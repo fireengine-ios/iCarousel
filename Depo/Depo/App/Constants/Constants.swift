@@ -17,6 +17,7 @@ struct TextConstants {
     static let registrationCellTitlePassword = "Password"//NSLocalizedString("PasswordPlaceholder", comment: "")
     static let registrationCellTitleReEnterPassword = "Re-Enter Password"
     static let registrationCellPlaceholderEmail = " You have to fill in your mail"
+    static let notCorrectEmail = "Please enter valid Email"
     static let registrationCellPlaceholderPassword = " You have to fill in a password"
     static let registrationCellPlaceholderReFillPassword = " You have to fill in a password"
     static let registrationTitleText = "Register to lifebox and get a 5 GB of storage for free!"
@@ -24,6 +25,7 @@ struct TextConstants {
     static let registrationResendButtonText = "Resend"
     static let optInNavigarionTitle = "Verify Your Purchase"
     static let phoneVereficationMainTitleText = "Verify Your Phone Number"
+    static let mailVereficationMainTitleText = "Verify Your Email"
     static let phoneVereficationInfoTitleText = "Enter the verification code"
     static let phoneVereficationNonValidCodeErrorText = "Verification code is invalid. \n Please try again."
     static let phoneVereficationResendRequestFailedErrorText = "Request failed \n Please try again"
@@ -93,6 +95,9 @@ struct TextConstants {
     static let errorAlertTextBackupAlreadyExist = "You have already a backup. Do you want to overwrite the existing one?"
     static let errorAlertNopeBtnBackupAlreadyExist = "Nope"
     static let errorAlertYesBtnBackupAlreadyExist = "Yes"
+    
+    //MARK: - mail update
+    static let updaitMailMaybeLater = "Maybe later"
     
     // MARK: - DetailScreenError 
     
@@ -260,6 +265,8 @@ struct TextConstants {
     static let settingsViewCellPasscode = "Lifebox Touch ID and Passcode"
     static let settingsViewCellHelp = "Help & Support"
     static let settingsViewCellLogout = "Logout"
+    static let settingsViewCellTurkcellPasscode = "Turkcell Passcode"
+    static let settingsViewCellTurkcellAutoLogin = "Auto-login"
     static let settingsViewLogoutCheckMessage = "Are you sure you want to exit the application?"
     
     //MARK: Import photos

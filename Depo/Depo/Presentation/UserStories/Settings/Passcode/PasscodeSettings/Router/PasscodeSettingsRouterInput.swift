@@ -10,6 +10,6 @@ import Foundation
 
 protocol PasscodeSettingsRouterInput {
     func closePasscode()
-    func changePasscode()
-    func setPasscode()
+    func changePasscode(isTurkCellUser: Bool)
+    func setPasscode(isTurkCellUser: Bool)
 }

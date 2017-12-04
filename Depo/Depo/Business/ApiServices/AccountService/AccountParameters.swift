@@ -23,6 +23,7 @@ struct AccountPath {
     static let updateUserEmail = accountBase + "email"
     static let updatePhoneNumber = accountBase + "updatePhoneNumber"
     static let verifyPhoneNumber = accountBase + "verifyPhoneNumberToUpdate"
+    static let securitySettings = "/api/auth/settings"
     
     static let updateLanguage = accountBase + "language"
     static let languageList = updateLanguage + "/list"
@@ -130,5 +131,30 @@ class QuotaInfo: BaseRequestParametrs {
 class UsageParameters: BaseRequestParametrs {
     override var patch: URL {
         return URL(string: AccountPath.usages, relativeTo: super.patch)!
+    }
+}
+
+class SecuritySettingsInfoParametres: BaseRequestParametrs {
+    override var patch: URL {
+        return URL(string: AccountPath.securitySettings, relativeTo: super.patch)!
+    }
+}
+
+class SecuritySettingsChangeInfoParametres: BaseRequestParametrs {
+    let turkcellPasswordAuthEnabled: Bool
+    let mobileNetworkAuthEnabled: Bool
+    
+    init(turkcellPasswordAuth: Bool, mobileNetworkAuth: Bool) {
+        turkcellPasswordAuthEnabled = turkcellPasswordAuth
+        mobileNetworkAuthEnabled = mobileNetworkAuth
+    }
+    
+    override var requestParametrs: Any {
+        return ["turkcellPasswordAuthEnabled": turkcellPasswordAuthEnabled,
+                "mobileNetworkAuthEnabled": mobileNetworkAuthEnabled]
+    }
+    
+    override var patch: URL {
+        return URL(string: AccountPath.securitySettings, relativeTo: super.patch)!
     }
 }

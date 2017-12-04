@@ -10,13 +10,13 @@ import UIKit
 
 class PasscodeSettingsModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, isTurkcell: Bool, inNeedOfMail: Bool) {
         if let viewController = viewInput as? PasscodeSettingsViewController {
-            configure(viewController: viewController)
+            configure(viewController: viewController, isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)
         }
     }
 
-    private func configure(viewController: PasscodeSettingsViewController) {
+    private func configure(viewController: PasscodeSettingsViewController, isTurkcell: Bool, inNeedOfMail: Bool) {
 
         let router = PasscodeSettingsRouter()
 
@@ -26,7 +26,9 @@ class PasscodeSettingsModuleConfigurator {
 
         let interactor = PasscodeSettingsInteractor()
         interactor.output = presenter
-
+        interactor.isEmptyMail = inNeedOfMail
+        interactor.isTurkcellUser = isTurkcell
+        
         presenter.interactor = interactor
         viewController.output = presenter
     }

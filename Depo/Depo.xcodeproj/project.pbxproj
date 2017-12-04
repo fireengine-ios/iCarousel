@@ -386,6 +386,8 @@
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
 		8C3B70B81F31B0BC0019715A /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3B70B71F31B0BC0019715A /* UIButtonExtension.swift */; };
+		8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */; };
+		8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54083E1F61C03B00D4717A /* GridListTopBar.swift */; };
 		8C5408411F61C0E000D4717A /* GridListTopBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C5408401F61C0E000D4717A /* GridListTopBar.xib */; };
 		8C5408431F62895300D4717A /* GridListTopBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5408421F62895300D4717A /* GridListTopBarConfig.swift */; };
@@ -432,6 +434,8 @@
 		8C7786A71F3F38F0005CB432 /* VisualMusicPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C77869A1F3F38EF005CB432 /* VisualMusicPlayerViewController.xib */; };
 		8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
+		8C881BD21FCFFAF100C86236 /* MailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */; };
+		8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */; };
 		8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */; };
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
@@ -1594,6 +1598,8 @@
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
 		8C3B70B71F31B0BC0019715A /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
+		8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewSwitchCell.swift; sourceTree = "<group>"; };
+		8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewSwitchCell.xib; sourceTree = "<group>"; };
 		8C54083E1F61C03B00D4717A /* GridListTopBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridListTopBar.swift; sourceTree = "<group>"; };
 		8C5408401F61C0E000D4717A /* GridListTopBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridListTopBar.xib; sourceTree = "<group>"; };
 		8C5408421F62895300D4717A /* GridListTopBarConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridListTopBarConfig.swift; sourceTree = "<group>"; };
@@ -1641,6 +1647,8 @@
 		8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMusicPlayerViewInput.swift; sourceTree = "<group>"; };
 		8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMusicPlayerViewOutput.swift; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
+		8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailVerificationViewController.swift; sourceTree = "<group>"; };
+		8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailVerificationViewController.xib; sourceTree = "<group>"; };
 		8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesDataStorage.swift; sourceTree = "<group>"; };
 		8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetInitialConfig.swift; sourceTree = "<group>"; };
 		8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetConfigurator.swift; sourceTree = "<group>"; };
@@ -3373,6 +3381,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				8C881BD01FCFF86B00C86236 /* MailVerification */,
 				7C18D75B1F9F460000F8679D /* ShadowView */,
 				8C54083D1F61C00400D4717A /* TopBar */,
 				7C1F89901F70FFB700740177 /* ViewForPopUp */,
@@ -3711,6 +3720,8 @@
 			children = (
 				7C634FA81F0F936700B5B93D /* SettingsTableViewCell.swift */,
 				7C634FA91F0F936700B5B93D /* SettingsTableViewCell.xib */,
+				8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */,
+				8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -4829,6 +4840,15 @@
 				CE907A2F1F94D49800D2F8CE /* VolumeSlider.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8C881BD01FCFF86B00C86236 /* MailVerification */ = {
+			isa = PBXGroup;
+			children = (
+				8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */,
+				8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */,
+			);
+			path = MailVerification;
 			sourceTree = "<group>";
 		};
 		8CAACDC81F14F39000B0A6FF /* Servieces */ = {
@@ -7190,6 +7210,7 @@
 				CEDFEC911F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				CEDFEC971F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				CEDFEC961F10C40C003D1A75 /* Localizable.strings in Resources */,
+				8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */,
 				CEAE3FF31EFD517300A405B2 /* TabBarView.xib in Resources */,
 				7CD1F8DF1F0272E20028F51A /* UploadedItemsViewController.xib in Resources */,
 				CEDFEC991F10C40C003D1A75 /* InfoPlist.strings in Resources */,
@@ -7207,6 +7228,7 @@
 				D47864021F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib in Resources */,
 				7C241EFA1F960E1C00322149 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				CEC05B671F05333800332EBA /* PhoneVereficationScreen~ipad.xib in Resources */,
+				8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */,
 				EFA74FB11FBF378F00CF946E /* PrintViewController.xib in Resources */,
 				CE4140621F0A5F6D001924E1 /* CaptchaViewController.xib in Resources */,
 				CE51AE6C1EF90853005DCEE0 /* AutoSyncViewController.xib in Resources */,
@@ -7815,6 +7837,7 @@
 				CE51ACE51EF90853005DCEE0 /* IntroduceRouterInput.swift in Sources */,
 				7C233CCF1FD51E290013CCA0 /* UploadFromLifeBoxConfigurator.swift in Sources */,
 				CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */,
+				8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */,
 				7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */,
 				CE51ACE71EF90853005DCEE0 /* IntroduceConfigurator.swift in Sources */,
 				CE0ED9761FBC0F5A00487632 /* PasscodeStorage.swift in Sources */,
@@ -8146,6 +8169,7 @@
 				8C6EF8771F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift in Sources */,
 				3E9E7380965142B606376820 /* SplashInteractorOutput.swift in Sources */,
 				C116353E0B4CB7B653684344 /* SplashInteractor.swift in Sources */,
+				8C881BD21FCFFAF100C86236 /* MailVerificationViewController.swift in Sources */,
 				44A9155A999E7CF45CED922A /* SplashRouterInput.swift in Sources */,
 				D5AAB0E3366C42E757055E8C /* SplashRouter.swift in Sources */,
 				CE246A031F3C5B5E008DF705 /* UploadService.swift in Sources */,

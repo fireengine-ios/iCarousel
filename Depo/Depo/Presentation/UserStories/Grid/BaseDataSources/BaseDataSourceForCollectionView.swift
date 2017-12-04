@@ -156,7 +156,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         }
         let allItemsArray = allMediaItems + originalItemsArray
         var allItemsMD5 = allItemsArray.map{return $0.md5}
-        debugPrint("!!!!all appended md5 is ",allItemsMD5)
+        
         if !isPaginationDidEnd {
             guard let lastRemoteObject = originalItemsArray.last else {
                 return originalItemsArray
