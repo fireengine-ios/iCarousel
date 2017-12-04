@@ -219,8 +219,7 @@ class EmailVerification: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
-        let dict = [LbRequestkeys.email : email]
-        return dict
+        return [LbRequestkeys.email : email]
     }
     
     override var patch: URL {

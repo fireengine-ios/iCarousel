@@ -33,8 +33,8 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     let custoPopUp = CustomPopUp()
     
     var tableDataArray: [[String]] = []
-    var turkCellSeuritySettingsPass: Bool?
-    var turkCellSeuritySettingsAutoLogin: Bool?
+    var turkCellSeuritySettingsPassState: Bool?
+    var turkCellSeuritySettingsAutoLoginState: Bool?
     
     
     var output: SettingsViewOutput!
@@ -138,25 +138,28 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let isSecurityCell = (indexPath == turkCellSecurityPasscodeCellIndex) || (indexPath == turkCellSecurityAutologinCellIndex)
-
-        let reusableID = isSecurityCell ? CellsIdConstants.settingsTableViewSwitchCellID : CellsIdConstants.settingTableViewCellID
-        let cell = tableView.dequeueReusableCell(withIdentifier: reusableID, for: indexPath)
         let array = tableDataArray[indexPath.section]
-        if let settingCell = cell as? SettingsTableViewCell  {
-            cell.selectionStyle = .none
-            settingCell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-            return settingCell
-        } else if let settingSwitchCell = cell as? SettingsTableViewSwitchCell {
-            settingSwitchCell.actionDelegate = self
-            settingSwitchCell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-            if indexPath.row == 4, let unwrapedturkCellSeuritySettingsPass = turkCellSeuritySettingsPass {
-                settingSwitchCell.cellSwitch.setOn(unwrapedturkCellSeuritySettingsPass, animated: true)
-            } else if indexPath.row == 5, let unwrapedturkCellSeuritySettingsAutoLogin = turkCellSeuritySettingsAutoLogin {
-                settingSwitchCell.cellSwitch.setOn(unwrapedturkCellSeuritySettingsAutoLogin, animated: true)
-            }
-            return settingSwitchCell
+        
+        if indexPath == turkCellSecurityPasscodeCellIndex,
+            let unwrapedturkCellSeuritySettingsPass = turkCellSeuritySettingsPassState {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID, for: indexPath) as! SettingsTableViewSwitchCell
+            cell.actionDelegate = self
+            cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
+            cell.cellSwitch.setOn(unwrapedturkCellSeuritySettingsPass, animated: true)
+            return cell
+        } else if indexPath == turkCellSecurityAutologinCellIndex,
+            let unwrapedturkCellSeuritySettingsAutoLogin = turkCellSeuritySettingsAutoLoginState {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID, for: indexPath) as! SettingsTableViewSwitchCell
+            cell.actionDelegate = self
+            cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
+            cell.cellSwitch.setOn(unwrapedturkCellSeuritySettingsAutoLogin, animated: true)
+            return cell
         } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingTableViewCellID, for: indexPath) as! SettingsTableViewCell
+            cell.selectionStyle = .none
+            cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
             return cell
         }
         

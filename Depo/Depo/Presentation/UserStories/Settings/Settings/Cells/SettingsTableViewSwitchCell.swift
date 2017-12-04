@@ -15,33 +15,32 @@ class SettingsTableViewSwitchCell: UITableViewCell {
     
     weak var actionDelegate: SettingsTableViewSwitchCellDelegate?
 
-    @IBOutlet weak var cellSwitch: UISwitch!
+    @IBOutlet weak var stateSwitch: UISwitch!
     
-    @IBOutlet weak var cellLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var separator: UIView!
     
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         
-        cellLabel.textColor = ColorConstants.textGrayColor
-        cellLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        cellSwitch.addTarget(self, action: #selector(self.swichChanged), for: .valueChanged)
+        titleLabel.textColor = ColorConstants.textGrayColor
+        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        stateSwitch.addTarget(self, action: #selector(swichChanged), for: .valueChanged)
     }
     
     @objc func swichChanged() {
-        actionDelegate?.switchToggled(positionOn: cellSwitch.isOn, cell: self)
+        actionDelegate?.switchToggled(positionOn: stateSwitch.isOn, cell: self)
     }
     
     func setTextForLabel(titleText: String, needShowSeparator:Bool) {
-        cellLabel.text = titleText
+        titleLabel.text = titleText
         separator.isHidden = !needShowSeparator
     }
     
     func changeSwithcState(turnOn: Bool) {
-        if cellSwitch.isOn != turnOn {
-          cellSwitch.setOn(turnOn, animated: true)
+        if stateSwitch.isOn != turnOn {
+          stateSwitch.setOn(turnOn, animated: true)
         }
     }
 }
