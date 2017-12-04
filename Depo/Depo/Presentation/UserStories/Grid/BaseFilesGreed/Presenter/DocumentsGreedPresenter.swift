@@ -27,7 +27,7 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
         if (Device.isIpad){
             return CGSize(width: 180, height: 180)
         }else{
-            let w: CGFloat = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedHorizontalSpace * 3)/NumericConstants.numerCellInDocumentLineOnIphone
+            let w: CGFloat = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * NumericConstants.numerCellInDocumentLineOnIphone)/NumericConstants.numerCellInDocumentLineOnIphone
             return CGSize(width: w, height: w)
         }
     }

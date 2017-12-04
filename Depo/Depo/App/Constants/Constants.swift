@@ -426,6 +426,7 @@ struct TextConstants {
     static let uploadPhotos = "Upload Photos"
     
     //MARK: Feedback View
+    static let feedbackMailTextFormat = "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n"
     static let feedbackViewTitle = "Thanks for leaving a comment!"
     static let feedbackViewSubTitle = "Feedback Form"
     static let feedbackViewSuggestion = "Suggestion"
@@ -608,7 +609,7 @@ struct NumericConstants {
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
     static let iPhoneGreedInset: CGFloat = 5
-    static let iPhoneGreedHorizontalSpace: CGFloat = 5
+    static let iPhoneGreedHorizontalSpace: CGFloat = 1
     static let iPadGreedInset: CGFloat = 5
     static let iPadGreedHorizontalSpace: CGFloat = 5
     static let maxNumberPhotosInStory: Int = 20
