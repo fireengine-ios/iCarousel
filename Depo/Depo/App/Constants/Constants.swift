@@ -22,6 +22,7 @@ struct TextConstants {
     static let registrationTitleText = "Register to lifebox and get a 5 GB of storage for free!"
     static let registrationNextButtonText = "Next"
     static let registrationResendButtonText = "Resend"
+    static let optInNavigarionTitle = "Verify Your Purchase"
     static let phoneVereficationMainTitleText = "Verify Your Phone Number"
     static let phoneVereficationInfoTitleText = "Enter the verification code"
     static let phoneVereficationNonValidCodeErrorText = "Verification code is invalid. \n Please try again."
@@ -585,6 +586,7 @@ struct NumericConstants {
     //verefy phone screen
     static let vereficationCharacterLimit = 6
     static let vereficationTimerLimit = 120//in seconds
+    static let maxVereficationAttempts = 3
     //
     
     static let numerCellInLineOnIphone: CGFloat = 4

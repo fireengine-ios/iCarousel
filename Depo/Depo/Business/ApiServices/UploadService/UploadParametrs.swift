@@ -66,7 +66,7 @@ class Upload: UploadRequestParametrs {
         return LocalMediaStorage.default.copyAssetToDocument(asset: self.item.asset!)
     }()
     
-    let  tmpUUId: String
+    let tmpUUId: String
     
     init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool) {
         
@@ -76,8 +76,14 @@ class Upload: UploadRequestParametrs {
         self.uploadStrategy = uploadStategy
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
-        self.tmpUUId = UUID().description
+
         self.isFavorite = isFavorite
+
+        if item.isLocalItem, item.uuid.count > 0 {
+            self.tmpUUId = item.uuid
+        } else {
+            self.tmpUUId = UUID().description
+        }
     }
     
     var requestParametrs: Any {
