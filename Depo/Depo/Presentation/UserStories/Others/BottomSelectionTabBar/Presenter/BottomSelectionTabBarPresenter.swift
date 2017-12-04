@@ -49,6 +49,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.makeCover)
             case .print:
                 itemTupple.append(EditinglBar.PreDetermendTypes.print)
+            case .removeAlbum:
+                itemTupple.append(EditinglBar.PreDetermendTypes.removeAlbum)
             default:
                 break
             }
@@ -162,6 +164,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             interactor.addToAlbum(items: selectedItems)
         case .print:
             router.showPrint(items: selectedItems)
+        case .removeAlbum:
+            interactor.delete(item: selectedItems)
         default:
             break
         }
