@@ -34,22 +34,21 @@ class UploadFromLifeBoxPresenter: BaseFilesGreedPresenter, UploadFromLifeBoxInte
     }
     
     override func onMaxSelectionExeption(){
-        let custoPopUp = CustomPopUp.sharedInstance
         let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
-        custoPopUp.showCustomAlert(withText: text, okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
+        CustomPopUp.sharedInstance.showCustomAlert(withText: text, okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
     }
     
     override func onNextButton(){
         let array = dataSource.getSelectedItems()
-        if (array.count > 0){
+        if (array.isEmpty){
+            custoPopUp.showCustomAlert(withText: TextConstants.uploadFromLifeBoxNoSelectedPhotosError, okButtonText: TextConstants.uploadFromLifeBoxEmptyFolderButtonText)
+        }else{
             guard let wrapArray = array as? [Item] else {
                 return
             }
             if let uploadInteractor = interactor as? UploadFromLifeBoxInteractorInput{
                 uploadInteractor
             }
-        }else{
-            custoPopUp.showCustomAlert(withText: TextConstants.uploadFromLifeBoxNoSelectedPhotosError, okButtonText: TextConstants.uploadFromLifeBoxEmptyFolderButtonText)
         }
     }
     

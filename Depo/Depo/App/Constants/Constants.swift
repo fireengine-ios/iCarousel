@@ -346,6 +346,7 @@ struct TextConstants {
     static let createStoryNoSelectedPhotosError = "Sorry, but story photos should not be empty"
     static let createStoryCreated = "Story created"
     static let createStoryNotCreated = "Story not created"
+    static let failWhileAddingToAlbum = "Fail while adding to album"
     
     //MARK: Create story Audio
     static let createStoryNoSelectedAudioError = "Sorry, but story audio should not be empty"

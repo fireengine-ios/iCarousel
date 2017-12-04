@@ -372,7 +372,7 @@ class UploadOperations: Operation {
     
     override func main() {
         
-        let isPhotoA = isPhotoAlbum
+        let isPhotoAlbum_ = isPhotoAlbum
         
         if isRealCancel {
             if let req = requestObject {
@@ -418,14 +418,14 @@ class UploadOperations: Operation {
                 self?.uploadNotify(param: uploadNotifParam, success: { baseurlResponse in
                     try? FileManager.default.removeItem(at: uploadParam.urlToLocalFile)
                     
-                    if isPhotoA{
+                    if isPhotoAlbum_{
                         if let resp = baseurlResponse as? SearchItemResponse{
                             let item = Item.init(remote: resp)
                             let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
                             PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
                                 
                             }, fail: { (error) in
-                                
+                                CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.failWhileAddingToAlbum, okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
                             })
                         }
                     }

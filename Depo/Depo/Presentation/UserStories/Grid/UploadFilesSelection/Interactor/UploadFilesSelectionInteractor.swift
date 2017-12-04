@@ -42,9 +42,10 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
     
     func addToUploadOnDemandItems(items: [BaseDataSourceItem]){
         let uploadItems = items as! [WrapData]
-        let isFavorites = RouterVC().isOnFavoritesView()
-        let rooutUUID = RouterVC().getParentUUID()
-        let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail()
+        let router = RouterVC()
+        let isFavorites = router.isOnFavoritesView()
+        let rooutUUID = router.getParentUUID()
+        let isFromAlbum = router.isRootViewControllerAlbumDetail()
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: {
             self.output.asyncOperationSucces()
         }) { (errorResponse) in

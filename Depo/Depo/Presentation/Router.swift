@@ -34,11 +34,9 @@ class RouterVC: NSObject {
     }
     
     func getParentUUID() -> String{
-        let nController = navigationController
-        let viewController = nController?.viewControllers.last
         
-        if let baseViewController = viewController as? BaseViewController{
-            return baseViewController.parentUUID
+        if let viewController = navigationController?.viewControllers.last as? BaseViewController{
+            return viewController.parentUUID
         }
         
         return ""
