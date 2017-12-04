@@ -402,9 +402,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             if selectedItems.count != 1, let renameIndex = actionTypes.index(of: .rename) {
                 actionTypes.remove(at: renameIndex)
             }
-            
-            let noSyncItems = selectedItems.filter{ $0.syncStatus != SyncWrapperedStatus.synced }
-            if noSyncItems.isEmpty {
+
+            let syncPhotos = selectedItems.filter{ $0.fileType == .image }
+            if !syncPhotos.isEmpty {
                 actionTypes.append(.print)
             }
             alertSheetModule?.showAlertSheet(with: actionTypes,
@@ -464,7 +464,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func printSelected() {
-        router.showPrint(items: selectedItems)
+        let syncPhotos = selectedItems.filter{ !$0.isLocalItem && $0.fileType == .image }
+        if !syncPhotos.isEmpty {
+            router.showPrint(items: syncPhotos)
+        }
     }
     
     func selectAllModeSelected() {
