@@ -502,6 +502,10 @@
 		AF744E3CD7A5DD8E7D6C30BB /* UserInfoSubViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021DEBE120BC8745E74C3B8B /* UserInfoSubViewViewController.swift */; };
 		B02F86BF64856149537A10F3 /* SyncContactsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD14ED875730C75E5AD4E0 /* SyncContactsRouterInput.swift */; };
 		B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */; };
+		B51FD62E1FD13C92000344BD /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51FD62D1FD13C92000344BD /* NotificationService.swift */; };
+		B51FD6321FD13C92000344BD /* Depo_LifeTech_NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B51FD62B1FD13C92000344BD /* Depo_LifeTech_NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B51FD6391FD18FDB000344BD /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD6261FD135CB000344BD /* libMPush.a */; };
+		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B6EC22F9A78F97B7AC7E1F69 /* LikeFilterModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEC5B817C9C02047F7D9C32 /* LikeFilterModuleInput.swift */; };
 		B73973BC5864F1C639D252EA /* SyncContactsModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC575D9B71AAF95E3625985 /* SyncContactsModuleInput.swift */; };
 		B7C673A176A577E30FAB824E /* FreeAppSpaceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2114672AE2BCD019F2E4 /* FreeAppSpaceConfigurator.swift */; };
@@ -748,7 +752,6 @@
 		CE51AD021EF90853005DCEE0 /* ForgotPasswordConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C450B9D56ECE6334139BA0 /* ForgotPasswordConfigurator.swift */; };
 		CE51AD031EF90853005DCEE0 /* ForgotPasswordInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8335AE67CC88B914BA208EA7 /* ForgotPasswordInitializer.swift */; };
 		CE51AD061EF90853005DCEE0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F931871C160E2F00858223 /* Accelerate.framework */; };
-		CE51AD081EF90853005DCEE0 /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B9D2281CA86C4300FC28F2 /* libMPush.a */; };
 		CE51AD091EF90853005DCEE0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05033BE01C24B22900FA2E5C /* StoreKit.framework */; };
 		CE51AD0A1EF90853005DCEE0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056107211C0D8E210014D550 /* WebKit.framework */; };
 		CE51AD0C1EF90853005DCEE0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
@@ -1044,6 +1047,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B51FD6301FD13C92000344BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B51FD62A1FD13C92000344BD;
+			remoteInfo = Depo_LifeTech_NotificationService;
+		};
 		CE79E4AA1F695DA200C1F151 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -1052,6 +1062,20 @@
 			remoteInfo = Depo_LifeTech;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B51FD6381FD13C93000344BD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B51FD6321FD13C92000344BD /* Depo_LifeTech_NotificationService.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		01D6468D5BDD2C7656DDA744 /* CompleteProfileRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompleteProfileRouterInput.swift; sourceTree = "<group>"; };
@@ -1724,8 +1748,6 @@
 		9308A9A544DF5D8923C800E0 /* AlbumsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsPresenter.swift; sourceTree = "<group>"; };
 		931900C1D8314FD173F701DC /* TermsAndServicesRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesRouterInput.swift; sourceTree = "<group>"; };
 		9373EA2411B8180CA5FE65D7 /* SelectNameConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameConfigurator.swift; sourceTree = "<group>"; };
-		94B9D2281CA86C4300FC28F2 /* libMPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMPush.a; sourceTree = "<group>"; };
-		94B9D2291CA86C4300FC28F2 /* MPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPush.h; sourceTree = "<group>"; };
 		94E5A70D0BAB72F0D8679BB8 /* TermsAndServicesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractor.swift; sourceTree = "<group>"; };
 		95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorInput.swift; sourceTree = "<group>"; };
 		96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorInput.swift; sourceTree = "<group>"; };
@@ -1762,6 +1784,12 @@
 		B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationRouterInput.swift; sourceTree = "<group>"; };
 		B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInitializer.swift; sourceTree = "<group>"; };
 		B3B1A822B7BCC165EA81C54D /* ExpandStorageInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageInteractorOutput.swift; sourceTree = "<group>"; };
+		B51FD6251FD135CA000344BD /* MPush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPush.h; sourceTree = "<group>"; };
+		B51FD6261FD135CB000344BD /* libMPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMPush.a; sourceTree = "<group>"; };
+		B51FD62B1FD13C92000344BD /* Depo_LifeTech_NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Depo_LifeTech_NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B51FD62D1FD13C92000344BD /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		B51FD62F1FD13C92000344BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
 		B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
 		B6D7EE8C0AFD8D04FB0C5CDC /* UploadedItemsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsPresenter.swift; sourceTree = "<group>"; };
@@ -2168,10 +2196,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B51FD6281FD13C92000344BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE51AD041EF90853005DCEE0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */,
+				CE51AD161EF90853005DCEE0 /* Security.framework in Frameworks */,
+				B51FD6391FD18FDB000344BD /* libMPush.a in Frameworks */,
 				CE51AD121EF90853005DCEE0 /* AssetsLibrary.framework in Frameworks */,
 				7CDB43321F865B0B00789FA6 /* CoreLocation.framework in Frameworks */,
 				7CFE92F11F5EC666008A3B72 /* MessageUI.framework in Frameworks */,
@@ -2184,7 +2222,6 @@
 				CE3318D31EFBDD8400E25989 /* Foundation.framework in Frameworks */,
 				CE3318D11EFBDD7700E25989 /* UIKit.framework in Frameworks */,
 				CE51AD061EF90853005DCEE0 /* Accelerate.framework in Frameworks */,
-				CE51AD081EF90853005DCEE0 /* libMPush.a in Frameworks */,
 				CE51AD091EF90853005DCEE0 /* StoreKit.framework in Frameworks */,
 				CE51AD0A1EF90853005DCEE0 /* WebKit.framework in Frameworks */,
 				CE51AD0C1EF90853005DCEE0 /* AudioToolbox.framework in Frameworks */,
@@ -2194,7 +2231,6 @@
 				CE51AD131EF90853005DCEE0 /* QuartzCore.framework in Frameworks */,
 				CE51AD141EF90853005DCEE0 /* libsqlite3.dylib in Frameworks */,
 				CE51AD151EF90853005DCEE0 /* AddressBook.framework in Frameworks */,
-				CE51AD161EF90853005DCEE0 /* Security.framework in Frameworks */,
 				CE51AD171EF90853005DCEE0 /* libz.dylib in Frameworks */,
 				CE51AD1A1EF90853005DCEE0 /* CoreGraphics.framework in Frameworks */,
 				70A2E1D0FA17BCF1F0AAD62F /* Pods_Depo_LifeTech.framework in Frameworks */,
@@ -2227,6 +2263,7 @@
 				87C315EE1FCD779F00845B0A /* LocalAlbums */,
 				051E1DFC19CAC2F900FD1E03 /* Depo */,
 				CE79E4A61F695DA200C1F151 /* Depo_LifeTechUITests */,
+				B51FD62C1FD13C92000344BD /* Depo_LifeTech_NotificationService */,
 				051E1DF519CAC2F900FD1E03 /* Frameworks */,
 				051E1DF419CAC2F900FD1E03 /* Products */,
 				FA9ABBCB19DCF3FFE7B413C8 /* Pods */,
@@ -2238,6 +2275,7 @@
 			children = (
 				CE51B0011EF90853005DCEE0 /* Depo_LifeTech.app */,
 				CE79E4A51F695DA200C1F151 /* Depo_LifeTechUITests.xctest */,
+				B51FD62B1FD13C92000344BD /* Depo_LifeTech_NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2245,6 +2283,7 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B51FD63A1FD19063000344BD /* CoreBluetooth.framework */,
 				7CDB43311F865B0B00789FA6 /* CoreLocation.framework */,
 				7CFE92F01F5EC666008A3B72 /* MessageUI.framework */,
 				CE3AA9AE1F4D686D000157AF /* CoreData.framework */,
@@ -4966,10 +5005,9 @@
 		8CFF866E1F0F96D100520D18 /* VendorsFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B51FD6241FD135BA000344BD /* Menloworks */,
 				8CFF866F1F0F96E600520D18 /* ContactSyncSDK */,
 				56B9E92B1DED750600DE1011 /* AppRater */,
-				94B9D2281CA86C4300FC28F2 /* libMPush.a */,
-				94B9D2291CA86C4300FC28F2 /* MPush.h */,
 				05A938071AF6AE7C00AE2892 /* TurkcellUpdaterSDK */,
 				05AD7F831AD7FD160052153A /* MMWormhole.h */,
 				05AD7F841AD7FD160052153A /* MMWormhole.m */,
@@ -5353,6 +5391,24 @@
 				26960B2B062ACC0F92ACEE26 /* UserInfoSubViewInitializer.swift */,
 			);
 			path = Configurator;
+			sourceTree = "<group>";
+		};
+		B51FD6241FD135BA000344BD /* Menloworks */ = {
+			isa = PBXGroup;
+			children = (
+				B51FD6261FD135CB000344BD /* libMPush.a */,
+				B51FD6251FD135CA000344BD /* MPush.h */,
+			);
+			path = Menloworks;
+			sourceTree = "<group>";
+		};
+		B51FD62C1FD13C92000344BD /* Depo_LifeTech_NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				B51FD62D1FD13C92000344BD /* NotificationService.swift */,
+				B51FD62F1FD13C92000344BD /* Info.plist */,
+			);
+			path = Depo_LifeTech_NotificationService;
 			sourceTree = "<group>";
 		};
 		B570A9C205858C62D8C96EE7 /* Router */ = {
@@ -7100,6 +7156,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B51FD62A1FD13C92000344BD /* Depo_LifeTech_NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B51FD6331FD13C92000344BD /* Build configuration list for PBXNativeTarget "Depo_LifeTech_NotificationService" */;
+			buildPhases = (
+				B51FD6271FD13C92000344BD /* Sources */,
+				B51FD6281FD13C92000344BD /* Frameworks */,
+				B51FD6291FD13C92000344BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Depo_LifeTech_NotificationService;
+			productName = Depo_LifeTech_NotificationService;
+			productReference = B51FD62B1FD13C92000344BD /* Depo_LifeTech_NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE51AFFC1EF90853005DCEE0 /* Build configuration list for PBXNativeTarget "Depo_LifeTech" */;
@@ -7112,10 +7185,12 @@
 				82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */,
 				06A2CFAB1619F4E52EEF03FF /* [CP] Copy Pods Resources */,
 				8C679AF51FBC244F00B78873 /* ShellScript */,
+				B51FD6381FD13C93000344BD /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B51FD6311FD13C92000344BD /* PBXTargetDependency */,
 			);
 			name = Depo_LifeTech;
 			productName = Depo;
@@ -7146,10 +7221,15 @@
 		051E1DEB19CAC2F900FD1E03 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = LifeTech;
 				TargetAttributes = {
+					B51FD62A1FD13C92000344BD = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = 7A7F3AW7RP;
+						ProvisioningStyle = Automatic;
+					};
 					CE51AAF51EF90853005DCEE0 = {
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
@@ -7192,11 +7272,19 @@
 			targets = (
 				CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */,
 				CE79E4A41F695DA200C1F151 /* Depo_LifeTechUITests */,
+				B51FD62A1FD13C92000344BD /* Depo_LifeTech_NotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B51FD6291FD13C92000344BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE51AD1D1EF90853005DCEE0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -7447,6 +7535,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B51FD6271FD13C92000344BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B51FD62E1FD13C92000344BD /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE51AAFD1EF90853005DCEE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -8353,6 +8449,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B51FD6311FD13C92000344BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B51FD62A1FD13C92000344BD /* Depo_LifeTech_NotificationService */;
+			targetProxy = B51FD6301FD13C92000344BD /* PBXContainerItemProxy */;
+		};
 		CE79E4AB1F695DA200C1F151 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */;
@@ -8651,16 +8752,125 @@
 			};
 			name = Enterprise;
 		};
+		B51FD6341FD13C92000344BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Depo_LifeTech_NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.Depo-LifeTech-NotificationService";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B51FD6351FD13C92000344BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Depo_LifeTech_NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.Depo-LifeTech-NotificationService";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B51FD6361FD13C92000344BD /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Depo_LifeTech_NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.Depo-LifeTech-NotificationService";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AppStore;
+		};
+		B51FD6371FD13C92000344BD /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Depo_LifeTech_NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.Depo-LifeTech-NotificationService";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Enterprise;
+		};
 		CE51AFFD1EF90853005DCEE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4777BF7378346F081CC034A1 /* Pods-Depo_LifeTech.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
@@ -8706,6 +8916,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8EE9FA64A6455D67D3D3A7BE /* Pods-Depo_LifeTech.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -8752,6 +8963,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EC89FED60BDB2184F7A039E4 /* Pods-Depo_LifeTech.appstore.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -8797,6 +9009,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DFF4B8B4B0FF4A1A62D38360 /* Pods-Depo_LifeTech.enterprise.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -8946,6 +9159,17 @@
 				051E1E1E19CAC2F900FD1E03 /* Release */,
 				0555EF2019F938350068F4CC /* AppStore */,
 				0555EF2319F9383C0068F4CC /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B51FD6331FD13C92000344BD /* Build configuration list for PBXNativeTarget "Depo_LifeTech_NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B51FD6341FD13C92000344BD /* Debug */,
+				B51FD6351FD13C92000344BD /* Release */,
+				B51FD6361FD13C92000344BD /* AppStore */,
+				B51FD6371FD13C92000344BD /* Enterprise */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
