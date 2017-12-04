@@ -365,6 +365,12 @@ struct TextConstants {
     static let uploadSuccessful = "Upload was successful"
     static let uploadFailed = "Upload failed"
     
+    //MARK: UploadFromLifeBox
+    static let uploadFromLifeBoxTitle = "Upload from lifebox"
+    static let uploadFromLifeBoxNextButton = "Next"
+    static let uploadFromLifeBoxNoSelectedPhotosError = "Sorry, but photos not selected"
+    static let uploadFromLifeBoxEmptyFolderButtonText = "Ok"
+    
     
     //MARK: Select Folder
     static let selectFolderNextButton = "Select"

@@ -10,7 +10,7 @@ xcodeproj_path: Depo.xcodeproj
 project_target: Depo_LifeTech
 
 # The file path for new modules
-project_file_path: Depo/Classes/Modules
+project_file_path: Depo/Presentation/UserStories
 
 # The Xcode group path to new modules
 project_group_path: Depo/Classes/Modules
