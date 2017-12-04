@@ -63,15 +63,20 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         asyncOperationSucces()
     }
 
-    func moreButtonPressed(sender: Any?) {
+    func moreButtonPressed(sender: Any?, inAlbumState: Bool) {
         let currentItem = interactor.allItems[interactor.currentItemIndex]
         var actions = [ElementTypes]()
+        var excludeTypes : [ElementTypes] = [.delete]
         
         switch currentItem.fileType {
-        case .audio, .video:
+        case .audio, .video, .image:
             actions = ActionSheetPredetermendConfigs.photoVideoDetailActions
         case .allDocs:
             actions = ActionSheetPredetermendConfigs.documetsDetailActions
+        case .image:
+            if inAlbumState {
+                excludeTypes = [ElementTypes]()
+            }
         default:
             break
         }
@@ -79,7 +84,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
                                          items: [currentItem],
                                          presentedBy: sender,
                                          onSourceView: nil,
-                                         excludeTypes: [.delete])
+                                         excludeTypes: excludeTypes)
     }
     
     //MARK: presenter output
@@ -92,7 +97,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch type {
-        case .delete:
+        case .delete, .removeFromAlbum:
             interactor.deleteSelectedItem()
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()

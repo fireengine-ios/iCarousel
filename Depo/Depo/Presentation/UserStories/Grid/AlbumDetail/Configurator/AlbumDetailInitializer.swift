@@ -24,7 +24,7 @@ class AlbumDetailModuleInitializer: NSObject {
         
         let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 140))
         interactor.album = album
-        
+        viewController.parentUUID = album.uuid
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid)],
                                bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presentor, interactor: interactor,

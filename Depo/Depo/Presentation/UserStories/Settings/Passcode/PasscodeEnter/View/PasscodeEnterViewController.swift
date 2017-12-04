@@ -23,6 +23,7 @@ class PasscodeEnterViewController: UIViewController {
     
     var state: PasscodeState!
     var success: (() -> Void)?
+    var isTurkCellUser: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,10 @@ extension PasscodeEnterViewController: PasscodeManagerDelegate {
     func passcodeLockDidSucceed(_ lock: PasscodeManager) {
         lock.view.resignResponder()
         success?()
+        if let unwrapedUserFlag = isTurkCellUser, unwrapedUserFlag {
+            AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: false, mobileNetworkAuthEnabled: false,
+                                                    success: nil, fail: nil)
+        }
     }
     
     func passcodeLockDidFail(_ lock: PasscodeManager) {

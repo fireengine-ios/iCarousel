@@ -18,7 +18,9 @@ protocol BaseFilesGreedViewInput: class {
     
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool)
     
-    func setupSelectionStyle(isSelection: Bool)
+    func startSelection(with numberOfItems: Int)
+    
+    func stopSelection()
     
     func getFolder() -> Item?
 

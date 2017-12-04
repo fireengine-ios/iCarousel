@@ -10,11 +10,13 @@ import Foundation
 
 protocol PackagesInteractorInput {
     func getOffers()
+    func checkJobExists()
     func getOfferApples()
     func getToken(for offer: OfferServiceResponse)
     func getResendToken(for offer: OfferServiceResponse)
     func activate(offerApple: OfferApple)
     func verifyOffer(token: String, otp: String)
+    func submit(promocode: String)
     func getActiveSubscriptions()
     func getAccountType()
     func convertToSubscriptionPlans(offers: [OfferServiceResponse]) -> [SubscriptionPlan]

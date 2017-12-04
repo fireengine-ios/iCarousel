@@ -21,7 +21,7 @@ class LanguageModel {
     var defaultCountryCode: String?
     
     init?(json: JSON){
-        if let languageCode = json[LanguageModel.languageCodeKey].string,  self.availableLanguageCodes.contains(languageCode) {
+        if let languageCode = json[LanguageModel.languageCodeKey].string, self.availableLanguageCodes.contains(languageCode) {
             self.languageCode = languageCode
             displayLanguage = json[LanguageModel.displayLanguageKey].string
             defaultCountryCode = json[LanguageModel.defaultCountryCodeKey].string

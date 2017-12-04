@@ -17,6 +17,7 @@ struct TextConstants {
     static let registrationCellTitlePassword = "Password"//NSLocalizedString("PasswordPlaceholder", comment: "")
     static let registrationCellTitleReEnterPassword = "Re-Enter Password"
     static let registrationCellPlaceholderEmail = " You have to fill in your mail"
+    static let notCorrectEmail = "Please enter valid Email"
     static let registrationCellPlaceholderPassword = " You have to fill in a password"
     static let registrationCellPlaceholderReFillPassword = " You have to fill in a password"
     static let registrationTitleText = "Register to lifebox and get a 5 GB of storage for free!"
@@ -24,6 +25,7 @@ struct TextConstants {
     static let registrationResendButtonText = "Resend"
     static let optInNavigarionTitle = "Verify Your Purchase"
     static let phoneVereficationMainTitleText = "Verify Your Phone Number"
+    static let mailVereficationMainTitleText = "Verify Your Email"
     static let phoneVereficationInfoTitleText = "Enter the verification code"
     static let phoneVereficationNonValidCodeErrorText = "Verification code is invalid. \n Please try again."
     static let phoneVereficationResendRequestFailedErrorText = "Request failed \n Please try again"
@@ -88,11 +90,14 @@ struct TextConstants {
     
     static let serverResponceError = "Wrong type of answer"
     
-    static let errorAlert = "ERROR"
+    static let errorAlert = "Error"
     static let errorAlerTitleBackupAlreadyExist = "Overwrite backup?"
     static let errorAlertTextBackupAlreadyExist = "You have already a backup. Do you want to overwrite the existing one?"
     static let errorAlertNopeBtnBackupAlreadyExist = "Nope"
     static let errorAlertYesBtnBackupAlreadyExist = "Yes"
+    
+    //MARK: - mail update
+    static let updaitMailMaybeLater = "Maybe later"
     
     // MARK: - DetailScreenError 
     
@@ -260,6 +265,8 @@ struct TextConstants {
     static let settingsViewCellPasscode = "Lifebox Touch ID and Passcode"
     static let settingsViewCellHelp = "Help & Support"
     static let settingsViewCellLogout = "Logout"
+    static let settingsViewCellTurkcellPasscode = "Turkcell Passcode"
+    static let settingsViewCellTurkcellAutoLogin = "Auto-login"
     static let settingsViewLogoutCheckMessage = "Are you sure you want to exit the application?"
     
     //MARK: Import photos
@@ -346,6 +353,7 @@ struct TextConstants {
     static let createStoryNoSelectedPhotosError = "Sorry, but story photos should not be empty"
     static let createStoryCreated = "Story created"
     static let createStoryNotCreated = "Story not created"
+    static let failWhileAddingToAlbum = "Fail while adding to album"
     
     //MARK: Create story Audio
     static let createStoryNoSelectedAudioError = "Sorry, but story audio should not be empty"
@@ -365,6 +373,12 @@ struct TextConstants {
     static let uploadFilesNothingUploadOk = "Ok"
     static let uploadSuccessful = "Upload was successful"
     static let uploadFailed = "Upload failed"
+    
+    //MARK: UploadFromLifeBox
+    static let uploadFromLifeBoxTitle = "Upload from lifebox"
+    static let uploadFromLifeBoxNextButton = "Next"
+    static let uploadFromLifeBoxNoSelectedPhotosError = "Sorry, but photos not selected"
+    static let uploadFromLifeBoxEmptyFolderButtonText = "Ok"
     
     
     //MARK: Select Folder
@@ -412,6 +426,7 @@ struct TextConstants {
     static let uploadPhotos = "Upload Photos"
     
     //MARK: Feedback View
+    static let feedbackMailTextFormat = "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n"
     static let feedbackViewTitle = "Thanks for leaving a comment!"
     static let feedbackViewSubTitle = "Feedback Form"
     static let feedbackViewSuggestion = "Suggestion"
@@ -573,6 +588,14 @@ struct TextConstants {
     static let passcodeEnableTouchID = "Enable Touch ID"
     static let passcodeNumberOfTries = "You have %@ attempts left"
     static let errorConnectedToNetwork = "Please check your internet connection is active and Cellular Data is ON under Settings/lifebox."
+    
+    static let apply = "Apply"
+    static let success = "Success"
+    
+    static let promocodeTitle = "lifebox Size Özel Kampanya"
+    static let promocodePlaceholder = "Enter Your Promotion Code"
+    static let promocodeError = "Invalid Promo Code"
+    static let promocodeSuccess = "Promo code was applied"
 }
 
 
@@ -586,7 +609,7 @@ struct NumericConstants {
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
     static let iPhoneGreedInset: CGFloat = 5
-    static let iPhoneGreedHorizontalSpace: CGFloat = 5
+    static let iPhoneGreedHorizontalSpace: CGFloat = 1
     static let iPadGreedInset: CGFloat = 5
     static let iPadGreedHorizontalSpace: CGFloat = 5
     static let maxNumberPhotosInStory: Int = 20

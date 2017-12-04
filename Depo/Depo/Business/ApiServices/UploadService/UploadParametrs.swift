@@ -26,9 +26,11 @@ class Upload: UploadRequestParametrs {
     
     private let uploadTo: MetaSpesialFolder
     
-    private let rootFolder: String
+    let rootFolder: String
     
     private let destitantionURL: URL
+    
+    private let isFavorite: Bool
     
     var contentType: String {
         switch item.fileType {
@@ -66,7 +68,7 @@ class Upload: UploadRequestParametrs {
     
     let tmpUUId: String
     
-    init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String) {
+    init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool) {
         
         self.item = item
         //self.uploadType = uploadType
@@ -74,14 +76,14 @@ class Upload: UploadRequestParametrs {
         self.uploadStrategy = uploadStategy
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
-        
+
+        self.isFavorite = isFavorite
+
         if item.isLocalItem, item.uuid.count > 0 {
             self.tmpUUId = item.uuid
         } else {
             self.tmpUUId = UUID().description
         }
-        
-        
     }
     
     var requestParametrs: Any {
@@ -94,6 +96,8 @@ class Upload: UploadRequestParametrs {
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
+            HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
+            HeaderConstant.XObjectMetaParentUuid : rootFolder
 //            HeaderConstant.Etag                   : md5
             //                  HeaderConstant.ContentLength         : contentLenght,
             //                  HeaderConstant.XObjectMetaParentUuid : rootFolder,
@@ -116,6 +120,8 @@ final class UploadDataParametrs: UploadDataRequestParametrs {
     
     let data: Data
     let url: URL
+    var parentUuid: String = ""
+    var isFavorites: Bool = false
     
     init(data: Data, url: URL) {
         self.data = data
@@ -138,7 +144,9 @@ final class UploadDataParametrs: UploadDataRequestParametrs {
             HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
             HeaderConstant.XMetaRecentServerHash: "s",
 //            HeaderConstant.Etag: md5,
-            HeaderConstant.XObjectMetaFileName: tmpUUId
+            HeaderConstant.XObjectMetaFileName: tmpUUId,
+            HeaderConstant.XObjectMetaParentUuid: parentUuid,
+            HeaderConstant.XObjectMetaFavorites: isFavorites ? "true" : "false"
         ]
     }
     

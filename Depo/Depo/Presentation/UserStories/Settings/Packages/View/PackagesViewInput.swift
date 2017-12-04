@@ -12,4 +12,6 @@ protocol PackagesViewInput: class, ActivityIndicator {
     func showActivateOfferAlert(for offer: OfferServiceResponse)
     func showCancelOfferAlert(for accountType: AccountType)
     func showCancelOfferApple()
+    func show(promocodeError: String)
+    func successedPromocode()
 }

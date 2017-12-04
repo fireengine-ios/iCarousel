@@ -21,6 +21,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func viewIsReady() {
+//        interactor.getCellsData()
+    }
+    
+    func viewWillBecomeActive() {
         interactor.getCellsData()
     }
     
@@ -74,7 +78,34 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func goToPasscodeSettings() {
-        router.goToPasscodeSettings()
+        router.goToPasscodeSettings(isTurkcell: interactor.isTurkcellUser, inNeedOfMail: inNeedOfMailVerefication())
+    }
+    
+    func inNeedOfMailVerefication() -> Bool {
+        return true//TEST TEST QA TEST
+        return (interactor.isTurkcellUser && interactor.isEmptyMail)
+    }
+    
+    var inNeedOfMail: Bool {
+        return inNeedOfMailVerefication()
+    }
+    
+    var isTurkCellUser: Bool { return interactor.isTurkcellUser }
+    
+    func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool) {
+        
+    }
+    
+    func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool) {
+        interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
+    }
+    
+    func turkCellSecuritySettingsAccuered(passcode: Bool, autoLogin: Bool) {
+        view.changeTurkCellSecurity(passcode: passcode, autologin: autoLogin)
+    }
+    
+    func turkCellSecurityfailed() {
+        
     }
     
     override func outputView() -> Waiting? {
