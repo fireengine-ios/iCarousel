@@ -7,7 +7,7 @@
 //
 
 class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelectionTabBarModuleInput, BottomSelectionTabBarViewOutput, BottomSelectionTabBarInteractorOutput {
-
+    
     var view: BottomSelectionTabBarViewInput!
 //    var interactor: BottomSelectionTabBarInteractorInput!
     var router: BottomSelectionTabBarRouterInput!
@@ -454,6 +454,14 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     override func operationStarted(type: ElementTypes) {
         startAsyncOperationDisableScreen()
+    }
+    
+    func selectFolder(_ selectFolder: SelectFolderViewController) {
+        router.showSelectFolder(selectFolder: selectFolder)
+    }
+    
+    func objectsToShare(rect: CGRect?, urls: [String]) {
+        router.showShare(rect: rect, urls: urls)
     }
     
     //MARK: base presenter

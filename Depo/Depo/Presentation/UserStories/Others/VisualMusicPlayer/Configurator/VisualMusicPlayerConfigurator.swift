@@ -10,14 +10,7 @@ import UIKit
 
 class VisualMusicPlayerModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, bottomBarConfig: EditingBarConfig) {
-
-        if let viewController = viewInput as? VisualMusicPlayerViewController {
-            configure(viewController: viewController, bottomBarConfig: bottomBarConfig)
-        }
-    }
-
-    private func configure(viewController: VisualMusicPlayerViewController, bottomBarConfig: EditingBarConfig) {
+    func configure(viewController: VisualMusicPlayerViewController, bottomBarConfig: EditingBarConfig) {
 
         let router = VisualMusicPlayerRouter()
 
