@@ -42,8 +42,8 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     
     weak var settingsDelegate: SettingsDelegate?
     
-    let turkCellSecurityPasscodeCellIndex = IndexPath(row: 4, section: 1)
-    let turkCellSecurityAutologinCellIndex = IndexPath(row: 5, section: 1)
+    let turkCellSecurityPasscodeCellIndex = IndexPath(row: 3, section: 1)
+    let turkCellSecurityAutologinCellIndex = IndexPath(row: 4, section: 1)
     
     // MARK: Life cycle
     override func viewDidLoad() {

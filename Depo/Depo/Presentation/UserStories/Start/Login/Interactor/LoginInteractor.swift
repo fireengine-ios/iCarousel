@@ -132,7 +132,13 @@ class LoginInteractor: LoginInteractorInput {
             }
         }) { [weak self] (failResponce) in
             DispatchQueue.main.async {
-                self?.output.onFailEULA()
+                if failResponce.description == "412" { //TODO: what do we do on other errors?
+                    //https://wiki.life.com.by/pages/viewpage.action?pageId=62456128
+                    self?.output.onFailEULA()
+                } else {
+                   self?.output.onSuccessEULA()
+                }
+                
             }
         }
         
