@@ -209,6 +209,12 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func submit(promocode: String) {
+        if promocode.isEmpty {
+            DispatchQueue.main.async {
+                self.output.failedPromocode(with: TextConstants.promocodeEmpty)
+            }
+            return
+        }
         offersService.submit(promocode: promocode,
              success: { [weak self] response in
                 /// maybe will be need

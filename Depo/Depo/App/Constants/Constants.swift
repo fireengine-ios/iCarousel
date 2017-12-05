@@ -592,10 +592,12 @@ struct TextConstants {
     static let apply = "Apply"
     static let success = "Success"
     
-    static let promocodeTitle = "lifebox Size Özel Kampanya"
-    static let promocodePlaceholder = "Enter Your Promotion Code"
+    static let promocodeTitle = "Lifebox campaign"
+    static let promocodePlaceholder = "Enter your promo code"
     static let promocodeError = "Invalid Promo Code"
+    static let promocodeEmpty = "Please enter your promo code"
     static let promocodeSuccess = "Promo code was applied"
+    static let promocodeInvalid = "Verification code is blocked.\nPlease request a new code."
 }
 
 

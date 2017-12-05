@@ -131,7 +131,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
         optInVC?.increaseNumberOfAttemps()
         optInVC?.clearCode()
         optInVC?.view.endEditing(true)
-        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: TextConstants.phoneVereficationNonValidCodeErrorText, okButtonText: TextConstants.ok)
+        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: TextConstants.promocodeInvalid, okButtonText: TextConstants.ok)
     }
     
     func successedVerifyOffer() {

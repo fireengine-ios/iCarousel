@@ -46,6 +46,7 @@ extension PackagesViewController: PackagesViewInput {
     }
     
     func successedPromocode() {
+        stopActivityIndicator()
         CustomPopUp.sharedInstance.showCustomSuccessAlert(withTitle: TextConstants.success, withText: TextConstants.promocodeSuccess, okButtonText: TextConstants.ok)
         
         promoView.endEditing(true)
@@ -54,6 +55,7 @@ extension PackagesViewController: PackagesViewInput {
     }
     
     func show(promocodeError: String) {
+        stopActivityIndicator()
         promoView.errorLabel.text = promocodeError
     }
     
@@ -161,6 +163,8 @@ extension PackagesViewController: ActivityIndicator {
 // MARK: - PromoViewDelegate
 extension PackagesViewController: PromoViewDelegate {
     func promoView(_ promoView: PromoView, didPressApplyWithPromocode promocode: String) {
+        startActivityIndicator()
         output.submit(promocode: promocode)
+        keyboardHideManager.dismissKeyboard()
     }
 }
