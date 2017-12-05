@@ -35,6 +35,7 @@ final class OptInController: UIViewController {
         return vc
     }
     
+    private lazy var activityManager = ActivityIndicatorManager()
     var phone = ""
     weak var delegate: OptInControllerDelegate?
     
@@ -60,6 +61,8 @@ final class OptInController: UIViewController {
         timerLabel.font = UIFont.TurkcellSaturaBolFont(size: 39)
         
         title = delegate?.optInNavigationTitle()
+        
+        activityManager.delegate = self
     }
     
     func setupTimer(withRemainingTime remainingTime: Int) {
@@ -129,10 +132,22 @@ final class OptInController: UIViewController {
     }
 }
 
+// MARK: - SmartTimerLabelDelegate
 extension OptInController: SmartTimerLabelDelegate {
     func timerDidFinishRunning() {
         endEnterCode()
         clearCode()
         showResendButton()
+    }
+}
+
+// MARK: - ActivityIndicator
+extension OptInController: ActivityIndicator {
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
     }
 }

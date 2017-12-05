@@ -92,6 +92,7 @@ extension PackagesPresenter: PackagesViewOutput {
 // MARK: - OptInControllerDelegate
 extension PackagesPresenter: OptInControllerDelegate {
     func optInResendPressed(_ optInVC: OptInController) {
+        optInVC.startActivityIndicator()
         self.optInVC = optInVC
         if let offer = offerToBuy {
             interactor.getResendToken(for: offer)
@@ -108,6 +109,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     }
     
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
+        optInVC.startActivityIndicator()
         self.optInVC = optInVC
         interactor.verifyOffer(token: referenceToken, otp: code)
     }
@@ -128,6 +130,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedVerifyOffer() {
+        optInVC?.stopActivityIndicator()
         optInVC?.increaseNumberOfAttemps()
         optInVC?.clearCode()
         optInVC?.view.endEditing(true)
@@ -135,6 +138,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successedVerifyOffer() {
+        optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
         RouterVC().popViewController()
     }
@@ -157,6 +161,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(tokenForResend: String) {
         referenceToken = tokenForResend
+        optInVC?.stopActivityIndicator()
         optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInVC?.startEnterCode()
         optInVC?.hideResendButton()
@@ -189,6 +194,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedUsage(with error: ErrorResponse) {
+        optInVC?.stopActivityIndicator()
         view?.stopActivityIndicator()
         view?.display(error: error)
     }
