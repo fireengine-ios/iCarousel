@@ -183,20 +183,17 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         moreButton.isHidden = isSelectionActive
         smallContentImageView.isHidden = false
         
-        if (isSelectionActive){
+        if let isFavorite = itemModel?.favorites {
+            if isBigSize() {
+                topFavoritesStar.isHidden = !isFavorite
+                bottomFavoritesStar.isHidden = true
+            } else {
+                topFavoritesStar.isHidden = true
+                bottomFavoritesStar.isHidden = !isFavorite
+            }
+        } else {
             topFavoritesStar.isHidden = true
             bottomFavoritesStar.isHidden = true
-        }else{
-            if itemModel != nil {
-                if (isBigSize()){
-                    topFavoritesStar.isHidden = !itemModel!.favorites
-                    bottomFavoritesStar.isHidden = true
-                }else{
-                    topFavoritesStar.isHidden = true
-                    bottomFavoritesStar.isHidden = !itemModel!.favorites
-                }
-
-            }
         }
         
         isCellSelected = isSelected
