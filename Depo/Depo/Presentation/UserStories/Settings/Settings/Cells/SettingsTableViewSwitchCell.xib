@@ -54,9 +54,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="cellLabel" destination="Ogz-jU-XLF" id="xVK-5x-UVe"/>
-                <outlet property="cellSwitch" destination="Kr9-aS-N8A" id="EB6-D1-B7E"/>
                 <outlet property="separator" destination="YAe-jV-fq9" id="tiA-fu-m6M"/>
+                <outlet property="stateSwitch" destination="Kr9-aS-N8A" id="UQW-xm-nGN"/>
+                <outlet property="titleLabel" destination="Ogz-jU-XLF" id="yX0-Oi-Grs"/>
             </connections>
             <point key="canvasLocation" x="8" y="32"/>
         </tableViewCell>
