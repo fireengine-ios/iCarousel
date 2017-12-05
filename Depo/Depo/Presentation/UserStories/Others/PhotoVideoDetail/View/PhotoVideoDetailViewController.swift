@@ -52,6 +52,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         editingTabBar?.view.layoutIfNeeded()
         output.viewIsReady(view: view)
+        setupTitle()
     }
     
     override func viewDidAppear(_ animated: Bool) {
