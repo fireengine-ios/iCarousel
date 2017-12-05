@@ -31,8 +31,8 @@ class LoginPhoneMailCell: BaseUserInputCellView {
             return
         }
         
-        if text.count >= 4, text[text.index(text.startIndex, offsetBy: 3)] == "0", CoreTelephonyService().isTurkcellOperator() {
-            text.remove(at: text.index(text.startIndex, offsetBy: 3))
+        if text.count >= 4, text[3] == "0", CoreTelephonyService().isTurkcellOperator() {
+            text.remove(at: text[3])
             textInputField.text = text
         }
     }
