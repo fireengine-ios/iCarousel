@@ -4580,7 +4580,6 @@
 			isa = PBXGroup;
 			children = (
 				8C0B2F221EF3140C00706DC0 /* ProtoTextInputCell */,
-				CEE9B4EE1F78FDFF002DAF81 /* InternetDataUsageCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -5399,6 +5398,15 @@
 				9991BD4E3939E69007211781 /* OTPViewInitializer.swift */,
 			);
 			path = Configurator;
+			sourceTree = "<group>";
+		};
+		CE085D521FD6DBF0009FF427 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				CEE9B4EE1F78FDFF002DAF81 /* InternetDataUsageCell */,
+				CE4CFEBE1F78F18700FB4C3D /* ResizableTableView.swift */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 		CE09155C1F3870D000C82A44 /* WrapItemFileService */ = {
@@ -6756,7 +6764,7 @@
 				D47863ED1F3F18FA00EFDC6D /* UsageInfoViewController.swift */,
 				D47863EF1F3F18FA00EFDC6D /* UsageInfoViewInput.swift */,
 				D47863F01F3F18FA00EFDC6D /* UsageInfoViewOutput.swift */,
-				CE4CFEBE1F78F18700FB4C3D /* ResizableTableView.swift */,
+				CE085D521FD6DBF0009FF427 /* views */,
 			);
 			path = View;
 			sourceTree = "<group>";
