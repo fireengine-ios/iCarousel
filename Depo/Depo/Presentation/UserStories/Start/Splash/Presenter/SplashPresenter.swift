@@ -53,6 +53,10 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         router.navigateToOnboarding()
     }
     
+    func onNetworkFail() {
+        router.showNetworkError()
+    }
+    
     func onSuccessEULA() {
         router.navigateToApplication()
     }

@@ -15,5 +15,6 @@ protocol SplashInteractorOutput:class, BaseAsyncOperationInteractorOutput {
     
     func onSuccessLogin()
     func onFailLogin()
+    func onNetworkFail()
     
 }
