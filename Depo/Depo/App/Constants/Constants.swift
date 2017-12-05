@@ -608,7 +608,7 @@ struct NumericConstants {
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
-    static let iPhoneGreedInset: CGFloat = 5
+    static let iPhoneGreedInset: CGFloat = 2
     static let iPhoneGreedHorizontalSpace: CGFloat = 1
     static let iPadGreedInset: CGFloat = 5
     static let iPadGreedHorizontalSpace: CGFloat = 5
