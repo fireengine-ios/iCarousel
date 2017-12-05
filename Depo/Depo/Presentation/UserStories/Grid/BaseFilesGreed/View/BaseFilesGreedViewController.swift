@@ -205,12 +205,14 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         setTitle(withString: "\(numberOfItems) Selected")
         navigationBarWithGradientStyle()
         configureNavBarActions()
+        underNavBarBar?.setSorting(enabled: false)
     }
     
     func stopSelection() {
         self.navigationItem.leftBarButtonItem = nil
         homePageNavigationBarStyle()
         configureNavBarActions()
+        underNavBarBar?.setSorting(enabled: true)
     }
     
     func setThreeDotsMenu(active isActive: Bool) {
