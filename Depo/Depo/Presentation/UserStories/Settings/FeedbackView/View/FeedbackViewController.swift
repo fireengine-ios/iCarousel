@@ -107,6 +107,11 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         let array = languagesArray.map({ (object) -> String in
             object.displayLanguage ?? ""
         })
+        
+        if let currentLanguage = languagesArray.first {
+            selectedLanguage = currentLanguage
+        }
+        
         dropDovnView!.setTableDataObjects(objects: array)
     }
     
