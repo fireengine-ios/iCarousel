@@ -570,9 +570,25 @@ struct TextConstants {
     static let errorInvalidPasswordLengthExceeded = "The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response."
     static let errorInvalidPasswordBelowLimit = "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response."
     static let errorManyRequest = "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry."
+    
+    static let TOO_MANY_REQUESTS = "Too many invalid attempts, please try again later"
+    
     static let errorUnknown = "Unknown error"
+    static let errorServer = "Server error"
     
     static let canceledOperationTextError = "Cancelled"
+    
+    static let ACCOUNT_NOT_FOUND = "Account cannot be found"
+    static let INVALID_PROMOCODE = "This package activation code is invalid"
+    static let PROMO_CODE_HAS_BEEN_ALREADY_ACTIVATED = "This package activation code has been used before, please try different code"
+    static let PROMO_CODE_HAS_BEEN_EXPIRED = "This package activation code has expired"
+    static let PROMO_CODE_IS_NOT_CREATED_FOR_THIS_ACCOUNT = "This package activation code is defined for different user"
+    static let THERE_IS_AN_ACTIVE_JOB_RUNNING = "Package activation process is in progress"
+    static let CURRENT_JOB_IS_FINISHED_OR_CANCELLED = "This package activation code has been used before, please try different code"
+    static let PROMO_IS_NOT_ACTIVATED = "This package activation code has not been activated  yet"
+    static let PROMO_HAS_NOT_STARTED = "This package activation code definition time has not yet begun"
+    static let PROMO_NOT_ALLOWED_FOR_MULTIPLE_USE = "You will not be able to use the this package activation code from this campaign for the second time because you have already benefited from it"
+    static let PROMO_IS_INACTIVE = "The package activation code is not active"
     
     static let passcode = "Passcode"
     static let passcodeEnter = "Enter lifebox passcode"
@@ -596,7 +612,7 @@ struct TextConstants {
     static let promocodePlaceholder = "Enter your promo code"
     static let promocodeError = "Invalid Promo Code"
     static let promocodeEmpty = "Please enter your promo code"
-    static let promocodeSuccess = "Promo code was applied"
+    static let promocodeSuccess = "Your package is successfully defined"
     static let promocodeInvalid = "Verification code is blocked.\nPlease request a new code."
 }
 

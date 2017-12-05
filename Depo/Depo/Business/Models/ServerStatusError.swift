@@ -1,5 +1,5 @@
 //
-//  BackendError.swift
+//  ServerStatusError.swift
 //  Depo_LifeTech
 //
 //  Created by Bondar Yaroslav on 9/28/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class BackendError: Error {
+final class ServerStatusError {
     let status: String
     let code: Int
     
@@ -32,9 +32,12 @@ final class BackendError: Error {
         static let invalidPasswordLengthExceeded = "PASSWORD_FIELD_IS_EMPTY"
         static let invalidPasswordBelowLimit = "PASSWORD_FIELD_IS_EMPTY"
         static let manyRequest = "PASSWORD_FIELD_IS_EMPTY"
+        
+        static let TOO_MANY_REQUESTS = "TOO_MANY_REQUESTS"
     }
-    
-    var localizedDescription: String {
+}
+extension ServerStatusError: LocalizedError {
+    var errorDescription: String? {
         switch status {
         case ErrorKeys.emptyEmail:
             return TextConstants.errorEmptyEmail
@@ -77,6 +80,9 @@ final class BackendError: Error {
             
         case ErrorKeys.manyRequest:
             return TextConstants.errorManyRequest
+            
+        case ErrorKeys.TOO_MANY_REQUESTS:
+            return TextConstants.TOO_MANY_REQUESTS
             
         default:
             return TextConstants.errorUnknown

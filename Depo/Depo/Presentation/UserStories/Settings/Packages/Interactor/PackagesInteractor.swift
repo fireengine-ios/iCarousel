@@ -218,13 +218,17 @@ extension PackagesInteractor: PackagesInteractorInput {
         offersService.submit(promocode: promocode,
              success: { [weak self] response in
                 /// maybe will be need
-                //guard let response = response as? SubmitPromocodeResponse else { return }
+                ///guard let response = response as? SubmitPromocodeResponse else { return }
                 DispatchQueue.main.async {
                     self?.output.successedPromocode()
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
-                    self?.output.failedPromocode(with: TextConstants.promocodeError)
+                    if case ErrorResponse.httpCode(500) = errorResponse {
+                        self?.output.failedPromocode(with: TextConstants.promocodeError)
+                    } else {
+                        self?.output.failedPromocode(with: errorResponse.localizedDescription)
+                    }
                 }
         })
     }
