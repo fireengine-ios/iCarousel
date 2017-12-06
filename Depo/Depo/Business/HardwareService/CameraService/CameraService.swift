@@ -38,8 +38,13 @@ import AVFoundation
     }
     
     func showCamera(onViewController sourceViewViewController: UIViewController) {
-        cameraIsAvalible { _ in
-            self.showPickerController(type: .camera, onViewController: sourceViewViewController)
+        cameraIsAvalible { [weak self] accessGranted in
+            guard accessGranted else {
+                self?.showAccessAlert()
+                return
+            }
+            
+            self?.showPickerController(type: .camera, onViewController: sourceViewViewController)
         }
     }
     
