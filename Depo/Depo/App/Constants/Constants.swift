@@ -292,6 +292,7 @@ struct TextConstants {
     static let fileInfoFileNameTitle = "File Name"
     static let fileInfoInfoTitle = "File Info"
     static let fileInfoFolderSizeTitle = "Folder size"
+    static let fileInfoAlbumSizeTitle = "Items"
     static let fileInfoFileSizeTitle = "File size"
     static let fileInfoDurationTitle = "Duration"
     static let fileInfoDateModifiedTitle = "Date modified"
@@ -300,6 +301,9 @@ struct TextConstants {
     static let fileInfoAlbumTitle = "Album"
     static let fileInfoArtistTitle = "Artist"
     static let fileInfoTitleTitle = "Title"
+    static let fileInfoAlbumNameTitle = "Album Name"
+    static let fileInfoAlbumInfoTitle = "Album Info"
+    static let fileInfoSave = "Save"
     
     //MARK: settings User info view
     static let settingsUserInfoViewUpgradeButtonText = "UPGRADE"
@@ -396,6 +400,7 @@ struct TextConstants {
     static let music = "Music"
     static let documents = "Documents"
     static let tabBarDeleteLabel = "Delete"
+    static let tabBarRemoveAlbumLabel = "Remove Album"
     static let tabBarRemoveLabel = "Remove From Album"
     static let tabBarAddToAlbumLabel = "Add To Album"
     static let tabAlbumCoverAlbumLabel = "Make album cover"
@@ -472,6 +477,7 @@ struct TextConstants {
     static let actionSheetCreateStory = "Create a Story"
     static let actionSheetCopy = "Copy"
     static let actionSheetAddToFavorites = "Add to Favorites"
+    static let actionSheetRemove = "Remove"
     static let actionSheetRemoveFavorites = "Remove from Favorites"
     static let actionSheetAddToAlbum = "Add to album"
     static let actionSheetBackUp = "Back Up"

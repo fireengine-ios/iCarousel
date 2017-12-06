@@ -132,12 +132,9 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?) {
-        
         let items = remoteItemsUUID(files: sharedFiles)
-        let isAlboum = false
-        let param = SharedServiceParam(filesList: items,
-                                       isAlbum: isAlboum,
-                                       sharedType: .link)
+        let isAlbum = !sharedFiles.contains(where: { $0.fileType != .photoAlbum })
+        let param = SharedServiceParam(filesList: items, isAlbum: isAlbum, sharedType: .link)
         sharedFileService.share(param: param, success: success, fail: fail)
     }
     
