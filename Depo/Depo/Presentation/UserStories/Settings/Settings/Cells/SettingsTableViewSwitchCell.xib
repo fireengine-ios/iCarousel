@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,7 +26,7 @@
                         </constraints>
                     </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogz-jU-XLF">
-                        <rect key="frame" x="21" y="11.5" width="279" height="21"/>
+                        <rect key="frame" x="13" y="11.5" width="287" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="TnQ-R5-l8L"/>
                         </constraints>
@@ -44,20 +43,20 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Ogz-jU-XLF" firstAttribute="leading" secondItem="r67-zP-zyN" secondAttribute="leadingMargin" constant="13" id="0gh-xH-4DI"/>
                     <constraint firstItem="YAe-jV-fq9" firstAttribute="leading" secondItem="r67-zP-zyN" secondAttribute="leading" constant="13" id="CFN-6N-OZi"/>
                     <constraint firstAttribute="trailing" secondItem="Kr9-aS-N8A" secondAttribute="trailing" constant="24" id="X7s-Vs-Ddh"/>
                     <constraint firstAttribute="trailing" secondItem="YAe-jV-fq9" secondAttribute="trailing" id="bO1-sU-3My"/>
                     <constraint firstAttribute="bottom" secondItem="YAe-jV-fq9" secondAttribute="bottom" id="cPq-TI-I2S"/>
+                    <constraint firstItem="Ogz-jU-XLF" firstAttribute="leading" secondItem="r67-zP-zyN" secondAttribute="leading" constant="13" id="dex-F8-mX4"/>
                     <constraint firstItem="Ogz-jU-XLF" firstAttribute="centerY" secondItem="r67-zP-zyN" secondAttribute="centerY" id="qaX-VU-5st"/>
                     <constraint firstItem="Kr9-aS-N8A" firstAttribute="centerY" secondItem="r67-zP-zyN" secondAttribute="centerY" id="xcA-dN-g6b"/>
                     <constraint firstItem="Kr9-aS-N8A" firstAttribute="leading" secondItem="Ogz-jU-XLF" secondAttribute="trailing" constant="10" id="y0s-QY-68J"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="cellLabel" destination="Ogz-jU-XLF" id="xVK-5x-UVe"/>
-                <outlet property="cellSwitch" destination="Kr9-aS-N8A" id="EB6-D1-B7E"/>
                 <outlet property="separator" destination="YAe-jV-fq9" id="tiA-fu-m6M"/>
+                <outlet property="stateSwitch" destination="Kr9-aS-N8A" id="UQW-xm-nGN"/>
+                <outlet property="titleLabel" destination="Ogz-jU-XLF" id="yX0-Oi-Grs"/>
             </connections>
             <point key="canvasLocation" x="8" y="32"/>
         </tableViewCell>

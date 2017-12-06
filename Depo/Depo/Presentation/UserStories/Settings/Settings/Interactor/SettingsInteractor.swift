@@ -29,7 +29,7 @@ class SettingsInteractor: SettingsInteractorInput {
     func getCellsData(){
         
         let securityCells = [TextConstants.settingsViewCellActivityTimline,
-                             TextConstants.settingsViewCellRecentlyDeletedFiles,
+//                             TextConstants.settingsViewCellRecentlyDeletedFiles,
                              TextConstants.settingsViewCellUsageInfo,
                              TextConstants.settingsViewCellPasscode]
         
