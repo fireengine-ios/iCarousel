@@ -117,11 +117,22 @@ class WrapItemFileService: WrapItemFileOperations {
             success?()
             return nil
         }
+        let successDetails: FileOperationSucces = {
+            let fileService = FileService()
+            fileService.details(uuids: items.map({ $0.uuid }), success: { (updatedItems) in
+                for item in updatedItems {
+                    if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
+                        itemToUpdate.metaData = item.metaData
+                    }
+                }
+                success?()
+            }, fail: fail)
+        }
         return uploadService.uploadFileList(items: localFiles,
                                             uploadType: .syncToUse,
                                             uploadStategy: .WithoutConflictControl,
                                             uploadTo: .MOBILE_UPLOAD,
-                                            success: success,
+                                            success: successDetails,
                                             fail: fail)
     }
     
