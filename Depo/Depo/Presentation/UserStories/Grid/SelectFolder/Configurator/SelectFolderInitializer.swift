@@ -39,8 +39,8 @@ class SelectFolderModuleInitializer: NSObject {
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []),
                                topBarConfig: nil)
-        if let folder_ = folder{
-            viewController.mainTitle = folder_.name
+        if let folder_ = folder, let unwrapedName = folder_.name {
+            viewController.mainTitle = unwrapedName
         } else {
             viewController.mainTitle = ""
         }
