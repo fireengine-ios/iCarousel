@@ -150,16 +150,16 @@
 		7C1F89921F70FFDF00740177 /* ViewForPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */; };
 		7C1F89951F7140AF00740177 /* PopUpSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */; };
 		7C1F89961F7140AF00740177 /* PopUpSwipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */; };
-		7C233CCF1FD51E290013CCA0 /* UploadFromLifeBoxConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC11FD51E280013CCA0 /* UploadFromLifeBoxConfigurator.swift */; };
 		7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */; };
 		7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC41FD51E280013CCA0 /* UploadFromLifeBoxModuleInput.swift */; };
-		7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxPresenter.swift */; };
+		7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift */; };
 		7C233CD31FD51E290013CCA0 /* UploadFromLifeBoxRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC71FD51E280013CCA0 /* UploadFromLifeBoxRouterInput.swift */; };
 		7C233CD41FD51E290013CCA0 /* UploadFromLifeBoxRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC81FD51E280013CCA0 /* UploadFromLifeBoxRouter.swift */; };
 		7C233CD51FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */; };
 		7C233CD61FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCB1FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift */; };
 		7C233CD71FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCD1FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift */; };
 		7C233CD81FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCE1FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift */; };
+		7C233CDA1FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CD91FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift */; };
 		7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */; };
 		7C241EFA1F960E1C00322149 /* CollectionViewCellForStoryPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C241EF91F960E1B00322149 /* CollectionViewCellForStoryPhoto.xib */; };
 		7C2F56F61F1CC0FE0014870B /* ActionsMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */; };
@@ -1334,16 +1334,16 @@
 		7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForPopUp.swift; sourceTree = "<group>"; };
 		7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpSwipeCell.swift; sourceTree = "<group>"; };
 		7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpSwipeCell.xib; sourceTree = "<group>"; };
-		7C233CC11FD51E280013CCA0 /* UploadFromLifeBoxConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxConfigurator.swift; sourceTree = "<group>"; };
 		7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInitializer.swift; sourceTree = "<group>"; };
 		7C233CC41FD51E280013CCA0 /* UploadFromLifeBoxModuleInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxModuleInput.swift; sourceTree = "<group>"; };
-		7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxPresenter.swift; sourceTree = "<group>"; };
+		7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxAllFilesPresenter.swift; sourceTree = "<group>"; };
 		7C233CC71FD51E280013CCA0 /* UploadFromLifeBoxRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxRouterInput.swift; sourceTree = "<group>"; };
 		7C233CC81FD51E280013CCA0 /* UploadFromLifeBoxRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxRouter.swift; sourceTree = "<group>"; };
 		7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInteractor.swift; sourceTree = "<group>"; };
 		7C233CCB1FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInteractorIO.swift; sourceTree = "<group>"; };
 		7C233CCD1FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxViewIO.swift; sourceTree = "<group>"; };
 		7C233CCE1FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxViewController.swift; sourceTree = "<group>"; };
+		7C233CD91FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxPhotosPresenter.swift; sourceTree = "<group>"; };
 		7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForStoryPhoto.swift; sourceTree = "<group>"; };
 		7C241EF91F960E1B00322149 /* CollectionViewCellForStoryPhoto.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCellForStoryPhoto.xib; sourceTree = "<group>"; };
 		7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionsMenuView.xib; sourceTree = "<group>"; };
@@ -3555,7 +3555,6 @@
 		7C233CC01FD51E280013CCA0 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
-				7C233CC11FD51E280013CCA0 /* UploadFromLifeBoxConfigurator.swift */,
 				7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */,
 			);
 			path = Configurator;
@@ -3565,7 +3564,8 @@
 			isa = PBXGroup;
 			children = (
 				7C233CC41FD51E280013CCA0 /* UploadFromLifeBoxModuleInput.swift */,
-				7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxPresenter.swift */,
+				7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift */,
+				7C233CD91FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -7913,7 +7913,6 @@
 				CE51ACE41EF90853005DCEE0 /* IntroduceInteractor.swift in Sources */,
 				EFA74FAE1FBF378F00CF946E /* PrintPresenter.swift in Sources */,
 				CE51ACE51EF90853005DCEE0 /* IntroduceRouterInput.swift in Sources */,
-				7C233CCF1FD51E290013CCA0 /* UploadFromLifeBoxConfigurator.swift in Sources */,
 				CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */,
 				8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */,
 				7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */,
@@ -7992,6 +7991,7 @@
 				7CFE92F81F5EDDE4008A3B72 /* LanguageModel.swift in Sources */,
 				CE274D611FB4806400CD53D7 /* Equatable+Contains.swift in Sources */,
 				CE95ED4A1F516736002F923A /* HelpAndSupportSectionTableViewCell.swift in Sources */,
+				7C233CDA1FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
 				CE6DE7591FCBE84100C23CBD /* FBParametrs.swift in Sources */,
 				CE51AD011EF90853005DCEE0 /* ForgotPasswordRouter.swift in Sources */,
 				7C1F89881F6FFE0300740177 /* ProgressPopUp.swift in Sources */,
@@ -8070,7 +8070,7 @@
 				39EB93C2291B9CEB5172FB15 /* ExpandStorageInitializer.swift in Sources */,
 				142A29D90D8A7CF39AC8F82C /* UploadedItemsViewInput.swift in Sources */,
 				92CB379A913C184F1ED25C74 /* UploadedItemsViewOutput.swift in Sources */,
-				7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxPresenter.swift in Sources */,
+				7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				7CFE92E81F5D85A5008A3B72 /* DropDovnView.swift in Sources */,
 				CE6DE7531FCBE84100C23CBD /* DropboxParametrs.swift in Sources */,
 				7C6E2F901F31E4F800536DB6 /* CreateStoryNameInteractor.swift in Sources */,

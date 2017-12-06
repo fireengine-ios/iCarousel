@@ -15,5 +15,5 @@ protocol UploadFromLifeBoxInteractorInput: class {
 }
 
 protocol UploadFromLifeBoxInteractorOutput: class {
-
+    func uploadOperationSuccess()
 }

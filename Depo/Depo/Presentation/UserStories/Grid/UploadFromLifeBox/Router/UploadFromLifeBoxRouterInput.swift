@@ -9,5 +9,7 @@
 import Foundation
 
 protocol UploadFromLifeBoxRouterInput {
-
+    
+    func goToFolder(destinationFolderUUID: String, outputFolderUUID: String, nController: UINavigationController)
+    
 }
