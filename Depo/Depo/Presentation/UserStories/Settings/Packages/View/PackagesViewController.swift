@@ -26,6 +26,7 @@ class PackagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setTitle(withString: TextConstants.packages)
         activityManager.delegate = self
         promoView.deleagte = self
         setupCollectionView()

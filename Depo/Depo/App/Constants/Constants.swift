@@ -622,6 +622,8 @@ struct TextConstants {
     static let promocodeSuccess = "Your package is successfully defined"
     static let promocodeInvalid = "Verification code is invalid.\nPlease try again"
     static let promocodeBlocked = "Verification code is blocked.\nPlease request a new code"
+    
+    static let packages = "Packages"
 }
 
 
