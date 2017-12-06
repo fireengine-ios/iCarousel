@@ -9,13 +9,13 @@
 import UIKit
 import Photos
 
+typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Swift.Void
+
 typealias FileDataSorceImg = (_ image: UIImage?) -> ()
 
 typealias AssetInfo = (url: URL, size: UInt64, md5: String)
 
 typealias AssetsList = (_ assets: [PHAsset] ) -> ()
-
-typealias PermissionType = (_: PHAuthorizationStatus) -> Void
 
 
 protocol LocalMediaStorageProtocol {
@@ -60,7 +60,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         getDetailQueue.maxConcurrentOperationCount = 1
         
         super.init()
-        photoLibrary.register(self)
+        askPermissionForPhotoFramework { [weak self] (accessGranted, _) in
+            if accessGranted, let `self` = self {
+                self.photoLibrary.register(self)
+            }
+        }
     }
     
     func photoIsAvalible() -> Bool {
@@ -68,11 +72,36 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return status == .authorized
     }
     
-    func askPermissionForPhotoFramework(_ status:@escaping PermissionType) {
-        if photoIsAvalible() {
-            status(.authorized)
-        } else {
-            PHPhotoLibrary.requestAuthorization(status)
+    
+    //MARK: Alerts
+    private func showAccessAlert() {
+        CustomPopUp.sharedInstance.showCustomAlert(
+            withTitle: TextConstants.photoLibraryAccessAlertTitle,
+            titleAligment: .center,
+            withText: TextConstants.photoLibraryAccessAlertText, warningTextAligment: .center,
+            firstButtonText: TextConstants.photoLibraryAccessAlertNo,
+            secondButtonText: TextConstants.photoLibraryAccessAlertGoToSettings,
+            isShadowViewShown: true,
+            secondCustomAction: {
+                CustomPopUp.sharedInstance.hideAll()
+                UIApplication.shared.openSettings()
+        })
+    }
+    
+    func askPermissionForPhotoFramework(_ accessGranted: @escaping PhotoLibraryGranted) {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .authorized:
+            accessGranted(true, status)
+        case .notDetermined, .restricted:
+            PHPhotoLibrary.requestAuthorization({ (authStatus) in
+                accessGranted(authStatus == .authorized, authStatus)
+            })
+        case .denied:
+            accessGranted(false, status)
+            DispatchQueue.main.async { [weak self] in
+                self?.showAccessAlert()
+            }
         }
     }
     
@@ -93,6 +122,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return mediaContent
     }
     
+    //WARNING: If you want to use this method, call askPermissionForPhotoFramework method first
     func getAllAlbums() -> [AlbumItem] {
         let album = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
         let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)

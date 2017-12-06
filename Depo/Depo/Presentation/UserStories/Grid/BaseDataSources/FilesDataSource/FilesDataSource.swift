@@ -44,13 +44,6 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     private let assetCache = PHCachingImageManager()
     
     
-    // MARK: check acces to local media library
-    
-    func checkAccessToMediaLibrary() -> Bool {
-        return localManager.photoIsAvalible()
-    }
-    
-    
     // MARK: PhotoDataSource
 
     func getSmalImage(path patch: PathForItem, compliteImage: @escaping RemoteImage) {
