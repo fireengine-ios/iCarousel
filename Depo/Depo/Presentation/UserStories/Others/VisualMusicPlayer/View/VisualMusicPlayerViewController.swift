@@ -18,10 +18,12 @@ protocol VisualMusicPlayerViewControllerDelegate: class {
 class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewInput {
     var output: VisualMusicPlayerViewOutput!
     
-    private let player: MediaPlayer = factory.resolve()
+    let player: MediaPlayer = factory.resolve()
     private let alert = AlertFilesActionsSheetPresenterModuleInitialiser().createModule()
     private let carouselItemFrameWidth: CGFloat = 232
     
+    var editingTabBar: BottomSelectionTabBarViewController?
+
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var playbackSlider: UISlider!
     @IBOutlet weak var passedTimeLabel: UILabel!
@@ -48,7 +50,6 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupCarousel()
         playButton.isSelected = !player.isPlaying
         player.delegates.add(self)
@@ -56,6 +57,16 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         currentDuration = player.duration
         musicName.text = player.currentMusicName
         artistName.text = player.currentArtist
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        editingTabBar?.view.layoutIfNeeded()
+        
+        output.viewIsReady(view: self.view)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private func setupCarousel() {
@@ -89,12 +100,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
     @IBAction func cancelAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    @IBAction func actionShareButton(_ sender: UIButton) {
-        guard let item = player.currentItem, let url = item.urlToFile else { return }
-        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        activityVC.popoverPresentationController?.sourceView = sender
-        present(activityVC, animated: true, completion: nil)
-    }
+
     @IBAction func actionMoreButton(_ sender: UIButton) {
         guard let item = player.currentItem else { return }
         alert.showSpecifiedMusicAlertSheet(with: item, presentedBy: sender, onSourceView: nil, viewController: self)

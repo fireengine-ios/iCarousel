@@ -35,6 +35,13 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uQr-Nc-nBr">
                                     <rect key="frame" x="47" y="213.5" width="280" height="240"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGR-tC-qlf">
+                                            <rect key="frame" x="0.0" y="192" width="280" height="1"/>
+                                            <color key="backgroundColor" red="0.26666666666666666" green="0.80000000000000004" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="Vf6-iO-YKO"/>
+                                            </constraints>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6U-vK-zhh">
                                             <rect key="frame" x="10" y="49" width="260" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -78,15 +85,18 @@
                                         <constraint firstAttribute="trailing" secondItem="Q6U-vK-zhh" secondAttribute="trailing" constant="10" id="6M8-A0-N4o"/>
                                         <constraint firstItem="Q6U-vK-zhh" firstAttribute="leading" secondItem="uQr-Nc-nBr" secondAttribute="leading" constant="10" id="7QZ-JL-0Rj"/>
                                         <constraint firstAttribute="height" constant="240" id="7gn-o0-oD1"/>
+                                        <constraint firstItem="0xo-kd-RYU" firstAttribute="top" secondItem="oGR-tC-qlf" secondAttribute="bottom" id="8qU-0y-jsJ"/>
                                         <constraint firstAttribute="width" constant="280" id="985-gd-jBj"/>
                                         <constraint firstItem="v3j-56-NbJ" firstAttribute="top" secondItem="uQr-Nc-nBr" secondAttribute="top" constant="9" id="Heu-eA-mi2"/>
                                         <constraint firstItem="Q6U-vK-zhh" firstAttribute="top" secondItem="uQr-Nc-nBr" secondAttribute="top" constant="49" id="Lck-QB-I8Z"/>
                                         <constraint firstAttribute="trailing" secondItem="ebZ-eJ-wcy" secondAttribute="trailing" constant="23" id="Y2J-vt-hKU"/>
                                         <constraint firstItem="ebZ-eJ-wcy" firstAttribute="top" secondItem="Q6U-vK-zhh" secondAttribute="bottom" constant="21" id="d6A-5d-ctS"/>
+                                        <constraint firstAttribute="trailing" secondItem="oGR-tC-qlf" secondAttribute="trailing" id="fZf-xn-UG9"/>
                                         <constraint firstAttribute="trailing" secondItem="0xo-kd-RYU" secondAttribute="trailing" id="feo-H9-EUl"/>
                                         <constraint firstAttribute="bottom" secondItem="0xo-kd-RYU" secondAttribute="bottom" id="m6i-rS-iD0"/>
                                         <constraint firstItem="ebZ-eJ-wcy" firstAttribute="leading" secondItem="uQr-Nc-nBr" secondAttribute="leading" constant="23" id="vik-Rv-DqK"/>
                                         <constraint firstAttribute="trailing" secondItem="v3j-56-NbJ" secondAttribute="trailing" constant="9" id="yIo-qW-P0H"/>
+                                        <constraint firstItem="oGR-tC-qlf" firstAttribute="leading" secondItem="uQr-Nc-nBr" secondAttribute="leading" id="zaG-pM-X0e"/>
                                     </constraints>
                                 </view>
                             </subviews>

@@ -13,5 +13,5 @@ protocol VisualMusicPlayerViewOutput {
         Notify presenter that view is ready
     */
 
-    func viewIsReady()
+    func viewIsReady(view: UIView) 
 }

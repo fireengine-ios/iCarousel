@@ -48,4 +48,6 @@ protocol SettingsViewOutput {
 
     var inNeedOfMail: Bool { get }
     var isTurkCellUser: Bool { get }
+    
+    func mailUpdated(mail: String)
 }

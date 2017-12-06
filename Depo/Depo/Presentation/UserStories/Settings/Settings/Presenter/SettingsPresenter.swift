@@ -82,7 +82,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func inNeedOfMailVerefication() -> Bool {
-        return true//TEST TEST QA TEST
+        return interactor.isTurkcellUser//TEST TEST QA TEST ONLY
         return (interactor.isTurkcellUser && interactor.isEmptyMail)
     }
     
@@ -91,6 +91,11 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     var isTurkCellUser: Bool { return interactor.isTurkcellUser }
+    
+    func mailUpdated(mail: String) {
+        view.profileInfoChanged()
+        interactor.updateUserInfo(mail: mail)
+    }
     
     func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool) {
         

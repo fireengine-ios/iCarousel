@@ -300,6 +300,16 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     func profileWontChange() {
         userInfoSubView.dismissLoadingSpinner()
     }
+    
+    fileprivate func showMailUpdatePopUp() {
+        let mailController = MailVerificationViewController()
+        mailController.actionDelegate = self
+        mailController.modalPresentationStyle = .overFullScreen
+        mailController.modalTransitionStyle = .crossDissolve
+        self.present(mailController, animated: true, completion: nil)
+        
+    }
+    
 }
 
 // MARK: - UserInfoSubViewViewControllerActionsDelegate
@@ -308,7 +318,7 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
         output.onChangeUserPhoto()
     }
     
-    func updateUserProfile(userInfo: AccountInfoResponse){
+    func updateUserProfile(userInfo: AccountInfoResponse) {
         output.onUpdatUserInfo(userInfo: userInfo)
     }
     
@@ -346,12 +356,22 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
     }
     
     func changeTurkCellSecurity(passcode: Bool, autologin: Bool) {
-        turkCellSeuritySettingsPassState = passcode
-        turkCellSeuritySettingsAutoLoginState = autologin
+
+        
         guard let securityPasscodeCell = tableView.cellForRow(at: turkCellSecurityPasscodeCellIndex) as? SettingsTableViewSwitchCell,
             let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
                 return
         }
+        guard !output.inNeedOfMail else {
+            showMailUpdatePopUp()
+            securityPasscodeCell.changeSwithcState(turnOn: !passcode)
+            securityAutoLoginCell.changeSwithcState(turnOn: !autologin)
+            return
+        }
+        
+        turkCellSeuritySettingsPassState = passcode
+        turkCellSeuritySettingsAutoLoginState = autologin
+        
         securityPasscodeCell.changeSwithcState(turnOn: passcode)
         securityAutoLoginCell.changeSwithcState(turnOn: autologin)
     }
@@ -364,5 +384,15 @@ extension SettingsViewController: SettingsTableViewSwitchCellDelegate {
                 return
         }
         output.turkcellSecurityChanged(passcode: securityPasscodeCell.stateSwitch.isOn, autoLogin: securityAutoLoginCell.stateSwitch.isOn)
+    }
+}
+
+extension SettingsViewController: MailVerificationViewControllerDelegate {
+    func mailVerified(mail: String) {
+        output.mailUpdated(mail: mail)
+    }
+    
+    func mailVerificationFailed() {
+        
     }
 }

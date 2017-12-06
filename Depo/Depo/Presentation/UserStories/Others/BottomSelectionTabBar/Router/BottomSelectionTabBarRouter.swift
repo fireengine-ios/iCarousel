@@ -33,4 +33,8 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
         let vc = PrintInitializer.viewController(data: wrapperedArray)
         router.pushViewController(viewController: vc)
     }
+    
+    func showSelectFolder(selectFolder: SelectFolderViewController) { }
+    
+    func showShare(rect: CGRect?, urls: [String]) { }
 }
