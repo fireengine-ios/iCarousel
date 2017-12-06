@@ -37,9 +37,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
     
+    var type: MoreActionsConfig.ViewType
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
+        type = .Grid
         super.init()
     }
     
@@ -52,6 +55,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                        filters: interactor.originalFilesTypeFilter)
        
         dataSource.delegate = self
+        
+        if let displayingType = topBarConfig?.defaultGridListViewtype {
+            if displayingType == .Grid {
+                dataSource.displayingType = .list
+            } else {
+                dataSource.displayingType = .greed
+            }
+        }
         
         view.setupInitialState()
         setupTopBar()
@@ -219,7 +230,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 player.play()
                 //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
             } else {
-                router.onItemSelected(item: item, from: data)
+                router.onItemSelected(item: item, from: data, type: type)
             }
         } else {
             custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
@@ -327,8 +338,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func viewAppearanceChanged(asGrid: Bool){
         if (asGrid){
             dataSource.updateDisplayngType(type: .greed)
+            type = .List
         }else{
             dataSource.updateDisplayngType(type: .list)
+            type = .Grid
         }
     }
     
@@ -486,5 +499,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func moveBack() {
         router.showBack()
     }
+    
+    func sortType() -> MoreActionsConfig.ViewType {
+        return type
+    }
+    
+    
 }
 

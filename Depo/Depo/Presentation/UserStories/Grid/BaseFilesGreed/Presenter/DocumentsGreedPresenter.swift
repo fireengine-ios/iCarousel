@@ -14,9 +14,9 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
         //interactor.viewIsReady()
         sortedRule = .lettersAZ
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.baseMultiFileCell)
-        dataSource.displayingType = .list
-
+        
         super.viewIsReady(collectionView: collectionView)
+        
     }
     
     override func getCellSizeForList() -> CGSize {

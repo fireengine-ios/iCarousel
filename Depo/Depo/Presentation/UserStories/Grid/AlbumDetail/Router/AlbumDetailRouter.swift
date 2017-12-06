@@ -12,7 +12,7 @@ class AlbumDetailRouter: BaseFilesGreedRouter, AlbumDetailRouterInput {
         view.navigationController?.popViewController(animated: true)
     }
     
-    override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
+    override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]], type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) {
         let router = RouterVC()
         
         if (item.fileType == .photoAlbum) { return }
@@ -23,7 +23,7 @@ class AlbumDetailRouter: BaseFilesGreedRouter, AlbumDetailRouterInput {
         
         switch item.fileType {
             case .folder:
-                let controller = router.filesFromFolder(folder: wrappered)
+                let controller = router.filesFromFolder(folder: wrappered, type: type, moduleOutput: moduleOutput)
                 router.pushViewControllertoTableViewNavBar(viewController: controller)
             case .audio:
                 player.play(list: [wrappered], startAt: 0)
