@@ -8,12 +8,13 @@
 
 import UIKit
 
-class UploadFromLifeBoxViewController: BaseFilesGreedViewController, UploadFromLifeBoxViewInput {
+class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, UploadFromLifeBoxViewInput {
     
     let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
     
     override func viewDidAppear(_ animated: Bool) {
         scrolliblePopUpView.isEnable = false
+        
         super.viewDidAppear(animated)
         
         cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)

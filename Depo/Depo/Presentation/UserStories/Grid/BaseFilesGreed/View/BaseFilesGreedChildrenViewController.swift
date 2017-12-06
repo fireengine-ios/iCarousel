@@ -19,6 +19,7 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
             if mainTitle != "" {
                 self.subTitle = output.getSortTypeString()
             }
+        
             self.setTitle(withString: mainTitle, andSubTitle: subTitle)
         
     }
