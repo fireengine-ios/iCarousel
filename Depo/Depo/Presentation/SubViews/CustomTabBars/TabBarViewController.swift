@@ -546,6 +546,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             let parentFolder = router.getParentUUID()
             let controller = router.uploadFromLifeBox(folderUUID: parentFolder)
             let navigationController = UINavigationController(rootViewController: controller)
+            navigationController.navigationBar.isHidden = false
+            
             router.presentViewController(controller: navigationController)
             return
         }
