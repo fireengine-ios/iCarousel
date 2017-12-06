@@ -13,7 +13,7 @@ class PhotoVideoDetailModuleConfigurator {
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, photoVideoBottomBarConfig: EditingBarConfig, documentsBottomBarConfig: EditingBarConfig) {
 
         if let viewController = viewInput as? PhotoVideoDetailViewController {
-            configure(viewController: viewController, photoVideoBottomBarConfig: photoVideoBottomBarConfig, documentsBottomBarConfig: documentsBottomBarConfig)
+            configure(viewController: viewController, photoVideoBottomBarConfig: photoVideoBottomBarConfig, documentsBottomBarConfig: documentsBottomBarConfig, alertSheetExcludeTypes: [.delete])
         }
     }
 
@@ -28,13 +28,15 @@ class PhotoVideoDetailModuleConfigurator {
                            photoVideoBottomBarConfig: EditingBarConfig,
                            documentsBottomBarConfig: EditingBarConfig,
                            alertSheetConfig: AlertFilesActionsSheetInitialConfig? = nil,
+                           alertSheetExcludeTypes: [ElementTypes] = [ElementTypes](),
                            interactor: PhotoVideoDetailInteractor = PhotoVideoDetailInteractor()) {
         let router = PhotoVideoDetailRouter()
 
         let presenter = PhotoVideoDetailPresenter()
         presenter.view = viewController
         presenter.router = router
-
+        presenter.alertSheetExcludeTypes = alertSheetExcludeTypes
+        
         interactor.output = presenter
         interactor.photoVideoBottomBarConfig = photoVideoBottomBarConfig
         interactor.documentsBottomBarConfig = documentsBottomBarConfig
