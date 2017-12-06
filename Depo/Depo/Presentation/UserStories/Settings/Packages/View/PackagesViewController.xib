@@ -85,7 +85,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Nw-n6-UYP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Nw-n6-UYP">
                                                     <rect key="frame" x="0.0" y="69" width="192" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -124,7 +124,6 @@
                                         <constraint firstAttribute="bottom" secondItem="HQv-5f-b5d" secondAttribute="bottom" id="2U3-gG-Htw"/>
                                         <constraint firstItem="UMR-3l-Xbr" firstAttribute="centerY" secondItem="ewx-h7-cJF" secondAttribute="centerY" id="HSu-Bw-6ds"/>
                                         <constraint firstItem="UMR-3l-Xbr" firstAttribute="leading" secondItem="HQv-5f-b5d" secondAttribute="trailing" constant="16" id="bCf-wD-d2F"/>
-                                        <constraint firstAttribute="height" constant="90" id="goY-IK-Y8a"/>
                                         <constraint firstItem="HQv-5f-b5d" firstAttribute="top" secondItem="5bp-6o-N2u" secondAttribute="top" id="kQl-DS-2qZ"/>
                                         <constraint firstItem="HQv-5f-b5d" firstAttribute="leading" secondItem="5bp-6o-N2u" secondAttribute="leading" id="sIY-TL-aPS"/>
                                     </constraints>

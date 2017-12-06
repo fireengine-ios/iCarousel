@@ -166,10 +166,13 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
                         return
                     case .NoneFormat: break
                 }
-                
+
+            } else if let data = data, let value = JSON(data: data)["value"].string {
+                let error = ServerValueError(value: value, code: httpResponse.statusCode)
+                fail?(.error(error))
             } else if let data = data, let status = JSON(data: data)["status"].string {
-                let beError = BackendError(status: status, code: httpResponse.statusCode)
-                fail?(.backendError(beError))
+                let error = ServerStatusError(status: status, code: httpResponse.statusCode)
+                fail?(.error(error))
             } else {
                 fail?(.httpCode(httpResponse.statusCode))
             }

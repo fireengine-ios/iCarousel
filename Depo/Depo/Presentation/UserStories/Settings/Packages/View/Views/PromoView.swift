@@ -50,6 +50,7 @@ final class PromoView: UIView {
             applyButton.setTitleColor(UIColor.white, for: .normal)
             applyButton.backgroundColor = ColorConstants.darcBlueColor
             applyButton.layer.cornerRadius = 15
+            applyButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         }
     }
     
