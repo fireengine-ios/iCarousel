@@ -32,7 +32,7 @@ class AlbumDetailModuleInitializer: NSObject {
                                                                                      selectionModeTypes: [.createStory, .delete]),
                                topBarConfig: nil)
         
-        viewController.mainTitle = album.name
+        viewController.mainTitle = album.name ?? ""
         
         return viewController
     }
