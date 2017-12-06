@@ -19,28 +19,28 @@ class InternetDataUsageCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel! {
         didSet {
-            nameLabel.textColor = ColorConstants.darkText
-            nameLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
+            nameLabel.textColor = ColorConstants.lightText
+            nameLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         }
     }
     @IBOutlet weak var dateLabel: UILabel! {
         didSet {
-            dateLabel.textColor = ColorConstants.darkText
-            dateLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            dateLabel.textColor = ColorConstants.textGrayColor
+            dateLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
         }
     }
     
     @IBOutlet weak var dataUsageLabel: UILabel! {
         didSet {
-            dataUsageLabel.textColor = ColorConstants.darkText
-            dataUsageLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            dataUsageLabel.textColor = ColorConstants.textGrayColor
+            dataUsageLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
         }
     }
     
     func fill(with object: InternetDataUsage) {
         nameLabel.text = object.offerName
         dateLabel.text = object.expiryDate?.getDateInFormat(format: "dd.MM.YYYY")
-        dataUsageLabel.text = "\(object.remainingString) of \(object.totalString) has remained"
+        dataUsageLabel.text = "\(object.remainingString) of \(object.totalString) has remained (only for lifebox usage)"
         progressBar.progress = Float(object.remaining ?? 1) / Float(object.total ?? 1)
     }
 }
