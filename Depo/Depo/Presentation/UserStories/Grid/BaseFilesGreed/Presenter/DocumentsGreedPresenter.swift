@@ -27,9 +27,9 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
         var cellWidth:CGFloat = 180
         
         if (Device.isIpad) {
-            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * NumericConstants.numerCellInDocumentLineOnIpad - 1)/NumericConstants.numerCellInDocumentLineOnIpad
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIpad - 1))/NumericConstants.numerCellInDocumentLineOnIpad
         } else {
-            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2  - NumericConstants.iPhoneGreedHorizontalSpace * NumericConstants.numerCellInDocumentLineOnIphone - 1)/NumericConstants.numerCellInDocumentLineOnIphone
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2  - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIphone - 1))/NumericConstants.numerCellInDocumentLineOnIphone
         }
         return CGSize(width: cellWidth, height: cellWidth)
     }
