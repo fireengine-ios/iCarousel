@@ -17,6 +17,7 @@ struct TextConstants {
     static let registrationCellTitlePassword = "Password"//NSLocalizedString("PasswordPlaceholder", comment: "")
     static let registrationCellTitleReEnterPassword = "Re-Enter Password"
     static let registrationCellPlaceholderEmail = " You have to fill in your mail"
+    static let notCorrectEmail = "Please enter valid Email"
     static let registrationCellPlaceholderPassword = " You have to fill in a password"
     static let registrationCellPlaceholderReFillPassword = " You have to fill in a password"
     static let registrationTitleText = "Register to lifebox and get a 5 GB of storage for free!"
@@ -24,6 +25,7 @@ struct TextConstants {
     static let registrationResendButtonText = "Resend"
     static let optInNavigarionTitle = "Verify Your Purchase"
     static let phoneVereficationMainTitleText = "Verify Your Phone Number"
+    static let mailVereficationMainTitleText = "Verify Your Email"
     static let phoneVereficationInfoTitleText = "Enter the verification code"
     static let phoneVereficationNonValidCodeErrorText = "Verification code is invalid. \n Please try again."
     static let phoneVereficationResendRequestFailedErrorText = "Request failed \n Please try again"
@@ -88,11 +90,14 @@ struct TextConstants {
     
     static let serverResponceError = "Wrong type of answer"
     
-    static let errorAlert = "ERROR"
+    static let errorAlert = "Error"
     static let errorAlerTitleBackupAlreadyExist = "Overwrite backup?"
     static let errorAlertTextBackupAlreadyExist = "You have already a backup. Do you want to overwrite the existing one?"
     static let errorAlertNopeBtnBackupAlreadyExist = "Nope"
     static let errorAlertYesBtnBackupAlreadyExist = "Yes"
+    
+    //MARK: - mail update
+    static let updaitMailMaybeLater = "Maybe later"
     
     // MARK: - DetailScreenError 
     
@@ -260,6 +265,8 @@ struct TextConstants {
     static let settingsViewCellPasscode = "Lifebox Touch ID and Passcode"
     static let settingsViewCellHelp = "Help & Support"
     static let settingsViewCellLogout = "Logout"
+    static let settingsViewCellTurkcellPasscode = "Turkcell Passcode"
+    static let settingsViewCellTurkcellAutoLogin = "Auto-login"
     static let settingsViewLogoutCheckMessage = "Are you sure you want to exit the application?"
     
     //MARK: Import photos
@@ -420,6 +427,7 @@ struct TextConstants {
     static let uploadPhotos = "Upload Photos"
     
     //MARK: Feedback View
+    static let feedbackMailTextFormat = "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n"
     static let feedbackViewTitle = "Thanks for leaving a comment!"
     static let feedbackViewSubTitle = "Feedback Form"
     static let feedbackViewSuggestion = "Suggestion"
@@ -563,9 +571,25 @@ struct TextConstants {
     static let errorInvalidPasswordLengthExceeded = "The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response."
     static let errorInvalidPasswordBelowLimit = "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response."
     static let errorManyRequest = "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry."
+    
+    static let TOO_MANY_REQUESTS = "Too many invalid attempts, please try again later"
+    
     static let errorUnknown = "Unknown error"
+    static let errorServer = "Server error"
     
     static let canceledOperationTextError = "Cancelled"
+    
+    static let ACCOUNT_NOT_FOUND = "Account cannot be found"
+    static let INVALID_PROMOCODE = "This package activation code is invalid"
+    static let PROMO_CODE_HAS_BEEN_ALREADY_ACTIVATED = "This package activation code has been used before, please try different code"
+    static let PROMO_CODE_HAS_BEEN_EXPIRED = "This package activation code has expired"
+    static let PROMO_CODE_IS_NOT_CREATED_FOR_THIS_ACCOUNT = "This package activation code is defined for different user"
+    static let THERE_IS_AN_ACTIVE_JOB_RUNNING = "Package activation process is in progress"
+    static let CURRENT_JOB_IS_FINISHED_OR_CANCELLED = "This package activation code has been used before, please try different code"
+    static let PROMO_IS_NOT_ACTIVATED = "This package activation code has not been activated  yet"
+    static let PROMO_HAS_NOT_STARTED = "This package activation code definition time has not yet begun"
+    static let PROMO_NOT_ALLOWED_FOR_MULTIPLE_USE = "You will not be able to use the this package activation code from this campaign for the second time because you have already benefited from it"
+    static let PROMO_IS_INACTIVE = "The package activation code is not active"
     
     static let passcode = "Passcode"
     static let passcodeEnter = "Enter lifebox passcode"
@@ -581,6 +605,16 @@ struct TextConstants {
     static let passcodeEnableTouchID = "Enable Touch ID"
     static let passcodeNumberOfTries = "You have %@ attempts left"
     static let errorConnectedToNetwork = "Please check your internet connection is active and Cellular Data is ON under Settings/lifebox."
+    
+    static let apply = "Apply"
+    static let success = "Success"
+    
+    static let promocodeTitle = "Lifebox campaign"
+    static let promocodePlaceholder = "Enter your promo code"
+    static let promocodeError = "Invalid Promo Code"
+    static let promocodeEmpty = "Please enter your promo code"
+    static let promocodeSuccess = "Your package is successfully defined"
+    static let promocodeInvalid = "Verification code is blocked.\nPlease request a new code."
 }
 
 
@@ -593,8 +627,8 @@ struct NumericConstants {
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
-    static let iPhoneGreedInset: CGFloat = 5
-    static let iPhoneGreedHorizontalSpace: CGFloat = 5
+    static let iPhoneGreedInset: CGFloat = 2
+    static let iPhoneGreedHorizontalSpace: CGFloat = 1
     static let iPadGreedInset: CGFloat = 5
     static let iPadGreedHorizontalSpace: CGFloat = 5
     static let maxNumberPhotosInStory: Int = 20

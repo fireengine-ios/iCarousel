@@ -58,22 +58,25 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         let selectedItem = array[selectedIndex]
         switch selectedItem.fileType {
         case .image, .video:
-            var barConfig = photoVideoBottomBarConfig!
-            if .video == selectedItem.fileType, let editIndex = barConfig.elementsConfig.index(of: .edit) {
-                var elementsConfig = barConfig.elementsConfig
-                elementsConfig.remove(at: editIndex)
-                barConfig = EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
+            var elementsConfig = photoVideoBottomBarConfig.elementsConfig
+            if .video == selectedItem.fileType {
+                if let editIndex = elementsConfig.index(of: .edit) {
+                    elementsConfig.remove(at: editIndex)
+                }
+                if let printIndex = elementsConfig.index(of: .print) {
+                    elementsConfig.remove(at: printIndex)
+                }
             }
             if selectedItem.syncStatus != .notSynced {
-                barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.delete], style: .black, tintColor: nil)
+                elementsConfig = elementsConfig + [.delete]
             }
             
             if selectedItem.syncStatus == .notSynced {
-                barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.sync], style: .black, tintColor: nil)
+                elementsConfig = elementsConfig + [.sync]
             } else if selectedItem.syncStatus == .synced {
-                barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.download], style: .black, tintColor: nil)
+                elementsConfig = elementsConfig + [.download]
             }
-            return barConfig
+            return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
         case .application:
             return documentsBottomBarConfig
         default:

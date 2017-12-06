@@ -9,4 +9,5 @@
 protocol UsageInfoViewOutput {
     func upgradeButtonPressed(with navVC: UINavigationController?)
     func viewIsReady()
+    func viewWillAppear()
 }

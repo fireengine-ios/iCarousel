@@ -10,6 +10,7 @@ import Foundation
 
 protocol PackagesInteractorOutput: class {
     func successed(offers: [OfferServiceResponse])
+    func successedJobExists()
     func successed(offerApples: [OfferApple])
     func successed(tokenForOffer: String)
     func successed(tokenForResend: String)
@@ -19,4 +20,7 @@ protocol PackagesInteractorOutput: class {
     func successed(offerApple: OfferApple)
     func failedUsage(with error: ErrorResponse)
     func failedVerifyOffer()
+    
+    func successedPromocode()
+    func failedPromocode(with errorString: String)
 }

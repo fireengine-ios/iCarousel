@@ -7,5 +7,5 @@
 //
 
 protocol PasscodeSettingsModuleInput: class {
-
+    
 }

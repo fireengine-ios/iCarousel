@@ -25,7 +25,8 @@ final class OptInController: UIViewController {
     
     @IBOutlet weak var codeTextField: CodeTextField!
     @IBOutlet weak var timerLabel: SmartTimerLabel!
-    @IBOutlet weak var resendButton: UIButton!
+    @IBOutlet weak var resendButton: BlueButtonWithWhiteText!
+    @IBOutlet weak var nextButton: BlueButtonWithWhiteText!
     @IBOutlet weak var titleLabel: UILabel!
     
     static func with(phone: String) -> OptInController {
@@ -34,6 +35,7 @@ final class OptInController: UIViewController {
         return vc
     }
     
+    private lazy var activityManager = ActivityIndicatorManager()
     var phone = ""
     weak var delegate: OptInControllerDelegate?
     
@@ -45,8 +47,10 @@ final class OptInController: UIViewController {
         codeTextField.becomeFirstResponder()
         setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         
-        resendButton.isHidden = true
-        resendButton.layer.cornerRadius = 20
+        nextButton.isEnabled = false
+        nextButton.setTitle(TextConstants.otpNextButton, for: .normal)
+        
+        hideResendButton()
         resendButton.setTitle(TextConstants.otpResendButton, for: .normal)
         
         titleLabel.text = String(format: TextConstants.otpTitleText, phone)
@@ -57,6 +61,8 @@ final class OptInController: UIViewController {
         timerLabel.font = UIFont.TurkcellSaturaBolFont(size: 39)
         
         title = delegate?.optInNavigationTitle()
+        
+        activityManager.delegate = self
     }
     
     func setupTimer(withRemainingTime remainingTime: Int) {
@@ -93,10 +99,12 @@ final class OptInController: UIViewController {
     
     func showResendButton() {
         resendButton.isHidden = false
+        nextButton.isHidden = true
     }
     
     func hideResendButton() {
         resendButton.isHidden = true
+        nextButton.isHidden = false
     }
     
 //    func vereficationCodeNotReady() {
@@ -124,10 +132,22 @@ final class OptInController: UIViewController {
     }
 }
 
+// MARK: - SmartTimerLabelDelegate
 extension OptInController: SmartTimerLabelDelegate {
     func timerDidFinishRunning() {
         endEnterCode()
         clearCode()
         showResendButton()
+    }
+}
+
+// MARK: - ActivityIndicator
+extension OptInController: ActivityIndicator {
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
     }
 }

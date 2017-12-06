@@ -200,15 +200,16 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         collectionView.isHidden = visibilityStatus
     }
     
-    func setupSelectionStyle(isSelection: Bool){
-        if (isSelection){
-            self.navigationItem.leftBarButtonItem = cancelSelectionButton!
-            setTitle(withString: "1 Selected")
-            navigationBarWithGradientStyle()
-        } else {
-            self.navigationItem.leftBarButtonItem = nil
-            homePageNavigationBarStyle()
-        }
+    func startSelection(with numberOfItems: Int) {
+        self.navigationItem.leftBarButtonItem = cancelSelectionButton!
+        setTitle(withString: "\(numberOfItems) Selected")
+        navigationBarWithGradientStyle()
+        configureNavBarActions()
+    }
+    
+    func stopSelection() {
+        self.navigationItem.leftBarButtonItem = nil
+        homePageNavigationBarStyle()
         configureNavBarActions()
     }
     

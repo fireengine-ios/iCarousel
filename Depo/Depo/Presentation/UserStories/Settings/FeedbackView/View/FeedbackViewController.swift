@@ -101,11 +101,17 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     func languagesUploaded(lanuages:[LanguageModel]){
         languagesArray.removeAll()
         languagesArray.append(contentsOf: lanuages)
-        let array = lanuages.sorted { (first, _) -> Bool in
+        languagesArray.sort { (first, _) -> Bool in
             return first.languageCode == self.selectedLanguage.languageCode
-            }.map({ (object) -> String in
+        }
+        let array = languagesArray.map({ (object) -> String in
             object.displayLanguage ?? ""
         })
+        
+        if let currentLanguage = languagesArray.first {
+            selectedLanguage = currentLanguage
+        }
+        
         dropDovnView!.setTableDataObjects(objects: array)
     }
     

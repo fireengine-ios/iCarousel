@@ -76,10 +76,10 @@ import CoreTelephony
         var phoneCode = "+90"
         if localCode == "uk" || localCode == "ru" {
             phoneCode = "+380"
-        } else if localCode == "cy" || localCode == "tr" {
-            phoneCode = "+90"
         } else if localCode == "ro" {
             phoneCode = "+373"
+        } else if localCode == "de" {
+            phoneCode = "+49"
         }
         
         return phoneCode

@@ -170,7 +170,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         }
         let allItemsArray = allMediaItems + originalItemsArray
         var allItemsMD5 = allItemsArray.map{return $0.md5}
-        debugPrint("!!!!all appended md5 is ",allItemsMD5)
+        
         if !isPaginationDidEnd {
             guard let lastRemoteObject = originalItemsArray.last else {
                 return originalItemsArray
@@ -777,23 +777,23 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     //-----
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if (Device.isIpad){
-            return 5.0
-        }else{
-            return 5.0
+            return NumericConstants.iPadGreedHorizontalSpace
+        } else {
+            return NumericConstants.iPhoneGreedHorizontalSpace
         }
     }
     
     //|||||
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if (Device.isIpad){
-            return 5.0
-        }else{
-            return 3.0
+            return NumericConstants.iPadGreedHorizontalSpace
+        } else {
+            return NumericConstants.iPhoneGreedHorizontalSpace
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        return UIEdgeInsets(top: 0, left: NumericConstants.iPhoneGreedInset, bottom: 0, right: NumericConstants.iPhoneGreedInset)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
