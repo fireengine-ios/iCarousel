@@ -102,6 +102,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     func optInReachedMaxAttempts(_ optInVC: OptInController) {
         optInVC.showResendButton()
         optInVC.dropTimer()
+        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: TextConstants.promocodeBlocked, okButtonText: TextConstants.ok)
     }
     
     func optInNavigationTitle() -> String {
@@ -131,10 +132,12 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func failedVerifyOffer() {
         optInVC?.stopActivityIndicator()
-        optInVC?.increaseNumberOfAttemps()
         optInVC?.clearCode()
         optInVC?.view.endEditing(true)
-        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: TextConstants.promocodeInvalid, okButtonText: TextConstants.ok)
+        
+        if optInVC?.increaseNumberOfAttemps() == false {
+            CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: TextConstants.promocodeInvalid, okButtonText: TextConstants.ok)
+        }
     }
     
     func successedVerifyOffer() {

@@ -611,10 +611,11 @@ struct TextConstants {
     
     static let promocodeTitle = "Lifebox campaign"
     static let promocodePlaceholder = "Enter your promo code"
-    static let promocodeError = "Invalid Promo Code"
+    static let promocodeError = "This package activation code is invalid"
     static let promocodeEmpty = "Please enter your promo code"
     static let promocodeSuccess = "Your package is successfully defined"
-    static let promocodeInvalid = "Verification code is blocked.\nPlease request a new code."
+    static let promocodeInvalid = "Verification code is invalid.\nPlease try again"
+    static let promocodeBlocked = "Verification code is blocked.\nPlease request a new code"
 }
 
 
