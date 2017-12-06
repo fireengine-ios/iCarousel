@@ -11,8 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MailVerificationViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
+                <outlet property="alertLikeView" destination="uQr-Nc-nBr" id="3Rs-Po-7Df"/>
+                <outlet property="contentView" destination="dAq-23-egP" id="uwy-gs-yRr"/>
                 <outlet property="inputTextField" destination="ebZ-eJ-wcy" id="sTo-15-DWc"/>
                 <outlet property="refuseButton" destination="v3j-56-NbJ" id="89W-tx-K3f"/>
+                <outlet property="scrollView" destination="5IX-RG-5Du" id="UBN-52-NkJ"/>
                 <outlet property="sendButton" destination="0xo-kd-RYU" id="DYD-t0-Dxq"/>
                 <outlet property="titleLabel" destination="Q6U-vK-zhh" id="aLa-TJ-9Gi"/>
                 <outlet property="view" destination="iN0-l3-epB" id="9Hl-qi-Orj"/>

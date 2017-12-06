@@ -680,7 +680,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
-                if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol{
+                if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol {
                     DispatchQueue.main.async {
                         cellToChange.setImage(image: image)
                     }
