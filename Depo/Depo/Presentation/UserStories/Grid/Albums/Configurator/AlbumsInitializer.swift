@@ -19,7 +19,7 @@ class AlbumsModuleInitializer: NSObject {
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonCreateAlbum])
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .removeAlbum],
                                                style: .default, tintColor: nil)
         
         let presentor = AlbumsPresenter()
@@ -40,7 +40,7 @@ class AlbumsModuleInitializer: NSObject {
                                bottomBarConfig: bottomBarConfig, router: AlbumsRouter(),
                                presenter: presentor, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                                     selectionModeTypes: [.albumDetails]),
+                                                                                     selectionModeTypes: [.completelyDeleteAlbums]),
                                topBarConfig: gridListTopBarConfig)
         
         

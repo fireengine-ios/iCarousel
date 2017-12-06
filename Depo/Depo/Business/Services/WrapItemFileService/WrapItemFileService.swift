@@ -117,11 +117,22 @@ class WrapItemFileService: WrapItemFileOperations {
             success?()
             return nil
         }
+        let successDetails: FileOperationSucces = {
+            let fileService = FileService()
+            fileService.details(uuids: items.map({ $0.uuid }), success: { (updatedItems) in
+                for item in updatedItems {
+                    if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
+                        itemToUpdate.metaData = item.metaData
+                    }
+                }
+                success?()
+            }, fail: fail)
+        }
         return uploadService.uploadFileList(items: localFiles,
                                             uploadType: .syncToUse,
                                             uploadStategy: .WithoutConflictControl,
                                             uploadTo: .MOBILE_UPLOAD,
-                                            success: success,
+                                            success: successDetails,
                                             fail: fail)
     }
     
@@ -132,12 +143,9 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?) {
-        
         let items = remoteItemsUUID(files: sharedFiles)
-        let isAlboum = false
-        let param = SharedServiceParam(filesList: items,
-                                       isAlbum: isAlboum,
-                                       sharedType: .link)
+        let isAlbum = !sharedFiles.contains(where: { $0.fileType != .photoAlbum })
+        let param = SharedServiceParam(filesList: items, isAlbum: isAlbum, sharedType: .link)
         sharedFileService.share(param: param, success: success, fail: fail)
     }
     

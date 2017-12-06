@@ -16,4 +16,6 @@ protocol SplashRouterInput {
     
     func navigateToTermsAndService()
     
+    func showNetworkError()
+    
 }

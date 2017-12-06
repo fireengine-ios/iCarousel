@@ -20,7 +20,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func viewIsReady(view: UIView) {
         interactor.onViewIsReady()
-         bottomBarPresenter?.show(animated: false, onView: view)
+        bottomBarPresenter?.show(animated: false, onView: view)
 //        if inte
     }
     

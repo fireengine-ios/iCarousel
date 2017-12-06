@@ -23,7 +23,7 @@ class FileInfoInteractor: FileInfoInteractorInput {
     }
     
     func onRename(newName: String){
-        if let file = item as? Item{
+        if let file = item as? Item {
             let renameFile = RenameFile(uuid: file.uuid, newName: newName)
             FileService().rename(rename: renameFile, success: {
                 DispatchQueue.main.async { [weak self] in
@@ -40,7 +40,7 @@ class FileInfoInteractor: FileInfoInteractorInput {
 
         }
         
-        if let album = item as? AlbumItem{
+        if let album = item as? AlbumItem {
             let renameAlbum = RenameAlbum(albumUUID: album.uuid, newName: newName)
             PhotosAlbumService().renameAlbum(parameters: renameAlbum, success: {
                 DispatchQueue.main.async { [weak self] in

@@ -42,8 +42,8 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     
     weak var settingsDelegate: SettingsDelegate?
     
-    let turkCellSecurityPasscodeCellIndex = IndexPath(row: 4, section: 1)
-    let turkCellSecurityAutologinCellIndex = IndexPath(row: 5, section: 1)
+    let turkCellSecurityPasscodeCellIndex = IndexPath(row: 3, section: 1)
+    let turkCellSecurityAutologinCellIndex = IndexPath(row: 4, section: 1)
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -208,18 +208,16 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                 }else{
                     output.goToActivityTimeline()
                 }
-            case 1: // recently deleted files
-                break
-            case 2: // usage info
+            case 1: // usage info
                 if (settingsDelegate != nil){
                     settingsDelegate!.goToUsageInfo()
                 }else{
                     output.goToUsageInfo()
                 }
                 break
-            case 3: /// passcode
+            case 2: /// passcode
                 showPasscodeOrPasscodeSettings()
-            case 4, 5:
+            case 3, 4:// Turkcell security
                 guard let securityCell = tableView.cellForRow(at: indexPath) as? SettingsTableViewSwitchCell else {
                     break
                 }
