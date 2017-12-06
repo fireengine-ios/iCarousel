@@ -24,9 +24,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var isFavorites: Bool = false
     
-    var mainTitle: String!
+    var mainTitle: String = ""
     
-    var subTitle: String!
+    var subTitle: String = ""
     
     @IBOutlet weak var collectionView: UICollectionView!
     
