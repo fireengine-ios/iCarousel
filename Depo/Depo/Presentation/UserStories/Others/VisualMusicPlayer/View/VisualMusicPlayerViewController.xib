@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -163,24 +163,13 @@
                                 <action selector="actionMoreButton:" destination="-1" eventType="touchUpInside" id="emE-K5-DQo"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyg-n6-qGf">
-                            <rect key="frame" x="240" y="5.5" width="40" height="50"/>
-                            <state key="normal" image="ShareButtonIcon"/>
-                            <connections>
-                                <action selector="actionShareButton:" destination="-1" eventType="touchUpInside" id="enM-oo-MLP"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="zyg-n6-qGf" firstAttribute="centerY" secondItem="heM-sH-YAa" secondAttribute="centerY" id="2O4-DV-v1k"/>
-                        <constraint firstItem="zyg-n6-qGf" firstAttribute="height" secondItem="KSe-ZH-k4N" secondAttribute="height" id="35D-AN-1n6"/>
                         <constraint firstItem="JZ3-wB-gOo" firstAttribute="leading" secondItem="heM-sH-YAa" secondAttribute="leading" constant="18" id="Jhe-s1-YLG"/>
                         <constraint firstItem="KSe-ZH-k4N" firstAttribute="centerY" secondItem="heM-sH-YAa" secondAttribute="centerY" id="K1a-aj-pN9"/>
                         <constraint firstItem="JZ3-wB-gOo" firstAttribute="centerY" secondItem="heM-sH-YAa" secondAttribute="centerY" id="LJh-bg-5yG"/>
-                        <constraint firstItem="zyg-n6-qGf" firstAttribute="width" secondItem="KSe-ZH-k4N" secondAttribute="width" id="RDD-iZ-4qQ"/>
                         <constraint firstAttribute="trailing" secondItem="KSe-ZH-k4N" secondAttribute="trailing" id="g5A-31-SEt"/>
-                        <constraint firstItem="KSe-ZH-k4N" firstAttribute="leading" secondItem="zyg-n6-qGf" secondAttribute="trailing" id="pRl-Gv-7td"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKH-U3-HRk">
@@ -230,7 +219,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ShareButtonIcon" width="24" height="27"/>
         <image name="more" width="24" height="6"/>
         <image name="next" width="21" height="20"/>
         <image name="pause" width="32" height="36"/>

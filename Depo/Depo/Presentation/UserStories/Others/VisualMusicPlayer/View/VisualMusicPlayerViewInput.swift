@@ -14,4 +14,6 @@ protocol VisualMusicPlayerViewInput: class {
     */
 
 //    func setupInitialState()
+    
+    var player: MediaPlayer { get }
 }
