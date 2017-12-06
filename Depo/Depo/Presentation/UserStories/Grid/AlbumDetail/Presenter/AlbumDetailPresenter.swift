@@ -18,4 +18,15 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override var selectedItems: [BaseDataSourceItem] {
+        let selectedItems = super.selectedItems
+        if selectedItems.count > 0 {
+            return selectedItems
+        } else if let interactor = interactor as? AlbumDetailInteractor, let album = interactor.album {
+            return [album]
+        } else {
+            return []
+        }
+    }
+    
 }

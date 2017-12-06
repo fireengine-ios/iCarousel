@@ -7,7 +7,7 @@
 //
 
 class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelectionTabBarModuleInput, BottomSelectionTabBarViewOutput, BottomSelectionTabBarInteractorOutput {
-
+    
     var view: BottomSelectionTabBarViewInput!
 //    var interactor: BottomSelectionTabBarInteractorInput!
     var router: BottomSelectionTabBarRouterInput!
@@ -49,6 +49,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.makeCover)
             case .print:
                 itemTupple.append(EditinglBar.PreDetermendTypes.print)
+            case .removeAlbum:
+                itemTupple.append(EditinglBar.PreDetermendTypes.removeAlbum)
             default:
                 break
             }
@@ -162,6 +164,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             interactor.addToAlbum(items: selectedItems)
         case .print:
             router.showPrint(items: selectedItems)
+        case .removeAlbum:
+            interactor.delete(item: selectedItems)
         default:
             break
         }
@@ -454,6 +458,14 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     override func operationStarted(type: ElementTypes) {
         startAsyncOperationDisableScreen()
+    }
+    
+    func selectFolder(_ selectFolder: SelectFolderViewController) {
+        router.showSelectFolder(selectFolder: selectFolder)
+    }
+    
+    func objectsToShare(rect: CGRect?, urls: [String]) {
+        router.showShare(rect: rect, urls: urls)
     }
     
     //MARK: base presenter

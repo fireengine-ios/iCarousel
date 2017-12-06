@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {    
+class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     
     weak var output: MoreFilesActionsInteractorOutput?
     private var fileService = WrapItemFileService()
@@ -169,6 +169,21 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         }
     }
     
+    func completelyDelete(albums: [BaseDataSourceItem]) {
+        guard let albums = albums as? [AlbumItem] else { return }
+        self.output?.operationStarted(type: .completelyDeleteAlbums)
+        let albumService = PhotosAlbumService()
+        albumService.completelyDelete(albums: DeleteAlbums(albums: albums), success: {
+            DispatchQueue.main.async { [weak self] in
+                self?.output?.operationFinished(type: .completelyDeleteAlbums)
+            }
+        }, fail: { errorRespone in
+            DispatchQueue.main.async { [weak self] in
+                self?.output?.operationFailed(type: .completelyDeleteAlbums, message: errorRespone.description)
+            }
+        })
+    }
+    
     private func deleteItems(items: [Item]) {
         output?.operationStarted(type: .delete)
         player.remove(listItems: items)
@@ -267,14 +282,19 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func download(item: [BaseDataSourceItem]) {
-        guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
-            return
+//        output?.operationStarted(type: .download)
+        if let item = item as? [Item] { //FIXME: transform all to BaseDataSourceItem
+            fileService.download(items: item, toPath: "",
+                                 success: succesAction(elementType: .download),
+                                 fail: failAction(elementType: .download))
+        } else if let albums = item as? [AlbumItem] {
+            let albumService = PhotosAlbumService()
+            albumService.allItemsFrom(albums: albums, success: { (items) in
+                self.fileService.download(items: items, toPath: "",
+                                          success: self.succesAction(elementType: .download),
+                                          fail: self.failAction(elementType: .download))
+            })
         }
-        //output?.operationStarted(type: .download)
-        
-        fileService.download(items: item, toPath: "",
-                             success: succesAction(elementType: .download),
-                             fail: failAction(elementType: .download))
     }
     
     func createStory(items: [BaseDataSourceItem]) {
@@ -363,7 +383,10 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func shareAlbum(items: [BaseDataSourceItem]) {
-        
+        guard items.count > 0 else { return }
+        sharingItems.removeAll()
+        sharingItems.append(contentsOf: items)
+        shareViaLink(sourceRect: nil)
     }
     
     func makeAlbumCover(items: [BaseDataSourceItem]) {
@@ -371,7 +394,10 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func albumDetails(items: [BaseDataSourceItem]) {
-        
+        let router = RouterVC()
+        let albumDetailVC = router.fileInfo as? FileInfoViewController
+        albumDetailVC?.interactor.setObject(object: items.first!)
+        router.pushViewController(viewController: albumDetailVC!)
     }
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem]) {

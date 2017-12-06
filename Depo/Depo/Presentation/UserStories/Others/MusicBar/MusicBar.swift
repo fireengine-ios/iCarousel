@@ -25,16 +25,19 @@ class MusicBar: UIView {
     
     @IBAction func actionZoomUpButton(_ sender: UIButton) {
         delegate?.musicBarZoomWillOpen()
-        RouterVC().rootViewController?.present(playerFullScreenVC, animated: delegate == nil ? true : false, completion: nil)
+        
+        let vc = VisualMusicPlayerModuleInitializer.initializeVisualMusicPlayerController(with: "VisualMusicPlayerViewController")
+        let navigation = UINavigationController(rootViewController: vc)
+        navigation.navigationBar.isHidden = false
+        RouterVC().presentViewController(controller: navigation)
     }
     
     @IBAction func actionPlayPauseButton(_ sender: UIButton) {
         player.togglePlayPause()
     }
     
-    private lazy var playerFullScreenVC = VisualMusicPlayerViewController(nibName: "VisualMusicPlayerViewController",
-                                                                          bundle: nil)
-
+    private var configureVisualMusicPlayerModule: VisualMusicPlayerModuleInitializer?
+    
     class func initFromXib() -> MusicBar {
         return UINib(nibName: "MusicBar", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! MusicBar
     }

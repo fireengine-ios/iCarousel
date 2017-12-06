@@ -160,7 +160,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []),
                                topBarConfig: nil)
-        viewController.mainTitle = folder.name
+        viewController.mainTitle = folder.name ?? ""
         return viewController
     }
 

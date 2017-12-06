@@ -177,8 +177,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
         
         var tempoItems = items
-        if tempoItems == nil {
-            guard let wrappedArray = basePassingPresenter?.selectedItems as? [Item] else {
+        if tempoItems == nil || tempoItems?.count == 0 {
+            guard let wrappedArray = basePassingPresenter?.selectedItems as? [BaseDataSourceItem] else {
                 return []
             }
             tempoItems = wrappedArray
@@ -315,6 +315,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .rename:
                 action = UIAlertAction(title: TextConstants.actionSheetRename, style: .default, handler: { _ in
                     self.interactor.info(item: currentItems, isRenameMode: true)
+                })
+            case .completelyDeleteAlbums:
+                action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                    self.interactor.completelyDelete(albums: currentItems)
+                })
+            case .removeAlbum:
+                action = UIAlertAction(title: TextConstants.actionSheetRemove, style: .default, handler: { _ in
+                    self.interactor.delete(item: currentItems)
                 })
             default:
                 action = UIAlertAction(title: "TEST", style: .default, handler: { _ in

@@ -15,7 +15,7 @@ struct FilePatch  {
     static let delete = "/api/filesystem/delete"
     static let rename = "/api/filesystem/rename/%@"
     static let move =   "/api/filesystem/move?targetFolderUuid=%@"
-    static let copy =   "/api/filesystem/copy??targetFolderUuid="
+    static let copy =   "/api/filesystem/copy?targetFolderUuid=%@"
     static let details = "/api/filesystem/details"
     static let detail =  "/api/filesystem/detail/%@"
     
@@ -272,7 +272,7 @@ class FileService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse,ObjectRequestResponse>(success: { _  in
             success?()
         }, fail: fail)
-        executeDeleteRequest(param: copyparam, handler: handler)
+        executePostRequest(param: copyparam, handler: handler)
     }
     
     func delete(deleteFiles: DeleteFiles, success: FileOperation?, fail:FailResponse?) {

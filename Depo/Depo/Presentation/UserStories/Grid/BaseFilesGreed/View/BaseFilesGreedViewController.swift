@@ -24,9 +24,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var isFavorites: Bool = false
     
-    var mainTitle: String!
+    var mainTitle: String = ""
     
-    var subTitle: String!
+    var subTitle: String = ""
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -205,12 +205,14 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         setTitle(withString: "\(numberOfItems) Selected")
         navigationBarWithGradientStyle()
         configureNavBarActions()
+        underNavBarBar?.setSorting(enabled: false)
     }
     
     func stopSelection() {
         self.navigationItem.leftBarButtonItem = nil
         homePageNavigationBarStyle()
         configureNavBarActions()
+        underNavBarBar?.setSorting(enabled: true)
     }
     
     func setThreeDotsMenu(active isActive: Bool) {

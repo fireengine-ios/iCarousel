@@ -542,6 +542,14 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         }
         if (button == uploadFromLifebox){
             //копия файла в текущую папку на сервере
+            let router = RouterVC()
+            let parentFolder = router.getParentUUID()
+            let controller = router.uploadFromLifeBox(folderUUID: parentFolder)
+            let navigationController = UINavigationController(rootViewController: controller)
+            navigationController.navigationBar.isHidden = false
+            
+            router.presentViewController(controller: navigationController)
+            return
         }
     }
     
