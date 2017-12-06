@@ -111,14 +111,16 @@ final class OptInController: UIViewController {
 //
 //    }
     
-    func increaseNumberOfAttemps() {
+    func increaseNumberOfAttemps() -> Bool {
         attempts += 1
         
         if attempts >= NumericConstants.maxVereficationAttempts {
             attempts = 0
             endEnterCode()
             delegate?.optInReachedMaxAttempts(self)
+            return true
         }
+        return false
     }
     
     private func endEnterCode() {

@@ -613,7 +613,8 @@ struct TextConstants {
     static let promocodeError = "Invalid Promo Code"
     static let promocodeEmpty = "Please enter your promo code"
     static let promocodeSuccess = "Your package is successfully defined"
-    static let promocodeInvalid = "Verification code is blocked.\nPlease request a new code."
+    static let promocodeInvalid = "Verification code is invalid.\nPlease try again"
+    static let promocodeBlocked = "Verification code is blocked.\nPlease request a new code"
 }
 
 
