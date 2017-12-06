@@ -7,7 +7,7 @@
 //
 
 protocol MailVerificationViewControllerDelegate: class {
-    func mailVerified()
+    func mailVerified(mail: String)
     func mailVerificationFailed()
 }
 
@@ -32,13 +32,15 @@ class MailVerificationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        UIBlurEffect()
-        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        titleLabel.textColor = UIColor.lrTealish
+        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
+        titleLabel.textColor = ColorConstants.darcBlueColor
         titleLabel.text = TextConstants.registrationCellPlaceholderEmail
         
+        inputTextField.font = UIFont.TurkcellSaturaRegFont(size: 20)
+        
         sendButton.setTitle(TextConstants.registrationNextButtonText, for: .normal)
-        sendButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 32)
-        sendButton.setTitleColor(UIColor.lrTealish, for: .normal)
+        sendButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        sendButton.setTitleColor(ColorConstants.blueColor, for: .normal)
 
         contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
@@ -47,26 +49,10 @@ class MailVerificationViewController: BaseViewController {
         inputTextField.resignFirstResponder()
         dismiss(animated: true, completion: nil)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        animateView()
-    }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         inputTextField.becomeFirstResponder()
-    }
-    
-    private func animateView() {
-//        if isShown {
-//            return
-//        }
-//        isShown = true
-        alertLikeView.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.contentView.transform = .identity
-        }
     }
     
     @IBAction func sendAction(_ sender: Any) {
@@ -91,12 +77,12 @@ class MailVerificationViewController: BaseViewController {
             return
         }
         showSpiner()
-
+        let newMail = inputTextField.text ?? ""
         let authService = AuthenticationService()
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
                                 sucess: { [weak self] response in
                                     DispatchQueue.main.async {
-                                        self?.actionDelegate?.mailVerified()
+                                        self?.actionDelegate?.mailVerified(mail: newMail)
                                     }
                                     self?.hideSpiner()
                                     self?.dismiss(animated: true, completion: nil)
