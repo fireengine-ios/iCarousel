@@ -82,10 +82,8 @@ extension UIViewController {
     }
     
     func homePageNavigationBarStyle() {
-        
-        rootNavController(vizible: false)
-        visibleNavigationBarStyle()
         defaultNavBarStyle()
+        visibleNavigationBarStyle()
         self.setTitle(withString: "")
         navBar?.backgroundColor = UIColor.white
         
