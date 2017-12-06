@@ -39,7 +39,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         let parameter = SelectedLanguage(selectedLanguage: selectedLanguage)
         FeedbackService().sendSelectedLanguage(selectedLanguageParameter: parameter, succes: {[weak self] (success) in
             DispatchQueue.main.async {
-                self?.getUserInfoString(with: selectedLanguage.displayLanguage!)
+                self?.getUserInfoString(with: selectedLanguage.displayLanguage ?? "")
             }
             }, fail: { [weak self] (fail) in
                 DispatchQueue.main.async {
