@@ -362,6 +362,7 @@
 		873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */; };
 		8766D2FF1FBDB06600316F46 /* PhotoSelectiondDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */; };
 		876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245B0B417FC8FE0BAF38799E /* SyncContactsRouter.swift */; };
+		87AD15E41FD678B800DE97DB /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		87C316061FCD77CC00845B0A /* LocalAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C315FC1FCD77CB00845B0A /* LocalAlbumPresenter.swift */; };
 		87C316071FCD77CC00845B0A /* LocalAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C315FE1FCD77CB00845B0A /* LocalAlbumViewController.swift */; };
 		87C316081FCD77CC00845B0A /* LocalAlbumModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C316001FCD77CB00845B0A /* LocalAlbumModuleInitializer.swift */; };
@@ -1568,6 +1569,7 @@
 		873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalAlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAssetCollection.swift; sourceTree = "<group>"; };
 		8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectiondDataSource.swift; sourceTree = "<group>"; };
+		87AD15E31FD678B800DE97DB /* String+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
 		87C315F01FCD779F00845B0A /* LocalAlbumPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumPresenter.swift; sourceTree = "<group>"; };
 		87C315F21FCD779F00845B0A /* LocalAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumViewController.swift; sourceTree = "<group>"; };
 		87C315F41FCD779F00845B0A /* LocalAlbumModuleInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumModuleInitializer.swift; sourceTree = "<group>"; };
@@ -6678,6 +6680,7 @@
 			isa = PBXGroup;
 			children = (
 				CEE9A5FA1F23308800ED8610 /* String+Int.swift */,
+				87AD15E31FD678B800DE97DB /* String+Subscript.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -8307,6 +8310,7 @@
 				D4F104D678F058E4AF0F2045 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				CE2F562F1F75548500F49DA1 /* SubscriptionPlanBaseResponse.swift in Sources */,
 				39581B8F2C64DF4E66021F77 /* UploadFilesSelectionViewController.swift in Sources */,
+				87AD15E41FD678B800DE97DB /* String+Subscript.swift in Sources */,
 				DAC81A65DF324B39D22D480E /* UploadFilesSelectionModuleInput.swift in Sources */,
 				001F64B2FEA10A0FC9BC0AB3 /* UploadFilesSelectionPresenter.swift in Sources */,
 				CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */,
