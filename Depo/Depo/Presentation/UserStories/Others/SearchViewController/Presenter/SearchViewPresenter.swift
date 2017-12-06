@@ -167,12 +167,14 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     
     func getCellSizeForGreed() -> CGSize {
-        if (Device.isIpad){
-            return CGSize(width: 180, height: 180)
-        }else{
-            let w: CGFloat = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedHorizontalSpace * NumericConstants.numerCellInDocumentLineOnIphone)/NumericConstants.numerCellInDocumentLineOnIphone
-            return CGSize(width: w, height: w)
+        var cellWidth:CGFloat = 180
+        
+        if (Device.isIpad) {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * NumericConstants.numerCellInLineOnIpad - 1)/NumericConstants.numerCellInLineOnIpad
+        } else {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2  - NumericConstants.iPhoneGreedHorizontalSpace * NumericConstants.numerCellInLineOnIphone - 1)/NumericConstants.numerCellInLineOnIphone
         }
+        return CGSize(width: cellWidth, height: cellWidth)
     }
     
     
