@@ -372,6 +372,7 @@ struct TextConstants {
     static let uploadFromLifeBoxNextButton = "Next"
     static let uploadFromLifeBoxNoSelectedPhotosError = "Sorry, but photos not selected"
     static let uploadFromLifeBoxEmptyFolderButtonText = "Ok"
+    static let failWhileuploadFromLifeBoxCopy = "Fail while uploading from LifeBox"
     
     
     //MARK: Select Folder

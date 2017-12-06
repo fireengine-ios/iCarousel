@@ -465,6 +465,16 @@ class RouterVC: NSObject {
         return controller
     }
     
+    func uploadFromLifeBox(folderUUID: String, soorceUUID: String = "") -> UIViewController {
+        if isRootViewControllerAlbumDetail(){
+            let controller = UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", albumUUID: folderUUID)
+            return controller
+        }else{
+            let controller = UploadFromLifeBoxModuleInitializer.initializeFilesForFolderViewController(with: "BaseFilesGreedViewController", destinationFolderUUID: folderUUID, outputFolderUUID: soorceUUID)
+            return controller
+        }
+    }
+    
     //MARK: Select Folder view controller
     
     func selectFolder(folder: Item?) -> SelectFolderViewController {

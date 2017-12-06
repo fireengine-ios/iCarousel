@@ -8,11 +8,28 @@
 
 import UIKit
 
-class UploadFromLifeBoxViewController: BaseFilesGreedViewController {
+class UploadFromLifeBoxViewController: BaseFilesGreedViewController, UploadFromLifeBoxViewInput {
+    
+    let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+    
+    override func viewDidAppear(_ animated: Bool) {
+        scrolliblePopUpView.isEnable = false
+        super.viewDidAppear(animated)
+        
+        cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
+        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
+
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavBarActions()
+        
+        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1{
+            let barButtonLeft = UIBarButtonItem(customView: cancelButton)
+            navigationItem.leftBarButtonItem = barButtonLeft
+        }
     }
     
     override func configureNavBarActions(){
@@ -32,8 +49,26 @@ class UploadFromLifeBoxViewController: BaseFilesGreedViewController {
         output.onNextButton()
     }
     
+    @objc func onCancelButton(){
+        hideView()
+    }
+    
+    func hideView(){
+        dismiss(animated: true) {
+            
+        }
+    }
+    
     override func isNeedShowTabBar() -> Bool{
         return false
+    }
+    
+    func getNavigationController() -> UINavigationController?{
+        return navigationController
+    }
+    
+    func getDestinationUUID() -> String{
+        return parentUUID
     }
     
 }

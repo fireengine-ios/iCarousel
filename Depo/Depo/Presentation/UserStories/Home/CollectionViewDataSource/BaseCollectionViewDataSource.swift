@@ -28,6 +28,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     var popUps = [BaseView]()
     var notPermittedPopUpViewTypes = Set<String>()
+    var isEnable: Bool = true
     var isActive: Bool = false
     
     func configurateWith(collectionView: UICollectionView, viewController:UIViewController, data:[UIViewController], delegate:BaseCollectionViewDataSourceDelegate?){
@@ -159,6 +160,11 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     //MARK: WrapItemOperationViewProtocol
     
     private func checkIsThisIsPermittedType(type: OperationType) -> Bool{
+        
+        if !isEnable{
+            return false
+        }
+        
         if notPermittedPopUpViewTypes.count == 0 {
             return true
         }
