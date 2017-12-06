@@ -25,6 +25,7 @@ class MailVerificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        UIBlurEffect()
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
         titleLabel.textColor = UIColor.lrTealish
         titleLabel.text = TextConstants.registrationCellPlaceholderEmail
