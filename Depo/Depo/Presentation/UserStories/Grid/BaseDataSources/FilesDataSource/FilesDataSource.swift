@@ -41,7 +41,13 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     private let getImageServise = ImageDownloder()
     
-    private let assetCache = PHCachingImageManager()
+    private var assetCache: PHCachingImageManager? {
+        var cachingManager: PHCachingImageManager?
+        if LocalMediaStorage.default.photoLibraryIsAvalible() {
+            cachingManager = PHCachingImageManager()
+        }
+        return cachingManager
+    }
     
     
     // MARK: PhotoDataSource
@@ -116,12 +122,14 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         
         let targetSize = CGSize(width: 300, height: 300)
 
+        if let cachingManager = assetCache {
+            cachingManager.startCachingImages(for: [asset], targetSize: targetSize, contentMode: .aspectFill, options: options)
+        }
+        
         manager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
 //            if let isDegaraded = (info?[PHImageResultIsDegradedKey] as? NSNumber)?.boolValue, !isDegaraded {
                 completion(result, indexPath)
 //            }
         })
-        
-        assetCache.startCachingImages(for: [asset], targetSize: targetSize, contentMode: .aspectFill, options: options)
     }
 }

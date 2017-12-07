@@ -60,14 +60,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         getDetailQueue.maxConcurrentOperationCount = 1
         
         super.init()
-        askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
-            if accessGranted, let `self` = self {
+//        askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
+//            if accessGranted, let `self` = self {
                 self.photoLibrary.register(self)
-            }
-        }
+//            }
+//        }
     }
     
-    func photoIsAvalible() -> Bool {
+    func photoLibraryIsAvalible() -> Bool {
         let status = PHPhotoLibrary.authorizationStatus()
         return status == .authorized
     }
@@ -109,6 +109,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     var fetchResult: PHFetchResult<PHAsset>!
     func getAllImagesAndVideoAssets() -> [PHAsset] {
+        guard photoLibraryIsAvalible() else {
+            return []
+        }
         
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
@@ -125,7 +128,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func getAllAlbums(completion: @escaping (_ albums: [AlbumItem])->Void) {
-        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false) { (accessGranted, _) in
+        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: true) { (accessGranted, _) in
             guard accessGranted else {
                 completion([])
                 return
@@ -227,6 +230,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     // MARK:  insert remove Asset
     
     func removeAssets(deleteAsset: [PHAsset], success: FileOperation?, fail: FailResponse?) {
+        guard photoLibraryIsAvalible() else {
+            fail?(.failResponse(nil))
+            return
+        }
+        
         
         PHPhotoLibrary.shared().performChanges({
             
@@ -249,7 +257,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
      * 
      */
     func appendToAlboum(fileUrl: URL, type:PHAssetMediaType, album:String?, success: FileOperation?, fail: FailResponse?) {
-    
+        guard photoLibraryIsAvalible() else {
+            fail?(.failResponse(nil))
+            return
+        }
+        
         PHPhotoLibrary.shared().performChanges({
             switch type {
                 case .image:

@@ -15,7 +15,7 @@ extension CoreDataStack {
         let queue = DispatchQueue(label: "Append Local Item ")
         queue.async {
             let localMediaStorage = LocalMediaStorage.default
-            localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) { (authorized, status) in
+            localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
                 if authorized {
                     self.insertFromPhotoFramework()
                 }
