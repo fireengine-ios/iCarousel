@@ -52,6 +52,7 @@ extension PackagesViewController: PackagesViewInput {
         
         promoView.endEditing(true)
         promoView.codeTextField.text = ""
+        promoView.errorLabel.text = ""
         reloadPackages()
     }
     
