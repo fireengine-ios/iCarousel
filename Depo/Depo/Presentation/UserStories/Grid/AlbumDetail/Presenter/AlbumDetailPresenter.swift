@@ -8,7 +8,7 @@
 
 class AlbumDetailPresenter: BaseFilesGreedPresenter {
     
-    weak var moduleOutput: AlbumDetailModuleOutput?
+    weak var albumDetailModuleOutput: AlbumDetailModuleOutput?
     
     func operationStarted(type: ElementTypes){
         
@@ -21,10 +21,10 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
             onReloadData()
         case .completelyDeleteAlbums:
             router.back()
-            moduleOutput?.onAlbumDeleted()
+            albumDetailModuleOutput?.onAlbumDeleted()
         case .removeAlbum:
             router.back()
-            moduleOutput?.onAlbumRemoved()
+            albumDetailModuleOutput?.onAlbumRemoved()
         default:
             return
         }

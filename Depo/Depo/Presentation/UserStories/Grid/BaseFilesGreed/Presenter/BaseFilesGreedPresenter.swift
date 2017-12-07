@@ -7,7 +7,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate {
+class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
     
     typealias Item = WrapData
     
@@ -16,6 +16,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     var dataSource: BaseDataSourceForCollectionView
     
     weak var view: BaseFilesGreedViewInput!
+    
+    weak var moduleOutput: BaseFilesGreedModuleOutput?
     
     var interactor: BaseFilesGreedInteractorInput!
     
@@ -58,9 +60,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
         if let displayingType = topBarConfig?.defaultGridListViewtype {
             if displayingType == .Grid {
-                dataSource.displayingType = .list
+                dataSource.updateDisplayngType(type: .list)
             } else {
-                dataSource.displayingType = .greed
+                dataSource.updateDisplayngType(type: .greed)
             }
         }
         
@@ -230,7 +232,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 player.play()
                 //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
             } else {
-                router.onItemSelected(item: item, from: data, type: type)
+                router.onItemSelected(item: item, from: data, type: type, moduleOutput: self)
             }
         } else {
             custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
@@ -332,16 +334,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
     }
     
-    
     //MARK: - MoreActionsViewDelegate
     
     func viewAppearanceChanged(asGrid: Bool){
         if (asGrid){
             dataSource.updateDisplayngType(type: .greed)
             type = .List
+            moduleOutput?.reloadType(type)
         }else{
             dataSource.updateDisplayngType(type: .list)
             type = .Grid
+            moduleOutput?.reloadType(type)
         }
     }
     
@@ -504,6 +507,26 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return type
     }
     
+    //MARK: - BaseFilesGreedModuleOutput
+    
+    func reloadType(_ type: MoreActionsConfig.ViewType) {
+        self.type = type
+        
+        var baseSortTypes: [MoreActionsConfig.SortRullesType] {
+            return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+        }
+
+        if type == .Grid {
+            dataSource.updateDisplayngType(type: .list)
+            let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: type)
+            topBarConfig = gridListTopBarConfig
+        } else {
+            dataSource.updateDisplayngType(type: .greed)
+            let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: type)
+            topBarConfig = gridListTopBarConfig
+        }
+        setupTopBar()
+    }
     
 }
 

@@ -8,7 +8,7 @@
 
 class LocalAlbumRouter: BaseFilesGreedRouter {
         
-    override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]], type: MoreActionsConfig.ViewType) {
+    override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]], type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) {
         let router = RouterVC()
         
         if (item.fileType == .photoAlbum){
