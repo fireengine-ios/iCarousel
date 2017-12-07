@@ -390,9 +390,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
             if remoteItems.contains(where: { return !($0.favorites) } ) {
                 actionTypes.append(.addToFavorites)
+            } else if let addToFavoritesIndex = actionTypes.index(of: .addToFavorites) {
+                actionTypes.remove(at: addToFavoritesIndex)
             }
+            
             if remoteItems.contains(where: { return $0.favorites } ) {
                 actionTypes.append(.removeFromFavorites)
+            } else if let removeFromFavorites = actionTypes.index(of: .removeFromFavorites) {
+                actionTypes.remove(at: removeFromFavorites)
             }
             
             if actionTypes.contains(.createStory) && remoteItems.contains(where: { return $0.fileType != .image } ) {
