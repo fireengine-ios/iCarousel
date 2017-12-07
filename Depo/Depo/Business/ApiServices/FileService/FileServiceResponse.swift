@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-import Foundation
+//import Foundation 
 import SwiftyJSON
 
 class FileListResponse: ObjectRequestResponse {

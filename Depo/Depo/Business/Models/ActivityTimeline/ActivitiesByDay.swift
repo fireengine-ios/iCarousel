@@ -6,8 +6,6 @@
 //  Copyright © 2017 LifeTech All rights reserved.
 //
 
-import Foundation
-
 class ActivitiesByDay {
     let date: Date
     let days: Int
