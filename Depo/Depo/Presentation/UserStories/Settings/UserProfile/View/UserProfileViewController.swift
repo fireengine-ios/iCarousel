@@ -189,4 +189,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         
         return true
     }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return !(textField == gsmNumberTextField && CoreTelephonyService().isTurkcellOperator())
+    }
 }
