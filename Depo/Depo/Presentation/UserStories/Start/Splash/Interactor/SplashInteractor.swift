@@ -15,16 +15,8 @@ class SplashInteractor: SplashInteractorInput {
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
-
-    func startLoginInBackroung(){
-//        if ApplicationSession.sharedSession.session.rememberMe {
-            auth()
-//        } else {
-//            output.onFailLogin()
-//        }
-    }
     
-    private func auth() {
+    func startLoginInBackroung() {
         output.startAsyncOperation()
         
         let success: SuccessLogin = { [weak self] in
