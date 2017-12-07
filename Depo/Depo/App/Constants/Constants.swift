@@ -542,7 +542,7 @@ struct TextConstants {
     static let usageInfoSongs = "%ld songs"
     static let usageInfoDocuments = "%ld documents"
     static let usageInfoBytesRemained = "%@ of %@ has remained"
-    static let usageInfoWelcome = "Welcome Pack (%@)"
+    static let usageInfoQuotaInfo = "Quota info"
     static let usageInfoDocs = "%ld docs"
     
     // MARK: - offers
