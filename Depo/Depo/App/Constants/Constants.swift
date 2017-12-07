@@ -201,6 +201,13 @@ struct TextConstants {
     static let cameraAccessAlertText = "You can't take photos with disabled camera. Please turn the camera on in settings."
     static let cameraAccessAlertGoToSettings = "Settings"
     static let cameraAccessAlertNo = "No"
+    
+    //MARK: - Photo Library alert
+    static let photoLibraryAccessAlertTitle = "Caution!"
+    static let photoLibraryAccessAlertText = "Access to Gallery is denied. Please change it from the settings menu of the device"
+    static let photoLibraryAccessAlertGoToSettings = "Settings"
+    static let photoLibraryAccessAlertNo = "No"
+    
     //MARK: Home page wiFiSync view
     static let homeWiFiTitleText = "Waiting for Wi-Fi to auto sync 14 items"
     static let homeWiFiSyncButtonTitle = "Sync with Data Plan Now"
