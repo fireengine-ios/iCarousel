@@ -1,0 +1,28 @@
+//
+//  PackagesPackagesInteractorInput.swift
+//  Depo
+//
+//  Created by Yaroslav Bondar on 20/09/2017.
+//  Copyright © 2017 LifeTech. All rights reserved.
+//
+
+import Foundation
+
+protocol PackagesInteractorInput {
+    func getOffers()
+    func checkJobExists()
+    func getOfferApples()
+    func getToken(for offer: OfferServiceResponse)
+    func getResendToken(for offer: OfferServiceResponse)
+    func activate(offerApple: OfferApple)
+    func verifyOffer(token: String, otp: String)
+    func submit(promocode: String)
+    func getActiveSubscriptions()
+    func getAccountType()
+    func convertToSubscriptionPlans(offers: [OfferServiceResponse]) -> [SubscriptionPlan]
+    func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse]) -> [SubscriptionPlan]
+    func convertToSubscriptionPlans(offerApples: [OfferApple]) -> [SubscriptionPlan]
+    
+    /// MAYBE WILL BE NEED
+    //func getCurrentSubscription()
+}
