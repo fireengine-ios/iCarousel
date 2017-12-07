@@ -388,13 +388,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             }
             
             let remoteItems = selectedItems.filter { $0.isLocalItem == false}
-
-            if remoteItems.contains(where: { return !($0.favorites) } ) {
-                actionTypes.append(.addToFavorites)
-            }
-            if remoteItems.contains(where: { return $0.favorites } ) {
-                actionTypes.append(.removeFromFavorites)
-            }
             
             if actionTypes.contains(.createStory) && remoteItems.contains(where: { return $0.fileType != .image } ) {
                 let index = actionTypes.index(where: { return $0 == .createStory})!
