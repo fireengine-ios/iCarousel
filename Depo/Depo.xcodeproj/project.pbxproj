@@ -363,12 +363,6 @@
 		8766D2FF1FBDB06600316F46 /* PhotoSelectiondDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */; };
 		876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245B0B417FC8FE0BAF38799E /* SyncContactsRouter.swift */; };
 		87AD15E41FD678B800DE97DB /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
-		87C316061FCD77CC00845B0A /* LocalAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C315FC1FCD77CB00845B0A /* LocalAlbumPresenter.swift */; };
-		87C316071FCD77CC00845B0A /* LocalAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C315FE1FCD77CB00845B0A /* LocalAlbumViewController.swift */; };
-		87C316081FCD77CC00845B0A /* LocalAlbumModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C316001FCD77CB00845B0A /* LocalAlbumModuleInitializer.swift */; };
-		87C316091FCD77CC00845B0A /* LocalAlbumConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C316011FCD77CB00845B0A /* LocalAlbumConfigurator.swift */; };
-		87C3160A1FCD77CC00845B0A /* LocalAlbumInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C316031FCD77CB00845B0A /* LocalAlbumInteractor.swift */; };
-		87C3160B1FCD77CC00845B0A /* LocalAlbumRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C316051FCD77CB00845B0A /* LocalAlbumRouter.swift */; };
 		8A1850C93CAA6D754F2E796D /* CompleteProfileInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BD358C05E4865147AD6DAE /* CompleteProfileInteractorOutput.swift */; };
 		8AC9821D58B05574782F11AB /* FeedbackViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E8EB45148F901AC01702F /* FeedbackViewInitializer.swift */; };
 		8BC2414816C90E31214FFA9E /* BaseFilesGreedInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D81D8F4441B332E687B17 /* BaseFilesGreedInitializer.swift */; };
@@ -440,7 +434,7 @@
 		8C28CE9D1FC59C250098FE89 /* HomePageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA01EFD4F0D00A405B2 /* HomePageInitializer.swift */; };
 		8C28CE9E1FC59C250098FE89 /* CreateStoryPhotosOrderViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4988121F3320420039C5F2 /* CreateStoryPhotosOrderViewInput.swift */; };
 		8C28CE9F1FC59C250098FE89 /* SeacrhViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21771F3C8BC000BAFE1E /* SeacrhViewRouter.swift */; };
-		8C28CEA01FC59C250098FE89 /* DropboxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A8A1C1FB2F43300C0A5E1 /* DropboxResponse.swift */; };
+		8C28CEA01FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28CEA11FC59C250098FE89 /* CurioNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D60D1DDDD0F600FFE63E /* CurioNetwork.m */; };
 		8C28CEA21FC59C250098FE89 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */; };
 		8C28CEA31FC59C250098FE89 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */; };
@@ -462,7 +456,7 @@
 		8C28CEB31FC59C250098FE89 /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */; };
 		8C28CEB41FC59C250098FE89 /* ImportPhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D498864A1F3EFBE200F50C95 /* ImportPhotosInteractor.swift */; };
 		8C28CEB51FC59C250098FE89 /* VisualMusicPlayerModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786931F3F38EF005CB432 /* VisualMusicPlayerModuleInput.swift */; };
-		8C28CEB61FC59C250098FE89 /* CellAppearanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6711F0B9F7600B552A3 /* CellAppearanceModel.swift */; };
+		8C28CEB61FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28CEB71FC59C250098FE89 /* ButtonWithGrayCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4484FD1F0FC607003AF631 /* ButtonWithGrayCorner.swift */; };
 		8C28CEB81FC59C250098FE89 /* SubscriptionParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F562B1F7553C800F49DA1 /* SubscriptionParameters.swift */; };
 		8C28CEB91FC59C250098FE89 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FEA1EFD517300A405B2 /* TabBarViewController.swift */; };
@@ -504,7 +498,7 @@
 		8C28CEDD1FC59C250098FE89 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		8C28CEDE1FC59C250098FE89 /* AutoSyncModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */; };
 		8C28CEDF1FC59C250098FE89 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1EC1F714DDB0008F4CF /* CoreDataStack.swift */; };
-		8C28CEE01FC59C250098FE89 /* DropboxStatusValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A8A1E1FB2F45500C0A5E1 /* DropboxStatusValue.swift */; };
+		8C28CEE01FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28CEE11FC59C250098FE89 /* AutoSyncInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145B1EF7A93E001DFCF0 /* AutoSyncInteractorOutput.swift */; };
 		8C28CEE21FC59C250098FE89 /* WelcomeViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F9121F0288DC0028F51A /* WelcomeViewOutput.swift */; };
 		8C28CEE31FC59C250098FE89 /* AlbumDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */; };
@@ -566,7 +560,7 @@
 		8C28CF1B1FC59C250098FE89 /* LoginRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7A1EEE8E7F0086DA84 /* LoginRouterInput.swift */; };
 		8C28CF1C1FC59C250098FE89 /* AlbumDetailResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */; };
 		8C28CF1D1FC59C250098FE89 /* WiFiSyncModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8E91F0288CA0028F51A /* WiFiSyncModuleInput.swift */; };
-		8C28CF1E1FC59C250098FE89 /* SupplementaryLabelHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6731F0B9F7600B552A3 /* SupplementaryLabelHeader.swift */; };
+		8C28CF1E1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28CF1F1FC59C250098FE89 /* CountiesGSMCodeCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */; };
 		8C28CF201FC59C250098FE89 /* HomePageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA31EFD4F0D00A405B2 /* HomePageInteractorInput.swift */; };
 		8C28CF211FC59C250098FE89 /* BaseCollectionViewCellWithSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FCC1EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.swift */; };
@@ -645,7 +639,7 @@
 		8C28CF6A1FC59C250098FE89 /* ApplicationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF866A1F0F874F00520D18 /* ApplicationSession.swift */; };
 		8C28CF6B1FC59C250098FE89 /* LoginInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C701EEE8E7F0086DA84 /* LoginInitializer.swift */; };
 		8C28CF6C1FC59C250098FE89 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD6BDD1F94EF320085FF30 /* Factory.swift */; };
-		8C28CF6D1FC59C250098FE89 /* BasicCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB66B1F0B9F7600B552A3 /* BasicCollectionController.swift */; };
+		8C28CF6D1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28CF6E1FC59C250098FE89 /* HelpAndSupportInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED3D1F516736002F923A /* HelpAndSupportInteractorOutput.swift */; };
 		8C28CF6F1FC59C250098FE89 /* MoreFilesActionsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0097131F6BDA6900FA069C /* MoreFilesActionsInteractorOutput.swift */; };
 		8C28CF701FC59C250098FE89 /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86771F0F96E600520D18 /* ContactUtil.m */; };
@@ -921,7 +915,7 @@
 		8C28D07E1FC59C250098FE89 /* BytesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEC01F78F94900FB4C3D /* BytesType.swift */; };
 		8C28D07F1FC59C250098FE89 /* UploadedItemsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A98EA438594E6B7C21041F /* UploadedItemsInteractorOutput.swift */; };
 		8C28D0801FC59C250098FE89 /* UploadedItemsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B3D00DF2CAD20A11EF38B /* UploadedItemsInteractor.swift */; };
-		8C28D0811FC59C250098FE89 /* BackendError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4516A81F7D2EF1008B1F9A /* BackendError.swift */; };
+		8C28D0811FC59C250098FE89 /* ServerStatusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4516A81F7D2EF1008B1F9A /* ServerStatusError.swift */; };
 		8C28D0821FC59C250098FE89 /* BaseRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4DBF1F14AD2A00EF1F0C /* BaseRequestService.swift */; };
 		8C28D0831FC59C250098FE89 /* CustomEditingTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8871F348B77002AC795 /* CustomEditingTabBarItem.swift */; };
 		8C28D0841FC59C250098FE89 /* UploadedItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0834AFC75083AA1A9D733C5 /* UploadedItemsRouterInput.swift */; };
@@ -936,7 +930,7 @@
 		8C28D08D1FC59C250098FE89 /* HomeHeaderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15117ECCA82CB6599B24AAD /* HomeHeaderPresenter.swift */; };
 		8C28D08E1FC59C250098FE89 /* HomeHeaderInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584169E67032B51B7B23F60D /* HomeHeaderInteractorInput.swift */; };
 		8C28D08F1FC59C250098FE89 /* HomeHeaderInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2944E4D7E97575567829EB5C /* HomeHeaderInteractorOutput.swift */; };
-		8C28D0901FC59C250098FE89 /* BasicCollectionControllerAppearanceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB66A1F0B9F7600B552A3 /* BasicCollectionControllerAppearanceConfig.swift */; };
+		8C28D0901FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0911FC59C250098FE89 /* HomeHeaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */; };
 		8C28D0921FC59C250098FE89 /* HomeHeaderRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E44B5C1E8BE17FFF812866 /* HomeHeaderRouterInput.swift */; };
 		8C28D0931FC59C250098FE89 /* HomeHeaderRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5904EF8C252E5010FDA01CEA /* HomeHeaderRouter.swift */; };
@@ -952,7 +946,7 @@
 		8C28D09D1FC59C250098FE89 /* BaseFilesGreedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9009A5FDA48558656AEA0B43 /* BaseFilesGreedPresenter.swift */; };
 		8C28D09E1FC59C250098FE89 /* BaseFilesGreedInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */; };
 		8C28D09F1FC59C250098FE89 /* BaseFilesGreedInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE89F708D1ADDEB03BE70E /* BaseFilesGreedInteractorOutput.swift */; };
-		8C28D0A01FC59C250098FE89 /* BasicCollectionMultiFileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6761F0B9F7600B552A3 /* BasicCollectionMultiFileCellModel.swift */; };
+		8C28D0A01FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0A11FC59C250098FE89 /* VisualMusicPlayerInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786901F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift */; };
 		8C28D0A21FC59C250098FE89 /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86731F0F96E600520D18 /* ContactDevice.m */; };
 		8C28D0A31FC59C250098FE89 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
@@ -965,61 +959,61 @@
 		8C28D0AA1FC59C250098FE89 /* BaseFilesGreedConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7ECB6D4F000A77B89C5008 /* BaseFilesGreedConfigurator.swift */; };
 		8C28D0AB1FC59C250098FE89 /* ActionsMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F56F81F1CC1CC0014870B /* ActionsMenuTableViewCell.swift */; };
 		8C28D0AC1FC59C250098FE89 /* BaseFilesGreedInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D81D8F4441B332E687B17 /* BaseFilesGreedInitializer.swift */; };
-		8C28D0AD1FC59C250098FE89 /* PhotoCellViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9443609C98B6F59C4E0ACE /* PhotoCellViewInput.swift */; };
-		8C28D0AE1FC59C250098FE89 /* PhotoCellViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0923482915EAD883EB3302E /* PhotoCellViewOutput.swift */; };
+		8C28D0AD1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0AE1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0AF1FC59C250098FE89 /* CreateStorySelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F691F31E4C900536DB6 /* CreateStorySelectionConfigurator.swift */; };
 		8C28D0B01FC59C250098FE89 /* SearchViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB216B1F3C858A00BAFE1E /* SearchViewPresenter.swift */; };
 		8C28D0B11FC59C250098FE89 /* InternetDataUsageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9B4EA1F78FD85002DAF81 /* InternetDataUsageCell.swift */; };
 		8C28D0B21FC59C250098FE89 /* ImportPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49886531F3EFBE200F50C95 /* ImportPhotosViewController.swift */; };
-		8C28D0B31FC59C250098FE89 /* PhotoCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4D0E48C237E69E8C20A1D /* PhotoCellViewController.swift */; };
+		8C28D0B31FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0B41FC59C250098FE89 /* UIviewControlllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA41F10C77E003D1A75 /* UIviewControlllerExtensions.swift */; };
-		8C28D0B51FC59C250098FE89 /* PhotoCellModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29689BC4E4E515695101ED3 /* PhotoCellModuleInput.swift */; };
+		8C28D0B51FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0B61FC59C250098FE89 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
 		8C28D0B71FC59C250098FE89 /* UsageInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E31F3F18FA00EFDC6D /* UsageInfoInteractor.swift */; };
-		8C28D0B81FC59C250098FE89 /* PhotoCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E4BC1A93D755DACEF10A86 /* PhotoCellPresenter.swift */; };
-		8C28D0B91FC59C250098FE89 /* PhotoCellInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A49674B0414C103A1DC6FE /* PhotoCellInteractorInput.swift */; };
+		8C28D0B81FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0B91FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0BA1FC59C250098FE89 /* AudioSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2FA61F3304D700536DB6 /* AudioSelectionDataSource.swift */; };
-		8C28D0BB1FC59C250098FE89 /* PhotoCellInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AB94C76998E6E26683D431 /* PhotoCellInteractorOutput.swift */; };
+		8C28D0BB1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0BC1FC59C250098FE89 /* AlbumItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFF0C8D1F4C1E1800E72E6A /* AlbumItem.swift */; };
 		8C28D0BD1FC59C250098FE89 /* UserProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCFE1F1E3A6300C8CC16 /* UserProfileRouter.swift */; };
-		8C28D0BE1FC59C250098FE89 /* PhotoCellInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDC69052FF3060078564B2C /* PhotoCellInteractor.swift */; };
+		8C28D0BE1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0BF1FC59C250098FE89 /* SelectionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0DBC301F2F2CE000F90590 /* SelectionImageView.swift */; };
 		8C28D0C01FC59C250098FE89 /* Int64+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */; };
 		8C28D0C11FC59C250098FE89 /* BottomSelectionTabBarModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF86C1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift */; };
-		8C28D0C21FC59C250098FE89 /* PhotoCellRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F94962877F3B6762905D0E /* PhotoCellRouterInput.swift */; };
-		8C28D0C31FC59C250098FE89 /* PhotoCellRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4380582AC66F470018BC99A8 /* PhotoCellRouter.swift */; };
+		8C28D0C21FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0C31FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0C41FC59C250098FE89 /* MediaItemOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1ED1F714DE30008F4CF /* MediaItemOperations.swift */; };
 		8C28D0C51FC59C250098FE89 /* ContactsSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */; };
-		8C28D0C61FC59C250098FE89 /* PhotoCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829A76AA44CFA7F5368456D8 /* PhotoCellConfigurator.swift */; };
+		8C28D0C61FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0C71FC59C250098FE89 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18D75C1F9F461A00F8679D /* ShadowView.swift */; };
 		8C28D0C81FC59C250098FE89 /* CreateStoryNameInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F821F31E4F800536DB6 /* CreateStoryNameInteractorOutput.swift */; };
-		8C28D0C91FC59C250098FE89 /* PhotoCellInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07736F312EDBB4364F3D022 /* PhotoCellInitializer.swift */; };
+		8C28D0C91FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0CA1FC59C250098FE89 /* CollectionViewStoryReorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5549FD1F6C11C300067F99 /* CollectionViewStoryReorderView.swift */; };
-		8C28D0CB1FC59C250098FE89 /* VideoCellViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7725EDECCE29F02528BCBC53 /* VideoCellViewInput.swift */; };
+		8C28D0CB1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0CC1FC59C250098FE89 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB215E1F3C6AE600BAFE1E /* SearchViewController.swift */; };
-		8C28D0CD1FC59C250098FE89 /* VideoCellViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAE3295D7B460F0925CA01 /* VideoCellViewOutput.swift */; };
+		8C28D0CD1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0CE1FC59C250098FE89 /* BasicCollectionMultiFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CED0B0E1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift */; };
-		8C28D0CF1FC59C250098FE89 /* VideoCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593ACD533D961B08C43D045C /* VideoCellViewController.swift */; };
-		8C28D0D01FC59C250098FE89 /* VideoCellModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B40D2723E81D6D2E32EB26 /* VideoCellModuleInput.swift */; };
-		8C28D0D11FC59C250098FE89 /* VideoCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D001B6C2215833D6A250F6F1 /* VideoCellPresenter.swift */; };
-		8C28D0D21FC59C250098FE89 /* VideoCellInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCBC66D92F9EE02ACE198 /* VideoCellInteractorInput.swift */; };
-		8C28D0D31FC59C250098FE89 /* VideoCellInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60582695BBBD252360FEAD0A /* VideoCellInteractorOutput.swift */; };
-		8C28D0D41FC59C250098FE89 /* VideoCellInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280772DCBEA04537379B5124 /* VideoCellInteractor.swift */; };
-		8C28D0D51FC59C250098FE89 /* VideoCellRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F835203054E2095BAC39ED /* VideoCellRouterInput.swift */; };
+		8C28D0CF1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0D01FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0D11FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0D21FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0D31FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0D41FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0D51FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0D61FC59C250098FE89 /* WrapItemFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */; };
-		8C28D0D71FC59C250098FE89 /* VideoCellRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E581449B0FE87067485308 /* VideoCellRouter.swift */; };
-		8C28D0D81FC59C250098FE89 /* VideoCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320999A330A92AEA4FD751DE /* VideoCellConfigurator.swift */; };
-		8C28D0D91FC59C250098FE89 /* VideoCellInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C786476F28B56215C54CB /* VideoCellInitializer.swift */; };
+		8C28D0D71FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0D81FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0D91FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0DA1FC59C250098FE89 /* CreateStorySelectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F6C1F31E4C900536DB6 /* CreateStorySelectionInteractor.swift */; };
 		8C28D0DB1FC59C250098FE89 /* UsageInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863ED1F3F18FA00EFDC6D /* UsageInfoViewController.swift */; };
 		8C28D0DC1FC59C250098FE89 /* PhotoVideoDetailViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE9AC6D7DD62C5A26F74CFE /* PhotoVideoDetailViewInput.swift */; };
 		8C28D0DD1FC59C250098FE89 /* PhotoVideoDetailViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC47E8ECC19A0C3CC7C7CCEF /* PhotoVideoDetailViewOutput.swift */; };
 		8C28D0DE1FC59C250098FE89 /* PhotoVideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A39EC58D2D1F5BD26616C89 /* PhotoVideoDetailViewController.swift */; };
 		8C28D0DF1FC59C250098FE89 /* ImportPhotosInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49886481F3EFBE200F50C95 /* ImportPhotosInitializer.swift */; };
-		8C28D0E01FC59C250098FE89 /* DropboxParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A8A1A1FB2F40300C0A5E1 /* DropboxParametrs.swift */; };
+		8C28D0E01FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0E11FC59C250098FE89 /* PhotoVideoDetailModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644BD485A1AAAA905F218013 /* PhotoVideoDetailModuleInput.swift */; };
-		8C28D0E21FC59C250098FE89 /* BasicCollectionMultiFileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6701F0B9F7600B552A3 /* BasicCollectionMultiFileDataSource.swift */; };
-		8C28D0E31FC59C250098FE89 /* FBResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7F1A11F87C51500EA26CA /* FBResponses.swift */; };
+		8C28D0E21FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C28D0E31FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D0E41FC59C250098FE89 /* PhotoVideoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */; };
 		8C28D0E51FC59C250098FE89 /* PhotoVideoDetailInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ACD7C82C97B84CF13A1A92 /* PhotoVideoDetailInteractorInput.swift */; };
 		8C28D0E61FC59C250098FE89 /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86861F0F96E600520D18 /* SyncSettings.m */; };
@@ -1070,7 +1064,7 @@
 		8C28D1131FC59C250098FE89 /* SyncContactsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD14ED875730C75E5AD4E0 /* SyncContactsRouterInput.swift */; };
 		8C28D1141FC59C250098FE89 /* SearchViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21641F3C6FCF00BAFE1E /* SearchViewConfigurator.swift */; };
 		8C28D1151FC59C250098FE89 /* VisualMusicPlayerInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77868D1F3F38EF005CB432 /* VisualMusicPlayerInitializer.swift */; };
-		8C28D1161FC59C250098FE89 /* ErrorsDescriotions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95881F154E210054BDC0 /* ErrorsDescriotions.swift */; };
+		8C28D1161FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D1171FC59C250098FE89 /* HelpAndSupportViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED471F516736002F923A /* HelpAndSupportViewInput.swift */; };
 		8C28D1181FC59C250098FE89 /* PrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAB1FBF378F00CF946E /* PrintInteractorInput.swift */; };
 		8C28D1191FC59C250098FE89 /* ImportPhotosViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49886551F3EFBE200F50C95 /* ImportPhotosViewInput.swift */; };
@@ -1090,7 +1084,7 @@
 		8C28D1271FC59C250098FE89 /* UrlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED5B1F5167D5002F923A /* UrlExtension.swift */; };
 		8C28D1281FC59C250098FE89 /* CreateStoryNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F871F31E4F800536DB6 /* CreateStoryNameRouter.swift */; };
 		8C28D1291FC59C250098FE89 /* SettingsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F6A1C9F3695D2974AEF4DA /* SettingsInteractorOutput.swift */; };
-		8C28D12A1FC59C250098FE89 /* FBParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7F19F1F87C44300EA26CA /* FBParametrs.swift */; };
+		8C28D12A1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D12B1FC59C250098FE89 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500943E503755A25C4E6B64 /* SettingsInteractor.swift */; };
 		8C28D12C1FC59C250098FE89 /* ImportPhotosRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49886501F3EFBE200F50C95 /* ImportPhotosRouter.swift */; };
 		8C28D12D1FC59C250098FE89 /* SettingsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFF44F88C9F0080E5FADF47 /* SettingsRouterInput.swift */; };
@@ -1138,7 +1132,7 @@
 		8C28D1571FC59C250098FE89 /* FileInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A790A17A1745A0D85ECB596 /* FileInfoConfigurator.swift */; };
 		8C28D1581FC59C250098FE89 /* FileInfoInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96CB1C3C9928A6AA7F97841 /* FileInfoInitializer.swift */; };
 		8C28D1591FC59C250098FE89 /* UsageInfoViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863EF1F3F18FA00EFDC6D /* UsageInfoViewInput.swift */; };
-		8C28D15A1FC59C250098FE89 /* DropboxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21541F345F8B00BAFE1E /* DropboxService.swift */; };
+		8C28D15A1FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D15B1FC59C250098FE89 /* CreateStoryPhotosOrderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4988041F3320420039C5F2 /* CreateStoryPhotosOrderConfigurator.swift */; };
 		8C28D15C1FC59C250098FE89 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4988081F3320420039C5F2 /* CreateStoryPhotosOrderInteractorInput.swift */; };
 		8C28D15D1FC59C250098FE89 /* UploadFilesSelectionViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */; };
@@ -1163,7 +1157,7 @@
 		8C28D1701FC59C250098FE89 /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0435051F4DBAAF00193C75 /* AlbumCollectionViewCell.swift */; };
 		8C28D1711FC59C250098FE89 /* SelectFolderInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4BCE425BAA49DA8EBEEA39 /* SelectFolderInitializer.swift */; };
 		8C28D1721FC59C250098FE89 /* FreeUpSpacePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE825BD1F823D9700356AD2 /* FreeUpSpacePopUp.swift */; };
-		8C28D1731FC59C250098FE89 /* FBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D496B9A71F386C4E008227CC /* FBService.swift */; };
+		8C28D1731FC59C250098FE89 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C28D1741FC59C250098FE89 /* VisualMusicPlayerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77868F1F3F38EF005CB432 /* VisualMusicPlayerInteractor.swift */; };
 		8C28D1751FC59C250098FE89 /* SelectNameViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF33FDE763AFBAF8B14EC86 /* SelectNameViewInput.swift */; };
 		8C28D1761FC59C250098FE89 /* AccountParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F55FB1F7551CD00F49DA1 /* AccountParameters.swift */; };
@@ -1281,7 +1275,7 @@
 		8C28D1E71FC59C250098FE89 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318D21EFBDD8400E25989 /* Foundation.framework */; };
 		8C28D1E81FC59C250098FE89 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318D01EFBDD7700E25989 /* UIKit.framework */; };
 		8C28D1E91FC59C250098FE89 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F931871C160E2F00858223 /* Accelerate.framework */; };
-		8C28D1EA1FC59C250098FE89 /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B9D2281CA86C4300FC28F2 /* libMPush.a */; };
+		8C28D1EA1FC59C250098FE89 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		8C28D1EB1FC59C250098FE89 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05033BE01C24B22900FA2E5C /* StoreKit.framework */; };
 		8C28D1EC1FC59C250098FE89 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056107211C0D8E210014D550 /* WebKit.framework */; };
 		8C28D1ED1FC59C250098FE89 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
@@ -1299,7 +1293,7 @@
 		8C28D1FA1FC59C250098FE89 /* HomeViewTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FD51EFD500B00A405B2 /* HomeViewTopView.xib */; };
 		8C28D1FB1FC59C250098FE89 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C049C7D1EEE8E7F0086DA84 /* LoginViewController.xib */; };
 		8C28D1FC1FC59C250098FE89 /* SubPlusButtons.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3F911EFD4D7C00A405B2 /* SubPlusButtons.xib */; };
-		8C28D1FD1FC59C250098FE89 /* BasicCollectionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6FB66C1F0B9F7600B552A3 /* BasicCollectionController.xib */; };
+		8C28D1FD1FC59C250098FE89 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		8C28D1FE1FC59C250098FE89 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA91F0F936700B5B93D /* SettingsTableViewCell.xib */; };
 		8C28D1FF1FC59C250098FE89 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE161F5957570041D041 /* AppRater.bundle */; };
 		8C28D2001FC59C250098FE89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */; };
@@ -1311,7 +1305,7 @@
 		8C28D2061FC59C250098FE89 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC791F10C40C003D1A75 /* InfoPlist.strings */; };
 		8C28D2071FC59C250098FE89 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC881F10C40C003D1A75 /* InfoPlist.strings */; };
 		8C28D2081FC59C250098FE89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC851F10C40C003D1A75 /* Localizable.strings */; };
-		8C28D2091FC59C250098FE89 /* PhotoCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A743A1F04FFCA00124DF5 /* PhotoCellViewController.xib */; };
+		8C28D2091FC59C250098FE89 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		8C28D20A1FC59C250098FE89 /* TabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FE91EFD517300A405B2 /* TabBarView.xib */; };
 		8C28D20B1FC59C250098FE89 /* UploadedItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F8DE1F0272E20028F51A /* UploadedItemsViewController.xib */; };
 		8C28D20C1FC59C250098FE89 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC8D1F10C40C003D1A75 /* InfoPlist.strings */; };
@@ -1326,7 +1320,7 @@
 		8C28D2151FC59C250098FE89 /* CollectionViewCellForController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C355E1B1F00E949003B004C /* CollectionViewCellForController.xib */; };
 		8C28D2161FC59C250098FE89 /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
 		8C28D2171FC59C250098FE89 /* AudioSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6E2FA21F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib */; };
-		8C28D2181FC59C250098FE89 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 051E1DFF19CAC2F900FD1E03 /* InfoPlist.strings */; };
+		8C28D2181FC59C250098FE89 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		8C28D2191FC59C250098FE89 /* SubscriptionPlanCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47864011F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib */; };
 		8C28D21A1FC59C250098FE89 /* CollectionViewCellForStoryPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C241EF91F960E1B00322149 /* CollectionViewCellForStoryPhoto.xib */; };
 		8C28D21B1FC59C250098FE89 /* PhoneVereficationScreen~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6BF9461EFA7AF200D73B62 /* PhoneVereficationScreen~ipad.xib */; };
@@ -1344,7 +1338,7 @@
 		8C28D2271FC59C250098FE89 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
 		8C28D2281FC59C250098FE89 /* BaseFileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74591F07C28D00124DF5 /* BaseFileContentView.xib */; };
 		8C28D2291FC59C250098FE89 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
-		8C28D22A1FC59C250098FE89 /* VideoCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A743C1F05178C00124DF5 /* VideoCellViewController.xib */; };
+		8C28D22A1FC59C250098FE89 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		8C28D22B1FC59C250098FE89 /* CustomPopUpAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3F991EFD4ED600A405B2 /* CustomPopUpAlert.xib */; };
 		8C28D22C1FC59C250098FE89 /* ActivityTimelineTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44F61F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib */; };
 		8C28D22D1FC59C250098FE89 /* HelpAndSupportHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE95ED391F516736002F923A /* HelpAndSupportHeaderView.xib */; };
@@ -1358,7 +1352,7 @@
 		8C28D2351FC59C250098FE89 /* CustomNavBar~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FE41EFD517300A405B2 /* CustomNavBar~iphone.xib */; };
 		8C28D2361FC59C250098FE89 /* ActivityTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE44714D1F6962F00017B4F0 /* ActivityTimelineViewController.xib */; };
 		8C28D2371FC59C250098FE89 /* HelpAndSupport.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE95ED451F516736002F923A /* HelpAndSupport.storyboard */; };
-		8C28D2381FC59C250098FE89 /* SupplementaryLabelHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6FB6741F0B9F7600B552A3 /* SupplementaryLabelHeader.xib */; };
+		8C28D2381FC59C250098FE89 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		8C28D2391FC59C250098FE89 /* CollectionViewCellForAudio.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF6BDE01F0B97050066709E /* CollectionViewCellForAudio.xib */; };
 		8C28D23A1FC59C250098FE89 /* BaseFilesGreedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74321F04DDD300124DF5 /* BaseFilesGreedViewController.xib */; };
 		8C28D23B1FC59C250098FE89 /* CompleteProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F8D61F023AFD0028F51A /* CompleteProfileViewController.xib */; };
@@ -1375,7 +1369,7 @@
 		8C28D2461FC59C250098FE89 /* LikeFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F8DA1F024DCF0028F51A /* LikeFilterViewController.xib */; };
 		8C28D2471FC59C250098FE89 /* EditinglBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF88B1F348B77002AC795 /* EditinglBar.xib */; };
 		8C28D2481FC59C250098FE89 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */; };
-		8C28D2491FC59C250098FE89 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CE68EEE1FC46389006CE7BB /* Images.xcassets */; };
+		8C28D2491FC59C250098FE89 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		8C28D24A1FC59C250098FE89 /* CustomNavBar~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FE31EFD517300A405B2 /* CustomNavBar~ipad.xib */; };
 		8C28D24B1FC59C250098FE89 /* IntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B711EEE9509006532C8 /* IntroduceViewController.xib */; };
 		8C28D24C1FC59C250098FE89 /* FileInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD121F1E434100C8CC16 /* FileInfoViewController.xib */; };
@@ -2600,18 +2594,6 @@
 		873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAssetCollection.swift; sourceTree = "<group>"; };
 		8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectiondDataSource.swift; sourceTree = "<group>"; };
 		87AD15E31FD678B800DE97DB /* String+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
-		87C315F01FCD779F00845B0A /* LocalAlbumPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumPresenter.swift; sourceTree = "<group>"; };
-		87C315F21FCD779F00845B0A /* LocalAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumViewController.swift; sourceTree = "<group>"; };
-		87C315F41FCD779F00845B0A /* LocalAlbumModuleInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumModuleInitializer.swift; sourceTree = "<group>"; };
-		87C315F51FCD779F00845B0A /* LocalAlbumConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumConfigurator.swift; sourceTree = "<group>"; };
-		87C315F71FCD779F00845B0A /* LocalAlbumInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumInteractor.swift; sourceTree = "<group>"; };
-		87C315F91FCD779F00845B0A /* LocalAlbumRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumRouter.swift; sourceTree = "<group>"; };
-		87C315FC1FCD77CB00845B0A /* LocalAlbumPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumPresenter.swift; sourceTree = "<group>"; };
-		87C315FE1FCD77CB00845B0A /* LocalAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumViewController.swift; sourceTree = "<group>"; };
-		87C316001FCD77CB00845B0A /* LocalAlbumModuleInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumModuleInitializer.swift; sourceTree = "<group>"; };
-		87C316011FCD77CB00845B0A /* LocalAlbumConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumConfigurator.swift; sourceTree = "<group>"; };
-		87C316031FCD77CB00845B0A /* LocalAlbumInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumInteractor.swift; sourceTree = "<group>"; };
-		87C316051FCD77CB00845B0A /* LocalAlbumRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumRouter.swift; sourceTree = "<group>"; };
 		8831E41C046C33B2DA7E6FFE /* SettingsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewInput.swift; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
 		8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderInteractor.swift; sourceTree = "<group>"; };
@@ -3254,7 +3236,7 @@
 				8C28D1E71FC59C250098FE89 /* Foundation.framework in Frameworks */,
 				8C28D1E81FC59C250098FE89 /* UIKit.framework in Frameworks */,
 				8C28D1E91FC59C250098FE89 /* Accelerate.framework in Frameworks */,
-				8C28D1EA1FC59C250098FE89 /* libMPush.a in Frameworks */,
+				8C28D1EA1FC59C250098FE89 /* (null) in Frameworks */,
 				8C28D1EB1FC59C250098FE89 /* StoreKit.framework in Frameworks */,
 				8C28D1EC1FC59C250098FE89 /* WebKit.framework in Frameworks */,
 				8C28D1ED1FC59C250098FE89 /* AudioToolbox.framework in Frameworks */,
@@ -8315,7 +8297,7 @@
 				8C28D1FA1FC59C250098FE89 /* HomeViewTopView.xib in Resources */,
 				8C28D1FB1FC59C250098FE89 /* LoginViewController.xib in Resources */,
 				8C28D1FC1FC59C250098FE89 /* SubPlusButtons.xib in Resources */,
-				8C28D1FD1FC59C250098FE89 /* BasicCollectionController.xib in Resources */,
+				8C28D1FD1FC59C250098FE89 /* (null) in Resources */,
 				8C28D1FE1FC59C250098FE89 /* SettingsTableViewCell.xib in Resources */,
 				8C28D1FF1FC59C250098FE89 /* AppRater.bundle in Resources */,
 				8C28D2001FC59C250098FE89 /* LaunchScreen.storyboard in Resources */,
@@ -8327,7 +8309,7 @@
 				8C28D2061FC59C250098FE89 /* InfoPlist.strings in Resources */,
 				8C28D2071FC59C250098FE89 /* InfoPlist.strings in Resources */,
 				8C28D2081FC59C250098FE89 /* Localizable.strings in Resources */,
-				8C28D2091FC59C250098FE89 /* PhotoCellViewController.xib in Resources */,
+				8C28D2091FC59C250098FE89 /* (null) in Resources */,
 				8C28D20A1FC59C250098FE89 /* TabBarView.xib in Resources */,
 				8C28D20B1FC59C250098FE89 /* UploadedItemsViewController.xib in Resources */,
 				8C28D20C1FC59C250098FE89 /* InfoPlist.strings in Resources */,
@@ -8342,7 +8324,7 @@
 				8C28D2151FC59C250098FE89 /* CollectionViewCellForController.xib in Resources */,
 				8C28D2161FC59C250098FE89 /* LoginPhoneMailCell.xib in Resources */,
 				8C28D2171FC59C250098FE89 /* AudioSelectionCollectionViewCell.xib in Resources */,
-				8C28D2181FC59C250098FE89 /* InfoPlist.strings in Resources */,
+				8C28D2181FC59C250098FE89 /* (null) in Resources */,
 				8C28D2191FC59C250098FE89 /* SubscriptionPlanCollectionViewCell.xib in Resources */,
 				8C28D21A1FC59C250098FE89 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				8C28D21B1FC59C250098FE89 /* PhoneVereficationScreen~ipad.xib in Resources */,
@@ -8360,7 +8342,7 @@
 				8C28D2271FC59C250098FE89 /* TurkcellSaturaMed.ttf in Resources */,
 				8C28D2281FC59C250098FE89 /* BaseFileContentView.xib in Resources */,
 				8C28D2291FC59C250098FE89 /* RegistrationScreen.xib in Resources */,
-				8C28D22A1FC59C250098FE89 /* VideoCellViewController.xib in Resources */,
+				8C28D22A1FC59C250098FE89 /* (null) in Resources */,
 				8C28D22B1FC59C250098FE89 /* CustomPopUpAlert.xib in Resources */,
 				8C28D22C1FC59C250098FE89 /* ActivityTimelineTimeCell.xib in Resources */,
 				8C28D22D1FC59C250098FE89 /* HelpAndSupportHeaderView.xib in Resources */,
@@ -8374,7 +8356,7 @@
 				8C28D2351FC59C250098FE89 /* CustomNavBar~iphone.xib in Resources */,
 				8C28D2361FC59C250098FE89 /* ActivityTimelineViewController.xib in Resources */,
 				8C28D2371FC59C250098FE89 /* HelpAndSupport.storyboard in Resources */,
-				8C28D2381FC59C250098FE89 /* SupplementaryLabelHeader.xib in Resources */,
+				8C28D2381FC59C250098FE89 /* (null) in Resources */,
 				8C28D2391FC59C250098FE89 /* CollectionViewCellForAudio.xib in Resources */,
 				8C28D23A1FC59C250098FE89 /* BaseFilesGreedViewController.xib in Resources */,
 				8C28D23B1FC59C250098FE89 /* CompleteProfileViewController.xib in Resources */,
@@ -8391,7 +8373,7 @@
 				8C28D2461FC59C250098FE89 /* LikeFilterViewController.xib in Resources */,
 				8C28D2471FC59C250098FE89 /* EditinglBar.xib in Resources */,
 				8C28D2481FC59C250098FE89 /* AlbumCollectionViewCell.xib in Resources */,
-				8C28D2491FC59C250098FE89 /* Images.xcassets in Resources */,
+				8C28D2491FC59C250098FE89 /* (null) in Resources */,
 				8C28D24A1FC59C250098FE89 /* CustomNavBar~ipad.xib in Resources */,
 				8C28D24B1FC59C250098FE89 /* IntroduceViewController.xib in Resources */,
 				8C28D24C1FC59C250098FE89 /* FileInfoViewController.xib in Resources */,
@@ -8854,7 +8836,7 @@
 				8C28CE9D1FC59C250098FE89 /* HomePageInitializer.swift in Sources */,
 				8C28CE9E1FC59C250098FE89 /* CreateStoryPhotosOrderViewInput.swift in Sources */,
 				8C28CE9F1FC59C250098FE89 /* SeacrhViewRouter.swift in Sources */,
-				8C28CEA01FC59C250098FE89 /* DropboxResponse.swift in Sources */,
+				8C28CEA01FC59C250098FE89 /* (null) in Sources */,
 				8C28CEA11FC59C250098FE89 /* CurioNetwork.m in Sources */,
 				8C28CEA21FC59C250098FE89 /* ValidationService.swift in Sources */,
 				8C28CEA31FC59C250098FE89 /* UserProfileViewController.swift in Sources */,
@@ -8876,7 +8858,7 @@
 				8C28CEB31FC59C250098FE89 /* BaseCollectionViewController.swift in Sources */,
 				8C28CEB41FC59C250098FE89 /* ImportPhotosInteractor.swift in Sources */,
 				8C28CEB51FC59C250098FE89 /* VisualMusicPlayerModuleInput.swift in Sources */,
-				8C28CEB61FC59C250098FE89 /* CellAppearanceModel.swift in Sources */,
+				8C28CEB61FC59C250098FE89 /* (null) in Sources */,
 				8C28CEB71FC59C250098FE89 /* ButtonWithGrayCorner.swift in Sources */,
 				8C28CEB81FC59C250098FE89 /* SubscriptionParameters.swift in Sources */,
 				8C28CEB91FC59C250098FE89 /* TabBarViewController.swift in Sources */,
@@ -8918,7 +8900,7 @@
 				8C28CEDD1FC59C250098FE89 /* VisualMusicPlayerViewInput.swift in Sources */,
 				8C28CEDE1FC59C250098FE89 /* AutoSyncModuleInput.swift in Sources */,
 				8C28CEDF1FC59C250098FE89 /* CoreDataStack.swift in Sources */,
-				8C28CEE01FC59C250098FE89 /* DropboxStatusValue.swift in Sources */,
+				8C28CEE01FC59C250098FE89 /* (null) in Sources */,
 				8C28CEE11FC59C250098FE89 /* AutoSyncInteractorOutput.swift in Sources */,
 				8C28CEE21FC59C250098FE89 /* WelcomeViewOutput.swift in Sources */,
 				8C28CEE31FC59C250098FE89 /* AlbumDetailService.swift in Sources */,
@@ -8980,7 +8962,7 @@
 				8C28CF1B1FC59C250098FE89 /* LoginRouterInput.swift in Sources */,
 				8C28CF1C1FC59C250098FE89 /* AlbumDetailResponce.swift in Sources */,
 				8C28CF1D1FC59C250098FE89 /* WiFiSyncModuleInput.swift in Sources */,
-				8C28CF1E1FC59C250098FE89 /* SupplementaryLabelHeader.swift in Sources */,
+				8C28CF1E1FC59C250098FE89 /* (null) in Sources */,
 				8C28CF1F1FC59C250098FE89 /* CountiesGSMCodeCompositor.swift in Sources */,
 				8C28CF201FC59C250098FE89 /* HomePageInteractorInput.swift in Sources */,
 				8C28CF211FC59C250098FE89 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
@@ -9059,7 +9041,7 @@
 				8C28CF6A1FC59C250098FE89 /* ApplicationSession.swift in Sources */,
 				8C28CF6B1FC59C250098FE89 /* LoginInitializer.swift in Sources */,
 				8C28CF6C1FC59C250098FE89 /* Factory.swift in Sources */,
-				8C28CF6D1FC59C250098FE89 /* BasicCollectionController.swift in Sources */,
+				8C28CF6D1FC59C250098FE89 /* (null) in Sources */,
 				8C28CF6E1FC59C250098FE89 /* HelpAndSupportInteractorOutput.swift in Sources */,
 				8C28CF6F1FC59C250098FE89 /* MoreFilesActionsInteractorOutput.swift in Sources */,
 				8C28CF701FC59C250098FE89 /* ContactUtil.m in Sources */,
@@ -9335,7 +9317,7 @@
 				8C28D07E1FC59C250098FE89 /* BytesType.swift in Sources */,
 				8C28D07F1FC59C250098FE89 /* UploadedItemsInteractorOutput.swift in Sources */,
 				8C28D0801FC59C250098FE89 /* UploadedItemsInteractor.swift in Sources */,
-				8C28D0811FC59C250098FE89 /* BackendError.swift in Sources */,
+				8C28D0811FC59C250098FE89 /* ServerStatusError.swift in Sources */,
 				8C28D0821FC59C250098FE89 /* BaseRequestService.swift in Sources */,
 				8C28D0831FC59C250098FE89 /* CustomEditingTabBarItem.swift in Sources */,
 				8C28D0841FC59C250098FE89 /* UploadedItemsRouterInput.swift in Sources */,
@@ -9350,7 +9332,7 @@
 				8C28D08D1FC59C250098FE89 /* HomeHeaderPresenter.swift in Sources */,
 				8C28D08E1FC59C250098FE89 /* HomeHeaderInteractorInput.swift in Sources */,
 				8C28D08F1FC59C250098FE89 /* HomeHeaderInteractorOutput.swift in Sources */,
-				8C28D0901FC59C250098FE89 /* BasicCollectionControllerAppearanceConfig.swift in Sources */,
+				8C28D0901FC59C250098FE89 /* (null) in Sources */,
 				8C28D0911FC59C250098FE89 /* HomeHeaderInteractor.swift in Sources */,
 				8C28D0921FC59C250098FE89 /* HomeHeaderRouterInput.swift in Sources */,
 				8C28D0931FC59C250098FE89 /* HomeHeaderRouter.swift in Sources */,
@@ -9366,7 +9348,7 @@
 				8C28D09D1FC59C250098FE89 /* BaseFilesGreedPresenter.swift in Sources */,
 				8C28D09E1FC59C250098FE89 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				8C28D09F1FC59C250098FE89 /* BaseFilesGreedInteractorOutput.swift in Sources */,
-				8C28D0A01FC59C250098FE89 /* BasicCollectionMultiFileCellModel.swift in Sources */,
+				8C28D0A01FC59C250098FE89 /* (null) in Sources */,
 				8C28D0A11FC59C250098FE89 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				8C28D0A21FC59C250098FE89 /* ContactDevice.m in Sources */,
 				8C28D0A31FC59C250098FE89 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
@@ -9379,61 +9361,61 @@
 				8C28D0AA1FC59C250098FE89 /* BaseFilesGreedConfigurator.swift in Sources */,
 				8C28D0AB1FC59C250098FE89 /* ActionsMenuTableViewCell.swift in Sources */,
 				8C28D0AC1FC59C250098FE89 /* BaseFilesGreedInitializer.swift in Sources */,
-				8C28D0AD1FC59C250098FE89 /* PhotoCellViewInput.swift in Sources */,
-				8C28D0AE1FC59C250098FE89 /* PhotoCellViewOutput.swift in Sources */,
+				8C28D0AD1FC59C250098FE89 /* (null) in Sources */,
+				8C28D0AE1FC59C250098FE89 /* (null) in Sources */,
 				8C28D0AF1FC59C250098FE89 /* CreateStorySelectionConfigurator.swift in Sources */,
 				8C28D0B01FC59C250098FE89 /* SearchViewPresenter.swift in Sources */,
 				8C28D0B11FC59C250098FE89 /* InternetDataUsageCell.swift in Sources */,
 				8C28D0B21FC59C250098FE89 /* ImportPhotosViewController.swift in Sources */,
-				8C28D0B31FC59C250098FE89 /* PhotoCellViewController.swift in Sources */,
+				8C28D0B31FC59C250098FE89 /* (null) in Sources */,
 				8C28D0B41FC59C250098FE89 /* UIviewControlllerExtensions.swift in Sources */,
-				8C28D0B51FC59C250098FE89 /* PhotoCellModuleInput.swift in Sources */,
+				8C28D0B51FC59C250098FE89 /* (null) in Sources */,
 				8C28D0B61FC59C250098FE89 /* Dictionary.swift in Sources */,
 				8C28D0B71FC59C250098FE89 /* UsageInfoInteractor.swift in Sources */,
-				8C28D0B81FC59C250098FE89 /* PhotoCellPresenter.swift in Sources */,
-				8C28D0B91FC59C250098FE89 /* PhotoCellInteractorInput.swift in Sources */,
+				8C28D0B81FC59C250098FE89 /* (null) in Sources */,
+				8C28D0B91FC59C250098FE89 /* (null) in Sources */,
 				8C28D0BA1FC59C250098FE89 /* AudioSelectionDataSource.swift in Sources */,
-				8C28D0BB1FC59C250098FE89 /* PhotoCellInteractorOutput.swift in Sources */,
+				8C28D0BB1FC59C250098FE89 /* (null) in Sources */,
 				8C28D0BC1FC59C250098FE89 /* AlbumItem.swift in Sources */,
 				8C28D0BD1FC59C250098FE89 /* UserProfileRouter.swift in Sources */,
-				8C28D0BE1FC59C250098FE89 /* PhotoCellInteractor.swift in Sources */,
+				8C28D0BE1FC59C250098FE89 /* (null) in Sources */,
 				8C28D0BF1FC59C250098FE89 /* SelectionImageView.swift in Sources */,
 				8C28D0C01FC59C250098FE89 /* Int64+Bytes.swift in Sources */,
 				8C28D0C11FC59C250098FE89 /* BottomSelectionTabBarModuleInput.swift in Sources */,
-				8C28D0C21FC59C250098FE89 /* PhotoCellRouterInput.swift in Sources */,
-				8C28D0C31FC59C250098FE89 /* PhotoCellRouter.swift in Sources */,
+				8C28D0C21FC59C250098FE89 /* (null) in Sources */,
+				8C28D0C31FC59C250098FE89 /* (null) in Sources */,
 				8C28D0C41FC59C250098FE89 /* MediaItemOperations.swift in Sources */,
 				8C28D0C51FC59C250098FE89 /* ContactsSyncService.swift in Sources */,
-				8C28D0C61FC59C250098FE89 /* PhotoCellConfigurator.swift in Sources */,
+				8C28D0C61FC59C250098FE89 /* (null) in Sources */,
 				8C28D0C71FC59C250098FE89 /* ShadowView.swift in Sources */,
 				8C28D0C81FC59C250098FE89 /* CreateStoryNameInteractorOutput.swift in Sources */,
-				8C28D0C91FC59C250098FE89 /* PhotoCellInitializer.swift in Sources */,
+				8C28D0C91FC59C250098FE89 /* (null) in Sources */,
 				8C28D0CA1FC59C250098FE89 /* CollectionViewStoryReorderView.swift in Sources */,
-				8C28D0CB1FC59C250098FE89 /* VideoCellViewInput.swift in Sources */,
+				8C28D0CB1FC59C250098FE89 /* (null) in Sources */,
 				8C28D0CC1FC59C250098FE89 /* SearchViewController.swift in Sources */,
-				8C28D0CD1FC59C250098FE89 /* VideoCellViewOutput.swift in Sources */,
+				8C28D0CD1FC59C250098FE89 /* (null) in Sources */,
 				8C28D0CE1FC59C250098FE89 /* BasicCollectionMultiFileCell.swift in Sources */,
-				8C28D0CF1FC59C250098FE89 /* VideoCellViewController.swift in Sources */,
-				8C28D0D01FC59C250098FE89 /* VideoCellModuleInput.swift in Sources */,
-				8C28D0D11FC59C250098FE89 /* VideoCellPresenter.swift in Sources */,
-				8C28D0D21FC59C250098FE89 /* VideoCellInteractorInput.swift in Sources */,
-				8C28D0D31FC59C250098FE89 /* VideoCellInteractorOutput.swift in Sources */,
-				8C28D0D41FC59C250098FE89 /* VideoCellInteractor.swift in Sources */,
-				8C28D0D51FC59C250098FE89 /* VideoCellRouterInput.swift in Sources */,
+				8C28D0CF1FC59C250098FE89 /* (null) in Sources */,
+				8C28D0D01FC59C250098FE89 /* (null) in Sources */,
+				8C28D0D11FC59C250098FE89 /* (null) in Sources */,
+				8C28D0D21FC59C250098FE89 /* (null) in Sources */,
+				8C28D0D31FC59C250098FE89 /* (null) in Sources */,
+				8C28D0D41FC59C250098FE89 /* (null) in Sources */,
+				8C28D0D51FC59C250098FE89 /* (null) in Sources */,
 				8C28D0D61FC59C250098FE89 /* WrapItemFileService.swift in Sources */,
-				8C28D0D71FC59C250098FE89 /* VideoCellRouter.swift in Sources */,
-				8C28D0D81FC59C250098FE89 /* VideoCellConfigurator.swift in Sources */,
-				8C28D0D91FC59C250098FE89 /* VideoCellInitializer.swift in Sources */,
+				8C28D0D71FC59C250098FE89 /* (null) in Sources */,
+				8C28D0D81FC59C250098FE89 /* (null) in Sources */,
+				8C28D0D91FC59C250098FE89 /* (null) in Sources */,
 				8C28D0DA1FC59C250098FE89 /* CreateStorySelectionInteractor.swift in Sources */,
 				8C28D0DB1FC59C250098FE89 /* UsageInfoViewController.swift in Sources */,
 				8C28D0DC1FC59C250098FE89 /* PhotoVideoDetailViewInput.swift in Sources */,
 				8C28D0DD1FC59C250098FE89 /* PhotoVideoDetailViewOutput.swift in Sources */,
 				8C28D0DE1FC59C250098FE89 /* PhotoVideoDetailViewController.swift in Sources */,
 				8C28D0DF1FC59C250098FE89 /* ImportPhotosInitializer.swift in Sources */,
-				8C28D0E01FC59C250098FE89 /* DropboxParametrs.swift in Sources */,
+				8C28D0E01FC59C250098FE89 /* (null) in Sources */,
 				8C28D0E11FC59C250098FE89 /* PhotoVideoDetailModuleInput.swift in Sources */,
-				8C28D0E21FC59C250098FE89 /* BasicCollectionMultiFileDataSource.swift in Sources */,
-				8C28D0E31FC59C250098FE89 /* FBResponses.swift in Sources */,
+				8C28D0E21FC59C250098FE89 /* (null) in Sources */,
+				8C28D0E31FC59C250098FE89 /* (null) in Sources */,
 				8C28D0E41FC59C250098FE89 /* PhotoVideoDetailPresenter.swift in Sources */,
 				8C28D0E51FC59C250098FE89 /* PhotoVideoDetailInteractorInput.swift in Sources */,
 				8C28D0E61FC59C250098FE89 /* SyncSettings.m in Sources */,
@@ -9484,7 +9466,7 @@
 				8C28D1131FC59C250098FE89 /* SyncContactsRouterInput.swift in Sources */,
 				8C28D1141FC59C250098FE89 /* SearchViewConfigurator.swift in Sources */,
 				8C28D1151FC59C250098FE89 /* VisualMusicPlayerInitializer.swift in Sources */,
-				8C28D1161FC59C250098FE89 /* ErrorsDescriotions.swift in Sources */,
+				8C28D1161FC59C250098FE89 /* (null) in Sources */,
 				8C28D1171FC59C250098FE89 /* HelpAndSupportViewInput.swift in Sources */,
 				8C28D1181FC59C250098FE89 /* PrintInteractorInput.swift in Sources */,
 				8C28D1191FC59C250098FE89 /* ImportPhotosViewInput.swift in Sources */,
@@ -9504,7 +9486,7 @@
 				8C28D1271FC59C250098FE89 /* UrlExtension.swift in Sources */,
 				8C28D1281FC59C250098FE89 /* CreateStoryNameRouter.swift in Sources */,
 				8C28D1291FC59C250098FE89 /* SettingsInteractorOutput.swift in Sources */,
-				8C28D12A1FC59C250098FE89 /* FBParametrs.swift in Sources */,
+				8C28D12A1FC59C250098FE89 /* (null) in Sources */,
 				8C28D12B1FC59C250098FE89 /* SettingsInteractor.swift in Sources */,
 				8C28D12C1FC59C250098FE89 /* ImportPhotosRouter.swift in Sources */,
 				8C28D12D1FC59C250098FE89 /* SettingsRouterInput.swift in Sources */,
@@ -9552,7 +9534,7 @@
 				8C28D1571FC59C250098FE89 /* FileInfoConfigurator.swift in Sources */,
 				8C28D1581FC59C250098FE89 /* FileInfoInitializer.swift in Sources */,
 				8C28D1591FC59C250098FE89 /* UsageInfoViewInput.swift in Sources */,
-				8C28D15A1FC59C250098FE89 /* DropboxService.swift in Sources */,
+				8C28D15A1FC59C250098FE89 /* (null) in Sources */,
 				8C28D15B1FC59C250098FE89 /* CreateStoryPhotosOrderConfigurator.swift in Sources */,
 				8C28D15C1FC59C250098FE89 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */,
 				8C28D15D1FC59C250098FE89 /* UploadFilesSelectionViewInput.swift in Sources */,
@@ -9577,7 +9559,7 @@
 				8C28D1701FC59C250098FE89 /* AlbumCollectionViewCell.swift in Sources */,
 				8C28D1711FC59C250098FE89 /* SelectFolderInitializer.swift in Sources */,
 				8C28D1721FC59C250098FE89 /* FreeUpSpacePopUp.swift in Sources */,
-				8C28D1731FC59C250098FE89 /* FBService.swift in Sources */,
+				8C28D1731FC59C250098FE89 /* (null) in Sources */,
 				8C28D1741FC59C250098FE89 /* VisualMusicPlayerInteractor.swift in Sources */,
 				8C28D1751FC59C250098FE89 /* SelectNameViewInput.swift in Sources */,
 				8C28D1761FC59C250098FE89 /* AccountParameters.swift in Sources */,
@@ -10923,7 +10905,7 @@
 					"PLATFORM_LOCAL=1",
 					"LOG2FILE_NO=1",
 				);
-				INFOPLIST_FILE = "Depo_LifeTech copy-Info.plist";
+				INFOPLIST_FILE = "Depo/App/Depo_LifeTech-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -11017,7 +10999,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Supporting Files/Depo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "PLATFORM_STORE=1";
-				INFOPLIST_FILE = "Depo/Depo-AppStore-Info.plist";
+				INFOPLIST_FILE = "Depo/App/Depo-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -11064,7 +11046,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Supporting Files/Depo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "PLATFORM_ICT=1";
-				INFOPLIST_FILE = "Depo/Depo-Enterprise-Info.plist";
+				INFOPLIST_FILE = "Depo/App/Depo-Enterprise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
