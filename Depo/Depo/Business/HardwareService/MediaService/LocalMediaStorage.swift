@@ -60,7 +60,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         getDetailQueue.maxConcurrentOperationCount = 1
         
         super.init()
-        askPermissionForPhotoFramework { [weak self] (accessGranted, _) in
+        askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
             if accessGranted, let `self` = self {
                 self.photoLibrary.register(self)
             }
@@ -88,19 +88,21 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         })
     }
     
-    func askPermissionForPhotoFramework(_ accessGranted: @escaping PhotoLibraryGranted) {
+    func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
-            accessGranted(true, status)
+            completion(true, status)
         case .notDetermined, .restricted:
             PHPhotoLibrary.requestAuthorization({ (authStatus) in
-                accessGranted(authStatus == .authorized, authStatus)
+                completion(authStatus == .authorized, authStatus)
             })
         case .denied:
-            accessGranted(false, status)
-            DispatchQueue.main.async { [weak self] in
-                self?.showAccessAlert()
+            completion(false, status)
+            if redirectToSettings {
+                DispatchQueue.main.async { [weak self] in
+                    self?.showAccessAlert()
+                }
             }
         }
     }
@@ -122,45 +124,51 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return mediaContent
     }
     
-    //WARNING: If you want to use this method, call askPermissionForPhotoFramework method first
-    func getAllAlbums() -> [AlbumItem] {
-        let album = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
-        let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
-        
-        var albums = [AlbumItem]()
-        
-        [album, smartAlbum].forEach { album in
-            album.enumerateObjects { (object, index, stop) in
-                if object.photosCount > 0 {
-                    let item = AlbumItem(uuid: object.localIdentifier,
-                                         name: object.localizedTitle,
-                                         creationDate: nil,
-                                         lastModifiDate: nil,
-                                         fileType: .photoAlbum,
-                                         syncStatus: .unknown,
-                                         isLocalItem: true)
-                    item.imageCount = object.photosCount
-                    
-                    let fetchOptions = PHFetchOptions()
-                    fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                    fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-                    
-                    if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
-                        let info = self.fullInfoAboutAsset(asset: asset)
+    func getAllAlbums(completion: @escaping (_ albums: [AlbumItem])->Void) {
+        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false) { (accessGranted, _) in
+            guard accessGranted else {
+                completion([])
+                return
+            }
+            
+            let album = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+            let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+            
+            var albums = [AlbumItem]()
+            
+            [album, smartAlbum].forEach { album in
+                album.enumerateObjects { (object, index, stop) in
+                    if object.photosCount > 0 {
+                        let item = AlbumItem(uuid: object.localIdentifier,
+                                             name: object.localizedTitle,
+                                             creationDate: nil,
+                                             lastModifiDate: nil,
+                                             fileType: .photoAlbum,
+                                             syncStatus: .unknown,
+                                             isLocalItem: true)
+                        item.imageCount = object.photosCount
                         
-                        let baseMediaContent = BaseMediaContent(curentAsset: asset,
-                                                                urlToFile: info.url,
-                                                                size: info.size,
-                                                                md5: info.md5)
-                        item.preview = WrapData(baseModel: baseMediaContent)
+                        let fetchOptions = PHFetchOptions()
+                        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                        fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+                        
+                        if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
+                            let info = self.fullInfoAboutAsset(asset: asset)
+                            
+                            let baseMediaContent = BaseMediaContent(curentAsset: asset,
+                                                                    urlToFile: info.url,
+                                                                    size: info.size,
+                                                                    md5: info.md5)
+                            item.preview = WrapData(baseModel: baseMediaContent)
+                        }
+                        
+                        albums.append(item)
                     }
-                    
-                    albums.append(item)
                 }
             }
+            
+            completion(albums)
         }
-        
-        return albums
     }
     
     // MARK: Image

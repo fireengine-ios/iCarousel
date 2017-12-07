@@ -13,7 +13,9 @@ class LocalAlbumInteractor: BaseFilesGreedInteractor {
     var localStorage = LocalMediaStorage.default
     
     override func getAllItems(sortBy: SortedRules) {
-        self.output.getContentWithSuccess(array: [localStorage.getAllAlbums()])
+        localStorage.getAllAlbums { [weak self] (albums) in
+            self?.output.getContentWithSuccess(array: [albums])
+        }
     }
     
 }
