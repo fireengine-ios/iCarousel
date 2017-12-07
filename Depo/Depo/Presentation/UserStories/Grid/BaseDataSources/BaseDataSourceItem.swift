@@ -22,6 +22,8 @@ class BaseDataSourceItem: NSObject {
     
     var syncStatus: SyncWrapperedStatus = .notSynced
     
+    var syncStatuses = [String]()
+    
     var isLocalItem: Bool
     
     var md5: String = ""
@@ -45,7 +47,6 @@ class BaseDataSourceItem: NSObject {
         self.fileType = fileType
         self.syncStatus = syncStatus
         self.isLocalItem = isLocalItem
-        
         //super.init()
     }
     
@@ -63,6 +64,10 @@ class BaseDataSourceItem: NSObject {
     
     static func == (left: BaseDataSourceItem, right: BaseDataSourceItem) -> Bool {
         return left.hashValue == right.hashValue
+    }
+    
+    func isSynced() -> Bool {
+        return syncStatuses.contains(SingletonStorage.shared().getUnigueUserID())
     }
     
 }

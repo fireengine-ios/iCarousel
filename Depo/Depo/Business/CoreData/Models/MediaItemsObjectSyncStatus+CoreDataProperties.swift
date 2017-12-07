@@ -13,5 +13,6 @@ extension MediaItemsObjectSyncStatus {
     }
     
     @NSManaged public var userID: String?
+    @NSManaged public var item: MediaItem?
     
 }

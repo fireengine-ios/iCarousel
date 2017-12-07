@@ -142,6 +142,7 @@ final class UploadService: BaseRequestService {
         let operations: [UploadOperations] = itemsToUpload.flatMap {
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { (finishedOperation) in
                 finishedOperation.item.syncStatus = .synced
+                finishedOperation.item.syncStatuses.append(SingletonStorage.shared().getUnigueUserID())
                 finishedOperation.item.isLocalItem = false
                 CoreDataStack.default.appendOnlyNewItems(items: [finishedOperation.item])
                 
@@ -218,6 +219,7 @@ final class UploadService: BaseRequestService {
             let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { (finishedOperation) in
                 
                 finishedOperation.item.syncStatus = .synced
+                finishedOperation.item.syncStatuses.append(SingletonStorage.shared().getUnigueUserID())
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)//appendOnlyNewItems(items: [finishedOperation.item])
                 
                 guard self.allSyncOperationsCount != 0 else {

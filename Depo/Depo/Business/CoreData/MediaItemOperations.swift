@@ -74,6 +74,16 @@ extension CoreDataStack {
         alreadySavedMediaItems.forEach({ savedItem in
             //for locals
             savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
+            
+            if let set = savedItem.objectSyncStatus{
+                savedItem.removeFromObjectSyncStatus(set)
+            }
+            
+            for userID in item.syncStatuses{
+                savedItem.addToObjectSyncStatus(MediaItemsObjectSyncStatus(userID: userID, context: backgroundContext))
+            }
+            
+            savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
         })
         saveDataForContext(context: backgroundContext)
     }
