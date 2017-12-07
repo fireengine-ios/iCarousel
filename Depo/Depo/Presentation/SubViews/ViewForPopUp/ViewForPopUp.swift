@@ -20,6 +20,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     var tableView: UITableView = UITableView()
     var viewsArray = [BaseView]()
     var notPermittedPopUpViewTypes = Set<String>()
+    var isEnable: Bool = true
     
     var viewsByType = [OperationType: BaseView]()
     
@@ -160,6 +161,11 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     //MARK: WrapItemOperationViewProtocol
     
     private func checkIsThisIsPermittedType(type: OperationType) -> Bool{
+        
+        if !isEnable{
+            return false
+        }
+        
         if notPermittedPopUpViewTypes.count == 0 {
             return true
         }

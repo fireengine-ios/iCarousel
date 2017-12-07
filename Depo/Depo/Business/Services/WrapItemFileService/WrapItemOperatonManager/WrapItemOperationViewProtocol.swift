@@ -18,5 +18,7 @@ protocol WrapItemOperationViewProtocol{
     
     func addNotPermittedPopUpViewTypes(types: [OperationType])
     
+    var isEnable: Bool { get set }
+    
 }
 

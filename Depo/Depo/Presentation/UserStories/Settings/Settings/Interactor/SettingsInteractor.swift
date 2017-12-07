@@ -26,10 +26,14 @@ class SettingsInteractor: SettingsInteractorInput {
         return userInfoResponse?.email?.isEmpty ?? false
     }
     
+    func updateUserInfo(mail: String) {
+         userInfoResponse?.email = mail
+    }
+    
     func getCellsData(){
         
         let securityCells = [TextConstants.settingsViewCellActivityTimline,
-                             TextConstants.settingsViewCellRecentlyDeletedFiles,
+//                             TextConstants.settingsViewCellRecentlyDeletedFiles,
                              TextConstants.settingsViewCellUsageInfo,
                              TextConstants.settingsViewCellPasscode]
         

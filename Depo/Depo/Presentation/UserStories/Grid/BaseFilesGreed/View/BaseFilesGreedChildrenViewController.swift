@@ -19,15 +19,18 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
             if mainTitle != "" {
                 self.subTitle = output.getSortTypeString()
             }
+        
             self.setTitle(withString: mainTitle, andSubTitle: subTitle)
         
     }
 
     override func startSelection(with numberOfItems: Int) {
+        underNavBarBar?.setSorting(enabled: false)
         self.navigationItem.leftBarButtonItem = cancelSelectionButton!
     }
     
     override func stopSelection() {
+        underNavBarBar?.setSorting(enabled: true)
         self.navigationItem.leftBarButtonItem = nil
         if mainTitle != "" {
             self.subTitle = output.getSortTypeString()

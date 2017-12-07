@@ -150,16 +150,16 @@
 		7C1F89921F70FFDF00740177 /* ViewForPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */; };
 		7C1F89951F7140AF00740177 /* PopUpSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */; };
 		7C1F89961F7140AF00740177 /* PopUpSwipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */; };
-		7C233CCF1FD51E290013CCA0 /* UploadFromLifeBoxConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC11FD51E280013CCA0 /* UploadFromLifeBoxConfigurator.swift */; };
 		7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */; };
 		7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC41FD51E280013CCA0 /* UploadFromLifeBoxModuleInput.swift */; };
-		7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxPresenter.swift */; };
+		7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift */; };
 		7C233CD31FD51E290013CCA0 /* UploadFromLifeBoxRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC71FD51E280013CCA0 /* UploadFromLifeBoxRouterInput.swift */; };
 		7C233CD41FD51E290013CCA0 /* UploadFromLifeBoxRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC81FD51E280013CCA0 /* UploadFromLifeBoxRouter.swift */; };
 		7C233CD51FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */; };
 		7C233CD61FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCB1FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift */; };
 		7C233CD71FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCD1FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift */; };
 		7C233CD81FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCE1FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift */; };
+		7C233CDA1FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CD91FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift */; };
 		7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */; };
 		7C241EFA1F960E1C00322149 /* CollectionViewCellForStoryPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C241EF91F960E1B00322149 /* CollectionViewCellForStoryPhoto.xib */; };
 		7C2F56F61F1CC0FE0014870B /* ActionsMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */; };
@@ -503,8 +503,6 @@
 		AF744E3CD7A5DD8E7D6C30BB /* UserInfoSubViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021DEBE120BC8745E74C3B8B /* UserInfoSubViewViewController.swift */; };
 		B02F86BF64856149537A10F3 /* SyncContactsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD14ED875730C75E5AD4E0 /* SyncContactsRouterInput.swift */; };
 		B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */; };
-		B51FD62E1FD13C92000344BD /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51FD62D1FD13C92000344BD /* NotificationService.swift */; };
-		B51FD6321FD13C92000344BD /* Depo_LifeTech_NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B51FD62B1FD13C92000344BD /* Depo_LifeTech_NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B51FD6391FD18FDB000344BD /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD6261FD135CB000344BD /* libMPush.a */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B6EC22F9A78F97B7AC7E1F69 /* LikeFilterModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEC5B817C9C02047F7D9C32 /* LikeFilterModuleInput.swift */; };
@@ -1026,6 +1024,8 @@
 		ED00E6080A9C91B4A3F19BDC /* ActionsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */; };
 		EDD8CBFAF2355BDB13376953 /* ActivityTimelinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBFD42348DB7E7086DFA5D8 /* ActivityTimelinePresenter.swift */; };
 		EF1B60441FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */; };
+		EF1B60461FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B60451FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift */; };
+		EF1B60481FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B60471FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift */; };
 		EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA23BA709900F6EF8480710 /* FeedbackViewModuleInput.swift */; };
 		EF9B85CF5585F042A8D5103F /* LikeFilterInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A4E83DDEBA92B2A944CD37 /* LikeFilterInteractorInput.swift */; };
 		EFA74F9E1FBF371200CF946E /* PrintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74F9D1FBF371100CF946E /* PrintService.swift */; };
@@ -1056,13 +1056,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B51FD6301FD13C92000344BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B51FD62A1FD13C92000344BD;
-			remoteInfo = Depo_LifeTech_NotificationService;
-		};
 		CE79E4AA1F695DA200C1F151 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -1079,7 +1072,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				B51FD6321FD13C92000344BD /* Depo_LifeTech_NotificationService.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1334,16 +1326,16 @@
 		7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForPopUp.swift; sourceTree = "<group>"; };
 		7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpSwipeCell.swift; sourceTree = "<group>"; };
 		7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpSwipeCell.xib; sourceTree = "<group>"; };
-		7C233CC11FD51E280013CCA0 /* UploadFromLifeBoxConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxConfigurator.swift; sourceTree = "<group>"; };
 		7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInitializer.swift; sourceTree = "<group>"; };
 		7C233CC41FD51E280013CCA0 /* UploadFromLifeBoxModuleInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxModuleInput.swift; sourceTree = "<group>"; };
-		7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxPresenter.swift; sourceTree = "<group>"; };
+		7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxAllFilesPresenter.swift; sourceTree = "<group>"; };
 		7C233CC71FD51E280013CCA0 /* UploadFromLifeBoxRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxRouterInput.swift; sourceTree = "<group>"; };
 		7C233CC81FD51E280013CCA0 /* UploadFromLifeBoxRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxRouter.swift; sourceTree = "<group>"; };
 		7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInteractor.swift; sourceTree = "<group>"; };
 		7C233CCB1FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInteractorIO.swift; sourceTree = "<group>"; };
 		7C233CCD1FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxViewIO.swift; sourceTree = "<group>"; };
 		7C233CCE1FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxViewController.swift; sourceTree = "<group>"; };
+		7C233CD91FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxPhotosPresenter.swift; sourceTree = "<group>"; };
 		7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForStoryPhoto.swift; sourceTree = "<group>"; };
 		7C241EF91F960E1B00322149 /* CollectionViewCellForStoryPhoto.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCellForStoryPhoto.xib; sourceTree = "<group>"; };
 		7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionsMenuView.xib; sourceTree = "<group>"; };
@@ -1796,7 +1788,6 @@
 		B3B1A822B7BCC165EA81C54D /* ExpandStorageInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageInteractorOutput.swift; sourceTree = "<group>"; };
 		B51FD6251FD135CA000344BD /* MPush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPush.h; sourceTree = "<group>"; };
 		B51FD6261FD135CB000344BD /* libMPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMPush.a; sourceTree = "<group>"; };
-		B51FD62B1FD13C92000344BD /* Depo_LifeTech_NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Depo_LifeTech_NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B51FD62D1FD13C92000344BD /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		B51FD62F1FD13C92000344BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -2177,6 +2168,8 @@
 		EED76B8EC80CDF294DAF95F7 /* ActivityTimelineRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineRouter.swift; sourceTree = "<group>"; };
 		EEEFEDC411CE8C9592155BE8 /* UploadedItemsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsViewInput.swift; sourceTree = "<group>"; };
 		EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoAlbumDetailInteractor.swift; sourceTree = "<group>"; };
+		EF1B60451FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSelectionMusicTabBarInteractor.swift; sourceTree = "<group>"; };
+		EF1B60471FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSelectionMusicTabBarRouter.swift; sourceTree = "<group>"; };
 		EFA74F9D1FBF371100CF946E /* PrintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintService.swift; sourceTree = "<group>"; };
 		EFA74FA11FBF378F00CF946E /* PrintPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintPresenter.swift; sourceTree = "<group>"; };
 		EFA74FA31FBF378F00CF946E /* PrintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintViewController.swift; sourceTree = "<group>"; };
@@ -2214,13 +2207,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B51FD6281FD13C92000344BD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CE51AD041EF90853005DCEE0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2292,7 +2278,6 @@
 			children = (
 				CE51B0011EF90853005DCEE0 /* Depo_LifeTech.app */,
 				CE79E4A51F695DA200C1F151 /* Depo_LifeTechUITests.xctest */,
-				B51FD62B1FD13C92000344BD /* Depo_LifeTech_NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3555,7 +3540,6 @@
 		7C233CC01FD51E280013CCA0 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
-				7C233CC11FD51E280013CCA0 /* UploadFromLifeBoxConfigurator.swift */,
 				7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */,
 			);
 			path = Configurator;
@@ -3565,7 +3549,8 @@
 			isa = PBXGroup;
 			children = (
 				7C233CC41FD51E280013CCA0 /* UploadFromLifeBoxModuleInput.swift */,
-				7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxPresenter.swift */,
+				7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift */,
+				7C233CD91FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -4659,6 +4644,7 @@
 		8C6EF8641F348B5C002AC795 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				EF1B60451FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift */,
 				8C6EF8651F348B5C002AC795 /* BottomSelectionTabBarInteractor.swift */,
 				8C6EF8661F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift */,
 				8C6EF8671F348B5C002AC795 /* BottomSelectionTabBarInteractorOutput.swift */,
@@ -4690,6 +4676,7 @@
 			children = (
 				8C6EF86F1F348B5C002AC795 /* BottomSelectionTabBarRouter.swift */,
 				8C6EF8701F348B5C002AC795 /* BottomSelectionTabBarRouterInput.swift */,
+				EF1B60471FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -7130,23 +7117,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B51FD62A1FD13C92000344BD /* Depo_LifeTech_NotificationService */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B51FD6331FD13C92000344BD /* Build configuration list for PBXNativeTarget "Depo_LifeTech_NotificationService" */;
-			buildPhases = (
-				B51FD6271FD13C92000344BD /* Sources */,
-				B51FD6281FD13C92000344BD /* Frameworks */,
-				B51FD6291FD13C92000344BD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Depo_LifeTech_NotificationService;
-			productName = Depo_LifeTech_NotificationService;
-			productReference = B51FD62B1FD13C92000344BD /* Depo_LifeTech_NotificationService.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE51AFFC1EF90853005DCEE0 /* Build configuration list for PBXNativeTarget "Depo_LifeTech" */;
@@ -7164,7 +7134,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B51FD6311FD13C92000344BD /* PBXTargetDependency */,
 			);
 			name = Depo_LifeTech;
 			productName = Depo;
@@ -7199,11 +7168,6 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = LifeTech;
 				TargetAttributes = {
-					B51FD62A1FD13C92000344BD = {
-						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = 7A7F3AW7RP;
-						ProvisioningStyle = Automatic;
-					};
 					CE51AAF51EF90853005DCEE0 = {
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
@@ -7246,19 +7210,11 @@
 			targets = (
 				CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */,
 				CE79E4A41F695DA200C1F151 /* Depo_LifeTechUITests */,
-				B51FD62A1FD13C92000344BD /* Depo_LifeTech_NotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B51FD6291FD13C92000344BD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CE51AD1D1EF90853005DCEE0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -7425,7 +7381,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */ = {
@@ -7509,14 +7465,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B51FD6271FD13C92000344BD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B51FD62E1FD13C92000344BD /* NotificationService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CE51AAFD1EF90853005DCEE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -7560,6 +7508,7 @@
 				CEE005761F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				7CDABD0A1F1E3A6300C8CC16 /* UserProfileModuleInput.swift in Sources */,
 				CE51AB361EF90853005DCEE0 /* CustomIOS7AlertView.m in Sources */,
+				EF1B60481FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				CE8F44F71F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.swift in Sources */,
 				8C7786881F3F38D9005CB432 /* MusicBar.swift in Sources */,
 				CEAE3FF21EFD517300A405B2 /* CustomTabBarItem.swift in Sources */,
@@ -7913,7 +7862,6 @@
 				CE51ACE41EF90853005DCEE0 /* IntroduceInteractor.swift in Sources */,
 				EFA74FAE1FBF378F00CF946E /* PrintPresenter.swift in Sources */,
 				CE51ACE51EF90853005DCEE0 /* IntroduceRouterInput.swift in Sources */,
-				7C233CCF1FD51E290013CCA0 /* UploadFromLifeBoxConfigurator.swift in Sources */,
 				CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */,
 				8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */,
 				7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */,
@@ -7949,6 +7897,7 @@
 				7C66E8B01F979C3300D98F27 /* CreateStoryPreviewRouterInput.swift in Sources */,
 				CE51ACF01EF90853005DCEE0 /* SmartTimerLabel.swift in Sources */,
 				7C66E8A91F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift in Sources */,
+				EF1B60461FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
 				CE51ACF11EF90853005DCEE0 /* PhoneVereficationInteractor.swift in Sources */,
 				D47864001F3F30BD00EFDC6D /* RoundedProgressView.swift in Sources */,
 				EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */,
@@ -7992,6 +7941,7 @@
 				7CFE92F81F5EDDE4008A3B72 /* LanguageModel.swift in Sources */,
 				CE274D611FB4806400CD53D7 /* Equatable+Contains.swift in Sources */,
 				CE95ED4A1F516736002F923A /* HelpAndSupportSectionTableViewCell.swift in Sources */,
+				7C233CDA1FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
 				CE6DE7591FCBE84100C23CBD /* FBParametrs.swift in Sources */,
 				CE51AD011EF90853005DCEE0 /* ForgotPasswordRouter.swift in Sources */,
 				7C1F89881F6FFE0300740177 /* ProgressPopUp.swift in Sources */,
@@ -8070,7 +8020,7 @@
 				39EB93C2291B9CEB5172FB15 /* ExpandStorageInitializer.swift in Sources */,
 				142A29D90D8A7CF39AC8F82C /* UploadedItemsViewInput.swift in Sources */,
 				92CB379A913C184F1ED25C74 /* UploadedItemsViewOutput.swift in Sources */,
-				7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxPresenter.swift in Sources */,
+				7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				7CFE92E81F5D85A5008A3B72 /* DropDovnView.swift in Sources */,
 				CE6DE7531FCBE84100C23CBD /* DropboxParametrs.swift in Sources */,
 				7C6E2F901F31E4F800536DB6 /* CreateStoryNameInteractor.swift in Sources */,
@@ -8426,11 +8376,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B51FD6311FD13C92000344BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B51FD62A1FD13C92000344BD /* Depo_LifeTech_NotificationService */;
-			targetProxy = B51FD6301FD13C92000344BD /* PBXContainerItemProxy */;
-		};
 		CE79E4AB1F695DA200C1F151 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */;
@@ -8726,114 +8671,6 @@
 				SDKROOT = iphoneos;
 				SWIFT_INCLUDE_PATHS = "";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Enterprise;
-		};
-		B51FD6341FD13C92000344BD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Depo_LifeTech_NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.Depo-LifeTech-NotificationService";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		B51FD6351FD13C92000344BD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Depo_LifeTech_NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.Depo-LifeTech-NotificationService";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		B51FD6361FD13C92000344BD /* AppStore */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Depo_LifeTech_NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.Depo-LifeTech-NotificationService";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = AppStore;
-		};
-		B51FD6371FD13C92000344BD /* Enterprise */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Depo_LifeTech_NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.Depo-LifeTech-NotificationService";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Enterprise;
 		};
@@ -9136,17 +8973,6 @@
 				051E1E1E19CAC2F900FD1E03 /* Release */,
 				0555EF2019F938350068F4CC /* AppStore */,
 				0555EF2319F9383C0068F4CC /* Enterprise */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B51FD6331FD13C92000344BD /* Build configuration list for PBXNativeTarget "Depo_LifeTech_NotificationService" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B51FD6341FD13C92000344BD /* Debug */,
-				B51FD6351FD13C92000344BD /* Release */,
-				B51FD6361FD13C92000344BD /* AppStore */,
-				B51FD6371FD13C92000344BD /* Enterprise */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

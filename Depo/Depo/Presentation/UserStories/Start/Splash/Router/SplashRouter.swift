@@ -26,4 +26,9 @@ class SplashRouter: SplashRouterInput {
         router.pushViewControllerWithoutAnimation(viewController: temsAndServices)
     }
     
+    func showNetworkError() {
+        CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.errorConnectedToNetwork,
+                                                   okButtonText:TextConstants.ok)
+    }
+    
 }

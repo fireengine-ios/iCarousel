@@ -19,4 +19,5 @@ protocol SettingsInteractorInput {
     var isPasscodeEmpty: Bool { get }
     var isTurkcellUser: Bool { get }
     var isEmptyMail: Bool { get }
+    func updateUserInfo(mail: String)
 }

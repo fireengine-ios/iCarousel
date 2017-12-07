@@ -1,28 +1,26 @@
 //
-//  UploadFromLifeBoxUploadFromLifeBoxPresenter.swift
-//  Depo
+//  UploadFromLifeBoxPhotosPresenter.swift
+//  Depo_LifeTech
 //
-//  Created by Oleg on 01/12/2017.
+//  Created by Oleg on 05.12.2017.
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class UploadFromLifeBoxPresenter: BaseFilesGreedPresenter, UploadFromLifeBoxInteractorOutput {
+import UIKit
+
+class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeBoxInteractorOutput {
     
     override func viewIsReady(collectionView: UICollectionView) {
-        dataSource = PhotoSelectionDataSource()
+        //dataSource = PhotoSelectionDataSource()
         
         super.viewIsReady(collectionView: collectionView)
         
         dataSource.canReselect = true
-        dataSource.maxSelectionCount = NumericConstants.maxNumberPhotosInStory
         dataSource.enableSelectionOnHeader = false
         dataSource.setSelectionState(selectionState: true)
         dataSource.updateDisplayngType(type: .greed)
-        dataSource.preferedCellReUseID = CollectionViewCellsIdsConstant.cellForStoryImage
-    }
-    
-    override func isArrayDataSource() -> Bool{
-        return true
+        dataSource.preferedCellReUseID = CollectionViewCellsIdsConstant.cellForImage
+        
     }
     
     override func viewWillDisappear() {
@@ -47,7 +45,8 @@ class UploadFromLifeBoxPresenter: BaseFilesGreedPresenter, UploadFromLifeBoxInte
                 return
             }
             if let uploadInteractor = interactor as? UploadFromLifeBoxInteractorInput{
-                uploadInteractor
+                startAsyncOperation()
+                uploadInteractor.onUploadItems(items: wrapArray)
             }
         }
     }
@@ -56,4 +55,13 @@ class UploadFromLifeBoxPresenter: BaseFilesGreedPresenter, UploadFromLifeBoxInte
         //DBDROP
         super.getContentWithSuccess(array: array)
     }
+    
+    func uploadOperationSuccess(){
+        guard let uploadView = view as? UploadFromLifeBoxViewInput else{
+            return
+        }
+        uploadView.hideView()
+    }
+    
 }
+

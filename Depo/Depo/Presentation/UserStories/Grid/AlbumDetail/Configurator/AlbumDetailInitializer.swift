@@ -28,11 +28,11 @@ class AlbumDetailModuleInitializer: NSObject {
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid)],
                                bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presentor, interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .select],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .delete, .removeAlbum, .albumDetails, .select],
                                                                                      selectionModeTypes: [.createStory, .delete]),
                                topBarConfig: nil)
         
-        viewController.mainTitle = album.name
+        viewController.mainTitle = album.name ?? ""
         
         return viewController
     }

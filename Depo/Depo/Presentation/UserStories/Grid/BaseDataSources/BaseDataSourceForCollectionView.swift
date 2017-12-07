@@ -137,11 +137,25 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         return nil
     }
     
+    private func isOnlyNonLocal(filters: [GeneralFilesFiltrationType]) -> Bool {
+        for filter in filters {
+            switch filter {
+            case   .localStatus(.nonLocal):
+                return true
+            default:
+                break
+            }
+        }
+        return false
+       
+    }
+    
     private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
         var tempoArray = originalItemsArray
         var tempoLocalArray = [WrapData]()
         
-        if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters) {
+        if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters),
+            !isOnlyNonLocal(filters: unwrapedFilters) {
             switch specificFilters {
             case .video:
                 tempoLocalArray = allLocalItems.filter{$0.fileType == .video}
@@ -680,7 +694,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
-                if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol{
+                if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol {
                     DispatchQueue.main.async {
                         cellToChange.setImage(image: image)
                     }

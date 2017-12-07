@@ -17,10 +17,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
     
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
+    var alertSheetExcludeTypes = [ElementTypes]()
     
     func viewIsReady(view: UIView) {
         interactor.onViewIsReady()
-         bottomBarPresenter?.show(animated: false, onView: view)
+        bottomBarPresenter?.show(animated: false, onView: view)
 //        if inte
     }
     
@@ -66,17 +67,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func moreButtonPressed(sender: Any?, inAlbumState: Bool) {
         let currentItem = interactor.allItems[interactor.currentItemIndex]
         var actions = [ElementTypes]()
-        var excludeTypes : [ElementTypes] = [.delete]
         
         switch currentItem.fileType {
         case .audio, .video, .image:
             actions = ActionSheetPredetermendConfigs.photoVideoDetailActions
         case .allDocs:
             actions = ActionSheetPredetermendConfigs.documetsDetailActions
-        case .image:
-            if inAlbumState {
-                excludeTypes = [ElementTypes]()
-            }
         default:
             break
         }
@@ -84,7 +80,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
                                          items: [currentItem],
                                          presentedBy: sender,
                                          onSourceView: nil,
-                                         excludeTypes: excludeTypes)
+                                         excludeTypes: alertSheetExcludeTypes)
     }
     
     //MARK: presenter output
