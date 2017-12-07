@@ -144,6 +144,22 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                                            excludeTypes: [ElementTypes] = [ElementTypes]()) -> [UIAlertAction] {
         var filteredActionTypes = types
         
+        if let remoteItems = items?.filter({ !$0.isLocalItem}) as? [Item] {
+            if remoteItems.contains(where: { !$0.favorites}) {
+                filteredActionTypes.append(.addToFavorites)
+            } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
+                filteredActionTypes.remove(at: addToFavoritesIndex)
+            }
+            
+            if remoteItems.contains(where: { $0.favorites }) {
+                filteredActionTypes.append(.removeFromFavorites)
+            } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
+                filteredActionTypes.remove(at: removeFromFavorites)
+            }
+        }
+        
+       
+        
         if (items?.contains(where: { return !$0.isLocalItem }) ?? false) {
             filteredActionTypes.append(.delete)
         }
