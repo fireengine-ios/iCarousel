@@ -100,8 +100,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         case .denied:
             completion(false, status)
             if redirectToSettings {
-                DispatchQueue.main.async { [weak self] in
-                    self?.showAccessAlert()
+                DispatchQueue.main.async {
+                    self.showAccessAlert()
                 }
             }
         }
@@ -128,8 +128,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func getAllAlbums(completion: @escaping (_ albums: [AlbumItem])->Void) {
-        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: true) { (accessGranted, _) in
-            guard accessGranted else {
+        askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] (accessGranted, _) in
+            guard accessGranted, let `self` = self else {
                 completion([])
                 return
             }
