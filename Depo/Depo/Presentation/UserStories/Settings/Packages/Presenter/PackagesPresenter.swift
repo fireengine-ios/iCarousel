@@ -47,6 +47,7 @@ extension PackagesPresenter: PackagesViewOutput {
     }
     
     func viewIsReady() {
+        view?.startActivityIndicator()
         interactor.getActiveSubscriptions()
     }
     
@@ -61,6 +62,7 @@ extension PackagesPresenter: PackagesViewOutput {
         case .subTurkcell:
             view?.showCancelOfferAlert(for: accountType)
         case .all:
+            /// maybe will be need view?.startActivityIndicator() + stop
             if let offer = plan.model as? OfferApple {
                 interactor.activate(offerApple: offer)
             } else {
@@ -174,22 +176,27 @@ extension PackagesPresenter: PackagesInteractorOutput {
         accountType = accountType(for: accountTypeString, subscriptionPlans: activeSubscriptions)
         switch accountType {
         case .turkcell:
+            view?.startActivityIndicator()
             interactor.checkJobExists()
         case .subTurkcell:
             break
         case .all:
+            view?.startActivityIndicator()
             interactor.getOfferApples()
         }
+        view?.stopActivityIndicator()
     }
     
     func successed(offers: [OfferServiceResponse]) {
         let subscriptionPlans = interactor.convertToSubscriptionPlans(offers: offers)
         view?.display(subscriptionPlans: subscriptionPlans)
+        view?.stopActivityIndicator()
     }
     
     func successed(offerApples: [OfferApple]) {
         let subscriptionPlans = interactor.convertToSubscriptionPlans(offerApples: offerApples)
         view?.display(subscriptionPlans: subscriptionPlans)
+        view?.stopActivityIndicator()
     }
     
     func successed(offerApple: OfferApple) {
