@@ -19,7 +19,7 @@ class ActivityTimelinePresenter: BasePresenter, ActivityTimelineModuleInput {
 }
 extension ActivityTimelinePresenter: ActivityTimelineViewOutput {
     func viewIsReady() {
-        startAsyncOperationDisableScreen()
+        startAsyncOperation()
         updateForPullToRefresh()
     }
     func updateForPullToRefresh() {
@@ -35,10 +35,10 @@ extension ActivityTimelinePresenter: ActivityTimelineInteractorOutput {
     }
     func refreshTimelineActivities(with array: [ActivityTimelineServiceResponse]) {
         view.refreshTimelineActivities(with: array)
-        compliteAsyncOperationEnableScreen()
+        asyncOperationSucces()
     }
     func failedTimelineActivities(with error: ErrorResponse) {
         view.endInfinityScrollWithNoMoreData()
-        compliteAsyncOperationEnableScreen()
+        asyncOperationSucces()
     }
 }
