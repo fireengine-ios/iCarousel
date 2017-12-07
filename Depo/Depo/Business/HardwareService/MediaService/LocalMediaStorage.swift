@@ -67,7 +67,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
 //        }
     }
     
-    func photoLibraryIsAvalible() -> Bool {
+    func photoLibraryIsAvailible() -> Bool {
         let status = PHPhotoLibrary.authorizationStatus()
         return status == .authorized
     }
@@ -109,7 +109,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     var fetchResult: PHFetchResult<PHAsset>!
     func getAllImagesAndVideoAssets() -> [PHAsset] {
-        guard photoLibraryIsAvalible() else {
+        guard photoLibraryIsAvailible() else {
             return []
         }
         
@@ -230,7 +230,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     // MARK:  insert remove Asset
     
     func removeAssets(deleteAsset: [PHAsset], success: FileOperation?, fail: FailResponse?) {
-        guard photoLibraryIsAvalible() else {
+        guard photoLibraryIsAvailible() else {
             fail?(.failResponse(nil))
             return
         }
@@ -257,7 +257,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
      * 
      */
     func appendToAlboum(fileUrl: URL, type:PHAssetMediaType, album:String?, success: FileOperation?, fail: FailResponse?) {
-        guard photoLibraryIsAvalible() else {
+        guard photoLibraryIsAvailible() else {
             fail?(.failResponse(nil))
             return
         }

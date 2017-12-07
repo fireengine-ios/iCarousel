@@ -43,7 +43,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     private var assetCache: PHCachingImageManager? {
         var cachingManager: PHCachingImageManager?
-        if LocalMediaStorage.default.photoLibraryIsAvalible() {
+        if LocalMediaStorage.default.photoLibraryIsAvailible() {
             cachingManager = PHCachingImageManager()
         }
         return cachingManager

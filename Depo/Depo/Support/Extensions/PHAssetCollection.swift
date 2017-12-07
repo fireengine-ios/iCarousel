@@ -10,7 +10,7 @@ import Photos
 
 extension PHAssetCollection {
     var photosCount: Int {
-        guard LocalMediaStorage.default.photoLibraryIsAvalible() else {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             return 0
         }
         
