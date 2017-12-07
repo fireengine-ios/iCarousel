@@ -437,6 +437,7 @@ struct TextConstants {
     static let feedbackViewSubTitle = "Feedback Form"
     static let feedbackViewSuggestion = "Suggestion"
     static let feedbackViewComplaint = "Complaint"
+    static let feedbackViewSubjectFormat = "%@ about Lifebox"
     static let feedbackViewLanguageLabel = "You need to specify your language preference so that we can serve you better."
     static let feedbackViewSendButton = "Send"
     static let feedbackViewSelect = "Select"
