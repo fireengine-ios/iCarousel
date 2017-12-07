@@ -28,7 +28,7 @@ final class PasscodeSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setTitle(withString: TextConstants.passcode)
+        setTitle(withString: TextConstants.passcodeLifebox)
         
         let biometricsText = output.isAvailableFaceID ? TextConstants.passcodeEnableFaceID : TextConstants.passcodeEnableTouchID
         biometricsLabel.text = biometricsText
