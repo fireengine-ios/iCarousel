@@ -43,10 +43,20 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                     }
                 }
                 
+                items.sort {
+                    guard let firstDate = $0.creationDate else {
+                        return false
+                    }
+                    guard let secondDate = $1.creationDate else {
+                        return true
+                    }
+                    
+                    return firstDate > secondDate
+                }
+                
                 self?.output.getContentWithSuccess(array: [items])
             }
         }
-        
     }
     
     func addToUploadOnDemandItems(items: [BaseDataSourceItem]){
