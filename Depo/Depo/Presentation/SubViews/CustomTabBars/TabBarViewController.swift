@@ -538,7 +538,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             //создание альбома
             let router = RouterVC()
             let controller = router.createNewAlbum()
-            router.pushViewController(viewController: controller)
+            let nController = UINavigationController(rootViewController: controller)
+            router.presentViewController(controller: nController)
             return
         }
         if (button == uploadFromLifebox){
