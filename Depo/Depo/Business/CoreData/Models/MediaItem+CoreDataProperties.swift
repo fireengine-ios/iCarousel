@@ -48,23 +48,9 @@ extension MediaItem {
     }
     
     public var syncStatusesArray: [String] {
-        guard let array = objectSyncStatus?.allObjects else{
-            return [String]()
-        }
-        
-        var stingArray = [String]()
-        for object in array{
-            
-            if let syncObject = object as? MediaItemsObjectSyncStatus{
-                stingArray.append(syncObject.userID ?? "")
-            }
-        }
-        
-        return stingArray
-        
-//        return self.objectSyncStatus?.flatMap({ (syncStatus) -> String? in
-//            return (syncStatus as? MediaItemsObjectSyncStatus)?.userID
-//        }) ?? []
+        return objectSyncStatus?.allObjects.flatMap({ (syncStatus) -> String? in
+            return (syncStatus as? MediaItemsObjectSyncStatus)?.userID
+        }) ?? []
     }
 }
 

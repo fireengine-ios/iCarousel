@@ -67,7 +67,7 @@ class BaseDataSourceItem: NSObject {
     }
     
     func isSynced() -> Bool {
-        return syncStatuses.contains(SingletonStorage.shared().getUnigueUserID())
+        return syncStatuses.contains(SingletonStorage.shared.unigueUserID)
     }
     
 }

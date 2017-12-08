@@ -531,7 +531,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         fileType = FileType(type: remote.contentType, fileName: name)
         isFolder = remote.folder
         syncStatus = .synced
-        syncStatuses.append(SingletonStorage.shared().getUnigueUserID())
+        syncStatuses.append(SingletonStorage.shared.unigueUserID)
         creationDate = remote.createdDate
         
         parent = remote.parent

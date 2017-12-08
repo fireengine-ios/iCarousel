@@ -317,7 +317,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func logout(success:SuccessLogout?) {
-        SingletonStorage.shared().accountInfo = nil
+        SingletonStorage.shared.accountInfo = nil
         let successResponse  =  {
             let s = LoginResponse(withJSON: nil)
             /// in LoginResponse(withJSON: nil)

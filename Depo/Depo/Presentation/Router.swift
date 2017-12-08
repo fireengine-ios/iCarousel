@@ -297,14 +297,14 @@ class RouterVC: NSObject {
     
     //MARK: Home Page
     var homePageScreen: UIViewController? {
-        if (!SingletonStorage.shared().isAppraterInited) {
+        if (!SingletonStorage.shared.isAppraterInited) {
             AppRater.sharedInstance().daysUntilPrompt = 5
             AppRater.sharedInstance().launchesUntilPrompt = 10
             AppRater.sharedInstance().remindMeDaysUntilPrompt = 15
             AppRater.sharedInstance().remindMeLaunchesUntilPrompt = 10
             AppRater.sharedInstance().appLaunched()
             
-            SingletonStorage.shared().isAppraterInited = true
+            SingletonStorage.shared.isAppraterInited = true
         }
         
         let controller = HomePageModuleInitializer.initializeViewController(with: "HomePage")

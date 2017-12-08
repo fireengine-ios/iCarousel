@@ -201,7 +201,7 @@ class SyncService: NSObject {
                     
                     let localItem = self_.localItemsArray[index_]
                     //localItem.syncStatus = .synced
-                    localItem.syncStatuses.append(    SingletonStorage.shared().getUnigueUserID())
+                    localItem.syncStatuses.append(    SingletonStorage.shared.unigueUserID)
                     CoreDataStack.default.updateLocalItemSyncStatus(item: localItem)
                     
                     self_.localItemsArray.remove(at: index_)

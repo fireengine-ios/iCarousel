@@ -139,7 +139,7 @@ extension CoreDataStack {
             //< correct
             return item1.fileSizeValue < item2.fileSizeValue
         }
-        let currentUserID = SingletonStorage.shared().getUnigueUserID()
+        let currentUserID = SingletonStorage.shared.unigueUserID
         
         let filtredArray = sortedItems.filter {
             
