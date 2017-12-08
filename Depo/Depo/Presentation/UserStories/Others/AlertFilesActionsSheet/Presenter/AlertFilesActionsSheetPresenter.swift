@@ -203,7 +203,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .download:
                 action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
-                    
                     self.interactor.download(item: currentItems)
                 })
             case .delete:

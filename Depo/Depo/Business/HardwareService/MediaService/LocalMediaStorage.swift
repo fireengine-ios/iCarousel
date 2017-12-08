@@ -256,43 +256,94 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
      * if album = nil put to camera rool
      * 
      */
-    func appendToAlboum(fileUrl: URL, type:PHAssetMediaType, album:String?, success: FileOperation?, fail: FailResponse?) {
+    func appendToAlboum(fileUrl: URL, type: PHAssetMediaType, album: String?, success: FileOperation?, fail: FailResponse?) {
         guard photoLibraryIsAvailible() else {
             fail?(.failResponse(nil))
             return
         }
         
+        var assetPlaceholder: PHObjectPlaceholder?
         PHPhotoLibrary.shared().performChanges({
             switch type {
                 case .image:
-                    self.createRequestAppendImageToAlbum(fileUrl: fileUrl)
+                    assetPlaceholder = self.createRequestAppendImageToAlbum(fileUrl: fileUrl)
                 case .video:
-                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileUrl)
+                    let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileUrl)
+                    assetPlaceholder = request?.placeholderForCreatedAsset
                 default:
                 fail?(.string("Only for photo & Video"))
             }
             
         }, completionHandler: { (status, error) in
-            
-            if (status) {
+            if status {
+                if let album = album, let assetPlaceholder = assetPlaceholder {
+                    self.add(asset: assetPlaceholder.localIdentifier, to: album)
+                }
+                
                 success?()
             } else {
                 fail?(.error(error!))
             }
         })
+
     }
     
-    fileprivate func createRequestAppendImageToAlbum(fileUrl: URL) {
+    fileprivate func add(asset assetIdentifier: String, to album: String) {
+        if let collection = loadAlbum(album) {
+            add(asset: assetIdentifier, to: collection)
+        } else {
+            createAlbum(album, completion: { (collection) in
+                if let collection = collection {
+                    self.add(asset: assetIdentifier, to: collection)
+                }
+            })
+        }
+        
+    }
+    
+    fileprivate func createRequestAppendImageToAlbum(fileUrl: URL) -> PHObjectPlaceholder? {
         do {
             if let image = try UIImage(data: Data(contentsOf: fileUrl)),
                let data = UIImageJPEGRepresentation(image, 1) {
                 try data.write(to: fileUrl)
-                PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: fileUrl)
+                let request = PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: fileUrl)
+                return request?.placeholderForCreatedAsset
             }
             
         } catch let e {
             print(e.localizedDescription)
         }
+        return nil
+    }
+    
+    fileprivate func add(asset assetIdentifier: String, to collection: PHAssetCollection) {
+        let assetRequest = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil)
+        PHPhotoLibrary.shared().performChanges({
+            let request = PHAssetCollectionChangeRequest(for: collection)
+            request?.addAssets(assetRequest)
+        }, completionHandler: nil)
+    }
+    
+    typealias AssetCollectionCompletion = (_ collection: PHAssetCollection?) -> Void
+    
+    private func createAlbum(_ name: String, completion: @escaping AssetCollectionCompletion) {
+        var assetCollectionPlaceholder: PHObjectPlaceholder?
+        PHPhotoLibrary.shared().performChanges({
+            let createAlbumRequest : PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: name)
+            assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
+        }, completionHandler: { success, error in
+            if success, let localIdentifier = assetCollectionPlaceholder?.localIdentifier {
+                let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [localIdentifier], options: nil)
+                completion(collectionFetchResult.firstObject)
+            }
+        })
+    }
+    
+    private func loadAlbum(_ name: String) -> PHAssetCollection? {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "title = %@", name)
+        let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+        return fetchResult.firstObject
     }
     
     // MARK: Copy Assets
