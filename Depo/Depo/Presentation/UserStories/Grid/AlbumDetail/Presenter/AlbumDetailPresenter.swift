@@ -15,14 +15,13 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        let router = self.router as! AlbumDetailRouter
+        guard let router = self.router as? AlbumDetailRouter else { return }
         switch type {
         case .removeFromAlbum:
             onReloadData()
         case .completelyDeleteAlbums:
             router.back()
             moduleOutput?.onAlbumDeleted()
-            break
         case .removeAlbum:
             router.back()
             moduleOutput?.onAlbumRemoved()
