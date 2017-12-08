@@ -83,3 +83,14 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 //
 //    }
 }
+
+extension AlbumsPresenter: AlbumDetailModuleOutput {
+    
+    func onAlbumRemoved() {
+        reloadData()
+    }
+    
+    func onAlbumDeleted() {
+        reloadData()
+    }
+}

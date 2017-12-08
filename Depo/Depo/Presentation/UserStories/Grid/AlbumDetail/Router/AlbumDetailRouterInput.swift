@@ -10,4 +10,6 @@ import Foundation
 
 protocol AlbumDetailRouterInput: BaseFilesGreedRouterInput {
 
+    func back()
+    
 }
