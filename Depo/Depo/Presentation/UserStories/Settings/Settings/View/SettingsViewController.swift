@@ -175,26 +175,23 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         case 0:
             switch indexPath.row {
             case 0: // back-ip contacts
-                if (settingsDelegate != nil){
+                if (settingsDelegate != nil) {
                     settingsDelegate!.goToContactSync()
-                }else{
+                } else {
                     output.goToContactSync()
                 }
-                break
             case 1: // import photos
-                if (settingsDelegate != nil){
+                if (settingsDelegate != nil) {
                     settingsDelegate?.goToIportPhotos()
-                }else{
+                } else {
                     output.goToImportPhotos()
                 }
-                break
             case 2: // auto upload
-                if (settingsDelegate != nil){
+                if (settingsDelegate != nil) {
                     settingsDelegate!.goToAutoUpload()
-                }else{
+                } else {
                     output.goToAutoApload()
                 }
-                break
             default:
                 break
             }
@@ -202,12 +199,11 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         case 1:
             switch indexPath.row {
             case 0: // my activity timeline
-                if (settingsDelegate != nil){
+                if (settingsDelegate != nil) {
                     settingsDelegate!.goToActivityTimeline()
-                }else{
+                } else {
                     output.goToActivityTimeline()
                 }
-                break
             case 1: // usage info
                 break
             case 2: /// passcode
@@ -225,12 +221,11 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         case 2:
             switch indexPath.row {
             case 0:
-                if (settingsDelegate != nil){
+                if (settingsDelegate != nil) {
                     settingsDelegate!.goToHelpAndSupport()
                 }else{
                     output.goToHelpAndSupport()
                 }
-                break
             case 1:
                 output.onLogout()
             default:

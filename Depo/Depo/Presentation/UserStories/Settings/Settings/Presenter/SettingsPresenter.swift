@@ -86,7 +86,6 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     var inNeedOfMail: Bool {
-        debugPrint("IN NEED OF MAIL \(inNeedOfMailVerefication())")
         return inNeedOfMailVerefication()
     }
     
