@@ -11,23 +11,43 @@ import UIKit
 class UsageInfoViewController: UIViewController {
     var output: UsageInfoViewOutput!
     
-    @IBOutlet weak fileprivate var currentPlanLabel: UILabel!
-    @IBOutlet weak fileprivate var memoryUsageProgressView: RoundedProgressView!
-    @IBOutlet weak fileprivate var memoryUsageLabel: UILabel!
-    @IBOutlet weak fileprivate var photosCountLabel: UILabel!
-    @IBOutlet weak fileprivate var videosCountLabel: UILabel!
-    @IBOutlet weak fileprivate var songsCountLabel: UILabel!
-    @IBOutlet weak fileprivate var docsCountLabel: UILabel!
-    @IBOutlet weak fileprivate var photosMemoryLabel: UILabel!
-    @IBOutlet weak fileprivate var videosMemoryLabel: UILabel!
-    @IBOutlet weak fileprivate var songsMemoryLabel: UILabel!
-    @IBOutlet weak fileprivate var docsMemoryLabel: UILabel!
-    @IBOutlet weak fileprivate var pricesTitleLabel: UILabel!
-    @IBOutlet weak fileprivate var notesLabel: UILabel!
+    @IBOutlet weak private var memoryUsageProgressView: RoundedProgressView! {
+        didSet {
+            memoryUsageProgressView.trackTintColor = ColorConstants.lightGrayColor
+            memoryUsageProgressView.progressTintColor = ColorConstants.greenColor
+            memoryUsageProgressView.progress = 0
+        }
+    }
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak private var currentPlanLabel: UILabel!  {
+        didSet {
+            currentPlanLabel.text = TextConstants.usageInfoQuotaInfo
+            currentPlanLabel.textColor = ColorConstants.lightText
+            currentPlanLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        }
+    }
     
-    var internetDataUsages: [InternetDataUsage] = []
+    @IBOutlet weak private var memoryUsageLabel: UILabel! {
+        didSet {
+            memoryUsageLabel.textColor = ColorConstants.textGrayColor
+            memoryUsageLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
+        }
+    }
+    
+    @IBOutlet weak private var photosCountLabel: UILabel!
+    @IBOutlet weak private var videosCountLabel: UILabel!
+    @IBOutlet weak private var songsCountLabel: UILabel!
+    @IBOutlet weak private var docsCountLabel: UILabel!
+    @IBOutlet weak private var photosMemoryLabel: UILabel!
+    @IBOutlet weak private var videosMemoryLabel: UILabel!
+    @IBOutlet weak private var songsMemoryLabel: UILabel!
+    @IBOutlet weak private var docsMemoryLabel: UILabel!
+    @IBOutlet weak private var pricesTitleLabel: UILabel!
+    @IBOutlet weak private var notesLabel: UILabel!
+    
+    @IBOutlet weak private var tableView: UITableView!
+    
+    private var internetDataUsages: [InternetDataUsage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,13 +86,12 @@ extension UsageInfoViewController: UsageInfoViewInput {
         
         
         guard let quotaBytes = usage.quotaBytes, let usedBytes = usage.usedBytes else { return }
-        memoryUsageProgressView.progress = Float(usedBytes)/Float(quotaBytes)
+        memoryUsageProgressView.progress = 1 - Float(usedBytes)/Float(quotaBytes)
         
         let quotaString = quotaBytes.bytesString
         let remaindSize = (quotaBytes - usedBytes).bytesString
         memoryUsageLabel.text = String(format: TextConstants.usageInfoBytesRemained, remaindSize, quotaString)
         
-        currentPlanLabel.text = String(format: TextConstants.usageInfoWelcome, quotaString)
         
         internetDataUsages = usage.internetDataUsage
         tableView.reloadData()
