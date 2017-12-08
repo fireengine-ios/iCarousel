@@ -146,7 +146,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete, .sync, .download],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move,.delete],
                                                style: .default, tintColor: nil)
 
         let presenter: BaseFilesGreedPresenter = DocumentsGreedPresenter()
