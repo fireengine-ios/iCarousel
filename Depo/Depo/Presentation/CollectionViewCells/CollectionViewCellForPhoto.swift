@@ -25,12 +25,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     static let borderW: CGFloat = 3
     
-    var isShowSyncStatus: Bool = true {
-        didSet {
-            cloudStatusImage.image = UIImage()
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

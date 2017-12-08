@@ -11,15 +11,8 @@ class UploadFilesSelectionDataSource: ArrayDataSourceForCollectionView {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
         
-        guard let _ = itemForIndexPath(indexPath: indexPath),
-            let cell_ = cell as? CollectionViewCellDataProtocol else {
-                return
-        }
-        
-        if let cell = cell_ as? CollectionViewCellForPhoto {
-            cell.isShowSyncStatus = false
+        if let `cell` = cell as? CollectionViewCellForPhoto {
+            cell.cloudStatusImage.isHidden = true
         }
     }
-    
 }
-
