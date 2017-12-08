@@ -49,7 +49,7 @@ class SingletonStorage: NSObject {
     }
     
     func getUnigueUserID() -> String{
-        return accountInfo?.cellografId ?? ""
+        return accountInfo?.projectID ?? ""
     }
     
 }

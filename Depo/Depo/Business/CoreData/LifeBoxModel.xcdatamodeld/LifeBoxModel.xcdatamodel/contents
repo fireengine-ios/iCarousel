@@ -21,7 +21,7 @@
         <attribute name="uuidValue" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="albums" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MediaItemsAlbum" inverseName="items" inverseEntity="MediaItemsAlbum" syncable="YES"/>
         <relationship name="metadata" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MediaItemsMetaData" inverseName="item" inverseEntity="MediaItemsMetaData" syncable="YES"/>
-        <relationship name="objectSyncStatus" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ObjectSyncStatus" inverseName="item" inverseEntity="ObjectSyncStatus" syncable="YES"/>
+        <relationship name="objectSyncStatus" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MediaItemsObjectSyncStatus" inverseName="item" inverseEntity="MediaItemsObjectSyncStatus" syncable="YES"/>
         <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="items" inverseEntity="Session" syncable="YES"/>
     </entity>
     <entity name="MediaItemsAlbum" representedClassName=".MediaItemsAlbum" syncable="YES">
@@ -50,7 +50,7 @@
         <attribute name="width" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MediaItem" inverseName="metadata" inverseEntity="MediaItem" syncable="YES"/>
     </entity>
-    <entity name="ObjectSyncStatus" representedClassName="ObjectSyncStatus" syncable="YES" codeGenerationType="class">
+    <entity name="MediaItemsObjectSyncStatus" representedClassName=".MediaItemsObjectSyncStatus" syncable="YES">
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MediaItem" inverseName="objectSyncStatus" inverseEntity="MediaItem" syncable="YES"/>
     </entity>
@@ -65,7 +65,7 @@
         <element name="MediaItem" positionX="-126" positionY="-270" width="162" height="373"/>
         <element name="MediaItemsAlbum" positionX="-432" positionY="-333" width="153" height="210"/>
         <element name="MediaItemsMetaData" positionX="-441" positionY="-108" width="153" height="210"/>
+        <element name="MediaItemsObjectSyncStatus" positionX="286" positionY="63" width="128" height="73"/>
         <element name="Session" positionX="-405" positionY="135" width="153" height="118"/>
-        <element name="ObjectSyncStatus" positionX="286" positionY="63" width="128" height="73"/>
     </elements>
 </model>

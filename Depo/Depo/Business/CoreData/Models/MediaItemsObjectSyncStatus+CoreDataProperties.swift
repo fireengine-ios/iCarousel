@@ -9,7 +9,7 @@
 extension MediaItemsObjectSyncStatus {
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MediaItemsMetaData> {
-        return NSFetchRequest<MediaItemsMetaData>(entityName: "ObjectSyncStatus")
+        return NSFetchRequest<MediaItemsMetaData>(entityName: "MediaItemsObjectSyncStatus")
     }
     
     @NSManaged public var userID: String?

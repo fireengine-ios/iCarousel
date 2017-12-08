@@ -12,10 +12,10 @@ import CoreData
 
 public class MediaItemsObjectSyncStatus: NSManagedObject {
     
-    static let Identifier = "ObjectSyncStatus"
+    static let Identifier = "MediaItemsObjectSyncStatus"
     
     convenience init(userID: String, context: NSManagedObjectContext) {
-        let entityDescr = NSEntityDescription.entity(forEntityName: MediaItemsMetaData.Identifier,
+        let entityDescr = NSEntityDescription.entity(forEntityName: MediaItemsObjectSyncStatus.Identifier,
                                                      in: context)!
         self.init(entity: entityDescr, insertInto: context)
         self.userID = userID

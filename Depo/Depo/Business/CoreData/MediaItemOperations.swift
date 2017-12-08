@@ -69,23 +69,25 @@ extension CoreDataStack {
     
     func updateLocalItemSyncStatus(item: Item) {
         let predicateForRemoteFile = NSPredicate(format: "uuidValue == %@", item.uuid)
-        let alreadySavedMediaItems = executeRequest(predicate: predicateForRemoteFile, context: backgroundContext)
+        let alreadySavedMediaItems = executeRequest(predicate: predicateForRemoteFile, context: mainContext)
         
         alreadySavedMediaItems.forEach({ savedItem in
             //for locals
             savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
             
-            if let set = savedItem.objectSyncStatus{
-                savedItem.removeFromObjectSyncStatus(set)
+            if savedItem.objectSyncStatus != nil{
+                savedItem.objectSyncStatus = nil
             }
             
+            var array = [MediaItemsObjectSyncStatus]()
             for userID in item.syncStatuses{
-                savedItem.addToObjectSyncStatus(MediaItemsObjectSyncStatus(userID: userID, context: backgroundContext))
+                array.append(MediaItemsObjectSyncStatus(userID: userID, context: mainContext))
             }
+            savedItem.objectSyncStatus = NSSet(array: array)
             
-            savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
+            //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
         })
-        saveDataForContext(context: backgroundContext)
+        saveDataForContext(context: mainContext)
     }
     
     func removeFromStorage(wrapData: [WrapData]) {
