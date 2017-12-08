@@ -195,17 +195,16 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     private func deleteAlbumbs(albumbs: [AlbumItem]) {
-
         self.output?.operationStarted(type: .removeFromAlbum)
         let albumService = PhotosAlbumService()
         albumService.deleteAlbums(deleteAlbums: DeleteAlbums(albums: albumbs), success: {
             DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFinished(type: .removeFromAlbum)
+                self?.output?.operationFinished(type: .removeAlbum)
             }
         }, fail: { errorRespone in
             DispatchQueue.main.async { [weak self] in
                 
-                self?.output?.operationFailed(type: .removeFromAlbum, message: errorRespone.description)
+                self?.output?.operationFailed(type: .removeAlbum, message: errorRespone.description)
             }
         })
     }

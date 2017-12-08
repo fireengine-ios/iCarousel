@@ -514,8 +514,10 @@ class RouterVC: NSObject {
     
     //MARK: Album detail
     
-    func albumDetailController(album: AlbumItem) -> AlbumDetailViewController{
-        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album)
+    func albumDetailController(album: AlbumItem, moduleOutput: AlbumDetailModuleOutput? = nil) -> AlbumDetailViewController{
+        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController",
+                                                                                      album: album,
+                                                                                      moduleOutput: moduleOutput)
         return controller
     }
     

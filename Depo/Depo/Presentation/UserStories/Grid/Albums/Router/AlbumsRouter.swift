@@ -8,6 +8,8 @@
 
 class AlbumsRouter: BaseFilesGreedRouter {
     
+    weak var presenter: AlbumsPresenter?
+    
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         let router = RouterVC()
         
@@ -15,12 +17,8 @@ class AlbumsRouter: BaseFilesGreedRouter {
             guard let album = item as? AlbumItem else {
                 return
             }
-            let controller = router.albumDetailController(album: album)
+            let controller = router.albumDetailController(album: album, moduleOutput: presenter)
             router.pushViewController(viewController: controller)
-            return
-        }
-        if (item.fileType == .musicPlayList){
-            
             return
         }
     }
