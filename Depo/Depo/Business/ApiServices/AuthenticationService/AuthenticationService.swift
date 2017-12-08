@@ -374,26 +374,19 @@ class AuthenticationService: BaseRequestService {
     
     func authenticate(success:SuccessLogin?, fail: FailResponse?) {
         let reachability = ReachabilityService()
-        if !reachability.isReachableViaWiFi {
-            turkcellAuth(success: success, fail: fail)
-        } else {
-            authification(success: success, fail: fail, byRememberMe: true)
-        }
-    }
-    
-    private func authification(success:SuccessLogin?, fail: FailResponse?, byRememberMe: Bool  = false) {
-        let reachability = ReachabilityService()
-        if (reachability.isReachableViaWiFi || byRememberMe ){ //TODO: check if we need byRememberMe flag
+        if ApplicationSession.sharedSession.session.rememberMe {
             autificationByRememberMe(sucess: success, fail: fail)
-        } else {
+        } else if !reachability.isReachableViaWiFi {
             turkcellAuth(success: success, fail: fail)
+        } else {
+            autificationByToken(sucess: success, fail: fail)
         }
     }
-    
+
     private func turkcellAuth(success:SuccessLogin?, fail: FailResponse?) {
         let user = Authentication3G()
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
-            self?.authification(success: success, fail: fail, byRememberMe: true)
+            self?.autificationByToken(sucess: success, fail: fail)
         })
     }
 }

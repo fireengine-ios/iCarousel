@@ -231,39 +231,40 @@ class InternetDataUsage: ObjectRequestResponse {
     }
     
     var offerName: String?
-    var total: Int?
-    var remaining: Int?
+    var total: Double?
+    var remaining: Double?
     var unit: BytesType?
     var expiryDate: Date?
     
     var totalString: String {
-        guard let unit = self.unit, let total = self.total else {
-            return ""
-        }
-        var size = 0
-        switch unit {
-        case .mb:
-            size = total / BytesType.size
-        }
-        return "\(size) \(unit.rawValue)"
+        return sizeString(for: total)
     }
     
     var remainingString: String {
-        guard let unit = self.unit, let remaining = self.remaining else {
+        return sizeString(for: remaining)
+    }
+    
+    private func sizeString(for size: Double?) -> String {
+        guard let unit = self.unit, let size = size else {
             return ""
         }
-        var size = 0
         switch unit {
         case .mb:
-            size = remaining / BytesType.size
+            return cleanZero(for: size / BytesType.size, unit: "GB")
         }
-        return "\(size) \(unit.rawValue)"
+    }
+    
+    private func cleanZero(for value: Double, unit: String) -> String {
+        let isDisplayFloat = value.truncatingRemainder(dividingBy: 1) != 0
+        let numberOfDigits = isDisplayFloat ? 1 : 0
+        return String(format: "%.\(numberOfDigits)f \(unit)", value)
+        // value.truncatingRemainder(dividingBy: 1) == 0 ? String(value) : String(format: "%.1f \(unit)", value)
     }
     
     override func mapping() {
         offerName = json?[InternetDataUsageKeys.offerName].string
-        total = json?[InternetDataUsageKeys.total].int
-        remaining = json?[InternetDataUsageKeys.remaining].int
+        total = json?[InternetDataUsageKeys.total].double
+        remaining = json?[InternetDataUsageKeys.remaining].double
         unit = json?[InternetDataUsageKeys.unit].bytesType
         expiryDate = json?[InternetDataUsageKeys.expiryDate].date
     }

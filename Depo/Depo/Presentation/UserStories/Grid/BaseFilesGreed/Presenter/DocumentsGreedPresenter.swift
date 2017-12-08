@@ -24,16 +24,18 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func getCellSizeForGreed() -> CGSize {
-        if (Device.isIpad){
-            return CGSize(width: 180, height: 180)
-        }else{
-            let w: CGFloat = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * NumericConstants.numerCellInDocumentLineOnIphone)/NumericConstants.numerCellInDocumentLineOnIphone
-            return CGSize(width: w, height: w)
+        var cellWidth:CGFloat = 180
+        
+        if (Device.isIpad) {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIpad - 1))/NumericConstants.numerCellInDocumentLineOnIpad
+        } else {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2  - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIphone - 1))/NumericConstants.numerCellInDocumentLineOnIphone
         }
+        return CGSize(width: cellWidth, height: cellWidth)
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .delete {
+        if type == .delete || type == .addToFavorites || type == .removeFromFavorites {
             onReloadData()  
         }
     }

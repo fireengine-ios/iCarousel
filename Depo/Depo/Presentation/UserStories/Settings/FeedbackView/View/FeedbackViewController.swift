@@ -249,10 +249,10 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     
     func getSubject()-> String{
         if (suggeston){
-            return TextConstants.feedbackViewSuggestion
+            return String(format: TextConstants.feedbackViewSubjectFormat, TextConstants.feedbackViewSuggestion)
         }
         if (complaint){
-            return TextConstants.feedbackViewComplaint
+            return String(format: TextConstants.feedbackViewSubjectFormat, TextConstants.feedbackViewComplaint)
         }
         return ""
     }

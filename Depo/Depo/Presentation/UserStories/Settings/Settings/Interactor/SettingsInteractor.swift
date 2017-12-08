@@ -53,6 +53,7 @@ class SettingsInteractor: SettingsInteractorInput {
                                                   TextConstants.settingsViewCellTurkcellAutoLogin])
                 }
             DispatchQueue.main.async {
+                self.requestTurkcellSecurityInfo()
                 self.output.cellsDataForSettings(array: array)
             }  
         }, fail: { [weak self] (error) in
@@ -60,6 +61,9 @@ class SettingsInteractor: SettingsInteractorInput {
                 self?.output.cellsDataForSettings(array: array)
             }
         })
+    }
+    
+    private func requestTurkcellSecurityInfo() {
         AccountService().securitySettingsInfo(success: { [weak self] (response) in
             guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
                 let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
@@ -76,10 +80,18 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool) {
-        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: passcode, mobileNetworkAuthEnabled: autoLogin, success: { (response) in
-            
+        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: passcode, mobileNetworkAuthEnabled: autoLogin, success: { [weak self] (response) in
+            guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
+                let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
+                let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
+                    return
+            }
+            DispatchQueue.main.async {
+                self?.output.turkCellSecuritySettingsAccuered(passcode: turkCellPasswordOn, autoLogin: turkCellAutoLogin)
+            }
+            debugPrint("response")
         }) { (error) in
-            
+            debugPrint("error")
         }
     }
     

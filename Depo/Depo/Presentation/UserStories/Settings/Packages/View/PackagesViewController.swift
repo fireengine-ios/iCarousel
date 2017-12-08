@@ -26,6 +26,7 @@ class PackagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setTitle(withString: TextConstants.packages)
         activityManager.delegate = self
         promoView.deleagte = self
         setupCollectionView()
@@ -51,6 +52,7 @@ extension PackagesViewController: PackagesViewInput {
         
         promoView.endEditing(true)
         promoView.codeTextField.text = ""
+        promoView.errorLabel.text = ""
         reloadPackages()
     }
     

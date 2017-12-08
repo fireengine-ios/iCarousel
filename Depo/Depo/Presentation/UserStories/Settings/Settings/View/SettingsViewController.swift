@@ -140,21 +140,19 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
 
         let array = tableDataArray[indexPath.section]
         
-        if indexPath == turkCellSecurityPasscodeCellIndex,
-            let unwrapedturkCellSeuritySettingsPass = turkCellSeuritySettingsPassState {
+        if indexPath == turkCellSecurityPasscodeCellIndex {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID, for: indexPath) as! SettingsTableViewSwitchCell
             cell.actionDelegate = self
             cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-            cell.stateSwitch.setOn(unwrapedturkCellSeuritySettingsPass, animated: true)
+            cell.stateSwitch.setOn(turkCellSeuritySettingsPassState ?? false, animated: false)
             return cell
-        } else if indexPath == turkCellSecurityAutologinCellIndex,
-            let unwrapedturkCellSeuritySettingsAutoLogin = turkCellSeuritySettingsAutoLoginState {
+        } else if indexPath == turkCellSecurityAutologinCellIndex {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID, for: indexPath) as! SettingsTableViewSwitchCell
             cell.actionDelegate = self
             cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-            cell.stateSwitch.setOn(unwrapedturkCellSeuritySettingsAutoLogin, animated: true)
+            cell.stateSwitch.setOn(turkCellSeuritySettingsAutoLoginState ?? false, animated: false)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingTableViewCellID, for: indexPath) as! SettingsTableViewCell
@@ -357,6 +355,8 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
     
     func changeTurkCellSecurity(passcode: Bool, autologin: Bool) {
 
+        turkCellSeuritySettingsPassState = passcode
+        turkCellSeuritySettingsAutoLoginState = autologin
         
         guard let securityPasscodeCell = tableView.cellForRow(at: turkCellSecurityPasscodeCellIndex) as? SettingsTableViewSwitchCell,
             let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
@@ -368,9 +368,6 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
             securityAutoLoginCell.changeSwithcState(turnOn: !autologin)
             return
         }
-        
-        turkCellSeuritySettingsPassState = passcode
-        turkCellSeuritySettingsAutoLoginState = autologin
         
         securityPasscodeCell.changeSwithcState(turnOn: passcode)
         securityAutoLoginCell.changeSwithcState(turnOn: autologin)

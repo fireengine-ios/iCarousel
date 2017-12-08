@@ -143,20 +143,22 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                                            for items: [BaseDataSourceItem]?,
                                            excludeTypes: [ElementTypes] = [ElementTypes]()) -> [UIAlertAction] {
         var filteredActionTypes = types
-        if let unwrapedItems = items as? [Item] {
-            unwrapedItems.forEach({
-                if $0.favorites {//works only if there is no favorite types in initial types array
-                    if !filteredActionTypes.contains(.removeFromFavorites) {
-                        filteredActionTypes.append(.removeFromFavorites)
-                    }
-                } else {
-                    if !filteredActionTypes.contains(.addToFavorites) {
-                        filteredActionTypes.append(.addToFavorites)
-                    }
-                }
-                
-            })
+        
+        if let remoteItems = items?.filter({ !$0.isLocalItem}) as? [Item] {
+            if remoteItems.contains(where: { !$0.favorites}) {
+                filteredActionTypes.append(.addToFavorites)
+            } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
+                filteredActionTypes.remove(at: addToFavoritesIndex)
+            }
+            
+            if remoteItems.contains(where: { $0.favorites }) {
+                filteredActionTypes.append(.removeFromFavorites)
+            } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
+                filteredActionTypes.remove(at: removeFromFavorites)
+            }
         }
+        
+       
         
         if (items?.contains(where: { return !$0.isLocalItem }) ?? false) {
             filteredActionTypes.append(.delete)
@@ -178,7 +180,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         var tempoItems = items
         if tempoItems == nil || tempoItems?.count == 0 {
-            guard let wrappedArray = basePassingPresenter?.selectedItems as? [BaseDataSourceItem] else {
+            guard let wrappedArray = basePassingPresenter?.selectedItems else {
                 return []
             }
             tempoItems = wrappedArray

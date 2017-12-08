@@ -56,7 +56,7 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func openPasscode(handler: @escaping () -> Void) {
-        let vc = PasscodeEnterViewController.with(flow: .validate)
+        let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         
         vc.success = { [weak self] in
             self?.router.navigationController?.popViewController(animated: false)
