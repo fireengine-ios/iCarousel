@@ -43,10 +43,6 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                     }
                 }
                 
-                for item in items {
-                    item.isLocalItem = false
-                }
-                
                 items.sort {
                     guard let firstDate = $0.creationDate else {
                         return false
