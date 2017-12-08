@@ -515,7 +515,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             
             let isFavorites = router.isOnFavoritesView()
             let controller = router.createNewFolder(rootFolderID: getFolderUUID(), isFavorites: isFavorites)
-            router.pushViewController(viewController: controller)
+            let nController = UINavigationController(rootViewController: controller)
+            router.presentViewController(controller: nController)
             return
         }
         if (button == storyBtn){

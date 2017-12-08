@@ -56,7 +56,7 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
             router.hideScreen()
             break
         case .selectFolderName:
-            router.hideScreen()
+            view.hideView()
             break
         }
     }
