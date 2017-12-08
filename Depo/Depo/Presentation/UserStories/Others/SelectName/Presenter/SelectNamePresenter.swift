@@ -50,13 +50,13 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
         asyncOperationSucces()
         switch operation {
         case .selectAlbumName:
-            router.hideScreen()
+            view.hideView()
             break
         case .selectPlayListName:
             router.hideScreen()
             break
         case .selectFolderName:
-            router.hideScreen()
+            view.hideView()
             break
         }
     }
