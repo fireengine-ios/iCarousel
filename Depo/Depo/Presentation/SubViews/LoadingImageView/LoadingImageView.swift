@@ -18,6 +18,7 @@ class LoadingImageView: UIImageView {
     let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var url: URL?
     var path: PathForItem?
+    private var filesDataSource = FilesDataSource()
     
     var cornerView: UIView?
     
@@ -49,7 +50,7 @@ class LoadingImageView: UIImageView {
     
     fileprivate func checkIsNeedCancelRequest(){
         if (path != nil){
-            FilesDataSource().cancelImgeRequest(path: path!)
+            filesDataSource.cancelImgeRequest(path: path!)
             path = nil
             delegate?.onLoadingImageCanceled()
         }
@@ -67,7 +68,7 @@ class LoadingImageView: UIImageView {
         activity.startAnimating()
         let path_: PathForItem = PathForItem.remoteUrl(url)
         path = path_
-        FilesDataSource().getImage(for: object, isOriginal: isOriginalImage) { [weak self] image in
+        filesDataSource.getImage(for: object, isOriginal: isOriginalImage) { [weak self] image in
             if self?.path == path_{
                 self?.activity.stopAnimating()
                 self?.image = image
@@ -89,7 +90,7 @@ class LoadingImageView: UIImageView {
         activity.startAnimating()
         let path_: PathForItem = PathForItem.remoteUrl(url)
         path = path_
-        FilesDataSource().getImage(patch: PathForItem.remoteUrl(url), compliteImage: {[weak self] (image) in
+        filesDataSource.getImage(patch: PathForItem.remoteUrl(url), compliteImage: {[weak self] (image) in
             if self?.path == path_{
                 self?.activity.stopAnimating()
                 self?.image = image
@@ -110,7 +111,8 @@ class LoadingImageView: UIImageView {
         
         activity.startAnimating()
         path = object!.patchToPreview
-        FilesDataSource().getImage(patch: object!.patchToPreview) { [weak self] (image) in
+        
+        filesDataSource.getImage(patch: object!.patchToPreview) { [weak self] (image) in
             if self?.path == object!.patchToPreview{
                 self?.activity.stopAnimating()
                 self?.image = image
@@ -131,7 +133,7 @@ class LoadingImageView: UIImageView {
         
         activity.startAnimating()
         path = path_
-        FilesDataSource().getImage(patch: path_!) { [weak self] (image) in
+        filesDataSource.getImage(patch: path_!) { [weak self] (image) in
             if self?.path == path_{
                 self?.activity.stopAnimating()
                 self?.image = image

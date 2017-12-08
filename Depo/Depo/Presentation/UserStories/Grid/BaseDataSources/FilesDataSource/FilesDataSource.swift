@@ -41,13 +41,12 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     private let getImageServise = ImageDownloder()
     
-    private let assetCache = PHCachingImageManager()
-    
-    
-    // MARK: check acces to local media library
-    
-    func checkAccessToMediaLibrary() -> Bool {
-        return localManager.photoIsAvalible()
+    private var assetCache: PHCachingImageManager? {
+        var cachingManager: PHCachingImageManager?
+        if LocalMediaStorage.default.photoLibraryIsAvailible() {
+            cachingManager = PHCachingImageManager()
+        }
+        return cachingManager
     }
     
     
@@ -123,12 +122,14 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         
         let targetSize = CGSize(width: 300, height: 300)
 
+        if let cachingManager = assetCache {
+            cachingManager.startCachingImages(for: [asset], targetSize: targetSize, contentMode: .aspectFill, options: options)
+        }
+        
         manager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
 //            if let isDegaraded = (info?[PHImageResultIsDegradedKey] as? NSNumber)?.boolValue, !isDegaraded {
                 completion(result, indexPath)
 //            }
         })
-        
-        assetCache.startCachingImages(for: [asset], targetSize: targetSize, contentMode: .aspectFill, options: options)
     }
 }

@@ -201,6 +201,13 @@ struct TextConstants {
     static let cameraAccessAlertText = "You can't take photos with disabled camera. Please turn the camera on in settings."
     static let cameraAccessAlertGoToSettings = "Settings"
     static let cameraAccessAlertNo = "No"
+    
+    //MARK: - Photo Library alert
+    static let photoLibraryAccessAlertTitle = "Caution!"
+    static let photoLibraryAccessAlertText = "Access to Gallery is denied. Please change it from the settings menu of the device"
+    static let photoLibraryAccessAlertGoToSettings = "Settings"
+    static let photoLibraryAccessAlertNo = "No"
+    
     //MARK: Home page wiFiSync view
     static let homeWiFiTitleText = "Waiting for Wi-Fi to auto sync 14 items"
     static let homeWiFiSyncButtonTitle = "Sync with Data Plan Now"
@@ -437,6 +444,7 @@ struct TextConstants {
     static let feedbackViewSubTitle = "Feedback Form"
     static let feedbackViewSuggestion = "Suggestion"
     static let feedbackViewComplaint = "Complaint"
+    static let feedbackViewSubjectFormat = "%@ about Lifebox"
     static let feedbackViewLanguageLabel = "You need to specify your language preference so that we can serve you better."
     static let feedbackViewSendButton = "Send"
     static let feedbackViewSelect = "Select"
@@ -636,8 +644,10 @@ struct NumericConstants {
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
     static let iPhoneGreedInset: CGFloat = 2
     static let iPhoneGreedHorizontalSpace: CGFloat = 1
-    static let iPadGreedInset: CGFloat = 5
-    static let iPadGreedHorizontalSpace: CGFloat = 5
+    static let iPadGreedInset: CGFloat = 2
+    static let iPadGreedHorizontalSpace: CGFloat = 1
+    static let numerCellInLineOnIpad: CGFloat = 8
+    static let numerCellInDocumentLineOnIpad: CGFloat = 4
     static let maxNumberPhotosInStory: Int = 20
     static let maxNumberAudioInStory: Int = 1
     static let creationStoryOrderingCountPhotosInLineiPhone: Int = 4
