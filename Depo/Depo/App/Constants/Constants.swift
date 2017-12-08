@@ -550,7 +550,7 @@ struct TextConstants {
     static let usageInfoSongs = "%ld songs"
     static let usageInfoDocuments = "%ld documents"
     static let usageInfoBytesRemained = "%@ of %@ has remained"
-    static let usageInfoWelcome = "Welcome Pack (%@)"
+    static let usageInfoQuotaInfo = "Quota info"
     static let usageInfoDocs = "%ld docs"
     
     // MARK: - offers
@@ -606,18 +606,19 @@ struct TextConstants {
     static let PROMO_IS_INACTIVE = "The package activation code is not active"
     
     static let passcode = "Passcode"
-    static let passcodeEnter = "Enter lifebox passcode"
-    static let passcodeEnterOld = "Enter old lifebox passcode"
-    static let passcodeEnterNew = "Enter new lifebox passcode"
-    static let passcodeConfirm = "Confirm lifebox passcode"
+    static let passcodeLifebox = "lifebox Passcode"
+    static let passcodeEnter = "Please enter your lifebox passcode"
+    static let passcodeEnterOld = "Please enter your lifebox passcode"
+    static let passcodeEnterNew = "Set a Passcode"
+    static let passcodeConfirm = "Please repeate your new lifebox passcode"
     static let passcodeChanged = "Passcode is changed successfully"
-    static let passcodeSet = "You successfully set passcode"
+    static let passcodeSet = "You successfully set your passcode"
     static let passcodeDontMatch = "Passcodes don't match, please try again"
-    static let passcodeEnterTitle = "Enter passcode"
+    static let passcodeSetTitle = "Set a Passcode"
     static let passcodeBiometricsDefault = "To enter passcode"
     static let passcodeEnableFaceID = "Enable Face ID"
     static let passcodeEnableTouchID = "Enable Touch ID"
-    static let passcodeNumberOfTries = "You have %@ attempts left"
+    static let passcodeNumberOfTries = "Invalid passcode. %@ attempts left. Please try again"
     static let errorConnectedToNetwork = "Please check your internet connection is active and Cellular Data is ON under Settings/lifebox."
     
     static let apply = "Apply"
@@ -630,6 +631,8 @@ struct TextConstants {
     static let promocodeSuccess = "Your package is successfully defined"
     static let promocodeInvalid = "Verification code is invalid.\nPlease try again"
     static let promocodeBlocked = "Verification code is blocked.\nPlease request a new code"
+    
+    static let packages = "Packages"
 }
 
 

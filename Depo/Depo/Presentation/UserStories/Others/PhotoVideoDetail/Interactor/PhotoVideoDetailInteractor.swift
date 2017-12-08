@@ -64,8 +64,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 if let editIndex = elementsConfig.index(of: .edit) {
                     elementsConfig.remove(at: editIndex)
                 }
-                if let printIndex = elementsConfig.index(of: .print), !selectedItem.isLocalItem {
+                if let printIndex = elementsConfig.index(of: .print) {
                     elementsConfig.remove(at: printIndex)
+                }
+                if !elementsConfig.contains(.info) {
+                    elementsConfig.append(.info)
                 }
             }
             if selectedItem.syncStatus != .notSynced {

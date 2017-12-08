@@ -82,15 +82,16 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func inNeedOfMailVerefication() -> Bool {
-        return interactor.isTurkcellUser//TEST TEST QA TEST ONLY
-        return (interactor.isTurkcellUser && interactor.isEmptyMail)
+        return interactor.isTurkcellUser && interactor.isEmptyMail
     }
     
     var inNeedOfMail: Bool {
         return inNeedOfMailVerefication()
     }
     
-    var isTurkCellUser: Bool { return interactor.isTurkcellUser }
+    var isTurkCellUser: Bool {
+        return interactor.isTurkcellUser
+    }
     
     func mailUpdated(mail: String) {
         view.profileInfoChanged()

@@ -12,5 +12,5 @@ enum BytesType: String {
     case mb = "MB"
 }
 extension BytesType {
-    static let size = 1024
+    static let size: Double = 1024
 }
