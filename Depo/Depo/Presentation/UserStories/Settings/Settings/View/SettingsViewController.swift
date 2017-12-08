@@ -180,6 +180,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                 }else{
                     output.goToContactSync()
                 }
+                break
             case 1: // import photos
                 if (settingsDelegate != nil){
                     settingsDelegate?.goToIportPhotos()
@@ -206,12 +207,8 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                 }else{
                     output.goToActivityTimeline()
                 }
+                break
             case 1: // usage info
-                if (settingsDelegate != nil){
-                    settingsDelegate!.goToUsageInfo()
-                }else{
-                    output.goToUsageInfo()
-                }
                 break
             case 2: /// passcode
                 showPasscodeOrPasscodeSettings()
@@ -363,7 +360,7 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
             let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
                 return
         }
-
+ 
         securityPasscodeCell.changeSwithcState(turnOn: passcode)
         securityAutoLoginCell.changeSwithcState(turnOn: autologin)
     }
@@ -374,15 +371,14 @@ extension SettingsViewController: SettingsTableViewSwitchCellDelegate {
         
         guard !output.inNeedOfMail else {
             showMailUpdatePopUp()
-            cell.stateSwitch.setOn(!positionOn, animated: true)//changeSwithcState(turnOn: !positionOn)
-            //            securityPasscodeCell.changeSwithcState(turnOn: !passcode)
-            //            securityAutoLoginCell.changeSwithcState(turnOn: !autologin)
+            cell.stateSwitch.setOn(!positionOn, animated: true)
             return
         }
         guard let securityPasscodeCell = tableView.cellForRow(at: turkCellSecurityPasscodeCellIndex) as? SettingsTableViewSwitchCell,
             let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
                 return
         }
+
         output.turkcellSecurityChanged(passcode: securityPasscodeCell.stateSwitch.isOn, autoLogin: securityAutoLoginCell.stateSwitch.isOn)
     }
 }
@@ -396,3 +392,4 @@ extension SettingsViewController: MailVerificationViewControllerDelegate {
         
     }
 }
+
