@@ -472,7 +472,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.selectAll(isTrue: true)
     }
     
-    func shareModeSelected() {
+    func stopModeSelected() {
          stopEditing() 
     }
     
