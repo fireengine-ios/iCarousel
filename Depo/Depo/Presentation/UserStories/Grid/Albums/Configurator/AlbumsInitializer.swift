@@ -22,8 +22,10 @@ class AlbumsModuleInitializer: NSObject {
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .removeAlbum],
                                                style: .default, tintColor: nil)
         
-        let presentor = AlbumsPresenter()
+        let presenter = AlbumsPresenter()
         
+        let router = AlbumsRouter()
+        router.presenter = presenter
         
         let interactor = AlbumsInteractor(remoteItems: AlbumService(requestSize: 140))
         
@@ -37,8 +39,8 @@ class AlbumsModuleInitializer: NSObject {
         
         
         configurator.configure(viewController: viewController,
-                               bottomBarConfig: bottomBarConfig, router: AlbumsRouter(),
-                               presenter: presentor, interactor: interactor,
+                               bottomBarConfig: bottomBarConfig, router: router,
+                               presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: [.completelyDeleteAlbums]),
                                topBarConfig: gridListTopBarConfig)
@@ -55,7 +57,7 @@ class AlbumsModuleInitializer: NSObject {
         //let bottomBarConfig = EditingBarConfig(elementsConfig: [],
         //                                       style: .default, tintColor: nil)
         
-        let presentor = AlbumSelectionPresenter()
+        let presenter = AlbumSelectionPresenter()
         
         
         let interactor = AlbumsInteractor(remoteItems: AlbumService(requestSize: 140))
@@ -63,7 +65,7 @@ class AlbumsModuleInitializer: NSObject {
         
         configurator.configure(viewController: viewController,
                                bottomBarConfig: nil, router: AlbumsRouter(),
-                               presenter: presentor, interactor: interactor,
+                               presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],
                                                                                      selectionModeTypes: []),
                                topBarConfig: nil)

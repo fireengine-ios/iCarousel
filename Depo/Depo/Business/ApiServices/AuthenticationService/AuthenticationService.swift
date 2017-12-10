@@ -374,7 +374,8 @@ class AuthenticationService: BaseRequestService {
     
     func authenticate(success:SuccessLogin?, fail: FailResponse?) {
         let reachability = ReachabilityService()
-        if ApplicationSession.sharedSession.session.rememberMe {
+        let rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
+        if rememberMeToken != nil {
             autificationByRememberMe(sucess: success, fail: fail)
         } else if !reachability.isReachableViaWiFi {
             turkcellAuth(success: success, fail: fail)

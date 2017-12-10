@@ -128,8 +128,12 @@ extension PackagesPresenter: PackagesInteractorOutput {
         view?.show(promocodeError: errorString)
     }
     
-    func successedJobExists() {
-        interactor.getOffers()
+    func successedJobExists(isJobExists: Bool) {
+        if !isJobExists {
+            view?.startActivityIndicator()
+            interactor.getOffers()
+        }
+        view?.stopActivityIndicator()
     }
     
     func failedVerifyOffer() {
@@ -181,8 +185,10 @@ extension PackagesPresenter: PackagesInteractorOutput {
         case .subTurkcell:
             break
         case .all:
-            view?.startActivityIndicator()
-            interactor.getOfferApples()
+            break
+            /// in app purchase
+//            view?.startActivityIndicator()
+//            interactor.getOfferApples()
         }
         view?.stopActivityIndicator()
     }
@@ -200,7 +206,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(offerApple: OfferApple) {
-        
+        view?.stopActivityIndicator()
     }
     
     func failedUsage(with error: ErrorResponse) {

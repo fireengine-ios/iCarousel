@@ -14,6 +14,8 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
     
     let custoPopUp = CustomPopUp()
     
+    let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+    
     @IBOutlet weak var textField: UITextField!
 
     // MARK: Life cycle
@@ -32,6 +34,10 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         let barButton = UIBarButtonItem(customView: rightButton)
         navigationItem.rightBarButtonItem = barButton
         
+        cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
+        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
+        
         output.viewIsReady()
     }
     
@@ -39,6 +45,11 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         super.viewWillAppear(animated)
         
         navigationBarWithGradientStyle()
+        
+        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1{
+            let barButtonLeft = UIBarButtonItem(customView: cancelButton)
+            navigationItem.leftBarButtonItem = barButtonLeft
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,8 +58,15 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         textField.becomeFirstResponder()
     }
     
+    @objc func onCancelButton(){
+        hideView()
+    }
     
-
+    func hideView(){
+        dismiss(animated: true) {
+            
+        }
+    }
 
     // MARK: SelectNameViewInput
     func setupInitialState() {

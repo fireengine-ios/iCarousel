@@ -8,6 +8,10 @@
 
 class AlbumDetailRouter: BaseFilesGreedRouter, AlbumDetailRouterInput {
 
+    func back() {
+        view.navigationController?.popViewController(animated: true)
+    }
+    
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         let router = RouterVC()
         
