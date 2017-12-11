@@ -18,7 +18,7 @@ class AppConfigurator {
         dropboxManager.start()
         
         CoreDataStack.default.appendLocalMediaItems(nil)
-        
+        setVersionAndBuildNumber()
         self.configureSDWebImage()
     }
     
