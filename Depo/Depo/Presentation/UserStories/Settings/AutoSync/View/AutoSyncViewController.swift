@@ -44,7 +44,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         
         if self.isMovingFromParentViewController {
             let model = dataSource.createSettingsAutoSyncModel()
-            output.onSaveButton(setting: model)
+            output.saveСhanges(setting: model)
         }
 
     }
@@ -77,7 +77,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
     
     @IBAction func onStartUsingButton(){
         let model = dataSource.createSettingsAutoSyncModel()
-        output.onSaveButton(setting: model)
+        output.saveСhanges(setting: model)
         
         output.startLifeBoxPressed()
     }
