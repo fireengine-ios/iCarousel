@@ -28,4 +28,19 @@ class AppConfigurator {
         SDImageCache.shared().config.shouldCacheImagesInMemory = false
     }
     
+    //MARK: - settings bundle
+    //Check original post here: https://medium.com/@abhimuralidharan/adding-settings-to-your-ios-app-cecef8c5497
+    
+    struct SettingsBundleKeys {
+        static let BuildVersionKey = "build_preference"
+        static let AppVersionKey = "version_preference"
+    }
+    
+    class func setVersionAndBuildNumber() {
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        UserDefaults.standard.set(version, forKey: "version_preference")
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+        UserDefaults.standard.set(build, forKey: "build_preference")
+    }
+    //MARK:-------
 }

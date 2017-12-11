@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         startMenloworks(with: launchOptions)
         
-        SettingsBundleHelper.setVersionAndBuildNumber()
+        AppConfigurator.setVersionAndBuildNumber()
         
         return true
     }
