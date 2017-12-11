@@ -418,6 +418,7 @@
 		8C6EF8911F348B77002AC795 /* EditinglBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF88B1F348B77002AC795 /* EditinglBar.xib */; };
 		8C6FB6901F0B9F7600B552A3 /* MoreActionsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB67C1F0B9F7600B552A3 /* MoreActionsConfig.swift */; };
 		8C6FB6981F0B9F8400B552A3 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */; };
+		8C75D24A1FDD1BF700CBE1A7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */; };
 		8C7786881F3F38D9005CB432 /* MusicBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786861F3F38D9005CB432 /* MusicBar.swift */; };
 		8C7786891F3F38D9005CB432 /* MusicBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C7786871F3F38D9005CB432 /* MusicBar.xib */; };
 		8C77869D1F3F38EF005CB432 /* VisualMusicPlayerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77868C1F3F38EF005CB432 /* VisualMusicPlayerConfigurator.swift */; };
@@ -1649,6 +1650,7 @@
 		8C6EF88B1F348B77002AC795 /* EditinglBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditinglBar.xib; sourceTree = "<group>"; };
 		8C6FB67C1F0B9F7600B552A3 /* MoreActionsConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreActionsConfig.swift; sourceTree = "<group>"; };
 		8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8C7786861F3F38D9005CB432 /* MusicBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicBar.swift; sourceTree = "<group>"; };
 		8C7786871F3F38D9005CB432 /* MusicBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicBar.xib; sourceTree = "<group>"; };
 		8C77868C1F3F38EF005CB432 /* VisualMusicPlayerConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMusicPlayerConfigurator.swift; sourceTree = "<group>"; };
@@ -6377,6 +6379,7 @@
 				CEDFEC871F10C40C003D1A75 /* tr.lproj */,
 				CEDFEC8C1F10C40C003D1A75 /* uk.lproj */,
 				CEBBDDDA1F01E4CF00CDF527 /* Fonts */,
+				8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -7325,6 +7328,7 @@
 				CEDFEC9A1F10C40C003D1A75 /* Localizable.strings in Resources */,
 				7C5358101F9492DA00EABBAF /* OTPViewController~iphone.xib in Resources */,
 				7CDABD0F1F1E3A6300C8CC16 /* UserProfileViewController.xib in Resources */,
+				8C75D24A1FDD1BF700CBE1A7 /* Settings.bundle in Resources */,
 				7C1F898A1F6FFE1100740177 /* ProgressPopUp.xib in Resources */,
 				CEC3C2441FB99AF800C3D67F /* PasscodeSettingsViewController.xib in Resources */,
 				7C3A74531F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.xib in Resources */,
