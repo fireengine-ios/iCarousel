@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8C28CE661FC59C250098FE89"
-               BuildableName = "TC_Depo_LifeTech.app"
-               BlueprintName = "TC_Depo_LifeTech"
+               BuildableName = "old_TC_Depo_LifeTech.app"
+               BlueprintName = "old_TC_Depo_LifeTech"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,7 +33,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C28CE661FC59C250098FE89"
+            BlueprintIdentifier = "8C0E8C611FDEBDFF00789C91"
             BuildableName = "TC_Depo_LifeTech.app"
             BlueprintName = "TC_Depo_LifeTech"
             ReferencedContainer = "container:Depo.xcodeproj">
@@ -57,7 +57,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C28CE661FC59C250098FE89"
+            BlueprintIdentifier = "8C0E8C611FDEBDFF00789C91"
             BuildableName = "TC_Depo_LifeTech.app"
             BlueprintName = "TC_Depo_LifeTech"
             ReferencedContainer = "container:Depo.xcodeproj">
@@ -77,8 +77,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C28CE661FC59C250098FE89"
-            BuildableName = "TC_Depo_LifeTech.app"
-            BlueprintName = "TC_Depo_LifeTech"
+            BuildableName = "old_TC_Depo_LifeTech.app"
+            BlueprintName = "old_TC_Depo_LifeTech"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
