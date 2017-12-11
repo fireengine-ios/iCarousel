@@ -11,7 +11,7 @@ import Foundation
 
 
 protocol UploadProgressServiceDelegate: class {
-    func didSend(bytes: Int64, for tempUUID: String)
+    func didSend(bytes: Int64, of totalBytes: Int64, for tempUUID: String)
     func didSend(ratio: Float, for tempUUID: String)
     func didSend(percent: Float, for tempUUID: String)
 }
@@ -29,7 +29,7 @@ class UploadProgressService: NSObject, URLSessionTaskDelegate {
         }
         
         let ratio = Float(totalBytesSent)/Float(totalBytesExpectedToSend)
-        progressDelegate.didSend(bytes: bytesSent, for: tempUUIDfromURL)
+        progressDelegate.didSend(bytes: totalBytesSent, of: totalBytesExpectedToSend, for: tempUUIDfromURL)
         progressDelegate.didSend(ratio: ratio, for: tempUUIDfromURL)
         progressDelegate.didSend(percent: ratio * 100, for: tempUUIDfromURL)
     }

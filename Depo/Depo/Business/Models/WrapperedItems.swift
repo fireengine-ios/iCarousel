@@ -531,6 +531,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         fileType = FileType(type: remote.contentType, fileName: name)
         isFolder = remote.folder
         syncStatus = .synced
+        syncStatuses.append(SingletonStorage.shared.unigueUserID)
         creationDate = remote.createdDate
         
         parent = remote.parent
@@ -621,9 +622,11 @@ class WrapData: BaseDataSourceItem, Wrappered {
         creationDate = mediaItem.creationDateValue as Date?
         lastModifiDate = mediaItem.lastModifiDateValue as Date?
         syncStatus =  SyncWrapperedStatus(value: mediaItem.syncStatusValue)
+        syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         fileType = FileType(value: mediaItem.fileTypeValue)
         isFolder = mediaItem.isFolder
         duration = WrapData.getDuration(duration: mediaItem.metadata?.duration)
+        syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         
         albums = mediaItem.albumsUUIDs
         
@@ -647,6 +650,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let smalURl = mediaItem.metadata?.smalURl {
             metaData?.smalURl = URL(string: smalURl)
         }
+        
     }
     
     private class func getDuration(duration: Double?) -> String {

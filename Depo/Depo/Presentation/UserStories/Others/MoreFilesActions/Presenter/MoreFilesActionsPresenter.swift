@@ -27,11 +27,11 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
                 actionTypes = [.createStory, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                 actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
-                actionTypes.append((item.syncStatus == .notSynced) ? .backUp : .addToCmeraRoll)
+                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
             case .video:
                 actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((item.syncStatus == .notSynced) ? .backUp : .addToCmeraRoll)
+                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
                 
             case .photoAlbum: // TODO add for Alboum
                 break
