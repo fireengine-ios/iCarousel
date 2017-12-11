@@ -32,7 +32,7 @@ final class BiometricsManagerImp: BiometricsManager {
     
     var isAvailableFaceID: Bool {
         if #available(iOS 11.0, *) {
-            return LAContext().biometryType == .typeFaceID
+            return LAContext().biometryType == .faceID
         } else {
             return false
         }
