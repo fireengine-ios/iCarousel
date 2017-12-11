@@ -158,12 +158,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             }
         }
         
-       
-        
-        if (items?.contains(where: { return !$0.isLocalItem }) ?? false) {
-            filteredActionTypes.append(.delete)
-        }
-        
         filteredActionTypes = filteredActionTypes.filter({ !excludeTypes.contains($0) })
         
         return constractActions(with: filteredActionTypes, for: items)
