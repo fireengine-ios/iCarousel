@@ -336,13 +336,14 @@ extension UploadService: UploadProgressServiceDelegate {
     }
     
     func didSend(ratio: Float, for tempUUID: String) {
-        //
+        if let uploadType = uploadOperations.first(where: {$0.item.uuid == tempUUID})?.uploadType {
+            print("Uploading... \(ratio * 100)")
+            WrapItemOperatonManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType))
+        }
     }
     
     func didSend(percent: Float, for tempUUID: String) {
-        if let operation = uploadOperations.first(where: {$0.item.uuid == tempUUID}) {
-            print("\(operation.item.name ?? tempUUID): Uploading... \(percent)%")
-        }
+        //
     }
 }
 

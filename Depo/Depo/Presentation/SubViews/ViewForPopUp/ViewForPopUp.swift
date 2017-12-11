@@ -201,6 +201,14 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         }
     }
     
+    func setProgress(ratio: Float, for operationType: OperationType ) {
+        guard let popUp = viewsByType[operationType] as? ProgressPopUp else {
+            return
+        }
+        
+        popUp.setProgressBar(ratio: ratio)
+    }
+    
     func stopOperationWithType(type: OperationType){
         if let view = viewsByType[type] {
             viewsByType[type] = nil
