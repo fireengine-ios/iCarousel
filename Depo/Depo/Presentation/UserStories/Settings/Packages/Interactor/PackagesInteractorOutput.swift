@@ -10,7 +10,7 @@ import Foundation
 
 protocol PackagesInteractorOutput: class {
     func successed(offers: [OfferServiceResponse])
-    func successedJobExists()
+    func successedJobExists(isJobExists: Bool)
     func successed(offerApples: [OfferApple])
     func successed(tokenForOffer: String)
     func successed(tokenForResend: String)

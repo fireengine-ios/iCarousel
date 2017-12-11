@@ -60,7 +60,7 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
         uplaodLabel.text = TextConstants.settingsViewUploadPhotoLabel
         
         usersStorrageUssesProgress.progressTintColor = ColorConstants.greenColor
-        usersStorrageUssesProgress.backgroundColor = ColorConstants.lightGrayColor
+        usersStorrageUssesProgress.trackTintColor = ColorConstants.lightGrayColor
         
         usersStorrageUssesProgress.setProgress(0, animated: false)
         
@@ -108,17 +108,26 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
     }
     
     func setQuotaInfo(quotoInfo: QuotaInfoResponse){
-        let all = Float(quotoInfo.bytes ?? 0)
-        let used = Float(quotoInfo.bytesUsed ?? 1)
-        let persent = used/all
+        guard let quotaBytes = quotoInfo.bytes, let usedBytes = quotoInfo.bytesUsed else { return }
+        usersStorrageUssesProgress.progress = 1 - Float(usedBytes)/Float(quotaBytes)
         
-        self.usersStorrageUssesProgress.progress = persent
+        let quotaString = quotaBytes.bytesString
+        let remaindSize = (quotaBytes - usedBytes).bytesString
+        userStorrageInformationLabel.text = String(format: TextConstants.usageInfoBytesRemained, remaindSize, quotaString)
         
-        let allSize = ByteCountFormatter.string(fromByteCount: quotoInfo.bytes ?? 0, countStyle: .binary)
-        let remaind = (quotoInfo.bytes ?? 0) - (quotoInfo.bytesUsed ?? 0)
-        let usedSize = ByteCountFormatter.string(fromByteCount: remaind, countStyle: .binary)
         
-        userStorrageInformationLabel.text = String(format: TextConstants.settingsUserInfoViewQuota, usedSize, allSize)
+        
+//        let all = Float(quotoInfo.bytes ?? 0)
+//        let used = Float(quotoInfo.bytesUsed ?? 1)
+//        let persent = used/all
+//
+//        self.usersStorrageUssesProgress.progress = persent
+//
+//        let allSize = ByteCountFormatter.string(fromByteCount: quotoInfo.bytes ?? 0, countStyle: .binary)
+//        let remaind = (quotoInfo.bytes ?? 0) - (quotoInfo.bytesUsed ?? 0)
+//        let usedSize = ByteCountFormatter.string(fromByteCount: remaind, countStyle: .binary)
+//
+//        userStorrageInformationLabel.text = String(format: TextConstants.settingsUserInfoViewQuota, usedSize, allSize)
         
     }
 

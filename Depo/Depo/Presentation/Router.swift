@@ -297,14 +297,14 @@ class RouterVC: NSObject {
     
     //MARK: Home Page
     var homePageScreen: UIViewController? {
-        if (!SingletonStorage.shared().isAppraterInited) {
+        if (!SingletonStorage.shared.isAppraterInited) {
             AppRater.sharedInstance().daysUntilPrompt = 5
             AppRater.sharedInstance().launchesUntilPrompt = 10
             AppRater.sharedInstance().remindMeDaysUntilPrompt = 15
             AppRater.sharedInstance().remindMeLaunchesUntilPrompt = 10
             AppRater.sharedInstance().appLaunched()
             
-            SingletonStorage.shared().isAppraterInited = true
+            SingletonStorage.shared.isAppraterInited = true
         }
         
         let controller = HomePageModuleInitializer.initializeViewController(with: "HomePage")
@@ -514,8 +514,10 @@ class RouterVC: NSObject {
     
     //MARK: Album detail
     
-    func albumDetailController(album: AlbumItem) -> AlbumDetailViewController{
-        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album)
+    func albumDetailController(album: AlbumItem, moduleOutput: AlbumDetailModuleOutput? = nil) -> AlbumDetailViewController{
+        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController",
+                                                                                      album: album,
+                                                                                      moduleOutput: moduleOutput)
         return controller
     }
     

@@ -26,10 +26,17 @@ class SettingsTableViewSwitchCell: UITableViewCell {
         
         titleLabel.textColor = ColorConstants.textGrayColor
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        stateSwitch.addTarget(self, action: #selector(swichChanged), for: .valueChanged)
+        stateSwitch.addTarget(self, action: #selector(swichChanged), for: .touchUpInside)//valueChanged)
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cellGotTouched)))
     }
     
     @objc func swichChanged() {
+        debugPrint("swichChanged SettingsTableViewSwitchCells")
+        actionDelegate?.switchToggled(positionOn: stateSwitch.isOn, cell: self)
+    }
+    
+    @objc func cellGotTouched() {
+        stateSwitch.setOn(!stateSwitch.isOn, animated: true)
         actionDelegate?.switchToggled(positionOn: stateSwitch.isOn, cell: self)
     }
     

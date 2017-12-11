@@ -93,13 +93,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         /// present PasscodeEnterViewController
-        let vc = PasscodeEnterViewController.with(flow: .validate)
+        let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         vc.success = {
             topVC?.dismiss(animated: true, completion: {
                 self.firstResponder?.becomeFirstResponder()
             })
         }
-        topVC?.present(vc, animated: true,completion: nil)
+        
+        let navVC = UINavigationController(rootViewController: vc)
+        vc.navigationBarWithGradientStyleWithoutInsets()
+        
+        topVC?.present(navVC, animated: true,completion: nil)
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

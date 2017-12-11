@@ -94,14 +94,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 actionTypes = [.createStory, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                 actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
-                actionTypes.append((item.syncStatus == .notSynced) ? .backUp : .addToCmeraRoll)
-                if item.syncStatus == .synced {
+                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
+                if item.isSynced() {
                     actionTypes.append(.delete)
                 }
             case .video:
                 actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((item.syncStatus == .notSynced) ? .backUp : .addToCmeraRoll)
+                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
                 
             case .photoAlbum: // TODO add for Alboum
                 break
@@ -143,20 +143,22 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                                            for items: [BaseDataSourceItem]?,
                                            excludeTypes: [ElementTypes] = [ElementTypes]()) -> [UIAlertAction] {
         var filteredActionTypes = types
-        if let unwrapedItems = items as? [Item] {
-            unwrapedItems.forEach({
-                if $0.favorites {//works only if there is no favorite types in initial types array
-                    if !filteredActionTypes.contains(.removeFromFavorites) {
-                        filteredActionTypes.append(.removeFromFavorites)
-                    }
-                } else {
-                    if !filteredActionTypes.contains(.addToFavorites) {
-                        filteredActionTypes.append(.addToFavorites)
-                    }
-                }
-                
-            })
+        
+        if let remoteItems = items?.filter({ !$0.isLocalItem}) as? [Item] {
+            if remoteItems.contains(where: { !$0.favorites}) {
+                filteredActionTypes.append(.addToFavorites)
+            } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
+                filteredActionTypes.remove(at: addToFavoritesIndex)
+            }
+            
+            if remoteItems.contains(where: { $0.favorites }) {
+                filteredActionTypes.append(.removeFromFavorites)
+            } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
+                filteredActionTypes.remove(at: removeFromFavorites)
+            }
         }
+        
+       
         
         if (items?.contains(where: { return !$0.isLocalItem }) ?? false) {
             filteredActionTypes.append(.delete)
@@ -178,7 +180,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         var tempoItems = items
         if tempoItems == nil || tempoItems?.count == 0 {
-            guard let wrappedArray = basePassingPresenter?.selectedItems as? [BaseDataSourceItem] else {
+            guard let wrappedArray = basePassingPresenter?.selectedItems else {
                 return []
             }
             tempoItems = wrappedArray
@@ -206,8 +208,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .delete:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                    
                     self.interactor.delete(item: currentItems)
+                    self.basePassingPresenter?.stopModeSelected()
                 })
             case .move:
                 action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
@@ -245,6 +247,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .removeFromAlbum:
                 action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
                     self.interactor.removeFromAlbum(items: currentItems)
+                    self.basePassingPresenter?.stopModeSelected()
                 })
             case .backUp:
                 action = UIAlertAction(title: TextConstants.actionSheetBackUp, style: .default, handler: { _ in
@@ -258,6 +261,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .createStory:
                 action = UIAlertAction(title: TextConstants.actionSheetCreateStory, style: .default, handler: { _ in
                     self.interactor.createStory(items: currentItems)
+                    self.basePassingPresenter?.stopModeSelected()
                 })
             case .iCloudDrive:
                 action = UIAlertAction(title: TextConstants.actionSheetiCloudDrive, style: .default, handler: { _ in
@@ -285,13 +289,13 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .addToFavorites:
                 action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
-                    
+                    self.basePassingPresenter?.stopModeSelected()
                     self.interactor.addToFavorites(items: currentItems)
                 })
             case .removeFromFavorites:
                 action = UIAlertAction(title: TextConstants.actionSheetRemoveFavorites, style: .default, handler: { _ in
-                    
                     self.interactor.removeFromFavorites(items: currentItems)
+                    self.basePassingPresenter?.stopModeSelected()
                 })
             case .documentDetails:
                 action = UIAlertAction(title: TextConstants.actionSheetDocumentDetails, style: .default, handler: { _ in

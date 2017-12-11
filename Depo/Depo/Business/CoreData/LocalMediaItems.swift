@@ -15,11 +15,11 @@ extension CoreDataStack {
         let queue = DispatchQueue(label: "Append Local Item ")
         queue.async {
             let localMediaStorage = LocalMediaStorage.default
-            localMediaStorage.askPermissionForPhotoFramework { status in
-                if status == .authorized {
+            localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
+                if authorized {
                     self.insertFromPhotoFramework()
                 }
-                if status == .denied{
+                if status == .denied {
                     self.deleteLocalFiles()
                 }
                 end?()
@@ -29,12 +29,15 @@ extension CoreDataStack {
     
     private func insertFromPhotoFramework() {
         let localMediaStorage = LocalMediaStorage.default
-        let localStorageIsAvalible = localMediaStorage.photoIsAvalible()
-        if (localStorageIsAvalible) {
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) {[weak self] (accessGranted, _) in
+            guard accessGranted, let `self` = self else {
+                return
+            }
+            
             let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
             
-            let newBgcontext = newChildBackgroundContext
-            let notSaved = listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
+            let newBgcontext = self.newChildBackgroundContext
+            let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
             
             debugPrint("number of not saved  ", notSaved.count)
             
@@ -48,18 +51,19 @@ extension CoreDataStack {
                                                         urlToFile: info.url,
                                                         size: info.size,
                                                         md5: info.md5)
-
+                
                 let wrapData = WrapData(baseModel: baseMediaContent)
                 _ = MediaItem(wrapData: wrapData, context:newBgcontext)
                 debugPrint(i)
                 
                 if i % 10 == 0 {
-                    saveDataForContext(context: newBgcontext, saveAndWait: true)
+                    self.saveDataForContext(context: newBgcontext, saveAndWait: true)
                 }
             }
             
-            saveDataForContext(context: newBgcontext, saveAndWait: true)
+            self.saveDataForContext(context: newBgcontext, saveAndWait: true)
         }
+        
     }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
@@ -129,13 +133,20 @@ extension CoreDataStack {
             filesTypesArray.append(FileType.image.valueForCoreDataMapping())
         }
         let context = mainContext
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (syncStatusValue == 0)", filesTypesArray)
+        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@)", filesTypesArray)
         let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
         let sortedItems = items.sorted { (item1, item2) -> Bool in
             //< correct
             return item1.fileSizeValue < item2.fileSizeValue
         }
-        return sortedItems.flatMap{ $0.wrapedObject }
+        let currentUserID = SingletonStorage.shared.unigueUserID
+        
+        let filtredArray = sortedItems.filter {
+            
+            return !$0.syncStatusesArray.contains(currentUserID)
+        }
+        
+        return filtredArray.flatMap{ $0.wrapedObject }
     }
     
     func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], context: NSManagedObjectContext) {

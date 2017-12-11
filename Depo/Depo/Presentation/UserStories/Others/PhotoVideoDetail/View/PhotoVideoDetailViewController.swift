@@ -71,7 +71,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     private func configureNavigationBar() {
         if objects.count > selectedIndex, selectedIndex >= 0 {
             let item = objects[selectedIndex]
-            navigationItem.rightBarButtonItem?.customView?.isHidden = item.syncStatus == .notSynced
+            navigationItem.rightBarButtonItem?.customView?.isHidden = !item.isSynced()
         }
     }
     
@@ -80,7 +80,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
            let editIndex = interactor?.bottomBarConfig.elementsConfig.index(of: .edit) {
             let item = objects[selectedIndex]
             
-            if item.syncStatus == .notSynced {
+            if !item.isSynced(){
                 editingTabBar.disableItems(atIntdex: [editIndex])
             } else {
                 editingTabBar.enableIems(atIndex: [editIndex])

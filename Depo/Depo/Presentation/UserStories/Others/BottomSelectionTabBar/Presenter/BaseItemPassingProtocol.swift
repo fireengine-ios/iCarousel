@@ -13,7 +13,7 @@ protocol BaseItemInputPassingProtocol: class {
     
     func selectModeSelected()
     func selectAllModeSelected()
-    func shareModeSelected()
+    func stopModeSelected()
 
     func printSelected()
     

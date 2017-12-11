@@ -242,13 +242,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getCellSizeForGreed() -> CGSize {
-        if (Device.isIpad) {
-            return CGSize(width: 90, height: 90)
-        }
+        var cellWidth:CGFloat = 180
         
-        let w = view.getCollectionViewWidth()
-        let cellW: CGFloat = (w - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * NumericConstants.numerCellInLineOnIphone)/NumericConstants.numerCellInLineOnIphone
-        return CGSize(width: cellW, height: cellW)
+        if (Device.isIpad) {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIpad - 1))/NumericConstants.numerCellInLineOnIpad
+        } else {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2  - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIphone - 1))/NumericConstants.numerCellInLineOnIphone
+        }
+        return CGSize(width: cellWidth, height: cellWidth)
     }
     
     func onLongPressInCell() {
@@ -387,13 +388,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             }
             
             let remoteItems = selectedItems.filter { $0.isLocalItem == false}
-
-            if remoteItems.contains(where: { return !($0.favorites) } ) {
-                actionTypes.append(.addToFavorites)
-            }
-            if remoteItems.contains(where: { return $0.favorites } ) {
-                actionTypes.append(.removeFromFavorites)
-            }
             
             if actionTypes.contains(.createStory) && remoteItems.contains(where: { return $0.fileType != .image } ) {
                 let index = actionTypes.index(where: { return $0 == .createStory})!
@@ -478,7 +472,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.selectAll(isTrue: true)
     }
     
-    func shareModeSelected() {
+    func stopModeSelected() {
          stopEditing() 
     }
     

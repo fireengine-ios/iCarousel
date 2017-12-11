@@ -195,11 +195,11 @@ extension PackagesInteractor: PackagesInteractorInput {
     func checkJobExists() {
         offersService.getJobExists(
             success: { [weak self] response in
-                guard let jobResponse = response as? JobExistsResponse else { return }
-                if jobResponse.isJobExists == false {
-                    DispatchQueue.main.async {
-                        self?.output.successedJobExists()
-                    }
+                guard let jobResponse = response as? JobExistsResponse,
+                    let isJobExists = jobResponse.isJobExists
+                    else { return }
+                DispatchQueue.main.async {
+                    self?.output.successedJobExists(isJobExists: isJobExists)
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {

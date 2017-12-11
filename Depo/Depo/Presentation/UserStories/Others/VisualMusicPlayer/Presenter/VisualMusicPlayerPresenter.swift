@@ -12,7 +12,7 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
     func operationFailed(withType type: ElementTypes) {}
     func selectModeSelected() {}
     func selectAllModeSelected() {}
-    func shareModeSelected() {}
+    func stopModeSelected() {}
     func printSelected() {}
     var selectedItems: [BaseDataSourceItem] {
         if let currentItem = view.player.currentItem {

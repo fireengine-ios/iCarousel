@@ -64,17 +64,20 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 if let editIndex = elementsConfig.index(of: .edit) {
                     elementsConfig.remove(at: editIndex)
                 }
-                if let printIndex = elementsConfig.index(of: .print), !selectedItem.isLocalItem {
+                if let printIndex = elementsConfig.index(of: .print) {
                     elementsConfig.remove(at: printIndex)
+                }
+                if !elementsConfig.contains(.info) {
+                    elementsConfig.append(.info)
                 }
             }
             if selectedItem.syncStatus != .notSynced {
                 elementsConfig = elementsConfig + [.delete]
             }
             
-            if selectedItem.syncStatus == .notSynced {
+            if !selectedItem.isSynced() {
                 elementsConfig = elementsConfig + [.sync]
-            } else if selectedItem.syncStatus == .synced {
+            } else if selectedItem.isSynced() {
                 elementsConfig = elementsConfig + [.download]
             }
             return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)

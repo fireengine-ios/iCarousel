@@ -130,7 +130,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             view.layoutSubviews()
         }
         
-        if let obj = object as? WrapData, obj.syncStatus == .synced, let takenDate = obj.metaData?.takenDate {
+        if let obj = object as? WrapData, obj.isSynced(), let takenDate = obj.metaData?.takenDate {
             takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
             if let createdDate = object.creationDate {
                 uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")

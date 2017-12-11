@@ -36,6 +36,7 @@ extension MediaItem {
     @NSManaged public var albums: NSOrderedSet?
     @NSManaged public var metadata: MediaItemsMetaData?
     @NSManaged public var isFolder: Bool
+    @NSManaged public var objectSyncStatus: NSSet?
 }
 
 
@@ -43,6 +44,12 @@ extension MediaItem {
     public var albumsUUIDs: [String] {
         return self.albums?.flatMap({ (album) -> String? in
             return (album as? MediaItemsAlbum)?.uuid
+        }) ?? []
+    }
+    
+    public var syncStatusesArray: [String] {
+        return objectSyncStatus?.allObjects.flatMap({ (syncStatus) -> String? in
+            return (syncStatus as? MediaItemsObjectSyncStatus)?.userID
         }) ?? []
     }
 }
@@ -62,5 +69,19 @@ extension MediaItem {
     
     @objc(removeAlbums:)
     @NSManaged public func removeFromAlbums(_ values: NSSet)
+    
+    
+    
+    @objc(addObjectSyncStatusObject:)
+    @NSManaged public func addToObjectSyncStatus(_ value: MediaItemsObjectSyncStatus)
+    
+    @objc(removeObjectSyncStatusObject:)
+    @NSManaged public func removeFromObjectSyncStatus(_ value: MediaItemsObjectSyncStatus)
+    
+    @objc(addObjectSyncStatus:)
+    @NSManaged public func addToObjectSyncStatus(_ values: NSSet)
+    
+    @objc(removeObjectSyncStatus:)
+    @NSManaged public func removeFromObjectSyncStatus(_ values: NSSet)
     
 }

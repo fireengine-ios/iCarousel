@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.7.8</string>
+	<string>1.8.0</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -98,7 +98,7 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Need access to save your photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>Your photos will be backed up to lifebox</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TurkcellSaturaReg.ttf</string>
