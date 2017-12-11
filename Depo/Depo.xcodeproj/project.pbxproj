@@ -1480,6 +1480,10 @@
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
+		8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
+		8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
+		8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
+		8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AB461FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift */; };
 		8CD8F4F11F1CC3FD00F1257B /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F01F1CC3FD00F1257B /* FloatingView.swift */; };
 		8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */; };
 		8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */; };
@@ -9132,6 +9136,7 @@
 				8C0E8D8F1FDEBDFF00789C91 /* WelcomeViewInput.swift in Sources */,
 				8C0E8D901FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				8C0E8D911FDEBDFF00789C91 /* WiFiSyncViewOutput.swift in Sources */,
+				8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
 				8C0E8D921FDEBDFF00789C91 /* AutoSyncInteractorInput.swift in Sources */,
 				8C0E8D931FDEBDFF00789C91 /* CustomNavBarButton.swift in Sources */,
 				8C0E8D941FDEBDFF00789C91 /* UserProfileViewOutput.swift in Sources */,
@@ -9245,6 +9250,7 @@
 				8C0E8E001FDEBDFF00789C91 /* InstagramService.swift in Sources */,
 				8C0E8E011FDEBDFF00789C91 /* LocationManager.swift in Sources */,
 				8C0E8E021FDEBDFF00789C91 /* PrintService.swift in Sources */,
+				8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				8C0E8E031FDEBDFF00789C91 /* WrapperedItemUtil.swift in Sources */,
 				8C0E8E041FDEBDFF00789C91 /* CreateStorySelectionRouter.swift in Sources */,
 				8C0E8E051FDEBDFF00789C91 /* PhoneVereficationViewOutput.swift in Sources */,
@@ -9417,6 +9423,7 @@
 				8C0E8EAC1FDEBDFF00789C91 /* HomeHeaderConfigurator.swift in Sources */,
 				8C0E8EAD1FDEBDFF00789C91 /* HomeHeaderInitializer.swift in Sources */,
 				8C0E8EAE1FDEBDFF00789C91 /* BaseFilesGreedViewInput.swift in Sources */,
+				8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */,
 				8C0E8EAF1FDEBDFF00789C91 /* BaseFilesGreedViewOutput.swift in Sources */,
 				8C0E8EB01FDEBDFF00789C91 /* SubscriptionPlan.swift in Sources */,
 				8C0E8EB11FDEBDFF00789C91 /* BaseFilesGreedViewController.swift in Sources */,
@@ -9571,6 +9578,7 @@
 				8C0E8F461FDEBDFF00789C91 /* ActionsMenuView.swift in Sources */,
 				8C0E8F471FDEBDFF00789C91 /* FileInfoViewInput.swift in Sources */,
 				8C0E8F481FDEBDFF00789C91 /* FileInfoViewOutput.swift in Sources */,
+				8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */,
 				8C0E8F491FDEBDFF00789C91 /* FileInfoViewController.swift in Sources */,
 				8C0E8F4A1FDEBDFF00789C91 /* FileInfoModuleInput.swift in Sources */,
 				8C0E8F4B1FDEBDFF00789C91 /* BottomSelectionTabBarRouterInput.swift in Sources */,
