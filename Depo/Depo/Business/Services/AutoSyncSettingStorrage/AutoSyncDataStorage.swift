@@ -11,7 +11,7 @@ import UIKit
 class AutoSyncDataStorage: NSObject {
 
     func getAutoSyncModelForCurrentUser(success:@escaping ([AutoSyncModel], _ uniqueUserId: String) -> Swift.Void){
-        SingletonStorage.shared().getAccountInfoForUser(success: { (accountInfoResponce) in
+        SingletonStorage.shared.getAccountInfoForUser(success: { (accountInfoResponce) in
             let settings: [AutoSyncModel]
             
             let uniqueUserID = accountInfoResponce.projectID ?? ""

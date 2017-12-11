@@ -133,13 +133,20 @@ extension CoreDataStack {
             filesTypesArray.append(FileType.image.valueForCoreDataMapping())
         }
         let context = mainContext
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (syncStatusValue == 0)", filesTypesArray)
+        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@)", filesTypesArray)
         let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
         let sortedItems = items.sorted { (item1, item2) -> Bool in
             //< correct
             return item1.fileSizeValue < item2.fileSizeValue
         }
-        return sortedItems.flatMap{ $0.wrapedObject }
+        let currentUserID = SingletonStorage.shared.unigueUserID
+        
+        let filtredArray = sortedItems.filter {
+            
+            return !$0.syncStatusesArray.contains(currentUserID)
+        }
+        
+        return filtredArray.flatMap{ $0.wrapedObject }
     }
     
     func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], context: NSManagedObjectContext) {

@@ -83,6 +83,8 @@ public class MediaItem: NSManagedObject {
             return MediaItemsAlbum(uuid: albumUuid, context: context)
         })
         self.albums = NSOrderedSet(array: albums ?? [])
+        
+        objectSyncStatus = NSSet(array: wrapData.syncStatuses)
 
 //        isUploading
 //        PHAsset

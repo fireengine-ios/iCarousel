@@ -75,9 +75,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 elementsConfig = elementsConfig + [.delete]
             }
             
-            if selectedItem.syncStatus == .notSynced {
+            if !selectedItem.isSynced() {
                 elementsConfig = elementsConfig + [.sync]
-            } else if selectedItem.syncStatus == .synced {
+            } else if selectedItem.isSynced() {
                 elementsConfig = elementsConfig + [.download]
             }
             return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)

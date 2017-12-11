@@ -39,6 +39,7 @@ class AlbumItem: BaseDataSourceItem {
         lastModifiDate = remote.lastModifiedDate
         fileType = FileType(type: remote.contentType, fileName: name)
         syncStatus = .synced
+        syncStatuses.append(SingletonStorage.shared.unigueUserID)
         isLocalItem = false
     }
     

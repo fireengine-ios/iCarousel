@@ -75,12 +75,12 @@ class WrapperedItemsSorting: NSObject {
                 newArray.append(item)
                 break
             case .notSync:
-                if (item.syncStatus == .notSynced){
+                if (!item.isSynced()){
                     newArray.append(item)
                 }
                 break
             case .sync:
-                if (item.syncStatus == .synced){
+                if (item.isSynced()){
                     newArray.append(item)
                 }
                 break
