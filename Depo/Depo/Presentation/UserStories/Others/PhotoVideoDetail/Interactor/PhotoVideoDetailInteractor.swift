@@ -89,16 +89,20 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
     }
     
-    func deleteSelectedItem() {
+    func deleteSelectedItem(){
+        let isRightSwipe = selectedIndex == array.count - 1
+        
         array.remove(at: selectedIndex)
-        if (selectedIndex >= array.count) {
+        
+        if (selectedIndex >= array.count){
             selectedIndex = array.count - 1
         }
 
-        if (array.count == 0){
+        if array.count == 0 {
             output.goBack()
         } else {
-            output.updateItems(objects: array, selectedIndex: selectedIndex)
+
+        output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
         }
     }
 }
