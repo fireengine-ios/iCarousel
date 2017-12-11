@@ -38,6 +38,8 @@ final class UploadService: BaseRequestService {
 //        syncDispatchQueue = DispatchQueue(label: "Sync Queue")
         
         super.init()
+        
+        UploadProgressService.shared.delegate = self
     }
 
     func upload(imageData: Data, parentUUID: String = "", isFaorites: Bool = false, handler: @escaping (Result<SearchItemResponse>) -> Void) {
@@ -324,6 +326,25 @@ final class UploadService: BaseRequestService {
     }
 }
 
+
+extension UploadService: UploadProgressServiceDelegate {
+    func didSend(bytes: Int64, for tempUUID: String) {
+        //
+    }
+    
+    func didSend(ratio: Float, for tempUUID: String) {
+        //
+    }
+    
+    func didSend(percent: Float, for tempUUID: String) {
+        if let operation = uploadOperations.first(where: {$0.item.uuid == tempUUID}) {
+            print("\(operation.item.name ?? tempUUID): Uploading... \(percent)%")
+        }
+    }
+}
+
+
+
 typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Swift.Void
 
 class UploadOperations: Operation {
@@ -463,3 +484,4 @@ class UploadOperations: Operation {
                                            fail: fail)
     }
 }
+
