@@ -54,8 +54,8 @@ struct TextConstants {
     static let loginRememberMyCredential = "Remember my credentials"
     static let loginCellTitleEmail = "E-Mail or GSM Number"
     static let loginCellTitlePassword = "Password"//NSLocalizedString("PasswordPlaceholder", comment: "")
-    static let loginCellEmailPlaceholder = ""
-    static let loginCellPasswordPlaceholder = ""
+    static let loginCellEmailPlaceholder =  "You have to fill in your mail or GSM Number"
+    static let loginCellPasswordPlaceholder = "You have to fill in a password"
     
     static let autoSyncNavigationTitle = "Auto Sync"
     static let autoSyncTitle = "Lifebox can sync your files automatically. Would you like to have this feature right now?"
