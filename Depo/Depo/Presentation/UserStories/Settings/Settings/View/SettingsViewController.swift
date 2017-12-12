@@ -205,7 +205,11 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                     output.goToActivityTimeline()
                 }
             case 1: // usage info
-                break
+                if (settingsDelegate != nil){
+                    settingsDelegate!.goToUsageInfo()
+                }else{
+                    output.goToUsageInfo()
+                }
             case 2: /// passcode
                 showPasscodeOrPasscodeSettings()
             case 3, 4:// Turkcell security
