@@ -84,6 +84,14 @@ class WrapItemOperatonManager: NSObject {
         }
     }
     
+    func setProgress(ratio: Float, operationType: OperationType){
+        DispatchQueue.main.async {
+            for notificationView in self.foloversArray{
+                notificationView.setProgress(ratio: ratio, for: operationType)
+            }
+        }
+    }
+    
     func stopOperationWithType(type: OperationType){
         progresForOperation[type] = nil
         DispatchQueue.main.async {
