@@ -52,6 +52,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         gsmNumberTextField.textColor = ColorConstants.textGrayColor
         gsmNumberTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
         
+        title = TextConstants.userProfileTitle
+        
         let editButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
         editButton.setTitle(TextConstants.userProfileEditButton, for: .normal)
         editButton.addTarget(self, action: #selector(onEditButtonAction), for: .touchUpInside)

@@ -284,6 +284,7 @@ struct TextConstants {
     static let importFromCropy = "Import From Cropy"
 
     //MARK: userProfile
+    static let userProfileTitle = "Your Profile"
     static let userProfileNameAndSurNameSubTitle = "Name and Surname"
     static let userProfileEmailSubTitle = "E-Mail"
     static let userProfileGSMNumberSubTitle = "GSM Number"
