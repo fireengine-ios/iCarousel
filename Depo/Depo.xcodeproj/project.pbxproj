@@ -321,6 +321,8 @@
 		7CE779B11F43235C00CFDB2B /* SelectNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE779B01F43235C00CFDB2B /* SelectNameViewController.xib */; };
 		7CE825BE1F823D9700356AD2 /* FreeUpSpacePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE825BD1F823D9700356AD2 /* FreeUpSpacePopUp.swift */; };
 		7CE825C01F823DA600356AD2 /* FreeUpSpacePopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE825BF1F823DA600356AD2 /* FreeUpSpacePopUp.xib */; };
+		7CEA863D1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEA863B1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift */; };
+		7CEA863E1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */; };
 		7CED0B0D1F21DE3B0016CE0C /* DocumentsGreedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CED0B0C1F21DE3B0016CE0C /* DocumentsGreedPresenter.swift */; };
 		7CED0B101F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CED0B0E1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift */; };
 		7CED0B111F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */; };
@@ -1523,6 +1525,8 @@
 		7CE779B01F43235C00CFDB2B /* SelectNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectNameViewController.xib; sourceTree = "<group>"; };
 		7CE825BD1F823D9700356AD2 /* FreeUpSpacePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUpSpacePopUp.swift; sourceTree = "<group>"; };
 		7CE825BF1F823DA600356AD2 /* FreeUpSpacePopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FreeUpSpacePopUp.xib; sourceTree = "<group>"; };
+		7CEA863B1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoUploadIsOffPopUp.swift; sourceTree = "<group>"; };
+		7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoUploadIsOffPopUp.xib; sourceTree = "<group>"; };
 		7CED0B0C1F21DE3B0016CE0C /* DocumentsGreedPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentsGreedPresenter.swift; sourceTree = "<group>"; };
 		7CED0B0E1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCollectionMultiFileCell.swift; sourceTree = "<group>"; };
 		7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCollectionMultiFileCell.xib; sourceTree = "<group>"; };
@@ -4309,6 +4313,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7CEA863A1FDE840800F17D9D /* AutoUploadIsOffPopUp */,
 				7CE825B91F823CDE00356AD2 /* FreeUpSpacePopUp */,
 				7C1F89861F6FFC0D00740177 /* ProgressPopUp */,
 			);
@@ -4322,6 +4327,15 @@
 				7CE825BF1F823DA600356AD2 /* FreeUpSpacePopUp.xib */,
 			);
 			path = FreeUpSpacePopUp;
+			sourceTree = "<group>";
+		};
+		7CEA863A1FDE840800F17D9D /* AutoUploadIsOffPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				7CEA863B1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift */,
+				7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */,
+			);
+			path = AutoUploadIsOffPopUp;
 			sourceTree = "<group>";
 		};
 		7CED0B121F2392700016CE0C /* WrapperedItemsUtils */ = {
@@ -7219,6 +7233,7 @@
 				CEAE3FDE1EFD500B00A405B2 /* HomeViewTopView.xib in Resources */,
 				CE51AD201EF90853005DCEE0 /* LoginViewController.xib in Resources */,
 				CE6DE75D1FCC3ECF00C23CBD /* OptInController.xib in Resources */,
+				7CEA863E1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib in Resources */,
 				CEAE3F931EFD4D7C00A405B2 /* SubPlusButtons.xib in Resources */,
 				7C634FAB1F0F936700B5B93D /* SettingsTableViewCell.xib in Resources */,
 				7C00FE191F5957570041D041 /* AppRater.bundle in Resources */,
@@ -8031,6 +8046,7 @@
 				7C7ED4DD1F84C8C400DC5D33 /* CircleYellowButton.swift in Sources */,
 				E121576F506E3512DE62F2BF /* UploadedItemsPresenter.swift in Sources */,
 				010B5388E6913FEA0813D2C8 /* UploadedItemsInteractorInput.swift in Sources */,
+				7CEA863D1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift in Sources */,
 				7C5526131F7B9CCD00A21F3C /* WrapItemOperatonManager.swift in Sources */,
 				CE4CFEC11F78F94900FB4C3D /* BytesType.swift in Sources */,
 				FB274A9C777B1B0305F1B7ED /* UploadedItemsInteractorOutput.swift in Sources */,

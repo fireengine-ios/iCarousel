@@ -463,6 +463,10 @@ struct TextConstants {
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
+    static let autoUploaOffPopUpText = "Auto Upload is off.\nGo to setting to auto sync."
+    static let autoUploaOffCancel = "Cancel"
+    static let autoUploaOffSettings = "Settings"
+    
 
     
     //MARK: - ActionSheet
@@ -642,6 +646,8 @@ struct NumericConstants {
     static let vereficationTimerLimit = 120//in seconds
     static let maxVereficationAttempts = 3
     //
+    
+    static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
