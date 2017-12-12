@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,13 +29,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otI-cs-Zfe">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ABM-kn-qB4">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="311"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="319"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVH-pb-Uth">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="311"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="319"/>
                                     <connections>
                                         <action selector="onHideKeyboardButton" destination="-1" eventType="touchUpInside" id="PrD-yb-26G"/>
                                     </connections>
@@ -49,7 +50,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I5n-S0-6Wf">
-                            <rect key="frame" x="30" y="0.0" width="315" height="291"/>
+                            <rect key="frame" x="30" y="8" width="315" height="291"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngD-Th-Vls">
                                     <rect key="frame" x="0.0" y="33" width="315" height="16"/>
@@ -193,7 +194,7 @@
                             <variation key="widthClass=regular" constant="48"/>
                         </constraint>
                         <constraint firstAttribute="trailing" secondItem="ABM-kn-qB4" secondAttribute="trailing" id="eKZ-NO-fUV"/>
-                        <constraint firstItem="I5n-S0-6Wf" firstAttribute="top" secondItem="otI-cs-Zfe" secondAttribute="top" id="lma-VH-sjH"/>
+                        <constraint firstItem="I5n-S0-6Wf" firstAttribute="top" secondItem="otI-cs-Zfe" secondAttribute="topMargin" id="lma-VH-sjH"/>
                         <constraint firstAttribute="bottom" secondItem="I5n-S0-6Wf" secondAttribute="bottom" constant="20" id="ocR-g3-BEq"/>
                         <constraint firstAttribute="bottom" secondItem="ABM-kn-qB4" secondAttribute="bottom" id="sec-Ie-xIz"/>
                     </constraints>
@@ -203,10 +204,8 @@
             <constraints>
                 <constraint firstItem="otI-cs-Zfe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6R5-Qc-oBy"/>
                 <constraint firstAttribute="trailing" secondItem="otI-cs-Zfe" secondAttribute="trailing" id="D48-Na-N67"/>
-                <constraint firstItem="otI-cs-Zfe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="YLk-pj-FSp">
-                    <variation key="widthClass=regular" constant="64"/>
-                </constraint>
                 <constraint firstAttribute="bottom" secondItem="otI-cs-Zfe" secondAttribute="bottom" id="b8w-j1-Yyo"/>
+                <constraint firstItem="otI-cs-Zfe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="bjP-wa-IHj"/>
                 <constraint firstItem="ABM-kn-qB4" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="xhZ-3t-bZY"/>
             </constraints>
             <point key="canvasLocation" x="31.5" y="104.5"/>
