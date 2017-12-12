@@ -146,8 +146,9 @@ final class UploadService: BaseRequestService {
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
                 finishedOperation.item.isLocalItem = false
+
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item) 
-                
+
                 guard self.allUploadOperationsCount != 0 else {
                     return
                 }
