@@ -38,6 +38,8 @@ final class UploadService: BaseRequestService {
 //        syncDispatchQueue = DispatchQueue(label: "Sync Queue")
         
         super.init()
+        
+        UploadProgressService.shared.delegate = self
     }
 
     func upload(imageData: Data, parentUUID: String = "", isFaorites: Bool = false, handler: @escaping (Result<SearchItemResponse>) -> Void) {
@@ -144,8 +146,9 @@ final class UploadService: BaseRequestService {
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
                 finishedOperation.item.isLocalItem = false
-                CoreDataStack.default.appendOnlyNewItems(items: [finishedOperation.item])
-                
+
+                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item) 
+
                 guard self.allUploadOperationsCount != 0 else {
                     return
                 }
@@ -326,6 +329,27 @@ final class UploadService: BaseRequestService {
     }
 }
 
+
+extension UploadService: UploadProgressServiceDelegate {
+    
+    func didSend(bytes: Int64, of totalBytes: Int64, for tempUUID: String) {
+        //
+    }
+    
+    func didSend(ratio: Float, for tempUUID: String) {
+        if let uploadType = uploadOperations.first(where: {$0.item.uuid == tempUUID})?.uploadType {
+            print("Uploading... \(ratio * 100)")
+            WrapItemOperatonManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType))
+        }
+    }
+    
+    func didSend(percent: Float, for tempUUID: String) {
+        //
+    }
+}
+
+
+
 typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Swift.Void
 
 class UploadOperations: Operation {
@@ -465,3 +489,4 @@ class UploadOperations: Operation {
                                            fail: fail)
     }
 }
+

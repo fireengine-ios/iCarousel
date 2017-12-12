@@ -51,10 +51,14 @@ class ProgressPopUp: BaseView, ProgressPopUpProtocol {
         guard let ready = readyItems else {
             return
         }
-        let progressValue = Float(ready) / Float(all)
-        progress.progress = progressValue
+//        let progressValue = Float(ready) / Float(all)
+//        progress.progress = progressValue
         let progressText = String(format: TextConstants.popUpProgress, ready, all)
         progressLabel.text = progressText
+    }
+    
+    func setProgressBar(ratio: Float) {
+        progress.progress = ratio
     }
     
     func configurateWithType(viewType: OperationType){

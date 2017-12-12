@@ -10,9 +10,6 @@ import UIKit
 
 class UserProfileModuleInitializer: NSObject {
 
-    //Connect with object on storyboard
-    @IBOutlet weak var userprofileViewController: UserProfileViewController!
-
     class func initializeViewController(with nibName:String, userInfo:AccountInfoResponse) -> UIViewController {
         let viewController = UserProfileViewController(nibName: nibName, bundle: nil)
         let configurator = UserProfileModuleConfigurator()
