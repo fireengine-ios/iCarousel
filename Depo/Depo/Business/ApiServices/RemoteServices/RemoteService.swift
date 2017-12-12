@@ -58,6 +58,12 @@ class RemoteItemsService {
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail, newFieldValue: newFieldValue)
     }
     
+    func nextItems(fileType : FieldValue, sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems? ) {
+        self.fieldValue = fileType
+        nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
+    }
+    
+    
     func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         if let unwrapedFieldValue = newFieldValue {
             fieldValue = unwrapedFieldValue
@@ -70,24 +76,10 @@ class RemoteItemsService {
                                                  page: currentPage,
                                                  size: requestSize)
         
-        let executingOrWaiting = queueOperations.operations.filter {
-            ($0 as? NextPageOperation)?.requestParam == serchParam
-        }
-        
-        if executingOrWaiting.count == 0  {
-            
-            let nextPageOperation = NextPageOperation(requestParam: serchParam, success: { list in
-//                CoreDataStack.default.appendOnlyNewItems(items: list)
-                self.currentPage = self.currentPage + 1
-                print("Current page \(self): \(self.currentPage)")
-                success?(list)
-            }, fail: fail)
-            
-            queueOperations.addOperation(nextPageOperation)
-        }
+        nextItems(with: serchParam, success: success, fail: fail)
     }
     
-    func nextItemsWithoutDBChanges(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    func nextItemsMinified(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         if let unwrapedFieldValue = newFieldValue {
             fieldValue = unwrapedFieldValue
         }
@@ -97,27 +89,28 @@ class RemoteItemsService {
                                                  sortBy: sortBy,
                                                  sortOrder: sortOrder,
                                                  page: currentPage,
-                                                 size: requestSize)
+                                                 size: requestSize,
+                                                 minified: true)
         
-        let executingOrWaiting = queueOperations.operations.filter {
-            ($0 as? NextPageOperation)?.requestParam == serchParam
-        }
-        
-        if executingOrWaiting.count == 0  {
-            
-            let nextPageOperation = NextPageOperation(requestParam: serchParam, success: { list in
-                self.currentPage = self.currentPage + 1
-                print("Current page \(self): \(self.currentPage)")
-                success?(list)
-            }, fail: fail)
-            
-            queueOperations.addOperation(nextPageOperation)
-        }
+        nextItems(with: serchParam, success: success, fail: fail)
     }
     
-    func nextItems(fileType : FieldValue, sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems? ) {
-        self.fieldValue = fileType
-        nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
+    
+    fileprivate func nextItems(with searchParameters: SearchByFieldParameters, success: ListRemoveItems?, fail:FailRemoteItems?) {
+        let executingOrWaitingOperations = queueOperations.operations.filter {
+            ($0 as? NextPageOperation)?.requestParam == searchParameters
+        }
+        guard executingOrWaitingOperations.isEmpty else {
+            return
+        }
+        
+        let nextPageOperation = NextPageOperation(requestParam: searchParameters, success: { list in
+            self.currentPage = self.currentPage + 1
+            print("Current page \(self): \(self.currentPage)")
+            success?(list)
+        }, fail: fail)
+        
+        queueOperations.addOperation(nextPageOperation)
     }
     
     func getSuggestion(text: String, success: @escaping ([SuggestionObject]) -> Void, fail: @escaping FailResponse) {

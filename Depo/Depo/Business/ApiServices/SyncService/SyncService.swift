@@ -106,7 +106,7 @@ class SyncService: NSObject {
                 localItemsArray.append(object)
                 if latestDate == nil {
                     latestDate = object.creationDate
-                }else{
+                } else {
                     guard let date = object.creationDate else{
                         continue
                     }
@@ -114,7 +114,7 @@ class SyncService: NSObject {
                         latestDate = object.creationDate
                     }
                 }
-            }else{
+            } else {
                 //
             }
         }
@@ -184,14 +184,14 @@ class SyncService: NSObject {
         }
         var finished = false
         
-        service.nextItems(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
+        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
             guard let self_ = self else{
                 fail()
                 return
             }
             
-            for item in items{
-                if let date = item.creationDate, date.compare(latestDate) == ComparisonResult.orderedAscending{
+            for item in items {
+                if item.metaDate.compare(latestDate) == ComparisonResult.orderedAscending {
                     finished = true
                     break
                 }
@@ -201,7 +201,7 @@ class SyncService: NSObject {
                     
                     let localItem = self_.localItemsArray[index_]
                     //localItem.syncStatus = .synced
-                    localItem.syncStatuses.append(    SingletonStorage.shared.unigueUserID)
+                    localItem.syncStatuses.append(SingletonStorage.shared.unigueUserID)
                     CoreDataStack.default.updateLocalItemSyncStatus(item: localItem)
                     
                     self_.localItemsArray.remove(at: index_)
@@ -216,7 +216,7 @@ class SyncService: NSObject {
             
             if (!finished) && (items.count == self_.numberElementsInRequest){
                 self_.getUnsyncedObjects(latestDate: latestDate, success: success, fail: fail)
-            }else{
+            } else {
                 success()
             }
             }, fail: {
