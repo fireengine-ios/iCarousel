@@ -161,6 +161,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             interactor.sync(item: selectedItems)
         case .removeFromAlbum:
             interactor.removeFromAlbum(items: selectedItems)
+            basePassingPresenter?.stopModeSelected()
         case .addToAlbum:
             interactor.addToAlbum(items: selectedItems)
         case .print:
