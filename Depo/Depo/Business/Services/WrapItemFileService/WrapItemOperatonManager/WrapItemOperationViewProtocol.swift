@@ -12,6 +12,8 @@ protocol WrapItemOperationViewProtocol{
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int)
     
+    func setProgress(ratio: Float, for operationType: OperationType )
+    
     func stopOperationWithType(type: OperationType)
     
     func isEqual(object: WrapItemOperationViewProtocol) -> Bool

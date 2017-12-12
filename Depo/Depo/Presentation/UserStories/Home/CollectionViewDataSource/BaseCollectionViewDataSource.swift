@@ -16,7 +16,7 @@ protocol BaseCollectionViewDataSourceDelegate {
 }
 
 class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, CollectionViewLayoutDelegate, BaseCollectionViewCellWithSwipeDelegate, WrapItemOperationViewProtocol {
-
+    
     var collectionView: UICollectionView!
     var viewController: UIViewController!
     
@@ -203,15 +203,24 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
     }
     
-    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
+    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
         if let view = viewsByType[type] {
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
             }
-        }else{
+        } else {
             startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
         }
     }
+    
+    func setProgress(ratio: Float, for operationType: OperationType) {
+        guard let popUp = viewsByType[operationType] as? ProgressPopUp else {
+            return
+        }
+        
+        popUp.setProgressBar(ratio: ratio)
+    }
+    
     
     func stopOperationWithType(type: OperationType){
         if let view = viewsByType[type] {
