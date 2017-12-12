@@ -101,6 +101,12 @@ class WrapItemOperatonManager: NSObject {
         }
     }
     
+    func stopAllOperations(){
+        for operation in progresForOperation.keys {
+            stopOperationWithType(type: operation)
+        }
+    }
+    
     //MARK: views for operations
     
     class func popUpViewForOperaion(type: OperationType) -> BaseView{
