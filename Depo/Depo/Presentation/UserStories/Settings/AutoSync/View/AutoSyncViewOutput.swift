@@ -13,5 +13,5 @@ protocol AutoSyncViewOutput {
     func startLifeBoxPressed()
     func skipForNowPressed()
     
-    func saveСhanges(setting: SettingsAutoSyncModel)
+    func saveChanges(setting: SettingsAutoSyncModel)
 }
