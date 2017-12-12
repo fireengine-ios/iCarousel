@@ -284,6 +284,7 @@ struct TextConstants {
     static let importFromCropy = "Import From Cropy"
 
     //MARK: userProfile
+    static let userProfileTitle = "Your Profile"
     static let userProfileNameAndSurNameSubTitle = "Name and Surname"
     static let userProfileEmailSubTitle = "E-Mail"
     static let userProfileGSMNumberSubTitle = "GSM Number"
@@ -637,6 +638,7 @@ struct TextConstants {
     static let promocodeBlocked = "Verification code is blocked.\nPlease request a new code"
     
     static let packages = "Packages"
+    static let purchase = "Purchase"
 }
 
 
@@ -674,5 +676,7 @@ struct NumericConstants {
     static let freeAppSpaceLimit = 0.2
     
     static let fourGigabytes: UInt64 = 4 * 1024 * 1024 * 1024
+    
+    static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     
 }
