@@ -185,7 +185,7 @@ class SyncService: NSObject {
         var finished = false
         
         service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
-            guard let self_ = self else{
+            guard let `self` = self else{
                 fail()
                 return
             }
@@ -195,27 +195,25 @@ class SyncService: NSObject {
                     finished = true
                     break
                 }
+                
                 let serverObjectMD5 = item.md5
-                let index = self_.localMD5Array.index(of: serverObjectMD5)
-                if let index_ = index {
-                    
-                    let localItem = self_.localItemsArray[index_]
-                    //localItem.syncStatus = .synced
+                if let index = self.localMD5Array.index(of: serverObjectMD5) {
+                    let localItem = self.localItemsArray[index]
                     localItem.syncStatuses.append(SingletonStorage.shared.unigueUserID)
                     CoreDataStack.default.updateLocalItemSyncStatus(item: localItem)
                     
-                    self_.localItemsArray.remove(at: index_)
-                    self_.localMD5Array.remove(at: index_)
+                    self.localItemsArray.remove(at: index)
+                    self.localMD5Array.remove(at: index)
                     
-                    if (self_.localItemsArray.count == 0){
+                    if self.localItemsArray.isEmpty {
                         finished = true
                         break
                     }
                 }
             }
             
-            if (!finished) && (items.count == self_.numberElementsInRequest){
-                self_.getUnsyncedObjects(latestDate: latestDate, success: success, fail: fail)
+            if !finished, items.count == self.numberElementsInRequest {
+                self.getUnsyncedObjects(latestDate: latestDate, success: success, fail: fail)
             } else {
                 success()
             }
@@ -225,7 +223,7 @@ class SyncService: NSObject {
     }
     
     func stopSync() {
-        if (isSyncing){
+        if (isSyncing) {
             photoVideoService?.stopAllOperations()
             UploadService.default.cancelOperations()
             isSyncing = false
