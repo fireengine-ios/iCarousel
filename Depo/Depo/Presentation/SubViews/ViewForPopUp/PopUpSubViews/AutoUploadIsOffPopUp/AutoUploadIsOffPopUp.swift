@@ -32,7 +32,7 @@ class AutoUploadIsOffPopUp: BaseView {
     
     @IBAction func onSettingsButton(){
         let router = RouterVC()
-        RouterVC().pushViewController(viewController: router.autoUpload)
+        router.pushViewController(viewController: router.autoUpload)
     }
     
 }

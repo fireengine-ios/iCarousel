@@ -156,7 +156,7 @@ class SyncService: NSObject {
         AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { (models, uniqueUserId) in
             let autoSyncEnable = models[SettingsAutoSyncModel.autoSyncEnableIndex]
             if (!autoSyncEnable.isSelected){
-                SingletonStorage.shared.checkIsNeedShowUploadOffPopUp()
+                PopUpService.shared.checkIsNeedShowUploadOffPopUp()
             }
         })
     }

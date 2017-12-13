@@ -115,8 +115,7 @@ class WrapItemOperatonManager: NSObject {
             popUp.configurateWithType(viewType: type)
             return popUp
         case .autoUploadIsOff:
-            let popUp = AutoUploadIsOffPopUp.initFromNib()
-            return popUp
+            return AutoUploadIsOffPopUp.initFromNib()
         }
     }
     
