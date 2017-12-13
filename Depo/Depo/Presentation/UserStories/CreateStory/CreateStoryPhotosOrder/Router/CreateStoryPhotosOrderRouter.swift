@@ -32,4 +32,12 @@ class CreateStoryPhotosOrderRouter: CreateStoryPhotosOrderRouterInput {
         nController.pushViewController(controller, animated: true)
     }
     
+    func showMusicEmptyPopUp(okHandler: @escaping () -> Void) {
+        let controller = PopUpController.with(title: TextConstants.createStoryMusicEmpty, message: nil, image: .music, firstButtonTitle: TextConstants.ok, secondButtonTitle: TextConstants.createStoryAddMusic, secondAction: { vc in
+            vc.close(completion: okHandler)
+        })
+        
+        RouterVC().presentViewController(controller: controller)
+    }
+    
 }

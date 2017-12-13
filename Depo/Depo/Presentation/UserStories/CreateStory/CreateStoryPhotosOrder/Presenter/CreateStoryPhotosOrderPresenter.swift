@@ -52,7 +52,9 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
     
     func audioNotSelectedError(){
         asyncOperationSucces()
-        custoPopUp.showCustomAlert(withText: TextConstants.createStoryNoSelectedAudioError, okButtonText: TextConstants.createFolderEmptyFolderButtonText)
+        router.showMusicEmptyPopUp { [weak self] in
+            self?.interactor.onMusicSelection()
+        }
     }
     
     func goToStoryPreview(story: PhotoStory, responce: CreateStoryResponce){
