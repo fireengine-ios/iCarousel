@@ -635,6 +635,8 @@ struct TextConstants {
     
     static let packages = "Packages"
     static let purchase = "Purchase"
+    
+    static let deleteText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
 }
 
 
