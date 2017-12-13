@@ -33,6 +33,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         
         if fromSettings {
             view.backgroundColor = ColorConstants.whiteColor
+            navigationBarWithGradientStyle()
         } else {
             view.backgroundColor = UIColor.lrTiffanyBlue
         }
