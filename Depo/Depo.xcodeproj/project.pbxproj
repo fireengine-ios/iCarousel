@@ -183,6 +183,8 @@
 		7C3A74551F07B20600124DF5 /* PhotoVideoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74541F07B20600124DF5 /* PhotoVideoDetailViewController.xib */; };
 		7C3A74581F07C27900124DF5 /* BaseFileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74571F07C27900124DF5 /* BaseFileContentView.swift */; };
 		7C3A745A1F07C28D00124DF5 /* BaseFileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74591F07C28D00124DF5 /* BaseFileContentView.xib */; };
+		7C3B186E1FE0153E00FF3C39 /* PrepareToAutoSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */; };
+		7C3B186F1FE0153E00FF3C39 /* PrepareToAutoSync.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */; };
 		7C4484FE1F0FC607003AF631 /* ButtonWithGrayCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4484FD1F0FC607003AF631 /* ButtonWithGrayCorner.swift */; };
 		7C4485011F0FC86B003AF631 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4485001F0FC86B003AF631 /* SettingHeaderView.swift */; };
 		7C4485031F0FC87A003AF631 /* SettingHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4485021F0FC87A003AF631 /* SettingHeaderView.xib */; };
@@ -2419,6 +2421,8 @@
 		7C3A74541F07B20600124DF5 /* PhotoVideoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoVideoDetailViewController.xib; sourceTree = "<group>"; };
 		7C3A74571F07C27900124DF5 /* BaseFileContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFileContentView.swift; sourceTree = "<group>"; };
 		7C3A74591F07C28D00124DF5 /* BaseFileContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseFileContentView.xib; sourceTree = "<group>"; };
+		7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareToAutoSync.swift; sourceTree = "<group>"; };
+		7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrepareToAutoSync.xib; sourceTree = "<group>"; };
 		7C4484FD1F0FC607003AF631 /* ButtonWithGrayCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithGrayCorner.swift; sourceTree = "<group>"; };
 		7C4485001F0FC86B003AF631 /* SettingHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		7C4485021F0FC87A003AF631 /* SettingHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingHeaderView.xib; sourceTree = "<group>"; };
@@ -4779,6 +4783,15 @@
 			path = ContentSubViews;
 			sourceTree = "<group>";
 		};
+		7C3B186B1FE0148900FF3C39 /* PrepareToAutoSync */ = {
+			isa = PBXGroup;
+			children = (
+				7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */,
+				7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */,
+			);
+			path = PrepareToAutoSync;
+			sourceTree = "<group>";
+		};
 		7C4484FF1F0FC82A003AF631 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -5417,6 +5430,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7C3B186B1FE0148900FF3C39 /* PrepareToAutoSync */,
 				7CE825B91F823CDE00356AD2 /* FreeUpSpacePopUp */,
 				7C1F89861F6FFC0D00740177 /* ProgressPopUp */,
 			);
@@ -8573,6 +8587,7 @@
 				7C3A744A1F07927200124DF5 /* CollectionViewCellForPhoto.xib in Resources */,
 				CEBBDE0A1F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf in Resources */,
 				7CED0B111F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib in Resources */,
+				7C3B186F1FE0153E00FF3C39 /* PrepareToAutoSync.xib in Resources */,
 				CEDFEC951F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				7CB2E3121FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				CE57DFA91FDE663C0065B688 /* DarkPopUpController.xib in Resources */,
@@ -8665,7 +8680,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */ = {
@@ -8735,7 +8750,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E90741FDEBDFF00789C91 /* ShellScript */ = {
@@ -10337,6 +10352,7 @@
 				010B5388E6913FEA0813D2C8 /* UploadedItemsInteractorInput.swift in Sources */,
 				7C5526131F7B9CCD00A21F3C /* WrapItemOperatonManager.swift in Sources */,
 				CE4CFEC11F78F94900FB4C3D /* BytesType.swift in Sources */,
+				7C3B186E1FE0153E00FF3C39 /* PrepareToAutoSync.swift in Sources */,
 				FB274A9C777B1B0305F1B7ED /* UploadedItemsInteractorOutput.swift in Sources */,
 				D90C48A4F5649113FAF1DC94 /* UploadedItemsInteractor.swift in Sources */,
 				CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */,

@@ -464,6 +464,7 @@ struct TextConstants {
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
+    static let prepareToAutoSunc = "Preparing to auto sync..."
 
     
     //MARK: - ActionSheet
