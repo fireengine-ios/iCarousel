@@ -102,6 +102,8 @@ class SettingsInteractor: SettingsInteractorInput {
                 self?.passcodeStorage.clearPasscode()
                 self?.biometricsManager.isEnabled = false
                 CoreDataStack.default.clearDataBase()
+                FreeAppSpace.default.clear()
+                WrapItemOperatonManager.default.stopAllOperations()
                 self?.output.goToOnboarding()
             }
         }

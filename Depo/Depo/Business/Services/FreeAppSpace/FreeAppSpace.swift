@@ -25,6 +25,18 @@ class FreeAppSpace {
         return duplicaesArray
     }
     
+    func clear(){
+        localtemsArray.removeAll()
+        localMD5Array.removeAll()
+        duplicaesArray.removeAll()
+        serverDuplicatesArray.removeAll()
+        isSearchRunning = false
+        if let service = photoVideoService{
+            service.stopAllOperations()
+            photoVideoService = nil
+        }
+    }
+    
     func getServerUIDSForLocalitem(localItemsArray: [BaseDataSourceItem]) -> [String]{
         let serverHash = serverDuplicatesArray.map { $0.md5 }
         var array = [String]()
