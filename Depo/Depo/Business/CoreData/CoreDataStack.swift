@@ -133,7 +133,7 @@ class CoreDataStack: NSObject {
         saveDataForContext(context: mainContext, saveAndWait: true)
     }
     
-    @objc func saveDataForContext(context: NSManagedObjectContext,saveAndWait: Bool = false) {
+    @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true) {
         debugPrint("save context")
         let saveBlock: () -> Void = {
             do {

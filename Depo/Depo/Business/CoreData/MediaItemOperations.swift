@@ -15,7 +15,7 @@ extension CoreDataStack {
         let uuidList = items.map{ $0.uuid }
         let predicateForRemoteFile = NSPredicate(format: "uuidValue IN %@", uuidList)
         
-        let childrenContext = backgroundContext
+        let childrenContext = mainContext//backgroundContext
  
         let alreadySavedMediaItems = executeRequest(predicate: predicateForRemoteFile, context: childrenContext)
         
@@ -75,12 +75,12 @@ extension CoreDataStack {
             //for locals
             savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
             
-            if savedItem.objectSyncStatus != nil{
+            if savedItem.objectSyncStatus != nil {
                 savedItem.objectSyncStatus = nil
             }
             
             var array = [MediaItemsObjectSyncStatus]()
-            for userID in item.syncStatuses{
+            for userID in item.syncStatuses {
                 array.append(MediaItemsObjectSyncStatus(userID: userID, context: mainContext))
             }
             savedItem.objectSyncStatus = NSSet(array: array)

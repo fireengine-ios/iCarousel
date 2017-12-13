@@ -19,9 +19,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     var photoVideoBottomBarConfig: EditingBarConfig!
     var documentsBottomBarConfig: EditingBarConfig!
     
-    func onSelectItem(fileObject: Item, from items: [[Item]]){
+    func onSelectItem(fileObject: Item, from items: [[Item]]) {
         array.removeAll()
-        for ar in items{
+        for ar in items {//FIXME: ALEX
             array.append(contentsOf: ar)
         }
         
@@ -89,15 +89,15 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
     }
     
-    func deleteSelectedItem(){
+    func deleteSelectedItem() {
         array.remove(at: selectedIndex)
-        if (selectedIndex >= array.count){
+        if (selectedIndex >= array.count) {
             selectedIndex = array.count - 1
         }
 
         if (array.count == 0){
             output.goBack()
-        }else{
+        } else {
             output.updateItems(objects: array, selectedIndex: selectedIndex)
         }
     }
