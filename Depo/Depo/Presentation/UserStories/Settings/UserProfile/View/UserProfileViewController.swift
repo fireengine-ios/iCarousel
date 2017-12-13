@@ -191,6 +191,10 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return !(textField == gsmNumberTextField && CoreTelephonyService().isTurkcellOperator())
+        if let text = textField.text {
+            return !(textField == gsmNumberTextField && text.contains("+90"))
+        }
+        
+        return true
     }
 }
