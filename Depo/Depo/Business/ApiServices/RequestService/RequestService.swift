@@ -26,11 +26,14 @@ class RequestService {
     static let `default` = RequestService()
     private let defaultSession: URLSession
     
+    private var uploadProgressService = UploadProgressService.shared
+    
+    
     init() {
         
         let configuration = URLSessionConfiguration.default
         defaultSession = URLSession(configuration: configuration,
-                                    delegate: nil,
+                                    delegate: uploadProgressService,
                                     delegateQueue: nil)
     }
     
