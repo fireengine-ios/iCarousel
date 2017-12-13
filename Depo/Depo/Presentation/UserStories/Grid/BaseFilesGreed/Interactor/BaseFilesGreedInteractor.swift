@@ -92,34 +92,41 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 self?.output.asyncOperationFail(errorMessage: nil)
         }, newFieldValue: newFieldValue)
     }
-
-    func needShowNoFileView()-> Bool{
-        if ((remoteItems is PhotoAndVideoService) ||
-            (remoteItems is MusicService)) {
-            return true
-        }
-        return false
-    }
     
     func textForNoFileLbel() -> String{
-        if (remoteItems is PhotoAndVideoService){
+        if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoTitleText
+        } else if remoteItems is MusicService {
+            return TextConstants.audioViewNoAudioTitleText
+        } else if remoteItems is DocumentService {
+            return TextConstants.documentsViewNoDocumenetsTitleText
         }
-        return TextConstants.audioViewNoAudioTitleText
+        
+        return ""
     }
     
     func textForNoFileButton() -> String{
-        if (remoteItems is PhotoAndVideoService){
+        if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoButtonText
+        } else if remoteItems is MusicService {
+            return TextConstants.audioViewNoAudioButtonText
+        } else if remoteItems is DocumentService {
+            return TextConstants.documentsViewNoDocumenetsTitleText
         }
-        return TextConstants.audioViewNoAudioButtonText
+    
+        return ""
     }
     
-    func imageForNoFileImageView() -> UIImage{
-        if (remoteItems is PhotoAndVideoService){
+    func imageForNoFileImageView() -> UIImage {
+        if remoteItems is PhotoAndVideoService {
             return UIImage(named: "ImageNoPhotos")!
+        } else if remoteItems is MusicService {
+            return UIImage(named: "ImageNoMusics")!
+        } else if remoteItems is DocumentService {
+            return UIImage(named: "ImageNoDocuments")!
         }
-        return UIImage(named: "ImageNoMusics")!
+        
+        return UIImage()
     }
     
     func getRemoteItemsService() -> RemoteItemsService{
