@@ -35,7 +35,7 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter, CustomPopUpAlertActions{
 //                                    secondButtonText: TextConstants.freeAppSpaceAlertDelete)
         
         if let int = interactor as? FreeAppSpaceInteractor {
-            if let array = dataSource.getSelectedItems() as? [WrapData]{
+            if let array = dataSource.getSelectedItems() as? [WrapData] {
                 startAsyncOperation()
                 int.onDeleteSelectedItems(selectedItems: array)
             }
