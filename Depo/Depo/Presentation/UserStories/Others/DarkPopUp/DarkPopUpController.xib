@@ -51,7 +51,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQr-18-rw2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQr-18-rw2">
                                                     <rect key="frame" x="0.0" y="0.0" width="144" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -112,7 +112,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="2ed-mv-4oJ" firstAttribute="centerX" secondItem="RaL-fE-aIJ" secondAttribute="centerX" id="Ach-ZV-DMl"/>
                                 <constraint firstItem="2ed-mv-4oJ" firstAttribute="top" secondItem="DQ0-Qd-mrh" secondAttribute="bottom" id="BPJ-lz-3sZ"/>
@@ -122,7 +122,7 @@
                                 <constraint firstItem="oAG-WH-Ye6" firstAttribute="centerX" secondItem="RaL-fE-aIJ" secondAttribute="centerX" id="Rak-ai-8Pc"/>
                                 <constraint firstItem="DQ0-Qd-mrh" firstAttribute="centerX" secondItem="RaL-fE-aIJ" secondAttribute="centerX" id="Zmp-SU-vfj"/>
                                 <constraint firstItem="DQ0-Qd-mrh" firstAttribute="width" secondItem="RaL-fE-aIJ" secondAttribute="width" multiplier="7:10" id="muU-qO-Q7h"/>
-                                <constraint firstItem="2ed-mv-4oJ" firstAttribute="height" secondItem="oAG-WH-Ye6" secondAttribute="height" id="zAz-au-bN2"/>
+                                <constraint firstItem="2ed-mv-4oJ" firstAttribute="height" secondItem="oAG-WH-Ye6" secondAttribute="height" priority="250" id="zAz-au-bN2"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -137,7 +137,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="0V8-bR-bNm" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="0yK-FL-tkx"/>
                 <constraint firstAttribute="bottom" secondItem="0V8-bR-bNm" secondAttribute="bottom" id="Yql-RQ-2ms"/>

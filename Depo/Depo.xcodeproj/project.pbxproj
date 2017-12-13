@@ -1575,6 +1575,7 @@
 		C9C861DC0DEC3C4584CBF425 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B2FD70EACA38EF90262C71 /* SettingsPresenter.swift */; };
 		CC5705DE3B84973A3C2928C7 /* AlbumDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7051E0E1A28BE580D7FEE520 /* AlbumDetailInteractor.swift */; };
 		CDE2227E3AD0825FD2B61890 /* BaseFilesGreedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F31D403CF3A25954AE0EF /* BaseFilesGreedViewController.swift */; };
+		CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */; };
 		CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
 		CE09155E1F3870D000C82A44 /* WrapItemFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */; };
 		CE0ED96E1FBC0F5A00487632 /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
@@ -1967,6 +1968,11 @@
 		CECA331A1F73DA660093CB3C /* CollectionSortingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */; };
 		CECA95951F1610590054BDC0 /* RemoteDownloder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95941F1610590054BDC0 /* RemoteDownloder.swift */; };
 		CECA95971F163CC80054BDC0 /* WrapperedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95961F163CC80054BDC0 /* WrapperedItems.swift */; };
+		CECD4E4D1FDFD69500978BE7 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
+		CECD4E4E1FDFD69500978BE7 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E4C1FDFD69400978BE7 /* PopUpController.swift */; };
+		CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
+		CECD4E541FE1150B00978BE7 /* UIButton+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E531FE1150B00978BE7 /* UIButton+Color.swift */; };
+		CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E551FE1152600978BE7 /* UIImage+Color.swift */; };
 		CEDEAB311FADA5D20046555F /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */; };
 		CEDEAB321FADA5D20046555F /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEAB301FADA5D20046555F /* AlbumCell.xib */; };
 		CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
@@ -2893,6 +2899,7 @@
 		CD5D09EFB8C155B2E9F82179 /* UploadedItemsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsViewOutput.swift; sourceTree = "<group>"; };
 		CD80CEB97E85BA37E721D389 /* FeedbackViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewRouterInput.swift; sourceTree = "<group>"; };
+		CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpImage.swift; sourceTree = "<group>"; };
 		CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarConfugurator.swift; sourceTree = "<group>"; };
 		CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapItemFileService.swift; sourceTree = "<group>"; };
 		CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricsManager.swift; sourceTree = "<group>"; };
@@ -3115,6 +3122,11 @@
 		CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSortingRules.swift; sourceTree = "<group>"; };
 		CECA95941F1610590054BDC0 /* RemoteDownloder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDownloder.swift; sourceTree = "<group>"; };
 		CECA95961F163CC80054BDC0 /* WrapperedItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperedItems.swift; sourceTree = "<group>"; };
+		CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpController.xib; sourceTree = "<group>"; };
+		CECD4E4C1FDFD69400978BE7 /* PopUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
+		CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Adjust.swift"; sourceTree = "<group>"; };
+		CECD4E531FE1150B00978BE7 /* UIButton+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Color.swift"; sourceTree = "<group>"; };
+		CECD4E551FE1152600978BE7 /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 		CED5E81F1EF7E81D009649EB /* CoreTelephonyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTelephonyService.swift; sourceTree = "<group>"; };
 		CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		CEDEAB301FADA5D20046555F /* AlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
@@ -6476,6 +6488,7 @@
 				120D20B58FE02EDFFDC3E5EF /* FileInfo */,
 				35466CD131154C1D21C7C31C /* PhotoVideoDetail */,
 				EFA74F9F1FBF378F00CF946E /* Print */,
+				CECD4E4F1FDFD69E00978BE7 /* PopUp */,
 				CE57DFAA1FDE66980065B688 /* DarkPopUp */,
 			);
 			path = Others;
@@ -6831,6 +6844,7 @@
 		CE34718A1F03689C00B97AC3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CECD4E521FE114FC00978BE7 /* Color */,
 				873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */,
 				CEC3C22E1FB997A600C3D67F /* FromNib.swift */,
 				CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */,
@@ -7641,6 +7655,26 @@
 				CECA95941F1610590054BDC0 /* RemoteDownloder.swift */,
 			);
 			path = ImageDownloderService;
+			sourceTree = "<group>";
+		};
+		CECD4E4F1FDFD69E00978BE7 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */,
+				CECD4E4C1FDFD69400978BE7 /* PopUpController.swift */,
+				CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
+		CECD4E521FE114FC00978BE7 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */,
+				CECD4E531FE1150B00978BE7 /* UIButton+Color.swift */,
+				CECD4E551FE1152600978BE7 /* UIImage+Color.swift */,
+			);
+			path = Color;
 			sourceTree = "<group>";
 		};
 		CED5E81D1EF7E81D009649EB /* HardwareService */ = {
@@ -8609,6 +8643,7 @@
 				CEAE3FEE1EFD517300A405B2 /* CustomNavBar~ipad.xib in Resources */,
 				CE2BA7CE1FC70B1100AA3EBE /* Images.xcassets in Resources */,
 				CE51AF5F1EF90853005DCEE0 /* IntroduceViewController.xib in Resources */,
+				CECD4E4D1FDFD69500978BE7 /* PopUpController.xib in Resources */,
 				7CDABD131F1E434100C8CC16 /* FileInfoViewController.xib in Resources */,
 				D49886601F3EFBE200F50C95 /* ImportPhotosViewController.xib in Resources */,
 				CEBBDE091F01E69B00CDF527 /* TurkcellSaturaDem.ttf in Resources */,
@@ -9869,6 +9904,7 @@
 				CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */,
 				CE51AB6E1EF90853005DCEE0 /* CurioLocationManager.m in Sources */,
 				CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */,
+				CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */,
 				CE51AB701EF90853005DCEE0 /* AutoSyncViewInput.swift in Sources */,
 				7CD1F8F41F0288CA0028F51A /* WiFiSyncInitializer.swift in Sources */,
 				8C7786A41F3F38F0005CB432 /* VisualMusicPlayerRouter.swift in Sources */,
@@ -9973,6 +10009,7 @@
 				CE2976E11FD58E2000350F3A /* LocalAlbumInteractor.swift in Sources */,
 				7CD1F9171F0288DC0028F51A /* WelcomeInteractorOutput.swift in Sources */,
 				D498865C1F3EFBE200F50C95 /* ImportPhotosPresenter.swift in Sources */,
+				CECD4E4E1FDFD69500978BE7 /* PopUpController.swift in Sources */,
 				CE7467011FD6B61600D0885D /* ErrorResponse.swift in Sources */,
 				CEAE3F961EFD4E6200A405B2 /* ButtonWithCorner.swift in Sources */,
 				7C4485011F0FC86B003AF631 /* SettingHeaderView.swift in Sources */,
@@ -10332,6 +10369,7 @@
 				20D9DB71C68797990E05E828 /* ExpandStorageModuleInput.swift in Sources */,
 				7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
+				CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */,
 				A1DBFD47F4260A0DF1C25486 /* ExpandStoragePresenter.swift in Sources */,
 				EFA74FAF1FBF378F00CF946E /* PrintViewController.swift in Sources */,
 				CEE005741F7B7DD0004FA8DE /* AssetsCash.swift in Sources */,
@@ -10396,6 +10434,7 @@
 				7C49881F1F3320420039C5F2 /* CreateStoryPhotosOrderViewOutput.swift in Sources */,
 				CEF73B9D1FCEAC30004C3ADF /* KeyboardHideManager.swift in Sources */,
 				38BA503099842E5840815A3A /* BaseFilesGreedPresenter.swift in Sources */,
+				CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */,
 				FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
@@ -10637,6 +10676,7 @@
 				CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */,
 				C7055CAC94DC0C09FAC5F608 /* AlbumDetailPresenter.swift in Sources */,
 				CE2F56321F7554A300F49DA1 /* OfferServiceResponse.swift in Sources */,
+				CECD4E541FE1150B00978BE7 /* UIButton+Color.swift in Sources */,
 				CC5705DE3B84973A3C2928C7 /* AlbumDetailInteractor.swift in Sources */,
 				CEC3C2481FB99AF800C3D67F /* PasscodeSettingsInteractor.swift in Sources */,
 				227254E0DCD67B9CEB06CD58 /* AlbumDetailRouterInput.swift in Sources */,
