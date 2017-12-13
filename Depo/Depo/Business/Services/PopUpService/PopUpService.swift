@@ -16,23 +16,19 @@ class PopUpService{
     }
     
     private func incrementLoginCountForUser(){
-        let userDef = UserDefaults.standard
         let count = getLoginCountForUser() + 1
-        userDef.set(count, forKey: getKeyForLoginCountForUser)
-        userDef.synchronize()
+        UserDefaults.standard.set(count, forKey: getKeyForLoginCountForUser)
+        UserDefaults.standard.synchronize()
     }
     
     private func getLoginCountForUser() -> Int{
-        let userDef = UserDefaults.standard
-        let countOfSuccesfulLoginForUser = userDef.integer(forKey: getKeyForLoginCountForUser)
-        return countOfSuccesfulLoginForUser + 1
+        let countOfSuccesfulLoginForUser = UserDefaults.standard.integer(forKey: getKeyForLoginCountForUser)
+        return countOfSuccesfulLoginForUser
     }
     
     private func resetLoginCountForUser(){
-        let userDef = UserDefaults.standard
-        let number = NSNumber(value: 0)
-        userDef.setValue(number, forKey: getKeyForLoginCountForUser)
-        userDef.synchronize()
+        UserDefaults.standard.set(0, forKey: getKeyForLoginCountForUser)
+        UserDefaults.standard.synchronize()
     }
     
     func checkIsNeedShowUploadOffPopUp(){
