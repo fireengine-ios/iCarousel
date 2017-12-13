@@ -402,6 +402,22 @@ protocol  Wrappered  {
 
 class WrapData: BaseDataSourceItem, Wrappered {
 
+    enum Status: String {
+        case active = "ACTIVE"
+        case uploaded = "UPLOADED"
+        case transcoding = "TRANSCODING"
+        case transcodingFailed = "TRANSCODING_FAILED"
+        case unknown = "UNKNOWN"
+        
+        init(string: String?) {
+            if let statusString = string, let status = Status(rawValue: statusString) {
+                self = status
+            } else {
+                self = .unknown
+            }
+        }
+    }
+    
     var coreDataObject: MediaItem?
     
     var id: Int64?
@@ -417,6 +433,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var albums: [String]?
 
     var metaData: BaseMetaData?
+    
+    var status: Status
     
     /* for remote content*/
     private let tmpDownloadUrl: URL?
@@ -455,6 +473,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         id = musicForCreateStory.id
         tmpDownloadUrl = musicForCreateStory.path
         favorites = false
+        status = .unknown
         patchToPreview = .remoteUrl(nil)
         // unuse parametrs
         fileSize =  Int64(0)
@@ -479,6 +498,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         duration = WrapData.getDuration(duration: baseModel.asset.duration)
             
         favorites = false
+        status = .unknown
         super.init()
         md5 = baseModel.md5
         
@@ -519,6 +539,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = remote.tempDownloadURL
         patchToPreview = .remoteUrl(URL(string: ""))
         fileSize = remote.bytes ?? Int64(0)
+        status = Status(string: remote.status)
         super.init()
         md5 = remote.hash ?? "not hash "
         
@@ -579,7 +600,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         coreDataObject = mediaItem
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
-        
+        status = .unknown
         var url: URL? = nil
         if let url_ = mediaItem.urlToFileValue {
             url = URL(string: url_)

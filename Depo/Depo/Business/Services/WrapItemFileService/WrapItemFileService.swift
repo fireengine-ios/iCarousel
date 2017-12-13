@@ -117,22 +117,16 @@ class WrapItemFileService: WrapItemFileOperations {
             success?()
             return nil
         }
-        let successDetails: FileOperationSucces = {
-            let fileService = FileService()
-            fileService.details(uuids: items.map({ $0.uuid }), success: { (updatedItems) in
-                for item in updatedItems {
-                    if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
-                        itemToUpdate.metaData = item.metaData
-                    }
-                }
-                success?()
-            }, fail: fail)
-        }
+
+        
         return uploadService.uploadFileList(items: localFiles,
                                             uploadType: .syncToUse,
                                             uploadStategy: .WithoutConflictControl,
                                             uploadTo: .MOBILE_UPLOAD,
-                                            success: successDetails,
+                                            success: { self.waitItemsDetails(for: items,
+                                                                             maxAttempts: 5,
+                                                                             success: success,
+                                                                             fail: fail) },
                                             fail: fail)
     }
     
@@ -210,4 +204,28 @@ class WrapItemFileService: WrapItemFileOperations {
         return items
     }
 
+    private func waitItemsDetails(for items: [WrapData], currentAttempt: Int = 0, maxAttempts: Int, success: FileOperationSucces?, fail: FailResponse?) {
+        let fileService = FileService()
+        fileService.details(uuids: items.map({ $0.uuid }), success: { (updatedItems) in
+            for item in updatedItems {
+                if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
+                    itemToUpdate.metaData = item.metaData
+                    itemToUpdate.status = item.status
+                }
+            }
+            let isCompleted = !updatedItems.contains(where: { $0.status != .active })
+            if isCompleted {
+                success?()
+            } else if currentAttempt < maxAttempts {
+                sleep(2)
+                self.waitItemsDetails(for: items,
+                                      currentAttempt: currentAttempt + 1,
+                                      maxAttempts: maxAttempts,
+                                      success: success,
+                                      fail: fail)
+            } else {
+                fail?(ErrorResponse.string(""))
+            }
+        }, fail: fail)
+    }
 }
