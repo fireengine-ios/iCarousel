@@ -98,7 +98,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             selectedIndex = array.count - 1
         }
 
-        if array.count == 0 {
+        if array.isEmpty {
             output.goBack()
         } else {
 
