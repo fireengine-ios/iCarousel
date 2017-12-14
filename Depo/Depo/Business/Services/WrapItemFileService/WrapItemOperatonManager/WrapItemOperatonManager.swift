@@ -67,6 +67,10 @@ class WrapItemOperatonManager: NSObject {
     //MARK: sending operation to registred subviews
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{
@@ -76,6 +80,10 @@ class WrapItemOperatonManager: NSObject {
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
+        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int){
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,7 +27,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atW-OJ-gax">
-                    <rect key="frame" x="65" y="10" width="264" height="21"/>
+                    <rect key="frame" x="65" y="10" width="224" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="jJJ-Yj-3g2"/>
                     </constraints>
@@ -35,6 +35,13 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Sr-a1-If8" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                    <rect key="frame" x="302" y="5" width="36" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="36" id="29u-zI-Dz7"/>
+                        <constraint firstAttribute="height" constant="36" id="wF8-9d-R3N"/>
+                    </constraints>
+                </imageView>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BO5-dD-3sD">
                     <rect key="frame" x="0.0" y="40" width="345" height="2"/>
                     <constraints>
@@ -64,8 +71,8 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="atW-OJ-gax" secondAttribute="trailing" constant="16" id="10P-hl-5km"/>
                 <constraint firstItem="me9-wy-dYD" firstAttribute="leading" secondItem="cbg-wt-y6p" secondAttribute="trailing" constant="20" id="Cgd-ft-1M6"/>
+                <constraint firstAttribute="trailing" secondItem="6Sr-a1-If8" secondAttribute="trailing" constant="7" id="D6z-HL-Fab"/>
                 <constraint firstItem="atW-OJ-gax" firstAttribute="leading" secondItem="1gD-dx-Gvi" secondAttribute="trailing" constant="13" id="Pcq-7r-DIK"/>
                 <constraint firstItem="47y-eR-fvu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UGX-fT-Ysk"/>
                 <constraint firstItem="1gD-dx-Gvi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="Vc2-r0-BwW"/>
@@ -75,7 +82,9 @@
                 <constraint firstAttribute="bottom" secondItem="47y-eR-fvu" secondAttribute="bottom" id="fEv-VP-gvf"/>
                 <constraint firstItem="cbg-wt-y6p" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="27" id="gVX-P8-7VV"/>
                 <constraint firstItem="me9-wy-dYD" firstAttribute="top" secondItem="BO5-dD-3sD" secondAttribute="bottom" constant="5" id="hG5-LI-uaw"/>
+                <constraint firstItem="6Sr-a1-If8" firstAttribute="leading" secondItem="atW-OJ-gax" secondAttribute="trailing" constant="13" id="hso-YC-ZKl"/>
                 <constraint firstItem="cbg-wt-y6p" firstAttribute="top" secondItem="BO5-dD-3sD" secondAttribute="bottom" constant="8" id="i9q-Dz-tVV"/>
+                <constraint firstItem="6Sr-a1-If8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="jhl-5N-khq"/>
                 <constraint firstAttribute="trailing" secondItem="me9-wy-dYD" secondAttribute="trailing" constant="10" id="mhk-zW-nSB"/>
                 <constraint firstItem="1gD-dx-Gvi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="29" id="nv2-uW-Nh0"/>
                 <constraint firstAttribute="trailing" secondItem="47y-eR-fvu" secondAttribute="trailing" id="rwF-Q6-j8e"/>
@@ -84,6 +93,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="iconImageViewForCurrentFile" destination="6Sr-a1-If8" id="N9S-Gz-bNi"/>
                 <outlet property="imageView" destination="1gD-dx-Gvi" id="aMe-yJ-13K"/>
                 <outlet property="operationLabel" destination="cbg-wt-y6p" id="E1m-6x-gCT"/>
                 <outlet property="progress" destination="BO5-dD-3sD" id="Kvp-OU-QyE"/>
