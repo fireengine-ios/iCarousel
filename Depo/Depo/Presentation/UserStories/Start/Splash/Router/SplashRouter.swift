@@ -27,8 +27,7 @@ class SplashRouter: SplashRouterInput {
     }
     
     func showNetworkError() {
-        CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.errorConnectedToNetwork,
-                                                   okButtonText:TextConstants.ok)
+        UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
     }
     
 }

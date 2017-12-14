@@ -14,8 +14,6 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     
     weak var output: PhoneVereficationInteractorOutput!
     
-//    let customPopUP = CustomPopUp()
-    
     var attempts: Int = 0
     
     let MaxAttemps = NumericConstants.maxVereficationAttempts
@@ -77,7 +75,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func showPopUp(with text: String) {
-        CustomPopUp.sharedInstance.showCustomAlert(withText: text, okButtonText: TextConstants.ok)
+        UIApplication.showErrorAlert(message: text)
     }
     
     func authificate(atachedCaptcha: CaptchaParametrAnswer?) {

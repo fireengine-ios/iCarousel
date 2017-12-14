@@ -12,8 +12,6 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
     var interactor: CreateStoryNameInteractorInput!
     var router: CreateStoryNameRouterInput!
     
-    let custoPopUp = CustomPopUp()
-
     private var _items: [BaseDataSourceItem]?
     
     var items: [BaseDataSourceItem]? {
@@ -26,9 +24,7 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
     }
     
     func showEmptyNamePopup(){
-        custoPopUp.showCustomAlert(
-            withText: TextConstants.createStoryEmptyTextError,
-            okButtonText: TextConstants.createFolderEmptyFolderButtonText)
+        UIApplication.showErrorAlert(message: TextConstants.createStoryEmptyTextError)
     }
     
     func onCreateStory(storyName: String?){

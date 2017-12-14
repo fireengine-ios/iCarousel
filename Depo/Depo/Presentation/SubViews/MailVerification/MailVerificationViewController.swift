@@ -73,7 +73,7 @@ class MailVerificationViewController: BaseViewController {
     
     private func verifyMail() {
         guard let email = inputTextField.text, email.count > 0 else {
-            CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: TextConstants.registrationCellPlaceholderEmail, okButtonText: TextConstants.ok)
+            UIApplication.showErrorAlert(message: TextConstants.registrationCellPlaceholderEmail)
             return
         }
         showSpiner()
@@ -91,7 +91,7 @@ class MailVerificationViewController: BaseViewController {
                                     DispatchQueue.main.async {
                                         self?.actionDelegate?.mailVerificationFailed()
                                         self?.hideSpiner()
-                                        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: TextConstants.notCorrectEmail, okButtonText: TextConstants.ok)
+                                        UIApplication.showErrorAlert(message: TextConstants.notCorrectEmail)
                                     }
         })
     }

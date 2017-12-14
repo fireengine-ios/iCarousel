@@ -49,7 +49,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
                 uploadVC.currentVC.navigationController?.popViewController(animated: true)
             }
         } else {
-            custoPopUp.showCustomAlert(withText: TextConstants.uploadFilesNothingUploadError, okButtonText: TextConstants.uploadFilesNothingUploadOk)
+            UIApplication.showErrorAlert(message: TextConstants.uploadFilesNothingUploadError)
         }
     }
     

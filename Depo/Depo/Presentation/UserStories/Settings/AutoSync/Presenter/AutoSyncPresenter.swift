@@ -6,13 +6,11 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput, AutoSyncInteractorOutput, CustomPopUpAlertActions {
+class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput, AutoSyncInteractorOutput {
     
     weak var view: AutoSyncViewInput!
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
-    
-    let customPopUp = CustomPopUp()
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
@@ -30,22 +28,15 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     }
     
     func skipForNowPressed() {
-        customPopUp.delegate = self
-        customPopUp.showCustomAlert(withTitle: TextConstants.autoSyncAlertTitle,
-                                    titleAligment: .left,
-                                    withText: TextConstants.autoSyncAlertText,
-                                    warningTextAligment: .left,
-                                    firstButtonText: TextConstants.autoSyncAlertNo,
-                                    secondButtonText: TextConstants.autoSyncAlertYes,
-                                    isShadowViewShown: true)
-    }
-    
-    func cancelationAction() {
-        
-    }
-    
-    func otherAction() {
-        router.routNextVC()
+        let controller = PopUpController.with(title: TextConstants.autoSyncAlertTitle,
+                                              message: TextConstants.autoSyncAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.autoSyncAlertNo,
+                                              secondButtonTitle: TextConstants.autoSyncAlertYes,
+                                              secondAction: { [weak self] vc in
+                                                self?.router.routNextVC()
+        })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
     func saveChanges(setting: SettingsAutoSyncModel){

@@ -25,8 +25,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var filters: [GeneralFilesFiltrationType] = []
     
-    let custoPopUp = CustomPopUp()
-    
     var bottomBarConfig: EditingBarConfig?
     
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
@@ -233,7 +231,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 router.onItemSelected(item: item, from: data)
             }
         } else {
-            custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
+            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
+            UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
     

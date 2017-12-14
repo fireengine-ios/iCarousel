@@ -48,7 +48,7 @@ extension PackagesViewController: PackagesViewInput {
     
     func successedPromocode() {
         stopActivityIndicator()
-        CustomPopUp.sharedInstance.showCustomSuccessAlert(withTitle: TextConstants.success, withText: TextConstants.promocodeSuccess, okButtonText: TextConstants.ok)
+        UIApplication.showSuccessAlert(message: TextConstants.promocodeSuccess)
         
         promoView.endEditing(true)
         promoView.codeTextField.text = ""
@@ -62,7 +62,7 @@ extension PackagesViewController: PackagesViewInput {
     }
     
     func display(error: ErrorResponse) {
-        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: error.description, okButtonText: TextConstants.ok)
+        UIApplication.showErrorAlert(message: TextConstants.errorAlert)
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan]) {
