@@ -141,8 +141,12 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     func addCellAtIndex(index: Int){
         if (isActive){
-            let indexPath = IndexPath(row: index, section: 0)
-            collectionView.insertItems(at: [indexPath])
+            collectionView.performBatchUpdates({
+                let indexPath = IndexPath(row: index, section: 0)
+                collectionView.insertItems(at: [indexPath])
+            }, completion: { (succes) in
+                
+            })
         }else{
             collectionView.reloadData()
         }
@@ -150,8 +154,12 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     func deleteCellAtIndex(index: Int){
         if (isActive){
-            let indexPath = IndexPath(row: index, section: 0)
-            collectionView.deleteItems(at: [indexPath])
+            collectionView.performBatchUpdates({
+                let indexPath = IndexPath(row: index, section: 0)
+                collectionView.deleteItems(at: [indexPath])
+            }, completion: { (succes) in
+                
+            })
         }else{
             collectionView.reloadData()
         }

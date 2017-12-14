@@ -78,6 +78,13 @@ class SyncService: NSObject {
         
         let isWiFi = ReachabilityService().isReachableViaWiFi
         if (!isWiFi && imageViaWiFiOnly && videoViaWiFiOnly){
+            //check, do we have objects that can be synced by WiFi
+            DispatchQueue.main.async {
+                let localItems = self.allLocalNotSyncItems(video: true, image: true)
+                if localItems.count > 0{
+                    WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
+                }
+            }
             return
         }
         
@@ -89,7 +96,6 @@ class SyncService: NSObject {
         isSyncing = true
         allObjectsHaveBeenUploaded = false
         itemsFromServer.removeAll()
-        self.photoVideoService = PhotoAndVideoService(requestSize: numberElementsInRequest)
         
         let localItems = self.allLocalNotSyncItems(video: isWiFi ? true : !videoViaWiFiOnly,
                                                    image: isWiFi ? true : !imageViaWiFiOnly)
@@ -98,6 +104,10 @@ class SyncService: NSObject {
             isSyncing = false
             return
         }
+        
+        WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+        
+        self.photoVideoService = PhotoAndVideoService(requestSize: numberElementsInRequest)
         
         var latestDate: Date? = nil
         
@@ -122,6 +132,7 @@ class SyncService: NSObject {
         
         guard let dateForCheck = latestDate else {
             isSyncing = false
+            onCancelPrepareToSync()
             return
         }
         
@@ -140,17 +151,27 @@ class SyncService: NSObject {
                                                             }
                     }, fail: { (error) in
                         self_.isSyncing = false
+                        self_.onCancelPrepareToSync()
                     })
                 }else{
                     self_.isSyncing = false
+                    self_.onCancelPrepareToSync()
                 }
             }
         }) {[weak self] in
             if let self_ = self {
                 self_.isSyncing = false
+                self_.onCancelPrepareToSync()
             }
         }
     }
+    
+    
+    
+    fileprivate func onCancelPrepareToSync(){
+        WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+    }
+
     
     func onLoginUser(){
         AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { (models, uniqueUserId) in

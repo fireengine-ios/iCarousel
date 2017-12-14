@@ -17,7 +17,7 @@ class WaitingForWiFiPopUp: BaseView {
     override func configurateView(){
         super.configurateView()
         titleLabel?.text = TextConstants.waitingForWiFiPopUpTitle
-        titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 12)
+        titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel?.textColor = ColorConstants.textGrayColor
         
         syncButton?.setTitle(TextConstants.waitingForWiFiPopUpSyncButton, for: .normal)

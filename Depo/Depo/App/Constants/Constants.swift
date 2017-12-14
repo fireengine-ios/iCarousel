@@ -479,6 +479,7 @@ struct TextConstants {
     static let waitingForWiFiPopUpTitle = "Waiting for a connetionto auto-sync"
     static let waitingForWiFiPopUpSettingsButton = "Settings"
     static let waitingForWiFiPopUpSyncButton = "Sync with data plan"
+    static let prepareToAutoSunc = "Preparing to auto sync..."
 
     
     //MARK: - ActionSheet
