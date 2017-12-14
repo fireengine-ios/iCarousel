@@ -237,7 +237,7 @@ struct TextConstants {
     static let homeUploadedImagesViewAllPictures = "View All Pictures"
     
     //MARK: Popup 
-    static let ok = "Ok"
+    static let ok = "OK"
     
     //MARK: PhotosVideosView
     static let photosVideosViewNoPhotoTitleText = "You don’t have anything on your photo roll."
