@@ -15,6 +15,7 @@ enum OperationType: String{
     case freeAppSpace           = "FreeAppSpace"
     case freeAppSpaceWarning    = "freeAppSpaceWarning"
     case prepareToAutoSync      = "prepareToAutoSync"
+    case autoUploadIsOff        = "autoUploadIsOff"
 }
 
 class Progress {
@@ -134,6 +135,8 @@ class WrapItemOperatonManager: NSObject {
         case .prepareToAutoSync:
             let popUp = PrepareToAutoSync.initFromNib()
             return popUp
+        case .autoUploadIsOff:
+            return AutoUploadIsOffPopUp.initFromNib()
         }
     }
     

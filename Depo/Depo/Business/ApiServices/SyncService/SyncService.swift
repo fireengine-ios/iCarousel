@@ -162,6 +162,16 @@ class SyncService: NSObject {
     fileprivate func onCancelPrepareToSync(){
         WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
     }
+
+    
+    func onLoginUser(){
+        AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { (models, uniqueUserId) in
+            let autoSyncEnable = models[SettingsAutoSyncModel.autoSyncEnableIndex]
+            if (!autoSyncEnable.isSelected){
+                PopUpService.shared.checkIsNeedShowUploadOffPopUp()
+            }
+        })
+    }
     
     fileprivate func startAutoSync() {
         AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (models, uniqueUserId) in
