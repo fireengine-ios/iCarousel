@@ -14,6 +14,8 @@ enum OperationType: String{
     case download               = "Download"
     case freeAppSpace           = "FreeAppSpace"
     case freeAppSpaceWarning    = "freeAppSpaceWarning"
+    case autoUploadIsOff        = "autoUploadIsOff"
+    case waitingForWiFi         = "waitingForWiFi"
 }
 
 class Progress {
@@ -127,6 +129,10 @@ class WrapItemOperatonManager: NSObject {
             let popUp = ProgressPopUp.initFromNib()
             popUp.configurateWithType(viewType: type)
             return popUp
+        case .autoUploadIsOff:
+            return AutoUploadIsOffPopUp.initFromNib()
+        case .waitingForWiFi:
+            return WaitingForWiFiPopUp.initFromNib()
         }
     }
     

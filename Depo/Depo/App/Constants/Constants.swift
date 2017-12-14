@@ -255,6 +255,10 @@ struct TextConstants {
     static let audioViewNoAudioTitleText = "You don’t have any music on your Lifebox yet."
     static let audioViewNoAudioButtonText = "Start adding your music"
 
+    //MARK: DocumentsView
+    static let documentsViewNoDocumenetsTitleText = "You don’t have any documents on your Lifebox yet."
+    static let documentsViewNoDocumenetsButtonText = "Start adding your documents"
+    
     //MARK: settings
     static let backPrintTitle = "Back to Lifebox"
 
@@ -469,6 +473,12 @@ struct TextConstants {
     static let networkType3g = "3G"
     static let networkType4g = "4G"
     static let networkTypeLTE = "LTE"
+    static let autoUploaOffPopUpText = "Auto Upload is off.\nGo to setting to auto sync."
+    static let autoUploaOffCancel = "Cancel"
+    static let autoUploaOffSettings = "Settings"
+    static let waitingForWiFiPopUpTitle = "Waiting for a connetionto auto-sync"
+    static let waitingForWiFiPopUpSettingsButton = "Settings"
+    static let waitingForWiFiPopUpSyncButton = "Sync with data plan"
 
     
     //MARK: - ActionSheet
@@ -649,6 +659,8 @@ struct NumericConstants {
     static let vereficationTimerLimit = 120//in seconds
     static let maxVereficationAttempts = 3
     //
+    
+    static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2

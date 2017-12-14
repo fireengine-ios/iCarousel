@@ -17,8 +17,6 @@ protocol BaseFilesGreedInteractorInput {
     func nextItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?)
     
     func reloadItems (_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?)
-        
-    func needShowNoFileView()-> Bool
     
     func textForNoFileLbel() -> String
     
