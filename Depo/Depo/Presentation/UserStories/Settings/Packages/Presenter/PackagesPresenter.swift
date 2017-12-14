@@ -145,7 +145,8 @@ extension PackagesPresenter: PackagesInteractorOutput {
         optInVC?.view.endEditing(true)
         
         if optInVC?.increaseNumberOfAttemps() == false {
-            CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: TextConstants.promocodeInvalid, okButtonText: TextConstants.ok)
+            let vc = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: TextConstants.promocodeInvalid, image: .error, buttonTitle: TextConstants.ok)
+            optInVC?.present(vc, animated: false, completion: nil)
         }
     }
     
