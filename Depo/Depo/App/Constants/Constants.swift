@@ -255,6 +255,10 @@ struct TextConstants {
     static let audioViewNoAudioTitleText = "You don’t have any music on your Lifebox yet."
     static let audioViewNoAudioButtonText = "Start adding your music"
 
+    //MARK: DocumentsView
+    static let documentsViewNoDocumenetsTitleText = "You don’t have any documents on your Lifebox yet."
+    static let documentsViewNoDocumenetsButtonText = "Start adding your documents"
+    
     //MARK: settings
     static let backPrintTitle = "Back to Lifebox"
 
