@@ -42,8 +42,12 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         super.viewDidAppear(animated)
     }
     
+    override func configurateViewForPopUp() {
+        scrolliblePopUpView.isEnable = false
+    }
+    
     override func configurateNavigationBar() {
-            configureNavBarActions()
+        configureNavBarActions()
     }
     
     override func isNeedShowTabBar() -> Bool{
