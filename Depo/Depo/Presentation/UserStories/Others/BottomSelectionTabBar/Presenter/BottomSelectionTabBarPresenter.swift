@@ -135,6 +135,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 self?.basePassingPresenter?.stopModeSelected()
             }
         case .download:
+            basePassingPresenter?.stopModeSelected()
             interactor.download(item: selectedItems)
         case .edit:
             interactor.edit(item: selectedItems)
@@ -160,6 +161,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             }
             basePassingPresenter?.stopModeSelected()
         case .sync:
+            basePassingPresenter?.stopModeSelected()
             interactor.sync(item: selectedItems)
         case .removeFromAlbum:
             interactor.removeFromAlbum(items: selectedItems)

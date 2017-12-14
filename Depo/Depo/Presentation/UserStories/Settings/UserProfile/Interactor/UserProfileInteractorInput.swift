@@ -9,9 +9,9 @@
 import Foundation
 
 protocol UserProfileInteractorInput {
+    var statusTurkcellUser: Bool { get }
     
     func viewIsReady()
         
     func changeTo(name: String, email: String, number: String)
-    
 }

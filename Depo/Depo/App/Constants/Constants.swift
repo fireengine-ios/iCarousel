@@ -255,6 +255,10 @@ struct TextConstants {
     static let audioViewNoAudioTitleText = "You don’t have any music on your Lifebox yet."
     static let audioViewNoAudioButtonText = "Start adding your music"
 
+    //MARK: DocumentsView
+    static let documentsViewNoDocumenetsTitleText = "You don’t have any documents on your Lifebox yet."
+    static let documentsViewNoDocumenetsButtonText = "Start adding your documents"
+    
     //MARK: settings
     static let backPrintTitle = "Back to Lifebox"
 
@@ -466,6 +470,10 @@ struct TextConstants {
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
+    static let prepareToAutoSunc = "Preparing to auto sync..."
+    static let autoUploaOffPopUpText = "Auto Upload is off.\nGo to setting to auto sync."
+    static let autoUploaOffCancel = "Cancel"
+    static let autoUploaOffSettings = "Settings"
 
     
     //MARK: - ActionSheet
@@ -654,6 +662,8 @@ struct NumericConstants {
     static let vereficationTimerLimit = 120//in seconds
     static let maxVereficationAttempts = 3
     //
+    
+    static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2

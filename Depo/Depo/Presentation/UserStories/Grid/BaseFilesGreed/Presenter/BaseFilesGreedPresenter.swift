@@ -136,6 +136,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view?.stopRefresher()
         dataSource.appendCollectionView(items: [])
         dataSource.reloadData()
+        updateNoFilesView()
     }
     
     func getContentWithSuccess(items: [WrapData]){
@@ -151,6 +152,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.appendCollectionView(items: items)
 
         dataSource.reloadData()
+        updateNoFilesView()
     }
     
     func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
@@ -163,7 +165,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
             dataSourceForArray.configurateWithArray(array: array)
         } else {
-            
             dataSource.reloadData()
         }
     }
@@ -182,20 +183,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view.showCustomPopUpWithInformationAboutAccessToMediaLibrary()
     }
     
-    func needShowNoFileView()-> Bool{
-        return interactor.needShowNoFileView()
-    }
-    
-    func textForNoFileLbel() -> String{
-        return interactor.textForNoFileLbel()
-    }
-    
-    func textForNoFileButton() -> String{
-        return interactor.textForNoFileButton()
-    }
-    
-    func imageForNoFileImageView() -> UIImage{
-        return interactor.imageForNoFileImageView()
+    func needShowNoFileView()-> Bool {
+        return dataSource.allMediaItems.count == 0
     }
     
     func getRemoteItemsService() -> RemoteItemsService{
@@ -282,6 +271,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view.stopSelection()
         dataSource.setSelectionState(selectionState: false)
         view.setThreeDotsMenu(active: true)
+    }
+    
+    private func updateNoFilesView() {
+        if needShowNoFileView() {
+            view.showNoFilesWith(text: interactor.textForNoFileLbel(),
+                                 image: interactor.imageForNoFileImageView(),
+                                 createFilesButtonText: interactor.textForNoFileButton())
+        } else {
+            view.hideNoFiles()
+        }
     }
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {

@@ -35,7 +35,8 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .delete || type == .addToFavorites || type == .removeFromFavorites {
+        let reloadTytpes: [ElementTypes] = [.delete, .addToFavorites, .removeFromFavorites, .move]
+        if reloadTytpes.contains(type) {
             onReloadData()  
         }
     }
