@@ -14,6 +14,7 @@ enum OperationType: String{
     case download               = "Download"
     case freeAppSpace           = "FreeAppSpace"
     case freeAppSpaceWarning    = "freeAppSpaceWarning"
+    case prepareToAutoSync      = "prepareToAutoSync"
     case autoUploadIsOff        = "autoUploadIsOff"
 }
 
@@ -68,6 +69,7 @@ class WrapItemOperatonManager: NSObject {
     //MARK: sending operation to registred subviews
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+        hidePopUpsByDepends(type: type)
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{
@@ -77,6 +79,7 @@ class WrapItemOperatonManager: NSObject {
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
+        hidePopUpsByDepends(type: type)
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{
@@ -108,6 +111,15 @@ class WrapItemOperatonManager: NSObject {
         }
     }
     
+    func hidePopUpsByDepends(type: OperationType){
+        switch type {
+        case .sync:
+            stopOperationWithType(type: .prepareToAutoSync)
+        default:
+            break
+        }
+    }
+    
     //MARK: views for operations
     
     class func popUpViewForOperaion(type: OperationType) -> BaseView{
@@ -119,6 +131,9 @@ class WrapItemOperatonManager: NSObject {
         case .download, .sync, .upload:
             let popUp = ProgressPopUp.initFromNib()
             popUp.configurateWithType(viewType: type)
+            return popUp
+        case .prepareToAutoSync:
+            let popUp = PrepareToAutoSync.initFromNib()
             return popUp
         case .autoUploadIsOff:
             return AutoUploadIsOffPopUp.initFromNib()
