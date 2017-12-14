@@ -7,5 +7,10 @@
 //
 
 class VisualMusicPlayerRouter: VisualMusicPlayerRouterInput {
+    
+    weak var view: VisualMusicPlayerViewController!
 
+    func dismiss() {
+        view.navigationController?.dismiss(animated: true, completion: {})
+    }
 }

@@ -9,10 +9,11 @@
 import UIKit
 
 class VisualMusicPlayerModuleConfigurator {
-
+    
     func configure(viewController: VisualMusicPlayerViewController, bottomBarConfig: EditingBarConfig) {
 
         let router = VisualMusicPlayerRouter()
+        router.view = viewController
 
         let presenter = VisualMusicPlayerPresenter()
         presenter.view = viewController
@@ -23,7 +24,6 @@ class VisualMusicPlayerModuleConfigurator {
         viewController.editingTabBar = botvarBarVC
         presenter.bottomBarPresenter = bottomBarVCmodule.presenter
         bottomBarVCmodule.presenter?.basePassingPresenter = presenter
-        
         
         let interactor = VisualMusicPlayerInteractor()
         interactor.output = presenter
