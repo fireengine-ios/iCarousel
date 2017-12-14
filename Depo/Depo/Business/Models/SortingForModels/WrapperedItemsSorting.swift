@@ -209,15 +209,15 @@ class WrapperedItemsSorting: NSObject {
         }
     }
        
-    func filterByType(itemsArray:[BaseDataSourceItem], types: [FileType]) -> [BaseDataSourceItem] {
-        let array = itemsArray.filter{
+    func filterByType(itemsArray: [BaseDataSourceItem], types: [FileType]) -> [BaseDataSourceItem] {
+        let array = itemsArray.filter {
             return types.contains($0.fileType)
         }
         return array
     }
     
-    func filterSync(items:[BaseDataSourceItem], key: MoreActionsConfig.CellSyncType) -> [BaseDataSourceItem] {
-        return items.filter{$0.fileType == .application(.doc) }
+    func filterSync(items: [BaseDataSourceItem], key: MoreActionsConfig.CellSyncType) -> [BaseDataSourceItem] {
+        return items.filter{ $0.fileType == .application(.doc) }
     }
     
 }

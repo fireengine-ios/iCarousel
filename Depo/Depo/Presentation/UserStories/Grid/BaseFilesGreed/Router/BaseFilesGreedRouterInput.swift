@@ -10,7 +10,7 @@ import Foundation
 
 protocol BaseFilesGreedRouterInput {
     
-    func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]])
+    func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem])
     
     func showPrint(items: [BaseDataSourceItem])
     

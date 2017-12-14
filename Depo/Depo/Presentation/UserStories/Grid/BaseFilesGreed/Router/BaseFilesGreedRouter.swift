@@ -11,7 +11,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     let player: MediaPlayer = factory.resolve()
     weak var view: BaseFilesGreedViewController!
     
-    func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
+    func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem]) {
         let router = RouterVC()
         
         if (item.fileType == .photoAlbum) {
@@ -23,7 +23,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             return
         }
         
-        guard let wrappered = item as? Item else {
+        guard let wrapperedItem = item as? Item else {
             return
         }
         guard let wrapperedArray = data as? [[Item]] else {
@@ -33,13 +33,13 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         switch item.fileType {
         
         case .folder:
-            let controller = router.filesFromFolder(folder: wrappered)
+            let controller = router.filesFromFolder(folder: wrapperedItem)
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         case .audio:
-            player.play(list: [wrappered], startAt: 0)
+            player.play(list: [wrapperedItem], startAt: 0)
 //            SingleSong.default.playWithItem(object: wrappered)
         default:
-            let controller = router.filesDetailViewController(fileObject: wrappered, from: wrapperedArray)
+            let controller = router.filesDetailViewController(fileObject: wrapperedItem, from: wrapperedArray)
             router.pushViewController(viewController: controller)
         }
     }

@@ -219,19 +219,20 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
         if item.fileType.isUnSupportedOpenType {
-            if interactor.remoteItems is MusicService {
-                guard let array = data as? [[Item]],
-                    let wrappered = item as? Item
-                    else { return }
-                
-                let list = array.flatMap{ $0 }
-                guard let startIndex = list.index(of: wrappered) else { return }
-                player.play(list: list, startAt: startIndex)
-                player.play()
-                //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
-            } else {
-                router.onItemSelected(item: item, from: data)
-            }
+//            if interactor.remoteItems is MusicService {
+//                guard let array = data as? [[Item]],
+//                    let wrappered = item as? Item
+//                    else { return }
+//
+//                let list = array.flatMap{ $0 }
+//                guard let startIndex = list.index(of: wrappered) else { return }
+//                player.play(list: list, startAt: startIndex)
+//                player.play()
+//                //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
+//            } else {
+            let sameTypeFiles: [BaseDataSourceItem] = data.flatMap{ return $0 }.filter{ $0.fileType == item.fileType }
+            router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
+//            }
         } else {
             custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
         }

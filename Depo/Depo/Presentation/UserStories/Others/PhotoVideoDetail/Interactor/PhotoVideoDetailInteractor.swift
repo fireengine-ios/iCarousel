@@ -28,7 +28,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         if fileObject.fileType == .image || fileObject.fileType == .video {
             let wrapperedArray = WrapperedItemsSorting().filterByType(itemsArray: array,
                                                                       types: [FileType.video, FileType.image])
-            guard let buf = wrapperedArray as? [Item] else{
+            guard let buf = wrapperedArray as? [Item] else {
                 return
             }
             array = buf
