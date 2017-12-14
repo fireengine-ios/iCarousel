@@ -557,9 +557,15 @@ struct TextConstants {
     static let usageInfoDocs = "%ld docs"
     
     // MARK: - offers
-    static let offersSubTurkcellActivate = "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080."
-    static let offersSubTurkcellCancel = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080."
-    static let offersTurkcellCancel = "You can send SMS message to 2222 by writing \"Depo Iptal\" to cancel subscription."
+    static let offersActivateUkranian = "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080"
+    static let offersActivateCyprus = "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships"
+    
+    static let offersCancelUkranian = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080"
+    static let offersCancelCyprus = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships"
+    static let offersCancelMoldcell = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2"
+    static let offersCancelAll = "You can visit iTunes to cancel your subscription"
+    static let offersCancelTurkcell = "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription"
+    
     static let offersAllCancel = "You can open settings and cancel subscption."
     static let offersInfo = "Info"
     static let offersCancel = "Cancel"

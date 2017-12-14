@@ -72,47 +72,21 @@ extension PackagesViewController: PackagesViewInput {
     func showActivateOfferAlert(for offer: OfferServiceResponse) {
         let bodyText = "\(offer.period ?? "") \(offer.price ?? 0)"
         
-        let vc = DarkPopUpController.with(title: offer.name, message: bodyText, buttonTitle: TextConstants.purchase) { vc in
+        let vc = DarkPopUpController.with(title: offer.name, message: bodyText, buttonTitle: TextConstants.purchase) { [weak self] vc in
             vc.close()
-            self.output.buy(offer: offer)
+            self?.output.buy(offer: offer)
         }
         present(vc, animated: false, completion: nil)
-        
-//        let alertVC = UIAlertController(title: offer.name, message: bodyText, preferredStyle: .alert)
-//        alertVC.view.tintColor = UIColor.lrTealish
-//
-//        let cancelAction = UIAlertAction(title: TextConstants.offersCancel, style: .cancel, handler: nil)
-//        let buyAction = UIAlertAction(title: TextConstants.offersBuy, style: .default) { action in
-//            alertVC.dismiss(animated: true, completion: nil)
-//            self.output.buy(offer: offer)
-//        }
-//
-//        alertVC.addAction(buyAction)
-//        alertVC.addAction(cancelAction)
-//        present(alertVC, animated: true, completion: nil)
     }
     
-    func showCancelOfferAlert(for accountType: AccountType) {
-        let message: String
-        
-        switch accountType {
-        case .turkcell:
-            message = TextConstants.offersTurkcellCancel
-        case .subTurkcell:
-            message = TextConstants.offersSubTurkcellCancel
-        case .all:
-            return
-        }
-        
-        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: message, buttonTitle: TextConstants.offersOk)
+    func showSubTurkcellOpenAlert(with text: String) {
+        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
         present(vc, animated: false, completion: nil)
-        
-//        let alertVC = UIAlertController(title: TextConstants.offersInfo, message: message, preferredStyle: .alert)
-//        alertVC.view.tintColor = UIColor.lrTealish
-//
-//        let okAction = UIAlertAction(title: TextConstants.offersOk, style: .cancel, handler: nil)
-//        alertVC.addAction(okAction)
-//        present(alertVC, animated: true, completion: nil)
+    }
+    
+    func showCancelOfferAlert(with text: String) {
+        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
+        present(vc, animated: false, completion: nil)
     }
     
     func showCancelOfferApple() {
