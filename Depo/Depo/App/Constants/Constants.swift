@@ -480,6 +480,7 @@ struct TextConstants {
     static let waitingForWiFiPopUpSettingsButton = "Settings"
     static let waitingForWiFiPopUpSyncButton = "Sync with data plan"
     static let prepareToAutoSunc = "Preparing to auto sync..."
+    static let waitForWiFiButtonTitle = "Wait for a WiFi Connection"
 
     
     //MARK: - ActionSheet
