@@ -122,7 +122,7 @@ class RemoteItemsService {
         }
     }
     
-    func stopAllOperations(){
+    func stopAllOperations() {
         DispatchQueue.main.async { [weak self] in
             self?.queueOperations.cancelAllOperations()
         }

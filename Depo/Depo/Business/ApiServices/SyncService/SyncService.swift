@@ -1,254 +1,143 @@
 //
 //  SyncService.swift
-//  Depo
+//  Depo_LifeTech
 //
-//  Created by Alexander Gurin on 8/11/17.
-//  Copyright © 2017 com.igones. All rights reserved.
+//  Created by Konstantin on 12/14/17.
+//  Copyright © 2017 LifeTech. All rights reserved.
 //
 
 import Foundation
 import ReachabilitySwift
 
-class SyncService: NSObject {
+
+class SyncService {
+    static let shared = SyncService()
     
-    static let `default` = SyncService()
+    fileprivate let reachabilityService = ReachabilityService()
     
-    private let reachabilityService = ReachabilityService()
-    private let operations: OperationQueue
-    private var timeLastAutoSync: TimeInterval = 0
-    private var isSyncing: Bool = false
-    private var hasNewItemsToSync: Bool = false
-    private var itemsFromServer = [WrapData]()
-    private let numberElementsInRequest = 100
-    private var allObjectsHaveBeenUploaded = false
-    private var photoVideoService : PhotoAndVideoService? = nil
+    fileprivate let photoSyncService: ItemSyncService = PhotoSyncService()
+    fileprivate let videoSyncService: ItemSyncService = VideoSyncService()
+    fileprivate var settings: SettingsAutoSyncModel?
     
-    private var localItemsArray = [WrapData]()
-    private var localMD5Array = [String]()
     
-    override init() {
-        operations = OperationQueue()
-        operations.maxConcurrentOperationCount = 1
-        
-        super.init()
-        
-        self.subscribeForNotifications()
+    //MARK: - Init
+    
+    init() {
+        subscribeForNotifications()
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    private func subscribeForNotifications() {
+    
+    //MARK: - Public
+    
+    func updateSyncSettings(settingsModel: SettingsAutoSyncModel) {
+        settings = settingsModel
+        
+        photoSyncService.isMobileDataEnabled = settingsModel.mobileDataPhotos
+        videoSyncService.isMobileDataEnabled = settingsModel.mobileDataVideo
+        
+        if settingsModel.isAutoSyncEnable {
+            photoSyncService.start(mobileData: settingsModel.mobileDataPhotos)
+            videoSyncService.start(mobileData: settingsModel.mobileDataVideo)
+        } else {
+            photoSyncService.stop(mobileDataOnly: false)
+            videoSyncService.stop(mobileDataOnly: false)
+        }
+    }
+    
+    
+    //MARK: - Private
+    
+    //MARK: Flow
+    
+    //start to sync
+    fileprivate func start(mobileData: Bool) {
+        photoSyncService.start(mobileData: mobileData)
+        videoSyncService.start(mobileData: mobileData)
+    }
+    
+    //start to sync
+    fileprivate func addNewItems(mobileData: Bool) {
+        
+    }
+    
+    //stop/cancel completely
+    fileprivate func stop(reachabilityDidChange: Bool, mobileDataOnly: Bool) {
+        if reachabilityDidChange {
+            photoSyncService.interrupt()
+            videoSyncService.interrupt()
+        } else {
+            photoSyncService.stop(mobileDataOnly: mobileDataOnly)
+            videoSyncService.stop(mobileDataOnly: mobileDataOnly)
+        }
+    }
+    
+    //wait for wi-fi connection
+    fileprivate func waitForWiFi() {
+        photoSyncService.waitForWiFi()
+        videoSyncService.waitForWiFi()
+    }
+    
+    //start if is waiting for wi-fi
+    fileprivate func startManually() {
+        photoSyncService.startManually()
+        videoSyncService.startManually()
+    }
+    
+    
+    
+}
+
+//MARK: Notifications
+extension SyncService {
+    fileprivate func subscribeForNotifications() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
-                                       selector: #selector(startSyncImmediately),
+                                       selector: #selector(onPhotoLibraryDidChange),
                                        name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
                                        object: nil)
         
         notificationCenter.addObserver(self,
-                                       selector: #selector(onReachabilityChanged),
+                                       selector: #selector(onReachabilityDidChange),
                                        name: ReachabilityChangedNotification,
                                        object: nil)
     }
     
-    @objc func startSyncImmediately() {
-        timeLastAutoSync = NSDate().timeIntervalSince1970
-        self.startAutoSync()
+    @objc private func onPhotoLibraryDidChange() {
+        guard let syncSettings = settings else {
+            //get
+            return
+        }
+        
+        if reachabilityService.isReachable, syncSettings.isAutoSyncEnable {
+            start(mobileData: !reachabilityService.isReachableViaWiFi)
+        }
     }
     
-    @objc func onReachabilityChanged() {
-        if isSyncing {
-            if !reachabilityService.isReachable {
-                stopSync()
-                hasNewItemsToSync = true
-            }
+    @objc private func onReachabilityDidChange() {
+        guard let syncSettings = settings else {
+            //get
+            return
+        }
+        
+        if !reachabilityService.isReachable {
+            waitForWiFi()
         } else {
-            if reachabilityService.isReachable {
-                startSyncImmediately()
-            }
-        }
-    }
-    
-    func startSync(imageViaWiFiOnly: Bool, videoViaWiFiOnly: Bool) {
-        if (isSyncing) {
-            hasNewItemsToSync = true
-            return
-        }
-        
-        let isWiFi = ReachabilityService().isReachableViaWiFi
-        if (!isWiFi && imageViaWiFiOnly && videoViaWiFiOnly){
-            return
-        }
-        
-        print("Starting auto sync")
-        
-        localItemsArray.removeAll()
-        localMD5Array.removeAll()
-        
-        isSyncing = true
-        allObjectsHaveBeenUploaded = false
-        itemsFromServer.removeAll()
-        self.photoVideoService = PhotoAndVideoService(requestSize: numberElementsInRequest)
-        
-        let localItems = self.allLocalNotSyncItems(video: isWiFi ? true : !videoViaWiFiOnly,
-                                                   image: isWiFi ? true : !imageViaWiFiOnly)
-        
-        if (localItems.count == 0){
-            isSyncing = false
-            return
-        }
-        
-        var latestDate: Date? = nil
-        
-        for object in localItems {
-            if object.fileSize < NumericConstants.fourGigabytes {
-                localItemsArray.append(object)
-                if latestDate == nil {
-                    latestDate = object.creationDate
-                } else {
-                    guard let date = object.creationDate else{
-                        continue
-                    }
-                    if latestDate!.compare(date) == ComparisonResult.orderedDescending {
-                        latestDate = object.creationDate
-                    }
-                }
+            if syncSettings.isAutoSyncEnable {
+                start(mobileData: !reachabilityService.isReachableViaWiFi)
             } else {
-                //
+                stop(reachabilityDidChange: true, mobileDataOnly: false)
             }
-        }
-        localMD5Array.append(contentsOf: localItemsArray.map({ $0.md5 }))
-        
-        guard let dateForCheck = latestDate else {
-            isSyncing = false
-            return
-        }
-        
-        getUnsyncedObjects(latestDate: dateForCheck, success: { [weak self] in
-            if let self_ = self {
-                if self_.localItemsArray.count > 0 {
-                    UploadService.default.uploadFileList(items: self_.localItemsArray,
-                                                         uploadType: .autoSync,
-                                                         uploadStategy: .WithoutConflictControl,
-                                                         uploadTo: .MOBILE_UPLOAD,
-                                                         success:{
-                                                            self_.isSyncing = false
-                                                            if self_.hasNewItemsToSync {
-                                                                self_.hasNewItemsToSync = false
-                                                                self_.startSyncImmediately()
-                                                            }
-                    }, fail: { (error) in
-                        self_.isSyncing = false
-                    })
-                }else{
-                    self_.isSyncing = false
-                }
-            }
-        }) {[weak self] in
-            if let self_ = self {
-                self_.isSyncing = false
-            }
-        }
-    }
-    
-    
-    
-    fileprivate func startAutoSync() {
-        AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (models, uniqueUserId) in
-            let autoSyncEnable = models[SettingsAutoSyncModel.autoSyncEnableIndex]
-            if (autoSyncEnable.isSelected){
-                let imageSyncViaWiFi = !models[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
-                let videoSyncViaWiFi = !models[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
-                self?.startSync(imageViaWiFiOnly: imageSyncViaWiFi, videoViaWiFiOnly: videoSyncViaWiFi)
-            }
-        })
-    }
-    
-    func startAutoSyncInBG(){
-        let time = NSDate().timeIntervalSince1970
-        if time - timeLastAutoSync > NumericConstants.timeIntervalBetweenAutoSync{
-            timeLastAutoSync = time
-            
-            startAutoSync()
-        }
-    }
-    
-    private func getUnsyncedObjects(latestDate: Date,
-                                      success: @escaping ()-> Swift.Void,
-                                      fail: @escaping ()-> Swift.Void){
-        
-        guard let service = self.photoVideoService else{
-            fail()
-            return
-        }
-        var finished = false
-        
-        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
-            guard let `self` = self else{
-                fail()
-                return
-            }
-            
-            for item in items {
-                if item.metaDate.compare(latestDate) == ComparisonResult.orderedAscending {
-                    finished = true
-                    break
-                }
-                
-                let serverObjectMD5 = item.md5
-                if let index = self.localMD5Array.index(of: serverObjectMD5) {
-                    let localItem = self.localItemsArray[index]
-                    localItem.syncStatuses.append(SingletonStorage.shared.unigueUserID)
-                    CoreDataStack.default.updateLocalItemSyncStatus(item: localItem)
-                    
-                    self.localItemsArray.remove(at: index)
-                    self.localMD5Array.remove(at: index)
-                    
-                    if self.localItemsArray.isEmpty {
-                        finished = true
-                        break
-                    }
-                }
-            }
-            
-            if !finished, items.count == self.numberElementsInRequest {
-                self.getUnsyncedObjects(latestDate: latestDate, success: success, fail: fail)
-            } else {
-                success()
-            }
-            }, fail: {
-                fail()
-        }, newFieldValue: nil)
-    }
-    
-    func stopSync() {
-        if (isSyncing) {
-            photoVideoService?.stopAllOperations()
-            UploadService.default.cancelOperations()
-            isSyncing = false
-        }
-    }
-    
-    func pause() {
-        
-    }
-    
-    func allLocalItems() -> [WrapData] {
-        return CoreDataStack.default.allLocalItem()
-    }
-    
-    func allLocalNotSyncItems(video: Bool, image: Bool) -> [WrapData] {
-        return CoreDataStack.default.allLocalItemsForSync(video:video, image:image)
-    }
-    
-    func updateSyncSettings(setting: SettingsAutoSyncModel) {
-        stopSync()
-        
-        if setting.isAutoSyncEnable {
-            startSync(imageViaWiFiOnly: !setting.mobileDataPhotos, videoViaWiFiOnly: !setting.mobileDataVideo)
-        } else {
-            stopSync()
         }
     }
 }
+
+
+
+
+
+
+

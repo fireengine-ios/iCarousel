@@ -189,7 +189,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func stopRefresher() {
-        self.refresher.endRefreshing()
+        DispatchQueue.main.async {
+            self.refresher.endRefreshing()
+        }
     }
     
     func showCustomPopUpWithInformationAboutAccessToMediaLibrary(){
