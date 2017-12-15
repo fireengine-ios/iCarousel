@@ -19,11 +19,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     var photoVideoBottomBarConfig: EditingBarConfig!
     var documentsBottomBarConfig: EditingBarConfig!
     
-    func onSelectItem(fileObject: Item, from items: [[Item]]) {
+    func onSelectItem(fileObject: Item, from items: [Item]) {
         array.removeAll()
-        for ar in items {//FIXME: ALEX
-            array.append(contentsOf: ar)
-        }
+        array.append(contentsOf: items)
+        
         
         if fileObject.fileType == .image || fileObject.fileType == .video {
             let wrapperedArray = WrapperedItemsSorting().filterByType(itemsArray: array,

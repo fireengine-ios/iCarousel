@@ -30,7 +30,7 @@ class SeacrhViewRouter: SearchViewRouterInput {
             let controller = router.filesFromFolder(folder: object)
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         }else{
-            let controller = router.filesDetailViewController(fileObject: object, from: data as! [[Item]])
+            let controller = router.filesDetailViewController(fileObject: object, items: data as! [Item])
             //
             router.pushViewController(viewController: controller)
         }

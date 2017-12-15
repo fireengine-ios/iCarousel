@@ -14,23 +14,23 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem]) {
         let router = RouterVC()
         
-        if (item.fileType == .photoAlbum) {
+        if (selectedItem.fileType == .photoAlbum) {
          
             return
         }
-        if (item.fileType == .musicPlayList) {
+        if (selectedItem.fileType == .musicPlayList) {
             
             return
         }
         
-        guard let wrapperedItem = item as? Item else {
+        guard let wrapperedItem = selectedItem as? Item else {
             return
         }
-        guard let wrapperedArray = data as? [[Item]] else {
+        guard let wrapperedArray = sameTypeItems as? [Item] else {
             return
         }
         
-        switch item.fileType {
+        switch selectedItem.fileType {
         
         case .folder:
             let controller = router.filesFromFolder(folder: wrapperedItem)
@@ -39,7 +39,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             player.play(list: [wrapperedItem], startAt: 0)
 //            SingleSong.default.playWithItem(object: wrappered)
         default:
-            let controller = router.filesDetailViewController(fileObject: wrapperedItem, from: wrapperedArray)
+            let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray)
             router.pushViewController(viewController: controller)
         }
     }
