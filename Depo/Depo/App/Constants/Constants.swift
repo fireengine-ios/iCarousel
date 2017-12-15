@@ -483,7 +483,7 @@ struct TextConstants {
     static let autoUploaOffPopUpText = "Auto Upload is off.\nGo to setting to auto sync."
     static let autoUploaOffCancel = "Cancel"
     static let autoUploaOffSettings = "Settings"
-    static let waitingForWiFiPopUpTitle = "Waiting for a connetionto auto-sync"
+    static let waitingForWiFiPopUpTitle = "Waiting for a connection to auto-sync"
     static let waitingForWiFiPopUpSettingsButton = "Settings"
     static let waitingForWiFiPopUpSyncButton = "Sync with data plan"
     static let prepareToAutoSunc = "Preparing to auto sync..."
