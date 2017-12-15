@@ -141,7 +141,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             [album, smartAlbum].forEach { album in
                 album.enumerateObjects { (object, index, stop) in
-                    if object.photosCount > 0 {
+                    if object.photosCount > 0 || object.videosCount > 0 {
                         let item = AlbumItem(uuid: object.localIdentifier,
                                              name: object.localizedTitle,
                                              creationDate: nil,
@@ -149,8 +149,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                              fileType: .photoAlbum,
                                              syncStatus: .unknown,
                                              isLocalItem: true)
-                        item.imageCount = object.photosCount
-                        
+                        item.imageCount = object.photosCount + object.videosCount
+
                         let fetchOptions = PHFetchOptions()
                         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
                         fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
@@ -164,12 +164,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                                     md5: info.md5)
                             item.preview = WrapData(baseModel: baseMediaContent)
                         }
-                        
                         albums.append(item)
                     }
                 }
             }
-            
             completion(albums)
         }
     }
