@@ -21,7 +21,6 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
             }
         
             self.setTitle(withString: mainTitle, andSubTitle: subTitle)
-        
     }
 
     override func startSelection(with numberOfItems: Int) {
@@ -49,4 +48,5 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     override func isNeedShowTabBar() -> Bool{
         return needShowTabBar
     }
+    
 }
