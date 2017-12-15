@@ -418,21 +418,31 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         return actions
     }
     
-    func updateItems(objectsArray: [Item], selectedIndex: Int){
+    func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
         self.selectedIndex = selectedIndex
         
-        if (selectedIndex == objectsArray.count - 1) {
+        if (isRightSwipe) {
+            if (self.selectedIndex == 0) {
+                self.selectedIndex = 1
+            }
             self.swipeRight(competition: {[weak self] in
                 if let self_ = self{
                     self_.objects.removeAll()
                     self_.objects.append(contentsOf: objectsArray)
                     self_.selectedIndex = selectedIndex
                     
+                    if (selectedIndex == 0){
+                        return
+                    }
+                    
                     let view = self_.views.first!
                     view.setObject(object: self_.objects[selectedIndex - 1], index: selectedIndex - 1)
                 }
             })
         } else {
+            if self.selectedIndex == objectsArray.count - 1 {
+                self.selectedIndex = self.selectedIndex - 1
+            }
             self.swipeLeft(competition: {[weak self] in
                 if let self_ = self{
                     self_.objects.removeAll()
