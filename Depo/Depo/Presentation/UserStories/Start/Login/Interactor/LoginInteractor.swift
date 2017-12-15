@@ -39,7 +39,7 @@ class LoginInteractor: LoginInteractorInput {
             
             output.userStillBlocked(user: login)
             return
-        } else if  (maxAttemps <= attempts) {
+        } else if (maxAttemps <= attempts) {
             output.allAttemtsExhausted(user: login)//block here
             return
         }
@@ -71,9 +71,11 @@ class LoginInteractor: LoginInteractorInput {
                 guard let `self` = self else {
                     return
                 }
-                if (self.inNeedOfCaptcha(forResponse: errorResponse)) {
-                    self.attempts += 1
+                if self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.output.needShowCaptcha()
+                }
+                if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
+                    self.attempts += 1
                 }
                 self.output.failLogin(message: errorResponse.description)
             }
@@ -108,11 +110,11 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     private func inNeedOfCaptcha(forResponse errorResponse: ErrorResponse) -> Bool {
-        
-        if errorResponse.description.contains("412") {
-            return true
-        }
-        return false
+        return errorResponse.description.contains("412")
+    }
+    
+    private func isAuthenticationError(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("401")
     }
     
     func findCoutryPhoneCode(plus: Bool) {

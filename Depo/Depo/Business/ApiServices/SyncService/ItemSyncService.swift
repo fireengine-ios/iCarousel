@@ -82,6 +82,10 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     
     private func sync() {
+        guard status != .executing else {
+            return
+        }
+        
         status = .executing
         
         localItems.removeAll()
@@ -174,11 +178,13 @@ class ItemSyncServiceImpl: ItemSyncService {
     private func appendNewUnsyncedItems() {
         let unsyncedLocalItems = localUnsyncedItems()
         
-        guard !unsyncedLocalItems.isEmpty else {
+        let newUnsyncedLocalItems = unsyncedLocalItems.filter({ !lastSyncedMD5s.contains($0.md5) })
+        
+        guard !newUnsyncedLocalItems.isEmpty else {
             return
         }
         
-        UploadService.default.uploadFileList(items: unsyncedLocalItems,
+        UploadService.default.uploadFileList(items: newUnsyncedLocalItems,
                                              uploadType: .autoSync,
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,

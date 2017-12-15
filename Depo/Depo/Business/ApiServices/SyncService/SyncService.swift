@@ -86,10 +86,9 @@ class SyncService {
         photoSyncService.startManually()
         videoSyncService.startManually()
     }
-    
-    
-    
 }
+
+
 
 //MARK: Notifications
 extension SyncService {

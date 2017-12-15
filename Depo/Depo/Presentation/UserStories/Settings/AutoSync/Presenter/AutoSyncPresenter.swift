@@ -7,7 +7,7 @@
 //
 
 class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput, AutoSyncInteractorOutput, CustomPopUpAlertActions {
-
+    
     weak var view: AutoSyncViewInput!
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
@@ -48,7 +48,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         router.routNextVC()
     }
     
-    func onSaveButton(setting: SettingsAutoSyncModel){
+    func saveChanges(setting: SettingsAutoSyncModel){
         interactor.onSaveSettings(setting: setting)
     }
     

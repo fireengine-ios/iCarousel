@@ -55,7 +55,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // CLLocationManager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        SyncService.default.startAutoSyncInBG()
+//        SyncService.shared
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

@@ -21,8 +21,6 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
     
     var fromSettings: Bool = false
     
-    var saveBarButton: UIBarButtonItem? = nil
-    
     let dataSource = AutoSyncDataSource()
 
     // MARK: Life cycle
@@ -35,26 +33,21 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         
         if fromSettings {
             view.backgroundColor = ColorConstants.whiteColor
+            navigationBarWithGradientStyle()
         } else {
             view.backgroundColor = UIColor.lrTiffanyBlue
         }
         
-        if fromSettings {
-            saveBarButton = UIBarButtonItem(title: TextConstants.autoSyncSaveButton,
-                                            style: .plain,
-                                            target: self,
-                                            action: #selector(onSaveButton))
-            saveBarButton!.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 19), NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
-            
-            splitViewController?.navigationController?.viewControllers.last?.navigationItem.rightBarButtonItem = saveBarButton!
-        }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if fromSettings {
-            navigationItem.rightBarButtonItem = saveBarButton!
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.isMovingFromParentViewController {
+            let model = dataSource.createSettingsAutoSyncModel()
+            output.saveChanges(setting: model)
         }
+
     }
     
     override func viewDidLoad() {
@@ -85,7 +78,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
     
     @IBAction func onStartUsingButton(){
         let model = dataSource.createSettingsAutoSyncModel()
-        output.onSaveButton(setting: model)
+        output.saveChanges(setting: model)
         
         output.startLifeBoxPressed()
     }
@@ -102,8 +95,4 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         dataSource.showCellsFromModels(models: models)
     }
     
-    @objc func onSaveButton(){
-        let model = dataSource.createSettingsAutoSyncModel()
-        output.onSaveButton(setting: model)
-    }
 }

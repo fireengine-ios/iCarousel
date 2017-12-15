@@ -66,7 +66,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func onUpdatUserInfo(userInfo: AccountInfoResponse){
-        router.goToUserInfo(userInfo: userInfo)
+        router.goToUserInfo(userInfo: userInfo, isTurkcellUser: interactor.isTurkcellUser)
     }
     
     func goToActivityTimeline() {

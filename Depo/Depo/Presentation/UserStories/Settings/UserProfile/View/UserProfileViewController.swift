@@ -52,6 +52,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         gsmNumberTextField.textColor = ColorConstants.textGrayColor
         gsmNumberTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
         
+        title = TextConstants.userProfileTitle
+        
         let editButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
         editButton.setTitle(TextConstants.userProfileEditButton, for: .normal)
         editButton.addTarget(self, action: #selector(onEditButtonAction), for: .touchUpInside)
@@ -76,8 +78,6 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         attributedText.addAttribute(NSAttributedStringKey.font, value: font1, range: r1)
         attributedText.addAttribute(NSAttributedStringKey.font, value: font2, range: r2)
         
-        scrollView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 0, right: 0)
-                
         output.viewIsReady()
     }
     
@@ -191,6 +191,7 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return !(textField == gsmNumberTextField && CoreTelephonyService().isTurkcellOperator())
+        return !(textField == gsmNumberTextField && output.isTurkcellUser())
     }
+    
 }

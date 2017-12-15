@@ -6,8 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-import Foundation
-
 class ActivitiesByMinutesAndType {
     let date: Date
     let type: ActivityType

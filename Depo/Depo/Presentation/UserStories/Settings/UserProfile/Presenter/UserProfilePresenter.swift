@@ -55,6 +55,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         view.setupEditState(false)
     }
     
+    func isTurkcellUser() -> Bool {
+        return interactor.statusTurkcellUser
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {

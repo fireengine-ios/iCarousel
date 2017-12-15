@@ -85,14 +85,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         
         output.viewIsReady(collectionView: collectionView)
-        let flag = output.needShowNoFileView()
-        
-        noFilesView.isHidden = !flag
-        if (flag){
-            noFilesLabel.text = output.textForNoFileLbel()
-            startCreatingFilesButton.setTitle(output.textForNoFileButton(), for: .normal)
-            noFilesImage.image = output.imageForNoFileImageView()
-        }
         
         //carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
         
@@ -219,6 +211,17 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func setThreeDotsMenu(active isActive: Bool) {
         navigationItem.rightBarButtonItem?.isEnabled = isActive
+    }
+    
+    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String) {
+        noFilesLabel.text = text
+        noFilesImage.image = image
+        startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
+        noFilesView.isHidden = false
+    }
+    
+    func hideNoFiles() {
+        noFilesView.isHidden = true
     }
     
     @objc func onCancelSelectionButton(){

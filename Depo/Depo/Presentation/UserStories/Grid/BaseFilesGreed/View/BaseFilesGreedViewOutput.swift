@@ -18,12 +18,6 @@ protocol BaseFilesGreedViewOutput {
     
     func needShowNoFileView()-> Bool
     
-    func textForNoFileLbel() -> String
-    
-    func textForNoFileButton() -> String
-    
-    func imageForNoFileImageView() -> UIImage
-    
     func getRemoteItemsService() -> RemoteItemsService
     
     func getFolder() -> Item?

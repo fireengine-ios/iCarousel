@@ -10,7 +10,7 @@ import UIKit
 
 class UserProfileModuleConfigurator {
 
-    func configure(viewController: UserProfileViewController, userInfo: AccountInfoResponse) {
+    func configure(viewController: UserProfileViewController, userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
 
         let router = UserProfileRouter()
 
@@ -21,6 +21,7 @@ class UserProfileModuleConfigurator {
         let interactor = UserProfileInteractor()
         interactor.output = presenter
         interactor.userInfo = userInfo
+        interactor.isTurkcellUser = isTurkcellUser
 
         presenter.interactor = interactor
         viewController.output = presenter
