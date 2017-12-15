@@ -16,6 +16,6 @@ protocol PhotoVideoDetailInteractorOutput: class {
     
     func goBack()
     
-    func updateItems(objects: [Item], selectedIndex: Int)
+    func updateItems(objects: [Item], selectedIndex: Int, isRightSwipe: Bool)
     
 }
