@@ -62,6 +62,7 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     }
     
     override func resendCode() {
+        attempts = 0
         guard let referenceToken = responce?.referenceToken else {
             return
         }

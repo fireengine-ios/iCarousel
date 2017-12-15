@@ -115,8 +115,8 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         dropDovnView!.setTableDataObjects(objects: array)
     }
     
-    func fail(text: String){
-        CustomPopUp.sharedInstance.showCustomAlert(withText: text, okButtonText: TextConstants.ok)
+    func fail(text: String) {
+        UIApplication.showErrorAlert(message: text)
     }
     
     func languageRequestSended(text: String){
@@ -126,10 +126,10 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
             Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [TextConstants.feedbackEmail], success: {
                 //
             }, fail: { (error) in
-                CustomPopUp.sharedInstance.showCustomAlert(withText: error?.localizedDescription ?? TextConstants.feedbackEmailError, okButtonText: TextConstants.ok)
+                UIApplication.showErrorAlert(message: error?.localizedDescription ?? TextConstants.feedbackEmailError)
             })
         } else {
-            CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.feedbackEmailError, okButtonText: TextConstants.ok)
+            UIApplication.showErrorAlert(message: TextConstants.feedbackEmailError)
         }
     }
     

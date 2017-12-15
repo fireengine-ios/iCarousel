@@ -98,7 +98,7 @@ extension UsageInfoViewController: UsageInfoViewInput {
     }
     
     func display(error: ErrorResponse) {
-        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: error.description, okButtonText: TextConstants.ok)
+        UIApplication.showErrorAlert(message: error.description)
     }
 }
 

@@ -58,14 +58,17 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     func vereficationFailed(with error: CustomStringConvertible) {
         view.heighlightInfoTitle()
         compliteAsyncOperationEnableScreen()
-        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: String(format: TextConstants.phoneVereficationNonValidCodeErrorText, interactor.email), okButtonText: TextConstants.ok)
-
+        
+        let text = String(format: TextConstants.phoneVereficationNonValidCodeErrorText, interactor.email)
+        router.presentErrorPopUp(with: text)
     }
     
     func resendCodeRequestFailed(with error: ErrorResponse) {
         compliteAsyncOperationEnableScreen()
-        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: String(format: TextConstants.phoneVereficationResendRequestFailedErrorText, interactor.email), okButtonText: TextConstants.ok)
         view.resendButtonShow(show: true)
+        
+        let text = String(format: TextConstants.phoneVereficationResendRequestFailedErrorText, interactor.email)
+        router.presentErrorPopUp(with: text)
     }
     
     func resendCodeRequestSuccesed() {

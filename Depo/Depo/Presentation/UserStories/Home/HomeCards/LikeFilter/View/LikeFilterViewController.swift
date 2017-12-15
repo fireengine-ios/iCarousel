@@ -48,10 +48,10 @@ class LikeFilterViewController: BaseCollectionViewController, LikeFilterViewInpu
     
     // MARK: UIButtons actions
     @IBAction func onSavePhotoButton(){
-        custoPopUp.showCustomAlert(withText: "Sorry this functional \n is under constraction", okButtonText: "Fine...")
+        UIApplication.showErrorAlert(message: "Sorry this functional \n is under constraction")
     }
     
     @IBAction func onChangeFilterButton(){
-        custoPopUp.showCustomAlert(withText: "Sorry this functional \n is under constraction", okButtonText: "Fine...")
+        UIApplication.showErrorAlert(message: "Sorry this functional \n is under constraction")
     }
 }

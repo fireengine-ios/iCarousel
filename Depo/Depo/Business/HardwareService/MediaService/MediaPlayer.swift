@@ -205,7 +205,7 @@ final class MediaPlayer: NSObject {
         if deleteIndexes.contains(currentIndex) {
             // TODO: CHECK ALL STATES
             if play(at: currentIndex) {
-                
+                currentIndex -= 1
             } else if list.count > 0 {
                 currentIndex = list.count - 1
                 play(at: currentIndex)
@@ -330,7 +330,14 @@ final class MediaPlayer: NSObject {
     
     @discardableResult
     func playNext() -> Bool {
+        if list.isEmpty {
+            delegates.invoke { delegate in
+                delegate.closeMediaPlayer()
+            }
+            return false
+        }
         if currentIndex == items.count - 1 { return false }
+        
         currentIndex += 1
         setupPlayerWithItem(at: chooseIndex(for: currentIndex))
         return true
@@ -403,7 +410,7 @@ final class MediaPlayer: NSObject {
     var shuffledIndexes = [Int]()
     
     func shuffleCurrentList() {
-        if list.count == 0 {
+        if list.count == 0 || currentIndex == list.count {
             return
         }
         
@@ -416,7 +423,7 @@ final class MediaPlayer: NSObject {
         shuffledList.append(list[currentIndex])
         
         shuffledIndexes.swapAt(0, currentIndex)
-        currentIndex = 0
+//        currentIndex = 0
         
         /// generated random indexes array
         for i in 1..<list.count {
@@ -470,6 +477,7 @@ protocol MediaPlayerDelegate {
     func didStartMediaPlayer(_ mediaPlayer: MediaPlayer)
     func didStopMediaPlayer(_ mediaPlayer: MediaPlayer)
     func changedListItemsInMediaPlayer(_ mediaPlayer: MediaPlayer)
+    func closeMediaPlayer()
 }
 extension MediaPlayerDelegate {
     func mediaPlayer(_ mediaPlayer: MediaPlayer, didStartItemWith duration: Float) {}
@@ -477,4 +485,5 @@ extension MediaPlayerDelegate {
     func didStartMediaPlayer(_ mediaPlayer: MediaPlayer) {}
     func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {}
     func changedListItemsInMediaPlayer(_ mediaPlayer: MediaPlayer) {}
+    func closeMediaPlayer() {}
 }

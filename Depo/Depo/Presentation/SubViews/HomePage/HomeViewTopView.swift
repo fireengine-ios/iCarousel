@@ -24,8 +24,6 @@ class HomeViewTopView: UICollectionReusableView {
     
 
     weak var actionsDelegate: HomeViewTopViewActions?
-
-    let custoPopUp = CustomPopUp()
     
     class func getHeight() -> CGFloat {
         if (Device.isIpad){

@@ -41,4 +41,6 @@ protocol BaseFilesGreedViewOutput {
     func moreActionsPressed(sender: Any)
     
     func moveBack()
+    
+    func reloadType(_ type: MoreActionsConfig.ViewType)
 }

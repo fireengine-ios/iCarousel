@@ -19,4 +19,6 @@ protocol BottomSelectionTabBarRouterInput {
     func showSelectFolder(selectFolder: SelectFolderViewController)
     
     func showShare(rect: CGRect?,urls: [String])
+    
+    func checkDelete(okHandler: @escaping () -> Void)
 }

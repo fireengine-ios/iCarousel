@@ -54,8 +54,8 @@ struct TextConstants {
     static let loginRememberMyCredential = "Remember my credentials"
     static let loginCellTitleEmail = "E-Mail or GSM Number"
     static let loginCellTitlePassword = "Password"//NSLocalizedString("PasswordPlaceholder", comment: "")
-    static let loginCellEmailPlaceholder = ""
-    static let loginCellPasswordPlaceholder = ""
+    static let loginCellEmailPlaceholder =  "You have to fill in your mail or GSM Number"
+    static let loginCellPasswordPlaceholder = "You have to fill in a password"
     
     static let autoSyncNavigationTitle = "Auto Sync"
     static let autoSyncTitle = "Lifebox can sync your files automatically. Would you like to have this feature right now?"
@@ -72,6 +72,11 @@ struct TextConstants {
     static let autoSyncAlertYes = "Skip Auto-Sync"
     static let autoSyncAlertNo = "Cancel"
     static let autoSyncSaveButton = "Save"
+    
+    static let autoSyncSyncOverTitle = "Sync over data plan?"
+    static let autoSyncSyncOverMessage = "Syncing files using cellular data could incur data charges"
+    static let autoSyncSyncOverOn = "Turn-on Sync"
+    
     
     static let registerTitle = "Sign Up"
     
@@ -237,7 +242,7 @@ struct TextConstants {
     static let homeUploadedImagesViewAllPictures = "View All Pictures"
     
     //MARK: Popup 
-    static let ok = "Ok"
+    static let ok = "OK"
     
     //MARK: PhotosVideosView
     static let photosVideosViewNoPhotoTitleText = "You don’t have anything on your photo roll."
@@ -370,6 +375,8 @@ struct TextConstants {
     static let createStoryCreated = "Story created"
     static let createStoryNotCreated = "Story not created"
     static let failWhileAddingToAlbum = "Fail while adding to album"
+    static let createStoryMusicEmpty = "You did not choose music for your story"
+    static let createStoryAddMusic = "Add music"
     
     //MARK: Create story Audio
     static let createStoryNoSelectedAudioError = "Sorry, but story audio should not be empty"
@@ -572,16 +579,22 @@ struct TextConstants {
     static let usageInfoDocs = "%ld docs"
     
     // MARK: - offers
-    static let offersSubTurkcellActivate = "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080."
-    static let offersSubTurkcellCancel = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080."
-    static let offersTurkcellCancel = "You can send SMS message to 2222 by writing \"Depo Iptal\" to cancel subscription."
+    static let offersActivateUkranian = "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080"
+    static let offersActivateCyprus = "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships"
+    
+    static let offersCancelUkranian = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080"
+    static let offersCancelCyprus = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships"
+    static let offersCancelMoldcell = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2"
+    static let offersCancelAll = "You can visit iTunes to cancel your subscription"
+    static let offersCancelTurkcell = "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription"
+    
     static let offersAllCancel = "You can open settings and cancel subscption."
     static let offersInfo = "Info"
     static let offersCancel = "Cancel"
     static let offersBuy = "Buy"
     static let offersOk = "OK"
     static let offersSettings = "Settings"
-    static let offersPrice = "%f ₺ / month"
+    static let offersPrice = "%.2f ₺ / month"
     
     // MARK: - OTP
     static let otpNextButton = "Next"
@@ -652,6 +665,8 @@ struct TextConstants {
     
     static let packages = "Packages"
     static let purchase = "Purchase"
+    
+    static let deleteText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
 }
 
 

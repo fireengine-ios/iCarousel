@@ -71,9 +71,8 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.loginPhoneMailCellID, for: indexPath) as! LoginPhoneMailCell
             cell.loginCellActionDelegate = self
             let model = tableDataMArray[indexPath.row]
-            cell.titleLabel.text = model.title
+            cell.setupBaseCell(withTitle: model.title, inputText: model.inputText)
             cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.textInputField.attributedPlaceholder = NSAttributedString(string: model.inputText, attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.whiteColor])
             
             cell.textDelegate = self
             
@@ -86,9 +85,8 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.passwordCellID,
                                                      for: indexPath) as! PasswordCell
             let model = tableDataMArray[indexPath.row]
-            cell.titleLabel.text = model.title
+            cell.setupInitialState(withLabelTitle: model.title, placeHolderText: model.inputText)
             cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.textInput.text = model.inputText
             cell.textInput.tag = 33
             cell.textDelegate = self
             #if DEBUG

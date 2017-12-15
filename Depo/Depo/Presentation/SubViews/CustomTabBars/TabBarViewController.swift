@@ -600,7 +600,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             switch result {
             case .success(let fhotoUploadResponce):
                 DispatchQueue.main.async {
-                    CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "Success", withText: "Photo uploaded", okButtonText: "OK")
+                    UIApplication.showSuccessAlert(message: "Photo uploaded")
                 }
                 
                 if isPhotoAlbum{
@@ -615,7 +615,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
                 
             case .failed(let error):
                 DispatchQueue.main.async {
-                    CustomPopUp.sharedInstance.showCustomAlert(withText: error.localizedDescription, okButtonText: "OK")
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
                 }
             }
             

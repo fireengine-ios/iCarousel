@@ -6,13 +6,11 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput, CustomPopUpAlertActions {
+class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
 
     weak var view: SyncContactsViewInput!
     var interactor: SyncContactsInteractorInput!
     var router: SyncContactsRouterInput!
-    
-    let customPopUp = CustomPopUp()
 
     var backupAvailable: Bool = false
     
@@ -26,12 +24,16 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
     }
     
     func startOperation(operationType: SyncOperationType){
-        if operationType == .backup, backupAvailable {
-            customPopUp.delegate = self
-            customPopUp.showCustomAlert(withTitle: TextConstants.errorAlerTitleBackupAlreadyExist,
-                                        withText: TextConstants.errorAlertTextBackupAlreadyExist,
-                                        firstButtonText: TextConstants.errorAlertNopeBtnBackupAlreadyExist,
-                                        secondButtonText: TextConstants.errorAlertYesBtnBackupAlreadyExist)
+        if backupAvailable, operationType == .backup {
+            let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
+                                                  message: TextConstants.errorAlertTextBackupAlreadyExist,
+                                                  image: .error,
+                                                  firstButtonTitle: TextConstants.errorAlertNopeBtnBackupAlreadyExist,
+                                                  secondButtonTitle: TextConstants.errorAlertYesBtnBackupAlreadyExist,
+                                                  secondAction: { [weak self] vc in
+                                                    self?.interactor.startOperation(operationType: .backup)
+            })
+            UIApplication.topController()?.present(controller, animated: false, completion: nil)
             return
         }
         
@@ -55,15 +57,5 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
     func lastBackUpDateResponse(response: Date?){
         backupAvailable = response == nil ? false : true
         view.setDateLastBacup(dateLastBacup: response)
-    }
-    
-    //MARK: alert delegate
-    
-    func cancelationAction() {
-        
-    }
-    
-    func otherAction() {
-        interactor.startOperation(operationType: .backup)
     }
 }
