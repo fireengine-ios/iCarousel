@@ -39,6 +39,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var type: MoreActionsConfig.ViewType
     
+    var alertSheetExcludeTypes = [ElementTypes]()
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
@@ -419,7 +421,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
-                                             onSourceView: nil)
+                                             onSourceView: nil,
+                                             excludeTypes: alertSheetExcludeTypes)
         } else {
             actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             alertSheetModule?.showAlertSheet(with: actionTypes,

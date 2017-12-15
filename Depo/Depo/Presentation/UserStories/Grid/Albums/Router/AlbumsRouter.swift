@@ -8,8 +8,6 @@
 
 class AlbumsRouter: BaseFilesGreedRouter {
     
-    weak var presenter: AlbumsPresenter?
-    
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]], type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) {
         let router = RouterVC()
         

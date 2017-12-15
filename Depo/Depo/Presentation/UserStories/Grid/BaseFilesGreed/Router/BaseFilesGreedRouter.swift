@@ -9,6 +9,7 @@
 class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     let player: MediaPlayer = factory.resolve()
     weak var view: BaseFilesGreedViewController!
+    weak var presenter: BaseFilesGreedPresenter!
     
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]], type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) {
         let router = RouterVC()
@@ -30,7 +31,10 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         switch item.fileType {
         
         case .folder:
-            let controller = router.filesFromFolder(folder: wrappered, type: type, moduleOutput: moduleOutput)
+            let controller = router.filesFromFolder(folder: wrappered,
+                                                    type: type,
+                                                    moduleOutput: moduleOutput,
+                                                    alertSheetExcludeTypes: presenter.alertSheetExcludeTypes)
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         case .audio:
             player.play(list: [wrappered], startAt: 0)
