@@ -472,6 +472,7 @@ struct TextConstants {
     static let popUpSyncing = "Syncing files"
     static let popUpUploading = "Uploading files"
     static let popUpDownload = "Downloading files"
+    static let popUpDownloadComplete = "Download is complete"
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
