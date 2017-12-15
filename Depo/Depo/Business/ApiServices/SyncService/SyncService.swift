@@ -86,6 +86,8 @@ class SyncService {
 
     //start to sync
     fileprivate func start(mobileData: Bool) {
+        WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+        
         photoSyncService.start(mobileData: mobileData)
         videoSyncService.start(mobileData: mobileData)
     }
@@ -138,7 +140,6 @@ extension SyncService {
     
     @objc private func onPhotoLibraryDidChange() {
         guard let syncSettings = settings else {
-            //TODO: get
             print("\(#function): Auto sync settings are missing")
             return
         }
@@ -150,7 +151,6 @@ extension SyncService {
     
     @objc private func onReachabilityDidChange() {
         guard let syncSettings = settings else {
-            //TODO: get
             print("\(#function): Auto sync settings are missing")
             return
         }
@@ -169,11 +169,14 @@ extension SyncService {
     @objc private func onAutoSyncStatusDidChange() {
         //has active uploading
         
+        WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+        
         let hasExecutingStatus = (photoSyncService.status == .executing || videoSyncService.status == .executing)
         let hasWaitingForWiFiStatus = (photoSyncService.status == .waitingForWifi || videoSyncService.status == .waitingForWifi)
         
         if !hasExecutingStatus, hasWaitingForWiFiStatus {
             print("\(#function): show 'waiting for wi-fi' card")
+            WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
     }
 }
