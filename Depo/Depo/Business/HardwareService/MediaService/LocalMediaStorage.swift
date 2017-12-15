@@ -75,17 +75,17 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     //MARK: Alerts
     private func showAccessAlert() {
-        CustomPopUp.sharedInstance.showCustomAlert(
-            withTitle: TextConstants.photoLibraryAccessAlertTitle,
-            titleAligment: .center,
-            withText: TextConstants.photoLibraryAccessAlertText, warningTextAligment: .center,
-            firstButtonText: TextConstants.photoLibraryAccessAlertNo,
-            secondButtonText: TextConstants.photoLibraryAccessAlertGoToSettings,
-            isShadowViewShown: true,
-            secondCustomAction: {
-                CustomPopUp.sharedInstance.hideAll()
-                UIApplication.shared.openSettings()
+        let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
+                                              message: TextConstants.cameraAccessAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.cameraAccessAlertNo,
+                                              secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
+                                              secondAction: { vc in
+                                                vc.close {
+                                                    UIApplication.shared.openSettings()
+                                                }
         })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
     func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {

@@ -186,7 +186,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func showCustomPopUpWithInformationAboutAccessToMediaLibrary(){
-        CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.photosVideosViewHaveNoPermissionsAllertText, okButtonText: TextConstants.ok)
+        UIApplication.showErrorAlert(message: TextConstants.photosVideosViewHaveNoPermissionsAllertText)
     }
     
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool){

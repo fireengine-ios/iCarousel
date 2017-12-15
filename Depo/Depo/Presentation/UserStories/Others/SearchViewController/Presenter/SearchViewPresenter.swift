@@ -28,8 +28,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     var sortedRule: SortedRules = .timeDown
     
-    let custoPopUp = CustomPopUp()
-    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
@@ -157,7 +155,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                 moduleOutput?.previewSearchResultsHide()
             }
         } else {
-            custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
+            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
+            UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
     
