@@ -469,16 +469,25 @@ struct TextConstants {
     
     //MARK: PopUp
     static let popUpProgress = "(%ld of %ld)"
-    static let popUpSyncing = "Syncing files"
-    static let popUpUploading = "Uploading files"
+    static let popUpSyncing = "Syncing files over"
+    static let popUpUploading = "Uploading files over"
     static let popUpDownload = "Downloading files"
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
-    static let prepareToAutoSunc = "Preparing to auto sync..."
+    static let networkTypeWiFi = "WiFi"
+    static let networkType2g = "2G"
+    static let networkType3g = "3G"
+    static let networkType4g = "4G"
+    static let networkTypeLTE = "LTE"
     static let autoUploaOffPopUpText = "Auto Upload is off.\nGo to setting to auto sync."
     static let autoUploaOffCancel = "Cancel"
     static let autoUploaOffSettings = "Settings"
+    static let waitingForWiFiPopUpTitle = "Waiting for a connetionto auto-sync"
+    static let waitingForWiFiPopUpSettingsButton = "Settings"
+    static let waitingForWiFiPopUpSyncButton = "Sync with data plan"
+    static let prepareToAutoSunc = "Preparing to auto sync..."
+    static let waitForWiFiButtonTitle = "Wait for a WiFi Connection"
 
     
     //MARK: - ActionSheet

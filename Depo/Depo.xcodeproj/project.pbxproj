@@ -269,6 +269,8 @@
 		7CB2E3121FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */; };
 		7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF50231F44723D00D67BF3 /* AlbumService.swift */; };
 		7CC11AAB1FE1364D00AF022D /* PopUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAA1FE1364D00AF022D /* PopUpService.swift */; };
+		7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */; };
+		7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
 		7CCAC5311FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		7CCAC5331FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
 		7CD1F8CF1F0140900028F51A /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */; };
@@ -2519,6 +2521,8 @@
 		7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeAppSpaceViewCotroller.xib; sourceTree = "<group>"; };
 		7CBF50231F44723D00D67BF3 /* AlbumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumService.swift; sourceTree = "<group>"; };
 		7CC11AAA1FE1364D00AF022D /* PopUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpService.swift; sourceTree = "<group>"; };
+		7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForWiFiPopUp.swift; sourceTree = "<group>"; };
+		7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaitingForWiFiPopUp.xib; sourceTree = "<group>"; };
 		7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellsConstant.swift; sourceTree = "<group>"; };
 		7CC814531EF7A93E001DFCF0 /* AutoSyncConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncConfigurator.swift; sourceTree = "<group>"; };
 		7CC814541EF7A93E001DFCF0 /* AutoSyncInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncInitializer.swift; sourceTree = "<group>"; };
@@ -5155,6 +5159,15 @@
 			path = PopUpService;
 			sourceTree = "<group>";
 		};
+		7CC11AAC1FE2768B00AF022D /* WaitingForWiFiPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */,
+				7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */,
+			);
+			path = WaitingForWiFiPopUp;
+			sourceTree = "<group>";
+		};
 		7CC814511EF7A93E001DFCF0 /* AutoSync */ = {
 			isa = PBXGroup;
 			children = (
@@ -5446,6 +5459,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7CC11AAC1FE2768B00AF022D /* WaitingForWiFiPopUp */,
 				7C3B186B1FE0148900FF3C39 /* PrepareToAutoSync */,
 				7CEA863A1FDE840800F17D9D /* AutoUploadIsOffPopUp */,
 				7CE825B91F823CDE00356AD2 /* FreeUpSpacePopUp */,
@@ -8670,6 +8684,7 @@
 				8DCB21621F3C6C6500BAFE1E /* SearchView.xib in Resources */,
 				7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */,
 				CE51AF921EF90853005DCEE0 /* IntroduceSubView.xib in Resources */,
+				7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */,
 				CE51AFB71EF90853005DCEE0 /* PasswordCell.xib in Resources */,
 				CEAE3FD71EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				CE51AFD11EF90853005DCEE0 /* ForgotPasswordViewController.xib in Resources */,
@@ -9858,6 +9873,7 @@
 				CE6DE7621FCD8A8000C23CBD /* CodeTextField.swift in Sources */,
 				7C6E2F7A1F31E4C900536DB6 /* CreateStoryPhotoSelectionViewController.swift in Sources */,
 				CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */,
+				7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */,
 				CE51AB221EF90853005DCEE0 /* UpdateCheck.m in Sources */,
 				CE51AB231EF90853005DCEE0 /* Constants.swift in Sources */,
 				CE37FF051F7BD42100EF5FF1 /* SKProduct+Localized.swift in Sources */,

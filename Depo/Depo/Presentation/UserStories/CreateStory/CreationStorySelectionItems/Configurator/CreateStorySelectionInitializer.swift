@@ -12,6 +12,7 @@ class CreateStoryModuleInitializer: BaseFilesGreedModuleInitializer {
 
     class func initializePhotoSelectionViewControllerForStory(with nibName:String, story:PhotoStory) -> UIViewController {
         let viewController = CreateStoryPhotoSelectionViewController(nibName: nibName, bundle: nil)
+        viewController.scrolliblePopUpView.isEnable = false
         let configurator = CreateStorySelectionConfigurator()
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100, type: .image),
@@ -21,6 +22,7 @@ class CreateStoryModuleInitializer: BaseFilesGreedModuleInitializer {
     
     class func initializeAudioSelectionViewControllerForStory(with nibName:String, story:PhotoStory) -> UIViewController {
         let viewController = CreateStoryAudioSelectionViewController(nibName: nibName, bundle: nil)
+        viewController.scrolliblePopUpView.isEnable = false
         let configurator = CreateStorySelectionConfigurator()
 
         configurator.configure(viewController: viewController, remoteServices: CreateStoryMusicService(),
