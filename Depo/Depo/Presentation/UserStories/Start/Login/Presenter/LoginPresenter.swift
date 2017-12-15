@@ -40,12 +40,13 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func loginFieldIsEmpty() {
-        showMessageHideSpinner(text: TextConstants.loginScreenNoLoginError)
+        compliteAsyncOperationEnableScreen()
+        view.showInfoButton(in: .login)
     }
     
     func passwordFieldIsEmpty() {
-        showMessageHideSpinner(text: TextConstants.loginScreenNoPasswordError)
-        
+        compliteAsyncOperationEnableScreen()
+        view.showInfoButton(in: .password)
     }
     
     func rememberMe(remember: Bool) {
