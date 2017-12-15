@@ -40,6 +40,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func resendCode() {
+        attempts = 0
         authService.resendVerificationSMS(resendVerification: ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken!), sucess: { [weak self] _ in
             DispatchQueue.main.async { [weak self] in
                 self?.output.resendCodeRequestSuccesed()

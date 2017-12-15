@@ -174,7 +174,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(tokenForResend: String) {
         referenceToken = tokenForResend
-        optInVC?.attempts = 0
         optInVC?.stopActivityIndicator()
         optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInVC?.startEnterCode()
