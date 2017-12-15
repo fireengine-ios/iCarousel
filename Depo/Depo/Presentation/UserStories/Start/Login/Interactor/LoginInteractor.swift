@@ -31,7 +31,8 @@ class LoginInteractor: LoginInteractorInput {
         if login.isEmpty {
             output.loginFieldIsEmpty()
             return
-        } else if password.isEmpty {
+        }
+        if password.isEmpty {
             output.passwordFieldIsEmpty()
             return
         }
