@@ -170,7 +170,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                               selectionModeTypes: []),
+                               selectionModeTypes: [.rename]),
                                topBarConfig: gridListTopBarConfig)
         
         viewController.mainTitle = folder.name ?? ""
