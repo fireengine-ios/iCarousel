@@ -289,16 +289,19 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     fileprivate func add(asset assetIdentifier: String, to album: String) {
-        if let collection = loadAlbum(album) {
-            add(asset: assetIdentifier, to: collection)
-        } else {
-            createAlbum(album, completion: { (collection) in
-                if let collection = collection {
+        askPermissionForPhotoFramework(redirectToSettings: true, completion: { (accessGranted, _) in
+            if accessGranted {
+                if let collection = self.loadAlbum(album) {
                     self.add(asset: assetIdentifier, to: collection)
+                } else {
+                    self.createAlbum(album, completion: { (collection) in
+                        if let collection = collection {
+                            self.add(asset: assetIdentifier, to: collection)
+                        }
+                    })
                 }
-            })
-        }
-        
+            }
+        })
     }
     
     fileprivate func createRequestAppendImageToAlbum(fileUrl: URL) -> PHObjectPlaceholder? {
