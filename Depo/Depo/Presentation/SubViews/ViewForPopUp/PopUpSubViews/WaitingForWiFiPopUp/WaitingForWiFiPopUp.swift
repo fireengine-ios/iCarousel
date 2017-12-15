@@ -26,7 +26,7 @@ class WaitingForWiFiPopUp: BaseView {
     }
     
     @IBAction func onSyncButton(){
-        
+        SyncService.shared.syncWithDataPlan()
     }
     
     @IBAction func onSettingsButton(){

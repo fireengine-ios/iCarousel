@@ -80,6 +80,11 @@ class SyncService {
     }
     
     
+    func syncWithDataPlan() {
+        startManually()
+    }
+    
+    
     //MARK: - Private
     
     //MARK: Flow
@@ -167,15 +172,12 @@ extension SyncService {
     }
     
     @objc private func onAutoSyncStatusDidChange() {
-        //has active uploading
-        
         WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
         
         let hasExecutingStatus = (photoSyncService.status == .executing || videoSyncService.status == .executing)
         let hasWaitingForWiFiStatus = (photoSyncService.status == .waitingForWifi || videoSyncService.status == .waitingForWifi)
         
         if !hasExecutingStatus, hasWaitingForWiFiStatus {
-            print("\(#function): show 'waiting for wi-fi' card")
             WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
     }
