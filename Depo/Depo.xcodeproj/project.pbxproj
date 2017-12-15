@@ -650,7 +650,6 @@
 		8C0E8D681FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C00971D1F6BDB0500FA069C /* AlertFilesActionsSheetInteractorInput.swift */; };
 		8C0E8D691FDEBDFF00789C91 /* CreateStoryPreviewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E8A41F979C3300D98F27 /* CreateStoryPreviewRouter.swift */; };
 		8C0E8D6A1FDEBDFF00789C91 /* CreateStoryNameConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F7D1F31E4F800536DB6 /* CreateStoryNameConfigurator.swift */; };
-		8C0E8D6B1FDEBDFF00789C91 /* CustomPopUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144D1EF41AD3001DFCF0 /* CustomPopUpService.swift */; };
 		8C0E8D6C1FDEBDFF00789C91 /* PackagesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56011F7552A900F49DA1 /* PackagesConfigurator.swift */; };
 		8C0E8D6D1FDEBDFF00789C91 /* EmptyContainerNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */; };
 		8C0E8D6E1FDEBDFF00789C91 /* PasscodeViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */; };
@@ -685,7 +684,6 @@
 		8C0E8D8B1FDEBDFF00789C91 /* CustomEditingTabBarItemConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8881F348B77002AC795 /* CustomEditingTabBarItemConfig.swift */; };
 		8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95961F163CC80054BDC0 /* WrapperedItems.swift */; };
 		8C0E8D8D1FDEBDFF00789C91 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECAE1F11C294003D1A75 /* SearchService.swift */; };
-		8C0E8D8E1FDEBDFF00789C91 /* CustomPopUpAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3F9A1EFD4ED600A405B2 /* CustomPopUpAlertView.swift */; };
 		8C0E8D8F1FDEBDFF00789C91 /* WelcomeViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F9111F0288DC0028F51A /* WelcomeViewInput.swift */; };
 		8C0E8D901FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1F31F714DFE0008F4CF /* MediaItemsMetaData+CoreDataClass.swift */; };
 		8C0E8D911FDEBDFF00789C91 /* WiFiSyncViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8F21F0288CA0028F51A /* WiFiSyncViewOutput.swift */; };
@@ -1355,7 +1353,6 @@
 		8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
 		8C0E902C1FDEBDFF00789C91 /* BaseFileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74591F07C28D00124DF5 /* BaseFileContentView.xib */; };
 		8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
-		8C0E902E1FDEBDFF00789C91 /* CustomPopUpAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3F991EFD4ED600A405B2 /* CustomPopUpAlert.xib */; };
 		8C0E902F1FDEBDFF00789C91 /* ActivityTimelineTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44F61F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib */; };
 		8C0E90301FDEBDFF00789C91 /* HelpAndSupportHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE95ED391F516736002F923A /* HelpAndSupportHeaderView.xib */; };
 		8C0E90311FDEBDFF00789C91 /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE1D1F5982FA0041D041 /* FeedbackViewController.xib */; };
@@ -1731,7 +1728,6 @@
 		CE51AC681EF90853005DCEE0 /* CurioNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D60F1DDDD0F600FFE63E /* CurioNotificationManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		CE51AC6C1EF90853005DCEE0 /* CurioPushData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6131DDDD0F600FFE63E /* CurioPushData.m */; };
 		CE51AC6E1EF90853005DCEE0 /* AutoSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814641EF7A93E001DFCF0 /* AutoSyncViewController.swift */; };
-		CE51AC6F1EF90853005DCEE0 /* CustomPopUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144D1EF41AD3001DFCF0 /* CustomPopUpService.swift */; };
 		CE51AC7E1EF90853005DCEE0 /* LoginInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C701EEE8E7F0086DA84 /* LoginInitializer.swift */; };
 		CE51AC871EF90853005DCEE0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7C1EEE8E7F0086DA84 /* LoginViewController.swift */; };
 		CE51AC8D1EF90853005DCEE0 /* AutoNextEditingRowPasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */; };
@@ -1908,8 +1904,6 @@
 		CEAE3F941EFD4D7C00A405B2 /* SubPlussButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3F921EFD4D7C00A405B2 /* SubPlussButtonView.swift */; };
 		CEAE3F961EFD4E6200A405B2 /* ButtonWithCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3F951EFD4E6200A405B2 /* ButtonWithCorner.swift */; };
 		CEAE3F981EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3F971EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift */; };
-		CEAE3F9B1EFD4ED600A405B2 /* CustomPopUpAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3F991EFD4ED600A405B2 /* CustomPopUpAlert.xib */; };
-		CEAE3F9C1EFD4ED600A405B2 /* CustomPopUpAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3F9A1EFD4ED600A405B2 /* CustomPopUpAlertView.swift */; };
 		CEAE3FB01EFD4F0D00A405B2 /* HomePageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3F9F1EFD4F0D00A405B2 /* HomePageConfigurator.swift */; };
 		CEAE3FB11EFD4F0D00A405B2 /* HomePageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA01EFD4F0D00A405B2 /* HomePageInitializer.swift */; };
 		CEAE3FB21EFD4F0D00A405B2 /* HomePageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA21EFD4F0D00A405B2 /* HomePageInteractor.swift */; };
@@ -2521,7 +2515,6 @@
 		7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeAppSpaceViewCotroller.xib; sourceTree = "<group>"; };
 		7CBF50231F44723D00D67BF3 /* AlbumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumService.swift; sourceTree = "<group>"; };
 		7CC11AAA1FE1364D00AF022D /* PopUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpService.swift; sourceTree = "<group>"; };
-		7CC8144D1EF41AD3001DFCF0 /* CustomPopUpService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPopUpService.swift; sourceTree = "<group>"; };
 		7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellsConstant.swift; sourceTree = "<group>"; };
 		7CC814531EF7A93E001DFCF0 /* AutoSyncConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncConfigurator.swift; sourceTree = "<group>"; };
 		7CC814541EF7A93E001DFCF0 /* AutoSyncInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncInitializer.swift; sourceTree = "<group>"; };
@@ -3066,8 +3059,6 @@
 		CEAE3F921EFD4D7C00A405B2 /* SubPlussButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubPlussButtonView.swift; sourceTree = "<group>"; };
 		CEAE3F951EFD4E6200A405B2 /* ButtonWithCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithCorner.swift; sourceTree = "<group>"; };
 		CEAE3F971EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiteButtonWithRoundedCorner.swift; sourceTree = "<group>"; };
-		CEAE3F991EFD4ED600A405B2 /* CustomPopUpAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPopUpAlert.xib; sourceTree = "<group>"; };
-		CEAE3F9A1EFD4ED600A405B2 /* CustomPopUpAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPopUpAlertView.swift; sourceTree = "<group>"; };
 		CEAE3F9F1EFD4F0D00A405B2 /* HomePageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageConfigurator.swift; sourceTree = "<group>"; };
 		CEAE3FA01EFD4F0D00A405B2 /* HomePageInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageInitializer.swift; sourceTree = "<group>"; };
 		CEAE3FA21EFD4F0D00A405B2 /* HomePageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageInteractor.swift; sourceTree = "<group>"; };
@@ -5116,7 +5107,6 @@
 				7C33885F1F5952B7006B46B8 /* SingletonStorage */,
 				CE09155C1F3870D000C82A44 /* WrapItemFileService */,
 				CECA95931F1610360054BDC0 /* ImageDownloderService */,
-				7CC8144C1EF41AD3001DFCF0 /* CustomPopUpService */,
 				CE907A2E1F94D49800D2F8CE /* MulticastDelegate.swift */,
 				CE37B0211F7B7BDE00DDE209 /* IAPManager.swift */,
 				CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */,
@@ -5154,16 +5144,6 @@
 				7CC11AAA1FE1364D00AF022D /* PopUpService.swift */,
 			);
 			path = PopUpService;
-			sourceTree = "<group>";
-		};
-		7CC8144C1EF41AD3001DFCF0 /* CustomPopUpService */ = {
-			isa = PBXGroup;
-			children = (
-				CEAE3F991EFD4ED600A405B2 /* CustomPopUpAlert.xib */,
-				CEAE3F9A1EFD4ED600A405B2 /* CustomPopUpAlertView.swift */,
-				7CC8144D1EF41AD3001DFCF0 /* CustomPopUpService.swift */,
-			);
-			path = CustomPopUpService;
 			sourceTree = "<group>";
 		};
 		7CC814511EF7A93E001DFCF0 /* AutoSync */ = {
@@ -8496,7 +8476,6 @@
 				8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */,
 				8C0E902C1FDEBDFF00789C91 /* BaseFileContentView.xib in Resources */,
 				8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */,
-				8C0E902E1FDEBDFF00789C91 /* CustomPopUpAlert.xib in Resources */,
 				8C0E902F1FDEBDFF00789C91 /* ActivityTimelineTimeCell.xib in Resources */,
 				8C0E90301FDEBDFF00789C91 /* HelpAndSupportHeaderView.xib in Resources */,
 				8C0E90311FDEBDFF00789C91 /* FeedbackViewController.xib in Resources */,
@@ -8624,7 +8603,6 @@
 				CEBBDE0C1F01E69B00CDF527 /* TurkcellSaturaMed.ttf in Resources */,
 				7C3A745A1F07C28D00124DF5 /* BaseFileContentView.xib in Resources */,
 				CE51AEC41EF90853005DCEE0 /* RegistrationScreen.xib in Resources */,
-				CEAE3F9B1EFD4ED600A405B2 /* CustomPopUpAlert.xib in Resources */,
 				CE8F44F81F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib in Resources */,
 				CE95ED4E1F516736002F923A /* HelpAndSupportHeaderView.xib in Resources */,
 				7C00FE1E1F5982FA0041D041 /* FeedbackViewController.xib in Resources */,
@@ -9204,7 +9182,6 @@
 				8C0E8D681FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
 				8C0E8D691FDEBDFF00789C91 /* CreateStoryPreviewRouter.swift in Sources */,
 				8C0E8D6A1FDEBDFF00789C91 /* CreateStoryNameConfigurator.swift in Sources */,
-				8C0E8D6B1FDEBDFF00789C91 /* CustomPopUpService.swift in Sources */,
 				8C0E8D6C1FDEBDFF00789C91 /* PackagesConfigurator.swift in Sources */,
 				8C0E8D6D1FDEBDFF00789C91 /* EmptyContainerNavVC.swift in Sources */,
 				8C0E8D6E1FDEBDFF00789C91 /* PasscodeViewImp.swift in Sources */,
@@ -9239,7 +9216,6 @@
 				8C0E8D8B1FDEBDFF00789C91 /* CustomEditingTabBarItemConfig.swift in Sources */,
 				8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */,
 				8C0E8D8D1FDEBDFF00789C91 /* SearchService.swift in Sources */,
-				8C0E8D8E1FDEBDFF00789C91 /* CustomPopUpAlertView.swift in Sources */,
 				8C0E8D8F1FDEBDFF00789C91 /* WelcomeViewInput.swift in Sources */,
 				8C0E8D901FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				8C0E8D911FDEBDFF00789C91 /* WiFiSyncViewOutput.swift in Sources */,
@@ -10112,7 +10088,6 @@
 				8C00971E1F6BDB0500FA069C /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
 				7C66E8AF1F979C3300D98F27 /* CreateStoryPreviewRouter.swift in Sources */,
 				7C6E2F8E1F31E4F800536DB6 /* CreateStoryNameConfigurator.swift in Sources */,
-				CE51AC6F1EF90853005DCEE0 /* CustomPopUpService.swift in Sources */,
 				CE2F56151F7552A900F49DA1 /* PackagesConfigurator.swift in Sources */,
 				8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */,
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
@@ -10148,7 +10123,6 @@
 				8C6EF88E1F348B77002AC795 /* CustomEditingTabBarItemConfig.swift in Sources */,
 				CECA95971F163CC80054BDC0 /* WrapperedItems.swift in Sources */,
 				CEDFECAF1F11C294003D1A75 /* SearchService.swift in Sources */,
-				CEAE3F9C1EFD4ED600A405B2 /* CustomPopUpAlertView.swift in Sources */,
 				7CD1F91E1F0288DC0028F51A /* WelcomeViewInput.swift in Sources */,
 				CEE1D1F91F714DFE0008F4CF /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				7CD1F8FF1F0288CA0028F51A /* WiFiSyncViewOutput.swift in Sources */,
