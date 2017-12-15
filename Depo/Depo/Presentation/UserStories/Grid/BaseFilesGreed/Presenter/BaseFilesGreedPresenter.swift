@@ -40,11 +40,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
     
     var type: MoreActionsConfig.ViewType
+    var sortedType: MoreActionsConfig.SortRullesType
     
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
         type = .Grid
+        sortedType = .TimeNewOld
         super.init()
     }
     
@@ -58,17 +60,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
        
         dataSource.delegate = self
         
-        if let displayingType = topBarConfig?.defaultGridListViewtype {
-            if displayingType == .Grid {
+        if let displayingType = topBarConfig {
+            if displayingType.defaultGridListViewtype == .Grid {
                 dataSource.updateDisplayngType(type: .list)
             } else {
                 dataSource.updateDisplayngType(type: .greed)
             }
+            dataSource.currentSortType = displayingType.defaultSortType.sortedRulesConveted
         }
         
         view.setupInitialState()
         setupTopBar()
-        dataSource.currentSortType = sortedRule
         getContent()
         reloadData()
     }
@@ -232,7 +234,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 player.play()
                 //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
             } else {
-                router.onItemSelected(item: item, from: data, type: type, moduleOutput: self)
+                router.onItemSelected(item: item, from: data, type: type, sortType: sortedType, moduleOutput: self)
             }
         } else {
             custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
@@ -340,20 +342,19 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (asGrid){
             dataSource.updateDisplayngType(type: .greed)
             type = .List
-            moduleOutput?.reloadType(type)
+            moduleOutput?.reloadType(type, sortedType: sortedType)
         }else{
             dataSource.updateDisplayngType(type: .list)
             type = .Grid
-            moduleOutput?.reloadType(type)
+            moduleOutput?.reloadType(type, sortedType: sortedType)
         }
     }
     
     func sortedPushed(with rule: SortedRules) {
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
-//        dataSource.dropData()
         dataSource.currentSortType = rule
-//        dataSource.reloadData()
+        moduleOutput?.reloadType(type, sortedType: sortedType)
         reloadData()
     }
     
@@ -438,6 +439,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
+        sortedType = rule
         sortedPushed(with: rule.sortedRulesConveted)
     }
     
@@ -509,22 +511,18 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     //MARK: - BaseFilesGreedModuleOutput
     
-    func reloadType(_ type: MoreActionsConfig.ViewType) {
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType) {
         self.type = type
-        
-        var baseSortTypes: [MoreActionsConfig.SortRullesType] {
-            return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
-        }
+        self.sortedType = sortedType
+        sortedRule = sortedType.sortedRulesConveted
 
-        if type == .Grid {
-            dataSource.updateDisplayngType(type: .list)
-            let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: type)
-            topBarConfig = gridListTopBarConfig
-        } else {
-            dataSource.updateDisplayngType(type: .greed)
-            let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: type)
-            topBarConfig = gridListTopBarConfig
-        }
+        type == .Grid ? dataSource.updateDisplayngType(type: .list) : dataSource.updateDisplayngType(type: .greed)
+        dataSource.currentSortType = sortedType.sortedRulesConveted
+        reloadData()
+        
+        let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: type, defaultSortType: sortedType)
+        topBarConfig = gridListTopBarConfig
+        
         setupTopBar()
     }
     

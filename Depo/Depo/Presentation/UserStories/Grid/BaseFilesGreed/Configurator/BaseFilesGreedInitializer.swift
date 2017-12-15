@@ -141,7 +141,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeFilesFromFolderViewController(with nibName:String, folder: Item, type: MoreActionsConfig.ViewType,moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController {
+    class func initializeFilesFromFolderViewController(with nibName:String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
@@ -161,7 +161,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: type,
             availableSortTypes: baseSortTypes,
-            defaultSortType: .TimeNewOld,
+            defaultSortType: sortType,
             availableFilter: false,
             showGridListButton: true
         )

@@ -8,6 +8,6 @@
 
 protocol BaseFilesGreedModuleOutput: class {
     
-    func reloadType(_ type: MoreActionsConfig.ViewType)
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType)
 
 }

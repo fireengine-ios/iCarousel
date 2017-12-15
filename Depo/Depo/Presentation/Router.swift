@@ -349,8 +349,8 @@ class RouterVC: NSObject {
     
     // MARK: Folder
     
-    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController{
-        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController", folder: folder, type: type, moduleOutput: moduleOutput)
+    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController{
+        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController", folder: folder, type: type, sortType: sortType, moduleOutput: moduleOutput)
         return controller
     }
     
