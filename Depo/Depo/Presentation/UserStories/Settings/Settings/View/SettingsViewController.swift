@@ -30,8 +30,6 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var leaveFeedbackButton: ButtonWithGrayCorner!
     
-    let custoPopUp = CustomPopUp()
-    
     var tableDataArray: [[String]] = []
     var turkCellSeuritySettingsPassState: Bool?
     var turkCellSeuritySettingsAutoLoginState: Bool?

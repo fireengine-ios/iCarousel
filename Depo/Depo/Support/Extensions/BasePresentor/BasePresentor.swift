@@ -71,8 +71,7 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
     
     private func showMessage(errorMessage: String?) {
         if let message = errorMessage{
-            CustomPopUp.sharedInstance.showCustomAlert(withText: message,
-                                  okButtonText:TextConstants.ok)
+            UIApplication.showErrorAlert(message: message)
         }
     }
 }

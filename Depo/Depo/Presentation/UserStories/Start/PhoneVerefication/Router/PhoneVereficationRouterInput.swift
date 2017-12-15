@@ -11,4 +11,5 @@ import Foundation
 protocol PhoneVereficationRouterInput {
 //    func goToTermAndUses()
     func goAutoSync()
+    func presentErrorPopUp(with message: String)
 }

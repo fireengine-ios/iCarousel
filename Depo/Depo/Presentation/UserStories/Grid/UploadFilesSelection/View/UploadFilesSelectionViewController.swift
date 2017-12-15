@@ -28,7 +28,7 @@ class UploadFilesSelectionViewController: BaseFilesGreedChildrenViewController, 
     }
     
     ///need override this method for correct configuration UINavigationBar
-    override func configureNavBarActions() {}
+    override func configureNavBarActions(isSelecting: Bool = false) {}
 
     @objc func onNextButton(){
         output.onNextButton()

@@ -21,15 +21,16 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
             }
         
             self.setTitle(withString: mainTitle, andSubTitle: subTitle)
-        
     }
 
     override func startSelection(with numberOfItems: Int) {
+        configureNavBarActions(isSelecting: true)
         underNavBarBar?.setSorting(enabled: false)
         self.navigationItem.leftBarButtonItem = cancelSelectionButton!
     }
     
     override func stopSelection() {
+        configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
         self.navigationItem.leftBarButtonItem = nil
         if mainTitle != "" {
@@ -38,15 +39,12 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         self.setTitle(withString: mainTitle, andSubTitle: subTitle)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     override func configurateNavigationBar() {
-            configureNavBarActions()
+        configureNavBarActions()
     }
     
     override func isNeedShowTabBar() -> Bool{
         return needShowTabBar
     }
+    
 }

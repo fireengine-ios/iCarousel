@@ -33,7 +33,7 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         }
     }
     
-    override func configureNavBarActions(){
+    override func configureNavBarActions(isSelecting: Bool = false) {
         navigationBarWithGradientStyle()
         setTitle(withString: TextConstants.uploadFromLifeBoxTitle)
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))

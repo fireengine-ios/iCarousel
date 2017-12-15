@@ -10,8 +10,12 @@ import UIKit
 
 class AlbumDetailModuleInitializer: NSObject {
     
+    static var baseSortTypes: [MoreActionsConfig.SortRullesType] {
+        return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+    }
+    
     //Connect with object on storyboard
-    class func initializeAlbumDetailController(with nibName:String, album: AlbumItem, moduleOutput: AlbumDetailModuleOutput? = nil) -> AlbumDetailViewController {
+    class func initializeAlbumDetailController(with nibName:String, album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonUploadFromLifebox])
@@ -25,12 +29,21 @@ class AlbumDetailModuleInitializer: NSObject {
         let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 140))
         interactor.album = album
         viewController.parentUUID = album.uuid
+        
+        let gridListTopBarConfig = GridListTopBarConfig(
+            defaultGridListViewtype: type,
+            availableSortTypes: baseSortTypes,
+            defaultSortType: .TimeNewOld,
+            availableFilter: false,
+            showGridListButton: true
+        )
+        
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid)],
                                bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyDeleteAlbums, .removeAlbum, .albumDetails, .select],
                                                                                      selectionModeTypes: [.createStory, .delete]),
-                               topBarConfig: nil)
+                               topBarConfig: gridListTopBarConfig)
         
         viewController.mainTitle = album.name ?? ""
         

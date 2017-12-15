@@ -471,7 +471,7 @@ class UploadOperations: Operation {
                             PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
                                 
                             }, fail: { (error) in
-                                CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.failWhileAddingToAlbum, okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
+                                UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
                             })
                         }
                     }

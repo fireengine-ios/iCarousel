@@ -10,14 +10,16 @@ class AlbumsRouter: BaseFilesGreedRouter {
     
     weak var presenter: AlbumsPresenter?
     
-    override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
+    override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]], type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) {
         let router = RouterVC()
         
         if (item.fileType == .photoAlbum){
             guard let album = item as? AlbumItem else {
                 return
             }
-            let controller = router.albumDetailController(album: album, moduleOutput: presenter)
+            
+            let controller = router.albumDetailController(album: album, type: type, moduleOutput: moduleOutput)
+
             router.pushViewController(viewController: controller)
             return
         }

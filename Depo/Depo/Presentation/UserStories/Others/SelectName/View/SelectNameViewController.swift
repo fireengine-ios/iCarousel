@@ -12,8 +12,6 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
 
     var output: SelectNameViewOutput!
     
-    let custoPopUp = CustomPopUp()
-    
     let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
     
     @IBOutlet weak var textField: UITextField!
@@ -88,8 +86,7 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         }
         
         if (!flag){
-            custoPopUp.showCustomAlert(withText: output.getTextForEmptyTextFieldAllert(),
-                                       okButtonText: TextConstants.ok)
+            UIApplication.showErrorAlert(message: output.getTextForEmptyTextFieldAllert())
         }
     }
     

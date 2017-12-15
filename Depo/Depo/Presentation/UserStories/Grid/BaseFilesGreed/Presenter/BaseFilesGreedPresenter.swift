@@ -7,7 +7,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate {
+class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
     
     typealias Item = WrapData
     
@@ -17,6 +17,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     weak var view: BaseFilesGreedViewInput!
     
+    weak var moduleOutput: BaseFilesGreedModuleOutput?
+    
     var interactor: BaseFilesGreedInteractorInput!
     
     var router: BaseFilesGreedRouterInput!
@@ -24,8 +26,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     var sortedRule: SortedRules
     
     var filters: [GeneralFilesFiltrationType] = []
-    
-    let custoPopUp = CustomPopUp()
     
     var bottomBarConfig: EditingBarConfig?
     
@@ -37,9 +37,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
     
+    var type: MoreActionsConfig.ViewType
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
+        type = .Grid
         super.init()
     }
     
@@ -52,6 +55,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                        filters: interactor.originalFilesTypeFilter)
        
         dataSource.delegate = self
+        
+        if let displayingType = topBarConfig?.defaultGridListViewtype {
+            if displayingType == .Grid {
+                dataSource.updateDisplayngType(type: .list)
+            } else {
+                dataSource.updateDisplayngType(type: .greed)
+            }
+        }
         
         view.setupInitialState()
         setupTopBar()
@@ -219,10 +230,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 player.play()
                 //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
             } else {
-                router.onItemSelected(item: item, from: data)
+                router.onItemSelected(item: item, from: data, type: type, moduleOutput: self)
             }
         } else {
-            custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
+            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
+            UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
     
@@ -321,14 +333,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
     }
     
-    
     //MARK: - MoreActionsViewDelegate
     
     func viewAppearanceChanged(asGrid: Bool){
         if (asGrid){
             dataSource.updateDisplayngType(type: .greed)
+            type = .List
+            moduleOutput?.reloadType(type)
         }else{
             dataSource.updateDisplayngType(type: .list)
+            type = .Grid
+            moduleOutput?.reloadType(type)
         }
     }
     
@@ -486,5 +501,31 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func moveBack() {
         router.showBack()
     }
+    
+    func sortType() -> MoreActionsConfig.ViewType {
+        return type
+    }
+    
+    //MARK: - BaseFilesGreedModuleOutput
+    
+    func reloadType(_ type: MoreActionsConfig.ViewType) {
+        self.type = type
+        
+        var baseSortTypes: [MoreActionsConfig.SortRullesType] {
+            return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+        }
+
+        if type == .Grid {
+            dataSource.updateDisplayngType(type: .list)
+            let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: type)
+            topBarConfig = gridListTopBarConfig
+        } else {
+            dataSource.updateDisplayngType(type: .greed)
+            let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: type)
+            topBarConfig = gridListTopBarConfig
+        }
+        setupTopBar()
+    }
+    
 }
 

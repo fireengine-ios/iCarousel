@@ -66,7 +66,6 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToConnectedToNetworkFailed() {
-        CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.errorConnectedToNetwork,
-                                                   okButtonText:TextConstants.ok)
+        UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
     }
 }

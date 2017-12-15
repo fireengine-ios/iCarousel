@@ -349,8 +349,8 @@ class RouterVC: NSObject {
     
     // MARK: Folder
     
-    func filesFromFolder(folder: Item) -> UIViewController{
-        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController", folder: folder)
+    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController{
+        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController", folder: folder, type: type, moduleOutput: moduleOutput)
         return controller
     }
     
@@ -514,10 +514,8 @@ class RouterVC: NSObject {
     
     //MARK: Album detail
     
-    func albumDetailController(album: AlbumItem, moduleOutput: AlbumDetailModuleOutput? = nil) -> AlbumDetailViewController{
-        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController",
-                                                                                      album: album,
-                                                                                      moduleOutput: moduleOutput)
+    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController{
+        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
         return controller
     }
     

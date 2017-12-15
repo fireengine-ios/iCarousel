@@ -28,7 +28,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     }
     var isAnimating = false
     var objects = [Item]() { didSet { configureNavigationBar() } }
-    let customPopUp = CustomPopUp()
     var localPlayer: AVPlayer?
     var playerController: AVPlayerViewController?
     let floatingView = FloatingView()
