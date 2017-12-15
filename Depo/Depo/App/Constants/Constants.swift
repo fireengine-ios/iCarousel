@@ -73,6 +73,11 @@ struct TextConstants {
     static let autoSyncAlertNo = "Cancel"
     static let autoSyncSaveButton = "Save"
     
+    static let autoSyncSyncOverTitle = "Sync over data plan?"
+    static let autoSyncSyncOverMessage = "Syncing files using cellular data could incur data charges"
+    static let autoSyncSyncOverOn = "Turn-on Sync"
+    
+    
     static let registerTitle = "Sign Up"
     
     static let forgotPasswordTitle = "Forgot My Password"

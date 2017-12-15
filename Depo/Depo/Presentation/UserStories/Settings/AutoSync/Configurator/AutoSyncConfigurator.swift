@@ -20,12 +20,13 @@ class AutoSyncModuleConfigurator {
     private func configure(viewController: AutoSyncViewController, fromSettings: Bool = false) {
 
         let router = AutoSyncRouter()
-        
-        viewController.fromSettings = fromSettings
 
         let presenter = AutoSyncPresenter()
         presenter.view = viewController
         presenter.router = router
+        
+        presenter.fromSettings = fromSettings
+        viewController.fromSettings = fromSettings
 
         let interactor = AutoSyncInteractor()
         interactor.output = presenter

@@ -6,11 +6,21 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+
+/**
+ logic from android page
+ https://wiki.life.com.by/display/LTFizy/004+Auto+Sync+page+Android
+ 
+ texts from iOS
+ https://wiki.life.com.by/display/LTFizy/004+Auto+Sync+iOS
+ */
 class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput, AutoSyncInteractorOutput {
     
     weak var view: AutoSyncViewInput!
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
+    
+    var fromSettings: Bool = false
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
@@ -20,11 +30,6 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     func preperedCellsModels(models:[AutoSyncModel]){
          compliteAsyncOperationEnableScreen()
         view.preperedCellsModels(models: models)
-    }
-    
-    func startLifeBoxPressed() {
-        //TODO: call interactor with collected data
-        router.routNextVC()
     }
     
     func skipForNowPressed() {
@@ -41,6 +46,12 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     
     func saveChanges(setting: SettingsAutoSyncModel){
         interactor.onSaveSettings(setting: setting)
+        
+        if !fromSettings, setting.isAutoSyncEnable, setting.mobileDataPhotos == true || setting.mobileDataVideo == true {
+            router.showSyncOverPopUp()
+        } else {
+            router.routNextVC()
+        }
     }
     
     //MARK : BasePresenter
