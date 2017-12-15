@@ -124,7 +124,7 @@ class WrapItemFileService: WrapItemFileOperations {
                                             uploadStategy: .WithoutConflictControl,
                                             uploadTo: .MOBILE_UPLOAD,
                                             success: { self.waitItemsDetails(for: items,
-                                                                             maxAttempts: 5,
+                                                                             maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
                                                                              success: success,
                                                                              fail: fail) },
                                             fail: fail)
@@ -217,14 +217,12 @@ class WrapItemFileService: WrapItemFileOperations {
             if isCompleted {
                 success?()
             } else if currentAttempt < maxAttempts {
-                sleep(2)
+                sleep(NumericConstants.detailsLoadingTimeAwait)
                 self.waitItemsDetails(for: items,
                                       currentAttempt: currentAttempt + 1,
                                       maxAttempts: maxAttempts,
                                       success: success,
                                       fail: fail)
-            } else {
-                fail?(ErrorResponse.string(""))
             }
         }, fail: fail)
     }

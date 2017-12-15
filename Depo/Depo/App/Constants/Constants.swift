@@ -652,6 +652,8 @@ struct NumericConstants {
     static let vereficationTimerLimit = 120//in seconds
     static let maxVereficationAttempts = 3
     //
+    static let maxDetailsLoadingAttempts = 5
+    static let detailsLoadingTimeAwait = UInt32(2)
     
     static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
     
