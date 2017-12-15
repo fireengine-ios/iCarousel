@@ -23,7 +23,7 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
         configureNavBarActions()
     }
     
-    override func configureNavBarActions(){
+    override func configureNavBarActions(isSelecting: Bool = false) {
         navigationBarWithGradientStyle()
         setTitle(withString: TextConstants.createStoryAudioSelected)
         

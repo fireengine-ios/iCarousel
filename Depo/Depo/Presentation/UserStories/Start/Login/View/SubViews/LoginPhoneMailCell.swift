@@ -14,7 +14,6 @@ protocol LoginPhoneMailCellActionProtocol: class {
 class LoginPhoneMailCell: BaseUserInputCellView {
     
     weak var loginCellActionDelegate: LoginPhoneMailCellActionProtocol?
-    private var code: String = ""
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.text?.count == 0, string == "+" {
@@ -32,11 +31,15 @@ class LoginPhoneMailCell: BaseUserInputCellView {
             return
         }
         
-        if code == "+90" && text[3] == "0" {
+        guard let range = text.range(of: "+900") else {
+            return
+        }
+        
+        if text.startIndex == range.lowerBound {
             text.remove(at: text[3])
             textInputField.text = text
         }
-        
+    
     }
     
     func enterPhoneCode(code: String) {
@@ -44,7 +47,6 @@ class LoginPhoneMailCell: BaseUserInputCellView {
     }
     
     func incertPhoneCode(code: String) {
-        self.code = code
         textInputField?.text = code + (textInputField?.text ?? "")
     }
     

@@ -183,6 +183,8 @@
 		7C3A74551F07B20600124DF5 /* PhotoVideoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74541F07B20600124DF5 /* PhotoVideoDetailViewController.xib */; };
 		7C3A74581F07C27900124DF5 /* BaseFileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74571F07C27900124DF5 /* BaseFileContentView.swift */; };
 		7C3A745A1F07C28D00124DF5 /* BaseFileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74591F07C28D00124DF5 /* BaseFileContentView.xib */; };
+		7C3B186E1FE0153E00FF3C39 /* PrepareToAutoSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */; };
+		7C3B186F1FE0153E00FF3C39 /* PrepareToAutoSync.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */; };
 		7C4484FE1F0FC607003AF631 /* ButtonWithGrayCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4484FD1F0FC607003AF631 /* ButtonWithGrayCorner.swift */; };
 		7C4485011F0FC86B003AF631 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4485001F0FC86B003AF631 /* SettingHeaderView.swift */; };
 		7C4485031F0FC87A003AF631 /* SettingHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4485021F0FC87A003AF631 /* SettingHeaderView.xib */; };
@@ -266,6 +268,7 @@
 		7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
 		7CB2E3121FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */; };
 		7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF50231F44723D00D67BF3 /* AlbumService.swift */; };
+		7CC11AAB1FE1364D00AF022D /* PopUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAA1FE1364D00AF022D /* PopUpService.swift */; };
 		7CCAC5311FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		7CCAC5331FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
 		7CD1F8CF1F0140900028F51A /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */; };
@@ -323,6 +326,8 @@
 		7CE779B11F43235C00CFDB2B /* SelectNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE779B01F43235C00CFDB2B /* SelectNameViewController.xib */; };
 		7CE825BE1F823D9700356AD2 /* FreeUpSpacePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE825BD1F823D9700356AD2 /* FreeUpSpacePopUp.swift */; };
 		7CE825C01F823DA600356AD2 /* FreeUpSpacePopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE825BF1F823DA600356AD2 /* FreeUpSpacePopUp.xib */; };
+		7CEA863D1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEA863B1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift */; };
+		7CEA863E1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */; };
 		7CED0B0D1F21DE3B0016CE0C /* DocumentsGreedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CED0B0C1F21DE3B0016CE0C /* DocumentsGreedPresenter.swift */; };
 		7CED0B101F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CED0B0E1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift */; };
 		7CED0B111F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */; };
@@ -366,6 +371,7 @@
 		873204F11FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */; };
 		873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */; };
 		8743AB471FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AB461FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift */; };
+		8734DA0D1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8734DA0C1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift */; };
 		8766D2FF1FBDB06600316F46 /* PhotoSelectiondDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */; };
 		876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245B0B417FC8FE0BAF38799E /* SyncContactsRouter.swift */; };
 		87AD15E41FD678B800DE97DB /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
@@ -1572,6 +1578,7 @@
 		C9C861DC0DEC3C4584CBF425 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B2FD70EACA38EF90262C71 /* SettingsPresenter.swift */; };
 		CC5705DE3B84973A3C2928C7 /* AlbumDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7051E0E1A28BE580D7FEE520 /* AlbumDetailInteractor.swift */; };
 		CDE2227E3AD0825FD2B61890 /* BaseFilesGreedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F31D403CF3A25954AE0EF /* BaseFilesGreedViewController.swift */; };
+		CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */; };
 		CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
 		CE09155E1F3870D000C82A44 /* WrapItemFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */; };
 		CE0ED96E1FBC0F5A00487632 /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
@@ -1964,6 +1971,11 @@
 		CECA331A1F73DA660093CB3C /* CollectionSortingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */; };
 		CECA95951F1610590054BDC0 /* RemoteDownloder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95941F1610590054BDC0 /* RemoteDownloder.swift */; };
 		CECA95971F163CC80054BDC0 /* WrapperedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95961F163CC80054BDC0 /* WrapperedItems.swift */; };
+		CECD4E4D1FDFD69500978BE7 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
+		CECD4E4E1FDFD69500978BE7 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E4C1FDFD69400978BE7 /* PopUpController.swift */; };
+		CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
+		CECD4E541FE1150B00978BE7 /* UIButton+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E531FE1150B00978BE7 /* UIButton+Color.swift */; };
+		CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E551FE1152600978BE7 /* UIImage+Color.swift */; };
 		CEDEAB311FADA5D20046555F /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */; };
 		CEDEAB321FADA5D20046555F /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEAB301FADA5D20046555F /* AlbumCell.xib */; };
 		CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
@@ -2419,6 +2431,8 @@
 		7C3A74541F07B20600124DF5 /* PhotoVideoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoVideoDetailViewController.xib; sourceTree = "<group>"; };
 		7C3A74571F07C27900124DF5 /* BaseFileContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFileContentView.swift; sourceTree = "<group>"; };
 		7C3A74591F07C28D00124DF5 /* BaseFileContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseFileContentView.xib; sourceTree = "<group>"; };
+		7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareToAutoSync.swift; sourceTree = "<group>"; };
+		7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrepareToAutoSync.xib; sourceTree = "<group>"; };
 		7C4484FD1F0FC607003AF631 /* ButtonWithGrayCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithGrayCorner.swift; sourceTree = "<group>"; };
 		7C4485001F0FC86B003AF631 /* SettingHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		7C4485021F0FC87A003AF631 /* SettingHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingHeaderView.xib; sourceTree = "<group>"; };
@@ -2507,6 +2521,7 @@
 		7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeAppSpace.swift; sourceTree = "<group>"; };
 		7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeAppSpaceViewCotroller.xib; sourceTree = "<group>"; };
 		7CBF50231F44723D00D67BF3 /* AlbumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumService.swift; sourceTree = "<group>"; };
+		7CC11AAA1FE1364D00AF022D /* PopUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpService.swift; sourceTree = "<group>"; };
 		7CC8144D1EF41AD3001DFCF0 /* CustomPopUpService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPopUpService.swift; sourceTree = "<group>"; };
 		7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellsConstant.swift; sourceTree = "<group>"; };
 		7CC814531EF7A93E001DFCF0 /* AutoSyncConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncConfigurator.swift; sourceTree = "<group>"; };
@@ -2586,6 +2601,8 @@
 		7CE779B01F43235C00CFDB2B /* SelectNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectNameViewController.xib; sourceTree = "<group>"; };
 		7CE825BD1F823D9700356AD2 /* FreeUpSpacePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUpSpacePopUp.swift; sourceTree = "<group>"; };
 		7CE825BF1F823DA600356AD2 /* FreeUpSpacePopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FreeUpSpacePopUp.xib; sourceTree = "<group>"; };
+		7CEA863B1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoUploadIsOffPopUp.swift; sourceTree = "<group>"; };
+		7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoUploadIsOffPopUp.xib; sourceTree = "<group>"; };
 		7CED0B0C1F21DE3B0016CE0C /* DocumentsGreedPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentsGreedPresenter.swift; sourceTree = "<group>"; };
 		7CED0B0E1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCollectionMultiFileCell.swift; sourceTree = "<group>"; };
 		7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCollectionMultiFileCell.xib; sourceTree = "<group>"; };
@@ -2634,6 +2651,7 @@
 		873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalAlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAssetCollection.swift; sourceTree = "<group>"; };
 		8743AB461FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionDataSource.swift; sourceTree = "<group>"; };
+		8734DA0C1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedModuleOutput.swift; sourceTree = "<group>"; };
 		8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectiondDataSource.swift; sourceTree = "<group>"; };
 		87AD15E31FD678B800DE97DB /* String+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
 		8831E41C046C33B2DA7E6FFE /* SettingsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewInput.swift; sourceTree = "<group>"; };
@@ -2887,6 +2905,7 @@
 		CD5D09EFB8C155B2E9F82179 /* UploadedItemsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsViewOutput.swift; sourceTree = "<group>"; };
 		CD80CEB97E85BA37E721D389 /* FeedbackViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewRouterInput.swift; sourceTree = "<group>"; };
+		CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpImage.swift; sourceTree = "<group>"; };
 		CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarConfugurator.swift; sourceTree = "<group>"; };
 		CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapItemFileService.swift; sourceTree = "<group>"; };
 		CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricsManager.swift; sourceTree = "<group>"; };
@@ -3109,6 +3128,11 @@
 		CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSortingRules.swift; sourceTree = "<group>"; };
 		CECA95941F1610590054BDC0 /* RemoteDownloder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDownloder.swift; sourceTree = "<group>"; };
 		CECA95961F163CC80054BDC0 /* WrapperedItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperedItems.swift; sourceTree = "<group>"; };
+		CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpController.xib; sourceTree = "<group>"; };
+		CECD4E4C1FDFD69400978BE7 /* PopUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
+		CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Adjust.swift"; sourceTree = "<group>"; };
+		CECD4E531FE1150B00978BE7 /* UIButton+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Color.swift"; sourceTree = "<group>"; };
+		CECD4E551FE1152600978BE7 /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 		CED5E81F1EF7E81D009649EB /* CoreTelephonyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTelephonyService.swift; sourceTree = "<group>"; };
 		CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		CEDEAB301FADA5D20046555F /* AlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
@@ -4033,6 +4057,7 @@
 				AAB4FE9A3DE9EE69A1D9C29B /* BaseFilesGreedModuleInput.swift */,
 				9009A5FDA48558656AEA0B43 /* BaseFilesGreedPresenter.swift */,
 				7CED0B0C1F21DE3B0016CE0C /* DocumentsGreedPresenter.swift */,
+				8734DA0C1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -4779,6 +4804,15 @@
 			path = ContentSubViews;
 			sourceTree = "<group>";
 		};
+		7C3B186B1FE0148900FF3C39 /* PrepareToAutoSync */ = {
+			isa = PBXGroup;
+			children = (
+				7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */,
+				7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */,
+			);
+			path = PrepareToAutoSync;
+			sourceTree = "<group>";
+		};
 		7C4484FF1F0FC82A003AF631 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -5078,6 +5112,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7CC11AA91FE1360B00AF022D /* PopUpService */,
 				8CFF86691F0F86E800520D18 /* AppSession */,
 				7CB2E30C1FB9CB26009CF813 /* FreeAppSpace */,
 				7C1663F31F793C53006DC87C /* AutoSyncSettingStorrage */,
@@ -5114,6 +5149,14 @@
 				7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */,
 			);
 			path = FreeAppSpace;
+			sourceTree = "<group>";
+		};
+		7CC11AA91FE1360B00AF022D /* PopUpService */ = {
+			isa = PBXGroup;
+			children = (
+				7CC11AAA1FE1364D00AF022D /* PopUpService.swift */,
+			);
+			path = PopUpService;
 			sourceTree = "<group>";
 		};
 		7CC8144C1EF41AD3001DFCF0 /* CustomPopUpService */ = {
@@ -5417,6 +5460,8 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7C3B186B1FE0148900FF3C39 /* PrepareToAutoSync */,
+				7CEA863A1FDE840800F17D9D /* AutoUploadIsOffPopUp */,
 				7CE825B91F823CDE00356AD2 /* FreeUpSpacePopUp */,
 				7C1F89861F6FFC0D00740177 /* ProgressPopUp */,
 			);
@@ -5430,6 +5475,15 @@
 				7CE825BF1F823DA600356AD2 /* FreeUpSpacePopUp.xib */,
 			);
 			path = FreeUpSpacePopUp;
+			sourceTree = "<group>";
+		};
+		7CEA863A1FDE840800F17D9D /* AutoUploadIsOffPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				7CEA863B1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift */,
+				7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */,
+			);
+			path = AutoUploadIsOffPopUp;
 			sourceTree = "<group>";
 		};
 		7CED0B121F2392700016CE0C /* WrapperedItemsUtils */ = {
@@ -6451,6 +6505,7 @@
 				120D20B58FE02EDFFDC3E5EF /* FileInfo */,
 				35466CD131154C1D21C7C31C /* PhotoVideoDetail */,
 				EFA74F9F1FBF378F00CF946E /* Print */,
+				CECD4E4F1FDFD69E00978BE7 /* PopUp */,
 				CE57DFAA1FDE66980065B688 /* DarkPopUp */,
 			);
 			path = Others;
@@ -6806,6 +6861,7 @@
 		CE34718A1F03689C00B97AC3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CECD4E521FE114FC00978BE7 /* Color */,
 				873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */,
 				CEC3C22E1FB997A600C3D67F /* FromNib.swift */,
 				CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */,
@@ -7616,6 +7672,26 @@
 				CECA95941F1610590054BDC0 /* RemoteDownloder.swift */,
 			);
 			path = ImageDownloderService;
+			sourceTree = "<group>";
+		};
+		CECD4E4F1FDFD69E00978BE7 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */,
+				CECD4E4C1FDFD69400978BE7 /* PopUpController.swift */,
+				CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
+		CECD4E521FE114FC00978BE7 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */,
+				CECD4E531FE1150B00978BE7 /* UIButton+Color.swift */,
+				CECD4E551FE1152600978BE7 /* UIImage+Color.swift */,
+			);
+			path = Color;
 			sourceTree = "<group>";
 		};
 		CED5E81D1EF7E81D009649EB /* HardwareService */ = {
@@ -8504,6 +8580,7 @@
 				CEAE3FDE1EFD500B00A405B2 /* HomeViewTopView.xib in Resources */,
 				CE51AD201EF90853005DCEE0 /* LoginViewController.xib in Resources */,
 				CE6DE75D1FCC3ECF00C23CBD /* OptInController.xib in Resources */,
+				7CEA863E1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib in Resources */,
 				CEAE3F931EFD4D7C00A405B2 /* SubPlusButtons.xib in Resources */,
 				7C634FAB1F0F936700B5B93D /* SettingsTableViewCell.xib in Resources */,
 				7C00FE191F5957570041D041 /* AppRater.bundle in Resources */,
@@ -8573,6 +8650,7 @@
 				7C3A744A1F07927200124DF5 /* CollectionViewCellForPhoto.xib in Resources */,
 				CEBBDE0A1F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf in Resources */,
 				7CED0B111F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib in Resources */,
+				7C3B186F1FE0153E00FF3C39 /* PrepareToAutoSync.xib in Resources */,
 				CEDFEC951F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				7CB2E3121FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				CE57DFA91FDE663C0065B688 /* DarkPopUpController.xib in Resources */,
@@ -8583,6 +8661,7 @@
 				CEAE3FEE1EFD517300A405B2 /* CustomNavBar~ipad.xib in Resources */,
 				CE2BA7CE1FC70B1100AA3EBE /* Images.xcassets in Resources */,
 				CE51AF5F1EF90853005DCEE0 /* IntroduceViewController.xib in Resources */,
+				CECD4E4D1FDFD69500978BE7 /* PopUpController.xib in Resources */,
 				7CDABD131F1E434100C8CC16 /* FileInfoViewController.xib in Resources */,
 				D49886601F3EFBE200F50C95 /* ImportPhotosViewController.xib in Resources */,
 				CEBBDE091F01E69B00CDF527 /* TurkcellSaturaDem.ttf in Resources */,
@@ -8665,7 +8744,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */ = {
@@ -8735,7 +8814,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E90741FDEBDFF00789C91 /* ShellScript */ = {
@@ -9843,6 +9922,7 @@
 				CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */,
 				CE51AB6E1EF90853005DCEE0 /* CurioLocationManager.m in Sources */,
 				CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */,
+				CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */,
 				CE51AB701EF90853005DCEE0 /* AutoSyncViewInput.swift in Sources */,
 				7CD1F8F41F0288CA0028F51A /* WiFiSyncInitializer.swift in Sources */,
 				8C7786A41F3F38F0005CB432 /* VisualMusicPlayerRouter.swift in Sources */,
@@ -9947,6 +10027,7 @@
 				CE2976E11FD58E2000350F3A /* LocalAlbumInteractor.swift in Sources */,
 				7CD1F9171F0288DC0028F51A /* WelcomeInteractorOutput.swift in Sources */,
 				D498865C1F3EFBE200F50C95 /* ImportPhotosPresenter.swift in Sources */,
+				CECD4E4E1FDFD69500978BE7 /* PopUpController.swift in Sources */,
 				CE7467011FD6B61600D0885D /* ErrorResponse.swift in Sources */,
 				CEAE3F961EFD4E6200A405B2 /* ButtonWithCorner.swift in Sources */,
 				7C4485011F0FC86B003AF631 /* SettingHeaderView.swift in Sources */,
@@ -10306,6 +10387,7 @@
 				20D9DB71C68797990E05E828 /* ExpandStorageModuleInput.swift in Sources */,
 				7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
+				CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */,
 				A1DBFD47F4260A0DF1C25486 /* ExpandStoragePresenter.swift in Sources */,
 				EFA74FAF1FBF378F00CF946E /* PrintViewController.swift in Sources */,
 				CEE005741F7B7DD0004FA8DE /* AssetsCash.swift in Sources */,
@@ -10335,8 +10417,10 @@
 				7C7ED4DD1F84C8C400DC5D33 /* CircleYellowButton.swift in Sources */,
 				E121576F506E3512DE62F2BF /* UploadedItemsPresenter.swift in Sources */,
 				010B5388E6913FEA0813D2C8 /* UploadedItemsInteractorInput.swift in Sources */,
+				7CEA863D1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift in Sources */,
 				7C5526131F7B9CCD00A21F3C /* WrapItemOperatonManager.swift in Sources */,
 				CE4CFEC11F78F94900FB4C3D /* BytesType.swift in Sources */,
+				7C3B186E1FE0153E00FF3C39 /* PrepareToAutoSync.swift in Sources */,
 				FB274A9C777B1B0305F1B7ED /* UploadedItemsInteractorOutput.swift in Sources */,
 				D90C48A4F5649113FAF1DC94 /* UploadedItemsInteractor.swift in Sources */,
 				CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */,
@@ -10369,6 +10453,7 @@
 				7C49881F1F3320420039C5F2 /* CreateStoryPhotosOrderViewOutput.swift in Sources */,
 				CEF73B9D1FCEAC30004C3ADF /* KeyboardHideManager.swift in Sources */,
 				38BA503099842E5840815A3A /* BaseFilesGreedPresenter.swift in Sources */,
+				CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */,
 				FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
@@ -10550,6 +10635,7 @@
 				CEC3C24B1FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift in Sources */,
 				CEC3C2461FB99AF800C3D67F /* PasscodeSettingsConfigurator.swift in Sources */,
 				709E10958B04F9A7C42CA5DE /* UploadFilesSelectionRouterInput.swift in Sources */,
+				7CC11AAB1FE1364D00AF022D /* PopUpService.swift in Sources */,
 				6F1E64C890D98AD859149D80 /* UploadFilesSelectionRouter.swift in Sources */,
 				617E2F43F78753FD7989435D /* UploadFilesSelectionInitializer.swift in Sources */,
 				F05F94EB8B3A970E994475FE /* SelectFolderViewController.swift in Sources */,
@@ -10558,6 +10644,7 @@
 				34EB62653F5454C7AC298EE3 /* SelectFolderInitializer.swift in Sources */,
 				7CE825BE1F823D9700356AD2 /* FreeUpSpacePopUp.swift in Sources */,
 				8C77869F1F3F38EF005CB432 /* VisualMusicPlayerInteractor.swift in Sources */,
+				8734DA0D1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift in Sources */,
 				08ACDB1ED67EACE17FB518FA /* SelectNameViewInput.swift in Sources */,
 				CE2F55FE1F7551CD00F49DA1 /* AccountParameters.swift in Sources */,
 				EFA74FB21FBF378F00CF946E /* PrintViewOutput.swift in Sources */,
@@ -10609,6 +10696,7 @@
 				CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */,
 				C7055CAC94DC0C09FAC5F608 /* AlbumDetailPresenter.swift in Sources */,
 				CE2F56321F7554A300F49DA1 /* OfferServiceResponse.swift in Sources */,
+				CECD4E541FE1150B00978BE7 /* UIButton+Color.swift in Sources */,
 				CC5705DE3B84973A3C2928C7 /* AlbumDetailInteractor.swift in Sources */,
 				CEC3C2481FB99AF800C3D67F /* PasscodeSettingsInteractor.swift in Sources */,
 				227254E0DCD67B9CEB06CD58 /* AlbumDetailRouterInput.swift in Sources */,

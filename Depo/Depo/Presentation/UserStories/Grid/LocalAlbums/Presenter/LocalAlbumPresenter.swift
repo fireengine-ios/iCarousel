@@ -11,10 +11,11 @@ class LocalAlbumPresenter: BaseFilesGreedPresenter {
     override func viewIsReady(collectionView: UICollectionView) {
         dataSource = ArrayDataSourceForCollectionView()
         interactor.viewIsReady()
-        dataSource.displayingType = .list
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.localAlbumCell)
         
         super.viewIsReady(collectionView: collectionView)
+        
+        dataSource.displayingType = .list
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
     }

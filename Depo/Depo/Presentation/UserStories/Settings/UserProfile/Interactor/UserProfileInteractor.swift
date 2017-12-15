@@ -11,6 +11,12 @@ class UserProfileInteractor: UserProfileInteractorInput {
     weak var output: UserProfileInteractorOutput!
     
     weak var userInfo: AccountInfoResponse? = nil
+    
+    var isTurkcellUser: Bool = false
+
+    var statusTurkcellUser: Bool {
+        return isTurkcellUser
+    }
 
     
     func viewIsReady(){

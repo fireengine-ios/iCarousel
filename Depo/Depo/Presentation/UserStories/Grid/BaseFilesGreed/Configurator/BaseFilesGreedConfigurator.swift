@@ -24,7 +24,7 @@ class BaseFilesGreedModuleConfigurator {
         } else {
             presenter = DocumentsGreedPresenter()
         }
-        
+                
         presenter?.bottomBarConfig = bottomBarConfig
         
         presenter!.view = viewController
