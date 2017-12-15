@@ -22,6 +22,13 @@ class PhotoSyncService: ItemSyncServiceImpl {
             .sorted(by:{$0.metaDate > $1.metaDate})
     }
     
+    override func interrupt() {
+        super.interrupt()
+        
+        photoVideoService?.stopAllOperations()//TODO: stop only photo sync
+        UploadService.default.cancelSyncOperations(photo: true, video: false)
+    }
+    
     override func stop(mobileDataOnly: Bool) {
         super.stop(mobileDataOnly: mobileDataOnly)
         

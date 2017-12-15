@@ -18,6 +18,9 @@ enum AutoSyncStatus {
 }
 
 
+public let autoSyncStatusDidChangeNotification = NSNotification.Name("AutoSyncStatusChangedNotification")
+
+
 protocol ItemSyncService: class {
     var isMobileDataEnabled: Bool {get set}
     var status: AutoSyncStatus {get}
@@ -32,7 +35,11 @@ protocol ItemSyncService: class {
 
 class ItemSyncServiceImpl: ItemSyncService {
     var fileType: FileType = .unknown
-    var status: AutoSyncStatus = .undetermined
+    var status: AutoSyncStatus = .undetermined {
+        didSet {
+            postNotification()
+        }
+    }
     var isMobileDataEnabled: Bool = false
     
     var photoVideoService: PhotoAndVideoService?
@@ -42,9 +49,14 @@ class ItemSyncServiceImpl: ItemSyncService {
     var lastSyncedMD5s: [String] = []
     
     
+    //MARK: - init
+    
     init() {
         photoVideoService = PhotoAndVideoService(requestSize: NumericConstants.numberOfElementsInSyncRequest)
     }
+    
+    
+    //MARK: - Public
     
     func start(mobileData: Bool) {
         guard !mobileData || isMobileDataEnabled else {
@@ -63,12 +75,12 @@ class ItemSyncServiceImpl: ItemSyncService {
     func interrupt() {
         if status == .executing {
             status = .waitingForWifi
-            stop(mobileDataOnly: false)
         }
     }
     
     func stop(mobileDataOnly: Bool) {
         status = .canceled
+
     }
     
     func waitForWiFi() {
@@ -80,6 +92,8 @@ class ItemSyncServiceImpl: ItemSyncService {
         sync()
     }
     
+    
+    //MARK: - Private
     
     private func sync() {
         guard status != .executing else {
@@ -195,6 +209,12 @@ class ItemSyncServiceImpl: ItemSyncService {
         })
     }
     
+    private func postNotification() {
+        NotificationCenter.default.post(name: autoSyncStatusDidChangeNotification, object: nil)
+    }
+    
+    
+    //MARK: - Override me
     
     func itemsToSync() -> [WrapData] {
         return []

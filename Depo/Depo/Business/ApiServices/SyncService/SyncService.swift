@@ -19,6 +19,8 @@ class SyncService {
     fileprivate let videoSyncService: ItemSyncService = VideoSyncService()
     fileprivate var settings: SettingsAutoSyncModel?
     
+    private var lastAutoSyncTime: TimeInterval = 0
+    
     
     //MARK: - Init
     
@@ -48,20 +50,44 @@ class SyncService {
         }
     }
     
+    func updateImmediately() {
+        lastAutoSyncTime = NSDate().timeIntervalSince1970
+        
+        guard let syncSettings = settings else {
+            print("\(#function): Auto sync settings are missing")
+            return
+        }
+        
+        if reachabilityService.isReachable, syncSettings.isAutoSyncEnable {
+            start(mobileData: !reachabilityService.isReachableViaWiFi)
+        }
+    }
+    
+    func updateInBackground() {
+        let time = NSDate().timeIntervalSince1970
+        if time - lastAutoSyncTime > NumericConstants.timeIntervalBetweenAutoSync{
+            lastAutoSyncTime = time
+            
+            guard let syncSettings = settings else {
+                print("\(#function): Auto sync settings are missing")
+                return
+            }
+            
+            if reachabilityService.isReachable, syncSettings.isAutoSyncEnable {
+                start(mobileData: !reachabilityService.isReachableViaWiFi)
+            }
+        }
+    }
+    
     
     //MARK: - Private
     
     //MARK: Flow
-    
+
     //start to sync
     fileprivate func start(mobileData: Bool) {
         photoSyncService.start(mobileData: mobileData)
         videoSyncService.start(mobileData: mobileData)
-    }
-    
-    //start to sync
-    fileprivate func addNewItems(mobileData: Bool) {
-        
     }
     
     //stop/cancel completely
@@ -103,11 +129,17 @@ extension SyncService {
                                        selector: #selector(onReachabilityDidChange),
                                        name: ReachabilityChangedNotification,
                                        object: nil)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(onAutoSyncStatusDidChange),
+                                       name: autoSyncStatusDidChangeNotification,
+                                       object: nil)
     }
     
     @objc private func onPhotoLibraryDidChange() {
         guard let syncSettings = settings else {
-            //get
+            //TODO: get
+            print("\(#function): Auto sync settings are missing")
             return
         }
         
@@ -118,7 +150,8 @@ extension SyncService {
     
     @objc private func onReachabilityDidChange() {
         guard let syncSettings = settings else {
-            //get
+            //TODO: get
+            print("\(#function): Auto sync settings are missing")
             return
         }
         
@@ -130,6 +163,17 @@ extension SyncService {
             } else {
                 stop(reachabilityDidChange: true, mobileDataOnly: false)
             }
+        }
+    }
+    
+    @objc private func onAutoSyncStatusDidChange() {
+        //has active uploading
+        
+        let hasExecutingStatus = (photoSyncService.status == .executing || videoSyncService.status == .executing)
+        let hasWaitingForWiFiStatus = (photoSyncService.status == .waitingForWifi || videoSyncService.status == .waitingForWifi)
+        
+        if !hasExecutingStatus, hasWaitingForWiFiStatus {
+            print("\(#function): show 'waiting for wi-fi' card")
         }
     }
 }
