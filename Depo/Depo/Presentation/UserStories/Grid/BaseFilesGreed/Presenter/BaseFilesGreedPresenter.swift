@@ -217,7 +217,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     //MARK: BaseGridDataSourceForCollectionView
     
-    func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
+    func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         if item.fileType.isUnSupportedOpenType {
 //            if interactor.remoteItems is MusicService {
 //                guard let array = data as? [[Item]],

@@ -490,10 +490,10 @@ class RouterVC: NSObject {
         return c
     }
     
-    func filesDetailAlbumViewController(fileObject: WrapData, items: [[WrapData]]) -> UIViewController {
+    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController")
         let c = controller as! PhotoVideoDetailViewController
-        c.interactor!.onSelectItem(fileObject: fileObject, from: items.flatMap{$0})
+        c.interactor!.onSelectItem(fileObject: fileObject, from: items)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
