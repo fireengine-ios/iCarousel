@@ -597,7 +597,7 @@ struct TextConstants {
     static let errorEmptyPassword = "Indicates that the password parameter is sent blank."
     static let errorEmptyPhone = "Specifies that the phone number parameter is sent  blank."
     static let errorInvalidEmail = "E-mail address is in an invalid format."
-    static let errorExistEmail = "A user with the given e-mail address already exists."
+    static let errorExistEmail = "This e-mail address is already registered. Please enter another e-mail address."
     static let errorVerifyEmail = "Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation."
     static let errorInvalidPhone = "Phone number is in an invalid format."
     static let errorExistPhone = "A user with the given phone number already exists."
