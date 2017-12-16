@@ -133,7 +133,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
-        UploadService.default.uploadFileList(items: items.sorted(by:{$0.fileSize > $1.fileSize}),
+        UploadService.default.uploadFileList(items: items.sorted(by:{$0.fileSize < $1.fileSize}),
                                              uploadType: .autoSync,
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
