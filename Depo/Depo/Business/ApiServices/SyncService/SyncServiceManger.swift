@@ -14,6 +14,7 @@ class SyncServiceManger {
     static let shared = SyncServiceManger()
     
     fileprivate let reachabilityService = ReachabilityService()
+    fileprivate let autoSyncStorage = AutoSyncDataStorage()
     
     fileprivate let photoSyncService: ItemSyncService = PhotoSyncService()
     fileprivate let videoSyncService: ItemSyncService = VideoSyncService()
@@ -64,7 +65,6 @@ class SyncServiceManger {
         }
     }
     
-    
     func syncWithDataPlan() {
         startManually()
     }
@@ -74,13 +74,23 @@ class SyncServiceManger {
     
     fileprivate func checkReachabilityAndSettings() {
         guard let syncSettings = settings else {
-            print("\(#function): Auto sync settings are missing")
+            autoSyncStorage.getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
+                if let `self` = self {
+                    let settings = SettingsAutoSyncModel()
+                    settings.isAutoSyncEnable = autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected
+                    settings.mobileDataPhotos = autoSyncModels[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
+                    settings.mobileDataVideo = autoSyncModels[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
+                    
+                    self.updateSyncSettings(settingsModel: settings)
+                }
+            })
+            
             return
         }
         
         guard syncSettings.isAutoSyncEnable else {
             WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
-            stop(reachabilityDidChange: false)
+            stop(reachabilityDidChange: false, photo: true, video: true)
             return
         }
         
@@ -90,10 +100,11 @@ class SyncServiceManger {
             if reachabilityService.isReachableViaWiFi {
                 start(photo: true, video: true)
             } else {
+                stop(reachabilityDidChange: true, photo: !syncSettings.mobileDataPhotos, video: !syncSettings.mobileDataPhotos)
                 start(photo: syncSettings.mobileDataPhotos, video: syncSettings.mobileDataVideo)
             }
         } else {
-            stop(reachabilityDidChange: true)
+            stop(reachabilityDidChange: true, photo: true, video: true)
         }
     }
     
@@ -108,13 +119,13 @@ class SyncServiceManger {
     }
     
     //stop/cancel completely
-    fileprivate func stop(reachabilityDidChange: Bool) {
+    fileprivate func stop(reachabilityDidChange: Bool, photo: Bool, video: Bool) {
         if reachabilityDidChange {
-            photoSyncService.interrupt()
-            videoSyncService.interrupt()
+            if photo { photoSyncService.interrupt() }
+            if video { videoSyncService.interrupt() }
         } else {
-            photoSyncService.stop()
-            videoSyncService.stop()
+            if photo { photoSyncService.stop() }
+            if video { videoSyncService.stop() }
         }
     }
     
