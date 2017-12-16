@@ -1,5 +1,5 @@
 //
-//  SyncService.swift
+//  SyncServiceManger.swift
 //  Depo_LifeTech
 //
 //  Created by Konstantin on 12/14/17.
@@ -10,8 +10,8 @@ import Foundation
 import ReachabilitySwift
 
 
-class SyncService {
-    static let shared = SyncService()
+class SyncServiceManger {
+    static let shared = SyncServiceManger()
     
     fileprivate let reachabilityService = ReachabilityService()
     
@@ -20,6 +20,14 @@ class SyncService {
     fileprivate var settings: SettingsAutoSyncModel?
     
     private var lastAutoSyncTime: TimeInterval = 0
+    
+    private var hasExecutingSync: Bool {
+        return (photoSyncService.status == .executing || videoSyncService.status == .executing)
+    }
+    
+    private var hasWaitingForWiFiSync: Bool {
+        return (photoSyncService.status == .waitingForWifi || videoSyncService.status == .waitingForWifi)
+    }
     
     
     //MARK: - Init
@@ -37,30 +45,14 @@ class SyncService {
     
     func updateSyncSettings(settingsModel: SettingsAutoSyncModel) {
         settings = settingsModel
-        
-        photoSyncService.isMobileDataEnabled = settingsModel.mobileDataPhotos
-        videoSyncService.isMobileDataEnabled = settingsModel.mobileDataVideo
-        
-        if settingsModel.isAutoSyncEnable {
-            photoSyncService.start(mobileData: settingsModel.mobileDataPhotos)
-            videoSyncService.start(mobileData: settingsModel.mobileDataVideo)
-        } else {
-            photoSyncService.stop(mobileDataOnly: false)
-            videoSyncService.stop(mobileDataOnly: false)
-        }
+    
+        checkReachabilityAndSettings()
     }
     
     func updateImmediately() {
         lastAutoSyncTime = NSDate().timeIntervalSince1970
         
-        guard let syncSettings = settings else {
-            print("\(#function): Auto sync settings are missing")
-            return
-        }
-        
-        if reachabilityService.isReachable, syncSettings.isAutoSyncEnable {
-            start(mobileData: !reachabilityService.isReachableViaWiFi)
-        }
+        checkReachabilityAndSettings()
     }
     
     func updateInBackground() {
@@ -68,14 +60,7 @@ class SyncService {
         if time - lastAutoSyncTime > NumericConstants.timeIntervalBetweenAutoSync{
             lastAutoSyncTime = time
             
-            guard let syncSettings = settings else {
-                print("\(#function): Auto sync settings are missing")
-                return
-            }
-            
-            if reachabilityService.isReachable, syncSettings.isAutoSyncEnable {
-                start(mobileData: !reachabilityService.isReachableViaWiFi)
-            }
+            checkReachabilityAndSettings()
         }
     }
     
@@ -87,24 +72,46 @@ class SyncService {
     
     //MARK: - Private
     
+    fileprivate func checkReachabilityAndSettings() {
+        guard let syncSettings = settings else {
+            print("\(#function): Auto sync settings are missing")
+            return
+        }
+        
+        guard syncSettings.isAutoSyncEnable else {
+            stop(reachabilityDidChange: false)
+            return
+        }
+        
+        if reachabilityService.isReachable {
+            if reachabilityService.isReachableViaWiFi {
+                start(photo: true, video: true)
+            } else {
+                start(photo: syncSettings.mobileDataPhotos, video: syncSettings.mobileDataVideo)
+            }
+        } else {
+            stop(reachabilityDidChange: true)
+        }
+    }
+    
     //MARK: Flow
 
     //start to sync
-    fileprivate func start(mobileData: Bool) {
+    fileprivate func start(photo: Bool, video: Bool) {
         WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
         
-        photoSyncService.start(mobileData: mobileData)
-        videoSyncService.start(mobileData: mobileData)
+        if photo { photoSyncService.start() }
+        if video { videoSyncService.start() }
     }
     
     //stop/cancel completely
-    fileprivate func stop(reachabilityDidChange: Bool, mobileDataOnly: Bool) {
+    fileprivate func stop(reachabilityDidChange: Bool) {
         if reachabilityDidChange {
             photoSyncService.interrupt()
             videoSyncService.interrupt()
         } else {
-            photoSyncService.stop(mobileDataOnly: mobileDataOnly)
-            videoSyncService.stop(mobileDataOnly: mobileDataOnly)
+            photoSyncService.stop()
+            videoSyncService.stop()
         }
     }
     
@@ -124,7 +131,7 @@ class SyncService {
 
 
 //MARK: Notifications
-extension SyncService {
+extension SyncServiceManger {
     fileprivate func subscribeForNotifications() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
@@ -144,40 +151,17 @@ extension SyncService {
     }
     
     @objc private func onPhotoLibraryDidChange() {
-        guard let syncSettings = settings else {
-            print("\(#function): Auto sync settings are missing")
-            return
-        }
-        
-        if reachabilityService.isReachable, syncSettings.isAutoSyncEnable {
-            start(mobileData: !reachabilityService.isReachableViaWiFi)
-        }
+        checkReachabilityAndSettings()
     }
     
     @objc private func onReachabilityDidChange() {
-        guard let syncSettings = settings else {
-            print("\(#function): Auto sync settings are missing")
-            return
-        }
-        
-        if !reachabilityService.isReachable {
-            waitForWiFi()
-        } else {
-            if syncSettings.isAutoSyncEnable {
-                start(mobileData: !reachabilityService.isReachableViaWiFi)
-            } else {
-                stop(reachabilityDidChange: true, mobileDataOnly: false)
-            }
-        }
+        checkReachabilityAndSettings()
     }
     
     @objc private func onAutoSyncStatusDidChange() {
         WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
         
-        let hasExecutingStatus = (photoSyncService.status == .executing || videoSyncService.status == .executing)
-        let hasWaitingForWiFiStatus = (photoSyncService.status == .waitingForWifi || videoSyncService.status == .waitingForWifi)
-        
-        if !hasExecutingStatus, hasWaitingForWiFiStatus {
+        if !hasExecutingSync, hasWaitingForWiFiSync {
             WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
     }

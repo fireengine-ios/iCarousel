@@ -9,7 +9,7 @@
 import Foundation
 
 
-class PhotoSyncService: ItemSyncServiceImpl {
+final class PhotoSyncService: ItemSyncServiceImpl {
     override init() {
         super.init()
         
@@ -25,14 +25,14 @@ class PhotoSyncService: ItemSyncServiceImpl {
     override func interrupt() {
         super.interrupt()
         
-        photoVideoService?.stopAllOperations()//TODO: stop only photo sync
+        photoVideoService?.stopAllOperations()//FIXME: stop only photo sync
         UploadService.default.cancelSyncOperations(photo: true, video: false)
     }
     
-    override func stop(mobileDataOnly: Bool) {
-        super.stop(mobileDataOnly: mobileDataOnly)
+    override func stop() {
+        super.stop()
         
-        photoVideoService?.stopAllOperations()//TODO: stop only photo sync
+        photoVideoService?.stopAllOperations()//FIXME: stop only photo sync
         UploadService.default.cancelSyncOperations(photo: true, video: false)
     }
 }

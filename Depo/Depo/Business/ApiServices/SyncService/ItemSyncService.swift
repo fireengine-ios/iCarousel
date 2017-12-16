@@ -22,11 +22,10 @@ public let autoSyncStatusDidChangeNotification = NSNotification.Name("AutoSyncSt
 
 
 protocol ItemSyncService: class {
-    var isMobileDataEnabled: Bool {get set}
     var status: AutoSyncStatus {get}
     
-    func start(mobileData: Bool)
-    func stop(mobileDataOnly: Bool)
+    func start()
+    func stop()
     func interrupt()
     func waitForWiFi()
     func startManually()
@@ -40,7 +39,6 @@ class ItemSyncServiceImpl: ItemSyncService {
             postNotification()
         }
     }
-    var isMobileDataEnabled: Bool = false
     
     var photoVideoService: PhotoAndVideoService?
     
@@ -56,14 +54,9 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     
-    //MARK: - Public
+    //MARK: - Public ItemSyncService functions
     
-    func start(mobileData: Bool) {
-        guard !mobileData || isMobileDataEnabled else {
-            status = .waitingForWifi
-            return
-        }
-        
+    func start() {
         guard status != .executing else {
             appendNewUnsyncedItems()
             return
@@ -78,14 +71,13 @@ class ItemSyncServiceImpl: ItemSyncService {
         }
     }
     
-    func stop(mobileDataOnly: Bool) {
+    func stop() {
         status = .canceled
-
     }
     
     func waitForWiFi() {
         status = .waitingForWifi
-        stop(mobileDataOnly: true)
+        stop()
     }
     
     func startManually() {
@@ -115,26 +107,19 @@ class ItemSyncServiceImpl: ItemSyncService {
         lastSyncedMD5s = localItemsMD5s
         localItemsMD5s.append(contentsOf: localItems.map({ $0.md5 }))
         
-        guard let dateForCheck = localItems.first?.metaDate else {
+        guard let oldestItemDate = localItems.last?.metaDate else {
             status = .synced
             return
         }
         
-        getUnsyncedObjects(latestDate: dateForCheck, success: { [weak self] in
+        getUnsyncedObjects(oldestItemDate: oldestItemDate, success: { [weak self] in
             if let `self` = self {
-                if !self.localItems.isEmpty {
-                    UploadService.default.uploadFileList(items: self.localItems,
-                                                         uploadType: .autoSync,
-                                                         uploadStategy: .WithoutConflictControl,
-                                                         uploadTo: .MOBILE_UPLOAD,
-                                                         success: {
-                                                            self.status = .synced
-                    }, fail: { (error) in
-                        self.status = .failed
-                    })
-                } else {
+                guard !self.localItems.isEmpty else {
                     self.status = .synced
+                    return
                 }
+                
+                self.upload(items: self.localItems)
             }
         }) {[weak self] in
             if let `self` = self {
@@ -143,7 +128,24 @@ class ItemSyncServiceImpl: ItemSyncService {
         }
     }
     
-    private func getUnsyncedObjects(latestDate: Date, success: @escaping () -> Void, fail: @escaping () -> Void) {
+    private func upload(items: [WrapData]) {
+        guard !items.isEmpty else {
+            return
+        }
+        
+        UploadService.default.uploadFileList(items: items.sorted(by:{$0.fileSize > $1.fileSize}),
+                                             uploadType: .autoSync,
+                                             uploadStategy: .WithoutConflictControl,
+                                             uploadTo: .MOBILE_UPLOAD,
+                                             success: {
+                                                self.status = .synced
+        }, fail: { (error) in
+            self.status = .failed
+        })
+        
+    }
+    
+    private func getUnsyncedObjects(oldestItemDate: Date, success: @escaping () -> Void, fail: @escaping () -> Void) {
         guard let service = self.photoVideoService else {
             fail()
             return
@@ -158,7 +160,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             }
             
             for item in items {
-                if item.metaDate.compare(latestDate) == ComparisonResult.orderedAscending {
+                if item.metaDate < oldestItemDate {
                     finished = true
                     break
                 }
@@ -180,7 +182,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             }
             
             if !finished, items.count == NumericConstants.numberOfElementsInSyncRequest {
-                self.getUnsyncedObjects(latestDate: latestDate, success: success, fail: fail)
+                self.getUnsyncedObjects(oldestItemDate: oldestItemDate, success: success, fail: fail)
             } else {
                 success()
             }
@@ -190,23 +192,12 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
-        let unsyncedLocalItems = localUnsyncedItems()
-        
-        let newUnsyncedLocalItems = unsyncedLocalItems.filter({ !lastSyncedMD5s.contains($0.md5) })
-        
+        let newUnsyncedLocalItems = localUnsyncedItems().filter({ !lastSyncedMD5s.contains($0.md5) })
         guard !newUnsyncedLocalItems.isEmpty else {
             return
         }
         
-        UploadService.default.uploadFileList(items: newUnsyncedLocalItems,
-                                             uploadType: .autoSync,
-                                             uploadStategy: .WithoutConflictControl,
-                                             uploadTo: .MOBILE_UPLOAD,
-                                             success: { [weak self] in
-                                                self?.status = .synced
-            }, fail: { [weak self] (error) in
-                self?.status = .failed
-        })
+        upload(items: newUnsyncedLocalItems)
     }
     
     private func postNotification() {

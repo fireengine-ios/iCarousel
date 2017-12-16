@@ -21,7 +21,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     
     func onSaveSettings(setting: SettingsAutoSyncModel){
         dataStorage.saveAutoSyncModel(model: setting, uniqueUserId: uniqueUserID ?? "")
-        SyncService.shared.updateSyncSettings(settingsModel: setting)
+        SyncServiceManger.shared.updateSyncSettings(settingsModel: setting)
     }
     
 }
