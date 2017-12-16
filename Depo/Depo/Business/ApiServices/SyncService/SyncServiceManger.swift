@@ -79,9 +79,12 @@ class SyncServiceManger {
         }
         
         guard syncSettings.isAutoSyncEnable else {
+            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
             stop(reachabilityDidChange: false)
             return
         }
+        
+        WrapItemOperatonManager.default.stopOperationWithType(type: .autoUploadIsOff)
         
         if reachabilityService.isReachable {
             if reachabilityService.isReachableViaWiFi {
