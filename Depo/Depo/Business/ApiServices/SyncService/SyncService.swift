@@ -77,7 +77,7 @@ class SyncService: NSObject {
         }
         
         let isWiFi = ReachabilityService().isReachableViaWiFi
-        if (!isWiFi && imageViaWiFiOnly && videoViaWiFiOnly){
+        if (!isWiFi && imageViaWiFiOnly && videoViaWiFiOnly) {
             return
         }
         
@@ -176,7 +176,7 @@ class SyncService: NSObject {
     
     private func getUnsyncedObjects(latestDate: Date,
                                       success: @escaping ()-> Swift.Void,
-                                      fail: @escaping ()-> Swift.Void){
+                                      fail: @escaping ()-> Swift.Void) {
         
         guard let service = self.photoVideoService else{
             fail()
@@ -207,7 +207,7 @@ class SyncService: NSObject {
                     self_.localItemsArray.remove(at: index_)
                     self_.localMD5Array.remove(at: index_)
                     
-                    if (self_.localItemsArray.count == 0){
+                    if (self_.localItemsArray.count == 0) {
                         finished = true
                         break
                     }
