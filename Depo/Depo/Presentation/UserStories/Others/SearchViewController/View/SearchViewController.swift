@@ -47,9 +47,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
         self.view.isOpaque = false
         self.view.backgroundColor = ColorConstants.searchShadowColor
         self.collectionView.isHidden = true
-        self.suggestTableView.isHidden = true
         self.noFilesLabel.text = TextConstants.noFilesFoundInSearch
         self.topBarContainer.isHidden = true
+        suggestTableView.contentInset.top = 20
         
         setupMusicBar()
         subscribeToNotifications()
@@ -59,8 +59,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
         UIApplication.shared.setStatusBarStyle(.default, animated: true)
-         self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -168,7 +168,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
-        dismiss(animated: true, completion: nil)
+        dismissController()
         output.tapCancel()
     }
     
@@ -239,7 +239,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     }
     
     func dismissController() {
-        self.dismiss(animated: false, completion: nil)
+        navigationController?.popViewController(animated: false)
     }
     
     
