@@ -10,5 +10,5 @@ import Foundation
 
 protocol SearchViewRouterInput {
     
-    func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]])
+    func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem])
 }

@@ -12,23 +12,24 @@ class AlbumDetailRouter: BaseFilesGreedRouter, AlbumDetailRouterInput {
         view.navigationController?.popViewController(animated: true)
     }
     
-    override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
+    override func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
+
         let router = RouterVC()
         
-        if (item.fileType == .photoAlbum) { return }
-        if (item.fileType == .musicPlayList) { return }
+        if (selectedItem.fileType == .photoAlbum) { return }
+        if (selectedItem.fileType == .musicPlayList) { return }
         
-        guard let wrappered = item as? Item else { return }
-        guard let wrapperedArray = data as? [[Item]] else { return }
+        guard let wrappered = selectedItem as? Item else { return }
+        guard let wrapperedArray = sameTypeItems as? [Item] else { return }
         
-        switch item.fileType {
+        switch selectedItem.fileType {
             case .folder:
                 let controller = router.filesFromFolder(folder: wrappered, type: type, sortType: sortType, moduleOutput: moduleOutput)
                 router.pushViewControllertoTableViewNavBar(viewController: controller)
             case .audio:
                 player.play(list: [wrappered], startAt: 0)
             default:
-                let controller = router.filesDetailAlbumViewController(fileObject: wrappered, from: wrapperedArray)
+                let controller = router.filesDetailAlbumViewController(fileObject: wrappered, items: wrapperedArray)
                 router.pushViewController(viewController: controller)
         }
     }
