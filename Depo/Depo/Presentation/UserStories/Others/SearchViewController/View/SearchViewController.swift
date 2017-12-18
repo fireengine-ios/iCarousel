@@ -50,6 +50,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
         self.collectionView.isHidden = true
         self.noFilesLabel.text = TextConstants.noFilesFoundInSearch
         self.topBarContainer.isHidden = true
+       
+        suggestTableView.register(UINib(nibName: CellsIdConstants.suggestionTableSectionHeaderID, bundle: nil),
+                                  forCellReuseIdentifier: CellsIdConstants.suggestionTableSectionHeaderID)
         suggestTableView.contentInset.top = 20
         
         setupMusicBar()
@@ -276,27 +279,75 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.suggestionList.count
+        guard let category = SuggestionTableSectionHeader.Category(rawValue: section) else {
+            return 0
+        }
+        switch category {
+        case .suggestion:
+            return suggestionList.count
+        case .recent:
+            return recentSearchList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let suggest = self.suggestionList[indexPath.row]
+        guard let category = SuggestionTableSectionHeader.Category(rawValue: indexPath.section) else {
+            return cell
+        }
         cell.textLabel?.font = UIFont.TurkcellSaturaDemFont(size: 15)
         cell.textLabel?.textColor = ColorConstants.darcBlueColor
-        if let text = suggest.highlightedText {
-            cell.textLabel?.attributedText = text
-        } else {
-            cell.textLabel?.text = suggest.text!
+        
+        switch category {
+        case .recent:
+            cell.textLabel?.text = recentSearchList[indexPath.row]
+        case .suggestion:
+            let suggest = suggestionList[indexPath.row]
+            if let text = suggest.highlightedText {
+                cell.textLabel?.attributedText = text
+            } else {
+                cell.textLabel?.text = suggest.text!
+            }
         }
+        
         return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.suggestionTableSectionHeaderID) as? SuggestionTableSectionHeader
+        
+        if let category = SuggestionTableSectionHeader.Category(rawValue: section) {
+            header?.configureWith(category: category, delegate: self)
+        }
+        
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let searchBar = self.navigationBar.topItem?.titleView as! UISearchBar
-        searchBar.text = self.suggestionList[indexPath.row].text!
-        self.searchBarSearchButtonClicked(searchBar)
+        guard let category = SuggestionTableSectionHeader.Category(rawValue: indexPath.section) else {
+            return
+        }
+        
+        let searchText: String
+        switch category {
+        case .recent:
+            searchText = recentSearchList[indexPath.row]
+        case .suggestion:
+            searchText = suggestionList[indexPath.row].text!
+        }
+        
+        let searchBar = navigationBar.topItem?.titleView as! UISearchBar
+        searchBar.text = searchText
+        searchBarSearchButtonClicked(searchBar)
     }
     
     func musicBarZoomWillOpen() {
