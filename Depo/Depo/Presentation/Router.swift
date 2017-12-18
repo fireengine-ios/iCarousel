@@ -102,7 +102,7 @@ class RouterVC: NSObject {
         }
     }
     
-    func popViewControllerFromTableViewNavBar(){
+    func popViewControllerFromTableViewNavBar() {
         if let tabBarVc = tabBarVC {
             tabBarVc.popViewController(animated: true)
             return
@@ -123,12 +123,12 @@ class RouterVC: NSObject {
         viewController.navigationController?.isNavigationBarHidden = false
     }
     
-    func popToRootViewController(){
+    func popToRootViewController() {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func popViewController(){
-        navigationController?.popViewController(animated: true)
+    func popViewController() {
+        navigationController?.topViewController?.navigationController?.popViewController(animated: true)
     }
     
     func popCreateStory() {
