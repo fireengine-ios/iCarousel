@@ -405,7 +405,19 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         let success: FileOperation = { [weak self] in
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
-                UIApplication.showSuccessAlert(message: TextConstants.popUpDownloadComplete)
+                
+                let text: String
+                switch elementType {
+                case .download:
+                    text = TextConstants.popUpDownloadComplete
+                case .delete:
+                    text = TextConstants.popUpDeleteComplete
+                default:
+                    return
+                    /// maybe will be need
+                    //text = TextConstants.popUpOperationComplete
+                }
+                UIApplication.showSuccessAlert(message: text)
             }
         }
         return success
