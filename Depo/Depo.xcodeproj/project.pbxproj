@@ -1488,8 +1488,6 @@
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
-		8CD2B3A71FE7B1ED00280547 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD2B3A61FE7B1EC00280547 /* SyncService.swift */; };
-		8CD2B3A81FE7B1ED00280547 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD2B3A61FE7B1EC00280547 /* SyncService.swift */; };
 		8CD2B3A91FE7B21C00280547 /* BaseFilesGreedModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8734DA0C1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift */; };
 		8CD2B3AA1FE7B22900280547 /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
 		8CD2B3AB1FE7B23E00280547 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E4C1FDFD69400978BE7 /* PopUpController.swift */; };
@@ -2776,7 +2774,6 @@
 		8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetPresenterModuleInitialiser.swift; sourceTree = "<group>"; };
 		8CBA3E931EF5D0B100072983 /* ValidationResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResults.swift; sourceTree = "<group>"; };
 		8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationUserInfoModel.swift; sourceTree = "<group>"; };
-		8CD2B3A61FE7B1EC00280547 /* SyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
 		8CD8F4F01F1CC3FD00F1257B /* FloatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingView.swift; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
@@ -6648,7 +6645,6 @@
 		CE246A0C1F3D2CDE008DF705 /* SyncService */ = {
 			isa = PBXGroup;
 			children = (
-				8CD2B3A61FE7B1EC00280547 /* SyncService.swift */,
 				CE246A0D1F3D2CDE008DF705 /* SyncServiceManger.swift */,
 				B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */,
 				B579E8181FE288A500F47B0A /* PhotoSyncService.swift */,
@@ -9222,7 +9218,6 @@
 				8C0E8D5B1FDEBDFF00789C91 /* UIButtonExtension.swift in Sources */,
 				8C0E8D5C1FDEBDFF00789C91 /* LoginInteractorOutput.swift in Sources */,
 				8C0E8D5D1FDEBDFF00789C91 /* UsageInfoInitializer.swift in Sources */,
-				8CD2B3A81FE7B1ED00280547 /* SyncService.swift in Sources */,
 				8C0E8D5E1FDEBDFF00789C91 /* CurioNotificationManager.m in Sources */,
 				8C0E8D5F1FDEBDFF00789C91 /* MediaService.swift in Sources */,
 				8C0E8D601FDEBDFF00789C91 /* SyncStatus.m in Sources */,
@@ -10669,7 +10664,6 @@
 				86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */,
 				46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				CE4CFEBF1F78F18700FB4C3D /* ResizableTableView.swift in Sources */,
-				8CD2B3A71FE7B1ED00280547 /* SyncService.swift in Sources */,
 				591DE1155E5210C187678E0B /* UploadFilesSelectionInteractor.swift in Sources */,
 				CEDFDF0F1FBEE616006BFCAE /* FirstResponder.swift in Sources */,
 				CEC3C24B1FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift in Sources */,
