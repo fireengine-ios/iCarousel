@@ -50,30 +50,37 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func startUpdateLocation(){
-        if CLLocationManager.locationServicesEnabled(){
-            if CLLocationManager.authorizationStatus() == .notDetermined{
-                locationManager.requestAlwaysAuthorization()
-            } else {
-                locationManager.startMonitoringSignificantLocationChanges()
-                if #available(iOS 9.0, *) {
-                    locationManager.allowsBackgroundLocationUpdates = true
-                }
-                locationManager.startUpdatingLocation()
+        AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
+            guard self != nil else{
+                return
             }
-        }else{
-            checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
-                let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable , preferredStyle: .alert)
-                let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { (action) in
-                    UIApplication.shared.openSettings()
-                })
-                let cancelAction = UIAlertAction(title: TextConstants.cancel , style: .cancel, handler: { (action) in
-                    
-                })
-                controller.addAction(okAction)
-                controller.addAction(cancelAction)
-                RouterVC().presentViewController(controller: controller)
-            })
-        }
+            if autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected {
+                if CLLocationManager.locationServicesEnabled(){
+                    if CLLocationManager.authorizationStatus() == .notDetermined{
+                        self!.locationManager.requestAlwaysAuthorization()
+                    } else {
+                        self!.locationManager.startMonitoringSignificantLocationChanges()
+                        if #available(iOS 9.0, *) {
+                            self!.locationManager.allowsBackgroundLocationUpdates = true
+                        }
+                        self!.locationManager.startUpdatingLocation()
+                    }
+                }else{
+                    self!.checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
+                        let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable , preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { (action) in
+                            UIApplication.shared.openGlobalSettings()
+                        })
+                        let cancelAction = UIAlertAction(title: TextConstants.cancel , style: .cancel, handler: { (action) in
+                            
+                        })
+                        controller.addAction(okAction)
+                        controller.addAction(cancelAction)
+                        RouterVC().presentViewController(controller: controller)
+                    })
+                }
+            }
+        })
     }
  
     func stopUpdateLocation(){
