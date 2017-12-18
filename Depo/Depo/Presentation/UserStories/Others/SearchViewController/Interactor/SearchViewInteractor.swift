@@ -12,10 +12,12 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     weak var output: SearchViewInteractorOutput!
     
-    var remoteItems: RemoteSearchService
+    let remoteItems: RemoteSearchService
+    let recentSearches: RecentSearchesService
     
-    init(remoteItems: RemoteSearchService) {
+    init(remoteItems: RemoteSearchService, recentSearches: RecentSearchesService) {
         self.remoteItems = remoteItems
+        self.recentSearches = recentSearches
     }
     
     func viewIsReady() {
