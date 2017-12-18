@@ -134,6 +134,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         moduleOutput?.cancelSearch()
     }
     
+    func onClearRecentSearchesTapped() {
+        interactor.clearRecentSearches()
+    }
+    
     func playerDidHide() {
         player.stop()
     }

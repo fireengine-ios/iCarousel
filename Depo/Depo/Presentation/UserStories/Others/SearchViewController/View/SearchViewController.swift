@@ -381,6 +381,13 @@ extension SearchViewController: GridListTopBarDelegate {
         output.viewAppearanceChangedTopBar(asGrid: asGrid)
     }
     
+}
+
+extension SearchViewController: SuggestionTableSectionHeaderDelegate {
+    
+    func onClearRecentSearchesTapped() {
+        output.onClearRecentSearchesTapped()
+    }
     
 }
 

@@ -76,4 +76,9 @@ class SearchViewInteractor: SearchViewInteractorInput {
         }, fail: { (_) in
         })
     }
+    
+    func clearRecentSearches() {
+        recentSearches.clearAll()
+        output.setRecentSearches(recentSearches.searches)
+    }
 }
