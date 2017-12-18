@@ -38,6 +38,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     var output: SearchViewOutput!
     
     var suggestionList = [SuggestionObject]()
+    var recentSearchList = [String]()
     
     // MARK: - Life Cicle
 
@@ -216,7 +217,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
         return collectionView.frame.size.width
     }
     
-    
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool){
         collectionView.isHidden = visibilityStatus
         noFilesView.isHidden = !visibilityStatus
@@ -225,13 +225,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     }
     
     func successWithSuggestList(list: [SuggestionObject]) {
-        if list.count > 0 {
-            self.suggestTableView.isHidden = false
-            self.suggestionList = list
-            self.suggestTableView.reloadData()
-        } else {
-            self.suggestTableView.isHidden = true
-        }
+        suggestionList = list
+        suggestTableView.isHidden = suggestionList.count == 0 && recentSearchList.count == 0
+        suggestTableView.reloadData()
+    }
+    
+    func setRecentSearches(_ recentSearches: [String]) {
+        recentSearchList = recentSearches
+        suggestTableView.reloadData()
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -241,7 +242,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     func dismissController() {
         navigationController?.popViewController(animated: false)
     }
-    
     
     //MARK: - Under nav bar
     
