@@ -25,7 +25,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .delete, .sync, .download, .addToAlbum],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
-            defaultGridListViewtype: .Grid,
+            defaultGridListViewtype: .List,
             availableSortTypes: [.AlphaBetricAZ, .AlphaBetricZA, .metaDataTimeNewOld, .metaDataTimeOldNew, .Largest, .Smallest],
             defaultSortType: .metaDataTimeNewOld,
             availableFilter: true,

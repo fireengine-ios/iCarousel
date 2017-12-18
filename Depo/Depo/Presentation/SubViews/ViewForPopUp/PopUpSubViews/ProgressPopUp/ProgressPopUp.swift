@@ -101,7 +101,7 @@ class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     }
     
     @IBAction func onWaitingForWiFiButton(){
-        
+        SyncServiceManger.shared.waitForWifi()
     }
 
 }

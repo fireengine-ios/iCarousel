@@ -66,9 +66,9 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     func interrupt() {
-        if status == .executing {
+//        if status == .executing {
             status = .waitingForWifi
-        }
+//        }
     }
     
     func stop() {
@@ -77,7 +77,6 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func waitForWiFi() {
         status = .waitingForWifi
-        stop()
     }
     
     func startManually() {
@@ -106,8 +105,8 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
-        lastSyncedMD5s = localItemsMD5s
         localItemsMD5s.append(contentsOf: localItems.map({ $0.md5 }))
+        lastSyncedMD5s = localItemsMD5s
         
         guard let oldestItemDate = localItems.last?.metaDate else {
             status = .synced
