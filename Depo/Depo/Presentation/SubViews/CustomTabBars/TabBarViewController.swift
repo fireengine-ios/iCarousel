@@ -218,15 +218,19 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     @objc private func hideTabBar(_ sender: Any) {
         changeTabBarStatus(hidden: true)
         if (bottomTabBarConstraint.constant >= 0){
+            var bottomConstraintConstant = -self.tabBar.frame.height
+            if !musicBarContainer.isHidden {
+                bottomConstraintConstant -= self.musicBarContainer.frame.height
+            }
             if #available(iOS 10.0, *) {
                 let obj = UIViewPropertyAnimator(duration: NumericConstants.animationDuration, curve: .linear) {
-                    self.bottomTabBarConstraint.constant = -self.tabBar.frame.height
+                    self.bottomTabBarConstraint.constant = bottomConstraintConstant
                     self.tabBar.layoutIfNeeded()
                 }
                 obj.startAnimation()
             } else {
                 UIView.animate(withDuration: NumericConstants.animationDuration) {
-                    self.bottomTabBarConstraint.constant = -self.tabBar.frame.height
+                    self.bottomTabBarConstraint.constant = bottomConstraintConstant
                     self.tabBar.layoutIfNeeded()
                 }
             }
