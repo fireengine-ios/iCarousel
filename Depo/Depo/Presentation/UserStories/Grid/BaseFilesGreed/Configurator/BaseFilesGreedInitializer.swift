@@ -48,6 +48,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto])
+        viewController.scrolliblePopUpView.isEnable = false
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
                                                style: .default, tintColor: nil)
@@ -72,6 +73,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto])
+        viewController.scrolliblePopUpView.isEnable = false
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
                                                style: .default, tintColor: nil)
@@ -141,7 +143,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeFilesFromFolderViewController(with nibName:String, folder: Item, type: MoreActionsConfig.ViewType,moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController {
+    class func initializeFilesFromFolderViewController(with nibName:String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
@@ -161,7 +163,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: type,
             availableSortTypes: baseSortTypes,
-            defaultSortType: .TimeNewOld,
+            defaultSortType: sortType,
             availableFilter: false,
             showGridListButton: true
         )
@@ -170,7 +172,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                               selectionModeTypes: []),
+                               selectionModeTypes: [.rename]),
                                topBarConfig: gridListTopBarConfig)
         
         viewController.mainTitle = folder.name ?? ""

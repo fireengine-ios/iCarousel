@@ -39,7 +39,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled(){
             if CLLocationManager.authorizationStatus() == .notDetermined{
                 locationManager.requestAlwaysAuthorization()
-            }else {
+            } else {
                 locationManager.startMonitoringSignificantLocationChanges()
                 if #available(iOS 9.0, *) {
                     locationManager.allowsBackgroundLocationUpdates = true
@@ -55,7 +55,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // CLLocationManager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        SyncService.default.startAutoSyncInBG()
+        SyncServiceManger.shared.updateInBackground()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

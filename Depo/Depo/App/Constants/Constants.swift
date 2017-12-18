@@ -469,17 +469,26 @@ struct TextConstants {
     
     //MARK: PopUp
     static let popUpProgress = "(%ld of %ld)"
-    static let popUpSyncing = "Syncing files"
-    static let popUpUploading = "Uploading files"
+    static let popUpSyncing = "Syncing files over"
+    static let popUpUploading = "Uploading files over"
     static let popUpDownload = "Downloading files"
     static let popUpDownloadComplete = "Download is complete"
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
-    static let prepareToAutoSunc = "Preparing to auto sync..."
+    static let networkTypeWiFi = "WiFi"
+    static let networkType2g = "2G"
+    static let networkType3g = "3G"
+    static let networkType4g = "4G"
+    static let networkTypeLTE = "LTE"
     static let autoUploaOffPopUpText = "Auto Upload is off.\nGo to setting to auto sync."
     static let autoUploaOffCancel = "Cancel"
     static let autoUploaOffSettings = "Settings"
+    static let waitingForWiFiPopUpTitle = "Waiting for a connection to auto-sync"
+    static let waitingForWiFiPopUpSettingsButton = "Settings"
+    static let waitingForWiFiPopUpSyncButton = "Sync with data plan"
+    static let prepareToAutoSunc = "Preparing to auto sync..."
+    static let waitForWiFiButtonTitle = "Wait for a WiFi Connection"
 
     
     //MARK: - ActionSheet
@@ -598,7 +607,7 @@ struct TextConstants {
     static let errorEmptyPassword = "Indicates that the password parameter is sent blank."
     static let errorEmptyPhone = "Specifies that the phone number parameter is sent  blank."
     static let errorInvalidEmail = "E-mail address is in an invalid format."
-    static let errorExistEmail = "A user with the given e-mail address already exists."
+    static let errorExistEmail = "This e-mail address is already registered. Please enter another e-mail address."
     static let errorVerifyEmail = "Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation."
     static let errorInvalidPhone = "Phone number is in an invalid format."
     static let errorExistPhone = "A user with the given phone number already exists."
@@ -684,6 +693,8 @@ struct NumericConstants {
     static let creationStoryOrderingCountPhotosInLineiPhone: Int = 4
     static let creationStoryOrderingCountPhotosInLineiPad: Int = 6
     static let albumCellListHeight: CGFloat = 100
+    
+    static let numberOfElementsInSyncRequest: Int = 1000
     
     static let topContentInset: CGFloat = 64
     

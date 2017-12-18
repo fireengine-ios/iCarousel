@@ -187,6 +187,10 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
         if !checkIsThisIsPermittedType(type: type){
             return
         }
@@ -197,6 +201,9 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
             viewsByType[type] = view
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
+                if let item = object{
+                    popUp.setImageForUploadingItem(item: item)
+                }
             }
             addPopUpSubView(popUp: view)
             
@@ -204,9 +211,16 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
+        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ){
         if let view = viewsByType[type] {
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
+                if let item = object{
+                    popUp.setImageForUploadingItem(item: item)
+                }
             }
         }else{
             startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
