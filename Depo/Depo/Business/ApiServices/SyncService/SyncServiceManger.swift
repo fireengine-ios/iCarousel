@@ -69,6 +69,10 @@ class SyncServiceManger {
         startManually()
     }
     
+    func waitForWifi() {
+        stopManually()
+    }
+    
     
     //MARK: - Private
     
@@ -100,8 +104,12 @@ class SyncServiceManger {
             if reachabilityService.isReachableViaWiFi {
                 start(photo: true, video: true)
             } else {
-                stop(reachabilityDidChange: true, photo: !syncSettings.mobileDataPhotos, video: !syncSettings.mobileDataPhotos)
-                start(photo: syncSettings.mobileDataPhotos, video: syncSettings.mobileDataVideo)
+                let photoEnabled = syncSettings.mobileDataPhotos
+                let videoEnabled = syncSettings.mobileDataVideo
+                if photoEnabled || videoEnabled {
+                    start(photo: photoEnabled, video: videoEnabled)
+                }
+                stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
             }
         } else {
             stop(reachabilityDidChange: true, photo: true, video: true)
@@ -130,7 +138,7 @@ class SyncServiceManger {
     }
     
     //wait for wi-fi connection
-    fileprivate func waitForWiFi() {
+    fileprivate func stopManually() {
         photoSyncService.waitForWiFi()
         videoSyncService.waitForWiFi()
     }
@@ -169,13 +177,16 @@ extension SyncServiceManger {
     }
     
     @objc private func onReachabilityDidChange() {
-        checkReachabilityAndSettings()
+//        checkReachabilityAndSettings()
     }
     
     @objc private func onAutoSyncStatusDidChange() {
-        WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+        guard !hasExecutingSync else {
+            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
+            return
+        }
         
-        if !hasExecutingSync, hasWaitingForWiFiSync {
+        if hasWaitingForWiFiSync {
             WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
     }
