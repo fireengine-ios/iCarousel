@@ -129,6 +129,7 @@
 		7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5BEC48C5ED3B8650FB2FB3 /* SettingsViewController.swift */; };
 		77CF7B297D6D1B75D73CACBC /* SelectNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */; };
 		7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A18BA44717122453DCA565 /* LBAlbumLikePreviewSliderViewOutput.swift */; };
+		782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */; };
 		786AA87724BCB7349231EF0C /* HomeHeaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */; };
 		787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
 		78D6C8FF1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */; };
@@ -2379,6 +2380,7 @@
 		76464C9E441C036AD8B15D78 /* TermsAndServicesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesPresenter.swift; sourceTree = "<group>"; };
 		77017DBA00D0813CC1CCA884 /* ExpandStorageRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageRouterInput.swift; sourceTree = "<group>"; };
 		7750D1860EF1326BD6776D8E /* SplashConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashConfigurator.swift; sourceTree = "<group>"; };
+		782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesService.swift; sourceTree = "<group>"; };
 		787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailModuleOutput.swift; sourceTree = "<group>"; };
 		78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
 		78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorInput.swift; sourceTree = "<group>"; };
@@ -4496,6 +4498,14 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		782E40B11FE7D05F007F7838 /* RecentSearchesService */ = {
+			isa = PBXGroup;
+			children = (
+				782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */,
+			);
+			path = RecentSearchesService;
+			sourceTree = "<group>";
+		};
 		78D1DECF2CF16509DB6F1EAD /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -5129,6 +5139,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				782E40B11FE7D05F007F7838 /* RecentSearchesService */,
 				7CC11AA91FE1360B00AF022D /* PopUpService */,
 				8CFF86691F0F86E800520D18 /* AppSession */,
 				7CB2E30C1FB9CB26009CF813 /* FreeAppSpace */,
@@ -10040,6 +10051,7 @@
 				CEAE3FB71EFD4F0D00A405B2 /* HomePageRouter.swift in Sources */,
 				CEAE3FED1EFD517300A405B2 /* CustomNavBarView.swift in Sources */,
 				7C3A74491F07927200124DF5 /* CollectionViewCellForPhoto.swift in Sources */,
+				782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */,
 				CE51ABDC1EF90853005DCEE0 /* LoginInteractor.swift in Sources */,
 				CE51ABE21EF90853005DCEE0 /* MessageView.m in Sources */,
 				CE51ABE41EF90853005DCEE0 /* FLImageView.m in Sources */,
