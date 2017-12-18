@@ -110,12 +110,16 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         configurateNavigationBar()
+        configurateViewForPopUp()
+    }
+    
+    func configurateViewForPopUp(){
+        WrapItemOperatonManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
     
     func configurateNavigationBar() {
         homePageNavigationBarStyle()
         configureNavBarActions()
-        WrapItemOperatonManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -182,7 +186,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func stopRefresher() {
-        self.refresher.endRefreshing()
+        DispatchQueue.main.async {
+            self.refresher.endRefreshing()
+        }
     }
     
     func showCustomPopUpWithInformationAboutAccessToMediaLibrary(){
