@@ -10,7 +10,11 @@ protocol WrapItemOperationViewProtocol{
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?)
     
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?)
+    
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int)
+    
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int)
     
     func setProgress(ratio: Float, for operationType: OperationType )
     

@@ -16,6 +16,7 @@ enum OperationType: String{
     case freeAppSpaceWarning    = "freeAppSpaceWarning"
     case prepareToAutoSync      = "prepareToAutoSync"
     case autoUploadIsOff        = "autoUploadIsOff"
+    case waitingForWiFi         = "waitingForWiFi"
 }
 
 class Progress {
@@ -69,6 +70,10 @@ class WrapItemOperatonManager: NSObject {
     //MARK: sending operation to registred subviews
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
         hidePopUpsByDepends(type: type)
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
         DispatchQueue.main.async {
@@ -79,6 +84,10 @@ class WrapItemOperatonManager: NSObject {
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
+        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int){
         hidePopUpsByDepends(type: type)
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
         DispatchQueue.main.async {
@@ -115,6 +124,7 @@ class WrapItemOperatonManager: NSObject {
         switch type {
         case .sync:
             stopOperationWithType(type: .prepareToAutoSync)
+            stopOperationWithType(type: .waitingForWiFi)
         default:
             break
         }
@@ -137,6 +147,8 @@ class WrapItemOperatonManager: NSObject {
             return popUp
         case .autoUploadIsOff:
             return AutoUploadIsOffPopUp.initFromNib()
+        case .waitingForWiFi:
+            return WaitingForWiFiPopUp.initFromNib()
         }
     }
     

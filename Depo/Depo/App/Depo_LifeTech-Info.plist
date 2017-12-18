@@ -93,7 +93,11 @@
 	<string></string>
 	<key>NSContactsUsageDescription</key>
 	<string></string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location will be used for background syncing</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location will be used for background syncing</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location will be used for background syncing</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Need access to save your photo</string>

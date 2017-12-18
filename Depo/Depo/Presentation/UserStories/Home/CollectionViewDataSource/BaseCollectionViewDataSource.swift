@@ -194,6 +194,10 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
         if !checkIsThisIsPermittedType(type: type){
             return
         }
@@ -202,6 +206,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
+                if let item = object{
+                    popUp.setImageForUploadingItem(item: item)
+                }
             }
             
             viewsByType[type] = view
@@ -212,9 +219,16 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
+        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ) {
         if let view = viewsByType[type] {
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
+                if let item = object{
+                    popUp.setImageForUploadingItem(item: item)
+                }
             }
         } else {
             startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
