@@ -402,17 +402,18 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func succesAction(elementType: ElementTypes) -> FileOperation {
-        let succes : FileOperation = {
-            DispatchQueue.main.async { [weak self] in
+        let success: FileOperation = { [weak self] in
+            DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
+                UIApplication.showSuccessAlert(message: TextConstants.popUpDownloadComplete)
             }
         }
-        return succes
+        return success
     }
     
     func failAction(elementType: ElementTypes) -> FailResponse {
         
-        let failResponse : FailResponse  = { value in
+        let failResponse : FailResponse  = { [weak self] value in
             DispatchQueue.main.async { [weak self] in
                 self?.output?.operationFailed(type: elementType, message: value.description)
             }

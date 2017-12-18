@@ -284,6 +284,26 @@ final class UploadService: BaseRequestService {
         WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
     }
     
+    func cancelSyncOperations(photo: Bool, video: Bool) {
+        uploadOperations.forEach { $0.cancel() }
+        uploadOperations.removeAll()
+        
+        var operationsToRemove = uploadOperations.filter({ $0.uploadType == .autoSync &&
+            ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
+        
+        operationsToRemove.forEach { (operation) in
+            operation.cancel()
+            if let index = uploadOperations.index(of: operation) {
+                uploadOperations.remove(at: index)
+            }
+        }
+        operationsToRemove.removeAll()
+        
+        clearSyncCounters()
+        
+        WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+    }
+    
     private func clearUlpoadCounters() {
         allUploadOperationsCount = 0
         finishedUploadOperationsCount = 0

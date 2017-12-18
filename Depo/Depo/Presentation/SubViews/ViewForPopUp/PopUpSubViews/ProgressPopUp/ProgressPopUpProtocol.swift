@@ -9,4 +9,5 @@
 protocol ProgressPopUpProtocol {
     func setProgress(allItems: Int?, readyItems: Int?)
     func configurateWithType(viewType: OperationType)
+    func setImageForUploadingItem(item: WrapData)
 }
