@@ -17,6 +17,7 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func models(models:[BaseCellModel])
     
     func needShowCaptcha()
+    func failedBlockError()
     
     func foundCoutryPhoneCode(code: String, plus: Bool)
     
