@@ -12,9 +12,9 @@ class BlueButtonWithWhiteText: WhiteButtonWithRoundedCorner {
 
     override func configurate(){
         backgroundColor = ColorConstants.darcBlueColor
-        setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
+        setTitleColor(ColorConstants.whiteColor, for: .normal)
+        setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
         titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         setCornerRadius()
     }
-
 }
