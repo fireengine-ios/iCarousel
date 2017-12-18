@@ -35,6 +35,20 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         return uniqueInstance!
     }
     
+    func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping (() -> Void)){
+        SingletonStorage.shared.getUniqueUserID(success: { (uniqueUserID) in
+            let key = uniqueUserID + "locationPermission"
+            let permission = UserDefaults.standard.integer(forKey: key)
+            if permission == 0{
+                UserDefaults.standard.set(1, forKey: key)
+                UserDefaults.standard.synchronize()
+                yesWeNeed()
+            }
+        }) {
+            
+        }
+    }
+    
     func startUpdateLocation(){
         if CLLocationManager.locationServicesEnabled(){
             if CLLocationManager.authorizationStatus() == .notDetermined{
@@ -46,6 +60,19 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                 }
                 locationManager.startUpdatingLocation()
             }
+        }else{
+            checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
+                let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable , preferredStyle: .alert)
+                let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { (action) in
+                    UIApplication.shared.openSettings()
+                })
+                let cancelAction = UIAlertAction(title: TextConstants.cancel , style: .cancel, handler: { (action) in
+                    
+                })
+                controller.addAction(okAction)
+                controller.addAction(cancelAction)
+                RouterVC().presentViewController(controller: controller)
+            })
         }
     }
  

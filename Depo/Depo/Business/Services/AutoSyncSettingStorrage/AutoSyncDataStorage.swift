@@ -29,7 +29,7 @@ class AutoSyncDataStorage: NSObject {
         }
     }
     
-    func saveAutoSyncModel(model: SettingsAutoSyncModel, uniqueUserId: String){
+    func saveAutoSyncModel(model: SettingsAutoSyncModel, uniqueUserId: String) {
         let dict = model.configurateDictionary()
         UserDefaults.standard.set(dict, forKey: uniqueUserId)
         if model.isAutoSyncEnable {
