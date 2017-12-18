@@ -112,6 +112,8 @@ struct TextConstants {
     // MARK: - Search
     
     static let search = "Search"
+    static let searchRecentSearchTitle = "RECENT SEARCHES"
+    static let searchSuggestionsTitle = "SUGGESTIONS"
     
     static let noFilesFoundInSearch = "No results found for your query."
     
@@ -710,4 +712,5 @@ struct NumericConstants {
     
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     
+    static let maxRecentSearches: Int = 10
 }
