@@ -9,5 +9,7 @@
 import Foundation
 
 protocol VisualMusicPlayerRouterInput {
+    
+    func dismiss()
 
 }

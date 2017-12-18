@@ -32,4 +32,7 @@ protocol BaseFilesGreedViewInput: class {
     
     func setThreeDotsMenu(active isActive: Bool)
     
+    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String)
+    
+    func hideNoFiles()
 }

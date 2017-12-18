@@ -27,7 +27,7 @@ class SeacrhViewRouter: SearchViewRouterInput {
         
         if (selectedItem.fileType == FileType.folder){
             
-            let controller = router.filesFromFolder(folder: object)
+            let controller = router.filesFromFolder(folder: object, type: .Grid, sortType: .TimeNewOld, moduleOutput: nil)
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         } else {
             let controller = router.filesDetailViewController(fileObject: object, items: sameTypeItems as! [Item])

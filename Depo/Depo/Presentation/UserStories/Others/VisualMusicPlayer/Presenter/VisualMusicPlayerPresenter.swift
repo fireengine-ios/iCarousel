@@ -35,4 +35,8 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
     func viewIsReady(view: UIView) {
         bottomBarPresenter?.show(animated: false, onView: view)
     }
+    
+    func closeMediaPlayer() {
+        router.dismiss()
+    }
 }

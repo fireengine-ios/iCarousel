@@ -69,10 +69,10 @@ class CompleteProfileViewController: BaseCollectionViewController, CompleteProfi
     // MARK: UIButtons actions
     
     @IBAction func onUploadPhotoButton(){
-        custoPopUp.showCustomAlert(withText: "Sorry this functional \n is under constraction", okButtonText: "Fine...")
+        UIApplication.showErrorAlert(message: "Sorry this functional \n is under constraction")
     }
     
     @IBAction func onTakeAPhotoButton(){
-        custoPopUp.showCustomAlert(withText: "Sorry this functional \n is under constraction", okButtonText: "Fine...")
+        UIApplication.showErrorAlert(message: "Sorry this functional \n is under constraction")
     }
 }

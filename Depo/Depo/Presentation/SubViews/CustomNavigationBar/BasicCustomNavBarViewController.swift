@@ -9,18 +9,14 @@
 import UIKit
 
 class BasicCustomNavBarViewController: UIViewController {
-    
-    let custoPopUp = CustomPopUp()
-    
     let customNavigationBar = CustomNavBarView.getFromNib()
-    
 }
 
 
 extension BasicCustomNavBarViewController: CustomNavBarViewActionDelegate {
     
     func navBarButtonGotPressed(button: CustomNavBarButton) {
-        custoPopUp.showCustomAlert(withText: "Sorry \(button.btnName!) \n is under constraction", okButtonText: "Fine...")
+        UIApplication.showErrorAlert(message: "Sorry \(button.btnName!) \n is under constraction")
     }
     
     func navBarBackButtonPressed() {

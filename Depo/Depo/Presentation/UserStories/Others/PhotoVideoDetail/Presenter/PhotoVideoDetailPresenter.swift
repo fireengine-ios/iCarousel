@@ -108,8 +108,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         router.goBack(navigationConroller: view.getNavigationController())
     }
     
-    func updateItems(objects: [Item], selectedIndex: Int){
-        view.updateItems(objectsArray: objects, selectedIndex: selectedIndex)
+    func updateItems(objects: [Item], selectedIndex: Int, isRightSwipe: Bool) {
+        view.updateItems(objectsArray: objects, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
     }
     
     func selectModeSelected() {

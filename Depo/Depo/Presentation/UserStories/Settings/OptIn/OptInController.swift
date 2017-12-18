@@ -84,6 +84,7 @@ final class OptInController: UIViewController {
     }
     
     @IBAction func actionResendButton(_ sender: UIButton) {
+        attempts = 0
         delegate?.optInResendPressed(self)
     }
     

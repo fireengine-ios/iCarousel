@@ -33,7 +33,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     }
     
     func showError(error: String){
-        CustomPopUp.sharedInstance.showCustomAlert(withText: error, okButtonText: TextConstants.ok)
+        UIApplication.showErrorAlert(message: error)
     }
     
     //view out
@@ -53,6 +53,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func dataWasUpdate() {
         view.setupEditState(false)
+    }
+    
+    func isTurkcellUser() -> Bool {
+        return interactor.statusTurkcellUser
     }
     
     //MARK : BasePresenter

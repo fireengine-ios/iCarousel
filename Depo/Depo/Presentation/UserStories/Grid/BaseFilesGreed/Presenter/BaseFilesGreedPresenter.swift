@@ -7,7 +7,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate {
+class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
     
     typealias Item = WrapData
     
@@ -17,6 +17,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     weak var view: BaseFilesGreedViewInput!
     
+    weak var moduleOutput: BaseFilesGreedModuleOutput?
+    
     var interactor: BaseFilesGreedInteractorInput!
     
     var router: BaseFilesGreedRouterInput!
@@ -24,8 +26,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     var sortedRule: SortedRules
     
     var filters: [GeneralFilesFiltrationType] = []
-    
-    let custoPopUp = CustomPopUp()
     
     var bottomBarConfig: EditingBarConfig?
     
@@ -37,9 +37,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
     
+    var type: MoreActionsConfig.ViewType
+    var sortedType: MoreActionsConfig.SortRullesType
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
+        type = .Grid
+        sortedType = .TimeNewOld
         super.init()
     }
     
@@ -53,9 +58,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
        
         dataSource.delegate = self
         
+        if let displayingType = topBarConfig {
+            if displayingType.defaultGridListViewtype == .Grid {
+                dataSource.updateDisplayngType(type: .list)
+            } else {
+                dataSource.updateDisplayngType(type: .greed)
+            }
+            dataSource.currentSortType = displayingType.defaultSortType.sortedRulesConveted
+        }
+        
         view.setupInitialState()
         setupTopBar()
-        dataSource.currentSortType = sortedRule
         getContent()
         reloadData()
     }
@@ -138,6 +151,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view?.stopRefresher()
         dataSource.appendCollectionView(items: [])
         dataSource.reloadData()
+        updateNoFilesView()
     }
     
     func getContentWithSuccess(items: [WrapData]){
@@ -153,6 +167,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.appendCollectionView(items: items)
 
         dataSource.reloadData()
+        updateNoFilesView()
     }
     
     func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
@@ -165,7 +180,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
             dataSourceForArray.configurateWithArray(array: array)
         } else {
-            
             dataSource.reloadData()
         }
     }
@@ -184,20 +198,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view.showCustomPopUpWithInformationAboutAccessToMediaLibrary()
     }
     
-    func needShowNoFileView()-> Bool{
-        return interactor.needShowNoFileView()
-    }
-    
-    func textForNoFileLbel() -> String{
-        return interactor.textForNoFileLbel()
-    }
-    
-    func textForNoFileButton() -> String{
-        return interactor.textForNoFileButton()
-    }
-    
-    func imageForNoFileImageView() -> UIImage{
-        return interactor.imageForNoFileImageView()
+    func needShowNoFileView()-> Bool {
+        return dataSource.allMediaItems.count == 0
     }
     
     func getRemoteItemsService() -> RemoteItemsService{
@@ -231,10 +233,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 //                //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
 //            } else {
             let sameTypeFiles: [BaseDataSourceItem] = data.flatMap{ return $0 }.filter{ $0.fileType == item.fileType }
-            router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
+            router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles, type: type, sortType: sortedType, moduleOutput: self)
 //            }
         } else {
-            custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
+            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
+            UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
     
@@ -286,6 +289,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view.setThreeDotsMenu(active: true)
     }
     
+    private func updateNoFilesView() {
+        if needShowNoFileView() {
+            view.showNoFilesWith(text: interactor.textForNoFileLbel(),
+                                 image: interactor.imageForNoFileImageView(),
+                                 createFilesButtonText: interactor.textForNoFileButton())
+        } else {
+            view.hideNoFiles()
+        }
+    }
+    
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         if (selectedItemsCount == 0){
             bottomBarPresenter?.dismiss(animated: true)
@@ -323,23 +336,25 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
     }
     
-    
     //MARK: - MoreActionsViewDelegate
     
     func viewAppearanceChanged(asGrid: Bool){
         if (asGrid){
             dataSource.updateDisplayngType(type: .greed)
+            type = .List
+            moduleOutput?.reloadType(type, sortedType: sortedType)
         }else{
             dataSource.updateDisplayngType(type: .list)
+            type = .Grid
+            moduleOutput?.reloadType(type, sortedType: sortedType)
         }
     }
     
     func sortedPushed(with rule: SortedRules) {
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
-//        dataSource.dropData()
         dataSource.currentSortType = rule
-//        dataSource.reloadData()
+        moduleOutput?.reloadType(type, sortedType: sortedType)
         reloadData()
     }
     
@@ -424,6 +439,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
+        sortedType = rule
         sortedPushed(with: rule.sortedRulesConveted)
     }
     
@@ -488,5 +504,27 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func moveBack() {
         router.showBack()
     }
+    
+    func sortType() -> MoreActionsConfig.ViewType {
+        return type
+    }
+    
+    //MARK: - BaseFilesGreedModuleOutput
+    
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType) {
+        self.type = type
+        self.sortedType = sortedType
+        sortedRule = sortedType.sortedRulesConveted
+
+        type == .Grid ? dataSource.updateDisplayngType(type: .list) : dataSource.updateDisplayngType(type: .greed)
+        dataSource.currentSortType = sortedType.sortedRulesConveted
+        reloadData()
+        
+        let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: type, defaultSortType: sortedType)
+        topBarConfig = gridListTopBarConfig
+        
+        setupTopBar()
+    }
+    
 }
 

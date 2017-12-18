@@ -14,4 +14,17 @@ struct GridListTopBarConfig {
     
     let availableFilter: Bool
     let showGridListButton: Bool
+    
+    init(defaultGridListViewtype: MoreActionsConfig.ViewType = .Grid,
+         availableSortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest],
+         defaultSortType: MoreActionsConfig.SortRullesType = .TimeNewOld,
+        availableFilter: Bool = false,
+        showGridListButton: Bool  = true) {
+        self.defaultGridListViewtype = defaultGridListViewtype
+        self.availableSortTypes = availableSortTypes
+        self.defaultSortType = defaultSortType
+        self.availableFilter = availableFilter
+        self.showGridListButton = showGridListButton
+    }
+    
 }

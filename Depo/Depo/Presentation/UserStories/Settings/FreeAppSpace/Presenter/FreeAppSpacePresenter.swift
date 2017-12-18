@@ -6,9 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class FreeAppSpacePresenter: BaseFilesGreedPresenter, CustomPopUpAlertActions{
-    
-    let customPopUp = CustomPopUp()
+class FreeAppSpacePresenter: BaseFilesGreedPresenter {
 
     override func viewIsReady(collectionView: UICollectionView) {
         dataSource = ArrayDataSourceForCollectionView()
@@ -24,16 +22,9 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter, CustomPopUpAlertActions{
     }
     
     override func onNextButton() {
-        if (dataSource.selectedItemsArray.count == 0){
+        if dataSource.selectedItemsArray.isEmpty {
             return
         }
-//        customPopUp.delegate = self
-//        let titleSting = String(format: TextConstants.freeAppSpaceAlertTitle, dataSource.selectedItemsArray.count)
-//        customPopUp.showCustomAlert(withTitle: titleSting,
-//                                    withText: TextConstants.freeAppSpaceAlertText,
-//                                    firstButtonText: TextConstants.freeAppSpaceAlertCancel,
-//                                    secondButtonText: TextConstants.freeAppSpaceAlertDelete)
-        
         if let int = interactor as? FreeAppSpaceInteractor {
             if let array = dataSource.getSelectedItems() as? [WrapData] {
                 startAsyncOperation()
@@ -54,20 +45,8 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter, CustomPopUpAlertActions{
         dataSource.selectedItemsArray.removeAll()
         dataSource.updateSelectionCount()
         
-        
-        let titleSting = String(format: TextConstants.freeAppSpaceAlertSuccesTitle, count)
-        CustomPopUp.sharedInstance.showCustomSuccessAlert(withTitle: "", withText: titleSting, okButtonText: TextConstants.freeAppSpaceAlertSuccesButton)
+        let text = String(format: TextConstants.freeAppSpaceAlertSuccesTitle, count)
+        UIApplication.showSuccessAlert(message: text)
     }
-    
-    //MARK: - CustomPopUpAlertActions
-    
-    func cancelationAction() {
-        
-    }
-    
-    func otherAction() {
-        
-    }
-    
 }
 

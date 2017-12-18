@@ -141,7 +141,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeFilesFromFolderViewController(with nibName:String, folder: Item) -> UIViewController {
+    class func initializeFilesFromFolderViewController(with nibName:String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
@@ -154,13 +154,27 @@ class BaseFilesGreedModuleInitializer: NSObject {
         interactor.folder = folder
         viewController.parentUUID = folder.uuid
         
+        if let output = moduleOutput {
+            presenter.moduleOutput = output
+        }
+        
+        let gridListTopBarConfig = GridListTopBarConfig(
+            defaultGridListViewtype: type,
+            availableSortTypes: baseSortTypes,
+            defaultSortType: sortType,
+            availableFilter: false,
+            showGridListButton: true
+        )
+        
         configurator.configure(viewController: viewController, fileFilters: [.rootFolder(folder.uuid)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                                     selectionModeTypes: []),
-                               topBarConfig: nil)
+                               selectionModeTypes: []),
+                               topBarConfig: gridListTopBarConfig)
+        
         viewController.mainTitle = folder.name ?? ""
+
         return viewController
     }
 

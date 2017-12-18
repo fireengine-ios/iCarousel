@@ -52,10 +52,10 @@ class UploadedItemsViewController: BaseCollectionViewController, UploadedItemsVi
     
     // MARK: UIButtons actions
     @IBAction func onViewAllStreamsButton(){
-        custoPopUp.showCustomAlert(withText: "Sorry this functional \n is under constraction", okButtonText: "Fine...")
+        UIApplication.showErrorAlert(message: "Sorry this functional \n is under constraction")
     }
     
     @IBAction func onViewAllPicturesButton(){
-        custoPopUp.showCustomAlert(withText: "Sorry this functional \n is under constraction", okButtonText: "Fine...")
+        UIApplication.showErrorAlert(message: "Sorry this functional \n is under constraction")
     }
 }

@@ -14,9 +14,9 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
         //interactor.viewIsReady()
         sortedRule = .lettersAZ
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.baseMultiFileCell)
-        dataSource.displayingType = .list
-
+        
         super.viewIsReady(collectionView: collectionView)
+        
     }
     
     override func getCellSizeForList() -> CGSize {
@@ -35,7 +35,8 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .delete || type == .addToFavorites || type == .removeFromFavorites {
+        let reloadTytpes: [ElementTypes] = [.delete, .addToFavorites, .removeFromFavorites, .move]
+        if reloadTytpes.contains(type) {
             onReloadData()  
         }
     }

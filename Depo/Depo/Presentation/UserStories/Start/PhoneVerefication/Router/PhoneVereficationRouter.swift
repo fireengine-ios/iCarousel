@@ -25,4 +25,9 @@ class PhoneVereficationRouter: PhoneVereficationRouterInput {
 //        nController.pushViewController(controller, animated: true)
 //        nController.navigationBar.isHidden = false
     }
+    
+    func presentErrorPopUp(with message: String) {
+        let controller = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: message, image: .error, buttonTitle: TextConstants.ok)
+        RouterVC().presentViewController(controller: controller)
+    }
 }

@@ -85,14 +85,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         
         output.viewIsReady(collectionView: collectionView)
-        let flag = output.needShowNoFileView()
-        
-        noFilesView.isHidden = !flag
-        if (flag){
-            noFilesLabel.text = output.textForNoFileLbel()
-            startCreatingFilesButton.setTitle(output.textForNoFileButton(), for: .normal)
-            noFilesImage.image = output.imageForNoFileImageView()
-        }
         
         //carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
         
@@ -120,7 +112,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         configurateNavigationBar()
     }
     
-    func configurateNavigationBar(){
+    func configurateNavigationBar() {
         homePageNavigationBarStyle()
         configureNavBarActions()
         WrapItemOperatonManager.default.addViewForNotification(view: scrolliblePopUpView)
@@ -139,7 +131,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     // MARK: - SearchBarButtonPressed
     
-   func configureNavBarActions() {
+   func configureNavBarActions(isSelecting: Bool = false) {
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { (_) in
             let router = RouterVC()
             let searchViewController = router.searchView()
@@ -150,7 +142,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
             self?.output.moreActionsPressed(sender: NavigationBarList().more)
         })
-        navBarConfigurator.configure(right: [more, search], left: [])
+        let rightActions: [NavBarWithAction] = isSelecting ? [more] : [more, search]
+        navBarConfigurator.configure(right: rightActions, left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
@@ -193,7 +186,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func showCustomPopUpWithInformationAboutAccessToMediaLibrary(){
-        CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.photosVideosViewHaveNoPermissionsAllertText, okButtonText: TextConstants.ok)
+        UIApplication.showErrorAlert(message: TextConstants.photosVideosViewHaveNoPermissionsAllertText)
     }
     
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool){
@@ -204,14 +197,14 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         self.navigationItem.leftBarButtonItem = cancelSelectionButton!
         setTitle(withString: "\(numberOfItems) Selected")
         navigationBarWithGradientStyle()
-        configureNavBarActions()
+        configureNavBarActions(isSelecting: true)
         underNavBarBar?.setSorting(enabled: false)
     }
     
     func stopSelection() {
         self.navigationItem.leftBarButtonItem = nil
         homePageNavigationBarStyle()
-        configureNavBarActions()
+        configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
     }
     
@@ -219,9 +212,19 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
+    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String) {
+        noFilesLabel.text = text
+        noFilesImage.image = image
+        startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
+        noFilesView.isHidden = false
+    }
+    
+    func hideNoFiles() {
+        noFilesView.isHidden = true
+    }
+    
     @objc func onCancelSelectionButton(){
-            output.onCancelSelection()
-        
+        output.onCancelSelection()
     }
     
     func changeSortingRepresentation(sortType type: SortedRules) {

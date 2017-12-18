@@ -24,11 +24,9 @@ class PackagesInteractor {
         self.accountService = accountService
     }
     
-    private let eps: Float = 0.00001
-    
     private func subscriptionPlanWith(name: String, price: Float, type: SubscriptionPlanType, model: Any) -> SubscriptionPlan {
         let priceString = String(format: TextConstants.offersPrice, price)
-        if abs(price - 4.99) < eps {
+        if name.contains("50") {
             return SubscriptionPlan(name: name,
                                     photosCount: 50_000,
                                     videosCount: 5_000,
@@ -37,7 +35,7 @@ class PackagesInteractor {
                                     priceString: priceString,
                                     type: type,
                                     model: model)
-        } else if abs(price - 12.99) < eps {
+        } else if name.contains("500") {
             return SubscriptionPlan(name: name,
                                     photosCount: 500_000,
                                     videosCount: 50_000,
@@ -46,7 +44,7 @@ class PackagesInteractor {
                                     priceString: priceString,
                                     type: type,
                                     model: model)
-        } else if abs(price - 29.99) < eps {
+        } else if name.contains("2.5") {
             return SubscriptionPlan(name: name,
                                     photosCount: 2_560_000,
                                     videosCount: 256_000,
@@ -251,7 +249,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     func convertToSubscriptionPlans(offers: [OfferServiceResponse]) -> [SubscriptionPlan] {
         return offers.flatMap { offer in
-            guard let price = offer.price, let name = offer.name else {
+            guard let price = offer.price, let name = offer.quota?.bytesString else {
                 return nil
             }
             return subscriptionPlanWith(name: name, price: price, type: .default, model: offer)
@@ -260,7 +258,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse]) -> [SubscriptionPlan] {
         return activeSubscriptionList.flatMap { subscription in
-            guard let price = subscription.subscriptionPlanPrice, let name = subscription.subscriptionPlanDisplayName else {
+            guard let price = subscription.subscriptionPlanPrice, let name = subscription.subscriptionPlanQuota?.bytesString else {
                 return nil
             }
             if price == 0 {
