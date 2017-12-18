@@ -140,20 +140,21 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
         if item.fileType.isUnSupportedOpenType {
-            if item.fileType == .audio {
-                guard let array = data as? [[Item]],
-                    let wrappered = item as? Item
-                    else { return }
-                
-                let list = array.flatMap{ $0 }
-                guard let startIndex = list.index(of: wrappered) else { return }
-                player.play(list: list, startAt: startIndex)
-                player.play()
-            } else {
-                router.onItemSelected(item: item, from: data)
-                self.view.dismissController()
+//            if item.fileType == .audio {
+//                guard let array = data as? [[Item]],
+//                    let wrappered = item as? Item
+//                    else { return }
+//
+//                let list = array.flatMap{ $0 }
+//                guard let startIndex = list.index(of: wrappered) else { return }
+//                player.play(list: list, startAt: startIndex)
+//                player.play()
+//            } else {
+            let sameTypeFiles: [BaseDataSourceItem] = data.flatMap{ return $0 }.filter{ $0.fileType == item.fileType }
+                router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
+//                self.view.dismissController()
                 moduleOutput?.previewSearchResultsHide()
-            }
+//            }
         } else {
             let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
