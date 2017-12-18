@@ -22,10 +22,6 @@ class SyncServiceManger {
     
     private var lastAutoSyncTime: TimeInterval = 0
     
-    private var isSynced: Bool {
-        return (photoSyncService.status == .synced && videoSyncService.status == .synced)
-    }
-    
     private var hasExecutingSync: Bool {
         return (photoSyncService.status == .executing || videoSyncService.status == .executing)
     }
@@ -185,10 +181,12 @@ extension SyncServiceManger {
     }
     
     @objc private func onAutoSyncStatusDidChange() {
-        guard !hasExecutingSync, !isSynced else {
+        guard !hasExecutingSync else {
             WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
             return
         }
+        
+        WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
         
         if hasWaitingForWiFiSync {
             WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)

@@ -35,4 +35,11 @@ final class VideoSyncService: ItemSyncServiceImpl {
         photoVideoService?.stopAllOperations()//FIXME: stop only video sync
         UploadService.default.cancelSyncOperations(photo: false, video: true)
     }
+    
+    override func waitForWiFi() {
+        super.waitForWiFi()
+        
+        photoVideoService?.stopAllOperations()//FIXME: stop only video sync
+        UploadService.default.cancelSyncOperations(photo: false, video: true)
+    }
 }

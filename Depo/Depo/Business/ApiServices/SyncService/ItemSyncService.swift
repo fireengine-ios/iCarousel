@@ -77,7 +77,6 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func waitForWiFi() {
         status = .waitingForWifi
-        stop()
     }
     
     func startManually() {
