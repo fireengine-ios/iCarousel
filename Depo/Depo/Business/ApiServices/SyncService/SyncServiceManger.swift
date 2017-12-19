@@ -47,9 +47,7 @@ class SyncServiceManger {
     }
     
     deinit {
-        DispatchQueue.main.async {
-            NotificationCenter.default.removeObserver(self)
-        }
+        NotificationCenter.default.removeObserver(self)
     }
     
     
@@ -224,11 +222,7 @@ extension SyncServiceManger {
             WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             return
         }
-        
-        if photoSyncService.status == .prepairing || videoSyncService.status == .prepairing {
-              WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
-        }
-        
+
         if hasWaitingForWiFiSync {
             WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
