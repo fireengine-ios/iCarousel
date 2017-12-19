@@ -22,6 +22,14 @@ class SyncServiceManger {
     
     private var lastAutoSyncTime: TimeInterval = 0
     
+    private var isSyncCancelled: Bool {
+        return (photoSyncService.status == .canceled && videoSyncService.status == .canceled)
+    }
+    
+    private var hasPrepairingSync: Bool {
+        return (photoSyncService.status == .prepairing || videoSyncService.status == .prepairing)
+    }
+    
     private var hasExecutingSync: Bool {
         return (photoSyncService.status == .executing || videoSyncService.status == .executing)
     }
@@ -78,21 +86,21 @@ class SyncServiceManger {
     //MARK: - Private
     
     private func setupReachability() {
-        guard reachabilityService != nil else {
+        guard let reachability = reachabilityService else {
             return
         }
         
         do {
-           try reachabilityService!.startNotifier()
+           try reachability.startNotifier()
         } catch {
             print("\(#function): can't start reachability notifier")
         }
         
-        reachabilityService!.whenReachable = { (reachability) in
+        reachability.whenReachable = { (reachability) in
             self.checkReachabilityAndSettings()
         }
         
-        reachabilityService!.whenUnreachable = { (reachability) in
+        reachability.whenUnreachable = { (reachability) in
             self.checkReachabilityAndSettings()
         }
     }
@@ -196,15 +204,26 @@ extension SyncServiceManger {
     }
     
     @objc private func onAutoSyncStatusDidChange() {
-        guard !hasExecutingSync else {
+        guard !isSyncCancelled else {
             WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
+            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
             return
         }
         
-        if photoSyncService.status == .executing || videoSyncService.status == .executing {
-              WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+        guard !hasExecutingSync else {
+            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
+            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            return
+
         }
         
+        guard !hasPrepairingSync else {
+            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
+            WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+            return
+        }
+
         if hasWaitingForWiFiSync {
             WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
