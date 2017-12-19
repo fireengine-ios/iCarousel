@@ -472,7 +472,9 @@ struct TextConstants {
     static let popUpSyncing = "Syncing files over"
     static let popUpUploading = "Uploading files over"
     static let popUpDownload = "Downloading files"
+    static let popUpDeleteComplete = "Deleting is complete"
     static let popUpDownloadComplete = "Download is complete"
+    static let popUpOperationComplete = "Operation is complete"
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
@@ -638,6 +640,8 @@ struct TextConstants {
     static let PROMO_IS_INACTIVE = "The package activation code is not active"
     
     static let passcode = "Passcode"
+    static let passcodeSettingsSetTitle = "Set a Passcode"
+    static let passcodeSettingsChangeTitle = "Change Passcode"
     static let passcodeLifebox = "lifebox Passcode"
     static let passcodeEnter = "Please enter your lifebox passcode"
     static let passcodeEnterOld = "Please enter your lifebox passcode"
