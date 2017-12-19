@@ -23,7 +23,37 @@ final class PasscodeSettingsViewController: UIViewController {
     
     @IBOutlet weak var passcodeSwitch: UISwitch!
     @IBOutlet weak var biometricsSwitch: UISwitch!
-    @IBOutlet weak var biometricsLabel: UILabel!
+    
+    @IBOutlet weak var passcodeLabel: UILabel! {
+        didSet {
+            passcodeLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            passcodeLabel.textColor = ColorConstants.textGrayColor
+            passcodeLabel.text = TextConstants.passcode
+        }
+    }
+    
+    @IBOutlet weak var biometricsLabel: UILabel! {
+        didSet {
+            biometricsLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            biometricsLabel.textColor = ColorConstants.textGrayColor
+        }
+    }
+    
+    @IBOutlet weak var changePasscodeLabel: UILabel! {
+        didSet {
+            changePasscodeLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            changePasscodeLabel.textColor = ColorConstants.textGrayColor
+            changePasscodeLabel.text = TextConstants.passcodeSettingsChangeTitle
+        }
+    }
+
+    @IBOutlet weak var setPasscodeLabel: UILabel! {
+        didSet {
+            setPasscodeLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            setPasscodeLabel.textColor = ColorConstants.textGrayColor
+            setPasscodeLabel.text = TextConstants.passcodeSettingsSetTitle
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

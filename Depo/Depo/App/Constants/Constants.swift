@@ -640,6 +640,8 @@ struct TextConstants {
     static let PROMO_IS_INACTIVE = "The package activation code is not active"
     
     static let passcode = "Passcode"
+    static let passcodeSettingsSetTitle = "Set a Passcode"
+    static let passcodeSettingsChangeTitle = "Change Passcode"
     static let passcodeLifebox = "lifebox Passcode"
     static let passcodeEnter = "Please enter your lifebox passcode"
     static let passcodeEnterOld = "Please enter your lifebox passcode"
