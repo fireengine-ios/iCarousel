@@ -33,9 +33,6 @@ def core_pods
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'ExpandableTableViewController'
 
-    ## UI
-    pod 'PullToRefreshKit', :git => 'https://github.com/bonyadmitr/PullToRefreshKit', :branch => 'swift-4'
-
 end
 
 target 'Depo_LifeTech' do

@@ -201,7 +201,7 @@ extension SyncServiceManger {
             return
         }
         
-        if photoSyncService.status == .prepairing || videoSyncService.status == .prepairing {
+        if photoSyncService.status == .executing || videoSyncService.status == .executing {
               WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
         }
         
