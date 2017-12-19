@@ -15,6 +15,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
     
+    static let shared = LocationManager()
+    
     private override init() {
         super.init()
         configurateLocationManager()
@@ -26,13 +28,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.distanceFilter = 100 //kCLDistanceFilterNone - any changes
         locationManager.pausesLocationUpdatesAutomatically = false
         
-    }
-    
-    @objc static func shared() -> LocationManager {
-        if uniqueInstance == nil {
-            uniqueInstance = LocationManager()
-        }
-        return uniqueInstance!
     }
     
     func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping (() -> Void)){
@@ -49,35 +44,39 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
+    func showIfNeedLocationPermissionAllert(){
+        self.checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
+            let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable , preferredStyle: .alert)
+            let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { (action) in
+                UIApplication.shared.openGlobalSettings()
+            })
+            let cancelAction = UIAlertAction(title: TextConstants.cancel , style: .cancel, handler: nil)
+            controller.addAction(okAction)
+            controller.addAction(cancelAction)
+            RouterVC().presentViewController(controller: controller)
+        })
+    }
+    
     func startUpdateLocation(){
         AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
-            guard self != nil else{
+            
+            guard let `self` = self else{
                 return
             }
+            
             if autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected {
                 if CLLocationManager.locationServicesEnabled(){
                     if CLLocationManager.authorizationStatus() == .notDetermined{
-                        self!.locationManager.requestAlwaysAuthorization()
+                        self.locationManager.requestAlwaysAuthorization()
                     } else {
-                        self!.locationManager.startMonitoringSignificantLocationChanges()
+                        self.locationManager.startMonitoringSignificantLocationChanges()
                         if #available(iOS 9.0, *) {
-                            self!.locationManager.allowsBackgroundLocationUpdates = true
+                            self.locationManager.allowsBackgroundLocationUpdates = true
                         }
-                        self!.locationManager.startUpdatingLocation()
+                        self.locationManager.startUpdatingLocation()
                     }
                 }else{
-                    self!.checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
-                        let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable , preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { (action) in
-                            UIApplication.shared.openGlobalSettings()
-                        })
-                        let cancelAction = UIAlertAction(title: TextConstants.cancel , style: .cancel, handler: { (action) in
-                            
-                        })
-                        controller.addAction(okAction)
-                        controller.addAction(cancelAction)
-                        RouterVC().presentViewController(controller: controller)
-                    })
+                    self.showIfNeedLocationPermissionAllert()
                 }
             }
         })
