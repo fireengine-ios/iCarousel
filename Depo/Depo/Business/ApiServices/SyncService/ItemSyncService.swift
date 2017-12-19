@@ -80,7 +80,9 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     func startManually() {
-        sync()
+        DispatchQueue.main.async {
+            self.sync()
+        }
     }
     
     
@@ -191,12 +193,14 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
-        let newUnsyncedLocalItems = localUnsyncedItems().filter({ !lastSyncedMD5s.contains($0.md5) })
-        guard !newUnsyncedLocalItems.isEmpty else {
-            return
+        DispatchQueue.main.async {
+            let newUnsyncedLocalItems = self.localUnsyncedItems().filter({ !self.lastSyncedMD5s.contains($0.md5) })
+            guard !newUnsyncedLocalItems.isEmpty else {
+                return
+            }
+            
+            self.upload(items: newUnsyncedLocalItems)
         }
-        
-        upload(items: newUnsyncedLocalItems)
     }
     
     private func postNotification() {
