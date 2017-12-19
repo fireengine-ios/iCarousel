@@ -59,7 +59,7 @@ class Mail: NSObject, MFMailComposeViewControllerDelegate {
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         mailController!.dismiss(animated: true) { [weak self] in
-            guard error == nil, !result.isСontained(in: [.failed]) else {
+            guard error == nil, !result.isContained(in: [.failed]) else {
                 self?.failHandler?(error)
                 return
             }

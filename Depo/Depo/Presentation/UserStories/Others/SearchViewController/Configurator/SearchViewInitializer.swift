@@ -26,7 +26,7 @@ class SearchViewInitializer {
             showGridListButton: true
         )
         
-        configurator.configure(viewController: viewController, remoteServices: RemoteSearchService(requestSize: 100), output: output, topBarConfig: gridListTopBarConfig)
+        configurator.configure(viewController: viewController, remoteServices: RemoteSearchService(requestSize: 100), recentSearches: RecentSearchesService.shared, output: output, topBarConfig: gridListTopBarConfig)
         
         return viewController
     }

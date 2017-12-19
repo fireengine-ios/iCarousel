@@ -27,7 +27,7 @@ class PopUpService{
     }
     
     private func resetLoginCountForUser(){
-        UserDefaults.standard.set(0, forKey: getKeyForLoginCountForUser)
+        UserDefaults.standard.set(1, forKey: getKeyForLoginCountForUser)
         UserDefaults.standard.synchronize()
     }
     
@@ -35,6 +35,9 @@ class PopUpService{
         SingletonStorage.shared.getAccountInfoForUser(success: { (success) in
             PopUpService.shared.incrementLoginCountForUser()
             let count = PopUpService.shared.getLoginCountForUser()
+            if (count == 1){
+                WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff , allOperations: nil, completedOperations: nil)
+            }
             if count >= NumericConstants.countOfLoginBeforeNeedShowUploadOffPopUp {
                 WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff , allOperations: nil, completedOperations: nil)
                 PopUpService.shared.resetLoginCountForUser()

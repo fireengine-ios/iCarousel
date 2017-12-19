@@ -7,15 +7,15 @@
 //
 
 import UIKit
-import PullToRefreshKit
 
 class ActivityTimelineViewController: UIViewController {
-
+    var output: ActivityTimelineViewOutput!
+    
     @IBOutlet weak var tableView: UITableView!
     
-    var output: ActivityTimelineViewOutput!
     private let sectionBuilder = ActivityTimelineSectionsBuider()
     private var isSettedInfinityScroll = false
+    private var isLoadingMore = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,16 +31,34 @@ class ActivityTimelineViewController: UIViewController {
         tableView.register(nibCell: ActivityTimelineFileCell.self)
     }
     
+    private var refreshControl: UIRefreshControl?
+    
     private func setupPullToRefresh() {
-        tableView.setUpHeaderRefresh { [weak self] in
+        refreshControl = tableView.addRefreshControl { [weak self] _ in
             self?.output.updateForPullToRefresh()
-        }.setupForLifeBox()
+        }
     }
     
     private func setupInfinityScroll() {
-        tableView.setUpFooterRefresh { [weak self] in
-            self?.output.loadMoreActivities()
-        }.setupForLifeBox()
+        tableView.tableFooterView = getInfinityView()
+    }
+    
+    private func getInfinityView() -> UIView {
+        let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activity.startAnimating()
+        return activity
+    }
+    
+    private func loadMoreData() {
+        if isLoadingMore {
+            return
+        }
+        isLoadingMore = true
+        output.loadMoreActivities()
+    }
+    
+    private func endFooterRefreshing() {
+        isLoadingMore = false
     }
 }
 
@@ -49,14 +67,14 @@ extension ActivityTimelineViewController: ActivityTimelineViewInput {
     
     func displayTimelineActivities(with array: [ActivityTimelineServiceResponse]) {
         sectionBuilder.setup(with: array)
-        tableView.endFooterRefreshing()
+        endFooterRefreshing()
         tableView.reloadData()
     }
     
     func refreshTimelineActivities(with array: [ActivityTimelineServiceResponse]) {
         sectionBuilder.clear()
         sectionBuilder.setup(with: array)
-        tableView.endHeaderRefreshing()
+        refreshControl?.endRefreshing()
         tableView.reloadData()
         
         if !isSettedInfinityScroll {
@@ -66,7 +84,7 @@ extension ActivityTimelineViewController: ActivityTimelineViewInput {
     }
     
     func endInfinityScrollWithNoMoreData() {
-        tableView.endFooterRefreshingWithNoMoreData()
+        tableView.tableFooterView = nil
     }
 }
 
@@ -92,5 +110,23 @@ extension ActivityTimelineViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return sectionBuilder.heightForHeaderInSection
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension ActivityTimelineViewController: UIScrollViewDelegate {
+    
+    /// Infinite Scrolling
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if deltaOffset(for: scrollView) <= 0 {
+            loadMoreData()
+        }
+    }
+    
+    private func deltaOffset(for scrollView: UIScrollView) -> CGFloat {
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.height
+        let infinity = tableView.tableFooterView?.bounds.height ?? 0
+        return maximumOffset - currentOffset - infinity
     }
 }

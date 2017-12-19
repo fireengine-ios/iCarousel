@@ -112,6 +112,8 @@ struct TextConstants {
     // MARK: - Search
     
     static let search = "Search"
+    static let searchRecentSearchTitle = "RECENT SEARCHES"
+    static let searchSuggestionsTitle = "SUGGESTIONS"
     
     static let noFilesFoundInSearch = "No results found for your query."
     
@@ -472,7 +474,9 @@ struct TextConstants {
     static let popUpSyncing = "Syncing files over"
     static let popUpUploading = "Uploading files over"
     static let popUpDownload = "Downloading files"
+    static let popUpDeleteComplete = "Deleting is complete"
     static let popUpDownloadComplete = "Download is complete"
+    static let popUpOperationComplete = "Operation is complete"
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
@@ -638,6 +642,8 @@ struct TextConstants {
     static let PROMO_IS_INACTIVE = "The package activation code is not active"
     
     static let passcode = "Passcode"
+    static let passcodeSettingsSetTitle = "Set a Passcode"
+    static let passcodeSettingsChangeTitle = "Change Passcode"
     static let passcodeLifebox = "lifebox Passcode"
     static let passcodeEnter = "Please enter your lifebox passcode"
     static let passcodeEnterOld = "Please enter your lifebox passcode"
@@ -678,7 +684,7 @@ struct NumericConstants {
     static let maxVereficationAttempts = 3
     //
     
-    static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
+    static let countOfLoginBeforeNeedShowUploadOffPopUp = 4
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
@@ -710,4 +716,5 @@ struct NumericConstants {
     
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     
+    static let maxRecentSearches: Int = 10
 }
