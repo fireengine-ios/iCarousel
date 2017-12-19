@@ -288,8 +288,8 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
                                  fail: failAction(elementType: .download))
         } else if let albums = item as? [AlbumItem] {
             let albumService = PhotosAlbumService()
-            albumService.allItemsFrom(albums: albums, success: { (items) in
-                self.fileService.download(items: items, toPath: "",
+            albumService.loadItemsBy(albums: albums, success: { (itemsByAlbums) in
+                self.fileService.download(itemsByAlbums: itemsByAlbums,
                                           success: self.succesAction(elementType: .download),
                                           fail: self.failAction(elementType: .download))
             })

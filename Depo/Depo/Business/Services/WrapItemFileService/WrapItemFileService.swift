@@ -144,6 +144,25 @@ class WrapItemFileService: WrapItemFileOperations {
         remoteFileService.download(items: downloadItems, success: success, fail: fail)
     }
     
+    func download(itemsByAlbums: [AlbumItem: [Item]], success: FileOperationSucces?, fail: FailResponse?) {
+        let group = DispatchGroup()
+        
+        for (album, items) in itemsByAlbums {
+            let downloadItems = remoteWrapDataItems(files: items)
+            guard downloadItems.count > 0 else { continue }
+            group.enter()
+            remoteFileService.download(items: downloadItems, album: album, success: {
+                group.leave()
+            }, fail: { (error) in
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            success?()
+        }
+    }
+    
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?) {
         let items = remoteItemsUUID(files: sharedFiles)
         let isAlbum = !sharedFiles.contains(where: { $0.fileType != .photoAlbum })

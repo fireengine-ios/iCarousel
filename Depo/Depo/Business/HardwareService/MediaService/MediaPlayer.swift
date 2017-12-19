@@ -111,6 +111,7 @@ final class MediaPlayer: NSObject {
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), options: [.new], context: nil)
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.status), options: [.new], context: nil)
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp), options: [.new], context: nil)
+        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), options: [.new], context: nil)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -136,7 +137,10 @@ final class MediaPlayer: NSObject {
         else if keyPath == #keyPath(AVPlayer.currentItem.status), player.currentItem?.status == .readyToPlay {
             play()
         }
-        else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp), player.currentItem?.status == .readyToPlay, !isPlaying {
+        else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp), player.currentItem?.status == .readyToPlay, isPlaying {
+            play()
+        }
+        else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), player.currentItem?.status == .readyToPlay {
             play()
         }
     }
@@ -309,6 +313,7 @@ final class MediaPlayer: NSObject {
     
     func pause() {
         player.pause()
+        
         delegates.invoke { delegate in
             delegate.didStopMediaPlayer(self)
         }
