@@ -215,6 +215,7 @@ extension SyncServiceManger {
             WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
             WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
             return
+
         }
         
         guard !hasPrepairingSync else {
