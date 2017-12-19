@@ -55,7 +55,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // CLLocationManager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        SyncServiceManger.shared.updateInBackground()
+        SyncServiceManager.shared.updateInBackground()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
