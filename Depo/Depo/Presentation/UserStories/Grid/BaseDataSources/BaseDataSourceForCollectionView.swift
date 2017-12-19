@@ -346,12 +346,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         allLocalItems.removeAll()
         allItems.removeAll()
         allMediaItems.removeAll()
-        
-        allLocalItems.append(contentsOf: getAllLocalItems())
-        if isLocalOnly() {
-            allItems = [allLocalItems]
+        DispatchQueue.main.async {
+            self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+            if self.isLocalOnly() {
+                self.allItems = [self.allLocalItems]
+            }
+            self.reloadData()
         }
-        reloadData()
     }
     
     private var sortingRules: SortedRules
@@ -368,15 +369,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         self.collectionView = collectionView
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        allLocalItems.append(contentsOf: getAllLocalItems())
-        
-        registerHeaders()
-        registerCells()
-        
-        if isLocalOnly() {
-            allItems = [allLocalItems]
-            reloadData()
+        DispatchQueue.main.async {
+            self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+            
+            self.registerHeaders()
+            self.registerCells()
+            
+            if self.isLocalOnly() {
+                self.allItems = [self.allLocalItems]
+                self.reloadData()
+            }
         }
     }
     

@@ -129,7 +129,6 @@ class PredicateRules {
     }
     
     func predicate(filters: [GeneralFilesFiltrationType]? = nil) -> NSPredicate? {
-        
         var filtersPredicates: [NSPredicate]?
         filtersPredicates = filters?.flatMap {
             self.predicateFromGeneralFilterType(type: $0)

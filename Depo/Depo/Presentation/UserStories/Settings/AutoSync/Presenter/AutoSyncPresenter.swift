@@ -49,8 +49,8 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         
         if !fromSettings, setting.isAutoSyncEnable, setting.mobileDataPhotos == true || setting.mobileDataVideo == true {
             router.showSyncOverPopUp()
-        } else {
-            router.routNextVC()
+        } else if !fromSettings {
+            router.routNextVC() 
         }
     }
     
