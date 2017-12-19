@@ -86,21 +86,21 @@ class SyncServiceManger {
     //MARK: - Private
     
     private func setupReachability() {
-        guard reachabilityService != nil else {
+        guard let reachability = reachabilityService else {
             return
         }
         
         do {
-           try reachabilityService!.startNotifier()
+           try reachability.startNotifier()
         } catch {
             print("\(#function): can't start reachability notifier")
         }
         
-        reachabilityService!.whenReachable = { (reachability) in
+        reachability.whenReachable = { (reachability) in
             self.checkReachabilityAndSettings()
         }
         
-        reachabilityService!.whenUnreachable = { (reachability) in
+        reachability.whenUnreachable = { (reachability) in
             self.checkReachabilityAndSettings()
         }
     }
