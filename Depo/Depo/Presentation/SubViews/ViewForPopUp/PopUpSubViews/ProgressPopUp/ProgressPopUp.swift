@@ -18,6 +18,8 @@ class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     @IBOutlet weak var iconImageViewForCurrentFile: LoadingImageView!
     @IBOutlet weak var waitingForWiFiButton: SimpleButtonWithBlueText!
     
+    var wrapItem: WrapData?
+    
     override class func initFromNib() -> ProgressPopUp{
         if let view = super.initFromNib() as? ProgressPopUp{
             return view
@@ -64,7 +66,10 @@ class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     }
     
     func setImageForUploadingItem(item: WrapData){
-        iconImageViewForCurrentFile.loadImageForItem(object: item)
+        if wrapItem != item{
+            wrapItem = item
+            iconImageViewForCurrentFile.loadImageForItem(object: item)
+        }
     }
     
     func configurateWithType(viewType: OperationType){
