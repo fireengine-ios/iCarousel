@@ -128,7 +128,7 @@ class RouterVC: NSObject {
     }
     
     func popViewController() {
-        navigationController?.topViewController?.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     func popCreateStory() {
