@@ -141,10 +141,11 @@ class ItemSyncServiceImpl: ItemSyncService {
                                              uploadType: .autoSync,
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
-                                             success: {
-                                                self.status = .synced
-        }, fail: { (error) in
-            self.status = .failed
+                                             success: { [weak self] in
+                                                self?.status = .synced
+        }, fail: { [weak self] (error) in
+            self?.status = .failed
+            self?.stop()
         })
         
     }

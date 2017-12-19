@@ -24,7 +24,11 @@ final class UploadService: BaseRequestService {
     private var allSyncOperationsCount = 0
     private var allUploadOperationsCount = 0
     
-    private var finishedSyncOperationsCount = 0
+    private var finishedSyncOperationsCount : Int {
+        return finishedPhotoSyncOperationsCount + finishedVideoSyncOperationsCount
+    }
+    private var finishedPhotoSyncOperationsCount = 0
+    private var finishedVideoSyncOperationsCount = 0
     private var finishedUploadOperationsCount = 0
 
     
@@ -229,7 +233,9 @@ final class UploadService: BaseRequestService {
                     return
                 }
                 
-                self.finishedSyncOperationsCount += 1
+                if finishedOperation.item.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 }
+                else if finishedOperation.item.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
+
                 WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
                                                                             allOperations: self.allSyncOperationsCount,
                                                                             completedOperations: self.finishedSyncOperationsCount)
@@ -243,9 +249,9 @@ final class UploadService: BaseRequestService {
                     success?()
                 }
                 
-            }, fail: { (fail) in
-                if fail.description != TextConstants.canceledOperationTextError{
-                    self.finishedSyncOperationsCount += 1
+            }, fail: { (error) in
+                if error.description != TextConstants.canceledOperationTextError{
+                    fail?(error)
                 }
                 
                 if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
@@ -299,9 +305,14 @@ final class UploadService: BaseRequestService {
         }
         operationsToRemove.removeAll()
         
-        clearSyncCounters()
+        resetSyncCounters(for: photo ? .image : .video)
         
-        WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+        guard allSyncOperationsCount != finishedSyncOperationsCount else {
+            WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+            return
+        }
+        
+        WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
     }
     
     private func clearUlpoadCounters() {
@@ -311,7 +322,15 @@ final class UploadService: BaseRequestService {
     
     private func clearSyncCounters() {
         allSyncOperationsCount = 0
-        finishedSyncOperationsCount = 0
+        finishedPhotoSyncOperationsCount = 0
+        finishedVideoSyncOperationsCount = 0
+    }
+    
+    private func resetSyncCounters(for type: FileType) {
+        allSyncOperationsCount = uploadOperations.filter({ $0.uploadType == .autoSync && $0.item.fileType == type }).count
+        
+        if type == .image { finishedPhotoSyncOperationsCount = 0 }
+        else if type == .video { finishedVideoSyncOperationsCount = 0 }
     }
     
     func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionUploadTask {
