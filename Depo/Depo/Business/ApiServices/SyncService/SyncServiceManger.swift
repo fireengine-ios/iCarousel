@@ -122,7 +122,7 @@ class SyncServiceManger {
         }
         
         guard syncSettings.isAutoSyncEnable else {
-            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
+            PopUpService.shared.checkIsNeedShowUploadOffPopUp()
             stop(reachabilityDidChange: false, photo: true, video: true)
             return
         }

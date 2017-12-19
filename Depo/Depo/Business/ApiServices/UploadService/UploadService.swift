@@ -219,7 +219,10 @@ final class UploadService: BaseRequestService {
         
         WrapItemOperatonManager.default.startOperationWith(type: .sync, allOperations: itemsToSync.count, completedOperations: 0)
         self.allSyncOperationsCount += itemsToSync.count
+        
+        let firstObject = itemsToSync.first!
         WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
+                                                                    object: firstObject,
                                                                     allOperations: self.allSyncOperationsCount,
                                                                     completedOperations: self.finishedSyncOperationsCount)
         let operations: [UploadOperations] = itemsToSync.flatMap {
@@ -232,13 +235,15 @@ final class UploadService: BaseRequestService {
                 guard self.allSyncOperationsCount != 0 else {
                     return
                 }
-                
+
                 if finishedOperation.item.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 }
                 else if finishedOperation.item.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
 
                 WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
+                                                                            object: finishedOperation.item,
                                                                             allOperations: self.allSyncOperationsCount,
                                                                             completedOperations: self.finishedSyncOperationsCount)
+                
                 if let index = self.uploadOperations.index(of: finishedOperation){
                     self.uploadOperations.remove(at: index)
                 }
