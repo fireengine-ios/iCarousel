@@ -11,10 +11,11 @@ import UIKit
 class BlueButtonWithWhiteText: WhiteButtonWithRoundedCorner {
 
     override func configurate(){
-        backgroundColor = ColorConstants.darcBlueColor
+        setCornerRadius()
+        setBackgroundColor(ColorConstants.darcBlueColor, for: .normal)
+        setBackgroundColor(ColorConstants.darcBlueColor.lighter(by: 30.0), for: .disabled)
         setTitleColor(ColorConstants.whiteColor, for: .normal)
         setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
         titleLabel?.font = ApplicationPalette.bigRoundButtonFont
-        setCornerRadius()
     }
 }
