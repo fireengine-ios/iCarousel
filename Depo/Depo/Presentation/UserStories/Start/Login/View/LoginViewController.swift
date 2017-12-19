@@ -314,4 +314,8 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         loginButton.isEnabled = true
         cantLoginButton.isEnabled = true
     }
+    
+    func failedBlockError() {
+        showErrorMessage(with: TextConstants.hourBlockLoginError)
+    }
 }

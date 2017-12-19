@@ -37,4 +37,6 @@ protocol LoginViewInput: class, Waiting {
     func blockUI()
     func unblockUI()
     
+    func failedBlockError()
+    
 }
