@@ -39,9 +39,7 @@ class SyncServiceManger {
     }
     
     deinit {
-        DispatchQueue.main.async {
-            NotificationCenter.default.removeObserver(self)
-        }
+        NotificationCenter.default.removeObserver(self)
     }
     
     
