@@ -674,6 +674,9 @@ struct TextConstants {
     static let purchase = "Purchase"
     
     static let deleteText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
+    
+    static let locationServiceDisable = "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu."
+    
 }
 
 
