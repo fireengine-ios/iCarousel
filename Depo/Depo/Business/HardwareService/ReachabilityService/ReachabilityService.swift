@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ReachabilitySwift
+import Reachability
 
 
 protocol ReachabilityProtocol  {
@@ -24,15 +24,15 @@ class ReachabilityService: ReachabilityProtocol {
     private let reachability  = Reachability()!
     
     var isReachableViaWiFi: Bool {
-        return self.reachability.isReachableViaWiFi
+        return self.reachability.connection == .wifi
     }
     
     var isReachableViaWWAN: Bool {
-        return self.reachability.isReachableViaWWAN
+        return self.reachability.connection == .cellular
     }
     
     var isReachable:Bool {
-        return self.reachability.isReachable
+        return self.reachability.connection != .none
     }
     
     init() {

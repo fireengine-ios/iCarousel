@@ -225,6 +225,10 @@ extension SyncServiceManger {
             return
         }
         
+        if photoSyncService.status == .prepairing || videoSyncService.status == .prepairing {
+              WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+        }
+        
         if hasWaitingForWiFiSync {
             WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
