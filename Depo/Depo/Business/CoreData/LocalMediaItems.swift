@@ -91,12 +91,15 @@ extension CoreDataStack {
         guard list.count > 0 else {
             return
         }
-        let context = mainContext//newChildBackgroundContext
-        let predicate = NSPredicate(format: "localFileID IN %@", list)
-        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
-        items.forEach { context.delete($0) }
+        DispatchQueue.main.async {
+            let context = self.mainContext//newChildBackgroundContext
+            let predicate = NSPredicate(format: "localFileID IN %@", list)
+            let items:[MediaItem] = self.executeRequest(predicate: predicate, context:context)
+            items.forEach { context.delete($0) }
+            
+            self.saveDataForContext(context: context)
+        }
         
-        saveDataForContext(context: context)
     }
     
     func  allLocalItem() -> [WrapData] {

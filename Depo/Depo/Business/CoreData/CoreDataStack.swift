@@ -53,16 +53,8 @@ class CoreDataStack: NSObject {
         
         
         super.init()
-//        rootBackgroundContext.persistentStoreCoordinator = persistentStoreCoordinator
         mainContext.persistentStoreCoordinator = persistentStoreCoordinator
         backgroundContext.parent = mainContext
-//        let name = NSNotification.Name.NSManagedObjectContextDidSave
-//        let selector = #selector(managedObjectContextObjectsDidSave)
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: selector,
-//                                               name: name,
-//                                               object: nil)
-        
     }
     
     func clearDataBase() {
@@ -84,13 +76,15 @@ class CoreDataStack: NSObject {
     }
 
     func deleteLocalFiles(){
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        let predicateRules = PredicateRules()
-        guard let predicate = predicateRules.predicate(filters: [.localStatus(.local)]) else {
-            return
+        DispatchQueue.main.async {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
+            let predicateRules = PredicateRules()
+            guard let predicate = predicateRules.predicate(filters: [.localStatus(.local)]) else {
+                return
+            }
+            fetchRequest.predicate = predicate
+            self.deleteObjects(fromFetch: fetchRequest)
         }
-        fetchRequest.predicate = predicate
-        deleteObjects(fromFetch: fetchRequest)
     }
     
     private func clearAllEntities() {
@@ -153,42 +147,9 @@ class CoreDataStack: NSObject {
         
         if context.parent == mainContext, context != mainContext {
             DispatchQueue.main.async {
-//                try? self.mainContext.save()
                 self.saveMainContext()
             }
             return
         }
     }
-    
-//    func appendNewRemmoteFiles(items:[SearchItemResponse]) { //AlexGurin
-//
-//        let uuidList = items.map{ $0.hash }
-//        let predicateForRemoteFile = NSPredicate(format: "uuidValue IN %@", uuidList)
-//
-//        let inCoreData = executeRequest(predicate: predicateForRemoteFile, context:rootBackgroundContext).flatMap{ $0.uuidValue }
-//
-//        let childrenContext = self.newChildBackgroundContext
-//        let appendItems = items.filter{ !inCoreData.contains($0.uuid!) }
-//        appendItems.forEach {
-//            _ = MediaItem(remoteItem: $0, context: childrenContext)
-//        }
-//        saveDataForContext(context: childrenContext, saveAndWait: true)
-//    }
-    
-//    @objc func managedObjectContextObjectsDidSave(notification: Notification) {
-    
-//        if let context = notification.object as? NSManagedObjectContext,
-//            let parent = context.parent,
-//            parent == mainContext {
-//            try? parent.save()
-////            print("SAVE MAIN CONTEXT %@ ", Date() )
-////            parent.mergeChanges(fromContextDidSave: notification)
-////            if parent == rootBackgroundContext {
-////                print("SAVE MAIN CONTEXT %@ ", Date() )
-////            }
-//        }
-        
-  
-//    }
-    
 }

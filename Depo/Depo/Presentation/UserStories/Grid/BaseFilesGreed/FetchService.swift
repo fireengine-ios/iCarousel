@@ -75,16 +75,17 @@ class FetchService: NSObject {
     func performFetch(sortingRules: SortedRules,
                       filtes: [GeneralFilesFiltrationType]? = nil,
                       delegate: NSFetchedResultsControllerDelegate? = nil) {
-        
-        self.sortingRules = sortingRules
-        let sortingAgregate = CollectionSortingRules(sortingRules: sortingRules).rule
-        let predicate = PredicateRules().predicate(filters: filtes)
-        
-        controller = FetchService.createController(batchSize: self.batchSize,
-                                                   sortingAgrifate: sortingAgregate,
-                                                   prediicate: predicate,
-                                                   delegate: delegate)
-        performFetch()
+        DispatchQueue.main.async {
+            self.sortingRules = sortingRules
+            let sortingAgregate = CollectionSortingRules(sortingRules: sortingRules).rule
+            let predicate = PredicateRules().predicate(filters: filtes)
+            
+            self.controller = FetchService.createController(batchSize: self.batchSize,
+                                                       sortingAgrifate: sortingAgregate,
+                                                       prediicate: predicate,
+                                                       delegate: delegate)
+            self.performFetch()
+        }
     }
     
     func mediaItemObject(at: IndexPath) -> MediaItem? {
