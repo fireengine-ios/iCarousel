@@ -58,7 +58,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     //MARK: - Public ItemSyncService functions
     
     func start() {
-        guard !status.isСontained(in: [.executing, .prepairing]) else {
+        guard !status.isContained(in: [.executing, .prepairing]) else {
             appendNewUnsyncedItems()
             return
         }
@@ -88,7 +88,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     //MARK: - Private
     
     private func sync() {
-        guard !status.isСontained(in: [.executing, .prepairing]) else {
+        guard !status.isContained(in: [.executing, .prepairing]) else {
             return
         }
         
