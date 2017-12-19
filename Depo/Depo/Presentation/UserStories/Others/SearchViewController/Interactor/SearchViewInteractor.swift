@@ -12,22 +12,27 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     weak var output: SearchViewInteractorOutput!
     
-    var remoteItems: RemoteSearchService
+    let remoteItems: RemoteSearchService
+    let recentSearches: RecentSearchesService
     
-    init(remoteItems: RemoteSearchService) {
+    init(remoteItems: RemoteSearchService, recentSearches: RecentSearchesService) {
         self.remoteItems = remoteItems
+        self.recentSearches = recentSearches
     }
     
     func viewIsReady() {
-        
+        output.setRecentSearches(recentSearches.searches)
     }
     
     func searchItems(by searchText: String, sortBy: SortType, sortOrder: SortOrder) {
         remoteItems.allItems(searchText, sortBy: sortBy, sortOrder: sortOrder,
              success: { [weak self] (items) in
-                self?.items(items: items)
+                guard let `self` = self else { return }
+                self.items(items: items)
                 DispatchQueue.main.async {
-                    self?.output.endSearchRequestWith(text: searchText)
+                    self.recentSearches.addSearch(searchText)
+                    self.output.setRecentSearches(self.recentSearches.searches)
+                    self.output.endSearchRequestWith(text: searchText)
                 }
             }, fail: {
                 DispatchQueue.main.async {
@@ -70,5 +75,10 @@ class SearchViewInteractor: SearchViewInteractorInput {
             }
         }, fail: { (_) in
         })
+    }
+    
+    func clearRecentSearches() {
+        recentSearches.clearAll()
+        output.setRecentSearches(recentSearches.searches)
     }
 }
