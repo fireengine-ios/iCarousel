@@ -11,8 +11,6 @@ import CoreLocation
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
-    private static var uniqueInstance: LocationManager?
-    
     private let locationManager = CLLocationManager()
     
     static let shared = LocationManager()
