@@ -16,5 +16,5 @@ protocol FeedbackViewOutput {
     func viewIsReady()
     
     func onSend(selectedLanguage: LanguageModel)
-    
+    func onTextDidChange(text: String)
 }
