@@ -16,7 +16,8 @@ class LoginInteractor: LoginInteractorInput {
     
     private var attempts: Int = 0
     
-    private let maxAttemps: Int = 6
+    /// from 0 to 11 = 12 attempts
+    private let maxAttemps: Int = 11
     
     func prepareModels(){
         output.models(models: dataStorage.getModels())
@@ -37,7 +38,6 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         if isBlocked(userName: login)  {
-            
             output.userStillBlocked(user: login)
             return
         } else if (maxAttemps <= attempts) {
@@ -53,11 +53,6 @@ class LoginInteractor: LoginInteractorInput {
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] in
-            
-//            PhotoAndVideoService(requestSize: 999999).nextItems(sortBy: .name,
-//                                                                sortOrder: .asc,
-//                                                                success: nil,
-//                                                                fail: nil)
             guard let `self` = self else {
                 return
             }
