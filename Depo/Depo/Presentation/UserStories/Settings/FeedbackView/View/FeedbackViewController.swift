@@ -46,6 +46,9 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         
         self.setupTexts()
         
+        sendButton.isEnabled = false
+        
+        feedbackTextView.delegate = self
         feedbackSubView.layer.cornerRadius = 4
         feedbackTextView.layer.cornerRadius = 4
         
@@ -153,7 +156,12 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
             self.allertView.transform = .identity
         }
     }
-
+    
+    func setSendButton(isEnabled: Bool) {
+        sendButton.isEnabled = isEnabled
+    }
+    
+    
     // MARK: Keboard
     
     @IBAction func onHideKeyboard(){
@@ -273,3 +281,15 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
 }
+
+
+extension FeedbackViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        guard textView == feedbackTextView else {
+            return
+        }
+        
+        output.onTextDidChange(text: textView.text)
+    }
+}
+
