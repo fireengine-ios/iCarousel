@@ -182,6 +182,15 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         return !notPermittedPopUpViewTypes.contains(type.rawValue)
     }
     
+    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool{
+        switch operationType {
+        case .prepareToAutoSync:
+            return viewsByType[.sync] == nil
+        default:
+            return true
+        }
+    }
+    
     func getViewForOperation(operation: OperationType) -> BaseView{
         return WrapItemOperatonManager.popUpViewForOperaion(type: operation)
     }
@@ -192,6 +201,10 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
         if !checkIsThisIsPermittedType(type: type){
+            return
+        }
+        
+        if !checkIsNeedShowPopUpFor(operationType: type){
             return
         }
         

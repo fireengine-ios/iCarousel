@@ -301,10 +301,12 @@ class FileService: BaseRequestService {
     
     //MARK: download && upload
     
-    func download(items: [WrapData], success: FileOperation?, fail:FailResponse?) {
+    func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail:FailResponse?) {
         let allOperationsCount = items.count
         WrapItemOperatonManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
-        let downLoadRequests: [BaseDownloadRequestParametrs] = items.flatMap { BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType) }
+        let downLoadRequests: [BaseDownloadRequestParametrs] = items.flatMap {
+            BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name)
+        }
         var completedOperationsCount = 0
         let operations = downLoadRequests.flatMap {
             DownLoadOperation(downloadParam: $0, success: {
@@ -364,7 +366,7 @@ class FileService: BaseRequestService {
                     
                     LocalMediaStorage.default.appendToAlboum(fileUrl: destination,
                                                        type: type,
-                                                       album: nil, success: {
+                                                       album: downloadParam.albumName, success: {
                         removeDestinationFile()
                         success?()
                         

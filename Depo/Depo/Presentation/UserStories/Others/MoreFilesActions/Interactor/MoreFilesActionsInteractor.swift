@@ -170,67 +170,116 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func completelyDelete(albums: [BaseDataSourceItem]) {
-        guard let albums = albums as? [AlbumItem] else { return }
-        self.output?.operationStarted(type: .completelyDeleteAlbums)
-        let albumService = PhotosAlbumService()
-        albumService.completelyDelete(albums: DeleteAlbums(albums: albums), success: {
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFinished(type: .completelyDeleteAlbums)
-            }
-        }, fail: { errorRespone in
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFailed(type: .completelyDeleteAlbums, message: errorRespone.description)
-            }
+        let okHandler: () -> Void = { [weak self] in
+            guard let albums = albums as? [AlbumItem] else { return }
+            self?.output?.operationStarted(type: .completelyDeleteAlbums)
+            let albumService = PhotosAlbumService()
+            albumService.completelyDelete(albums: DeleteAlbums(albums: albums), success: {
+                DispatchQueue.main.async { [weak self] in
+                    self?.output?.operationFinished(type: .completelyDeleteAlbums)
+                }
+            }, fail: { [weak self] errorRespone in
+                DispatchQueue.main.async {
+                    self?.output?.operationFailed(type: .completelyDeleteAlbums, message: errorRespone.description)
+                }
+            })
+        }
+        
+        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                              message: TextConstants.deleteAlbums,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
         })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
     private func deleteItems(items: [Item]) {
-        output?.operationStarted(type: .delete)
-        player.remove(listItems: items)
-//        SingleSong.default.remove(items: items)
-        fileService.delete(deleteFiles: items,
-                           success: succesAction(elementType: .delete),
-                           fail: failAction(elementType: .delete))
+        let okHandler: () -> Void = { [weak self] in
+            self?.output?.operationStarted(type: .delete)
+            self?.player.remove(listItems: items)
+            self?.fileService.delete(deleteFiles: items,
+            success: self?.succesAction(elementType: .delete),
+            fail: self?.failAction(elementType: .delete))
+        }
         
+        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                              message: TextConstants.deleteFilesText,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
     private func deleteAlbumbs(albumbs: [AlbumItem]) {
-        self.output?.operationStarted(type: .removeFromAlbum)
-        let albumService = PhotosAlbumService()
-        albumService.deleteAlbums(deleteAlbums: DeleteAlbums(albums: albumbs), success: {
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFinished(type: .removeAlbum)
-            }
-        }, fail: { errorRespone in
-            DispatchQueue.main.async { [weak self] in
-                
-                self?.output?.operationFailed(type: .removeAlbum, message: errorRespone.description)
-            }
+        let okHandler: () -> Void = { [weak self] in
+            self?.output?.operationStarted(type: .removeFromAlbum)
+            let albumService = PhotosAlbumService()
+            albumService.deleteAlbums(deleteAlbums: DeleteAlbums(albums: albumbs), success: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.output?.operationFinished(type: .removeAlbum)
+                }
+            }, fail: { [weak self] errorRespone in
+                DispatchQueue.main.async {
+                    self?.output?.operationFailed(type: .removeAlbum, message: errorRespone.description)
+                }
+            })
+        }
+        
+        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                              message: TextConstants.removeAlbums,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
         })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
     private func deleteFromAlbums(items: [BaseDataSourceItem]){
-        self.output?.operationStarted(type: .removeFromAlbum)
-        
-        var album = ""
-        
-        for item in items {
-            if let item = item as? WrapData, let albumID = item.albums?.first {
-                album = albumID
-                break
+        let okHandler: () -> Void = { [weak self] in
+            self?.output?.operationStarted(type: .removeFromAlbum)
+            
+            var album = ""
+            
+            for item in items {
+                if let item = item as? WrapData, let albumID = item.albums?.first {
+                    album = albumID
+                    break
+                }
+            }
+            
+            let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items as! [Item])
+            PhotosAlbumService().deletePhotosFromAlbum(parameters: parameters, success: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.output?.operationFinished(type: .removeFromAlbum)
+                }
+            }) { [weak self] errorRespone in
+                DispatchQueue.main.async {
+                    self?.output?.operationFailed(type: .removeFromAlbum, message: errorRespone.description)
+                }
             }
         }
         
-        let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items as! [Item])
-        PhotosAlbumService().deletePhotosFromAlbum(parameters: parameters, success: {
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFinished(type: .removeFromAlbum)
-            }
-        }) { (errorRespone) in
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFailed(type: .removeFromAlbum, message: errorRespone.description)
-            }
-        }
+        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                              message: TextConstants.deleteFilesText,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
     func move(item: [BaseDataSourceItem], toPath:String) {
@@ -260,12 +309,13 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         
         
         folderSelector.selectFolder(select: { [weak self] (folder) in
-            
             self?.fileService.move(items: item, toPath: folder.uuid,
                                    success: self?.succesAction(elementType: .copy),
                                    fail: self?.failAction(elementType: .copy))
             
-            }, cancel: { self.succesAction(elementType: ElementTypes.move)() } )
+            }, cancel: { [weak self] in
+                self?.succesAction(elementType: ElementTypes.move)()
+        })
     }
     
     func sync(item: [BaseDataSourceItem]) {
@@ -273,23 +323,20 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
             return
         }
         
-        //output?.operationStarted(type: .sync)
-        
         fileService.upload(items: item, toPath: "",
                            success: succesAction(elementType: .sync),
                            fail: failAction(elementType: .sync))
     }
     
     func download(item: [BaseDataSourceItem]) {
-//        output?.operationStarted(type: .download)
         if let item = item as? [Item] { //FIXME: transform all to BaseDataSourceItem
             fileService.download(items: item, toPath: "",
                                  success: succesAction(elementType: .download),
                                  fail: failAction(elementType: .download))
         } else if let albums = item as? [AlbumItem] {
-            let albumService = PhotosAlbumService()
-            albumService.allItemsFrom(albums: albums, success: { (items) in
-                self.fileService.download(items: items, toPath: "",
+            
+            PhotosAlbumService().loadItemsBy(albums: albums, success: { (itemsByAlbums) in
+                self.fileService.download(itemsByAlbums: itemsByAlbums,
                                           success: self.succesAction(elementType: .download),
                                           fail: self.failAction(elementType: .download))
             })
@@ -414,8 +461,6 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
                     text = TextConstants.popUpDeleteComplete
                 default:
                     return
-                    /// maybe will be need
-                    //text = TextConstants.popUpOperationComplete
                 }
                 UIApplication.showSuccessAlert(message: text)
             }
