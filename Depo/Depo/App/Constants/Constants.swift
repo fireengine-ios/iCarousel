@@ -687,7 +687,7 @@ struct NumericConstants {
     static let maxVereficationAttempts = 3
     //
     
-    static let countOfLoginBeforeNeedShowUploadOffPopUp = 4
+    static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
