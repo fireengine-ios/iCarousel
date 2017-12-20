@@ -599,7 +599,7 @@ struct TextConstants {
     static let offersBuy = "Buy"
     static let offersOk = "OK"
     static let offersSettings = "Settings"
-    static let offersPrice = "%.2f ₺ / month"
+    static let offersPrice = "%.2f %@ / month"
     
     // MARK: - OTP
     static let otpNextButton = "Next"

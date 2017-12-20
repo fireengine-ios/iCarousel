@@ -159,8 +159,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
     func successed(activeSubscriptions: [SubscriptionPlanBaseResponse]) {
         interactor.getAccountType()
         self.activeSubscriptions = activeSubscriptions
-        let subscriptionPlans = interactor.convertToASubscriptionList(activeSubscriptionList: activeSubscriptions)
-        view?.display(subscriptionPlans: subscriptionPlans)
     }
     
     func successed(tokenForOffer: String) {
@@ -198,11 +196,15 @@ extension PackagesPresenter: PackagesInteractorOutput {
 //            view?.startActivityIndicator()
 //            interactor.getOfferApples()
         }
+        
+        let subscriptionPlans = interactor.convertToASubscriptionList(activeSubscriptionList: activeSubscriptions, accountType: accountType)
+        view?.display(subscriptionPlans: subscriptionPlans)
+        
         view?.stopActivityIndicator()
     }
     
     func successed(offers: [OfferServiceResponse]) {
-        let subscriptionPlans = interactor.convertToSubscriptionPlans(offers: offers)
+        let subscriptionPlans = interactor.convertToSubscriptionPlans(offers: offers, accountType: accountType)
         view?.display(subscriptionPlans: subscriptionPlans)
         view?.stopActivityIndicator()
     }
