@@ -24,8 +24,7 @@ class PackagesInteractor {
         self.accountService = accountService
     }
     
-    private func subscriptionPlanWith(name: String, price: Float, type: SubscriptionPlanType, model: Any) -> SubscriptionPlan {
-        let priceString = String(format: TextConstants.offersPrice, price)
+    private func subscriptionPlanWith(name: String, priceString: String, type: SubscriptionPlanType, model: Any) -> SubscriptionPlan {
         if name.contains("50") {
             return SubscriptionPlan(name: name,
                                     photosCount: 50_000,
@@ -247,31 +246,39 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
-    func convertToSubscriptionPlans(offers: [OfferServiceResponse]) -> [SubscriptionPlan] {
+    func convertToSubscriptionPlans(offers: [OfferServiceResponse], accountType: AccountType) -> [SubscriptionPlan] {
         return offers.flatMap { offer in
             guard let price = offer.price, let name = offer.quota?.bytesString else {
                 return nil
             }
-            return subscriptionPlanWith(name: name, price: price, type: .default, model: offer)
+            
+            let currency = getCurrency(for: accountType)
+            let priceString = String(format: TextConstants.offersPrice, price, currency)
+            
+            return subscriptionPlanWith(name: name, priceString: priceString, type: .default, model: offer)
         }
     }
     
-    func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse]) -> [SubscriptionPlan] {
+    func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan] {
         return activeSubscriptionList.flatMap { subscription in
             guard let price = subscription.subscriptionPlanPrice, let name = subscription.subscriptionPlanQuota?.bytesString else {
                 return nil
             }
+            
+            let currency = getCurrency(for: accountType)
+            let priceString = String(format: TextConstants.offersPrice, price, currency)
+            
             if price == 0 {
                 return SubscriptionPlan(name: name,
                                         photosCount: 5_000,
                                         videosCount: 500,
                                         songsCount: 2_500,
                                         docsCount: 50_000,
-                                        priceString: String(format: TextConstants.offersPrice, price),
+                                        priceString: priceString,
                                         type: .free,
                                         model: subscription)
             }
-            return subscriptionPlanWith(name: name, price: price, type: .current, model: subscription)
+            return subscriptionPlanWith(name: name, priceString: priceString, type: .current, model: subscription)
         }
     }
     
@@ -280,12 +287,31 @@ extension PackagesInteractor: PackagesInteractorInput {
             guard let name = offer.name else {
                 return nil
             }
-            return subscriptionPlanWith(name: name, price: offer.rawPrice, type: .default, model: offer)
+            
+            let currency = getCurrency(for: AccountType.all)
+            let priceString = String(format: TextConstants.offersPrice, currency, offer.rawPrice)
+            
+            return subscriptionPlanWith(name: name, priceString: priceString, type: .default, model: offer)
         }
     }
     
     func sendReciept() {
         guard let receipt = iapManager.receipt else { return }
         offersService.validateApplePurchase(with: receipt, productId: nil, success: nil) { _ in }
+    }
+    
+    private func getCurrency(for accountType: AccountType) -> String {
+        switch accountType {
+        case .turkcell:
+            return "TL"
+        case .ukranian:
+            return "UAH"
+        case .cyprus:
+            return "CYP"
+        case .moldovian:
+            return "MDL"
+        case .all:
+            return "$" /// temp
+        }
     }
 }

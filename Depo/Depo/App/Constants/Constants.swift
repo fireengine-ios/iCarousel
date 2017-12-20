@@ -599,7 +599,7 @@ struct TextConstants {
     static let offersBuy = "Buy"
     static let offersOk = "OK"
     static let offersSettings = "Settings"
-    static let offersPrice = "%.2f ₺ / month"
+    static let offersPrice = "%.2f %@ / month"
     
     // MARK: - OTP
     static let otpNextButton = "Next"
@@ -673,7 +673,11 @@ struct TextConstants {
     static let packages = "Packages"
     static let purchase = "Purchase"
     
-    static let deleteText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
+    static let deleteFilesText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
+    static let deleteAlbums = "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"
+    static let removeAlbums = "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?"
+    
+    static let locationServiceDisable = "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu."
 }
 
 
@@ -683,8 +687,10 @@ struct NumericConstants {
     static let vereficationTimerLimit = 120//in seconds
     static let maxVereficationAttempts = 3
     //
+    static let maxDetailsLoadingAttempts = 5
+    static let detailsLoadingTimeAwait = UInt32(2)
     
-    static let countOfLoginBeforeNeedShowUploadOffPopUp = 4
+    static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2

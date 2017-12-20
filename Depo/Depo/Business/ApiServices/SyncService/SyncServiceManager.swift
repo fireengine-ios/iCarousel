@@ -107,7 +107,7 @@ class SyncServiceManager {
     
     private func checkReachabilityAndSettings() {
         guard let syncSettings = settings else {
-            autoSyncStorage.getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
+            AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
                 if let `self` = self {
                     let settings = SettingsAutoSyncModel()
                     settings.isAutoSyncEnable = autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected
@@ -122,7 +122,6 @@ class SyncServiceManager {
         }
         
         guard syncSettings.isAutoSyncEnable else {
-            PopUpService.shared.checkIsNeedShowUploadOffPopUp()
             stop(reachabilityDidChange: false, photo: true, video: true)
             return
         }
@@ -207,7 +206,6 @@ extension SyncServiceManager {
         guard !isSyncCancelled else {
             WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
             WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
-            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
             return
         }
         

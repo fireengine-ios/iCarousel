@@ -130,10 +130,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         switch type {
         case .delete:
-            router.checkDelete { [weak self] in
-                self?.interactor.delete(item: selectedItems)
-                self?.basePassingPresenter?.stopModeSelected()
-            }
+            interactor.delete(item: selectedItems)
+            basePassingPresenter?.stopModeSelected()
         case .download:
             basePassingPresenter?.stopModeSelected()
             interactor.download(item: selectedItems)

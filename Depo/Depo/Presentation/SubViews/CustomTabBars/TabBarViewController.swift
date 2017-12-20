@@ -25,6 +25,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var curtainView: UIView!
     
+    @IBOutlet weak var curtainColorView: UIView!
+    
     @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var plusButtonBottomConstraint: NSLayoutConstraint!
@@ -58,6 +60,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
 
     let musicBar = MusicBar.initFromXib()
     let player: MediaPlayer = factory.resolve()
+    let cameraService: CameraService = CameraService()
     
     var customNavigationControllers: [UINavigationController] = []
     
@@ -286,16 +289,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
     
     private func setupCurtainView() {
-        
-        let fr = CGRect(x: 0, y: 10, width: 1024, height: 1024)
-        let circleView = UIView(frame:fr )
-        circleView.backgroundColor = UIColor.blue
-        curtainView.addSubview(circleView)
-        curtainView.layer.mask = circleView.layer
         curtainView.layer.masksToBounds = true
+        curtainView.backgroundColor = UIColor.clear
         
-        curtainView.backgroundColor = ColorConstants.whiteColor
-        curtainView.alpha = 0.88
+        curtainColorView.backgroundColor = ColorConstants.whiteColor
+        curtainColorView.alpha = 0.88
         showCurtainView(show: false)
     }
     
@@ -505,9 +503,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
     func buttonGotPressed(button: SubPlussButtonView) {
         changeViewState(state: false)
         if (button == photoBtn ){
-           let cameraService = CameraService()
             cameraService.showCamera(onViewController: self)
-            
             return
         }
         if (button == folderBtn){
