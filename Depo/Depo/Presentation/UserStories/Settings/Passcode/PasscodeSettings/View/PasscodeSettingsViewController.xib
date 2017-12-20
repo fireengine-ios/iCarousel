@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,9 +13,12 @@
             <connections>
                 <outlet property="biometricsLabel" destination="ydG-LF-VUl" id="Iit-gq-AIX"/>
                 <outlet property="biometricsSwitch" destination="4lc-iZ-AQB" id="qTv-q1-yde"/>
+                <outlet property="changePasscodeLabel" destination="5gd-ty-uBV" id="JTG-Tg-X29"/>
                 <outlet property="changePasscodeView" destination="jMc-IM-6FD" id="e53-kz-0sq"/>
+                <outlet property="passcodeLabel" destination="t5W-ve-57f" id="7iw-nx-b1w"/>
                 <outlet property="passcodeSwitch" destination="INF-fe-wul" id="a1y-ih-KXM"/>
                 <outlet property="passcodeView" destination="QzT-aa-nxV" id="dRy-xX-3w4"/>
+                <outlet property="setPasscodeLabel" destination="4jv-WX-EDz" id="kDq-8g-9Yr"/>
                 <outlet property="setPasscodeView" destination="H6p-r0-aNi" id="Gut-wD-KzX"/>
                 <outlet property="touchIdView" destination="52L-4V-mCz" id="X9O-H5-h27"/>
                 <outlet property="view" destination="iN0-l3-epB" id="8ZT-YB-rW4"/>

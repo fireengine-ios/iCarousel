@@ -11,38 +11,39 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     weak var view: BaseFilesGreedViewController!
     weak var presenter: BaseFilesGreedPresenter!
     
-    func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
+
+     func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
         let router = RouterVC()
         
-        if (item.fileType == .photoAlbum) {
+        if (selectedItem.fileType == .photoAlbum) {
+         
             return
         }
-        if (item.fileType == .musicPlayList) {
-            return
-        }
-        
-        guard let wrappered = item as? Item else {
-            return
-        }
-        guard let wrapperedArray = data as? [[Item]] else {
+        if (selectedItem.fileType == .musicPlayList) {
             return
         }
         
-        switch item.fileType {
+        guard let wrapperedItem = selectedItem as? Item else {
+            return
+        }
+        guard let wrapperedArray = sameTypeItems as? [Item] else {
+            return
+        }
+        
+        switch selectedItem.fileType {
         
         case .folder:
-            let controller = router.filesFromFolder(folder: wrappered,
+            let controller = router.filesFromFolder(folder: wrapperedItem,
                                                     type: type,
                                                     sortType: sortType,
                                                     moduleOutput: moduleOutput,
                                                     alertSheetExcludeTypes: presenter.alertSheetExcludeTypes)
-
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         case .audio:
-            player.play(list: [wrappered], startAt: 0)
+            player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
 //            SingleSong.default.playWithItem(object: wrappered)
         default:
-            let controller = router.filesDetailViewController(fileObject: wrappered, from: wrapperedArray)
+            let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray)
             router.pushViewController(viewController: controller)
         }
     }

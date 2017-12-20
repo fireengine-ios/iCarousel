@@ -7,20 +7,28 @@
 //
 
 import Foundation
-import ReachabilitySwift
+import Reachability
 
 
 class SyncServiceManger {
     static let shared = SyncServiceManger()
     
-    fileprivate let reachabilityService = ReachabilityService()
-    fileprivate let autoSyncStorage = AutoSyncDataStorage()
+    private let reachabilityService = Reachability()
+    private let autoSyncStorage = AutoSyncDataStorage()
     
-    fileprivate let photoSyncService: ItemSyncService = PhotoSyncService()
-    fileprivate let videoSyncService: ItemSyncService = VideoSyncService()
-    fileprivate var settings: SettingsAutoSyncModel?
+    private let photoSyncService: ItemSyncService = PhotoSyncService()
+    private let videoSyncService: ItemSyncService = VideoSyncService()
+    private var settings: SettingsAutoSyncModel?
     
     private var lastAutoSyncTime: TimeInterval = 0
+    
+    private var isSyncCancelled: Bool {
+        return (photoSyncService.status == .canceled && videoSyncService.status == .canceled)
+    }
+    
+    private var hasPrepairingSync: Bool {
+        return (photoSyncService.status == .prepairing || videoSyncService.status == .prepairing)
+    }
     
     private var hasExecutingSync: Bool {
         return (photoSyncService.status == .executing || videoSyncService.status == .executing)
@@ -34,6 +42,7 @@ class SyncServiceManger {
     //MARK: - Init
     
     init() {
+        setupReachability()
         subscribeForNotifications()
     }
     
@@ -69,12 +78,36 @@ class SyncServiceManger {
         startManually()
     }
     
+    func waitForWifi() {
+        stopManually()
+    }
+    
     
     //MARK: - Private
     
-    fileprivate func checkReachabilityAndSettings() {
+    private func setupReachability() {
+        guard let reachability = reachabilityService else {
+            return
+        }
+        
+        do {
+           try reachability.startNotifier()
+        } catch {
+            print("\(#function): can't start reachability notifier")
+        }
+        
+        reachability.whenReachable = { (reachability) in
+            self.checkReachabilityAndSettings()
+        }
+        
+        reachability.whenUnreachable = { (reachability) in
+            self.checkReachabilityAndSettings()
+        }
+    }
+    
+    private func checkReachabilityAndSettings() {
         guard let syncSettings = settings else {
-            autoSyncStorage.getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
+            AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
                 if let `self` = self {
                     let settings = SettingsAutoSyncModel()
                     settings.isAutoSyncEnable = autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected
@@ -89,19 +122,28 @@ class SyncServiceManger {
         }
         
         guard syncSettings.isAutoSyncEnable else {
-            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
+            PopUpService.shared.checkIsNeedShowUploadOffPopUp()
             stop(reachabilityDidChange: false, photo: true, video: true)
             return
         }
         
         WrapItemOperatonManager.default.stopOperationWithType(type: .autoUploadIsOff)
         
-        if reachabilityService.isReachable {
-            if reachabilityService.isReachableViaWiFi {
+        guard let reachability = reachabilityService else {
+            print("\(#function): reachabilityService is nil")
+            return
+        }
+        
+        if reachability.connection != .none {
+            if reachability.connection == .wifi {
                 start(photo: true, video: true)
-            } else {
-                stop(reachabilityDidChange: true, photo: !syncSettings.mobileDataPhotos, video: !syncSettings.mobileDataPhotos)
-                start(photo: syncSettings.mobileDataPhotos, video: syncSettings.mobileDataVideo)
+            } else if reachability.connection == .cellular {
+                let photoEnabled = syncSettings.mobileDataPhotos
+                let videoEnabled = syncSettings.mobileDataVideo
+                if photoEnabled || videoEnabled {
+                    start(photo: photoEnabled, video: videoEnabled)
+                }
+                stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
             }
         } else {
             stop(reachabilityDidChange: true, photo: true, video: true)
@@ -111,15 +153,13 @@ class SyncServiceManger {
     //MARK: Flow
 
     //start to sync
-    fileprivate func start(photo: Bool, video: Bool) {
-        WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
-        
+    private func start(photo: Bool, video: Bool) {
         if photo { photoSyncService.start() }
         if video { videoSyncService.start() }
     }
     
     //stop/cancel completely
-    fileprivate func stop(reachabilityDidChange: Bool, photo: Bool, video: Bool) {
+    private func stop(reachabilityDidChange: Bool, photo: Bool, video: Bool) {
         if reachabilityDidChange {
             if photo { photoSyncService.interrupt() }
             if video { videoSyncService.interrupt() }
@@ -130,13 +170,13 @@ class SyncServiceManger {
     }
     
     //wait for wi-fi connection
-    fileprivate func waitForWiFi() {
+    private func stopManually() {
         photoSyncService.waitForWiFi()
         videoSyncService.waitForWiFi()
     }
     
     //start if is waiting for wi-fi
-    fileprivate func startManually() {
+    private func startManually() {
         photoSyncService.startManually()
         videoSyncService.startManually()
     }
@@ -146,16 +186,11 @@ class SyncServiceManger {
 
 //MARK: Notifications
 extension SyncServiceManger {
-    fileprivate func subscribeForNotifications() {
+    private func subscribeForNotifications() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
                                        selector: #selector(onPhotoLibraryDidChange),
                                        name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
-                                       object: nil)
-        
-        notificationCenter.addObserver(self,
-                                       selector: #selector(onReachabilityDidChange),
-                                       name: ReachabilityChangedNotification,
                                        object: nil)
         
         notificationCenter.addObserver(self,
@@ -168,14 +203,28 @@ extension SyncServiceManger {
         checkReachabilityAndSettings()
     }
     
-    @objc private func onReachabilityDidChange() {
-        checkReachabilityAndSettings()
-    }
-    
     @objc private func onAutoSyncStatusDidChange() {
-        WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+        guard !isSyncCancelled else {
+            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
+            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
+            return
+        }
         
-        if !hasExecutingSync, hasWaitingForWiFiSync {
+        guard !hasExecutingSync else {
+            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
+            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            return
+
+        }
+        
+        guard !hasPrepairingSync else {
+            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
+            WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+            return
+        }
+
+        if hasWaitingForWiFiSync {
             WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
     }

@@ -17,4 +17,5 @@ protocol FeedbackViewInput: class {
     func languagesUploaded(lanuages:[LanguageModel])
     func fail(text: String)
     func languageRequestSended(text: String)
+    func setSendButton(isEnabled: Bool)
 }

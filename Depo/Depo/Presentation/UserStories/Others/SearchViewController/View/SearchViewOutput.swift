@@ -16,6 +16,7 @@ protocol SearchViewOutput {
     func isShowedSpinner() -> Bool
     func getSuggestion(text: String)
     func tapCancel()
+    func onClearRecentSearchesTapped()
     
     func viewAppearanceChangedTopBar(asGrid: Bool)
     func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType)

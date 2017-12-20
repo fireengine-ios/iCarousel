@@ -141,9 +141,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     func addCellAtIndex(index: Int){
         if (isActive){
-            collectionView.performBatchUpdates({
+            self.collectionView.performBatchUpdates({
                 let indexPath = IndexPath(row: index, section: 0)
-                collectionView.insertItems(at: [indexPath])
+                self.collectionView.insertItems(at: [indexPath])
             }, completion: { (succes) in
                 
             })
@@ -154,9 +154,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     func deleteCellAtIndex(index: Int){
         if (isActive){
-            collectionView.performBatchUpdates({
+            self.collectionView.performBatchUpdates({
                 let indexPath = IndexPath(row: index, section: 0)
-                collectionView.deleteItems(at: [indexPath])
+                self.collectionView.deleteItems(at: [indexPath])
             }, completion: { (succes) in
                 
             })
@@ -179,6 +179,15 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         return !notPermittedPopUpViewTypes.contains(type.rawValue)
     }
     
+    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool{
+        switch operationType {
+        case .prepareToAutoSync:
+            return viewsByType[.sync] == nil
+        default:
+            return true
+        }
+    }
+    
     func getViewForOperation(operation: OperationType) -> BaseView{
         return WrapItemOperatonManager.popUpViewForOperaion(type: operation)
     }
@@ -188,8 +197,10 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             let view = getViewForOperation(operation: type)
             viewsByType[type] = view
             let index = 0
-            popUps.insert(view, at: index)
-            addCellAtIndex(index: index)
+            
+            print("insert at index ", index, type.rawValue)
+            self.popUps.insert(view, at: index)
+            self.addCellAtIndex(index: index)
         }
     }
     
@@ -201,6 +212,10 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         if !checkIsThisIsPermittedType(type: type){
             return
         }
+        if !checkIsNeedShowPopUpFor(operationType: type){
+            return
+        }
+        
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
             
@@ -213,8 +228,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             
             viewsByType[type] = view
             let index = 0
-            popUps.insert(view, at: index)
-            addCellAtIndex(index: index)
+            print("insert at index ", index, type.rawValue)
+            self.popUps.insert(view, at: index)
+            self.addCellAtIndex(index: index)
         }
     }
     
@@ -245,11 +261,14 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     
     func stopOperationWithType(type: OperationType){
-        if let view = viewsByType[type] {
-            viewsByType[type] = nil
-            if let index = popUps.index(of: view){
-                popUps.remove(at: index)
-                deleteCellAtIndex(index: index)
+        if let view = self.viewsByType[type] {
+            self.viewsByType[type] = nil
+            if let index = self.popUps.index(of: view){
+                self.popUps.remove(at: index)
+                print("delete at index ", index, type.rawValue)
+                self.deleteCellAtIndex(index: index)
+            }else{
+                
             }
         }
     }
