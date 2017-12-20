@@ -369,12 +369,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         self.collectionView = collectionView
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        registerHeaders()
+        registerCells()
+        
         DispatchQueue.main.async {
             self.allLocalItems.append(contentsOf: self.getAllLocalItems())
-            
-            self.registerHeaders()
-            self.registerCells()
-            
+
             if self.isLocalOnly() {
                 self.allItems = [self.allLocalItems]
                 self.reloadData()
