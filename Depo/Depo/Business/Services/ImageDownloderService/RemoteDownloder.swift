@@ -129,7 +129,7 @@ class FilesDownloader {
                 if let urlToTmpFile = urlToTmpFile {
                     do {
                         let urlToLocalFile = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
-                        try self.fileManager.moveItem(at: urlToTmpFile, to: urlToLocalFile)
+                        try FileManager.default.moveItem(at: urlToTmpFile, to: urlToLocalFile)
                         localURLs.append(urlToLocalFile)
                     } catch {
                         print(error.localizedDescription)
