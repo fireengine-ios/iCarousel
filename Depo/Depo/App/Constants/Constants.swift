@@ -281,6 +281,8 @@ struct TextConstants {
     static let settingsViewCellPasscode = "Lifebox Touch ID and Passcode"
     static let settingsViewCellHelp = "Help & Support"
     static let settingsViewCellLogout = "Logout"
+    static let settingsViewCellLoginSettings = "Login Settings"
+    
     static let settingsViewCellTurkcellPasscode = "Turkcell Passcode"
     static let settingsViewCellTurkcellAutoLogin = "Auto-login"
     static let settingsViewLogoutCheckMessage = "Are you sure you want to exit the application?"

@@ -138,27 +138,10 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
 
         let array = tableDataArray[indexPath.section]
         
-        if indexPath == turkCellSecurityPasscodeCellIndex {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID, for: indexPath) as! SettingsTableViewSwitchCell
-            cell.actionDelegate = self
-            cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-            cell.stateSwitch.setOn(turkCellSeuritySettingsPassState ?? false, animated: false)
-            return cell
-        } else if indexPath == turkCellSecurityAutologinCellIndex {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID, for: indexPath) as! SettingsTableViewSwitchCell
-            cell.actionDelegate = self
-            cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-            cell.stateSwitch.setOn(turkCellSeuritySettingsAutoLoginState ?? false, animated: false)
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingTableViewCellID, for: indexPath) as! SettingsTableViewCell
-            cell.selectionStyle = .none
-            cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-            return cell
-        }
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingTableViewCellID, for: indexPath) as! SettingsTableViewCell
+        cell.selectionStyle = .none
+        cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -210,7 +193,8 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                 }
             case 2: /// passcode
                 showPasscodeOrPasscodeSettings()
-            case 3, 4:// Turkcell security
+            case 3:// Turkcell security
+                output.goTurkcellSecurity()
 //                guard let securityCell = tableView.cellForRow(at: indexPath) as? SettingsTableViewSwitchCell else {
 //                    break
 //                }

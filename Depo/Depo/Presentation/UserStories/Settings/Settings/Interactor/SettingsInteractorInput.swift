@@ -15,7 +15,7 @@ protocol SettingsInteractorInput {
     func checkConnectedToNetwork()
     
 //    func requestTurkCellSecurityStatus()
-    func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool)
+//    func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool)
     var isPasscodeEmpty: Bool { get }
     var isTurkcellUser: Bool { get }
     var isEmptyMail: Bool { get }

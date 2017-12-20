@@ -39,6 +39,7 @@
 		1DB68FAB905B6E98B07736B7 /* HomeHeaderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE59D416A67AC6A99671E6B3 /* HomeHeaderConfigurator.swift */; };
 		1DCD5F3C1611CAA42850AF7B /* ExpandStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DFBE20B4A76B3C0EDC0E13 /* ExpandStorageViewController.swift */; };
 		1E85634C922D97D7DDCEC1B9 /* LikeFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EA589B52302CF0E564F355 /* LikeFilterViewController.swift */; };
+		1F2C92D261B370E748CCE763 /* TurkcellSecurityRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A5187B999282BAD50189C0 /* TurkcellSecurityRouter.swift */; };
 		1F636EE108C67F610C25C722 /* UploadedItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC9334E5A755D8D1981359 /* UploadedItemsViewController.swift */; };
 		205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */; };
 		20D9DB71C68797990E05E828 /* ExpandStorageModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7793E0523F4384CC33748B /* ExpandStorageModuleInput.swift */; };
@@ -61,6 +62,7 @@
 		2EA03B3FBEC8D2ED563D175D /* ActionsMenuViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29E5867A0B1232EF8B56B8 /* ActionsMenuViewInput.swift */; };
 		2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BCBDB527895B614215B1EC /* BaseFilesGreedInteractor.swift */; };
 		2EF733E89FE2194E3B6817BA /* FeedbackViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B86902F4B6DCEC18002C23 /* FeedbackViewConfigurator.swift */; };
+		2F24E45F6055512AA39134B9 /* TurkcellSecurityInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380B6E7CABDB7802BDD0490 /* TurkcellSecurityInteractorIO.swift */; };
 		2F4FBBADE418935193F54EBB /* SyncContactsInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E129D217E4E979AFF5939D /* SyncContactsInteractorInput.swift */; };
 		3027A2E14F67F63A1600AE42 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C71D6E2FCFC8C34611820B /* FileInfoViewController.swift */; };
 		31000BF3193830B673A587E6 /* HomeHeaderViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5342D6788627EBC90BDA678A /* HomeHeaderViewOutput.swift */; };
@@ -83,11 +85,13 @@
 		44A9155A999E7CF45CED922A /* SplashRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D263784A01AEA819EB5CA24 /* SplashRouterInput.swift */; };
 		45AA4BD813307742304E29A3 /* LikeFilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A558BFBE514C65998367DD73 /* LikeFilterPresenter.swift */; };
 		463A9A904E22B54222190099 /* SelectNameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62E6075722A7C68AB366E0F /* SelectNameInteractor.swift */; };
+		46926568BE047EA67AF5965B /* TurkcellSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FF7FA06D9B4435571E1906 /* TurkcellSecurityViewController.swift */; };
 		46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8913479D5236DDD47EE0E6 /* UploadFilesSelectionInteractorOutput.swift */; };
 		46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF9B9785CB91B71D6E10883 /* OTPViewConfigurator.swift */; };
 		473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */; };
 		48AAD540DF9AE2C249F9B6D4 /* OTPViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */; };
 		4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7E2D395BBA8DC5D0612F29 /* LBAlbumLikePreviewSliderInteractorOutput.swift */; };
+		4B04D11E27DE9E747873AF31 /* TurkcellSecurityViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367F371ABE0D1437581AD6B /* TurkcellSecurityViewIO.swift */; };
 		4BCD0211E6F3ED79A879D88B /* CompleteProfileInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C66D262F6A075566FD30AC /* CompleteProfileInitializer.swift */; };
 		4C625D18F465CC4F6D27A6B1 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500943E503755A25C4E6B64 /* SettingsInteractor.swift */; };
 		4C7B0D374F8DE575C03C683C /* SplashInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE7E386FBD5473EAA3840B /* SplashInitializer.swift */; };
@@ -126,6 +130,7 @@
 		70A2E1D0FA17BCF1F0AAD62F /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */; };
 		745E2B63A07B865C70D88553 /* ExpandStorageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C665F7190FD02A64929A765 /* ExpandStorageInteractor.swift */; };
 		759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7C949A95C197C80ACC503C /* OTPViewInteractorIO.swift */; };
+		75F91B7AEB94F895311F056C /* TurkcellSecurityModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21B9354C047CC11BE6B5C6D /* TurkcellSecurityModuleInput.swift */; };
 		7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5BEC48C5ED3B8650FB2FB3 /* SettingsViewController.swift */; };
 		77CF7B297D6D1B75D73CACBC /* SelectNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */; };
 		7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A18BA44717122453DCA565 /* LBAlbumLikePreviewSliderViewOutput.swift */; };
@@ -1484,6 +1489,18 @@
 		8C8711721FDFF47800F66396 /* DarkPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57DFA71FDE663C0065B688 /* DarkPopUpController.xib */; };
 		8C881BD21FCFFAF100C86236 /* MailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */; };
 		8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */; };
+		8CA8F35C1FE90983009E7836 /* TurkcellSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA8F35B1FE90983009E7836 /* TurkcellSecurityViewController.xib */; };
+		8CA8F35D1FE90983009E7836 /* TurkcellSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA8F35B1FE90983009E7836 /* TurkcellSecurityViewController.xib */; };
+		8CA8F35E1FE914C9009E7836 /* TurkcellSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FF7FA06D9B4435571E1906 /* TurkcellSecurityViewController.swift */; };
+		8CA8F35F1FE914CF009E7836 /* TurkcellSecurityViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367F371ABE0D1437581AD6B /* TurkcellSecurityViewIO.swift */; };
+		8CA8F3601FE914D3009E7836 /* TurkcellSecurityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E252ECFDC34300272EEA8749 /* TurkcellSecurityPresenter.swift */; };
+		8CA8F3611FE914D7009E7836 /* TurkcellSecurityModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21B9354C047CC11BE6B5C6D /* TurkcellSecurityModuleInput.swift */; };
+		8CA8F3621FE914DA009E7836 /* TurkcellSecurityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBCEF904478645A0A66F22F /* TurkcellSecurityInteractor.swift */; };
+		8CA8F3631FE914DD009E7836 /* TurkcellSecurityInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380B6E7CABDB7802BDD0490 /* TurkcellSecurityInteractorIO.swift */; };
+		8CA8F3641FE914E1009E7836 /* TurkcellSecurityRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A5187B999282BAD50189C0 /* TurkcellSecurityRouter.swift */; };
+		8CA8F3651FE914E3009E7836 /* TurkcellSecurityRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7471A44C9FBBBEF98D164F4 /* TurkcellSecurityRouterInput.swift */; };
+		8CA8F3661FE914E8009E7836 /* TurkcellSecurityConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4964D367E888C7A757990B71 /* TurkcellSecurityConfigurator.swift */; };
+		8CA8F3671FE914EA009E7836 /* TurkcellSecurityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8FE0F3D82876D5FC66697 /* TurkcellSecurityInitializer.swift */; };
 		8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */; };
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
@@ -1558,6 +1575,7 @@
 		9FAEEE54B923C711062DB111 /* SettingsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F6A1C9F3695D2974AEF4DA /* SettingsInteractorOutput.swift */; };
 		A0052B3EF580D29AEEB116BA /* ActivityTimelineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8296DD3298BBAAAE73EEFBBA /* ActivityTimelineInteractor.swift */; };
 		A0903BC815026822773731DE /* FeedbackViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492FFCA73A2AFF885199E9CF /* FeedbackViewInteractorOutput.swift */; };
+		A15EDFF93E6A34C3249656EE /* TurkcellSecurityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBCEF904478645A0A66F22F /* TurkcellSecurityInteractor.swift */; };
 		A1CDAEB7DD76D4F27F3EA741 /* ExpandStorageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8BFD15AF72B3992E638CF /* ExpandStorageConfigurator.swift */; };
 		A1CEB018812ED0593B7A063B /* PhotoVideoDetailInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5047D2D77F166BBE66169F8E /* PhotoVideoDetailInteractorOutput.swift */; };
 		A1DBFD47F4260A0DF1C25486 /* ExpandStoragePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EAF9B728FE75E3C0321F6B /* ExpandStoragePresenter.swift */; };
@@ -1583,10 +1601,12 @@
 		BA527EDC7876722B487A0428 /* FileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F2AB0A215CE40568819D5 /* FileInfoPresenter.swift */; };
 		BD0B1847E5F68DAB8C778883 /* CompleteProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4585DD65822E56FFEB2B707 /* CompleteProfileInteractor.swift */; };
 		BE450FE40E4ED7E16FBD0140 /* CompleteProfileViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F5FE523AF707161585AB4D /* CompleteProfileViewInput.swift */; };
+		BE6839C8136B6253324F05AA /* TurkcellSecurityConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4964D367E888C7A757990B71 /* TurkcellSecurityConfigurator.swift */; };
 		C065DB441478A7A0231FDCEE /* HomeHeaderRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E44B5C1E8BE17FFF812866 /* HomeHeaderRouterInput.swift */; };
 		C116353E0B4CB7B653684344 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BCF2B48577C5A8E5B52F4F /* SplashInteractor.swift */; };
 		C16DECBEE5DA1602185ABA27 /* OTPViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F26225A3A888399391D9BFF /* OTPViewInteractor.swift */; };
 		C1FD046A70F4C0DF7651095E /* FeedbackViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA76EDE6C0F51A2CCD2694D /* FeedbackViewPresenter.swift */; };
+		C2633CE6DCE21581F3989484 /* TurkcellSecurityRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7471A44C9FBBBEF98D164F4 /* TurkcellSecurityRouterInput.swift */; };
 		C31A7AB8B8824DB84111E8FB /* SplashInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */; };
 		C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */; };
 		C5E5EC15332297CC6F59374A /* SyncContactsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B17E6F8BC6EF2FCF5C768A7 /* SyncContactsViewInput.swift */; };
@@ -2041,7 +2061,9 @@
 		CEF69DE71FB593AF00FCE6AB /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE61FB593AF00FCE6AB /* ServerError.swift */; };
 		CEF69DE91FB5A26D00FCE6AB /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE81FB5A26D00FCE6AB /* UIImage+Orientation.swift */; };
 		CEF73B9D1FCEAC30004C3ADF /* KeyboardHideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF73B9C1FCEAC30004C3ADF /* KeyboardHideManager.swift */; };
+		CFFA80002F0955FCA6223E49 /* TurkcellSecurityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8FE0F3D82876D5FC66697 /* TurkcellSecurityInitializer.swift */; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
+		D14ABF39A9C2CD712E53AD11 /* TurkcellSecurityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E252ECFDC34300272EEA8749 /* TurkcellSecurityPresenter.swift */; };
 		D1F7307987DD553C63317B99 /* FreeAppSpacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC2BA6DE6B4E15B0260F638 /* FreeAppSpacePresenter.swift */; };
 		D3C1B14F5945B690203921F1 /* UploadedItemsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5A59232059F8E376C0A2D /* UploadedItemsInitializer.swift */; };
 		D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E01F3F18FA00EFDC6D /* UsageInfoConfigurator.swift */; };
@@ -2287,14 +2309,17 @@
 		3B61F432DD637D1DC18C3689 /* UploadFilesSelectionInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionInteractor.swift; sourceTree = "<group>"; };
 		3C0817D19161BF904D94191B /* RegistrationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationModuleInput.swift; sourceTree = "<group>"; };
 		3D263784A01AEA819EB5CA24 /* SplashRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashRouterInput.swift; sourceTree = "<group>"; };
+		3FC8FE0F3D82876D5FC66697 /* TurkcellSecurityInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityInitializer.swift; sourceTree = "<group>"; };
 		412F2AB0A215CE40568819D5 /* FileInfoPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoPresenter.swift; sourceTree = "<group>"; };
 		41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoModuleInput.swift; sourceTree = "<group>"; };
+		43FF7FA06D9B4435571E1906 /* TurkcellSecurityViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityViewController.swift; sourceTree = "<group>"; };
 		4483DD5CFB766196E8A1ADB3 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		4506CAFF4D0E7AC665C195BA /* Pods-DepoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		46D21B416D68E0EDD1E1DB16 /* BaseFilesGreedViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedViewInput.swift; sourceTree = "<group>"; };
 		4777BF7378346F081CC034A1 /* Pods-Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		492FFCA73A2AFF885199E9CF /* FeedbackViewInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractorOutput.swift; sourceTree = "<group>"; };
 		495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractorInput.swift; sourceTree = "<group>"; };
+		4964D367E888C7A757990B71 /* TurkcellSecurityConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityConfigurator.swift; sourceTree = "<group>"; };
 		49A793804B9422E2D6327427 /* UploadFilesSelectionPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionPresenter.swift; sourceTree = "<group>"; };
 		4A4AC5C4BDA613483E0B3CCA /* SyncContactsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsPresenter.swift; sourceTree = "<group>"; };
 		4B1BD4C7B771F9CAD4F9CE5D /* LikeFilterRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterRouter.swift; sourceTree = "<group>"; };
@@ -2340,6 +2365,7 @@
 		5247D61C1DDDD0F600FFE63E /* CurioUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioUtil.h; sourceTree = "<group>"; };
 		5247D61D1DDDD0F600FFE63E /* CurioUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioUtil.m; sourceTree = "<group>"; };
 		5342D6788627EBC90BDA678A /* HomeHeaderViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderViewOutput.swift; sourceTree = "<group>"; };
+		5367F371ABE0D1437581AD6B /* TurkcellSecurityViewIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityViewIO.swift; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		5570CF3888592E7C4D788AA3 /* ActivityTimelineViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineViewOutput.swift; sourceTree = "<group>"; };
 		57753712CB7D976990B18D89 /* SplashRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
@@ -2652,6 +2678,7 @@
 		80C0E890FDF8C7AC80AB73B6 /* LikeFilterInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterInteractorOutput.swift; sourceTree = "<group>"; };
 		80F1FD97D6FA54C9C0C10996 /* AlbumDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailInitializer.swift; sourceTree = "<group>"; };
 		81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorOutput.swift; sourceTree = "<group>"; };
+		81A5187B999282BAD50189C0 /* TurkcellSecurityRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityRouter.swift; sourceTree = "<group>"; };
 		82180F7E73B665AC7BA7EE23 /* UploadFilesSelectionInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionInteractorInput.swift; sourceTree = "<group>"; };
 		8296DD3298BBAAAE73EEFBBA /* ActivityTimelineInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInteractor.swift; sourceTree = "<group>"; };
 		82EFD8C000647F52E5E9F30F /* HomeHeaderViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderViewInput.swift; sourceTree = "<group>"; };
@@ -2768,6 +2795,7 @@
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
 		8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailVerificationViewController.swift; sourceTree = "<group>"; };
 		8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailVerificationViewController.xib; sourceTree = "<group>"; };
+		8CA8F35B1FE90983009E7836 /* TurkcellSecurityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TurkcellSecurityViewController.xib; sourceTree = "<group>"; };
 		8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesDataStorage.swift; sourceTree = "<group>"; };
 		8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetInitialConfig.swift; sourceTree = "<group>"; };
 		8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetConfigurator.swift; sourceTree = "<group>"; };
@@ -2831,6 +2859,7 @@
 		8DCB21791F3C8BE700BAFE1E /* SearchViewRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewRouterInput.swift; sourceTree = "<group>"; };
 		8E7793E0523F4384CC33748B /* ExpandStorageModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageModuleInput.swift; sourceTree = "<group>"; };
 		8EE9FA64A6455D67D3D3A7BE /* Pods-Depo_LifeTech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech.release.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech.release.xcconfig"; sourceTree = "<group>"; };
+		8FBCEF904478645A0A66F22F /* TurkcellSecurityInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityInteractor.swift; sourceTree = "<group>"; };
 		9009A5FDA48558656AEA0B43 /* BaseFilesGreedPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedPresenter.swift; sourceTree = "<group>"; };
 		90C97731562E4ACF6D86E22E /* TermsAndServicesInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractorInput.swift; sourceTree = "<group>"; };
 		90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewConfigurator.swift; sourceTree = "<group>"; };
@@ -2854,6 +2883,7 @@
 		9FDC8B6304E88519C6887C09 /* UploadedItemsModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsModuleInput.swift; sourceTree = "<group>"; };
 		A0E7FFCEA7A1AF1C19244F11 /* TermsAndServicesInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractorOutput.swift; sourceTree = "<group>"; };
 		A15117ECCA82CB6599B24AAD /* HomeHeaderPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderPresenter.swift; sourceTree = "<group>"; };
+		A21B9354C047CC11BE6B5C6D /* TurkcellSecurityModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityModuleInput.swift; sourceTree = "<group>"; };
 		A25BF60A65135F0C80BD118B /* UploadedItemsConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsConfigurator.swift; sourceTree = "<group>"; };
 		A27FB35728F24100F410FBA2 /* TermsAndServicesInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInitializer.swift; sourceTree = "<group>"; };
 		A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailPresenter.swift; sourceTree = "<group>"; };
@@ -2861,6 +2891,7 @@
 		A4585DD65822E56FFEB2B707 /* CompleteProfileInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompleteProfileInteractor.swift; sourceTree = "<group>"; };
 		A4A4A9F285CF79F4800E7BAD /* ActivityTimelineRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineRouterInput.swift; sourceTree = "<group>"; };
 		A558BFBE514C65998367DD73 /* LikeFilterPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterPresenter.swift; sourceTree = "<group>"; };
+		A7471A44C9FBBBEF98D164F4 /* TurkcellSecurityRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityRouterInput.swift; sourceTree = "<group>"; };
 		A7E44B5C1E8BE17FFF812866 /* HomeHeaderRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderRouterInput.swift; sourceTree = "<group>"; };
 		A8CEE7F449AB04C7F484C5F1 /* RegistrationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInteractorOutput.swift; sourceTree = "<group>"; };
 		A8EBD4DA3306AA75754215A6 /* SelectNameRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameRouterInput.swift; sourceTree = "<group>"; };
@@ -2875,6 +2906,7 @@
 		B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionRouterInput.swift; sourceTree = "<group>"; };
 		B0E129D217E4E979AFF5939D /* SyncContactsInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsInteractorInput.swift; sourceTree = "<group>"; };
 		B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationRouterInput.swift; sourceTree = "<group>"; };
+		B380B6E7CABDB7802BDD0490 /* TurkcellSecurityInteractorIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityInteractorIO.swift; sourceTree = "<group>"; };
 		B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInitializer.swift; sourceTree = "<group>"; };
 		B3B1A822B7BCC165EA81C54D /* ExpandStorageInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageInteractorOutput.swift; sourceTree = "<group>"; };
 		B51FD6251FD135CA000344BD /* MPush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPush.h; sourceTree = "<group>"; };
@@ -3253,6 +3285,7 @@
 		DFF4B8B4B0FF4A1A62D38360 /* Pods-Depo_LifeTech.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech.enterprise.xcconfig"; sourceTree = "<group>"; };
 		DFFF44F88C9F0080E5FADF47 /* SettingsRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsRouterInput.swift; sourceTree = "<group>"; };
 		E0B2FD70EACA38EF90262C71 /* SettingsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		E252ECFDC34300272EEA8749 /* TurkcellSecurityPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TurkcellSecurityPresenter.swift; sourceTree = "<group>"; };
 		E40E1BD211278D025B3C9A56 /* FileInfoViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoViewOutput.swift; sourceTree = "<group>"; };
 		E500943E503755A25C4E6B64 /* SettingsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
 		E52F5296568EE7BCE2BF46A4 /* IntroduceRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouter.swift; sourceTree = "<group>"; };
@@ -3864,6 +3897,15 @@
 				7C04350E1F50B6E200193C75 /* AlbumSelectionPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		32CEE69E4E1F72F847EA685C /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				4964D367E888C7A757990B71 /* TurkcellSecurityConfigurator.swift */,
+				3FC8FE0F3D82876D5FC66697 /* TurkcellSecurityInitializer.swift */,
+			);
+			path = Configurator;
 			sourceTree = "<group>";
 		};
 		32D1314B15E847CE8B33082C /* View */ = {
@@ -4531,6 +4573,15 @@
 				4CDFC675B66399A57487FB85 /* UserInfoSubViewRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		7B5B3155EB2A8946E1543608 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8FBCEF904478645A0A66F22F /* TurkcellSecurityInteractor.swift */,
+				B380B6E7CABDB7802BDD0490 /* TurkcellSecurityInteractorIO.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		7C032B751EEEB060006532C8 /* Enteties */ = {
@@ -5605,6 +5656,18 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		898B111A009E006747335305 /* TurkcellSecurity */ = {
+			isa = PBXGroup;
+			children = (
+				FA27F57619DC33871B8FBB28 /* View */,
+				CB8541B371DBC60BA3E94D75 /* Presenter */,
+				7B5B3155EB2A8946E1543608 /* Interactor */,
+				BE02FEFB64C69FB095306942 /* Router */,
+				32CEE69E4E1F72F847EA685C /* Configurator */,
+			);
+			path = TurkcellSecurity;
+			sourceTree = "<group>";
+		};
 		8C0097071F6BD8AA00FA069C /* MoreFilesActions */ = {
 			isa = PBXGroup;
 			children = (
@@ -6507,6 +6570,15 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		BE02FEFB64C69FB095306942 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				81A5187B999282BAD50189C0 /* TurkcellSecurityRouter.swift */,
+				A7471A44C9FBBBEF98D164F4 /* TurkcellSecurityRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
@@ -6578,6 +6650,15 @@
 				F1F379D7533680E1193EA393 /* Configurator */,
 			);
 			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
+		CB8541B371DBC60BA3E94D75 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				E252ECFDC34300272EEA8749 /* TurkcellSecurityPresenter.swift */,
+				A21B9354C047CC11BE6B5C6D /* TurkcellSecurityModuleInput.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		CC77BB694679750437F54C58 /* Configurator */ = {
@@ -6998,6 +7079,7 @@
 			isa = PBXGroup;
 			children = (
 				3C4921A13B9D2D3165521B9C /* Settings */,
+				898B111A009E006747335305 /* TurkcellSecurity */,
 				3EABB6A70DB5801ACC311373 /* SettingsIpad */,
 				92C9F550DC7528C74BAEFD9F /* UserInfoSubView */,
 				7CDABCF21F1E3A6300C8CC16 /* UserProfile */,
@@ -8309,6 +8391,16 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		FA27F57619DC33871B8FBB28 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				43FF7FA06D9B4435571E1906 /* TurkcellSecurityViewController.swift */,
+				8CA8F35B1FE90983009E7836 /* TurkcellSecurityViewController.xib */,
+				5367F371ABE0D1437581AD6B /* TurkcellSecurityViewIO.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		FA9ABBCB19DCF3FFE7B413C8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -8537,6 +8629,7 @@
 				8C0E903F1FDEBDFF00789C91 /* AlbumCell.xib in Resources */,
 				8C0E90401FDEBDFF00789C91 /* TurkcellSaturaMedIta.ttf in Resources */,
 				8C0E90411FDEBDFF00789C91 /* GridListTopBar.xib in Resources */,
+				8CA8F35D1FE90983009E7836 /* TurkcellSecurityViewController.xib in Resources */,
 				8C0E90421FDEBDFF00789C91 /* CollectionViewCellForPhoto.xib in Resources */,
 				8C0E90431FDEBDFF00789C91 /* TurkcellSaturaDemIta.ttf in Resources */,
 				8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */,
@@ -8608,6 +8701,7 @@
 				CE51AD3C1EF90853005DCEE0 /* LaunchScreen.storyboard in Resources */,
 				8C6EF8821F348B5C002AC795 /* BottomSelectionTabBarViewController.xib in Resources */,
 				CE51AD6A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.xib in Resources */,
+				8CA8F35C1FE90983009E7836 /* TurkcellSecurityViewController.xib in Resources */,
 				CE51AD771EF90853005DCEE0 /* updater_strings.plist in Resources */,
 				7C4485031F0FC87A003AF631 /* SettingHeaderView.xib in Resources */,
 				8CF87D5D1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
@@ -9038,6 +9132,7 @@
 				8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */,
 				8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */,
 				8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */,
+				8CA8F3641FE914E1009E7836 /* TurkcellSecurityRouter.swift in Sources */,
 				8C0E8CAC1FDEBDFF00789C91 /* CurioLocationManager.m in Sources */,
 				8C0E8CAD1FDEBDFF00789C91 /* LifeBoxModel.xcdatamodeld in Sources */,
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
@@ -9094,6 +9189,7 @@
 				8C0E8CE01FDEBDFF00789C91 /* WelcomeViewOutput.swift in Sources */,
 				8C0E8CE11FDEBDFF00789C91 /* AlbumDetailService.swift in Sources */,
 				8C0E8CE21FDEBDFF00789C91 /* CurioDBToolkit.m in Sources */,
+				8CA8F3621FE914DA009E7836 /* TurkcellSecurityInteractor.swift in Sources */,
 				8C0E8CE31FDEBDFF00789C91 /* RequestHeader.swift in Sources */,
 				8C0E8CE41FDEBDFF00789C91 /* Contact.m in Sources */,
 				8C0E8CE51FDEBDFF00789C91 /* CreateStoryNameViewInput.swift in Sources */,
@@ -9158,7 +9254,9 @@
 				8C0E8D1F1FDEBDFF00789C91 /* WiFiSyncModuleInput.swift in Sources */,
 				8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */,
 				8C0E8D211FDEBDFF00789C91 /* HomePageInteractorInput.swift in Sources */,
+				8CA8F3611FE914D7009E7836 /* TurkcellSecurityModuleInput.swift in Sources */,
 				8C0E8D221FDEBDFF00789C91 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
+				8CA8F3661FE914E8009E7836 /* TurkcellSecurityConfigurator.swift in Sources */,
 				8C0E8D231FDEBDFF00789C91 /* ViewForPopUp.swift in Sources */,
 				8C0E8D241FDEBDFF00789C91 /* CreateStoryPreviewPresenter.swift in Sources */,
 				8C0E8D251FDEBDFF00789C91 /* InstagramParametrs.swift in Sources */,
@@ -9176,6 +9274,7 @@
 				8C0E8D311FDEBDFF00789C91 /* CaptchaViewController.swift in Sources */,
 				8C0E8D321FDEBDFF00789C91 /* CollectionSortingRules.swift in Sources */,
 				8C0E8D331FDEBDFF00789C91 /* PhotoVideoAlbumDetailInteractor.swift in Sources */,
+				8CA8F35E1FE914C9009E7836 /* TurkcellSecurityViewController.swift in Sources */,
 				8C0E8D341FDEBDFF00789C91 /* RegistrationDataSource.swift in Sources */,
 				8C0E8D351FDEBDFF00789C91 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				8C0E8D361FDEBDFF00789C91 /* WiFiSyncPresenter.swift in Sources */,
@@ -9299,6 +9398,7 @@
 				8C0E8DAC1FDEBDFF00789C91 /* SearchServiceResponse.swift in Sources */,
 				8C0E8DAD1FDEBDFF00789C91 /* RegistrationModuleInput.swift in Sources */,
 				8C0E8DAE1FDEBDFF00789C91 /* RegistrationPresenter.swift in Sources */,
+				8CA8F3601FE914D3009E7836 /* TurkcellSecurityPresenter.swift in Sources */,
 				8C0E8DAF1FDEBDFF00789C91 /* SimpleButtonWithBlueText.swift in Sources */,
 				8C0E8DB01FDEBDFF00789C91 /* RegistrationInteractorInput.swift in Sources */,
 				8C0E8DB11FDEBDFF00789C91 /* WelcomeViewController.swift in Sources */,
@@ -9372,6 +9472,7 @@
 				8C0E8DF31FDEBDFF00789C91 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				8C0E8DF41FDEBDFF00789C91 /* ActivityTimelineHeader.swift in Sources */,
 				8C0E8DF51FDEBDFF00789C91 /* PrintViewInput.swift in Sources */,
+				8CA8F35F1FE914CF009E7836 /* TurkcellSecurityViewIO.swift in Sources */,
 				8C0E8DF61FDEBDFF00789C91 /* UINavigationBarExtension.swift in Sources */,
 				8C0E8DF71FDEBDFF00789C91 /* UsageInfoViewOutput.swift in Sources */,
 				8C0E8DF81FDEBDFF00789C91 /* IntroduceInitializer.swift in Sources */,
@@ -9437,6 +9538,7 @@
 				8C0E8E331FDEBDFF00789C91 /* SyncServiceManger.swift in Sources */,
 				8C0E8E341FDEBDFF00789C91 /* UploadFromLifeBoxViewController.swift in Sources */,
 				8C0E8E351FDEBDFF00789C91 /* RequestsKey.swift in Sources */,
+				8CA8F3631FE914DD009E7836 /* TurkcellSecurityInteractorIO.swift in Sources */,
 				8C0E8E361FDEBDFF00789C91 /* RemoteService.swift in Sources */,
 				8C0E8E371FDEBDFF00789C91 /* UsageInfoConfigurator.swift in Sources */,
 				8C0E8E381FDEBDFF00789C91 /* ForgotPasswordRouterInput.swift in Sources */,
@@ -9455,6 +9557,7 @@
 				8CD2B3B21FE7B3BF00280547 /* UIImage+Color.swift in Sources */,
 				8C0E8E451FDEBDFF00789C91 /* AlbumCell.swift in Sources */,
 				8C0E8E461FDEBDFF00789C91 /* CompleteProfileViewOutput.swift in Sources */,
+				8CA8F3651FE914E3009E7836 /* TurkcellSecurityRouterInput.swift in Sources */,
 				8C0E8E471FDEBDFF00789C91 /* WrapperedItemsSorting.swift in Sources */,
 				8C0E8E481FDEBDFF00789C91 /* CompleteProfileViewController.swift in Sources */,
 				8C0E8E491FDEBDFF00789C91 /* CompleteProfileModuleInput.swift in Sources */,
@@ -9543,6 +9646,7 @@
 				8C0E8E9C1FDEBDFF00789C91 /* UploadedItemsRouterInput.swift in Sources */,
 				8C0E8E9D1FDEBDFF00789C91 /* UploadedItemsRouter.swift in Sources */,
 				8C0E8E9E1FDEBDFF00789C91 /* UploadedItemsConfigurator.swift in Sources */,
+				8CA8F3671FE914EA009E7836 /* TurkcellSecurityInitializer.swift in Sources */,
 				8C0E8E9F1FDEBDFF00789C91 /* UploadedItemsInitializer.swift in Sources */,
 				8C0E8EA01FDEBDFF00789C91 /* HomeHeaderViewInput.swift in Sources */,
 				8C0E8EA11FDEBDFF00789C91 /* HomeHeaderViewOutput.swift in Sources */,
@@ -10789,6 +10893,16 @@
 				B7C673A176A577E30FAB824E /* FreeAppSpaceConfigurator.swift in Sources */,
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
 				29F301A021F9712D24CB97EE /* FreeAppSpaceInitializer.swift in Sources */,
+				46926568BE047EA67AF5965B /* TurkcellSecurityViewController.swift in Sources */,
+				4B04D11E27DE9E747873AF31 /* TurkcellSecurityViewIO.swift in Sources */,
+				D14ABF39A9C2CD712E53AD11 /* TurkcellSecurityPresenter.swift in Sources */,
+				75F91B7AEB94F895311F056C /* TurkcellSecurityModuleInput.swift in Sources */,
+				A15EDFF93E6A34C3249656EE /* TurkcellSecurityInteractor.swift in Sources */,
+				2F24E45F6055512AA39134B9 /* TurkcellSecurityInteractorIO.swift in Sources */,
+				1F2C92D261B370E748CCE763 /* TurkcellSecurityRouter.swift in Sources */,
+				C2633CE6DCE21581F3989484 /* TurkcellSecurityRouterInput.swift in Sources */,
+				BE6839C8136B6253324F05AA /* TurkcellSecurityConfigurator.swift in Sources */,
+				CFFA80002F0955FCA6223E49 /* TurkcellSecurityInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

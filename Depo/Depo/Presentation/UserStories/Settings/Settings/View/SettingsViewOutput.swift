@@ -41,13 +41,15 @@ protocol SettingsViewOutput {
     
     func openPasscode(handler: @escaping () -> Void)
     
+    func goTurkcellSecurity()
+    
     var isPasscodeEmpty: Bool { get }
 
-    func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool)
-    func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool)
-
-    var inNeedOfMail: Bool { get }
-    var isTurkCellUser: Bool { get }
+//    func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool)
+//    func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool)
+//
+//    var inNeedOfMail: Bool { get }
+//    var isTurkCellUser: Bool { get }
     
-    func mailUpdated(mail: String)
+//    func mailUpdated(mail: String)
 }

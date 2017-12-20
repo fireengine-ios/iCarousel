@@ -102,6 +102,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         interactor.updateUserInfo(mail: mail)
     }
     
+    func goTurkcellSecurity() {
+        router.goTurkcellSecurity()
+    }
+    
     func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool) {
         
     }
