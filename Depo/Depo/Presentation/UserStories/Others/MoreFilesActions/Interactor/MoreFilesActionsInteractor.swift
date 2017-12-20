@@ -334,11 +334,11 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
                                  success: succesAction(elementType: .download),
                                  fail: failAction(elementType: .download))
         } else if let albums = item as? [AlbumItem] {
-            let albumService = PhotosAlbumService()
-            albumService.allItemsFrom(albums: albums, success: { [weak self] items in
-                self?.fileService.download(items: items, toPath: "",
-                                          success: self?.succesAction(elementType: .download),
-                                          fail: self?.failAction(elementType: .download))
+            
+            PhotosAlbumService().loadItemsBy(albums: albums, success: { (itemsByAlbums) in
+                self.fileService.download(itemsByAlbums: itemsByAlbums,
+                                          success: self.succesAction(elementType: .download),
+                                          fail: self.failAction(elementType: .download))
             })
         }
     }

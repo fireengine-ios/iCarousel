@@ -107,7 +107,7 @@ class SyncServiceManger {
     
     private func checkReachabilityAndSettings() {
         guard let syncSettings = settings else {
-            autoSyncStorage.getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
+            AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
                 if let `self` = self {
                     let settings = SettingsAutoSyncModel()
                     settings.isAutoSyncEnable = autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected

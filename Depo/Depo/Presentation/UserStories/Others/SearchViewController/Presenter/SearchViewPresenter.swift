@@ -81,6 +81,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         view.successWithSuggestList(list: list)
     }
     
+    func setRecentSearches(_ recentSearches: [String]) {
+        view.setRecentSearches(recentSearches)
+    }
+    
     func failedSearch() {
         showedSpinner = false
         self.outputView()?.hideSpiner()
@@ -128,6 +132,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func tapCancel() {
         moduleOutput?.cancelSearch()
+    }
+    
+    func onClearRecentSearchesTapped() {
+        interactor.clearRecentSearches()
     }
     
     func playerDidHide() {
