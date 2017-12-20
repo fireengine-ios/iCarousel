@@ -296,9 +296,6 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelSyncOperations(photo: Bool, video: Bool) {
-        uploadOperations.forEach { $0.cancel() }
-        uploadOperations.removeAll()
-        
         var operationsToRemove = uploadOperations.filter({ $0.uploadType == .autoSync &&
             ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
         
