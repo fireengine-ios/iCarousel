@@ -102,7 +102,7 @@ class RouterVC: NSObject {
         }
     }
     
-    func popViewControllerFromTableViewNavBar(){
+    func popViewControllerFromTableViewNavBar() {
         if let tabBarVc = tabBarVC {
             tabBarVc.popViewController(animated: true)
             return
@@ -123,11 +123,11 @@ class RouterVC: NSObject {
         viewController.navigationController?.isNavigationBarHidden = false
     }
     
-    func popToRootViewController(){
+    func popToRootViewController() {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func popViewController(){
+    func popViewController() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -349,16 +349,16 @@ class RouterVC: NSObject {
     
     // MARK: Folder
     
-    func filesFromFolder(folder: Item) -> UIViewController{
-        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController", folder: folder)
+    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController{
+        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController", folder: folder, type: type, sortType: sortType, moduleOutput: moduleOutput)
         return controller
     }
     
     
     // MARK: User profile
     
-    func userProfile(userInfo: AccountInfoResponse) -> UIViewController{
-        let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo)
+    func userProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController{
+        let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo, isTurkcellUser: isTurkcellUser)
         return viewController
     }
     
@@ -482,15 +482,15 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func filesDetailViewController(fileObject:WrapData, from items:[[WrapData]]) -> UIViewController {
+    func filesDetailViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController")
         let c = controller as! PhotoVideoDetailViewController
-        c.interactor!.onSelectItem(fileObject: fileObject, from: items)
+        c.interactor!.onSelectItem(fileObject: fileObject, from: items)//FIXME: ALEX
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
     
-    func filesDetailAlbumViewController(fileObject:WrapData, from items:[[WrapData]]) -> UIViewController {
+    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController")
         let c = controller as! PhotoVideoDetailViewController
         c.interactor!.onSelectItem(fileObject: fileObject, from: items)
@@ -514,10 +514,8 @@ class RouterVC: NSObject {
     
     //MARK: Album detail
     
-    func albumDetailController(album: AlbumItem, moduleOutput: AlbumDetailModuleOutput? = nil) -> AlbumDetailViewController{
-        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController",
-                                                                                      album: album,
-                                                                                      moduleOutput: moduleOutput)
+    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController{
+        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
         return controller
     }
     

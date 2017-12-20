@@ -22,18 +22,15 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func viewIsReady(view: UIView) {
         interactor.onViewIsReady()
         bottomBarPresenter?.show(animated: false, onView: view)
-//        if inte
     }
     
     func onShowSelectedItem(at index: Int, from items:[Item]) {
         view.onShowSelectedItem(at: index, from: items)
-        var barConfig = interactor.bottomBarConfig
-        
-        
+
 //        if items[index].fileType == .image {
 //            
 //        }
-        bottomBarPresenter?.setupTabBarWith(config: barConfig)
+        bottomBarPresenter?.setupTabBarWith(config: interactor.bottomBarConfig)
         view.onItemSelected(at: index, from: items)
     }
     
@@ -111,8 +108,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         router.goBack(navigationConroller: view.getNavigationController())
     }
     
-    func updateItems(objects: [Item], selectedIndex: Int){
-        view.updateItems(objectsArray: objects, selectedIndex: selectedIndex)
+    func updateItems(objects: [Item], selectedIndex: Int, isRightSwipe: Bool) {
+        view.updateItems(objectsArray: objects, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
     }
     
     func selectModeSelected() {

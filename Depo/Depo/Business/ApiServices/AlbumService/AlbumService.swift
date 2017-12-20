@@ -133,6 +133,7 @@ class AlbumService: RemoteItemsService {
 
 typealias PhotosAlbumOperation = () -> Swift.Void
 typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Swift.Void
+typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Swift.Void
 
 class PhotosAlbumService: BaseRequestService {
     
@@ -151,7 +152,7 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func completelyDelete(albums: DeleteAlbums, success: PhotosAlbumOperation?, fail: FailResponse?) {
-        allItemsFrom(albums: albums.albums) { (items) in
+        loadAllItemsFrom(albums: albums.albums) { (items) in
             let fileService = WrapItemFileService()
             fileService.delete(deleteFiles: items, success: nil, fail: nil)
             self.deleteAlbums(deleteAlbums: albums, success: success, fail: fail)
@@ -180,7 +181,7 @@ class PhotosAlbumService: BaseRequestService {
         executePutRequest(param: parameters, handler: handler)
     }
     
-    func allItemsFrom(albums: [AlbumItem], success: PhotosFromAlbumsOperation?) {
+    func loadAllItemsFrom(albums: [AlbumItem], success: PhotosFromAlbumsOperation?) {
         guard albums.count > 0 else { success?([Item]()); return }
         let group = DispatchGroup()
         var allItems = [WrapData]()
@@ -189,6 +190,25 @@ class PhotosAlbumService: BaseRequestService {
             let albumService = AlbumDetailService(requestSize: 100)
             albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { (items) in
                 allItems.append(contentsOf: items)
+                group.leave()
+            }, fail: {
+                group.leave()
+            })
+        }
+        group.notify(queue: DispatchQueue.main) {
+            success?(allItems)
+        }
+    }
+    
+    func loadItemsBy(albums: [AlbumItem], success: PhotosByAlbumsOperation?) {
+        guard albums.count > 0 else { success?([AlbumItem: [Item]]()); return }
+        let group = DispatchGroup()
+        var allItems = [AlbumItem: [Item]]()
+        for album in albums {
+            group.enter()
+            let albumService = AlbumDetailService(requestSize: 100)
+            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { (items) in
+                allItems[album] = items
                 group.leave()
             }, fail: {
                 group.leave()

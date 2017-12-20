@@ -7,11 +7,23 @@
 //
 
 class AutoSyncRouter: AutoSyncRouterInput {
-
+ 
     func routNextVC() {
         let router = RouterVC()
-        let homePage = router.tabBarScreen
-        router.setNavigationController(controller: homePage)
+        router.setNavigationController(controller: router.tabBarScreen)
     }
     
+    func showSyncOverPopUp() {
+        let router = RouterVC()
+        
+        let controller = PopUpController.with(title: TextConstants.autoSyncSyncOverTitle,
+                                              message: TextConstants.autoSyncSyncOverMessage,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.autoSyncSyncOverOn,
+                                              secondAction: { vc in
+                                                router.setNavigationController(controller: router.tabBarScreen)
+        })
+        router.presentViewController(controller: controller)
+    }
 }

@@ -10,27 +10,27 @@ import Foundation
 
 class SeacrhViewRouter: SearchViewRouterInput {
     
-    func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
+    func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem]) {
         let router = RouterVC()
-        if (item.fileType == FileType.photoAlbum){
+        if (selectedItem.fileType == FileType.photoAlbum) {
             
             return
         }
-        if (item.fileType == FileType.musicPlayList){
+        if (selectedItem.fileType == FileType.musicPlayList) {
             
             return
         }
         
-        guard let object = item as? Item else{
+        guard let object = selectedItem as? Item else {
             return
         }
         
-        if (item.fileType == FileType.folder){
+        if (selectedItem.fileType == FileType.folder){
             
-            let controller = router.filesFromFolder(folder: object)
+            let controller = router.filesFromFolder(folder: object, type: .Grid, sortType: .TimeNewOld, moduleOutput: nil)
             router.pushViewControllertoTableViewNavBar(viewController: controller)
-        }else{
-            let controller = router.filesDetailViewController(fileObject: object, from: data as! [[Item]])
+        } else {
+            let controller = router.filesDetailViewController(fileObject: object, items: sameTypeItems as! [Item])
             //
             router.pushViewController(viewController: controller)
         }

@@ -54,8 +54,8 @@ struct TextConstants {
     static let loginRememberMyCredential = "Remember my credentials"
     static let loginCellTitleEmail = "E-Mail or GSM Number"
     static let loginCellTitlePassword = "Password"//NSLocalizedString("PasswordPlaceholder", comment: "")
-    static let loginCellEmailPlaceholder = ""
-    static let loginCellPasswordPlaceholder = ""
+    static let loginCellEmailPlaceholder =  "You have to fill in your mail or GSM Number"
+    static let loginCellPasswordPlaceholder = "You have to fill in a password"
     
     static let autoSyncNavigationTitle = "Auto Sync"
     static let autoSyncTitle = "Lifebox can sync your files automatically. Would you like to have this feature right now?"
@@ -72,6 +72,11 @@ struct TextConstants {
     static let autoSyncAlertYes = "Skip Auto-Sync"
     static let autoSyncAlertNo = "Cancel"
     static let autoSyncSaveButton = "Save"
+    
+    static let autoSyncSyncOverTitle = "Sync over data plan?"
+    static let autoSyncSyncOverMessage = "Syncing files using cellular data could incur data charges"
+    static let autoSyncSyncOverOn = "Turn-on Sync"
+    
     
     static let registerTitle = "Sign Up"
     
@@ -107,6 +112,8 @@ struct TextConstants {
     // MARK: - Search
     
     static let search = "Search"
+    static let searchRecentSearchTitle = "RECENT SEARCHES"
+    static let searchSuggestionsTitle = "SUGGESTIONS"
     
     static let noFilesFoundInSearch = "No results found for your query."
     
@@ -237,7 +244,7 @@ struct TextConstants {
     static let homeUploadedImagesViewAllPictures = "View All Pictures"
     
     //MARK: Popup 
-    static let ok = "Ok"
+    static let ok = "OK"
     
     //MARK: PhotosVideosView
     static let photosVideosViewNoPhotoTitleText = "You don’t have anything on your photo roll."
@@ -255,6 +262,10 @@ struct TextConstants {
     static let audioViewNoAudioTitleText = "You don’t have any music on your Lifebox yet."
     static let audioViewNoAudioButtonText = "Start adding your music"
 
+    //MARK: DocumentsView
+    static let documentsViewNoDocumenetsTitleText = "You don’t have any documents on your Lifebox yet."
+    static let documentsViewNoDocumenetsButtonText = "Start adding your documents"
+    
     //MARK: settings
     static let backPrintTitle = "Back to Lifebox"
 
@@ -366,6 +377,8 @@ struct TextConstants {
     static let createStoryCreated = "Story created"
     static let createStoryNotCreated = "Story not created"
     static let failWhileAddingToAlbum = "Fail while adding to album"
+    static let createStoryMusicEmpty = "You did not choose music for your story"
+    static let createStoryAddMusic = "Add music"
     
     //MARK: Create story Audio
     static let createStoryNoSelectedAudioError = "Sorry, but story audio should not be empty"
@@ -458,12 +471,28 @@ struct TextConstants {
     
     //MARK: PopUp
     static let popUpProgress = "(%ld of %ld)"
-    static let popUpSyncing = "Syncing files"
-    static let popUpUploading = "Uploading files"
+    static let popUpSyncing = "Syncing files over"
+    static let popUpUploading = "Uploading files over"
     static let popUpDownload = "Downloading files"
+    static let popUpDeleteComplete = "Deleting is complete"
+    static let popUpDownloadComplete = "Download is complete"
+    static let popUpOperationComplete = "Operation is complete"
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
+    static let networkTypeWiFi = "WiFi"
+    static let networkType2g = "2G"
+    static let networkType3g = "3G"
+    static let networkType4g = "4G"
+    static let networkTypeLTE = "LTE"
+    static let autoUploaOffPopUpText = "Auto Upload is off.\nGo to setting to auto sync."
+    static let autoUploaOffCancel = "Cancel"
+    static let autoUploaOffSettings = "Settings"
+    static let waitingForWiFiPopUpTitle = "Waiting for a connection to auto-sync"
+    static let waitingForWiFiPopUpSettingsButton = "Settings"
+    static let waitingForWiFiPopUpSyncButton = "Sync with data plan"
+    static let prepareToAutoSunc = "Preparing to auto sync..."
+    static let waitForWiFiButtonTitle = "Wait for a WiFi Connection"
 
     
     //MARK: - ActionSheet
@@ -555,16 +584,22 @@ struct TextConstants {
     static let usageInfoDocs = "%ld docs"
     
     // MARK: - offers
-    static let offersSubTurkcellActivate = "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080."
-    static let offersSubTurkcellCancel = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080."
-    static let offersTurkcellCancel = "You can send SMS message to 2222 by writing \"Depo Iptal\" to cancel subscription."
+    static let offersActivateUkranian = "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080"
+    static let offersActivateCyprus = "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships"
+    
+    static let offersCancelUkranian = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080"
+    static let offersCancelCyprus = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships"
+    static let offersCancelMoldcell = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2"
+    static let offersCancelAll = "You can visit iTunes to cancel your subscription"
+    static let offersCancelTurkcell = "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription"
+    
     static let offersAllCancel = "You can open settings and cancel subscption."
     static let offersInfo = "Info"
     static let offersCancel = "Cancel"
     static let offersBuy = "Buy"
     static let offersOk = "OK"
     static let offersSettings = "Settings"
-    static let offersPrice = "%f ₺ / month"
+    static let offersPrice = "%.2f ₺ / month"
     
     // MARK: - OTP
     static let otpNextButton = "Next"
@@ -576,7 +611,7 @@ struct TextConstants {
     static let errorEmptyPassword = "Indicates that the password parameter is sent blank."
     static let errorEmptyPhone = "Specifies that the phone number parameter is sent  blank."
     static let errorInvalidEmail = "E-mail address is in an invalid format."
-    static let errorExistEmail = "A user with the given e-mail address already exists."
+    static let errorExistEmail = "This e-mail address is already registered. Please enter another e-mail address."
     static let errorVerifyEmail = "Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation."
     static let errorInvalidPhone = "Phone number is in an invalid format."
     static let errorExistPhone = "A user with the given phone number already exists."
@@ -607,6 +642,8 @@ struct TextConstants {
     static let PROMO_IS_INACTIVE = "The package activation code is not active"
     
     static let passcode = "Passcode"
+    static let passcodeSettingsSetTitle = "Set a Passcode"
+    static let passcodeSettingsChangeTitle = "Change Passcode"
     static let passcodeLifebox = "lifebox Passcode"
     static let passcodeEnter = "Please enter your lifebox passcode"
     static let passcodeEnterOld = "Please enter your lifebox passcode"
@@ -635,6 +672,12 @@ struct TextConstants {
     
     static let packages = "Packages"
     static let purchase = "Purchase"
+    
+    static let deleteFilesText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
+    static let deleteAlbums = "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"
+    static let removeAlbums = "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?"
+    
+    static let locationServiceDisable = "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu."
 }
 
 
@@ -644,6 +687,10 @@ struct NumericConstants {
     static let vereficationTimerLimit = 120//in seconds
     static let maxVereficationAttempts = 3
     //
+    static let maxDetailsLoadingAttempts = 5
+    static let detailsLoadingTimeAwait = UInt32(2)
+    
+    static let countOfLoginBeforeNeedShowUploadOffPopUp = 4
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
@@ -659,6 +706,8 @@ struct NumericConstants {
     static let creationStoryOrderingCountPhotosInLineiPad: Int = 6
     static let albumCellListHeight: CGFloat = 100
     
+    static let numberOfElementsInSyncRequest: Int = 1000
+    
     static let topContentInset: CGFloat = 64
     
     static let animationDuration: Double = 0.3
@@ -673,4 +722,5 @@ struct NumericConstants {
     
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     
+    static let maxRecentSearches: Int = 10
 }

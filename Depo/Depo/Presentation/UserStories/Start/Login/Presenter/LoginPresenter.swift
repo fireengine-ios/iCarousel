@@ -7,9 +7,7 @@
 //
 
 class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInteractorOutput {
-    
     weak var view: LoginViewInput!
-    
     var interactor: LoginInteractorInput!
     var router: LoginRouterInput!
     
@@ -40,12 +38,13 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func loginFieldIsEmpty() {
-        showMessageHideSpinner(text: TextConstants.loginScreenNoLoginError)
+        compliteAsyncOperationEnableScreen()
+        view.showInfoButton(in: .login)
     }
     
     func passwordFieldIsEmpty() {
-        showMessageHideSpinner(text: TextConstants.loginScreenNoPasswordError)
-        
+        compliteAsyncOperationEnableScreen()
+        view.showInfoButton(in: .password)
     }
     
     func rememberMe(remember: Bool) {
@@ -64,6 +63,11 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         compliteAsyncOperationEnableScreen()
         captchaShowed = true
         view.showCapcha()
+    }
+    
+    func failedBlockError() {
+        compliteAsyncOperationEnableScreen()
+        view.failedBlockError()
     }
     
     func succesLogin() {

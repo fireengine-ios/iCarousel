@@ -46,6 +46,9 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         
         self.setupTexts()
         
+        sendButton.isEnabled = false
+        
+        feedbackTextView.delegate = self
         feedbackSubView.layer.cornerRadius = 4
         feedbackTextView.layer.cornerRadius = 4
         
@@ -115,8 +118,8 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         dropDovnView!.setTableDataObjects(objects: array)
     }
     
-    func fail(text: String){
-        CustomPopUp.sharedInstance.showCustomAlert(withText: text, okButtonText: TextConstants.ok)
+    func fail(text: String) {
+        UIApplication.showErrorAlert(message: text)
     }
     
     func languageRequestSended(text: String){
@@ -126,10 +129,10 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
             Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [TextConstants.feedbackEmail], success: {
                 //
             }, fail: { (error) in
-                CustomPopUp.sharedInstance.showCustomAlert(withText: error?.localizedDescription ?? TextConstants.feedbackEmailError, okButtonText: TextConstants.ok)
+                UIApplication.showErrorAlert(message: error?.localizedDescription ?? TextConstants.feedbackEmailError)
             })
         } else {
-            CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.feedbackEmailError, okButtonText: TextConstants.ok)
+            UIApplication.showErrorAlert(message: TextConstants.feedbackEmailError)
         }
     }
     
@@ -153,7 +156,12 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
             self.allertView.transform = .identity
         }
     }
-
+    
+    func setSendButton(isEnabled: Bool) {
+        sendButton.isEnabled = isEnabled
+    }
+    
+    
     // MARK: Keboard
     
     @IBAction func onHideKeyboard(){
@@ -273,3 +281,15 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
 }
+
+
+extension FeedbackViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        guard textView == feedbackTextView else {
+            return
+        }
+        
+        output.onTextDidChange(text: textView.text)
+    }
+}
+

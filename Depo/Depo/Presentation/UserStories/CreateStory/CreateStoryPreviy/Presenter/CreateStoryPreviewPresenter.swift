@@ -6,27 +6,16 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class CreateStoryPreviewPresenter: BasePresenter, CustomPopUpAlertActions {
+class CreateStoryPreviewPresenter: BasePresenter {
     weak var view: CreateStoryPreviewViewInput?
     var interactor: CreateStoryPreviewInteractorInput!
     var router: CreateStoryPreviewRouterInput!
-    
-    let custoPopUp = CustomPopUp()
     
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
-    
-    func cancelationAction(){
-        router.goToMain()
-    }
-    
-    func otherAction(){
-        
-    }
-    
 }
 
 // MARK: CreateStoryPreviewViewOutput
@@ -44,20 +33,32 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
     func storyCreated(){
         asyncOperationSucces()
         
-        custoPopUp.delegate = self
-        custoPopUp.showCustomInfoAlert(withTitle: TextConstants.pullToRefreshSuccess,
-                                       withText: TextConstants.createStoryCreated,
-                                       okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
+        let controller = PopUpController.with(title: TextConstants.pullToRefreshSuccess,
+                                              message: TextConstants.createStoryCreated,
+                                              image: .success,
+                                              buttonTitle: TextConstants.ok,
+                                              action: { [weak self] vc in
+                                                vc.close { [weak self] in
+                                                    self?.router.goToMain()
+                                                }
+        })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
     func storyCreatedWithError(){
         asyncOperationSucces()
         
-        custoPopUp.delegate = self
-        custoPopUp.showCustomAlert(withText: TextConstants.createStoryNotCreated,
-                                   okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
+        let controller = PopUpController.with(title: TextConstants.errorAlert,
+                                              message: TextConstants.createStoryNotCreated,
+                                              image: .error,
+                                              buttonTitle: TextConstants.ok,
+                                              action: { [weak self] vc in
+                                                vc.close { [weak self] in
+                                                    self?.router.goToMain()
+                                                }
+        })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
-    
 }
 
 // MARK: CreateStoryPreviewInteractorOutput

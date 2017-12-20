@@ -75,10 +75,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
     private func compoundItems(pageItems: [WrapData]) {
-        debugPrint("!!!GOT NEW ITEMS!!!")
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
         isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
-        debugPrint("!!!ALL NEW ITEMS SORTED!!!")
     }
     
     private func isLocalOnly() -> Bool {
@@ -348,12 +346,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         allLocalItems.removeAll()
         allItems.removeAll()
         allMediaItems.removeAll()
-        
-        allLocalItems.append(contentsOf: getAllLocalItems())
-        if isLocalOnly() {
-            allItems = [allLocalItems]
+        DispatchQueue.main.async {
+            self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+            if self.isLocalOnly() {
+                self.allItems = [self.allLocalItems]
+            }
+            self.reloadData()
         }
-        reloadData()
     }
     
     private var sortingRules: SortedRules
@@ -370,15 +369,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         self.collectionView = collectionView
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        allLocalItems.append(contentsOf: getAllLocalItems())
-        
-        registerHeaders()
-        registerCells()
-        
-        if isLocalOnly() {
-            allItems = [allLocalItems]
-            reloadData()
+        DispatchQueue.main.async {
+            self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+            
+            self.registerHeaders()
+            self.registerCells()
+            
+            if self.isLocalOnly() {
+                self.allItems = [self.allLocalItems]
+                self.reloadData()
+            }
         }
     }
     
@@ -687,7 +687,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
         cell_.setDelegateObject(delegateObject: self)
         
-        guard let wraped = unwrapedObject as? Item else{
+        guard let wraped = unwrapedObject as? Item else {
             return
         }
         
@@ -741,19 +741,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         guard let unwrapedObject = object else {
             return
         }
-        if (isSelectionStateActive){
+        if (isSelectionStateActive) {
             onSelectObject(object: unwrapedObject)
             let cell = collectionView.cellForItem(at: indexPath)
             guard let cell_ = cell as? CollectionViewCellDataProtocol else {
                 return
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
-        }else{
+        } else {
             if  let forwardDelegate = self.delegate {
                 let array = getAllObjects()
                 for subArray in array {
                     for obj in subArray{
                         if (obj.uuid == unwrapedObject.uuid){
+                            
                             forwardDelegate.onItemSelected(item: obj, from: array)
                             return
                         }

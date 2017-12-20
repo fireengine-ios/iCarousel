@@ -34,8 +34,8 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.usageInfo!)
     }
     
-    func goToUserInfo(userInfo: AccountInfoResponse) {
-        router.pushViewController(viewController: router.userProfile(userInfo: userInfo))
+    func goToUserInfo(userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
+        router.pushViewController(viewController: router.userProfile(userInfo: userInfo, isTurkcellUser: isTurkcellUser))
     }
     
     func goToActivityTimeline() {
@@ -66,7 +66,6 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToConnectedToNetworkFailed() {
-        CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.errorConnectedToNetwork,
-                                                   okButtonText:TextConstants.ok)
+        UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
     }
 }

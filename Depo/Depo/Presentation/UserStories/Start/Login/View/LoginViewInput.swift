@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum LoginViewInputField {
+    case login, password
+}
+
 protocol LoginViewInput: class, Waiting {
     
     var captchaViewController: CaptchaViewController! { set get }
@@ -19,7 +23,7 @@ protocol LoginViewInput: class, Waiting {
     func refreshCaptcha()
     
     func showErrorMessage(with text: String)
-
+    func showInfoButton(in field: LoginViewInputField)
     
     func hideErrorMessage()
     
@@ -32,5 +36,7 @@ protocol LoginViewInput: class, Waiting {
     
     func blockUI()
     func unblockUI()
+    
+    func failedBlockError()
     
 }

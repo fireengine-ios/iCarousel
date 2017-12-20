@@ -14,6 +14,9 @@ enum OperationType: String{
     case download               = "Download"
     case freeAppSpace           = "FreeAppSpace"
     case freeAppSpaceWarning    = "freeAppSpaceWarning"
+    case prepareToAutoSync      = "prepareToAutoSync"
+    case autoUploadIsOff        = "autoUploadIsOff"
+    case waitingForWiFi         = "waitingForWiFi"
 }
 
 class Progress {
@@ -67,6 +70,11 @@ class WrapItemOperatonManager: NSObject {
     //MARK: sending operation to registred subviews
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
+        hidePopUpsByDepends(type: type)
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{
@@ -76,10 +84,22 @@ class WrapItemOperatonManager: NSObject {
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
+        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int){
+        hidePopUpsByDepends(type: type)
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
+        
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{
-                notificationView.setProgressForOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+                
+                if let obj = object {
+                    notificationView.setProgressForOperationWith(type: type, object: obj, allOperations: allOperations, completedOperations: completedOperations)
+                }else{
+                    notificationView.setProgressForOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+                }
+                
             }
         }
     }
@@ -101,6 +121,22 @@ class WrapItemOperatonManager: NSObject {
         }
     }
     
+    func stopAllOperations(){
+        for operation in progresForOperation.keys {
+            stopOperationWithType(type: operation)
+        }
+    }
+    
+    func hidePopUpsByDepends(type: OperationType){
+        switch type {
+        case .sync:
+            stopOperationWithType(type: .prepareToAutoSync)
+            stopOperationWithType(type: .waitingForWiFi)
+        default:
+            break
+        }
+    }
+    
     //MARK: views for operations
     
     class func popUpViewForOperaion(type: OperationType) -> BaseView{
@@ -113,6 +149,13 @@ class WrapItemOperatonManager: NSObject {
             let popUp = ProgressPopUp.initFromNib()
             popUp.configurateWithType(viewType: type)
             return popUp
+        case .prepareToAutoSync:
+            let popUp = PrepareToAutoSync.initFromNib()
+            return popUp
+        case .autoUploadIsOff:
+            return AutoUploadIsOffPopUp.initFromNib()
+        case .waitingForWiFi:
+            return WaitingForWiFiPopUp.initFromNib()
         }
     }
     

@@ -12,7 +12,6 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         dataSource = ArrayDataSourceForCollectionView()
         interactor.viewIsReady()
         sortedRule = .timeUp
-        dataSource.displayingType = .list
         dataSource.setPreferedCellReUseID(reUseID: nil)
         
         super.viewIsReady(collectionView: collectionView)

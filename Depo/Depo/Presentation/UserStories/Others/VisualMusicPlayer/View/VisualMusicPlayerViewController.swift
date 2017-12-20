@@ -136,6 +136,9 @@ extension VisualMusicPlayerViewController: MediaPlayerDelegate {
     func changedListItemsInMediaPlayer(_ mediaPlayer: MediaPlayer) {
         carouselView.reloadData()
     }
+    func closeMediaPlayer() {
+        output.closeMediaPlayer()
+    }
 }
 
 

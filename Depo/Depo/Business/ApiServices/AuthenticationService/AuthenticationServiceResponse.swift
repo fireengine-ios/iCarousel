@@ -173,6 +173,8 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
             } else if let data = data, let status = JSON(data: data)["status"].string {
                 let error = ServerStatusError(status: status, code: httpResponse.statusCode)
                 fail?(.error(error))
+            } else if let data = data, let text = String(data: data, encoding: .utf8) {
+                fail?(.string(text))
             } else {
                 fail?(.httpCode(httpResponse.statusCode))
             }

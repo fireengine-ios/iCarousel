@@ -15,6 +15,10 @@ class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var iconImageViewForCurrentFile: LoadingImageView!
+    @IBOutlet weak var waitingForWiFiButton: SimpleButtonWithBlueText!
+    
+    var wrapItem: WrapData?
     
     override class func initFromNib() -> ProgressPopUp{
         if let view = super.initFromNib() as? ProgressPopUp{
@@ -61,16 +65,31 @@ class ProgressPopUp: BaseView, ProgressPopUpProtocol {
         progress.progress = ratio
     }
     
+    func setImageForUploadingItem(item: WrapData){
+        if wrapItem != item{
+            wrapItem = item
+            iconImageViewForCurrentFile.loadImageForItem(object: item)
+        }
+    }
+    
     func configurateWithType(viewType: OperationType){
+        let isWiFi = ReachabilityService().isReachableViaWiFi
+        let networkType = isWiFi ? TextConstants.networkTypeWiFi : TextConstants.networkType3g
+        waitingForWiFiButton.isHidden = true
+        
         switch viewType {
         case .sync:
             operationLabel.text = ""
-            titleLabel.text = TextConstants.popUpSyncing
+            if (!isWiFi){
+                waitingForWiFiButton.setTitle(TextConstants.waitForWiFiButtonTitle, for: .normal)
+                waitingForWiFiButton.isHidden = false
+            }
+            titleLabel.text = TextConstants.popUpSyncing + " " + networkType
             imageView.image = UIImage(named: "SyncingPopUpImage")
             
         case .upload:
             operationLabel.text = ""
-            titleLabel.text = TextConstants.popUpUploading
+            titleLabel.text = TextConstants.popUpUploading + " " + networkType
             imageView.image = UIImage(named: "SyncingPopUpImage")
             
         case .download:
@@ -84,6 +103,10 @@ class ProgressPopUp: BaseView, ProgressPopUpProtocol {
             imageView.image = nil
         }
             
+    }
+    
+    @IBAction func onWaitingForWiFiButton(){
+        SyncServiceManger.shared.waitForWifi()
     }
 
 }

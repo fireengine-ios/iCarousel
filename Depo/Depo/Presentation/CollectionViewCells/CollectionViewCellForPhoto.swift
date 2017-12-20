@@ -100,8 +100,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
 
     override func setSelection(isSelectionActive: Bool, isSelected: Bool){
-        favoriteIcon.alpha = isSelectionActive ? 0 : 1
-        
         selectionImageView.isHidden = !isSelectionActive
         selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
         

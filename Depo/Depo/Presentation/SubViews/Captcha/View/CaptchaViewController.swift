@@ -76,8 +76,8 @@ class CaptchaViewController: UIViewController {
             }
             
         }) { (error) in
-            DispatchQueue.main.async { 
-                CustomPopUp.sharedInstance.showCustomAlert(withText: error.description, okButtonText: TextConstants.ok)
+            DispatchQueue.main.async {
+                UIApplication.showErrorAlert(message: error.description)
             }
         }
         

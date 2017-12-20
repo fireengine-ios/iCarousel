@@ -33,13 +33,13 @@ class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeB
     
     override func onMaxSelectionExeption(){
         let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
-        CustomPopUp.sharedInstance.showCustomAlert(withText: text, okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
+        UIApplication.showErrorAlert(message: text)
     }
     
     override func onNextButton(){
         let array = dataSource.getSelectedItems()
-        if (array.isEmpty){
-            custoPopUp.showCustomAlert(withText: TextConstants.uploadFromLifeBoxNoSelectedPhotosError, okButtonText: TextConstants.uploadFromLifeBoxEmptyFolderButtonText)
+        if array.isEmpty {
+            UIApplication.showErrorAlert(message: TextConstants.uploadFromLifeBoxNoSelectedPhotosError)
         }else{
             guard let wrapArray = array as? [Item] else {
                 return

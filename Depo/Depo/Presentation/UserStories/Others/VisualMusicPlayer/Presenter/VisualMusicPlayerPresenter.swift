@@ -8,7 +8,12 @@
 
 class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlayerViewOutput, VisualMusicPlayerInteractorOutput, BaseItemInputPassingProtocol {
     
-    func operationFinished(withType type: ElementTypes, response: Any?) {}
+    func operationFinished(withType type: ElementTypes, response: Any?) {
+        if type == .delete {
+            view.player.playNext()
+        }
+    }
+    
     func operationFailed(withType type: ElementTypes) {}
     func selectModeSelected() {}
     func selectAllModeSelected() {}
@@ -29,5 +34,9 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
 
     func viewIsReady(view: UIView) {
         bottomBarPresenter?.show(animated: false, onView: view)
+    }
+    
+    func closeMediaPlayer() {
+        router.dismiss()
     }
 }

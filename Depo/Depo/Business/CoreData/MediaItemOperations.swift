@@ -10,30 +10,31 @@ import Foundation
 
 extension CoreDataStack {
     
-    func appendOnlyNewItems(items: [WrapData] ) {
-        
-        let uuidList = items.map{ $0.uuid }
-        let predicateForRemoteFile = NSPredicate(format: "uuidValue IN %@", uuidList)
-        
-        let childrenContext = backgroundContext
- 
-        let alreadySavedMediaItems = executeRequest(predicate: predicateForRemoteFile, context: childrenContext)
-        
-        updateSavedItems(savedItems: alreadySavedMediaItems, remoteItems: items, context: childrenContext)
-        
-        let inCoreData = alreadySavedMediaItems.flatMap{ $0.uuidValue }
-        
-        let appendItems = items.filter { !inCoreData.contains($0.uuid) }
-        
-        if appendItems.count == 0 {
-            return
+    func appendOnlyNewItems(items: [WrapData]) {
+        DispatchQueue.main.async {
+            let uuidList = items.map{ $0.uuid }
+            let predicateForRemoteFile = NSPredicate(format: "uuidValue IN %@", uuidList)
+            
+            let childrenContext = self.mainContext//backgroundContext
+            
+            let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: childrenContext)
+            
+            self.updateSavedItems(savedItems: alreadySavedMediaItems, remoteItems: items, context: childrenContext)
+            
+            let inCoreData = alreadySavedMediaItems.flatMap{ $0.uuidValue }
+            
+            let appendItems = items.filter { !inCoreData.contains($0.uuid) }
+            
+            if appendItems.count == 0 {
+                return
+            }
+            
+            appendItems.forEach {
+                _ = MediaItem(wrapData: $0, context: childrenContext)
+            }
+            
+            self.saveDataForContext(context: childrenContext, saveAndWait: true)
         }
-        
-        appendItems.forEach {
-            _ = MediaItem(wrapData: $0, context: childrenContext)
-        }
-        
-        saveDataForContext(context: childrenContext, saveAndWait: true)
     }
     
     func updateSavedItems(savedItems: [MediaItem], remoteItems: [WrapData], context: NSManagedObjectContext) {
@@ -68,26 +69,28 @@ extension CoreDataStack {
     }
     
     func updateLocalItemSyncStatus(item: Item) {
-        let predicateForRemoteFile = NSPredicate(format: "uuidValue == %@", item.uuid)
-        let alreadySavedMediaItems = executeRequest(predicate: predicateForRemoteFile, context: mainContext)
-        
-        alreadySavedMediaItems.forEach({ savedItem in
-            //for locals
-            savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
+        DispatchQueue.main.async {
+            let predicateForRemoteFile = NSPredicate(format: "uuidValue == %@", item.uuid)
+            let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: self.mainContext)
             
-            if savedItem.objectSyncStatus != nil{
-                savedItem.objectSyncStatus = nil
-            }
-            
-            var array = [MediaItemsObjectSyncStatus]()
-            for userID in item.syncStatuses{
-                array.append(MediaItemsObjectSyncStatus(userID: userID, context: mainContext))
-            }
-            savedItem.objectSyncStatus = NSSet(array: array)
-            
-            //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
-        })
-        saveDataForContext(context: mainContext)
+            alreadySavedMediaItems.forEach({ savedItem in
+                //for locals
+                savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
+                
+                if savedItem.objectSyncStatus != nil {
+                    savedItem.objectSyncStatus = nil
+                }
+                
+                var array = [MediaItemsObjectSyncStatus]()
+                for userID in item.syncStatuses {
+                    array.append(MediaItemsObjectSyncStatus(userID: userID, context: self.mainContext))
+                }
+                savedItem.objectSyncStatus = NSSet(array: array)
+                
+                //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
+            })
+            self.saveDataForContext(context: self.mainContext)
+        }
     }
     
     func removeFromStorage(wrapData: [WrapData]) {

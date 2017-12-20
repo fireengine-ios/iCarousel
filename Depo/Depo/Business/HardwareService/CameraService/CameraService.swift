@@ -73,16 +73,16 @@ import AVFoundation
     }
     
     private func showAccessAlert() {
-        CustomPopUp.sharedInstance.showCustomAlert(
-            withTitle: TextConstants.cameraAccessAlertTitle,
-            titleAligment: .center,
-            withText: TextConstants.cameraAccessAlertText, warningTextAligment: .center,
-            firstButtonText: TextConstants.cameraAccessAlertNo,
-            secondButtonText: TextConstants.cameraAccessAlertGoToSettings,
-            isShadowViewShown: true,
-            secondCustomAction: {
-                CustomPopUp.sharedInstance.hideAll()
-                UIApplication.shared.openSettings()
+        let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
+                                              message: TextConstants.cameraAccessAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.cameraAccessAlertNo,
+                                              secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
+                                              secondAction: { vc in
+                                                vc.close {
+                                                    UIApplication.shared.openSettings()
+                                                }
         })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
 }
