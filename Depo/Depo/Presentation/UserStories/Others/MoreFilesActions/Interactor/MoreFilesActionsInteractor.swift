@@ -71,13 +71,7 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     
     func shareSmallSize(sourceRect: CGRect?){
         if let items = sharingItems as? [WrapData] {
-            var files = [FileForDownload]()
-            
-            for item in items {
-                if let file = FileForDownload(forSmallURL: item) {
-                    files.append(file)
-                }
-            }
+            let files: [FileForDownload] = items.flatMap({ FileForDownload(forSmallURL: $0) })
             shareFiles(filesForDownload: files, sourceRect: sourceRect)
         }
         
@@ -85,13 +79,7 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     
     func shareOrignalSize(sourceRect: CGRect?){
         if let items = sharingItems as? [WrapData] {
-            var files = [FileForDownload]()
-            
-            for item in items {
-                if let file = FileForDownload(forOriginalURL: item) {
-                    files.append(file)
-                }
-            }
+            let files: [FileForDownload] = items.flatMap({ FileForDownload(forOriginalURL: $0) })
             shareFiles(filesForDownload: files, sourceRect: sourceRect)
         }
     }
@@ -109,8 +97,8 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
                     activityVC.completionWithItemsHandler = { (_, _, _, _) in
                         do {
                             try FileManager.default.removeItem(at: directoryURL)
-                        } catch let e {
-                            print(e.localizedDescription)
+                        } catch {
+                            print(error.localizedDescription)
                         }
                     }
                     
@@ -121,8 +109,8 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
                     let router = RouterVC()
                     router.presentViewController(controller: activityVC)
                 }
-            }, fail: {
-                self.output?.operationFailed(type: .share, message: "")
+            }, fail: { [weak self] (errorMessage) in
+                self?.output?.operationFailed(type: .share, message: errorMessage)
         })
     }
     

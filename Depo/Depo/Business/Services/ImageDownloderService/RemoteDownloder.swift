@@ -86,7 +86,7 @@ class ImageDownloder {
 }
 
 typealias FilesDownloaderResponse = (_ fileURLs: [URL], _ directoryURL: URL) -> Swift.Void
-typealias FilesDownloaderFail = () -> Swift.Void
+typealias FilesDownloaderFail = (_ errorMessage: String) -> Swift.Void
 
 class FileDownloadRequestParameters: BaseRequestParametrs, DownloadRequestParametrs {
     var urlToRemoteFile: URL
@@ -102,16 +102,21 @@ class FilesDownloader {
     let requestService = BaseRequestService()
     
     func getFiles(filesForDownload: [FileForDownload], response: @escaping FilesDownloaderResponse, fail: @escaping FilesDownloaderFail) {
-        guard filesForDownload.count > 0, let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            fail()
+        guard filesForDownload.count > 0 else {
+            fail(TextConstants.errorFileSystemAccessDenied)
+            return
+        }
+        
+        guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first  else {
+            fail(TextConstants.errorNothingToDownload)
             return
         }
         
         let tmpDirectoryURL = documentsURL.appendingPathComponent(UUID().uuidString, isDirectory: true)
         do {
             try fileManager.createDirectory(at: tmpDirectoryURL, withIntermediateDirectories: true, attributes: nil)
-        } catch let e {
-            print(e.localizedDescription)
+        } catch {
+            fail(error.localizedDescription)
             return
         }
         
@@ -126,8 +131,8 @@ class FilesDownloader {
                         let urlToLocalFile = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
                         try self.fileManager.moveItem(at: urlToTmpFile, to: urlToLocalFile)
                         localURLs.append(urlToLocalFile)
-                    } catch let e {
-                        print(e.localizedDescription)
+                    } catch {
+                        print(error.localizedDescription)
                     }
                 }
                 group.leave()
