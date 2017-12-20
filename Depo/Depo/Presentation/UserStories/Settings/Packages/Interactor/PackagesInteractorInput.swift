@@ -19,8 +19,8 @@ protocol PackagesInteractorInput {
     func submit(promocode: String)
     func getActiveSubscriptions()
     func getAccountType()
-    func convertToSubscriptionPlans(offers: [OfferServiceResponse]) -> [SubscriptionPlan]
-    func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse]) -> [SubscriptionPlan]
+    func convertToSubscriptionPlans(offers: [OfferServiceResponse], accountType: AccountType) -> [SubscriptionPlan]
+    func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan]
     func convertToSubscriptionPlans(offerApples: [OfferApple]) -> [SubscriptionPlan]
     
     /// MAYBE WILL BE NEED
