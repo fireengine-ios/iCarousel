@@ -9,13 +9,14 @@
 import Foundation
 
 protocol SearchViewInput: class {
-    func setCollectionViewVisibilityStatus(visibilityStatus: Bool)
-    func getCollectionViewWidth() -> CGFloat
     func endSearchRequestWith(text: String)
     func successWithSuggestList(list: [SuggestionObject])
+    func setRecentSearches(_ recentSearches: [String])
+    
+    func setCollectionViewVisibilityStatus(visibilityStatus: Bool)
+    func getCollectionViewWidth() -> CGFloat
     func scrollViewDidScroll(scrollView: UIScrollView)
     func setupUnderNavBarBar(withConfig config: GridListTopBarConfig)
     func dismissController()
-    
     func showMusicBar()
 }

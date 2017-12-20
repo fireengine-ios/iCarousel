@@ -13,4 +13,5 @@ protocol SearchViewInteractorInput {
     func searchItems(by searchText: String, sortBy: SortType, sortOrder: SortOrder)
     func needShowNoFileView() -> Bool
     func getSuggetion(text: String)
+    func clearRecentSearches()
 }

@@ -112,6 +112,8 @@ struct TextConstants {
     // MARK: - Search
     
     static let search = "Search"
+    static let searchRecentSearchTitle = "RECENT SEARCHES"
+    static let searchSuggestionsTitle = "SUGGESTIONS"
     
     static let noFilesFoundInSearch = "No results found for your query."
     
@@ -472,7 +474,9 @@ struct TextConstants {
     static let popUpSyncing = "Syncing files over"
     static let popUpUploading = "Uploading files over"
     static let popUpDownload = "Downloading files"
+    static let popUpDeleteComplete = "Deleting is complete"
     static let popUpDownloadComplete = "Download is complete"
+    static let popUpOperationComplete = "Operation is complete"
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
@@ -638,6 +642,8 @@ struct TextConstants {
     static let PROMO_IS_INACTIVE = "The package activation code is not active"
     
     static let passcode = "Passcode"
+    static let passcodeSettingsSetTitle = "Set a Passcode"
+    static let passcodeSettingsChangeTitle = "Change Passcode"
     static let passcodeLifebox = "lifebox Passcode"
     static let passcodeEnter = "Please enter your lifebox passcode"
     static let passcodeEnterOld = "Please enter your lifebox passcode"
@@ -667,7 +673,11 @@ struct TextConstants {
     static let packages = "Packages"
     static let purchase = "Purchase"
     
-    static let deleteText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
+    static let deleteFilesText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
+    static let deleteAlbums = "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"
+    static let removeAlbums = "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?"
+    
+    static let locationServiceDisable = "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu."
 }
 
 
@@ -678,7 +688,7 @@ struct NumericConstants {
     static let maxVereficationAttempts = 3
     //
     
-    static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
+    static let countOfLoginBeforeNeedShowUploadOffPopUp = 4
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
@@ -710,4 +720,5 @@ struct NumericConstants {
     
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     
+    static let maxRecentSearches: Int = 10
 }

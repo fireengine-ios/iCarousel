@@ -59,7 +59,9 @@ class WrapItemFileService: WrapItemFileOperations {
                 LocalMediaStorage.default.removeAssets(deleteAsset: localAssetsW, success:  {
 
                     let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
-                    CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
+                    DispatchQueue.main.async {
+                        CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
+                    }
                     success?()
                 }, fail: fail)
                 
@@ -140,6 +142,25 @@ class WrapItemFileService: WrapItemFileOperations {
         let downloadItems = remoteWrapDataItems(files: items)
         
         remoteFileService.download(items: downloadItems, success: success, fail: fail)
+    }
+    
+    func download(itemsByAlbums: [AlbumItem: [Item]], success: FileOperationSucces?, fail: FailResponse?) {
+        let group = DispatchGroup()
+        
+        for (album, items) in itemsByAlbums {
+            let downloadItems = remoteWrapDataItems(files: items)
+            guard downloadItems.count > 0 else { continue }
+            group.enter()
+            remoteFileService.download(items: downloadItems, album: album, success: {
+                group.leave()
+            }, fail: { (error) in
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            success?()
+        }
     }
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?) {

@@ -7,9 +7,7 @@
 //
 
 class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInteractorOutput {
-    
     weak var view: LoginViewInput!
-    
     var interactor: LoginInteractorInput!
     var router: LoginRouterInput!
     
@@ -65,6 +63,11 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         compliteAsyncOperationEnableScreen()
         captchaShowed = true
         view.showCapcha()
+    }
+    
+    func failedBlockError() {
+        compliteAsyncOperationEnableScreen()
+        view.failedBlockError()
     }
     
     func succesLogin() {

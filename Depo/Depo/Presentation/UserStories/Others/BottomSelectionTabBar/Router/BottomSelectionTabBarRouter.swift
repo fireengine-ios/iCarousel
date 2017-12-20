@@ -39,8 +39,13 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
     func showShare(rect: CGRect?, urls: [String]) { }
     
     func checkDelete(okHandler: @escaping () -> Void) {
-        let controller = PopUpController.with(title: TextConstants.actionSheetDelete, message: TextConstants.deleteText, image: .delete, firstButtonTitle: TextConstants.offersOk, secondButtonTitle: TextConstants.cancel, firstAction: { vc in
-            vc.close(completion: okHandler)
+        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                              message: TextConstants.deleteFilesText,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
         })
         
         RouterVC().presentViewController(controller: controller)
