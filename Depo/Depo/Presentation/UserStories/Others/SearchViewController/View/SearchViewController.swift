@@ -202,7 +202,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     }
     
     func endSearchRequestWith(text: String) {
-        self.collectionView.isHidden = false
+        self.collectionView.isHidden = !noFilesView.isHidden
         setCurrentPlayState()
         if let searchBar = self.navigationBar.topItem?.titleView {
             if text != (searchBar as! UISearchBar).text! {
