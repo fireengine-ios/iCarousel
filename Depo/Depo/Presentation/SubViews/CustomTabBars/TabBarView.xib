@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,6 +14,7 @@
                 <outlet property="bottomTabBarConstraint" destination="h5L-B7-j4z" id="5aU-u1-biQ"/>
                 <outlet property="containerViewBottomConstraint" destination="cb3-Bd-ooM" id="cSN-dV-FBF"/>
                 <outlet property="contentView" destination="i0i-at-wPy" id="UmC-zb-APO"/>
+                <outlet property="curtainColorView" destination="bUS-H9-z0e" id="jxS-Sd-X5Y"/>
                 <outlet property="curtainView" destination="kYF-ga-W3s" id="Svh-NZ-Ok0"/>
                 <outlet property="musicBarContainer" destination="EuE-DG-HiM" id="MEn-uJ-knm"/>
                 <outlet property="musicBarContainerHeightConstraint" destination="HyB-SJ-gXC" id="uhu-aK-4gX"/>
@@ -42,6 +43,18 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYF-ga-W3s" userLabel="curtain">
                     <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUS-H9-z0e">
+                            <rect key="frame" x="0.0" y="10" width="375" height="593"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="bUS-H9-z0e" firstAttribute="leading" secondItem="kYF-ga-W3s" secondAttribute="leading" id="AF9-bk-5Bp"/>
+                        <constraint firstAttribute="trailing" secondItem="bUS-H9-z0e" secondAttribute="trailing" id="Utj-IQ-JyM"/>
+                        <constraint firstAttribute="bottom" secondItem="bUS-H9-z0e" secondAttribute="bottom" id="gw6-Kg-UTs"/>
+                        <constraint firstItem="bUS-H9-z0e" firstAttribute="top" secondItem="kYF-ga-W3s" secondAttribute="top" constant="10" id="pfC-uT-uHf"/>
+                    </constraints>
                 </view>
                 <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="CustomTabBar" customModule="Depo_LifeTech" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="618" width="375" height="49"/>
