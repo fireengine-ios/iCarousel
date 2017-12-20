@@ -89,6 +89,11 @@ class Sesssion: NSObject, NSCoding {
     }
     
     
+    public func clearRemeberMeToken() {
+        rememberMeToken = nil
+    }
+    
+    
     //MARK: NSCoding
     
     public required init?(coder aDecoder: NSCoder) {
