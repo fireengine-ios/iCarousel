@@ -123,10 +123,11 @@ class WrapItemFileService: WrapItemFileOperations {
                                             uploadType: .syncToUse,
                                             uploadStategy: .WithoutConflictControl,
                                             uploadTo: .MOBILE_UPLOAD,
-                                            success: { self.waitItemsDetails(for: items,
-                                                                             maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
-                                                                             success: success,
-                                                                             fail: fail) },
+                                            success: { [weak self] in
+                                                            self?.waitItemsDetails(for: items,
+                                                                                   maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
+                                                                                   success: success,
+                                                                                   fail: fail) },
                                             fail: fail)
     }
     
@@ -206,7 +207,7 @@ class WrapItemFileService: WrapItemFileOperations {
 
     private func waitItemsDetails(for items: [WrapData], currentAttempt: Int = 0, maxAttempts: Int, success: FileOperationSucces?, fail: FailResponse?) {
         let fileService = FileService()
-        fileService.details(uuids: items.map({ $0.uuid }), success: { (updatedItems) in
+        fileService.details(uuids: items.map({ $0.uuid }), success: { [weak self] (updatedItems) in
             for item in updatedItems {
                 if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
                     itemToUpdate.metaData = item.metaData
@@ -218,7 +219,7 @@ class WrapItemFileService: WrapItemFileOperations {
                 success?()
             } else if currentAttempt < maxAttempts {
                 sleep(NumericConstants.detailsLoadingTimeAwait)
-                self.waitItemsDetails(for: items,
+                self?.waitItemsDetails(for: items,
                                       currentAttempt: currentAttempt + 1,
                                       maxAttempts: maxAttempts,
                                       success: success,
