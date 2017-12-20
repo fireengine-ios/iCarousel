@@ -58,6 +58,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
 
     let musicBar = MusicBar.initFromXib()
     let player: MediaPlayer = factory.resolve()
+    let cameraService: CameraService = CameraService()
     
     var customNavigationControllers: [UINavigationController] = []
     
@@ -505,9 +506,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
     func buttonGotPressed(button: SubPlussButtonView) {
         changeViewState(state: false)
         if (button == photoBtn ){
-           let cameraService = CameraService()
             cameraService.showCamera(onViewController: self)
-            
             return
         }
         if (button == folderBtn){
