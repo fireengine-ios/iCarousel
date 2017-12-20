@@ -135,9 +135,9 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
-        if status != .executing {
+//        if status != .executing {
             status = .executing
-        }
+//        }
         
         UploadService.default.uploadFileList(items: items.sorted(by:{$0.fileSize < $1.fileSize}),
                                              uploadType: .autoSync,

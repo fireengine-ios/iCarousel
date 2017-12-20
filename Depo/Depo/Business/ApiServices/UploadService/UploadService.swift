@@ -21,7 +21,9 @@ final class UploadService: BaseRequestService {
     private let uploadQueue: OperationQueue
     private var uploadOperations = [UploadOperations]()
     
-    private var allSyncOperationsCount = 0
+    private var allSyncOperationsCount: Int {
+        return uploadOperations.filter({ $0.uploadType == .autoSync }).count
+    }
     private var allUploadOperationsCount = 0
     
     private var finishedSyncOperationsCount : Int {
@@ -127,7 +129,6 @@ final class UploadService: BaseRequestService {
                     operation.cancel()
                     if let index = self.uploadOperations.index(of: operation){
                         self.uploadOperations.remove(at: index)
-                        self.allSyncOperationsCount -= 1
                     }
                     return false
                 }
@@ -166,7 +167,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if self.allUploadOperationsCount == self.finishedUploadOperationsCount {
-                    self.clearUlpoadCounters()
+                    self.clearUploadCounters()
                     WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
                     success?()
                 }
@@ -177,7 +178,7 @@ final class UploadService: BaseRequestService {
                 self.finishedUploadOperationsCount += 1
                 
                 if self.allUploadOperationsCount == self.finishedUploadOperationsCount {
-                    self.clearUlpoadCounters()
+                    self.clearUploadCounters()
                     self.uploadOperations = self.uploadOperations.flatMap({
                         if $0.uploadType == .autoSync {
                             return $0
@@ -216,14 +217,14 @@ final class UploadService: BaseRequestService {
         guard !itemsToSync.isEmpty else {
             return nil
         }
-        
-        WrapItemOperatonManager.default.startOperationWith(type: .sync, allOperations: itemsToSync.count, completedOperations: 0)
-        self.allSyncOperationsCount += itemsToSync.count
+        if allSyncOperationsCount == 0 {
+            WrapItemOperatonManager.default.startOperationWith(type: .sync, allOperations: itemsToSync.count, completedOperations: 0)
+        }
         
         let firstObject = itemsToSync.first!
         WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
                                                                     object: firstObject,
-                                                                    allOperations: self.allSyncOperationsCount,
+                                                                    allOperations: self.allSyncOperationsCount + itemsToSync.count,
                                                                     completedOperations: self.finishedSyncOperationsCount)
         let operations: [UploadOperations] = itemsToSync.flatMap {
             let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { (finishedOperation) in
@@ -288,7 +289,7 @@ final class UploadService: BaseRequestService {
         uploadOperations.forEach { $0.cancel() }
         uploadOperations.removeAll()
         
-        clearUlpoadCounters()
+        clearUploadCounters()
         clearSyncCounters()
         
         WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
@@ -317,20 +318,17 @@ final class UploadService: BaseRequestService {
         WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
     }
     
-    private func clearUlpoadCounters() {
+    private func clearUploadCounters() {
         allUploadOperationsCount = 0
         finishedUploadOperationsCount = 0
     }
     
     private func clearSyncCounters() {
-        allSyncOperationsCount = 0
         finishedPhotoSyncOperationsCount = 0
         finishedVideoSyncOperationsCount = 0
     }
     
     private func resetSyncCounters(for type: FileType) {
-        allSyncOperationsCount = uploadOperations.filter({ $0.uploadType == .autoSync && $0.item.fileType == type }).count
-        
         if type == .image { finishedPhotoSyncOperationsCount = 0 }
         else if type == .video { finishedVideoSyncOperationsCount = 0 }
     }
