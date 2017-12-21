@@ -29,8 +29,7 @@ class TurkcellSecurityViewController: UIViewController {
                            forCellReuseIdentifier: CellsIdConstants.settingsTableViewSwitchCellID)
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
+  
         output.viewIsReady()
     }
     
