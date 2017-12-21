@@ -29,6 +29,10 @@ class PopUpService{
         UserDefaults.standard.set(1, forKey: getKeyForLoginCountForUser)
     }
     
+    func setLoginCountForShowImmediately(){
+        UserDefaults.standard.set(NumericConstants.countOfLoginBeforeNeedShowUploadOffPopUp, forKey: getKeyForLoginCountForUser)
+    }
+    
     func checkIsNeedShowUploadOffPopUp(){
         SingletonStorage.shared.getAccountInfoForUser(success: { (success) in
             let count = PopUpService.shared.getLoginCountForUser()
