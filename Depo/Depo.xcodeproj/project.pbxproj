@@ -855,7 +855,7 @@
 		8C0E8E301FDEBDFF00789C91 /* AppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB43341F86678D00789FA6 /* AppConfigurator.swift */; };
 		8C0E8E311FDEBDFF00789C91 /* ImportFromInstagramPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */; };
 		8C0E8E321FDEBDFF00789C91 /* UsageInfoInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E51F3F18FA00EFDC6D /* UsageInfoInteractorOutput.swift */; };
-		8C0E8E331FDEBDFF00789C91 /* SyncServiceManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE246A0D1F3D2CDE008DF705 /* SyncServiceManger.swift */; };
+		8C0E8E331FDEBDFF00789C91 /* SyncServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE246A0D1F3D2CDE008DF705 /* SyncServiceManager.swift */; };
 		8C0E8E341FDEBDFF00789C91 /* UploadFromLifeBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCE1FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift */; };
 		8C0E8E351FDEBDFF00789C91 /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
 		8C0E8E361FDEBDFF00789C91 /* RemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23BB1F45718700607660 /* RemoteService.swift */; };
@@ -1613,7 +1613,7 @@
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
 		CE2469F51F3BF8F3008DF705 /* CreateStoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2469F41F3BF8F3008DF705 /* CreateStoryService.swift */; };
 		CE246A031F3C5B5E008DF705 /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE246A021F3C5B5E008DF705 /* UploadService.swift */; };
-		CE246A0E1F3D2CDE008DF705 /* SyncServiceManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE246A0D1F3D2CDE008DF705 /* SyncServiceManger.swift */; };
+		CE246A0E1F3D2CDE008DF705 /* SyncServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE246A0D1F3D2CDE008DF705 /* SyncServiceManager.swift */; };
 		CE24FB8B1F0B149D00C55188 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24FB8A1F0B117B00C55188 /* CameraService.swift */; };
 		CE274D611FB4806400CD53D7 /* Equatable+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */; };
 		CE27C31E1EF9515400D4D156 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
@@ -2945,7 +2945,7 @@
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
 		CE2469F41F3BF8F3008DF705 /* CreateStoryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryService.swift; sourceTree = "<group>"; };
 		CE246A021F3C5B5E008DF705 /* UploadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
-		CE246A0D1F3D2CDE008DF705 /* SyncServiceManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncServiceManger.swift; sourceTree = "<group>"; };
+		CE246A0D1F3D2CDE008DF705 /* SyncServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncServiceManager.swift; sourceTree = "<group>"; };
 		CE24FB8A1F0B117B00C55188 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equatable+Contains.swift"; sourceTree = "<group>"; };
 		CE2976D31FD58E1F00350F3A /* LocalAlbumPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumPresenter.swift; sourceTree = "<group>"; };
@@ -6672,7 +6672,7 @@
 		CE246A0C1F3D2CDE008DF705 /* SyncService */ = {
 			isa = PBXGroup;
 			children = (
-				CE246A0D1F3D2CDE008DF705 /* SyncServiceManger.swift */,
+				CE246A0D1F3D2CDE008DF705 /* SyncServiceManager.swift */,
 				B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */,
 				B579E8181FE288A500F47B0A /* PhotoSyncService.swift */,
 				B579E81A1FE2892200F47B0A /* VideoSyncService.swift */,
@@ -9458,7 +9458,7 @@
 				8C0E8E301FDEBDFF00789C91 /* AppConfigurator.swift in Sources */,
 				8C0E8E311FDEBDFF00789C91 /* ImportFromInstagramPresenter.swift in Sources */,
 				8C0E8E321FDEBDFF00789C91 /* UsageInfoInteractorOutput.swift in Sources */,
-				8C0E8E331FDEBDFF00789C91 /* SyncServiceManger.swift in Sources */,
+				8C0E8E331FDEBDFF00789C91 /* SyncServiceManager.swift in Sources */,
 				8C0E8E341FDEBDFF00789C91 /* UploadFromLifeBoxViewController.swift in Sources */,
 				8C0E8E351FDEBDFF00789C91 /* RequestsKey.swift in Sources */,
 				8C0E8E361FDEBDFF00789C91 /* RemoteService.swift in Sources */,
@@ -10377,7 +10377,7 @@
 				7CDB43351F86678D00789FA6 /* AppConfigurator.swift in Sources */,
 				CEF0C2841FC5493200105C31 /* ImportFromInstagramPresenter.swift in Sources */,
 				D47863F51F3F18FA00EFDC6D /* UsageInfoInteractorOutput.swift in Sources */,
-				CE246A0E1F3D2CDE008DF705 /* SyncServiceManger.swift in Sources */,
+				CE246A0E1F3D2CDE008DF705 /* SyncServiceManager.swift in Sources */,
 				7C233CD81FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift in Sources */,
 				CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */,
 				7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */,
