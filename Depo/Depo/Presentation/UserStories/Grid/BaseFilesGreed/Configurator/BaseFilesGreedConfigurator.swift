@@ -16,7 +16,8 @@ class BaseFilesGreedModuleConfigurator {
                    fileFilters: [GeneralFilesFiltrationType],
                    bottomBarConfig: EditingBarConfig?,
                    visibleSlider: Bool = false, topBarConfig: GridListTopBarConfig?,
-                   alertSheetConfig: AlertFilesActionsSheetInitialConfig?) {
+                   alertSheetConfig: AlertFilesActionsSheetInitialConfig?,
+                   alertSheetExcludeTypes: [ElementTypes]? = nil) {
         
         let router = BaseFilesGreedRouter()
         
@@ -26,11 +27,15 @@ class BaseFilesGreedModuleConfigurator {
         } else {
             presenter = DocumentsGreedPresenter()
         }
-                
+        
+        if let alertSheetExcludeTypes = alertSheetExcludeTypes {
+            presenter?.alertSheetExcludeTypes = alertSheetExcludeTypes
+        }
         presenter?.bottomBarConfig = bottomBarConfig
         
         presenter!.view = viewController
         presenter!.router = router
+        router.presenter = presenter
         presenter?.moduleOutput = moduleOutput
         
         if let barConfig = bottomBarConfig {
@@ -84,6 +89,7 @@ class BaseFilesGreedModuleConfigurator {
         
         presenter.view = viewController
         presenter.router = router
+        router.presenter = presenter
         
         let interactor = BaseFilesGreedInteractor(remoteItems: remoteServices)
         interactor.output = presenter
@@ -105,6 +111,7 @@ class BaseFilesGreedModuleConfigurator {
         presenter.view = viewController
         presenter.router = router
         router.view = viewController
+        router.presenter = presenter
         
         if let barConfig = bottomBarConfig {
             let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
