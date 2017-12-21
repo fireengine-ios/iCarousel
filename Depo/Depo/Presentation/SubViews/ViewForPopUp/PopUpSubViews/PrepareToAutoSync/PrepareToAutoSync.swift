@@ -42,7 +42,7 @@ class PrepareToAutoSync: BaseView {
             titleImageView.image = UIImage(named: "SyncingPopUpImage")
         }
         
-        let timer = Timer.scheduledTimer(timeInterval: 0.02,
+        let timer = Timer.scheduledTimer(timeInterval: 0.1,
                                          target: self,
                                          selector: #selector(setProgress),
                                          userInfo: nil,
