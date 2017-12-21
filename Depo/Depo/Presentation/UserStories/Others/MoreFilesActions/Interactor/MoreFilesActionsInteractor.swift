@@ -233,7 +233,7 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
             })
         }
         
-        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
                                               message: TextConstants.removeAlbums,
                                               image: .delete,
                                               firstButtonTitle: TextConstants.cancel,
@@ -270,8 +270,8 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
             }
         }
         
-        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
-                                              message: TextConstants.deleteFilesText,
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                              message: TextConstants.removeFromAlbum,
                                               image: .delete,
                                               firstButtonTitle: TextConstants.cancel,
                                               secondButtonTitle: TextConstants.ok,
