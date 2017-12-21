@@ -38,6 +38,9 @@ struct TextConstants {
     static let registrationMailError = "Please check the e-mail address."
     static let registrationPasswordNotMatchError = "Password fields do not match."
     
+    static let registrationEmailPopupTitle = "E-mail Usage Information"
+    static let registrationEmailPopupMessage = "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications"
+    
     //MARK: - Registration Error Messages
     static let invalidMailErrorText = NSLocalizedString("EmailFormatErrorMessage", comment: "")
     static let invalidPhoneNumberText = NSLocalizedString("MsisdnFormatErrorMessage", comment: "")
@@ -488,7 +491,7 @@ struct TextConstants {
     static let autoUploaOffPopUpText = "Auto Upload is off.\nGo to setting to auto sync."
     static let autoUploaOffCancel = "Cancel"
     static let autoUploaOffSettings = "Settings"
-    static let waitingForWiFiPopUpTitle = "Waiting for a connection to auto-sync"
+    static let waitingForWiFiPopUpTitle = "Waiting for Wi-Fi connection to auto-sync"
     static let waitingForWiFiPopUpSettingsButton = "Settings"
     static let waitingForWiFiPopUpSyncButton = "Sync with data plan"
     static let prepareToAutoSunc = "Preparing to auto sync..."
@@ -599,7 +602,7 @@ struct TextConstants {
     static let offersBuy = "Buy"
     static let offersOk = "OK"
     static let offersSettings = "Settings"
-    static let offersPrice = "%.2f ₺ / month"
+    static let offersPrice = "%.2f %@ / month"
     
     // MARK: - OTP
     static let otpNextButton = "Next"
@@ -626,6 +629,9 @@ struct TextConstants {
     
     static let errorUnknown = "Unknown error"
     static let errorServer = "Server error"
+    
+    static let errorFileSystemAccessDenied = "Can't get access to file system"
+    static let errorNothingToDownload = "Nothing to download"
     
     static let canceledOperationTextError = "Cancelled"
     
@@ -676,6 +682,7 @@ struct TextConstants {
     static let deleteFilesText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
     static let deleteAlbums = "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"
     static let removeAlbums = "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?"
+    static let removeFromAlbum = "This file will be removed only from your album. You can access this file from Photos tab"
     
     static let locationServiceDisable = "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu."
 }
@@ -690,7 +697,7 @@ struct NumericConstants {
     static let maxDetailsLoadingAttempts = 5
     static let detailsLoadingTimeAwait = UInt32(2)
     
-    static let countOfLoginBeforeNeedShowUploadOffPopUp = 4
+    static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
     
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2

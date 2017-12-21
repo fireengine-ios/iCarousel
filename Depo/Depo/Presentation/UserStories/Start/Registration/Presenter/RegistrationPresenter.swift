@@ -43,7 +43,7 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     }
     
     func userValid(email: String, phone: String, passpword: String) {
-        router.termsAndServices(with: view)
+        router.termsAndServices(with: view, email: email)
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {

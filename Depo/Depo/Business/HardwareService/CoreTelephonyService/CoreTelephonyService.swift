@@ -73,16 +73,15 @@ import CoreTelephony
     
     func countryCodeByLang() -> String {
         let localCode = Device.locale
-        var phoneCode = "+90"
-        if localCode == "uk" || localCode == "ru" {
-            phoneCode = "+380"
-        } else if localCode == "ro" {
-            phoneCode = "+373"
-        } else if localCode == "de" {
-            phoneCode = "+49"
-        }
         
-        return phoneCode
+        switch localCode {
+        case "uk", "ru": return "+380"
+        case "de": return "+49"
+        case "ar": return "966"
+        case "ro": return "+373"
+        case "es": return "+34"
+        default: return "+90"
+        }
     }
     
     func callingCodeMap() -> [String:String] {

@@ -35,6 +35,8 @@ class AutoSyncDataStorage: NSObject {
         if model.isAutoSyncEnable {
             LocationManager.shared.startUpdateLocation()
         }else{
+            PopUpService.shared.setLoginCountForShowImmediately()
+            PopUpService.shared.checkIsNeedShowUploadOffPopUp()
             LocationManager.shared.stopUpdateLocation()
         }
         

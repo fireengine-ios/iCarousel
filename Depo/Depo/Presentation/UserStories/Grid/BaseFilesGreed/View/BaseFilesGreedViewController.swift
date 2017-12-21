@@ -83,7 +83,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
         
-        
         output.viewIsReady(collectionView: collectionView)
         
         //carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)

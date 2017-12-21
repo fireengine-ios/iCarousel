@@ -39,12 +39,16 @@ import AVFoundation
     
     func showCamera(onViewController sourceViewViewController: UIViewController) {
         cameraIsAvalible { [weak self] accessGranted in
-            guard accessGranted else {
-                self?.showAccessAlert()
+            guard let `self` = self else {
                 return
             }
             
-            self?.showPickerController(type: .camera, onViewController: sourceViewViewController)
+            guard accessGranted else {
+                self.showAccessAlert()
+                return
+            }
+            
+            self.showPickerController(type: .camera, onViewController: sourceViewViewController)
         }
     }
     
@@ -65,11 +69,11 @@ import AVFoundation
         picker.delegate = cameraSupportedVC
         picker.allowsEditing = true
         
-        DispatchQueue.main.async(execute: {
+        DispatchQueue.main.async {
             sourceViewViewController.present(picker,
                                              animated: true,
                                              completion: nil)
-        })
+        }
     }
     
     private func showAccessAlert() {

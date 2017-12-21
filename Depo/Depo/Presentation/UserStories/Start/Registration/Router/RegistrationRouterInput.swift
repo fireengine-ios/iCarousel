@@ -10,5 +10,5 @@ import UIKit
 
 protocol RegistrationRouterInput {
     func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
-    func termsAndServices(with delegate: RegistrationViewDelegate?)
+    func termsAndServices(with delegate: RegistrationViewDelegate?, email: String)
 }

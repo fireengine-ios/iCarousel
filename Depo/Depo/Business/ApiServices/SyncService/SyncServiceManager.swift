@@ -1,5 +1,5 @@
 //
-//  SyncServiceManger.swift
+//  SyncServiceManager.swift
 //  Depo_LifeTech
 //
 //  Created by Konstantin on 12/14/17.
@@ -10,8 +10,8 @@ import Foundation
 import Reachability
 
 
-class SyncServiceManger {
-    static let shared = SyncServiceManger()
+class SyncServiceManager {
+    static let shared = SyncServiceManager()
     
     private let reachabilityService = Reachability()
     private let autoSyncStorage = AutoSyncDataStorage()
@@ -122,7 +122,6 @@ class SyncServiceManger {
         }
         
         guard syncSettings.isAutoSyncEnable else {
-            PopUpService.shared.checkIsNeedShowUploadOffPopUp()
             stop(reachabilityDidChange: false, photo: true, video: true)
             return
         }
@@ -185,7 +184,7 @@ class SyncServiceManger {
 
 
 //MARK: Notifications
-extension SyncServiceManger {
+extension SyncServiceManager {
     private func subscribeForNotifications() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
@@ -207,7 +206,6 @@ extension SyncServiceManger {
         guard !isSyncCancelled else {
             WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
             WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
-            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
             return
         }
         
