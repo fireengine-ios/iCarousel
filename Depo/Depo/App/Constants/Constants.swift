@@ -627,6 +627,9 @@ struct TextConstants {
     static let errorUnknown = "Unknown error"
     static let errorServer = "Server error"
     
+    static let errorFileSystemAccessDenied = "Can't get access to file system"
+    static let errorNothingToDownload = "Nothing to download"
+    
     static let canceledOperationTextError = "Cancelled"
     
     static let ACCOUNT_NOT_FOUND = "Account cannot be found"

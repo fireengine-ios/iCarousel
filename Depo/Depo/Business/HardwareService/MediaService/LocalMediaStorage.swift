@@ -311,8 +311,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 return request?.placeholderForCreatedAsset
             }
             
-        } catch let e {
-            print(e.localizedDescription)
+        } catch {
+            print(error.localizedDescription)
         }
         return nil
     }

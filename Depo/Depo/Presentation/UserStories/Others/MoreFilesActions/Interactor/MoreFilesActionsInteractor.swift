@@ -70,27 +70,48 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func shareSmallSize(sourceRect: CGRect?){
-        if let array = sharingItems as? [WrapData]{
-            let imagesArray: [ImageForDowload] = array.flatMap({
-                let image = ImageForDowload()
-                image.downloadURL = $0.metaData?.smalURl
-                image.imageName = $0.name
-                return image
-            })
-            shareImagesByURLs(images: imagesArray, sourceRect: sourceRect)
+        if let items = sharingItems as? [WrapData] {
+            let files: [FileForDownload] = items.flatMap({ FileForDownload(forSmallURL: $0) })
+            shareFiles(filesForDownload: files, sourceRect: sourceRect)
         }
+        
     }
     
     func shareOrignalSize(sourceRect: CGRect?){
-        if let array = sharingItems as? [WrapData]{
-            let imagesArray: [ImageForDowload] = array.flatMap({
-                let image = ImageForDowload()
-                image.downloadURL = $0.urlToFile
-                image.imageName = $0.name
-                return image
-            })
-            shareImagesByURLs(images: imagesArray, sourceRect: sourceRect)
+        if let items = sharingItems as? [WrapData] {
+            let files: [FileForDownload] = items.flatMap({ FileForDownload(forOriginalURL: $0) })
+            shareFiles(filesForDownload: files, sourceRect: sourceRect)
         }
+    }
+    
+    private func shareFiles(filesForDownload: [FileForDownload], sourceRect: CGRect?) {
+        let downloader = FilesDownloader()
+        output?.operationStarted(type: .share)
+        
+        downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] (fileURLs, directoryURL) in
+                DispatchQueue.main.async {
+                    self?.output?.operationFinished(type: .share)
+                    
+                    let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
+                    
+                    activityVC.completionWithItemsHandler = { (_, _, _, _) in
+                        do {
+                            try FileManager.default.removeItem(at: directoryURL)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    
+                    if let tempoRect = sourceRect {//if ipad
+                        activityVC.popoverPresentationController?.sourceRect = tempoRect
+                    }
+                    
+                    let router = RouterVC()
+                    router.presentViewController(controller: activityVC)
+                }
+            }, fail: { [weak self] (errorMessage) in
+                self?.output?.operationFailed(type: .share, message: errorMessage)
+        })
     }
     
     private func shareImagesByURLs(images: [ImageForDowload], sourceRect: CGRect?){
