@@ -38,6 +38,9 @@ struct TextConstants {
     static let registrationMailError = "Please check the e-mail address."
     static let registrationPasswordNotMatchError = "Password fields do not match."
     
+    static let registrationEmailPopupTitle = "E-mail Usage Information"
+    static let registrationEmailPopupMessage = "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications"
+    
     //MARK: - Registration Error Messages
     static let invalidMailErrorText = NSLocalizedString("EmailFormatErrorMessage", comment: "")
     static let invalidPhoneNumberText = NSLocalizedString("MsisdnFormatErrorMessage", comment: "")
