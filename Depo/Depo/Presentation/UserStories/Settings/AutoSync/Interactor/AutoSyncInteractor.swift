@@ -23,7 +23,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
         output.onSettingSaved()
         
         dataStorage.saveAutoSyncModel(model: setting, uniqueUserId: uniqueUserID ?? "")
-        SyncServiceManger.shared.updateSyncSettings(settingsModel: setting)
+        SyncServiceManager.shared.updateSyncSettings(settingsModel: setting)
     }
     
 }
