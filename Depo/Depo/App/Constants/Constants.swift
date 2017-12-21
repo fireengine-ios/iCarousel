@@ -114,6 +114,7 @@ struct TextConstants {
     static let search = "Search"
     static let searchRecentSearchTitle = "RECENT SEARCHES"
     static let searchSuggestionsTitle = "SUGGESTIONS"
+    static let searchNoFilesToCreateStoryError = "No files to create a story"
     
     static let noFilesFoundInSearch = "No results found for your query."
     

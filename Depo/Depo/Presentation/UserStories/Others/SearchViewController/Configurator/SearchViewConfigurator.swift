@@ -23,7 +23,6 @@ class SearchViewConfigurator {
             let gridListTopBar = GridListTopBar.initFromXib()
             viewController.underNavBarBar = gridListTopBar
             gridListTopBar.delegate = viewController
-            
         }
         
         let interactor = SearchViewInteractor(remoteItems: remoteServices, recentSearches: recentSearches)
@@ -31,5 +30,8 @@ class SearchViewConfigurator {
         
         presenter.interactor = interactor
         viewController.output = presenter
+        
+        viewController.needShowTabBar = true
+        viewController.floatingButtonsArray = [.floatingButtonTakeAPhoto, .floatingButtonCreateAStory]
     }
 }

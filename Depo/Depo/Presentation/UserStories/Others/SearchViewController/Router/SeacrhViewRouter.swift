@@ -9,7 +9,7 @@
 import Foundation
 
 class SeacrhViewRouter: SearchViewRouterInput {
-    
+
     func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem]) {
         let router = RouterVC()
         if (selectedItem.fileType == FileType.photoAlbum) {
@@ -34,6 +34,13 @@ class SeacrhViewRouter: SearchViewRouterInput {
             //
             router.pushViewController(viewController: controller)
         }
-        
+    }
+    
+    func createStoryWithItems(_ items: [BaseDataSourceItem]) {
+        RouterVC().createStoryName(items: items)
+    }
+    
+    func showNoFilesToCreateStoryAlert() {
+        UIApplication.showErrorAlert(message: TextConstants.searchNoFilesToCreateStoryError)
     }
 }

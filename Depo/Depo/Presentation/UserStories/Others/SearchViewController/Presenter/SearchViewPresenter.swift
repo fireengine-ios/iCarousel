@@ -22,6 +22,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     var showedSpinner = false
     
     let player: MediaPlayer = factory.resolve()
+    var tabBarActionHandler: TabBarActionHandler { return self }
 
     var filters: [MoreActionsConfig.MoreActionsFileType] = []
     var syncType: MoreActionsConfig.CellSyncType = MoreActionsConfig.CellSyncType.all
@@ -211,6 +212,17 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         
     }
     
+    private func createStory() {
+        var items = dataSource.allItems.flatMap { $0 }
+        items = items.filter { $0.fileType == .image }
+        
+        if items.count > 0 {
+            router.createStoryWithItems(items)
+        } else {
+            router.showNoFilesToCreateStoryAlert()
+        }
+    }
+    
     //MARK: - View output/TopBar/UnderNavBarBar Delegates
     
     func viewAppearanceChangedTopBar(asGrid: Bool) {
@@ -234,5 +246,20 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             dataSource.updateDisplayngType(type: .list)
         }
     }
+}
+
+extension SearchViewPresenter: TabBarActionHandler {
     
+    func canHandleTabBarAction(_ action: TabBarViewController.Action) -> Bool {
+        return action == .createStory
+    }
+    
+    func handleAction(_ action: TabBarViewController.Action) {
+        switch action {
+        case .createStory:
+            createStory()
+        default:
+            break
+        }
+    }
 }
