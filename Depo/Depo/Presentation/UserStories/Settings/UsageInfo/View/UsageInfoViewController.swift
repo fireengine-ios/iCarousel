@@ -89,8 +89,11 @@ extension UsageInfoViewController: UsageInfoViewInput {
         memoryUsageProgressView.progress = 1 - Float(usedBytes)/Float(quotaBytes)
         
         let quotaString = quotaBytes.bytesString
-        let remaindSize = (quotaBytes - usedBytes).bytesString
-        memoryUsageLabel.text = String(format: TextConstants.usageInfoBytesRemained, remaindSize, quotaString)
+        var remaind = quotaBytes - usedBytes
+        if remaind < 0 {
+            remaind = 0
+        }
+        memoryUsageLabel.text = String(format: TextConstants.usageInfoBytesRemained, remaind.bytesString, quotaString)
         
         
         internetDataUsages = usage.internetDataUsage
