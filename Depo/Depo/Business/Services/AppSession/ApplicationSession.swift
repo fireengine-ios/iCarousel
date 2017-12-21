@@ -89,9 +89,11 @@ class Sesssion: NSObject, NSCoding {
     }
     
     
-    public func clearRemeberMeToken() {
+    public func clearTokens() {
         rememberMeToken = nil
+        authToken = nil
     }
+
     
     
     //MARK: NSCoding
