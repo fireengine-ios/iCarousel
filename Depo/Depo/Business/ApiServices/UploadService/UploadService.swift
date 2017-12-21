@@ -142,9 +142,13 @@ final class UploadService: BaseRequestService {
         
         WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: itemsToUpload.count, completedOperations: 0)
         self.allUploadOperationsCount += itemsToUpload.count
+        
+        let firstObject = itemsToUpload.first!
         WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
-                                                                    allOperations: self.allUploadOperationsCount,
-                                                                    completedOperations: self.finishedUploadOperationsCount)
+                                                                    object: firstObject,
+                                                                    allOperations: self.allSyncOperationsCount + itemsToUpload.count,
+                                                                    completedOperations: self.finishedSyncOperationsCount)
+        
         
         let operations: [UploadOperations] = itemsToUpload.flatMap {
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { (finishedOperation) in
@@ -159,6 +163,7 @@ final class UploadService: BaseRequestService {
                 }
                 self.finishedUploadOperationsCount += 1
                 WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
+                                                                            object: finishedOperation.item,
                                                                             allOperations: self.allUploadOperationsCount,
                                                                             completedOperations: self.finishedUploadOperationsCount)
                 
