@@ -95,7 +95,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeAllFilesViewController(with nibName:String) -> UIViewController {
+    class func initializeAllFilesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonNewFolder])
@@ -103,13 +103,15 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
-            defaultGridListViewtype: .Grid,
+            defaultGridListViewtype: viewType,
             availableSortTypes: baseSortTypes,
-            defaultSortType: .TimeNewOld,
+            defaultSortType: sortType,
             availableFilter: false,
             showGridListButton: true
         )
-        configurator.configure(viewController: viewController, remoteServices: AllFilesService(requestSize: 100),
+        configurator.configure(viewController: viewController,
+                               moduleOutput: moduleOutput,
+                               remoteServices: AllFilesService(requestSize: 100),
                                fileFilters: [.localStatus(.nonLocal), .parentless ],
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
@@ -119,7 +121,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeFavoritesViewController(with nibName:String) -> UIViewController {
+    class func initializeFavoritesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory])
@@ -128,17 +130,19 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
-            defaultGridListViewtype: .Grid,
+            defaultGridListViewtype: viewType,
             availableSortTypes: baseSortTypes,
-            defaultSortType: .TimeNewOld,
+            defaultSortType: sortType,
             availableFilter: false,
             showGridListButton: true
         )
-        configurator.configure(viewController: viewController, remoteServices: FavouritesService(requestSize: 100),
+        configurator.configure(viewController: viewController,
+                               moduleOutput: moduleOutput,
+                               remoteServices: FavouritesService(requestSize: 100),
                                fileFilters: [.favoriteStatus(.favorites)],
-                                bottomBarConfig: bottomBarConfig,
-                                topBarConfig: gridListTopBarConfig,
-                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+                               bottomBarConfig: bottomBarConfig,
+                               topBarConfig: gridListTopBarConfig,
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                       selectionModeTypes: [.rename]))
         viewController.mainTitle = TextConstants.homeButtonFavorites
         return viewController

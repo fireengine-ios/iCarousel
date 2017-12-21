@@ -331,18 +331,22 @@ class RouterVC: NSObject {
     
     // MARK: All Files
     
-    var allFiles: UIViewController?{
-    
-        let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController")
+    func allFiles(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController",
+                                                                                          moduleOutput: moduleOutput,
+                                                                                          sortType: sortType,
+                                                                                          viewType: viewType)
         return controller
     }
     
     
     // MARK: Favorites
     
-    var favorites: UIViewController?{
-
-        let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController")
+    func favorites(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController",
+                                                                                           moduleOutput: moduleOutput,
+                                                                                           sortType: sortType,
+                                                                                           viewType: viewType)
         return controller
     }
     
