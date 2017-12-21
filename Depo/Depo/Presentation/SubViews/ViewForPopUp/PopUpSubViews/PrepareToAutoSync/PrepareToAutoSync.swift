@@ -26,6 +26,8 @@ class PrepareToAutoSync: BaseView {
     override func configurateView() {
         super.configurateView()
         
+        canSwipe = false
+        
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel.textColor = ColorConstants.textGrayColor
         titleLabel.text = TextConstants.prepareToAutoSunc
