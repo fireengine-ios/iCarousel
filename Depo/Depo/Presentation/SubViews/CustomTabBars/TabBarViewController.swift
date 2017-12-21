@@ -100,22 +100,23 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         return result
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         tabBar.delegate = self
         
-        let items = [("outlineHome",TextConstants.home),
-                     ("outlinePhotosVideos", TextConstants.photoAndVideo),
+        let items = [("outlineHome",""),
+                     ("outlinePhotosVideos", ""),
                      ("", ""),
-                     ("outlineMusic", TextConstants.music),
-                     ("outlineDocs",  TextConstants.documents)]
+                     ("outlineMusic", ""),
+                     ("outlineDocs",  "")]
         
         tabBar.setupItems(withImageToTitleNames: items)
         
         setupCurtainView()
         setupSubButtons()
         setupCustomNavControllers()
-
+        
         selectedIndex = 0
         tabBar.selectedItem = tabBar.items?.first
         
@@ -124,6 +125,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         setupObserving()
         
         player.delegates.add(self)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
     
     deinit {
