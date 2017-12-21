@@ -37,4 +37,6 @@ protocol SettingsRouterInput {
     func goToConnectedToNetworkFailed()
     
     func goTurkcellSecurity()
+    
+    func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?)
 }

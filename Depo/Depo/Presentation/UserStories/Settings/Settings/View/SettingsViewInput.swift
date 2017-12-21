@@ -14,5 +14,5 @@ protocol SettingsViewInput: class {
     func profileInfoChanged()
     func profileWontChange()
 
-    func changeTurkCellSecurity(passcode: Bool, autologin: Bool)
+//    func changeTurkCellSecurity(passcode: Bool, autologin: Bool)
 }

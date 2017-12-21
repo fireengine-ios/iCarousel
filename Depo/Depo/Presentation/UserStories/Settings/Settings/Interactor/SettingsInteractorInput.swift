@@ -13,9 +13,7 @@ protocol SettingsInteractorInput {
     func onLogout()
     func uploadPhoto(withPhoto photo: Data)
     func checkConnectedToNetwork()
-    
-//    func requestTurkCellSecurityStatus()
-//    func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool)
+
     var isPasscodeEmpty: Bool { get }
     var isTurkcellUser: Bool { get }
     var isEmptyMail: Bool { get }

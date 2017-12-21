@@ -40,9 +40,6 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     
     weak var settingsDelegate: SettingsDelegate?
     
-    let turkCellSecurityPasscodeCellIndex = IndexPath(row: 3, section: 1)
-    let turkCellSecurityAutologinCellIndex = IndexPath(row: 4, section: 1)
-    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +51,6 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                              bundle: nil)
         
         tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.settingTableViewCellID)
-        tableView.register(UINib.init(nibName: CellsIdConstants.settingsTableViewSwitchCellID,
-                                      bundle: nil),
-                           forCellReuseIdentifier: CellsIdConstants.settingsTableViewSwitchCellID)
         
         tableView.backgroundColor = UIColor.clear
         
@@ -186,20 +180,15 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                     output.goToActivityTimeline()
                 }
             case 1: // usage info
-                if (settingsDelegate != nil){
+                if (settingsDelegate != nil) {
                     settingsDelegate!.goToUsageInfo()
-                }else{
+                } else {
                     output.goToUsageInfo()
                 }
             case 2: /// passcode
                 showPasscodeOrPasscodeSettings()
             case 3:// Turkcell security
                 output.goTurkcellSecurity()
-//                guard let securityCell = tableView.cellForRow(at: indexPath) as? SettingsTableViewSwitchCell else {
-//                    break
-//                }
-//                securityCell.stateSwitch.setOn(!securityCell.stateSwitch.isOn, animated: true)
-                break
             default:
                 break
             }
@@ -209,7 +198,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
             case 0:
                 if (settingsDelegate != nil) {
                     settingsDelegate!.goToHelpAndSupport()
-                }else{
+                } else {
                     output.goToHelpAndSupport()
                 }
             case 1:
@@ -217,7 +206,6 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
             default:
                 break
             }
-            
         default:
             break
         }
@@ -278,15 +266,6 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         userInfoSubView.dismissLoadingSpinner()
     }
     
-    fileprivate func showMailUpdatePopUp() {
-        let mailController = MailVerificationViewController()
-        mailController.actionDelegate = self
-        mailController.modalPresentationStyle = .overFullScreen
-        mailController.modalTransitionStyle = .crossDissolve
-        self.present(mailController, animated: true, completion: nil)
-        
-    }
-    
 }
 
 // MARK: - UserInfoSubViewViewControllerActionsDelegate
@@ -332,45 +311,17 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func changeTurkCellSecurity(passcode: Bool, autologin: Bool) {
-
-        turkCellSeuritySettingsPassState = passcode
-        turkCellSeuritySettingsAutoLoginState = autologin
-        
-        guard let securityPasscodeCell = tableView.cellForRow(at: turkCellSecurityPasscodeCellIndex) as? SettingsTableViewSwitchCell,
-            let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
-                return
-        }
- 
-        securityPasscodeCell.changeSwithcState(turnOn: passcode)
-        securityAutoLoginCell.changeSwithcState(turnOn: autologin)
-    }
+//    func changeTurkCellSecurity(passcode: Bool, autologin: Bool) {
+//
+//        turkCellSeuritySettingsPassState = passcode
+//        turkCellSeuritySettingsAutoLoginState = autologin
+//        
+//        guard let securityPasscodeCell = tableView.cellForRow(at: turkCellSecurityPasscodeCellIndex) as? SettingsTableViewSwitchCell,
+//            let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
+//                return
+//        }
+// 
+//        securityPasscodeCell.changeSwithcState(turnOn: passcode)
+//        securityAutoLoginCell.changeSwithcState(turnOn: autologin)
+//    }
 }
-
-extension SettingsViewController: SettingsTableViewSwitchCellDelegate {
-    func switchToggled(positionOn: Bool, cell: SettingsTableViewSwitchCell) {
-        
-        guard !output.inNeedOfMail else {
-            showMailUpdatePopUp()
-            cell.stateSwitch.setOn(!positionOn, animated: true)
-            return
-        }
-        guard let securityPasscodeCell = tableView.cellForRow(at: turkCellSecurityPasscodeCellIndex) as? SettingsTableViewSwitchCell,
-            let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
-                return
-        }
-
-        output.turkcellSecurityChanged(passcode: securityPasscodeCell.stateSwitch.isOn, autoLogin: securityAutoLoginCell.stateSwitch.isOn)
-    }
-}
-
-extension SettingsViewController: MailVerificationViewControllerDelegate {
-    func mailVerified(mail: String) {
-        output.mailUpdated(mail: mail)
-    }
-    
-    func mailVerificationFailed() {
-        
-    }
-}
-

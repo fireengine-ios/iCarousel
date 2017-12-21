@@ -9,9 +9,10 @@
 import Foundation
 
 protocol TurkcellSecurityViewInput: class {
-
+    func setupSecuritySettings(passcode: Bool, autoLogin: Bool)
 }
 
 protocol TurkcellSecurityViewOutput: class {
     func viewIsReady()
+    func securityChanged(passcode: Bool, autoLogin: Bool)
 }

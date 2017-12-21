@@ -33,7 +33,6 @@ class SettingsInteractor: SettingsInteractorInput {
     func getCellsData(){
         
         let securityCells = [TextConstants.settingsViewCellActivityTimline,
-//                             TextConstants.settingsViewCellRecentlyDeletedFiles,
                              TextConstants.settingsViewCellUsageInfo,
                              TextConstants.settingsViewCellPasscode]
         
@@ -47,10 +46,14 @@ class SettingsInteractor: SettingsInteractorInput {
             guard let `self` = self else {
                 return
             }
-            self.userInfoResponse = responce as? AccountInfoResponse
+            DispatchQueue.main.async {
+                self.userInfoResponse = responce as? AccountInfoResponse
                 if self.isTurkcellUser {
                     array[1].append(TextConstants.settingsViewCellLoginSettings)
                 }
+                self.output.cellsDataForSettings(array: array)
+            }
+            
         }, fail: { [weak self] (error) in
             DispatchQueue.main.async {
                 self?.output.cellsDataForSettings(array: array)
