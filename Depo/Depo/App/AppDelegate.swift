@@ -113,6 +113,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
+        if !ApplicationSession.sharedSession.session.rememberMe {
+            ApplicationSession.sharedSession.session.clearTokens()
+            ApplicationSession.sharedSession.saveData()
+        }
         UserDefaults.standard.synchronize()
     }
     
