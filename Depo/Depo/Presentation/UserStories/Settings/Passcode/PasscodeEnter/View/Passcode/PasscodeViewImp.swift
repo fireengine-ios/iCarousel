@@ -11,8 +11,23 @@ import UIKit
 final class PasscodeViewImp: UIView, FromNib {
     
     @IBOutlet private weak var passcodeInputView: PasscodeInputView!
-    @IBOutlet private weak var passcodeOutputLabel: UILabel!
-    @IBOutlet weak var passcodeErrorLabel: UILabel!
+    
+    @IBOutlet private weak var passcodeOutputLabel: UILabel! {
+        didSet {
+            passcodeOutputLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            passcodeOutputLabel.textColor = ColorConstants.textGrayColor
+        }
+    }
+    
+    @IBOutlet weak var passcodeErrorLabel: UILabel! {
+        didSet {
+            passcodeErrorLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            passcodeErrorLabel.backgroundColor = UIColor.darkGray
+            passcodeErrorLabel.textColor = UIColor.white
+            passcodeErrorLabel.layer.cornerRadius = 5
+            passcodeErrorLabel.layer.masksToBounds = true
+        }
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,12 +41,7 @@ final class PasscodeViewImp: UIView, FromNib {
     
     private func setup() {
         setupFromNib()
-        
         passcodeInputView.becomeFirstResponder()
-        passcodeErrorLabel.backgroundColor = UIColor.darkGray
-        passcodeErrorLabel.textColor = UIColor.white
-        passcodeErrorLabel.layer.cornerRadius = 5
-        passcodeErrorLabel.layer.masksToBounds = true
     }
     
     lazy var passcodeOutput: PasscodeOutput = {

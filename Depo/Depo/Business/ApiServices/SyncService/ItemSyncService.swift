@@ -11,6 +11,7 @@ import Foundation
 enum AutoSyncStatus {
     case undetermined
     case waitingForWifi
+    case prepairing
     case executing
     case canceled
     case synced
@@ -57,7 +58,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     //MARK: - Public ItemSyncService functions
     
     func start() {
-        guard status != .executing else {
+        guard !status.isContained(in: [.executing, .prepairing]) else {
             appendNewUnsyncedItems()
             return
         }
@@ -80,18 +81,20 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     func startManually() {
-        sync()
+        DispatchQueue.main.async {
+            self.sync()
+        }
     }
     
     
     //MARK: - Private
     
     private func sync() {
-        guard status != .executing else {
+        guard !status.isContained(in: [.executing, .prepairing]) else {
             return
         }
         
-        status = .executing
+        status = .prepairing
         
         localItems.removeAll()
         localItemsMD5s.removeAll()
@@ -132,14 +135,24 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
+//        if status != .executing {
+            status = .executing
+//        }
+        
         UploadService.default.uploadFileList(items: items.sorted(by:{$0.fileSize < $1.fileSize}),
                                              uploadType: .autoSync,
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
-                                             success: {
-                                                self.status = .synced
-        }, fail: { (error) in
-            self.status = .failed
+                                             success: { [weak self] in
+                                                self?.status = .synced
+        }, fail: { [weak self] (error) in
+            self?.status = .failed
+            self?.stop()
+            
+            if case ErrorResponse.httpCode(413) = error {
+                //TODO: add popup 'out of space'
+            }
+            
         })
         
     }
@@ -191,16 +204,20 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
-        let newUnsyncedLocalItems = localUnsyncedItems().filter({ !lastSyncedMD5s.contains($0.md5) })
-        guard !newUnsyncedLocalItems.isEmpty else {
-            return
+        DispatchQueue.main.async {
+            let newUnsyncedLocalItems = self.localUnsyncedItems().filter({ !self.lastSyncedMD5s.contains($0.md5) })
+            guard !newUnsyncedLocalItems.isEmpty else {
+                return
+            }
+            
+            self.upload(items: newUnsyncedLocalItems)
         }
-        
-        upload(items: newUnsyncedLocalItems)
     }
     
     private func postNotification() {
-        NotificationCenter.default.post(name: autoSyncStatusDidChangeNotification, object: nil)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: autoSyncStatusDidChangeNotification, object: nil)
+        }
     }
     
     

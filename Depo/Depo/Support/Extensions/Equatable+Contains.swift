@@ -9,7 +9,7 @@
 import Foundation
 
 extension Equatable {
-    func isСontained(in array: [Self]) -> Bool {
+    func isContained(in array: [Self]) -> Bool {
         return array.contains(self)
     }
 }

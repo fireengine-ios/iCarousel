@@ -45,13 +45,24 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     }
     
     func saveChanges(setting: SettingsAutoSyncModel){
-        interactor.onSaveSettings(setting: setting)
-        
-        if !fromSettings, setting.isAutoSyncEnable, setting.mobileDataPhotos == true || setting.mobileDataVideo == true {
-            router.showSyncOverPopUp()
+        if !fromSettings {
+            let dataSyncEnabled = setting.isAutoSyncEnable && (setting.mobileDataPhotos == true || setting.mobileDataVideo == true)
+            if dataSyncEnabled {
+                router.showSyncOverPopUp(okHandler: {[weak self] in
+                    self?.router.routNextVC()
+                    self?.interactor.onSaveSettings(setting: setting)
+                })
+            } else {
+                router.routNextVC()
+                interactor.onSaveSettings(setting: setting)
+            }
         } else {
-            router.routNextVC()
+            interactor.onSaveSettings(setting: setting)
         }
+    }
+    
+    func onSettingSaved(){
+        
     }
     
     //MARK : BasePresenter

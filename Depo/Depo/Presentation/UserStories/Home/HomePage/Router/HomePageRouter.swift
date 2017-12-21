@@ -7,7 +7,9 @@
 //
 
 class HomePageRouter: HomePageRouterInput {
+    
     let router = RouterVC()
+    weak var presenter: HomePagePresenter!
     
     func moveToSettingsScreen() {
         var controller: UIViewController?
@@ -35,12 +37,12 @@ class HomePageRouter: HomePageRouterInput {
     }
     
     func moveToAllFilesPage() {
-        let allFiles = router.allFiles!
+        let allFiles = router.allFiles(moduleOutput: presenter, sortType: presenter.sortType, viewType: presenter.viewType)!
         router.pushViewController(viewController: allFiles)
     }
     
     func moveToFavouritsFilesPage() {
-        let favourites = router.favorites!
+        let favourites = router.favorites(moduleOutput: presenter, sortType: presenter.sortType, viewType: presenter.viewType)!
         router.pushViewController(viewController: favourites)
     }
     

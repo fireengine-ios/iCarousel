@@ -25,9 +25,13 @@ class AutoUploadIsOffPopUp: BaseView {
         settingsButton?.setTitle(TextConstants.autoUploaOffSettings, for: .normal)
     }
     
+    override func viewDeletedBySwipe(){
+        onCancelButton()
+    }
 
     @IBAction func onCancelButton(){
         WrapItemOperatonManager.default.stopOperationWithType(type: .autoUploadIsOff)
+        PopUpService.shared.resetLoginCountForUploadOffPopUp()
     }
     
     @IBAction func onSettingsButton(){

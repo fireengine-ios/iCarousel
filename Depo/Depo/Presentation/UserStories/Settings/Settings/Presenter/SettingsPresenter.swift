@@ -32,10 +32,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         let controller = PopUpController.with(title: TextConstants.settingsViewLogoutCheckMessage,
                                               message: nil,
                                               image: .none,
-                                              firstButtonTitle: TextConstants.ok,
-                                              secondButtonTitle: TextConstants.cancel,
-                                              firstAction: { [weak self] vc in
-                                                vc.close {
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { [weak self] vc in
+                                                vc.close { [weak self] in
                                                     self?.startAsyncOperation()
                                                     self?.interactor.checkConnectedToNetwork()
                                                 }

@@ -130,10 +130,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         switch type {
         case .delete:
-            router.checkDelete { [weak self] in
-                self?.interactor.delete(item: selectedItems)
-                self?.basePassingPresenter?.stopModeSelected()
-            }
+            interactor.delete(item: selectedItems)
+            basePassingPresenter?.stopModeSelected()
         case .download:
             basePassingPresenter?.stopModeSelected()
             interactor.download(item: selectedItems)
@@ -148,12 +146,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         case .move:
             interactor.move(item: selectedItems, toPath: "")
         case .share:
-            var onlyLink = false
-            selectedItems.forEach({ (item) in
-                if item.fileType != .image {
-                    onlyLink = true
-                }
+            let onlyLink = selectedItems.contains(where: {
+                $0.fileType != .image && $0.fileType != .video
             })
+
             if onlyLink {
                 interactor.shareViaLink(item: selectedItems, sourceRect: middleTabBarRect)
             } else {

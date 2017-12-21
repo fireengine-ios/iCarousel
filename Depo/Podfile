@@ -29,12 +29,9 @@ def core_pods
     
     # json
     pod 'SwiftyJSON', '~>3'
-    pod 'ReachabilitySwift', '~> 3'
+    pod 'ReachabilitySwift'
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'ExpandableTableViewController'
-
-    ## UI
-    pod 'PullToRefreshKit', :git => 'https://github.com/bonyadmitr/PullToRefreshKit', :branch => 'swift-4'
 
 end
 

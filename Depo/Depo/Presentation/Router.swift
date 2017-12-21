@@ -102,7 +102,7 @@ class RouterVC: NSObject {
         }
     }
     
-    func popViewControllerFromTableViewNavBar(){
+    func popViewControllerFromTableViewNavBar() {
         if let tabBarVc = tabBarVC {
             tabBarVc.popViewController(animated: true)
             return
@@ -123,11 +123,11 @@ class RouterVC: NSObject {
         viewController.navigationController?.isNavigationBarHidden = false
     }
     
-    func popToRootViewController(){
+    func popToRootViewController() {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func popViewController(){
+    func popViewController() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -331,18 +331,22 @@ class RouterVC: NSObject {
     
     // MARK: All Files
     
-    var allFiles: UIViewController?{
-    
-        let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController")
+    func allFiles(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController",
+                                                                                          moduleOutput: moduleOutput,
+                                                                                          sortType: sortType,
+                                                                                          viewType: viewType)
         return controller
     }
     
     
     // MARK: Favorites
     
-    var favorites: UIViewController?{
-
-        let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController")
+    func favorites(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController",
+                                                                                           moduleOutput: moduleOutput,
+                                                                                           sortType: sortType,
+                                                                                           viewType: viewType)
         return controller
     }
     

@@ -90,9 +90,16 @@ class WrapItemOperatonManager: NSObject {
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int){
         hidePopUpsByDepends(type: type)
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
+        
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{
-                notificationView.setProgressForOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+                
+                if let obj = object {
+                    notificationView.setProgressForOperationWith(type: type, object: obj, allOperations: allOperations, completedOperations: completedOperations)
+                }else{
+                    notificationView.setProgressForOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+                }
+                
             }
         }
     }

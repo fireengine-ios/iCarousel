@@ -16,7 +16,8 @@ class LoginInteractor: LoginInteractorInput {
     
     private var attempts: Int = 0
     
-    private let maxAttemps: Int = 6
+    /// from 0 to 11 = 12 attempts
+    private let maxAttemps: Int = 11
     
     func prepareModels(){
         output.models(models: dataStorage.getModels())
@@ -37,7 +38,6 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         if isBlocked(userName: login)  {
-            
             output.userStillBlocked(user: login)
             return
         } else if (maxAttemps <= attempts) {
@@ -53,11 +53,6 @@ class LoginInteractor: LoginInteractorInput {
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] in
-            
-//            PhotoAndVideoService(requestSize: 999999).nextItems(sortBy: .name,
-//                                                                sortOrder: .asc,
-//                                                                success: nil,
-//                                                                fail: nil)
             guard let `self` = self else {
                 return
             }
@@ -72,10 +67,13 @@ class LoginInteractor: LoginInteractorInput {
                 guard let `self` = self else {
                     return
                 }
+                if self.isBlockError(forResponse: errorResponse) {
+                    self.output.failedBlockError()
+                    return
+                }
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.output.needShowCaptcha()
-                }
-                if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
+                } else if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.attempts += 1
                 }
                 self.output.failLogin(message: errorResponse.description)
@@ -111,11 +109,15 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     private func inNeedOfCaptcha(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("412")
+        return errorResponse.description.contains("Captcha required")
     }
     
     private func isAuthenticationError(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("401")
+        return errorResponse.description.contains("Authentication failure")
+    }
+    
+    private func isBlockError(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("LDAP account is locked")
     }
     
     func findCoutryPhoneCode(plus: Bool) {

@@ -86,6 +86,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         super.viewWillAppear(animated)
         
         navigationBarWithGradientStyle()
+        setTitle(withString: "")
     }
     
     func setObject(object: BaseDataSourceItem){

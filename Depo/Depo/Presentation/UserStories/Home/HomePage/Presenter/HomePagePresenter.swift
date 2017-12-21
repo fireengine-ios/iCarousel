@@ -6,12 +6,15 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageInteractorOutput {
-
+class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageInteractorOutput, BaseFilesGreedModuleOutput {
+    
     weak var view: HomePageViewInput!
     var interactor: HomePageInteractorInput!
     var router: HomePageRouterInput!
 
+    private(set) var viewType = MoreActionsConfig.ViewType.Grid
+    private(set) var sortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    
     func viewIsReady() {
         view.setupInitialState()
     }
@@ -39,4 +42,10 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     func createStory() {
         router.moveToCreationStory()
     }
+    
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType) {
+        self.viewType = type
+        self.sortType = sortedType
+    }
+    
 }

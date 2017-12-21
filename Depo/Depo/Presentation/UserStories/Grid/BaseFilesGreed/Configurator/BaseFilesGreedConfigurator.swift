@@ -10,7 +10,9 @@ import UIKit
 
 class BaseFilesGreedModuleConfigurator {
     
-    func configure(viewController: BaseFilesGreedViewController, remoteServices: RemoteItemsService,
+    func configure(viewController: BaseFilesGreedViewController,
+                   moduleOutput: BaseFilesGreedModuleOutput? = nil,
+                   remoteServices: RemoteItemsService,
                    fileFilters: [GeneralFilesFiltrationType],
                    bottomBarConfig: EditingBarConfig?,
                    visibleSlider: Bool = false, topBarConfig: GridListTopBarConfig?,
@@ -29,6 +31,7 @@ class BaseFilesGreedModuleConfigurator {
         
         presenter!.view = viewController
         presenter!.router = router
+        presenter?.moduleOutput = moduleOutput
         
         if let barConfig = bottomBarConfig {
             let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()

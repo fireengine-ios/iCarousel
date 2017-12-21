@@ -112,6 +112,8 @@ struct TextConstants {
     // MARK: - Search
     
     static let search = "Search"
+    static let searchRecentSearchTitle = "RECENT SEARCHES"
+    static let searchSuggestionsTitle = "SUGGESTIONS"
     
     static let noFilesFoundInSearch = "No results found for your query."
     
@@ -474,7 +476,9 @@ struct TextConstants {
     static let popUpSyncing = "Syncing files over"
     static let popUpUploading = "Uploading files over"
     static let popUpDownload = "Downloading files"
+    static let popUpDeleteComplete = "Deleting is complete"
     static let popUpDownloadComplete = "Download is complete"
+    static let popUpOperationComplete = "Operation is complete"
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
@@ -597,7 +601,7 @@ struct TextConstants {
     static let offersBuy = "Buy"
     static let offersOk = "OK"
     static let offersSettings = "Settings"
-    static let offersPrice = "%.2f ₺ / month"
+    static let offersPrice = "%.2f %@ / month"
     
     // MARK: - OTP
     static let otpNextButton = "Next"
@@ -625,6 +629,9 @@ struct TextConstants {
     static let errorUnknown = "Unknown error"
     static let errorServer = "Server error"
     
+    static let errorFileSystemAccessDenied = "Can't get access to file system"
+    static let errorNothingToDownload = "Nothing to download"
+    
     static let canceledOperationTextError = "Cancelled"
     
     static let ACCOUNT_NOT_FOUND = "Account cannot be found"
@@ -640,6 +647,8 @@ struct TextConstants {
     static let PROMO_IS_INACTIVE = "The package activation code is not active"
     
     static let passcode = "Passcode"
+    static let passcodeSettingsSetTitle = "Set a Passcode"
+    static let passcodeSettingsChangeTitle = "Change Passcode"
     static let passcodeLifebox = "lifebox Passcode"
     static let passcodeEnter = "Please enter your lifebox passcode"
     static let passcodeEnterOld = "Please enter your lifebox passcode"
@@ -669,7 +678,12 @@ struct TextConstants {
     static let packages = "Packages"
     static let purchase = "Purchase"
     
-    static let deleteText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
+    static let deleteFilesText = "Deleting these files will remove them from cloud. You won't be able to access them once deleted"
+    static let deleteAlbums = "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"
+    static let removeAlbums = "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?"
+    static let removeFromAlbum = "This file will be removed only from your album. You can access this file from Photos tab"
+    
+    static let locationServiceDisable = "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu."
 }
 
 
@@ -679,6 +693,8 @@ struct NumericConstants {
     static let vereficationTimerLimit = 120//in seconds
     static let maxVereficationAttempts = 3
     //
+    static let maxDetailsLoadingAttempts = 5
+    static let detailsLoadingTimeAwait = UInt32(2)
     
     static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
     
@@ -712,4 +728,5 @@ struct NumericConstants {
     
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     
+    static let maxRecentSearches: Int = 10
 }

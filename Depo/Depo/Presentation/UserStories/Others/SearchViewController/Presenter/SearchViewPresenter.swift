@@ -81,6 +81,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         view.successWithSuggestList(list: list)
     }
     
+    func setRecentSearches(_ recentSearches: [String]) {
+        view.setRecentSearches(recentSearches)
+    }
+    
     func failedSearch() {
         showedSpinner = false
         self.outputView()?.hideSpiner()
@@ -99,7 +103,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         self.showedSpinner = false
         //items.sorted(by: {$0.creationDate! > $1.creationDate!})
         dataSource.dropData()
-        dataSource.appendCollectionView(items: items)
 //        dataSource.configurateWithSimpleData(collectionData: files, sortingRules: sortedRule, types: filters, syncType: syncType)
         
         if (items.count == 0){
@@ -107,6 +110,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             view.setCollectionViewVisibilityStatus(visibilityStatus: flag)
         }else{
             view.setCollectionViewVisibilityStatus(visibilityStatus: false)
+            dataSource.appendCollectionView(items: items)
         }
         
     }
@@ -128,6 +132,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func tapCancel() {
         moduleOutput?.cancelSearch()
+    }
+    
+    func onClearRecentSearchesTapped() {
+        interactor.clearRecentSearches()
     }
     
     func playerDidHide() {
