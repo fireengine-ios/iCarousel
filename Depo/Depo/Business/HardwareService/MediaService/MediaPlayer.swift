@@ -134,9 +134,6 @@ final class MediaPlayer: NSObject {
             
             play()
         }
-        else if keyPath == #keyPath(AVPlayer.currentItem.status), player.currentItem?.status == .readyToPlay {
-            play()
-        }
         else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp), player.currentItem?.status == .readyToPlay, isPlaying {
             play()
         }
