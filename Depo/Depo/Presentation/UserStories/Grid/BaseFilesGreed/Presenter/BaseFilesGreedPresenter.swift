@@ -290,6 +290,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
+        setupNewBottomBarConfig()
         if (selectedItemsCount == 0){
             bottomBarPresenter?.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
@@ -297,18 +298,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
         
-        setupNewBottomBarConfig()
+        
         view.setThreeDotsMenu(active: dataSource.selectedItemsArray.count > 0)
         self.view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
     func setupNewBottomBarConfig() {
-//        .print
         guard let barConfig = interactor.bottomBarConfig,
             let array = dataSource.getSelectedItems() as? [Item] else {
                 return
         }
-
         bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
     }
     
@@ -393,7 +392,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
             }
             
-            let remoteItems = selectedItems.filter { $0.isLocalItem == false}
+            let remoteItems = selectedItems.filter {$0.isLocalItem == false}
             
             if actionTypes.contains(.createStory) && remoteItems.contains(where: { return $0.fileType != .image } ) {
                 let index = actionTypes.index(where: { return $0 == .createStory})!
