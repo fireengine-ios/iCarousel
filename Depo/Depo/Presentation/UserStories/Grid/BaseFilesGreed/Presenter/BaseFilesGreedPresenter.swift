@@ -61,6 +61,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.delegate = self
         
         if let displayingType = topBarConfig {
+            type = displayingType.defaultGridListViewtype
             if displayingType.defaultGridListViewtype == .Grid {
                 dataSource.updateDisplayngType(type: .list)
             } else {
