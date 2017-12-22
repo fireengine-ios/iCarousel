@@ -494,7 +494,7 @@ struct TextConstants {
     static let waitingForWiFiPopUpTitle = "Waiting for Wi-Fi connection to auto-sync"
     static let waitingForWiFiPopUpSettingsButton = "Settings"
     static let waitingForWiFiPopUpSyncButton = "Sync with data plan"
-    static let prepareToAutoSunc = "Preparing to auto sync..."
+    static let prepareToAutoSunc = "Auto Sync Preparation"
     static let waitForWiFiButtonTitle = "Wait for a WiFi Connection"
 
     
