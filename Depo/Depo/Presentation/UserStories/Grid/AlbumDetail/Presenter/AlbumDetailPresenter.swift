@@ -41,4 +41,20 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func setupNewBottomBarConfig() {
+        //        .print
+        guard var barConfig = interactor.bottomBarConfig,
+            let array = dataSource.getSelectedItems() as? [Item] else {
+                return
+        }
+        let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
+        if allSelectedItemsTypes.contains(.image) {
+            barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.print],
+                                         style: barConfig.style,
+                                         tintColor: barConfig.tintColor)
+            //barConfig.elementsConfig.append(.pr)
+        }
+        
+        bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
+    }
 }

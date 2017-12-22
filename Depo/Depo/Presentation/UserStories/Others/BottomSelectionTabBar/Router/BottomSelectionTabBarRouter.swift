@@ -29,8 +29,8 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
             return
         }
         let router = RouterVC()
-        
-        let vc = PrintInitializer.viewController(data: wrapperedArray)
+        let imagesOnly = wrapperedArray.filter{$0.fileType == .image}
+        let vc = PrintInitializer.viewController(data: imagesOnly)
         router.pushViewController(viewController: vc)
     }
     

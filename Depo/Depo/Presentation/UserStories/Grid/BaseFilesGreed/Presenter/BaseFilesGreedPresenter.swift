@@ -223,20 +223,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         if item.fileType.isUnSupportedOpenType {
-//            if interactor.remoteItems is MusicService {
-//                guard let array = data as? [[Item]],
-//                    let wrappered = item as? Item
-//                    else { return }
-//
-//                let list = array.flatMap{ $0 }
-//                guard let startIndex = list.index(of: wrappered) else { return }
-//                player.play(list: list, startAt: startIndex)
-//                player.play()
-//                //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
-//            } else {
             let sameTypeFiles: [BaseDataSourceItem] = data.flatMap{ return $0 }.filter{ $0.fileType == item.fileType }
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles, type: type, sortType: sortedType, moduleOutput: self)
-//            }
         } else {
             let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
@@ -314,13 +302,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         self.view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
-    private func setupNewBottomBarConfig() {
-        
+    func setupNewBottomBarConfig() {
+//        .print
         guard let barConfig = interactor.bottomBarConfig,
             let array = dataSource.getSelectedItems() as? [Item] else {
                 return
         }
-        
+
         bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
     }
     
