@@ -62,7 +62,7 @@ struct TextConstants {
     
     static let autoSyncNavigationTitle = "Auto Sync"
     static let autoSyncTitle = "Lifebox can sync your files automatically. Would you like to have this feature right now?"
-    static let autoSyncCellWiFiTile = NSLocalizedString("Wifi", comment: "")
+    static let autoSyncCellWiFiTile = NSLocalizedString("Wi-fi", comment: "")
     static let autoSyncCellWiFiSubTitle = "When syncing via Wi-Fi, your photos and videos are uploaded by default."
     static let autoSyncCellMobileDataTitle = "Mobile Data"
     static let autoSyncCellMobileDataSubTitle = "Select the items to sync with mobile data."
@@ -483,7 +483,7 @@ struct TextConstants {
     static let freeAppSpacePopUpTextNormal = "There are some duplicated items both in your device and lifebox"
     static let freeAppSpacePopUpTextWaring = "Your device memory is almost full"
     static let freeAppSpacePopUpButtonTitle = "Free up space"
-    static let networkTypeWiFi = "WiFi"
+    static let networkTypeWiFi = "Wi-Fi"
     static let networkType2g = "2G"
     static let networkType3g = "3G"
     static let networkType4g = "4G"
@@ -495,7 +495,7 @@ struct TextConstants {
     static let waitingForWiFiPopUpSettingsButton = "Settings"
     static let waitingForWiFiPopUpSyncButton = "Sync with data plan"
     static let prepareToAutoSunc = "Auto Sync Preparation"
-    static let waitForWiFiButtonTitle = "Wait for a WiFi Connection"
+    static let waitForWiFiButtonTitle = "Wait for a Wi-Fi Connection"
 
     
     //MARK: - ActionSheet
