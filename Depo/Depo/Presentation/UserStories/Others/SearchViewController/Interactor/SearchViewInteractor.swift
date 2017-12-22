@@ -22,6 +22,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     func viewIsReady() {
         output.setRecentSearches(recentSearches.searches)
+        getDefaultSuggetion(text: "")
     }
     
     func searchItems(by searchText: String, sortBy: SortType, sortOrder: SortOrder) {
@@ -75,6 +76,10 @@ class SearchViewInteractor: SearchViewInteractorInput {
             }
         }, fail: { (_) in
         })
+    }
+    
+    func getDefaultSuggetion(text: String) {
+        getSuggetion(text: text)
     }
     
     func clearRecentSearches() {
