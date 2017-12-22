@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,15 +30,15 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="aiV-eJ-bmf" userLabel="playerFullScreen">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dc0-QF-4Zh" userLabel="carouselView" customClass="iCarousel">
-                    <rect key="frame" x="0.0" y="66" width="320" height="206.5"/>
+                    <rect key="frame" x="0.0" y="66" width="320" height="174.5"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZG-q6-ZSJ" userLabel="playerController">
-                    <rect key="frame" x="0.0" y="272.5" width="320" height="135"/>
+                    <rect key="frame" x="0.0" y="240.5" width="320" height="135"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZJ-Gg-jio" userLabel="title">
                             <rect key="frame" x="112.5" y="17.5" width="95.5" height="20"/>
@@ -173,19 +173,19 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKH-U3-HRk">
-                    <rect key="frame" x="150" y="407.5" width="20" height="64.5"/>
+                    <rect key="frame" x="150" y="375.5" width="20" height="36.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="WBX-VN-WrV"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xvz-pH-Pzz">
-                    <rect key="frame" x="150" y="504" width="20" height="64"/>
+                    <rect key="frame" x="150" y="444" width="20" height="36"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="14M-jU-kcF"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ks8-05-b09" customClass="VolumeSlider" customModule="Depo_LifeTech" customModuleProvider="target">
-                    <rect key="frame" x="20" y="472" width="280" height="32"/>
+                    <rect key="frame" x="20" y="412" width="280" height="32"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="M0S-bd-kQp"/>
