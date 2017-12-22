@@ -660,8 +660,10 @@ struct TextConstants {
     static let passcodeDontMatch = "Passcodes don't match, please try again"
     static let passcodeSetTitle = "Set a Passcode"
     static let passcodeBiometricsDefault = "To enter passcode"
-    static let passcodeEnableFaceID = "Enable Face ID"
-    static let passcodeEnableTouchID = "Enable Touch ID"
+    static let passcodeBiometricsError = "Please activate %@ from your device settings to use this feature"
+    static let passcodeEnable = "Enable"
+    static let passcodeFaceID = "Face ID"
+    static let passcodeTouchID = "Touch ID"
     static let passcodeNumberOfTries = "Invalid passcode. %@ attempts left. Please try again"
     static let errorConnectedToNetwork = "Please check your internet connection is active and Cellular Data is ON under Settings/lifebox."
     

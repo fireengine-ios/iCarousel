@@ -68,7 +68,7 @@ extension PasscodeManagerImp: PasscodeManager {
     }
     
     func authenticateWithBiometrics() {
-        if !biometricsManager.isAvailable || !biometricsManager.isEnabled {
+        if biometricsManager.status != .available || !biometricsManager.isEnabled {
             return
         }
         view.resignResponder()
