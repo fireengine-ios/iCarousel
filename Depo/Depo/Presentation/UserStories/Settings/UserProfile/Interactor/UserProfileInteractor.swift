@@ -56,7 +56,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func changeTo(name: String, email: String, number: String){
-        if ((name.count == 0) || (email.count == 0) || (number.count == 0)){
+        if email.isEmpty || number.isEmpty {
             output.showError(error: TextConstants.userProfileDataNotСhanged)
             return
         }
