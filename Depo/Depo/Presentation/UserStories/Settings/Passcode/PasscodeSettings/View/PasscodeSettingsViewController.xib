@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PasscodeSettingsViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
+                <outlet property="biometricsErrorLabel" destination="896-SX-PG3" id="lbW-G8-WBt"/>
                 <outlet property="biometricsLabel" destination="ydG-LF-VUl" id="Iit-gq-AIX"/>
                 <outlet property="biometricsSwitch" destination="4lc-iZ-AQB" id="qTv-q1-yde"/>
                 <outlet property="changePasscodeLabel" destination="5gd-ty-uBV" id="JTG-Tg-X29"/>
@@ -107,7 +108,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52L-4V-mCz" userLabel="TouchID View">
-                    <rect key="frame" x="0.0" y="188" width="375" height="62"/>
+                    <rect key="frame" x="0.0" y="188" width="375" height="81.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable biometrics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydG-LF-VUl">
                             <rect key="frame" x="15" y="20" width="137" height="21"/>
@@ -122,22 +123,31 @@
                             </connections>
                         </switch>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ABE-K9-GpV" userLabel="line">
-                            <rect key="frame" x="15" y="61.5" width="360" height="0.5"/>
+                            <rect key="frame" x="15" y="81" width="360" height="0.5"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="BaX-T4-Zfl"/>
                             </constraints>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biometrics Error" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="896-SX-PG3">
+                            <rect key="frame" x="15" y="51" width="282" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="4lc-iZ-AQB" secondAttribute="trailing" constant="19" id="7JS-sE-FvI"/>
-                        <constraint firstAttribute="height" constant="62" id="8Yb-a5-aVE"/>
+                        <constraint firstItem="4lc-iZ-AQB" firstAttribute="top" secondItem="52L-4V-mCz" secondAttribute="top" constant="15" id="85j-ne-kFj"/>
                         <constraint firstItem="ABE-K9-GpV" firstAttribute="leading" secondItem="52L-4V-mCz" secondAttribute="leading" constant="15" id="9Qz-PD-6zf"/>
+                        <constraint firstAttribute="bottom" secondItem="896-SX-PG3" secondAttribute="bottom" constant="10" id="AIJ-ww-9xR"/>
                         <constraint firstItem="ydG-LF-VUl" firstAttribute="leading" secondItem="52L-4V-mCz" secondAttribute="leading" constant="15" id="KGl-wq-5Ni"/>
+                        <constraint firstItem="ydG-LF-VUl" firstAttribute="top" secondItem="52L-4V-mCz" secondAttribute="top" constant="20" id="Mff-QH-LaB"/>
                         <constraint firstAttribute="trailing" secondItem="ABE-K9-GpV" secondAttribute="trailing" id="NWS-Pc-3J2"/>
-                        <constraint firstItem="ydG-LF-VUl" firstAttribute="centerY" secondItem="52L-4V-mCz" secondAttribute="centerY" id="Rod-3W-EO7"/>
-                        <constraint firstItem="4lc-iZ-AQB" firstAttribute="centerY" secondItem="52L-4V-mCz" secondAttribute="centerY" id="l6K-ER-XRP"/>
+                        <constraint firstItem="4lc-iZ-AQB" firstAttribute="leading" secondItem="896-SX-PG3" secondAttribute="trailing" constant="10" id="SXA-bz-TyO"/>
+                        <constraint firstItem="896-SX-PG3" firstAttribute="top" secondItem="ydG-LF-VUl" secondAttribute="bottom" constant="10" id="XhW-s7-Itm"/>
+                        <constraint firstItem="896-SX-PG3" firstAttribute="leading" secondItem="52L-4V-mCz" secondAttribute="leading" constant="15" id="rr3-Hf-2zO"/>
                         <constraint firstAttribute="bottom" secondItem="ABE-K9-GpV" secondAttribute="bottom" id="tse-A1-TtT"/>
                     </constraints>
                 </view>

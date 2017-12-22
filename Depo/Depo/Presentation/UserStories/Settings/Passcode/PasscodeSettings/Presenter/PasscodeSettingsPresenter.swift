@@ -53,8 +53,8 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
         return interactor.isPasscodeEmpty
     }
     
-    var isBiometricsAvailable: Bool {
-        return interactor.isBiometricsAvailable
+    var biometricsStatus: BiometricsStatus {
+        return interactor.biometricsStatus
     }
     
     var isBiometricsEnabled: Bool {
