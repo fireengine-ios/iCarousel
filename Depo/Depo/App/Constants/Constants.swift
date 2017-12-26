@@ -212,6 +212,12 @@ struct TextConstants {
     static let cameraAccessAlertGoToSettings = "Settings"
     static let cameraAccessAlertNo = "No"
     
+    //MARK: - Sync out of space alert
+    static let syncOutOfSpaceAlertTitle = "Caution!"
+    static let syncOutOfSpaceAlertText = "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!"
+    static let syncOutOfSpaceAlertGoToSettings = "Settings"
+    static let syncOutOfSpaceAlertNo = "No"
+    
     //MARK: - Photo Library alert
     static let photoLibraryAccessAlertTitle = "Caution!"
     static let photoLibraryAccessAlertText = "Access to Gallery is denied. Please change it from the settings menu of the device"
