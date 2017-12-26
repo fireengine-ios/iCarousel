@@ -146,11 +146,12 @@ class ItemSyncServiceImpl: ItemSyncService {
                                              success: { [weak self] in
                                                 self?.status = .synced
         }, fail: { [weak self] (error) in
-            self?.status = .failed
-            self?.stop()
-            
             if case ErrorResponse.httpCode(413) = error {
+                self?.status = .failed
+                self?.stop()
+                
                 //TODO: add popup 'out of space'
+                
             }
             
         })
