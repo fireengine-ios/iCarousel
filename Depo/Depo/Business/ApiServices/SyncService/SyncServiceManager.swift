@@ -176,8 +176,10 @@ class SyncServiceManager {
     
     //start if is waiting for wi-fi
     private func startManually() {
-        photoSyncService.startManually()
-        videoSyncService.startManually()
+        if reachabilityService?.connection != .none {
+            photoSyncService.startManually()
+            videoSyncService.startManually()
+        }
     }
 }
 
