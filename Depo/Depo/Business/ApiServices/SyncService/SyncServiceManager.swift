@@ -97,10 +97,12 @@ class SyncServiceManager {
         }
         
         reachability.whenReachable = { (reachability) in
+            print("AUTOSYNC: is reachable")
             self.checkReachabilityAndSettings()
         }
         
         reachability.whenUnreachable = { (reachability) in
+            print("AUTOSYNC: is unreachable")
             self.checkReachabilityAndSettings()
         }
     }
