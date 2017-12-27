@@ -470,7 +470,10 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func deleteDeviceOriginal(items: [BaseDataSourceItem]) {
-        
+        guard let wrapedItems = items as? [WrapData] else {
+            return
+        }
+        fileService.deleteLocalFiles(deleteFiles: wrapedItems, success: succesAction(elementType: .deleteDeviceOriginal), fail: failAction(elementType: .deleteDeviceOriginal))
     }
     
     func succesAction(elementType: ElementTypes) -> FileOperation {

@@ -83,19 +83,6 @@ class FreeAppSpace {
         }
     }
     
-    func getLocalDuplicates(remoteItems: [Item]) -> [Item] {
-        let remoteMd5s = remoteItems.map{$0.md5}
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        fetchRequest.predicate = NSPredicate(format: "md5Value IN %@",  remoteMd5s)
-        
-        guard let localDuplicatesMediaItems = (try? CoreDataStack.default.mainContext.fetch(fetchRequest)) as? [MediaItem] else {
-            return []
-        }
-        
-        return localDuplicatesMediaItems.flatMap{return WrapData(mediaItem: $0)}
-    }
-    
     func deleteDeletedLocalPhotos(deletedPhotos: [WrapData]) {
         var array = duplicaesArray.map { $0.md5 }
         for object in deletedPhotos {

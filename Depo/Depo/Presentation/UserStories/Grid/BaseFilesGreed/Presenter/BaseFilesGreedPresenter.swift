@@ -407,9 +407,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: printIndex)
             }
             
-            if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal), FreeAppSpace.default.getDuplicatesObjects() {
-                // (at least one) check remotes for locals with same MD5 on disk
-                actionTypes.remove(at: deleteOriginalIndex)
+            if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
+                let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
+                if localDuplicates.count > 0 {
+                    selectedItems = localDuplicates
+                } else {
+                    actionTypes.remove(at: deleteOriginalIndex)
+                }
             }
             
             alertSheetModule?.showAlertSheet(with: actionTypes,

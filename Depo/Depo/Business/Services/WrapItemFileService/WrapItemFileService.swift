@@ -72,7 +72,7 @@ class WrapItemFileService: WrapItemFileOperations {
         
     }
     
-    func deleteLocalFile(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+    func deleteLocalFiles(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let localAssets = assetsForlocalItems(files: deleteFiles)
         if let localAssetsW = localAssets,
             localAssetsW.count > 0 {
