@@ -150,7 +150,11 @@ final class UploadService: BaseRequestService {
                                                                     completedOperations: self.finishedUploadOperationsCount)
         
         let operations: [UploadOperations] = itemsToUpload.flatMap {
-            let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { (finishedOperation) in
+            let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] (finishedOperation) in
+                guard let `self` = self else {
+                    return
+                }
+                
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
                 finishedOperation.item.isLocalItem = false
@@ -178,7 +182,11 @@ final class UploadService: BaseRequestService {
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
                                                 object: nil)
-            }, fail: { (operationFail) in
+            }, fail: { [weak self] (operationFail) in
+                guard let `self` = self else {
+                    return
+                }
+                
                 self.finishedUploadOperationsCount += 1
                 
                 if self.allUploadOperationsCount == self.finishedUploadOperationsCount {
@@ -233,7 +241,10 @@ final class UploadService: BaseRequestService {
                                                                     completedOperations: self.finishedSyncOperationsCount)
         let operations: [UploadOperations] = itemsToSync.flatMap {
             
-            let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { (finishedOperation, error) in
+            let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] (finishedOperation, error) in
+                guard let `self` = self else {
+                    return
+                }
                 
                 if finishedOperation.item.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 }
                 else if finishedOperation.item.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
@@ -247,20 +258,15 @@ final class UploadService: BaseRequestService {
                                                                             allOperations: self.allSyncOperationsCount,
                                                                             completedOperations: self.finishedSyncOperationsCount)
                 
-                guard error == nil else {
-                    if error!.description != TextConstants.canceledOperationTextError {
-                        fail(error!)
+                if let error = error {
+                    if error.description != TextConstants.canceledOperationTextError {
+                        fail(error)
                     }
                     
                     
                     if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
                         self.clearSyncCounters()
-                        self.uploadOperations = self.uploadOperations.flatMap({
-                            if $0.uploadType != .autoSync {
-                                return $0
-                            }
-                            return nil
-                        })
+                        self.uploadOperations = self.uploadOperations.filter({ $0.uploadType != .autoSync })
                         WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
                         success()
                     }
@@ -269,7 +275,7 @@ final class UploadService: BaseRequestService {
 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
-                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)//appendOnlyNewItems(items: [finishedOperation.item])
+                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                 
                 guard self.allSyncOperationsCount != 0 else {
                     return
