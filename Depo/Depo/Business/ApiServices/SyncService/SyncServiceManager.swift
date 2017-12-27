@@ -207,20 +207,20 @@ extension SyncServiceManager {
     }
     
     @objc private func onAutoSyncStatusDidChange() {
-        guard !isSyncCancelled else {
+        if isSyncCancelled {
+            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
+            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+            return
+        }
+        
+        if hasExecutingSync {
             WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
             WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
             return
         }
         
-        guard !hasExecutingSync else {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
-            return
-
-        }
-        
-        guard !hasPrepairingSync else {
+        if hasPrepairingSync {
             WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
             WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             return
