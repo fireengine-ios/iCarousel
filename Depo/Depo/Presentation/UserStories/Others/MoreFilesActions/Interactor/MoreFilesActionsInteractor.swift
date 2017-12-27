@@ -71,7 +71,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func shareSmallSize(sourceRect: CGRect?){
         if let items = sharingItems as? [WrapData] {
-            let files: [FileForDownload] = items.flatMap({ FileForDownload(forSmallURL: $0) })
+            let files: [FileForDownload] = items.flatMap({ FileForDownload(forMediumURL: $0) })
             shareFiles(filesForDownload: files, sourceRect: sourceRect)
         }
         

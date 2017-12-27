@@ -135,9 +135,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
-//        if status != .executing {
-            status = .executing
-//        }
+        status = .executing
         
         UploadService.default.uploadFileList(items: items.sorted(by:{$0.fileSize < $1.fileSize}),
                                              uploadType: .autoSync,
@@ -146,11 +144,15 @@ class ItemSyncServiceImpl: ItemSyncService {
                                              success: { [weak self] in
                                                 self?.status = .synced
         }, fail: { [weak self] (error) in
-            self?.status = .failed
-            self?.stop()
-            
+            guard let `self` = self else {
+                print("\(#function): self == nil")
+                return
+            }
+
             if case ErrorResponse.httpCode(413) = error {
-                //TODO: add popup 'out of space'
+                self.status = .failed
+                self.stop()
+                self.showOutOfSpaceAlert()
             }
             
         })
@@ -230,4 +232,29 @@ class ItemSyncServiceImpl: ItemSyncService {
     func localUnsyncedItems() -> [WrapData] {
         return []
     }
+    
 }
+
+
+extension ItemSyncService {
+    fileprivate func showOutOfSpaceAlert() {
+        let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
+                                              message: TextConstants.syncOutOfSpaceAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertNo,
+                                              secondButtonTitle: TextConstants.syncOutOfSpaceAlertGoToSettings,
+                                              secondAction: { vc in
+                                                vc.close(completion: {
+                                                    let router = RouterVC()
+                                                    router.pushViewController(viewController: router.packages)
+                                                })
+        })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+    }
+}
+
+
+
+
+
+
