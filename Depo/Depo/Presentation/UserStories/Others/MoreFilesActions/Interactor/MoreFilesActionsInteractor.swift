@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
+class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     weak var output: MoreFilesActionsInteractorOutput?
     private var fileService = WrapItemFileService()
@@ -178,8 +178,26 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         }
     }
     
+    
+    private var cropyController: CRYCropNavigationController?
+    
     func edit(item: [BaseDataSourceItem]) {
+        guard let item = item.first as? Item else {
+            return
+        }
         
+        FilesDataSource().getImage(for: item, isOriginal: true) { [weak self] image in
+            
+            guard let `self` = self, let image = image,
+                let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
+                else { return }
+            
+            //vc.setShareEnabled(true)
+            //        vc.setCropDelegate(self)
+            vc.sharedDelegate = self
+            self.cropyController = vc
+            RouterVC().presentViewController(controller: vc)
+        }
     }
     
     func delete(item: [BaseDataSourceItem]) {
@@ -514,4 +532,57 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
             output?.startCancelableAsync(operations: operations, cancel: cancel)
         }
     }
+}
+
+
+// MARK: - Edit delegates
+
+//extension MoreFilesActionsInteractor: CRYRotateImageDelegate {
+//
+//    /// dont need
+//    func getRotatedImage(_ rotatedImage: UIImage!) {
+////        SecondViewController *second = [[SecondViewController alloc]init];
+////        second.comingImage = rotatedImage;
+////        [self.navigationController pushViewController:second animated:YES];
+//    }
+//
+//
+//}
+
+extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
+    
+    @objc func getEditedImage(_ sharedImage: UIImage) {
+        
+        let vc = PopUpController.with(title: TextConstants.save, message: TextConstants.cropyMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, secondAction: { [weak self] vc in
+            vc.close { [weak self] in
+                self?.cropyController?.dismiss(animated: true, completion: nil)
+                print("--- save image")
+            }
+        })
+        UIApplication.topController()?.present(vc, animated: false, completion: nil)
+        
+        print(sharedImage)
+    }
+    
+    //    @objc func getSharedUrl(_ sharedUrl: String) {
+    //        print("SharedURL = \(sharedUrl)")
+    //        print("SharedURL = \(sharedUrl)")
+    //    }
+    
+    //    func cropViewController(_ cropViewController: TOCropViewController!, didCropTo image: UIImage!, with cropRect: CGRect, angle: Int) {
+    //        print(image)
+    //    }
+    //
+    //    func cropViewController(_ cropViewController: TOCropViewController!, didCropToCircularImage image: UIImage!, with cropRect: CGRect, angle: Int) {
+    //        print(image)
+    //    }
+    //
+    //    func cropViewController(_ cropViewController: TOCropViewController!, didCropImageTo cropRect: CGRect, angle: Int) {
+    //        print(cropRect)
+    ////        SecondViewController *second = [[SecondViewController alloc]init];
+    ////        second.comingImage = image;
+    ////        [self.navigationController pushViewController:second animated:YES];
+    ////        [self dismissViewControllerAnimated:YES completion:nil];
+    //    }
+    
 }

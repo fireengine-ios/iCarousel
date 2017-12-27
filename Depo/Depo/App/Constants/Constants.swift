@@ -557,9 +557,9 @@ struct TextConstants {
     static let freeAppSpaceAlertSuccesTitle = "You have free space for %d more items."
     static let freeAppSpaceAlertSuccesButton = "OK"
     
-    // MARK NAVBAR titles
-    
     static let cancel = "Cancel"
+    static let save = "Save"
+    static let cropyMessage = "This edited photo will be saved as a new photo in your device gallery"
     
     
     //MARK: - 
