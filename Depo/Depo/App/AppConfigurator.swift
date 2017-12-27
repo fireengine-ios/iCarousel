@@ -30,13 +30,16 @@ class AppConfigurator {
     }
     
     class private func setupCropy() {
-        
-        let cropyConfig = CRYConfiguration.sharedInstance()!
-        //        cropyConfig.headerColor = UIColor.red
+        guard let cropyConfig = CRYConfiguration.sharedInstance() else { return }
         cropyConfig.shareType = SharedTypeImage
         cropyConfig.origin = "http://www.cropyioslifebox.com"
         cropyConfig.apiKey = "57f38c7d-1762-43e7-9ade-545fed50dd04"
-        //        cropyConfig.enableShare = false
+        
+        cropyConfig.headerColor = UIColor.lrTealish
+        cropyConfig.headerTitleColor = UIColor.white
+        
+        cropyConfig.cropHeaderColor = UIColor.lrTealish
+        cropyConfig.cropHeaderTitleColor = UIColor.white
     }
     
     //MARK: - settings bundle
