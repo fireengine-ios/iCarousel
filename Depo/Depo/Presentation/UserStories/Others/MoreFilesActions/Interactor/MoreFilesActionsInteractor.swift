@@ -181,21 +181,25 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     private var cropyController: CRYCropNavigationController?
     
-    func edit(item: [BaseDataSourceItem]) {
-        guard let item = item.first as? Item else {
+    func edit(item: [BaseDataSourceItem], complition: (() -> Void)?) {
+        guard let item = item.first as? Item, let url = item.tmpDownloadUrl else {
             return
         }
         
-        FilesDataSource().getImage(for: item, isOriginal: true) { [weak self] image in
-            
+        ImageDownloder().getImage(patch: url) { [weak self] image in
             guard let `self` = self, let image = image,
                 let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
-                else { return }
+            else {
+                complition?()
+                return
+            }
             
             //vc.setShareEnabled(true)
             //        vc.setCropDelegate(self)
             vc.sharedDelegate = self
             self.cropyController = vc
+            
+            complition?()
             RouterVC().presentViewController(controller: vc)
         }
     }
