@@ -97,10 +97,12 @@ class SyncServiceManager {
         }
         
         reachability.whenReachable = { (reachability) in
+            print("AUTOSYNC: is reachable")
             self.checkReachabilityAndSettings()
         }
         
         reachability.whenUnreachable = { (reachability) in
+            print("AUTOSYNC: is unreachable")
             self.checkReachabilityAndSettings()
         }
     }
@@ -176,8 +178,10 @@ class SyncServiceManager {
     
     //start if is waiting for wi-fi
     private func startManually() {
-        photoSyncService.startManually()
-        videoSyncService.startManually()
+        if reachabilityService?.connection != .none {
+            photoSyncService.startManually()
+            videoSyncService.startManually()
+        }
     }
 }
 
