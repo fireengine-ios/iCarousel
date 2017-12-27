@@ -21,11 +21,11 @@ class FreeAppSpace {
     private var duplicaesArray = [WrapData]()
     private var serverDuplicatesArray = [WrapData]()
     
-    func getDuplicatesObjects() -> [WrapData]{
+    func getDuplicatesObjects() -> [WrapData] {
         return duplicaesArray
     }
     
-    func clear(){
+    func clear() {
         localtemsArray.removeAll()
         localMD5Array.removeAll()
         duplicaesArray.removeAll()
@@ -37,7 +37,7 @@ class FreeAppSpace {
         }
     }
     
-    func getServerUIDSForLocalitem(localItemsArray: [BaseDataSourceItem]) -> [String]{
+    func getServerUIDSForLocalitem(localItemsArray: [BaseDataSourceItem]) -> [String] {
         let serverHash = serverDuplicatesArray.map { $0.md5 }
         var array = [String]()
         for item in localItemsArray {
@@ -60,40 +60,53 @@ class FreeAppSpace {
         }
     }
     
-    func checkFreeAppSpace(){
+    func checkFreeAppSpace() {
         let freeSpace = Device.getFreeDiskSpaceInPercent
-        if freeSpace < NumericConstants.freeAppSpaceLimit{
+        if freeSpace < NumericConstants.freeAppSpaceLimit {
             startSearchDuplicates(finished: { [weak self] in
                 guard let self_ = self else{
                     return
                 }
-                if (self_.duplicaesArray.count > 0){
+                if (self_.duplicaesArray.count > 0) {
                     WrapItemOperatonManager.default.startOperationWith(type: .freeAppSpaceWarning, allOperations: nil, completedOperations: nil)
                 }
             })
-        }else{
+        } else {
             startSearchDuplicates(finished: { [weak self] in
                 guard let self_ = self else{
                     return
                 }
-                if (self_.duplicaesArray.count > 0){
+                if (self_.duplicaesArray.count > 0) {
                     WrapItemOperatonManager.default.startOperationWith(type: .freeAppSpace, allOperations: nil, completedOperations: nil)
                 }
             })
         }
     }
     
-    func deleteDeletedLocalPhotos(deletedPhotos:[WrapData]){
+    func getLocalDuplicates(remoteItems: [Item]) -> [Item] {
+        let remoteMd5s = remoteItems.map{$0.md5}
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
+        fetchRequest.predicate = NSPredicate(format: "md5Value IN %@",  remoteMd5s)
+        
+        guard let localDuplicatesMediaItems = (try? CoreDataStack.default.mainContext.fetch(fetchRequest)) as? [MediaItem] else {
+            return []
+        }
+        
+        return localDuplicatesMediaItems.flatMap{return WrapData(mediaItem: $0)}
+    }
+    
+    func deleteDeletedLocalPhotos(deletedPhotos: [WrapData]) {
         var array = duplicaesArray.map { $0.md5 }
         for object in deletedPhotos {
-            if let index = array.index(of: object.md5){
+            if let index = array.index(of: object.md5) {
                 array.remove(at: index)
                 duplicaesArray.remove(at: index)
             }
         }
     }
     
-    func isDuplicatesNotAvailable() -> Bool{
+    func isDuplicatesNotAvailable() -> Bool {
         return duplicaesArray.count == 0
     }
     
@@ -147,9 +160,9 @@ class FreeAppSpace {
     
     private func getDuplicatesObjects(latestDate: Date,
                                       success: @escaping ()-> Swift.Void,
-                                      fail: @escaping ()-> Swift.Void){
+                                      fail: @escaping ()-> Swift.Void) {
 
-        guard let service = self.photoVideoService else{
+        guard let service = self.photoVideoService else {
             fail()
             return
         }

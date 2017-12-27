@@ -68,4 +68,6 @@ protocol MoreFilesActionsInteractorInput {
     func albumDetails(items: [BaseDataSourceItem])
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem])
+    
+    func deleteDeviceOriginal(items: [BaseDataSourceItem])
 }

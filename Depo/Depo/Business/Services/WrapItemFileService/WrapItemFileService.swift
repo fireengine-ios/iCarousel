@@ -51,24 +51,8 @@ class WrapItemFileService: WrapItemFileOperations {
     
     func delete(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         
-        let localAssets = assetsForlocalItems(files: deleteFiles)
         let successOperation: FileOperationSucces = {
-            
-            if let localAssetsW = localAssets,
-                localAssetsW.count > 0 {
-                LocalMediaStorage.default.removeAssets(deleteAsset: localAssetsW, success:  {
-
-                    let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
-                    DispatchQueue.main.async {
-                        CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
-                    }
-                    success?()
-                }, fail: fail)
-                
-            } else {
-
                 success?()
-            }
         }
         
         let failOperation: FailResponse = {  value in
@@ -86,6 +70,25 @@ class WrapItemFileService: WrapItemFileOperations {
                                  success: successOperation,
                                  fail: failOperation)
         
+    }
+    
+    func deleteLocalFile(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let localAssets = assetsForlocalItems(files: deleteFiles)
+        if let localAssetsW = localAssets,
+            localAssetsW.count > 0 {
+            LocalMediaStorage.default.removeAssets(deleteAsset: localAssetsW, success:  {
+                
+                let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
+                DispatchQueue.main.async {
+                    CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
+                }
+                success?()
+            }, fail: fail)
+            
+        } else {
+            
+            success?()
+        }
     }
     
     func move(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {

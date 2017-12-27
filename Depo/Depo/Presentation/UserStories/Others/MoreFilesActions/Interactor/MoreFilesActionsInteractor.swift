@@ -469,6 +469,10 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         download(item: items)
     }
     
+    func deleteDeviceOriginal(items: [BaseDataSourceItem]) {
+        
+    }
+    
     func succesAction(elementType: ElementTypes) -> FileOperation {
         let success: FileOperation = { [weak self] in
             DispatchQueue.main.async {

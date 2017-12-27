@@ -506,6 +506,7 @@ struct TextConstants {
     static let actionSheetInfo = "Info"
     static let actionSheetEdit = "Edit"
     static let actionSheetDelete = "Delete"
+    static let actionSheetDeleteDeviceOriginal = "Delete Device Original"
     static let actionSheetMove = "Move"
     static let actionSheetSync = "Sync"
     static let actionSheetDownload = "Download"

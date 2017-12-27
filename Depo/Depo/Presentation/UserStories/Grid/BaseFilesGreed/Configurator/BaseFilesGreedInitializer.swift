@@ -34,7 +34,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         )
 
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                  selectionModeTypes: [.createStory])
+                                                                  selectionModeTypes: [.createStory, .print, .deleteDeviceOriginal])
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
                                fileFilters: [.fileType(.image)],
@@ -45,7 +45,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeMusicViewController(with nibName:String) -> UIViewController {
+    class func initializeMusicViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto])

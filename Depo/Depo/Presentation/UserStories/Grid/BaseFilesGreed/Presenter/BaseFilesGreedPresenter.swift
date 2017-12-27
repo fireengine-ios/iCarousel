@@ -403,10 +403,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: renameIndex)
             }
 
-            let syncPhotos = selectedItems.filter{ $0.fileType == .image }
-            if !syncPhotos.isEmpty {
-                actionTypes.append(.print)
+            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: {$0.fileType == .image}) {
+                actionTypes.remove(at: printIndex)
             }
+            
+            if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal), FreeAppSpace.default.getDuplicatesObjects() {
+                // (at least one) check remotes for locals with same MD5 on disk
+                actionTypes.remove(at: deleteOriginalIndex)
+            }
+            
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,

@@ -233,7 +233,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             return
         }
         
-        
         PHPhotoLibrary.shared().performChanges({
             
             let listToDelete = NSArray(array: deleteAsset)
