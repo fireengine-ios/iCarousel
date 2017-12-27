@@ -28,6 +28,7 @@ class CreateStorySelectionConfigurator: BaseFilesGreedModuleConfigurator {
         
         presenter!.view = viewController
         presenter!.router = router
+        presenter!.sortedRule = .metaDataTimeUp
         
         let interactor = CreateStorySelectionInteractor(remoteItems: remoteServices)
         interactor.output = presenter
