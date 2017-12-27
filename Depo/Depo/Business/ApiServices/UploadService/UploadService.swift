@@ -146,9 +146,8 @@ final class UploadService: BaseRequestService {
         let firstObject = itemsToUpload.first!
         WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
                                                                     object: firstObject,
-                                                                    allOperations: self.allSyncOperationsCount + itemsToUpload.count,
-                                                                    completedOperations: self.finishedSyncOperationsCount)
-        
+                                                                    allOperations: self.allUploadOperationsCount,
+                                                                    completedOperations: self.finishedUploadOperationsCount)
         
         let operations: [UploadOperations] = itemsToUpload.flatMap {
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { (finishedOperation) in
