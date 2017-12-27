@@ -539,54 +539,21 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 }
 
 
-// MARK: - Edit delegates
-
-//extension MoreFilesActionsInteractor: CRYRotateImageDelegate {
-//
-//    /// dont need
-//    func getRotatedImage(_ rotatedImage: UIImage!) {
-////        SecondViewController *second = [[SecondViewController alloc]init];
-////        second.comingImage = rotatedImage;
-////        [self.navigationController pushViewController:second animated:YES];
-//    }
-//
-//
-//}
-
+// MARK: - Cropy delegate
 extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     
-    @objc func getEditedImage(_ sharedImage: UIImage) {
+    @objc func getEditedImage(_ image: UIImage) {
         
         let vc = PopUpController.with(title: TextConstants.save, message: TextConstants.cropyMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, secondAction: { [weak self] vc in
+            self?.save(image: image)
             vc.close { [weak self] in
                 self?.cropyController?.dismiss(animated: true, completion: nil)
-                print("--- save image")
             }
         })
         UIApplication.topController()?.present(vc, animated: false, completion: nil)
-        
-        print(sharedImage)
     }
     
-    //    @objc func getSharedUrl(_ sharedUrl: String) {
-    //        print("SharedURL = \(sharedUrl)")
-    //        print("SharedURL = \(sharedUrl)")
-    //    }
-    
-    //    func cropViewController(_ cropViewController: TOCropViewController!, didCropTo image: UIImage!, with cropRect: CGRect, angle: Int) {
-    //        print(image)
-    //    }
-    //
-    //    func cropViewController(_ cropViewController: TOCropViewController!, didCropToCircularImage image: UIImage!, with cropRect: CGRect, angle: Int) {
-    //        print(image)
-    //    }
-    //
-    //    func cropViewController(_ cropViewController: TOCropViewController!, didCropImageTo cropRect: CGRect, angle: Int) {
-    //        print(cropRect)
-    ////        SecondViewController *second = [[SecondViewController alloc]init];
-    ////        second.comingImage = image;
-    ////        [self.navigationController pushViewController:second animated:YES];
-    ////        [self dismissViewControllerAnimated:YES completion:nil];
-    //    }
-    
+    private func save(image: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+    }
 }
