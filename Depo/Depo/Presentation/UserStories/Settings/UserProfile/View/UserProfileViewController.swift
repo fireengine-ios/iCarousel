@@ -9,7 +9,6 @@
 import UIKit
 
 class UserProfileViewController: BaseViewController, UserProfileViewInput, UITextFieldDelegate {
-
     var output: UserProfileViewOutput!
     
     @IBOutlet weak var scrollView : UIScrollView!
@@ -158,6 +157,10 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         return gsmNumberTextField.text ?? ""
     }
     
+    func successSaving() {
+        readyButton?.isEnabled = true
+    }
+    
     // MARK: ButtonsAction
     
     @IBAction func onValueChanged() {}
@@ -181,6 +184,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
             setupEditState(false)
             return
         }
+        
+        readyButton?.isEnabled = false
         
         output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
     }
