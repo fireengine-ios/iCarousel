@@ -540,6 +540,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 
 
 // MARK: - Cropy delegate
+/// https://wiki.life.com.by/pages/viewpage.action?spaceKey=LTFizy&title=Cropy
+/// https://stash.turkcell.com.tr/git/projects/CROP/repos/cropy-ios-sdk/browse
 extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     
     @objc func getEditedImage(_ image: UIImage) {
