@@ -57,13 +57,14 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     func changeTo(name: String, email: String, number: String){
         if email.isEmpty || number.isEmpty {
-            output.showError(error: TextConstants.userProfileDataNotСhanged)
+            output.showError(error: TextConstants.userProfileDataNotCorrect)
             return
         }
         
         let isChanged = isNameChanged(name: name) || isEmailChanged(email: email) || isPhoneChanged(phone: number)
         if !isChanged {
             output.showError(error: TextConstants.userProfileDataNotCorrect)
+            return
         }
         
         updateNameIfNeed(name: name, email: email, number: number)

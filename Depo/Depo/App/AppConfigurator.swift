@@ -19,13 +19,27 @@ class AppConfigurator {
         
         CoreDataStack.default.appendLocalMediaItems(nil)
         setVersionAndBuildNumber()
-        self.configureSDWebImage()
+        configureSDWebImage()
+        setupCropy()
     }
     
     class private func configureSDWebImage() {
         SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024   // 100Mb
         SDImageCache.shared().config.maxCacheAge = 7 * 24 * 60 * 60     // 7 days
         SDImageCache.shared().config.shouldCacheImagesInMemory = false
+    }
+    
+    class private func setupCropy() {
+        guard let cropyConfig = CRYConfiguration.sharedInstance() else { return }
+        cropyConfig.shareType = SharedTypeImage
+        cropyConfig.origin = "http://www.cropyioslifebox.com"
+        cropyConfig.apiKey = "57f38c7d-1762-43e7-9ade-545fed50dd04"
+        
+        cropyConfig.headerColor = UIColor.lrTealish
+        cropyConfig.headerTitleColor = UIColor.white
+        
+        cropyConfig.cropHeaderColor = UIColor.lrTealish
+        cropyConfig.cropHeaderTitleColor = UIColor.white
     }
     
     //MARK: - settings bundle

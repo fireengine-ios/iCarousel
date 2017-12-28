@@ -197,7 +197,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .edit:
                 action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                    self.interactor.edit(item: currentItems)
+                    
+                    UIApplication.topController()?.showSpiner()
+                    self.interactor.edit(item: currentItems, complition: {
+                        UIApplication.topController()?.hideSpiner()
+                    })
                 })
             case .download:
                 action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
