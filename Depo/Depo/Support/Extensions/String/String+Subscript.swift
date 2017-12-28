@@ -25,5 +25,10 @@ extension String {
         let end = index(startIndex, offsetBy: r.upperBound)
         return String(self[Range(start ..< end)])
     }
+    
+    func stringByAppendingPathComponent(path: String) -> String {
+        let nsSt = self as NSString
+        return nsSt.appendingPathComponent(path)
+    }
 
 }

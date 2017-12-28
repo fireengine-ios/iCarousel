@@ -44,6 +44,7 @@ class RequestService {
                                 method: RequestMethod,
                                 timeoutInterval: TimeInterval,
                                 response: @escaping RequestResponse ) -> URLSessionDataTask {
+        log.debug("RequestService downloadRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
             request.timeoutInterval = timeoutInterval
@@ -63,6 +64,7 @@ class RequestService {
                               method: RequestMethod,
                               timeoutInterval: TimeInterval,
                               response: @escaping RequestResponse ) -> URLSessionUploadTask {
+        log.debug("RequestService uploadRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
             request.timeoutInterval = timeoutInterval
@@ -81,6 +83,7 @@ class RequestService {
                                     method: RequestMethod,
                                     timeoutInterval: TimeInterval,
                                     response: @escaping RequestFileDownloadResponse ) -> URLSessionDownloadTask {
+        log.debug("RequestService downloadFileRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
@@ -101,6 +104,7 @@ class RequestService {
                                   method: RequestMethod,
                                   timeoutInterval: TimeInterval,
                                   response: @escaping RequestFileUploadResponse ) -> URLSessionUploadTask {
+        log.debug("RequestService uploadFileRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
@@ -123,6 +127,7 @@ class RequestService {
                                       method: RequestMethod,
                                       timeoutInterval: TimeInterval,
                                       response: @escaping RequestFileUploadResponse ) -> URLSessionUploadTask {
+        log.debug("RequestService uploadFileRequestTask")
         
         var request: URLRequest = URLRequest(url: path)
         request.timeoutInterval = timeoutInterval

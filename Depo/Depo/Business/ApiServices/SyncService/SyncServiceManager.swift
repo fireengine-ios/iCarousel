@@ -58,18 +58,24 @@ class SyncServiceManager {
     //MARK: - Public
     
     func updateSyncSettings(settingsModel: SettingsAutoSyncModel) {
+        log.debug("SyncServiceManager updateSyncSettings")
+        
         settings = settingsModel
     
         checkReachabilityAndSettings()
     }
     
     func updateImmediately() {
+        log.debug("SyncServiceManager updateImmediately")
+
         lastAutoSyncTime = NSDate().timeIntervalSince1970
         
         checkReachabilityAndSettings()
     }
     
     func updateInBackground() {
+        log.debug("SyncServiceManager updateInBackground")
+
         let time = NSDate().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncs {
             lastAutoSyncTime = time

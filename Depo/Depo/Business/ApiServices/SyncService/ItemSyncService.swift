@@ -99,6 +99,8 @@ class ItemSyncServiceImpl: ItemSyncService {
     //MARK: - Private
     
     private func sync() {
+        log.debug("ItemSyncServiceImpl sync")
+
         guard !status.isContained(in: [.executing, .prepairing]) else {
             return
         }
@@ -124,6 +126,8 @@ class ItemSyncServiceImpl: ItemSyncService {
         }
         
         getUnsyncedObjects(oldestItemDate: oldestItemDate, success: { [weak self] in
+            log.debug("ItemSyncServiceImpl sync getUnsyncedObjects success")
+
             if let `self` = self {
                 guard !self.localItems.isEmpty else {
                     self.status = .synced
@@ -133,6 +137,8 @@ class ItemSyncServiceImpl: ItemSyncService {
                 self.upload(items: self.localItems)
             }
         }) {[weak self] in
+            log.debug("ItemSyncServiceImpl sync getUnsyncedObjects fail")
+
             if let `self` = self {
                 self.status = .failed
             }
@@ -140,6 +146,8 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func upload(items: [WrapData]) {
+        log.debug("ItemSyncServiceImpl upload")
+
         guard !items.isEmpty else {
             return
         }
@@ -151,12 +159,16 @@ class ItemSyncServiceImpl: ItemSyncService {
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
                                              success: { [weak self] in
+                                                log.debug("ItemSyncServiceImpl upload UploadService uploadFileList success")
+
                                                 self?.status = .synced
         }, fail: { [weak self] (error) in
             guard let `self` = self else {
                 print("\(#function): self == nil")
                 return
             }
+            
+            log.debug("ItemSyncServiceImpl upload UploadService uploadFileList fail")
 
             self.status = .failed
             
@@ -171,6 +183,8 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func getUnsyncedObjects(oldestItemDate: Date, success: @escaping () -> Void, fail: @escaping () -> Void) {
+        log.debug("ItemSyncServiceImpl getUnsyncedObjects")
+
         guard let service = self.photoVideoService else {
             fail()
             return
@@ -179,6 +193,8 @@ class ItemSyncServiceImpl: ItemSyncService {
         var finished = false
         
         service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
+            log.debug("ItemSyncServiceImpl getUnsyncedObjects PhotoAndVideoService nextItemsMinified success")
+
             guard let `self` = self else {
                 fail()
                 return
@@ -209,9 +225,13 @@ class ItemSyncServiceImpl: ItemSyncService {
             if !finished, items.count == NumericConstants.numberOfElementsInSyncRequest {
                 self.getUnsyncedObjects(oldestItemDate: oldestItemDate, success: success, fail: fail)
             } else {
+                log.debug("ItemSyncServiceImpl getUnsyncedObjects PhotoAndVideoService nextItemsMinified success")
+
                 success()
             }
             }, fail: {
+                log.debug("ItemSyncServiceImpl getUnsyncedObjects PhotoAndVideoService nextItemsMinified fail")
+
                 fail()
         }, newFieldValue: nil)
     }
