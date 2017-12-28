@@ -10,8 +10,6 @@ protocol CollectionViewCellDataProtocol {
     
     typealias Item = WrapData
     
-    func placeholderImage() -> UIImage?
-    
     func confireWithWrapperd(wrappedObj: BaseDataSourceItem)
     
     func setImage(image: UIImage?)
