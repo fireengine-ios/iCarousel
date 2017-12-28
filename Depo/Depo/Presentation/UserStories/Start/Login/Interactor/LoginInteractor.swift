@@ -139,7 +139,7 @@ class LoginInteractor: LoginInteractorInput {
             DispatchQueue.main.async {
                 //TODO: what do we do on other errors?
                 ///https://wiki.life.com.by/pages/viewpage.action?pageId=62456128
-                if failResponce.description == "412" {
+                if failResponce.description == TextConstants.eulaCheckErrorCode {
                     self?.output.onFailEULA()
                 } else {
                    self?.output.onSuccessEULA()
