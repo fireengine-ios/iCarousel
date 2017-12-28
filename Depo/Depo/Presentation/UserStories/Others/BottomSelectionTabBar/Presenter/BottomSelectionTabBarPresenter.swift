@@ -136,7 +136,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             basePassingPresenter?.stopModeSelected()
             interactor.download(item: selectedItems)
         case .edit:
-            interactor.edit(item: selectedItems)
+            RouterVC().tabBarVC?.showSpiner()
+            self.interactor.edit(item: selectedItems, complition: {
+                RouterVC().tabBarVC?.hideSpiner()
+            })
         case .info:
             if let firstSelected = selectedItems.first as? Item {
                 router.onInfo(object: firstSelected)
@@ -291,7 +294,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 
             case .edit:
                 action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                    self.interactor.edit(item: currentItems)
+                    
+                    RouterVC().tabBarVC?.showSpiner()
+                    self.interactor.edit(item: currentItems, complition: {
+                        RouterVC().tabBarVC?.hideSpiner()
+                    })
                 })
             case .download:
                 action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in

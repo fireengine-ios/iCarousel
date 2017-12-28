@@ -562,8 +562,8 @@ struct TextConstants {
     static let freeAppSpaceAlertSuccesTitle = NSLocalizedString("You have free space for %d more items.", comment: "")
     static let freeAppSpaceAlertSuccesButton = NSLocalizedString("OK", comment: "")
     
-    // MARK NAVBAR titles
-    
+    static let save = NSLocalizedString("Save", comment: "")
+    static let cropyMessage = NSLocalizedString("This edited photo will be saved as a new photo in your device gallery", comment: "")
     static let cancel = NSLocalizedString("Cancel", comment: "")
     
     
