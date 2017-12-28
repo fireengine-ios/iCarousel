@@ -35,6 +35,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         selectionView.alpha = 0
         
         progressView.tintColor = ColorConstants.blueColor
+        imageView.backgroundColor = UIColor.clear
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
@@ -76,29 +77,30 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     override func setImage(image: UIImage?) {
-        if image != nil {
-            self.imageView.contentMode = .scaleAspectFill
-            imageView.image = image
-            isAlreadyConfigured = true
-            self.backgroundColor = ColorConstants.fileGreedCellColor
-            activity.stopAnimating()
-        } else {
-            self.imageView.contentMode = .center
-            super.setImage(image: image)
-        }
+        self.imageView.contentMode = .scaleAspectFill
+        imageView.image = image
+        isAlreadyConfigured = true
+        self.backgroundColor = ColorConstants.fileGreedCellColor
+        activity.stopAnimating()
     }
 
     override func setImage(with url: URL) {
         self.imageView.contentMode = .center
-        imageView.sd_setImage(with: url, placeholderImage: self.placeholderImage(), options: [.avoidAutoSetImage]) {[weak self] (image, error, cacheType, url) in
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] (image, error, cacheType, url) in
+            guard let `self` = self else {
+                return
+            }
+            
             guard error == nil else {
                 print("SD_WebImage_setImage error: \(error!.localizedDescription)")
                 return
             }
             
-            DispatchQueue.main.async {
-                self?.setImage(image: image)
-            }
+            self.imageView.layer.opacity = 0.1
+            self.setImage(image: image)
+            UIView.animate(withDuration: 0.2, animations: {
+                self.imageView.layer.opacity = 1.0
+            })
         }
         
         isAlreadyConfigured = true
@@ -115,10 +117,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
     }
-    
-    override func placeholderImage() -> UIImage? {
-        return ActivityFileType.image.image
-    }
+
     
     class func getCellSise()->CGSize{
         return CGSize(width: 90.0, height: 90.0)

@@ -21,8 +21,5 @@ class CollectionViewCellForAudio: CollectionViewCellForPhoto {
     override class func getCellSise() -> CGSize {
         return CGSize(width: 90.0, height: 90.0)
     }
-    
-    override func placeholderImage() -> UIImage? {
-        return ActivityFileType.audio.image
-    }
+  
 }

@@ -55,20 +55,16 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         interactor.authificate(atachedCaptcha: nil)
     }
     
-    func vereficationFailed(with error: CustomStringConvertible) {
+    func vereficationFailed(with error: String) {
         view.heighlightInfoTitle()
         compliteAsyncOperationEnableScreen()
-        
-        let text = String(format: TextConstants.phoneVereficationNonValidCodeErrorText, interactor.email)
-        router.presentErrorPopUp(with: text)
+        router.presentErrorPopUp(with: error)
     }
     
     func resendCodeRequestFailed(with error: ErrorResponse) {
         compliteAsyncOperationEnableScreen()
         view.resendButtonShow(show: true)
-        
-        let text = String(format: TextConstants.phoneVereficationResendRequestFailedErrorText, interactor.email)
-        router.presentErrorPopUp(with: text)
+        router.presentErrorPopUp(with: TextConstants.phoneVereficationResendRequestFailedErrorText)
     }
     
     func resendCodeRequestSuccesed() {

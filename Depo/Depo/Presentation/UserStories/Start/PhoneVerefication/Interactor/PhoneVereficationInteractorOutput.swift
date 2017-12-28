@@ -11,7 +11,7 @@ import Foundation
 protocol PhoneVereficationInteractorOutput: class {
     
     func verificationSucces()
-    func vereficationFailed(with error: CustomStringConvertible)
+    func vereficationFailed(with error: String)
     
     func resendCodeRequestFailed(with error: ErrorResponse)
     func resendCodeRequestSuccesed()

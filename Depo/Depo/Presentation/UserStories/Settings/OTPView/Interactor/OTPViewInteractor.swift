@@ -55,8 +55,10 @@ class OTPViewInteractor: PhoneVereficationInteractor {
                 if self.attempts >= 3 {
                     self.attempts = 0
                     self.output.reachedMaxAttempts()
+                    self.output.vereficationFailed(with: TextConstants.promocodeBlocked)
+                } else {
+                    self.output.vereficationFailed(with: TextConstants.phoneVereficationNonValidCodeErrorText)
                 }
-                self.output.vereficationFailed(with: errorRespose)
             }
         }
     }
