@@ -132,14 +132,10 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     func finishedUploadForObject(){
         progressView.isHidden = true
         cloudStatusImage.image = UIImage(named: "objectInCloud")
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
-//            if let `self` = self{
-//                if self.needHideCloudImage{
-//                    self.cloudStatusImage.image = UIImage()
-//                }
-//            }
-//        }
-        
+    }
+    
+    func resetCloudImage(){
+        cloudStatusImage.image = UIImage()
     }
 
 }

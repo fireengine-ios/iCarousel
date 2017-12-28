@@ -671,8 +671,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificati
             cellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         }
         
+        
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReUseID!,
                                                       for: indexPath)
+        
+        
         return  cell
     }
     
@@ -719,6 +723,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificati
         if isLastCell, isLastSection, !isPaginationDidEnd {
             self.delegate?.getNextItems()
         }
+        
+        if let photoCell = cell_ as? CollectionViewCellForPhoto{
+            let file = itemForIndexPath(indexPath: indexPath)
+            if let `file` = file, uploadedObjectID.index(of: file.uuid) != nil{
+                photoCell.finishedUploadForObject()
+            }
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -878,18 +890,23 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificati
             cell.finishedUploadForObject()
         }
         
-        if let index = uploadedObjectID.index(of: file.uuid){
-            
-        }else{
-            let uuid = file.uuid
+        let uuid = file.uuid
+        
+        if uploadedObjectID.index(of: file.uuid) == nil{
             uploadedObjectID.append(uuid)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
-                if let `self` = self{
-                    let indexPath = self.getCellForFile(objectUUID: uuid)
-                    
-                }
-            })
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
+            if let `self` = self{
+                let cell = self.getCellForFile(objectUUID: uuid)
+                cell?.resetCloudImage()
+                
+                if let index = self.uploadedObjectID.index(of: uuid){
+                    self.uploadedObjectID.remove(at: index)
+                }
+            }
+        })
+        
     }
     
     func isEqual(object: UploadNotificationManagerProtocol) -> Bool{
