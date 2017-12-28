@@ -81,6 +81,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         attributedText.addAttribute(NSAttributedStringKey.font, value: font1, range: r1)
         attributedText.addAttribute(NSAttributedStringKey.font, value: font2, range: r2)
         
+        backButtonForNavigationItem(title: TextConstants.backTitle)
+        
         output.viewIsReady()
     }
     
@@ -157,7 +159,7 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         return gsmNumberTextField.text ?? ""
     }
     
-    func successSaving() {
+    func endSaving() {
         readyButton?.isEnabled = true
     }
     

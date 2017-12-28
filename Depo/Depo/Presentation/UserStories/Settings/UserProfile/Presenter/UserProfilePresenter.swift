@@ -27,14 +27,15 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     }
     
     func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse){
-        view.successSaving()
+        view.endSaving()
+        view.setupEditState(false)
         if let navigationController = view.getNavigationController(){
             router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController, phoneNumber: view.getPhoneNumber())
         }
     }
     
     func showError(error: String){
-        view.successSaving()
+        view.endSaving()
         UIApplication.showErrorAlert(message: error)
     }
     

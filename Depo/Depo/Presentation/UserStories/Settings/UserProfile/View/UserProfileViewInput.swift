@@ -23,5 +23,5 @@ protocol UserProfileViewInput: class {
     
     func getPhoneNumber() -> String
     
-    func successSaving()
+    func endSaving()
 }
