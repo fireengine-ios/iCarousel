@@ -631,6 +631,7 @@ struct TextConstants {
     static let errorManyRequest = NSLocalizedString("It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry.", comment: "")
     
     static let TOO_MANY_REQUESTS = NSLocalizedString("Too many invalid attempts, please try again later", comment: "")
+    static let EMAIL_IS_INVALID = NSLocalizedString("E-mail field is invalid", comment: "")
     
     static let errorUnknown = NSLocalizedString("Unknown error", comment: "")
     static let errorServer = NSLocalizedString("Server error", comment: "")

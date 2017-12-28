@@ -34,6 +34,7 @@ final class ServerStatusError {
         static let manyRequest = "PASSWORD_FIELD_IS_EMPTY"
         
         static let TOO_MANY_REQUESTS = "TOO_MANY_REQUESTS"
+        static let EMAIL_IS_INVALID = "EMAIL_IS_INVALID"
     }
 }
 extension ServerStatusError: LocalizedError {
@@ -84,8 +85,11 @@ extension ServerStatusError: LocalizedError {
         case ErrorKeys.TOO_MANY_REQUESTS:
             return TextConstants.TOO_MANY_REQUESTS
             
+        case ErrorKeys.EMAIL_IS_INVALID:
+            return TextConstants.EMAIL_IS_INVALID
+            
         default:
-            return TextConstants.errorUnknown
+            return status
         }
     }
 }
