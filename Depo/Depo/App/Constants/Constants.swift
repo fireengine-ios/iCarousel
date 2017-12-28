@@ -693,8 +693,6 @@ struct TextConstants {
     static let removeFromAlbum = NSLocalizedString("This file will be removed only from your album. You can access this file from Photos tab", comment: "")
     
     static let locationServiceDisable = NSLocalizedString("Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu.", comment: "")
-    
-    static let eulaCheckErrorCode = "EULA_APPROVE_REQUIRED"
 }
 
 

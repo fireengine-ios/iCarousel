@@ -139,10 +139,10 @@ class LoginInteractor: LoginInteractorInput {
             DispatchQueue.main.async {
                 //TODO: what do we do on other errors?
                 ///https://wiki.life.com.by/pages/viewpage.action?pageId=62456128
-                if failResponce.description == TextConstants.eulaCheckErrorCode {
+                if failResponce.description == "EULA_APPROVE_REQUIRED" {
                     self?.output.onFailEULA()
                 } else {
-                   self?.output.onSuccessEULA()
+                   self?.output.onFailEULA()
                 }
                 
             }
