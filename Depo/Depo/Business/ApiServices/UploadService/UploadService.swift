@@ -255,18 +255,18 @@ final class UploadService: BaseRequestService {
                 
                 if finishedOperation.item.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 }
                 else if finishedOperation.item.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
-
-                WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
-                                                                            object: nil,
-                                                                            allOperations: self.allSyncOperationsCount,
-                                                                            completedOperations: self.finishedSyncOperationsCount)
-
-                
-                UploadNotificationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
                 if let index = self.uploadOperations.index(of: finishedOperation){
                     self.uploadOperations.remove(at: index)
                 }
+                
+                WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
+                                                                            object: nil,
+                                                                            allOperations: self.allSyncOperationsCount,
+                                                                            completedOperations: self.finishedSyncOperationsCount)
+                
+                
+                UploadNotificationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
                 if let error = error {
                     if error.description != TextConstants.canceledOperationTextError {
