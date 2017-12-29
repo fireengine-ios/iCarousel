@@ -23,6 +23,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     @IBOutlet weak var selectionView: UIView!
     
+    @IBOutlet weak var progressView: UIProgressView!
+    
     static let borderW: CGFloat = 3
     
     override func awakeFromNib() {
@@ -32,6 +34,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         selectionView.layer.borderColor = ColorConstants.darcBlueColor.cgColor
         selectionView.alpha = 0
         
+        progressView.tintColor = ColorConstants.blueColor
         imageView.backgroundColor = UIColor.clear
     }
     
@@ -43,6 +46,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         if (isAlreadyConfigured){
             return
         }
+        
+        progressView.isHidden = true
         
         if let item = wrappedObj as? Item{
             favoriteIcon.isHidden = !item.favorites
@@ -116,6 +121,20 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     class func getCellSise()->CGSize{
         return CGSize(width: 90.0, height: 90.0)
+    }
+    
+    func setProgressForObject(progress: Float){
+        progressView.isHidden = false
+        progressView.setProgress(progress, animated: false)
+    }
+    
+    func finishedUploadForObject(){
+        progressView.isHidden = true
+        cloudStatusImage.image = UIImage(named: "objectInCloud")
+    }
+    
+    func resetCloudImage(){
+        cloudStatusImage.image = UIImage()
     }
 
 }
