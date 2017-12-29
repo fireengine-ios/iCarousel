@@ -74,6 +74,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         setupTopBar()
         getContent()
         reloadData()
+        subscribeDataSource()
+    }
+    
+    func subscribeDataSource(){
+        UploadNotificationManager.default.startUpdateView(view: dataSource)
+    }
+    
+    deinit {
+        UploadNotificationManager.default.stopUpdateView(view: dataSource)
     }
     
     func searchByText(searchText: String) {

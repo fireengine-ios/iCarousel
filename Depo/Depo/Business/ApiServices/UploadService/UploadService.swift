@@ -144,6 +144,8 @@ final class UploadService: BaseRequestService {
         self.allUploadOperationsCount += itemsToUpload.count
         
         let firstObject = itemsToUpload.first!
+        
+        UploadNotificationManager.default.startUploadFile(file: firstObject)
         WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
                                                                     object: firstObject,
                                                                     allOperations: self.allUploadOperationsCount,
@@ -166,9 +168,11 @@ final class UploadService: BaseRequestService {
                 }
                 self.finishedUploadOperationsCount += 1
                 WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
-                                                                            object: finishedOperation.item,
+                                                                            object: nil,
                                                                             allOperations: self.allUploadOperationsCount,
                                                                             completedOperations: self.finishedUploadOperationsCount)
+                
+                UploadNotificationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
                 if let index = self.uploadOperations.index(of: finishedOperation){
                     self.uploadOperations.remove(at: index)
@@ -239,6 +243,9 @@ final class UploadService: BaseRequestService {
                                                                     object: firstObject,
                                                                     allOperations: self.allSyncOperationsCount + itemsToSync.count,
                                                                     completedOperations: self.finishedSyncOperationsCount)
+        
+        UploadNotificationManager.default.startUploadFile(file: firstObject)
+        
         let operations: [UploadOperations] = itemsToSync.flatMap {
             
             let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] (finishedOperation, error) in
@@ -254,9 +261,12 @@ final class UploadService: BaseRequestService {
                 }
                 
                 WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
-                                                                            object: finishedOperation.item,
+                                                                            object: nil,
                                                                             allOperations: self.allSyncOperationsCount,
                                                                             completedOperations: self.finishedSyncOperationsCount)
+                
+                
+                UploadNotificationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
                 if let error = error {
                     if error.description != TextConstants.canceledOperationTextError {
@@ -397,9 +407,11 @@ extension UploadService: UploadProgressServiceDelegate {
     }
     
     func didSend(ratio: Float, for tempUUID: String) {
-        if let uploadType = uploadOperations.first(where: {$0.item.uuid == tempUUID})?.uploadType {
-            print("Uploading... \(ratio * 100)")
-            WrapItemOperatonManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType))
+        if let uploadOperation = uploadOperations.first(where: {$0.item.uuid == tempUUID}){
+            if let uploadType = uploadOperation.uploadType{
+                WrapItemOperatonManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: uploadOperation.item)
+            }
+            UploadNotificationManager.default.setProgressForUploadingFile(file: uploadOperation.item, progress: ratio)
         }
     }
     
@@ -504,6 +516,8 @@ class UploadOperations: Operation {
             self.handler?(self, value)
             self.semaphore.signal()
         }
+        
+        UploadNotificationManager.default.startUploadFile(file: item)
         
         baseUrl(success: { [weak self] baseurlResponse in
             guard let `self` = self else{

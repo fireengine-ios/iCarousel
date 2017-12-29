@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -49,10 +49,17 @@
                             <constraint firstAttribute="height" constant="12" id="wFq-mS-Bu8"/>
                         </constraints>
                     </imageView>
+                    <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XJs-Ot-0Kd">
+                        <rect key="frame" x="5" y="86" width="80" height="2"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="aaB-d5-C0C"/>
+                        </constraints>
+                    </progressView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="qHk-K2-jJ1" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="29Z-8F-zaG"/>
+                <constraint firstAttribute="trailing" secondItem="XJs-Ot-0Kd" secondAttribute="trailing" constant="5" id="2pK-Nl-cZ6"/>
                 <constraint firstItem="kwv-1p-nO6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="3HP-DR-B2Y"/>
                 <constraint firstAttribute="trailing" secondItem="Lqt-0c-t0J" secondAttribute="trailing" id="8uz-yU-7hi"/>
                 <constraint firstItem="Lqt-0c-t0J" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="EHS-nI-eXc"/>
@@ -65,9 +72,11 @@
                 <constraint firstAttribute="trailing" secondItem="0of-UX-nI8" secondAttribute="trailing" constant="5" id="PfD-53-IAa"/>
                 <constraint firstItem="kwv-1p-nO6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Pzt-C4-zdu"/>
                 <constraint firstItem="Lqt-0c-t0J" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="RlI-z4-WD1"/>
+                <constraint firstAttribute="bottom" secondItem="XJs-Ot-0Kd" secondAttribute="bottom" constant="2" id="Zey-ez-MkW"/>
                 <constraint firstAttribute="bottom" secondItem="2VJ-2A-pkc" secondAttribute="bottom" id="bcu-La-YZE"/>
                 <constraint firstAttribute="bottom" secondItem="IQc-XA-IIn" secondAttribute="bottom" constant="8" id="ivt-zk-vgW"/>
                 <constraint firstItem="2VJ-2A-pkc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mJT-yZ-qWv"/>
+                <constraint firstItem="XJs-Ot-0Kd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="zeB-aX-9yy"/>
             </constraints>
             <size key="customSize" width="103" height="95"/>
             <connections>
@@ -75,6 +84,7 @@
                 <outlet property="cloudStatusImage" destination="IQc-XA-IIn" id="Bsx-gf-1p3"/>
                 <outlet property="favoriteIcon" destination="kwv-1p-nO6" id="yqs-WY-gDH"/>
                 <outlet property="imageView" destination="2VJ-2A-pkc" id="DSz-RE-Xol"/>
+                <outlet property="progressView" destination="XJs-Ot-0Kd" id="nir-k5-cnD"/>
                 <outlet property="selectionImageView" destination="0of-UX-nI8" id="qwk-PN-ZFc"/>
                 <outlet property="selectionView" destination="Lqt-0c-t0J" id="4Af-9D-QkW"/>
             </connections>
