@@ -27,8 +27,8 @@ extension String {
     }
     
     func stringByAppendingPathComponent(path: String) -> String {
-        let nsSt = self as NSString
-        return nsSt.appendingPathComponent(path)
+        let currentString = self as NSString
+        return currentString.appendingPathComponent(path)
     }
 
 }
