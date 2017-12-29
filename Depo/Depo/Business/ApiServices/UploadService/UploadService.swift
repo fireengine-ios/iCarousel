@@ -410,15 +410,9 @@ extension UploadService: UploadProgressServiceDelegate {
         if let uploadOperation = uploadOperations.first(where: {$0.item.uuid == tempUUID}){
             if let uploadType = uploadOperation.uploadType{
                 WrapItemOperatonManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: uploadOperation.item)
-                //WrapItemOperatonManager.default.set
             }
             UploadNotificationManager.default.setProgressForUploadingFile(file: uploadOperation.item, progress: ratio)
         }
-        
-//        if let uploadType = uploadOperations.first(where: {$0.item.uuid == tempUUID})?.uploadType {
-//            print("Uploading... \(ratio * 100)")
-//
-//        }
     }
     
     func didSend(percent: Float, for tempUUID: String) {
