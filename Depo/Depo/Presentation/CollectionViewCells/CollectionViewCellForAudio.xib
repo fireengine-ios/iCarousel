@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -58,6 +57,12 @@
                             <constraint firstAttribute="width" constant="14" id="rik-vS-rre"/>
                         </constraints>
                     </imageView>
+                    <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1WA-8R-czo">
+                        <rect key="frame" x="5" y="85" width="80" height="2"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="Qv6-gY-Nec"/>
+                        </constraints>
+                    </progressView>
                 </subviews>
             </view>
             <constraints>
@@ -66,6 +71,7 @@
                 <constraint firstAttribute="trailing" secondItem="5Ak-jd-gIh" secondAttribute="trailing" constant="8" id="E6G-HP-YaB"/>
                 <constraint firstItem="QBu-DP-PdN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="HdP-7A-7TG"/>
                 <constraint firstItem="Cax-Kd-Ygh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="IGO-wr-DV8"/>
+                <constraint firstAttribute="bottom" secondItem="1WA-8R-czo" secondAttribute="bottom" constant="3" id="KYO-yP-ONv"/>
                 <constraint firstAttribute="trailing" secondItem="cVQ-eE-Srw" secondAttribute="trailing" id="Lfm-6m-Nar"/>
                 <constraint firstItem="c0S-7X-BEV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="RQR-Mt-TDO"/>
                 <constraint firstItem="Bbg-jH-i46" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="RXc-51-xR7"/>
@@ -76,8 +82,10 @@
                 <constraint firstItem="cVQ-eE-Srw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Xqe-5v-7Kp"/>
                 <constraint firstItem="Bbg-jH-i46" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="cFN-0g-riS"/>
                 <constraint firstAttribute="trailing" secondItem="c0S-7X-BEV" secondAttribute="trailing" id="ckw-wN-NdV"/>
+                <constraint firstItem="1WA-8R-czo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="jhq-TR-OTb"/>
                 <constraint firstItem="3CW-co-sd1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="nHM-Ib-pTb"/>
                 <constraint firstAttribute="bottom" secondItem="c0S-7X-BEV" secondAttribute="bottom" id="psQ-nz-hqV"/>
+                <constraint firstAttribute="trailing" secondItem="1WA-8R-czo" secondAttribute="trailing" constant="5" id="tVU-lY-v6R"/>
                 <constraint firstAttribute="bottom" secondItem="cVQ-eE-Srw" secondAttribute="bottom" id="tZr-bC-bjv"/>
                 <constraint firstItem="QBu-DP-PdN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="zwX-cq-kot"/>
             </constraints>
@@ -86,6 +94,7 @@
                 <outlet property="cloudStatusImage" destination="5Ak-jd-gIh" id="baz-vb-H7Y"/>
                 <outlet property="favoriteIcon" destination="QBu-DP-PdN" id="ZaF-8o-6Vf"/>
                 <outlet property="imageView" destination="3CW-co-sd1" id="gFZ-JH-tje"/>
+                <outlet property="progressView" destination="1WA-8R-czo" id="8Gf-NH-nqn"/>
                 <outlet property="selectionImageView" destination="Cax-Kd-Ygh" id="jyM-LN-6FN"/>
                 <outlet property="selectionView" destination="c0S-7X-BEV" id="cUX-bs-FGv"/>
                 <outlet property="titleLabel" destination="cVQ-eE-Srw" id="F3U-ef-Oln"/>

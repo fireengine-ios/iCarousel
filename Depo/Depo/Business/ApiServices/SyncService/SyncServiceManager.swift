@@ -75,14 +75,6 @@ class SyncServiceManager {
         }
     }
     
-    func syncWithDataPlan() {
-        startManually()
-    }
-    
-    func waitForWifi() {
-        stopManually()
-    }
-    
     
     //MARK: - Private
     
