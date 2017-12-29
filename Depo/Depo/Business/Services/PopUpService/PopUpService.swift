@@ -35,17 +35,20 @@ class PopUpService{
     
     func checkIsNeedShowUploadOffPopUp(){
         SingletonStorage.shared.getAccountInfoForUser(success: { (success) in
-            let count = PopUpService.shared.getLoginCountForUser()
-            if (count == 0){
-                WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff , allOperations: nil, completedOperations: nil)
-                return
-            }
-            if count >= NumericConstants.countOfLoginBeforeNeedShowUploadOffPopUp {
-                WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff , allOperations: nil, completedOperations: nil)
-                return
-            }
+            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff , allOperations: nil, completedOperations: nil)
             
-            PopUpService.shared.incrementLoginCountForUser()
+            //Old logic with checking login count
+//            let count = PopUpService.shared.getLoginCountForUser()
+//            if (count == 0){
+//                WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff , allOperations: nil, completedOperations: nil)
+//                return
+//            }
+//            if count >= NumericConstants.countOfLoginBeforeNeedShowUploadOffPopUp {
+//                WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff , allOperations: nil, completedOperations: nil)
+//                return
+//            }
+//
+//            PopUpService.shared.incrementLoginCountForUser()
         }) { (fail) in
             
         }

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +21,7 @@
                         <constraint firstAttribute="height" constant="20" id="tpm-wJ-TxJ"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFk-Wg-JrE" customClass="CircleButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFk-Wg-JrE" customClass="CircleButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
                     <rect key="frame" x="141" y="21" width="70" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="Ru7-hO-yiq"/>

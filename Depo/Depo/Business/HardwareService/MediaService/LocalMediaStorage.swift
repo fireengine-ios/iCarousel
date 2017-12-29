@@ -286,18 +286,17 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
 
     }
     
+    var addAssetToCollectionQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
     fileprivate func add(asset assetIdentifier: String, to album: String) {
         askPermissionForPhotoFramework(redirectToSettings: true, completion: { (accessGranted, _) in
             if accessGranted {
-                if let collection = self.loadAlbum(album) {
-                    self.add(asset: assetIdentifier, to: collection)
-                } else {
-                    self.createAlbum(album, completion: { (collection) in
-                        if let collection = collection {
-                            self.add(asset: assetIdentifier, to: collection)
-                        }
-                    })
-                }
+                let operation = AddAssetToCollectionOperation(albumName: album, assetIdentifier: assetIdentifier)
+                self.addAssetToCollectionQueue.addOperation(operation)
             }
         })
     }
@@ -327,7 +326,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     typealias AssetCollectionCompletion = (_ collection: PHAssetCollection?) -> Void
     
-    private func createAlbum(_ name: String, completion: @escaping AssetCollectionCompletion) {
+    func createAlbum(_ name: String, completion: @escaping AssetCollectionCompletion) {
         var assetCollectionPlaceholder: PHObjectPlaceholder?
         PHPhotoLibrary.shared().performChanges({
             let createAlbumRequest : PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: name)
@@ -340,7 +339,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         })
     }
     
-    private func loadAlbum(_ name: String) -> PHAssetCollection? {
+    func loadAlbum(_ name: String) -> PHAssetCollection? {
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate(format: "title = %@", name)
         let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
@@ -593,4 +592,32 @@ class GetOriginalVideoOperation: Operation {
         options.isNetworkAccessAllowed = true
         photoManager.requestAVAsset(forVideo: asset, options: options, resultHandler: callback)
     }
+}
+
+class AddAssetToCollectionOperation: AsyncOperation {
+    
+    let albumName: String
+    let assetIdentifier: String
+    let mediaStorage = LocalMediaStorage.default
+    
+    init(albumName: String, assetIdentifier: String) {
+        self.albumName = albumName
+        self.assetIdentifier = assetIdentifier
+        super.init()
+    }
+    
+    override func workItem() {
+        if let collection = mediaStorage.loadAlbum(albumName) {
+            mediaStorage.add(asset: assetIdentifier, to: collection)
+            markFinished()
+        } else {
+            mediaStorage.createAlbum(albumName, completion: { [weak self] (collection) in
+                if let collection = collection, let `self` = self {
+                    self.mediaStorage.add(asset: self.assetIdentifier, to: collection)
+                    self.markFinished()
+                }
+            })
+        }
+    }
+
 }

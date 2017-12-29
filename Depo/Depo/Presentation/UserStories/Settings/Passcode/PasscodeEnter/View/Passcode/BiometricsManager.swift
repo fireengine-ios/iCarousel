@@ -13,9 +13,15 @@ typealias AuthenticateHandler = (Bool) -> Void
 
 protocol BiometricsManager {
     var isEnabled: Bool { get set }
-    var isAvailable: Bool { get }
+    var status: BiometricsStatus { get }
     var isAvailableFaceID: Bool { get }
     func authenticate(reason: String, handler: @escaping AuthenticateHandler)
+}
+
+enum BiometricsStatus {
+    case available
+    case notAvailable
+    case notInitialized ///"No fingers are enrolled with Touch ID."
 }
 
 final class BiometricsManagerImp: BiometricsManager {
@@ -26,8 +32,17 @@ final class BiometricsManagerImp: BiometricsManager {
         set { UserDefaults.standard.set(newValue, forKey: BiometricsManagerImp.isEnabledKey) }
     }
     
-    var isAvailable: Bool {
-        return LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+    var status: BiometricsStatus {
+        var error: NSError?
+        let result = LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+        
+        if result {
+            return .available
+        } else if error?.code == -7 {
+            return .notInitialized
+        } else {
+            return .notAvailable
+        }
     }
     
     var isAvailableFaceID: Bool {
@@ -41,7 +56,7 @@ final class BiometricsManagerImp: BiometricsManager {
     }
     
     func authenticate(reason: String = TextConstants.passcodeBiometricsDefault, handler: @escaping AuthenticateHandler) {
-        if !isAvailable || !isEnabled {
+        if status != .available || !isEnabled {
             return handler(false)
         }
         

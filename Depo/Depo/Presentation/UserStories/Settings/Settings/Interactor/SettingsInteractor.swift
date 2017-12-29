@@ -101,7 +101,8 @@ class SettingsInteractor: SettingsInteractorInput {
             DispatchQueue.main.async {
                 self?.passcodeStorage.clearPasscode()
                 self?.biometricsManager.isEnabled = false
-                ApplicationSession.sharedSession.session.clearRemeberMeToken()
+                ApplicationSession.sharedSession.session.clearTokens()
+                ApplicationSession.sharedSession.saveData()
                 CoreDataStack.default.clearDataBase()
                 FreeAppSpace.default.clear()
                 WrapItemOperatonManager.default.stopAllOperations()

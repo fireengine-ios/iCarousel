@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
+class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     weak var output: MoreFilesActionsInteractorOutput?
     private var fileService = WrapItemFileService()
@@ -71,7 +71,7 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     
     func shareSmallSize(sourceRect: CGRect?){
         if let items = sharingItems as? [WrapData] {
-            let files: [FileForDownload] = items.flatMap({ FileForDownload(forSmallURL: $0) })
+            let files: [FileForDownload] = items.flatMap({ FileForDownload(forMediumURL: $0) })
             shareFiles(filesForDownload: files, sourceRect: sourceRect)
         }
         
@@ -178,8 +178,30 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         }
     }
     
-    func edit(item: [BaseDataSourceItem]) {
+    
+    private var cropyController: CRYCropNavigationController?
+    
+    func edit(item: [BaseDataSourceItem], complition: (() -> Void)?) {
+        guard let item = item.first as? Item, let url = item.tmpDownloadUrl else {
+            return
+        }
         
+        ImageDownloder().getImage(patch: url) { [weak self] image in
+            guard let `self` = self, let image = image,
+                let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
+            else {
+                complition?()
+                return
+            }
+            
+            //vc.setShareEnabled(true)
+            //        vc.setCropDelegate(self)
+            vc.sharedDelegate = self
+            self.cropyController = vc
+            
+            complition?()
+            RouterVC().presentViewController(controller: vc)
+        }
     }
     
     func delete(item: [BaseDataSourceItem]) {
@@ -513,5 +535,27 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         if let operations = operations {
             output?.startCancelableAsync(operations: operations, cancel: cancel)
         }
+    }
+}
+
+
+// MARK: - Cropy delegate
+/// https://wiki.life.com.by/pages/viewpage.action?spaceKey=LTFizy&title=Cropy
+/// https://stash.turkcell.com.tr/git/projects/CROP/repos/cropy-ios-sdk/browse
+extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
+    
+    @objc func getEditedImage(_ image: UIImage) {
+        
+        let vc = PopUpController.with(title: TextConstants.save, message: TextConstants.cropyMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, secondAction: { [weak self] vc in
+            self?.save(image: image)
+            vc.close { [weak self] in
+                self?.cropyController?.dismiss(animated: true, completion: nil)
+            }
+        })
+        UIApplication.topController()?.present(vc, animated: false, completion: nil)
+    }
+    
+    private func save(image: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }

@@ -36,7 +36,7 @@ enum BaseDataSourceDisplayingType{
 }
 
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
-UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificationManagerProtocol {
     
     var isPaginationDidEnd = false
     
@@ -71,6 +71,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
     var allLocalItems = [WrapData]()
+    var uploadedObjectID = [String]()
     
     
     
@@ -670,8 +671,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             cellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         }
         
+        
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReUseID!,
                                                       for: indexPath)
+        
+        
         return  cell
     }
     
@@ -718,6 +723,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         if isLastCell, isLastSection, !isPaginationDidEnd {
             self.delegate?.getNextItems()
         }
+        
+        if let photoCell = cell_ as? CollectionViewCellForPhoto{
+            let file = itemForIndexPath(indexPath: indexPath)
+            if let `file` = file, uploadedObjectID.index(of: file.uuid) != nil{
+                photoCell.finishedUploadForObject()
+            }
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -830,4 +843,77 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return UICollectionReusableView()
         }
     }
+    
+    //MARK: UploadNotificationManagerProtocol
+    
+    func getIndexPathForObject(objectUUID: String) -> IndexPath?{
+        var indexPath: IndexPath? = nil
+        var section = 0
+        var row = 0
+        for array in allItems{
+            row = 0
+            for arraysObject in array{
+                if arraysObject.uuid == objectUUID{
+                    indexPath = IndexPath(row: row, section: section)
+                }
+                row += 1
+            }
+            section += 1
+        }
+        return indexPath
+    }
+    
+    func getCellForFile(objectUUID: String) -> CollectionViewCellForPhoto?{
+        if let path = getIndexPathForObject(objectUUID: objectUUID){
+            let cell = collectionView.cellForItem(at: path)
+            if let `cell` = cell as? CollectionViewCellForPhoto{
+                return cell
+            }
+        }
+        return nil
+    }
+    
+    func startUploadFile(file: WrapData){
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.setProgressForObject(progress: 0)
+        }
+    }
+    
+    func setProgressForUploadingFile(file: WrapData, progress: Float){
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.setProgressForObject(progress: progress)
+        }
+    }
+    
+    func finishedUploadFile(file: WrapData){
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.finishedUploadForObject()
+        }
+        
+        let uuid = file.uuid
+        
+        if uploadedObjectID.index(of: file.uuid) == nil{
+            uploadedObjectID.append(uuid)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
+            if let `self` = self{
+                let cell = self.getCellForFile(objectUUID: uuid)
+                cell?.resetCloudImage()
+                
+                if let index = self.uploadedObjectID.index(of: uuid){
+                    self.uploadedObjectID.remove(at: index)
+                }
+            }
+        })
+        
+    }
+    
+    func isEqual(object: UploadNotificationManagerProtocol) -> Bool {
+        if let compairedView = object as? BaseDataSourceForCollectionView {
+            return compairedView == self
+        }
+        return false
+    }
+    
 }

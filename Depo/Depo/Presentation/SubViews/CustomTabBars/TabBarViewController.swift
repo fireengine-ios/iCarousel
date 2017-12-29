@@ -115,33 +115,36 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tabBar.delegate = self
         
-        let items = [("outlineHome",TextConstants.home),
-                     ("outlinePhotosVideos", TextConstants.photoAndVideo),
-                     ("", ""),
-                     ("outlineMusic", TextConstants.music),
-                     ("outlineDocs",  TextConstants.documents)]
-        
-        tabBar.setupItems(withImageToTitleNames: items)
+        setupTabBarItems()
         
         setupCurtainView()
         setupSubButtons()
         setupCustomNavControllers()
-
+        
         selectedIndex = 0
         tabBar.selectedItem = tabBar.items?.first
         
         setupMusicBar()
-        
         setupObserving()
         
         player.delegates.add(self)
     }
     
     deinit {
-    
         player.delegates.remove(self)
+    }
+    
+    private func setupTabBarItems() {
+        let items = [("outlineHome",""),
+                     ("outlinePhotosVideos", ""),
+                     ("", ""),
+                     ("outlineMusic", ""),
+                     ("outlineDocs",  "")]
+        
+        tabBar.setupItems(withImageToTitleNames: items)
     }
     
     private func setupMusicBar() {
@@ -269,7 +272,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
     
     func setupCustomNavControllers() {
-        
         let router = RouterVC()
         let list = [router.homePageScreen,
                     router.photosAndVideos,

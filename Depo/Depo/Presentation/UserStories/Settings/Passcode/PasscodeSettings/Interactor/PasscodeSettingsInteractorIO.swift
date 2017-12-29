@@ -11,7 +11,7 @@ import Foundation
 protocol PasscodeSettingsInteractorInput: class {
     func clearPasscode()
     var isPasscodeEmpty: Bool { get }
-    var isBiometricsAvailable: Bool { get }
+    var biometricsStatus: BiometricsStatus { get }
     var isBiometricsEnabled: Bool { get set }
     var isAvailableFaceID: Bool { get }
     var inNeedOfMailVerefication: Bool { set get }

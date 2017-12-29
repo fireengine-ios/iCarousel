@@ -16,6 +16,9 @@ class AutoUploadIsOffPopUp: BaseView {
     
     override func configurateView(){
         super.configurateView()
+        
+        canSwipe = false
+        
         titleText?.text = TextConstants.autoUploaOffPopUpText
         titleText?.font = UIFont.TurkcellSaturaRegFont(size: 12)
         titleText?.textColor = ColorConstants.textGrayColor

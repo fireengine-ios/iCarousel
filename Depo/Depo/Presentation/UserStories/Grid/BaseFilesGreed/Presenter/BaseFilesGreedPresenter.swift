@@ -40,6 +40,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     var type: MoreActionsConfig.ViewType
     var sortedType: MoreActionsConfig.SortRullesType
     
+    var alertSheetExcludeTypes = [ElementTypes]()
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
@@ -59,6 +61,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.delegate = self
         
         if let displayingType = topBarConfig {
+            type = displayingType.defaultGridListViewtype
             if displayingType.defaultGridListViewtype == .Grid {
                 dataSource.updateDisplayngType(type: .list)
             } else {
@@ -71,6 +74,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         setupTopBar()
         getContent()
         reloadData()
+        subscribeDataSource()
+    }
+    
+    func subscribeDataSource(){
+        UploadNotificationManager.default.startUpdateView(view: dataSource)
+    }
+    
+    deinit {
+        UploadNotificationManager.default.stopUpdateView(view: dataSource)
     }
     
     func searchByText(searchText: String) {
@@ -421,7 +433,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
-                                             onSourceView: nil)
+                                             onSourceView: nil,
+                                             excludeTypes: alertSheetExcludeTypes)
         } else {
             actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             alertSheetModule?.showAlertSheet(with: actionTypes,

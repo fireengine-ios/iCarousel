@@ -74,14 +74,6 @@ class SyncServiceManager {
         }
     }
     
-    func syncWithDataPlan() {
-        startManually()
-    }
-    
-    func waitForWifi() {
-        stopManually()
-    }
-    
     
     //MARK: - Private
     
@@ -97,10 +89,12 @@ class SyncServiceManager {
         }
         
         reachability.whenReachable = { (reachability) in
+            print("AUTOSYNC: is reachable")
             self.checkReachabilityAndSettings()
         }
         
         reachability.whenUnreachable = { (reachability) in
+            print("AUTOSYNC: is unreachable")
             self.checkReachabilityAndSettings()
         }
     }
@@ -123,6 +117,7 @@ class SyncServiceManager {
         
         guard syncSettings.isAutoSyncEnable else {
             stop(reachabilityDidChange: false, photo: true, video: true)
+            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
             return
         }
         
@@ -176,8 +171,10 @@ class SyncServiceManager {
     
     //start if is waiting for wi-fi
     private func startManually() {
-        photoSyncService.startManually()
-        videoSyncService.startManually()
+        if reachabilityService?.connection != .none {
+            photoSyncService.startManually()
+            videoSyncService.startManually()
+        }
     }
 }
 
@@ -203,20 +200,20 @@ extension SyncServiceManager {
     }
     
     @objc private func onAutoSyncStatusDidChange() {
-        guard !isSyncCancelled else {
+        if isSyncCancelled {
+            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
+            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+            return
+        }
+        
+        if hasExecutingSync {
             WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
             WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
             return
         }
         
-        guard !hasExecutingSync else {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
-            return
-
-        }
-        
-        guard !hasPrepairingSync else {
+        if hasPrepairingSync {
             WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
             WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             return

@@ -22,7 +22,7 @@ protocol PasscodeSettingsViewOutput: class {
     func mailVerified()
     
     var isPasscodeEmpty: Bool { get }
-    var isBiometricsAvailable: Bool { get }
+    var biometricsStatus: BiometricsStatus { get }
     var isBiometricsEnabled: Bool { get }
     var isAvailableFaceID: Bool { get }
 }
