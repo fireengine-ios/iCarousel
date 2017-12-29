@@ -27,8 +27,7 @@ protocol PhotoDataSource {
 }
 
 protocol AsynImage {
-    
-    func getImage(patch: PathForItem, compliteImage:@escaping RemoteImage)
+    func getImage(patch: PathForItem, compliteImage:@escaping RemoteImage) -> URL?
 }
 
 class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
@@ -64,7 +63,6 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     }
     
     func cancelImgeRequest(path: PathForItem) {
-        
         switch path {
         case let .localMediaContent(local):
          localManager.cancelRequest(asset: local.asset)
@@ -78,19 +76,24 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         }
     }
     
+    func cancelRequest(url: URL) {
+        getImageServise.cancelRequest(path: url)
+    }
     
     //MARK: AsynImage
     
-    func getImage(patch: PathForItem, compliteImage: @escaping RemoteImage) {
+    func getImage(patch: PathForItem, compliteImage: @escaping RemoteImage) -> URL? {
         switch patch {
         case let .localMediaContent(local):
             localManager.getPreviewImage(asset: local.asset, image: compliteImage)
+            return nil
         case let .remoteUrl(url):
             getImageServise.getImage(patch: url, compliteImage: compliteImage)
+            return url
         }
     }
     
-    func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) {
+    func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) -> URL? {
         if isOriginal {
             switch item.patchToPreview {
             case let .localMediaContent(local):
@@ -99,14 +102,17 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
             case let .remoteUrl(url):
                 if let largeUrl = item.metaData?.largeUrl {
                     getImageServise.getImage(patch: largeUrl, compliteImage: compliteImage)
+                    return largeUrl
                 } else {
                     getImageServise.getImage(patch: url, compliteImage: compliteImage)
+                    return url
                 }
             }
-            
         } else {
-            getImage(patch: item.patchToPreview, compliteImage: compliteImage)
+            return getImage(patch: item.patchToPreview, compliteImage: compliteImage)
         }
+        
+        return nil
     }
     
     //Mark: - Sync Image
