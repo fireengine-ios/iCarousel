@@ -43,6 +43,7 @@ class SyncServiceManager {
     
     init() {
         setupReachability()
+        setupAPIReachability()
         subscribeForNotifications()
     }
     
@@ -84,6 +85,10 @@ class SyncServiceManager {
     
     
     //MARK: - Private
+    
+    private func setupAPIReachability() {
+        APIReachabilityService.shared.startNotifier()
+    }
     
     private func setupReachability() {
         guard let reachability = reachabilityService else {
@@ -135,7 +140,7 @@ class SyncServiceManager {
             return
         }
         
-        if reachability.connection != .none {
+        if reachability.connection != .none, APIReachabilityService.shared.connection == .reachable {
             if reachability.connection == .wifi {
                 start(photo: true, video: true)
             } else if reachability.connection == .cellular {
@@ -200,9 +205,18 @@ extension SyncServiceManager {
                                        selector: #selector(onAutoSyncStatusDidChange),
                                        name: autoSyncStatusDidChangeNotification,
                                        object: nil)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(onAPIReachabilityDidChange),
+                                       name: APIReachabilityService.APIReachabilityDidChangeName,
+                                       object: nil)
     }
     
     @objc private func onPhotoLibraryDidChange() {
+        checkReachabilityAndSettings()
+    }
+    
+    @objc private func onAPIReachabilityDidChange() {
         checkReachabilityAndSettings()
     }
     

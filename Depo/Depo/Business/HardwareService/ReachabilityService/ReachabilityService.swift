@@ -52,3 +52,92 @@ class ReachabilityService: ReachabilityProtocol {
     }
 }
 
+
+typealias APIReachabilityHandler = (_ isAvailable: Bool) -> Void
+
+
+class APIReachabilityService {
+    
+    static let APIReachabilityDidChangeName = NSNotification.Name("APIReachabilityServiceReachabilityDidChangeName")
+    
+    enum Connection {
+        case unreachable
+        case reachable
+    }
+    
+    static let shared = APIReachabilityService()
+    
+    private var timer: Timer?
+    private (set) var connection: Connection = .unreachable {
+        didSet {
+            if oldValue != connection {
+                notify()
+            }
+        }
+    }
+    private let pingInterval: TimeInterval = 60.0
+    private var lastKnownSuccesfullRequestDate: TimeInterval = 0
+    private var timeSinceLastKnownSuccesfullRequest: TimeInterval {
+        return Date().timeIntervalSince1970 - lastKnownSuccesfullRequestDate
+    }
+    
+    init() {
+        
+    }
+    
+    //MARK: - Public
+    
+    func startNotifier() {
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkAPI), userInfo: nil, repeats: true).fire()
+    }
+    
+    func stopNotifier() {
+        timer = nil
+    }
+    
+    func saveSuccesfullRequest() {
+        lastKnownSuccesfullRequestDate = Date().timeIntervalSince1970
+    }
+    
+    private func notify() {
+        NotificationCenter.default.post(name: APIReachabilityService.APIReachabilityDidChangeName , object: nil)
+    }
+    
+    
+    @objc private func checkAPI() {
+        guard timeSinceLastKnownSuccesfullRequest > pingInterval else {
+            return
+        }
+        
+        APIReachabilityRequestService().sendPingRequest { [weak self] (isReachable) in
+            guard let `self` = self else {
+                return
+            }
+            self.connection = isReachable ? .reachable : .unreachable
+            if isReachable {
+                self.saveSuccesfullRequest()
+            }
+        }
+    }
+
+}
+
+
+class APIHostReachabilityRequestParameters: BaseRequestParametrs {
+    override var patch: URL {
+        return RouteRequests.BaseUrl
+    }
+}
+
+class APIReachabilityRequestService: BaseRequestService {
+    func sendPingRequest(handler: @escaping APIReachabilityHandler) {
+        let parameters = APIHostReachabilityRequestParameters()
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _ in
+            handler(true)
+        }, fail: { _ in
+            handler(false)
+        })
+        executeGetRequest(param: parameters, handler: handler)
+    }
+}
+
