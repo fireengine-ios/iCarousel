@@ -48,4 +48,22 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
         }
 
     }
+    
+    override func delete(item: [BaseDataSourceItem]) {
+        if let items = item as? [Item] {
+            let okHandler: () -> Void = { [weak self] in
+                self?.output?.operationStarted(type: .delete)
+                self?.player.remove(listItems: items)
+                self?.fileService.delete(deleteFiles: items,
+                                         success: self?.succesAction(elementType: .delete),
+                                         fail: self?.failAction(elementType: .delete))
+            }
+            
+            if let `output` = output as? BottomSelectionTabBarInteractorOutput {
+                output.deleteMusic(okHandler)
+            }
+        }
+            
+        
+    }
 }
