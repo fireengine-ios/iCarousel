@@ -909,8 +909,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificati
         
     }
     
-    func isEqual(object: UploadNotificationManagerProtocol) -> Bool{
-        return isEqual(object:object)
+    func isEqual(object: UploadNotificationManagerProtocol) -> Bool {
+        if let compairedView = object as? BaseDataSourceForCollectionView {
+            return compairedView == self
+        }
+        return false
     }
     
 }
