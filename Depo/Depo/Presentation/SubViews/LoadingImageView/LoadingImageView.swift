@@ -49,14 +49,14 @@ class LoadingImageView: UIImageView {
     }
     
     fileprivate func checkIsNeedCancelRequest(){
-        if path != nil {
+        if let path = path {
             if let url = url {
                 filesDataSource.cancelRequest(url: url)
             } else {
-                filesDataSource.cancelImgeRequest(path: path!)
+                filesDataSource.cancelImgeRequest(path: path)
             }
             
-            path = nil
+            self.path = nil
             url = nil
             delegate?.onLoadingImageCanceled()
         }
@@ -70,9 +70,7 @@ class LoadingImageView: UIImageView {
             return
         }
         
-        if path != nil {
-            checkIsNeedCancelRequest()
-        }
+        checkIsNeedCancelRequest()
         path = object.patchToPreview
         activity.startAnimating()
         url = filesDataSource.getImage(for: object, isOriginal: isOriginalImage) { [weak self] image in

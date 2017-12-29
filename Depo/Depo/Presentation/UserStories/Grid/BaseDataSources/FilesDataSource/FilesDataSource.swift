@@ -86,12 +86,11 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         switch patch {
         case let .localMediaContent(local):
             localManager.getPreviewImage(asset: local.asset, image: compliteImage)
+            return nil
         case let .remoteUrl(url):
             getImageServise.getImage(patch: url, compliteImage: compliteImage)
             return url
         }
-        
-        return nil
     }
     
     func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) -> URL? {
