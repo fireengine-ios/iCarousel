@@ -476,7 +476,7 @@ struct TextConstants {
     static let feedbackViewLanguageLabel = NSLocalizedString("You need to specify your language preference so that we can serve you better.", comment: "")
     static let feedbackViewSendButton = NSLocalizedString("Send", comment: "")
     static let feedbackViewSelect = NSLocalizedString("Select", comment: "")
-    static let feedbackEmail = NSLocalizedString("evgeniybrest@tut.by", comment: "")
+    static let feedbackEmail = NSLocalizedString("DESTEK-LIFEBOX@TURKCELL.COM.TR", comment: "")
     static let feedbackEmailError = NSLocalizedString("Please configurate email client", comment: "")
     static let feedbackErrorEmptyDataTitle = NSLocalizedString("Error", comment: "")
     static let feedbackErrorTextError = NSLocalizedString("Please type your message", comment: "")
