@@ -12,6 +12,9 @@ class FreeAppSpaceModuleInitializer: NSObject {
    
     class func initializeFreeAppSpaceViewController(with nibName:String) -> UIViewController {
         let viewController = FreeAppSpaceViewController(nibName: nibName, bundle: nil)
+        
+        viewController.scrolliblePopUpView.isEnable = false
+        
         let configurator = FreeAppSpaceModuleConfigurator()
         
         configurator.configure(viewController: viewController, remoteServices: FreeAppService())

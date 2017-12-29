@@ -42,6 +42,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var alertSheetExcludeTypes = [ElementTypes]()
     
+    var needShowProgressInCells = false
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
@@ -78,11 +80,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func subscribeDataSource(){
-        UploadNotificationManager.default.startUpdateView(view: dataSource)
+        if needShowProgressInCells{
+            UploadNotificationManager.default.startUpdateView(view: dataSource)
+        }
     }
     
     deinit {
-        UploadNotificationManager.default.stopUpdateView(view: dataSource)
+        if needShowProgressInCells{
+            UploadNotificationManager.default.stopUpdateView(view: dataSource)
+        }
     }
     
     func searchByText(searchText: String) {
