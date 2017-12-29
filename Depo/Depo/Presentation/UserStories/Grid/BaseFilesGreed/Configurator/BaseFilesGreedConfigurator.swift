@@ -24,6 +24,7 @@ class BaseFilesGreedModuleConfigurator {
         var presenter: BaseFilesGreedPresenter?
         if remoteServices is PhotoAndVideoService{
             presenter = BaseFilesGreedPresenter()
+            presenter?.needShowProgressInCells = true
         } else {
             presenter = DocumentsGreedPresenter()
         }
