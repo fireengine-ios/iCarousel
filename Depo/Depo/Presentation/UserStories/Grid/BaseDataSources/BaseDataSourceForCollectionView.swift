@@ -36,7 +36,7 @@ enum BaseDataSourceDisplayingType{
 }
 
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
-UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificationManagerProtocol {
+UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationManagerViewProtocol {
     
     var isPaginationDidEnd = false
     
@@ -47,8 +47,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificati
     weak var delegate: BaseDataSourceForCollectionViewDelegate?
     
     internal var preferedCellReUseID: String?
-    
-    private var fileDataSource =  FilesDataSource()
     
     private var isSelectionStateActive = false
     
@@ -73,6 +71,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificati
     var allLocalItems = [WrapData]()
     var uploadedObjectID = [String]()
     
+    var needShowProgressInCell: Bool = false
+    
+    var isFavorites: Bool = false
     
     
     private func compoundItems(pageItems: [WrapData]) {
@@ -735,6 +736,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificati
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
+        return
+        
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath) as? Item else {
             return
         }
@@ -874,18 +877,30 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificati
     }
     
     func startUploadFile(file: WrapData){
+        if !needShowProgressInCell{
+            return
+        }
+        
         if let cell = getCellForFile(objectUUID: file.uuid){
             cell.setProgressForObject(progress: 0)
         }
     }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float){
+        if !needShowProgressInCell{
+            return
+        }
+        
         if let cell = getCellForFile(objectUUID: file.uuid){
             cell.setProgressForObject(progress: progress)
         }
     }
     
     func finishedUploadFile(file: WrapData){
+        if !needShowProgressInCell{
+            return
+        }
+        
         if let cell = getCellForFile(objectUUID: file.uuid){
             cell.finishedUploadForObject()
         }
@@ -909,7 +924,91 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificati
         
     }
     
-    func isEqual(object: UploadNotificationManagerProtocol) -> Bool {
+    func updateFavoritesCellStatus(items: [Item], isFavorites: Bool){
+        var arrayOfPath = [IndexPath]()
+        
+        for item in items{
+            if let path = getIndexPathForObject(objectUUID: item.uuid){
+                arrayOfPath.append(path)
+            }
+        }
+        
+        if arrayOfPath.count > 0{
+            var uuids = items.map { $0.uuid }
+            for array in allItems{
+                for arraysObject in array{
+                    if let index = uuids.index(of: arraysObject.uuid){
+                        arraysObject.favorites = isFavorites
+                        uuids.remove(at: index)
+                    }
+                }
+            }
+            
+            collectionView.performBatchUpdates({ [weak self] in
+                if let `self` = self{
+                    self.collectionView.reloadItems(at: arrayOfPath)
+                }
+                }, completion: nil)
+        }
+    }
+    
+    func addFilesToFavorites(items: [Item]){
+        updateFavoritesCellStatus(items: items, isFavorites: true)
+    }
+    
+    func removeFileFromFavorites(items: [Item]){
+        if (isFavorites){
+            deleteItems(items: items)
+        }else{
+            updateFavoritesCellStatus(items: items, isFavorites: false)
+        }
+    }
+    
+    func deleteItems(items: [Item]){
+        var arrayOfPath = [IndexPath]()
+        var arrayOfSection = [Int]()
+        
+        for item in items{
+            if let path = getIndexPathForObject(objectUUID: item.uuid){
+                arrayOfPath.append(path)
+            }
+        }
+        
+        if arrayOfPath.count > 0{
+            
+            var uuids = items.map { $0.uuid }
+            var newArray = [[Item]]()
+            
+            var section = 0
+            for array in allItems{
+                var newSectionArray = [Item]()
+                for arraysObject in array{
+                    if let index = uuids.index(of: arraysObject.uuid){
+                        uuids.remove(at: index)
+                    }else{
+                        newSectionArray.append(arraysObject)
+                    }
+                }
+                
+                if newSectionArray.count > 0{
+                    newArray.append(newSectionArray)
+                }else{
+                    arrayOfSection.append(section)
+                }
+                
+                section += 1
+            }
+            allItems = newArray
+            collectionView.performBatchUpdates({ [weak self] in
+                if let `self` = self{
+                    self.collectionView.deleteItems(at: arrayOfPath)
+                    self.collectionView.deleteSections(IndexSet(arrayOfSection))
+                }
+                }, completion: nil)
+        }
+    }
+    
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         if let compairedView = object as? BaseDataSourceForCollectionView {
             return compairedView == self
         }

@@ -62,11 +62,13 @@ class WrapItemFileService: WrapItemFileOperations {
                     DispatchQueue.main.async {
                         CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
                     }
+                    
                     success?()
+                    ItemOperationManager.default.deleteItems(items: deleteFiles)
                 }, fail: fail)
                 
             } else {
-
+                ItemOperationManager.default.deleteItems(items: deleteFiles)
                 success?()
             }
         }
@@ -196,6 +198,11 @@ class WrapItemFileService: WrapItemFileOperations {
             success?()
             files.forEach {
                 $0.coreDataObject?.favoritesValue = favouritse
+            }
+            if (favouritse){
+                ItemOperationManager.default.addFilesToFavorites(items: files)
+            }else{
+                ItemOperationManager.default.removeFileFromFavorites(items: files)
             }
         }
         

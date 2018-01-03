@@ -29,6 +29,10 @@ class BaseFilesGreedModuleConfigurator {
             presenter = DocumentsGreedPresenter()
         }
         
+        if remoteServices is FavouritesService{
+            presenter?.dataSource.isFavorites = true
+        }
+        
         if let alertSheetExcludeTypes = alertSheetExcludeTypes {
             presenter?.alertSheetExcludeTypes = alertSheetExcludeTypes
         }

@@ -140,13 +140,13 @@ final class UploadService: BaseRequestService {
             return nil
         }
         
-        WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: itemsToUpload.count, completedOperations: 0)
+        CardsManager.default.startOperationWith(type: .upload, allOperations: itemsToUpload.count, completedOperations: 0)
         self.allUploadOperationsCount += itemsToUpload.count
         
         let firstObject = itemsToUpload.first!
         
-        UploadNotificationManager.default.startUploadFile(file: firstObject)
-        WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
+        ItemOperationManager.default.startUploadFile(file: firstObject)
+        CardsManager.default.setProgressForOperationWith(type: .upload,
                                                                     object: firstObject,
                                                                     allOperations: self.allUploadOperationsCount,
                                                                     completedOperations: self.finishedUploadOperationsCount)
@@ -167,12 +167,12 @@ final class UploadService: BaseRequestService {
                     return
                 }
                 self.finishedUploadOperationsCount += 1
-                WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
+                CardsManager.default.setProgressForOperationWith(type: .upload,
                                                                             object: nil,
                                                                             allOperations: self.allUploadOperationsCount,
                                                                             completedOperations: self.finishedUploadOperationsCount)
                 
-                UploadNotificationManager.default.finishedUploadFile(file: finishedOperation.item)
+                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
                 if let index = self.uploadOperations.index(of: finishedOperation){
                     self.uploadOperations.remove(at: index)
@@ -180,7 +180,7 @@ final class UploadService: BaseRequestService {
                 
                 if self.allUploadOperationsCount == self.finishedUploadOperationsCount {
                     self.clearUploadCounters()
-                    WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
+                    CardsManager.default.stopOperationWithType(type: .upload)
                     success?()
                 }
                 
@@ -201,7 +201,7 @@ final class UploadService: BaseRequestService {
                         }
                         return nil
                     })
-                    WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
+                    CardsManager.default.stopOperationWithType(type: .upload)
                     if !needsSuccess {
                         success?()
                     } else {
@@ -234,17 +234,17 @@ final class UploadService: BaseRequestService {
             return nil
         }
         if allSyncOperationsCount == 0 {
-            WrapItemOperatonManager.default.startOperationWith(type: .sync, allOperations: self.allSyncOperationsCount + itemsToSync.count, completedOperations: 0)
+            CardsManager.default.startOperationWith(type: .sync, allOperations: self.allSyncOperationsCount + itemsToSync.count, completedOperations: 0)
         }
         
         let firstObject = itemsToSync.first!
         print("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
-        WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
+        CardsManager.default.setProgressForOperationWith(type: .sync,
                                                                     object: firstObject,
                                                                     allOperations: self.allSyncOperationsCount + itemsToSync.count,
                                                                     completedOperations: self.finishedSyncOperationsCount)
         
-        UploadNotificationManager.default.startUploadFile(file: firstObject)
+        ItemOperationManager.default.startUploadFile(file: firstObject)
         
         let operations: [UploadOperations] = itemsToSync.flatMap {
             
@@ -260,13 +260,13 @@ final class UploadService: BaseRequestService {
                     self.uploadOperations.remove(at: index)
                 }
                 
-                WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
+                CardsManager.default.setProgressForOperationWith(type: .sync,
                                                                             object: nil,
                                                                             allOperations: self.allSyncOperationsCount,
                                                                             completedOperations: self.finishedSyncOperationsCount)
                 
                 
-                UploadNotificationManager.default.finishedUploadFile(file: finishedOperation.item)
+                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
                 if let error = error {
                     if error.description != TextConstants.canceledOperationTextError {
@@ -277,7 +277,7 @@ final class UploadService: BaseRequestService {
                     if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
                         self.clearSyncCounters()
                         self.uploadOperations = self.uploadOperations.filter({ $0.uploadType != .autoSync })
-                        WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+                        CardsManager.default.stopOperationWithType(type: .sync)
                         success()
                     }
                     return
@@ -293,7 +293,7 @@ final class UploadService: BaseRequestService {
                 
                 if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
                     self.clearSyncCounters()
-                    WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+                    CardsManager.default.stopOperationWithType(type: .sync)
                     success()
                 }
                 
@@ -318,8 +318,8 @@ final class UploadService: BaseRequestService {
         clearUploadCounters()
         clearSyncCounters()
         
-        WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
-        WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+        CardsManager.default.stopOperationWithType(type: .upload)
+        CardsManager.default.stopOperationWithType(type: .sync)
     }
     
     func cancelSyncOperations(photo: Bool, video: Bool) {
@@ -340,11 +340,11 @@ final class UploadService: BaseRequestService {
         resetSyncCounters(for: photo ? .image : .video)
         
         guard allSyncOperationsCount != finishedSyncOperationsCount else {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+            CardsManager.default.stopOperationWithType(type: .sync)
             return
         }
         
-        WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
+        CardsManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
     }
     
     private func clearUploadCounters() {
@@ -409,9 +409,9 @@ extension UploadService: UploadProgressServiceDelegate {
     func didSend(ratio: Float, for tempUUID: String) {
         if let uploadOperation = uploadOperations.first(where: {$0.item.uuid == tempUUID}){
             if let uploadType = uploadOperation.uploadType{
-                WrapItemOperatonManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: uploadOperation.item)
+                CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: uploadOperation.item)
             }
-            UploadNotificationManager.default.setProgressForUploadingFile(file: uploadOperation.item, progress: ratio)
+            ItemOperationManager.default.setProgressForUploadingFile(file: uploadOperation.item, progress: ratio)
         }
     }
     
@@ -517,7 +517,7 @@ class UploadOperations: Operation {
             self.semaphore.signal()
         }
         
-        UploadNotificationManager.default.startUploadFile(file: item)
+        ItemOperationManager.default.startUploadFile(file: item)
         
         baseUrl(success: { [weak self] baseurlResponse in
             guard let `self` = self else{

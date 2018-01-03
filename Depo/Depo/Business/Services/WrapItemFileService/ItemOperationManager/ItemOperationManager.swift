@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol UploadNotificationManagerProtocol {
+protocol ItemOperationManagerViewProtocol {
     
     func startUploadFile(file: WrapData)
     
@@ -16,20 +16,26 @@ protocol UploadNotificationManagerProtocol {
     
     func finishedUploadFile(file: WrapData)
     
-    func isEqual(object: UploadNotificationManagerProtocol) -> Bool
+    func addFilesToFavorites(items: [Item])
+    
+    func removeFileFromFavorites(items: [Item])
+    
+    func deleteItems(items: [Item])
+    
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool
     
 }
 
 
-class UploadNotificationManager: NSObject {
+class ItemOperationManager: NSObject {
     
-    static let `default` = UploadNotificationManager()
-    private var views = [UploadNotificationManagerProtocol]()
+    static let `default` = ItemOperationManager()
+    private var views = [ItemOperationManagerViewProtocol]()
     
     private var currentUploadingObject: WrapData?
     private var currentUploadProgress: Float = 0
     
-    func startUpdateView(view: UploadNotificationManagerProtocol){
+    func startUpdateView(view: ItemOperationManagerViewProtocol){
         if views.index(where: {$0.isEqual(object: view)}) == nil{
             views.append(view)
         }
@@ -40,7 +46,7 @@ class UploadNotificationManager: NSObject {
         }
     }
     
-    func stopUpdateView(view: UploadNotificationManagerProtocol){
+    func stopUpdateView(view: ItemOperationManagerViewProtocol){
         if let index = views.index(where: {$0.isEqual(object: view)}){
             views.remove(at: index)
         }
@@ -78,4 +84,29 @@ class UploadNotificationManager: NSObject {
         currentUploadProgress = 0
     }
     
+    func addFilesToFavorites(items: [Item]){
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.addFilesToFavorites(items: items)
+            }
+        }
+    }
+    
+    func removeFileFromFavorites(items: [Item]){
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.removeFileFromFavorites(items: items)
+            }
+        }
+    }
+    
+    func deleteItems(items: [Item]){
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.deleteItems(items: items)
+            }
+        }
+    }
+    
 }
+

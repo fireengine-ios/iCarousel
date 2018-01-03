@@ -303,7 +303,7 @@ class FileService: BaseRequestService {
     
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail:FailResponse?) {
         let allOperationsCount = items.count
-        WrapItemOperatonManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
+        CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
         let downLoadRequests: [BaseDownloadRequestParametrs] = items.flatMap {
             BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name)
         }
@@ -311,7 +311,7 @@ class FileService: BaseRequestService {
         let operations = downLoadRequests.flatMap {
             DownLoadOperation(downloadParam: $0, success: {
                 completedOperationsCount = completedOperationsCount + 1
-                WrapItemOperatonManager.default.setProgressForOperationWith(type: .download,
+                CardsManager.default.setProgressForOperationWith(type: .download,
                                                                             allOperations: allOperationsCount,
                                                                             completedOperations: completedOperationsCount)
             }, fail: { (error) in
@@ -321,7 +321,7 @@ class FileService: BaseRequestService {
         
         dispatchQueue.async {
             self.downloadOperation.addOperations(operations, waitUntilFinished: true)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .download)
+            CardsManager.default.stopOperationWithType(type: .download)
             success?()
         }
     }

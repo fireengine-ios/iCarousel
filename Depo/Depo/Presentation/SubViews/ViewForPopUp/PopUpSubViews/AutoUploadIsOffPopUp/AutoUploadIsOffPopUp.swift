@@ -33,7 +33,7 @@ class AutoUploadIsOffPopUp: BaseView {
     }
 
     @IBAction func onCancelButton(){
-        WrapItemOperatonManager.default.stopOperationWithType(type: .autoUploadIsOff)
+        CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
         PopUpService.shared.resetLoginCountForUploadOffPopUp()
     }
     

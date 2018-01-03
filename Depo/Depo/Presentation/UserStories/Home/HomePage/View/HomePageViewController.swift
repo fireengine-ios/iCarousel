@@ -109,7 +109,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         homePageDataSource.isActive = true
-        WrapItemOperatonManager.default.addViewForNotification(view: homePageDataSource)
+        CardsManager.default.addViewForNotification(view: homePageDataSource)
         if homepageIsActiveAndVisible {
             homePageNavigationBarStyle()
             configureNavBarActions()
@@ -123,7 +123,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     deinit{
-        WrapItemOperatonManager.default.removeViewForNotification(view: homePageDataSource)
+        CardsManager.default.removeViewForNotification(view: homePageDataSource)
     }
 
     // MARK: - SearchBarButtonPressed
