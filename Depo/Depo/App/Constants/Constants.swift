@@ -75,6 +75,8 @@ struct TextConstants {
     static let autoSyncAlertYes = NSLocalizedString("Skip Auto-Sync", comment: "")
     static let autoSyncAlertNo = NSLocalizedString("Cancel", comment: "")
     static let autoSyncSaveButton = NSLocalizedString("Save", comment: "")
+    static let welcome1Info = NSLocalizedString("Welcome1Info", comment: "")
+    static let welcome1SubInfo = NSLocalizedString("Welcome1SubInfo", comment: "")
     
     static let autoSyncSyncOverTitle = NSLocalizedString("Sync over data plan?", comment: "")
     static let autoSyncSyncOverMessage = NSLocalizedString("Syncing files using cellular data could incur data charges", comment: "")

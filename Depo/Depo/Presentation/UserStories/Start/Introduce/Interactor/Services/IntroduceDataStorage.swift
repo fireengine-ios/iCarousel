@@ -16,8 +16,8 @@ class IntroduceDataStorage: NSObject {
             let model = IntroduceModel()
             let imageName = "IntroduceImage" + String(i)
             model.imageName = imageName
-            let textKey1 = "Welcome" + String(i) + "Info"
-            let textSubKey1 = "Welcome" + String(i) + "SubInfo"
+            let textKey1 = TextConstants.welcome1Info
+            let textSubKey1 = TextConstants.welcome1SubInfo
             let text = NSLocalizedString(textKey1, comment: "") + "\n\n" + NSLocalizedString(textSubKey1, comment: "")
             
             let string = text as NSString
