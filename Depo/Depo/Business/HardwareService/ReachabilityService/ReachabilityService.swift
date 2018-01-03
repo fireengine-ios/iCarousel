@@ -75,10 +75,10 @@ class APIReachabilityService {
             }
         }
     }
-    private let pingInterval: TimeInterval = 60.0
-    private var lastKnownSuccesfullRequestDate: TimeInterval = 0
+    private let pingInterval: TimeInterval = 30.0
+    private var lastKnownRequestDate: TimeInterval = 0
     private var timeSinceLastKnownSuccesfullRequest: TimeInterval {
-        return Date().timeIntervalSince1970 - lastKnownSuccesfullRequestDate
+        return Date().timeIntervalSince1970 - lastKnownRequestDate
     }
     
     init() {
@@ -88,15 +88,21 @@ class APIReachabilityService {
     //MARK: - Public
     
     func startNotifier() {
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkAPI), userInfo: nil, repeats: true).fire()
+        guard timer == nil else {
+            return
+        }
+
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.checkAPI), userInfo: nil, repeats: true)
+        self.timer?.fire()
     }
     
     func stopNotifier() {
-        timer = nil
+        self.timer?.invalidate()
+        self.timer = nil
     }
     
     func saveSuccesfullRequest() {
-        lastKnownSuccesfullRequestDate = Date().timeIntervalSince1970
+        lastKnownRequestDate = Date().timeIntervalSince1970
     }
     
     private func notify() {
@@ -113,7 +119,9 @@ class APIReachabilityService {
             guard let `self` = self else {
                 return
             }
+            
             self.connection = isReachable ? .reachable : .unreachable
+            
             if isReachable {
                 self.saveSuccesfullRequest()
             }
@@ -132,12 +140,12 @@ class APIHostReachabilityRequestParameters: BaseRequestParametrs {
 class APIReachabilityRequestService: BaseRequestService {
     func sendPingRequest(handler: @escaping APIReachabilityHandler) {
         let parameters = APIHostReachabilityRequestParameters()
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _ in
+        let responseHandler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _ in
             handler(true)
         }, fail: { _ in
             handler(false)
         })
-        executeGetRequest(param: parameters, handler: handler)
+        executeGetRequest(param: parameters, handler: responseHandler)
     }
 }
 

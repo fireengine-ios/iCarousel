@@ -49,6 +49,7 @@ class RequestService {
             request.httpMethod = method.rawValue
             request.httpBody = body
             request.allHTTPHeaderFields = headerParametrs
+            request.cachePolicy = NSURLRequest.CachePolicy.reloadRevalidatingCacheData
         
         debugPrint("REQUEST: \(request)")
         
