@@ -216,10 +216,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         var items = dataSource.allItems.flatMap { $0 }
         items = items.filter { $0.fileType == .image }
         
-        if items.count > 0 {
-            router.createStoryWithItems(items)
-        } else {
+        if items.isEmpty {
             router.showNoFilesToCreateStoryAlert()
+        } else {
+            router.createStoryWithItems(items)
         }
     }
     
