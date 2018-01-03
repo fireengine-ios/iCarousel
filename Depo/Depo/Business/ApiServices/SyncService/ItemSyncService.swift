@@ -34,7 +34,8 @@ protocol ItemSyncService: class {
 
 
 protocol ItemSyncServiceDelegate: class {
-    func didReceiveOutOfSpaceError<T: ItemSyncService>(service: T)
+    func didReceiveOutOfSpaceError()
+    func didReceiveError()
 }
 
 
@@ -157,9 +158,12 @@ class ItemSyncServiceImpl: ItemSyncService {
                 return
             }
 
+            self.status = .failed
+            
             if case ErrorResponse.httpCode(413) = error {
-                self.status = .failed
-                self.delegate?.didReceiveOutOfSpaceError(service: self)
+                self.delegate?.didReceiveOutOfSpaceError()
+            } else {
+                self.delegate?.didReceiveError()
             }
             
         })

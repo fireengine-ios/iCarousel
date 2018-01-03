@@ -234,12 +234,16 @@ extension SyncServiceManager {
 //MARK: - ItemSyncServiceDelegate
 
 extension SyncServiceManager: ItemSyncServiceDelegate {
-    func didReceiveOutOfSpaceError<T>(service: T) where T : ItemSyncService {
+    func didReceiveOutOfSpaceError() {
         stop(reachabilityDidChange: false, photo: true, video: true)
         if UIApplication.shared.applicationState == .background {
             timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
         }
         showOutOfSpaceAlert()
+    }
+    
+    func didReceiveError() {
+        stop(reachabilityDidChange: false, photo: true, video: true)
     }
 }
 
