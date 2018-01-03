@@ -25,6 +25,18 @@ class FreeAppSpace {
         return duplicaesArray
     }
     
+    func clear(){
+        localtemsArray.removeAll()
+        localMD5Array.removeAll()
+        duplicaesArray.removeAll()
+        serverDuplicatesArray.removeAll()
+        isSearchRunning = false
+        if let service = photoVideoService{
+            service.stopAllOperations()
+            photoVideoService = nil
+        }
+    }
+    
     func getServerUIDSForLocalitem(localItemsArray: [BaseDataSourceItem]) -> [String]{
         let serverHash = serverDuplicatesArray.map { $0.md5 }
         var array = [String]()
@@ -86,6 +98,7 @@ class FreeAppSpace {
     }
     
     func startSearchDuplicates(finished: @escaping() -> Swift.Void) {
+        
         if (isSearchRunning){
             return
         }
@@ -96,38 +109,40 @@ class FreeAppSpace {
         serverDuplicatesArray.removeAll()
         
         isSearchRunning = true
-        
-        localtemsArray.append(contentsOf: allLocalItems().sorted { (item1, item2) -> Bool in
-            if let date1 = item1.creationDate, let date2 = item2.creationDate {
-                if (date1 > date2){
-                    return true
+        DispatchQueue.main.async {
+            self.localtemsArray.append(contentsOf: self.allLocalItems().sorted { (item1, item2) -> Bool in
+                if let date1 = item1.creationDate, let date2 = item2.creationDate {
+                    if (date1 > date2){
+                        return true
+                    }
                 }
-            }
-            return false
-        })
-        
-        localMD5Array.append(contentsOf: localtemsArray.map({$0.md5}))
-        let latestDate = localtemsArray.last?.creationDate ?? Date()
-        
-        //need to check have we duplicates
-        if localtemsArray.count > 0 {
-            photoVideoService = PhotoAndVideoService(requestSize: numberElementsInRequest)
-            getDuplicatesObjects(latestDate: latestDate, success: { [weak self] in
-                guard let self_ = self else{
-                    return
-                }
-                if (self_.duplicaesArray.count > 0) {
-                    debugPrint("duplicates count = ", self_.duplicaesArray.count)
-                }else{
-                    debugPrint("have no duplicates")
-                }
-                finished()
-            }, fail: {
-                finished()
+                return false
             })
-        }else{
-            finished()
+            
+            self.localMD5Array.append(contentsOf: self.localtemsArray.map({$0.md5}))
+            let latestDate = self.localtemsArray.last?.creationDate ?? Date()
+            
+            //need to check have we duplicates
+            if self.localtemsArray.count > 0 {
+                self.photoVideoService = PhotoAndVideoService(requestSize: self.numberElementsInRequest)
+                self.getDuplicatesObjects(latestDate: latestDate, success: { [weak self] in
+                    guard let self_ = self else{
+                        return
+                    }
+                    if (self_.duplicaesArray.count > 0) {
+                        debugPrint("duplicates count = ", self_.duplicaesArray.count)
+                    }else{
+                        debugPrint("have no duplicates")
+                    }
+                    finished()
+                    }, fail: {
+                        finished()
+                })
+            }else{
+                finished()
+            }
         }
+        
     }
     
     private func getDuplicatesObjects(latestDate: Date,

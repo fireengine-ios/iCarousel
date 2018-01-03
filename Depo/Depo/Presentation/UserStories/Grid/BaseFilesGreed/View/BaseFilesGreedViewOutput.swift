@@ -18,12 +18,6 @@ protocol BaseFilesGreedViewOutput {
     
     func needShowNoFileView()-> Bool
     
-    func textForNoFileLbel() -> String
-    
-    func textForNoFileButton() -> String
-    
-    func imageForNoFileImageView() -> UIImage
-    
     func getRemoteItemsService() -> RemoteItemsService
     
     func getFolder() -> Item?
@@ -45,4 +39,8 @@ protocol BaseFilesGreedViewOutput {
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType])
     
     func moreActionsPressed(sender: Any)
+    
+    func moveBack()
+    
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType)
 }

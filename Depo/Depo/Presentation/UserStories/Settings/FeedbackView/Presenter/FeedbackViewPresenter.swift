@@ -20,6 +20,10 @@ class FeedbackViewPresenter:BasePresenter, FeedbackViewModuleInput, FeedbackView
         interactor.onSend(selectedLanguage: selectedLanguage)
     }
     
+    func onTextDidChange(text: String) {
+        view.setSendButton(isEnabled: !text.isEmpty)
+    }
+    
     //interactor output
     
     func languagesUploaded(lanuages:[LanguageModel]){

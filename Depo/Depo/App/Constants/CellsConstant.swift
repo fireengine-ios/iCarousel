@@ -16,9 +16,11 @@ struct CellsIdConstants {
     static let autoSyncInformCellID = "AutoSyncInformTableViewCell"
     static let autoSyncSwitcherCellID = "AutoSyncSwitcherTableViewCell"
     static let settingTableViewCellID = "SettingsTableViewCell"
+    static let settingsTableViewSwitchCellID = "SettingsTableViewSwitchCell"
     static let actionsMenuCellID = "ActionsMenuTableViewCell"
     static let dropDovnCellID = "DropDovnTableViewCell"
     static let popUpCellID = "PopUpSwipeCell"
+    static let suggestionTableSectionHeaderID = "SuggestionTableSectionHeader"
 }
 
 struct CollectionViewCellsIdsConstant {
@@ -35,6 +37,7 @@ struct CollectionViewCellsIdsConstant {
     static let photosOrderCell = "PhotosOrderCollectionViewCell"
     static let folderSelectionCell = "FolderSelectionCollectionViewCell"
     static let albumCell = "AlbumCollectionViewCell"
+    static let localAlbumCell = "LocalAlbumCollectionViewCell"
 }
 
 struct CollectionViewSuplementaryConstants {

@@ -55,6 +55,9 @@ class SplashInteractor: SplashInteractorInput {
         DispatchQueue.main.async {
             self.output.asyncOperationSucces()
             self.output.onFailLogin()
+            if !ReachabilityService().isReachable {
+                self.output.onNetworkFail()
+            }
         }
     }
     

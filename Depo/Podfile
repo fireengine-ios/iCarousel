@@ -2,10 +2,8 @@ platform :ios, '8.0'
 use_frameworks!
 inhibit_all_warnings!
 
-target 'Depo_LifeTech' do
-
-
-    pod 'Fabric'
+def core_pods
+ 	pod 'Fabric'
     pod 'Crashlytics'
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
@@ -33,17 +31,23 @@ target 'Depo_LifeTech' do
     
     # json
     pod 'SwiftyJSON', '~>3'
-    pod 'ReachabilitySwift', '~> 3'
+    pod 'ReachabilitySwift'
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'ExpandableTableViewController'
 
-    ## UI
-    pod 'PullToRefreshKit', :git => 'https://github.com/bonyadmitr/PullToRefreshKit', :branch => 'swift-4'
+end
 
+target 'Depo_LifeTech' do
+
+	core_pods
 
 #  target 'DepoTests' do
 #    inherit! :search_paths
 #    # Pods for testing
 #  end
 
+end
+
+target ‘TC_Depo_LifeTech’ do
+	core_pods
 end

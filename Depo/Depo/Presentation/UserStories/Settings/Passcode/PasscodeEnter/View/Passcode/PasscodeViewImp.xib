@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,6 +24,26 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isq-lG-wUK">
                     <rect key="frame" x="0.0" y="0.0" width="210" height="234"/>
                     <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-b9-ejs" customClass="InsetsLabel" customModule="Depo_LifeTech" customModuleProvider="target">
+                            <rect key="frame" x="105" y="147" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="size" keyPath="topBottom">
+                                    <size key="value" width="3" height="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="size" keyPath="leftRight">
+                                    <size key="value" width="5" height="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-Vi-aUo" customClass="SpringLabel" customModule="Depo_LifeTech" customModuleProvider="target">
+                            <rect key="frame" x="20" y="155" width="170" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czr-rG-Jde" customClass="PasscodeInputView" customModule="Depo_LifeTech" customModuleProvider="target">
                             <rect key="frame" x="25" y="184" width="160" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,26 +69,6 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-Vi-aUo" customClass="SpringLabel" customModule="Depo_LifeTech" customModuleProvider="target">
-                            <rect key="frame" x="20" y="155" width="170" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-b9-ejs" customClass="InsetsLabel" customModule="Depo_LifeTech" customModuleProvider="target">
-                            <rect key="frame" x="105" y="147" width="0.0" height="0.0"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="size" keyPath="topBottom">
-                                    <size key="value" width="3" height="3"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="size" keyPath="leftRight">
-                                    <size key="value" width="5" height="5"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -79,6 +79,7 @@
                         <constraint firstItem="4xx-Vi-aUo" firstAttribute="top" secondItem="Ld8-b9-ejs" secondAttribute="bottom" constant="8" id="VDf-gg-FsZ"/>
                         <constraint firstAttribute="bottom" secondItem="czr-rG-Jde" secondAttribute="bottom" id="Z0s-yW-e0W"/>
                         <constraint firstItem="4xx-Vi-aUo" firstAttribute="leading" secondItem="isq-lG-wUK" secondAttribute="leading" constant="20" symbolic="YES" id="dfz-i0-GTC"/>
+                        <constraint firstItem="Ld8-b9-ejs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="isq-lG-wUK" secondAttribute="top" constant="10" id="kgi-Mq-e0Q"/>
                         <constraint firstItem="czr-rG-Jde" firstAttribute="top" secondItem="4xx-Vi-aUo" secondAttribute="bottom" constant="8" id="qYv-IO-Mth"/>
                         <constraint firstItem="Ld8-b9-ejs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="isq-lG-wUK" secondAttribute="leading" constant="8" id="vU9-rh-LnG"/>
                     </constraints>

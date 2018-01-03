@@ -8,6 +8,8 @@
 
 import Foundation
 
-protocol AlbumDetailRouterInput {
+protocol AlbumDetailRouterInput: BaseFilesGreedRouterInput {
 
+    func back()
+    
 }

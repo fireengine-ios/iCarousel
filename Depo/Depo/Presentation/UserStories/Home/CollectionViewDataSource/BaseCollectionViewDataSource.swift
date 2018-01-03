@@ -16,7 +16,7 @@ protocol BaseCollectionViewDataSourceDelegate {
 }
 
 class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, CollectionViewLayoutDelegate, BaseCollectionViewCellWithSwipeDelegate, WrapItemOperationViewProtocol {
-
+    
     var collectionView: UICollectionView!
     var viewController: UIViewController!
     
@@ -28,6 +28,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     var popUps = [BaseView]()
     var notPermittedPopUpViewTypes = Set<String>()
+    var isEnable: Bool = true
     var isActive: Bool = false
     
     func configurateWith(collectionView: UICollectionView, viewController:UIViewController, data:[UIViewController], delegate:BaseCollectionViewDataSourceDelegate?){
@@ -140,8 +141,12 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     func addCellAtIndex(index: Int){
         if (isActive){
-            let indexPath = IndexPath(row: index, section: 0)
-            collectionView.insertItems(at: [indexPath])
+            self.collectionView.performBatchUpdates({
+                let indexPath = IndexPath(row: index, section: 0)
+                self.collectionView.insertItems(at: [indexPath])
+            }, completion: { (succes) in
+                
+            })
         }else{
             collectionView.reloadData()
         }
@@ -149,8 +154,12 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     func deleteCellAtIndex(index: Int){
         if (isActive){
-            let indexPath = IndexPath(row: index, section: 0)
-            collectionView.deleteItems(at: [indexPath])
+            self.collectionView.performBatchUpdates({
+                let indexPath = IndexPath(row: index, section: 0)
+                self.collectionView.deleteItems(at: [indexPath])
+            }, completion: { (succes) in
+                
+            })
         }else{
             collectionView.reloadData()
         }
@@ -159,10 +168,24 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     //MARK: WrapItemOperationViewProtocol
     
     private func checkIsThisIsPermittedType(type: OperationType) -> Bool{
+        
+        if !isEnable{
+            return false
+        }
+        
         if notPermittedPopUpViewTypes.count == 0 {
             return true
         }
         return !notPermittedPopUpViewTypes.contains(type.rawValue)
+    }
+    
+    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool{
+        switch operationType {
+        case .prepareToAutoSync:
+            return viewsByType[.sync] == nil
+        default:
+            return true
+        }
     }
     
     func getViewForOperation(operation: OperationType) -> BaseView{
@@ -174,45 +197,81 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             let view = getViewForOperation(operation: type)
             viewsByType[type] = view
             let index = 0
-            popUps.insert(view, at: index)
-            addCellAtIndex(index: index)
+            
+            print("insert at index ", index, type.rawValue)
+            self.popUps.insert(view, at: index)
+            self.addCellAtIndex(index: index)
         }
     }
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
         if !checkIsThisIsPermittedType(type: type){
             return
         }
+        if !checkIsNeedShowPopUpFor(operationType: type){
+            return
+        }
+        
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
             
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
+                if let item = object{
+                    popUp.setImageForUploadingItem(item: item)
+                }
             }
             
             viewsByType[type] = view
             let index = 0
-            popUps.insert(view, at: index)
-            addCellAtIndex(index: index)
+            print("insert at index ", index, type.rawValue)
+            self.popUps.insert(view, at: index)
+            self.addCellAtIndex(index: index)
         }
     }
     
-    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
+    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
+        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ) {
         if let view = viewsByType[type] {
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
+                if let item = object{
+                    popUp.setImageForUploadingItem(item: item)
+                }
             }
-        }else{
+        } else {
             startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
         }
     }
     
+    func setProgress(ratio: Float, for operationType: OperationType, object: WrapData?) {
+        guard let popUp = viewsByType[operationType] as? ProgressPopUp else {
+            return
+        }
+        
+        popUp.setProgressBar(ratio: ratio)
+        if let`object` = object{
+            popUp.setImageForUploadingItem(item: object)
+        }
+    }
+    
+    
     func stopOperationWithType(type: OperationType){
-        if let view = viewsByType[type] {
-            viewsByType[type] = nil
-            if let index = popUps.index(of: view){
-                popUps.remove(at: index)
-                deleteCellAtIndex(index: index)
+        if let view = self.viewsByType[type] {
+            self.viewsByType[type] = nil
+            if let index = self.popUps.index(of: view){
+                self.popUps.remove(at: index)
+                print("delete at index ", index, type.rawValue)
+                self.deleteCellAtIndex(index: index)
+            }else{
+                
             }
         }
     }

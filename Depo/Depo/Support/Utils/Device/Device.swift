@@ -82,7 +82,7 @@ class Device {
     }
     
     static var locale: String {
-       return NSLocale.current.languageCode ?? "en"
+       return Locale.current.languageCode ?? "en"
     }
     
     static var winSize = UIScreen.main.bounds

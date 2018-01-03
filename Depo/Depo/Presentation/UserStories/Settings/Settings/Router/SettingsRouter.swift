@@ -34,8 +34,8 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.usageInfo!)
     }
     
-    func goToUserInfo(userInfo: AccountInfoResponse) {
-        router.pushViewController(viewController: router.userProfile(userInfo: userInfo))
+    func goToUserInfo(userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
+        router.pushViewController(viewController: router.userProfile(userInfo: userInfo, isTurkcellUser: isTurkcellUser))
     }
     
     func goToActivityTimeline() {
@@ -46,8 +46,9 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.packages)
     }
     
-    func goToPasscodeSettings() {
-        router.pushViewController(viewController: router.passcodeSettings())
+    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) {
+        
+        router.pushViewController(viewController: router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail))
     }
     
     func closeEnterPasscode() {
@@ -55,7 +56,7 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func openPasscode(handler: @escaping () -> Void) {
-        let vc = PasscodeEnterViewController.with(flow: .validate)
+        let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         
         vc.success = { [weak self] in
             self?.router.navigationController?.popViewController(animated: false)
@@ -65,7 +66,6 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToConnectedToNetworkFailed() {
-        CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.errorConnectedToNetwork,
-                                                   okButtonText:TextConstants.ok)
+        UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
     }
 }

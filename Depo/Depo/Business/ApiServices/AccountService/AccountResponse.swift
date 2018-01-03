@@ -34,6 +34,9 @@ struct AccountJSONConstants {
     static let bytesUsed = "bytesUsed"
     static let objectCount = "objectCount"
     static let projectID = "projectId"
+    
+    static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
+    static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -55,6 +58,13 @@ class AccountInfoResponse: ObjectRequestResponse {
     var urlForPhoto: URL?
     var projectID: String?
     
+    var fullPhoneNumber: String {
+        if let code = countryCode, let number = phoneNumber {
+            return "+\(code)\(number)"
+        }
+        return ""
+    }
+    
     override func mapping() {
         mobileUploadsSpecialFolderUuid = json?[AccountJSONConstants.mobileUploadsSpecialFolderUuid].string
         isCropyTagAvailable = json?[AccountJSONConstants.isCropyTagAvailable].bool
@@ -73,6 +83,17 @@ class AccountInfoResponse: ObjectRequestResponse {
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
     }
+}
+
+class SecuritySettingsInfoResponse: ObjectRequestResponse {
+    var turkcellPasswordAuthEnabled: Bool?
+    var mobileNetworkAuthEnabled: Bool?
+    
+    override func mapping() {
+        turkcellPasswordAuthEnabled =  json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
+        mobileNetworkAuthEnabled =  json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
+    }
+    
 }
 
 class QuotaInfoResponse: ObjectRequestResponse {
@@ -210,39 +231,40 @@ class InternetDataUsage: ObjectRequestResponse {
     }
     
     var offerName: String?
-    var total: Int?
-    var remaining: Int?
+    var total: Double?
+    var remaining: Double?
     var unit: BytesType?
     var expiryDate: Date?
     
     var totalString: String {
-        guard let unit = self.unit, let total = self.total else {
-            return ""
-        }
-        var size = 0
-        switch unit {
-        case .mb:
-            size = total / BytesType.size
-        }
-        return "\(size) \(unit.rawValue)"
+        return sizeString(for: total)
     }
     
     var remainingString: String {
-        guard let unit = self.unit, let remaining = self.remaining else {
+        return sizeString(for: remaining)
+    }
+    
+    private func sizeString(for size: Double?) -> String {
+        guard let unit = self.unit, let size = size else {
             return ""
         }
-        var size = 0
         switch unit {
         case .mb:
-            size = remaining / BytesType.size
+            return cleanZero(for: size / BytesType.size, unit: "GB")
         }
-        return "\(size) \(unit.rawValue)"
+    }
+    
+    private func cleanZero(for value: Double, unit: String) -> String {
+        let isDisplayFloat = value.truncatingRemainder(dividingBy: 1) != 0
+        let numberOfDigits = isDisplayFloat ? 1 : 0
+        return String(format: "%.\(numberOfDigits)f \(unit)", value)
+        // value.truncatingRemainder(dividingBy: 1) == 0 ? String(value) : String(format: "%.1f \(unit)", value)
     }
     
     override func mapping() {
         offerName = json?[InternetDataUsageKeys.offerName].string
-        total = json?[InternetDataUsageKeys.total].int
-        remaining = json?[InternetDataUsageKeys.remaining].int
+        total = json?[InternetDataUsageKeys.total].double
+        remaining = json?[InternetDataUsageKeys.remaining].double
         unit = json?[InternetDataUsageKeys.unit].bytesType
         expiryDate = json?[InternetDataUsageKeys.expiryDate].date
     }

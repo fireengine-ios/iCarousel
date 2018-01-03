@@ -39,7 +39,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         let parameter = SelectedLanguage(selectedLanguage: selectedLanguage)
         FeedbackService().sendSelectedLanguage(selectedLanguageParameter: parameter, succes: {[weak self] (success) in
             DispatchQueue.main.async {
-                self?.getUserInfoString()
+                self?.getUserInfoString(with: selectedLanguage.displayLanguage ?? "")
             }
             }, fail: { [weak self] (fail) in
                 DispatchQueue.main.async {
@@ -49,7 +49,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         
     }
     
-    func getUserInfoString(){
+    func getUserInfoString(with languageName: String){
         let group = DispatchGroup()
         let queue = DispatchQueue(label: "GetUserInfo")
         group.enter()
@@ -96,7 +96,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
                 let packages = subscriptions
                     .flatMap { $0.subscriptionPlanName }
                     .joined(separator: ", ")
-                let userInfoString = String(format: "Application Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n", versionString, phoneString, CoreTelephonyService().operatorName() ?? "" , UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, ReachabilityService().isReachableViaWiFi ? "WWAN" : "WIFI", quota, quotaUsed, packages)
+                let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "" , UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WWAN" : "WIFI", quota, quotaUsed, packages)
                 
                 self?.output.asyncOperationSucces()
                 self?.output.languageRequestSended(text: userInfoString)

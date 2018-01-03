@@ -9,6 +9,13 @@
 import UIKit
 
 class PackagesViewController: UIViewController {
+    var output: PackagesViewOutput!
+    
+    @IBOutlet weak private var collectionView: UICollectionView!
+    @IBOutlet weak private var promoView: PromoView!
+    @IBOutlet var keyboardHideManager: KeyboardHideManager!
+    
+    private lazy var activityManager = ActivityIndicatorManager()
     
     private var plans = [SubscriptionPlan]() {
         didSet {
@@ -16,12 +23,12 @@ class PackagesViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak private var collectionView: UICollectionView!
-    
-    var output: PackagesViewOutput!
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setTitle(withString: TextConstants.packages)
+        activityManager.delegate = self
+        promoView.deleagte = self
         setupCollectionView()
         output.viewIsReady()
     }
@@ -34,8 +41,28 @@ class PackagesViewController: UIViewController {
 // MARK: PackagesViewInput
 extension PackagesViewController: PackagesViewInput {
     
+    func reloadPackages() {
+        plans = []
+        output.viewIsReady()
+    }
+    
+    func successedPromocode() {
+        stopActivityIndicator()
+        UIApplication.showSuccessAlert(message: TextConstants.promocodeSuccess)
+        
+        promoView.endEditing(true)
+        promoView.codeTextField.text = ""
+        promoView.errorLabel.text = ""
+        reloadPackages()
+    }
+    
+    func show(promocodeError: String) {
+        stopActivityIndicator()
+        promoView.errorLabel.text = promocodeError
+    }
+    
     func display(error: ErrorResponse) {
-        print(error.description)
+        UIApplication.showErrorAlert(message: TextConstants.errorAlert)
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan]) {
@@ -44,37 +71,22 @@ extension PackagesViewController: PackagesViewInput {
     
     func showActivateOfferAlert(for offer: OfferServiceResponse) {
         let bodyText = "\(offer.period ?? "") \(offer.price ?? 0)"
-        let alertVC = UIAlertController(title: offer.name, message: bodyText, preferredStyle: .alert)
-        alertVC.view.tintColor = UIColor.lrTealish
         
-        let cancelAction = UIAlertAction(title: TextConstants.offersCancel, style: .cancel, handler: nil)
-        let buyAction = UIAlertAction(title: TextConstants.offersBuy, style: .default) { action in
-            self.output.buy(offer: offer)
+        let vc = DarkPopUpController.with(title: offer.name, message: bodyText, buttonTitle: TextConstants.purchase) { [weak self] vc in
+            vc.close()
+            self?.output.buy(offer: offer)
         }
-        
-        alertVC.addAction(buyAction)
-        alertVC.addAction(cancelAction)
-        present(alertVC, animated: true, completion: nil)
+        present(vc, animated: false, completion: nil)
     }
     
-    func showCancelOfferAlert(for accountType: AccountType) {
-        let message: String
-        
-        switch accountType {
-        case .turkcell:
-            message = TextConstants.offersTurkcellCancel
-        case .subTurkcell:
-            message = TextConstants.offersSubTurkcellCancel
-        case .all:
-            return
-        }
-        
-        let alertVC = UIAlertController(title: TextConstants.offersInfo, message: message, preferredStyle: .alert)
-        alertVC.view.tintColor = UIColor.lrTealish
-        
-        let okAction = UIAlertAction(title: TextConstants.offersOk, style: .cancel, handler: nil)
-        alertVC.addAction(okAction)
-        present(alertVC, animated: true, completion: nil)
+    func showSubTurkcellOpenAlert(with text: String) {
+        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
+        present(vc, animated: false, completion: nil)
+    }
+    
+    func showCancelOfferAlert(with text: String) {
+        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
+        present(vc, animated: false, completion: nil)
     }
     
     func showCancelOfferApple() {
@@ -121,4 +133,24 @@ extension PackagesViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: UICollectionViewDelegate
 extension PackagesViewController: UICollectionViewDelegate {
+}
+
+// MARK: - ActivityIndicator
+extension PackagesViewController: ActivityIndicator {
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
+    }
+}
+
+// MARK: - PromoViewDelegate
+extension PackagesViewController: PromoViewDelegate {
+    func promoView(_ promoView: PromoView, didPressApplyWithPromocode promocode: String) {
+        startActivityIndicator()
+        output.submit(promocode: promocode)
+        keyboardHideManager.dismissKeyboard()
+    }
 }

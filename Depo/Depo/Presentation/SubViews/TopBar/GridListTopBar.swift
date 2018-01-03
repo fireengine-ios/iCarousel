@@ -16,11 +16,11 @@ protocol GridListTopBarDelegate: class {
 
 class GridListTopBar: UIViewController {
     
-    @IBOutlet weak var sortByButton: UIButton!
+    @IBOutlet fileprivate weak var sortByButton: UIButton!
     
-    @IBOutlet weak var gridListButton: UIButton!
+    @IBOutlet fileprivate weak var gridListButton: UIButton!
     
-    @IBOutlet weak var segmentFilter: UISegmentedControl!
+    @IBOutlet fileprivate weak var segmentFilter: UISegmentedControl!
 
     var currentConfig: GridListTopBarConfig?
     
@@ -67,9 +67,13 @@ class GridListTopBar: UIViewController {
         gridListButton.isHidden = !config.showGridListButton
     }
     
+    func setSorting(enabled: Bool) {
+        sortByButton.isHidden = !enabled
+    }
+    
     private func setupSortingView(withTypes types: [MoreActionsConfig.SortRullesType],
                                   defaultType: MoreActionsConfig.SortRullesType) {
-   
+        sortByButton.isHidden = types.isEmpty
     }
     
     private func setupFilterSegmentView() {
@@ -99,7 +103,6 @@ class GridListTopBar: UIViewController {
             delegate?.filterChanged(filter: .Video)
         }
     }
-    
     
     //MARK: - Actions
 

@@ -6,13 +6,21 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput, AutoSyncInteractorOutput, CustomPopUpAlertActions {
 
+/**
+ logic from android page
+ https://wiki.life.com.by/display/LTFizy/004+Auto+Sync+page+Android
+ 
+ texts from iOS
+ https://wiki.life.com.by/display/LTFizy/004+Auto+Sync+iOS
+ */
+class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput, AutoSyncInteractorOutput {
+    
     weak var view: AutoSyncViewInput!
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
     
-    let customPopUp = CustomPopUp()
+    var fromSettings: Bool = false
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
@@ -24,32 +32,37 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         view.preperedCellsModels(models: models)
     }
     
-    func startLifeBoxPressed() {
-        //TODO: call interactor with collected data
-        router.routNextVC()
-    }
-    
     func skipForNowPressed() {
-        customPopUp.delegate = self
-        customPopUp.showCustomAlert(withTitle: TextConstants.autoSyncAlertTitle,
-                                    titleAligment: .left,
-                                    withText: TextConstants.autoSyncAlertText,
-                                    warningTextAligment: .left,
-                                    firstButtonText: TextConstants.autoSyncAlertNo,
-                                    secondButtonText: TextConstants.autoSyncAlertYes,
-                                    isShadowViewShown: true)
+        let controller = PopUpController.with(title: TextConstants.autoSyncAlertTitle,
+                                              message: TextConstants.autoSyncAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.autoSyncAlertNo,
+                                              secondButtonTitle: TextConstants.autoSyncAlertYes,
+                                              secondAction: { [weak self] vc in
+                                                self?.router.routNextVC()
+        })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func cancelationAction() {
+    func saveChanges(setting: SettingsAutoSyncModel){
+        if !fromSettings {
+            let dataSyncEnabled = setting.isAutoSyncEnable && (setting.mobileDataPhotos == true || setting.mobileDataVideo == true)
+            if dataSyncEnabled {
+                router.showSyncOverPopUp(okHandler: {[weak self] in
+                    self?.router.routNextVC()
+                    self?.interactor.onSaveSettings(setting: setting)
+                })
+            } else {
+                router.routNextVC()
+                interactor.onSaveSettings(setting: setting)
+            }
+        } else {
+            interactor.onSaveSettings(setting: setting)
+        }
+    }
+    
+    func onSettingSaved(){
         
-    }
-    
-    func otherAction() {
-        router.routNextVC()
-    }
-    
-    func onSaveButton(setting: SettingsAutoSyncModel){
-        interactor.onSaveSettings(setting: setting)
     }
     
     //MARK : BasePresenter

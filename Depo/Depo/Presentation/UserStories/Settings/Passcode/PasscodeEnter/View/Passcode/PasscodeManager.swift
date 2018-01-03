@@ -43,6 +43,13 @@ final class PasscodeManagerImp {
         self.biometricsManager = biometricsManager
         passcodeView.passcodeInput.delegate = self
         changeState(to: state)
+        initPasscodeStorage()
+    }
+    
+    func initPasscodeStorage() {
+        if storage.numberOfTries <= 0 {
+            storage.numberOfTries = maximumInccorectPasscodeAttempts
+        }
     }
 }
 extension PasscodeManagerImp: PasscodeManager {
@@ -61,7 +68,7 @@ extension PasscodeManagerImp: PasscodeManager {
     }
     
     func authenticateWithBiometrics() {
-        if !biometricsManager.isAvailable || !biometricsManager.isEnabled {
+        if biometricsManager.status != .available || !biometricsManager.isEnabled {
             return
         }
         view.resignResponder()

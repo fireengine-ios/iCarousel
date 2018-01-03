@@ -23,7 +23,7 @@ class SelectFolderModuleInitializer: NSObject {
         var filters: [GeneralFilesFiltrationType] = [.fileType(.folder)]
         
         let interactor: BaseFilesGreedInteractor
-        if let folder_ = folder{
+        if let folder_ = folder {
             viewController.selectedFolder = folder
             interactor = BaseFilesGreedInteractor(remoteItems: FolderService(requestSize: 9999, rootFolder: folder_.uuid, onlyFolders: true))
             interactor.folder = folder_
@@ -39,11 +39,8 @@ class SelectFolderModuleInitializer: NSObject {
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []),
                                topBarConfig: nil)
-        if let folder_ = folder{
-            viewController.mainTitle = folder_.name
-        } else {
-            viewController.mainTitle = ""
-        }
+
+        viewController.mainTitle = folder?.name ?? ""
         return viewController
     }
 

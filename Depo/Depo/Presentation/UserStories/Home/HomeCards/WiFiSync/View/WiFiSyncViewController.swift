@@ -39,6 +39,6 @@ class WiFiSyncViewController: BaseCollectionViewController, WiFiSyncViewInput {
     
     @IBAction func onSyncDataButton(){
         output.onSyncDataButton()
-        custoPopUp.showCustomAlert(withText: "Sorry this functional \n is under constraction", okButtonText: "Fine...")
+        UIApplication.showErrorAlert(message: "Sorry this functional \n is under constraction")
     }
 }

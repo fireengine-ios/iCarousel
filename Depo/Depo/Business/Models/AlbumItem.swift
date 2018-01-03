@@ -11,7 +11,7 @@ import UIKit
 
 class AlbumItem: BaseDataSourceItem {
     
-    let imageCount: Int?
+    var imageCount: Int?
     
     let videoCount: Int?
     
@@ -39,7 +39,17 @@ class AlbumItem: BaseDataSourceItem {
         lastModifiDate = remote.lastModifiedDate
         fileType = FileType(type: remote.contentType, fileName: name)
         syncStatus = .synced
+        syncStatuses.append(SingletonStorage.shared.unigueUserID)
         isLocalItem = false
+    }
+    
+    override init(uuid: String?, name: String?, creationDate: Date?, lastModifiDate: Date?, fileType: FileType, syncStatus: SyncWrapperedStatus, isLocalItem: Bool) {
+        imageCount = 0
+        videoCount = 0
+        audioCount = 0
+        preview = nil
+        readOnly = false
+        super.init(uuid: uuid, name: name, creationDate: creationDate, lastModifiDate: lastModifiDate, fileType: fileType, syncStatus: syncStatus, isLocalItem: isLocalItem)
     }
     
     override func getCellReUseID() -> String {

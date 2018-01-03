@@ -26,14 +26,18 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
             return
         }
         
-        let vc = PasscodeEnterViewController.with(flow: .validate)
+        let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         
         vc.success = {
             rootVC.dismiss(animated: true, completion: nil)
             self.interactor.startLoginInBackroung()
         }
+        
+        let navVC = UINavigationController(rootViewController: vc)
+        vc.navigationBarWithGradientStyleWithoutInsets()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            rootVC.present(vc, animated: true,completion: nil)
+            rootVC.present(navVC, animated: true,completion: nil)
         }
     }
     
@@ -51,6 +55,10 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func onFailLogin(){
         router.navigateToOnboarding()
+    }
+    
+    func onNetworkFail() {
+        router.showNetworkError()
     }
     
     func onSuccessEULA() {

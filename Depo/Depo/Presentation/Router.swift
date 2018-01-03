@@ -22,6 +22,30 @@ class RouterVC: NSObject {
         return rootviewController
     }
     
+    func getFloatingButtonsArray() -> [FloatingButtonsType]{
+        let nController = navigationController
+        let viewController = nController?.viewControllers.last
+        
+        if let baseViewController = viewController as? BaseViewController{
+            return baseViewController.floatingButtonsArray
+        }
+        
+        return [FloatingButtonsType]()
+    }
+    
+    func getParentUUID() -> String{
+        
+        if let viewController = navigationController?.viewControllers.last as? BaseViewController{
+            return viewController.parentUUID
+        }
+        
+        return ""
+    }
+    
+    func isRootViewControllerAlbumDetail() -> Bool{
+        return navigationController?.viewControllers.last is AlbumDetailViewController
+    }
+    
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {
@@ -78,7 +102,7 @@ class RouterVC: NSObject {
         }
     }
     
-    func popViewControllerFromTableViewNavBar(){
+    func popViewControllerFromTableViewNavBar() {
         if let tabBarVc = tabBarVC {
             tabBarVc.popViewController(animated: true)
             return
@@ -99,11 +123,11 @@ class RouterVC: NSObject {
         viewController.navigationController?.isNavigationBarHidden = false
     }
     
-    func popToRootViewController(){
+    func popToRootViewController() {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func popViewController(){
+    func popViewController() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -273,14 +297,14 @@ class RouterVC: NSObject {
     
     //MARK: Home Page
     var homePageScreen: UIViewController? {
-        if (!SingletonStorage.shared().isAppraterInited) {
+        if (!SingletonStorage.shared.isAppraterInited) {
             AppRater.sharedInstance().daysUntilPrompt = 5
             AppRater.sharedInstance().launchesUntilPrompt = 10
             AppRater.sharedInstance().remindMeDaysUntilPrompt = 15
             AppRater.sharedInstance().remindMeLaunchesUntilPrompt = 10
             AppRater.sharedInstance().appLaunched()
             
-            SingletonStorage.shared().isAppraterInited = true
+            SingletonStorage.shared.isAppraterInited = true
         }
         
         let controller = HomePageModuleInitializer.initializeViewController(with: "HomePage")
@@ -307,34 +331,44 @@ class RouterVC: NSObject {
     
     // MARK: All Files
     
-    var allFiles: UIViewController?{
-    
-        let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController")
+    func allFiles(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController",
+                                                                                          moduleOutput: moduleOutput,
+                                                                                          sortType: sortType,
+                                                                                          viewType: viewType)
         return controller
     }
     
     
     // MARK: Favorites
     
-    var favorites: UIViewController?{
-
-        let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController")
+    func favorites(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController",
+                                                                                           moduleOutput: moduleOutput,
+                                                                                           sortType: sortType,
+                                                                                           viewType: viewType)
         return controller
     }
     
     
     // MARK: Folder
     
-    func filesFromFolder(folder: Item) -> UIViewController{
-        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController", folder: folder)
+    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController{
+        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController",
+                                                                                                 folder: folder,
+                                                                                                 type: type,
+                                                                                                 sortType: sortType,
+                                                                                                 moduleOutput: moduleOutput,
+                                                                                                 alertSheetExcludeTypes: alertSheetExcludeTypes)
+
         return controller
     }
     
     
     // MARK: User profile
     
-    func userProfile(userInfo: AccountInfoResponse) -> UIViewController{
-        let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo)
+    func userProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController{
+        let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo, isTurkcellUser: isTurkcellUser)
         return viewController
     }
     
@@ -430,7 +464,7 @@ class RouterVC: NSObject {
     //MARK: Upload All files
     
     func uploadPhotos() -> UIViewController {
-        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController()
+        let controller = LocalAlbumModuleInitializer.initializeLocalAlbumsController(with: "BaseFilesGreedViewController")
         //UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }
@@ -441,6 +475,16 @@ class RouterVC: NSObject {
         return controller
     }
     
+    func uploadFromLifeBox(folderUUID: String, soorceUUID: String = "") -> UIViewController {
+        if isRootViewControllerAlbumDetail(){
+            let controller = UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", albumUUID: folderUUID)
+            return controller
+        }else{
+            let controller = UploadFromLifeBoxModuleInitializer.initializeFilesForFolderViewController(with: "BaseFilesGreedViewController", destinationFolderUUID: folderUUID, outputFolderUUID: soorceUUID)
+            return controller
+        }
+    }
+    
     //MARK: Select Folder view controller
     
     func selectFolder(folder: Item?) -> SelectFolderViewController {
@@ -448,8 +492,16 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func filesDetailViewController(fileObject:WrapData, from items:[[WrapData]]) -> UIViewController {
+    func filesDetailViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController")
+        let c = controller as! PhotoVideoDetailViewController
+        c.interactor!.onSelectItem(fileObject: fileObject, from: items)//FIXME: ALEX
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return c
+    }
+    
+    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
+        let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController")
         let c = controller as! PhotoVideoDetailViewController
         c.interactor!.onSelectItem(fileObject: fileObject, from: items)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -472,8 +524,8 @@ class RouterVC: NSObject {
     
     //MARK: Album detail
     
-    func albumDetailController(album: AlbumItem) -> AlbumDetailViewController{
-        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album)
+    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController{
+        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
         return controller
     }
     
@@ -577,7 +629,7 @@ class RouterVC: NSObject {
     
     // MARK: - Passcode
     
-    func passcodeSettings() -> UIViewController {
-        return PasscodeSettingsModuleInitializer.viewController
+    func passcodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) -> UIViewController {
+        return PasscodeSettingsModuleInitializer.setupModule(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)
     }
 }

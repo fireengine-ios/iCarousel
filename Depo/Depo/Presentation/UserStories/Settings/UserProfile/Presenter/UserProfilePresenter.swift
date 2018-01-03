@@ -27,13 +27,16 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     }
     
     func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse){
+        view.endSaving()
+        view.setupEditState(false)
         if let navigationController = view.getNavigationController(){
             router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController, phoneNumber: view.getPhoneNumber())
         }
     }
     
     func showError(error: String){
-        CustomPopUp.sharedInstance.showCustomAlert(withText: error, okButtonText: TextConstants.ok)
+        view.endSaving()
+        UIApplication.showErrorAlert(message: error)
     }
     
     //view out
@@ -53,6 +56,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func dataWasUpdate() {
         view.setupEditState(false)
+    }
+    
+    func isTurkcellUser() -> Bool {
+        return interactor.statusTurkcellUser
     }
     
     //MARK : BasePresenter

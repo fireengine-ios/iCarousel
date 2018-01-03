@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,6 +14,7 @@
                 <outlet property="bottomTabBarConstraint" destination="h5L-B7-j4z" id="5aU-u1-biQ"/>
                 <outlet property="containerViewBottomConstraint" destination="cb3-Bd-ooM" id="cSN-dV-FBF"/>
                 <outlet property="contentView" destination="i0i-at-wPy" id="UmC-zb-APO"/>
+                <outlet property="curtainColorView" destination="bUS-H9-z0e" id="jxS-Sd-X5Y"/>
                 <outlet property="curtainView" destination="kYF-ga-W3s" id="Svh-NZ-Ok0"/>
                 <outlet property="musicBarContainer" destination="EuE-DG-HiM" id="MEn-uJ-knm"/>
                 <outlet property="musicBarContainerHeightConstraint" destination="HyB-SJ-gXC" id="uhu-aK-4gX"/>
@@ -42,6 +43,18 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYF-ga-W3s" userLabel="curtain">
                     <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUS-H9-z0e">
+                            <rect key="frame" x="0.0" y="10" width="375" height="593"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="bUS-H9-z0e" firstAttribute="leading" secondItem="kYF-ga-W3s" secondAttribute="leading" id="AF9-bk-5Bp"/>
+                        <constraint firstAttribute="trailing" secondItem="bUS-H9-z0e" secondAttribute="trailing" id="Utj-IQ-JyM"/>
+                        <constraint firstAttribute="bottom" secondItem="bUS-H9-z0e" secondAttribute="bottom" id="gw6-Kg-UTs"/>
+                        <constraint firstItem="bUS-H9-z0e" firstAttribute="top" secondItem="kYF-ga-W3s" secondAttribute="top" constant="10" id="pfC-uT-uHf"/>
+                    </constraints>
                 </view>
                 <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="CustomTabBar" customModule="Depo_LifeTech" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="618" width="375" height="49"/>
@@ -53,14 +66,13 @@
                     <color key="selectedImageTintColor" red="0.2666666667" green="0.80000000000000004" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
                 </tabBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTg-Qb-BHM">
-                    <rect key="frame" x="157.5" y="597" width="60" height="60"/>
+                    <rect key="frame" x="157" y="596" width="61" height="61"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="eNR-wi-msA"/>
-                        <constraint firstAttribute="width" constant="60" id="gh2-wD-vOm"/>
+                        <constraint firstAttribute="height" constant="61" id="eNR-wi-msA"/>
+                        <constraint firstAttribute="width" constant="61" id="gh2-wD-vOm"/>
                     </constraints>
-                    <state key="normal" image="add" backgroundImage="menu2"/>
+                    <state key="normal" image="CenterButton"/>
                     <state key="disabled" image="add"/>
-                    <state key="selected" image="menu2"/>
                     <connections>
                         <action selector="plussBtnAction:" destination="-1" eventType="touchUpInside" id="CJy-Uz-sSH"/>
                     </connections>
@@ -92,7 +104,7 @@
         </view>
     </objects>
     <resources>
-        <image name="add" width="58" height="58"/>
-        <image name="menu2" width="58" height="58"/>
+        <image name="CenterButton" width="64" height="64"/>
+        <image name="add" width="64" height="64"/>
     </resources>
 </document>

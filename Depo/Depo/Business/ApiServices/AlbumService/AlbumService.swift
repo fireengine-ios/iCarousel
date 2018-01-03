@@ -132,21 +132,31 @@ class AlbumService: RemoteItemsService {
 
 
 typealias PhotosAlbumOperation = () -> Swift.Void
+typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Swift.Void
+typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Swift.Void
 
 class PhotosAlbumService: BaseRequestService {
     
-    func createAlbum(createAlbum: CreatesAlbum, success: PhotosAlbumOperation?, fail: FailResponse?){
+    func createAlbum(createAlbum: CreatesAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             success?()
         }, fail: fail)
         executePostRequest(param: createAlbum, handler: handler)
     }
     
-    func deleteAlbums(deleteAlbums: DeleteAlbums, success: PhotosAlbumOperation?, fail: FailResponse?){
+    func deleteAlbums(deleteAlbums: DeleteAlbums, success: PhotosAlbumOperation?, fail: FailResponse?) {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             success?()
         }, fail: fail)
         executeDeleteRequest(param: deleteAlbums, handler: handler)
+    }
+    
+    func completelyDelete(albums: DeleteAlbums, success: PhotosAlbumOperation?, fail: FailResponse?) {
+        loadAllItemsFrom(albums: albums.albums) { (items) in
+            let fileService = WrapItemFileService()
+            fileService.delete(deleteFiles: items, success: nil, fail: nil)
+            self.deleteAlbums(deleteAlbums: albums, success: success, fail: fail)
+        }
     }
     
     func addPhotosToAlbum(parameters: AddPhotosToAlbum, success: PhotosAlbumOperation?, fail: FailResponse?){
@@ -157,18 +167,56 @@ class PhotosAlbumService: BaseRequestService {
         executePutRequest(param: parameters, handler: handler)
     }
     
-    func deletePhotosFromAlbum(parameters: DeletePhotosFromAlbum, success: PhotosAlbumOperation?, fail: FailResponse?){
+    func deletePhotosFromAlbum(parameters: DeletePhotosFromAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
     }
     
-    func renameAlbum(parameters: RenameAlbum, success: PhotosAlbumOperation?, fail: FailResponse?){
+    func renameAlbum(parameters: RenameAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
+    }
+    
+    func loadAllItemsFrom(albums: [AlbumItem], success: PhotosFromAlbumsOperation?) {
+        guard albums.count > 0 else { success?([Item]()); return }
+        let group = DispatchGroup()
+        var allItems = [WrapData]()
+        for album in albums {
+            group.enter()
+            let albumService = AlbumDetailService(requestSize: 100)
+            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { (items) in
+                allItems.append(contentsOf: items)
+                group.leave()
+            }, fail: {
+                group.leave()
+            })
+        }
+        group.notify(queue: DispatchQueue.main) {
+            success?(allItems)
+        }
+    }
+    
+    func loadItemsBy(albums: [AlbumItem], success: PhotosByAlbumsOperation?) {
+        guard albums.count > 0 else { success?([AlbumItem: [Item]]()); return }
+        let group = DispatchGroup()
+        var allItems = [AlbumItem: [Item]]()
+        for album in albums {
+            group.enter()
+            let albumService = AlbumDetailService(requestSize: 100)
+            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { (items) in
+                allItems[album] = items
+                group.leave()
+            }, fail: {
+                group.leave()
+            })
+        }
+        group.notify(queue: DispatchQueue.main) {
+            success?(allItems)
+        }
     }
     
 }

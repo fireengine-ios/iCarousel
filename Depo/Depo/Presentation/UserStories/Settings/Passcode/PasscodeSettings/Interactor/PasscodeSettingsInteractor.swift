@@ -11,6 +11,9 @@ class PasscodeSettingsInteractor {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
+    
+    var isEmptyMail: Bool?
+    var isTurkcellUser: Bool?
 }
 
 // MARK: PasscodeSettingsInteractorInput
@@ -20,8 +23,8 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
         passcodeStorage.clearPasscode()
     }
     
-    var isBiometricsAvailable: Bool {
-        return biometricsManager.isAvailable
+    var biometricsStatus: BiometricsStatus {
+        return biometricsManager.status
     }
     
     var isBiometricsEnabled: Bool {
@@ -36,4 +39,11 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
+    
+    var inNeedOfMailVerefication: Bool {
+        get { return isEmptyMail ?? false }
+        set { isEmptyMail = newValue }
+    }
+    
+    var isTurkcellUserFlag: Bool { return isTurkcellUser ?? false }
 }

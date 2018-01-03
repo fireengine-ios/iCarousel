@@ -26,4 +26,8 @@ class SplashRouter: SplashRouterInput {
         router.pushViewControllerWithoutAnimation(viewController: temsAndServices)
     }
     
+    func showNetworkError() {
+        UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+    }
+    
 }

@@ -12,7 +12,7 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func homePagePresented(){
         FreeAppSpace.default.checkFreeAppSpace()
-        SyncService.default.startSyncImmediately()
+        SyncServiceManager.shared.updateImmediately()
     }
 
 }

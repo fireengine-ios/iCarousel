@@ -14,11 +14,9 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     
     weak var output: PhoneVereficationInteractorOutput!
     
-//    let customPopUP = CustomPopUp()
-    
     var attempts: Int = 0
     
-    let MaxAttemps: Int = 3
+    let MaxAttemps = NumericConstants.maxVereficationAttempts
     
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response
@@ -42,6 +40,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func resendCode() {
+        attempts = 0
         authService.resendVerificationSMS(resendVerification: ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken!), sucess: { [weak self] _ in
             DispatchQueue.main.async { [weak self] in
                 self?.output.resendCodeRequestSuccesed()
@@ -70,14 +69,16 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                 if self.attempts >= 3 {
                     self.attempts = 0
                     self.output.reachedMaxAttempts()
+                    self.output.vereficationFailed(with: TextConstants.promocodeBlocked)
+                } else {
+                    self.output.vereficationFailed(with: TextConstants.phoneVereficationNonValidCodeErrorText)
                 }
-                self.output.vereficationFailed(with: errorRespose)
             }
         })
     }
     
     func showPopUp(with text: String) {
-        CustomPopUp.sharedInstance.showCustomAlert(withText: text, okButtonText: TextConstants.ok)
+        UIApplication.showErrorAlert(message: text)
     }
     
     func authificate(atachedCaptcha: CaptchaParametrAnswer?) {

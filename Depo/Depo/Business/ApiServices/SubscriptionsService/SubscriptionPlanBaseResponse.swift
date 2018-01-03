@@ -58,7 +58,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
     var subscriptionPlanRole: String?
     var subscriptionPlanSlcmOfferId: String?
     var subscriptionPlanCometOfferId: String?
-    var subscriptionPlanQuota: NSNumber?
+    var subscriptionPlanQuota: Int64?
     var subscriptionPlanPeriod: String?
     var subscriptionPlanInAppPurchaseId: String?
     var subscriptionPlanType: String?
@@ -91,7 +91,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
         subscriptionPlanRole = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanRole]?.string
         subscriptionPlanSlcmOfferId = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanSlcmOfferId]?.string
         subscriptionPlanCometOfferId = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanCometOfferId]?.string
-        subscriptionPlanQuota = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanQuota]?.number
+        subscriptionPlanQuota = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanQuota]?.int64
         subscriptionPlanPeriod = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanPeriod]?.string
         subscriptionPlanInAppPurchaseId = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlaninAppPurchaseId]?.string
         subscriptionPlanType = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanType]?.string

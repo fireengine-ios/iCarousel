@@ -27,8 +27,7 @@ protocol PhotoDataSource {
 }
 
 protocol AsynImage {
-    
-    func getImage(patch: PathForItem, compliteImage:@escaping RemoteImage)
+    func getImage(patch: PathForItem, compliteImage:@escaping RemoteImage) -> URL?
 }
 
 class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
@@ -41,13 +40,12 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     private let getImageServise = ImageDownloder()
     
-    private let assetCache = PHCachingImageManager()
-    
-    
-    // MARK: check acces to local media library
-    
-    func checkAccessToMediaLibrary() -> Bool {
-        return localManager.photoIsAvalible()
+    private var assetCache: PHCachingImageManager? {
+        var cachingManager: PHCachingImageManager?
+        if LocalMediaStorage.default.photoLibraryIsAvailible() {
+            cachingManager = PHCachingImageManager()
+        }
+        return cachingManager
     }
     
     
@@ -65,7 +63,6 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     }
     
     func cancelImgeRequest(path: PathForItem) {
-        
         switch path {
         case let .localMediaContent(local):
          localManager.cancelRequest(asset: local.asset)
@@ -79,19 +76,24 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         }
     }
     
+    func cancelRequest(url: URL) {
+        getImageServise.cancelRequest(path: url)
+    }
     
     //MARK: AsynImage
     
-    func getImage(patch: PathForItem, compliteImage: @escaping RemoteImage) {
+    func getImage(patch: PathForItem, compliteImage: @escaping RemoteImage) -> URL? {
         switch patch {
         case let .localMediaContent(local):
             localManager.getPreviewImage(asset: local.asset, image: compliteImage)
+            return nil
         case let .remoteUrl(url):
             getImageServise.getImage(patch: url, compliteImage: compliteImage)
+            return url
         }
     }
     
-    func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) {
+    func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) -> URL? {
         if isOriginal {
             switch item.patchToPreview {
             case let .localMediaContent(local):
@@ -100,14 +102,17 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
             case let .remoteUrl(url):
                 if let largeUrl = item.metaData?.largeUrl {
                     getImageServise.getImage(patch: largeUrl, compliteImage: compliteImage)
+                    return largeUrl
                 } else {
                     getImageServise.getImage(patch: url, compliteImage: compliteImage)
+                    return url
                 }
             }
-            
         } else {
-            getImage(patch: item.patchToPreview, compliteImage: compliteImage)
+            return getImage(patch: item.patchToPreview, compliteImage: compliteImage)
         }
+        
+        return nil
     }
     
     //Mark: - Sync Image
@@ -116,19 +121,21 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         let manager = PHImageManager.default()
         
         let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = false
+        options.isNetworkAccessAllowed = true
         options.isSynchronous = false
         options.version = .current
-        options.deliveryMode = .fastFormat
+        options.deliveryMode = .opportunistic
         
         let targetSize = CGSize(width: 300, height: 300)
 
+        if let cachingManager = assetCache {
+            cachingManager.startCachingImages(for: [asset], targetSize: targetSize, contentMode: .aspectFill, options: options)
+        }
+        
         manager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
 //            if let isDegaraded = (info?[PHImageResultIsDegradedKey] as? NSNumber)?.boolValue, !isDegaraded {
                 completion(result, indexPath)
 //            }
         })
-        
-        assetCache.startCachingImages(for: [asset], targetSize: targetSize, contentMode: .aspectFill, options: options)
     }
 }

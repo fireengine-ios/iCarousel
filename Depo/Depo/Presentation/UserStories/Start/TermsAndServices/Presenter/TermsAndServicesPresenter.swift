@@ -61,7 +61,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func eulaApplied(){
          compliteAsyncOperationEnableScreen()
-        router.goToHomePage()
+        router.goToAutoSync()
     }
     
     func applyEulaFaild(errorResponce: ErrorResponse) {

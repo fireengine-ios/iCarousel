@@ -17,7 +17,7 @@ class CollectionViewCellForVideo: CollectionViewCellForPhoto {
         // Initialization code
         
         videoLengthLabel.textColor = ColorConstants.whiteColor
-        videoLengthLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        videoLengthLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
@@ -29,7 +29,4 @@ class CollectionViewCellForVideo: CollectionViewCellForPhoto {
         super.confireWithWrapperd(wrappedObj: wrappered)
     }
     
-    override func placeholderImage() -> UIImage? {
-        return ActivityFileType.video.image 
-    }
 }

@@ -43,7 +43,7 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     }
     
     func userValid(email: String, phone: String, passpword: String) {
-        router.termsAndServices(with: view)
+        router.termsAndServices(with: view, email: email)
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {
@@ -85,18 +85,20 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     }
     
     func showPopUp(forType type: UserValidationResults) {
+        let text: String
         switch type {
         case .mailNotValid:
-            CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.invalidMailErrorText, okButtonText: TextConstants.ok)
+            text = TextConstants.invalidMailErrorText
         case .passwordNotValid:
-            CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.invalidPasswordText, okButtonText: TextConstants.ok)
+            text = TextConstants.invalidPasswordText
         case .phoneNotValid:
-            CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.invalidPhoneNumberText, okButtonText: TextConstants.ok)
+            text = TextConstants.invalidPhoneNumberText
         case .passwodsNotMatch:
-            CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.invalidPasswordMatchText, okButtonText: TextConstants.ok)
+            text = TextConstants.invalidPasswordMatchText
         default:
-            break
+            return
         }
+        UIApplication.showErrorAlert(message: text)
     }
     
     // MARK: BasePresenter

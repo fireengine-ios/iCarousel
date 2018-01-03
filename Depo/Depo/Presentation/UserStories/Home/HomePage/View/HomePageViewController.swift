@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, UICollectionViewDelegate, SearchModuleOutput {
+class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, UICollectionViewDelegate, SearchModuleOutput {
 
     var output: HomePageViewOutput!
     
@@ -102,7 +102,7 @@ class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectio
         
         if _searchViewController != nil {
             let router = RouterVC()
-            router.rootViewController?.present(self.searchViewController, animated: false, completion: nil)
+            router.pushViewControllerWithoutAnimation(viewController: self.searchViewController)
         }
     }
 
@@ -134,7 +134,7 @@ class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectio
                 return
             }
             let router = RouterVC()
-            router.rootViewController?.present(self.searchViewController, animated: true, completion: nil)
+            router.pushViewControllerWithoutAnimation(viewController: self.searchViewController)
         })
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.output.showSettings()
@@ -194,6 +194,7 @@ class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectio
     }
     
     func previewSearchResultsHide() { }
+    
 }
 
 

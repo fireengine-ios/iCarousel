@@ -19,7 +19,7 @@ struct ColorConstants {
     static let textLightGrayColor = UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 0.5)
     static let orrageTextColor = UIColor(red: 1, green: 183/255, blue: 111/255, alpha: 1)
     static let orrageBacgroundColor = UIColor(red: 1, green: 183/255, blue: 116/255, alpha: 1)
-    static let greenColor = UIColor(red: 83/255, green: 236/255, blue: 0, alpha: 1)
+    static let greenColor = UIColor(red: 80/255, green: 227/255, blue: 119/255, alpha: 1)
     static let lightGrayColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1)
     static let selectedCellBlueColor = UIColor(red: 80/255, green: 220/255, blue: 220/255, alpha: 0.2)
     static let selectedBottomBarButtonColor = UIColor(red: 255/255, green: 171/255, blue: 141/255, alpha: 1)
@@ -28,9 +28,13 @@ struct ColorConstants {
     static let searchBarColor = UIColor(red: 3/255, green: 3/255, blue: 3/255, alpha: 0.09)
     static let searchShadowColor = UIColor(red: 29/255, green: 29/255, blue: 29/255, alpha: 0.49)
     static let darkText = UIColor(red: 77/255, green: 77/255, blue: 77/255, alpha: 1)
+    static let lightText = UIColor(red: 127/255, green: 127/255, blue: 127/255, alpha: 1)
     static let activityTimelineDraws = UIColor(red: 6/255, green: 44/255, blue: 66/255, alpha: 1)
     static let lightPeach = UIColor(red: 255/255, green: 226/255, blue: 198/255, alpha: 1)
     static let yellowButtonColor = UIColor(red: 1, green: 199/255, blue: 77/255, alpha: 1)
+    static let grayTabBarButtonsColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
+    static let textOrange = UIColor(red: 255/255, green: 160/255, blue: 10/255, alpha: 1)
+    static let darkBorder = UIColor(red: 151/255, green: 151/255, blue: 151/255, alpha: 1)
 }
 
 extension UIColor {

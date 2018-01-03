@@ -8,22 +8,13 @@
 
 import UIKit
 
-class SingletonStorage: NSObject {
-    
-    private static var uniqueInstance: SingletonStorage?
+class SingletonStorage {
     
     var isAppraterInited: Bool = false
     
     var accountInfo: AccountInfoResponse?
     
-    private override init() {}
-    
-    static func shared() -> SingletonStorage {
-        if uniqueInstance == nil {
-            uniqueInstance = SingletonStorage()
-        }
-        return uniqueInstance!
-    }
+    static let shared = SingletonStorage()
     
     func getAccountInfoForUser(success:@escaping (AccountInfoResponse) -> Swift.Void, fail: @escaping (ErrorResponse?) -> Swift.Void ){
         if let info = accountInfo{
@@ -45,6 +36,18 @@ class SingletonStorage: NSObject {
                     fail(error)
                 }
             }
+        }
+    }
+    
+    var unigueUserID: String{
+        return accountInfo?.projectID ?? ""
+    }
+    
+    func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), faill:@escaping (() -> Void)){
+        getAccountInfoForUser(success: { (info) in
+            success(info.projectID ?? "")
+        }) { (error) in
+            faill()
         }
     }
     

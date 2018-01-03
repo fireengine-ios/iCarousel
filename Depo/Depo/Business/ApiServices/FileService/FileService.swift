@@ -15,7 +15,7 @@ struct FilePatch  {
     static let delete = "/api/filesystem/delete"
     static let rename = "/api/filesystem/rename/%@"
     static let move =   "/api/filesystem/move?targetFolderUuid=%@"
-    static let copy =   "/api/filesystem/copy??targetFolderUuid="
+    static let copy =   "/api/filesystem/copy?targetFolderUuid=%@"
     static let details = "/api/filesystem/details"
     static let detail =  "/api/filesystem/detail/%@"
     
@@ -272,7 +272,7 @@ class FileService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse,ObjectRequestResponse>(success: { _  in
             success?()
         }, fail: fail)
-        executeDeleteRequest(param: copyparam, handler: handler)
+        executePostRequest(param: copyparam, handler: handler)
     }
     
     func delete(deleteFiles: DeleteFiles, success: FileOperation?, fail:FailResponse?) {
@@ -301,10 +301,12 @@ class FileService: BaseRequestService {
     
     //MARK: download && upload
     
-    func download(items: [WrapData], success: FileOperation?, fail:FailResponse?) {
+    func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail:FailResponse?) {
         let allOperationsCount = items.count
         WrapItemOperatonManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
-        let downLoadRequests: [BaseDownloadRequestParametrs] = items.flatMap { BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType) }
+        let downLoadRequests: [BaseDownloadRequestParametrs] = items.flatMap {
+            BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name)
+        }
         var completedOperationsCount = 0
         let operations = downLoadRequests.flatMap {
             DownLoadOperation(downloadParam: $0, success: {
@@ -364,7 +366,7 @@ class FileService: BaseRequestService {
                     
                     LocalMediaStorage.default.appendToAlboum(fileUrl: destination,
                                                        type: type,
-                                                       album: nil, success: {
+                                                       album: downloadParam.albumName, success: {
                         removeDestinationFile()
                         success?()
                         
@@ -393,7 +395,7 @@ class FileService: BaseRequestService {
                         handler: handler)
     }
     
-    func details(uuids: [String], success: ListRemoveItems?, fail:FailResponse?) {
+    func details(uuids: [String], success: ListRemoveItems?, fail: FailResponse?) {
         
         let param = FileDetails(uuids: uuids)
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { (responce) in
@@ -404,7 +406,7 @@ class FileService: BaseRequestService {
             }
             
             let list = resultResponse.flatMap { WrapData(remote: $0) }
-            CoreDataStack.default.appendOnlyNewItems(items: list)
+//            CoreDataStack.default.appendOnlyNewItems(items: list)
             success?(list)
         }, fail: fail)
         self.executePostRequest(param: param, handler: handler)

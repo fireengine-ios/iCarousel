@@ -23,8 +23,7 @@ class SelectFolderPresenter: DocumentsGreedPresenter{
             if (view_.selectedFolder != nil){
                 view_.onFolderSelected(folder: view_.selectedFolder!)
             }else{
-                custoPopUp.showCustomAlert(withText: TextConstants.selectFolderEmptySelectionError,
-                                           okButtonText: TextConstants.selectFolderEmptySelectionErrorOK)
+                UIApplication.showErrorAlert(message: TextConstants.selectFolderEmptySelectionError)
             }
         }
     }

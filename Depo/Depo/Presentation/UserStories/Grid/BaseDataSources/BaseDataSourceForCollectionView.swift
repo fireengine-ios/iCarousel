@@ -36,7 +36,7 @@ enum BaseDataSourceDisplayingType{
 }
 
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
-UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificationManagerProtocol {
     
     var isPaginationDidEnd = false
     
@@ -71,14 +71,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
     var allLocalItems = [WrapData]()
+    var uploadedObjectID = [String]()
     
     
     
     private func compoundItems(pageItems: [WrapData]) {
-        debugPrint("!!!GOT NEW ITEMS!!!")
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
         isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
-        debugPrint("!!!ALL NEW ITEMS SORTED!!!")
     }
     
     private func isLocalOnly() -> Bool {
@@ -137,11 +136,25 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         return nil
     }
     
+    private func isOnlyNonLocal(filters: [GeneralFilesFiltrationType]) -> Bool {
+        for filter in filters {
+            switch filter {
+            case   .localStatus(.nonLocal):
+                return true
+            default:
+                break
+            }
+        }
+        return false
+       
+    }
+    
     private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
-        var tempoArray = [WrapData]()
+        var tempoArray = originalItemsArray
         var tempoLocalArray = [WrapData]()
         
-        if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters) {
+        if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters),
+            !isOnlyNonLocal(filters: unwrapedFilters) {
             switch specificFilters {
             case .video:
                 tempoLocalArray = allLocalItems.filter{$0.fileType == .video}
@@ -154,68 +167,61 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         if tempoLocalArray.count == 0 {
             return originalItemsArray
         }
+        let allItemsArray = allMediaItems + originalItemsArray
+        var allItemsMD5 = allItemsArray.map{return $0.md5}
         
         if !isPaginationDidEnd {
-            var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
-            for remoteItem in originalItemsArray {
-                
-                innerLocalsLoop: for localItem in tempoLocalArray {
-                    guard let lastRemoteObject = originalItemsArray.last else {
-                        return originalItemsArray
+            guard let lastRemoteObject = originalItemsArray.last else {
+                return originalItemsArray
+            }
+            for localItem in tempoLocalArray {
+                if allItemsMD5.contains(localItem.md5) {
+                    if let unwrpedIndex = allLocalItems.index(of: localItem) {
+                        allLocalItems.remove(at: unwrpedIndex)
                     }
-                    switch currentSortType {
-                    case .timeUp, .timeUpWithoutSection:
-                        
-                        if localItem.creationDate! < lastRemoteObject.creationDate! {
-                            continue innerLocalsLoop
-                        }
-                    case .timeDown, .timeDownWithoutSection:
-                        if localItem.creationDate! > lastRemoteObject.creationDate! {
-                            continue innerLocalsLoop
-                        }
-                    case .lettersAZ, .albumlettersAZ:
-                        if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
-                            continue innerLocalsLoop
-                        }
-                    case .lettersZA, .albumlettersZA:
-                        if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
-                            continue innerLocalsLoop
-                        }
-                    case .sizeAZ:
-                        if localItem.fileSize > lastRemoteObject.fileSize {
-                            continue innerLocalsLoop
-                        }
-                    case .sizeZA:
-                        if localItem.fileSize < lastRemoteObject.fileSize {
-                            continue innerLocalsLoop
-                        }
-                    case .metaDataTimeUp:
-                        if let lastObjectMetaDate = lastRemoteObject.metaData?.takenDate,
-                            localItem.creationDate! < lastObjectMetaDate {
-                            continue innerLocalsLoop
-                        }
-                    case .metaDataTimeDown:
-                        if let lastObjectMetaDate = lastRemoteObject.metaData?.takenDate,
-                            localItem.creationDate! > lastObjectMetaDate {
-
-                            continue innerLocalsLoop
-                        }
-                    }
-                    if remoteItemsMD5List.contains(localItem.md5) {
-                        if let unwrpedIndex = allLocalItems.index(of: localItem) {
-                            allLocalItems.remove(at: unwrpedIndex)
-                        }
-                        continue innerLocalsLoop
-                    } else {
-                        tempoArray.append(localItem)
-                        remoteItemsMD5List.append(localItem.md5)
-                        if let unwrpedIndex = allLocalItems.index(of: localItem) {
-                            allLocalItems.remove(at: unwrpedIndex)
-                        }
-                    }
-                    
+                    continue
                 }
-                tempoArray.append(remoteItem)
+                
+                switch currentSortType {
+                case .timeUp, .timeUpWithoutSection:
+                    
+                    if localItem.creationDate! < lastRemoteObject.creationDate! {
+                        continue
+                    }
+                case .timeDown, .timeDownWithoutSection:
+                    if localItem.creationDate! > lastRemoteObject.creationDate! {
+                        continue
+                    }
+                case .lettersAZ, .albumlettersAZ:
+                    if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
+                        continue
+                    }
+                case .lettersZA, .albumlettersZA:
+                    if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
+                        continue
+                    }
+                case .sizeAZ:
+                    if localItem.fileSize > lastRemoteObject.fileSize {
+                        continue
+                    }
+                case .sizeZA:
+                    if localItem.fileSize < lastRemoteObject.fileSize {
+                        continue
+                    }
+                case .metaDataTimeUp:
+                    if localItem.metaDate < lastRemoteObject.metaDate {
+                        continue
+                    }
+                case .metaDataTimeDown:
+                    if localItem.metaDate > lastRemoteObject.metaDate {
+                        continue
+                    }
+                }
+                tempoArray.append(localItem)
+                allItemsMD5.append(localItem.md5)
+                if let unwrpedIndex = allLocalItems.index(of: localItem) {
+                    allLocalItems.remove(at: unwrpedIndex)
+                }
             }
         } else {
             debugPrint("!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
@@ -242,29 +248,23 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         case .sizeZA:
             tempoArray.sort{$0.fileSize < $1.fileSize}
         case .metaDataTimeUp:
-            tempoArray.sort{
-                if let firstMetaDate = $0.metaData?.takenDate,
-                    let secondMetaDate = $1.metaData?.takenDate{
-                    return firstMetaDate > secondMetaDate
-                } else {
-                    return $0.creationDate! > $1.creationDate!
-                }
-                }
+            tempoArray.sort{$0.metaDate > $1.metaDate}
         case .metaDataTimeDown:
-            tempoArray.sort{$0.creationDate! < $1.creationDate!}
+            tempoArray.sort{$0.metaDate < $1.metaDate}
         }
         debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
         return tempoArray
     }
     
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
-        if var lastItemCreatedDate = lastItem.creationDate,
-            var newItemCreationDate = newItem.creationDate {
-            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
-                let newItemMetaDate = newItem.metaData?.takenDate {
-                lastItemCreatedDate =  lastItemMetaDate
-                newItemCreationDate = newItemMetaDate
-            }
+        let lastItemCreatedDate =  isMetaDate ? lastItem.metaDate : lastItem.creationDate!
+        let newItemCreationDate = isMetaDate ? newItem.metaDate : newItem.creationDate!
+//        if var lastItemCreatedDate = lastItem.creationDate,
+//            var newItemCreationDate = newItem.creationDate {
+//            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
+//                let newItemMetaDate = newItem.metaData?.takenDate {
+            
+//            }
             if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
                 lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
                 
@@ -273,10 +273,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             } else {
                 allItems.append([newItem])
             }
-        } else {
-            allItems.append([newItem])
-        }
-        
+//        }
+//    else {
+//            allItems.append([newItem])
+//        }
+    
     }
     
     private func addByName(lastItem: WrapData, newItem: WrapData) {
@@ -346,12 +347,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         allLocalItems.removeAll()
         allItems.removeAll()
         allMediaItems.removeAll()
-        
-        allLocalItems.append(contentsOf: getAllLocalItems())
-        if isLocalOnly() {
-            allItems = [allLocalItems]
+        DispatchQueue.main.async {
+            self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+            if self.isLocalOnly() {
+                self.allItems = [self.allLocalItems]
+            }
+            self.reloadData()
         }
-        reloadData()
     }
     
     private var sortingRules: SortedRules
@@ -369,14 +371,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        allLocalItems.append(contentsOf: getAllLocalItems())
-        
         registerHeaders()
         registerCells()
         
-        if isLocalOnly() {
-            allItems = [allLocalItems]
-            reloadData()
+        DispatchQueue.main.async {
+            self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+
+            if self.isLocalOnly() {
+                self.allItems = [self.allLocalItems]
+                self.reloadData()
+            }
         }
     }
     
@@ -389,7 +393,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                             CollectionViewCellsIdsConstant.baseMultiFileCell,
                             CollectionViewCellsIdsConstant.photosOrderCell,
                             CollectionViewCellsIdsConstant.folderSelectionCell,
-                            CollectionViewCellsIdsConstant.albumCell]
+                            CollectionViewCellsIdsConstant.albumCell,
+                            CollectionViewCellsIdsConstant.localAlbumCell]
         
         registreList.forEach {
             let listNib = UINib(nibName: $0, bundle: nil)
@@ -491,6 +496,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             
             if !isObjctSelected(object: object){
                 onSelectObject(object: object)
+            }
+            
+            if !isSelectionStateActive{
                 forwardDelegate.onLongPressInCell()
             }
         }
@@ -663,8 +671,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             cellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         }
         
+        
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReUseID!,
                                                       for: indexPath)
+        
+        
         return  cell
     }
     
@@ -681,15 +693,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
         cell_.setDelegateObject(delegateObject: self)
         
-        guard let wraped = unwrapedObject as? Item else{
+        guard let wraped = unwrapedObject as? Item else {
             return
         }
         
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
-            print("Local: indexPath: \(indexPath), assetId: \(local.asset.localIdentifier)")
-            FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
-                if let cellToChange = self.collectionView.cellForItem(at: path) as? CollectionViewCellDataProtocol{
+            FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
+                if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol {
                     DispatchQueue.main.async {
                         cellToChange.setImage(image: image)
                     }
@@ -712,6 +723,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         if isLastCell, isLastSection, !isPaginationDidEnd {
             self.delegate?.getNextItems()
         }
+        
+        if let photoCell = cell_ as? CollectionViewCellForPhoto{
+            let file = itemForIndexPath(indexPath: indexPath)
+            if let `file` = file, uploadedObjectID.index(of: file.uuid) != nil{
+                photoCell.finishedUploadForObject()
+            }
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -736,19 +755,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         guard let unwrapedObject = object else {
             return
         }
-        if (isSelectionStateActive){
+        if (isSelectionStateActive) {
             onSelectObject(object: unwrapedObject)
             let cell = collectionView.cellForItem(at: indexPath)
             guard let cell_ = cell as? CollectionViewCellDataProtocol else {
                 return
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
-        }else{
+        } else {
             if  let forwardDelegate = self.delegate {
                 let array = getAllObjects()
                 for subArray in array {
                     for obj in subArray{
                         if (obj.uuid == unwrapedObject.uuid){
+                            
                             forwardDelegate.onItemSelected(item: obj, from: array)
                             return
                         }
@@ -772,23 +792,23 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     //-----
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if (Device.isIpad){
-            return 5.0
-        }else{
-            return 5.0
+            return NumericConstants.iPadGreedHorizontalSpace
+        } else {
+            return NumericConstants.iPhoneGreedHorizontalSpace
         }
     }
     
     //|||||
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if (Device.isIpad){
-            return 5.0
-        }else{
-            return 3.0
+            return NumericConstants.iPadGreedHorizontalSpace
+        } else {
+            return NumericConstants.iPhoneGreedHorizontalSpace
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        return UIEdgeInsets(top: 0, left: NumericConstants.iPhoneGreedInset, bottom: 0, right: NumericConstants.iPhoneGreedInset)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -823,4 +843,77 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return UICollectionReusableView()
         }
     }
+    
+    //MARK: UploadNotificationManagerProtocol
+    
+    func getIndexPathForObject(objectUUID: String) -> IndexPath?{
+        var indexPath: IndexPath? = nil
+        var section = 0
+        var row = 0
+        for array in allItems{
+            row = 0
+            for arraysObject in array{
+                if arraysObject.uuid == objectUUID{
+                    indexPath = IndexPath(row: row, section: section)
+                }
+                row += 1
+            }
+            section += 1
+        }
+        return indexPath
+    }
+    
+    func getCellForFile(objectUUID: String) -> CollectionViewCellForPhoto?{
+        if let path = getIndexPathForObject(objectUUID: objectUUID){
+            let cell = collectionView.cellForItem(at: path)
+            if let `cell` = cell as? CollectionViewCellForPhoto{
+                return cell
+            }
+        }
+        return nil
+    }
+    
+    func startUploadFile(file: WrapData){
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.setProgressForObject(progress: 0)
+        }
+    }
+    
+    func setProgressForUploadingFile(file: WrapData, progress: Float){
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.setProgressForObject(progress: progress)
+        }
+    }
+    
+    func finishedUploadFile(file: WrapData){
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.finishedUploadForObject()
+        }
+        
+        let uuid = file.uuid
+        
+        if uploadedObjectID.index(of: file.uuid) == nil{
+            uploadedObjectID.append(uuid)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
+            if let `self` = self{
+                let cell = self.getCellForFile(objectUUID: uuid)
+                cell?.resetCloudImage()
+                
+                if let index = self.uploadedObjectID.index(of: uuid){
+                    self.uploadedObjectID.remove(at: index)
+                }
+            }
+        })
+        
+    }
+    
+    func isEqual(object: UploadNotificationManagerProtocol) -> Bool {
+        if let compairedView = object as? BaseDataSourceForCollectionView {
+            return compairedView == self
+        }
+        return false
+    }
+    
 }

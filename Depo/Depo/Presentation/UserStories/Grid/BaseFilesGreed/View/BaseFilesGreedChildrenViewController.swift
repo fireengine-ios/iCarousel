@@ -14,32 +14,45 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
+            navigationBarWithGradientStyle()
+
+            if mainTitle != "" {
+                self.subTitle = output.getSortTypeString()
+            }
+        
+            self.setTitle(withString: mainTitle, andSubTitle: subTitle)
+    }
+
+    override func startSelection(with numberOfItems: Int) {
+        configureNavBarActions(isSelecting: true)
+        underNavBarBar?.setSorting(enabled: false)
+        self.navigationItem.leftBarButtonItem = cancelSelectionButton!
+    }
+    
+    override func stopSelection() {
+        configureNavBarActions(isSelecting: false)
+        underNavBarBar?.setSorting(enabled: true)
+        self.navigationItem.leftBarButtonItem = nil
         if mainTitle != "" {
             self.subTitle = output.getSortTypeString()
         }
         self.setTitle(withString: mainTitle, andSubTitle: subTitle)
     }
     
-    override  func setupSelectionStyle(isSelection: Bool){
-        if (isSelection){
-//            editingTabBar?.show()
-            self.navigationItem.leftBarButtonItem = cancelSelectionButton!
-        }else{
-//            editingTabBar?.dismiss()
-            self.navigationItem.leftBarButtonItem = nil
-        }
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    override func configurateNavigationBar(){
+    override func configurateViewForPopUp() {
+        scrolliblePopUpView.isEnable = false
+    }
+
+    override func configurateNavigationBar() {
         configureNavBarActions()
     }
     
     override func isNeedShowTabBar() -> Bool{
         return needShowTabBar
     }
+    
 }

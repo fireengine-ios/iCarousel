@@ -10,6 +10,7 @@ import Foundation
 
 protocol PasscodeSettingsViewInput: class {
     func setup(state: PasscodeSettingsViewState, animated: Bool)
+    func presentMailVerefication()
 }
 
 protocol PasscodeSettingsViewOutput: class {
@@ -18,9 +19,10 @@ protocol PasscodeSettingsViewOutput: class {
     func setTouchId(enable: Bool)
     func turnOffPasscode()
     func setPasscode()
+    func mailVerified()
     
     var isPasscodeEmpty: Bool { get }
-    var isBiometricsAvailable: Bool { get }
+    var biometricsStatus: BiometricsStatus { get }
     var isBiometricsEnabled: Bool { get }
     var isAvailableFaceID: Bool { get }
 }

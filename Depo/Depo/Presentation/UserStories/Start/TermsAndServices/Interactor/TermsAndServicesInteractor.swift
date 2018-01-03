@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class TermsAndServicesInteractor: TermsAndServicesInteractorInput, CustomPopUpAlertActions {
+class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
 
     weak var output: TermsAndServicesInteractorOutput!
     let eulaService = EulaService()
@@ -78,14 +78,6 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput, CustomPopUpAl
 //                self?.output.signupFailed(errorResponce: errorResponce)
 //            }
 //        })
-    }
-    
-    func cancelationAction() {
-        output.popUpPressed()
-    }
-    
-    func otherAction() {
-        
     }
     
     func applyEula(){

@@ -74,21 +74,16 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     }
     
     override func setImage(image: UIImage?) {
-        if (image != nil){
-            isAlreadyConfigured = true
-            if (isBigSize()){
-                bigContentImageView.contentMode = .scaleAspectFill
-                bigContentImageView.image = image
-            } else {
-                smallContentImageView.contentMode = .scaleAspectFit
-                smallContentImageView.configured = true
-                smallContentImageView.setImage(image: image)
-                smallContentImageView.isHidden = false
-                smallCellSelectionView.isHidden = true
-                
-            }
+        isAlreadyConfigured = true
+        if (isBigSize()){
+            bigContentImageView.contentMode = .scaleAspectFill
+            bigContentImageView.image = image
         } else {
-            super.setImage(image: image)
+            smallContentImageView.contentMode = .scaleAspectFit
+            smallContentImageView.configured = true
+            smallContentImageView.setImage(image: image)
+            smallContentImageView.isHidden = false
+            smallCellSelectionView.isHidden = true
         }
         stopAnimation()
     }
@@ -107,10 +102,12 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func setImage(with url: URL) {
         if let imageView = isBigSize() ? self.bigContentImageView : self.smallContentImageView {
             imageView.contentMode = .center
-            imageView.sd_setImage(with: url, placeholderImage: self.placeholderImage(), options: [.avoidAutoSetImage]) { (image, error, cacheType, url) in
-                DispatchQueue.main.async {
-                    self.setImage(image: image)
-                }
+            imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { (image, error, cacheType, url) in
+                imageView.layer.opacity = 0.1
+                self.setImage(image: image)
+                UIView.animate(withDuration: 0.2, animations: {
+                    imageView.layer.opacity = 1.0
+                })
             }
         }
     }
@@ -183,20 +180,17 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         moreButton.isHidden = isSelectionActive
         smallContentImageView.isHidden = false
         
-        if (isSelectionActive){
+        if let isFavorite = itemModel?.favorites {
+            if isBigSize() {
+                topFavoritesStar.isHidden = !isFavorite
+                bottomFavoritesStar.isHidden = true
+            } else {
+                topFavoritesStar.isHidden = true
+                bottomFavoritesStar.isHidden = !isFavorite
+            }
+        } else {
             topFavoritesStar.isHidden = true
             bottomFavoritesStar.isHidden = true
-        }else{
-            if itemModel != nil {
-                if (isBigSize()){
-                    topFavoritesStar.isHidden = !itemModel!.favorites
-                    bottomFavoritesStar.isHidden = true
-                }else{
-                    topFavoritesStar.isHidden = true
-                    bottomFavoritesStar.isHidden = !itemModel!.favorites
-                }
-
-            }
         }
         
         isCellSelected = isSelected

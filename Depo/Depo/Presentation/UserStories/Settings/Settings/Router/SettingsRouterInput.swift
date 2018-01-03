@@ -22,13 +22,13 @@ protocol SettingsRouterInput {
     
     func goToUsageInfo()
     
-    func goToUserInfo(userInfo: AccountInfoResponse)
+    func goToUserInfo(userInfo: AccountInfoResponse, isTurkcellUser: Bool)
     
     func goToActivityTimeline()
     
     func goToPackages()
     
-    func goToPasscodeSettings()
+    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool)
     
     func closeEnterPasscode()
     

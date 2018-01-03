@@ -75,12 +75,12 @@ class WrapperedItemsSorting: NSObject {
                 newArray.append(item)
                 break
             case .notSync:
-                if (item.syncStatus == .notSynced){
+                if (!item.isSynced()){
                     newArray.append(item)
                 }
                 break
             case .sync:
-                if (item.syncStatus == .synced){
+                if (item.isSynced()){
                     newArray.append(item)
                 }
                 break
@@ -209,15 +209,15 @@ class WrapperedItemsSorting: NSObject {
         }
     }
        
-    func filterByType(itemsArray:[BaseDataSourceItem], types: [FileType]) -> [BaseDataSourceItem] {
-        let array = itemsArray.filter{
+    func filterByType(itemsArray: [BaseDataSourceItem], types: [FileType]) -> [BaseDataSourceItem] {
+        let array = itemsArray.filter {
             return types.contains($0.fileType)
         }
         return array
     }
     
-    func filterSync(items:[BaseDataSourceItem], key: MoreActionsConfig.CellSyncType) -> [BaseDataSourceItem] {
-        return items.filter{$0.fileType == .application(.doc) }
+    func filterSync(items: [BaseDataSourceItem], key: MoreActionsConfig.CellSyncType) -> [BaseDataSourceItem] {
+        return items.filter{ $0.fileType == .application(.doc) }
     }
     
 }

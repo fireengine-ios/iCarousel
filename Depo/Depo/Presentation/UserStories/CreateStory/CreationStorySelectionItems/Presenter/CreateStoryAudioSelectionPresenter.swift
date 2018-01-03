@@ -48,7 +48,7 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
                viewController.hideView()
             }
         }else{
-            custoPopUp.showCustomAlert(withText: TextConstants.createStoryNoSelectedAudioError, okButtonText: TextConstants.createFolderEmptyFolderButtonText)
+            UIApplication.showErrorAlert(message: TextConstants.createStoryNoSelectedAudioError)
         }
         
 //        SingleSong.default.stop()

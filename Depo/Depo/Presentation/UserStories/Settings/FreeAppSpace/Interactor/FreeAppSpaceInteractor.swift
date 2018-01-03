@@ -8,12 +8,11 @@
 
 class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     
-    func onDeleteSelectedItems(selectedItems: [WrapData]){
+    func onDeleteSelectedItems(selectedItems: [WrapData]) {
         let uuids = FreeAppSpace.default.getServerUIDSForLocalitem(localItemsArray: selectedItems)
         
-        FileService().details(uuids: uuids, success: {[weak self] (objects) in
-            let localFilesForDelete = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
-            print(localFilesForDelete.count)
+        FileService().details(uuids: uuids, success: { [weak self] (objects) in
+            //let localFilesForDelete = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
             
             let array = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
             
@@ -26,31 +25,23 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                    return
                 }
                 
-                if let service = self_.remoteItems as? FreeAppService{
+                if let service = self_.remoteItems as? FreeAppService {
                     service.clear()
                 }
                 if let presenter = self_.output as? FreeAppSpacePresenter {
                     DispatchQueue.main.async {
                         presenter.onItemDeleted()
+                        WrapItemOperatonManager.default.stopOperationWithType(type: .freeAppSpace)
+                        WrapItemOperatonManager.default.stopOperationWithType(type: .freeAppSpaceWarning)
+                        presenter.goBack()
                     }
-                    if FreeAppSpace.default.isDuplicatesNotAvailable() {
-                        DispatchQueue.main.async {
-                            WrapItemOperatonManager.default.stopOperationWithType(type: .freeAppSpace)
-                            WrapItemOperatonManager.default.stopOperationWithType(type: .freeAppSpaceWarning)
-                            presenter.goBack()
-                        }
-                    }else{
+                }
+                
+            }, fail: { [weak self] error in
+                if let presenter = self?.output as? FreeAppSpacePresenter {
+                    DispatchQueue.main.async {
                         presenter.reloadData()
                     }
-                }
-                
-            }, fail: { (error) in
-                guard let self_ = self else{
-                    return
-                }
-                
-                if let presenter = self_.output as? FreeAppSpacePresenter {
-                    presenter.reloadData()
                 }
             })
         }) { (error) in

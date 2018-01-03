@@ -18,15 +18,28 @@ class LoginPhoneMailCell: BaseUserInputCellView {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.text?.count == 0, string == "+" {
             loginCellActionDelegate?.firstCharacterIsPlus(fromCell: self, string: string)
-//            textField.text = 
             return false
         } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil, textField.text?.count == 0 {
             loginCellActionDelegate?.firstCharacterIsNum(fromCell: self, string: string)
-            if string == "0", CoreTelephonyService().isTurkcellOperator() { return false }
-            debugPrint("First symbol is num!!!!!!47")
         }
 
         return true
+    }
+    
+    override func textFieldDidEndEditing(_ textField: UITextField) {
+        guard var text = textInputField.text else {
+            return
+        }
+        
+        guard let range = text.range(of: "+900") else {
+            return
+        }
+        
+        if text.startIndex == range.lowerBound {
+            text.remove(at: text[3])
+            textInputField.text = text
+        }
+    
     }
     
     func enterPhoneCode(code: String) {
@@ -34,7 +47,7 @@ class LoginPhoneMailCell: BaseUserInputCellView {
     }
     
     func incertPhoneCode(code: String) {
-        textInputField.text = code + (textInputField.text ?? "")
+        textInputField?.text = code + (textInputField?.text ?? "")
     }
     
 }

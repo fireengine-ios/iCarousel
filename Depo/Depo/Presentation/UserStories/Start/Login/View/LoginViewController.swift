@@ -185,6 +185,22 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         errorLabel.isHidden = false
     }
     
+    func showInfoButton(in field: LoginViewInputField) {
+        switch field {
+        case .login:
+            guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? BaseUserInputCellView else {
+                return
+            }
+            cell.changeInfoButtonTo(hidden: false)
+        case .password:
+            guard let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? PasswordCell else {
+                return
+            }
+            cell.changeInfoButtonTo(hidden: false)
+        }
+        
+    }
+    
     func hideErrorMessage() {
         errorLabel.isHidden = true
     }
@@ -193,14 +209,14 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? BaseUserInputCellView else {
             return
         }
-        cell.changeTitleHeighlight(heighlight: false)
+        cell.changeTitleHeighlight(heighlight: true)
     }
     
     func highlightPasswordTitle() {
         guard let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? PasswordCell else {
             return
         }
-        cell.changeTitleHeighlight(heighlight: false)
+        cell.changeTitleHeighlight(heighlight: true)
     }
     
     func dehighlightTitles() {
@@ -297,5 +313,9 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     func unblockUI() {
         loginButton.isEnabled = true
         cantLoginButton.isEnabled = true
+    }
+    
+    func failedBlockError() {
+        showErrorMessage(with: TextConstants.hourBlockLoginError)
     }
 }

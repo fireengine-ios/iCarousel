@@ -15,4 +15,5 @@ protocol CreateStoryPhotosOrderRouterInput {
     
     func goToStoryPreviewViewController(forStory story: PhotoStory, responce: CreateStoryResponce, navigationController: UINavigationController?)
     
+    func showMusicEmptyPopUp(okHandler: @escaping () -> Void)
 }

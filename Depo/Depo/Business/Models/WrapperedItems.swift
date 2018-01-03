@@ -402,6 +402,22 @@ protocol  Wrappered  {
 
 class WrapData: BaseDataSourceItem, Wrappered {
 
+    enum Status: String {
+        case active = "ACTIVE"
+        case uploaded = "UPLOADED"
+        case transcoding = "TRANSCODING"
+        case transcodingFailed = "TRANSCODING_FAILED"
+        case unknown = "UNKNOWN"
+        
+        init(string: String?) {
+            if let statusString = string, let status = Status(rawValue: statusString) {
+                self = status
+            } else {
+                self = .unknown
+            }
+        }
+    }
+    
     var coreDataObject: MediaItem?
     
     var id: Int64?
@@ -418,8 +434,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
 
     var metaData: BaseMetaData?
     
+    var status: Status
+    
     /* for remote content*/
-    private let tmpDownloadUrl: URL?
+    let tmpDownloadUrl: URL?
     
     var isUploading: Bool = false
     
@@ -442,10 +460,20 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var isFolder: Bool?
     
+    var metaDate: Date {
+        if let unwrapedMetaDate = metaData?.takenDate {
+            return unwrapedMetaDate
+        } else if let unwrapedCreatedDate = creationDate {
+            return unwrapedCreatedDate
+        }
+        return Date()
+    }
+    
     init(musicForCreateStory: CreateStoryMusicItem) {
         id = musicForCreateStory.id
         tmpDownloadUrl = musicForCreateStory.path
         favorites = false
+        status = .unknown
         patchToPreview = .remoteUrl(nil)
         // unuse parametrs
         fileSize =  Int64(0)
@@ -470,10 +498,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
         duration = WrapData.getDuration(duration: baseModel.asset.duration)
             
         favorites = false
+        status = .unknown
         super.init()
         md5 = baseModel.md5
-
+        
         name = baseModel.name
+        if let fileName = name {
+            md5 = String(format: "%@%i", fileName, fileSize)
+        }
+        
         fileType = baseModel.fileType
         isLocalItem = true
         creationDate = baseModel.dateOfCreation
@@ -506,6 +539,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = remote.tempDownloadURL
         patchToPreview = .remoteUrl(URL(string: ""))
         fileSize = remote.bytes ?? Int64(0)
+        status = Status(string: remote.status)
         super.init()
         md5 = remote.hash ?? "not hash "
         
@@ -518,6 +552,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         fileType = FileType(type: remote.contentType, fileName: name)
         isFolder = remote.folder
         syncStatus = .synced
+        syncStatuses.append(SingletonStorage.shared.unigueUserID)
         creationDate = remote.createdDate
         
         parent = remote.parent
@@ -546,8 +581,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         
         favorites = remote.metadata?.favourite ?? false
+        if let fileName = name {
+            md5 = String(format: "%@%i", fileName, fileSize)//remote.hash ?? ""
+        }
         
-        md5 = remote.hash ?? ""
         patchToPreview = .remoteUrl(url)
         id = remote.id
     }
@@ -563,7 +600,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         coreDataObject = mediaItem
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
-        
+        status = .unknown
         var url: URL? = nil
         if let url_ = mediaItem.urlToFileValue {
             url = URL(string: url_)
@@ -581,6 +618,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
                 let urlToFile = URL(string: url)!
                 let tmp  = LocalMediaContent(asset: asset,
                                              urlToFile: urlToFile)
+                mediaItem.metadata?.duration = asset.duration
                 patchToPreview = .localMediaContent(tmp)
             } else {
                 // WARNIG: THIS CASE INCOREECTif 
@@ -605,8 +643,11 @@ class WrapData: BaseDataSourceItem, Wrappered {
         creationDate = mediaItem.creationDateValue as Date?
         lastModifiDate = mediaItem.lastModifiDateValue as Date?
         syncStatus =  SyncWrapperedStatus(value: mediaItem.syncStatusValue)
+        syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         fileType = FileType(value: mediaItem.fileTypeValue)
         isFolder = mediaItem.isFolder
+        duration = WrapData.getDuration(duration: mediaItem.metadata?.duration)
+        syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         
         albums = mediaItem.albumsUUIDs
         
@@ -614,7 +655,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         /// metaData filling
         metaData?.favourite = mediaItem.favoritesValue
-        metaData?.album = mediaItem.metadata?.album
+        //        metaData?.album = mediaItem.metadata?.album //FIXME: currently disabled
         metaData?.artist = mediaItem.metadata?.artist
         metaData?.duration = mediaItem.metadata?.duration
         metaData?.genre = mediaItem.metadata?.genre ?? []
@@ -630,6 +671,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let smalURl = mediaItem.metadata?.smalURl {
             metaData?.smalURl = URL(string: smalURl)
         }
+        
     }
     
     private class func getDuration(duration: Double?) -> String {

@@ -10,11 +10,20 @@ class UsageInfoPresenter: BasePresenter {
     weak var view: UsageInfoViewInput!
     var interactor: UsageInfoInteractorInput!
     var router: UsageInfoRouterInput!
+    
+    //MARK : BasePresenter
+    override func outputView() -> Waiting? {
+        return view
+    }
 }
 
 // MARK: - UsageInfoViewOutput
 extension UsageInfoPresenter: UsageInfoViewOutput {
     func viewIsReady() {
+    }
+    
+    func viewWillAppear() {
+        startAsyncOperation()
         interactor.getUsage()
     }
     
@@ -27,9 +36,11 @@ extension UsageInfoPresenter: UsageInfoViewOutput {
 extension UsageInfoPresenter: UsageInfoInteractorOutput {
     func successed(usage: UsageResponse) {
         view.display(usage: usage)
+        asyncOperationSucces()
     }
     
     func failedUsage(with error: ErrorResponse) {
-        
+        asyncOperationSucces()
+        view.display(error: error)
     }
 }

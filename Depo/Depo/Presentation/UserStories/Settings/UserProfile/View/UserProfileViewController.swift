@@ -9,7 +9,6 @@
 import UIKit
 
 class UserProfileViewController: BaseViewController, UserProfileViewInput, UITextFieldDelegate {
-
     var output: UserProfileViewOutput!
     
     @IBOutlet weak var scrollView : UIScrollView!
@@ -26,6 +25,10 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     
     var editButton: UIBarButtonItem?
     var readyButton: UIBarButtonItem?
+    
+    private var name: String?
+    private var email: String?
+    private var number: String?
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -52,6 +55,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         gsmNumberTextField.textColor = ColorConstants.textGrayColor
         gsmNumberTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
         
+        title = TextConstants.userProfileTitle
+        
         let editButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
         editButton.setTitle(TextConstants.userProfileEditButton, for: .normal)
         editButton.addTarget(self, action: #selector(onEditButtonAction), for: .touchUpInside)
@@ -76,8 +81,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         attributedText.addAttribute(NSAttributedStringKey.font, value: font1, range: r1)
         attributedText.addAttribute(NSAttributedStringKey.font, value: font2, range: r2)
         
-        scrollView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 0, right: 0)
-                
+        backButtonForNavigationItem(title: TextConstants.backTitle)
+        
         output.viewIsReady()
     }
     
@@ -121,11 +126,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     }
     
     func setupEditState(_ isEdit: Bool) {
-        if isEdit {
-            self.navigationItem.rightBarButtonItem = readyButton
-        } else {
-            self.navigationItem.rightBarButtonItem = editButton
-        }
+        let button = isEdit ? readyButton : editButton
+        navigationItem.setRightBarButton(button, animated: true)
         nameTextField.isUserInteractionEnabled = isEdit
         emailTextField.isUserInteractionEnabled = isEdit
         gsmNumberTextField.isUserInteractionEnabled = isEdit
@@ -143,10 +145,9 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
             }
             string = string + surName_
         }
+        
         nameTextField.text = string
-        
         emailTextField.text = userInfo.email
-        
         gsmNumberTextField.text = userInfo.phoneNumber
     }
     
@@ -158,6 +159,10 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         return gsmNumberTextField.text ?? ""
     }
     
+    func endSaving() {
+        readyButton?.isEnabled = true
+    }
+    
     // MARK: ButtonsAction
     
     @IBAction func onValueChanged() {}
@@ -165,9 +170,25 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     @objc func onEditButtonAction() {
         nameTextField.becomeFirstResponder()
         output.tapEditButton()
+        saveFields()
+    }
+    
+    /// save for "check for no changes" in onReadyButtonAction
+    private func saveFields() {
+        name = nameTextField.text
+        email = emailTextField.text
+        number = gsmNumberTextField.text
     }
     
     @objc func onReadyButtonAction() {
+        /// check for no changes
+        if name == nameTextField.text, email == emailTextField.text, number == gsmNumberTextField.text {
+            setupEditState(false)
+            return
+        }
+        
+        readyButton?.isEnabled = false
+        
         output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
     }
     
@@ -189,4 +210,9 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         
         return true
     }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return !(textField == gsmNumberTextField && output.isTurkcellUser())
+    }
+    
 }

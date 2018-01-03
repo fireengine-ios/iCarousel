@@ -10,28 +10,42 @@ import UIKit
 
 class AlbumDetailModuleInitializer: NSObject {
     
+    static var baseSortTypes: [MoreActionsConfig.SortRullesType] {
+        return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+    }
+    
     //Connect with object on storyboard
-    class func initializeAlbumDetailController(with nibName:String, album: AlbumItem) -> AlbumDetailViewController {
+    class func initializeAlbumDetailController(with nibName:String, album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
+        viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .sync, .removeFromAlbum],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .print, .removeFromAlbum],
                                                style: .default, tintColor: nil)
         
-        let presentor = AlbumDetailPresenter()
-        
+        let presenter = AlbumDetailPresenter()
+        presenter.moduleOutput = moduleOutput
         
         let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 140))
         interactor.album = album
+        viewController.parentUUID = album.uuid
+        
+        let gridListTopBarConfig = GridListTopBarConfig(
+            defaultGridListViewtype: type,
+            availableSortTypes: baseSortTypes,
+            defaultSortType: .TimeNewOld,
+            availableFilter: false,
+            showGridListButton: true
+        )
         
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid)],
-                               bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
-                               presenter: presentor, interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .select],
+                               bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
+                               presenter: presenter, interactor: interactor,
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyDeleteAlbums, .removeAlbum, .albumDetails, .select],
                                                                                      selectionModeTypes: [.createStory, .delete]),
-                               topBarConfig: nil)
+                               topBarConfig: gridListTopBarConfig)
         
-        viewController.mainTitle = album.name
+        viewController.mainTitle = album.name ?? ""
         
         return viewController
     }

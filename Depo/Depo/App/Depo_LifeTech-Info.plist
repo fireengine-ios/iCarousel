@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.6.7</string>
+	<string>1.9.1</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -93,12 +93,16 @@
 	<string></string>
 	<key>NSContactsUsageDescription</key>
 	<string></string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location will be used for background syncing</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location will be used for background syncing</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location will be used for background syncing</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Need access to save your photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>Your photos will be backed up to lifebox</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TurkcellSaturaReg.ttf</string>

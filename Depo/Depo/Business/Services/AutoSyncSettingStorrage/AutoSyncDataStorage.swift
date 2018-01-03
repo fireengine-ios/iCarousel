@@ -11,7 +11,7 @@ import UIKit
 class AutoSyncDataStorage: NSObject {
 
     func getAutoSyncModelForCurrentUser(success:@escaping ([AutoSyncModel], _ uniqueUserId: String) -> Swift.Void){
-        SingletonStorage.shared().getAccountInfoForUser(success: { (accountInfoResponce) in
+        SingletonStorage.shared.getAccountInfoForUser(success: { (accountInfoResponce) in
             let settings: [AutoSyncModel]
             
             let uniqueUserID = accountInfoResponce.projectID ?? ""
@@ -29,13 +29,15 @@ class AutoSyncDataStorage: NSObject {
         }
     }
     
-    func saveAutoSyncModel(model: SettingsAutoSyncModel, uniqueUserId: String){
+    func saveAutoSyncModel(model: SettingsAutoSyncModel, uniqueUserId: String) {
         let dict = model.configurateDictionary()
         UserDefaults.standard.set(dict, forKey: uniqueUserId)
         if model.isAutoSyncEnable {
-            LocationManager.shared().startUpdateLocation()
+            LocationManager.shared.startUpdateLocation()
         }else{
-            LocationManager.shared().stopUpdateLocation()
+            PopUpService.shared.setLoginCountForShowImmediately()
+            PopUpService.shared.checkIsNeedShowUploadOffPopUp()
+            LocationManager.shared.stopUpdateLocation()
         }
         
     }

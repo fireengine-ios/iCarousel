@@ -17,6 +17,7 @@ enum ElementTypes {
     case download
     case undetermend
     case rename
+    case removeAlbum
     
     //used only in alert sheet:
     //photos:
@@ -46,7 +47,7 @@ enum ElementTypes {
     case shareAlbum
     case makeAlbumCover
     case albumDetails
-    
+    case completelyDeleteAlbums
 }
 
 
@@ -58,7 +59,9 @@ class EditinglBar: CustomTabBar {
         static let share = ("ShareButtonIcon", TextConstants.tabBarShareLabel)
         static let info = ("InfoButtonIcon", TextConstants.tabBarInfoLabel)
         static let edit = ("EditButtonIcon", TextConstants.tabBarEditeLabel)
+        static let print = ("PrintButtonIcon", TextConstants.tabBarPrintLabel)
         static let delete = ("DeleteShareButton", TextConstants.tabBarDeleteLabel)
+        static let removeAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveAlbumLabel)
         static let move = ("MoveButtonIcon", TextConstants.tabBarMoveLabel)
         static let addToAlbum = ("MoveButtonIcon", TextConstants.tabBarAddToAlbumLabel)
         static let makeCover = ("MoveButtonIcon", TextConstants.tabAlbumCoverAlbumLabel)

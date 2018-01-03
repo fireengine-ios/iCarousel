@@ -20,10 +20,13 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     var tableView: UITableView = UITableView()
     var viewsArray = [BaseView]()
     var notPermittedPopUpViewTypes = Set<String>()
+    var isEnable: Bool = true
     
     var viewsByType = [OperationType: BaseView]()
     
     static let indent: CGFloat = 10
+    
+    let lock = NSLock()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,21 +61,29 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
 
     func addPopUpSubView(popUp: BaseView){
-        viewsArray.insert(popUp, at: 0)
-        updateH()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.lock.lock()
+            self.viewsArray.insert(popUp, at: 0)
+            let path = IndexPath(row: 0, section: 0)
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [path], with: .automatic)
+            self.tableView.endUpdates()
+            self.updateH()
+            self.lock.unlock()
+        }
     }
     
     func deletePopUpSubView(popUp: BaseView){
-        if let index = viewsArray.index(of: popUp){
-            DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            if let index = self.viewsArray.index(of: popUp){
+                self.lock.lock()
                 let path = IndexPath(row: index, section: 0)
                 self.viewsArray.remove(at: path.row)
                 self.tableView.beginUpdates()
                 self.tableView.deleteRows(at: [path], with: .automatic)
                 self.tableView.endUpdates()
                 self.updateH()
-                
+                self.lock.unlock()
             }
         }
     }
@@ -160,10 +171,24 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     //MARK: WrapItemOperationViewProtocol
     
     private func checkIsThisIsPermittedType(type: OperationType) -> Bool{
+        
+        if !isEnable{
+            return false
+        }
+        
         if notPermittedPopUpViewTypes.count == 0 {
             return true
         }
         return !notPermittedPopUpViewTypes.contains(type.rawValue)
+    }
+    
+    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool{
+        switch operationType {
+        case .prepareToAutoSync:
+            return viewsByType[.sync] == nil
+        default:
+            return true
+        }
     }
     
     func getViewForOperation(operation: OperationType) -> BaseView{
@@ -171,27 +196,58 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
         if !checkIsThisIsPermittedType(type: type){
             return
         }
         
+        if !checkIsNeedShowPopUpFor(operationType: type){
+            return
+        }
+        
         if viewsByType[type] == nil {
+            
             let view = getViewForOperation(operation: type)
             viewsByType[type] = view
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
+                if let item = object{
+                    popUp.setImageForUploadingItem(item: item)
+                }
             }
             addPopUpSubView(popUp: view)
+            
         }
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
+        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    }
+    
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ){
         if let view = viewsByType[type] {
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
+                if let item = object{
+                    popUp.setImageForUploadingItem(item: item)
+                }
             }
         }else{
             startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+        }
+    }
+    
+    func setProgress(ratio: Float, for operationType: OperationType, object: WrapData? ) {
+        guard let popUp = viewsByType[operationType] as? ProgressPopUp else {
+            return
+        }
+        
+        popUp.setProgressBar(ratio: ratio)
+        if let `object` = object{
+            popUp.setImageForUploadingItem(item: object)
         }
     }
     

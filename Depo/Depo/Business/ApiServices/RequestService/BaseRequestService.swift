@@ -15,32 +15,7 @@ protocol ObjectFromRequestResponse: class {
     func mapping()
 }
 
-
-enum ErrorResponse : CustomStringConvertible, Error  {
-    
-    case failResponse(ObjectFromRequestResponse?)
-    case error(Error)
-    case string(String)
-    case httpCode(NSInteger)
-    case backendError(BackendError)
-    
-    var description: String {
-        switch self {
-        case .failResponse(_):
-            return "Server error"
-        case .string(let errorString):
-            return errorString
-        case .error(let recivedError):
-           return recivedError.localizedDescription
-        case .httpCode(let code):
-            return String(code)
-        case .backendError(let error):
-            return error.localizedDescription
-        }
-    }
-}
-
-protocol  RequestParametrs {
+protocol RequestParametrs {
     
     var requestParametrs: Any { get }
     
@@ -92,6 +67,8 @@ class BaseDownloadRequestParametrs: DownloadRequestParametrs {
     
     let fileName: String
     
+    let albumName: String?
+    
     var requestParametrs: Any {
         return Data()
     }
@@ -104,10 +81,11 @@ class BaseDownloadRequestParametrs: DownloadRequestParametrs {
         return RequestHeaders.authification()
     }
     
-    init(urlToFile: URL, fileName: String, contentType: FileType) {
+    init(urlToFile: URL, fileName: String, contentType: FileType, albumName: String? = nil) {
         urlToRemoteFile = urlToFile
         self.contentType = contentType
         self.fileName = fileName
+        self.albumName = albumName
     }
 }
 
