@@ -61,20 +61,12 @@ class AppConfigurator {
     }
     
     class private func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        var notificationTypes: NSInteger?
-        if #available(iOS 8, *) {
-            let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
-            notificationTypes = NSInteger(types.rawValue)
-        } else {
-            let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.sound, UIUserNotificationType.badge]
-            notificationTypes = NSInteger(types.rawValue)
-        }
+        let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.sound, UIUserNotificationType.badge]
+        let notificationTypes = NSInteger(types.rawValue)
         
-        if let notificationTypes = notificationTypes {
-            DispatchQueue.main.async {
-                MPush.register(forRemoteNotificationTypes: notificationTypes)
-                MPush.applicationDidFinishLaunching(options: launchOptions)
-            }
+        DispatchQueue.main.async {
+            MPush.register(forRemoteNotificationTypes: notificationTypes)
+            MPush.applicationDidFinishLaunching(options: launchOptions)
         }
     }
     
