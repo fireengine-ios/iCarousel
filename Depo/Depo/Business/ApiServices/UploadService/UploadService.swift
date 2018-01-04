@@ -448,14 +448,16 @@ extension UploadService {
         let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
                                               message: TextConstants.syncOutOfSpaceAlertText,
                                               image: .none,
-                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertNo,
+                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
                                               secondButtonTitle: TextConstants.syncOutOfSpaceAlertGoToSettings,
+                                              firstAction: nil,
                                               secondAction: { vc in
                                                 vc.close(completion: {
                                                     let router = RouterVC()
                                                     router.pushViewController(viewController: router.packages)
                                                 })
         })
+        
         DispatchQueue.main.async {
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
         }
