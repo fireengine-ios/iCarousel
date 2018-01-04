@@ -54,6 +54,8 @@ extension UIViewController {
         if let view = navBar?.viewWithTag(tagHomeView)  {
             view.removeFromSuperview()
         }
+        
+        setStatusBarBackgroundColor(color: UIColor.clear)
     }
     
     func backButtonForNavigationItem(title: String) {
@@ -68,6 +70,14 @@ extension UIViewController {
     func setNavigationTitle(title: String) {
         navigationItem.title = title
         navBar?.titleTextAttributes = [NSAttributedStringKey.font: UIFont.TurkcellSaturaDemFont(size: 19), NSAttributedStringKey.foregroundColor: UIColor.white]
+    }
+    
+    func setStatusBarBackgroundColor(color: UIColor) {
+        UIApplication.shared.statusBarView?.backgroundColor = color
+    }
+    
+    func setNavigationBackgroundColor(color: UIColor) {
+        navBar?.backgroundColor = color
     }
     
     func hidenNavigationBarStyle() {
@@ -101,6 +111,9 @@ extension UIViewController {
     
     func blackNavigationBarStyle() {
         defaultNavBarStyle()
+        
+        navBar?.backgroundColor = UIColor.black
+        setStatusBarBackgroundColor(color: UIColor.black)
     }
     
     func navigationBarWithGradientStyleWithoutInsets() {
