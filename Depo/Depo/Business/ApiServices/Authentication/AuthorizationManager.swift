@@ -64,9 +64,6 @@ extension AuthorizationRepositoryImp: RequestAdapter {
         }
         
         var urlRequest = urlRequest
-//        urlRequest.setValue("application/json; encoding=utf-8", forHTTPHeaderField: "Content-Type")
-        
-        
         
         guard let accessToken = tokenStorage.accessToken else {
             return urlRequest
@@ -87,7 +84,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         }
         
         /// if accessToken is valid
-        if response.statusCode != 401 {
+        guard response.statusCode == 401 else {
             completion(false, 0.0)
             return
         }

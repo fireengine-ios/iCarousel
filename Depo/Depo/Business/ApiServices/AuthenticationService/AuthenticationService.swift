@@ -308,10 +308,9 @@ class AuthenticationService: BaseRequestService {
         ]
         
         SessionManager.default.request(URLs.login, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
-                .validate()
+                .customValidate()
                 .responseString { [weak self] response in
-
-                    debugPrint(response)
+                    
                     switch response.result {
                     case .success(_):
                         if let headers = response.response?.allHeaderFields as? [String: Any],
@@ -333,26 +332,22 @@ class AuthenticationService: BaseRequestService {
         
     }
     
-    func autificationByRememberMe(sucess:SuccessLogin?, fail: FailResponse?) {
-        let user = AuthenticationUserByRememberMe()
-//        self.success = sucess
-//        self.fail = fail
-//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
+//    func autificationByRememberMe(sucess:SuccessLogin?, fail: FailResponse?) {
+//        let user = AuthenticationUserByRememberMe()
+////        self.success = sucess
+////        self.fail = fail
+////        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
+////        executePostRequest(param: user, handler: handler)
+//    }
+    
+    func autificationByToken(sucess: SuccessLogin?, fail: FailResponse?) {
+//        let user = AuthenticationUserByToken()
+//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: sucess, fail: fail)
 //        executePostRequest(param: user, handler: handler)
     }
     
-    func autificationByToken(sucess:SuccessLogin?, fail: FailResponse?) {
-        let user = AuthenticationUserByToken()
-//        self.success = sucess
-//        self.fail = fail
-//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
-//        executePostRequest(param: user, handler: handler)
-    }
-    
-    func turkcellAutification(user: Authentication3G, sucess:SuccessLogin?, fail: FailResponse?) {
-//        self.success = sucess
-//        self.fail = fail
-//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: fail)
+    func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
+//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: sucess, fail: fail)
 //        executePostRequest(param: user, handler: handler)
     }
     
@@ -403,17 +398,17 @@ class AuthenticationService: BaseRequestService {
         executePostRequest(param: forgotPassword, handler: handler)
     }
     
-    func authenticate(success:SuccessLogin?, fail: FailResponse?) {
-        let reachability = ReachabilityService()
-        
-        if tokenStorage.refreshToken != nil {
-            autificationByRememberMe(sucess: success, fail: fail)
-        } else if !reachability.isReachableViaWiFi {
-            turkcellAuth(success: success, fail: fail)
-        } else {
-            autificationByToken(sucess: success, fail: fail)
-        }
-    }
+//    func authenticate(success:SuccessLogin?, fail: FailResponse?) {
+//        let reachability = ReachabilityService()
+//
+//        if tokenStorage.refreshToken != nil {
+//            autificationByRememberMe(sucess: success, fail: fail)
+//        } else if !reachability.isReachableViaWiFi {
+//            turkcellAuth(success: success, fail: fail)
+//        } else {
+//            autificationByToken(sucess: success, fail: fail)
+//        }
+//    }
 
     private func turkcellAuth(success:SuccessLogin?, fail: FailResponse?) {
         let user = Authentication3G()

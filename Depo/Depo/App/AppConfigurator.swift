@@ -15,7 +15,6 @@ class AppConfigurator {
     static let dropboxManager: DropboxManager = factory.resolve()
     
     class func applicationStarted(){
-//        ApplicationSessionManager.start()
         dropboxManager.start()
         
         CoreDataStack.default.appendLocalMediaItems(nil)
@@ -78,4 +77,19 @@ class AppConfigurator {
         UserDefaults.standard.set(build, forKey: "build_preference")
     }
     //MARK:-------
+}
+
+/// here we can change global requests validation
+extension DataRequest {
+    @discardableResult
+    public func customValidate() -> Self {
+        return validate()
+    }
+}
+
+extension DownloadRequest {
+    @discardableResult
+    public func customValidate() -> Self {
+        return validate()
+    }
 }

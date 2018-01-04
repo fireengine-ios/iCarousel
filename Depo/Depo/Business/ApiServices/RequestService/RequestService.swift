@@ -42,8 +42,10 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        let sessionRequest = SessionManager.default.request(request).response { requestResponse in
-            response(requestResponse.data, requestResponse.response, requestResponse.error)
+        let sessionRequest = SessionManager.default.request(request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.data, requestResponse.response, requestResponse.error)
         }
         return sessionRequest.task!
     }
@@ -60,8 +62,10 @@ class RequestService {
             request.httpMethod = method.rawValue
             request.httpBody = body
             request.allHTTPHeaderFields = headerParametrs
-        let sessionRequest = SessionManager.default.upload(body!, with: request).response { requestResponse in
-            response(requestResponse.data, requestResponse.response, requestResponse.error)
+        let sessionRequest = SessionManager.default.upload(body!, with: request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.data, requestResponse.response, requestResponse.error)
         }
         return sessionRequest.task!
     }
@@ -74,8 +78,10 @@ class RequestService {
                                     timeoutInterval: TimeInterval,
                                     response: @escaping RequestFileDownloadResponse ) -> URLSessionTask {
         
-        let sessionRequest = SessionManager.default.download(patch).response { requestResponse in
-            response(requestResponse.destinationURL, requestResponse.response, requestResponse.error)
+        let sessionRequest = SessionManager.default.download(patch)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.destinationURL, requestResponse.response, requestResponse.error)
         }
         return sessionRequest.task!
     }
@@ -94,8 +100,10 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        let sessionRequest = SessionManager.default.upload(fromFile, with: request).response { requestResponse in
-            response(requestResponse.data, requestResponse.response, requestResponse.error)
+        let sessionRequest = SessionManager.default.upload(fromFile, with: request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.data, requestResponse.response, requestResponse.error)
         }
         return sessionRequest.task!
     }
@@ -114,8 +122,10 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        let sessionRequest = SessionManager.default.upload(fileData, with: request).response { requestResponse in
-            response(requestResponse.data, requestResponse.response, requestResponse.error)
+        let sessionRequest = SessionManager.default.upload(fileData, with: request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.data, requestResponse.response, requestResponse.error)
         }
         return sessionRequest.task!
     }
