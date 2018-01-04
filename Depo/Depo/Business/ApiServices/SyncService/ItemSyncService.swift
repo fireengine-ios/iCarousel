@@ -21,9 +21,9 @@ enum AutoSyncStatus {
 
 public let autoSyncStatusDidChangeNotification = NSNotification.Name("AutoSyncStatusChangedNotification")
 
-
 protocol ItemSyncService: class {
     var status: AutoSyncStatus {get}
+    weak var delegate: ItemSyncServiceDelegate? {get set}
     
     func start()
     func stop()
@@ -33,7 +33,14 @@ protocol ItemSyncService: class {
 }
 
 
+protocol ItemSyncServiceDelegate: class {
+    func didReceiveOutOfSpaceError()
+    func didReceiveError()
+}
+
+
 class ItemSyncServiceImpl: ItemSyncService {
+
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
         didSet {
@@ -46,6 +53,8 @@ class ItemSyncServiceImpl: ItemSyncService {
     var localItems: [WrapData] = []
     var localItemsMD5s: [String] = []
     var lastSyncedMD5s: [String] = []
+    
+    weak var delegate: ItemSyncServiceDelegate?
     
     
     //MARK: - init
@@ -149,10 +158,12 @@ class ItemSyncServiceImpl: ItemSyncService {
                 return
             }
 
+            self.status = .failed
+            
             if case ErrorResponse.httpCode(413) = error {
-                self.status = .failed
-                self.stop()
-                self.showOutOfSpaceAlert()
+                self.delegate?.didReceiveOutOfSpaceError()
+            } else {
+                self.delegate?.didReceiveError()
             }
             
         })
@@ -233,24 +244,6 @@ class ItemSyncServiceImpl: ItemSyncService {
         return []
     }
     
-}
-
-
-extension ItemSyncService {
-    fileprivate func showOutOfSpaceAlert() {
-        let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
-                                              message: TextConstants.syncOutOfSpaceAlertText,
-                                              image: .none,
-                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertNo,
-                                              secondButtonTitle: TextConstants.syncOutOfSpaceAlertGoToSettings,
-                                              secondAction: { vc in
-                                                vc.close(completion: {
-                                                    let router = RouterVC()
-                                                    router.pushViewController(viewController: router.packages)
-                                                })
-        })
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
-    }
 }
 
 
