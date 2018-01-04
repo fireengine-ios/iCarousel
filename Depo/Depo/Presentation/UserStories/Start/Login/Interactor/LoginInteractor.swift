@@ -13,6 +13,7 @@ class LoginInteractor: LoginInteractorInput {
     var dataStorage = LoginDataStorage()
     
     private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var authenticationService = AuthenticationService()
     
     private var rememberMe: Bool = true
     
@@ -46,9 +47,6 @@ class LoginInteractor: LoginInteractorInput {
             output.allAttemtsExhausted(user: login)//block here
             return
         }
-        
-        let authenticationService = AuthenticationService()
-        
         
         let user = AuthenticationUser(login          : login,
                                       password       : password,

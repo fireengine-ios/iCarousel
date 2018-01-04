@@ -22,7 +22,8 @@ class AppConfigurator {
         
         let urls: AuthorizationURLs = AuthorizationURLsImp()
         let tokenStorage: TokenStorage = TokenStorageUserDefaults()
-        let auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
+        var auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
+        auth.refreshFailedHandler = logout
         
         let sessionManager = SessionManager.default
         sessionManager.retrier = auth
@@ -31,6 +32,16 @@ class AppConfigurator {
         setVersionAndBuildNumber()
         configureSDWebImage()
         setupCropy()
+    }
+    
+    class func logout() {
+        /// there is no retain circle bcz of singleton
+        AuthenticationService().logout {
+            DispatchQueue.main.async {
+                let router = RouterVC()
+                router.setNavigationController(controller: router.onboardingScreen)
+            }
+        }
     }
     
     class private func configureSDWebImage() {

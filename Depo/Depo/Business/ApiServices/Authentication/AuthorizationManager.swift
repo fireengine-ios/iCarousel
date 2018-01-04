@@ -11,7 +11,7 @@ import Alamofire
 // TODO: Need to test refresh token request for no internet connection and timed out
 
 protocol AuthorizationRepository: RequestAdapter, RequestRetrier {
-    var refreshHandler: (() -> Void) { get set }
+    var refreshFailedHandler: (() -> Void) { get set }
 }
 
 open class AuthorizationRepositoryImp: AuthorizationRepository {
@@ -46,7 +46,7 @@ open class AuthorizationRepositoryImp: AuthorizationRepository {
     }
     
     /// will be executed if refresh token is invalid (statusCode == 401 for urls.refreshAccessToken)
-    open var refreshHandler: (() -> Void) = {}
+    open var refreshFailedHandler: (() -> Void) = {}
     
     // MARK: - Init
     
@@ -157,7 +157,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                     completion(true, accessToken)
                 } else {
                     /// if refresh token is invalid
-                    strongSelf.refreshHandler()
+                    strongSelf.refreshFailedHandler()
                     completion(false, nil)
                 }
                 

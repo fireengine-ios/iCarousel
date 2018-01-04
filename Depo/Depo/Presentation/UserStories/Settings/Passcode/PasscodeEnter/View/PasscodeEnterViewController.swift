@@ -39,15 +39,16 @@ class PasscodeEnterViewController: UIViewController {
 // MARK: PasscodeEnterViewInput
 extension PasscodeEnterViewController: PasscodeManagerDelegate {
     func passcodeLockDidFailNumberOfTries(_ lock: PasscodeManager) {
-        AuthenticationService().logout {
+        AuthenticationService().logout { [weak self] in
+            guard let `self` = self else {
+                return
+            }
             DispatchQueue.main.async {
                 CoreDataStack.default.clearDataBase()
                 let router = RouterVC()
                 router.setNavigationController(controller: router.onboardingScreen)
                 self.view.window?.endEditing(true)
-                self.passcodeManager.storage.clearPasscode()
                 self.passcodeManager.storage.numberOfTries = self.passcodeManager.maximumInccorectPasscodeAttempts
-                self.biometricsManager.isEnabled = false
             }
         }
     }

@@ -258,6 +258,8 @@ typealias  FailLoginType = FailResponse
 
 class AuthenticationService: BaseRequestService {
     
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
     
 //    private var success: SuccessLogin?
@@ -305,11 +307,9 @@ class AuthenticationService: BaseRequestService {
             ]
         ]
         
-        let tokenStorage: TokenStorage = TokenStorageUserDefaults()
-        
         SessionManager.default.request(URLs.login, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
                 .validate()
-                .responseString { response in
+                .responseString { [weak self] response in
 
                     debugPrint(response)
                     switch response.result {
@@ -318,8 +318,8 @@ class AuthenticationService: BaseRequestService {
                             let accessToken = headers["X-Auth-Token"] as? String,
                             let refreshToken = headers["X-Remember-Me-Token"] as? String
                         {
-                            tokenStorage.accessToken = accessToken
-                            tokenStorage.refreshToken = refreshToken
+                            self?.tokenStorage.accessToken = accessToken
+                            self?.tokenStorage.refreshToken = refreshToken
                             sucess?()
                             
                         } else {
@@ -356,26 +356,17 @@ class AuthenticationService: BaseRequestService {
 //        executePostRequest(param: user, handler: handler)
     }
     
-    func logout(success:SuccessLogout?) {
-        SingletonStorage.shared.accountInfo = nil
-        let successResponse  =  {
-            let s = LoginResponse(withJSON: nil)
-            /// in LoginResponse(withJSON: nil)
-            /// rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
-            s.rememberMeToken = nil
-//            ApplicationSession.sharedSession.updateSession(loginData: s)
+    func logout(success: SuccessLogout?) {
+        DispatchQueue.main.async {
+            SingletonStorage.shared.accountInfo = nil
+            self.passcodeStorage.clearPasscode()
+            self.biometricsManager.isEnabled = false
+            self.tokenStorage.clearTokens()
+            CoreDataStack.default.clearDataBase()
+            FreeAppSpace.default.clear()
+            WrapItemOperatonManager.default.stopAllOperations()
             success?()
         }
-        
-        let failResponse: FailResponse = { value in
-            let s = LoginResponse(withJSON: nil)
-//            ApplicationSession.sharedSession.updateSession(loginData: s)
-            success?()
-        }
-        successResponse()
-        return
-//        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: successResponse, fail: failResponse)
-//        executePostRequest(param: param, handler: handler)
     }
     
     func signUp(user: SignUpUser, sucess:SuccessResponse?, fail: FailResponse?) {

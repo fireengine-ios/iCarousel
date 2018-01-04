@@ -99,15 +99,7 @@ class SettingsInteractor: SettingsInteractorInput {
     func onLogout() {
         let authService = AuthenticationService()
         authService.logout { [weak self] in
-            DispatchQueue.main.async {
-                self?.passcodeStorage.clearPasscode()
-                self?.biometricsManager.isEnabled = false
-                self?.tokenStorage.clearTokens()
-                CoreDataStack.default.clearDataBase()
-                FreeAppSpace.default.clear()
-                WrapItemOperatonManager.default.stopAllOperations()
-                self?.output.goToOnboarding()
-            }
+            self?.output.goToOnboarding()
         }
     }
     
