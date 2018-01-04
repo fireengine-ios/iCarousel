@@ -275,6 +275,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         startEditing()
     }
     
+    func needReloadData(){
+        reloadData()
+    }
+    
     
     //MARK: - UnderNavBarBar/TopBar
     

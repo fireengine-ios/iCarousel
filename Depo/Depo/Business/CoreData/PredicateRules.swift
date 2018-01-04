@@ -51,6 +51,15 @@ class PredicateRules {
         return NSPredicate(format: "== %@",rootFolder)
     }
     
+    func allLocalObjectsForObjects(objects:[Item]) -> NSPredicate{
+        let serverObjects = objects.filter {
+            return !$0.isLocalItem
+        }
+        let list = serverObjects.map{ $0.uuid }
+        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND uuidValue IN %@",  list)
+        return predicate
+    }
+    
     
     // MARK: By favorite staus
     

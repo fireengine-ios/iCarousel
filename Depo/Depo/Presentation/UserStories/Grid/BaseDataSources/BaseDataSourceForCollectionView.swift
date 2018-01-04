@@ -32,7 +32,10 @@ enum BaseDataSourceDisplayingType{
     
     func getNextItems()
     
+    @objc optional func needReloadData()
+    
     @objc optional func scrollViewDidScroll(scrollView: UIScrollView)
+    
 }
 
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
@@ -72,9 +75,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var uploadedObjectID = [String]()
     
     var needShowProgressInCell: Bool = false
-    
-    var isFavorites: Bool = false
-    
     
     private func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
@@ -147,7 +147,46 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         return false
-       
+    }
+    
+    private func canShowFolderFilters(filters: [GeneralFilesFiltrationType]) -> Bool {
+        for filter in filters {
+            switch filter {
+            case   .fileType(.folder):
+                return true
+            case .rootFolder(_):
+                return true
+            case .parentless:
+                return true
+            default:
+                break
+            }
+        }
+        return false
+    }
+    
+    private func canShowAlbumsFilters(filters: [GeneralFilesFiltrationType]) -> Bool {
+        for filter in filters {
+            switch filter {
+            case   .fileType(.photoAlbum):
+                return true
+            default:
+                break
+            }
+        }
+        return false
+    }
+    
+    private func isFavoritesOnly(filters: [GeneralFilesFiltrationType]) -> Bool{
+        for filter in filters {
+            switch filter {
+            case   .favoriteStatus(.favorites):
+                return true
+            default:
+                break
+            }
+        }
+        return false
     }
     
     private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
@@ -953,31 +992,97 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func addFilesToFavorites(items: [Item]){
-        updateFavoritesCellStatus(items: items, isFavorites: true)
+        if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
+            delegate?.needReloadData?()
+        }else{
+            updateFavoritesCellStatus(items: items, isFavorites: true)
+        }
+        
     }
     
     func removeFileFromFavorites(items: [Item]){
-        if (isFavorites){
-            deleteItems(items: items)
+        if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
+            updateCellsForObjects(objectsForDelete: items, objectsForUpdate: [Item]())
         }else{
             updateFavoritesCellStatus(items: items, isFavorites: false)
         }
     }
     
     func deleteItems(items: [Item]){
-        var arrayOfPath = [IndexPath]()
+        var objectsForRemoving = [Item]()
+        var localObjectsForReplace = [Item]()
+        
+        if let unwrapedFilters = originalFilters,
+            !isOnlyNonLocal(filters: unwrapedFilters) {
+            
+            var serverObjects = [Item]()
+            
+            for object in items{
+                if object.isLocalItem {
+                    objectsForRemoving.append(object)
+                }else{
+                    serverObjects.append(object)
+                }
+            }
+            
+            let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
+            let predicate = PredicateRules().allLocalObjectsForObjects(objects: serverObjects)
+            let sortDescriptors = CollectionSortingRules(sortingRules: currentSortType).rule.sortDescriptors
+            
+            fetchRequest.predicate = predicate
+            fetchRequest.sortDescriptors = sortDescriptors
+            
+            guard let fetchResult = try? CoreDataStack.default.mainContext.fetch(fetchRequest) else {
+                return
+            }
+            localObjectsForReplace = fetchResult.map{ return WrapData(mediaItem: $0) }
+            let uuids = localObjectsForReplace.map({ $0.uuid })
+            
+            if (localObjectsForReplace.count != serverObjects.count){
+                for object in serverObjects {
+                    if !uuids.contains(object.uuid){
+                        objectsForRemoving.append(object)
+                    }
+                }
+            }
+            
+            if (localObjectsForReplace.count > 0){
+                var newArray = [[Item]]()
+                for array in allItems{
+                    var sectionArray = [Item]()
+                    for arraysObject in array{
+                        if let index = uuids.index(of: arraysObject.uuid){
+                            sectionArray.append(localObjectsForReplace[index])
+                        }else{
+                            sectionArray.append(arraysObject)
+                        }
+                    }
+                    newArray.append(sectionArray)
+                }
+                
+                allItems = newArray
+            }
+        }else{
+            objectsForRemoving = items
+        }
+        
+        updateCellsForObjects(objectsForDelete: objectsForRemoving, objectsForUpdate: localObjectsForReplace)
+    }
+    
+    private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]){
+        var arrayOfPathForDelete = [IndexPath]()
+        var arrayOfPathForUpdate = [IndexPath]()
         var arrayOfSection = [Int]()
         
-        for item in items{
+        for item in objectsForDelete{
             if let path = getIndexPathForObject(objectUUID: item.uuid){
-                arrayOfPath.append(path)
+                arrayOfPathForDelete.append(path)
             }
         }
         
-        if arrayOfPath.count > 0{
-            
-            var uuids = items.map { $0.uuid }
+        if arrayOfPathForDelete.count > 0{
             var newArray = [[Item]]()
+            var uuids = objectsForDelete.map { $0.uuid }
             
             var section = 0
             for array in allItems{
@@ -998,13 +1103,39 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 section += 1
             }
+            
             allItems = newArray
-            collectionView.performBatchUpdates({ [weak self] in
-                if let `self` = self{
-                    self.collectionView.deleteItems(at: arrayOfPath)
-                    self.collectionView.deleteSections(IndexSet(arrayOfSection))
-                }
-                }, completion: nil)
+        }
+        
+        for item in objectsForUpdate{
+            if let path = getIndexPathForObject(objectUUID: item.uuid){
+                arrayOfPathForUpdate.append(path)
+            }
+        }
+        
+        collectionView.performBatchUpdates({[weak self] in
+            if let `self` = self{
+                self.collectionView.deleteItems(at: arrayOfPathForDelete)
+                self.collectionView.deleteSections(IndexSet(arrayOfSection))
+            }
+        }) { [weak self] (flag) in
+            if let `self` = self{
+                self.collectionView.reloadItems(at: arrayOfPathForUpdate)
+            }
+        }
+    }
+
+    func newFolderCreated(){
+        if let unwrapedFilters = originalFilters,
+            canShowFolderFilters(filters: unwrapedFilters) {
+            delegate?.needReloadData?()
+        }
+    }
+    
+    func newAlbumCreated(){
+        if let unwrapedFilters = originalFilters,
+            canShowAlbumsFilters(filters: unwrapedFilters) {
+            delegate?.needReloadData?()
         }
     }
     
