@@ -116,9 +116,11 @@ struct TextConstants {
     
     // MARK: - Search
     
+
     static let search = NSLocalizedString("Search", comment: "")
     static let searchRecentSearchTitle = NSLocalizedString("RECENT SEARCHES", comment: "")
     static let searchSuggestionsTitle = NSLocalizedString("SUGGESTIONS", comment: "")
+    static let searchNoFilesToCreateStoryError = NSLocalizedString("No files to create a story", comment: "")
     
     static let noFilesFoundInSearch = NSLocalizedString("No results found for your query.", comment: "")
     
