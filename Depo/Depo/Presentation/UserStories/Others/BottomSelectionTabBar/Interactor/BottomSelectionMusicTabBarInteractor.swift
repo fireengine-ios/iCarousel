@@ -18,8 +18,8 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: .share)
                 
-                if let `output` = self?.output as? BottomSelectionTabBarInteractorOutput {
-                    output.objectsToShare(rect: sourceRect,urls: [url])
+                if let output_ = self?.output as? BottomSelectionTabBarInteractorOutput {
+                    output_.objectsToShare(rect: sourceRect,urls: [url])
                 }
             }
             
@@ -43,8 +43,8 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
             self.succesAction(elementType: ElementTypes.move)()
         }
         
-        if let `output` = output as? BottomSelectionTabBarInteractorOutput {
-            output.selectFolder(folderSelector)
+        if let output_ = output as? BottomSelectionTabBarInteractorOutput {
+            output_.selectFolder(folderSelector)
         }
 
     }
@@ -59,8 +59,8 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
                                          fail: self?.failAction(elementType: .delete))
             }
             
-            if let `output` = output as? BottomSelectionTabBarInteractorOutput {
-                output.deleteMusic(okHandler)
+            if let output_ = output as? BottomSelectionTabBarInteractorOutput {
+                output_.deleteMusic(okHandler)
             }
         }
             
