@@ -24,8 +24,6 @@ protocol LocalMediaStorageProtocol {
     
     func getBigImageFromFile(asset: PHAsset, image: @escaping FileDataSorceImg)
     
-    func appendToAlboum(fileUrl: URL, type:PHAssetMediaType, album:String?, success: FileOperation?, fail: FailResponse?)
-    
     func getAllImagesAndVideoAssets() -> [PHAsset]
     
     func removeAssets(deleteAsset: [PHAsset],success: FileOperation?, fail: FailResponse?)
@@ -254,7 +252,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
      * if album = nil put to camera rool
      * 
      */
-    func appendToAlboum(fileUrl: URL, type: PHAssetMediaType, album: String?, success: FileOperation?, fail: FailResponse?) {
+    func appendToAlboum(fileUrl: URL, type: PHAssetMediaType, album: String?, item: WrapData? = nil, success: FileOperation?, fail: FailResponse?) {
         guard photoLibraryIsAvailible() else {
             fail?(.failResponse(nil))
             return
@@ -274,10 +272,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
         }, completionHandler: { (status, error) in
             if status {
+                if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.merge(asset: assetIdentifier, with: item)
+                    }
+                }
                 if let album = album, let assetPlaceholder = assetPlaceholder {
                     self.add(asset: assetPlaceholder.localIdentifier, to: album)
                 }
-                
                 success?()
             } else {
                 fail?(.error(error!))
@@ -291,6 +293,32 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
+    
+    private func merge(asset assetIdentifier: String, with item: WrapData) {
+        
+        if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
+            let info = fullInfoAboutAsset(asset: asset)
+            
+            let baseMediaContent = BaseMediaContent(curentAsset: asset,
+                                                    urlToFile: info.url,
+                                                    size: info.size,
+                                                    md5: info.md5)
+            let wrapData = WrapData(baseModel: baseMediaContent)
+            wrapData.copyFileData(from: item)
+            
+            let context = CoreDataStack.default.mainContext
+            let mediaItem: MediaItem
+            if let existingMediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
+                mediaItem = existingMediaItem
+            } else {
+                mediaItem = MediaItem(wrapData: wrapData, context: context)
+            }
+        
+            
+            mediaItem.localFileID = assetIdentifier
+            CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)
+        }
+    }
     
     fileprivate func add(asset assetIdentifier: String, to album: String) {
         askPermissionForPhotoFramework(redirectToSettings: true, completion: { (accessGranted, _) in

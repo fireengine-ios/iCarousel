@@ -69,6 +69,8 @@ class BaseDownloadRequestParametrs: DownloadRequestParametrs {
     
     let albumName: String?
     
+    let item: WrapData?
+    
     var requestParametrs: Any {
         return Data()
     }
@@ -81,11 +83,12 @@ class BaseDownloadRequestParametrs: DownloadRequestParametrs {
         return RequestHeaders.authification()
     }
     
-    init(urlToFile: URL, fileName: String, contentType: FileType, albumName: String? = nil) {
+    init(urlToFile: URL, fileName: String, contentType: FileType, albumName: String? = nil, item: WrapData? = nil) {
         urlToRemoteFile = urlToFile
         self.contentType = contentType
         self.fileName = fileName
         self.albumName = albumName
+        self.item = item
     }
 }
 

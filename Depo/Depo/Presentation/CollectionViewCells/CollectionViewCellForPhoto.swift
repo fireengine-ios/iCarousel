@@ -55,7 +55,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         
         imageView.image = nil
 //        activity.startAnimating()
-        if wrappered.isLocalItem {
+        if wrappered.syncStatus == .notSynced {
             cloudStatusImage.image = UIImage(named: "objectNotInCloud")
         } else {
             cloudStatusImage.image = UIImage()

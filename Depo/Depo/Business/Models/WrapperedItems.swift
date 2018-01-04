@@ -674,6 +674,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
     }
     
+    func copyFileData(from item: WrapData) {
+        uuid = item.uuid
+        id = item.id
+        name = item.name
+        creationDate = item.creationDate
+        lastModifiDate = item.lastModifiDate
+        md5 = item.md5
+    }
+    
     private class func getDuration(duration: Double?) -> String {
         if let d = duration{
             let s = CGFloat(d)
