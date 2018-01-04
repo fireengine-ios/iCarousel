@@ -109,7 +109,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-//        ApplicationSessionManager.shared().checkSession()
         LocationManager.shared.startUpdateLocation()
     }
     

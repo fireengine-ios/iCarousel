@@ -46,6 +46,8 @@ struct HeaderConstant {
 
 class RequestHeaders {
     
+    private static let tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    
     static func captchaHeader(id: String, answer: String) -> RequestHeaderParametrs {
         return [ HeaderConstant.CaptchaId     : id,
                  HeaderConstant.CaptchaAnswer : answer]
@@ -58,15 +60,17 @@ class RequestHeaders {
     
     static func authification() -> RequestHeaderParametrs {
         var result = base()
-        let token = "" //ApplicationSession.sharedSession.session.authToken ?? ""
-        result = result + [HeaderConstant.AuthToken : token]
+        if let accessToken = tokenStorage.accessToken {
+            result = result + [HeaderConstant.AuthToken: accessToken]
+        }
         return result 
     }
     
     static func authificationByRememberMe() -> RequestHeaderParametrs {
         var result = base()
-        let token = "" //ApplicationSession.sharedSession.session.rememberMeToken ?? ""
-        result = result + [HeaderConstant.RememberMeToken : token]
+        if let refreshToken = tokenStorage.refreshToken {
+            result = result + [HeaderConstant.RememberMeToken: refreshToken]
+        }
         return result
     }
     

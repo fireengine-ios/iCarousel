@@ -12,6 +12,8 @@ class LoginInteractor: LoginInteractorInput {
     
     var dataStorage = LoginDataStorage()
     
+    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    
     private var rememberMe: Bool = true
     
     private var attempts: Int = 0
@@ -47,6 +49,7 @@ class LoginInteractor: LoginInteractorInput {
         
         let authenticationService = AuthenticationService()
         
+        
         let user = AuthenticationUser(login          : login,
                                       password       : password,
                                       rememberMe     : true,//rememberMe,
@@ -56,14 +59,13 @@ class LoginInteractor: LoginInteractorInput {
             guard let `self` = self else {
                 return
             }
-//            ApplicationSession.sharedSession.session.rememberMe = self.rememberMe
-//            ApplicationSession.sharedSession.saveData()
-            DispatchQueue.main.async { [weak self] in
-                self?.output.succesLogin()
+            self.tokenStorage.isRememberMe = self.rememberMe
+            DispatchQueue.main.async {
+                self.output.succesLogin()
             }
         }, fail: { [weak self] (errorResponse)  in
             
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
                 }
