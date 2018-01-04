@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -113,9 +114,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        if !ApplicationSession.sharedSession.session.rememberMe {
-            ApplicationSession.sharedSession.session.clearTokens()
-            ApplicationSession.sharedSession.saveData()
+        if !tokenStorage.isRememberMe {
+            tokenStorage.clearTokens()
         }
         UserDefaults.standard.synchronize()
     }

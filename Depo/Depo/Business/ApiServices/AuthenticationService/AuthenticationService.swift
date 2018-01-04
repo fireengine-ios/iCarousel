@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Alamofire
 
 typealias SuccessResponse = (_ value:ObjectFromRequestResponse? ) -> Swift.Void
 typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
@@ -254,8 +255,10 @@ typealias  SuccessLogout = () -> Swift.Void
 
 typealias  FailLoginType = FailResponse
 
-import Alamofire
+
 class AuthenticationService: BaseRequestService {
+    
+    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
     
 //    private var success: SuccessLogin?
 //
@@ -411,8 +414,8 @@ class AuthenticationService: BaseRequestService {
     
     func authenticate(success:SuccessLogin?, fail: FailResponse?) {
         let reachability = ReachabilityService()
-        let rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
-        if rememberMeToken != nil {
+        
+        if tokenStorage.refreshToken != nil {
             autificationByRememberMe(sucess: success, fail: fail)
         } else if !reachability.isReachableViaWiFi {
             turkcellAuth(success: success, fail: fail)

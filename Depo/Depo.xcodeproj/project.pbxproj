@@ -7696,6 +7696,15 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		CE085D521FD6DBF0009FF427 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				CEE9B4EE1F78FDFF002DAF81 /* InternetDataUsageCell */,
+				CE4CFEBE1F78F18700FB4C3D /* ResizableTableView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		CE08BDDF1FC8403B00440CA0 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -7708,15 +7717,6 @@
 				CE08BDEC1FC8415600440CA0 /* URL+Path.swift */,
 			);
 			path = Authentication;
-            sourceTree = "<group>";
-        };
-		CE085D521FD6DBF0009FF427 /* views */ = {
-			isa = PBXGroup;
-			children = (
-				CEE9B4EE1F78FDFF002DAF81 /* InternetDataUsageCell */,
-				CE4CFEBE1F78F18700FB4C3D /* ResizableTableView.swift */,
-			);
-			path = views;
 			sourceTree = "<group>";
 		};
 		CE09155C1F3870D000C82A44 /* WrapItemFileService */ = {
@@ -11057,6 +11057,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressBar/CircleProgressBar.framework",
 				"${BUILT_PRODUCTS_DIR}/ExpandableTableViewController/ExpandableTableViewController.framework",
@@ -11077,6 +11078,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ExpandableTableViewController.framework",
@@ -12721,7 +12723,6 @@
 				CEE1D1FF1F714F350008F4CF /* MediaItemOperations.swift in Sources */,
 				8CFF86971F0FA84A00520D18 /* ContactsSyncService.swift in Sources */,
 				CE08BDE51FC8403C00440CA0 /* AuthenticationServiceNew.swift in Sources */,
-				361C8CB14774F1A202875263 /* PhotoCellConfigurator.swift in Sources */,
 				7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */,
 				7C6E2F921F31E4F800536DB6 /* CreateStoryNameInteractorOutput.swift in Sources */,
 				7C5549FF1F6C11C300067F99 /* CollectionViewStoryReorderView.swift in Sources */,

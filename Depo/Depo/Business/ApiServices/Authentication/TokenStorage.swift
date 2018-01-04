@@ -11,12 +11,15 @@ import Foundation
 protocol TokenStorage: class {
     var accessToken: String? { get set }
     var refreshToken: String? { get set }
+    var isRememberMe: Bool { get set }
+    func clearTokens()
 }
 
 final class TokenStorageUserDefaults: TokenStorage {
     
     private let accessTokenKey = "accessToken"
     private let refreshTokenKey = "refreshToken"
+    private let isRememberMeKey = "isRememberMeKey"
     
     var accessToken: String? {
         get {
@@ -42,5 +45,16 @@ final class TokenStorageUserDefaults: TokenStorage {
         set {
             UserDefaults.standard.setValue(newValue, forKey: refreshTokenKey)
         }
+    }
+    
+    var isRememberMe: Bool {
+        get { return UserDefaults.standard.bool(forKey: isRememberMeKey) }
+        set { UserDefaults.standard.setValue(newValue, forKey: isRememberMeKey) }
+    }
+    
+    func clearTokens() {
+        accessToken = nil
+        refreshToken = nil
+        isRememberMe = false
     }
 }

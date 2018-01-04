@@ -11,13 +11,14 @@ class SplashInteractor: SplashInteractorInput {
     weak var output: SplashInteractorOutput!
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
 
     func startLoginInBackroung(){
-        let tokenStorage: TokenStorage = TokenStorageUserDefaults()
+        
         
         if tokenStorage.accessToken == nil {
             failLogin()
