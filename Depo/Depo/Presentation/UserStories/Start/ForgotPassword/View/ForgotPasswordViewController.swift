@@ -85,7 +85,13 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
     
     private func setupSubTitle() {
         subTitle.isHidden = false
-        subTitle.text = TextConstants.forgotPasswordSubTitle
+        
+        if Locale.current.languageCode == "en" || Locale.current.languageCode == "tr" {
+            subTitle.text = TextConstants.forgotPasswordSpecialSubTitle
+        } else {
+            subTitle.text = TextConstants.forgotPasswordSubTitle
+        }
+        
         subTitle.textColor = ColorConstants.whiteColor
         if (Device.isIpad){
             
