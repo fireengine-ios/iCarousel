@@ -135,6 +135,7 @@
 		7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A18BA44717122453DCA565 /* LBAlbumLikePreviewSliderViewOutput.swift */; };
 		782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */; };
 		786AA87724BCB7349231EF0C /* HomeHeaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */; };
+		78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */; };
 		787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
 		78D6C8FF1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */; };
 		7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */; };
@@ -278,6 +279,10 @@
 		7CC11AAB1FE1364D00AF022D /* PopUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAA1FE1364D00AF022D /* PopUpService.swift */; };
 		7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */; };
 		7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
+		7CC9A0D11FF6785100CF7936 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CC9A0CD1FF6785100CF7936 /* Localizable.strings */; };
+		7CC9A0D21FF6785100CF7936 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CC9A0CD1FF6785100CF7936 /* Localizable.strings */; };
+		7CC9A0D31FF6785100CF7936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CC9A0CF1FF6785100CF7936 /* InfoPlist.strings */; };
+		7CC9A0D41FF6785100CF7936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CC9A0CF1FF6785100CF7936 /* InfoPlist.strings */; };
 		7CCAC5311FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		7CCAC5331FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
 		7CD1F8CF1F0140900028F51A /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */; };
@@ -2800,6 +2805,7 @@
 		7809A32C1FED09EF00954A5F /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		781839851FE9140E0046D73C /* FileForDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileForDownload.swift; sourceTree = "<group>"; };
 		782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesService.swift; sourceTree = "<group>"; };
+		78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarActionHandler.swift; sourceTree = "<group>"; };
 		787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailModuleOutput.swift; sourceTree = "<group>"; };
 		78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
 		78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorInput.swift; sourceTree = "<group>"; };
@@ -2982,6 +2988,8 @@
 		7CC8146A1EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncInformTableViewCell.xib; sourceTree = "<group>"; };
 		7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSwitcherTableViewCell.swift; sourceTree = "<group>"; };
 		7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSwitcherTableViewCell.xib; sourceTree = "<group>"; };
+		7CC9A0CE1FF6785100CF7936 /* base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = base; path = base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7CC9A0D01FF6785100CF7936 /* base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = base; path = base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaItemsObjectSyncStatus+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaItemsObjectSyncStatus+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewController.swift; sourceTree = "<group>"; };
@@ -6371,6 +6379,15 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
+		7CC9A0CC1FF6785100CF7936 /* base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9A0CD1FF6785100CF7936 /* Localizable.strings */,
+				7CC9A0CF1FF6785100CF7936 /* InfoPlist.strings */,
+			);
+			path = base.lproj;
+			sourceTree = "<group>";
+		};
 		7CD1F8D01F014EF90028F51A /* CustomSwitch */ = {
 			isa = PBXGroup;
 			children = (
@@ -9342,6 +9359,7 @@
 				CEAE3FE81EFD517300A405B2 /* CustomTabBarItem.swift */,
 				CEAE3FE91EFD517300A405B2 /* TabBarView.xib */,
 				CEAE3FEA1EFD517300A405B2 /* TabBarViewController.swift */,
+				78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */,
 			);
 			path = CustomTabBars;
 			sourceTree = "<group>";
@@ -9357,6 +9375,7 @@
 		CEBBDDD91F01E4CF00CDF527 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7CC9A0CC1FF6785100CF7936 /* base.lproj */,
 				CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */,
 				CEDFEC781F10C40C003D1A75 /* ar.lproj */,
 				CEDFEC7D1F10C40C003D1A75 /* de.lproj */,
@@ -10248,6 +10267,7 @@
 				id,
 				nl,
 				pt,
+				base,
 			);
 			mainGroup = 051E1DEA19CAC2F900FD1E03;
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
@@ -10267,6 +10287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */,
+				7CC9A0D41FF6785100CF7936 /* InfoPlist.strings in Resources */,
 				8C0E8FFE1FDEBDFF00789C91 /* LoginViewController.xib in Resources */,
 				8C0E8FFF1FDEBDFF00789C91 /* OptInController.xib in Resources */,
 				8C0E90001FDEBDFF00789C91 /* SubPlusButtons.xib in Resources */,
@@ -10339,6 +10360,7 @@
 				8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */,
 				8C0E90441FDEBDFF00789C91 /* BasicCollectionMultiFileCell.xib in Resources */,
 				8C0E90451FDEBDFF00789C91 /* InfoPlist.strings in Resources */,
+				7CC9A0D21FF6785100CF7936 /* Localizable.strings in Resources */,
 				8C0E90461FDEBDFF00789C91 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				8C8711721FDFF47800F66396 /* DarkPopUpController.xib in Resources */,
 				8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */,
@@ -10586,6 +10608,7 @@
 				CE16C3D61FF234BA00BE5906 /* checkbox_secili@3x.png in Resources */,
 				CE16C3841FF234BA00BE5906 /* cizgi_3@2x.png in Resources */,
 				CE16C39B1FF234BA00BE5906 /* duz_siyah.png in Resources */,
+				7CC9A0D11FF6785100CF7936 /* Localizable.strings in Resources */,
 				CE16C44F1FF234BB00BE5906 /* share_icon@3x.png in Resources */,
 				CEBBDE0C1F01E69B00CDF527 /* TurkcellSaturaMed.ttf in Resources */,
 				CE16C4251FF234BB00BE5906 /* kirmizi@3x.png in Resources */,
@@ -10705,6 +10728,7 @@
 				CE8F44FE1F6BB21C0062C2E0 /* ActivityTimelineFileCell.xib in Resources */,
 				CE16C30A1FF234BA00BE5906 /* checkbox@3x.png in Resources */,
 				7CD1F8DB1F024DCF0028F51A /* LikeFilterViewController.xib in Resources */,
+				7CC9A0D31FF6785100CF7936 /* InfoPlist.strings in Resources */,
 				8C6EF8911F348B77002AC795 /* EditinglBar.xib in Resources */,
 				CE16C3051FF234BA00BE5906 /* bold.png in Resources */,
 				CE16C44E1FF234BB00BE5906 /* paylas_akilli_depo@2x.png in Resources */,
@@ -12955,6 +12979,7 @@
 				EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */,
 				C1FD046A70F4C0DF7651095E /* FeedbackViewPresenter.swift in Sources */,
 				7C233CD41FD51E290013CCA0 /* UploadFromLifeBoxRouter.swift in Sources */,
+				78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */,
 				7C5AFD701F69768300DBB9E7 /* BaseViewController.swift in Sources */,
 				6DD569A1DD4A69901636564E /* FeedbackViewInteractorInput.swift in Sources */,
 				CEF69DE91FB5A26D00FCE6AB /* UIImage+Orientation.swift in Sources */,
@@ -13021,6 +13046,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7CC9A0CD1FF6785100CF7936 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CC9A0CE1FF6785100CF7936 /* base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		7CC9A0CF1FF6785100CF7936 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CC9A0D01FF6785100CF7936 /* base */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		CE16C04B1FF234A300BE5906 /* TOCropViewControllerLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

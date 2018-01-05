@@ -8,8 +8,8 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInput, MusicBarDelegate {
-    
+class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewInput, MusicBarDelegate, TabBarActionHandlerContainer {
+
     // MARK: - Outlets
     
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -39,6 +39,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     
     var suggestionList = [SuggestionObject]()
     var recentSearchList = [String]()
+    
+    var tabBarActionHandler: TabBarActionHandler? { return output.tabBarActionHandler }
     
     // MARK: - Life Cicle
 
@@ -273,6 +275,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
         
         floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
     }
+    
 }
 
 //MARK: - UITableViewDelagate & DataSource 
