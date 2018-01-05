@@ -291,45 +291,41 @@ class AuthenticationService: BaseRequestService {
 //        }
 //    }
     
-    func login(user: AuthenticationUser, sucess:SuccessLogin?, fail: FailResponse?) {
+    func loginHandler(_ response: DataResponse<String>, _ sucess: SuccessLogin?, _ fail: FailResponse?) -> Void {
+        switch response.result {
+        case .success(_):
+            if let headers = response.response?.allHeaderFields as? [String: Any],
+                let accessToken = headers["X-Auth-Token"] as? String,
+                let refreshToken = headers["X-Remember-Me-Token"] as? String
+            {
+                self.tokenStorage.accessToken = accessToken
+                self.tokenStorage.refreshToken = refreshToken
+                sucess?()
+                
+            } else {
+                let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                fail?(ErrorResponse.error(error))
+            }
+        case .failure(let error):
+            fail?(ErrorResponse.error(error))
+        }
+    }
+    
+    func login(user: AuthenticationUser, sucess: SuccessLogin?, fail: FailResponse?) {
 //        self.success = sucess
 //        self.fail = fail
 //        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
 //        executePostRequest(param: user, handler: handler)
         
-        let params: [String : Any] =  [
-            "username": user.login,
-            "password": user.password,
-            "deviceInfo": [
-                "name": "MacBook Pro — user",
-                "deviceType": "IPHONE",
-                "uuid":  "621DF1D4-D76E-451C-9609-8B54E7A4F8C1"
-            ]
-        ]
+        let params: [String: Any] = ["username": user.login,
+                                     "password": user.password,
+                                     "deviceInfo": Device.deviceInfo]
         
-        SessionManager.default.request(URLs.login, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
+        SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
                 .customValidate()
                 .responseString { [weak self] response in
-                    
-                    switch response.result {
-                    case .success(_):
-                        if let headers = response.response?.allHeaderFields as? [String: Any],
-                            let accessToken = headers["X-Auth-Token"] as? String,
-                            let refreshToken = headers["X-Remember-Me-Token"] as? String
-                        {
-                            self?.tokenStorage.accessToken = accessToken
-                            self?.tokenStorage.refreshToken = refreshToken
-                            sucess?()
-                            
-                        } else {
-                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
-                            fail?(ErrorResponse.error(error))
-                        }
-                    case .failure(let error):
-                        fail?(ErrorResponse.error(error))
-                    }
-            }
-        
+                    self?.loginHandler(response, sucess, fail)
+        }
     }
     
 //    func autificationByRememberMe(sucess:SuccessLogin?, fail: FailResponse?) {
@@ -341,14 +337,21 @@ class AuthenticationService: BaseRequestService {
 //    }
     
     func autificationByToken(sucess: SuccessLogin?, fail: FailResponse?) {
-//        let user = AuthenticationUserByToken()
-//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: sucess, fail: fail)
-//        executePostRequest(param: user, handler: handler)
+        let user = AuthenticationUserByToken()
+        let params: [String: Any] = ["deviceInfo": Device.deviceInfo]
+        SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .responseString { [weak self] response in
+                self?.loginHandler(response, sucess, fail)
+        }
     }
     
     func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
-//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: sucess, fail: fail)
-//        executePostRequest(param: user, handler: handler)
+        SessionManager.default.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .responseString { [weak self] response in
+                self?.loginHandler(response, sucess, fail)
+        }
     }
     
     func logout(success: SuccessLogout?) {
@@ -410,7 +413,7 @@ class AuthenticationService: BaseRequestService {
 //        }
 //    }
 
-    private func turkcellAuth(success:SuccessLogin?, fail: FailResponse?) {
+    func turkcellAuth(success:SuccessLogin?, fail: FailResponse?) {
         let user = Authentication3G()
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
             self?.autificationByToken(sucess: success, fail: fail)

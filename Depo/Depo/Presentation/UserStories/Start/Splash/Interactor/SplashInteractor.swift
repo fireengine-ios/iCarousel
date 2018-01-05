@@ -12,6 +12,7 @@ class SplashInteractor: SplashInteractorInput {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var authenticationService = AuthenticationService()
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
@@ -19,7 +20,17 @@ class SplashInteractor: SplashInteractorInput {
 
     func startLoginInBackroung(){
         if tokenStorage.accessToken == nil {
-            failLogin()
+            if ReachabilityService().isReachableViaWiFi {
+                failLogin()
+            } else {
+                /// turkcell login
+                authenticationService.turkcellAuth(success: { [weak self] in
+                    self?.successLogin()
+                }, fail: { [weak self] response in
+                    self?.output.asyncOperationSucces()
+                    self?.output.onFailLogin()
+                })
+            }
         } else {
             successLogin()
         }

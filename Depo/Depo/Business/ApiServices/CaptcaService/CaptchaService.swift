@@ -30,7 +30,7 @@ struct CaptchaParametr: RequestParametrs {
     }
     
     var header: RequestHeaderParametrs {
-        return RequestHeaders.base()
+        return [:]
     }
 }
 
