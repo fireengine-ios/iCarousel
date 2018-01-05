@@ -165,7 +165,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return false
     }
     
-    private func canShowAlbumsFilters(filters: [GeneralFilesFiltrationType]) -> Bool {
+    func canShowAlbumsFilters(filters: [GeneralFilesFiltrationType]) -> Bool {
         for filter in filters {
             switch filter {
             case   .fileType(.photoAlbum):
@@ -181,6 +181,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         for filter in filters {
             switch filter {
             case   .favoriteStatus(.favorites):
+                return true
+            default:
+                break
+            }
+        }
+        return false
+    }
+    
+    private func isAlbumDetail(filters: [GeneralFilesFiltrationType]) -> Bool{
+        for filter in filters {
+            switch filter {
+            case   .rootAlbum(_):
                 return true
             default:
                 break
@@ -1135,6 +1147,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func newAlbumCreated(){
         if let unwrapedFilters = originalFilters,
             canShowAlbumsFilters(filters: unwrapedFilters) {
+            delegate?.needReloadData?()
+        }
+    }
+    
+    func albumsDeleted(albums: [AlbumItem]){
+        
+    }
+    
+    func fileAddedToAlbum(){
+        if let unwrapedFilters = originalFilters,
+            isAlbumDetail(filters: unwrapedFilters) {
             delegate?.needReloadData?()
         }
     }

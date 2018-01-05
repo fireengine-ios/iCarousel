@@ -545,7 +545,7 @@ class UploadOperations: Operation {
                             let item = Item.init(remote: resp)
                             let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
                             PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
-                                
+                                ItemOperationManager.default.fileAddedToAlbum()
                             }, fail: { (error) in
                                 UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
                             })

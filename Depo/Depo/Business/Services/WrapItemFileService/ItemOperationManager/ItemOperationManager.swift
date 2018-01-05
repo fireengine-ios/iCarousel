@@ -26,6 +26,10 @@ protocol ItemOperationManagerViewProtocol {
     
     func newAlbumCreated()
     
+    func albumsDeleted(albums: [AlbumItem])
+    
+    func fileAddedToAlbum()
+    
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool
     
 }
@@ -124,6 +128,22 @@ class ItemOperationManager: NSObject {
         DispatchQueue.main.async {
             for view in self.views{
                 view.newAlbumCreated()
+            }
+        }
+    }
+    
+    func albumsDeleted(albums: [AlbumItem]){
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.albumsDeleted(albums: albums)
+            }
+        }
+    }
+    
+    func fileAddedToAlbum(){
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.fileAddedToAlbum()
             }
         }
     }
