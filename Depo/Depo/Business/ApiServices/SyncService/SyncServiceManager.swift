@@ -21,6 +21,7 @@ class SyncServiceManager {
     private var settings: SettingsAutoSyncModel?
     
     private var lastAutoSyncTime: TimeInterval = 0
+    private var timeIntervalBetweenSyncs: TimeInterval = NumericConstants.timeIntervalBetweenAutoSync
     
     private var isSyncCancelled: Bool {
         return (photoSyncService.status == .canceled && videoSyncService.status == .canceled)
@@ -42,6 +43,8 @@ class SyncServiceManager {
     //MARK: - Init
     
     init() {
+        photoSyncService.delegate = self
+        videoSyncService.delegate = self
         setupReachability()
         setupAPIReachability()
         subscribeForNotifications()
@@ -68,7 +71,7 @@ class SyncServiceManager {
     
     func updateInBackground() {
         let time = NSDate().timeIntervalSince1970
-        if time - lastAutoSyncTime > NumericConstants.timeIntervalBetweenAutoSync{
+        if time - lastAutoSyncTime > timeIntervalBetweenSyncs {
             lastAutoSyncTime = time
             
             checkReachabilityAndSettings()
@@ -119,6 +122,8 @@ class SyncServiceManager {
             
             return
         }
+        
+        timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
         
         guard syncSettings.isAutoSyncEnable else {
             stop(reachabilityDidChange: false, photo: true, video: true)
@@ -185,7 +190,7 @@ class SyncServiceManager {
 
 
 
-//MARK: Notifications
+//MARK: - Notifications
 extension SyncServiceManager {
     private func subscribeForNotifications() {
         let notificationCenter = NotificationCenter.default
@@ -239,6 +244,40 @@ extension SyncServiceManager {
     }
 }
 
+
+//MARK: - ItemSyncServiceDelegate
+
+extension SyncServiceManager: ItemSyncServiceDelegate {
+    func didReceiveOutOfSpaceError() {
+        stop(reachabilityDidChange: false, photo: true, video: true)
+        if UIApplication.shared.applicationState == .background {
+            timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
+        }
+        showOutOfSpaceAlert()
+    }
+    
+    func didReceiveError() {
+        stop(reachabilityDidChange: false, photo: true, video: true)
+    }
+}
+
+
+extension SyncServiceManager {
+    fileprivate func showOutOfSpaceAlert() {
+        let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
+                                              message: TextConstants.syncOutOfSpaceAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
+                                              secondButtonTitle: TextConstants.syncOutOfSpaceAlertGoToSettings,
+                                              secondAction: { vc in
+                                                vc.close(completion: {
+                                                    let router = RouterVC()
+                                                    router.pushViewController(viewController: router.packages)
+                                                })
+        })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+    }
+}
 
 
 

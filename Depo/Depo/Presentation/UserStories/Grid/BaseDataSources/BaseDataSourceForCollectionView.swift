@@ -866,7 +866,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UploadNotificati
     func getCellForFile(objectUUID: String) -> CollectionViewCellForPhoto?{
         if let path = getIndexPathForObject(objectUUID: objectUUID){
             let cell = collectionView.cellForItem(at: path)
-            if let `cell` = cell as? CollectionViewCellForPhoto{
+            if let cell = cell as? CollectionViewCellForPhoto {
                 return cell
             }
         }
