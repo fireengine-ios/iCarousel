@@ -27,10 +27,21 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func onShowSelectedItem(at index: Int, from items:[Item]) {
         view.onShowSelectedItem(at: index, from: items)
 
-//        if items[index].fileType == .image {
-//            
-//        }
-        bottomBarPresenter?.setupTabBarWith(config: interactor.bottomBarConfig)
+        let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
+        
+        var barConfig = interactor.bottomBarConfig
+        var actionTypes = barConfig.elementsConfig
+        
+        if !allSelectedItemsTypes.contains(.image) {
+            if let editIndex = actionTypes.index(of: .edit) {
+                actionTypes.remove(at: editIndex)
+            }
+            barConfig = EditingBarConfig(elementsConfig: actionTypes,
+                                         style: barConfig.style,
+                                         tintColor: barConfig.tintColor)
+        }
+        
+        bottomBarPresenter?.setupTabBarWith(config: barConfig)
         view.onItemSelected(at: index, from: items)
     }
     

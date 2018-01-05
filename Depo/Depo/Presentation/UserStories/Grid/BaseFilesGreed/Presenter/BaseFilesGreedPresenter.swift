@@ -407,6 +407,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: printIndex)
             }
             
+            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: {$0.fileType == .image}) {
+                actionTypes.remove(at: editIndex)
+            }
+            
             if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
                 let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
                 if localDuplicates.count > 0 {

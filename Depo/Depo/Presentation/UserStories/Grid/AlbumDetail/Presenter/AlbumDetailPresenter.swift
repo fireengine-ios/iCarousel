@@ -51,12 +51,13 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         }
         let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
         if allSelectedItemsTypes.contains(.image) {
-            barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.print],
+            let actionTypes = barConfig.elementsConfig + [.print]
+            
+            barConfig = EditingBarConfig(elementsConfig: actionTypes,
                                          style: barConfig.style,
                                          tintColor: barConfig.tintColor)
-            //barConfig.elementsConfig.append(.pr)
         }
         
-        bottomBarPresenter?.setupTabBarWith(config: barConfig)//setupTabBarWith(items: array, originalConfig: barConfig)
+        bottomBarPresenter?.setupTabBarWith(config: barConfig)
     }
 }
