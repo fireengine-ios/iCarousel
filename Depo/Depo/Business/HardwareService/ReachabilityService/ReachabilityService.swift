@@ -76,10 +76,7 @@ class APIReachabilityService {
         }
     }
     private let pingInterval: TimeInterval = 30.0
-    private var lastKnownRequestDate: TimeInterval = 0
-    private var timeSinceLastKnownSuccesfullRequest: TimeInterval {
-        return Date().timeIntervalSince1970 - lastKnownRequestDate
-    }
+    
     
     init() {
         
@@ -92,7 +89,7 @@ class APIReachabilityService {
             return
         }
 
-        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.checkAPI), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: pingInterval, target: self, selector: #selector(checkAPI), userInfo: nil, repeats: true)
         self.timer?.fire()
     }
     
@@ -101,30 +98,18 @@ class APIReachabilityService {
         self.timer = nil
     }
     
-    func saveSuccesfullRequest() {
-        lastKnownRequestDate = Date().timeIntervalSince1970
-    }
-    
     private func notify() {
         NotificationCenter.default.post(name: APIReachabilityService.APIReachabilityDidChangeName , object: nil)
     }
     
     
     @objc private func checkAPI() {
-        guard timeSinceLastKnownSuccesfullRequest > pingInterval else {
-            return
-        }
-        
         APIReachabilityRequestService().sendPingRequest { [weak self] (isReachable) in
             guard let `self` = self else {
                 return
             }
             
             self.connection = isReachable ? .reachable : .unreachable
-            
-            if isReachable {
-                self.saveSuccesfullRequest()
-            }
         }
     }
 
@@ -144,8 +129,9 @@ class APIReachabilityRequestService: BaseRequestService {
             handler(true)
         }, fail: { _ in
             handler(false)
+            
         })
-        executeGetRequest(param: parameters, handler: responseHandler)
+        executeHeadRequest(param: parameters, handler: responseHandler)
     }
 }
 

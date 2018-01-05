@@ -18,6 +18,7 @@ enum RequestMethod: String {
     case Get    = "GET"
     case Delete = "DELETE"
     case Put    = "PUT"
+    case Head    = "HEAD"
 }
 
 
@@ -49,7 +50,6 @@ class RequestService {
             request.httpMethod = method.rawValue
             request.httpBody = body
             request.allHTTPHeaderFields = headerParametrs
-            request.cachePolicy = NSURLRequest.CachePolicy.reloadRevalidatingCacheData
         
         debugPrint("REQUEST: \(request)")
         
@@ -132,5 +132,23 @@ class RequestService {
         debugPrint("REQUEST: \(request)")
         
         return defaultSession.uploadTask(with: request, from: fileData, completionHandler: response)
+    }
+    
+    public func headRequestTask(patch:URL,
+                                    headerParametrs: RequestHeaderParametrs,
+                                    method: RequestMethod,
+                                    timeoutInterval: TimeInterval,
+                                    response: @escaping RequestResponse ) -> URLSessionDataTask {
+        
+        var request: URLRequest = URLRequest(url: patch)
+        request.timeoutInterval = timeoutInterval
+        request.httpMethod = method.rawValue
+        request.allHTTPHeaderFields = headerParametrs
+        request.cachePolicy = .reloadRevalidatingCacheData
+        
+        debugPrint("REQUEST: \(request)")
+        
+        let task = defaultSession.dataTask(with: request, completionHandler: response)
+        return task
     }
 }
