@@ -437,7 +437,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var status: Status
     
     /* for remote content*/
-    let tmpDownloadUrl: URL?
+    var tmpDownloadUrl: URL?
     
     var isUploading: Bool = false
     
