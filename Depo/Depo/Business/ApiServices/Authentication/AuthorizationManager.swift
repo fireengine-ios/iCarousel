@@ -83,6 +83,11 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             return
         }
         
+        if request.request?.url?.absoluteString.contains("account/info") == true {
+            completion(false, 0.0)
+            return
+        }
+        
         /// if accessToken is valid
         guard response.statusCode == 401 else {
             completion(false, 0.0)

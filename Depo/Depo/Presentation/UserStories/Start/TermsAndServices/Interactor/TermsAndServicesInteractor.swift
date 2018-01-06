@@ -66,7 +66,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             DispatchQueue.main.async { [weak self] in
 
                 guard let t = result as? SignUpSuccessResponse else {
-                        return
+                    return
                 }
                 self?.dataStorage.signUpResponse = t
                 self?.dataStorage.signUpUserInfo = SingletonStorage.shared.signUpInfo
