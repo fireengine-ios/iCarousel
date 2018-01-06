@@ -89,6 +89,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
             DispatchQueue.main.async {
                 if let self_ = self{
                     self_.output.operationSucces(operation: self_.moduleType)
+                    ItemOperationManager.default.newAlbumCreated()
                 }
             }
         }) { (error) in
@@ -112,6 +113,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
                                                 DispatchQueue.main.async {
                                                     if let self_ = self{
                                                         self_.output.operationSucces(operation: self_.moduleType)
+                                                        ItemOperationManager.default.newFolderCreated()
                                                     }
                                                 }
             },

@@ -268,6 +268,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             albumService.deleteAlbums(deleteAlbums: DeleteAlbums(albums: albumbs), success: { [weak self] in
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .removeAlbum)
+                    ItemOperationManager.default.albumsDeleted(albums: albumbs)
                 }
             }, fail: { [weak self] errorRespone in
                 DispatchQueue.main.async {

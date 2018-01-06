@@ -18,6 +18,7 @@ enum RequestMethod: String {
     case Get    = "GET"
     case Delete = "DELETE"
     case Put    = "PUT"
+    case Head    = "HEAD"
 }
 
 import Alamofire
@@ -128,5 +129,23 @@ class RequestService {
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
         }
         return sessionRequest.task!
+    }
+    
+    public func headRequestTask(patch:URL,
+                                    headerParametrs: RequestHeaderParametrs,
+                                    method: RequestMethod,
+                                    timeoutInterval: TimeInterval,
+                                    response: @escaping RequestResponse ) -> URLSessionDataTask {
+        
+        var request: URLRequest = URLRequest(url: patch)
+        request.timeoutInterval = timeoutInterval
+        request.httpMethod = method.rawValue
+        request.allHTTPHeaderFields = headerParametrs
+        request.cachePolicy = .reloadRevalidatingCacheData
+        
+        debugPrint("REQUEST: \(request)")
+        
+        let task = defaultSession.dataTask(with: request, completionHandler: response)
+        return task
     }
 }

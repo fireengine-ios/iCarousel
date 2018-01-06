@@ -322,7 +322,7 @@ class AuthenticationService: BaseRequestService {
             self.tokenStorage.clearTokens()
             CoreDataStack.default.clearDataBase()
             FreeAppSpace.default.clear()
-            WrapItemOperatonManager.default.stopAllOperations()
+            CardsManager.default.stopAllOperations()
             success?()
         }
     }

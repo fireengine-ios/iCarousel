@@ -11,4 +11,5 @@ import Foundation
 protocol BottomSelectionTabBarInteractorOutput: MoreFilesActionsInteractorOutput {
     func selectFolder(_ selectFolder: SelectFolderViewController)
     func objectsToShare(rect: CGRect?,urls: [String])
+    func deleteMusic(_ completion: @escaping (() -> Void))
 }

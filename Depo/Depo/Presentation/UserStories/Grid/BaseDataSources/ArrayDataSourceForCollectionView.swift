@@ -71,4 +71,40 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         }
     }
     
+    override func albumsDeleted(albums: [AlbumItem]){
+        if let unwrapedFilters = originalFilters,
+            canShowAlbumsFilters(filters: unwrapedFilters) {
+            let uuids = albums.map({ $0.uuid })
+            var arrayOfIndexes = [IndexPath]()
+            var section = 0
+            var newArray = [[BaseDataSourceItem]]()
+            for array in tableDataMArray{
+                var row = 0
+                var newSectionArray = [BaseDataSourceItem]()
+                for album in array{
+                    if uuids.contains(album.uuid){
+                        let path = IndexPath(row: row, section: section)
+                        arrayOfIndexes.append(path)
+                    }else{
+                        newSectionArray.append(album)
+                    }
+                    row = row + 1
+                }
+                section = section + 1
+                newArray.append(newSectionArray)
+            }
+            
+            
+            if arrayOfIndexes.count > 0 {
+                tableDataMArray = newArray
+                collectionView.performBatchUpdates({ [weak self] in
+                    if let `self` = self{
+                        self.collectionView.deleteItems(at: arrayOfIndexes)
+                    }
+                }, completion: nil)
+            }
+        }
+        
+    }
+    
 }

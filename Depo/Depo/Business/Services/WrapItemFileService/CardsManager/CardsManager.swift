@@ -24,17 +24,17 @@ class Progress {
     var completedOperations: Int?
 }
 
-class WrapItemOperatonManager: NSObject {
+class CardsManager: NSObject {
     
-    static let `default` = WrapItemOperatonManager()
+    static let `default` = CardsManager()
     
-    private var foloversArray = [WrapItemOperationViewProtocol]()
+    private var foloversArray = [CardsManagerViewProtocol]()
     private var progresForOperation = [OperationType: Progress]()
     
     
     //MARK: registration view
     
-    func addViewForNotification(view: WrapItemOperationViewProtocol){
+    func addViewForNotification(view: CardsManagerViewProtocol){
         if foloversArray.index(where: {$0.isEqual(object: view)}) == nil{
             foloversArray.append(view)
         }
@@ -46,7 +46,7 @@ class WrapItemOperatonManager: NSObject {
         }
     }
     
-    func removeViewForNotification(view: WrapItemOperationViewProtocol){
+    func removeViewForNotification(view: CardsManagerViewProtocol){
         if let index = foloversArray.index(where: {$0.isEqual(object: view)}){
             foloversArray.remove(at: index)
         }

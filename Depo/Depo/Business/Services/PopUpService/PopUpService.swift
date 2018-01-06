@@ -35,7 +35,7 @@ class PopUpService{
     
     func checkIsNeedShowUploadOffPopUp(){
         SingletonStorage.shared.getAccountInfoForUser(success: { (success) in
-            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff , allOperations: nil, completedOperations: nil)
+            CardsManager.default.startOperationWith(type: .autoUploadIsOff , allOperations: nil, completedOperations: nil)
             
             //Old logic with checking login count
 //            let count = PopUpService.shared.getLoginCountForUser()

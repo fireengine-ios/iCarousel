@@ -45,7 +45,7 @@ class AlbumsModuleInitializer: NSObject {
                                                                                      selectionModeTypes: [.completelyDeleteAlbums]),
                                topBarConfig: gridListTopBarConfig)
         
-        
+        interactor.originalFilters = [.fileType(.photoAlbum)]
         viewController.mainTitle = TextConstants.albumsTitle
         
         return viewController
