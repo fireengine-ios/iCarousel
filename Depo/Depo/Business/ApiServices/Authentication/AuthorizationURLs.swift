@@ -15,8 +15,5 @@ protocol AuthorizationURLs {
 
 final class AuthorizationURLsImp: AuthorizationURLs {
     let baseUrl = URLs.baseUrl
-    
-    var refreshAccessToken: URL {
-        return URLs.refreshAccessToken
-    }
+    let refreshAccessToken = URLs.refreshAccessToken
 }
