@@ -357,7 +357,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     func collectInputedUserInfo() {
-        output.collectedUserInfo(email: getTextFieldValue(forRow: 0), code: dataSource.currentGSMCode, phone: getTextFieldValue(forRow: 1), password: getTextFieldValue(forRow: 2), repassword: getTextFieldValue(forRow: 3))
+        output.collectedUserInfo(email: getTextFieldValue(forRow: 1), code: dataSource.currentGSMCode, phone: getTextFieldValue(forRow: 0), password: getTextFieldValue(forRow: 2), repassword: getTextFieldValue(forRow: 3))
     }
     
     
