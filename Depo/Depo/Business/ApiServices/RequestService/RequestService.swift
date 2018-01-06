@@ -135,7 +135,7 @@ class RequestService {
                                     headerParametrs: RequestHeaderParametrs,
                                     method: RequestMethod,
                                     timeoutInterval: TimeInterval,
-                                    response: @escaping RequestResponse ) -> URLSessionDataTask {
+                                    response: @escaping RequestResponse ) -> URLSessionTask {
         
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
@@ -145,7 +145,11 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        let task = defaultSession.dataTask(with: request, completionHandler: response)
-        return task
+        let sessionRequest = SessionManager.default.request(request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.data, requestResponse.response, requestResponse.error)
+        }
+        return sessionRequest.task!
     }
 }
