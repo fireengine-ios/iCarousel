@@ -48,50 +48,6 @@ final class UploadService: BaseRequestService {
         UploadProgressService.shared.delegate = self
     }
 
-    func upload(imageData: Data, parentUUID: String = "", isFaorites: Bool = false, handler: @escaping (Result<SearchItemResponse>) -> Void) {
-        baseUrl(success: { [weak self] urlResponse in
-            
-            guard let url = urlResponse?.url else {
-                return handler(.failed(CustomErrors.unknown))
-            }
-            
-            let uploadParam = UploadDataParametrs(data: imageData, url: url)
-            uploadParam.parentUuid = parentUUID
-            uploadParam.isFavorites = isFaorites
-            
-            _ = self?.executeUploadDataRequest(param: uploadParam, response: { [weak self]
-                (data, response, error) in
-                
-                if let error = error {
-                    return handler(.failed(error))
-                }
-                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode >= 300 {
-                    return handler(.failed(ServerError(code: httpResponse.statusCode, data: data)))
-                }
-                guard let _ = data else {
-                    return handler(.failed(CustomErrors.unknown))
-                }
-                
-                let uploadNotifParam = UploadNotify(parentUUID: parentUUID,
-                                                    fileUUID: uploadParam.tmpUUId )
-
-                self?.uploadNotify(param: uploadNotifParam, success: { baseurlResponse in
-                    guard let response = baseurlResponse as? SearchItemResponse else {
-                        return handler(.failed(CustomErrors.unknown))
-                    }
-
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
-                                                    object: nil)
-                    handler(.success(response))
-                }, fail: { errorResponse in
-                    handler(.failed(CustomErrors.text(errorResponse.description)))
-                })
-            })
-        }, fail: { errorResponse in
-            handler(.failed(CustomErrors.text(errorResponse.description)))
-        })
-    }
-
     
     //MARK: -
     class func convertUploadType(uploadType: UploadType) -> OperationType{
@@ -111,6 +67,7 @@ final class UploadService: BaseRequestService {
             }, fail: { (errorResponse) in
                 fail?(errorResponse)
             })
+        //TODO: add .syncTouse case with the higher priority
         default:
             return self.uploadFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, needsSuccess: uploadType == .syncToUse, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: {
 
@@ -581,7 +538,9 @@ class UploadOperations: Operation {
                                                     fileUUID:uploadParam.tmpUUId )
                 
                 self?.uploadNotify(param: uploadNotifParam, success: { baseurlResponse in
-                    try? FileManager.default.removeItem(at: uploadParam.urlToLocalFile)
+                    if let localURL = uploadParam.urlToLocalFile {
+                        try? FileManager.default.removeItem(at: localURL)
+                    }
                     
                     if isPhotoAlbum_{
                         if let resp = baseurlResponse as? SearchItemResponse{

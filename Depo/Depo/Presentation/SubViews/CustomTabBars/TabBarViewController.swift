@@ -579,35 +579,17 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         /// IF WILL BE NEED TO SAVE FILE
         //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+
+        let wrapData = WrapData(imageData: data)
         
-        WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: 1, completedOperations: 0)
-        let parentUUID = RouterVC().getParentUUID()
-        let isPhotoAlbum = RouterVC().isRootViewControllerAlbumDetail()
-        let isFavorites = RouterVC().isOnFavoritesView()
-        UploadService.default.upload(imageData: data, parentUUID: parentUUID, isFaorites: isFavorites) { result in
-            WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
-            switch result {
-            case .success(let fhotoUploadResponce):
-                DispatchQueue.main.async {
-                    UIApplication.showSuccessAlert(message: "Photo uploaded")
-                }
-                
-                if isPhotoAlbum{
-                    let item = Item.init(remote: fhotoUploadResponce)
-                    let parameter = AddPhotosToAlbum(albumUUID: parentUUID, photos: [item])
-                    PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
-                        
-                    }, fail: { (error) in
-                        
-                    })
-                }
-                
-            case .failed(let error):
-                DispatchQueue.main.async {
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
-                }
+        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {
+            DispatchQueue.main.async {
+                UIApplication.showSuccessAlert(message: TextConstants.photoUploadedMessage )
             }
-            
+        }) { (error) in
+            DispatchQueue.main.async {
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+            }
         }
         
         picker.dismiss(animated: true, completion: nil)

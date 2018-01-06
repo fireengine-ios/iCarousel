@@ -390,6 +390,8 @@ protocol  Wrappered  {
     
     var urlToFile: URL? { get }
     
+    var fileData: Data? { get }
+    
     var duration: String? { get }
     
     var uuid: String { get }
@@ -401,7 +403,6 @@ protocol  Wrappered  {
 
 
 class WrapData: BaseDataSourceItem, Wrappered {
-
     enum Status: String {
         case active = "ACTIVE"
         case uploaded = "UPLOADED"
@@ -444,6 +445,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var urlToFile: URL? {
         return tmpDownloadUrl
     }
+    
+     var fileData: Data?
     
     var asset: PHAsset? {
         
@@ -594,6 +597,19 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let unwrapedFolderUUID = parendfolderUUID {
             parent = unwrapedFolderUUID
         }
+    }
+    
+    init(imageData: Data) {
+        fileData = imageData
+        fileSize = Int64(imageData.count)
+        favorites = false
+        patchToPreview = .remoteUrl(nil)
+        status = .unknown
+        tmpDownloadUrl = nil
+        
+        let creationDate = Date()
+        super.init(uuid: nil, name: nil, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
+        
     }
     
     init(mediaItem: MediaItem) {

@@ -25,7 +25,8 @@ protocol RequestParametrs {
 }
 
 protocol UploadRequestParametrs: RequestParametrs {
-    var urlToLocalFile: URL { get }
+    var urlToLocalFile: URL? { get }
+    var fileData: Data? { get }
 }
 
 protocol UploadDataRequestParametrs: RequestParametrs {
@@ -39,8 +40,9 @@ protocol DownloadRequestParametrs: RequestParametrs {
 
 class BaseUploadRequestParametrs: UploadRequestParametrs {
     
-    var urlToLocalFile: URL
+    var urlToLocalFile: URL?
 
+    var fileData: Data?
     
     var requestParametrs: Any {
         return Data()
@@ -205,35 +207,47 @@ class BaseRequestService {
     }
     
     func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionUploadTask {
-        let app = UIApplication.shared
         var backgroundTaskID = UIBackgroundTaskInvalid
-        backgroundTaskID = app.beginBackgroundTask(withName: param.urlToLocalFile.absoluteString) {
-            app.endBackgroundTask(backgroundTaskID)
-        }
-        let task = requestService.uploadFileRequestTask(patch: param.patch,
+        var task: URLSessionUploadTask!
+        
+        if let localURL = param.urlToLocalFile {
+            backgroundTaskID = beginBackgroundTask(with: localURL.absoluteString)
+            
+            task = requestService.uploadFileRequestTask(patch: param.patch,
+                                                            headerParametrs: param.header,
+                                                            fromFile: localURL,
+                                                            method: RequestMethod.Put,
+                                                            timeoutInterval: 2000,
+                                                            response: { (data, urlResponse, error) in
+                                                                response(data, urlResponse, error)
+                                                                UIApplication.shared.endBackgroundTask(backgroundTaskID)
+            })
+        } else if let fileData = param.fileData {
+            let taskName = UUID().uuidString
+            backgroundTaskID = beginBackgroundTask(with: taskName)
+            
+            task = requestService.uploadFileRequestTask(path: param.patch,
                                                         headerParametrs: param.header,
-                                                        fromFile: param.urlToLocalFile,
+                                                        fileData: fileData,
                                                         method: RequestMethod.Put,
                                                         timeoutInterval: 2000,
                                                         response: { (data, urlResponse, error) in
                                                             response(data, urlResponse, error)
-                                                            app.endBackgroundTask(backgroundTaskID)
-        })
+                                                            UIApplication.shared.endBackgroundTask(backgroundTaskID)
+            })
+        }
         
         task.resume()
+        
         return task
     }
     
-    func executeUploadDataRequest(param: UploadDataRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionUploadTask{
-        
-        let task = requestService.uploadFileRequestTask(path: param.patch,
-                                                        headerParametrs: param.header,
-                                                        fileData: param.data,
-                                                        method: RequestMethod.Put,
-                                                        timeoutInterval: 2000,
-                                                        response: response)
-        
-        task.resume()
-        return task
+    private func beginBackgroundTask(with name: String?) -> UIBackgroundTaskIdentifier {
+        var taskId = UIBackgroundTaskInvalid
+        taskId = UIApplication.shared.beginBackgroundTask(withName: name, expirationHandler: {
+            UIApplication.shared.endBackgroundTask(taskId)
+        })
+        return taskId
     }
+
 }
