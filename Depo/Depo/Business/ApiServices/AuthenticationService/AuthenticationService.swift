@@ -333,6 +333,7 @@ class AuthenticationService: BaseRequestService {
             success?()
         }
         successResponse()
+        FactoryMain.mediaPlayer.stop()
         return
 //        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: successResponse, fail: failResponse)
 //        executePostRequest(param: param, handler: handler)

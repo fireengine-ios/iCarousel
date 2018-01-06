@@ -118,6 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ApplicationSession.sharedSession.saveData()
         }
         UserDefaults.standard.synchronize()
+        FactoryMain.mediaPlayer.stop()
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
