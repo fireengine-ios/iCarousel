@@ -194,9 +194,9 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
                                                   message: message,
                                                   image: .error,
                                                   buttonTitle: TextConstants.ok,
-                                                  action: { vc in
-                                                    self.output.tapReadyButton(name: self.nameTextField.text ?? "", email: self.emailTextField.text ?? "", number: self.gsmNumberTextField.text ?? "")
-                                                    self.readyButton?.isEnabled = true
+                                                  action: { [weak self] vc in
+                                                    self?.output.tapReadyButton(name: self?.nameTextField.text ?? "", email: self?.emailTextField.text ?? "", number: self?.gsmNumberTextField.text ?? "")
+                                                    self?.readyButton?.isEnabled = true
                                                     vc.dismiss(animated: true, completion: nil)
             })
             self.present(controller, animated: true, completion: nil)
