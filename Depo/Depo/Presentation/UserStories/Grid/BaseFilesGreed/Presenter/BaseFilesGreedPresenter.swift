@@ -424,7 +424,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             
             let remoteItems = selectedItems.filter { $0.isLocalItem == false}
             
-            if actionTypes.contains(.createStory) && remoteItems.contains(where: { return $0.fileType != .image } ) {
+            if actionTypes.contains(.createStory) && !remoteItems.contains(where: { return $0.fileType == .image } ) {
                 let index = actionTypes.index(where: { return $0 == .createStory})!
                 actionTypes.remove(at: index)
             }
