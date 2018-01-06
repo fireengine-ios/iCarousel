@@ -67,7 +67,10 @@ class OTPViewInteractor: PhoneVereficationInteractor {
         attempts = 0
         
         let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
-        AccountService().updateUserPhone(parameters: parameters, success: { [weak self] (responce) in
+        AccountService().updateUserPhone(parameters: parameters, success: { [weak self] responce in
+                if let responce = responce as? SignUpSuccessResponse {
+                    self?.responce = responce
+                }
                 DispatchQueue.main.async {
                     self?.output.resendCodeRequestSuccesed()
                 }
