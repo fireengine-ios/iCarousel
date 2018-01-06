@@ -7,7 +7,7 @@
 //
 
 protocol GridListTopBarSortingTableViewDelegate: class {
-    func didSelectItem(atIndex index: IndexPath)
+    func gridListTopBarSortingTableView(_ gridListTopBarSortingTableView: GridListTopBarSortingTableView, didSelectItemAtIndex index: IndexPath)
 }
 
 class GridListTopBarSortingTableView: UITableViewController
@@ -80,7 +80,7 @@ class GridListTopBarSortingTableView: UITableViewController
         
         selectedCell.changeState(selected: true)
         
-        actionDelegate?.didSelectItem(atIndex: indexPath)
+        actionDelegate?.gridListTopBarSortingTableView(self, didSelectItemAtIndex: indexPath)
     }
     
     private func unselectAllCells(table: UITableView) {
