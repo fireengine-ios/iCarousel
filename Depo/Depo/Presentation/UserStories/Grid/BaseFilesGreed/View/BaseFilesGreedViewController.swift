@@ -113,7 +113,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func configurateViewForPopUp(){
-        WrapItemOperatonManager.default.addViewForNotification(view: scrolliblePopUpView)
+        CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
     
     func configurateNavigationBar() {
@@ -128,7 +128,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     deinit{
-         WrapItemOperatonManager.default.removeViewForNotification(view: scrolliblePopUpView)
+         CardsManager.default.removeViewForNotification(view: scrolliblePopUpView)
          NotificationCenter.default.removeObserver(self)
     }
     

@@ -209,8 +209,8 @@
 		7C49881F1F3320420039C5F2 /* CreateStoryPhotosOrderViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4988131F3320420039C5F2 /* CreateStoryPhotosOrderViewOutput.swift */; };
 		7C5358101F9492DA00EABBAF /* OTPViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C53580E1F9492DA00EABBAF /* OTPViewController~iphone.xib */; };
 		7C5358111F9492DA00EABBAF /* OTPViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C53580F1F9492DA00EABBAF /* OTPViewController~ipad.xib */; };
-		7C5526131F7B9CCD00A21F3C /* WrapItemOperatonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526121F7B9CCD00A21F3C /* WrapItemOperatonManager.swift */; };
-		7C5526161F7BA1B400A21F3C /* WrapItemOperationViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526151F7BA1B400A21F3C /* WrapItemOperationViewProtocol.swift */; };
+		7C5526131F7B9CCD00A21F3C /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526121F7B9CCD00A21F3C /* CardsManager.swift */; };
+		7C5526161F7BA1B400A21F3C /* CardsManagerViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526151F7BA1B400A21F3C /* CardsManagerViewProtocol.swift */; };
 		7C5549FF1F6C11C300067F99 /* CollectionViewStoryReorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5549FD1F6C11C300067F99 /* CollectionViewStoryReorderView.swift */; };
 		7C554A001F6C11C300067F99 /* CollectionViewStoryReorderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C5549FE1F6C11C300067F99 /* CollectionViewStoryReorderView.xib */; };
 		7C5722771F753581004FC596 /* ApplicationSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5722761F753581004FC596 /* ApplicationSessionManager.swift */; };
@@ -232,6 +232,8 @@
 		7C66E8B11F979C3300D98F27 /* CreateStoryPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E8A71F979C3300D98F27 /* CreateStoryPreviewViewController.swift */; };
 		7C66E8B21F979C3300D98F27 /* CreateStoryPreviewViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E8A81F979C3300D98F27 /* CreateStoryPreviewViewIO.swift */; };
 		7C66E8B41F979C6800D98F27 /* CreateStoryPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C66E8B31F979C6800D98F27 /* CreateStoryPreviewViewController.xib */; };
+		7C6B30011FFCC6510066C818 /* ItemOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B30001FFCC6510066C818 /* ItemOperationManager.swift */; };
+		7C6B30021FFCC6510066C818 /* ItemOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B30001FFCC6510066C818 /* ItemOperationManager.swift */; };
 		7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F531F31BD2200536DB6 /* PhotoStory.swift */; };
 		7C6E2F741F31E4C900536DB6 /* CreateStorySelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F691F31E4C900536DB6 /* CreateStorySelectionConfigurator.swift */; };
 		7C6E2F751F31E4C900536DB6 /* CreateStorySelectionInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F6A1F31E4C900536DB6 /* CreateStorySelectionInitializer.swift */; };
@@ -264,8 +266,6 @@
 		7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		7C83B6F11F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */; };
 		7C83B6F31F3D916F006D05E3 /* SettingsAutoSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */; };
-		7C99C2EA1FF3C7F800CD23B9 /* UploadNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99C2E91FF3C7F800CD23B9 /* UploadNotificationManager.swift */; };
-		7C99C2EB1FF3C7F800CD23B9 /* UploadNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99C2E91FF3C7F800CD23B9 /* UploadNotificationManager.swift */; };
 		7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AB1F14CDF800F37E2C /* CircleButton.swift */; };
 		7CA2A7AE1F14CDF800F37E2C /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AC1F14CDF800F37E2C /* MenuButton.swift */; };
 		7CA2A7B01F14CE3F00F37E2C /* LocalMediaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AF1F14CE3F00F37E2C /* LocalMediaStorage.swift */; };
@@ -961,7 +961,7 @@
 		8C0E8E921FDEBDFF00789C91 /* CircleYellowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7ED4DC1F84C8C400DC5D33 /* CircleYellowButton.swift */; };
 		8C0E8E931FDEBDFF00789C91 /* UploadedItemsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D7EE8C0AFD8D04FB0C5CDC /* UploadedItemsPresenter.swift */; };
 		8C0E8E941FDEBDFF00789C91 /* UploadedItemsInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D045DF0F653D30F137A3A31E /* UploadedItemsInteractorInput.swift */; };
-		8C0E8E951FDEBDFF00789C91 /* WrapItemOperatonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526121F7B9CCD00A21F3C /* WrapItemOperatonManager.swift */; };
+		8C0E8E951FDEBDFF00789C91 /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526121F7B9CCD00A21F3C /* CardsManager.swift */; };
 		8C0E8E961FDEBDFF00789C91 /* BytesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEC01F78F94900FB4C3D /* BytesType.swift */; };
 		8C0E8E971FDEBDFF00789C91 /* UploadedItemsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A98EA438594E6B7C21041F /* UploadedItemsInteractorOutput.swift */; };
 		8C0E8E981FDEBDFF00789C91 /* UploadedItemsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B3D00DF2CAD20A11EF38B /* UploadedItemsInteractor.swift */; };
@@ -1001,7 +1001,7 @@
 		8C0E8EBA1FDEBDFF00789C91 /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86731F0F96E600520D18 /* ContactDevice.m */; };
 		8C0E8EBB1FDEBDFF00789C91 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
 		8C0E8EBC1FDEBDFF00789C91 /* BaseFilesGreedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BCBDB527895B614215B1EC /* BaseFilesGreedInteractor.swift */; };
-		8C0E8EBD1FDEBDFF00789C91 /* WrapItemOperationViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526151F7BA1B400A21F3C /* WrapItemOperationViewProtocol.swift */; };
+		8C0E8EBD1FDEBDFF00789C91 /* CardsManagerViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526151F7BA1B400A21F3C /* CardsManagerViewProtocol.swift */; };
 		8C0E8EBE1FDEBDFF00789C91 /* BaseFilesGreedRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F040044EA7ABA90A56F70F /* BaseFilesGreedRouterInput.swift */; };
 		8C0E8EBF1FDEBDFF00789C91 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AB1F14CDF800F37E2C /* CircleButton.swift */; };
 		8C0E8EC01FDEBDFF00789C91 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
@@ -2887,8 +2887,8 @@
 		7C4988131F3320420039C5F2 /* CreateStoryPhotosOrderViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotosOrderViewOutput.swift; sourceTree = "<group>"; };
 		7C53580E1F9492DA00EABBAF /* OTPViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OTPViewController~iphone.xib"; sourceTree = "<group>"; };
 		7C53580F1F9492DA00EABBAF /* OTPViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OTPViewController~ipad.xib"; sourceTree = "<group>"; };
-		7C5526121F7B9CCD00A21F3C /* WrapItemOperatonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapItemOperatonManager.swift; sourceTree = "<group>"; };
-		7C5526151F7BA1B400A21F3C /* WrapItemOperationViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapItemOperationViewProtocol.swift; sourceTree = "<group>"; };
+		7C5526121F7B9CCD00A21F3C /* CardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsManager.swift; sourceTree = "<group>"; };
+		7C5526151F7BA1B400A21F3C /* CardsManagerViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsManagerViewProtocol.swift; sourceTree = "<group>"; };
 		7C5549FD1F6C11C300067F99 /* CollectionViewStoryReorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewStoryReorderView.swift; sourceTree = "<group>"; };
 		7C5549FE1F6C11C300067F99 /* CollectionViewStoryReorderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewStoryReorderView.xib; sourceTree = "<group>"; };
 		7C5722761F753581004FC596 /* ApplicationSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSessionManager.swift; sourceTree = "<group>"; };
@@ -2910,6 +2910,7 @@
 		7C66E8A71F979C3300D98F27 /* CreateStoryPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPreviewViewController.swift; sourceTree = "<group>"; };
 		7C66E8A81F979C3300D98F27 /* CreateStoryPreviewViewIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPreviewViewIO.swift; sourceTree = "<group>"; };
 		7C66E8B31F979C6800D98F27 /* CreateStoryPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryPreviewViewController.xib; sourceTree = "<group>"; };
+		7C6B30001FFCC6510066C818 /* ItemOperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemOperationManager.swift; sourceTree = "<group>"; };
 		7C6BF9461EFA7AF200D73B62 /* PhoneVereficationScreen~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PhoneVereficationScreen~ipad.xib"; sourceTree = "<group>"; };
 		7C6E2F531F31BD2200536DB6 /* PhotoStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStory.swift; sourceTree = "<group>"; };
 		7C6E2F691F31E4C900536DB6 /* CreateStorySelectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStorySelectionConfigurator.swift; sourceTree = "<group>"; };
@@ -2944,7 +2945,6 @@
 		7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FolderSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAutoSyncModel.swift; sourceTree = "<group>"; };
 		7C942FED1EF94A18008F8A8E /* Depo_LifeTech-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Depo_LifeTech-Info.plist"; sourceTree = "<group>"; };
-		7C99C2E91FF3C7F800CD23B9 /* UploadNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadNotificationManager.swift; sourceTree = "<group>"; };
 		7CA2A7AB1F14CDF800F37E2C /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		7CA2A7AC1F14CDF800F37E2C /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		7CA2A7AF1F14CE3F00F37E2C /* LocalMediaStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalMediaStorage.swift; sourceTree = "<group>"; };
@@ -5996,13 +5996,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		7C5526141F7BA16100A21F3C /* WrapItemOperatonManager */ = {
+		7C5526141F7BA16100A21F3C /* CardsManager */ = {
 			isa = PBXGroup;
 			children = (
-				7C5526121F7B9CCD00A21F3C /* WrapItemOperatonManager.swift */,
-				7C5526151F7BA1B400A21F3C /* WrapItemOperationViewProtocol.swift */,
+				7C5526121F7B9CCD00A21F3C /* CardsManager.swift */,
+				7C5526151F7BA1B400A21F3C /* CardsManagerViewProtocol.swift */,
 			);
-			path = WrapItemOperatonManager;
+			path = CardsManager;
 			sourceTree = "<group>";
 		};
 		7C5AFD6E1F69761900DBB9E7 /* ViewController */ = {
@@ -6080,6 +6080,14 @@
 				7C66E8A81F979C3300D98F27 /* CreateStoryPreviewViewIO.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7C6B2FFF1FFCC6000066C818 /* ItemOperationManager */ = {
+			isa = PBXGroup;
+			children = (
+				7C6B30001FFCC6510066C818 /* ItemOperationManager.swift */,
+			);
+			path = ItemOperationManager;
 			sourceTree = "<group>";
 		};
 		7C6E2F671F31E4AF00536DB6 /* CreationStorySelectionItems */ = {
@@ -7711,7 +7719,8 @@
 		CE09155C1F3870D000C82A44 /* WrapItemFileService */ = {
 			isa = PBXGroup;
 			children = (
-				7C5526141F7BA16100A21F3C /* WrapItemOperatonManager */,
+				7C6B2FFF1FFCC6000066C818 /* ItemOperationManager */,
+				7C5526141F7BA16100A21F3C /* CardsManager */,
 				CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */,
 			);
 			path = WrapItemFileService;
@@ -8408,7 +8417,6 @@
 				CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */,
 				CEF69DE01FB5851E00FCE6AB /* UploadParametrs.swift */,
 				CEF69DE41FB5861A00FCE6AB /* UploadHelpers.swift */,
-				7C99C2E91FF3C7F800CD23B9 /* UploadNotificationManager.swift */,
 			);
 			path = UploadService;
 			sourceTree = "<group>";
@@ -11195,6 +11203,7 @@
 				8C0E8C8A1FDEBDFF00789C91 /* CustomIOS7AlertView.m in Sources */,
 				8C0E8C8B1FDEBDFF00789C91 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				8C0E8C8C1FDEBDFF00789C91 /* ActivityTimelineTimeCell.swift in Sources */,
+				7C6B30021FFCC6510066C818 /* ItemOperationManager.swift in Sources */,
 				8C0E8C8D1FDEBDFF00789C91 /* MusicBar.swift in Sources */,
 				8C0E8C8E1FDEBDFF00789C91 /* CustomTabBarItem.swift in Sources */,
 				8C0E8C8F1FDEBDFF00789C91 /* EditinglBar.swift in Sources */,
@@ -11722,7 +11731,7 @@
 				8C0E8E921FDEBDFF00789C91 /* CircleYellowButton.swift in Sources */,
 				8C0E8E931FDEBDFF00789C91 /* UploadedItemsPresenter.swift in Sources */,
 				8C0E8E941FDEBDFF00789C91 /* UploadedItemsInteractorInput.swift in Sources */,
-				8C0E8E951FDEBDFF00789C91 /* WrapItemOperatonManager.swift in Sources */,
+				8C0E8E951FDEBDFF00789C91 /* CardsManager.swift in Sources */,
 				8C0E8E961FDEBDFF00789C91 /* BytesType.swift in Sources */,
 				8C0E8E971FDEBDFF00789C91 /* UploadedItemsInteractorOutput.swift in Sources */,
 				8C0E8E981FDEBDFF00789C91 /* UploadedItemsInteractor.swift in Sources */,
@@ -11763,7 +11772,7 @@
 				8C0E8EBA1FDEBDFF00789C91 /* ContactDevice.m in Sources */,
 				8C0E8EBB1FDEBDFF00789C91 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				8C0E8EBC1FDEBDFF00789C91 /* BaseFilesGreedInteractor.swift in Sources */,
-				8C0E8EBD1FDEBDFF00789C91 /* WrapItemOperationViewProtocol.swift in Sources */,
+				8C0E8EBD1FDEBDFF00789C91 /* CardsManagerViewProtocol.swift in Sources */,
 				8C0E8EBE1FDEBDFF00789C91 /* BaseFilesGreedRouterInput.swift in Sources */,
 				8C0E8EBF1FDEBDFF00789C91 /* CircleButton.swift in Sources */,
 				8C0E8EC01FDEBDFF00789C91 /* DateExtension.swift in Sources */,
@@ -12027,7 +12036,6 @@
 				8C0E8FBA1FDEBDFF00789C91 /* FeedbackViewRouterInput.swift in Sources */,
 				8C0E8FBB1FDEBDFF00789C91 /* FeedbackViewRouter.swift in Sources */,
 				8C0E8FBC1FDEBDFF00789C91 /* FeedbackViewConfigurator.swift in Sources */,
-				7C99C2EB1FF3C7F800CD23B9 /* UploadNotificationManager.swift in Sources */,
 				8C0E8FBD1FDEBDFF00789C91 /* FeedbackViewInitializer.swift in Sources */,
 				8C0E8FBE1FDEBDFF00789C91 /* ActivityTimelineViewInput.swift in Sources */,
 				8C0E8FBF1FDEBDFF00789C91 /* ActivityTimelineViewOutput.swift in Sources */,
@@ -12184,7 +12192,6 @@
 				EFA74FB61FBF378F00CF946E /* PrintInteractorOutput.swift in Sources */,
 				CE51ABA11EF90853005DCEE0 /* CurioResourceUtil.m in Sources */,
 				8C6FB6901F0B9F7600B552A3 /* MoreActionsConfig.swift in Sources */,
-				7C99C2EA1FF3C7F800CD23B9 /* UploadNotificationManager.swift in Sources */,
 				CE7466FF1FD6B35400D0885D /* ServerValueError.swift in Sources */,
 				8CFF868F1F0F96E600520D18 /* SyncDB.m in Sources */,
 				7C6E2F911F31E4F800536DB6 /* CreateStoryNameInteractorInput.swift in Sources */,
@@ -12591,6 +12598,7 @@
 				1E85634C922D97D7DDCEC1B9 /* LikeFilterViewController.swift in Sources */,
 				B6EC22F9A78F97B7AC7E1F69 /* LikeFilterModuleInput.swift in Sources */,
 				45AA4BD813307742304E29A3 /* LikeFilterPresenter.swift in Sources */,
+				7C6B30011FFCC6510066C818 /* ItemOperationManager.swift in Sources */,
 				CEE1D1FA1F714DFE0008F4CF /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
 				EF9B85CF5585F042A8D5103F /* LikeFilterInteractorInput.swift in Sources */,
 				CEE1D2001F714F370008F4CF /* PredicateRules.swift in Sources */,
@@ -12644,7 +12652,7 @@
 				E121576F506E3512DE62F2BF /* UploadedItemsPresenter.swift in Sources */,
 				010B5388E6913FEA0813D2C8 /* UploadedItemsInteractorInput.swift in Sources */,
 				7CEA863D1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift in Sources */,
-				7C5526131F7B9CCD00A21F3C /* WrapItemOperatonManager.swift in Sources */,
+				7C5526131F7B9CCD00A21F3C /* CardsManager.swift in Sources */,
 				CE4CFEC11F78F94900FB4C3D /* BytesType.swift in Sources */,
 				7C3B186E1FE0153E00FF3C39 /* PrepareToAutoSync.swift in Sources */,
 				FB274A9C777B1B0305F1B7ED /* UploadedItemsInteractorOutput.swift in Sources */,
@@ -12686,7 +12694,7 @@
 				8CFF868A1F0F96E600520D18 /* ContactDevice.m in Sources */,
 				8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */,
-				7C5526161F7BA1B400A21F3C /* WrapItemOperationViewProtocol.swift in Sources */,
+				7C5526161F7BA1B400A21F3C /* CardsManagerViewProtocol.swift in Sources */,
 				5851E00D5C6AB2815DCCB595 /* BaseFilesGreedRouterInput.swift in Sources */,
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
 				CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */,

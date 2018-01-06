@@ -46,6 +46,7 @@ class SyncServiceManager {
         photoSyncService.delegate = self
         videoSyncService.delegate = self
         setupReachability()
+        setupAPIReachability()
         subscribeForNotifications()
     }
     
@@ -79,6 +80,10 @@ class SyncServiceManager {
     
     
     //MARK: - Private
+    
+    private func setupAPIReachability() {
+        APIReachabilityService.shared.startNotifier()
+    }
     
     private func setupReachability() {
         guard let reachability = reachabilityService else {
@@ -122,18 +127,18 @@ class SyncServiceManager {
         
         guard syncSettings.isAutoSyncEnable else {
             stop(reachabilityDidChange: false, photo: true, video: true)
-            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
+            CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
             return
         }
         
-        WrapItemOperatonManager.default.stopOperationWithType(type: .autoUploadIsOff)
+        CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
         
         guard let reachability = reachabilityService else {
             print("\(#function): reachabilityService is nil")
             return
         }
         
-        if reachability.connection != .none {
+        if reachability.connection != .none, APIReachabilityService.shared.connection == .reachable {
             if reachability.connection == .wifi {
                 start(photo: true, video: true)
             } else if reachability.connection == .cellular {
@@ -198,34 +203,43 @@ extension SyncServiceManager {
                                        selector: #selector(onAutoSyncStatusDidChange),
                                        name: autoSyncStatusDidChangeNotification,
                                        object: nil)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(onAPIReachabilityDidChange),
+                                       name: APIReachabilityService.APIReachabilityDidChangeName,
+                                       object: nil)
     }
     
     @objc private func onPhotoLibraryDidChange() {
         checkReachabilityAndSettings()
     }
     
+    @objc private func onAPIReachabilityDidChange() {
+        checkReachabilityAndSettings()
+    }
+    
     @objc private func onAutoSyncStatusDidChange() {
         if isSyncCancelled {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            CardsManager.default.stopOperationWithType(type: .sync)
             return
         }
         
         if hasExecutingSync {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
             return
         }
         
         if hasPrepairingSync {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             return
         }
 
         if hasWaitingForWiFiSync {
-            WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
+            CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
     }
 }

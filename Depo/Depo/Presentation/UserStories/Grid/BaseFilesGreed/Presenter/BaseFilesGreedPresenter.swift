@@ -61,6 +61,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                        filters: interactor.originalFilesTypeFilter)
        
         dataSource.delegate = self
+        dataSource.needShowProgressInCell = needShowProgressInCells
         
         if let displayingType = topBarConfig {
             type = displayingType.defaultGridListViewtype
@@ -80,15 +81,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func subscribeDataSource(){
-        if needShowProgressInCells{
-            UploadNotificationManager.default.startUpdateView(view: dataSource)
-        }
+        ItemOperationManager.default.startUpdateView(view: dataSource)
     }
     
     deinit {
-        if needShowProgressInCells{
-            UploadNotificationManager.default.stopUpdateView(view: dataSource)
-        }
+        ItemOperationManager.default.stopUpdateView(view: dataSource)
     }
     
     func searchByText(searchText: String) {
@@ -276,6 +273,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onLongPressInCell() {
         startEditing()
+    }
+    
+    func needReloadData(){
+        reloadData()
     }
     
     
@@ -482,14 +483,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
-        onChangeSelectedItemsCount(selectedItemsCount: 0)
     }
     
     func operationFailed(withType type: ElementTypes) {
         debugPrint("failed")
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
-        onChangeSelectedItemsCount(selectedItemsCount: 0)
     }
     
     func selectModeSelected() {
