@@ -197,8 +197,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func startSelection(with numberOfItems: Int) {
-        self.navigationItem.leftBarButtonItem = cancelSelectionButton!
-        setTitle(withString: "\(numberOfItems) Selected")
+        navigationItem.leftBarButtonItem = cancelSelectionButton!
+        selectedItemsCountChange(with: numberOfItems)
         navigationBarWithGradientStyle()
         configureNavBarActions(isSelecting: true)
         underNavBarBar?.setSorting(enabled: false)
@@ -245,7 +245,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func selectedItemsCountChange(with count: Int) {
-        self.setTitle(withString: String(count) + " Selected")
+        setTitle(withString: String(count) + " Selected")
     }
     
     static let sliderH : CGFloat = 180
