@@ -42,7 +42,6 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     }
     
     override func setupNewBottomBarConfig() {
-        //        .print
         guard var barConfig = interactor.bottomBarConfig
 //            ,
 //            let array = dataSource.getSelectedItems() as? [Item]

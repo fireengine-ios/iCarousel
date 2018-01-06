@@ -63,7 +63,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 //        bottomBarPresenter?.show(animated: false, onView: self.view)
     }
     
-
     func startCreatingAVAsset(){
         startAsyncOperation()
     }
