@@ -206,6 +206,7 @@ class BaseRequestService {
         task.resume()
     }
     
+    
     func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionUploadTask {
         var backgroundTaskID = UIBackgroundTaskInvalid
         var task: URLSessionUploadTask!
@@ -241,6 +242,19 @@ class BaseRequestService {
         
         return task
     }
+    
+    func executeHeadRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
+        
+        let task = requestService.headRequestTask(patch: param.patch,
+                                                  headerParametrs: param.header,
+                                                  method: RequestMethod.Head,
+                                                  timeoutInterval: 30,
+                                                  response: handler.response)
+        task.resume()
+    }
+
+    
+    //MARK: - Helpers
     
     private func beginBackgroundTask(with name: String?) -> UIBackgroundTaskIdentifier {
         var taskId = UIBackgroundTaskInvalid
