@@ -16,9 +16,7 @@ class SplashInteractor: SplashInteractorInput {
         return passcodeStorage.isEmpty
     }
     
-    func startLoginInBackroung() {
-        output.startAsyncOperation()
-        
+    func startLoginInBackroung() {        
         let success: SuccessLogin = { [weak self] in
             self?.successLogin()
         }
