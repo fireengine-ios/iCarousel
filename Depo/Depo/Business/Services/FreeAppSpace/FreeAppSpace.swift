@@ -68,7 +68,7 @@ class FreeAppSpace {
                     return
                 }
                 if (self_.duplicaesArray.count > 0){
-                    WrapItemOperatonManager.default.startOperationWith(type: .freeAppSpaceWarning, allOperations: nil, completedOperations: nil)
+                    CardsManager.default.startOperationWith(type: .freeAppSpaceWarning, allOperations: nil, completedOperations: nil)
                 }
             })
         }else{
@@ -77,7 +77,7 @@ class FreeAppSpace {
                     return
                 }
                 if (self_.duplicaesArray.count > 0){
-                    WrapItemOperatonManager.default.startOperationWith(type: .freeAppSpace, allOperations: nil, completedOperations: nil)
+                    CardsManager.default.startOperationWith(type: .freeAppSpace, allOperations: nil, completedOperations: nil)
                 }
             })
         }

@@ -140,7 +140,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         configurator.configure(viewController: viewController,
                                moduleOutput: moduleOutput,
                                remoteServices: FavouritesService(requestSize: 100),
-                               fileFilters: [.favoriteStatus(.favorites)],
+                               fileFilters: [.favoriteStatus(.favorites), .localStatus(.nonLocal)],
                                 bottomBarConfig: bottomBarConfig,
                                 topBarConfig: gridListTopBarConfig,
                                 alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],

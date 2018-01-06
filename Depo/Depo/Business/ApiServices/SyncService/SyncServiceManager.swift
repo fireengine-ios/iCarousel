@@ -127,11 +127,11 @@ class SyncServiceManager {
         
         guard syncSettings.isAutoSyncEnable else {
             stop(reachabilityDidChange: false, photo: true, video: true)
-            WrapItemOperatonManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
+            CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
             return
         }
         
-        WrapItemOperatonManager.default.stopOperationWithType(type: .autoUploadIsOff)
+        CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
         
         guard let reachability = reachabilityService else {
             print("\(#function): reachabilityService is nil")
@@ -220,26 +220,26 @@ extension SyncServiceManager {
     
     @objc private func onAutoSyncStatusDidChange() {
         if isSyncCancelled {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            CardsManager.default.stopOperationWithType(type: .sync)
             return
         }
         
         if hasExecutingSync {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
             return
         }
         
         if hasPrepairingSync {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             return
         }
 
         if hasWaitingForWiFiSync {
-            WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
+            CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
     }
 }

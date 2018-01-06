@@ -580,12 +580,12 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         /// IF WILL BE NEED TO SAVE FILE
         //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
-        WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: 1, completedOperations: 0)
+        CardsManager.default.startOperationWith(type: .upload, allOperations: 1, completedOperations: 0)
         let parentUUID = RouterVC().getParentUUID()
         let isPhotoAlbum = RouterVC().isRootViewControllerAlbumDetail()
         let isFavorites = RouterVC().isOnFavoritesView()
         UploadService.default.upload(imageData: data, parentUUID: parentUUID, isFaorites: isFavorites) { result in
-            WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
+            CardsManager.default.stopOperationWithType(type: .upload)
             switch result {
             case .success(let fhotoUploadResponce):
                 DispatchQueue.main.async {
