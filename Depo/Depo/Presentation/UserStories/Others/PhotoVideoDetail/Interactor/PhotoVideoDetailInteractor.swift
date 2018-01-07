@@ -19,6 +19,12 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     var photoVideoBottomBarConfig: EditingBarConfig!
     var documentsBottomBarConfig: EditingBarConfig!
     
+     var moreMenuConfig = [ElementTypes]()
+    
+    var setupedMoreMenuConfig: [ElementTypes] {
+        return moreMenuConfig
+    }
+    
     func onSelectItem(fileObject: Item, from items: [Item]) {
         array.removeAll()
         array.append(contentsOf: items)

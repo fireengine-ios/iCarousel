@@ -37,6 +37,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         configurator.configureModuleFromAlbumForViewInput(viewInput: viewController,
                                                           photoVideoBottomBarConfig: photoVideoBottomBarConfig,
                                                           documentsBottomBarConfig: documentsBottomBarConfig)
+        
         return viewController
     }
 

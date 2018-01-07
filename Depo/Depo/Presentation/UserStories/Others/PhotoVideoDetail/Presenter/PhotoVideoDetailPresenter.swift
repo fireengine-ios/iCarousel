@@ -36,6 +36,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             if let editIndex = actionTypes.index(of: .edit) {
                 actionTypes.remove(at: editIndex)
             }
+            if let printIndex = actionTypes.index(of: .print) {
+                actionTypes.remove(at: printIndex)
+            }
+            if allSelectedItemsTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
+                actionTypes.remove(at: infoIndex)
+            }
             barConfig = EditingBarConfig(elementsConfig: actionTypes,
                                          style: barConfig.style,
                                          tintColor: barConfig.tintColor)
@@ -77,7 +83,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
         switch currentItem.fileType {
         case .audio, .video, .image:
-            actions = ActionSheetPredetermendConfigs.photoVideoDetailActions
+            actions = interactor.setupedMoreMenuConfig//ActionSheetPredetermendConfigs.photoVideoDetailActions
         case .allDocs:
             actions = ActionSheetPredetermendConfigs.documetsDetailActions
         default:
