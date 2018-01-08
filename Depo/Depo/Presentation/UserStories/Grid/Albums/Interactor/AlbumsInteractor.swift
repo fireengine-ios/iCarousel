@@ -22,16 +22,22 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
     }
     
     override func getAllItems(sortBy: SortedRules) {
+        log.debug("AlbumsInteractor getAllItems")
+
         guard let remote =  remoteItems as? AlbumService else{
             return
         }
         remote.allAlbums(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, success: { [weak self]  albumbs in
             DispatchQueue.main.async {
+                log.debug("AlbumsInteractor getAllItems AlbumService allAlbums success")
+
                 var array = [[BaseDataSourceItem]]()
                 array.append(albumbs)
                 self?.output.getContentWithSuccess(array: array)
             }
         }, fail: { [weak self] in
+            log.debug("AlbumsInteractor getAllItems AlbumService allAlbums fail")
+
             DispatchQueue.main.async {
                 self?.output.asyncOperationFail(errorMessage: "fail")
             }
@@ -39,9 +45,13 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
     }
     
     func onAddPhotosToAlbum(selectedAlbumUUID: String){
+        log.debug("AlbumsInteractor onAddPhotosToAlbum")
+
         output.startAsyncOperation()
         let parameters = AddPhotosToAlbum(albumUUID: selectedAlbumUUID, photos: photos as! [Item])
         PhotosAlbumService().addPhotosToAlbum(parameters: parameters, success: { [weak self] in
+            log.debug("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum success")
+
             DispatchQueue.main.async {
                 print("success")
                 self?.output.asyncOperationSucces()
@@ -50,6 +60,8 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
                 }
             }
         }) { [weak self] (error) in
+            log.debug("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum error")
+
             DispatchQueue.main.async {
                 print("fail")
                 self?.output.asyncOperationFail(errorMessage: "fail")

@@ -507,7 +507,7 @@ struct TextConstants {
     static let waitingForWiFiPopUpSyncButton = NSLocalizedString("Sync with data plan", comment: "")
     static let prepareToAutoSunc = NSLocalizedString("Auto Sync Preparation", comment: "")
     static let waitForWiFiButtonTitle = NSLocalizedString("Wait for a Wi-Fi Connection", comment: "")
-    
+    static let photoUploadedMessage = NSLocalizedString("Photo uploaded", comment: "")
     
     //MARK: - ActionSheet
     static let actionSheetDeleteDeviceOriginal = NSLocalizedString("Delete Device Original", comment: "")
