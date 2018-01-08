@@ -36,7 +36,6 @@ class SplashInteractor: SplashInteractorInput {
     
     func failLogin(){
         DispatchQueue.main.async {
-            self.output.asyncOperationSucces()
             self.output.onFailLogin()
             if !ReachabilityService().isReachable {
                 self.output.onNetworkFail()
@@ -48,12 +47,10 @@ class SplashInteractor: SplashInteractorInput {
         let eulaService = EulaService()
         eulaService.eulaCheck(success: { [weak self] (successResponce) in
             DispatchQueue.main.async {
-                self?.output.asyncOperationSucces()
                 self?.output.onSuccessEULA()
             }
         }) { [weak self] (errorResponce) in
             DispatchQueue.main.async {
-                self?.output.asyncOperationSucces()
                 self?.output.onFailEULA()
             }
         }
