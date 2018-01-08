@@ -188,8 +188,20 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         }
         
         readyButton?.isEnabled = false
+        if email != emailTextField.text {
+            let message = String(format: TextConstants.registrationEmailPopupMessage, emailTextField.text ?? "")
+            let controller = PopUpController.with(title: TextConstants.registrationEmailPopupTitle,
+                                                  message: message,
+                                                  image: .error,
+                                                  buttonTitle: TextConstants.ok,
+                                                  action: { [weak self] vc in
+                                                    self?.output.tapReadyButton(name: self?.nameTextField.text ?? "", email: self?.emailTextField.text ?? "", number: self?.gsmNumberTextField.text ?? "")
+                                                    self?.readyButton?.isEnabled = true
+                                                    vc.dismiss(animated: true, completion: nil)
+            })
+            self.present(controller, animated: true, completion: nil)
+        }
         
-        output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
     }
     
     @IBAction func onHideKeyboardButton(){
