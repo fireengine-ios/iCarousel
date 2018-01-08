@@ -25,18 +25,19 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
 
     override func startSelection(with numberOfItems: Int) {
         configureNavBarActions(isSelecting: true)
+        selectedItemsCountChange(with: numberOfItems)
         underNavBarBar?.setSorting(enabled: false)
-        self.navigationItem.leftBarButtonItem = cancelSelectionButton!
+        navigationItem.leftBarButtonItem = cancelSelectionButton!
     }
     
     override func stopSelection() {
         configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
-        self.navigationItem.leftBarButtonItem = nil
+        navigationItem.leftBarButtonItem = nil
         if mainTitle != "" {
-            self.subTitle = output.getSortTypeString()
+            subTitle = output.getSortTypeString()
         }
-        self.setTitle(withString: mainTitle, andSubTitle: subTitle)
+        setTitle(withString: mainTitle, andSubTitle: subTitle)
     }
     
     override func viewDidAppear(_ animated: Bool) {
