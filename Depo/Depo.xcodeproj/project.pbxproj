@@ -261,6 +261,8 @@
 		7C6E2FA31F32FCD900536DB6 /* AudioSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2FA11F32FCD900536DB6 /* AudioSelectionCollectionViewCell.swift */; };
 		7C6E2FA41F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6E2FA21F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib */; };
 		7C6E2FA71F3304D700536DB6 /* AudioSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2FA61F3304D700536DB6 /* AudioSelectionDataSource.swift */; };
+		7C73CDF0200356B6000824AA /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
+		7C73CDF1200356B6000824AA /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		7C7ED4DB1F84C58200DC5D33 /* CircleButtonWithGrayCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7ED4DA1F84C58200DC5D33 /* CircleButtonWithGrayCorner.swift */; };
 		7C7ED4DD1F84C8C400DC5D33 /* CircleYellowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7ED4DC1F84C8C400DC5D33 /* CircleYellowButton.swift */; };
 		7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
@@ -279,10 +281,6 @@
 		7CC11AAB1FE1364D00AF022D /* PopUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAA1FE1364D00AF022D /* PopUpService.swift */; };
 		7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */; };
 		7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
-		7CC9A0D11FF6785100CF7936 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CC9A0CD1FF6785100CF7936 /* Localizable.strings */; };
-		7CC9A0D21FF6785100CF7936 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CC9A0CD1FF6785100CF7936 /* Localizable.strings */; };
-		7CC9A0D31FF6785100CF7936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CC9A0CF1FF6785100CF7936 /* InfoPlist.strings */; };
-		7CC9A0D41FF6785100CF7936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CC9A0CF1FF6785100CF7936 /* InfoPlist.strings */; };
 		7CCAC5311FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		7CCAC5331FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
 		7CD1F8CF1F0140900028F51A /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */; };
@@ -1329,15 +1327,10 @@
 		8C0E90061FDEBDFF00789C91 /* updater_strings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05A9381E1AF6AE9100AE2892 /* updater_strings.plist */; };
 		8C0E90071FDEBDFF00789C91 /* SettingHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4485021F0FC87A003AF631 /* SettingHeaderView.xib */; };
 		8C0E90081FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF87D5C1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib */; };
-		8C0E90091FDEBDFF00789C91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC791F10C40C003D1A75 /* InfoPlist.strings */; };
-		8C0E900A1FDEBDFF00789C91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC881F10C40C003D1A75 /* InfoPlist.strings */; };
-		8C0E900B1FDEBDFF00789C91 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC851F10C40C003D1A75 /* Localizable.strings */; };
 		8C0E900C1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C0E900D1FDEBDFF00789C91 /* TabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FE91EFD517300A405B2 /* TabBarView.xib */; };
 		8C0E900E1FDEBDFF00789C91 /* UploadedItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F8DE1F0272E20028F51A /* UploadedItemsViewController.xib */; };
-		8C0E900F1FDEBDFF00789C91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC8D1F10C40C003D1A75 /* InfoPlist.strings */; };
 		8C0E90101FDEBDFF00789C91 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C44850A1F1351A4003AF631 /* SplashViewController.xib */; };
-		8C0E90111FDEBDFF00789C91 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC7B1F10C40C003D1A75 /* Localizable.strings */; };
 		8C0E90121FDEBDFF00789C91 /* AutoSyncInformTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC8146A1EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.xib */; };
 		8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
 		8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FAC1EFD4F0D00A405B2 /* HomePage.xib */; };
@@ -1381,14 +1374,12 @@
 		8C0E903B1FDEBDFF00789C91 /* CollectionViewCellForAudio.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF6BDE01F0B97050066709E /* CollectionViewCellForAudio.xib */; };
 		8C0E903C1FDEBDFF00789C91 /* BaseFilesGreedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74321F04DDD300124DF5 /* BaseFilesGreedViewController.xib */; };
 		8C0E903D1FDEBDFF00789C91 /* CompleteProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F8D61F023AFD0028F51A /* CompleteProfileViewController.xib */; };
-		8C0E903E1FDEBDFF00789C91 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC801F10C40C003D1A75 /* Localizable.strings */; };
 		8C0E903F1FDEBDFF00789C91 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEAB301FADA5D20046555F /* AlbumCell.xib */; };
 		8C0E90401FDEBDFF00789C91 /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
 		8C0E90411FDEBDFF00789C91 /* GridListTopBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C5408401F61C0E000D4717A /* GridListTopBar.xib */; };
 		8C0E90421FDEBDFF00789C91 /* CollectionViewCellForPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74481F07927200124DF5 /* CollectionViewCellForPhoto.xib */; };
 		8C0E90431FDEBDFF00789C91 /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
 		8C0E90441FDEBDFF00789C91 /* BasicCollectionMultiFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */; };
-		8C0E90451FDEBDFF00789C91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC831F10C40C003D1A75 /* InfoPlist.strings */; };
 		8C0E90461FDEBDFF00789C91 /* FreeAppSpaceViewCotroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */; };
 		8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44FC1F6BB21C0062C2E0 /* ActivityTimelineFileCell.xib */; };
 		8C0E90481FDEBDFF00789C91 /* LikeFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F8DA1F024DCF0028F51A /* LikeFilterViewController.xib */; };
@@ -1403,9 +1394,7 @@
 		8C0E90511FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */; };
 		8C0E90521FDEBDFF00789C91 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F9101F0288DC0028F51A /* WelcomeViewController.xib */; };
 		8C0E90531FDEBDFF00789C91 /* ExpandStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F8DC1F0263360028F51A /* ExpandStorageViewController.xib */; };
-		8C0E90541FDEBDFF00789C91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC7E1F10C40C003D1A75 /* InfoPlist.strings */; };
 		8C0E90551FDEBDFF00789C91 /* CollectionViewStoryReorderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C5549FE1F6C11C300067F99 /* CollectionViewStoryReorderView.xib */; };
-		8C0E90561FDEBDFF00789C91 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC8A1F10C40C003D1A75 /* Localizable.strings */; };
 		8C0E90571FDEBDFF00789C91 /* WiFiSyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F8F01F0288CA0028F51A /* WiFiSyncViewController.xib */; };
 		8C0E90581FDEBDFF00789C91 /* PopUpSwipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */; };
 		8C0E90591FDEBDFF00789C91 /* UserInfoSubViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA01F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib */; };
@@ -1425,7 +1414,6 @@
 		8C0E90671FDEBDFF00789C91 /* InternetDataUsageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9B4EB1F78FD85002DAF81 /* InternetDataUsageCell.xib */; };
 		8C0E90681FDEBDFF00789C91 /* ActionsMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */; };
 		8C0E90691FDEBDFF00789C91 /* UsageInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47863EE1F3F18FA00EFDC6D /* UsageInfoViewController.xib */; };
-		8C0E906A1FDEBDFF00789C91 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC8F1F10C40C003D1A75 /* Localizable.strings */; };
 		8C0E906B1FDEBDFF00789C91 /* OTPViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C53580E1F9492DA00EABBAF /* OTPViewController~iphone.xib */; };
 		8C0E906C1FDEBDFF00789C91 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */; };
 		8C0E906D1FDEBDFF00789C91 /* ProgressPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressPopUp.xib */; };
@@ -2407,16 +2395,6 @@
 		CEDEAB321FADA5D20046555F /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEAB301FADA5D20046555F /* AlbumCell.xib */; };
 		CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
 		CEDFDF0F1FBEE616006BFCAE /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0E1FBEE616006BFCAE /* FirstResponder.swift */; };
-		CEDFEC911F10C40C003D1A75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC791F10C40C003D1A75 /* InfoPlist.strings */; };
-		CEDFEC921F10C40C003D1A75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC7B1F10C40C003D1A75 /* Localizable.strings */; };
-		CEDFEC931F10C40C003D1A75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC7E1F10C40C003D1A75 /* InfoPlist.strings */; };
-		CEDFEC941F10C40C003D1A75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC801F10C40C003D1A75 /* Localizable.strings */; };
-		CEDFEC951F10C40C003D1A75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC831F10C40C003D1A75 /* InfoPlist.strings */; };
-		CEDFEC961F10C40C003D1A75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC851F10C40C003D1A75 /* Localizable.strings */; };
-		CEDFEC971F10C40C003D1A75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC881F10C40C003D1A75 /* InfoPlist.strings */; };
-		CEDFEC981F10C40C003D1A75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC8A1F10C40C003D1A75 /* Localizable.strings */; };
-		CEDFEC991F10C40C003D1A75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC8D1F10C40C003D1A75 /* InfoPlist.strings */; };
-		CEDFEC9A1F10C40C003D1A75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDFEC8F1F10C40C003D1A75 /* Localizable.strings */; };
 		CEDFECA51F10C77E003D1A75 /* BasePresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFEC9E1F10C77E003D1A75 /* BasePresentor.swift */; };
 		CEDFECA61F10C77E003D1A75 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
 		CEDFECA71F10C77E003D1A75 /* UINavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA21F10C77E003D1A75 /* UINavigationBarExtension.swift */; };
@@ -2936,6 +2914,8 @@
 		7C6E2FA11F32FCD900536DB6 /* AudioSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C6E2FA21F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		7C6E2FA61F3304D700536DB6 /* AudioSelectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSelectionDataSource.swift; sourceTree = "<group>"; };
+		7C73CDF2200356B6000824AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
+		7C73CDF4200356B9000824AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		7C7ED4DA1F84C58200DC5D33 /* CircleButtonWithGrayCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonWithGrayCorner.swift; sourceTree = "<group>"; };
 		7C7ED4DC1F84C8C400DC5D33 /* CircleYellowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleYellowButton.swift; sourceTree = "<group>"; };
 		7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -2978,8 +2958,6 @@
 		7CC8146A1EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncInformTableViewCell.xib; sourceTree = "<group>"; };
 		7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSwitcherTableViewCell.swift; sourceTree = "<group>"; };
 		7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSwitcherTableViewCell.xib; sourceTree = "<group>"; };
-		7CC9A0CE1FF6785100CF7936 /* base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = base; path = base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7CC9A0D01FF6785100CF7936 /* base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = base; path = base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaItemsObjectSyncStatus+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaItemsObjectSyncStatus+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewController.swift; sourceTree = "<group>"; };
@@ -4218,16 +4196,6 @@
 		CEDEAB301FADA5D20046555F /* AlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
 		CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topController.swift"; sourceTree = "<group>"; };
 		CEDFDF0E1FBEE616006BFCAE /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
-		CEDFEC7A1F10C40C003D1A75 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CEDFEC7C1F10C40C003D1A75 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CEDFEC7F1F10C40C003D1A75 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CEDFEC811F10C40C003D1A75 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CEDFEC841F10C40C003D1A75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CEDFEC861F10C40C003D1A75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CEDFEC891F10C40C003D1A75 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CEDFEC8B1F10C40C003D1A75 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CEDFEC8E1F10C40C003D1A75 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CEDFEC901F10C40C003D1A75 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEDFEC9E1F10C77E003D1A75 /* BasePresentor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePresentor.swift; sourceTree = "<group>"; };
 		CEDFECA01F10C77E003D1A75 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		CEDFECA21F10C77E003D1A75 /* UINavigationBarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtension.swift; sourceTree = "<group>"; };
@@ -6365,15 +6333,6 @@
 				7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */,
 			);
 			path = SubViews;
-			sourceTree = "<group>";
-		};
-		7CC9A0CC1FF6785100CF7936 /* base.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				7CC9A0CD1FF6785100CF7936 /* Localizable.strings */,
-				7CC9A0CF1FF6785100CF7936 /* InfoPlist.strings */,
-			);
-			path = base.lproj;
 			sourceTree = "<group>";
 		};
 		7CD1F8D01F014EF90028F51A /* CustomSwitch */ = {
@@ -9348,15 +9307,10 @@
 		CEBBDDD91F01E4CF00CDF527 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7CC9A0CC1FF6785100CF7936 /* base.lproj */,
 				CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */,
-				CEDFEC781F10C40C003D1A75 /* ar.lproj */,
-				CEDFEC7D1F10C40C003D1A75 /* de.lproj */,
-				CEDFEC821F10C40C003D1A75 /* en.lproj */,
-				CEDFEC871F10C40C003D1A75 /* tr.lproj */,
-				CEDFEC8C1F10C40C003D1A75 /* uk.lproj */,
 				CEBBDDDA1F01E4CF00CDF527 /* Fonts */,
 				8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */,
+				7C73CDF3200356B6000824AA /* OurLocalizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -9515,51 +9469,6 @@
 				CEDEAB301FADA5D20046555F /* AlbumCell.xib */,
 			);
 			path = AlbumCell;
-			sourceTree = "<group>";
-		};
-		CEDFEC781F10C40C003D1A75 /* ar.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				CEDFEC791F10C40C003D1A75 /* InfoPlist.strings */,
-				CEDFEC7B1F10C40C003D1A75 /* Localizable.strings */,
-			);
-			path = ar.lproj;
-			sourceTree = "<group>";
-		};
-		CEDFEC7D1F10C40C003D1A75 /* de.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				CEDFEC7E1F10C40C003D1A75 /* InfoPlist.strings */,
-				CEDFEC801F10C40C003D1A75 /* Localizable.strings */,
-			);
-			path = de.lproj;
-			sourceTree = "<group>";
-		};
-		CEDFEC821F10C40C003D1A75 /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				CEDFEC831F10C40C003D1A75 /* InfoPlist.strings */,
-				CEDFEC851F10C40C003D1A75 /* Localizable.strings */,
-			);
-			path = en.lproj;
-			sourceTree = "<group>";
-		};
-		CEDFEC871F10C40C003D1A75 /* tr.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				CEDFEC881F10C40C003D1A75 /* InfoPlist.strings */,
-				CEDFEC8A1F10C40C003D1A75 /* Localizable.strings */,
-			);
-			path = tr.lproj;
-			sourceTree = "<group>";
-		};
-		CEDFEC8C1F10C40C003D1A75 /* uk.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				CEDFEC8D1F10C40C003D1A75 /* InfoPlist.strings */,
-				CEDFEC8F1F10C40C003D1A75 /* Localizable.strings */,
-			);
-			path = uk.lproj;
 			sourceTree = "<group>";
 		};
 		CEDFEC9D1F10C77E003D1A75 /* BasePresentor */ = {
@@ -10262,7 +10171,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */,
-				7CC9A0D41FF6785100CF7936 /* InfoPlist.strings in Resources */,
 				8C0E8FFE1FDEBDFF00789C91 /* LoginViewController.xib in Resources */,
 				8C0E8FFF1FDEBDFF00789C91 /* OptInController.xib in Resources */,
 				8C0E90001FDEBDFF00789C91 /* SubPlusButtons.xib in Resources */,
@@ -10274,15 +10182,10 @@
 				8C0E90061FDEBDFF00789C91 /* updater_strings.plist in Resources */,
 				8C0E90071FDEBDFF00789C91 /* SettingHeaderView.xib in Resources */,
 				8C0E90081FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
-				8C0E90091FDEBDFF00789C91 /* InfoPlist.strings in Resources */,
-				8C0E900A1FDEBDFF00789C91 /* InfoPlist.strings in Resources */,
-				8C0E900B1FDEBDFF00789C91 /* Localizable.strings in Resources */,
 				8C0E900C1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.xib in Resources */,
 				8C0E900D1FDEBDFF00789C91 /* TabBarView.xib in Resources */,
 				8C0E900E1FDEBDFF00789C91 /* UploadedItemsViewController.xib in Resources */,
-				8C0E900F1FDEBDFF00789C91 /* InfoPlist.strings in Resources */,
 				8C0E90101FDEBDFF00789C91 /* SplashViewController.xib in Resources */,
-				8C0E90111FDEBDFF00789C91 /* Localizable.strings in Resources */,
 				8C0E90121FDEBDFF00789C91 /* AutoSyncInformTableViewCell.xib in Resources */,
 				8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */,
 				8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */,
@@ -10326,7 +10229,6 @@
 				8C0E903B1FDEBDFF00789C91 /* CollectionViewCellForAudio.xib in Resources */,
 				8C0E903C1FDEBDFF00789C91 /* BaseFilesGreedViewController.xib in Resources */,
 				8C0E903D1FDEBDFF00789C91 /* CompleteProfileViewController.xib in Resources */,
-				8C0E903E1FDEBDFF00789C91 /* Localizable.strings in Resources */,
 				8C0E903F1FDEBDFF00789C91 /* AlbumCell.xib in Resources */,
 				8C0E90401FDEBDFF00789C91 /* TurkcellSaturaMedIta.ttf in Resources */,
 				8C0E90411FDEBDFF00789C91 /* GridListTopBar.xib in Resources */,
@@ -10334,8 +10236,6 @@
 				8C0E90431FDEBDFF00789C91 /* TurkcellSaturaDemIta.ttf in Resources */,
 				8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */,
 				8C0E90441FDEBDFF00789C91 /* BasicCollectionMultiFileCell.xib in Resources */,
-				8C0E90451FDEBDFF00789C91 /* InfoPlist.strings in Resources */,
-				7CC9A0D21FF6785100CF7936 /* Localizable.strings in Resources */,
 				8C0E90461FDEBDFF00789C91 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				8C8711721FDFF47800F66396 /* DarkPopUpController.xib in Resources */,
 				8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */,
@@ -10351,9 +10251,8 @@
 				8C0E90511FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.xib in Resources */,
 				8C0E90521FDEBDFF00789C91 /* WelcomeViewController.xib in Resources */,
 				8C0E90531FDEBDFF00789C91 /* ExpandStorageViewController.xib in Resources */,
-				8C0E90541FDEBDFF00789C91 /* InfoPlist.strings in Resources */,
 				8C0E90551FDEBDFF00789C91 /* CollectionViewStoryReorderView.xib in Resources */,
-				8C0E90561FDEBDFF00789C91 /* Localizable.strings in Resources */,
+				7C73CDF1200356B6000824AA /* OurLocalizable.strings in Resources */,
 				8CD2B3B51FE7B42E00280547 /* AutoUploadIsOffPopUp.xib in Resources */,
 				8C0E90571FDEBDFF00789C91 /* WiFiSyncViewController.xib in Resources */,
 				8C0E90581FDEBDFF00789C91 /* PopUpSwipeCell.xib in Resources */,
@@ -10375,7 +10274,6 @@
 				8C0E90671FDEBDFF00789C91 /* InternetDataUsageCell.xib in Resources */,
 				8C0E90681FDEBDFF00789C91 /* ActionsMenuView.xib in Resources */,
 				8C0E90691FDEBDFF00789C91 /* UsageInfoViewController.xib in Resources */,
-				8C0E906A1FDEBDFF00789C91 /* Localizable.strings in Resources */,
 				8C0E906B1FDEBDFF00789C91 /* OTPViewController~iphone.xib in Resources */,
 				8C0E906C1FDEBDFF00789C91 /* UserProfileViewController.xib in Resources */,
 				8C0E906D1FDEBDFF00789C91 /* ProgressPopUp.xib in Resources */,
@@ -10430,9 +10328,7 @@
 				CE16C30D1FF234BA00BE5906 /* paylas_mail@3x.png in Resources */,
 				CE16C3381FF234BA00BE5906 /* close_icon@2x.png in Resources */,
 				8CF87D5D1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
-				CEDFEC911F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				CE16C3931FF234BA00BE5906 /* t_orta_selected@2x.png in Resources */,
-				CEDFEC971F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				CE16C3291FF234BA00BE5906 /* error_icon@2x.png in Resources */,
 				CE16C41D1FF234BB00BE5906 /* extraOptions_selected@2x.png in Resources */,
 				CE16C4361FF234BB00BE5906 /* italic_secili@2x.png in Resources */,
@@ -10440,7 +10336,6 @@
 				CE16C3781FF234BA00BE5906 /* kare_selected@2x.png in Resources */,
 				CE16C2F31FF234BA00BE5906 /* duz_cizgi_selected@3x.png in Resources */,
 				CE16C43A1FF234BB00BE5906 /* daire.png in Resources */,
-				CEDFEC961F10C40C003D1A75 /* Localizable.strings in Resources */,
 				CE16C3141FF234BA00BE5906 /* frekans@2x.png in Resources */,
 				CE16C3B31FF234BA00BE5906 /* rotate@2x.png in Resources */,
 				CE16C3121FF234BA00BE5906 /* edit@3x.png in Resources */,
@@ -10473,7 +10368,6 @@
 				CE16C16F1FF234A300BE5906 /* CRYShareImageViewController.nib in Resources */,
 				CE16C3071FF234BA00BE5906 /* paylas_linkedin@2x.png in Resources */,
 				CE16C1691FF234A300BE5906 /* CRYFrameCell.nib in Resources */,
-				CEDFEC991F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				CE16C15F1FF234A300BE5906 /* sticker_resize@3x.png in Resources */,
 				CE16C3BD1FF234BA00BE5906 /* turuncu@2x.png in Resources */,
 				CE16C4591FF234BB00BE5906 /* cizgi_2@3x.png in Resources */,
@@ -10482,7 +10376,6 @@
 				CE16C3661FF234BA00BE5906 /* cizgi_3_selected@2x.png in Resources */,
 				CE16C35B1FF234BA00BE5906 /* rotate@3x.png in Resources */,
 				7C44850B1F1351A4003AF631 /* SplashViewController.xib in Resources */,
-				CEDFEC921F10C40C003D1A75 /* Localizable.strings in Resources */,
 				CE51ADF61EF90853005DCEE0 /* AutoSyncInformTableViewCell.xib in Resources */,
 				CE16C3311FF234BA00BE5906 /* checkbox@2x.png in Resources */,
 				CE16C3651FF234BA00BE5906 /* cizgi_2_selected.png in Resources */,
@@ -10583,7 +10476,6 @@
 				CE16C3D61FF234BA00BE5906 /* checkbox_secili@3x.png in Resources */,
 				CE16C3841FF234BA00BE5906 /* cizgi_3@2x.png in Resources */,
 				CE16C39B1FF234BA00BE5906 /* duz_siyah.png in Resources */,
-				7CC9A0D11FF6785100CF7936 /* Localizable.strings in Resources */,
 				CE16C44F1FF234BB00BE5906 /* share_icon@3x.png in Resources */,
 				CEBBDE0C1F01E69B00CDF527 /* TurkcellSaturaMed.ttf in Resources */,
 				CE16C4251FF234BB00BE5906 /* kirmizi@3x.png in Resources */,
@@ -10644,7 +10536,6 @@
 				CE16C1671FF234A300BE5906 /* CRYColorCell.nib in Resources */,
 				CE16C3711FF234BA00BE5906 /* rotate.png in Resources */,
 				CE16C4081FF234BB00BE5906 /* vintage@3x.png in Resources */,
-				CEDFEC941F10C40C003D1A75 /* Localizable.strings in Resources */,
 				CE16C3A81FF234BA00BE5906 /* crop@3x.png in Resources */,
 				CE16C38F1FF234BA00BE5906 /* cizgi_3_selected.png in Resources */,
 				CE16C31F1FF234BA00BE5906 /* caps2@2x.png in Resources */,
@@ -10683,7 +10574,6 @@
 				CE16C33A1FF234BA00BE5906 /* paylas_kaydet@3x.png in Resources */,
 				CE16C3DD1FF234BA00BE5906 /* sample_green.png in Resources */,
 				7C3B186F1FE0153E00FF3C39 /* PrepareToAutoSync.xib in Resources */,
-				CEDFEC951F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				CE16C2F01FF234BA00BE5906 /* polaroid_yeni@2x.png in Resources */,
 				CE16C32F1FF234BA00BE5906 /* paylas_mail@2x.png in Resources */,
 				CE16C1731FF234A300BE5906 /* lookup_miss_etikate.png in Resources */,
@@ -10703,7 +10593,6 @@
 				CE8F44FE1F6BB21C0062C2E0 /* ActivityTimelineFileCell.xib in Resources */,
 				CE16C30A1FF234BA00BE5906 /* checkbox@3x.png in Resources */,
 				7CD1F8DB1F024DCF0028F51A /* LikeFilterViewController.xib in Resources */,
-				7CC9A0D31FF6785100CF7936 /* InfoPlist.strings in Resources */,
 				8C6EF8911F348B77002AC795 /* EditinglBar.xib in Resources */,
 				CE16C3051FF234BA00BE5906 /* bold.png in Resources */,
 				CE16C44E1FF234BB00BE5906 /* paylas_akilli_depo@2x.png in Resources */,
@@ -10751,7 +10640,6 @@
 				CE16C3001FF234BA00BE5906 /* yesil@2x.png in Resources */,
 				7CD1F8DD1F0263360028F51A /* ExpandStorageViewController.xib in Resources */,
 				CE16C3C41FF234BA00BE5906 /* polaroid_yeni.png in Resources */,
-				CEDFEC931F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				CE16C3E71FF234BA00BE5906 /* undo@2x.png in Resources */,
 				CE16C4061FF234BB00BE5906 /* right@3x.png in Resources */,
 				7C554A001F6C11C300067F99 /* CollectionViewStoryReorderView.xib in Resources */,
@@ -10759,7 +10647,6 @@
 				CE16C3391FF234BA00BE5906 /* paylas_fb@3x.png in Resources */,
 				CE16C1601FF234A300BE5906 /* lookup.png in Resources */,
 				CE16C2FF1FF234BA00BE5906 /* target_secili@3x.png in Resources */,
-				CEDFEC981F10C40C003D1A75 /* Localizable.strings in Resources */,
 				7CD1F8FD1F0288CA0028F51A /* WiFiSyncViewController.xib in Resources */,
 				CE16C3D51FF234BA00BE5906 /* kontrast_secili.png in Resources */,
 				CE16C40C1FF234BB00BE5906 /* ok_selected.png in Resources */,
@@ -10838,6 +10725,7 @@
 				CE16C35A1FF234BA00BE5906 /* t_buyuk.png in Resources */,
 				CEE9B4ED1F78FD85002DAF81 /* InternetDataUsageCell.xib in Resources */,
 				CE16C3AD1FF234BA00BE5906 /* toolbar_ciz_icon.png in Resources */,
+				7C73CDF0200356B6000824AA /* OurLocalizable.strings in Resources */,
 				CE16C2EC1FF234BA00BE5906 /* paylas_kaydet.png in Resources */,
 				CE16C2F71FF234BA00BE5906 /* parlaklik@2x.png in Resources */,
 				CE16C3481FF234BA00BE5906 /* kare_selected.png in Resources */,
@@ -10865,7 +10753,6 @@
 				CE16C35C1FF234BA00BE5906 /* bottomright@3x.png in Resources */,
 				CE16C3E61FF234BA00BE5906 /* toolbar_crop_icon@2x.png in Resources */,
 				CE16C4101FF234BB00BE5906 /* back_icon.png in Resources */,
-				CEDFEC9A1F10C40C003D1A75 /* Localizable.strings in Resources */,
 				CE16C4271FF234BB00BE5906 /* akilli_depo_beyaz@3x.png in Resources */,
 				7C5358101F9492DA00EABBAF /* OTPViewController~iphone.xib in Resources */,
 				7CDABD0F1F1E3A6300C8CC16 /* UserProfileViewController.xib in Resources */,
@@ -13018,20 +12905,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7CC9A0CD1FF6785100CF7936 /* Localizable.strings */ = {
+		7C73CDF3200356B6000824AA /* OurLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7CC9A0CE1FF6785100CF7936 /* base */,
+				7C73CDF2200356B6000824AA /* en */,
+				7C73CDF4200356B9000824AA /* Base */,
 			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		7CC9A0CF1FF6785100CF7936 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7CC9A0D01FF6785100CF7936 /* base */,
-			);
-			name = InfoPlist.strings;
+			name = OurLocalizable.strings;
 			sourceTree = "<group>";
 		};
 		CE16C04B1FF234A300BE5906 /* TOCropViewControllerLocalizable.strings */ = {
@@ -13068,96 +12948,6 @@
 				CE16C06A1FF234A300BE5906 /* tr */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		CEDFEC791F10C40C003D1A75 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDFEC7A1F10C40C003D1A75 /* ar */,
-			);
-			name = InfoPlist.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-		CEDFEC7B1F10C40C003D1A75 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDFEC7C1F10C40C003D1A75 /* ar */,
-			);
-			name = Localizable.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-		CEDFEC7E1F10C40C003D1A75 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDFEC7F1F10C40C003D1A75 /* de */,
-			);
-			name = InfoPlist.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-		CEDFEC801F10C40C003D1A75 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDFEC811F10C40C003D1A75 /* de */,
-			);
-			name = Localizable.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-		CEDFEC831F10C40C003D1A75 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDFEC841F10C40C003D1A75 /* en */,
-			);
-			name = InfoPlist.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-		CEDFEC851F10C40C003D1A75 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDFEC861F10C40C003D1A75 /* en */,
-			);
-			name = Localizable.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-		CEDFEC881F10C40C003D1A75 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDFEC891F10C40C003D1A75 /* tr */,
-			);
-			name = InfoPlist.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-		CEDFEC8A1F10C40C003D1A75 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDFEC8B1F10C40C003D1A75 /* tr */,
-			);
-			name = Localizable.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-		CEDFEC8D1F10C40C003D1A75 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDFEC8E1F10C40C003D1A75 /* uk */,
-			);
-			name = InfoPlist.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-		CEDFEC8F1F10C40C003D1A75 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDFEC901F10C40C003D1A75 /* uk */,
-			);
-			name = Localizable.strings;
-			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -145,11 +145,12 @@ class GridListTopBar: UIViewController {
 }
 
 extension GridListTopBar: GridListTopBarSortingTableViewDelegate {
-    func didSelectItem(atIndex index: IndexPath) {
+    func gridListTopBarSortingTableView(_ gridListTopBarSortingTableView: GridListTopBarSortingTableView, didSelectItemAtIndex index: IndexPath) {
         guard let unwrapedConfig = currentConfig, index.row < unwrapedConfig.availableSortTypes.count else {
             return
         }
         selectedIndex = index.row
         delegate?.sortingRuleChanged(rule: unwrapedConfig.availableSortTypes[index.row])
+        gridListTopBarSortingTableView.dismiss(animated: true, completion: nil)
     }
 }

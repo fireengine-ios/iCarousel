@@ -389,9 +389,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func createStory(items: [BaseDataSourceItem]) {
         let router = RouterVC()
-        sync(items: items, action: {
+        let images = items.filter({ $0.fileType == .image })
+        sync(items: images, action: {
             DispatchQueue.main.async {
-                router.createStoryName(items: items)
+                router.createStoryName(items: images)
             }
         }, cancel: {})
     }
@@ -490,6 +491,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem]) {
         download(item: items)
+    }
+    
+    func deleteDeviceOriginal(items: [BaseDataSourceItem]) {
+        guard let wrapedItems = items as? [WrapData] else {
+            return
+        }
+        fileService.deleteLocalFiles(deleteFiles: wrapedItems, success: succesAction(elementType: .deleteDeviceOriginal), fail: failAction(elementType: .deleteDeviceOriginal))
     }
     
     func succesAction(elementType: ElementTypes) -> FileOperation {

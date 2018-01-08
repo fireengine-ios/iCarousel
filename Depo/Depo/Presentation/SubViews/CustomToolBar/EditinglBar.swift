@@ -12,6 +12,7 @@ enum ElementTypes {
     case info//one for alert one for tab
     case edit
     case delete
+    case deleteDeviceOriginal
     case move
     case sync
     case download
