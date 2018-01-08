@@ -16,18 +16,24 @@ protocol AccountServicePrl {
 class AccountService: BaseRequestService, AccountServicePrl {
     
     func info(success: SuccessResponse?, fail:@escaping FailResponse) {
+        log.debug("AccountService info")
+        
         let param = AccontInfo()
         let handler = BaseResponseHandler<AccountInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func quotaInfo(success: SuccessResponse?, fail:@escaping FailResponse) {
+        log.debug("AccountService quotaInfo")
+
         let param = QuotaInfo()
         let handler = BaseResponseHandler<QuotaInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func usage(success: SuccessResponse?, fail: @escaping FailResponse) {
+        log.debug("AccountService usage")
+
         let param = UsageParameters()
         let handler = BaseResponseHandler<UsageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
@@ -38,11 +44,15 @@ class AccountService: BaseRequestService, AccountServicePrl {
     }
     
     func language(success: SuccessResponse?, fail:@escaping FailResponse) {
+        log.debug("AccountService language")
+
         let param = LanguageList()
         let handler = BaseResponseHandler<LanguageListResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     func updateLanguage(success: SuccessResponse?, fail:@escaping FailResponse) {
+        log.debug("AccountService updateLanguage")
+
         let param = LanguageListChange()
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: param, handler: handler)
@@ -52,11 +62,15 @@ class AccountService: BaseRequestService, AccountServicePrl {
     // MARK: Profile photo
     
     func setProfilePhoto(param: UserPhoto, success: SuccessResponse?, fail:@escaping FailResponse) {
+        log.debug("AccountService setProfilePhoto")
+
         let handler = BaseResponseHandler<UserPhotoResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePutRequest(param: param, handler: handler)
     }
     
     func deleteProfilePhoto(success: SuccessResponse?, fail:@escaping FailResponse) {
+        log.debug("AccountService deleteProfilePhoto")
+
         let param = UserPhoto()
         let handler = BaseResponseHandler<UserPhotoResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeDeleteRequest(param: param, handler: handler)
@@ -65,21 +79,29 @@ class AccountService: BaseRequestService, AccountServicePrl {
     //MARK: - User Profile
 
     func updateUserProfile(parameters: UserNameParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
+        log.debug("AccountService updateUserProfile")
+
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
     }
     
     func updateUserEmail(parameters: UserEmailParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
+        log.debug("AccountService updateUserEmail")
+
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
     }
     
     func updateUserPhone(parameters: UserPhoneNumberParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
+        log.debug("AccountService updateUserPhone")
+
         let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
     }
     
     func verifyPhoneNumber(parameters: VerifyPhoneNumberParameter, success: SuccessResponse?, fail: @escaping FailResponse) {
+        log.debug("AccountService verifyPhoneNumber")
+
         let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
     }
@@ -87,6 +109,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
     //MARK: - User Security
     
     func securitySettingsInfo(success: SuccessResponse?, fail: @escaping FailResponse) {
+        log.debug("AccountService securitySettingsInfo")
+
         let parametres = SecuritySettingsInfoParametres()
         let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
         executeGetRequest(param: parametres, handler: handler)
@@ -94,6 +118,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
     
     func securitySettingsChange(turkcellPasswordAuthEnabled: Bool? = nil, mobileNetworkAuthEnabled: Bool? = nil,
                                 success: SuccessResponse?, fail: FailResponse?) {
+        log.debug("AccountService securitySettingsChange")
         
         let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled ?? false,
                                                               mobileNetworkAuth: mobileNetworkAuthEnabled ?? false)

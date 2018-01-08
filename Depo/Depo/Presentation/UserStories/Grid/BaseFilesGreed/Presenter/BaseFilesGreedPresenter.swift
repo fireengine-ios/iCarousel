@@ -53,6 +53,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func viewIsReady(collectionView: UICollectionView) {
+        log.debug("BaseFilesGreedPresenter viewIsReady")
+
         interactor.viewIsReady()
         if let unwrapedFilters = interactor.originalFilesTypeFilter {
             filters = unwrapedFilters
@@ -61,6 +63,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                        filters: interactor.originalFilesTypeFilter)
        
         dataSource.delegate = self
+        dataSource.needShowProgressInCell = needShowProgressInCells
         
         if let displayingType = topBarConfig {
             type = displayingType.defaultGridListViewtype
@@ -80,28 +83,29 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func subscribeDataSource(){
-        if needShowProgressInCells{
-            UploadNotificationManager.default.startUpdateView(view: dataSource)
-        }
+        ItemOperationManager.default.startUpdateView(view: dataSource)
     }
     
     deinit {
-        if needShowProgressInCells{
-            UploadNotificationManager.default.stopUpdateView(view: dataSource)
-        }
+        ItemOperationManager.default.stopUpdateView(view: dataSource)
     }
     
     func searchByText(searchText: String) {
+        log.debug("BaseFilesGreedPresenter searchByText")
+
         uploadData(searchText)
     }
     
     func onReloadData(){
+        log.debug("BaseFilesGreedPresenter onReloadData")
         
 //        dataSource.dropData()
         reloadData()
     }
     
     func onStartCreatingPhotoAndVideos(){
+        log.debug("BaseFilesGreedPresenter onStartCreatingPhotoAndVideos")
+
         getContent()
     }
     
@@ -124,6 +128,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
+        log.debug("BaseFilesGreedPresenter compoundAllFiltersAndNextItems")
+
 //        startAsyncOperation()
         interactor.nextItems(searchText,
                              sortBy: sortedRule.sortingRules,
@@ -131,6 +137,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
 
     func reloadData() {
+        log.debug("BaseFilesGreedPresenter reloadData")
+
         dataSource.dropData()
         dataSource.currentSortType = sortedRule
         dataSource.reloadData()
@@ -142,6 +150,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func uploadData(_ searchText: String? = nil){
+        log.debug("BaseFilesGreedPresenter uploadData")
+
         startAsyncOperation()
         compoundAllFiltersAndNextItems(searchText: searchText)
     }
@@ -155,6 +165,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view?.stopRefresher()
         dataSource.isPaginationDidEnd = false
         debugPrint("???getContentWithFail()")
+        log.debug("BaseFilesGreedPresenter getContentWithFail")
         asyncOperationFail(errorMessage: errorString)
     }
     
@@ -163,6 +174,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
 
     func getContentWithSuccessEnd() {
+        log.debug("BaseFilesGreedPresenter getContentWithSuccessEnd")
         debugPrint("???getContentWithSuccessEnd()")
         asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
@@ -173,6 +185,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getContentWithSuccess(items: [WrapData]){
+        log.debug("BaseFilesGreedPresenter getContentWithSuccess")
+
         if (view == nil){
             return
         }
@@ -189,6 +203,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
+        log.debug("BaseFilesGreedPresenter getContentWithSuccess")
+
         if (view == nil) {
             return
         }
@@ -213,6 +229,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func showCustomPopUpWithInformationAboutAccessToMediaLibrary(){
+        log.debug("BaseFilesGreedPresenter showCustomPopUpWithInformationAboutAccessToMediaLibrary")
+
         view.showCustomPopUpWithInformationAboutAccessToMediaLibrary()
     }
     
@@ -238,6 +256,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     //MARK: BaseGridDataSourceForCollectionView
     
     func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
+        log.debug("BaseFilesGreedPresenter onItemSelected")
+
         if item.fileType.isUnSupportedOpenType {
 //            if interactor.remoteItems is MusicService {
 //                guard let array = data as? [[Item]],
@@ -276,6 +296,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onLongPressInCell() {
         startEditing()
+    }
+    
+    func needReloadData(){
+        reloadData()
     }
     
     
@@ -318,10 +342,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
+        log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount")
+
         if (selectedItemsCount == 0){
+            log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
+
             bottomBarPresenter?.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         }else{
+            log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
+
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
         
@@ -344,6 +374,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         guard let item = ofItem else {
             return
         }
+        log.debug("BaseFilesGreedPresenter onMoreActions")
+
         alertSheetModule?.showSpecifiedAlertSheet(with: item,
                                                   presentedBy: sender,
                                                   onSourceView: nil,
@@ -357,11 +389,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     //MARK: - MoreActionsViewDelegate
     
     func viewAppearanceChanged(asGrid: Bool){
+        log.debug("BaseFilesGreedPresenter viewAppearanceChanged")
+
         if (asGrid){
+            log.debug("BaseFilesGreedPresenter viewAppearanceChanged Grid")
+
             dataSource.updateDisplayngType(type: .greed)
             type = .List
             moduleOutput?.reloadType(type, sortedType: sortedType)
         }else{
+            log.debug("BaseFilesGreedPresenter viewAppearanceChanged List")
+
             dataSource.updateDisplayngType(type: .list)
             type = .Grid
             moduleOutput?.reloadType(type, sortedType: sortedType)
@@ -369,6 +407,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func sortedPushed(with rule: SortedRules) {
+        log.debug("BaseFilesGreedPresenter sortedPushed")
+
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
         dataSource.currentSortType = rule
@@ -377,10 +417,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func selectPressed(type: MoreActionsConfig.SelectedType) {
+        log.debug("BaseFilesGreedPresenter selectPressed")
+
         if (type == .Selected) {
+            log.debug("BaseFilesGreedPresenter selectPressed type == selected")
+
             dataSource.selectAll(isTrue: true)
             startEditing()
         } else {
+            log.debug("BaseFilesGreedPresenter selectPressed type != selected")
+
             dataSource.selectAll(isTrue: false)
             stopEditing()
         }
@@ -479,24 +525,28 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func operationFinished(withType type: ElementTypes, response: Any?) {
+        log.debug("BaseFilesGreedPresenter operationFinished")
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
-        onChangeSelectedItemsCount(selectedItemsCount: 0)
     }
     
     func operationFailed(withType type: ElementTypes) {
+        log.debug("BaseFilesGreedPresenter operationFailed")
         debugPrint("failed")
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
-        onChangeSelectedItemsCount(selectedItemsCount: 0)
     }
     
     func selectModeSelected() {
+        log.debug("BaseFilesGreedPresenter selectModeSelected")
+
         startEditing()
     }
     
     func printSelected() {
+        log.debug("BaseFilesGreedPresenter printSelected")
+
         let syncPhotos = selectedItems.filter{ !$0.isLocalItem && $0.fileType == .image }
         if !syncPhotos.isEmpty {
             router.showPrint(items: syncPhotos)
@@ -504,6 +554,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func selectAllModeSelected() {
+        log.debug("BaseFilesGreedPresenter selectAllModeSelected")
+
         view.startSelection(with: dataSource.selectedItemsArray.count)
         dataSource.selectAll(isTrue: true)
     }
@@ -531,6 +583,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     //MARK: - BaseFilesGreedModuleOutput
     
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType) {
+        log.debug("BaseFilesGreedPresenter reloadType")
+
         self.type = type
         self.sortedType = sortedType
         sortedRule = sortedType.sortedRulesConveted

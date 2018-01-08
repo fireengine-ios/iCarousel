@@ -105,7 +105,7 @@ class SettingsInteractor: SettingsInteractorInput {
                 ApplicationSession.sharedSession.saveData()
                 CoreDataStack.default.clearDataBase()
                 FreeAppSpace.default.clear()
-                WrapItemOperatonManager.default.stopAllOperations()
+                CardsManager.default.stopAllOperations()
                 self?.output.goToOnboarding()
             }
         }

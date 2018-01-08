@@ -61,6 +61,8 @@ class AppConfigurator {
     }
     
     class private func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        log.debug("AppConfigurator startMenloworks")
+        
         let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.sound, UIUserNotificationType.badge]
         let notificationTypes = NSInteger(types.rawValue)
         

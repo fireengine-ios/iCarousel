@@ -37,4 +37,18 @@ class BottomSelectionMusicTabBarRouter: BottomSelectionTabBarRouter {
         topVC?.present(activityVC, animated:  true)
     }
     
+    override func showDeleteMusic(_ completion: @escaping (() -> Void)) {
+        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                              message: TextConstants.deleteAlbums,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: completion)
+        })
+        
+        let topVC = UIApplication.topController()
+        topVC?.navigationController?.present(controller, animated: true)
+    }
+    
 }

@@ -58,13 +58,17 @@ class Upload: UploadRequestParametrs {
         return item.md5
     }
     
-    var urlToLocalFile: URL {
-        return tmpLocation
-    }
-    
-    lazy var tmpLocation: URL = {
-        return LocalMediaStorage.default.copyAssetToDocument(asset: self.item.asset!)
+    lazy var urlToLocalFile: URL? = {
+        if let asset = self.item.asset {
+            return LocalMediaStorage.default.copyAssetToDocument(asset: asset)
+        }
+        
+        return nil
     }()
+
+    var fileData: Data? {
+        return item.fileData
+    }
     
     let tmpUUId: String
     

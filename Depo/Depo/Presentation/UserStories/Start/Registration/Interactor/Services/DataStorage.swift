@@ -16,10 +16,10 @@ class DataStorage {
     var userRegistrationInfo: RegistrationUserInfoModel!
     
     init() {
-        models = [BaseCellModel(withTitle: TextConstants.registrationCellTitleEmail,
+        models = [BaseCellModel(withTitle: TextConstants.registrationCellTitleGSMNumber,
+                                initialText: ""),
+                  BaseCellModel(withTitle: TextConstants.registrationCellTitleEmail,
                                 initialText: TextConstants.registrationCellPlaceholderEmail),
-        BaseCellModel(withTitle: TextConstants.registrationCellTitleGSMNumber,
-                      initialText: ""),
         BaseCellModel(withTitle: TextConstants.registrationCellTitlePassword,
                       initialText:TextConstants.registrationCellPlaceholderPassword),
         BaseCellModel(withTitle: TextConstants.registrationCellTitleReEnterPassword,

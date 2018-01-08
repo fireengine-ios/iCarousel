@@ -62,11 +62,13 @@ class WrapItemFileService: WrapItemFileOperations {
                     DispatchQueue.main.async {
                         CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
                     }
+                    
                     success?()
+                    ItemOperationManager.default.deleteItems(items: deleteFiles)
                 }, fail: fail)
                 
             } else {
-
+                ItemOperationManager.default.deleteItems(items: deleteFiles)
                 success?()
             }
         }
@@ -125,11 +127,12 @@ class WrapItemFileService: WrapItemFileOperations {
                                             uploadType: .syncToUse,
                                             uploadStategy: .WithoutConflictControl,
                                             uploadTo: .MOBILE_UPLOAD,
-                                            success: { [weak self] in
-                                                            self?.waitItemsDetails(for: items,
-                                                                                   maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
-                                                                                   success: success,
-                                                                                   fail: fail) },
+                                            success: {
+                                                WrapItemFileService.waitItemsDetails(for: items,
+                                                                                     maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
+                                                                                     success: success,
+                                                                                     fail: fail)
+                                            },
                                             fail: fail)
     }
     
@@ -197,6 +200,11 @@ class WrapItemFileService: WrapItemFileOperations {
             files.forEach {
                 $0.coreDataObject?.favoritesValue = favouritse
             }
+            if (favouritse){
+                ItemOperationManager.default.addFilesToFavorites(items: files)
+            }else{
+                ItemOperationManager.default.removeFileFromFavorites(items: files)
+            }
         }
         
         remoteFileService.medaDataRequest(param: param, success: success_, fail: fail)
@@ -226,25 +234,26 @@ class WrapItemFileService: WrapItemFileOperations {
         return items
     }
 
-    private func waitItemsDetails(for items: [WrapData], currentAttempt: Int = 0, maxAttempts: Int, success: FileOperationSucces?, fail: FailResponse?) {
+    static private func waitItemsDetails(for items: [WrapData], currentAttempt: Int = 0, maxAttempts: Int, success: FileOperationSucces?, fail: FailResponse?) {
         let fileService = FileService()
-        fileService.details(uuids: items.map({ $0.uuid }), success: { [weak self] (updatedItems) in
+        fileService.details(uuids: items.map({ $0.uuid }), success: { (updatedItems) in
             for item in updatedItems {
                 if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
                     itemToUpdate.metaData = item.metaData
+                    itemToUpdate.tmpDownloadUrl = item.tmpDownloadUrl
                     itemToUpdate.status = item.status
                 }
             }
-            let isCompleted = !updatedItems.contains(where: { $0.status != .active })
+            let isCompleted = !items.contains(where: { $0.status != .active })
             if isCompleted {
                 success?()
             } else if currentAttempt < maxAttempts {
                 sleep(NumericConstants.detailsLoadingTimeAwait)
-                self?.waitItemsDetails(for: items,
-                                      currentAttempt: currentAttempt + 1,
-                                      maxAttempts: maxAttempts,
-                                      success: success,
-                                      fail: fail)
+                waitItemsDetails(for: items,
+                                 currentAttempt: currentAttempt + 1,
+                                 maxAttempts: maxAttempts,
+                                 success: success,
+                                 fail: fail)
             }
         }, fail: fail)
     }

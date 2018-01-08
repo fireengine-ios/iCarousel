@@ -35,6 +35,8 @@ struct FAQUrl:RequestParametrs{
 class FaqUrlService: BaseRequestService{
 
   func requestFaqUrl(success: SuccessResponse?, fail: FailResponse?){
+        log.debug("FaqUrlService requestFaqUrl")
+    
         let faq = FAQUrl()
         let handler = BaseResponseHandler<Faq,ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param:faq, handler: handler)

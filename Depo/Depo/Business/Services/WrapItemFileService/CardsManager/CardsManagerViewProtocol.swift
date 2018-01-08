@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol WrapItemOperationViewProtocol{
+protocol CardsManagerViewProtocol{
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?)
     
@@ -20,7 +20,7 @@ protocol WrapItemOperationViewProtocol{
     
     func stopOperationWithType(type: OperationType)
     
-    func isEqual(object: WrapItemOperationViewProtocol) -> Bool
+    func isEqual(object: CardsManagerViewProtocol) -> Bool
     
     func addNotPermittedPopUpViewTypes(types: [OperationType])
     

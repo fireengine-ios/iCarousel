@@ -67,9 +67,22 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     var selectedViewController: UIViewController? {
         if customNavigationControllers.count > 0 {
             return customNavigationControllers[selectedIndex]
-        } else {
-            return nil
         }
+        return nil
+    }
+    
+    var currentViewController: UIViewController? {
+        if let navigationController = selectedViewController as? UINavigationController{
+            return navigationController.viewControllers.last
+        }
+        return nil
+    }
+    
+    var externalActionHandler: TabBarActionHandler? {
+        if let actionHandlerContainer = currentViewController as? TabBarActionHandlerContainer {
+            return actionHandlerContainer.tabBarActionHandler
+        }
+        return nil
     }
     
     var selectedIndex: NSInteger = 0 {
@@ -89,6 +102,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             contentView.addSubview(selectedViewController!.view)
             selectedViewController?.didMove(toParentViewController: self)
             setNeedsStatusBarAppearanceUpdate()
+            if let navigationController = selectedViewController as? UINavigationController {
+                navigationController.popToRootViewController(animated: true)
+            }
         }
     }
     
@@ -504,56 +520,35 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
     
     func buttonGotPressed(button: SubPlussButtonView) {
         changeViewState(state: false)
-        if (button == photoBtn ){
-            cameraService.showCamera(onViewController: self)
+        
+        let action: Action
+        switch button {
+        case photoBtn:
+            action = .takePhoto
+            
+        case folderBtn:
+            action = .createFolder
+            
+        case storyBtn:
+            action = .createStory
+            
+        case uploadBtn:
+            action = .upload
+            
+        case albumBtn:
+            action = .createAlbum
+            
+        case uploadFromLifebox:
+            action = .uploadFromLifeBox
+        
+        default:
             return
         }
-        if (button == folderBtn){
-            let router = RouterVC()
-            
-//            let controller = router.createNewAlbum()
-//            router.pushViewController(viewController: controller)
-//            return
-            
-            let isFavorites = router.isOnFavoritesView()
-            let controller = router.createNewFolder(rootFolderID: getFolderUUID(), isFavorites: isFavorites)
-            let nController = UINavigationController(rootViewController: controller)
-            router.presentViewController(controller: nController)
-            return
-        }
-        if (button == storyBtn){
-            let router = RouterVC()
-            router.createStoryName()
-            return
-        }
-        if (button == uploadBtn){
-            let router = RouterVC()
-            let controller = router.uploadPhotos()
-            let navigation = UINavigationController(rootViewController: controller)
-            
-            navigation.navigationBar.isHidden = false
-            router.presentViewController(controller: navigation)
-            
-            return
-        }
-        if (button == albumBtn){
-            //создание альбома
-            let router = RouterVC()
-            let controller = router.createNewAlbum()
-            let nController = UINavigationController(rootViewController: controller)
-            router.presentViewController(controller: nController)
-            return
-        }
-        if (button == uploadFromLifebox){
-            //копия файла в текущую папку на сервере
-            let router = RouterVC()
-            let parentFolder = router.getParentUUID()
-            let controller = router.uploadFromLifeBox(folderUUID: parentFolder)
-            let navigationController = UINavigationController(rootViewController: controller)
-            navigationController.navigationBar.isHidden = false
-            
-            router.presentViewController(controller: navigationController)
-            return
+        
+        if let externalActionHandler = externalActionHandler, externalActionHandler.canHandleTabBarAction(action) {
+            externalActionHandler.handleAction(action)
+        } else {
+            handleAction(action)
         }
     }
     
@@ -573,14 +568,9 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         return searchService!
     }
     
-    func getFolderUUID() -> String?{
-        if let nController = selectedViewController as? UINavigationController{
-            let viewConroller = nController.viewControllers.last
-            if let contr = viewConroller as? BaseFilesGreedViewController{
-                if let folder = contr.getFolder(){
-                    return folder.uuid
-                }
-            }
+    func getFolderUUID() -> String? {
+        if let viewConroller = currentViewController as? BaseFilesGreedViewController {
+            return viewConroller.getFolder()?.uuid
         }
         return nil
     }
@@ -592,35 +582,17 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         /// IF WILL BE NEED TO SAVE FILE
         //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+
+        let wrapData = WrapData(imageData: data)
         
-        WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: 1, completedOperations: 0)
-        let parentUUID = RouterVC().getParentUUID()
-        let isPhotoAlbum = RouterVC().isRootViewControllerAlbumDetail()
-        let isFavorites = RouterVC().isOnFavoritesView()
-        UploadService.default.upload(imageData: data, parentUUID: parentUUID, isFaorites: isFavorites) { result in
-            WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
-            switch result {
-            case .success(let fhotoUploadResponce):
-                DispatchQueue.main.async {
-                    UIApplication.showSuccessAlert(message: "Photo uploaded")
-                }
-                
-                if isPhotoAlbum{
-                    let item = Item.init(remote: fhotoUploadResponce)
-                    let parameter = AddPhotosToAlbum(albumUUID: parentUUID, photos: [item])
-                    PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
-                        
-                    }, fail: { (error) in
-                        
-                    })
-                }
-                
-            case .failed(let error):
-                DispatchQueue.main.async {
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
-                }
+        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {
+            DispatchQueue.main.async {
+                UIApplication.showSuccessAlert(message: TextConstants.photoUploadedMessage )
             }
-            
+        }) { (error) in
+            DispatchQueue.main.async {
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+            }
         }
         
         picker.dismiss(animated: true, completion: nil)
@@ -638,4 +610,48 @@ extension TabBarViewController: MediaPlayerDelegate {
     func mediaPlayer(_ musicPlayer: MediaPlayer, changedCurrentTime time: Float) {}
     func didStartMediaPlayer(_ mediaPlayer: MediaPlayer) {}
     func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {}
+}
+
+extension TabBarViewController: TabBarActionHandler {
+    
+    func canHandleTabBarAction(_ action: TabBarViewController.Action) -> Bool {
+        return true
+    }
+    
+    func handleAction(_ action: TabBarViewController.Action) {
+        let router = RouterVC()
+        
+        switch action {
+        case .takePhoto:
+            cameraService.showCamera(onViewController: self)
+            
+        case .createFolder:
+            let isFavorites = router.isOnFavoritesView()
+            let controller = router.createNewFolder(rootFolderID: getFolderUUID(), isFavorites: isFavorites)
+            let nController = UINavigationController(rootViewController: controller)
+            router.presentViewController(controller: nController)
+            
+        case .createStory:
+            router.createStoryName()
+            
+        case .upload:
+            let controller = router.uploadPhotos()
+            let navigation = UINavigationController(rootViewController: controller)
+            navigation.navigationBar.isHidden = false
+            router.presentViewController(controller: navigation)
+            
+        case .createAlbum:
+            let controller = router.createNewAlbum()
+            let nController = UINavigationController(rootViewController: controller)
+            router.presentViewController(controller: nController)
+            
+        case .uploadFromLifeBox:
+            let parentFolder = router.getParentUUID()
+            let controller = router.uploadFromLifeBox(folderUUID: parentFolder)
+            let navigationController = UINavigationController(rootViewController: controller)
+            navigationController.navigationBar.isHidden = false
+            router.presentViewController(controller: navigationController)
+        }
+    }
+    
 }

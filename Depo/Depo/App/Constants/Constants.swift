@@ -87,6 +87,7 @@ struct TextConstants {
     
     static let forgotPasswordTitle = NSLocalizedString("Forgot My Password", comment: "")
     static let forgotPasswordSubTitle = NSLocalizedString("If you are already a Turkcell subscriber, you can retrieve your password by sending SMS to 2222", comment: "")
+    static let forgotPasswordSpecialSubTitle = NSLocalizedString("If you registered with your Turkcell Number you can just send SIFRE LIFEBOX to 2222 to recieve a new password or enter your mail below", comment: "")
     static let forgotPasswordSendPassword = NSLocalizedString("Send password reset link", comment: "")
     static let forgotPasswordCellTitle = NSLocalizedString("E-MAIL", comment: "")
     
@@ -116,9 +117,11 @@ struct TextConstants {
     
     // MARK: - Search
     
+
     static let search = NSLocalizedString("Search", comment: "")
     static let searchRecentSearchTitle = NSLocalizedString("RECENT SEARCHES", comment: "")
     static let searchSuggestionsTitle = NSLocalizedString("SUGGESTIONS", comment: "")
+    static let searchNoFilesToCreateStoryError = NSLocalizedString("No files to create a story", comment: "")
     
     static let noFilesFoundInSearch = NSLocalizedString("No results found for your query.", comment: "")
     
@@ -215,10 +218,10 @@ struct TextConstants {
     static let cameraAccessAlertNo = NSLocalizedString("No", comment: "")
     
     //MARK: - Sync out of space alert
-    static let syncOutOfSpaceAlertTitle = "Caution!"
-    static let syncOutOfSpaceAlertText = "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!"
-    static let syncOutOfSpaceAlertGoToSettings = "Settings"
-    static let syncOutOfSpaceAlertNo = "No"
+    static let syncOutOfSpaceAlertTitle = NSLocalizedString("Caution!", comment: "")
+    static let syncOutOfSpaceAlertText = NSLocalizedString("You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!", comment: "")
+    static let syncOutOfSpaceAlertGoToSettings = NSLocalizedString("Upgrade", comment: "")
+    static let syncOutOfSpaceAlertCancel = NSLocalizedString("Cancel", comment: "")
     
     //MARK: - Photo Library alert
     static let photoLibraryAccessAlertTitle = NSLocalizedString("Caution!", comment: "")
@@ -504,7 +507,7 @@ struct TextConstants {
     static let waitingForWiFiPopUpSyncButton = NSLocalizedString("Sync with data plan", comment: "")
     static let prepareToAutoSunc = NSLocalizedString("Auto Sync Preparation", comment: "")
     static let waitForWiFiButtonTitle = NSLocalizedString("Wait for a Wi-Fi Connection", comment: "")
-    
+    static let photoUploadedMessage = NSLocalizedString("Photo uploaded", comment: "")
     
     //MARK: - ActionSheet
     
@@ -732,6 +735,8 @@ struct NumericConstants {
     static let lifeSessionDuration: TimeInterval = 60 * 50 //50 min
     
     static let timeIntervalBetweenAutoSync: TimeInterval = 60*60
+    
+    static let timeIntervalBetweenAutoSyncAfterOutOfSpaceError: TimeInterval = 60*60*12 // 12 hours
 
     static let freeAppSpaceLimit = 0.2
     

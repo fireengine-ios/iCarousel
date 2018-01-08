@@ -65,19 +65,19 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     
     override func resendCode() {
         attempts = 0
-        guard let referenceToken = responce?.referenceToken else {
-            return
-        }
-        authService.resendVerificationSMS(resendVerification: ResendVerificationSMS(refreshToken: referenceToken), sucess: { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.output.resendCodeRequestSuccesed()
-                
-            }
+        
+        let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
+        AccountService().updateUserPhone(parameters: parameters, success: { [weak self] responce in
+                if let responce = responce as? SignUpSuccessResponse {
+                    self?.responce = responce
+                }
+                DispatchQueue.main.async {
+                    self?.output.resendCodeRequestSuccesed()
+                }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
                     self?.output.resendCodeRequestFailed(with: errorResponse)
                 }
         })
     }
-    
 }

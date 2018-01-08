@@ -30,7 +30,7 @@ class AlbumsModuleInitializer: NSObject {
         let interactor = AlbumsInteractor(remoteItems: AlbumService(requestSize: 140))
         
         let gridListTopBarConfig = GridListTopBarConfig(
-            defaultGridListViewtype: .Grid,
+            defaultGridListViewtype: .List,
             availableSortTypes: albumsSortTypes,
             defaultSortType: .TimeNewOld,
             availableFilter: false,
@@ -45,7 +45,7 @@ class AlbumsModuleInitializer: NSObject {
                                                                                      selectionModeTypes: [.completelyDeleteAlbums]),
                                topBarConfig: gridListTopBarConfig)
         
-        
+        interactor.originalFilters = [.fileType(.photoAlbum)]
         viewController.mainTitle = TextConstants.albumsTitle
         
         return viewController

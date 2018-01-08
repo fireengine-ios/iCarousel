@@ -143,10 +143,13 @@ class CreateStoryMusicService: RemoteItemsService {
     }
     
     func allItems(success: ListRemoveItems?, fail: FailRemoteItems?) {
+        log.debug("CreateStoryMusicService allItems")
      
         let requestService = BaseRequestService()
         let  handler = BaseResponseHandler< CreateStoryMusicListResponse, ObjectRequestResponse>(success: {  resp  in
             if self.isGotAll {
+                log.debug("CreateStoryMusicService allItems success with empty result")
+
                 success?([])
                 return
             }
@@ -155,10 +158,16 @@ class CreateStoryMusicService: RemoteItemsService {
                 let result = list.flatMap { WrapData(musicForCreateStory: $0) }
                 self.isGotAll = true
                 success?(result)
+                
+                log.debug("CreateStoryMusicService allItems success")
             } else {
+                log.debug("CreateStoryMusicService allItems fail")
+
                 fail?()
             }
         }, fail: { _  in
+            log.debug("CreateStoryMusicService allItems fail")
+
             fail?()
         })
 
@@ -166,6 +175,8 @@ class CreateStoryMusicService: RemoteItemsService {
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        log.debug("CreateStoryMusicService nextItems")
+
         allItems(success: success, fail: fail)
     }
 }
@@ -176,12 +187,18 @@ typealias GetPreviewStorrySyccess = (_ responce: CreateStoryResponce) -> Swift.V
 class CreateStoryService: BaseRequestService {
     
     func createStory(createStory: CreateStory, success:  CreateStorSuccess?, fail:  FailResponse?) {
+        log.debug("CreateStoryMusicService createStory")
+
         let  handler = BaseResponseHandler< CreateResponse, ObjectRequestResponse>(success: {
             resp  in
             if let created = resp as? CreateResponse,
                 created.isOkStatus {
+                log.debug("CreateStoryMusicServic createStory success")
+
                 success?()
             } else {
+                log.debug("CreateStoryMusicService createStory fail")
+
                 let erorr: Error = NSError(domain: "Create story ", code: -6000, userInfo: nil)
                 fail?(.error(erorr))
             }
@@ -190,14 +207,22 @@ class CreateStoryService: BaseRequestService {
     }
     
     func getPreview(preview: CreateStoryPreview, success: @escaping GetPreviewStorrySyccess, fail: @escaping FailResponse ) {
+        log.debug("CreateStoryMusicService getPreview fail")
+
         let  handler = BaseResponseHandler<CreateStoryResponce , ObjectRequestResponse>(success: {  resp  in
             if let responce = resp as? CreateStoryResponce{
+                log.debug("CreateStoryMusicService getPreview success")
+
                 success(responce)
             }else{
+                log.debug("CreateStoryMusicService getPreview fail")
+
                 let erorr: Error = NSError(domain: "Create story ", code: -6000, userInfo: nil)
                 fail(.error(erorr))
             }
         }, fail: { _  in
+            log.debug("CreateStoryMusicService getPreview fail")
+
             let erorr: Error = NSError(domain: "Create story ", code: -6000, userInfo: nil)
             fail(.error(erorr))
         })
