@@ -102,6 +102,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             contentView.addSubview(selectedViewController!.view)
             selectedViewController?.didMove(toParentViewController: self)
             setNeedsStatusBarAppearanceUpdate()
+            if let navigationController = selectedViewController as? UINavigationController {
+                navigationController.popToRootViewController(animated: true)
+            }
         }
     }
     
