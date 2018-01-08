@@ -510,7 +510,7 @@ struct TextConstants {
     
     
     //MARK: - ActionSheet
-    static let actionSheetDeleteDeviceOriginal = "Delete Device Original"
+    static let actionSheetDeleteDeviceOriginal = NSLocalizedString("Delete Device Original", comment: "")
  
     static let actionSheetCancel = NSLocalizedString("Cancel", comment: "")
 
