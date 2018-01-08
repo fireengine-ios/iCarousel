@@ -4,8 +4,8 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -42,7 +42,7 @@
                     <variation key="widthClass=regular" image="Logo-Ipad"/>
                 </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kNq-kb-jWD">
-                    <rect key="frame" x="0.0" y="50" width="414" height="686"/>
+                    <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="346" translatesAutoresizingMaskIntoConstraints="NO" id="HCp-Ig-1We">
                             <rect key="frame" x="30" y="7" width="354" height="21"/>
@@ -219,7 +219,7 @@
                 <constraint firstItem="VaL-qI-xdB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ERl-Gf-ZtY"/>
                 <constraint firstAttribute="trailing" secondItem="kNq-kb-jWD" secondAttribute="trailing" id="cpc-I4-Dgh"/>
                 <constraint firstAttribute="trailing" secondItem="VaL-qI-xdB" secondAttribute="trailing" id="g8T-rg-Qu4"/>
-                <constraint firstItem="kNq-kb-jWD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="ioQ-qH-VC2"/>
+                <constraint firstItem="kNq-kb-jWD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="ioQ-qH-VC2"/>
                 <constraint firstAttribute="bottom" secondItem="VaL-qI-xdB" secondAttribute="bottom" id="rDi-bM-Mv5"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

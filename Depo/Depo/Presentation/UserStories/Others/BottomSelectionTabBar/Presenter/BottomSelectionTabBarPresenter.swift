@@ -15,7 +15,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     let middleTabBarRect = CGRect(x: Device.winSize.width/2 - 5, y: Device.winSize.height - 49, width: 10, height: 50)
     
     func viewIsReady() {
-        
         guard let bottomBarInteractor = interactor as? BottomSelectionTabBarInteractorInput,
             let currentConfig = bottomBarInteractor.currentBarcongfig else {
             return
@@ -113,7 +112,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHidePlusTabBar), object: nil)
         view.showBar(animated: animated, onView: shownSourceView)
-        debugPrint("Show")
     }
     
     func bottomBarSelectedItem(index: Int, sender: UITabBarItem) {
