@@ -1,0 +1,6 @@
+framework module CropySDK {
+  umbrella header "CropySDK.h"
+
+  export *
+  module * { export * }
+}

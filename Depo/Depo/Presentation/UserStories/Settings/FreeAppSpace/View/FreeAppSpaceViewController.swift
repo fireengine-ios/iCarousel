@@ -32,7 +32,7 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
             }
             self_.output.onNextButton()
         }
-        WrapItemOperatonManager.default.addViewForNotification(view: scrolliblePopUpView)
+        CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
     
 }

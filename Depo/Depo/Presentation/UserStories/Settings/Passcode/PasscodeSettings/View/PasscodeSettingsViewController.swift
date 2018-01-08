@@ -39,6 +39,13 @@ final class PasscodeSettingsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var biometricsErrorLabel: UILabel! {
+        didSet {
+            biometricsErrorLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+            biometricsErrorLabel.textColor = ColorConstants.textGrayColor
+        }
+    }
+    
     @IBOutlet weak var changePasscodeLabel: UILabel! {
         didSet {
             changePasscodeLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
@@ -57,13 +64,19 @@ final class PasscodeSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupTexts()
+        output.viewIsReady()
+    }
+    
+    lazy var biometricsText: String = {
+        return output.isAvailableFaceID ? TextConstants.passcodeFaceID : TextConstants.passcodeTouchID
+    }()
+    
+    private func setupTexts() {
         setTitle(withString: TextConstants.passcodeLifebox)
         
-        let biometricsText = output.isAvailableFaceID ? TextConstants.passcodeEnableFaceID : TextConstants.passcodeEnableTouchID
-        biometricsLabel.text = biometricsText
-        
-        output.viewIsReady()
+        let enableText = TextConstants.passcodeEnable + " " + biometricsText
+        biometricsLabel.text = enableText
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +84,19 @@ final class PasscodeSettingsViewController: UIViewController {
         
         output.isPasscodeEmpty ? setup(state: .set) : setup(state: .ready)
         
-        touchIdView.isHidden = !output.isBiometricsAvailable
+        switch output.biometricsStatus {
+        case .available:
+            touchIdView.isHidden = false
+            biometricsSwitch.isEnabled = true
+            biometricsErrorLabel.text = ""
+        case .notAvailable:
+            touchIdView.isHidden = true
+        case .notInitialized:
+            touchIdView.isHidden = false
+            biometricsSwitch.isEnabled = false
+            biometricsErrorLabel.text = String(format: TextConstants.passcodeBiometricsError, biometricsText)
+        }
+        
         passcodeSwitch.isOn = !output.isPasscodeEmpty
         biometricsSwitch.isOn = output.isBiometricsEnabled
     }

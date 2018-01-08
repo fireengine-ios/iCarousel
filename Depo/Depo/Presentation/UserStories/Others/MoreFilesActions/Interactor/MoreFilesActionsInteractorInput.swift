@@ -14,7 +14,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool)
     
-    func edit(item: [BaseDataSourceItem])
+    func edit(item: [BaseDataSourceItem], complition: (() -> Void)?)
     
     func delete(item: [BaseDataSourceItem])
     

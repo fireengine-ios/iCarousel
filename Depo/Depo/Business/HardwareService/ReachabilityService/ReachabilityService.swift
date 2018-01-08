@@ -52,3 +52,86 @@ class ReachabilityService: ReachabilityProtocol {
     }
 }
 
+
+typealias APIReachabilityHandler = (_ isAvailable: Bool) -> Void
+
+
+class APIReachabilityService {
+    
+    static let APIReachabilityDidChangeName = NSNotification.Name("APIReachabilityServiceReachabilityDidChangeName")
+    
+    enum Connection {
+        case unreachable
+        case reachable
+    }
+    
+    static let shared = APIReachabilityService()
+    
+    private var timer: Timer?
+    private (set) var connection: Connection = .unreachable {
+        didSet {
+            if oldValue != connection {
+                notify()
+            }
+        }
+    }
+    private let pingInterval: TimeInterval = 30.0
+    
+    
+    init() {
+        
+    }
+    
+    //MARK: - Public
+    
+    func startNotifier() {
+        guard timer == nil else {
+            return
+        }
+
+        self.timer = Timer.scheduledTimer(timeInterval: pingInterval, target: self, selector: #selector(checkAPI), userInfo: nil, repeats: true)
+        self.timer?.fire()
+    }
+    
+    func stopNotifier() {
+        self.timer?.invalidate()
+        self.timer = nil
+    }
+    
+    private func notify() {
+        NotificationCenter.default.post(name: APIReachabilityService.APIReachabilityDidChangeName , object: nil)
+    }
+    
+    
+    @objc private func checkAPI() {
+        APIReachabilityRequestService().sendPingRequest { [weak self] (isReachable) in
+            guard let `self` = self else {
+                return
+            }
+            
+            self.connection = isReachable ? .reachable : .unreachable
+        }
+    }
+
+}
+
+
+class APIHostReachabilityRequestParameters: BaseRequestParametrs {
+    override var patch: URL {
+        return RouteRequests.BaseUrl
+    }
+}
+
+class APIReachabilityRequestService: BaseRequestService {
+    func sendPingRequest(handler: @escaping APIReachabilityHandler) {
+        let parameters = APIHostReachabilityRequestParameters()
+        let responseHandler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _ in
+            handler(true)
+        }, fail: { _ in
+            handler(false)
+            
+        })
+        executeHeadRequest(param: parameters, handler: responseHandler)
+    }
+}
+

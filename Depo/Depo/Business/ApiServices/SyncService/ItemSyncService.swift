@@ -21,9 +21,9 @@ enum AutoSyncStatus {
 
 public let autoSyncStatusDidChangeNotification = NSNotification.Name("AutoSyncStatusChangedNotification")
 
-
 protocol ItemSyncService: class {
     var status: AutoSyncStatus {get}
+    weak var delegate: ItemSyncServiceDelegate? {get set}
     
     func start()
     func stop()
@@ -33,7 +33,14 @@ protocol ItemSyncService: class {
 }
 
 
+protocol ItemSyncServiceDelegate: class {
+    func didReceiveOutOfSpaceError()
+    func didReceiveError()
+}
+
+
 class ItemSyncServiceImpl: ItemSyncService {
+
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
         didSet {
@@ -46,6 +53,8 @@ class ItemSyncServiceImpl: ItemSyncService {
     var localItems: [WrapData] = []
     var localItemsMD5s: [String] = []
     var lastSyncedMD5s: [String] = []
+    
+    weak var delegate: ItemSyncServiceDelegate?
     
     
     //MARK: - init
@@ -135,9 +144,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
-//        if status != .executing {
-            status = .executing
-//        }
+        status = .executing
         
         UploadService.default.uploadFileList(items: items.sorted(by:{$0.fileSize < $1.fileSize}),
                                              uploadType: .autoSync,
@@ -146,11 +153,17 @@ class ItemSyncServiceImpl: ItemSyncService {
                                              success: { [weak self] in
                                                 self?.status = .synced
         }, fail: { [weak self] (error) in
-            self?.status = .failed
-            self?.stop()
+            guard let `self` = self else {
+                print("\(#function): self == nil")
+                return
+            }
+
+            self.status = .failed
             
             if case ErrorResponse.httpCode(413) = error {
-                //TODO: add popup 'out of space'
+                self.delegate?.didReceiveOutOfSpaceError()
+            } else {
+                self.delegate?.didReceiveError()
             }
             
         })
@@ -230,4 +243,11 @@ class ItemSyncServiceImpl: ItemSyncService {
     func localUnsyncedItems() -> [WrapData] {
         return []
     }
+    
 }
+
+
+
+
+
+

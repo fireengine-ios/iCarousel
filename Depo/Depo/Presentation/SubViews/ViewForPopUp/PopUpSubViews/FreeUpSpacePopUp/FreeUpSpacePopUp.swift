@@ -44,7 +44,7 @@ class FreeUpSpacePopUp: BaseView {
     }
     
     @IBAction func onCancelButton(){
-        WrapItemOperatonManager.default.stopOperationWithType(type: operation ?? .freeAppSpace)
+        CardsManager.default.stopOperationWithType(type: operation ?? .freeAppSpace)
     }
     
     @IBAction func onFreeAppSpaceButton(){

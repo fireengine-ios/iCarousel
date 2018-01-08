@@ -21,6 +21,7 @@ class SyncServiceManager {
     private var settings: SettingsAutoSyncModel?
     
     private var lastAutoSyncTime: TimeInterval = 0
+    private var timeIntervalBetweenSyncs: TimeInterval = NumericConstants.timeIntervalBetweenAutoSync
     
     private var isSyncCancelled: Bool {
         return (photoSyncService.status == .canceled && videoSyncService.status == .canceled)
@@ -42,7 +43,10 @@ class SyncServiceManager {
     //MARK: - Init
     
     init() {
+        photoSyncService.delegate = self
+        videoSyncService.delegate = self
         setupReachability()
+        setupAPIReachability()
         subscribeForNotifications()
     }
     
@@ -67,23 +71,19 @@ class SyncServiceManager {
     
     func updateInBackground() {
         let time = NSDate().timeIntervalSince1970
-        if time - lastAutoSyncTime > NumericConstants.timeIntervalBetweenAutoSync{
+        if time - lastAutoSyncTime > timeIntervalBetweenSyncs {
             lastAutoSyncTime = time
             
             checkReachabilityAndSettings()
         }
     }
     
-    func syncWithDataPlan() {
-        startManually()
-    }
-    
-    func waitForWifi() {
-        stopManually()
-    }
-    
     
     //MARK: - Private
+    
+    private func setupAPIReachability() {
+        APIReachabilityService.shared.startNotifier()
+    }
     
     private func setupReachability() {
         guard let reachability = reachabilityService else {
@@ -97,10 +97,12 @@ class SyncServiceManager {
         }
         
         reachability.whenReachable = { (reachability) in
+            print("AUTOSYNC: is reachable")
             self.checkReachabilityAndSettings()
         }
         
         reachability.whenUnreachable = { (reachability) in
+            print("AUTOSYNC: is unreachable")
             self.checkReachabilityAndSettings()
         }
     }
@@ -121,19 +123,22 @@ class SyncServiceManager {
             return
         }
         
+        timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
+        
         guard syncSettings.isAutoSyncEnable else {
             stop(reachabilityDidChange: false, photo: true, video: true)
+            CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
             return
         }
         
-        WrapItemOperatonManager.default.stopOperationWithType(type: .autoUploadIsOff)
+        CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
         
         guard let reachability = reachabilityService else {
             print("\(#function): reachabilityService is nil")
             return
         }
         
-        if reachability.connection != .none {
+        if reachability.connection != .none, APIReachabilityService.shared.connection == .reachable {
             if reachability.connection == .wifi {
                 start(photo: true, video: true)
             } else if reachability.connection == .cellular {
@@ -176,14 +181,16 @@ class SyncServiceManager {
     
     //start if is waiting for wi-fi
     private func startManually() {
-        photoSyncService.startManually()
-        videoSyncService.startManually()
+        if reachabilityService?.connection != .none {
+            photoSyncService.startManually()
+            videoSyncService.startManually()
+        }
     }
 }
 
 
 
-//MARK: Notifications
+//MARK: - Notifications
 extension SyncServiceManager {
     private func subscribeForNotifications() {
         let notificationCenter = NotificationCenter.default
@@ -196,38 +203,81 @@ extension SyncServiceManager {
                                        selector: #selector(onAutoSyncStatusDidChange),
                                        name: autoSyncStatusDidChangeNotification,
                                        object: nil)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(onAPIReachabilityDidChange),
+                                       name: APIReachabilityService.APIReachabilityDidChangeName,
+                                       object: nil)
     }
     
     @objc private func onPhotoLibraryDidChange() {
         checkReachabilityAndSettings()
     }
     
+    @objc private func onAPIReachabilityDidChange() {
+        checkReachabilityAndSettings()
+    }
+    
     @objc private func onAutoSyncStatusDidChange() {
-        guard !isSyncCancelled else {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+        if isSyncCancelled {
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            CardsManager.default.stopOperationWithType(type: .sync)
             return
         }
         
-        guard !hasExecutingSync else {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.stopOperationWithType(type: .prepareToAutoSync)
+        if hasExecutingSync {
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
             return
-
         }
         
-        guard !hasPrepairingSync else {
-            WrapItemOperatonManager.default.stopOperationWithType(type: .waitingForWiFi)
-            WrapItemOperatonManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+        if hasPrepairingSync {
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             return
         }
 
         if hasWaitingForWiFiSync {
-            WrapItemOperatonManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
+            CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
     }
 }
 
+
+//MARK: - ItemSyncServiceDelegate
+
+extension SyncServiceManager: ItemSyncServiceDelegate {
+    func didReceiveOutOfSpaceError() {
+        stop(reachabilityDidChange: false, photo: true, video: true)
+        if UIApplication.shared.applicationState == .background {
+            timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
+        }
+        showOutOfSpaceAlert()
+    }
+    
+    func didReceiveError() {
+        stop(reachabilityDidChange: false, photo: true, video: true)
+    }
+}
+
+
+extension SyncServiceManager {
+    fileprivate func showOutOfSpaceAlert() {
+        let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
+                                              message: TextConstants.syncOutOfSpaceAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
+                                              secondButtonTitle: TextConstants.syncOutOfSpaceAlertGoToSettings,
+                                              secondAction: { vc in
+                                                vc.close(completion: {
+                                                    let router = RouterVC()
+                                                    router.pushViewController(viewController: router.packages)
+                                                })
+        })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+    }
+}
 
 
 

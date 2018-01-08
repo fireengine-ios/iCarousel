@@ -7,7 +7,7 @@
 //
 
 class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
-    
+
     func onInfo(object: Item) {
         let router = RouterVC()
         let viewContr = router.fileInfo!
@@ -37,4 +37,6 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
     func showSelectFolder(selectFolder: SelectFolderViewController) { }
     
     func showShare(rect: CGRect?, urls: [String]) { }
+    
+    func showDeleteMusic(_ completion: @escaping (() -> Void)) { }
 }

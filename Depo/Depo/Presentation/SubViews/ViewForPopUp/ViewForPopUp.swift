@@ -12,7 +12,7 @@ import UIKit
     func onUpdateViewForPopUpH(h: CGFloat)
 }
 
-class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwipeCellDelegate, WrapItemOperationViewProtocol {
+class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwipeCellDelegate, CardsManagerViewProtocol {
 
     var hConstraint: NSLayoutConstraint? = nil
     weak var delegate: ViewForPopUpDelegate? = nil
@@ -192,7 +192,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
     
     func getViewForOperation(operation: OperationType) -> BaseView{
-        return WrapItemOperatonManager.popUpViewForOperaion(type: operation)
+        return CardsManager.popUpViewForOperaion(type: operation)
     }
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
@@ -240,12 +240,15 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         }
     }
     
-    func setProgress(ratio: Float, for operationType: OperationType ) {
+    func setProgress(ratio: Float, for operationType: OperationType, object: WrapData? ) {
         guard let popUp = viewsByType[operationType] as? ProgressPopUp else {
             return
         }
         
         popUp.setProgressBar(ratio: ratio)
+        if let `object` = object{
+            popUp.setImageForUploadingItem(item: object)
+        }
     }
     
     func stopOperationWithType(type: OperationType){
@@ -255,7 +258,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         }
     }
     
-    func isEqual(object: WrapItemOperationViewProtocol) -> Bool{
+    func isEqual(object: CardsManagerViewProtocol) -> Bool{
         if let compairedView = object as? ViewForPopUp{
             return compairedView == self
         }

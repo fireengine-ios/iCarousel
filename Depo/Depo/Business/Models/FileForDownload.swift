@@ -13,12 +13,12 @@ struct FileForDownload {
     let name: String
     let type: FileType
     
-    init?(forSmallURL wrapData: WrapData) {
+    init?(forMediumURL wrapData: WrapData) {
         let url: URL?
         if wrapData.fileType == .video {
             url = wrapData.metaData?.videoPreviewURL
         } else {
-            url = wrapData.metaData?.smalURl
+            url = wrapData.metaData?.mediumUrl
         }
         
         guard let _url = url, let name = wrapData.name else { return nil }

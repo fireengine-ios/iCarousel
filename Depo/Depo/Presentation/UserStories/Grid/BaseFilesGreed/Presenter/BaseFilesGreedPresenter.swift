@@ -42,6 +42,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var alertSheetExcludeTypes = [ElementTypes]()
     
+    var needShowProgressInCells = false
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
@@ -59,8 +61,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                        filters: interactor.originalFilesTypeFilter)
        
         dataSource.delegate = self
+        dataSource.needShowProgressInCell = needShowProgressInCells
         
         if let displayingType = topBarConfig {
+            type = displayingType.defaultGridListViewtype
             if displayingType.defaultGridListViewtype == .Grid {
                 dataSource.updateDisplayngType(type: .list)
             } else {
@@ -73,6 +77,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         setupTopBar()
         getContent()
         reloadData()
+        subscribeDataSource()
+    }
+    
+    func subscribeDataSource(){
+        ItemOperationManager.default.startUpdateView(view: dataSource)
+    }
+    
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: dataSource)
     }
     
     func searchByText(searchText: String) {
@@ -248,6 +261,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onLongPressInCell() {
         startEditing()
+    }
+    
+    func needReloadData(){
+        reloadData()
     }
     
     
@@ -466,14 +483,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
-        onChangeSelectedItemsCount(selectedItemsCount: 0)
     }
     
     func operationFailed(withType type: ElementTypes) {
         debugPrint("failed")
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
-        onChangeSelectedItemsCount(selectedItemsCount: 0)
     }
     
     func selectModeSelected() {

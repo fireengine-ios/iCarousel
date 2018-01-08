@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        
+        SyncServiceManager.shared.updateImmediately()
     }
     
     private var firstResponder: UIResponder?

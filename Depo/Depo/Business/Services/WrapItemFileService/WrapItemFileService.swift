@@ -200,6 +200,11 @@ class WrapItemFileService: WrapItemFileOperations {
             files.forEach {
                 $0.coreDataObject?.favoritesValue = favouritse
             }
+            if (favouritse){
+                ItemOperationManager.default.addFilesToFavorites(items: files)
+            }else{
+                ItemOperationManager.default.removeFileFromFavorites(items: files)
+            }
         }
         
         remoteFileService.medaDataRequest(param: param, success: success_, fail: fail)
