@@ -510,8 +510,10 @@ struct TextConstants {
     static let photoUploadedMessage = NSLocalizedString("Photo uploaded", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: - ActionSheet
+    static let actionSheetDeleteDeviceOriginal = NSLocalizedString("Delete Device Original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let actionSheetCancel = NSLocalizedString("Cancel", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     
     static let actionSheetShare = NSLocalizedString("Share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetInfo = NSLocalizedString("Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

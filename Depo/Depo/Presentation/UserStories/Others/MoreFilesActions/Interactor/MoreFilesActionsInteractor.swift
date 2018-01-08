@@ -493,6 +493,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         download(item: items)
     }
     
+    func deleteDeviceOriginal(items: [BaseDataSourceItem]) {
+        guard let wrapedItems = items as? [WrapData] else {
+            return
+        }
+        fileService.deleteLocalFiles(deleteFiles: wrapedItems, success: succesAction(elementType: .deleteDeviceOriginal), fail: failAction(elementType: .deleteDeviceOriginal))
+    }
+    
     func succesAction(elementType: ElementTypes) -> FileOperation {
         let success: FileOperation = { [weak self] in
             DispatchQueue.main.async {

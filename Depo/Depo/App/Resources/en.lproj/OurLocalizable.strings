@@ -7,6 +7,7 @@
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Deleting these files will remove them from cloud. You won't be able to access them once deleted";
 "Purchase" = "Purchase";
 "Packages" = "Packages";
+"Delete Device Original" = "Delete Device Original";
 "Verification code is blocked.\nPlease request a new code" = "Verification code is blocked.\nPlease request a new code";
 "Verification code is invalid.\nPlease try again" = "Verification code is invalid.\nPlease try again";
 "Your package is successfully defined" = "Your package is successfully defined";
