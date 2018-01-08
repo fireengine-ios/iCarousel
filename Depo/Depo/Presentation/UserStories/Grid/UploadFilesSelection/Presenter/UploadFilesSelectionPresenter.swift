@@ -54,10 +54,14 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func uploadData(_ searchText: String! = nil) {
+        log.debug("UploadFilesSelectionPresenter uploadData")
+
         debugPrint("upload uploadData presenter override")
     }
     
     override func getNextItems() {
+        log.debug("UploadFilesSelectionPresenter getNextItems")
+
         debugPrint("upload getNextItems presenter override")
     }
     
@@ -66,6 +70,8 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     func networkOperationStopped(){
+        log.debug("UploadFilesSelectionPresenter networkOperationStopped")
+
         asyncOperationSucces()
     }
 

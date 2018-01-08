@@ -27,10 +27,27 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func onShowSelectedItem(at index: Int, from items:[Item]) {
         view.onShowSelectedItem(at: index, from: items)
 
-//        if items[index].fileType == .image {
-//            
-//        }
-        bottomBarPresenter?.setupTabBarWith(config: interactor.bottomBarConfig)
+        let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
+        
+        var barConfig = interactor.bottomBarConfig
+        var actionTypes = barConfig.elementsConfig
+        
+        if !allSelectedItemsTypes.contains(.image) {
+            if let editIndex = actionTypes.index(of: .edit) {
+                actionTypes.remove(at: editIndex)
+            }
+            if let printIndex = actionTypes.index(of: .print) {
+                actionTypes.remove(at: printIndex)
+            }
+            if allSelectedItemsTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
+                actionTypes.remove(at: infoIndex)
+            }
+            barConfig = EditingBarConfig(elementsConfig: actionTypes,
+                                         style: barConfig.style,
+                                         tintColor: barConfig.tintColor)
+        }
+        
+        bottomBarPresenter?.setupTabBarWith(config: barConfig)
         view.onItemSelected(at: index, from: items)
     }
     
@@ -52,7 +69,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 //        bottomBarPresenter?.show(animated: false, onView: self.view)
     }
     
-
     func startCreatingAVAsset(){
         startAsyncOperation()
     }
@@ -67,7 +83,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
         switch currentItem.fileType {
         case .audio, .video, .image:
-            actions = ActionSheetPredetermendConfigs.photoVideoDetailActions
+            actions = interactor.setupedMoreMenuConfig//ActionSheetPredetermendConfigs.photoVideoDetailActions
         case .allDocs:
             actions = ActionSheetPredetermendConfigs.documetsDetailActions
         default:

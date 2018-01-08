@@ -16,6 +16,8 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
     let localMediaStorage = LocalMediaStorage.default
     
     override func getAllItems(sortBy: SortedRules) {
+        log.debug("UploadFilesSelectionInteractor getAllItems")
+
         guard let uuid = rootUIID else {
             return
         }
@@ -24,6 +26,9 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             guard accessGranted else {
                 return
             }
+            
+            log.debug("UploadFilesSelectionInteractor getAllItems LocalMediaStorage askPermissionForPhotoFramework")
+
             
             let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [uuid], options: nil)
             if let album = collectionFetchResult.firstObject {
@@ -60,14 +65,20 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
     }
     
     func addToUploadOnDemandItems(items: [BaseDataSourceItem]){
+        log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems")
+
         let uploadItems = items as! [WrapData]
         let router = RouterVC()
         let isFavorites = router.isOnFavoritesView()
         let rooutUUID = router.getParentUUID()
         let isFromAlbum = router.isRootViewControllerAlbumDetail()
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: {
+            log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
+
             self.output.asyncOperationSucces()
         }) { (errorResponse) in
+            log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList fail")
+
             self.output.asyncOperationSucces()
         }
 //        UploadService.default.uploadOnDemandFileList(items: uploadItems,

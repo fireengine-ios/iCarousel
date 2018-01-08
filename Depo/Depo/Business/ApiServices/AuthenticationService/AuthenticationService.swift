@@ -328,34 +328,42 @@ class AuthenticationService: BaseRequestService {
     }
     
     func signUp(user: SignUpUser, sucess:SuccessResponse?, fail: FailResponse?) {
+        log.debug("AuthenticationService logout")
         
         let handler = BaseResponseHandler<SignUpSuccessResponse,SignUpFailResponse>(success: sucess, fail: fail)
         executePostRequest(param: user, handler: handler)
     }
     
     func verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification, sucess:SuccessResponse?, fail:FailResponse?) {
+        log.debug("AuthenticationService verificationPhoneNumber")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: phoveVerification, handler: handler)
     }
     
     func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess:SuccessResponse?, fail:FailResponse?) {
+        log.debug("AuthenticationService resendVerificationSMS")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: resendVerification, handler: handler)
     }
     
     func updateEmail(emailUpdateParameters: EmailUpdate, sucess:SuccessResponse?, fail:FailResponse?) {
+        log.debug("AuthenticationService updateEmail")
+
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailUpdateParameters, handler: handler)
     }
     
     func verificationEmail(emailVerification:EmailVerification, sucess:SuccessResponse?, fail:FailResponse?) {
+        log.debug("AuthenticationService verificationEmail")
+
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailVerification, handler: handler)
     }
     
     func fogotPassword(forgotPassword:ForgotPassword, success:SuccessResponse?, fail: FailResponse?) {
+        log.debug("AuthenticationService fogotPassword")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: forgotPassword, handler: handler)

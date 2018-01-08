@@ -330,10 +330,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 action = UIAlertAction(title: TextConstants.actionSheetRemove, style: .default, handler: { _ in
                     self.interactor.delete(item: currentItems)
                 })
-            default:
-                action = UIAlertAction(title: "TEST", style: .default, handler: { _ in
-                    
+            case .deleteDeviceOriginal:
+                action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
+                    self.interactor.deleteDeviceOriginal(items: currentItems)
                 })
+            case .sync:
+                action = UIAlertAction()
+            case .undetermend:
+                action = UIAlertAction()
             }
             return action
         }

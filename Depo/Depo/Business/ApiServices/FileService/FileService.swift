@@ -262,37 +262,55 @@ class FileService: BaseRequestService {
     private let dispatchQueue = DispatchQueue(label: "Download Queue")
     
     func move(moveFiles: MoveFiles , success: FileOperation?, fail:FailResponse?) {
+        log.debug("FileService move")
+
         let handler = BaseResponseHandler<ObjectRequestResponse,ObjectRequestResponse>(success: { _  in
+            log.debug("FileService move success")
+
             success?()
         }, fail: fail)
         executePostRequest(param: moveFiles, handler: handler)
     }
     
     func copy(copyparam: CopyFiles, success: FileOperation?, fail:FailResponse?) {
+        log.debug("FileService copy")
+
         let handler = BaseResponseHandler<ObjectRequestResponse,ObjectRequestResponse>(success: { _  in
+            log.debug("FileService copy success")
+
             success?()
         }, fail: fail)
         executePostRequest(param: copyparam, handler: handler)
     }
     
     func delete(deleteFiles: DeleteFiles, success: FileOperation?, fail:FailResponse?) {
+        log.debug("FileService delete")
+
         let handler = BaseResponseHandler<ObjectRequestResponse,ObjectRequestResponse>(success: { _  in
+            log.debug("FileService delete success")
+
             success?()
         }, fail: fail)
         executeDeleteRequest(param: deleteFiles, handler: handler)
     }
     
     func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail:FailResponse?) {
+        log.debug("FileService createsFolder")
         
         let handler = BaseResponseHandler<CreateFolderResponse,ObjectRequestResponse>(success: { _  in
+            log.debug("FileService createsFolder success")
+
             success?()
         }, fail: fail)
         executePostRequest(param: createFolder, handler: handler)
     }
     
     func rename(rename: RenameFile, success: FileOperation?, fail:FailResponse?) {
+        log.debug("FileService rename")
         
         let handler = BaseResponseHandler<SearchResponse,ObjectRequestResponse>(success: { y  in
+            log.debug("FileService rename success")
+
             success?()
         }, fail: fail)
         executePostRequest(param: rename, handler: handler)
@@ -302,6 +320,8 @@ class FileService: BaseRequestService {
     //MARK: download && upload
     
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail:FailResponse?) {
+        log.debug("FileService download")
+
         let allOperationsCount = items.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
         let downLoadRequests: [BaseDownloadRequestParametrs] = items.flatMap {
@@ -310,12 +330,14 @@ class FileService: BaseRequestService {
         var completedOperationsCount = 0
         let operations = downLoadRequests.flatMap {
             DownLoadOperation(downloadParam: $0, success: {
+                log.debug("FileService download DownLoadOperation success")
+
                 completedOperationsCount = completedOperationsCount + 1
                 CardsManager.default.setProgressForOperationWith(type: .download,
                                                                             allOperations: allOperationsCount,
                                                                             completedOperations: completedOperationsCount)
             }, fail: { (error) in
-                
+                log.debug("FileService download DownLoadOperation fail")
             })
         }
         
@@ -327,6 +349,7 @@ class FileService: BaseRequestService {
     }
     
     func downloadToCameraRoll(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail:FailResponse?) {
+        log.debug("FileService downloadToCameraRoll")
         
         executeDownloadRequest(param: downloadParam) { (url, urlResponse, error) in
             
