@@ -15,25 +15,42 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
         if router.isRootViewControllerAlbumDetail(){
             let parameter = AddPhotosToAlbum(albumUUID: rootFolderUUID, photos: items)
             PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: { [weak self] in
-                self?.output.asyncOperationSucces()
-                guard let out = self?.output as? UploadFromLifeBoxInteractorOutput else{
-                    return
+                DispatchQueue.main.async {
+                    if let `self` = self {
+                        self.output.asyncOperationSucces()
+                        guard let out = self.output as? UploadFromLifeBoxInteractorOutput else{
+                            return
+                        }
+                        out.uploadOperationSuccess()
+                    }
+                    ItemOperationManager.default.fileAddedToAlbum()
                 }
-                out.uploadOperationSuccess()
             }, fail: { [weak self] (error) in
-                self?.output.asyncOperationFail(errorMessage: TextConstants.failWhileAddingToAlbum)
+                DispatchQueue.main.async {
+                    if let `self` = self {
+                        self.output.asyncOperationFail(errorMessage: TextConstants.failWhileAddingToAlbum)
+                    }
+                }
             })
         }else{
             let itemsUUIDs = items.map({ $0.uuid })
             let parametr = CopyFiles(items: itemsUUIDs, path: rootFolderUUID)
             FileService().copy(copyparam: parametr, success: { [weak self] in
-                self?.output.asyncOperationSucces()
-                guard let out = self?.output as? UploadFromLifeBoxInteractorOutput else{
-                    return
+                DispatchQueue.main.async {
+                    if let `self` = self {
+                        self.output.asyncOperationSucces()
+                        guard let out = self.output as? UploadFromLifeBoxInteractorOutput else{
+                            return
+                        }
+                        out.uploadOperationSuccess()
+                    }
                 }
-                out.uploadOperationSuccess()
             }, fail: { [weak self] (fail) in
-                self?.output.asyncOperationFail(errorMessage: TextConstants.failWhileuploadFromLifeBoxCopy)
+                DispatchQueue.main.async {
+                    if let `self` = self {
+                        self.output.asyncOperationFail(errorMessage: TextConstants.failWhileuploadFromLifeBoxCopy)
+                    }
+                }
             })
         }
     }

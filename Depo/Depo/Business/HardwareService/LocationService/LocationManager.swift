@@ -29,6 +29,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping (() -> Void)){
+        log.debug("LocationManager checkDoWeNeedShowLocationPermissionAllert")
         SingletonStorage.shared.getUniqueUserID(success: { (uniqueUserID) in
             let key = uniqueUserID + "locationPermission"
             let permission = UserDefaults.standard.integer(forKey: key)
@@ -43,6 +44,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func showIfNeedLocationPermissionAllert(){
+        log.debug("LocationManager showIfNeedLocationPermissionAllert")
+
         self.checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
             let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable , preferredStyle: .alert)
             let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { (action) in
@@ -56,6 +59,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func startUpdateLocation(){
+        log.debug("LocationManager startUpdateLocation")
+
         AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
             
             guard let `self` = self else{
@@ -81,15 +86,21 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
  
     func stopUpdateLocation(){
+        log.debug("LocationManager stopUpdateLocation")
+
         locationManager.stopMonitoringSignificantLocationChanges()
     }
     
     // CLLocationManager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        log.debug("LocationManager locationManager")
+
         SyncServiceManager.shared.updateInBackground()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        log.debug("LocationManager locationManager")
+
         if ((status == .authorizedAlways) || (status == .authorizedWhenInUse) || (status == .authorizedAlways)){
             startUpdateLocation()
         }

@@ -9,6 +9,8 @@
 class LocalAlbumPresenter: BaseFilesGreedPresenter {
         
     override func viewIsReady(collectionView: UICollectionView) {
+        log.debug("LocalAlbumPresenter viewIsReady")
+
         dataSource = ArrayDataSourceForCollectionView()
         interactor.viewIsReady()
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.localAlbumCell)

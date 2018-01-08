@@ -87,6 +87,7 @@ struct TextConstants {
     
     static let forgotPasswordTitle = NSLocalizedString("Forgot My Password", comment: "")
     static let forgotPasswordSubTitle = NSLocalizedString("If you are already a Turkcell subscriber, you can retrieve your password by sending SMS to 2222", comment: "")
+    static let forgotPasswordSpecialSubTitle = NSLocalizedString("If you registered with your Turkcell Number you can just send SIFRE LIFEBOX to 2222 to recieve a new password or enter your mail below", comment: "")
     static let forgotPasswordSendPassword = NSLocalizedString("Send password reset link", comment: "")
     static let forgotPasswordCellTitle = NSLocalizedString("E-MAIL", comment: "")
     
@@ -506,7 +507,7 @@ struct TextConstants {
     static let waitingForWiFiPopUpSyncButton = NSLocalizedString("Sync with data plan", comment: "")
     static let prepareToAutoSunc = NSLocalizedString("Auto Sync Preparation", comment: "")
     static let waitForWiFiButtonTitle = NSLocalizedString("Wait for a Wi-Fi Connection", comment: "")
-    
+    static let photoUploadedMessage = NSLocalizedString("Photo uploaded", comment: "")
     
     //MARK: - ActionSheet
     

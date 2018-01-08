@@ -18,6 +18,7 @@ enum RequestMethod: String {
     case Get    = "GET"
     case Delete = "DELETE"
     case Put    = "PUT"
+    case Head    = "HEAD"
 }
 
 
@@ -43,6 +44,7 @@ class RequestService {
                                 method: RequestMethod,
                                 timeoutInterval: TimeInterval,
                                 response: @escaping RequestResponse ) -> URLSessionDataTask {
+        log.debug("RequestService downloadRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
             request.timeoutInterval = timeoutInterval
@@ -62,6 +64,7 @@ class RequestService {
                               method: RequestMethod,
                               timeoutInterval: TimeInterval,
                               response: @escaping RequestResponse ) -> URLSessionUploadTask {
+        log.debug("RequestService uploadRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
             request.timeoutInterval = timeoutInterval
@@ -80,6 +83,7 @@ class RequestService {
                                     method: RequestMethod,
                                     timeoutInterval: TimeInterval,
                                     response: @escaping RequestFileDownloadResponse ) -> URLSessionDownloadTask {
+        log.debug("RequestService downloadFileRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
@@ -100,6 +104,7 @@ class RequestService {
                                   method: RequestMethod,
                                   timeoutInterval: TimeInterval,
                                   response: @escaping RequestFileUploadResponse ) -> URLSessionUploadTask {
+        log.debug("RequestService uploadFileRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
@@ -122,6 +127,7 @@ class RequestService {
                                       method: RequestMethod,
                                       timeoutInterval: TimeInterval,
                                       response: @escaping RequestFileUploadResponse ) -> URLSessionUploadTask {
+        log.debug("RequestService uploadFileRequestTask")
         
         var request: URLRequest = URLRequest(url: path)
         request.timeoutInterval = timeoutInterval
@@ -131,5 +137,23 @@ class RequestService {
         debugPrint("REQUEST: \(request)")
         
         return defaultSession.uploadTask(with: request, from: fileData, completionHandler: response)
+    }
+    
+    public func headRequestTask(patch:URL,
+                                    headerParametrs: RequestHeaderParametrs,
+                                    method: RequestMethod,
+                                    timeoutInterval: TimeInterval,
+                                    response: @escaping RequestResponse ) -> URLSessionDataTask {
+        
+        var request: URLRequest = URLRequest(url: patch)
+        request.timeoutInterval = timeoutInterval
+        request.httpMethod = method.rawValue
+        request.allHTTPHeaderFields = headerParametrs
+        request.cachePolicy = .reloadRevalidatingCacheData
+        
+        debugPrint("REQUEST: \(request)")
+        
+        let task = defaultSession.dataTask(with: request, completionHandler: response)
+        return task
     }
 }
