@@ -446,6 +446,41 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     // MARK: Asset info
     
+    func shortInfoAboutAsset(asset: PHAsset) -> AssetInfo {
+        log.debug("\(#function)")
+        
+        switch asset.mediaType {
+        case .image:
+            return shortInfoAboutImageAsset(asset:asset)
+            
+        case . video:
+            return shortInfoAboutVideoAsset(asset:asset)
+            
+        default:
+            return (url: LocalMediaStorage.defaultUrl, size: 0, md5: LocalMediaStorage.noneMD5)
+        }
+    }
+    
+    func shortInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
+        log.debug("\(#function)")
+        
+        let url: URL =  LocalMediaStorage.defaultUrl
+        let md5: String = LocalMediaStorage.noneMD5
+        let size: UInt64 = 0
+
+        return (url: url, size: size, md5: md5)
+    }
+    
+    func shortInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
+        log.debug("\(#function)")
+        
+        let url: URL = LocalMediaStorage.defaultUrl
+        let md5: String = LocalMediaStorage.noneMD5
+        let size: UInt64 = 0
+
+        return (url: url, size: size, md5: md5)
+    }
+    
     func fullInfoAboutAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutAsset")
 
@@ -465,7 +500,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         log.debug("LocalMediaStorage fullInfoAboutVideoAsset")
 
         var url: URL =  LocalMediaStorage.defaultUrl
-        var md5: String = LocalMediaStorage.noneMD5
+        let md5: String = LocalMediaStorage.noneMD5
         var size: UInt64 = 0
         let semaphore = DispatchSemaphore(value: 0)
         
@@ -496,7 +531,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         log.debug("LocalMediaStorage fullInfoAboutImageAsset")
         
         var url: URL = LocalMediaStorage.defaultUrl
-        var md5: String = LocalMediaStorage.noneMD5
+        let md5: String = LocalMediaStorage.noneMD5
         var size: UInt64 = 0
         
         let semaphore = DispatchSemaphore(value: 0)
