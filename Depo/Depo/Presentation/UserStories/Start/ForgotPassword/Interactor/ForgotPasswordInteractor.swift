@@ -20,16 +20,22 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
                 DispatchQueue.main.async { [weak self] in
                     debugPrint("forgot password response fail", response.description)
                     self?.output.requestFailed(withError: self?.checkErrorService(withErrorResponse: response.description) ?? "Error")
-                    
                 }
         })
     }
     
     func checkErrorService(withErrorResponse response: Any) -> String {
-        if let response1 = response as? String, response1.description.contains("4001") {
-            return "Please enter captcha."
+        guard let response1 = response as? String else {
+            return "Error Handling Under Constraction"
         }
-        return "Error Handling Under Constraction"
+        
+        if response1.contains("ACCOUNT_NOT_FOUND_FOR_EMAIL") {
+            return "Account not found for email"
+        }
+        if response1 == "This package activation code is invalid" {
+            return "This text doesn't match. Please try again"
+        }
+        return "An error is occurred!"
     }
     
 }
