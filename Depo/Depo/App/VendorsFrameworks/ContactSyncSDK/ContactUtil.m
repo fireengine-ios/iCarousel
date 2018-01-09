@@ -68,7 +68,32 @@
     }
 }
 
-- (void)deleteContact:(NSNumber*)contactId devices:(NSArray*)devices
+- (void)deleteContacts:(NSMutableArray<Contact*>*) contacts{
+    for (Contact *contact in contacts) {
+        if (SYNC_NUMBER_IS_NULL_OR_ZERO(contact.objectId)){
+            SYNC_Log(@"Invalid record id : %@", contact.objectId);
+            continue;
+        }
+
+        ABRecordRef record = ABAddressBookGetPersonWithRecordID(_addressBook, [contact.objectId intValue]);
+        if (record == nil){
+            SYNC_Log(@"!!! CONTACT ID NOT FOUND IN ADDRESS BOOK %@",contact.objectId);
+            continue;
+        }
+        CFErrorRef  error = NULL;
+        BOOL success = ABAddressBookRemoveRecord(_addressBook, (ABRecordRef)record, &error);
+        if (!success) {
+            SYNC_Log(@"An error occurred while deleting contact with id: %@ with error: %@", contact.objectId, error);
+        }
+    }
+    CFErrorRef  error = NULL;
+    BOOL success = ABAddressBookSave(_addressBook, &error);
+    if (!success){
+        SYNC_Log(@"An error occurred while deleting contacts with error: %@", error);
+    }
+}
+
+- (void)deleteContactDevices:(NSNumber*)contactId devices:(NSArray*)devices
 {
     if (SYNC_NUMBER_IS_NULL_OR_ZERO(contactId)){
         SYNC_Log(@"Invalid record id : %@", contactId);
@@ -83,7 +108,7 @@
         SYNC_Log(@"!!! CONTACT ID NOT FOUND IN ADDRESS BOOK %@",contactId);
         return;
     }
-    
+
     NSMutableSet *phoneIdSet = [NSMutableSet new];
     NSMutableSet *emailIdSet = [NSMutableSet new];
     for (ContactDevice *device in devices){
@@ -134,34 +159,38 @@
             ABMultiValueRemoveValueAndLabelAtIndex(emails, i);
     }
     
-    CFRelease(phoneNumbers);
-    CFRelease(emails);
+    if (phoneNumbers!=nil)
+        CFRelease(phoneNumbers);
+    if (emails!=nil)
+        CFRelease(emails);
     
     CFErrorRef error;
     BOOL success = ABAddressBookSave(_addressBook, &error);
     if (!success){
-        SYNC_Log(@"En error occurred while deleting contact devices : %@",error);
+        SYNC_Log(@"An error occurred while deleting contact devices : %@",error);
     }
 }
 
-- (NSMutableArray *)applyContacts{
+- (NSMutableArray *)applyContacts:(NSInteger)syncRound{
     CFErrorRef error;
     bool success = false;
     success = ABAddressBookSave(_addressBook, &error);
     if (!success){
-        SYNC_Log(@"En error occurred while saving contacts : %@",error);
+        SYNC_Log(@"An error occurred while saving contacts : %@",error);
     }
     else{
-        _objectIds = [NSMutableArray new];
+        if(SYNC_ARRAY_IS_NULL_OR_EMPTY(_objectIds)){
+            _objectIds = [NSMutableArray new];
+        }
         NSUInteger recordCount = [_records count];
-        for (NSUInteger i=0; i<recordCount; i++){
+        NSUInteger startIndex = syncRound * SYNC_RESTORE_THRESHOLD;
+        for (NSUInteger i=startIndex; i<recordCount; i++){
             ABRecordRef record = (__bridge  ABRecordRef)[_records objectAtIndex:i];
             ABRecordID recordId = ABRecordGetRecordID(record);
             NSString *recordIdString = [NSString stringWithFormat:@"%d",recordId];
-            
+
             [_objectIds addObject:recordIdString];
         }
-    
     }
 
     return _objectIds;  // If not success then it will return nil. Check it to understand errors.
@@ -190,10 +219,18 @@
         }
     }
     
-    ABRecordSetValue(record, kABPersonFirstNameProperty, (__bridge CFStringRef)contact.firstName, nil);
-    ABRecordSetValue(record, kABPersonMiddleNameProperty, (__bridge CFStringRef)contact.middleName, nil);
-    ABRecordSetValue(record, kABPersonNicknameProperty, (__bridge CFStringRef)contact.nickName, nil);
-    ABRecordSetValue(record, kABPersonLastNameProperty, (__bridge CFStringRef)contact.lastName, nil);
+    if(!SYNC_STRING_IS_NULL_OR_EMPTY(contact.firstName)){
+        ABRecordSetValue(record, kABPersonFirstNameProperty, (__bridge CFStringRef)contact.firstName, nil);
+    }
+    if(!SYNC_STRING_IS_NULL_OR_EMPTY(contact.middleName)){
+        ABRecordSetValue(record, kABPersonMiddleNameProperty, (__bridge CFStringRef)contact.middleName, nil);
+    }
+    if(!SYNC_STRING_IS_NULL_OR_EMPTY(contact.nickName)){
+        ABRecordSetValue(record, kABPersonNicknameProperty, (__bridge CFStringRef)contact.nickName, nil);
+    }
+    if(!SYNC_STRING_IS_NULL_OR_EMPTY(contact.lastName)){
+        ABRecordSetValue(record, kABPersonLastNameProperty, (__bridge CFStringRef)contact.lastName, nil);
+    }
     
     ABMutableMultiValueRef phoneNumbers = nil;
     ABMutableMultiValueRef emails = nil;
@@ -210,15 +247,19 @@
             }
         }
     }
-    ABRecordSetValue(record, kABPersonPhoneProperty, phoneNumbers, nil);
-    ABRecordSetValue(record, kABPersonEmailProperty, emails, nil);
+    if(phoneNumbers != nil){
+        ABRecordSetValue(record, kABPersonPhoneProperty, phoneNumbers, nil);
+    }
     
+    if(emails != nil){
+        ABRecordSetValue(record, kABPersonEmailProperty, emails, nil);
+    }
     if (isNew){
         CFErrorRef error;
         BOOL success = NO;
         success = ABAddressBookAddRecord(_addressBook, record, &error);
         if (!success){
-            SYNC_Log(@"En error occurred while adding contact : %@",error);
+            SYNC_Log(@"An error occurred while adding contact : %@",error);
         } else {
             ABRecordID recordId = ABRecordGetRecordID(record);
             //SYNC_Log(@"Record Id: %d", recordId);
@@ -228,7 +269,7 @@
     }
     
     [_records addObject:(__bridge id)record];
-    
+
     if(phoneNumbers != nil)
         CFRelease(phoneNumbers);
     if(emails != nil)
@@ -281,7 +322,8 @@
         }
         [ret addObject:contact];
     }
-    CFRelease(allPeople);
+    if (allPeople!=nil)
+        CFRelease(allPeople);
     return ret;
 }
 
@@ -309,7 +351,8 @@
 
         SYNC_Log(@"%@ => %@ / %@", objectId, lastModif, SYNC_DATE_AS_NUMBER(lastModif));
     }
-    CFRelease(allPeople);
+    if (allPeople!=nil)
+        CFRelease(allPeople);
 }
 
 - (void)fetchNumbers:(Contact*)contact
@@ -325,11 +368,12 @@
         NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
         NSString *type = (__bridge NSString *) phoneTypeRef;
         
-        CFRelease(phoneNumberRef);
+        if (phoneTypeRef!=nil)
+            CFRelease(phoneNumberRef);
 
         if (phoneTypeRef==NULL || type==nil){
             type = (__bridge NSString *)kABOtherLabel;
-        } else {
+        } else if (phoneTypeRef!=nil){
             CFRelease(phoneTypeRef);
         }
         
@@ -358,10 +402,11 @@
         NSString *mailAddress = (__bridge NSString *) emailRef;
         NSString *type = (__bridge NSString *) emailTypeRef;
         
-        CFRelease(emailRef);
+        if (emailRef!=nil)
+            CFRelease(emailRef);
         if (emailTypeRef==NULL || type==nil){
             type = (__bridge NSString *)kABOtherLabel;
-        } else {
+        } else if (emailTypeRef!=nil){
             CFRelease(emailTypeRef);
         }
         

@@ -10,7 +10,7 @@
 #import <AddressBook/ABRecord.h>
 #import <AddressBook/ABPerson.h>
 
-@interface Contact : NSObject
+@interface Contact : NSObject<NSCopying>
 
 @property (strong) NSNumber *objectId;
 @property (strong) NSNumber *remoteId;

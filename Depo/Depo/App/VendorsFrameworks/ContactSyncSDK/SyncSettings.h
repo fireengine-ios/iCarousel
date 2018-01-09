@@ -18,6 +18,17 @@ typedef NS_ENUM(NSUInteger, SYNCMode) {
     SYNCBackup,
     SYNCRestore
 };
+typedef NS_ENUM(NSUInteger, SYNCPeriodic) {
+    SYNCNone,
+    SYNCDaily,
+    SYNCEvery7,
+    SYNCEvery30
+};
+typedef NS_ENUM(NSUInteger, SYNCType) {
+    SYNCRequested,
+    SYNCPeriod
+};
+
 @interface SyncSettings : NSObject
 
 /**
@@ -27,18 +38,27 @@ typedef NS_ENUM(NSUInteger, SYNCMode) {
 @property BOOL debug;
 
 /**
+ * Setting this value true activates dry-run for duplicate analyzing.
+ */
+@property BOOL dryRun;
+
+/**
  * Custom url for endpoint
  */
-@property (strong) NSString *url;
+@property (nonatomic) NSString *url;
 @property SYNCEnvironment environment;
 /**
  * Sync mode. It has possible two value: BACKUP and RESTORE
  */
 @property (nonatomic) SYNCMode mode;
 /**
+ * Sync type. It has possible two value: REQUESTED and PERIODIC
+ */
+@property (nonatomic) SYNCType type;
+/**
  * Auth token.
  */
-@property NSString *token;
+@property (nonatomic) NSString *token;
 /**
  * For internal use only
  */
@@ -52,13 +72,19 @@ typedef NS_ENUM(NSUInteger, SYNCMode) {
  */
 @property (nonatomic) NSTimeInterval delayInterval;
 /**
- * Sync periodically. Period can be adjusted using syncInterval
+ * Backup periodically. Period is defined by this parameter
  */
-@property (nonatomic) BOOL periodicSync;
+@property (nonatomic) SYNCPeriodic periodicBackup;
 
 @property (nonatomic, copy) void (^callback)(id data);
 
-@property (nonatomic, copy) void (^progressCallback)(void);
+@property (nonatomic, copy) void (^progressCallback)();
+
+@property (nonatomic, copy) void (^analyzeNotifyCallback)(NSMutableDictionary<NSString*, NSNumber*>*, NSMutableArray<NSString*>*);
+
+@property (nonatomic, copy) void (^analyzeCompleteCallback)();
+
+@property (nonatomic, copy) void (^analyzeProgressCallback)();
 
 + (SYNC_INSTANCETYPE) shared;
 
@@ -68,5 +94,6 @@ typedef NS_ENUM(NSUInteger, SYNCMode) {
  */
 - (NSString*) endpointUrl;
 
+- (NSString*) periodToString:(SYNCPeriodic)periodic;
 
 @end
