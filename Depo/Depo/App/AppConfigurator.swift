@@ -13,14 +13,17 @@ class AppConfigurator {
     
     static let dropboxManager: DropboxManager = factory.resolve()
     
-    class func applicationStarted(){
+    class func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         ApplicationSessionManager.start()
         dropboxManager.start()
         
-        CoreDataStack.default.appendLocalMediaItems(nil)
         setVersionAndBuildNumber()
         configureSDWebImage()
         setupCropy()
+        
+        CoreDataStack.default.appendLocalMediaItems {
+            startMenloworks(with: launchOptions)
+        }
     }
     
     class private func configureSDWebImage() {
@@ -56,5 +59,17 @@ class AppConfigurator {
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
         UserDefaults.standard.set(build, forKey: "build_preference")
     }
-    //MARK:-------
+    
+    class private func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        log.debug("AppConfigurator startMenloworks")
+        
+        let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.sound, UIUserNotificationType.badge]
+        let notificationTypes = NSInteger(types.rawValue)
+        
+        DispatchQueue.main.async {
+            MPush.register(forRemoteNotificationTypes: notificationTypes)
+            MPush.applicationDidFinishLaunching(options: launchOptions)
+        }
+    }
+    
 }

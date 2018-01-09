@@ -216,7 +216,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     private func allLocalItems() -> [WrapData] {
-        return CoreDataStack.default.allLocalItem()
+        return CoreDataStack.default.allLocalItems()
     }
     
     func getLocalFiesComaredWithServerObjects(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData]{
