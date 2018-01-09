@@ -309,43 +309,45 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                     PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option, resultHandler: { (avAsset, avAudioMix, hash) in
                         
                         DispatchQueue.main.async {
-                            self?.output.stopCreatingAVAsset()
+                            guard let `self` = self else { return }
                             
-                            let plauerItem = AVPlayerItem(asset: avAsset!)
-                            self?.localPlayer!.replaceCurrentItem(with: plauerItem)
-                            let plController = AVPlayerViewController()
-                            self?.playerController = plController
-                            self?.playerController!.player = self?.localPlayer!
-                            self?.present(plController, animated: true) {
-                                self?.playerController?.player!.play()
-                            }
+                            self.output.stopCreatingAVAsset()
+                            
+                            let playerItem = AVPlayerItem(asset: avAsset!)
+                            self.play(item: playerItem)
                         }
-                        
                     })
                 }
-                
-                
-                
+                                
 //                [[PHImageManager defaultManager] requestAVAssetForVideo:videoAsset options:option resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
 //                    resultAsset = avasset;
 //                    dispatch_semaphore_signal(semaphore);
 //                    }];
                 
-            case .remoteUrl(_):
-                
-                let plauerItem = AVPlayerItem(url:url)
-                localPlayer!.replaceCurrentItem(with: plauerItem)
-                playerController = AVPlayerViewController()
-                playerController!.player = localPlayer!
-                self.present(playerController!, animated: true) { [weak playerController] in
-                    playerController?.player?.play()
-                }
+            case .remoteUrl(_):                
+                let playerItem = AVPlayerItem(url:url)
+                play(item: playerItem)
             }
 
         }
     }
     
-    func onStopPlay(){
+    func play(item: AVPlayerItem) {
+        localPlayer!.replaceCurrentItem(with: item)
+        playerController = AVPlayerViewController()
+        playerController!.player = localPlayer!
+        present(playerController!, animated: true) { [weak playerController] in
+            playerController?.player?.play()
+            if ProcessInfo().operatingSystemVersion.majorVersion < 11 {
+                UIApplication.shared.isStatusBarHidden = true
+            }
+        }
+    }
+    
+    func onStopPlay() {
+        if ProcessInfo().operatingSystemVersion.majorVersion < 11 {
+            UIApplication.shared.isStatusBarHidden = false
+        }
 //        playerController?.player = nil
 //        playerController?.removeFromParentViewController()
 //        playerController = nil
