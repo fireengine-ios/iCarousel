@@ -27,7 +27,7 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         
         log.debug("PhotoSyncService interrupt")
         
-        photoVideoService?.stopAllOperations()//FIXME: stop only photo sync
+        photoVideoService?.stopAllOperations()
         UploadService.default.cancelSyncOperations(photo: true, video: false)
     }
     
@@ -36,7 +36,7 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         
         log.debug("PhotoSyncService stop")
         
-        photoVideoService?.stopAllOperations()//FIXME: stop only photo sync
+        photoVideoService?.stopAllOperations()
         UploadService.default.cancelSyncOperations(photo: true, video: false)
     }
     
