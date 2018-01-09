@@ -162,7 +162,8 @@ class ItemSyncServiceImpl: ItemSyncService {
             }
             
             log.debug("ItemSyncServiceImpl upload UploadService uploadFileList fail")
-
+            
+            self.stop()
             self.status = .failed
             
             if case ErrorResponse.httpCode(413) = error {
