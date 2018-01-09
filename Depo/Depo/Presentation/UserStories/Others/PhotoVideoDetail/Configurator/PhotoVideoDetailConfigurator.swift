@@ -10,18 +10,30 @@ import UIKit
 
 class PhotoVideoDetailModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, photoVideoBottomBarConfig: EditingBarConfig, documentsBottomBarConfig: EditingBarConfig) {
-
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController,
+                                                       photoVideoBottomBarConfig: EditingBarConfig,
+                                                       documentsBottomBarConfig: EditingBarConfig,
+                                                       selecetedItem: Item,
+                                                       allItems: [Item]) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
             configure(viewController: viewController, photoVideoBottomBarConfig: photoVideoBottomBarConfig, documentsBottomBarConfig: documentsBottomBarConfig, alertSheetExcludeTypes: [.delete],
-                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions)
+                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions,
+                      selecetedItem: selecetedItem, allItems: allItems)
         }
     }
 
-    func configureModuleFromAlbumForViewInput<UIViewController>(viewInput: UIViewController, photoVideoBottomBarConfig: EditingBarConfig, documentsBottomBarConfig: EditingBarConfig) {
-        
+    func configureModuleFromAlbumForViewInput<UIViewController>(viewInput: UIViewController,
+                                                                photoVideoBottomBarConfig: EditingBarConfig,
+                                                                documentsBottomBarConfig: EditingBarConfig,
+                                                                selecetedItem: Item,
+                                                                allItems: [Item]) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
-            configure(viewController: viewController, photoVideoBottomBarConfig: photoVideoBottomBarConfig, documentsBottomBarConfig: documentsBottomBarConfig, interactor: PhotoVideoAlbumDetailInteractor(), photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.delete])
+            configure(viewController: viewController,
+                      photoVideoBottomBarConfig: photoVideoBottomBarConfig,
+                      documentsBottomBarConfig: documentsBottomBarConfig,
+                      interactor: PhotoVideoAlbumDetailInteractor(),
+                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.delete],
+                      selecetedItem: selecetedItem, allItems: allItems)
         }
     }
     
@@ -31,7 +43,9 @@ class PhotoVideoDetailModuleConfigurator {
                            alertSheetConfig: AlertFilesActionsSheetInitialConfig? = nil,
                            alertSheetExcludeTypes: [ElementTypes] = [ElementTypes](),
                            interactor: PhotoVideoDetailInteractor = PhotoVideoDetailInteractor(),
-                           photoDetailMoreMenu: [ElementTypes]) {
+                           photoDetailMoreMenu: [ElementTypes],
+                           selecetedItem: Item,
+                           allItems: [Item]) {
         let router = PhotoVideoDetailRouter()
 
         let presenter = PhotoVideoDetailPresenter()
@@ -61,7 +75,10 @@ class PhotoVideoDetailModuleConfigurator {
         //-------------------
         presenter.interactor = interactor
         viewController.output = presenter
-        viewController.interactor = interactor
+        
+        //Little KOSTIL'
+        interactor.onSelectItem(fileObject: selecetedItem, from: allItems)
+        
     }
 
 }

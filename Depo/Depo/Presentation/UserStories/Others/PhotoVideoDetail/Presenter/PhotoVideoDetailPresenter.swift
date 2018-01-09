@@ -15,8 +15,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     var router: PhotoVideoDetailRouterInput!
 
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
+    weak var alertSheetModule: AlertFilesActionsSheetModuleInput?
     
-    var alertSheetModule: AlertFilesActionsSheetModuleInput?
     var alertSheetExcludeTypes = [ElementTypes]()
     
     func viewIsReady(view: UIView) {
@@ -120,7 +120,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         debugPrint("failed")
     }
     
-    func goBack(){
+    func goBack() {
         router.goBack(navigationConroller: view.getNavigationController())
     }
     
