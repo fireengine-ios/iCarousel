@@ -75,6 +75,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var uploadedObjectID = [String]()
     
     var needShowProgressInCell: Bool = false
+    var needShowCloudIcon: Bool = true
     
     private func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
@@ -723,11 +724,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             cellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         }
         
-        
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReUseID!,
                                                       for: indexPath)
         
+        if !needShowCloudIcon {
+            if let cell = cell as? CollectionViewCellForPhoto{
+                cell.cloudStatusImage.isHidden = true
+            }
+        }
         
         return  cell
     }

@@ -132,6 +132,8 @@ class CardsManager: NSObject {
         case .sync:
             stopOperationWithType(type: .prepareToAutoSync)
             stopOperationWithType(type: .waitingForWiFi)
+            stopOperationWithType(type: .freeAppSpaceWarning)
+            stopOperationWithType(type: .freeAppSpace)
         default:
             break
         }

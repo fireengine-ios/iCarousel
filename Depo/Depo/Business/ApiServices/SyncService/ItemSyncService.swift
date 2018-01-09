@@ -72,7 +72,9 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
-        sync()
+        DispatchQueue.main.async {
+            self.sync()
+        }
     }
     
     func interrupt() {

@@ -14,7 +14,7 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
     
     override func viewDidLoad() {
         
-        scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.upload, .sync, .download, .freeAppSpace, .freeAppSpaceWarning])
+        scrolliblePopUpView.isEnable = false
         
         duplicatesTextLabel.textColor = ColorConstants.darkText
         duplicatesTextLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
@@ -26,7 +26,7 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
     
     override func configurateNavigationBar(){
         navigationBarWithGradientStyle()
-        configurateDeleteNavBarActions {[weak self] in
+        configurateFreeAppSpaceActions {[weak self] in
             guard let self_ = self else{
                 return
             }

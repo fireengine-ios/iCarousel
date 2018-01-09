@@ -71,6 +71,14 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         }
     }
     
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
+//        if let cell = cell as? CollectionViewCellForPhoto{
+//            cell.cloudStatusImage.isHidden = true
+//        }
+//        return cell
+//    }
+    
     override func albumsDeleted(albums: [AlbumItem]){
         if let unwrapedFilters = originalFilters,
             canShowAlbumsFilters(filters: unwrapedFilters) {
