@@ -15,10 +15,16 @@ class PhotoSelectionDataSource: ArrayDataSourceForCollectionView {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.cellForStoryImage, for: indexPath)
-        
-        return  cell
+        return collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.cellForStoryImage, for: indexPath)
     }
     
+    override func configurateWithArray(array: [[BaseDataSourceItem]]){
+        tableDataMArray.append(contentsOf: array)
+        collectionView.reloadData()
+    }
+    
+    override func dropData() {
+        tableDataMArray.removeAll()
+        super.dropData()
+    }
 }
