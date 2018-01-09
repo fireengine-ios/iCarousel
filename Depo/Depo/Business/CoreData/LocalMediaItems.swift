@@ -102,9 +102,16 @@ extension CoreDataStack {
         
     }
     
-    func  allLocalItem() -> [WrapData] {
+    func  allLocalItems() -> [WrapData] {
         let context = mainContext
         let predicate = NSPredicate(format: "localFileID != nil")
+        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
+        return items.flatMap{ $0.wrapedObject }
+    }
+    
+    func  allLocalItems(with localIds: [String]) -> [WrapData] {
+        let context = mainContext
+        let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
         let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
         return items.flatMap{ $0.wrapedObject }
     }
