@@ -102,12 +102,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         if (selectedIndex >= array.count){
             selectedIndex = array.count - 1
         }
-
         if array.isEmpty {
             output.goBack()
         } else {
-
-        output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
+            output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
         }
     }
 }
