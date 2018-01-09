@@ -749,6 +749,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
+        
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
@@ -763,9 +764,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if let url = url {
                 cell_.setImage(with: url)
             } else {
-                cell_.setImage(image: nil)
+                switch wraped.fileType {
+                case .folder:
+                    cell_.setPlaceholderImage(image: #imageLiteral(resourceName: "fileBigIconFolder"))
+                case let .application(applicationType):
+                    cell_.setPlaceholderImage(image: applicationType.bigIconImage())
+                default:
+                    cell_.setImage(image: nil)
+                }
             }
-
         }
         
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
