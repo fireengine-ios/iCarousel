@@ -208,7 +208,7 @@ class BaseRequestService {
     
     func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask {
         var backgroundTaskID = UIBackgroundTaskInvalid
-        var task: URLSessionUploadTask!
+        var task: URLSessionTask!
         
         if let localURL = param.urlToLocalFile {
             backgroundTaskID = beginBackgroundTask(with: localURL.absoluteString)
