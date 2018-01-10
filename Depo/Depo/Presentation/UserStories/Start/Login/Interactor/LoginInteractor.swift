@@ -8,7 +8,7 @@
 
 class LoginInteractor: LoginInteractorInput {
     
-    weak var output: LoginInteractorOutput!
+    weak var output: LoginInteractorOutput?
     
     var dataStorage = LoginDataStorage()
     
@@ -20,7 +20,7 @@ class LoginInteractor: LoginInteractorInput {
     private let maxAttemps: Int = 11
     
     func prepareModels(){
-        output.models(models: dataStorage.getModels())
+        output?.models(models: dataStorage.getModels())
     }
     
     func rememberMe(state:Bool){
@@ -30,18 +30,18 @@ class LoginInteractor: LoginInteractorInput {
     func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
         
         if login.isEmpty {
-            output.loginFieldIsEmpty()
+            output?.loginFieldIsEmpty()
             return
         }
         if password.isEmpty {
-            output.passwordFieldIsEmpty()
+            output?.passwordFieldIsEmpty()
             return
         }
         if isBlocked(userName: login)  {
-            output.userStillBlocked(user: login)
+            output?.userStillBlocked(user: login)
             return
         } else if (maxAttemps <= attempts) {
-            output.allAttemtsExhausted(user: login)//block here
+            output?.allAttemtsExhausted(user: login)//block here
             return
         }
         
@@ -57,9 +57,8 @@ class LoginInteractor: LoginInteractorInput {
                 return
             }
             ApplicationSession.sharedSession.session.rememberMe = self.rememberMe
-            ApplicationSession.sharedSession.saveData()
             DispatchQueue.main.async { [weak self] in
-                self?.output.succesLogin()
+                self?.output?.succesLogin()
             }
         }, fail: { [weak self] (errorResponse)  in
             
@@ -68,15 +67,15 @@ class LoginInteractor: LoginInteractorInput {
                     return
                 }
                 if self.isBlockError(forResponse: errorResponse) {
-                    self.output.failedBlockError()
+                    self.output?.failedBlockError()
                     return
                 }
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
-                    self.output.needShowCaptcha()
+                    self.output?.needShowCaptcha()
                 } else if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.attempts += 1
                 }
-                self.output.failLogin(message: errorResponse.description)
+                self.output?.failLogin(message: errorResponse.description)
             }
         })
     }
@@ -126,23 +125,23 @@ class LoginInteractor: LoginInteractorInput {
         if phoneCode == "" {
             phoneCode = telephonyService.countryCodeByLang()
         }
-        output.foundCoutryPhoneCode(code: phoneCode, plus: plus)
+        output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)
     }
     
     func checkEULA() {
         let eulaService = EulaService()
         eulaService.eulaCheck(success: { [weak self] (succesResponce) in
             DispatchQueue.main.async {
-                self?.output.onSuccessEULA()
+                self?.output?.onSuccessEULA()
             }
         }) { [weak self] (failResponce) in
             DispatchQueue.main.async {
                 //TODO: what do we do on other errors?
                 ///https://wiki.life.com.by/pages/viewpage.action?pageId=62456128
                 if failResponce.description == "EULA_APPROVE_REQUIRED" {
-                    self?.output.onFailEULA()
+                    self?.output?.onFailEULA()
                 } else {
-                   self?.output.onFailEULA()
+                   self?.output?.onFailEULA()
                 }
                 
             }
@@ -159,5 +158,78 @@ class LoginInteractor: LoginInteractorInput {
     func eraseBlockTime(forUserName name: String) {
 //        attempts = 0
 //        dataStorage.blockDate = nil
+    }
+    
+    let accountService = AccountService()
+    
+    func getAccountInfo() {
+        accountService.info(success: { [weak self] responce in
+            guard let accountInfoResponce = responce as? AccountInfoResponse else {
+                return
+            }
+            DispatchQueue.main.async {
+                self?.output?.successed(accountInfo: accountInfoResponce)
+            }
+        }, fail: { [weak self] error in
+            DispatchQueue.main.async {
+                self?.output?.failedAccountInfo(errorResponse: error)
+            }
+        })
+    }
+    
+    func getTokenToUpdatePhone(for phoneNumber: String) {
+        let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
+        accountService.updateUserPhone(parameters: parameters, success: { [weak self] responce in
+            guard let signUpResponce = responce as? SignUpSuccessResponse else {
+                return
+            }
+            DispatchQueue.main.async {
+                self?.output?.successed(updatePhone: signUpResponce)
+            }
+        }, fail: { [weak self] (error) in
+            DispatchQueue.main.async {
+                self?.output?.failedAccountInfo(errorResponse: error)
+            }
+        })
+    }
+    
+    func getResendTokenToUpdatePhone(for phoneNumber: String) {
+        let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
+        accountService.updateUserPhone(parameters: parameters, success: { [weak self] responce in
+            guard let signUpResponce = responce as? SignUpSuccessResponse else {
+                return
+            }
+            DispatchQueue.main.async {
+                self?.output?.successed(updatePhone: signUpResponce)
+            }
+            }, fail: { [weak self] (error) in
+                DispatchQueue.main.async {
+                    self?.output?.failedAccountInfo(errorResponse: error)
+                }
+        })
+    }
+    
+    func verifyPhoneNumber(token: String, code: String) {
+        let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: token)
+        AccountService().verifyPhoneNumber(parameters: parameters, success: { [weak self] (responce) in
+            DispatchQueue.main.async {
+//                self?.userInfo?.phoneNumber = self?.phoneNumber
+                self?.output?.successedVerifyPhone()
+            }
+        }) { [weak self] (errorRespose) in
+            DispatchQueue.main.async {
+//                guard let `self` = self else {
+//                    return
+//                }
+//                self.attempts += 1
+//                if self.attempts >= 3 {
+//                    self.attempts = 0
+//                    self.output.reachedMaxAttempts()
+//                    self.output.vereficationFailed(with: TextConstants.promocodeBlocked)
+//                } else {
+                    self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
+//                }
+            }
+        }
     }
 }

@@ -11,6 +11,11 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     var interactor: LoginInteractorInput!
     var router: LoginRouterInput!
     
+    var optInVC: OptInController?
+    var textEnterVC: TextEnterController?
+    var newPhone: String?
+    var referenceToken: String?
+    
     var captchaShowed: Bool = false
 
     func viewIsReady() {
@@ -71,9 +76,10 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func succesLogin() {
-//        asyncOperationSucces()
+        compliteAsyncOperationEnableScreen()
+        interactor.getAccountInfo()
         
-        interactor.checkEULA()
+
 //        router.goToHomePage()
     }
     
@@ -83,7 +89,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func failLogin(message:String) {
-        
+        compliteAsyncOperationEnableScreen()
         view.highlightLoginTitle()
         view.highlightPasswordTitle()
         //FIXME: in te future change it, when we got real error handling
@@ -131,13 +137,14 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func allAttemtsExhausted(user: String) {
-        
+        compliteAsyncOperationEnableScreen()
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
         interactor.blockUser(user: user)
 //        view.blockUI()
     }
     
     func userStillBlocked(user: String) {
+        compliteAsyncOperationEnableScreen()
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
     }
     
@@ -159,5 +166,118 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     override func outputView() -> Waiting? {
         return view
+    }
+    
+    func successed(accountInfo: AccountInfoResponse) {
+        compliteAsyncOperationEnableScreen()
+        
+        if accountInfo.phoneNumber == nil || accountInfo.phoneNumber?.isEmpty == true {
+            let textEnterVC = TextEnterController.with(
+            title: "Please enter your GSM number",
+            textPlaceholder: "GSM number",
+            buttonTitle: "Save") { [weak self] enterText, vc in
+                self?.newPhone = enterText
+                self?.interactor.getTokenToUpdatePhone(for: enterText)
+                vc.startLoading()
+            }
+            self.textEnterVC = textEnterVC
+            RouterVC().presentViewController(controller: textEnterVC)
+        }
+    }
+    
+    func failedAccountInfo(errorResponse: ErrorResponse) {
+        compliteAsyncOperationEnableScreen()
+        
+    }
+    
+    func successed(updatePhone: SignUpSuccessResponse) {
+        textEnterVC?.stopLoading()
+        textEnterVC?.close { [weak self] in
+            guard let newPhone = self?.newPhone else {
+                return
+            }
+            let optInVC = OptInController.with(phone: newPhone)
+            optInVC.delegate = self
+            RouterVC().navigationController?.popViewController(animated: false)
+            RouterVC().pushViewController(viewController: optInVC)
+        }
+    }
+    
+    func failedUpdatePhone(errorResponse: ErrorResponse) {
+        textEnterVC?.stopLoading()
+        textEnterVC?.showAlertMessage(with: errorResponse.description)
+    }
+    
+    func successed(resendUpdatePhone: SignUpSuccessResponse) {
+        
+    }
+    
+    func failedResendUpdatePhone(errorResponse: ErrorResponse) {
+        
+    }
+    
+    func successed(tokenForResend: String) {
+        referenceToken = tokenForResend
+        optInVC?.stopActivityIndicator()
+        optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
+        optInVC?.startEnterCode()
+        optInVC?.hideResendButton()
+    }
+
+    func failedTokenForResend(errorResponse: ErrorResponse) {
+        optInVC?.stopActivityIndicator()
+    }
+    
+    func successedVerifyPhone() {
+        optInVC?.stopActivityIndicator()
+        optInVC?.resignFirstResponder()
+        //    RouterVC().popViewController() //// ??????
+        
+        ApplicationSession.sharedSession.saveData()
+        
+        startAsyncOperationDisableScreen()
+        interactor.checkEULA()
+    }
+    
+    func failedVerifyPhone(errorString: String) {
+        optInVC?.stopActivityIndicator()
+        optInVC?.clearCode()
+        optInVC?.view.endEditing(true)
+    
+        if optInVC?.increaseNumberOfAttemps() == false {
+            let vc = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: TextConstants.promocodeInvalid, image: .error, buttonTitle: TextConstants.ok)
+            optInVC?.present(vc, animated: false, completion: nil)
+        }
+    }
+}
+
+
+
+
+
+// MARK: - OptInControllerDelegate
+extension LoginPresenter: OptInControllerDelegate {
+    func optInResendPressed(_ optInVC: OptInController) {
+        optInVC.startActivityIndicator()
+        self.optInVC = optInVC
+        if let newPhone = newPhone {
+            interactor.getResendTokenToUpdatePhone(for: newPhone)
+        }
+    }
+
+    func optInReachedMaxAttempts(_ optInVC: OptInController) {
+        optInVC.showResendButton()
+        optInVC.dropTimer()
+        UIApplication.showErrorAlert(message: TextConstants.promocodeBlocked)
+    }
+
+    func optInNavigationTitle() -> String {
+        return TextConstants.confirmPhoneOptInNavigarionTitle
+    }
+
+    func optIn(_ optInVC: OptInController, didEnterCode code: String) {
+        optInVC.startActivityIndicator()
+        self.optInVC = optInVC
+        interactor.verifyPhoneNumber(token: referenceToken ?? "", code: code)
     }
 }
