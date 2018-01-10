@@ -766,7 +766,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             } else {
                 switch wraped.fileType {
                 case .folder:
-                    cell_.setPlaceholderImage(image: #imageLiteral(resourceName: "fileBigIconFolder"))
+                    cell_.setPlaceholderImage(image: UIImage(named: "fileBigIconFolder"))
                 case let .application(applicationType):
                     cell_.setPlaceholderImage(image: applicationType.bigIconImage())
                 default:
