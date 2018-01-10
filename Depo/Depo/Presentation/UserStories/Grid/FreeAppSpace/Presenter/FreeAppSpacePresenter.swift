@@ -52,14 +52,14 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
      override func moreActionsPressed(sender: Any) {
         let selectionMode = dataSource.isInSelectionMode()
         if selectionMode {
-            let actionTypes = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
+            let actionTypes = interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? []
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
                                              onSourceView: nil,
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
-            let actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            let actionTypes  = interactor.alerSheetMoreActionsConfig?.initialTypes ?? []
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              presentedBy: sender,
                                              onSourceView: nil)
@@ -68,7 +68,7 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) {
-        self.view.selectedItemsCountChange(with: selectedItemsCount)
+        view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
 }
