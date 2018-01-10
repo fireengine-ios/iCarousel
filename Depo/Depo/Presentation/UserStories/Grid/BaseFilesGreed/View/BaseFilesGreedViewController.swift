@@ -82,11 +82,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesLabel.textColor = ColorConstants.textGrayColor
         noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         
-        if let noFilesTopLabel = noFilesTopLabel{
-            noFilesTopLabel.text = TextConstants.folderEmptyText
-            noFilesTopLabel.textColor = ColorConstants.grayTabBarButtonsColor
-            noFilesTopLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        }
+        noFilesTopLabel?.text = TextConstants.folderEmptyText
+        noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
+        noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
         startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
@@ -243,17 +241,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func showNoFilesTop() {
-        if let noFilesTopLabel = noFilesTopLabel{
-            noFilesTopLabel.isHidden = false
-        }
+        noFilesTopLabel?.isHidden = false
         topBarContainer.isHidden = true
     }
     
     func hideNoFiles() {
         noFilesView.isHidden = true
-        if let noFilesTopLabel = noFilesTopLabel {
-            noFilesTopLabel.isHidden = true
-        }
+        noFilesTopLabel?.isHidden = true
         topBarContainer.isHidden = false
     }
     
