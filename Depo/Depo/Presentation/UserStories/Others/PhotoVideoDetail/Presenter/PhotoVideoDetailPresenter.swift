@@ -15,7 +15,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     var router: PhotoVideoDetailRouterInput!
 
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
-    weak var alertSheetModule: AlertFilesActionsSheetModuleInput?
+    var alertSheetModule: AlertFilesActionsSheetModuleInput?
     
     var alertSheetExcludeTypes = [ElementTypes]()
     
