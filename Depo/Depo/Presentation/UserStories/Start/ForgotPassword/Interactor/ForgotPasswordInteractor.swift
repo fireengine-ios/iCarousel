@@ -11,6 +11,13 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     weak var output: ForgotPasswordInteractorOutput!
 
     func sendForgotPasswordRequest(with mail: String, enteredCaptcha: String, captchaUDID: String) {
+        guard isValid(email: mail) else {
+            DispatchQueue.main.async { [weak self] in
+                self?.output.requestFailed(withError: TextConstants.forgotPasswordErrorEmailFormatText)
+            }
+            return
+        }
+        
         let authenticationService = AuthenticationService()
         authenticationService.fogotPassword(forgotPassword: ForgotPassword(email: mail, attachedCaptcha: CaptchaParametrAnswer(uuid: captchaUDID, answer: enteredCaptcha)), success: { _ in
             DispatchQueue.main.async { [weak self] in
@@ -26,16 +33,22 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     
     func checkErrorService(withErrorResponse response: Any) -> String {
         guard let response1 = response as? String else {
-            return "Error Handling Under Constraction"
+            return TextConstants.forgotPasswordErrorHandlingText
         }
         
         if response1.contains("ACCOUNT_NOT_FOUND_FOR_EMAIL") {
-            return "Account not found for email"
+            return TextConstants.forgotPasswordErrorEmailNotFoundText
         }
         if response1 == "This package activation code is invalid" {
-            return "This text doesn't match. Please try again"
+            return TextConstants.forgotPasswordErrorCaptchaText
         }
-        return "An error is occurred!"
+        return TextConstants.forgotPasswordCommonErrorText
+    }
+    
+    fileprivate func isValid(email: String) -> Bool {
+        let emailRegEx = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,})$"
+        let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
+        return emailTest.evaluate(with: email)
     }
     
 }
