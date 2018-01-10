@@ -129,7 +129,7 @@ class CardsManager: NSObject {
     
     func hidePopUpsByDepends(type: OperationType){
         switch type {
-        case .sync:
+        case .sync, .upload:
             stopOperationWithType(type: .prepareToAutoSync)
             stopOperationWithType(type: .waitingForWiFi)
             stopOperationWithType(type: .freeAppSpaceWarning)
