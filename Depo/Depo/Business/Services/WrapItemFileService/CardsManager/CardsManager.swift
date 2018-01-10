@@ -74,6 +74,10 @@ class CardsManager: NSObject {
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
+        if !canShowPopUpByDepends(type: type){
+            return
+        }
+        
         hidePopUpsByDepends(type: type)
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
         DispatchQueue.main.async {
@@ -137,6 +141,22 @@ class CardsManager: NSObject {
         default:
             break
         }
+    }
+    
+    func canShowPopUpByDepends(type: OperationType) -> Bool{
+        switch type {
+        case .freeAppSpace, .freeAppSpaceWarning:
+            let operations: [OperationType] = [.sync, .upload]
+            for operation in operations{
+                if (progresForOperation[operation] != nil){
+                    return false
+                }
+            }
+        default:
+            break
+        }
+        
+        return true
     }
     
     //MARK: views for operations
