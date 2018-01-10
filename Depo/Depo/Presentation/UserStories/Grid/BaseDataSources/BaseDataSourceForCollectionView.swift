@@ -75,6 +75,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var uploadedObjectID = [String]()
     
     var needShowProgressInCell: Bool = false
+    var needShowCloudIcon: Bool = true
     
     private func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
@@ -506,19 +507,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func selectAll(isTrue: Bool){
         if (isTrue) {
-//            let sections = fetchService.controller.sections
-//            let sectionsCount = sections?.count ?? 0
-//            for section in 0...sectionsCount - 1 {
-//                let rowCount = sections?[section].numberOfObjects ?? 0
-//                for row in 0...rowCount - 1 {
-//                    let indexPath = IndexPath(row: row, section: section)
-//                    if let obj = itemForIndexPath(indexPath: indexPath) {
-//                        selectedItemsArray.insert(obj.uuid)
-//                    }
-//                }
-//            }
+            for array in allItems{
+                for object in array{
+                    onSelectObject(object: object)
+                }
+            }
+            updateVisibleCells()
+            
         }else{
             selectedItemsArray.removeAll()
+            updateVisibleCells()
         }
     }
     
@@ -723,11 +721,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             cellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         }
         
-        
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReUseID!,
                                                       for: indexPath)
         
+        if !needShowCloudIcon {
+            if let cell = cell as? CollectionViewCellForPhoto{
+                cell.cloudStatusImage.isHidden = true
+            }
+        }
         
         return  cell
     }

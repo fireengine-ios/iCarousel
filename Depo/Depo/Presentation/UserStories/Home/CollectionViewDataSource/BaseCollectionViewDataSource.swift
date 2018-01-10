@@ -145,7 +145,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 let indexPath = IndexPath(row: index, section: 0)
                 self.collectionView.insertItems(at: [indexPath])
             }, completion: { (succes) in
-                
+                print("finished competition")
             })
         }else{
             collectionView.reloadData()
@@ -158,7 +158,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 let indexPath = IndexPath(row: index, section: 0)
                 self.collectionView.deleteItems(at: [indexPath])
             }, completion: { (succes) in
-                
+                print("finished competition")
             })
         }else{
             collectionView.reloadData()

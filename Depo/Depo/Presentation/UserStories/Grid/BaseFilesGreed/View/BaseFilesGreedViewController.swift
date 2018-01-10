@@ -162,6 +162,17 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
+    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Swift.Void) {
+        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
+            deleteAction()
+        })
+        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+        })
+        navBarConfigurator.configure(right: [more, delete], left: [])
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+    
     @IBAction func onStartCreatingFilesButton(){
         output.onStartCreatingPhotoAndVideos()
     }

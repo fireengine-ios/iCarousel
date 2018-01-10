@@ -39,6 +39,10 @@ class SyncServiceManager {
         return (photoSyncService.status == .waitingForWifi || videoSyncService.status == .waitingForWifi)
     }
     
+    private var isSyncFinished: Bool {
+        return (photoSyncService.status == .synced && videoSyncService.status == .synced)
+    }
+    
     
     //MARK: - Init
     
@@ -215,6 +219,7 @@ extension SyncServiceManager {
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
             CardsManager.default.stopOperationWithType(type: .sync)
+            FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
             return
         }
         
@@ -232,6 +237,10 @@ extension SyncServiceManager {
 
         if hasWaitingForWiFiSync {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
+        }
+        
+        if isSyncFinished {
+            FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
         }
     }
 }
