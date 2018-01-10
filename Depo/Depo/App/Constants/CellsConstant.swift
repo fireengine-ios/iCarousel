@@ -45,4 +45,5 @@ struct CollectionViewSuplementaryConstants {
     static let baseCollectionSuplementaryHeaderReuseID =  "SupplementaryLabelHeaderID"
     static let baseDataSourceForCollectionViewReuseID = "CollectionViewSimpleHeaderWithText"
     static let collectionViewStoryReorderView = "CollectionViewStoryReorderView"
+    static let collectionViewHeaderWithText = "CollectionViewHeaderWithText"
 }
