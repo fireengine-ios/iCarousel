@@ -338,14 +338,14 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         playerController!.player = localPlayer!
         present(playerController!, animated: true) { [weak playerController] in
             playerController?.player?.play()
-            if ProcessInfo().operatingSystemVersion.majorVersion < 11 {
+            if Device.operationSystemVersionLessThen(11) {
                 UIApplication.shared.isStatusBarHidden = true
             }
         }
     }
     
     func onStopPlay() {
-        if ProcessInfo().operatingSystemVersion.majorVersion < 11 {
+        if Device.operationSystemVersionLessThen(11) {
             UIApplication.shared.isStatusBarHidden = false
         }
 //        playerController?.player = nil
