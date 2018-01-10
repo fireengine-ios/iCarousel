@@ -134,6 +134,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         setupObserving()
         
         player.delegates.add(self)
+        
+        plussButton.accessibilityLabel = TextConstants.accessibilityPlus
     }
     
     deinit {
@@ -304,6 +306,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         } else {
             hideButtonRainbow()
         }
+        
+        plussButton.accessibilityLabel = state ? TextConstants.accessibilityClose : TextConstants.accessibilityPlus
     }
     
     private func setupCurtainView() {
