@@ -391,10 +391,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func createStory(items: [BaseDataSourceItem]) {
         let router = RouterVC()
-        let images = items.filter({ $0.fileType == .image })
-        sync(items: images, action: {
+        sync(items: items, action: {
             DispatchQueue.main.async {
-                router.createStoryName(items: images)
+                router.createStoryName(items: items)
             }
         }, cancel: {})
     }
