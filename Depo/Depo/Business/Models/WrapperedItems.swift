@@ -532,9 +532,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if fileSize == 0, let localAsset = asset {
                 let resources = PHAssetResource.assetResources(for: localAsset)
                 if let resource = resources.first {
-                    let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong
-                    let sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64!))
-                    fileSize = sizeOnDisk
+                    if let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong {
+                        let sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64))
+                        fileSize = sizeOnDisk
+                    }
                 }
             }
             md5 = String(format: "%@%i", fileName, fileSize)
