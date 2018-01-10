@@ -9,7 +9,6 @@
 import UIKit
 
 class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewForLogo: UIView!
     @IBOutlet weak var viewForInformationAfterBacup: UIView!
@@ -25,19 +24,22 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
     @IBOutlet weak var removedCountLabel: UILabel!
     @IBOutlet weak var removedSubTitleLabel: UILabel!
     
-    @IBOutlet weak var viewWith2Buttons: UIView!
-    @IBOutlet weak var viewWith1Button: UIView!
-    
     @IBOutlet weak var cancelButton: ButtonWithGrayCorner!
+    
+    @IBOutlet weak var deleteDuplicatedButton: BlueButtonWithWhiteText!
     @IBOutlet weak var restoreButton: BlueButtonWithWhiteText!
-    @IBOutlet weak var bacupButton1: BlueButtonWithWhiteText!
-    @IBOutlet weak var bacupButton2: BlueButtonWithWhiteText!
+    @IBOutlet weak var backUpButton: BlueButtonWithWhiteText!
     
     @IBOutlet weak var backupDateLabel: UILabel!
 
     @IBOutlet weak var backUpContactsImageView: UIImageView!
+    
     var output: SyncContactsViewOutput!
-    var isBacupAvailable: Bool = false
+    var isBackUpAvailable: Bool = false {
+        didSet {
+            isBackUpAvailable ? setStateWithBackUp() : setStateWithoutBackUp()
+        }
+    }
     
     @IBOutlet weak var gradientLoaderIndicator: GradientLoadingIndicator!
     // MARK: Life cycle
@@ -48,7 +50,7 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         //backButtonForNavigationItem(title: TextConstants.backTitle)
         
-        newContactCountLabel.textColor = ColorConstants.textGrayColor
+        newContactCountLabel.textColor = ColorConstants.textLightGrayColor
         newContactCountLabel.font = UIFont.TurkcellSaturaBolFont(size: 25)
         newContactCountLabel.text = ""
         
@@ -56,7 +58,7 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
         newCantactSubTitleLabel.text = TextConstants.settingsBackupContactsViewNewContactsText
         newCantactSubTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         
-        duplicatedCountLabel.textColor = ColorConstants.textGrayColor
+        duplicatedCountLabel.textColor = ColorConstants.textLightGrayColor
         duplicatedCountLabel.font = UIFont.TurkcellSaturaBolFont(size: 25)
         duplicatedCountLabel.text = ""
         
@@ -64,7 +66,7 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
         duplicatedSubTitleLabel.text = TextConstants.settingsBackupContactsViewDuplicatesText
         duplicatedSubTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         
-        removedCountLabel.textColor = ColorConstants.textGrayColor
+        removedCountLabel.textColor = ColorConstants.textLightGrayColor
         removedCountLabel.font = UIFont.TurkcellSaturaBolFont(size: 25)
         removedCountLabel.text = ""
         
@@ -75,13 +77,12 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
         backupDateLabel.textColor = ColorConstants.textGrayColor
         backupDateLabel.font = UIFont.TurkcellSaturaItaFont(size: 14)
         
-        bacupButton1.setTitle(TextConstants.settingsBacupButtonTitle, for: .normal)
-        bacupButton2.setTitle(TextConstants.settingsBacupButtonTitle, for: .normal)
-        restoreButton.setTitle(TextConstants.settingsBacupRestoreTitle, for: .normal)
-        cancelButton.setTitle(TextConstants.settingsBacupCancelBacupTitle, for: .normal)
-        cancelButton.isHidden = true
+        backUpButton.setTitle(TextConstants.settingsBackUpButtonTitle, for: .normal)
+        backUpButton.setTitle(TextConstants.settingsBackUpButtonTitle, for: .normal)
+        restoreButton.setTitle(TextConstants.settingsBackUpRestoreTitle, for: .normal)
+        cancelButton.setTitle(TextConstants.settingsBackUpCancelBackUpTitle, for: .normal)
         
-        setupStateWithoutBacup()
+        setStateWithoutBackUp()
         
         output.getDateLastUpdate()
     }
@@ -115,54 +116,54 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
     }
     
     @IBAction func onCancelButton(){
-        if (isBacupAvailable){
-            output.startOperation(operationType: .canselAllOperations)
-        }else{
-            //
+        if (isBackUpAvailable) {
+            output.startOperation(operationType: .cancelAllOperations)
+        } else {
+            output.startOperation(operationType: .clear)
         }
     }
-
     
     // MARK: SyncContactsViewInput
     
-    func setupInitialState() {
+    func setInitialState() {
 
     }
     
-    func setupStateWithoutBacup(){
-        titleLabel.text = TextConstants.settingsBacupNeverDidIt
-        backupDateLabel.text = TextConstants.settingsBacupNewer
+    func setStateWithoutBackUp(){
+        titleLabel.text = TextConstants.settingsBackUpNeverDidIt
+        backupDateLabel.text = TextConstants.settingsBackUpNewer
         viewForInformationAfterBacup.isHidden = true
-        viewWith2Buttons.isHidden = true
-        //cancelButton.isHidden = true
+        cancelButton.isHidden = true
+    }
+    
+    func setStateWithBackUp() {
+        cancelButton.setTitle(TextConstants.settingsBackUpClearBackUpTitle, for: .normal)
+        cancelButton.isHidden = false
     }
     
     func showProggress(progress :Int, forOperation operation: SyncOperationType){
         gradientLoaderIndicator.progress = CGFloat(progress)
         if (operation == .backup){
-            let text = String.init(format: TextConstants.settingsBacupingText, progress)
+            let text = String.init(format: TextConstants.settingsBackUpingText, progress)
             titleLabel.text = text
             viewForInformationAfterBacup.isHidden = true
-            cancelButton.setTitle(TextConstants.settingsBacupCancelBacupTitle, for: .normal)
-            //cancelButton.isHidden = false
-            viewWith2Buttons.isHidden = !isBacupAvailable
+            cancelButton.setTitle(TextConstants.settingsBackUpCancelBackUpTitle, for: .normal)
         }
         if (operation == .restore){
             let text = String.init(format: TextConstants.settingsRestoringText, progress)
             titleLabel.text = text
             viewForInformationAfterBacup.isHidden = true
-            cancelButton.setTitle(TextConstants.settingsBacupCancelBacupTitle, for: .normal)
-            //cancelButton.isHidden = false
-            viewWith2Buttons.isHidden = !isBacupAvailable
+            cancelButton.setTitle(TextConstants.settingsBackUpCancelBackUpTitle, for: .normal)
         }
+        cancelButton.isHidden = false
     }
     
-    func succes(object: ContactSyncResposeModel, forOperation operation: SyncOperationType){
+    func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType){
         output.getDateLastUpdate()
         var template: String = ""
         if (operation == .backup){
             template = TextConstants.settingsBackupedText
-            isBacupAvailable = true
+            isBackUpAvailable = true
         }else{
             template = TextConstants.settingsRestoredText
         }
@@ -182,27 +183,20 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
         newContactCountLabel.text = String(object.newContactsNumber)
         duplicatedCountLabel.text = String(object.duplicatesNumber)
         removedCountLabel.text = String(object.deletedNumber)
-        
-        viewWith2Buttons.isHidden = !isBacupAvailable
-        
-        cancelButton.setTitle(TextConstants.settingsBacupClearBacupTitle, for: .normal)
-        //cancelButton.isHidden = false
-        
     }
     
     func setDateLastBacup(dateLastBacup: Date?){
         if (dateLastBacup != nil){
-            isBacupAvailable = true
+            isBackUpAvailable = true
             let timeInterval = dateLastBacup!.timeIntervalSinceNow
-            viewWith2Buttons.isHidden = !isBacupAvailable
             if (-timeInterval < 60){
-                backupDateLabel.text = TextConstants.settingsBacupLessAMinute
-            }else{
-                backupDateLabel.text = String.init(format: TextConstants.settingsBacupLessADay, dateLastBacup!.getDateInFormat(format: "d MMMM yyyy"))
+                backupDateLabel.text = TextConstants.settingsBackUpLessAMinute
+            } else {
+                backupDateLabel.text = String.init(format: TextConstants.settingsBackUpLessADay, dateLastBacup!.getDateInFormat(format: "d MMMM yyyy"))
             }
         }else{
-            isBacupAvailable = false
-            setupStateWithoutBacup()
+            isBackUpAvailable = false
+            setStateWithoutBackUp()
         }
         
     }

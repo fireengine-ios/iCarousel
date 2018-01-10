@@ -7,16 +7,11 @@
 //
 
 protocol SyncContactsViewInput: class {
-
-    /**
-        @author Oleg
-        Setup initial state of the view
-    */
-
-    func setupInitialState()
+    func setInitialState()
+    func setStateWithoutBackUp()
+    func setStateWithBackUp()
     
-    func setupStateWithoutBacup()
     func showProggress(progress :Int, forOperation operation: SyncOperationType)
-    func succes(object: ContactSyncResposeModel, forOperation operation: SyncOperationType)
+    func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType)
     func setDateLastBacup(dateLastBacup: Date?)
 }

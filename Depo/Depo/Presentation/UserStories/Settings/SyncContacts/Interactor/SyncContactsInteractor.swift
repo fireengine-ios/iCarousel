@@ -9,7 +9,8 @@
 enum SyncOperationType{
     case backup
     case restore
-    case canselAllOperations
+    case clear
+    case cancelAllOperations
 }
 
 enum SyncOperationErrors{
@@ -33,8 +34,10 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             performOperation(forType: .backup)
         case .restore:
             performOperation(forType: .restore)
-        case .canselAllOperations:
+        case .cancelAllOperations:
             contactsSyncService.cancellCurrentOperation()
+        case .clear:
+            break
         }
     }
     
@@ -62,7 +65,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             }, finishCallback: { result, type in
                 DispatchQueue.main.async { [weak self] in
                     if self?.output != nil {
-                        self?.output.succes(object: result, forOperation: type)
+                        self?.output.success(object: result, forOperation: type)
                     }
                 }
         }, errorCallback: { errortype, type in

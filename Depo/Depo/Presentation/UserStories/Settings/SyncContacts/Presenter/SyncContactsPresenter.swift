@@ -16,14 +16,14 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
     
     //MARK: view out
     func viewIsReady() {
-        view.setupInitialState()
+        view.setInitialState()
     }
     
     func getDateLastUpdate(){
         interactor.getLastBackUpDate()
     }
     
-    func startOperation(operationType: SyncOperationType){
+    func startOperation(operationType: SyncOperationType) {
         if backupAvailable, operationType == .backup {
             let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
                                                   message: TextConstants.errorAlertTextBackupAlreadyExist,
@@ -32,26 +32,26 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
                                                   secondButtonTitle: TextConstants.errorAlertYesBtnBackupAlreadyExist,
                                                   secondAction: { [weak self] vc in
                                                     self?.interactor.startOperation(operationType: .backup)
+                                                    vc.close()
             })
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
-            return
+        } else {
+            interactor.startOperation(operationType: operationType)
         }
-        
-        interactor.startOperation(operationType: operationType)
     }
     
     //MARK: interactor out
     
-    func showError(errorType: SyncOperationErrors){
+    func showError(errorType: SyncOperationErrors) {
         
     }
     
-    func showProggress(progress :Int, forOperation operation: SyncOperationType){
+    func showProggress(progress: Int, forOperation operation: SyncOperationType) {
         view.showProggress(progress: progress, forOperation: operation)
     }
     
-    func succes(object: ContactSyncResposeModel, forOperation operation: SyncOperationType){
-        view.succes(object: object, forOperation: operation)
+    func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType) {
+        view.success(object: object, forOperation: operation)
     }
     
     func lastBackUpDateResponse(response: Date?){
