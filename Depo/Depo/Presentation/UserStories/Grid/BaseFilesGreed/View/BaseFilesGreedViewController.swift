@@ -40,7 +40,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var topBarContainer: UIView!
     
-    @IBOutlet weak var noFilesTopLabel: UILabel!
+    @IBOutlet weak var noFilesTopLabel: UILabel?
     
     var scrolliblePopUpView = ViewForPopUp()
     
@@ -82,9 +82,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesLabel.textColor = ColorConstants.textGrayColor
         noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         
-        noFilesTopLabel.text = TextConstants.folderEmptyText
-        noFilesTopLabel.textColor = ColorConstants.grayTabBarButtonsColor
-        noFilesTopLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        if let noFilesTopLabel = noFilesTopLabel{
+            noFilesTopLabel.text = TextConstants.folderEmptyText
+            noFilesTopLabel.textColor = ColorConstants.grayTabBarButtonsColor
+            noFilesTopLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        }
         
         startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
@@ -241,13 +243,17 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func showNoFilesTop() {
-        noFilesTopLabel.isHidden = false
+        if let noFilesTopLabel = noFilesTopLabel{
+            noFilesTopLabel.isHidden = false
+        }
         topBarContainer.isHidden = true
     }
     
     func hideNoFiles() {
         noFilesView.isHidden = true
-        noFilesTopLabel.isHidden = true
+        if let noFilesTopLabel = noFilesTopLabel {
+            noFilesTopLabel.isHidden = true
+        }
         topBarContainer.isHidden = false
     }
     
