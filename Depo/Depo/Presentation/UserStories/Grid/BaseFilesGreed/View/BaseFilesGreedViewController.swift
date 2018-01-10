@@ -20,6 +20,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
     var cancelSelectionButton: UIBarButtonItem?
     
+    var backAsCancelBarButton: UIBarButtonItem?
+    
     var editingTabBar: BottomSelectionTabBarViewController?
     
     var isFavorites: Bool = false
@@ -77,6 +79,14 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         cancelButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 19)
         
         cancelSelectionButton = UIBarButtonItem(customView: cancelButton)
+        
+        let cancelBackButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
+        cancelBackButton.addTarget(self, action: #selector(onBackButton), for: .touchUpInside)
+        cancelBackButton.setTitle(TextConstants.cancelSelectionButtonTitle, for: .normal)
+        cancelBackButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelBackButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 19)
+        
+        backAsCancelBarButton = UIBarButtonItem(customView: cancelBackButton)
         
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
         noFilesLabel.textColor = ColorConstants.textGrayColor
@@ -170,7 +180,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             self?.output.moreActionsPressed(sender: NavigationBarList().more)
         })
         navBarConfigurator.configure(right: [more, delete], left: [])
+        
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
     
     @IBAction func onStartCreatingFilesButton(){
@@ -253,6 +265,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @objc func onCancelSelectionButton(){
         output.onCancelSelection()
+    }
+    
+    @objc func onBackButton(){
+        RouterVC().popViewController()
     }
     
     func changeSortingRepresentation(sortType type: SortedRules) {
