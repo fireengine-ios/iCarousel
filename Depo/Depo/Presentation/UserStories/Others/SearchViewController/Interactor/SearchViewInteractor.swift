@@ -35,9 +35,9 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     self.output.setRecentSearches(self.recentSearches.searches)
                     self.output.endSearchRequestWith(text: searchText)
                 }
-            }, fail: {
+            }, fail: { [weak self] in
                 DispatchQueue.main.async {
-                    self.output.failedSearch()
+                    self?.output.failedSearch()
                 }
         })
     }

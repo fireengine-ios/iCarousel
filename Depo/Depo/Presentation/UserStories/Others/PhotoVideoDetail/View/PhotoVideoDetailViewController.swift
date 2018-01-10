@@ -15,15 +15,14 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     typealias Item = WrapData
     
-    let player: MediaPlayer = factory.resolve()
-
     var output: PhotoVideoDetailViewOutput!
-    var interactor: PhotoVideoDetailInteractor?
+    
+    let player: MediaPlayer = factory.resolve()
+ 
     var views: [BaseFileContentView] = [BaseFileContentView]()
     var selectedIndex: Int = -1 {
         didSet {
             configureNavigationBar()
-            configureEditingTabBar()
         }
     }
     var isAnimating = false
@@ -38,7 +37,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     @IBOutlet weak var deleteButton: MenuButton!
     @IBOutlet weak var viewForContent: UIView!
     var editingTabBar: BottomSelectionTabBarViewController!
-    
     
     // MARK: Life cycle
     
@@ -74,20 +72,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         }
     }
     
-    private func configureEditingTabBar() {
-        if objects.count > selectedIndex, selectedIndex >= 0,
-           let editIndex = interactor?.bottomBarConfig.elementsConfig.index(of: .edit) {
-            let item = objects[selectedIndex]
-            
-            if !item.isSynced(){
-                editingTabBar.disableItems(atIntdex: [editIndex])
-            } else {
-                editingTabBar.enableIems(atIndex: [editIndex])
-            }
-        }
-    }
-    
-    func onBack(){
+    func onBack() {
         
     }
     
@@ -148,7 +133,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
 
     //<---.
     func swipeLeft(competition: @escaping ()-> Void){
-        if (!isAnimating) && (selectedIndex < objects.count - 1){
+        if (!isAnimating) && (selectedIndex < objects.count - 1) {
             isAnimating = true
             selectedIndex = selectedIndex + 1
             output.setSelectedItemIndex(selectedIndex: selectedIndex)
@@ -180,7 +165,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     }
     
     //.--->
-    func swipeRight(competition: @escaping ()-> Void){
+    func swipeRight(competition: @escaping ()-> Void) {
         if (!isAnimating) && (selectedIndex > 0){
             isAnimating = true
             selectedIndex = selectedIndex - 1
@@ -211,12 +196,12 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         }
     }
     
-    func setupTitle(){
+    func setupTitle() {
         let obj = objects[selectedIndex]
         self.setTitle(withString: obj.name ?? "")
     }
     
-    func setVisibilityOfNotVisibleViws(visibility: Bool){
+    func setVisibilityOfNotVisibleViws(visibility: Bool) {
         let view0 = views.first
         let view2 = views.last
         if (view0 != nil){
@@ -252,7 +237,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         }
     }
     
-    func getActionMenyItemsForObject(object: WrapData) -> [ActionMenyItem]{
+    func getActionMenyItemsForObject(object: WrapData) -> [ActionMenyItem] {
         if (object.fileType.isApplication) {
             return getActionsForDocumentObject(object: object)
         }
@@ -279,10 +264,10 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     // MARK: BaseFileContentViewDeleGate
     
-    func tapOnSelectedItem(){
+    func tapOnSelectedItem() {
         let file = objects[selectedIndex]
         
-        if (file.fileType == .video){
+        if (file.fileType == .video) {
             guard let url = file.urlToFile else{
                 return
             }
@@ -306,7 +291,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                 output.startCreatingAVAsset()
                 
                 DispatchQueue.global(qos: .default).async  { [weak self] in
-                    PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option, resultHandler: { (avAsset, avAudioMix, hash) in
+                    PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option, resultHandler: { [weak self] (avAsset, avAudioMix, hash) in
                         
                         DispatchQueue.main.async {
                             self?.output.stopCreatingAVAsset()
@@ -345,7 +330,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         }
     }
     
-    func onStopPlay(){
+    func onStopPlay() {
 //        playerController?.player = nil
 //        playerController?.removeFromParentViewController()
 //        playerController = nil
@@ -358,7 +343,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     //MARK actions meny 
     
-    func getActionsForDocumentObject(object: WrapData) -> [ActionMenyItem]{
+    func getActionsForDocumentObject(object: WrapData) -> [ActionMenyItem] {
         var actions = [ActionMenyItem]()
         
         actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionCopy, action: {
@@ -376,7 +361,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         return actions
     }
     
-    func getActionsForMostPartOfObjects(object: WrapData) -> [ActionMenyItem]{
+    func getActionsForMostPartOfObjects(object: WrapData) -> [ActionMenyItem] {
         var actions = [ActionMenyItem]()
         
         actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionMove, action: {
@@ -405,12 +390,12 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                 self.selectedIndex = 1
             }
             self.swipeRight(competition: {[weak self] in
-                if let self_ = self{
+                if let self_ = self {
                     self_.objects.removeAll()
                     self_.objects.append(contentsOf: objectsArray)
                     self_.selectedIndex = selectedIndex
                     
-                    if (selectedIndex == 0){
+                    if (selectedIndex == 0) {
                         return
                     }
                     
@@ -423,12 +408,12 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                 self.selectedIndex = self.selectedIndex - 1
             }
             self.swipeLeft(competition: {[weak self] in
-                if let self_ = self{
+                if let self_ = self {
                     self_.objects.removeAll()
                     self_.objects.append(contentsOf: objectsArray)
                     
                     self_.selectedIndex = selectedIndex
-                    if (selectedIndex == 0){
+                    if (selectedIndex == 0) {
                         return
                     }
                     let view = self_.views.first!
@@ -445,9 +430,9 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     func pageToRight() {
         swipeLeft(competition: {})
     }
+    
     func pageToLeft() {
         swipeRight(competition: {})
-        
     }
     
 }

@@ -13,7 +13,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     //Connect with object on storyboard
     var photovideodetailViewController: PhotoVideoDetailViewController!
 
-    class func initializeViewController(with nibName:String) -> UIViewController {
+    class func initializeViewController(with nibName:String, selectedItem: Item, allItems: [Item]) -> UIViewController {
         let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit],
                                                          style: .blackOpaque, tintColor: nil)
         let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
@@ -22,11 +22,13 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         let configurator = PhotoVideoDetailModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController,
                                                  photoVideoBottomBarConfig: photoVideoBottomBarConfig,
-                                                 documentsBottomBarConfig: documentsBottomBarConfig)
+                                                 documentsBottomBarConfig: documentsBottomBarConfig,
+                                                 selecetedItem: selectedItem,
+                                                 allItems: allItems)
         return viewController
     }
     
-    class func initializeAlbumViewController(with nibName:String) -> UIViewController {
+    class func initializeAlbumViewController(with nibName:String, selectedItem: Item, allItems: [Item]) -> UIViewController {
         let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit, .removeFromAlbum],
                                                          style: .blackOpaque, tintColor: nil)
         let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .removeFromAlbum],
@@ -36,7 +38,9 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         let configurator = PhotoVideoDetailModuleConfigurator()
         configurator.configureModuleFromAlbumForViewInput(viewInput: viewController,
                                                           photoVideoBottomBarConfig: photoVideoBottomBarConfig,
-                                                          documentsBottomBarConfig: documentsBottomBarConfig)
+                                                          documentsBottomBarConfig: documentsBottomBarConfig,
+                                                          selecetedItem: selectedItem,
+                                                          allItems: allItems)
         
         return viewController
     }
