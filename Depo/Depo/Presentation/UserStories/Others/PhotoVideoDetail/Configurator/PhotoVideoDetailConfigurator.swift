@@ -76,7 +76,6 @@ class PhotoVideoDetailModuleConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
         
-        //Little KOSTIL'
         interactor.onSelectItem(fileObject: selecetedItem, from: allItems)
         
     }
