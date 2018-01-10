@@ -529,16 +529,22 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         name = baseModel.name
         if let fileName = name {
-            if fileSize == 0, let localAsset = asset {
-                let resources = PHAssetResource.assetResources(for: localAsset)
-                if let resource = resources.first {
-                    if let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong {
-                        let sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64))
-                        fileSize = sizeOnDisk
+            if #available(iOS 10.0, *) {//FIXME: hotfix
+                if fileSize == 0, let localAsset = asset {
+                    let resources = PHAssetResource.assetResources(for: localAsset)
+                    if let resource = resources.first {
+                        if let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong {
+                            let sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64))
+                            fileSize = sizeOnDisk
+                        }
                     }
                 }
+                md5 = String(format: "%@%i", fileName, fileSize)
+            } else {
+                md5 = fileName
             }
-            md5 = String(format: "%@%i", fileName, fileSize)
+            
+            
         }
         
         fileType = baseModel.fileType
