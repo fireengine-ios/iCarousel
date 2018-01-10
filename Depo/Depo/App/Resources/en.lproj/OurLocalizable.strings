@@ -244,8 +244,10 @@
 "Ok" = "Ok";
 "Please choose %d files at most" = "Please choose %d files at most";
 "Next" = "Next";
-"Photo selection" = "Photo selection";
+"Create story" = "Create story";
+"Cancel" = "Cancel";
 "Continue" = "Continue";
+"Please Choose 20 files at most" = "Please Choose 20 files at most";
 "Sorry, but story name should not be empty" = "Sorry, but story name should not be empty";
 "SAVE" = "SAVE";
 "Name" = "Name";

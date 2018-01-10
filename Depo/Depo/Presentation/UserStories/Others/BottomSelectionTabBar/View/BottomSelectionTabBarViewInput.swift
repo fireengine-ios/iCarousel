@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol BottomSelectionTabBarViewInput: Waiting {
+protocol BottomSelectionTabBarViewInput: class, Waiting {
 
     /**
         @author AlexanderP

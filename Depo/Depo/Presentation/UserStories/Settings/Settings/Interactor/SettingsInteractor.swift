@@ -14,6 +14,8 @@ class SettingsInteractor: SettingsInteractorInput {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
     private var userInfoResponse: AccountInfoResponse?
+    let authService = AuthenticationService()
+    let accountSerivese = AccountService()
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
@@ -43,7 +45,7 @@ class SettingsInteractor: SettingsInteractorInput {
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
                       TextConstants.settingsViewCellLogout]]
-        AccountService().info(success: { [weak self] (responce) in
+        accountSerivese.info(success: { [weak self] (responce) in
             guard let `self` = self else {
                 return
             }
@@ -64,7 +66,7 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     private func requestTurkcellSecurityInfo() {
-        AccountService().securitySettingsInfo(success: { [weak self] (response) in
+        accountSerivese.securitySettingsInfo(success: { [weak self] (response) in
             guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
                 let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
                 let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
@@ -80,7 +82,7 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool) {
-        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: passcode, mobileNetworkAuthEnabled: autoLogin, success: { [weak self] (response) in
+        accountSerivese.securitySettingsChange(turkcellPasswordAuthEnabled: passcode, mobileNetworkAuthEnabled: autoLogin, success: { [weak self] (response) in
             guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
                 let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
                 let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
@@ -96,7 +98,6 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     func onLogout() {
-        let authService = AuthenticationService()
         authService.logout { [weak self] in
             DispatchQueue.main.async {
                 self?.passcodeStorage.clearPasscode()
@@ -112,7 +113,7 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     func uploadPhoto(withPhoto photo: Data) {
-        AccountService().setProfilePhoto(param: UserPhoto(photo: photo), success: {[weak self] (response) in
+        accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] (response) in
             DispatchQueue.main.async {
                 self?.output.profilePhotoUploadSuccessed()
             }
