@@ -445,7 +445,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var id: Int64?
 
-    let fileSize: Int64
+    var fileSize: Int64
     
     var favorites: Bool
     
@@ -468,7 +468,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return tmpDownloadUrl
     }
     
-     var fileData: Data?
+    var fileData: Data?
     
     var asset: PHAsset? {
         
@@ -529,6 +529,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         name = baseModel.name
         if let fileName = name {
+            if fileSize == 0, let localAsset = asset {
+                let resources = PHAssetResource.assetResources(for: localAsset)
+                if let resource = resources.first {
+                    if let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong {
+                        let sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64))
+                        fileSize = sizeOnDisk
+                    }
+                }
+            }
             md5 = String(format: "%@%i", fileName, fileSize)
         }
         
