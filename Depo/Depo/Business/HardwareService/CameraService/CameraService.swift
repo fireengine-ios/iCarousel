@@ -26,6 +26,8 @@ import AVFoundation
 //    }
     
     func cameraIsAvalible (cameraGranted: @escaping CameraGranted) {
+        log.debug("CameraService cameraIsAvalible")
+
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             cameraGranted(true)
@@ -38,6 +40,8 @@ import AVFoundation
     }
     
     func showCamera(onViewController sourceViewViewController: UIViewController) {
+        log.debug("CameraService showCamera")
+
         cameraIsAvalible { [weak self] accessGranted in
             guard let `self` = self else {
                 return
@@ -53,11 +57,15 @@ import AVFoundation
     }
     
     func showImagesPicker(onViewController sourceViewViewController: UIViewController) {
+        log.debug("CameraService showImagesPicker")
+
         self.showPickerController(type: .photoLibrary, onViewController: sourceViewViewController)
     }
     
     private func showPickerController(type: UIImagePickerControllerSourceType,
                                       onViewController sourceViewViewController: UIViewController) {
+        log.debug("CameraService showPickerController")
+
         guard let cameraSupportedVC = sourceViewViewController as?
             (UIImagePickerControllerDelegate & UINavigationControllerDelegate) else {
                 debugPrint("this VC does not support camera picker delegate")
@@ -77,6 +85,8 @@ import AVFoundation
     }
     
     private func showAccessAlert() {
+        log.debug("CameraService showAccessAlert")
+
         let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
                                               message: TextConstants.cameraAccessAlertText,
                                               image: .none,

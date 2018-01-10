@@ -6,13 +6,15 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
+class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     weak var output: MoreFilesActionsInteractorOutput?
     private var fileService = WrapItemFileService()
     
     let player: MediaPlayer = factory.resolve()
-
+    let photosAlbumService = PhotosAlbumService()
+    
+    
     typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
     
     var sharingItems = [BaseDataSourceItem]()
@@ -71,7 +73,7 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     
     func shareSmallSize(sourceRect: CGRect?){
         if let items = sharingItems as? [WrapData] {
-            let files: [FileForDownload] = items.flatMap({ FileForDownload(forSmallURL: $0) })
+            let files: [FileForDownload] = items.flatMap({ FileForDownload(forMediumURL: $0) })
             shareFiles(filesForDownload: files, sourceRect: sourceRect)
         }
         
@@ -178,8 +180,30 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         }
     }
     
-    func edit(item: [BaseDataSourceItem]) {
+    
+    private var cropyController: CRYCropNavigationController?
+    
+    func edit(item: [BaseDataSourceItem], complition: (() -> Void)?) {
+        guard let item = item.first as? Item, let url = item.tmpDownloadUrl else {
+            return
+        }
         
+        ImageDownloder().getImage(patch: url) { [weak self] image in
+            guard let `self` = self, let image = image,
+                let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
+            else {
+                complition?()
+                return
+            }
+            
+            //vc.setShareEnabled(true)
+            //        vc.setCropDelegate(self)
+            vc.sharedDelegate = self
+            self.cropyController = vc
+            
+            complition?()
+            RouterVC().presentViewController(controller: vc)
+        }
     }
     
     func delete(item: [BaseDataSourceItem]) {
@@ -246,6 +270,7 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
             albumService.deleteAlbums(deleteAlbums: DeleteAlbums(albums: albumbs), success: { [weak self] in
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .removeAlbum)
+                    ItemOperationManager.default.albumsDeleted(albums: albumbs)
                 }
             }, fail: { [weak self] errorRespone in
                 DispatchQueue.main.async {
@@ -317,11 +342,12 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
                                    success: self?.succesAction(elementType: .move),
                                    fail: self?.failAction(elementType: .move))
             
-            }, cancel: { self.succesAction(elementType: ElementTypes.move)()
+            }, cancel: { [weak self] in
+                self?.succesAction(elementType: ElementTypes.move)()
         } )
     }
     
-    func copy(item: [BaseDataSourceItem], toPath:String) {
+    func copy(item: [BaseDataSourceItem], toPath: String) {
         guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
             return
         }
@@ -333,7 +359,6 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
             self?.fileService.move(items: item, toPath: folder.uuid,
                                    success: self?.succesAction(elementType: .copy),
                                    fail: self?.failAction(elementType: .copy))
-            
             }, cancel: { [weak self] in
                 self?.succesAction(elementType: ElementTypes.move)()
         })
@@ -356,10 +381,10 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
                                  fail: failAction(elementType: .download))
         } else if let albums = item as? [AlbumItem] {
             
-            PhotosAlbumService().loadItemsBy(albums: albums, success: { (itemsByAlbums) in
-                self.fileService.download(itemsByAlbums: itemsByAlbums,
-                                          success: self.succesAction(elementType: .download),
-                                          fail: self.failAction(elementType: .download))
+            photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] (itemsByAlbums) in
+                self?.fileService.download(itemsByAlbums: itemsByAlbums,
+                                          success: self?.succesAction(elementType: .download),
+                                          fail: self?.failAction(elementType: .download))
             })
         }
     }
@@ -469,6 +494,14 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         download(item: items)
     }
     
+    func deleteDeviceOriginal(items: [BaseDataSourceItem]) {
+        guard let wrapedItems = items as? [WrapData] else {
+            return
+        }
+        fileService.deleteLocalFiles(deleteFiles: wrapedItems, success: succesAction(elementType: .deleteDeviceOriginal),
+                                     fail: failAction(elementType: .deleteDeviceOriginal))
+    }
+    
     func succesAction(elementType: ElementTypes) -> FileOperation {
         let success: FileOperation = { [weak self] in
             DispatchQueue.main.async {
@@ -492,7 +525,7 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     func failAction(elementType: ElementTypes) -> FailResponse {
         
         let failResponse : FailResponse  = { [weak self] value in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 self?.output?.operationFailed(type: elementType, message: value.description)
             }
         }
@@ -513,5 +546,27 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         if let operations = operations {
             output?.startCancelableAsync(operations: operations, cancel: cancel)
         }
+    }
+}
+
+
+// MARK: - Cropy delegate
+/// https://wiki.life.com.by/pages/viewpage.action?spaceKey=LTFizy&title=Cropy
+/// https://stash.turkcell.com.tr/git/projects/CROP/repos/cropy-ios-sdk/browse
+extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
+    
+    @objc func getEditedImage(_ image: UIImage) {
+        
+        let vc = PopUpController.with(title: TextConstants.save, message: TextConstants.cropyMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, secondAction: { [weak self] vc in
+            self?.save(image: image)
+            vc.close { [weak self] in
+                self?.cropyController?.dismiss(animated: true, completion: nil)
+            }
+        })
+        UIApplication.topController()?.present(vc, animated: false, completion: nil)
+    }
+    
+    private func save(image: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }

@@ -40,6 +40,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var topBarContainer: UIView!
     
+    @IBOutlet weak var noFilesTopLabel: UILabel?
+    
     var scrolliblePopUpView = ViewForPopUp()
     
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
@@ -80,6 +82,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesLabel.textColor = ColorConstants.textGrayColor
         noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         
+        noFilesTopLabel?.text = TextConstants.folderEmptyText
+        noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
+        noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        
         startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
         
@@ -113,7 +119,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func configurateViewForPopUp(){
-        WrapItemOperatonManager.default.addViewForNotification(view: scrolliblePopUpView)
+        CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
     
     func configurateNavigationBar() {
@@ -128,7 +134,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     deinit{
-         WrapItemOperatonManager.default.removeViewForNotification(view: scrolliblePopUpView)
+         CardsManager.default.removeViewForNotification(view: scrolliblePopUpView)
          NotificationCenter.default.removeObserver(self)
     }
     
@@ -153,6 +159,17 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             deleteAction()
         })
         navBarConfigurator.configure(right: [delete], left: [])
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+    
+    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Swift.Void) {
+        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
+            deleteAction()
+        })
+        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+        })
+        navBarConfigurator.configure(right: [more, delete], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
@@ -197,8 +214,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func startSelection(with numberOfItems: Int) {
-        self.navigationItem.leftBarButtonItem = cancelSelectionButton!
-        setTitle(withString: "\(numberOfItems) Selected")
+        navigationItem.leftBarButtonItem = cancelSelectionButton!
+        selectedItemsCountChange(with: numberOfItems)
         navigationBarWithGradientStyle()
         configureNavBarActions(isSelecting: true)
         underNavBarBar?.setSorting(enabled: false)
@@ -220,10 +237,18 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesImage.image = image
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
+        topBarContainer.isHidden = true
+    }
+    
+    func showNoFilesTop() {
+        noFilesTopLabel?.isHidden = false
+        topBarContainer.isHidden = true
     }
     
     func hideNoFiles() {
         noFilesView.isHidden = true
+        noFilesTopLabel?.isHidden = true
+        topBarContainer.isHidden = false
     }
     
     @objc func onCancelSelectionButton(){
@@ -245,7 +270,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func selectedItemsCountChange(with count: Int) {
-        self.setTitle(withString: String(count) + " Selected")
+        setTitle(withString: String(count) + " Selected")
     }
     
     static let sliderH : CGFloat = 180

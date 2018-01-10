@@ -8,14 +8,13 @@
 
 class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelectionTabBarModuleInput, BottomSelectionTabBarViewOutput, BottomSelectionTabBarInteractorOutput {
     
-    var view: BottomSelectionTabBarViewInput!
+    weak var view: BottomSelectionTabBarViewInput!
 //    var interactor: BottomSelectionTabBarInteractorInput!
     var router: BottomSelectionTabBarRouterInput!
     
     let middleTabBarRect = CGRect(x: Device.winSize.width/2 - 5, y: Device.winSize.height - 49, width: 10, height: 50)
     
     func viewIsReady() {
-        
         guard let bottomBarInteractor = interactor as? BottomSelectionTabBarInteractorInput,
             let currentConfig = bottomBarInteractor.currentBarcongfig else {
             return
@@ -113,7 +112,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHidePlusTabBar), object: nil)
         view.showBar(animated: animated, onView: shownSourceView)
-        debugPrint("Show")
     }
     
     func bottomBarSelectedItem(index: Int, sender: UITabBarItem) {
@@ -136,7 +134,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             basePassingPresenter?.stopModeSelected()
             interactor.download(item: selectedItems)
         case .edit:
-            interactor.edit(item: selectedItems)
+            RouterVC().tabBarVC?.showSpiner()
+            self.interactor.edit(item: selectedItems, complition: {
+                RouterVC().tabBarVC?.hideSpiner()
+            })
         case .info:
             if let firstSelected = selectedItems.first as? Item {
                 router.onInfo(object: firstSelected)
@@ -291,7 +292,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 
             case .edit:
                 action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                    self.interactor.edit(item: currentItems)
+                    
+                    RouterVC().tabBarVC?.showSpiner()
+                    self.interactor.edit(item: currentItems, complition: {
+                        RouterVC().tabBarVC?.hideSpiner()
+                    })
                 })
             case .download:
                 action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
@@ -468,6 +473,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     func objectsToShare(rect: CGRect?, urls: [String]) {
         router.showShare(rect: rect, urls: urls)
+    }
+    
+    func deleteMusic(_ completion: @escaping (() -> Void)) {
+        router.showDeleteMusic(completion)
     }
     
     //MARK: base presenter

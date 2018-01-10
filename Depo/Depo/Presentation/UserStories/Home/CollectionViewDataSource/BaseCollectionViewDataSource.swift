@@ -15,7 +15,7 @@ protocol BaseCollectionViewDataSourceDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
 }
 
-class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, CollectionViewLayoutDelegate, BaseCollectionViewCellWithSwipeDelegate, WrapItemOperationViewProtocol {
+class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, CollectionViewLayoutDelegate, BaseCollectionViewCellWithSwipeDelegate, CardsManagerViewProtocol {
     
     var collectionView: UICollectionView!
     var viewController: UIViewController!
@@ -145,7 +145,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 let indexPath = IndexPath(row: index, section: 0)
                 self.collectionView.insertItems(at: [indexPath])
             }, completion: { (succes) in
-                
+                print("finished competition")
             })
         }else{
             collectionView.reloadData()
@@ -158,7 +158,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 let indexPath = IndexPath(row: index, section: 0)
                 self.collectionView.deleteItems(at: [indexPath])
             }, completion: { (succes) in
-                
+                print("finished competition")
             })
         }else{
             collectionView.reloadData()
@@ -189,7 +189,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func getViewForOperation(operation: OperationType) -> BaseView{
-        return WrapItemOperatonManager.popUpViewForOperaion(type: operation)
+        return CardsManager.popUpViewForOperaion(type: operation)
     }
     
     func startOperationWith(type: OperationType){
@@ -251,12 +251,15 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
     }
     
-    func setProgress(ratio: Float, for operationType: OperationType) {
+    func setProgress(ratio: Float, for operationType: OperationType, object: WrapData?) {
         guard let popUp = viewsByType[operationType] as? ProgressPopUp else {
             return
         }
         
         popUp.setProgressBar(ratio: ratio)
+        if let`object` = object{
+            popUp.setImageForUploadingItem(item: object)
+        }
     }
     
     
@@ -273,7 +276,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
     }
     
-    func isEqual(object: WrapItemOperationViewProtocol) -> Bool{
+    func isEqual(object: CardsManagerViewProtocol) -> Bool{
         if let compairedView = object as? BaseCollectionViewDataSource{
             return compairedView == self
         }

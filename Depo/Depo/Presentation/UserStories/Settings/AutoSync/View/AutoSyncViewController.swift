@@ -43,10 +43,8 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if self.isMovingFromParentViewController {
-            let model = dataSource.createSettingsAutoSyncModel()
-            output.saveChanges(setting: model)
-        }
+        let model = dataSource.createSettingsAutoSyncModel()
+        output.saveChanges(setting: model)
 
     }
     

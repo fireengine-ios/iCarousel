@@ -353,8 +353,14 @@ class RouterVC: NSObject {
     
     // MARK: Folder
     
-    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController{
-        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController", folder: folder, type: type, sortType: sortType, moduleOutput: moduleOutput)
+    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController{
+        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController",
+                                                                                                 folder: folder,
+                                                                                                 type: type,
+                                                                                                 sortType: sortType,
+                                                                                                 moduleOutput: moduleOutput,
+                                                                                                 alertSheetExcludeTypes: alertSheetExcludeTypes)
+
         return controller
     }
     
@@ -487,17 +493,19 @@ class RouterVC: NSObject {
     }
     
     func filesDetailViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController")
+        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
+                                                                                    selectedItem: fileObject,
+                                                                                    allItems: items)
         let c = controller as! PhotoVideoDetailViewController
-        c.interactor!.onSelectItem(fileObject: fileObject, from: items)//FIXME: ALEX
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
     
     func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController")
+        let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                         selectedItem: fileObject,
+                                                                                         allItems: items)
         let c = controller as! PhotoVideoDetailViewController
-        c.interactor!.onSelectItem(fileObject: fileObject, from: items)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }

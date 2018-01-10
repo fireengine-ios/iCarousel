@@ -14,6 +14,8 @@ class SettingsInteractor: SettingsInteractorInput {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
     private var userInfoResponse: AccountInfoResponse?
+    let authService = AuthenticationService()
+    let accountSerivese = AccountService()
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
@@ -42,7 +44,7 @@ class SettingsInteractor: SettingsInteractorInput {
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
                       TextConstants.settingsViewCellLogout]]
-        AccountService().info(success: { [weak self] (responce) in
+        accountSerivese.info(success: { [weak self] (responce) in
             guard let `self` = self else {
                 return
             }
@@ -62,22 +64,22 @@ class SettingsInteractor: SettingsInteractorInput {
     }
 
     func onLogout() {
-        let authService = AuthenticationService()
         authService.logout { [weak self] in
             DispatchQueue.main.async {
                 self?.passcodeStorage.clearPasscode()
                 self?.biometricsManager.isEnabled = false
-                ApplicationSession.sharedSession.session.clearRemeberMeToken()
+                ApplicationSession.sharedSession.session.clearTokens()
+                ApplicationSession.sharedSession.saveData()
                 CoreDataStack.default.clearDataBase()
                 FreeAppSpace.default.clear()
-                WrapItemOperatonManager.default.stopAllOperations()
+                CardsManager.default.stopAllOperations()
                 self?.output.goToOnboarding()
             }
         }
     }
     
     func uploadPhoto(withPhoto photo: Data) {
-        AccountService().setProfilePhoto(param: UserPhoto(photo: photo), success: {[weak self] (response) in
+        accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] (response) in
             DispatchQueue.main.async {
                 self?.output.profilePhotoUploadSuccessed()
             }

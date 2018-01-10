@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseFileContentViewDeleGate {
+protocol BaseFileContentViewDeleGate: class {
     func tapOnSelectedItem()
     
     func pageToRight()
@@ -21,7 +21,7 @@ class BaseFileContentView: UIView {
     
     typealias Item = WrapData
     
-    var delegate: BaseFileContentViewDeleGate?
+    weak var delegate: BaseFileContentViewDeleGate? // Dele Gate ?
     var index: Int = -1
 
     @IBOutlet weak var imageView: LoadingImageView!
@@ -33,7 +33,7 @@ class BaseFileContentView: UIView {
     @IBOutlet weak var webView: UIWebView!
 
     
-    class func initFromXib()->BaseFileContentView {
+    class func initFromXib() -> BaseFileContentView {
         let view = UINib(nibName: "BaseFileContentView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! BaseFileContentView
         view.configurateView()
         return view
@@ -56,7 +56,6 @@ class BaseFileContentView: UIView {
             playVideoButton.isHidden = !(object.fileType == FileType.video)
         } else if object.fileType != .audio {
             if object.fileType.isUnSupportedOpenType {
-                
                 imageView.isHidden = true
                 webView.isHidden = false
                 if let url = object.urlToFile {

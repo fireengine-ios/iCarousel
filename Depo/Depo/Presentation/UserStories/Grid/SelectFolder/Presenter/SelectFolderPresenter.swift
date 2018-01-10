@@ -9,8 +9,10 @@
 class SelectFolderPresenter: DocumentsGreedPresenter{
 
     override func viewIsReady(collectionView: UICollectionView) {
-        
         super.viewIsReady(collectionView: collectionView)
+        
+        log.debug("SelectFolderPresenter viewIsReady")
+
         dataSource.canReselect = false
         dataSource.enableSelectionOnHeader = false
         dataSource.maxSelectionCount = 0
@@ -19,6 +21,8 @@ class SelectFolderPresenter: DocumentsGreedPresenter{
     }
     
     override func onNextButton(){
+        log.debug("SelectFolderPresenter onNextButton")
+
         if let view_ = view as? SelectFolderViewController{
             if (view_.selectedFolder != nil){
                 view_.onFolderSelected(folder: view_.selectedFolder!)
@@ -33,6 +37,8 @@ class SelectFolderPresenter: DocumentsGreedPresenter{
 //    }
     
     override func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
+        log.debug("SelectFolderPresenter onItemSelected")
+
         guard let wraperd = item as? Item else{
             return
         }

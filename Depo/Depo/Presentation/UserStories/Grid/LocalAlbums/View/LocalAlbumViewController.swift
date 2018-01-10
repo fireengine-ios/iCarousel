@@ -22,9 +22,10 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
     }
     
     override func configureNavBarActions(isSelecting: Bool = false) {
-        navigationBarWithGradientStyleWithoutInsets()
+        super.configureNavBarActions(isSelecting: isSelecting)
+        visibleNavigationBarStyle()
+        setTitle(withString: "")
         setNavigationTitle(title: mainTitle)
-        
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItems = nil
         
@@ -42,3 +43,4 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
     }
     
 }
+

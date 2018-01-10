@@ -134,9 +134,6 @@ final class MediaPlayer: NSObject {
             
             play()
         }
-        else if keyPath == #keyPath(AVPlayer.currentItem.status), player.currentItem?.status == .readyToPlay {
-            play()
-        }
         else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp), player.currentItem?.status == .readyToPlay, isPlaying {
             play()
         }
@@ -181,6 +178,7 @@ final class MediaPlayer: NSObject {
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem))
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.status))
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp))
+        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty))
     }
     
     // MARK: - Start actions

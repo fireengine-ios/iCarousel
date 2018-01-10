@@ -22,6 +22,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     func viewIsReady() {
         output.setRecentSearches(recentSearches.searches)
+        getDefaultSuggetion(text: "")
     }
     
     func searchItems(by searchText: String, sortBy: SortType, sortOrder: SortOrder) {
@@ -34,9 +35,9 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     self.output.setRecentSearches(self.recentSearches.searches)
                     self.output.endSearchRequestWith(text: searchText)
                 }
-            }, fail: {
+            }, fail: { [weak self] in
                 DispatchQueue.main.async {
-                    self.output.failedSearch()
+                    self?.output.failedSearch()
                 }
         })
     }
@@ -75,6 +76,10 @@ class SearchViewInteractor: SearchViewInteractorInput {
             }
         }, fail: { (_) in
         })
+    }
+    
+    func getDefaultSuggetion(text: String) {
+        getSuggetion(text: text)
     }
     
     func clearRecentSearches() {

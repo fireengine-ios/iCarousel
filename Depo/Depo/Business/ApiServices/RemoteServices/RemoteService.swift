@@ -51,6 +51,8 @@ class RemoteItemsService {
     }
     
     func reloadItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        log.debug("RemoteItemsService reloadItems")
+
         currentPage = 0
         isFull = false
         queueOperations.cancelAllOperations()
@@ -59,12 +61,16 @@ class RemoteItemsService {
     }
     
     func nextItems(fileType : FieldValue, sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems? ) {
+        log.debug("RemoteItemsService nextItems")
+
         self.fieldValue = fileType
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
     }
     
     
     func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        log.debug("RemoteItemsService nextItems")
+
         if let unwrapedFieldValue = newFieldValue {
             fieldValue = unwrapedFieldValue
         }
@@ -80,6 +86,8 @@ class RemoteItemsService {
     }
     
     func nextItemsMinified(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        log.debug("RemoteItemsService nextItemsMinified")
+
         if let unwrapedFieldValue = newFieldValue {
             fieldValue = unwrapedFieldValue
         }
@@ -97,6 +105,8 @@ class RemoteItemsService {
     
     
     fileprivate func nextItems(with searchParameters: SearchByFieldParameters, success: ListRemoveItems?, fail:FailRemoteItems?) {
+        log.debug("RemoteItemsService nextItems")
+
         let executingOrWaitingOperations = queueOperations.operations.filter {
             ($0 as? NextPageOperation)?.requestParam == searchParameters
         }
@@ -107,6 +117,7 @@ class RemoteItemsService {
         let nextPageOperation = NextPageOperation(requestParam: searchParameters, success: { list in
             self.currentPage = self.currentPage + 1
             print("Current page \(self): \(self.currentPage)")
+            log.debug("Current page \(self): \(self.currentPage)")
             success?(list)
         }, fail: fail)
         
@@ -114,10 +125,16 @@ class RemoteItemsService {
     }
     
     func getSuggestion(text: String, success: @escaping ([SuggestionObject]) -> Void, fail: @escaping FailResponse) {
+        log.debug("RemoteItemsService getSuggestion")
+
         let parametrs = SuggestionParametrs(withText: text)
         remote.suggestion(param: parametrs, success: { suggestList in
+            log.debug("RemoteItemsService getSuggestion SearchService suggestion success")
+
             success((suggestList as! SuggestionResponse).list)
         }) { (error) in
+            log.debug("RemoteItemsService getSuggestion SearchService suggestion fail")
+
             fail(error)
         }
     }
@@ -158,7 +175,11 @@ class NextPageOperation: Operation {
             return
         }
         let semaphore = DispatchSemaphore(value: 0)
-        searchService.searchByField(param: requestParam, success: { (response)  in
+        searchService.searchByField(param: requestParam, success: { [weak self] (response)  in
+            
+            guard let `self` = self else {
+                return
+            }
             
             if self.isRealCancel {
                 self.fail?()
@@ -176,8 +197,8 @@ class NextPageOperation: Operation {
             self.success?(list)
             semaphore.signal()
             
-        }, fail: { _ in
-            self.fail?()
+        }, fail: { [weak self]_ in
+            self?.fail?()
             semaphore.signal()
         })
         semaphore.wait()
@@ -247,6 +268,8 @@ class FolderService: RemoteItemsService {
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        log.debug("FilesFromFolderService nextItems")
+
         fileService.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder,
                               folderOnly: foldersOnly, remoteServicePage: currentPage,
                               success: success, fail: fail)
@@ -265,6 +288,8 @@ class FilesFromFolderService: RemoteItemsService {
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        log.debug("AllFilesService nextItems")
+
         fileService.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder, remoteServicePage: currentPage, success: success, fail: fail)
         currentPage += 1
     }
@@ -296,6 +321,8 @@ class FacedRemoteItemsService {
     }
     
     func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?) {
+        log.debug("FacedRemoteItemsService nextItems")
+
         remoteService.nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
     }
     

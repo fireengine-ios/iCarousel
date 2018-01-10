@@ -9,7 +9,6 @@
 import UIKit
 
 class UserProfileViewController: BaseViewController, UserProfileViewInput, UITextFieldDelegate {
-
     var output: UserProfileViewOutput!
     
     @IBOutlet weak var scrollView : UIScrollView!
@@ -81,6 +80,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         let r2 = NSRange(location: range.location, length: range.length)
         attributedText.addAttribute(NSAttributedStringKey.font, value: font1, range: r1)
         attributedText.addAttribute(NSAttributedStringKey.font, value: font2, range: r2)
+        
+        backButtonForNavigationItem(title: TextConstants.backTitle)
         
         output.viewIsReady()
     }
@@ -158,6 +159,10 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         return gsmNumberTextField.text ?? ""
     }
     
+    func endSaving() {
+        readyButton?.isEnabled = true
+    }
+    
     // MARK: ButtonsAction
     
     @IBAction func onValueChanged() {}
@@ -182,7 +187,23 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
             return
         }
         
-        output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
+        if email != emailTextField.text {
+            readyButton?.isEnabled = false
+            let message = String(format: TextConstants.registrationEmailPopupMessage, emailTextField.text ?? "")
+            let controller = PopUpController.with(title: TextConstants.registrationEmailPopupTitle,
+                                                  message: message,
+                                                  image: .error,
+                                                  buttonTitle: TextConstants.ok,
+                                                  action: { [weak self] vc in
+                                                    self?.output.tapReadyButton(name: self?.nameTextField.text ?? "", email: self?.emailTextField.text ?? "", number: self?.gsmNumberTextField.text ?? "")
+                                                    self?.readyButton?.isEnabled = true
+                                                    vc.dismiss(animated: true, completion: nil)
+            })
+            self.present(controller, animated: true, completion: nil)
+        } else {
+            output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
+        }
+        
     }
     
     @IBAction func onHideKeyboardButton(){

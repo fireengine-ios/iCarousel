@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -49,11 +48,18 @@
                             <constraint firstAttribute="height" constant="12" id="wFq-mS-Bu8"/>
                         </constraints>
                     </imageView>
+                    <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Pct-zi-geI">
+                        <rect key="frame" x="5" y="85" width="80" height="2"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="Pts-fc-WVc"/>
+                        </constraints>
+                    </progressView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="qHk-K2-jJ1" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="29Z-8F-zaG"/>
                 <constraint firstItem="kwv-1p-nO6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="3HP-DR-B2Y"/>
+                <constraint firstAttribute="bottom" secondItem="Pct-zi-geI" secondAttribute="bottom" constant="3" id="5Th-uT-gol"/>
                 <constraint firstAttribute="trailing" secondItem="Lqt-0c-t0J" secondAttribute="trailing" id="8uz-yU-7hi"/>
                 <constraint firstItem="Lqt-0c-t0J" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="EHS-nI-eXc"/>
                 <constraint firstItem="0of-UX-nI8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Gyk-ZW-aZt"/>
@@ -65,7 +71,9 @@
                 <constraint firstAttribute="trailing" secondItem="0of-UX-nI8" secondAttribute="trailing" constant="5" id="PfD-53-IAa"/>
                 <constraint firstItem="kwv-1p-nO6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Pzt-C4-zdu"/>
                 <constraint firstItem="Lqt-0c-t0J" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="RlI-z4-WD1"/>
+                <constraint firstItem="Pct-zi-geI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="XoO-oq-wl4"/>
                 <constraint firstAttribute="bottom" secondItem="2VJ-2A-pkc" secondAttribute="bottom" id="bcu-La-YZE"/>
+                <constraint firstAttribute="trailing" secondItem="Pct-zi-geI" secondAttribute="trailing" constant="5" id="hUx-DJ-NaM"/>
                 <constraint firstAttribute="bottom" secondItem="IQc-XA-IIn" secondAttribute="bottom" constant="8" id="ivt-zk-vgW"/>
                 <constraint firstItem="2VJ-2A-pkc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mJT-yZ-qWv"/>
             </constraints>
@@ -75,6 +83,7 @@
                 <outlet property="cloudStatusImage" destination="IQc-XA-IIn" id="Bsx-gf-1p3"/>
                 <outlet property="favoriteIcon" destination="kwv-1p-nO6" id="yqs-WY-gDH"/>
                 <outlet property="imageView" destination="2VJ-2A-pkc" id="DSz-RE-Xol"/>
+                <outlet property="progressView" destination="Pct-zi-geI" id="54V-SU-E1P"/>
                 <outlet property="selectionImageView" destination="0of-UX-nI8" id="qwk-PN-ZFc"/>
                 <outlet property="selectionView" destination="Lqt-0c-t0J" id="4Af-9D-QkW"/>
             </connections>

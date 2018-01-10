@@ -15,14 +15,13 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
     override func shareViaLink(sourceRect: CGRect?){
         output?.operationStarted(type: .share)
         fileService.share(sharedFiles: sharingItems, success: {[weak self] (url) in
-            DispatchQueue.main.async {
-                self?.output?.operationFinished(type: .share)
-                
-                if let `output` = self?.output as? BottomSelectionTabBarInteractorOutput {
-                    output.objectsToShare(rect: sourceRect,urls: [url])
+                DispatchQueue.main.async {
+    
+                    self?.output?.operationFinished(type: .share)                
+                    if let output_ = self?.output as? BottomSelectionTabBarInteractorOutput {
+                        output_.objectsToShare(rect: sourceRect,urls: [url])
+                    }
                 }
-            }
-            
             }, fail: failAction(elementType: .share))
     }
    
@@ -43,9 +42,25 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
             self.succesAction(elementType: ElementTypes.move)()
         }
         
-        if let `output` = output as? BottomSelectionTabBarInteractorOutput {
-            output.selectFolder(folderSelector)
+        if let output_ = output as? BottomSelectionTabBarInteractorOutput {
+            output_.selectFolder(folderSelector)
         }
 
+    }
+    
+    override func delete(item: [BaseDataSourceItem]) {
+        if let items = item as? [Item] {
+            let okHandler: () -> Void = { [weak self] in
+                self?.output?.operationStarted(type: .delete)
+                self?.player.remove(listItems: items)
+                self?.fileService.delete(deleteFiles: items,
+                                         success: self?.succesAction(elementType: .delete),
+                                         fail: self?.failAction(elementType: .delete))
+            }
+            
+            if let output_ = output as? BottomSelectionTabBarInteractorOutput {
+                output_.deleteMusic(okHandler)
+            }
+        }
     }
 }

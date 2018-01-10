@@ -278,15 +278,17 @@ class AuthenticationService: BaseRequestService {
             self?.success?()
         }
         
-        failLogin = { (result) in
+        failLogin = { [weak self] (result) in
             // remove token
             let loginData = LoginResponse(withJSON: nil)
             ApplicationSession.sharedSession.updateSession(loginData: loginData)
-            self.fail?(result)
+            self?.fail?(result)
         }
     }
     
     func login(user: AuthenticationUser, sucess:SuccessLogin?, fail: FailResponse?) {
+        log.debug("AuthenticationService login")
+
         self.success = sucess
         self.fail = fail
         let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
@@ -294,6 +296,8 @@ class AuthenticationService: BaseRequestService {
     }
     
     func autificationByRememberMe(sucess:SuccessLogin?, fail: FailResponse?) {
+        log.debug("AuthenticationService autificationByRememberMe")
+
         let user = AuthenticationUserByRememberMe()
         self.success = sucess
         self.fail = fail
@@ -302,6 +306,8 @@ class AuthenticationService: BaseRequestService {
     }
     
     func autificationByToken(sucess:SuccessLogin?, fail: FailResponse?) {
+        log.debug("AuthenticationService autificationByToken")
+
         let user = AuthenticationUserByToken()
         self.success = sucess
         self.fail = fail
@@ -310,6 +316,8 @@ class AuthenticationService: BaseRequestService {
     }
     
     func turkcellAutification(user: Authentication3G, sucess:SuccessLogin?, fail: FailResponse?) {
+        log.debug("AuthenticationService turkcellAutification")
+
         self.success = sucess
         self.fail = fail
         let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: fail)
@@ -317,8 +325,10 @@ class AuthenticationService: BaseRequestService {
     }
     
     func logout(success:SuccessLogout?) {
+        log.debug("AuthenticationService logout")
+
         SingletonStorage.shared.accountInfo = nil
-        let successResponse  =  {
+        let successResponse = {
             let s = LoginResponse(withJSON: nil)
             /// in LoginResponse(withJSON: nil)
             /// rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
@@ -333,46 +343,57 @@ class AuthenticationService: BaseRequestService {
             success?()
         }
         successResponse()
+        FactoryMain.mediaPlayer.stop()
         return
 //        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: successResponse, fail: failResponse)
 //        executePostRequest(param: param, handler: handler)
     }
     
     func signUp(user: SignUpUser, sucess:SuccessResponse?, fail: FailResponse?) {
+        log.debug("AuthenticationService logout")
         
         let handler = BaseResponseHandler<SignUpSuccessResponse,SignUpFailResponse>(success: sucess, fail: fail)
         executePostRequest(param: user, handler: handler)
     }
     
     func verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification, sucess:SuccessResponse?, fail:FailResponse?) {
+        log.debug("AuthenticationService verificationPhoneNumber")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: phoveVerification, handler: handler)
     }
     
     func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess:SuccessResponse?, fail:FailResponse?) {
+        log.debug("AuthenticationService resendVerificationSMS")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: resendVerification, handler: handler)
     }
     
     func updateEmail(emailUpdateParameters: EmailUpdate, sucess:SuccessResponse?, fail:FailResponse?) {
+        log.debug("AuthenticationService updateEmail")
+
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailUpdateParameters, handler: handler)
     }
     
     func verificationEmail(emailVerification:EmailVerification, sucess:SuccessResponse?, fail:FailResponse?) {
+        log.debug("AuthenticationService verificationEmail")
+
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailVerification, handler: handler)
     }
     
     func fogotPassword(forgotPassword:ForgotPassword, success:SuccessResponse?, fail: FailResponse?) {
+        log.debug("AuthenticationService fogotPassword")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: forgotPassword, handler: handler)
     }
     
     func authenticate(success:SuccessLogin?, fail: FailResponse?) {
+        log.debug("AuthenticationService authenticate")
+
         let reachability = ReachabilityService()
         let rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
         if rememberMeToken != nil {
@@ -385,6 +406,8 @@ class AuthenticationService: BaseRequestService {
     }
 
     private func turkcellAuth(success:SuccessLogin?, fail: FailResponse?) {
+        log.debug("AuthenticationService turkcellAuth")
+
         let user = Authentication3G()
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
             self?.autificationByToken(sucess: success, fail: fail)

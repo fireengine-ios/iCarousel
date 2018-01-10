@@ -7,7 +7,7 @@
 //
 
 class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
-    
+
     func onInfo(object: Item) {
         let router = RouterVC()
         let viewContr = router.fileInfo!
@@ -29,12 +29,14 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
             return
         }
         let router = RouterVC()
-        
-        let vc = PrintInitializer.viewController(data: wrapperedArray)
+        let imagesOnly = wrapperedArray.filter{$0.fileType == .image}
+        let vc = PrintInitializer.viewController(data: imagesOnly)
         router.pushViewController(viewController: vc)
     }
     
     func showSelectFolder(selectFolder: SelectFolderViewController) { }
     
     func showShare(rect: CGRect?, urls: [String]) { }
+    
+    func showDeleteMusic(_ completion: @escaping (() -> Void)) { }
 }

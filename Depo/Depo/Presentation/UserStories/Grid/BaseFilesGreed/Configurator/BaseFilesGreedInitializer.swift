@@ -34,7 +34,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         )
 
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                  selectionModeTypes: [.createStory])
+                                                                  selectionModeTypes: [.createStory, .print, .deleteDeviceOriginal])
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
                                fileFilters: [.fileType(.image)],
@@ -45,7 +45,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeMusicViewController(with nibName:String) -> UIViewController {
+    class func initializeMusicViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto])
@@ -116,7 +116,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                                     selectionModeTypes: [.rename]))
+                                                                                     selectionModeTypes: [.rename]),
+                               alertSheetExcludeTypes: [.print])
         viewController.mainTitle = TextConstants.homeButtonAllFiles
         return viewController
     }
@@ -139,16 +140,17 @@ class BaseFilesGreedModuleInitializer: NSObject {
         configurator.configure(viewController: viewController,
                                moduleOutput: moduleOutput,
                                remoteServices: FavouritesService(requestSize: 100),
-                               fileFilters: [.favoriteStatus(.favorites)],
-                               bottomBarConfig: bottomBarConfig,
-                               topBarConfig: gridListTopBarConfig,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                                      selectionModeTypes: [.rename]))
+                               fileFilters: [.favoriteStatus(.favorites), .localStatus(.nonLocal)],
+                                bottomBarConfig: bottomBarConfig,
+                                topBarConfig: gridListTopBarConfig,
+                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+                                                                                      selectionModeTypes: [.rename]),
+                                alertSheetExcludeTypes: [.print])
         viewController.mainTitle = TextConstants.homeButtonFavorites
         return viewController
     }
     
-    class func initializeFilesFromFolderViewController(with nibName:String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) -> UIViewController {
+    class func initializeFilesFromFolderViewController(with nibName:String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
@@ -157,6 +159,9 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                style: .default, tintColor: nil)
 
         let presenter: BaseFilesGreedPresenter = DocumentsGreedPresenter()
+        if let alertSheetExcludeTypes = alertSheetExcludeTypes {
+            presenter.alertSheetExcludeTypes = alertSheetExcludeTypes
+        }
         let interactor = BaseFilesGreedInteractor(remoteItems: FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid))
         interactor.folder = folder
         viewController.parentUUID = folder.uuid

@@ -58,6 +58,27 @@ enum ApplicationType: String {
     case xls = "xls"
     case pdf = "pdf"
     case ppt = "ppt"
+    
+    func bigIconImage() -> UIImage? {
+        switch self {
+        case .rar:
+            return #imageLiteral(resourceName: "fileIconRar")
+        case .zip:
+            return #imageLiteral(resourceName: "fileIconZip")
+        case .doc:
+            return #imageLiteral(resourceName: "fileBigIconDoc")
+        case .txt:
+            return #imageLiteral(resourceName: "fileBigIconTxt")
+        case .xls:
+            return #imageLiteral(resourceName: "fileBigIconXls")
+        case .pdf:
+            return #imageLiteral(resourceName: "fileBigIconPdf")
+        case .ppt:
+            return #imageLiteral(resourceName: "fileBigIconPpt")
+        default:
+            return #imageLiteral(resourceName: "fileIconUnknown")
+        }
+    }
 }
 
 enum FileType: Equatable {
@@ -70,6 +91,7 @@ enum FileType: Equatable {
     case musicPlayList
     case allDocs
     case application(ApplicationType)
+
     
     var convertedToSearchFieldValue: FieldValue {
         
@@ -390,6 +412,8 @@ protocol  Wrappered  {
     
     var urlToFile: URL? { get }
     
+    var fileData: Data? { get }
+    
     var duration: String? { get }
     
     var uuid: String { get }
@@ -401,7 +425,6 @@ protocol  Wrappered  {
 
 
 class WrapData: BaseDataSourceItem, Wrappered {
-
     enum Status: String {
         case active = "ACTIVE"
         case uploaded = "UPLOADED"
@@ -422,7 +445,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var id: Int64?
 
-    let fileSize: Int64
+    var fileSize: Int64
     
     var favorites: Bool
     
@@ -437,13 +460,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var status: Status
     
     /* for remote content*/
-    private let tmpDownloadUrl: URL?
+    var tmpDownloadUrl: URL?
     
     var isUploading: Bool = false
     
     var urlToFile: URL? {
         return tmpDownloadUrl
     }
+    
+    var fileData: Data?
     
     var asset: PHAsset? {
         
@@ -504,6 +529,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         name = baseModel.name
         if let fileName = name {
+            if fileSize == 0, let localAsset = asset {
+                let resources = PHAssetResource.assetResources(for: localAsset)
+                if let resource = resources.first {
+                    if let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong {
+                        let sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64))
+                        fileSize = sizeOnDisk
+                    }
+                }
+            }
             md5 = String(format: "%@%i", fileName, fileSize)
         }
         
@@ -594,6 +628,19 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let unwrapedFolderUUID = parendfolderUUID {
             parent = unwrapedFolderUUID
         }
+    }
+    
+    init(imageData: Data) {
+        fileData = imageData
+        fileSize = Int64(imageData.count)
+        favorites = false
+        patchToPreview = .remoteUrl(nil)
+        status = .unknown
+        tmpDownloadUrl = nil
+        
+        let creationDate = Date()
+        super.init(uuid: nil, name: nil, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
+        
     }
     
     init(mediaItem: MediaItem) {

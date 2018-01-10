@@ -12,6 +12,9 @@ class LoginInteractor: LoginInteractorInput {
     
     var dataStorage = LoginDataStorage()
     
+    let authenticationService = AuthenticationService()
+    let eulaService = EulaService()
+    
     private var rememberMe: Bool = true
     
     private var attempts: Int = 0
@@ -44,8 +47,6 @@ class LoginInteractor: LoginInteractorInput {
             output.allAttemtsExhausted(user: login)//block here
             return
         }
-        
-        let authenticationService = AuthenticationService()
         
         let user = AuthenticationUser(login          : login,
                                       password       : password,
@@ -130,7 +131,6 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     func checkEULA() {
-        let eulaService = EulaService()
         eulaService.eulaCheck(success: { [weak self] (succesResponce) in
             DispatchQueue.main.async {
                 self?.output.onSuccessEULA()
@@ -139,10 +139,10 @@ class LoginInteractor: LoginInteractorInput {
             DispatchQueue.main.async {
                 //TODO: what do we do on other errors?
                 ///https://wiki.life.com.by/pages/viewpage.action?pageId=62456128
-                if failResponce.description == "412" {
+                if failResponce.description == "EULA_APPROVE_REQUIRED" {
                     self?.output.onFailEULA()
                 } else {
-                   self?.output.onSuccessEULA()
+                   self?.output.onFailEULA()
                 }
                 
             }

@@ -25,19 +25,25 @@ final class PhotoSyncService: ItemSyncServiceImpl {
     override func interrupt() {
         super.interrupt()
         
-        photoVideoService?.stopAllOperations()//FIXME: stop only photo sync
+        log.debug("PhotoSyncService interrupt")
+        
+        photoVideoService?.stopAllOperations()
         UploadService.default.cancelSyncOperations(photo: true, video: false)
     }
     
     override func stop() {
         super.stop()
         
-        photoVideoService?.stopAllOperations()//FIXME: stop only photo sync
+        log.debug("PhotoSyncService stop")
+        
+        photoVideoService?.stopAllOperations()
         UploadService.default.cancelSyncOperations(photo: true, video: false)
     }
     
     override func waitForWiFi() {
         super.waitForWiFi()
+        
+        log.debug("PhotoSyncService waitForWiFi")
         
         photoVideoService?.stopAllOperations()//FIXME: stop only photo sync
         UploadService.default.cancelSyncOperations(photo: true, video: false)

@@ -21,7 +21,8 @@ class RecentSearchesService {
         if let recentSearches = UserDefaults.standard.object(forKey: recentSearchesKey) as? [String] {
             return recentSearches
         } else {
-            let recentSearches = [String]()
+            let currentYear = Date().getYear()
+            let recentSearches = ["\(currentYear)"]
             UserDefaults.standard.set(recentSearches, forKey: recentSearchesKey)
             return recentSearches
         }

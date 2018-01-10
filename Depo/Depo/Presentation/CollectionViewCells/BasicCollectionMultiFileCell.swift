@@ -74,21 +74,35 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     }
     
     override func setImage(image: UIImage?) {
-        if (image != nil){
-            isAlreadyConfigured = true
-            if (isBigSize()){
-                bigContentImageView.contentMode = .scaleAspectFill
-                bigContentImageView.image = image
-            } else {
-                smallContentImageView.contentMode = .scaleAspectFit
-                smallContentImageView.configured = true
-                smallContentImageView.setImage(image: image)
-                smallContentImageView.isHidden = false
-                smallCellSelectionView.isHidden = true
-                
-            }
+        isAlreadyConfigured = true
+
+        if (isBigSize()){
+            bigContentImageView.contentMode = .scaleAspectFill
+            bigContentImageView.image = image
         } else {
-            super.setImage(image: image)
+            smallContentImageView.contentMode = .scaleAspectFit
+            smallContentImageView.configured = true
+            smallContentImageView.setImage(image: image)
+            smallContentImageView.isHidden = false
+            smallCellSelectionView.isHidden = true
+        }
+        stopAnimation()
+    }
+    
+    override func setPlaceholderImage(image: UIImage?) {
+        isAlreadyConfigured = true
+        
+        if isBigSize() {
+            bigContentImageView.contentMode = .scaleAspectFit
+            bigContentImageView.image = image
+            bigContentImageView.isHidden = false
+        } else {
+            smallContentImageView.contentMode = .scaleAspectFill
+            smallContentImageView.configured = true
+            smallContentImageView.setImage(image: image)
+            smallContentImageView.isHidden = false
+            bigContentImageView.isHidden = true
+            smallCellSelectionView.isHidden = true
         }
         stopAnimation()
     }
@@ -107,10 +121,12 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func setImage(with url: URL) {
         if let imageView = isBigSize() ? self.bigContentImageView : self.smallContentImageView {
             imageView.contentMode = .center
-            imageView.sd_setImage(with: url, placeholderImage: self.placeholderImage(), options: [.avoidAutoSetImage]) { (image, error, cacheType, url) in
-                DispatchQueue.main.async {
-                    self.setImage(image: image)
-                }
+            imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { (image, error, cacheType, url) in
+                imageView.layer.opacity = 0.1
+                self.setImage(image: image)
+                UIView.animate(withDuration: 0.2, animations: {
+                    imageView.layer.opacity = 1.0
+                })
             }
         }
     }

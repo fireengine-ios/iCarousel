@@ -24,6 +24,8 @@ class UploadProgressService: NSObject, URLSessionTaskDelegate {
     weak var delegate: UploadProgressServiceDelegate?
  
     func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        log.debug("UploadProgressService urlSession")
+
         guard let progressDelegate = delegate, let tempUUIDfromURL = task.currentRequest?.url?.lastPathComponent else {
             return
         }

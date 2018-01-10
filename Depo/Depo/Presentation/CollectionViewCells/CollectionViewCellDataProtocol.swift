@@ -10,13 +10,13 @@ protocol CollectionViewCellDataProtocol {
     
     typealias Item = WrapData
     
-    func placeholderImage() -> UIImage?
-    
     func confireWithWrapperd(wrappedObj: BaseDataSourceItem)
     
     func setImage(image: UIImage?)
     
     func setImage(with url: URL)
+    
+    func setPlaceholderImage(image: UIImage?)
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool)
     

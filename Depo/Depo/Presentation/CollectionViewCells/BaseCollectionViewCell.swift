@@ -31,6 +31,8 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         lpgr.delegate = self
         lpgr.delaysTouchesBegan = true
         addGestureRecognizer(lpgr)
+        
+        contentView.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
     }
     
     @objc func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
@@ -66,23 +68,19 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     }
     
     func setImage(image: UIImage?){
-        if image == nil, let placeholder = self.placeholderImage() {
-            DispatchQueue.main.async {
-                self.setImage(image: placeholder)
-            }
-        }
+
     }
     
     func setImage(with url: URL) {
         
     }
     
-    func setSelection(isSelectionActive: Bool, isSelected: Bool){
-        
+    func setPlaceholderImage(image: UIImage?) {
+
     }
     
-    func placeholderImage() -> UIImage? {
-        return nil
+    func setSelection(isSelectionActive: Bool, isSelected: Bool){
+        
     }
     
     func updating(){

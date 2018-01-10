@@ -16,6 +16,9 @@ class AutoUploadIsOffPopUp: BaseView {
     
     override func configurateView(){
         super.configurateView()
+        
+        canSwipe = false
+        
         titleText?.text = TextConstants.autoUploaOffPopUpText
         titleText?.font = UIFont.TurkcellSaturaRegFont(size: 12)
         titleText?.textColor = ColorConstants.textGrayColor
@@ -30,7 +33,7 @@ class AutoUploadIsOffPopUp: BaseView {
     }
 
     @IBAction func onCancelButton(){
-        WrapItemOperatonManager.default.stopOperationWithType(type: .autoUploadIsOff)
+        CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
         PopUpService.shared.resetLoginCountForUploadOffPopUp()
     }
     
