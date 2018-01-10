@@ -58,6 +58,27 @@ enum ApplicationType: String {
     case xls = "xls"
     case pdf = "pdf"
     case ppt = "ppt"
+    
+    func bigIconImage() -> UIImage? {
+        switch self {
+        case .rar:
+            return #imageLiteral(resourceName: "fileIconRar")
+        case .zip:
+            return #imageLiteral(resourceName: "fileIconZip")
+        case .doc:
+            return #imageLiteral(resourceName: "fileBigIconDoc")
+        case .txt:
+            return #imageLiteral(resourceName: "fileBigIconTxt")
+        case .xls:
+            return #imageLiteral(resourceName: "fileBigIconXls")
+        case .pdf:
+            return #imageLiteral(resourceName: "fileBigIconPdf")
+        case .ppt:
+            return #imageLiteral(resourceName: "fileBigIconPpt")
+        default:
+            return #imageLiteral(resourceName: "fileIconUnknown")
+        }
+    }
 }
 
 enum FileType: Equatable {
@@ -70,6 +91,7 @@ enum FileType: Equatable {
     case musicPlayList
     case allDocs
     case application(ApplicationType)
+
     
     var convertedToSearchFieldValue: FieldValue {
         
