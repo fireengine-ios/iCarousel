@@ -39,6 +39,10 @@ class SyncServiceManager {
         return (photoSyncService.status == .waitingForWifi || videoSyncService.status == .waitingForWifi)
     }
     
+    private var isSyncFinished: Bool {
+        return (photoSyncService.status == .synced && videoSyncService.status == .synced)
+    }
+    
     
     //MARK: - Init
     
@@ -144,7 +148,7 @@ class SyncServiceManager {
             return
         }
         
-        if reachability.connection != .none, APIReachabilityService.shared.connection == .reachable {
+        if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
             if reachability.connection == .wifi {
                 start(photo: true, video: true)
             } else if reachability.connection == .cellular {
@@ -176,20 +180,6 @@ class SyncServiceManager {
         } else {
             if photo { photoSyncService.stop() }
             if video { videoSyncService.stop() }
-        }
-    }
-    
-    //wait for wi-fi connection
-    private func stopManually() {
-        photoSyncService.waitForWiFi()
-        videoSyncService.waitForWiFi()
-    }
-    
-    //start if is waiting for wi-fi
-    private func startManually() {
-        if reachabilityService?.connection != .none {
-            photoSyncService.startManually()
-            videoSyncService.startManually()
         }
     }
 }
@@ -229,6 +219,7 @@ extension SyncServiceManager {
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
             CardsManager.default.stopOperationWithType(type: .sync)
+            FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
             return
         }
         
@@ -246,6 +237,10 @@ extension SyncServiceManager {
 
         if hasWaitingForWiFiSync {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
+        }
+        
+        if isSyncFinished {
+            FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
         }
     }
 }

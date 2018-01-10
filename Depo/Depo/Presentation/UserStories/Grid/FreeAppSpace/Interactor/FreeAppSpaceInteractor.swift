@@ -17,7 +17,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
             let array = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
             
             let fileService = WrapItemFileService()
-            fileService.delete(deleteFiles: array, success: {
+            fileService.deleteLocalFiles(deleteFiles: array, success: {
                 
                 FreeAppSpace.default.deleteDeletedLocalPhotos(deletedPhotos: array)
                 
@@ -50,6 +50,9 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     }
     
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        if let remoteItems = remoteItems as? FreeAppService {
+            remoteItems.clear()
+        }
         super.reloadItems(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
     }
     

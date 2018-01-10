@@ -153,13 +153,6 @@ struct TextConstants {
     static let createAlbum = NSLocalizedString("Create album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadFromLifebox = NSLocalizedString("Upload from lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    //MARK: - Navigation bar img names
-    
-    static let moreBtnImgName = NSLocalizedString("more", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cogBtnImgName = NSLocalizedString("cog", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let searchBtnImgName = NSLocalizedString("search", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let deleteBtnImgName = NSLocalizedString("DeleteShareButton", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
     // MARK: - Searchbar img name
     
     static let searchIcon = NSLocalizedString("searchIcon", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -280,6 +273,9 @@ struct TextConstants {
     static let documentsViewNoDocumenetsTitleText = NSLocalizedString("You don’t have any documents on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let documentsViewNoDocumenetsButtonText = NSLocalizedString("Start adding your documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    //MARK: Folder
+    static let folderEmptyText = NSLocalizedString("Folder is Empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     //MARK: settings
     static let backPrintTitle = NSLocalizedString("Back to Lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -383,8 +379,10 @@ struct TextConstants {
     static let createStorySelectAudioButton = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: Create story Photos
-    static let createStoryPhotosTitle = NSLocalizedString("Photo selection", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let createStoryPhotosNext = NSLocalizedString("Next", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPhotosTitle = NSLocalizedString("Create story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPhotosCancel = NSLocalizedString("Cancel", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPhotosContinue = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPhotosHeaderTitle = NSLocalizedString("Please Choose 20 files at most", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryPhotosMaxCountAllert = NSLocalizedString("Please choose %d files at most", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryPhotosMaxCountAllertOK = NSLocalizedString("Ok", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryNoSelectedPhotosError = NSLocalizedString("Sorry, but story photos should not be empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -701,6 +699,13 @@ struct TextConstants {
     
     static let locationServiceDisable = NSLocalizedString("Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    
+    //MARK: - Navigation bar img names
+    
+    static let moreBtnImgName = "more"
+    static let cogBtnImgName = "cog"
+    static let searchBtnImgName = "search"
+    static let deleteBtnImgName = "DeleteShareButton"
 }
 
 

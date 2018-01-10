@@ -75,6 +75,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     override func setImage(image: UIImage?) {
         isAlreadyConfigured = true
+
         if (isBigSize()){
             bigContentImageView.contentMode = .scaleAspectFill
             bigContentImageView.image = image
@@ -83,6 +84,24 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             smallContentImageView.configured = true
             smallContentImageView.setImage(image: image)
             smallContentImageView.isHidden = false
+            smallCellSelectionView.isHidden = true
+        }
+        stopAnimation()
+    }
+    
+    override func setPlaceholderImage(image: UIImage?) {
+        isAlreadyConfigured = true
+        
+        if isBigSize() {
+            bigContentImageView.contentMode = .scaleAspectFit
+            bigContentImageView.image = image
+            bigContentImageView.isHidden = false
+        } else {
+            smallContentImageView.contentMode = .scaleAspectFill
+            smallContentImageView.configured = true
+            smallContentImageView.setImage(image: image)
+            smallContentImageView.isHidden = false
+            bigContentImageView.isHidden = true
             smallCellSelectionView.isHidden = true
         }
         stopAnimation()

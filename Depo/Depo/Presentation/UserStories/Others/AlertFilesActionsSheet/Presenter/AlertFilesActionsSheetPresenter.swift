@@ -262,8 +262,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .createStory:
                 action = UIAlertAction(title: TextConstants.actionSheetCreateStory, style: .default, handler: { _ in
-                    self.interactor.createStory(items: currentItems)
-                    self.basePassingPresenter?.stopModeSelected()
+                    let images = currentItems.filter({ $0.fileType == .image })
+                    if images.count <= NumericConstants.maxNumberPhotosInStory {
+                        self.interactor.createStory(items: images)
+                        self.basePassingPresenter?.stopModeSelected()
+                    } else {
+                        let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
+                        UIApplication.showErrorAlert(message: text)
+                    }
                 })
             case .iCloudDrive:
                 action = UIAlertAction(title: TextConstants.actionSheetiCloudDrive, style: .default, handler: { _ in

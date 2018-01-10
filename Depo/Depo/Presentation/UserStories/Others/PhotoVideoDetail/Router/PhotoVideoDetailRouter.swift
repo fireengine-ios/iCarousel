@@ -15,11 +15,11 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
             return
         }
         router.pushViewController(viewController: fileInfo)
-        fileInfo.interactor.setObject(object: object)
+        fileInfo.interactor.setObject(object: object) //FIXME: AGAIN!>!?!@>!@ interactor in vc!!@@!!@!@
     }
     
     func goBack(navigationConroller: UINavigationController?){
-        guard let nController = navigationConroller else{
+        guard let nController = navigationConroller else { //TODO: change to global router
             return
         }
         nController.popViewController(animated: true)

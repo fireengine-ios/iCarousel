@@ -9,15 +9,16 @@
 class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
 
     weak var output: ForgotPasswordInteractorOutput!
-
+    let authenticationService = AuthenticationService()
+    
     func sendForgotPasswordRequest(with mail: String, enteredCaptcha: String, captchaUDID: String) {
-        let authenticationService = AuthenticationService()
-        authenticationService.fogotPassword(forgotPassword: ForgotPassword(email: mail, attachedCaptcha: CaptchaParametrAnswer(uuid: captchaUDID, answer: enteredCaptcha)), success: { _ in
-            DispatchQueue.main.async { [weak self] in
+        authenticationService.fogotPassword(forgotPassword: ForgotPassword(email: mail, attachedCaptcha: CaptchaParametrAnswer(uuid: captchaUDID, answer: enteredCaptcha)),
+                                            success: { [weak self] _ in
+            DispatchQueue.main.async {
                 self?.output.requestSucceed()
             }
-            }, fail: { response in
-                DispatchQueue.main.async { [weak self] in
+            }, fail: { [weak self] response in
+                DispatchQueue.main.async {
                     debugPrint("forgot password response fail", response.description)
                     self?.output.requestFailed(withError: self?.checkErrorService(withErrorResponse: response.description) ?? "Error")
                     

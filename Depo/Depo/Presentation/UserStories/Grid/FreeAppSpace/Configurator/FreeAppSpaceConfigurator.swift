@@ -28,13 +28,22 @@ class FreeAppSpaceModuleConfigurator {
         
         let presenter = FreeAppSpacePresenter()
         
-        //presenter.topBarConfig = gridListTopBarConfig
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.selectAll],
+                                                                   selectionModeTypes: [.selectAll])
+        
+        let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
+        let alertModulePresenter = alertSheetModuleInitilizer.createModule()
+        presenter.alertSheetModule = alertModulePresenter
+        alertModulePresenter.basePassingPresenter = presenter
+        
+        //presenter.topBarConfig = alertSheetConfig
         
         presenter.view = viewController
         presenter.router = router
         
         let interactor = FreeAppSpaceInteractor(remoteItems: remoteServices)
         interactor.output = presenter
+        interactor.alertSheetConfig = alertSheetConfig
         
         presenter.interactor = interactor
         viewController.output = presenter

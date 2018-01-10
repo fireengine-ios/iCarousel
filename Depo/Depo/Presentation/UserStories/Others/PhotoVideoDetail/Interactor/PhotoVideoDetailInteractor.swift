@@ -10,7 +10,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
     typealias Item = WrapData
 
-    var output: PhotoVideoDetailInteractorOutput!
+    weak var output: PhotoVideoDetailInteractorOutput!
     
     var array = [Item]()
     
@@ -19,7 +19,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     var photoVideoBottomBarConfig: EditingBarConfig!
     var documentsBottomBarConfig: EditingBarConfig!
     
-     var moreMenuConfig = [ElementTypes]()
+    var moreMenuConfig = [ElementTypes]()
     
     var setupedMoreMenuConfig: [ElementTypes] {
         return moreMenuConfig
@@ -28,8 +28,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     func onSelectItem(fileObject: Item, from items: [Item]) {
         array.removeAll()
         array.append(contentsOf: items)
-        
-        
+      
 //        if fileObject.fileType == .image || fileObject.fileType == .video {
 ////            let wrapperedArray = WrapperedItemsSorting().filterByType(itemsArray: array,
 ////                                                                      types: [FileType.video, FileType.image])
@@ -63,7 +62,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         let selectedItem = array[selectedIndex]
         switch selectedItem.fileType {
         case .image, .video:
-
             var elementsConfig = photoVideoBottomBarConfig.elementsConfig
             if .video == selectedItem.fileType || selectedItem.isLocalItem {
                 if let editIndex = elementsConfig.index(of: .edit) {
@@ -102,12 +100,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         if (selectedIndex >= array.count){
             selectedIndex = array.count - 1
         }
-
         if array.isEmpty {
             output.goBack()
         } else {
-
-        output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
+            output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
         }
     }
 }
