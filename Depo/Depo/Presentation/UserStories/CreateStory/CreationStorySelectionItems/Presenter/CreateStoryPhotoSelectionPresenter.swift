@@ -15,7 +15,7 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
 
         super.viewIsReady(collectionView: collectionView)
         
-        dataSource.canReselect = true
+        dataSource.canReselect = false
         dataSource.maxSelectionCount = NumericConstants.maxNumberPhotosInStory
         dataSource.enableSelectionOnHeader = false
         dataSource.setSelectionState(selectionState: true)

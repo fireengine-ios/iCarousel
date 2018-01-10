@@ -244,8 +244,10 @@
 "Ok" = "Ok";
 "Please choose %d files at most" = "Please choose %d files at most";
 "Next" = "Next";
-"Photo selection" = "Photo selection";
+"Create story" = "Create story";
+"Cancel" = "Cancel";
 "Continue" = "Continue";
+"Please Choose 20 files at most" = "Please Choose 20 files at most";
 "Sorry, but story name should not be empty" = "Sorry, but story name should not be empty";
 "SAVE" = "SAVE";
 "Name" = "Name";
@@ -330,6 +332,7 @@
 "You don’t have any documents on your Lifebox yet." = "You don’t have any documents on your Lifebox yet.";
 "Start adding your music" = "Start adding your music";
 "You don’t have any music on your Lifebox yet." = "You don’t have any music on your Lifebox yet.";
+"Folder is Empty" = "Folder is Empty";
 "Delete" = "Delete";
 "Move" = "Move";
 "Edit" = "Edit";

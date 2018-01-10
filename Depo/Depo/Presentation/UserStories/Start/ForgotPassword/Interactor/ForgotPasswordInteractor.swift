@@ -9,8 +9,10 @@
 class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
 
     weak var output: ForgotPasswordInteractorOutput!
-
+    let authenticationService = AuthenticationService()
+    
     func sendForgotPasswordRequest(with mail: String, enteredCaptcha: String, captchaUDID: String) {
+
         guard isValid(email: mail) else {
             DispatchQueue.main.async { [weak self] in
                 self?.output.requestFailed(withError: TextConstants.forgotPasswordErrorEmailFormatText)
@@ -23,11 +25,11 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
             DispatchQueue.main.async { [weak self] in
                 self?.output.requestSucceed()
             }
-            }, fail: { response in
-                DispatchQueue.main.async { [weak self] in
-                    debugPrint("forgot password response fail", response.description)
-                    self?.output.requestFailed(withError: self?.checkErrorService(withErrorResponse: response.description) ?? "Error")
-                }
+        }, fail: { [weak self] response in
+            DispatchQueue.main.async {
+                debugPrint("forgot password response fail", response.description)
+                self?.output.requestFailed(withError: self?.checkErrorService(withErrorResponse: response.description) ?? "Error")
+            }
         })
     }
     

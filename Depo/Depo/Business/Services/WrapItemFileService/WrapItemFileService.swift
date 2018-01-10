@@ -87,7 +87,6 @@ class WrapItemFileService: WrapItemFileOperations {
             }, fail: fail)
             
         } else {
-            
             success?()
         }
     }

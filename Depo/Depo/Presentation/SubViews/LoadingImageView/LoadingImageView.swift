@@ -27,7 +27,7 @@ class LoadingImageView: UIImageView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        if (cornerView == nil){
+        if (cornerView == nil) {
             cornerView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
             
             cornerView!.backgroundColor = UIColor.clear
@@ -80,7 +80,7 @@ class LoadingImageView: UIImageView {
         }
     }
     
-    func loadImageByURL(url: URL?){
+    func loadImageByURL(url: URL?) {
         self.image = nil
         if (url == nil) {
             checkIsNeedCancelRequest()
@@ -92,16 +92,16 @@ class LoadingImageView: UIImageView {
         activity.startAnimating()
         let path_: PathForItem = PathForItem.remoteUrl(url)
         path = path_
-        self.url = filesDataSource.getImage(patch: PathForItem.remoteUrl(url), compliteImage: {[weak self] (image) in
+        self.url = filesDataSource.getImage(patch: PathForItem.remoteUrl(url), compliteImage: { [weak self] (image) in
             if self?.path == path_ {
                 self?.finishImageLoading(image)
             }
         })
     }
     
-    func loadImageForItem(object: Item?){
+    func loadImageForItem(object: Item?) {
         self.image = nil
-        if (object == nil){
+        if (object == nil) {
             checkIsNeedCancelRequest()
             activity.stopAnimating()
             
@@ -120,7 +120,7 @@ class LoadingImageView: UIImageView {
     
     func loadImageByPath(path_ : PathForItem?){
         self.image = nil
-        if (path_ == nil){
+        if (path_ == nil) {
             checkIsNeedCancelRequest()
             activity.stopAnimating()
             
@@ -136,8 +136,8 @@ class LoadingImageView: UIImageView {
         }
     }
     
-    func setBorderVisibility(visibility: Bool){
-        if (visibility){
+    func setBorderVisibility(visibility: Bool) {
+        if (visibility) {
             addSubview(cornerView!)
         }else{
             cornerView!.removeFromSuperview()

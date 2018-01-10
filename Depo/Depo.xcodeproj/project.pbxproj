@@ -31,7 +31,6 @@
 		0D3A5AC196CA4CBF0837C33C /* CompleteProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E974936A7389CB85B79AA /* CompleteProfilePresenter.swift */; };
 		0D9510CB65B6DA6F2D661754 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8325E4AA32B488A637E3E308 /* LBAlbumLikePreviewSliderInteractorInput.swift */; };
 		0E221DE499E4E51040E5550A /* SettingsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFF44F88C9F0080E5FADF47 /* SettingsRouterInput.swift */; };
-		10CC7D3FA3B7A3A380C4E7D2 /* FreeAppSpaceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEB2D95F1B425231C9C7DE7 /* FreeAppSpaceInteractor.swift */; };
 		124B2508A085C281AB2765AF /* SelectNameViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */; };
 		1356E354CDA8AA7567B09334 /* UserInfoSubViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */; };
 		142A29D90D8A7CF39AC8F82C /* UploadedItemsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEFEDC411CE8C9592155BE8 /* UploadedItemsViewInput.swift */; };
@@ -52,7 +51,6 @@
 		24BA38BB8897D5355C541F70 /* ExpandStorageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61734B0CF97BFEC48E48A7E /* ExpandStorageViewOutput.swift */; };
 		25F2EEBED80FA9650DB66A1A /* UploadedItemsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BF60A65135F0C80BD118B /* UploadedItemsConfigurator.swift */; };
 		265478F6639B1332E1AD5E9E /* CompleteProfileInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC13B5A20B007574AC5D1A /* CompleteProfileInteractorInput.swift */; };
-		29F301A021F9712D24CB97EE /* FreeAppSpaceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEEC14B3D3808D6425359A /* FreeAppSpaceInitializer.swift */; };
 		2A1CBA93F5950F76EF480D84 /* SyncContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DC6D877F96EAC0DCE038CA /* SyncContactsViewController.swift */; };
 		2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */; };
 		2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282E581C729D5E96D07CE3D1 /* AlbumDetailRouter.swift */; };
@@ -232,6 +230,13 @@
 		7C66E8B11F979C3300D98F27 /* CreateStoryPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E8A71F979C3300D98F27 /* CreateStoryPreviewViewController.swift */; };
 		7C66E8B21F979C3300D98F27 /* CreateStoryPreviewViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E8A81F979C3300D98F27 /* CreateStoryPreviewViewIO.swift */; };
 		7C66E8B41F979C6800D98F27 /* CreateStoryPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C66E8B31F979C6800D98F27 /* CreateStoryPreviewViewController.xib */; };
+		7C6945E320039F4A00152344 /* FreeAppSpacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945D820039F4A00152344 /* FreeAppSpacePresenter.swift */; };
+		7C6945E420039F4A00152344 /* FreeAppSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945DA20039F4A00152344 /* FreeAppSpaceViewController.swift */; };
+		7C6945E520039F4A00152344 /* FreeAppSpaceViewCotroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6945DB20039F4A00152344 /* FreeAppSpaceViewCotroller.xib */; };
+		7C6945E620039F4A00152344 /* FreeAppSpaceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945DD20039F4A00152344 /* FreeAppSpaceInitializer.swift */; };
+		7C6945E720039F4A00152344 /* FreeAppSpaceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945DE20039F4A00152344 /* FreeAppSpaceConfigurator.swift */; };
+		7C6945E820039F4A00152344 /* FreeAppSpaceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945E020039F4A00152344 /* FreeAppSpaceInteractor.swift */; };
+		7C6945E920039F4A00152344 /* FreeAppSpaceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945E220039F4A00152344 /* FreeAppSpaceRouter.swift */; };
 		7C6B30011FFCC6510066C818 /* ItemOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B30001FFCC6510066C818 /* ItemOperationManager.swift */; };
 		7C6B30021FFCC6510066C818 /* ItemOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B30001FFCC6510066C818 /* ItemOperationManager.swift */; };
 		7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F531F31BD2200536DB6 /* PhotoStory.swift */; };
@@ -276,7 +281,6 @@
 		7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23BE1F4ABD3100607660 /* LoadingImageView.swift */; };
 		7CAC23C21F4ADC3900607660 /* RemoteSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23C11F4ADC3900607660 /* RemoteSearchService.swift */; };
 		7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
-		7CB2E3121FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */; };
 		7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF50231F44723D00D67BF3 /* AlbumService.swift */; };
 		7CC11AAB1FE1364D00AF022D /* PopUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAA1FE1364D00AF022D /* PopUpService.swift */; };
 		7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */; };
@@ -377,7 +381,6 @@
 		85AAD0E4BD93A160437B1236 /* AlbumSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832B26F8B87F6C1957D4A0FE /* AlbumSelectionViewController.swift */; };
 		865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED76B8EC80CDF294DAF95F7 /* ActivityTimelineRouter.swift */; };
 		86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82180F7E73B665AC7BA7EE23 /* UploadFilesSelectionInteractorInput.swift */; };
-		868B89BA3A01CCDC66E16667 /* FreeAppSpaceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BCED48F4E9B72F1A00F2BB /* FreeAppSpaceRouter.swift */; };
 		872D8C119282747BDC9A55C6 /* ActivityTimelineInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1FF28B20122B510C14A5A2 /* ActivityTimelineInteractorInput.swift */; };
 		873204F01FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873204EE1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift */; };
 		873204F11FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */; };
@@ -1282,13 +1285,7 @@
 		8C0E8FD61FDEBDFF00789C91 /* OTPViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF9B9785CB91B71D6E10883 /* OTPViewConfigurator.swift */; };
 		8C0E8FD71FDEBDFF00789C91 /* OTPViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9991BD4E3939E69007211781 /* OTPViewInitializer.swift */; };
 		8C0E8FD81FDEBDFF00789C91 /* UploadFromLifeBoxModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC41FD51E280013CCA0 /* UploadFromLifeBoxModuleInput.swift */; };
-		8C0E8FD91FDEBDFF00789C91 /* FreeAppSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D745EAC5C08D7738B982A9FE /* FreeAppSpaceViewController.swift */; };
-		8C0E8FDA1FDEBDFF00789C91 /* FreeAppSpacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC2BA6DE6B4E15B0260F638 /* FreeAppSpacePresenter.swift */; };
-		8C0E8FDB1FDEBDFF00789C91 /* FreeAppSpaceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEB2D95F1B425231C9C7DE7 /* FreeAppSpaceInteractor.swift */; };
-		8C0E8FDC1FDEBDFF00789C91 /* FreeAppSpaceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BCED48F4E9B72F1A00F2BB /* FreeAppSpaceRouter.swift */; };
-		8C0E8FDD1FDEBDFF00789C91 /* FreeAppSpaceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2114672AE2BCD019F2E4 /* FreeAppSpaceConfigurator.swift */; };
 		8C0E8FDE1FDEBDFF00789C91 /* OptInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE75A1FCC3ECF00C23CBD /* OptInController.swift */; };
-		8C0E8FDF1FDEBDFF00789C91 /* FreeAppSpaceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEEC14B3D3808D6425359A /* FreeAppSpaceInitializer.swift */; };
 		8C0E8FE11FDEBDFF00789C91 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9019CAC9FE00FD1E03 /* Security.framework */; };
 		8C0E8FE31FDEBDFF00789C91 /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD6261FD135CB000344BD /* libMPush.a */; };
@@ -1380,7 +1377,6 @@
 		8C0E90421FDEBDFF00789C91 /* CollectionViewCellForPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74481F07927200124DF5 /* CollectionViewCellForPhoto.xib */; };
 		8C0E90431FDEBDFF00789C91 /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
 		8C0E90441FDEBDFF00789C91 /* BasicCollectionMultiFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */; };
-		8C0E90461FDEBDFF00789C91 /* FreeAppSpaceViewCotroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */; };
 		8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44FC1F6BB21C0062C2E0 /* ActivityTimelineFileCell.xib */; };
 		8C0E90481FDEBDFF00789C91 /* LikeFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F8DA1F024DCF0028F51A /* LikeFilterViewController.xib */; };
 		8C0E90491FDEBDFF00789C91 /* EditinglBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF88B1F348B77002AC795 /* EditinglBar.xib */; };
@@ -1547,6 +1543,8 @@
 		97DC05B9B3DCF2CBAE060AF4 /* SyncContactsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC08749C42535A16BE62A26 /* SyncContactsInteractorOutput.swift */; };
 		97E245036F6119CDFA534B88 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD920B02D55872C2278EC4BE /* SplashViewController.swift */; };
 		980738277831905CE1389C42 /* FreeAppSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D745EAC5C08D7738B982A9FE /* FreeAppSpaceViewController.swift */; };
+		9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */; };
+		9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
 		9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FC663D1385AB04CA228302 /* FeedbackViewOutput.swift */; };
 		9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */; };
 		9BBF662583E415D3BC0ED486 /* PhotoVideoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */; };
@@ -1576,7 +1574,6 @@
 		B5FB65761FDE6F6900A02FD7 /* UploadProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* UploadProgressService.swift */; };
 		B6EC22F9A78F97B7AC7E1F69 /* LikeFilterModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEC5B817C9C02047F7D9C32 /* LikeFilterModuleInput.swift */; };
 		B73973BC5864F1C639D252EA /* SyncContactsModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC575D9B71AAF95E3625985 /* SyncContactsModuleInput.swift */; };
-		B7C673A176A577E30FAB824E /* FreeAppSpaceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2114672AE2BCD019F2E4 /* FreeAppSpaceConfigurator.swift */; };
 		B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E5B07CCA1DEE8EE3F7BCD /* LBAlbumLikePreviewSliderPresenter.swift */; };
 		BA527EDC7876722B487A0428 /* FileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F2AB0A215CE40568819D5 /* FileInfoPresenter.swift */; };
 		BD0B1847E5F68DAB8C778883 /* CompleteProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4585DD65822E56FFEB2B707 /* CompleteProfileInteractor.swift */; };
@@ -2432,7 +2429,6 @@
 		CEF69DE91FB5A26D00FCE6AB /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE81FB5A26D00FCE6AB /* UIImage+Orientation.swift */; };
 		CEF73B9D1FCEAC30004C3ADF /* KeyboardHideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF73B9C1FCEAC30004C3ADF /* KeyboardHideManager.swift */; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
-		D1F7307987DD553C63317B99 /* FreeAppSpacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC2BA6DE6B4E15B0260F638 /* FreeAppSpacePresenter.swift */; };
 		D3C1B14F5945B690203921F1 /* UploadedItemsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5A59232059F8E376C0A2D /* UploadedItemsInitializer.swift */; };
 		D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E01F3F18FA00EFDC6D /* UsageInfoConfigurator.swift */; };
 		D47863F21F3F18FA00EFDC6D /* UsageInfoInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E11F3F18FA00EFDC6D /* UsageInfoInitializer.swift */; };
@@ -2621,7 +2617,6 @@
 		097F4E84C509D07D9BC4F909 /* SettingsConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsConfigurator.swift; sourceTree = "<group>"; };
 		09A6A5A047D25FE5E736FC54 /* LBAlbumLikePreviewSliderInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderInitializer.swift; sourceTree = "<group>"; };
 		0AEEA430A2A4A92D35185388 /* AlbumsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsInitializer.swift; sourceTree = "<group>"; };
-		0CAE2114672AE2BCD019F2E4 /* FreeAppSpaceConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceConfigurator.swift; sourceTree = "<group>"; };
 		0E1CC5DC67F2371ACE4EC131 /* UserInfoSubViewInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewInteractorInput.swift; sourceTree = "<group>"; };
 		0EC8C528F82167DC7208C077 /* ExpandStorageViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageViewInput.swift; sourceTree = "<group>"; };
 		0F1FF28B20122B510C14A5A2 /* ActivityTimelineInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInteractorInput.swift; sourceTree = "<group>"; };
@@ -2635,7 +2630,6 @@
 		1A2448EE9B34B3649082BE9E /* UploadedItemsRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsRouter.swift; sourceTree = "<group>"; };
 		1A579EF08735401E788B9391 /* LikeFilterRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterRouterInput.swift; sourceTree = "<group>"; };
 		1AB80F562E2E268C766082D5 /* SettingsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInitializer.swift; sourceTree = "<group>"; };
-		1AEB2D95F1B425231C9C7DE7 /* FreeAppSpaceInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceInteractor.swift; sourceTree = "<group>"; };
 		1BCD54E34E004AFFD765CE3B /* SplashPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderConfigurator.swift; sourceTree = "<group>"; };
 		20BCBDB527895B614215B1EC /* BaseFilesGreedInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractor.swift; sourceTree = "<group>"; };
@@ -2885,6 +2879,13 @@
 		7C66E8A71F979C3300D98F27 /* CreateStoryPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPreviewViewController.swift; sourceTree = "<group>"; };
 		7C66E8A81F979C3300D98F27 /* CreateStoryPreviewViewIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPreviewViewIO.swift; sourceTree = "<group>"; };
 		7C66E8B31F979C6800D98F27 /* CreateStoryPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryPreviewViewController.xib; sourceTree = "<group>"; };
+		7C6945D820039F4A00152344 /* FreeAppSpacePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAppSpacePresenter.swift; sourceTree = "<group>"; };
+		7C6945DA20039F4A00152344 /* FreeAppSpaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceViewController.swift; sourceTree = "<group>"; };
+		7C6945DB20039F4A00152344 /* FreeAppSpaceViewCotroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeAppSpaceViewCotroller.xib; sourceTree = "<group>"; };
+		7C6945DD20039F4A00152344 /* FreeAppSpaceInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceInitializer.swift; sourceTree = "<group>"; };
+		7C6945DE20039F4A00152344 /* FreeAppSpaceConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceConfigurator.swift; sourceTree = "<group>"; };
+		7C6945E020039F4A00152344 /* FreeAppSpaceInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceInteractor.swift; sourceTree = "<group>"; };
+		7C6945E220039F4A00152344 /* FreeAppSpaceRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceRouter.swift; sourceTree = "<group>"; };
 		7C6B30001FFCC6510066C818 /* ItemOperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemOperationManager.swift; sourceTree = "<group>"; };
 		7C6BF9461EFA7AF200D73B62 /* PhoneVereficationScreen~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PhoneVereficationScreen~ipad.xib"; sourceTree = "<group>"; };
 		7C6E2F531F31BD2200536DB6 /* PhotoStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStory.swift; sourceTree = "<group>"; };
@@ -2932,7 +2933,6 @@
 		7CAC23BE1F4ABD3100607660 /* LoadingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		7CAC23C11F4ADC3900607660 /* RemoteSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteSearchService.swift; sourceTree = "<group>"; };
 		7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeAppSpace.swift; sourceTree = "<group>"; };
-		7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeAppSpaceViewCotroller.xib; sourceTree = "<group>"; };
 		7CBF50231F44723D00D67BF3 /* AlbumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumService.swift; sourceTree = "<group>"; };
 		7CC11AAA1FE1364D00AF022D /* PopUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpService.swift; sourceTree = "<group>"; };
 		7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForWiFiPopUp.swift; sourceTree = "<group>"; };
@@ -3242,6 +3242,8 @@
 		94E5A70D0BAB72F0D8679BB8 /* TermsAndServicesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractor.swift; sourceTree = "<group>"; };
 		95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorInput.swift; sourceTree = "<group>"; };
 		96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorInput.swift; sourceTree = "<group>"; };
+		9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderWithText.swift; sourceTree = "<group>"; };
+		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
 		9991BD4E3939E69007211781 /* OTPViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewInitializer.swift; sourceTree = "<group>"; };
 		99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationModuleInput.swift; sourceTree = "<group>"; };
@@ -3292,7 +3294,6 @@
 		B82D89618225F753C7AEEF59 /* SplashViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashViewInput.swift; sourceTree = "<group>"; };
 		B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInteractor.swift; sourceTree = "<group>"; };
 		B8AE89F708D1ADDEB03BE70E /* BaseFilesGreedInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorOutput.swift; sourceTree = "<group>"; };
-		B8BCED48F4E9B72F1A00F2BB /* FreeAppSpaceRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceRouter.swift; sourceTree = "<group>"; };
 		BAF33FDE763AFBAF8B14EC86 /* SelectNameViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewInput.swift; sourceTree = "<group>"; };
 		BB2E099926470C9E12018BC6 /* TermsAndServicesViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewOutput.swift; sourceTree = "<group>"; };
 		BB3D81D8F4441B332E687B17 /* BaseFilesGreedInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInitializer.swift; sourceTree = "<group>"; };
@@ -3308,7 +3309,6 @@
 		C0E7C8A905CBF89702F18211 /* Pods-DepoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C14662373D7DDA7928074D3C /* IntroduceConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceConfigurator.swift; sourceTree = "<group>"; };
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
-		C2FEEC14B3D3808D6425359A /* FreeAppSpaceInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceInitializer.swift; sourceTree = "<group>"; };
 		C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
 		C4A98EA438594E6B7C21041F /* UploadedItemsInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsInteractorOutput.swift; sourceTree = "<group>"; };
 		C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInitializer.swift; sourceTree = "<group>"; };
@@ -4269,7 +4269,6 @@
 		D510E6399344E81392443CFD /* PhoneVereficationInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractor.swift; sourceTree = "<group>"; };
 		D6249B52DD4A8E3987667D30 /* SelectFolderPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderPresenter.swift; sourceTree = "<group>"; };
 		D6F285DAEBFD29EE3A3322FE /* IntroduceModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceModuleInput.swift; sourceTree = "<group>"; };
-		D745EAC5C08D7738B982A9FE /* FreeAppSpaceViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceViewController.swift; sourceTree = "<group>"; };
 		D8210436C55034A653D4CEE9 /* ForgotPasswordViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewOutput.swift; sourceTree = "<group>"; };
 		D95FAF8E46E2D2359F5FB7BE /* SelectNameInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameInteractorInput.swift; sourceTree = "<group>"; };
 		D9A02B1046915E8086459A15 /* PhoneVereficationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationViewController.swift; sourceTree = "<group>"; };
@@ -4334,7 +4333,6 @@
 		FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewInteractorOutput.swift; sourceTree = "<group>"; };
 		FD5BEC48C5ED3B8650FB2FB3 /* SettingsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FD733F7347C546BBBAE9DF7D /* TermsAndServicesModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesModuleInput.swift; sourceTree = "<group>"; };
-		FEC2BA6DE6B4E15B0260F638 /* FreeAppSpacePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpacePresenter.swift; sourceTree = "<group>"; };
 		FF3D38F0C7EEF61373827F8A /* RegistrationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInteractorInput.swift; sourceTree = "<group>"; };
 		FFEC5B817C9C02047F7D9C32 /* LikeFilterModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterModuleInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -4731,15 +4729,6 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
-		1E019F3D4A4B96389B42C8FA /* View */ = {
-			isa = PBXGroup;
-			children = (
-				7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */,
-				D745EAC5C08D7738B982A9FE /* FreeAppSpaceViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		1FFBE2A6FBBEA028772BBA97 /* ExpandStorage */ = {
 			isa = PBXGroup;
 			children = (
@@ -4918,15 +4907,6 @@
 				F62E6075722A7C68AB366E0F /* SelectNameInteractor.swift */,
 			);
 			path = Interactor;
-			sourceTree = "<group>";
-		};
-		34932498D2615BCA4BC41310 /* Configurator */ = {
-			isa = PBXGroup;
-			children = (
-				0CAE2114672AE2BCD019F2E4 /* FreeAppSpaceConfigurator.swift */,
-				C2FEEC14B3D3808D6425359A /* FreeAppSpaceInitializer.swift */,
-			);
-			path = Configurator;
 			sourceTree = "<group>";
 		};
 		35466CD131154C1D21C7C31C /* PhotoVideoDetail */ = {
@@ -5867,6 +5847,8 @@
 				7C3A74511F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.xib */,
 				7C5549FD1F6C11C300067F99 /* CollectionViewStoryReorderView.swift */,
 				7C5549FE1F6C11C300067F99 /* CollectionViewStoryReorderView.xib */,
+				9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */,
+				9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */,
 			);
 			path = CollectionViewHeaders;
 			sourceTree = "<group>";
@@ -6042,6 +6024,60 @@
 				7C66E8A81F979C3300D98F27 /* CreateStoryPreviewViewIO.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7C6945D620039F4A00152344 /* FreeAppSpace */ = {
+			isa = PBXGroup;
+			children = (
+				7C6945D720039F4A00152344 /* Presenter */,
+				7C6945D920039F4A00152344 /* View */,
+				7C6945DC20039F4A00152344 /* Configurator */,
+				7C6945DF20039F4A00152344 /* Interactor */,
+				7C6945E120039F4A00152344 /* Router */,
+			);
+			path = FreeAppSpace;
+			sourceTree = "<group>";
+		};
+		7C6945D720039F4A00152344 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7C6945D820039F4A00152344 /* FreeAppSpacePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7C6945D920039F4A00152344 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C6945DA20039F4A00152344 /* FreeAppSpaceViewController.swift */,
+				7C6945DB20039F4A00152344 /* FreeAppSpaceViewCotroller.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7C6945DC20039F4A00152344 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				7C6945DD20039F4A00152344 /* FreeAppSpaceInitializer.swift */,
+				7C6945DE20039F4A00152344 /* FreeAppSpaceConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		7C6945DF20039F4A00152344 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				7C6945E020039F4A00152344 /* FreeAppSpaceInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		7C6945E120039F4A00152344 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7C6945E220039F4A00152344 /* FreeAppSpaceRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		7C6B2FFF1FFCC6000066C818 /* ItemOperationManager */ = {
@@ -7304,18 +7340,6 @@
 			path = UserInfoSubView;
 			sourceTree = "<group>";
 		};
-		93E92ABFC04D8544F8D821E6 /* FreeAppSpace */ = {
-			isa = PBXGroup;
-			children = (
-				1E019F3D4A4B96389B42C8FA /* View */,
-				C61382065FDD5DD89632A1B9 /* Presenter */,
-				9A71067F56FFB23AF51D6FD6 /* Interactor */,
-				F0489169C282E817A0D35646 /* Router */,
-				34932498D2615BCA4BC41310 /* Configurator */,
-			);
-			path = FreeAppSpace;
-			sourceTree = "<group>";
-		};
 		943B33C6E5BAACBCAAA6748C /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -7341,14 +7365,6 @@
 				F233973492D247406E39E96E /* ForgotPasswordRouter.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		9A71067F56FFB23AF51D6FD6 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				1AEB2D95F1B425231C9C7DE7 /* FreeAppSpaceInteractor.swift */,
-			);
-			path = Interactor;
 			sourceTree = "<group>";
 		};
 		9AB7D6151BB0A4ADD3ADE65B /* Interactor */ = {
@@ -7616,14 +7632,6 @@
 				A4585DD65822E56FFEB2B707 /* CompleteProfileInteractor.swift */,
 			);
 			path = Interactor;
-			sourceTree = "<group>";
-		};
-		C61382065FDD5DD89632A1B9 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				FEC2BA6DE6B4E15B0260F638 /* FreeAppSpacePresenter.swift */,
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		C7EF66C623C833B469A51536 /* View */ = {
@@ -8744,7 +8752,6 @@
 				5E26BCF377F078459F09451C /* FeedbackView */,
 				D68883816EC3361501EB6861 /* ActivityTimeline */,
 				CE3EB3111FC7F84E000B70D6 /* Passcode */,
-				93E92ABFC04D8544F8D821E6 /* FreeAppSpace */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -8752,6 +8759,7 @@
 		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				7C6945D620039F4A00152344 /* FreeAppSpace */,
 				7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */,
 				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
 				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
@@ -9934,14 +9942,6 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		F0489169C282E817A0D35646 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				B8BCED48F4E9B72F1A00F2BB /* FreeAppSpaceRouter.swift */,
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
 		F1F379D7533680E1193EA393 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -10102,6 +10102,7 @@
 						DevelopmentTeam = 7A7F3AW7RP;
 					};
 					CE51AAF51EF90853005DCEE0 = {
+						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -10236,7 +10237,6 @@
 				8C0E90431FDEBDFF00789C91 /* TurkcellSaturaDemIta.ttf in Resources */,
 				8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */,
 				8C0E90441FDEBDFF00789C91 /* BasicCollectionMultiFileCell.xib in Resources */,
-				8C0E90461FDEBDFF00789C91 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				8C8711721FDFF47800F66396 /* DarkPopUpController.xib in Resources */,
 				8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */,
 				8C0E90481FDEBDFF00789C91 /* LikeFilterViewController.xib in Resources */,
@@ -10385,6 +10385,7 @@
 				CE16C1701FF234A300BE5906 /* CRYPopupViewController.nib in Resources */,
 				CE16C3D41FF234BA00BE5906 /* duz_beyaz.png in Resources */,
 				CE16C2F11FF234BA00BE5906 /* sample_orange@3x.png in Resources */,
+				9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */,
 				CE16C3151FF234BA00BE5906 /* slider_thumb@3x.png in Resources */,
 				CE16C3BB1FF234BA00BE5906 /* sample@3x.png in Resources */,
 				CE51AE291EF90853005DCEE0 /* GSMUInputCell.xib in Resources */,
@@ -10431,6 +10432,7 @@
 				7C241EFA1F960E1C00322149 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				CE16C3201FF234BA00BE5906 /* refresh@3x.png in Resources */,
 				CE16C44A1FF234BB00BE5906 /* oval_beyaz.png in Resources */,
+				7C6945E520039F4A00152344 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				CEC05B671F05333800332EBA /* PhoneVereficationScreen~ipad.xib in Resources */,
 				8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */,
 				CE16C3D91FF234BA00BE5906 /* slider_thumb2@3x.png in Resources */,
@@ -10578,7 +10580,6 @@
 				CE16C32F1FF234BA00BE5906 /* paylas_mail@2x.png in Resources */,
 				CE16C1731FF234A300BE5906 /* lookup_miss_etikate.png in Resources */,
 				CE16C35E1FF234BA00BE5906 /* underline@2x.png in Resources */,
-				7CB2E3121FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				CE16C1631FF234A300BE5906 /* Turkcell_Satura_Regular.ttf in Resources */,
 				CE16C33B1FF234BA00BE5906 /* yesil@3x.png in Resources */,
 				CE57DFA91FDE663C0065B688 /* DarkPopUpController.xib in Resources */,
@@ -11954,13 +11955,7 @@
 				8C0E8FD61FDEBDFF00789C91 /* OTPViewConfigurator.swift in Sources */,
 				8C0E8FD71FDEBDFF00789C91 /* OTPViewInitializer.swift in Sources */,
 				8C0E8FD81FDEBDFF00789C91 /* UploadFromLifeBoxModuleInput.swift in Sources */,
-				8C0E8FD91FDEBDFF00789C91 /* FreeAppSpaceViewController.swift in Sources */,
-				8C0E8FDA1FDEBDFF00789C91 /* FreeAppSpacePresenter.swift in Sources */,
-				8C0E8FDB1FDEBDFF00789C91 /* FreeAppSpaceInteractor.swift in Sources */,
-				8C0E8FDC1FDEBDFF00789C91 /* FreeAppSpaceRouter.swift in Sources */,
-				8C0E8FDD1FDEBDFF00789C91 /* FreeAppSpaceConfigurator.swift in Sources */,
 				8C0E8FDE1FDEBDFF00789C91 /* OptInController.swift in Sources */,
-				8C0E8FDF1FDEBDFF00789C91 /* FreeAppSpaceInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12043,6 +12038,7 @@
 				CE907A311F94D49900D2F8CE /* MulticastDelegate.swift in Sources */,
 				7C1F89951F7140AF00740177 /* PopUpSwipeCell.swift in Sources */,
 				CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */,
+				7C6945E720039F4A00152344 /* FreeAppSpaceConfigurator.swift in Sources */,
 				CE51AB6E1EF90853005DCEE0 /* CurioLocationManager.m in Sources */,
 				CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */,
 				CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */,
@@ -12285,6 +12281,7 @@
 				D47863F41F3F18FA00EFDC6D /* UsageInfoInteractorInput.swift in Sources */,
 				CEF69DDD1FB584CD00FCE6AB /* Result.swift in Sources */,
 				7C6E2F751F31E4C900536DB6 /* CreateStorySelectionInitializer.swift in Sources */,
+				7C6945E620039F4A00152344 /* FreeAppSpaceInitializer.swift in Sources */,
 				CE51ACAD1EF90853005DCEE0 /* CoreTelephonyService.swift in Sources */,
 				CEE1D1F81F714DFE0008F4CF /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				7CFBB6DB1F28A40F009C32D5 /* BaseCollectionViewCell.swift in Sources */,
@@ -12310,6 +12307,7 @@
 				7CD1F8D91F0242FE0028F51A /* SimpleButtonWithBlueText.swift in Sources */,
 				CE51ACC91EF90853005DCEE0 /* RegistrationInteractorInput.swift in Sources */,
 				7CD1F91C1F0288DC0028F51A /* WelcomeViewController.swift in Sources */,
+				9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */,
 				CE51ACCA1EF90853005DCEE0 /* RegistrationInteractorOutput.swift in Sources */,
 				7CFD0D201F8F44CA002B1FB5 /* ArrayDataSourceForCollectionView.swift in Sources */,
 				7C4988161F3320420039C5F2 /* CreateStoryPhotosOrderInteractor.swift in Sources */,
@@ -12360,6 +12358,7 @@
 				CE51ACDE1EF90853005DCEE0 /* IntroduceViewOutput.swift in Sources */,
 				CE51ACDF1EF90853005DCEE0 /* IntroduceViewController.swift in Sources */,
 				CE51ACE01EF90853005DCEE0 /* IntroduceModuleInput.swift in Sources */,
+				7C6945E420039F4A00152344 /* FreeAppSpaceViewController.swift in Sources */,
 				8C7786A11F3F38EF005CB432 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				7CDABD091F1E3A6300C8CC16 /* UserProfileInteractorOutput.swift in Sources */,
 				CE51ACE11EF90853005DCEE0 /* IntroducePresenter.swift in Sources */,
@@ -12529,6 +12528,7 @@
 				EAF4B177768EB4A5DC564BD8 /* ExpandStorageRouter.swift in Sources */,
 				A1CDAEB7DD76D4F27F3EA741 /* ExpandStorageConfigurator.swift in Sources */,
 				7C6E2F771F31E4C900536DB6 /* CreateStoryPhotoSelectionPresenter.swift in Sources */,
+				7C6945E320039F4A00152344 /* FreeAppSpacePresenter.swift in Sources */,
 				39EB93C2291B9CEB5172FB15 /* ExpandStorageInitializer.swift in Sources */,
 				142A29D90D8A7CF39AC8F82C /* UploadedItemsViewInput.swift in Sources */,
 				92CB379A913C184F1ED25C74 /* UploadedItemsViewOutput.swift in Sources */,
@@ -12805,6 +12805,7 @@
 				0D9510CB65B6DA6F2D661754 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				016636E0593FCDC66B6F5CD0 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
+				7C6945E820039F4A00152344 /* FreeAppSpaceInteractor.swift in Sources */,
 				CE95ED4C1F516736002F923A /* HelpAndSupportInitializer.swift in Sources */,
 				F7482D621455E6693DAF8873 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				07BD09833626CA46F3CE945C /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
@@ -12820,6 +12821,7 @@
 				CE2F56251F75531800F49DA1 /* UICollectionView+Extensions.swift in Sources */,
 				4E2D35C770D6AD2189D274A8 /* AlbumsInitializer.swift in Sources */,
 				9065EE336B9F1D044DBD3944 /* AlbumDetailViewController.swift in Sources */,
+				7C6945E920039F4A00152344 /* FreeAppSpaceRouter.swift in Sources */,
 				7C00FE1C1F5958380041D041 /* SingletonStorage.swift in Sources */,
 				CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */,
 				C7055CAC94DC0C09FAC5F608 /* AlbumDetailPresenter.swift in Sources */,
@@ -12876,13 +12878,7 @@
 				46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */,
 				7F27470E56D2B8E0764CFF33 /* OTPViewInitializer.swift in Sources */,
 				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
-				980738277831905CE1389C42 /* FreeAppSpaceViewController.swift in Sources */,
-				D1F7307987DD553C63317B99 /* FreeAppSpacePresenter.swift in Sources */,
-				10CC7D3FA3B7A3A380C4E7D2 /* FreeAppSpaceInteractor.swift in Sources */,
-				868B89BA3A01CCDC66E16667 /* FreeAppSpaceRouter.swift in Sources */,
-				B7C673A176A577E30FAB824E /* FreeAppSpaceConfigurator.swift in Sources */,
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
-				29F301A021F9712D24CB97EE /* FreeAppSpaceInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13359,7 +13355,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -13389,8 +13385,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "975b3db6-9e3c-4677-8ffc-89996a30bcbf";
+				PROVISIONING_PROFILE_SPECIFIER = LifeboxForTurkcell;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;

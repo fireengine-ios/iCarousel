@@ -40,6 +40,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var topBarContainer: UIView!
     
+    @IBOutlet weak var noFilesTopLabel: UILabel!
+    
     var scrolliblePopUpView = ViewForPopUp()
     
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
@@ -79,6 +81,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
         noFilesLabel.textColor = ColorConstants.textGrayColor
         noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        
+        noFilesTopLabel.text = TextConstants.folderEmptyText
+        noFilesTopLabel.textColor = ColorConstants.grayTabBarButtonsColor
+        noFilesTopLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
         startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
@@ -156,6 +162,17 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
+    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Swift.Void) {
+        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
+            deleteAction()
+        })
+        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+        })
+        navBarConfigurator.configure(right: [more, delete], left: [])
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+    
     @IBAction func onStartCreatingFilesButton(){
         output.onStartCreatingPhotoAndVideos()
     }
@@ -220,10 +237,18 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesImage.image = image
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
+        topBarContainer.isHidden = true
+    }
+    
+    func showNoFilesTop() {
+        noFilesTopLabel.isHidden = false
+        topBarContainer.isHidden = true
     }
     
     func hideNoFiles() {
         noFilesView.isHidden = true
+        noFilesTopLabel.isHidden = true
+        topBarContainer.isHidden = false
     }
     
     @objc func onCancelSelectionButton(){

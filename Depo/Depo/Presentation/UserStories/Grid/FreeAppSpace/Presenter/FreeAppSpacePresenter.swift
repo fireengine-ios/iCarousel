@@ -9,16 +9,16 @@
 class FreeAppSpacePresenter: BaseFilesGreedPresenter {
 
     override func viewIsReady(collectionView: UICollectionView) {
-        dataSource = ArrayDataSourceForCollectionView()
         super.viewIsReady(collectionView: collectionView)
         dataSource.canReselect = true
         dataSource.enableSelectionOnHeader = true
         dataSource.setSelectionState(selectionState: true)
         dataSource.updateDisplayngType(type: .greed)
+        dataSource.needShowCloudIcon = false
     }
     
     override func isArrayDataSource() -> Bool{
-        return true
+        return false
     }
     
     override func onNextButton() {
@@ -48,5 +48,28 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         let text = String(format: TextConstants.freeAppSpaceAlertSuccesTitle, count)
         UIApplication.showSuccessAlert(message: text)
     }
+    
+     override func moreActionsPressed(sender: Any) {
+        let selectionMode = dataSource.isInSelectionMode()
+        if selectionMode {
+            let actionTypes = interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? []
+            alertSheetModule?.showAlertSheet(with: actionTypes,
+                                             items: selectedItems,
+                                             presentedBy: sender,
+                                             onSourceView: nil,
+                                             excludeTypes: alertSheetExcludeTypes)
+        } else {
+            let actionTypes  = interactor.alerSheetMoreActionsConfig?.initialTypes ?? []
+            alertSheetModule?.showAlertSheet(with: actionTypes,
+                                             presentedBy: sender,
+                                             onSourceView: nil)
+        }
+        
+    }
+    
+    override func onChangeSelectedItemsCount(selectedItemsCount: Int) {
+        view.selectedItemsCountChange(with: selectedItemsCount)
+    }
+    
 }
 
