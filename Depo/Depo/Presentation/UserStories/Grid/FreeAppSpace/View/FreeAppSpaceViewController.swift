@@ -35,5 +35,10 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
         CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
     
+    override func startSelection(with numberOfItems: Int) {
+        selectedItemsCountChange(with: numberOfItems)
+    }
+    
+    
 }
 

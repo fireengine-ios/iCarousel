@@ -67,5 +67,9 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         
     }
     
+    override func onChangeSelectedItemsCount(selectedItemsCount: Int) {
+        self.view.selectedItemsCountChange(with: selectedItemsCount)
+    }
+    
 }
 

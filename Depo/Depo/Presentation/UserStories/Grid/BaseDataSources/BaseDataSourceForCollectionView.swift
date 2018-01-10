@@ -507,19 +507,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func selectAll(isTrue: Bool){
         if (isTrue) {
-//            let sections = fetchService.controller.sections
-//            let sectionsCount = sections?.count ?? 0
-//            for section in 0...sectionsCount - 1 {
-//                let rowCount = sections?[section].numberOfObjects ?? 0
-//                for row in 0...rowCount - 1 {
-//                    let indexPath = IndexPath(row: row, section: section)
-//                    if let obj = itemForIndexPath(indexPath: indexPath) {
-//                        selectedItemsArray.insert(obj.uuid)
-//                    }
-//                }
-//            }
+            for array in allItems{
+                for object in array{
+                    onSelectObject(object: object)
+                }
+            }
+            updateVisibleCells()
+            
         }else{
             selectedItemsArray.removeAll()
+            updateVisibleCells()
         }
     }
     
