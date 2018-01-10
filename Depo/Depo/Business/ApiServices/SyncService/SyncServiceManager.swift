@@ -148,7 +148,7 @@ class SyncServiceManager {
             return
         }
         
-        if reachability.connection != .none, APIReachabilityService.shared.connection == .reachable {
+        if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
             if reachability.connection == .wifi {
                 start(photo: true, video: true)
             } else if reachability.connection == .cellular {
@@ -180,20 +180,6 @@ class SyncServiceManager {
         } else {
             if photo { photoSyncService.stop() }
             if video { videoSyncService.stop() }
-        }
-    }
-    
-    //wait for wi-fi connection
-    private func stopManually() {
-        photoSyncService.waitForWiFi()
-        videoSyncService.waitForWiFi()
-    }
-    
-    //start if is waiting for wi-fi
-    private func startManually() {
-        if reachabilityService?.connection != .none {
-            photoSyncService.startManually()
-            videoSyncService.startManually()
         }
     }
 }
