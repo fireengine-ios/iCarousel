@@ -244,7 +244,7 @@
 "Ok" = "Ok";
 "Please choose %d files at most" = "Please choose %d files at most";
 "Next" = "Next";
-"Create story" = "Create story";
+"Create a story" = "Create a story";
 "Cancel" = "Cancel";
 "Continue" = "Continue";
 "Please Choose 20 files at most" = "Please Choose 20 files at most";
@@ -327,6 +327,7 @@
 "Back-up my contacts" = "Back-up my contacts";
 "Leave feedback" = "Leave feedback";
 "Upload Photo" = "Upload Photo";
+"Login Settings" = "Login Settings";
 "Back to Lifebox" = "Back to Lifebox";
 "Start adding your documents" = "Start adding your documents";
 "You don’t have any documents on your Lifebox yet." = "You don’t have any documents on your Lifebox yet.";
@@ -510,5 +511,6 @@
 "I have an account, let me log in" = "I have an account, let me log in";
 "Start using Lifebox now!" = "Start using Lifebox now!";
 "E-mail field is invalid" = "E-mail field is invalid";
-
+"Please enter your GSM number"="Please enter your GSM number";
+"GSM number"="GSM number";
 

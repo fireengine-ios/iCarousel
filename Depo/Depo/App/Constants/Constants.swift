@@ -24,6 +24,7 @@ struct TextConstants {
     static let registrationNextButtonText = NSLocalizedString("Next", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationResendButtonText = NSLocalizedString("Resend", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let optInNavigarionTitle = NSLocalizedString("Verify Your Purchase", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let confirmPhoneOptInNavigarionTitle = NSLocalizedString("Confirm Your Phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let phoneVereficationMainTitleText = NSLocalizedString("Verify Your Phone Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let mailVereficationMainTitleText = NSLocalizedString("Verify Your Email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let phoneVereficationInfoTitleText = NSLocalizedString("Enter the verification code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -287,6 +288,11 @@ struct TextConstants {
     
     //MARK: settings
     
+
+    static let settingsViewCellLoginSettings = NSLocalizedString("Login Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellTurkcellPasscode = NSLocalizedString("Turkcell Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellTurkcellAutoLogin = NSLocalizedString("Auto-login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let settingsViewUploadPhotoLabel = NSLocalizedString("Upload Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewLeaveFeedback = NSLocalizedString("Leave feedback", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -299,9 +305,9 @@ struct TextConstants {
     static let settingsViewCellPasscode = NSLocalizedString("Lifebox Touch ID and Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellHelp = NSLocalizedString("Help & Support", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellLogout = NSLocalizedString("Logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsViewCellTurkcellPasscode = NSLocalizedString("Turkcell Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsViewCellTurkcellAutoLogin = NSLocalizedString("Auto-login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let settingsViewLogoutCheckMessage = NSLocalizedString("Are you sure you want to exit the application?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     
     //MARK: Import photos
     static let importPhotos = NSLocalizedString("Import Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -385,7 +391,7 @@ struct TextConstants {
     static let createStorySelectAudioButton = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: Create story Photos
-    static let createStoryPhotosTitle = NSLocalizedString("Create story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPhotosTitle = NSLocalizedString("Create a story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryPhotosCancel = NSLocalizedString("Cancel", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryPhotosContinue = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryPhotosHeaderTitle = NSLocalizedString("Please Choose 20 files at most", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -705,6 +711,8 @@ struct TextConstants {
     
     static let locationServiceDisable = NSLocalizedString("Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let loginEnterGSM = NSLocalizedString("Please enter your GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginGSMNumber = NSLocalizedString("GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: - Navigation bar img names
     

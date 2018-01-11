@@ -249,19 +249,23 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         if file.isLocalItem{
             duplicaesArray.append(file)
         }else{
-            serverDuplicatesArray.append(file)
-            let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
-            let predicate = PredicateRules().allLocalObjectsForObjects(objects: [file])
-            let sortDescriptors = CollectionSortingRules(sortingRules: .timeUp).rule.sortDescriptors
-            
-            fetchRequest.predicate = predicate
-            fetchRequest.sortDescriptors = sortDescriptors
-            
-            guard let fetchResult = try? CoreDataStack.default.mainContext.fetch(fetchRequest) else {
-                return
+            let serverObjectsUUIDs = serverDuplicatesArray.map({ $0.uuid })
+            if !serverObjectsUUIDs.contains(file.uuid){
+                serverDuplicatesArray.append(file)
+                
+                let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
+                let predicate = PredicateRules().allLocalObjectsForObjects(objects: [file])
+                let sortDescriptors = CollectionSortingRules(sortingRules: .timeUp).rule.sortDescriptors
+                
+                fetchRequest.predicate = predicate
+                fetchRequest.sortDescriptors = sortDescriptors
+                
+                guard let fetchResult = try? CoreDataStack.default.mainContext.fetch(fetchRequest) else {
+                    return
+                }
+                let localObjects = fetchResult.map{ return WrapData(mediaItem: $0) }
+                duplicaesArray.append(contentsOf: localObjects)
             }
-            let localObjects = fetchResult.map{ return WrapData(mediaItem: $0) }
-            duplicaesArray.append(contentsOf: localObjects)
         }
 
         showFreeAppSpaceCard()

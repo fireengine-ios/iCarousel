@@ -21,6 +21,4 @@ protocol SettingsInteractorOutput: class {
     
     func connectToNetworkFailed()
     
-    func turkCellSecuritySettingsAccuered(passcode: Bool, autoLogin: Bool)
-    func turkCellSecurityfailed()
 }

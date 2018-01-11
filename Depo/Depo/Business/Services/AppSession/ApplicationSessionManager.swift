@@ -64,6 +64,7 @@ class ApplicationSessionManager: NSObject {
     
     @objc func updateSession(){
         authService.autificationByRememberMe(sucess: {
+            ApplicationSession.sharedSession.saveData()
             print("session updated successfully")
         }, fail: { (error) in
             print("session updated with error")
