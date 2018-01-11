@@ -12,5 +12,5 @@ struct ContactSyncResposeModel {
     let newContactsNumber: Int
     let duplicatesNumber: Int
     let deletedNumber: Int
-    
+    let date: Date
 }

@@ -7,16 +7,7 @@
 //
 
 protocol SyncContactsViewOutput {
-
-    /**
-        @author Oleg
-        Notify presenter that view is ready
-    */
-
     func viewIsReady()
-    
     func startOperation(operationType: SyncOperationType)
-    
-    func getDateLastUpdate()
-    
+    func onManageContacts()
 }

@@ -13,5 +13,4 @@ protocol SyncContactsViewInput: class {
     
     func showProggress(progress :Int, forOperation operation: SyncOperationType)
     func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType)
-    func setDateLastBacup(dateLastBacup: Date?)
 }

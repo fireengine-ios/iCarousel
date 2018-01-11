@@ -343,7 +343,7 @@ struct TextConstants {
     static let settingsUserInfoViewUpgradeButtonText = NSLocalizedString("UPGRADE", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsUserInfoViewQuota = NSLocalizedString("%@ of %@ has remained", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    //MARK: Bacup contacts view
+    //MARK: BackUp contacts view
     static let settingsBackupContactsViewTitle = NSLocalizedString("Back Up My Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupContactsViewNewContactsText = NSLocalizedString("New Contact", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupContactsViewDuplicatesText = NSLocalizedString("Updated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -749,4 +749,6 @@ struct NumericConstants {
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     
     static let maxRecentSearches: Int = 10
+    
+    static let minute: TimeInterval = 60
 }

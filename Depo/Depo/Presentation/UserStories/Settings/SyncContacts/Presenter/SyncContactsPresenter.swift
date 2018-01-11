@@ -7,24 +7,20 @@
 //
 
 class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
-
     weak var view: SyncContactsViewInput!
     var interactor: SyncContactsInteractorInput!
     var router: SyncContactsRouterInput!
 
-    var backupAvailable: Bool = false
+    var isBackUpAvailable: Bool = false
     
     //MARK: view out
     func viewIsReady() {
         view.setInitialState()
-    }
-    
-    func getDateLastUpdate(){
-        interactor.getLastBackUpDate()
+        startOperation(operationType: .getBackUpStatus)
     }
     
     func startOperation(operationType: SyncOperationType) {
-        if backupAvailable, operationType == .backup {
+        if isBackUpAvailable, operationType == .backup {
             let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
                                                   message: TextConstants.errorAlertTextBackupAlreadyExist,
                                                   image: .error,
@@ -40,10 +36,11 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
         }
     }
     
-    //MARK: interactor out
+    //MARK: Interactor Output
     
     func showError(errorType: SyncOperationErrors) {
-        
+        view.setStateWithoutBackUp()
+        isBackUpAvailable = false
     }
     
     func showProggress(progress: Int, forOperation operation: SyncOperationType) {
@@ -51,11 +48,15 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
     }
     
     func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType) {
+        isBackUpAvailable = true
         view.success(object: object, forOperation: operation)
     }
     
-    func lastBackUpDateResponse(response: Date?){
-        backupAvailable = response == nil ? false : true
-        view.setDateLastBacup(dateLastBacup: response)
+    func onManageContacts() {
+        router.goToManageContacts()
+    }
+    
+    func showNoBackUp() {
+        view.setStateWithoutBackUp()
     }
 }

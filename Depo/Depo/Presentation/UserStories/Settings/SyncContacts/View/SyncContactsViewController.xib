@@ -26,6 +26,7 @@
                 <outlet property="duplicatedCountLabel" destination="Wwm-Cn-146" id="1hC-Z5-CaT"/>
                 <outlet property="duplicatedSubTitleLabel" destination="bqy-QD-ZdD" id="AeW-Av-JTT"/>
                 <outlet property="gradientLoaderIndicator" destination="pkl-kE-oQ1" id="tgo-MA-YiW"/>
+                <outlet property="manageContactsButton" destination="iM8-Y4-P5K" id="tVd-5v-4BN"/>
                 <outlet property="newCantactSubTitleLabel" destination="eSI-Y2-nf7" id="JzV-yH-DSl"/>
                 <outlet property="newContactCountLabel" destination="A13-eN-6xR" id="gJ0-eL-kKW"/>
                 <outlet property="removedCountLabel" destination="82P-10-K6U" id="PT3-V7-obS"/>
@@ -34,7 +35,7 @@
                 <outlet property="scrollView" destination="6co-Ab-n7k" id="Eg9-kX-SYl"/>
                 <outlet property="titleLabel" destination="KrQ-Cb-oUZ" id="BBq-54-nUZ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="yFs-l3-TK9"/>
-                <outlet property="viewForInformationAfterBacup" destination="dxs-eW-wJ3" id="C8N-zm-JFE"/>
+                <outlet property="viewForInformationAfterBackUp" destination="dxs-eW-wJ3" id="C8N-zm-JFE"/>
                 <outlet property="viewForLogo" destination="LvS-vM-9ef" id="RCk-Vf-wFj"/>
             </connections>
         </placeholder>
@@ -50,7 +51,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="564.33333333333337"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvS-vM-9ef" userLabel="View for loading">
-                                    <rect key="frame" x="114.33333333333331" y="50" width="162" height="162"/>
+                                    <rect key="frame" x="137" y="50" width="162" height="162"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bacupContacts" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-dP-E3S">
                                             <rect key="frame" x="0.0" y="0.0" width="162" height="162"/>
@@ -67,7 +68,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkl-kE-oQ1" customClass="GradientLoadingIndicator" customModule="Depo_LifeTech" customModuleProvider="target">
-                                    <rect key="frame" x="97.333333333333314" y="33" width="196" height="196"/>
+                                    <rect key="frame" x="120" y="33" width="196" height="196"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="rX0-8z-yJA">
@@ -80,12 +81,15 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iM8-Y4-P5K" customClass="ButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
-                                            <rect key="frame" x="135.33333333333334" y="37.333333333333314" width="120" height="29"/>
+                                            <rect key="frame" x="158" y="37.333333333333314" width="120" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="29" id="Zm0-6y-rlt"/>
                                                 <constraint firstAttribute="width" constant="120" id="hRE-w6-A69"/>
                                             </constraints>
                                             <state key="normal" title="Manage Contacts"/>
+                                            <connections>
+                                                <action selector="onManageContactsTapped:" destination="-1" eventType="touchUpInside" id="GAb-uV-YWM"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -93,13 +97,13 @@
                                     <rect key="frame" x="0.0" y="333.33333333333331" width="414" height="209.99999999999994"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="dxs-eW-wJ3">
-                                            <rect key="frame" x="8.3333333333333428" y="0.0" width="374" height="50"/>
+                                            <rect key="frame" x="31" y="0.0" width="374" height="50"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1x-46-75q">
-                                                    <rect key="frame" x="0.0" y="0.0" width="125.33333333333333" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="124.66666666666667" height="50"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A13-eN-6xR">
-                                                            <rect key="frame" x="10" y="0.0" width="105.33333333333333" height="21"/>
+                                                            <rect key="frame" x="10" y="0.0" width="104.66666666666667" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="OcQ-it-tNf"/>
                                                             </constraints>
@@ -108,7 +112,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSI-Y2-nf7">
-                                                            <rect key="frame" x="10" y="26" width="105.33333333333333" height="24"/>
+                                                            <rect key="frame" x="10" y="26" width="104.66666666666667" height="24"/>
                                                             <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="16"/>
                                                             <color key="textColor" red="0.37254901960784315" green="0.37254901960784315" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -126,10 +130,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nu3-Up-SBw">
-                                                    <rect key="frame" x="125.33333333333331" y="0.0" width="124.66666666666669" height="50"/>
+                                                    <rect key="frame" x="124.66666666666666" y="0.0" width="124.66666666666666" height="50"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xik-dx-lLj">
-                                                            <rect key="frame" x="0.0" y="11.333333333333371" width="1" height="28"/>
+                                                            <rect key="frame" x="0.0" y="11.666666666666686" width="1" height="28"/>
                                                             <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="1" id="YcM-bm-RcT"/>
@@ -176,10 +180,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMA-I1-agg">
-                                                    <rect key="frame" x="250" y="0.0" width="124" height="50"/>
+                                                    <rect key="frame" x="249.33333333333329" y="0.0" width="124.66666666666666" height="50"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82P-10-K6U">
-                                                            <rect key="frame" x="10" y="0.0" width="104" height="21"/>
+                                                            <rect key="frame" x="10" y="0.0" width="104.66666666666667" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="Dvv-wE-oPP"/>
                                                             </constraints>
@@ -188,7 +192,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKY-Yp-o3j">
-                                                            <rect key="frame" x="10" y="26" width="104" height="24"/>
+                                                            <rect key="frame" x="10" y="26" width="104.66666666666667" height="24"/>
                                                             <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="16"/>
                                                             <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -233,18 +237,21 @@
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <action selector="onBacupButton" destination="-1" eventType="touchUpInside" id="nNg-v6-ksB"/>
+                                                        <action selector="onBackUpButton" destination="-1" eventType="touchUpInside" id="L5z-9z-O7L"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGU-WQ-T3u" customClass="BlueButtonWithWhiteText" customModule="Depo_LifeTech" customModuleProvider="target">
-                                                    <rect key="frame" x="47" y="0.0" width="138" height="50"/>
+                                                    <rect key="frame" x="138" y="0.0" width="138" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" priority="750" constant="159" id="uc1-90-LDY"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="onRestoreButton" destination="-1" eventType="touchUpInside" id="xww-re-r8O"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXY-Hc-WhS" customClass="BlueButtonWithWhiteText" customModule="Depo_LifeTech" customModuleProvider="target">
-                                                    <rect key="frame" x="276" y="0.0" width="138" height="50"/>
+                                                    <rect key="frame" x="374.66666666666669" y="0.0" width="138.00000000000006" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" priority="750" constant="159" id="rIF-S5-Wbg"/>
                                                     </constraints>
@@ -253,7 +260,7 @@
                                             </subviews>
                                         </stackView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy9-O6-ddF">
-                                            <rect key="frame" x="174.66666666666666" y="140" width="41.666666666666657" height="21"/>
+                                            <rect key="frame" x="197.33333333333334" y="140" width="41.666666666666657" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="WOl-ef-EvQ"/>
                                             </constraints>
@@ -262,7 +269,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34w-gh-gNj" customClass="ButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
-                                            <rect key="frame" x="140" y="181.00000000000006" width="111" height="29"/>
+                                            <rect key="frame" x="162.66666666666666" y="181.00000000000006" width="110.99999999999997" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="29" id="SLt-IX-zYY"/>
                                                 <constraint firstAttribute="width" constant="111" id="nHm-g0-GBZ"/>

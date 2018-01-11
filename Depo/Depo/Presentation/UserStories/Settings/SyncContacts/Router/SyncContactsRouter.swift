@@ -7,5 +7,9 @@
 //
 
 class SyncContactsRouter: SyncContactsRouterInput {
-
+    let router = RouterVC()
+    
+    func goToManageContacts() {
+        router.pushViewController(viewController: router.manageContacts)
+    }
 }

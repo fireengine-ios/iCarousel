@@ -49,6 +49,28 @@ class ContactsSyncService {
         ContactSyncSDK.doSync(type)
     }
     
+    func getBackUpStatus(completion: @escaping (ContactSyncResposeModel) -> Void, fail: @escaping () -> Void) {
+        ContactSyncSDK.getBackupStatus { (response) in
+            guard let response = response as? [String: Any],
+                  let contactsAmount = response["contacts"] as? Int,
+                  let updatedContactsAmount = response["updated"] as? Int,
+                  let createdContactsAmount = response["created"] as? Int,
+                  let deletedContactsAmount = response["deleted"] as? Int,
+                  let time = response["timestamp"] as? TimeInterval else {
+                    fail()
+                    return
+            }
+            
+            let syncModel = ContactSyncResposeModel(responseType: .getBackUpStatus,
+                                                    totalNumberOfContacts: contactsAmount,
+                                                    newContactsNumber: createdContactsAmount,
+                                                    duplicatesNumber: updatedContactsAmount,
+                                                    deletedNumber: deletedContactsAmount,
+                                                    date: Date(timeIntervalSince1970: time / 1000))
+            completion(syncModel)
+        }
+    }
+    
     func getCurrentOperationType() -> SyncOperationType {
         switch SyncSettings.shared().mode {
         case .backup:
@@ -97,13 +119,15 @@ class ContactsSyncService {
                                            totalNumberOfContacts: SyncStatus.shared().totalContactOnServer as! Int,
                                            newContactsNumber: SyncStatus.shared().createdContactsSent.count,
                                            duplicatesNumber: SyncStatus.shared().updatedContactsSent.count,
-                                           deletedNumber: SyncStatus.shared().deletedContactsOnServer.count)
+                                           deletedNumber: SyncStatus.shared().deletedContactsOnServer.count,
+                                           date: Date())
         case .restore:
             return ContactSyncResposeModel(responseType: .restore,
                                            totalNumberOfContacts: SyncStatus.shared().totalContactOnClient as! Int,
                                            newContactsNumber: SyncStatus.shared().createdContactsReceived.count,
                                            duplicatesNumber: SyncStatus.shared().updatedContactsReceived.count,
-                                           deletedNumber: SyncStatus.shared().deletedContactsOnDevice.count)
+                                           deletedNumber: SyncStatus.shared().deletedContactsOnDevice.count,
+                                           date: Date())
             
         }
     }
@@ -115,11 +139,12 @@ class ContactsSyncService {
     }
     
     func getPreviousBackupTime() -> Double? {
-        let time = ContactSyncSDK.lastSyncTime()
-        if (time?.intValue == 0 ){
+        let time = ContactSyncSDK.lastSyncTime().doubleValue
+        if time == 0 {
             return nil
+        } else {
+            return time
         }
-        return time?.doubleValue
     }
     
     private func setup() {

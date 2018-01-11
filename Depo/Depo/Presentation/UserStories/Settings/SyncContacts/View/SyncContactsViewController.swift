@@ -8,10 +8,10 @@
 
 import UIKit
 
-class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
+class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewForLogo: UIView!
-    @IBOutlet weak var viewForInformationAfterBacup: UIView!
+    @IBOutlet weak var viewForInformationAfterBackUp: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -25,23 +25,20 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
     @IBOutlet weak var removedSubTitleLabel: UILabel!
     
     @IBOutlet weak var cancelButton: ButtonWithGrayCorner!
+    @IBOutlet weak var manageContactsButton: ButtonWithGrayCorner!
     
     @IBOutlet weak var deleteDuplicatedButton: BlueButtonWithWhiteText!
     @IBOutlet weak var restoreButton: BlueButtonWithWhiteText!
     @IBOutlet weak var backUpButton: BlueButtonWithWhiteText!
     
     @IBOutlet weak var backupDateLabel: UILabel!
-
+    
     @IBOutlet weak var backUpContactsImageView: UIImageView!
     
-    var output: SyncContactsViewOutput!
-    var isBackUpAvailable: Bool = false {
-        didSet {
-            isBackUpAvailable ? setStateWithBackUp() : setStateWithoutBackUp()
-        }
-    }
-    
     @IBOutlet weak var gradientLoaderIndicator: GradientLoadingIndicator!
+    
+    var output: SyncContactsViewOutput!
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +81,6 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
         
         setStateWithoutBackUp()
         
-        output.getDateLastUpdate()
     }
     
     
@@ -107,20 +103,20 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
     
     // MARK: buttons action
     
-    @IBAction func onBacupButton(){
+    @IBAction func onBackUpButton() {
         output.startOperation(operationType: .backup)
     }
     
-    @IBAction func onRestoreButton(){
+    @IBAction func onRestoreButton() {
         output.startOperation(operationType: .restore)
     }
     
+    @IBAction func onManageContactsTapped(_ sender: Any) {
+        output.onManageContacts()
+    }
+    
     @IBAction func onCancelButton(){
-        if (isBackUpAvailable) {
-            output.startOperation(operationType: .cancelAllOperations)
-        } else {
-            output.startOperation(operationType: .clear)
-        }
+        output.startOperation(operationType: .cancelAllOperations)
     }
     
     // MARK: SyncContactsViewInput
@@ -129,16 +125,15 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
 
     }
     
-    func setStateWithoutBackUp(){
+    func setStateWithoutBackUp() {
         titleLabel.text = TextConstants.settingsBackUpNeverDidIt
         backupDateLabel.text = TextConstants.settingsBackUpNewer
-        viewForInformationAfterBacup.isHidden = true
+        viewForInformationAfterBackUp.isHidden = true
         cancelButton.isHidden = true
     }
     
     func setStateWithBackUp() {
-        cancelButton.setTitle(TextConstants.settingsBackUpClearBackUpTitle, for: .normal)
-        cancelButton.isHidden = false
+        cancelButton.isHidden = true
     }
     
     func showProggress(progress :Int, forOperation operation: SyncOperationType){
@@ -146,25 +141,25 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
         if (operation == .backup){
             let text = String.init(format: TextConstants.settingsBackUpingText, progress)
             titleLabel.text = text
-            viewForInformationAfterBacup.isHidden = true
+            viewForInformationAfterBackUp.isHidden = true
             cancelButton.setTitle(TextConstants.settingsBackUpCancelBackUpTitle, for: .normal)
         }
         if (operation == .restore){
             let text = String.init(format: TextConstants.settingsRestoringText, progress)
             titleLabel.text = text
-            viewForInformationAfterBacup.isHidden = true
+            viewForInformationAfterBackUp.isHidden = true
             cancelButton.setTitle(TextConstants.settingsBackUpCancelBackUpTitle, for: .normal)
         }
         cancelButton.isHidden = false
     }
     
-    func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType){
-        output.getDateLastUpdate()
+    func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType) {
+        setDateLastBackUp(dateLastBackUp: object.date)
         var template: String = ""
         if (operation == .backup){
             template = TextConstants.settingsBackupedText
-            isBackUpAvailable = true
-        }else{
+            setStateWithBackUp()
+        } else {
             template = TextConstants.settingsRestoredText
         }
         
@@ -178,26 +173,21 @@ class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
         attributedText.addAttribute(NSAttributedStringKey.font, value: font, range: r)
         
         titleLabel.attributedText = attributedText
-        viewForInformationAfterBacup.isHidden = false
+        viewForInformationAfterBackUp.isHidden = false
         
         newContactCountLabel.text = String(object.newContactsNumber)
         duplicatedCountLabel.text = String(object.duplicatesNumber)
         removedCountLabel.text = String(object.deletedNumber)
     }
     
-    func setDateLastBacup(dateLastBacup: Date?){
-        if (dateLastBacup != nil){
-            isBackUpAvailable = true
-            let timeInterval = dateLastBacup!.timeIntervalSinceNow
-            if (-timeInterval < 60){
-                backupDateLabel.text = TextConstants.settingsBackUpLessAMinute
-            } else {
-                backupDateLabel.text = String.init(format: TextConstants.settingsBackUpLessADay, dateLastBacup!.getDateInFormat(format: "d MMMM yyyy"))
-            }
-        }else{
-            isBackUpAvailable = false
-            setStateWithoutBackUp()
+    func setDateLastBackUp(dateLastBackUp: Date) {
+        let timeToLastBackUp = -dateLastBackUp.timeIntervalSinceNow
+        if (timeToLastBackUp < NumericConstants.minute) {
+            backupDateLabel.text = TextConstants.settingsBackUpLessAMinute
+        } else {
+            backupDateLabel.text = String(format: TextConstants.settingsBackUpLessADay, dateLastBackUp.getDateInFormat(format: "d MMMM yyyy"))
         }
-        
     }
+    
+    
 }
