@@ -41,6 +41,7 @@ final class OptInController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        navigationBarWithGradientStyle()
         
         automaticallyAdjustsScrollViewInsets = false
         
@@ -60,9 +61,16 @@ final class OptInController: UIViewController {
         timerLabel.textColor = ColorConstants.darkText
         timerLabel.font = UIFont.TurkcellSaturaBolFont(size: 39)
         
-        title = delegate?.optInNavigationTitle()
+        if let delegate = delegate {
+            setTitle(withString: delegate.optInNavigationTitle())
+        }
         
         activityManager.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
     }
     
     func setupTimer(withRemainingTime remainingTime: Int) {

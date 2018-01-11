@@ -511,4 +511,5 @@
 "I have an account, let me log in" = "I have an account, let me log in";
 "Start using Lifebox now!" = "Start using Lifebox now!";
 "E-mail field is invalid" = "E-mail field is invalid";
-
+"Please enter your GSM number"="Please enter your GSM number";
+"GSM number"="GSM number";

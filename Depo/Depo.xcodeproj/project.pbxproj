@@ -1623,6 +1623,8 @@
 		CE0ED9751FBC0F5A00487632 /* PasscodeViewImp.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0ED96A1FBC0F5A00487632 /* PasscodeViewImp.xib */; };
 		CE0ED9761FBC0F5A00487632 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
 		CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */; };
+		CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1353342004F0F90004CBBE /* TextEnterController.swift */; };
+		CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1353382004F1530004CBBE /* TextEnterController.xib */; };
 		CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
 		CE16C15A1FF234A300BE5906 /* TOCropViewControllerLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE16C04B1FF234A300BE5906 /* TOCropViewControllerLocalizable.strings */; };
@@ -3365,6 +3367,8 @@
 		CE0ED96A1FBC0F5A00487632 /* PasscodeViewImp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasscodeViewImp.xib; sourceTree = "<group>"; };
 		CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeStorage.swift; sourceTree = "<group>"; };
 		CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeManager.swift; sourceTree = "<group>"; };
+		CE1353342004F0F90004CBBE /* TextEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterController.swift; sourceTree = "<group>"; };
+		CE1353382004F1530004CBBE /* TextEnterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextEnterController.xib; sourceTree = "<group>"; };
 		CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CE16C04C1FF234A300BE5906 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
@@ -7687,6 +7691,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				CE1353332004F0D20004CBBE /* TextEnter */,
 				8C6EF8601F348B5C002AC795 /* BottomSelectionTabBar */,
 				8C7786851F3F38D9005CB432 /* MusicBar */,
 				8C77868A1F3F38EF005CB432 /* VisualMusicPlayer */,
@@ -7790,6 +7795,15 @@
 				CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */,
 			);
 			path = Passcode;
+			sourceTree = "<group>";
+		};
+		CE1353332004F0D20004CBBE /* TextEnter */ = {
+			isa = PBXGroup;
+			children = (
+				CE1353382004F1530004CBBE /* TextEnterController.xib */,
+				CE1353342004F0F90004CBBE /* TextEnterController.swift */,
+			);
+			path = TextEnter;
 			sourceTree = "<group>";
 		};
 		CE16C0491FF2348700BE5906 /* CropySDK */ = {
@@ -10418,6 +10432,7 @@
 				7C4485031F0FC87A003AF631 /* SettingHeaderView.xib in Resources */,
 				CE16C3E91FF234BB00BE5906 /* Orta.png in Resources */,
 				CE16C30D1FF234BA00BE5906 /* paylas_mail@3x.png in Resources */,
+				CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */,
 				CE16C3381FF234BA00BE5906 /* close_icon@2x.png in Resources */,
 				8CF87D5D1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				CE16C3931FF234BA00BE5906 /* t_orta_selected@2x.png in Resources */,
@@ -12945,6 +12960,7 @@
 				CE2F561C1F7552A900F49DA1 /* PackagesRouter.swift in Sources */,
 				2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */,
 				81E0ADA871598E31E25ABC23 /* AlbumDetailInitializer.swift in Sources */,
+				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
 				CE907A321F94D49900D2F8CE /* VolumeSlider.swift in Sources */,
 				2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */,
 				CE2F56301F75548500F49DA1 /* SubscriptionsService.swift in Sources */,
