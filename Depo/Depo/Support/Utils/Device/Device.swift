@@ -37,6 +37,10 @@ class Device {
         return UI_USER_INTERFACE_IDIOM() == .pad
     }
     
+    static func operationSystemVersionLessThen(_ version: Int) -> Bool {
+        return ProcessInfo().operatingSystemVersion.majorVersion < version
+    }
+    
     static var getFreeDiskspace: UInt64 {
         var totalFreeSpace: UInt64 = 0
         
