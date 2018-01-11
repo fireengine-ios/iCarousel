@@ -67,4 +67,8 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
         //DBDROP
         super.getContentWithSuccess(array: array)
     }
+    
+    override func needShowNoFileView() -> Bool {
+        return dataSource.getAllObjects().count == 0
+    }
 }
