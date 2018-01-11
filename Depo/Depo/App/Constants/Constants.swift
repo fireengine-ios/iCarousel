@@ -287,6 +287,11 @@ struct TextConstants {
     
     //MARK: settings
     
+
+    static let settingsViewCellLoginSettings = NSLocalizedString("Login Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellTurkcellPasscode = NSLocalizedString("Turkcell Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellTurkcellAutoLogin = NSLocalizedString("Auto-login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let settingsViewUploadPhotoLabel = NSLocalizedString("Upload Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewLeaveFeedback = NSLocalizedString("Leave feedback", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -299,9 +304,9 @@ struct TextConstants {
     static let settingsViewCellPasscode = NSLocalizedString("Lifebox Touch ID and Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellHelp = NSLocalizedString("Help & Support", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellLogout = NSLocalizedString("Logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsViewCellTurkcellPasscode = NSLocalizedString("Turkcell Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsViewCellTurkcellAutoLogin = NSLocalizedString("Auto-login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let settingsViewLogoutCheckMessage = NSLocalizedString("Are you sure you want to exit the application?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     
     //MARK: Import photos
     static let importPhotos = NSLocalizedString("Import Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

@@ -538,7 +538,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    // MARK: SETTINGS
+    // MARK: - SETTINGS
     
     var settings: UIViewController? {
         let controller = SettingsModuleInitializer.initializeViewController(with: "SettingsViewController")
@@ -562,6 +562,12 @@ class RouterVC: NSObject {
     var helpAndSupport: UIViewController? {
         let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "HelpAndSupportViewController")
         return controller
+    }
+    
+    // MARK: Turkcell Security
+    
+    var turkcellSecurity: UIViewController {
+        return TurkcellSecurityModuleInitializer.viewController
     }
     
     // MARK: Auto Upload

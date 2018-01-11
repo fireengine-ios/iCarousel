@@ -35,7 +35,6 @@ class SettingsInteractor: SettingsInteractorInput {
     func getCellsData(){
         
         let securityCells = [TextConstants.settingsViewCellActivityTimline,
-//                             TextConstants.settingsViewCellRecentlyDeletedFiles,
                              TextConstants.settingsViewCellUsageInfo,
                              TextConstants.settingsViewCellPasscode]
         
@@ -49,54 +48,21 @@ class SettingsInteractor: SettingsInteractorInput {
             guard let `self` = self else {
                 return
             }
-            self.userInfoResponse = responce as? AccountInfoResponse
-                if self.isTurkcellUser {
-                    array[1].append(contentsOf: [TextConstants.settingsViewCellTurkcellPasscode,
-                                                  TextConstants.settingsViewCellTurkcellAutoLogin])
-                }
             DispatchQueue.main.async {
-                self.requestTurkcellSecurityInfo()
+                self.userInfoResponse = responce as? AccountInfoResponse
+                if self.isTurkcellUser {
+                    array[1].append(TextConstants.settingsViewCellLoginSettings)
+                }
                 self.output.cellsDataForSettings(array: array)
-            }  
+            }
+            
         }, fail: { [weak self] (error) in
             DispatchQueue.main.async {
                 self?.output.cellsDataForSettings(array: array)
             }
         })
     }
-    
-    private func requestTurkcellSecurityInfo() {
-        accountSerivese.securitySettingsInfo(success: { [weak self] (response) in
-            guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
-                let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
-                let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
-                    return
-            }
-            DispatchQueue.main.async {
-                self?.output.turkCellSecuritySettingsAccuered(passcode: turkCellPasswordOn, autoLogin: turkCellAutoLogin)
-            }
-            
-        }) { (error) in
-            
-        }
-    }
-    
-    func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool) {
-        accountSerivese.securitySettingsChange(turkcellPasswordAuthEnabled: passcode, mobileNetworkAuthEnabled: autoLogin, success: { [weak self] (response) in
-            guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
-                let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
-                let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
-                    return
-            }
-            DispatchQueue.main.async {
-                self?.output.turkCellSecuritySettingsAccuered(passcode: turkCellPasswordOn, autoLogin: turkCellAutoLogin)
-            }
-            debugPrint("response")
-        }) { (error) in
-            debugPrint("error")
-        }
-    }
-    
+
     func onLogout() {
         authService.logout { [weak self] in
             DispatchQueue.main.async {
