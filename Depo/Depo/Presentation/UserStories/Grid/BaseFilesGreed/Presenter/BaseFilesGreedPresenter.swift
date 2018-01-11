@@ -322,16 +322,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     private func updateNoFilesView() {
-        if needShowNoFileView() {            
-            if interactor.remoteItems is AllFilesService ||
-                interactor.remoteItems is FolderService ||
-                interactor.remoteItems is FilesFromFolderService ||
-                interactor.remoteItems is FavouritesService {
-                view.showNoFilesTop()
-            } else {
+        if needShowNoFileView() {
+            if interactor.remoteItems is PhotoAndVideoService ||
+                interactor.remoteItems is MusicService ||
+                interactor.remoteItems is DocumentService {
                 view.showNoFilesWith(text: interactor.textForNoFileLbel(),
                                      image: interactor.imageForNoFileImageView(),
                                      createFilesButtonText: interactor.textForNoFileButton())
+            } else {
+                view.showNoFilesTop()
             }
         } else {
             view.hideNoFiles()
