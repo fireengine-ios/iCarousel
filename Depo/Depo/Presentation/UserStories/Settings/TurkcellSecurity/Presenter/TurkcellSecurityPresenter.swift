@@ -33,7 +33,6 @@ extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
 extension TurkcellSecurityPresenter: TurkcellSecurityInteractorOutput {
     func changeTurkcellSecurityFailed() {
         asyncOperationSucces()
-        
     }
     
     func acquiredTurkcellSecurityState(passcode: Bool, autoLogin: Bool) {
