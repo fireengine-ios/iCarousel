@@ -20,6 +20,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
     var cancelSelectionButton: UIBarButtonItem?
     
+    var backAsCancelBarButton: UIBarButtonItem?
+    
     var editingTabBar: BottomSelectionTabBarViewController?
     
     var isFavorites: Bool = false
@@ -40,7 +42,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var topBarContainer: UIView!
     
-    @IBOutlet weak var noFilesTopLabel: UILabel!
+    @IBOutlet weak var noFilesTopLabel: UILabel?
     
     var scrolliblePopUpView = ViewForPopUp()
     
@@ -78,13 +80,21 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         cancelSelectionButton = UIBarButtonItem(customView: cancelButton)
         
+        let cancelBackButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
+        cancelBackButton.addTarget(self, action: #selector(onBackButton), for: .touchUpInside)
+        cancelBackButton.setTitle(TextConstants.cancelSelectionButtonTitle, for: .normal)
+        cancelBackButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelBackButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 19)
+        
+        backAsCancelBarButton = UIBarButtonItem(customView: cancelBackButton)
+        
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
         noFilesLabel.textColor = ColorConstants.textGrayColor
         noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         
-        noFilesTopLabel.text = TextConstants.folderEmptyText
-        noFilesTopLabel.textColor = ColorConstants.grayTabBarButtonsColor
-        noFilesTopLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        noFilesTopLabel?.text = TextConstants.folderEmptyText
+        noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
+        noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
         startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
@@ -170,7 +180,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             self?.output.moreActionsPressed(sender: NavigationBarList().more)
         })
         navBarConfigurator.configure(right: [more, delete], left: [])
+        
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
     
     @IBAction func onStartCreatingFilesButton(){
@@ -241,18 +253,22 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func showNoFilesTop() {
-        noFilesTopLabel.isHidden = false
+        noFilesTopLabel?.isHidden = false
         topBarContainer.isHidden = true
     }
     
     func hideNoFiles() {
         noFilesView.isHidden = true
-        noFilesTopLabel.isHidden = true
+        noFilesTopLabel?.isHidden = true
         topBarContainer.isHidden = false
     }
     
     @objc func onCancelSelectionButton(){
         output.onCancelSelection()
+    }
+    
+    @objc func onBackButton(){
+        RouterVC().popViewController()
     }
     
     func changeSortingRepresentation(sortType type: SortedRules) {

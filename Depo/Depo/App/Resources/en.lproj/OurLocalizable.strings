@@ -430,6 +430,11 @@
 "Nope" = "Nope";
 "You have already a backup. Do you want to overwrite the existing one?" = "You have already a backup. Do you want to overwrite the existing one?";
 "Overwrite backup?" = "Overwrite backup?";
+"Error Handling Under Constraction" = "Error Handling Under Constraction";
+"Account not found for email" = "Account not found for email";
+"This text doesn't match. Please try again" = "This text doesn't match. Please try again";
+"An error is occurred!" = "An error is occurred!";
+"Please check the e-mail address" = "Please check the e-mail address";
 "Error" = "Error";
 "Wrong type of answer" = "Wrong type of answer";
 "Verification code is invalid. Please try again." = "Verification code is invalid. Please try again.";
