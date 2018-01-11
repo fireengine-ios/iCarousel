@@ -768,6 +768,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 switch wraped.fileType {
                 case .folder:
                     cell_.setPlaceholderImage(image: UIImage(named: "fileBigIconFolder"))
+                case .audio:
+                    cell_.setPlaceholderImage(image: UIImage(named: "fileIconAudio"))
                 case let .application(applicationType):
                     cell_.setPlaceholderImage(image: applicationType.bigIconImage())
                 default:
