@@ -12,28 +12,20 @@ class TurkcellSecurityInteractor {
     var turkcellPassword: Bool?
     var turkcellLogin: Bool?
     
-//    var inNeedOfMail: Bool?
     
-//    if self.isTurkcellUser {
-//          array[1].append(contentsOf: [TextConstants.settingsViewCellTurkcellPasscode,
-//          TextConstants.settingsViewCellTurkcellAutoLogin])
-//    }
-//    private func requestTurkcellSecurityInfo() {
-//        AccountService().securitySettingsInfo(success: { [weak self] (response) in
-//            guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
-//                let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
-//                let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
-//                    return
-//            }
-//            DispatchQueue.main.async {
-//                self?.output.turkCellSecuritySettingsAccuered(passcode: turkCellPasswordOn, autoLogin: turkCellAutoLogin)
-//            }
-//
-//        }) { (error) in
-//
-//        }
-//    }
-//
+    private let isEnabledKey = "isEnabledKey"
+    private let passcodeKey = "passcodeKey"
+    
+    private var touchIDEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: isEnabledKey)
+    }
+    
+    private var passcodeEnabled: Bool {
+        guard let passcodeKey = UserDefaults.standard.string(forKey: self.passcodeKey) else {
+            return false
+        }
+        return !passcodeKey.isEmpty
+    }
     
 }
 
@@ -85,5 +77,8 @@ extension TurkcellSecurityInteractor: TurkcellSecurityInteractorInput {
     }
     var turkcellAutoLoginOn: Bool {
         return turkcellLogin ?? false
+    }
+    var isPasscodeEnabled: Bool {
+        return touchIDEnabled && passcodeEnabled
     }
 }
