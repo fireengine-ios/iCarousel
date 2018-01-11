@@ -41,6 +41,9 @@ class Eula : ObjectRequestResponse {
 }
 
 struct EULAGet: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     var requestParametrs: Any {
         return ""
@@ -57,6 +60,9 @@ struct EULAGet: RequestParametrs {
 }
 
 struct EULACheck: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     var requestParametrs: Any {
         return ""
@@ -73,6 +79,9 @@ struct EULACheck: RequestParametrs {
 }
 
 struct  EULAApprove: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     let id: Int
     

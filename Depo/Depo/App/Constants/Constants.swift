@@ -767,4 +767,7 @@ struct NumericConstants {
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     
     static let maxRecentSearches: Int = 10
+    
+    static let defaultTimeout: TimeInterval = 30.0
+    
 }
