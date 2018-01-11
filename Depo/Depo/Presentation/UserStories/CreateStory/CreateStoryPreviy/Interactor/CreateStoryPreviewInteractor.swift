@@ -10,6 +10,7 @@ class CreateStoryPreviewInteractor {
     weak var output: CreateStoryPreviewInteractorOutput?
     var story:PhotoStory? = nil
     var responce: CreateStoryResponce? = nil
+    var isRequestStarted = false
 }
 
 // MARK: CreateStoryPreviewInteractorInput
@@ -23,6 +24,10 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
     }
     
     func onSaveStory(){
+        if isRequestStarted {
+            return
+        }
+        
         guard let story_ = story else {
             return
         }
@@ -30,6 +35,8 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
         guard let parameter = story_.photoStoryRequestParameter() else{
             return
         }
+        
+        isRequestStarted = true
         
         CreateStoryService().createStory(createStory: parameter, success: {[weak self] in
             DispatchQueue.main.async {
@@ -39,6 +46,7 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
             }, fail: {[weak self] (error) in
                 DispatchQueue.main.async {
                     self?.output?.storyCreatedWithError()
+                    self?.isRequestStarted = false
                 }
         })
     }
