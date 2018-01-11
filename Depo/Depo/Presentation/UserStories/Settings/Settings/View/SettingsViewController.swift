@@ -63,6 +63,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         
         userInfoSubView.actionsDelegate = self
         output.viewIsReady()
+        setupVersionLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
