@@ -55,7 +55,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     }
     
     func signUpUser() {
-        guard let sigUpInfo = ApplicationSession.sharedSession.signUpInfo,
+        guard let sigUpInfo = SingletonStorage.shared.signUpInfo,
             let eulaId = eula?.id
             else { return }
         

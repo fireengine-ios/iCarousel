@@ -185,7 +185,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
             RouterVC().presentViewController(controller: textEnterVC)
             
         } else {
-            ApplicationSession.sharedSession.saveData()
+            //ApplicationSession.sharedSession.saveData()
             interactor.checkEULA()
         }
     }
@@ -230,7 +230,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
         
-        ApplicationSession.sharedSession.saveData()
+        //ApplicationSession.sharedSession.saveData()
         
         startAsyncOperationDisableScreen()
         interactor.checkEULA()
