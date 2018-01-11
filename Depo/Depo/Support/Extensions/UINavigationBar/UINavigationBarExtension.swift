@@ -66,6 +66,7 @@ extension UIViewController {
     }
     
     func setNavigationTitle(title: String) {
+        self.navigationItem.titleView = nil
         navigationItem.title = title
         navBar?.titleTextAttributes = [NSAttributedStringKey.font: UIFont.TurkcellSaturaDemFont(size: 19), NSAttributedStringKey.foregroundColor: UIColor.white]
     }
