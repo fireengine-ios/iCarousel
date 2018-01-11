@@ -61,10 +61,8 @@ enum ApplicationType: String {
     
     func bigIconImage() -> UIImage? {
         switch self {
-        case .rar:
-            return #imageLiteral(resourceName: "fileIconRar")
-        case .zip:
-            return #imageLiteral(resourceName: "fileIconZip")
+        case .rar, .zip:
+            return #imageLiteral(resourceName: "fileBigIconAchive")
         case .doc:
             return #imageLiteral(resourceName: "fileBigIconDoc")
         case .txt:
@@ -75,6 +73,27 @@ enum ApplicationType: String {
             return #imageLiteral(resourceName: "fileBigIconPdf")
         case .ppt:
             return #imageLiteral(resourceName: "fileBigIconPpt")
+        default:
+            return nil
+        }
+    }
+    
+    func smallIconImage() -> UIImage? {
+        switch self {
+        case .rar:
+            return #imageLiteral(resourceName: "fileIconRar")
+        case .zip:
+            return #imageLiteral(resourceName: "fileIconZip")
+        case .doc:
+            return #imageLiteral(resourceName: "fileIconDoc")
+        case .txt:
+            return #imageLiteral(resourceName: "fileIconTxt")
+        case .xls:
+            return #imageLiteral(resourceName: "fileIconXls")
+        case .pdf:
+            return #imageLiteral(resourceName: "fileIconPdf")
+        case .ppt:
+            return #imageLiteral(resourceName: "fileIconPpt")
         default:
             return #imageLiteral(resourceName: "fileIconUnknown")
         }

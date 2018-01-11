@@ -32,10 +32,6 @@ class PhotosOrderCollectionViewCell: UICollectionViewCell {
         positionLabel.text = ""
         
     }
-    
-    func startAnimating(){
-        progress.startAnimating()
-    }
 
     func configurateWith(image: UIImage?){
         progress.stopAnimating()

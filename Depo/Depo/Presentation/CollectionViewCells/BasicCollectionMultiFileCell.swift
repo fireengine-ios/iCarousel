@@ -68,11 +68,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     static let leftSpaceSmallCell: CGFloat              = 14
     
     var itemModel: Item?
-    
-    func stopAnimation(){
-        activity.stopAnimating()
-    }
-    
+
     override func setImage(image: UIImage?) {
         isAlreadyConfigured = true
 
@@ -86,25 +82,22 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             smallContentImageView.isHidden = false
             smallCellSelectionView.isHidden = true
         }
-        stopAnimation()
     }
     
-    override func setPlaceholderImage(image: UIImage?) {
-        isAlreadyConfigured = true
+    override func setPlaceholderImage(fileType: FileType) {
+        var image: UIImage?
         
-        if isBigSize() {
-            bigContentImageView.contentMode = .scaleAspectFit
-            bigContentImageView.image = image
-            bigContentImageView.isHidden = false
-        } else {
-            smallContentImageView.contentMode = .scaleAspectFill
-            smallContentImageView.configured = true
-            smallContentImageView.setImage(image: image)
-            smallContentImageView.isHidden = false
-            bigContentImageView.isHidden = true
-            smallCellSelectionView.isHidden = true
+        switch fileType {
+        case .folder:
+            image = isBigSize() ? UIImage(named: "fileBigIconFolder") : UIImage(named: "fileIconFolder")
+        case .audio:
+            image = isBigSize() ? UIImage(named: "fileBigIconAudio") : UIImage(named: "fileIconAudio")
+        case let .application(applicationType):
+            image = isBigSize() ? applicationType.bigIconImage() : applicationType.smallIconImage()
+        default:
+            image = nil
         }
-        stopAnimation()
+        setImage(image: image)
     }
     
     private func isBigSize() -> Bool{
@@ -143,9 +136,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         itemModel = wrappered
         
         fileNameLabel.text = wrappedObj.name
-        activity.startAnimating()
         bigContentImageView.image = nil
-        stopAnimation()
         bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(object: wrappered)
         if (isBigSize()){
             smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(object: wrappered)

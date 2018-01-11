@@ -19,6 +19,7 @@ class AlbumCell: UICollectionViewCell {
     @IBOutlet weak var previewImage: LoadingImageView!
     
     func setup(forItem item: Item, titleText: String) {
+        previewImage.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
         previewImage.loadImageForItem(object: item)
         titleLabel.text = titleText
     }

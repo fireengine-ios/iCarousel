@@ -54,7 +54,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
         imageView.image = nil
-//        activity.startAnimating()
         if wrappered.isLocalItem {
             cloudStatusImage.image = UIImage(named: "objectNotInCloud")
         } else {
@@ -81,7 +80,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         imageView.image = image
         isAlreadyConfigured = true
         self.backgroundColor = ColorConstants.fileGreedCellColor
-        activity.stopAnimating()
     }
 
     override func setImage(with url: URL) {
