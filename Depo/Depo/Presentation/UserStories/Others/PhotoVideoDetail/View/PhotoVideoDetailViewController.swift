@@ -48,6 +48,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         blackNavigationBarStyle()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         editingTabBar?.view.layoutIfNeeded()
+        editingTabBar.view.backgroundColor = UIColor.black
         output.viewIsReady(view: view)
         setupTitle()
     }
@@ -59,6 +60,8 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        setNavigationBackgroundColor(color: UIColor.clear)
+        setStatusBarBackgroundColor(color: UIColor.clear)
         visibleNavigationBarStyle()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         floatingView.hideView(animated: true)
