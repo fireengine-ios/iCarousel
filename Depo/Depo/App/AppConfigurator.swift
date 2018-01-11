@@ -21,6 +21,11 @@ class AppConfigurator {
         
         let urls: AuthorizationURLs = AuthorizationURLsImp()
         let tokenStorage: TokenStorage = TokenStorageUserDefaults()
+        if tokenStorage.isClearTokens {
+            tokenStorage.isClearTokens = false
+            tokenStorage.clearTokens()
+        }
+        
         var auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
         auth.refreshFailedHandler = logout
         

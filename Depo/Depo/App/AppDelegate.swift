@@ -30,11 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.isStatusBarHidden = false
         application.statusBarStyle = .lightContent
         
+        AppConfigurator.applicationStarted(with: launchOptions)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = RouterVC().vcForCurrentState()
         window?.makeKeyAndVisible()
         
-        AppConfigurator.applicationStarted(with: launchOptions)
+        
         
         Fabric.with([Crashlytics.self])
             

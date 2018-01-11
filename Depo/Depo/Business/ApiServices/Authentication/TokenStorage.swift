@@ -12,6 +12,7 @@ protocol TokenStorage: class {
     var accessToken: String? { get set }
     var refreshToken: String? { get set }
     var isRememberMe: Bool { get set }
+    var isClearTokens: Bool { get set }
     func clearTokens()
 }
 
@@ -20,6 +21,7 @@ final class TokenStorageUserDefaults: TokenStorage {
     private let accessTokenKey = "accessToken"
     private let refreshTokenKey = "refreshToken"
     private let isRememberMeKey = "isRememberMeKey"
+    private let isClearTokensKey = "isClearTokensKey"
     
     var accessToken: String? {
         get {
@@ -50,6 +52,11 @@ final class TokenStorageUserDefaults: TokenStorage {
     var isRememberMe: Bool {
         get { return UserDefaults.standard.bool(forKey: isRememberMeKey) }
         set { UserDefaults.standard.setValue(newValue, forKey: isRememberMeKey) }
+    }
+    
+    var isClearTokens: Bool {
+        get { return UserDefaults.standard.bool(forKey: isClearTokensKey) }
+        set { UserDefaults.standard.setValue(newValue, forKey: isClearTokensKey) }
     }
     
     func clearTokens() {

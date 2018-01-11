@@ -11,6 +11,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     var interactor: LoginInteractorInput!
     var router: LoginRouterInput!
     
+    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    
     var optInVC: OptInController?
     var textEnterVC: TextEnterController?
     var newPhone: String?
@@ -76,11 +78,9 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func succesLogin() {
+        tokenStorage.isClearTokens = true
         compliteAsyncOperationEnableScreen()
         interactor.getAccountInfo()
-        
-
-//        router.goToHomePage()
     }
     
     private func showMessageHideSpinner(text: String) {
@@ -101,9 +101,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         if captchaShowed {
             view.refreshCaptcha()
         }
-        
-//        loginScreenNoInternetError
-        
     }
     
     func startedEnteringPhoneNumberPlus() {
@@ -155,7 +152,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         }  else {
             showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
         }
-        
     }
     
     //MARK : BasePresenter    
@@ -231,6 +227,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         optInVC?.resignFirstResponder()
         
         //ApplicationSession.sharedSession.saveData()
+        tokenStorage.isClearTokens = false
         
         startAsyncOperationDisableScreen()
         interactor.checkEULA()
@@ -247,10 +244,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         }
     }
 }
-
-
-
-
 
 // MARK: - OptInControllerDelegate
 extension LoginPresenter: OptInControllerDelegate {
