@@ -29,7 +29,7 @@
 #import "GPUImage.h"
 #import "MyTextView.h"
 
-#define ACEDrawingViewVersion   2.0.0
+#define ACEDrawingViewVersion   "2.0.0"
 
 typedef enum {
     ACEDrawingToolTypeNone,

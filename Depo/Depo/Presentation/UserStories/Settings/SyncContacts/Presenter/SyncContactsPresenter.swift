@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
+class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
     weak var view: SyncContactsViewInput!
     var interactor: SyncContactsInteractorInput!
     var router: SyncContactsRouterInput!
@@ -47,7 +47,7 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
         view.showProggress(progress: progress, forOperation: operation)
     }
     
-    func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType) {
+    func success(object: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
         isBackUpAvailable = true
         view.success(object: object, forOperation: operation)
     }
@@ -58,5 +58,17 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
     
     func showNoBackUp() {
         view.setStateWithoutBackUp()
+    }
+    
+    func asyncOperationStarted() {
+        outputView()?.showSpiner()
+    }
+    
+    func asyncOperationFinished() {
+        outputView()?.hideSpiner()
+    }
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
     }
 }

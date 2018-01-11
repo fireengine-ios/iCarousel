@@ -27,9 +27,9 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     @IBOutlet weak var cancelButton: ButtonWithGrayCorner!
     @IBOutlet weak var manageContactsButton: ButtonWithGrayCorner!
     
-    @IBOutlet weak var deleteDuplicatedButton: BlueButtonWithWhiteText!
-    @IBOutlet weak var restoreButton: BlueButtonWithWhiteText!
-    @IBOutlet weak var backUpButton: BlueButtonWithWhiteText!
+    @IBOutlet weak var deleteDuplicatedButton: BlueButtonWithMediumWhiteText!
+    @IBOutlet weak var restoreButton: BlueButtonWithMediumWhiteText!
+    @IBOutlet weak var backUpButton: BlueButtonWithMediumWhiteText!
     
     @IBOutlet weak var backupDateLabel: UILabel!
     
@@ -45,6 +45,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         
         titleLabel.textColor = ColorConstants.textGrayColor
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        titleLabel.text = ""
         //backButtonForNavigationItem(title: TextConstants.backTitle)
         
         newContactCountLabel.textColor = ColorConstants.textLightGrayColor
@@ -73,14 +74,17 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         
         backupDateLabel.textColor = ColorConstants.textGrayColor
         backupDateLabel.font = UIFont.TurkcellSaturaItaFont(size: 14)
+        backupDateLabel.text = ""
         
-        backUpButton.setTitle(TextConstants.settingsBackUpButtonTitle, for: .normal)
         backUpButton.setTitle(TextConstants.settingsBackUpButtonTitle, for: .normal)
         restoreButton.setTitle(TextConstants.settingsBackUpRestoreTitle, for: .normal)
         cancelButton.setTitle(TextConstants.settingsBackUpCancelBackUpTitle, for: .normal)
+        deleteDuplicatedButton.setTitle(TextConstants.settingsBackUpDeleteDuplicatedButton, for: .normal)
+        backUpButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
+        restoreButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
+        deleteDuplicatedButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         
-        setStateWithoutBackUp()
-        
+        setInitialState()
     }
     
     
@@ -119,10 +123,17 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         output.startOperation(operationType: .cancelAllOperations)
     }
     
+    @IBAction func onDeleteDuplicatedTapped(_ sender: Any) {
+        output.startOperation(operationType: .analyze)
+    }
+    
     // MARK: SyncContactsViewInput
     
     func setInitialState() {
-        
+        viewForInformationAfterBackUp.isHidden = true
+        cancelButton.isHidden = true
+        restoreButton.isHidden = true
+        deleteDuplicatedButton.isHidden = true
     }
     
     func setStateWithoutBackUp() {
@@ -136,17 +147,19 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     
     func setStateWithBackUp() {
         cancelButton.isHidden = true
+        restoreButton.isHidden = false
+        deleteDuplicatedButton.isHidden = false
     }
     
-    func showProggress(progress :Int, forOperation operation: SyncOperationType){
-        gradientLoaderIndicator.progress = CGFloat(progress)
-        if (operation == .backup){
+    func showProggress(progress: Int, forOperation operation: SyncOperationType){
+        gradientLoaderIndicator.progress = CGFloat(progress) / 100
+        if (operation == .backup) {
             let text = String.init(format: TextConstants.settingsBackUpingText, progress)
             titleLabel.text = text
             viewForInformationAfterBackUp.isHidden = true
             cancelButton.setTitle(TextConstants.settingsBackUpCancelBackUpTitle, for: .normal)
         }
-        if (operation == .restore){
+        if (operation == .restore) {
             let text = String.init(format: TextConstants.settingsRestoringText, progress)
             titleLabel.text = text
             viewForInformationAfterBackUp.isHidden = true
@@ -155,12 +168,12 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         cancelButton.isHidden = false
     }
     
-    func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType) {
+    func success(object: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
         setLastBackUpDate(object.date)
+        setStateWithBackUp()
         var template: String = ""
         if (operation == .backup){
             template = TextConstants.settingsBackupedText
-            setStateWithBackUp()
         } else {
             template = TextConstants.settingsRestoredText
         }

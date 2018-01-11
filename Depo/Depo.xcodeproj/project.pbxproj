@@ -464,7 +464,7 @@
 		8C0E8C931FDEBDFF00789C91 /* PasscodeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2371FB99AF800C3D67F /* PasscodeSettingsViewController.swift */; };
 		8C0E8C941FDEBDFF00789C91 /* HomePageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FAF1EFD4F0D00A405B2 /* HomePageViewOutput.swift */; };
 		8C0E8C951FDEBDFF00789C91 /* CurioConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6031DDDD0F600FFE63E /* CurioConstants.m */; };
-		8C0E8C961FDEBDFF00789C91 /* ContactSyncResposeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF792AA1F10C65E00007719 /* ContactSyncResposeModel.swift */; };
+		8C0E8C961FDEBDFF00789C91 /* ContactSyncModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */; };
 		8C0E8C971FDEBDFF00789C91 /* SubscriptionPlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47864031F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift */; };
 		8C0E8C981FDEBDFF00789C91 /* WiFiSyncInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8E71F0288CA0028F51A /* WiFiSyncInteractorOutput.swift */; };
 		8C0E8C991FDEBDFF00789C91 /* CollectionViewCellDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAB66DC1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift */; };
@@ -1523,7 +1523,7 @@
 		8CD8F4F11F1CC3FD00F1257B /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F01F1CC3FD00F1257B /* FloatingView.swift */; };
 		8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */; };
 		8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */; };
-		8CF792AB1F10C65E00007719 /* ContactSyncResposeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF792AA1F10C65E00007719 /* ContactSyncResposeModel.swift */; };
+		8CF792AB1F10C65E00007719 /* ContactSyncModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */; };
 		8CF87D5D1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF87D5C1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib */; };
 		8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF87D5E1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift */; };
 		8CF89EF91F1351A800F1A2D0 /* LoginPhoneMailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF89EF81F1351A800F1A2D0 /* LoginPhoneMailCell.swift */; };
@@ -3205,7 +3205,7 @@
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
-		8CF792AA1F10C65E00007719 /* ContactSyncResposeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactSyncResposeModel.swift; sourceTree = "<group>"; };
+		8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactSyncModels.swift; sourceTree = "<group>"; };
 		8CF87D5C1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBAlbumLikePreviewSliderViewController.xib; sourceTree = "<group>"; };
 		8CF87D5E1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderDataStorage.swift; sourceTree = "<group>"; };
 		8CF89EF81F1351A800F1A2D0 /* LoginPhoneMailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPhoneMailCell.swift; sourceTree = "<group>"; };
@@ -7178,7 +7178,7 @@
 		8CF792A91F10C65E00007719 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8CF792AA1F10C65E00007719 /* ContactSyncResposeModel.swift */,
+				8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -11197,7 +11197,7 @@
 				8C0E8C931FDEBDFF00789C91 /* PasscodeSettingsViewController.swift in Sources */,
 				8C0E8C941FDEBDFF00789C91 /* HomePageViewOutput.swift in Sources */,
 				8C0E8C951FDEBDFF00789C91 /* CurioConstants.m in Sources */,
-				8C0E8C961FDEBDFF00789C91 /* ContactSyncResposeModel.swift in Sources */,
+				8C0E8C961FDEBDFF00789C91 /* ContactSyncModels.swift in Sources */,
 				8C0E8C971FDEBDFF00789C91 /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				8C0E8C981FDEBDFF00789C91 /* WiFiSyncInteractorOutput.swift in Sources */,
 				8CD2B3AE1FE7B37100280547 /* PhotoSyncService.swift in Sources */,
@@ -12113,7 +12113,7 @@
 				CEAE3FBC1EFD4F0D00A405B2 /* HomePageViewOutput.swift in Sources */,
 				CE51AB3D1EF90853005DCEE0 /* CurioConstants.m in Sources */,
 				CEB76EB01FE9094700B679EB /* UIScrollView+Refresh.swift in Sources */,
-				8CF792AB1F10C65E00007719 /* ContactSyncResposeModel.swift in Sources */,
+				8CF792AB1F10C65E00007719 /* ContactSyncModels.swift in Sources */,
 				D47864041F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				7CD1F8F71F0288CA0028F51A /* WiFiSyncInteractorOutput.swift in Sources */,
 				B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */,

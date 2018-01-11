@@ -117,6 +117,14 @@ class ApplicationPalette {
         return UIFont.TurkcellSaturaBolFont(size: fontSize)
     }
     
+    static var mediumRoundButtonFont: UIFont? {
+        var fontSize: CGFloat = 18.0
+        if (Device.isIpad) {
+            fontSize = 24.0
+        }
+        return UIFont.TurkcellSaturaBolFont(size: fontSize)
+    }
+    
     static var roundedCornersButtonFont: UIFont? {
         var fontSize: CGFloat = 12.0
         if (Device.isIpad) {

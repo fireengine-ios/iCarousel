@@ -11,6 +11,8 @@ import Foundation
 protocol SyncContactsInteractorOutput: class {
     func showError(errorType: SyncOperationErrors)
     func showProggress(progress :Int, forOperation operation: SyncOperationType)
-    func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType)
+    func success(object: ContactSync.SyncResponse, forOperation operation: SyncOperationType)
     func showNoBackUp()
+    func asyncOperationStarted()
+    func asyncOperationFinished()
 }

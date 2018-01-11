@@ -9,6 +9,8 @@
 enum SyncOperationType {
     case backup
     case restore
+    case analyze
+    case deleteDuplicated
     case getBackUpStatus
     case cancelAllOperations
 }
@@ -37,6 +39,10 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             contactsSyncService.cancellCurrentOperation()
         case .getBackUpStatus:
             loadLastBackUp()
+        case .analyze:
+            analyze()
+        case .deleteDuplicated:
+            deleteDuplicated()
         }
     }
     
@@ -45,25 +51,44 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 DispatchQueue.main.async { [weak self] in
                     self?.output.showProggress(progress: progressPercentage, forOperation: type)
                 }
-            }, finishCallback: { result, type in
+            }, finishCallback: { (result, type) in
                 DispatchQueue.main.async { [weak self] in
                     self?.output.success(object: result, forOperation: type)
                 }
-        }, errorCallback: { errortype, type in
+        }, errorCallback: { errorType, type in
             DispatchQueue.main.async { [weak self] in
-                if self?.output != nil {
-                    self?.output.showError(errorType: errortype)
-                }
+                self?.output.showError(errorType: errorType)
             }
         })
     }
     
-    func loadLastBackUp() {
+    private func loadLastBackUp() {
+        output.asyncOperationStarted()
         contactsSyncService.getBackUpStatus(completion: { [weak self] (model) in
             self?.output.success(object: model, forOperation: .getBackUpStatus)
+            self?.output.asyncOperationFinished()
         }, fail: { [weak self] in
             self?.output.showNoBackUp()
+            self?.output.asyncOperationFinished()
         })
+    }
+    
+    private func analyze() {
+        contactsSyncService.analyze(progressCallback: { [weak self] (progressPercentage, type) in
+            DispatchQueue.main.async { [weak self] in
+                self?.output.showProggress(progress: progressPercentage, forOperation: type)
+            }
+        }, finishCallback: { (response) in
+            
+        }) { (errorType, type) in
+            DispatchQueue.main.async { [weak self] in
+                self?.output.showError(errorType: errorType)
+            }
+        }
+    }
+    
+    private func deleteDuplicated() {
+        
     }
 }
 
