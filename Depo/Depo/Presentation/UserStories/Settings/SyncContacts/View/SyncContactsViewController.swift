@@ -122,7 +122,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     // MARK: SyncContactsViewInput
     
     func setInitialState() {
-
+        
     }
     
     func setStateWithoutBackUp() {
@@ -130,6 +130,8 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         backupDateLabel.text = TextConstants.settingsBackUpNewer
         viewForInformationAfterBackUp.isHidden = true
         cancelButton.isHidden = true
+        restoreButton.isHidden = true
+        deleteDuplicatedButton.isHidden = true
     }
     
     func setStateWithBackUp() {
@@ -154,7 +156,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     }
     
     func success(object: ContactSyncResposeModel, forOperation operation: SyncOperationType) {
-        setDateLastBackUp(dateLastBackUp: object.date)
+        setLastBackUpDate(object.date)
         var template: String = ""
         if (operation == .backup){
             template = TextConstants.settingsBackupedText
@@ -180,12 +182,17 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         removedCountLabel.text = String(object.deletedNumber)
     }
     
-    func setDateLastBackUp(dateLastBackUp: Date) {
-        let timeToLastBackUp = -dateLastBackUp.timeIntervalSinceNow
+    func setLastBackUpDate(_ lastBackUpDate: Date?) {
+        guard let lastBackUpDate = lastBackUpDate else {
+            return
+        }
+        
+        let timeToLastBackUp = -lastBackUpDate.timeIntervalSinceNow
         if (timeToLastBackUp < NumericConstants.minute) {
             backupDateLabel.text = TextConstants.settingsBackUpLessAMinute
         } else {
-            backupDateLabel.text = String(format: TextConstants.settingsBackUpLessADay, dateLastBackUp.getDateInFormat(format: "d MMMM yyyy"))
+            backupDateLabel.text = String(format: TextConstants.settingsBackUpLessADay,
+                                          lastBackUpDate.getDateInFormat(format: "d MMMM yyyy"))
         }
     }
     

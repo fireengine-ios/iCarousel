@@ -108,7 +108,6 @@ class ContactsSyncService {
     }
     
     func constractSuccessResponse(finishCallback: FinishClousure?) {
-        
         finishCallback?(constractContactSyncInfoModel(), getCurrentOperationType())
     }
     
@@ -127,24 +126,14 @@ class ContactsSyncService {
                                            newContactsNumber: SyncStatus.shared().createdContactsReceived.count,
                                            duplicatesNumber: SyncStatus.shared().updatedContactsReceived.count,
                                            deletedNumber: SyncStatus.shared().deletedContactsOnDevice.count,
-                                           date: Date())
+                                           date: nil)
             
         }
     }
     
     func cancellCurrentOperation() {
-
         //TODO: Pestryakov find out how to close
 //        SyncStatus.shared().reset()
-    }
-    
-    func getPreviousBackupTime() -> Double? {
-        let time = ContactSyncSDK.lastSyncTime().doubleValue
-        if time == 0 {
-            return nil
-        } else {
-            return time
-        }
     }
     
     private func setup() {
