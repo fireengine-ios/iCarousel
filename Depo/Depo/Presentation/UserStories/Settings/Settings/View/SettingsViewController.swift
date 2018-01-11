@@ -29,6 +29,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     @IBOutlet weak var headerContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var leaveFeedbackButton: ButtonWithGrayCorner!
+    @IBOutlet weak var versionLabel: UILabel!
     
     var tableDataArray: [[String]] = []
     var turkCellSeuritySettingsPassState: Bool?
@@ -62,6 +63,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         
         userInfoSubView.actionsDelegate = self
         output.viewIsReady()
+        setupVersionLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +82,16 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     }
     
     // MARK: SettingsViewInput
+    
+    func setupVersionLabel() {
+        versionLabel.textColor = ColorConstants.lightText
+        versionLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        
+        if let version = UserDefaults.standard.string(forKey: AppConfigurator.SettingsBundleKeys.AppVersionKey),
+            let build = UserDefaults.standard.string(forKey: AppConfigurator.SettingsBundleKeys.BuildVersionKey) {
+            versionLabel.text = "\(version)_\(build)_lifetech"
+        }
+    }
     
     func showCellsData(array: [[String]]){
         tableDataArray.removeAll()
