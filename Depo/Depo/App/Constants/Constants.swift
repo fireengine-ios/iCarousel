@@ -122,6 +122,10 @@ struct TextConstants {
     static let theFileIsNotSupported = NSLocalizedString("The file isn't supported", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warning = NSLocalizedString("Warning", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    //MARK: - Turkcell Security
+    
+    static let turkcellSecurityWaringPasscode = NSLocalizedString("TurkcellSecurityPasscodeWarningText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let passcodeEneblingwWithActivatedTurkcellSecurity = NSLocalizedString("PasscodeActivationWhileTurkcellActivated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     // MARK: - Search
     
 

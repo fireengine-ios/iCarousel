@@ -14,13 +14,27 @@ class TurkcellSecurityPresenter: BasePresenter {
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
+    
+//    private func showWarningPopUp
 }
 
 // MARK: TurkcellSecurityViewOutput
 extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
     func securityChanged(passcode: Bool, autoLogin: Bool) {
-        startAsyncOperation()
-        interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
+        
+        if interactor.isPasscodeEnabled, passcode {
+            let router = RouterVC()
+            let popUP = PopUpController.with(title: TextConstants.warning, message: TextConstants.turkcellSecurityWaringPasscode, image: .error, buttonTitle: TextConstants.ok, action: { [weak self] controller in
+                self?.startAsyncOperation()
+                self?.interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
+            })
+            router.rootViewController?.present(popUP, animated: true, completion: nil)
+        } else {
+            startAsyncOperation()
+            interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
+        }
+        
+        
     }
     
     func viewIsReady() {
