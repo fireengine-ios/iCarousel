@@ -172,10 +172,11 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         compliteAsyncOperationEnableScreen()
         
         if isPhoneNumberEmpty(for: accountInfo) {
+            
             let textEnterVC = TextEnterController.with(
-                title: "Please enter your GSM number",
-                textPlaceholder: "GSM number",
-                buttonTitle: "Save") { [weak self] enterText, vc in
+                title: TextConstants.loginEnterGSM,
+                textPlaceholder: TextConstants.loginGSMNumber,
+                buttonTitle: TextConstants.save) { [weak self] enterText, vc in
                     self?.newPhone = enterText
                     self?.interactor.getTokenToUpdatePhone(for: enterText)
                     vc.startLoading()
@@ -203,7 +204,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
             let optInVC = OptInController.with(phone: newPhone)
             self?.optInVC = optInVC
             optInVC.delegate = self
-//            RouterVC().navigationController?.popViewController(animated: false)
             RouterVC().pushViewController(viewController: optInVC)
         }
     }
