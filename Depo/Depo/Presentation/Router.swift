@@ -253,7 +253,11 @@ class RouterVC: NSObject {
     var syncContacts: UIViewController? {
         let viewController = SyncContactsModuleInitializer.initializeViewController(with: "SyncContactsViewController")
         return viewController
-        
+    }
+    
+    var manageContacts: UIViewController {
+        let viewController = ManageContactsModuleInitializer.initializeViewController(with: "ManageContactsViewController")
+        return viewController
     }
     
     //MARK: Terms

@@ -128,6 +128,7 @@ struct TextConstants {
     // MARK: - Sync Contacts
     
     static let backUpMyContacts = NSLocalizedString("Back Up My Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let manageContacts = NSLocalizedString("Manage Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Authification Cells
     static let showPassword = NSLocalizedString("Show", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -357,8 +358,8 @@ struct TextConstants {
     static let settingsBackUpLessADay = NSLocalizedString("Your last back was on %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpButtonTitle = NSLocalizedString("Back-Up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpRestoreTitle = NSLocalizedString("Restore", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBackUpClearBackUpTitle = NSLocalizedString("Clear Back-Up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpCancelBackUpTitle = NSLocalizedString("Cancel Back-Up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpManageContactsButton = NSLocalizedString("Manage Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: ActionsMenuAction
     static let actionsMenuActionMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

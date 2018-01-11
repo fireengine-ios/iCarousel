@@ -135,6 +135,19 @@
 		781839861FE9140E0046D73C /* FileForDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781839851FE9140E0046D73C /* FileForDownload.swift */; };
 		7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A18BA44717122453DCA565 /* LBAlbumLikePreviewSliderViewOutput.swift */; };
 		782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */; };
+		7859298A20060E7D003F8AB3 /* ManageContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7859298620060E7D003F8AB3 /* ManageContactsViewController.xib */; };
+		7859298B20060E7D003F8AB3 /* ManageContactsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298720060E7D003F8AB3 /* ManageContactsViewOutput.swift */; };
+		7859298C20060E7D003F8AB3 /* ManageContactsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298820060E7D003F8AB3 /* ManageContactsViewInput.swift */; };
+		7859298D20060E7D003F8AB3 /* ManageContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298920060E7D003F8AB3 /* ManageContactsViewController.swift */; };
+		7859299020060E85003F8AB3 /* ManageContactsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298E20060E84003F8AB3 /* ManageContactsRouterInput.swift */; };
+		7859299120060E85003F8AB3 /* ManageContactssRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298F20060E84003F8AB3 /* ManageContactssRouter.swift */; };
+		7859299420060E8B003F8AB3 /* ManageContactsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299220060E8A003F8AB3 /* ManageContactsPresenter.swift */; };
+		7859299520060E8B003F8AB3 /* ManageContactsModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299320060E8A003F8AB3 /* ManageContactsModuleInput.swift */; };
+		7859299920060E94003F8AB3 /* ManageContactsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299620060E93003F8AB3 /* ManageContactsInteractor.swift */; };
+		7859299A20060E94003F8AB3 /* ManageContactsInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299720060E93003F8AB3 /* ManageContactsInteractorInput.swift */; };
+		7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */; };
+		7859299E20060E9C003F8AB3 /* ManageContactsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299C20060E9C003F8AB3 /* ManageContactsInitializer.swift */; };
+		7859299F20060E9C003F8AB3 /* ManageContactsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */; };
 		786AA87724BCB7349231EF0C /* HomeHeaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */; };
 		78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */; };
 		787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
@@ -2776,6 +2789,19 @@
 		780ACF9A2004D6D1009CA4F5 /* AnalyzeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeStatus.h; sourceTree = "<group>"; };
 		781839851FE9140E0046D73C /* FileForDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileForDownload.swift; sourceTree = "<group>"; };
 		782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesService.swift; sourceTree = "<group>"; };
+		7859298620060E7D003F8AB3 /* ManageContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ManageContactsViewController.xib; sourceTree = "<group>"; };
+		7859298720060E7D003F8AB3 /* ManageContactsViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsViewOutput.swift; sourceTree = "<group>"; };
+		7859298820060E7D003F8AB3 /* ManageContactsViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsViewInput.swift; sourceTree = "<group>"; };
+		7859298920060E7D003F8AB3 /* ManageContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsViewController.swift; sourceTree = "<group>"; };
+		7859298E20060E84003F8AB3 /* ManageContactsRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsRouterInput.swift; sourceTree = "<group>"; };
+		7859298F20060E84003F8AB3 /* ManageContactssRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactssRouter.swift; sourceTree = "<group>"; };
+		7859299220060E8A003F8AB3 /* ManageContactsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsPresenter.swift; sourceTree = "<group>"; };
+		7859299320060E8A003F8AB3 /* ManageContactsModuleInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsModuleInput.swift; sourceTree = "<group>"; };
+		7859299620060E93003F8AB3 /* ManageContactsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInteractor.swift; sourceTree = "<group>"; };
+		7859299720060E93003F8AB3 /* ManageContactsInteractorInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInteractorInput.swift; sourceTree = "<group>"; };
+		7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInteractorOutput.swift; sourceTree = "<group>"; };
+		7859299C20060E9C003F8AB3 /* ManageContactsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInitializer.swift; sourceTree = "<group>"; };
+		7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsConfigurator.swift; sourceTree = "<group>"; };
 		78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarActionHandler.swift; sourceTree = "<group>"; };
 		787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailModuleOutput.swift; sourceTree = "<group>"; };
 		78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
@@ -5555,6 +5581,66 @@
 				782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */,
 			);
 			path = RecentSearchesService;
+			sourceTree = "<group>";
+		};
+		7859297620060D72003F8AB3 /* ManageContacts */ = {
+			isa = PBXGroup;
+			children = (
+				7859298520060E6B003F8AB3 /* View */,
+				7859298420060E5B003F8AB3 /* Router */,
+				7859298320060E4C003F8AB3 /* Presenter */,
+				7859298220060E2C003F8AB3 /* Interactor */,
+				7859298120060DF8003F8AB3 /* Configurator */,
+			);
+			path = ManageContacts;
+			sourceTree = "<group>";
+		};
+		7859298120060DF8003F8AB3 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */,
+				7859299C20060E9C003F8AB3 /* ManageContactsInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		7859298220060E2C003F8AB3 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				7859299620060E93003F8AB3 /* ManageContactsInteractor.swift */,
+				7859299720060E93003F8AB3 /* ManageContactsInteractorInput.swift */,
+				7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		7859298320060E4C003F8AB3 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7859299320060E8A003F8AB3 /* ManageContactsModuleInput.swift */,
+				7859299220060E8A003F8AB3 /* ManageContactsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7859298420060E5B003F8AB3 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7859298E20060E84003F8AB3 /* ManageContactsRouterInput.swift */,
+				7859298F20060E84003F8AB3 /* ManageContactssRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		7859298520060E6B003F8AB3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7859298920060E7D003F8AB3 /* ManageContactsViewController.swift */,
+				7859298620060E7D003F8AB3 /* ManageContactsViewController.xib */,
+				7859298820060E7D003F8AB3 /* ManageContactsViewInput.swift */,
+				7859298720060E7D003F8AB3 /* ManageContactsViewOutput.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		78D1DECF2CF16509DB6F1EAD /* View */ = {
@@ -8734,6 +8820,7 @@
 		CE3EB30D1FC7F512000B70D6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				7859297620060D72003F8AB3 /* ManageContacts */,
 				3C4921A13B9D2D3165521B9C /* Settings */,
 				3EABB6A70DB5801ACC311373 /* SettingsIpad */,
 				92C9F550DC7528C74BAEFD9F /* UserInfoSubView */,
@@ -10693,6 +10780,7 @@
 				CE16C38B1FF234BA00BE5906 /* crop_selected@3x.png in Resources */,
 				CE16C41C1FF234BB00BE5906 /* kup@2x.png in Resources */,
 				CE16C3731FF234BA00BE5906 /* bottomleft@2x.png in Resources */,
+				7859298A20060E7D003F8AB3 /* ManageContactsViewController.xib in Resources */,
 				CE16C3CC1FF234BA00BE5906 /* paylas_bip@3x.png in Resources */,
 				CE16C4091FF234BB00BE5906 /* Kucuk_Selected.png in Resources */,
 				CE16C1611FF234A300BE5906 /* CRYFilterCell.nib in Resources */,
@@ -12121,6 +12209,7 @@
 				CE51ABCA1EF90853005DCEE0 /* Message.m in Sources */,
 				CE907A331F94D49900D2F8CE /* MediaPlayer.swift in Sources */,
 				8C6EF87A1F348B5C002AC795 /* BottomSelectionTabBarInteractorOutput.swift in Sources */,
+				7859298B20060E7D003F8AB3 /* ManageContactsViewOutput.swift in Sources */,
 				7C66E8AB1F979C3300D98F27 /* CreateStoryPreviewInteractor.swift in Sources */,
 				CE6FBFBC1FB2DC3F008FC18C /* AppDelegate.swift in Sources */,
 				7C355E1A1F00E920003B004C /* CollectionViewCellForController.swift in Sources */,
@@ -12128,6 +12217,7 @@
 				7CF6BDE11F0B97050066709E /* CollectionViewCellForAudio.swift in Sources */,
 				CE6DE7601FCC44F800C23CBD /* KeyboardLayoutConstraint.swift in Sources */,
 				CE51ABCD1EF90853005DCEE0 /* AutoSyncInitializer.swift in Sources */,
+				7859299420060E8B003F8AB3 /* ManageContactsPresenter.swift in Sources */,
 				7C49881B1F3320420039C5F2 /* CreateStoryPhotosOrderRouter.swift in Sources */,
 				CE51ABD01EF90853005DCEE0 /* UpdateServerIntegration.m in Sources */,
 				CE2F56231F7552A900F49DA1 /* ResizableCollectionView.swift in Sources */,
@@ -12175,6 +12265,7 @@
 				7C1F89921F70FFDF00740177 /* ViewForPopUp.swift in Sources */,
 				7C66E8AE1F979C3300D98F27 /* CreateStoryPreviewPresenter.swift in Sources */,
 				CE6DE7561FCBE84100C23CBD /* InstagramParametrs.swift in Sources */,
+				7859299F20060E9C003F8AB3 /* ManageContactsConfigurator.swift in Sources */,
 				CE24FB8B1F0B149D00C55188 /* CameraService.swift in Sources */,
 				CE95ED4B1F516736002F923A /* HelpAndSupportConfigurator.swift in Sources */,
 				CE51AC091EF90853005DCEE0 /* AutoSyncInteractor.swift in Sources */,
@@ -12183,6 +12274,7 @@
 				7C233CD51FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */,
 				8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */,
+				7859299020060E85003F8AB3 /* ManageContactsRouterInput.swift in Sources */,
 				CE51AC0D1EF90853005DCEE0 /* UIAlertViewCustom.m in Sources */,
 				CE51AC151EF90853005DCEE0 /* UpdaterController.m in Sources */,
 				CE2976DD1FD58E2000350F3A /* LocalAlbumPresenter.swift in Sources */,
@@ -12226,6 +12318,7 @@
 				CE27C31F1EF9515800D4D156 /* RouteRequests.swift in Sources */,
 				CE2F56161F7552A900F49DA1 /* PackagesInitializer.swift in Sources */,
 				CE51AC521EF90853005DCEE0 /* LoginDataStorage.swift in Sources */,
+				7859299920060E94003F8AB3 /* ManageContactsInteractor.swift in Sources */,
 				7C3A74391F04F4B800124DF5 /* BaseMediaContent.swift in Sources */,
 				CE51AC591EF90853005DCEE0 /* IntroduceSubView.swift in Sources */,
 				8C3B70B81F31B0BC0019715A /* UIButtonExtension.swift in Sources */,
@@ -12413,6 +12506,7 @@
 				CE51ACF01EF90853005DCEE0 /* SmartTimerLabel.swift in Sources */,
 				7C66E8A91F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift in Sources */,
 				EF1B60461FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
+				7859298D20060E7D003F8AB3 /* ManageContactsViewController.swift in Sources */,
 				CE51ACF11EF90853005DCEE0 /* PhoneVereficationInteractor.swift in Sources */,
 				D47864001F3F30BD00EFDC6D /* RoundedProgressView.swift in Sources */,
 				EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */,
@@ -12516,6 +12610,7 @@
 				CE2F56211F7552A900F49DA1 /* PackagesViewOutput.swift in Sources */,
 				1DCD5F3C1611CAA42850AF7B /* ExpandStorageViewController.swift in Sources */,
 				20D9DB71C68797990E05E828 /* ExpandStorageModuleInput.swift in Sources */,
+				7859299520060E8B003F8AB3 /* ManageContactsModuleInput.swift in Sources */,
 				7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
 				CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */,
@@ -12557,6 +12652,7 @@
 				CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */,
 				CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */,
 				8C6EF88D1F348B77002AC795 /* CustomEditingTabBarItem.swift in Sources */,
+				7859299A20060E94003F8AB3 /* ManageContactsInteractorInput.swift in Sources */,
 				F2C69F643F8005F8666F6AAF /* UploadedItemsRouterInput.swift in Sources */,
 				0B94DE553DA8501190B2CEC5 /* UploadedItemsRouter.swift in Sources */,
 				25F2EEBED80FA9650DB66A1A /* UploadedItemsConfigurator.swift in Sources */,
@@ -12653,6 +12749,7 @@
 				7C0EBD001F4C5B5100283ECF /* BaseDataSourceItem.swift in Sources */,
 				67539B0A8267DB7EEB08948D /* UserInfoSubViewPresenter.swift in Sources */,
 				09D1D10783F4E47C7E8089AA /* UserInfoSubViewInteractorInput.swift in Sources */,
+				7859299E20060E9C003F8AB3 /* ManageContactsInitializer.swift in Sources */,
 				205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				011111224BABABC38EFD0DAD /* UserInfoSubViewInteractor.swift in Sources */,
 				956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */,
@@ -12687,6 +12784,7 @@
 				8C0097161F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift in Sources */,
 				876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */,
 				65F920DAC010E5F0859369FE /* SyncContactsConfigurator.swift in Sources */,
+				7859298C20060E7D003F8AB3 /* ManageContactsViewInput.swift in Sources */,
 				41AFB14EB1A012B62DF71C13 /* SyncContactsInitializer.swift in Sources */,
 				80C205BAFDB776C2537BF66F /* SettingsViewInput.swift in Sources */,
 				CE6DE7521FCBE84100C23CBD /* DropboxService.swift in Sources */,
@@ -12809,6 +12907,7 @@
 				CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */,
 				B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				0D9510CB65B6DA6F2D661754 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
+				7859299120060E85003F8AB3 /* ManageContactssRouter.swift in Sources */,
 				4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				016636E0593FCDC66B6F5CD0 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				CE95ED4C1F516736002F923A /* HelpAndSupportInitializer.swift in Sources */,
@@ -12865,6 +12964,7 @@
 				2364F4A40D0899837114AB2A /* ActivityTimelineInteractorOutput.swift in Sources */,
 				A0052B3EF580D29AEEB116BA /* ActivityTimelineInteractor.swift in Sources */,
 				7D44F2D8BA13AA210B247EF0 /* ActivityTimelineRouterInput.swift in Sources */,
+				7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */,
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
