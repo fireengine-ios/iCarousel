@@ -89,6 +89,10 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         setTitle(withString: "")
     }
     
+    override func willMove(toParentViewController parent: UIViewController?) {
+        blackNavigationBarStyle()
+    }
+    
     func setObject(object: BaseDataSourceItem){
         
         fileName.text = object.name

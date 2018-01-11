@@ -24,6 +24,7 @@ struct TextConstants {
     static let registrationNextButtonText = NSLocalizedString("Next", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationResendButtonText = NSLocalizedString("Resend", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let optInNavigarionTitle = NSLocalizedString("Verify Your Purchase", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let confirmPhoneOptInNavigarionTitle = NSLocalizedString("Confirm Your Phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let phoneVereficationMainTitleText = NSLocalizedString("Verify Your Phone Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let mailVereficationMainTitleText = NSLocalizedString("Verify Your Email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let phoneVereficationInfoTitleText = NSLocalizedString("Enter the verification code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -107,6 +108,12 @@ struct TextConstants {
     static let errorAlertNopeBtnBackupAlreadyExist = NSLocalizedString("Nope", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlertYesBtnBackupAlreadyExist = NSLocalizedString("Yes", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let forgotPasswordErrorHandlingText = NSLocalizedString("Error Handling Under Constraction", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let forgotPasswordErrorEmailNotFoundText = NSLocalizedString("Account not found for email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let forgotPasswordErrorCaptchaText = NSLocalizedString("This text doesn't match. Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let forgotPasswordCommonErrorText = NSLocalizedString("An error is occurred!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let forgotPasswordErrorEmailFormatText = NSLocalizedString("Please check the e-mail address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     //MARK: - mail update
     static let updaitMailMaybeLater = NSLocalizedString("Maybe later", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -152,13 +159,6 @@ struct TextConstants {
     static let newFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createAlbum = NSLocalizedString("Create album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadFromLifebox = NSLocalizedString("Upload from lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    //MARK: - Navigation bar img names
-    
-    static let moreBtnImgName = NSLocalizedString("more", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cogBtnImgName = NSLocalizedString("cog", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let searchBtnImgName = NSLocalizedString("search", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let deleteBtnImgName = NSLocalizedString("DeleteShareButton", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Searchbar img name
     
@@ -280,11 +280,19 @@ struct TextConstants {
     static let documentsViewNoDocumenetsTitleText = NSLocalizedString("You don’t have any documents on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let documentsViewNoDocumenetsButtonText = NSLocalizedString("Start adding your documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    //MARK: Folder
+    static let folderEmptyText = NSLocalizedString("Folder is Empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     //MARK: settings
     static let backPrintTitle = NSLocalizedString("Back to Lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: settings
     
+
+    static let settingsViewCellLoginSettings = NSLocalizedString("Login Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellTurkcellPasscode = NSLocalizedString("Turkcell Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellTurkcellAutoLogin = NSLocalizedString("Auto-login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let settingsViewUploadPhotoLabel = NSLocalizedString("Upload Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewLeaveFeedback = NSLocalizedString("Leave feedback", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -297,9 +305,9 @@ struct TextConstants {
     static let settingsViewCellPasscode = NSLocalizedString("Lifebox Touch ID and Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellHelp = NSLocalizedString("Help & Support", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellLogout = NSLocalizedString("Logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsViewCellTurkcellPasscode = NSLocalizedString("Turkcell Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsViewCellTurkcellAutoLogin = NSLocalizedString("Auto-login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let settingsViewLogoutCheckMessage = NSLocalizedString("Are you sure you want to exit the application?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     
     //MARK: Import photos
     static let importPhotos = NSLocalizedString("Import Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -383,8 +391,10 @@ struct TextConstants {
     static let createStorySelectAudioButton = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: Create story Photos
-    static let createStoryPhotosTitle = NSLocalizedString("Photo selection", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let createStoryPhotosNext = NSLocalizedString("Next", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPhotosTitle = NSLocalizedString("Create a story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPhotosCancel = NSLocalizedString("Cancel", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPhotosContinue = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryPhotosHeaderTitle = NSLocalizedString("Please Choose 20 files at most", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryPhotosMaxCountAllert = NSLocalizedString("Please choose %d files at most", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryPhotosMaxCountAllertOK = NSLocalizedString("Ok", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryNoSelectedPhotosError = NSLocalizedString("Sorry, but story photos should not be empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -701,6 +711,15 @@ struct TextConstants {
     
     static let locationServiceDisable = NSLocalizedString("Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let loginEnterGSM = NSLocalizedString("Please enter your GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginGSMNumber = NSLocalizedString("GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: - Navigation bar img names
+    
+    static let moreBtnImgName = "more"
+    static let cogBtnImgName = "cog"
+    static let searchBtnImgName = "search"
+    static let deleteBtnImgName = "DeleteShareButton"
 }
 
 

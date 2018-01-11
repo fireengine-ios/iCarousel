@@ -10,6 +10,8 @@ class SplashInteractor: SplashInteractorInput {
 
     weak var output: SplashInteractorOutput!
     
+    let authService = AuthenticationService()
+    
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
     private lazy var authenticationService = AuthenticationService()
@@ -38,6 +40,7 @@ class SplashInteractor: SplashInteractorInput {
     
     func successLogin(){
         DispatchQueue.main.async {
+            ApplicationSession.sharedSession.saveData()
             self.output.onSuccessLogin()
         }
     }

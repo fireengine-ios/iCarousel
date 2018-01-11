@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,6 +13,7 @@
                 <outlet property="headerContainerView" destination="3rt-Cv-aY8" id="PDS-xG-t2W"/>
                 <outlet property="leaveFeedbackButton" destination="Ss4-2b-IB0" id="UqQ-XU-sJG"/>
                 <outlet property="tableView" destination="M7i-kt-Jaj" id="GTQ-UF-Iv2"/>
+                <outlet property="versionLabel" destination="kOj-ga-6x8" id="Ahd-0A-M4i"/>
                 <outlet property="view" destination="iN0-l3-epB" id="s9h-jf-rhR"/>
             </connections>
         </placeholder>
@@ -30,7 +30,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="M7i-kt-Jaj">
-                    <rect key="frame" x="0.0" y="64" width="375" height="532"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="492"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="AeJ-9b-l3Y"/>
@@ -38,7 +38,7 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ss4-2b-IB0" customClass="ButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
-                    <rect key="frame" x="99" y="617" width="177" height="29"/>
+                    <rect key="frame" x="99" y="577" width="177" height="29"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="29" id="BWI-Qi-jg4"/>
                         <constraint firstAttribute="width" constant="177" id="Ohg-Hj-hHv"/>
@@ -48,6 +48,12 @@
                         <action selector="onLeaveFeedback" destination="-1" eventType="touchUpInside" id="nMP-wZ-NGL"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOj-ga-6x8">
+                    <rect key="frame" x="159" y="626" width="57" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -55,11 +61,13 @@
                 <constraint firstItem="3rt-Cv-aY8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5n1-no-eB4"/>
                 <constraint firstAttribute="trailing" secondItem="M7i-kt-Jaj" secondAttribute="trailing" id="9oR-9J-diX"/>
                 <constraint firstItem="Ss4-2b-IB0" firstAttribute="top" secondItem="M7i-kt-Jaj" secondAttribute="bottom" priority="750" constant="21" id="HJO-1G-da9"/>
+                <constraint firstItem="kOj-ga-6x8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="MKB-bf-heh"/>
                 <constraint firstAttribute="trailing" secondItem="3rt-Cv-aY8" secondAttribute="trailing" id="PoI-Gt-8g3"/>
+                <constraint firstItem="kOj-ga-6x8" firstAttribute="top" secondItem="Ss4-2b-IB0" secondAttribute="bottom" constant="20" id="VRY-3V-y30"/>
                 <constraint firstItem="3rt-Cv-aY8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WoL-Su-WRv"/>
                 <constraint firstItem="M7i-kt-Jaj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hKh-jC-yLe"/>
                 <constraint firstItem="Ss4-2b-IB0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ifh-gz-dZ3"/>
-                <constraint firstAttribute="bottom" secondItem="Ss4-2b-IB0" secondAttribute="bottom" constant="21" id="uJx-SP-lKV"/>
+                <constraint firstAttribute="bottom" secondItem="kOj-ga-6x8" secondAttribute="bottom" constant="20" id="uLj-gn-aN4"/>
             </constraints>
             <point key="canvasLocation" x="32.5" y="53.5"/>
         </view>

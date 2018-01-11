@@ -313,9 +313,10 @@ class AuthenticationService: BaseRequestService {
     }
     
     // MARK: - Authentication
-    
+
     func logout(success: SuccessLogout?) {
         DispatchQueue.main.async {
+//ApplicationSession.sharedSession.saveData()
             SingletonStorage.shared.accountInfo = nil
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
@@ -323,6 +324,7 @@ class AuthenticationService: BaseRequestService {
             CoreDataStack.default.clearDataBase()
             FreeAppSpace.default.clear()
             CardsManager.default.stopAllOperations()
+            FactoryMain.mediaPlayer.stop()
             success?()
         }
     }

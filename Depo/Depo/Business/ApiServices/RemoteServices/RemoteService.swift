@@ -175,7 +175,11 @@ class NextPageOperation: Operation {
             return
         }
         let semaphore = DispatchSemaphore(value: 0)
-        searchService.searchByField(param: requestParam, success: { (response)  in
+        searchService.searchByField(param: requestParam, success: { [weak self] (response)  in
+            
+            guard let `self` = self else {
+                return
+            }
             
             if self.isRealCancel {
                 self.fail?()
@@ -193,8 +197,8 @@ class NextPageOperation: Operation {
             self.success?(list)
             semaphore.signal()
             
-        }, fail: { _ in
-            self.fail?()
+        }, fail: { [weak self]_ in
+            self?.fail?()
             semaphore.signal()
         })
         semaphore.wait()

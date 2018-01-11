@@ -260,9 +260,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         if item.fileType.isUnSupportedOpenType {
             let sameTypeFiles: [BaseDataSourceItem] = data.flatMap{ return $0 }.filter{ $0.fileType == item.fileType }
-            router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles, type: type, sortType: sortedType, moduleOutput: self)
+            router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
+                                  type: type, sortType: sortedType, moduleOutput: self)
         } else {
-            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
+            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported,
+                                          image: .error, buttonTitle: TextConstants.ok)
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
@@ -321,9 +323,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func updateNoFilesView() {
         if needShowNoFileView() {
-            view.showNoFilesWith(text: interactor.textForNoFileLbel(),
-                                 image: interactor.imageForNoFileImageView(),
-                                 createFilesButtonText: interactor.textForNoFileButton())
+            if interactor.remoteItems is PhotoAndVideoService ||
+                interactor.remoteItems is MusicService ||
+                interactor.remoteItems is DocumentService {
+                view.showNoFilesWith(text: interactor.textForNoFileLbel(),
+                                     image: interactor.imageForNoFileImageView(),
+                                     createFilesButtonText: interactor.textForNoFileButton())
+            } else {
+                view.showNoFilesTop()
+            }
         } else {
             view.hideNoFiles()
         }

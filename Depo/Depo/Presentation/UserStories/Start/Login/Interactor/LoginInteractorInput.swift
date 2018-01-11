@@ -24,4 +24,9 @@ protocol LoginInteractorInput {
     func eraseBlockTime(forUserName name: String)
     
     func blockUser(user: String)
+    
+    func getAccountInfo()
+    func getTokenToUpdatePhone(for phoneNumber: String)
+    func getResendTokenToUpdatePhone(for phoneNumber: String)
+    func verifyPhoneNumber(token: String, code: String)
 }

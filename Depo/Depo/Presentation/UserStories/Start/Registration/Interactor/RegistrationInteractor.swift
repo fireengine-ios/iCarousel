@@ -10,6 +10,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
     
     weak var output: RegistrationInteractorOutput!
     let dataStorage = DataStorage()
+    let validationService = UserValidator()
+    let authenticationService = AuthenticationService()
     
     func prepareModels() {
         output.prepearedModels(models: dataStorage.getModels())
@@ -23,12 +25,12 @@ class RegistrationInteractor: RegistrationInteractorInput {
     }
     
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String) {
-        let validationService = UserValidator()
+       
         let validationResult = validationService.validateUserInfo(mail: email, code: code, phone: phone, password: password, repassword: repassword)
         if validationResult.count == 0 {//== .allValid {
             dataStorage.userRegistrationInfo = RegistrationUserInfoModel(mail: email, phone: code + phone, password: password)
             SingletonStorage.shared.signUpInfo = dataStorage.userRegistrationInfo
-            
+            ApplicationSession.sharedSession.signUpInfo = dataStorage.userRegistrationInfo
             output.userValid(email: email, phone: code + phone, passpword: password)
         } else {
             output.userInvalid(withResult: validationResult)
@@ -36,25 +38,21 @@ class RegistrationInteractor: RegistrationInteractorInput {
     }
     
     func signUPUser(email: String, phone: String, password: String) {
-        
-        let authenticationService = AuthenticationService()
         let sigUpUser = SignUpUser(phone: phone,
                                    mail: email,
                                    password: password,
                                    eulaId: 0) /// 0 is server logic
         
-        
-        authenticationService.signUp(user: sigUpUser, sucess: {  result in
-            DispatchQueue.main.async { [weak self] in
-                
+        authenticationService.signUp(user: sigUpUser, sucess: { [weak self] result in
+            DispatchQueue.main.async {
                 guard let t = result as? SignUpSuccessResponse,
                     let userRegistrationInfo = self?.dataStorage.userRegistrationInfo  else {
                         return
                 }
                 self?.output.signUpSucces(withResult: t, userInfo: userRegistrationInfo)
             }
-            }, fail: {  result in
-                DispatchQueue.main.async { [weak self] in
+            }, fail: { [weak self] result in
+                DispatchQueue.main.async {
                     self?.output.signUpFailed(withResult: result.description)
                 }
         })

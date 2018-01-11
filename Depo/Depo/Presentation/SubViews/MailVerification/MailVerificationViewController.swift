@@ -29,6 +29,8 @@ class MailVerificationViewController: BaseViewController {
     
     weak var actionDelegate: MailVerificationViewControllerDelegate?
     
+    let authService = AuthenticationService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        UIBlurEffect()
@@ -78,7 +80,6 @@ class MailVerificationViewController: BaseViewController {
         }
         showSpiner()
         let newMail = inputTextField.text ?? ""
-        let authService = AuthenticationService()
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
                                 sucess: { [weak self] response in
                                     DispatchQueue.main.async {

@@ -34,13 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = RouterVC().vcForCurrentState()
         window?.makeKeyAndVisible()
         
-        AppConfigurator.applicationStarted()
+        AppConfigurator.applicationStarted(with: launchOptions)
         
         Fabric.with([Crashlytics.self])
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        startMenloworks(with: launchOptions)
         
         let documentDirectory: NSURL = {
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -180,30 +179,6 @@ extension AppDelegate {
 
         MPush.applicationDidReceive(notification)
     }
-}
-
-
-//Menloworks
-
-extension AppDelegate {
-    private func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        log.debug("AppDelegate startMenloworks")
-
-        var notificationTypes: NSInteger?
-        if #available(iOS 8, *) {
-            let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
-            notificationTypes = NSInteger(types.rawValue)
-        } else {
-            let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.sound, UIUserNotificationType.badge]
-            notificationTypes = NSInteger(types.rawValue)
-        }
-        
-        if notificationTypes != nil {
-            MPush.register(forRemoteNotificationTypes: notificationTypes!)
-            MPush.applicationDidFinishLaunching(options: launchOptions)
-        }
-    }
-    
 }
 
 private func setupLog() -> XCGLogger {

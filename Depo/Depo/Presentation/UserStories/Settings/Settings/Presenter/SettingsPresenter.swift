@@ -41,7 +41,6 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
                                                 }
         })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
-        
     }
     
     func goToOnboarding(){
@@ -101,20 +100,8 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         interactor.updateUserInfo(mail: mail)
     }
     
-    func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool) {
-        
-    }
-    
-    func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool) {
-        interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
-    }
-    
-    func turkCellSecuritySettingsAccuered(passcode: Bool, autoLogin: Bool) {
-        view.changeTurkCellSecurity(passcode: passcode, autologin: autoLogin)
-    }
-    
-    func turkCellSecurityfailed() {
-        
+    func goTurkcellSecurity() {
+        inNeedOfMailVerefication() ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity()
     }
     
     override func outputView() -> Waiting? {
@@ -156,5 +143,15 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     
     func openPasscode(handler: @escaping () -> Void) {
         router.openPasscode(handler: handler)
+    }
+}
+
+extension SettingsPresenter: MailVerificationViewControllerDelegate {
+    func mailVerified(mail: String) {
+        mailUpdated(mail: mail)
+    }
+    
+    func mailVerificationFailed() {
+        
     }
 }
