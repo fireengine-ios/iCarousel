@@ -48,6 +48,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         blackNavigationBarStyle()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         editingTabBar?.view.layoutIfNeeded()
+        editingTabBar.view.backgroundColor = UIColor.black
         output.viewIsReady(view: view)
         setupTitle()
     }
@@ -59,6 +60,8 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        setNavigationBackgroundColor(color: UIColor.clear)
+        setStatusBarBackgroundColor(color: UIColor.clear)
         visibleNavigationBarStyle()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         floatingView.hideView(animated: true)
@@ -296,20 +299,12 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                         DispatchQueue.main.async {
                             self?.output.stopCreatingAVAsset()
                             
-                            let plauerItem = AVPlayerItem(asset: avAsset!)
-                            self?.localPlayer!.replaceCurrentItem(with: plauerItem)
-                            let plController = AVPlayerViewController()
-                            self?.playerController = plController
-                            self?.playerController!.player = self?.localPlayer!
-                            self?.present(plController, animated: true) {
-                                self?.playerController?.player!.play()
-                            }
+                            let playerItem = AVPlayerItem(asset: avAsset!)
+                            self?.play(item: playerItem)
                         }
                         
                     })
                 }
-                
-                
                 
 //                [[PHImageManager defaultManager] requestAVAssetForVideo:videoAsset options:option resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
 //                    resultAsset = avasset;
@@ -317,20 +312,29 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
 //                    }];
                 
             case .remoteUrl(_):
-                
-                let plauerItem = AVPlayerItem(url:url)
-                localPlayer!.replaceCurrentItem(with: plauerItem)
-                playerController = AVPlayerViewController()
-                playerController!.player = localPlayer!
-                self.present(playerController!, animated: true) { [weak playerController] in
-                    playerController?.player?.play()
-                }
+                let playerItem = AVPlayerItem(url:url)
+                play(item: playerItem)
             }
 
         }
     }
     
+    func play(item: AVPlayerItem) {
+        localPlayer!.replaceCurrentItem(with: item)
+        playerController = AVPlayerViewController()
+        playerController!.player = localPlayer!
+        present(playerController!, animated: true) { [weak playerController] in
+            playerController?.player?.play()
+            if Device.operationSystemVersionLessThen(11) {
+                UIApplication.shared.isStatusBarHidden = true
+            }
+        }
+    }
+    
     func onStopPlay() {
+        if Device.operationSystemVersionLessThen(11) {
+            UIApplication.shared.isStatusBarHidden = false
+        }
 //        playerController?.player = nil
 //        playerController?.removeFromParentViewController()
 //        playerController = nil

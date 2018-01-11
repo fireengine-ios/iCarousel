@@ -31,8 +31,6 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                 if let presenter = self_.output as? FreeAppSpacePresenter {
                     DispatchQueue.main.async {
                         presenter.onItemDeleted()
-                        CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-                        CardsManager.default.stopOperationWithType(type: .freeAppSpaceWarning)
                         presenter.goBack()
                     }
                 }
