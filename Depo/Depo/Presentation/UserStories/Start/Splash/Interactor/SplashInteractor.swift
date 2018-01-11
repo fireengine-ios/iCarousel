@@ -30,6 +30,7 @@ class SplashInteractor: SplashInteractorInput {
     
     func successLogin(){
         DispatchQueue.main.async {
+            ApplicationSession.sharedSession.saveData()
             self.output.onSuccessLogin()
         }
     }

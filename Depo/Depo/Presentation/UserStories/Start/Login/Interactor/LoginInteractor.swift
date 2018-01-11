@@ -184,11 +184,11 @@ class LoginInteractor: LoginInteractorInput {
                 return
             }
             DispatchQueue.main.async {
-                self?.output?.successed(updatePhone: signUpResponce)
+                self?.output?.successed(tokenUpdatePhone: signUpResponce)
             }
         }, fail: { [weak self] (error) in
             DispatchQueue.main.async {
-                self?.output?.failedAccountInfo(errorResponse: error)
+                self?.output?.failedUpdatePhone(errorResponse: error)
             }
         })
     }
@@ -200,35 +200,24 @@ class LoginInteractor: LoginInteractorInput {
                 return
             }
             DispatchQueue.main.async {
-                self?.output?.successed(updatePhone: signUpResponce)
+                self?.output?.successed(resendUpdatePhone: signUpResponce)
             }
             }, fail: { [weak self] (error) in
                 DispatchQueue.main.async {
-                    self?.output?.failedAccountInfo(errorResponse: error)
+                    self?.output?.failedResendUpdatePhone(errorResponse: error)
                 }
         })
     }
     
     func verifyPhoneNumber(token: String, code: String) {
         let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: token)
-        AccountService().verifyPhoneNumber(parameters: parameters, success: { [weak self] (responce) in
+        accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] (responce) in
             DispatchQueue.main.async {
-//                self?.userInfo?.phoneNumber = self?.phoneNumber
                 self?.output?.successedVerifyPhone()
             }
         }) { [weak self] (errorRespose) in
             DispatchQueue.main.async {
-//                guard let `self` = self else {
-//                    return
-//                }
-//                self.attempts += 1
-//                if self.attempts >= 3 {
-//                    self.attempts = 0
-//                    self.output.reachedMaxAttempts()
-//                    self.output.vereficationFailed(with: TextConstants.promocodeBlocked)
-//                } else {
-                    self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
-//                }
+                self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
             }
         }
     }

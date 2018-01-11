@@ -25,7 +25,6 @@ class ApplicationSession: NSObject, NSCoding {
     func updateSession(loginData: LoginResponse) {
         session.rememberMeToken = loginData.rememberMeToken
         session.authToken = loginData.token
-        saveData()
         
     
         FBSDKLoginManager().logOut()

@@ -127,7 +127,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func onSuccessEULA() {
         compliteAsyncOperationEnableScreen()
-        //router.goToHomePage()
         router.goToSyncSettingsView()
     }
     
@@ -140,7 +139,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         compliteAsyncOperationEnableScreen()
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
         interactor.blockUser(user: user)
-//        view.blockUI()
     }
     
     func userStillBlocked(user: String) {
@@ -153,11 +151,9 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         let timeIntervalFromBlockDate =  currentTime.timeIntervalSince(date)
         debugPrint("time passed since block in minutes", timeIntervalFromBlockDate/60)
         if timeIntervalFromBlockDate/60 >= 60 {
-//            view.unblockUI()
             interactor.eraseBlockTime(forUserName: name)
         }  else {
             showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
-//            view.blockUI()
         }
         
     }
@@ -168,37 +164,46 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         return view
     }
     
+    private func isPhoneNumberEmpty(for accountInfo: AccountInfoResponse) -> Bool {
+        return accountInfo.phoneNumber == nil || accountInfo.phoneNumber?.isEmpty == true
+    }
+    
     func successed(accountInfo: AccountInfoResponse) {
         compliteAsyncOperationEnableScreen()
         
-        if accountInfo.phoneNumber == nil || accountInfo.phoneNumber?.isEmpty == true {
+        if isPhoneNumberEmpty(for: accountInfo) {
             let textEnterVC = TextEnterController.with(
-            title: "Please enter your GSM number",
-            textPlaceholder: "GSM number",
-            buttonTitle: "Save") { [weak self] enterText, vc in
-                self?.newPhone = enterText
-                self?.interactor.getTokenToUpdatePhone(for: enterText)
-                vc.startLoading()
+                title: "Please enter your GSM number",
+                textPlaceholder: "GSM number",
+                buttonTitle: "Save") { [weak self] enterText, vc in
+                    self?.newPhone = enterText
+                    self?.interactor.getTokenToUpdatePhone(for: enterText)
+                    vc.startLoading()
             }
             self.textEnterVC = textEnterVC
             RouterVC().presentViewController(controller: textEnterVC)
+            
+        } else {
+            ApplicationSession.sharedSession.saveData()
+            interactor.checkEULA()
         }
     }
     
     func failedAccountInfo(errorResponse: ErrorResponse) {
         compliteAsyncOperationEnableScreen()
-        
     }
     
-    func successed(updatePhone: SignUpSuccessResponse) {
+    func successed(tokenUpdatePhone: SignUpSuccessResponse) {
+        referenceToken = tokenUpdatePhone.referenceToken
         textEnterVC?.stopLoading()
         textEnterVC?.close { [weak self] in
             guard let newPhone = self?.newPhone else {
                 return
             }
             let optInVC = OptInController.with(phone: newPhone)
+            self?.optInVC = optInVC
             optInVC.delegate = self
-            RouterVC().navigationController?.popViewController(animated: false)
+//            RouterVC().navigationController?.popViewController(animated: false)
             RouterVC().pushViewController(viewController: optInVC)
         }
     }
@@ -209,29 +214,21 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func successed(resendUpdatePhone: SignUpSuccessResponse) {
-        
-    }
-    
-    func failedResendUpdatePhone(errorResponse: ErrorResponse) {
-        
-    }
-    
-    func successed(tokenForResend: String) {
-        referenceToken = tokenForResend
+        referenceToken = resendUpdatePhone.referenceToken
         optInVC?.stopActivityIndicator()
         optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         optInVC?.startEnterCode()
         optInVC?.hideResendButton()
     }
-
-    func failedTokenForResend(errorResponse: ErrorResponse) {
+    
+    func failedResendUpdatePhone(errorResponse: ErrorResponse) {
         optInVC?.stopActivityIndicator()
+        textEnterVC?.showAlertMessage(with: errorResponse.description)
     }
     
     func successedVerifyPhone() {
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
-        //    RouterVC().popViewController() //// ??????
         
         ApplicationSession.sharedSession.saveData()
         

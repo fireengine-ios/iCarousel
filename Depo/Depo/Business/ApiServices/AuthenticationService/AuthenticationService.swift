@@ -334,12 +334,14 @@ class AuthenticationService: BaseRequestService {
             /// rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
             s.rememberMeToken = nil
             ApplicationSession.sharedSession.updateSession(loginData: s)
+            ApplicationSession.sharedSession.saveData()
             success?()
         }
         
         let failResponse: FailResponse = { value in
             let s = LoginResponse(withJSON: nil)
             ApplicationSession.sharedSession.updateSession(loginData: s)
+            ApplicationSession.sharedSession.saveData()
             success?()
         }
         successResponse()

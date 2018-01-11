@@ -36,7 +36,7 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func successed(accountInfo: AccountInfoResponse)
     func failedAccountInfo(errorResponse: ErrorResponse)
     
-    func successed(updatePhone: SignUpSuccessResponse)
+    func successed(tokenUpdatePhone: SignUpSuccessResponse)
     func failedUpdatePhone(errorResponse: ErrorResponse)
     
     func successed(resendUpdatePhone: SignUpSuccessResponse)
