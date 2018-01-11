@@ -488,6 +488,7 @@
 "E-mail Usage Information" = "E-mail Usage Information";
 "Password fields do not match." = "Password fields do not match.";
 "Please check the e-mail address." = "Please check the e-mail address.";
+"Please enter a valid email adress" = "Please enter a valid email adress";
 "You have performed too many attempts. Please try again 1 hour later." = "You have performed too many attempts. Please try again 1 hour later.";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
 "Please check your internet connection." = "Please check your internet connection.";
