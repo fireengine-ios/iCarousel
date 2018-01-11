@@ -135,8 +135,6 @@ final class UploadService: BaseRequestService {
                                                                             allOperations: self.allUploadOperationsCount,
                                                                             completedOperations: self.finishedUploadOperationsCount)
                 
-                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
-                
                 if let error = error {
                     
                     //FIXME: remove needsSuccess flag, implement logic with a higher priority operations for the .syncToUse case
@@ -159,7 +157,9 @@ final class UploadService: BaseRequestService {
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
                 finishedOperation.item.isLocalItem = false
 
-                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item) 
+                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
+                
+                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
 
                 guard self.allUploadOperationsCount != 0 else {
                     return
@@ -230,8 +230,6 @@ final class UploadService: BaseRequestService {
                                                                             completedOperations: self.finishedSyncOperationsCount)
                 
                 
-                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
-                
                 if let error = error {
                     if error.description != TextConstants.canceledOperationTextError {
                         fail(error)
@@ -250,6 +248,8 @@ final class UploadService: BaseRequestService {
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
+                
+                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
                 guard self.allSyncOperationsCount != 0 else {
                     return

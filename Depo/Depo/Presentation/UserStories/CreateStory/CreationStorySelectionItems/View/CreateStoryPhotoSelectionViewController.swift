@@ -18,22 +18,33 @@ class CreateStoryPhotoSelectionViewController: BaseFilesGreedViewController {
     override func configureNavBarActions(isSelecting: Bool = false) {
         navigationBarWithGradientStyle()
         setTitle(withString: TextConstants.createStoryPhotosTitle)
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-        button.setTitle(TextConstants.createStoryPhotosNext, for: .normal)
-        button.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        button.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
         
-        let barButton = UIBarButtonItem(customView: button)
+        let continueButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+        continueButton.setTitle(TextConstants.createStoryPhotosContinue, for: .normal)
+        continueButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        continueButton.addTarget(self, action: #selector(onContinueButton), for: .touchUpInside)
         
-        navigationItem.rightBarButtonItem = barButton
+        let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+        cancelButton.setTitle(TextConstants.createStoryPhotosCancel, for: .normal)
+        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
+        
+        let rightBarButton = UIBarButtonItem(customView: continueButton)
+        let leftBarButton = UIBarButtonItem(customView: cancelButton)
+        
+        navigationItem.rightBarButtonItem = rightBarButton
+        navigationItem.leftBarButtonItem = leftBarButton
     }
     
-    @objc func onNextButton(){
+    @objc func onContinueButton() {
         output.onNextButton()
     }
     
-    override func isNeedShowTabBar() -> Bool{
-        return false
+    @objc func onCancelButton() {
+        navigationController?.popViewController(animated: true)
     }
     
+    override func isNeedShowTabBar() -> Bool {
+        return false
+    }
 }

@@ -40,12 +40,12 @@ extension CoreDataStack {
             let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
             
             debugPrint("number of not saved  ", notSaved.count)
-            
+            let start = Date().timeIntervalSince1970
             var i = 0
             notSaved.forEach {
                 i += 1
                 debugPrint("local ", i)
-                let info = localMediaStorage.fullInfoAboutAsset(asset: $0)
+                let info = localMediaStorage.shortInfoAboutAsset(asset: $0)
                 
                 let baseMediaContent = BaseMediaContent(curentAsset: $0,
                                                         urlToFile: info.url,
@@ -62,6 +62,8 @@ extension CoreDataStack {
             }
             
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+            let finish = Date().timeIntervalSince1970
+            debugPrint("All images and videos have been saved in \(finish - start) seconds")
         }
         
     }

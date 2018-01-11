@@ -278,11 +278,11 @@ class AuthenticationService: BaseRequestService {
             self?.success?()
         }
         
-        failLogin = { (result) in
+        failLogin = { [weak self] (result) in
             // remove token
             let loginData = LoginResponse(withJSON: nil)
             ApplicationSession.sharedSession.updateSession(loginData: loginData)
-            self.fail?(result)
+            self?.fail?(result)
         }
     }
     
@@ -328,7 +328,7 @@ class AuthenticationService: BaseRequestService {
         log.debug("AuthenticationService logout")
 
         SingletonStorage.shared.accountInfo = nil
-        let successResponse  =  {
+        let successResponse = {
             let s = LoginResponse(withJSON: nil)
             /// in LoginResponse(withJSON: nil)
             /// rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken

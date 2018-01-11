@@ -10,6 +10,8 @@ class SplashInteractor: SplashInteractorInput {
 
     weak var output: SplashInteractorOutput!
     
+    let authService = AuthenticationService()
+    
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
     var isPasscodeEmpty: Bool {
@@ -25,7 +27,7 @@ class SplashInteractor: SplashInteractorInput {
             self?.failLogin()
         }
         
-        AuthenticationService().authenticate(success: success, fail: fail)
+        authService.authenticate(success: success, fail: fail)
     }
     
     func successLogin(){

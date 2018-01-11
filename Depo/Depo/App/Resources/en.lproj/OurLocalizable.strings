@@ -244,8 +244,10 @@
 "Ok" = "Ok";
 "Please choose %d files at most" = "Please choose %d files at most";
 "Next" = "Next";
-"Photo selection" = "Photo selection";
+"Create story" = "Create story";
+"Cancel" = "Cancel";
 "Continue" = "Continue";
+"Please Choose 20 files at most" = "Please Choose 20 files at most";
 "Sorry, but story name should not be empty" = "Sorry, but story name should not be empty";
 "SAVE" = "SAVE";
 "Name" = "Name";
@@ -330,6 +332,7 @@
 "You don’t have any documents on your Lifebox yet." = "You don’t have any documents on your Lifebox yet.";
 "Start adding your music" = "Start adding your music";
 "You don’t have any music on your Lifebox yet." = "You don’t have any music on your Lifebox yet.";
+"Folder is Empty" = "Folder is Empty";
 "Delete" = "Delete";
 "Move" = "Move";
 "Edit" = "Edit";
@@ -427,6 +430,11 @@
 "Nope" = "Nope";
 "You have already a backup. Do you want to overwrite the existing one?" = "You have already a backup. Do you want to overwrite the existing one?";
 "Overwrite backup?" = "Overwrite backup?";
+"Error Handling Under Constraction" = "Error Handling Under Constraction";
+"Account not found for email" = "Account not found for email";
+"This text doesn't match. Please try again" = "This text doesn't match. Please try again";
+"An error is occurred!" = "An error is occurred!";
+"Please check the e-mail address" = "Please check the e-mail address";
 "Error" = "Error";
 "Wrong type of answer" = "Wrong type of answer";
 "Verification code is invalid. Please try again." = "Verification code is invalid. Please try again.";

@@ -79,10 +79,6 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         hide()
     }
     
-    @objc func onBackButton(){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     func hide(){
         dismiss(animated: true) {
             
