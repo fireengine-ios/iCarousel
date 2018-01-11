@@ -249,7 +249,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesImage.image = image
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
-        topBarContainer.isHidden = true
     }
     
     func showNoFilesTop() {
