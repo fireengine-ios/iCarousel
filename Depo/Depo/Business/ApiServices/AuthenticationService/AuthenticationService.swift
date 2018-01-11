@@ -67,6 +67,9 @@ class Authentication3G: BaseRequestParametrs {
 
 
 struct AuthenticationUserByRememberMe: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     var requestParametrs: Any {
         let dict: [String: Any] = [LbRequestkeys.deviceInfo : Device.deviceInfo]
@@ -133,6 +136,9 @@ class SignUpUser: BaseRequestParametrs  {
 
 
 struct LogoutUser: RequestParametrs  {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     var requestParametrs: Any {
         return ""
@@ -149,6 +155,9 @@ struct LogoutUser: RequestParametrs  {
 
 
 struct SignUpUserPhoveVerification: RequestParametrs  {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     let token: String
     let otp: String
@@ -170,6 +179,10 @@ struct SignUpUserPhoveVerification: RequestParametrs  {
 
 
 struct  ForgotPassword: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+    
     let email: String
     let attachedCaptcha: CaptchaParametrAnswer?
     
@@ -233,6 +246,10 @@ class EmailVerification: BaseRequestParametrs {
 
 
 struct ResendVerificationSMS: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+    
     let refreshToken: String
     
     var requestParametrs: Any {
@@ -334,12 +351,14 @@ class AuthenticationService: BaseRequestService {
             /// rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
             s.rememberMeToken = nil
             ApplicationSession.sharedSession.updateSession(loginData: s)
+            ApplicationSession.sharedSession.saveData()
             success?()
         }
         
         let failResponse: FailResponse = { value in
             let s = LoginResponse(withJSON: nil)
             ApplicationSession.sharedSession.updateSession(loginData: s)
+            ApplicationSession.sharedSession.saveData()
             success?()
         }
         successResponse()

@@ -15,6 +15,7 @@ enum PopUpButtonState {
     case twin
 }
 
+
 final class PopUpController: UIViewController {
 
     // MARK: - Static

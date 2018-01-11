@@ -12,7 +12,13 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     let authenticationService = AuthenticationService()
     
     func sendForgotPasswordRequest(with mail: String, enteredCaptcha: String, captchaUDID: String) {
-
+        guard !mail.isEmpty else {
+            DispatchQueue.main.async { [weak self] in
+                self?.output.requestFailed(withError: TextConstants.forgotPasswordEmptyEmailText)
+            }
+            return
+        }
+        
         guard isValid(email: mail) else {
             DispatchQueue.main.async { [weak self] in
                 self?.output.requestFailed(withError: TextConstants.forgotPasswordErrorEmailFormatText)

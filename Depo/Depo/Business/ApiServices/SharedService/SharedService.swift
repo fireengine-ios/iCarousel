@@ -33,6 +33,9 @@ struct SharedServiceConstants {
 }
 
 struct SharedServiceParam: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     let filesList: [String]
     

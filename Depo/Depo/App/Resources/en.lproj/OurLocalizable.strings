@@ -244,7 +244,7 @@
 "Ok" = "Ok";
 "Please choose %d files at most" = "Please choose %d files at most";
 "Next" = "Next";
-"Create story" = "Create story";
+"Create a story" = "Create a story";
 "Cancel" = "Cancel";
 "Continue" = "Continue";
 "Please Choose 20 files at most" = "Please Choose 20 files at most";
@@ -327,6 +327,7 @@
 "Back-up my contacts" = "Back-up my contacts";
 "Leave feedback" = "Leave feedback";
 "Upload Photo" = "Upload Photo";
+"Login Settings" = "Login Settings";
 "Back to Lifebox" = "Back to Lifebox";
 "Start adding your documents" = "Start adding your documents";
 "You don’t have any documents on your Lifebox yet." = "You don’t have any documents on your Lifebox yet.";
@@ -424,6 +425,9 @@
 "RECENT SEARCHES" = "RECENT SEARCHES";
 "Search" = "Search";
 "Warning" = "Warning";
+"TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate login with Turkcell password feature.";
+"TurkcellSecurityAutologinText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate autologin with 3G/LTE feature.";
+"PasscodeActivationWhileTurkcellActivated" = "Auto login to lifebox with 3G/LTE and login to lifebox with Turkcell password have been deactivated for you to use lifebox passcode and touch id features safely, you can reactivate from login settings anytime you wish. In this case, you can login to lifebox with your lifebox password.";
 "The file isn't supported" = "The file isn't supported";
 "Maybe later" = "Maybe later";
 "Yes" = "Yes";
@@ -484,6 +488,7 @@
 "E-mail Usage Information" = "E-mail Usage Information";
 "Password fields do not match." = "Password fields do not match.";
 "Please check the e-mail address." = "Please check the e-mail address.";
+"Please enter a valid email adress" = "Please enter a valid email adress";
 "You have performed too many attempts. Please try again 1 hour later." = "You have performed too many attempts. Please try again 1 hour later.";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
 "Please check your internet connection." = "Please check your internet connection.";
@@ -510,5 +515,6 @@
 "I have an account, let me log in" = "I have an account, let me log in";
 "Start using Lifebox now!" = "Start using Lifebox now!";
 "E-mail field is invalid" = "E-mail field is invalid";
-
+"Please enter your GSM number"="Please enter your GSM number";
+"GSM number"="GSM number";
 

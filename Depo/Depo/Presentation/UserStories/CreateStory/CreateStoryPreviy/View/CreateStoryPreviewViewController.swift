@@ -22,7 +22,7 @@ class CreateStoryPreviewViewController: UIViewController, AVPlayerViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        blackNavigationBarStyle()
+        defaultNavBarStyle()
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
         button.setTitle(TextConstants.createStorySave, for: .normal)
         button.setTitleColor(ColorConstants.whiteColor, for: .normal)

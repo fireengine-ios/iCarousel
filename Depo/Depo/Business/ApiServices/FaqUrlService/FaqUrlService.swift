@@ -18,6 +18,10 @@ class Faq : ObjectRequestResponse {
 }
 
 struct FAQUrl:RequestParametrs{
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+    
     var requestParametrs: Any {
         return ""
     }
