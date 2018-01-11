@@ -153,7 +153,6 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         }
         
         let object = collectionViewData[indexPath.row]
-        cell_.startAnimating()
         cell_.setPosition(position: indexPath.row + 1)
         fileDataSource.getImage(patch: object.patchToPreview) { [weak self] (image) in
             
