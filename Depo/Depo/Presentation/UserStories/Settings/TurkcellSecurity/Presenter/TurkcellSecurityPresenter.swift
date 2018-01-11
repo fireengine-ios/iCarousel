@@ -29,6 +29,13 @@ extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
                 self?.interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
             })
             router.rootViewController?.present(popUP, animated: true, completion: nil)
+        } else if interactor.isPasscodeEnabled, autoLogin  {
+            let router = RouterVC()
+            let popUP = PopUpController.with(title: TextConstants.warning, message: TextConstants.turkcellSecurityWaringAutologin, image: .error, buttonTitle: TextConstants.ok, action: { [weak self] controller in
+                self?.startAsyncOperation()
+                self?.interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
+            })
+            router.rootViewController?.present(popUP, animated: true, completion: nil)
         } else {
             startAsyncOperation()
             interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
