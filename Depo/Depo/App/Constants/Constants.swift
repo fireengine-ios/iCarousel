@@ -112,7 +112,8 @@ struct TextConstants {
     static let forgotPasswordErrorEmailNotFoundText = NSLocalizedString("Account not found for email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordErrorCaptchaText = NSLocalizedString("This text doesn't match. Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordCommonErrorText = NSLocalizedString("An error is occurred!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let forgotPasswordErrorEmailFormatText = NSLocalizedString("Please check the e-mail address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let forgotPasswordEmptyEmailText = NSLocalizedString("Please check the e-mail address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let forgotPasswordErrorEmailFormatText = NSLocalizedString("Please enter a valid email adress", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: - mail update
     static let updaitMailMaybeLater = NSLocalizedString("Maybe later", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
