@@ -77,9 +77,9 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     func interrupt() {
-        if status.isContained(in: [.prepairing, .executing]) {
+//        if status.isContained(in: [.prepairing, .executing]) {
             status = .waitingForWifi
-        }
+//        }
     }
     
     func stop() {
