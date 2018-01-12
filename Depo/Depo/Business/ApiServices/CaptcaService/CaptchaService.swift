@@ -15,6 +15,9 @@ enum CaptchaType: String {
 }
 
 struct CaptchaParametr: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     let uuid: String
     let type: String
@@ -35,6 +38,9 @@ struct CaptchaParametr: RequestParametrs {
 }
 
 struct CaptchaParametrAnswer: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     let uuid: String
     let answer: String
@@ -55,6 +61,9 @@ struct CaptchaParametrAnswer: RequestParametrs {
 }
 
 struct ValidateCaptchaParametr: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     let uuid: String
     let value: String

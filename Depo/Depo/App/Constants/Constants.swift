@@ -112,7 +112,8 @@ struct TextConstants {
     static let forgotPasswordErrorEmailNotFoundText = NSLocalizedString("Account not found for email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordErrorCaptchaText = NSLocalizedString("This text doesn't match. Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordCommonErrorText = NSLocalizedString("An error is occurred!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let forgotPasswordErrorEmailFormatText = NSLocalizedString("Please check the e-mail address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let forgotPasswordEmptyEmailText = NSLocalizedString("Please check the e-mail address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let forgotPasswordErrorEmailFormatText = NSLocalizedString("Please enter a valid email adress", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: - mail update
     static let updaitMailMaybeLater = NSLocalizedString("Maybe later", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -122,6 +123,11 @@ struct TextConstants {
     static let theFileIsNotSupported = NSLocalizedString("The file isn't supported", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warning = NSLocalizedString("Warning", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    //MARK: - Turkcell Security
+    
+    static let turkcellSecurityWaringPasscode = NSLocalizedString("TurkcellSecurityPasscodeWarningText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let turkcellSecurityWaringAutologin = NSLocalizedString("TurkcellSecurityAutologinText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let passcodeEneblingwWithActivatedTurkcellSecurity = NSLocalizedString("PasscodeActivationWhileTurkcellActivated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     // MARK: - Search
     
 
@@ -767,4 +773,7 @@ struct NumericConstants {
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     
     static let maxRecentSearches: Int = 10
+    
+    static let defaultTimeout: TimeInterval = 30.0
+    
 }

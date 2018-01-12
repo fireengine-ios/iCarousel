@@ -14,6 +14,7 @@ protocol TurkcellSecurityInteractorInput: class {
     
     var turkcellPasswordOn: Bool {get}
     var turkcellAutoLoginOn: Bool {get}
+    var isPasscodeEnabled: Bool {get}
 }
 
 protocol TurkcellSecurityInteractorOutput: class {

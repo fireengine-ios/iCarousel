@@ -720,7 +720,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if (cellReUseID == nil), let unwrapedFile = file {
             cellReUseID = unwrapedFile.getCellReUseID()
         }
-        
+
         if ((displayingType == .list) &&
             (file is Item)) {
             cellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
@@ -755,13 +755,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
-                if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol {
-                    DispatchQueue.main.async {
-                        cellToChange.setImage(image: image)
+                DispatchQueue.main.async {
+                    if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol {
+                        if let image = image {
+                            cellToChange.setImage(image: image)
+                        } else {
+                            cellToChange.setPlaceholderImage(fileType: wraped.fileType)
+                        }
                     }
                 }
             })
@@ -770,16 +773,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if let url = url {
                 cell_.setImage(with: url)
             } else {
-                switch wraped.fileType {
-                case .folder:
-                    cell_.setPlaceholderImage(image: UIImage(named: "fileBigIconFolder"))
-                case .audio:
-                    cell_.setPlaceholderImage(image: UIImage(named: "fileIconAudio"))
-                case let .application(applicationType):
-                    cell_.setPlaceholderImage(image: applicationType.bigIconImage())
-                default:
-                    cell_.setImage(image: nil)
-                }
+                cell_.setPlaceholderImage(fileType: wraped.fileType)
             }
         }
         

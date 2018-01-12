@@ -27,6 +27,15 @@ class SyncServiceManager {
         return (photoSyncService.status == .canceled && videoSyncService.status == .canceled)
     }
     
+    private var isSyncFinished: Bool {
+        return (photoSyncService.status == .synced && videoSyncService.status == .synced)
+    }
+    
+    
+    private var hasSyncCancelled: Bool {
+        return (photoSyncService.status == .canceled || videoSyncService.status == .canceled)
+    }
+    
     private var hasPrepairingSync: Bool {
         return (photoSyncService.status == .prepairing || videoSyncService.status == .prepairing)
     }
@@ -39,8 +48,8 @@ class SyncServiceManager {
         return (photoSyncService.status == .waitingForWifi || videoSyncService.status == .waitingForWifi)
     }
     
-    private var isSyncFinished: Bool {
-        return (photoSyncService.status == .synced && videoSyncService.status == .synced)
+    private var hasFailedSync: Bool {
+        return (photoSyncService.status == .failed || videoSyncService.status == .failed)
     }
     
     
@@ -154,10 +163,10 @@ class SyncServiceManager {
             } else if reachability.connection == .cellular {
                 let photoEnabled = syncSettings.mobileDataPhotos
                 let videoEnabled = syncSettings.mobileDataVideo
+                stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
                 if photoEnabled || videoEnabled {
                     start(photo: photoEnabled, video: videoEnabled)
                 }
-                stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
             }
         } else {
             stop(reachabilityDidChange: true, photo: true, video: true)
@@ -234,11 +243,13 @@ extension SyncServiceManager {
             CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             return
         }
+        
+        CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
 
-        if hasWaitingForWiFiSync {
+        if hasWaitingForWiFiSync || hasFailedSync || hasSyncCancelled {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
         }
-        
+
         if isSyncFinished {
             FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
         }
