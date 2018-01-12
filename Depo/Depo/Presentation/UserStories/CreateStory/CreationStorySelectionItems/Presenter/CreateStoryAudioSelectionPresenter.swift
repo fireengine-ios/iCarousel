@@ -80,4 +80,7 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
 //        }
 //    }
 
+    override func needShowNoFileView() -> Bool {
+        return dataSource.getAllObjects().count == 0
+    }
 }

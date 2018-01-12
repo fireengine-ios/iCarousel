@@ -1030,6 +1030,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func deleteItems(items: [Item]){
+        if (items.count == 0){
+            return
+        }
         var objectsForRemoving = [Item]()
         var localObjectsForReplace = [Item]()
         
@@ -1134,16 +1137,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        collectionView.performBatchUpdates({[weak self] in
-            if let `self` = self{
-                self.collectionView.deleteItems(at: arrayOfPathForDelete)
-                self.collectionView.deleteSections(IndexSet(arrayOfSection))
-            }
-        }) { [weak self] (flag) in
-            if let `self` = self{
-                self.collectionView.reloadItems(at: arrayOfPathForUpdate)
-            }
-        }
+        collectionView.reloadData()
+        
+//        collectionView.performBatchUpdates({[weak self] in
+//            if let `self` = self{
+//                self.collectionView.deleteItems(at: arrayOfPathForDelete)
+//                self.collectionView.deleteSections(IndexSet(arrayOfSection))
+//            }
+//        }) { [weak self] (flag) in
+//            if let `self` = self{
+//                self.collectionView.reloadItems(at: arrayOfPathForUpdate)
+//            }
+//        }
     }
     
     func newFolderCreated(){
@@ -1169,6 +1174,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             isAlbumDetail(filters: unwrapedFilters) {
             delegate?.needReloadData?()
         }
+    }
+    
+    func addedLocalFiles(items: [Item]){
+        if let unwrapedFilters = originalFilters,
+            isAlbumDetail(filters: unwrapedFilters) {
+            return
+        }
+        
+        if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
+            return
+        }
+        
+        delegate?.needReloadData?()
     }
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {

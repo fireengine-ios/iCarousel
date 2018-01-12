@@ -26,14 +26,16 @@ class PhotoSelectionDataSource: ArrayDataSourceForCollectionView {
         if (section == 0) {
             return CGSize(width: collectionView.bounds.size.width, height: 53.0)
         } else {
-            return CGSize.zero
+            let height = Device.isIpad ? NumericConstants.iPadGreedHorizontalSpace : NumericConstants.iPhoneGreedHorizontalSpace
+            return CGSize(width: collectionView.bounds.size.width, height: height)
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewHeaderWithText, for: indexPath)
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewHeaderWithText, for: indexPath) as! CollectionViewHeaderWithText
+            headerView.titleLabel.isHidden = indexPath.section != 0
             return headerView
             
         default:
