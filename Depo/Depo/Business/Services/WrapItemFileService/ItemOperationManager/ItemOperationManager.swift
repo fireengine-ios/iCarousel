@@ -18,6 +18,8 @@ protocol ItemOperationManagerViewProtocol {
     
     func addFilesToFavorites(items: [Item])
     
+    func addedLocalFiles(items: [Item])
+    
     func removeFileFromFavorites(items: [Item])
     
     func deleteItems(items: [Item])
@@ -109,9 +111,25 @@ class ItemOperationManager: NSObject {
     }
     
     func deleteItems(items: [Item]){
+        if items.count == 0{
+            return
+        }
+        
         DispatchQueue.main.async {
             for view in self.views{
                 view.deleteItems(items: items)
+            }
+        }
+    }
+    
+    func addedLocalFiles(items: [Item]){
+        if items.count == 0{
+            return
+        }
+        
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.addedLocalFiles(items: items)
             }
         }
     }
