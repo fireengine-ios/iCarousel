@@ -10,14 +10,14 @@ import UIKit
 
 class DuplicatedContactsModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, analyzeResponse: ContactSync.AnalyzeResponse) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, analyzeResponse: ContactSync.AnalyzeResponse, moduleOutput: DuplicatedContactsModuleOutput?) {
 
         if let viewController = viewInput as? DuplicatedContactsViewController {
-            configure(viewController: viewController, analyzeResponse: analyzeResponse)
+            configure(viewController: viewController, analyzeResponse: analyzeResponse, moduleOutput: moduleOutput)
         }
     }
 
-    private func configure(viewController: DuplicatedContactsViewController, analyzeResponse: ContactSync.AnalyzeResponse) {
+    private func configure(viewController: DuplicatedContactsViewController, analyzeResponse: ContactSync.AnalyzeResponse, moduleOutput: DuplicatedContactsModuleOutput?) {
         viewController.analyzeResponse = analyzeResponse
         
         let router = DuplicatedContactsRouter()
@@ -25,7 +25,8 @@ class DuplicatedContactsModuleConfigurator {
         let presenter = DuplicatedContactsPresenter()
         presenter.view = viewController
         presenter.router = router
-
+        presenter.moduleOutput = moduleOutput
+        
         let interactor = DuplicatedContactsInteractor()
         interactor.output = presenter
         

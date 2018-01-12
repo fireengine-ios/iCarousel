@@ -250,13 +250,20 @@ class RouterVC: NSObject {
     
     //MARK: SyncContacts
     
-    var syncContacts: UIViewController? {
+    var syncContacts: UIViewController {
         let viewController = SyncContactsModuleInitializer.initializeViewController(with: "SyncContactsViewController")
         return viewController
     }
     
     var manageContacts: UIViewController {
         let viewController = ManageContactsModuleInitializer.initializeViewController(with: "ManageContactsViewController")
+        return viewController
+    }
+    
+    func duplicatedContacts(analyzeResponse: ContactSync.AnalyzeResponse, moduleOutput: DuplicatedContactsModuleOutput?) -> UIViewController {
+        let viewController = DuplicatedContactsModuleInitializer.initializeViewController(with: "DuplicatedContactsViewController",
+                                                                                          analyzeResponse: analyzeResponse,
+                                                                                          moduleOutput: moduleOutput)
         return viewController
     }
     
@@ -552,7 +559,7 @@ class RouterVC: NSObject {
         let rightController = syncContacts
         
         //let splitContr = SplitIpadViewContoller()
-        splitContr.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController!])
+        splitContr.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController])
         
         let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitContr.getSplitVC())
         return containerController

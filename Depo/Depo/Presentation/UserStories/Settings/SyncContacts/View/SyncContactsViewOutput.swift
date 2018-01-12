@@ -10,4 +10,5 @@ protocol SyncContactsViewOutput {
     func viewIsReady()
     func startOperation(operationType: SyncOperationType)
     func onManageContacts()
+    func onDeinit()
 }

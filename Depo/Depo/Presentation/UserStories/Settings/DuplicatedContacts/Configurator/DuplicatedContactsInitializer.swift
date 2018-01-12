@@ -10,10 +10,13 @@ import UIKit
 
 class DuplicatedContactsModuleInitializer: NSObject {
 
-    class func initializeViewController(with nibName:String, analyzeResponse: ContactSync.AnalyzeResponse) -> UIViewController {
+    class func initializeViewController(with nibName:String,
+                                        analyzeResponse: ContactSync.AnalyzeResponse,
+                                        moduleOutput: DuplicatedContactsModuleOutput?) -> UIViewController {
+        
         let viewController = DuplicatedContactsViewController(nibName: nibName, bundle: nil)
         let configurator = DuplicatedContactsModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: viewController, analyzeResponse: analyzeResponse)
+        configurator.configureModuleForViewInput(viewInput: viewController, analyzeResponse: analyzeResponse, moduleOutput: moduleOutput)
         return viewController
     }
 

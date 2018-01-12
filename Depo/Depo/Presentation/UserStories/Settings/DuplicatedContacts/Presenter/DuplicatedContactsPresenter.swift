@@ -9,6 +9,7 @@
 class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedContactsViewOutput, DuplicatedContactsInteractorOutput {
     
     weak var view: DuplicatedContactsViewInput!
+    weak var moduleOutput: DuplicatedContactsModuleOutput?
     var interactor: DuplicatedContactsInteractorInput!
     var router: DuplicatedContactsRouterInput!
     
@@ -17,7 +18,9 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
         
     }
     
-
+    func onWillDisappear() {
+        moduleOutput?.cancelDeletingDuplicatedContacts()
+    }
     
     //MARK: Interactor Output
 

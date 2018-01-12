@@ -23,7 +23,7 @@ class ContactsSyncService {
     
     typealias ProgressCallback = (_ progress: Int, _ mode: SyncOperationType) -> Void
     typealias FinishCallback = (_ finished: ContactSync.SyncResponse, _ mode: SyncOperationType) -> Void
-    typealias AnalyzeFinishCallback = (_ finished: ContactSync.AnalyzeReponse) -> Void
+    typealias AnalyzeFinishCallback = (_ finished: ContactSync.AnalyzeResponse) -> Void
     typealias ErrorCallback = (_ errorType: SyncOperationErrors, _ mode: SyncOperationType) -> Void
 
     func executeOperation(type: SYNCMode, progress: ProgressCallback?, finishCallback: FinishCallback?, errorCallback: ErrorCallback?) {
@@ -131,8 +131,8 @@ class ContactsSyncService {
     
     func cancellCurrentOperation() {
         //TODO: Pestryakov find out how to close
-        SyncStatus.shared().reset()
-        AnalyzeStatus.shared().reset()
+//        SyncStatus.shared().reset()
+//        AnalyzeStatus.shared().reset()
         ContactSyncSDK.cancelAnalyze()
     }
     
@@ -150,7 +150,7 @@ class ContactsSyncService {
             let parsedContactsToMerge = ContactsSyncService.parseContactsToMerge(contactsToMerge)
             let parsedContactsToDelete = ContactsSyncService.parseContactsToDelete(contactsToDelete)
             
-            let response = ContactSync.AnalyzeReponse(contactsToMerge: parsedContactsToMerge,
+            let response = ContactSync.AnalyzeResponse(contactsToMerge: parsedContactsToMerge,
                                                       contactsToDelete: parsedContactsToDelete)
             
             finishCallback?(response)

@@ -37,6 +37,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             performOperation(forType: .restore)
         case .cancelAllOperations:
             contactsSyncService.cancellCurrentOperation()
+            output.cancellSuccess()
         case .getBackUpStatus:
             loadLastBackUp()
         case .analyze:
@@ -53,7 +54,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 }
             }, finishCallback: { (result, type) in
                 DispatchQueue.main.async { [weak self] in
-                    self?.output.success(object: result, forOperation: type)
+                    self?.output.success(response: result, forOperation: type)
                 }
         }, errorCallback: { errorType, type in
             DispatchQueue.main.async { [weak self] in
@@ -65,7 +66,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     private func loadLastBackUp() {
         output.asyncOperationStarted()
         contactsSyncService.getBackUpStatus(completion: { [weak self] (model) in
-            self?.output.success(object: model, forOperation: .getBackUpStatus)
+            self?.output.success(response: model, forOperation: .getBackUpStatus)
             self?.output.asyncOperationFinished()
         }, fail: { [weak self] in
             self?.output.showNoBackUp()
@@ -79,7 +80,9 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self?.output.showProggress(progress: progressPercentage, forOperation: type)
             }
         }, finishCallback: { (response) in
-            
+            DispatchQueue.main.async { [weak self] in
+                self?.output.analyzeSuccess(response: response)
+            }
         }) { (errorType, type) in
             DispatchQueue.main.async { [weak self] in
                 self?.output.showError(errorType: errorType)

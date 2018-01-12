@@ -30,6 +30,7 @@
                 <outlet property="manageContactsButton" destination="iM8-Y4-P5K" id="tVd-5v-4BN"/>
                 <outlet property="newCantactSubTitleLabel" destination="eSI-Y2-nf7" id="JzV-yH-DSl"/>
                 <outlet property="newContactCountLabel" destination="A13-eN-6xR" id="gJ0-eL-kKW"/>
+                <outlet property="operationButtonsStackView" destination="BjP-ys-4HT" id="YD5-no-6wY"/>
                 <outlet property="removedCountLabel" destination="82P-10-K6U" id="PT3-V7-obS"/>
                 <outlet property="removedSubTitleLabel" destination="GKY-Yp-o3j" id="jK8-Ak-1FO"/>
                 <outlet property="restoreButton" destination="JGU-WQ-T3u" id="HoS-Uz-O5E"/>
@@ -49,7 +50,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tib-1p-vqS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="518.33333333333337"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="666"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvS-vM-9ef" userLabel="View for loading">
                                     <rect key="frame" x="126" y="50" width="162" height="162"/>
@@ -73,7 +74,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="rX0-8z-yJA">
-                                    <rect key="frame" x="0.0" y="247.00000000000003" width="414" height="20.333333333333343"/>
+                                    <rect key="frame" x="0.0" y="247.00000000000003" width="414" height="66.333333333333343"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KrQ-Cb-oUZ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="20.333333333333332"/>
@@ -81,8 +82,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iM8-Y4-P5K" customClass="ButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
-                                            <rect key="frame" x="147" y="-247" width="120" height="29"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iM8-Y4-P5K" customClass="ButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
+                                            <rect key="frame" x="147" y="37.333333333333314" width="120" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="29" id="Zm0-6y-rlt"/>
                                                 <constraint firstAttribute="width" constant="120" id="hRE-w6-A69"/>
@@ -95,7 +96,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hZZ-dA-LwW">
-                                    <rect key="frame" x="10" y="287.33333333333331" width="394" height="210"/>
+                                    <rect key="frame" x="10" y="333" width="394" height="161"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="dxs-eW-wJ3">
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
@@ -270,23 +271,23 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34w-gh-gNj" customClass="ButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
-                                            <rect key="frame" x="141.66666666666666" y="181" width="111" height="29"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="29" id="SLt-IX-zYY"/>
-                                                <constraint firstAttribute="width" constant="111" id="nHm-g0-GBZ"/>
-                                            </constraints>
-                                            <state key="normal" title="Cancel"/>
-                                            <connections>
-                                                <action selector="onCancelButton" destination="-1" eventType="touchUpInside" id="QJV-zE-Io6"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="4we-6Z-PGt" firstAttribute="width" secondItem="hZZ-dA-LwW" secondAttribute="width" multiplier="0.3" id="QjK-n0-G0S"/>
                                         <constraint firstItem="dxs-eW-wJ3" firstAttribute="width" secondItem="hZZ-dA-LwW" secondAttribute="width" id="kHK-jc-zvc"/>
                                     </constraints>
                                 </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34w-gh-gNj" customClass="ButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
+                                    <rect key="frame" x="151" y="617" width="111" height="29"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="29" id="SLt-IX-zYY"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="111" id="nHm-g0-GBZ"/>
+                                    </constraints>
+                                    <state key="normal" title="Cancel"/>
+                                    <connections>
+                                        <action selector="onCancelButton" destination="-1" eventType="touchUpInside" id="QJV-zE-Io6"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -295,22 +296,24 @@
                                 <constraint firstItem="LvS-vM-9ef" firstAttribute="top" secondItem="Tib-1p-vqS" secondAttribute="top" constant="50" id="A8U-wb-Kke"/>
                                 <constraint firstItem="pkl-kE-oQ1" firstAttribute="centerX" secondItem="LvS-vM-9ef" secondAttribute="centerX" id="Ely-Ej-FZL"/>
                                 <constraint firstItem="rX0-8z-yJA" firstAttribute="top" secondItem="LvS-vM-9ef" secondAttribute="bottom" constant="35" id="Eyj-81-imk"/>
-                                <constraint firstAttribute="bottom" secondItem="hZZ-dA-LwW" secondAttribute="bottom" constant="21" id="IAQ-Q6-i1q"/>
                                 <constraint firstItem="pkl-kE-oQ1" firstAttribute="centerY" secondItem="LvS-vM-9ef" secondAttribute="centerY" id="MbW-fz-bAj"/>
+                                <constraint firstItem="34w-gh-gNj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hZZ-dA-LwW" secondAttribute="bottom" constant="10" id="Oke-fF-sYF"/>
+                                <constraint firstItem="34w-gh-gNj" firstAttribute="centerX" secondItem="Tib-1p-vqS" secondAttribute="centerX" id="c4h-Xx-JoW"/>
                                 <constraint firstItem="hZZ-dA-LwW" firstAttribute="top" secondItem="rX0-8z-yJA" secondAttribute="bottom" constant="20" id="dFD-Bs-AmV"/>
                                 <constraint firstAttribute="trailing" secondItem="hZZ-dA-LwW" secondAttribute="trailing" constant="10" id="fUp-5r-CsV"/>
                                 <constraint firstItem="pkl-kE-oQ1" firstAttribute="height" secondItem="LvS-vM-9ef" secondAttribute="height" constant="34" id="kiG-Zy-5pl"/>
                                 <constraint firstItem="LvS-vM-9ef" firstAttribute="centerX" secondItem="Tib-1p-vqS" secondAttribute="centerX" id="qR6-uZ-9Mf"/>
                                 <constraint firstItem="hZZ-dA-LwW" firstAttribute="leading" secondItem="Tib-1p-vqS" secondAttribute="leading" constant="10" id="rVi-go-tvg"/>
+                                <constraint firstAttribute="bottom" secondItem="34w-gh-gNj" secondAttribute="bottom" constant="20" id="vIN-x9-TEB"/>
                                 <constraint firstAttribute="trailing" secondItem="rX0-8z-yJA" secondAttribute="trailing" id="xPI-qF-G0c"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="Tib-1p-vqS" firstAttribute="top" secondItem="6co-Ab-n7k" secondAttribute="top" id="7do-cF-Yjo"/>
+                        <constraint firstItem="Tib-1p-vqS" firstAttribute="height" secondItem="6co-Ab-n7k" secondAttribute="height" priority="250" constant="-70" id="EWH-dR-4T2"/>
                         <constraint firstAttribute="bottom" secondItem="Tib-1p-vqS" secondAttribute="bottom" id="GG3-Wf-VMT"/>
-                        <constraint firstItem="Tib-1p-vqS" firstAttribute="height" secondItem="6co-Ab-n7k" secondAttribute="height" priority="250" id="H2B-md-f5R"/>
-                        <constraint firstItem="Tib-1p-vqS" firstAttribute="width" secondItem="6co-Ab-n7k" secondAttribute="width" id="qSn-BW-BTj"/>
+                        <constraint firstItem="Tib-1p-vqS" firstAttribute="width" secondItem="6co-Ab-n7k" secondAttribute="width" id="TuH-gO-ZL6"/>
                         <constraint firstAttribute="trailing" secondItem="Tib-1p-vqS" secondAttribute="trailing" id="w29-sj-lFd"/>
                         <constraint firstItem="Tib-1p-vqS" firstAttribute="leading" secondItem="6co-Ab-n7k" secondAttribute="leading" id="w95-oN-rUb"/>
                     </constraints>

@@ -7,7 +7,6 @@
 //
 
 protocol DuplicatedContactsViewOutput {
-
     func viewIsReady()
-    
+    func onWillDisappear()
 }

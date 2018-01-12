@@ -27,6 +27,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     @IBOutlet weak var cancelButton: ButtonWithGrayCorner!
     @IBOutlet weak var manageContactsButton: ButtonWithGrayCorner!
     
+    @IBOutlet weak var operationButtonsStackView: UIStackView!
     @IBOutlet weak var deleteDuplicatedButton: BlueButtonWithMediumWhiteText!
     @IBOutlet weak var restoreButton: BlueButtonWithMediumWhiteText!
     @IBOutlet weak var backUpButton: BlueButtonWithMediumWhiteText!
@@ -42,6 +43,8 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setInitialState()
         
         titleLabel.textColor = ColorConstants.textGrayColor
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
@@ -78,15 +81,17 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         
         backUpButton.setTitle(TextConstants.settingsBackUpButtonTitle, for: .normal)
         restoreButton.setTitle(TextConstants.settingsBackUpRestoreTitle, for: .normal)
-        cancelButton.setTitle(TextConstants.settingsBackUpCancelBackUpTitle, for: .normal)
+        cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
         deleteDuplicatedButton.setTitle(TextConstants.settingsBackUpDeleteDuplicatedButton, for: .normal)
         backUpButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         restoreButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         deleteDuplicatedButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        
-        setInitialState()
+        output.viewIsReady()
     }
     
+    deinit {
+        output.onDeinit()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -96,14 +101,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
             navigationBarWithGradientStyle()
         }
         setTitle(withString: TextConstants.backUpMyContacts)
-        output.viewIsReady()
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        visibleNavigationBarStyle()
-    }
-    
     
     // MARK: buttons action
     
@@ -119,7 +117,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         output.onManageContacts()
     }
     
-    @IBAction func onCancelButton(){
+    @IBAction func onCancelButton() {
         output.startOperation(operationType: .cancelAllOperations)
     }
     
@@ -132,8 +130,8 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     func setInitialState() {
         viewForInformationAfterBackUp.isHidden = true
         cancelButton.isHidden = true
-        restoreButton.isHidden = true
-        deleteDuplicatedButton.isHidden = true
+        operationButtonsStackView.isHidden = true
+        manageContactsButton.isHidden = true
     }
     
     func setStateWithoutBackUp() {
@@ -142,34 +140,60 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         viewForInformationAfterBackUp.isHidden = true
         cancelButton.isHidden = true
         restoreButton.isHidden = true
+        backUpButton.isHidden = false
         deleteDuplicatedButton.isHidden = true
+        operationButtonsStackView.isHidden = false
+        backupDateLabel.isHidden = false
+        manageContactsButton.isHidden = false
     }
     
     func setStateWithBackUp() {
         cancelButton.isHidden = true
         restoreButton.isHidden = false
+        backUpButton.isHidden = false
         deleteDuplicatedButton.isHidden = false
+        operationButtonsStackView.isHidden = false
+        backupDateLabel.isHidden = false
+        manageContactsButton.isHidden = false
+    }
+    
+    func setOperationState(operationType: SyncOperationType) {
+        viewForInformationAfterBackUp.isHidden = true
+        operationButtonsStackView.isHidden = true
+        backupDateLabel.isHidden = true
+        manageContactsButton.isHidden = true
+        
+        switch operationType {
+        case .analyze:
+            cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
+            cancelButton.isHidden = false
+        case .deleteDuplicated:
+            cancelButton.setTitle(TextConstants.settingsBackUpCancelDeletingTitle, for: .normal)
+            cancelButton.isHidden = false
+        default:
+            cancelButton.isHidden = true
+        }
     }
     
     func showProggress(progress: Int, forOperation operation: SyncOperationType){
         gradientLoaderIndicator.progress = CGFloat(progress) / 100
-        if (operation == .backup) {
-            let text = String.init(format: TextConstants.settingsBackUpingText, progress)
-            titleLabel.text = text
-            viewForInformationAfterBackUp.isHidden = true
-            cancelButton.setTitle(TextConstants.settingsBackUpCancelBackUpTitle, for: .normal)
+        
+        switch operation {
+        case .backup:
+            titleLabel.text = String(format: TextConstants.settingsBackUpingText, progress)
+        case .restore:
+            titleLabel.text = String(format: TextConstants.settingsRestoringText, progress)
+        case .analyze:
+            titleLabel.text = String(format: TextConstants.settingsAnalyzingText, progress)
+        case .deleteDuplicated:
+            titleLabel.text = String(format: TextConstants.settingsDeletingText, progress)
+        default:
+            break
         }
-        if (operation == .restore) {
-            let text = String.init(format: TextConstants.settingsRestoringText, progress)
-            titleLabel.text = text
-            viewForInformationAfterBackUp.isHidden = true
-            cancelButton.setTitle(TextConstants.settingsBackUpCancelBackUpTitle, for: .normal)
-        }
-        cancelButton.isHidden = false
     }
     
-    func success(object: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
-        setLastBackUpDate(object.date)
+    func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
+        setLastBackUpDate(response.date)
         setStateWithBackUp()
         var template: String = ""
         if (operation == .backup){
@@ -178,21 +202,21 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
             template = TextConstants.settingsRestoredText
         }
         
-        let t = String.init(format: template, object.totalNumberOfContacts)
+        let t = String.init(format: template, response.totalNumberOfContacts)
         let text = t as NSString
         let attributedText = NSMutableAttributedString(string: t)
         
         let font = UIFont.TurkcellSaturaBolFont(size: 16)
-        let str = String(object.totalNumberOfContacts)
+        let str = String(response.totalNumberOfContacts)
         let r = text.range(of: str)
         attributedText.addAttribute(NSAttributedStringKey.font, value: font, range: r)
         
         titleLabel.attributedText = attributedText
         viewForInformationAfterBackUp.isHidden = false
         
-        newContactCountLabel.text = String(object.newContactsNumber)
-        duplicatedCountLabel.text = String(object.duplicatesNumber)
-        removedCountLabel.text = String(object.deletedNumber)
+        newContactCountLabel.text = String(response.newContactsNumber)
+        duplicatedCountLabel.text = String(response.duplicatesNumber)
+        removedCountLabel.text = String(response.deletedNumber)
     }
     
     func setLastBackUpDate(_ lastBackUpDate: Date?) {

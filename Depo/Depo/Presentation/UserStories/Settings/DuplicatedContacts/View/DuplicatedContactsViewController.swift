@@ -24,6 +24,12 @@ class DuplicatedContactsViewController: BaseViewController, DuplicatedContactsVi
         output.viewIsReady()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        output.onWillDisappear()
+    }
+    
     // MARK: Actions
     
     // MARK: DuplicatedContactsViewInput

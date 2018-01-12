@@ -7,6 +7,7 @@
 //
 
 class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
+    
     weak var view: SyncContactsViewInput!
     var interactor: SyncContactsInteractorInput!
     var router: SyncContactsRouterInput!
@@ -28,10 +29,13 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
                                                   secondButtonTitle: TextConstants.errorAlertYesBtnBackupAlreadyExist,
                                                   secondAction: { [weak self] vc in
                                                     self?.interactor.startOperation(operationType: .backup)
+                                                    self?.view.setOperationState(operationType: operationType)
                                                     vc.close()
             })
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            
         } else {
+            view.setOperationState(operationType: operationType)
             interactor.startOperation(operationType: operationType)
         }
     }
@@ -47,13 +51,29 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         view.showProggress(progress: progress, forOperation: operation)
     }
     
-    func success(object: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
+    func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
         isBackUpAvailable = true
-        view.success(object: object, forOperation: operation)
+        view.success(response: response, forOperation: operation)
+    }
+    
+    func analyzeSuccess(response: ContactSync.AnalyzeResponse) {
+        router.goToDuplicatedContacts(with: response, moduleOutput: self)
+    }
+    
+    func cancellSuccess() {
+        if isBackUpAvailable {
+            view.setStateWithBackUp()
+        } else {
+            view.setStateWithoutBackUp()
+        }
     }
     
     func onManageContacts() {
         router.goToManageContacts()
+    }
+    
+    func onDeinit() {
+        interactor.startOperation(operationType: .cancelAllOperations)
     }
     
     func showNoBackUp() {
@@ -70,5 +90,15 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     override func outputView() -> Waiting? {
         return view as? Waiting
+    }
+}
+
+extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
+    func cancelDeletingDuplicatedContacts() {
+        interactor.startOperation(operationType: .cancelAllOperations)
+    }
+    
+    func deleteDuplicatedContacts() {
+        interactor.startOperation(operationType: .deleteDuplicated)
     }
 }

@@ -12,4 +12,9 @@ class SyncContactsRouter: SyncContactsRouterInput {
     func goToManageContacts() {
         router.pushViewController(viewController: router.manageContacts)
     }
+    
+    func goToDuplicatedContacts(with analyzeResponse: ContactSync.AnalyzeResponse, moduleOutput: DuplicatedContactsModuleOutput?) {
+        let viewController = router.duplicatedContacts(analyzeResponse: analyzeResponse, moduleOutput: moduleOutput)
+        router.pushViewController(viewController: viewController)
+    }
 }

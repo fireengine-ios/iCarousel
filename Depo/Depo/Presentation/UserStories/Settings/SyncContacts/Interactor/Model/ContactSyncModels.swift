@@ -16,7 +16,7 @@ struct ContactSync {
         let date: Date?
     }
     
-    struct AnalyzeReponse {
+    struct AnalyzeResponse {
         let contactsToMerge: [AnalyzedContact]
         let contactsToDelete: [AnalyzedContact]
     }
