@@ -1137,16 +1137,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        collectionView.performBatchUpdates({[weak self] in
-            if let `self` = self{
-                self.collectionView.deleteItems(at: arrayOfPathForDelete)
-                self.collectionView.deleteSections(IndexSet(arrayOfSection))
-            }
-        }) { [weak self] (flag) in
-            if let `self` = self{
-                self.collectionView.reloadItems(at: arrayOfPathForUpdate)
-            }
-        }
+        collectionView.reloadData()
+        
+//        collectionView.performBatchUpdates({[weak self] in
+//            if let `self` = self{
+//                self.collectionView.deleteItems(at: arrayOfPathForDelete)
+//                self.collectionView.deleteSections(IndexSet(arrayOfSection))
+//            }
+//        }) { [weak self] (flag) in
+//            if let `self` = self{
+//                self.collectionView.reloadItems(at: arrayOfPathForUpdate)
+//            }
+//        }
     }
     
     func newFolderCreated(){
