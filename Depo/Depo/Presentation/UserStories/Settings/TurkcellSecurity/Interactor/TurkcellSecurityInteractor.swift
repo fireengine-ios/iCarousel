@@ -79,6 +79,6 @@ extension TurkcellSecurityInteractor: TurkcellSecurityInteractorInput {
         return turkcellLogin ?? false
     }
     var isPasscodeEnabled: Bool {
-        return touchIDEnabled && passcodeEnabled
+        return touchIDEnabled || passcodeEnabled
     }
 }
