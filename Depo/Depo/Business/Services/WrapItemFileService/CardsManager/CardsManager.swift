@@ -19,6 +19,8 @@ enum OperationType: String{
     case waitingForWiFi         = "waitingForWiFi"
 }
 
+typealias BlockObject = () -> Void
+
 class Progress {
     var allOperations: Int?
     var completedOperations: Int?
@@ -30,11 +32,22 @@ class CardsManager: NSObject {
     
     private var foloversArray = [CardsManagerViewProtocol]()
     private var progresForOperation = [OperationType: Progress]()
+
+    var timer: Timer?
     
+    var blocks = [BlockObject]()
     
     //MARK: registration view
     
     func addViewForNotification(view: CardsManagerViewProtocol){
+        if timer == nil{
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(0.5),
+                                         target: self,
+                                         selector: #selector(self.performOperations),
+                                         userInfo: nil, repeats: true)
+            timer?.fire()
+        }
+        
         if foloversArray.index(where: {$0.isEqual(object: view)}) == nil{
             foloversArray.append(view)
         }
@@ -69,22 +82,37 @@ class CardsManager: NSObject {
     
     //MARK: sending operation to registred subviews
     
+    @objc private func performOperations(){
+        if blocks.count == 0{
+            return
+        }
+        blocks[0]()
+        _ = blocks.removeFirst()
+    }
+    
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
+        if progresForOperation[type] != nil{
+            return
+        }
+        
         if !canShowPopUpByDepends(type: type){
             return
         }
         
         hidePopUpsByDepends(type: type)
         setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
-        DispatchQueue.main.async {
+        
+        print("operation started ", type.rawValue)
+        
+        blocks.append ({
             for notificationView in self.foloversArray{
                 notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
             }
-        }
+        })
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
@@ -117,12 +145,19 @@ class CardsManager: NSObject {
     }
     
     func stopOperationWithType(type: OperationType){
-        progresForOperation[type] = nil
-        DispatchQueue.main.async {
+        
+        if progresForOperation[type] == nil{
+            return
+        }
+        
+        print("operation stopped ", type.rawValue)
+        
+        blocks.append ({
+            self.progresForOperation[type] = nil
             for notificationView in self.foloversArray{
                 notificationView.stopOperationWithType(type: type)
             }
-        }
+        })
     }
     
     func stopAllOperations(){
