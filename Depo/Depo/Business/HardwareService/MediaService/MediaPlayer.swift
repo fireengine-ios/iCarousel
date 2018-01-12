@@ -124,7 +124,11 @@ final class MediaPlayer: NSObject {
         }
         else if keyPath == #keyPath(AVPlayer.currentItem) {
             let index = chooseIndex(for: currentIndex)
+            if items.count <= index || index < 0 {
+                return
+            }
             let duration = Float(CMTimeGetSeconds(items[index].asset.duration))
+            
             self.duration = duration
             currentItem = list[index]
             
@@ -215,6 +219,8 @@ final class MediaPlayer: NSObject {
                 currentIndex = 0
                 stop()
             }
+        } else {
+            stop()
         }
         
         delegates.invoke { delegate in
