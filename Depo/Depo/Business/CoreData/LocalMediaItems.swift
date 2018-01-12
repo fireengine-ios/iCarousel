@@ -42,6 +42,7 @@ extension CoreDataStack {
             debugPrint("number of not saved  ", notSaved.count)
             let start = Date().timeIntervalSince1970
             var i = 0
+            var addedObjects = [WrapData]()
             notSaved.forEach {
                 i += 1
                 debugPrint("local ", i)
@@ -59,7 +60,11 @@ extension CoreDataStack {
                 if i % 10 == 0 {
                     self.saveDataForContext(context: newBgcontext, saveAndWait: true)
                 }
+                
+                addedObjects.append(wrapData)
             }
+            
+            ItemOperationManager.default.addedLocalFiles(items: addedObjects)
             
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)
             let finish = Date().timeIntervalSince1970
@@ -169,6 +174,7 @@ extension CoreDataStack {
         allNonAccurateSavedLocalFiles.forEach {
             context.delete($0)
         }
-        
+        let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
+        ItemOperationManager.default.deleteItems(items: items)
     }
 }
