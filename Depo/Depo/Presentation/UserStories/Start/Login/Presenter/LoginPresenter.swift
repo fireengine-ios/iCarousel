@@ -78,9 +78,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func succesLogin() {
-        tokenStorage.isClearTokens = true
+        interactor.checkEULA()
         compliteAsyncOperationEnableScreen()
-        interactor.getAccountInfo()
     }
     
     private func showMessageHideSpinner(text: String) {
@@ -160,30 +159,20 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         return view
     }
     
-    private func isPhoneNumberEmpty(for accountInfo: AccountInfoResponse) -> Bool {
-        return accountInfo.phoneNumber == nil || accountInfo.phoneNumber?.isEmpty == true
-    }
-    
-    func successed(accountInfo: AccountInfoResponse) {
+    func openEmptyPhone() {
         compliteAsyncOperationEnableScreen()
+        tokenStorage.isClearTokens = true
         
-        if isPhoneNumberEmpty(for: accountInfo) {
-            
-            let textEnterVC = TextEnterController.with(
-                title: TextConstants.loginEnterGSM,
-                textPlaceholder: TextConstants.loginGSMNumber,
-                buttonTitle: TextConstants.save) { [weak self] enterText, vc in
-                    self?.newPhone = enterText
-                    self?.interactor.getTokenToUpdatePhone(for: enterText)
-                    vc.startLoading()
-            }
-            self.textEnterVC = textEnterVC
-            RouterVC().presentViewController(controller: textEnterVC)
-            
-        } else {
-            //ApplicationSession.sharedSession.saveData()
-            interactor.checkEULA()
+        let textEnterVC = TextEnterController.with(
+            title: TextConstants.loginEnterGSM,
+            textPlaceholder: TextConstants.loginGSMNumber,
+            buttonTitle: TextConstants.save) { [weak self] enterText, vc in
+                self?.newPhone = enterText
+                self?.interactor.getTokenToUpdatePhone(for: enterText)
+                vc.startLoading()
         }
+        self.textEnterVC = textEnterVC
+        RouterVC().presentViewController(controller: textEnterVC)
     }
     
     func failedAccountInfo(errorResponse: ErrorResponse) {
@@ -226,11 +215,10 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
         
-        //ApplicationSession.sharedSession.saveData()
         tokenStorage.isClearTokens = false
         
         startAsyncOperationDisableScreen()
-        interactor.checkEULA()
+        interactor.relogin()
     }
     
     func failedVerifyPhone(errorString: String) {

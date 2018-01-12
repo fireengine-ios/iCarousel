@@ -288,7 +288,34 @@ class AuthenticationService: BaseRequestService {
         
         SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
                 .responseString { [weak self] response in
-                    self?.loginHandler(response, sucess, fail)
+                    switch response.result {
+                    case .success(_):
+                        
+                        guard let headers = response.response?.allHeaderFields as? [String: Any] else {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
+                            return
+                        }
+                        
+                        if let accessToken = headers["X-Auth-Token"] as? String {
+                            self?.tokenStorage.accessToken = accessToken
+                        }
+                        
+                        if let refreshToken = headers["X-Remember-Me-Token"] as? String {
+                            self?.tokenStorage.refreshToken = refreshToken
+                        }
+                        
+                        /// must be after accessToken save logic
+                        if let emptyPhoneFlag = headers["X-Account-Warning"] as? String, emptyPhoneFlag == "EMPTY_MSISDN" {
+                            fail?(ErrorResponse.string("EMPTY_MSISDN"))
+                            return
+                        }
+
+                        sucess?()
+                        
+                    case .failure(let error):
+                        fail?(ErrorResponse.error(error))
+                    }
         }
     }
     
@@ -333,7 +360,6 @@ class AuthenticationService: BaseRequestService {
 
     func logout(success: SuccessLogout?) {
         DispatchQueue.main.async {
-//ApplicationSession.sharedSession.saveData()
             SingletonStorage.shared.accountInfo = nil
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
