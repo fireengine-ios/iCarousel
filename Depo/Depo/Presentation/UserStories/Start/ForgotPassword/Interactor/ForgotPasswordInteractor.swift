@@ -26,6 +26,13 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
             return
         }
         
+        guard !enteredCaptcha.isEmpty else {
+            DispatchQueue.main.async { [weak self] in
+                self?.output.requestFailed(withError: TextConstants.forgotPasswordErrorCaptchaFormatText)
+            }
+            return
+        }
+        
         let authenticationService = AuthenticationService()
         authenticationService.fogotPassword(forgotPassword: ForgotPassword(email: mail, attachedCaptcha: CaptchaParametrAnswer(uuid: captchaUDID, answer: enteredCaptcha)), success: { _ in
             DispatchQueue.main.async { [weak self] in
