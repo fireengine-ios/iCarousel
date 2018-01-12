@@ -68,9 +68,13 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
         userIconImageView.layer.masksToBounds = true
         
         editButton.isHidden = true
-        
-        output.viewIsReady()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        output.viewWillAppear()
+    }
+
     
     func reloadUserInfo() {
         output.reloadUserInfoRequered()
