@@ -22,18 +22,20 @@ class TurkcellSecurityPresenter: BasePresenter {
 extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
     func securityChanged(passcode: Bool, autoLogin: Bool) {
         
-        if interactor.isPasscodeEnabled, passcode {
+        if interactor.isPasscodeEnabled, passcode, passcode != interactor.turkcellPasswordOn {
             let router = RouterVC()
             let popUP = PopUpController.with(title: TextConstants.warning, message: TextConstants.turkcellSecurityWaringPasscode, image: .error, buttonTitle: TextConstants.ok, action: { [weak self] controller in
                 self?.startAsyncOperation()
                 self?.interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
+                controller.close()
             })
             router.rootViewController?.present(popUP, animated: true, completion: nil)
-        } else if interactor.isPasscodeEnabled, autoLogin  {
+        } else if interactor.isPasscodeEnabled, autoLogin, autoLogin != interactor.turkcellAutoLoginOn {
             let router = RouterVC()
             let popUP = PopUpController.with(title: TextConstants.warning, message: TextConstants.turkcellSecurityWaringAutologin, image: .error, buttonTitle: TextConstants.ok, action: { [weak self] controller in
                 self?.startAsyncOperation()
                 self?.interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
+                controller.close()
             })
             router.rootViewController?.present(popUP, animated: true, completion: nil)
         } else {
@@ -65,17 +67,6 @@ extension TurkcellSecurityPresenter: TurkcellSecurityInteractorOutput {
         asyncOperationSucces()
         view?.setupSecuritySettings(passcode: interactor.turkcellPasswordOn, autoLogin: interactor.turkcellAutoLoginOn)
     }
-//    func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool) {
-//        
-//    }
-//    
-//    func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool) {
-//        interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
-//    }
-//    
-//    func turkCellSecuritySettingsAccuered(passcode: Bool, autoLogin: Bool) {
-//        view.changeTurkCellSecurity(passcode: passcode, autologin: autoLogin)
-//    }
 }
 
 // MARK: TurkcellSecurityModuleInput
