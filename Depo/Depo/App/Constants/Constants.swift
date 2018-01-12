@@ -109,6 +109,7 @@ struct TextConstants {
     static let errorAlertYesBtnBackupAlreadyExist = NSLocalizedString("Yes", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let forgotPasswordErrorHandlingText = NSLocalizedString("Error Handling Under Constraction", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let forgotPasswordErrorNotRegisteredText = NSLocalizedString("This e-mail address is not registered. Please try again.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordErrorEmailNotFoundText = NSLocalizedString("Account not found for email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordErrorCaptchaText = NSLocalizedString("This text doesn't match. Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordCommonErrorText = NSLocalizedString("An error is occurred!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

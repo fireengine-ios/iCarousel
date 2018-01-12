@@ -41,7 +41,7 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     
     func checkErrorService(withErrorResponse response: Any) -> String {
         guard let response1 = response as? String else {
-            return TextConstants.forgotPasswordErrorHandlingText
+            return TextConstants.forgotPasswordErrorNotRegisteredText
         }
         
         if response1.contains("ACCOUNT_NOT_FOUND_FOR_EMAIL") {
