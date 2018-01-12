@@ -27,6 +27,10 @@ class SyncServiceManager {
         return (photoSyncService.status == .canceled && videoSyncService.status == .canceled)
     }
     
+    private var isSyncFailed: Bool {
+        return (photoSyncService.status == .failed && videoSyncService.status == .failed)
+    }
+    
     private var isSyncFinished: Bool {
         return (photoSyncService.status == .synced && videoSyncService.status == .synced)
     }
@@ -224,35 +228,39 @@ extension SyncServiceManager {
     }
     
     @objc private func onAutoSyncStatusDidChange() {
-        if isSyncCancelled {
-            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
-            CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
-            CardsManager.default.stopOperationWithType(type: .sync)
-            FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
-            return
-        }
-        
         if hasExecutingSync {
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
             return
         }
         
+        CardsManager.default.stopOperationWithType(type: .sync)
+        
         if hasPrepairingSync {
-            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             return
         }
         
         CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
-
-        if hasWaitingForWiFiSync || hasFailedSync || hasSyncCancelled {
+        
+        if hasWaitingForWiFiSync {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
+            return
         }
-
-        if isSyncFinished {
-            FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
+        
+        CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+        
+        if isSyncCancelled || isSyncFailed || isSyncFinished {
+            //TODO: show error?
+            return
         }
+        
+        if hasFailedSync || hasSyncCancelled {
+            //TODO: show error?
+        }
+        
+        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
     }
 }
 

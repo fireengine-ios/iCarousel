@@ -662,10 +662,13 @@ class WrapData: BaseDataSourceItem, Wrappered {
         patchToPreview = .remoteUrl(nil)
         status = .unknown
         tmpDownloadUrl = nil
-        
+
         let creationDate = Date()
-        super.init(uuid: nil, name: nil, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
         
+        if let fileName = name {
+            md5 = "\(fileName)\(fileSize)"
+        }
     }
     
     init(mediaItem: MediaItem) {

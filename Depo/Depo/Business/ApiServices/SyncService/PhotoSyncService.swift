@@ -45,7 +45,7 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         
         log.debug("PhotoSyncService waitForWiFi")
         
-        photoVideoService?.stopAllOperations()//FIXME: stop only photo sync
+        photoVideoService?.stopAllOperations()
         UploadService.default.cancelSyncOperations(photo: true, video: false)
     }
 }
