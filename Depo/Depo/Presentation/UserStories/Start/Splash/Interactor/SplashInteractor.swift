@@ -10,15 +10,15 @@ class SplashInteractor: SplashInteractorInput {
 
     weak var output: SplashInteractorOutput!
     
+    let authService = AuthenticationService()
+    
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
     
-    func startLoginInBackroung() {
-        output.startAsyncOperation()
-        
+    func startLoginInBackroung() {        
         let success: SuccessLogin = { [weak self] in
             self?.successLogin()
         }
@@ -27,18 +27,18 @@ class SplashInteractor: SplashInteractorInput {
             self?.failLogin()
         }
         
-        AuthenticationService().authenticate(success: success, fail: fail)
+        authService.authenticate(success: success, fail: fail)
     }
     
     func successLogin(){
         DispatchQueue.main.async {
+            ApplicationSession.sharedSession.saveData()
             self.output.onSuccessLogin()
         }
     }
     
     func failLogin(){
         DispatchQueue.main.async {
-            self.output.asyncOperationSucces()
             self.output.onFailLogin()
             if !ReachabilityService().isReachable {
                 self.output.onNetworkFail()
@@ -50,12 +50,10 @@ class SplashInteractor: SplashInteractorInput {
         let eulaService = EulaService()
         eulaService.eulaCheck(success: { [weak self] (successResponce) in
             DispatchQueue.main.async {
-                self?.output.asyncOperationSucces()
                 self?.output.onSuccessEULA()
             }
         }) { [weak self] (errorResponce) in
             DispatchQueue.main.async {
-                self?.output.asyncOperationSucces()
                 self?.output.onFailEULA()
             }
         }

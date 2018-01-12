@@ -29,6 +29,8 @@ class MailVerificationViewController: BaseViewController {
     
     weak var actionDelegate: MailVerificationViewControllerDelegate?
     
+    let authService = AuthenticationService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        UIBlurEffect()
@@ -73,12 +75,11 @@ class MailVerificationViewController: BaseViewController {
     
     private func verifyMail() {
         guard let email = inputTextField.text, email.count > 0 else {
-            CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: TextConstants.registrationCellPlaceholderEmail, okButtonText: TextConstants.ok)
+            UIApplication.showErrorAlert(message: TextConstants.registrationCellPlaceholderEmail)
             return
         }
         showSpiner()
         let newMail = inputTextField.text ?? ""
-        let authService = AuthenticationService()
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
                                 sucess: { [weak self] response in
                                     DispatchQueue.main.async {
@@ -91,7 +92,7 @@ class MailVerificationViewController: BaseViewController {
                                     DispatchQueue.main.async {
                                         self?.actionDelegate?.mailVerificationFailed()
                                         self?.hideSpiner()
-                                        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: TextConstants.notCorrectEmail, okButtonText: TextConstants.ok)
+                                        UIApplication.showErrorAlert(message: TextConstants.notCorrectEmail)
                                     }
         })
     }

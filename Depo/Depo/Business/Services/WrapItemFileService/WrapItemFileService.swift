@@ -51,22 +51,9 @@ class WrapItemFileService: WrapItemFileOperations {
     
     func delete(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         
-        let localAssets = assetsForlocalItems(files: deleteFiles)
         let successOperation: FileOperationSucces = {
-            
-            if let localAssetsW = localAssets,
-                localAssetsW.count > 0 {
-                LocalMediaStorage.default.removeAssets(deleteAsset: localAssetsW, success:  {
-
-                    let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
-                    CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
-                    success?()
-                }, fail: fail)
-                
-            } else {
-
-                success?()
-            }
+            success?()
+            ItemOperationManager.default.deleteItems(items: deleteFiles)
         }
         
         let failOperation: FailResponse = {  value in
@@ -84,6 +71,24 @@ class WrapItemFileService: WrapItemFileOperations {
                                  success: successOperation,
                                  fail: failOperation)
         
+    }
+    
+    func deleteLocalFiles(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let localAssets = assetsForlocalItems(files: deleteFiles)
+        if let localAssetsW = localAssets,
+            localAssetsW.count > 0 {
+            LocalMediaStorage.default.removeAssets(deleteAsset: localAssetsW, success:  {
+                
+                let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
+                DispatchQueue.main.async {
+                    CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
+                }
+                success?()
+            }, fail: fail)
+            
+        } else {
+            success?()
+        }
     }
     
     func move(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
@@ -117,22 +122,18 @@ class WrapItemFileService: WrapItemFileOperations {
             success?()
             return nil
         }
-        let successDetails: FileOperationSucces = {
-            let fileService = FileService()
-            fileService.details(uuids: items.map({ $0.uuid }), success: { (updatedItems) in
-                for item in updatedItems {
-                    if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
-                        itemToUpdate.metaData = item.metaData
-                    }
-                }
-                success?()
-            }, fail: fail)
-        }
+
+        
         return uploadService.uploadFileList(items: localFiles,
                                             uploadType: .syncToUse,
                                             uploadStategy: .WithoutConflictControl,
                                             uploadTo: .MOBILE_UPLOAD,
-                                            success: successDetails,
+                                            success: {
+                                                WrapItemFileService.waitItemsDetails(for: items,
+                                                                                     maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
+                                                                                     success: success,
+                                                                                     fail: fail)
+                                            },
                                             fail: fail)
     }
     
@@ -140,6 +141,25 @@ class WrapItemFileService: WrapItemFileOperations {
         let downloadItems = remoteWrapDataItems(files: items)
         
         remoteFileService.download(items: downloadItems, success: success, fail: fail)
+    }
+    
+    func download(itemsByAlbums: [AlbumItem: [Item]], success: FileOperationSucces?, fail: FailResponse?) {
+        let group = DispatchGroup()
+        
+        for (album, items) in itemsByAlbums {
+            let downloadItems = remoteWrapDataItems(files: items)
+            guard downloadItems.count > 0 else { continue }
+            group.enter()
+            remoteFileService.download(items: downloadItems, album: album, success: {
+                group.leave()
+            }, fail: { (error) in
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            success?()
+        }
     }
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?) {
@@ -181,6 +201,11 @@ class WrapItemFileService: WrapItemFileOperations {
             files.forEach {
                 $0.coreDataObject?.favoritesValue = favouritse
             }
+            if (favouritse){
+                ItemOperationManager.default.addFilesToFavorites(items: files)
+            }else{
+                ItemOperationManager.default.removeFileFromFavorites(items: files)
+            }
         }
         
         remoteFileService.medaDataRequest(param: param, success: success_, fail: fail)
@@ -210,4 +235,27 @@ class WrapItemFileService: WrapItemFileOperations {
         return items
     }
 
+    static private func waitItemsDetails(for items: [WrapData], currentAttempt: Int = 0, maxAttempts: Int, success: FileOperationSucces?, fail: FailResponse?) {
+        let fileService = FileService()
+        fileService.details(uuids: items.map({ $0.uuid }), success: { (updatedItems) in
+            for item in updatedItems {
+                if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
+                    itemToUpdate.metaData = item.metaData
+                    itemToUpdate.tmpDownloadUrl = item.tmpDownloadUrl
+                    itemToUpdate.status = item.status
+                }
+            }
+            let isCompleted = !items.contains(where: { $0.status != .active })
+            if isCompleted {
+                success?()
+            } else if currentAttempt < maxAttempts {
+                sleep(NumericConstants.detailsLoadingTimeAwait)
+                waitItemsDetails(for: items,
+                                 currentAttempt: currentAttempt + 1,
+                                 maxAttempts: maxAttempts,
+                                 success: success,
+                                 fail: fail)
+            }
+        }, fail: fail)
+    }
 }

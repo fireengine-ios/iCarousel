@@ -20,6 +20,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
     var cancelSelectionButton: UIBarButtonItem?
     
+    var backAsCancelBarButton: UIBarButtonItem?
+    
     var editingTabBar: BottomSelectionTabBarViewController?
     
     var isFavorites: Bool = false
@@ -39,6 +41,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     @IBOutlet weak var startCreatingFilesButton: BlueButtonWithWhiteText!
     
     @IBOutlet weak var topBarContainer: UIView!
+    
+    @IBOutlet weak var noFilesTopLabel: UILabel?
     
     var scrolliblePopUpView = ViewForPopUp()
     
@@ -64,7 +68,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         refresher = UIRefreshControl()
         collectionView!.alwaysBounceVertical = true
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        refresher.tintColor = ColorConstants.textGrayColor
+        refresher.tintColor = ColorConstants.whiteColor
         refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
         collectionView!.addSubview(refresher)
         
@@ -76,23 +80,26 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         cancelSelectionButton = UIBarButtonItem(customView: cancelButton)
         
+        let cancelBackButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
+        cancelBackButton.addTarget(self, action: #selector(onBackButton), for: .touchUpInside)
+        cancelBackButton.setTitle(TextConstants.cancelSelectionButtonTitle, for: .normal)
+        cancelBackButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelBackButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 19)
+        
+        backAsCancelBarButton = UIBarButtonItem(customView: cancelBackButton)
+        
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
         noFilesLabel.textColor = ColorConstants.textGrayColor
         noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         
+        noFilesTopLabel?.text = TextConstants.folderEmptyText
+        noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
+        noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        
         startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
         
-        
         output.viewIsReady(collectionView: collectionView)
-        let flag = output.needShowNoFileView()
-        
-        noFilesView.isHidden = !flag
-        if (flag){
-            noFilesLabel.text = output.textForNoFileLbel()
-            startCreatingFilesButton.setTitle(output.textForNoFileButton(), for: .normal)
-            noFilesImage.image = output.imageForNoFileImageView()
-        }
         
         //carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
         
@@ -118,12 +125,16 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         configurateNavigationBar()
+        configurateViewForPopUp()
     }
     
-    func configurateNavigationBar(){
+    func configurateViewForPopUp(){
+        CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
+    }
+    
+    func configurateNavigationBar() {
         homePageNavigationBarStyle()
         configureNavBarActions()
-        WrapItemOperatonManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -133,24 +144,23 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     deinit{
-         WrapItemOperatonManager.default.removeViewForNotification(view: scrolliblePopUpView)
+         CardsManager.default.removeViewForNotification(view: scrolliblePopUpView)
          NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - SearchBarButtonPressed
     
-   func configureNavBarActions() {
+   func configureNavBarActions(isSelecting: Bool = false) {
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { (_) in
             let router = RouterVC()
             let searchViewController = router.searchView()
-            searchViewController.modalPresentationStyle = .overCurrentContext
-            searchViewController.modalTransitionStyle = .crossDissolve
-            router.rootViewController?.present(searchViewController, animated: true, completion: nil)
+            router.pushViewControllerWithoutAnimation(viewController: searchViewController)
         })
         let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
             self?.output.moreActionsPressed(sender: NavigationBarList().more)
         })
-        navBarConfigurator.configure(right: [more, search], left: [])
+        let rightActions: [NavBarWithAction] = isSelecting ? [more] : [more, search]
+        navBarConfigurator.configure(right: rightActions, left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
@@ -160,6 +170,19 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         })
         navBarConfigurator.configure(right: [delete], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+    
+    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Swift.Void) {
+        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
+            deleteAction()
+        })
+        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+        })
+        navBarConfigurator.configure(right: [more, delete], left: [])
+        
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
     
     @IBAction func onStartCreatingFilesButton(){
@@ -189,11 +212,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func stopRefresher() {
-        self.refresher.endRefreshing()
+        DispatchQueue.main.async {
+            self.refresher.endRefreshing()
+        }
     }
     
     func showCustomPopUpWithInformationAboutAccessToMediaLibrary(){
-        CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.photosVideosViewHaveNoPermissionsAllertText, okButtonText: TextConstants.ok)
+        UIApplication.showErrorAlert(message: TextConstants.photosVideosViewHaveNoPermissionsAllertText)
     }
     
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool){
@@ -201,17 +226,17 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func startSelection(with numberOfItems: Int) {
-        self.navigationItem.leftBarButtonItem = cancelSelectionButton!
-        setTitle(withString: "\(numberOfItems) Selected")
+        navigationItem.leftBarButtonItem = cancelSelectionButton!
+        selectedItemsCountChange(with: numberOfItems)
         navigationBarWithGradientStyle()
-        configureNavBarActions()
+        configureNavBarActions(isSelecting: true)
         underNavBarBar?.setSorting(enabled: false)
     }
     
     func stopSelection() {
         self.navigationItem.leftBarButtonItem = nil
         homePageNavigationBarStyle()
-        configureNavBarActions()
+        configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
     }
     
@@ -219,9 +244,30 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
+    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String) {
+        noFilesLabel.text = text
+        noFilesImage.image = image
+        startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
+        noFilesView.isHidden = false
+    }
+    
+    func showNoFilesTop() {
+        noFilesTopLabel?.isHidden = false
+        topBarContainer.isHidden = true
+    }
+    
+    func hideNoFiles() {
+        noFilesView.isHidden = true
+        noFilesTopLabel?.isHidden = true
+        topBarContainer.isHidden = false
+    }
+    
     @objc func onCancelSelectionButton(){
-            output.onCancelSelection()
-        
+        output.onCancelSelection()
+    }
+    
+    @objc func onBackButton(){
+        RouterVC().popViewController()
     }
     
     func changeSortingRepresentation(sortType type: SortedRules) {
@@ -239,7 +285,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func selectedItemsCountChange(with count: Int) {
-        self.setTitle(withString: String(count) + " Selected")
+        setTitle(withString: String(count) + " Selected")
     }
     
     static let sliderH : CGFloat = 180

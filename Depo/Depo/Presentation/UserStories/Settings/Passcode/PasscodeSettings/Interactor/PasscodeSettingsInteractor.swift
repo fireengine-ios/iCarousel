@@ -23,8 +23,8 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
         passcodeStorage.clearPasscode()
     }
     
-    var isBiometricsAvailable: Bool {
-        return biometricsManager.isAvailable
+    var biometricsStatus: BiometricsStatus {
+        return biometricsManager.status
     }
     
     var isBiometricsEnabled: Bool {

@@ -40,12 +40,12 @@ extension CoreDataStack {
             let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
             
             debugPrint("number of not saved  ", notSaved.count)
-            
+            let start = Date().timeIntervalSince1970
             var i = 0
             notSaved.forEach {
                 i += 1
                 debugPrint("local ", i)
-                let info = localMediaStorage.fullInfoAboutAsset(asset: $0)
+                let info = localMediaStorage.shortInfoAboutAsset(asset: $0)
                 
                 let baseMediaContent = BaseMediaContent(curentAsset: $0,
                                                         urlToFile: info.url,
@@ -62,6 +62,8 @@ extension CoreDataStack {
             }
             
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+            let finish = Date().timeIntervalSince1970
+            debugPrint("All images and videos have been saved in \(finish - start) seconds")
         }
         
     }
@@ -91,17 +93,27 @@ extension CoreDataStack {
         guard list.count > 0 else {
             return
         }
-        let context = mainContext//newChildBackgroundContext
-        let predicate = NSPredicate(format: "localFileID IN %@", list)
-        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
-        items.forEach { context.delete($0) }
+        DispatchQueue.main.async {
+            let context = self.mainContext//newChildBackgroundContext
+            let predicate = NSPredicate(format: "localFileID IN %@", list)
+            let items:[MediaItem] = self.executeRequest(predicate: predicate, context:context)
+            items.forEach { context.delete($0) }
+            
+            self.saveDataForContext(context: context)
+        }
         
-        saveDataForContext(context: context)
     }
     
-    func  allLocalItem() -> [WrapData] {
+    func  allLocalItems() -> [WrapData] {
         let context = mainContext
         let predicate = NSPredicate(format: "localFileID != nil")
+        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
+        return items.flatMap{ $0.wrapedObject }
+    }
+    
+    func  allLocalItems(with localIds: [String]) -> [WrapData] {
+        let context = mainContext
+        let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
         let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
         return items.flatMap{ $0.wrapedObject }
     }

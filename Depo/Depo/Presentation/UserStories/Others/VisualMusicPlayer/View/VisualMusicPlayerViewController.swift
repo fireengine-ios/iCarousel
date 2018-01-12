@@ -20,7 +20,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
     
     let player: MediaPlayer = factory.resolve()
     private let alert = AlertFilesActionsSheetPresenterModuleInitialiser().createModule()
-    private let carouselItemFrameWidth: CGFloat = 232
+    private let carouselItemFrameWidth: CGFloat = 220
     
     var editingTabBar: BottomSelectionTabBarViewController?
 
@@ -86,10 +86,13 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         }
     }
     @IBAction func actionPrevButton(_ sender: UIButton) {
-        if player.playPrevious() {
+        if player.currentTime > 5 {
+            player.resetTime()
+        } else if player.playPrevious() {
             carouselView.scrollToItem(at: player.currentIndex, animated: true)
         }
     }
+    
     @IBAction func playbackSliderDidEndChanging(_ sender: UISlider) {
         player.seek(to: sender.value)
     }
@@ -136,6 +139,9 @@ extension VisualMusicPlayerViewController: MediaPlayerDelegate {
     func changedListItemsInMediaPlayer(_ mediaPlayer: MediaPlayer) {
         carouselView.reloadData()
     }
+    func closeMediaPlayer() {
+        output.closeMediaPlayer()
+    }
 }
 
 
@@ -167,18 +173,17 @@ extension VisualMusicPlayerViewController: iCarouselDataSource, iCarouselDelegat
     }
     
     func carousel(_ carousel: iCarousel, itemTransformForOffset offset: CGFloat, baseTransform transform: CATransform3D) -> CATransform3D {
-        let distance: CGFloat = 130
-        let z: CGFloat = -CGFloat(fminf(1.0, fabs(Float(offset)))) * distance
-        return CATransform3DTranslate(transform, offset * carousel.itemWidth, 0.0, z)
+        let z = -CGFloat(fmin(1.0, fabs(offset))) * 130
+        return CATransform3DTranslate(transform, offset * carousel.itemWidth, 0, z)
     }
     
     func carouselItemWidth(_ carousel: iCarousel) -> CGFloat {
-        return carouselItemFrameWidth
+        return carouselItemFrameWidth + 40
     }
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         if (option == .spacing) {
-            return value * 1.1
+            return value * 1.3
         }
         if (option == .visibleItems) {
             return 5

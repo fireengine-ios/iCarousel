@@ -86,6 +86,11 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         super.viewWillAppear(animated)
         
         navigationBarWithGradientStyle()
+        setTitle(withString: "")
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        blackNavigationBarStyle()
     }
     
     func setObject(object: BaseDataSourceItem){

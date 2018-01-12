@@ -58,6 +58,46 @@ enum ApplicationType: String {
     case xls = "xls"
     case pdf = "pdf"
     case ppt = "ppt"
+    
+    func bigIconImage() -> UIImage? {
+        switch self {
+        case .rar, .zip:
+            return #imageLiteral(resourceName: "fileBigIconAchive")
+        case .doc:
+            return #imageLiteral(resourceName: "fileBigIconDoc")
+        case .txt:
+            return #imageLiteral(resourceName: "fileBigIconTxt")
+        case .xls:
+            return #imageLiteral(resourceName: "fileBigIconXls")
+        case .pdf:
+            return #imageLiteral(resourceName: "fileBigIconPdf")
+        case .ppt:
+            return #imageLiteral(resourceName: "fileBigIconPpt")
+        default:
+            return nil
+        }
+    }
+    
+    func smallIconImage() -> UIImage? {
+        switch self {
+        case .rar:
+            return #imageLiteral(resourceName: "fileIconRar")
+        case .zip:
+            return #imageLiteral(resourceName: "fileIconZip")
+        case .doc:
+            return #imageLiteral(resourceName: "fileIconDoc")
+        case .txt:
+            return #imageLiteral(resourceName: "fileIconTxt")
+        case .xls:
+            return #imageLiteral(resourceName: "fileIconXls")
+        case .pdf:
+            return #imageLiteral(resourceName: "fileIconPdf")
+        case .ppt:
+            return #imageLiteral(resourceName: "fileIconPpt")
+        default:
+            return #imageLiteral(resourceName: "fileIconUnknown")
+        }
+    }
 }
 
 enum FileType: Equatable {
@@ -70,6 +110,7 @@ enum FileType: Equatable {
     case musicPlayList
     case allDocs
     case application(ApplicationType)
+
     
     var convertedToSearchFieldValue: FieldValue {
         
@@ -390,6 +431,8 @@ protocol  Wrappered  {
     
     var urlToFile: URL? { get }
     
+    var fileData: Data? { get }
+    
     var duration: String? { get }
     
     var uuid: String { get }
@@ -401,12 +444,27 @@ protocol  Wrappered  {
 
 
 class WrapData: BaseDataSourceItem, Wrappered {
-
+    enum Status: String {
+        case active = "ACTIVE"
+        case uploaded = "UPLOADED"
+        case transcoding = "TRANSCODING"
+        case transcodingFailed = "TRANSCODING_FAILED"
+        case unknown = "UNKNOWN"
+        
+        init(string: String?) {
+            if let statusString = string, let status = Status(rawValue: statusString) {
+                self = status
+            } else {
+                self = .unknown
+            }
+        }
+    }
+    
     var coreDataObject: MediaItem?
     
     var id: Int64?
 
-    let fileSize: Int64
+    var fileSize: Int64
     
     var favorites: Bool
     
@@ -418,14 +476,18 @@ class WrapData: BaseDataSourceItem, Wrappered {
 
     var metaData: BaseMetaData?
     
+    var status: Status
+    
     /* for remote content*/
-    private let tmpDownloadUrl: URL?
+    var tmpDownloadUrl: URL?
     
     var isUploading: Bool = false
     
     var urlToFile: URL? {
         return tmpDownloadUrl
     }
+    
+    var fileData: Data?
     
     var asset: PHAsset? {
         
@@ -455,6 +517,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         id = musicForCreateStory.id
         tmpDownloadUrl = musicForCreateStory.path
         favorites = false
+        status = .unknown
         patchToPreview = .remoteUrl(nil)
         // unuse parametrs
         fileSize =  Int64(0)
@@ -479,12 +542,28 @@ class WrapData: BaseDataSourceItem, Wrappered {
         duration = WrapData.getDuration(duration: baseModel.asset.duration)
             
         favorites = false
+        status = .unknown
         super.init()
         md5 = baseModel.md5
         
         name = baseModel.name
         if let fileName = name {
-            md5 = String(format: "%@%i", fileName, fileSize)
+            if #available(iOS 10.0, *) {//FIXME: hotfix
+                if fileSize == 0, let localAsset = asset {
+                    let resources = PHAssetResource.assetResources(for: localAsset)
+                    if let resource = resources.first {
+                        if let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong {
+                            let sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64))
+                            fileSize = sizeOnDisk
+                        }
+                    }
+                }
+                md5 = String(format: "%@%i", fileName, fileSize)
+            } else {
+                md5 = fileName
+            }
+            
+            
         }
         
         fileType = baseModel.fileType
@@ -519,6 +598,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = remote.tempDownloadURL
         patchToPreview = .remoteUrl(URL(string: ""))
         fileSize = remote.bytes ?? Int64(0)
+        status = Status(string: remote.status)
         super.init()
         md5 = remote.hash ?? "not hash "
         
@@ -575,11 +655,24 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
+    init(imageData: Data) {
+        fileData = imageData
+        fileSize = Int64(imageData.count)
+        favorites = false
+        patchToPreview = .remoteUrl(nil)
+        status = .unknown
+        tmpDownloadUrl = nil
+        
+        let creationDate = Date()
+        super.init(uuid: nil, name: nil, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
+        
+    }
+    
     init(mediaItem: MediaItem) {
         coreDataObject = mediaItem
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
-        
+        status = .unknown
         var url: URL? = nil
         if let url_ = mediaItem.urlToFileValue {
             url = URL(string: url_)

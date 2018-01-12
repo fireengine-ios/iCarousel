@@ -56,9 +56,9 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var tempoRow: UITableViewCell
         
-        if indexPath.row == 1 {
+        if indexPath.row == 0 {
             tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.gSMUserInputCellID, for: indexPath)
-        } else if indexPath.row == 0 {
+        } else if indexPath.row == 1 {
             tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.baseUserInputCellViewID,
                                                      for: indexPath)
         } else {

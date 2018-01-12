@@ -10,11 +10,9 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     
     var dataStorage: PhoneVereficationDataStorage = PhoneVereficationDataStorage()
     
-    let authService = AuthenticationService()
+    let authenticationService = AuthenticationService()
     
     weak var output: PhoneVereficationInteractorOutput!
-    
-//    let customPopUP = CustomPopUp()
     
     var attempts: Int = 0
     
@@ -42,27 +40,28 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func resendCode() {
-        authService.resendVerificationSMS(resendVerification: ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken!), sucess: { [weak self] _ in
-            DispatchQueue.main.async { [weak self] in
+        attempts = 0
+        authenticationService.resendVerificationSMS(resendVerification: ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken!), sucess: { [weak self] _ in
+            DispatchQueue.main.async {
                 self?.output.resendCodeRequestSuccesed()
                 
             }
         }, fail: { [weak self] errorResponse in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 self?.output.resendCodeRequestFailed(with: errorResponse)
             }
         })
     }
     
     func verifyCode(code: String) {
-        authService.verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "", otp: code), sucess:{ [weak self]  _ in
-            DispatchQueue.main.async { [weak self] in
+        authenticationService.verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "", otp: code), sucess:{ [weak self]  _ in
+            DispatchQueue.main.async {
                 self?.output.verificationSucces()
                 
             }
             
         }, fail:{ [weak self] errorRespose in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
                 }
@@ -70,14 +69,16 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                 if self.attempts >= 3 {
                     self.attempts = 0
                     self.output.reachedMaxAttempts()
+                    self.output.vereficationFailed(with: TextConstants.promocodeBlocked)
+                } else {
+                    self.output.vereficationFailed(with: TextConstants.phoneVereficationNonValidCodeErrorText)
                 }
-                self.output.vereficationFailed(with: errorRespose)
             }
         })
     }
     
     func showPopUp(with text: String) {
-        CustomPopUp.sharedInstance.showCustomAlert(withText: text, okButtonText: TextConstants.ok)
+        UIApplication.showErrorAlert(message: text)
     }
     
     func authificate(atachedCaptcha: CaptchaParametrAnswer?) {
@@ -86,16 +87,14 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
 //            output.needShowCaptcha()
             return
         }
-        
-        let authenticationService = AuthenticationService()
-        
+
         let user = AuthenticationUser(login          : dataStorage.signUpUserInfo.phone,
                                       password       : dataStorage.signUpUserInfo.password,
                                       rememberMe     : true,
                                       attachedCaptcha: atachedCaptcha)
         
-        authenticationService.login(user: user, sucess: {
-            DispatchQueue.main.async { [weak self] in
+        authenticationService.login(user: user, sucess: { [weak self] in
+            DispatchQueue.main.async {
                 self?.output.succesLogin()
             }
         }, fail: { [weak self] (errorResponse)  in
@@ -105,7 +104,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                 self?.attempts += 1
             }
             
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 self?.output.failLogin(message: errorResponse.description)
             }
         })

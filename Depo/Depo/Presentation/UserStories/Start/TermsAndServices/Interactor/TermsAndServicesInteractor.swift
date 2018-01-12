@@ -6,12 +6,13 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class TermsAndServicesInteractor: TermsAndServicesInteractorInput, CustomPopUpAlertActions {
+class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
 
     weak var output: TermsAndServicesInteractorOutput!
     let eulaService = EulaService()
     
     let dataStorage = TermsAndServicesDataStorage()
+    let authenticationService = AuthenticationService()
     
     var isFromLogin = false
     
@@ -54,16 +55,15 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput, CustomPopUpAl
     }
     
     func signUpUser() {
-        let authenticationService = AuthenticationService()
+        
         guard let sigUpInfo = ApplicationSession.sharedSession.signUpInfo,
             let eulaId = eula?.id
             else { return }
         
         let signUpUser = SignUpUser(phone: sigUpInfo.phone, mail: sigUpInfo.mail, password: sigUpInfo.password, eulaId: eulaId)
         
-        authenticationService.signUp(user: signUpUser, sucess: {  result in
-            DispatchQueue.main.async { [weak self] in
-                
+        authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
+            DispatchQueue.main.async {
                 guard let t = result as? SignUpSuccessResponse else {
                         return
                 }
@@ -78,14 +78,6 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput, CustomPopUpAl
                 self?.output.signupFailed(errorResponce: errorResponce)
             }
         })
-    }
-    
-    func cancelationAction() {
-        output.popUpPressed()
-    }
-    
-    func otherAction() {
-        
     }
     
     func applyEula(){

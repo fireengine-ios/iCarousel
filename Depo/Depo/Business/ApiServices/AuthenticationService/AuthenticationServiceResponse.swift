@@ -155,7 +155,6 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
     }
     
     private func handleSuccess(data: Data?, response:URLResponse?) {
-        
         if let httpResponse = response as? HTTPURLResponse {
             if 200...299 ~= httpResponse.statusCode {
                 
@@ -167,12 +166,16 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
                     case .NoneFormat: break
                 }
 
-            } else if let data = data, let value = JSON(data: data)["value"].string {
-                let error = ServerValueError(value: value, code: httpResponse.statusCode)
-                fail?(.error(error))
-            } else if let data = data, let status = JSON(data: data)["status"].string {
-                let error = ServerStatusError(status: status, code: httpResponse.statusCode)
-                fail?(.error(error))
+            } else if let data = data {
+                if let value = JSON(data: data)["value"].string {
+                    let error = ServerValueError(value: value, code: httpResponse.statusCode)
+                    fail?(.error(error))
+                } else if let status = JSON(data: data)["status"].string {
+                    let error = ServerStatusError(status: status, code: httpResponse.statusCode)
+                    fail?(.error(error))
+                } else if let text = String(data: data, encoding: .utf8) {
+                    fail?(.string(text))
+                }
             } else {
                 fail?(.httpCode(httpResponse.statusCode))
             }

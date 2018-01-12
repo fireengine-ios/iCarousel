@@ -6,15 +6,11 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput, SettingsInteractorOutput, CustomPopUpAlertActions {
+class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput, SettingsInteractorOutput {
     
     weak var view: SettingsViewInput!
-    
     var interactor: SettingsInteractorInput!
-    
     var router: SettingsRouterInput!
-
-    let customPopUp = CustomPopUp()
     
     var isPasscodeEmpty: Bool {
         return interactor.isPasscodeEmpty
@@ -33,12 +29,18 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func onLogout(){
-        customPopUp.delegate = self
-        customPopUp.showCustomAlert(withTitle: "",
-                                    withText: TextConstants.settingsViewLogoutCheckMessage,
-                                    firstButtonText: TextConstants.ok,
-                                    secondButtonText: TextConstants.cancel)
-        
+        let controller = PopUpController.with(title: TextConstants.settingsViewLogoutCheckMessage,
+                                              message: nil,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { [weak self] vc in
+                                                vc.close { [weak self] in
+                                                    self?.startAsyncOperation()
+                                                    self?.interactor.checkConnectedToNetwork()
+                                                }
+        })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
     func goToOnboarding(){
@@ -66,7 +68,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func onUpdatUserInfo(userInfo: AccountInfoResponse){
-        router.goToUserInfo(userInfo: userInfo)
+        router.goToUserInfo(userInfo: userInfo, isTurkcellUser: interactor.isTurkcellUser)
     }
     
     func goToActivityTimeline() {
@@ -98,20 +100,8 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         interactor.updateUserInfo(mail: mail)
     }
     
-    func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool) {
-        
-    }
-    
-    func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool) {
-        interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
-    }
-    
-    func turkCellSecuritySettingsAccuered(passcode: Bool, autoLogin: Bool) {
-        view.changeTurkCellSecurity(passcode: passcode, autologin: autoLogin)
-    }
-    
-    func turkCellSecurityfailed() {
-        
+    func goTurkcellSecurity() {
+        inNeedOfMailVerefication() ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity()
     }
     
     override func outputView() -> Waiting? {
@@ -150,19 +140,18 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         asyncOperationSucces()
         router.goToConnectedToNetworkFailed()
     }
-
-    //MARK: - CustomPopUpAlertActions
-
-    func cancelationAction() {
-        // Logout
-        startAsyncOperation()
-        interactor.checkConnectedToNetwork()
-    }
-    
-    func otherAction() {
-    }
     
     func openPasscode(handler: @escaping () -> Void) {
         router.openPasscode(handler: handler)
+    }
+}
+
+extension SettingsPresenter: MailVerificationViewControllerDelegate {
+    func mailVerified(mail: String) {
+        mailUpdated(mail: mail)
+    }
+    
+    func mailVerificationFailed() {
+        
     }
 }

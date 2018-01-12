@@ -33,6 +33,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         
         if fromSettings {
             view.backgroundColor = ColorConstants.whiteColor
+            navigationBarWithGradientStyle()
         } else {
             view.backgroundColor = UIColor.lrTiffanyBlue
         }
@@ -42,10 +43,8 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if self.isMovingFromParentViewController {
-            let model = dataSource.createSettingsAutoSyncModel()
-            output.saveChanges(setting: model)
-        }
+        let model = dataSource.createSettingsAutoSyncModel()
+        output.saveChanges(setting: model)
 
     }
     
@@ -78,8 +77,6 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
     @IBAction func onStartUsingButton(){
         let model = dataSource.createSettingsAutoSyncModel()
         output.saveChanges(setting: model)
-        
-        output.startLifeBoxPressed()
     }
     
     @IBAction func onSkipButtn(){

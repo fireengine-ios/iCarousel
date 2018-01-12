@@ -15,6 +15,9 @@ enum CaptchaType: String {
 }
 
 struct CaptchaParametr: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     let uuid: String
     let type: String
@@ -35,6 +38,9 @@ struct CaptchaParametr: RequestParametrs {
 }
 
 struct CaptchaParametrAnswer: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     let uuid: String
     let answer: String
@@ -55,6 +61,9 @@ struct CaptchaParametrAnswer: RequestParametrs {
 }
 
 struct ValidateCaptchaParametr: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
     
     let uuid: String
     let value: String
@@ -94,6 +103,7 @@ class CaptchaResponse: ObjectRequestResponse  {
     }
     
     required init(withJSON: JSON?) {
+        log.debug("CaptchaResponse init(withJSON:) has not been implemented")
         fatalError("init(withJSON:) has not been implemented")
     }
 }
@@ -109,6 +119,8 @@ class CaptchaService: BaseRequestService {
     }
     
     func getCaptcha(type: CaptchaType = .image, sucess:SuccessResponse?, fail: FailResponse?   ) {
+        log.debug("CaptchaService getCaptcha")
+
         uuid = UUID().description
         let param = CaptchaParametr(uuid: uuid, type: type.rawValue)
         let handler = BaseResponseHandler<CaptchaResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat:.DataFormat)

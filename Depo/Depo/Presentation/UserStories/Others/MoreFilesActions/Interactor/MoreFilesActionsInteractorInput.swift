@@ -14,7 +14,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool)
     
-    func edit(item: [BaseDataSourceItem])
+    func edit(item: [BaseDataSourceItem], complition: (() -> Void)?)
     
     func delete(item: [BaseDataSourceItem])
     
@@ -68,4 +68,6 @@ protocol MoreFilesActionsInteractorInput {
     func albumDetails(items: [BaseDataSourceItem])
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem])
+    
+    func deleteDeviceOriginal(items: [BaseDataSourceItem])
 }

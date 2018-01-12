@@ -10,6 +10,9 @@ import Foundation
 
 enum AccountType {
     case turkcell
-    case subTurkcell /// Ukranian/Cyprus/Moldovian
     case all
+    case ukranian
+    case cyprus
+    case moldovian
 }
+

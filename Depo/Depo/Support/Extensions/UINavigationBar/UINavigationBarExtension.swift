@@ -54,6 +54,8 @@ extension UIViewController {
         if let view = navBar?.viewWithTag(tagHomeView)  {
             view.removeFromSuperview()
         }
+        
+        setStatusBarBackgroundColor(color: UIColor.clear)
     }
     
     func backButtonForNavigationItem(title: String) {
@@ -66,8 +68,17 @@ extension UIViewController {
     }
     
     func setNavigationTitle(title: String) {
+        self.navigationItem.titleView = nil
         navigationItem.title = title
         navBar?.titleTextAttributes = [NSAttributedStringKey.font: UIFont.TurkcellSaturaDemFont(size: 19), NSAttributedStringKey.foregroundColor: UIColor.white]
+    }
+    
+    func setStatusBarBackgroundColor(color: UIColor) {
+        UIApplication.shared.statusBarView?.backgroundColor = color
+    }
+    
+    func setNavigationBackgroundColor(color: UIColor) {
+        navBar?.backgroundColor = color
     }
     
     func hidenNavigationBarStyle() {
@@ -101,6 +112,9 @@ extension UIViewController {
     
     func blackNavigationBarStyle() {
         defaultNavBarStyle()
+        
+        navBar?.backgroundColor = UIColor.black
+        setStatusBarBackgroundColor(color: UIColor.black)
     }
     
     func navigationBarWithGradientStyleWithoutInsets() {
@@ -173,20 +187,28 @@ extension UIViewController {
         if let _ = subTitle {
             navigationItem.title = nil
             navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
-            let delta: CGFloat = 50.0
-            let weihth = Device.winSize.width - delta*2.0
-            let mainTitleLabel = UILabel(frame: CGRect(x: delta, y: 0, width: weihth, height: 40))
-            mainTitleLabel.backgroundColor = UIColor.clear
-            mainTitleLabel.numberOfLines = 2
-            mainTitleLabel.textAlignment = .center
-            mainTitleLabel.textColor = UIColor.white
             
-            let attributtedText = NSMutableAttributedString(string: title + "\n" + subTitle)
-            attributtedText.addAttributes([NSAttributedStringKey.font : UIFont.TurkcellSaturaDemFont(size: 19.0)], range: NSMakeRange(0, (title as NSString).length))
-            attributtedText.addAttributes([NSAttributedStringKey.font : UIFont.TurkcellSaturaMedFont(size: 12.0)], range: NSMakeRange((title as NSString).length + 1, (subTitle as NSString).length))
-            mainTitleLabel.attributedText = attributtedText
-            mainTitleLabel.tag = tagTitleView
-            navBar?.addSubview(mainTitleLabel)
+            let titleLabel = UILabel()
+            titleLabel.backgroundColor = UIColor.clear
+            titleLabel.textColor = UIColor.white
+            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 19.0)
+            titleLabel.text = title
+ 
+            let subtitleLabel = UILabel()
+            subtitleLabel.backgroundColor = UIColor.clear
+            subtitleLabel.textColor = UIColor.white
+            subtitleLabel.font = UIFont.TurkcellSaturaMedFont(size: 12.0)
+            subtitleLabel.text = subTitle
+            
+            let mainStackView = UIStackView()
+            mainStackView.axis = .vertical
+            mainStackView.distribution = .fillEqually
+            mainStackView.alignment = .center
+            mainStackView.addArrangedSubview(titleLabel)
+            mainStackView.addArrangedSubview(subtitleLabel)
+            mainStackView.tag = tagTitleView
+            
+            self.navigationItem.titleView = mainStackView
         } else {
             self.navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
             self.navigationItem.title = title

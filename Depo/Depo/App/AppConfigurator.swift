@@ -13,19 +13,36 @@ class AppConfigurator {
     
     static let dropboxManager: DropboxManager = factory.resolve()
     
-    class func applicationStarted(){
+    class func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         ApplicationSessionManager.start()
         dropboxManager.start()
         
-        CoreDataStack.default.appendLocalMediaItems(nil)
         setVersionAndBuildNumber()
-        self.configureSDWebImage()
+        configureSDWebImage()
+        setupCropy()
+        
+        CoreDataStack.default.appendLocalMediaItems {
+            startMenloworks(with: launchOptions)
+        }
     }
     
     class private func configureSDWebImage() {
         SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024   // 100Mb
         SDImageCache.shared().config.maxCacheAge = 7 * 24 * 60 * 60     // 7 days
         SDImageCache.shared().config.shouldCacheImagesInMemory = false
+    }
+    
+    class private func setupCropy() {
+        guard let cropyConfig = CRYConfiguration.sharedInstance() else { return }
+        cropyConfig.shareType = SharedTypeImage
+        cropyConfig.origin = "http://www.cropyioslifebox.com"
+        cropyConfig.apiKey = "57f38c7d-1762-43e7-9ade-545fed50dd04"
+        
+        cropyConfig.headerColor = UIColor.lrTealish
+        cropyConfig.headerTitleColor = UIColor.white
+        
+        cropyConfig.cropHeaderColor = UIColor.lrTealish
+        cropyConfig.cropHeaderTitleColor = UIColor.white
     }
     
     //MARK: - settings bundle
@@ -42,5 +59,17 @@ class AppConfigurator {
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
         UserDefaults.standard.set(build, forKey: "build_preference")
     }
-    //MARK:-------
+    
+    class private func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        log.debug("AppConfigurator startMenloworks")
+        
+        let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.sound, UIUserNotificationType.badge]
+        let notificationTypes = NSInteger(types.rawValue)
+        
+        DispatchQueue.main.async {
+            MPush.register(forRemoteNotificationTypes: notificationTypes)
+            MPush.applicationDidFinishLaunching(options: launchOptions)
+        }
+    }
+    
 }

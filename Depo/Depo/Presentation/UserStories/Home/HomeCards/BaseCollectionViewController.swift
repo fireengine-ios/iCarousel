@@ -12,7 +12,6 @@ class BaseCollectionViewController: UIViewController {
 
     var calculatedH:CGFloat = 0
     var calculatedW:CGFloat = 0
-    let custoPopUp = CustomPopUp()
     
     class func getSizeFoCurrentCell()->CGSize{
         return CGSize(width: 90.0, height: 90.0)

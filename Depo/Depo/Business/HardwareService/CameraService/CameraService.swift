@@ -26,6 +26,8 @@ import AVFoundation
 //    }
     
     func cameraIsAvalible (cameraGranted: @escaping CameraGranted) {
+        log.debug("CameraService cameraIsAvalible")
+
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             cameraGranted(true)
@@ -38,22 +40,32 @@ import AVFoundation
     }
     
     func showCamera(onViewController sourceViewViewController: UIViewController) {
+        log.debug("CameraService showCamera")
+
         cameraIsAvalible { [weak self] accessGranted in
-            guard accessGranted else {
-                self?.showAccessAlert()
+            guard let `self` = self else {
                 return
             }
             
-            self?.showPickerController(type: .camera, onViewController: sourceViewViewController)
+            guard accessGranted else {
+                self.showAccessAlert()
+                return
+            }
+            
+            self.showPickerController(type: .camera, onViewController: sourceViewViewController)
         }
     }
     
     func showImagesPicker(onViewController sourceViewViewController: UIViewController) {
+        log.debug("CameraService showImagesPicker")
+
         self.showPickerController(type: .photoLibrary, onViewController: sourceViewViewController)
     }
     
     private func showPickerController(type: UIImagePickerControllerSourceType,
                                       onViewController sourceViewViewController: UIViewController) {
+        log.debug("CameraService showPickerController")
+
         guard let cameraSupportedVC = sourceViewViewController as?
             (UIImagePickerControllerDelegate & UINavigationControllerDelegate) else {
                 debugPrint("this VC does not support camera picker delegate")
@@ -65,24 +77,26 @@ import AVFoundation
         picker.delegate = cameraSupportedVC
         picker.allowsEditing = true
         
-        DispatchQueue.main.async(execute: {
+        DispatchQueue.main.async {
             sourceViewViewController.present(picker,
                                              animated: true,
                                              completion: nil)
-        })
+        }
     }
     
     private func showAccessAlert() {
-        CustomPopUp.sharedInstance.showCustomAlert(
-            withTitle: TextConstants.cameraAccessAlertTitle,
-            titleAligment: .center,
-            withText: TextConstants.cameraAccessAlertText, warningTextAligment: .center,
-            firstButtonText: TextConstants.cameraAccessAlertNo,
-            secondButtonText: TextConstants.cameraAccessAlertGoToSettings,
-            isShadowViewShown: true,
-            secondCustomAction: {
-                CustomPopUp.sharedInstance.hideAll()
-                UIApplication.shared.openSettings()
+        log.debug("CameraService showAccessAlert")
+
+        let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
+                                              message: TextConstants.cameraAccessAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.cameraAccessAlertNo,
+                                              secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
+                                              secondAction: { vc in
+                                                vc.close {
+                                                    UIApplication.shared.openSettings()
+                                                }
         })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
 }

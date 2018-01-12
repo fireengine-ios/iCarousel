@@ -8,15 +8,20 @@
 
 import UIKit
 
-protocol BaseFileContentViewDeleGate{
+protocol BaseFileContentViewDeleGate: class {
     func tapOnSelectedItem()
+    
+    func pageToRight()
+    func pageToLeft()
 }
 
 class BaseFileContentView: UIView {
     
+    let turnPageOffset: CGFloat = 30
+    
     typealias Item = WrapData
     
-    var delegate:BaseFileContentViewDeleGate?
+    weak var delegate: BaseFileContentViewDeleGate? // Dele Gate ?
     var index: Int = -1
 
     @IBOutlet weak var imageView: LoadingImageView!
@@ -28,7 +33,7 @@ class BaseFileContentView: UIView {
     @IBOutlet weak var webView: UIWebView!
 
     
-    class func initFromXib()->BaseFileContentView{
+    class func initFromXib() -> BaseFileContentView {
         let view = UINib(nibName: "BaseFileContentView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! BaseFileContentView
         view.configurateView()
         return view
@@ -40,6 +45,8 @@ class BaseFileContentView: UIView {
     
     func setObject(object:Item, index: Int) {
         webView.isHidden = true
+//        webView.scrollView.bounces = false
+        webView.scrollView.delegate = self
         imageView.image = nil
         playVideoButton.isHidden = true
         self.index = index
@@ -49,7 +56,6 @@ class BaseFileContentView: UIView {
             playVideoButton.isHidden = !(object.fileType == FileType.video)
         } else if object.fileType != .audio {
             if object.fileType.isUnSupportedOpenType {
-                
                 imageView.isHidden = true
                 webView.isHidden = false
                 if let url = object.urlToFile {
@@ -59,10 +65,24 @@ class BaseFileContentView: UIView {
         }
     }
     
-    @IBAction func onPlayVideoButton(){
+    @IBAction func onPlayVideoButton() {
         if (delegate != nil){
             delegate?.tapOnSelectedItem()
         }
     }
     
+}
+
+extension BaseFileContentView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollWidth = webView.scrollView.frame.size.width
+        let scrollOffsetX = webView.scrollView.contentOffset.x
+        
+        if scrollWidth + scrollOffsetX > webView.scrollView.contentSize.width + scrollWidth * 0.15 {
+            delegate?.pageToRight()
+        } else if scrollOffsetX < 0 - scrollWidth * 0.15 {
+            delegate?.pageToLeft()
+        }
+        
+    }
 }

@@ -17,6 +17,7 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func models(models:[BaseCellModel])
     
     func needShowCaptcha()
+    func failedBlockError()
     
     func foundCoutryPhoneCode(code: String, plus: Bool)
     
@@ -31,4 +32,16 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func preparedTimePassed(date: Date, forUserName name: String)
     
     func userStillBlocked(user: String)
+    
+    func successed(accountInfo: AccountInfoResponse)
+    func failedAccountInfo(errorResponse: ErrorResponse)
+    
+    func successed(tokenUpdatePhone: SignUpSuccessResponse)
+    func failedUpdatePhone(errorResponse: ErrorResponse)
+    
+    func successed(resendUpdatePhone: SignUpSuccessResponse)
+    func failedResendUpdatePhone(errorResponse: ErrorResponse)
+    
+    func successedVerifyPhone()
+    func failedVerifyPhone(errorString: String)
 }

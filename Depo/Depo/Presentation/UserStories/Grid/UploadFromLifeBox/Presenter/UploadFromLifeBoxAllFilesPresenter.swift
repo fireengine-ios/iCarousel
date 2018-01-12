@@ -30,14 +30,18 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     }
     
     override func onMaxSelectionExeption(){
+        log.debug("UploadFromLifeBoxPhotosPresenter onMaxSelectionExeption")
+
         let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
-        CustomPopUp.sharedInstance.showCustomAlert(withText: text, okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
+        UIApplication.showErrorAlert(message: text)
     }
     
     override func onNextButton(){
+        log.debug("UploadFromLifeBoxPhotosPresenter onNextButton")
+
         let array = dataSource.getSelectedItems()
         if (array.isEmpty){
-            custoPopUp.showCustomAlert(withText: TextConstants.uploadFromLifeBoxNoSelectedPhotosError, okButtonText: TextConstants.uploadFromLifeBoxEmptyFolderButtonText)
+            UIApplication.showErrorAlert(message: TextConstants.uploadFromLifeBoxNoSelectedPhotosError)
         }else{
             guard let wrapArray = array as? [Item] else {
                 return
@@ -55,6 +59,8 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]){
+        log.debug("UploadFromLifeBoxPhotosPresenter onItemSelected")
+
         guard let wrapDataItem = item as? WrapData, let isFolder = wrapDataItem.isFolder else{
             super.onItemSelected(item: item, from: data)
             return
@@ -70,6 +76,8 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     }
     
     func uploadOperationSuccess(){
+        log.debug("UploadFromLifeBoxPhotosPresenter uploadOperationSuccess")
+
         guard let uploadView = view as? UploadFromLifeBoxViewInput else{
             return
         }

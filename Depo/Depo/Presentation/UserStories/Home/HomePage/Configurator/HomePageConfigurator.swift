@@ -24,7 +24,8 @@ class HomePageModuleConfigurator {
         let presenter = HomePagePresenter()
         presenter.view = viewController
         presenter.router = router
-
+        router.presenter = presenter
+        
         let interactor = HomePageInteractor()
         interactor.output = presenter
 

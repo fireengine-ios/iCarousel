@@ -14,23 +14,21 @@ class PackagesPresenter {
     var activeSubscriptions: [SubscriptionPlanBaseResponse] = []
     var accountType = AccountType.all
     
-    private func accountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
+    private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
         if accountType == "TURKCELL" {
             return AccountType.turkcell
         } else {
             let plans = subscriptionPlans.flatMap { $0.subscriptionPlanRole }
-            var isSubTur = false
             for plan in plans {
-                if plan.hasPrefix("lifebox") || plan.hasPrefix("kktcell") || plan.hasPrefix("moldcell") {
-                    isSubTur = true
-                    break
+                if plan.hasPrefix("lifebox") {
+                    return AccountType.ukranian
+                } else if plan.hasPrefix("kktcell") {
+                    return AccountType.cyprus
+                } else if plan.hasPrefix("moldcell") {
+                    return AccountType.moldovian
                 }
             }
-            if isSubTur {
-                return AccountType.subTurkcell
-            } else {
-                return AccountType.all
-            }
+            return AccountType.all
         }
     }
     
@@ -54,13 +52,18 @@ extension PackagesPresenter: PackagesViewOutput {
     func didPressOn(plan: SubscriptionPlan) {
         switch accountType {
         case .turkcell:
-            if let offer = plan.model as? OfferServiceResponse { /// from active subscription list
+            if let offer = plan.model as? OfferServiceResponse { /// purchase, from active subscription list
                 view?.showActivateOfferAlert(for: offer)
-            } else {
-                view?.showCancelOfferAlert(for: accountType)
+            } else if let quota = (plan.model as? SubscriptionPlanBaseResponse)?.subscriptionPlanQuota { /// cancel
+                let message = String(format: TextConstants.offersCancelTurkcell, quota.bytesString)
+                view?.showCancelOfferAlert(with: message)
             }
-        case .subTurkcell:
-            view?.showCancelOfferAlert(for: accountType)
+        case .ukranian:
+            view?.showCancelOfferAlert(with: TextConstants.offersCancelUkranian)
+        case .cyprus:
+            view?.showCancelOfferAlert(with: TextConstants.offersCancelCyprus)
+        case .moldovian:
+            view?.showCancelOfferAlert(with: TextConstants.offersCancelMoldcell)
         case .all:
             /// maybe will be need view?.startActivityIndicator() + stop
             if let offer = plan.model as? OfferApple {
@@ -104,7 +107,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     func optInReachedMaxAttempts(_ optInVC: OptInController) {
         optInVC.showResendButton()
         optInVC.dropTimer()
-        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: TextConstants.promocodeBlocked, okButtonText: TextConstants.ok)
+        UIApplication.showErrorAlert(message: TextConstants.promocodeBlocked)
     }
     
     func optInNavigationTitle() -> String {
@@ -142,7 +145,8 @@ extension PackagesPresenter: PackagesInteractorOutput {
         optInVC?.view.endEditing(true)
         
         if optInVC?.increaseNumberOfAttemps() == false {
-            CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: TextConstants.promocodeInvalid, okButtonText: TextConstants.ok)
+            let vc = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: TextConstants.promocodeInvalid, image: .error, buttonTitle: TextConstants.ok)
+            optInVC?.present(vc, animated: false, completion: nil)
         }
     }
     
@@ -155,8 +159,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
     func successed(activeSubscriptions: [SubscriptionPlanBaseResponse]) {
         interactor.getAccountType()
         self.activeSubscriptions = activeSubscriptions
-        let subscriptionPlans = interactor.convertToASubscriptionList(activeSubscriptionList: activeSubscriptions)
-        view?.display(subscriptionPlans: subscriptionPlans)
     }
     
     func successed(tokenForOffer: String) {
@@ -177,12 +179,16 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(accountTypeString: String) {
-        accountType = accountType(for: accountTypeString, subscriptionPlans: activeSubscriptions)
+        accountType = getAccountType(for: accountTypeString, subscriptionPlans: activeSubscriptions)
         switch accountType {
         case .turkcell:
             view?.startActivityIndicator()
             interactor.checkJobExists()
-        case .subTurkcell:
+        case .ukranian:
+            view?.showSubTurkcellOpenAlert(with: TextConstants.offersActivateUkranian)
+        case .cyprus:
+            view?.showSubTurkcellOpenAlert(with: TextConstants.offersActivateCyprus)
+        case .moldovian:
             break
         case .all:
             break
@@ -190,11 +196,15 @@ extension PackagesPresenter: PackagesInteractorOutput {
 //            view?.startActivityIndicator()
 //            interactor.getOfferApples()
         }
+        
+        let subscriptionPlans = interactor.convertToASubscriptionList(activeSubscriptionList: activeSubscriptions, accountType: accountType)
+        view?.display(subscriptionPlans: subscriptionPlans)
+        
         view?.stopActivityIndicator()
     }
     
     func successed(offers: [OfferServiceResponse]) {
-        let subscriptionPlans = interactor.convertToSubscriptionPlans(offers: offers)
+        let subscriptionPlans = interactor.convertToSubscriptionPlans(offers: offers, accountType: accountType)
         view?.display(subscriptionPlans: subscriptionPlans)
         view?.stopActivityIndicator()
     }

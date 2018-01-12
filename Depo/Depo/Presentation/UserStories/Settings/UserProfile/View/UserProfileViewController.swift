@@ -9,7 +9,6 @@
 import UIKit
 
 class UserProfileViewController: BaseViewController, UserProfileViewInput, UITextFieldDelegate {
-
     var output: UserProfileViewOutput!
     
     @IBOutlet weak var scrollView : UIScrollView!
@@ -26,6 +25,10 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     
     var editButton: UIBarButtonItem?
     var readyButton: UIBarButtonItem?
+    
+    private var name: String?
+    private var email: String?
+    private var number: String?
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -78,6 +81,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         attributedText.addAttribute(NSAttributedStringKey.font, value: font1, range: r1)
         attributedText.addAttribute(NSAttributedStringKey.font, value: font2, range: r2)
         
+        backButtonForNavigationItem(title: TextConstants.backTitle)
+        
         output.viewIsReady()
     }
     
@@ -121,11 +126,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     }
     
     func setupEditState(_ isEdit: Bool) {
-        if isEdit {
-            self.navigationItem.rightBarButtonItem = readyButton
-        } else {
-            self.navigationItem.rightBarButtonItem = editButton
-        }
+        let button = isEdit ? readyButton : editButton
+        navigationItem.setRightBarButton(button, animated: true)
         nameTextField.isUserInteractionEnabled = isEdit
         emailTextField.isUserInteractionEnabled = isEdit
         gsmNumberTextField.isUserInteractionEnabled = isEdit
@@ -143,10 +145,9 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
             }
             string = string + surName_
         }
+        
         nameTextField.text = string
-        
         emailTextField.text = userInfo.email
-        
         gsmNumberTextField.text = userInfo.phoneNumber
     }
     
@@ -158,6 +159,10 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         return gsmNumberTextField.text ?? ""
     }
     
+    func endSaving() {
+        readyButton?.isEnabled = true
+    }
+    
     // MARK: ButtonsAction
     
     @IBAction func onValueChanged() {}
@@ -165,10 +170,40 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     @objc func onEditButtonAction() {
         nameTextField.becomeFirstResponder()
         output.tapEditButton()
+        saveFields()
+    }
+    
+    /// save for "check for no changes" in onReadyButtonAction
+    private func saveFields() {
+        name = nameTextField.text
+        email = emailTextField.text
+        number = gsmNumberTextField.text
     }
     
     @objc func onReadyButtonAction() {
-        output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
+        /// check for no changes
+        if name == nameTextField.text, email == emailTextField.text, number == gsmNumberTextField.text {
+            setupEditState(false)
+            return
+        }
+        
+        if email != emailTextField.text {
+            readyButton?.isEnabled = false
+            let message = String(format: TextConstants.registrationEmailPopupMessage, emailTextField.text ?? "")
+            let controller = PopUpController.with(title: TextConstants.registrationEmailPopupTitle,
+                                                  message: message,
+                                                  image: .error,
+                                                  buttonTitle: TextConstants.ok,
+                                                  action: { [weak self] vc in
+                                                    self?.output.tapReadyButton(name: self?.nameTextField.text ?? "", email: self?.emailTextField.text ?? "", number: self?.gsmNumberTextField.text ?? "")
+                                                    self?.readyButton?.isEnabled = true
+                                                    vc.dismiss(animated: true, completion: nil)
+            })
+            self.present(controller, animated: true, completion: nil)
+        } else {
+            output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
+        }
+        
     }
     
     @IBAction func onHideKeyboardButton(){
@@ -191,6 +226,7 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return !(textField == gsmNumberTextField && CoreTelephonyService().isTurkcellOperator())
+        return !(textField == gsmNumberTextField && output.isTurkcellUser())
     }
+    
 }

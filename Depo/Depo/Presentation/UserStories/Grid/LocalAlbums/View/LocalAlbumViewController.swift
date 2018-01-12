@@ -21,10 +21,10 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
         configureNavBarActions()
     }
     
-    override func configureNavBarActions(){
-        navigationBarWithGradientStyleWithoutInsets()
-        setTitle(withString: TextConstants.uploadPhotos)
-        
+    override func configureNavBarActions(isSelecting: Bool = false) {
+        super.configureNavBarActions(isSelecting: isSelecting)
+        visibleNavigationBarStyle()
+        setNavigationTitle(title: mainTitle)
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItems = nil
         
@@ -42,3 +42,4 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
     }
     
 }
+

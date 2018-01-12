@@ -49,15 +49,19 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
                 uploadVC.currentVC.navigationController?.popViewController(animated: true)
             }
         } else {
-            custoPopUp.showCustomAlert(withText: TextConstants.uploadFilesNothingUploadError, okButtonText: TextConstants.uploadFilesNothingUploadOk)
+            UIApplication.showErrorAlert(message: TextConstants.uploadFilesNothingUploadError)
         }
     }
     
     override func uploadData(_ searchText: String! = nil) {
+        log.debug("UploadFilesSelectionPresenter uploadData")
+
         debugPrint("upload uploadData presenter override")
     }
     
     override func getNextItems() {
+        log.debug("UploadFilesSelectionPresenter getNextItems")
+
         debugPrint("upload getNextItems presenter override")
     }
     
@@ -66,6 +70,8 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     func networkOperationStopped(){
+        log.debug("UploadFilesSelectionPresenter networkOperationStopped")
+
         asyncOperationSucces()
     }
 

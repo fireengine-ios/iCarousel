@@ -12,6 +12,8 @@ class ApplicationSessionManager: NSObject {
     
     private static var uniqueInstance: ApplicationSessionManager?
     
+    private let authService = AuthenticationService()
+    
     static let repeatCheckingSessionInterval: TimeInterval = 20 * 60 //20 minutes
     
     private override init() {
@@ -61,7 +63,8 @@ class ApplicationSessionManager: NSObject {
     }
     
     @objc func updateSession(){
-        AuthenticationService().autificationByRememberMe(sucess: {
+        authService.autificationByRememberMe(sucess: {
+            ApplicationSession.sharedSession.saveData()
             print("session updated successfully")
         }, fail: { (error) in
             print("session updated with error")

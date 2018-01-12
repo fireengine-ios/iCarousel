@@ -10,12 +10,14 @@ import Foundation
 
 protocol SearchViewOutput {
     var player: MediaPlayer { get }
-
+    var tabBarActionHandler: TabBarActionHandler { get }
+    
     func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder)
     func viewIsReady(collectionView: UICollectionView)
     func isShowedSpinner() -> Bool
     func getSuggestion(text: String)
     func tapCancel()
+    func onClearRecentSearchesTapped()
     
     func viewAppearanceChangedTopBar(asGrid: Bool)
     func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType)

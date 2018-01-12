@@ -24,4 +24,19 @@ extension UIApplication {
         }
         return controller
     }
+    
+    static func showErrorAlert(message: String) {
+        let vc = PopUpController.with(title: TextConstants.errorAlert, message: message, image: .error, buttonTitle: TextConstants.ok)
+        topController()?.present(vc, animated: false, completion: nil)
+    }
+    
+    static func showSuccessAlert(message: String) {
+        let vc = PopUpController.with(title: TextConstants.success, message: message, image: .success, buttonTitle: TextConstants.ok)
+        topController()?.present(vc, animated: false, completion: nil)
+    }
+    
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+
 }

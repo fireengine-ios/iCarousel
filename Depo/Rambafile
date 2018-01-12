@@ -7,13 +7,13 @@ xcodeproj_path: Depo.xcodeproj
 
 ### Code generation settings section
 # The main project target name
-project_target: Depo_LifeTech
+project_targets: [Depo_LifeTech, TC_Depo_LifeTech]
 
 # The file path for new modules
 project_file_path: Depo/Presentation/UserStories
 
 # The Xcode group path to new modules
-project_group_path: Depo/Classes/Modules
+project_group_path: Depo/Presentation/UserStories
 
 ### Dependencies settings section
 podfile_path: Podfile

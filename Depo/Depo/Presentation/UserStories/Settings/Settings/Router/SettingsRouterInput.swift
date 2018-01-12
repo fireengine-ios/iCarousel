@@ -22,7 +22,7 @@ protocol SettingsRouterInput {
     
     func goToUsageInfo()
     
-    func goToUserInfo(userInfo: AccountInfoResponse)
+    func goToUserInfo(userInfo: AccountInfoResponse, isTurkcellUser: Bool)
     
     func goToActivityTimeline()
     
@@ -35,4 +35,8 @@ protocol SettingsRouterInput {
     func openPasscode(handler: @escaping () -> Void)
 
     func goToConnectedToNetworkFailed()
+    
+    func goTurkcellSecurity()
+    
+    func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?)
 }

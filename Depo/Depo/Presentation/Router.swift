@@ -102,7 +102,7 @@ class RouterVC: NSObject {
         }
     }
     
-    func popViewControllerFromTableViewNavBar(){
+    func popViewControllerFromTableViewNavBar() {
         if let tabBarVc = tabBarVC {
             tabBarVc.popViewController(animated: true)
             return
@@ -123,11 +123,11 @@ class RouterVC: NSObject {
         viewController.navigationController?.isNavigationBarHidden = false
     }
     
-    func popToRootViewController(){
+    func popToRootViewController() {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func popViewController(){
+    func popViewController() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -331,34 +331,44 @@ class RouterVC: NSObject {
     
     // MARK: All Files
     
-    var allFiles: UIViewController?{
-    
-        let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController")
+    func allFiles(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController",
+                                                                                          moduleOutput: moduleOutput,
+                                                                                          sortType: sortType,
+                                                                                          viewType: viewType)
         return controller
     }
     
     
     // MARK: Favorites
     
-    var favorites: UIViewController?{
-
-        let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController")
+    func favorites(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController",
+                                                                                           moduleOutput: moduleOutput,
+                                                                                           sortType: sortType,
+                                                                                           viewType: viewType)
         return controller
     }
     
     
     // MARK: Folder
     
-    func filesFromFolder(folder: Item) -> UIViewController{
-        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController", folder: folder)
+    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController{
+        let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController",
+                                                                                                 folder: folder,
+                                                                                                 type: type,
+                                                                                                 sortType: sortType,
+                                                                                                 moduleOutput: moduleOutput,
+                                                                                                 alertSheetExcludeTypes: alertSheetExcludeTypes)
+
         return controller
     }
     
     
     // MARK: User profile
     
-    func userProfile(userInfo: AccountInfoResponse) -> UIViewController{
-        let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo)
+    func userProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController{
+        let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo, isTurkcellUser: isTurkcellUser)
         return viewController
     }
     
@@ -482,18 +492,20 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func filesDetailViewController(fileObject:WrapData, from items:[[WrapData]]) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController")
+    func filesDetailViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
+        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
+                                                                                    selectedItem: fileObject,
+                                                                                    allItems: items)
         let c = controller as! PhotoVideoDetailViewController
-        c.interactor!.onSelectItem(fileObject: fileObject, from: items)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
     
-    func filesDetailAlbumViewController(fileObject:WrapData, from items:[[WrapData]]) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController")
+    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
+        let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                         selectedItem: fileObject,
+                                                                                         allItems: items)
         let c = controller as! PhotoVideoDetailViewController
-        c.interactor!.onSelectItem(fileObject: fileObject, from: items)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
@@ -514,10 +526,8 @@ class RouterVC: NSObject {
     
     //MARK: Album detail
     
-    func albumDetailController(album: AlbumItem, moduleOutput: AlbumDetailModuleOutput? = nil) -> AlbumDetailViewController{
-        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController",
-                                                                                      album: album,
-                                                                                      moduleOutput: moduleOutput)
+    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController{
+        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
         return controller
     }
     
@@ -528,7 +538,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    // MARK: SETTINGS
+    // MARK: - SETTINGS
     
     var settings: UIViewController? {
         let controller = SettingsModuleInitializer.initializeViewController(with: "SettingsViewController")
@@ -552,6 +562,12 @@ class RouterVC: NSObject {
     var helpAndSupport: UIViewController? {
         let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "HelpAndSupportViewController")
         return controller
+    }
+    
+    // MARK: Turkcell Security
+    
+    var turkcellSecurity: UIViewController {
+        return TurkcellSecurityModuleInitializer.viewController
     }
     
     // MARK: Auto Upload

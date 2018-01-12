@@ -27,7 +27,7 @@ class LoadingImageView: UIImageView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        if (cornerView == nil){
+        if (cornerView == nil) {
             cornerView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
             
             cornerView!.backgroundColor = UIColor.clear
@@ -49,36 +49,38 @@ class LoadingImageView: UIImageView {
     }
     
     fileprivate func checkIsNeedCancelRequest(){
-        if (path != nil){
-            filesDataSource.cancelImgeRequest(path: path!)
-            path = nil
+        if let path = path {
+            if let url = url {
+                filesDataSource.cancelRequest(url: url)
+            } else {
+                filesDataSource.cancelImgeRequest(path: path)
+            }
+            
+            self.path = nil
+            url = nil
             delegate?.onLoadingImageCanceled()
         }
     }
     
     func loadImage(with object: Item?, isOriginalImage: Bool) {
-        
         self.image = nil
-        guard let object = object else {
+        guard let object = object, path != object.patchToPreview else {
             checkIsNeedCancelRequest()
             activity.stopAnimating()
             return
         }
         
+        checkIsNeedCancelRequest()
+        path = object.patchToPreview
         activity.startAnimating()
-        let path_: PathForItem = PathForItem.remoteUrl(url)
-        path = path_
-        filesDataSource.getImage(for: object, isOriginal: isOriginalImage) { [weak self] image in
-            if self?.path == path_{
-                self?.activity.stopAnimating()
-                self?.image = image
-                self?.path = nil
-                self?.delegate?.onImageLoaded()
+        url = filesDataSource.getImage(for: object, isOriginal: isOriginalImage) { [weak self] image in
+            if self?.path == object.patchToPreview {
+                self?.finishImageLoading(image)
             }
         }
     }
     
-    func loadImageByURL(url: URL?){
+    func loadImageByURL(url: URL?) {
         self.image = nil
         if (url == nil) {
             checkIsNeedCancelRequest()
@@ -90,19 +92,16 @@ class LoadingImageView: UIImageView {
         activity.startAnimating()
         let path_: PathForItem = PathForItem.remoteUrl(url)
         path = path_
-        filesDataSource.getImage(patch: PathForItem.remoteUrl(url), compliteImage: {[weak self] (image) in
-            if self?.path == path_{
-                self?.activity.stopAnimating()
-                self?.image = image
-                self?.path = nil
-                self?.delegate?.onImageLoaded()
+        self.url = filesDataSource.getImage(patch: PathForItem.remoteUrl(url), compliteImage: { [weak self] (image) in
+            if self?.path == path_ {
+                self?.finishImageLoading(image)
             }
         })
     }
     
-    func loadImageForItem(object: Item?){
+    func loadImageForItem(object: Item?) {
         self.image = nil
-        if (object == nil){
+        if (object == nil) {
             checkIsNeedCancelRequest()
             activity.stopAnimating()
             
@@ -112,19 +111,16 @@ class LoadingImageView: UIImageView {
         activity.startAnimating()
         path = object!.patchToPreview
         
-        filesDataSource.getImage(patch: object!.patchToPreview) { [weak self] (image) in
-            if self?.path == object!.patchToPreview{
-                self?.activity.stopAnimating()
-                self?.image = image
-                self?.path = nil
-                self?.delegate?.onImageLoaded()
+        url = filesDataSource.getImage(patch: object!.patchToPreview) { [weak self] (image) in
+            if self?.path == object!.patchToPreview {
+                self?.finishImageLoading(image)
             }
         }
     }
     
     func loadImageByPath(path_ : PathForItem?){
         self.image = nil
-        if (path_ == nil){
+        if (path_ == nil) {
             checkIsNeedCancelRequest()
             activity.stopAnimating()
             
@@ -133,22 +129,27 @@ class LoadingImageView: UIImageView {
         
         activity.startAnimating()
         path = path_
-        filesDataSource.getImage(patch: path_!) { [weak self] (image) in
+        url = filesDataSource.getImage(patch: path_!) { [weak self] (image) in
             if self?.path == path_{
-                self?.activity.stopAnimating()
-                self?.image = image
-                self?.path = nil
-                self?.delegate?.onImageLoaded()
+                self?.finishImageLoading(image)
             }
         }
     }
     
-    func setBorderVisibility(visibility: Bool){
-        if (visibility){
+    func setBorderVisibility(visibility: Bool) {
+        if (visibility) {
             addSubview(cornerView!)
         }else{
             cornerView!.removeFromSuperview()
         }
+    }
+    
+    private func finishImageLoading(_ image: UIImage?) {
+        activity.stopAnimating()
+        self.image = image
+        path = nil
+        url = nil
+        delegate?.onImageLoaded()
     }
 
 }

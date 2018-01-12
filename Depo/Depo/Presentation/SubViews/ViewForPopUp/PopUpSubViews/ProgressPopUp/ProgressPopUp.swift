@@ -15,6 +15,10 @@ class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var iconImageViewForCurrentFile: LoadingImageView!
+    
+    var wrapItem: WrapData?
+    var typeOfOperation: OperationType?
     
     override class func initFromNib() -> ProgressPopUp{
         if let view = super.initFromNib() as? ProgressPopUp{
@@ -55,22 +59,40 @@ class ProgressPopUp: BaseView, ProgressPopUpProtocol {
 //        progress.progress = progressValue
         let progressText = String(format: TextConstants.popUpProgress, ready, all)
         progressLabel.text = progressText
+        
+        if let typeOfOperation = typeOfOperation{
+            configurateWithType(viewType: typeOfOperation)
+        }
     }
     
     func setProgressBar(ratio: Float) {
         progress.progress = ratio
+        if let typeOfOperation = typeOfOperation{
+            configurateWithType(viewType: typeOfOperation)
+        }
+    }
+    
+    func setImageForUploadingItem(item: WrapData){
+        if wrapItem != item{
+            wrapItem = item
+            iconImageViewForCurrentFile.loadImageForItem(object: item)
+        }
     }
     
     func configurateWithType(viewType: OperationType){
+        let isWiFi = ReachabilityService().isReachableViaWiFi
+        let networkType = isWiFi ? TextConstants.networkTypeWiFi : TextConstants.networkType3g
+        typeOfOperation = viewType
+        
         switch viewType {
         case .sync:
             operationLabel.text = ""
-            titleLabel.text = TextConstants.popUpSyncing
+            titleLabel.text = TextConstants.popUpSyncing + " " + networkType
             imageView.image = UIImage(named: "SyncingPopUpImage")
             
         case .upload:
             operationLabel.text = ""
-            titleLabel.text = TextConstants.popUpUploading
+            titleLabel.text = TextConstants.popUpUploading + " " + networkType
             imageView.image = UIImage(named: "SyncingPopUpImage")
             
         case .download:

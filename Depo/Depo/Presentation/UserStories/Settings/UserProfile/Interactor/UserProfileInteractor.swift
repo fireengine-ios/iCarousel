@@ -11,6 +11,12 @@ class UserProfileInteractor: UserProfileInteractorInput {
     weak var output: UserProfileInteractorOutput!
     
     weak var userInfo: AccountInfoResponse? = nil
+    
+    var isTurkcellUser: Bool = false
+
+    var statusTurkcellUser: Bool {
+        return isTurkcellUser
+    }
 
     
     func viewIsReady(){
@@ -50,14 +56,15 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func changeTo(name: String, email: String, number: String){
-        if ((name.count == 0) || (email.count == 0) || (number.count == 0)){
-            output.showError(error: TextConstants.userProfileDataNotСhanged)
+        if email.isEmpty || number.isEmpty {
+            output.showError(error: TextConstants.userProfileDataNotCorrect)
             return
         }
         
         let isChanged = isNameChanged(name: name) || isEmailChanged(email: email) || isPhoneChanged(phone: number)
         if !isChanged {
             output.showError(error: TextConstants.userProfileDataNotCorrect)
+            return
         }
         
         updateNameIfNeed(name: name, email: email, number: number)

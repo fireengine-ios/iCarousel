@@ -71,14 +71,13 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.loginPhoneMailCellID, for: indexPath) as! LoginPhoneMailCell
             cell.loginCellActionDelegate = self
             let model = tableDataMArray[indexPath.row]
-            cell.titleLabel.text = model.title
+            cell.setupBaseCell(withTitle: model.title, inputText: model.inputText)
             cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.textInputField.attributedPlaceholder = NSAttributedString(string: model.inputText, attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.whiteColor])
             
             cell.textDelegate = self
             
             #if DEBUG
-                cell.textInputField.text = "6257515test@gmail.com" //"testasdasdMail@notRealMail.yep"//"Aleksandr.Pestriakov@life.com.by"//"6257515test@gmail.com"
+                cell.textInputField.text = "+905373858714" //"testasdasdMail@notRealMail.yep"//"Aleksandr.Pestriakov@life.com.by"//"6257515test@gmail.com"
             #endif
 
             return cell
@@ -86,13 +85,12 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.passwordCellID,
                                                      for: indexPath) as! PasswordCell
             let model = tableDataMArray[indexPath.row]
-            cell.titleLabel.text = model.title
+            cell.setupInitialState(withLabelTitle: model.title, placeHolderText: model.inputText)
             cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.textInput.text = model.inputText
             cell.textInput.tag = 33
             cell.textDelegate = self
             #if DEBUG
-                cell.textInput.text = "Best6257515"//".FsddQ646"//".FsddQ646"//"Best6257515"
+                cell.textInput.text = "test8714"//".FsddQ646"//".FsddQ646"//"Best6257515"
             #endif
             return cell
         }

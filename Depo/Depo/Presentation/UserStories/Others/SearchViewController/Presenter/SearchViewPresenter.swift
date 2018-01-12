@@ -22,13 +22,12 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     var showedSpinner = false
     
     let player: MediaPlayer = factory.resolve()
+    var tabBarActionHandler: TabBarActionHandler { return self }
 
     var filters: [MoreActionsConfig.MoreActionsFileType] = []
     var syncType: MoreActionsConfig.CellSyncType = MoreActionsConfig.CellSyncType.all
     
     var sortedRule: SortedRules = .timeDown
-    
-    let custoPopUp = CustomPopUp()
     
     //MARK : BasePresenter
     
@@ -83,6 +82,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         view.successWithSuggestList(list: list)
     }
     
+    func setRecentSearches(_ recentSearches: [String]) {
+        view.setRecentSearches(recentSearches)
+    }
+    
     func failedSearch() {
         showedSpinner = false
         self.outputView()?.hideSpiner()
@@ -101,7 +104,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         self.showedSpinner = false
         //items.sorted(by: {$0.creationDate! > $1.creationDate!})
         dataSource.dropData()
-        dataSource.appendCollectionView(items: items)
 //        dataSource.configurateWithSimpleData(collectionData: files, sortingRules: sortedRule, types: filters, syncType: syncType)
         
         if (items.count == 0){
@@ -109,6 +111,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             view.setCollectionViewVisibilityStatus(visibilityStatus: flag)
         }else{
             view.setCollectionViewVisibilityStatus(visibilityStatus: false)
+            dataSource.appendCollectionView(items: items)
         }
         
     }
@@ -132,6 +135,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         moduleOutput?.cancelSearch()
     }
     
+    func onClearRecentSearchesTapped() {
+        interactor.clearRecentSearches()
+    }
+    
     func playerDidHide() {
         player.stop()
     }
@@ -142,22 +149,24 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
         if item.fileType.isUnSupportedOpenType {
-            if item.fileType == .audio {
-                guard let array = data as? [[Item]],
-                    let wrappered = item as? Item
-                    else { return }
-                
-                let list = array.flatMap{ $0 }
-                guard let startIndex = list.index(of: wrappered) else { return }
-                player.play(list: list, startAt: startIndex)
-                player.play()
-            } else {
-                router.onItemSelected(item: item, from: data)
-                self.view.dismissController()
+//            if item.fileType == .audio {
+//                guard let array = data as? [[Item]],
+//                    let wrappered = item as? Item
+//                    else { return }
+//
+//                let list = array.flatMap{ $0 }
+//                guard let startIndex = list.index(of: wrappered) else { return }
+//                player.play(list: list, startAt: startIndex)
+//                player.play()
+//            } else {
+            let sameTypeFiles: [BaseDataSourceItem] = data.flatMap{ return $0 }.filter{ $0.fileType == item.fileType }
+                router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
+//                self.view.dismissController()
                 moduleOutput?.previewSearchResultsHide()
-            }
+//            }
         } else {
-            custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
+            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
+            UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
     
@@ -203,6 +212,17 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         
     }
     
+    private func createStory() {
+        var items = dataSource.allItems.flatMap { $0 }
+        items = items.filter { $0.fileType == .image }
+        
+        if items.isEmpty {
+            router.showNoFilesToCreateStoryAlert()
+        } else {
+            router.createStoryWithItems(items)
+        }
+    }
+    
     //MARK: - View output/TopBar/UnderNavBarBar Delegates
     
     func viewAppearanceChangedTopBar(asGrid: Bool) {
@@ -226,5 +246,20 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             dataSource.updateDisplayngType(type: .list)
         }
     }
+}
+
+extension SearchViewPresenter: TabBarActionHandler {
     
+    func canHandleTabBarAction(_ action: TabBarViewController.Action) -> Bool {
+        return action == .createStory
+    }
+    
+    func handleAction(_ action: TabBarViewController.Action) {
+        switch action {
+        case .createStory:
+            createStory()
+        default:
+            break
+        }
+    }
 }

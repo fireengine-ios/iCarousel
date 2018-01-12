@@ -14,10 +14,11 @@ protocol PhotoVideoDetailViewInput: class {
     
     func onShowSelectedItem(at index: Int, from items: [Item])
     
-    func updateItems(objectsArray: [Item], selectedIndex: Int)
+    func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool)
     
     func getNavigationController() -> UINavigationController?
     
     func onItemSelected(at index: Int, from items: [Item])
     
+//    func configureEditingTabBar(config: EditingBarConfig)
 }

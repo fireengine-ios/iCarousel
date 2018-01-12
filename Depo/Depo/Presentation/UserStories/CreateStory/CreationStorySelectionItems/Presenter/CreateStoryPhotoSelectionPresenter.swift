@@ -15,7 +15,7 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
 
         super.viewIsReady(collectionView: collectionView)
         
-        dataSource.canReselect = true
+        dataSource.canReselect = false
         dataSource.maxSelectionCount = NumericConstants.maxNumberPhotosInStory
         dataSource.enableSelectionOnHeader = false
         dataSource.setSelectionState(selectionState: true)
@@ -36,9 +36,8 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     }
     
     override func onMaxSelectionExeption(){
-        let custoPopUp = CustomPopUp.sharedInstance
         let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
-        custoPopUp.showCustomAlert(withText: text, okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
+        UIApplication.showErrorAlert(message: text)
     }
     
     override func onNextButton(){
@@ -56,7 +55,7 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
                 rout.goToSelectionOrderPhotosFor(story: story)
             }
         }else{
-            custoPopUp.showCustomAlert(withText: TextConstants.createStoryNoSelectedPhotosError, okButtonText: TextConstants.createFolderEmptyFolderButtonText)
+            UIApplication.showErrorAlert(message: TextConstants.createStoryNoSelectedPhotosError)
         }
     }
     
@@ -67,5 +66,9 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     override func getContentWithSuccess(array: [[BaseDataSourceItem]]){
         //DBDROP
         super.getContentWithSuccess(array: array)
+    }
+    
+    override func needShowNoFileView() -> Bool {
+        return dataSource.getAllObjects().count == 0
     }
 }

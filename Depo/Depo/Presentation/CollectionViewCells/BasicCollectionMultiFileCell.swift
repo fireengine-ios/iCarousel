@@ -68,29 +68,36 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     static let leftSpaceSmallCell: CGFloat              = 14
     
     var itemModel: Item?
-    
-    func stopAnimation(){
-        activity.stopAnimating()
+
+    override func setImage(image: UIImage?) {
+        isAlreadyConfigured = true
+
+        if (isBigSize()){
+            bigContentImageView.contentMode = .scaleAspectFill
+            bigContentImageView.image = image
+        } else {
+            smallContentImageView.contentMode = .scaleAspectFit
+            smallContentImageView.configured = true
+            smallContentImageView.setImage(image: image)
+            smallContentImageView.isHidden = false
+            smallCellSelectionView.isHidden = true
+        }
     }
     
-    override func setImage(image: UIImage?) {
-        if (image != nil){
-            isAlreadyConfigured = true
-            if (isBigSize()){
-                bigContentImageView.contentMode = .scaleAspectFill
-                bigContentImageView.image = image
-            } else {
-                smallContentImageView.contentMode = .scaleAspectFit
-                smallContentImageView.configured = true
-                smallContentImageView.setImage(image: image)
-                smallContentImageView.isHidden = false
-                smallCellSelectionView.isHidden = true
-                
-            }
-        } else {
-            super.setImage(image: image)
+    override func setPlaceholderImage(fileType: FileType) {
+        var image: UIImage?
+        
+        switch fileType {
+        case .folder:
+            image = isBigSize() ? UIImage(named: "fileBigIconFolder") : UIImage(named: "fileIconFolder")
+        case .audio:
+            image = isBigSize() ? UIImage(named: "fileBigIconAudio") : UIImage(named: "fileIconAudio")
+        case let .application(applicationType):
+            image = isBigSize() ? applicationType.bigIconImage() : applicationType.smallIconImage()
+        default:
+            image = nil
         }
-        stopAnimation()
+        setImage(image: image)
     }
     
     private func isBigSize() -> Bool{
@@ -107,10 +114,12 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func setImage(with url: URL) {
         if let imageView = isBigSize() ? self.bigContentImageView : self.smallContentImageView {
             imageView.contentMode = .center
-            imageView.sd_setImage(with: url, placeholderImage: self.placeholderImage(), options: [.avoidAutoSetImage]) { (image, error, cacheType, url) in
-                DispatchQueue.main.async {
-                    self.setImage(image: image)
-                }
+            imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { (image, error, cacheType, url) in
+                imageView.layer.opacity = 0.1
+                self.setImage(image: image)
+                UIView.animate(withDuration: 0.2, animations: {
+                    imageView.layer.opacity = 1.0
+                })
             }
         }
     }
@@ -127,9 +136,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         itemModel = wrappered
         
         fileNameLabel.text = wrappedObj.name
-        activity.startAnimating()
         bigContentImageView.image = nil
-        stopAnimation()
         bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(object: wrappered)
         if (isBigSize()){
             smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(object: wrappered)

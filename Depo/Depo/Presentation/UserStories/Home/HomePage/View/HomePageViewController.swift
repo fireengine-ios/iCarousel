@@ -102,14 +102,14 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         if _searchViewController != nil {
             let router = RouterVC()
-            router.rootViewController?.present(self.searchViewController, animated: false, completion: nil)
+            router.pushViewControllerWithoutAnimation(viewController: self.searchViewController)
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         homePageDataSource.isActive = true
-        WrapItemOperatonManager.default.addViewForNotification(view: homePageDataSource)
+        CardsManager.default.addViewForNotification(view: homePageDataSource)
         if homepageIsActiveAndVisible {
             homePageNavigationBarStyle()
             configureNavBarActions()
@@ -123,7 +123,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     deinit{
-        WrapItemOperatonManager.default.removeViewForNotification(view: homePageDataSource)
+        CardsManager.default.removeViewForNotification(view: homePageDataSource)
     }
 
     // MARK: - SearchBarButtonPressed
@@ -134,7 +134,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
                 return
             }
             let router = RouterVC()
-            router.rootViewController?.present(self.searchViewController, animated: true, completion: nil)
+            router.pushViewControllerWithoutAnimation(viewController: self.searchViewController)
         })
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.output.showSettings()

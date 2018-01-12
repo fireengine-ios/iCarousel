@@ -32,14 +32,18 @@ class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeB
     }
     
     override func onMaxSelectionExeption(){
+        log.debug("UploadFromLifeBoxPhotosPresenter onMaxSelectionExeption")
+
         let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
-        CustomPopUp.sharedInstance.showCustomAlert(withText: text, okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
+        UIApplication.showErrorAlert(message: text)
     }
     
     override func onNextButton(){
+        log.debug("UploadFromLifeBoxPhotosPresenter onNextButton")
+
         let array = dataSource.getSelectedItems()
-        if (array.isEmpty){
-            custoPopUp.showCustomAlert(withText: TextConstants.uploadFromLifeBoxNoSelectedPhotosError, okButtonText: TextConstants.uploadFromLifeBoxEmptyFolderButtonText)
+        if array.isEmpty {
+            UIApplication.showErrorAlert(message: TextConstants.uploadFromLifeBoxNoSelectedPhotosError)
         }else{
             guard let wrapArray = array as? [Item] else {
                 return
@@ -52,11 +56,15 @@ class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeB
     }
     
     override func getContentWithSuccess(array: [[BaseDataSourceItem]]){
+        log.debug("UploadFromLifeBoxPhotosPresenter getContentWithSuccess")
+
         //DBDROP
         super.getContentWithSuccess(array: array)
     }
     
     func uploadOperationSuccess(){
+        log.debug("UploadFromLifeBoxPhotosPresenter uploadOperationSuccess")
+
         guard let uploadView = view as? UploadFromLifeBoxViewInput else{
             return
         }

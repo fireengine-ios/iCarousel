@@ -6,13 +6,15 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
+class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     weak var output: MoreFilesActionsInteractorOutput?
     private var fileService = WrapItemFileService()
     
     let player: MediaPlayer = factory.resolve()
-
+    let photosAlbumService = PhotosAlbumService()
+    
+    
     typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
     
     var sharingItems = [BaseDataSourceItem]()
@@ -70,27 +72,48 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func shareSmallSize(sourceRect: CGRect?){
-        if let array = sharingItems as? [WrapData]{
-            let imagesArray: [ImageForDowload] = array.flatMap({
-                let image = ImageForDowload()
-                image.downloadURL = $0.metaData?.smalURl
-                image.imageName = $0.name
-                return image
-            })
-            shareImagesByURLs(images: imagesArray, sourceRect: sourceRect)
+        if let items = sharingItems as? [WrapData] {
+            let files: [FileForDownload] = items.flatMap({ FileForDownload(forMediumURL: $0) })
+            shareFiles(filesForDownload: files, sourceRect: sourceRect)
         }
+        
     }
     
     func shareOrignalSize(sourceRect: CGRect?){
-        if let array = sharingItems as? [WrapData]{
-            let imagesArray: [ImageForDowload] = array.flatMap({
-                let image = ImageForDowload()
-                image.downloadURL = $0.urlToFile
-                image.imageName = $0.name
-                return image
-            })
-            shareImagesByURLs(images: imagesArray, sourceRect: sourceRect)
+        if let items = sharingItems as? [WrapData] {
+            let files: [FileForDownload] = items.flatMap({ FileForDownload(forOriginalURL: $0) })
+            shareFiles(filesForDownload: files, sourceRect: sourceRect)
         }
+    }
+    
+    private func shareFiles(filesForDownload: [FileForDownload], sourceRect: CGRect?) {
+        let downloader = FilesDownloader()
+        output?.operationStarted(type: .share)
+        
+        downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] (fileURLs, directoryURL) in
+                DispatchQueue.main.async {
+                    self?.output?.operationFinished(type: .share)
+                    
+                    let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
+                    
+                    activityVC.completionWithItemsHandler = { (_, _, _, _) in
+                        do {
+                            try FileManager.default.removeItem(at: directoryURL)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    
+                    if let tempoRect = sourceRect {//if ipad
+                        activityVC.popoverPresentationController?.sourceRect = tempoRect
+                    }
+                    
+                    let router = RouterVC()
+                    router.presentViewController(controller: activityVC)
+                }
+            }, fail: { [weak self] (errorMessage) in
+                self?.output?.operationFailed(type: .share, message: errorMessage)
+        })
     }
     
     private func shareImagesByURLs(images: [ImageForDowload], sourceRect: CGRect?){
@@ -157,8 +180,30 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         }
     }
     
-    func edit(item: [BaseDataSourceItem]) {
+    
+    private var cropyController: CRYCropNavigationController?
+    
+    func edit(item: [BaseDataSourceItem], complition: (() -> Void)?) {
+        guard let item = item.first as? Item, let url = item.tmpDownloadUrl else {
+            return
+        }
         
+        ImageDownloder().getImage(patch: url) { [weak self] image in
+            guard let `self` = self, let image = image,
+                let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
+            else {
+                complition?()
+                return
+            }
+            
+            //vc.setShareEnabled(true)
+            //        vc.setCropDelegate(self)
+            vc.sharedDelegate = self
+            self.cropyController = vc
+            
+            complition?()
+            RouterVC().presentViewController(controller: vc)
+        }
     }
     
     func delete(item: [BaseDataSourceItem]) {
@@ -170,67 +215,117 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func completelyDelete(albums: [BaseDataSourceItem]) {
-        guard let albums = albums as? [AlbumItem] else { return }
-        self.output?.operationStarted(type: .completelyDeleteAlbums)
-        let albumService = PhotosAlbumService()
-        albumService.completelyDelete(albums: DeleteAlbums(albums: albums), success: {
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFinished(type: .completelyDeleteAlbums)
-            }
-        }, fail: { errorRespone in
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFailed(type: .completelyDeleteAlbums, message: errorRespone.description)
-            }
+        let okHandler: () -> Void = { [weak self] in
+            guard let albums = albums as? [AlbumItem] else { return }
+            self?.output?.operationStarted(type: .completelyDeleteAlbums)
+            let albumService = PhotosAlbumService()
+            albumService.completelyDelete(albums: DeleteAlbums(albums: albums), success: {
+                DispatchQueue.main.async { [weak self] in
+                    self?.output?.operationFinished(type: .completelyDeleteAlbums)
+                }
+            }, fail: { [weak self] errorRespone in
+                DispatchQueue.main.async {
+                    self?.output?.operationFailed(type: .completelyDeleteAlbums, message: errorRespone.description)
+                }
+            })
+        }
+        
+        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                              message: TextConstants.deleteAlbums,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
         })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
     private func deleteItems(items: [Item]) {
-        output?.operationStarted(type: .delete)
-        player.remove(listItems: items)
-//        SingleSong.default.remove(items: items)
-        fileService.delete(deleteFiles: items,
-                           success: succesAction(elementType: .delete),
-                           fail: failAction(elementType: .delete))
+        let okHandler: () -> Void = { [weak self] in
+            self?.output?.operationStarted(type: .delete)
+            self?.player.remove(listItems: items)
+            self?.fileService.delete(deleteFiles: items,
+            success: self?.succesAction(elementType: .delete),
+            fail: self?.failAction(elementType: .delete))
+        }
         
+        let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                              message: TextConstants.deleteFilesText,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
     private func deleteAlbumbs(albumbs: [AlbumItem]) {
-        self.output?.operationStarted(type: .removeFromAlbum)
-        let albumService = PhotosAlbumService()
-        albumService.deleteAlbums(deleteAlbums: DeleteAlbums(albums: albumbs), success: {
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFinished(type: .removeAlbum)
-            }
-        }, fail: { errorRespone in
-            DispatchQueue.main.async { [weak self] in
-                
-                self?.output?.operationFailed(type: .removeAlbum, message: errorRespone.description)
-            }
+        let okHandler: () -> Void = { [weak self] in
+            self?.output?.operationStarted(type: .removeFromAlbum)
+            let albumService = PhotosAlbumService()
+            albumService.deleteAlbums(deleteAlbums: DeleteAlbums(albums: albumbs), success: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.output?.operationFinished(type: .removeAlbum)
+                    ItemOperationManager.default.albumsDeleted(albums: albumbs)
+                }
+            }, fail: { [weak self] errorRespone in
+                DispatchQueue.main.async {
+                    self?.output?.operationFailed(type: .removeAlbum, message: errorRespone.description)
+                }
+            })
+        }
+        
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                              message: TextConstants.removeAlbums,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
         })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
     private func deleteFromAlbums(items: [BaseDataSourceItem]){
-        self.output?.operationStarted(type: .removeFromAlbum)
-        
-        var album = ""
-        
-        for item in items {
-            if let item = item as? WrapData, let albumID = item.albums?.first {
-                album = albumID
-                break
+        let okHandler: () -> Void = { [weak self] in
+            self?.output?.operationStarted(type: .removeFromAlbum)
+            
+            var album = ""
+            
+            for item in items {
+                if let item = item as? WrapData, let albumID = item.albums?.first {
+                    album = albumID
+                    break
+                }
+            }
+            
+            let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items as! [Item])
+            PhotosAlbumService().deletePhotosFromAlbum(parameters: parameters, success: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.output?.operationFinished(type: .removeFromAlbum)
+                }
+            }) { [weak self] errorRespone in
+                DispatchQueue.main.async {
+                    self?.output?.operationFailed(type: .removeFromAlbum, message: errorRespone.description)
+                }
             }
         }
         
-        let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items as! [Item])
-        PhotosAlbumService().deletePhotosFromAlbum(parameters: parameters, success: {
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFinished(type: .removeFromAlbum)
-            }
-        }) { (errorRespone) in
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.operationFailed(type: .removeFromAlbum, message: errorRespone.description)
-            }
-        }
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                              message: TextConstants.removeFromAlbum,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
     func move(item: [BaseDataSourceItem], toPath:String) {
@@ -247,11 +342,12 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
                                    success: self?.succesAction(elementType: .move),
                                    fail: self?.failAction(elementType: .move))
             
-            }, cancel: { self.succesAction(elementType: ElementTypes.move)()
+            }, cancel: { [weak self] in
+                self?.succesAction(elementType: ElementTypes.move)()
         } )
     }
     
-    func copy(item: [BaseDataSourceItem], toPath:String) {
+    func copy(item: [BaseDataSourceItem], toPath: String) {
         guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
             return
         }
@@ -260,12 +356,12 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         
         
         folderSelector.selectFolder(select: { [weak self] (folder) in
-            
             self?.fileService.move(items: item, toPath: folder.uuid,
                                    success: self?.succesAction(elementType: .copy),
                                    fail: self?.failAction(elementType: .copy))
-            
-            }, cancel: { self.succesAction(elementType: ElementTypes.move)() } )
+            }, cancel: { [weak self] in
+                self?.succesAction(elementType: ElementTypes.move)()
+        })
     }
     
     func sync(item: [BaseDataSourceItem]) {
@@ -273,25 +369,22 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
             return
         }
         
-        //output?.operationStarted(type: .sync)
-        
         fileService.upload(items: item, toPath: "",
                            success: succesAction(elementType: .sync),
                            fail: failAction(elementType: .sync))
     }
     
     func download(item: [BaseDataSourceItem]) {
-//        output?.operationStarted(type: .download)
         if let item = item as? [Item] { //FIXME: transform all to BaseDataSourceItem
             fileService.download(items: item, toPath: "",
                                  success: succesAction(elementType: .download),
                                  fail: failAction(elementType: .download))
         } else if let albums = item as? [AlbumItem] {
-            let albumService = PhotosAlbumService()
-            albumService.allItemsFrom(albums: albums, success: { (items) in
-                self.fileService.download(items: items, toPath: "",
-                                          success: self.succesAction(elementType: .download),
-                                          fail: self.failAction(elementType: .download))
+            
+            photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] (itemsByAlbums) in
+                self?.fileService.download(itemsByAlbums: itemsByAlbums,
+                                          success: self?.succesAction(elementType: .download),
+                                          fail: self?.failAction(elementType: .download))
             })
         }
     }
@@ -401,19 +494,38 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         download(item: items)
     }
     
+    func deleteDeviceOriginal(items: [BaseDataSourceItem]) {
+        guard let wrapedItems = items as? [WrapData] else {
+            return
+        }
+        fileService.deleteLocalFiles(deleteFiles: wrapedItems, success: succesAction(elementType: .deleteDeviceOriginal),
+                                     fail: failAction(elementType: .deleteDeviceOriginal))
+    }
+    
     func succesAction(elementType: ElementTypes) -> FileOperation {
-        let succes : FileOperation = {
-            DispatchQueue.main.async { [weak self] in
+        let success: FileOperation = { [weak self] in
+            DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
+                
+                let text: String
+                switch elementType {
+                case .download:
+                    text = TextConstants.popUpDownloadComplete
+                case .delete:
+                    text = TextConstants.popUpDeleteComplete
+                default:
+                    return
+                }
+                UIApplication.showSuccessAlert(message: text)
             }
         }
-        return succes
+        return success
     }
     
     func failAction(elementType: ElementTypes) -> FailResponse {
         
-        let failResponse : FailResponse  = { value in
-            DispatchQueue.main.async { [weak self] in
+        let failResponse : FailResponse  = { [weak self] value in
+            DispatchQueue.main.async {
                 self?.output?.operationFailed(type: elementType, message: value.description)
             }
         }
@@ -434,5 +546,27 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         if let operations = operations {
             output?.startCancelableAsync(operations: operations, cancel: cancel)
         }
+    }
+}
+
+
+// MARK: - Cropy delegate
+/// https://wiki.life.com.by/pages/viewpage.action?spaceKey=LTFizy&title=Cropy
+/// https://stash.turkcell.com.tr/git/projects/CROP/repos/cropy-ios-sdk/browse
+extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
+    
+    @objc func getEditedImage(_ image: UIImage) {
+        
+        let vc = PopUpController.with(title: TextConstants.save, message: TextConstants.cropyMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, secondAction: { [weak self] vc in
+            self?.save(image: image)
+            vc.close { [weak self] in
+                self?.cropyController?.dismiss(animated: true, completion: nil)
+            }
+        })
+        UIApplication.topController()?.present(vc, animated: false, completion: nil)
+    }
+    
+    private func save(image: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }

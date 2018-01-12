@@ -147,6 +147,10 @@ func ==(lhs: SearchByFieldParameters, rhs: SearchByFieldParameters) -> Bool {
 }
 
 struct AdvancedSearchParameters: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+    
     let sortBy: SortType
     let sortOrder: SortOrder
     let from: Int
@@ -284,31 +288,43 @@ class AlbumDetalParameters: BaseRequestParametrs {
 class SearchService: BaseRequestService {
     
     func searchByField(param:SearchByFieldParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
+        log.debug("SearchService searchByField")
+
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func searchByName(param:AdvancedSearchParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
+        log.debug("SearchService searchByName")
+
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func searchAlbums(param:AlbumParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ){
+        log.debug("SearchService searchAlbums")
+
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func searchContentAlbum(param:AlbumDetalParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ){
+        log.debug("SearchService searchContentAlbum")
+
         let handler = BaseResponseHandler<AlbumDetailResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func unifiedSearch(param:UnifiedSearchParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
+        log.debug("SearchService unifiedSearch")
+
         let handler = BaseResponseHandler<UnifiedSearchResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func suggestion(param: SuggestionParametrs, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+        log.debug("SearchService suggestion")
+
         let handler = BaseResponseHandler<SuggestionResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }

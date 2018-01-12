@@ -69,11 +69,14 @@ typealias FeedbackLanguagesListOperation = () -> Swift.Void
 class FeedbackService: BaseRequestService {
     
     func getFeedbackLanguage(feedbackLanguageParameter: FeedbackLanguage, success: SuccessResponse?, fail: FailResponse?){
+        log.debug("FeedbackService getFeedbackLanguage")
         let handler = BaseResponseHandler<FeedbackLanguagesListResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: feedbackLanguageParameter, handler: handler)
     }
     
     func sendSelectedLanguage(selectedLanguageParameter: SelectedLanguage, succes: SuccessResponse?, fail: FailResponse?){
+        log.debug("FeedbackService sendSelectedLanguage")
+
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: succes, fail: fail)
         executePostRequest(param: selectedLanguageParameter, handler: handler)
     }

@@ -11,9 +11,9 @@ import CoreLocation
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
-    private static var uniqueInstance: LocationManager?
-    
     private let locationManager = CLLocationManager()
+    
+    static let shared = LocationManager()
     
     private override init() {
         super.init()
@@ -28,37 +28,77 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
     }
     
-    @objc static func shared() -> LocationManager {
-        if uniqueInstance == nil {
-            uniqueInstance = LocationManager()
+    func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping (() -> Void)){
+        log.debug("LocationManager checkDoWeNeedShowLocationPermissionAllert")
+        SingletonStorage.shared.getUniqueUserID(success: { (uniqueUserID) in
+            let key = uniqueUserID + "locationPermission"
+            let permission = UserDefaults.standard.integer(forKey: key)
+            if permission == 0{
+                UserDefaults.standard.set(1, forKey: key)
+                UserDefaults.standard.synchronize()
+                yesWeNeed()
+            }
+        }) {
+            
         }
-        return uniqueInstance!
+    }
+    
+    func showIfNeedLocationPermissionAllert(){
+        log.debug("LocationManager showIfNeedLocationPermissionAllert")
+
+        self.checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
+            let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable , preferredStyle: .alert)
+            let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { (action) in
+                UIApplication.shared.openGlobalSettings()
+            })
+            let cancelAction = UIAlertAction(title: TextConstants.cancel , style: .cancel, handler: nil)
+            controller.addAction(okAction)
+            controller.addAction(cancelAction)
+            RouterVC().presentViewController(controller: controller)
+        })
     }
     
     func startUpdateLocation(){
-        if CLLocationManager.locationServicesEnabled(){
-            if CLLocationManager.authorizationStatus() == .notDetermined{
-                locationManager.requestAlwaysAuthorization()
-            }else {
-                locationManager.startMonitoringSignificantLocationChanges()
-                if #available(iOS 9.0, *) {
-                    locationManager.allowsBackgroundLocationUpdates = true
-                }
-                locationManager.startUpdatingLocation()
+        log.debug("LocationManager startUpdateLocation")
+
+        AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
+            
+            guard let `self` = self else{
+                return
             }
-        }
+            
+            if autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected {
+                if CLLocationManager.locationServicesEnabled(){
+                    if CLLocationManager.authorizationStatus() == .notDetermined{
+                        self.locationManager.requestAlwaysAuthorization()
+                    } else {
+                        self.locationManager.startMonitoringSignificantLocationChanges()
+                        self.locationManager.allowsBackgroundLocationUpdates = true
+                        self.locationManager.startUpdatingLocation()
+                    }
+                }else{
+                    self.showIfNeedLocationPermissionAllert()
+                }
+            }
+        })
     }
  
     func stopUpdateLocation(){
+        log.debug("LocationManager stopUpdateLocation")
+
         locationManager.stopMonitoringSignificantLocationChanges()
     }
     
     // CLLocationManager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        SyncService.default.startAutoSyncInBG()
+        log.debug("LocationManager locationManager")
+
+        SyncServiceManager.shared.updateInBackground()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        log.debug("LocationManager locationManager")
+
         if ((status == .authorizedAlways) || (status == .authorizedWhenInUse) || (status == .authorizedAlways)){
             startUpdateLocation()
         }

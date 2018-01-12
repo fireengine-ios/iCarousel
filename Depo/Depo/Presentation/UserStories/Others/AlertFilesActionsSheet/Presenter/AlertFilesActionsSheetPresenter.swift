@@ -162,10 +162,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             }
         }
         
-        if (items?.contains(where: { return !$0.isLocalItem }) ?? false) {
-            filteredActionTypes.append(.delete)
-        }
-        
         filteredActionTypes = filteredActionTypes.filter({ !excludeTypes.contains($0) })
         
         return constractActions(with: filteredActionTypes, for: items)
@@ -201,12 +197,16 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .edit:
                 action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                    self.interactor.edit(item: currentItems)
+                    
+                    UIApplication.topController()?.showSpiner()
+                    self.interactor.edit(item: currentItems, complition: {
+                        UIApplication.topController()?.hideSpiner()
+                    })
                 })
             case .download:
                 action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
-                    
                     self.interactor.download(item: currentItems)
+                    self.basePassingPresenter?.stopModeSelected()
                 })
             case .delete:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
@@ -262,8 +262,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .createStory:
                 action = UIAlertAction(title: TextConstants.actionSheetCreateStory, style: .default, handler: { _ in
-                    self.interactor.createStory(items: currentItems)
-                    self.basePassingPresenter?.stopModeSelected()
+                    let images = currentItems.filter({ $0.fileType == .image })
+                    if images.count <= NumericConstants.maxNumberPhotosInStory {
+                        self.interactor.createStory(items: images)
+                        self.basePassingPresenter?.stopModeSelected()
+                    } else {
+                        let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
+                        UIApplication.showErrorAlert(message: text)
+                    }
                 })
             case .iCloudDrive:
                 action = UIAlertAction(title: TextConstants.actionSheetiCloudDrive, style: .default, handler: { _ in
@@ -330,10 +336,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 action = UIAlertAction(title: TextConstants.actionSheetRemove, style: .default, handler: { _ in
                     self.interactor.delete(item: currentItems)
                 })
-            default:
-                action = UIAlertAction(title: "TEST", style: .default, handler: { _ in
-                    
+            case .deleteDeviceOriginal:
+                action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
+                    self.interactor.deleteDeviceOriginal(items: currentItems)
                 })
+            case .sync:
+                action = UIAlertAction()
+            case .undetermend:
+                action = UIAlertAction()
             }
             return action
         }

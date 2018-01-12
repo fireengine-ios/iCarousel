@@ -40,8 +40,8 @@ class ImageDownloder {
         
     }
     
-    func getImagesByImagesURLs(list:[ImageForDowload], images:@escaping ([URL]) -> Swift.Void){
-        if list.count > 0{
+    func getImagesByImagesURLs(list:[ImageForDowload], images: @escaping ([URL]) -> Swift.Void) {
+        if list.count > 0 {
             let imageObject = list.first
             getImage(patch: imageObject?.downloadURL, compliteImage: {(image) in
                 var urlsArray = [URL]()
@@ -85,5 +85,64 @@ class ImageDownloder {
     }
 }
 
+typealias FilesDownloaderResponse = (_ fileURLs: [URL], _ directoryURL: URL) -> Swift.Void
+typealias FilesDownloaderFail = (_ errorMessage: String) -> Swift.Void
 
+class FileDownloadRequestParameters: BaseRequestParametrs, DownloadRequestParametrs {
+    var urlToRemoteFile: URL
+    
+    init(url: URL) {
+        urlToRemoteFile = url
+    }
+}
+
+class FilesDownloader {
+    
+    let fileManager = FileManager.default
+    let requestService = BaseRequestService()
+    
+    func getFiles(filesForDownload: [FileForDownload], response: @escaping FilesDownloaderResponse, fail: @escaping FilesDownloaderFail) {
+        guard filesForDownload.count > 0 else {
+            fail(TextConstants.errorFileSystemAccessDenied)
+            return
+        }
+        
+        guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first  else {
+            fail(TextConstants.errorNothingToDownload)
+            return
+        }
+        
+        let tmpDirectoryURL = documentsURL.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        do {
+            try fileManager.createDirectory(at: tmpDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            fail(error.localizedDescription)
+            return
+        }
+        
+        let group = DispatchGroup()
+        var localURLs = [URL]()
+        for file in filesForDownload {
+            group.enter()
+            let params = BaseDownloadRequestParametrs(urlToFile: file.url, fileName: file.name, contentType: file.type)
+            requestService.executeDownloadRequest(param: params) { (urlToTmpFile, response, error) in
+                if let urlToTmpFile = urlToTmpFile {
+                    do {
+                        let urlToLocalFile = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
+                        try FileManager.default.moveItem(at: urlToTmpFile, to: urlToLocalFile)
+                        localURLs.append(urlToLocalFile)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            response(localURLs, tmpDirectoryURL)
+        }
+    }
+    
+}
 

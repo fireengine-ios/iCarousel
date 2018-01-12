@@ -12,7 +12,7 @@ protocol PhotoVideoDetailInteractorInput {
     
     typealias Item = WrapData
     
-    func onSelectItem(fileObject:Item, from items:[[Item]])
+    func onSelectItem(fileObject:Item, from items:[Item])
     
     func onViewIsReady()
     
@@ -25,5 +25,7 @@ protocol PhotoVideoDetailInteractorInput {
     var bottomBarConfig: EditingBarConfig { get }
 
     func deleteSelectedItem()
+    
+    var setupedMoreMenuConfig: [ElementTypes] {get}
     
 }

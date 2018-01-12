@@ -12,7 +12,6 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         dataSource = ArrayDataSourceForCollectionView()
         interactor.viewIsReady()
         sortedRule = .timeUp
-        dataSource.displayingType = .list
         dataSource.setPreferedCellReUseID(reUseID: nil)
         
         super.viewIsReady(collectionView: collectionView)
@@ -21,6 +20,8 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
 
     override func uploadData(_ searchText: String! = nil) {
+        log.debug("AlbumsPresenter uploadData")
+
         interactor.getAllItems(sortBy: sortedRule)
     }
     
@@ -39,6 +40,8 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func sortedPushed(with rule: SortedRules){
+        log.debug("AlbumsPresenter sortedPushed")
+
         //sortedRule = rule
         sortedRule = rule
         interactor.getAllItems(sortBy: rule)
@@ -51,6 +54,8 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func reloadData() {
+        log.debug("AlbumsPresenter reloadData")
+
         startAsyncOperation()
         interactor.getAllItems(sortBy: sortedRule)
     }

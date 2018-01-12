@@ -10,7 +10,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
     typealias Item = WrapData
 
-    var output: PhotoVideoDetailInteractorOutput!
+    weak var output: PhotoVideoDetailInteractorOutput!
     
     var array = [Item]()
     
@@ -19,30 +19,34 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     var photoVideoBottomBarConfig: EditingBarConfig!
     var documentsBottomBarConfig: EditingBarConfig!
     
-    func onSelectItem(fileObject: Item, from items: [[Item]]) {
-        array.removeAll()
-        for ar in items {//FIXME: ALEX
-            array.append(contentsOf: ar)
-        }
-        
-        if fileObject.fileType == .image || fileObject.fileType == .video {
-            let wrapperedArray = WrapperedItemsSorting().filterByType(itemsArray: array,
-                                                                      types: [FileType.video, FileType.image])
-            guard let buf = wrapperedArray as? [Item] else{
-                return
-            }
-            array = buf
-        } else {
-            array = [fileObject]
-        }
-        selectedIndex = array.index(of: fileObject)!
+    var moreMenuConfig = [ElementTypes]()
+    
+    var setupedMoreMenuConfig: [ElementTypes] {
+        return moreMenuConfig
     }
     
-    func onViewIsReady(){
+    func onSelectItem(fileObject: Item, from items: [Item]) {
+        array.removeAll()
+        array.append(contentsOf: items)
+      
+//        if fileObject.fileType == .image || fileObject.fileType == .video {
+////            let wrapperedArray = WrapperedItemsSorting().filterByType(itemsArray: array,
+////                                                                      types: [FileType.video, FileType.image])
+////            guard let buf = wrapperedArray as? [Item] else {
+////                return
+////            }
+////            array = buf
+//        } else {
+////            array = [fileObject]
+//        }
+        selectedIndex = array.index(of: fileObject) ?? 0
+    }
+    
+    func onViewIsReady() {
         output.onShowSelectedItem(at: selectedIndex, from: array)
     }
     
-    func setSelectedItemIndex(selectedIndex: Int){
+    func setSelectedItemIndex(selectedIndex: Int) {
         self.selectedIndex = selectedIndex
     }
     
@@ -58,7 +62,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         let selectedItem = array[selectedIndex]
         switch selectedItem.fileType {
         case .image, .video:
-
             var elementsConfig = photoVideoBottomBarConfig.elementsConfig
             if .video == selectedItem.fileType || selectedItem.isLocalItem {
                 if let editIndex = elementsConfig.index(of: .edit) {
@@ -89,16 +92,18 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
     }
     
-    func deleteSelectedItem() {
+    func deleteSelectedItem(){
+        let isRightSwipe = selectedIndex == array.count - 1
+        
         array.remove(at: selectedIndex)
-        if (selectedIndex >= array.count) {
+        
+        if (selectedIndex >= array.count){
             selectedIndex = array.count - 1
         }
-
-        if (array.count == 0){
+        if array.isEmpty {
             output.goBack()
         } else {
-            output.updateItems(objects: array, selectedIndex: selectedIndex)
+            output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
         }
     }
 }

@@ -35,12 +35,15 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     }
     
     func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        log.debug("BaseFilesGreedInteractor reloadItems")
+        
         guard isUpdating == false else {
             return
         }
         isUpdating = true
         remoteItems.reloadItems(sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
             DispatchQueue.main.async {
+                log.debug("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems success")
                 
                 var isArrayPresenter = false
                 if let presenter = self?.output as? BaseFilesGreedPresenter{
@@ -59,6 +62,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 }
             }
             }, fail: { [weak self] in
+                log.debug("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems fail")
+
                 self?.isUpdating = false
                 self?.output.getContentWithFail(errorString: nil)//asyncOperationFail(errorMessage: nil)
             },
@@ -66,6 +71,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     }
     
     func nextItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        log.debug("BaseFilesGreedInteractor nextItems")
+
         guard isUpdating == false else {
             return
         }
@@ -75,6 +82,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                               success:
             { [weak self] items in
                 DispatchQueue.main.async {
+                    log.debug("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems success")
+
                     self?.isUpdating = false
                     if items.count == 0 {
                         self?.output.getContentWithSuccessEnd()
@@ -88,38 +97,47 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     }
                 }
             }, fail: { [weak self] in
+                log.debug("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems fail")
+
                 self?.isUpdating = false
                 self?.output.asyncOperationFail(errorMessage: nil)
         }, newFieldValue: newFieldValue)
     }
-
-    func needShowNoFileView()-> Bool{
-        if ((remoteItems is PhotoAndVideoService) ||
-            (remoteItems is MusicService)) {
-            return true
-        }
-        return false
-    }
     
     func textForNoFileLbel() -> String{
-        if (remoteItems is PhotoAndVideoService){
+        if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoTitleText
+        } else if remoteItems is MusicService {
+            return TextConstants.audioViewNoAudioTitleText
+        } else if remoteItems is DocumentService {
+            return TextConstants.documentsViewNoDocumenetsTitleText
         }
-        return TextConstants.audioViewNoAudioTitleText
+        
+        return ""
     }
     
     func textForNoFileButton() -> String{
-        if (remoteItems is PhotoAndVideoService){
+        if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoButtonText
+        } else if remoteItems is MusicService {
+            return TextConstants.audioViewNoAudioButtonText
+        } else if remoteItems is DocumentService {
+            return TextConstants.documentsViewNoDocumenetsTitleText
         }
-        return TextConstants.audioViewNoAudioButtonText
+    
+        return ""
     }
     
-    func imageForNoFileImageView() -> UIImage{
-        if (remoteItems is PhotoAndVideoService){
+    func imageForNoFileImageView() -> UIImage {
+        if remoteItems is PhotoAndVideoService {
             return UIImage(named: "ImageNoPhotos")!
+        } else if remoteItems is MusicService {
+            return UIImage(named: "ImageNoMusics")!
+        } else if remoteItems is DocumentService {
+            return UIImage(named: "ImageNoDocuments")!
         }
-        return UIImage(named: "ImageNoMusics")!
+        
+        return UIImage()
     }
     
     func getRemoteItemsService() -> RemoteItemsService{

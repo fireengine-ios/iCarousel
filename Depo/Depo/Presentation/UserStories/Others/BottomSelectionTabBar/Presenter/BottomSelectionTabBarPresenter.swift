@@ -8,14 +8,13 @@
 
 class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelectionTabBarModuleInput, BottomSelectionTabBarViewOutput, BottomSelectionTabBarInteractorOutput {
     
-    var view: BottomSelectionTabBarViewInput!
+    weak var view: BottomSelectionTabBarViewInput!
 //    var interactor: BottomSelectionTabBarInteractorInput!
     var router: BottomSelectionTabBarRouterInput!
     
     let middleTabBarRect = CGRect(x: Device.winSize.width/2 - 5, y: Device.winSize.height - 49, width: 10, height: 50)
     
     func viewIsReady() {
-        
         guard let bottomBarInteractor = interactor as? BottomSelectionTabBarInteractorInput,
             let currentConfig = bottomBarInteractor.currentBarcongfig else {
             return
@@ -113,7 +112,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHidePlusTabBar), object: nil)
         view.showBar(animated: animated, onView: shownSourceView)
-        debugPrint("Show")
     }
     
     func bottomBarSelectedItem(index: Int, sender: UITabBarItem) {
@@ -133,9 +131,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             interactor.delete(item: selectedItems)
             basePassingPresenter?.stopModeSelected()
         case .download:
+            basePassingPresenter?.stopModeSelected()
             interactor.download(item: selectedItems)
         case .edit:
-            interactor.edit(item: selectedItems)
+            RouterVC().tabBarVC?.showSpiner()
+            self.interactor.edit(item: selectedItems, complition: {
+                RouterVC().tabBarVC?.hideSpiner()
+            })
         case .info:
             if let firstSelected = selectedItems.first as? Item {
                 router.onInfo(object: firstSelected)
@@ -145,12 +147,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         case .move:
             interactor.move(item: selectedItems, toPath: "")
         case .share:
-            var onlyLink = false
-            selectedItems.forEach({ (item) in
-                if item.fileType != .image {
-                    onlyLink = true
-                }
+            let onlyLink = selectedItems.contains(where: {
+                $0.fileType != .image && $0.fileType != .video
             })
+
             if onlyLink {
                 interactor.shareViaLink(item: selectedItems, sourceRect: middleTabBarRect)
             } else {
@@ -158,6 +158,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             }
             basePassingPresenter?.stopModeSelected()
         case .sync:
+            basePassingPresenter?.stopModeSelected()
             interactor.sync(item: selectedItems)
         case .removeFromAlbum:
             interactor.removeFromAlbum(items: selectedItems)
@@ -291,7 +292,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 
             case .edit:
                 action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                    self.interactor.edit(item: currentItems)
+                    
+                    RouterVC().tabBarVC?.showSpiner()
+                    self.interactor.edit(item: currentItems, complition: {
+                        RouterVC().tabBarVC?.hideSpiner()
+                    })
                 })
             case .download:
                 action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
@@ -468,6 +473,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     func objectsToShare(rect: CGRect?, urls: [String]) {
         router.showShare(rect: rect, urls: urls)
+    }
+    
+    func deleteMusic(_ completion: @escaping (() -> Void)) {
+        router.showDeleteMusic(completion)
     }
     
     //MARK: base presenter

@@ -25,6 +25,7 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        navigationItem.rightBarButtonItem?.isEnabled = true
         setTitle(withString: TextConstants.createStory, andSubTitle: nil)
     }
     
@@ -42,37 +43,33 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture))
         self.collectionView.addGestureRecognizer(longPressGesture)
         
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-        button.setTitle(TextConstants.createStoryPhotosOrderNextButton, for: .normal)
-        button.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        button.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
+        let createButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+        createButton.setTitle(TextConstants.createStoryPhotosOrderNextButton, for: .normal)
+        createButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        createButton.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
         
-        let barButton = UIBarButtonItem(customView: button)
-        
-        navigationItem.rightBarButtonItem = barButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: createButton)
         
         output.viewIsReady()
     }
     
     @objc func handleLongGesture(gesture: UILongPressGestureRecognizer) {
-        if #available(iOS 9.0, *) {
-            switch(gesture.state) {
-                
-            case UIGestureRecognizerState.began:
-                guard let selectedIndexPath = self.collectionView.indexPathForItem(at: gesture.location(in: self.collectionView)) else {
-                    break
-                }
-                collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
-                setSelectionForCellSelectedBy(gesture: gesture, selection: true)
-            case UIGestureRecognizerState.changed:
-                collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
-            case UIGestureRecognizerState.ended:
-                collectionView.endInteractiveMovement()
-                setSelectionForCellSelectedBy(gesture: gesture, selection: false)
-            default:
-                collectionView.cancelInteractiveMovement()
-                setSelectionForCellSelectedBy(gesture: gesture, selection: false)
+        switch(gesture.state) {
+            
+        case UIGestureRecognizerState.began:
+            guard let selectedIndexPath = self.collectionView.indexPathForItem(at: gesture.location(in: self.collectionView)) else {
+                break
             }
+            collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
+            setSelectionForCellSelectedBy(gesture: gesture, selection: true)
+        case UIGestureRecognizerState.changed:
+            collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+        case UIGestureRecognizerState.ended:
+            collectionView.endInteractiveMovement()
+            setSelectionForCellSelectedBy(gesture: gesture, selection: false)
+        default:
+            collectionView.cancelInteractiveMovement()
+            setSelectionForCellSelectedBy(gesture: gesture, selection: false)
         }
     }
     
@@ -98,6 +95,7 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
     
     
     @objc func onNextButton(){
+        navigationItem.rightBarButtonItem?.isEnabled = false
         output.onNextButton(array: collectionViewData)
     }
 
@@ -153,7 +151,6 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         }
         
         let object = collectionViewData[indexPath.row]
-        cell_.startAnimating()
         cell_.setPosition(position: indexPath.row + 1)
         fileDataSource.getImage(patch: object.patchToPreview) { [weak self] (image) in
             
