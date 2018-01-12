@@ -48,6 +48,7 @@ class RemoteItemsService {
         self.requestSize = requestSize
         currentPage = 0
         queueOperations = OperationQueue()
+        queueOperations.maxConcurrentOperationCount = 1
     }
     
     func reloadItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
@@ -140,9 +141,9 @@ class RemoteItemsService {
     }
     
     func stopAllOperations() {
-        DispatchQueue.main.async { [weak self] in
-            self?.queueOperations.cancelAllOperations()
-        }
+//        DispatchQueue.main.async { [weak self] in
+           queueOperations.cancelAllOperations()
+//        }
     }
 }
 

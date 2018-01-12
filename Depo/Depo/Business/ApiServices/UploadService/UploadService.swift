@@ -197,9 +197,9 @@ final class UploadService: BaseRequestService {
         guard !itemsToSync.isEmpty else {
             return nil
         }
-        if allSyncOperationsCount == 0 {
-            CardsManager.default.startOperationWith(type: .sync, allOperations: self.allSyncOperationsCount + itemsToSync.count, completedOperations: 0)
-        }
+//        if allSyncOperationsCount == 0 {
+//            CardsManager.default.startOperationWith(type: .sync, allOperations: self.allSyncOperationsCount + itemsToSync.count, completedOperations: 0)
+//        }
         
         let firstObject = itemsToSync.first!
         print("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
@@ -239,7 +239,7 @@ final class UploadService: BaseRequestService {
                     if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
                         self.clearSyncCounters()
                         self.uploadOperations = self.uploadOperations.filter({ $0.uploadType != .autoSync })
-                        CardsManager.default.stopOperationWithType(type: .sync)
+//                        CardsManager.default.stopOperationWithType(type: .sync)
                         success()
                     }
                     return
@@ -257,7 +257,7 @@ final class UploadService: BaseRequestService {
                 
                 if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
                     self.clearSyncCounters()
-                    CardsManager.default.stopOperationWithType(type: .sync)
+//                    CardsManager.default.stopOperationWithType(type: .sync)
                     success()
                 }
                 
@@ -282,8 +282,8 @@ final class UploadService: BaseRequestService {
         clearUploadCounters()
         clearSyncCounters()
         
-        CardsManager.default.stopOperationWithType(type: .upload)
-        CardsManager.default.stopOperationWithType(type: .sync)
+//        CardsManager.default.stopOperationWithType(type: .upload)
+//        CardsManager.default.stopOperationWithType(type: .sync)
     }
     
     func cancelUploadOperations(){
@@ -318,12 +318,12 @@ final class UploadService: BaseRequestService {
         
         resetSyncCounters(for: photo ? .image : .video)
         
-        guard allSyncOperationsCount != finishedSyncOperationsCount else {
-            CardsManager.default.stopOperationWithType(type: .sync)
-            return
-        }
-        
-        CardsManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
+//        guard allSyncOperationsCount != finishedSyncOperationsCount else {
+//            CardsManager.default.stopOperationWithType(type: .sync)
+//            return
+//        }
+//
+//        CardsManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
     }
     
     private func clearUploadCounters() {
