@@ -33,13 +33,13 @@ open class AuthorizationRepositoryImp: AuthorizationRepository {
     // MARK: - Open properties for customization (by override)
     
     open var accessTokenKey: String {
-        return "X-Auth-Token"
+        return HeaderConstant.AuthToken
     }
     open var refreshTokenKey: String {
-        return "X-Remember-Me-Token"
+        return HeaderConstant.RememberMeToken
     }
     open var authorizationHeaderKey: String {
-        return "X-Auth-Token"
+        return HeaderConstant.AuthToken
     }
     open func fullAccessToken(_ accessToken: String) -> String {
         return accessToken

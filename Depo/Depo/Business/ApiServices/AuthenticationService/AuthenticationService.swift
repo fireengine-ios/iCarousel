@@ -297,17 +297,17 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         
-                        if let accessToken = headers["X-Auth-Token"] as? String {
+                        if let accessToken = headers[HeaderConstant.AuthToken] as? String {
                             self?.tokenStorage.accessToken = accessToken
                         }
                         
-                        if let refreshToken = headers["X-Remember-Me-Token"] as? String {
+                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
                             self?.tokenStorage.refreshToken = refreshToken
                         }
                         
                         /// must be after accessToken save logic
-                        if let emptyPhoneFlag = headers["X-Account-Warning"] as? String, emptyPhoneFlag == "EMPTY_MSISDN" {
-                            fail?(ErrorResponse.string("EMPTY_MSISDN"))
+                        if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String, emptyPhoneFlag == HeaderConstant.emptyMSISDN {
+                            fail?(ErrorResponse.string(HeaderConstant.emptyMSISDN))
                             return
                         }
 
@@ -340,8 +340,8 @@ class AuthenticationService: BaseRequestService {
         switch response.result {
         case .success(_):
             if let headers = response.response?.allHeaderFields as? [String: Any],
-                let accessToken = headers["X-Auth-Token"] as? String,
-                let refreshToken = headers["X-Remember-Me-Token"] as? String
+                let accessToken = headers[HeaderConstant.AuthToken] as? String,
+                let refreshToken = headers[HeaderConstant.RememberMeToken] as? String
             {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken

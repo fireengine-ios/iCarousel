@@ -138,7 +138,7 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     private func isEmptyPhoneError(for errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("EMPTY_MSISDN")
+        return errorResponse.description.contains(HeaderConstant.emptyMSISDN)
     }
     
     func findCoutryPhoneCode(plus: Bool) {

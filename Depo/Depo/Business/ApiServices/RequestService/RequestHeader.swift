@@ -41,7 +41,8 @@ struct HeaderConstant {
     static let accountWarning = "X-Account-Warning"
     
     static let Authorization = "Authorization"
-
+    
+    static let emptyMSISDN = "EMPTY_MSISDN"
 }
 
 class RequestHeaders {
