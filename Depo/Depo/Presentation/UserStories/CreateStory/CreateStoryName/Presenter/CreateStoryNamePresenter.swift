@@ -32,6 +32,13 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
             showEmptyNamePopup()
             return
         }
+        
+        let checkNameString = text.replacingOccurrences(of: " ", with: "")
+        if checkNameString.isEmpty {
+            showEmptyNamePopup()
+            return
+        }
+        
         if (text.isEmpty){
             showEmptyNamePopup()
         } else {
