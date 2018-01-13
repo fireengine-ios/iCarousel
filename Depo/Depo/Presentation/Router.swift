@@ -260,7 +260,7 @@ class RouterVC: NSObject {
         return viewController
     }
     
-    func duplicatedContacts(analyzeResponse: ContactSync.AnalyzeResponse, moduleOutput: DuplicatedContactsModuleOutput?) -> UIViewController {
+    func duplicatedContacts(analyzeResponse: [ContactSync.AnalyzedContact], moduleOutput: DuplicatedContactsModuleOutput?) -> UIViewController {
         let viewController = DuplicatedContactsModuleInitializer.initializeViewController(with: "DuplicatedContactsViewController",
                                                                                           analyzeResponse: analyzeResponse,
                                                                                           moduleOutput: moduleOutput)

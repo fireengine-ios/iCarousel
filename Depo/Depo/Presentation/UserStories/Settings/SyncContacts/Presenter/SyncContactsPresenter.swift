@@ -56,11 +56,21 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         view.success(response: response, forOperation: operation)
     }
     
-    func analyzeSuccess(response: ContactSync.AnalyzeResponse) {
-        router.goToDuplicatedContacts(with: response, moduleOutput: self)
+    func analyzeSuccess(response: [ContactSync.AnalyzedContact]) {
+        if response.count > 0 {
+            router.goToDuplicatedContacts(with: response, moduleOutput: self)
+        } else {
+            let controller = PopUpController.with(title: "",
+                                 message: TextConstants.errorAlertTextNoDuplicatedContacts,
+                                 image: .none, buttonTitle: TextConstants.ok)
+            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            interactor.startOperation(operationType: .cancel)
+        }
     }
     
-    func cancellSuccess() {
+    func cancelSuccess() {
+        guard let view = view else { return }
+        
         if isBackUpAvailable {
             view.setStateWithBackUp()
         } else {
@@ -73,7 +83,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func onDeinit() {
-        interactor.startOperation(operationType: .cancelAllOperations)
+        interactor.startOperation(operationType: .cancel)
     }
     
     func showNoBackUp() {
@@ -95,7 +105,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
 
 extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
     func cancelDeletingDuplicatedContacts() {
-        interactor.startOperation(operationType: .cancelAllOperations)
+        interactor.startOperation(operationType: .cancel)
     }
     
     func deleteDuplicatedContacts() {

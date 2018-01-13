@@ -11,7 +11,7 @@ import UIKit
 class DuplicatedContactsModuleInitializer: NSObject {
 
     class func initializeViewController(with nibName:String,
-                                        analyzeResponse: ContactSync.AnalyzeResponse,
+                                        analyzeResponse: [ContactSync.AnalyzedContact],
                                         moduleOutput: DuplicatedContactsModuleOutput?) -> UIViewController {
         
         let viewController = DuplicatedContactsViewController(nibName: nibName, bundle: nil)

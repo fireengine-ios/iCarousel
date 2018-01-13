@@ -118,7 +118,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     }
     
     @IBAction func onCancelButton() {
-        output.startOperation(operationType: .cancelAllOperations)
+        output.startOperation(operationType: .cancel)
     }
     
     @IBAction func onDeleteDuplicatedTapped(_ sender: Any) {
@@ -229,7 +229,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
             backupDateLabel.text = TextConstants.settingsBackUpLessAMinute
         } else {
             backupDateLabel.text = String(format: TextConstants.settingsBackUpLessADay,
-                                          lastBackUpDate.getDateInFormat(format: "d MMMM yyyy"))
+                                          lastBackUpDate.getDateInFormat(format: "d MMMM yyyy HH:mm:ss"))
         }
     }
     

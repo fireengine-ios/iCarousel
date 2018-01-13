@@ -9,4 +9,6 @@
 protocol DuplicatedContactsViewOutput {
     func viewIsReady()
     func onWillDisappear()
+    func onKeepTapped()
+    func onDeleteAllTapped()
 }

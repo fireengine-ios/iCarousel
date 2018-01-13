@@ -151,6 +151,7 @@
 		786AA87724BCB7349231EF0C /* HomeHeaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */; };
 		78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */; };
 		787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
+		78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */; };
 		78D6C8FF1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */; };
 		78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */; };
 		78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */; };
@@ -165,6 +166,8 @@
 		78D9BA482007E82800F2233F /* DuplicatedContactsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA442007E82700F2233F /* DuplicatedContactsViewInput.swift */; };
 		78D9BA492007E82800F2233F /* DuplicatedContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA452007E82700F2233F /* DuplicatedContactsViewController.swift */; };
 		78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */; };
+		78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */; };
+		78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */; };
 		7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */; };
 		7C00FE191F5957570041D041 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE161F5957570041D041 /* AppRater.bundle */; };
 		7C00FE1A1F5957570041D041 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00FE181F5957570041D041 /* AppRater.m */; };
@@ -2817,6 +2820,7 @@
 		7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsConfigurator.swift; sourceTree = "<group>"; };
 		78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarActionHandler.swift; sourceTree = "<group>"; };
 		787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailModuleOutput.swift; sourceTree = "<group>"; };
+		78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsModuleOutput.swift; sourceTree = "<group>"; };
 		78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
 		78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsConfigurator.swift; sourceTree = "<group>"; };
 		78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsInitializer.swift; sourceTree = "<group>"; };
@@ -2832,6 +2836,8 @@
 		78D9BA452007E82700F2233F /* DuplicatedContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewController.swift; sourceTree = "<group>"; };
 		78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewOutput.swift; sourceTree = "<group>"; };
 		78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorInput.swift; sourceTree = "<group>"; };
+		78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactTableViewCell.swift; sourceTree = "<group>"; };
+		78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DuplicatedContactTableViewCell.xib; sourceTree = "<group>"; };
 		797B0A89F74D79DE19756139 /* IntroducePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroducePresenter.swift; sourceTree = "<group>"; };
 		7A39EC58D2D1F5BD26616C89 /* PhotoVideoDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailViewController.swift; sourceTree = "<group>"; };
 		7A7ECB6D4F000A77B89C5008 /* BaseFilesGreedConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedConfigurator.swift; sourceTree = "<group>"; };
@@ -5691,6 +5697,7 @@
 		78D9BA2B2007E73A00F2233F /* DuplicatedContacts */ = {
 			isa = PBXGroup;
 			children = (
+				78FA7AD02008D57200E0747F /* Cells */,
 				78D9BA2C2007E75000F2233F /* View */,
 				78D9BA2D2007E75600F2233F /* Router */,
 				78D9BA2E2007E75F00F2233F /* Presenter */,
@@ -5725,6 +5732,7 @@
 			children = (
 				78D9BA3B2007E80400F2233F /* DuplicatedContactsModuleInput.swift */,
 				78D9BA3C2007E80500F2233F /* DuplicatedContactsPresenter.swift */,
+				78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -5755,6 +5763,15 @@
 				264BDDE222D06B0A452F4DF7 /* PhotoVideoDetailRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		78FA7AD02008D57200E0747F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */,
+				78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		796EC0788CE39CDF0AE1A1E0 /* Router */ = {
@@ -10681,6 +10698,7 @@
 				CE95ED4E1F516736002F923A /* HelpAndSupportHeaderView.xib in Resources */,
 				CE16C3E11FF234BA00BE5906 /* toolbar_crop_icon@3x.png in Resources */,
 				CE16C3321FF234BA00BE5906 /* toolbar_undo_icon@2x.png in Resources */,
+				78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */,
 				CE16C3061FF234BA00BE5906 /* caps2_selected@2x.png in Resources */,
 				CE16C3541FF234BA00BE5906 /* cancel_buton.png in Resources */,
 				7C00FE1E1F5982FA0041D041 /* FeedbackViewController.xib in Resources */,
@@ -12366,6 +12384,7 @@
 				CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */,
 				8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */,
 				7859299020060E85003F8AB3 /* ManageContactsRouterInput.swift in Sources */,
+				78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */,
 				CE51AC0D1EF90853005DCEE0 /* UIAlertViewCustom.m in Sources */,
 				CE51AC151EF90853005DCEE0 /* UpdaterController.m in Sources */,
 				CE2976DD1FD58E2000350F3A /* LocalAlbumPresenter.swift in Sources */,
@@ -13088,6 +13107,7 @@
 				868B89BA3A01CCDC66E16667 /* FreeAppSpaceRouter.swift in Sources */,
 				B7C673A176A577E30FAB824E /* FreeAppSpaceConfigurator.swift in Sources */,
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
+				78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */,
 				29F301A021F9712D24CB97EE /* FreeAppSpaceInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

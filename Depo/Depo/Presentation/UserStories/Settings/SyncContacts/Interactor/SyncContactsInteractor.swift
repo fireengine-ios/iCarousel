@@ -12,7 +12,7 @@ enum SyncOperationType {
     case analyze
     case deleteDuplicated
     case getBackUpStatus
-    case cancelAllOperations
+    case cancel
 }
 
 enum SyncOperationErrors {
@@ -35,9 +35,9 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             performOperation(forType: .backup)
         case .restore:
             performOperation(forType: .restore)
-        case .cancelAllOperations:
-            contactsSyncService.cancellCurrentOperation()
-            output.cancellSuccess()
+        case .cancel:
+            contactsSyncService.cancel()
+            output.cancelSuccess()
         case .getBackUpStatus:
             loadLastBackUp()
         case .analyze:
@@ -91,7 +91,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     private func deleteDuplicated() {
-        
+        contactsSyncService.deleteDuplicates()
     }
 }
 

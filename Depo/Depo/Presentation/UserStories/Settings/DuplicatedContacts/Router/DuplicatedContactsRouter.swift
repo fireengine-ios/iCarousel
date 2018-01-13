@@ -7,5 +7,7 @@
 //
 
 class DuplicatedContactsRouter: DuplicatedContactsRouterInput {
-
+    func back() {
+        RouterVC().popViewController()
+    }
 }
