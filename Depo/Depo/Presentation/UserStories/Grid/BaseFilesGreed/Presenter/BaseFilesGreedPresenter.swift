@@ -483,10 +483,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             
             if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
                 let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
-                if localDuplicates.count > 0 {
-                    selectedItems = localDuplicates
-                } else {
+                if localDuplicates.count == 0 {
+                    //selectedItems = localDuplicates
                     actionTypes.remove(at: deleteOriginalIndex)
+                } else {
+                    
                 }
             }
             
