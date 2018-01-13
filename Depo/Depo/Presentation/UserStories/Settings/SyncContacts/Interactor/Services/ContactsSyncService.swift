@@ -22,8 +22,8 @@ class ContactsSyncService {
     }
     
     typealias ProgressCallback = (_ progress: Int, _ mode: SyncOperationType) -> Void
-    typealias FinishCallback = (_ finished: ContactSync.SyncResponse, _ mode: SyncOperationType) -> Void
-    typealias AnalyzeFinishCallback = (_ finished: ContactSync.AnalyzeResponse) -> Void
+    typealias FinishCallback = (_ response: ContactSync.SyncResponse, _ mode: SyncOperationType) -> Void
+    typealias AnalyzeFinishCallback = (_ response: [ContactSync.AnalyzedContact]) -> Void
     typealias ErrorCallback = (_ errorType: SyncOperationErrors, _ mode: SyncOperationType) -> Void
 
     func executeOperation(type: SYNCMode, progress: ProgressCallback?, finishCallback: FinishCallback?, errorCallback: ErrorCallback?) {
@@ -129,10 +129,7 @@ class ContactsSyncService {
         }
     }
     
-    func cancellCurrentOperation() {
-        //TODO: Pestryakov find out how to close
-//        SyncStatus.shared().reset()
-//        AnalyzeStatus.shared().reset()
+    func cancel() {
         ContactSyncSDK.cancelAnalyze()
     }
     
@@ -150,8 +147,7 @@ class ContactsSyncService {
             let parsedContactsToMerge = ContactsSyncService.parseContactsToMerge(contactsToMerge)
             let parsedContactsToDelete = ContactsSyncService.parseContactsToDelete(contactsToDelete)
             
-            let response = ContactSync.AnalyzeResponse(contactsToMerge: parsedContactsToMerge,
-                                                      contactsToDelete: parsedContactsToDelete)
+            let response = ContactsSyncService.mergeContacts(parsedContactsToMerge, with: parsedContactsToDelete)
             
             finishCallback?(response)
         }
@@ -161,6 +157,14 @@ class ContactsSyncService {
             progressCallback?(Int(truncating: progressPerecentage), .analyze)
         }
     }
+    
+    func deleteDuplicates() {
+        if AnalyzeStatus.shared().analyzeStep == AnalyzeStep.ANALYZE_STEP_PROCESS_DUPLICATES {
+            ContactSyncSDK.continueAnalyze()
+        }
+    }
+    
+
     
     static private func parseContactsToMerge(_ contactsToMerge: [String: Int]) -> [ContactSync.AnalyzedContact] {
         var parsedContacts = [ContactSync.AnalyzedContact]()
@@ -187,6 +191,28 @@ class ContactsSyncService {
         }
         
         return parsedContacts
+    }
+    
+    static private func mergeContacts(_ firstContacts: [ContactSync.AnalyzedContact],
+                                      with secondContacts: [ContactSync.AnalyzedContact]) -> [ContactSync.AnalyzedContact] {
+        var finalContacts = [ContactSync.AnalyzedContact]()
+        for contact in firstContacts {
+            let name = contact.name
+            var numberOfErrors = contact.numberOfErrors
+            if let index = secondContacts.index(where: { $0.name == name })  {
+                numberOfErrors += secondContacts[index].numberOfErrors
+            }
+            let finalContact = ContactSync.AnalyzedContact(name: name, numberOfErrors: numberOfErrors)
+            finalContacts.append(finalContact)
+        }
+        
+        for contact in secondContacts {
+            if !firstContacts.contains(where: { $0.name == contact.name }) {
+                finalContacts.append(contact)
+            }
+        }
+        
+        return finalContacts
     }
     
     private func setup() {

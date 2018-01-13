@@ -24,4 +24,13 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
     
     //MARK: Interactor Output
 
+    func onKeepTapped() {
+        router.back()
+    }
+    
+    func onDeleteAllTapped() {
+        moduleOutput?.deleteDuplicatedContacts()
+        router.back()
+    }
+    
 }

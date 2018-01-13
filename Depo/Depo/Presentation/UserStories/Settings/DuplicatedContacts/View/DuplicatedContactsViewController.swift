@@ -10,18 +10,41 @@ import UIKit
 
 class DuplicatedContactsViewController: BaseViewController, DuplicatedContactsViewInput {
 
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var deleteAllButton: BlueButtonWithMediumWhiteText!
+    @IBOutlet private weak var keepButton: BlueButtonWithMediumWhiteText!
+    
     var output: DuplicatedContactsViewOutput!
-    var analyzeResponse = ContactSync.AnalyzeResponse(contactsToMerge: [ContactSync.AnalyzedContact](),
-                                                      contactsToDelete: [ContactSync.AnalyzedContact]())
+    var analyzeResponse = [ContactSync.AnalyzedContact]()
+    
+    private let cellIdentifier = "DuplicatedContactTableViewCell"
     
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let numberOfAllDuplicatedContacts = analyzeResponse.reduce(0) { $0 + $1.numberOfErrors }
+        titleLabel.text = String(format: TextConstants.settingsBackUpTotalNumberOfDuplicatedContacts, numberOfAllDuplicatedContacts)
+        
         backButtonForNavigationItem(title: TextConstants.backTitle)
         setTitle(withString: TextConstants.duplicatedContacts)
         
+        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        
+        deleteAllButton.setTitle(TextConstants.settingsBackUpDeleteAllButton, for: .normal)
+        keepButton.setTitle(TextConstants.settingsBackUpKeepButton, for: .normal)
+        
         output.viewIsReady()
+    }
+    
+    @IBAction func onDeleteAllTapped(_ sender: Any) {
+        output.onDeleteAllTapped()
+        
+    }
+    
+    @IBAction func onKeepTapped(_ sender: Any) {
+        output.onKeepTapped()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -34,4 +57,17 @@ class DuplicatedContactsViewController: BaseViewController, DuplicatedContactsVi
     
     // MARK: DuplicatedContactsViewInput
     
+}
+
+extension DuplicatedContactsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return analyzeResponse.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! DuplicatedContactTableViewCell
+        cell.configure(with: analyzeResponse[indexPath.row])
+        
+        return cell
+    }
 }

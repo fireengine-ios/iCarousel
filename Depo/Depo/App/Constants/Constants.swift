@@ -103,6 +103,7 @@ struct TextConstants {
     
     static let errorAlert = NSLocalizedString("Error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlerTitleBackupAlreadyExist = NSLocalizedString("Overwrite backup?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let errorAlertTextNoDuplicatedContacts = NSLocalizedString("You have no duplicated contacts!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlertTextBackupAlreadyExist = NSLocalizedString("You have already a backup. Do you want to overwrite the existing one?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlertNopeBtnBackupAlreadyExist = NSLocalizedString("Nope", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlertYesBtnBackupAlreadyExist = NSLocalizedString("Yes", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -365,6 +366,10 @@ struct TextConstants {
     static let settingsBackUpCancelAnalyzingTitle = NSLocalizedString("Cancel Analyzing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpManageContactsButton = NSLocalizedString("Manage Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpDeleteDuplicatedButton = NSLocalizedString("Delete Duplicated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpNumberOfDuplicated = NSLocalizedString("%d same contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpTotalNumberOfDuplicatedContacts = NSLocalizedString("You have %d duplicated contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpKeepButton = NSLocalizedString("Keep", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpDeleteAllButton = NSLocalizedString("Delete All", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: ActionsMenuAction
     static let actionsMenuActionMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
