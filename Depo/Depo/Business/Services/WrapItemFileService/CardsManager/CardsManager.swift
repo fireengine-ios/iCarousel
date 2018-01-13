@@ -95,20 +95,20 @@ class CardsManager: NSObject {
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
+        print("operation possible will started ", type.rawValue)
         if progresForOperation[type] != nil{
             return
         }
         
-        if !canShowPopUpByDepends(type: type){
-            return
-        }
-        
         hidePopUpsByDepends(type: type)
-        setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
-        
-        print("operation started ", type.rawValue)
         
         blocks.append ({
+            if !self.canShowPopUpByDepends(type: type){
+                return
+            }
+            
+            print("operation started ", type.rawValue)
+            self.setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
             for notificationView in self.foloversArray{
                 notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
             }
