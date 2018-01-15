@@ -435,6 +435,7 @@
 "You have already a backup. Do you want to overwrite the existing one?" = "You have already a backup. Do you want to overwrite the existing one?";
 "Overwrite backup?" = "Overwrite backup?";
 "Error Handling Under Constraction" = "Error Handling Under Constraction";
+"This e-mail address is not registered. Please try again" = "This e-mail address is not registered. Please try again";
 "Account not found for email" = "Account not found for email";
 "This text doesn't match. Please try again" = "This text doesn't match. Please try again";
 "An error is occurred!" = "An error is occurred!";
