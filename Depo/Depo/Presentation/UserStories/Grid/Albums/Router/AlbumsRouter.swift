@@ -11,7 +11,7 @@ class AlbumsRouter: BaseFilesGreedRouter {
     override func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
         let router = RouterVC()
         
-        if (selectedItem.fileType == .photoAlbum){
+        if (selectedItem.fileType == .photoAlbum) {
             guard let album = selectedItem as? AlbumItem else {
                 return
             }
@@ -19,7 +19,10 @@ class AlbumsRouter: BaseFilesGreedRouter {
             let controller = router.albumDetailController(album: album, type: type, moduleOutput: moduleOutput)
 
             router.pushViewController(viewController: controller)
+        } else {
+            super.onItemSelected(selectedItem: selectedItem, sameTypeItems: sameTypeItems, type: type, sortType: sortType, moduleOutput: moduleOutput)
         }
+        
     }
     
 }

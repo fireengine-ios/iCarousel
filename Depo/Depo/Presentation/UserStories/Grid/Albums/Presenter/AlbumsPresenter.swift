@@ -26,7 +26,10 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func getCellSizeForList() -> CGSize {
-        return CGSize(width: view.getCollectionViewWidth(), height: NumericConstants.albumCellListHeight)
+        if (interactor.remoteItems is AlbumService) {
+            return CGSize(width: view.getCollectionViewWidth(), height: NumericConstants.albumCellListHeight)
+        }
+        return super.getCellSizeForList()
     }
     
     override func getCellSizeForGreed() -> CGSize {

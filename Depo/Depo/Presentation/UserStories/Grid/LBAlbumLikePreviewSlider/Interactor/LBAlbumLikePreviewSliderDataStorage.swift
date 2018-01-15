@@ -15,11 +15,11 @@ enum MyStreamType: Int {
     
     var title: String {
         switch self {
-        case .album: return "Albums"
-        case .story: return "Stories"
-        case .people: return "People"
-        case .things: return "Things"
-        case .places: return "Places"
+        case .album: return TextConstants.myStreamAlbumsTitle
+        case .story: return TextConstants.myStreamStoriesTitle
+        case .people: return TextConstants.myStreamPeopleTitle
+        case .things: return TextConstants.myStreamThingsTitle
+        case .places: return TextConstants.myStreamPlacesTitle
         }
     }
 }

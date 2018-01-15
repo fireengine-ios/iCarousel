@@ -25,7 +25,8 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
     }
     
     func goToStoryListView() {
-
+        let controller = router.storiesListController()
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
     func goToPeopleListView() {

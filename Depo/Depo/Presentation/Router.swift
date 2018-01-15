@@ -531,6 +531,13 @@ class RouterVC: NSObject {
         return controller
     }
     
+    //MARK: Stories list
+    
+    func storiesListController() -> BaseFilesGreedChildrenViewController {
+        let controller = StoriesInitializer.initializeStoriesController(with: "BaseFilesGreedViewController")
+        return controller
+    }
+    
     //MARK: Free App Space
     
     func freeAppSpace() -> UIViewController{

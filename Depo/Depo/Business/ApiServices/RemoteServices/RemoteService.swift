@@ -262,18 +262,18 @@ class StoryService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .story)
     }
     
-    func allStories(success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems) {
+    func allStories(sortBy: SortType = .albumName, sortOrder: SortOrder = .desc, success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems) {
         currentPage = 0
-        nextItems(success: success, fail: fail)
+        nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
     }
     
-    func nextItems(success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems ) {
+    func nextItems(sortBy: SortType = .albumName, sortOrder: SortOrder = .desc, success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems ) {
         log.debug("StoryService nextItems")
         
         let searchParam = SearchByFieldParameters(fieldName: .story,
                                                   fieldValue: .story,
-                                                  sortBy: .albumName,
-                                                  sortOrder: .desc ,
+                                                  sortBy: sortBy,
+                                                  sortOrder: sortOrder,
                                                   page: currentPage,
                                                   size: requestSize)
                 
