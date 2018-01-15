@@ -244,7 +244,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             let index = 0
             print("insert at index ", index, type.rawValue)
             self.popUps.insert(view, at: index)
-            self.addCellAtIndex(index: index)
+            collectionView.reloadData()
         }
     }
     
@@ -283,7 +283,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             if let index = self.popUps.index(of: view){
                 
                 print("delete at index ", index, type.rawValue)
-                self.deleteCellAtIndex(index: index)
+                
+                popUps.remove(at: index)
+                collectionView.reloadData()
             }else{
                 
             }

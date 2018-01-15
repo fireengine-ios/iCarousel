@@ -32,21 +32,12 @@ class CardsManager: NSObject {
     
     private var foloversArray = [CardsManagerViewProtocol]()
     private var progresForOperation = [OperationType: Progress]()
-
-    var timer: Timer?
     
     var blocks = [BlockObject]()
     
     //MARK: registration view
     
     func addViewForNotification(view: CardsManagerViewProtocol){
-        if timer == nil{
-            timer = Timer.scheduledTimer(timeInterval: TimeInterval(0.5),
-                                         target: self,
-                                         selector: #selector(self.performOperations),
-                                         userInfo: nil, repeats: true)
-            timer?.fire()
-        }
         
         if foloversArray.index(where: {$0.isEqual(object: view)}) == nil{
             foloversArray.append(view)
@@ -82,14 +73,6 @@ class CardsManager: NSObject {
     
     //MARK: sending operation to registred subviews
     
-    @objc private func performOperations(){
-        if blocks.count == 0{
-            return
-        }
-        blocks[0]()
-        _ = blocks.removeFirst()
-    }
-    
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
@@ -108,11 +91,12 @@ class CardsManager: NSObject {
         
         print("operation started ", type.rawValue)
         
-        blocks.append ({
+        DispatchQueue.main.async {
             for notificationView in self.foloversArray{
                 notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
             }
-        })
+        }
+        
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
@@ -152,12 +136,12 @@ class CardsManager: NSObject {
         
         print("operation stopped ", type.rawValue)
         
-        blocks.append ({
+        DispatchQueue.main.async {
             self.progresForOperation[type] = nil
             for notificationView in self.foloversArray{
                 notificationView.stopOperationWithType(type: type)
             }
-        })
+        }
     }
     
     func stopAllOperations(){
