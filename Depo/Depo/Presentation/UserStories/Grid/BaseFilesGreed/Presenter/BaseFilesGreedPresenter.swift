@@ -484,10 +484,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             
             if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
                 let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
-                if localDuplicates.count > 0 {
-                    selectedItems = localDuplicates
-                } else {
+                if localDuplicates.count == 0 {
+                    //selectedItems = localDuplicates
                     actionTypes.remove(at: deleteOriginalIndex)
+                } else {
+                    
                 }
             }
             
@@ -498,6 +499,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
             actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.index(of: .download) {
+                actionTypes.remove(at: downloadIdex)
+            }
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              presentedBy: sender,
                                              onSourceView: nil)

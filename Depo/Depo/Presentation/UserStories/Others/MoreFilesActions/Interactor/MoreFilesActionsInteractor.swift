@@ -535,12 +535,16 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func sync(items: [BaseDataSourceItem], action: @escaping () -> Void, cancel: @escaping () -> Void, fail: FailResponse? = nil) {
         guard let items = items as? [WrapData] else { return }
         let successClosure = { [weak self] in
-            self?.output?.compliteAsyncOperationEnableScreen()
-            action()
+            DispatchQueue.main.async {
+                self?.output?.compliteAsyncOperationEnableScreen()
+                action()
+            }
         }
         let failClosure: FailResponse = { [weak self] (errorResponse) in
-            self?.output?.compliteAsyncOperationEnableScreen()
-            fail?(errorResponse)
+            DispatchQueue.main.async {
+                self?.output?.compliteAsyncOperationEnableScreen()
+                fail?(errorResponse)
+            }
         }
         let operations = fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure)
         if let operations = operations {

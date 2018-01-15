@@ -141,7 +141,7 @@ extension PasscodeInputView: UIKeyInput {
     }
     
     public func insertText(_ text: String) {
-        if isPasscodeFull { /// guard for passcodeLength length
+        if isPasscodeFull || !isAvailableCharacters(in: text) {
             return
         }
         passcode.append(text)
@@ -153,6 +153,13 @@ extension PasscodeInputView: UIKeyInput {
                 self.delegate?.finish(with: self.passcode)
             }
         }
+    }
+    
+    private func isAvailableCharacters(in text: String) -> Bool {
+        if text.contains("\n") {
+            return false
+        }
+        return text.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }
     
     public func deleteBackward() {

@@ -48,9 +48,7 @@ extension PasscodeEnterViewController: PasscodeManagerDelegate {
                 let router = RouterVC()
                 router.setNavigationController(controller: router.onboardingScreen)
                 self.view.window?.endEditing(true)
-                self.passcodeManager.storage.clearPasscode()
                 self.passcodeManager.storage.numberOfTries = self.passcodeManager.maximumInccorectPasscodeAttempts
-                self.biometricsManager.isEnabled = false
             }
         }
     }

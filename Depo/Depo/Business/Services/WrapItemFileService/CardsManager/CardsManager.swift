@@ -19,6 +19,8 @@ enum OperationType: String{
     case waitingForWiFi         = "waitingForWiFi"
 }
 
+typealias BlockObject = () -> Void
+
 class Progress {
     var allOperations: Int?
     var completedOperations: Int?
@@ -31,10 +33,12 @@ class CardsManager: NSObject {
     private var foloversArray = [CardsManagerViewProtocol]()
     private var progresForOperation = [OperationType: Progress]()
     
+    var blocks = [BlockObject]()
     
     //MARK: registration view
     
     func addViewForNotification(view: CardsManagerViewProtocol){
+        
         if foloversArray.index(where: {$0.isEqual(object: view)}) == nil{
             foloversArray.append(view)
         }
@@ -74,17 +78,20 @@ class CardsManager: NSObject {
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
-        if !canShowPopUpByDepends(type: type){
+        print("operation possible will started ", type.rawValue)
+        if progresForOperation[type] != nil{
             return
         }
         
         hidePopUpsByDepends(type: type)
-        setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
+        
+
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{
                 notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
             }
         }
+        
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
@@ -117,8 +124,15 @@ class CardsManager: NSObject {
     }
     
     func stopOperationWithType(type: OperationType){
-        progresForOperation[type] = nil
+        
+        if progresForOperation[type] == nil{
+            return
+        }
+        
+        print("operation stopped ", type.rawValue)
+        
         DispatchQueue.main.async {
+            self.progresForOperation[type] = nil
             for notificationView in self.foloversArray{
                 notificationView.stopOperationWithType(type: type)
             }

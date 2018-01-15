@@ -10,11 +10,12 @@ import UIKit
 
 class SingletonStorage {
     
-    var isAppraterInited: Bool = false
-    
-    var accountInfo: AccountInfoResponse?
-    
     static let shared = SingletonStorage()
+    
+    var isAppraterInited: Bool = false
+    var accountInfo: AccountInfoResponse?
+    var signUpInfo: RegistrationUserInfoModel?
+    var referenceToken: String?
     
     func getAccountInfoForUser(success:@escaping (AccountInfoResponse) -> Swift.Void, fail: @escaping (ErrorResponse?) -> Swift.Void ){
         if let info = accountInfo{

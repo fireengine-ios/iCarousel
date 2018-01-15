@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Alamofire
 
 typealias SuccessResponse = (_ value:ObjectFromRequestResponse? ) -> Swift.Void
 typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
@@ -274,98 +275,107 @@ typealias  FailLoginType = FailResponse
 
 class AuthenticationService: BaseRequestService {
     
-    private var success: SuccessLogin?
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var biometricsManager: BiometricsManager = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
     
-    private var fail: FailLoginType?
+    // MARK: - Login
     
-    private var successLogin: SuccessResponse!
-    
-    private var failLogin: FailResponse!
-    
-    
-     override init() {
-        super.init()
+    func login(user: AuthenticationUser, sucess: SuccessLogin?, fail: FailResponse?) {
+        let params: [String: Any] = ["username": user.login,
+                                     "password": user.password,
+                                     "deviceInfo": Device.deviceInfo]
         
-        successLogin = {  [weak self] (succes) in
-            guard let data = succes as? LoginResponse else {
-                // TODO: GURIN
-                return
-            }
-            ApplicationSession.sharedSession.updateSession(loginData: data)
-            self?.success?()
+        SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
+                .responseString { [weak self] response in
+                    switch response.result {
+                    case .success(_):
+                        
+                        guard let headers = response.response?.allHeaderFields as? [String: Any] else {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
+                            return
+                        }
+                        
+                        if let accessToken = headers[HeaderConstant.AuthToken] as? String {
+                            self?.tokenStorage.accessToken = accessToken
+                        }
+                        
+                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
+                            self?.tokenStorage.refreshToken = refreshToken
+                        }
+                        
+                        /// must be after accessToken save logic
+                        if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String, emptyPhoneFlag == HeaderConstant.emptyMSISDN {
+                            fail?(ErrorResponse.string(HeaderConstant.emptyMSISDN))
+                            return
+                        }
+                        
+                        if self?.tokenStorage.refreshToken == nil {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
+                            return
+                        }
+
+                        sucess?()
+                        
+                    case .failure(let error):
+                        fail?(ErrorResponse.error(error))
+                    }
         }
-        
-        failLogin = { [weak self] (result) in
-            // remove token
-            let loginData = LoginResponse(withJSON: nil)
-            ApplicationSession.sharedSession.updateSession(loginData: loginData)
-            self?.fail?(result)
-        }
     }
     
-    func login(user: AuthenticationUser, sucess:SuccessLogin?, fail: FailResponse?) {
-        log.debug("AuthenticationService login")
-
-        self.success = sucess
-        self.fail = fail
-        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
-        executePostRequest(param: user, handler: handler)
-    }
-    
-    func autificationByRememberMe(sucess:SuccessLogin?, fail: FailResponse?) {
-        log.debug("AuthenticationService autificationByRememberMe")
-
-        let user = AuthenticationUserByRememberMe()
-        self.success = sucess
-        self.fail = fail
-        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
-        executePostRequest(param: user, handler: handler)
-    }
-    
-    func autificationByToken(sucess:SuccessLogin?, fail: FailResponse?) {
-        log.debug("AuthenticationService autificationByToken")
-
+    func autificationByToken(sucess: SuccessLogin?, fail: FailResponse?) {
         let user = AuthenticationUserByToken()
-        self.success = sucess
-        self.fail = fail
-        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
-        executePostRequest(param: user, handler: handler)
-    }
-    
-    func turkcellAutification(user: Authentication3G, sucess:SuccessLogin?, fail: FailResponse?) {
-        log.debug("AuthenticationService turkcellAutification")
-
-        self.success = sucess
-        self.fail = fail
-        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: fail)
-        executePostRequest(param: user, handler: handler)
-    }
-    
-    func logout(success:SuccessLogout?) {
-        log.debug("AuthenticationService logout")
-
-        SingletonStorage.shared.accountInfo = nil
-        let successResponse = {
-            let s = LoginResponse(withJSON: nil)
-            /// in LoginResponse(withJSON: nil)
-            /// rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
-            s.rememberMeToken = nil
-            ApplicationSession.sharedSession.updateSession(loginData: s)
-            ApplicationSession.sharedSession.saveData()
-            success?()
-        }
+        let params: [String: Any] = ["deviceInfo": Device.deviceInfo]
         
-        let failResponse: FailResponse = { value in
-            let s = LoginResponse(withJSON: nil)
-            ApplicationSession.sharedSession.updateSession(loginData: s)
-            ApplicationSession.sharedSession.saveData()
+        SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
+            .responseString { [weak self] response in
+                self?.loginHandler(response, sucess, fail)
+        }
+    }
+    
+    func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
+        SessionManager.default.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
+            .responseString { [weak self] response in
+                self?.loginHandler(response, sucess, fail)
+        }
+    }
+    
+    private func loginHandler(_ response: DataResponse<String>, _ sucess: SuccessLogin?, _ fail: FailResponse?) -> Void {
+        switch response.result {
+        case .success(_):
+            if let headers = response.response?.allHeaderFields as? [String: Any],
+                let accessToken = headers[HeaderConstant.AuthToken] as? String,
+                let refreshToken = headers[HeaderConstant.RememberMeToken] as? String
+            {
+                self.tokenStorage.accessToken = accessToken
+                self.tokenStorage.refreshToken = refreshToken
+                sucess?()
+                
+            } else {
+                let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                fail?(ErrorResponse.error(error))
+            }
+        case .failure(let error):
+            fail?(ErrorResponse.error(error))
+        }
+    }
+    
+    // MARK: - Authentication
+
+    func logout(success: SuccessLogout?) {
+        DispatchQueue.main.async {
+            SingletonStorage.shared.accountInfo = nil
+            self.passcodeStorage.clearPasscode()
+            self.biometricsManager.isEnabled = false
+            self.tokenStorage.clearTokens()
+            CoreDataStack.default.clearDataBase()
+            FreeAppSpace.default.clear()
+            CardsManager.default.stopAllOperations()
+            FactoryMain.mediaPlayer.stop()
             success?()
         }
-        successResponse()
-        FactoryMain.mediaPlayer.stop()
-        return
-//        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: successResponse, fail: failResponse)
-//        executePostRequest(param: param, handler: handler)
     }
     
     func signUp(user: SignUpUser, sucess:SuccessResponse?, fail: FailResponse?) {
@@ -409,24 +419,8 @@ class AuthenticationService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: forgotPassword, handler: handler)
     }
-    
-    func authenticate(success:SuccessLogin?, fail: FailResponse?) {
-        log.debug("AuthenticationService authenticate")
 
-        let reachability = ReachabilityService()
-        let rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
-        if rememberMeToken != nil {
-            autificationByRememberMe(sucess: success, fail: fail)
-        } else if !reachability.isReachableViaWiFi {
-            turkcellAuth(success: success, fail: fail)
-        } else {
-            autificationByToken(sucess: success, fail: fail)
-        }
-    }
-
-    private func turkcellAuth(success:SuccessLogin?, fail: FailResponse?) {
-        log.debug("AuthenticationService turkcellAuth")
-
+    func turkcellAuth(success:SuccessLogin?, fail: FailResponse?) {
         let user = Authentication3G()
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
             self?.autificationByToken(sucess: success, fail: fail)
