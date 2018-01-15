@@ -286,7 +286,7 @@ class AuthenticationService: BaseRequestService {
                                      "password": user.password,
                                      "deviceInfo": Device.deviceInfo]
         
-        SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
+        SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
                 .responseString { [weak self] response in
                     switch response.result {
                     case .success(_):
@@ -308,6 +308,12 @@ class AuthenticationService: BaseRequestService {
                         /// must be after accessToken save logic
                         if let emptyPhoneFlag = headers[HeaderConstant.accountWarning] as? String, emptyPhoneFlag == HeaderConstant.emptyMSISDN {
                             fail?(ErrorResponse.string(HeaderConstant.emptyMSISDN))
+                            return
+                        }
+                        
+                        if self?.tokenStorage.refreshToken == nil {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
                             return
                         }
 
