@@ -17,8 +17,6 @@ class AppConfigurator {
     class func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         dropboxManager.start()
         
-        CoreDataStack.default.appendLocalMediaItems(nil)
-        
         let urls: AuthorizationURLs = AuthorizationURLsImp()
         let tokenStorage: TokenStorage = TokenStorageUserDefaults()
         if tokenStorage.isClearTokens {
