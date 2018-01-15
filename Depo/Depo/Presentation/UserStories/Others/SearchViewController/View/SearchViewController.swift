@@ -311,10 +311,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = recentSearchList[indexPath.row]
         case .suggestion:
             let suggest = suggestionList[indexPath.row]
-            if let text = suggest.highlightedText {
-                cell.textLabel?.attributedText = text
-            } else {
-                cell.textLabel?.text = suggest.text!
+            if let highlightedText = suggest.highlightedText {
+                cell.textLabel?.attributedText = highlightedText
+            } else if let text = suggest.text {
+                cell.textLabel?.text = text
             }
         }
         
