@@ -12,6 +12,8 @@ import Photos
 
 class CoreDataStack: NSObject {
     
+    typealias AppendingLocaclItemsFinishCallback = ()->Void
+    
     @objc static let `default` = CoreDataStack()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
@@ -35,6 +37,7 @@ class CoreDataStack: NSObject {
         return coordinator
     }()
     
+    var appendingItemsFinishBlock: AppendingLocaclItemsFinishCallback?
     
     var mainContext: NSManagedObjectContext
     
@@ -60,6 +63,8 @@ class CoreDataStack: NSObject {
     func clearDataBase() {
         deleteRemoteFiles()
     }
+    
+//    func
     
     func deleteRemoteFiles() {
         // Album has remote status by default for now

@@ -29,7 +29,7 @@ extension CoreDataStack {
     
     private func insertFromPhotoFramework() {
         let localMediaStorage = LocalMediaStorage.default
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) {[weak self] (accessGranted, _) in
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
             guard accessGranted, let `self` = self else {
                 return
             }
