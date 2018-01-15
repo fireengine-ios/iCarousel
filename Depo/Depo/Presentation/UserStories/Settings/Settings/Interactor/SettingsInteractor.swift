@@ -67,6 +67,8 @@ class SettingsInteractor: SettingsInteractorInput {
     func onLogout() {
         authService.logout { [weak self] in
             self?.output.goToOnboarding()
+            SyncServiceManager.shared.stopSync()
+
         }
     }
     
