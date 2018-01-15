@@ -74,6 +74,15 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         
     }
     
+    func sortDuplicatesArray(){
+        self.duplicaesArray = self.duplicaesArray.sorted(by: { (obj1, obj2) -> Bool in
+            if let date1 = obj1.creationDate, let date2 = obj2.creationDate, date1 > date2{
+                return true
+            }
+            return false
+        })
+    }
+    
     func checkFreeAppSpace(){
         startSearchDuplicates(finished: { [weak self] in
             guard let self_ = self else{
@@ -87,6 +96,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 self_.checkFreeAppSpace()
                 return
             }
+            
+            self_.sortDuplicatesArray()
             
             self_.showFreeAppSpaceCard()
         })
@@ -267,7 +278,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 duplicaesArray.append(contentsOf: localObjects)
             }
         }
-
+        
+        sortDuplicatesArray()
         showFreeAppSpaceCard()
     }
     
