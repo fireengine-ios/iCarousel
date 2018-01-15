@@ -75,7 +75,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func sortDuplicatesArray(){
-        self.duplicaesArray = self.duplicaesArray.sorted(by: { (obj1, obj2) -> Bool in
+        duplicatesArray = duplicatesArray.sorted(by: { (obj1, obj2) -> Bool in
             if let date1 = obj1.creationDate, let date2 = obj2.creationDate, date1 > date2{
                 return true
             }
