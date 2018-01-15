@@ -12,6 +12,7 @@ class SettingsInteractor: SettingsInteractorInput {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
     
     private var userInfoResponse: AccountInfoResponse?
     let authService = AuthenticationService()
@@ -65,16 +66,7 @@ class SettingsInteractor: SettingsInteractorInput {
 
     func onLogout() {
         authService.logout { [weak self] in
-            DispatchQueue.main.async {
-                self?.passcodeStorage.clearPasscode()
-                self?.biometricsManager.isEnabled = false
-                ApplicationSession.sharedSession.session.clearTokens()
-                ApplicationSession.sharedSession.saveData()
-                CoreDataStack.default.clearDataBase()
-                FreeAppSpace.default.clear()
-                CardsManager.default.stopAllOperations()
-                self?.output.goToOnboarding()
-            }
+            self?.output.goToOnboarding()
         }
     }
     

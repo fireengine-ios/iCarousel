@@ -29,7 +29,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
         let validationResult = validationService.validateUserInfo(mail: email, code: code, phone: phone, password: password, repassword: repassword)
         if validationResult.count == 0 {//== .allValid {
             dataStorage.userRegistrationInfo = RegistrationUserInfoModel(mail: email, phone: code + phone, password: password)
-            ApplicationSession.sharedSession.signUpInfo = dataStorage.userRegistrationInfo
+            SingletonStorage.shared.signUpInfo = dataStorage.userRegistrationInfo
             output.userValid(email: email, phone: code + phone, passpword: password)
         } else {
             output.userInvalid(withResult: validationResult)

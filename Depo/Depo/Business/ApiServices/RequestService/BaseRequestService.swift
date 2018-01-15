@@ -217,10 +217,9 @@ class BaseRequestService {
         task.resume()
     }
     
-    
-    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionUploadTask {
+    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask {
         var backgroundTaskID = UIBackgroundTaskInvalid
-        var task: URLSessionUploadTask!
+        var task: URLSessionTask!
         
         if let localURL = param.urlToLocalFile {
             backgroundTaskID = beginBackgroundTask(with: localURL.absoluteString)
@@ -262,7 +261,18 @@ class BaseRequestService {
                                                   response: handler.response)
         task.resume()
     }
+    
+    func executeUploadDataRequest(param: UploadDataRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask{
 
+        let task = requestService.uploadFileRequestTask(path: param.patch,
+                                                        headerParametrs: param.header,
+                                                        fileData: param.data,
+                                                        method: RequestMethod.Put,
+                                                        timeoutInterval: 2000,
+                                                        response: response)
+        task.resume()
+        return task
+    }
     
     //MARK: - Helpers
     

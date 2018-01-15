@@ -33,8 +33,7 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func userStillBlocked(user: String)
     
-    func successed(accountInfo: AccountInfoResponse)
-    func failedAccountInfo(errorResponse: ErrorResponse)
+    func openEmptyPhone()
     
     func successed(tokenUpdatePhone: SignUpSuccessResponse)
     func failedUpdatePhone(errorResponse: ErrorResponse)

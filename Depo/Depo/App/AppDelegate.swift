@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         log.debug("AppDelegate didFinishLaunchingWithOptions")
@@ -29,11 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.isStatusBarHidden = false
         application.statusBarStyle = .lightContent
         
+        AppConfigurator.applicationStarted(with: launchOptions)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = RouterVC().vcForCurrentState()
         window?.makeKeyAndVisible()
         
-        AppConfigurator.applicationStarted(with: launchOptions)
+        
         
         Fabric.with([Crashlytics.self])
             
@@ -124,17 +127,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         log.debug("AppDelegate applicationDidBecomeActive")
-
-        ApplicationSessionManager.shared().checkSession()
         LocationManager.shared.startUpdateLocation()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillTerminate")
-
-        if !ApplicationSession.sharedSession.session.rememberMe {
-            ApplicationSession.sharedSession.session.clearTokens()
-            ApplicationSession.sharedSession.saveData()
+        if !tokenStorage.isRememberMe {
+            tokenStorage.clearTokens()
         }
         UserDefaults.standard.synchronize()
         FactoryMain.mediaPlayer.stop()
