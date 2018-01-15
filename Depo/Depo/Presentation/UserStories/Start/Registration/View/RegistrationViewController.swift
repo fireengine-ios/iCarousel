@@ -238,7 +238,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     private func reloadGSMCell() {
-        userRegistrationTable.reloadRows(at: [IndexPath(item: 1, section: 0)], with: UITableViewRowAnimation.none)
+        userRegistrationTable.reloadRows(at: [IndexPath(item: 0, section: 0)], with: UITableViewRowAnimation.none)
     }
     
     private func getTextFieldValue(forRow: Int) -> String {

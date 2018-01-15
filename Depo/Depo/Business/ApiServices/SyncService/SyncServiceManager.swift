@@ -13,6 +13,8 @@ import Reachability
 class SyncServiceManager {
     static let shared = SyncServiceManager()
     
+    private let dispatchQueue = DispatchQueue(label: "com.lifebox.autosync")
+    
     private let reachabilityService = Reachability()
     private let autoSyncStorage = AutoSyncDataStorage()
     
@@ -22,6 +24,8 @@ class SyncServiceManager {
     
     private var lastAutoSyncTime: TimeInterval = 0
     private var timeIntervalBetweenSyncs: TimeInterval = NumericConstants.timeIntervalBetweenAutoSync
+    
+    private var networkIsUnreachable = false
     
     private var isSyncCancelled: Bool {
         return (photoSyncService.status == .canceled && videoSyncService.status == .canceled)
@@ -34,7 +38,6 @@ class SyncServiceManager {
     private var isSyncFinished: Bool {
         return (photoSyncService.status == .synced && videoSyncService.status == .synced)
     }
-    
     
     private var hasSyncCancelled: Bool {
         return (photoSyncService.status == .canceled || videoSyncService.status == .canceled)
@@ -101,6 +104,10 @@ class SyncServiceManager {
         }
     }
     
+    func stopSync() {
+        stop(reachabilityDidChange: false, photo: true, video: true)
+    }
+    
     
     //MARK: - Private
     
@@ -118,7 +125,7 @@ class SyncServiceManager {
         } catch {
             print("\(#function): can't start reachability notifier")
         }
-        
+
         reachability.whenReachable = { (reachability) in
             print("AUTOSYNC: is reachable")
             self.checkReachabilityAndSettings()
@@ -162,18 +169,26 @@ class SyncServiceManager {
         }
         
         if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
+            networkIsUnreachable = false
             if reachability.connection == .wifi {
                 start(photo: true, video: true)
             } else if reachability.connection == .cellular {
                 let photoEnabled = syncSettings.mobileDataPhotos
                 let videoEnabled = syncSettings.mobileDataVideo
+                
                 stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
                 if photoEnabled || videoEnabled {
                     start(photo: photoEnabled, video: videoEnabled)
                 }
             }
         } else {
-            stop(reachabilityDidChange: true, photo: true, video: true)
+            networkIsUnreachable = true
+            dispatchQueue.asyncAfter(deadline: .now() + .seconds(1), execute: { [weak self] in
+                guard let `self` = self, self.networkIsUnreachable else {
+                    return
+                }
+                self.stop(reachabilityDidChange: true, photo: true, video: true)
+            })
         }
     }
     
@@ -224,7 +239,9 @@ extension SyncServiceManager {
     }
     
     @objc private func onAPIReachabilityDidChange() {
-        checkReachabilityAndSettings()
+        dispatchQueue.async {
+            self.checkReachabilityAndSettings()
+        }
     }
     
     @objc private func onAutoSyncStatusDidChange() {

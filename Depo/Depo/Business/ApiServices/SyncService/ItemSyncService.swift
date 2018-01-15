@@ -39,7 +39,8 @@ protocol ItemSyncServiceDelegate: class {
 
 
 class ItemSyncServiceImpl: ItemSyncService {
-
+    private var dispatchQueue = DispatchQueue(label: "com.lifebox.autosync")
+    
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
         didSet {
@@ -66,27 +67,32 @@ class ItemSyncServiceImpl: ItemSyncService {
     //MARK: - Public ItemSyncService functions
     
     func start() {
+        log.debug("ItemSyncServiceImpl start")
+        
         guard !status.isContained(in: [.executing, .prepairing]) else {
             appendNewUnsyncedItems()
             return
         }
-        
-        DispatchQueue.main.async {
+
+        dispatchQueue.async {
             self.sync()
         }
     }
     
     func interrupt() {
+        log.debug("ItemSyncServiceImpl interrupt")
 //        if status.isContained(in: [.prepairing, .executing]) {
             status = .waitingForWifi
 //        }
     }
     
     func stop() {
+        log.debug("ItemSyncServiceImpl stop")
         status = .canceled
     }
     
     func waitForWiFi() {
+        log.debug("ItemSyncServiceImpl waitForWiFi")
         status = .waitingForWifi
     }
     
@@ -105,7 +111,12 @@ class ItemSyncServiceImpl: ItemSyncService {
         localItems.removeAll()
         localItemsMD5s.removeAll()
         
-        localItems = localUnsyncedItems()
+        let semaphore = DispatchSemaphore(value: 0)
+        DispatchQueue.main.async {
+            self.localItems = self.localUnsyncedItems()
+            semaphore.signal()
+        }
+        semaphore.wait()
 
         guard !localItems.isEmpty else {
             status = .synced
@@ -179,6 +190,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func getUnsyncedObjects(oldestItemDate: Date, success: @escaping () -> Void, fail: @escaping () -> Void) {
+        
         log.debug("ItemSyncServiceImpl getUnsyncedObjects")
 
         guard let service = self.photoVideoService else {
@@ -233,14 +245,20 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
+        var localUnsynced = [WrapData]()
+        let semaphore = DispatchSemaphore(value: 0)
         DispatchQueue.main.async {
-            let newUnsyncedLocalItems = self.localUnsyncedItems().filter({ !self.lastSyncedMD5s.contains($0.md5) })
-            guard !newUnsyncedLocalItems.isEmpty else {
-                return
-            }
-            
-            self.upload(items: newUnsyncedLocalItems)
+            localUnsynced = self.localUnsyncedItems()
+            semaphore.signal()
         }
+        semaphore.wait()
+        
+        let newUnsyncedLocalItems = localUnsynced.filter({ !self.lastSyncedMD5s.contains($0.md5) })
+        guard !newUnsyncedLocalItems.isEmpty else {
+            return
+        }
+        
+        self.upload(items: newUnsyncedLocalItems)
     }
     
     private func postNotification() {
