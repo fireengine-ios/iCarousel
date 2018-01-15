@@ -27,15 +27,13 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
     func onSendPassword(withEmail email: String, enteredCaptcha: String, captchaUDID: String) {
         startAsyncOperationDisableScreen()
         interactor.sendForgotPasswordRequest(with: email, enteredCaptcha: enteredCaptcha, captchaUDID: captchaUDID)
-
-       
-
     }
     
     func requestSucceed() {
         compliteAsyncOperationEnableScreen()
+        router.goToResetPassword()
         //pop back
-        router.popBack()
+//        router.popBack()
     }
     
     func requestFailed(withError error: String) {

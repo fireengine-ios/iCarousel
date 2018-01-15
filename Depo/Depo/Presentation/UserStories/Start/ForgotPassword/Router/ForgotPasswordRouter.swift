@@ -9,7 +9,20 @@
 class ForgotPasswordRouter: ForgotPasswordRouterInput {
    
     func goToResetPassword() {
+        let router = RouterVC()
+        let navVC = router.navigationController
         
+        let vc = PopUpController.with(title: TextConstants.success,
+                                      message: TextConstants.forgotPasswordSentEmailAddres,
+                                      image: .error,
+                                      buttonTitle: TextConstants.ok,
+                                      action: { [weak self] vc in
+                                        vc.dismiss(animated: true, completion: {})
+                                        self?.popBack()
+        })
+        
+        
+        navVC?.present(vc, animated: true, completion: {})
     }
     
     func popBack() {//Goes to Login
