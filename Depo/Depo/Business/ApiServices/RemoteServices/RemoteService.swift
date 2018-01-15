@@ -40,6 +40,8 @@ class RemoteItemsService {
                 contentType = .cropy
             case .albums:
                 contentType = .album
+            case .story:
+                contentType = .story
             default:
                 contentType = .content_type
         }
@@ -251,6 +253,45 @@ class DocumentService: RemoteItemsService {
 class FavouritesService: RemoteItemsService {
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .favorite)
+    }
+}
+
+class StoryService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .story)
+    }
+    
+    func allStories(success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems) {
+        currentPage = 0
+        nextItems(success: success, fail: fail)
+    }
+    
+    func nextItems(success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems ) {
+        log.debug("StoryService nextItems")
+        
+        let searchParam = SearchByFieldParameters(fieldName: .story,
+                                                  fieldValue: .story,
+                                                  sortBy: .albumName,
+                                                  sortOrder: .desc ,
+                                                  page: currentPage,
+                                                  size: requestSize)
+                
+        remote.searchByField(param: searchParam, success: { [weak self] response in
+            guard let resultResponse = response as? SearchResponse else {
+                log.debug("StoryService remote searchStories fail")
+                return fail()
+            }
+            
+            log.debug("StoryService remote searchStories success")
+            
+            self?.currentPage += 1
+            let list = resultResponse.list.flatMap{ Item(remote: $0) }
+            success(list)
+            }, fail: { _ in
+                    log.debug("StoryService remote searchStories fail")
+    
+                    fail()
+            })
     }
 }
 
