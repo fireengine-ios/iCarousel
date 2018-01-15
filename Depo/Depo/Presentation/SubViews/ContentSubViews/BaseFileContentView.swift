@@ -46,7 +46,7 @@ class BaseFileContentView: UIView {
     func setObject(object:Item, index: Int) {
         webView.isHidden = true
 //        webView.scrollView.bounces = false
-        webView.scrollView.delegate = self
+        
         imageView.image = nil
         playVideoButton.isHidden = true
         self.index = index
@@ -59,7 +59,8 @@ class BaseFileContentView: UIView {
                 imageView.isHidden = true
                 webView.isHidden = false
                 if let url = object.urlToFile {
-                    self.webView.loadRequest(URLRequest(url: url))
+                    webView.delegate = self
+                    webView.loadRequest(URLRequest(url: url))
                 }
             }
         }
@@ -75,6 +76,9 @@ class BaseFileContentView: UIView {
 
 extension BaseFileContentView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if webView.isHidden {
+            return
+        }
         let scrollWidth = webView.scrollView.frame.size.width
         let scrollOffsetX = webView.scrollView.contentOffset.x
         
@@ -84,5 +88,11 @@ extension BaseFileContentView: UIScrollViewDelegate {
             delegate?.pageToLeft()
         }
         
+    }
+}
+
+extension BaseFileContentView: UIWebViewDelegate {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        webView.scrollView.delegate = self
     }
 }
