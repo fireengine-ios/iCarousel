@@ -81,10 +81,20 @@ class RequestService {
                                     timeoutInterval: TimeInterval,
                                     response: @escaping RequestFileDownloadResponse ) -> URLSessionTask {
         log.debug("RequestService downloadFileRequestTask")
-        let sessionRequest = SessionManager.default.download(patch)
+        
+        
+        
+        var request: URLRequest = URLRequest(url: patch)
+        request.timeoutInterval = timeoutInterval
+        request.httpMethod = method.rawValue
+        request.allHTTPHeaderFields = headerParametrs
+        
+        debugPrint("REQUEST: \(request)")
+        
+        let sessionRequest = SessionManager.default.download(request)
             .customValidate()
             .response { requestResponse in
-                response(requestResponse.destinationURL, requestResponse.response, requestResponse.error)
+                response(requestResponse.temporaryURL, requestResponse.response, requestResponse.error)
         }
         return sessionRequest.task!
     }

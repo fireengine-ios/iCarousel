@@ -104,13 +104,13 @@ class AppConfigurator {
 extension DataRequest {
     @discardableResult
     public func customValidate() -> Self {
-        return validate()
+        return validate(statusCode: 200..<300)
     }
 }
 
 extension DownloadRequest {
     @discardableResult
     public func customValidate() -> Self {
-        return validate()
+        return validate(statusCode: 200..<300)
     }
 }
