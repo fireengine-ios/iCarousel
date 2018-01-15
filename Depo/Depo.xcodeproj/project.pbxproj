@@ -13880,12 +13880,7 @@
 				7F27470E56D2B8E0764CFF33 /* OTPViewInitializer.swift in Sources */,
 				CE08BDE71FC8403C00440CA0 /* AuthorizationManager.swift in Sources */,
 				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
-				980738277831905CE1389C42 /* FreeAppSpaceViewController.swift in Sources */,
-				D1F7307987DD553C63317B99 /* FreeAppSpacePresenter.swift in Sources */,
-				10CC7D3FA3B7A3A380C4E7D2 /* FreeAppSpaceInteractor.swift in Sources */,
-				868B89BA3A01CCDC66E16667 /* FreeAppSpaceRouter.swift in Sources */,
 				CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */,
-				B7C673A176A577E30FAB824E /* FreeAppSpaceConfigurator.swift in Sources */,
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -14364,7 +14359,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
@@ -14397,8 +14392,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "975b3db6-9e3c-4677-8ffc-89996a30bcbf";
-				PROVISIONING_PROFILE_SPECIFIER = LifeboxForTurkcell;
+				PROVISIONING_PROFILE = "9581b4f3-226d-4b11-919d-3d78387424de";
+				PROVISIONING_PROFILE_SPECIFIER = ADHOC_LifeboxForTurkcell;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
