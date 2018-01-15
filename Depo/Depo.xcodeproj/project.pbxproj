@@ -5378,8 +5378,6 @@
 		5B9EDC8F04B49066C30CC5A9 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				8CF792A91F10C65E00007719 /* Model */,
-				8CFF86951F0FA80A00520D18 /* Services */,
 				B0E129D217E4E979AFF5939D /* SyncContactsInteractorInput.swift */,
 				BBC08749C42535A16BE62A26 /* SyncContactsInteractorOutput.swift */,
 				6798035E9D982957494A8509 /* SyncContactsInteractor.swift */,
@@ -7278,14 +7276,6 @@
 			path = ContainerNavVC;
 			sourceTree = "<group>";
 		};
-		8CF792A91F10C65E00007719 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		8CF89EF71F13516E00F1A2D0 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -7382,12 +7372,13 @@
 			path = ContactSyncSDK;
 			sourceTree = "<group>";
 		};
-		8CFF86951F0FA80A00520D18 /* Services */ = {
+		8CFF86951F0FA80A00520D18 /* ContactsSyncService */ = {
 			isa = PBXGroup;
 			children = (
 				8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */,
+				8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */,
 			);
-			path = Services;
+			path = ContactsSyncService;
 			sourceTree = "<group>";
 		};
 		8DCB215C1F3C6ABC00BAFE1E /* SearchViewController */ = {
@@ -9020,6 +9011,7 @@
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				8CFF86951F0FA80A00520D18 /* ContactsSyncService */,
 				B5FB65741FDE6F3E00A02FD7 /* UploadProgressService */,
 				CE6DE7421FCBE84000C23CBD /* Socials */,
 				EFA74F9C1FBF371100CF946E /* PrintService */,
