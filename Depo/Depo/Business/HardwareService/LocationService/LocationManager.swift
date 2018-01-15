@@ -73,9 +73,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                         self.locationManager.requestAlwaysAuthorization()
                     } else {
                         self.locationManager.startMonitoringSignificantLocationChanges()
-                        if #available(iOS 9.0, *) {
-                            self.locationManager.allowsBackgroundLocationUpdates = true
-                        }
+                        self.locationManager.allowsBackgroundLocationUpdates = true
                         self.locationManager.startUpdatingLocation()
                     }
                 }else{

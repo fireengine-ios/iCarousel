@@ -10,24 +10,32 @@ class SplashInteractor: SplashInteractorInput {
 
     weak var output: SplashInteractorOutput!
     
+    let authService = AuthenticationService()
+    
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var authenticationService = AuthenticationService()
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
-    
-    func startLoginInBackroung() {
-        output.startAsyncOperation()
-        
-        let success: SuccessLogin = { [weak self] in
-            self?.successLogin()
+
+    func startLoginInBackroung(){
+        if tokenStorage.accessToken == nil {
+            if ReachabilityService().isReachableViaWiFi {
+                failLogin()
+            } else {
+                /// turkcell login
+                authenticationService.turkcellAuth(success: { [weak self] in
+                    self?.successLogin()
+                }, fail: { [weak self] response in
+                    self?.output.asyncOperationSucces()
+                    self?.output.onFailLogin()
+                })
+            }
+        } else {
+            successLogin()
         }
-        
-        let fail: FailResponse = { [weak self] (failObject) in
-            self?.failLogin()
-        }
-        
-        AuthenticationService().authenticate(success: success, fail: fail)
     }
     
     func successLogin(){
@@ -38,7 +46,6 @@ class SplashInteractor: SplashInteractorInput {
     
     func failLogin(){
         DispatchQueue.main.async {
-            self.output.asyncOperationSucces()
             self.output.onFailLogin()
             if !ReachabilityService().isReachable {
                 self.output.onNetworkFail()
@@ -50,12 +57,10 @@ class SplashInteractor: SplashInteractorInput {
         let eulaService = EulaService()
         eulaService.eulaCheck(success: { [weak self] (successResponce) in
             DispatchQueue.main.async {
-                self?.output.asyncOperationSucces()
                 self?.output.onSuccessEULA()
             }
         }) { [weak self] (errorResponce) in
             DispatchQueue.main.async {
-                self?.output.asyncOperationSucces()
                 self?.output.onFailEULA()
             }
         }

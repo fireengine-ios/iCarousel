@@ -36,7 +36,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     private let localManager = LocalMediaStorage.default
     
-    private let remoteManager = SearchService()
+//    private let remoteManager = SearchService()
     
     private let getImageServise = ImageDownloder()
     

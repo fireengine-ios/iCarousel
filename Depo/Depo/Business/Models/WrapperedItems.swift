@@ -58,6 +58,46 @@ enum ApplicationType: String {
     case xls = "xls"
     case pdf = "pdf"
     case ppt = "ppt"
+    
+    func bigIconImage() -> UIImage? {
+        switch self {
+        case .rar, .zip:
+            return #imageLiteral(resourceName: "fileBigIconAchive")
+        case .doc:
+            return #imageLiteral(resourceName: "fileBigIconDoc")
+        case .txt:
+            return #imageLiteral(resourceName: "fileBigIconTxt")
+        case .xls:
+            return #imageLiteral(resourceName: "fileBigIconXls")
+        case .pdf:
+            return #imageLiteral(resourceName: "fileBigIconPdf")
+        case .ppt:
+            return #imageLiteral(resourceName: "fileBigIconPpt")
+        default:
+            return nil
+        }
+    }
+    
+    func smallIconImage() -> UIImage? {
+        switch self {
+        case .rar:
+            return #imageLiteral(resourceName: "fileIconRar")
+        case .zip:
+            return #imageLiteral(resourceName: "fileIconZip")
+        case .doc:
+            return #imageLiteral(resourceName: "fileIconDoc")
+        case .txt:
+            return #imageLiteral(resourceName: "fileIconTxt")
+        case .xls:
+            return #imageLiteral(resourceName: "fileIconXls")
+        case .pdf:
+            return #imageLiteral(resourceName: "fileIconPdf")
+        case .ppt:
+            return #imageLiteral(resourceName: "fileIconPpt")
+        default:
+            return #imageLiteral(resourceName: "fileIconUnknown")
+        }
+    }
 }
 
 enum FileType: Equatable {
@@ -70,6 +110,7 @@ enum FileType: Equatable {
     case musicPlayList
     case allDocs
     case application(ApplicationType)
+
     
     var convertedToSearchFieldValue: FieldValue {
         
@@ -423,7 +464,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var id: Int64?
 
-    let fileSize: Int64
+    var fileSize: Int64
     
     var favorites: Bool
     
@@ -446,7 +487,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return tmpDownloadUrl
     }
     
-     var fileData: Data?
+    var fileData: Data?
     
     var asset: PHAsset? {
         
@@ -507,7 +548,22 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         name = baseModel.name
         if let fileName = name {
-            md5 = String(format: "%@%i", fileName, fileSize)
+            if #available(iOS 10.0, *) {//FIXME: hotfix
+                if fileSize == 0, let localAsset = asset {
+                    let resources = PHAssetResource.assetResources(for: localAsset)
+                    if let resource = resources.first {
+                        if let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong {
+                            let sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64))
+                            fileSize = sizeOnDisk
+                        }
+                    }
+                }
+                md5 = String(format: "%@%i", fileName, fileSize)
+            } else {
+                md5 = fileName
+            }
+            
+            
         }
         
         fileType = baseModel.fileType
@@ -606,10 +662,13 @@ class WrapData: BaseDataSourceItem, Wrappered {
         patchToPreview = .remoteUrl(nil)
         status = .unknown
         tmpDownloadUrl = nil
-        
+
         let creationDate = Date()
-        super.init(uuid: nil, name: nil, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
         
+        if let fileName = name {
+            md5 = "\(fileName)\(fileSize)"
+        }
     }
     
     init(mediaItem: MediaItem) {

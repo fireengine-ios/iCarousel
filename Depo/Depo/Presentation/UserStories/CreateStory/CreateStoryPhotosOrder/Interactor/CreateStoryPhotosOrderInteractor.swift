@@ -11,6 +11,8 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
     weak var output: CreateStoryPhotosOrderInteractorOutput!
     
     var story: PhotoStory?
+    
+    var isRequestStarted = false
 
     func viewIsReady(){
         if (story != nil){
@@ -19,6 +21,10 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
     }
     
     func onNextButton(array: [Item]){
+        if isRequestStarted{
+            return
+        }
+        
         guard let story_ = story else{
             return
         }
@@ -28,30 +34,35 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
             return
         }
         
+        
         story_.storyPhotos.removeAll()
         story_.storyPhotos.append(contentsOf: array)
-        
         //TODO: creation story on server
-        
+        isRequestStarted = true
         let parameter = story_.photoStoryRequestParameter()
         if let parameter_ = parameter {
             let t = CreateStoryPreview(name: parameter_.title,
                                        imageuuid: parameter_.imageUUids,
                                        musicUUID: parameter_.audioUuid,
                                        musicId: parameter_.musicId)
+            
             CreateStoryService().getPreview(preview: t, success: { [weak self] (responce) in
                 if let self_ = self {
+                    self_.isRequestStarted = false
                     DispatchQueue.main.async {
                         self_.output.goToStoryPreview(story: story_, responce: responce)
                     }
                 }
             }, fail: { [weak self] (fail) in
                 if let self_ = self {
+                    self_.isRequestStarted = false
                     DispatchQueue.main.async {
                         self_.output.storyCreatedWithError()
                     }
                 }
             })
+        }else{
+            isRequestStarted = false
         }
         
         

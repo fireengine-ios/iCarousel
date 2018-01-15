@@ -12,6 +12,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     let eulaService = EulaService()
     
     let dataStorage = TermsAndServicesDataStorage()
+    let authenticationService = AuthenticationService()
     
     var isFromLogin = false
     
@@ -54,24 +55,22 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     }
     
     func signUpUser() {
-        let authenticationService = AuthenticationService()
-        guard let sigUpInfo = ApplicationSession.sharedSession.signUpInfo,
+        guard let sigUpInfo = SingletonStorage.shared.signUpInfo,
             let eulaId = eula?.id
             else { return }
         
         let signUpUser = SignUpUser(phone: sigUpInfo.phone, mail: sigUpInfo.mail, password: sigUpInfo.password, eulaId: eulaId)
         
-        authenticationService.signUp(user: signUpUser, sucess: {  result in
-            DispatchQueue.main.async { [weak self] in
-                
+        authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
+            DispatchQueue.main.async {
                 guard let t = result as? SignUpSuccessResponse else {
-                        return
+                    return
                 }
                 self?.dataStorage.signUpResponse = t
-                self?.dataStorage.signUpUserInfo = ApplicationSession.sharedSession.signUpInfo
-                ApplicationSession.sharedSession.session.authToken = t.referenceToken
+                self?.dataStorage.signUpUserInfo = SingletonStorage.shared.signUpInfo
+                SingletonStorage.shared.referenceToken = t.referenceToken
                 self?.output.signUpSuccessed()
-                
+
             }
         }, fail: { [weak self] errorResponce in
             DispatchQueue.main.async {

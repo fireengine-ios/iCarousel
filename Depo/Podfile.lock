@@ -1,23 +1,24 @@
 PODS:
-  - Adjust (4.11.5):
-    - Adjust/Core (= 4.11.5)
-  - Adjust/Core (4.11.5)
-  - Bolts (1.8.4):
-    - Bolts/AppLinks (= 1.8.4)
-    - Bolts/Tasks (= 1.8.4)
-  - Bolts/AppLinks (1.8.4):
+  - Adjust (4.12.1):
+    - Adjust/Core (= 4.12.1)
+  - Adjust/Core (4.12.1)
+  - Alamofire (4.6.0)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.8.4)
+  - Bolts/Tasks (1.9.0)
   - CircleProgressBar (0.32)
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
   - ExpandableTableViewController (2.1)
   - Fabric (1.7.2)
-  - FBSDKCoreKit (4.28.0):
+  - FBSDKCoreKit (4.29.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.28.0):
+  - FBSDKLoginKit (4.29.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.28.0):
+  - FBSDKShareKit (4.29.0):
     - FBSDKCoreKit
   - GoogleConversionTracking (3.4.0)
   - iCarousel (1.8.3)
@@ -27,9 +28,9 @@ PODS:
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - ObjectiveDropboxOfficial (3.0.15)
   - ReachabilitySwift (4.1.0)
-  - SDWebImage (4.2.2):
-    - SDWebImage/Core (= 4.2.2)
-  - SDWebImage/Core (4.2.2)
+  - SDWebImage (4.2.3):
+    - SDWebImage/Core (= 4.2.3)
+  - SDWebImage/Core (4.2.3)
   - SimpleExif (0.0.1)
   - SplunkMint (5.2.2)
   - SwiftyJSON (3.1.4)
@@ -43,6 +44,7 @@ PODS:
 
 DEPENDENCIES:
   - Adjust
+  - Alamofire (~> 4.5)
   - CircleProgressBar (~> 0.32)
   - Crashlytics
   - ExpandableTableViewController
@@ -59,28 +61,29 @@ DEPENDENCIES:
   - SimpleExif
   - SplunkMint
   - SwiftyJSON (~> 3)
-  - Typist
+  - Typist (~> 1.1.0)
   - UIImage-Categories
   - XCGLogger (~> 6.0.1)
   - XYPieChart
 
 SPEC CHECKSUMS:
-  Adjust: 4d8e3830da125a270705188250c3ba86b544ebb7
-  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Adjust: 3d11ee5856dd0474d26496f4fa5a110e9f3ec264
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   ExpandableTableViewController: 7a97b8cf60f044b588255a01176cafa5ce2b7438
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
-  FBSDKCoreKit: ca961e279113f691fd83dc634c0bbad9d4e3f370
-  FBSDKLoginKit: b077381c27d800f21661757e8140cf2c80a91e4a
-  FBSDKShareKit: 4f525556e0df4cf0f574cb3f01c675434f29d477
+  FBSDKCoreKit: 6f139173dc63a1deaff4430a55f2fe5bb222d2af
+  FBSDKLoginKit: 56a057ca6822535ea0faa25f57a7c41edb697fd4
+  FBSDKShareKit: 18a2cd118aef11dd657fe7e8b64bae5c719088b2
   GoogleConversionTracking: ca8c89abda2bd28bb6472b316eeb4ece9264e279
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ObjectiveDropboxOfficial: 69d6d3831e41cf4918e0374b0d1fcb620b238791
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
+  SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
   SimpleExif: 61ba6dce666641dc4b925d9d26a2694e68ebbf4b
   SplunkMint: 8c22ce314fd7a36ee584f2e40d239e19d9fa174d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
@@ -89,6 +92,6 @@ SPEC CHECKSUMS:
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
 
-PODFILE CHECKSUM: 3ae1e18f067853f54f95bc2035a4f9afd8ae8b24
+PODFILE CHECKSUM: ee1fac21881e4be331226882b0d6312b4369f525
 
 COCOAPODS: 1.3.1

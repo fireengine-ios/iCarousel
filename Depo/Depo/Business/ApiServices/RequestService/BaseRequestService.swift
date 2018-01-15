@@ -17,6 +17,8 @@ protocol ObjectFromRequestResponse: class {
 
 protocol RequestParametrs {
     
+    var timeout: TimeInterval { get }
+    
     var requestParametrs: Any { get }
     
     var patch: URL {get}
@@ -38,6 +40,7 @@ protocol DownloadRequestParametrs: RequestParametrs {
     var urlToRemoteFile: URL {get}
 }
 
+
 class BaseUploadRequestParametrs: UploadRequestParametrs {
     
     var urlToLocalFile: URL?
@@ -54,6 +57,10 @@ class BaseUploadRequestParametrs: UploadRequestParametrs {
     
     var header: RequestHeaderParametrs {
         return RequestHeaders.authification()
+    }
+    
+    var timeout: TimeInterval{
+        return 2000.0
     }
     
     init(urlToFile: URL) {
@@ -83,6 +90,10 @@ class BaseDownloadRequestParametrs: DownloadRequestParametrs {
     
     var header: RequestHeaderParametrs {
         return RequestHeaders.authification()
+    }
+    
+    var timeout: TimeInterval{
+        return 2000.0
     }
     
     init(urlToFile: URL, fileName: String, contentType: FileType, albumName: String? = nil, item: WrapData? = nil) {
@@ -118,6 +129,10 @@ class BaseRequestParametrs: RequestParametrs {
     
     var header: RequestHeaderParametrs {
         return RequestHeaders.authification()
+    }
+    
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
     }
 }
 
@@ -160,59 +175,54 @@ class BaseRequestService {
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
                                                       method:RequestMethod.Post,
-                                                      timeoutInterval: 30,
+                                                      timeoutInterval: param.timeout,
                                                       response: handler.response)
         task.resume()
     }
     
     func executeGetRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        
         let task = requestService.downloadRequestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: nil,
                                                       method:RequestMethod.Get,
-                                                      timeoutInterval: 30,
+                                                      timeoutInterval: param.timeout,
                                                       response: handler.response)
         task.resume()
     }
     
     func executeDeleteRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        
         let task = requestService.downloadRequestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
                                                       method:RequestMethod.Delete,
-                                                      timeoutInterval: 30,
+                                                      timeoutInterval: param.timeout,
                                                       response: handler.response)
         task.resume()
     }
     
     func executePutRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        
         let task = requestService.downloadRequestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
                                                       method:RequestMethod.Put,
-                                                      timeoutInterval: 30,
+                                                      timeoutInterval: param.timeout,
                                                       response: handler.response)
         task.resume()
     }
     
     func executeDownloadRequest(param: DownloadRequestParametrs, response:@escaping RequestFileDownloadResponse) {
-        
         let task  = requestService.downloadFileRequestTask(patch: param.patch,
                                                            headerParametrs: param.header,
                                                            body: nil,
                                                            method: RequestMethod.Get,
-                                                           timeoutInterval: 2000,
+                                                           timeoutInterval: param.timeout,
                                                            response: response)
         task.resume()
     }
     
-    
-    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionUploadTask {
+    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask {
         var backgroundTaskID = UIBackgroundTaskInvalid
-        var task: URLSessionUploadTask!
+        var task: URLSessionTask!
         
         if let localURL = param.urlToLocalFile {
             backgroundTaskID = beginBackgroundTask(with: localURL.absoluteString)
@@ -221,7 +231,7 @@ class BaseRequestService {
                                                             headerParametrs: param.header,
                                                             fromFile: localURL,
                                                             method: RequestMethod.Put,
-                                                            timeoutInterval: 2000,
+                                                            timeoutInterval: param.timeout,
                                                             response: { (data, urlResponse, error) in
                                                                 response(data, urlResponse, error)
                                                                 UIApplication.shared.endBackgroundTask(backgroundTaskID)
@@ -234,7 +244,7 @@ class BaseRequestService {
                                                         headerParametrs: param.header,
                                                         fileData: fileData,
                                                         method: RequestMethod.Put,
-                                                        timeoutInterval: 2000,
+                                                        timeoutInterval: param.timeout,
                                                         response: { (data, urlResponse, error) in
                                                             response(data, urlResponse, error)
                                                             UIApplication.shared.endBackgroundTask(backgroundTaskID)
@@ -247,15 +257,25 @@ class BaseRequestService {
     }
     
     func executeHeadRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        
         let task = requestService.headRequestTask(patch: param.patch,
                                                   headerParametrs: param.header,
                                                   method: RequestMethod.Head,
-                                                  timeoutInterval: 30,
+                                                  timeoutInterval: param.timeout,
                                                   response: handler.response)
         task.resume()
     }
+    
+    func executeUploadDataRequest(param: UploadDataRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask{
 
+        let task = requestService.uploadFileRequestTask(path: param.patch,
+                                                        headerParametrs: param.header,
+                                                        fileData: param.data,
+                                                        method: RequestMethod.Put,
+                                                        timeoutInterval: 2000,
+                                                        response: response)
+        task.resume()
+        return task
+    }
     
     //MARK: - Helpers
     

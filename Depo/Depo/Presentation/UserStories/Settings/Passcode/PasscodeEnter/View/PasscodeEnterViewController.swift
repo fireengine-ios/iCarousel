@@ -11,7 +11,8 @@ import UIKit
 class PasscodeEnterViewController: UIViewController {
     
     @IBOutlet weak var passcodeViewImp: PasscodeViewImp!
-    
+    let authtService = AuthenticationService()
+    let accountService = AccountService()
     static func with(flow: PasscodeFlow, navigationTitle: String) -> PasscodeEnterViewController {
         let vc = PasscodeEnterViewController(nibName: "PasscodeEnterViewController", bundle: nil)
         vc.state = flow.startState
@@ -29,7 +30,6 @@ class PasscodeEnterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setTitle(withString: navigationTitle)
         passcodeManager = PasscodeManagerImp(passcodeView: passcodeViewImp, state: state)
         passcodeManager.delegate = self
@@ -39,15 +39,16 @@ class PasscodeEnterViewController: UIViewController {
 // MARK: PasscodeEnterViewInput
 extension PasscodeEnterViewController: PasscodeManagerDelegate {
     func passcodeLockDidFailNumberOfTries(_ lock: PasscodeManager) {
-        AuthenticationService().logout {
+        authtService.logout { [weak self] in
+            guard let `self` = self else {
+                return
+            }
             DispatchQueue.main.async {
                 CoreDataStack.default.clearDataBase()
                 let router = RouterVC()
                 router.setNavigationController(controller: router.onboardingScreen)
                 self.view.window?.endEditing(true)
-                self.passcodeManager.storage.clearPasscode()
                 self.passcodeManager.storage.numberOfTries = self.passcodeManager.maximumInccorectPasscodeAttempts
-                self.biometricsManager.isEnabled = false
             }
         }
     }
@@ -56,7 +57,7 @@ extension PasscodeEnterViewController: PasscodeManagerDelegate {
         lock.view.resignResponder()
         success?()
         if let unwrapedUserFlag = isTurkCellUser, unwrapedUserFlag {
-            AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: false, mobileNetworkAuthEnabled: false,
+            accountService.securitySettingsChange(turkcellPasswordAuthEnabled: false, mobileNetworkAuthEnabled: false,
                                                     success: nil, fail: nil)
         }
     }

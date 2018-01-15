@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseFileContentViewDeleGate {
+protocol BaseFileContentViewDeleGate: class {
     func tapOnSelectedItem()
     
     func pageToRight()
@@ -21,7 +21,7 @@ class BaseFileContentView: UIView {
     
     typealias Item = WrapData
     
-    var delegate: BaseFileContentViewDeleGate?
+    weak var delegate: BaseFileContentViewDeleGate? // Dele Gate ?
     var index: Int = -1
 
     @IBOutlet weak var imageView: LoadingImageView!
@@ -33,7 +33,7 @@ class BaseFileContentView: UIView {
     @IBOutlet weak var webView: UIWebView!
 
     
-    class func initFromXib()->BaseFileContentView {
+    class func initFromXib() -> BaseFileContentView {
         let view = UINib(nibName: "BaseFileContentView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! BaseFileContentView
         view.configurateView()
         return view
@@ -46,7 +46,7 @@ class BaseFileContentView: UIView {
     func setObject(object:Item, index: Int) {
         webView.isHidden = true
 //        webView.scrollView.bounces = false
-        webView.scrollView.delegate = self
+        
         imageView.image = nil
         playVideoButton.isHidden = true
         self.index = index
@@ -56,11 +56,11 @@ class BaseFileContentView: UIView {
             playVideoButton.isHidden = !(object.fileType == FileType.video)
         } else if object.fileType != .audio {
             if object.fileType.isUnSupportedOpenType {
-                
                 imageView.isHidden = true
                 webView.isHidden = false
                 if let url = object.urlToFile {
-                    self.webView.loadRequest(URLRequest(url: url))
+                    webView.delegate = self
+                    webView.loadRequest(URLRequest(url: url))
                 }
             }
         }
@@ -76,6 +76,9 @@ class BaseFileContentView: UIView {
 
 extension BaseFileContentView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if webView.isHidden {
+            return
+        }
         let scrollWidth = webView.scrollView.frame.size.width
         let scrollOffsetX = webView.scrollView.contentOffset.x
         
@@ -85,5 +88,11 @@ extension BaseFileContentView: UIScrollViewDelegate {
             delegate?.pageToLeft()
         }
         
+    }
+}
+
+extension BaseFileContentView: UIWebViewDelegate {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        webView.scrollView.delegate = self
     }
 }

@@ -261,6 +261,11 @@ class FileService: BaseRequestService {
     let downloadOperation = OperationQueue()
     private let dispatchQueue = DispatchQueue(label: "Download Queue")
     
+    override init() {
+        super.init()
+        downloadOperation.maxConcurrentOperationCount = 1
+    }
+    
     func move(moveFiles: MoveFiles , success: FileOperation?, fail:FailResponse?) {
         log.debug("FileService move")
 

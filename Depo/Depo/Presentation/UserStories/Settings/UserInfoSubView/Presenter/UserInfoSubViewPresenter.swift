@@ -12,7 +12,7 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     var interactor: UserInfoSubViewInteractorInput!
     var router: UserInfoSubViewRouterInput!
 
-    func viewIsReady() {
+    func viewWillAppear() {
         startAsyncOperation()
         interactor.onStartRecuests()
     }

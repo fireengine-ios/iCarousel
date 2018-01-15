@@ -259,22 +259,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         log.debug("BaseFilesGreedPresenter onItemSelected")
 
         if item.fileType.isUnSupportedOpenType {
-//            if interactor.remoteItems is MusicService {
-//                guard let array = data as? [[Item]],
-//                    let wrappered = item as? Item
-//                    else { return }
-//
-//                let list = array.flatMap{ $0 }
-//                guard let startIndex = list.index(of: wrappered) else { return }
-//                player.play(list: list, startAt: startIndex)
-//                player.play()
-//                //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
-//            } else {
             let sameTypeFiles: [BaseDataSourceItem] = data.flatMap{ return $0 }.filter{ $0.fileType == item.fileType }
-            router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles, type: type, sortType: sortedType, moduleOutput: self)
-//            }
+            router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
+                                  type: type, sortType: sortedType, moduleOutput: self)
         } else {
-            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
+            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported,
+                                          image: .error, buttonTitle: TextConstants.ok)
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
@@ -333,15 +323,22 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func updateNoFilesView() {
         if needShowNoFileView() {
-            view.showNoFilesWith(text: interactor.textForNoFileLbel(),
-                                 image: interactor.imageForNoFileImageView(),
-                                 createFilesButtonText: interactor.textForNoFileButton())
+            if interactor.remoteItems is PhotoAndVideoService ||
+                interactor.remoteItems is MusicService ||
+                interactor.remoteItems is DocumentService {
+                view.showNoFilesWith(text: interactor.textForNoFileLbel(),
+                                     image: interactor.imageForNoFileImageView(),
+                                     createFilesButtonText: interactor.textForNoFileButton())
+            } else {
+                view.showNoFilesTop()
+            }
         } else {
             view.hideNoFiles()
         }
     }
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
+        setupNewBottomBarConfig()
         log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount")
 
         if (selectedItemsCount == 0){
@@ -355,18 +352,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
         
-        setupNewBottomBarConfig()
+        
         view.setThreeDotsMenu(active: dataSource.selectedItemsArray.count > 0)
         self.view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
-    private func setupNewBottomBarConfig() {
-        
+    func setupNewBottomBarConfig() {
         guard let barConfig = interactor.bottomBarConfig,
             let array = dataSource.getSelectedItems() as? [Item] else {
                 return
         }
-        
         bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
     }
     
@@ -467,9 +462,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
             }
             
-            let remoteItems = selectedItems.filter { $0.isLocalItem == false}
+            let remoteItems = selectedItems.filter {$0.isLocalItem == false}
             
-            if actionTypes.contains(.createStory) && remoteItems.contains(where: { return $0.fileType != .image } ) {
+            if actionTypes.contains(.createStory) && !remoteItems.contains(where: { return $0.fileType == .image } ) {
                 let index = actionTypes.index(where: { return $0 == .createStory})!
                 actionTypes.remove(at: index)
             }
@@ -478,10 +473,24 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: renameIndex)
             }
 
-            let syncPhotos = selectedItems.filter{ $0.fileType == .image }
-            if !syncPhotos.isEmpty {
-                actionTypes.append(.print)
+            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: {$0.fileType == .image}) {
+                actionTypes.remove(at: printIndex)
             }
+            
+            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: {$0.fileType == .image}) {
+                actionTypes.remove(at: editIndex)
+            }
+            
+            if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
+                let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
+                if localDuplicates.count == 0 {
+                    //selectedItems = localDuplicates
+                    actionTypes.remove(at: deleteOriginalIndex)
+                } else {
+                    
+                }
+            }
+            
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
@@ -489,6 +498,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
             actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.index(of: .download) {
+                actionTypes.remove(at: downloadIdex)
+            }
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              presentedBy: sender,
                                              onSourceView: nil)

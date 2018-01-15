@@ -29,7 +29,6 @@ protocol ItemSyncService: class {
     func stop()
     func interrupt()
     func waitForWiFi()
-    func startManually()
 }
 
 
@@ -72,11 +71,13 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
-        sync()
+        DispatchQueue.main.async {
+            self.sync()
+        }
     }
     
     func interrupt() {
-//        if status == .executing {
+//        if status.isContained(in: [.prepairing, .executing]) {
             status = .waitingForWifi
 //        }
     }
@@ -87,12 +88,6 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func waitForWiFi() {
         status = .waitingForWifi
-    }
-    
-    func startManually() {
-        DispatchQueue.main.async {
-            self.sync()
-        }
     }
     
     
@@ -169,7 +164,8 @@ class ItemSyncServiceImpl: ItemSyncService {
             }
             
             log.debug("ItemSyncServiceImpl upload UploadService uploadFileList fail")
-
+            
+            self.stop()
             self.status = .failed
             
             if case ErrorResponse.httpCode(413) = error {

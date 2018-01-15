@@ -68,13 +68,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     static let leftSpaceSmallCell: CGFloat              = 14
     
     var itemModel: Item?
-    
-    func stopAnimation(){
-        activity.stopAnimating()
-    }
-    
+
     override func setImage(image: UIImage?) {
         isAlreadyConfigured = true
+
         if (isBigSize()){
             bigContentImageView.contentMode = .scaleAspectFill
             bigContentImageView.image = image
@@ -85,7 +82,22 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             smallContentImageView.isHidden = false
             smallCellSelectionView.isHidden = true
         }
-        stopAnimation()
+    }
+    
+    override func setPlaceholderImage(fileType: FileType) {
+        var image: UIImage?
+        
+        switch fileType {
+        case .folder:
+            image = isBigSize() ? UIImage(named: "fileBigIconFolder") : UIImage(named: "fileIconFolder")
+        case .audio:
+            image = isBigSize() ? UIImage(named: "fileBigIconAudio") : UIImage(named: "fileIconAudio")
+        case let .application(applicationType):
+            image = isBigSize() ? applicationType.bigIconImage() : applicationType.smallIconImage()
+        default:
+            image = nil
+        }
+        setImage(image: image)
     }
     
     private func isBigSize() -> Bool{
@@ -124,9 +136,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         itemModel = wrappered
         
         fileNameLabel.text = wrappedObj.name
-        activity.startAnimating()
         bigContentImageView.image = nil
-        stopAnimation()
         bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(object: wrappered)
         if (isBigSize()){
             smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(object: wrappered)
