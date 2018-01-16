@@ -36,6 +36,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         
         progressView.tintColor = ColorConstants.blueColor
         imageView.backgroundColor = UIColor.clear
+        
+        favoriteIcon.accessibilityLabel = TextConstants.accessibilityFavorite
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {

@@ -64,11 +64,11 @@ extension CoreDataStack {
                 addedObjects.append(wrapData)
             }
             
-            ItemOperationManager.default.addedLocalFiles(items: addedObjects)
-            
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)
             let finish = Date().timeIntervalSince1970
             debugPrint("All images and videos have been saved in \(finish - start) seconds")
+            
+            ItemOperationManager.default.addedLocalFiles(items: addedObjects)
         }
         
     }

@@ -523,3 +523,17 @@
 "E-mail field is invalid" = "E-mail field is invalid";
 "Please enter your GSM number"="Please enter your GSM number";
 "GSM number"="GSM number";
+"Plus" = "Plus";
+"Close" = "Close";
+"Home" = "Home";
+"Photos and videos" = "Photos and videos";
+"Music" = "Music";
+"Documents" = "Documents";
+"Settings" = "Settings";
+"More" = "More";
+"Search" = "Search";
+"Delete" = "Delete";
+"Favorite" = "Favorite";
+"Selected" = "Selected";
+"Not selected" = "Not selected";
+

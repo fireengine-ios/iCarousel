@@ -173,9 +173,14 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     // MARK: - UISearchbarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(true)
-        dismissController()
-        output.tapCancel()
+        if let searchBar = self.navigationBar.topItem?.titleView,
+            searchBar.isKind(of: UISearchBar.self),
+            searchBar.isFirstResponder {
+            view.endEditing(true)
+        } else {
+            dismissController()
+            output.tapCancel()
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
