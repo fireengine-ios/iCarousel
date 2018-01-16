@@ -41,6 +41,9 @@ class SubPlussButtonView: UIView {
     func setupLabel(withText text: String) {
         self.adjustedLabel.text = text
         self.adjustedLabel.textColor = ColorConstants.grayTabBarButtonsColor
+        
+        button.accessibilityLabel = text
+        button.accessibilityTraits = UIAccessibilityTraitButton
     }
     
     func changeVisability(toHidden hidden: Bool) {
