@@ -389,6 +389,8 @@
 		8766D2FF1FBDB06600316F46 /* PhotoSelectiondDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */; };
 		876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245B0B417FC8FE0BAF38799E /* SyncContactsRouter.swift */; };
 		87AD15E41FD678B800DE97DB /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
+		87FB97AE2008CBA0000D8E2B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
+		87FB97B02008CBAF000D8E2B /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FB97AF2008CBAF000D8E2B /* TitleView.xib */; };
 		8A1850C93CAA6D754F2E796D /* CompleteProfileInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BD358C05E4865147AD6DAE /* CompleteProfileInteractorOutput.swift */; };
 		8AC9821D58B05574782F11AB /* FeedbackViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E8EB45148F901AC01702F /* FeedbackViewInitializer.swift */; };
 		8BC2414816C90E31214FFA9E /* BaseFilesGreedInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D81D8F4441B332E687B17 /* BaseFilesGreedInitializer.swift */; };
@@ -3510,6 +3512,8 @@
 		8743AB461FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionDataSource.swift; sourceTree = "<group>"; };
 		8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectiondDataSource.swift; sourceTree = "<group>"; };
 		87AD15E31FD678B800DE97DB /* String+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
+		87FB97AD2008CBA0000D8E2B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		87FB97AF2008CBAF000D8E2B /* TitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
 		8831E41C046C33B2DA7E6FFE /* SettingsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewInput.swift; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
 		8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderInteractor.swift; sourceTree = "<group>"; };
@@ -6070,6 +6074,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				87B335A82008AD1D0079965F /* TitleView */,
 				8C881BD01FCFF86B00C86236 /* MailVerification */,
 				7C18D75B1F9F460000F8679D /* ShadowView */,
 				8C54083D1F61C00400D4717A /* TopBar */,
@@ -7158,6 +7163,15 @@
 				9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		87B335A82008AD1D0079965F /* TitleView */ = {
+			isa = PBXGroup;
+			children = (
+				87FB97AD2008CBA0000D8E2B /* TitleView.swift */,
+				87FB97AF2008CBAF000D8E2B /* TitleView.xib */,
+			);
+			path = TitleView;
 			sourceTree = "<group>";
 		};
 		88624F2AE6A9AF52410B741C /* Interactor */ = {
@@ -11413,6 +11427,17 @@
 				7C3A745A1F07C28D00124DF5 /* BaseFileContentView.xib in Resources */,
 				CE51AEC41EF90853005DCEE0 /* RegistrationScreen.xib in Resources */,
 				CE8F44F81F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib in Resources */,
+				CE16C45C1FF234BB00BE5906 /* focus@2x.png in Resources */,
+				CE16C3F61FF234BB00BE5906 /* geri.png in Resources */,
+				87FB97B02008CBAF000D8E2B /* TitleView.xib in Resources */,
+				CE16C3761FF234BA00BE5906 /* t_orta_selected@3x.png in Resources */,
+				CE16C3AE1FF234BA00BE5906 /* underline@3x.png in Resources */,
+				CE16C4521FF234BB00BE5906 /* lifebox.png in Resources */,
+				CE16C3ED1FF234BB00BE5906 /* serbest_cizgi.png in Resources */,
+				CE16C42A1FF234BB00BE5906 /* text_selected@3x.png in Resources */,
+				CE16C4221FF234BB00BE5906 /* parlaklik_secili@3x.png in Resources */,
+				CE16C33D1FF234BA00BE5906 /* target_secili@2x.png in Resources */,
+				CE16C4421FF234BB00BE5906 /* sag_ok@3x.png in Resources */,
 				CE95ED4E1F516736002F923A /* HelpAndSupportHeaderView.xib in Resources */,
 				8C06AFA02008AD71003D8E05 /* focus@3x.png in Resources */,
 				8C06AFBE2008AD71003D8E05 /* geri@3x.png in Resources */,
@@ -13644,6 +13669,7 @@
 				DAAF43DBFF829F405419E4E8 /* SyncContactsPresenter.swift in Sources */,
 				7CDABD101F1E3A6300C8CC16 /* UserProfileViewInput.swift in Sources */,
 				CE08BDED1FC8415600440CA0 /* URL+Path.swift in Sources */,
+				87FB97AE2008CBA0000D8E2B /* TitleView.swift in Sources */,
 				2F4FBBADE418935193F54EBB /* SyncContactsInteractorInput.swift in Sources */,
 				97DC05B9B3DCF2CBAE060AF4 /* SyncContactsInteractorOutput.swift in Sources */,
 				555C0C8351470D02E705873D /* SyncContactsInteractor.swift in Sources */,
