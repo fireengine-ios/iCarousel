@@ -44,8 +44,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         super.viewWillDisappear(animated)
         
         let model = dataSource.createSettingsAutoSyncModel()
-        output.saveChanges(setting: model)
-
+        output.saveSettings(model)
     }
     
     override func viewDidLoad() {
