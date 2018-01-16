@@ -971,11 +971,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             uploadedObjectID.append(uuid)
         }
         
-        finshed: for (section, array) in allItems.enumerated() {
+        finished: for (section, array) in allItems.enumerated() {
             for (row, object) in array.enumerated() {
                 if object.uuid == uuid{
                     allItems[section][row] = file
-                    break finshed
+                    break finished
                 }
             }
         }
