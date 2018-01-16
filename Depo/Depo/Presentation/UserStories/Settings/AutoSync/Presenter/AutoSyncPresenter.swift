@@ -54,12 +54,17 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
                 })
             } else {
                 router.routNextVC()
-                interactor.onSaveSettings(setting: setting)
+                saveSettings(setting)
             }
         } else {
-            interactor.onSaveSettings(setting: setting)
+            saveSettings(setting)
         }
     }
+    
+    func saveSettings(_ setting: SettingsAutoSyncModel) {
+        interactor.onSaveSettings(setting: setting)
+    }
+    
     
     func onSettingSaved(){
         
