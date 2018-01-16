@@ -31,12 +31,12 @@ class LoginPhoneMailCell: BaseUserInputCellView {
             return
         }
         
-        guard let range = text.range(of: "+900") else {
+        guard let range = text.range(of: "+(90)0") else {
             return
         }
         
         if text.startIndex == range.lowerBound {
-            text.remove(at: text[3])
+            text.remove(at: text[6])
             textInputField.text = text
         }
     
