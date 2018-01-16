@@ -46,7 +46,7 @@ class PhotoSelectionDataSource: ArrayDataSourceForCollectionView {
     
     override func configurateWithArray(array: [[BaseDataSourceItem]]){
         tableDataMArray.append(contentsOf: array)
-        collectionView.reloadData()
+        collectionView?.reloadData()
     }
     
     override func dropData() {
