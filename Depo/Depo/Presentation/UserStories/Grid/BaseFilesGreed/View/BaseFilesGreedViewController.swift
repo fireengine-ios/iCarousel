@@ -189,7 +189,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         output.onStartCreatingPhotoAndVideos()
     }
     
-    
     // MARK: PhotosAndVideosViewInput
     
     func setupInitialState() {
