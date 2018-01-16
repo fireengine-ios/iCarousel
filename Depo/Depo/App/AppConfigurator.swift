@@ -35,9 +35,9 @@ class AppConfigurator {
         configureSDWebImage()
         setupCropy()
         
-        CoreDataStack.default.appendLocalMediaItems {
+//        CoreDataStack.default.appendLocalMediaItems {
             startMenloworks(with: launchOptions)
-        }
+//        }
     }
     
     class func logout() {

@@ -37,8 +37,9 @@ class CoreDataStack: NSObject {
         return coordinator
     }()
     
-    var appendingItemsFinishBlock: AppendingLocaclItemsFinishCallback?
-    
+//    var appendingItemsFinishBlock: AppendingLocaclItemsFinishCallback?
+//    var isAppendingLocalFilesFinished = false
+
     var mainContext: NSManagedObjectContext
     
     var newChildBackgroundContext: NSManagedObjectContext {
