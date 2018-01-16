@@ -262,12 +262,12 @@ class StoryService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .story)
     }
     
-    func allStories(sortBy: SortType = .albumName, sortOrder: SortOrder = .desc, success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems) {
+    func allStories(sortBy: SortType = .date, sortOrder: SortOrder = .desc, success: ListRemoveItems?, fail: FailRemoteItems?) {
         currentPage = 0
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
     }
     
-    func nextItems(sortBy: SortType = .albumName, sortOrder: SortOrder = .desc, success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems ) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         log.debug("StoryService nextItems")
         
         let searchParam = SearchByFieldParameters(fieldName: .story,
@@ -280,18 +280,19 @@ class StoryService: RemoteItemsService {
         remote.searchByField(param: searchParam, success: { [weak self] response in
             guard let resultResponse = response as? SearchResponse else {
                 log.debug("StoryService remote searchStories fail")
-                return fail()
+                fail?()
+                return
             }
             
             log.debug("StoryService remote searchStories success")
             
             self?.currentPage += 1
             let list = resultResponse.list.flatMap{ Item(remote: $0) }
-            success(list)
+            success?(list)
             }, fail: { _ in
                     log.debug("StoryService remote searchStories fail")
     
-                    fail()
+                    fail?()
             })
     }
 }

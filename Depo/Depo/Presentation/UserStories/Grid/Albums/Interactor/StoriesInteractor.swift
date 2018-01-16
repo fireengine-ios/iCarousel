@@ -13,7 +13,7 @@ class StoriesInteractor: BaseFilesGreedInteractor {
     override func getAllItems(sortBy: SortedRules) {
         log.debug("StoriesInteractor getAllItems")
         
-        guard let remote = remoteItems as? StoryService else{
+        guard let remote = remoteItems as? StoryService else {
             return
         }
         remote.allStories(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, success: { [weak self] stories in

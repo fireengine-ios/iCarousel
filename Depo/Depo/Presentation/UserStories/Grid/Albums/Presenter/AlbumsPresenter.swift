@@ -71,6 +71,10 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
             sortRule = .albumlettersAZ
         case .AlphaBetricZA:
             sortRule = .albumlettersZA
+        case .LettersAZ:
+            sortRule = .lettersAZ
+        case .LettersZA:
+            sortRule = .lettersZA
         case .TimeNewOld:
             sortRule = .timeUp
         case .TimeOldNew:
@@ -79,6 +83,10 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
             sortRule = .sizeAZ
         case .Smallest:
             sortRule = .sizeZA
+        case .metaDataTimeNewOld:
+            sortRule = .metaDataTimeUp
+        case .metaDataTimeOldNew:
+            sortRule = .metaDataTimeDown
         default:
             sortRule = .timeUp
         }

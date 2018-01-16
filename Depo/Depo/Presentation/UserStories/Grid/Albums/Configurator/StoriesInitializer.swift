@@ -11,7 +11,7 @@ import UIKit
 class StoriesInitializer: NSObject {
     
     static var storiesSortTypes: [MoreActionsConfig.SortRullesType] {
-        return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew]
+        return [.LettersAZ,.LettersZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
     class func initializeStoriesController(with nibName:String) -> BaseFilesGreedChildrenViewController {
