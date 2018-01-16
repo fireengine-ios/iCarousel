@@ -168,7 +168,7 @@ class BaseRequestService {
     let requestService = RequestService.default
     
     func executePostRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        let task = requestService.downloadRequestTask(patch: param.patch,
+        let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
                                                       method:RequestMethod.Post,
@@ -178,7 +178,7 @@ class BaseRequestService {
     }
     
     func executeGetRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        let task = requestService.downloadRequestTask(patch: param.patch,
+        let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: nil,
                                                       method:RequestMethod.Get,
@@ -188,7 +188,7 @@ class BaseRequestService {
     }
     
     func executeDeleteRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        let task = requestService.downloadRequestTask(patch: param.patch,
+        let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
                                                       method:RequestMethod.Delete,
@@ -198,7 +198,7 @@ class BaseRequestService {
     }
     
     func executePutRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        let task = requestService.downloadRequestTask(patch: param.patch,
+        let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
                                                       method:RequestMethod.Put,
