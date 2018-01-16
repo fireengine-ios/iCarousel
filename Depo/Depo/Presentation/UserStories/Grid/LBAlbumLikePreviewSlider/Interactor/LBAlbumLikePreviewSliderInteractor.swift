@@ -63,26 +63,26 @@ class LBAlbumLikePreviewSliderInteractor: LBAlbumLikePreviewSliderInteractorInpu
         group.enter()
         
         let albumService = AlbumService(requestSize: 4)
-        albumService.allAlbums(sortBy: .albumName, sortOrder: .asc, success: { albums in
-            DispatchQueue.main.async { [weak self] in
+        albumService.allAlbums(sortBy: .albumName, sortOrder: .asc, success: { [weak self] albums in
+            DispatchQueue.main.async {
                 self?.albumItems = albums
                 group.leave()
             }
-        }, fail: {
-            DispatchQueue.main.async { [weak self] in
+        }, fail: { [weak self] in
+            DispatchQueue.main.async {
                 self?.output.operationFailed()
                 group.leave()
             }
         })
 
         let storiesService = StoryService(requestSize: 4)
-        storiesService.allStories(success: { stories in
-            DispatchQueue.main.async { [weak self] in
+        storiesService.allStories(success: { [weak self] stories in
+            DispatchQueue.main.async {
                 self?.storyItems = stories
                 group.leave()
             }
-        }, fail: {
-            DispatchQueue.main.async { [weak self] in
+        }, fail: { [weak self] in
+            DispatchQueue.main.async {
                 self?.output.operationFailed()
                 group.leave()
             }

@@ -100,7 +100,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 //    }
     
     override func needShowNoFileView() -> Bool {
-        return dataSource.getAllObjects().count == 0
+        return dataSource.getAllObjects().isEmpty
     }
 }
 
