@@ -92,7 +92,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             self_.isSearchRunning = false
             
             if (self_.needSearchAgain){
-                self_.needSearchAgain = true
+                self_.needSearchAgain = false
                 self_.checkFreeAppSpace()
                 return
             }
