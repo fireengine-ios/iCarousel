@@ -78,14 +78,9 @@ class CardsManager: NSObject {
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
-        print("operation possible will started ", type.rawValue)
-        if progresForOperation[type] != nil{
-            return
-        }
         
         hidePopUpsByDepends(type: type)
         
-
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{
                 notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
@@ -124,10 +119,6 @@ class CardsManager: NSObject {
     }
     
     func stopOperationWithType(type: OperationType){
-        
-        if progresForOperation[type] == nil{
-            return
-        }
         
         print("operation stopped ", type.rawValue)
         

@@ -106,6 +106,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         guard let baseCel = cell as? CollectionViewCellForController else {
             return cell
         }
+        
         baseCel.setStateToDefault()
         baseCel.cellDelegate = self
         if (isPopUpCell(path: indexPath)){

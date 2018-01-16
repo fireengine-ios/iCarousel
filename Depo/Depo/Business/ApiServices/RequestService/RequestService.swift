@@ -26,14 +26,12 @@ class RequestService {
     
     static let `default` = RequestService()
     
-    private var uploadProgressService = UploadProgressService.shared
-    
-    public func downloadRequestTask(patch:URL,
-                                headerParametrs: RequestHeaderParametrs,
-                                body: Data?,
-                                method: RequestMethod,
-                                timeoutInterval: TimeInterval,
-                                response: @escaping RequestResponse ) -> URLSessionTask {
+    public func requestTask(patch:URL,
+                            headerParametrs: RequestHeaderParametrs,
+                            body: Data?,
+                            method: RequestMethod,
+                            timeoutInterval: TimeInterval,
+                            response: @escaping RequestResponse ) -> URLSessionTask {
         log.debug("RequestService downloadRequestTask")
         
         var request = URLRequest(url: patch)
@@ -70,6 +68,9 @@ class RequestService {
             .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
         }
+        sessionRequest.uploadProgress { [weak self] progress in
+            self?.requestProgressHander(progress, request: request)
+        }
         return sessionRequest.task!
     }
     
@@ -96,6 +97,9 @@ class RequestService {
             .response { requestResponse in
                 response(requestResponse.temporaryURL, requestResponse.response, requestResponse.error)
         }
+        sessionRequest.downloadProgress { [weak self] progress in
+            self?.requestProgressHander(progress, request: request)
+        }
         return sessionRequest.task!
     }
     
@@ -118,6 +122,9 @@ class RequestService {
             .customValidate()
             .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
+        }
+        sessionRequest.uploadProgress { [weak self] progress in
+            self?.requestProgressHander(progress, request: request)
         }
         return sessionRequest.task!
     }
@@ -142,14 +149,17 @@ class RequestService {
             .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
         }
+        sessionRequest.uploadProgress { [weak self] progress in
+            self?.requestProgressHander(progress, request: request)
+        }
         return sessionRequest.task!
     }
     
     public func headRequestTask(patch:URL,
-                                    headerParametrs: RequestHeaderParametrs,
-                                    method: RequestMethod,
-                                    timeoutInterval: TimeInterval,
-                                    response: @escaping RequestResponse ) -> URLSessionTask {
+                                headerParametrs: RequestHeaderParametrs,
+                                method: RequestMethod,
+                                timeoutInterval: TimeInterval,
+                                response: @escaping RequestResponse ) -> URLSessionTask {
         
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
@@ -163,7 +173,15 @@ class RequestService {
             .customValidate()
             .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
-        }
+            }
         return sessionRequest.task!
+    }
+    
+    func requestProgressHander(_ progress: Alamofire.Progress, request: URLRequest) {
+        guard let delegate = SingletonStorage.shared.uploadProgressDelegate,
+            let tempUUIDfromURL = request.url?.lastPathComponent
+            else { return }
+        
+        delegate.didSend(ratio: Float(progress.fractionCompleted), for: tempUUIDfromURL)
     }
 }

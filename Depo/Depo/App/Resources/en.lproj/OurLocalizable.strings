@@ -435,6 +435,7 @@
 "You have already a backup. Do you want to overwrite the existing one?" = "You have already a backup. Do you want to overwrite the existing one?";
 "Overwrite backup?" = "Overwrite backup?";
 "Error Handling Under Constraction" = "Error Handling Under Constraction";
+"This e-mail address is not registered. Please try again" = "This e-mail address is not registered. Please try again";
 "Account not found for email" = "Account not found for email";
 "This text doesn't match. Please try again" = "This text doesn't match. Please try again";
 "An error is occurred!" = "An error is occurred!";
@@ -489,6 +490,7 @@
 "Password fields do not match." = "Password fields do not match.";
 "Please check the e-mail address." = "Please check the e-mail address.";
 "Please enter a valid email adress" = "Please enter a valid email adress";
+"Please type the text" = "Please type the text";
 "You have performed too many attempts. Please try again 1 hour later." = "You have performed too many attempts. Please try again 1 hour later.";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
 "Please check your internet connection." = "Please check your internet connection.";
@@ -517,4 +519,17 @@
 "E-mail field is invalid" = "E-mail field is invalid";
 "Please enter your GSM number"="Please enter your GSM number";
 "GSM number"="GSM number";
+"Plus" = "Plus";
+"Close" = "Close";
+"Home" = "Home";
+"Photos and videos" = "Photos and videos";
+"Music" = "Music";
+"Documents" = "Documents";
+"Settings" = "Settings";
+"More" = "More";
+"Search" = "Search";
+"Delete" = "Delete";
+"Favorite" = "Favorite";
+"Selected" = "Selected";
+"Not selected" = "Not selected";
 

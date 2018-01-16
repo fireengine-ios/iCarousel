@@ -209,6 +209,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         var bgColor: UIColor = ColorConstants.whiteColor
         if (isSelectionActive){
             selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
+            selectionImageView.accessibilityLabel = isSelected ? TextConstants.accessibilitySelected : TextConstants.accessibilityNotSelected
             if (isBigSize()){
                 UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                     self.bigSelectionView.alpha = isSelected ? 1 : 0
@@ -255,6 +256,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
         fileNameLabel.textColor = ColorConstants.textGrayColor
         
+        moreButton.accessibilityLabel = TextConstants.accessibilityMore
     }
     
     override func updating(){

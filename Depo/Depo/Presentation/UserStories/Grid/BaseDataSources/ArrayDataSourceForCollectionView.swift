@@ -15,7 +15,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     func configurateWithArray(array: [[BaseDataSourceItem]]){
         tableDataMArray.removeAll()
         tableDataMArray.append(contentsOf: array)
-        collectionView.reloadData()
+        collectionView?.reloadData()
 //        allItems.append(array.first! as [WrapData])
     }
     
@@ -97,9 +97,9 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
             
             if arrayOfIndexes.count > 0 {
                 tableDataMArray = newArray
-                collectionView.performBatchUpdates({ [weak self] in
+                collectionView?.performBatchUpdates({ [weak self] in
                     if let `self` = self{
-                        self.collectionView.deleteItems(at: arrayOfIndexes)
+                        self.collectionView?.deleteItems(at: arrayOfIndexes)
                     }
                 }, completion: nil)
             }
