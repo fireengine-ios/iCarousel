@@ -374,7 +374,16 @@ class AuthenticationService: BaseRequestService {
             FreeAppSpace.default.clear()
             CardsManager.default.stopAllOperations()
             FactoryMain.mediaPlayer.stop()
+            self.cancellAllRequests()
             success?()
+        }
+    }
+    
+    func cancellAllRequests() {
+        SessionManager.default.session.getTasksWithCompletionHandler { dataTasks, uploadTasks, downloadTasks in
+            dataTasks.forEach { $0.cancel() }
+            uploadTasks.forEach { $0.cancel() }
+            downloadTasks.forEach { $0.cancel() }
         }
     }
     
