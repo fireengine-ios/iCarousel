@@ -43,7 +43,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var isPaginationDidEnd = false
     
-    internal weak var collectionView: UICollectionView!
+    internal weak var collectionView: UICollectionView?
     
     var displayingType: BaseDataSourceDisplayingType = .greed
     
@@ -456,7 +456,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         registreList.forEach {
             let listNib = UINib(nibName: $0, bundle: nil)
-            collectionView.register(listNib, forCellWithReuseIdentifier: $0)
+            collectionView?.register(listNib, forCellWithReuseIdentifier: $0)
         }
         
     }
@@ -464,7 +464,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private func registerHeaders() {
         let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID,
                               bundle: nil)
-        collectionView.register(headerNib,
+        collectionView?.register(headerNib,
                                 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
         
@@ -483,13 +483,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         isSelectionStateActive = selectionState
-        let array = collectionView.visibleCells
+        let array = collectionView?.visibleCells ?? [UICollectionViewCell]()
         for cell in array {
             guard let cell_ = cell as? CollectionViewCellDataProtocol else{
                 continue
             }
             
-            let indexPath = collectionView.indexPath(for: cell)
+            let indexPath = collectionView?.indexPath(for: cell)
             guard let indexPath_ = indexPath else {
                 continue
             }
@@ -531,7 +531,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){
         displayingType = type
-        collectionView.reloadData()
+        collectionView?.reloadData()
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
@@ -546,7 +546,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func onLongPress(cell: UICollectionViewCell){
         if  let forwardDelegate = self.delegate,
-            let path = collectionView.indexPath(for: cell),
+            let path = collectionView?.indexPath(for: cell),
             let object = itemForIndexPath(indexPath: path) {
             
             if !isObjctSelected(object: object){
@@ -623,10 +623,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        let visibleCells = collectionView.visibleCells
+        let visibleCells = collectionView?.visibleCells ?? [UICollectionViewCell]()
         for cell in visibleCells {
             guard let cell_ = cell as? CollectionViewCellDataProtocol,
-                let indexPath = collectionView.indexPath(for: cell),
+                let indexPath = collectionView?.indexPath(for: cell),
                 (indexPath.section == section),
                 let object = itemForIndexPath(indexPath: indexPath)
                 else{
@@ -644,13 +644,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func updateVisibleCells(){
-        let array = collectionView.visibleCells
+        let array = collectionView?.visibleCells ?? [UICollectionViewCell]()
         for cell in array {
             guard let cell_ = cell as? CollectionViewCellDataProtocol else{
                 continue
             }
             
-            let indexPath = collectionView.indexPath(for: cell)
+            let indexPath = collectionView?.indexPath(for: cell)
             guard let indexPath_ = indexPath else {
                 continue
             }
@@ -928,7 +928,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func getCellForFile(objectUUID: String) -> CollectionViewCellForPhoto?{
         if let path = getIndexPathForObject(objectUUID: objectUUID){
-            let cell = collectionView.cellForItem(at: path)
+            let cell = collectionView?.cellForItem(at: path)
             if let cell = cell as? CollectionViewCellForPhoto {
                 return cell
             }
@@ -971,6 +971,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             uploadedObjectID.append(uuid)
         }
         
+        finshed: for (section, array) in allItems.enumerated() {
+            for (row, object) in array.enumerated() {
+                if object.uuid == uuid{
+                    allItems[section][row] = file
+                    break finshed
+                }
+            }
+        }
+        
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
             if let `self` = self{
                 let cell = self.getCellForFile(objectUUID: uuid)
@@ -1004,9 +1014,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             }
             
-            collectionView.performBatchUpdates({ [weak self] in
+            collectionView?.performBatchUpdates({ [weak self] in
                 if let `self` = self{
-                    self.collectionView.reloadItems(at: arrayOfPath)
+                    self.collectionView?.reloadItems(at: arrayOfPath)
                 }
                 }, completion: nil)
         }
@@ -1048,6 +1058,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     serverObjects.append(object)
                 }
             }
+            
+            var serversUUIDs = [String]()
+            for array in allItems{
+                for arraysObject in array{
+                    if !arraysObject.isLocalItem {
+                        serversUUIDs.append(arraysObject.uuid)
+                    }
+                }
+            }
+            objectsForRemoving = objectsForRemoving.filter({
+                return !serversUUIDs.contains($0.uuid)
+            })
             
             let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
             let predicate = PredicateRules().allLocalObjectsForObjects(objects: serverObjects)
@@ -1137,7 +1159,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        collectionView.reloadData()
+        collectionView?.reloadData()
         
 //        collectionView.performBatchUpdates({[weak self] in
 //            if let `self` = self{
@@ -1185,7 +1207,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
             return
         }
-        
+        allLocalItems.append(contentsOf: items)
         delegate?.needReloadData?()
     }
     
