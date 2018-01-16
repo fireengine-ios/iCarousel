@@ -68,13 +68,12 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func start() {
         log.debug("ItemSyncServiceImpl start")
-        
-        guard !status.isContained(in: [.executing, .prepairing]) else {
-            appendNewUnsyncedItems()
-            return
-        }
-
         dispatchQueue.async {
+            guard !self.status.isContained(in: [.executing, .prepairing]) else {
+                self.appendNewUnsyncedItems()
+                return
+            }
+            
             self.sync()
         }
     }

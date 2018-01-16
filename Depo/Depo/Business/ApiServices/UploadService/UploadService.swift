@@ -44,8 +44,7 @@ final class UploadService: BaseRequestService {
 //        syncDispatchQueue = DispatchQueue(label: "Sync Queue")
         
         super.init()
-        
-        UploadProgressService.shared.delegate = self
+        SingletonStorage.shared.uploadProgressDelegate = self
     }
 
     
@@ -378,13 +377,8 @@ final class UploadService: BaseRequestService {
     }
 }
 
-
 extension UploadService: UploadProgressServiceDelegate {
-    
-    func didSend(bytes: Int64, of totalBytes: Int64, for tempUUID: String) {
-        //
-    }
-    
+
     func didSend(ratio: Float, for tempUUID: String) {
         if let uploadOperation = uploadOperations.first(where: {$0.item.uuid == tempUUID}){
             if let uploadType = uploadOperation.uploadType{
@@ -393,12 +387,7 @@ extension UploadService: UploadProgressServiceDelegate {
             ItemOperationManager.default.setProgressForUploadingFile(file: uploadOperation.item, progress: ratio)
         }
     }
-    
-    func didSend(percent: Float, for tempUUID: String) {
-        //
-    }
 }
-
 
 extension UploadService {
     fileprivate func showOutOfSpaceAlert() {
