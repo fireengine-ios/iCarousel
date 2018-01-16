@@ -130,6 +130,9 @@
 		77CF7B297D6D1B75D73CACBC /* SelectNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */; };
 		780400F91FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780400F71FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift */; };
 		780400FA1FE7E6FB00560EEF /* SuggestionTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 780400F81FE7E6FB00560EEF /* SuggestionTableSectionHeader.xib */; };
+		78052962200DCDA70051FA78 /* ManageContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78052960200DCDA70051FA78 /* ManageContactTableViewCell.swift */; };
+		78052963200DCDA70051FA78 /* ManageContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78052961200DCDA70051FA78 /* ManageContactTableViewCell.xib */; };
+		78052965200DD3470051FA78 /* ManageContactsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78052964200DD3470051FA78 /* ManageContactsModels.swift */; };
 		7809A32D1FED09EF00954A5F /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7809A32C1FED09EF00954A5F /* AsyncOperation.swift */; };
 		780ACF9B2004D6D2009CA4F5 /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 780ACF992004D6D1009CA4F5 /* AnalyzeStatus.m */; };
 		781839861FE9140E0046D73C /* FileForDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781839851FE9140E0046D73C /* FileForDownload.swift */; };
@@ -152,6 +155,8 @@
 		78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */; };
 		787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
 		78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */; };
+		78B02CBD200D1AD500D11CD2 /* ContactSyncResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */; };
+		78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */; };
 		78D6C8FF1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */; };
 		78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */; };
 		78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */; };
@@ -2800,6 +2805,9 @@
 		7750D1860EF1326BD6776D8E /* SplashConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashConfigurator.swift; sourceTree = "<group>"; };
 		780400F71FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableSectionHeader.swift; sourceTree = "<group>"; };
 		780400F81FE7E6FB00560EEF /* SuggestionTableSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionTableSectionHeader.xib; sourceTree = "<group>"; };
+		78052960200DCDA70051FA78 /* ManageContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageContactTableViewCell.swift; sourceTree = "<group>"; };
+		78052961200DCDA70051FA78 /* ManageContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageContactTableViewCell.xib; sourceTree = "<group>"; };
+		78052964200DD3470051FA78 /* ManageContactsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageContactsModels.swift; sourceTree = "<group>"; };
 		7809A32C1FED09EF00954A5F /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		780ACF992004D6D1009CA4F5 /* AnalyzeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeStatus.m; sourceTree = "<group>"; };
 		780ACF9A2004D6D1009CA4F5 /* AnalyzeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeStatus.h; sourceTree = "<group>"; };
@@ -2821,6 +2829,8 @@
 		78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarActionHandler.swift; sourceTree = "<group>"; };
 		787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailModuleOutput.swift; sourceTree = "<group>"; };
 		78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsModuleOutput.swift; sourceTree = "<group>"; };
+		78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncResponse.swift; sourceTree = "<group>"; };
+		78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncParametrs.swift; sourceTree = "<group>"; };
 		78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
 		78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsConfigurator.swift; sourceTree = "<group>"; };
 		78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsInitializer.swift; sourceTree = "<group>"; };
@@ -5597,6 +5607,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7805295F200DCD870051FA78 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				78052960200DCDA70051FA78 /* ManageContactTableViewCell.swift */,
+				78052961200DCDA70051FA78 /* ManageContactTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		7809A32B1FED09C500954A5F /* Concurrency */ = {
 			isa = PBXGroup;
 			children = (
@@ -5616,6 +5635,7 @@
 		7859297620060D72003F8AB3 /* ManageContacts */ = {
 			isa = PBXGroup;
 			children = (
+				7805295F200DCD870051FA78 /* Cells */,
 				7859298520060E6B003F8AB3 /* View */,
 				7859298420060E5B003F8AB3 /* Router */,
 				7859298320060E4C003F8AB3 /* Presenter */,
@@ -5640,6 +5660,7 @@
 				7859299620060E93003F8AB3 /* ManageContactsInteractor.swift */,
 				7859299720060E93003F8AB3 /* ManageContactsInteractorInput.swift */,
 				7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */,
+				78052964200DD3470051FA78 /* ManageContactsModels.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -7377,6 +7398,8 @@
 			children = (
 				8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */,
 				8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */,
+				78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */,
+				78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */,
 			);
 			path = ContactsSyncService;
 			sourceTree = "<group>";
@@ -10789,6 +10812,7 @@
 				CE16C38A1FF234BA00BE5906 /* kare.png in Resources */,
 				CE16C3231FF234BA00BE5906 /* ok.png in Resources */,
 				CE16C2EF1FF234BA00BE5906 /* Orta_Selected@2x.png in Resources */,
+				78052963200DCDA70051FA78 /* ManageContactTableViewCell.xib in Resources */,
 				CE16C3D01FF234BA00BE5906 /* t_kucuk@3x.png in Resources */,
 				CE16C3451FF234BA00BE5906 /* rotation_secili@2x.png in Resources */,
 				CE16C4341FF234BB00BE5906 /* kontrast_secili@2x.png in Resources */,
@@ -12247,6 +12271,7 @@
 				8C7786A21F3F38F0005CB432 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				7C4484FE1F0FC607003AF631 /* ButtonWithGrayCorner.swift in Sources */,
 				CE2F562E1F75548500F49DA1 /* SubscriptionParameters.swift in Sources */,
+				78B02CBD200D1AD500D11CD2 /* ContactSyncResponse.swift in Sources */,
 				CEAE3FF41EFD517300A405B2 /* TabBarViewController.swift in Sources */,
 				7C49881A1F3320420039C5F2 /* CreateStoryPhotosOrderPresenter.swift in Sources */,
 				7CD1F9181F0288DC0028F51A /* WelcomeModuleInput.swift in Sources */,
@@ -12331,6 +12356,7 @@
 				7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */,
 				CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */,
 				8CFF868B1F0F96E600520D18 /* ContactSyncSDK.m in Sources */,
+				78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */,
 				CE8F44E61F6AB59C0062C2E0 /* ActivityTimelineService.swift in Sources */,
 				7C4988191F3320420039C5F2 /* CreateStoryPhotosOrderModuleInput.swift in Sources */,
 				8DCB216E1F3C85CD00BAFE1E /* SearchViewInput.swift in Sources */,
@@ -12538,6 +12564,7 @@
 				CE37FF091F7BEB7600EF5FF1 /* PurchaseResult.swift in Sources */,
 				CE51ACCF1EF90853005DCEE0 /* RegistrationInitializer.swift in Sources */,
 				CE95ED501F516736002F923A /* HelpAndSupportInteractorInput.swift in Sources */,
+				78052965200DD3470051FA78 /* ManageContactsModels.swift in Sources */,
 				CE51ACD01EF90853005DCEE0 /* TermsAndServicesViewInput.swift in Sources */,
 				7C66E8B21F979C3300D98F27 /* CreateStoryPreviewViewIO.swift in Sources */,
 				CEAE3F981EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift in Sources */,
@@ -12900,6 +12927,7 @@
 				2B5261513879D04FFE1D241C /* SettingsViewOutput.swift in Sources */,
 				7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */,
 				CE0ED9721FBC0F5A00487632 /* PasscodeInputView.swift in Sources */,
+				78052962200DCDA70051FA78 /* ManageContactTableViewCell.swift in Sources */,
 				0BC0B9C638832D70DF19F6B3 /* SettingsModuleInput.swift in Sources */,
 				C9C861DC0DEC3C4584CBF425 /* SettingsPresenter.swift in Sources */,
 				5362D573ACB91FF20AF99896 /* SettingsInteractorInput.swift in Sources */,

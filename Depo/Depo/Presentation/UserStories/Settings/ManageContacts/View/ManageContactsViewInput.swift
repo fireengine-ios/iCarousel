@@ -7,5 +7,5 @@
 //
 
 protocol ManageContactsViewInput: class {
-
+    func showContacts(_ contactGroups: [ManageContacts.Group])
 }

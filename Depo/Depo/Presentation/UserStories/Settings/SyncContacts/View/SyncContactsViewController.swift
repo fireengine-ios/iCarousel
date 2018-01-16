@@ -49,7 +49,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         titleLabel.textColor = ColorConstants.textGrayColor
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         titleLabel.text = ""
-        //backButtonForNavigationItem(title: TextConstants.backTitle)
         
         newContactCountLabel.textColor = ColorConstants.textLightGrayColor
         newContactCountLabel.font = UIFont.TurkcellSaturaBolFont(size: 25)
@@ -95,11 +94,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if (Device.isIpad){
-//           hidenNavigationBarStyle()
-        } else {
-            navigationBarWithGradientStyle()
-        }
+        navigationBarWithGradientStyle()
         setTitle(withString: TextConstants.backUpMyContacts)
     }
     
@@ -144,7 +139,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         deleteDuplicatedButton.isHidden = true
         operationButtonsStackView.isHidden = false
         backupDateLabel.isHidden = false
-        manageContactsButton.isHidden = false
+        manageContactsButton.isHidden = true
     }
     
     func setStateWithBackUp() {

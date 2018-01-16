@@ -7,7 +7,9 @@
 //
 
 protocol ManageContactsViewOutput {
-
     func viewIsReady()
-    
+    func onDeleteContact(_ contact: RemoteContact)
+    func didScrollToEnd()
+    func onSearch(_ query: String)
+    func cancelSearch()
 }

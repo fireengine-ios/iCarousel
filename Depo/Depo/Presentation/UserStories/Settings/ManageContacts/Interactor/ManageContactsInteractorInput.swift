@@ -9,4 +9,9 @@
 import Foundation
 
 protocol ManageContactsInteractorInput {
+    func loadContacts()
+    func cancelSearch()
+    func searchContacts(query: String)
+    func continueLoading()
+    func deleteContact(_ contact: RemoteContact)
 }

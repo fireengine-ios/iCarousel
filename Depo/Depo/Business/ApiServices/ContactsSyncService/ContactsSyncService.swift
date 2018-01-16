@@ -15,9 +15,12 @@ struct ContactsSyncServiceConstant {
     static let webProdURL =  "https://contactsync.turkcell.com.tr/ttyapi/"
 }
 
-class ContactsSyncService {
+typealias ContactsOperation = (ContactsResponse) -> Swift.Void
+
+class ContactsSyncService: BaseRequestService {
     
-    init() {
+    override init() {
+        super.init()
         setup()
     }
     
@@ -164,7 +167,32 @@ class ContactsSyncService {
         }
     }
     
-
+    func searchRemoteContacts(with query: String, page: Int, success: ContactsOperation?, fail: FailResponse?) {
+        let handler = BaseResponseHandler<ContactsResponse, ObjectRequestResponse>(success: { response  in
+            guard let response = response as? ContactsResponse else {
+                return
+            }
+            success?(response)
+        }, fail: fail)
+        executeGetRequest(param: SearchContacts(query: query, page: page), handler: handler)
+    }
+    
+    func deleteRemoteContacts(_ contacts: [RemoteContact], success: SuccessResponse?, fail: FailResponse?) {
+        let param = DeleteContacts(contactIDs: contacts.flatMap({ $0.id }))
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeDeleteRequest(param: param, handler: handler)
+    }
+    
+    func getContacts(with page: Int, success: ContactsOperation?, fail: FailResponse?) {
+        let handler = BaseResponseHandler<ContactsResponse, ObjectRequestResponse>(success: { response  in
+            guard let response = response as? ContactsResponse else {
+                return
+            }
+            success?(response)
+        },
+            fail: fail)
+        executeGetRequest(param: GetContacts(page: page), handler: handler)
+    }
     
     static private func parseContactsToMerge(_ contactsToMerge: [String: Int]) -> [ContactSync.AnalyzedContact] {
         var parsedContacts = [ContactSync.AnalyzedContact]()

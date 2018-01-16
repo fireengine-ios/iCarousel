@@ -9,5 +9,7 @@
 import Foundation
 
 protocol ManageContactsInteractorOutput: class {
-    
+    func didLoadContacts(_ contacts: [RemoteContact])
+    func asyncOperationStarted()
+    func asyncOperationFinished()
 }
