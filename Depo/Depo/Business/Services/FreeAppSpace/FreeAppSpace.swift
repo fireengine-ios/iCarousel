@@ -84,6 +84,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func checkFreeAppSpace(){
+        photoVideoService?.currentPage = 0
         startSearchDuplicates(finished: { [weak self] in
             guard let self_ = self else{
                 return
@@ -191,7 +192,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
         var finished = false
         
-        service.nextItems(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
+        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
             guard let self_ = self else{
                 fail()
                 return
@@ -202,10 +203,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     finished = true
                     break
                 }
-                let serverObjectMD5 = item.md5
-                let index = self_.localMD5Array.index(of: serverObjectMD5)
+                let index = self_.localMD5Array.index(of: item.md5)
                 if let index_ = index {
-                    
                     self_.serverDuplicatesArray.append(item)
                     self_.duplicatesArray.append(self_.localtemsArray[index_])
                     self_.localtemsArray.remove(at: index_)
@@ -324,7 +323,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         var newServerDuplicatesArray = [WrapData]()
         for object in serverDuplicatesArray{
             if !md5Array.contains(object.md5){
-                newDuplicatesArray.append(object)
+                newServerDuplicatesArray.append(object)
             }
         }
         serverDuplicatesArray.removeAll()
