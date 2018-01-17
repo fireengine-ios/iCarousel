@@ -1092,6 +1092,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             }
             
+            for object in localObjectsForReplace{
+                if let index = serversUUIDs.index(of: object.uuid){
+                    serversUUIDs.remove(at: index)
+                }
+            }
+            
+            for localObject in localObjectsForReplace{
+                for (index, object) in allMediaItems.enumerated(){
+                    if object.uuid == localObject.uuid {
+                        allMediaItems[index] = localObject
+                    }
+                }
+            }
+            
             if (localObjectsForReplace.count > 0){
                 var newArray = [[Item]]()
                 for array in allItems{
@@ -1219,4 +1233,3 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
 }
-
