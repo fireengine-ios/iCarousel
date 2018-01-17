@@ -957,16 +957,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func finishedUploadFile(file: WrapData){
-        if !needShowProgressInCell{
-            return
-        }
-        
-        if let cell = getCellForFile(objectUUID: file.uuid){
-            cell.finishedUploadForObject()
-        }
         
         let uuid = file.uuid
-        
+        file.isLocalItem = false
         if uploadedObjectID.index(of: file.uuid) == nil{
             uploadedObjectID.append(uuid)
         }
@@ -978,6 +971,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     break finished
                 }
             }
+        }
+        
+        
+        for (index, object) in allMediaItems.enumerated(){
+            if object.uuid == file.uuid {
+                allMediaItems[index] = file
+            }
+        }
+        
+        
+        if !needShowProgressInCell{
+            return
+        }
+        
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.finishedUploadForObject()
         }
         
         

@@ -84,6 +84,8 @@ class CardsManager: NSObject {
             }
             self.hidePopUpsByDepends(type: type)
             
+            self.setProgressForOperationWith(type: type, allOperations: 0, completedOperations: 0)
+            
             for notificationView in self.foloversArray{
                 notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
             }
