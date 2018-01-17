@@ -173,14 +173,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     // MARK: - UISearchbarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if let searchBar = self.navigationBar.topItem?.titleView,
-            searchBar.isKind(of: UISearchBar.self),
-            searchBar.isFirstResponder {
-            view.endEditing(true)
-        } else {
-            dismissController()
-            output.tapCancel()
-        }
+        view.endEditing(true)
+        dismissController()
+        output.tapCancel()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -193,6 +188,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         }
         view.endEditing(true)
         suggestTableView.isHidden = true
+        searchBar.enableCancelButton()
     }
     
     var timerToSearch = Timer()
@@ -398,11 +394,3 @@ extension SearchViewController: SuggestionTableSectionHeaderDelegate {
     }
     
 }
-
-
-
-
-
-
-
-
