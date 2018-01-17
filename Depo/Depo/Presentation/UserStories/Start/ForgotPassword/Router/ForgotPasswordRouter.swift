@@ -14,7 +14,7 @@ class ForgotPasswordRouter: ForgotPasswordRouterInput {
                                       image: .error,
                                       buttonTitle: TextConstants.ok,
                                       action: { vc in
-                                        vc.dismiss(animated: true, completion: { [weak self] in
+                                        vc.close(completion: { [weak self] in
                                             self?.popBack()
                                         })
         })
