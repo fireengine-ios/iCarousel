@@ -76,11 +76,12 @@ class RequestService {
     
     
     public func downloadFileRequestTask(patch:URL,
-                                    headerParametrs: RequestHeaderParametrs,
-                                    body: Data?,
-                                    method: RequestMethod,
-                                    timeoutInterval: TimeInterval,
-                                    response: @escaping RequestFileDownloadResponse ) -> URLSessionTask {
+                                        to destinationURL: URL? = nil,
+                                        headerParametrs: RequestHeaderParametrs,
+                                        body: Data?,
+                                        method: RequestMethod,
+                                        timeoutInterval: TimeInterval,
+                                        response: @escaping RequestFileDownloadResponse ) -> URLSessionTask {
         log.debug("RequestService downloadFileRequestTask")
         
         
@@ -90,9 +91,15 @@ class RequestService {
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headerParametrs
         
+        var destination: DownloadRequest.DownloadFileDestination?
+        if let destinationURL = destinationURL {
+            destination = { (_, _) in
+                return (destinationURL, [])
+            }
+        }
         debugPrint("REQUEST: \(request)")
         
-        let sessionRequest = SessionManager.default.download(request)
+        let sessionRequest = SessionManager.default.download(request, to: destination)
             .customValidate()
             .response { requestResponse in
                 response(requestResponse.temporaryURL, requestResponse.response, requestResponse.error)

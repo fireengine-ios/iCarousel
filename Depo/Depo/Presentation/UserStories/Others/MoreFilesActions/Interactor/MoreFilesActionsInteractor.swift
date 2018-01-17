@@ -30,33 +30,36 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func selectShareType(sourceRect: CGRect?) {
-        sync(items: sharingItems, action: { [weak self] in
-            guard let `self` = self else { return }
-            if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }) {
-                self.shareViaLink(sourceRect: sourceRect)
-            } else {
-                self.showSharingMenu(sourceRect: sourceRect)
-            }
-        }, cancel: {})
+        if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }) {
+            self.shareViaLink(sourceRect: sourceRect)
+        } else {
+            self.showSharingMenu(sourceRect: sourceRect)
+        }
     }
     
     func showSharingMenu(sourceRect: CGRect?) {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darcBlueColor
         
-        let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { (action) in
-            self.shareSmallSize(sourceRect: sourceRect)
+        let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] (action) in
+            self?.sync(items: self?.sharingItems, action: { [weak self] in
+                self?.shareSmallSize(sourceRect: sourceRect)
+            }, cancel: {})
         }
         
         controler.addAction(smallAction)
         
-        let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { (action) in
-            self.shareOrignalSize(sourceRect: sourceRect)
+        let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] (action) in
+            self?.sync(items: self?.sharingItems, action: { [weak self] in
+                self?.shareOrignalSize(sourceRect: sourceRect)
+            }, cancel: {})
         }
         controler.addAction(originalAction)
         
-        let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { (action) in
-            self.shareViaLink(sourceRect: sourceRect)
+        let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] (action) in
+            self?.sync(items: self?.sharingItems, action: { [weak self] in
+                self?.shareViaLink(sourceRect: sourceRect)
+            }, cancel: {})
         }
         controler.addAction(shareViaLinkAction)
         
@@ -532,7 +535,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         return failResponse
     }
     
-    private func sync(items: [BaseDataSourceItem], action: @escaping () -> Void, cancel: @escaping () -> Void, fail: FailResponse? = nil) {
+    private func sync(items: [BaseDataSourceItem]?, action: @escaping () -> Void, cancel: @escaping () -> Void, fail: FailResponse? = nil) {
         guard let items = items as? [WrapData] else { return }
         let successClosure = { [weak self] in
             DispatchQueue.main.async {

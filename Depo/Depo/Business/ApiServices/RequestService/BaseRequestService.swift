@@ -36,8 +36,8 @@ protocol UploadDataRequestParametrs: RequestParametrs {
 }
 
 protocol DownloadRequestParametrs: RequestParametrs {
-    
-    var urlToRemoteFile: URL {get}
+    var urlToRemoteFile: URL { get }
+    var destinationURL: URL? { get }
 }
 
 
@@ -69,6 +69,7 @@ class BaseUploadRequestParametrs: UploadRequestParametrs {
 }
 
 class BaseDownloadRequestParametrs: DownloadRequestParametrs {
+    var destinationURL: URL?
     
     let urlToRemoteFile: URL
     
@@ -209,6 +210,7 @@ class BaseRequestService {
     
     func executeDownloadRequest(param: DownloadRequestParametrs, response:@escaping RequestFileDownloadResponse) {
         let task  = requestService.downloadFileRequestTask(patch: param.patch,
+                                                           to: param.destinationURL,
                                                            headerParametrs: param.header,
                                                            body: nil,
                                                            method: RequestMethod.Get,
