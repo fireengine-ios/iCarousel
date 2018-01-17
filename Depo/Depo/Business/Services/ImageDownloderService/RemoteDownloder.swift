@@ -89,8 +89,6 @@ typealias FilesDownloaderResponse = (_ fileURLs: [URL], _ directoryURL: URL) -> 
 typealias FilesDownloaderFail = (_ errorMessage: String) -> Swift.Void
 
 class FileDownloadRequestParameters: BaseRequestParametrs, DownloadRequestParametrs {
-    var destinationURL: URL?
-    
     var urlToRemoteFile: URL
     
     init(url: URL) {
@@ -127,11 +125,16 @@ class FilesDownloader {
         for file in filesForDownload {
             group.enter()
             let params = BaseDownloadRequestParametrs(urlToFile: file.url, fileName: file.name, contentType: file.type)
-            let destinationURL = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
-            params.destinationURL = destinationURL
+            
             requestService.executeDownloadRequest(param: params) { (urlToTmpFile, response, error) in
-                if error == nil {
-                    localURLs.append(destinationURL)
+                if let urlToTmpFile = urlToTmpFile {
+                    let destinationURL = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
+                    do {
+                        try FileManager.default.moveItem(at: urlToTmpFile, to: destinationURL)
+                        localURLs.append(destinationURL)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
                 group.leave()
             }

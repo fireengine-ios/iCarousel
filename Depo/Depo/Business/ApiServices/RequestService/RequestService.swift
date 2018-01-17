@@ -76,33 +76,30 @@ class RequestService {
     
     
     public func downloadFileRequestTask(patch:URL,
-                                        to destinationURL: URL? = nil,
                                         headerParametrs: RequestHeaderParametrs,
                                         body: Data?,
                                         method: RequestMethod,
                                         timeoutInterval: TimeInterval,
                                         response: @escaping RequestFileDownloadResponse ) -> URLSessionTask {
         log.debug("RequestService downloadFileRequestTask")
-        
-        
-        
+
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headerParametrs
-        
-        var destination: DownloadRequest.DownloadFileDestination?
-        if let destinationURL = destinationURL {
-            destination = { (_, _) in
-                return (destinationURL, [])
-            }
-        }
+    
         debugPrint("REQUEST: \(request)")
+        
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory())
+            let file = tempDirectoryURL.appendingPathComponent(patch.lastPathComponent, isDirectory: false)
+            return (file, [.createIntermediateDirectories, .removePreviousFile])
+        }
         
         let sessionRequest = SessionManager.default.download(request, to: destination)
             .customValidate()
             .response { requestResponse in
-                response(requestResponse.temporaryURL, requestResponse.response, requestResponse.error)
+                response(requestResponse.destinationURL, requestResponse.response, requestResponse.error)
         }
         sessionRequest.downloadProgress { [weak self] progress in
             self?.requestProgressHander(progress, request: request)

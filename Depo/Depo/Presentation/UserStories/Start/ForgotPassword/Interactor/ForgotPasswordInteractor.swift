@@ -19,7 +19,7 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
             return
         }
         
-        guard isValid(email: mail) else {
+        guard Validator.isValid(email: mail) else {
             DispatchQueue.main.async { [weak self] in
                 self?.output.requestFailed(withError: TextConstants.forgotPasswordErrorEmailFormatText)
             }
@@ -59,11 +59,4 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
         }
         return TextConstants.forgotPasswordCommonErrorText
     }
-    
-    fileprivate func isValid(email: String) -> Bool {
-        let emailRegEx = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,})$"
-        let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
-        return emailTest.evaluate(with: email)
-    }
-    
 }
