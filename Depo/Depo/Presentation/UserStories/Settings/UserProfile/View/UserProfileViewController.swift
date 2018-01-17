@@ -8,9 +8,10 @@
 
 import UIKit
 
-class UserProfileViewController: BaseViewController, UserProfileViewInput, UITextFieldDelegate {
+class UserProfileViewController: UIViewController, UserProfileViewInput, UITextFieldDelegate {
     var output: UserProfileViewOutput!
     
+    @IBOutlet var keyboardHideManager: KeyboardHideManager! /// not weak
     @IBOutlet weak var scrollView : UIScrollView!
     @IBOutlet weak var viewForContent: UIView!
     
@@ -33,6 +34,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        automaticallyAdjustsScrollViewInsets = false
         
         nameSubTitle.text = TextConstants.userProfileNameAndSurNameSubTitle
         nameSubTitle.textColor = ColorConstants.textLightGrayColor
@@ -85,40 +88,6 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         
         output.viewIsReady()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self);
-    }
-    
-    override func showKeyBoard(notification: NSNotification){
-        super.showKeyBoard(notification: notification)
-        let spaceUnderContentView = view.frame.size.height - (viewForContent.frame.origin.y + viewForContent.frame.size.height)
-        if (spaceUnderContentView < keyboardHeight + 10){
-            let bottomInset = keyboardHeight + 10 - spaceUnderContentView
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset + keyboardHeight, right: 0)
-            
-            let textField = searchActiveTextField(view: self.view)
-            
-            let yTextField = textField!.frame.origin.y + textField!.frame.size.height + 10
-            if (view.frame.size.height - yTextField < keyboardHeight){
-                let y = yTextField - (view.frame.size.height - keyboardHeight - 64)
-                if (y > 0){
-                    let point = CGPoint(x: 0, y: y)
-                    scrollView.setContentOffset(point, animated: false)
-                }
-            }
-        }
-    }
-    
-    override func hideKeyboard() {
-        super.hideKeyboard()
-        view.endEditing(true)
-        let point = CGPoint(x: 0, y: 0)
-        scrollView.setContentOffset(point, animated: false)
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
-
 
     // MARK: ViewInput
     func setupInitialState() {
@@ -188,28 +157,40 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         }
         
         if email != emailTextField.text {
+            
+            if emailTextField.text?.isEmpty == true {
+                output.showError(error: TextConstants.emptyEmail)
+                return
+            }
+            
+            guard Validator.isValid(email: emailTextField.text) else {
+                output.showError(error: TextConstants.forgotPasswordErrorEmailFormatText)
+                return
+            }
+            
+            
             readyButton?.isEnabled = false
+            
             let message = String(format: TextConstants.registrationEmailPopupMessage, emailTextField.text ?? "")
-            let controller = PopUpController.with(title: TextConstants.registrationEmailPopupTitle,
-                                                  message: message,
-                                                  image: .error,
-                                                  buttonTitle: TextConstants.ok,
-                                                  action: { [weak self] vc in
-                                                    self?.output.tapReadyButton(name: self?.nameTextField.text ?? "", email: self?.emailTextField.text ?? "", number: self?.gsmNumberTextField.text ?? "")
-                                                    self?.readyButton?.isEnabled = true
-                                                    vc.dismiss(animated: true, completion: nil)
-            })
+            
+            let controller = PopUpController.with(
+                title: TextConstants.registrationEmailPopupTitle,
+                message: message,
+                image: .error,
+                buttonTitle: TextConstants.ok,
+                action: { [weak self] vc in
+                    vc.close { [weak self] in
+                        self?.output.tapReadyButton(name: self?.nameTextField.text ?? "", email: self?.emailTextField.text ?? "", number: self?.gsmNumberTextField.text ?? "")
+                        self?.readyButton?.isEnabled = true
+                    }
+                })
+            
             self.present(controller, animated: true, completion: nil)
+            
         } else {
             output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
         }
         
-    }
-    
-    @IBAction func onHideKeyboardButton(){
-        if let textField = searchActiveTextField(view: view){
-            textField.resignFirstResponder()
-        }
     }
     
     // MARK: UITextFieldDelegate

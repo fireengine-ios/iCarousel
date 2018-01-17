@@ -34,7 +34,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         }
     }
     
-    func showError(error: String){
+    func showError(error: String) {
         view.endSaving()
         UIApplication.showErrorAlert(message: error)
     }
