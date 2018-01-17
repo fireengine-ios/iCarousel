@@ -61,7 +61,7 @@ class GridListTopBar: UIViewController {
         setupGridListViewType(withDefault: config.defaultGridListViewtype)
         
         if config.availableFilter {
-            setupFilterSegmentView()
+            setupFilterSegmentView(defaultState: config.defaultFilterState)
         }
         
         gridListButton.isHidden = !config.showGridListButton
@@ -76,12 +76,21 @@ class GridListTopBar: UIViewController {
         sortByButton.isHidden = types.isEmpty
     }
     
-    private func setupFilterSegmentView() {
+    private func setupFilterSegmentView(defaultState: MoreActionsConfig.MoreActionsFileType) {
         segmentFilter.isHidden = false
         segmentFilter.isEnabled = true
         segmentFilter.setTitle(TextConstants.topBarVideosFilter, forSegmentAt: 1)
         segmentFilter.setTitle(TextConstants.topBarPhotosFilter, forSegmentAt: 0)
-
+        
+        switch defaultState {
+        case .Photo:
+            segmentFilter.selectedSegmentIndex = 0
+        case .Video:
+            segmentFilter.selectedSegmentIndex = 1
+        default:
+            segmentFilter.selectedSegmentIndex = 0
+        }
+        
         segmentFilter.addTarget(self, action: #selector(self.segmentControlValueChanged(sender:)),
                                 for: .valueChanged)
     }
@@ -99,9 +108,12 @@ class GridListTopBar: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             delegate?.filterChanged(filter: .Photo)
+            sender.selectedSegmentIndex = 1//
         default:
             delegate?.filterChanged(filter: .Video)
+            sender.selectedSegmentIndex = 0//
         }
+        
     }
     
     //MARK: - Actions

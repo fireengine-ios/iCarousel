@@ -39,7 +39,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                                   selectionModeTypes: [.createStory, .print, .deleteDeviceOriginal])
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
-                               fileFilters: [.fileType(.image)],
+                               fileFilters: [.fileType(screenFilterType.convertToFileType())],
                                bottomBarConfig: bottomBarConfig, visibleSlider: true,
                                topBarConfig: gridListTopBarConfig,
                                alertSheetConfig: alertSheetConfig)

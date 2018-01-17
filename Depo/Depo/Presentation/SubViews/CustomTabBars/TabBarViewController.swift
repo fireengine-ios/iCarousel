@@ -48,6 +48,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationMusicStartedPlaying = "MusicStartedPlaying"
     static let notificationMusicDrop = "MusicDrop"
     static let notificationMusicStop = "MusicStop"
+    static let notificationPhotosScreen = "PhotosScreenOn"
+    static let notificationVideoScreen = "VideoScreenOn"
     
     let originalPlusBotttomConstraint: CGFloat = 10
     
@@ -61,6 +63,20 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     let musicBar = MusicBar.initFromXib()
     let player: MediaPlayer = factory.resolve()
     let cameraService: CameraService = CameraService()
+    
+//    let list = [router.homePageScreen,
+//                router.photosScreen,
+//                router.videosScreen,
+//                router.musics,
+//                router.documents]
+    
+    enum TabScreenIndex: Int {
+        case homePageScreenIndex = 0
+        case photosScreenIndex = 1
+        case videosScreenIndex = 2
+        case musicScreenIndex = 3
+        case documentsScreenIndex = 4
+    }
     
     var customNavigationControllers: [UINavigationController] = []
     
@@ -189,6 +205,25 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                                                selector: #selector(hideMusicBar),
                                                name: dropNotificationName,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showPhotosScreen),
+                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showVideosScreen),
+                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationVideoScreen),
+                                               object: nil)
+        
+    }
+    
+    @objc func showPhotosScreen(_ sender: Any) {
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+        selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
+    }
+    
+    @objc func showVideosScreen(_ sender: Any) {
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
+        selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
     }
     
     @objc func showMusicBar(_ sender: Any) {
@@ -511,11 +546,23 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeViewState(state: false)
         
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
-            
-            tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
-            if tabbarSelectedIndex > 2 {
-                tabbarSelectedIndex -= 1
+          
+            if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
+                selectedIndex == TabScreenIndex.videosScreenIndex.rawValue {
+                tabbarSelectedIndex = TabScreenIndex.videosScreenIndex.rawValue
+                tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+            } else if tabbarSelectedIndex == TabScreenIndex.videosScreenIndex.rawValue,
+                selectedIndex == TabScreenIndex.photosScreenIndex.rawValue {
+                tabbarSelectedIndex = TabScreenIndex.photosScreenIndex.rawValue
+                tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+            } else {
+                tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
+            
+            
+//            if tabbarSelectedIndex > 2 {
+//                tabbarSelectedIndex -= 1
+//            }
             selectedIndex = tabbarSelectedIndex
         }
     }
