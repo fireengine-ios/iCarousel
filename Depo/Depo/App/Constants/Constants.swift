@@ -336,7 +336,7 @@ struct TextConstants {
     static let userProfileDoneButton = NSLocalizedString("Done", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileDataNotСhanged = NSLocalizedString("Data did not changed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileDataNotCorrect = NSLocalizedString("Data is not correct", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let emptyEmail = NSLocalizedString("E-mail is empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     //MARK: fileInfo
     static let fileInfoFileNameTitle = NSLocalizedString("File Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoInfoTitle = NSLocalizedString("File Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
