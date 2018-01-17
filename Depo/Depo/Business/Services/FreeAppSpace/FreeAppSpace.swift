@@ -283,7 +283,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
         
         sortDuplicatesArray()
-        showFreeAppSpaceCard()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.showFreeAppSpaceCard()
+        }
     }
     
     func addedLocalFiles(items: [Item]){
