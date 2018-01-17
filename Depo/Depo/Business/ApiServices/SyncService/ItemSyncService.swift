@@ -13,7 +13,7 @@ enum AutoSyncStatus {
     case waitingForWifi
     case prepairing
     case executing
-    case canceled
+    case stoped
     case synced
     case failed
 }
@@ -28,6 +28,7 @@ protocol ItemSyncService: class {
     func start()
     func stop()
     func interrupt()
+    func fail()
     func waitForWiFi()
 }
 
@@ -44,6 +45,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
         didSet {
+            debugPrint("AUTOSYNC: \(fileType) status = \(status)")
             postNotification()
         }
     }
@@ -87,7 +89,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func stop() {
         log.debug("ItemSyncServiceImpl stop")
-        status = .canceled
+        status = .stoped
     }
     
     func waitForWiFi() {
@@ -95,6 +97,10 @@ class ItemSyncServiceImpl: ItemSyncService {
         status = .waitingForWifi
     }
     
+    func fail() {
+        log.debug("ItemSyncServiceImpl fail")
+        status = .failed
+    }
     
     //MARK: - Private
     
@@ -130,6 +136,9 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
+        if let service = photoVideoService {
+            service.currentPage = 0
+        }
         getUnsyncedObjects(oldestItemDate: oldestItemDate, success: { [weak self] in
             log.debug("ItemSyncServiceImpl sync getUnsyncedObjects success")
 
@@ -145,7 +154,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             log.debug("ItemSyncServiceImpl sync getUnsyncedObjects fail")
 
             if let `self` = self {
-                self.status = .failed
+                self.fail()
             }
         }
     }
@@ -175,8 +184,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             
             log.debug("ItemSyncServiceImpl upload UploadService uploadFileList fail")
             
-            self.stop()
-            self.status = .failed
+            self.fail()
             
             if case ErrorResponse.httpCode(413) = error {
                 self.delegate?.didReceiveOutOfSpaceError()
