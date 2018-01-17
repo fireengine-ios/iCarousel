@@ -482,13 +482,19 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             }
             
             if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
-                if localDuplicates.count == 0 {
-                    //selectedItems = localDuplicates
+                let serverObjects = selectedItems.filter({ return !$0.isLocalItem })
+                if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
-                } else {
-                    
+                }else{
+                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
+                    if localDuplicates.count == 0 {
+                        //selectedItems = localDuplicates
+                        actionTypes.remove(at: deleteOriginalIndex)
+                    } else {
+                        
+                    }
                 }
+                
             }
             
             alertSheetModule?.showAlertSheet(with: actionTypes,

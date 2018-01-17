@@ -78,10 +78,14 @@ class CardsManager: NSObject {
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
-        
-        hidePopUpsByDepends(type: type)
-        
         DispatchQueue.main.async {
+            if (!self.canShowPopUpByDepends(type: type)){
+                return
+            }
+            self.hidePopUpsByDepends(type: type)
+            
+            self.setProgressForOperationWith(type: type, allOperations: 0, completedOperations: 0)
+            
             for notificationView in self.foloversArray{
                 notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
             }

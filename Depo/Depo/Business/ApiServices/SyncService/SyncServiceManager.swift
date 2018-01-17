@@ -252,6 +252,7 @@ extension SyncServiceManager {
         }
         
         CardsManager.default.stopOperationWithType(type: .sync)
+        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
         
         if hasPrepairingSync {
             CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)

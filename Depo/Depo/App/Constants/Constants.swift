@@ -91,6 +91,7 @@ struct TextConstants {
     static let forgotPasswordSpecialSubTitle = NSLocalizedString("If you registered with your Turkcell Number you can just send SIFRE LIFEBOX to 2222 to recieve a new password or enter your mail below", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordSendPassword = NSLocalizedString("Send password reset link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordCellTitle = NSLocalizedString("E-MAIL", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let forgotPasswordSentEmailAddres = NSLocalizedString("Your password is sent to your e-mail address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let captchaPlaceholder = NSLocalizedString("Type the text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -336,7 +337,7 @@ struct TextConstants {
     static let userProfileDoneButton = NSLocalizedString("Done", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileDataNotСhanged = NSLocalizedString("Data did not changed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileDataNotCorrect = NSLocalizedString("Data is not correct", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let emptyEmail = NSLocalizedString("E-mail is empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     //MARK: fileInfo
     static let fileInfoFileNameTitle = NSLocalizedString("File Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoInfoTitle = NSLocalizedString("File Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
