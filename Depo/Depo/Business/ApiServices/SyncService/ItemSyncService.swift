@@ -29,7 +29,6 @@ protocol ItemSyncService: class {
     func stop()
     func interrupt()
     func waitForWiFi()
-    func startManually()
 }
 
 
@@ -40,7 +39,8 @@ protocol ItemSyncServiceDelegate: class {
 
 
 class ItemSyncServiceImpl: ItemSyncService {
-
+    private var dispatchQueue = DispatchQueue(label: "com.lifebox.autosync")
+    
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
         didSet {
@@ -67,32 +67,32 @@ class ItemSyncServiceImpl: ItemSyncService {
     //MARK: - Public ItemSyncService functions
     
     func start() {
-        guard !status.isContained(in: [.executing, .prepairing]) else {
-            appendNewUnsyncedItems()
-            return
+        log.debug("ItemSyncServiceImpl start")
+        dispatchQueue.async {
+            guard !self.status.isContained(in: [.executing, .prepairing]) else {
+                self.appendNewUnsyncedItems()
+                return
+            }
+            
+            self.sync()
         }
-        
-        sync()
     }
     
     func interrupt() {
-//        if status == .executing {
+        log.debug("ItemSyncServiceImpl interrupt")
+//        if status.isContained(in: [.prepairing, .executing]) {
             status = .waitingForWifi
 //        }
     }
     
     func stop() {
+        log.debug("ItemSyncServiceImpl stop")
         status = .canceled
     }
     
     func waitForWiFi() {
+        log.debug("ItemSyncServiceImpl waitForWiFi")
         status = .waitingForWifi
-    }
-    
-    func startManually() {
-        DispatchQueue.main.async {
-            self.sync()
-        }
     }
     
     
@@ -110,7 +110,12 @@ class ItemSyncServiceImpl: ItemSyncService {
         localItems.removeAll()
         localItemsMD5s.removeAll()
         
-        localItems = localUnsyncedItems()
+        let semaphore = DispatchSemaphore(value: 0)
+        DispatchQueue.main.async {
+            self.localItems = self.localUnsyncedItems()
+            semaphore.signal()
+        }
+        semaphore.wait()
 
         guard !localItems.isEmpty else {
             status = .synced
@@ -169,7 +174,8 @@ class ItemSyncServiceImpl: ItemSyncService {
             }
             
             log.debug("ItemSyncServiceImpl upload UploadService uploadFileList fail")
-
+            
+            self.stop()
             self.status = .failed
             
             if case ErrorResponse.httpCode(413) = error {
@@ -183,6 +189,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func getUnsyncedObjects(oldestItemDate: Date, success: @escaping () -> Void, fail: @escaping () -> Void) {
+        
         log.debug("ItemSyncServiceImpl getUnsyncedObjects")
 
         guard let service = self.photoVideoService else {
@@ -237,14 +244,20 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
+        var localUnsynced = [WrapData]()
+        let semaphore = DispatchSemaphore(value: 0)
         DispatchQueue.main.async {
-            let newUnsyncedLocalItems = self.localUnsyncedItems().filter({ !self.lastSyncedMD5s.contains($0.md5) })
-            guard !newUnsyncedLocalItems.isEmpty else {
-                return
-            }
-            
-            self.upload(items: newUnsyncedLocalItems)
+            localUnsynced = self.localUnsyncedItems()
+            semaphore.signal()
         }
+        semaphore.wait()
+        
+        let newUnsyncedLocalItems = localUnsynced.filter({ !self.lastSyncedMD5s.contains($0.md5) })
+        guard !newUnsyncedLocalItems.isEmpty else {
+            return
+        }
+        
+        self.upload(items: newUnsyncedLocalItems)
     }
     
     private func postNotification() {

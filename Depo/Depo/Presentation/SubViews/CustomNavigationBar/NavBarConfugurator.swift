@@ -26,19 +26,26 @@ class NavigationBarList {
                              style: .plain,
                              target: nil,
                              action: nil )
+        
+        settings.accessibilityLabel = TextConstants.accessibilitySettings
+        
         search = UIBarButtonItem(image: UIImage(named: TextConstants.searchBtnImgName),
                         style: .plain,
                         target: nil,
                         action: nil )
+        search.accessibilityLabel = TextConstants.accessibilitySearch
+
         more = UIBarButtonItem(image: UIImage(named: TextConstants.moreBtnImgName),
                         style: .plain,
                         target: nil,
                         action: nil)
+        more.accessibilityLabel = TextConstants.accessibilityMore
         
         delete = UIBarButtonItem(image: UIImage(named: TextConstants.deleteBtnImgName),
                                  style: .plain,
                                  target: nil,
                                  action: nil)
+        delete.accessibilityLabel = TextConstants.accessibilityDelete
         
         // upload 
         // create

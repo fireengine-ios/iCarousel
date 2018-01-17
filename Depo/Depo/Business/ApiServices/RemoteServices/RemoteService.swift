@@ -48,6 +48,7 @@ class RemoteItemsService {
         self.requestSize = requestSize
         currentPage = 0
         queueOperations = OperationQueue()
+        queueOperations.maxConcurrentOperationCount = 1
     }
     
     func reloadItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
@@ -140,9 +141,9 @@ class RemoteItemsService {
     }
     
     func stopAllOperations() {
-        DispatchQueue.main.async { [weak self] in
-            self?.queueOperations.cancelAllOperations()
-        }
+//        DispatchQueue.main.async { [weak self] in
+           queueOperations.cancelAllOperations()
+//        }
     }
 }
 
@@ -175,7 +176,11 @@ class NextPageOperation: Operation {
             return
         }
         let semaphore = DispatchSemaphore(value: 0)
-        searchService.searchByField(param: requestParam, success: { (response)  in
+        searchService.searchByField(param: requestParam, success: { [weak self] (response)  in
+            
+            guard let `self` = self else {
+                return
+            }
             
             if self.isRealCancel {
                 self.fail?()
@@ -193,8 +198,8 @@ class NextPageOperation: Operation {
             self.success?(list)
             semaphore.signal()
             
-        }, fail: { _ in
-            self.fail?()
+        }, fail: { [weak self]_ in
+            self?.fail?()
             semaphore.signal()
         })
         semaphore.wait()

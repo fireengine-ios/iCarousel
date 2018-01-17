@@ -118,6 +118,10 @@ class Upload: UploadRequestParametrs {
             .appending("/")
             .appending(tmpUUId))!
     }
+    
+    var timeout: TimeInterval{
+        return 2000.0
+    }
 }
 
 final class UploadDataParametrs: UploadDataRequestParametrs {
@@ -158,6 +162,10 @@ final class UploadDataParametrs: UploadDataRequestParametrs {
         return URL(string: url.absoluteString
             .appending("/")
             .appending(tmpUUId))!
+    }
+    
+    var timeout: TimeInterval{
+        return 2000.0
     }
 }
 

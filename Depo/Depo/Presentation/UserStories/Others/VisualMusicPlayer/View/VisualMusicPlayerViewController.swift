@@ -86,7 +86,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         }
     }
     @IBAction func actionPrevButton(_ sender: UIButton) {
-        if player.currentTime < 5 {
+        if player.currentTime > 5 {
             player.resetTime()
         } else if player.playPrevious() {
             carouselView.scrollToItem(at: player.currentIndex, animated: true)

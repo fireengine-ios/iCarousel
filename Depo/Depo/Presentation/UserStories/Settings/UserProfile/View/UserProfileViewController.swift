@@ -187,8 +187,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
             return
         }
         
-        readyButton?.isEnabled = false
         if email != emailTextField.text {
+            readyButton?.isEnabled = false
             let message = String(format: TextConstants.registrationEmailPopupMessage, emailTextField.text ?? "")
             let controller = PopUpController.with(title: TextConstants.registrationEmailPopupTitle,
                                                   message: message,
@@ -200,6 +200,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
                                                     vc.dismiss(animated: true, completion: nil)
             })
             self.present(controller, animated: true, completion: nil)
+        } else {
+            output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
         }
         
     }

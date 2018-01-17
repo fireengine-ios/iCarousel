@@ -28,26 +28,18 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             }
             
             log.debug("UploadFilesSelectionInteractor getAllItems LocalMediaStorage askPermissionForPhotoFramework")
-
             
             let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [uuid], options: nil)
+            
             if let album = collectionFetchResult.firstObject {
                 let assetsFetchResult = PHAsset.fetchAssets(in: album, options: nil)
                 var assets = [PHAsset]()
                 assetsFetchResult.enumerateObjects({ (asset, index, stop) in
                     assets.append(asset)
                 })
-                var items = [WrapData]()
-                for asset in assets {
-                    if let info = self?.localMediaStorage.fullInfoAboutAsset(asset: asset) {
-                        let baseMediaContent = BaseMediaContent(curentAsset: asset,
-                                                                urlToFile: info.url,
-                                                                size: info.size,
-                                                                md5: info.md5)
-                        items.append(WrapData(baseModel: baseMediaContent))
-                    }
-                }
                 
+                var items  = CoreDataStack.default.allLocalItems(with: assets.map({ $0.localIdentifier }))
+
                 items.sort {
                     guard let firstDate = $0.creationDate else {
                         return false

@@ -8,19 +8,46 @@
 
 import UIKit
 import SDWebImage
+import Alamofire
 
 class AppConfigurator {
     
     static let dropboxManager: DropboxManager = factory.resolve()
     
-    class func applicationStarted(){
-        ApplicationSessionManager.start()
+    class func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         dropboxManager.start()
         
-        CoreDataStack.default.appendLocalMediaItems(nil)
+        let urls: AuthorizationURLs = AuthorizationURLsImp()
+        let tokenStorage: TokenStorage = TokenStorageUserDefaults()
+        if tokenStorage.isClearTokens {
+            tokenStorage.isClearTokens = false
+            tokenStorage.clearTokens()
+        }
+        
+        var auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
+        auth.refreshFailedHandler = logout
+        
+        let sessionManager = SessionManager.default
+        sessionManager.retrier = auth
+        sessionManager.adapter = auth
+        
         setVersionAndBuildNumber()
         configureSDWebImage()
         setupCropy()
+        
+        CoreDataStack.default.appendLocalMediaItems {
+            startMenloworks(with: launchOptions)
+        }
+    }
+    
+    class func logout() {
+        /// there is no retain circle bcz of singleton
+        AuthenticationService().logout {
+            DispatchQueue.main.async {
+                let router = RouterVC()
+                router.setNavigationController(controller: router.onboardingScreen)
+            }
+        }
     }
     
     class private func configureSDWebImage() {
@@ -56,5 +83,32 @@ class AppConfigurator {
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
         UserDefaults.standard.set(build, forKey: "build_preference")
     }
-    //MARK:-------
+    
+    class private func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        log.debug("AppConfigurator startMenloworks")
+        
+        let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.sound, UIUserNotificationType.badge]
+        let notificationTypes = NSInteger(types.rawValue)
+        
+        DispatchQueue.main.async {
+            MPush.register(forRemoteNotificationTypes: notificationTypes)
+            MPush.applicationDidFinishLaunching(options: launchOptions)
+        }
+    }
+    
+}
+
+/// here we can change global requests validation
+extension DataRequest {
+    @discardableResult
+    public func customValidate() -> Self {
+        return validate(statusCode: 200..<300)
+    }
+}
+
+extension DownloadRequest {
+    @discardableResult
+    public func customValidate() -> Self {
+        return validate(statusCode: 200..<300)
+    }
 }

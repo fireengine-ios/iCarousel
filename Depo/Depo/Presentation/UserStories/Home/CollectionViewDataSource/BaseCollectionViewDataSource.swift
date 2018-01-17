@@ -106,6 +106,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         guard let baseCel = cell as? CollectionViewCellForController else {
             return cell
         }
+        
         baseCel.setStateToDefault()
         baseCel.cellDelegate = self
         if (isPopUpCell(path: indexPath)){
@@ -140,12 +141,17 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     //MARK: animation of collectionView
     
     func addCellAtIndex(index: Int){
+        //collectionView.reloadData()
+        //return
+        
         if (isActive){
+            print(Date().timeIntervalSince1970)
             self.collectionView.performBatchUpdates({
+                print(Date().timeIntervalSince1970)
                 let indexPath = IndexPath(row: index, section: 0)
                 self.collectionView.insertItems(at: [indexPath])
             }, completion: { (succes) in
-                
+                print("finished competition")
             })
         }else{
             collectionView.reloadData()
@@ -153,14 +159,23 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func deleteCellAtIndex(index: Int){
+        var needReload = true
         if (isActive){
-            self.collectionView.performBatchUpdates({
-                let indexPath = IndexPath(row: index, section: 0)
-                self.collectionView.deleteItems(at: [indexPath])
-            }, completion: { (succes) in
-                
-            })
-        }else{
+            let rowIndexes = collectionView.indexPathsForVisibleItems.map({ $0.row })
+            if rowIndexes.contains(index){
+                needReload = false
+                popUps.remove(at: index)
+                collectionView.performBatchUpdates({
+                    let indexPath = IndexPath(row: index, section: 0)
+                    self.collectionView.deleteItems(at: [indexPath])
+                }, completion: { (succes) in
+                    print("finished competition")
+                })
+            }
+        }
+        
+        if needReload {
+            popUps.remove(at: index)
             collectionView.reloadData()
         }
     }
@@ -230,7 +245,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             let index = 0
             print("insert at index ", index, type.rawValue)
             self.popUps.insert(view, at: index)
-            self.addCellAtIndex(index: index)
+            collectionView.reloadData()
         }
     }
     
@@ -257,7 +272,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
         
         popUp.setProgressBar(ratio: ratio)
-        if let`object` = object{
+        if let object = object{
             popUp.setImageForUploadingItem(item: object)
         }
     }
@@ -267,9 +282,11 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         if let view = self.viewsByType[type] {
             self.viewsByType[type] = nil
             if let index = self.popUps.index(of: view){
-                self.popUps.remove(at: index)
+                
                 print("delete at index ", index, type.rawValue)
-                self.deleteCellAtIndex(index: index)
+                
+                popUps.remove(at: index)
+                collectionView.reloadData()
             }else{
                 
             }

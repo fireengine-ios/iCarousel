@@ -8,7 +8,7 @@
 
 class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelectionTabBarModuleInput, BottomSelectionTabBarViewOutput, BottomSelectionTabBarInteractorOutput {
     
-    var view: BottomSelectionTabBarViewInput!
+    weak var view: BottomSelectionTabBarViewInput!
 //    var interactor: BottomSelectionTabBarInteractorInput!
     var router: BottomSelectionTabBarRouterInput!
     

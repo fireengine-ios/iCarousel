@@ -45,7 +45,14 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
         if interactor.inNeedOfMailVerefication {
             view?.presentMailVerefication()
         } else {
-            router.setPasscode(isTurkCellUser: interactor.isTurkcellUserFlag)
+            let isTurkcell = interactor.isTurkcellUserFlag
+            router.setPasscode(isTurkCellUser: isTurkcell, finishCallBack: {
+                if isTurkcell {//end enebled???
+                    let routerVC = RouterVC()
+                    let popUP = PopUpController.with(title: TextConstants.warning, message: TextConstants.passcodeEneblingwWithActivatedTurkcellSecurity, image: .error, buttonTitle: TextConstants.ok)
+                    routerVC.rootViewController?.present(popUP, animated: true, completion: nil)
+                }
+            })
         }
     }
     

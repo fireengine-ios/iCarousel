@@ -63,12 +63,13 @@ class APIReachabilityService {
     enum Connection {
         case unreachable
         case reachable
+        case undefined
     }
     
     static let shared = APIReachabilityService()
     
     private var timer: Timer?
-    private (set) var connection: Connection = .unreachable {
+    private (set) var connection: Connection = .undefined {
         didSet {
             if oldValue != connection {
                 notify()

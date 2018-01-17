@@ -40,12 +40,13 @@ extension CoreDataStack {
             let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
             
             debugPrint("number of not saved  ", notSaved.count)
-            
+            let start = Date().timeIntervalSince1970
             var i = 0
+            var addedObjects = [WrapData]()
             notSaved.forEach {
                 i += 1
                 debugPrint("local ", i)
-                let info = localMediaStorage.fullInfoAboutAsset(asset: $0)
+                let info = localMediaStorage.shortInfoAboutAsset(asset: $0)
                 
                 let baseMediaContent = BaseMediaContent(curentAsset: $0,
                                                         urlToFile: info.url,
@@ -59,9 +60,15 @@ extension CoreDataStack {
                 if i % 10 == 0 {
                     self.saveDataForContext(context: newBgcontext, saveAndWait: true)
                 }
+                
+                addedObjects.append(wrapData)
             }
             
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+            let finish = Date().timeIntervalSince1970
+            debugPrint("All images and videos have been saved in \(finish - start) seconds")
+            
+            ItemOperationManager.default.addedLocalFiles(items: addedObjects)
         }
         
     }
@@ -102,9 +109,16 @@ extension CoreDataStack {
         
     }
     
-    func  allLocalItem() -> [WrapData] {
+    func  allLocalItems() -> [WrapData] {
         let context = mainContext
         let predicate = NSPredicate(format: "localFileID != nil")
+        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
+        return items.flatMap{ $0.wrapedObject }
+    }
+    
+    func  allLocalItems(with localIds: [String]) -> [WrapData] {
+        let context = mainContext
+        let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
         let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
         return items.flatMap{ $0.wrapedObject }
     }
@@ -160,6 +174,7 @@ extension CoreDataStack {
         allNonAccurateSavedLocalFiles.forEach {
             context.delete($0)
         }
-        
+        let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
+        ItemOperationManager.default.deleteItems(items: items)
     }
 }

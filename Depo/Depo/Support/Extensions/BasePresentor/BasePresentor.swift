@@ -44,20 +44,20 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
     }
     
     func startAsyncOperation() {
-        outputView()!.showSpiner()
+        outputView()?.showSpiner()
     }
     
     func startAsyncOperationDisableScreen() {
-        outputView()!.showSpinerIncludeNavigatinBar()
+        outputView()?.showSpinerIncludeNavigatinBar()
     }
     
     func compliteAsyncOperationEnableScreen(errorMessage: String?) {
-        outputView()!.hideSpinerIncludeNavigatinBar()
+        outputView()?.hideSpinerIncludeNavigatinBar()
         showMessage(errorMessage: errorMessage)
     }
     
     func compliteAsyncOperationEnableScreen() {
-        outputView()!.hideSpinerIncludeNavigatinBar()
+        outputView()?.hideSpinerIncludeNavigatinBar()
     }
     
     func asyncOperationSucces() {

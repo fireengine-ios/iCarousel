@@ -75,12 +75,12 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         
     }
     
-    func setSelection(isSelectionActive: Bool, isSelected: Bool){
-        
+    func setPlaceholderImage(fileType: FileType) {
+
     }
     
-    func placeholderImage() -> UIImage? {
-        return nil
+    func setSelection(isSelectionActive: Bool, isSelected: Bool){
+        
     }
     
     func updating(){

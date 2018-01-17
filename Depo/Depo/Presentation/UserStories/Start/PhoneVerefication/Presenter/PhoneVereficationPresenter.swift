@@ -77,7 +77,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     func succesLogin() {
         compliteAsyncOperationEnableScreen()
         view.dropTimer()
-        router.goAutoSync()//
+        router.goAutoSync()
     }
     
     func failLogin(message: String) {

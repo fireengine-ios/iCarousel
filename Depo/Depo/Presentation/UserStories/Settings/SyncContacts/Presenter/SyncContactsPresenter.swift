@@ -28,9 +28,10 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
                                                   firstButtonTitle: TextConstants.errorAlertNopeBtnBackupAlreadyExist,
                                                   secondButtonTitle: TextConstants.errorAlertYesBtnBackupAlreadyExist,
                                                   secondAction: { [weak self] vc in
-                                                    self?.interactor.startOperation(operationType: .backup)
-                                                    self?.view.setOperationState(operationType: operationType)
-                                                    vc.close()
+                                                    vc.close { [weak self] in
+                                                        self?.interactor.startOperation(operationType: .backup)
+                                                        self?.view.setOperationState(operationType: operationType)
+                                                    }
             })
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
             

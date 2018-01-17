@@ -147,6 +147,10 @@ func ==(lhs: SearchByFieldParameters, rhs: SearchByFieldParameters) -> Bool {
 }
 
 struct AdvancedSearchParameters: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+    
     let sortBy: SortType
     let sortOrder: SortOrder
     let from: Int

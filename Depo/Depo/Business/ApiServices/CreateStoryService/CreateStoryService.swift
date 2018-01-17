@@ -67,11 +67,16 @@ class CreateStory: BaseRequestParametrs {
 }
 
 class CreateStoryPreview: CreateStory {
+    override var timeout: TimeInterval {
+        return 300.0
+    }
     
     override var patch: URL {
         return URL(string: CreateStoryPath.preview, relativeTo:super.patch)!
     }
+    
 }
+
 
 class CreateStoryMusicList: BaseRequestParametrs {
     

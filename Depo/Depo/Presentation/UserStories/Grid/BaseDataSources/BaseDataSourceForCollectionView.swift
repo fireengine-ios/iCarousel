@@ -43,7 +43,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var isPaginationDidEnd = false
     
-    internal weak var collectionView: UICollectionView!
+    internal weak var collectionView: UICollectionView?
     
     var displayingType: BaseDataSourceDisplayingType = .greed
     
@@ -75,6 +75,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var uploadedObjectID = [String]()
     
     var needShowProgressInCell: Bool = false
+    var needShowCloudIcon: Bool = true
     
     private func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
@@ -283,7 +284,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     allLocalItems.remove(at: unwrpedIndex)
                 }
             }
-//            allLocalItems.removeAll()
+            //            allLocalItems.removeAll()
         }
         
         switch currentSortType {
@@ -311,25 +312,25 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
         let lastItemCreatedDate =  isMetaDate ? lastItem.metaDate : lastItem.creationDate!
         let newItemCreationDate = isMetaDate ? newItem.metaDate : newItem.creationDate!
-//        if var lastItemCreatedDate = lastItem.creationDate,
-//            var newItemCreationDate = newItem.creationDate {
-//            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
-//                let newItemMetaDate = newItem.metaData?.takenDate {
+        //        if var lastItemCreatedDate = lastItem.creationDate,
+        //            var newItemCreationDate = newItem.creationDate {
+        //            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
+        //                let newItemMetaDate = newItem.metaData?.takenDate {
+        
+        //            }
+        if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
+            lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
             
-//            }
-            if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
-                lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
-                
-                allItems[allItems.count - 1].append(newItem)
-                
-            } else {
-                allItems.append([newItem])
-            }
-//        }
-//    else {
-//            allItems.append([newItem])
-//        }
-    
+            allItems[allItems.count - 1].append(newItem)
+            
+        } else {
+            allItems.append([newItem])
+        }
+        //        }
+        //    else {
+        //            allItems.append([newItem])
+        //        }
+        
     }
     
     private func addByName(lastItem: WrapData, newItem: WrapData) {
@@ -392,15 +393,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func appendCollectionView(items: [WrapData]) {
         compoundItems(pageItems: items)
         
-//        reloadData()
+        //        reloadData()
     }
     
     func dropData() {
-        allLocalItems.removeAll()
+        
         allItems.removeAll()
         allMediaItems.removeAll()
+        self.allLocalItems.removeAll()
+        self.allLocalItems.append(contentsOf: self.getAllLocalItems())
         DispatchQueue.main.async {
-            self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+            
             if self.isLocalOnly() {
                 self.allItems = [self.allLocalItems]
             }
@@ -426,9 +429,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         registerHeaders()
         registerCells()
         
+        self.allLocalItems.removeAll()
+        self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+        
         DispatchQueue.main.async {
-            self.allLocalItems.append(contentsOf: self.getAllLocalItems())
-
+            
+            
             if self.isLocalOnly() {
                 self.allItems = [self.allLocalItems]
                 self.reloadData()
@@ -450,18 +456,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         registreList.forEach {
             let listNib = UINib(nibName: $0, bundle: nil)
-            collectionView.register(listNib, forCellWithReuseIdentifier: $0)
+            collectionView?.register(listNib, forCellWithReuseIdentifier: $0)
         }
-
+        
     }
     
     private func registerHeaders() {
         let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID,
                               bundle: nil)
-        collectionView.register(headerNib,
+        collectionView?.register(headerNib,
                                 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
-
+        
     }
     
     func setPreferedCellReUseID(reUseID: String?){
@@ -477,13 +483,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         isSelectionStateActive = selectionState
-        let array = collectionView.visibleCells
+        let array = collectionView?.visibleCells ?? [UICollectionViewCell]()
         for cell in array {
             guard let cell_ = cell as? CollectionViewCellDataProtocol else{
                 continue
             }
             
-            let indexPath = collectionView.indexPath(for: cell)
+            let indexPath = collectionView?.indexPath(for: cell)
             guard let indexPath_ = indexPath else {
                 continue
             }
@@ -506,19 +512,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func selectAll(isTrue: Bool){
         if (isTrue) {
-//            let sections = fetchService.controller.sections
-//            let sectionsCount = sections?.count ?? 0
-//            for section in 0...sectionsCount - 1 {
-//                let rowCount = sections?[section].numberOfObjects ?? 0
-//                for row in 0...rowCount - 1 {
-//                    let indexPath = IndexPath(row: row, section: section)
-//                    if let obj = itemForIndexPath(indexPath: indexPath) {
-//                        selectedItemsArray.insert(obj.uuid)
-//                    }
-//                }
-//            }
+            for array in allItems{
+                for object in array{
+                    onSelectObject(object: object)
+                }
+            }
+            updateVisibleCells()
+            
         }else{
             selectedItemsArray.removeAll()
+            updateVisibleCells()
         }
     }
     
@@ -528,13 +531,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){
         displayingType = type
-        collectionView.reloadData()
+        collectionView?.reloadData()
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
         let selectedItemsTempo = allMediaItems.filter{ selectedItemsArray.contains($0.uuid) }
-//        let array = CoreDataStack.default.mediaItemByUUIDs(uuidList: Array(selectedItemsArray))
-//        return Array(selectedItemsArray)
+        //        let array = CoreDataStack.default.mediaItemByUUIDs(uuidList: Array(selectedItemsArray))
+        //        return Array(selectedItemsArray)
         return selectedItemsTempo
     }
     
@@ -543,7 +546,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func onLongPress(cell: UICollectionViewCell){
         if  let forwardDelegate = self.delegate,
-            let path = collectionView.indexPath(for: cell),
+            let path = collectionView?.indexPath(for: cell),
             let object = itemForIndexPath(indexPath: path) {
             
             if !isObjctSelected(object: object){
@@ -596,20 +599,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func isHeaderSelected(section: Int) -> Bool {
         guard section < allItems.count else {
-                return false
+            return false
         }
         let array = allItems[section]
         let result: [String] = array.map { $0.uuid }
         let subSet = Set<String>(result)
-
+        
         return subSet.isSubset(of: selectedItemsArray)
-
+        
     }
     
     func selectSectionAt(section: Int){
         
         let objectsArray: [BaseDataSourceItem] = allItems[section]
-
+        
         if (isHeaderSelected(section: section)){
             for obj in objectsArray {
                 selectedItemsArray.remove(obj.uuid)
@@ -619,21 +622,21 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 selectedItemsArray.insert(obj.uuid)
             }
         }
-
-        let visibleCells = collectionView.visibleCells
+        
+        let visibleCells = collectionView?.visibleCells ?? [UICollectionViewCell]()
         for cell in visibleCells {
             guard let cell_ = cell as? CollectionViewCellDataProtocol,
-                let indexPath = collectionView.indexPath(for: cell),
+                let indexPath = collectionView?.indexPath(for: cell),
                 (indexPath.section == section),
                 let object = itemForIndexPath(indexPath: indexPath)
                 else{
                     continue
             }
-
+            
             cell_.setSelection(isSelectionActive: isSelectionStateActive,
                                isSelected: isObjctSelected(object: object))
             cell_.confireWithWrapperd(wrappedObj: object)
-
+            
         }
         if isSelectionStateActive {
             delegate?.onChangeSelectedItemsCount(selectedItemsCount: self.selectedItemsArray.count)
@@ -641,13 +644,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func updateVisibleCells(){
-        let array = collectionView.visibleCells
+        let array = collectionView?.visibleCells ?? [UICollectionViewCell]()
         for cell in array {
             guard let cell_ = cell as? CollectionViewCellDataProtocol else{
                 continue
             }
             
-            let indexPath = collectionView.indexPath(for: cell)
+            let indexPath = collectionView?.indexPath(for: cell)
             guard let indexPath_ = indexPath else {
                 continue
             }
@@ -717,17 +720,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if (cellReUseID == nil), let unwrapedFile = file {
             cellReUseID = unwrapedFile.getCellReUseID()
         }
-        
+
         if ((displayingType == .list) &&
             (file is Item)) {
             cellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         }
         
-        
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReUseID!,
                                                       for: indexPath)
         
+        if !needShowCloudIcon {
+            if let cell = cell as? CollectionViewCellForPhoto{
+                cell.cloudStatusImage.isHidden = true
+            }
+        }
         
         return  cell
     }
@@ -752,9 +758,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
-                if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol {
-                    DispatchQueue.main.async {
-                        cellToChange.setImage(image: image)
+                DispatchQueue.main.async {
+                    if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol {
+                        if let image = image {
+                            cellToChange.setImage(image: image)
+                        } else {
+                            cellToChange.setPlaceholderImage(fileType: wraped.fileType)
+                        }
                     }
                 }
             })
@@ -763,9 +773,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if let url = url {
                 cell_.setImage(with: url)
             } else {
-                cell_.setImage(image: nil)
+                cell_.setPlaceholderImage(fileType: wraped.fileType)
             }
-
         }
         
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
@@ -793,12 +802,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-//        fileDataSource.cancelImgeRequest(path: unwrapedObject.patchToPreview)
+        //        fileDataSource.cancelImgeRequest(path: unwrapedObject.patchToPreview)
         
         guard let cell_ = cell as? CollectionViewCellDataProtocol else {
             return
         }
-//        cell_.setImage(image: nil)
+        //        cell_.setImage(image: nil)
         cell_.setSelection(isSelectionActive: isSelectionStateActive,
                            isSelected: isObjctSelected(object: unwrapedObject))
     }
@@ -876,9 +885,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
             
             let textHeader = headerView as! CollectionViewSimpleHeaderWithText
-
+            
             let title = getHeaderText(indexPath: indexPath)//fetchService.headerText(indexPath: indexPath)
-
+            
             textHeader.setText(text: title)
             
             textHeader.setSelectedState(selected: isHeaderSelected(section: indexPath.section), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
@@ -919,7 +928,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func getCellForFile(objectUUID: String) -> CollectionViewCellForPhoto?{
         if let path = getIndexPathForObject(objectUUID: objectUUID){
-            let cell = collectionView.cellForItem(at: path)
+            let cell = collectionView?.cellForItem(at: path)
             if let cell = cell as? CollectionViewCellForPhoto {
                 return cell
             }
@@ -962,6 +971,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             uploadedObjectID.append(uuid)
         }
         
+        finished: for (section, array) in allItems.enumerated() {
+            for (row, object) in array.enumerated() {
+                if object.uuid == uuid{
+                    allItems[section][row] = file
+                    break finished
+                }
+            }
+        }
+        
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
             if let `self` = self{
                 let cell = self.getCellForFile(objectUUID: uuid)
@@ -995,9 +1014,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             }
             
-            collectionView.performBatchUpdates({ [weak self] in
+            collectionView?.performBatchUpdates({ [weak self] in
                 if let `self` = self{
-                    self.collectionView.reloadItems(at: arrayOfPath)
+                    self.collectionView?.reloadItems(at: arrayOfPath)
                 }
                 }, completion: nil)
         }
@@ -1021,6 +1040,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func deleteItems(items: [Item]){
+        if (items.count == 0){
+            return
+        }
         var objectsForRemoving = [Item]()
         var localObjectsForReplace = [Item]()
         
@@ -1036,6 +1058,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     serverObjects.append(object)
                 }
             }
+            
+            var serversUUIDs = [String]()
+            for array in allItems{
+                for arraysObject in array{
+                    if !arraysObject.isLocalItem {
+                        serversUUIDs.append(arraysObject.uuid)
+                    }
+                }
+            }
+            objectsForRemoving = objectsForRemoving.filter({
+                return !serversUUIDs.contains($0.uuid)
+            })
             
             let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
             let predicate = PredicateRules().allLocalObjectsForObjects(objects: serverObjects)
@@ -1054,6 +1088,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 for object in serverObjects {
                     if !uuids.contains(object.uuid){
                         objectsForRemoving.append(object)
+                    }
+                }
+            }
+            
+            for object in localObjectsForReplace{
+                if let index = serversUUIDs.index(of: object.uuid){
+                    serversUUIDs.remove(at: index)
+                }
+            }
+            
+            for localObject in localObjectsForReplace{
+                for (index, object) in allMediaItems.enumerated(){
+                    if object.uuid == localObject.uuid {
+                        allMediaItems[index] = localObject
                     }
                 }
             }
@@ -1125,18 +1173,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        collectionView.performBatchUpdates({[weak self] in
-            if let `self` = self{
-                self.collectionView.deleteItems(at: arrayOfPathForDelete)
-                self.collectionView.deleteSections(IndexSet(arrayOfSection))
-            }
-        }) { [weak self] (flag) in
-            if let `self` = self{
-                self.collectionView.reloadItems(at: arrayOfPathForUpdate)
-            }
-        }
+        collectionView?.reloadData()
+        
+//        collectionView.performBatchUpdates({[weak self] in
+//            if let `self` = self{
+//                self.collectionView.deleteItems(at: arrayOfPathForDelete)
+//                self.collectionView.deleteSections(IndexSet(arrayOfSection))
+//            }
+//        }) { [weak self] (flag) in
+//            if let `self` = self{
+//                self.collectionView.reloadItems(at: arrayOfPathForUpdate)
+//            }
+//        }
     }
-
+    
     func newFolderCreated(){
         if let unwrapedFilters = originalFilters,
             canShowFolderFilters(filters: unwrapedFilters) {
@@ -1151,15 +1201,28 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func albumsDeleted(albums: [AlbumItem]){
+    func albumsDeleted(albums: [AlbumItem]) {
         
     }
     
-    func fileAddedToAlbum(){
+    func fileAddedToAlbum() {
         if let unwrapedFilters = originalFilters,
             isAlbumDetail(filters: unwrapedFilters) {
             delegate?.needReloadData?()
         }
+    }
+    
+    func addedLocalFiles(items: [Item]){
+        if let unwrapedFilters = originalFilters,
+            isAlbumDetail(filters: unwrapedFilters) {
+            return
+        }
+        
+        if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
+            return
+        }
+        allLocalItems.append(contentsOf: items)
+        delegate?.needReloadData?()
     }
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {

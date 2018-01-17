@@ -12,7 +12,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private var fileService = WrapItemFileService()
     
     let player: MediaPlayer = factory.resolve()
-
+    let photosAlbumService = PhotosAlbumService()
+    
+    
     typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
     
     var sharingItems = [BaseDataSourceItem]()
@@ -340,11 +342,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                    success: self?.succesAction(elementType: .move),
                                    fail: self?.failAction(elementType: .move))
             
-            }, cancel: { self.succesAction(elementType: ElementTypes.move)()
+            }, cancel: { [weak self] in
+                self?.succesAction(elementType: ElementTypes.move)()
         } )
     }
     
-    func copy(item: [BaseDataSourceItem], toPath:String) {
+    func copy(item: [BaseDataSourceItem], toPath: String) {
         guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
             return
         }
@@ -356,7 +359,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.fileService.move(items: item, toPath: folder.uuid,
                                    success: self?.succesAction(elementType: .copy),
                                    fail: self?.failAction(elementType: .copy))
-            
             }, cancel: { [weak self] in
                 self?.succesAction(elementType: ElementTypes.move)()
         })
@@ -379,20 +381,19 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                  fail: failAction(elementType: .download))
         } else if let albums = item as? [AlbumItem] {
             
-            PhotosAlbumService().loadItemsBy(albums: albums, success: { (itemsByAlbums) in
-                self.fileService.download(itemsByAlbums: itemsByAlbums,
-                                          success: self.succesAction(elementType: .download),
-                                          fail: self.failAction(elementType: .download))
+            photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] (itemsByAlbums) in
+                self?.fileService.download(itemsByAlbums: itemsByAlbums,
+                                          success: self?.succesAction(elementType: .download),
+                                          fail: self?.failAction(elementType: .download))
             })
         }
     }
     
     func createStory(items: [BaseDataSourceItem]) {
         let router = RouterVC()
-        let images = items.filter({ $0.fileType == .image })
-        sync(items: images, action: {
+        sync(items: items, action: {
             DispatchQueue.main.async {
-                router.createStoryName(items: images)
+                router.createStoryName(items: items)
             }
         }, cancel: {})
     }
@@ -497,7 +498,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let wrapedItems = items as? [WrapData] else {
             return
         }
-        fileService.deleteLocalFiles(deleteFiles: wrapedItems, success: succesAction(elementType: .deleteDeviceOriginal), fail: failAction(elementType: .deleteDeviceOriginal))
+        fileService.deleteLocalFiles(deleteFiles: wrapedItems, success: succesAction(elementType: .deleteDeviceOriginal),
+                                     fail: failAction(elementType: .deleteDeviceOriginal))
     }
     
     func succesAction(elementType: ElementTypes) -> FileOperation {
@@ -523,7 +525,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func failAction(elementType: ElementTypes) -> FailResponse {
         
         let failResponse : FailResponse  = { [weak self] value in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 self?.output?.operationFailed(type: elementType, message: value.description)
             }
         }
@@ -533,12 +535,16 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func sync(items: [BaseDataSourceItem], action: @escaping () -> Void, cancel: @escaping () -> Void, fail: FailResponse? = nil) {
         guard let items = items as? [WrapData] else { return }
         let successClosure = { [weak self] in
-            self?.output?.compliteAsyncOperationEnableScreen()
-            action()
+            DispatchQueue.main.async {
+                self?.output?.compliteAsyncOperationEnableScreen()
+                action()
+            }
         }
         let failClosure: FailResponse = { [weak self] (errorResponse) in
-            self?.output?.compliteAsyncOperationEnableScreen()
-            fail?(errorResponse)
+            DispatchQueue.main.async {
+                self?.output?.compliteAsyncOperationEnableScreen()
+                fail?(errorResponse)
+            }
         }
         let operations = fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure)
         if let operations = operations {

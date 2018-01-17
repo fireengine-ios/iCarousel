@@ -244,7 +244,7 @@ class ContactsSyncService: BaseRequestService {
     }
     
     private func setup() {
-        SyncSettings.shared().token = ApplicationSession.sharedSession.session.authToken
+        SyncSettings.shared().token = TokenStorageUserDefaults().accessToken
         SyncSettings.shared().url =  ContactsSyncServiceConstant.webProdURL
         SyncSettings.shared().environment = .productionEnvironment//.developmentEnvironment
     }

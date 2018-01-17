@@ -41,15 +41,19 @@ class HomeViewTopView: UICollectionReusableView {
     private func configurateView(){
         allFilesButton.setImage(UIImage(named: "homeAllFiles"), for: .normal)
         allFilesButton.setBottomTitleText(titleText: TextConstants.homeButtonAllFiles)
+        allFilesButton.accessibilityLabel = TextConstants.homeButtonAllFiles
         
         createAStoryButton.setImage(UIImage(named: "homeCreateStory"), for: .normal)
         createAStoryButton.setBottomTitleText(titleText: TextConstants.homeButtonCreateStory)
+        createAStoryButton.accessibilityLabel = TextConstants.homeButtonCreateStory
         
         favoritesButton.setImage(UIImage(named: "homeFavorites"), for: .normal)
         favoritesButton.setBottomTitleText(titleText: TextConstants.homeButtonFavorites)
+        favoritesButton.accessibilityLabel = TextConstants.homeButtonFavorites
         
         syncContactsButton.setImage(UIImage(named: "homeSyncContacts"), for: .normal)
         syncContactsButton.setBottomTitleText(titleText: TextConstants.homeButtonSyncContacts)
+        syncContactsButton.accessibilityLabel = TextConstants.homeButtonSyncContacts
     }
     
     // MARK: Buttons action

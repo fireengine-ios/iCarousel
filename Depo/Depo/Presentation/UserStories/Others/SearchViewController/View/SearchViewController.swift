@@ -173,9 +173,14 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     // MARK: - UISearchbarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(true)
-        dismissController()
-        output.tapCancel()
+        if let searchBar = self.navigationBar.topItem?.titleView,
+            searchBar.isKind(of: UISearchBar.self),
+            searchBar.isFirstResponder {
+            view.endEditing(true)
+        } else {
+            dismissController()
+            output.tapCancel()
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -311,10 +316,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = recentSearchList[indexPath.row]
         case .suggestion:
             let suggest = suggestionList[indexPath.row]
-            if let text = suggest.highlightedText {
-                cell.textLabel?.attributedText = text
-            } else {
-                cell.textLabel?.text = suggest.text!
+            if let highlightedText = suggest.highlightedText {
+                cell.textLabel?.attributedText = highlightedText
+            } else if let text = suggest.text {
+                cell.textLabel?.text = text
             }
         }
         

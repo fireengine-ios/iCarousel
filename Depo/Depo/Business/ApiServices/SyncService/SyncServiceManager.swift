@@ -13,6 +13,8 @@ import Reachability
 class SyncServiceManager {
     static let shared = SyncServiceManager()
     
+    private let dispatchQueue = DispatchQueue(label: "com.lifebox.autosync")
+    
     private let reachabilityService = Reachability()
     private let autoSyncStorage = AutoSyncDataStorage()
     
@@ -23,8 +25,22 @@ class SyncServiceManager {
     private var lastAutoSyncTime: TimeInterval = 0
     private var timeIntervalBetweenSyncs: TimeInterval = NumericConstants.timeIntervalBetweenAutoSync
     
+    private var networkIsUnreachable = false
+    
     private var isSyncCancelled: Bool {
         return (photoSyncService.status == .canceled && videoSyncService.status == .canceled)
+    }
+    
+    private var isSyncFailed: Bool {
+        return (photoSyncService.status == .failed && videoSyncService.status == .failed)
+    }
+    
+    private var isSyncFinished: Bool {
+        return (photoSyncService.status == .synced && videoSyncService.status == .synced)
+    }
+    
+    private var hasSyncCancelled: Bool {
+        return (photoSyncService.status == .canceled || videoSyncService.status == .canceled)
     }
     
     private var hasPrepairingSync: Bool {
@@ -37,6 +53,10 @@ class SyncServiceManager {
     
     private var hasWaitingForWiFiSync: Bool {
         return (photoSyncService.status == .waitingForWifi || videoSyncService.status == .waitingForWifi)
+    }
+    
+    private var hasFailedSync: Bool {
+        return (photoSyncService.status == .failed || videoSyncService.status == .failed)
     }
     
     
@@ -84,6 +104,10 @@ class SyncServiceManager {
         }
     }
     
+    func stopSync() {
+        stop(reachabilityDidChange: false, photo: true, video: true)
+    }
+    
     
     //MARK: - Private
     
@@ -101,7 +125,7 @@ class SyncServiceManager {
         } catch {
             print("\(#function): can't start reachability notifier")
         }
-        
+
         reachability.whenReachable = { (reachability) in
             print("AUTOSYNC: is reachable")
             self.checkReachabilityAndSettings()
@@ -114,49 +138,59 @@ class SyncServiceManager {
     }
     
     private func checkReachabilityAndSettings() {
-        guard let syncSettings = settings else {
-            AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
-                if let `self` = self {
-                    let settings = SettingsAutoSyncModel()
-                    settings.isAutoSyncEnable = autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected
-                    settings.mobileDataPhotos = autoSyncModels[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
-                    settings.mobileDataVideo = autoSyncModels[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
-                    
-                    self.updateSyncSettings(settingsModel: settings)
-                }
-            })
-            
-            return
-        }
-        
-        timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
-        
-        guard syncSettings.isAutoSyncEnable else {
-            stop(reachabilityDidChange: false, photo: true, video: true)
-            CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
-            return
-        }
-        
-        CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
-        
-        guard let reachability = reachabilityService else {
-            print("\(#function): reachabilityService is nil")
-            return
-        }
-        
-        if reachability.connection != .none, APIReachabilityService.shared.connection == .reachable {
-            if reachability.connection == .wifi {
-                start(photo: true, video: true)
-            } else if reachability.connection == .cellular {
-                let photoEnabled = syncSettings.mobileDataPhotos
-                let videoEnabled = syncSettings.mobileDataVideo
-                if photoEnabled || videoEnabled {
-                    start(photo: photoEnabled, video: videoEnabled)
-                }
-                stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
+        dispatchQueue.async {
+            guard let syncSettings = self.settings else {
+                AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
+                    if let `self` = self {
+                        let settings = SettingsAutoSyncModel()
+                        settings.isAutoSyncEnable = autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected
+                        settings.mobileDataPhotos = autoSyncModels[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
+                        settings.mobileDataVideo = autoSyncModels[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
+                        
+                        self.updateSyncSettings(settingsModel: settings)
+                    }
+                })
+                
+                return
             }
-        } else {
-            stop(reachabilityDidChange: true, photo: true, video: true)
+            
+            self.timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
+            
+            guard syncSettings.isAutoSyncEnable else {
+                self.stop(reachabilityDidChange: false, photo: true, video: true)
+                CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
+                return
+            }
+            
+            CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
+            
+            guard let reachability = self.reachabilityService else {
+                print("\(#function): reachabilityService is nil")
+                return
+            }
+            
+            if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
+                self.networkIsUnreachable = false
+                if reachability.connection == .wifi {
+                    self.start(photo: true, video: true)
+                } else if reachability.connection == .cellular {
+                    let photoEnabled = syncSettings.mobileDataPhotos
+                    let videoEnabled = syncSettings.mobileDataVideo
+                    
+                    self.stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
+                    if photoEnabled || videoEnabled {
+                        self.start(photo: photoEnabled, video: videoEnabled)
+                    }
+                }
+            } else {
+                self.networkIsUnreachable = true
+                self.dispatchQueue.asyncAfter(deadline: .now() + .seconds(1), execute: { [weak self] in
+                    guard let `self` = self, self.networkIsUnreachable else {
+                        return
+                    }
+                    self.stop(reachabilityDidChange: true, photo: true, video: true)
+                })
+            }
         }
     }
     
@@ -176,20 +210,6 @@ class SyncServiceManager {
         } else {
             if photo { photoSyncService.stop() }
             if video { videoSyncService.stop() }
-        }
-    }
-    
-    //wait for wi-fi connection
-    private func stopManually() {
-        photoSyncService.waitForWiFi()
-        videoSyncService.waitForWiFi()
-    }
-    
-    //start if is waiting for wi-fi
-    private func startManually() {
-        if reachabilityService?.connection != .none {
-            photoSyncService.startManually()
-            videoSyncService.startManually()
         }
     }
 }
@@ -221,32 +241,43 @@ extension SyncServiceManager {
     }
     
     @objc private func onAPIReachabilityDidChange() {
-        checkReachabilityAndSettings()
+        self.checkReachabilityAndSettings()
     }
     
     @objc private func onAutoSyncStatusDidChange() {
-        if isSyncCancelled {
-            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
-            CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
-            CardsManager.default.stopOperationWithType(type: .sync)
-            return
-        }
-        
         if hasExecutingSync {
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
             return
         }
         
+        CardsManager.default.stopOperationWithType(type: .sync)
+        
         if hasPrepairingSync {
-            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             return
         }
-
+        
+        CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
+        
         if hasWaitingForWiFiSync {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
+            return
         }
+        
+        CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+        
+        if isSyncCancelled || isSyncFailed || isSyncFinished {
+            //TODO: show error?
+            return
+        }
+        
+        if hasFailedSync || hasSyncCancelled {
+            //TODO: show error?
+        }
+        
+        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
     }
 }
 

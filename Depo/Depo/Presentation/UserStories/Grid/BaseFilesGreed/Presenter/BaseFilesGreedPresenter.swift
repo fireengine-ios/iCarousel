@@ -260,9 +260,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         if item.fileType.isUnSupportedOpenType {
             let sameTypeFiles: [BaseDataSourceItem] = data.flatMap{ return $0 }.filter{ $0.fileType == item.fileType }
-            router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles, type: type, sortType: sortedType, moduleOutput: self)
+            router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
+                                  type: type, sortType: sortedType, moduleOutput: self)
         } else {
-            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
+            let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported,
+                                          image: .error, buttonTitle: TextConstants.ok)
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
@@ -321,9 +323,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func updateNoFilesView() {
         if needShowNoFileView() {
-            view.showNoFilesWith(text: interactor.textForNoFileLbel(),
-                                 image: interactor.imageForNoFileImageView(),
-                                 createFilesButtonText: interactor.textForNoFileButton())
+            if interactor.remoteItems is PhotoAndVideoService ||
+                interactor.remoteItems is MusicService ||
+                interactor.remoteItems is DocumentService {
+                view.showNoFilesWith(text: interactor.textForNoFileLbel(),
+                                     image: interactor.imageForNoFileImageView(),
+                                     createFilesButtonText: interactor.textForNoFileButton())
+            } else {
+                view.showNoFilesTop()
+            }
         } else {
             view.hideNoFiles()
         }
@@ -475,10 +483,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             
             if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
                 let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
-                if localDuplicates.count > 0 {
-                    selectedItems = localDuplicates
-                } else {
+                if localDuplicates.count == 0 {
+                    //selectedItems = localDuplicates
                     actionTypes.remove(at: deleteOriginalIndex)
+                } else {
+                    
                 }
             }
             
@@ -489,6 +498,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
             actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.index(of: .download) {
+                actionTypes.remove(at: downloadIdex)
+            }
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              presentedBy: sender,
                                              onSourceView: nil)

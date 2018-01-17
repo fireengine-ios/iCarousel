@@ -36,6 +36,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         
         progressView.tintColor = ColorConstants.blueColor
         imageView.backgroundColor = UIColor.clear
+        
+        favoriteIcon.accessibilityLabel = TextConstants.accessibilityFavorite
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
@@ -54,7 +56,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
         imageView.image = nil
-//        activity.startAnimating()
         if wrappered.isLocalItem {
             cloudStatusImage.image = UIImage(named: "objectNotInCloud")
         } else {
@@ -77,11 +78,15 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     override func setImage(image: UIImage?) {
-        self.imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.opacity = 0.1
         imageView.image = image
+        UIView.animate(withDuration: 0.2, animations: {
+            self.imageView.layer.opacity = 1.0
+        })
+        backgroundColor = ColorConstants.fileGreedCellColor
+        
         isAlreadyConfigured = true
-        self.backgroundColor = ColorConstants.fileGreedCellColor
-        activity.stopAnimating()
     }
 
     override func setImage(with url: URL) {
@@ -96,11 +101,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
                 return
             }
             
-            self.imageView.layer.opacity = 0.1
             self.setImage(image: image)
-            UIView.animate(withDuration: 0.2, animations: {
-                self.imageView.layer.opacity = 1.0
-            })
         }
         
         isAlreadyConfigured = true

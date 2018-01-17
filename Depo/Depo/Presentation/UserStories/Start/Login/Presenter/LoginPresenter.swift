@@ -11,6 +11,13 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     var interactor: LoginInteractorInput!
     var router: LoginRouterInput!
     
+    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    
+    var optInVC: OptInController?
+    var textEnterVC: TextEnterController?
+    var newPhone: String?
+    var referenceToken: String?
+    
     var captchaShowed: Bool = false
 
     func viewIsReady() {
@@ -71,10 +78,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func succesLogin() {
-//        asyncOperationSucces()
-        
         interactor.checkEULA()
-//        router.goToHomePage()
+        compliteAsyncOperationEnableScreen()
     }
     
     private func showMessageHideSpinner(text: String) {
@@ -83,7 +88,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func failLogin(message:String) {
-        
+        compliteAsyncOperationEnableScreen()
         view.highlightLoginTitle()
         view.highlightPasswordTitle()
         //FIXME: in te future change it, when we got real error handling
@@ -95,9 +100,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         if captchaShowed {
             view.refreshCaptcha()
         }
-        
-//        loginScreenNoInternetError
-        
     }
     
     func startedEnteringPhoneNumberPlus() {
@@ -121,7 +123,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func onSuccessEULA() {
         compliteAsyncOperationEnableScreen()
-        //router.goToHomePage()
         router.goToSyncSettingsView()
     }
     
@@ -131,13 +132,13 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func allAttemtsExhausted(user: String) {
-        
+        compliteAsyncOperationEnableScreen()
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
         interactor.blockUser(user: user)
-//        view.blockUI()
     }
     
     func userStillBlocked(user: String) {
+        compliteAsyncOperationEnableScreen()
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
     }
     
@@ -146,18 +147,115 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         let timeIntervalFromBlockDate =  currentTime.timeIntervalSince(date)
         debugPrint("time passed since block in minutes", timeIntervalFromBlockDate/60)
         if timeIntervalFromBlockDate/60 >= 60 {
-//            view.unblockUI()
             interactor.eraseBlockTime(forUserName: name)
         }  else {
             showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
-//            view.blockUI()
         }
-        
     }
     
     //MARK : BasePresenter    
     
     override func outputView() -> Waiting? {
         return view
+    }
+    
+    func openEmptyPhone() {
+        compliteAsyncOperationEnableScreen()
+        tokenStorage.isClearTokens = true
+        
+        let textEnterVC = TextEnterController.with(
+            title: TextConstants.loginEnterGSM,
+            textPlaceholder: TextConstants.loginGSMNumber,
+            buttonTitle: TextConstants.save) { [weak self] enterText, vc in
+                self?.newPhone = enterText
+                self?.interactor.getTokenToUpdatePhone(for: enterText)
+                vc.startLoading()
+        }
+        self.textEnterVC = textEnterVC
+        RouterVC().presentViewController(controller: textEnterVC)
+    }
+    
+    func failedAccountInfo(errorResponse: ErrorResponse) {
+        compliteAsyncOperationEnableScreen()
+    }
+    
+    func successed(tokenUpdatePhone: SignUpSuccessResponse) {
+        referenceToken = tokenUpdatePhone.referenceToken
+        textEnterVC?.stopLoading()
+        textEnterVC?.close { [weak self] in
+            guard let newPhone = self?.newPhone else {
+                return
+            }
+            let optInVC = OptInController.with(phone: newPhone)
+            self?.optInVC = optInVC
+            optInVC.delegate = self
+            RouterVC().pushViewController(viewController: optInVC)
+        }
+    }
+    
+    func failedUpdatePhone(errorResponse: ErrorResponse) {
+        textEnterVC?.stopLoading()
+        textEnterVC?.showAlertMessage(with: errorResponse.description)
+    }
+    
+    func successed(resendUpdatePhone: SignUpSuccessResponse) {
+        referenceToken = resendUpdatePhone.referenceToken
+        optInVC?.stopActivityIndicator()
+        optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
+        optInVC?.startEnterCode()
+        optInVC?.hideResendButton()
+    }
+    
+    func failedResendUpdatePhone(errorResponse: ErrorResponse) {
+        optInVC?.stopActivityIndicator()
+        textEnterVC?.showAlertMessage(with: errorResponse.description)
+    }
+    
+    func successedVerifyPhone() {
+        optInVC?.stopActivityIndicator()
+        optInVC?.resignFirstResponder()
+        
+        tokenStorage.isClearTokens = false
+        
+        startAsyncOperationDisableScreen()
+        interactor.relogin()
+    }
+    
+    func failedVerifyPhone(errorString: String) {
+        optInVC?.stopActivityIndicator()
+        optInVC?.clearCode()
+        optInVC?.view.endEditing(true)
+    
+        if optInVC?.increaseNumberOfAttemps() == false {
+            let vc = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: TextConstants.promocodeInvalid, image: .error, buttonTitle: TextConstants.ok)
+            optInVC?.present(vc, animated: false, completion: nil)
+        }
+    }
+}
+
+// MARK: - OptInControllerDelegate
+extension LoginPresenter: OptInControllerDelegate {
+    func optInResendPressed(_ optInVC: OptInController) {
+        optInVC.startActivityIndicator()
+        self.optInVC = optInVC
+        if let newPhone = newPhone {
+            interactor.getResendTokenToUpdatePhone(for: newPhone)
+        }
+    }
+
+    func optInReachedMaxAttempts(_ optInVC: OptInController) {
+        optInVC.showResendButton()
+        optInVC.dropTimer()
+        UIApplication.showErrorAlert(message: TextConstants.promocodeBlocked)
+    }
+
+    func optInNavigationTitle() -> String {
+        return TextConstants.confirmPhoneOptInNavigarionTitle
+    }
+
+    func optIn(_ optInVC: OptInController, didEnterCode code: String) {
+        optInVC.startActivityIndicator()
+        self.optInVC = optInVC
+        interactor.verifyPhoneNumber(token: referenceToken ?? "", code: code)
     }
 }

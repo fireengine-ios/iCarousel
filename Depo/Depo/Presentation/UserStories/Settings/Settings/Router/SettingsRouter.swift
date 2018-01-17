@@ -47,7 +47,6 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) {
-        
         router.pushViewController(viewController: router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail))
     }
     
@@ -67,5 +66,17 @@ class SettingsRouter: SettingsRouterInput {
     
     func goToConnectedToNetworkFailed() {
         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+    }
+    
+    func goTurkcellSecurity() {
+        router.pushViewController(viewController: router.turkcellSecurity)
+    }
+    
+    func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?) {
+        let mailController = MailVerificationViewController()
+        mailController.actionDelegate = delegate
+        mailController.modalPresentationStyle = .overFullScreen
+        mailController.modalTransitionStyle = .crossDissolve
+        router.presentViewController(controller: mailController)//.present(mailController, animated: true, completion: nil)
     }
 }

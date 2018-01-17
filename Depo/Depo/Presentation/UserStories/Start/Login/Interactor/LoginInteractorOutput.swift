@@ -32,4 +32,15 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func preparedTimePassed(date: Date, forUserName name: String)
     
     func userStillBlocked(user: String)
+    
+    func openEmptyPhone()
+    
+    func successed(tokenUpdatePhone: SignUpSuccessResponse)
+    func failedUpdatePhone(errorResponse: ErrorResponse)
+    
+    func successed(resendUpdatePhone: SignUpSuccessResponse)
+    func failedResendUpdatePhone(errorResponse: ErrorResponse)
+    
+    func successedVerifyPhone()
+    func failedVerifyPhone(errorString: String)
 }

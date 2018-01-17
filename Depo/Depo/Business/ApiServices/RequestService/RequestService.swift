@@ -21,32 +21,20 @@ enum RequestMethod: String {
     case Head    = "HEAD"
 }
 
-
+import Alamofire
 class RequestService {
     
     static let `default` = RequestService()
-    private let defaultSession: URLSession
     
-    private var uploadProgressService = UploadProgressService.shared
-    
-    
-    init() {
-        
-        let configuration = URLSessionConfiguration.default
-        defaultSession = URLSession(configuration: configuration,
-                                    delegate: uploadProgressService,
-                                    delegateQueue: nil)
-    }
-    
-    public func downloadRequestTask(patch:URL,
-                                headerParametrs: RequestHeaderParametrs,
-                                body: Data?,
-                                method: RequestMethod,
-                                timeoutInterval: TimeInterval,
-                                response: @escaping RequestResponse ) -> URLSessionDataTask {
+    public func requestTask(patch:URL,
+                            headerParametrs: RequestHeaderParametrs,
+                            body: Data?,
+                            method: RequestMethod,
+                            timeoutInterval: TimeInterval,
+                            response: @escaping RequestResponse ) -> URLSessionTask {
         log.debug("RequestService downloadRequestTask")
         
-        var request: URLRequest = URLRequest(url: patch)
+        var request = URLRequest(url: patch)
             request.timeoutInterval = timeoutInterval
             request.httpMethod = method.rawValue
             request.httpBody = body
@@ -54,8 +42,12 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        let task = defaultSession.dataTask(with: request, completionHandler: response)
-        return task
+        let sessionRequest = SessionManager.default.request(request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.data, requestResponse.response, requestResponse.error)
+        }
+        return sessionRequest.task!
     }
     
     public func uploadRequestTask(patch:URL,
@@ -63,7 +55,7 @@ class RequestService {
                               body: Data?,
                               method: RequestMethod,
                               timeoutInterval: TimeInterval,
-                              response: @escaping RequestResponse ) -> URLSessionUploadTask {
+                              response: @escaping RequestResponse ) -> URLSessionTask {
         log.debug("RequestService uploadRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
@@ -71,9 +63,15 @@ class RequestService {
             request.httpMethod = method.rawValue
             request.httpBody = body
             request.allHTTPHeaderFields = headerParametrs
-        
-        let task = defaultSession.uploadTask(with: request, from: body, completionHandler: response)
-        return task
+        let sessionRequest = SessionManager.default.upload(body!, with: request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.data, requestResponse.response, requestResponse.error)
+        }
+        sessionRequest.uploadProgress { [weak self] progress in
+            self?.requestProgressHander(progress, request: request)
+        }
+        return sessionRequest.task!
     }
     
     
@@ -82,20 +80,27 @@ class RequestService {
                                     body: Data?,
                                     method: RequestMethod,
                                     timeoutInterval: TimeInterval,
-                                    response: @escaping RequestFileDownloadResponse ) -> URLSessionDownloadTask {
+                                    response: @escaping RequestFileDownloadResponse ) -> URLSessionTask {
         log.debug("RequestService downloadFileRequestTask")
+        
+        
         
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
         request.httpMethod = method.rawValue
-        request.httpBody = body
         request.allHTTPHeaderFields = headerParametrs
         
         debugPrint("REQUEST: \(request)")
         
-        let task = defaultSession.downloadTask(with: patch,
-                                               completionHandler: response)
-        return task
+        let sessionRequest = SessionManager.default.download(request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.temporaryURL, requestResponse.response, requestResponse.error)
+        }
+        sessionRequest.downloadProgress { [weak self] progress in
+            self?.requestProgressHander(progress, request: request)
+        }
+        return sessionRequest.task!
     }
     
     public func uploadFileRequestTask(patch:URL,
@@ -103,7 +108,7 @@ class RequestService {
                                   fromFile: URL,
                                   method: RequestMethod,
                                   timeoutInterval: TimeInterval,
-                                  response: @escaping RequestFileUploadResponse ) -> URLSessionUploadTask {
+                                  response: @escaping RequestFileUploadResponse ) -> URLSessionTask {
         log.debug("RequestService uploadFileRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
@@ -111,14 +116,17 @@ class RequestService {
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headerParametrs
         
-        
         debugPrint("REQUEST: \(request)")
         
-        let task = defaultSession.uploadTask(with: request,
-                                             fromFile: fromFile,
-                                             completionHandler: response)
-        
-        return task
+        let sessionRequest = SessionManager.default.upload(fromFile, with: request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.data, requestResponse.response, requestResponse.error)
+        }
+        sessionRequest.uploadProgress { [weak self] progress in
+            self?.requestProgressHander(progress, request: request)
+        }
+        return sessionRequest.task!
     }
     
     public func uploadFileRequestTask(path:URL,
@@ -126,7 +134,7 @@ class RequestService {
                                       fileData: Data,
                                       method: RequestMethod,
                                       timeoutInterval: TimeInterval,
-                                      response: @escaping RequestFileUploadResponse ) -> URLSessionUploadTask {
+                                      response: @escaping RequestFileUploadResponse ) -> URLSessionTask {
         log.debug("RequestService uploadFileRequestTask")
         
         var request: URLRequest = URLRequest(url: path)
@@ -136,14 +144,22 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        return defaultSession.uploadTask(with: request, from: fileData, completionHandler: response)
+        let sessionRequest = SessionManager.default.upload(fileData, with: request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.data, requestResponse.response, requestResponse.error)
+        }
+        sessionRequest.uploadProgress { [weak self] progress in
+            self?.requestProgressHander(progress, request: request)
+        }
+        return sessionRequest.task!
     }
     
     public func headRequestTask(patch:URL,
-                                    headerParametrs: RequestHeaderParametrs,
-                                    method: RequestMethod,
-                                    timeoutInterval: TimeInterval,
-                                    response: @escaping RequestResponse ) -> URLSessionDataTask {
+                                headerParametrs: RequestHeaderParametrs,
+                                method: RequestMethod,
+                                timeoutInterval: TimeInterval,
+                                response: @escaping RequestResponse ) -> URLSessionTask {
         
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
@@ -153,7 +169,19 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        let task = defaultSession.dataTask(with: request, completionHandler: response)
-        return task
+        let sessionRequest = SessionManager.default.request(request)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.data, requestResponse.response, requestResponse.error)
+            }
+        return sessionRequest.task!
+    }
+    
+    func requestProgressHander(_ progress: Alamofire.Progress, request: URLRequest) {
+        guard let delegate = SingletonStorage.shared.uploadProgressDelegate,
+            let tempUUIDfromURL = request.url?.lastPathComponent
+            else { return }
+        
+        delegate.didSend(ratio: Float(progress.fractionCompleted), for: tempUUIDfromURL)
     }
 }

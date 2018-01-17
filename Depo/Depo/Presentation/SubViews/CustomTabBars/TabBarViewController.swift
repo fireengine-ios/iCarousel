@@ -134,6 +134,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         setupObserving()
         
         player.delegates.add(self)
+        
+        plussButton.accessibilityLabel = TextConstants.accessibilityPlus
     }
     
     deinit {
@@ -304,6 +306,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         } else {
             hideButtonRainbow()
         }
+        
+        plussButton.accessibilityLabel = state ? TextConstants.accessibilityClose : TextConstants.accessibilityPlus
     }
     
     private func setupCurtainView() {
@@ -586,9 +590,9 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         let wrapData = WrapData(imageData: data)
         
         UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {
-            DispatchQueue.main.async {
-                UIApplication.showSuccessAlert(message: TextConstants.photoUploadedMessage )
-            }
+//            DispatchQueue.main.async {
+//                UIApplication.showSuccessAlert(message: TextConstants.photoUploadedMessage )
+//            }
         }) { (error) in
             DispatchQueue.main.async {
                 UIApplication.showErrorAlert(message: error.localizedDescription)

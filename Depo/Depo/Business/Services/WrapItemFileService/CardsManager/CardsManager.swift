@@ -19,6 +19,8 @@ enum OperationType: String{
     case waitingForWiFi         = "waitingForWiFi"
 }
 
+typealias BlockObject = () -> Void
+
 class Progress {
     var allOperations: Int?
     var completedOperations: Int?
@@ -31,10 +33,12 @@ class CardsManager: NSObject {
     private var foloversArray = [CardsManagerViewProtocol]()
     private var progresForOperation = [OperationType: Progress]()
     
+    var blocks = [BlockObject]()
     
     //MARK: registration view
     
     func addViewForNotification(view: CardsManagerViewProtocol){
+        
         if foloversArray.index(where: {$0.isEqual(object: view)}) == nil{
             foloversArray.append(view)
         }
@@ -74,13 +78,15 @@ class CardsManager: NSObject {
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
+        
         hidePopUpsByDepends(type: type)
-        setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
+        
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{
                 notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
             }
         }
+        
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
@@ -113,8 +119,11 @@ class CardsManager: NSObject {
     }
     
     func stopOperationWithType(type: OperationType){
-        progresForOperation[type] = nil
+        
+        print("operation stopped ", type.rawValue)
+        
         DispatchQueue.main.async {
+            self.progresForOperation[type] = nil
             for notificationView in self.foloversArray{
                 notificationView.stopOperationWithType(type: type)
             }
@@ -129,12 +138,30 @@ class CardsManager: NSObject {
     
     func hidePopUpsByDepends(type: OperationType){
         switch type {
-        case .sync:
+        case .sync, .upload:
             stopOperationWithType(type: .prepareToAutoSync)
             stopOperationWithType(type: .waitingForWiFi)
+            stopOperationWithType(type: .freeAppSpaceWarning)
+            stopOperationWithType(type: .freeAppSpace)
         default:
             break
         }
+    }
+    
+    func canShowPopUpByDepends(type: OperationType) -> Bool{
+        switch type {
+        case .freeAppSpace, .freeAppSpaceWarning:
+            let operations: [OperationType] = [.sync, .upload]
+            for operation in operations{
+                if (progresForOperation[operation] != nil){
+                    return false
+                }
+            }
+        default:
+            break
+        }
+        
+        return true
     }
     
     //MARK: views for operations

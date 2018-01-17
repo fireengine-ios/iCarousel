@@ -44,8 +44,7 @@ final class UploadService: BaseRequestService {
 //        syncDispatchQueue = DispatchQueue(label: "Sync Queue")
         
         super.init()
-        
-        UploadProgressService.shared.delegate = self
+        SingletonStorage.shared.uploadProgressDelegate = self
     }
 
     
@@ -135,8 +134,6 @@ final class UploadService: BaseRequestService {
                                                                             allOperations: self.allUploadOperationsCount,
                                                                             completedOperations: self.finishedUploadOperationsCount)
                 
-                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
-                
                 if let error = error {
                     
                     //FIXME: remove needsSuccess flag, implement logic with a higher priority operations for the .syncToUse case
@@ -159,7 +156,9 @@ final class UploadService: BaseRequestService {
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
                 finishedOperation.item.isLocalItem = false
 
-                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item) 
+                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
+                
+                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
 
                 guard self.allUploadOperationsCount != 0 else {
                     return
@@ -197,9 +196,9 @@ final class UploadService: BaseRequestService {
         guard !itemsToSync.isEmpty else {
             return nil
         }
-        if allSyncOperationsCount == 0 {
-            CardsManager.default.startOperationWith(type: .sync, allOperations: self.allSyncOperationsCount + itemsToSync.count, completedOperations: 0)
-        }
+//        if allSyncOperationsCount == 0 {
+//            CardsManager.default.startOperationWith(type: .sync, allOperations: self.allSyncOperationsCount + itemsToSync.count, completedOperations: 0)
+//        }
         
         let firstObject = itemsToSync.first!
         print("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
@@ -230,8 +229,6 @@ final class UploadService: BaseRequestService {
                                                                             completedOperations: self.finishedSyncOperationsCount)
                 
                 
-                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
-                
                 if let error = error {
                     if error.description != TextConstants.canceledOperationTextError {
                         fail(error)
@@ -241,7 +238,7 @@ final class UploadService: BaseRequestService {
                     if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
                         self.clearSyncCounters()
                         self.uploadOperations = self.uploadOperations.filter({ $0.uploadType != .autoSync })
-                        CardsManager.default.stopOperationWithType(type: .sync)
+//                        CardsManager.default.stopOperationWithType(type: .sync)
                         success()
                     }
                     return
@@ -251,13 +248,15 @@ final class UploadService: BaseRequestService {
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                 
+                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
+                
                 guard self.allSyncOperationsCount != 0 else {
                     return
                 }
                 
                 if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
                     self.clearSyncCounters()
-                    CardsManager.default.stopOperationWithType(type: .sync)
+//                    CardsManager.default.stopOperationWithType(type: .sync)
                     success()
                 }
                 
@@ -282,8 +281,8 @@ final class UploadService: BaseRequestService {
         clearUploadCounters()
         clearSyncCounters()
         
-        CardsManager.default.stopOperationWithType(type: .upload)
-        CardsManager.default.stopOperationWithType(type: .sync)
+//        CardsManager.default.stopOperationWithType(type: .upload)
+//        CardsManager.default.stopOperationWithType(type: .sync)
     }
     
     func cancelUploadOperations(){
@@ -318,12 +317,12 @@ final class UploadService: BaseRequestService {
         
         resetSyncCounters(for: photo ? .image : .video)
         
-        guard allSyncOperationsCount != finishedSyncOperationsCount else {
-            CardsManager.default.stopOperationWithType(type: .sync)
-            return
-        }
-        
-        CardsManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
+//        guard allSyncOperationsCount != finishedSyncOperationsCount else {
+//            CardsManager.default.stopOperationWithType(type: .sync)
+//            return
+//        }
+//
+//        CardsManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
     }
     
     private func clearUploadCounters() {
@@ -343,7 +342,7 @@ final class UploadService: BaseRequestService {
         else if type == .video { finishedVideoSyncOperationsCount = 0 }
     }
     
-    func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionUploadTask {
+    func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask {
     
         let request = executeUploadRequest(param: uploadParam, response: { (data, response, error) in
                             
@@ -378,13 +377,8 @@ final class UploadService: BaseRequestService {
     }
 }
 
-
 extension UploadService: UploadProgressServiceDelegate {
-    
-    func didSend(bytes: Int64, of totalBytes: Int64, for tempUUID: String) {
-        //
-    }
-    
+
     func didSend(ratio: Float, for tempUUID: String) {
         if let uploadOperation = uploadOperations.first(where: {$0.item.uuid == tempUUID}){
             if let uploadType = uploadOperation.uploadType{
@@ -393,12 +387,7 @@ extension UploadService: UploadProgressServiceDelegate {
             ItemOperationManager.default.setProgressForUploadingFile(file: uploadOperation.item, progress: ratio)
         }
     }
-    
-    func didSend(percent: Float, for tempUUID: String) {
-        //
-    }
 }
-
 
 extension UploadService {
     fileprivate func showOutOfSpaceAlert() {
@@ -433,8 +422,8 @@ class UploadOperations: Operation {
     let folder: String
     let success: UploadOperationSuccess?
     let fail: FailResponse?
+    var requestObject: URLSessionTask?
     let handler: ((_ uploadOberation: UploadOperations, _ value: ErrorResponse?) -> Void)?
-    var requestObject: URLSessionUploadTask?
     var isRealCancel = false
     var isFavorites: Bool = false
     var isPhotoAlbum: Bool = false
@@ -575,7 +564,7 @@ class UploadOperations: Operation {
         UploadService.default.baseUrl(success: success, fail: fail)
     }
     
-    private func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? )-> URLSessionUploadTask {
+    private func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? )-> URLSessionTask {
         return UploadService.default.upload(uploadParam: uploadParam,
                                             success: success,
                                             fail: fail)
