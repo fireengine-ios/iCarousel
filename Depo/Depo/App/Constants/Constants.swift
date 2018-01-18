@@ -668,7 +668,7 @@ struct TextConstants {
     static let errorFileSystemAccessDenied = NSLocalizedString("Can't get access to file system", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorNothingToDownload = NSLocalizedString("Nothing to download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let canceledOperationTextError = NSLocalizedString("Cancelled", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let canceledOperationTextError = NSLocalizedString("cancelled", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let ACCOUNT_NOT_FOUND = NSLocalizedString("Account cannot be found", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let INVALID_PROMOCODE = NSLocalizedString("This package activation code is invalid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
