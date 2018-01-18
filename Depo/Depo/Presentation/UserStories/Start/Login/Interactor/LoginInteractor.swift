@@ -12,7 +12,7 @@ class LoginInteractor: LoginInteractorInput {
     
     var dataStorage = LoginDataStorage()
     
-    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
     private lazy var eulaService = EulaService()
     

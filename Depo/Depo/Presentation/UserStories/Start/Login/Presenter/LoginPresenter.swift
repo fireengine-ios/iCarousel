@@ -11,7 +11,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     var interactor: LoginInteractorInput!
     var router: LoginRouterInput!
     
-    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     var optInVC: OptInController?
     var textEnterVC: TextEnterController?

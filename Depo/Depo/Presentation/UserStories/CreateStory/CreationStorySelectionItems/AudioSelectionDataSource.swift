@@ -8,7 +8,7 @@
 
 class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelectionCollectionViewCellDelegate {
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     let smallPlayer = SmallBasePlayer()
     
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
