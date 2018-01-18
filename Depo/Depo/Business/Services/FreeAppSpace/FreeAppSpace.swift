@@ -10,7 +10,7 @@ import UIKit
 
 class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
-    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     static let `default` = FreeAppSpace()
     
