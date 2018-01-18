@@ -12,7 +12,7 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
 
     private var userInfoResponse: AccountInfoResponse?
     
-    func onStartRecuests(){
+    func onStartRequests() {
         
         let group = DispatchGroup()
         let queue = DispatchQueue(label: "GetUserInfo")
@@ -21,26 +21,26 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
         group.enter()
         
         
-        AccountService().info(success: {[weak self] (responce) in
-            self?.userInfoResponse = responce as? AccountInfoResponse
+        AccountService().info(success: { [weak self] (response) in
+            self?.userInfoResponse = response as? AccountInfoResponse
             DispatchQueue.main.async {
-                self?.output.setUserInfo(userInfo: responce as! AccountInfoResponse)
+                self?.output.setUserInfo(userInfo: response as! AccountInfoResponse)
                 group.leave()
             }
         }) { (error) in
             group.leave()
         }
         
-        AccountService().quotaInfo(success: {[weak self] (respoce) in
+        AccountService().quotaInfo(success: { [weak self] (response) in
             DispatchQueue.main.async {
-                self?.output.setQuotaInfo(quotoInfo: respoce as! QuotaInfoResponse)
+                self?.output.setQuotaInfo(quotoInfo: response as! QuotaInfoResponse)
             }
             group.leave()
         }) { (error) in
             group.leave()
         }
         
-        group.notify(queue: queue) {[weak self] in
+        group.notify(queue: queue) { [weak self] in
             self?.output.requestsFinished()
         }
     }

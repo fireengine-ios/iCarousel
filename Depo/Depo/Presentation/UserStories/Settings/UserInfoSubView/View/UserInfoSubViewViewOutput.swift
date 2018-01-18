@@ -7,16 +7,9 @@
 //
 
 protocol UserInfoSubViewViewOutput {
-
-    /**
-        @author Oleg
-        Notify presenter that view is ready
-    */
-
-    func viewWillAppear()
     
-    func reloadUserInfoRequered()
-    func loadingIndicatorRequered()
+    func reloadUserInfoRequired()
+    func loadingIndicatorRequired()
     
-    func loadingIndicatorDismissalRequered()
+    func loadingIndicatorDismissalRequired()
 }
