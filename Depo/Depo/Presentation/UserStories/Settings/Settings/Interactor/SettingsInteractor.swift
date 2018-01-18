@@ -12,7 +12,7 @@ class SettingsInteractor: SettingsInteractorInput {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
-    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     private var userInfoResponse: AccountInfoResponse?
     let authService = AuthenticationService()

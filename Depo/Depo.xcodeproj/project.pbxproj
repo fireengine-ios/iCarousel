@@ -2510,6 +2510,7 @@
 		CE37FF071F7BEB5B00EF5FF1 /* OfferApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37FF061F7BEB5B00EF5FF1 /* OfferApple.swift */; };
 		CE37FF091F7BEB7600EF5FF1 /* PurchaseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37FF081F7BEB7600EF5FF1 /* PurchaseResult.swift */; };
 		CE394B621F6FFA8200128324 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394B611F6FFA8200128324 /* Array+Safe.swift */; };
+		CE3A3003200F4B030028C900 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A3002200F4B030028C900 /* Validator.swift */; };
 		CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
 		CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */; };
 		CE3AA9D61F4D96DB000157AF /* MediaItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D41F4D96DB000157AF /* MediaItem+CoreDataClass.swift */; };
@@ -2860,6 +2861,7 @@
 		CEE9B4EC1F78FD85002DAF81 /* InternetDataUsageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9B4EA1F78FD85002DAF81 /* InternetDataUsageCell.swift */; };
 		CEE9B4ED1F78FD85002DAF81 /* InternetDataUsageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9B4EB1F78FD85002DAF81 /* InternetDataUsageCell.xib */; };
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
+		CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */; };
 		CEF0C2841FC5493200105C31 /* ImportFromInstagramPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */; };
 		CEF0C2861FC549C400105C31 /* ImportFromInstagramInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */; };
 		CEF0C28A1FC594E300105C31 /* InstagramAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */; };
@@ -4496,6 +4498,7 @@
 		CE37FF061F7BEB5B00EF5FF1 /* OfferApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferApple.swift; sourceTree = "<group>"; };
 		CE37FF081F7BEB7600EF5FF1 /* PurchaseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseResult.swift; sourceTree = "<group>"; };
 		CE394B611F6FFA8200128324 /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
+		CE3A3002200F4B030028C900 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CE3AA9AE1F4D686D000157AF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		CE3AA9C21F4D860F000157AF /* LifeBoxModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LifeBoxModel.xcdatamodel; sourceTree = "<group>"; };
 		CE3AA9D41F4D96DB000157AF /* MediaItem+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -4686,6 +4689,7 @@
 		CEE9B4EA1F78FD85002DAF81 /* InternetDataUsageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetDataUsageCell.swift; sourceTree = "<group>"; };
 		CEE9B4EB1F78FD85002DAF81 /* InternetDataUsageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InternetDataUsageCell.xib; sourceTree = "<group>"; };
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
+		CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
 		CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramPresenter.swift; sourceTree = "<group>"; };
 		CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramInteractor.swift; sourceTree = "<group>"; };
 		CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAuthViewController.swift; sourceTree = "<group>"; };
@@ -6693,6 +6697,7 @@
 				7CFE92ED1F5EC5C9008A3B72 /* Mail */,
 				CE3318E41EFCFE1800E25989 /* ApplicationPalette */,
 				CE3318DF1EFCF9D600E25989 /* Device */,
+				CE3A3002200F4B030028C900 /* Validator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -9192,6 +9197,7 @@
 				CEDFEC9F1F10C77E003D1A75 /* Date */,
 				CEDFECA11F10C77E003D1A75 /* UINavigationBar */,
 				CEDFECA31F10C77E003D1A75 /* UIViewController */,
+				CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -11427,17 +11433,7 @@
 				7C3A745A1F07C28D00124DF5 /* BaseFileContentView.xib in Resources */,
 				CE51AEC41EF90853005DCEE0 /* RegistrationScreen.xib in Resources */,
 				CE8F44F81F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib in Resources */,
-				CE16C45C1FF234BB00BE5906 /* focus@2x.png in Resources */,
-				CE16C3F61FF234BB00BE5906 /* geri.png in Resources */,
 				87FB97B02008CBAF000D8E2B /* TitleView.xib in Resources */,
-				CE16C3761FF234BA00BE5906 /* t_orta_selected@3x.png in Resources */,
-				CE16C3AE1FF234BA00BE5906 /* underline@3x.png in Resources */,
-				CE16C4521FF234BB00BE5906 /* lifebox.png in Resources */,
-				CE16C3ED1FF234BB00BE5906 /* serbest_cizgi.png in Resources */,
-				CE16C42A1FF234BB00BE5906 /* text_selected@3x.png in Resources */,
-				CE16C4221FF234BB00BE5906 /* parlaklik_secili@3x.png in Resources */,
-				CE16C33D1FF234BA00BE5906 /* target_secili@2x.png in Resources */,
-				CE16C4421FF234BB00BE5906 /* sag_ok@3x.png in Resources */,
 				CE95ED4E1F516736002F923A /* HelpAndSupportHeaderView.xib in Resources */,
 				8C06AFA02008AD71003D8E05 /* focus@3x.png in Resources */,
 				8C06AFBE2008AD71003D8E05 /* geri@3x.png in Resources */,
@@ -13347,6 +13343,7 @@
 				8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */,
 				CE51ACD91EF90853005DCEE0 /* TermsAndServicesRouterInput.swift in Sources */,
 				CEACBEA11F6C0EEA003BE328 /* RingView.swift in Sources */,
+				CE3A3003200F4B030028C900 /* Validator.swift in Sources */,
 				CE51ACDA1EF90853005DCEE0 /* TermsAndServicesRouter.swift in Sources */,
 				CE51ACDB1EF90853005DCEE0 /* TermsAndServicesConfigurator.swift in Sources */,
 				CE51ACDC1EF90853005DCEE0 /* TermsAndServicesInitializer.swift in Sources */,
@@ -13727,6 +13724,7 @@
 				53794AC45ECB88862D21B980 /* SplashConfigurator.swift in Sources */,
 				D47863F91F3F18FA00EFDC6D /* UsageInfoRouterInput.swift in Sources */,
 				4C7B0D374F8DE575C03C683C /* SplashInitializer.swift in Sources */,
+				CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */,
 				2EA03B3FBEC8D2ED563D175D /* ActionsMenuViewInput.swift in Sources */,
 				ED00E6080A9C91B4A3F19BDC /* ActionsMenuView.swift in Sources */,
 				8C06AC1C20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */,

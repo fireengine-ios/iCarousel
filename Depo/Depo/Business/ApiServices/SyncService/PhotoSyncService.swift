@@ -27,8 +27,7 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         
         log.debug("PhotoSyncService interrupt")
         
-        photoVideoService?.stopAllOperations()
-        UploadService.default.cancelSyncOperations(photo: true, video: false)
+        stopAllOperations()
     }
     
     override func stop() {
@@ -36,8 +35,7 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         
         log.debug("PhotoSyncService stop")
         
-        photoVideoService?.stopAllOperations()
-        UploadService.default.cancelSyncOperations(photo: true, video: false)
+        stopAllOperations()
     }
     
     override func waitForWiFi() {
@@ -45,7 +43,17 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         
         log.debug("PhotoSyncService waitForWiFi")
         
-        photoVideoService?.stopAllOperations()
+        stopAllOperations()
+    }
+    
+    
+    //MARK: - Private
+    
+    private func stopAllOperations() {
         UploadService.default.cancelSyncOperations(photo: true, video: false)
+        
+        if let service = photoVideoService {
+            service.stopAllOperations()
+        }
     }
 }

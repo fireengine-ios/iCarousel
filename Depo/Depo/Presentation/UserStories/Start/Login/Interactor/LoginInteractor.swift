@@ -12,7 +12,7 @@ class LoginInteractor: LoginInteractorInput {
     
     var dataStorage = LoginDataStorage()
     
-    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
     private lazy var eulaService = EulaService()
     
@@ -147,6 +147,8 @@ class LoginInteractor: LoginInteractorInput {
         if phoneCode == "" {
             phoneCode = telephonyService.countryCodeByLang()
         }
+        phoneCode.insert("(", at: phoneCode.index(after: phoneCode.startIndex))
+        phoneCode.insert(")", at: phoneCode.endIndex)
         output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)
     }
     

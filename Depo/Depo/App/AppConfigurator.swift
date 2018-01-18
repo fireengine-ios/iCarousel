@@ -18,7 +18,7 @@ class AppConfigurator {
         dropboxManager.start()
         
         let urls: AuthorizationURLs = AuthorizationURLsImp()
-        let tokenStorage: TokenStorage = TokenStorageUserDefaults()
+        let tokenStorage: TokenStorage = factory.resolve()
         if tokenStorage.isClearTokens {
             tokenStorage.isClearTokens = false
             tokenStorage.clearTokens()

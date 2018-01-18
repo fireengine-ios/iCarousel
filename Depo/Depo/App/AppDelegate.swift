@@ -19,10 +19,12 @@ let log = setupLog()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var window: UIWindow?
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
-    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var player: MediaPlayer = factory.resolve()
+    
+    var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         log.debug("AppDelegate didFinishLaunchingWithOptions")
@@ -73,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        SyncServiceManager.shared.updateImmediately()
+//        SyncServiceManager.shared.updateImmediately()
     }
     
     private var firstResponder: UIResponder?
@@ -136,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tokenStorage.clearTokens()
         }
         UserDefaults.standard.synchronize()
-        FactoryMain.mediaPlayer.stop()
+        player.stop()
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
@@ -148,7 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // TODO: update for new app delegate
     override func remoteControlReceived(with event: UIEvent?) {
         if (event?.type == .remoteControl) {
-            FactoryMain.mediaPlayer.handle(event: event)
+            player.handle(event: event)
         }
     }
     
