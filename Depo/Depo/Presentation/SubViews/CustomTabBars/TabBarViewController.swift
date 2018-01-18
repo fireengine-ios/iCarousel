@@ -64,12 +64,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     let player: MediaPlayer = factory.resolve()
     let cameraService: CameraService = CameraService()
     
-//    let list = [router.homePageScreen,
-//                router.photosScreen,
-//                router.videosScreen,
-//                router.musics,
-//                router.documents]
-    
     enum TabScreenIndex: Int {
         case homePageScreenIndex = 0
         case photosScreenIndex = 1
@@ -100,6 +94,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
         return nil
     }
+    
+    var lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+    
     
     var selectedIndex: NSInteger = 0 {
         willSet {
@@ -219,11 +216,13 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     @objc func showPhotosScreen(_ sender: Any) {
         tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
         selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
     }
     
     @objc func showVideosScreen(_ sender: Any) {
         tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
         selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.videosScreenIndex.rawValue
     }
     
     @objc func showMusicBar(_ sender: Any) {
@@ -546,23 +545,15 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeViewState(state: false)
         
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
-          
+
             if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
-                selectedIndex == TabScreenIndex.videosScreenIndex.rawValue {
-                tabbarSelectedIndex = TabScreenIndex.videosScreenIndex.rawValue
-                tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
-            } else if tabbarSelectedIndex == TabScreenIndex.videosScreenIndex.rawValue,
-                selectedIndex == TabScreenIndex.photosScreenIndex.rawValue {
-                tabbarSelectedIndex = TabScreenIndex.photosScreenIndex.rawValue
-                tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
-            } else {
-                tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
+                (lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue ||
+                lastPhotoVideoIndex == TabScreenIndex.videosScreenIndex.rawValue ) {
+                tabbarSelectedIndex = lastPhotoVideoIndex
             }
             
+            tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             
-//            if tabbarSelectedIndex > 2 {
-//                tabbarSelectedIndex -= 1
-//            }
             selectedIndex = tabbarSelectedIndex
         }
     }
