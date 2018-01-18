@@ -123,7 +123,13 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func onSuccessEULA() {
         compliteAsyncOperationEnableScreen()
-        router.goToSyncSettingsView()
+        startAsyncOperation()
+        CoreDataStack.default.appendLocalMediaItems { [weak self] in
+            DispatchQueue.main.async {
+                self?.compliteAsyncOperationEnableScreen()
+                self?.router.goToSyncSettingsView()
+            }
+        }
     }
     
     func onFailEULA() {
