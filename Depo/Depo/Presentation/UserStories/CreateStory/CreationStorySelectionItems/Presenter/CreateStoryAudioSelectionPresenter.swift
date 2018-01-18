@@ -31,7 +31,6 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int){
-        //view.setTitle(title: "", subTitle: "")
     }
     
     override func onNextButton() {
