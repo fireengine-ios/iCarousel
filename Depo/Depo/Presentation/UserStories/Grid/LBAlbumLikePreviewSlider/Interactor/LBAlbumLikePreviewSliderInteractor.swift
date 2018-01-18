@@ -47,38 +47,6 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     //Protocol ItemOperationManagerViewProtocol
     
-    func startUploadFile(file: WrapData){
-        
-    }
-    
-    func setProgressForUploadingFile(file: WrapData, progress: Float){
-        
-    }
-    
-    func finishedUploadFile(file: WrapData){
-        
-    }
-    
-    func addFilesToFavorites(items: [Item]){
-        
-    }
-    
-    func addedLocalFiles(items: [Item]){
-        
-    }
-    
-    func removeFileFromFavorites(items: [Item]){
-        
-    }
-    
-    func deleteItems(items: [Item]){
-        
-    }
-    
-    func newFolderCreated(){
-        
-    }
-    
     func newAlbumCreated(){
         requestAlbumbs()
     }
@@ -95,14 +63,6 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             currentItems = newArray
             output.preparedAlbumbs(albumbs: currentItems)
         }
-    }
-    
-    func fileAddedToAlbum(){
-        
-    }
-    
-    func filesRomovedFromAlbum(items: [Item], albumUUID: String){
-        
     }
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool{
