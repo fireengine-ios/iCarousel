@@ -959,6 +959,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func finishedUploadFile(file: WrapData){
+        if let unwrapedFilters = originalFilters,
+            isAlbumDetail(filters: unwrapedFilters) {
+            return
+        }
         
         let uuid = file.uuid
         file.isLocalItem = false
