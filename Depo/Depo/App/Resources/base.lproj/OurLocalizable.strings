@@ -47,7 +47,7 @@
 "This package activation code has been used before, please try different code" = "This package activation code has been used before, please try different code";
 "This package activation code is invalid" = "This package activation code is invalid";
 "Account cannot be found" = "Account cannot be found";
-"Cancelled" = "Cancelled";
+"cancelled" = "cancelled";
 "Nothing to download" = "Nothing to download";
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";

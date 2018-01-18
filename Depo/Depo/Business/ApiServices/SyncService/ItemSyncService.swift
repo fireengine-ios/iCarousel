@@ -184,6 +184,10 @@ class ItemSyncServiceImpl: ItemSyncService {
             
             log.debug("ItemSyncServiceImpl upload UploadService uploadFileList fail")
             
+            if error.description == TextConstants.canceledOperationTextError {
+                return
+            }
+            
             self.fail()
             
             if case ErrorResponse.httpCode(413) = error {
@@ -252,20 +256,24 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
+        let group = DispatchGroup()
         var localUnsynced = [WrapData]()
-        let semaphore = DispatchSemaphore(value: 0)
+        
+        group.enter()
         DispatchQueue.main.async {
             localUnsynced = self.localUnsyncedItems()
-            semaphore.signal()
+            group.leave()
         }
-        semaphore.wait()
-        
-        let newUnsyncedLocalItems = localUnsynced.filter({ !self.lastSyncedMD5s.contains($0.md5) })
-        guard !newUnsyncedLocalItems.isEmpty else {
-            return
+    
+        group.notify(queue: dispatchQueue) {
+            let newUnsyncedLocalItems = localUnsynced.filter({ !self.lastSyncedMD5s.contains($0.md5) })
+            
+            guard !newUnsyncedLocalItems.isEmpty else {
+                return
+            }
+            
+            self.upload(items: newUnsyncedLocalItems)
         }
-        
-        self.upload(items: newUnsyncedLocalItems)
     }
     
     private func postNotification() {

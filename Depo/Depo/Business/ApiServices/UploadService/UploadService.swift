@@ -170,11 +170,12 @@ final class UploadService: BaseRequestService {
             return operation
         }
         uploadOperations.insert(contentsOf: operations, at: 0)
-//        dispatchQueue.async {
+        dispatchQueue.async {
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
+            
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
-//        }
-        
+        }
+    
         return operations
     }
     
@@ -228,11 +229,12 @@ final class UploadService: BaseRequestService {
                     }
                     
                     
-                    if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
+                    if self.allSyncOperationsCount != 0, self.allSyncOperationsCount == self.finishedSyncOperationsCount {
+                        print("allSyncOperationsCount = \(self.allSyncOperationsCount), finishedSyncOperationsCount = \(self.finishedSyncOperationsCount)")
                         self.clearSyncCounters()
                         self.uploadOperations = self.uploadOperations.filter({ $0.uploadType != .autoSync })
-//                        CardsManager.default.stopOperationWithType(type: .sync)
-                        success()
+                        CardsManager.default.stopOperationWithType(type: .sync)
+//                        success()
                     }
                     return
                 }
@@ -243,7 +245,7 @@ final class UploadService: BaseRequestService {
                 
                 ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
-                guard self.allSyncOperationsCount != 0 else {
+                guard self.allSyncOperationsCount != 0, self.finishedSyncOperationsCount != 0 else {
                     return
                 }
                 
@@ -259,10 +261,10 @@ final class UploadService: BaseRequestService {
             return operation
         }
         uploadOperations.append(contentsOf: operations)
-//        dispatchQueue.async {
+        dispatchQueue.async {
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
             print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
-//        }
+        }
         
         return uploadOperations
     }
@@ -294,28 +296,30 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelSyncOperations(photo: Bool, video: Bool) {
-        print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
-        
-        var operationsToRemove = uploadOperations.filter({ $0.uploadType == .autoSync &&
-            ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
-        
-        operationsToRemove.forEach { (operation) in
-            operation.cancel()
-            if let index = uploadOperations.index(of: operation) {
-                uploadOperations.remove(at: index)
+        dispatchQueue.sync {
+            print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
+            
+            var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .autoSync &&
+                ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
+            
+            operationsToRemove.forEach { (operation) in
+                operation.cancel()
+                if let index = self.uploadOperations.index(of: operation) {
+                    self.uploadOperations.remove(at: index)
+                }
             }
+            print("AUTOSYNC: \(operationsToRemove.count) operations have been deleted")
+            operationsToRemove.removeAll()
+            
+            self.resetSyncCounters(for: photo ? .image : .video)
+            
+            guard self.allSyncOperationsCount != self.finishedSyncOperationsCount else {
+                CardsManager.default.stopOperationWithType(type: .sync)
+                return
+            }
+            
+            CardsManager.default.setProgressForOperationWith(type: .sync, allOperations: self.allSyncOperationsCount, completedOperations: self.finishedSyncOperationsCount)
         }
-        print("AUTOSYNC: \(operationsToRemove.count) operations have been deleted")
-        operationsToRemove.removeAll()
-        
-        resetSyncCounters(for: photo ? .image : .video)
-        
-        guard allSyncOperationsCount != finishedSyncOperationsCount else {
-            CardsManager.default.stopOperationWithType(type: .sync)
-            return
-        }
-
-        CardsManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
     }
     
     private func clearUploadCounters() {
@@ -338,7 +342,12 @@ final class UploadService: BaseRequestService {
     func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask {
     
         let request = executeUploadRequest(param: uploadParam, response: { (data, response, error) in
-                            
+            
+            guard error == nil else {
+                fail?(.error(error!))
+                return
+            }
+            
             if let httpResponse = response as? HTTPURLResponse {
                 if 200...299 ~= httpResponse.statusCode {
                     success?()
@@ -348,8 +357,8 @@ final class UploadService: BaseRequestService {
                     return
                 }
             }
-                                
-//            fail?(.string("Error upload"))
+            
+            fail?(.string("Error upload"))
         })
         
         return request
@@ -460,6 +469,7 @@ class UploadOperations: Operation {
     }
     
     override func cancel() {
+        super.cancel()
         if let req = requestObject {
             if (req.state == .running) || (req.state == .suspended){
                 req.cancel()
@@ -471,7 +481,6 @@ class UploadOperations: Operation {
     }
     
     override func main() {
-        
         let isPhotoAlbum_ = isPhotoAlbum
         
         if isRealCancel {
@@ -484,6 +493,10 @@ class UploadOperations: Operation {
             }
             
             self.semaphore.signal()
+            return
+        }
+        
+        if isCancelled {
             return
         }
         
