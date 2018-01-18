@@ -59,7 +59,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     fileprivate var uploadFromLifebox   : SubPlussButtonView!
 
     let musicBar = MusicBar.initFromXib()
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     let cameraService: CameraService = CameraService()
     
     var customNavigationControllers: [UINavigationController] = []

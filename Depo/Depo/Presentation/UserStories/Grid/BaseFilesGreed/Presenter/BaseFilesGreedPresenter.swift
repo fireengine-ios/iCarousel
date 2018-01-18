@@ -11,7 +11,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     typealias Item = WrapData
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     
     var dataSource: BaseDataSourceForCollectionView
     

@@ -84,7 +84,7 @@ class CardsManager: NSObject {
             }
             self.hidePopUpsByDepends(type: type)
             
-            self.setProgressForOperationWith(type: type, allOperations: 0, completedOperations: 0)
+            self.setProgressForOperationWith(type: type, allOperations: allOperations ?? 0, completedOperations: completedOperations ?? 0)
             
             for notificationView in self.foloversArray{
                 notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
@@ -99,9 +99,10 @@ class CardsManager: NSObject {
     
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int){
         hidePopUpsByDepends(type: type)
-        setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
         
         DispatchQueue.main.async {
+            self.setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
+            
             for notificationView in self.foloversArray{
                 
                 if let obj = object {

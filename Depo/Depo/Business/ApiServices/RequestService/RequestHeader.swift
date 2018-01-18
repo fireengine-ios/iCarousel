@@ -47,7 +47,7 @@ struct HeaderConstant {
 
 class RequestHeaders {
     
-    private static let tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private static let tokenStorage: TokenStorage = factory.resolve()
     
     static func captchaHeader(id: String, answer: String) -> RequestHeaderParametrs {
         return [ HeaderConstant.CaptchaId     : id,

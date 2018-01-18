@@ -11,7 +11,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     weak var output: MoreFilesActionsInteractorOutput?
     private var fileService = WrapItemFileService()
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     let photosAlbumService = PhotosAlbumService()
     
     
