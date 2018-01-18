@@ -26,12 +26,15 @@ class PhotoVideoDetailModuleConfigurator {
                                                                 photoVideoBottomBarConfig: EditingBarConfig,
                                                                 documentsBottomBarConfig: EditingBarConfig,
                                                                 selecetedItem: Item,
-                                                                allItems: [Item]) {
+                                                                allItems: [Item],
+                                                                albumUUID: String) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
+            let interactor = PhotoVideoAlbumDetailInteractor()
+            interactor.albumUUID = albumUUID
             configure(viewController: viewController,
                       photoVideoBottomBarConfig: photoVideoBottomBarConfig,
                       documentsBottomBarConfig: documentsBottomBarConfig,
-                      interactor: PhotoVideoAlbumDetailInteractor(),
+                      interactor: interactor,
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.delete],
                       selecetedItem: selecetedItem, allItems: allItems)
         }

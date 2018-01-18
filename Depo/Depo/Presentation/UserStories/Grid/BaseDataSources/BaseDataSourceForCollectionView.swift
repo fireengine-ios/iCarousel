@@ -77,6 +77,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var needShowProgressInCell: Bool = false
     var needShowCloudIcon: Bool = true
     
+    var parentUUID: String?
+    
     private func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
         isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
@@ -957,6 +959,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func finishedUploadFile(file: WrapData){
+        if let unwrapedFilters = originalFilters,
+            isAlbumDetail(filters: unwrapedFilters) {
+            return
+        }
         
         let uuid = file.uuid
         file.isLocalItem = false
@@ -982,6 +988,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         
         if !needShowProgressInCell{
+            delegate?.needReloadData?()
             return
         }
         
@@ -1061,12 +1068,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             var serverObjects = [Item]()
             
             for object in items{
-                if object.isLocalItem {
+                if object.isLocalItem{
                     objectsForRemoving.append(object)
                 }else{
                     serverObjects.append(object)
                 }
             }
+            
             
             var serversUUIDs = [String]()
             for array in allItems{
@@ -1232,6 +1240,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         allLocalItems.append(contentsOf: items)
         delegate?.needReloadData?()
+    }
+    
+    func filesRomovedFromAlbum(items: [Item], albumUUID: String){
+        if let uuid = parentUUID, uuid == albumUUID{
+            deleteItems(items: items)
+        }
     }
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {

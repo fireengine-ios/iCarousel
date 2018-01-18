@@ -64,6 +64,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
        
         dataSource.delegate = self
         dataSource.needShowProgressInCell = needShowProgressInCells
+        dataSource.parentUUID = interactor.getFolder()?.uuid
+        if let albumInteractor = interactor as? AlbumDetailInteractor {
+            dataSource.parentUUID = albumInteractor.album?.uuid
+        }
         
         if let displayingType = topBarConfig {
             type = displayingType.defaultGridListViewtype

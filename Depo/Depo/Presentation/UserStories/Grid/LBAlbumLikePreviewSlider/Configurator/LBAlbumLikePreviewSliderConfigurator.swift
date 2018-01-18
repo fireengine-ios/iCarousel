@@ -37,6 +37,7 @@ class LBAlbumLikePreviewSliderModuleConfigurator {
 
         let interactor = LBAlbumLikePreviewSliderInteractor()
         interactor.output = presenter
+        ItemOperationManager.default.startUpdateView(view: interactor)
 
         presenter.interactor = interactor
         viewController.output = presenter

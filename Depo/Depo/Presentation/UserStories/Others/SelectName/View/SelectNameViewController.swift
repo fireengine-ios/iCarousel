@@ -76,18 +76,7 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
     
     @objc func onNextButton(){
         textField.resignFirstResponder()
-        
-        var flag = false
-        if let string = textField.text{
-            if (string.count != 0) {
-                output.onNextButton(name: string)
-                flag = true
-            }
-        }
-        
-        if (!flag){
-            UIApplication.showErrorAlert(message: output.getTextForEmptyTextFieldAllert())
-        }
+        output.onNextButton(name: textField.text ?? "")
     }
     
     

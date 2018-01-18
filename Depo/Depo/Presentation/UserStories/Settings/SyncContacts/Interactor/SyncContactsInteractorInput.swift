@@ -10,5 +10,4 @@ import Foundation
 
 protocol SyncContactsInteractorInput {
     func startOperation(operationType: SyncOperationType)
-    func getLastBackUpDate()
 }

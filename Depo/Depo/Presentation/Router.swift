@@ -250,10 +250,21 @@ class RouterVC: NSObject {
     
     //MARK: SyncContacts
     
-    var syncContacts: UIViewController? {
+    var syncContacts: UIViewController {
         let viewController = SyncContactsModuleInitializer.initializeViewController(with: "SyncContactsViewController")
         return viewController
-        
+    }
+    
+    var manageContacts: UIViewController {
+        let viewController = ManageContactsModuleInitializer.initializeViewController(with: "ManageContactsViewController")
+        return viewController
+    }
+    
+    func duplicatedContacts(analyzeResponse: [ContactSync.AnalyzedContact], moduleOutput: DuplicatedContactsModuleOutput?) -> UIViewController {
+        let viewController = DuplicatedContactsModuleInitializer.initializeViewController(with: "DuplicatedContactsViewController",
+                                                                                          analyzeResponse: analyzeResponse,
+                                                                                          moduleOutput: moduleOutput)
+        return viewController
     }
     
     //MARK: Terms
@@ -505,10 +516,11 @@ class RouterVC: NSObject {
         return c
     }
     
-    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
+    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                          selectedItem: fileObject,
-                                                                                         allItems: items)
+                                                                                         allItems: items,
+                                                                                         albumUUID: albumUUID)
         let c = controller as! PhotoVideoDetailViewController
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
@@ -561,7 +573,7 @@ class RouterVC: NSObject {
         let rightController = syncContacts
         
         //let splitContr = SplitIpadViewContoller()
-        splitContr.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController!])
+        splitContr.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController])
         
         let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitContr.getSplitVC())
         return containerController

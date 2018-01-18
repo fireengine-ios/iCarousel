@@ -249,14 +249,6 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     //MARK: UploadNotificationManagerProtocol
     
-    func startUploadFile(file: WrapData){
-        
-    }
-    
-    func setProgressForUploadingFile(file: WrapData, progress: Float){
-        
-    }
-    
     func finishedUploadFile(file: WrapData){
         print("uploaded object with uuid - ", file.uuid)
         if (isSearchRunning){
@@ -303,14 +295,6 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
     }
     
-    func addFilesToFavorites(items: [Item]){
-        
-    }
-    
-    func removeFileFromFavorites(items: [Item]){
-        
-    }
-    
     func deleteItems(items: [Item]){
         if (isSearchRunning){
             needSearchAgain = true
@@ -340,22 +324,6 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             CardsManager.default.stopOperationWithType(type: .freeAppSpace)
             CardsManager.default.stopOperationWithType(type: .freeAppSpaceWarning)
         }
-    }
-    
-    func newFolderCreated(){
-        
-    }
-    
-    func newAlbumCreated(){
-        
-    }
-    
-    func albumsDeleted(albums: [AlbumItem]){
-        
-    }
-    
-    func fileAddedToAlbum(){
-        
     }
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool{

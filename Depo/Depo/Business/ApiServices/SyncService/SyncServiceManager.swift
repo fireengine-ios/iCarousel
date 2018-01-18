@@ -25,7 +25,7 @@ class SyncServiceManager {
     private var lastAutoSyncTime: TimeInterval = 0
     private var timeIntervalBetweenSyncs: TimeInterval = NumericConstants.timeIntervalBetweenAutoSync
     
-    private var networkIsUnreachable = false
+//    private var networkIsUnreachable = false
     
     private var isSyncStoped: Bool {
         return (photoSyncService.status == .stoped && videoSyncService.status == .stoped)
@@ -39,7 +39,7 @@ class SyncServiceManager {
         return (photoSyncService.status == .synced && videoSyncService.status == .synced)
     }
     
-    private var hasSyncCancelled: Bool {
+    private var hasSyncStoped: Bool {
         return (photoSyncService.status == .stoped || videoSyncService.status == .stoped)
     }
     
@@ -170,7 +170,7 @@ class SyncServiceManager {
             }
             
             if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
-                self.networkIsUnreachable = false
+//                self.networkIsUnreachable = false
                 if reachability.connection == .wifi {
                     self.start(photo: true, video: true)
                 } else if reachability.connection == .cellular {
@@ -183,13 +183,13 @@ class SyncServiceManager {
                     }
                 }
             } else {
-                self.networkIsUnreachable = true
-                self.dispatchQueue.asyncAfter(deadline: .now() + .seconds(1), execute: { [weak self] in
-                    guard let `self` = self, self.networkIsUnreachable else {
-                        return
-                    }
+//                self.networkIsUnreachable = true
+//                self.dispatchQueue.asyncAfter(deadline: .now() + .seconds(1), execute: { [weak self] in
+//                    guard let `self` = self, self.networkIsUnreachable else {
+//                        return
+//                    }
                     self.stop(reachabilityDidChange: true, photo: true, video: true)
-                })
+//                })
             }
         }
     }
@@ -274,7 +274,7 @@ extension SyncServiceManager {
             return
         }
         
-        if hasFailedSync || hasSyncCancelled {
+        if hasFailedSync || hasSyncStoped {
             //TODO: show error?
         }
     }

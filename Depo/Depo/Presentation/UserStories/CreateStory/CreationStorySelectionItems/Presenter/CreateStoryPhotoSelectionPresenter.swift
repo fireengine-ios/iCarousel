@@ -28,11 +28,12 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     }
     
     override func viewWillDisappear() {
-        
+        super.viewWillDisappear()
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int){
-        //view.setTitle(title: "", subTitle: "")
+        startEditing()
+        super.onChangeSelectedItemsCount(selectedItemsCount: selectedItemsCount)
     }
     
     override func onMaxSelectionExeption(){
@@ -70,5 +71,9 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     
     override func needShowNoFileView() -> Bool {
         return dataSource.getAllObjects().count == 0
+    }
+    
+    private func startEditing() {
+        dataSource.setSelectionState(selectionState: true)
     }
 }

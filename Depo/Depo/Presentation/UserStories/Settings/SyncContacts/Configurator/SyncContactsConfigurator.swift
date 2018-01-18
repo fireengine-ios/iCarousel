@@ -11,14 +11,12 @@ import UIKit
 class SyncContactsModuleConfigurator {
 
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
-
         if let viewController = viewInput as? SyncContactsViewController {
             configure(viewController: viewController)
         }
     }
 
     private func configure(viewController: SyncContactsViewController) {
-
         let router = SyncContactsRouter()
 
         let presenter = SyncContactsPresenter()

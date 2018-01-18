@@ -15,7 +15,7 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToContactSync(){
-        router.pushViewController(viewController:router.syncContacts!)
+        router.pushViewController(viewController:router.syncContacts)
     }
     
     func goToImportPhotos() {

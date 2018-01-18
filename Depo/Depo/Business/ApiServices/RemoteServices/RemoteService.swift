@@ -133,7 +133,7 @@ class RemoteItemsService {
         let parametrs = SuggestionParametrs(withText: text)
         remote.suggestion(param: parametrs, success: { suggestList in
             log.debug("RemoteItemsService getSuggestion SearchService suggestion success")
-
+            
             success((suggestList as! SuggestionResponse).list)
         }) { (error) in
             log.debug("RemoteItemsService getSuggestion SearchService suggestion fail")
@@ -171,7 +171,6 @@ class NextPageOperation: Operation {
     }
     
     override func main() {
-        
         if isCancelled {
             return
         }
@@ -183,7 +182,8 @@ class NextPageOperation: Operation {
             }
             
             if self.isRealCancel {
-                self.fail?()
+                //TODO: check if we need it
+//                self.fail?()
                 semaphore.signal()
                 return
             }

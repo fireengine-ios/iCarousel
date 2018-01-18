@@ -205,6 +205,7 @@ extension UIViewController {
 
             self.navigationItem.titleView = customTitleView
         } else {
+            self.navigationItem.titleView = nil
             self.navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
             self.navigationItem.title = title
         }

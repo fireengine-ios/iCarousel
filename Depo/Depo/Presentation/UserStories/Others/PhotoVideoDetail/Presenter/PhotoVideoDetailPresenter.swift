@@ -107,7 +107,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch type {
         case .delete, .removeFromAlbum:
-            interactor.deleteSelectedItem()
+            interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
         default:
