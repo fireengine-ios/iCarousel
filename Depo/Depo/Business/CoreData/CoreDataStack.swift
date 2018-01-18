@@ -38,7 +38,7 @@ class CoreDataStack: NSObject {
     }()
     
 //    var appendingItemsFinishBlock: AppendingLocaclItemsFinishCallback?
-//    var isAppendingLocalFilesFinished = false
+    var inProcessAppendingLocalFiles = false
 
     var mainContext: NSManagedObjectContext
     

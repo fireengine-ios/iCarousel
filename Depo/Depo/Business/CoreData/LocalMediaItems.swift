@@ -29,9 +29,12 @@ extension CoreDataStack {
     func insertFromPhotoFramework(allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
         let localMediaStorage = LocalMediaStorage.default
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
-            guard accessGranted, let `self` = self else {
+            guard accessGranted, let `self` = self,
+                self.inProcessAppendingLocalFiles else {
                 return
             }
+            
+            self.inProcessAppendingLocalFiles = true
             
             let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
             
@@ -66,6 +69,7 @@ extension CoreDataStack {
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)
 //            self.isAppendingLocalFilesFinished = true
 //            self.appendingItemsFinishBlock?()
+            self.inProcessAppendingLocalFiles = false
             allItemsAddedCallBack?()
             let finish = Date().timeIntervalSince1970
             debugPrint("All images and videos have been saved in \(finish - start) seconds")
