@@ -6,25 +6,22 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
-
+class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
+    
     weak var view: SyncContactsViewInput!
     var interactor: SyncContactsInteractorInput!
     var router: SyncContactsRouterInput!
 
-    var backupAvailable: Bool = false
+    var isBackUpAvailable: Bool = false
     
     //MARK: view out
     func viewIsReady() {
-        view.setupInitialState()
+        view.setInitialState()
+        startOperation(operationType: .getBackUpStatus)
     }
     
-    func getDateLastUpdate(){
-        interactor.getLastBackUpDate()
-    }
-    
-    func startOperation(operationType: SyncOperationType){
-        if backupAvailable, operationType == .backup {
+    func startOperation(operationType: SyncOperationType) {
+        if isBackUpAvailable, operationType == .backup {
             let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
                                                   message: TextConstants.errorAlertTextBackupAlreadyExist,
                                                   image: .error,
@@ -33,31 +30,86 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
                                                   secondAction: { [weak self] vc in
                                                     vc.close { [weak self] in
                                                         self?.interactor.startOperation(operationType: .backup)
+                                                        self?.view.setOperationState(operationType: operationType)
                                                     }
             })
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
-            return
+            
+        } else {
+            view.setOperationState(operationType: operationType)
+            interactor.startOperation(operationType: operationType)
         }
-        
-        interactor.startOperation(operationType: operationType)
     }
     
-    //MARK: interactor out
+    //MARK: Interactor Output
     
-    func showError(errorType: SyncOperationErrors){
-        
+    func showError(errorType: SyncOperationErrors) {
+        view.setStateWithoutBackUp()
+        isBackUpAvailable = false
     }
     
-    func showProggress(progress :Int, forOperation operation: SyncOperationType){
+    func showProggress(progress: Int, forOperation operation: SyncOperationType) {
         view.showProggress(progress: progress, forOperation: operation)
     }
     
-    func succes(object: ContactSyncResposeModel, forOperation operation: SyncOperationType){
-        view.succes(object: object, forOperation: operation)
+    func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
+        isBackUpAvailable = true
+        view.success(response: response, forOperation: operation)
     }
     
-    func lastBackUpDateResponse(response: Date?){
-        backupAvailable = response == nil ? false : true
-        view.setDateLastBacup(dateLastBacup: response)
+    func analyzeSuccess(response: [ContactSync.AnalyzedContact]) {
+        if response.count > 0 {
+            router.goToDuplicatedContacts(with: response, moduleOutput: self)
+        } else {
+            let controller = PopUpController.with(title: "",
+                                 message: TextConstants.errorAlertTextNoDuplicatedContacts,
+                                 image: .none, buttonTitle: TextConstants.ok)
+            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            interactor.startOperation(operationType: .cancel)
+        }
+    }
+    
+    func cancelSuccess() {
+        guard let view = view else { return }
+        
+        if isBackUpAvailable {
+            view.setStateWithBackUp()
+        } else {
+            view.setStateWithoutBackUp()
+        }
+    }
+    
+    func onManageContacts() {
+        router.goToManageContacts()
+    }
+    
+    func onDeinit() {
+        interactor.startOperation(operationType: .cancel)
+    }
+    
+    func showNoBackUp() {
+        view.setStateWithoutBackUp()
+    }
+    
+    func asyncOperationStarted() {
+        outputView()?.showSpiner()
+    }
+    
+    func asyncOperationFinished() {
+        outputView()?.hideSpiner()
+    }
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
+    }
+}
+
+extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
+    func cancelDeletingDuplicatedContacts() {
+        interactor.startOperation(operationType: .cancel)
+    }
+    
+    func deleteDuplicatedContacts() {
+        interactor.startOperation(operationType: .deleteDuplicated)
     }
 }

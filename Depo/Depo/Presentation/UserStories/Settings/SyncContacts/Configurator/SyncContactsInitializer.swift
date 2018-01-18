@@ -10,9 +10,6 @@ import UIKit
 
 class SyncContactsModuleInitializer: NSObject {
 
-    //Connect with object on storyboard
-    @IBOutlet weak var synccontactsViewController: SyncContactsViewController!
-
     class func initializeViewController(with nibName:String) -> UIViewController {
         let viewController = SyncContactsViewController(nibName: nibName, bundle: nil)
         let configurator = SyncContactsModuleConfigurator()

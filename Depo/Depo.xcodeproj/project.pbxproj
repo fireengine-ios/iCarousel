@@ -128,14 +128,49 @@
 		77CF7B297D6D1B75D73CACBC /* SelectNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */; };
 		780400F91FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780400F71FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift */; };
 		780400FA1FE7E6FB00560EEF /* SuggestionTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 780400F81FE7E6FB00560EEF /* SuggestionTableSectionHeader.xib */; };
+		78052962200DCDA70051FA78 /* ManageContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78052960200DCDA70051FA78 /* ManageContactTableViewCell.swift */; };
+		78052963200DCDA70051FA78 /* ManageContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78052961200DCDA70051FA78 /* ManageContactTableViewCell.xib */; };
+		78052965200DD3470051FA78 /* ManageContactsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78052964200DD3470051FA78 /* ManageContactsModels.swift */; };
 		7809A32D1FED09EF00954A5F /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7809A32C1FED09EF00954A5F /* AsyncOperation.swift */; };
+		780ACF9B2004D6D2009CA4F5 /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 780ACF992004D6D1009CA4F5 /* AnalyzeStatus.m */; };
 		781839861FE9140E0046D73C /* FileForDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781839851FE9140E0046D73C /* FileForDownload.swift */; };
 		7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A18BA44717122453DCA565 /* LBAlbumLikePreviewSliderViewOutput.swift */; };
 		782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */; };
+		7859298A20060E7D003F8AB3 /* ManageContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7859298620060E7D003F8AB3 /* ManageContactsViewController.xib */; };
+		7859298B20060E7D003F8AB3 /* ManageContactsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298720060E7D003F8AB3 /* ManageContactsViewOutput.swift */; };
+		7859298C20060E7D003F8AB3 /* ManageContactsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298820060E7D003F8AB3 /* ManageContactsViewInput.swift */; };
+		7859298D20060E7D003F8AB3 /* ManageContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298920060E7D003F8AB3 /* ManageContactsViewController.swift */; };
+		7859299020060E85003F8AB3 /* ManageContactsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298E20060E84003F8AB3 /* ManageContactsRouterInput.swift */; };
+		7859299120060E85003F8AB3 /* ManageContactsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859298F20060E84003F8AB3 /* ManageContactsRouter.swift */; };
+		7859299420060E8B003F8AB3 /* ManageContactsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299220060E8A003F8AB3 /* ManageContactsPresenter.swift */; };
+		7859299520060E8B003F8AB3 /* ManageContactsModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299320060E8A003F8AB3 /* ManageContactsModuleInput.swift */; };
+		7859299920060E94003F8AB3 /* ManageContactsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299620060E93003F8AB3 /* ManageContactsInteractor.swift */; };
+		7859299A20060E94003F8AB3 /* ManageContactsInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299720060E93003F8AB3 /* ManageContactsInteractorInput.swift */; };
+		7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */; };
+		7859299E20060E9C003F8AB3 /* ManageContactsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299C20060E9C003F8AB3 /* ManageContactsInitializer.swift */; };
+		7859299F20060E9C003F8AB3 /* ManageContactsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */; };
 		786AA87724BCB7349231EF0C /* HomeHeaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */; };
 		78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */; };
 		787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
+		78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */; };
+		78B02CBD200D1AD500D11CD2 /* ContactSyncResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */; };
+		78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */; };
 		78D6C8FF1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */; };
+		78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */; };
+		78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */; };
+		78D9BA382007E7F100F2233F /* DuplicatedContactsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA352007E7EE00F2233F /* DuplicatedContactsInteractorOutput.swift */; };
+		78D9BA392007E7F100F2233F /* DuplicatedContactsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA362007E7EF00F2233F /* DuplicatedContactsInteractor.swift */; };
+		78D9BA3A2007E7F100F2233F /* DuplicatedContactsInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA372007E7EF00F2233F /* DuplicatedContactsInteractorInput.swift */; };
+		78D9BA3D2007E80600F2233F /* DuplicatedContactsModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA3B2007E80400F2233F /* DuplicatedContactsModuleInput.swift */; };
+		78D9BA3E2007E80600F2233F /* DuplicatedContactsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA3C2007E80500F2233F /* DuplicatedContactsPresenter.swift */; };
+		78D9BA412007E81200F2233F /* DuplicatedContactsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA3F2007E81000F2233F /* DuplicatedContactsRouterInput.swift */; };
+		78D9BA422007E81200F2233F /* DuplicatedContactsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA402007E81100F2233F /* DuplicatedContactsRouter.swift */; };
+		78D9BA472007E82800F2233F /* DuplicatedContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78D9BA432007E82600F2233F /* DuplicatedContactsViewController.xib */; };
+		78D9BA482007E82800F2233F /* DuplicatedContactsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA442007E82700F2233F /* DuplicatedContactsViewInput.swift */; };
+		78D9BA492007E82800F2233F /* DuplicatedContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA452007E82700F2233F /* DuplicatedContactsViewController.swift */; };
+		78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */; };
+		78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */; };
+		78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */; };
 		7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */; };
 		7C00FE191F5957570041D041 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE161F5957570041D041 /* AppRater.bundle */; };
 		7C00FE1A1F5957570041D041 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00FE181F5957570041D041 /* AppRater.m */; };
@@ -1294,7 +1329,7 @@
 		8C0E8C931FDEBDFF00789C91 /* PasscodeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2371FB99AF800C3D67F /* PasscodeSettingsViewController.swift */; };
 		8C0E8C941FDEBDFF00789C91 /* HomePageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FAF1EFD4F0D00A405B2 /* HomePageViewOutput.swift */; };
 		8C0E8C951FDEBDFF00789C91 /* CurioConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6031DDDD0F600FFE63E /* CurioConstants.m */; };
-		8C0E8C961FDEBDFF00789C91 /* ContactSyncResposeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF792AA1F10C65E00007719 /* ContactSyncResposeModel.swift */; };
+		8C0E8C961FDEBDFF00789C91 /* ContactSyncModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */; };
 		8C0E8C971FDEBDFF00789C91 /* SubscriptionPlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47864031F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift */; };
 		8C0E8C981FDEBDFF00789C91 /* WiFiSyncInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8E71F0288CA0028F51A /* WiFiSyncInteractorOutput.swift */; };
 		8C0E8C991FDEBDFF00789C91 /* CollectionViewCellDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAB66DC1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift */; };
@@ -2344,7 +2379,7 @@
 		8CD8F4F11F1CC3FD00F1257B /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F01F1CC3FD00F1257B /* FloatingView.swift */; };
 		8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */; };
 		8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */; };
-		8CF792AB1F10C65E00007719 /* ContactSyncResposeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF792AA1F10C65E00007719 /* ContactSyncResposeModel.swift */; };
+		8CF792AB1F10C65E00007719 /* ContactSyncModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */; };
 		8CF87D5D1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF87D5C1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib */; };
 		8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF87D5E1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift */; };
 		8CF89EF91F1351A800F1A2D0 /* LoginPhoneMailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF89EF81F1351A800F1A2D0 /* LoginPhoneMailCell.swift */; };
@@ -3211,13 +3246,49 @@
 		7750D1860EF1326BD6776D8E /* SplashConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashConfigurator.swift; sourceTree = "<group>"; };
 		780400F71FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableSectionHeader.swift; sourceTree = "<group>"; };
 		780400F81FE7E6FB00560EEF /* SuggestionTableSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionTableSectionHeader.xib; sourceTree = "<group>"; };
+		78052960200DCDA70051FA78 /* ManageContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageContactTableViewCell.swift; sourceTree = "<group>"; };
+		78052961200DCDA70051FA78 /* ManageContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageContactTableViewCell.xib; sourceTree = "<group>"; };
+		78052964200DD3470051FA78 /* ManageContactsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageContactsModels.swift; sourceTree = "<group>"; };
 		7809A32C1FED09EF00954A5F /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		780ACF992004D6D1009CA4F5 /* AnalyzeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeStatus.m; sourceTree = "<group>"; };
+		780ACF9A2004D6D1009CA4F5 /* AnalyzeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeStatus.h; sourceTree = "<group>"; };
 		781839851FE9140E0046D73C /* FileForDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileForDownload.swift; sourceTree = "<group>"; };
 		782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesService.swift; sourceTree = "<group>"; };
+		7859298620060E7D003F8AB3 /* ManageContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ManageContactsViewController.xib; sourceTree = "<group>"; };
+		7859298720060E7D003F8AB3 /* ManageContactsViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsViewOutput.swift; sourceTree = "<group>"; };
+		7859298820060E7D003F8AB3 /* ManageContactsViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsViewInput.swift; sourceTree = "<group>"; };
+		7859298920060E7D003F8AB3 /* ManageContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsViewController.swift; sourceTree = "<group>"; };
+		7859298E20060E84003F8AB3 /* ManageContactsRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsRouterInput.swift; sourceTree = "<group>"; };
+		7859298F20060E84003F8AB3 /* ManageContactsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsRouter.swift; sourceTree = "<group>"; };
+		7859299220060E8A003F8AB3 /* ManageContactsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsPresenter.swift; sourceTree = "<group>"; };
+		7859299320060E8A003F8AB3 /* ManageContactsModuleInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsModuleInput.swift; sourceTree = "<group>"; };
+		7859299620060E93003F8AB3 /* ManageContactsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInteractor.swift; sourceTree = "<group>"; };
+		7859299720060E93003F8AB3 /* ManageContactsInteractorInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInteractorInput.swift; sourceTree = "<group>"; };
+		7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInteractorOutput.swift; sourceTree = "<group>"; };
+		7859299C20060E9C003F8AB3 /* ManageContactsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInitializer.swift; sourceTree = "<group>"; };
+		7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsConfigurator.swift; sourceTree = "<group>"; };
 		78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarActionHandler.swift; sourceTree = "<group>"; };
 		787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailModuleOutput.swift; sourceTree = "<group>"; };
+		78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsModuleOutput.swift; sourceTree = "<group>"; };
+		78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncResponse.swift; sourceTree = "<group>"; };
+		78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncParametrs.swift; sourceTree = "<group>"; };
 		78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
+		78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsConfigurator.swift; sourceTree = "<group>"; };
+		78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsInitializer.swift; sourceTree = "<group>"; };
+		78D9BA352007E7EE00F2233F /* DuplicatedContactsInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsInteractorOutput.swift; sourceTree = "<group>"; };
+		78D9BA362007E7EF00F2233F /* DuplicatedContactsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsInteractor.swift; sourceTree = "<group>"; };
+		78D9BA372007E7EF00F2233F /* DuplicatedContactsInteractorInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsInteractorInput.swift; sourceTree = "<group>"; };
+		78D9BA3B2007E80400F2233F /* DuplicatedContactsModuleInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsModuleInput.swift; sourceTree = "<group>"; };
+		78D9BA3C2007E80500F2233F /* DuplicatedContactsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsPresenter.swift; sourceTree = "<group>"; };
+		78D9BA3F2007E81000F2233F /* DuplicatedContactsRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsRouterInput.swift; sourceTree = "<group>"; };
+		78D9BA402007E81100F2233F /* DuplicatedContactsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsRouter.swift; sourceTree = "<group>"; };
+		78D9BA432007E82600F2233F /* DuplicatedContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DuplicatedContactsViewController.xib; sourceTree = "<group>"; };
+		78D9BA442007E82700F2233F /* DuplicatedContactsViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewInput.swift; sourceTree = "<group>"; };
+		78D9BA452007E82700F2233F /* DuplicatedContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewController.swift; sourceTree = "<group>"; };
+		78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewOutput.swift; sourceTree = "<group>"; };
 		78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorInput.swift; sourceTree = "<group>"; };
+		78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactTableViewCell.swift; sourceTree = "<group>"; };
+		78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DuplicatedContactTableViewCell.xib; sourceTree = "<group>"; };
 		797B0A89F74D79DE19756139 /* IntroducePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroducePresenter.swift; sourceTree = "<group>"; };
 		7A39EC58D2D1F5BD26616C89 /* PhotoVideoDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailViewController.swift; sourceTree = "<group>"; };
 		7A7ECB6D4F000A77B89C5008 /* BaseFilesGreedConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedConfigurator.swift; sourceTree = "<group>"; };
@@ -4276,7 +4347,7 @@
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
-		8CF792AA1F10C65E00007719 /* ContactSyncResposeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactSyncResposeModel.swift; sourceTree = "<group>"; };
+		8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactSyncModels.swift; sourceTree = "<group>"; };
 		8CF87D5C1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBAlbumLikePreviewSliderViewController.xib; sourceTree = "<group>"; };
 		8CF87D5E1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderDataStorage.swift; sourceTree = "<group>"; };
 		8CF89EF81F1351A800F1A2D0 /* LoginPhoneMailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPhoneMailCell.swift; sourceTree = "<group>"; };
@@ -5767,8 +5838,6 @@
 		5B9EDC8F04B49066C30CC5A9 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				8CF792A91F10C65E00007719 /* Model */,
-				8CFF86951F0FA80A00520D18 /* Services */,
 				B0E129D217E4E979AFF5939D /* SyncContactsInteractorInput.swift */,
 				BBC08749C42535A16BE62A26 /* SyncContactsInteractorOutput.swift */,
 				6798035E9D982957494A8509 /* SyncContactsInteractor.swift */,
@@ -5988,6 +6057,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7805295F200DCD870051FA78 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				78052960200DCDA70051FA78 /* ManageContactTableViewCell.swift */,
+				78052961200DCDA70051FA78 /* ManageContactTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		7809A32B1FED09C500954A5F /* Concurrency */ = {
 			isa = PBXGroup;
 			children = (
@@ -6002,6 +6080,68 @@
 				782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */,
 			);
 			path = RecentSearchesService;
+			sourceTree = "<group>";
+		};
+		7859297620060D72003F8AB3 /* ManageContacts */ = {
+			isa = PBXGroup;
+			children = (
+				7805295F200DCD870051FA78 /* Cells */,
+				7859298520060E6B003F8AB3 /* View */,
+				7859298420060E5B003F8AB3 /* Router */,
+				7859298320060E4C003F8AB3 /* Presenter */,
+				7859298220060E2C003F8AB3 /* Interactor */,
+				7859298120060DF8003F8AB3 /* Configurator */,
+			);
+			path = ManageContacts;
+			sourceTree = "<group>";
+		};
+		7859298120060DF8003F8AB3 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */,
+				7859299C20060E9C003F8AB3 /* ManageContactsInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		7859298220060E2C003F8AB3 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				7859299620060E93003F8AB3 /* ManageContactsInteractor.swift */,
+				7859299720060E93003F8AB3 /* ManageContactsInteractorInput.swift */,
+				7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */,
+				78052964200DD3470051FA78 /* ManageContactsModels.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		7859298320060E4C003F8AB3 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7859299320060E8A003F8AB3 /* ManageContactsModuleInput.swift */,
+				7859299220060E8A003F8AB3 /* ManageContactsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7859298420060E5B003F8AB3 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7859298E20060E84003F8AB3 /* ManageContactsRouterInput.swift */,
+				7859298F20060E84003F8AB3 /* ManageContactsRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		7859298520060E6B003F8AB3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7859298920060E7D003F8AB3 /* ManageContactsViewController.swift */,
+				7859298620060E7D003F8AB3 /* ManageContactsViewController.xib */,
+				7859298820060E7D003F8AB3 /* ManageContactsViewInput.swift */,
+				7859298720060E7D003F8AB3 /* ManageContactsViewOutput.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		78D1DECF2CF16509DB6F1EAD /* View */ = {
@@ -6023,6 +6163,68 @@
 			path = GestureRecognizer;
 			sourceTree = "<group>";
 		};
+		78D9BA2B2007E73A00F2233F /* DuplicatedContacts */ = {
+			isa = PBXGroup;
+			children = (
+				78FA7AD02008D57200E0747F /* Cells */,
+				78D9BA2C2007E75000F2233F /* View */,
+				78D9BA2D2007E75600F2233F /* Router */,
+				78D9BA2E2007E75F00F2233F /* Presenter */,
+				78D9BA2F2007E76600F2233F /* Interactor */,
+				78D9BA302007E76F00F2233F /* Configurator */,
+			);
+			path = DuplicatedContacts;
+			sourceTree = "<group>";
+		};
+		78D9BA2C2007E75000F2233F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				78D9BA452007E82700F2233F /* DuplicatedContactsViewController.swift */,
+				78D9BA432007E82600F2233F /* DuplicatedContactsViewController.xib */,
+				78D9BA442007E82700F2233F /* DuplicatedContactsViewInput.swift */,
+				78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		78D9BA2D2007E75600F2233F /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				78D9BA3F2007E81000F2233F /* DuplicatedContactsRouterInput.swift */,
+				78D9BA402007E81100F2233F /* DuplicatedContactsRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		78D9BA2E2007E75F00F2233F /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				78D9BA3B2007E80400F2233F /* DuplicatedContactsModuleInput.swift */,
+				78D9BA3C2007E80500F2233F /* DuplicatedContactsPresenter.swift */,
+				78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		78D9BA2F2007E76600F2233F /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				78D9BA362007E7EF00F2233F /* DuplicatedContactsInteractor.swift */,
+				78D9BA372007E7EF00F2233F /* DuplicatedContactsInteractorInput.swift */,
+				78D9BA352007E7EE00F2233F /* DuplicatedContactsInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		78D9BA302007E76F00F2233F /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */,
+				78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
 		78F37C0756C82A69B3457241 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -6030,6 +6232,15 @@
 				264BDDE222D06B0A452F4DF7 /* PhotoVideoDetailRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		78FA7AD02008D57200E0747F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */,
+				78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		796EC0788CE39CDF0AE1A1E0 /* Router */ = {
@@ -8320,14 +8531,6 @@
 			path = ContainerNavVC;
 			sourceTree = "<group>";
 		};
-		8CF792A91F10C65E00007719 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8CF792AA1F10C65E00007719 /* ContactSyncResposeModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		8CF89EF71F13516E00F1A2D0 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -8384,6 +8587,8 @@
 		8CFF866F1F0F96E600520D18 /* ContactSyncSDK */ = {
 			isa = PBXGroup;
 			children = (
+				780ACF9A2004D6D1009CA4F5 /* AnalyzeStatus.h */,
+				780ACF992004D6D1009CA4F5 /* AnalyzeStatus.m */,
 				8CFF86701F0F96E600520D18 /* Contact.h */,
 				8CFF86711F0F96E600520D18 /* Contact.m */,
 				8CFF86721F0F96E600520D18 /* ContactDevice.h */,
@@ -8413,12 +8618,15 @@
 			path = ContactSyncSDK;
 			sourceTree = "<group>";
 		};
-		8CFF86951F0FA80A00520D18 /* Services */ = {
+		8CFF86951F0FA80A00520D18 /* ContactsSyncService */ = {
 			isa = PBXGroup;
 			children = (
 				8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */,
+				8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */,
+				78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */,
+				78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */,
 			);
-			path = Services;
+			path = ContactsSyncService;
 			sourceTree = "<group>";
 		};
 		8DCB215C1F3C6ABC00BAFE1E /* SearchViewController */ = {
@@ -9291,6 +9499,8 @@
 		CE3EB30D1FC7F512000B70D6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				78D9BA2B2007E73A00F2233F /* DuplicatedContacts */,
+				7859297620060D72003F8AB3 /* ManageContacts */,
 				8C06ABF720066640003D8E05 /* TurkcellSecurity */,
 				3C4921A13B9D2D3165521B9C /* Settings */,
 				3EABB6A70DB5801ACC311373 /* SettingsIpad */,
@@ -9387,6 +9597,7 @@
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				8CFF86951F0FA80A00520D18 /* ContactsSyncService */,
 				CE08BDDF1FC8403B00440CA0 /* Authentication */,
 				CE51A0C71EF8ED38005DCEE0 /* AuthenticationService */,
 				CE51A0D11EF8F308005DCEE0 /* RequestService */,
@@ -11433,6 +11644,8 @@
 				7C3A745A1F07C28D00124DF5 /* BaseFileContentView.xib in Resources */,
 				CE51AEC41EF90853005DCEE0 /* RegistrationScreen.xib in Resources */,
 				CE8F44F81F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib in Resources */,
+				78D9BA472007E82800F2233F /* DuplicatedContactsViewController.xib in Resources */,
+				78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */,
 				87FB97B02008CBAF000D8E2B /* TitleView.xib in Resources */,
 				CE95ED4E1F516736002F923A /* HelpAndSupportHeaderView.xib in Resources */,
 				8C06AFA02008AD71003D8E05 /* focus@3x.png in Resources */,
@@ -11552,6 +11765,7 @@
 				8C06AC1A20066641003D8E05 /* TurkcellSecurityViewController.xib in Resources */,
 				8C06AF102008AD70003D8E05 /* checkbox_secili@2x.png in Resources */,
 				8C6EF8911F348B77002AC795 /* EditinglBar.xib in Resources */,
+				78052963200DCDA70051FA78 /* ManageContactTableViewCell.xib in Resources */,
 				7C0435081F4DBAAF00193C75 /* AlbumCollectionViewCell.xib in Resources */,
 				8C06AFF22008AD71003D8E05 /* kirmizi@2x.png in Resources */,
 				8C06B07E2008AD71003D8E05 /* paylas_linkedin@2x.png in Resources */,
@@ -11655,6 +11869,7 @@
 				8C06B00A2008AD71003D8E05 /* Kucuk_Selected@3x.png in Resources */,
 				8C06B12C2008AD72003D8E05 /* t_kucuk_selected@3x.png in Resources */,
 				8DCB21621F3C6C6500BAFE1E /* SearchView.xib in Resources */,
+				7859298A20060E7D003F8AB3 /* ManageContactsViewController.xib in Resources */,
 				8C06AFB62008AD71003D8E05 /* frekans_secili@2x.png in Resources */,
 				7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */,
 				8C06B0DC2008AD71003D8E05 /* sample_red@2x.png in Resources */,
@@ -12072,7 +12287,7 @@
 				8C0E8C931FDEBDFF00789C91 /* PasscodeSettingsViewController.swift in Sources */,
 				8C0E8C941FDEBDFF00789C91 /* HomePageViewOutput.swift in Sources */,
 				8C0E8C951FDEBDFF00789C91 /* CurioConstants.m in Sources */,
-				8C0E8C961FDEBDFF00789C91 /* ContactSyncResposeModel.swift in Sources */,
+				8C0E8C961FDEBDFF00789C91 /* ContactSyncModels.swift in Sources */,
 				8C0E8C971FDEBDFF00789C91 /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				8C0E8C981FDEBDFF00789C91 /* WiFiSyncInteractorOutput.swift in Sources */,
 				8CD2B3AE1FE7B37100280547 /* PhotoSyncService.swift in Sources */,
@@ -12955,6 +13170,7 @@
 				CE4363421F6FC43F004724BF /* ActivitiesByMinutesAndType.swift in Sources */,
 				CE4363431F6FC43F004724BF /* ActivityFileType.swift in Sources */,
 				CE4363441F6FC43F004724BF /* ActivityType.swift in Sources */,
+				78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */,
 				CEADDA9E1F234920001DDA8A /* FileServiceResponse.swift in Sources */,
 				7C66E8AD1F979C3300D98F27 /* CreateStoryPreviewModuleInput.swift in Sources */,
 				7C49881D1F3320420039C5F2 /* CreateStoryPhotosOrderViewController.swift in Sources */,
@@ -12993,6 +13209,7 @@
 				CE51AB361EF90853005DCEE0 /* CustomIOS7AlertView.m in Sources */,
 				EF1B60481FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				CE8F44F71F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.swift in Sources */,
+				78D9BA422007E81200F2233F /* DuplicatedContactsRouter.swift in Sources */,
 				8C7786881F3F38D9005CB432 /* MusicBar.swift in Sources */,
 				CEAE3FF21EFD517300A405B2 /* CustomTabBarItem.swift in Sources */,
 				8C6EF8901F348B77002AC795 /* EditinglBar.swift in Sources */,
@@ -13003,7 +13220,7 @@
 				CEAE3FBC1EFD4F0D00A405B2 /* HomePageViewOutput.swift in Sources */,
 				CE51AB3D1EF90853005DCEE0 /* CurioConstants.m in Sources */,
 				CEB76EB01FE9094700B679EB /* UIScrollView+Refresh.swift in Sources */,
-				8CF792AB1F10C65E00007719 /* ContactSyncResposeModel.swift in Sources */,
+				8CF792AB1F10C65E00007719 /* ContactSyncModels.swift in Sources */,
 				D47864041F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				7CD1F8F71F0288CA0028F51A /* WiFiSyncInteractorOutput.swift in Sources */,
 				B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */,
@@ -13038,6 +13255,7 @@
 				8C7786A21F3F38F0005CB432 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				7C4484FE1F0FC607003AF631 /* ButtonWithGrayCorner.swift in Sources */,
 				CE2F562E1F75548500F49DA1 /* SubscriptionParameters.swift in Sources */,
+				78B02CBD200D1AD500D11CD2 /* ContactSyncResponse.swift in Sources */,
 				CEAE3FF41EFD517300A405B2 /* TabBarViewController.swift in Sources */,
 				7C49881A1F3320420039C5F2 /* CreateStoryPhotosOrderPresenter.swift in Sources */,
 				7CD1F9181F0288DC0028F51A /* WelcomeModuleInput.swift in Sources */,
@@ -13100,6 +13318,7 @@
 				CE51ABCA1EF90853005DCEE0 /* Message.m in Sources */,
 				CE907A331F94D49900D2F8CE /* MediaPlayer.swift in Sources */,
 				8C6EF87A1F348B5C002AC795 /* BottomSelectionTabBarInteractorOutput.swift in Sources */,
+				7859298B20060E7D003F8AB3 /* ManageContactsViewOutput.swift in Sources */,
 				7C66E8AB1F979C3300D98F27 /* CreateStoryPreviewInteractor.swift in Sources */,
 				CE6FBFBC1FB2DC3F008FC18C /* AppDelegate.swift in Sources */,
 				7C355E1A1F00E920003B004C /* CollectionViewCellForController.swift in Sources */,
@@ -13107,6 +13326,7 @@
 				7CF6BDE11F0B97050066709E /* CollectionViewCellForAudio.swift in Sources */,
 				CE6DE7601FCC44F800C23CBD /* KeyboardLayoutConstraint.swift in Sources */,
 				CE51ABCD1EF90853005DCEE0 /* AutoSyncInitializer.swift in Sources */,
+				7859299420060E8B003F8AB3 /* ManageContactsPresenter.swift in Sources */,
 				7C49881B1F3320420039C5F2 /* CreateStoryPhotosOrderRouter.swift in Sources */,
 				CE51ABD01EF90853005DCEE0 /* UpdateServerIntegration.m in Sources */,
 				CE2F56231F7552A900F49DA1 /* ResizableCollectionView.swift in Sources */,
@@ -13120,6 +13340,7 @@
 				7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */,
 				CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */,
 				8CFF868B1F0F96E600520D18 /* ContactSyncSDK.m in Sources */,
+				78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */,
 				CE8F44E61F6AB59C0062C2E0 /* ActivityTimelineService.swift in Sources */,
 				7C4988191F3320420039C5F2 /* CreateStoryPhotosOrderModuleInput.swift in Sources */,
 				8DCB216E1F3C85CD00BAFE1E /* SearchViewInput.swift in Sources */,
@@ -13127,6 +13348,7 @@
 				CE51ABE91EF90853005DCEE0 /* AutoSyncDataStorage.swift in Sources */,
 				EFA74FB41FBF378F00CF946E /* PrintInitializer.swift in Sources */,
 				7CDABD061F1E3A6300C8CC16 /* UserProfileInitializer.swift in Sources */,
+				78D9BA3D2007E80600F2233F /* DuplicatedContactsModuleInput.swift in Sources */,
 				CE51ABEA1EF90853005DCEE0 /* BaseCellModel.swift in Sources */,
 				7CD1F9151F0288DC0028F51A /* WelcomeInteractor.swift in Sources */,
 				7CCAC5311FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
@@ -13155,6 +13377,7 @@
 				7C1F89921F70FFDF00740177 /* ViewForPopUp.swift in Sources */,
 				7C66E8AE1F979C3300D98F27 /* CreateStoryPreviewPresenter.swift in Sources */,
 				CE6DE7561FCBE84100C23CBD /* InstagramParametrs.swift in Sources */,
+				7859299F20060E9C003F8AB3 /* ManageContactsConfigurator.swift in Sources */,
 				CE24FB8B1F0B149D00C55188 /* CameraService.swift in Sources */,
 				8C06AC0A20066641003D8E05 /* TurkcellSecurityInitializer.swift in Sources */,
 				CE95ED4B1F516736002F923A /* HelpAndSupportConfigurator.swift in Sources */,
@@ -13164,6 +13387,8 @@
 				7C233CD51FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */,
 				8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */,
+				7859299020060E85003F8AB3 /* ManageContactsRouterInput.swift in Sources */,
+				78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */,
 				CE51AC0D1EF90853005DCEE0 /* UIAlertViewCustom.m in Sources */,
 				CE51AC151EF90853005DCEE0 /* UpdaterController.m in Sources */,
 				CE2976DD1FD58E2000350F3A /* LocalAlbumPresenter.swift in Sources */,
@@ -13185,11 +13410,13 @@
 				CE51AC351EF90853005DCEE0 /* CurioDB.m in Sources */,
 				CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */,
 				7CD1F8FA1F0288CA0028F51A /* WiFiSyncRouter.swift in Sources */,
+				78D9BA392007E7F100F2233F /* DuplicatedContactsInteractor.swift in Sources */,
 				CEB1CEAA1F21E11200C9DD8F /* SwiftyJSONExtension.swift in Sources */,
 				CECA95951F1610590054BDC0 /* RemoteDownloder.swift in Sources */,
 				7C634F9F1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift in Sources */,
 				7CD1F8F61F0288CA0028F51A /* WiFiSyncInteractorInput.swift in Sources */,
 				CEBB2DD61F76550A00D725F0 /* String+Int.swift in Sources */,
+				78D9BA412007E81200F2233F /* DuplicatedContactsRouterInput.swift in Sources */,
 				CE51AC3C1EF90853005DCEE0 /* CurioUtil.m in Sources */,
 				8C6FB6981F0B9F8400B552A3 /* CustomTabBar.swift in Sources */,
 				7CD1F9131F0288DC0028F51A /* WelcomeConfigurator.swift in Sources */,
@@ -13207,8 +13434,10 @@
 				CE27C31F1EF9515800D4D156 /* RouteRequests.swift in Sources */,
 				CE2F56161F7552A900F49DA1 /* PackagesInitializer.swift in Sources */,
 				CE51AC521EF90853005DCEE0 /* LoginDataStorage.swift in Sources */,
+				7859299920060E94003F8AB3 /* ManageContactsInteractor.swift in Sources */,
 				7C3A74391F04F4B800124DF5 /* BaseMediaContent.swift in Sources */,
 				CE51AC591EF90853005DCEE0 /* IntroduceSubView.swift in Sources */,
+				78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */,
 				8C3B70B81F31B0BC0019715A /* UIButtonExtension.swift in Sources */,
 				CE51AC641EF90853005DCEE0 /* LoginInteractorOutput.swift in Sources */,
 				D47863F21F3F18FA00EFDC6D /* UsageInfoInitializer.swift in Sources */,
@@ -13229,12 +13458,14 @@
 				8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */,
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
 				7CD1F8FC1F0288CA0028F51A /* WiFiSyncViewController.swift in Sources */,
+				78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */,
 				CE51AC7E1EF90853005DCEE0 /* LoginInitializer.swift in Sources */,
 				CEAD6BDE1F94EF320085FF30 /* Factory.swift in Sources */,
 				7C233CD31FD51E290013CCA0 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				CE95ED511F516736002F923A /* HelpAndSupportInteractorOutput.swift in Sources */,
 				8C0097141F6BDA6900FA069C /* MoreFilesActionsInteractorOutput.swift in Sources */,
 				8CFF868C1F0F96E600520D18 /* ContactUtil.m in Sources */,
+				780ACF9B2004D6D2009CA4F5 /* AnalyzeStatus.m in Sources */,
 				7CFE92FD1F601EB5008A3B72 /* SMS.swift in Sources */,
 				CEAE3FB81EFD4F0D00A405B2 /* HomePageRouterInput.swift in Sources */,
 				CEE1D1F61F714DFE0008F4CF /* MediaItem+CoreDataProperties.swift in Sources */,
@@ -13294,6 +13525,7 @@
 				CE51ACC71EF90853005DCEE0 /* RegistrationModuleInput.swift in Sources */,
 				CE51ACC81EF90853005DCEE0 /* RegistrationPresenter.swift in Sources */,
 				7CD1F8D91F0242FE0028F51A /* SimpleButtonWithBlueText.swift in Sources */,
+				78D9BA3A2007E7F100F2233F /* DuplicatedContactsInteractorInput.swift in Sources */,
 				CE51ACC91EF90853005DCEE0 /* RegistrationInteractorInput.swift in Sources */,
 				7CD1F91C1F0288DC0028F51A /* WelcomeViewController.swift in Sources */,
 				9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */,
@@ -13320,6 +13552,7 @@
 				CE37FF091F7BEB7600EF5FF1 /* PurchaseResult.swift in Sources */,
 				CE51ACCF1EF90853005DCEE0 /* RegistrationInitializer.swift in Sources */,
 				CE95ED501F516736002F923A /* HelpAndSupportInteractorInput.swift in Sources */,
+				78052965200DD3470051FA78 /* ManageContactsModels.swift in Sources */,
 				CE51ACD01EF90853005DCEE0 /* TermsAndServicesViewInput.swift in Sources */,
 				7C66E8B21F979C3300D98F27 /* CreateStoryPreviewViewIO.swift in Sources */,
 				CEAE3F981EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift in Sources */,
@@ -13401,6 +13634,7 @@
 				7C66E8A91F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift in Sources */,
 				8C06AC1220066641003D8E05 /* TurkcellSecurityPresenter.swift in Sources */,
 				EF1B60461FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
+				7859298D20060E7D003F8AB3 /* ManageContactsViewController.swift in Sources */,
 				CE51ACF11EF90853005DCEE0 /* PhoneVereficationInteractor.swift in Sources */,
 				D47864001F3F30BD00EFDC6D /* RoundedProgressView.swift in Sources */,
 				EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */,
@@ -13504,6 +13738,7 @@
 				CE2F56211F7552A900F49DA1 /* PackagesViewOutput.swift in Sources */,
 				1DCD5F3C1611CAA42850AF7B /* ExpandStorageViewController.swift in Sources */,
 				20D9DB71C68797990E05E828 /* ExpandStorageModuleInput.swift in Sources */,
+				7859299520060E8B003F8AB3 /* ManageContactsModuleInput.swift in Sources */,
 				7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
 				CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */,
@@ -13547,6 +13782,7 @@
 				CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */,
 				CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */,
 				8C6EF88D1F348B77002AC795 /* CustomEditingTabBarItem.swift in Sources */,
+				7859299A20060E94003F8AB3 /* ManageContactsInteractorInput.swift in Sources */,
 				F2C69F643F8005F8666F6AAF /* UploadedItemsRouterInput.swift in Sources */,
 				0B94DE553DA8501190B2CEC5 /* UploadedItemsRouter.swift in Sources */,
 				25F2EEBED80FA9650DB66A1A /* UploadedItemsConfigurator.swift in Sources */,
@@ -13581,6 +13817,7 @@
 				8CFF868A1F0F96E600520D18 /* ContactDevice.m in Sources */,
 				8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */,
+				78D9BA3E2007E80600F2233F /* DuplicatedContactsPresenter.swift in Sources */,
 				7C5526161F7BA1B400A21F3C /* CardsManagerViewProtocol.swift in Sources */,
 				5851E00D5C6AB2815DCCB595 /* BaseFilesGreedRouterInput.swift in Sources */,
 				7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */,
@@ -13645,6 +13882,7 @@
 				7C0EBD001F4C5B5100283ECF /* BaseDataSourceItem.swift in Sources */,
 				67539B0A8267DB7EEB08948D /* UserInfoSubViewPresenter.swift in Sources */,
 				09D1D10783F4E47C7E8089AA /* UserInfoSubViewInteractorInput.swift in Sources */,
+				7859299E20060E9C003F8AB3 /* ManageContactsInitializer.swift in Sources */,
 				205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				011111224BABABC38EFD0DAD /* UserInfoSubViewInteractor.swift in Sources */,
 				956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */,
@@ -13681,6 +13919,7 @@
 				8C0097161F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift in Sources */,
 				876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */,
 				65F920DAC010E5F0859369FE /* SyncContactsConfigurator.swift in Sources */,
+				7859298C20060E7D003F8AB3 /* ManageContactsViewInput.swift in Sources */,
 				41AFB14EB1A012B62DF71C13 /* SyncContactsInitializer.swift in Sources */,
 				80C205BAFDB776C2537BF66F /* SettingsViewInput.swift in Sources */,
 				CE6DE7521FCBE84100C23CBD /* DropboxService.swift in Sources */,
@@ -13688,6 +13927,7 @@
 				2B5261513879D04FFE1D241C /* SettingsViewOutput.swift in Sources */,
 				7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */,
 				CE0ED9721FBC0F5A00487632 /* PasscodeInputView.swift in Sources */,
+				78052962200DCDA70051FA78 /* ManageContactTableViewCell.swift in Sources */,
 				0BC0B9C638832D70DF19F6B3 /* SettingsModuleInput.swift in Sources */,
 				C9C861DC0DEC3C4584CBF425 /* SettingsPresenter.swift in Sources */,
 				5362D573ACB91FF20AF99896 /* SettingsInteractorInput.swift in Sources */,
@@ -13749,6 +13989,7 @@
 				5DF885B77D64CAAB43CB969F /* FileInfoInitializer.swift in Sources */,
 				D47863FC1F3F18FA00EFDC6D /* UsageInfoViewInput.swift in Sources */,
 				7CEEC1BB1F33251800BD433F /* CreateStoryPhotosOrderConfigurator.swift in Sources */,
+				78D9BA492007E82800F2233F /* DuplicatedContactsViewController.swift in Sources */,
 				7C4988171F3320420039C5F2 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */,
 				84F590D00E5D8FE7C0F21A7E /* UploadFilesSelectionViewInput.swift in Sources */,
 				D4F104D678F058E4AF0F2045 /* UploadFilesSelectionViewOutput.swift in Sources */,
@@ -13806,6 +14047,7 @@
 				CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */,
 				B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				0D9510CB65B6DA6F2D661754 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
+				7859299120060E85003F8AB3 /* ManageContactsRouter.swift in Sources */,
 				4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				016636E0593FCDC66B6F5CD0 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				7C6945E820039F4A00152344 /* FreeAppSpaceInteractor.swift in Sources */,
@@ -13845,11 +14087,13 @@
 				DB6E1B2B2651A46923CB165B /* FeedbackViewController.swift in Sources */,
 				EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */,
 				C1FD046A70F4C0DF7651095E /* FeedbackViewPresenter.swift in Sources */,
+				78D9BA382007E7F100F2233F /* DuplicatedContactsInteractorOutput.swift in Sources */,
 				7C233CD41FD51E290013CCA0 /* UploadFromLifeBoxRouter.swift in Sources */,
 				78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */,
 				7C5AFD701F69768300DBB9E7 /* BaseViewController.swift in Sources */,
 				6DD569A1DD4A69901636564E /* FeedbackViewInteractorInput.swift in Sources */,
 				CEF69DE91FB5A26D00FCE6AB /* UIImage+Orientation.swift in Sources */,
+				78D9BA482007E82800F2233F /* DuplicatedContactsViewInput.swift in Sources */,
 				A0903BC815026822773731DE /* FeedbackViewInteractorOutput.swift in Sources */,
 				A8F0A4767B5D5821DD4D8083 /* FeedbackViewInteractor.swift in Sources */,
 				1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */,
@@ -13866,6 +14110,7 @@
 				2364F4A40D0899837114AB2A /* ActivityTimelineInteractorOutput.swift in Sources */,
 				A0052B3EF580D29AEEB116BA /* ActivityTimelineInteractor.swift in Sources */,
 				7D44F2D8BA13AA210B247EF0 /* ActivityTimelineRouterInput.swift in Sources */,
+				7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */,
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
@@ -13886,6 +14131,7 @@
 				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */,
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
+				78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

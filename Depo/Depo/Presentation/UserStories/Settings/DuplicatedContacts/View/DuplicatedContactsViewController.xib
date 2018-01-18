@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DuplicatedContactsViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+            <connections>
+                <outlet property="deleteAllButton" destination="P7z-te-2rn" id="9es-Xd-8XL"/>
+                <outlet property="keepButton" destination="TFU-Lz-2ek" id="Pfz-Aj-OLS"/>
+                <outlet property="tableView" destination="qNy-pN-2dH" id="CMa-d4-cqd"/>
+                <outlet property="titleLabel" destination="fgS-mi-6YC" id="e5Q-a8-42J"/>
+                <outlet property="view" destination="iN0-l3-epB" id="yFs-l3-TK9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="38" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qNy-pN-2dH">
+                    <rect key="frame" x="40" y="100.5" width="295" height="250.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="FeJ-Ma-Gbg"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7z-te-2rn" customClass="BlueButtonWithMediumWhiteText" customModule="Depo_LifeTech" customModuleProvider="target">
+                    <rect key="frame" x="22" y="562" width="161.5" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="syl-8f-g1i"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="onDeleteAllTapped:" destination="-1" eventType="touchUpInside" id="aZz-tx-D3m"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFU-Lz-2ek" customClass="BlueButtonWithMediumWhiteText" customModule="Depo_LifeTech" customModuleProvider="target">
+                    <rect key="frame" x="191.5" y="562" width="161.5" height="45"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="onKeepTapped:" destination="-1" eventType="touchUpInside" id="1t1-2l-K6c"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgS-mi-6YC">
+                    <rect key="frame" x="22" y="40" width="331" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="TFU-Lz-2ek" secondAttribute="trailing" constant="22" id="2Bm-gL-oKA"/>
+                <constraint firstItem="fgS-mi-6YC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="B7h-Q6-aS0"/>
+                <constraint firstItem="P7z-te-2rn" firstAttribute="top" secondItem="qNy-pN-2dH" secondAttribute="bottom" constant="211" id="Ho4-Dq-b8Q"/>
+                <constraint firstItem="fgS-mi-6YC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="IdW-tE-ZQ8"/>
+                <constraint firstItem="P7z-te-2rn" firstAttribute="width" secondItem="TFU-Lz-2ek" secondAttribute="width" id="Ljn-4V-Mp6"/>
+                <constraint firstItem="P7z-te-2rn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="MHT-lx-WXU"/>
+                <constraint firstItem="qNy-pN-2dH" firstAttribute="top" secondItem="fgS-mi-6YC" secondAttribute="bottom" constant="40" id="XM1-Nx-bDY"/>
+                <constraint firstItem="TFU-Lz-2ek" firstAttribute="leading" secondItem="P7z-te-2rn" secondAttribute="trailing" constant="8" id="cXf-SI-Vm1"/>
+                <constraint firstAttribute="trailing" secondItem="fgS-mi-6YC" secondAttribute="trailing" constant="22" id="elD-R1-sHl"/>
+                <constraint firstItem="P7z-te-2rn" firstAttribute="centerY" secondItem="TFU-Lz-2ek" secondAttribute="centerY" id="ixE-HZ-r64"/>
+                <constraint firstItem="qNy-pN-2dH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="kiq-S8-zdw"/>
+                <constraint firstAttribute="bottom" secondItem="P7z-te-2rn" secondAttribute="bottom" constant="60" id="oND-Rg-6VH"/>
+                <constraint firstItem="TFU-Lz-2ek" firstAttribute="height" secondItem="P7z-te-2rn" secondAttribute="height" id="p22-An-G3U"/>
+                <constraint firstAttribute="trailing" secondItem="qNy-pN-2dH" secondAttribute="trailing" constant="40" id="ulu-C5-tde"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <point key="canvasLocation" x="32" y="53"/>
+        </view>
+    </objects>
+</document>

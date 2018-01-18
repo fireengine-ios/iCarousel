@@ -263,8 +263,8 @@
 "Add to favorites" = "Add to favorites";
 "Remove from album" = "Remove from album";
 "Move" = "Move";
-"Cancel Bacup" = "Cancel Bacup";
-"Clear Bacup" = "Clear Bacup";
+"Cancel BackUp" = "Cancel BackUp";
+"Clear BackUp" = "Clear BackUp";
 "Restore" = "Restore";
 "Back-Up" = "Back-Up";
 "Your last back was on %@" = "Your last back was on %@";

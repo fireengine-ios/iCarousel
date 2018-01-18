@@ -106,6 +106,7 @@ struct TextConstants {
     
     static let errorAlert = NSLocalizedString("Error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlerTitleBackupAlreadyExist = NSLocalizedString("Overwrite backup?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let errorAlertTextNoDuplicatedContacts = NSLocalizedString("You have no duplicated contacts!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlertTextBackupAlreadyExist = NSLocalizedString("You have already a backup. Do you want to overwrite the existing one?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlertNopeBtnBackupAlreadyExist = NSLocalizedString("Nope", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlertYesBtnBackupAlreadyExist = NSLocalizedString("Yes", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -145,6 +146,8 @@ struct TextConstants {
     // MARK: - Sync Contacts
     
     static let backUpMyContacts = NSLocalizedString("Back Up My Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let manageContacts = NSLocalizedString("Manage Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let duplicatedContacts = NSLocalizedString("Duplicated Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Authification Cells
     static let showPassword = NSLocalizedString("Show", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -362,23 +365,32 @@ struct TextConstants {
     static let settingsUserInfoViewUpgradeButtonText = NSLocalizedString("UPGRADE", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsUserInfoViewQuota = NSLocalizedString("%@ of %@ has remained", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    //MARK: Bacup contacts view
+    //MARK: BackUp contacts view
     static let settingsBackupContactsViewTitle = NSLocalizedString("Back Up My Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupContactsViewNewContactsText = NSLocalizedString("New Contact", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupContactsViewDuplicatesText = NSLocalizedString("Updated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupContactsViewRemovedText = NSLocalizedString("Removed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupedText = NSLocalizedString("Backed up %d Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsRestoredText = NSLocalizedString("Restored up %d Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBacupingText = NSLocalizedString("%d%% Backed up…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpingText = NSLocalizedString("%d%% Backed up…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsDeletingText = NSLocalizedString("%d%% of Duplicated Contacts Deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsAnalyzingText = NSLocalizedString("%d%% Analyzed...", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsRestoringText = NSLocalizedString("%d%% Restored up…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBacupNeverDidIt = NSLocalizedString("You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBacupNewer = NSLocalizedString("You never backed up your contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBacupLessAMinute = NSLocalizedString("Your last back up was a few seconds ago.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBacupLessADay = NSLocalizedString("Your last back was on %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBacupButtonTitle = NSLocalizedString("Back-Up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBacupRestoreTitle = NSLocalizedString("Restore", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBacupClearBacupTitle = NSLocalizedString("Clear Bacup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBacupCancelBacupTitle = NSLocalizedString("Cancel Bacup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpNeverDidIt = NSLocalizedString("You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpNewer = NSLocalizedString("You never backed up your contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpLessAMinute = NSLocalizedString("Your last back up was a few seconds ago.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpLessADay = NSLocalizedString("Your last back was on %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpButtonTitle = NSLocalizedString("Back-Up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpRestoreTitle = NSLocalizedString("Restore", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpCancelDeletingTitle = NSLocalizedString("Cancel Deleting", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpCancelAnalyzingTitle = NSLocalizedString("Cancel Analyzing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpManageContactsButton = NSLocalizedString("Manage Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpDeleteDuplicatedButton = NSLocalizedString("Delete Duplicated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpDeleteContactButton = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpNumberOfDuplicated = NSLocalizedString("%d same contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpTotalNumberOfDuplicatedContacts = NSLocalizedString("You have %d duplicated contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpKeepButton = NSLocalizedString("Keep", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpDeleteAllButton = NSLocalizedString("Delete All", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: ActionsMenuAction
     static let actionsMenuActionMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -794,6 +806,7 @@ struct NumericConstants {
     
     static let maxRecentSearches: Int = 10
     
+    static let minute: TimeInterval = 60
     static let defaultTimeout: TimeInterval = 30.0
     
 }

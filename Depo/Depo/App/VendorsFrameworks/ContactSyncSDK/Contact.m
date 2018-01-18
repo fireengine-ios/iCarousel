@@ -23,11 +23,29 @@
     if (self){
         _recordRef = ref;
         
+        CFTypeRef cFirstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+        CFTypeRef cMiddleName = ABRecordCopyValue(ref, kABPersonMiddleNameProperty);
+        CFTypeRef cLastName = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+        CFTypeRef cNickName = ABRecordCopyValue(ref, kABPersonNicknameProperty);
+        
         _objectId = [NSNumber numberWithInt:ABRecordGetRecordID(_recordRef)];
-        _firstName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonFirstNameProperty);
-        _middleName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonMiddleNameProperty);
-        _lastName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonLastNameProperty);
-        _nickName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonNicknameProperty);
+        
+        if (cFirstName!=NULL){
+            _firstName=[NSString stringWithFormat:@"%@", cFirstName];
+            CFRelease(cFirstName);
+        }
+        if (cMiddleName!=NULL){
+            _middleName=[NSString stringWithFormat:@"%@", cMiddleName];
+            CFRelease(cMiddleName);
+        }
+        if (cLastName!=NULL){
+            _lastName=[NSString stringWithFormat:@"%@", cLastName];
+            CFRelease(cLastName);
+        }
+        if (cNickName!=NULL){
+            _nickName=[NSString stringWithFormat:@"%@", cNickName];
+            CFRelease(cNickName);
+        }
 
         NSDate *lastModif=(__bridge NSDate *)(ABRecordCopyValue(_recordRef,kABPersonModificationDateProperty));
         _localUpdateDate = SYNC_DATE_AS_NUMBER(lastModif);
@@ -71,6 +89,29 @@
             [_devices addObjectsFromArray:[devices allObjects]];
         }
 
+    }
+    return self;
+}
+
+/**
+ * Use this constructor to convert remote records
+ *
+ * @param json
+ */
+- (instancetype)initWithCopy:(NSDictionary*)json
+{
+    if (self = [super init]){
+        _objectId = [json[@"localId"] copy];
+        _remoteId = [json[@"id"] copy];
+        _firstName = [json[@"firstname"] copy];
+        _middleName = [json[@"middlename"] copy];
+        _lastName = [json[@"lastname"] copy];
+        _nickName = [json[@"nickname"] copy];
+        _displayName = [json[@"displayname"] copy];
+        _remoteUpdateDate = [json[@"modified"] copy];
+        _hasName = [json[@"hasName"] boolValue];
+        _hasPhoneNumber = [json[@"hasNumber"] boolValue];
+        _devices = [json[@"devices"] mutableCopy];
     }
     return self;
 }
@@ -298,4 +339,27 @@
     
     return YES;
 }
+
+- (id)copyWithZone:(NSZone *)zone {
+
+    NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          _objectId ?: [NSNull null], @"localId",
+                          _remoteId ?: [NSNull null], @"id",
+                          _firstName ?: [NSNull null], @"firstname",
+                          _middleName ?: [NSNull null], @"middlename",
+                          _lastName ?: [NSNull null], @"lastname",
+                          _nickName ?: [NSNull null], @"nickname",
+                          _displayName ?: [NSNull null], @"displayname",
+                          _remoteUpdateDate ?: [NSNull null], @"modified",
+                          _devices ?: [NSNull null], @"devices",
+                          @(_hasName) ?: [NSNull null], @"hasName",
+                          @(_hasPhoneNumber) ?: [NSNull null], @"hasNumber",
+                          nil];
+
+    Contact *contact = [self initWithCopy:data];
+    contact.recordRef = _recordRef;
+
+    return contact;
+}
+
 @end

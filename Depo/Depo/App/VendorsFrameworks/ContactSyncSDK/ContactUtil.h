@@ -16,9 +16,10 @@
 + (NSString*)clearMsisdn:(NSString*)input;
 
 - (void)checkAddressbookAccess:(void(^)(BOOL))callback;
-- (void)deleteContact:(NSNumber*)contactId devices:(NSArray*)devices;
+- (void)deleteContactDevices:(NSNumber*)contactId devices:(NSArray*)devices;
+- (void)deleteContacts:(NSMutableArray*) contacts;
 - (void)save:(Contact*)contact;
-- (NSMutableArray *)applyContacts;
+- (NSMutableArray *)applyContacts:(NSInteger)syncRound;
 - (NSMutableArray*)fetchContacts;
 - (NSInteger)getContactCount;
 - (Contact*)findContactById:(NSNumber*)objectId;
