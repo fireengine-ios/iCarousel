@@ -277,8 +277,6 @@ extension SyncServiceManager {
         if hasFailedSync || hasSyncCancelled {
             //TODO: show error?
         }
-        
-        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
     }
 }
 

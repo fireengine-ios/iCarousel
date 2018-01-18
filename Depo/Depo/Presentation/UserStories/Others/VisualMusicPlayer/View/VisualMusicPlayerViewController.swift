@@ -18,7 +18,7 @@ protocol VisualMusicPlayerViewControllerDelegate: class {
 class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewInput {
     var output: VisualMusicPlayerViewOutput!
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     private let alert = AlertFilesActionsSheetPresenterModuleInitialiser().createModule()
     private let carouselItemFrameWidth: CGFloat = 220
     

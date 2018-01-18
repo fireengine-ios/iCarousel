@@ -21,7 +21,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     var dataSource = BaseDataSourceForCollectionView()
     var showedSpinner = false
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     var tabBarActionHandler: TabBarActionHandler { return self }
 
     var filters: [MoreActionsConfig.MoreActionsFileType] = []
