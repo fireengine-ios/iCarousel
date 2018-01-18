@@ -7,7 +7,7 @@
 //
 
 class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     weak var view: BaseFilesGreedViewController!
     weak var presenter: BaseFilesGreedPresenter!
     

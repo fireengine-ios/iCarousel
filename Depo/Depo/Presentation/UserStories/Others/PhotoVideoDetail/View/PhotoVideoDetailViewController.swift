@@ -17,7 +17,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     var output: PhotoVideoDetailViewOutput!
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
  
     var views: [BaseFileContentView] = [BaseFileContentView]()
     var selectedIndex: Int = -1 {
