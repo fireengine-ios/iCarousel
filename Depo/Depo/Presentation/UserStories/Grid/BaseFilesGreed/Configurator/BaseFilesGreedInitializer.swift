@@ -178,7 +178,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
             showGridListButton: true
         )
         
-        configurator.configure(viewController: viewController, fileFilters: [.rootFolder(folder.uuid)],
+        configurator.configure(viewController: viewController, fileFilters: [.rootFolder(folder.uuid), .localStatus(.nonLocal)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],

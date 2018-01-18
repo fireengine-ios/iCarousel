@@ -353,6 +353,10 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         
     }
     
+    func filesRomovedFromAlbum(items: [Item], albumUUID: String){
+        
+    }
+    
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool{
         if let compairedView = object as? FreeAppSpace {
             return compairedView == self

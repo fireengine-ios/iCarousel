@@ -222,6 +222,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             albumService.completelyDelete(albums: DeleteAlbums(albums: albums), success: {
                 DispatchQueue.main.async { [weak self] in
                     self?.output?.operationFinished(type: .completelyDeleteAlbums)
+                    ItemOperationManager.default.albumsDeleted(albums: albums)
                 }
             }, fail: { [weak self] errorRespone in
                 DispatchQueue.main.async {
