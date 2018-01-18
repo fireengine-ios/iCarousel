@@ -314,11 +314,15 @@ class RouterVC: NSObject {
     
     //MARK: Photos and Videos
     
-    var photosAndVideos: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController")
+    var photosScreen: UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Photo)
         return controller
     }
     
+    var videosScreen: UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Video)
+        return controller
+    }
     
     //MARK: Music
     

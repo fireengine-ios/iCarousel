@@ -10,6 +10,8 @@ import UIKit
 
 class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    
     static let `default` = FreeAppSpace()
     
     private var photoVideoService : PhotoAndVideoService? = nil
@@ -84,6 +86,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func checkFreeAppSpace(){
+        if tokenStorage.refreshToken == nil {
+            return
+        }
         photoVideoService?.currentPage = 0
         startSearchDuplicates(finished: { [weak self] in
             guard let self_ = self else{
@@ -283,7 +288,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
         
         sortDuplicatesArray()
-        showFreeAppSpaceCard()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.showFreeAppSpaceCard()
+        }
     }
     
     func addedLocalFiles(items: [Item]){

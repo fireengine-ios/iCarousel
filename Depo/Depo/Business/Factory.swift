@@ -15,14 +15,15 @@ protocol Factory {
     func resolve() -> DropboxManager
     func resolve() -> PasscodeStorage
     func resolve() -> BiometricsManager
+    func resolve() -> TokenStorage
 }
 
-final class FactoryMain: NSObject, Factory {
-    @objc static let mediaPlayer = MediaPlayer() /// when will be appdelegate on swift, make it private
+final class FactoryMain: Factory {
+    
+    private static let mediaPlayer = MediaPlayer()
     func resolve() -> MediaPlayer {
         return FactoryMain.mediaPlayer
     }
-    
     
     private static let dropboxManager = DropboxManager()
     func resolve() -> DropboxManager {
@@ -37,5 +38,10 @@ final class FactoryMain: NSObject, Factory {
     private static let biometricsManager = BiometricsManagerImp()
     func resolve() -> BiometricsManager {
         return FactoryMain.biometricsManager
+    }
+    
+    private static let tokenStorage = TokenStorageUserDefaults()
+    func resolve() -> TokenStorage {
+        return FactoryMain.tokenStorage
     }
 }

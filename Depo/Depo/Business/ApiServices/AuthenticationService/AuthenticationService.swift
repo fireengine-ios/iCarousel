@@ -277,7 +277,8 @@ class AuthenticationService: BaseRequestService {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
-    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var player: MediaPlayer = factory.resolve()
     
     // MARK: - Login
     
@@ -373,7 +374,7 @@ class AuthenticationService: BaseRequestService {
             CoreDataStack.default.clearDataBase()
             FreeAppSpace.default.clear()
             CardsManager.default.stopAllOperations()
-            FactoryMain.mediaPlayer.stop()
+            self.player.stop()
             self.cancellAllRequests()
             success?()
         }

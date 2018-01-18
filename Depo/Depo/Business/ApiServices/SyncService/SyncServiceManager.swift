@@ -27,8 +27,8 @@ class SyncServiceManager {
     
     private var networkIsUnreachable = false
     
-    private var isSyncCancelled: Bool {
-        return (photoSyncService.status == .canceled && videoSyncService.status == .canceled)
+    private var isSyncStoped: Bool {
+        return (photoSyncService.status == .stoped && videoSyncService.status == .stoped)
     }
     
     private var isSyncFailed: Bool {
@@ -40,7 +40,7 @@ class SyncServiceManager {
     }
     
     private var hasSyncCancelled: Bool {
-        return (photoSyncService.status == .canceled || videoSyncService.status == .canceled)
+        return (photoSyncService.status == .stoped || videoSyncService.status == .stoped)
     }
     
     private var hasPrepairingSync: Bool {
@@ -205,8 +205,8 @@ class SyncServiceManager {
     //stop/cancel completely
     private func stop(reachabilityDidChange: Bool, photo: Bool, video: Bool) {
         if reachabilityDidChange {
-            if photo { photoSyncService.interrupt() }
-            if video { videoSyncService.interrupt() }
+            if photo { photoSyncService.waitForWiFi() }
+            if video { videoSyncService.waitForWiFi() }
         } else {
             if photo { photoSyncService.stop() }
             if video { videoSyncService.stop() }
@@ -252,6 +252,7 @@ extension SyncServiceManager {
         }
         
         CardsManager.default.stopOperationWithType(type: .sync)
+        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
         
         if hasPrepairingSync {
             CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
@@ -268,7 +269,7 @@ extension SyncServiceManager {
         
         CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
         
-        if isSyncCancelled || isSyncFailed || isSyncFinished {
+        if isSyncStoped || isSyncFailed || isSyncFinished {
             //TODO: show error?
             return
         }
@@ -276,8 +277,6 @@ extension SyncServiceManager {
         if hasFailedSync || hasSyncCancelled {
             //TODO: show error?
         }
-        
-        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
     }
 }
 

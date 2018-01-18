@@ -25,21 +25,29 @@ final class VideoSyncService: ItemSyncServiceImpl {
     override func interrupt() {
         super.interrupt()
         
-        photoVideoService?.stopAllOperations()
-        UploadService.default.cancelSyncOperations(photo: false, video: true)
+        stopAllOperations()
     }
 
     override func stop() {
         super.stop()
         
-        photoVideoService?.stopAllOperations()
-        UploadService.default.cancelSyncOperations(photo: false, video: true)
+        stopAllOperations()
     }
     
     override func waitForWiFi() {
         super.waitForWiFi()
         
-        photoVideoService?.stopAllOperations()
+        stopAllOperations()
+    }
+    
+    
+    //MARK: - Private
+    
+    private func stopAllOperations() {
         UploadService.default.cancelSyncOperations(photo: false, video: true)
+        
+        if let service = photoVideoService {
+            service.stopAllOperations()
+        }
     }
 }

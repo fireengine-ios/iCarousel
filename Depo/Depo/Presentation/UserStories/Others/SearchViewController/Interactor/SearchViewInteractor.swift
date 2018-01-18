@@ -10,7 +10,7 @@ import Foundation
 
 class SearchViewInteractor: SearchViewInteractorInput {
     
-    weak var output: SearchViewInteractorOutput!
+    weak var output: SearchViewInteractorOutput?
     
     let remoteItems: RemoteSearchService
     let recentSearches: RecentSearchesService
@@ -21,7 +21,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     }
     
     func viewIsReady() {
-        output.setRecentSearches(recentSearches.searches)
+        output?.setRecentSearches(recentSearches.searches)
         getDefaultSuggetion(text: "")
     }
     
@@ -32,12 +32,12 @@ class SearchViewInteractor: SearchViewInteractorInput {
                 self.items(items: items)
                 DispatchQueue.main.async {
                     self.recentSearches.addSearch(searchText)
-                    self.output.setRecentSearches(self.recentSearches.searches)
-                    self.output.endSearchRequestWith(text: searchText)
+                    self.output?.setRecentSearches(self.recentSearches.searches)
+                    self.output?.endSearchRequestWith(text: searchText)
                 }
             }, fail: { [weak self] in
                 DispatchQueue.main.async {
-                    self?.output.failedSearch()
+                    self?.output?.failedSearch()
                 }
         })
     }
@@ -84,6 +84,6 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     func clearRecentSearches() {
         recentSearches.clearAll()
-        output.setRecentSearches(recentSearches.searches)
+        output?.setRecentSearches(recentSearches.searches)
     }
 }

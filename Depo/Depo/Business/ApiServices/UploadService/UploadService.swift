@@ -15,10 +15,9 @@ final class UploadService: BaseRequestService {
     
     static let notificatioUploadServiceDidUpload = "notificatioUploadServiceDidUpload"
 
-    private let dispatchQueue: DispatchQueue
-//    private let syncDispatchQueue: DispatchQueue
+    private let dispatchQueue = DispatchQueue(label: "com.lifebox.upload")
     
-    private let uploadQueue: OperationQueue
+    private let uploadQueue = OperationQueue()
     private var uploadOperations = [UploadOperations]()
     
     private var allSyncOperationsCount: Int {
@@ -35,14 +34,8 @@ final class UploadService: BaseRequestService {
 
     
     override init() {
-        
-        uploadQueue = OperationQueue()
-        uploadQueue.qualityOfService = .background
         uploadQueue.maxConcurrentOperationCount = 1
     
-        dispatchQueue = DispatchQueue(label: "Upload Queue")
-//        syncDispatchQueue = DispatchQueue(label: "Sync Queue")
-        
         super.init()
         SingletonStorage.shared.uploadProgressDelegate = self
     }
@@ -177,10 +170,10 @@ final class UploadService: BaseRequestService {
             return operation
         }
         uploadOperations.insert(contentsOf: operations, at: 0)
-        dispatchQueue.async {
+//        dispatchQueue.async {
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
-        }
+//        }
         
         return operations
     }
@@ -266,10 +259,10 @@ final class UploadService: BaseRequestService {
             return operation
         }
         uploadOperations.append(contentsOf: operations)
-        dispatchQueue.async {
+//        dispatchQueue.async {
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
             print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
-        }
+//        }
         
         return uploadOperations
     }
@@ -281,8 +274,8 @@ final class UploadService: BaseRequestService {
         clearUploadCounters()
         clearSyncCounters()
         
-//        CardsManager.default.stopOperationWithType(type: .upload)
-//        CardsManager.default.stopOperationWithType(type: .sync)
+        CardsManager.default.stopOperationWithType(type: .upload)
+        CardsManager.default.stopOperationWithType(type: .sync)
     }
     
     func cancelUploadOperations(){
@@ -317,12 +310,12 @@ final class UploadService: BaseRequestService {
         
         resetSyncCounters(for: photo ? .image : .video)
         
-//        guard allSyncOperationsCount != finishedSyncOperationsCount else {
-//            CardsManager.default.stopOperationWithType(type: .sync)
-//            return
-//        }
-//
-//        CardsManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
+        guard allSyncOperationsCount != finishedSyncOperationsCount else {
+            CardsManager.default.stopOperationWithType(type: .sync)
+            return
+        }
+
+        CardsManager.default.setProgressForOperationWith(type: .sync, allOperations: allSyncOperationsCount, completedOperations: finishedSyncOperationsCount)
     }
     
     private func clearUploadCounters() {
@@ -356,7 +349,7 @@ final class UploadService: BaseRequestService {
                 }
             }
                                 
-            fail?(.string("Error upload"))
+//            fail?(.string("Error upload"))
         })
         
         return request
@@ -462,7 +455,7 @@ class UploadOperations: Operation {
         self.isPhotoAlbum = isFromAlbum
         
         super.init()
-        self.qualityOfService = (uploadType == .autoSync) ? .background : .userInitiated
+        self.qualityOfService = (uploadType == .autoSync) ? .default : .userInitiated
         
     }
     
@@ -472,7 +465,7 @@ class UploadOperations: Operation {
                 req.cancel()
                 isRealCancel = true
             }
-        }else{
+        } else {
             isRealCancel = true
         }
     }

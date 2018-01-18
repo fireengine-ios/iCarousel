@@ -11,7 +11,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     typealias Item = WrapData
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     
     var dataSource: BaseDataSourceForCollectionView
     
@@ -483,13 +483,19 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             }
             
             if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
-                if localDuplicates.count == 0 {
-                    //selectedItems = localDuplicates
+                let serverObjects = selectedItems.filter({ return !$0.isLocalItem })
+                if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
-                } else {
-                    
+                }else{
+                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
+                    if localDuplicates.count == 0 {
+                        //selectedItems = localDuplicates
+                        actionTypes.remove(at: deleteOriginalIndex)
+                    } else {
+                        
+                    }
                 }
+                
             }
             
             alertSheetModule?.showAlertSheet(with: actionTypes,
@@ -522,12 +528,20 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
-        self.filters = filters.map{ $0.convertToGeneralFilterFileType() }
+        guard let firstFilter = filters.first else {
+            return
+        }
+        var notificationTitle: String
+        switch firstFilter {
+        case .Photo:
+            notificationTitle = TabBarViewController.notificationPhotosScreen
+        case .Video:
+            notificationTitle = TabBarViewController.notificationVideoScreen
+        default:
+            notificationTitle = TabBarViewController.notificationPhotosScreen
+        }
         
-        stopEditing()
-//        dataSource.dropData()
-        dataSource.originalFilters = self.filters
-        reloadData()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationTitle), object: nil, userInfo: nil)
     }
     
     

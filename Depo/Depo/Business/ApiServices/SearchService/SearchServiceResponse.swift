@@ -64,6 +64,9 @@ struct SearchJsonKey {
     
     static let VideoSlideshow = "Video-Slideshow"
     static let VideoHLSPreview = "Video-Hls-Preview"
+
+    //folder
+    static let ChildCount = "childCount"
 }
 
 class BaseMetaData: ObjectRequestResponse {
@@ -178,6 +181,7 @@ class SearchItemResponse: ObjectRequestResponse {
     var albums: [String]?//Array<JSON>?
     var subordinates: Array<JSON>?
     var location: Any? // TODO Add!
+    var childCount: Int64?
     
     override func mapping() {
         // it upload date
@@ -197,7 +201,7 @@ class SearchItemResponse: ObjectRequestResponse {
         status = json?[SearchJsonKey.status].string
         subordinates = json?[SearchJsonKey.subordinates].array
         albums = json?[SearchJsonKey.album].array?.flatMap{ $0.string }
-        
+        childCount = json?[SearchJsonKey.ChildCount].int64
     }
 }
 

@@ -15,7 +15,7 @@ protocol LoadingImageViewDelegate: class{
 
 class LoadingImageView: UIImageView {
 
-    let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
     var url: URL?
     var path: PathForItem?
     private var filesDataSource = FilesDataSource()

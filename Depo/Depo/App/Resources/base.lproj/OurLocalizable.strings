@@ -301,6 +301,8 @@
 "Folder size" = "Folder size";
 "File Info" = "File Info";
 "File Name" = "File Name";
+"Folder Info" = "Folder Info";
+"Folder Name" = "Folder Name";
 "Data is not correct" = "Data is not correct";
 "Data did not changed" = "Data did not changed";
 "Done" = "Done";
@@ -319,7 +321,7 @@
 "Import Photos" = "Import Photos";
 "Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
 "Auto-login" = "Auto-login";
-"Turkcell Passcode" = "Turkcell Passcode";
+"Turkcell Password" = "Turkcell Password";
 "Logout" = "Logout";
 "Help & Support" = "Help & Support";
 "Lifebox Touch ID and Passcode" = "Lifebox Touch ID and Passcode";
@@ -453,8 +455,9 @@
 "Type the text" = "Type the text";
 "E-MAIL" = "E-MAIL";
 "Send password reset link" = "Send password reset link";
-"If you are already a Turkcell subscriber, you can retrieve your password by sending SMS to 2222" = "If you are already a Turkcell subscriber, you can retrieve your password by sending SMS to 2222";
+"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222.";
 "Forgot My Password" = "Forgot My Password";
+"Your password is sent to your e-mail address" = "Your password is sent to your e-mail address";
 "Sign Up" = "Sign Up";
 "Turn-on Sync" = "Turn-on Sync";
 "Syncing files using cellular data could incur data charges" = "Syncing files using cellular data could incur data charges";
@@ -536,4 +539,4 @@
 "Favorite" = "Favorite";
 "Selected" = "Selected";
 "Not selected" = "Not selected";
-
+"E-mail is empty" = "E-mail is empty";

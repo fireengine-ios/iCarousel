@@ -56,6 +56,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
         imageView.image = nil
+
         if wrappered.isLocalItem {
             cloudStatusImage.image = UIImage(named: "objectNotInCloud")
         } else {

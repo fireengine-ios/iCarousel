@@ -18,7 +18,7 @@ class AppConfigurator {
         dropboxManager.start()
         
         let urls: AuthorizationURLs = AuthorizationURLsImp()
-        let tokenStorage: TokenStorage = TokenStorageUserDefaults()
+        let tokenStorage: TokenStorage = factory.resolve()
         if tokenStorage.isClearTokens {
             tokenStorage.isClearTokens = false
             tokenStorage.clearTokens()
@@ -35,9 +35,9 @@ class AppConfigurator {
         configureSDWebImage()
         setupCropy()
         
-        CoreDataStack.default.appendLocalMediaItems {
+//        CoreDataStack.default.appendLocalMediaItems {
             startMenloworks(with: launchOptions)
-        }
+//        }
     }
     
     class func logout() {

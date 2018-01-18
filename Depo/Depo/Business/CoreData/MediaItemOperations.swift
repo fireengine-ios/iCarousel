@@ -60,6 +60,7 @@ extension CoreDataStack {
                     savedMediaItem.metadata?.smalURl = remoteWrapedItem.metaData?.smalURl?.absoluteString
                     savedMediaItem.favoritesValue = remoteWrapedItem.favorites
                     
+                    savedMediaItem.syncStatusValue = remoteWrapedItem.syncStatus.valueForCoreDataMapping()
                     
                     break
                 }
@@ -105,13 +106,9 @@ extension CoreDataStack {
     
     // MARK:  MediaItem
     
-    func mediaItemByUUIDs(uuidList: [String]) -> [WrapData] {
-        
-        let context = mainContext
+    func mediaItemByUUIDs(uuidList: [String]) -> [MediaItem] {
         let predicate = NSPredicate(format: "uuidValue IN %@", uuidList)
-        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
-        
-        return items.flatMap{ $0.wrapedObject }
+        return executeRequest(predicate: predicate, context: mainContext)
     }
     
     func executeRequest(predicate: NSPredicate, context:NSManagedObjectContext) -> [MediaItem] {

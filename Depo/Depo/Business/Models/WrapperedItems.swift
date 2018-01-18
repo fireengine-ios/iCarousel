@@ -504,6 +504,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var isFolder: Bool?
     
+    var childCount: Int64?
+    
     var metaDate: Date {
         if let unwrapedMetaDate = metaData?.takenDate {
             return unwrapedMetaDate
@@ -617,6 +619,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         parent = remote.parent
         
         var url: URL?
+        
+        childCount = remote.childCount
         
         metaData = remote.metadata
         
@@ -747,6 +751,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
             metaData?.smalURl = URL(string: smalURl)
         }
         
+    }
+    
+    func copyFileData(from item: WrapData) {
+        uuid = item.uuid
+        id = item.id
+        name = item.name
+        creationDate = item.creationDate
+        lastModifiDate = item.lastModifiDate
+        md5 = item.md5
     }
     
     private class func getDuration(duration: Double?) -> String {

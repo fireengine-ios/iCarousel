@@ -11,28 +11,30 @@ import Photos
 
 extension CoreDataStack {
     
-    @objc func appendLocalMediaItems(_ end: (() -> Void)?) {
+    @objc func appendLocalMediaItems(_ end: AppendingLocaclItemsFinishCallback?) {
         let queue = DispatchQueue(label: "Append Local Item ")
         queue.async {
             let localMediaStorage = LocalMediaStorage.default
             localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
                 if authorized {
-                    self.insertFromPhotoFramework()
+                    self.insertFromPhotoFramework(allItemsAddedCallBack: end)
                 }
                 if status == .denied {
                     self.deleteLocalFiles()
                 }
-                end?()
             }
         }
     }
     
-    private func insertFromPhotoFramework() {
+    func insertFromPhotoFramework(allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
         let localMediaStorage = LocalMediaStorage.default
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) {[weak self] (accessGranted, _) in
-            guard accessGranted, let `self` = self else {
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
+            guard accessGranted, let `self` = self,
+                self.inProcessAppendingLocalFiles else {
                 return
             }
+            
+            self.inProcessAppendingLocalFiles = true
             
             let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
             
@@ -65,6 +67,10 @@ extension CoreDataStack {
             }
             
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+//            self.isAppendingLocalFilesFinished = true
+//            self.appendingItemsFinishBlock?()
+            self.inProcessAppendingLocalFiles = false
+            allItemsAddedCallBack?()
             let finish = Date().timeIntervalSince1970
             debugPrint("All images and videos have been saved in \(finish - start) seconds")
             

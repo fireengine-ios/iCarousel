@@ -26,7 +26,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     
     var output: FileInfoViewOutput!
     var interactor: FileInfoInteractor!
-
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         fileName.textColor = ColorConstants.textGrayColor
         fileName.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
-        fileInfoTitle.text = TextConstants.fileInfoInfoTitle
+        fileInfoTitle.text = TextConstants.fileInfoFileInfoTitle
         fileInfoTitle.textColor = ColorConstants.blueColor
         fileInfoTitle.font = UIFont.TurkcellSaturaBolFont(size: 14)
         
@@ -93,12 +93,13 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         blackNavigationBarStyle()
     }
     
-    func setObject(object: BaseDataSourceItem){
+    func setObject(object: BaseDataSourceItem) {
         
         fileName.text = object.name
         
-        if (object.fileType == .folder){
-            folderSizeTitle.text = TextConstants.fileInfoFolderSizeTitle
+        if (object.fileType == .folder) {
+            fileNameTitle.text = TextConstants.fileInfoFolderNameTitle
+            fileInfoTitle.text = TextConstants.fileInfoFolderInfoTitle
         } else if object.fileType == .photoAlbum {
             
         }  else {
@@ -106,20 +107,34 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         }
         
         if let obj = object as? WrapData {
-             if obj.fileType == .audio {
+            if obj.fileType == .audio {
                 configurateAudioMethadataFor(object: obj)
             }
             
-            if (obj.fileType.typeWithDuration){
+            if (obj.fileType.typeWithDuration) {
                 durationLabel.text = obj.duration
             } else {
                 durationH.constant = 0
                 view.layoutSubviews()
             }
-
+            
             let formatter = ByteCountFormatter()
             formatter.countStyle = .binary
             folderSizeLabel.text = formatter.string(fromByteCount: obj.fileSize)
+            
+            if obj.fileType == .folder {
+                folderSizeTitle.text = TextConstants.fileInfoAlbumSizeTitle
+                folderSizeLabel.text = String(obj.childCount ?? 0)
+                
+                if let createdDate = obj.creationDate {
+                    uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
+                    takenDateLabel.isHidden = true
+                    takenDateTitle.isHidden = true
+                } else {
+                    hiddeInfoDateLabels()
+                }
+            }
+            
         } else if let album = object as? AlbumItem {
             folderSizeTitle.text = TextConstants.fileInfoAlbumSizeTitle
             fileNameTitle.text = TextConstants.fileInfoAlbumNameTitle
@@ -146,13 +161,11 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             } else {
                 hiddeInfoDateLabels()
             }
-        } else {
+        } else if object.fileType != .folder {
             hiddeInfoDateLabels()
+        }
     }
-}
 
-    
-    
     func addReturnIfNeed(string: inout String){
         if string.count > 0 {
             string.append("\n")
@@ -184,7 +197,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         }
     }
 
-
+    
     // MARK: FileInfoViewInput
     
     func startRenaming() {

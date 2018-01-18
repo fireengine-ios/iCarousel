@@ -12,7 +12,7 @@ protocol MusicBarDelegate: class {
 
 class MusicBar: UIView {
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     
     weak var delegate: MusicBarDelegate?
 
