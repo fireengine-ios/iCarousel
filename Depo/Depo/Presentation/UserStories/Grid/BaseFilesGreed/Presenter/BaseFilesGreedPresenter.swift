@@ -527,12 +527,20 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
-        self.filters = filters.map{ $0.convertToGeneralFilterFileType() }
+        guard let firstFilter = filters.first else {
+            return
+        }
+        var notificationTitle: String
+        switch firstFilter {
+        case .Photo:
+            notificationTitle = TabBarViewController.notificationPhotosScreen
+        case .Video:
+            notificationTitle = TabBarViewController.notificationVideoScreen
+        default:
+            notificationTitle = TabBarViewController.notificationPhotosScreen
+        }
         
-        stopEditing()
-//        dataSource.dropData()
-        dataSource.originalFilters = self.filters
-        reloadData()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationTitle), object: nil, userInfo: nil)
     }
     
     

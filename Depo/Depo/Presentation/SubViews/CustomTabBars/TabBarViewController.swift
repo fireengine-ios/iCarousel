@@ -48,6 +48,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationMusicStartedPlaying = "MusicStartedPlaying"
     static let notificationMusicDrop = "MusicDrop"
     static let notificationMusicStop = "MusicStop"
+    static let notificationPhotosScreen = "PhotosScreenOn"
+    static let notificationVideoScreen = "VideoScreenOn"
     
     let originalPlusBotttomConstraint: CGFloat = 10
     
@@ -61,6 +63,14 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()
     let cameraService: CameraService = CameraService()
+    
+    enum TabScreenIndex: Int {
+        case homePageScreenIndex = 0
+        case photosScreenIndex = 1
+        case videosScreenIndex = 2
+        case musicScreenIndex = 3
+        case documentsScreenIndex = 4
+    }
     
     var customNavigationControllers: [UINavigationController] = []
     
@@ -84,6 +94,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
         return nil
     }
+    
+    var lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+    
     
     var selectedIndex: NSInteger = 0 {
         willSet {
@@ -189,6 +202,27 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                                                selector: #selector(hideMusicBar),
                                                name: dropNotificationName,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showPhotosScreen),
+                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showVideosScreen),
+                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationVideoScreen),
+                                               object: nil)
+        
+    }
+    
+    @objc func showPhotosScreen(_ sender: Any) {
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+        selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+    }
+    
+    @objc func showVideosScreen(_ sender: Any) {
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
+        selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.videosScreenIndex.rawValue
     }
     
     @objc func showMusicBar(_ sender: Any) {
@@ -279,7 +313,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     func setupCustomNavControllers() {
         let router = RouterVC()
         let list = [router.homePageScreen,
-                    router.photosAndVideos,
+                    router.photosScreen,
+                    router.videosScreen,
                     router.musics,
                     router.documents]
         customNavigationControllers = list.flatMap{ UINavigationController(rootViewController: $0!)}
@@ -510,11 +545,15 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeViewState(state: false)
         
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
+
+            if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
+                (lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue ||
+                lastPhotoVideoIndex == TabScreenIndex.videosScreenIndex.rawValue ) {
+                tabbarSelectedIndex = lastPhotoVideoIndex
+            }
             
             tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
-            if tabbarSelectedIndex > 2 {
-                tabbarSelectedIndex -= 1
-            }
+            
             selectedIndex = tabbarSelectedIndex
         }
     }
