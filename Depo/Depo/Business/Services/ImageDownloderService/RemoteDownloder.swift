@@ -125,12 +125,13 @@ class FilesDownloader {
         for file in filesForDownload {
             group.enter()
             let params = BaseDownloadRequestParametrs(urlToFile: file.url, fileName: file.name, contentType: file.type)
+            
             requestService.executeDownloadRequest(param: params) { (urlToTmpFile, response, error) in
                 if let urlToTmpFile = urlToTmpFile {
+                    let destinationURL = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
                     do {
-                        let urlToLocalFile = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
-                        try FileManager.default.moveItem(at: urlToTmpFile, to: urlToLocalFile)
-                        localURLs.append(urlToLocalFile)
+                        try FileManager.default.moveItem(at: urlToTmpFile, to: destinationURL)
+                        localURLs.append(destinationURL)
                     } catch {
                         print(error.localizedDescription)
                     }

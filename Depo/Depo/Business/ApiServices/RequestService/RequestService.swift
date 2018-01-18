@@ -76,18 +76,18 @@ class RequestService {
     
     
     public func downloadFileRequestTask(patch:URL,
-                                    headerParametrs: RequestHeaderParametrs,
-                                    body: Data?,
-                                    method: RequestMethod,
-                                    timeoutInterval: TimeInterval,
-                                    response: @escaping RequestFileDownloadResponse ) -> URLSessionTask {
+                                        headerParametrs: RequestHeaderParametrs,
+                                        body: Data?,
+                                        method: RequestMethod,
+                                        timeoutInterval: TimeInterval,
+                                        response: @escaping RequestFileDownloadResponse ) -> URLSessionTask {
         log.debug("RequestService downloadFileRequestTask")
 
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headerParametrs
-        
+    
         debugPrint("REQUEST: \(request)")
         
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in

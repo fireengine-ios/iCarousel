@@ -36,8 +36,7 @@ protocol UploadDataRequestParametrs: RequestParametrs {
 }
 
 protocol DownloadRequestParametrs: RequestParametrs {
-    
-    var urlToRemoteFile: URL {get}
+    var urlToRemoteFile: URL { get }
 }
 
 
@@ -69,7 +68,6 @@ class BaseUploadRequestParametrs: UploadRequestParametrs {
 }
 
 class BaseDownloadRequestParametrs: DownloadRequestParametrs {
-    
     let urlToRemoteFile: URL
     
     let contentType: FileType
