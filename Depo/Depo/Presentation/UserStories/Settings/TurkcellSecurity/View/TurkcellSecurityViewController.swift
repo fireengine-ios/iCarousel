@@ -83,7 +83,7 @@ extension TurkcellSecurityViewController: UITableViewDelegate, UITableViewDataSo
         var cellLabelText = ""
         switch indexPath.row {
         case 0:
-            cellLabelText = TextConstants.settingsViewCellTurkcellPasscode
+            cellLabelText = TextConstants.settingsViewCellTurkcellPassword
         case 1:
             cellLabelText = TextConstants.settingsViewCellTurkcellAutoLogin
         default:
