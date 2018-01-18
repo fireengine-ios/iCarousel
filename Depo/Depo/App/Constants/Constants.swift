@@ -341,7 +341,9 @@ struct TextConstants {
     static let emptyEmail = NSLocalizedString("E-mail is empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     //MARK: fileInfo
     static let fileInfoFileNameTitle = NSLocalizedString("File Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let fileInfoInfoTitle = NSLocalizedString("File Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fileInfoFileInfoTitle = NSLocalizedString("File Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fileInfoFolderNameTitle = NSLocalizedString("Folder Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fileInfoFolderInfoTitle = NSLocalizedString("Folder Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoFolderSizeTitle = NSLocalizedString("Folder size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoAlbumSizeTitle = NSLocalizedString("Items", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoFileSizeTitle = NSLocalizedString("File size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

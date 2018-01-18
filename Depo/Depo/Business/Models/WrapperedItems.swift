@@ -504,6 +504,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var isFolder: Bool?
     
+    var childCount: Int64?
+    
     var metaDate: Date {
         if let unwrapedMetaDate = metaData?.takenDate {
             return unwrapedMetaDate
@@ -617,6 +619,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         parent = remote.parent
         
         var url: URL?
+        
+        childCount = remote.childCount
         
         metaData = remote.metadata
         
