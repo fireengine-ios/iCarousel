@@ -13,7 +13,7 @@ class SplashInteractor: SplashInteractorInput {
     let authService = AuthenticationService()
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
-    private lazy var tokenStorage: TokenStorage = TokenStorageUserDefaults()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
     
     var isPasscodeEmpty: Bool {
