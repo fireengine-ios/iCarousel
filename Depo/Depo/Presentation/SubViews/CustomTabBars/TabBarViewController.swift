@@ -274,6 +274,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
     
     @objc private func hideTabBar(_ sender: Any) {
+        changeViewState(state: false)
         changeTabBarStatus(hidden: true)
         if (bottomTabBarConstraint.constant >= 0){
             var bottomConstraintConstant = -self.tabBar.frame.height
