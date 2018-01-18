@@ -30,7 +30,7 @@ extension CoreDataStack {
         let localMediaStorage = LocalMediaStorage.default
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
             guard accessGranted, let `self` = self,
-                self.inProcessAppendingLocalFiles else {
+                !self.inProcessAppendingLocalFiles else {
                 return
             }
             
