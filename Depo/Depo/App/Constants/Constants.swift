@@ -31,6 +31,7 @@ struct TextConstants {
     static let phoneVereficationNonValidCodeErrorText = NSLocalizedString("Verification code is invalid. \n Please try again.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let phoneVereficationResendRequestFailedErrorText = NSLocalizedString("Request failed \n Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenCredentialsError = NSLocalizedString("Login denied. Please check your credentials.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginScreenInvalidCaptchaError = NSLocalizedString("This text doesn't match. Please try again.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenNoLoginError = NSLocalizedString("Please check the GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenNoPasswordError = NSLocalizedString("Please enter your password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenNoInternetError = NSLocalizedString("Please check your internet connection.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

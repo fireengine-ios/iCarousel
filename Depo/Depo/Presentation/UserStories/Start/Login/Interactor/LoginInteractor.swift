@@ -79,6 +79,13 @@ class LoginInteractor: LoginInteractorInput {
                     self.output?.needShowCaptcha()
                 } else if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.attempts += 1
+                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
+                } else if self.isInvalidCaptchaError(forResponse: errorResponse) {
+                    self.output?.failLogin(message: TextConstants.loginScreenInvalidCaptchaError)
+                } else if self.isInternetError(forResponse: errorResponse) {
+                    self.output?.failLogin(message: errorResponse.description)
+                } else {
+                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
                 if self.isEmptyPhoneError(for: errorResponse) {
                     self.login = login
@@ -87,7 +94,6 @@ class LoginInteractor: LoginInteractorInput {
                     self.output?.openEmptyPhone()
                     return
                 }
-                self.output?.failLogin(message: errorResponse.description)
             }
         })
     }
@@ -131,6 +137,14 @@ class LoginInteractor: LoginInteractorInput {
     
     private func isAuthenticationError(forResponse errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains("Authentication failure")
+    }
+    
+    private func isInvalidCaptchaError(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("Invalid captcha")
+    }
+    
+    private func isInternetError(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("Internet")
     }
     
     private func isBlockError(forResponse errorResponse: ErrorResponse) -> Bool {
