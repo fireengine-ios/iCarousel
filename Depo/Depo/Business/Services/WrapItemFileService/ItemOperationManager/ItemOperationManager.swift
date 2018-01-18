@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ItemOperationManagerViewProtocol {
+protocol ItemOperationManagerViewProtocol: class {
     
     func startUploadFile(file: WrapData)
     
@@ -32,8 +32,36 @@ protocol ItemOperationManagerViewProtocol {
     
     func fileAddedToAlbum()
     
+    func filesRomovedFromAlbum(items: [Item], albumUUID: String)
+
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool
     
+}
+
+extension ItemOperationManagerViewProtocol {
+    func startUploadFile(file: WrapData) {}
+    
+    func setProgressForUploadingFile(file: WrapData, progress: Float) {}
+    
+    func finishedUploadFile(file: WrapData) {}
+    
+    func addFilesToFavorites(items: [Item]) {}
+    
+    func addedLocalFiles(items: [Item]) {}
+    
+    func removeFileFromFavorites(items: [Item]) {}
+    
+    func deleteItems(items: [Item]) {}
+    
+    func newFolderCreated() {}
+    
+    func newAlbumCreated() {}
+    
+    func albumsDeleted(albums: [AlbumItem]) {}
+    
+    func fileAddedToAlbum() {}
+    
+    func filesRomovedFromAlbum(items: [Item], albumUUID: String) {}
 }
 
 
@@ -162,6 +190,14 @@ class ItemOperationManager: NSObject {
         DispatchQueue.main.async {
             for view in self.views{
                 view.fileAddedToAlbum()
+            }
+        }
+    }
+    
+    func filesRomovedFromAlbum(items: [Item], albumUUID: String){
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.filesRomovedFromAlbum(items: items, albumUUID: albumUUID)
             }
         }
     }

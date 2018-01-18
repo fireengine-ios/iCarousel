@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class LBAlbumLikePreviewSliderInteractor: LBAlbumLikePreviewSliderInteractorInput {
+class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInteractorInput, ItemOperationManagerViewProtocol {
 
     weak var output: LBAlbumLikePreviewSliderInteractorOutput!
 
@@ -14,6 +14,10 @@ class LBAlbumLikePreviewSliderInteractor: LBAlbumLikePreviewSliderInteractorInpu
     
     
     //MARK: - Interactor Input
+    
+    deinit{
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
     
     var currentItems: [AlbumItem] {
         set {
@@ -38,6 +42,34 @@ class LBAlbumLikePreviewSliderInteractor: LBAlbumLikePreviewSliderInteractorInpu
             }
             
         })
+    }
+    
+    
+    //Protocol ItemOperationManagerViewProtocol
+    
+    func newAlbumCreated(){
+        requestAlbumbs()
+    }
+    
+    func albumsDeleted(albums: [AlbumItem]){
+        if !albums.isEmpty, !currentItems.isEmpty{
+            var newArray = [AlbumItem]()
+            let albumsUUIDS = albums.map { $0.uuid }
+            for object in currentItems{
+                if !albumsUUIDS.contains(object.uuid){
+                    newArray.append(object)
+                }
+            }
+            currentItems = newArray
+            output.preparedAlbumbs(albumbs: currentItems)
+        }
+    }
+    
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool{
+        if let compairedView = object as? LBAlbumLikePreviewSliderInteractor {
+            return compairedView == self
+        }
+        return false
     }
     
 }
