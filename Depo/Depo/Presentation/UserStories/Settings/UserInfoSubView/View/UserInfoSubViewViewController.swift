@@ -32,8 +32,6 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
     weak var actionsDelegate: UserInfoSubViewViewControllerActionsDelegate?
     
     var userInfo: AccountInfoResponse?
-
-    
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -69,35 +67,29 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
         
         editButton.isHidden = true
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        output.viewWillAppear()
-    }
-
-    
+        
     func reloadUserInfo() {
-        output.reloadUserInfoRequered()
+        output.reloadUserInfoRequired()
     }
     
     func showLoadingSpinner() {
-        output.loadingIndicatorRequered()
+        output.loadingIndicatorRequired()
     }
     
     func dismissLoadingSpinner() {
-        output.loadingIndicatorDismissalRequered()
+        output.loadingIndicatorDismissalRequired()
     }
     
-    func setUserInfo(userInfo: AccountInfoResponse){
+    func setUserInfo(userInfo: AccountInfoResponse) {
         self.userInfo = userInfo
         editButton.isHidden = false
         var string: String = ""
-        if let name_ = userInfo.name{
+        if let name_ = userInfo.name {
             string = string + name_
         }
         
-        if let surName_ = userInfo.surname{
-            if (string.count > 0){
+        if let surName_ = userInfo.surname {
+            if (string.count > 0) {
                 string = string + " "
             }
             string = string + surName_
@@ -111,13 +103,13 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
         }
     }
     
-    func setQuotaInfo(quotoInfo: QuotaInfoResponse){
+    func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
         guard let quotaBytes = quotoInfo.bytes, let usedBytes = quotoInfo.bytesUsed else { return }
         usersStorrageUssesProgress.progress = 1 - Float(usedBytes)/Float(quotaBytes)
         
         let quotaString = quotaBytes.bytesString
         var remaind = quotaBytes - usedBytes
-        if remaind < 0{
+        if remaind < 0 {
             remaind = 0
         }
         let remaindSize = remaind.bytesString
@@ -145,18 +137,18 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
     }
     
     // MARK: buttons actions
-    @IBAction func onEditUserInformationButton(){
+    @IBAction func onEditUserInformationButton() {
         guard let userInfo_ = userInfo else{
             return
         }
         actionsDelegate?.updateUserProfile(userInfo: userInfo_)
     }
     
-    @IBAction func onUpgradeUserStorrageButton(){
+    @IBAction func onUpgradeUserStorrageButton() {
         actionsDelegate?.upgradeButtonPressed()
     }
     
-    @IBAction func onUpdateUserPhoto(){
+    @IBAction func onUpdateUserPhoto() {
         actionsDelegate?.changePhotoPressed()
 //        output.onChangeUserPhoto()
     }

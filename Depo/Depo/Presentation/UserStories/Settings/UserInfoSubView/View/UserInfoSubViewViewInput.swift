@@ -8,11 +8,6 @@
 
 protocol UserInfoSubViewViewInput: class {
 
-    /**
-        @author Oleg
-        Setup initial state of the view
-    */
-
     func setupInitialState()
     
     func setUserInfo(userInfo: AccountInfoResponse)
