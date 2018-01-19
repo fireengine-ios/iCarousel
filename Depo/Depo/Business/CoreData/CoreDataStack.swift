@@ -13,6 +13,7 @@ import Photos
 class CoreDataStack: NSObject {
     
     typealias AppendingLocaclItemsFinishCallback = ()->Void
+    typealias AppendingLocaclItemsProgressCallback = (Int)->Void
     
     @objc static let `default` = CoreDataStack()
     

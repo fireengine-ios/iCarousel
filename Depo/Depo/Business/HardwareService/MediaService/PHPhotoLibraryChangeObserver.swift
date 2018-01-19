@@ -18,7 +18,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         DispatchQueue.main.async {
             self.fetchResult = changes.fetchResultAfterChanges
             if changes.hasIncrementalChanges, changes.insertedIndexes != nil || changes.removedIndexes != nil {
-                CoreDataStack.default.appendLocalMediaItems({
+                CoreDataStack.default.appendLocalMediaItems(progress: nil, {
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
                                                     object: nil)
                 })
