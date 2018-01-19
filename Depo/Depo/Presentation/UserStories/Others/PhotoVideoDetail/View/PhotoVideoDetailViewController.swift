@@ -263,6 +263,16 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     }
     
     func onItemSelected(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
+        let item = items[index]
+        if item.isLocalItem && item.fileType == .image{
+            setThreeDotsMenu(active: false)
+        }else{
+            setThreeDotsMenu(active: true)
+        }
+    }
+    
+    func setThreeDotsMenu(active isActive: Bool) {
+        navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
     // MARK: BaseFileContentViewDeleGate
