@@ -393,7 +393,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func appendCollectionView(items: [WrapData]) {
-        compoundItems(pageItems: items)
+        let nonEmptyMetaItems = items.filter{$0.metaData?.takenDate != nil}
+        compoundItems(pageItems: nonEmptyMetaItems)
         
         //        reloadData()
     }

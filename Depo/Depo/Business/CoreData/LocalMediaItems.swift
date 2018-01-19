@@ -21,6 +21,7 @@ extension CoreDataStack {
                 }
                 if status == .denied {
                     self.deleteLocalFiles()
+                    end?()
                 }
             }
         }
