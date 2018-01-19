@@ -77,6 +77,8 @@ class LoginInteractor: LoginInteractorInput {
                 }
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.output?.needShowCaptcha()
+                } else if (!self.checkInternetConnection()) {
+                    self.output?.failLogin(message: TextConstants.loginScreenNoInternetError)
                 } else if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.attempts += 1
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
@@ -153,6 +155,10 @@ class LoginInteractor: LoginInteractorInput {
     
     private func isEmptyPhoneError(for errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains(HeaderConstant.emptyMSISDN)
+    }
+    
+    private func checkInternetConnection() -> Bool {
+        return ReachabilityService().isReachable
     }
     
     func findCoutryPhoneCode(plus: Bool) {

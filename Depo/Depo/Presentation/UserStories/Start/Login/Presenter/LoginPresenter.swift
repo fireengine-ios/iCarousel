@@ -91,7 +91,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         compliteAsyncOperationEnableScreen()
         view.highlightLoginTitle()
         view.highlightPasswordTitle()
-
         showMessageHideSpinner(text: message)
         if captchaShowed {
             view.refreshCaptcha()

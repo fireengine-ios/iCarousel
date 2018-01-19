@@ -34,7 +34,7 @@ struct TextConstants {
     static let loginScreenInvalidCaptchaError = NSLocalizedString("This text doesn't match. Please try again.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenNoLoginError = NSLocalizedString("Please check the GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenNoPasswordError = NSLocalizedString("Please enter your password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let loginScreenNoInternetError = NSLocalizedString("Please check your internet connection.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginScreenNoInternetError = NSLocalizedString("The Internet connection appears to be offline.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationPasswordError = NSLocalizedString("Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hourBlockLoginError = NSLocalizedString("You have performed too many attempts. Please try again 1 hour later.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationMailError = NSLocalizedString("Please check the e-mail address.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -500,6 +500,13 @@ struct TextConstants {
     static let albumsTitle = NSLocalizedString("Albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let selectAlbumButtonTitle = NSLocalizedString("Add", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadPhotos = NSLocalizedString("Upload Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: My stream
+    static let myStreamAlbumsTitle = NSLocalizedString("Albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let myStreamStoriesTitle = NSLocalizedString("My Stories", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let myStreamPeopleTitle = NSLocalizedString("People", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let myStreamThingsTitle = NSLocalizedString("Things", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let myStreamPlacesTitle = NSLocalizedString("Places", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: Feedback View
     static let feedbackMailTextFormat = NSLocalizedString("Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

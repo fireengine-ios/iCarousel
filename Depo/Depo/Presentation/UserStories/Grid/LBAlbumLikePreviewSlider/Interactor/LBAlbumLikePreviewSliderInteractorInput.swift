@@ -7,9 +7,13 @@
 //
 
 protocol LBAlbumLikePreviewSliderInteractorInput {
+        
+    func requestAllItems()
+    
+    var albumItems: [AlbumItem] { get set }
+    var storyItems: [Item] { get set }
+    var peopleItems: [Item] { get set }
+    var thingItems: [Item] { get set }
+    var placeItems: [Item] { get set }
 
-    var currentItems: [AlbumItem] { get set }
-    
-    func requestAlbumbs()
-    
 }

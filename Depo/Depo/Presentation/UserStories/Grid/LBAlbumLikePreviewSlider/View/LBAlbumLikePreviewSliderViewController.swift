@@ -11,7 +11,7 @@ import UIKit
 final class LBAlbumLikePreviewSliderViewController: UIViewController {
     var output: LBAlbumLikePreviewSliderViewOutput!
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var titleLabel: UILabel!
     
     class func initFromXIB() -> LBAlbumLikePreviewSliderViewController {
@@ -20,7 +20,7 @@ final class LBAlbumLikePreviewSliderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(nibCell: AlbumCell.self)
+        collectionView?.register(nibCell: AlbumCell.self)
         output.viewIsReady()
     }
     
@@ -46,29 +46,33 @@ extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewIn
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTouchRecognition))
         titleLabel.addGestureRecognizer(tapGesture)
     }
+    
     func setupCollectionView() {
-        collectionView.reloadData()
+        collectionView?.reloadData()
     }
 }
 
 extension LBAlbumLikePreviewSliderViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return output.currentItems.count
+        return 5
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(cell: AlbumCell.self, for: indexPath)
+        let cell = collectionView.dequeue(cell: AlbumCell.self, for: indexPath)        
         
-        let albumItem = output.currentItems[indexPath.row]
-        if let unwrapedItem = albumItem.preview {
-            cell.setup(forItem: unwrapedItem, titleText: albumItem.name ?? "Unnamed")
+        if let type = MyStreamType(rawValue: indexPath.item) {
+            let items = output.previewItems(withType: type)
+            cell.setup(forItems: items, titleText: type.title)
         }
+        
         return cell
     }
 }
 
 extension LBAlbumLikePreviewSliderViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        output.onSelectAlbumAt(index: indexPath.row)
+        if let type = MyStreamType(rawValue: indexPath.item) {
+            output.onSelectItem(type: type)
+        }
     }
 }
 

@@ -338,7 +338,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .deleteDeviceOriginal:
                 if let itemsArray = items as? [Item]{
-                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: itemsArray)
+                    let serverObjects = itemsArray.filter({
+                        return !$0.isLocalItem
+                    })
+                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects)
                     action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
                         self.interactor.deleteDeviceOriginal(items: localDuplicates)
                     })

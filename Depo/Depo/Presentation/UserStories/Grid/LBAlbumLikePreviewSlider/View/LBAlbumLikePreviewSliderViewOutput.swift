@@ -9,12 +9,12 @@
 protocol LBAlbumLikePreviewSliderViewOutput {
 
     func viewIsReady()
-    
-    var currentItems: [AlbumItem] { get }
+
+    func previewItems(withType type: MyStreamType) -> [Item]
     
     func sliderTitlePressed()
     
-    func onSelectAlbumAt(index: Int)
+    func onSelectItem(type: MyStreamType)
     
     func reloadData()
 

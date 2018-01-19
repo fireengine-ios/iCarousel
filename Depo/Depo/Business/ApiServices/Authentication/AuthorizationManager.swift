@@ -59,15 +59,10 @@ open class AuthorizationRepositoryImp: AuthorizationRepository {
 extension AuthorizationRepositoryImp: RequestAdapter {
     
     public func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
-        guard let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix(urls.baseUrl.absoluteString) else {
-            return urlRequest
-        }
-        
+        guard urlRequest.url?.absoluteString != nil,
+            let accessToken = tokenStorage.accessToken
+            else { return urlRequest }
         var urlRequest = urlRequest
-        
-        guard let accessToken = tokenStorage.accessToken else {
-            return urlRequest
-        }
         urlRequest.setValue(fullAccessToken(accessToken), forHTTPHeaderField: authorizationHeaderKey)
         return urlRequest
     }
@@ -150,18 +145,20 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                 guard let strongSelf = self else { return }
                 debugPrint(response)
                 
-                // mapping accessToken for completion handler
                 
-                if
-                    let headers = response.response?.allHeaderFields as? [String: Any],
-                    let accessToken = headers[strongSelf.accessTokenKey] as? String
-                {
-                    completion(true, accessToken)
-                } else {
-                    /// if refresh token is invalid
+                /// if tokenStorage.refreshToken is invalid
+                if response.response?.statusCode == 401 {
                     strongSelf.refreshFailedHandler()
                     completion(false, nil)
+                
+                /// mapping accessToken for completion handler
+                } else if let headers = response.response?.allHeaderFields as? [String: Any],
+                    let accessToken = headers[strongSelf.accessTokenKey] as? String {
+                    completion(true, accessToken)
+                } else {
+                    completion(false, nil)
                 }
+                
                 
                 // end refresh status
                 strongSelf.isRefreshing = false

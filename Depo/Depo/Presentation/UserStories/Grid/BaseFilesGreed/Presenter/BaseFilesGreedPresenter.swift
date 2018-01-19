@@ -220,6 +220,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             dataSource.reloadData()
         }
+        updateNoFilesView()
     }
     
     func isArrayDataSource() -> Bool{
@@ -309,10 +310,20 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     // MARK: Bottom Bar
     
+    private func canShow3DotsButton() -> Bool {
+        let array = dataSource.getSelectedItems().filter {
+            if $0.isLocalItem && $0.fileType == .video {
+                return false
+            }
+            return true
+        }
+        return !array.isEmpty
+    }
+    
     private func startEditing() {
         let selectedItemsCount = dataSource.selectedItemsArray.count
         view.startSelection(with: selectedItemsCount)
-        view.setThreeDotsMenu(active: selectedItemsCount > 0)
+        view.setThreeDotsMenu(active: canShow3DotsButton())
         dataSource.setSelectionState(selectionState: true)
     }
     
@@ -357,7 +368,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         
         
-        view.setThreeDotsMenu(active: dataSource.selectedItemsArray.count > 0)
+        view.setThreeDotsMenu(active: canShow3DotsButton())
         self.view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
@@ -466,9 +477,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
             }
             
-            let remoteItems = selectedItems.filter {$0.isLocalItem == false}
+            //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
             
-            if actionTypes.contains(.createStory) && !remoteItems.contains(where: { return $0.fileType == .image } ) {
+            if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image } ) {
                 let index = actionTypes.index(where: { return $0 == .createStory})!
                 actionTypes.remove(at: index)
             }
