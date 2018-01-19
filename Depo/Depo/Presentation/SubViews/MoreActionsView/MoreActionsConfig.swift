@@ -176,6 +176,8 @@ class MoreActionsConfig {
     enum SortRullesType: CustomStringConvertible {
         case AlphaBetricAZ
         case AlphaBetricZA
+        case LettersAZ
+        case LettersZA
         case TimeNewOld
         case TimeOldNew
         case metaDataTimeNewOld
@@ -186,9 +188,9 @@ class MoreActionsConfig {
         
         var description: String {
             switch self {
-            case .AlphaBetricAZ:
+            case .AlphaBetricAZ, .LettersAZ:
                 return TextConstants.sortTypeAlphabeticAZTitle
-            case .AlphaBetricZA:
+            case .AlphaBetricZA, .LettersZA:
                 return TextConstants.sortTypeAlphabeticZATitle
             case .TimeNewOld, .metaDataTimeNewOld:
                 return TextConstants.sortTimeNewOldTitle

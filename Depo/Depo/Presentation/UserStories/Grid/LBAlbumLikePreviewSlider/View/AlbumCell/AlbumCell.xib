@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,9 +17,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="186" height="151"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4k4-wf-gbJ" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="186" height="131"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSq-I2-uPu">
                         <rect key="frame" x="0.0" y="131" width="186" height="20"/>
                         <constraints>
@@ -30,20 +26,64 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TbP-rD-dRR">
+                        <rect key="frame" x="0.0" y="0.0" width="186" height="131"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0rl-uE-Kzb" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="92.5" height="65"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICB-ZY-xuu" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                                <rect key="frame" x="93.5" y="0.0" width="92.5" height="65"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aXF-q3-q7j" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                                <rect key="frame" x="93" y="66" width="92.5" height="65"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bfe-Cc-K0B" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="66" width="92.5" height="65"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="bfe-Cc-K0B" secondAttribute="bottom" id="3LI-IQ-HIO"/>
+                            <constraint firstItem="bfe-Cc-K0B" firstAttribute="leading" secondItem="TbP-rD-dRR" secondAttribute="leading" id="3OX-PU-xwh"/>
+                            <constraint firstItem="0rl-uE-Kzb" firstAttribute="height" secondItem="bfe-Cc-K0B" secondAttribute="height" id="6Xg-tx-aJW"/>
+                            <constraint firstItem="0rl-uE-Kzb" firstAttribute="width" secondItem="ICB-ZY-xuu" secondAttribute="width" id="GEG-Mb-gF9"/>
+                            <constraint firstItem="bfe-Cc-K0B" firstAttribute="leading" secondItem="TbP-rD-dRR" secondAttribute="leading" id="I9K-1I-XDf"/>
+                            <constraint firstAttribute="trailing" secondItem="ICB-ZY-xuu" secondAttribute="trailing" id="LES-gb-mYV"/>
+                            <constraint firstItem="ICB-ZY-xuu" firstAttribute="top" secondItem="TbP-rD-dRR" secondAttribute="top" id="Nx7-mN-g5a"/>
+                            <constraint firstItem="0rl-uE-Kzb" firstAttribute="width" secondItem="aXF-q3-q7j" secondAttribute="width" id="SVX-VA-Gc9"/>
+                            <constraint firstItem="0rl-uE-Kzb" firstAttribute="width" secondItem="bfe-Cc-K0B" secondAttribute="width" id="VYe-UE-Aaw"/>
+                            <constraint firstItem="0rl-uE-Kzb" firstAttribute="top" secondItem="TbP-rD-dRR" secondAttribute="top" id="Ymb-cc-swZ"/>
+                            <constraint firstAttribute="trailing" secondItem="aXF-q3-q7j" secondAttribute="trailing" id="cjt-PL-qv5"/>
+                            <constraint firstItem="0rl-uE-Kzb" firstAttribute="height" secondItem="ICB-ZY-xuu" secondAttribute="height" id="crF-z7-QzS"/>
+                            <constraint firstAttribute="trailing" secondItem="aXF-q3-q7j" secondAttribute="trailing" id="d5h-z5-ILt"/>
+                            <constraint firstItem="aXF-q3-q7j" firstAttribute="leading" secondItem="bfe-Cc-K0B" secondAttribute="trailing" constant="1" id="fIe-1f-oqR"/>
+                            <constraint firstItem="0rl-uE-Kzb" firstAttribute="leading" secondItem="TbP-rD-dRR" secondAttribute="leading" id="hwn-we-O7b"/>
+                            <constraint firstItem="bfe-Cc-K0B" firstAttribute="top" secondItem="0rl-uE-Kzb" secondAttribute="bottom" constant="1" id="kxl-MI-AVx"/>
+                            <constraint firstAttribute="bottom" secondItem="aXF-q3-q7j" secondAttribute="bottom" id="mVd-H7-c42"/>
+                            <constraint firstItem="ICB-ZY-xuu" firstAttribute="leading" secondItem="0rl-uE-Kzb" secondAttribute="trailing" constant="1" id="oL9-qh-SXw"/>
+                            <constraint firstItem="0rl-uE-Kzb" firstAttribute="height" secondItem="aXF-q3-q7j" secondAttribute="height" id="x5R-ob-Khd"/>
+                            <constraint firstItem="aXF-q3-q7j" firstAttribute="top" secondItem="ICB-ZY-xuu" secondAttribute="bottom" constant="1" id="ypn-bK-qCF"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="4k4-wf-gbJ" secondAttribute="trailing" id="IwX-cQ-42K"/>
-                <constraint firstItem="XSq-I2-uPu" firstAttribute="top" secondItem="4k4-wf-gbJ" secondAttribute="bottom" id="KJO-ed-rk1"/>
-                <constraint firstItem="4k4-wf-gbJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="PnA-Fl-A8R"/>
-                <constraint firstItem="4k4-wf-gbJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="UTg-Jv-RqE"/>
+                <constraint firstAttribute="trailing" secondItem="TbP-rD-dRR" secondAttribute="trailing" id="GjN-yZ-DYK"/>
                 <constraint firstAttribute="bottom" secondItem="XSq-I2-uPu" secondAttribute="bottom" id="X6k-jY-zK9"/>
                 <constraint firstItem="XSq-I2-uPu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oc3-K6-Up6"/>
+                <constraint firstItem="TbP-rD-dRR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xXs-08-8zp"/>
+                <constraint firstItem="XSq-I2-uPu" firstAttribute="top" secondItem="TbP-rD-dRR" secondAttribute="bottom" id="yAt-s8-gNa"/>
                 <constraint firstAttribute="trailing" secondItem="XSq-I2-uPu" secondAttribute="trailing" id="z7p-Wr-cCl"/>
+                <constraint firstItem="TbP-rD-dRR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zft-yA-V1r"/>
             </constraints>
             <size key="customSize" width="186" height="151"/>
             <connections>
-                <outlet property="previewImage" destination="4k4-wf-gbJ" id="JwZ-KP-jt4"/>
+                <outlet property="previewBackView" destination="TbP-rD-dRR" id="6JY-eq-xjp"/>
+                <outlet property="previewImage1" destination="0rl-uE-Kzb" id="ikU-sU-iEJ"/>
+                <outlet property="previewImage2" destination="ICB-ZY-xuu" id="05A-A5-y7x"/>
+                <outlet property="previewImage3" destination="bfe-Cc-K0B" id="T6S-CE-ltf"/>
+                <outlet property="previewImage4" destination="aXF-q3-q7j" id="WM1-nK-mo7"/>
                 <outlet property="titleLabel" destination="XSq-I2-uPu" id="crV-Ax-qKT"/>
             </connections>
             <point key="canvasLocation" x="102" y="104.5"/>

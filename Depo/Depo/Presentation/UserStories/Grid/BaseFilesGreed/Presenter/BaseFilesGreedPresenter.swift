@@ -220,6 +220,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             dataSource.reloadData()
         }
+        updateNoFilesView()
     }
     
     func isArrayDataSource() -> Bool{

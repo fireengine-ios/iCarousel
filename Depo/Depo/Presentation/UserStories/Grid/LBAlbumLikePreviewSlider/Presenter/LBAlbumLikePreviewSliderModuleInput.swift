@@ -8,6 +8,6 @@
 
 protocol LBAlbumLikePreviewSliderModuleInput: class {
 
-    func setup(withItems items: [AlbumItem])
+    func setup(withItems albumItems: [AlbumItem], storyItems: [Item], peopleItems: [Item], thingItems: [Item], placeItems: [Item])
     func reload()
 }

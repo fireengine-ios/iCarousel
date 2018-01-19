@@ -60,6 +60,11 @@ struct SearchJsonKey {
     static let Duration = "Duration"
     static let Genre = "Genre"
     
+    // story metadata
+    
+    static let VideoSlideshow = "Video-Slideshow"
+    static let VideoHLSPreview = "Video-Hls-Preview"
+
     //folder
     static let ChildCount = "childCount"
 }
@@ -84,8 +89,12 @@ class BaseMetaData: ObjectRequestResponse {
     var title: String?
     var genre =  [String]()
     
-    // music & video
+    // music & video & story
     var duration: Double?
+    
+    //story
+    var videoSlideshow: Bool?
+    var videoHLSPreview: URL?
     
     required init(withJSON: JSON?) {
         super.init(withJSON: withJSON)
@@ -121,6 +130,12 @@ class BaseMetaData: ObjectRequestResponse {
         if let genreresponse = json?[SearchJsonKey.Genre].string {
             genre = genreresponse.components(separatedBy: ",")
         }
+        
+        if let slideshow = json?[SearchJsonKey.VideoSlideshow].string, slideshow.count > 0 {
+            videoSlideshow = slideshow == "true" ? true : false
+        }
+        
+        videoHLSPreview = json?[SearchJsonKey.VideoHLSPreview].url
     }
 }
 
