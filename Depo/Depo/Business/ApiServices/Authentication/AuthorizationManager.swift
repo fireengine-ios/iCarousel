@@ -59,15 +59,10 @@ open class AuthorizationRepositoryImp: AuthorizationRepository {
 extension AuthorizationRepositoryImp: RequestAdapter {
     
     public func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
-        guard let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix(urls.baseUrl.absoluteString) else {
-            return urlRequest
-        }
-        
+        guard urlRequest.url?.absoluteString != nil,
+            let accessToken = tokenStorage.accessToken
+            else { return urlRequest }
         var urlRequest = urlRequest
-        
-        guard let accessToken = tokenStorage.accessToken else {
-            return urlRequest
-        }
         urlRequest.setValue(fullAccessToken(accessToken), forHTTPHeaderField: authorizationHeaderKey)
         return urlRequest
     }
