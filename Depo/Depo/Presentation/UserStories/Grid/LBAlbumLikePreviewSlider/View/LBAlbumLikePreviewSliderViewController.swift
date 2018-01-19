@@ -11,7 +11,7 @@ import UIKit
 final class LBAlbumLikePreviewSliderViewController: UIViewController {
     var output: LBAlbumLikePreviewSliderViewOutput!
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var titleLabel: UILabel!
     
     class func initFromXIB() -> LBAlbumLikePreviewSliderViewController {
@@ -20,7 +20,7 @@ final class LBAlbumLikePreviewSliderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(nibCell: AlbumCell.self)
+        collectionView?.register(nibCell: AlbumCell.self)
         output.viewIsReady()
     }
     
@@ -46,8 +46,9 @@ extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewIn
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTouchRecognition))
         titleLabel.addGestureRecognizer(tapGesture)
     }
+    
     func setupCollectionView() {
-        collectionView.reloadData()
+        collectionView?.reloadData()
     }
 }
 

@@ -101,24 +101,24 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     //Protocol ItemOperationManagerViewProtocol
     
-    func newAlbumCreated() {
-        requestAllItems()
-    }
-    
-    func albumsDeleted(albums: [AlbumItem]) {
-        if !albums.isEmpty, !albumItems.isEmpty {
-            var newArray = [AlbumItem]()
-            let albumsUUIDS = albums.map { $0.uuid }
-            for object in albumItems {
-                if !albumsUUIDS.contains(object.uuid) {
-                    newArray.append(object)
-                }
-            }
-            albumItems = newArray
-            output.preparedAlbumbs(albumbs: albumItems)
-        }
-    }
-    
+//    func newAlbumCreated() {
+//        requestAllItems()
+//    }
+//
+//    func albumsDeleted(albums: [AlbumItem]) {
+//        if !albums.isEmpty, !albumItems.isEmpty {
+//            var newArray = [AlbumItem]()
+//            let albumsUUIDS = albums.map { $0.uuid }
+//            for object in albumItems {
+//                if !albumsUUIDS.contains(object.uuid) {
+//                    newArray.append(object)
+//                }
+//            }
+//            albumItems = newArray
+//            output.preparedAlbumbs(albumbs: albumItems)
+//        }
+//    }
+
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         if let compairedView = object as? LBAlbumLikePreviewSliderInteractor {
             return compairedView == self
