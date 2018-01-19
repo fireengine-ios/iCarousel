@@ -130,8 +130,8 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         if (isPopUpCell(path: path)){
             popUps.remove(at: path.row)
         }else{
-            let controller = controllersArray[path.row]
-            controllersArray.remove(at: path.row)
+            let controller = controllersArray[path.row - popUps.count]
+            controllersArray.remove(at: path.row - popUps.count)
             controller.removeFromParentViewController()
             delegate?.onCellHasBeenRemovedWith(controller: controller)
         }
