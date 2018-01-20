@@ -36,9 +36,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             if let printIndex = actionTypes.index(of: .print) {
                 actionTypes.remove(at: printIndex)
             }
-            if fileTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
-                actionTypes.remove(at: infoIndex)
-            }
+//            if fileTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
+//                actionTypes.remove(at: infoIndex)
+//            }
             barConfig = EditingBarConfig(elementsConfig: actionTypes,
                                          style: barConfig.style,
                                          tintColor: barConfig.tintColor)

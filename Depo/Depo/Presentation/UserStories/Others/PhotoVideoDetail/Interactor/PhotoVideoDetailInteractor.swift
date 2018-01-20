@@ -76,6 +76,13 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                     elementsConfig.append(.info)
                 }
             }
+            
+            if .video == selectedItem.fileType && !selectedItem.isLocalItem {
+                if let deleteIndex = elementsConfig.index(of: .info)  {
+                    elementsConfig.remove(at: deleteIndex)
+                }
+            }
+            
             if selectedItem.syncStatus != .notSynced {
                 elementsConfig = elementsConfig + [.delete]
             }
