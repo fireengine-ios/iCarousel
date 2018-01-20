@@ -48,6 +48,7 @@
 "This package activation code is invalid" = "This package activation code is invalid";
 "Account cannot be found" = "Account cannot be found";
 "cancelled" = "cancelled";
+"The network connection was lost." = "The network connection was lost.";
 "Nothing to download" = "Nothing to download";
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";

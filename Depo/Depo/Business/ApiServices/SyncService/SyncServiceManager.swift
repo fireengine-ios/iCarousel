@@ -82,7 +82,7 @@ class SyncServiceManager {
         
         settings = settingsModel
     
-        checkReachabilityAndSettings()
+        checkReachabilityAndSettings(reachabilityChanged: false)
     }
     
     func updateImmediately() {
@@ -90,7 +90,7 @@ class SyncServiceManager {
 
         lastAutoSyncTime = NSDate().timeIntervalSince1970
         
-        checkReachabilityAndSettings()
+        checkReachabilityAndSettings(reachabilityChanged: false)
     }
     
     func updateInBackground() {
@@ -100,7 +100,7 @@ class SyncServiceManager {
         if time - lastAutoSyncTime > timeIntervalBetweenSyncs {
             lastAutoSyncTime = time
             
-            checkReachabilityAndSettings()
+            checkReachabilityAndSettings(reachabilityChanged: false)
         }
     }
     
@@ -128,16 +128,16 @@ class SyncServiceManager {
 
         reachability.whenReachable = { (reachability) in
             print("AUTOSYNC: is reachable")
-            self.checkReachabilityAndSettings()
+            self.checkReachabilityAndSettings(reachabilityChanged: true)
         }
         
         reachability.whenUnreachable = { (reachability) in
             print("AUTOSYNC: is unreachable")
-            self.checkReachabilityAndSettings()
+            self.checkReachabilityAndSettings(reachabilityChanged: true)
         }
     }
     
-    private func checkReachabilityAndSettings() {
+    private func checkReachabilityAndSettings(reachabilityChanged: Bool) {
         dispatchQueue.async {
             guard let syncSettings = self.settings else {
                 AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
@@ -157,7 +157,7 @@ class SyncServiceManager {
             self.timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
             
             guard syncSettings.isAutoSyncEnable else {
-                self.stop(reachabilityDidChange: false, photo: true, video: true)
+                self.stop(reachabilityDidChange: reachabilityChanged, photo: true, video: true)
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
                 return
             }
@@ -177,7 +177,7 @@ class SyncServiceManager {
                     let photoEnabled = syncSettings.mobileDataPhotos
                     let videoEnabled = syncSettings.mobileDataVideo
                     
-                    self.stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
+                    self.stop(reachabilityDidChange: reachabilityChanged, photo: !photoEnabled, video: !videoEnabled)
                     if photoEnabled || videoEnabled {
                         self.start(photo: photoEnabled, video: videoEnabled)
                     }
@@ -188,7 +188,7 @@ class SyncServiceManager {
 //                    guard let `self` = self, self.networkIsUnreachable else {
 //                        return
 //                    }
-                    self.stop(reachabilityDidChange: true, photo: true, video: true)
+                    self.stop(reachabilityDidChange: reachabilityChanged, photo: true, video: true)
 //                })
             }
         }
@@ -237,11 +237,11 @@ extension SyncServiceManager {
     }
     
     @objc private func onPhotoLibraryDidChange() {
-        checkReachabilityAndSettings()
+        checkReachabilityAndSettings(reachabilityChanged: false)
     }
     
     @objc private func onAPIReachabilityDidChange() {
-        self.checkReachabilityAndSettings()
+        self.checkReachabilityAndSettings(reachabilityChanged: true)
     }
     
     @objc private func onAutoSyncStatusDidChange() {
