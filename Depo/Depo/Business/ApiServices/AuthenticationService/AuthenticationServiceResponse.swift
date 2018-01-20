@@ -134,10 +134,9 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
     private let expectedDataFormat: ExpectedDataFormat
     
     lazy var wrapRequestResponse: RequestResponse = { (data, response, error) in
-        self.handleSuccess(data: data, response: response)
-//        if self.notError(error: error) {
-//
-//        }
+        if self.notError(error: error) {
+            self.handleSuccess(data: data, response: response)
+        }
     }
     
     init(success:SuccessResponse?, fail: FailResponse?, expectedDataFormat: ExpectedDataFormat = .JSONFormat) {
@@ -146,14 +145,14 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
         self.fail = fail
     }
     
-//    private func notError(error: Error?) -> Bool {
-//        guard let err = error else  {
-//            return true
-//        }
-//        fail?(.error(err))
-//        return false
-//    }
-    
+    private func notError(error: Error?) -> Bool {
+        guard let err = error else  {
+            return true
+        }
+        fail?(.error(err))
+        return false
+    }
+
     private func handleSuccess(data: Data?, response:URLResponse?) {
         if let httpResponse = response as? HTTPURLResponse {
             if 200...299 ~= httpResponse.statusCode {
