@@ -77,8 +77,17 @@ class LoginInteractor: LoginInteractorInput {
                 }
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.output?.needShowCaptcha()
+                } else if (!self.checkInternetConnection()) {
+                    self.output?.failLogin(message: TextConstants.loginScreenNoInternetError)
                 } else if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.attempts += 1
+                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
+                } else if self.isInvalidCaptchaError(forResponse: errorResponse) {
+                    self.output?.failLogin(message: TextConstants.loginScreenInvalidCaptchaError)
+                } else if self.isInternetError(forResponse: errorResponse) {
+                    self.output?.failLogin(message: errorResponse.description)
+                } else {
+                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
                 if self.isEmptyPhoneError(for: errorResponse) {
                     self.login = login
@@ -86,12 +95,6 @@ class LoginInteractor: LoginInteractorInput {
                     self.atachedCaptcha = atachedCaptcha
                     self.output?.openEmptyPhone()
                     return
-                }
-                if (!self.checkInternetConnection()) {
-                    self.output?.failLogin(message: TextConstants.loginScreenNoInternetError)
-                } else {
-                    debugPrint("login response fail", errorResponse.description)
-                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
             }
         })
@@ -136,6 +139,14 @@ class LoginInteractor: LoginInteractorInput {
     
     private func isAuthenticationError(forResponse errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains("Authentication failure")
+    }
+    
+    private func isInvalidCaptchaError(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("Invalid captcha")
+    }
+    
+    private func isInternetError(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("Internet")
     }
     
     private func isBlockError(forResponse errorResponse: ErrorResponse) -> Bool {

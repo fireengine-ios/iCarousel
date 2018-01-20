@@ -505,6 +505,7 @@
 "Please enter your password" = "Please enter your password";
 "Please check the GSM number" = "Please check the GSM number";
 "Login denied. Please check your credentials." = "Login denied. Please check your credentials.";
+"This text doesn't match. Please try again." = "This text doesn't match. Please try again.";
 "Request failed \n Please try again" = "Request failed \n Please try again";
 "Verification code is invalid. \n Please try again." = "Verification code is invalid. \n Please try again.";
 "Enter the verification code" = "Enter the verification code";

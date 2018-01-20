@@ -87,7 +87,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         compliteAsyncOperationEnableScreen()
     }
     
-    func failLogin(message:String) {
+    func failLogin(message: String) {
         compliteAsyncOperationEnableScreen()
         view.highlightLoginTitle()
         view.highlightPasswordTitle()
