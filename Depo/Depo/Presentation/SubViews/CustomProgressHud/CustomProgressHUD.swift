@@ -17,7 +17,7 @@ class CustomProgressHUD {
         if currentHUD == nil {
             currentHUD = MBProgressHUD.showAdded(to: window, animated: true)
             currentHUD?.mode = .determinateHorizontalBar
-            currentHUD?.label.text = "CALCULATING"
+            currentHUD?.label.text = TextConstants.localFilesBeingProcessed
         }
         
         currentHUD?.progress = progress
