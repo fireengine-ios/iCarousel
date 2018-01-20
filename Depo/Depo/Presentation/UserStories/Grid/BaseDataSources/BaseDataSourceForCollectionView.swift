@@ -551,6 +551,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     //MARK: LBCellsDelegate
     
     func onLongPress(cell: UICollectionViewCell){
+        if maxSelectionCount == selectedItemsArray.count {
+            if let cell = cell as? CollectionViewCellForStoryPhoto  {
+                cell.setSelection(isSelectionActive: false, isSelected: false)
+            }
+        }
+        
         if  let forwardDelegate = self.delegate,
             let path = collectionView?.indexPath(for: cell),
             let object = itemForIndexPath(indexPath: path) {
