@@ -227,7 +227,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if !isPaginationDidEnd {
             guard let lastRemoteObject = originalItemsArray.last else {
-                return originalItemsArray
+                return originalItemsArray + tempoLocalArray
             }
             for localItem in tempoLocalArray {
                 if allItemsMD5.contains(localItem.md5) {
