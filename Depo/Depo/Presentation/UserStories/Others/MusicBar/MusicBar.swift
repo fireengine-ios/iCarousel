@@ -22,6 +22,7 @@ class MusicBar: UIView {
     @IBOutlet weak var musicNameLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var progressViewContainer: UIView!
+    @IBOutlet var contentView: UIView!
     
     @IBAction func actionZoomUpButton(_ sender: UIButton) {
         delegate?.musicBarZoomWillOpen()
@@ -37,11 +38,24 @@ class MusicBar: UIView {
     }
     
     private var configureVisualMusicPlayerModule: VisualMusicPlayerModuleInitializer?
-    
-    class func initFromXib() -> MusicBar {
-        return UINib(nibName: "MusicBar", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! MusicBar
-    }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        Bundle.main.loadNibNamed("MusicBar", owner: self, options: nil)
+        addSubview(contentView)
+        contentView.frame = bounds
+        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

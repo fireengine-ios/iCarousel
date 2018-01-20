@@ -27,7 +27,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
      let underNavBarBarHeight: CGFloat = 53
     
-    let musicBar = MusicBar.initFromXib()
+    let musicBar = MusicBar(frame: CGRect.zero)
 
     @IBOutlet weak var musicBarContainer: UIView!
     @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
