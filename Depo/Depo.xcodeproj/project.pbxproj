@@ -1279,6 +1279,8 @@
 		8C06B1D52008AD72003D8E05 /* Turkcell_Satura_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEB12008AD6F003D8E05 /* Turkcell_Satura_Bold.ttf */; };
 		8C06B1D62008AD72003D8E05 /* Turkcell_Satura_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEB22008AD6F003D8E05 /* Turkcell_Satura_Regular.ttf */; };
 		8C06B1D72008AD72003D8E05 /* Turkcell_Satura_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEB22008AD6F003D8E05 /* Turkcell_Satura_Regular.ttf */; };
+		8C0B91902013221400A5BA81 /* CustomProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B918F2013221400A5BA81 /* CustomProgressHUD.swift */; };
+		8C0B91912013221400A5BA81 /* CustomProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B918F2013221400A5BA81 /* CustomProgressHUD.swift */; };
 		8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633D1F6FC3D3004724BF /* ActivitiesByDay.swift */; };
 		8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633E1F6FC3D3004724BF /* ActivitiesByMinutesAndType.swift */; };
 		8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633F1F6FC3D3004724BF /* ActivityFileType.swift */; };
@@ -4279,6 +4281,7 @@
 		8C06AEB52008AD6F003D8E05 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/TOCropViewControllerLocalizable.strings"; sourceTree = "<group>"; };
 		8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtoInputTextCell.swift; sourceTree = "<group>"; };
 		8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoNextEditingRowPasser.swift; sourceTree = "<group>"; };
+		8C0B918F2013221400A5BA81 /* CustomProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressHUD.swift; sourceTree = "<group>"; };
 		8C0E907E1FDEBE0000789C91 /* TC_Depo_LifeTech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TC_Depo_LifeTech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetPredetermendConfigs.swift; sourceTree = "<group>"; };
 		8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoButtonCellProtocol.swift; sourceTree = "<group>"; };
@@ -6294,6 +6297,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				8C0B918E2013200A00A5BA81 /* CustomProgressHud */,
 				87B335A82008AD1D0079965F /* TitleView */,
 				8C881BD01FCFF86B00C86236 /* MailVerification */,
 				7C18D75B1F9F460000F8679D /* ShadowView */,
@@ -8278,6 +8282,14 @@
 				8C0B2F221EF3140C00706DC0 /* ProtoTextInputCell */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		8C0B918E2013200A00A5BA81 /* CustomProgressHud */ = {
+			isa = PBXGroup;
+			children = (
+				8C0B918F2013221400A5BA81 /* CustomProgressHUD.swift */,
+			);
+			path = CustomProgressHud;
 			sourceTree = "<group>";
 		};
 		8C2044601EEA7A3B00642627 /* Services */ = {
@@ -12888,6 +12900,7 @@
 				8C0E8ED11FDEBDFF00789C91 /* Int64+Bytes.swift in Sources */,
 				8C0E8ED21FDEBDFF00789C91 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				8C0E8ED31FDEBDFF00789C91 /* MediaItemOperations.swift in Sources */,
+				8C0B91912013221400A5BA81 /* CustomProgressHUD.swift in Sources */,
 				8C0E8ED41FDEBDFF00789C91 /* ContactsSyncService.swift in Sources */,
 				8C0E8ED51FDEBDFF00789C91 /* ShadowView.swift in Sources */,
 				8C0E8ED61FDEBDFF00789C91 /* CreateStoryNameInteractorOutput.swift in Sources */,
@@ -13296,6 +13309,7 @@
 				8CFF868F1F0F96E600520D18 /* SyncDB.m in Sources */,
 				7C6E2F911F31E4F800536DB6 /* CreateStoryNameInteractorInput.swift in Sources */,
 				CEAE3FB51EFD4F0D00A405B2 /* HomePageModuleInput.swift in Sources */,
+				8C0B91902013221400A5BA81 /* CustomProgressHUD.swift in Sources */,
 				CE51ABAA1EF90853005DCEE0 /* GSMCodeModel.swift in Sources */,
 				CE2F55F71F75518F00F49DA1 /* PlanType.swift in Sources */,
 				8DCB21671F3C7CBF00BAFE1E /* SearchViewInitializer.swift in Sources */,

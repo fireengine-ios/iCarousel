@@ -47,6 +47,10 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
         outputView()?.showSpiner()
     }
     
+    func startAsyncOperation(progress: Int) {
+        outputView()?.showSpiner()
+    }
+    
     func startAsyncOperationDisableScreen() {
         outputView()?.showSpinerIncludeNavigatinBar()
     }
@@ -61,6 +65,10 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
     }
     
     func asyncOperationSucces() {
+        outputView()?.hideSpiner()
+    }
+    
+    func asyncProgressOperationSucces() {
         outputView()?.hideSpiner()
     }
     

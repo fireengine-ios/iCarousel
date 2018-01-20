@@ -11,13 +11,14 @@ import Photos
 
 extension CoreDataStack {
     
-    @objc func appendLocalMediaItems(_ end: AppendingLocaclItemsFinishCallback?) {
+    @objc func appendLocalMediaItems(progress: AppendingLocaclItemsProgressCallback?,
+                                     _ end: AppendingLocaclItemsFinishCallback?) {
         let queue = DispatchQueue(label: "Append Local Item ")
         queue.async {
             let localMediaStorage = LocalMediaStorage.default
             localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
                 if authorized {
-                    self.insertFromPhotoFramework(allItemsAddedCallBack: end)
+                    self.insertFromPhotoFramework(progress: progress, allItemsAddedCallBack: end)
                 }
                 if status == .denied {
                     self.deleteLocalFiles()
@@ -27,7 +28,8 @@ extension CoreDataStack {
         }
     }
     
-    func insertFromPhotoFramework(allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
+    func insertFromPhotoFramework(progress: AppendingLocaclItemsProgressCallback?,
+                                  allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
         let localMediaStorage = LocalMediaStorage.default
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
             guard accessGranted, let `self` = self,
@@ -46,6 +48,9 @@ extension CoreDataStack {
             let start = Date().timeIntervalSince1970
             var i = 0
             var addedObjects = [WrapData]()
+            
+            let totalNotSavedItems = Float(notSaved.count)
+            
             notSaved.forEach {
                 i += 1
                 debugPrint("local ", i)
@@ -63,8 +68,9 @@ extension CoreDataStack {
                 if i % 10 == 0 {
                     self.saveDataForContext(context: newBgcontext, saveAndWait: true)
                 }
-                
                 addedObjects.append(wrapData)
+                
+                progress?(Float(i)/totalNotSavedItems)
             }
             
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)

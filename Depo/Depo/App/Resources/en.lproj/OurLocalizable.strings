@@ -428,6 +428,7 @@
 "Show" = "Show";
 "Back Up My Contacts" = "Back Up My Contacts";
 "No results found for your query." = "No results found for your query.";
+"localFilesBeingProcessed" = "Processing local files.";
 "SUGGESTIONS" = "SUGGESTIONS";
 "RECENT SEARCHES" = "RECENT SEARCHES";
 "Search" = "Search";
