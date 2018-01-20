@@ -95,6 +95,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func waitForWiFi() {
         log.debug("ItemSyncServiceImpl waitForWiFi")
+        localItemsMD5s.removeAll()
         status = .waitingForWifi
     }
     

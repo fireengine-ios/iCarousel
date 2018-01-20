@@ -177,7 +177,7 @@ class SyncServiceManager {
                     let photoEnabled = syncSettings.mobileDataPhotos
                     let videoEnabled = syncSettings.mobileDataVideo
                     
-                    self.stop(reachabilityDidChange: reachabilityChanged, photo: !photoEnabled, video: !videoEnabled)
+                    self.stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
                     if photoEnabled || videoEnabled {
                         self.start(photo: photoEnabled, video: videoEnabled)
                     }
