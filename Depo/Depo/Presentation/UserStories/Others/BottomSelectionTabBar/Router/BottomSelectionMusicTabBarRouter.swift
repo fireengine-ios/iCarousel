@@ -29,11 +29,13 @@ class BottomSelectionMusicTabBarRouter: BottomSelectionTabBarRouter {
     
     override func showShare(rect: CGRect?, urls: [String]) {
         let activityVC = UIActivityViewController(activityItems: urls, applicationActivities: nil)
+        let topVC = UIApplication.topController()
         
         if let tempoRect = rect {//if ipad
             activityVC.popoverPresentationController?.sourceRect = tempoRect
+            activityVC.popoverPresentationController?.sourceView = topVC?.view
         }
-        let topVC = UIApplication.topController()
+        
         topVC?.present(activityVC, animated:  true)
     }
     
