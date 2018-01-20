@@ -76,7 +76,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             bigContentImageView.contentMode = .scaleAspectFill
             bigContentImageView.image = image
         } else {
-            smallContentImageView.contentMode = .scaleAspectFit
+            smallContentImageView.contentMode = .scaleToFill
             smallContentImageView.configured = true
             smallContentImageView.setImage(image: image)
             smallContentImageView.isHidden = false
