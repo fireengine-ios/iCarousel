@@ -176,10 +176,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
             deleteAction()
         })
-        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
-            self?.output.moreActionsPressed(sender: NavigationBarList().more)
-        })
-        navBarConfigurator.configure(right: [more, delete], left: [])
+
+        navBarConfigurator.configure(right: [delete], left: [])
         
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
         navigationItem.leftBarButtonItem = backAsCancelBarButton
