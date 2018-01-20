@@ -87,7 +87,12 @@ class LoginInteractor: LoginInteractorInput {
                     self.output?.openEmptyPhone()
                     return
                 }
-                self.output?.failLogin(message: errorResponse.description)
+                if (!self.checkInternetConnection()) {
+                    self.output?.failLogin(message: TextConstants.loginScreenNoInternetError)
+                } else {
+                    debugPrint("login response fail", errorResponse.description)
+                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
+                }
             }
         })
     }
@@ -139,6 +144,10 @@ class LoginInteractor: LoginInteractorInput {
     
     private func isEmptyPhoneError(for errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains(HeaderConstant.emptyMSISDN)
+    }
+    
+    private func checkInternetConnection() -> Bool {
+        return ReachabilityService().isReachable
     }
     
     func findCoutryPhoneCode(plus: Bool) {

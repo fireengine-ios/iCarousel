@@ -394,7 +394,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func appendCollectionView(items: [WrapData]) {
         let nonEmptyMetaItems = items.filter{
-            if $0.fileType == .image {
+            if $0.fileType == .image, !$0.isLocalItem {
                return ($0.metaData?.takenDate != nil)
             }
             return $0.metaData != nil
