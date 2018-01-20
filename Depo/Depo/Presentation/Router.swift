@@ -140,6 +140,8 @@ class RouterVC: NSObject {
             if let ind = index, ind > 0 {
                 let viewController = viewControllers[ind - 1]
                 navigationController?.popToViewController(viewController, animated: true)
+            } else {
+                navigationController?.popToRootViewController(animated: true)
             }
         }
     }
