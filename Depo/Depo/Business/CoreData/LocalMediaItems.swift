@@ -49,7 +49,7 @@ extension CoreDataStack {
             var i = 0
             var addedObjects = [WrapData]()
             
-            let totalNotSavedItems = notSaved.count
+            let totalNotSavedItems = Float(notSaved.count)
             
             notSaved.forEach {
                 i += 1
@@ -70,7 +70,7 @@ extension CoreDataStack {
                 }
                 addedObjects.append(wrapData)
                 
-                progress?(i/totalNotSavedItems)
+                progress?(Float(i)/totalNotSavedItems)
             }
             
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)

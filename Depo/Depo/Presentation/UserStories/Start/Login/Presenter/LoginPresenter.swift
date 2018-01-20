@@ -20,6 +20,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     var captchaShowed: Bool = false
 
+    private lazy var customProgressHUD = CustomProgressHUD()
+    
     func viewIsReady() {
         interactor.prepareModels()
     }
@@ -123,10 +125,14 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func onSuccessEULA() {
         compliteAsyncOperationEnableScreen()
-        startAsyncOperation()
-        CoreDataStack.default.appendLocalMediaItems(progress: nil) { [weak self] in
+        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
             DispatchQueue.main.async {
-                self?.compliteAsyncOperationEnableScreen()
+                self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
+            }
+            
+        }) { [weak self] in
+            DispatchQueue.main.async {
+                self?.customProgressHUD.hideProgressSpinner()
                 self?.router.goToSyncSettingsView()
             }
         }

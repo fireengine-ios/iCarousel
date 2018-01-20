@@ -11,7 +11,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     weak var view: SplashViewInput!
     var interactor: SplashInteractorInput!
     var router: SplashRouterInput!
-
+    private lazy var customProgressHUD = CustomProgressHUD()
+    
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
         showPasscodeIfNeed()
@@ -62,10 +63,15 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onSuccessEULA() {
-        startAsyncOperation()
-        CoreDataStack.default.appendLocalMediaItems(progress: nil){ [weak self] in
+        
+        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercentage in
             DispatchQueue.main.async {
-                self?.asyncOperationSucces()
+                self?.customProgressHUD.showProgressSpinner(progress: progressPercentage)
+            }
+        
+        }){ [weak self] in
+            DispatchQueue.main.async {
+                self?.customProgressHUD.hideProgressSpinner()
                 self?.router.navigateToApplication()
             }
         }
