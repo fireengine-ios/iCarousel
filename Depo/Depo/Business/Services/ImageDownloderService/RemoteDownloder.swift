@@ -27,12 +27,24 @@ class ImageDownloder {
             }
         }
         
-        let item = downloder.downloadImage(with: patch,
-                                options: [.lowPriority,.useNSURLCache],
-                                progress: nil) { (image, data, error, bool) in
-                                    
-                                    compliteImage(image)
+        var cachePath: String?
+        if let path = patch?.absoluteString, let query = patch?.query {
+            cachePath = path.replacingOccurrences(of: "?"+query, with: "")
         }
+        
+        if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
+            compliteImage(image)
+            return
+        }
+        
+        let item = downloder.downloadImage(with: patch,
+                                           options: [.lowPriority/*,.useNSURLCache*/],
+                                           progress: nil) { (image, data, error, bool) in
+                                            
+                                            SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
+                                            compliteImage(image)
+        }
+        
         guard let it = item else {
             return
         }
