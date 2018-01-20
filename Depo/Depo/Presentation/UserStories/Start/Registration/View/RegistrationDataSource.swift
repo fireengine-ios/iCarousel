@@ -98,11 +98,11 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
             cell.setupGSMCode(code: currentGSMCode)
             cell.setupCell(withTitle: model.title, inputText: model.inputText)
             
-            #if DEBUG
-                cell.inputTextField?.text = "259092538"
-                cell.gsmCountryCodeLabel.text = "+375"
-                currentGSMCode = "+375"
-            #endif
+//            #if DEBUG
+//                cell.inputTextField?.text = "259092538"
+//                cell.gsmCountryCodeLabel.text = "+375"
+//                currentGSMCode = "+375"
+//            #endif
         } else if let cell = cell as? BaseUserInputCellView {
             cell.infoButtonDelegate = self
             cell.setupBaseCell(withTitle: model.title, inputText: model.inputText)
