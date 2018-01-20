@@ -22,13 +22,13 @@ final class PhotoSyncService: ItemSyncServiceImpl {
             .sorted(by:{$0.metaDate > $1.metaDate})
     }
     
-    override func interrupt() {
-        super.interrupt()
-        
-        log.debug("PhotoSyncService interrupt")
-        
-        stopAllOperations()
-    }
+//    override func interrupt() {
+//        super.interrupt()
+//        
+//        log.debug("PhotoSyncService interrupt")
+//        
+//        stopAllOperations()
+//    }
     
     override func stop() {
         super.stop()

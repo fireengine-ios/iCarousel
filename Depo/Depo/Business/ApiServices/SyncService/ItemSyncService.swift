@@ -27,7 +27,7 @@ protocol ItemSyncService: class {
     
     func start()
     func stop()
-    func interrupt()
+//    func interrupt()
     func fail()
     func waitForWiFi()
 }
@@ -80,15 +80,16 @@ class ItemSyncServiceImpl: ItemSyncService {
         }
     }
     
-    func interrupt() {
-        log.debug("ItemSyncServiceImpl interrupt")
-//        if status.isContained(in: [.prepairing, .executing]) {
-            status = .waitingForWifi
-//        }
-    }
+//    func interrupt() {
+//        log.debug("ItemSyncServiceImpl interrupt")
+////        if status.isContained(in: [.prepairing, .executing]) {
+//            status = .waitingForWifi
+////        }
+//    }
     
     func stop() {
         log.debug("ItemSyncServiceImpl stop")
+        localItemsMD5s.removeAll()
         status = .stoped
     }
     
@@ -99,6 +100,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func fail() {
         log.debug("ItemSyncServiceImpl fail")
+        localItemsMD5s.removeAll()
         status = .failed
     }
     
@@ -184,7 +186,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             
             log.debug("ItemSyncServiceImpl upload UploadService uploadFileList fail")
             
-            if error.description == TextConstants.canceledOperationTextError {
+            if error.description == TextConstants.canceledOperationTextError || error.description == TextConstants.networkConnectionLostTextError {
                 return
             }
             
