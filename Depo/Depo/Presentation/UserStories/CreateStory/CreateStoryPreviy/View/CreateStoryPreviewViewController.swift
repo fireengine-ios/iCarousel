@@ -76,6 +76,6 @@ extension CreateStoryPreviewViewController: CreateStoryPreviewViewInput {
             return
         }
         previewURLString = urlString
-        playVideoByURLString(urlSting: urlString)
+//        playVideoByURLString(urlSting: urlString) //Left this in case if requrements would change again(start automaticaly)
     }
 }

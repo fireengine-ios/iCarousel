@@ -501,7 +501,7 @@
 "Please type the text" = "Please type the text";
 "You have performed too many attempts. Please try again 1 hour later." = "You have performed too many attempts. Please try again 1 hour later.";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
-"Please check your internet connection." = "Please check your internet connection.";
+"The Internet connection appears to be offline." = "The Internet connection appears to be offline.";
 "Please enter your password" = "Please enter your password";
 "Please check the GSM number" = "Please check the GSM number";
 "Login denied. Please check your credentials." = "Login denied. Please check your credentials.";
