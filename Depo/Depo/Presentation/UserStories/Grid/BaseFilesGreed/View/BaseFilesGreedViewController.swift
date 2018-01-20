@@ -38,6 +38,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var noFilesImage: UIImageView!
     
+    @IBOutlet weak var noFilesViewCenterOffsetConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var startCreatingFilesButton: BlueButtonWithWhiteText!
     
     @IBOutlet weak var topBarContainer: UIView!
@@ -248,6 +250,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesImage.image = image
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
+        topBarContainer.isHidden = false
     }
     
     func showNoFilesTop() {
@@ -325,6 +328,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
         refresherY =  -hTopPopUpView - BaseFilesGreedViewController.sliderH + 30
         updateRefresher()
+        
+        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH/2
     }
     
     private func setupViewForPopUp(){
