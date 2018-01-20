@@ -157,7 +157,7 @@ class SyncServiceManager {
             self.timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
             
             guard syncSettings.isAutoSyncEnable else {
-                self.stop(reachabilityDidChange: reachabilityChanged, photo: true, video: true)
+                self.stop(reachabilityDidChange: false, photo: true, video: true)
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
                 return
             }
