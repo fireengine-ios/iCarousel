@@ -35,7 +35,7 @@ struct TextConstants {
     static let loginScreenCredentialsError = NSLocalizedString("Login denied. Please check your credentials.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenNoLoginError = NSLocalizedString("Please check the GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenNoPasswordError = NSLocalizedString("Please enter your password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let loginScreenNoInternetError = NSLocalizedString("Please check your internet connection.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginScreenNoInternetError = NSLocalizedString("The Internet connection appears to be offline.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationPasswordError = NSLocalizedString("Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hourBlockLoginError = NSLocalizedString("You have performed too many attempts. Please try again 1 hour later.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationMailError = NSLocalizedString("Please check the e-mail address.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -690,6 +690,7 @@ struct TextConstants {
     static let errorNothingToDownload = NSLocalizedString("Nothing to download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let canceledOperationTextError = NSLocalizedString("cancelled", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let networkConnectionLostTextError = NSLocalizedString("The network connection was lost.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let ACCOUNT_NOT_FOUND = NSLocalizedString("Account cannot be found", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let INVALID_PROMOCODE = NSLocalizedString("This package activation code is invalid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

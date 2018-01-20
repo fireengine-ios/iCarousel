@@ -93,12 +93,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         compliteAsyncOperationEnableScreen()
         view.highlightLoginTitle()
         view.highlightPasswordTitle()
-        //FIXME: in te future change it, when we got real error handling
-        var messageText = TextConstants.loginScreenCredentialsError
-        if message.contains("Internet") {
-            messageText = message
-        }
-        showMessageHideSpinner(text: messageText)
+        showMessageHideSpinner(text: message)
         if captchaShowed {
             view.refreshCaptcha()
         }

@@ -225,7 +225,9 @@ final class UploadService: BaseRequestService {
                 
                 if let error = error {
                     if error.description != TextConstants.canceledOperationTextError {
+                        print(error.localizedDescription)
                         fail(error)
+                        return
                     }
                     
                     
@@ -234,9 +236,9 @@ final class UploadService: BaseRequestService {
                         self.clearSyncCounters()
                         self.uploadOperations = self.uploadOperations.filter({ $0.uploadType != .autoSync })
                         CardsManager.default.stopOperationWithType(type: .sync)
-//                        success()
+                        success()
+                        return
                     }
-                    return
                 }
 
                 finishedOperation.item.syncStatus = .synced
@@ -251,8 +253,9 @@ final class UploadService: BaseRequestService {
                 
                 if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
                     self.clearSyncCounters()
-//                    CardsManager.default.stopOperationWithType(type: .sync)
+                    CardsManager.default.stopOperationWithType(type: .sync)
                     success()
+                    return
                 }
                 
             })
