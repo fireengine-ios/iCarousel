@@ -110,7 +110,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        configurateNavigationBar()
         editingTabBar?.view.layoutIfNeeded()
         
         if mainTitle != "" {
@@ -124,7 +124,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        configurateNavigationBar()
         configurateViewForPopUp()
     }
     
