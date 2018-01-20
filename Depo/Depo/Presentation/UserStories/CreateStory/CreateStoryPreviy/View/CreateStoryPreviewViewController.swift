@@ -13,13 +13,28 @@ import AVFoundation
 class CreateStoryPreviewViewController: UIViewController, AVPlayerViewControllerDelegate {
 
     var output: CreateStoryPreviewViewOutput!
-    var previewURLString: String? = nil
+    
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var viewForPlayer: UIView!
+    
+    var previewURLString: String? {
+        didSet {
+            guard let previewURLString = previewURLString else {
+                return
+            }
+            let sourceURL = URL(string: previewURLString)
+            let asset = AVAsset(url: sourceURL!)
+            let imageGenerator = AVAssetImageGenerator(asset: asset)
+            let time = CMTimeMake(1, 1)
+            let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
+            let thumbnail = UIImage(cgImage:imageRef)
+            previewImageView.image = thumbnail
+        }
+    }
     
     var player: AVPlayer?
     var playerController: AVPlayerViewController?
     
-    @IBOutlet weak var viewForPlayer: UIView!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         defaultNavBarStyle()
@@ -39,11 +54,11 @@ class CreateStoryPreviewViewController: UIViewController, AVPlayerViewController
     }
     
     func playVideoByURLString(urlSting: String?){
-        guard let string = urlSting else{
+        guard let string = urlSting else {
             return
         }
         
-        guard let url = URL(string: string) else{
+        guard let url = URL(string: string) else {
             return
         }
         
