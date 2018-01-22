@@ -376,6 +376,7 @@ struct TextConstants {
     static let settingsBackupContactsViewDuplicatesText = NSLocalizedString("Updated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupContactsViewRemovedText = NSLocalizedString("Removed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupedText = NSLocalizedString("Backed up %d Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackupStatusText = NSLocalizedString("You have %d numbers on your contacts backup.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsRestoredText = NSLocalizedString("Restored up %d Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpingText = NSLocalizedString("%d%% Backed up…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsDeletingText = NSLocalizedString("%d%% of Duplicated Contacts Deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
