@@ -30,6 +30,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     DispatchQueue.main.async {
                         presenter.goBack()
                     }
+                    return
                 }
             }
             
