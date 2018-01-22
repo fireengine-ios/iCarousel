@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MusicBar" customModule="Depo_LifeTech" customModuleProvider="target">
+            <connections>
+                <outlet property="artistLabel" destination="hRl-4f-gjc" id="z9q-Eh-K35"/>
+                <outlet property="contentView" destination="7TD-Km-mkZ" id="CLE-8O-0lS"/>
+                <outlet property="gradientView" destination="CYb-oQ-PdE" id="pfa-Kn-rco"/>
+                <outlet property="musicNameLabel" destination="hjb-dB-NHk" id="BQz-xn-OMs"/>
+                <outlet property="playPauseButton" destination="rGm-wJ-sPn" id="olt-R2-xKG"/>
+                <outlet property="progressViewContainer" destination="AwS-bS-X3J" id="2WM-FT-hV0"/>
+                <outlet property="zoomUpButton" destination="7Qv-7Z-1M5" id="gxT-e0-djG"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="7TD-Km-mkZ" userLabel="musicBar" customClass="MusicBar" customModule="Depo_LifeTech" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="7TD-Km-mkZ" userLabel="musicBar">
             <rect key="frame" x="0.0" y="0.0" width="378" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -21,8 +32,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="378" height="70"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Artist" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRl-4f-gjc">
-                            <rect key="frame" x="65" y="41.5" width="29" height="13.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="750" text="Artist" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRl-4f-gjc">
+                            <rect key="frame" x="60" y="31.5" width="265" height="13.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -36,11 +47,11 @@
                             </constraints>
                             <state key="normal" image="common06"/>
                             <connections>
-                                <action selector="actionZoomUpButton:" destination="7TD-Km-mkZ" eventType="touchUpInside" id="esu-Cm-ISA"/>
+                                <action selector="actionZoomUpButton:" destination="-1" eventType="touchUpInside" id="QId-PO-Whj"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Music" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjb-dB-NHk">
-                            <rect key="frame" x="65" y="20" width="43.5" height="19.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Music" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjb-dB-NHk">
+                            <rect key="frame" x="65" y="5" width="260" height="26.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -53,26 +64,27 @@
                             <state key="normal" image="pause"/>
                             <state key="selected" image="play"/>
                             <connections>
-                                <action selector="actionPlayPauseButton:" destination="7TD-Km-mkZ" eventType="touchUpInside" id="df5-im-nTN"/>
+                                <action selector="actionPlayPauseButton:" destination="-1" eventType="touchUpInside" id="kSA-cb-pUj"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="7Qv-7Z-1M5" firstAttribute="centerY" secondItem="O6c-hM-A1c" secondAttribute="centerY" id="29h-Iy-Cwg"/>
-                        <constraint firstItem="hRl-4f-gjc" firstAttribute="leading" secondItem="7Qv-7Z-1M5" secondAttribute="trailing" constant="10" id="2Rg-NZ-NaI"/>
-                        <constraint firstItem="hjb-dB-NHk" firstAttribute="top" secondItem="O6c-hM-A1c" secondAttribute="top" constant="20" id="3lp-oc-kHE"/>
+                        <constraint firstItem="hjb-dB-NHk" firstAttribute="top" secondItem="O6c-hM-A1c" secondAttribute="top" constant="5" id="3lp-oc-kHE"/>
                         <constraint firstItem="CYb-oQ-PdE" firstAttribute="leading" secondItem="O6c-hM-A1c" secondAttribute="leading" id="7XK-nf-fbO"/>
                         <constraint firstItem="rGm-wJ-sPn" firstAttribute="centerY" secondItem="O6c-hM-A1c" secondAttribute="centerY" id="FIb-fo-Hnw"/>
                         <constraint firstAttribute="trailing" secondItem="CYb-oQ-PdE" secondAttribute="trailing" id="IcZ-z2-chU"/>
-                        <constraint firstItem="hRl-4f-gjc" firstAttribute="top" secondItem="hjb-dB-NHk" secondAttribute="bottom" constant="2" id="UlJ-o0-7WG"/>
+                        <constraint firstAttribute="bottom" secondItem="hRl-4f-gjc" secondAttribute="bottom" constant="25" id="JUj-Oe-Nkv"/>
+                        <constraint firstItem="hRl-4f-gjc" firstAttribute="leading" secondItem="7Qv-7Z-1M5" secondAttribute="trailing" constant="5" id="Jnb-HY-wbh"/>
                         <constraint firstAttribute="bottom" secondItem="CYb-oQ-PdE" secondAttribute="bottom" id="Uz0-BD-RSU"/>
-                        <constraint firstItem="rGm-wJ-sPn" firstAttribute="leading" secondItem="hjb-dB-NHk" secondAttribute="trailing" priority="750" constant="5" id="XK8-N0-Cu8"/>
+                        <constraint firstItem="rGm-wJ-sPn" firstAttribute="leading" secondItem="hjb-dB-NHk" secondAttribute="trailing" constant="5" id="VHG-8h-2kG"/>
                         <constraint firstItem="7Qv-7Z-1M5" firstAttribute="leading" secondItem="O6c-hM-A1c" secondAttribute="leading" constant="15" id="YMf-fh-YUb"/>
                         <constraint firstItem="hjb-dB-NHk" firstAttribute="leading" secondItem="7Qv-7Z-1M5" secondAttribute="trailing" constant="10" id="Zak-uG-Qxy"/>
                         <constraint firstItem="CYb-oQ-PdE" firstAttribute="top" secondItem="O6c-hM-A1c" secondAttribute="top" id="dGM-ap-PwQ"/>
-                        <constraint firstItem="rGm-wJ-sPn" firstAttribute="leading" secondItem="hRl-4f-gjc" secondAttribute="trailing" priority="750" constant="5" id="fxe-Ha-rZw"/>
+                        <constraint firstItem="rGm-wJ-sPn" firstAttribute="leading" secondItem="hRl-4f-gjc" secondAttribute="trailing" constant="5" id="fxe-Ha-rZw"/>
                         <constraint firstAttribute="trailing" secondItem="rGm-wJ-sPn" secondAttribute="trailing" constant="16" id="t2k-F8-iuK"/>
+                        <constraint firstItem="hRl-4f-gjc" firstAttribute="top" secondItem="hjb-dB-NHk" secondAttribute="bottom" id="uyI-F8-t4O"/>
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwS-bS-X3J">
@@ -83,7 +95,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.98039215690000003" green="0.60784313729999995" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="O6c-hM-A1c" firstAttribute="top" secondItem="7TD-Km-mkZ" secondAttribute="top" id="1FV-DR-RCU"/>
                 <constraint firstAttribute="trailing" secondItem="O6c-hM-A1c" secondAttribute="trailing" id="6VZ-r1-J7k"/>
@@ -95,15 +107,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="artistLabel" destination="hRl-4f-gjc" id="Ohs-7l-I40"/>
-                <outlet property="gradientView" destination="CYb-oQ-PdE" id="H4K-RW-87x"/>
-                <outlet property="musicNameLabel" destination="hjb-dB-NHk" id="K4F-z3-U9O"/>
-                <outlet property="playPauseButton" destination="rGm-wJ-sPn" id="AkR-ym-fIG"/>
-                <outlet property="progressViewContainer" destination="AwS-bS-X3J" id="YGJ-1N-3GP"/>
-                <outlet property="zoomUpButton" destination="7Qv-7Z-1M5" id="YWp-59-tlW"/>
-            </connections>
-            <point key="canvasLocation" x="-455" y="413.5"/>
+            <point key="canvasLocation" x="-455" y="413"/>
         </view>
     </objects>
     <resources>
