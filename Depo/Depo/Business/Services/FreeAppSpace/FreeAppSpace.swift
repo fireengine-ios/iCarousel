@@ -40,14 +40,16 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
     }
     
-    func getServerUIDSForLocalitem(localItemsArray: [BaseDataSourceItem]) -> [String]{
+    func getUIDSForObjects(itemsArray: [BaseDataSourceItem]) -> [String]{
         let serverHash = serverDuplicatesArray.map { $0.md5 }
         var array = [String]()
-        for item in localItemsArray {
+        for item in itemsArray {
             let index  = serverHash.index(of: item.md5)
             if let index_ = index {
                 let serverObject = serverDuplicatesArray[index_]
                 array.append(serverObject.uuid)
+            }else{
+                array.append(item.uuid)
             }
         }
         return array
@@ -257,6 +259,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
         
         if file.isLocalItem{
+            file.metaData?.takenDate = Date()
             duplicatesArray.append(file)
         }else{
             print("uploaded server object")

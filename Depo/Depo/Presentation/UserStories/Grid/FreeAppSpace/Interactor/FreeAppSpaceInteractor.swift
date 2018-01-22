@@ -16,11 +16,23 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         }
         
         isDeleteRequestRunning = true
-        let uuids = FreeAppSpace.default.getServerUIDSForLocalitem(localItemsArray: selectedItems)
+        let uuids = FreeAppSpace.default.getUIDSForObjects(itemsArray: selectedItems)
         
         FileService().details(uuids: uuids, success: { [weak self] (objects) in
             //let localFilesForDelete = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
             let array = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
+            if (array.isEmpty){
+                
+                guard let self_ = self else{
+                    return
+                }
+                if let presenter = self_.output as? FreeAppSpacePresenter {
+                    DispatchQueue.main.async {
+                        presenter.goBack()
+                    }
+                    return
+                }
+            }
             
             let fileService = WrapItemFileService()
             fileService.deleteLocalFiles(deleteFiles: array, success: {
