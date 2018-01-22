@@ -141,7 +141,12 @@ class RouterVC: NSObject {
                 let viewController = viewControllers[ind - 1]
                 navigationController?.popToViewController(viewController, animated: true)
             } else {
-                navigationController?.popToRootViewController(animated: true)
+                if viewControllers.count >= 3{
+                    let viewController = viewControllers[viewControllers.count - 3]
+                    navigationController?.popToViewController(viewController, animated: true)
+                }else{
+                    navigationController?.popToRootViewController(animated: true)
+                }
             }
         }
     }
