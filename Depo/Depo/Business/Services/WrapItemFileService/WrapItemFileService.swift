@@ -224,8 +224,7 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     private func assetsForlocalItems(files: [WrapData]) -> [PHAsset]? {
-        let assets = files.filter{ $0.isLocalItem }
-                          .flatMap{ $0.asset }
+        let assets = files.flatMap{ $0.asset }
         return assets
     }
     
