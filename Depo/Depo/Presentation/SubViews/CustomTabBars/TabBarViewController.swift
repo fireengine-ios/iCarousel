@@ -352,6 +352,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         curtainColorView.backgroundColor = ColorConstants.whiteColor
         curtainColorView.alpha = 0.88
         showCurtainView(show: false)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(TabBarViewController.closeCurtainView))
+        curtainView.addGestureRecognizer(tap)
     }
     
     private func showCurtainView(show: Bool) {
@@ -359,6 +362,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         curtainView.isUserInteractionEnabled = show
         selectedViewController?.navigationItem.rightBarButtonItem?.isEnabled = !show
         selectedViewController?.navigationItem.leftBarButtonItem?.isEnabled = !show
+    }
+    
+    @objc func closeCurtainView() {
+        changeViewState(state: false)
     }
     
     func setupSubButtons() {
