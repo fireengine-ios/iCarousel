@@ -352,7 +352,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         currentViewController?.navigationItem.rightBarButtonItems?.forEach {
             $0.isEnabled = !show
         }
-        currentViewController?.navigationItem.hidesBackButton = !show
+
+        currentViewController?.navigationItem.hidesBackButton = show
     }
     
     @objc func closeCurtainView() {
