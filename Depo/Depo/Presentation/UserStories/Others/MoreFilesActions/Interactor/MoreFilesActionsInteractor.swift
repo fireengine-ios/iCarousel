@@ -552,7 +552,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         let operations = fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure)
         if let operations = operations {
-            output?.startCancelableAsync(operations: operations, cancel: cancel)
+            output?.startCancelableAsync(cancel: cancel)
         }
     }
 }
