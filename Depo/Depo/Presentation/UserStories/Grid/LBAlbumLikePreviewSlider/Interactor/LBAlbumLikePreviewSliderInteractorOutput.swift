@@ -10,8 +10,7 @@ import Foundation
 
 protocol LBAlbumLikePreviewSliderInteractorOutput: class {
 
-    func operationSuccessed()
+    func operationSuccessed(withItems items:[SliderItem])
     func operationFailed()
-    func preparedAlbumbs(albumbs: [AlbumItem])
     
 }

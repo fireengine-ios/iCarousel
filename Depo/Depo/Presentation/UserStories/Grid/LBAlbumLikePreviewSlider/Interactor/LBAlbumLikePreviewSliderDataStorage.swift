@@ -7,7 +7,7 @@
 //
 
 enum MyStreamType: Int {
-    case album
+    case album = 0
     case story
     case people
     case things
@@ -24,10 +24,76 @@ enum MyStreamType: Int {
     }
 }
 
+class SliderItem: NSObject {    
+    var name: String?
+    var previewItems: [PathForItem]?
+    var placeholderImage: UIImage?
+    var type: MyStreamType?
+    
+    init(name: String?, previewItems:[PathForItem]?, placeholder: UIImage?, type: MyStreamType?) {
+        self.name = name
+        self.previewItems = previewItems
+        self.placeholderImage = placeholder
+        self.type = type
+    }
+    
+    init(withAlbumItems items: [AlbumItem]?) {
+        self.name = TextConstants.myStreamAlbumsTitle
+        if let items = items {
+            self.previewItems = Array(items.prefix(4).flatMap {$0.preview?.patchToPreview})
+        }
+        self.type = .album
+        self.placeholderImage = UIImage()
+    }
+    
+    init(withStoriesItems items: [Item]?) {
+        self.name = TextConstants.myStreamStoriesTitle
+        if let items = items {
+            self.previewItems = Array(items.prefix(4).flatMap {$0.patchToPreview})
+        }
+        self.type = .story
+        self.placeholderImage = UIImage()
+    }
+    
+    init(withPeopleItems items: [PeopleItemResponse]?) {
+        self.name = TextConstants.myStreamPeopleTitle
+        if let items = items {
+            self.previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
+        }
+        self.type = .people
+        self.placeholderImage = UIImage()
+    }
+    
+    init(withThingItems items: [ThingsItemResponse]?) {
+        self.name = TextConstants.myStreamThingsTitle
+        if let items = items {
+            self.previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
+        }
+        self.type = .things
+        self.placeholderImage = UIImage()
+    }
+    
+    init(withPlaceItems items: [PlacesItemResponse]?) {
+        self.name = TextConstants.myStreamPlacesTitle
+        if let items = items {
+            self.previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
+        }
+        self.type = .places
+        self.placeholderImage = UIImage()
+    }
+}
+
 class LBAlbumLikePreviewSliderDataStorage {
+    
     var albumItems: [AlbumItem] = []
     var storyItems: [Item] = []
     var peopleItems: [Item] = []
     var thingItems: [Item] = []
     var placeItems: [Item] = []
+    
+    var currentItems: [SliderItem] = []
+    
+    func addNew(item: SliderItem) {
+        currentItems.append(item)
+    }
 }

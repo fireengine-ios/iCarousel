@@ -77,6 +77,12 @@ struct RouteRequests {
     static let details      = "/api/album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
     static let setCoverPhoo = "/api/album/coverPhoto/%@?coverPhotoUuid=%@"
     
+    // MARK: My Streams
+    
+    static let people = "/api/person/"
+    static let things = "/api/object/"
+    static let places = "/api/location/"
+    
     //MARK : Share
     
     static let share = "/api/share/%@"
