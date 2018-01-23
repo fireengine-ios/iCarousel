@@ -280,6 +280,7 @@
 "%d%% Backed up…" = "%d%% Backed up…";
 "Restored up %d Contacts" = "Restored up %d Contacts";
 "Backed up %d Contacts" = "Backed up %d Contacts";
+"You have %d numbers on your contacts backup." = "You have %d numbers on your contacts backup.";
 "Removed" = "Removed";
 "Updated" = "Updated";
 "New Contact" = "New Contact";
