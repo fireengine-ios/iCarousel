@@ -310,6 +310,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             
             let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items as! [Item])
             PhotosAlbumService().deletePhotosFromAlbum(parameters: parameters, success: { [weak self] in
+                ItemOperationManager.default.filesRomovedFromAlbum(items: items as! [Item], albumUUID: album)
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .removeFromAlbum)
                 }
@@ -343,8 +344,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         folderSelector.selectFolder(select: { [weak self] (folder) in
             self?.output?.operationStarted(type: .move)
             self?.fileService.move(items: item, toPath: folder.uuid,
-                                   success: self?.succesAction(elementType: .move),
-                                   fail: self?.failAction(elementType: .move))
+                                   success: {
+                                    self?.succesAction(elementType: .move)()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 , execute: {
+                                        ItemOperationManager.default.filesMoved(items: item, toFolder: folder.uuid)
+                                    })
+                                    
+            },fail: self?.failAction(elementType: .move))
             
             }, cancel: { [weak self] in
                 self?.succesAction(elementType: ElementTypes.move)()

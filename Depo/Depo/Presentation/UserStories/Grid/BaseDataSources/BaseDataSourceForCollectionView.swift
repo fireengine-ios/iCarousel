@@ -1157,6 +1157,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]){
+        if objectsForDelete.isEmpty && objectsForUpdate.isEmpty{
+            return
+        }
+        
         var arrayOfPathForDelete = [IndexPath]()
         var arrayOfPathForUpdate = [IndexPath]()
         var arrayOfSection = [Int]()
@@ -1254,6 +1258,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String){
         if let uuid = parentUUID, uuid == albumUUID{
+            deleteItems(items: items)
+        }
+    }
+    
+    func filesMoved(items: [Item], toFolder folderUUID: String){
+        if let uuid = parentUUID, uuid != folderUUID{
+            deleteItems(items: items)
+        }else if let unwrapedFilters = originalFilters,
+            canShowFolderFilters(filters: unwrapedFilters) {
             deleteItems(items: items)
         }
     }
