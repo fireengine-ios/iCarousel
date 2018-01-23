@@ -24,7 +24,7 @@ enum MyStreamType: Int {
     }
 }
 
-class SliderItem: NSObject {    
+class SliderItem {
     var name: String?
     var previewItems: [PathForItem]?
     var placeholderImage: UIImage?
@@ -38,48 +38,48 @@ class SliderItem: NSObject {
     }
     
     init(withAlbumItems items: [AlbumItem]?) {
-        self.name = TextConstants.myStreamAlbumsTitle
+        name = TextConstants.myStreamAlbumsTitle
         if let items = items {
-            self.previewItems = Array(items.prefix(4).flatMap {$0.preview?.patchToPreview})
+            previewItems = Array(items.prefix(4).flatMap {$0.preview?.patchToPreview})
         }
-        self.type = .album
-        self.placeholderImage = UIImage() //TODO: No image
+        type = .album
+        placeholderImage = UIImage() //TODO: No image
     }
     
     init(withStoriesItems items: [Item]?) {
-        self.name = TextConstants.myStreamStoriesTitle
+        name = TextConstants.myStreamStoriesTitle
         if let items = items {
-            self.previewItems = Array(items.prefix(4).flatMap {$0.patchToPreview})
+            previewItems = Array(items.prefix(4).flatMap {$0.patchToPreview})
         }
-        self.type = .story
-        self.placeholderImage = UIImage() //TODO: No image
+        type = .story
+        placeholderImage = UIImage() //TODO: No image
     }
     
     init(withPeopleItems items: [PeopleItemResponse]?) {
-        self.name = TextConstants.myStreamPeopleTitle
+        name = TextConstants.myStreamPeopleTitle
         if let items = items {
-            self.previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
+            previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
         }
-        self.type = .people
-        self.placeholderImage = #imageLiteral(resourceName: "people")
+        type = .people
+        placeholderImage = #imageLiteral(resourceName: "people")
     }
     
     init(withThingItems items: [ThingsItemResponse]?) {
-        self.name = TextConstants.myStreamThingsTitle
+        name = TextConstants.myStreamThingsTitle
         if let items = items {
-            self.previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
+            previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
         }
-        self.type = .things
-        self.placeholderImage = #imageLiteral(resourceName: "things")
+        type = .things
+        placeholderImage = #imageLiteral(resourceName: "things")
     }
     
     init(withPlaceItems items: [PlacesItemResponse]?) {
-        self.name = TextConstants.myStreamPlacesTitle
+        name = TextConstants.myStreamPlacesTitle
         if let items = items {
-            self.previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
+            previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
         }
-        self.type = .places
-        self.placeholderImage = #imageLiteral(resourceName: "places")
+        type = .places
+        placeholderImage = #imageLiteral(resourceName: "places")
     }
 }
 

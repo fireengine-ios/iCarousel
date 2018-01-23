@@ -9,13 +9,9 @@
 protocol LBAlbumLikePreviewSliderViewOutput {
 
     func viewIsReady(collectionView: UICollectionView)
-
-//    func previewItems(withType type: MyStreamType) -> [Item]
     
     func sliderTitlePressed()
-    
-//    func onSelectItem(type: MyStreamType)
-    
+
     func reloadData()
 
 }

@@ -35,8 +35,7 @@ class PlacesServiceResponse: ObjectRequestResponse {
     var list: Array<PlacesItemResponse> = []
     
     override func mapping() {
-        let  tmpList = json?.array
-        if let result = tmpList?.flatMap( {PlacesItemResponse(withJSON: $0)}) {
+        if let result = json?.array?.flatMap( {PlacesItemResponse(withJSON: $0)}) {
             list = result
         }
     }
