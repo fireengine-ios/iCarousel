@@ -184,6 +184,9 @@ final class UploadService: BaseRequestService {
                 
                 ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
+                                                object: nil)
+                
                 checkIfFinished()
             })
             operation.queuePriority = .veryHigh
@@ -275,6 +278,8 @@ final class UploadService: BaseRequestService {
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
                                                 object: nil)
+                
+                checkIfFinished()
             })
             operation.queuePriority = .high
             return operation
