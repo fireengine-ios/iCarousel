@@ -164,7 +164,7 @@ class UserProfileViewController: UIViewController, UserProfileViewInput, UITextF
             }
             
             guard Validator.isValid(email: emailTextField.text) else {
-                output.showError(error: TextConstants.forgotPasswordErrorEmailFormatText)
+                output.showError(error: TextConstants.notValidEmail)
                 return
             }
             
