@@ -89,19 +89,19 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func stop() {
         log.debug("ItemSyncServiceImpl stop")
-        localItemsMD5s.removeAll()
+        lastSyncedMD5s.removeAll()
         status = .stoped
     }
     
     func waitForWiFi() {
         log.debug("ItemSyncServiceImpl waitForWiFi")
-        localItemsMD5s.removeAll()
+        lastSyncedMD5s.removeAll()
         status = .waitingForWifi
     }
     
     func fail() {
         log.debug("ItemSyncServiceImpl fail")
-        localItemsMD5s.removeAll()
+        lastSyncedMD5s.removeAll()
         status = .failed
     }
     
