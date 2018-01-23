@@ -56,7 +56,9 @@ final class UploadService: BaseRequestService {
         switch uploadType {
         case .autoSync:
             return .sync
-        default:
+        case .syncToUse, .fromHomePage:
+            return .upload
+        case .other:
             return .upload
         }
     }
@@ -111,6 +113,20 @@ final class UploadService: BaseRequestService {
         }
     }
     
+    private func showSyncCardProgress() {
+        CardsManager.default.setProgressForOperationWith(type: .sync,
+                                                         object: nil,
+                                                         allOperations: allSyncOperationsCount,
+                                                         completedOperations: finishedSyncOperationsCount)
+    }
+    
+    private func showUploadCardProgress() {
+        CardsManager.default.setProgressForOperationWith(type: .upload,
+                                                         object: nil,
+                                                         allOperations: allSyncToUseOperationsCount + allUploadOperationsCount,
+                                                         completedOperations: finishedUploadOperationsCount + finishedSyncToUseOperationsCount)
+    }
+    
     @discardableResult private func syncToUseFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: FileOperationSucces?, fail: FailResponse? ) -> [UploadOperations]? {
         // filter all items which md5's are not in the uploadOperations
         let itemsToUpload = items.filter { (item) -> Bool in
@@ -158,10 +174,7 @@ final class UploadService: BaseRequestService {
                     print("AUTOSYNC: \(error.localizedDescription)")
                     if error.description == TextConstants.canceledOperationTextError {
                         //operation was cancelled - not an actual error
-                        CardsManager.default.setProgressForOperationWith(type: .upload,
-                                                                         object: nil,
-                                                                         allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount,
-                                                                         completedOperations: self.finishedUploadOperationsCount + self.finishedSyncToUseOperationsCount)
+                        self.showUploadCardProgress()
                         checkIfFinished()
                     } else {
                         //sync failed
@@ -172,11 +185,7 @@ final class UploadService: BaseRequestService {
                 
                 self.finishedSyncToUseOperationsCount += 1
                 
-                CardsManager.default.setProgressForOperationWith(type: .upload,
-                                                                 object: nil,
-                                                                 allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount,
-                                                                 completedOperations: self.finishedUploadOperationsCount + self.finishedSyncToUseOperationsCount)
-                
+                self.showUploadCardProgress()
                 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
@@ -198,7 +207,7 @@ final class UploadService: BaseRequestService {
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
         }
         
-        return operations
+        return uploadOperations.filter({ $0.uploadType == .syncToUse })
     }
     
     @discardableResult private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: FileOperationSucces?, fail: FailResponse? ) -> [UploadOperations]? {
@@ -249,10 +258,7 @@ final class UploadService: BaseRequestService {
                     print("AUTOSYNC: \(error.localizedDescription)")
                     if error.description == TextConstants.canceledOperationTextError {
                         //operation was cancelled - not an actual error
-                        CardsManager.default.setProgressForOperationWith(type: .upload,
-                                                                         object: nil,
-                                                                         allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount,
-                                                                         completedOperations: self.finishedUploadOperationsCount + self.finishedSyncToUseOperationsCount)
+                        self.showUploadCardProgress()
                         checkIfFinished()
                     } else {
                         fail?(error)
@@ -262,10 +268,7 @@ final class UploadService: BaseRequestService {
 
                 self.finishedUploadOperationsCount += 1
                 
-                CardsManager.default.setProgressForOperationWith(type: .upload,
-                                                                 object: nil,
-                                                                 allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount,
-                                                                 completedOperations: self.finishedUploadOperationsCount + self.finishedSyncToUseOperationsCount)
+                self.showUploadCardProgress()
                 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
@@ -287,7 +290,7 @@ final class UploadService: BaseRequestService {
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
         }
     
-        return operations
+        return uploadOperations.filter({ $0.uploadType == .fromHomePage })
     }
     
     @discardableResult private func syncFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
@@ -332,23 +335,18 @@ final class UploadService: BaseRequestService {
                     print("AUTOSYNC: \(error.localizedDescription)")
                     if error.description == TextConstants.canceledOperationTextError {
                         //operation was cancelled - not an actual error
-                        CardsManager.default.setProgressForOperationWith(type: .sync,
-                                                                         object: nil,
-                                                                         allOperations: self.allSyncOperationsCount,
-                                                                         completedOperations: self.finishedSyncOperationsCount)
+                        self.showSyncCardProgress()
                         checkIfFinished()
                     } else {
                         fail(error)
                     }
                     return
                 }
+
+                if finishedOperation.item.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 }
+                else if finishedOperation.item.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
                 
-                self.finishedUploadOperationsCount += 1
-                
-                CardsManager.default.setProgressForOperationWith(type: .sync,
-                                                                 object: nil,
-                                                                 allOperations: self.allSyncOperationsCount,
-                                                                 completedOperations: self.finishedSyncOperationsCount)
+                self.showSyncCardProgress()
                 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
@@ -370,7 +368,7 @@ final class UploadService: BaseRequestService {
             print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
         }
         
-        return uploadOperations
+        return uploadOperations.filter({ $0.uploadType == .autoSync })
     }
     
     func cancelOperations(){
@@ -410,26 +408,15 @@ final class UploadService: BaseRequestService {
         dispatchQueue.sync {
             print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
             
-            var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .autoSync &&
-                ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
+            if photo { finishedPhotoSyncOperationsCount = 0 }
+            if video { finishedVideoSyncOperationsCount = 0 }
             
-            operationsToRemove.forEach { (operation) in
-                operation.cancel()
-                if let index = self.uploadOperations.index(of: operation) {
-                    self.uploadOperations.remove(at: index)
+            self.uploadOperations.forEach({ (operation) in
+                if operation.uploadType == .autoSync &&
+                    ((video && operation.item.fileType == .video) || (photo && operation.item.fileType == .image)) {
+                    operation.cancel()
                 }
-            }
-            print("AUTOSYNC: \(operationsToRemove.count) operations have been deleted")
-            operationsToRemove.removeAll()
-            
-            self.resetSyncCounters(for: photo ? .image : .video)
-            
-            guard self.allSyncOperationsCount != self.finishedSyncOperationsCount else {
-                CardsManager.default.stopOperationWithType(type: .sync)
-                return
-            }
-            
-            CardsManager.default.setProgressForOperationWith(type: .sync, allOperations: self.allSyncOperationsCount, completedOperations: self.finishedSyncOperationsCount)
+            })
         }
     }
     
@@ -584,7 +571,6 @@ class UploadOperations: Operation {
     }
     
     override func cancel() {
-        super.cancel()
         if let req = requestObject {
             if (req.state == .running) || (req.state == .suspended){
                 req.cancel()
@@ -603,15 +589,15 @@ class UploadOperations: Operation {
                 req.cancel()
             }
             
-            if let fail_ = self.fail{
+            if let fail_ = fail {
                 fail_(ErrorResponse.string(TextConstants.canceledOperationTextError))
             }
             
-            self.semaphore.signal()
-            return
-        }
-        
-        if isCancelled {
+            if let handler = handler {
+                handler(self, ErrorResponse.string(TextConstants.canceledOperationTextError))
+            }
+            
+            semaphore.signal()
             return
         }
         
