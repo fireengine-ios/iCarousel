@@ -345,8 +345,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.output?.operationStarted(type: .move)
             self?.fileService.move(items: item, toPath: folder.uuid,
                                    success: {
-                                    ItemOperationManager.default.filesMoved(items: item, toFolder: folder.uuid)
                                     self?.succesAction(elementType: .move)()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 , execute: {
+                                        ItemOperationManager.default.filesMoved(items: item, toFolder: folder.uuid)
+                                    })
+                                    
             },fail: self?.failAction(elementType: .move))
             
             }, cancel: { [weak self] in

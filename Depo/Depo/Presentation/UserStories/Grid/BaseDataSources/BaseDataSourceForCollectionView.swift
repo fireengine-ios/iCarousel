@@ -1157,6 +1157,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]){
+        if objectsForDelete.isEmpty && objectsForUpdate.isEmpty{
+            return
+        }
+        
         var arrayOfPathForDelete = [IndexPath]()
         var arrayOfPathForUpdate = [IndexPath]()
         var arrayOfSection = [Int]()
