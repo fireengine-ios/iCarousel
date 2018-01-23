@@ -70,7 +70,27 @@ class BaseUserInputCellView: ProtoInputTextCell {
     
     override func textFieldDidBeginEditing(_ textField: UITextField) {
         super.textFieldDidBeginEditing(textField)
+        
         changeInfoButtonTo(hidden: true)
+    }
+    
+    override func textFieldDidEndEditing(_ textField: UITextField) {
+        super.textFieldDidEndEditing(textField)
+
+        guard var text = textInputField.text else {
+            return
+        }
+        
+        text = text.removingWhiteSpaces()
+        textInputField.text = text
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == " " {
+            return false
+        }
+        
+        return true
     }
 }
 
