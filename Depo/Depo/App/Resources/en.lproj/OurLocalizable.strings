@@ -279,6 +279,8 @@
 "%d%% Restored up…" = "%d%% Restored up…";
 "%d%% Backed up…" = "%d%% Backed up…";
 "Restored up %d Contacts" = "Restored up %d Contacts";
+"Are you sure you want to delete?" = "Are you sure you want to delete?";
+"This duplicated contacts will be deleted from your contacts." = "This duplicated contacts will be deleted from your contacts.";
 "Backed up %d Contacts" = "Backed up %d Contacts";
 "You have %d numbers on your contacts backup." = "You have %d numbers on your contacts backup.";
 "Removed" = "Removed";
