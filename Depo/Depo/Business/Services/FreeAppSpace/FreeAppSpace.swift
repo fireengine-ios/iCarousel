@@ -67,6 +67,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     func checkFreeAppSpaceAfterAutoSync(){
         if (isSearchRunning){
+            needSearchAgain = true
             return
         }
         

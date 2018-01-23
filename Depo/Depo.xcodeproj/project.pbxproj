@@ -204,6 +204,14 @@
 		7C233CDA1FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CD91FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift */; };
 		7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */; };
 		7C241EFA1F960E1C00322149 /* CollectionViewCellForStoryPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C241EF91F960E1B00322149 /* CollectionViewCellForStoryPhoto.xib */; };
+		7C257B3720174D2500CB56F8 /* ContactBackupOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C257B3620174D2500CB56F8 /* ContactBackupOld.swift */; };
+		7C257B3820174D2500CB56F8 /* ContactBackupOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C257B3620174D2500CB56F8 /* ContactBackupOld.swift */; };
+		7C257B3A20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C257B3920174D3C00CB56F8 /* ContactBackupOld.xib */; };
+		7C257B3B20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C257B3920174D3C00CB56F8 /* ContactBackupOld.xib */; };
+		7C257B3D20174D7700CB56F8 /* ContactBackupEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C257B3C20174D7700CB56F8 /* ContactBackupEmpty.swift */; };
+		7C257B3E20174D7700CB56F8 /* ContactBackupEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C257B3C20174D7700CB56F8 /* ContactBackupEmpty.swift */; };
+		7C257B4020174D8B00CB56F8 /* ContactBackupEmpty.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C257B3F20174D8B00CB56F8 /* ContactBackupEmpty.xib */; };
+		7C257B4120174D8B00CB56F8 /* ContactBackupEmpty.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C257B3F20174D8B00CB56F8 /* ContactBackupEmpty.xib */; };
 		7C2F56F61F1CC0FE0014870B /* ActionsMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */; };
 		7C2F56FA1F1CC1CC0014870B /* ActionsMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F56F81F1CC1CC0014870B /* ActionsMenuTableViewCell.swift */; };
 		7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F91F1CC1CC0014870B /* ActionsMenuTableViewCell.xib */; };
@@ -3339,6 +3347,10 @@
 		7C233CD91FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxPhotosPresenter.swift; sourceTree = "<group>"; };
 		7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForStoryPhoto.swift; sourceTree = "<group>"; };
 		7C241EF91F960E1B00322149 /* CollectionViewCellForStoryPhoto.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCellForStoryPhoto.xib; sourceTree = "<group>"; };
+		7C257B3620174D2500CB56F8 /* ContactBackupOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactBackupOld.swift; sourceTree = "<group>"; };
+		7C257B3920174D3C00CB56F8 /* ContactBackupOld.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactBackupOld.xib; sourceTree = "<group>"; };
+		7C257B3C20174D7700CB56F8 /* ContactBackupEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactBackupEmpty.swift; sourceTree = "<group>"; };
+		7C257B3F20174D8B00CB56F8 /* ContactBackupEmpty.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactBackupEmpty.xib; sourceTree = "<group>"; };
 		7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionsMenuView.xib; sourceTree = "<group>"; };
 		7C2F56F81F1CC1CC0014870B /* ActionsMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsMenuTableViewCell.swift; sourceTree = "<group>"; };
 		7C2F56F91F1CC1CC0014870B /* ActionsMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionsMenuTableViewCell.xib; sourceTree = "<group>"; };
@@ -6455,6 +6467,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7C257B3420174BC400CB56F8 /* ContactBackupEmpty */ = {
+			isa = PBXGroup;
+			children = (
+				7C257B3C20174D7700CB56F8 /* ContactBackupEmpty.swift */,
+				7C257B3F20174D8B00CB56F8 /* ContactBackupEmpty.xib */,
+			);
+			path = ContactBackupEmpty;
+			sourceTree = "<group>";
+		};
+		7C257B3520174C1100CB56F8 /* ContactBackupOld */ = {
+			isa = PBXGroup;
+			children = (
+				7C257B3620174D2500CB56F8 /* ContactBackupOld.swift */,
+				7C257B3920174D3C00CB56F8 /* ContactBackupOld.xib */,
+			);
+			path = ContactBackupOld;
+			sourceTree = "<group>";
+		};
 		7C2F56F71F1CC1980014870B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -7271,6 +7301,8 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7C257B3520174C1100CB56F8 /* ContactBackupOld */,
+				7C257B3420174BC400CB56F8 /* ContactBackupEmpty */,
 				7CC11AAC1FE2768B00AF022D /* WaitingForWiFiPopUp */,
 				7C3B186B1FE0148900FF3C39 /* PrepareToAutoSync */,
 				7CEA863A1FDE840800F17D9D /* AutoUploadIsOffPopUp */,
@@ -11411,6 +11443,7 @@
 				8C06B0CF2008AD71003D8E05 /* sample_green.png in Resources */,
 				8C06AF452008AD70003D8E05 /* crop_icon.png in Resources */,
 				8C06B0B32008AD71003D8E05 /* rotate@2x.png in Resources */,
+				7C257B3B20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
 				8C06AEC32008AD70003D8E05 /* alt_cizgili_secili.png in Resources */,
 				8C06B1672008AD72003D8E05 /* toolbar_crop_icon@2x.png in Resources */,
 				8C0E90621FDEBDFF00789C91 /* IntroduceSubView.xib in Resources */,
@@ -11457,6 +11490,7 @@
 				8C06AF632008AD70003D8E05 /* duz_beyaz.png in Resources */,
 				8C06AFA12008AD71003D8E05 /* focus@3x.png in Resources */,
 				8C06B0872008AD71003D8E05 /* paylas_mail@3x.png in Resources */,
+				7C257B4120174D8B00CB56F8 /* ContactBackupEmpty.xib in Resources */,
 				8C0E906E1FDEBDFF00789C91 /* PasscodeSettingsViewController.xib in Resources */,
 				8C0E906F1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.xib in Resources */,
 				8C06AEDB2008AD70003D8E05 /* bold_secili.png in Resources */,
@@ -11699,6 +11733,7 @@
 				8C06B05A2008AD71003D8E05 /* paylas_akilli_depo@2x.png in Resources */,
 				8C06B1B42008AD72003D8E05 /* CRYShareImageViewController.nib in Resources */,
 				8C06B1342008AD72003D8E05 /* t_orta_selected.png in Resources */,
+				7C257B4020174D8B00CB56F8 /* ContactBackupEmpty.xib in Resources */,
 				8C7786891F3F38D9005CB432 /* MusicBar.xib in Resources */,
 				CE51AEEB1EF90853005DCEE0 /* inputCell.xib in Resources */,
 				8C06AF302008AD70003D8E05 /* cizgi_3@3x.png in Resources */,
@@ -11785,6 +11820,7 @@
 				8C6EF8911F348B77002AC795 /* EditinglBar.xib in Resources */,
 				78052963200DCDA70051FA78 /* ManageContactTableViewCell.xib in Resources */,
 				7C0435081F4DBAAF00193C75 /* AlbumCollectionViewCell.xib in Resources */,
+				7C257B3A20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
 				8C06AFF22008AD71003D8E05 /* kirmizi@2x.png in Resources */,
 				8C06B07E2008AD71003D8E05 /* paylas_linkedin@2x.png in Resources */,
 				8C06AFF42008AD71003D8E05 /* kirmizi@3x.png in Resources */,
@@ -12280,6 +12316,7 @@
 				8C0E8C7C1FDEBDFF00789C91 /* LoginDataSource.swift in Sources */,
 				8C0E8C7D1FDEBDFF00789C91 /* UpdateCheck.m in Sources */,
 				8C0E8C7E1FDEBDFF00789C91 /* Constants.swift in Sources */,
+				7C257B3E20174D7700CB56F8 /* ContactBackupEmpty.swift in Sources */,
 				8C0E8C7F1FDEBDFF00789C91 /* SKProduct+Localized.swift in Sources */,
 				8CD2B3AB1FE7B23E00280547 /* PopUpController.swift in Sources */,
 				8C0E8C801FDEBDFF00789C91 /* PasscodeSettingsInteractorIO.swift in Sources */,
@@ -12681,6 +12718,7 @@
 				8C0E8DFF1FDEBDFF00789C91 /* SplitIpadViewContoller.swift in Sources */,
 				8C0E8E001FDEBDFF00789C91 /* InstagramService.swift in Sources */,
 				8C0E8E011FDEBDFF00789C91 /* LocationManager.swift in Sources */,
+				7C257B3820174D2500CB56F8 /* ContactBackupOld.swift in Sources */,
 				8C0E8E021FDEBDFF00789C91 /* PrintService.swift in Sources */,
 				8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				8C0E8E031FDEBDFF00789C91 /* WrapperedItemUtil.swift in Sources */,
@@ -13209,6 +13247,7 @@
 				984F8E7F200CE10100D9D595 /* StoriesInitializer.swift in Sources */,
 				CE3318E61EFCFE1800E25989 /* ApplicationPalette.swift in Sources */,
 				CE51AB1C1EF90853005DCEE0 /* AutoSyncInformTableViewCell.swift in Sources */,
+				7C257B3720174D2500CB56F8 /* ContactBackupOld.swift in Sources */,
 				CE6DE7621FCD8A8000C23CBD /* CodeTextField.swift in Sources */,
 				7C6E2F7A1F31E4C900536DB6 /* CreateStoryPhotoSelectionViewController.swift in Sources */,
 				CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */,
@@ -13279,6 +13318,7 @@
 				CEAE3FF41EFD517300A405B2 /* TabBarViewController.swift in Sources */,
 				7C49881A1F3320420039C5F2 /* CreateStoryPhotosOrderPresenter.swift in Sources */,
 				7CD1F9181F0288DC0028F51A /* WelcomeModuleInput.swift in Sources */,
+				7C257B3D20174D7700CB56F8 /* ContactBackupEmpty.swift in Sources */,
 				CE51AB801EF90853005DCEE0 /* LoginRouter.swift in Sources */,
 				CE52011E1FB4348900C11DD0 /* ActivityIndicatorManager.swift in Sources */,
 				7CFE92F41F5ED498008A3B72 /* FeedbackService.swift in Sources */,

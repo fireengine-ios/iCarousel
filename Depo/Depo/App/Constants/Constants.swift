@@ -256,6 +256,14 @@ struct TextConstants {
     static let homeCompleteProfileTakeAPhoto = NSLocalizedString("Take a Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
+    //MARK: Home page contact bacup
+    static let homePageContactBacupHeader = NSLocalizedString("Contact Backup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupTitle = NSLocalizedString("Your last contact update was %d months ago!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupSubTitle = NSLocalizedString("It has been %d months since you last updated your contacts, update now to never loose any of your contacts.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupButton = NSLocalizedString("Backup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupLastUpate = NSLocalizedString("Last update:", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
     //MARK: Home page like filter view
     static let homeLikeFilterTitle = NSLocalizedString("Did you like this filter?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLikeFilterSubTitle = NSLocalizedString("You can apply this filter and my more to your other picures as well", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
