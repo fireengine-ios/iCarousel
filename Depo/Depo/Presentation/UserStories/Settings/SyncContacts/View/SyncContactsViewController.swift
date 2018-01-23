@@ -123,7 +123,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     // MARK: SyncContactsViewInput
     
     func setInitialState() {
-        viewForInformationAfterBackUp.isHidden = true
+        viewForInformationAfterBackUp.setSubviewsHidden(true)
         cancelButton.isHidden = true
         operationButtonsStackView.isHidden = true
         manageContactsButton.isHidden = true
@@ -132,7 +132,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     func setStateWithoutBackUp() {
         titleLabel.text = TextConstants.settingsBackUpNeverDidIt
         backupDateLabel.text = TextConstants.settingsBackUpNewer
-        viewForInformationAfterBackUp.isHidden = true
+        viewForInformationAfterBackUp.setSubviewsHidden(true)
         cancelButton.isHidden = true
         restoreButton.isHidden = true
         backUpButton.isHidden = false
@@ -153,7 +153,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     }
     
     func setOperationState(operationType: SyncOperationType) {
-        viewForInformationAfterBackUp.isHidden = true
+        viewForInformationAfterBackUp.setSubviewsHidden(true)
         operationButtonsStackView.isHidden = true
         backupDateLabel.isHidden = true
         manageContactsButton.isHidden = true
@@ -214,7 +214,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         attributedText.addAttribute(NSAttributedStringKey.font, value: font, range: r)
         
         titleLabel.attributedText = attributedText
-        viewForInformationAfterBackUp.isHidden = false
+        viewForInformationAfterBackUp.setSubviewsHidden(false)
         
         newContactCountLabel.text = String(response.newContactsNumber)
         duplicatedCountLabel.text = String(response.duplicatesNumber)
