@@ -3003,6 +3003,13 @@
 		F80A68F35B5CBF5C9E6E0288 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023504848539E3C241742408 /* LBAlbumLikePreviewSliderModuleInput.swift */; };
 		F81E6A8E95588C59EE134C9F /* UserInfoSubViewViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F47BDFE9C7A5963725FFA1 /* UserInfoSubViewViewOutput.swift */; };
 		F87A7C545D69A5A04B6C19BF /* FileInfoRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F451A358830EBF98327912 /* FileInfoRouterInput.swift */; };
+		FA793D702017112F00A02B46 /* PlacesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C7485A201621AA00350FC6 /* PlacesService.swift */; };
+		FA793D712017112F00A02B46 /* PlacesServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C748572016219800350FC6 /* PlacesServiceResponse.swift */; };
+		FA793D722017113300A02B46 /* ThingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C7485C201621B600350FC6 /* ThingsService.swift */; };
+		FA793D732017113300A02B46 /* ThingsServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C748552016219700350FC6 /* ThingsServiceResponse.swift */; };
+		FA793D742017113900A02B46 /* PeopleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C7484C201620F700350FC6 /* PeopleService.swift */; };
+		FA793D752017113900A02B46 /* PeopleServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C7484E2016213D00350FC6 /* PeopleServiceResponse.swift */; };
+		FA793D762017130000A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C7484720161ADD00350FC6 /* LBAlbumLikePreviewSliderDataSource.swift */; };
 		FB274A9C777B1B0305F1B7ED /* UploadedItemsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A98EA438594E6B7C21041F /* UploadedItemsInteractorOutput.swift */; };
 		FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */; };
 		FDD9464A87588DD71CCC5E0C /* HomeHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D733688673044E79E05452F /* HomeHeaderViewController.swift */; };
@@ -12502,6 +12509,7 @@
 				8C0E8D271FDEBDFF00789C91 /* HelpAndSupportConfigurator.swift in Sources */,
 				8C06AC1320066641003D8E05 /* TurkcellSecurityPresenter.swift in Sources */,
 				8C06AC1F2008AAC4003D8E05 /* FileForDownload.swift in Sources */,
+				FA793D722017113300A02B46 /* ThingsService.swift in Sources */,
 				8C0E8D281FDEBDFF00789C91 /* AutoSyncInteractor.swift in Sources */,
 				8C0E8D291FDEBDFF00789C91 /* FilesDataSource.swift in Sources */,
 				8C0E8D2A1FDEBDFF00789C91 /* CurioActionToolkit.m in Sources */,
@@ -12544,6 +12552,7 @@
 				8C0E8D4E1FDEBDFF00789C91 /* CurioReachabilityEx.m in Sources */,
 				8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */,
 				8C0E8D501FDEBDFF00789C91 /* SettingsAutoSyncModel.swift in Sources */,
+				FA793D732017113300A02B46 /* ThingsServiceResponse.swift in Sources */,
 				8C0E8D511FDEBDFF00789C91 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				8C0E8D521FDEBDFF00789C91 /* DataStorage.swift in Sources */,
 				8C0E8D531FDEBDFF00789C91 /* BaseUserInputCellView.swift in Sources */,
@@ -12607,6 +12616,7 @@
 				8C0E8D8F1FDEBDFF00789C91 /* WelcomeViewInput.swift in Sources */,
 				8C0E8D901FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				8C0E8D911FDEBDFF00789C91 /* WiFiSyncViewOutput.swift in Sources */,
+				FA793D712017112F00A02B46 /* PlacesServiceResponse.swift in Sources */,
 				8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
 				8C0E8D921FDEBDFF00789C91 /* AutoSyncInteractorInput.swift in Sources */,
 				8C0E8D931FDEBDFF00789C91 /* CustomNavBarButton.swift in Sources */,
@@ -12757,6 +12767,7 @@
 				8C0E8E1C1FDEBDFF00789C91 /* ForgotPasswordViewOutput.swift in Sources */,
 				8C0E8E1D1FDEBDFF00789C91 /* ForgotPasswordViewController.swift in Sources */,
 				8C0E8E1E1FDEBDFF00789C91 /* ForgotPasswordModuleInput.swift in Sources */,
+				FA793D702017112F00A02B46 /* PlacesService.swift in Sources */,
 				8C0E8E1F1FDEBDFF00789C91 /* EditingBarConfig.swift in Sources */,
 				8C0E8E201FDEBDFF00789C91 /* WiFiSyncInteractor.swift in Sources */,
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
@@ -12962,6 +12973,7 @@
 				8C0E8EE11FDEBDFF00789C91 /* PhotoVideoDetailModuleInput.swift in Sources */,
 				8C0E8EE21FDEBDFF00789C91 /* PhotoVideoDetailPresenter.swift in Sources */,
 				8C0E8EE31FDEBDFF00789C91 /* PhotoVideoDetailInteractorInput.swift in Sources */,
+				FA793D752017113900A02B46 /* PeopleServiceResponse.swift in Sources */,
 				8C0E8EE41FDEBDFF00789C91 /* SyncSettings.m in Sources */,
 				8C0E8EE51FDEBDFF00789C91 /* MediaItem+CoreDataClass.swift in Sources */,
 				8C0E8EE61FDEBDFF00789C91 /* CreateStoryNameModuleInput.swift in Sources */,
@@ -13148,6 +13160,7 @@
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				8C0E8F901FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
+				FA793D742017113900A02B46 /* PeopleService.swift in Sources */,
 				8C0E8F911FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				8C0E8F921FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				8C0E8F931FDEBDFF00789C91 /* HelpAndSupportInitializer.swift in Sources */,
@@ -13183,6 +13196,7 @@
 				8C0E8FB01FDEBDFF00789C91 /* CreateStoryPreviyInteractorIO.swift in Sources */,
 				8C0E8FB11FDEBDFF00789C91 /* FeedbackViewController.swift in Sources */,
 				8C0E8FB21FDEBDFF00789C91 /* FeedbackViewModuleInput.swift in Sources */,
+				FA793D762017130000A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				8C0E8FB31FDEBDFF00789C91 /* FeedbackViewPresenter.swift in Sources */,
 				8C06AC242008AB17003D8E05 /* AsyncOperation.swift in Sources */,
 				8C0E8FB41FDEBDFF00789C91 /* UploadFromLifeBoxRouter.swift in Sources */,

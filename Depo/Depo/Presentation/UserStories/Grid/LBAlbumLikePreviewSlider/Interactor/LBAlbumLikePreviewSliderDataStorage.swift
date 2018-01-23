@@ -43,7 +43,7 @@ class SliderItem: NSObject {
             self.previewItems = Array(items.prefix(4).flatMap {$0.preview?.patchToPreview})
         }
         self.type = .album
-        self.placeholderImage = UIImage()
+        self.placeholderImage = UIImage() //TODO: No image
     }
     
     init(withStoriesItems items: [Item]?) {
@@ -52,7 +52,7 @@ class SliderItem: NSObject {
             self.previewItems = Array(items.prefix(4).flatMap {$0.patchToPreview})
         }
         self.type = .story
-        self.placeholderImage = UIImage()
+        self.placeholderImage = UIImage() //TODO: No image
     }
     
     init(withPeopleItems items: [PeopleItemResponse]?) {
@@ -61,7 +61,7 @@ class SliderItem: NSObject {
             self.previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
         }
         self.type = .people
-        self.placeholderImage = UIImage()
+        self.placeholderImage = #imageLiteral(resourceName: "people")
     }
     
     init(withThingItems items: [ThingsItemResponse]?) {
@@ -70,7 +70,7 @@ class SliderItem: NSObject {
             self.previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
         }
         self.type = .things
-        self.placeholderImage = UIImage()
+        self.placeholderImage = #imageLiteral(resourceName: "things")
     }
     
     init(withPlaceItems items: [PlacesItemResponse]?) {
@@ -79,7 +79,7 @@ class SliderItem: NSObject {
             self.previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
         }
         self.type = .places
-        self.placeholderImage = UIImage()
+        self.placeholderImage = #imageLiteral(resourceName: "places")
     }
 }
 
