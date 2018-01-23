@@ -61,6 +61,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func eulaApplied(){
          compliteAsyncOperationEnableScreen()
+        //theoreticaly we should add coredata update/append here also
         router.goToAutoSync()
     }
     

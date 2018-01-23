@@ -64,30 +64,30 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
     }
 }
 
-class LoginResponse: ObjectRequestResponse {
-    
-    var rememberMeToken: String?
-    var token: String?
-    var newUser: Bool?
-    var migration: Bool?
-    var accountWarning: String?
-
-    override func mapping() {
-
-        rememberMeToken = self.responseHeader?[HeaderConstant.RememberMeToken] as? String
-        
-        //Need set remember me Token because we need to store it.
-        //As we can understand API documentation, we should receive it but server did not send X-Remember-Me-Token in remember me login method
-        if (rememberMeToken == nil){
-            rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
-        }
-        
-        token = self.responseHeader?[HeaderConstant.AuthToken] as? String
-        newUser = self.responseHeader?[HeaderConstant.newUser] as? Bool
-        migration = self.responseHeader?[HeaderConstant.migration] as? Bool
-        accountWarning = self.responseHeader?[HeaderConstant.accountWarning] as? String
-    }
-}
+//class LoginResponse: ObjectRequestResponse {
+//    
+//    var rememberMeToken: String?
+//    var token: String?
+//    var newUser: Bool?
+//    var migration: Bool?
+//    var accountWarning: String?
+//
+//    override func mapping() {
+//
+//        rememberMeToken = self.responseHeader?[HeaderConstant.RememberMeToken] as? String
+//        
+//        //Need set remember me Token because we need to store it.
+//        //As we can understand API documentation, we should receive it but server did not send X-Remember-Me-Token in remember me login method
+//        if (rememberMeToken == nil){
+////            rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
+//        }
+//        
+//        token = self.responseHeader?[HeaderConstant.AuthToken] as? String
+//        newUser = self.responseHeader?[HeaderConstant.newUser] as? Bool
+//        migration = self.responseHeader?[HeaderConstant.migration] as? Bool
+//        accountWarning = self.responseHeader?[HeaderConstant.accountWarning] as? String
+//    }
+//}
 
 class FailLoginResponse: ObjectRequestResponse {
     
@@ -134,10 +134,7 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
     private let expectedDataFormat: ExpectedDataFormat
     
     lazy var wrapRequestResponse: RequestResponse = { (data, response, error) in
-        
-        if self.notError(error: error) {
-            self.handleSuccess(data: data, response: response)
-        }
+        self.handleResponse(data: data, response: response, error: error)
     }
     
     init(success:SuccessResponse?, fail: FailResponse?, expectedDataFormat: ExpectedDataFormat = .JSONFormat) {
@@ -145,16 +142,8 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
         self.success = success
         self.fail = fail
     }
-    
-    private func notError(error: Error?) -> Bool {
-        guard let err = error else  {
-            return true
-        }
-        fail?(.error(err))
-        return false
-    }
-    
-    private func handleSuccess(data: Data?, response:URLResponse?) {
+
+    private func handleResponse(data: Data?, response:URLResponse?, error: Error?) {
         if let httpResponse = response as? HTTPURLResponse {
             if 200...299 ~= httpResponse.statusCode {
                 
@@ -179,6 +168,8 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
             } else {
                 fail?(.httpCode(httpResponse.statusCode))
             }
+        } else if let error = error {
+            fail?(.error(error))
         }
     }
 }

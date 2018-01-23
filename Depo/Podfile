@@ -14,8 +14,10 @@ def core_pods
     pod 'Adjust'
     #pod 'ActiveLabel'
 
+    pod 'Alamofire', '~> 4.5'
+
     #Keyboard
-    pod 'Typist'
+    pod 'Typist', '~> 1.1.0'
 
     pod 'ObjectiveDropboxOfficial'
 

@@ -24,29 +24,34 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         bottomBarPresenter?.show(animated: false, onView: view)
     }
     
-    func onShowSelectedItem(at index: Int, from items:[Item]) {
-        view.onShowSelectedItem(at: index, from: items)
-
-        let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
+    func prepareBarConfigForFileTypes(fileTypes: [FileType]) -> EditingBarConfig{
         
         var barConfig = interactor.bottomBarConfig
         var actionTypes = barConfig.elementsConfig
         
-        if !allSelectedItemsTypes.contains(.image) {
+        if !fileTypes.contains(.image) {
             if let editIndex = actionTypes.index(of: .edit) {
                 actionTypes.remove(at: editIndex)
             }
             if let printIndex = actionTypes.index(of: .print) {
                 actionTypes.remove(at: printIndex)
             }
-            if allSelectedItemsTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
-                actionTypes.remove(at: infoIndex)
-            }
+//            if fileTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
+//                actionTypes.remove(at: infoIndex)
+//            }
             barConfig = EditingBarConfig(elementsConfig: actionTypes,
                                          style: barConfig.style,
                                          tintColor: barConfig.tintColor)
         }
-        
+        return barConfig
+    }
+    
+    func onShowSelectedItem(at index: Int, from items:[Item]) {
+        view.onShowSelectedItem(at: index, from: items)
+
+        let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
+
+        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
         view.onItemSelected(at: index, from: items)
     }
@@ -54,7 +59,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func setSelectedItemIndex(selectedIndex: Int) {
         interactor.setSelectedItemIndex(selectedIndex: selectedIndex)
         view.onItemSelected(at: selectedIndex, from: interactor.allItems)
-        bottomBarPresenter?.setupTabBarWith(config: interactor.bottomBarConfig)
+        
+        let selectedItems = [interactor.allItems[selectedIndex]]
+        let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
+        
+        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes)
+        bottomBarPresenter?.setupTabBarWith(config: barConfig)
     }
     
     func onInfo(object: Item){
@@ -107,7 +117,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch type {
         case .delete, .removeFromAlbum:
-            interactor.deleteSelectedItem()
+            interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
         default:

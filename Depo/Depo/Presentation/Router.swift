@@ -140,6 +140,8 @@ class RouterVC: NSObject {
             if let ind = index, ind > 0 {
                 let viewController = viewControllers[ind - 1]
                 navigationController?.popToViewController(viewController, animated: true)
+            } else {
+                navigationController?.popToRootViewController(animated: true)
             }
         }
     }
@@ -250,10 +252,21 @@ class RouterVC: NSObject {
     
     //MARK: SyncContacts
     
-    var syncContacts: UIViewController? {
+    var syncContacts: UIViewController {
         let viewController = SyncContactsModuleInitializer.initializeViewController(with: "SyncContactsViewController")
         return viewController
-        
+    }
+    
+    var manageContacts: UIViewController {
+        let viewController = ManageContactsModuleInitializer.initializeViewController(with: "ManageContactsViewController")
+        return viewController
+    }
+    
+    func duplicatedContacts(analyzeResponse: [ContactSync.AnalyzedContact], moduleOutput: DuplicatedContactsModuleOutput?) -> UIViewController {
+        let viewController = DuplicatedContactsModuleInitializer.initializeViewController(with: "DuplicatedContactsViewController",
+                                                                                          analyzeResponse: analyzeResponse,
+                                                                                          moduleOutput: moduleOutput)
+        return viewController
     }
     
     //MARK: Terms
@@ -314,11 +327,15 @@ class RouterVC: NSObject {
     
     //MARK: Photos and Videos
     
-    var photosAndVideos: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController")
+    var photosScreen: UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Photo)
         return controller
     }
     
+    var videosScreen: UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Video)
+        return controller
+    }
     
     //MARK: Music
     
@@ -501,10 +518,11 @@ class RouterVC: NSObject {
         return c
     }
     
-    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
+    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                          selectedItem: fileObject,
-                                                                                         allItems: items)
+                                                                                         allItems: items,
+                                                                                         albumUUID: albumUUID)
         let c = controller as! PhotoVideoDetailViewController
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
@@ -531,6 +549,13 @@ class RouterVC: NSObject {
         return controller
     }
     
+    //MARK: Stories list
+    
+    func storiesListController() -> BaseFilesGreedChildrenViewController {
+        let controller = StoriesInitializer.initializeStoriesController(with: "BaseFilesGreedViewController")
+        return controller
+    }
+    
     //MARK: Free App Space
     
     func freeAppSpace() -> UIViewController{
@@ -550,7 +575,7 @@ class RouterVC: NSObject {
         let rightController = syncContacts
         
         //let splitContr = SplitIpadViewContoller()
-        splitContr.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController!])
+        splitContr.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController])
         
         let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitContr.getSplitVC())
         return containerController

@@ -261,6 +261,11 @@ class FileService: BaseRequestService {
     let downloadOperation = OperationQueue()
     private let dispatchQueue = DispatchQueue(label: "Download Queue")
     
+    override init() {
+        super.init()
+        downloadOperation.maxConcurrentOperationCount = 1
+    }
+    
     func move(moveFiles: MoveFiles , success: FileOperation?, fail:FailResponse?) {
         log.debug("FileService move")
 
@@ -325,7 +330,7 @@ class FileService: BaseRequestService {
         let allOperationsCount = items.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
         let downLoadRequests: [BaseDownloadRequestParametrs] = items.flatMap {
-            BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name)
+            BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
         var completedOperationsCount = 0
         let operations = downLoadRequests.flatMap {
@@ -387,16 +392,27 @@ class FileService: BaseRequestService {
                         default     : break
                     }
                     
-                    LocalMediaStorage.default.appendToAlboum(fileUrl: destination,
-                                                       type: type,
-                                                       album: downloadParam.albumName, success: {
+                    if let item = downloadParam.item, let mediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
+                        CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
+                                                               remoteItems: [item],
+                                                               context: CoreDataStack.default.mainContext)
                         removeDestinationFile()
                         success?()
-                        
-                    }, fail: { (error) in
-                        removeDestinationFile()
-                        fail?(error)
-                    })
+                    } else {
+                        LocalMediaStorage.default.appendToAlboum(fileUrl: destination,
+                                                                 type: type,
+                                                                 album: downloadParam.albumName,
+                                                                 item: downloadParam.item,
+                        success: {
+                            removeDestinationFile()
+                            success?()
+                        }, fail: { (error) in
+                            removeDestinationFile()
+                            fail?(error)
+                        })
+                    }
+                    
+                    
 
                 } else {
                     fail?(.string("Incorrect response "))

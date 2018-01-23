@@ -10,6 +10,6 @@ import Foundation
 
 protocol UserInfoSubViewInteractorInput {
 
-    func onStartRecuests()
+    func onStartRequests()
     
 }

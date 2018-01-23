@@ -63,12 +63,13 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
-        if (Device.isIpad){
+        if (Device.isIpad) {
             splitViewController?.navigationController?.viewControllers.last?.title = "Settings"
         } else {
             self.setTitle(withString: "Settings")
         }
         output.viewWillBecomeActive()
+        userInfoSubView.reloadUserInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,7 +88,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         }
     }
     
-    func showCellsData(array: [[String]]){
+    func showCellsData(array: [[String]]) {
         tableDataArray.removeAll()
         tableDataArray.append(contentsOf: array)
         tableView.reloadData()
@@ -96,7 +97,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     
     // MARK: buttons action
     
-    @IBAction func onLeaveFeedback(){
+    @IBAction func onLeaveFeedback() {
         RouterVC().showFeedbackSubView()
     }
     
@@ -107,14 +108,14 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 0){
+        if (section == 0) {
             return 156
         }
         return 14
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if (section == 0){
+        if (section == 0) {
             return userInfoSubView.view
         }
         return SettingHeaderView.viewFromNib()
@@ -125,7 +126,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if (section == tableDataArray.count - 1){
+        if (section == tableDataArray.count - 1) {
             return SettingHeaderView.viewFromNib()
         }
         return nil
@@ -152,7 +153,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.scrollRectToVisible(tableView.rectForRow(at: indexPath), animated: true)
-        if (!Device.isIpad){
+        if (!Device.isIpad) {
             tableView.deselectRow(at: indexPath, animated: true)
         } else {
             splitViewController?.navigationController?.viewControllers.last?.navigationItem.rightBarButtonItem = nil
@@ -308,7 +309,7 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
             
         } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             photoData = UIImagePNGRepresentation(image)
-        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage  {
+        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             photoData = UIImagePNGRepresentation(image)
         }
         if let unwrapedPhotoData = photoData {
@@ -319,7 +320,7 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
         
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
     

@@ -36,7 +36,7 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     // MARK: SettingsDelegate
     func goToContactSync(){
         if let left = leftController{
-        configurateWithControllers(leftViewController: left, controllers: [RouterVC().syncContacts!])
+        configurateWithControllers(leftViewController: left, controllers: [RouterVC().syncContacts])
         }
     }
     

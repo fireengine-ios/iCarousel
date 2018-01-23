@@ -27,12 +27,26 @@ class ImageDownloder {
             }
         }
         
-        let item = downloder.downloadImage(with: patch,
-                                options: [.lowPriority,.useNSURLCache],
-                                progress: nil) { (image, data, error, bool) in
-                                    
-                                    compliteImage(image)
+        var cachePath: String?
+        if let path = patch?.absoluteString, let query = patch?.query {
+            cachePath = path.replacingOccurrences(of: "?"+query, with: "")
         }
+        
+        if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                compliteImage(image)
+            }
+            return
+        }
+        
+        let item = downloder.downloadImage(with: patch,
+                                           options: [.lowPriority/*,.useNSURLCache*/],
+                                           progress: nil) { (image, data, error, bool) in
+                                            
+                                            SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
+                                            compliteImage(image)
+        }
+        
         guard let it = item else {
             return
         }
@@ -125,12 +139,13 @@ class FilesDownloader {
         for file in filesForDownload {
             group.enter()
             let params = BaseDownloadRequestParametrs(urlToFile: file.url, fileName: file.name, contentType: file.type)
+            
             requestService.executeDownloadRequest(param: params) { (urlToTmpFile, response, error) in
                 if let urlToTmpFile = urlToTmpFile {
+                    let destinationURL = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
                     do {
-                        let urlToLocalFile = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
-                        try FileManager.default.moveItem(at: urlToTmpFile, to: urlToLocalFile)
-                        localURLs.append(urlToLocalFile)
+                        try FileManager.default.moveItem(at: urlToTmpFile, to: destinationURL)
+                        localURLs.append(destinationURL)
                     } catch {
                         print(error.localizedDescription)
                     }

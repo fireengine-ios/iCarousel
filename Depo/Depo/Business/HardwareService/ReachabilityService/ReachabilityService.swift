@@ -68,6 +68,8 @@ class APIReachabilityService {
     
     static let shared = APIReachabilityService()
     
+    private let requestService = APIReachabilityRequestService()
+    
     private var timer: Timer?
     private (set) var connection: Connection = .undefined {
         didSet {
@@ -105,7 +107,7 @@ class APIReachabilityService {
     
     
     @objc private func checkAPI() {
-        APIReachabilityRequestService().sendPingRequest { [weak self] (isReachable) in
+        requestService.sendPingRequest { [weak self] (isReachable) in
             guard let `self` = self else {
                 return
             }

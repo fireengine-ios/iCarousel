@@ -12,6 +12,7 @@
 #import "SyncDBUtils.h"
 #import "SyncAdapter.h"
 #import "SyncStatus.h"
+#import "AnalyzeStatus.h"
 
 @interface ContactSyncSDK : NSObject
 
@@ -26,6 +27,37 @@
 + (void)doSync:(SYNCMode)mode;
 
 /**
+ * Starts analyze process for duplicates
+ */
++ (void)doAnalyze:(BOOL)dryRun;
+
+/**
+ * Cancels analyzing duplicate process, must be called if dry-run activated and user cancels process
+ * @see SyncSettings#setDryRun(BOOL)
+ * @see [SyncSettings shared].analyzeNotifyCallback
+ * @see [SyncSettings shared].analyzeNotifyCallback(NSMutableDict, NSMutableArray)
+ */
++ (void) cancelAnalyze;
+
+/**
+ * Continues analyzing duplicate process when dry-run activated and user continues process
+ * @see SyncSettings#setDryRun(BOOL)
+ * @see [SyncSettings shared].analyzeNotifyCallback
+ * @see [SyncSettings shared].analyzeNotifyCallback(NSMutableDict, NSMutableArray)
+ */
++ (void) continueAnalyze;
+
+/**
+ * @return Last successful periodic synchronization time
+ */
++ (NSDate*)lastPeriodicSyncTime;
+
+/**
+ * Starts either backup or restore process
+ */
++ (void)doPeriodicSync;
+
+/**
  *
  * @return true, if synchronization is still running
  */
@@ -37,3 +69,4 @@
 #pragma mark -
 
 @end
+

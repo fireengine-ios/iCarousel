@@ -8,7 +8,7 @@
 
 class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelectionCollectionViewCellDelegate {
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     let smallPlayer = SmallBasePlayer()
     
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
@@ -28,7 +28,7 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     // MARK: AudioSelectionCollectionViewCellDelegate
     
     func onPlayButton(inCell: AudioSelectionCollectionViewCell){
-        let indexPath = collectionView.indexPath(for: inCell)
+        let indexPath = collectionView?.indexPath(for: inCell)
         guard let path = indexPath else {
             return
         }
@@ -50,7 +50,7 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     }
     
     private func unplayOtherCells(currentlyPlayingCell: AudioSelectionCollectionViewCell) {
-        collectionView.visibleCells.forEach {
+        collectionView?.visibleCells.forEach {
             if let audioCell = $0 as? AudioSelectionCollectionViewCell, audioCell != currentlyPlayingCell {
                 audioCell.changeButtonState(playing: false)//playingButton.isSelected = false
             }

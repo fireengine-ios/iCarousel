@@ -14,6 +14,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     var array = [Item]()
     
+    var albumUUID: String?
+    
     var selectedIndex = 0
     
     var photoVideoBottomBarConfig: EditingBarConfig!
@@ -74,6 +76,13 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                     elementsConfig.append(.info)
                 }
             }
+            
+            if .video == selectedItem.fileType && !selectedItem.isLocalItem {
+                if let deleteIndex = elementsConfig.index(of: .info)  {
+                    elementsConfig.remove(at: deleteIndex)
+                }
+            }
+            
             if selectedItem.syncStatus != .notSynced {
                 elementsConfig = elementsConfig + [.delete]
             }
@@ -92,14 +101,24 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
     }
     
-    func deleteSelectedItem(){
+    func deleteSelectedItem(type: ElementTypes){
         let isRightSwipe = selectedIndex == array.count - 1
         
+        let removedObject = array[selectedIndex]
+            
         array.remove(at: selectedIndex)
         
         if (selectedIndex >= array.count){
             selectedIndex = array.count - 1
         }
+        
+        if type == .delete{
+            ItemOperationManager.default.deleteItems(items: [removedObject])
+        }
+        if type == .removeFromAlbum{
+            ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
+        }
+        
         if array.isEmpty {
             output.goBack()
         } else {

@@ -11,30 +11,25 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     weak var view: UserInfoSubViewViewInput!
     var interactor: UserInfoSubViewInteractorInput!
     var router: UserInfoSubViewRouterInput!
-
-    func viewIsReady() {
-        startAsyncOperation()
-        interactor.onStartRecuests()
-    }
     
-    func requestsFinished(){
+    func requestsFinished() {
         asyncOperationSucces()
     }
     
-    func setUserInfo(userInfo: AccountInfoResponse){
+    func setUserInfo(userInfo: AccountInfoResponse) {
         view.setUserInfo(userInfo: userInfo)
     }
     
-    func setQuotaInfo(quotoInfo: QuotaInfoResponse){
+    func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
         view.setQuotaInfo(quotoInfo: quotoInfo)
     }
 
-    func reloadUserInfoRequered() {
+    func reloadUserInfoRequired() {
         showSpinner()
-        interactor.onStartRecuests()
+        interactor.onStartRequests()
     }
     
-    func loadingIndicatorRequered() {
+    func loadingIndicatorRequired() {
         showSpinner()
     }
 
@@ -43,7 +38,7 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
         startAsyncOperation()
     }
     
-    func loadingIndicatorDismissalRequered() {
+    func loadingIndicatorDismissalRequired() {
         asyncOperationSucces()
     }
     

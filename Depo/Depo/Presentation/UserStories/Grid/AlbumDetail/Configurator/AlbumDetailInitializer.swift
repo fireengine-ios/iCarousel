@@ -38,7 +38,7 @@ class AlbumDetailModuleInitializer: NSObject {
             showGridListButton: true
         )
         
-        configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid)],
+        configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid), .localStatus(.nonLocal)],
                                bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .completelyDeleteAlbums, .removeAlbum, .albumDetails, .select],

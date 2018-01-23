@@ -10,6 +10,8 @@ import UIKit
 
 class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    
     static let `default` = FreeAppSpace()
     
     private var photoVideoService : PhotoAndVideoService? = nil
@@ -19,17 +21,17 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     private var localtemsArray = [WrapData]()
     private var localMD5Array = [String]()
-    private var duplicaesArray = [WrapData]()
+    private var duplicatesArray = [WrapData]()
     private var serverDuplicatesArray = [WrapData]()
     
     func getDuplicatesObjects() -> [WrapData]{
-        return duplicaesArray
+        return duplicatesArray
     }
     
     func clear(){
         localtemsArray.removeAll()
         localMD5Array.removeAll()
-        duplicaesArray.removeAll()
+        duplicatesArray.removeAll()
         serverDuplicatesArray.removeAll()
         isSearchRunning = false
         if let service = photoVideoService{
@@ -38,14 +40,16 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
     }
     
-    func getServerUIDSForLocalitem(localItemsArray: [BaseDataSourceItem]) -> [String]{
+    func getUIDSForObjects(itemsArray: [BaseDataSourceItem]) -> [String]{
         let serverHash = serverDuplicatesArray.map { $0.md5 }
         var array = [String]()
-        for item in localItemsArray {
+        for item in itemsArray {
             let index  = serverHash.index(of: item.md5)
             if let index_ = index {
                 let serverObject = serverDuplicatesArray[index_]
                 array.append(serverObject.uuid)
+            }else{
+                array.append(item.uuid)
             }
         }
         return array
@@ -66,7 +70,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             return
         }
         
-        if duplicaesArray.count > 0 {
+        if duplicatesArray.count > 0 {
             showFreeAppSpaceCard()
         }else{
             checkFreeAppSpace()
@@ -74,7 +78,20 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         
     }
     
+    func sortDuplicatesArray(){
+        duplicatesArray = duplicatesArray.sorted(by: { (obj1, obj2) -> Bool in
+            if let date1 = obj1.creationDate, let date2 = obj2.creationDate, date1 > date2{
+                return true
+            }
+            return false
+        })
+    }
+    
     func checkFreeAppSpace(){
+        if tokenStorage.refreshToken == nil {
+            return
+        }
+        photoVideoService?.currentPage = 0
         startSearchDuplicates(finished: { [weak self] in
             guard let self_ = self else{
                 return
@@ -83,38 +100,42 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             self_.isSearchRunning = false
             
             if (self_.needSearchAgain){
-                self_.needSearchAgain = true
+                self_.needSearchAgain = false
                 self_.checkFreeAppSpace()
                 return
             }
+            
+            self_.sortDuplicatesArray()
             
             self_.showFreeAppSpaceCard()
         })
     }
     
     func showFreeAppSpaceCard(){
-        if (duplicaesArray.count > 0){
+        if (duplicatesArray.count > 0){
             let freeSpace = Device.getFreeDiskSpaceInPercent
             if freeSpace < NumericConstants.freeAppSpaceLimit{
                 CardsManager.default.startOperationWith(type: .freeAppSpaceWarning, allOperations: nil, completedOperations: nil)
             }else{
                 CardsManager.default.startOperationWith(type: .freeAppSpace, allOperations: nil, completedOperations: nil)
             }
+        }else{
+            print("have no duplicates")
         }
     }
     
     func deleteDeletedLocalPhotos(deletedPhotos:[WrapData]){
-        var array = duplicaesArray.map { $0.md5 }
+        var array = duplicatesArray.map { $0.md5 }
         for object in deletedPhotos {
             if let index = array.index(of: object.md5){
                 array.remove(at: index)
-                duplicaesArray.remove(at: index)
+                duplicatesArray.remove(at: index)
             }
         }
     }
     
     func isDuplicatesNotAvailable() -> Bool{
-        return duplicaesArray.count == 0
+        return duplicatesArray.count == 0
     }
     
     func startSearchDuplicates(finished: @escaping() -> Swift.Void) {
@@ -129,7 +150,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         
         localtemsArray.removeAll()
         localMD5Array.removeAll()
-        duplicaesArray.removeAll()
+        duplicatesArray.removeAll()
         serverDuplicatesArray.removeAll()
         
         DispatchQueue.main.async {
@@ -152,8 +173,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     guard let self_ = self else{
                         return
                     }
-                    if (self_.duplicaesArray.count > 0) {
-                        debugPrint("duplicates count = ", self_.duplicaesArray.count)
+                    if (self_.duplicatesArray.count > 0) {
+                        debugPrint("duplicates count = ", self_.duplicatesArray.count)
                     }else{
                         debugPrint("have no duplicates")
                     }
@@ -178,7 +199,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
         var finished = false
         
-        service.nextItems(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
+        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
             guard let self_ = self else{
                 fail()
                 return
@@ -189,12 +210,10 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     finished = true
                     break
                 }
-                let serverObjectMD5 = item.md5
-                let index = self_.localMD5Array.index(of: serverObjectMD5)
+                let index = self_.localMD5Array.index(of: item.md5)
                 if let index_ = index {
-                    
                     self_.serverDuplicatesArray.append(item)
-                    self_.duplicaesArray.append(self_.localtemsArray[index_])
+                    self_.duplicatesArray.append(self_.localtemsArray[index_])
                     self_.localtemsArray.remove(at: index_)
                     self_.localMD5Array.remove(at: index_)
                     
@@ -232,23 +251,18 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     //MARK: UploadNotificationManagerProtocol
     
-    func startUploadFile(file: WrapData){
-        
-    }
-    
-    func setProgressForUploadingFile(file: WrapData, progress: Float){
-        
-    }
-    
     func finishedUploadFile(file: WrapData){
+        print("uploaded object with uuid - ", file.uuid)
         if (isSearchRunning){
             needSearchAgain = true
             return
         }
         
         if file.isLocalItem{
-            duplicaesArray.append(file)
+            file.metaData?.takenDate = Date()
+            duplicatesArray.append(file)
         }else{
+            print("uploaded server object")
             let serverObjectsUUIDs = serverDuplicatesArray.map({ $0.uuid })
             if !serverObjectsUUIDs.contains(file.uuid){
                 serverDuplicatesArray.append(file)
@@ -264,19 +278,24 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     return
                 }
                 let localObjects = fetchResult.map{ return WrapData(mediaItem: $0) }
-                duplicaesArray.append(contentsOf: localObjects)
+                duplicatesArray.append(contentsOf: localObjects)
             }
         }
-
-        showFreeAppSpaceCard()
+        
+        sortDuplicatesArray()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.showFreeAppSpaceCard()
+        }
     }
     
-    func addFilesToFavorites(items: [Item]){
-        
-    }
-    
-    func removeFileFromFavorites(items: [Item]){
-        
+    func addedLocalFiles(items: [Item]){
+        let serverObjectsUUIDs = serverDuplicatesArray.map({ $0.uuid })
+        for item in items {
+            if serverObjectsUUIDs.contains(item.uuid){
+                localtemsArray.append(item)
+                duplicatesArray.append(item)
+            }
+        }
     }
     
     func deleteItems(items: [Item]){
@@ -287,33 +306,27 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         
         let md5Array = items.map { $0.md5 }
         var newDuplicatesArray = [WrapData]()
-        for object in duplicaesArray {
+        for object in duplicatesArray {
             if !md5Array.contains(object.md5){
                 newDuplicatesArray.append(object)
             }
         }
-        duplicaesArray.removeAll()
-        duplicaesArray.append(contentsOf: newDuplicatesArray)
-        if (duplicaesArray.count == 0){
+        duplicatesArray.removeAll()
+        duplicatesArray.append(contentsOf: newDuplicatesArray)
+        
+        var newServerDuplicatesArray = [WrapData]()
+        for object in serverDuplicatesArray{
+            if !md5Array.contains(object.md5){
+                newServerDuplicatesArray.append(object)
+            }
+        }
+        serverDuplicatesArray.removeAll()
+        serverDuplicatesArray.append(contentsOf: newServerDuplicatesArray)
+        
+        if (duplicatesArray.count == 0){
             CardsManager.default.stopOperationWithType(type: .freeAppSpace)
             CardsManager.default.stopOperationWithType(type: .freeAppSpaceWarning)
         }
-    }
-    
-    func newFolderCreated(){
-        
-    }
-    
-    func newAlbumCreated(){
-        
-    }
-    
-    func albumsDeleted(albums: [AlbumItem]){
-        
-    }
-    
-    func fileAddedToAlbum(){
-        
     }
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool{

@@ -13,6 +13,7 @@ struct RouteRequests {
     // MARK: Authentication
     
     static let BaseUrl: URL = URL(string: "https://adepo.turkcell.com.tr/")!
+    static let BaseContactsUrl: URL = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
     static let TestUrl = "https://tcloudstb.turkcell.com.tr/"
     static let NewURL: URL = URL(string: "https://mylifebox.com/")!
     
@@ -84,5 +85,10 @@ struct RouteRequests {
     
     static let faqUrl = "api/faq/url/%@"
 
+    //MARK: - Contacts
+    static let getContacts = "contact?currentPage=%d"
+    static let searchContacts = "search?query=%@&currentPage=%d"
+    static let deleteContacts = "contact"
+    
 }
     

@@ -31,7 +31,6 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int){
-        //view.setTitle(title: "", subTitle: "")
     }
     
     override func onNextButton() {
@@ -80,4 +79,7 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
 //        }
 //    }
 
+    override func needShowNoFileView() -> Bool {
+        return dataSource.getAllObjects().count == 0
+    }
 }

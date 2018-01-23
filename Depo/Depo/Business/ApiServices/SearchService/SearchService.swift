@@ -56,6 +56,7 @@ enum FieldValue: CustomStringConvertible  {
     case playLists
     case favorite
     case cropy
+    case story
     case all
     
     var description: String {
@@ -69,6 +70,7 @@ enum FieldValue: CustomStringConvertible  {
         case .document      : return "application%20OR%20text%20NOT%20directory"
         case .favorite      : return "true"
         case .cropy         : return "true"
+        case .story         : return "true"
         case .all           : return ""
         }
     }
@@ -84,6 +86,7 @@ enum FieldValue: CustomStringConvertible  {
         case .document      : return "documents"
         case .favorite      : return "true"
         case .cropy         : return "true"
+        case .story         : return "true"
         case .all           : return ""
         }
     }
@@ -94,6 +97,7 @@ enum SearchContentType: CustomStringConvertible {
     case cropy
     case favorite
     case album
+    case story
     
     var description: String {
         switch self {
@@ -101,6 +105,7 @@ enum SearchContentType: CustomStringConvertible {
         case .cropy        : return "metadata.Cropy"
         case .favorite     : return "metadata.X-Object-Meta-Favourite"
         case .album        : return "album/photo"
+        case .story        : return "metadata.Video-Slideshow"
         }
     }
 }

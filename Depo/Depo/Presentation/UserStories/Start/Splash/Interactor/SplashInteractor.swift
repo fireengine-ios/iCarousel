@@ -13,26 +13,33 @@ class SplashInteractor: SplashInteractorInput {
     let authService = AuthenticationService()
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var authenticationService = AuthenticationService()
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
-    
-    func startLoginInBackroung() {        
-        let success: SuccessLogin = { [weak self] in
-            self?.successLogin()
+
+    func startLoginInBackroung(){
+        if tokenStorage.accessToken == nil {
+            if ReachabilityService().isReachableViaWiFi {
+                failLogin()
+            } else {
+                /// turkcell login
+                authenticationService.turkcellAuth(success: { [weak self] in
+                    self?.successLogin()
+                }, fail: { [weak self] response in
+                    self?.output.asyncOperationSucces()
+                    self?.output.onFailLogin()
+                })
+            }
+        } else {
+            successLogin()
         }
-        
-        let fail: FailResponse = { [weak self] (failObject) in
-            self?.failLogin()
-        }
-        
-        authService.authenticate(success: success, fail: fail)
     }
     
     func successLogin(){
         DispatchQueue.main.async {
-            ApplicationSession.sharedSession.saveData()
             self.output.onSuccessLogin()
         }
     }

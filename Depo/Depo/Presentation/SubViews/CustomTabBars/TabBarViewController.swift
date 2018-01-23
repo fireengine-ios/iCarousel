@@ -33,13 +33,14 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var plusButtonHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var musicBarContainer: UIView!
     
-    @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var musicBarHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var bottomTabBarConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var musicBar: MusicBar!
     
     static let notificationHidePlusTabBar = "HideMainTabBarPlusNotification"
     static let notificationShowPlusTabBar = "ShowMainTabBarPlusNotification"
@@ -48,6 +49,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationMusicStartedPlaying = "MusicStartedPlaying"
     static let notificationMusicDrop = "MusicDrop"
     static let notificationMusicStop = "MusicStop"
+    static let notificationPhotosScreen = "PhotosScreenOn"
+    static let notificationVideoScreen = "VideoScreenOn"
     
     let originalPlusBotttomConstraint: CGFloat = 10
     
@@ -58,9 +61,17 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     fileprivate var albumBtn            : SubPlussButtonView!
     fileprivate var uploadFromLifebox   : SubPlussButtonView!
 
-    let musicBar = MusicBar.initFromXib()
-    let player: MediaPlayer = factory.resolve()
+    //    let musicBar = MusicBar.initFromXib()
+    lazy var player: MediaPlayer = factory.resolve()
     let cameraService: CameraService = CameraService()
+    
+    enum TabScreenIndex: Int {
+        case homePageScreenIndex = 0
+        case photosScreenIndex = 1
+        case videosScreenIndex = 2
+        case musicScreenIndex = 3
+        case documentsScreenIndex = 4
+    }
     
     var customNavigationControllers: [UINavigationController] = []
     
@@ -84,6 +95,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
         return nil
     }
+    
+    var lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+    
     
     var selectedIndex: NSInteger = 0 {
         willSet {
@@ -130,10 +144,13 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         selectedIndex = 0
         tabBar.selectedItem = tabBar.items?.first
         
-        setupMusicBar()
+        
+        changeVisibleStatus(hidden: true)
         setupObserving()
         
         player.delegates.add(self)
+        
+        plussButton.accessibilityLabel = TextConstants.accessibilityPlus
     }
     
     deinit {
@@ -148,19 +165,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                      ("outlineDocs",  "")]
         
         tabBar.setupItems(withImageToTitleNames: items)
-    }
-    
-    private func setupMusicBar() {
-        musicBarContainer.addSubview(musicBar)
-        let horisontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[item1]-(0)-|",
-                                                               options: [], metrics: nil,
-                                                               views: ["item1" : musicBar])
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[item1]-(0)-|",
-                                                                   options: [], metrics: nil,
-                                                                   views: ["item1" : musicBar])
-
-        musicBarContainer.addConstraints(horisontalConstraints + verticalConstraints)
-        changeVisibleStatus(hidden: true)
     }
     
     private func setupObserving() {
@@ -187,13 +191,33 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                                                selector: #selector(hideMusicBar),
                                                name: dropNotificationName,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showPhotosScreen),
+                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showVideosScreen),
+                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationVideoScreen),
+                                               object: nil)
+        
+    }
+    
+    @objc func showPhotosScreen(_ sender: Any) {
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+        selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+    }
+    
+    @objc func showVideosScreen(_ sender: Any) {
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
+        selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.videosScreenIndex.rawValue
     }
     
     @objc func showMusicBar(_ sender: Any) {
         musicBar.configurateFromPLayer()
         changeVisibleStatus(hidden: false)
-        containerViewBottomConstraint.constant = musicBarContainerHeightConstraint.constant
-        
+        containerViewBottomConstraint.constant = musicBarHeightConstraint.constant
     }
     
     @objc func hideMusicBar(_ sender: Any) {
@@ -202,8 +226,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
 
     private func changeVisibleStatus(hidden: Bool) {
-        musicBarContainer.isHidden = hidden
-        musicBarContainer.isUserInteractionEnabled = !hidden
+        musicBar.isHidden = hidden
+        musicBar.isUserInteractionEnabled = !hidden
     }
     
     @objc private func showPlusTabBar(_ sender: Any) {
@@ -241,8 +265,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeTabBarStatus(hidden: true)
         if (bottomTabBarConstraint.constant >= 0){
             var bottomConstraintConstant = -self.tabBar.frame.height
-            if !musicBarContainer.isHidden {
-                bottomConstraintConstant -= self.musicBarContainer.frame.height
+            if !musicBar.isHidden {
+                bottomConstraintConstant -= self.musicBar.frame.height
             }
             if #available(iOS 10.0, *) {
                 let obj = UIViewPropertyAnimator(duration: NumericConstants.animationDuration, curve: .linear) {
@@ -277,7 +301,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     func setupCustomNavControllers() {
         let router = RouterVC()
         let list = [router.homePageScreen,
-                    router.photosAndVideos,
+                    router.photosScreen,
+                    router.videosScreen,
                     router.musics,
                     router.documents]
         customNavigationControllers = list.flatMap{ UINavigationController(rootViewController: $0!)}
@@ -304,6 +329,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         } else {
             hideButtonRainbow()
         }
+        
+        plussButton.accessibilityLabel = state ? TextConstants.accessibilityClose : TextConstants.accessibilityPlus
     }
     
     private func setupCurtainView() {
@@ -313,6 +340,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         curtainColorView.backgroundColor = ColorConstants.whiteColor
         curtainColorView.alpha = 0.88
         showCurtainView(show: false)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(TabBarViewController.closeCurtainView))
+        curtainView.addGestureRecognizer(tap)
     }
     
     private func showCurtainView(show: Bool) {
@@ -320,6 +350,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         curtainView.isUserInteractionEnabled = show
         selectedViewController?.navigationItem.rightBarButtonItem?.isEnabled = !show
         selectedViewController?.navigationItem.leftBarButtonItem?.isEnabled = !show
+    }
+    
+    @objc func closeCurtainView() {
+        changeViewState(state: false)
     }
     
     func setupSubButtons() {
@@ -506,11 +540,15 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeViewState(state: false)
         
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
+
+            if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
+                (lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue ||
+                lastPhotoVideoIndex == TabScreenIndex.videosScreenIndex.rawValue ) {
+                tabbarSelectedIndex = lastPhotoVideoIndex
+            }
             
             tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
-            if tabbarSelectedIndex > 2 {
-                tabbarSelectedIndex -= 1
-            }
+            
             selectedIndex = tabbarSelectedIndex
         }
     }
@@ -586,9 +624,9 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         let wrapData = WrapData(imageData: data)
         
         UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {
-            DispatchQueue.main.async {
-                UIApplication.showSuccessAlert(message: TextConstants.photoUploadedMessage )
-            }
+//            DispatchQueue.main.async {
+//                UIApplication.showSuccessAlert(message: TextConstants.photoUploadedMessage )
+//            }
         }) { (error) in
             DispatchQueue.main.async {
                 UIApplication.showErrorAlert(message: error.localizedDescription)

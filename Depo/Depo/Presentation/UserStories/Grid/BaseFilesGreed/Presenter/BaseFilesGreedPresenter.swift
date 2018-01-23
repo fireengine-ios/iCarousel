@@ -11,7 +11,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     typealias Item = WrapData
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
     
     var dataSource: BaseDataSourceForCollectionView
     
@@ -64,6 +64,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
        
         dataSource.delegate = self
         dataSource.needShowProgressInCell = needShowProgressInCells
+        dataSource.parentUUID = interactor.getFolder()?.uuid
+        if let albumInteractor = interactor as? AlbumDetailInteractor {
+            dataSource.parentUUID = albumInteractor.album?.uuid
+        }
         
         if let displayingType = topBarConfig {
             type = displayingType.defaultGridListViewtype
@@ -216,6 +220,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             dataSource.reloadData()
         }
+        updateNoFilesView()
     }
     
     func isArrayDataSource() -> Bool{
@@ -305,10 +310,20 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     // MARK: Bottom Bar
     
+    private func canShow3DotsButton() -> Bool {
+        let array = dataSource.getSelectedItems().filter {
+            if $0.isLocalItem && $0.fileType == .video {
+                return false
+            }
+            return true
+        }
+        return !array.isEmpty
+    }
+    
     private func startEditing() {
         let selectedItemsCount = dataSource.selectedItemsArray.count
         view.startSelection(with: selectedItemsCount)
-        view.setThreeDotsMenu(active: selectedItemsCount > 0)
+        view.setThreeDotsMenu(active: canShow3DotsButton())
         dataSource.setSelectionState(selectionState: true)
     }
     
@@ -353,7 +368,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         
         
-        view.setThreeDotsMenu(active: dataSource.selectedItemsArray.count > 0)
+        view.setThreeDotsMenu(active: canShow3DotsButton())
         self.view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
@@ -462,9 +477,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
             }
             
-            let remoteItems = selectedItems.filter {$0.isLocalItem == false}
+            //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
             
-            if actionTypes.contains(.createStory) && !remoteItems.contains(where: { return $0.fileType == .image } ) {
+            if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image } ) {
                 let index = actionTypes.index(where: { return $0 == .createStory})!
                 actionTypes.remove(at: index)
             }
@@ -482,12 +497,19 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             }
             
             if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
-                if localDuplicates.count > 0 {
-                    selectedItems = localDuplicates
-                } else {
+                let serverObjects = selectedItems.filter({ return !$0.isLocalItem })
+                if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
+                }else{
+                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
+                    if localDuplicates.count == 0 {
+                        //selectedItems = localDuplicates
+                        actionTypes.remove(at: deleteOriginalIndex)
+                    } else {
+                        
+                    }
                 }
+                
             }
             
             alertSheetModule?.showAlertSheet(with: actionTypes,
@@ -497,6 +519,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
             actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.index(of: .download) {
+                actionTypes.remove(at: downloadIdex)
+            }
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              presentedBy: sender,
                                              onSourceView: nil)
@@ -517,12 +542,20 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
-        self.filters = filters.map{ $0.convertToGeneralFilterFileType() }
+        guard let firstFilter = filters.first else {
+            return
+        }
+        var notificationTitle: String
+        switch firstFilter {
+        case .Photo:
+            notificationTitle = TabBarViewController.notificationPhotosScreen
+        case .Video:
+            notificationTitle = TabBarViewController.notificationVideoScreen
+        default:
+            notificationTitle = TabBarViewController.notificationPhotosScreen
+        }
         
-        stopEditing()
-//        dataSource.dropData()
-        dataSource.originalFilters = self.filters
-        reloadData()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationTitle), object: nil, userInfo: nil)
     }
     
     

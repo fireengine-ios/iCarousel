@@ -8,21 +8,45 @@
 
 import UIKit
 import SDWebImage
+import Alamofire
 
 class AppConfigurator {
     
     static let dropboxManager: DropboxManager = factory.resolve()
     
     class func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        ApplicationSessionManager.start()
         dropboxManager.start()
+        
+        let urls: AuthorizationURLs = AuthorizationURLsImp()
+        let tokenStorage: TokenStorage = factory.resolve()
+        if tokenStorage.isClearTokens {
+            tokenStorage.isClearTokens = false
+            tokenStorage.clearTokens()
+        }
+        
+        var auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
+        auth.refreshFailedHandler = logout
+        
+        let sessionManager = SessionManager.default
+        sessionManager.retrier = auth
+        sessionManager.adapter = auth
         
         setVersionAndBuildNumber()
         configureSDWebImage()
         setupCropy()
         
-        CoreDataStack.default.appendLocalMediaItems {
+//        CoreDataStack.default.appendLocalMediaItems {
             startMenloworks(with: launchOptions)
+//        }
+    }
+    
+    class func logout() {
+        /// there is no retain circle bcz of singleton
+        AuthenticationService().logout {
+            DispatchQueue.main.async {
+                let router = RouterVC()
+                router.setNavigationController(controller: router.onboardingScreen)
+            }
         }
     }
     
@@ -72,4 +96,19 @@ class AppConfigurator {
         }
     }
     
+}
+
+/// here we can change global requests validation
+extension DataRequest {
+    @discardableResult
+    public func customValidate() -> Self {
+        return validate(statusCode: 200..<300)
+    }
+}
+
+extension DownloadRequest {
+    @discardableResult
+    public func customValidate() -> Self {
+        return validate(statusCode: 200..<300)
+    }
 }

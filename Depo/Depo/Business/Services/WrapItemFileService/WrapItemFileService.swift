@@ -82,6 +82,7 @@ class WrapItemFileService: WrapItemFileOperations {
                 let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
                 DispatchQueue.main.async {
                     CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
+                    ItemOperationManager.default.deleteItems(items: deleteFiles)
                 }
                 success?()
             }, fail: fail)
@@ -223,8 +224,7 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     private func assetsForlocalItems(files: [WrapData]) -> [PHAsset]? {
-        let assets = files.filter{ $0.isLocalItem }
-                          .flatMap{ $0.asset }
+        let assets = files.flatMap{ $0.asset }
         return assets
     }
     

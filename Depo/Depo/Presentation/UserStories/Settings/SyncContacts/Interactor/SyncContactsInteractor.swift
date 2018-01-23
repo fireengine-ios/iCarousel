@@ -6,13 +6,16 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-enum SyncOperationType{
+enum SyncOperationType {
     case backup
     case restore
-    case canselAllOperations
+    case analyze
+    case deleteDuplicated
+    case getBackUpStatus
+    case cancel
 }
 
-enum SyncOperationErrors{
+enum SyncOperationErrors {
     case accessDenied
     case failed
     case remoteServerError
@@ -27,51 +30,68 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     let contactsSyncService = ContactsSyncService()
     
     func startOperation(operationType: SyncOperationType){
-        
         switch operationType {
         case .backup:
             performOperation(forType: .backup)
         case .restore:
             performOperation(forType: .restore)
-        case .canselAllOperations:
-            contactsSyncService.cancellCurrentOperation()
-        }
-    }
-    
-    func getLastBackUpDate() {
-        DispatchQueue.main.async { [weak self] in
-            
-            let time = self?.contactsSyncService.getPreviousBackupTime()
-            var date: Date? = nil
-            
-            if (time != nil ){
-                date = Date(timeIntervalSince1970: time!/1000)
-            }
-            
-            self?.output.lastBackUpDateResponse(response: date)
+        case .cancel:
+            contactsSyncService.cancel()
+            output.cancelSuccess()
+        case .getBackUpStatus:
+            loadLastBackUp()
+        case .analyze:
+            analyze()
+        case .deleteDuplicated:
+            deleteDuplicated()
         }
     }
     
     func performOperation(forType type: SYNCMode) {
         contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, type in
                 DispatchQueue.main.async { [weak self] in
-                    if self?.output != nil {
-                        self?.output.showProggress(progress: progressPercentage, forOperation: type)
-                    }
+                    self?.output.showProggress(progress: progressPercentage, forOperation: type)
                 }
-            }, finishCallback: { result, type in
+            }, finishCallback: { (result, type) in
                 DispatchQueue.main.async { [weak self] in
-                    if self?.output != nil {
-                        self?.output.succes(object: result, forOperation: type)
-                    }
+                    self?.output.success(response: result, forOperation: type)
                 }
-        }, errorCallback: { errortype, type in
+        }, errorCallback: { errorType, type in
             DispatchQueue.main.async { [weak self] in
-                if self?.output != nil {
-                    self?.output.showError(errorType: errortype)
-                }
+                self?.output.showError(errorType: errorType)
             }
         })
+    }
+    
+    private func loadLastBackUp() {
+        output.asyncOperationStarted()
+        contactsSyncService.getBackUpStatus(completion: { [weak self] (model) in
+            self?.output.success(response: model, forOperation: .getBackUpStatus)
+            self?.output.asyncOperationFinished()
+        }, fail: { [weak self] in
+            self?.output.showNoBackUp()
+            self?.output.asyncOperationFinished()
+        })
+    }
+    
+    private func analyze() {
+        contactsSyncService.analyze(progressCallback: { [weak self] (progressPercentage, type) in
+            DispatchQueue.main.async { [weak self] in
+                self?.output.showProggress(progress: progressPercentage, forOperation: type)
+            }
+        }, finishCallback: { (response) in
+            DispatchQueue.main.async { [weak self] in
+                self?.output.analyzeSuccess(response: response)
+            }
+        }) { (errorType, type) in
+            DispatchQueue.main.async { [weak self] in
+                self?.output.showError(errorType: errorType)
+            }
+        }
+    }
+    
+    private func deleteDuplicated() {
+        contactsSyncService.deleteDuplicates()
     }
 }
 

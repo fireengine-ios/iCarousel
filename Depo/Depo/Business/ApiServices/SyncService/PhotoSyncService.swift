@@ -22,22 +22,20 @@ final class PhotoSyncService: ItemSyncServiceImpl {
             .sorted(by:{$0.metaDate > $1.metaDate})
     }
     
-    override func interrupt() {
-        super.interrupt()
-        
-        log.debug("PhotoSyncService interrupt")
-        
-        photoVideoService?.stopAllOperations()
-        UploadService.default.cancelSyncOperations(photo: true, video: false)
-    }
+//    override func interrupt() {
+//        super.interrupt()
+//        
+//        log.debug("PhotoSyncService interrupt")
+//        
+//        stopAllOperations()
+//    }
     
     override func stop() {
         super.stop()
         
         log.debug("PhotoSyncService stop")
         
-        photoVideoService?.stopAllOperations()
-        UploadService.default.cancelSyncOperations(photo: true, video: false)
+        stopAllOperations()
     }
     
     override func waitForWiFi() {
@@ -45,7 +43,17 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         
         log.debug("PhotoSyncService waitForWiFi")
         
-        photoVideoService?.stopAllOperations()//FIXME: stop only photo sync
+        stopAllOperations()
+    }
+    
+    
+    //MARK: - Private
+    
+    private func stopAllOperations() {
         UploadService.default.cancelSyncOperations(photo: true, video: false)
+        
+        if let service = photoVideoService {
+            service.stopAllOperations()
+        }
     }
 }

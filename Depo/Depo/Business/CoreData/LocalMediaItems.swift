@@ -11,28 +11,33 @@ import Photos
 
 extension CoreDataStack {
     
-    @objc func appendLocalMediaItems(_ end: (() -> Void)?) {
+    @objc func appendLocalMediaItems(progress: AppendingLocaclItemsProgressCallback?,
+                                     _ end: AppendingLocaclItemsFinishCallback?) {
         let queue = DispatchQueue(label: "Append Local Item ")
         queue.async {
             let localMediaStorage = LocalMediaStorage.default
             localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
                 if authorized {
-                    self.insertFromPhotoFramework()
+                    self.insertFromPhotoFramework(progress: progress, allItemsAddedCallBack: end)
                 }
                 if status == .denied {
                     self.deleteLocalFiles()
+                    end?()
                 }
-                end?()
             }
         }
     }
     
-    private func insertFromPhotoFramework() {
+    func insertFromPhotoFramework(progress: AppendingLocaclItemsProgressCallback?,
+                                  allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
         let localMediaStorage = LocalMediaStorage.default
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) {[weak self] (accessGranted, _) in
-            guard accessGranted, let `self` = self else {
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
+            guard accessGranted, let `self` = self,
+                !self.inProcessAppendingLocalFiles else {
                 return
             }
+            
+            self.inProcessAppendingLocalFiles = true
             
             let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
             
@@ -42,6 +47,10 @@ extension CoreDataStack {
             debugPrint("number of not saved  ", notSaved.count)
             let start = Date().timeIntervalSince1970
             var i = 0
+            var addedObjects = [WrapData]()
+            
+            let totalNotSavedItems = Float(notSaved.count)
+            
             notSaved.forEach {
                 i += 1
                 debugPrint("local ", i)
@@ -59,11 +68,20 @@ extension CoreDataStack {
                 if i % 10 == 0 {
                     self.saveDataForContext(context: newBgcontext, saveAndWait: true)
                 }
+                addedObjects.append(wrapData)
+                
+                progress?(Float(i)/totalNotSavedItems)
             }
             
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+//            self.isAppendingLocalFilesFinished = true
+//            self.appendingItemsFinishBlock?()
+            self.inProcessAppendingLocalFiles = false
+            allItemsAddedCallBack?()
             let finish = Date().timeIntervalSince1970
             debugPrint("All images and videos have been saved in \(finish - start) seconds")
+            
+            ItemOperationManager.default.addedLocalFiles(items: addedObjects)
         }
         
     }
@@ -169,6 +187,7 @@ extension CoreDataStack {
         allNonAccurateSavedLocalFiles.forEach {
             context.delete($0)
         }
-        
+        let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
+        ItemOperationManager.default.deleteItems(items: items)
     }
 }

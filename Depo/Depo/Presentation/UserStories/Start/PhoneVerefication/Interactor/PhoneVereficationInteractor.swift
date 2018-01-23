@@ -8,6 +8,7 @@
 
 class PhoneVereficationInteractor: PhoneVereficationInteractorInput {    
     
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     var dataStorage: PhoneVereficationDataStorage = PhoneVereficationDataStorage()
     
     let authenticationService = AuthenticationService()
@@ -94,6 +95,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] in
+            self?.tokenStorage.isRememberMe = true
             DispatchQueue.main.async {
                 self?.output.succesLogin()
             }

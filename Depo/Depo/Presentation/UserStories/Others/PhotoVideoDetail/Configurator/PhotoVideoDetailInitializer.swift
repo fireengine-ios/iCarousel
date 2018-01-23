@@ -16,7 +16,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     class func initializeViewController(with nibName:String, selectedItem: Item, allItems: [Item]) -> UIViewController {
         let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit],
                                                          style: .blackOpaque, tintColor: nil)
-        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .delete],
                                                         style: .blackOpaque, tintColor: nil)
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
         let configurator = PhotoVideoDetailModuleConfigurator()
@@ -28,7 +28,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeAlbumViewController(with nibName:String, selectedItem: Item, allItems: [Item]) -> UIViewController {
+    class func initializeAlbumViewController(with nibName:String, selectedItem: Item, allItems: [Item], albumUUID: String) -> UIViewController {
         let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit, .removeFromAlbum],
                                                          style: .blackOpaque, tintColor: nil)
         let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .removeFromAlbum],
@@ -40,7 +40,8 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                           photoVideoBottomBarConfig: photoVideoBottomBarConfig,
                                                           documentsBottomBarConfig: documentsBottomBarConfig,
                                                           selecetedItem: selectedItem,
-                                                          allItems: allItems)
+                                                          allItems: allItems,
+                                                          albumUUID: albumUUID)
         
         return viewController
     }

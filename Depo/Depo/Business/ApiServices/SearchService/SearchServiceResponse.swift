@@ -59,6 +59,14 @@ struct SearchJsonKey {
     static let Title = "Title"
     static let Duration = "Duration"
     static let Genre = "Genre"
+    
+    // story metadata
+    
+    static let VideoSlideshow = "Video-Slideshow"
+    static let VideoHLSPreview = "Video-Hls-Preview"
+
+    //folder
+    static let ChildCount = "childCount"
 }
 
 class BaseMetaData: ObjectRequestResponse {
@@ -81,8 +89,12 @@ class BaseMetaData: ObjectRequestResponse {
     var title: String?
     var genre =  [String]()
     
-    // music & video
+    // music & video & story
     var duration: Double?
+    
+    //story
+    var videoSlideshow: Bool?
+    var videoHLSPreview: URL?
     
     required init(withJSON: JSON?) {
         super.init(withJSON: withJSON)
@@ -118,6 +130,12 @@ class BaseMetaData: ObjectRequestResponse {
         if let genreresponse = json?[SearchJsonKey.Genre].string {
             genre = genreresponse.components(separatedBy: ",")
         }
+        
+        if let slideshow = json?[SearchJsonKey.VideoSlideshow].string, slideshow.count > 0 {
+            videoSlideshow = slideshow == "true" ? true : false
+        }
+        
+        videoHLSPreview = json?[SearchJsonKey.VideoHLSPreview].url
     }
 }
 
@@ -163,6 +181,7 @@ class SearchItemResponse: ObjectRequestResponse {
     var albums: [String]?//Array<JSON>?
     var subordinates: Array<JSON>?
     var location: Any? // TODO Add!
+    var childCount: Int64?
     
     override func mapping() {
         // it upload date
@@ -182,7 +201,7 @@ class SearchItemResponse: ObjectRequestResponse {
         status = json?[SearchJsonKey.status].string
         subordinates = json?[SearchJsonKey.subordinates].array
         albums = json?[SearchJsonKey.album].array?.flatMap{ $0.string }
-        
+        childCount = json?[SearchJsonKey.ChildCount].int64
     }
 }
 

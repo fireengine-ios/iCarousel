@@ -504,6 +504,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var isFolder: Bool?
     
+    var childCount: Int64?
+    
     var metaDate: Date {
         if let unwrapedMetaDate = metaData?.takenDate {
             return unwrapedMetaDate
@@ -618,6 +620,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         var url: URL?
         
+        childCount = remote.childCount
+        
         metaData = remote.metadata
         
         switch fileType { //Do we even need this????
@@ -662,10 +666,13 @@ class WrapData: BaseDataSourceItem, Wrappered {
         patchToPreview = .remoteUrl(nil)
         status = .unknown
         tmpDownloadUrl = nil
-        
+
         let creationDate = Date()
-        super.init(uuid: nil, name: nil, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
         
+        if let fileName = name {
+            md5 = "\(fileName)\(fileSize)"
+        }
     }
     
     init(mediaItem: MediaItem) {
@@ -744,6 +751,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
             metaData?.smalURl = URL(string: smalURl)
         }
         
+    }
+    
+    func copyFileData(from item: WrapData) {
+        uuid = item.uuid
+        id = item.id
+        name = item.name
+        creationDate = item.creationDate
+        lastModifiDate = item.lastModifiDate
+        md5 = item.md5
     }
     
     private class func getDuration(duration: Double?) -> String {

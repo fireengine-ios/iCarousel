@@ -17,7 +17,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     var output: PhotoVideoDetailViewOutput!
     
-    let player: MediaPlayer = factory.resolve()
+    lazy var player: MediaPlayer = factory.resolve()
  
     var views: [BaseFileContentView] = [BaseFileContentView]()
     var selectedIndex: Int = -1 {
@@ -263,6 +263,16 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     }
     
     func onItemSelected(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
+        let item = items[index]
+        if item.isLocalItem && item.fileType == .image{
+            setThreeDotsMenu(active: false)
+        }else{
+            setThreeDotsMenu(active: true)
+        }
+    }
+    
+    func setThreeDotsMenu(active isActive: Bool) {
+        navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
     // MARK: BaseFileContentViewDeleGate

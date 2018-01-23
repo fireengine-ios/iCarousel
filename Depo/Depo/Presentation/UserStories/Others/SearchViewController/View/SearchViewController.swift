@@ -27,7 +27,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
      let underNavBarBarHeight: CGFloat = 53
     
-    let musicBar = MusicBar.initFromXib()
+    let musicBar = MusicBar(frame: CGRect.zero)
 
     @IBOutlet weak var musicBarContainer: UIView!
     @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
@@ -188,6 +188,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         }
         view.endEditing(true)
         suggestTableView.isHidden = true
+        searchBar.enableCancelButton()
     }
     
     var timerToSearch = Timer()
@@ -311,10 +312,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = recentSearchList[indexPath.row]
         case .suggestion:
             let suggest = suggestionList[indexPath.row]
-            if let text = suggest.highlightedText {
-                cell.textLabel?.attributedText = text
-            } else {
-                cell.textLabel?.text = suggest.text!
+            if let highlightedText = suggest.highlightedText {
+                cell.textLabel?.attributedText = highlightedText
+            } else if let text = suggest.text {
+                cell.textLabel?.text = text
             }
         }
         
@@ -393,11 +394,3 @@ extension SearchViewController: SuggestionTableSectionHeaderDelegate {
     }
     
 }
-
-
-
-
-
-
-
-

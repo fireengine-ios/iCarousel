@@ -8,8 +8,10 @@
 
 class GradientLoadingIndicator: UIView {
     let circlePathLayer = CAShapeLayer()
-    let circleRadius: CGFloat = 120.0
-    let lineWidth: CGFloat = 18
+    var circleRadius: CGFloat {
+        return bounds.width / 2
+    }
+    let lineWidth: CGFloat = 14
     
     let gradientView = GradientView()
     
@@ -23,10 +25,8 @@ class GradientLoadingIndicator: UIView {
             } else if (newValue < 0) {
                 circlePathLayer.strokeEnd = 0
             } else {
-                
                 circlePathLayer.strokeEnd = newValue
             }
-
         }
     }
     
@@ -51,7 +51,6 @@ class GradientLoadingIndicator: UIView {
     }
     
     private func addMaskGradient() {
-
         gradientView.setup(withFrame: bounds, startColor: UIColor.lrCryonBlue, endColoer: UIColor.lrMintGreen, startPoint: CGPoint(x: 0, y: 1), endPoint: CGPoint(x:  1, y: 0))
         addSubview(gradientView)
         
@@ -70,7 +69,10 @@ class GradientLoadingIndicator: UIView {
     }
     
     func circlePath() -> UIBezierPath {
-        return UIBezierPath(arcCenter: CGPoint(x: bounds.size.width/2, y: bounds.size.height/2), radius: circleRadius, startAngle: -CGFloat.pi*3/2, endAngle: CGFloat.pi/2, clockwise: true)
+        return UIBezierPath(arcCenter: CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2),
+                            radius: circleRadius - lineWidth / 2,
+                            startAngle: -CGFloat.pi * 3 / 2,
+                            endAngle: CGFloat.pi / 2, clockwise: true)
     }
 
     

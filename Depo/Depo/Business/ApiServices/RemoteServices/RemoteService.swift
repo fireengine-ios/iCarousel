@@ -40,6 +40,8 @@ class RemoteItemsService {
                 contentType = .cropy
             case .albums:
                 contentType = .album
+            case .story:
+                contentType = .story
             default:
                 contentType = .content_type
         }
@@ -48,6 +50,7 @@ class RemoteItemsService {
         self.requestSize = requestSize
         currentPage = 0
         queueOperations = OperationQueue()
+        queueOperations.maxConcurrentOperationCount = 1
     }
     
     func reloadItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
@@ -130,7 +133,7 @@ class RemoteItemsService {
         let parametrs = SuggestionParametrs(withText: text)
         remote.suggestion(param: parametrs, success: { suggestList in
             log.debug("RemoteItemsService getSuggestion SearchService suggestion success")
-
+            
             success((suggestList as! SuggestionResponse).list)
         }) { (error) in
             log.debug("RemoteItemsService getSuggestion SearchService suggestion fail")
@@ -140,9 +143,7 @@ class RemoteItemsService {
     }
     
     func stopAllOperations() {
-        DispatchQueue.main.async { [weak self] in
-            self?.queueOperations.cancelAllOperations()
-        }
+        queueOperations.cancelAllOperations()
     }
 }
 
@@ -170,7 +171,6 @@ class NextPageOperation: Operation {
     }
     
     override func main() {
-        
         if isCancelled {
             return
         }
@@ -182,7 +182,8 @@ class NextPageOperation: Operation {
             }
             
             if self.isRealCancel {
-                self.fail?()
+                //TODO: check if we need it
+//                self.fail?()
                 semaphore.signal()
                 return
             }
@@ -251,6 +252,46 @@ class DocumentService: RemoteItemsService {
 class FavouritesService: RemoteItemsService {
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .favorite)
+    }
+}
+
+class StoryService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .story)
+    }
+    
+    func allStories(sortBy: SortType = .date, sortOrder: SortOrder = .desc, success: ListRemoveItems?, fail: FailRemoteItems?) {
+        currentPage = 0
+        nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
+    }
+    
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        log.debug("StoryService nextItems")
+        
+        let searchParam = SearchByFieldParameters(fieldName: .story,
+                                                  fieldValue: .story,
+                                                  sortBy: sortBy,
+                                                  sortOrder: sortOrder,
+                                                  page: currentPage,
+                                                  size: requestSize)
+                
+        remote.searchByField(param: searchParam, success: { [weak self] response in
+            guard let resultResponse = response as? SearchResponse else {
+                log.debug("StoryService remote searchStories fail")
+                fail?()
+                return
+            }
+            
+            log.debug("StoryService remote searchStories success")
+            
+            self?.currentPage += 1
+            let list = resultResponse.list.flatMap{ Item(remote: $0) }
+            success?(list)
+            }, fail: { _ in
+                    log.debug("StoryService remote searchStories fail")
+    
+                    fail?()
+            })
     }
 }
 

@@ -24,7 +24,7 @@ protocol PhotoVideoDetailInteractorInput {
 
     var bottomBarConfig: EditingBarConfig { get }
 
-    func deleteSelectedItem()
+    func deleteSelectedItem(type: ElementTypes)
     
     var setupedMoreMenuConfig: [ElementTypes] {get}
     

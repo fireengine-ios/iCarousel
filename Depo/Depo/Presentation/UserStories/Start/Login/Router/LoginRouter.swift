@@ -36,5 +36,4 @@ class LoginRouter: LoginRouterInput {
         let router = RouterVC()
         router.pushViewController(viewController: router.synchronyseScreen!)
     }
-    
 }

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,6 +55,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxp-v2-t2S">
                             <rect key="frame" x="221" y="27" width="26" height="26"/>
+                            <accessibility key="accessibilityConfiguration" label="Refresh"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Yxp-v2-t2S" secondAttribute="height" multiplier="1:1" id="ARe-PC-1A2"/>
                                 <constraint firstAttribute="width" constant="26" id="TLj-bS-1dp"/>
@@ -67,6 +67,9 @@
                         </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duo-dp-Lhi">
                             <rect key="frame" x="247" y="23" width="0.0" height="34"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" playsSound="YES"/>
+                            </accessibility>
                             <constraints>
                                 <constraint firstAttribute="width" id="uhg-9F-LS5"/>
                             </constraints>

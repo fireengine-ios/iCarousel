@@ -337,9 +337,19 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     self.interactor.delete(item: currentItems)
                 })
             case .deleteDeviceOriginal:
-                action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
-                    self.interactor.deleteDeviceOriginal(items: currentItems)
-                })
+                if let itemsArray = items as? [Item]{
+                    let serverObjects = itemsArray.filter({
+                        return !$0.isLocalItem
+                    })
+                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects)
+                    action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
+                        self.interactor.deleteDeviceOriginal(items: localDuplicates)
+                    })
+                }else{
+                    action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
+                        self.interactor.deleteDeviceOriginal(items: currentItems)
+                    })
+                }
             case .sync:
                 action = UIAlertAction()
             case .undetermend:

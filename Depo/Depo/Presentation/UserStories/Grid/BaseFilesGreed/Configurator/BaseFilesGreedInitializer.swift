@@ -17,7 +17,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
-    class func initializePhotoVideosViewController(with nibName:String) -> UIViewController {
+    class func initializePhotoVideosViewController(with nibName:String, screenFilterType: MoreActionsConfig.MoreActionsFileType) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonCreateAlbum])
@@ -25,19 +25,21 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .delete, .sync, .download, .addToAlbum],
                                                style: .default, tintColor: nil)
-        let gridListTopBarConfig = GridListTopBarConfig(
-            defaultGridListViewtype: .List,
-            availableSortTypes: [.AlphaBetricAZ, .AlphaBetricZA, .metaDataTimeNewOld, .metaDataTimeOldNew, .Largest, .Smallest],
-            defaultSortType: .metaDataTimeNewOld,
-            availableFilter: true,
-            showGridListButton: false
-        )
+        
+        let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: .List,
+                                                        availableSortTypes: [.AlphaBetricAZ, .AlphaBetricZA,
+                                                                             .metaDataTimeNewOld, .metaDataTimeOldNew,
+                                                                             .Largest, .Smallest],
+                                                        defaultSortType: .metaDataTimeNewOld,
+                                                        availableFilter: true,
+                                                        showGridListButton: false,
+                                                        defaultFilterState: screenFilterType)
 
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                   selectionModeTypes: [.createStory, .print, .deleteDeviceOriginal])
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
-                               fileFilters: [.fileType(.image)],
+                               fileFilters: [.fileType(screenFilterType.convertToFileType())],
                                bottomBarConfig: bottomBarConfig, visibleSlider: true,
                                topBarConfig: gridListTopBarConfig,
                                alertSheetConfig: alertSheetConfig)
@@ -178,7 +180,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
             showGridListButton: true
         )
         
-        configurator.configure(viewController: viewController, fileFilters: [.rootFolder(folder.uuid)],
+        configurator.configure(viewController: viewController, fileFilters: [.rootFolder(folder.uuid), .localStatus(.nonLocal)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],

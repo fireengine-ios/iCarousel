@@ -19,9 +19,12 @@ let log = setupLog()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var window: UIWindow?
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var player: MediaPlayer = factory.resolve()
+    
+    var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         log.debug("AppDelegate didFinishLaunchingWithOptions")
@@ -29,11 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.isStatusBarHidden = false
         application.statusBarStyle = .lightContent
         
+        AppConfigurator.applicationStarted(with: launchOptions)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = RouterVC().vcForCurrentState()
         window?.makeKeyAndVisible()
         
-        AppConfigurator.applicationStarted(with: launchOptions)
+        
         
         Fabric.with([Crashlytics.self])
             
@@ -70,7 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        SyncServiceManager.shared.updateImmediately()
     }
     
     private var firstResponder: UIResponder?
@@ -124,20 +128,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         log.debug("AppDelegate applicationDidBecomeActive")
-
-        ApplicationSessionManager.shared().checkSession()
         LocationManager.shared.startUpdateLocation()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillTerminate")
-
-        if !ApplicationSession.sharedSession.session.rememberMe {
-            ApplicationSession.sharedSession.session.clearTokens()
-            ApplicationSession.sharedSession.saveData()
+        if !tokenStorage.isRememberMe {
+            tokenStorage.clearTokens()
         }
         UserDefaults.standard.synchronize()
-        FactoryMain.mediaPlayer.stop()
+        player.stop()
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
@@ -149,7 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // TODO: update for new app delegate
     override func remoteControlReceived(with event: UIEvent?) {
         if (event?.type == .remoteControl) {
-            FactoryMain.mediaPlayer.handle(event: event)
+            player.handle(event: event)
         }
     }
     

@@ -29,7 +29,8 @@ class AlbumDetailRouter: BaseFilesGreedRouter, AlbumDetailRouterInput {
             case .audio:
                 player.play(list: [wrappered], startAt: 0)
             default:
-                let controller = router.filesDetailAlbumViewController(fileObject: wrappered, items: wrapperedArray)
+                let albumUUID = RouterVC().getParentUUID()
+                let controller = router.filesDetailAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID)
                 router.pushViewController(viewController: controller)
         }
     }

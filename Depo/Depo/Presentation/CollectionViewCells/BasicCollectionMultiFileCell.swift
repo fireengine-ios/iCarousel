@@ -24,6 +24,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     @IBOutlet weak var bigContentImageView: UIImageView!
     
     @IBOutlet weak var fileNameLabel: UILabel!
+    @IBOutlet weak var detailsLabel: UILabel!
     
     @IBOutlet weak var moreButton: UIButton!
     
@@ -136,6 +137,30 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         itemModel = wrappered
         
         fileNameLabel.text = wrappedObj.name
+        
+        if (!isBigSize()) {
+            var detailsLabelText = ""
+            
+            switch wrappered.fileType {
+            case .folder:
+                if let itemCount = wrappered.childCount {
+                    detailsLabelText = "\(itemCount) \(TextConstants.folderItemsText)"
+                } else {
+                    detailsLabelText = "0 \(TextConstants.folderItemsText)"
+                }
+            case .audio,.video:
+                if let duration = wrappered.duration {
+                    detailsLabelText = duration
+                }
+            default:
+                break
+            }
+            detailsLabel.text = detailsLabelText
+            detailsLabel.isHidden = detailsLabelText.isEmpty
+        } else {
+            detailsLabel.isHidden = true
+        }
+
         bigContentImageView.image = nil
         bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(object: wrappered)
         if (isBigSize()){
@@ -173,6 +198,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             leftSpaceForSmallmage.constant = BasicCollectionMultiFileCell.leftSpaceSmallCell
             
             fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            detailsLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
             layoutIfNeeded()
         }
         
@@ -209,6 +235,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         var bgColor: UIColor = ColorConstants.whiteColor
         if (isSelectionActive){
             selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
+            selectionImageView.accessibilityLabel = isSelected ? TextConstants.accessibilitySelected : TextConstants.accessibilityNotSelected
             if (isBigSize()){
                 UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                     self.bigSelectionView.alpha = isSelected ? 1 : 0
@@ -255,6 +282,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
         fileNameLabel.textColor = ColorConstants.textGrayColor
         
+        detailsLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
+        detailsLabel.textColor = ColorConstants.textGrayColor.withAlphaComponent(0.6)
+        
+        moreButton.accessibilityLabel = TextConstants.accessibilityMore
     }
     
     override func updating(){

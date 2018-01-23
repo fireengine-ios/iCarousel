@@ -13,13 +13,38 @@ import AVFoundation
 class CreateStoryPreviewViewController: UIViewController, AVPlayerViewControllerDelegate {
 
     var output: CreateStoryPreviewViewOutput!
-    var previewURLString: String? = nil
+    
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var viewForPlayer: UIView!
+    
+    var previewURLString: String? {
+        didSet {
+            guard let previewURLString = previewURLString,
+            let sourceURL = URL(string: previewURLString)else {
+                return
+            }
+            playerController?.player = nil
+            playerController?.removeFromParentViewController()
+            playerController = nil
+            player?.pause()
+            player = nil
+            
+            let plauerItem = AVPlayerItem(url: sourceURL)
+            
+            player = AVPlayer(playerItem: plauerItem)
+            
+            let imageGenerator = AVAssetImageGenerator(asset: plauerItem.asset)
+            let time = CMTimeMake(1, 1)
+            if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
+                let thumbnail = UIImage(cgImage: imageRef)
+                previewImageView.image = thumbnail
+            }
+        }
+    }
     
     var player: AVPlayer?
     var playerController: AVPlayerViewController?
     
-    @IBOutlet weak var viewForPlayer: UIView!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         defaultNavBarStyle()
@@ -39,27 +64,10 @@ class CreateStoryPreviewViewController: UIViewController, AVPlayerViewController
     }
     
     func playVideoByURLString(urlSting: String?){
-        guard let string = urlSting else{
-            return
-        }
-        
-        guard let url = URL(string: string) else{
-            return
-        }
-        
-        playerController?.player = nil
-        playerController?.removeFromParentViewController()
-        playerController = nil
-        player?.pause()
-        player = nil
-        player = AVPlayer()
-        
-        let plauerItem = AVPlayerItem(url:url)
-        player!.replaceCurrentItem(with: plauerItem)
         playerController = AVPlayerViewController()
-        playerController!.player = player!
-        self.present(playerController!, animated: true) {[weak playerController] in
-            playerController?.player!.play()
+        playerController?.player = player
+        self.present(playerController!, animated: true) { [weak self] in
+            self?.playerController?.player!.play()
         }
     }
     
@@ -76,6 +84,6 @@ extension CreateStoryPreviewViewController: CreateStoryPreviewViewInput {
             return
         }
         previewURLString = urlString
-        playVideoByURLString(urlSting: urlString)
+//        playVideoByURLString(urlSting: urlString) //Left this in case if requrements would change again(start automaticaly)
     }
 }

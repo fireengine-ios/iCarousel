@@ -12,12 +12,16 @@ class LoginInteractor: LoginInteractorInput {
     
     var dataStorage = LoginDataStorage()
     
-    let authenticationService = AuthenticationService()
-    let eulaService = EulaService()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var authenticationService = AuthenticationService()
+    private lazy var eulaService = EulaService()
     
     private var rememberMe: Bool = true
-    
     private var attempts: Int = 0
+    
+    private var login: String?
+    private var password: String?
+    private var atachedCaptcha: CaptchaParametrAnswer?
     
     /// from 0 to 11 = 12 attempts
     private let maxAttemps: Int = 11
@@ -57,13 +61,13 @@ class LoginInteractor: LoginInteractorInput {
             guard let `self` = self else {
                 return
             }
-            ApplicationSession.sharedSession.session.rememberMe = self.rememberMe
-            DispatchQueue.main.async { [weak self] in
-                self?.output?.succesLogin()
+            self.tokenStorage.isRememberMe = self.rememberMe
+            DispatchQueue.main.async {
+                self.output?.succesLogin()
             }
         }, fail: { [weak self] (errorResponse)  in
             
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
                 }
@@ -73,12 +77,33 @@ class LoginInteractor: LoginInteractorInput {
                 }
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.output?.needShowCaptcha()
+                } else if (!self.checkInternetConnection()) {
+                    self.output?.failLogin(message: TextConstants.loginScreenNoInternetError)
                 } else if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.attempts += 1
+                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
+                } else if self.isInvalidCaptchaError(forResponse: errorResponse) {
+                    self.output?.failLogin(message: TextConstants.loginScreenInvalidCaptchaError)
+                } else if self.isInternetError(forResponse: errorResponse) {
+                    self.output?.failLogin(message: errorResponse.description)
+                } else {
+                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
-                self.output?.failLogin(message: errorResponse.description)
+                if self.isEmptyPhoneError(for: errorResponse) {
+                    self.login = login
+                    self.password = password
+                    self.atachedCaptcha = atachedCaptcha
+                    self.output?.openEmptyPhone()
+                    return
+                }
             }
         })
+    }
+    
+    func relogin() {
+        if let login = login, let password = password {
+            authificate(login: login, password: password, atachedCaptcha: atachedCaptcha)
+        }
     }
     
     func blockUser(user: String) {
@@ -116,8 +141,24 @@ class LoginInteractor: LoginInteractorInput {
         return errorResponse.description.contains("Authentication failure")
     }
     
+    private func isInvalidCaptchaError(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("Invalid captcha")
+    }
+    
+    private func isInternetError(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("Internet")
+    }
+    
     private func isBlockError(forResponse errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains("LDAP account is locked")
+    }
+    
+    private func isEmptyPhoneError(for errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains(HeaderConstant.emptyMSISDN)
+    }
+    
+    private func checkInternetConnection() -> Bool {
+        return ReachabilityService().isReachable
     }
     
     func findCoutryPhoneCode(plus: Bool) {
@@ -126,6 +167,8 @@ class LoginInteractor: LoginInteractorInput {
         if phoneCode == "" {
             phoneCode = telephonyService.countryCodeByLang()
         }
+        phoneCode.insert("(", at: phoneCode.index(after: phoneCode.startIndex))
+        phoneCode.insert(")", at: phoneCode.endIndex)
         output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)
     }
     
@@ -161,21 +204,6 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     let accountService = AccountService()
-    
-    func getAccountInfo() {
-        accountService.info(success: { [weak self] responce in
-            guard let accountInfoResponce = responce as? AccountInfoResponse else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.output?.successed(accountInfo: accountInfoResponce)
-            }
-        }, fail: { [weak self] error in
-            DispatchQueue.main.async {
-                self?.output?.failedAccountInfo(errorResponse: error)
-            }
-        })
-    }
     
     func getTokenToUpdatePhone(for phoneNumber: String) {
         let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)

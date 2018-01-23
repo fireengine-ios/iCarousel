@@ -18,5 +18,7 @@ protocol UserProfileViewOutput {
     func tapEditButton()
     func tapReadyButton(name: String, email: String, number: String)
     
-    func isTurkcellUser() -> Bool 
+    func isTurkcellUser() -> Bool
+    
+    func showError(error: String)
 }

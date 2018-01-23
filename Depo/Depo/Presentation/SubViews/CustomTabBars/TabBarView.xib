@@ -11,13 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
-                <outlet property="bottomTabBarConstraint" destination="h5L-B7-j4z" id="5aU-u1-biQ"/>
-                <outlet property="containerViewBottomConstraint" destination="cb3-Bd-ooM" id="cSN-dV-FBF"/>
+                <outlet property="bottomTabBarConstraint" destination="h5L-B7-j4z" id="Ro8-oE-zta"/>
+                <outlet property="containerViewBottomConstraint" destination="cb3-Bd-ooM" id="0nW-18-OKd"/>
                 <outlet property="contentView" destination="i0i-at-wPy" id="UmC-zb-APO"/>
                 <outlet property="curtainColorView" destination="bUS-H9-z0e" id="jxS-Sd-X5Y"/>
                 <outlet property="curtainView" destination="kYF-ga-W3s" id="Svh-NZ-Ok0"/>
-                <outlet property="musicBarContainer" destination="EuE-DG-HiM" id="MEn-uJ-knm"/>
-                <outlet property="musicBarContainerHeightConstraint" destination="HyB-SJ-gXC" id="uhu-aK-4gX"/>
+                <outlet property="musicBar" destination="W0f-ko-odc" id="s5m-3f-Nav"/>
+                <outlet property="musicBarHeightConstraint" destination="oLW-8y-KOm" id="Xal-XQ-eOu"/>
                 <outlet property="plusButtonBottomConstraint" destination="cAw-hj-h4s" id="EXu-Tp-u2q"/>
                 <outlet property="plusButtonHeightConstraint" destination="eNR-wi-msA" id="BjE-qO-7Pk"/>
                 <outlet property="plussButton" destination="HTg-Qb-BHM" id="xi3-JD-RNS"/>
@@ -34,11 +34,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EuE-DG-HiM">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0f-ko-odc" customClass="MusicBar" customModule="Depo_LifeTech" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="548" width="375" height="70"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="70" id="HyB-SJ-gXC"/>
+                        <constraint firstAttribute="height" constant="70" id="oLW-8y-KOm"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYF-ga-W3s" userLabel="curtain">
@@ -83,19 +83,19 @@
                 <constraint firstItem="HTg-Qb-BHM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5cd-5b-VX1"/>
                 <constraint firstItem="kYF-ga-W3s" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CVX-me-dUP"/>
                 <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="DgE-Ey-67T"/>
-                <constraint firstAttribute="trailing" secondItem="EuE-DG-HiM" secondAttribute="trailing" id="ETd-O9-0Kb"/>
+                <constraint firstAttribute="trailing" secondItem="W0f-ko-odc" secondAttribute="trailing" id="LHI-pX-x3P"/>
                 <constraint firstAttribute="bottom" secondItem="kYF-ga-W3s" secondAttribute="bottom" id="M6c-4l-QDr"/>
                 <constraint firstItem="kYF-ga-W3s" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="MvP-0O-hlj"/>
-                <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="EuE-DG-HiM" secondAttribute="bottom" id="WSq-cs-nM3"/>
                 <constraint firstAttribute="trailing" secondItem="i0i-at-wPy" secondAttribute="trailing" id="XvU-tI-lsX"/>
                 <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aju-p1-py5"/>
                 <constraint firstItem="i0i-at-wPy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bxr-gG-N2c"/>
                 <constraint firstAttribute="bottom" secondItem="HTg-Qb-BHM" secondAttribute="bottom" constant="10" id="cAw-hj-h4s"/>
                 <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="i0i-at-wPy" secondAttribute="bottom" id="cb3-Bd-ooM"/>
                 <constraint firstAttribute="bottom" secondItem="Pdh-iF-uTx" secondAttribute="bottom" id="h5L-B7-j4z"/>
-                <constraint firstItem="EuE-DG-HiM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="l33-9m-gxx"/>
+                <constraint firstItem="W0f-ko-odc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hed-BL-U7c"/>
                 <constraint firstItem="i0i-at-wPy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uPE-6F-eCe"/>
                 <constraint firstAttribute="trailing" secondItem="kYF-ga-W3s" secondAttribute="trailing" id="xUg-Gy-ggH"/>
+                <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="W0f-ko-odc" secondAttribute="bottom" id="zSN-99-8ro"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

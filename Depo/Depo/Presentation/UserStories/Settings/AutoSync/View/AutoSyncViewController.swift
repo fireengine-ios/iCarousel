@@ -36,16 +36,15 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
             navigationBarWithGradientStyle()
         } else {
             view.backgroundColor = UIColor.lrTiffanyBlue
+            defaultNavBarStyle()
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         let model = dataSource.createSettingsAutoSyncModel()
-        output.saveChanges(setting: model)
-
+        output.saveSettings(model)
     }
     
     override func viewDidLoad() {

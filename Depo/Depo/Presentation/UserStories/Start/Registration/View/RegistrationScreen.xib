@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -48,7 +47,7 @@
                     <variation key="widthClass=regular" image="Logo-Ipad"/>
                 </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfM-YV-oKw">
-                    <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kkP-qM-De4">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="680"/>
@@ -146,6 +145,9 @@
                     <subviews>
                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h68-Mh-k1S">
                             <rect key="frame" x="0.0" y="46" width="320" height="216"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <bool key="isElement" value="YES"/>
+                            </accessibility>
                         </pickerView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,7 +174,7 @@
                 <constraint firstAttribute="trailing" secondItem="Rmp-60-G1Z" secondAttribute="trailing" id="dzU-Pl-XtC"/>
                 <constraint firstAttribute="bottom" secondItem="TfM-YV-oKw" secondAttribute="bottom" id="iOD-PE-OdM"/>
                 <constraint firstItem="TfM-YV-oKw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jUB-so-Ndt"/>
-                <constraint firstItem="TfM-YV-oKw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="m4U-sO-o24">
+                <constraint firstItem="TfM-YV-oKw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="m4U-sO-o24">
                     <variation key="widthClass=regular" constant="191"/>
                 </constraint>
                 <constraint firstItem="pff-nq-J3Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="nS4-qi-sJg"/>

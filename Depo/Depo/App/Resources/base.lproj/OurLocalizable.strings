@@ -47,7 +47,8 @@
 "This package activation code has been used before, please try different code" = "This package activation code has been used before, please try different code";
 "This package activation code is invalid" = "This package activation code is invalid";
 "Account cannot be found" = "Account cannot be found";
-"Cancelled" = "Cancelled";
+"cancelled" = "cancelled";
+"The network connection was lost." = "The network connection was lost.";
 "Nothing to download" = "Nothing to download";
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
@@ -184,6 +185,10 @@
 "Upload Photos" = "Upload Photos";
 "Add" = "Add";
 "Albums" = "Albums";
+"My Stories" = "My Stories";
+"People" = "People";
+"Things" = "Things";
+"Places" = "Places";
 "Sorry, but play list name should not be empty" = "Sorry, but play list name should not be empty";
 "Sorry, but album name should not be empty" = "Sorry, but album name should not be empty";
 "Sorry, but folder name should not be empty" = "Sorry, but folder name should not be empty";
@@ -263,8 +268,8 @@
 "Add to favorites" = "Add to favorites";
 "Remove from album" = "Remove from album";
 "Move" = "Move";
-"Cancel Bacup" = "Cancel Bacup";
-"Clear Bacup" = "Clear Bacup";
+"Cancel BackUp" = "Cancel BackUp";
+"Clear BackUp" = "Clear BackUp";
 "Restore" = "Restore";
 "Back-Up" = "Back-Up";
 "Your last back was on %@" = "Your last back was on %@";
@@ -290,6 +295,7 @@
 "Album" = "Album";
 "Taken date" = "Taken date";
 "Upload date" = "Upload date";
+"Creation date" = "Creation date";
 "Date modified" = "Date modified";
 "Duration" = "Duration";
 "File size" = "File size";
@@ -297,6 +303,8 @@
 "Folder size" = "Folder size";
 "File Info" = "File Info";
 "File Name" = "File Name";
+"Folder Info" = "Folder Info";
+"Folder Name" = "Folder Name";
 "Data is not correct" = "Data is not correct";
 "Data did not changed" = "Data did not changed";
 "Done" = "Done";
@@ -315,7 +323,7 @@
 "Import Photos" = "Import Photos";
 "Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
 "Auto-login" = "Auto-login";
-"Turkcell Passcode" = "Turkcell Passcode";
+"Turkcell Password" = "Turkcell Password";
 "Logout" = "Logout";
 "Help & Support" = "Help & Support";
 "Lifebox Touch ID and Passcode" = "Lifebox Touch ID and Passcode";
@@ -334,6 +342,7 @@
 "Start adding your music" = "Start adding your music";
 "You don’t have any music on your Lifebox yet." = "You don’t have any music on your Lifebox yet.";
 "Folder is Empty" = "Folder is Empty";
+"Folder Items" = "Items";
 "Delete" = "Delete";
 "Move" = "Move";
 "Edit" = "Edit";
@@ -421,6 +430,7 @@
 "Show" = "Show";
 "Back Up My Contacts" = "Back Up My Contacts";
 "No results found for your query." = "No results found for your query.";
+"localFilesBeingProcessed" = "Processing local files.";
 "SUGGESTIONS" = "SUGGESTIONS";
 "RECENT SEARCHES" = "RECENT SEARCHES";
 "Search" = "Search";
@@ -435,6 +445,7 @@
 "You have already a backup. Do you want to overwrite the existing one?" = "You have already a backup. Do you want to overwrite the existing one?";
 "Overwrite backup?" = "Overwrite backup?";
 "Error Handling Under Constraction" = "Error Handling Under Constraction";
+"This e-mail address is not registered. Please try again" = "This e-mail address is not registered. Please try again";
 "Account not found for email" = "Account not found for email";
 "This text doesn't match. Please try again" = "This text doesn't match. Please try again";
 "An error is occurred!" = "An error is occurred!";
@@ -448,8 +459,9 @@
 "Type the text" = "Type the text";
 "E-MAIL" = "E-MAIL";
 "Send password reset link" = "Send password reset link";
-"If you are already a Turkcell subscriber, you can retrieve your password by sending SMS to 2222" = "If you are already a Turkcell subscriber, you can retrieve your password by sending SMS to 2222";
+"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222.";
 "Forgot My Password" = "Forgot My Password";
+"Your password is sent to your e-mail address" = "Your password is sent to your e-mail address";
 "Sign Up" = "Sign Up";
 "Turn-on Sync" = "Turn-on Sync";
 "Syncing files using cellular data could incur data charges" = "Syncing files using cellular data could incur data charges";
@@ -489,12 +501,14 @@
 "Password fields do not match." = "Password fields do not match.";
 "Please check the e-mail address." = "Please check the e-mail address.";
 "Please enter a valid email adress" = "Please enter a valid email adress";
+"Please type the text" = "Please type the text";
 "You have performed too many attempts. Please try again 1 hour later." = "You have performed too many attempts. Please try again 1 hour later.";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
-"Please check your internet connection." = "Please check your internet connection.";
+"The Internet connection appears to be offline." = "The Internet connection appears to be offline.";
 "Please enter your password" = "Please enter your password";
 "Please check the GSM number" = "Please check the GSM number";
 "Login denied. Please check your credentials." = "Login denied. Please check your credentials.";
+"This text doesn't match. Please try again." = "This text doesn't match. Please try again.";
 "Request failed \n Please try again" = "Request failed \n Please try again";
 "Verification code is invalid. \n Please try again." = "Verification code is invalid. \n Please try again.";
 "Enter the verification code" = "Enter the verification code";
@@ -517,3 +531,17 @@
 "E-mail field is invalid" = "E-mail field is invalid";
 "Please enter your GSM number"="Please enter your GSM number";
 "GSM number"="GSM number";
+"Plus" = "Plus";
+"Close" = "Close";
+"Home" = "Home";
+"Photos and videos" = "Photos and videos";
+"Music" = "Music";
+"Documents" = "Documents";
+"Settings" = "Settings";
+"More" = "More";
+"Search" = "Search";
+"Delete" = "Delete";
+"Favorite" = "Favorite";
+"Selected" = "Selected";
+"Not selected" = "Not selected";
+"E-mail is empty" = "E-mail is empty";

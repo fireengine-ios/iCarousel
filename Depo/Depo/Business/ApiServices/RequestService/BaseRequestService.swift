@@ -36,8 +36,7 @@ protocol UploadDataRequestParametrs: RequestParametrs {
 }
 
 protocol DownloadRequestParametrs: RequestParametrs {
-    
-    var urlToRemoteFile: URL {get}
+    var urlToRemoteFile: URL { get }
 }
 
 
@@ -69,7 +68,6 @@ class BaseUploadRequestParametrs: UploadRequestParametrs {
 }
 
 class BaseDownloadRequestParametrs: DownloadRequestParametrs {
-    
     let urlToRemoteFile: URL
     
     let contentType: FileType
@@ -77,6 +75,8 @@ class BaseDownloadRequestParametrs: DownloadRequestParametrs {
     let fileName: String
     
     let albumName: String?
+    
+    let item: WrapData?
     
     var requestParametrs: Any {
         return Data()
@@ -94,11 +94,12 @@ class BaseDownloadRequestParametrs: DownloadRequestParametrs {
         return 2000.0
     }
     
-    init(urlToFile: URL, fileName: String, contentType: FileType, albumName: String? = nil) {
+    init(urlToFile: URL, fileName: String, contentType: FileType, albumName: String? = nil, item: WrapData? = nil) {
         urlToRemoteFile = urlToFile
         self.contentType = contentType
         self.fileName = fileName
         self.albumName = albumName
+        self.item = item
     }
 }
 
@@ -168,7 +169,7 @@ class BaseRequestService {
     let requestService = RequestService.default
     
     func executePostRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        let task = requestService.downloadRequestTask(patch: param.patch,
+        let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
                                                       method:RequestMethod.Post,
@@ -178,7 +179,7 @@ class BaseRequestService {
     }
     
     func executeGetRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        let task = requestService.downloadRequestTask(patch: param.patch,
+        let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: nil,
                                                       method:RequestMethod.Get,
@@ -188,7 +189,7 @@ class BaseRequestService {
     }
     
     func executeDeleteRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        let task = requestService.downloadRequestTask(patch: param.patch,
+        let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
                                                       method:RequestMethod.Delete,
@@ -198,7 +199,7 @@ class BaseRequestService {
     }
     
     func executePutRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
-        let task = requestService.downloadRequestTask(patch: param.patch,
+        let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
                                                       method:RequestMethod.Put,
@@ -217,11 +218,10 @@ class BaseRequestService {
         task.resume()
     }
     
-    
-    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionUploadTask {
+    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask {
         var backgroundTaskID = UIBackgroundTaskInvalid
-        var task: URLSessionUploadTask!
-        
+        var task = URLSessionTask()
+
         if let localURL = param.urlToLocalFile {
             backgroundTaskID = beginBackgroundTask(with: localURL.absoluteString)
             
@@ -262,7 +262,18 @@ class BaseRequestService {
                                                   response: handler.response)
         task.resume()
     }
+    
+    func executeUploadDataRequest(param: UploadDataRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask{
 
+        let task = requestService.uploadFileRequestTask(path: param.patch,
+                                                        headerParametrs: param.header,
+                                                        fileData: param.data,
+                                                        method: RequestMethod.Put,
+                                                        timeoutInterval: 2000,
+                                                        response: response)
+        task.resume()
+        return task
+    }
     
     //MARK: - Helpers
     

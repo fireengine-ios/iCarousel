@@ -12,6 +12,8 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     var interactor: PhoneVereficationInteractorInput!
     var router: PhoneVereficationRouterInput!
 
+    private lazy var customProgressHUD = CustomProgressHUD()
+    
     func viewIsReady() {
         view.setupInitialState()
         configure()
@@ -75,10 +77,19 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     }
     
     func succesLogin() {
-        ApplicationSession.sharedSession.saveData()
         compliteAsyncOperationEnableScreen()
         view.dropTimer()
-        router.goAutoSync()//
+        
+        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
+            DispatchQueue.main.async {
+                self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
+            }
+        }) { [weak self] in
+            DispatchQueue.main.async {
+                self?.customProgressHUD.hideProgressSpinner()
+                self?.router.goAutoSync()
+            }
+        }
     }
     
     func failLogin(message: String) {

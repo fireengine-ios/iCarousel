@@ -11,6 +11,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     var interactor: LoginInteractorInput!
     var router: LoginRouterInput!
     
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    
     var optInVC: OptInController?
     var textEnterVC: TextEnterController?
     var newPhone: String?
@@ -18,6 +20,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     var captchaShowed: Bool = false
 
+    private lazy var customProgressHUD = CustomProgressHUD()
+    
     func viewIsReady() {
         interactor.prepareModels()
     }
@@ -76,11 +80,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func succesLogin() {
+        interactor.checkEULA()
         compliteAsyncOperationEnableScreen()
-        interactor.getAccountInfo()
-        
-
-//        router.goToHomePage()
     }
     
     private func showMessageHideSpinner(text: String) {
@@ -88,22 +89,14 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         compliteAsyncOperationEnableScreen()
     }
     
-    func failLogin(message:String) {
+    func failLogin(message: String) {
         compliteAsyncOperationEnableScreen()
         view.highlightLoginTitle()
         view.highlightPasswordTitle()
-        //FIXME: in te future change it, when we got real error handling
-        var messageText = TextConstants.loginScreenCredentialsError
-        if message.contains("Internet") {
-            messageText = message
-        }
-        showMessageHideSpinner(text: messageText)
+        showMessageHideSpinner(text: message)
         if captchaShowed {
             view.refreshCaptcha()
         }
-        
-//        loginScreenNoInternetError
-        
     }
     
     func startedEnteringPhoneNumberPlus() {
@@ -127,7 +120,17 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func onSuccessEULA() {
         compliteAsyncOperationEnableScreen()
-        router.goToSyncSettingsView()
+        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
+            DispatchQueue.main.async {
+                self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
+            }
+            
+        }) { [weak self] in
+            DispatchQueue.main.async {
+                self?.customProgressHUD.hideProgressSpinner()
+                self?.router.goToSyncSettingsView()
+            }
+        }
     }
     
     func onFailEULA() {
@@ -155,7 +158,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         }  else {
             showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
         }
-        
     }
     
     //MARK : BasePresenter    
@@ -164,30 +166,20 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         return view
     }
     
-    private func isPhoneNumberEmpty(for accountInfo: AccountInfoResponse) -> Bool {
-        return accountInfo.phoneNumber == nil || accountInfo.phoneNumber?.isEmpty == true
-    }
-    
-    func successed(accountInfo: AccountInfoResponse) {
+    func openEmptyPhone() {
         compliteAsyncOperationEnableScreen()
+        tokenStorage.isClearTokens = true
         
-        if isPhoneNumberEmpty(for: accountInfo) {
-            
-            let textEnterVC = TextEnterController.with(
-                title: TextConstants.loginEnterGSM,
-                textPlaceholder: TextConstants.loginGSMNumber,
-                buttonTitle: TextConstants.save) { [weak self] enterText, vc in
-                    self?.newPhone = enterText
-                    self?.interactor.getTokenToUpdatePhone(for: enterText)
-                    vc.startLoading()
-            }
-            self.textEnterVC = textEnterVC
-            RouterVC().presentViewController(controller: textEnterVC)
-            
-        } else {
-            ApplicationSession.sharedSession.saveData()
-            interactor.checkEULA()
+        let textEnterVC = TextEnterController.with(
+            title: TextConstants.loginEnterGSM,
+            textPlaceholder: TextConstants.loginGSMNumber,
+            buttonTitle: TextConstants.save) { [weak self] enterText, vc in
+                self?.newPhone = enterText
+                self?.interactor.getTokenToUpdatePhone(for: enterText)
+                vc.startLoading()
         }
+        self.textEnterVC = textEnterVC
+        RouterVC().presentViewController(controller: textEnterVC)
     }
     
     func failedAccountInfo(errorResponse: ErrorResponse) {
@@ -230,10 +222,10 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
         
-        ApplicationSession.sharedSession.saveData()
+        tokenStorage.isClearTokens = false
         
         startAsyncOperationDisableScreen()
-        interactor.checkEULA()
+        interactor.relogin()
     }
     
     func failedVerifyPhone(errorString: String) {
@@ -247,10 +239,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         }
     }
 }
-
-
-
-
 
 // MARK: - OptInControllerDelegate
 extension LoginPresenter: OptInControllerDelegate {

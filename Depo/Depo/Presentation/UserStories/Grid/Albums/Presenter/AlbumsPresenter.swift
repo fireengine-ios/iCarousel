@@ -26,7 +26,10 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func getCellSizeForList() -> CGSize {
-        return CGSize(width: view.getCollectionViewWidth(), height: NumericConstants.albumCellListHeight)
+        if (interactor.remoteItems is AlbumService) {
+            return CGSize(width: view.getCollectionViewWidth(), height: NumericConstants.albumCellListHeight)
+        }
+        return super.getCellSizeForList()
     }
     
     override func getCellSizeForGreed() -> CGSize {
@@ -68,6 +71,10 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
             sortRule = .albumlettersAZ
         case .AlphaBetricZA:
             sortRule = .albumlettersZA
+        case .LettersAZ:
+            sortRule = .lettersAZ
+        case .LettersZA:
+            sortRule = .lettersZA
         case .TimeNewOld:
             sortRule = .timeUp
         case .TimeOldNew:
@@ -76,6 +83,10 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
             sortRule = .sizeAZ
         case .Smallest:
             sortRule = .sizeZA
+        case .metaDataTimeNewOld:
+            sortRule = .metaDataTimeUp
+        case .metaDataTimeOldNew:
+            sortRule = .metaDataTimeDown
         default:
             sortRule = .timeUp
         }
@@ -87,6 +98,10 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 //                         sortOrder: .asc)
 //
 //    }
+    
+    override func needShowNoFileView() -> Bool {
+        return dataSource.getAllObjects().isEmpty
+    }
 }
 
 extension AlbumsPresenter: AlbumDetailModuleOutput {
