@@ -22,7 +22,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         case .removeFromAlbum:
             log.debug("AlbumDetailPresenter operationFinished type == removeFromAlbum")
 
-            onReloadData()
+            //onReloadData()
         case .completelyDeleteAlbums:
             log.debug("AlbumDetailPresenter operationFinished type == completelyDeleteAlbums")
 

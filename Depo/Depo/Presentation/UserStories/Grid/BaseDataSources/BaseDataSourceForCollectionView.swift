@@ -1258,6 +1258,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
+    func filesMoved(items: [Item], toFolder folderUUID: String){
+        if let uuid = parentUUID, uuid != folderUUID{
+            deleteItems(items: items)
+        }else if let unwrapedFilters = originalFilters,
+            canShowFolderFilters(filters: unwrapedFilters) {
+            deleteItems(items: items)
+        }
+    }
+    
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         if let compairedView = object as? BaseDataSourceForCollectionView {
             return compairedView == self
