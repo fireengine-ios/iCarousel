@@ -210,4 +210,18 @@ class UserProfileViewController: UIViewController, UserProfileViewInput, UITextF
         return !(textField == gsmNumberTextField && output.isTurkcellUser())
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let text = textField.text, textField == emailTextField {
+            textField.text = text.removingWhiteSpaces()
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == " " && textField == emailTextField{
+            return false
+        }
+        
+        return true
+    }
+    
 }
