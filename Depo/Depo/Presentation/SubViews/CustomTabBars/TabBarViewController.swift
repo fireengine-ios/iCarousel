@@ -516,12 +516,13 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             return
         }
         
+        view.layoutIfNeeded()
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews, animations: {
             for button in buttons{
                 button.changeVisability(toHidden: hidden)
             }
             self.view.layoutIfNeeded()
-        }, completion: { _ in })
+        }, completion: nil)
     }
     
     private func setupOriginalPlustBtnConstraint(forView unconstrainedView: SubPlussButtonView) {
