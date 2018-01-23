@@ -15,8 +15,10 @@ class LoginPhoneMailCell: BaseUserInputCellView {
     
     weak var loginCellActionDelegate: LoginPhoneMailCellActionProtocol?
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField.text?.count == 0, string == "+" {
+    override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == " " {
+            return false
+        } else if textField.text?.count == 0, string == "+" {
             loginCellActionDelegate?.firstCharacterIsPlus(fromCell: self, string: string)
             return false
         } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil, textField.text?.count == 0 {
@@ -30,6 +32,9 @@ class LoginPhoneMailCell: BaseUserInputCellView {
         guard var text = textInputField.text else {
             return
         }
+        
+        text = text.removingWhiteSpaces()
+        textInputField.text = text
         
         guard let range = text.range(of: "+(90)0") else {
             return
