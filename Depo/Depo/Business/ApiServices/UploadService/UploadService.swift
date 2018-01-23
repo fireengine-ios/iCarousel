@@ -180,12 +180,11 @@ final class UploadService: BaseRequestService {
                 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
+                finishedOperation.item.isLocalItem = false
+                
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                 
                 ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
-                
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
-                                                object: nil)
                 
                 checkIfFinished()
             })
@@ -276,9 +275,6 @@ final class UploadService: BaseRequestService {
                 
                 ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
-                                                object: nil)
-                
                 checkIfFinished()
             })
             operation.queuePriority = .high
@@ -302,14 +298,10 @@ final class UploadService: BaseRequestService {
             }) == nil)
         }
         
-        guard !itemsToSync.isEmpty else {
+        guard !itemsToSync.isEmpty, let firstObject = itemsToSync.first else {
             return nil
         }
-//        if allSyncOperationsCount == 0 {
-//            CardsManager.default.startOperationWith(type: .sync, allOperations: self.allSyncOperationsCount + itemsToSync.count, completedOperations: 0)
-//        }
-        
-        let firstObject = itemsToSync.first!
+
         print("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
         CardsManager.default.setProgressForOperationWith(type: .sync,
                                                                     object: firstObject,
@@ -325,54 +317,48 @@ final class UploadService: BaseRequestService {
                     return
                 }
                 
-                if finishedOperation.item.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 }
-                else if finishedOperation.item.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
-                
                 if let index = self.uploadOperations.index(of: finishedOperation){
                     self.uploadOperations.remove(at: index)
                 }
                 
-                CardsManager.default.setProgressForOperationWith(type: .sync,
-                                                                            object: nil,
-                                                                            allOperations: self.allSyncOperationsCount,
-                                                                            completedOperations: self.finishedSyncOperationsCount)
-                
-                
-                if let error = error {
-                    if error.description != TextConstants.canceledOperationTextError {
-                        print(error.localizedDescription)
-                        fail(error)
-                        return
-                    }
-                    
-                    
-                    if self.allSyncOperationsCount != 0, self.allSyncOperationsCount == self.finishedSyncOperationsCount {
-                        print("allSyncOperationsCount = \(self.allSyncOperationsCount), finishedSyncOperationsCount = \(self.finishedSyncOperationsCount)")
-                        self.clearSyncCounters()
-                        self.uploadOperations = self.uploadOperations.filter({ $0.uploadType != .autoSync })
-                        CardsManager.default.stopOperationWithType(type: .sync)
+                let checkIfFinished = {
+                    if self.uploadOperations.filter({ $0.uploadType == .autoSync }).isEmpty {
                         success()
                         return
                     }
                 }
-
+                
+                if let error = error {
+                    print("AUTOSYNC: \(error.localizedDescription)")
+                    if error.description == TextConstants.canceledOperationTextError {
+                        //operation was cancelled - not an actual error
+                        CardsManager.default.setProgressForOperationWith(type: .sync,
+                                                                         object: nil,
+                                                                         allOperations: self.allSyncOperationsCount,
+                                                                         completedOperations: self.finishedSyncOperationsCount)
+                        checkIfFinished()
+                    } else {
+                        fail(error)
+                    }
+                    return
+                }
+                
+                self.finishedUploadOperationsCount += 1
+                
+                CardsManager.default.setProgressForOperationWith(type: .sync,
+                                                                 object: nil,
+                                                                 allOperations: self.allSyncOperationsCount,
+                                                                 completedOperations: self.finishedSyncOperationsCount)
+                
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
+                finishedOperation.item.isLocalItem = false
+                
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                 
                 ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
                 
-                guard self.allSyncOperationsCount != 0, self.finishedSyncOperationsCount != 0 else {
-                    return
-                }
-                
-                if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
-                    self.clearSyncCounters()
-                    CardsManager.default.stopOperationWithType(type: .sync)
-                    success()
-                    return
-                }
-                
+                checkIfFinished()
             })
             
             operation.queuePriority = .normal
