@@ -2765,6 +2765,7 @@
 		CE7466FF1FD6B35400D0885D /* ServerValueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7466FE1FD6B35400D0885D /* ServerValueError.swift */; };
 		CE7467011FD6B61600D0885D /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7467001FD6B61600D0885D /* ErrorResponse.swift */; };
 		CE79E4A81F695DA200C1F151 /* Depo_LifeTechUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE79E4A71F695DA200C1F151 /* Depo_LifeTechUITests.swift */; };
+		CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4B0292017731400D06CA9 /* Alamofire+Response.swift */; };
 		CE8F44E41F6AAFA80062C2E0 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
 		CE8F44E61F6AB59C0062C2E0 /* ActivityTimelineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E51F6AB59C0062C2E0 /* ActivityTimelineService.swift */; };
 		CE8F44E81F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E71F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift */; };
@@ -12801,6 +12802,7 @@
 				8C0E8E4E1FDEBDFF00789C91 /* CompleteProfileInteractorOutput.swift in Sources */,
 				8C0E8E4F1FDEBDFF00789C91 /* CompleteProfileInteractor.swift in Sources */,
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
+				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
 				8C0E8E511FDEBDFF00789C91 /* SearchViewOutput.swift in Sources */,
 				8C0E8E521FDEBDFF00789C91 /* OfferApple.swift in Sources */,
 				8C0E8E531FDEBDFF00789C91 /* CompleteProfileRouterInput.swift in Sources */,
@@ -14231,6 +14233,7 @@
 				7C73CDF4200356B9000824AA /* Base */,
 			);
 			name = OurLocalizable.strings;
+			path = .;
 			sourceTree = "<group>";
 		};
 		8C06ADA72008AD6F003D8E05 /* TOCropViewControllerLocalizable.strings */ = {
@@ -14257,6 +14260,7 @@
 				8C06AEB52008AD6F003D8E05 /* zh-Hant */,
 			);
 			name = TOCropViewControllerLocalizable.strings;
+			path = .;
 			sourceTree = "<group>";
 		};
 		8C06ADA92008AD6F003D8E05 /* Localizable.strings */ = {
@@ -14267,6 +14271,7 @@
 				8C06AEAF2008AD6F003D8E05 /* tr */,
 			);
 			name = Localizable.strings;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
