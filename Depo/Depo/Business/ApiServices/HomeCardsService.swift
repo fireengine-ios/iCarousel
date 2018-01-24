@@ -28,12 +28,24 @@ extension HomeCardsServiceImp: HomeCardsService {
         sessionManager
             .request(RouteRequests.HomeCards.all)
             .customValidate()
-            .responseArray(handler)
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let array = HomeCardResponse.array(from: data)
+                    for (i, object) in array.enumerated() {
+                        object.order = i + 1
+                    }
+                    handler(ResponseResult.success(array))
+                case .failure(let error):
+                    let backendError = ResponseParser.getBackendError(data: response.data,
+                                                                      response: response.response)
+                    handler(ResponseResult.failed(backendError ?? error))
+                }
+            }
     }
     
     func save(with id: Int, handler: @escaping ResponseVoid) {
         let url = RouteRequests.HomeCards.card(with: id)
-        
         sessionManager
             .request(url, method: .put)
             .customValidate()
