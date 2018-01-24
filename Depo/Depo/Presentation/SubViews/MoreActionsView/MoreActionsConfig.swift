@@ -66,8 +66,6 @@ enum SortedRules: Int {
             return TextConstants.sortHeaderTime
         case .sizeZA, .sizeAZ:
             return TextConstants.sortHeaderSize
-        default:
-            return "None"
         }
     }
     
