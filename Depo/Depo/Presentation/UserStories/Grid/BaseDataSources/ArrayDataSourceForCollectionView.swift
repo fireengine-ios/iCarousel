@@ -65,12 +65,6 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         return CGSize.zero
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.section < tableDataMArray.count, indexPath.row < tableDataMArray[indexPath.section].count {
-            super.collectionView(collectionView, didEndDisplaying: cell, forItemAt: indexPath)
-        }
-    }
-    
     override func albumsDeleted(albums: [AlbumItem]){
         if let unwrapedFilters = originalFilters,
             canShowAlbumsFilters(filters: unwrapedFilters) {

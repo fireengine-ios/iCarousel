@@ -19,6 +19,6 @@
 
 @interface MyTextView : UITextView
 
-@property (nonatomic, assign) id<MyTextViewProtocol> delegate;
+@property (nonatomic, assign) id<MyTextViewProtocol, UITextViewDelegate> delegate;
 
 @end
