@@ -133,14 +133,20 @@ class RouterVC: NSObject {
     
     func popCreateStory() {
         if let viewControllers = navigationController?.viewControllers {
-            let index = viewControllers.index(where: ({ (viewController) -> Bool in
-                return viewController is CreateStoryPhotoSelectionViewController
-            }))
+            var index: Int? = nil
             
-            if let ind = index, ind > 0 {
+            for (i, viewController) in viewControllers.enumerated(){
+                if viewController is CreateStoryPhotoSelectionViewController
+                    || viewController is CreateStoryPhotosOrderViewController{
+                    index = i
+                    break
+                }
+            }
+
+            if let ind = index{
                 let viewController = viewControllers[ind - 1]
                 navigationController?.popToViewController(viewController, animated: true)
-            } else {
+            }else{
                 navigationController?.popToRootViewController(animated: true)
             }
         }

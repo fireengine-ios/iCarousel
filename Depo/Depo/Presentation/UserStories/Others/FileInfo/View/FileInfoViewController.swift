@@ -60,7 +60,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         moreFileInfoLabel.textColor = ColorConstants.textGrayColor
         moreFileInfoLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
-        uploadDateTitle.text = TextConstants.fileInfoUploadDateTitle
+        uploadDateTitle.text = TextConstants.fileInfoCreationDateTitle
         uploadDateTitle.textColor = ColorConstants.textGrayColor
         uploadDateTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
         

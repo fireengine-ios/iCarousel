@@ -33,7 +33,9 @@ class ImageDownloder {
         }
         
         if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
-            compliteImage(image)
+            DispatchQueue.main.async {
+                compliteImage(image)
+            }
             return
         }
         

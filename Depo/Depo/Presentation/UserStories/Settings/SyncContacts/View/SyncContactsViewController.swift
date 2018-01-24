@@ -190,12 +190,19 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
         setLastBackUpDate(response.date)
         setStateWithBackUp()
-        var template: String = ""
-        if (operation == .backup){
+        
+        var template: String
+        switch operation {
+        case .backup:
             template = TextConstants.settingsBackupedText
-        } else {
+        case .restore:
             template = TextConstants.settingsRestoredText
+        case .getBackUpStatus:
+            template = TextConstants.settingsBackupStatusText
+        default:
+            template = TextConstants.settingsBackupedText
         }
+
         
         let t = String.init(format: template, response.totalNumberOfContacts)
         let text = t as NSString

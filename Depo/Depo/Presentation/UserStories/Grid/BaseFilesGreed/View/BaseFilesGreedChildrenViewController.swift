@@ -21,13 +21,6 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         }
         
         self.setTitle(withString: mainTitle, andSubTitle: subTitle)
-        
-        let allVisibleCells = collectionView.indexPathsForVisibleItems
-        if !allVisibleCells.isEmpty{
-            collectionView.performBatchUpdates({
-                collectionView.reloadItems(at: allVisibleCells)
-            })
-        }
     }
 
     override func startSelection(with numberOfItems: Int) {

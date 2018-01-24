@@ -33,13 +33,14 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var plusButtonHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var musicBarContainer: UIView!
     
-    @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var musicBarHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var bottomTabBarConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var musicBar: MusicBar!
     
     static let notificationHidePlusTabBar = "HideMainTabBarPlusNotification"
     static let notificationShowPlusTabBar = "ShowMainTabBarPlusNotification"
@@ -60,7 +61,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     fileprivate var albumBtn            : SubPlussButtonView!
     fileprivate var uploadFromLifebox   : SubPlussButtonView!
 
-    let musicBar = MusicBar.initFromXib()
+    //    let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()
     let cameraService: CameraService = CameraService()
     
@@ -143,7 +144,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         selectedIndex = 0
         tabBar.selectedItem = tabBar.items?.first
         
-        setupMusicBar()
+        
+        changeVisibleStatus(hidden: true)
         setupObserving()
         
         player.delegates.add(self)
@@ -163,19 +165,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                      ("outlineDocs",  "")]
         
         tabBar.setupItems(withImageToTitleNames: items)
-    }
-    
-    private func setupMusicBar() {
-        musicBarContainer.addSubview(musicBar)
-        let horisontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[item1]-(0)-|",
-                                                               options: [], metrics: nil,
-                                                               views: ["item1" : musicBar])
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[item1]-(0)-|",
-                                                                   options: [], metrics: nil,
-                                                                   views: ["item1" : musicBar])
-
-        musicBarContainer.addConstraints(horisontalConstraints + verticalConstraints)
-        changeVisibleStatus(hidden: true)
     }
     
     private func setupObserving() {
@@ -228,8 +217,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     @objc func showMusicBar(_ sender: Any) {
         musicBar.configurateFromPLayer()
         changeVisibleStatus(hidden: false)
-        containerViewBottomConstraint.constant = musicBarContainerHeightConstraint.constant
-        
+        containerViewBottomConstraint.constant = musicBarHeightConstraint.constant
     }
     
     @objc func hideMusicBar(_ sender: Any) {
@@ -238,8 +226,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
 
     private func changeVisibleStatus(hidden: Bool) {
-        musicBarContainer.isHidden = hidden
-        musicBarContainer.isUserInteractionEnabled = !hidden
+        musicBar.isHidden = hidden
+        musicBar.isUserInteractionEnabled = !hidden
     }
     
     @objc private func showPlusTabBar(_ sender: Any) {
@@ -277,8 +265,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeTabBarStatus(hidden: true)
         if (bottomTabBarConstraint.constant >= 0){
             var bottomConstraintConstant = -self.tabBar.frame.height
-            if !musicBarContainer.isHidden {
-                bottomConstraintConstant -= self.musicBarContainer.frame.height
+            if !musicBar.isHidden {
+                bottomConstraintConstant -= self.musicBar.frame.height
             }
             if #available(iOS 10.0, *) {
                 let obj = UIViewPropertyAnimator(duration: NumericConstants.animationDuration, curve: .linear) {
@@ -352,13 +340,23 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         curtainColorView.backgroundColor = ColorConstants.whiteColor
         curtainColorView.alpha = 0.88
         showCurtainView(show: false)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(TabBarViewController.closeCurtainView))
+        curtainView.addGestureRecognizer(tap)
     }
     
     private func showCurtainView(show: Bool) {
         curtainView.isHidden = !show
         curtainView.isUserInteractionEnabled = show
-        selectedViewController?.navigationItem.rightBarButtonItem?.isEnabled = !show
-        selectedViewController?.navigationItem.leftBarButtonItem?.isEnabled = !show
+        
+        currentViewController?.navigationItem.rightBarButtonItems?.forEach {
+            $0.isEnabled = !show
+        }
+        currentViewController?.navigationItem.hidesBackButton = !show
+    }
+    
+    @objc func closeCurtainView() {
+        changeViewState(state: false)
     }
     
     func setupSubButtons() {
@@ -521,12 +519,13 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             return
         }
         
+        view.layoutIfNeeded()
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews, animations: {
             for button in buttons{
                 button.changeVisability(toHidden: hidden)
             }
             self.view.layoutIfNeeded()
-        }, completion: { _ in })
+        }, completion: nil)
     }
     
     private func setupOriginalPlustBtnConstraint(forView unconstrainedView: SubPlussButtonView) {

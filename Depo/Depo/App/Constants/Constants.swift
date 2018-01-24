@@ -92,7 +92,7 @@ struct TextConstants {
     static let forgotPasswordTitle = NSLocalizedString("Forgot My Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let forgotPasswordSubTitle = NSLocalizedString("If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let forgotPasswordSpecialSubTitle = NSLocalizedString("If you registered with your Turkcell Number you can just send SIFRE LIFEBOX to 2222 to recieve a new password or enter your mail below", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let forgotPasswordSendPassword = NSLocalizedString("Send password reset link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordCellTitle = NSLocalizedString("E-MAIL", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordSentEmailAddres = NSLocalizedString("Your password is sent to your e-mail address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -357,6 +357,7 @@ struct TextConstants {
     static let fileInfoDurationTitle = NSLocalizedString("Duration", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoDateModifiedTitle = NSLocalizedString("Date modified", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoUploadDateTitle = NSLocalizedString("Upload date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fileInfoCreationDateTitle = NSLocalizedString("Creation date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoTakenDateTitle = NSLocalizedString("Taken date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoAlbumTitle = NSLocalizedString("Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoArtistTitle = NSLocalizedString("Artist", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -375,6 +376,7 @@ struct TextConstants {
     static let settingsBackupContactsViewDuplicatesText = NSLocalizedString("Updated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupContactsViewRemovedText = NSLocalizedString("Removed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupedText = NSLocalizedString("Backed up %d Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackupStatusText = NSLocalizedString("You have %d numbers on your contacts backup.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsRestoredText = NSLocalizedString("Restored up %d Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpingText = NSLocalizedString("%d%% Backed up…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsDeletingText = NSLocalizedString("%d%% of Duplicated Contacts Deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

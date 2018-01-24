@@ -75,7 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-//        SyncServiceManager.shared.updateImmediately()
     }
     
     private var firstResponder: UIResponder?
@@ -137,6 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !tokenStorage.isRememberMe {
             tokenStorage.clearTokens()
         }
+        SyncServiceManager.shared.stopSync()
         UserDefaults.standard.synchronize()
         player.stop()
     }
