@@ -1,5 +1,5 @@
 //
-//  Result.swift
+//  ResponseResult.swift
 //  Depo_LifeTech
 //
 //  Created by Bondar Yaroslav on 11/10/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Result <T> {
+enum ResponseResult <T> {
     case success(T)
     case failed(Error)
 }

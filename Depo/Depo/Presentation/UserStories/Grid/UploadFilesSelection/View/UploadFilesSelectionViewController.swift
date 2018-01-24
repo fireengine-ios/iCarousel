@@ -22,9 +22,14 @@ class UploadFilesSelectionViewController: BaseFilesGreedChildrenViewController, 
         button.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
         
         let barButton = UIBarButtonItem(customView: button)
-        
         navigationItem.rightBarButtonItem = barButton
+    }
+    
+    
+    override func selectedItemsCountChange(with count: Int) {
+        super.selectedItemsCountChange(with: count)
         
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     ///need override this method for correct configuration UINavigationBar

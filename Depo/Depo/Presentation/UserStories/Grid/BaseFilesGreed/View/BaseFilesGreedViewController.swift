@@ -121,6 +121,14 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
 //        if let unwrapedSlider = contentSlider { //FIXME: shiwt reload mechanic to presenter, so modules would speak as normal
 //            unwrapedSlider.reloadAllData()
 //        }
+        
+        let allVisibleCells = collectionView.indexPathsForVisibleItems
+        if !allVisibleCells.isEmpty{
+            collectionView.performBatchUpdates({
+                collectionView.reloadItems(at: allVisibleCells)
+            })
+        }
+        
         output.viewWillAppear()
     }
     

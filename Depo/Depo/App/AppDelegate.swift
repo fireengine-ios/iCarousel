@@ -136,6 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !tokenStorage.isRememberMe {
             tokenStorage.clearTokens()
         }
+        SyncServiceManager.shared.stopSync()
         UserDefaults.standard.synchronize()
         player.stop()
     }
