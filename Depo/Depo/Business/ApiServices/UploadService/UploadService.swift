@@ -180,14 +180,14 @@ final class UploadService: BaseRequestService {
                 
                 if let error = error {
                     print("AUTOSYNC: \(error.localizedDescription)")
-                    if error.description == TextConstants.canceledOperationTextError {
-                        //operation was cancelled - not an actual error
-                        self.showUploadCardProgress()
-                        checkIfFinished()
-                    } else {
+//                    if error.description == TextConstants.canceledOperationTextError {
+//                        //operation was cancelled - not an actual error
+//                        self.showUploadCardProgress()
+//                        checkIfFinished()
+//                    } else {
                         //sync failed
                         fail?(.error(error))
-                    }
+//                    }
                     return
                 }
                 
@@ -391,25 +391,37 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelSyncToUseOperations(){
-        var operationsToRemove = uploadOperations.filter({ $0.uploadType == .syncToUse })
-        operationsToRemove.forEach { (operation) in
-            operation.cancel()
-            if let index = uploadOperations.index(of: operation) {
-                uploadOperations.remove(at: index)
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
             }
+            
+            var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .syncToUse })
+            operationsToRemove.forEach { (operation) in
+                operation.cancel()
+                if let index = self.uploadOperations.index(of: operation) {
+                    self.uploadOperations.remove(at: index)
+                }
+            }
+            operationsToRemove.removeAll()
         }
-        operationsToRemove.removeAll()
     }
     
     func cancelUploadOperations(){
-        var operationsToRemove = uploadOperations.filter({ $0.uploadType == .fromHomePage })
-        operationsToRemove.forEach { (operation) in
-            operation.cancel()
-            if let index = uploadOperations.index(of: operation) {
-                uploadOperations.remove(at: index)
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
             }
+            
+            var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .fromHomePage })
+            operationsToRemove.forEach { (operation) in
+                operation.cancel()
+                if let index = self.uploadOperations.index(of: operation) {
+                    self.uploadOperations.remove(at: index)
+                }
+            }
+            operationsToRemove.removeAll()
         }
-        operationsToRemove.removeAll()
     }
     
     func cancelSyncOperations(photo: Bool, video: Bool) {
