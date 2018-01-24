@@ -90,5 +90,11 @@ struct RouteRequests {
     static let searchContacts = "search?query=%@&currentPage=%d"
     static let deleteContacts = "contact"
     
-}
     
+    struct HomeCards {
+        static let all = BaseUrl +/ "api/assistant/v1"
+        static func card(with id: Int) -> URL {
+            return all +/ String(id)
+        }
+    }
+}
