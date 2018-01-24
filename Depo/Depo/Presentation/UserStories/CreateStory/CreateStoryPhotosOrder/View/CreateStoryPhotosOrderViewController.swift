@@ -152,7 +152,7 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         
         let object = collectionViewData[indexPath.row]
         cell_.setPosition(position: indexPath.row + 1)
-        fileDataSource.getImage(patch: object.patchToPreview) { [weak self] (image) in
+        _ = fileDataSource.getImage(patch: object.patchToPreview) { [weak self] (image) in
             
             let contains = self?.collectionView.indexPathsForVisibleItems.contains(indexPath)
             if let value = contains,
