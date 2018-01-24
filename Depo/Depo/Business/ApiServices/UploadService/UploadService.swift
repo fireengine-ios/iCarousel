@@ -391,11 +391,7 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelSyncToUseOperations(){
-        dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            
+        dispatchQueue.async {
             var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .syncToUse })
             operationsToRemove.forEach { (operation) in
                 operation.cancel()
@@ -408,11 +404,7 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelUploadOperations(){
-        dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            
+        dispatchQueue.async {
             var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .fromHomePage })
             operationsToRemove.forEach { (operation) in
                 operation.cancel()
@@ -425,18 +417,18 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelSyncOperations(photo: Bool, video: Bool) {
-        dispatchQueue.async { [weak self] in
+        dispatchQueue.async {
             print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
             
-            if photo { self?.finishedPhotoSyncOperationsCount = 0 }
-            if video { self?.finishedVideoSyncOperationsCount = 0 }
+            if photo { self.finishedPhotoSyncOperationsCount = 0 }
+            if video { self.finishedVideoSyncOperationsCount = 0 }
             
-            self?.uploadOperations.forEach({ (operation) in
+            self.uploadOperations.forEach({ (operation) in
                 if operation.uploadType == .autoSync &&
                     ((video && operation.item.fileType == .video) || (photo && operation.item.fileType == .image)) {
                     operation.cancel()
-                    if let index = self?.uploadOperations.index(of: operation){
-                        self?.uploadOperations.remove(at: index)
+                    if let index = self.uploadOperations.index(of: operation){
+                        self.uploadOperations.remove(at: index)
                     }
                 }
             })
@@ -448,12 +440,12 @@ final class UploadService: BaseRequestService {
             return
         }
         
-        dispatchQueue.async { [weak self] in
-            self?.uploadOperations.forEach({ (operation) in
+        dispatchQueue.async {
+            self.uploadOperations.forEach({ (operation) in
                 if let asset = operation.item.asset, !operation.isCancelled, assets.contains(asset) {
                     operation.cancel()
-                    if let index = self?.uploadOperations.index(of: operation){
-                        self?.uploadOperations.remove(at: index)
+                    if let index = self.uploadOperations.index(of: operation){
+                        self.uploadOperations.remove(at: index)
                     }
                 }
             })
