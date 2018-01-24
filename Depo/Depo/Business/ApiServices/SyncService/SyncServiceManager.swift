@@ -213,8 +213,8 @@ extension SyncServiceManager {
     private func subscribeForNotifications() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
-                                       selector: #selector(onPhotoLibraryDidChange),
-                                       name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
+                                       selector: #selector(onPhotoLibraryDidChange(notification:)),
+                                       name: LocalMediaStorage.notificationPhotoLibraryDidChange,
                                        object: nil)
         
         notificationCenter.addObserver(self,
@@ -228,8 +228,13 @@ extension SyncServiceManager {
                                        object: nil)
     }
     
-    @objc private func onPhotoLibraryDidChange() {
-        checkReachabilityAndSettings(reachabilityChanged: false)
+    @objc private func onPhotoLibraryDidChange(notification: Notification) {
+        if let phChanges = notification.userInfo {
+            if let _ = phChanges[PhotoLibraryChangeType.added] as? [PHAsset]  {
+                //TODO: append only added items
+                 checkReachabilityAndSettings(reachabilityChanged: false)
+            }
+        }
     }
     
     @objc private func onAPIReachabilityDidChange() {
