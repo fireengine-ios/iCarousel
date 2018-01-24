@@ -33,6 +33,8 @@ protocol ItemOperationManagerViewProtocol: class {
     func fileAddedToAlbum()
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String)
+    
+    func filesMoved(items: [Item], toFolder folderUUID: String)
 
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool
     
@@ -62,6 +64,8 @@ extension ItemOperationManagerViewProtocol {
     func fileAddedToAlbum() {}
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String) {}
+    
+    func filesMoved(items: [Item], toFolder folderUUID: String) {}
 }
 
 
@@ -198,6 +202,14 @@ class ItemOperationManager: NSObject {
         DispatchQueue.main.async {
             for view in self.views{
                 view.filesRomovedFromAlbum(items: items, albumUUID: albumUUID)
+            }
+        }
+    }
+    
+    func filesMoved(items: [Item], toFolder folderUUID: String){
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.filesMoved(items: items, toFolder: folderUUID)
             }
         }
     }

@@ -54,7 +54,7 @@ extension CoreDataStack {
             notSaved.forEach {
                 i += 1
                 debugPrint("local ", i)
-                let info = localMediaStorage.shortInfoAboutAsset(asset: $0)
+                let info = localMediaStorage.fullInfoAboutImageAsset(asset: $0)//shortInfoAboutAsset(asset: $0)
                 
                 let baseMediaContent = BaseMediaContent(curentAsset: $0,
                                                         urlToFile: info.url,
@@ -74,10 +74,10 @@ extension CoreDataStack {
             }
             
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)
-//            self.isAppendingLocalFilesFinished = true
-//            self.appendingItemsFinishBlock?()
+
             self.inProcessAppendingLocalFiles = false
             allItemsAddedCallBack?()
+            
             let finish = Date().timeIntervalSince1970
             debugPrint("All images and videos have been saved in \(finish - start) seconds")
             
