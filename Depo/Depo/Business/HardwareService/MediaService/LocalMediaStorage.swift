@@ -45,7 +45,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private let getDetailQueue = OperationQueue()
     
-    static let notificationPhotoLibraryDidChange = "notificationPhotoLibraryDidChange"
+    static let notificationPhotoLibraryDidChange = NSNotification.Name(rawValue: "notificationPhotoLibraryDidChange")
     
     static let defaultUrl = URL(string: "http://Not.url.com")!
     

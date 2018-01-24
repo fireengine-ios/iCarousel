@@ -22,7 +22,7 @@ final class UploadService: BaseRequestService {
     
     
     private var allSyncOperationsCount: Int {
-        return uploadOperations.filter({ $0.uploadType == .autoSync }).count + finishedSyncOperationsCount
+        return uploadOperations.filter({ $0.uploadType == .autoSync && !$0.isCancelled }).count + finishedSyncOperationsCount
     }
     private var finishedSyncOperationsCount : Int {
         return finishedPhotoSyncOperationsCount + finishedVideoSyncOperationsCount
@@ -32,13 +32,13 @@ final class UploadService: BaseRequestService {
     
     
     private var allUploadOperationsCount: Int {
-        return uploadOperations.filter({ $0.uploadType == .fromHomePage }).count + finishedUploadOperationsCount
+        return uploadOperations.filter({ $0.uploadType == .fromHomePage && !$0.isCancelled }).count + finishedUploadOperationsCount
     }
     private var finishedUploadOperationsCount = 0
     
     
     private var allSyncToUseOperationsCount : Int {
-        return uploadOperations.filter({ $0.uploadType == .syncToUse }).count + finishedSyncToUseOperationsCount
+        return uploadOperations.filter({ $0.uploadType == .syncToUse && !$0.isCancelled }).count + finishedSyncToUseOperationsCount
     }
     private var finishedSyncToUseOperationsCount = 0
     
@@ -114,6 +114,10 @@ final class UploadService: BaseRequestService {
     }
     
     private func showSyncCardProgress() {
+        guard allSyncOperationsCount != 0 else {
+            return
+        }
+        
         CardsManager.default.setProgressForOperationWith(type: .sync,
                                                          object: nil,
                                                          allOperations: allSyncOperationsCount,
@@ -121,6 +125,10 @@ final class UploadService: BaseRequestService {
     }
     
     private func showUploadCardProgress() {
+        guard allSyncToUseOperationsCount + allUploadOperationsCount != 0 else {
+            return
+        }
+        
         CardsManager.default.setProgressForOperationWith(type: .upload,
                                                          object: nil,
                                                          allOperations: allSyncToUseOperationsCount + allUploadOperationsCount,
@@ -405,18 +413,39 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelSyncOperations(photo: Bool, video: Bool) {
-        dispatchQueue.sync {
+        dispatchQueue.async { [weak self] in
             print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
             
-            if photo { finishedPhotoSyncOperationsCount = 0 }
-            if video { finishedVideoSyncOperationsCount = 0 }
+            if photo { self?.finishedPhotoSyncOperationsCount = 0 }
+            if video { self?.finishedVideoSyncOperationsCount = 0 }
             
-            self.uploadOperations.forEach({ (operation) in
+            self?.uploadOperations.forEach({ (operation) in
                 if operation.uploadType == .autoSync &&
                     ((video && operation.item.fileType == .video) || (photo && operation.item.fileType == .image)) {
                     operation.cancel()
+                    if let index = self?.uploadOperations.index(of: operation){
+                        self?.uploadOperations.remove(at: index)
+                    }
                 }
             })
+        }
+    }
+    
+    func cancelOperations(with assets: [PHAsset]?) {
+        guard let assets = assets else {
+            return
+        }
+        
+        dispatchQueue.async { [weak self] in
+            self?.uploadOperations.forEach({ (operation) in
+                if let asset = operation.item.asset, !operation.isCancelled, assets.contains(asset) {
+                    operation.cancel()
+                    if let index = self?.uploadOperations.index(of: operation){
+                        self?.uploadOperations.remove(at: index)
+                    }
+                }
+            })
+            
         }
     }
     
