@@ -14,7 +14,8 @@ final class HomeCardResponse {
     var type: HomeCardTypes?
     var saved: Bool = false
     var actionable: Bool = false
-    var details: Any?
+    var details: JSON?
+    var order = 0
 }
 
 extension HomeCardResponse: Map {

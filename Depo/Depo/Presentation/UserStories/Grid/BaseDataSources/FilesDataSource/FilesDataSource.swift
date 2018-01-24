@@ -82,6 +82,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     //MARK: AsynImage
     
+    @discardableResult
     func getImage(patch: PathForItem, compliteImage: @escaping RemoteImage) -> URL? {
         switch patch {
         case let .localMediaContent(local):

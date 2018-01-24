@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FreeUpSpacePopUp: BaseView {
+final class FreeUpSpacePopUp: BaseView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bigTitleLabel: UILabel!
@@ -17,13 +17,6 @@ class FreeUpSpacePopUp: BaseView {
     @IBOutlet weak var freeAppSpaceButton: CircleYellowButton!
     
     private var operation: OperationType?
-    
-    override class func initFromNib() -> FreeUpSpacePopUp{
-        if let view = super.initFromNib() as? FreeUpSpacePopUp{
-            return view
-        }
-        return FreeUpSpacePopUp()
-    }
     
     override func configurateView() {
         super.configurateView()
