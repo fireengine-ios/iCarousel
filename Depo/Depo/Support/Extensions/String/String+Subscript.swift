@@ -30,5 +30,9 @@ extension String {
         let currentString = self as NSString
         return currentString.appendingPathComponent(path)
     }
+    
+    func removingWhiteSpaces() -> String {
+        return components(separatedBy: .whitespaces).joined()
+    }
 
 }

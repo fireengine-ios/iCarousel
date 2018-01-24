@@ -348,8 +348,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     private func showCurtainView(show: Bool) {
         curtainView.isHidden = !show
         curtainView.isUserInteractionEnabled = show
-        selectedViewController?.navigationItem.rightBarButtonItem?.isEnabled = !show
-        selectedViewController?.navigationItem.leftBarButtonItem?.isEnabled = !show
+        
+        currentViewController?.navigationItem.rightBarButtonItems?.forEach {
+            $0.isEnabled = !show
+        }
+        currentViewController?.navigationItem.hidesBackButton = !show
     }
     
     @objc func closeCurtainView() {
@@ -516,12 +519,13 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             return
         }
         
+        view.layoutIfNeeded()
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews, animations: {
             for button in buttons{
                 button.changeVisability(toHidden: hidden)
             }
             self.view.layoutIfNeeded()
-        }, completion: { _ in })
+        }, completion: nil)
     }
     
     private func setupOriginalPlustBtnConstraint(forView unconstrainedView: SubPlussButtonView) {

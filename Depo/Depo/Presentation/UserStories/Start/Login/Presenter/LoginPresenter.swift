@@ -32,12 +32,17 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String) {
         onLogin()
-        interactor.authificate(login: login, password: password, atachedCaptcha: CaptchaParametrAnswer(uuid: captchaID, answer: captchaAnswer))
+        
+        interactor.authificate(login: removeBrackets(text: login), password: password, atachedCaptcha: CaptchaParametrAnswer(uuid: captchaID, answer: captchaAnswer))
+    }
+    
+    private func removeBrackets(text: String) -> String {
+        return text.filter{$0 != ")" && $0 != "("}
     }
     
     func sendLoginAndPassword(login: String, password: String) {
         onLogin()
-        interactor.authificate(login: login, password: password, atachedCaptcha: nil)
+        interactor.authificate(login: removeBrackets(text: login), password: password, atachedCaptcha: nil)
     }
     
     private func onLogin() {
