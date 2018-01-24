@@ -20,8 +20,7 @@ final class Validator {
     }
     
     static func isValid(phone: String) -> Bool {
-        var phoneNumber = phone.replacingOccurrences(of: "(", with: "")
-        phoneNumber = phoneNumber.replacingOccurrences(of: ")", with: "")
+        var phoneNumber = phone.filter{$0 != "(" && $0 != ")"}
         if !phone.contains("+") {
             phoneNumber = "+" + phoneNumber
         }
