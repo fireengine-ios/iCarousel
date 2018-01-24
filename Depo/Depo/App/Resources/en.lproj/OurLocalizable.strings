@@ -124,6 +124,7 @@
 "Photos" = "Photos";
 "Choose From Library" = "Choose From Library";
 "Take Photo" = "Take Photo";
+
 "Remove from album" = "Remove from album";
 "Back Up" = "Back Up";
 "Add to album" = "Add to album";
@@ -365,6 +366,13 @@
 "You can apply this filter and my more to your other picures as well" = "You can apply this filter and my more to your other picures as well";
 "Did you like this filter?" = "Did you like this filter?";
 "Take a Photo" = "Take a Photo";
+"Contact Backup" = "Contact Backup";
+"Your last contact update was %d months ago!" = "Your last contact update was %d months ago!";
+"It has been %d months since you last updated your contacts, update now to never loose any of your contacts." = "It has been %d months since you last updated your contacts, update now to never loose any of your contacts.";
+"Your contact list looks empty" = "Your contact list looks empty";
+"You don’t have any contacts in your profile, backup your contacts now!" = "You don’t have any contacts in your profile, backup your contacts now!";
+"Backup" = "Backup";
+"Last update:" = "Last update:";
 "Upload" = "Upload";
 "You don’t have a profile picture, let’s upload a pretty photo!" = "You don’t have a profile picture, let’s upload a pretty photo!";
 "Your profile looks empty" = "Your profile looks empty";

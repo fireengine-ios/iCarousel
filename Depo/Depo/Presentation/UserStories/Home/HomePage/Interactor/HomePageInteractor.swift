@@ -13,6 +13,9 @@ class HomePageInteractor: HomePageInteractorInput {
     func homePagePresented(){
         FreeAppSpace.default.checkFreeAppSpace()
         SyncServiceManager.shared.updateImmediately()
+        
+        CardsManager.default.startOperationWith(type: .contactBacupOld, allOperations: nil, completedOperations: nil)
+        CardsManager.default.startOperationWith(type: .contactBacupEmpty, allOperations: nil, completedOperations: nil)
     }
 
 }

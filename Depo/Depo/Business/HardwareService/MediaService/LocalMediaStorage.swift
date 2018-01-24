@@ -567,7 +567,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                   asset: asset) { (data, string, orientation, dict) in
             if let wrapDict = dict, let dataValue  = data {
                 
-                url = wrapDict["PHImageFileURLKey"] as! URL
+                if let unwrapedUrl = wrapDict["PHImageFileURLKey"] as? URL {
+                    url = unwrapedUrl
+                }
 //                md5 = MD5().hexMD5fromData(dataValue) // md5 = String(format: "%@%i", fileName, size)
                 size = UInt64(dataValue.count)
                 semaphore.signal()

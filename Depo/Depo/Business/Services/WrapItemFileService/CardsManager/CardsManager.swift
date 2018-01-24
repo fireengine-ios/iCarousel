@@ -9,14 +9,18 @@
 import UIKit
 
 enum OperationType: String{
-    case upload                 = "Upload"
-    case sync                   = "Sync"
-    case download               = "Download"
-    case freeAppSpace           = "FreeAppSpace"
-    case freeAppSpaceWarning    = "freeAppSpaceWarning"
-    case prepareToAutoSync      = "prepareToAutoSync"
-    case autoUploadIsOff        = "autoUploadIsOff"
-    case waitingForWiFi         = "waitingForWiFi"
+    case upload                     = "Upload"
+    case sync                       = "Sync"
+    case download                   = "Download"
+    case freeAppSpace               = "FreeAppSpace"
+    case freeAppSpaceLocalWarning   = "freeAppSpaceLocalWarning"
+    case freeAppSpaceCloudWarning   = "freeAppSpaceCloudWarning"
+    case emptyStorage               = "emptyStorage"
+    case prepareToAutoSync          = "prepareToAutoSync"
+    case autoUploadIsOff            = "autoUploadIsOff"
+    case waitingForWiFi             = "waitingForWiFi"
+    case contactBacupEmpty          = "contactBacupEmpty"
+    case contactBacupOld            = "contactBacupOld"
 }
 
 typealias BlockObject = () -> Void
@@ -146,7 +150,7 @@ class CardsManager: NSObject {
         case .sync, .upload:
             stopOperationWithType(type: .prepareToAutoSync)
             stopOperationWithType(type: .waitingForWiFi)
-            stopOperationWithType(type: .freeAppSpaceWarning)
+            stopOperationWithType(type: .freeAppSpaceLocalWarning)
             stopOperationWithType(type: .freeAppSpace)
         default:
             break
@@ -155,7 +159,7 @@ class CardsManager: NSObject {
     
     func canShowPopUpByDepends(type: OperationType) -> Bool{
         switch type {
-        case .freeAppSpace, .freeAppSpaceWarning:
+        case .freeAppSpace, .freeAppSpaceLocalWarning:
             let operations: [OperationType] = [.sync, .upload]
             for operation in operations{
                 if (progresForOperation[operation] != nil){
@@ -173,10 +177,13 @@ class CardsManager: NSObject {
     
     class func popUpViewForOperaion(type: OperationType) -> BaseView{
         switch type {
-        case .freeAppSpace, .freeAppSpaceWarning:
+        case .freeAppSpace:
             let view = FreeUpSpacePopUp.initFromNib()
             view.configurateWithType(viewType: type)
             return view
+        case .freeAppSpaceCloudWarning, .freeAppSpaceLocalWarning, .emptyStorage:
+            let popUp = StorageCard.initFromNib()
+            return popUp
         case .download, .sync, .upload:
             let popUp = ProgressPopUp.initFromNib()
             popUp.configurateWithType(viewType: type)
@@ -188,6 +195,10 @@ class CardsManager: NSObject {
             return AutoUploadIsOffPopUp.initFromNib()
         case .waitingForWiFi:
             return WaitingForWiFiPopUp.initFromNib()
+        case .contactBacupEmpty:
+            return ContactBackupEmpty.initFromNib()
+        case .contactBacupOld:
+            return ContactBackupOld.initFromNib()
         }
     }
     
