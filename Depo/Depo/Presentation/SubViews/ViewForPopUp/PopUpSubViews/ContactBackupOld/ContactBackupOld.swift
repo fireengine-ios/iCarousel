@@ -25,11 +25,11 @@ class ContactBackupOld: BaseView {
         
         titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel?.textColor = ColorConstants.textGrayColor
-        titleLabel?.text = TextConstants.homePageContactBacupTitle
+        titleLabel?.text = TextConstants.homePageContactBacupOldTitle
         
         subTitle?.font = UIFont.TurkcellSaturaRegFont(size: 12)
         subTitle?.textColor = ColorConstants.textGrayColor
-        subTitle?.text = TextConstants.homePageContactBacupSubTitle
+        subTitle?.text = TextConstants.homePageContactBacupOldSubTitle
         
         bacupButton?.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         bacupButton?.setTitleColor(ColorConstants.blueColor, for: .normal)
@@ -38,12 +38,11 @@ class ContactBackupOld: BaseView {
         lastUpdateLabel?.font = UIFont.TurkcellSaturaRegFont(size: 14)
         lastUpdateLabel?.textColor = ColorConstants.darkBorder
         lastUpdateLabel?.text = TextConstants.homePageContactBacupLastUpate
-
     }
     
     
     @IBAction func onCloseButton(){
-        
+        CardsManager.default.stopOperationWithType(type: .contactBacupOld)
     }
     
     @IBAction func onBackupButton(){

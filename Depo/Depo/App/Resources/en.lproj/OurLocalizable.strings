@@ -369,6 +369,8 @@
 "Contact Backup" = "Contact Backup";
 "Your last contact update was %d months ago!" = "Your last contact update was %d months ago!";
 "It has been %d months since you last updated your contacts, update now to never loose any of your contacts." = "It has been %d months since you last updated your contacts, update now to never loose any of your contacts.";
+"Your contact list looks empty" = "Your contact list looks empty";
+"You don’t have any contacts in your profile, backup your contacts now!" = "You don’t have any contacts in your profile, backup your contacts now!";
 "Backup" = "Backup";
 "Last update:" = "Last update:";
 "Upload" = "Upload";

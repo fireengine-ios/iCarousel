@@ -8,8 +8,25 @@
 
 import UIKit
 
-class ContactBackupEmpty: BaseView {
+class ContactBackupEmpty: ContactBackupOld {
 
+    override func configurateView(){
+        super.configurateView()
+        
+        titleLabel?.text = TextConstants.homePageContactBacupEmptyTitle
+        
+        subTitle?.text = TextConstants.homePageContactBacupEmptySubTitle
+        
+        lastUpdateLabel?.text = ""
+    }
     
+    
+    @IBAction override func onCloseButton(){
+        CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
+    }
+    
+    @IBAction override func onBackupButton(){
+        
+    }
 
 }

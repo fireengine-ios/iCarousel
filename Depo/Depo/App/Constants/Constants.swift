@@ -258,8 +258,10 @@ struct TextConstants {
     
     //MARK: Home page contact bacup
     static let homePageContactBacupHeader = NSLocalizedString("Contact Backup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let homePageContactBacupTitle = NSLocalizedString("Your last contact update was %d months ago!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let homePageContactBacupSubTitle = NSLocalizedString("It has been %d months since you last updated your contacts, update now to never loose any of your contacts.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupOldTitle = NSLocalizedString("Your last contact update was %d months ago!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupOldSubTitle = NSLocalizedString("It has been %d months since you last updated your contacts, update now to never loose any of your contacts.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupEmptyTitle = NSLocalizedString("Your contact list looks empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupEmptySubTitle = NSLocalizedString("You don’t have any contacts in your profile, backup your contacts now!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homePageContactBacupButton = NSLocalizedString("Backup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homePageContactBacupLastUpate = NSLocalizedString("Last update:", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     

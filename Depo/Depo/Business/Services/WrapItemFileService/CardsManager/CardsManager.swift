@@ -17,6 +17,8 @@ enum OperationType: String{
     case prepareToAutoSync      = "prepareToAutoSync"
     case autoUploadIsOff        = "autoUploadIsOff"
     case waitingForWiFi         = "waitingForWiFi"
+    case contactBacupEmpty      = "contactBacupEmpty"
+    case contactBacupOld        = "contactBacupOld"
 }
 
 typealias BlockObject = () -> Void
@@ -188,6 +190,10 @@ class CardsManager: NSObject {
             return AutoUploadIsOffPopUp.initFromNib()
         case .waitingForWiFi:
             return WaitingForWiFiPopUp.initFromNib()
+        case .contactBacupEmpty:
+            return ContactBackupEmpty.initFromNib()
+        case .contactBacupOld:
+            return ContactBackupOld.initFromNib()
         }
     }
     
