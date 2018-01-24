@@ -141,9 +141,7 @@ final class UploadService: BaseRequestService {
             return (self.uploadOperations.first(where: { (operation) -> Bool in
                 if operation.item.md5 == item.md5 && operation.uploadType?.isContained(in: [.autoSync, .fromHomePage]) ?? false {
                     operation.cancel()
-                    if let index = self.uploadOperations.index(of: operation){
-                        self.uploadOperations.remove(at: index)
-                    }
+                    self.uploadOperations.removeFirstIfExists(operation)
                     return false
                 }
                 return operation.item.md5 == item.md5
@@ -174,9 +172,7 @@ final class UploadService: BaseRequestService {
                     }
                 }
                 
-                if let index = self.uploadOperations.index(of: finishedOperation){
-                    self.uploadOperations.remove(at: index)
-                }
+                self.uploadOperations.removeFirstIfExists(finishedOperation)
                 
                 if let error = error {
                     print("AUTOSYNC: \(error.localizedDescription)")
@@ -224,9 +220,7 @@ final class UploadService: BaseRequestService {
             return (self.uploadOperations.first(where: { (operation) -> Bool in
                 if operation.item.md5 == item.md5 && operation.uploadType == .autoSync && !operation.isExecuting {
                     operation.cancel()
-                    if let index = self.uploadOperations.index(of: operation){
-                        self.uploadOperations.remove(at: index)
-                    }
+                    self.uploadOperations.removeFirstIfExists(operation)
                     return false
                 }
                 return operation.item.md5 == item.md5
@@ -251,9 +245,7 @@ final class UploadService: BaseRequestService {
                     return
                 }
                 
-                if let index = self.uploadOperations.index(of: finishedOperation){
-                    self.uploadOperations.remove(at: index)
-                }
+                self.uploadOperations.removeFirstIfExists(finishedOperation)
                 
                 let checkIfFinished = {
                     if self.uploadOperations.filter({ $0.uploadType == .fromHomePage }).isEmpty {
@@ -328,9 +320,7 @@ final class UploadService: BaseRequestService {
                     return
                 }
                 
-                if let index = self.uploadOperations.index(of: finishedOperation){
-                    self.uploadOperations.remove(at: index)
-                }
+                self.uploadOperations.removeFirstIfExists(finishedOperation)
                 
                 let checkIfFinished = {
                     if self.uploadOperations.filter({ $0.uploadType == .autoSync }).isEmpty {
@@ -395,9 +385,7 @@ final class UploadService: BaseRequestService {
             var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .syncToUse })
             operationsToRemove.forEach { (operation) in
                 operation.cancel()
-                if let index = self.uploadOperations.index(of: operation) {
-                    self.uploadOperations.remove(at: index)
-                }
+                self.uploadOperations.removeFirstIfExists(operation)
             }
             operationsToRemove.removeAll()
         }
@@ -408,9 +396,7 @@ final class UploadService: BaseRequestService {
             var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .fromHomePage })
             operationsToRemove.forEach { (operation) in
                 operation.cancel()
-                if let index = self.uploadOperations.index(of: operation) {
-                    self.uploadOperations.remove(at: index)
-                }
+                self.uploadOperations.removeFirstIfExists(operation)
             }
             operationsToRemove.removeAll()
         }
@@ -427,9 +413,7 @@ final class UploadService: BaseRequestService {
                 if operation.uploadType == .autoSync &&
                     ((video && operation.item.fileType == .video) || (photo && operation.item.fileType == .image)) {
                     operation.cancel()
-                    if let index = self.uploadOperations.index(of: operation){
-                        self.uploadOperations.remove(at: index)
-                    }
+                    self.uploadOperations.removeFirstIfExists(operation)
                 }
             })
         }
@@ -444,9 +428,7 @@ final class UploadService: BaseRequestService {
             self.uploadOperations.forEach({ (operation) in
                 if let asset = operation.item.asset, !operation.isCancelled, assets.contains(asset) {
                     operation.cancel()
-                    if let index = self.uploadOperations.index(of: operation){
-                        self.uploadOperations.remove(at: index)
-                    }
+                    self.uploadOperations.removeFirstIfExists(operation)
                 }
             })
             
