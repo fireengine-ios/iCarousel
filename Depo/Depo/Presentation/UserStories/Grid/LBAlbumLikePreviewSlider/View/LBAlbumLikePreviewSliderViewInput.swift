@@ -9,6 +9,4 @@
 protocol LBAlbumLikePreviewSliderViewInput: class {
 
     func setupInitialState()
-    
-    func setupCollectionView()//withItems items: [Item])
 }
