@@ -54,11 +54,11 @@ final class FreeUpSpacePopUp: BaseView {
             titleLabel.isHidden = false
             imageView.isHidden = false
             
-        case .freeAppSpaceWarning:
-            bigTitleLabel.text = TextConstants.freeAppSpacePopUpTextWaring
-            bigTitleLabel.isHidden = false
-            titleLabel.isHidden = true
-            imageView.isHidden = true
+//        case .freeAppSpaceWarning:
+//            bigTitleLabel.text = TextConstants.freeAppSpacePopUpTextWaring
+//            bigTitleLabel.isHidden = false
+//            titleLabel.isHidden = true
+//            imageView.isHidden = true
             
         default:
             return

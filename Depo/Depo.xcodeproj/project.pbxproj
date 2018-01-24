@@ -363,6 +363,10 @@
 		7CD1F91D1F0288DC0028F51A /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1F9101F0288DC0028F51A /* WelcomeViewController.xib */; };
 		7CD1F91E1F0288DC0028F51A /* WelcomeViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F9111F0288DC0028F51A /* WelcomeViewInput.swift */; };
 		7CD1F91F1F0288DC0028F51A /* WelcomeViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F9121F0288DC0028F51A /* WelcomeViewOutput.swift */; };
+		7CD7C2A320189C6C009F6D3D /* StorageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C2A220189C6C009F6D3D /* StorageCard.swift */; };
+		7CD7C2A420189C6C009F6D3D /* StorageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C2A220189C6C009F6D3D /* StorageCard.swift */; };
+		7CD7C2A620189E24009F6D3D /* StorageCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD7C2A520189E24009F6D3D /* StorageCard.xib */; };
+		7CD7C2A720189E24009F6D3D /* StorageCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD7C2A520189E24009F6D3D /* StorageCard.xib */; };
 		7CDABD051F1E3A6300C8CC16 /* UserProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCF41F1E3A6300C8CC16 /* UserProfileConfigurator.swift */; };
 		7CDABD061F1E3A6300C8CC16 /* UserProfileInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCF51F1E3A6300C8CC16 /* UserProfileInitializer.swift */; };
 		7CDABD071F1E3A6300C8CC16 /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCF71F1E3A6300C8CC16 /* UserProfileInteractor.swift */; };
@@ -3538,6 +3542,8 @@
 		7CD1F9101F0288DC0028F51A /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		7CD1F9111F0288DC0028F51A /* WelcomeViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewInput.swift; sourceTree = "<group>"; };
 		7CD1F9121F0288DC0028F51A /* WelcomeViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewOutput.swift; sourceTree = "<group>"; };
+		7CD7C2A220189C6C009F6D3D /* StorageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCard.swift; sourceTree = "<group>"; };
+		7CD7C2A520189E24009F6D3D /* StorageCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StorageCard.xib; sourceTree = "<group>"; };
 		7CDABCF41F1E3A6300C8CC16 /* UserProfileConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileConfigurator.swift; sourceTree = "<group>"; };
 		7CDABCF51F1E3A6300C8CC16 /* UserProfileInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileInitializer.swift; sourceTree = "<group>"; };
 		7CDABCF71F1E3A6300C8CC16 /* UserProfileInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileInteractor.swift; sourceTree = "<group>"; };
@@ -7235,6 +7241,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7CD7C2A120189A27009F6D3D /* StorageCard */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7C2A220189C6C009F6D3D /* StorageCard.swift */,
+				7CD7C2A520189E24009F6D3D /* StorageCard.xib */,
+			);
+			path = StorageCard;
+			sourceTree = "<group>";
+		};
 		7CDABCF21F1E3A6300C8CC16 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -7316,6 +7331,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7CD7C2A120189A27009F6D3D /* StorageCard */,
 				7C257B3520174C1100CB56F8 /* ContactBackupOld */,
 				7C257B3420174BC400CB56F8 /* ContactBackupEmpty */,
 				7CC11AAC1FE2768B00AF022D /* WaitingForWiFiPopUp */,
@@ -11072,6 +11088,7 @@
 				8C06AFF72008AD71003D8E05 /* kontrast.png in Resources */,
 				8C06AF5B2008AD70003D8E05 /* daire@3x.png in Resources */,
 				8C06B0CD2008AD71003D8E05 /* sample_bw@3x.png in Resources */,
+				7CD7C2A720189E24009F6D3D /* StorageCard.xib in Resources */,
 				8C06B0332008AD71003D8E05 /* ok_selected@3x.png in Resources */,
 				8C06B05D2008AD71003D8E05 /* paylas_akilli_depo@3x.png in Resources */,
 				8C06B0732008AD71003D8E05 /* paylas_fb@2x.png in Resources */,
@@ -12046,6 +12063,7 @@
 				8C06B0682008AD71003D8E05 /* Paylas_butnuna_basin@3x.png in Resources */,
 				7C3A74531F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.xib in Resources */,
 				8C06AF3E2008AD70003D8E05 /* crop.png in Resources */,
+				7CD7C2A620189E24009F6D3D /* StorageCard.xib in Resources */,
 				8C06AF5A2008AD70003D8E05 /* daire@3x.png in Resources */,
 				8C06AEB82008AD70003D8E05 /* akilli_depo_beyaz@2x.png in Resources */,
 				8C06AED22008AD70003D8E05 /* beyaz_cerceve@3x.png in Resources */,
@@ -13060,6 +13078,7 @@
 				8C0E8F261FDEBDFF00789C91 /* UrlExtension.swift in Sources */,
 				8C0E8F271FDEBDFF00789C91 /* CreateStoryNameRouter.swift in Sources */,
 				8C0E8F281FDEBDFF00789C91 /* SettingsInteractorOutput.swift in Sources */,
+				7CD7C2A420189C6C009F6D3D /* StorageCard.swift in Sources */,
 				8C0E8F291FDEBDFF00789C91 /* SettingsInteractor.swift in Sources */,
 				8CD2B3B71FE7B43D00280547 /* WaitingForWiFiPopUp.swift in Sources */,
 				8C0E8F2A1FDEBDFF00789C91 /* ImportPhotosRouter.swift in Sources */,
@@ -13332,6 +13351,7 @@
 				7CD1F91A1F0288DC0028F51A /* WelcomeRouter.swift in Sources */,
 				CE8F44E41F6AAFA80062C2E0 /* UITableView+Extensions.swift in Sources */,
 				CE27C31E1EF9515400D4D156 /* RequestService.swift in Sources */,
+				7CD7C2A320189C6C009F6D3D /* StorageCard.swift in Sources */,
 				CE47D1FC1FD147BA00888D2E /* InsetsTextField.swift in Sources */,
 				CE907A311F94D49900D2F8CE /* MulticastDelegate.swift in Sources */,
 				7C1F89951F7140AF00740177 /* PopUpSwipeCell.swift in Sources */,
