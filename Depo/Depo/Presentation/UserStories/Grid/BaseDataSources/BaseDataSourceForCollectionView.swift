@@ -806,24 +806,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        return
-        
-        guard let unwrapedObject = itemForIndexPath(indexPath: indexPath) as? Item else {
-            return
-        }
-        
-        //        fileDataSource.cancelImgeRequest(path: unwrapedObject.patchToPreview)
-        
-        guard let cell_ = cell as? CollectionViewCellDataProtocol else {
-            return
-        }
-        //        cell_.setImage(image: nil)
-        cell_.setSelection(isSelectionActive: isSelectionStateActive,
-                           isSelected: isObjctSelected(object: unwrapedObject))
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let object = itemForIndexPath(indexPath: indexPath)
@@ -1098,6 +1080,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return !serversUUIDs.contains($0.uuid)
             })
             
+            
             let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
             let predicate = PredicateRules().allLocalObjectsForObjects(objects: serverObjects)
             let sortDescriptors = CollectionSortingRules(sortingRules: currentSortType).rule.sortDescriptors
@@ -1157,6 +1140,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]){
+        if objectsForDelete.isEmpty && objectsForUpdate.isEmpty{
+            return
+        }
+        
         var arrayOfPathForDelete = [IndexPath]()
         var arrayOfPathForUpdate = [IndexPath]()
         var arrayOfSection = [Int]()
@@ -1254,6 +1241,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String){
         if let uuid = parentUUID, uuid == albumUUID{
+            deleteItems(items: items)
+        }
+    }
+    
+    func filesMoved(items: [Item], toFolder folderUUID: String){
+        if let uuid = parentUUID, uuid != folderUUID{
+            deleteItems(items: items)
+        }else if let unwrapedFilters = originalFilters,
+            canShowFolderFilters(filters: unwrapedFilters) {
             deleteItems(items: items)
         }
     }

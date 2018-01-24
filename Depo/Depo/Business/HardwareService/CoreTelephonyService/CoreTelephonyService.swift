@@ -63,9 +63,9 @@ import CoreTelephony
     }
     
     func callingCountryCode() -> String {
-        guard ReachabilityService().isReachableViaWWAN == true else {
-            return ""
-        }
+//        guard ReachabilityService().isReachableViaWWAN else {
+//            return ""
+//        }
         
         let dict  = callingCodeMap()
         guard let isoCountryCode = carrier?.isoCountryCode?.uppercased() else {
