@@ -276,7 +276,7 @@
 "Your last back up was a few seconds ago." = "Your last back up was a few seconds ago.";
 "You never backed up your contacts" = "You never backed up your contacts";
 "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.";
-"%d%% Restored up…" = "%d%% Restored up…";
+"%%%d Restored up…" = "%%%d Restored up…";
 "%d%% Backed up…" = "%d%% Backed up…";
 "Restored up %d Contacts" = "Restored up %d Contacts";
 "Backed up %d Contacts" = "Backed up %d Contacts";
