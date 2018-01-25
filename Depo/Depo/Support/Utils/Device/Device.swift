@@ -86,7 +86,10 @@ class Device {
     }
     
     static var locale: String {
-       return Locale.current.languageCode ?? "en"
+        guard let preferedLanguadge = Locale.preferredLanguages.first else {
+            return "en"
+        }
+        return String(preferedLanguadge[..<String.Index(encodedOffset: 2)])
     }
     
     static var winSize = UIScreen.main.bounds

@@ -78,6 +78,12 @@ class MailVerificationViewController: BaseViewController {
             UIApplication.showErrorAlert(message: TextConstants.registrationCellPlaceholderEmail)
             return
         }
+       
+        guard Validator.isValid(email: email) else {
+            UIApplication.showErrorAlert(message: TextConstants.notCorrectEmail)
+            return
+        }
+        
         showSpiner()
         let newMail = inputTextField.text ?? ""
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),

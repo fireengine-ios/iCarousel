@@ -56,6 +56,14 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func changeTo(name: String, email: String, number: String){
+        if !Validator.isValid(email: email) {
+            output.showError(error: TextConstants.errorInvalidEmail)
+            return
+        }
+        if !Validator.isValid(phone: number) {
+            output.showError(error: TextConstants.errorInvalidPhone)
+            return
+        }
         updateNameIfNeed(name: name, email: email, number: number)
     }
     

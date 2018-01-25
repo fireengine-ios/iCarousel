@@ -978,11 +978,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        
         if !needShowProgressInCell{
-            delegate?.needReloadData?()
+            //delegate?.needReloadData?()
             return
         }
+        
         
         if let cell = getCellForFile(objectUUID: file.uuid){
             cell.finishedUploadForObject()
@@ -1251,6 +1251,21 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }else if let unwrapedFilters = originalFilters,
             canShowFolderFilters(filters: unwrapedFilters) {
             deleteItems(items: items)
+        }
+    }
+    
+    func syncFinished() {
+        if isLocalOnly(){
+            return
+        }
+        if let unwrapedFilters = originalFilters  {
+            if isFavoritesOnly(filters: unwrapedFilters) || isAlbumDetail(filters: unwrapedFilters){
+                return
+            }
+        }
+        
+        if !needShowProgressInCell{
+            delegate?.needReloadData?()
         }
     }
     
