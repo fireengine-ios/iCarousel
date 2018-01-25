@@ -2347,6 +2347,7 @@
 		8C0E90731FDEBDFF00789C91 /* CreateStoryPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C66E8B31F979C6800D98F27 /* CreateStoryPreviewViewController.xib */; };
 		8C11C42E1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */; };
 		8C12F695CDDDA2217C118FAD /* HomeHeaderRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5904EF8C252E5010FDA01CEA /* HomeHeaderRouter.swift */; };
+		8C178B4B2019AF0C00A45581 /* Alamofire+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4B0292017731400D06CA9 /* Alamofire+Response.swift */; };
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
 		8C3B70B81F31B0BC0019715A /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3B70B71F31B0BC0019715A /* UIButtonExtension.swift */; };
@@ -12597,6 +12598,7 @@
 				8C0E8D461FDEBDFF00789C91 /* WiFiSyncInteractorInput.swift in Sources */,
 				8C0B91BE201710EB00A5BA81 /* TitleView.swift in Sources */,
 				8C0E8D471FDEBDFF00789C91 /* String+Int.swift in Sources */,
+				8C178B4B2019AF0C00A45581 /* Alamofire+Response.swift in Sources */,
 				8C0E8D481FDEBDFF00789C91 /* CurioUtil.m in Sources */,
 				8C0E8D491FDEBDFF00789C91 /* CustomTabBar.swift in Sources */,
 				8C0E8D4A1FDEBDFF00789C91 /* WelcomeConfigurator.swift in Sources */,
