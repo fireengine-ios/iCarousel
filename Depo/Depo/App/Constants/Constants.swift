@@ -230,8 +230,8 @@ struct TextConstants {
     static let homeWelcomTextSmall = NSLocalizedString("You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. ", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: - Camera alert
-    static let cameraAccessAlertTitle = NSLocalizedString("Caution!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cameraAccessAlertText = NSLocalizedString("You can't take photos with disabled camera. Please turn the camera on in settings.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let cameraAccessAlertTitle = NSLocalizedString("Error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let cameraAccessAlertText = NSLocalizedString("Error occurred while accessing your photos.\nPlease check your settings.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let cameraAccessAlertGoToSettings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let cameraAccessAlertNo = NSLocalizedString("No", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
