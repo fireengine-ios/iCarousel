@@ -20,6 +20,7 @@ struct TextConstants {
     static let registrationCellTitleReEnterPassword = NSLocalizedString("Re-Enter Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationCellPlaceholderEmail = NSLocalizedString(" You have to fill in your mail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let notCorrectEmail = NSLocalizedString("Please enter valid Email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let notValidEmail = NSLocalizedString("Email field is invalid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationCellPlaceholderPassword = NSLocalizedString(" You have to fill in a password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationCellPlaceholderReFillPassword = NSLocalizedString(" You have to fill in a password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationTitleText = NSLocalizedString("Register to lifebox and get a 5 GB of storage for free!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
