@@ -150,6 +150,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         operationButtonsStackView.isHidden = false
         backupDateLabel.isHidden = false
         manageContactsButton.isHidden = false
+        viewForInformationAfterBackUp.isHidden = false
     }
     
     func setOperationState(operationType: SyncOperationType) {
@@ -185,6 +186,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         default:
             break
         }
+    }
+    
+    func resetProgress() {
+        gradientLoaderIndicator.progress = 0
     }
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
