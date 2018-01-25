@@ -22,7 +22,7 @@ final class UploadService: BaseRequestService {
     
     
     private var allSyncOperationsCount: Int {
-        return uploadOperations.filter({ $0.uploadType == .autoSync && !$0.isCancelled }).count + finishedSyncOperationsCount
+        return uploadOperations.filter({ $0.uploadType == .autoSync && !$0.isRealCancel }).count + finishedSyncOperationsCount
     }
     private var finishedSyncOperationsCount : Int {
         return finishedPhotoSyncOperationsCount + finishedVideoSyncOperationsCount
@@ -32,19 +32,20 @@ final class UploadService: BaseRequestService {
     
     
     private var allUploadOperationsCount: Int {
-        return uploadOperations.filter({ $0.uploadType == .fromHomePage && !$0.isCancelled }).count + finishedUploadOperationsCount
+        return uploadOperations.filter({ $0.uploadType == .fromHomePage && !$0.isRealCancel }).count + finishedUploadOperationsCount
     }
     private var finishedUploadOperationsCount = 0
     
     
     private var allSyncToUseOperationsCount : Int {
-        return uploadOperations.filter({ $0.uploadType == .syncToUse && !$0.isCancelled }).count + finishedSyncToUseOperationsCount
+        return uploadOperations.filter({ $0.uploadType == .syncToUse && !$0.isRealCancel }).count + finishedSyncToUseOperationsCount
     }
     private var finishedSyncToUseOperationsCount = 0
     
 
     override init() {
         uploadQueue.maxConcurrentOperationCount = 1
+        uploadQueue.qualityOfService = .userInteractive
     
         super.init()
         SingletonStorage.shared.uploadProgressDelegate = self
@@ -304,12 +305,12 @@ final class UploadService: BaseRequestService {
         guard !itemsToSync.isEmpty, let firstObject = itemsToSync.first else {
             return nil
         }
-
+        
         print("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
         CardsManager.default.setProgressForOperationWith(type: .sync,
-                                                                    object: firstObject,
-                                                                    allOperations: self.allSyncOperationsCount + itemsToSync.count,
-                                                                    completedOperations: self.finishedSyncOperationsCount)
+                                                         object: firstObject,
+                                                         allOperations: self.allSyncOperationsCount + itemsToSync.count,
+                                                         completedOperations: self.finishedSyncOperationsCount)
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
@@ -319,7 +320,7 @@ final class UploadService: BaseRequestService {
                 guard let `self` = self else {
                     return
                 }
-                
+
                 self.uploadOperations.removeFirstIfExists(finishedOperation)
                 
                 let checkIfFinished = {
@@ -330,7 +331,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if let error = error {
-                    print("AUTOSYNC: \(error.localizedDescription)")
+//                    print("AUTOSYNC: \(error.localizedDescription)")
                     if error.description == TextConstants.canceledOperationTextError {
                         //operation was cancelled - not an actual error
                         self.showSyncCardProgress()
@@ -387,6 +388,7 @@ final class UploadService: BaseRequestService {
                 operation.cancel()
                 self.uploadOperations.removeFirstIfExists(operation)
             }
+            print("AUTOSYNC: removed \(operationsToRemove.count) operations")
             operationsToRemove.removeAll()
         }
     }
@@ -406,16 +408,23 @@ final class UploadService: BaseRequestService {
         dispatchQueue.async {
             print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
             
-            if photo { self.finishedPhotoSyncOperationsCount = 0 }
-            if video { self.finishedVideoSyncOperationsCount = 0 }
+            var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .autoSync &&
+                ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
             
-            self.uploadOperations.forEach({ (operation) in
-                if operation.uploadType == .autoSync &&
-                    ((video && operation.item.fileType == .video) || (photo && operation.item.fileType == .image)) {
-                    operation.cancel()
-                    self.uploadOperations.removeFirstIfExists(operation)
-                }
-            })
+            operationsToRemove.forEach { (operation) in
+                operation.cancel()
+                self.uploadOperations.removeFirstIfExists(operation)
+            }
+            print("AUTOSYNC: removed \(operationsToRemove.count) operations")
+            operationsToRemove.removeAll()
+            
+            if photo {
+                self.finishedPhotoSyncOperationsCount = 0
+            }
+            if video {
+                self.finishedVideoSyncOperationsCount = 0
+            }
+            
         }
     }
     
@@ -425,13 +434,19 @@ final class UploadService: BaseRequestService {
         }
         
         dispatchQueue.async {
-            self.uploadOperations.forEach({ (operation) in
-                if let asset = operation.item.asset, !operation.isCancelled, assets.contains(asset) {
-                    operation.cancel()
-                    self.uploadOperations.removeFirstIfExists(operation)
+            var operationsToRemove = self.uploadOperations.filter { (operation) -> Bool in
+                if let asset = operation.item.asset {
+                    return !operation.isCancelled && assets.contains(asset)
                 }
-            })
+                return false
+            }
             
+            operationsToRemove.forEach { (operation) in
+                operation.cancel()
+                self.uploadOperations.removeFirstIfExists(operation)
+            }
+            print("AUTOSYNC: removed \(operationsToRemove.count) operations")
+            operationsToRemove.removeAll()
         }
     }
     
@@ -594,6 +609,14 @@ class UploadOperations: Operation {
         } else {
             isRealCancel = true
         }
+        
+        if let fail_ = fail {
+            fail_(ErrorResponse.string(TextConstants.canceledOperationTextError))
+        }
+        
+        if let handler = handler {
+            handler(self, ErrorResponse.string(TextConstants.canceledOperationTextError))
+        }
     }
     
     override func main() {
@@ -604,13 +627,13 @@ class UploadOperations: Operation {
                 req.cancel()
             }
             
-            if let fail_ = fail {
-                fail_(ErrorResponse.string(TextConstants.canceledOperationTextError))
-            }
-            
-            if let handler = handler {
-                handler(self, ErrorResponse.string(TextConstants.canceledOperationTextError))
-            }
+//            if let fail_ = fail {
+//                fail_(ErrorResponse.string(TextConstants.canceledOperationTextError))
+//            }
+//            
+//            if let handler = handler {
+//                handler(self, ErrorResponse.string(TextConstants.canceledOperationTextError))
+//            }
             
             semaphore.signal()
             return
