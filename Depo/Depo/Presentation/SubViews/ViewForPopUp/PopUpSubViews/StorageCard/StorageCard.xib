@@ -37,7 +37,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eJ-8T-ehP">
-                            <rect key="frame" x="14" y="14" width="347" height="21"/>
+                            <rect key="frame" x="14" y="14" width="321" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="mfk-XS-fH3"/>
                             </constraints>
@@ -59,7 +59,7 @@
                     <constraints>
                         <constraint firstItem="kHh-wG-6sD" firstAttribute="top" secondItem="Oa9-hs-Yj6" secondAttribute="top" id="7pq-ux-mCJ"/>
                         <constraint firstItem="Qe9-qo-i3A" firstAttribute="top" secondItem="Oa9-hs-Yj6" secondAttribute="top" id="HjR-ew-rAw"/>
-                        <constraint firstAttribute="trailing" secondItem="9eJ-8T-ehP" secondAttribute="trailing" constant="14" id="IXI-SC-cqx"/>
+                        <constraint firstAttribute="trailing" secondItem="9eJ-8T-ehP" secondAttribute="trailing" constant="40" id="IXI-SC-cqx"/>
                         <constraint firstAttribute="trailing" secondItem="kHh-wG-6sD" secondAttribute="trailing" id="LY3-Zl-WWE"/>
                         <constraint firstItem="9eJ-8T-ehP" firstAttribute="leading" secondItem="Oa9-hs-Yj6" secondAttribute="leading" constant="14" id="NUe-x4-Uo2"/>
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mY8-Qy-c8h" secondAttribute="bottom" constant="14" id="cIC-3j-z7I"/>

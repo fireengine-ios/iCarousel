@@ -183,6 +183,7 @@ class CardsManager: NSObject {
             return view
         case .freeAppSpaceCloudWarning, .freeAppSpaceLocalWarning, .emptyStorage:
             let popUp = StorageCard.initFromNib()
+            popUp.configurateWithType(viewType: type)
             return popUp
         case .download, .sync, .upload:
             let popUp = ProgressPopUp.initFromNib()

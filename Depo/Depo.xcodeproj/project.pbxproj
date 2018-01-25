@@ -7250,6 +7250,13 @@
 			path = StorageCard;
 			sourceTree = "<group>";
 		};
+		7CD7C2A82019AFF7009F6D3D /* CollageCard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CollageCard;
+			sourceTree = "<group>";
+		};
 		7CDABCF21F1E3A6300C8CC16 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -7331,6 +7338,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7CD7C2A82019AFF7009F6D3D /* CollageCard */,
 				7CD7C2A120189A27009F6D3D /* StorageCard */,
 				7C257B3520174C1100CB56F8 /* ContactBackupOld */,
 				7C257B3420174BC400CB56F8 /* ContactBackupEmpty */,
