@@ -41,8 +41,8 @@ extension CoreDataStack {
             
             let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
             
-//            let newBgcontext = self.newChildBackgroundContext
-//            let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
+            let newBgcontext = self.newChildBackgroundContext
+            let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
             
             debugPrint("number of not saved  ", notSaved.count)
             let start = Date().timeIntervalSince1970
@@ -164,8 +164,8 @@ extension CoreDataStack {
             filesTypesArray.append(FileType.image.valueForCoreDataMapping())
         }
         
-        let newBgcontext = self.newChildBackgroundContext
-        let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
+//        let newBgcontext = self.newChildBackgroundContext
+//        let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
         
         
         
