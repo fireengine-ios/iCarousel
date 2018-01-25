@@ -44,13 +44,14 @@ final class FilterPhotoCard: BaseView {
             bottomButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
             bottomButton.isExclusiveTouch = true
             bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            bottomButton.setTitleColor(ColorConstants.blueColor.darker(), for: .highlighted)
             bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         }
     }
     
-    @IBOutlet private weak var drawingView: ACEDrawingView!
+    @IBOutlet private weak var photoImageView: UIImageView!
     
-    var cardType = CardActionType.save {
+    private var cardType = CardActionType.save {
         didSet {
             switch cardType {
             case .save:
@@ -61,31 +62,20 @@ final class FilterPhotoCard: BaseView {
         }
     }
     
-    /// not working
-    func set(image: UIImage) {
+    private func set(image: UIImage) {
         cardType = .save
-        
-//        let color = UIColor(red: 1, green: 230.0/255.0, blue: 0, alpha: 0.6)
-        
-//        drawingView.bgImageView.contentMode = .scaleAspectFill
-//        drawingView.bgImageView.image = image
-        
-        drawingView.loadImage(image)
-//        drawingView.originalImageUndo(FilterEffect)
-//        drawingView.addUndo(forOtherEffects: image, for: FilterEffect, forFrameImage: nil, for: drawingView.transform)
-//        drawingView.loadImage(image)
-    }
-    
-    func getFilteredImage() -> UIImage {
-        return UIImage()
+        let oldieFilterColor = UIColor(red: 1, green: 230.0/255.0, blue: 0, alpha: 0.4)
+        photoImageView.image = image.grayScaleImage?.mask(with: oldieFilterColor)
     }
     
     private func saveToDevice(image: UIImage) {
+        bottomButton.isEnabled = false
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(saved(image:error:contextInfo:)), nil)
     }
     
     @objc private func saved(image: UIImage, error: Error?, contextInfo: UnsafeRawPointer) {
         DispatchQueue.main.async {
+            self.bottomButton.isEnabled = true
             if let error = error {
                 UIApplication.showErrorAlert(message: error.localizedDescription)
             } else {
@@ -94,16 +84,16 @@ final class FilterPhotoCard: BaseView {
         }
     }
     
-    @IBAction func actionCloseButton(){
+    @IBAction private func actionCloseButton(){
         /// will be need to add to the Type enum
         //CardsManager.default.stopOperationWithType(type: .)
     }
     
-    @IBAction func actionBottomButton(_ sender: UIButton) {
+    @IBAction private func actionBottomButton(_ sender: UIButton) {
         switch cardType {
         case .save:
-            ///saveToDevice(image: )
-            break
+            guard let image = photoImageView.image else { return }
+            saveToDevice(image: image)
         case .display:
             break
         }
