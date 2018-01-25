@@ -678,7 +678,7 @@ struct TextConstants {
     static let errorExistEmail = NSLocalizedString("This e-mail address is already registered. Please enter another e-mail address.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorVerifyEmail = NSLocalizedString("Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorInvalidPhone = NSLocalizedString("Phone number is in an invalid format.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let errorExistPhone = NSLocalizedString("A user with the given phone number already exists.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let errorExistPhone = NSLocalizedString("This GSM Number is already registered. Please enter another GSM Number.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorInvalidPassword = NSLocalizedString("Password is invalid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorInvalidPasswordConsecutive = NSLocalizedString("It is not allowed that the password consists of consecutive characters.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorInvalidPasswordSame = NSLocalizedString("It is not allowed that the password consists of all the same characters.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
