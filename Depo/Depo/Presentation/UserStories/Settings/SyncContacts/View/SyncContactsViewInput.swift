@@ -12,6 +12,7 @@ protocol SyncContactsViewInput: class {
     func setStateWithBackUp()
     func setOperationState(operationType: SyncOperationType)
     
-    func showProggress(progress :Int, forOperation operation: SyncOperationType)
+    func showProggress(progress: Int, forOperation operation: SyncOperationType)
+    func resetProgress()
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType)
 }
