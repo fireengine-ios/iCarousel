@@ -155,7 +155,9 @@ extension CoreDataStack {
     }
     
     func allLocalItemsForSync(video: Bool, image: Bool) -> [WrapData] {
-        _ = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+        let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+        let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap{ $0.localIdentifier }
+        
         var filesTypesArray = [Int16]()
         if (video){
             filesTypesArray.append(FileType.video.valueForCoreDataMapping())
@@ -163,20 +165,11 @@ extension CoreDataStack {
         if (image){
             filesTypesArray.append(FileType.image.valueForCoreDataMapping())
         }
-        
-//        let newBgcontext = self.newChildBackgroundContext
-//        let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
-        
-        
-        
+
         let context = mainContext
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@)", filesTypesArray)
+        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
         let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
         let sortedItems = items.sorted { (item1, item2) -> Bool in
-            //< correct
-            if item1.urlToFileValue == nil {
-                debugPrint("SOMETHING WENT WRONG", item1)
-            }
             return item1.fileSizeValue < item2.fileSizeValue
         }
         let currentUserID = SingletonStorage.shared.unigueUserID
