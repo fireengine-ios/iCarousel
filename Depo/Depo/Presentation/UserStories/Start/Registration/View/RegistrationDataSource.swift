@@ -96,7 +96,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
             cell.infoButtonDelegate = self
             cell.setupBaseCell(withTitle: model.title, inputText: model.inputText)
             
-            #if !DEBUG
+            #if DEBUG
                 cell.inputTextField?.text = "testMail@notRealMail.yep"
             #endif
             
@@ -104,7 +104,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
                 cell.delegate = self
                 cell.setupGSMCode(code: currentGSMCode)
                 
-                #if !DEBUG
+                #if DEBUG
                     cell.inputTextField?.text = "259092538"
                     cell.gsmCountryCodeLabel.text = "+375"
                     currentGSMCode = "+375"
