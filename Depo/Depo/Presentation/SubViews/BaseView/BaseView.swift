@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseView: UIView, NibView {
+class BaseView: UIView, NibInit {
     
     @IBOutlet weak var whiteView: UIView?
     

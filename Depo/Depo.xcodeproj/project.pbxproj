@@ -2575,6 +2575,8 @@
 		CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */; };
 		CE3AA9D61F4D96DB000157AF /* MediaItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D41F4D96DB000157AF /* MediaItem+CoreDataClass.swift */; };
 		CE3AA9D91F4EB153000157AF /* FetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D81F4EB153000157AF /* FetchService.swift */; };
+		CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D05201B11BF00173045 /* PVViewerController.swift */; };
+		CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
 		CE3F33AF1F34881800EE37E7 /* SharedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F33AE1F34881800EE37E7 /* SharedService.swift */; };
 		CE40133B1FCFE4AF006F28FD /* PromoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40133A1FCFE4AF006F28FD /* PromoView.swift */; };
 		CE4140621F0A5F6D001924E1 /* CaptchaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4140551F0A5F6D001924E1 /* CaptchaViewController.xib */; };
@@ -4629,6 +4631,8 @@
 		CE3AA9D81F4EB153000157AF /* FetchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchService.swift; sourceTree = "<group>"; };
 		CE3AF76F1F01D63D002AD17C /* EULAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAService.swift; sourceTree = "<group>"; };
 		CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
+		CE3E4D05201B11BF00173045 /* PVViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVViewerController.swift; sourceTree = "<group>"; };
+		CE3E4D06201B11BF00173045 /* PVViewerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PVViewerController.xib; sourceTree = "<group>"; };
 		CE3F33AE1F34881800EE37E7 /* SharedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedService.swift; sourceTree = "<group>"; };
 		CE40133A1FCFE4AF006F28FD /* PromoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoView.swift; sourceTree = "<group>"; };
 		CE4140551F0A5F6D001924E1 /* CaptchaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptchaViewController.xib; sourceTree = "<group>"; };
@@ -9128,6 +9132,7 @@
 				EFA74F9F1FBF378F00CF946E /* Print */,
 				CECD4E4F1FDFD69E00978BE7 /* PopUp */,
 				CE57DFAA1FDE66980065B688 /* DarkPopUp */,
+				CE3E4D09201B131600173045 /* PVViewerController */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -9570,6 +9575,15 @@
 				CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */,
 			);
 			path = ReachabilityService;
+			sourceTree = "<group>";
+		};
+		CE3E4D09201B131600173045 /* PVViewerController */ = {
+			isa = PBXGroup;
+			children = (
+				CE3E4D05201B11BF00173045 /* PVViewerController.swift */,
+				CE3E4D06201B11BF00173045 /* PVViewerController.xib */,
+			);
+			path = PVViewerController;
 			sourceTree = "<group>";
 		};
 		CE3EB30A1FC7F0AD000B70D6 /* UserStories */ = {
@@ -11693,6 +11707,7 @@
 				8C06AF9A2008AD71003D8E05 /* filtre_selected@3x.png in Resources */,
 				8C06B0AE2008AD71003D8E05 /* right@3x.png in Resources */,
 				8C06B0242008AD71003D8E05 /* ok@2x.png in Resources */,
+				CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */,
 				8C06AF6C2008AD70003D8E05 /* duz_cizgi_selected@2x.png in Resources */,
 				8C06AEBA2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				7C355E1C1F00E949003B004C /* CollectionViewCellForController.xib in Resources */,
@@ -14204,6 +14219,7 @@
 				2108C2EF8209265F3A1A5B4D /* SelectNameViewController.swift in Sources */,
 				055B2C9D579111703604F4E5 /* SelectNameModuleInput.swift in Sources */,
 				77CF7B297D6D1B75D73CACBC /* SelectNamePresenter.swift in Sources */,
+				CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */,
 				7C1F898D1F70ECB100740177 /* BaseView.swift in Sources */,
 				7CF9A9F51FA2279500242FDD /* ImageForDowload.swift in Sources */,
 				8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,

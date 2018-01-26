@@ -49,7 +49,12 @@ final class FilterPhotoCard: BaseView {
         }
     }
     
-    @IBOutlet private weak var photoImageView: UIImageView!
+    @IBOutlet private weak var photoImageView: UIImageView! {
+        didSet {
+//            set(image: #imageLiteral(resourceName: "dogFilterImage"))
+            set(image: #imageLiteral(resourceName: "Background"))
+        }
+    }
     
     private var cardType = CardActionType.save {
         didSet {
@@ -63,7 +68,8 @@ final class FilterPhotoCard: BaseView {
     }
     
     private func set(image: UIImage) {
-        cardType = .save
+        cardType = .display
+//        cardType = .save
         let oldieFilterColor = UIColor(red: 1, green: 230.0/255.0, blue: 0, alpha: 0.4)
         photoImageView.image = image.grayScaleImage?.mask(with: oldieFilterColor)
     }
@@ -90,11 +96,23 @@ final class FilterPhotoCard: BaseView {
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
+        guard let image = photoImageView.image else {
+            return
+        }
+        
         switch cardType {
         case .save:
-            guard let image = photoImageView.image else { return }
             saveToDevice(image: image)
         case .display:
+            let vc = PVViewerController.initFromNib()
+            vc.image = image
+            RouterVC().pushViewController(viewController: vc)
+//            let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: <#T##String#>, selectedItem: <#T##Item#>, allItems: <#T##[Item]#>, hideActionButtons: <#T##Bool#>)
+//
+//            let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
+//                                                                                        selectedItem: fileObject,
+//                                                                                        allItems: items)
+//            let c = controller as! PhotoVideoDetailViewController
             break
         }
     }
