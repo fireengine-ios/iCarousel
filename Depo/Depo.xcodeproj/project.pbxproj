@@ -2586,6 +2586,10 @@
 		CE44714E1F6962F00017B4F0 /* ActivityTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE44714D1F6962F00017B4F0 /* ActivityTimelineViewController.xib */; };
 		CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4516A81F7D2EF1008B1F9A /* ServerStatusError.swift */; };
 		CE47D1FC1FD147BA00888D2E /* InsetsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */; };
+		CE4851ED2018B029006B8854 /* FilterPhotoCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4851EC2018B029006B8854 /* FilterPhotoCard.xib */; };
+		CE4851EE2018B029006B8854 /* FilterPhotoCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4851EC2018B029006B8854 /* FilterPhotoCard.xib */; };
+		CE4851F02018B03A006B8854 /* FilterPhotoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4851EF2018B03A006B8854 /* FilterPhotoCard.swift */; };
+		CE4851F12018B03A006B8854 /* FilterPhotoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4851EF2018B03A006B8854 /* FilterPhotoCard.swift */; };
 		CE4CFEBF1F78F18700FB4C3D /* ResizableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEBE1F78F18700FB4C3D /* ResizableTableView.swift */; };
 		CE4CFEC11F78F94900FB4C3D /* BytesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEC01F78F94900FB4C3D /* BytesType.swift */; };
 		CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4DBF1F14AD2A00EF1F0C /* BaseRequestService.swift */; };
@@ -4636,6 +4640,8 @@
 		CE44714D1F6962F00017B4F0 /* ActivityTimelineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTimelineViewController.xib; sourceTree = "<group>"; };
 		CE4516A81F7D2EF1008B1F9A /* ServerStatusError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerStatusError.swift; sourceTree = "<group>"; };
 		CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetsTextField.swift; sourceTree = "<group>"; };
+		CE4851EC2018B029006B8854 /* FilterPhotoCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterPhotoCard.xib; sourceTree = "<group>"; };
+		CE4851EF2018B03A006B8854 /* FilterPhotoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPhotoCard.swift; sourceTree = "<group>"; };
 		CE4CFEBE1F78F18700FB4C3D /* ResizableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTableView.swift; sourceTree = "<group>"; };
 		CE4CFEC01F78F94900FB4C3D /* BytesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytesType.swift; sourceTree = "<group>"; };
 		CE4F4DBF1F14AD2A00EF1F0C /* BaseRequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequestService.swift; sourceTree = "<group>"; };
@@ -7371,6 +7377,7 @@
 				7CEA863A1FDE840800F17D9D /* AutoUploadIsOffPopUp */,
 				7CE825B91F823CDE00356AD2 /* FreeUpSpacePopUp */,
 				7C1F89861F6FFC0D00740177 /* ProgressPopUp */,
+				CE4851F22018B13A006B8854 /* FilterPhotoCard */,
 			);
 			path = PopUpSubViews;
 			sourceTree = "<group>";
@@ -9704,6 +9711,15 @@
 			path = ActivityTimeline;
 			sourceTree = "<group>";
 		};
+		CE4851F22018B13A006B8854 /* FilterPhotoCard */ = {
+			isa = PBXGroup;
+			children = (
+				CE4851EC2018B029006B8854 /* FilterPhotoCard.xib */,
+				CE4851EF2018B03A006B8854 /* FilterPhotoCard.swift */,
+			);
+			path = FilterPhotoCard;
+			sourceTree = "<group>";
+		};
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
@@ -11484,6 +11500,7 @@
 				8C06B1792008AD72003D8E05 /* topleft@3x.png in Resources */,
 				8C06B0E72008AD72003D8E05 /* sample_yellow@2x.png in Resources */,
 				8C0E905A1FDEBDFF00789C91 /* PhotosOrderCollectionViewCell.xib in Resources */,
+				CE4851EE2018B029006B8854 /* FilterPhotoCard.xib in Resources */,
 				8C0E905B1FDEBDFF00789C91 /* PackagesViewController.xib in Resources */,
 				8C06AF932008AD71003D8E05 /* filtre@2x.png in Resources */,
 				8C06B1CD2008AD72003D8E05 /* sticker_resize.png in Resources */,
@@ -11652,6 +11669,7 @@
 				7CD1F8DF1F0272E20028F51A /* UploadedItemsViewController.xib in Resources */,
 				8C06B0F42008AD72003D8E05 /* serbest_cizgi_selected@2x.png in Resources */,
 				8C06AFA42008AD71003D8E05 /* frame@2x.png in Resources */,
+				CE4851ED2018B029006B8854 /* FilterPhotoCard.xib in Resources */,
 				8C06B1B22008AD72003D8E05 /* CRYSchemeCell.nib in Resources */,
 				7C44850B1F1351A4003AF631 /* SplashViewController.xib in Resources */,
 				8C06AF262008AD70003D8E05 /* cizgi_2_selected.png in Resources */,
@@ -12927,6 +12945,7 @@
 				8C0E8E751FDEBDFF00789C91 /* ExpandStorageModuleInput.swift in Sources */,
 				8C0E8E761FDEBDFF00789C91 /* LoadingImageView.swift in Sources */,
 				8C0E8E771FDEBDFF00789C91 /* PasscodeSettingsViewIO.swift in Sources */,
+				CE4851F12018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
 				8C0E8E781FDEBDFF00789C91 /* ExpandStoragePresenter.swift in Sources */,
 				8C0E8E791FDEBDFF00789C91 /* PrintViewController.swift in Sources */,
 				8C0E8E7A1FDEBDFF00789C91 /* AssetsCash.swift in Sources */,
@@ -13972,6 +13991,7 @@
 				CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */,
 				FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
+				CE4851F02018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				8CFF868A1F0F96E600520D18 /* ContactDevice.m in Sources */,
 				8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
