@@ -30,4 +30,8 @@ class AssetsСache {
     func assetBy(identifier: String) -> PHAsset? {
        return storage[identifier]
     }
+    
+    func dropAll() {
+        storage.removeAll()
+    }
 }
