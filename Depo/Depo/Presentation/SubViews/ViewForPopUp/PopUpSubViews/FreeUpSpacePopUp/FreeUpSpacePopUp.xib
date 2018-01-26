@@ -33,16 +33,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVS-SH-eAn" customClass="CircleButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
-                    <rect key="frame" x="207" y="49" width="76" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="76" id="8SC-wj-svZ"/>
-                        <constraint firstAttribute="height" constant="24" id="Fbh-df-Zfl"/>
-                    </constraints>
-                    <connections>
-                        <action selector="onCancelButton" destination="iN0-l3-epB" eventType="touchUpInside" id="fil-js-jmn"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUc-YC-YuZ" customClass="CircleYellowButton" customModule="Depo_LifeTech" customModuleProvider="target">
                     <rect key="frame" x="292" y="49" width="76" height="24"/>
                     <constraints>
@@ -60,6 +50,17 @@
                         <constraint firstAttribute="height" constant="22" id="Hiu-6X-foM"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyj-bv-ETM">
+                    <rect key="frame" x="342" y="0.0" width="33" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="33" id="i6t-Uv-UUP"/>
+                        <constraint firstAttribute="height" constant="33" id="ulf-9a-XEv"/>
+                    </constraints>
+                    <state key="normal" image="CloseCardIcon"/>
+                    <connections>
+                        <action selector="onCancelButton" destination="iN0-l3-epB" eventType="touchUpInside" id="QGc-l1-3VH"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -67,19 +68,18 @@
                 <constraint firstItem="15l-Sg-8pX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="19" id="644-ZL-I0W"/>
                 <constraint firstItem="5bF-UL-a8f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="21" id="9d8-Dq-8tG"/>
                 <constraint firstAttribute="bottom" secondItem="pUc-YC-YuZ" secondAttribute="bottom" constant="11" id="DJ6-if-u0M"/>
-                <constraint firstAttribute="bottom" secondItem="GVS-SH-eAn" secondAttribute="bottom" constant="11" id="Ear-9q-FRU"/>
                 <constraint firstAttribute="trailing" secondItem="5bF-UL-a8f" secondAttribute="trailing" constant="21" id="Fjc-wf-8mJ"/>
-                <constraint firstItem="pUc-YC-YuZ" firstAttribute="leading" secondItem="GVS-SH-eAn" secondAttribute="trailing" constant="9" id="QgK-Bz-x0s"/>
                 <constraint firstItem="eNd-Lf-Xnb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="55" id="T50-M0-TRf"/>
                 <constraint firstAttribute="trailing" secondItem="eNd-Lf-Xnb" secondAttribute="trailing" constant="21" id="fDg-Xk-zZd"/>
+                <constraint firstItem="dyj-bv-ETM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="i9L-Va-dDH"/>
                 <constraint firstAttribute="trailing" secondItem="pUc-YC-YuZ" secondAttribute="trailing" constant="7" id="kIL-Qt-g5F"/>
                 <constraint firstItem="eNd-Lf-Xnb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="lDZ-QV-S1V"/>
                 <constraint firstItem="15l-Sg-8pX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="p2A-Lc-ihI"/>
+                <constraint firstAttribute="trailing" secondItem="dyj-bv-ETM" secondAttribute="trailing" id="tZ4-2J-yTp"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bigTitleLabel" destination="5bF-UL-a8f" id="ioR-bq-Gou"/>
-                <outlet property="cancelButton" destination="GVS-SH-eAn" id="gFN-DW-62W"/>
                 <outlet property="freeAppSpaceButton" destination="pUc-YC-YuZ" id="3Qh-rK-2La"/>
                 <outlet property="imageView" destination="15l-Sg-8pX" id="VfM-4e-NhC"/>
                 <outlet property="titleLabel" destination="eNd-Lf-Xnb" id="4XK-lV-EN1"/>
@@ -88,6 +88,7 @@
         </view>
     </objects>
     <resources>
+        <image name="CloseCardIcon" width="14" height="14"/>
         <image name="DeletingImagesPopUpImage" width="24" height="22"/>
     </resources>
 </document>

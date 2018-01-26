@@ -248,6 +248,14 @@
 		7C49881D1F3320420039C5F2 /* CreateStoryPhotosOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4988111F3320420039C5F2 /* CreateStoryPhotosOrderViewController.swift */; };
 		7C49881E1F3320420039C5F2 /* CreateStoryPhotosOrderViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4988121F3320420039C5F2 /* CreateStoryPhotosOrderViewInput.swift */; };
 		7C49881F1F3320420039C5F2 /* CreateStoryPhotosOrderViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4988131F3320420039C5F2 /* CreateStoryPhotosOrderViewOutput.swift */; };
+		7C4F60A22019D0340033C58F /* CollageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F60A12019D0340033C58F /* CollageCard.swift */; };
+		7C4F60A32019D0340033C58F /* CollageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F60A12019D0340033C58F /* CollageCard.swift */; };
+		7C4F60A52019D0440033C58F /* CollageCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60A42019D0440033C58F /* CollageCard.xib */; };
+		7C4F60A62019D0440033C58F /* CollageCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60A42019D0440033C58F /* CollageCard.xib */; };
+		7C4F60A92019E2AE0033C58F /* AlbumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F60A82019E2AE0033C58F /* AlbumCard.swift */; };
+		7C4F60AA2019E2AE0033C58F /* AlbumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F60A82019E2AE0033C58F /* AlbumCard.swift */; };
+		7C4F60AC2019E2BC0033C58F /* AlbumCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60AB2019E2BC0033C58F /* AlbumCard.xib */; };
+		7C4F60AD2019E2BC0033C58F /* AlbumCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60AB2019E2BC0033C58F /* AlbumCard.xib */; };
 		7C5358101F9492DA00EABBAF /* OTPViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C53580E1F9492DA00EABBAF /* OTPViewController~iphone.xib */; };
 		7C5358111F9492DA00EABBAF /* OTPViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C53580F1F9492DA00EABBAF /* OTPViewController~ipad.xib */; };
 		7C5526131F7B9CCD00A21F3C /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526121F7B9CCD00A21F3C /* CardsManager.swift */; };
@@ -3407,6 +3415,10 @@
 		7C4988111F3320420039C5F2 /* CreateStoryPhotosOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotosOrderViewController.swift; sourceTree = "<group>"; };
 		7C4988121F3320420039C5F2 /* CreateStoryPhotosOrderViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotosOrderViewInput.swift; sourceTree = "<group>"; };
 		7C4988131F3320420039C5F2 /* CreateStoryPhotosOrderViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotosOrderViewOutput.swift; sourceTree = "<group>"; };
+		7C4F60A12019D0340033C58F /* CollageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageCard.swift; sourceTree = "<group>"; };
+		7C4F60A42019D0440033C58F /* CollageCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollageCard.xib; sourceTree = "<group>"; };
+		7C4F60A82019E2AE0033C58F /* AlbumCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCard.swift; sourceTree = "<group>"; };
+		7C4F60AB2019E2BC0033C58F /* AlbumCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCard.xib; sourceTree = "<group>"; };
 		7C53580E1F9492DA00EABBAF /* OTPViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OTPViewController~iphone.xib"; sourceTree = "<group>"; };
 		7C53580F1F9492DA00EABBAF /* OTPViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OTPViewController~ipad.xib"; sourceTree = "<group>"; };
 		7C5526121F7B9CCD00A21F3C /* CardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsManager.swift; sourceTree = "<group>"; };
@@ -6688,6 +6700,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7C4F60A72019E28A0033C58F /* AlbumCard */ = {
+			isa = PBXGroup;
+			children = (
+				7C4F60A82019E2AE0033C58F /* AlbumCard.swift */,
+				7C4F60AB2019E2BC0033C58F /* AlbumCard.xib */,
+			);
+			path = AlbumCard;
+			sourceTree = "<group>";
+		};
 		7C5526141F7BA16100A21F3C /* CardsManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -7256,6 +7277,15 @@
 			path = StorageCard;
 			sourceTree = "<group>";
 		};
+		7CD7C2A82019AFF7009F6D3D /* CollageCard */ = {
+			isa = PBXGroup;
+			children = (
+				7C4F60A12019D0340033C58F /* CollageCard.swift */,
+				7C4F60A42019D0440033C58F /* CollageCard.xib */,
+			);
+			path = CollageCard;
+			sourceTree = "<group>";
+		};
 		7CDABCF21F1E3A6300C8CC16 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -7337,6 +7367,8 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7C4F60A72019E28A0033C58F /* AlbumCard */,
+				7CD7C2A82019AFF7009F6D3D /* CollageCard */,
 				7CD7C2A120189A27009F6D3D /* StorageCard */,
 				7C257B3520174C1100CB56F8 /* ContactBackupOld */,
 				7C257B3420174BC400CB56F8 /* ContactBackupEmpty */,
@@ -11208,6 +11240,7 @@
 				8C0E901F1FDEBDFF00789C91 /* PrintViewController.xib in Resources */,
 				8C06AFF92008AD71003D8E05 /* kontrast@2x.png in Resources */,
 				8C0E90201FDEBDFF00789C91 /* CaptchaViewController.xib in Resources */,
+				7C4F60A62019D0440033C58F /* CollageCard.xib in Resources */,
 				8C06AF012008AD70003D8E05 /* caps2_selected.png in Resources */,
 				8C0E90211FDEBDFF00789C91 /* AutoSyncViewController.xib in Resources */,
 				8C0E90221FDEBDFF00789C91 /* CreateStoryPhotosOrderViewController.xib in Resources */,
@@ -11429,6 +11462,7 @@
 				8C06B1972008AD72003D8E05 /* vintage.png in Resources */,
 				8C0E90571FDEBDFF00789C91 /* WiFiSyncViewController.xib in Resources */,
 				8C06AF8B2008AD70003D8E05 /* extraOptions_selected.png in Resources */,
+				7C4F60AD2019E2BC0033C58F /* AlbumCard.xib in Resources */,
 				8C06B1AF2008AD72003D8E05 /* CRYPopupViewController.nib in Resources */,
 				8C06B0D32008AD71003D8E05 /* sample_green@3x.png in Resources */,
 				8C06B0912008AD71003D8E05 /* paylas_whatsapp@2x.png in Resources */,
@@ -11640,6 +11674,7 @@
 				7C44850B1F1351A4003AF631 /* SplashViewController.xib in Resources */,
 				8C06AF262008AD70003D8E05 /* cizgi_2_selected.png in Resources */,
 				8C06B09A2008AD71003D8E05 /* refresh.png in Resources */,
+				7C4F60A52019D0440033C58F /* CollageCard.xib in Resources */,
 				8C06B1042008AD72003D8E05 /* slider_thumb2@3x.png in Resources */,
 				CE51ADF61EF90853005DCEE0 /* AutoSyncInformTableViewCell.xib in Resources */,
 				8C06B1922008AD72003D8E05 /* undo@2x.png in Resources */,
@@ -11941,6 +11976,7 @@
 				7CD1F91D1F0288DC0028F51A /* WelcomeViewController.xib in Resources */,
 				8C06B0BA2008AD71003D8E05 /* rotation_secili.png in Resources */,
 				8C06AF042008AD70003D8E05 /* caps2_selected@3x.png in Resources */,
+				7C4F60AC2019E2BC0033C58F /* AlbumCard.xib in Resources */,
 				8C06B08A2008AD71003D8E05 /* paylas_twitter@2x.png in Resources */,
 				8C06AFBA2008AD71003D8E05 /* geri.png in Resources */,
 				8C06B0B22008AD71003D8E05 /* rotate@2x.png in Resources */,
@@ -12581,6 +12617,7 @@
 				8C0E8D3B1FDEBDFF00789C91 /* ProtoInputTextCell.swift in Sources */,
 				8C0E8D3C1FDEBDFF00789C91 /* RemoteSearchService.swift in Sources */,
 				8C0E8D3D1FDEBDFF00789C91 /* BaseCollectionViewDataSource.swift in Sources */,
+				7C4F60A32019D0340033C58F /* CollageCard.swift in Sources */,
 				8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */,
 				8C0E8D401FDEBDFF00789C91 /* CurioDB.m in Sources */,
@@ -13014,6 +13051,7 @@
 				8C0E8ED81FDEBDFF00789C91 /* SearchViewController.swift in Sources */,
 				8C0E8ED91FDEBDFF00789C91 /* BasicCollectionMultiFileCell.swift in Sources */,
 				8C0E8EDA1FDEBDFF00789C91 /* WrapItemFileService.swift in Sources */,
+				7C4F60AA2019E2AE0033C58F /* AlbumCard.swift in Sources */,
 				8C0E8EDB1FDEBDFF00789C91 /* CreateStorySelectionInteractor.swift in Sources */,
 				8C0E8EDC1FDEBDFF00789C91 /* UsageInfoViewController.swift in Sources */,
 				8C0E8EDD1FDEBDFF00789C91 /* PhotoVideoDetailViewInput.swift in Sources */,
@@ -13656,6 +13694,7 @@
 				CE51ACC41EF90853005DCEE0 /* RegistrationViewInput.swift in Sources */,
 				CE51ACC51EF90853005DCEE0 /* RegistrationViewOutput.swift in Sources */,
 				CE51ACC61EF90853005DCEE0 /* RegistrationViewController.swift in Sources */,
+				7C4F60A92019E2AE0033C58F /* AlbumCard.swift in Sources */,
 				CE95ED541F516736002F923A /* HelpAndSupportRouter.swift in Sources */,
 				7C6E2F9E1F31E7C000536DB6 /* CreateStoryAudioSelectionPresenter.swift in Sources */,
 				CEDFECBB1F11F86B003D1A75 /* SearchServiceResponse.swift in Sources */,
@@ -14249,6 +14288,7 @@
 				872D8C119282747BDC9A55C6 /* ActivityTimelineInteractorInput.swift in Sources */,
 				2364F4A40D0899837114AB2A /* ActivityTimelineInteractorOutput.swift in Sources */,
 				A0052B3EF580D29AEEB116BA /* ActivityTimelineInteractor.swift in Sources */,
+				7C4F60A22019D0340033C58F /* CollageCard.swift in Sources */,
 				7D44F2D8BA13AA210B247EF0 /* ActivityTimelineRouterInput.swift in Sources */,
 				7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */,
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,

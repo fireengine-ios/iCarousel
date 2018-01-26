@@ -60,7 +60,7 @@ class CollectionViewLayout: UICollectionViewLayout {
                 
                 let width = columnWidth - cellPadding*2
                 let cellHeight = delegate.collectionView(collectionView: collectionView!, heightForCellAtIndexPath: indexPath, withWidth: width)
-                
+                print("cell h = ", cellHeight)
                 let height = cellPadding +  cellHeight + cellPadding
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
                 let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
@@ -101,6 +101,10 @@ class CollectionViewLayout: UICollectionViewLayout {
         let headerH = delegate.collectionView(collectionView: collectionView!, heightForHeaderinSection: indexPath.section)
         headerAttribute.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: headerH)
         return headerAttribute
+    }
+    
+    func remoweAttributesForCell(in rect: CGRect){
+        
     }
     
 }

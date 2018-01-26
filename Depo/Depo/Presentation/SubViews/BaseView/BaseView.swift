@@ -14,6 +14,7 @@ class BaseView: UIView, NibView {
     
     var canSwipe: Bool = true
     static let baseViewCornerRadius: CGFloat = 5
+    var calculatedH: CGFloat = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +23,7 @@ class BaseView: UIView, NibView {
     
     func configurateView() {
         whiteView?.layer.cornerRadius = BaseView.baseViewCornerRadius
+        calculatedH = frame.size.height
     }
     
     func viewDeletedBySwipe(){
