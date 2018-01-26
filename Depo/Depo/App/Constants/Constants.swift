@@ -277,6 +277,21 @@ struct TextConstants {
     static let homeStorageCardEmptyBottomButtonTitle = NSLocalizedString("Upload Files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeStorageCardLocalBottomButtonTitle = NSLocalizedString("Free Up Space", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    
+    //MARK: Home Collage card
+    static let homeCollageCardTitle = NSLocalizedString("Collage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeCollageCardSubTitle = NSLocalizedString("We have created a collage from your photos!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeCollageCardButtonSaveCollage = NSLocalizedString("Save Collage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeCollageCardButtonViewCollage = NSLocalizedString("View", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
+    //MARK: Home Album card
+    static let homeAlbumCardTitle = NSLocalizedString("Album Card", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeAlbumCardSubTitle = NSLocalizedString("We have created an album for you.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeAlbumCardBottomButtonSaveAlbum = NSLocalizedString("Save Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeAlbumCardBottomButtonViewAlbum = NSLocalizedString("View", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
     //MARK: Home page like filter view
     static let homeLikeFilterTitle = NSLocalizedString("Did you like this filter?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLikeFilterSubTitle = NSLocalizedString("You can apply this filter and my more to your other picures as well", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

@@ -19,6 +19,7 @@ class ContactBackupOld: BaseView {
     
     override func configurateView(){
         super.configurateView()
+        
         headerLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
         headerLabel?.textColor = ColorConstants.darkText
         headerLabel?.text = TextConstants.homePageContactBacupHeader

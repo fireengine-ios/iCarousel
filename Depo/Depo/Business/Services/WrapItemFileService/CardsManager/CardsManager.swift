@@ -21,6 +21,8 @@ enum OperationType: String{
     case waitingForWiFi             = "waitingForWiFi"
     case contactBacupEmpty          = "contactBacupEmpty"
     case contactBacupOld            = "contactBacupOld"
+    case collage                    = "collage"
+    case albumCard                  = "albumCard"
 }
 
 typealias BlockObject = () -> Void
@@ -200,6 +202,10 @@ class CardsManager: NSObject {
             return ContactBackupEmpty.initFromNib()
         case .contactBacupOld:
             return ContactBackupOld.initFromNib()
+        case .collage:
+            return CollageCard.initFromNib()
+        case .albumCard:
+            return AlbumCard.initFromNib()
         }
     }
     

@@ -20,7 +20,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     var collectionView: UICollectionView!
     var viewController: UIViewController!
     
-    var controllersArray = [UIViewController]()
+    //var controllersArray = [UIViewController]()
     
     var delegate:BaseCollectionViewDataSourceDelegate?
     
@@ -49,13 +49,13 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
         
-        controllersArray.removeAll()
-        controllersArray.insert(contentsOf: data, at: 0)
-        
-        for controller in controllersArray{
-            controller.view.layoutSubviews()
-            viewController.addChildViewController(controller)
-        }
+//        controllersArray.removeAll()
+//        controllersArray.insert(contentsOf: data, at: 0)
+//
+//        for controller in controllersArray{
+//            controller.view.layoutSubviews()
+//            viewController.addChildViewController(controller)
+//        }
         
         collectionView.reloadData()
         
@@ -64,15 +64,16 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth:CGFloat) -> CGFloat{
         if (isPopUpCell(path: indexPath)){
             let popUpView = popUps[indexPath.row]
-            return popUpView.frame.size.height
+            return popUpView.calculatedH
         }
-            
-        let vC = controllersArray[indexPath.row - popUps.count]
-        guard let contr = vC as? BaseCollectionViewController else {
-            return 40
-        }
-        contr.calculateHeight(forWidth: withWidth)
-        return contr.calculatedH
+        return 40
+        
+//        let vC = controllersArray[indexPath.row - popUps.count]
+//        guard let contr = vC as? BaseCollectionViewController else {
+//            return 40
+//        }
+//        contr.calculateHeight(forWidth: withWidth)
+//        return contr.calculatedH
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat{
@@ -86,7 +87,8 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     //MARK UICollectionView delegate
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return controllersArray.count + popUps.count
+        //return controllersArray.count + popUps.count
+        return popUps.count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -109,13 +111,13 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         
         baseCel.setStateToDefault()
         baseCel.cellDelegate = self
-        if (isPopUpCell(path: indexPath)){
+//        if (isPopUpCell(path: indexPath)){
             let popUpView = popUps[indexPath.row]
             baseCel.addViewOnCell(controllersView: popUpView, withShadow: true)
-        }else{
-            let viewController = controllersArray[indexPath.row - popUps.count]
-            baseCel.addViewOnCell(controllersView: viewController.view, withShadow: true)
-        }
+//        }else{
+//            let viewController = controllersArray[indexPath.row - popUps.count]
+//            baseCel.addViewOnCell(controllersView: viewController.view, withShadow: true)
+//        }
         
         return baseCel
     }
@@ -127,14 +129,14 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         guard let path = indehPath else {
             return
         }
-        if (isPopUpCell(path: path)){
+        //if (isPopUpCell(path: path)){
             popUps.remove(at: path.row)
-        }else{
-            let controller = controllersArray[path.row - popUps.count]
-            controllersArray.remove(at: path.row - popUps.count)
-            controller.removeFromParentViewController()
-            delegate?.onCellHasBeenRemovedWith(controller: controller)
-        }
+//        }else{
+//            let controller = controllersArray[path.row - popUps.count]
+//            controllersArray.remove(at: path.row - popUps.count)
+//            controller.removeFromParentViewController()
+//            delegate?.onCellHasBeenRemovedWith(controller: controller)
+//        }
         collectionView.deleteItems(at: [path])
     }
     
@@ -159,6 +161,8 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func deleteCellAtIndex(index: Int){
+        //let cell = collectionView.cellForItem(at: IndexPath(row: index, section: 0))
+        
         var needReload = true
         if (isActive){
             let rowIndexes = collectionView.indexPathsForVisibleItems.map({ $0.row })
@@ -175,8 +179,12 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
         
         if needReload {
-            popUps.remove(at: index)
+//            popUps.remove(at: index)
+//            if let layout = collectionView.collectionViewLayout as? CollectionViewLayout {
+//                layout.remoweAttributesForCell(in: <#T##CGRect#>)
+//            }
             collectionView.reloadData()
+            //collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
@@ -233,7 +241,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
-            
+            view.layoutIfNeeded()
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
                 if let item = object{
