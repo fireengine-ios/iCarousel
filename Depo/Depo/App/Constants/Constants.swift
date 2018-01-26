@@ -307,8 +307,6 @@ struct TextConstants {
     static let backPrintTitle = NSLocalizedString("Back to Lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: settings
-    
-
     static let settingsViewCellLoginSettings = NSLocalizedString("Login Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellTurkcellPassword = NSLocalizedString("Turkcell Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellTurkcellAutoLogin = NSLocalizedString("Auto-login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -319,6 +317,7 @@ struct TextConstants {
     static let settingsViewCellBeckup = NSLocalizedString("Back-up my contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellImportPhotos = NSLocalizedString("Import Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellAutoUpload = NSLocalizedString("Auto Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellFaceAndImageGrouping = NSLocalizedString("Face & Image Grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellActivityTimline = NSLocalizedString("My Activity Timeline", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellRecentlyDeletedFiles = NSLocalizedString("Recently Deleted Files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellUsageInfo = NSLocalizedString("Usage Info and Packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -336,6 +335,9 @@ struct TextConstants {
     static let importFromInstagram = NSLocalizedString("Import From Instagram", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let importFromCropy = NSLocalizedString("Import From Cropy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    //MARK: Face Image
+    static let faceAndImageGrouping = NSLocalizedString("Face & Image Grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     //MARK: userProfile
     static let userProfileTitle = NSLocalizedString("Your Profile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileNameAndSurNameSubTitle = NSLocalizedString("Name and Surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -349,6 +351,7 @@ struct TextConstants {
     static let userProfileDataNotСhanged = NSLocalizedString("Data did not changed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileDataNotCorrect = NSLocalizedString("Data is not correct", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let emptyEmail = NSLocalizedString("E-mail is empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     //MARK: fileInfo
     static let fileInfoFileNameTitle = NSLocalizedString("File Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoFileInfoTitle = NSLocalizedString("File Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
