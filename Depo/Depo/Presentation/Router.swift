@@ -620,6 +620,13 @@ class RouterVC: NSObject {
         return controller
     }
     
+    // MARK: Face image
+    
+    var faceImage: UIViewController {
+        let controller = FaceImageInitializer.initializeViewController(with: "FaceImageViewController")
+        return controller
+    }
+    
     // MARK: - Import photos
     
     var usageInfo: UIViewController? {

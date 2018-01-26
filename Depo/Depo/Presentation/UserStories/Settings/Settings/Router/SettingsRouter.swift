@@ -25,6 +25,10 @@ class SettingsRouter: SettingsRouterInput {
     func goToAutoApload(){
         router.pushViewController(viewController: router.autoUpload)
     }
+    
+    func goToFaceImage() {
+        router.pushViewController(viewController: router.faceImage)
+    }
 
     func goToHelpAndSupport(){
         router.pushViewController(viewController: router.helpAndSupport!)
