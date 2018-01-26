@@ -21,6 +21,10 @@ final class VideoSyncService: ItemSyncServiceImpl {
             .filter({$0.fileSize < NumericConstants.fourGigabytes})
             .sorted(by:{$0.metaDate > $1.metaDate})
     }
+    
+    override func itemsSortedToUpload(from items: [WrapData]) -> [WrapData] {
+        return items.sorted(by: { $0.fileSize < $1.fileSize })
+    }
 
     override func stop() {
         stopAllOperations()

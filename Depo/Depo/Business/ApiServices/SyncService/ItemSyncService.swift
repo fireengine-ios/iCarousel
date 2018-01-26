@@ -165,7 +165,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         status = .executing
         
-        UploadService.default.uploadFileList(items: items.sorted(by:{$0.fileSize < $1.fileSize}),
+        UploadService.default.uploadFileList(items: itemsSortedToUpload(from: items),
                                              uploadType: .autoSync,
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
@@ -283,7 +283,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     //MARK: - Override me
     
-    func itemsToSync() -> [WrapData] {
+    func itemsSortedToUpload(from items: [WrapData]) -> [WrapData] {
         return []
     }
     
