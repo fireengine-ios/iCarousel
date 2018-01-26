@@ -27,7 +27,6 @@ protocol ItemSyncService: class {
     
     func start()
     func stop()
-//    func interrupt()
     func fail()
     func waitForWiFi()
 }

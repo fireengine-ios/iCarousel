@@ -15,7 +15,7 @@ final class UploadService: BaseRequestService {
     
     static let notificatioUploadServiceDidUpload = "notificatioUploadServiceDidUpload"
 
-    private let dispatchQueue = DispatchQueue(label: "com.lifebox.upload")
+//    private let dispatchQueue = DispatchQueue(label: "com.lifebox.upload")
     
     private let uploadQueue = OperationQueue()
     private var uploadOperations = [UploadOperations]()
@@ -46,6 +46,7 @@ final class UploadService: BaseRequestService {
     override init() {
         uploadQueue.maxConcurrentOperationCount = 1
         uploadQueue.qualityOfService = .userInteractive
+//        uploadQueue.underlyingQueue = dispatchQueue
     
         super.init()
         SingletonStorage.shared.uploadProgressDelegate = self
@@ -116,7 +117,7 @@ final class UploadService: BaseRequestService {
     }
     
     private func showSyncCardProgress() {
-        guard allSyncOperationsCount != 0 else {
+        guard allSyncOperationsCount != 0, allSyncOperationsCount != finishedSyncOperationsCount else {
             return
         }
         
@@ -207,12 +208,10 @@ final class UploadService: BaseRequestService {
             return operation
         }
         uploadOperations.insert(contentsOf: operations, at: 0)
-        dispatchQueue.async {
-            self.uploadQueue.addOperations(operations, waitUntilFinished: false)
-            
-            print("UPLOADING upload: \(operations.count) have been added to the upload queue")
-        }
-        
+
+        uploadQueue.addOperations(operations, waitUntilFinished: false)
+        print("UPLOADING upload: \(operations.count) have been added to the upload queue")
+    
         return uploadOperations.filter({ $0.uploadType == .syncToUse })
     }
     
@@ -286,12 +285,10 @@ final class UploadService: BaseRequestService {
             return operation
         }
         uploadOperations.insert(contentsOf: operations, at: 0)
-        dispatchQueue.async {
-            self.uploadQueue.addOperations(operations, waitUntilFinished: false)
-            
-            print("UPLOADING upload: \(operations.count) have been added to the upload queue")
-        }
-    
+        
+        uploadQueue.addOperations(operations, waitUntilFinished: false)
+        print("UPLOADING upload: \(operations.count) have been added to the upload queue")
+        
         return uploadOperations.filter({ $0.uploadType == .fromHomePage })
     }
     
@@ -363,10 +360,9 @@ final class UploadService: BaseRequestService {
             return operation
         }
         uploadOperations.append(contentsOf: operations)
-        dispatchQueue.async {
-            self.uploadQueue.addOperations(operations, waitUntilFinished: false)
-            print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
-        }
+        
+        uploadQueue.addOperations(operations, waitUntilFinished: false)
+        print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
         
         return uploadOperations.filter({ $0.uploadType == .autoSync })
     }
@@ -384,7 +380,7 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelSyncToUseOperations(){
-        dispatchQueue.async {
+//        dispatchQueue.sync {
             var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .syncToUse })
             operationsToRemove.forEach { (operation) in
                 operation.cancel()
@@ -392,32 +388,32 @@ final class UploadService: BaseRequestService {
             }
             print("AUTOSYNC: removed \(operationsToRemove.count) operations")
             operationsToRemove.removeAll()
-        }
+//        }
     }
     
-    func cancelUploadOperations(){
-        dispatchQueue.async {
+    func cancelUploadOperations() {
+//        dispatchQueue.sync {
             var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .fromHomePage })
             operationsToRemove.forEach { (operation) in
                 operation.cancel()
                 self.uploadOperations.removeFirstIfExists(operation)
             }
             operationsToRemove.removeAll()
-        }
+//        }
     }
     
     func cancelSyncOperations(photo: Bool, video: Bool) {
-        dispatchQueue.async {
+//        dispatchQueue.sync {
             print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
             
             var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .autoSync &&
                 ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
-            
+            let time = Date()
             operationsToRemove.forEach { (operation) in
                 operation.cancel()
                 self.uploadOperations.removeFirstIfExists(operation)
             }
-            print("AUTOSYNC: removed \(operationsToRemove.count) operations")
+            print("AUTOSYNC: removed \(operationsToRemove.count) operations in \(Date().timeIntervalSince(time)) secs")
             operationsToRemove.removeAll()
             
             if photo {
@@ -427,7 +423,7 @@ final class UploadService: BaseRequestService {
                 self.finishedVideoSyncOperationsCount = 0
             }
             
-        }
+//        }
     }
     
     func cancelOperations(with assets: [PHAsset]?) {
@@ -435,7 +431,7 @@ final class UploadService: BaseRequestService {
             return
         }
         
-        dispatchQueue.async {
+//        dispatchQueue.sync {
             var operationsToRemove = self.uploadOperations.filter { (operation) -> Bool in
                 if let asset = operation.item.asset {
                     return !operation.isCancelled && assets.contains(asset)
@@ -449,7 +445,7 @@ final class UploadService: BaseRequestService {
             }
             print("AUTOSYNC: removed \(operationsToRemove.count) operations")
             operationsToRemove.removeAll()
-        }
+//        }
     }
     
     private func clearUploadCounters() {
@@ -611,14 +607,6 @@ class UploadOperations: Operation {
         } else {
             isRealCancel = true
         }
-        
-        if let fail_ = fail {
-            fail_(ErrorResponse.string(TextConstants.canceledOperationTextError))
-        }
-        
-        if let handler = handler {
-            handler(self, ErrorResponse.string(TextConstants.canceledOperationTextError))
-        }
     }
     
     override func main() {
@@ -629,13 +617,13 @@ class UploadOperations: Operation {
                 req.cancel()
             }
             
-//            if let fail_ = fail {
-//                fail_(ErrorResponse.string(TextConstants.canceledOperationTextError))
-//            }
-//            
-//            if let handler = handler {
-//                handler(self, ErrorResponse.string(TextConstants.canceledOperationTextError))
-//            }
+            if let fail_ = fail {
+                fail_(ErrorResponse.string(TextConstants.canceledOperationTextError))
+            }
+            
+            if let handler = handler {
+                handler(self, ErrorResponse.string(TextConstants.canceledOperationTextError))
+            }
             
             semaphore.signal()
             return

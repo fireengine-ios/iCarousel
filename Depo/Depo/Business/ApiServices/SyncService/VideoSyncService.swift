@@ -21,29 +21,25 @@ final class VideoSyncService: ItemSyncServiceImpl {
             .filter({$0.fileSize < NumericConstants.fourGigabytes})
             .sorted(by:{$0.metaDate > $1.metaDate})
     }
-    
-//    override func interrupt() {
-//        super.interrupt()
-//
-//        stopAllOperations()
-//    }
 
     override func stop() {
-        super.stop()
-        
         stopAllOperations()
+        super.stop()
     }
     
     override func waitForWiFi() {
-        super.waitForWiFi()
-        
         stopAllOperations()
+        super.waitForWiFi()
     }
     
     
     //MARK: - Private
     
     private func stopAllOperations() {
+        guard self.status.isContained(in: [.prepairing, .executing]) else {
+            return
+        }
+        
         UploadService.default.cancelSyncOperations(photo: false, video: true)
         
         if let service = photoVideoService {
