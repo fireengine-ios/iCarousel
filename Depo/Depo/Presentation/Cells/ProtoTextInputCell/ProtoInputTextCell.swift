@@ -60,4 +60,8 @@ extension ProtoInputTextCell: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.textDelegate?.textStartedEditing(withCell: self)
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
 }

@@ -92,24 +92,24 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
         cell.textDelegate = self
         let model = cells[index]
         
-        if let cell = cell as? GSMUserInputCell {
-            cell.delegate = self
-            cell.infoButtonDelegate = self
-            cell.setupGSMCode(code: currentGSMCode)
-            cell.setupCell(withTitle: model.title, inputText: model.inputText)
-            
-            #if DEBUG
-                cell.inputTextField?.text = "259092538"
-                cell.gsmCountryCodeLabel.text = "+375"
-                currentGSMCode = "+375"
-            #endif
-        } else if let cell = cell as? BaseUserInputCellView {
+        if let cell = cell as? BaseUserInputCellView {
             cell.infoButtonDelegate = self
             cell.setupBaseCell(withTitle: model.title, inputText: model.inputText)
-            #if DEBUG
-               cell.inputTextField?.text = "testMail@notRealMail.yep"
+            
+            #if !DEBUG
+                cell.inputTextField?.text = "testMail@notRealMail.yep"
             #endif
             
+            if let cell = cell as? GSMUserInputCell {
+                cell.delegate = self
+                cell.setupGSMCode(code: currentGSMCode)
+                
+                #if !DEBUG
+                    cell.inputTextField?.text = "259092538"
+                    cell.gsmCountryCodeLabel.text = "+375"
+                    currentGSMCode = "+375"
+                #endif
+            }
         } else if let cell = cell as? PasswordCell {
             cell.infoButtonDelegate = self
             cell.setupInitialState(withLabelTitle: model.title, placeHolderText: model.inputText)
@@ -118,7 +118,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
                 cell.textInput.tag = 33
             }
             #if DEBUG
-               cell.inputTextField?.text = ".FsddQ646"
+                cell.inputTextField?.text = ".FsddQ646"
             #endif
         }
     }
