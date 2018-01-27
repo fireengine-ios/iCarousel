@@ -8,11 +8,8 @@
 
 protocol AutoSyncViewInput: class {
 
-    /**
-        @author Oleg
-        Setup initial state of the view
-    */
-
     func setupInitialState()
     func preperedCellsModels(models:[AutoSyncModel])
+    func reloadTableView()
+    func disableAutoSync()
 }

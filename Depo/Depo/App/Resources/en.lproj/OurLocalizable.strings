@@ -377,8 +377,8 @@
 "No" = "No";
 "Settings" = "Settings";
 "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!";
-"You can't take photos with disabled camera. Please turn the camera on in settings." = "You can't take photos with disabled camera. Please turn the camera on in settings.";
-"Caution!" = "Caution!";
+"Error occurred while accessing your photos.\nPlease check your settings." = "Error occurred while accessing your photos.\nPlease check your settings.";
+"Error" = "Error";
 "You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. ";
 "Welcome! Let’s get you started!" = "Welcome! Let’s get you started!";
 "Photos" = "Photos";
