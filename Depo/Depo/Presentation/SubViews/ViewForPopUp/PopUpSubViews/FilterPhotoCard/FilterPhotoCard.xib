@@ -54,7 +54,7 @@
                     </constraints>
                     <state key="normal" image="CloseCardIcon"/>
                     <connections>
-                        <action selector="actionCloseButton" destination="iN0-l3-epB" eventType="touchUpInside" id="Oaq-nm-MOx"/>
+                        <action selector="actionCloseButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="0Bj-2l-JU5"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztU-vr-dm2" userLabel="Line View">

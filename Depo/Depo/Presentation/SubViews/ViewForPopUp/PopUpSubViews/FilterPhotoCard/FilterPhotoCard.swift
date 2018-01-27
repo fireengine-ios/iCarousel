@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 enum CardActionType {
     case save
@@ -16,6 +17,7 @@ enum CardActionType {
 final class FilterPhotoCard: BaseView {
     
     private lazy var imageManager = ImageManager()
+    private lazy var filesDataSource = FilesDataSource()
     private lazy var homeCardsService: HomeCardsService = factory.resolve()
     
     @IBOutlet private weak var headerLabel: UILabel! {
@@ -52,11 +54,7 @@ final class FilterPhotoCard: BaseView {
         }
     }
     
-    @IBOutlet private weak var photoImageView: UIImageView! {
-        didSet {
-            set(image: #imageLiteral(resourceName: "dogFilterImage"))
-        }
-    }
+    @IBOutlet private weak var photoImageView: UIImageView!
     
     private var cardType = CardActionType.save {
         didSet {
@@ -65,6 +63,19 @@ final class FilterPhotoCard: BaseView {
                 bottomButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
             case .display:
                 bottomButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
+            }
+        }
+    }
+    
+    func set(object: JSON) {
+        let searchItem = SearchItemResponse(withJSON: object)
+        let item = WrapData(remote: searchItem)
+        
+        filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
+            if let image = image {
+                self?.set(image: image)
+            } else {
+                UIApplication.showErrorAlert(message: TextConstants.getImageError)
             }
         }
     }

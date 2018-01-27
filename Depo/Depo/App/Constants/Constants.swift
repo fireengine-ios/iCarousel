@@ -810,6 +810,8 @@ struct TextConstants {
     static let accessibilityFavorite = NSLocalizedString("Favorite", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilitySelected = NSLocalizedString("Selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityNotSelected = NSLocalizedString("Not selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let getImageError = NSLocalizedString("Couldn't get image", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
 
