@@ -55,7 +55,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
        
         suggestTableView.register(UINib(nibName: CellsIdConstants.suggestionTableSectionHeaderID, bundle: nil),
                                   forCellReuseIdentifier: CellsIdConstants.suggestionTableSectionHeaderID)
-        suggestTableView.contentInset.top = 20
+        suggestTableView.contentInset.top = 11
         
         setupMusicBar()
         subscribeToNotifications()
