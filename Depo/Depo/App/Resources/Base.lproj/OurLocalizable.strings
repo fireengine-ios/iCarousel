@@ -60,7 +60,7 @@
 "It is not allowed that the password consists of all the same characters." = "It is not allowed that the password consists of all the same characters.";
 "It is not allowed that the password consists of consecutive characters." = "It is not allowed that the password consists of consecutive characters.";
 "Password is invalid" = "Password is invalid";
-"A user with the given phone number already exists." = "A user with the given phone number already exists.";
+"This GSM Number is already registered. Please enter another GSM Number." = "This GSM Number is already registered. Please enter another GSM Number.";
 "Phone number is in an invalid format." = "Phone number is in an invalid format.";
 "Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation." = "Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation.";
 "This e-mail address is already registered. Please enter another e-mail address." = "This e-mail address is already registered. Please enter another e-mail address.";
@@ -272,12 +272,12 @@
 "Clear BackUp" = "Clear BackUp";
 "Restore" = "Restore";
 "Back-Up" = "Back-Up";
-"Your last back was on %@" = "Your last back was on %@";
+"Your last backup was on %@" = "Your last backup was on %@";
 "Your last back up was a few seconds ago." = "Your last back up was a few seconds ago.";
 "You never backed up your contacts" = "You never backed up your contacts";
 "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.";
 "%d%% Restored up…" = "%d%% Restored up…";
-"%d%% Backed up…" = "%d%% Backed up…";
+"%%%d Backed up…" = "%%%d Backed up…";
 "Restored up %d Contacts" = "Restored up %d Contacts";
 "Backed up %d Contacts" = "Backed up %d Contacts";
 "You have %d numbers on your contacts backup." = "You have %d numbers on your contacts backup.";
@@ -546,8 +546,9 @@
 "Next" = "Next";
 "Register to lifebox and get a 5 GB of storage for free!" = "Register to lifebox and get a 5 GB of storage for free!";
 " You have to fill in a password" = " You have to fill in a password";
-" You have to fill in a password" = " You have to fill in a password";
 "Please enter valid Email" = "Please enter valid Email";
+"Email field is invalid" = "Email field is invalid";
+" You have to fill in GSM number" = " You have to fill in GSM number";
 " You have to fill in your mail" = " You have to fill in your mail";
 "Re-Enter Password" = "Re-Enter Password";
 "Password" = "Password";

@@ -10,34 +10,47 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
     
     let router = RouterVC()
     
+    func onItemSelected(type: MyStreamType?) {
+        guard let type = type else {
+            return
+        }
+        switch type {
+        case .album: goToAlbumListView()
+        case .story: goToStoryListView()
+        case .people: goToPeopleListView()
+        case .things: goToThingListView()
+        case .places: goToPlaceListView()
+        }
+    }
+    
     func goToAlbumbsGreedView() {
         router.pushViewControllertoTableViewNavBar(viewController: router.albumsListController())
     }
 
-    func goToAlbumDetailView(album: AlbumItem) {
+    private func goToAlbumDetailView(album: AlbumItem) {
         let controller = router.albumDetailController(album: album, type: .List, moduleOutput: nil)
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
-    func goToAlbumListView() {
+    private func goToAlbumListView() {
         let controller = router.albumsListController()
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
-    func goToStoryListView() {
+    private func goToStoryListView() {
         let controller = router.storiesListController()
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
-    func goToPeopleListView() {
+    private func goToPeopleListView() {
         
     }
     
-    func goToThingListView() {
+    private func goToThingListView() {
         
     }
     
-    func goToPlaceListView() {
+    private func goToPlaceListView() {
         
     }
     

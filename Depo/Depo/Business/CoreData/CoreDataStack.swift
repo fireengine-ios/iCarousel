@@ -152,6 +152,9 @@ class CoreDataStack: NSObject {
         let saveBlock: () -> Void = {
             do {
                 try context.save()
+                if !self.inProcessAppendingLocalFiles {
+                    //TODO: some NOTIFICATION OR ACTUAL finished block
+                }
             } catch {
                 print("Error saving context ___ ")
             }

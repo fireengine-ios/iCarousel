@@ -46,7 +46,9 @@ class ItemSyncServiceImpl: ItemSyncService {
     var status: AutoSyncStatus = .undetermined {
         didSet {
             debugPrint("AUTOSYNC: \(fileType) status = \(status)")
-            postNotification()
+            if oldValue != status {
+                postNotification()
+            }
         }
     }
     
@@ -79,13 +81,6 @@ class ItemSyncServiceImpl: ItemSyncService {
             self.sync()
         }
     }
-    
-//    func interrupt() {
-//        log.debug("ItemSyncServiceImpl interrupt")
-////        if status.isContained(in: [.prepairing, .executing]) {
-//            status = .waitingForWifi
-////        }
-//    }
     
     func stop() {
         log.debug("ItemSyncServiceImpl stop")
@@ -177,8 +172,9 @@ class ItemSyncServiceImpl: ItemSyncService {
                                              uploadTo: .MOBILE_UPLOAD,
                                              success: { [weak self] in
                                                 log.debug("ItemSyncServiceImpl upload UploadService uploadFileList success")
-
-                                                self?.status = .synced
+                                                if self?.status == .executing {
+                                                    self?.status = .synced
+                                                }
         }, fail: { [weak self] (error) in
             guard let `self` = self else {
                 print("\(#function): self == nil")

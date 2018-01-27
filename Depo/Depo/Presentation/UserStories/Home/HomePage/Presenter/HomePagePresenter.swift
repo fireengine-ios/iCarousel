@@ -12,8 +12,11 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     var interactor: HomePageInteractorInput!
     var router: HomePageRouterInput!
 
-    private(set) var viewType = MoreActionsConfig.ViewType.Grid
-    private(set) var sortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
+    private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    
+    private(set) var favoritesViewType = MoreActionsConfig.ViewType.Grid
+    private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
     func viewIsReady() {
         view.setupInitialState()
@@ -43,9 +46,14 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         router.moveToCreationStory()
     }
     
-    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType) {
-        self.viewType = type
-        self.sortType = sortedType
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
+        if fieldType == .all {
+            self.allFilesViewType = type
+            self.allFilesSortType = sortedType
+        } else if fieldType == .favorite {
+            self.favoritesViewType = type
+            self.favoritesSortType = sortedType
+        }
     }
     
 }

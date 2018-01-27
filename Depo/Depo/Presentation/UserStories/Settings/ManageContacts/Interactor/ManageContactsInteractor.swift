@@ -129,5 +129,3 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
         output.didLoadContacts(contacts)
     }
 }
-
-

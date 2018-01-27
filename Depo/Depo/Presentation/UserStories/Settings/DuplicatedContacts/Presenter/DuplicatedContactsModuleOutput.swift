@@ -9,6 +9,7 @@
 import UIKit
 
 protocol DuplicatedContactsModuleOutput: class {
-func cancelDeletingDuplicatedContacts()
-func deleteDuplicatedContacts()
+    func cancelDeletingDuplicatedContacts()
+    func deleteDuplicatedContacts()
+    func backFromDuplicatedContacts()
 }

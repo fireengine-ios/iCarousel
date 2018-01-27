@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -41,7 +41,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="m2A-Yc-sXL">
-                        <rect key="frame" x="120" y="38.666666666666671" width="185" height="30.000000000000014"/>
+                        <rect key="frame" x="120" y="38.666666666666664" width="185" height="29.999999999999993"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="PWM-zr-tjM"/>
@@ -51,10 +51,10 @@
                         <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
                     </textField>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTC-xV-eJp">
-                        <rect key="frame" x="30" y="33.666666666666671" width="65" height="35.000000000000014"/>
+                        <rect key="frame" x="30" y="33.666666666666664" width="65" height="34.999999999999993"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rif-Oc-MH3">
-                                <rect key="frame" x="0.0" y="5" width="65" height="30.000000000000007"/>
+                                <rect key="frame" x="0.0" y="5" width="65" height="30"/>
                                 <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -118,7 +118,7 @@
                 <outlet property="gsmCodeContainerView" destination="gTC-xV-eJp" id="bxr-gd-Z1l"/>
                 <outlet property="gsmCountryCodeLabel" destination="rif-Oc-MH3" id="ZPp-x1-hmT"/>
                 <outlet property="infoButton" destination="yFl-Qm-0OU" id="hQj-UC-HM7"/>
-                <outlet property="infoIcon" destination="Zq3-pi-gqg" id="MGw-r6-C8P"/>
+                <outlet property="infoImage" destination="Zq3-pi-gqg" id="GLb-3n-VDj"/>
                 <outlet property="textInputField" destination="m2A-Yc-sXL" id="O4s-Ce-S78"/>
                 <outlet property="titleLabel" destination="8fu-Cm-8Bt" id="dZz-n2-qvJ"/>
             </connections>

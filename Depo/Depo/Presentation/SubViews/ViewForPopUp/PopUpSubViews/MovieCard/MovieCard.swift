@@ -12,7 +12,7 @@ class MovieCard: BaseView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
-    @IBOutlet weak var videoPreviewImageView: UIImageView!
+    @IBOutlet weak var videoPreviewImageView: LoadingImageView!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var bottomButton: UIButton!
     

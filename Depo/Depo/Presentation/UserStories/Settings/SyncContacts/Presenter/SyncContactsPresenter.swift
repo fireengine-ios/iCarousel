@@ -12,7 +12,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     var interactor: SyncContactsInteractorInput!
     var router: SyncContactsRouterInput!
 
-    var isBackUpAvailable: Bool = false
+    var contactSyncResponse: ContactSync.SyncResponse?
+    var isBackUpAvailable: Bool { return contactSyncResponse != nil }
     
     //MARK: view out
     func viewIsReady() {
@@ -45,7 +46,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     func showError(errorType: SyncOperationErrors) {
         view.setStateWithoutBackUp()
-        isBackUpAvailable = false
+        contactSyncResponse = nil
     }
     
     func showProggress(progress: Int, forOperation operation: SyncOperationType) {
@@ -53,7 +54,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
-        isBackUpAvailable = true
+        contactSyncResponse = response
         view.success(response: response, forOperation: operation)
     }
     
@@ -105,6 +106,16 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
 }
 
 extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
+    func backFromDuplicatedContacts() {
+        if let contactSyncResponse = contactSyncResponse {
+            view.success(response: contactSyncResponse, forOperation: .getBackUpStatus)
+            view.setStateWithBackUp()
+        } else {
+            view.setStateWithoutBackUp()
+        }
+        view.resetProgress()
+    }
+    
     func cancelDeletingDuplicatedContacts() {
         interactor.startOperation(operationType: .cancel)
     }
