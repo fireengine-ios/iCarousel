@@ -12,8 +12,8 @@ final class FaceImageViewController: UIViewController {
     
     var output: FaceImageViewOutput!
     
-    @IBOutlet private weak var faceAllowewLabel: UILabel!
-    @IBOutlet private weak var faceAllowewSwitch: UISwitch!
+    @IBOutlet private weak var faceImageAllowedLabel: UILabel!
+    @IBOutlet private weak var faceImageAllowedSwitch: UISwitch!
     
     private lazy var activityManager = ActivityIndicatorManager()
 
@@ -21,7 +21,7 @@ final class FaceImageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         activityManager.delegate = self
 
         configureNavBar()
@@ -33,6 +33,12 @@ final class FaceImageViewController: UIViewController {
         setTitle(withString: TextConstants.faceAndImageGrouping)
 
         navigationController?.navigationItem.title = TextConstants.backTitle
+    }
+    
+    // MARK: UISwitch Action
+    
+    @IBAction private func faceImageSwitchValueChanged(_ sender: UISwitch) {
+        output.changeFaceImageStatus(sender.isOn)
     }
 }
 
@@ -52,6 +58,10 @@ extension FaceImageViewController: ActivityIndicator {
 
 extension FaceImageViewController: FaceImageViewInput {
     func showFaceImageStatus(_ isFaceImageAllowed: Bool) {
-        faceAllowewSwitch.setOn(isFaceImageAllowed, animated: true)
+        faceImageAllowedSwitch.setOn(isFaceImageAllowed, animated: false)
+    }
+    
+    func showfailedChangeFaceImageStatus() {
+        faceImageAllowedSwitch.setOn(!faceImageAllowedSwitch.isOn, animated: true)
     }
 }

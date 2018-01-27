@@ -8,4 +8,6 @@
 
 protocol FaceImageViewOutput: class {
     func viewIsReady()
+    
+    func changeFaceImageStatus(_ isAllowed: Bool)
 }

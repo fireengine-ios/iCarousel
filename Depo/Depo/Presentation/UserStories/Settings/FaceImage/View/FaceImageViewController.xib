@@ -16,8 +16,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FaceImageViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
-                <outlet property="faceAllowewLabel" destination="h4B-P5-Rce" id="lu0-4G-0Mq"/>
-                <outlet property="faceAllowewSwitch" destination="hp4-RT-NAP" id="nyB-QM-OTl"/>
+                <outlet property="faceImageAllowedLabel" destination="h4B-P5-Rce" id="dSz-qL-2et"/>
+                <outlet property="faceImageAllowedSwitch" destination="hp4-RT-NAP" id="LES-kR-BQz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,6 +28,9 @@
             <subviews>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hp4-RT-NAP">
                     <rect key="frame" x="306" y="121" width="51" height="31"/>
+                    <connections>
+                        <action selector="faceImageSwitchValueChanged:" destination="-1" eventType="valueChanged" id="3zo-kg-2Tf"/>
+                    </connections>
                 </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change face image allowed" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcp-Yc-LSE">
                     <rect key="frame" x="20" y="84" width="335" height="19"/>
