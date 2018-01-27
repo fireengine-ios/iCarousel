@@ -769,7 +769,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
-            FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
+            let requestID = FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
                 DispatchQueue.main.async {
                     if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol {
                         if let image = image {
@@ -780,7 +780,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                 }
             })
-            
+            cell_.setRequestID(requestID: requestID)
         case let .remoteUrl(url):
             if let url = url {
                 cell_.setImage(with: url)
@@ -804,6 +804,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell_ = cell as? CollectionViewCellDataProtocol else {
+                return
+        }
+        if let requestID = cell_.getRequestID(){
+            FilesDataSource().cancelRequestByID(requestID: requestID)
+            cell_.setRequestID(requestID: requestID)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -978,11 +988,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        
         if !needShowProgressInCell{
-            delegate?.needReloadData?()
+            //delegate?.needReloadData?()
             return
         }
+        
         
         if let cell = getCellForFile(objectUUID: file.uuid){
             cell.finishedUploadForObject()
@@ -1251,6 +1261,21 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }else if let unwrapedFilters = originalFilters,
             canShowFolderFilters(filters: unwrapedFilters) {
             deleteItems(items: items)
+        }
+    }
+    
+    func syncFinished() {
+        if isLocalOnly(){
+            return
+        }
+        if let unwrapedFilters = originalFilters  {
+            if isFavoritesOnly(filters: unwrapedFilters) || isAlbumDetail(filters: unwrapedFilters){
+                return
+            }
+        }
+        
+        if !needShowProgressInCell{
+            delegate?.needReloadData?()
         }
     }
     

@@ -45,7 +45,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private let getDetailQueue = OperationQueue()
     
-    static let notificationPhotoLibraryDidChange = "notificationPhotoLibraryDidChange"
+    static let notificationPhotoLibraryDidChange = NSNotification.Name(rawValue: "notificationPhotoLibraryDidChange")
     
     static let defaultUrl = URL(string: "http://Not.url.com")!
     
@@ -113,6 +113,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     var fetchResult: PHFetchResult<PHAsset>!
     func getAllImagesAndVideoAssets() -> [PHAsset] {
+        assetsCache.dropAll()
         log.debug("LocalMediaStorage getAllImagesAndVideoAssets")
 
         guard photoLibraryIsAvailible() else {

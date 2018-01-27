@@ -51,6 +51,10 @@ class LoginInteractor: LoginInteractorInput {
             output?.allAttemtsExhausted(user: login)//block here
             return
         }
+        if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
+            output?.failLogin(message: TextConstants.loginScreenInvalidLoginError)
+            return
+        }
         
         let user = AuthenticationUser(login          : login,
                                       password       : password,

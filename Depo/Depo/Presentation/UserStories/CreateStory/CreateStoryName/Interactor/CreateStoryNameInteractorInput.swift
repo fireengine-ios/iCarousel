@@ -9,6 +9,7 @@
 import Foundation
 
 protocol CreateStoryNameInteractorInput {
+    var needSelectionItems: Bool { set get }
     func onCreateStory(storyName: String)
     func onCreateStory(storyName: String, items: [BaseDataSourceItem])
 }

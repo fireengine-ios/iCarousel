@@ -9,6 +9,7 @@
 class CreateStoryNameInteractor: CreateStoryNameInteractorInput {
 
     weak var output: CreateStoryNameInteractorOutput!
+    var needSelectionItems: Bool = false
     
     func onCreateStory(storyName: String){
         let story = PhotoStory(name: storyName)
@@ -25,11 +26,12 @@ class CreateStoryNameInteractor: CreateStoryNameInteractorInput {
                 storyItems.append(storyItem)
             }
         }
-        if storyItems.count > 0 {
-            story.storyPhotos = storyItems
-            output.goToPhotosOrderForStory(story: story)
-        } else {
+        
+        story.storyPhotos = storyItems
+        if storyItems.isEmpty || needSelectionItems {
             output.goToSelectionPhoto(forStory: story)
+        } else {
+            output.goToPhotosOrderForStory(story: story)
         }
     }
 }

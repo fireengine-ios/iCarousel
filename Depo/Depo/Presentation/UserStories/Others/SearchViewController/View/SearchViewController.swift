@@ -55,7 +55,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
        
         suggestTableView.register(UINib(nibName: CellsIdConstants.suggestionTableSectionHeaderID, bundle: nil),
                                   forCellReuseIdentifier: CellsIdConstants.suggestionTableSectionHeaderID)
-        suggestTableView.contentInset.top = 20
+        suggestTableView.contentInset.top = 11
         
         setupMusicBar()
         subscribeToNotifications()
@@ -207,13 +207,15 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     func endSearchRequestWith(text: String) {
         self.collectionView.isHidden = !noFilesView.isHidden
         setCurrentPlayState()
-        if let searchBar = self.navigationBar.topItem?.titleView {
-            if text != (searchBar as! UISearchBar).text! {
+        
+        if let searchBar = self.navigationBar.topItem?.titleView as? UISearchBar, let searchBarText = searchBar.text {
+            let requestText = text.removingPercentEncoding ?? text
+            if requestText != searchBarText {
                 self.timerToSearch.invalidate()
-                self.timerToSearch = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.searchTimerIsOver(timer:)), userInfo: (searchBar as! UISearchBar).text!, repeats: false)
+                self.timerToSearch = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.searchTimerIsOver(timer:)), userInfo: text, repeats: false)
             }
         }
-        
+
         self.topBarContainer.isHidden = false
     }
     
@@ -309,7 +311,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch category {
         case .recent:
-            cell.textLabel?.text = recentSearchList[indexPath.row]
+            let text = recentSearchList[indexPath.row]
+            cell.textLabel?.text = text.removingPercentEncoding ?? text
         case .suggestion:
             let suggest = suggestionList[indexPath.row]
             if let highlightedText = suggest.highlightedText {
@@ -350,7 +353,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let searchBar = navigationBar.topItem?.titleView as! UISearchBar
-        searchBar.text = searchText
+        searchBar.text = searchText.removingPercentEncoding ?? searchText
         searchBarSearchButtonClicked(searchBar)
     }
     

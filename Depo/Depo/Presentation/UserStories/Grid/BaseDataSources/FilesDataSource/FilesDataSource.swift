@@ -118,7 +118,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     //Mark: - Sync Image
     
-    func getAssetThumbnail(asset: PHAsset, indexPath: IndexPath, completion: @escaping (_ image: UIImage?, _ indexPath: IndexPath)->Void) {
+    func getAssetThumbnail(asset: PHAsset, indexPath: IndexPath, completion: @escaping (_ image: UIImage?, _ indexPath: IndexPath)->Void) -> PHImageRequestID {
         let manager = PHImageManager.default()
         
         let options = PHImageRequestOptions()
@@ -133,10 +133,15 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
             cachingManager.startCachingImages(for: [asset], targetSize: targetSize, contentMode: .aspectFill, options: options)
         }
         
-        manager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
+        return manager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
 //            if let isDegaraded = (info?[PHImageResultIsDegradedKey] as? NSNumber)?.boolValue, !isDegaraded {
                 completion(result, indexPath)
 //            }
         })
+    }
+    
+    func cancelRequestByID(requestID: PHImageRequestID){
+        let manager = PHImageManager.default()
+        manager.cancelImageRequest(requestID)
     }
 }

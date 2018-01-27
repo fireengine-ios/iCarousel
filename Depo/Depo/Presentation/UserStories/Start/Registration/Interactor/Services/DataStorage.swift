@@ -17,7 +17,7 @@ class DataStorage {
     
     init() {
         models = [BaseCellModel(withTitle: TextConstants.registrationCellTitleGSMNumber,
-                                initialText: ""),
+                                initialText: TextConstants.registrationCellPlaceholderPhone),
                   BaseCellModel(withTitle: TextConstants.registrationCellTitleEmail,
                                 initialText: TextConstants.registrationCellPlaceholderEmail),
         BaseCellModel(withTitle: TextConstants.registrationCellTitlePassword,

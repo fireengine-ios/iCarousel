@@ -24,5 +24,9 @@ protocol CollectionViewCellDataProtocol {
     
     func updating()
     
+    func setRequestID(requestID: PHImageRequestID?)
+    
+    func getRequestID() -> PHImageRequestID?
+    
 }
 

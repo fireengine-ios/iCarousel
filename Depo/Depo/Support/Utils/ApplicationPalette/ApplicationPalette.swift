@@ -35,6 +35,8 @@ struct ColorConstants {
     static let grayTabBarButtonsColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
     static let textOrange = UIColor(red: 255/255, green: 160/255, blue: 10/255, alpha: 1)
     static let darkBorder = UIColor(red: 151/255, green: 151/255, blue: 151/255, alpha: 1)
+    static let orangeBorder = UIColor(red: 249/255, green: 206/255, blue: 107/255, alpha: 1)
+    
     static let orangeGradientStart = UIColor(red: 255/255, green: 177/255, blue: 33/255, alpha: 1)
     static let orangeGradientEnd = UIColor(red: 255/255, green: 183/255, blue: 116/255, alpha: 1)
     static let greenGradientStart = UIColor(red: 92/255, green: 195/255, blue: 195/255, alpha: 1)

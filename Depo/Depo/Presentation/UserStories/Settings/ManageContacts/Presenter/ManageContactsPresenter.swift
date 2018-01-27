@@ -58,7 +58,18 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
             }
         }
         
-        return sortedContacts.sorted(by: { $0.name < $1.name } )
+        sortedContacts = sortedContacts.sorted(by: { (group1, group2) -> Bool in
+            group1.name.getFirstUnicode().compareWithCyrillicPriority(with: group2.name.getFirstUnicode()) != .orderedAscending
+        })
+        
+        for i in 0..<sortedContacts.count {
+            let contacts = sortedContacts[i].contacts.sorted(by: { (contact1, contact2) -> Bool in
+                contact1.name.compareWithCyrillicPriority(with: contact2.name)
+            })
+            sortedContacts[i] = ManageContacts.Group(name: sortedContacts[i].name, contacts: contacts)
+        }
+        
+        return sortedContacts
     }
     
     func asyncOperationStarted() {
