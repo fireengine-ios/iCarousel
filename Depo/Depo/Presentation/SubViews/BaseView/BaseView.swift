@@ -15,6 +15,7 @@ class BaseView: UIView, NibInit {
     var canSwipe: Bool = true
     static let baseViewCornerRadius: CGFloat = 5
     var calculatedH: CGFloat = 0
+    var cardObject: HomeCardResponse? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()

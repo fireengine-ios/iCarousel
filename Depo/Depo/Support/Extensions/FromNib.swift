@@ -38,6 +38,7 @@ extension NibInit where Self: UIView {
         return nib.instantiate(withOwner: nil, options: nil)[0] as! Self
     }
 }
+
 extension NibInit where Self: UIViewController {
     static func initFromNib() -> Self {
         let nibName = String(describing: Self.self)

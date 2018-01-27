@@ -231,6 +231,34 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
+    func startOperationsWith(serverObjects: [HomeCardResponse]){
+        for object in serverObjects{
+            if let type = object.getOperationType(){
+                if let view = viewsByType[type] {
+                    view.cardObject = object
+                }else{
+                    if !checkIsThisIsPermittedType(type: type){
+                        continue
+                    }
+                    if !checkIsNeedShowPopUpFor(operationType: type){
+                        continue
+                    }
+                    if !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type){
+                        let view = getViewForOperation(operation: type)
+                        view.layoutIfNeeded()
+                        popUps.insert(view, at: 0)
+                    }
+                }
+            }
+        }
+        popUps = popUps.sorted(by: { (view1, view2) -> Bool in
+            let order1 = view1.cardObject?.order ?? 0
+            let order2 = view2.cardObject?.order ?? 0
+            return order1 < order2
+        })
+        collectionView.reloadData()
+    }
+    
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
         if !checkIsThisIsPermittedType(type: type){
             return
@@ -251,8 +279,13 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             
             viewsByType[type] = view
             let index = 0
-            print("insert at index ", index, type.rawValue)
-            self.popUps.insert(view, at: index)
+            //print("insert at index ", index, type.rawValue)
+            popUps.insert(view, at: index)
+            popUps = popUps.sorted(by: { (view1, view2) -> Bool in
+                let order1 = view1.cardObject?.order ?? 0
+                let order2 = view2.cardObject?.order ?? 0
+                return order1 < order2
+            })
             collectionView.reloadData()
         }
     }

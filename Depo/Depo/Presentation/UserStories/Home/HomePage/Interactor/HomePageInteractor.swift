@@ -6,22 +6,38 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+
 class HomePageInteractor: HomePageInteractorInput {
 
     weak var output: HomePageInteractorOutput!
+    
+    private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
     
     func homePagePresented(){
         FreeAppSpace.default.checkFreeAppSpace()
         SyncServiceManager.shared.updateImmediately()
         
-        CardsManager.default.startOperationWith(type: .contactBacupOld, allOperations: nil, completedOperations: nil)
-        CardsManager.default.startOperationWith(type: .contactBacupEmpty, allOperations: nil, completedOperations: nil)
+//        CardsManager.default.startOperationWith(type: .contactBacupOld, allOperations: nil, completedOperations: nil)
+//        CardsManager.default.startOperationWith(type: .contactBacupEmpty, allOperations: nil, completedOperations: nil)
+//
+//        CardsManager.default.startOperationWith(type: .freeAppSpaceLocalWarning, allOperations: nil, completedOperations: nil)
+//        CardsManager.default.startOperationWith(type: .freeAppSpaceCloudWarning, allOperations: nil, completedOperations: nil)
+//        CardsManager.default.startOperationWith(type: .emptyStorage, allOperations: nil, completedOperations: nil)
+//        CardsManager.default.startOperationWith(type: .collage, allOperations: nil, completedOperations: nil)
+//        CardsManager.default.startOperationWith(type: .albumCard, allOperations: nil, completedOperations: nil)
         
-        CardsManager.default.startOperationWith(type: .freeAppSpaceLocalWarning, allOperations: nil, completedOperations: nil)
-        CardsManager.default.startOperationWith(type: .freeAppSpaceCloudWarning, allOperations: nil, completedOperations: nil)
-        CardsManager.default.startOperationWith(type: .emptyStorage, allOperations: nil, completedOperations: nil)
-        CardsManager.default.startOperationWith(type: .collage, allOperations: nil, completedOperations: nil)
-        CardsManager.default.startOperationWith(type: .albumCard, allOperations: nil, completedOperations: nil)
+
+        homeCardsService.all { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let array):
+                    print(array)
+                    CardsManager.default.startOperatonsForCardsResponces(cardsResponces: array)
+                case .failed(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 
 }
