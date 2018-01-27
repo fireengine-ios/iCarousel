@@ -9,11 +9,6 @@
 import UIKit
 import SwiftyJSON
 
-enum CardActionType {
-    case save
-    case display
-}
-
 final class FilterPhotoCard: BaseView {
     
     private lazy var imageManager = ImageManager()
