@@ -329,6 +329,10 @@
 		7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		7C83B6F11F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */; };
 		7C83B6F31F3D916F006D05E3 /* SettingsAutoSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */; };
+		7C849211201CB979007C502A /* LatestUpladsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C849210201CB979007C502A /* LatestUpladsCard.swift */; };
+		7C849212201CB979007C502A /* LatestUpladsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C849210201CB979007C502A /* LatestUpladsCard.swift */; };
+		7C849214201CB990007C502A /* LatestUpladsCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C849213201CB990007C502A /* LatestUpladsCard.xib */; };
+		7C849215201CB990007C502A /* LatestUpladsCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C849213201CB990007C502A /* LatestUpladsCard.xib */; };
 		7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AB1F14CDF800F37E2C /* CircleButton.swift */; };
 		7CA2A7AE1F14CDF800F37E2C /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AC1F14CDF800F37E2C /* MenuButton.swift */; };
 		7CA2A7B01F14CE3F00F37E2C /* LocalMediaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AF1F14CE3F00F37E2C /* LocalMediaStorage.swift */; };
@@ -3572,6 +3576,8 @@
 		7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FolderSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAutoSyncModel.swift; sourceTree = "<group>"; };
+		7C849210201CB979007C502A /* LatestUpladsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestUpladsCard.swift; sourceTree = "<group>"; };
+		7C849213201CB990007C502A /* LatestUpladsCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LatestUpladsCard.xib; sourceTree = "<group>"; };
 		7C942FED1EF94A18008F8A8E /* Depo_LifeTech-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Depo_LifeTech-Info.plist"; sourceTree = "<group>"; };
 		7CA2A7AB1F14CDF800F37E2C /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		7CA2A7AC1F14CDF800F37E2C /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
@@ -7097,6 +7103,15 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		7C84920F201CB8EF007C502A /* LatestUploads */ = {
+			isa = PBXGroup;
+			children = (
+				7C849210201CB979007C502A /* LatestUpladsCard.swift */,
+				7C849213201CB990007C502A /* LatestUpladsCard.xib */,
+			);
+			path = LatestUploads;
+			sourceTree = "<group>";
+		};
 		7C942FE81EF931A7008F8A8E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -7480,6 +7495,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7C84920F201CB8EF007C502A /* LatestUploads */,
 				7C4F60AE201C65E90033C58F /* MovieCard */,
 				7C4F60A72019E28A0033C58F /* AlbumCard */,
 				7CD7C2A82019AFF7009F6D3D /* CollageCard */,
@@ -11423,6 +11439,7 @@
 				8C06AEEF2008AD70003D8E05 /* Buyuk_Selected.png in Resources */,
 				8C0E90291FDEBDFF00789C91 /* PhoneVereficationScreen~iphone.xib in Resources */,
 				8C06B12F2008AD72003D8E05 /* t_orta.png in Resources */,
+				7C849215201CB990007C502A /* LatestUpladsCard.xib in Resources */,
 				8C0E902A1FDEBDFF00789C91 /* InstagramAuthViewController.xib in Resources */,
 				8C06AF092008AD70003D8E05 /* check-mark@2x.png in Resources */,
 				8C06AF672008AD70003D8E05 /* duz_cizgi@2x.png in Resources */,
@@ -12124,6 +12141,7 @@
 				780400FA1FE7E6FB00560EEF /* SuggestionTableSectionHeader.xib in Resources */,
 				8C06AF542008AD70003D8E05 /* cropy_icon@3x.png in Resources */,
 				8C06B0C82008AD71003D8E05 /* sample@3x.png in Resources */,
+				7C849214201CB990007C502A /* LatestUpladsCard.xib in Resources */,
 				8C06AF7A2008AD70003D8E05 /* edit_selected@2x.png in Resources */,
 				8C06B0D82008AD71003D8E05 /* sample_orange@2x.png in Resources */,
 				8C06B1182008AD72003D8E05 /* t_buyuk@2x.png in Resources */,
@@ -13278,6 +13296,7 @@
 				8C0E8EEE1FDEBDFF00789C91 /* PhotoVideoDetailConfigurator.swift in Sources */,
 				8C0B91BB2017104800A5BA81 /* URL+Path.swift in Sources */,
 				8C0E8EEF1FDEBDFF00789C91 /* PhotoVideoDetailInitializer.swift in Sources */,
+				7C849212201CB979007C502A /* LatestUpladsCard.swift in Sources */,
 				8CD2B3AA1FE7B22900280547 /* ItemSyncService.swift in Sources */,
 				8C0E8EF01FDEBDFF00789C91 /* UserInfoSubViewViewInput.swift in Sources */,
 				8C0E8EF11FDEBDFF00789C91 /* UserInfoSubViewViewOutput.swift in Sources */,
@@ -13817,6 +13836,7 @@
 				78D9BA392007E7F100F2233F /* DuplicatedContactsInteractor.swift in Sources */,
 				CEB1CEAA1F21E11200C9DD8F /* SwiftyJSONExtension.swift in Sources */,
 				CECA95951F1610590054BDC0 /* RemoteDownloder.swift in Sources */,
+				7C849211201CB979007C502A /* LatestUpladsCard.swift in Sources */,
 				7C634F9F1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift in Sources */,
 				7CD1F8F61F0288CA0028F51A /* WiFiSyncInteractorInput.swift in Sources */,
 				CE1E26E120174D7500F49E41 /* ResponseParser.swift in Sources */,
