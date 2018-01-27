@@ -85,7 +85,7 @@ class BaseUserInputCellView: ProtoInputTextCell {
         textInputField.text = text
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if string == " " {
             return false
         }
@@ -93,4 +93,3 @@ class BaseUserInputCellView: ProtoInputTextCell {
         return true
     }
 }
-

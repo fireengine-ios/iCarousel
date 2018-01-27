@@ -10,14 +10,14 @@ import UIKit
 
 class CreateStoryNameModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, needSelectionItems: Bool) {
 
         if let viewController = viewInput as? CreateStoryNameViewController {
-            configure(viewController: viewController)
+            configure(viewController: viewController, needSelectionItems: needSelectionItems)
         }
     }
 
-    private func configure(viewController: CreateStoryNameViewController) {
+    private func configure(viewController: CreateStoryNameViewController, needSelectionItems: Bool) {
 
         let router = CreateStoryNameRouter()
 
@@ -27,6 +27,7 @@ class CreateStoryNameModuleConfigurator {
 
         let interactor = CreateStoryNameInteractor()
         interactor.output = presenter
+        interactor.needSelectionItems = needSelectionItems
 
         presenter.interactor = interactor
         viewController.output = presenter
