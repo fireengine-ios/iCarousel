@@ -22,18 +22,30 @@ extension FaceImagePresenter: FaceImageViewOutput {
         view?.startActivityIndicator()
         interactor.getFaceImageStatus()
     }
+    
+    func changeFaceImageStatus(_ isAllowed: Bool) {
+        view?.startActivityIndicator()
+        interactor.changeFaceImageStatus(isAllowed)
+    }
 }
 
 // MARK: - FaceImageInteractorOutput
 
 extension FaceImagePresenter: FaceImageInteractorOutput {
-    func didFaceImageStatus(_ isFaceImageAllowed: Bool) {
+    func operationFinished() {
         view?.stopActivityIndicator()
-        view?.showFaceImageStatus(isFaceImageAllowed)
     }
     
-    func operationFailed() {
-        view?.stopActivityIndicator()
+    func showError(error: String) {
+        UIApplication.showErrorAlert(message: error)
+    }
+    
+    func didFaceImageStatus(_ isFaceImageAllowed: Bool) {
+        view?.showFaceImageStatus(isFaceImageAllowed)
+    }
+
+    func failedChangeFaceImageStatus() {
+        view?.showfailedChangeFaceImageStatus()
     }
 }
 
