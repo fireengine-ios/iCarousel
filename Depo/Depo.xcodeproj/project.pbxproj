@@ -256,6 +256,10 @@
 		7C4F60AA2019E2AE0033C58F /* AlbumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F60A82019E2AE0033C58F /* AlbumCard.swift */; };
 		7C4F60AC2019E2BC0033C58F /* AlbumCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60AB2019E2BC0033C58F /* AlbumCard.xib */; };
 		7C4F60AD2019E2BC0033C58F /* AlbumCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60AB2019E2BC0033C58F /* AlbumCard.xib */; };
+		7C4F60B0201C674A0033C58F /* MovieCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F60AF201C674A0033C58F /* MovieCard.swift */; };
+		7C4F60B1201C674A0033C58F /* MovieCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F60AF201C674A0033C58F /* MovieCard.swift */; };
+		7C4F60B3201C675F0033C58F /* MovieCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60B2201C675F0033C58F /* MovieCard.xib */; };
+		7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60B2201C675F0033C58F /* MovieCard.xib */; };
 		7C5358101F9492DA00EABBAF /* OTPViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C53580E1F9492DA00EABBAF /* OTPViewController~iphone.xib */; };
 		7C5358111F9492DA00EABBAF /* OTPViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C53580F1F9492DA00EABBAF /* OTPViewController~ipad.xib */; };
 		7C5526131F7B9CCD00A21F3C /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526121F7B9CCD00A21F3C /* CardsManager.swift */; };
@@ -3419,6 +3423,8 @@
 		7C4F60A42019D0440033C58F /* CollageCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollageCard.xib; sourceTree = "<group>"; };
 		7C4F60A82019E2AE0033C58F /* AlbumCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCard.swift; sourceTree = "<group>"; };
 		7C4F60AB2019E2BC0033C58F /* AlbumCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCard.xib; sourceTree = "<group>"; };
+		7C4F60AF201C674A0033C58F /* MovieCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCard.swift; sourceTree = "<group>"; };
+		7C4F60B2201C675F0033C58F /* MovieCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCard.xib; sourceTree = "<group>"; };
 		7C53580E1F9492DA00EABBAF /* OTPViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OTPViewController~iphone.xib"; sourceTree = "<group>"; };
 		7C53580F1F9492DA00EABBAF /* OTPViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OTPViewController~ipad.xib"; sourceTree = "<group>"; };
 		7C5526121F7B9CCD00A21F3C /* CardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsManager.swift; sourceTree = "<group>"; };
@@ -6709,6 +6715,15 @@
 			path = AlbumCard;
 			sourceTree = "<group>";
 		};
+		7C4F60AE201C65E90033C58F /* MovieCard */ = {
+			isa = PBXGroup;
+			children = (
+				7C4F60AF201C674A0033C58F /* MovieCard.swift */,
+				7C4F60B2201C675F0033C58F /* MovieCard.xib */,
+			);
+			path = MovieCard;
+			sourceTree = "<group>";
+		};
 		7C5526141F7BA16100A21F3C /* CardsManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -7367,6 +7382,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7C4F60AE201C65E90033C58F /* MovieCard */,
 				7C4F60A72019E28A0033C58F /* AlbumCard */,
 				7CD7C2A82019AFF7009F6D3D /* CollageCard */,
 				7CD7C2A120189A27009F6D3D /* StorageCard */,
@@ -11538,6 +11554,7 @@
 				8C06B0CF2008AD71003D8E05 /* sample_green.png in Resources */,
 				8C06AF452008AD70003D8E05 /* crop_icon.png in Resources */,
 				8C06B0B32008AD71003D8E05 /* rotate@2x.png in Resources */,
+				7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */,
 				7C257B3B20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
 				8C06AEC32008AD70003D8E05 /* alt_cizgili_secili.png in Resources */,
 				8C06B1672008AD72003D8E05 /* toolbar_crop_icon@2x.png in Resources */,
@@ -12049,6 +12066,7 @@
 				8C06B0822008AD71003D8E05 /* paylas_mail.png in Resources */,
 				8C06AEF62008AD70003D8E05 /* cancel_buton@2x.png in Resources */,
 				8C06AECA2008AD70003D8E05 /* back_icon@2x.png in Resources */,
+				7C4F60B3201C675F0033C58F /* MovieCard.xib in Resources */,
 				8C06AFE82008AD71003D8E05 /* kare@3x.png in Resources */,
 				8C06B0CA2008AD71003D8E05 /* sample_bw@2x.png in Resources */,
 				CE51AFD11EF90853005DCEE0 /* ForgotPasswordViewController.xib in Resources */,
@@ -12414,6 +12432,7 @@
 				8C0E8C7B1FDEBDFF00789C91 /* CreateStoryPhotoSelectionViewController.swift in Sources */,
 				8C0E8C7C1FDEBDFF00789C91 /* LoginDataSource.swift in Sources */,
 				8C0E8C7D1FDEBDFF00789C91 /* UpdateCheck.m in Sources */,
+				7C4F60B1201C674A0033C58F /* MovieCard.swift in Sources */,
 				8C0E8C7E1FDEBDFF00789C91 /* Constants.swift in Sources */,
 				7C257B3E20174D7700CB56F8 /* ContactBackupEmpty.swift in Sources */,
 				8C0E8C7F1FDEBDFF00789C91 /* SKProduct+Localized.swift in Sources */,
@@ -13973,6 +13992,7 @@
 				D4E6081D5359092FC1F32441 /* HomeHeaderPresenter.swift in Sources */,
 				ABA837888294F92BAA62C9D7 /* HomeHeaderInteractorInput.swift in Sources */,
 				0C71C60CD17A3B334E9AAEC3 /* HomeHeaderInteractorOutput.swift in Sources */,
+				7C4F60B0201C674A0033C58F /* MovieCard.swift in Sources */,
 				786AA87724BCB7349231EF0C /* HomeHeaderInteractor.swift in Sources */,
 				CE6DE7581FCBE84100C23CBD /* FBResponses.swift in Sources */,
 				C065DB441478A7A0231FDCEE /* HomeHeaderRouterInput.swift in Sources */,

@@ -12,17 +12,22 @@ enum OperationType: String{
     case upload                     = "Upload"
     case sync                       = "Sync"
     case download                   = "Download"
+    case prepareToAutoSync          = "prepareToAutoSync"
+    case autoUploadIsOff            = "autoUploadIsOff"
+    case waitingForWiFi             = "waitingForWiFi"
+    
     case freeAppSpace               = "FreeAppSpace"
     case freeAppSpaceLocalWarning   = "freeAppSpaceLocalWarning"
     case freeAppSpaceCloudWarning   = "freeAppSpaceCloudWarning"
     case emptyStorage               = "emptyStorage"
-    case prepareToAutoSync          = "prepareToAutoSync"
-    case autoUploadIsOff            = "autoUploadIsOff"
-    case waitingForWiFi             = "waitingForWiFi"
+    
     case contactBacupEmpty          = "contactBacupEmpty"
     case contactBacupOld            = "contactBacupOld"
     case collage                    = "collage"
     case albumCard                  = "albumCard"
+    case latestUploads              = "latestUploads"
+    case stylizedPhoto              = "stylizedPhoto"
+    case movieCard                  = "movieCard"
 }
 
 typealias BlockObject = () -> Void
@@ -38,8 +43,13 @@ class CardsManager: NSObject {
     
     private var foloversArray = [CardsManagerViewProtocol]()
     private var progresForOperation = [OperationType: Progress]()
+    private var homeCardsObjects = [HomeCardResponse]()
     
-    var blocks = [BlockObject]()
+    var cardsThatStartedByDevice : [OperationType]{
+        get{
+            return [.upload, .sync, .download, .prepareToAutoSync, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
+        }
+    }
     
     //MARK: registration view
     
@@ -78,6 +88,26 @@ class CardsManager: NSObject {
     }
     
     //MARK: sending operation to registred subviews
+    func startOperatonsForCardsResponces(cardsResponces:[HomeCardResponse]){
+        let sortedArray = cardsResponces.sorted { (obj1, obj2) -> Bool in
+            return obj1.order < obj2.order
+        }
+        homeCardsObjects.removeAll()
+        homeCardsObjects.append(contentsOf: sortedArray)
+        sortingAllCards()
+    }
+    
+    private func sortingAllCards(){
+        //получаем список всех операций в массиве и стартуем их кучей
+        //во въюхах мерджим массивы и сортируем затем релоадим таблицу
+        //простой старт операции теперь должен будет инсертить в нужную точку массива
+
+        DispatchQueue.main.async {
+            for notificationView in self.foloversArray{
+                notificationView.startOperationsWith(serverObjects: self.homeCardsObjects)
+            }
+        }
+    }
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
@@ -177,36 +207,59 @@ class CardsManager: NSObject {
     
     //MARK: views for operations
     
+    func checkIsThisOperationStartedByDevice(operation: OperationType) -> Bool{
+        return cardsThatStartedByDevice.contains(operation)
+    }
+    
+    private func serverOperationFor(type: OperationType) -> HomeCardResponse? {
+        for serverObject in homeCardsObjects {
+            if serverObject.getOperationType() == type{
+                return serverObject
+            }
+        }
+        return nil
+    }
+    
     class func popUpViewForOperaion(type: OperationType) -> BaseView{
+        let serverObject = CardsManager.default.serverOperationFor(type: type)
+        var cardView: BaseView? = nil
+        
         switch type {
         case .freeAppSpace:
             let view = FreeUpSpacePopUp.initFromNib()
             view.configurateWithType(viewType: type)
-            return view
+            cardView = view
         case .freeAppSpaceCloudWarning, .freeAppSpaceLocalWarning, .emptyStorage:
             let popUp = StorageCard.initFromNib()
             popUp.configurateWithType(viewType: type)
-            return popUp
+            cardView = popUp
         case .download, .sync, .upload:
             let popUp = ProgressPopUp.initFromNib()
             popUp.configurateWithType(viewType: type)
-            return popUp
+            cardView = popUp
         case .prepareToAutoSync:
-            let popUp = PrepareToAutoSync.initFromNib()
-            return popUp
+            cardView = PrepareToAutoSync.initFromNib()
         case .autoUploadIsOff:
-            return AutoUploadIsOffPopUp.initFromNib()
+            cardView = AutoUploadIsOffPopUp.initFromNib()
         case .waitingForWiFi:
-            return WaitingForWiFiPopUp.initFromNib()
+            cardView = WaitingForWiFiPopUp.initFromNib()
         case .contactBacupEmpty:
-            return ContactBackupEmpty.initFromNib()
+            cardView = ContactBackupEmpty.initFromNib()
         case .contactBacupOld:
-            return ContactBackupOld.initFromNib()
+            cardView = ContactBackupOld.initFromNib()
         case .collage:
-            return CollageCard.initFromNib()
+            cardView = CollageCard.initFromNib()
         case .albumCard:
-            return AlbumCard.initFromNib()
+            cardView = AlbumCard.initFromNib()
+        case .latestUploads:
+            cardView = BaseView()
+        case .stylizedPhoto:
+            cardView = BaseView()
+        case .movieCard:
+            cardView = MovieCard.initFromNib()
         }
+        cardView?.cardObject = serverObject
+        return cardView!
     }
     
 }
