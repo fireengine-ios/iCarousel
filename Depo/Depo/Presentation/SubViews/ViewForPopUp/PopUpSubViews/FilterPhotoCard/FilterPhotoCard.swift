@@ -67,10 +67,21 @@ final class FilterPhotoCard: BaseView {
         }
     }
     
-    func set(object: JSON) {
+    override func set(object: HomeCardResponse?) {
+        super.set(object: object)
+        
+        if let details = object?.details {
+            set(details: details)
+        }
+    }
+    
+    private func set(details object: JSON) {
         let searchItem = SearchItemResponse(withJSON: object)
         let item = WrapData(remote: searchItem)
-        
+        loadImage(from: item)
+    }
+    
+    private func loadImage(from item: WrapData) {
         filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
             if let image = image {
                 self?.set(image: image)
@@ -87,8 +98,10 @@ final class FilterPhotoCard: BaseView {
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){
-        /// ENTER  OBJECT ID HERE
-        homeCardsService.delete(with: 1111) { result in
+        guard let id = cardObject?.id else {
+            return
+        }
+        homeCardsService.delete(with: id) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
@@ -98,8 +111,8 @@ final class FilterPhotoCard: BaseView {
                 }
             }
         }
-        /// will be need to add to the Type enum
-        //CardsManager.default.stopOperationWithType(type: .)
+        
+        CardsManager.default.stopOperationWithType(type: .stylizedPhoto)
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {

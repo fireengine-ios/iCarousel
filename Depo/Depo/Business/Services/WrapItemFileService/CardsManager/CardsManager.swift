@@ -222,7 +222,7 @@ class CardsManager: NSObject {
     
     class func popUpViewForOperaion(type: OperationType) -> BaseView{
         let serverObject = CardsManager.default.serverOperationFor(type: type)
-        var cardView: BaseView? = nil
+        let cardView: BaseView
         
         switch type {
         case .freeAppSpace:
@@ -254,12 +254,13 @@ class CardsManager: NSObject {
         case .latestUploads:
             cardView = BaseView()
         case .stylizedPhoto:
-            cardView = BaseView()
+            cardView = FilterPhotoCard.initFromNib()
         case .movieCard:
             cardView = MovieCard.initFromNib()
         }
-        cardView?.cardObject = serverObject
-        return cardView!
+        
+        cardView.set(object: serverObject)
+        return cardView
     }
     
 }

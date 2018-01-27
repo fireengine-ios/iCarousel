@@ -27,6 +27,10 @@ class BaseView: UIView, NibInit {
         calculatedH = frame.size.height
     }
     
+    func set(object: HomeCardResponse?) {
+        cardObject = object
+    }
+    
     func viewDeletedBySwipe(){
         
     }
