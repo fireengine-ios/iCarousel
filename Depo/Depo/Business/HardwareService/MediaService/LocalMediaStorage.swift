@@ -113,6 +113,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     var fetchResult: PHFetchResult<PHAsset>!
     func getAllImagesAndVideoAssets() -> [PHAsset] {
+        assetsCache.dropAll()
         log.debug("LocalMediaStorage getAllImagesAndVideoAssets")
 
         guard photoLibraryIsAvailible() else {
