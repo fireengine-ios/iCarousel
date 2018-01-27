@@ -10,4 +10,6 @@ import Foundation
 
 protocol FaceImageInteractorInput: class {
     func getFaceImageStatus()
+
+    func changeFaceImageStatus(_ isAllowed: Bool)
 }

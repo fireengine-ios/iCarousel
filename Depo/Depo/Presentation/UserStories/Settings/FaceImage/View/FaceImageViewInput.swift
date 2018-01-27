@@ -11,5 +11,8 @@ import Foundation
 protocol FaceImageViewInput: class, ActivityIndicator {
     func startActivityIndicator()
     func stopActivityIndicator()
+    
     func showFaceImageStatus(_ isFaceImageAllowed: Bool)
+    
+    func showfailedChangeFaceImageStatus()
 }

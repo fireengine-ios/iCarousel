@@ -9,6 +9,11 @@
 import Foundation
 
 protocol FaceImageInteractorOutput: class {
-    func operationFailed()
+    func operationFinished()
+    func showError(error: String)
+
     func didFaceImageStatus(_ isFaceImageAllowed: Bool)
+    
+    func failedChangeFaceImageStatus()
+    
 }
