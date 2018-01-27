@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -74,7 +75,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="rX0-8z-yJA">
-                                    <rect key="frame" x="0.0" y="222" width="414" height="66.333333333333314"/>
+                                    <rect key="frame" x="0.0" y="344.66666666666669" width="414" height="66.333333333333314"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KrQ-Cb-oUZ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="20.333333333333332"/>
@@ -96,7 +97,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hZZ-dA-LwW">
-                                    <rect key="frame" x="10" y="308" width="394" height="161"/>
+                                    <rect key="frame" x="10" y="451" width="394" height="161"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="dxs-eW-wJ3">
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
@@ -277,8 +278,8 @@
                                         <constraint firstItem="dxs-eW-wJ3" firstAttribute="width" secondItem="hZZ-dA-LwW" secondAttribute="width" id="kHK-jc-zvc"/>
                                     </constraints>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34w-gh-gNj" customClass="ButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
-                                    <rect key="frame" x="151" y="622" width="111" height="29"/>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34w-gh-gNj" customClass="ButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
+                                    <rect key="frame" x="151" y="621" width="111" height="29"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="29" id="SLt-IX-zYY"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="111" id="nHm-g0-GBZ"/>
@@ -295,11 +296,11 @@
                                 <constraint firstItem="pkl-kE-oQ1" firstAttribute="width" secondItem="LvS-vM-9ef" secondAttribute="width" constant="34" id="A74-Q3-LlP"/>
                                 <constraint firstItem="LvS-vM-9ef" firstAttribute="top" secondItem="Tib-1p-vqS" secondAttribute="top" constant="35" id="A8U-wb-Kke"/>
                                 <constraint firstItem="pkl-kE-oQ1" firstAttribute="centerX" secondItem="LvS-vM-9ef" secondAttribute="centerX" id="Ely-Ej-FZL"/>
-                                <constraint firstItem="rX0-8z-yJA" firstAttribute="top" secondItem="LvS-vM-9ef" secondAttribute="bottom" constant="25" id="Eyj-81-imk"/>
+                                <constraint firstItem="rX0-8z-yJA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LvS-vM-9ef" secondAttribute="bottom" constant="25" id="Eyj-81-imk"/>
                                 <constraint firstItem="pkl-kE-oQ1" firstAttribute="centerY" secondItem="LvS-vM-9ef" secondAttribute="centerY" id="MbW-fz-bAj"/>
-                                <constraint firstItem="34w-gh-gNj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hZZ-dA-LwW" secondAttribute="bottom" id="Oke-fF-sYF"/>
+                                <constraint firstItem="34w-gh-gNj" firstAttribute="top" secondItem="hZZ-dA-LwW" secondAttribute="bottom" constant="10" id="Oke-fF-sYF"/>
                                 <constraint firstItem="34w-gh-gNj" firstAttribute="centerX" secondItem="Tib-1p-vqS" secondAttribute="centerX" id="c4h-Xx-JoW"/>
-                                <constraint firstItem="hZZ-dA-LwW" firstAttribute="top" secondItem="rX0-8z-yJA" secondAttribute="bottom" constant="20" id="dFD-Bs-AmV"/>
+                                <constraint firstItem="hZZ-dA-LwW" firstAttribute="top" secondItem="rX0-8z-yJA" secondAttribute="bottom" constant="40" id="dFD-Bs-AmV"/>
                                 <constraint firstAttribute="trailing" secondItem="hZZ-dA-LwW" secondAttribute="trailing" constant="10" id="fUp-5r-CsV"/>
                                 <constraint firstItem="pkl-kE-oQ1" firstAttribute="height" secondItem="LvS-vM-9ef" secondAttribute="height" constant="34" id="kiG-Zy-5pl"/>
                                 <constraint firstItem="LvS-vM-9ef" firstAttribute="centerX" secondItem="Tib-1p-vqS" secondAttribute="centerX" id="qR6-uZ-9Mf"/>
