@@ -2577,6 +2577,14 @@
 		CE3AA9D91F4EB153000157AF /* FetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9D81F4EB153000157AF /* FetchService.swift */; };
 		CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D05201B11BF00173045 /* PVViewerController.swift */; };
 		CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
+		CE3E4D0B201B63A800173045 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0A201B63A800173045 /* ImageScrollView.swift */; };
+		CE3E4D0D201B696500173045 /* UIButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0C201B696500173045 /* UIButton+Properties.swift */; };
+		CE3E4D0E201B698F00173045 /* UIButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0C201B696500173045 /* UIButton+Properties.swift */; };
+		CE3E4D0F201B699F00173045 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0A201B63A800173045 /* ImageScrollView.swift */; };
+		CE3E4D10201B69A200173045 /* PVViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D05201B11BF00173045 /* PVViewerController.swift */; };
+		CE3E4D11201B69A900173045 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
+		CE3E4D13201C70A100173045 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D12201C70A100173045 /* ImageManager.swift */; };
+		CE3E4D14201C7B6600173045 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D12201C70A100173045 /* ImageManager.swift */; };
 		CE3F33AF1F34881800EE37E7 /* SharedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F33AE1F34881800EE37E7 /* SharedService.swift */; };
 		CE40133B1FCFE4AF006F28FD /* PromoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40133A1FCFE4AF006F28FD /* PromoView.swift */; };
 		CE4140621F0A5F6D001924E1 /* CaptchaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4140551F0A5F6D001924E1 /* CaptchaViewController.xib */; };
@@ -4633,6 +4641,9 @@
 		CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
 		CE3E4D05201B11BF00173045 /* PVViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVViewerController.swift; sourceTree = "<group>"; };
 		CE3E4D06201B11BF00173045 /* PVViewerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PVViewerController.xib; sourceTree = "<group>"; };
+		CE3E4D0A201B63A800173045 /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
+		CE3E4D0C201B696500173045 /* UIButton+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Properties.swift"; sourceTree = "<group>"; };
+		CE3E4D12201C70A100173045 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		CE3F33AE1F34881800EE37E7 /* SharedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedService.swift; sourceTree = "<group>"; };
 		CE40133A1FCFE4AF006F28FD /* PromoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoView.swift; sourceTree = "<group>"; };
 		CE4140551F0A5F6D001924E1 /* CaptchaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptchaViewController.xib; sourceTree = "<group>"; };
@@ -7017,6 +7028,7 @@
 				CE907A2E1F94D49800D2F8CE /* MulticastDelegate.swift */,
 				CE37B0211F7B7BDE00DDE209 /* IAPManager.swift */,
 				CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */,
+				CE3E4D12201C70A100173045 /* ImageManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -9528,6 +9540,7 @@
 				CEDFECA11F10C77E003D1A75 /* UINavigationBar */,
 				CEDFECA31F10C77E003D1A75 /* UIViewController */,
 				CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */,
+				CE3E4D0C201B696500173045 /* UIButton+Properties.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -9580,8 +9593,9 @@
 		CE3E4D09201B131600173045 /* PVViewerController */ = {
 			isa = PBXGroup;
 			children = (
-				CE3E4D05201B11BF00173045 /* PVViewerController.swift */,
 				CE3E4D06201B11BF00173045 /* PVViewerController.xib */,
+				CE3E4D05201B11BF00173045 /* PVViewerController.swift */,
+				CE3E4D0A201B63A800173045 /* ImageScrollView.swift */,
 			);
 			path = PVViewerController;
 			sourceTree = "<group>";
@@ -11129,6 +11143,7 @@
 				8C06B09B2008AD71003D8E05 /* refresh.png in Resources */,
 				8C06AF3F2008AD70003D8E05 /* crop.png in Resources */,
 				8C06B0052008AD71003D8E05 /* Kucuk@3x.png in Resources */,
+				CE3E4D11201B69A900173045 /* PVViewerController.xib in Resources */,
 				8C06AF432008AD70003D8E05 /* crop@3x.png in Resources */,
 				8C06AF772008AD70003D8E05 /* edit@3x.png in Resources */,
 				8C06B1652008AD72003D8E05 /* toolbar_crop_icon.png in Resources */,
@@ -12430,6 +12445,7 @@
 				8C0E8C7C1FDEBDFF00789C91 /* LoginDataSource.swift in Sources */,
 				8C0E8C7D1FDEBDFF00789C91 /* UpdateCheck.m in Sources */,
 				8C0E8C7E1FDEBDFF00789C91 /* Constants.swift in Sources */,
+				CE3E4D14201C7B6600173045 /* ImageManager.swift in Sources */,
 				7C257B3E20174D7700CB56F8 /* ContactBackupEmpty.swift in Sources */,
 				8C0E8C7F1FDEBDFF00789C91 /* SKProduct+Localized.swift in Sources */,
 				8CD2B3AB1FE7B23E00280547 /* PopUpController.swift in Sources */,
@@ -12740,6 +12756,7 @@
 				8C0E8DA51FDEBDFF00789C91 /* BottomSelectionTabBarRouter.swift in Sources */,
 				8C0E8DA61FDEBDFF00789C91 /* PasswordCell.swift in Sources */,
 				8C0E8DA71FDEBDFF00789C91 /* RegistrationViewInput.swift in Sources */,
+				CE3E4D0F201B699F00173045 /* ImageScrollView.swift in Sources */,
 				8C0E8DA81FDEBDFF00789C91 /* RegistrationViewOutput.swift in Sources */,
 				8C0E8DA91FDEBDFF00789C91 /* RegistrationViewController.swift in Sources */,
 				8C0E8DAA1FDEBDFF00789C91 /* HelpAndSupportRouter.swift in Sources */,
@@ -13091,6 +13108,7 @@
 				8CD2B3AA1FE7B22900280547 /* ItemSyncService.swift in Sources */,
 				8C0E8EF01FDEBDFF00789C91 /* UserInfoSubViewViewInput.swift in Sources */,
 				8C0E8EF11FDEBDFF00789C91 /* UserInfoSubViewViewOutput.swift in Sources */,
+				CE3E4D10201B69A200173045 /* PVViewerController.swift in Sources */,
 				8C0E8EF21FDEBDFF00789C91 /* IAPManager.swift in Sources */,
 				8C0E8EF31FDEBDFF00789C91 /* UserInfoSubViewViewController.swift in Sources */,
 				8C0E8EF41FDEBDFF00789C91 /* UserInfoSubViewModuleInput.swift in Sources */,
@@ -13198,6 +13216,7 @@
 				8C0E8F511FDEBDFF00789C91 /* SearchViewRouterInput.swift in Sources */,
 				8C0E8F521FDEBDFF00789C91 /* FileInfoRouterInput.swift in Sources */,
 				8C0E8F531FDEBDFF00789C91 /* DocumentsGreedPresenter.swift in Sources */,
+				CE3E4D0E201B698F00173045 /* UIButton+Properties.swift in Sources */,
 				8C0E8F541FDEBDFF00789C91 /* FileInfoRouter.swift in Sources */,
 				8C0E8F551FDEBDFF00789C91 /* UsageInfoRouter.swift in Sources */,
 				8C0E8F561FDEBDFF00789C91 /* ActionSheetPredetermendConfigs.swift in Sources */,
@@ -13365,6 +13384,7 @@
 				CE95ED491F516736002F923A /* HelpAndSupportDescriptionTableViewCell.swift in Sources */,
 				CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */,
 				CE51AB161EF90853005DCEE0 /* CurioLocationData.m in Sources */,
+				CE3E4D0D201B696500173045 /* UIButton+Properties.swift in Sources */,
 				CEAE3FB41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift in Sources */,
 				CE95ED2F1F5162A7002F923A /* FAQSectionItem.swift in Sources */,
 				CE2F561B1F7552A900F49DA1 /* PackagesPresenter.swift in Sources */,
@@ -13996,6 +14016,7 @@
 				9C583593E55BA0F9A4F6B53D /* HomeHeaderInitializer.swift in Sources */,
 				DE10EF65DE653E0EDBEC8C17 /* BaseFilesGreedViewInput.swift in Sources */,
 				228C4DD0339279189CC9619C /* BaseFilesGreedViewOutput.swift in Sources */,
+				CE3E4D13201C70A100173045 /* ImageManager.swift in Sources */,
 				CE2F55F81F7551A100F49DA1 /* SubscriptionPlan.swift in Sources */,
 				CDE2227E3AD0825FD2B61890 /* BaseFilesGreedViewController.swift in Sources */,
 				CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */,
@@ -14224,6 +14245,7 @@
 				7CF9A9F51FA2279500242FDD /* ImageForDowload.swift in Sources */,
 				8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
 				05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */,
+				CE3E4D0B201B63A800173045 /* ImageScrollView.swift in Sources */,
 				E197FC956A2CBF90DCEB2E3D /* SelectNameInteractorOutput.swift in Sources */,
 				463A9A904E22B54222190099 /* SelectNameInteractor.swift in Sources */,
 				54702BD5C12348C54DF56381 /* SelectNameRouterInput.swift in Sources */,

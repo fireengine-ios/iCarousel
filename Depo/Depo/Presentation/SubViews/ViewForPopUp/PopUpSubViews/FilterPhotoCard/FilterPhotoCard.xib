@@ -67,10 +67,21 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="HVF-63-a7z">
                     <rect key="frame" x="15" y="87" width="433" height="163"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIO-P6-tSa">
+                    <rect key="frame" x="15" y="87" width="433" height="163"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="actionPhotoViewButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="TZz-7B-aAk"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="QIO-P6-tSa" firstAttribute="top" secondItem="HVF-63-a7z" secondAttribute="top" id="08q-Sk-wQf"/>
                 <constraint firstItem="HVF-63-a7z" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="1qN-nJ-vq1"/>
+                <constraint firstItem="QIO-P6-tSa" firstAttribute="trailing" secondItem="HVF-63-a7z" secondAttribute="trailing" id="4SE-7O-y49"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HVF-63-a7z" secondAttribute="trailing" constant="15" id="6YT-rI-tJx"/>
                 <constraint firstAttribute="trailing" secondItem="ztU-vr-dm2" secondAttribute="trailing" id="7rx-C9-cmm"/>
                 <constraint firstItem="I3X-eZ-Q6a" firstAttribute="top" secondItem="PAk-O0-dnB" secondAttribute="bottom" constant="15" id="FoM-0G-KTh"/>
@@ -82,11 +93,15 @@
                 <constraint firstItem="I3X-eZ-Q6a" firstAttribute="leading" secondItem="PAk-O0-dnB" secondAttribute="leading" id="Mfs-5h-yuv"/>
                 <constraint firstItem="lak-ux-Y5D" firstAttribute="top" secondItem="ztU-vr-dm2" secondAttribute="bottom" id="Mm5-mm-CxC"/>
                 <constraint firstItem="Y1Z-QC-Djp" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="NBh-U9-aA4"/>
+                <constraint firstItem="QIO-P6-tSa" firstAttribute="centerY" secondItem="HVF-63-a7z" secondAttribute="centerY" id="Nic-rR-Q0h"/>
+                <constraint firstItem="QIO-P6-tSa" firstAttribute="bottom" secondItem="HVF-63-a7z" secondAttribute="bottom" id="QiI-Vl-5Hc"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="0R8-XT-jM1" secondAttribute="trailing" constant="15" id="RWF-uo-fL2"/>
+                <constraint firstItem="QIO-P6-tSa" firstAttribute="leading" secondItem="HVF-63-a7z" secondAttribute="leading" id="S9t-Cu-RrA"/>
                 <constraint firstItem="HVF-63-a7z" firstAttribute="top" secondItem="I3X-eZ-Q6a" secondAttribute="bottom" constant="15" id="VU0-hP-1uE"/>
                 <constraint firstItem="ztU-vr-dm2" firstAttribute="top" secondItem="0R8-XT-jM1" secondAttribute="bottom" constant="15" id="YO3-sE-3L9"/>
                 <constraint firstItem="PAk-O0-dnB" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="15" id="YYZ-WC-hiL"/>
                 <constraint firstItem="0R8-XT-jM1" firstAttribute="top" secondItem="HVF-63-a7z" secondAttribute="bottom" constant="15" id="bdh-t7-CcH"/>
+                <constraint firstItem="QIO-P6-tSa" firstAttribute="centerX" secondItem="HVF-63-a7z" secondAttribute="centerX" id="f3T-Cj-rBA"/>
                 <constraint firstItem="0R8-XT-jM1" firstAttribute="leading" secondItem="PAk-O0-dnB" secondAttribute="leading" id="hHO-6U-nrP"/>
                 <constraint firstItem="ztU-vr-dm2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sWB-lD-qOE"/>
                 <constraint firstItem="lak-ux-Y5D" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="ztQ-3u-k1U"/>

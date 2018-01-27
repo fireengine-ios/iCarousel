@@ -515,6 +515,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return Date()
     }
     
+    convenience init(asset: PHAsset) {
+        let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
+        let baseMediaContent = BaseMediaContent(curentAsset: asset,
+                                                urlToFile: info.url,
+                                                size: info.size,
+                                                md5: info.md5)
+        self.init(baseModel: baseMediaContent)
+    }
+    
     init(musicForCreateStory: CreateStoryMusicItem) {
         id = musicForCreateStory.id
         tmpDownloadUrl = musicForCreateStory.path

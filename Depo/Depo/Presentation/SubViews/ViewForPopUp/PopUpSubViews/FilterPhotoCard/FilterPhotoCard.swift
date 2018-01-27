@@ -15,6 +15,9 @@ enum CardActionType {
 
 final class FilterPhotoCard: BaseView {
     
+    private lazy var imageManager = ImageManager()
+    private lazy var homeCardsService: HomeCardsService = factory.resolve()
+    
     @IBOutlet private weak var headerLabel: UILabel! {
         didSet {
             headerLabel.text = TextConstants.homeLikeFilterHeader
@@ -51,8 +54,7 @@ final class FilterPhotoCard: BaseView {
     
     @IBOutlet private weak var photoImageView: UIImageView! {
         didSet {
-//            set(image: #imageLiteral(resourceName: "dogFilterImage"))
-            set(image: #imageLiteral(resourceName: "Background"))
+            set(image: #imageLiteral(resourceName: "dogFilterImage"))
         }
     }
     
@@ -68,52 +70,80 @@ final class FilterPhotoCard: BaseView {
     }
     
     private func set(image: UIImage) {
-        cardType = .display
-//        cardType = .save
+        cardType = .save
         let oldieFilterColor = UIColor(red: 1, green: 230.0/255.0, blue: 0, alpha: 0.4)
         photoImageView.image = image.grayScaleImage?.mask(with: oldieFilterColor)
     }
     
-    private func saveToDevice(image: UIImage) {
-        bottomButton.isEnabled = false
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(saved(image:error:contextInfo:)), nil)
-    }
-    
-    @objc private func saved(image: UIImage, error: Error?, contextInfo: UnsafeRawPointer) {
-        DispatchQueue.main.async {
-            self.bottomButton.isEnabled = true
-            if let error = error {
-                UIApplication.showErrorAlert(message: error.localizedDescription)
-            } else {
-                self.cardType = .display
+    @IBAction private func actionCloseButton(_ sender: UIButton){
+        /// ENTER  OBJECT ID HERE
+        homeCardsService.delete(with: 1111) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    break
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                }
             }
         }
-    }
-    
-    @IBAction private func actionCloseButton(){
         /// will be need to add to the Type enum
         //CardsManager.default.stopOperationWithType(type: .)
     }
     
+    @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
+        guard let image = photoImageView.image else { return }
+        
+        let vc = PVViewerController.initFromNib()
+        vc.image = image
+        RouterVC().pushViewController(viewController: vc)
+    }
+    
     @IBAction private func actionBottomButton(_ sender: UIButton) {
-        guard let image = photoImageView.image else {
-            return
-        }
+        guard let image = photoImageView.image else { return }
         
         switch cardType {
         case .save:
             saveToDevice(image: image)
+            
         case .display:
-            let vc = PVViewerController.initFromNib()
-            vc.image = image
-            RouterVC().pushViewController(viewController: vc)
-//            let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: <#T##String#>, selectedItem: <#T##Item#>, allItems: <#T##[Item]#>, hideActionButtons: <#T##Bool#>)
-//
-//            let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
-//                                                                                        selectedItem: fileObject,
-//                                                                                        allItems: items)
-//            let c = controller as! PhotoVideoDetailViewController
-            break
+            imageManager.getLastImageAsset { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let asset):
+                        self.showPhotoVideoDetail(with: asset)
+                    case .failed(let error):
+                        UIApplication.showErrorAlert(message: error.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func showPhotoVideoDetail(with asset: PHAsset) {
+        let item = WrapData(asset: asset)
+        
+        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
+
+        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        RouterVC().pushViewController(viewController: controller)
+    }
+    
+    private func saveToDevice(image: UIImage) {
+        bottomButton.isEnabled = false
+        
+        imageManager.saveToDevice(image: image) { result in
+            DispatchQueue.main.async {
+                self.bottomButton.isEnabled = true
+                
+                switch result {
+                case .success(_):
+                    self.cardType = .display
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                }
+            }
         }
     }
 }
