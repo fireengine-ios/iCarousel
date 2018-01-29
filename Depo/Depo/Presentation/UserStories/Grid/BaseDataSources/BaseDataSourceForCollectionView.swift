@@ -1296,10 +1296,16 @@ extension BaseDataSourceForCollectionView {
     
     fileprivate func updateCachedAssets() {
         // Update only if the view is visible.
-        guard let view = collectionView?.superview, view.window != nil else { return }
+        guard
+            let collectionView = collectionView,
+            let view = collectionView.superview,
+            view.window != nil
+        else {
+            return
+        }
         
         // The preheat window is twice the height of the visible rect.
-        let visibleRect = CGRect(origin: collectionView!.contentOffset, size: collectionView!.bounds.size)
+        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
         let preheatRect = visibleRect.insetBy(dx: 0, dy: -0.5 * visibleRect.height)
         
         // Update only if the visible area is significantly different from the last preheated area.
@@ -1309,7 +1315,7 @@ extension BaseDataSourceForCollectionView {
         // Compute the assets to start caching and to stop caching.
         let (addedRects, removedRects) = differencesBetweenRects(previousPreheatRect, preheatRect)
         let addedAssets = addedRects
-            .flatMap { rect in collectionView!.indexPathsForElements(in: rect) }
+            .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
             .flatMap { (indexPath) -> PHAsset? in
                 var asset: PHAsset?
                 if let item = itemForIndexPath(indexPath: indexPath) as? Item {
@@ -1320,7 +1326,7 @@ extension BaseDataSourceForCollectionView {
                 return asset
         }
         let removedAssets = removedRects
-            .flatMap { rect in collectionView!.indexPathsForElements(in: rect) }
+            .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
             .flatMap {  (indexPath) -> PHAsset? in
                 var asset: PHAsset?
                 if let item = itemForIndexPath(indexPath: indexPath) as? Item {

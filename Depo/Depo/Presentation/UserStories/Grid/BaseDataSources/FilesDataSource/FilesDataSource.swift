@@ -121,7 +121,7 @@ extension FilesDataSource {
     
     //Mark: - Sync Image
     
-    private func phImageRequestOptions() -> PHImageRequestOptions {
+    private func defaultImageRequestOptions() -> PHImageRequestOptions {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
         options.isSynchronous = false
@@ -147,7 +147,7 @@ extension FilesDataSource {
         
         let targetSize = CGSize(width: 300, height: 300)
         
-        let options = phImageRequestOptions()
+        let options = defaultImageRequestOptions()
         
         cachingManager.startCachingImages(for: assets, targetSize: targetSize, contentMode: .aspectFill, options: options)
     }
@@ -159,7 +159,7 @@ extension FilesDataSource {
         
         let targetSize = CGSize(width: 300, height: 300)
         
-        let options = phImageRequestOptions()
+        let options = defaultImageRequestOptions()
         
         cachingManager.stopCachingImages(for: assets, targetSize: targetSize, contentMode: .aspectFill, options: options)
     }
@@ -171,7 +171,7 @@ extension FilesDataSource {
         
         let targetSize = CGSize(width: 300, height: 300)
         
-        let options = phImageRequestOptions()
+        let options = defaultImageRequestOptions()
         
         cachingManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
             completion(result, indexPath)
