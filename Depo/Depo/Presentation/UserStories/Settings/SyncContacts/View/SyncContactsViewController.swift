@@ -231,7 +231,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
             backupDateLabel.text = TextConstants.settingsBackUpLessAMinute
         } else {
             backupDateLabel.text = String(format: TextConstants.settingsBackUpLessADay,
-                                          lastBackUpDate.getDateInFormat(format: "d MMMM yyyy HH:mm:ss"))
+                                          lastBackUpDate.getDateInFormat(format: "d MMMM yyyy"))
         }
     }
     
