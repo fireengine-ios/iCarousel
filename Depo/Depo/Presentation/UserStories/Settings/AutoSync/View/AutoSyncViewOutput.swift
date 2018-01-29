@@ -11,4 +11,5 @@ protocol AutoSyncViewOutput {
     func skipForNowPressed()
     func saveChanges(setting: SettingsAutoSyncModel)
     func saveSettings(_ setting: SettingsAutoSyncModel)
+    func enableAutoSync()
 }

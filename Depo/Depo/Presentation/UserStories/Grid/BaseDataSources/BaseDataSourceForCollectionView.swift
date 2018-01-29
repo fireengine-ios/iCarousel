@@ -79,6 +79,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var parentUUID: String?
     
+    let filesDataSource = FilesDataSource()
+    
     private func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
         isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
@@ -769,7 +771,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
-            let requestID = FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
+            let requestID = filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
                 DispatchQueue.main.async {
                     if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol {
                         if let image = image {
@@ -811,7 +813,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
         }
         if let requestID = cell_.getRequestID(){
-            FilesDataSource().cancelRequestByID(requestID: requestID)
+            filesDataSource.cancelRequestByID(requestID: requestID)
             cell_.setRequestID(requestID: requestID)
         }
     }

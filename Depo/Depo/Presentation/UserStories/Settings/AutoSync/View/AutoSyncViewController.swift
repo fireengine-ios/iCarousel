@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutoSyncViewController: UIViewController, AutoSyncViewInput {
+class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataSourceDelegate {
 
     var output: AutoSyncViewOutput!
     
@@ -67,6 +67,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         skipButton.setTitle(TextConstants.autoSyncskipForNowButton, for: .normal)
         
         dataSource.configurateTable(table: tableView, tableHConstraint: tableHConstaint)
+        dataSource.delegate = self
         
         output.viewIsReady()
     }
@@ -90,4 +91,17 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         dataSource.showCellsFromModels(models: models)
     }
     
+    func reloadTableView() {
+        dataSource.reloadTableView()
+    }
+    
+    func disableAutoSync() {
+        dataSource.forceDisableAutoSync()
+    }
+    
+    // MARK: AutoSyncDataSourceDelegate
+    
+    func enableAutoSync() {
+        output.enableAutoSync()
+    }
 }

@@ -9,7 +9,7 @@
 struct ContactSync {
     struct SyncResponse {
         let responseType: SyncOperationType
-        let totalNumberOfContacts: Int
+        var totalNumberOfContacts: Int
         let newContactsNumber: Int
         let duplicatesNumber: Int
         let deletedNumber: Int
