@@ -175,11 +175,11 @@ final class UploadService: BaseRequestService {
                     }
                 }
                 
-                self.uploadOperations.removeFirstIfExists(finishedOperation)
-                
                 if let error = error {
                     print("AUTOSYNC: \(error.localizedDescription)")
-//                    if error.description == TextConstants.canceledOperationTextError {
+                    if error.description != TextConstants.canceledOperationTextError {
+                        self.uploadOperations.removeFirstIfExists(finishedOperation)
+                    }
 //                        //operation was cancelled - not an actual error
 //                        self.showUploadCardProgress()
 //                        checkIfFinished()
@@ -189,6 +189,8 @@ final class UploadService: BaseRequestService {
 //                    }
                     return
                 }
+                
+                self.uploadOperations.removeFirstIfExists(finishedOperation)
                 
                 self.finishedSyncToUseOperationsCount += 1
                 
@@ -246,8 +248,6 @@ final class UploadService: BaseRequestService {
                     return
                 }
                 
-                self.uploadOperations.removeFirstIfExists(finishedOperation)
-                
                 let checkIfFinished = {
                     if self.uploadOperations.filter({ $0.uploadType == .fromHomePage }).isEmpty {
                         success?()
@@ -262,10 +262,13 @@ final class UploadService: BaseRequestService {
                         self.showUploadCardProgress()
                         checkIfFinished()
                     } else {
+                        self.uploadOperations.removeFirstIfExists(finishedOperation)
                         fail?(error)
                     }
                     return
                 }
+                
+                self.uploadOperations.removeFirstIfExists(finishedOperation)
 
                 self.finishedUploadOperationsCount += 1
                 
@@ -325,12 +328,12 @@ final class UploadService: BaseRequestService {
                         return
                     }
                 }
-
-                self.uploadOperations.removeFirstIfExists(finishedOperation)
                 
                 if let error = error {
 //                    print("AUTOSYNC: \(error.localizedDescription)")
-//                    if error.description == TextConstants.canceledOperationTextError {
+                    if error.description != TextConstants.canceledOperationTextError {
+                        self.uploadOperations.removeFirstIfExists(finishedOperation)
+                    }
 //                        //operation was cancelled - not an actual error
 //                        self.showSyncCardProgress()
 //                        checkIfFinished()
@@ -339,6 +342,8 @@ final class UploadService: BaseRequestService {
 //                    }
                     return
                 }
+                
+                self.uploadOperations.removeFirstIfExists(finishedOperation)
 
                 if finishedOperation.item.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 }
                 else if finishedOperation.item.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
