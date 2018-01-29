@@ -8,8 +8,25 @@
 
 import UIKit
 
-class LatestUpladsCard: UIView {
+class LatestUpladsCard: BaseView {
 
+    @IBOutlet weak var title:UILabel!
+    @IBOutlet weak var subTitle: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var viewRecentActivitiesButton: UIButton!
+    @IBOutlet weak var viewAllPhotosButton: UIButton!
     
+    
+    override func configurateView() {
+        super.configurateView()
+    }
+    
+    @IBAction func onViewRecentActivitiesButton(){
+        
+    }
 
+    @IBAction func onViewAllPhotosButton(){
+        
+    }
+    
 }
