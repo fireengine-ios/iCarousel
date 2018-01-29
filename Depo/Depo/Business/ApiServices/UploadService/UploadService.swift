@@ -175,8 +175,6 @@ final class UploadService: BaseRequestService {
                     }
                 }
                 
-                self.uploadOperations.removeFirstIfExists(finishedOperation)
-                
                 if let error = error {
                     print("AUTOSYNC: \(error.localizedDescription)")
                     if error.description != TextConstants.canceledOperationTextError {
