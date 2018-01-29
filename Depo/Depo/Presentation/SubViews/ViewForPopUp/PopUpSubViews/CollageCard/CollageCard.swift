@@ -10,12 +10,11 @@ import UIKit
 import SwiftyJSON
 
 final class CollageCard: BaseView {
-
-    private lazy var imageManager = ImageManager()
+    
     private lazy var filesDataSource = FilesDataSource()
     private lazy var homeCardsService: HomeCardsService = factory.resolve()
     
-    @IBOutlet weak var titleLabel: UILabel! {
+    @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
             titleLabel.textColor = ColorConstants.darkText
@@ -23,7 +22,7 @@ final class CollageCard: BaseView {
         }
     }
     
-    @IBOutlet weak var subTitleLabel: UILabel! {
+    @IBOutlet private weak var subTitleLabel: UILabel! {
         didSet {
             subTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
             subTitleLabel.textColor = ColorConstants.textGrayColor
@@ -31,7 +30,7 @@ final class CollageCard: BaseView {
         }
     }
     
-    @IBOutlet weak var bottomButton: UIButton! {
+    @IBOutlet private weak var bottomButton: UIButton! {
         didSet {
             bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
             bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
@@ -39,7 +38,7 @@ final class CollageCard: BaseView {
         }
     }
     
-    @IBOutlet weak var photoImageView: LoadingImageView!
+    @IBOutlet private weak var photoImageView: LoadingImageView!
     
     private var item: WrapData?
     

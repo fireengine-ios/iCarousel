@@ -6817,8 +6817,8 @@
 		7C4F60AE201C65E90033C58F /* MovieCard */ = {
 			isa = PBXGroup;
 			children = (
-				7C4F60AF201C674A0033C58F /* MovieCard.swift */,
 				7C4F60B2201C675F0033C58F /* MovieCard.xib */,
+				7C4F60AF201C674A0033C58F /* MovieCard.swift */,
 			);
 			path = MovieCard;
 			sourceTree = "<group>";
