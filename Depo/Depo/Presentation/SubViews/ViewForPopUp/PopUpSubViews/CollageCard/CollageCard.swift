@@ -73,10 +73,12 @@ final class CollageCard: BaseView {
     
     private func loadImage(from item: WrapData) {
         filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
-            if let image = image {
-                self?.set(image: image)
-            } else {
-                UIApplication.showErrorAlert(message: TextConstants.getImageError)
+            DispatchQueue.main.async {
+                if let image = image {
+                    self?.set(image: image)
+                } else {
+                    UIApplication.showErrorAlert(message: TextConstants.getImageError)
+                }
             }
         }
     }
