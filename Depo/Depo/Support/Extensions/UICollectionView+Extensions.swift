@@ -40,7 +40,7 @@ extension UICollectionView {
 extension UICollectionView {
     func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
         guard let allLayoutAttributes = collectionViewLayout.layoutAttributesForElements(in: rect) else {
-            return nil
+            return []
         }
         return allLayoutAttributes.map { $0.indexPath }
     }
