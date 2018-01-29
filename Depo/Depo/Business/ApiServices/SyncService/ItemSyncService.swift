@@ -25,7 +25,7 @@ protocol ItemSyncService: class {
     var status: AutoSyncStatus {get}
     weak var delegate: ItemSyncServiceDelegate? {get set}
     
-    func start()
+    func start(newItems: Bool)
     func stop()
     func fail()
     func waitForWiFi()
@@ -69,10 +69,10 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     //MARK: - Public ItemSyncService functions
     
-    func start() {
+    func start(newItems: Bool) {
         log.debug("ItemSyncServiceImpl start")
         dispatchQueue.async {
-            guard !self.status.isContained(in: [.executing, .prepairing]) else {
+            guard !(newItems && self.status.isContained(in: [.prepairing, .executing])) else {
                 self.appendNewUnsyncedItems()
                 return
             }
