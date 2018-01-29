@@ -44,6 +44,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         var cachingManager: PHCachingImageManager?
         if LocalMediaStorage.default.photoLibraryIsAvailible() {
             cachingManager = PHCachingImageManager()
+            cachingManager?.allowsCachingHighQualityImages = false
         }
         return cachingManager
     }
@@ -114,33 +115,66 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         
         return nil
     }
+}
+
+extension FilesDataSource {
     
     //Mark: - Sync Image
     
-    func getAssetThumbnail(asset: PHAsset, indexPath: IndexPath, completion: @escaping (_ image: UIImage?, _ indexPath: IndexPath)->Void) -> PHImageRequestID {
-        let manager = PHImageManager.default()
-        
+    private func phImageRequestOptions() -> PHImageRequestOptions {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
         options.isSynchronous = false
         options.version = .current
         options.deliveryMode = .opportunistic
+        options.resizeMode = .exact
         
-        let targetSize = CGSize(width: 300, height: 300)
-
-        if let cachingManager = assetCache {
-            cachingManager.startCachingImages(for: [asset], targetSize: targetSize, contentMode: .aspectFill, options: options)
-        }
-        
-        return manager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
-//            if let isDegaraded = (info?[PHImageResultIsDegradedKey] as? NSNumber)?.boolValue, !isDegaraded {
-                completion(result, indexPath)
-//            }
-        })
+        return options
     }
     
-    func cancelRequestByID(requestID: PHImageRequestID){
-        let manager = PHImageManager.default()
-        manager.cancelImageRequest(requestID)
+    func stopCahcingAllImages() {
+        guard let cachingManager = assetCache else {
+            return
+        }
+        
+        cachingManager.stopCachingImagesForAllAssets()
+    }
+    
+    func startCahcingImages(for assets: [PHAsset]) {
+        guard let cachingManager = assetCache else {
+            return
+        }
+        
+        let targetSize = CGSize(width: 300, height: 300)
+        
+        let options = phImageRequestOptions()
+        
+        cachingManager.startCachingImages(for: assets, targetSize: targetSize, contentMode: .aspectFill, options: options)
+    }
+    
+    func stopCahcingImages(for assets: [PHAsset]) {
+        guard let cachingManager = assetCache else {
+            return
+        }
+        
+        let targetSize = CGSize(width: 300, height: 300)
+        
+        let options = phImageRequestOptions()
+        
+        cachingManager.stopCachingImages(for: assets, targetSize: targetSize, contentMode: .aspectFill, options: options)
+    }
+    
+    func getAssetThumbnail(asset: PHAsset, indexPath: IndexPath, completion: @escaping (_ image: UIImage?, _ indexPath: IndexPath)->Void) {
+        guard let cachingManager = assetCache else {
+            return
+        }
+        
+        let targetSize = CGSize(width: 300, height: 300)
+        
+        let options = phImageRequestOptions()
+        
+        cachingManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
+            completion(result, indexPath)
+        })
     }
 }
