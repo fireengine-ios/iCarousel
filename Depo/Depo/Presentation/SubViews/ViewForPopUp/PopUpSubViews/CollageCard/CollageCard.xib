@@ -44,6 +44,9 @@
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgU-kh-xnk">
                                     <rect key="frame" x="0.0" y="0.0" width="156" height="156"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="actionPhotoViewButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="P5Z-BA-VJP"/>
                                     </connections>

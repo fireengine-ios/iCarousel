@@ -118,7 +118,6 @@ final class CollageCard: BaseView {
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
-        sender.isEnabled = false
         switch cardType {
         case .save:
             saveImage()
