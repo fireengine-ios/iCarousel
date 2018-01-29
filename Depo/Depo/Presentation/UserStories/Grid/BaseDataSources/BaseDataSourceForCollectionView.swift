@@ -580,7 +580,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     //MARK: selection
     
-    func updateSelectionCount(){
+    func updateSelectionCount() {
         self.delegate?.onChangeSelectedItemsCount(selectedItemsCount: selectedItemsArray.count)
     }
     
