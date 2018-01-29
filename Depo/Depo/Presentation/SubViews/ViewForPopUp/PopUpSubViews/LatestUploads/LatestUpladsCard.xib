@@ -54,6 +54,10 @@
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="uVw-03-3Gc"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="fMT-ec-eGV"/>
+                    </connections>
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crt-Qk-vhL">
                     <rect key="frame" x="0.0" y="181" width="375" height="1"/>

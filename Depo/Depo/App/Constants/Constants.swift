@@ -302,6 +302,13 @@ struct TextConstants {
     static let homeMovieCardSaveButton = NSLocalizedString("View", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
+    //MARK: Home Latest Uploads card
+    static let homeLatestUploadsCardTitle = NSLocalizedString("Latest Uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeLatestUploadsCardSubTitle = NSLocalizedString("Your latest uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeLatestUploadsCardRecentActivitiesButton = NSLocalizedString("View Recent Activities", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeLatestUploadsCardAllPhotosButtn = NSLocalizedString("View All Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
     //MARK: Home page like filter view
     static let homeLikeFilterHeader = NSLocalizedString("Filter Card", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLikeFilterTitle = NSLocalizedString("Did you like this filter?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

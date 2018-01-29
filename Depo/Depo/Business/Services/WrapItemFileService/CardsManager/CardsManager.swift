@@ -252,7 +252,7 @@ class CardsManager: NSObject {
         case .albumCard:
             cardView = AlbumCard.initFromNib()
         case .latestUploads:
-            cardView = BaseView()
+            cardView = LatestUpladsCard.initFromNib()
         case .stylizedPhoto:
             cardView = FilterPhotoCard.initFromNib()
         case .movieCard:
