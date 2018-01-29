@@ -46,7 +46,6 @@ final class MovieCard: BaseView {
         }
     }
     
-    @IBOutlet private weak var photoImageView: LoadingImageView!
     @IBOutlet private weak var videoPreviewImageView: LoadingImageView!
     
     private var item: WrapData?
@@ -82,17 +81,19 @@ final class MovieCard: BaseView {
     
     private func loadImage(from item: WrapData) {
         filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
-            if let image = image {
-                self?.set(image: image)
-            } else {
-                UIApplication.showErrorAlert(message: TextConstants.getImageError)
+            DispatchQueue.main.async {
+                if let image = image {
+                    self?.set(image: image)
+                } else {
+                    UIApplication.showErrorAlert(message: TextConstants.getImageError)
+                }
             }
         }
     }
     
     private func set(image: UIImage) {
         cardType = .save
-        photoImageView.image = image
+        videoPreviewImageView.image = image
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){
@@ -117,9 +118,9 @@ final class MovieCard: BaseView {
         CardsManager.default.stopOperationWithType(type: .movieCard)
     }
     
-    @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
-        guard let image = photoImageView.image else { return }
-        
+    @IBAction private func actionVideoViewButton(_ sender: UIButton) {
+        guard let image = videoPreviewImageView.image else { return }
+
         let vc = PVViewerController.initFromNib()
         vc.image = image
         RouterVC().pushViewController(viewController: vc)
