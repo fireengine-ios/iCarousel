@@ -777,13 +777,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             cell_.setAssetId(local.asset.localIdentifier)
-            filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
-                if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
-                    cell_.setImage(image: image)
-                } else {
-                    cell_.setPlaceholderImage(fileType: wraped.fileType)
-                }
-            })
+            DispatchQueue.global().async {
+                self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
+                    DispatchQueue.main.async {
+                        if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
+                            cell_.setImage(image: image)
+                        } else {
+                            cell_.setPlaceholderImage(fileType: wraped.fileType)
+                        }
+                    }
+                })
+            }
+            
         case let .remoteUrl(url):
             if let url = url {
                 cell_.setImage(with: url)
