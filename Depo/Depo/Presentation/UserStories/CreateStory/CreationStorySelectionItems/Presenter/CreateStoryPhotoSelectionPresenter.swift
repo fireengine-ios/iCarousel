@@ -71,7 +71,11 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     
     override func getContentWithSuccess(array: [[BaseDataSourceItem]]){
         //DBDROP
-        super.getContentWithSuccess(array: array)
+        var content = [[BaseDataSourceItem]]()
+        array.forEach { items in
+            content.append(items.filter {$0.fileType == .image})
+        }        
+        super.getContentWithSuccess(array: content)
     }
         
     private func startEditing() {
