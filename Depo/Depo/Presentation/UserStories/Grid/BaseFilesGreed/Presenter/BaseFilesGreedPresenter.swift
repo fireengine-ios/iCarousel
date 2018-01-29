@@ -239,8 +239,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view.showCustomPopUpWithInformationAboutAccessToMediaLibrary()
     }
     
-    func needShowNoFileView()-> Bool {
-        return dataSource.allMediaItems.count == 0
+    func needShowNoFileView() -> Bool {
+        return dataSource.getAllObjects().isEmpty
     }
     
     func getRemoteItemsService() -> RemoteItemsService{
