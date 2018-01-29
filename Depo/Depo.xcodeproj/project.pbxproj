@@ -149,6 +149,7 @@
 		7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */; };
 		7859299E20060E9C003F8AB3 /* ManageContactsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299C20060E9C003F8AB3 /* ManageContactsInitializer.swift */; };
 		7859299F20060E9C003F8AB3 /* ManageContactsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */; };
+		78624ADA201C8A3A00C969D3 /* ManageContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78624AD9201C8A3A00C969D3 /* ManageContactsModuleOutput.swift */; };
 		786AA87724BCB7349231EF0C /* HomeHeaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */; };
 		78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */; };
 		787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
@@ -3075,6 +3076,8 @@
 		FA793D8C201872E600A02B46 /* PeopleServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA793D7C2018725300A02B46 /* PeopleServiceResponse.swift */; };
 		FA793D8D201872EA00A02B46 /* ThingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA793D7E2018725400A02B46 /* ThingsService.swift */; };
 		FA793D8E201872EA00A02B46 /* ThingsServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA793D7F2018725400A02B46 /* ThingsServiceResponse.swift */; };
+		FA9ED11C201B7B7E00A92D69 /* CreateStorySelectionPhotoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9ED11B201B7B7E00A92D69 /* CreateStorySelectionPhotoInteractor.swift */; };
+		FA9ED11D201B7EFC00A92D69 /* CreateStorySelectionPhotoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9ED11B201B7B7E00A92D69 /* CreateStorySelectionPhotoInteractor.swift */; };
 		FB274A9C777B1B0305F1B7ED /* UploadedItemsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A98EA438594E6B7C21041F /* UploadedItemsInteractorOutput.swift */; };
 		FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */; };
 		FDD9464A87588DD71CCC5E0C /* HomeHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D733688673044E79E05452F /* HomeHeaderViewController.swift */; };
@@ -3350,6 +3353,7 @@
 		7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInteractorOutput.swift; sourceTree = "<group>"; };
 		7859299C20060E9C003F8AB3 /* ManageContactsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInitializer.swift; sourceTree = "<group>"; };
 		7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsConfigurator.swift; sourceTree = "<group>"; };
+		78624AD9201C8A3A00C969D3 /* ManageContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageContactsModuleOutput.swift; sourceTree = "<group>"; };
 		78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarActionHandler.swift; sourceTree = "<group>"; };
 		787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailModuleOutput.swift; sourceTree = "<group>"; };
 		78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsModuleOutput.swift; sourceTree = "<group>"; };
@@ -4969,6 +4973,7 @@
 		FA793D7E2018725400A02B46 /* ThingsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThingsService.swift; sourceTree = "<group>"; };
 		FA793D7F2018725400A02B46 /* ThingsServiceResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThingsServiceResponse.swift; sourceTree = "<group>"; };
 		FA793D86201872DB00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderDataSource.swift; sourceTree = "<group>"; };
+		FA9ED11B201B7B7E00A92D69 /* CreateStorySelectionPhotoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStorySelectionPhotoInteractor.swift; sourceTree = "<group>"; };
 		FB7C949A95C197C80ACC503C /* OTPViewInteractorIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewInteractorIO.swift; sourceTree = "<group>"; };
 		FBB01CDF10CB058E76558146 /* IntroduceInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractor.swift; sourceTree = "<group>"; };
 		FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewInteractorOutput.swift; sourceTree = "<group>"; };
@@ -6223,6 +6228,7 @@
 			children = (
 				7859299320060E8A003F8AB3 /* ManageContactsModuleInput.swift */,
 				7859299220060E8A003F8AB3 /* ManageContactsPresenter.swift */,
+				78624AD9201C8A3A00C969D3 /* ManageContactsModuleOutput.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -6902,6 +6908,7 @@
 			children = (
 				7C6E2F6C1F31E4C900536DB6 /* CreateStorySelectionInteractor.swift */,
 				7C6E2F9F1F31FC6500536DB6 /* CreateStorySelectionInteractorOutput.swift */,
+				FA9ED11B201B7B7E00A92D69 /* CreateStorySelectionPhotoInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -13100,6 +13107,7 @@
 				8C0E8EE21FDEBDFF00789C91 /* PhotoVideoDetailPresenter.swift in Sources */,
 				8C0E8EE31FDEBDFF00789C91 /* PhotoVideoDetailInteractorInput.swift in Sources */,
 				8C0B919920170E5200A5BA81 /* DuplicatedContactsViewInput.swift in Sources */,
+				FA9ED11D201B7EFC00A92D69 /* CreateStorySelectionPhotoInteractor.swift in Sources */,
 				8C0E8EE41FDEBDFF00789C91 /* SyncSettings.m in Sources */,
 				8C0E8EE51FDEBDFF00789C91 /* MediaItem+CoreDataClass.swift in Sources */,
 				8C0E8EE61FDEBDFF00789C91 /* CreateStoryNameModuleInput.swift in Sources */,
@@ -13586,6 +13594,7 @@
 				CE2976E11FD58E2000350F3A /* LocalAlbumInteractor.swift in Sources */,
 				7CD1F9171F0288DC0028F51A /* WelcomeInteractorOutput.swift in Sources */,
 				D498865C1F3EFBE200F50C95 /* ImportPhotosPresenter.swift in Sources */,
+				FA9ED11C201B7B7E00A92D69 /* CreateStorySelectionPhotoInteractor.swift in Sources */,
 				8C06AC1420066641003D8E05 /* TurkcellSecurityRouter.swift in Sources */,
 				CECD4E4E1FDFD69500978BE7 /* PopUpController.swift in Sources */,
 				CE7467011FD6B61600D0885D /* ErrorResponse.swift in Sources */,
@@ -14353,6 +14362,7 @@
 				7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */,
 				FA793D87201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,
+				78624ADA201C8A3A00C969D3 /* ManageContactsModuleOutput.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,

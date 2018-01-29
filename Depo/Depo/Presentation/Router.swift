@@ -263,8 +263,8 @@ class RouterVC: NSObject {
         return viewController
     }
     
-    var manageContacts: UIViewController {
-        let viewController = ManageContactsModuleInitializer.initializeViewController(with: "ManageContactsViewController")
+    func manageContacts(moduleOutput: ManageContactsModuleOutput?) -> UIViewController {
+        let viewController = ManageContactsModuleInitializer.initializeViewController(with: "ManageContactsViewController", moduleOutput: moduleOutput)
         return viewController
     }
     
@@ -429,8 +429,8 @@ class RouterVC: NSObject {
     
     //MARK: CreateStory name
     
-    func createStoryName(items: [BaseDataSourceItem]? = nil) {
-        let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController")
+    func createStoryName(items: [BaseDataSourceItem]? = nil, needSelectionItems: Bool = false) {
+        let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController", needSelectionItems: needSelectionItems)
         controller.output.items = items
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve

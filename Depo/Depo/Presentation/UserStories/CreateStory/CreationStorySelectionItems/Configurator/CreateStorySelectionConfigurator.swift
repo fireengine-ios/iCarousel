@@ -16,7 +16,7 @@ class CreateStorySelectionConfigurator: BaseFilesGreedModuleConfigurator {
         let router = CreateStorySelectionRouter()
         
         var presenter: BaseFilesGreedPresenter?
-        if remoteServices is PhotoAndVideoService{
+        if remoteServices is PhotoAndVideoService {
             presenter = CreateStoryPhotoSelectionPresenter()
         } else {
             presenter = CreateStoryAudioSelectionPresenter()
@@ -30,11 +30,15 @@ class CreateStorySelectionConfigurator: BaseFilesGreedModuleConfigurator {
         presenter!.router = router
         presenter!.sortedRule = .metaDataTimeUp
         
-        let interactor = CreateStorySelectionInteractor(remoteItems: remoteServices)
-        interactor.output = presenter
-        interactor.photoStory = story
-        
-        interactor.originalFilters = filters
+        let interactor: CreateStorySelectionInteractor?
+        if remoteServices is PhotoAndVideoService {
+            interactor = CreateStorySelectionPhotoInteractor(remoteItems: remoteServices)
+        } else {
+            interactor = CreateStorySelectionInteractor(remoteItems: remoteServices)
+        }
+        interactor?.output = presenter
+        interactor?.photoStory = story
+        interactor?.originalFilters = filters
         
         presenter!.interactor = interactor
         viewController.output = presenter
