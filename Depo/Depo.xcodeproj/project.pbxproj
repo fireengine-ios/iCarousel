@@ -149,6 +149,7 @@
 		7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */; };
 		7859299E20060E9C003F8AB3 /* ManageContactsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299C20060E9C003F8AB3 /* ManageContactsInitializer.swift */; };
 		7859299F20060E9C003F8AB3 /* ManageContactsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */; };
+		78624ADA201C8A3A00C969D3 /* ManageContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78624AD9201C8A3A00C969D3 /* ManageContactsModuleOutput.swift */; };
 		786AA87724BCB7349231EF0C /* HomeHeaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */; };
 		78750E301FEBBAD9000EF505 /* TabBarActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */; };
 		787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
@@ -3393,6 +3394,7 @@
 		7859299820060E94003F8AB3 /* ManageContactsInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInteractorOutput.swift; sourceTree = "<group>"; };
 		7859299C20060E9C003F8AB3 /* ManageContactsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsInitializer.swift; sourceTree = "<group>"; };
 		7859299D20060E9C003F8AB3 /* ManageContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsConfigurator.swift; sourceTree = "<group>"; };
+		78624AD9201C8A3A00C969D3 /* ManageContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageContactsModuleOutput.swift; sourceTree = "<group>"; };
 		78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarActionHandler.swift; sourceTree = "<group>"; };
 		787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailModuleOutput.swift; sourceTree = "<group>"; };
 		78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsModuleOutput.swift; sourceTree = "<group>"; };
@@ -6286,6 +6288,7 @@
 			children = (
 				7859299320060E8A003F8AB3 /* ManageContactsModuleInput.swift */,
 				7859299220060E8A003F8AB3 /* ManageContactsPresenter.swift */,
+				78624AD9201C8A3A00C969D3 /* ManageContactsModuleOutput.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -6820,8 +6823,8 @@
 		7C4F60AE201C65E90033C58F /* MovieCard */ = {
 			isa = PBXGroup;
 			children = (
-				7C4F60AF201C674A0033C58F /* MovieCard.swift */,
 				7C4F60B2201C675F0033C58F /* MovieCard.xib */,
+				7C4F60AF201C674A0033C58F /* MovieCard.swift */,
 			);
 			path = MovieCard;
 			sourceTree = "<group>";
@@ -7408,8 +7411,8 @@
 		7CD7C2A82019AFF7009F6D3D /* CollageCard */ = {
 			isa = PBXGroup;
 			children = (
-				7C4F60A12019D0340033C58F /* CollageCard.swift */,
 				7C4F60A42019D0440033C58F /* CollageCard.xib */,
+				7C4F60A12019D0340033C58F /* CollageCard.swift */,
 			);
 			path = CollageCard;
 			sourceTree = "<group>";
@@ -14551,6 +14554,7 @@
 				7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */,
 				FA793D87201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,
+				78624ADA201C8A3A00C969D3 /* ManageContactsModuleOutput.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,

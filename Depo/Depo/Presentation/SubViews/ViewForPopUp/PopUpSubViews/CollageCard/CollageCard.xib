@@ -42,13 +42,26 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t6A-N4-vMD" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="156" height="156"/>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgU-kh-xnk">
+                                    <rect key="frame" x="0.0" y="0.0" width="156" height="156"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="actionPhotoViewButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="P5Z-BA-VJP"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="t6A-N4-vMD" firstAttribute="top" secondItem="5br-PK-Szq" secondAttribute="top" id="5b4-mx-Ojg"/>
+                                <constraint firstItem="zgU-kh-xnk" firstAttribute="leading" secondItem="5br-PK-Szq" secondAttribute="leading" id="D41-OP-Thd"/>
+                                <constraint firstAttribute="bottom" secondItem="zgU-kh-xnk" secondAttribute="bottom" id="Mfc-yX-RoR"/>
                                 <constraint firstAttribute="bottom" secondItem="t6A-N4-vMD" secondAttribute="bottom" id="NIL-Xc-VXT"/>
                                 <constraint firstAttribute="trailing" secondItem="t6A-N4-vMD" secondAttribute="trailing" id="Ojt-9m-Nxd"/>
+                                <constraint firstItem="zgU-kh-xnk" firstAttribute="top" secondItem="5br-PK-Szq" secondAttribute="top" id="Wu1-fF-JUi"/>
                                 <constraint firstItem="t6A-N4-vMD" firstAttribute="leading" secondItem="5br-PK-Szq" secondAttribute="leading" id="oBV-bs-sCt"/>
+                                <constraint firstAttribute="trailing" secondItem="zgU-kh-xnk" secondAttribute="trailing" id="zs9-k4-SAu"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -75,8 +88,11 @@
                         <constraint firstAttribute="height" constant="30" id="ao5-Tc-6Q3"/>
                     </constraints>
                     <state key="normal" title="Button"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="onBottomBar" destination="iN0-l3-epB" eventType="touchUpInside" id="K8p-vF-vju"/>
+                        <action selector="actionBottomButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="Lhk-Fm-MCQ"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zB-Fq-XrF">
@@ -86,8 +102,11 @@
                         <constraint firstAttribute="width" constant="33" id="gtm-72-gi1"/>
                     </constraints>
                     <state key="normal" image="CloseCardIcon"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="onCloseButton" destination="iN0-l3-epB" eventType="touchUpInside" id="CGK-GP-1fg"/>
+                        <action selector="actionCloseButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="DRB-H5-NRa"/>
                     </connections>
                 </button>
             </subviews>
@@ -114,7 +133,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bottomButton" destination="BtN-La-yOR" id="WkX-tl-i5h"/>
-                <outlet property="imageView" destination="t6A-N4-vMD" id="KRw-Re-J44"/>
+                <outlet property="photoImageView" destination="t6A-N4-vMD" id="Cmh-rO-uBC"/>
                 <outlet property="subTitleLabel" destination="eZq-QK-VUa" id="Ruy-mj-fVD"/>
                 <outlet property="titleLabel" destination="NMh-tk-T45" id="6KJ-zO-TpF"/>
             </connections>

@@ -263,8 +263,8 @@ class RouterVC: NSObject {
         return viewController
     }
     
-    var manageContacts: UIViewController {
-        let viewController = ManageContactsModuleInitializer.initializeViewController(with: "ManageContactsViewController")
+    func manageContacts(moduleOutput: ManageContactsModuleOutput?) -> UIViewController {
+        let viewController = ManageContactsModuleInitializer.initializeViewController(with: "ManageContactsViewController", moduleOutput: moduleOutput)
         return viewController
     }
     

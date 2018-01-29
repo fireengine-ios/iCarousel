@@ -81,7 +81,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func onManageContacts() {
-        router.goToManageContacts()
+        router.goToManageContacts(moduleOutput: self)
     }
     
     func onDeinit() {
@@ -103,10 +103,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
-}
-
-extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
-    func backFromDuplicatedContacts() {
+    
+    fileprivate func updateContactsStatus() {
         if let contactSyncResponse = contactSyncResponse {
             view.success(response: contactSyncResponse, forOperation: .getBackUpStatus)
             view.setStateWithBackUp()
@@ -115,6 +113,12 @@ extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
         }
         view.resetProgress()
     }
+}
+
+extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
+    func backFromDuplicatedContacts() {
+        updateContactsStatus()
+    }
     
     func cancelDeletingDuplicatedContacts() {
         interactor.startOperation(operationType: .cancel)
@@ -122,5 +126,12 @@ extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
     
     func deleteDuplicatedContacts() {
         interactor.startOperation(operationType: .deleteDuplicated)
+    }
+}
+
+extension SyncContactsPresenter: ManageContactsModuleOutput {
+    func didDeleteContact() {
+        contactSyncResponse?.totalNumberOfContacts -= 1
+        updateContactsStatus()
     }
 }

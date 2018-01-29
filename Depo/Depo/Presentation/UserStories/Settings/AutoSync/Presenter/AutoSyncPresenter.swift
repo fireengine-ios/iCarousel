@@ -70,6 +70,18 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         
     }
     
+    func enableAutoSync() {
+        interactor.checkPermissionForPhoto()
+    }
+    
+    func onCheckPermissionForPhoto(accessGranted: Bool) {
+        if accessGranted {
+            view.reloadTableView()
+        } else {
+            view.disableAutoSync()
+        }
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {

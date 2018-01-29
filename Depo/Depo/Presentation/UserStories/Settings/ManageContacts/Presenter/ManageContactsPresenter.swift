@@ -7,7 +7,9 @@
 //
 
 class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageContactsViewOutput, ManageContactsInteractorOutput {
+    
     weak var view: ManageContactsViewInput!
+    weak var moduleOutput: ManageContactsModuleOutput?
     var interactor: ManageContactsInteractorInput!
     var router: ManageContactsRouterInput!
     
@@ -42,6 +44,10 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
         DispatchQueue.main.async {
             self.view.showContacts(sortedContacts)
         }
+    }
+    
+    func didDeleteContact() {
+        moduleOutput?.didDeleteContact()
     }
     
     private func sortContacts(_ contacts: [RemoteContact]) -> [ManageContacts.Group]  {
