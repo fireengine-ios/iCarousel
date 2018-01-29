@@ -9,6 +9,13 @@
 import Foundation
 import Photos
 
+
+enum PhotoLibraryChangeType: String {
+    case added = "added"
+    case removed = "removed"
+}
+
+
 extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
     
     func photoLibraryDidChange(_ changeInstance: PHChange) {
@@ -18,9 +25,20 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         DispatchQueue.main.async {
             self.fetchResult = changes.fetchResultAfterChanges
             if changes.hasIncrementalChanges, changes.insertedIndexes != nil || changes.removedIndexes != nil {
+                let previosFetch = changes.fetchResultBeforeChanges
+                var phChanges = [PhotoLibraryChangeType: [PHAsset]]()
+                
+                if let addedIndexes = changes.insertedIndexes {
+                    phChanges[.added] = self.fetchResult.objects(at: addedIndexes)
+                }
+                
+                if let removedIndexes = changes.removedIndexes {
+                    phChanges[.removed] = previosFetch.objects(at: removedIndexes)
+                }
+                
                 CoreDataStack.default.appendLocalMediaItems(progress: nil, {
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
-                                                    object: nil)
+                    UploadService.default.cancelOperations(with: phChanges[.removed])
+                    NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
                 })
             }
         }

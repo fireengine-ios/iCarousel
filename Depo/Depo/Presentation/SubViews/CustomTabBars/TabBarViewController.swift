@@ -352,7 +352,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         currentViewController?.navigationItem.rightBarButtonItems?.forEach {
             $0.isEnabled = !show
         }
-        currentViewController?.navigationItem.hidesBackButton = !show
+
+        currentViewController?.navigationItem.hidesBackButton = show
     }
     
     @objc func closeCurtainView() {
@@ -544,14 +545,15 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeViewState(state: false)
         
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
-
+            
             if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
                 (lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue ||
                 lastPhotoVideoIndex == TabScreenIndex.videosScreenIndex.rawValue ) {
                 tabbarSelectedIndex = lastPhotoVideoIndex
+                tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+            } else {
+                tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
-            
-            tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             
             selectedIndex = tabbarSelectedIndex
         }

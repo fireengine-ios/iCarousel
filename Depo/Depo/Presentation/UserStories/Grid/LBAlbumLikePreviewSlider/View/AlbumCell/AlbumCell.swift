@@ -21,26 +21,34 @@ class AlbumCell: UICollectionViewCell {
     @IBOutlet weak var previewImage2: LoadingImageView!
     @IBOutlet weak var previewImage3: LoadingImageView!
     @IBOutlet weak var previewImage4: LoadingImageView!
+    @IBOutlet weak var placeholderImage: UIImageView!
     
-    func setup(forItems items: [Item], titleText: String) {
-        setupImage(previewImage1, item: items.first)
-        setupImage(previewImage2, item: items[safe: 1])
-        setupImage(previewImage3, item: items[safe: 2])
-        setupImage(previewImage4, item: items[safe: 3])
-        titleLabel.text = titleText
+    func setup(withItem item: SliderItem) {
+        titleLabel.text = item.name ?? ""
+        
+        if let items = item.previewItems, !items.isEmpty {
+            previewBackView.isHidden = false
+            placeholderImage.layer.borderColor = ColorConstants.blueColor.cgColor
+            placeholderImage.image = nil
+            setupImage(previewImage1, path: items.first)
+            setupImage(previewImage2, path: items[safe: 1])
+            setupImage(previewImage3, path: items[safe: 2])
+            setupImage(previewImage4, path: items[safe: 3])
+        } else {
+            previewBackView.isHidden = true
+            placeholderImage.layer.borderColor = ColorConstants.orangeBorder.cgColor
+            placeholderImage.image = item.placeholderImage
+        }
     }
     
-    fileprivate func setupImage(_ imageView: LoadingImageView, item: Item?) {
+    fileprivate func setupImage(_ imageView: LoadingImageView, path: PathForItem?) {
         imageView.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
-        if let item = item {
-            imageView.loadImageForItem(object: item)
-        }
+        imageView.loadImageByPath(path_: path)
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         titleLabel.text = ""
-        previewBackView.layer.borderWidth = 1
-        previewBackView.layer.borderColor = ColorConstants.blueColor.cgColor
+        placeholderImage.layer.borderWidth = 1
     }
 }

@@ -10,21 +10,22 @@ import UIKit
 
 class ManageContactsModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, moduleOutput: ManageContactsModuleOutput?) {
 
         if let viewController = viewInput as? ManageContactsViewController {
-            configure(viewController: viewController)
+            configure(viewController: viewController, moduleOutput: moduleOutput)
         }
     }
 
-    private func configure(viewController: ManageContactsViewController) {
+    private func configure(viewController: ManageContactsViewController, moduleOutput: ManageContactsModuleOutput?) {
 
         let router = ManageContactsRouter()
 
         let presenter = ManageContactsPresenter()
         presenter.view = viewController
         presenter.router = router
-
+        presenter.moduleOutput = moduleOutput
+        
         let interactor = ManageContactsInteractor()
         interactor.output = presenter
 

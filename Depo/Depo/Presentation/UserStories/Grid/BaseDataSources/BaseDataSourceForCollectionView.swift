@@ -79,6 +79,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var parentUUID: String?
     
+    let filesDataSource = FilesDataSource()
+    
     private func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
         isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
@@ -769,7 +771,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
-            FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
+            let requestID = filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { [weak self] (image, path) in
                 DispatchQueue.main.async {
                     if let cellToChange = self?.collectionView?.cellForItem(at: path) as? CollectionViewCellDataProtocol {
                         if let image = image {
@@ -780,7 +782,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                 }
             })
-            
+            cell_.setRequestID(requestID: requestID)
         case let .remoteUrl(url):
             if let url = url {
                 cell_.setImage(with: url)
@@ -807,21 +809,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        return
-        
-        guard let unwrapedObject = itemForIndexPath(indexPath: indexPath) as? Item else {
-            return
-        }
-        
-        //        fileDataSource.cancelImgeRequest(path: unwrapedObject.patchToPreview)
-        
         guard let cell_ = cell as? CollectionViewCellDataProtocol else {
-            return
+                return
         }
-        //        cell_.setImage(image: nil)
-        cell_.setSelection(isSelectionActive: isSelectionStateActive,
-                           isSelected: isObjctSelected(object: unwrapedObject))
+        if let requestID = cell_.getRequestID(){
+            filesDataSource.cancelRequestByID(requestID: requestID)
+            cell_.setRequestID(requestID: requestID)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -996,11 +990,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        
         if !needShowProgressInCell{
-            delegate?.needReloadData?()
+            //delegate?.needReloadData?()
             return
         }
+        
         
         if let cell = getCellForFile(objectUUID: file.uuid){
             cell.finishedUploadForObject()
@@ -1097,6 +1091,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             objectsForRemoving = objectsForRemoving.filter({
                 return !serversUUIDs.contains($0.uuid)
             })
+            
             
             let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
             let predicate = PredicateRules().allLocalObjectsForObjects(objects: serverObjects)
@@ -1268,6 +1263,21 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }else if let unwrapedFilters = originalFilters,
             canShowFolderFilters(filters: unwrapedFilters) {
             deleteItems(items: items)
+        }
+    }
+    
+    func syncFinished() {
+        if isLocalOnly(){
+            return
+        }
+        if let unwrapedFilters = originalFilters  {
+            if isFavoritesOnly(filters: unwrapedFilters) || isAlbumDetail(filters: unwrapedFilters){
+                return
+            }
+        }
+        
+        if !needShowProgressInCell{
+            delegate?.needReloadData?()
         }
     }
     

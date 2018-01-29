@@ -11,6 +11,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     weak var output: AutoSyncInteractorOutput!
     var dataStorage = AutoSyncDataStorage()
     var uniqueUserID: String? = ""
+    let localMediaStorage = LocalMediaStorage.default
 
     func prepareCellsModels() {
         dataStorage.getAutoSyncModelForCurrentUser(success: { [weak self] (models, uniqueUserId) in
@@ -26,4 +27,9 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
         SyncServiceManager.shared.updateSyncSettings(settingsModel: setting)
     }
     
+    func checkPermissionForPhoto() {
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] (accessGranted, _) in
+            self?.output.onCheckPermissionForPhoto(accessGranted: accessGranted)
+        }
+    }
 }

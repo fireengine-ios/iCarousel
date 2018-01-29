@@ -10,6 +10,7 @@ import Foundation
 
 protocol ManageContactsInteractorOutput: class {
     func didLoadContacts(_ contacts: [RemoteContact])
+    func didDeleteContact()
     func asyncOperationStarted()
     func asyncOperationFinished()
 }

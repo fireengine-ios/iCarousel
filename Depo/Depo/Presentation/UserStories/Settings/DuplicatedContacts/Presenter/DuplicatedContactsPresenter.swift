@@ -20,6 +20,7 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
     
     func onWillDisappear() {
         moduleOutput?.cancelDeletingDuplicatedContacts()
+        moduleOutput?.backFromDuplicatedContacts()
     }
     
     //MARK: Interactor Output
@@ -37,9 +38,8 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
                              secondAction: { [weak self] (vc) in
                                 self?.moduleOutput?.deleteDuplicatedContacts()
                                 self?.router.back()
-                                vc.dismiss(animated: false, completion: nil)
+                                vc.close()
                              })
         UIApplication.topController()?.present(vc, animated: false, completion: nil)
     }
-    
 }

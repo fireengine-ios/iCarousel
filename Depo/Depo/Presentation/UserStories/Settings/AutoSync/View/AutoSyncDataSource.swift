@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AutoSyncDataSourceDelegate: class {
+    func enableAutoSync()
+}
+
 class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource, AutoSyncSwitcherTableViewCellDelegate, AutoSyncInformTableViewCellCheckBoxStateProtocol {
 
     @IBOutlet weak var tableView: UITableView?
@@ -15,6 +19,8 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
     var isFromSettings: Bool = false
     
     var tableDataArray = [AutoSyncModel]()
+    
+    weak var delegate: AutoSyncDataSourceDelegate?
     
     func configurateTable(table: UITableView, tableHConstraint: NSLayoutConstraint?){
         tableView = table
@@ -59,6 +65,18 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
         }
         
         return tableH
+    }
+    
+    func forceDisableAutoSync() {
+        for index in 0..<tableDataArray.count {
+            let model = tableDataArray[index]
+            if (model.cellType == .headerLike) {
+                if let cell = tableView?.cellForRow(at: IndexPath(row: index, section: 0)) as? AutoSyncSwitcherTableViewCell {
+                    cell.switcher.isOn = false
+                }
+                break
+            }
+        }
     }
     
     // MARK: UITableView delegate
@@ -119,10 +137,10 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
         tableDataArray[(indexPath?.row)!] = model
         
         if model.cellType == .headerLike {
-            tableView?.reloadData()
-            if let constraint = tableHConstraint {
-                constraint.constant = getTableH()
-                tableView?.updateConstraints()
+            if cell.switcher.isOn {
+                delegate?.enableAutoSync()
+            } else {
+                reloadTableView()
             }
         }
     }
@@ -134,6 +152,14 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
         if model.cellType == .typeSwitherActivator {
             tableView?.reloadData()
             cell.separatorView.isHidden = state
+        }
+    }
+    
+    func reloadTableView() {
+        tableView?.reloadData()
+        if let constraint = tableHConstraint {
+            constraint.constant = getTableH()
+            tableView?.updateConstraints()
         }
     }
     

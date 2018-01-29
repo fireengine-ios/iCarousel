@@ -25,9 +25,8 @@ protocol ItemSyncService: class {
     var status: AutoSyncStatus {get}
     weak var delegate: ItemSyncServiceDelegate? {get set}
     
-    func start()
+    func start(newItems: Bool)
     func stop()
-//    func interrupt()
     func fail()
     func waitForWiFi()
 }
@@ -46,7 +45,9 @@ class ItemSyncServiceImpl: ItemSyncService {
     var status: AutoSyncStatus = .undetermined {
         didSet {
             debugPrint("AUTOSYNC: \(fileType) status = \(status)")
-            postNotification()
+            if oldValue != status {
+                postNotification()
+            }
         }
     }
     
@@ -68,10 +69,10 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     //MARK: - Public ItemSyncService functions
     
-    func start() {
+    func start(newItems: Bool) {
         log.debug("ItemSyncServiceImpl start")
         dispatchQueue.async {
-            guard !self.status.isContained(in: [.executing, .prepairing]) else {
+            guard !(newItems && self.status.isContained(in: [.prepairing, .executing])) else {
                 self.appendNewUnsyncedItems()
                 return
             }
@@ -79,13 +80,6 @@ class ItemSyncServiceImpl: ItemSyncService {
             self.sync()
         }
     }
-    
-//    func interrupt() {
-//        log.debug("ItemSyncServiceImpl interrupt")
-////        if status.isContained(in: [.prepairing, .executing]) {
-//            status = .waitingForWifi
-////        }
-//    }
     
     func stop() {
         log.debug("ItemSyncServiceImpl stop")
@@ -171,14 +165,15 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         status = .executing
         
-        UploadService.default.uploadFileList(items: items.sorted(by:{$0.fileSize < $1.fileSize}),
+        UploadService.default.uploadFileList(items: itemsSortedToUpload(from: items),
                                              uploadType: .autoSync,
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
                                              success: { [weak self] in
                                                 log.debug("ItemSyncServiceImpl upload UploadService uploadFileList success")
-
-                                                self?.status = .synced
+                                                if self?.status == .executing {
+                                                    self?.status = .synced
+                                                }
         }, fail: { [weak self] (error) in
             guard let `self` = self else {
                 print("\(#function): self == nil")
@@ -288,7 +283,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     //MARK: - Override me
     
-    func itemsToSync() -> [WrapData] {
+    func itemsSortedToUpload(from items: [WrapData]) -> [WrapData] {
         return []
     }
     
