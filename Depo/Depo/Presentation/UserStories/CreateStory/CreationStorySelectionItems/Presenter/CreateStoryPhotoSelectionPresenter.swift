@@ -27,8 +27,13 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
         return true
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        dataSource.updateSelectionCount()
+    }
+    
     override func viewWillDisappear() {
-        super.viewWillDisappear()
+        bottomBarPresenter?.dismiss(animated: true)
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int){
