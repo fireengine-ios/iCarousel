@@ -108,14 +108,12 @@ final class MovieCard: BaseView {
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
-                    break
+                    CardsManager.default.stopOperationWithType(type: .movieCard)
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.localizedDescription)
                 }
             }
         }
-        
-        CardsManager.default.stopOperationWithType(type: .movieCard)
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {

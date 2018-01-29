@@ -105,14 +105,12 @@ final class FilterPhotoCard: BaseView {
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
-                    break
+                    CardsManager.default.stopOperationWithType(type: .stylizedPhoto)
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.localizedDescription)
                 }
             }
         }
-        
-        CardsManager.default.stopOperationWithType(type: .stylizedPhoto)
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
