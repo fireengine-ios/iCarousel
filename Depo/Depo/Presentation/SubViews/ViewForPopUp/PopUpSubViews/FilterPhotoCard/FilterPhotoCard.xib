@@ -42,6 +42,9 @@
                     <state key="normal" title="Button">
                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="actionBottomButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="pNt-lK-BL4"/>
                     </connections>
@@ -53,6 +56,9 @@
                         <constraint firstAttribute="height" constant="33" id="gC0-Gf-3xe"/>
                     </constraints>
                     <state key="normal" image="CloseCardIcon"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="actionCloseButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="0Bj-2l-JU5"/>
                     </connections>

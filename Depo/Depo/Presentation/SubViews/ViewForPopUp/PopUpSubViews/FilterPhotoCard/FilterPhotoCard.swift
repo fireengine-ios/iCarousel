@@ -42,7 +42,6 @@ final class FilterPhotoCard: BaseView {
     @IBOutlet private weak var bottomButton: UIButton! {
         didSet {
             bottomButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
-            bottomButton.isExclusiveTouch = true
             bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
             bottomButton.setTitleColor(ColorConstants.blueColor.darker(), for: .highlighted)
             bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
@@ -93,6 +92,10 @@ final class FilterPhotoCard: BaseView {
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){
+        deleteCard()
+    }
+    
+    private func deleteCard() {
         guard let id = cardObject?.id else {
             return
         }
@@ -124,16 +127,19 @@ final class FilterPhotoCard: BaseView {
         switch cardType {
         case .save:
             saveToDevice(image: image)
-            
         case .display:
-            imageManager.getLastImageAsset { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let asset):
-                        self.showPhotoVideoDetail(with: asset)
-                    case .failed(let error):
-                        UIApplication.showErrorAlert(message: error.localizedDescription)
-                    }
+            getLastImageAssetAndShowImage()
+        }
+    }
+    
+    private func getLastImageAssetAndShowImage() {
+        imageManager.getLastImageAsset { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let asset):
+                    self?.showPhotoVideoDetail(with: asset)
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
                 }
             }
         }
@@ -152,13 +158,13 @@ final class FilterPhotoCard: BaseView {
     private func saveToDevice(image: UIImage) {
         bottomButton.isEnabled = false
         
-        imageManager.saveToDevice(image: image) { result in
+        imageManager.saveToDevice(image: image) { [weak self] result in
             DispatchQueue.main.async {
-                self.bottomButton.isEnabled = true
+                self?.bottomButton.isEnabled = true
                 
                 switch result {
                 case .success(_):
-                    self.cardType = .display
+                    self?.cardType = .display
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.localizedDescription)
                 }
