@@ -45,7 +45,7 @@
                         <action selector="onCloseButton" destination="iN0-l3-epB" eventType="touchUpInside" id="FIC-zy-J0Y"/>
                     </connections>
                 </button>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nrt-8t-az2">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nrt-8t-az2">
                     <rect key="frame" x="47" y="85" width="313" height="85"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>

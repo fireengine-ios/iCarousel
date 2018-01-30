@@ -73,6 +73,13 @@ class LatestUpladsCard: BaseView {
                 collectionViewDataSource.append(item)
             }
         }
+        
+        if collectionViewDataSource.count > 14{
+            let array = collectionViewDataSource[0..<14]
+            collectionViewDataSource.removeAll()
+            collectionViewDataSource.append(contentsOf: array)
+        }
+        
         collectionView.reloadData()
     }
     
