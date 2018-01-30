@@ -48,8 +48,10 @@ final class AlbumCard: BaseView {
     @IBOutlet private weak var previewImageView: LoadingImageView!
 
     private var album: AlbumServiceResponse?
-    private var albumPhotos: [WrapData]?
     private var albumItem: AlbumItem?
+    
+    /// MAYBE WILL BE NEED
+    ///private var albumPhotos: [WrapData]?
     
     private var cardType = CardActionType.save {
         didSet {
@@ -74,15 +76,39 @@ final class AlbumCard: BaseView {
         album = AlbumServiceResponse(withJSON: object)
         ///album?.name
         
-        let photosJson = object[AlbumDetailJsonKey.albumDetailFiles].array
-        
-        albumPhotos = photosJson?.map {
-            let searchItem = SearchItemResponse(withJSON: $0)
-            return WrapData(remote: searchItem)
-        }
         if let album = album {
             albumItem = AlbumItem(remote: album)
         }
+        
+        if let searchItem = album?.coverPhoto {
+            let item = WrapData(remote: searchItem)
+            loadImage(from: item)
+        }
+        
+        /// MAYBE WILL BE NEED
+        //let photosJson = object[AlbumDetailJsonKey.albumDetailFiles].array
+        //
+        //albumPhotos = photosJson?.map {
+        //    let searchItem = SearchItemResponse(withJSON: $0)
+        //    return WrapData(remote: searchItem)
+        //}
+    }
+    
+    private func loadImage(from item: WrapData) {
+        filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
+            DispatchQueue.main.async {
+                if let image = image {
+                    self?.set(image: image)
+                } else {
+                    UIApplication.showErrorAlert(message: TextConstants.getImageError)
+                }
+            }
+        }
+    }
+    
+    private func set(image: UIImage) {
+        cardType = .save
+        previewImageView.image = image
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){
