@@ -12,17 +12,17 @@ class FileInfoInteractor: FileInfoInteractorInput {
     
     var item: BaseDataSourceItem?
 
-    func setObject(object: BaseDataSourceItem){
+    func setObject(object: BaseDataSourceItem) {
         item = object
     }
     
-    func viewIsReady(){
-        if (item != nil){
-            output.setObject(object: item!)
+    func viewIsReady() {
+        if let item = item {
+            output.setObject(object: item)
         }
     }
     
-    func onRename(newName: String){
+    func onRename(newName: String) {
         if let file = item as? Item {
             let renameFile = RenameFile(uuid: file.uuid, newName: newName)
             FileService().rename(rename: renameFile, success: {
