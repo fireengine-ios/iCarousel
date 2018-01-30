@@ -7419,8 +7419,8 @@
 		7CD7C2A82019AFF7009F6D3D /* CollageCard */ = {
 			isa = PBXGroup;
 			children = (
-				7C4F60A12019D0340033C58F /* CollageCard.swift */,
 				7C4F60A42019D0440033C58F /* CollageCard.xib */,
+				7C4F60A12019D0340033C58F /* CollageCard.swift */,
 			);
 			path = CollageCard;
 			sourceTree = "<group>";
@@ -9867,8 +9867,8 @@
 		CE4851F22018B13A006B8854 /* FilterPhotoCard */ = {
 			isa = PBXGroup;
 			children = (
-				CE4851EF2018B03A006B8854 /* FilterPhotoCard.swift */,
 				CE4851EC2018B029006B8854 /* FilterPhotoCard.xib */,
+				CE4851EF2018B03A006B8854 /* FilterPhotoCard.swift */,
 			);
 			path = FilterPhotoCard;
 			sourceTree = "<group>";

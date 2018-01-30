@@ -82,7 +82,7 @@ final class AlbumCard: BaseView {
         
         if let searchItem = album?.coverPhoto {
             let item = WrapData(remote: searchItem)
-            loadImage(from: item)
+            previewImageView.loadImageForItem(object: item)
         }
         
         /// MAYBE WILL BE NEED
@@ -92,23 +92,6 @@ final class AlbumCard: BaseView {
         //    let searchItem = SearchItemResponse(withJSON: $0)
         //    return WrapData(remote: searchItem)
         //}
-    }
-    
-    private func loadImage(from item: WrapData) {
-        filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
-            DispatchQueue.main.async {
-                if let image = image {
-                    self?.set(image: image)
-                } else {
-                    UIApplication.showErrorAlert(message: TextConstants.getImageError)
-                }
-            }
-        }
-    }
-    
-    private func set(image: UIImage) {
-        cardType = .save
-        previewImageView.image = image
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){
