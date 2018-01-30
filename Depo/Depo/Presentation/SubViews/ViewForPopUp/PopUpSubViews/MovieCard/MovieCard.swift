@@ -73,6 +73,7 @@ final class MovieCard: BaseView {
     private func set(details object: JSON) {
         let searchItem = SearchItemResponse(withJSON: object)
         let item = WrapData(remote: searchItem)
+        durationLabel.text = item.duration
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
