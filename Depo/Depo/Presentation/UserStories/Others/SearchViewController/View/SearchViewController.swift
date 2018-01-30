@@ -31,7 +31,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
 
     @IBOutlet weak var musicBarContainer: UIView!
     @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
 
     // MARK: - Variables
     var underNavBarBar: GridListTopBar?
@@ -108,11 +107,11 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     func showMusicBar() {
         musicBar.configurateFromPLayer()
         changeVisibleStatus(hidden: false)
-        containerViewBottomConstraint.constant = musicBarContainerHeightConstraint.constant
+        collectionView.contentInset.bottom = musicBarContainerHeightConstraint.constant
     }
     
     @objc func hideMusicBar(_ sender: Any) {
-        containerViewBottomConstraint.constant = 0
+        collectionView.contentInset.bottom = 0
         changeVisibleStatus(hidden: true)
         output.playerDidHide()
     }
