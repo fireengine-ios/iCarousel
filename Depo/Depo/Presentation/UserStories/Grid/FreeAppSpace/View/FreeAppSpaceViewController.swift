@@ -38,7 +38,6 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
     override func startSelection(with numberOfItems: Int) {
         selectedItemsCountChange(with: numberOfItems)
     }
-    
-    
+
 }
 

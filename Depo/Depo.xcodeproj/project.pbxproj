@@ -110,6 +110,24 @@
 		4A8CC323201A02D900C040C4 /* FaceImageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC322201A02D900C040C4 /* FaceImageInitializer.swift */; };
 		4A8CC324201A02D900C040C4 /* FaceImageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC322201A02D900C040C4 /* FaceImageInitializer.swift */; };
 		4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7E2D395BBA8DC5D0612F29 /* LBAlbumLikePreviewSliderInteractorOutput.swift */; };
+		4A9B38F4201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */; };
+		4A9B38F5201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */; };
+		4A9B38F6201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */; };
+		4A9B38F7201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */; };
+		4A9B38FF201F3502009FC572 /* FaceImageFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38FE201F3502009FC572 /* FaceImageFilesViewController.swift */; };
+		4A9B3900201F3502009FC572 /* FaceImageFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38FE201F3502009FC572 /* FaceImageFilesViewController.swift */; };
+		4A9B3902201F3513009FC572 /* FaceImageFilesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3901201F3513009FC572 /* FaceImageFilesPresenter.swift */; };
+		4A9B3903201F3513009FC572 /* FaceImageFilesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3901201F3513009FC572 /* FaceImageFilesPresenter.swift */; };
+		4A9B3905201F3525009FC572 /* FaceImageFilesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3904201F3525009FC572 /* FaceImageFilesInteractor.swift */; };
+		4A9B3906201F3525009FC572 /* FaceImageFilesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3904201F3525009FC572 /* FaceImageFilesInteractor.swift */; };
+		4A9B3908201F3533009FC572 /* FaceImageFilesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3907201F3533009FC572 /* FaceImageFilesRouter.swift */; };
+		4A9B3909201F3533009FC572 /* FaceImageFilesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3907201F3533009FC572 /* FaceImageFilesRouter.swift */; };
+		4A9B390E201F3969009FC572 /* FaceImageFilesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B390D201F3969009FC572 /* FaceImageFilesInitializer.swift */; };
+		4A9B390F201F3969009FC572 /* FaceImageFilesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B390D201F3969009FC572 /* FaceImageFilesInitializer.swift */; };
+		4A9B3911201F5EC5009FC572 /* FaceImageFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B3910201F5EC5009FC572 /* FaceImageFilesViewController.xib */; };
+		4A9B3912201F5EC5009FC572 /* FaceImageFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B3910201F5EC5009FC572 /* FaceImageFilesViewController.xib */; };
+		4AAF28B720205454007B43BA /* FaceImageFilesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF28B620205454007B43BA /* FaceImageFilesConfigurator.swift */; };
+		4AAF28B820205454007B43BA /* FaceImageFilesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF28B620205454007B43BA /* FaceImageFilesConfigurator.swift */; };
 		4BCD0211E6F3ED79A879D88B /* CompleteProfileInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C66D262F6A075566FD30AC /* CompleteProfileInitializer.swift */; };
 		4C625D18F465CC4F6D27A6B1 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500943E503755A25C4E6B64 /* SettingsInteractor.swift */; };
 		4C7B0D374F8DE575C03C683C /* SplashInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE7E386FBD5473EAA3840B /* SplashInitializer.swift */; };
@@ -3284,6 +3302,15 @@
 		4A8CC31C201A028600C040C4 /* FaceImageInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageInteractorOutput.swift; sourceTree = "<group>"; };
 		4A8CC31F201A02A600C040C4 /* FaceImageConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageConfigurator.swift; sourceTree = "<group>"; };
 		4A8CC322201A02D900C040C4 /* FaceImageInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageInitializer.swift; sourceTree = "<group>"; };
+		4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForFaceImage.swift; sourceTree = "<group>"; };
+		4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCellForFaceImage.xib; sourceTree = "<group>"; };
+		4A9B38FE201F3502009FC572 /* FaceImageFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageFilesViewController.swift; sourceTree = "<group>"; };
+		4A9B3901201F3513009FC572 /* FaceImageFilesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageFilesPresenter.swift; sourceTree = "<group>"; };
+		4A9B3904201F3525009FC572 /* FaceImageFilesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageFilesInteractor.swift; sourceTree = "<group>"; };
+		4A9B3907201F3533009FC572 /* FaceImageFilesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageFilesRouter.swift; sourceTree = "<group>"; };
+		4A9B390D201F3969009FC572 /* FaceImageFilesInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageFilesInitializer.swift; sourceTree = "<group>"; };
+		4A9B3910201F5EC5009FC572 /* FaceImageFilesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceImageFilesViewController.xib; sourceTree = "<group>"; };
+		4AAF28B620205454007B43BA /* FaceImageFilesConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageFilesConfigurator.swift; sourceTree = "<group>"; };
 		4B1BD4C7B771F9CAD4F9CE5D /* LikeFilterRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterRouter.swift; sourceTree = "<group>"; };
 		4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderViewController.swift; sourceTree = "<group>"; };
 		4C7DA7C21EC6C571D491E359 /* OTPViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewPresenter.swift; sourceTree = "<group>"; };
@@ -5874,6 +5901,60 @@
 				4A8CC302201A00D400C040C4 /* FaceImageViewController.xib */,
 				4A8CC307201A016F00C040C4 /* FaceImageViewInput.swift */,
 				4A8CC30A201A018000C040C4 /* FaceImageViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A9B38F8201F3189009FC572 /* FaceImageFiles */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B38FD201F3395009FC572 /* View */,
+				4A9B38FB201F3386009FC572 /* Presenter */,
+				4A9B38FA201F330F009FC572 /* Interactor */,
+				4A9B38F9201F3306009FC572 /* Router */,
+				4A9B38FC201F338D009FC572 /* Configurator */,
+			);
+			path = FaceImageFiles;
+			sourceTree = "<group>";
+		};
+		4A9B38F9201F3306009FC572 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B3907201F3533009FC572 /* FaceImageFilesRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		4A9B38FA201F330F009FC572 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B3904201F3525009FC572 /* FaceImageFilesInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		4A9B38FB201F3386009FC572 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B3901201F3513009FC572 /* FaceImageFilesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4A9B38FC201F338D009FC572 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B390D201F3969009FC572 /* FaceImageFilesInitializer.swift */,
+				4AAF28B620205454007B43BA /* FaceImageFilesConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		4A9B38FD201F3395009FC572 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B38FE201F3502009FC572 /* FaceImageFilesViewController.swift */,
+				4A9B3910201F5EC5009FC572 /* FaceImageFilesViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -9740,6 +9821,7 @@
 		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				4A9B38F8201F3189009FC572 /* FaceImageFiles */,
 				7C6945D620039F4A00152344 /* FreeAppSpace */,
 				7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */,
 				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
@@ -10252,6 +10334,8 @@
 				7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */,
 				873204EE1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift */,
 				873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */,
+				4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */,
+				4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -11227,6 +11311,7 @@
 				8C06B1392008AD72003D8E05 /* t_orta_selected@3x.png in Resources */,
 				8C06AFCF2008AD71003D8E05 /* info_icon@2x.png in Resources */,
 				8C06B1172008AD72003D8E05 /* t_buyuk.png in Resources */,
+				4A9B3912201F5EC5009FC572 /* FaceImageFilesViewController.xib in Resources */,
 				8C06AF592008AD70003D8E05 /* daire@2x.png in Resources */,
 				8C06AFC12008AD71003D8E05 /* gonder_btn.png in Resources */,
 				8C06AFB32008AD71003D8E05 /* frekans@3x.png in Resources */,
@@ -11303,6 +11388,7 @@
 				8C0E90121FDEBDFF00789C91 /* AutoSyncInformTableViewCell.xib in Resources */,
 				8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */,
 				8C06AF7D2008AD70003D8E05 /* edit_selected@3x.png in Resources */,
+				4A9B38F7201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
 				8C06AF1F2008AD70003D8E05 /* cizgi_1_selected@3x.png in Resources */,
 				8C06B1852008AD72003D8E05 /* underline.png in Resources */,
 				8C06B0112008AD71003D8E05 /* kucuk_ucgen@3x.png in Resources */,
@@ -11874,6 +11960,7 @@
 				8C06AEC42008AD70003D8E05 /* alt_cizgili_secili@2x.png in Resources */,
 				8C06AF882008AD70003D8E05 /* extraOptions@3x.png in Resources */,
 				8C06AFDC2008AD71003D8E05 /* italic@3x.png in Resources */,
+				4A9B3911201F5EC5009FC572 /* FaceImageFilesViewController.xib in Resources */,
 				8C06B12A2008AD72003D8E05 /* t_kucuk_selected@2x.png in Resources */,
 				8C06B0302008AD71003D8E05 /* ok_selected@2x.png in Resources */,
 				8C06AFE22008AD71003D8E05 /* italic_secili@3x.png in Resources */,
@@ -11897,6 +11984,7 @@
 				8C06AF662008AD70003D8E05 /* duz_cizgi@2x.png in Resources */,
 				CE51AE7B1EF90853005DCEE0 /* PhoneVereficationScreen~iphone.xib in Resources */,
 				CEF0C28B1FC594E300105C31 /* InstagramAuthViewController.xib in Resources */,
+				4A9B38F6201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
 				8C06B1B02008AD72003D8E05 /* CRYRotateImageViewController.nib in Resources */,
 				8C06AF742008AD70003D8E05 /* edit@2x.png in Resources */,
 				8C06AF4E2008AD70003D8E05 /* crop_selected@3x.png in Resources */,
@@ -12530,6 +12618,7 @@
 				8C0E8C761FDEBDFF00789C91 /* PackagesPresenter.swift in Sources */,
 				8C0E8C771FDEBDFF00789C91 /* LocalMediaItems.swift in Sources */,
 				8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */,
+				4A9B390F201F3969009FC572 /* FaceImageFilesInitializer.swift in Sources */,
 				8C0E8C791FDEBDFF00789C91 /* AutoSyncInformTableViewCell.swift in Sources */,
 				8C0E8C7A1FDEBDFF00789C91 /* CodeTextField.swift in Sources */,
 				8C0E8C7B1FDEBDFF00789C91 /* CreateStoryPhotoSelectionViewController.swift in Sources */,
@@ -12612,6 +12701,7 @@
 				8C0E8CC31FDEBDFF00789C91 /* ActivityTimelineParameters.swift in Sources */,
 				8C0E8CC41FDEBDFF00789C91 /* PhotosOrderCollectionViewCell.swift in Sources */,
 				8C0E8CC51FDEBDFF00789C91 /* InstagramResponses.swift in Sources */,
+				4A9B3909201F3533009FC572 /* FaceImageFilesRouter.swift in Sources */,
 				8C0E8CC61FDEBDFF00789C91 /* HelpAndSupportPresenter.swift in Sources */,
 				FA793D8D201872EA00A02B46 /* ThingsService.swift in Sources */,
 				8C0E8CC71FDEBDFF00789C91 /* IntroduceDataSource.swift in Sources */,
@@ -12768,6 +12858,7 @@
 				8C0E8D4E1FDEBDFF00789C91 /* CurioReachabilityEx.m in Sources */,
 				8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */,
 				8C0E8D501FDEBDFF00789C91 /* SettingsAutoSyncModel.swift in Sources */,
+				4A9B3906201F3525009FC572 /* FaceImageFilesInteractor.swift in Sources */,
 				FA793D8A201872E200A02B46 /* PlacesService.swift in Sources */,
 				8C0E8D511FDEBDFF00789C91 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				8C0E8D521FDEBDFF00789C91 /* DataStorage.swift in Sources */,
@@ -13024,6 +13115,7 @@
 				8C0E8E3B1FDEBDFF00789C91 /* HelpAndSupportSectionTableViewCell.swift in Sources */,
 				8C0E8E3C1FDEBDFF00789C91 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
 				8C0E8E3D1FDEBDFF00789C91 /* FBParametrs.swift in Sources */,
+				4A9B38F5201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */,
 				8C0E8E3E1FDEBDFF00789C91 /* ForgotPasswordRouter.swift in Sources */,
 				8C0E8E3F1FDEBDFF00789C91 /* ProgressPopUp.swift in Sources */,
 				8C0E8E401FDEBDFF00789C91 /* ForgotPasswordConfigurator.swift in Sources */,
@@ -13075,6 +13167,7 @@
 				8C0E8E651FDEBDFF00789C91 /* DropboxResponse.swift in Sources */,
 				8C0E8E661FDEBDFF00789C91 /* LikeFilterInteractorOutput.swift in Sources */,
 				8C0E8E671FDEBDFF00789C91 /* LikeFilterInteractor.swift in Sources */,
+				4AAF28B820205454007B43BA /* FaceImageFilesConfigurator.swift in Sources */,
 				8C0E8E681FDEBDFF00789C91 /* FileService.swift in Sources */,
 				8C0E8E691FDEBDFF00789C91 /* AlertFilesActionsSheetPresenter.swift in Sources */,
 				8C0E8E6A1FDEBDFF00789C91 /* LikeFilterRouterInput.swift in Sources */,
@@ -13333,6 +13426,7 @@
 				8C0E8F451FDEBDFF00789C91 /* ActionsMenuViewInput.swift in Sources */,
 				8C0E8F461FDEBDFF00789C91 /* ActionsMenuView.swift in Sources */,
 				8C0E8F471FDEBDFF00789C91 /* FileInfoViewInput.swift in Sources */,
+				4A9B3900201F3502009FC572 /* FaceImageFilesViewController.swift in Sources */,
 				8C0B91C02017145D00A5BA81 /* UISearchBar+Cancel.swift in Sources */,
 				8C0E8F481FDEBDFF00789C91 /* FileInfoViewOutput.swift in Sources */,
 				8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */,
@@ -13452,6 +13546,7 @@
 				8C0E8FAE1FDEBDFF00789C91 /* SubscriptionsService.swift in Sources */,
 				8C0E8FAF1FDEBDFF00789C91 /* FeedbackViewOutput.swift in Sources */,
 				8C0E8FB01FDEBDFF00789C91 /* CreateStoryPreviyInteractorIO.swift in Sources */,
+				4A9B3903201F3513009FC572 /* FaceImageFilesPresenter.swift in Sources */,
 				8C0E8FB11FDEBDFF00789C91 /* FeedbackViewController.swift in Sources */,
 				8C0E8FB21FDEBDFF00789C91 /* FeedbackViewModuleInput.swift in Sources */,
 				8C0E8FB31FDEBDFF00789C91 /* FeedbackViewPresenter.swift in Sources */,
@@ -13676,6 +13771,7 @@
 				CE51ABD01EF90853005DCEE0 /* UpdateServerIntegration.m in Sources */,
 				CE2F56231F7552A900F49DA1 /* ResizableCollectionView.swift in Sources */,
 				CEAE3FB71EFD4F0D00A405B2 /* HomePageRouter.swift in Sources */,
+				4A9B38F4201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */,
 				CEAE3FED1EFD517300A405B2 /* CustomNavBarView.swift in Sources */,
 				7C3A74491F07927200124DF5 /* CollectionViewCellForPhoto.swift in Sources */,
 				782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */,
@@ -13811,6 +13907,7 @@
 				7CD1F8FC1F0288CA0028F51A /* WiFiSyncViewController.swift in Sources */,
 				78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */,
 				CE51AC7E1EF90853005DCEE0 /* LoginInitializer.swift in Sources */,
+				4A9B3908201F3533009FC572 /* FaceImageFilesRouter.swift in Sources */,
 				CEAD6BDE1F94EF320085FF30 /* Factory.swift in Sources */,
 				7C233CD31FD51E290013CCA0 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				CE95ED511F516736002F923A /* HelpAndSupportInteractorOutput.swift in Sources */,
@@ -14110,6 +14207,7 @@
 				8C6EF88C1F348B77002AC795 /* CustomEdinitgTabBar.swift in Sources */,
 				745E2B63A07B865C70D88553 /* ExpandStorageInteractor.swift in Sources */,
 				8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
+				4A9B3905201F3525009FC572 /* FaceImageFilesInteractor.swift in Sources */,
 				24A17016A49195E62A5E5DC5 /* ExpandStorageRouterInput.swift in Sources */,
 				7CF6BDBA1F0B88910066709E /* CollectionViewCellForVideo.swift in Sources */,
 				8C6EF87B1F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift in Sources */,
@@ -14175,6 +14273,7 @@
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				8CFF868A1F0F96E600520D18 /* ContactDevice.m in Sources */,
+				4A9B3902201F3513009FC572 /* FaceImageFilesPresenter.swift in Sources */,
 				8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */,
 				78D9BA3E2007E80600F2233F /* DuplicatedContactsPresenter.swift in Sources */,
@@ -14412,6 +14511,7 @@
 				F80A68F35B5CBF5C9E6E0288 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
 				CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */,
 				B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
+				4A9B38FF201F3502009FC572 /* FaceImageFilesViewController.swift in Sources */,
 				0D9510CB65B6DA6F2D661754 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				7859299120060E85003F8AB3 /* ManageContactsRouter.swift in Sources */,
 				4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
@@ -14448,6 +14548,7 @@
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
 				CE907A321F94D49900D2F8CE /* VolumeSlider.swift in Sources */,
 				2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */,
+				4A9B390E201F3969009FC572 /* FaceImageFilesInitializer.swift in Sources */,
 				CE2F56301F75548500F49DA1 /* SubscriptionsService.swift in Sources */,
 				9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */,
 				7C66E8AC1F979C3300D98F27 /* CreateStoryPreviyInteractorIO.swift in Sources */,
@@ -14491,6 +14592,7 @@
 				FA793D812018725400A02B46 /* PlacesService.swift in Sources */,
 				D66872AC6631A25FA11EB409 /* OTPViewIO.swift in Sources */,
 				8518B9D1741BF6B4470BCD73 /* OTPViewPresenter.swift in Sources */,
+				4AAF28B720205454007B43BA /* FaceImageFilesConfigurator.swift in Sources */,
 				C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */,
 				C16DECBEE5DA1602185ABA27 /* OTPViewInteractor.swift in Sources */,
 				759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */,
