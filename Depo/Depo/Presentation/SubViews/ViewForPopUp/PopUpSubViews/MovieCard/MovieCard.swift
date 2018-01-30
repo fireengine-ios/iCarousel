@@ -117,11 +117,7 @@ final class MovieCard: BaseView {
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
-        guard let image = videoPreviewImageView.image else { return }
-
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
-        RouterVC().pushViewController(viewController: vc)
+        showPhotoVideoDetail(hideActions: true)
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
@@ -129,7 +125,7 @@ final class MovieCard: BaseView {
         case .save:
             saveImage()
         case .display:
-            showPhotoVideoDetail()
+            showPhotoVideoDetail(hideActions: false)
         }
     }
     
@@ -152,10 +148,10 @@ final class MovieCard: BaseView {
         }
     }
     
-    private func showPhotoVideoDetail() {
+    private func showPhotoVideoDetail(hideActions: Bool) {
         guard let item = item else { return }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
+        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], hideActions: hideActions)
         
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
