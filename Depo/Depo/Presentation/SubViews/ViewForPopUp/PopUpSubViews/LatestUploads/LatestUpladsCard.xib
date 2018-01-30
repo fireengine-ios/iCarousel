@@ -41,12 +41,15 @@
                         <constraint firstAttribute="height" constant="33" id="XHZ-en-7iV"/>
                     </constraints>
                     <state key="normal" image="CloseCardIcon"/>
+                    <connections>
+                        <action selector="onCloseButton" destination="iN0-l3-epB" eventType="touchUpInside" id="FIC-zy-J0Y"/>
+                    </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nrt-8t-az2">
-                    <rect key="frame" x="47" y="85" width="313" height="63"/>
+                    <rect key="frame" x="47" y="85" width="313" height="85"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="63" id="uBS-l6-9l0"/>
+                        <constraint firstAttribute="height" constant="85" id="uBS-l6-9l0"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xIY-LR-gss">
                         <size key="itemSize" width="50" height="50"/>

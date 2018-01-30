@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewDataSource {
+class LatestUpladsCard: BaseView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var title:UILabel!
     @IBOutlet weak var subTitle: UILabel!
@@ -20,6 +20,7 @@ class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewData
     
     let numberOfcellInRow: CGFloat = 7
     let minSeparatorSize: CGFloat = 2
+    var collectionViewW: CGFloat = 0
     
     override func configurateView() {
         super.configurateView()
@@ -41,6 +42,16 @@ class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewData
         viewAllPhotosButton.setTitleColor(ColorConstants.blueColor, for: .normal)
         
         collectionView.register(nibCell: LatestUploadCardCell.self)
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if collectionViewW != collectionView.frame.size.width{
+            collectionViewW = collectionView.frame.size.width
+            collectionView.layoutSubviews()
+            collectionView.reloadData()
+        }
     }
     
     override func set(object: HomeCardResponse?) {
@@ -62,23 +73,34 @@ class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewData
                 collectionViewDataSource.append(item)
             }
         }
+        var i = 0
+        while i < 5 {
+            collectionViewDataSource.append(contentsOf: collectionViewDataSource)
+            i = i + 1
+        }
         collectionView.reloadData()
         
     }
     
     @IBAction func onViewRecentActivitiesButton(){
-        
+        let router = RouterVC()
+        router.pushViewController(viewController: router.vcActivityTimeline)
     }
 
     @IBAction func onViewAllPhotosButton(){
-        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen), object: nil, userInfo: nil)
+    }
+    
+    @IBAction func onCloseButton(){
+        CardsManager.default.stopOperationWithType(type: .latestUploads)
     }
     
     //MARK: UICollectionView Delegate
     
     func calculateLinearDimensionsForCell() -> CGFloat{
         let w = collectionView.frame.size.width
-        return (w - minSeparatorSize*numberOfcellInRow + minSeparatorSize)/numberOfcellInRow
+        let cellW = (w - minSeparatorSize*numberOfcellInRow + minSeparatorSize)/numberOfcellInRow
+        return cellW
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -89,12 +111,12 @@ class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewData
         return collectionViewDataSource.count
     }
     
-    func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth:CGFloat) -> CGFloat{
-        return calculateLinearDimensionsForCell()
-    }
-    
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat{
         return HomeViewTopView.getHeight()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: calculateLinearDimensionsForCell(), height: calculateLinearDimensionsForCell())
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
