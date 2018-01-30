@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -15,7 +16,10 @@ class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewData
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var viewRecentActivitiesButton: UIButton!
     @IBOutlet weak var viewAllPhotosButton: UIButton!
-    var collectionViewDataSource = [Any]()
+    var collectionViewDataSource = [WrapData]()
+    
+    let numberOfcellInRow: CGFloat = 7
+    let minSeparatorSize: CGFloat = 2
     
     override func configurateView() {
         super.configurateView()
@@ -37,6 +41,28 @@ class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewData
         viewAllPhotosButton.setTitleColor(ColorConstants.blueColor, for: .normal)
         
         collectionView.register(nibCell: LatestUploadCardCell.self)
+    }
+    
+    override func set(object: HomeCardResponse?) {
+        super.set(object: object)
+        
+        if let details = object?.details {
+            set(details: details)
+        }
+    }
+    
+    
+    private func set(details object: JSON) {
+        if let array = object.array {
+            for itemObject in array{
+                let searchItem = SearchItemResponse(withJSON: itemObject)
+                let item = WrapData(remote: searchItem)
+                item.syncStatus = .synced
+                item.isLocalItem = false
+                collectionViewDataSource.append(item)
+            }
+        }
+        collectionView.reloadData()
         
     }
     
@@ -50,6 +76,11 @@ class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewData
     
     //MARK: UICollectionView Delegate
     
+    func calculateLinearDimensionsForCell() -> CGFloat{
+        let w = collectionView.frame.size.width
+        return (w - minSeparatorSize*numberOfcellInRow + minSeparatorSize)/numberOfcellInRow
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -59,7 +90,7 @@ class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth:CGFloat) -> CGFloat{
-        return 40
+        return calculateLinearDimensionsForCell()
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat{
@@ -68,7 +99,19 @@ class LatestUpladsCard: BaseView, UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: LatestUploadCardCell.self, for: indexPath)
+        let object = collectionViewDataSource[indexPath.row]
+        cell.setImage(image: object)
         return cell
+    }
+    
+    //-----
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return minSeparatorSize
+    }
+    
+    //|||||
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return minSeparatorSize
     }
     
 }

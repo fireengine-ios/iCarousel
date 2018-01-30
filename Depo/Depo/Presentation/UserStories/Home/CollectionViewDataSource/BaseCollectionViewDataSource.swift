@@ -20,8 +20,6 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     var collectionView: UICollectionView!
     var viewController: UIViewController!
     
-    //var controllersArray = [UIViewController]()
-    
     var delegate:BaseCollectionViewDataSourceDelegate?
     
     var viewsByType = [OperationType: BaseView]()
@@ -48,17 +46,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
-        
-//        controllersArray.removeAll()
-//        controllersArray.insert(contentsOf: data, at: 0)
-//
-//        for controller in controllersArray{
-//            controller.view.layoutSubviews()
-//            viewController.addChildViewController(controller)
-//        }
-        
         collectionView.reloadData()
-        
     }
     
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth:CGFloat) -> CGFloat{
@@ -67,13 +55,6 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             return popUpView.calculatedH
         }
         return 40
-        
-//        let vC = controllersArray[indexPath.row - popUps.count]
-//        guard let contr = vC as? BaseCollectionViewController else {
-//            return 40
-//        }
-//        contr.calculateHeight(forWidth: withWidth)
-//        return contr.calculatedH
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat{
@@ -87,7 +68,6 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     //MARK UICollectionView delegate
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return controllersArray.count + popUps.count
         return popUps.count
     }
     
@@ -111,14 +91,8 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         
         baseCel.setStateToDefault()
         baseCel.cellDelegate = self
-//        if (isPopUpCell(path: indexPath)){
-            let popUpView = popUps[indexPath.row]
-            baseCel.addViewOnCell(controllersView: popUpView, withShadow: true)
-//        }else{
-//            let viewController = controllersArray[indexPath.row - popUps.count]
-//            baseCel.addViewOnCell(controllersView: viewController.view, withShadow: true)
-//        }
-        
+        let popUpView = popUps[indexPath.row]
+        baseCel.addViewOnCell(controllersView: popUpView, withShadow: true)
         return baseCel
     }
     
@@ -129,23 +103,13 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         guard let path = indehPath else {
             return
         }
-        //if (isPopUpCell(path: path)){
-            popUps.remove(at: path.row)
-//        }else{
-//            let controller = controllersArray[path.row - popUps.count]
-//            controllersArray.remove(at: path.row - popUps.count)
-//            controller.removeFromParentViewController()
-//            delegate?.onCellHasBeenRemovedWith(controller: controller)
-//        }
+        popUps.remove(at: path.row)
         collectionView.deleteItems(at: [path])
     }
     
     //MARK: animation of collectionView
     
     func addCellAtIndex(index: Int){
-        //collectionView.reloadData()
-        //return
-        
         if (isActive){
             print(Date().timeIntervalSince1970)
             self.collectionView.performBatchUpdates({
@@ -161,8 +125,6 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func deleteCellAtIndex(index: Int){
-        //let cell = collectionView.cellForItem(at: IndexPath(row: index, section: 0))
-        
         var needReload = true
         if (isActive){
             let rowIndexes = collectionView.indexPathsForVisibleItems.map({ $0.row })
@@ -179,12 +141,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
         
         if needReload {
-//            popUps.remove(at: index)
-//            if let layout = collectionView.collectionViewLayout as? CollectionViewLayout {
-//                layout.remoweAttributesForCell(in: <#T##CGRect#>)
-//            }
             collectionView.reloadData()
-            //collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
@@ -247,6 +204,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                         let view = getViewForOperation(operation: type)
                         view.layoutIfNeeded()
                         popUps.insert(view, at: 0)
+                        viewsByType[type] = view
                     }
                 }
             }
@@ -279,7 +237,6 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             
             viewsByType[type] = view
             let index = 0
-            //print("insert at index ", index, type.rawValue)
             popUps.insert(view, at: index)
             popUps = popUps.sorted(by: { (view1, view2) -> Bool in
                 let order1 = view1.cardObject?.order ?? 0
