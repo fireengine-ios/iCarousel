@@ -37,7 +37,7 @@ class SeacrhViewRouter: SearchViewRouterInput {
     }
     
     func createStoryWithItems(_ items: [BaseDataSourceItem]) {
-        RouterVC().createStoryName(items: items, needSelectionItems: true)
+        RouterVC().createStoryName(items: items, needSelectionItems: true, isFavorites: false)
     }
     
     func showNoFilesToCreateStoryAlert() {

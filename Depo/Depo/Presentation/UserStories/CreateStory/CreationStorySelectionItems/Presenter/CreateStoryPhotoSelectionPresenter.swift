@@ -27,8 +27,13 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
         return true
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        dataSource.updateSelectionCount()
+    }
+    
     override func viewWillDisappear() {
-        super.viewWillDisappear()
+        bottomBarPresenter?.dismiss(animated: true)
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int){
@@ -66,13 +71,13 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     
     override func getContentWithSuccess(array: [[BaseDataSourceItem]]){
         //DBDROP
-        super.getContentWithSuccess(array: array)
+        var content = [[BaseDataSourceItem]]()
+        array.forEach { items in
+            content.append(items.filter {$0.fileType == .image})
+        }        
+        super.getContentWithSuccess(array: content)
     }
-    
-    override func needShowNoFileView() -> Bool {
-        return dataSource.getAllObjects().count == 0
-    }
-    
+        
     private func startEditing() {
         dataSource.setSelectionState(selectionState: true)
     }

@@ -22,7 +22,8 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     
     static let durationOfSelection : Double = 0.5
     
-    var requestID: PHImageRequestID?
+    private var assetId: String?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -85,15 +86,12 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         
     }
     
-    func setRequestID(requestID: PHImageRequestID?){
-        if let `requestID` = requestID{
-            FilesDataSource().cancelRequestByID(requestID: requestID)
-        }
-        self.requestID = requestID
+    func getAssetId() -> String? {
+        return assetId
     }
     
-    func getRequestID() -> PHImageRequestID?{
-        return requestID
+    func setAssetId(_ id: String?) {
+        assetId = id
     }
     
     func updating(){

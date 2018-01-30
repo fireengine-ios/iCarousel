@@ -14,6 +14,12 @@ class CreateStoryNameRouter: CreateStoryNameRouterInput {
         router.pushViewController(viewController: controller)
     }
     
+    func goToFavoriteSelectionPhotosForStory(story: PhotoStory) {
+        let router = RouterVC()
+        let controller = router.favoritePhotoSelection(forStory: story)
+        router.pushViewController(viewController: controller)
+    }
+    
     func goToPhotosOrderForStory(story: PhotoStory) {
         let router = RouterVC()
         let controller = router.photosOrder(forStory: story)
