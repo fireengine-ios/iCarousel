@@ -48,8 +48,10 @@ final class AlbumCard: BaseView {
     @IBOutlet private weak var previewImageView: LoadingImageView!
 
     private var album: AlbumServiceResponse?
-    private var albumPhotos: [WrapData]?
     private var albumItem: AlbumItem?
+    
+    /// MAYBE WILL BE NEED
+    ///private var albumPhotos: [WrapData]?
     
     private var cardType = CardActionType.save {
         didSet {
@@ -74,15 +76,42 @@ final class AlbumCard: BaseView {
         album = AlbumServiceResponse(withJSON: object)
         ///album?.name
         
-        let photosJson = object[AlbumDetailJsonKey.albumDetailFiles].array
-        
-        albumPhotos = photosJson?.map {
-            let searchItem = SearchItemResponse(withJSON: $0)
-            return WrapData(remote: searchItem)
-        }
         if let album = album {
             albumItem = AlbumItem(remote: album)
         }
+        
+        if let searchItem = album?.coverPhoto {
+            let item = WrapData(remote: searchItem)
+            previewImageView.loadImageForItem(object: item)
+        }
+        
+        let photosJson = object[AlbumDetailJsonKey.albumDetailFiles].array
+        
+        if let albumName = albumItem?.name, let photosCount = photosJson?.count {
+            setupAlbumDescriptionWith(albumName: albumName, photosCount: photosCount)
+        }
+        
+        /// MAYBE WILL BE NEED
+        //albumPhotos = photosJson?.map {
+        //    let searchItem = SearchItemResponse(withJSON: $0)
+        //    return WrapData(remote: searchItem)
+        //}
+    }
+    
+    private func setupAlbumDescriptionWith(albumName: String, photosCount: Int) {
+        let countString = "- \(photosCount) " + TextConstants.photos
+        let countAttributes = [NSAttributedStringKey.foregroundColor: ColorConstants.darkBorder,
+                               NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)]
+        let attributedCount = NSAttributedString(string: countString, attributes: countAttributes)
+        
+        let fullName = "\"\(albumName)\""
+        let nameAttributes = [NSAttributedStringKey.foregroundColor: ColorConstants.textGrayColor,
+                              NSAttributedStringKey.font: UIFont.TurkcellSaturaDemFont(size: 14)]
+        
+        let attributedName = NSMutableAttributedString(string: fullName, attributes: nameAttributes)
+        attributedName.append(attributedCount)
+        
+        descriptionLabel.attributedText = attributedName
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){

@@ -48,7 +48,7 @@ final class FilterPhotoCard: BaseView {
         }
     }
     
-    @IBOutlet private weak var photoImageView: UIImageView!
+    @IBOutlet private weak var photoImageView: LoadingImageView!
     
     private var cardType = CardActionType.save {
         didSet {
@@ -78,11 +78,8 @@ final class FilterPhotoCard: BaseView {
     private func loadImage(from item: WrapData) {
         filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
             DispatchQueue.main.async {
-                if let image = image {
-                    self?.set(image: image)
-                } else {
-                    UIApplication.showErrorAlert(message: TextConstants.getImageError)
-                }
+                guard let image = image else { return }
+                self?.set(image: image)
             }
         }
     }
