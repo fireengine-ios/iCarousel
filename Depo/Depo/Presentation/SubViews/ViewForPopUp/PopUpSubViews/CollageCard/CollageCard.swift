@@ -100,14 +100,12 @@ final class CollageCard: BaseView {
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
-                    break
+                    CardsManager.default.stopOperationWithType(type: .collage)
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.localizedDescription)
                 }
             }
         }
-        
-        CardsManager.default.stopOperationWithType(type: .collage)
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {

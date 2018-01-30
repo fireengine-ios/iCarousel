@@ -6820,8 +6820,8 @@
 		7C4F60A72019E28A0033C58F /* AlbumCard */ = {
 			isa = PBXGroup;
 			children = (
-				7C4F60A82019E2AE0033C58F /* AlbumCard.swift */,
 				7C4F60AB2019E2BC0033C58F /* AlbumCard.xib */,
+				7C4F60A82019E2AE0033C58F /* AlbumCard.swift */,
 			);
 			path = AlbumCard;
 			sourceTree = "<group>";

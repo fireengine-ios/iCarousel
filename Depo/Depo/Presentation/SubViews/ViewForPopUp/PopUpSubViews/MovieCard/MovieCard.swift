@@ -35,7 +35,7 @@ final class MovieCard: BaseView {
         didSet {
             bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
             bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-            bottomButton.setTitle(TextConstants.homeMovieCardViewButton, for: .normal)
+            bottomButton.setTitle(TextConstants.homeMovieCardSaveButton, for: .normal)
         }
     }
     
@@ -54,9 +54,9 @@ final class MovieCard: BaseView {
         didSet {
             switch cardType {
             case .save:
-                bottomButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
+                bottomButton.setTitle(TextConstants.homeMovieCardSaveButton, for: .normal)
             case .display:
-                bottomButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
+                bottomButton.setTitle(TextConstants.homeMovieCardViewButton, for: .normal)
             }
         }
     }
@@ -73,6 +73,7 @@ final class MovieCard: BaseView {
     private func set(details object: JSON) {
         let searchItem = SearchItemResponse(withJSON: object)
         let item = WrapData(remote: searchItem)
+        durationLabel.text = item.duration
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
@@ -108,22 +109,16 @@ final class MovieCard: BaseView {
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
-                    break
+                    CardsManager.default.stopOperationWithType(type: .movieCard)
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.localizedDescription)
                 }
             }
         }
-        
-        CardsManager.default.stopOperationWithType(type: .movieCard)
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
-        guard let image = videoPreviewImageView.image else { return }
-
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
-        RouterVC().pushViewController(viewController: vc)
+        showPhotoVideoDetail(hideActions: true)
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
@@ -131,7 +126,7 @@ final class MovieCard: BaseView {
         case .save:
             saveImage()
         case .display:
-            showPhotoVideoDetail()
+            showPhotoVideoDetail(hideActions: false)
         }
     }
     
@@ -154,10 +149,10 @@ final class MovieCard: BaseView {
         }
     }
     
-    private func showPhotoVideoDetail() {
+    private func showPhotoVideoDetail(hideActions: Bool) {
         guard let item = item else { return }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
+        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], hideActions: hideActions)
         
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
