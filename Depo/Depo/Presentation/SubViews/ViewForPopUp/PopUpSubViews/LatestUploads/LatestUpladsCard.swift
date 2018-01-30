@@ -64,20 +64,15 @@ class LatestUpladsCard: BaseView {
     
     
     private func set(details object: JSON) {
-        if let array = object.array {
-            for itemObject in array{
+        if let arrayOfJsons = object.array {
+            for itemObject in arrayOfJsons{
                 let searchItem = SearchItemResponse(withJSON: itemObject)
                 let item = WrapData(remote: searchItem)
-                item.syncStatus = .synced
-                item.isLocalItem = false
                 collectionViewDataSource.append(item)
+                if collectionViewDataSource.count == 14{
+                    break
+                }
             }
-        }
-        
-        if collectionViewDataSource.count > 14{
-            let array = collectionViewDataSource[0..<14]
-            collectionViewDataSource.removeAll()
-            collectionViewDataSource.append(contentsOf: array)
         }
         
         collectionView.reloadData()
