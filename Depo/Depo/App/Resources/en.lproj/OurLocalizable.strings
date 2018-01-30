@@ -368,8 +368,8 @@
 "Did you like this filter?" = "Did you like this filter?";
 "Take a Photo" = "Take a Photo";
 "Contact Backup" = "Contact Backup";
-"Your last contact update was %d months ago!" = "Your last contact update was %d months ago!";
-"It has been %d months since you last updated your contacts, update now to never loose any of your contacts." = "It has been %d months since you last updated your contacts, update now to never loose any of your contacts.";
+"Your last contact update was %@ months ago!" = "Your last contact update was %@ months ago!";
+"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts.";
 "Your contact list looks empty" = "Your contact list looks empty";
 "You don’t have any contacts in your profile, backup your contacts now!" = "You don’t have any contacts in your profile, backup your contacts now!";
 "Backup" = "Backup";

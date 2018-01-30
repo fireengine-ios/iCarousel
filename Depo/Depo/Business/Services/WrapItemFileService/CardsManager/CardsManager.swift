@@ -98,10 +98,6 @@ class CardsManager: NSObject {
     }
     
     private func sortingAllCards(){
-        //получаем список всех операций в массиве и стартуем их кучей
-        //во въюхах мерджим массивы и сортируем затем релоадим таблицу
-        //простой старт операции теперь должен будет инсертить в нужную точку массива
-
         DispatchQueue.main.async {
             for notificationView in self.foloversArray{
                 notificationView.startOperationsWith(serverObjects: self.homeCardsObjects)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ContactBackupOld: BaseView {
 
@@ -16,6 +17,12 @@ class ContactBackupOld: BaseView {
     @IBOutlet weak var bacupButton: UIButton?
     @IBOutlet weak var lastUpdateLabel: UILabel?
     
+    class func isContactInfoObjectEmpty(object: JSON?) -> Bool{
+        if object?["lastBackupDate"].date != nil{
+            return false
+        }
+        return true
+    }
     
     override func configurateView(){
         super.configurateView()
@@ -26,11 +33,9 @@ class ContactBackupOld: BaseView {
         
         titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel?.textColor = ColorConstants.textGrayColor
-        titleLabel?.text = TextConstants.homePageContactBacupOldTitle
         
         subTitle?.font = UIFont.TurkcellSaturaRegFont(size: 12)
         subTitle?.textColor = ColorConstants.textGrayColor
-        subTitle?.text = TextConstants.homePageContactBacupOldSubTitle
         
         bacupButton?.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         bacupButton?.setTitleColor(ColorConstants.blueColor, for: .normal)
@@ -38,16 +43,48 @@ class ContactBackupOld: BaseView {
         
         lastUpdateLabel?.font = UIFont.TurkcellSaturaRegFont(size: 14)
         lastUpdateLabel?.textColor = ColorConstants.darkBorder
-        lastUpdateLabel?.text = TextConstants.homePageContactBacupLastUpate
     }
     
+    override func set(object: HomeCardResponse?) {
+        super.set(object: object)
+        
+        configurateByResponceObject()
+    }
+    
+    func configurateByResponceObject(){
+        let lastBacupDate = getLastBackupDate()
+        let monthesAfterLastBacup = getMonthesAfterLastBacup()
+        
+        titleLabel?.text = String(format: TextConstants.homePageContactBacupOldTitle, monthesAfterLastBacup)
+        subTitle?.text = String(format: TextConstants.homePageContactBacupOldSubTitle, monthesAfterLastBacup)
+        
+        lastUpdateLabel?.text = String(format: "%@ %@", TextConstants.homePageContactBacupLastUpate, lastBacupDate)
+    }
+    
+    func getLastBackupDate()->String{
+        if let dateLastBackup = cardObject?.details?["lastBackupDate"].date{
+           return dateLastBackup.getDateInFormat(format: "dd.MM.YYYY")
+        }
+        
+        return ""
+    }
+    
+    func getMonthesAfterLastBacup()->String{
+        if let dateLastBackup = cardObject?.details?["lastBackupDate"].date{
+            return String(format: "%d", dateLastBackup.getTimeIntervalBetweenDateAndCurrentDate())
+        }
+        
+        return ""
+    }
     
     @IBAction func onCloseButton(){
         CardsManager.default.stopOperationWithType(type: .contactBacupOld)
     }
     
     @IBAction func onBackupButton(){
-        
+        let router = RouterVC()
+        let controller = router.syncContacts
+        router.pushViewController(viewController: controller)
     }
     
 }

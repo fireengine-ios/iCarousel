@@ -35,7 +35,10 @@ final class HomeCardResponse {
         case .stylizedPhoto:
             return .stylizedPhoto
         case .contactBackup:
-            return .contactBacupEmpty
+            if ContactBackupOld.isContactInfoObjectEmpty(object: details){
+                return .contactBacupEmpty
+            }
+            return .contactBacupOld
         case .album:
             return .albumCard
         case .autoSyncWatingForWifi:

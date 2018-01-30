@@ -25,7 +25,7 @@ class ContactBackupEmpty: ContactBackupOld {
         CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
     }
     
-    @IBAction override func onBackupButton(){
+    override func configurateByResponceObject(){
         
     }
 
