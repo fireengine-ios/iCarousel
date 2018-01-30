@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class LatestUpladsCard: BaseView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class LatestUpladsCard: BaseView {
 
     @IBOutlet weak var title:UILabel!
     @IBOutlet weak var subTitle: UILabel!
@@ -73,18 +73,13 @@ class LatestUpladsCard: BaseView, UICollectionViewDataSource, UICollectionViewDe
                 collectionViewDataSource.append(item)
             }
         }
-        var i = 0
-        while i < 5 {
-            collectionViewDataSource.append(contentsOf: collectionViewDataSource)
-            i = i + 1
-        }
         collectionView.reloadData()
-        
     }
     
     @IBAction func onViewRecentActivitiesButton(){
         let router = RouterVC()
-        router.pushViewController(viewController: router.vcActivityTimeline)
+        let controller = router.vcActivityTimeline
+        router.pushViewController(viewController: controller)
     }
 
     @IBAction func onViewAllPhotosButton(){
@@ -95,7 +90,11 @@ class LatestUpladsCard: BaseView, UICollectionViewDataSource, UICollectionViewDe
         CardsManager.default.stopOperationWithType(type: .latestUploads)
     }
     
-    //MARK: UICollectionView Delegate
+}
+
+
+//MARK: UICollectionView Delegate
+extension LatestUpladsCard: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func calculateLinearDimensionsForCell() -> CGFloat{
         let w = collectionView.frame.size.width
@@ -112,7 +111,7 @@ class LatestUpladsCard: BaseView, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat{
-        return HomeViewTopView.getHeight()
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
