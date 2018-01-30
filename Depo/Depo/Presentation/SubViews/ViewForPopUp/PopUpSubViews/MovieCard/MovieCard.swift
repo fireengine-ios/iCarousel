@@ -35,7 +35,7 @@ final class MovieCard: BaseView {
         didSet {
             bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
             bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-            bottomButton.setTitle(TextConstants.homeMovieCardViewButton, for: .normal)
+            bottomButton.setTitle(TextConstants.homeMovieCardSaveButton, for: .normal)
         }
     }
     
@@ -54,9 +54,9 @@ final class MovieCard: BaseView {
         didSet {
             switch cardType {
             case .save:
-                bottomButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
+                bottomButton.setTitle(TextConstants.homeMovieCardSaveButton, for: .normal)
             case .display:
-                bottomButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
+                bottomButton.setTitle(TextConstants.homeMovieCardViewButton, for: .normal)
             }
         }
     }
