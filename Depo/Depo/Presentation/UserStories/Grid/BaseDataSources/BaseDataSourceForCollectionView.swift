@@ -1299,7 +1299,8 @@ extension BaseDataSourceForCollectionView {
         guard
             let collectionView = collectionView,
             let view = collectionView.superview,
-            view.window != nil
+            view.window != nil,
+            allItems.count > 0
         else {
             return
         }
