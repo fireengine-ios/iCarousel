@@ -567,6 +567,27 @@ class RouterVC: NSObject {
         return controller
     }
     
+    //MARK: People list
+    
+    func peopleListController() -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageFilesInitializer.initializePeopleController(with: "BaseFilesGreedViewController")
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    //MARK: Thing list
+    
+    func thingsListController() -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageFilesInitializer.initializeThingsController(with: "BaseFilesGreedViewController")
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    //MARK: Place list
+    
+    func placesListController() -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageFilesInitializer.initializePlacesController(with: "BaseFilesGreedViewController")
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
     //MARK: Free App Space
     
     func freeAppSpace() -> UIViewController{
@@ -617,6 +638,13 @@ class RouterVC: NSObject {
     
     var importPhotos: UIViewController? {
         let controller = ImportPhotosInitializer.initializeViewController(with: "ImportPhotosViewController")
+        return controller
+    }
+    
+    // MARK: Face image
+    
+    var faceImage: UIViewController {
+        let controller = FaceImageInitializer.initializeViewController(with: "FaceImageViewController")
         return controller
     }
     

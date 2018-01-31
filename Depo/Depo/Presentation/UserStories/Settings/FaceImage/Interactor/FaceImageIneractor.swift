@@ -1,0 +1,65 @@
+//
+//  FaceImageIneractor.swift
+//  Depo
+//
+//  Created by Tsimafei Harhun on 25.01.2018.
+//  Copyright © 2018 LifeTech. All rights reserved.
+//
+
+import Foundation
+
+final class FaceImageInteractor {
+    var output: FaceImageInteractorOutput!
+    
+    private func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
+        let accountService = AccountService()
+        accountService.faceImageAllowed(success: { [weak self] response in
+            self?.output.operationFinished()
+            if let response = response as? FaceImageAllowedResponse, let allowed = response.allowed {
+                completion(allowed)
+            } else {
+                completion(false)
+            }
+        }, fail: { [weak self] error in
+            self?.fail(error: error.localizedDescription)
+            completion(false)
+        })
+    }
+    
+    private func fail(error: String){
+        DispatchQueue.main.async { [weak self] in
+            self?.output.operationFinished()
+            self?.output.showError(error: error)
+        }
+    }
+}
+
+// MARK: - FaceImageInteractorInput
+
+extension FaceImageInteractor: FaceImageInteractorInput {
+    func getFaceImageStatus() {
+        faceImageAllowed { [weak self] result in
+            DispatchQueue.main.async {
+                self?.output.didFaceImageStatus(result)
+            }
+        }
+    }
+    
+    func changeFaceImageStatus(_ isAllowed: Bool) {
+        let accountService = AccountService()
+        let parameters = FaceImageAllowedParameters()
+        parameters.allowed = isAllowed
+        accountService.switchFaceImageAllowed(parameters: parameters, success: { [weak self] response in
+            DispatchQueue.main.async {
+                self?.output.operationFinished()
+            }
+
+        }, fail: { [weak self] error in
+            DispatchQueue.main.async {
+                self?.fail(error: error.localizedDescription)
+                self?.output.failedChangeFaceImageStatus()
+            }
+        })
+    }
+    
+}

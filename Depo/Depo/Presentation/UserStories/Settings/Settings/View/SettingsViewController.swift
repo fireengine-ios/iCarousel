@@ -15,6 +15,8 @@ protocol SettingsDelegate: class{
     
     func goToAutoUpload()
     
+    func goToFaceImage()
+    
     func goToHelpAndSupport()
     
     func goToUsageInfo()
@@ -179,6 +181,12 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                     settingsDelegate!.goToAutoUpload()
                 } else {
                     output.goToAutoApload()
+                }
+            case 3: // face image
+                if (settingsDelegate != nil) {
+                    settingsDelegate?.goToFaceImage()
+                } else {
+                    output.goToFaceImage()
                 }
             default:
                 break
