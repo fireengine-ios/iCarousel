@@ -20,14 +20,4 @@ extension UIImage {
         guard let cgImage = image?.cgImage else { return nil }
         self.init(cgImage: cgImage)
     }
-    
-    func imageWithColor(_ color: UIColor) -> UIImage? {
-        var image = withRenderingMode(.alwaysTemplate)
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        color.set()
-        image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        image = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return image
-    }
 }

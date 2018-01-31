@@ -33,11 +33,10 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var carouselView: iCarousel!
     
-    private let shuffleButtonOffImage = UIImage(named: "shuffle")?.imageWithColor(.lightGray)
-    private let shuffleButtonOnImage = UIImage(named: "shuffle")?.imageWithColor(.white)
+    let shuffleButtonOffColor = UIColor.lightGray
     @IBOutlet weak var shuffleButton: UIButton! {
         didSet {
-            shuffleButton.setImage(shuffleButtonOffImage, for: .normal)
+            shuffleButton.tintColor = shuffleButtonOffColor
         }
     }
     
@@ -136,12 +135,8 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         alert.showSpecifiedMusicAlertSheet(with: item, presentedBy: sender, onSourceView: nil, viewController: self)
     }
     @IBAction func actionShuffleButton(_ sender: UIButton) {
+        sender.tintColor = (sender.tintColor == shuffleButtonOffColor) ? UIColor.white : shuffleButtonOffColor
         player.togglePlayMode()
-        if player.playMode == .normal {
-            sender.setImage(shuffleButtonOffImage, for: .normal)
-        } else {
-            sender.setImage(shuffleButtonOnImage, for: .normal)
-        }
     }
 }
 extension VisualMusicPlayerViewController: MediaPlayerDelegate {
