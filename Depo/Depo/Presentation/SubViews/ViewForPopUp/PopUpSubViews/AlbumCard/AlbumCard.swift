@@ -74,7 +74,6 @@ final class AlbumCard: BaseView {
     
     private func set(details object: JSON) {
         album = AlbumServiceResponse(withJSON: object)
-        ///album?.name
         
         if let album = album {
             albumItem = AlbumItem(remote: album)
