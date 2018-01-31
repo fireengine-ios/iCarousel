@@ -20,6 +20,7 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
     
     func onWillDisappear() {
         moduleOutput?.cancelDeletingDuplicatedContacts()
+        moduleOutput?.backFromDuplicatedContacts()
     }
     
     //MARK: Interactor Output
@@ -32,5 +33,4 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
         moduleOutput?.deleteDuplicatedContacts()
         router.back()
     }
-    
 }

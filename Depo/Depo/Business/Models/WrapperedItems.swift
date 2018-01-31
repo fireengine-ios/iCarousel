@@ -515,6 +515,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return Date()
     }
     
+    convenience init(asset: PHAsset) {
+        let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
+        let baseMediaContent = BaseMediaContent(curentAsset: asset,
+                                                urlToFile: info.url,
+                                                size: info.size,
+                                                md5: info.md5)
+        self.init(baseModel: baseMediaContent)
+    }
+    
     init(musicForCreateStory: CreateStoryMusicItem) {
         id = musicForCreateStory.id
         tmpDownloadUrl = musicForCreateStory.path
@@ -550,20 +559,20 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         name = baseModel.name
         if let fileName = name {
-            if #available(iOS 10.0, *) {//FIXME: hotfix
-                if fileSize == 0, let localAsset = asset {
-                    let resources = PHAssetResource.assetResources(for: localAsset)
-                    if let resource = resources.first {
-                        if let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong {
-                            let sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64))
-                            fileSize = sizeOnDisk
-                        }
-                    }
-                }
+//            if #available(iOS 10.0, *) {//FIXME: hotfix
+//                if fileSize == 0, let localAsset = asset {
+//                    let resources = PHAssetResource.assetResources(for: localAsset)
+//                    if let resource = resources.first {
+//                        if let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong {
+//                            let sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64))
+//                            fileSize = sizeOnDisk
+//                        }
+//                    }
+//                }
                 md5 = String(format: "%@%i", fileName, fileSize)
-            } else {
-                md5 = fileName
-            }
+//            } else {
+//                md5 = fileName
+//            }
             
             
         }

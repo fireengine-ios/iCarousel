@@ -48,8 +48,11 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         }
     }
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         setupCarousel()
         playButton.isSelected = !player.isPlaying
         player.delegates.add(self)
@@ -66,7 +69,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         editingTabBar?.view.layoutIfNeeded()
         
         output.viewIsReady(view: self.view)
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        hidenNavigationBarStyle()
     }
     
     private func setupCarousel() {
@@ -77,19 +80,42 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         carouselView.scrollToItem(at: player.currentIndex, animated: false)
     }
     
+    private func setupNavigationBar() {
+        let backButton = UIButton(type: .system)
+        backButton.frame = CGRect(x: 0, y: 0, width: 100, height: 44)
+        backButton.contentHorizontalAlignment = .left
+        backButton.titleEdgeInsets.left = 8
+        backButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        backButton.setImage(UIImage(named: "im_backButton"), for: .normal)
+        backButton.setTitle(TextConstants.backTitle, for: .normal)
+        backButton.addTarget(self, action: #selector(cancelAction(_:)), for:.touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        
+        let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(actionMoreButton(_:)))
+        moreButton.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem = moreButton
+    }
+    
+    // MARK: - Actions
+    
     @IBAction func actionPlayButton(_ sender: UIButton) {
         player.togglePlayPause()
     }
     @IBAction func actionNextButton(_ sender: UIButton) {
-        if player.playNext() {
-            carouselView.scrollToItem(at: player.currentIndex, animated: true)
+        let nextIndex = player.playNext()
+        if nextIndex >= 0 {
+            carouselView.scrollToItem(at: nextIndex, animated: true)
         }
     }
     @IBAction func actionPrevButton(_ sender: UIButton) {
+        
         if player.currentTime > 5 {
             player.resetTime()
-        } else if player.playPrevious() {
-            carouselView.scrollToItem(at: player.currentIndex, animated: true)
+        } else {
+            let previousIndex = player.playPrevious()
+            if previousIndex >= 0  {
+                carouselView.scrollToItem(at: previousIndex, animated: true)
+            }
         }
     }
     
@@ -109,11 +135,8 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         alert.showSpecifiedMusicAlertSheet(with: item, presentedBy: sender, onSourceView: nil, viewController: self)
     }
     @IBAction func actionShuffleButton(_ sender: UIButton) {
-//        sender.isSelected = !sender.isSelected
         sender.tintColor = (sender.tintColor == shuffleButtonOffColor) ? UIColor.white : shuffleButtonOffColor
         player.togglePlayMode()
-        carouselView.reloadData()
-        carouselView.scrollToItem(at: player.currentIndex, animated: true)
     }
 }
 extension VisualMusicPlayerViewController: MediaPlayerDelegate {
@@ -145,7 +168,7 @@ extension VisualMusicPlayerViewController: MediaPlayerDelegate {
 }
 
 
-//MARK: - Crousel
+//MARK: - Carousel
 
 extension VisualMusicPlayerViewController: iCarouselDataSource, iCarouselDelegate {
 
@@ -189,6 +212,13 @@ extension VisualMusicPlayerViewController: iCarouselDataSource, iCarouselDelegat
             return 5
         }
         return value
+    }
+    
+    func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
+        if index != carousel.currentItemIndex {
+            carousel.scrollToItem(at: index, animated: true)
+            player.play(at: index)
+        }
     }
 }
 

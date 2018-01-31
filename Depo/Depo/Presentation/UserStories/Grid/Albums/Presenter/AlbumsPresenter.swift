@@ -98,10 +98,6 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 //                         sortOrder: .asc)
 //
 //    }
-    
-    override func needShowNoFileView() -> Bool {
-        return dataSource.getAllObjects().isEmpty
-    }
 }
 
 extension AlbumsPresenter: AlbumDetailModuleOutput {

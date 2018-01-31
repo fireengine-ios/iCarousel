@@ -24,6 +24,7 @@ struct AccountPath {
     static let updatePhoneNumber = accountBase + "updatePhoneNumber"
     static let verifyPhoneNumber = accountBase + "verifyPhoneNumberToUpdate"
     static let securitySettings = "/api/auth/settings"
+    static let faceImageAllowed = accountBase + "setting/faceImageAllowed"
     
     static let updateLanguage = accountBase + "language"
     static let languageList = updateLanguage + "/list"
@@ -137,6 +138,27 @@ class UsageParameters: BaseRequestParametrs {
 class SecuritySettingsInfoParametres: BaseRequestParametrs {
     override var patch: URL {
         return URL(string: AccountPath.securitySettings, relativeTo: super.patch)!
+    }
+}
+
+class FaceImageAllowedParameters: BaseRequestParametrs {
+    var allowed: Bool?
+    
+    init(allowed: Bool? = false) {
+        self.allowed = allowed
+    }
+    
+    override var requestParametrs: Any {
+        var string = ""
+        if let allowed = allowed {
+            string = String(allowed)
+        }
+        let data = string.data(using: .utf8)
+        return data ?? NSData()
+    }
+    
+    override var patch: URL {
+        return URL(string: AccountPath.faceImageAllowed, relativeTo: super.patch)!
     }
 }
 

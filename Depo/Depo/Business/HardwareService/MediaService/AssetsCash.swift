@@ -10,24 +10,42 @@ import Foundation
 import Photos
 
 class AssetsСache {
+    let dispatchQueue = DispatchQueue(label: "com.lifebox.assetCache")
+    
     
     private var storage: [String: PHAsset] = [:]
     
     func append(asset:PHAsset) {
-        storage[asset.localIdentifier] = asset
+        dispatchQueue.sync {
+            storage[asset.localIdentifier] = asset
+        }
     }
     
     func append(list:[PHAsset]) {
-        list.forEach {
-            storage[$0.localIdentifier] = $0
+        dispatchQueue.sync {
+            list.forEach {
+                storage[$0.localIdentifier] = $0
+            }
         }
     }
     
     func remove(identifier: String) {
-        storage.removeValue(forKey: identifier)
+        dispatchQueue.sync {
+            _ = storage.removeValue(forKey: identifier)
+        }
     }
     
     func assetBy(identifier: String) -> PHAsset? {
-       return storage[identifier]
+        var assets: PHAsset?
+        dispatchQueue.sync {
+            assets = storage[identifier]
+        }
+        return assets
+    }
+    
+    func dropAll() {
+        dispatchQueue.sync {
+            storage.removeAll()
+        }
     }
 }

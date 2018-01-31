@@ -10,5 +10,12 @@ import UIKit
 
 class AlbumDetailViewController: BaseFilesGreedChildrenViewController {
 
+    var album: AlbumItem?
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let name = album?.name {
+            mainTitle = name
+        }
+        super.viewWillAppear(animated)
+    }
 }

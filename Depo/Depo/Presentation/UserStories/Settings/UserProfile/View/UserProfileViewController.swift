@@ -102,17 +102,13 @@ class UserProfileViewController: UIViewController, UserProfileViewInput, UITextF
         gsmNumberTextField.isUserInteractionEnabled = isEdit
     }
     
-    func configurateUserInfo(userInfo: AccountInfoResponse){
-        var string: String = ""
-        if let name_ = userInfo.name{
-            string = string + name_
-        }
-        
-        if let surName_ = userInfo.surname{
-            if (string.count > 0){
+    func configurateUserInfo(userInfo: AccountInfoResponse) {
+        var string = userInfo.name ?? ""
+        if let surname = userInfo.surname, !surname.isEmpty {
+            if !string.isEmpty {
                 string = string + " "
             }
-            string = string + surName_
+            string = string + surname
         }
         
         nameTextField.text = string
@@ -120,7 +116,7 @@ class UserProfileViewController: UIViewController, UserProfileViewInput, UITextF
         gsmNumberTextField.text = userInfo.phoneNumber
     }
     
-    func getNavigationController() -> UINavigationController?{
+    func getNavigationController() -> UINavigationController? {
         return navigationController
     }
     
@@ -164,7 +160,7 @@ class UserProfileViewController: UIViewController, UserProfileViewInput, UITextF
             }
             
             guard Validator.isValid(email: emailTextField.text) else {
-                output.showError(error: TextConstants.forgotPasswordErrorEmailFormatText)
+                output.showError(error: TextConstants.notValidEmail)
                 return
             }
             

@@ -67,6 +67,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     func checkFreeAppSpaceAfterAutoSync(){
         if (isSearchRunning){
+            needSearchAgain = true
             return
         }
         
@@ -115,7 +116,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         if (duplicatesArray.count > 0){
             let freeSpace = Device.getFreeDiskSpaceInPercent
             if freeSpace < NumericConstants.freeAppSpaceLimit{
-                CardsManager.default.startOperationWith(type: .freeAppSpaceWarning, allOperations: nil, completedOperations: nil)
+                CardsManager.default.startOperationWith(type: .freeAppSpaceLocalWarning, allOperations: nil, completedOperations: nil)
             }else{
                 CardsManager.default.startOperationWith(type: .freeAppSpace, allOperations: nil, completedOperations: nil)
             }
@@ -325,7 +326,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         
         if (duplicatesArray.count == 0){
             CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-            CardsManager.default.stopOperationWithType(type: .freeAppSpaceWarning)
+            CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
         }
     }
     

@@ -10,12 +10,19 @@ import UIKit
 
 class CustomTabBarItem: UITabBarItem {
     
-    func setupTitle() {
-        let font = UIFont.TurkcellSaturaBolFont(size: 14)
-        setTitleTextAttributes([NSAttributedStringKey.font: font], for: .normal)
-    }
-    
-    override func awakeFromNib() {
+    override init() {
+        super.init()
         setupTitle()
     }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupTitle()
+    }
+
+    func setupTitle() {
+        let font = UIFont.TurkcellSaturaMedFont(size: 11)
+        setTitleTextAttributes([.font: font], for: .normal)
+    }
+
 }

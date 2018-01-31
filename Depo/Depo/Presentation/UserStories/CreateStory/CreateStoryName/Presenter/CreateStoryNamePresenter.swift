@@ -50,8 +50,12 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
         }
     }
     
-    func goToSelectionPhoto(forStory story: PhotoStory){
+    func goToSelectionPhoto(forStory story: PhotoStory) {
         router.goToSelectionPhotosForStory(story: story)
+    }
+    
+    func goToFavoriteSelectionPhoto(forStory story: PhotoStory) {
+        router.goToFavoriteSelectionPhotosForStory(story: story)
     }
     
     func goToPhotosOrderForStory(story: PhotoStory) {

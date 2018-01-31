@@ -19,9 +19,14 @@ class AppConfigurator {
         
         let urls: AuthorizationURLs = AuthorizationURLsImp()
         let tokenStorage: TokenStorage = factory.resolve()
+        
         if tokenStorage.isClearTokens {
             tokenStorage.isClearTokens = false
             tokenStorage.clearTokens()
+        }
+        
+        if !tokenStorage.isRememberMe {
+            AuthenticationService().logout(async: false, success: nil)
         }
         
         var auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)

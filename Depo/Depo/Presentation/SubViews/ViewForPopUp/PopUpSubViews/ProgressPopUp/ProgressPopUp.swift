@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgressPopUp: BaseView, ProgressPopUpProtocol {
+final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var progress: UIProgressView!
@@ -19,13 +19,6 @@ class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     
     var wrapItem: WrapData?
     var typeOfOperation: OperationType?
-    
-    override class func initFromNib() -> ProgressPopUp{
-        if let view = super.initFromNib() as? ProgressPopUp{
-            return view
-        }
-        return ProgressPopUp()
-    }
     
     override func configurateView() {
         super.configurateView()

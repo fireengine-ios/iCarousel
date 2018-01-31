@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,10 +26,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MBu-f2-VfC">
-                        <rect key="frame" x="74" y="3" width="12" height="12"/>
+                        <rect key="frame" x="68" y="68" width="14" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="12" id="OaE-gs-Ojj"/>
-                            <constraint firstAttribute="height" constant="12" id="rTI-zZ-jZo"/>
+                            <constraint firstAttribute="width" constant="14" id="OaE-gs-Ojj"/>
+                            <constraint firstAttribute="height" constant="14" id="rTI-zZ-jZo"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NtU-N7-Qtp">
@@ -74,9 +75,10 @@
             </view>
             <constraints>
                 <constraint firstItem="uip-Zv-Lj0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0cJ-xn-Dl4"/>
-                <constraint firstAttribute="trailing" secondItem="MBu-f2-VfC" secondAttribute="trailing" constant="4" id="46D-IE-JX3"/>
+                <constraint firstAttribute="trailing" secondItem="MBu-f2-VfC" secondAttribute="trailing" constant="8" id="46D-IE-JX3"/>
                 <constraint firstAttribute="trailing" secondItem="Vty-wj-zHS" secondAttribute="trailing" constant="4" id="8VM-Ll-Ysn"/>
                 <constraint firstAttribute="trailing" secondItem="32d-zc-raV" secondAttribute="trailing" id="8fy-UM-maF"/>
+                <constraint firstAttribute="bottom" secondItem="MBu-f2-VfC" secondAttribute="bottom" constant="8" id="8sa-Gt-Hmd"/>
                 <constraint firstItem="Tgi-g8-grY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="7" id="9ts-ny-6yx"/>
                 <constraint firstItem="NtU-N7-Qtp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="AzI-My-mbB"/>
                 <constraint firstItem="32d-zc-raV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Msf-LT-G79"/>
@@ -90,7 +92,6 @@
                 <constraint firstAttribute="bottom" secondItem="32d-zc-raV" secondAttribute="bottom" id="dIL-Dc-EKM"/>
                 <constraint firstItem="EFu-Rx-2DV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="eBQ-RI-ROZ"/>
                 <constraint firstItem="LGC-Nm-9e9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="fvC-qT-sXd"/>
-                <constraint firstItem="MBu-f2-VfC" firstAttribute="centerY" secondItem="LGC-Nm-9e9" secondAttribute="centerY" id="gvo-dW-ZIa"/>
                 <constraint firstItem="uip-Zv-Lj0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lCZ-MQ-bDz"/>
                 <constraint firstAttribute="trailing" secondItem="uip-Zv-Lj0" secondAttribute="trailing" id="oR2-TF-Y6S"/>
                 <constraint firstAttribute="bottom" secondItem="Vty-wj-zHS" secondAttribute="bottom" constant="2" id="vif-We-1bV"/>

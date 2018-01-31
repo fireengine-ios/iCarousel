@@ -71,7 +71,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
         remoteItems.getSuggestion(text: text, success: { (suggestList) in
             DispatchQueue.main.async { [weak self] in
                 if let wrapOutput = self?.output {
-                    wrapOutput.successWithSuggestList(list: suggestList)
+                    wrapOutput.successWithSuggestList(list: suggestList.filter {$0.text != nil})
                 }
             }
         }, fail: { (_) in

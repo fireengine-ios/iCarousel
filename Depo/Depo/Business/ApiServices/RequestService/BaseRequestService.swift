@@ -247,6 +247,8 @@ class BaseRequestService {
                                                             response(data, urlResponse, error)
                                                             UIApplication.shared.endBackgroundTask(backgroundTaskID)
             })
+        } else {
+            debugPrint("something went WRONG!! ", param)
         }
         
         task.resume()

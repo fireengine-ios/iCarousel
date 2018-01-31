@@ -223,6 +223,10 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         }
     }
     
+    func startOperationsWith(serverObjects: [HomeCardResponse]){
+        
+    }
+    
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
         setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }

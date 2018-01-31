@@ -9,14 +9,19 @@
 import UIKit
 
 class CreateStoryPhotoSelectionViewController: BaseFilesGreedViewController {
-
+    
     override func viewWillAppear(_ animated: Bool) {
+        configurateNavigationBar()
+        configurateViewForPopUp()
         super.viewWillAppear(animated)
-        configureNavBarActions()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     
     override func configureNavBarActions(isSelecting: Bool = false) {
-        navigationBarWithGradientStyle()
+        navigationBarWithGradientStyle()        
         setTitle(withString: TextConstants.createStoryPhotosTitle)
         
         let continueButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 40))

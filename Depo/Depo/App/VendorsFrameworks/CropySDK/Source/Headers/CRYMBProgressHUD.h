@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, CRYMBProgressHUDBackgroundStyle) {
     CRYMBProgressHUDBackgroundStyleBlur
 };
 
-typedef void (^CRYMBProgressHUDCompletionBlock)();
+typedef void (^CRYMBProgressHUDCompletionBlock)(void);
 
 
 NS_ASSUME_NONNULL_BEGIN

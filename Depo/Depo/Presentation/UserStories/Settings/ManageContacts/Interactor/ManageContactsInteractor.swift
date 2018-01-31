@@ -98,8 +98,9 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
                 return
             }
             self.contacts.remove(at: index)
-            self.output.didLoadContacts( self.contacts)
+            self.output.didLoadContacts(self.contacts)
             self.output.asyncOperationFinished()
+            self.output.didDeleteContact()
         }) { (error) in
             self.output.asyncOperationFinished()
         }
@@ -129,5 +130,3 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
         output.didLoadContacts(contacts)
     }
 }
-
-

@@ -77,6 +77,12 @@ struct RouteRequests {
     static let details      = "/api/album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
     static let setCoverPhoo = "/api/album/coverPhoto/%@?coverPhotoUuid=%@"
     
+    // MARK: My Streams
+    
+    static let people = "/api/person/"
+    static let things = "/api/object/"
+    static let places = "/api/location/"
+    
     //MARK : Share
     
     static let share = "/api/share/%@"
@@ -86,9 +92,15 @@ struct RouteRequests {
     static let faqUrl = "api/faq/url/%@"
 
     //MARK: - Contacts
-    static let getContacts = "contact?currentPage=%d"
-    static let searchContacts = "search?query=%@&currentPage=%d"
+    static let getContacts = "contact?sortField=firstname&sortOrder=ASC&maxResult=16&currentPage=%d"
+    static let searchContacts = "search?sortField=firstname&sortOrder=ASC&maxResult=16&query=%@&currentPage=%d"
     static let deleteContacts = "contact"
     
-}
     
+    struct HomeCards {
+        static let all = BaseUrl +/ "api/assistant/v1"
+        static func card(with id: Int) -> URL {
+            return all +/ String(id)
+        }
+    }
+}
