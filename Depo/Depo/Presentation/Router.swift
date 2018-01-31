@@ -429,8 +429,8 @@ class RouterVC: NSObject {
     
     //MARK: CreateStory name
     
-    func createStoryName(items: [BaseDataSourceItem]? = nil, needSelectionItems: Bool = false) {
-        let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController", needSelectionItems: needSelectionItems)
+    func createStoryName(items: [BaseDataSourceItem]? = nil, needSelectionItems: Bool = false, isFavorites: Bool = false) {
+        let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController", needSelectionItems: needSelectionItems, isFavorites: isFavorites)
         controller.output.items = items
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
@@ -449,6 +449,11 @@ class RouterVC: NSObject {
     
     func photoSelection(forStory story:PhotoStory) -> UIViewController {
         let controller = CreateStoryModuleInitializer.initializePhotoSelectionViewControllerForStory(with: "BaseFilesGreedViewController", story: story)
+        return controller
+    }
+    
+    func favoritePhotoSelection(forStory story:PhotoStory) -> UIViewController {
+        let controller = CreateStoryModuleInitializer.initializeFavoritePhotoSelectionViewControllerForStory(with: "BaseFilesGreedViewController", story: story)
         return controller
     }
     

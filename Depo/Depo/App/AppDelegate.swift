@@ -133,9 +133,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillTerminate")
-        if !tokenStorage.isRememberMe {
-            tokenStorage.clearTokens()
-        }
         SyncServiceManager.shared.stopSync()
         UserDefaults.standard.synchronize()
         player.stop()

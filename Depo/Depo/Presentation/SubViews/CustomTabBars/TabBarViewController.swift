@@ -676,7 +676,8 @@ extension TabBarViewController: TabBarActionHandler {
             router.presentViewController(controller: nController)
             
         case .createStory:
-            router.createStoryName()
+            let isFavorites = router.isOnFavoritesView()
+            router.createStoryName(items: nil, needSelectionItems: false, isFavorites: isFavorites)
             
         case .upload:
             let controller = router.uploadPhotos()

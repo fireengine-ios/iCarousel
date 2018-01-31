@@ -11,6 +11,9 @@ import Foundation
 protocol CreateStoryNameRouterInput {
     
     func goToSelectionPhotosForStory(story: PhotoStory)
+    
+    func goToFavoriteSelectionPhotosForStory(story: PhotoStory)
+    
     func goToPhotosOrderForStory(story: PhotoStory)
     
 }

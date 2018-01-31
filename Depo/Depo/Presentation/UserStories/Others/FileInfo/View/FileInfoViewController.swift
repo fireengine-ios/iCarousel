@@ -60,7 +60,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         moreFileInfoLabel.textColor = ColorConstants.textGrayColor
         moreFileInfoLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
-        uploadDateTitle.text = TextConstants.fileInfoCreationDateTitle
+        uploadDateTitle.text = TextConstants.fileInfoUploadDateTitle
         uploadDateTitle.textColor = ColorConstants.textGrayColor
         uploadDateTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
@@ -97,15 +97,6 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         
         fileName.text = object.name
         
-        if (object.fileType == .folder) {
-            fileNameTitle.text = TextConstants.fileInfoFolderNameTitle
-            fileInfoTitle.text = TextConstants.fileInfoFolderInfoTitle
-        } else if object.fileType == .photoAlbum {
-            
-        }  else {
-            folderSizeTitle.text = TextConstants.fileInfoFileSizeTitle
-        }
-        
         if let obj = object as? WrapData {
             if obj.fileType == .audio {
                 configurateAudioMethadataFor(object: obj)
@@ -123,19 +114,29 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             folderSizeLabel.text = formatter.string(fromByteCount: obj.fileSize)
             
             if obj.fileType == .folder {
+                fileNameTitle.text = TextConstants.fileInfoFolderNameTitle
+                fileInfoTitle.text = TextConstants.fileInfoFolderInfoTitle
                 folderSizeTitle.text = TextConstants.fileInfoAlbumSizeTitle
                 folderSizeLabel.text = String(obj.childCount ?? 0)
-                
-                if let createdDate = obj.creationDate {
-                    uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
-                    takenDateLabel.isHidden = true
-                    takenDateTitle.isHidden = true
-                } else {
-                    hiddeInfoDateLabels()
-                }
+            } else {
+                folderSizeTitle.text = TextConstants.fileInfoFileSizeTitle
             }
             
-        } else if let album = object as? AlbumItem {
+            if let createdDate = obj.creationDate {
+                uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
+                if obj.isSynced(), let takenDate = obj.metaData?.takenDate, createdDate != takenDate {
+                    takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
+                } else {
+                    takenDateLabel.isHidden = true
+                    takenDateTitle.isHidden = true
+                }
+            } else {
+                hiddeInfoDateLabels()
+            }
+            return
+        }
+        
+        if let album = object as? AlbumItem {
             folderSizeTitle.text = TextConstants.fileInfoAlbumSizeTitle
             fileNameTitle.text = TextConstants.fileInfoAlbumNameTitle
             fileInfoTitle.text = TextConstants.fileInfoAlbumInfoTitle
@@ -144,26 +145,11 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             count += album.imageCount ?? 0
             count += album.videoCount ?? 0
             folderSizeLabel.text = String(count)
-            durationH.constant = 0
-        } else {
-            durationH.constant = 0
-            view.layoutSubviews()
         }
         
-        if let obj = object as? WrapData, obj.isSynced(), let takenDate = obj.metaData?.takenDate {
-            takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
-            if let createdDate = object.creationDate {
-                uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
-                if createdDate == takenDate {
-                    takenDateLabel.isHidden = true
-                    takenDateTitle.isHidden = true
-                }
-            } else {
-                hiddeInfoDateLabels()
-            }
-        } else if object.fileType != .folder {
-            hiddeInfoDateLabels()
-        }
+        durationH.constant = 0
+        hiddeInfoDateLabels()
+        view.layoutIfNeeded()
     }
 
     func addReturnIfNeed(string: inout String){

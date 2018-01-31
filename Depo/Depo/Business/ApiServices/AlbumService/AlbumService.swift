@@ -12,7 +12,7 @@ struct AlbumsPatch  {
     static let deleteAlbumss =  "/api/album"
     static let addPhotosToAlbum = "/api/album/addFiles/%@"
     static let deletePhotosFromAlbum = "/api/album/removeFiles/%@"
-    static let renameAlbum = "/api/album/rename/%@&newLabel=%@"
+    static let renameAlbum = "/api/album/rename/%@?newLabel=%@"
     
 }
 
