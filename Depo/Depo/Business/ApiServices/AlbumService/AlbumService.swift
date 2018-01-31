@@ -264,5 +264,4 @@ class PhotosAlbumService: BaseRequestService {
             success?(allItems)
         }
     }
-    
 }

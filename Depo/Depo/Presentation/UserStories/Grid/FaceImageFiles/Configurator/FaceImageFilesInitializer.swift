@@ -15,7 +15,7 @@ class FaceImageFilesInitializer: NSObject {
     
         let configurator = FaceImageFilesConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: AlbumService(requestSize: 140),title: TextConstants.myStreamPeopleTitle)
+        configurator.configure(viewController: viewController, remoteServices: PeopleItemsService(requestSize: 20), title: TextConstants.myStreamPeopleTitle)
         
         return viewController
     }
