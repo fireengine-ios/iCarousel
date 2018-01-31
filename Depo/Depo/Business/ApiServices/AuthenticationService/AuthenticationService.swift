@@ -365,8 +365,8 @@ class AuthenticationService: BaseRequestService {
     
     // MARK: - Authentication
 
-    func logout(success: SuccessLogout?) {
-        DispatchQueue.main.async {
+    func logout(async: Bool = true, success: SuccessLogout?) {
+        func logout() {
             SingletonStorage.shared.accountInfo = nil
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
@@ -377,6 +377,13 @@ class AuthenticationService: BaseRequestService {
             self.player.stop()
             self.cancellAllRequests()
             success?()
+        }
+        if async {
+            DispatchQueue.main.async {
+                logout()
+            }   
+        } else {
+            logout()
         }
     }
     
