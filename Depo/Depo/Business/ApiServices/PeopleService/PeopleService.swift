@@ -25,7 +25,6 @@ class PeopleService: BaseRequestService {
     }
 }
 
-
 class PeopleItemsService: RemoteItemsService {
     let service = PeopleService()
     

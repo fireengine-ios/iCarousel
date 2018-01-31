@@ -31,7 +31,6 @@ class ThingsItemResponse: ObjectRequestResponse {
 }
 
 class ThingsServiceResponse: ObjectRequestResponse {
-    
     var list: Array<ThingsItemResponse> = []
     
     override func mapping() {

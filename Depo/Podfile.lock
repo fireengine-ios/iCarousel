@@ -3,12 +3,12 @@ PODS:
     - Adjust/Core (= 4.12.1)
   - Adjust/Core (4.12.1)
   - Alamofire (4.6.0)
-  - Bolts (1.9.0):
-    - Bolts/AppLinks (= 1.9.0)
-    - Bolts/Tasks (= 1.9.0)
-  - Bolts/AppLinks (1.9.0):
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
-  - Bolts/Tasks (1.9.0)
+  - Bolts/Tasks (1.8.4)
   - CircleProgressBar (0.32)
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
@@ -28,9 +28,9 @@ PODS:
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - ObjectiveDropboxOfficial (3.0.15)
   - ReachabilitySwift (4.1.0)
-  - SDWebImage (4.2.3):
-    - SDWebImage/Core (= 4.2.3)
-  - SDWebImage/Core (4.2.3)
+  - SDWebImage (4.2.2):
+    - SDWebImage/Core (= 4.2.2)
+  - SDWebImage/Core (4.2.2)
   - SimpleExif (0.0.1)
   - SplunkMint (5.2.2)
   - SwiftyJSON (3.1.4)
@@ -69,7 +69,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Adjust: 3d11ee5856dd0474d26496f4fa5a110e9f3ec264
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
-  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   ExpandableTableViewController: 7a97b8cf60f044b588255a01176cafa5ce2b7438
@@ -83,7 +83,7 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ObjectiveDropboxOfficial: 69d6d3831e41cf4918e0374b0d1fcb620b238791
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
+  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   SimpleExif: 61ba6dce666641dc4b925d9d26a2694e68ebbf4b
   SplunkMint: 8c22ce314fd7a36ee584f2e40d239e19d9fa174d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220

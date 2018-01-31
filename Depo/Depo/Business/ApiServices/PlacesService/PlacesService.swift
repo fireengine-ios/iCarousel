@@ -16,11 +16,70 @@ class PlacesService: BaseRequestService {
         let handler = BaseResponseHandler<PlacesServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
+    
+    func getPlacesPage(param: PlacesPageParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+        log.debug("SearchService suggestion")
+        
+        let handler = BaseResponseHandler<PlacesServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+}
+
+class PlacesItemsService: RemoteItemsService {
+    let service = PlacesService()
+    
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .image)
+    }
+    
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        let param = PlacesPageParameters(pageSize: requestSize, pageNumber: currentPage)
+        
+        // TO-DO: Delete when back-end will deploy
+        if currentPage > 0 {
+            success?([PeopleItem]())
+            return
+        }
+        // END
+
+        
+        service.getPlacesPage(param: param, success: { [weak self] (response) in
+            if let response = response as? PlacesServiceResponse {
+                success?(response.list.map({ PlacesItem(response: $0) }))
+                self?.currentPage += 1
+            } else {
+                fail?()
+            }
+        }) { (error) in
+            fail?()
+        }
+    }
 }
 
 class PlacesParameters: BaseRequestParametrs {
+    override var patch: URL {
+        let searchWithParam = String(format:RouteRequests.places)
+        
+        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+    }
+}
+
+class PlacesPageParameters: BaseRequestParametrs {
+    let pageSize: Int
+    let pageNumber: Int
+    
+    init(pageSize: Int, pageNumber: Int) {
+        self.pageSize = pageSize
+        self.pageNumber = pageNumber
+    }
     
     override var patch: URL {
+//        let searchWithParam = String(format: RouteRequests.placesPage, pageSize, pageNumber)
+//
+//        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        
+        // TO-DO: Use commented version when back-end will deploy
+        
         let searchWithParam = String(format:RouteRequests.places)
         
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!

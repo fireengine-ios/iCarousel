@@ -82,7 +82,9 @@ struct RouteRequests {
     static let people = "/api/person/"
     static let peoplePage = "/api/person/page?pageSize=%d&pageNumber=%d"
     static let things = "/api/object/"
+    static let thingsPage = "/api/object/page?pageSize=%d&pageNumber=%d"
     static let places = "/api/location/"
+    static let placesPage = "/api/location/page?pageSize=%d&pageNumber=%d"
     
     //MARK : Share
     
