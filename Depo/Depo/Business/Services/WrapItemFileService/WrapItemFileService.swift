@@ -135,7 +135,12 @@ class WrapItemFileService: WrapItemFileOperations {
                                                                                      success: success,
                                                                                      fail: fail)
                                             },
-                                            fail: fail)
+                                            fail: { error in
+                                                if error.description == TextConstants.canceledOperationTextError {
+                                                    return
+                                                }
+                                                fail?(error)
+        })
     }
     
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {

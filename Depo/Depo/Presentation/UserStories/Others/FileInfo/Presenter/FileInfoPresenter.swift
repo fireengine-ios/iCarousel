@@ -16,16 +16,16 @@ class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput,
         interactor.viewIsReady()
     }
     
-    func setObject(object: BaseDataSourceItem){
+    func setObject(object: BaseDataSourceItem) {
         view.setObject(object: object)
     }
     
-    func onRename(newName: String){
+    func onRename(newName: String) {
         startAsyncOperation()
         interactor.onRename(newName: newName)
     }
     
-    func updated(){
+    func updated() {
         asyncOperationSucces()
     }
     

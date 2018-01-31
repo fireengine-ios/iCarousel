@@ -13,34 +13,20 @@ protocol GSMCodeCellDelegate {
     func phoneNumberChanged(toNumber number: String)
 }
 
-class GSMUserInputCell: ProtoInputTextCell {//BaseUserInputCellView {
+class GSMUserInputCell: BaseUserInputCellView {
 
     @IBOutlet weak var gsmCountryCodeLabel: UILabel!
     @IBOutlet weak var gsmCodeContainerView: UIView!
-    @IBOutlet weak var textInputField: UITextField!{
-        didSet {
-            inputTextField = textInputField
-        }
-    }
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var infoButton: UIButton!
-    @IBOutlet weak var infoIcon: UIImageView!
-    
     var delegate: GSMCodeCellDelegate?
-    weak var infoButtonDelegate: InfoButtonCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         gsmCodeContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(GSMUserInputCell.codeViewTouched)))
-        textInputField.delegate = self
-        changeInfoButtonTo(hidden: true)
     }
     
-    func setupCell(withTitle title: String, inputText text: String) {
+    override func setupBaseCell(withTitle title: String, inputText text: String) {
+        super.setupBaseCell(withTitle: title, inputText: text)
         addBarToKeyboard()
-        textInputField.text = text
-        titleLabel.text = title
     }
     
     func addBarToKeyboard() {
@@ -66,32 +52,12 @@ class GSMUserInputCell: ProtoInputTextCell {//BaseUserInputCellView {
     
     func setupGSMCode(code: String) {
         gsmCountryCodeLabel.text = code
-        
     }
     
     @objc func codeViewTouched() {
         changeInfoButtonTo(hidden: true)
         delegate?.phoneNumberChanged(toNumber: textInputField.text!)
         delegate?.codeViewGotTapped()
-    }
-    
-    func changeTitleHeighlight(heighlight: Bool) {
-        if heighlight {
-            titleLabel.textColor = ColorConstants.whiteColor
-        } else {
-            titleLabel.textColor = ColorConstants.yellowColor
-        }
-    }
-    
-    override func changeInfoButtonTo(hidden: Bool) {
-//        infoButton.isEnabled = false//!hidden
-//        infoButton.isHidden = hidden
-        infoIcon.isHidden = hidden
-        changeTitleHeighlight(heighlight: hidden)
-    }
-    
-    @IBAction func infoButtonAction(_ sender: Any) {
-//        infoButtonDelegate?.infoButtonGotPressed(with: self, andType: .phoneNotValid)
     }
 }
 
@@ -113,7 +79,7 @@ extension GSMUserInputCell {
         changeInfoButtonTo(hidden: true)
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let notAvailableCharacterSet = CharacterSet.decimalDigits.inverted
         let result = string.rangeOfCharacter(from: notAvailableCharacterSet)
         return result == nil

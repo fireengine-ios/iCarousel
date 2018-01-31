@@ -53,4 +53,10 @@ class PhotoSelectionDataSource: ArrayDataSourceForCollectionView {
         tableDataMArray.removeAll()
         super.dropData()
     }
+    
+    override func updateSelectionCount() {
+        if !selectedItemsArray.isEmpty {
+            super.updateSelectionCount()
+        }
+    }
 }

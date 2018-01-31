@@ -17,6 +17,7 @@ class AlbumDetailModuleInitializer: NSObject {
     //Connect with object on storyboard
     class func initializeAlbumDetailController(with nibName:String, album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
+        viewController.album = album
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()

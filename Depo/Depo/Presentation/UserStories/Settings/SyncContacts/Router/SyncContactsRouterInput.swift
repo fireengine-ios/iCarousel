@@ -9,6 +9,6 @@
 import Foundation
 
 protocol SyncContactsRouterInput {
-    func goToManageContacts()
+    func goToManageContacts(moduleOutput: ManageContactsModuleOutput?)
     func goToDuplicatedContacts(with analyzeResponse: [ContactSync.AnalyzedContact], moduleOutput: DuplicatedContactsModuleOutput?)
 }

@@ -6,6 +6,10 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import Contacts
+
+typealias ContactsPermissionCallback = (_ success: Bool) -> Void
+
 class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
     
     weak var view: SyncContactsViewInput!
@@ -18,27 +22,19 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     //MARK: view out
     func viewIsReady() {
         view.setInitialState()
-        startOperation(operationType: .getBackUpStatus)
+        
+        self.startOperation(operationType: .getBackUpStatus)
     }
     
     func startOperation(operationType: SyncOperationType) {
-        if isBackUpAvailable, operationType == .backup {
-            let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
-                                                  message: TextConstants.errorAlertTextBackupAlreadyExist,
-                                                  image: .error,
-                                                  firstButtonTitle: TextConstants.errorAlertNopeBtnBackupAlreadyExist,
-                                                  secondButtonTitle: TextConstants.errorAlertYesBtnBackupAlreadyExist,
-                                                  secondAction: { [weak self] vc in
-                                                    vc.close { [weak self] in
-                                                        self?.interactor.startOperation(operationType: .backup)
-                                                        self?.view.setOperationState(operationType: operationType)
-                                                    }
-            })
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
-            
+        if operationType != .getBackUpStatus {
+            requesetAccess { (success) in
+                if success {
+                    self.proccessOperation(operationType)
+                }
+            }
         } else {
-            view.setOperationState(operationType: operationType)
-            interactor.startOperation(operationType: operationType)
+            proccessOperation(operationType)
         }
     }
     
@@ -81,7 +77,11 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func onManageContacts() {
-        router.goToManageContacts()
+        requesetAccess { (success) in
+            if success {
+                self.router.goToManageContacts(moduleOutput: self)
+            }
+        }
     }
     
     func onDeinit() {
@@ -103,10 +103,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
-}
-
-extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
-    func backFromDuplicatedContacts() {
+    
+    fileprivate func updateContactsStatus() {
         if let contactSyncResponse = contactSyncResponse {
             view.success(response: contactSyncResponse, forOperation: .getBackUpStatus)
             view.setStateWithBackUp()
@@ -116,11 +114,83 @@ extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
         view.resetProgress()
     }
     
+    private func sendOperationToOutputs(_ operationType: SyncOperationType) {
+        view.setOperationState(operationType: operationType)
+        interactor.startOperation(operationType: operationType)
+    }
+    
+    private func proccessOperation(_ operationType: SyncOperationType) {
+        if isBackUpAvailable, operationType == .backup {
+            let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
+                                                  message: TextConstants.errorAlertTextBackupAlreadyExist,
+                                                  image: .error,
+                                                  firstButtonTitle: TextConstants.errorAlertNopeBtnBackupAlreadyExist,
+                                                  secondButtonTitle: TextConstants.errorAlertYesBtnBackupAlreadyExist,
+                                                  secondAction: { [weak self] vc in
+                                                    vc.close { [weak self] in
+                                                        self?.sendOperationToOutputs(operationType)
+                                                    }
+            })
+            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            
+        } else {
+            sendOperationToOutputs(operationType)
+        }
+    }
+    
+    private func requesetAccess(completionHandler: @escaping ContactsPermissionCallback) {
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .authorized:
+            completionHandler(true)
+        case .denied:
+            showSettingsAlert(completionHandler: completionHandler)
+        case .restricted, .notDetermined:
+            CNContactStore().requestAccess(for: .contacts) { granted, error in
+                if granted {
+                    completionHandler(true)
+                } else {
+                    DispatchQueue.main.async {
+                        self.showSettingsAlert(completionHandler: completionHandler)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func showSettingsAlert(completionHandler: @escaping ContactsPermissionCallback) {
+        let controller = PopUpController.with(title: nil,
+                                              message: TextConstants.settingsContactsPermissionDeniedMessage,
+                                              image: .error,
+                                              firstButtonTitle: TextConstants.ok,
+                                              secondButtonTitle: TextConstants.cancel,
+                                              firstAction: { vc in
+                                                vc.close { completionHandler(false) }
+                                                UIApplication.shared.openGlobalSettings()
+                                              },
+                                              secondAction: { vc in
+                                                vc.close { completionHandler(false) }
+                                              })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+    }
+}
+
+extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
+    func backFromDuplicatedContacts() {
+        updateContactsStatus()
+    }
+    
     func cancelDeletingDuplicatedContacts() {
         interactor.startOperation(operationType: .cancel)
     }
     
     func deleteDuplicatedContacts() {
         interactor.startOperation(operationType: .deleteDuplicated)
+    }
+}
+
+extension SyncContactsPresenter: ManageContactsModuleOutput {
+    func didDeleteContact() {
+        contactSyncResponse?.totalNumberOfContacts -= 1
+        updateContactsStatus()
     }
 }

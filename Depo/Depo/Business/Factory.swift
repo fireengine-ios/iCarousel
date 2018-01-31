@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 let factory: Factory = FactoryMain()
 
@@ -16,6 +17,9 @@ protocol Factory {
     func resolve() -> PasscodeStorage
     func resolve() -> BiometricsManager
     func resolve() -> TokenStorage
+    func resolve() -> SessionManager
+    
+    func resolve() -> HomeCardsService
 }
 
 final class FactoryMain: Factory {
@@ -43,5 +47,17 @@ final class FactoryMain: Factory {
     private static let tokenStorage = TokenStorageUserDefaults()
     func resolve() -> TokenStorage {
         return FactoryMain.tokenStorage
+    }
+    
+    func resolve() -> SessionManager {
+        return SessionManager.default
+    }
+}
+
+/// services
+extension FactoryMain {
+    private static let homeCardsService = HomeCardsServiceImp(sessionManager: factory.resolve())
+    func resolve() -> HomeCardsService {
+        return FactoryMain.homeCardsService
     }
 }

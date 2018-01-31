@@ -22,6 +22,9 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     
     static let durationOfSelection : Double = 0.5
     
+    private var assetId: String?
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -81,6 +84,14 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool){
         
+    }
+    
+    func getAssetId() -> String? {
+        return assetId
+    }
+    
+    func setAssetId(_ id: String?) {
+        assetId = id
     }
     
     func updating(){

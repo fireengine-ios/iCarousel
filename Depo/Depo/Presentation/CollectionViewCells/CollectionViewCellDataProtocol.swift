@@ -22,6 +22,10 @@ protocol CollectionViewCellDataProtocol {
     
     func setDelegateObject(delegateObject: LBCellsDelegate)
     
+    func getAssetId() -> String?
+    
+    func setAssetId(_ id: String?)
+    
     func updating()
     
 }

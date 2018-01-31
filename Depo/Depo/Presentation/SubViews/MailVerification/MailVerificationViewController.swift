@@ -85,21 +85,19 @@ class MailVerificationViewController: BaseViewController {
         }
         
         showSpiner()
-        let newMail = inputTextField.text ?? ""
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
-                                sucess: { [weak self] response in
-                                    DispatchQueue.main.async {
-                                        self?.actionDelegate?.mailVerified(mail: newMail)
-                                    }
-                                    self?.hideSpiner()
-                                    self?.dismiss(animated: true, completion: nil)
-            },
-                                fail: { [weak self] error in
-                                    DispatchQueue.main.async {
-                                        self?.actionDelegate?.mailVerificationFailed()
-                                        self?.hideSpiner()
-                                        UIApplication.showErrorAlert(message: TextConstants.notCorrectEmail)
-                                    }
+            sucess: { [weak self] response in
+                DispatchQueue.main.async {
+                    self?.actionDelegate?.mailVerified(mail: email)
+                    self?.hideSpiner()
+                    self?.dismiss(animated: true, completion: nil)
+                }
+            }, fail: { [weak self] error in
+                DispatchQueue.main.async {
+                    self?.actionDelegate?.mailVerificationFailed()
+                    self?.hideSpiner()
+                    UIApplication.showErrorAlert(message: TextConstants.notCorrectEmail)
+                }
         })
     }
     

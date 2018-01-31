@@ -20,6 +20,17 @@ class CreateStoryModuleInitializer: BaseFilesGreedModuleInitializer {
         return viewController
     }
     
+    class func initializeFavoritePhotoSelectionViewControllerForStory(with nibName:String, story:PhotoStory) -> UIViewController {
+        let viewController = CreateStoryPhotoSelectionViewController(nibName: nibName, bundle: nil)
+        viewController.scrolliblePopUpView.isEnable = false
+        viewController.isFavorites = true
+        let configurator = CreateStorySelectionConfigurator()
+        
+        configurator.configure(viewController: viewController, remoteServices: FavouritesService(requestSize: 100),
+                               filters: [.localStatus(.nonLocal), .favoriteStatus(.favorites), .fileType(.image)], story: story)
+        return viewController
+    }
+    
     class func initializeAudioSelectionViewControllerForStory(with nibName:String, story:PhotoStory) -> UIViewController {
         let viewController = CreateStoryAudioSelectionViewController(nibName: nibName, bundle: nil)
         viewController.scrolliblePopUpView.isEnable = false

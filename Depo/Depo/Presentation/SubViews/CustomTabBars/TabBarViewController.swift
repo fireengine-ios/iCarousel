@@ -545,14 +545,15 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeViewState(state: false)
         
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
-
+            
             if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
                 (lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue ||
                 lastPhotoVideoIndex == TabScreenIndex.videosScreenIndex.rawValue ) {
                 tabbarSelectedIndex = lastPhotoVideoIndex
+                tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+            } else {
+                tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
-            
-            tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             
             selectedIndex = tabbarSelectedIndex
         }
@@ -675,7 +676,8 @@ extension TabBarViewController: TabBarActionHandler {
             router.presentViewController(controller: nController)
             
         case .createStory:
-            router.createStoryName()
+            let isFavorites = router.isOnFavoritesView()
+            router.createStoryName(items: nil, needSelectionItems: false, isFavorites: isFavorites)
             
         case .upload:
             let controller = router.uploadPhotos()
