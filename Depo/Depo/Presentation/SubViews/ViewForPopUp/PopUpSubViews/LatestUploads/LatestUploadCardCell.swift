@@ -11,14 +11,8 @@ import UIKit
 class LatestUploadCardCell: UICollectionViewCell {
     
     @IBOutlet weak var iconImageView: LoadingImageView!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
     
     func setImage(image: Item){
         iconImageView.loadImageForItem(object: image)
     }
-
 }

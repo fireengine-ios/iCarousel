@@ -48,17 +48,17 @@ class ContactBackupOld: BaseView {
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         
-        configurateByResponceObject()
+        configurateByResponseObject()
     }
     
-    func configurateByResponceObject(){
-        let lastBacupDate = getLastBackupDate()
+    func configurateByResponseObject(){
+        let lastBackupDate = getLastBackupDate()
         let monthesAfterLastBacup = getMonthesAfterLastBacup()
         
         titleLabel?.text = String(format: TextConstants.homePageContactBacupOldTitle, monthesAfterLastBacup)
         subTitle?.text = String(format: TextConstants.homePageContactBacupOldSubTitle, monthesAfterLastBacup)
         
-        lastUpdateLabel?.text = String(format: "%@ %@", TextConstants.homePageContactBacupLastUpate, lastBacupDate)
+        lastUpdateLabel?.text = String(format: "%@ %@", TextConstants.homePageContactBacupLastUpate, lastBackupDate)
     }
     
     func getLastBackupDate()->String{

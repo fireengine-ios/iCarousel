@@ -102,9 +102,4 @@ class CollectionViewLayout: UICollectionViewLayout {
         headerAttribute.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: headerH)
         return headerAttribute
     }
-    
-    func remoweAttributesForCell(in rect: CGRect){
-        
-    }
-    
 }

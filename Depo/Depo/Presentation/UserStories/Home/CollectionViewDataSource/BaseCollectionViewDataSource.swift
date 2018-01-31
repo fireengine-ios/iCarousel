@@ -85,15 +85,15 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.cellForController, for: indexPath)
-        guard let baseCel = cell as? CollectionViewCellForController else {
+        guard let baseCell = cell as? CollectionViewCellForController else {
             return cell
         }
         
-        baseCel.setStateToDefault()
-        baseCel.cellDelegate = self
+        baseCell.setStateToDefault()
+        baseCell.cellDelegate = self
         let popUpView = popUps[indexPath.row]
-        baseCel.addViewOnCell(controllersView: popUpView, withShadow: true)
-        return baseCel
+        baseCell.addViewOnCell(controllersView: popUpView, withShadow: true)
+        return baseCell
     }
     
     // MARK: BaseCollectionViewCellWithSwipeDelegate

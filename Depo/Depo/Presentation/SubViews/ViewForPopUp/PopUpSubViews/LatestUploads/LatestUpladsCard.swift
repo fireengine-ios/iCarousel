@@ -18,7 +18,7 @@ class LatestUpladsCard: BaseView {
     @IBOutlet weak var viewAllPhotosButton: UIButton!
     var collectionViewDataSource = [WrapData]()
     
-    let numberOfcellInRow: CGFloat = 7
+    let numberOfСellInRow: CGFloat = 7
     let minSeparatorSize: CGFloat = 2
     var collectionViewW: CGFloat = 0
     
@@ -91,33 +91,12 @@ class LatestUpladsCard: BaseView {
     @IBAction func onCloseButton(){
         CardsManager.default.stopOperationWithType(type: .latestUploads)
     }
-    
 }
 
-
-//MARK: UICollectionView Delegate
-extension LatestUpladsCard: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    
-    func calculateLinearDimensionsForCell() -> CGFloat{
-        let w = collectionView.frame.size.width
-        let cellW = (w - minSeparatorSize*numberOfcellInRow + minSeparatorSize)/numberOfcellInRow
-        return cellW
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+extension LatestUpladsCard: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionViewDataSource.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat{
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: calculateLinearDimensionsForCell(), height: calculateLinearDimensionsForCell())
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -126,15 +105,25 @@ extension LatestUpladsCard: UICollectionViewDataSource, UICollectionViewDelegate
         cell.setImage(image: object)
         return cell
     }
+}
+
+extension LatestUpladsCard: UICollectionViewDelegateFlowLayout {
     
-    //-----
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return minSeparatorSize
     }
     
-    //|||||
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return minSeparatorSize
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: calculateLinearDimensionsForCell(), height: calculateLinearDimensionsForCell())
+    }
+    
+    private func calculateLinearDimensionsForCell() -> CGFloat{
+        let w = collectionView.frame.size.width
+        let cellW = (w - minSeparatorSize*numberOfСellInRow + minSeparatorSize)/numberOfСellInRow
+        return cellW
+    }
 }
