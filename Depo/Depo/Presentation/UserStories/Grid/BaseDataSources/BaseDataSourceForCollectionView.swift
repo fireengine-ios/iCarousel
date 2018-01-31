@@ -84,7 +84,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     fileprivate var previousPreheatRect = CGRect.zero
     
     
-    private func compoundItems(pageItems: [WrapData]) {
+    func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
         isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
     }
@@ -398,7 +398,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func appendCollectionView(items: [WrapData]) {
-        let nonEmptyMetaItems = items.filter{
+        let nonEmptyMetaItems = items.filter {
             if $0.fileType == .image, !$0.isLocalItem {
                return ($0.metaData?.takenDate != nil)
             }

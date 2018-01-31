@@ -26,3 +26,12 @@ class PlacesParameters: BaseRequestParametrs {
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }
+
+class PlacesItem: Item {
+    let responseObject: PlacesItemResponse
+    
+    init(response: PlacesItemResponse) {
+        responseObject = response
+        super.init(placesItemResponse: response)
+    }
+}

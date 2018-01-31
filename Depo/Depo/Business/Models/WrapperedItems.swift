@@ -543,6 +543,55 @@ class WrapData: BaseDataSourceItem, Wrappered {
         lastModifiDate = Date()
     }
     
+    init(peopleItemResponse: PeopleItemResponse) {
+        id = peopleItemResponse.id
+        fileSize =  Int64(0)
+        favorites = false
+        status = .unknown
+        metaData = BaseMetaData()
+        metaData?.takenDate = Date()
+        tmpDownloadUrl = peopleItemResponse.thumbnail
+        patchToPreview = .remoteUrl(tmpDownloadUrl)
+        super.init()
+        name = peopleItemResponse.name
+        isLocalItem = false
+        creationDate = Date()
+        syncStatus = .notSynced
+        fileType = .image
+    }
+    
+    init(thingsItemResponse: ThingsItemResponse) {
+        id = thingsItemResponse.id
+        fileSize =  Int64(0)
+        favorites = false
+        status = .unknown
+        metaData = BaseMetaData()
+        metaData?.takenDate = Date()
+        tmpDownloadUrl = thingsItemResponse.thumbnail
+        patchToPreview = .remoteUrl(tmpDownloadUrl)
+        super.init()
+        isLocalItem = false
+        creationDate = Date()
+        syncStatus = .notSynced
+        fileType = .image
+    }
+    
+    init(placesItemResponse: PlacesItemResponse) {
+        id = placesItemResponse.id
+        fileSize =  Int64(0)
+        favorites = false
+        status = .unknown
+        metaData = BaseMetaData()
+        metaData?.takenDate = Date()
+        tmpDownloadUrl = placesItemResponse.thumbnail
+        patchToPreview = .remoteUrl(tmpDownloadUrl)
+        super.init()
+        isLocalItem = false
+        creationDate = Date()
+        syncStatus = .notSynced
+        fileType = .image
+    }
+    
     init(baseModel: BaseMediaContent) {
 
         fileSize = baseModel.size

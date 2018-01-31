@@ -80,6 +80,7 @@ struct RouteRequests {
     // MARK: My Streams
     
     static let people = "/api/person/"
+    static let peoplePage = "/api/person/page?pageSize=%d&pageNumber=%d"
     static let things = "/api/object/"
     static let places = "/api/location/"
     
