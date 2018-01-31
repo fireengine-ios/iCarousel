@@ -180,6 +180,8 @@ class CardsManager: NSObject {
             stopOperationWithType(type: .waitingForWiFi)
             stopOperationWithType(type: .freeAppSpaceLocalWarning)
             stopOperationWithType(type: .freeAppSpace)
+        case .freeAppSpace:
+            stopOperationWithType(type: .emptyStorage)
         default:
             break
         }

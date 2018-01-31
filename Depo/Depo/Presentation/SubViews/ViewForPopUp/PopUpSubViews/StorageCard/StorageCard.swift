@@ -31,7 +31,27 @@ class StorageCard: BaseView {
     }
     
     @IBAction func onBottomButton(){
-        
+        if let operationType = operationType{
+            let router = RouterVC()
+            switch operationType {
+            case .freeAppSpaceCloudWarning:
+                let controller = router.packages
+                router.pushViewController(viewController: controller)
+                break
+            case .emptyStorage:
+                let controller = router.uploadPhotos()
+                let navigation = UINavigationController(rootViewController: controller)
+                navigation.navigationBar.isHidden = false
+                router.presentViewController(controller: navigation)
+                break
+            case .freeAppSpaceLocalWarning:
+                let controller = router.freeAppSpace()
+                router.pushViewController(viewController: controller)
+                break
+            default:
+                return
+            }
+        }
     }
     
     @IBAction func onCloseButton(){
@@ -49,7 +69,6 @@ class StorageCard: BaseView {
             iconView.image = UIImage(named: "CardIconLamp")
             
             titleLabel.text = TextConstants.homeStorageCardCloudTitle
-            subTileLabel.text = TextConstants.homeStorageCardCloudSubTitle
             
             bottomButton.setTitle(TextConstants.homeStorageCardCloudBottomButtonTitle, for: .normal)
             bottomButton.setTitleColor(ColorConstants.orangeGradientEnd, for: .normal)
@@ -69,7 +88,9 @@ class StorageCard: BaseView {
             iconView.image = UIImage(named: "CardIconLamp")
             
             titleLabel.text = TextConstants.homeStorageCardLocalTitle
-            subTileLabel.text = TextConstants.homeStorageCardLocalSubTitle
+            let percent = Device.getFreeDiskSpaceInPercent
+            subTileLabel.text = String(format: TextConstants.homeStorageCardLocalSubTitle, percent)
+            
             
             bottomButton.setTitle(TextConstants.homeStorageCardLocalBottomButtonTitle, for: .normal)
             bottomButton.setTitleColor(ColorConstants.redGradientEnd, for: .normal)
@@ -79,7 +100,19 @@ class StorageCard: BaseView {
             return
         }
         
-    } 
+    }
+    
+    override func set(object: HomeCardResponse?) {
+        super.set(object: object)
+        
+        configurateByResponceObject()
+    }
+    
+    func configurateByResponceObject(){
+        if operationType == .freeAppSpaceCloudWarning, let percent = cardObject?.details?["usage-percentage"].float{
+            subTileLabel.text = String(format: TextConstants.homeStorageCardCloudSubTitle, percent)
+        }
+    }
     
     func setGradient(colorTop: UIColor, colorBottom: UIColor){
         let gradient: CAGradientLayer = CAGradientLayer()

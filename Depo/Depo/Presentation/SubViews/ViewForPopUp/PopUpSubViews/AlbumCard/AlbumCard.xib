@@ -79,7 +79,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGs-5l-TOq">
                             <rect key="frame" x="1" y="1" width="339" height="152"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8bJ-os-ke5" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8bJ-os-ke5" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="339" height="152"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nux-hs-zyp">

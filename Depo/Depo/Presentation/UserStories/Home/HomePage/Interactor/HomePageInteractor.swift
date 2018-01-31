@@ -17,16 +17,6 @@ class HomePageInteractor: HomePageInteractorInput {
         FreeAppSpace.default.checkFreeAppSpace()
         SyncServiceManager.shared.updateImmediately()
         
-//        CardsManager.default.startOperationWith(type: .contactBacupOld, allOperations: nil, completedOperations: nil)
-//        CardsManager.default.startOperationWith(type: .contactBacupEmpty, allOperations: nil, completedOperations: nil)
-//
-//        CardsManager.default.startOperationWith(type: .freeAppSpaceLocalWarning, allOperations: nil, completedOperations: nil)
-//        CardsManager.default.startOperationWith(type: .freeAppSpaceCloudWarning, allOperations: nil, completedOperations: nil)
-//        CardsManager.default.startOperationWith(type: .emptyStorage, allOperations: nil, completedOperations: nil)
-//        CardsManager.default.startOperationWith(type: .collage, allOperations: nil, completedOperations: nil)
-//        CardsManager.default.startOperationWith(type: .albumCard, allOperations: nil, completedOperations: nil)
-        
-
         homeCardsService.all { result in
             DispatchQueue.main.async {
                 switch result {
