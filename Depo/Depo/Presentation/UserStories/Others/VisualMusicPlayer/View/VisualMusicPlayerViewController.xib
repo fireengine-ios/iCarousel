@@ -139,38 +139,6 @@
                         <constraint firstItem="fQ8-4f-HHC" firstAttribute="centerX" secondItem="CZG-q6-ZSJ" secondAttribute="centerX" id="rSJ-bS-6JG"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="heM-sH-YAa">
-                    <rect key="frame" x="0.0" y="5" width="320" height="61"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZ3-wB-gOo">
-                            <rect key="frame" x="18" y="20" width="53" height="22"/>
-                            <state key="normal" title=" Back" image="im_backButton">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="CZl-i7-6bx"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSe-ZH-k4N">
-                            <rect key="frame" x="280" y="5.5" width="40" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="40" id="PVu-06-XDt"/>
-                                <constraint firstAttribute="height" constant="50" id="rlr-hk-xHe"/>
-                            </constraints>
-                            <state key="normal" image="more"/>
-                            <connections>
-                                <action selector="actionMoreButton:" destination="-1" eventType="touchUpInside" id="emE-K5-DQo"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="JZ3-wB-gOo" firstAttribute="leading" secondItem="heM-sH-YAa" secondAttribute="leading" constant="18" id="Jhe-s1-YLG"/>
-                        <constraint firstItem="KSe-ZH-k4N" firstAttribute="centerY" secondItem="heM-sH-YAa" secondAttribute="centerY" id="K1a-aj-pN9"/>
-                        <constraint firstItem="JZ3-wB-gOo" firstAttribute="centerY" secondItem="heM-sH-YAa" secondAttribute="centerY" id="LJh-bg-5yG"/>
-                        <constraint firstAttribute="trailing" secondItem="KSe-ZH-k4N" secondAttribute="trailing" id="g5A-31-SEt"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKH-U3-HRk">
                     <rect key="frame" x="150" y="375.5" width="20" height="36.5"/>
                     <constraints>
@@ -193,22 +161,18 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="heM-sH-YAa" firstAttribute="leading" secondItem="aiV-eJ-bmf" secondAttribute="leading" id="0be-0i-g8l"/>
                 <constraint firstItem="Dc0-QF-4Zh" firstAttribute="leading" secondItem="aiV-eJ-bmf" secondAttribute="leading" id="239-Ot-WFN"/>
                 <constraint firstAttribute="trailing" secondItem="Dc0-QF-4Zh" secondAttribute="trailing" id="EXX-bx-9cF"/>
                 <constraint firstItem="Xvz-pH-Pzz" firstAttribute="centerX" secondItem="aiV-eJ-bmf" secondAttribute="centerX" id="LI7-0u-YlN"/>
                 <constraint firstAttribute="bottom" secondItem="Xvz-pH-Pzz" secondAttribute="bottom" id="MJM-aS-Jh5"/>
                 <constraint firstItem="CZG-q6-ZSJ" firstAttribute="leading" secondItem="aiV-eJ-bmf" secondAttribute="leading" id="N1Q-A5-nlp"/>
                 <constraint firstItem="Xvz-pH-Pzz" firstAttribute="top" secondItem="Ks8-05-b09" secondAttribute="bottom" id="NCO-tD-1U9"/>
-                <constraint firstItem="Dc0-QF-4Zh" firstAttribute="top" secondItem="heM-sH-YAa" secondAttribute="bottom" id="OFQ-va-Cg7"/>
                 <constraint firstItem="Ks8-05-b09" firstAttribute="leading" secondItem="aiV-eJ-bmf" secondAttribute="leading" constant="20" id="Omv-sl-kdT"/>
                 <constraint firstItem="Dc0-QF-4Zh" firstAttribute="height" secondItem="aiV-eJ-bmf" secondAttribute="height" multiplier="4:11" id="Qxu-pY-OJl"/>
                 <constraint firstAttribute="trailing" secondItem="CZG-q6-ZSJ" secondAttribute="trailing" id="THx-rv-229"/>
                 <constraint firstItem="cKH-U3-HRk" firstAttribute="top" secondItem="CZG-q6-ZSJ" secondAttribute="bottom" id="WWM-uX-dDs"/>
                 <constraint firstItem="Dc0-QF-4Zh" firstAttribute="top" secondItem="aiV-eJ-bmf" secondAttribute="top" constant="66" id="X3C-Xq-AWT"/>
                 <constraint firstItem="Xvz-pH-Pzz" firstAttribute="height" secondItem="cKH-U3-HRk" secondAttribute="height" id="Xfr-O9-DHl"/>
-                <constraint firstAttribute="trailing" secondItem="heM-sH-YAa" secondAttribute="trailing" id="bZf-hc-8ql"/>
-                <constraint firstItem="heM-sH-YAa" firstAttribute="top" secondItem="aiV-eJ-bmf" secondAttribute="top" constant="5" id="cZR-6q-rbW"/>
                 <constraint firstItem="cKH-U3-HRk" firstAttribute="centerX" secondItem="aiV-eJ-bmf" secondAttribute="centerX" id="dcR-xf-mhy"/>
                 <constraint firstAttribute="trailing" secondItem="Ks8-05-b09" secondAttribute="trailing" constant="20" id="dmC-dp-8mt"/>
                 <constraint firstItem="Ks8-05-b09" firstAttribute="top" secondItem="cKH-U3-HRk" secondAttribute="bottom" id="pG7-Xb-esR"/>
@@ -218,8 +182,6 @@
         </view>
     </objects>
     <resources>
-        <image name="im_backButton" width="8" height="12"/>
-        <image name="more" width="24" height="6"/>
         <image name="next" width="21" height="20"/>
         <image name="pause" width="32" height="36"/>
         <image name="play" width="32" height="36"/>

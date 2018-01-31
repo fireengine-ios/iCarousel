@@ -361,7 +361,7 @@ final class UploadService: BaseRequestService {
                 checkIfFinished()
             })
             
-            operation.queuePriority = .normal
+            operation.queuePriority = firstObject.fileType == .image ? .normal : .low // start images sync first
             return operation
         }
         uploadOperations.append(contentsOf: operations)

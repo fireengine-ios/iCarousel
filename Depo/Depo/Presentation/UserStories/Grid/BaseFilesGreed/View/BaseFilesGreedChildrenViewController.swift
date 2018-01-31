@@ -17,10 +17,10 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         navigationBarWithGradientStyle()
         
         if mainTitle != "" {
-            self.subTitle = output.getSortTypeString()
+            subTitle = output.getSortTypeString()
         }
         
-        self.setTitle(withString: mainTitle, andSubTitle: subTitle)
+        setTitle(withString: mainTitle, andSubTitle: subTitle)
     }
 
     override func startSelection(with numberOfItems: Int) {

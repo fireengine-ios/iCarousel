@@ -50,6 +50,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         setupCarousel()
         playButton.isSelected = !player.isPlaying
         player.delegates.add(self)
@@ -66,7 +67,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         editingTabBar?.view.layoutIfNeeded()
         
         output.viewIsReady(view: self.view)
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        hidenNavigationBarStyle()
     }
     
     private func setupCarousel() {
@@ -75,6 +76,22 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         carouselView.dataSource = self
         carouselView.isPagingEnabled = true
         carouselView.scrollToItem(at: player.currentIndex, animated: false)
+    }
+    
+    private func setupNavigationBar() {
+        let backButton = UIButton(type: .system)
+        backButton.frame = CGRect(x: 0, y: 0, width: 100, height: 44)
+        backButton.contentHorizontalAlignment = .left
+        backButton.titleEdgeInsets.left = 8
+        backButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        backButton.setImage(UIImage(named: "im_backButton"), for: .normal)
+        backButton.setTitle(TextConstants.backTitle, for: .normal)
+        backButton.addTarget(self, action: #selector(cancelAction(_:)), for:.touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        
+        let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(actionMoreButton(_:)))
+        moreButton.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem = moreButton
     }
     
     @IBAction func actionPlayButton(_ sender: UIButton) {
