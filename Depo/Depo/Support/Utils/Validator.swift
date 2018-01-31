@@ -18,4 +18,15 @@ final class Validator {
         let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
         return emailTest.evaluate(with: email)
     }
+    
+    static func isValid(phone: String) -> Bool {
+        var phoneNumber = phone.filter{$0 != "(" && $0 != ")"}
+        if !phone.contains("+") {
+            phoneNumber = "+" + phoneNumber
+        }
+        let phoneRegEx = "^((\\+)|(00))[0-9]{9,15}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegEx)
+        let result = phoneTest.evaluate(with: phoneNumber)
+        return result
+    }
 }

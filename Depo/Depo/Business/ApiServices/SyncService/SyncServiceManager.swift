@@ -81,7 +81,7 @@ class SyncServiceManager {
         
         settings = settingsModel
     
-        checkReachabilityAndSettings(reachabilityChanged: false)
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
     }
     
     func updateImmediately() {
@@ -89,7 +89,7 @@ class SyncServiceManager {
 
         lastAutoSyncTime = NSDate().timeIntervalSince1970
         
-        checkReachabilityAndSettings(reachabilityChanged: false)
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
     }
     
     func updateInBackground() {
@@ -99,7 +99,7 @@ class SyncServiceManager {
         if time - lastAutoSyncTime > timeIntervalBetweenSyncs {
             lastAutoSyncTime = time
             
-            checkReachabilityAndSettings(reachabilityChanged: false)
+            checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         }
     }
     
@@ -127,16 +127,16 @@ class SyncServiceManager {
 
         reachability.whenReachable = { (reachability) in
             print("AUTOSYNC: is reachable")
-            self.checkReachabilityAndSettings(reachabilityChanged: true)
+            self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
         }
         
         reachability.whenUnreachable = { (reachability) in
             print("AUTOSYNC: is unreachable")
-            self.checkReachabilityAndSettings(reachabilityChanged: true)
+            self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
         }
     }
     
-    private func checkReachabilityAndSettings(reachabilityChanged: Bool) {
+    private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         dispatchQueue.async {
             guard let syncSettings = self.settings else {
                 AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
@@ -146,7 +146,9 @@ class SyncServiceManager {
                         settings.mobileDataPhotos = autoSyncModels[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
                         settings.mobileDataVideo = autoSyncModels[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
                         
-                        self.updateSyncSettings(settingsModel: settings)
+                        if self.settings == nil {
+                            self.updateSyncSettings(settingsModel: settings)
+                        }
                     }
                 })
                 
@@ -170,14 +172,14 @@ class SyncServiceManager {
             
             if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
                 if reachability.connection == .wifi {
-                    self.start(photo: true, video: true)
+                    self.start(photo: true, video: true, newItems: newItems)
                 } else if reachability.connection == .cellular {
                     let photoEnabled = syncSettings.mobileDataPhotos
                     let videoEnabled = syncSettings.mobileDataVideo
                     
                     self.stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
                     if photoEnabled || videoEnabled {
-                        self.start(photo: photoEnabled, video: videoEnabled)
+                        self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
                     }
                 }
             } else {
@@ -189,9 +191,9 @@ class SyncServiceManager {
     //MARK: Flow
 
     //start to sync
-    private func start(photo: Bool, video: Bool) {
-        if photo { photoSyncService.start() }
-        if video { videoSyncService.start() }
+    private func start(photo: Bool, video: Bool, newItems: Bool) {
+        if photo { photoSyncService.start(newItems: newItems) }
+        if video { videoSyncService.start(newItems: newItems) }
     }
     
     //stop/cancel completely
@@ -213,8 +215,8 @@ extension SyncServiceManager {
     private func subscribeForNotifications() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
-                                       selector: #selector(onPhotoLibraryDidChange),
-                                       name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
+                                       selector: #selector(onPhotoLibraryDidChange(notification:)),
+                                       name: LocalMediaStorage.notificationPhotoLibraryDidChange,
                                        object: nil)
         
         notificationCenter.addObserver(self,
@@ -228,12 +230,17 @@ extension SyncServiceManager {
                                        object: nil)
     }
     
-    @objc private func onPhotoLibraryDidChange() {
-        checkReachabilityAndSettings(reachabilityChanged: false)
+    @objc private func onPhotoLibraryDidChange(notification: Notification) {
+        if let phChanges = notification.userInfo {
+            if let _ = phChanges[PhotoLibraryChangeType.added] as? [PHAsset]  {
+                //TODO: append only added items
+                 checkReachabilityAndSettings(reachabilityChanged: false, newItems: true)
+            }
+        }
     }
     
     @objc private func onAPIReachabilityDidChange() {
-        self.checkReachabilityAndSettings(reachabilityChanged: true)
+        self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
     }
     
     @objc private func onAutoSyncStatusDidChange() {
@@ -245,6 +252,7 @@ extension SyncServiceManager {
         
         CardsManager.default.stopOperationWithType(type: .sync)
         FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
+        ItemOperationManager.default.syncFinished()
         
         if hasPrepairingSync {
             CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)

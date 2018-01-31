@@ -8,13 +8,13 @@
 
 import UIKit
 
-class AutoUploadIsOffPopUp: BaseView {
+final class AutoUploadIsOffPopUp: BaseView {
     
     @IBOutlet weak var titleText: UILabel?
     @IBOutlet weak var cancelButton: CircleButtonWithGrayCorner?
     @IBOutlet weak var settingsButton: CircleYellowButton?
-    
-    override func configurateView(){
+
+    override func configurateView() {
         super.configurateView()
         
         canSwipe = false

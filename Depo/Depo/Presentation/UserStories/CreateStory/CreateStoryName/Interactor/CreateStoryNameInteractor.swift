@@ -10,9 +10,16 @@ class CreateStoryNameInteractor: CreateStoryNameInteractorInput {
 
     weak var output: CreateStoryNameInteractorOutput!
     
-    func onCreateStory(storyName: String){
+    var needSelectionItems: Bool = false
+    var isFavorites: Bool = false
+    
+    func onCreateStory(storyName: String) {
         let story = PhotoStory(name: storyName)
-        output.goToSelectionPhoto(forStory: story)
+        if (isFavorites) {
+            output.goToFavoriteSelectionPhoto(forStory: story)
+        } else {
+            output.goToSelectionPhoto(forStory: story)
+        }
     }
     
     func onCreateStory(storyName: String, items: [BaseDataSourceItem]) {
@@ -25,11 +32,16 @@ class CreateStoryNameInteractor: CreateStoryNameInteractorInput {
                 storyItems.append(storyItem)
             }
         }
-        if storyItems.count > 0 {
-            story.storyPhotos = storyItems
-            output.goToPhotosOrderForStory(story: story)
+        
+        story.storyPhotos = storyItems
+        if storyItems.isEmpty || needSelectionItems {
+            if isFavorites {
+                output.goToFavoriteSelectionPhoto(forStory: story)
+            } else {
+                output.goToSelectionPhoto(forStory: story)
+            }
         } else {
-            output.goToSelectionPhoto(forStory: story)
+            output.goToPhotosOrderForStory(story: story)
         }
     }
 }

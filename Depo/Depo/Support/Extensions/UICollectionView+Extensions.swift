@@ -35,3 +35,13 @@ extension UICollectionView {
         register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifierString)
     }
 }
+
+
+extension UICollectionView {
+    func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
+        guard let allLayoutAttributes = collectionViewLayout.layoutAttributesForElements(in: rect) else {
+            return []
+        }
+        return allLayoutAttributes.map { $0.indexPath }
+    }
+}

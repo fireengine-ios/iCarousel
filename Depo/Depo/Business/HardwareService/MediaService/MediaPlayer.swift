@@ -156,7 +156,7 @@ final class MediaPlayer: NSObject {
     @objc private func finishedPlaying(_ notification: NSNotification) {
         guard let item = notification.object as? AVPlayerItem, item == player.currentItem else { return }
         
-        if playNext() {
+        if playNext() >= 0 {
             play()
         } else {
             stop()
@@ -338,27 +338,43 @@ final class MediaPlayer: NSObject {
     }
     
     @discardableResult
-    func playNext() -> Bool {
+    func playNext() -> Int {
         if list.isEmpty {
             delegates.invoke { delegate in
                 delegate.closeMediaPlayer()
             }
-            return false
+            return -1
         }
-        if currentIndex == items.count - 1 { return false }
-        
-        currentIndex += 1
-        setupPlayerWithItem(at: chooseIndex(for: currentIndex))
-        return true
+        if currentIndex == items.count - 1 {
+            if playMode == .normal {
+                return -1
+            } else {
+                currentIndex = 0
+            }
+        } else {
+            currentIndex += 1
+        }
+        let nextIndex = chooseIndex(for: currentIndex)
+        setupPlayerWithItem(at: nextIndex)
+        return nextIndex
     }
 
     
     @discardableResult
-    func playPrevious() -> Bool {
-        if currentIndex == 0 { return false }
-        currentIndex -= 1
-        setupPlayerWithItem(at: chooseIndex(for: currentIndex))
-        return true
+    func playPrevious() -> Int {
+        if currentIndex == 0 {
+            if playMode == .normal {
+                return -1
+            } else {
+                currentIndex = list.count - 1
+            }
+        } else {
+            currentIndex -= 1
+        }
+        
+        let previousIndex = chooseIndex(for: currentIndex)
+        setupPlayerWithItem(at: previousIndex)
+        return previousIndex
     }
     
     @discardableResult

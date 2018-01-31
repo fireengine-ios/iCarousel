@@ -349,6 +349,7 @@ class FileService: BaseRequestService {
         dispatchQueue.async {
             self.downloadOperation.addOperations(operations, waitUntilFinished: true)
             CardsManager.default.stopOperationWithType(type: .download)
+            FreeAppSpace.default.checkFreeAppSpace()
             success?()
         }
     }

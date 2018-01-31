@@ -126,4 +126,19 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executePostRequest(param: parametres, handler: handler)
     }
     
+    //MARK: - Face Image Allowed
+    func faceImageAllowed(success: SuccessResponse?, fail: @escaping FailResponse) {
+        log.debug("AccountService faceImageAllowed")
+        
+        let parameters = FaceImageAllowedParameters()
+        let handler = BaseResponseHandler<FaceImageAllowedResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: parameters, handler: handler)
+    }
+    
+    func switchFaceImageAllowed(parameters: FaceImageAllowedParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
+        log.debug("AccountService switchFaceImageAllowed")
+
+        let handler = BaseResponseHandler<FaceImageAllowedResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePutRequest(param: parameters, handler: handler)
+    }
 }

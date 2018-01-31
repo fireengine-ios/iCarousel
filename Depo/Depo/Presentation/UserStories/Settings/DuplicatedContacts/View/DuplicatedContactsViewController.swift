@@ -40,7 +40,6 @@ class DuplicatedContactsViewController: BaseViewController, DuplicatedContactsVi
     
     @IBAction func onDeleteAllTapped(_ sender: Any) {
         output.onDeleteAllTapped()
-        
     }
     
     @IBAction func onKeepTapped(_ sender: Any) {
