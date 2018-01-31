@@ -136,6 +136,7 @@ extension UIViewController {
     }
  
     func navigationBarWithGradientStyle() {
+        visibleNavigationBarStyle()
         navigationController?.setNavigationBarHidden(false, animated: false)
         defaultNavBarStyle()
         navBar?.backgroundColor = UIColor.white
