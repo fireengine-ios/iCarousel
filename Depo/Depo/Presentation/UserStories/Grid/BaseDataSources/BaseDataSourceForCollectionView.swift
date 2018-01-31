@@ -538,6 +538,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func reloadData() {
         collectionView?.reloadData()
+        
+        resetCachedAssets()
     }
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){

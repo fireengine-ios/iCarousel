@@ -250,7 +250,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                 log.debug("ItemSyncServiceImpl getUnsyncedObjects PhotoAndVideoService nextItemsMinified fail")
 
                 fail()
-        }, newFieldValue: nil)
+        }, newFieldValue: fileType == .image ? .image : .video)
     }
     
     private func appendNewUnsyncedItems() {
