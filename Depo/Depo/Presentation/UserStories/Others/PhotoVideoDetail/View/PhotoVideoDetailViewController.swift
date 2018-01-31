@@ -30,6 +30,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     var localPlayer: AVPlayer?
     var playerController: AVPlayerViewController?
     let floatingView = FloatingView()
+    var hideActions = false
     
     @IBOutlet weak var shareButton: MenuButton!
     @IBOutlet weak var infoButton: MenuButton!
@@ -51,6 +52,10 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         editingTabBar.view.backgroundColor = UIColor.black
         output.viewIsReady(view: view)
         setupTitle()
+        
+        if hideActions {
+            editingTabBar.view.isHidden = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,7 +76,11 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     private func configureNavigationBar() {
         if objects.count > selectedIndex, selectedIndex >= 0 {
             let item = objects[selectedIndex]
-            navigationItem.rightBarButtonItem?.customView?.isHidden = !item.isSynced()
+            if hideActions {
+                navigationItem.rightBarButtonItem?.customView?.isHidden = true
+            } else {
+                navigationItem.rightBarButtonItem?.customView?.isHidden = !item.isSynced()
+            }
         }
     }
     

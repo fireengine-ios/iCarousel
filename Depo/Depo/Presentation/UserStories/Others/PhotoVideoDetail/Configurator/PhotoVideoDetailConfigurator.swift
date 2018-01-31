@@ -14,11 +14,12 @@ class PhotoVideoDetailModuleConfigurator {
                                                        photoVideoBottomBarConfig: EditingBarConfig,
                                                        documentsBottomBarConfig: EditingBarConfig,
                                                        selecetedItem: Item,
-                                                       allItems: [Item]) {
+                                                       allItems: [Item],
+                                                       hideActions: Bool = false) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
             configure(viewController: viewController, photoVideoBottomBarConfig: photoVideoBottomBarConfig, documentsBottomBarConfig: documentsBottomBarConfig, alertSheetExcludeTypes: [.delete],
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions,
-                      selecetedItem: selecetedItem, allItems: allItems)
+                      selecetedItem: selecetedItem, allItems: allItems, hideActions: hideActions)
         }
     }
 
@@ -27,7 +28,8 @@ class PhotoVideoDetailModuleConfigurator {
                                                                 documentsBottomBarConfig: EditingBarConfig,
                                                                 selecetedItem: Item,
                                                                 allItems: [Item],
-                                                                albumUUID: String) {
+                                                                albumUUID: String,
+                                                                hideActions: Bool = false) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
             let interactor = PhotoVideoAlbumDetailInteractor()
             interactor.albumUUID = albumUUID
@@ -36,7 +38,7 @@ class PhotoVideoDetailModuleConfigurator {
                       documentsBottomBarConfig: documentsBottomBarConfig,
                       interactor: interactor,
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.delete],
-                      selecetedItem: selecetedItem, allItems: allItems)
+                      selecetedItem: selecetedItem, allItems: allItems, hideActions: hideActions)
         }
     }
     
@@ -48,7 +50,8 @@ class PhotoVideoDetailModuleConfigurator {
                            interactor: PhotoVideoDetailInteractor = PhotoVideoDetailInteractor(),
                            photoDetailMoreMenu: [ElementTypes],
                            selecetedItem: Item,
-                           allItems: [Item]) {
+                           allItems: [Item],
+                           hideActions: Bool) {
         let router = PhotoVideoDetailRouter()
 
         let presenter = PhotoVideoDetailPresenter()
@@ -66,6 +69,7 @@ class PhotoVideoDetailModuleConfigurator {
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         let botvarBarVC = bottomBarVCmodule.setupModule(config: photoVideoBottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
         viewController.editingTabBar = botvarBarVC
+        viewController.hideActions = hideActions
         presenter.bottomBarPresenter = bottomBarVCmodule.presenter
         bottomBarVCmodule.presenter?.basePassingPresenter = presenter
         //--------------------

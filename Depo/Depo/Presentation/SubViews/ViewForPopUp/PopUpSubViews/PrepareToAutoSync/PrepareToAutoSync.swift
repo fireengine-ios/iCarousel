@@ -8,20 +8,13 @@
 
 import UIKit
 
-class PrepareToAutoSync: BaseView {
+final class PrepareToAutoSync: BaseView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
     
     var timer: Timer?
-    
-    override class func initFromNib() -> PrepareToAutoSync{
-        if let view = super.initFromNib() as? PrepareToAutoSync{
-            return view
-        }
-        return PrepareToAutoSync()
-    }
     
     override func configurateView() {
         super.configurateView()
@@ -48,7 +41,6 @@ class PrepareToAutoSync: BaseView {
                                          userInfo: nil,
                                          repeats: true)
         timer.fire()
-        
     }
     
     deinit {

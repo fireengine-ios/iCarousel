@@ -25,6 +25,11 @@ class ActivityTimelineViewController: UIViewController {
         output.viewIsReady()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
+    }
+    
     private func setupTableView() {
         tableView.register(nibHeaderFooter: ActivityTimelineHeader.self)
         tableView.register(nibCell: ActivityTimelineTimeCell.self)

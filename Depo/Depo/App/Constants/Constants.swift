@@ -259,11 +259,63 @@ struct TextConstants {
     static let homeCompleteProfileTakeAPhoto = NSLocalizedString("Take a Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
+    //MARK: Home page contact bacup
+    static let homePageContactBacupHeader = NSLocalizedString("Contact Backup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupOldTitle = NSLocalizedString("Your last contact update was %@ months ago!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupOldSubTitle = NSLocalizedString("It has been %@ months since you last updated your contacts, update now to never loose any of your contacts.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupEmptyTitle = NSLocalizedString("Your contact list looks empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupEmptySubTitle = NSLocalizedString("You don’t have any contacts in your profile, backup your contacts now!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupButton = NSLocalizedString("Backup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homePageContactBacupLastUpate = NSLocalizedString("Last update:", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
+    //MARK: Home Storage card
+    static let homeStorageCardCloudTitle = NSLocalizedString("Your storage is almost full!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeStorageCardEmptyTitle = NSLocalizedString("Your storage is empty!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeStorageCardLocalTitle = NSLocalizedString("Your storage is almost full!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeStorageCardCloudSubTitle = NSLocalizedString("You are using %f of your disk space! It’s a great time to expand your storage.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeStorageCardEmptySubTitle = NSLocalizedString("You seem to have no uploaded files. Start uploading your memories on Lifebox!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeStorageCardLocalSubTitle = NSLocalizedString("You are using %f of your device storage. It’s a great time to freeup space on your device.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeStorageCardCloudBottomButtonTitle = NSLocalizedString("Expand My Storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeStorageCardEmptyBottomButtonTitle = NSLocalizedString("Upload Files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeStorageCardLocalBottomButtonTitle = NSLocalizedString("Free Up Space", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
+    //MARK: Home Collage card
+    static let homeCollageCardTitle = NSLocalizedString("Collage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeCollageCardSubTitle = NSLocalizedString("We have created a collage from your photos!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeCollageCardButtonSaveCollage = NSLocalizedString("Save Collage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeCollageCardButtonViewCollage = NSLocalizedString("View", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
+    //MARK: Home Album card
+    static let homeAlbumCardTitle = NSLocalizedString("Album Card", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeAlbumCardSubTitle = NSLocalizedString("We have created an album for you.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeAlbumCardBottomButtonSaveAlbum = NSLocalizedString("Save Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeAlbumCardBottomButtonViewAlbum = NSLocalizedString("View", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
+    //MARK: Home movie card
+    static let homeMovieCardTitle = NSLocalizedString("Movie", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeMovieCardSubTitle = NSLocalizedString("Did you like this story that we created for you?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeMovieCardViewButton = NSLocalizedString("View", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeMovieCardSaveButton = NSLocalizedString("Save This Story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
+    //MARK: Home Latest Uploads card
+    static let homeLatestUploadsCardTitle = NSLocalizedString("Latest Uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeLatestUploadsCardSubTitle = NSLocalizedString("Your latest uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeLatestUploadsCardRecentActivitiesButton = NSLocalizedString("View Recent Activities", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeLatestUploadsCardAllPhotosButtn = NSLocalizedString("View All Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
     //MARK: Home page like filter view
+    static let homeLikeFilterHeader = NSLocalizedString("Filter Card", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLikeFilterTitle = NSLocalizedString("Did you like this filter?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLikeFilterSubTitle = NSLocalizedString("You can apply this filter and my more to your other picures as well", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLikeFilterSavePhotoButton = NSLocalizedString("Save this photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLikeFilterChangeFilterButton = NSLocalizedString("Change filter", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeLikeFilterViewPhoto = NSLocalizedString("View", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: Home page expande storrage view
     static let homeExpandeStorageBigTitle = NSLocalizedString("Your storage is almost full!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -775,6 +827,10 @@ struct TextConstants {
     static let accessibilityFavorite = NSLocalizedString("Favorite", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilitySelected = NSLocalizedString("Selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityNotSelected = NSLocalizedString("Not selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let getImageError = NSLocalizedString("Couldn't get image", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photos = NSLocalizedString("photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
 

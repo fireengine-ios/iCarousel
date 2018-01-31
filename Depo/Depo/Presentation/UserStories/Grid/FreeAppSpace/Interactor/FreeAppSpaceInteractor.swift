@@ -52,7 +52,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                         presenter.onItemDeleted()
                         if FreeAppSpace.default.getDuplicatesObjects().count == 0{
                             CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-                            CardsManager.default.stopOperationWithType(type: .freeAppSpaceWarning)
+                            CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
                         }
                         presenter.goBack()
                     }
