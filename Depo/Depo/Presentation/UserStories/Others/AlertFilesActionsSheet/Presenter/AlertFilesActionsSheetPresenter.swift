@@ -156,6 +156,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
                 filteredActionTypes.remove(at: removeFromFavorites)
             }
+            
+            let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems)
+            if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal){
+                filteredActionTypes.remove(at: index)
+            }
         } else {
             if let printIndex = filteredActionTypes.index(of: .print) {
                 filteredActionTypes.remove(at: printIndex)
