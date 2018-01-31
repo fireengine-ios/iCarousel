@@ -27,7 +27,7 @@ class CreateStoryModuleInitializer: BaseFilesGreedModuleInitializer {
         let configurator = CreateStorySelectionConfigurator()
         
         configurator.configure(viewController: viewController, remoteServices: FavouritesService(requestSize: 100),
-                               filters: [.localStatus(.nonLocal), .favoriteStatus(.favorites)], story: story)
+                               filters: [.localStatus(.nonLocal), .favoriteStatus(.favorites), .fileType(.image)], story: story)
         return viewController
     }
     
