@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -30,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="38" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qNy-pN-2dH">
-                    <rect key="frame" x="40" y="121.5" width="295" height="400.5"/>
+                    <rect key="frame" x="40" y="141.5" width="295" height="380.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="FeJ-Ma-Gbg"/>
@@ -53,8 +52,8 @@
                         <action selector="onKeepTapped:" destination="-1" eventType="touchUpInside" id="1t1-2l-K6c"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are 20 duplicated contacts." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgS-mi-6YC">
-                    <rect key="frame" x="22" y="60" width="331" height="21.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="There are 20 duplicated contacts." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgS-mi-6YC">
+                    <rect key="frame" x="22" y="90" width="331" height="21.5"/>
                     <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="19"/>
                     <color key="textColor" red="0.38714492321014404" green="0.38746166229248047" blue="0.38719403743743896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -65,10 +64,10 @@
                 <constraint firstAttribute="trailing" secondItem="TFU-Lz-2ek" secondAttribute="trailing" constant="22" id="2Bm-gL-oKA"/>
                 <constraint firstItem="fgS-mi-6YC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="B7h-Q6-aS0"/>
                 <constraint firstItem="P7z-te-2rn" firstAttribute="top" secondItem="qNy-pN-2dH" secondAttribute="bottom" constant="40" id="Ho4-Dq-b8Q"/>
-                <constraint firstItem="fgS-mi-6YC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" constant="40" id="IdW-tE-ZQ8"/>
+                <constraint firstItem="fgS-mi-6YC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="90" id="IdW-tE-ZQ8"/>
                 <constraint firstItem="P7z-te-2rn" firstAttribute="width" secondItem="TFU-Lz-2ek" secondAttribute="width" id="Ljn-4V-Mp6"/>
                 <constraint firstItem="P7z-te-2rn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="MHT-lx-WXU"/>
-                <constraint firstItem="qNy-pN-2dH" firstAttribute="top" secondItem="fgS-mi-6YC" secondAttribute="bottom" constant="40" id="XM1-Nx-bDY"/>
+                <constraint firstItem="qNy-pN-2dH" firstAttribute="top" secondItem="fgS-mi-6YC" secondAttribute="bottom" constant="30" id="XM1-Nx-bDY"/>
                 <constraint firstItem="TFU-Lz-2ek" firstAttribute="leading" secondItem="P7z-te-2rn" secondAttribute="trailing" constant="8" id="cXf-SI-Vm1"/>
                 <constraint firstAttribute="trailing" secondItem="fgS-mi-6YC" secondAttribute="trailing" constant="22" id="elD-R1-sHl"/>
                 <constraint firstItem="P7z-te-2rn" firstAttribute="centerY" secondItem="TFU-Lz-2ek" secondAttribute="centerY" id="ixE-HZ-r64"/>

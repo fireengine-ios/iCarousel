@@ -274,7 +274,8 @@
 "Clear BackUp" = "Clear BackUp";
 "Restore" = "Restore";
 "Back-Up" = "Back-Up";
-"Your last backup was on %@" = "Your last backup was on %@";
+"Your last back was on %@" = "Your last back was on %@";
+"There are %d duplicated contacts." = "There are %d duplicated contacts.";
 "Your last back up was a few seconds ago." = "Your last back up was a few seconds ago.";
 "You never backed up your contacts" = "You never backed up your contacts";
 "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.";
