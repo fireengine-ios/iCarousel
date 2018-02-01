@@ -45,7 +45,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         group.enter()
         
         let albumService = AlbumService(requestSize: 4)
-        albumService.allAlbums(sortBy: .albumName, sortOrder: .asc, success: { [weak self] albums in
+        albumService.allAlbums(sortBy: .date, sortOrder: .desc, success: { [weak self] albums in
             DispatchQueue.main.async {
                 self?.dataStorage.addNew(item: SliderItem(withAlbumItems: albums))
                 group.leave()
