@@ -38,8 +38,8 @@ final class FreeUpSpacePopUp: BaseView {
     }
     
     override func deleteCard() {
-        CardsManager.default.stopOperationWithType(type: operation ?? .freeAppSpace)
         super.deleteCard()
+        CardsManager.default.stopOperationWithType(type: operation ?? .freeAppSpace)
     }
     
     @IBAction func onFreeAppSpaceButton(){

@@ -117,8 +117,8 @@ final class AlbumCard: BaseView {
     }
     
     override func deleteCard() {
-        CardsManager.default.stopOperationWithType(type: .albumCard)
         super.deleteCard()
+        CardsManager.default.stopOperationWithType(type: .albumCard)
     }
     
     @IBAction private func actionAlbumViewButton(_ sender: UIButton) {

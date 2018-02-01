@@ -93,8 +93,8 @@ final class FilterPhotoCard: BaseView {
     }
     
     override func deleteCard() {
-        CardsManager.default.stopOperationWithType(type: .stylizedPhoto)
         super.deleteCard()
+        CardsManager.default.stopOperationWithType(type: .stylizedPhoto)
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {

@@ -93,8 +93,8 @@ class LatestUpladsCard: BaseView {
     }
     
     override func deleteCard() {
-        CardsManager.default.stopOperationWithType(type: .latestUploads)
         super.deleteCard()
+        CardsManager.default.stopOperationWithType(type: .latestUploads)
     }
 }
 

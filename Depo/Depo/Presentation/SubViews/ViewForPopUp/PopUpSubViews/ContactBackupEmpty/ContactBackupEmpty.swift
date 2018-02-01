@@ -26,8 +26,8 @@ class ContactBackupEmpty: ContactBackupOld {
     }
     
     override func deleteCard() {
-        CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
         super.deleteCard()
+        CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
     }
     
     override func configurateByResponseObject(){

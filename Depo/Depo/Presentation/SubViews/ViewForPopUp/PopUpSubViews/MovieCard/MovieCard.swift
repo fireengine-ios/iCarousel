@@ -101,8 +101,8 @@ final class MovieCard: BaseView {
     }
     
     override func deleteCard() {
-        CardsManager.default.stopOperationWithType(type: .movieCard)
         super.deleteCard()
+        CardsManager.default.stopOperationWithType(type: .movieCard)
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
