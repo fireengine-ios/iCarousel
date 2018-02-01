@@ -570,21 +570,21 @@ class RouterVC: NSObject {
     //MARK: People list
     
     func peopleListController() -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageFilesInitializer.initializePeopleController(with: "BaseFilesGreedViewController")
+        let controller = FaceImageItemsInitializer.initializePeopleController(with: "BaseFilesGreedViewController")
         return controller as! BaseFilesGreedChildrenViewController
     }
     
     //MARK: Thing list
     
     func thingsListController() -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageFilesInitializer.initializeThingsController(with: "BaseFilesGreedViewController")
+        let controller = FaceImageItemsInitializer.initializeThingsController(with: "BaseFilesGreedViewController")
         return controller as! BaseFilesGreedChildrenViewController
     }
     
     //MARK: Place list
     
     func placesListController() -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageFilesInitializer.initializePlacesController(with: "BaseFilesGreedViewController")
+        let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController")
         return controller as! BaseFilesGreedChildrenViewController
     }
     

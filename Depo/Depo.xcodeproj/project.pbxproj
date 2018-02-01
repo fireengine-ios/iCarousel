@@ -5971,7 +5971,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		4A9B38F8201F3189009FC572 /* FaceImageFiles */ = {
+		4A9B38F8201F3189009FC572 /* FaceImageItems */ = {
 			isa = PBXGroup;
 			children = (
 				4A9B38FD201F3395009FC572 /* View */,
@@ -5980,7 +5980,7 @@
 				4A9B38F9201F3306009FC572 /* Router */,
 				4A9B38FC201F338D009FC572 /* Configurator */,
 			);
-			path = FaceImageFiles;
+			path = FaceImageItems;
 			sourceTree = "<group>";
 		};
 		4A9B38F9201F3306009FC572 /* Router */ = {
@@ -9971,7 +9971,7 @@
 		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
-				4A9B38F8201F3189009FC572 /* FaceImageFiles */,
+				4A9B38F8201F3189009FC572 /* FaceImageItems */,
 				7C6945D620039F4A00152344 /* FreeAppSpace */,
 				7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */,
 				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,

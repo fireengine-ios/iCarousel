@@ -1,17 +1,17 @@
 //
-//  FaceImageFilesConfigurator.swift
+//  FaceImageItemsConfigurator.swift
 //  Depo
 //
 //  Created by Harbros on 30.01.2018.
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class FaceImageFilesConfigurator {
+class FaceImageItemsConfigurator {
     
-    func configure(viewController: FaceImageFilesViewController, remoteServices: RemoteItemsService, title: String) {
-        let router = FaceImageFilesRouter()
+    func configure(viewController: FaceImageItemsViewController, remoteServices: RemoteItemsService, title: String) {
+        let router = FaceImageItemsRouter()
         
-        let presenter = FaceImageFilesPresenter()
+        let presenter = FaceImageItemsPresenter()
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                    selectionModeTypes: [.createStory,.addToFavorites,.delete])
@@ -26,7 +26,7 @@ class FaceImageFilesConfigurator {
         presenter.view = viewController
         presenter.router = router
         
-        let interactor = FaceImageFilesInteractor(remoteItems: remoteServices)
+        let interactor = FaceImageItemsInteractor(remoteItems: remoteServices)
         interactor.output = presenter
         interactor.alertSheetConfig = alertSheetConfig
         

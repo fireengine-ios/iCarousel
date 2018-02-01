@@ -1,5 +1,5 @@
 //
-//  FaceImageFilesInitializer.swift
+//  FaceImageItemsInitializer.swift
 //  Depo
 //
 //  Created by Harbros on 29.01.2018.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-class FaceImageFilesInitializer: NSObject {
+class FaceImageItemsInitializer: NSObject {
 
     class func initializePeopleController(with nibName:String) -> UIViewController {
-        let viewController = FaceImageFilesViewController(nibName: nibName, bundle: nil)
+        let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
     
-        let configurator = FaceImageFilesConfigurator()
+        let configurator = FaceImageItemsConfigurator()
         
         configurator.configure(viewController: viewController, remoteServices: PeopleItemsService(requestSize: 20), title: TextConstants.myStreamPeopleTitle)
         
@@ -21,9 +21,9 @@ class FaceImageFilesInitializer: NSObject {
     }
     
     class func initializeThingsController(with nibName:String) -> UIViewController {
-        let viewController = FaceImageFilesViewController(nibName: nibName, bundle: nil)
+        let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
         
-        let configurator = FaceImageFilesConfigurator()
+        let configurator = FaceImageItemsConfigurator()
         
         configurator.configure(viewController: viewController, remoteServices: ThingsItemsService(requestSize: 20), title: TextConstants.myStreamThingsTitle)
         
@@ -31,9 +31,9 @@ class FaceImageFilesInitializer: NSObject {
     }
     
     class func initializePlacesController(with nibName:String) -> UIViewController {
-        let viewController = FaceImageFilesViewController(nibName: nibName, bundle: nil)
+        let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
         
-        let configurator = FaceImageFilesConfigurator()
+        let configurator = FaceImageItemsConfigurator()
         
         configurator.configure(viewController: viewController, remoteServices: PlacesItemsService(requestSize: 20), title: TextConstants.myStreamPlacesTitle)
         

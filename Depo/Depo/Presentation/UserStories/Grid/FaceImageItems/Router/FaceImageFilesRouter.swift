@@ -1,5 +1,5 @@
 //
-//  FaceImageFilesRouter.swift
+//  FaceImageItemsRouter.swift
 //  Depo
 //
 //  Created by Harbros on 29.01.2018.
@@ -8,5 +8,5 @@
 
 import Foundation
 
-class FaceImageFilesRouter: BaseFilesGreedRouter {
+class FaceImageItemsRouter: BaseFilesGreedRouter {
 }

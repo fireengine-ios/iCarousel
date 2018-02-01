@@ -1,5 +1,5 @@
 //
-//  FaceImageFilesInteractor.swift
+//  FaceImageItemsInteractor.swift
 //  Depo
 //
 //  Created by Harbros on 29.01.2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FaceImageFilesInteractor: BaseFilesGreedInteractor {
+class FaceImageItemsInteractor: BaseFilesGreedInteractor {
 
     
 }
