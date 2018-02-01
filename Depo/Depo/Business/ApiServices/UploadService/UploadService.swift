@@ -473,11 +473,6 @@ final class UploadService: BaseRequestService {
     
         let request = executeUploadRequest(param: uploadParam, response: { (data, response, error) in
             
-            guard error == nil else {
-                fail?(.error(error!))
-                return
-            }
-            
             if let httpResponse = response as? HTTPURLResponse {
                 if 200...299 ~= httpResponse.statusCode {
                     success?()
@@ -486,6 +481,9 @@ final class UploadService: BaseRequestService {
                     fail?(.httpCode(httpResponse.statusCode))
                     return
                 }
+            } else if let error = error {
+                fail?(.error(error))
+                return
             }
             
             fail?(.string("Error upload"))
