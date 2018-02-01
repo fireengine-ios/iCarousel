@@ -12,7 +12,7 @@ struct ThingsJsonKey {
     static let id = "id"
     static let code = "code"
     static let thumbnail = "thumbnail"
-    static let objectInfoNames = "objectInfoNames"
+    static let name = "name"
 }
 
 class ThingsItemResponse: ObjectRequestResponse {
@@ -20,13 +20,14 @@ class ThingsItemResponse: ObjectRequestResponse {
     var id: Int64?
     var code: String?
     var thumbnail: URL?
-    var objectInfoNames: [String]?
+    var name: String?
     
     override func mapping() {
         id = json?[ThingsJsonKey.id].int64
         code = json?[ThingsJsonKey.code].string
         thumbnail = json?[ThingsJsonKey.thumbnail].url
-        objectInfoNames = json?[ThingsJsonKey.objectInfoNames].array?.flatMap{ $0.string }
+        name = json?[ThingsJsonKey.name].string
+
     }
 }
 

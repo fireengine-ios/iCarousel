@@ -12,7 +12,7 @@ struct PlacesJsonKey {
     static let id = "id"
     static let adminLevel = "adminLevel"
     static let thumbnail = "thumbnail"
-    static let locationInfoNames = "locationInfoNames"
+    static let name = "name"
 }
 
 class PlacesItemResponse: ObjectRequestResponse {
@@ -20,13 +20,14 @@ class PlacesItemResponse: ObjectRequestResponse {
     var id: Int64?
     var adminLevel: String?
     var thumbnail: URL?
-    var locationInfoNames: [String]?
+    var name: String?
     
     override func mapping() {
         id = json?[PlacesJsonKey.id].int64
         adminLevel = json?[PlacesJsonKey.adminLevel].string
         thumbnail = json?[PlacesJsonKey.thumbnail].url
-        locationInfoNames = json?[PlacesJsonKey.locationInfoNames].array?.flatMap{ $0.string }
+        name = json?[PlacesJsonKey.name].string
+
     }
 }
 

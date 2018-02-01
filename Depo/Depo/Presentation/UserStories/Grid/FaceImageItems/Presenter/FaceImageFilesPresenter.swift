@@ -9,4 +9,10 @@
 import Foundation
 
 class FaceImageItemsPresenter: BaseFilesGreedPresenter {
+    
+    override func viewIsReady(collectionView: UICollectionView) {
+        super.viewIsReady(collectionView: collectionView)
+        dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
+    }
+    
 }

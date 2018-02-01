@@ -570,6 +570,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = thingsItemResponse.thumbnail
         patchToPreview = .remoteUrl(tmpDownloadUrl)
         super.init()
+        name = thingsItemResponse.name
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced
@@ -586,6 +587,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = placesItemResponse.thumbnail
         patchToPreview = .remoteUrl(tmpDownloadUrl)
         super.init()
+        name = placesItemResponse.name
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced

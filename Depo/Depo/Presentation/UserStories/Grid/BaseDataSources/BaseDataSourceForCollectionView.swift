@@ -463,7 +463,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             CollectionViewCellsIdsConstant.photosOrderCell,
                             CollectionViewCellsIdsConstant.folderSelectionCell,
                             CollectionViewCellsIdsConstant.albumCell,
-                            CollectionViewCellsIdsConstant.localAlbumCell]
+                            CollectionViewCellsIdsConstant.localAlbumCell,
+                            CollectionViewCellsIdsConstant.cellForFaceImage]
         
         registreList.forEach {
             let listNib = UINib(nibName: $0, bundle: nil)
