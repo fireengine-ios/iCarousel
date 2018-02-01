@@ -80,7 +80,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQ8-4f-HHC" userLabel="play_pause">
-                            <rect key="frame" x="144" y="98.5" width="32" height="36"/>
+                            <rect key="frame" x="138" y="88.5" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="ejR-P7-TWM"/>
+                                <constraint firstAttribute="height" constant="44" id="lme-ZH-cGt"/>
+                            </constraints>
                             <state key="normal" image="pause"/>
                             <state key="selected" image="play"/>
                             <connections>
@@ -88,7 +92,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ao2-BR-zM3" userLabel="back">
-                            <rect key="frame" x="62" y="94.5" width="44" height="44"/>
+                            <rect key="frame" x="66" y="88.5" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="3Uw-C9-bwm"/>
                                 <constraint firstAttribute="width" constant="44" id="vhj-2I-wS6"/>
@@ -99,7 +103,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oLy-SB-Bex" userLabel="forward">
-                            <rect key="frame" x="214" y="94.5" width="44" height="44"/>
+                            <rect key="frame" x="210" y="88.5" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="FJH-Yr-BfF"/>
                                 <constraint firstAttribute="height" constant="44" id="jen-21-oFG"/>
@@ -110,7 +114,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GkX-FG-hGA">
-                            <rect key="frame" x="266" y="95" width="46" height="44"/>
+                            <rect key="frame" x="262" y="89" width="46" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="bfC-hg-cN2"/>
                                 <constraint firstAttribute="width" constant="46" id="sKm-Lb-dHx"/>
@@ -132,17 +136,17 @@
                         <constraint firstItem="5KY-bX-azV" firstAttribute="top" secondItem="Ij1-hs-gIO" secondAttribute="bottom" constant="17.5" id="DeU-Jm-1zn"/>
                         <constraint firstItem="5KY-bX-azV" firstAttribute="leading" secondItem="cpV-6R-D54" secondAttribute="trailing" constant="5" id="Kgs-St-KEd"/>
                         <constraint firstItem="GkX-FG-hGA" firstAttribute="leading" secondItem="oLy-SB-Bex" secondAttribute="trailing" constant="8" id="Mpw-oX-Vvc"/>
-                        <constraint firstItem="fQ8-4f-HHC" firstAttribute="top" secondItem="5KY-bX-azV" secondAttribute="bottom" constant="20" id="NDo-Sp-0BY"/>
+                        <constraint firstItem="fQ8-4f-HHC" firstAttribute="top" secondItem="5KY-bX-azV" secondAttribute="bottom" constant="10" id="NDo-Sp-0BY"/>
                         <constraint firstItem="dZJ-Gg-jio" firstAttribute="top" secondItem="CZG-q6-ZSJ" secondAttribute="top" constant="17.5" id="O2x-nM-Xre"/>
                         <constraint firstItem="Ij1-hs-gIO" firstAttribute="centerX" secondItem="CZG-q6-ZSJ" secondAttribute="centerX" id="PG1-Wc-pvQ"/>
                         <constraint firstItem="cpV-6R-D54" firstAttribute="leading" secondItem="CZG-q6-ZSJ" secondAttribute="leading" constant="20" id="PdT-PP-sY7"/>
                         <constraint firstItem="C9K-DL-jA9" firstAttribute="leading" secondItem="5KY-bX-azV" secondAttribute="trailing" constant="10" id="Qbm-Mf-4wX"/>
                         <constraint firstItem="fQ8-4f-HHC" firstAttribute="centerY" secondItem="ao2-BR-zM3" secondAttribute="centerY" id="R9Y-XP-rt2"/>
-                        <constraint firstItem="fQ8-4f-HHC" firstAttribute="leading" secondItem="ao2-BR-zM3" secondAttribute="trailing" constant="38" id="RSP-qL-2J5"/>
+                        <constraint firstItem="fQ8-4f-HHC" firstAttribute="leading" secondItem="ao2-BR-zM3" secondAttribute="trailing" constant="28" id="RSP-qL-2J5"/>
                         <constraint firstAttribute="trailing" secondItem="C9K-DL-jA9" secondAttribute="trailing" constant="20" id="Z7B-zS-c1K"/>
                         <constraint firstItem="5KY-bX-azV" firstAttribute="centerY" secondItem="cpV-6R-D54" secondAttribute="centerY" id="d50-Nv-tAA"/>
                         <constraint firstAttribute="height" constant="135" id="dZ7-7L-XHZ"/>
-                        <constraint firstItem="oLy-SB-Bex" firstAttribute="leading" secondItem="fQ8-4f-HHC" secondAttribute="trailing" constant="38" id="gUM-IR-Jmu"/>
+                        <constraint firstItem="oLy-SB-Bex" firstAttribute="leading" secondItem="fQ8-4f-HHC" secondAttribute="trailing" constant="28" id="gUM-IR-Jmu"/>
                         <constraint firstItem="oLy-SB-Bex" firstAttribute="centerY" secondItem="fQ8-4f-HHC" secondAttribute="centerY" id="lvI-jX-gTl"/>
                         <constraint firstItem="C9K-DL-jA9" firstAttribute="width" secondItem="cpV-6R-D54" secondAttribute="width" id="qdp-2M-wJe"/>
                         <constraint firstItem="fQ8-4f-HHC" firstAttribute="centerX" secondItem="CZG-q6-ZSJ" secondAttribute="centerX" id="rSJ-bS-6JG"/>
@@ -192,7 +196,7 @@
     </objects>
     <resources>
         <image name="next" width="21" height="20"/>
-        <image name="pause" width="32" height="36"/>
+        <image name="pause" width="18" height="20"/>
         <image name="play" width="32" height="36"/>
         <image name="prev" width="21" height="20"/>
         <image name="shuffle" width="19" height="14"/>
