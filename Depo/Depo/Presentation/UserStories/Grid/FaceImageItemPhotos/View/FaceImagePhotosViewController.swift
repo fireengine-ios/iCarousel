@@ -8,6 +8,6 @@
 
 import UIKit
 
-class FaceImageItemPhotosViewController: BaseFilesGreedChildrenViewController {
+class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController {
 
 }

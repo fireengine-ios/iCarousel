@@ -23,6 +23,20 @@ class ThingsService: BaseRequestService {
         let handler = BaseResponseHandler<ThingsServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
+    
+    func getThingsAlbum(id: Int, success:@escaping (_ uuid: String) -> Void, fail:@escaping FailResponse) {
+        let param = ThingsAlbumParameters(id: id)
+        
+        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
+            if let response = response as? AlbumResponse, let albumUUID = response.list.first?.uuid {
+                success(albumUUID)
+            } else {
+                fail(ErrorResponse.failResponse(response))
+            }
+        }, fail: fail)
+        
+        executeGetRequest(param: param, handler: handler)
+    }
 }
 
 class ThingsParameters: BaseRequestParametrs {
@@ -69,6 +83,19 @@ class ThingsItem: Item {
     init(response: ThingsItemResponse) {
         responseObject = response
         super.init(thingsItemResponse: response)
+    }
+}
+
+class ThingsAlbumParameters: BaseRequestParametrs {
+    let id: Int
+    
+    init(id: Int) {
+        self.id = id
+    }
+    
+    override var patch: URL {
+        let searchWithParam = String(format: RouteRequests.thingsAlbum, id)
+        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }
 

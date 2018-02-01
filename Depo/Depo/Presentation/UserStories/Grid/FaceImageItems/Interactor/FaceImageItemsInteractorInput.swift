@@ -1,5 +1,5 @@
 //
-//  FaceImagePhotosRouter.swift
+//  FaceImageFilesInteractorInput.swift
 //  Depo_LifeTech
 //
 //  Created by Harbros Agency on 2/1/18.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class FaceImagePhotosRouter: BaseFilesGreedRouter {
-    
+protocol FaceImageItemsInteractorInput {
+    func loadItem(_ item: BaseDataSourceItem)
 }

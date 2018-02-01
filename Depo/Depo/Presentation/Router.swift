@@ -588,6 +588,13 @@ class RouterVC: NSObject {
         return controller as! BaseFilesGreedChildrenViewController
     }
     
+    //MARK: Face Image Recognition Photos
+    
+    func imageFacePhotosController(albumUUID: String, item: Item) -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImagePhotosInitializer.initializePeopleController(with: "BaseFilesGreedViewController", albumUUID: albumUUID, item: item)
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
     //MARK: Free App Space
     
     func freeAppSpace() -> UIViewController{
