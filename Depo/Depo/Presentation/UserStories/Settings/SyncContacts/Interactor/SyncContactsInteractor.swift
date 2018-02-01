@@ -76,15 +76,15 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     private func analyze() {
         contactsSyncService.analyze(progressCallback: { [weak self] (progressPercentage, type) in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 self?.output?.showProggress(progress: progressPercentage, forOperation: type)
             }
-        }, finishCallback: { (response) in
-            DispatchQueue.main.async { [weak self] in
+        }, finishCallback: { [weak self] (response) in
+            DispatchQueue.main.async {
                 self?.output?.analyzeSuccess(response: response)
             }
-        }) { (errorType, type) in
-            DispatchQueue.main.async { [weak self] in
+        }) { [weak self] (errorType, type) in
+            DispatchQueue.main.async {
                 self?.output?.showError(errorType: errorType)
             }
         }
