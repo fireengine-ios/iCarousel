@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension Notification.Name {
+    public static let changeFaceImageStatus = Notification.Name("changeFaceImageStatus")
+}
+
 final class FaceImageViewController: UIViewController {
     
     var output: FaceImageViewOutput!
@@ -50,6 +54,7 @@ extension FaceImageViewController: ActivityIndicator {
     }
     
     func stopActivityIndicator() {
+        NotificationCenter.default.post(name: .changeFaceImageStatus, object:self)
         activityManager.stop()
     }
 }

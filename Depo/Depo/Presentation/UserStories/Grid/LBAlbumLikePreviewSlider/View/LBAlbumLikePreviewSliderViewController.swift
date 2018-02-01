@@ -21,6 +21,11 @@ final class LBAlbumLikePreviewSliderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady(collectionView: collectionView)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reloadData),
+                                               name: .changeFaceImageStatus,
+                                               object: nil)
     }
     
     @objc func labelTouchRecognition(_ sender: Any) {
@@ -28,6 +33,10 @@ final class LBAlbumLikePreviewSliderViewController: UIViewController {
     }
     
     func reloadAllData() {
+        output.reloadData()
+    }
+    
+    @objc func reloadData() {
         output.reloadData()
     }
 }
