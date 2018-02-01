@@ -12,7 +12,6 @@ import SwiftyJSON
 final class AlbumCard: BaseView {
 
     private lazy var filesDataSource = FilesDataSource()
-    private lazy var homeCardsService: HomeCardsService = factory.resolve()
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -117,20 +116,9 @@ final class AlbumCard: BaseView {
         deleteCard()
     }
     
-    private func deleteCard() {
-        guard let id = cardObject?.id else {
-            return
-        }
-        homeCardsService.delete(with: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    CardsManager.default.stopOperationWithType(type: .albumCard)
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
-                }
-            }
-        }
+    override func deleteCard() {
+        CardsManager.default.stopOperationWithType(type: .albumCard)
+        super.deleteCard()
     }
     
     @IBAction private func actionAlbumViewButton(_ sender: UIButton) {

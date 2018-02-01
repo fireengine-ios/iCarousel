@@ -13,7 +13,6 @@ final class FilterPhotoCard: BaseView {
     
     private lazy var imageManager = ImageManager()
     private lazy var filesDataSource = FilesDataSource()
-    private lazy var homeCardsService: HomeCardsService = factory.resolve()
     
     @IBOutlet private weak var headerLabel: UILabel! {
         didSet {
@@ -93,20 +92,9 @@ final class FilterPhotoCard: BaseView {
         deleteCard()
     }
     
-    private func deleteCard() {
-        guard let id = cardObject?.id else {
-            return
-        }
-        homeCardsService.delete(with: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    CardsManager.default.stopOperationWithType(type: .stylizedPhoto)
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
-                }
-            }
-        }
+    override func deleteCard() {
+        CardsManager.default.stopOperationWithType(type: .stylizedPhoto)
+        super.deleteCard()
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {

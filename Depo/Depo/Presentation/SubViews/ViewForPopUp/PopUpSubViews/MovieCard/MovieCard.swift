@@ -13,7 +13,6 @@ final class MovieCard: BaseView {
     
     private lazy var imageManager = ImageManager()
     private lazy var filesDataSource = FilesDataSource()
-    private lazy var homeCardsService: HomeCardsService = factory.resolve()
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -101,20 +100,9 @@ final class MovieCard: BaseView {
         deleteCard()
     }
     
-    private func deleteCard() {
-        guard let id = cardObject?.id else {
-            return
-        }
-        homeCardsService.delete(with: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    CardsManager.default.stopOperationWithType(type: .movieCard)
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
-                }
-            }
-        }
+    override func deleteCard() {
+        CardsManager.default.stopOperationWithType(type: .movieCard)
+        super.deleteCard()
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {

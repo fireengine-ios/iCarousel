@@ -64,9 +64,14 @@ class StorageCard: BaseView {
     }
     
     @IBAction func onCloseButton(){
+        deleteCard()
+    }
+    
+    override func deleteCard() {
         if let type = operationType{
             CardsManager.default.stopOperationWithType(type: type)
         }
+        super.deleteCard()
     }
     
     func configurateWithType(viewType: OperationType){
