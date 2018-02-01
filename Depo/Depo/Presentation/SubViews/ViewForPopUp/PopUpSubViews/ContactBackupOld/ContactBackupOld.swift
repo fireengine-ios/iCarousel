@@ -78,6 +78,11 @@ class ContactBackupOld: BaseView {
     }
     
     @IBAction func onCloseButton(){
+        deleteCard()
+    }
+    
+    override func deleteCard() {
+        super.deleteCard()
         CardsManager.default.stopOperationWithType(type: .contactBacupOld)
     }
     
