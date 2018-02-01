@@ -14,7 +14,7 @@ protocol LBAlbumLikePreviewSliderDataSourceDelegate: class {
 
 class LBAlbumLikePreviewSliderDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    var collectionView: UICollectionView!
+    internal weak var collectionView: UICollectionView?
     var allItems: [SliderItem] = []
     weak var delegate: LBAlbumLikePreviewSliderDataSourceDelegate?
     
@@ -31,7 +31,9 @@ class LBAlbumLikePreviewSliderDataSource: NSObject, UICollectionViewDataSource, 
     }
     
     func reloadData() {
-        collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+        }        
     }
     
     // MARK: - UICollectionViewDataSource
