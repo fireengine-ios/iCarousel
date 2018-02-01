@@ -25,7 +25,7 @@ enum SyncOperationErrors {
 
 class SyncContactsInteractor: SyncContactsInteractorInput {
 
-    weak var output: SyncContactsInteractorOutput!
+    weak var output: SyncContactsInteractorOutput?
     
     let contactsSyncService = ContactsSyncService()
     
@@ -37,7 +37,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             performOperation(forType: .restore)
         case .cancel:
             contactsSyncService.cancel()
-            output.cancelSuccess()
+            output?.cancelSuccess()
         case .getBackUpStatus:
             loadLastBackUp()
         case .analyze:
@@ -48,44 +48,44 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     func performOperation(forType type: SYNCMode) {
-        contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, type in
-                DispatchQueue.main.async { [weak self] in
-                    self?.output.showProggress(progress: progressPercentage, forOperation: type)
+        contactsSyncService.executeOperation(type: type, progress: { [weak self] (progressPercentage, type) in
+                DispatchQueue.main.async {
+                    self?.output?.showProggress(progress: progressPercentage, forOperation: type)
                 }
-            }, finishCallback: { (result, type) in
-                DispatchQueue.main.async { [weak self] in
-                    self?.output.success(response: result, forOperation: type)
+            }, finishCallback: { [weak self] (result, type) in
+                DispatchQueue.main.async {
+                    self?.output?.success(response: result, forOperation: type)
                 }
-        }, errorCallback: { errorType, type in
-            DispatchQueue.main.async { [weak self] in
-                self?.output.showError(errorType: errorType)
+        }, errorCallback: { [weak self] (errorType, type) in
+            DispatchQueue.main.async {
+                self?.output?.showError(errorType: errorType)
             }
         })
     }
     
     private func loadLastBackUp() {
-        output.asyncOperationStarted()
+        output?.asyncOperationStarted()
         contactsSyncService.getBackUpStatus(completion: { [weak self] (model) in
-            self?.output.success(response: model, forOperation: .getBackUpStatus)
-            self?.output.asyncOperationFinished()
+            self?.output?.success(response: model, forOperation: .getBackUpStatus)
+            self?.output?.asyncOperationFinished()
         }, fail: { [weak self] in
-            self?.output.showNoBackUp()
-            self?.output.asyncOperationFinished()
+            self?.output?.showNoBackUp()
+            self?.output?.asyncOperationFinished()
         })
     }
     
     private func analyze() {
         contactsSyncService.analyze(progressCallback: { [weak self] (progressPercentage, type) in
-            DispatchQueue.main.async { [weak self] in
-                self?.output.showProggress(progress: progressPercentage, forOperation: type)
+            DispatchQueue.main.async {
+                self?.output?.showProggress(progress: progressPercentage, forOperation: type)
             }
-        }, finishCallback: { (response) in
-            DispatchQueue.main.async { [weak self] in
-                self?.output.analyzeSuccess(response: response)
+        }, finishCallback: { [weak self] (response) in
+            DispatchQueue.main.async {
+                self?.output?.analyzeSuccess(response: response)
             }
-        }) { (errorType, type) in
-            DispatchQueue.main.async { [weak self] in
-                self?.output.showError(errorType: errorType)
+        }) { [weak self] (errorType, type) in
+            DispatchQueue.main.async {
+                self?.output?.showError(errorType: errorType)
             }
         }
     }
