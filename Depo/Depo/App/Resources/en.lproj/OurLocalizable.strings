@@ -278,16 +278,10 @@
 "Your last back up was a few seconds ago." = "Your last back up was a few seconds ago.";
 "You never backed up your contacts" = "You never backed up your contacts";
 "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.";
-<<<<<<< HEAD
 "%%%d Restored…" = "%%%d Restored…";
-"%d%% Backed up…" = "%d%% Backed up…";
-"Restored %d Contacts" = "Restored %d Contacts";
-=======
-"%d%% Restored…" = "%d%% Restored…";
 "%%%d Analyzed…" = "%%%d Analyzed…";
 "%%%d Backed up…" = "%%%d Backed up…";
 "Restored %d Contacts" = "Restored %d Contacts";
->>>>>>> origin/develop
 "Backed up %d Contacts" = "Backed up %d Contacts";
 "You have %d numbers on your contacts backup." = "You have %d numbers on your contacts backup.";
 "Removed" = "Removed";
