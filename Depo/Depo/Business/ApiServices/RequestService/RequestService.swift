@@ -32,7 +32,7 @@ class RequestService {
                             method: RequestMethod,
                             timeoutInterval: TimeInterval,
                             response: @escaping RequestResponse ) -> URLSessionTask {
-        log.debug("RequestService downloadRequestTask")
+        log.debug("RequestService requestTask")
         
         var request = URLRequest(url: patch)
             request.timeoutInterval = timeoutInterval
