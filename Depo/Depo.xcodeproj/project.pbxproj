@@ -214,6 +214,13 @@
 		78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */; };
 		78DDEF9C201908C100E3530B /* String+CyrillicCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */; };
 		78DDEF9D201908CB00E3530B /* String+CyrillicCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */; };
+		78E8E2A72023186C00A979AB /* FaceImageItemPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A52023186C00A979AB /* FaceImageItemPhotosViewController.swift */; };
+		78E8E2A82023186C00A979AB /* FaceImageItemPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E8E2A62023186C00A979AB /* FaceImageItemPhotosViewController.xib */; };
+		78E8E2AA2023189F00A979AB /* FaceImagePhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */; };
+		78E8E2AC202318E700A979AB /* FaceImagePhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AB202318E700A979AB /* FaceImagePhotosInteractor.swift */; };
+		78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AD2023191800A979AB /* FaceImagePhotosRouter.swift */; };
+		78E8E2B02023195600A979AB /* FaceImagePhotosInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AF2023195600A979AB /* FaceImagePhotosInitializer.swift */; };
+		78E8E2B22023196B00A979AB /* FaceImagePhotosConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B12023196B00A979AB /* FaceImagePhotosConfigurator.swift */; };
 		78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */; };
 		78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */; };
 		7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */; };
@@ -3482,6 +3489,13 @@
 		78D9BA452007E82700F2233F /* DuplicatedContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewController.swift; sourceTree = "<group>"; };
 		78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewOutput.swift; sourceTree = "<group>"; };
 		78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CyrillicCompare.swift"; sourceTree = "<group>"; };
+		78E8E2A52023186C00A979AB /* FaceImageItemPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemPhotosViewController.swift; sourceTree = "<group>"; };
+		78E8E2A62023186C00A979AB /* FaceImageItemPhotosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceImageItemPhotosViewController.xib; sourceTree = "<group>"; };
+		78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosPresenter.swift; sourceTree = "<group>"; };
+		78E8E2AB202318E700A979AB /* FaceImagePhotosInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosInteractor.swift; sourceTree = "<group>"; };
+		78E8E2AD2023191800A979AB /* FaceImagePhotosRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosRouter.swift; sourceTree = "<group>"; };
+		78E8E2AF2023195600A979AB /* FaceImagePhotosInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosInitializer.swift; sourceTree = "<group>"; };
+		78E8E2B12023196B00A979AB /* FaceImagePhotosConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosConfigurator.swift; sourceTree = "<group>"; };
 		78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorInput.swift; sourceTree = "<group>"; };
 		78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactTableViewCell.swift; sourceTree = "<group>"; };
 		78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DuplicatedContactTableViewCell.xib; sourceTree = "<group>"; };
@@ -6572,6 +6586,60 @@
 			children = (
 				78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */,
 				78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		78E8E29F202317A300A979AB /* FaceImageItemPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2A0202317BA00A979AB /* View */,
+				78E8E2A1202317C000A979AB /* Presenter */,
+				78E8E2A2202317C500A979AB /* Interactor */,
+				78E8E2A3202317CE00A979AB /* Router */,
+				78E8E2A4202317D600A979AB /* Configurator */,
+			);
+			path = FaceImageItemPhotos;
+			sourceTree = "<group>";
+		};
+		78E8E2A0202317BA00A979AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2A52023186C00A979AB /* FaceImageItemPhotosViewController.swift */,
+				78E8E2A62023186C00A979AB /* FaceImageItemPhotosViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		78E8E2A1202317C000A979AB /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		78E8E2A2202317C500A979AB /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2AB202318E700A979AB /* FaceImagePhotosInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		78E8E2A3202317CE00A979AB /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2AD2023191800A979AB /* FaceImagePhotosRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		78E8E2A4202317D600A979AB /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2AF2023195600A979AB /* FaceImagePhotosInitializer.swift */,
+				78E8E2B12023196B00A979AB /* FaceImagePhotosConfigurator.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -9971,6 +10039,7 @@
 		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				78E8E29F202317A300A979AB /* FaceImageItemPhotos */,
 				4A9B38F8201F3189009FC572 /* FaceImageItems */,
 				7C6945D620039F4A00152344 /* FreeAppSpace */,
 				7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */,
@@ -12110,6 +12179,7 @@
 				8C06AF942008AD71003D8E05 /* filtre@3x.png in Resources */,
 				7CEEC1BD1F3326C900BD433F /* CreateStoryPhotosOrderViewController.xib in Resources */,
 				8C06AF0C2008AD70003D8E05 /* checkbox@2x.png in Resources */,
+				78E8E2A82023186C00A979AB /* FaceImageItemPhotosViewController.xib in Resources */,
 				8C06AFB02008AD71003D8E05 /* frekans@2x.png in Resources */,
 				CEBBDE071F01E69B00CDF527 /* TurkcellSaturaBol.ttf in Resources */,
 				8C06AF322008AD70003D8E05 /* cizgi_3_selected.png in Resources */,
@@ -14033,6 +14103,7 @@
 				7859299020060E85003F8AB3 /* ManageContactsRouterInput.swift in Sources */,
 				78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */,
 				CE51AC0D1EF90853005DCEE0 /* UIAlertViewCustom.m in Sources */,
+				78E8E2AC202318E700A979AB /* FaceImagePhotosInteractor.swift in Sources */,
 				CE51AC151EF90853005DCEE0 /* UpdaterController.m in Sources */,
 				CE2976DD1FD58E2000350F3A /* LocalAlbumPresenter.swift in Sources */,
 				CE4140631F0A5F6D001924E1 /* CaptchaViewController.swift in Sources */,
@@ -14091,6 +14162,7 @@
 				CEAE3F841EFD3FC800A405B2 /* MediaService.swift in Sources */,
 				8CFF86941F0F96E600520D18 /* SyncStatus.m in Sources */,
 				CEC05B6A1F05399100332EBA /* PhoneVereficationDataStorage.swift in Sources */,
+				78E8E2B22023196B00A979AB /* FaceImagePhotosConfigurator.swift in Sources */,
 				8C00971A1F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				CE51AC6C1EF90853005DCEE0 /* CurioPushData.m in Sources */,
 				8C6EF8811F348B5C002AC795 /* BottomSelectionTabBarViewController.swift in Sources */,
@@ -14104,6 +14176,7 @@
 				8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */,
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
 				7CD1F8FC1F0288CA0028F51A /* WiFiSyncViewController.swift in Sources */,
+				78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */,
 				78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */,
 				CE51AC7E1EF90853005DCEE0 /* LoginInitializer.swift in Sources */,
 				4A9B3908201F3533009FC572 /* FaceImageFilesRouter.swift in Sources */,
@@ -14126,6 +14199,7 @@
 				CE51AC941EF90853005DCEE0 /* Controller.m in Sources */,
 				4A8CC308201A016F00C040C4 /* FaceImageViewInput.swift in Sources */,
 				CEAE3FB01EFD4F0D00A405B2 /* HomePageConfigurator.swift in Sources */,
+				78E8E2AA2023189F00A979AB /* FaceImagePhotosPresenter.swift in Sources */,
 				7C49881C1F3320420039C5F2 /* CreateStoryPhotosOrderRouterInput.swift in Sources */,
 				7C6E2F961F31E4F800536DB6 /* CreateStoryNameRouterInput.swift in Sources */,
 				7CCAC5331FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
@@ -14456,6 +14530,7 @@
 				CE6DE7581FCBE84100C23CBD /* FBResponses.swift in Sources */,
 				C065DB441478A7A0231FDCEE /* HomeHeaderRouterInput.swift in Sources */,
 				8C12F695CDDDA2217C118FAD /* HomeHeaderRouter.swift in Sources */,
+				78E8E2B02023195600A979AB /* FaceImagePhotosInitializer.swift in Sources */,
 				1DB68FAB905B6E98B07736B7 /* HomeHeaderConfigurator.swift in Sources */,
 				9C583593E55BA0F9A4F6B53D /* HomeHeaderInitializer.swift in Sources */,
 				DE10EF65DE653E0EDBEC8C17 /* BaseFilesGreedViewInput.swift in Sources */,
@@ -14578,6 +14653,7 @@
 				EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */,
 				D49886611F3EFBE200F50C95 /* ImportPhotosViewInput.swift in Sources */,
 				8C0097161F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift in Sources */,
+				78E8E2A72023186C00A979AB /* FaceImageItemPhotosViewController.swift in Sources */,
 				876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */,
 				65F920DAC010E5F0859369FE /* SyncContactsConfigurator.swift in Sources */,
 				7859298C20060E7D003F8AB3 /* ManageContactsViewInput.swift in Sources */,

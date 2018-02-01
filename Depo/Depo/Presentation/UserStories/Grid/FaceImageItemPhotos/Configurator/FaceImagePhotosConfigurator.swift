@@ -8,6 +8,6 @@
 
 import UIKit
 
-class FaceImagePhotosConfigurator: NSObject {
+class FaceImagePhotosConfigurator {
 
 }
