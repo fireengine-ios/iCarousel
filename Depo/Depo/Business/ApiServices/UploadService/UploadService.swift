@@ -49,7 +49,6 @@ final class UploadService: BaseRequestService {
         uploadQueue.underlyingQueue = dispatchQueue
     
         super.init()
-        SingletonStorage.shared.uploadProgressDelegate = self
     }
 
     
@@ -426,6 +425,8 @@ final class UploadService: BaseRequestService {
         if video {
             finishedVideoSyncOperationsCount = 0
         }
+        
+        showSyncCardProgress()
     }
     
     func cancelOperations(with assets: [PHAsset]?) {
@@ -507,17 +508,6 @@ final class UploadService: BaseRequestService {
     }
 }
 
-extension UploadService: UploadProgressServiceDelegate {
-
-    func didSend(ratio: Float, for tempUUID: String) {
-        if let uploadOperation = uploadOperations.first(where: {$0.item.uuid == tempUUID}){
-            if let uploadType = uploadOperation.uploadType{
-                CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: uploadOperation.item)
-            }
-            ItemOperationManager.default.setProgressForUploadingFile(file: uploadOperation.item, progress: ratio)
-        }
-    }
-}
 
 extension UploadService {
     fileprivate func showOutOfSpaceAlert() {
@@ -575,7 +565,7 @@ class UploadOperations: Operation {
         
         super.init()
         self.qualityOfService = (uploadType == .autoSync) ? .background : .userInitiated
-        
+        SingletonStorage.shared.progressDelegates.add(self)
     }
     
     init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: UploadOperationSuccess?, fail: FailResponse?) {
@@ -593,7 +583,7 @@ class UploadOperations: Operation {
         
         super.init()
         self.qualityOfService = (uploadType == .autoSync) ? .default : .userInitiated
-        
+        SingletonStorage.shared.progressDelegates.add(self)
     }
     
     override func cancel() {
@@ -705,4 +695,20 @@ class UploadOperations: Operation {
                                            fail: fail)
     }
 }
+
+
+extension UploadOperations: OperationProgressServiceDelegate {
+    func didSend(ratio: Float, for tempUUID: String) {
+        guard !isRealCancel else {
+            return
+        }
+        
+        if item.uuid == tempUUID, let uploadType = uploadType {
+            CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: item)
+            ItemOperationManager.default.setProgressForUploadingFile(file: item, progress: ratio)
+        }
+    }
+}
+
+
 
