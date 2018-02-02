@@ -48,7 +48,7 @@
                     </imageView>
                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nml-wh-Hsd">
                         <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                        <color key="backgroundColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.37647058823529411" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </subviews>
             </view>

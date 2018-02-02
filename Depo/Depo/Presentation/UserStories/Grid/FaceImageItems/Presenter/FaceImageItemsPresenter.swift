@@ -22,6 +22,14 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
         }
     }
     
+    override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
+    
+    override func selectPressed(type: MoreActionsConfig.SelectedType) { }
+    
+    override func selectModeSelected() { }
+    
+    override func onLongPressInCell() { }
+    
     // MARK: - Interactor Output
     
     func didLoadAlbum(_ albumUUID: String, forItem item: Item) {

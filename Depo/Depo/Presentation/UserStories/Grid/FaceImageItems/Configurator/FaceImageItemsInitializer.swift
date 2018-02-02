@@ -12,6 +12,7 @@ class FaceImageItemsInitializer: NSObject {
 
     class func initializePeopleController(with nibName:String) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
+        viewController.isCanChangeVisibility = true
     
         let configurator = FaceImageItemsConfigurator()
         

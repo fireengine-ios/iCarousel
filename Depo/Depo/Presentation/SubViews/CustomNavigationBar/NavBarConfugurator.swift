@@ -21,6 +21,8 @@ class NavigationBarList {
     
     let delete: UIBarButtonItem
     
+    let showHide: UIBarButtonItem
+    
     init(){
         settings = UIBarButtonItem(image: UIImage(named: TextConstants.cogBtnImgName),
                              style: .plain,
@@ -46,6 +48,12 @@ class NavigationBarList {
                                  target: nil,
                                  action: nil)
         delete.accessibilityLabel = TextConstants.accessibilityDelete
+        
+        showHide = UIBarButtonItem.init(title: TextConstants.showHideBtnTitleName,
+                                        style: .plain,
+                                        target: nil,
+                                        action: nil)
+        showHide.accessibilityLabel = TextConstants.accessibilityshowHide
         
         // upload 
         // create

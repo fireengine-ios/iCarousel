@@ -21,7 +21,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         nameLabel.textColor = ColorConstants.whiteColor
-        nameLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        nameLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
@@ -44,7 +44,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
             let isVisible = peopleItem.responseObject.visible,
             isVisible == false{
             visibleImageView.isHidden = isVisible
-            transperentView.alpha = 0.4
+            transperentView.alpha = 0.6
         }
     }
     

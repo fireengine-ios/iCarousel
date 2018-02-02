@@ -10,17 +10,25 @@ import UIKit
 
 class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     
+    var isCanChangeVisibility: Bool = false
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(title: mainTitle)
+        setTitle(withString: mainTitle )
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
-    override func configureNavBarActions(isSelecting: Bool = false) {
-        super.configureNavBarActions(isSelecting: isSelecting)
+    override func configurateNavigationBar(){
+        if (isCanChangeVisibility) {
+            configurateFaceImagePeopleActions {
+            }
+        } else {
+            navigationItem.rightBarButtonItems = nil
+        }
+        
     }
-    
+
 }

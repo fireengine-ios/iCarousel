@@ -193,6 +193,26 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
     
+    func configurateFaceImagePeopleActions(showHideAction: @escaping () -> Swift.Void) {
+        let showHide = NavBarWithAction(navItem: NavigationBarList().showHide, action: { (_) in
+            showHideAction()
+        })
+        
+        navBarConfigurator.configure(right: [showHide], left: [])
+        
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+    
+    func configureFaceImageItemsPhotoActions() {
+        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+        })
+        let rightActions: [NavBarWithAction] = [more]
+        navBarConfigurator.configure(right: rightActions, left: [])
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+
+    
     @IBAction func onStartCreatingFilesButton(){
         output.onStartCreatingPhotoAndVideos()
     }
