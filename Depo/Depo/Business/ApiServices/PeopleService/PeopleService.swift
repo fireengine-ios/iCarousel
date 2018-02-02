@@ -20,7 +20,7 @@ class PeopleService: BaseRequestService {
     func getPeoplePage(param: PeoplePageParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
         log.debug("SearchService suggestion")
         
-        let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
+        let handler = BaseResponseHandler<PeoplePageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
@@ -49,15 +49,8 @@ class PeopleItemsService: RemoteItemsService {
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         let param = PeoplePageParameters(pageSize: requestSize, pageNumber: currentPage)
         
-        // TO-DO: Delete when back-end will deploy
-        if currentPage > 0 {
-            success?([PeopleItem]())
-            return
-        }
-        // END
-        
         service.getPeoplePage(param: param, success: { [weak self] (response) in
-            if let response = response as? PeopleServiceResponse {
+            if let response = response as? PeoplePageResponse, !response.list.isEmpty {
                 success?(response.list.map({ PeopleItem(response: $0) }))
                 self?.currentPage += 1
             } else {
@@ -90,7 +83,6 @@ class PeopleAlbumParameters: BaseRequestParametrs {
 }
 
 class PeoplePageParameters: BaseRequestParametrs {
-    
     let pageSize: Int
     let pageNumber: Int
     
@@ -100,14 +92,7 @@ class PeoplePageParameters: BaseRequestParametrs {
     }
     
     override var patch: URL {
-//        let searchWithParam = String(format: RouteRequests.peoplePage, pageSize, pageNumber)
-//
-//        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
-        
-        // TO-DO: Use commented version when back-end will deploy
-        
-        let searchWithParam = String(format: RouteRequests.people)
-        
+        let searchWithParam = String(format: RouteRequests.peoplePage, pageSize, pageNumber)
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }

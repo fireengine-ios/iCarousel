@@ -13,6 +13,7 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
     override func viewIsReady(collectionView: UICollectionView) {
         super.viewIsReady(collectionView: collectionView)
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
+        dataSource.isHeaderless = true
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {

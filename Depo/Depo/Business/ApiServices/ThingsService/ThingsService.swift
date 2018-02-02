@@ -20,7 +20,7 @@ class ThingsService: BaseRequestService {
     func getThingsPage(param: ThingsPageParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
         log.debug("SearchService suggestion")
         
-        let handler = BaseResponseHandler<ThingsServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
+        let handler = BaseResponseHandler<ThingsPageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
@@ -57,15 +57,8 @@ class ThingsItemsService: RemoteItemsService {
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         let param = ThingsPageParameters(pageSize: requestSize, pageNumber: currentPage)
         
-        // TO-DO: Delete when back-end will deploy
-        if currentPage > 0 {
-            success?([PeopleItem]())
-            return
-        }
-        // END
-        
         service.getThingsPage(param: param, success: { [weak self] (response) in
-            if let response = response as? ThingsServiceResponse {
+            if let response = response as? ThingsPageResponse, !response.list.isEmpty {
                 success?(response.list.map({ ThingsItem(response: $0) }))
                 self?.currentPage += 1
             } else {
@@ -109,14 +102,7 @@ class ThingsPageParameters: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        //        let searchWithParam = String(format: RouteRequests.thingsPage, pageSize, pageNumber)
-        //
-        //        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
-        
-        // TO-DO: Use commented version when back-end will deploy
-        
-        let searchWithParam = String(format:RouteRequests.things)
-        
+        let searchWithParam = String(format: RouteRequests.thingsPage, pageSize, pageNumber)
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }

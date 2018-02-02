@@ -14,6 +14,7 @@ struct PeopleJsonKey {
     static let name = "name"
     static let thumbnail = "thumbnail"
     static let visible = "visible"
+    static let personInfos = "personInfos"
 }
 
 
@@ -40,6 +41,17 @@ class PeopleServiceResponse: ObjectRequestResponse {
     
     override func mapping() {
         if let result = json?.array?.flatMap( {PeopleItemResponse(withJSON: $0)}) {
+            list = result
+        }
+    }
+}
+
+class PeoplePageResponse: ObjectRequestResponse {
+    
+    var list: Array<PeopleItemResponse> = []
+    
+    override func mapping() {
+        if let result = json?[PeopleJsonKey.personInfos].array?.flatMap( {PeopleItemResponse(withJSON: $0)}) {
             list = result
         }
     }

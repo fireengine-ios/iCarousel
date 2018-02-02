@@ -13,6 +13,7 @@ struct ThingsJsonKey {
     static let code = "code"
     static let thumbnail = "thumbnail"
     static let name = "name"
+    static let objectInfos = "objectInfos"
 }
 
 class ThingsItemResponse: ObjectRequestResponse {
@@ -36,6 +37,16 @@ class ThingsServiceResponse: ObjectRequestResponse {
     
     override func mapping() {
         if let result = json?.array?.flatMap( {ThingsItemResponse(withJSON: $0)}) {
+            list = result
+        }
+    }
+}
+
+class ThingsPageResponse: ObjectRequestResponse {
+    var list: Array<ThingsItemResponse> = []
+    
+    override func mapping() {
+        if let result = json?[ThingsJsonKey.objectInfos].array?.flatMap( {ThingsItemResponse(withJSON: $0)}) {
             list = result
         }
     }

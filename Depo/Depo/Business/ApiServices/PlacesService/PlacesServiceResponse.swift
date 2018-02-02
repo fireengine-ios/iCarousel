@@ -13,6 +13,7 @@ struct PlacesJsonKey {
     static let adminLevel = "adminLevel"
     static let thumbnail = "thumbnail"
     static let name = "name"
+    static let locationInfos = "locationInfos"
 }
 
 class PlacesItemResponse: ObjectRequestResponse {
@@ -32,11 +33,20 @@ class PlacesItemResponse: ObjectRequestResponse {
 }
 
 class PlacesServiceResponse: ObjectRequestResponse {
-    
     var list: Array<PlacesItemResponse> = []
     
     override func mapping() {
         if let result = json?.array?.flatMap( {PlacesItemResponse(withJSON: $0)}) {
+            list = result
+        }
+    }
+}
+
+class PlacesPageResponse: ObjectRequestResponse {
+    var list: Array<PlacesItemResponse> = []
+    
+    override func mapping() {
+        if let result = json?[PlacesJsonKey.locationInfos].array?.flatMap( {PlacesItemResponse(withJSON: $0)}) {
             list = result
         }
     }
