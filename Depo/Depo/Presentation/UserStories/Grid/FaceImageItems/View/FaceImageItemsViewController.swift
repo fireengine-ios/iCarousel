@@ -10,6 +10,8 @@ import UIKit
 
 class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     
+    var isCanChangeVisibility: Bool = false
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTitle(withString: mainTitle )
@@ -20,9 +22,13 @@ class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     }
 
     override func configurateNavigationBar(){
-        configurateFaceImageItemsActions {
-            
+        if (isCanChangeVisibility) {
+            configurateFaceImagePeopleActions {
+            }
+        } else {
+            navigationItem.rightBarButtonItems = nil
         }
+        
     }
 
 }
