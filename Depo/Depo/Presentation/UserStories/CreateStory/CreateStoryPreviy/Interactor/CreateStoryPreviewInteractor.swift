@@ -41,6 +41,7 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
         CreateStoryService().createStory(createStory: parameter, success: {[weak self] in
             DispatchQueue.main.async {
                 self?.output?.storyCreated()
+                ItemOperationManager.default.newStoryCreated()
             }
             
             }, fail: {[weak self] (error) in
