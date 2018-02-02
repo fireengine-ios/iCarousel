@@ -16,6 +16,7 @@ class BaseView: UIView, NibInit {
     static let baseViewCornerRadius: CGFloat = 5
     var calculatedH: CGFloat = 0
     var cardObject: HomeCardResponse? = nil
+    lazy var homeCardsService: HomeCardsService = factory.resolve()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,7 +33,24 @@ class BaseView: UIView, NibInit {
     }
     
     func viewDeletedBySwipe(){
+        deleteCard()
+    }
+    
+    func deleteCard(){
+        guard let id = cardObject?.id else {
+            return
+        }
         
+        homeCardsService.delete(with: id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    return
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                }
+            }
+        }
     }
     
 }

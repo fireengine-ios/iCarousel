@@ -310,7 +310,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     // MARK: Bottom Bar
     
-    private func canShow3DotsButton() -> Bool {
+    private func canShow3DotsButtonInSelectionMode() -> Bool {
         let array = dataSource.getSelectedItems().filter {
             if $0.isLocalItem && $0.fileType == .video {
                 return false
@@ -320,10 +320,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return !array.isEmpty
     }
     
+    private func canShow3DotsButton() -> Bool {
+        return !alertSheetActions().isEmpty
+    }
+    
     private func startEditing() {
         let selectedItemsCount = dataSource.selectedItemsArray.count
         view.startSelection(with: selectedItemsCount)
-        view.setThreeDotsMenu(active: canShow3DotsButton())
+        view.setThreeDotsMenu(active: canShow3DotsButtonInSelectionMode())
         dataSource.setSelectionState(selectionState: true)
     }
     
@@ -333,7 +337,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         view.stopSelection()
         dataSource.setSelectionState(selectionState: false)
-        view.setThreeDotsMenu(active: true)
+        view.setThreeDotsMenu(active: canShow3DotsButton())
     }
     
     private func updateNoFilesView() {
@@ -350,26 +354,27 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             view.hideNoFiles()
         }
+        view.setThreeDotsMenu(active: canShow3DotsButton())
     }
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         setupNewBottomBarConfig()
         log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount")
 
-        if (selectedItemsCount == 0){
+        if (selectedItemsCount == 0) {
             log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
 
             bottomBarPresenter?.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
-        }else{
+        } else {
             log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
 
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
         
         
-        view.setThreeDotsMenu(active: canShow3DotsButton())
-        self.view.selectedItemsCountChange(with: selectedItemsCount)
+        view.setThreeDotsMenu(active: canShow3DotsButtonInSelectionMode())
+        view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
     func setupNewBottomBarConfig() {
@@ -465,11 +470,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
     }
     
-    func moreActionsPressed(sender: Any) {
-        
-        let selectionMode = dataSource.isInSelectionMode()
+    func alertSheetActions() -> [ElementTypes] {
         var actionTypes = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
-        if selectionMode {
+        if dataSource.isInSelectionMode() {
             let selectedItemsUUIDs = Array(dataSource.selectedItemsArray)
             var selectedItems = [WrapData]()
             
@@ -487,7 +490,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             if selectedItems.count != 1, let renameIndex = actionTypes.index(of: .rename) {
                 actionTypes.remove(at: renameIndex)
             }
-
+            
             if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: {$0.fileType == .image}) {
                 actionTypes.remove(at: printIndex)
             }
@@ -511,18 +514,37 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 }
                 
             }
+        } else {
+            actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             
-            alertSheetModule?.showAlertSheet(with: actionTypes,
+            let itemsCount: Int
+            if let dataSource = dataSource as? ArrayDataSourceForCollectionView {
+                itemsCount = dataSource.tableDataMArray.count
+            } else {
+                itemsCount = dataSource.allMediaItems.count
+            }
+            
+            if itemsCount == 0, let downloadIdex = actionTypes.index(of: .download) {
+                actionTypes.remove(at: downloadIdex)
+            }
+            
+            if itemsCount == 0, let selectIdex = actionTypes.index(of: .select) {
+                actionTypes.remove(at: selectIdex)
+            }
+        }
+        
+        return actionTypes
+    }
+    
+    func moreActionsPressed(sender: Any) {
+        if dataSource.isInSelectionMode() {
+            alertSheetModule?.showAlertSheet(with: alertSheetActions(),
                                              items: selectedItems,
                                              presentedBy: sender,
                                              onSourceView: nil,
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
-            actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
-            if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.index(of: .download) {
-                actionTypes.remove(at: downloadIdex)
-            }
-            alertSheetModule?.showAlertSheet(with: actionTypes,
+            alertSheetModule?.showAlertSheet(with: alertSheetActions(),
                                              presentedBy: sender,
                                              onSourceView: nil)
         }

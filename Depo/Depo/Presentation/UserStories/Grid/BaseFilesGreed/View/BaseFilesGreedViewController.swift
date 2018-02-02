@@ -112,7 +112,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        configurateNavigationBar()
         editingTabBar?.view.layoutIfNeeded()
         
         if mainTitle != "" {
@@ -134,7 +134,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        configurateNavigationBar()
         configurateViewForPopUp()
     }
     
@@ -186,8 +185,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
             deleteAction()
         })
-
-        navBarConfigurator.configure(right: [delete], left: [])
+        
+        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+        })
+        
+        navBarConfigurator.configure(right: [more, delete], left: [])
         
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
         navigationItem.leftBarButtonItem = backAsCancelBarButton
