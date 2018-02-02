@@ -202,6 +202,15 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
+    
+    func configureFaceImageItemsPhotoActions() {
+        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+        })
+        let rightActions: [NavBarWithAction] = [more]
+        navBarConfigurator.configure(right: rightActions, left: [])
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
 
     
     @IBAction func onStartCreatingFilesButton(){

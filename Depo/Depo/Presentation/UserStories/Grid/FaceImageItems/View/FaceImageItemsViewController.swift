@@ -12,7 +12,7 @@ class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(title: mainTitle)
+        setTitle(withString: mainTitle )
     }
     
     override func viewDidLoad() {
