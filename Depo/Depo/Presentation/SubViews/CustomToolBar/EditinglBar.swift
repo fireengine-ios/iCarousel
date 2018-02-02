@@ -40,6 +40,7 @@ enum ElementTypes {
     //all files/select
     case select
     case selectAll
+    case deSelectAll
     //doc viewing
     case documentDetails
     //music

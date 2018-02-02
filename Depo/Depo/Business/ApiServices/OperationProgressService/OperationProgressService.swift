@@ -1,5 +1,5 @@
 //
-//  UploadPregressService.swift
+//  OperationProgressService.swift
 //  Depo_LifeTech
 //
 //  Created by Konstantin on 12/11/17.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol UploadProgressServiceDelegate: class {
+protocol OperationProgressServiceDelegate: class {
     func didSend(ratio: Float, for tempUUID: String)
 }
