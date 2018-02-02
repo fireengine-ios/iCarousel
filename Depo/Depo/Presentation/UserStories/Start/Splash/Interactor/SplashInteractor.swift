@@ -61,7 +61,11 @@ class SplashInteractor: SplashInteractorInput {
             }
         }) { [weak self] (errorResponce) in
             DispatchQueue.main.async {
-                self?.output.onFailEULA()
+                if case ErrorResponse.error(let error) = errorResponce, error is URLError {
+                    UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+                } else {
+                    self?.output.onFailEULA()
+                }
             }
         }
     }

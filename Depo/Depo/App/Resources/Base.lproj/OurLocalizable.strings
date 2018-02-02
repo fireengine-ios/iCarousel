@@ -17,7 +17,7 @@
 "Lifebox campaign" = "Lifebox campaign";
 "Success" = "Success";
 "Apply" = "Apply";
-"Please check your internet connection is active and Cellular Data is ON under Settings/lifebox." = "Please check your internet connection is active and Cellular Data is ON under Settings/lifebox.";
+"Please check your internet connection is active and Mobile Data is ON." = "Please check your internet connection is active and Mobile Data is ON.";
 "Invalid passcode. %@ attempts left. Please try again" = "Invalid passcode. %@ attempts left. Please try again";
 "Touch ID" = "Touch ID";
 "Face ID" = "Face ID";
