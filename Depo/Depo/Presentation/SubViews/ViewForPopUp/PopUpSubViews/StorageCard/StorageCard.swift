@@ -102,9 +102,8 @@ class StorageCard: BaseView {
             iconView.image = UIImage(named: "CardIconLamp")
             
             titleLabel.text = TextConstants.homeStorageCardLocalTitle
-            let percent = Device.getFreeDiskSpaceInPercent
+            let percent = Int(exactly: Device.getFreeDiskSpaceInPercent) ?? 0
             subTileLabel.text = String(format: TextConstants.homeStorageCardLocalSubTitle, percent)
-            
             
             bottomButton.setTitle(TextConstants.homeStorageCardLocalBottomButtonTitle, for: .normal)
             bottomButton.setTitleColor(ColorConstants.redGradientEnd, for: .normal)
@@ -123,7 +122,7 @@ class StorageCard: BaseView {
     }
     
     func configurateByResponceObject(){
-        if operationType == .freeAppSpaceCloudWarning, let percent = cardObject?.details?["usage-percentage"].float{
+        if operationType == .freeAppSpaceCloudWarning, let percent = cardObject?.details?["usage-percentage"].int{
             subTileLabel.text = String(format: TextConstants.homeStorageCardCloudSubTitle, percent)
         }
     }
