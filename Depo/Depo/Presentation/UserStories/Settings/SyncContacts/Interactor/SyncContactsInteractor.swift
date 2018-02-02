@@ -55,6 +55,8 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             }, finishCallback: { [weak self] (result, type) in
                 DispatchQueue.main.async {
                     self?.output?.success(response: result, forOperation: type)
+                    CardsManager.default.stopOperationWithType(type: .contactBacupOld)
+                    CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
                 }
         }, errorCallback: { [weak self] (errorType, type) in
             DispatchQueue.main.async {

@@ -95,7 +95,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         }
     }
     
-    func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) -> URL? {
+    @discardableResult func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) -> URL? {
         if isOriginal {
             switch item.patchToPreview {
             case let .localMediaContent(local):
