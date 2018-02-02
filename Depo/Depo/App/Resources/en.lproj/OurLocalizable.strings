@@ -256,7 +256,7 @@
 "Continue" = "Continue";
 "Please Choose 20 files at most" = "Please Choose 20 files at most";
 "Sorry, but story name should not be empty" = "Sorry, but story name should not be empty";
-"You need to enable access to Contacts to continue. \"Settings - Privacy - Contacts\"." = "You need to enable access to Contacts to continue. \"Settings - Privacy - Contacts\".";
+"You need to enable access to Contacts to continue" = "You need to enable access to Contacts to continue";
 "SAVE" = "SAVE";
 "Name" = "Name";
 "Create a Name" = "Create a Name";
