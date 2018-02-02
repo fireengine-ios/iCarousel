@@ -13,7 +13,7 @@ typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatu
 
 typealias FileDataSorceImg = (_ image: UIImage?) -> ()
 
-typealias AssetInfo = (url: URL, size: UInt64, md5: String)
+typealias AssetInfo = (url: URL, name: String, size: UInt64, md5: String)
 
 typealias AssetsList = (_ assets: [PHAsset] ) -> ()
 
@@ -165,13 +165,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                         fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
                         
                         if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
-                            let info = self.fullInfoAboutAsset(asset: asset)
                             
-                            let baseMediaContent = BaseMediaContent(curentAsset: asset,
-                                                                    urlToFile: info.url,
-                                                                    size: info.size,
-                                                                    md5: info.md5)
-                            item.preview = WrapData(baseModel: baseMediaContent)
+                            item.preview = WrapData(asset: asset)
                         }
                         albums.append(item)
                     }
@@ -323,13 +318,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     private func merge(asset assetIdentifier: String, with item: WrapData) {
         
         if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
-            let info = fullInfoAboutAsset(asset: asset)
-            
-            let baseMediaContent = BaseMediaContent(curentAsset: asset,
-                                                    urlToFile: info.url,
-                                                    size: info.size,
-                                                    md5: info.md5)
-            let wrapData = WrapData(baseModel: baseMediaContent)
+   
+            let wrapData = WrapData(asset: asset)
             wrapData.copyFileData(from: item)
             
             let context = CoreDataStack.default.mainContext
@@ -486,7 +476,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             return shortInfoAboutVideoAsset(asset:asset)
             
         default:
-            return (url: LocalMediaStorage.defaultUrl, size: 0, md5: LocalMediaStorage.noneMD5)
+            return (url: LocalMediaStorage.defaultUrl, name: "", size: 0, md5: LocalMediaStorage.noneMD5)
         }
     }
     
@@ -497,7 +487,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let md5: String = LocalMediaStorage.noneMD5
         let size: UInt64 = 0
 
-        return (url: url, size: size, md5: md5)
+        return (url: url, name:"", size: size, md5: md5)
     }
     
     func shortInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
@@ -507,7 +497,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let md5: String = LocalMediaStorage.noneMD5
         let size: UInt64 = 0
 
-        return (url: url, size: size, md5: md5)
+        return (url: url, name:"", size: size, md5: md5)
     }
     
     func fullInfoAboutAsset(asset: PHAsset) -> AssetInfo {
@@ -521,7 +511,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             return fullInfoAboutVideoAsset(asset:asset)
         
         default:
-            return (url: LocalMediaStorage.defaultUrl, size: 0, md5: LocalMediaStorage.noneMD5)
+            return (url: LocalMediaStorage.defaultUrl, name: "", size: 0, md5: LocalMediaStorage.noneMD5)
         }
     }
     
@@ -529,9 +519,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         log.debug("LocalMediaStorage fullInfoAboutVideoAsset")
 
         var url: URL =  LocalMediaStorage.defaultUrl
-        let md5: String = LocalMediaStorage.noneMD5
+        var md5: String = LocalMediaStorage.noneMD5
         var size: UInt64 = 0
         let semaphore = DispatchSemaphore(value: 0)
+        var originalFileName = ""
         
         let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { (avAsset, aVAudioMix, Dict) in
             if let urlToFile = (avAsset as? AVURLAsset)?.url {
@@ -541,6 +532,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
 //                    if let fileName = asset.value(forKey: "filename") as? String {
 //                        md5 = String(format: "%@%i", fileName, size) //MD5().hexMD5fromFileUrl(urlToFile)
 //                    }
+                    let resources = PHAssetResource.assetResources(for: asset)
+                    if let resource = resources.first {
+                        originalFileName = resource.originalFilename
+                    }
+                    md5 = String(format: "%@%i", originalFileName, size)
                     semaphore.signal()
                 } catch  {
                     semaphore.signal()
@@ -553,26 +549,32 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         getDetailQueue.addOperation(operation)
         /// added timeout bcz callback from "requestAVAsset(forVideo" may not come
         _ = semaphore.wait(timeout: .now() + .seconds(40))
-        return (url: url, size: size, md5: md5)
+        return (url: url, name: originalFileName, size: size, md5: md5)
     }
     
     func fullInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutImageAsset")
         
         var url: URL = LocalMediaStorage.defaultUrl
-        let md5: String = LocalMediaStorage.noneMD5
+        var md5: String = LocalMediaStorage.noneMD5
         var size: UInt64 = 0
+        var originalFileName = ""
         
         let semaphore = DispatchSemaphore(value: 0)
         let operation = GetOriginalImageOperation(photoManager: self.photoManger,
                                                   asset: asset) { (data, string, orientation, dict) in
             if let wrapDict = dict, let dataValue  = data {
-                
+
+                let resources = PHAssetResource.assetResources(for: asset)
+                if let resource = resources.first {
+                    originalFileName = resource.originalFilename
+                }
                 if let unwrapedUrl = wrapDict["PHImageFileURLKey"] as? URL {
                     url = unwrapedUrl
                 }
-//                md5 = MD5().hexMD5fromData(dataValue) // md5 = String(format: "%@%i", fileName, size)
                 size = UInt64(dataValue.count)
+                md5 = String(format: "%@%i", originalFileName, size)
+                
                 semaphore.signal()
             } else {
                 semaphore.signal()
@@ -580,7 +582,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         getDetailQueue.addOperation(operation)
         semaphore.wait()
-        return (url: url, size: size, md5: md5)
+        return (url: url, name: originalFileName, size: size, md5: md5)
     }
     
     
