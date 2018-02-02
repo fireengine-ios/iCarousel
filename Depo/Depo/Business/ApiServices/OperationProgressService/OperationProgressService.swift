@@ -1,5 +1,5 @@
 //
-//  UploadPregressService.swift
+//  OperationProgressService.swift
 //  Depo_LifeTech
 //
 //  Created by Konstantin on 12/11/17.
