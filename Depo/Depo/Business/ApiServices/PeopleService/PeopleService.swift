@@ -23,6 +23,20 @@ class PeopleService: BaseRequestService {
         let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
+    
+    func getPeopleAlbum(id: Int, success:@escaping (_ uuid: String) -> Void, fail:@escaping FailResponse) {
+        let param = PeopleAlbumParameters(id: id)
+        
+        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
+            if let response = response as? AlbumResponse, let albumUUID = response.list.first?.uuid {
+                success(albumUUID)
+            } else {
+                fail(ErrorResponse.failResponse(response))
+            }
+        }, fail: fail)
+        
+       executeGetRequest(param: param, handler: handler)
+    }
 }
 
 class PeopleItemsService: RemoteItemsService {
@@ -56,10 +70,21 @@ class PeopleItemsService: RemoteItemsService {
 }
 
 class PeopleParameters: BaseRequestParametrs {
-    
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.people)
-        
+        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+    }
+}
+
+class PeopleAlbumParameters: BaseRequestParametrs {
+    let id: Int
+    
+    init(id: Int) {
+        self.id = id
+    }
+    
+    override var patch: URL {
+        let searchWithParam = String(format: RouteRequests.peopleAlbum, id)
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }

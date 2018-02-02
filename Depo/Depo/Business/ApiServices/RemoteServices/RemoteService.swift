@@ -373,3 +373,18 @@ class FacedRemoteItemsService {
     }
 }
 
+class FaceImageDetailService: RemoteItemsService {
+    let albumUUID: String
+    
+    let albumDetailService: AlbumDetailService
+    
+    init(albumUUID: String, requestSize: Int) {
+        self.albumUUID = albumUUID
+        self.albumDetailService = AlbumDetailService(requestSize: requestSize)
+        super.init(requestSize: requestSize, fieldValue: .image)
+    }
+    
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue?) {
+        albumDetailService.nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
+    }
+}

@@ -23,6 +23,20 @@ class PlacesService: BaseRequestService {
         let handler = BaseResponseHandler<PlacesServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
+    
+    func getPlacesAlbum(id: Int, success:@escaping (_ uuid: String) -> Void, fail:@escaping FailResponse) {
+        let param = ThingsAlbumParameters(id: id)
+        
+        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
+            if let response = response as? AlbumResponse, let albumUUID = response.list.first?.uuid {
+                success(albumUUID)
+            } else {
+                fail(ErrorResponse.failResponse(response))
+            }
+        }, fail: fail)
+        
+        executeGetRequest(param: param, handler: handler)
+    }
 }
 
 class PlacesItemsService: RemoteItemsService {
@@ -60,6 +74,19 @@ class PlacesParameters: BaseRequestParametrs {
     override var patch: URL {
         let searchWithParam = String(format:RouteRequests.places)
         
+        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+    }
+}
+
+class PlacesAlbumParameters: BaseRequestParametrs {
+    let id: Int
+    
+    init(id: Int) {
+        self.id = id
+    }
+    
+    override var patch: URL {
+        let searchWithParam = String(format: RouteRequests.placesAlbum, id)
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }
