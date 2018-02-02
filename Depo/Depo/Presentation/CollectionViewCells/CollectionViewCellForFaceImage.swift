@@ -44,7 +44,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
             let isVisible = peopleItem.responseObject.visible,
             isVisible == false{
             visibleImageView.isHidden = isVisible
-            transperentView.alpha = 0.4
+            transperentView.alpha = 0.6
         }
     }
     

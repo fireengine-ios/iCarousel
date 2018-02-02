@@ -19,8 +19,10 @@ class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
         super.viewDidLoad()
     }
 
-    override func configureNavBarActions(isSelecting: Bool = false) {
-        super.configureNavBarActions(isSelecting: isSelecting)
+    override func configurateNavigationBar(){
+        configurateFaceImageItemsActions {
+            
+        }
     }
     
 }

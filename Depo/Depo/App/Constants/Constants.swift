@@ -817,6 +817,11 @@ struct TextConstants {
     static let cogBtnImgName = "cog"
     static let searchBtnImgName = "search"
     static let deleteBtnImgName = "DeleteShareButton"
+    
+    //MARK: - Navigation bar title names
+    
+    static let showHideBtnTitleName = "Show & Hide"
+
     //MARK: - Accessibility
     static let accessibilityPlus = NSLocalizedString("Plus", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityClose = NSLocalizedString("Close", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -831,6 +836,7 @@ struct TextConstants {
     static let accessibilityFavorite = NSLocalizedString("Favorite", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilitySelected = NSLocalizedString("Selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityNotSelected = NSLocalizedString("Not selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessibilityshowHide = NSLocalizedString("Show and Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let getImageError = NSLocalizedString("Couldn't get image", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     

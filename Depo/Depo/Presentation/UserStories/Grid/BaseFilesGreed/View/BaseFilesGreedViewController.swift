@@ -193,6 +193,17 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
     
+    func configurateFaceImageItemsActions(showHideAction: @escaping () -> Swift.Void) {
+        let showHide = NavBarWithAction(navItem: NavigationBarList().showHide, action: { (_) in
+            showHideAction()
+        })
+        
+        navBarConfigurator.configure(right: [showHide], left: [])
+        
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+
+    
     @IBAction func onStartCreatingFilesButton(){
         output.onStartCreatingPhotoAndVideos()
     }
