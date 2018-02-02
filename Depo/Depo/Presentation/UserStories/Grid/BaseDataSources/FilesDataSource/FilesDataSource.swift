@@ -125,7 +125,7 @@ extension FilesDataSource {
     private func defaultImageRequestOptions() -> PHImageRequestOptions {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
-        options.isSynchronous = false
+        options.isSynchronous = true
         options.version = .current
         options.deliveryMode = .opportunistic
         options.resizeMode = .exact
