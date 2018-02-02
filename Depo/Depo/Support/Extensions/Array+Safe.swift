@@ -16,10 +16,3 @@ extension Collection {
     }
 }
 
-extension Array where Element: Equatable {
-    mutating func removeFirstIfExists(_ element: Element) {
-        if let index = index(of: element) {
-            remove(at: index)
-        }
-    }
-}
