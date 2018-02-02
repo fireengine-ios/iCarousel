@@ -326,7 +326,6 @@
 		7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
 		7CCAC5311FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		7CCAC5331FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
-		7CD1F8CF1F0140900028F51A /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */; };
 		7CD1F8D21F014EF90028F51A /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8D11F014EF90028F51A /* CustomSwitch.swift */; };
 		7CD1F8D51F014F150028F51A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8D41F014F150028F51A /* Router.swift */; };
 		7CD1F8D91F0242FE0028F51A /* SimpleButtonWithBlueText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8D81F0242FE0028F51A /* SimpleButtonWithBlueText.swift */; };
@@ -1381,7 +1380,6 @@
 		8C0E8CAD1FDEBDFF00789C91 /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */; };
 		8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */; };
 		8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786961F3F38EF005CB432 /* VisualMusicPlayerRouter.swift */; };
-		8C0E8CB11FDEBDFF00789C91 /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */; };
 		8C0E8CB21FDEBDFF00789C91 /* ImportPhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D498864A1F3EFBE200F50C95 /* ImportPhotosInteractor.swift */; };
 		8C0E8CB31FDEBDFF00789C91 /* VisualMusicPlayerModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786931F3F38EF005CB432 /* VisualMusicPlayerModuleInput.swift */; };
 		8C0E8CB41FDEBDFF00789C91 /* ButtonWithGrayCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4484FD1F0FC607003AF631 /* ButtonWithGrayCorner.swift */; };
@@ -3452,7 +3450,6 @@
 		7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSwitcherTableViewCell.xib; sourceTree = "<group>"; };
 		7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaItemsObjectSyncStatus+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaItemsObjectSyncStatus+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewController.swift; sourceTree = "<group>"; };
 		7CD1F8D11F014EF90028F51A /* CustomSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
 		7CD1F8D41F014F150028F51A /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		7CD1F8D81F0242FE0028F51A /* SimpleButtonWithBlueText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleButtonWithBlueText.swift; sourceTree = "<group>"; };
@@ -9165,14 +9162,6 @@
 			path = UserStories;
 			sourceTree = "<group>";
 		};
-		CE3EB30B1FC7F0BF000B70D6 /* HomeCards */ = {
-			isa = PBXGroup;
-			children = (
-				7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */,
-			);
-			path = HomeCards;
-			sourceTree = "<group>";
-		};
 		CE3EB30C1FC7F4D2000B70D6 /* Start */ = {
 			isa = PBXGroup;
 			children = (
@@ -9235,7 +9224,6 @@
 				7C355E5F1F012239003B004C /* CollectionViewDataSource */,
 				CEAE3F9D1EFD4F0D00A405B2 /* HomePage */,
 				56CE46284ACDF61A64DCEB28 /* HomeHeader */,
-				CE3EB30B1FC7F0BF000B70D6 /* HomeCards */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -12061,7 +12049,6 @@
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
 				8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */,
 				8C0B91B42017103600A5BA81 /* TokenStorage.swift in Sources */,
-				8C0E8CB11FDEBDFF00789C91 /* BaseCollectionViewController.swift in Sources */,
 				8C0E8CB21FDEBDFF00789C91 /* ImportPhotosInteractor.swift in Sources */,
 				8C0E8CB31FDEBDFF00789C91 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				8C0E8CB41FDEBDFF00789C91 /* ButtonWithGrayCorner.swift in Sources */,
@@ -12994,7 +12981,6 @@
 				CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */,
 				CE51AB701EF90853005DCEE0 /* AutoSyncViewInput.swift in Sources */,
 				8C7786A41F3F38F0005CB432 /* VisualMusicPlayerRouter.swift in Sources */,
-				7CD1F8CF1F0140900028F51A /* BaseCollectionViewController.swift in Sources */,
 				D49886591F3EFBE200F50C95 /* ImportPhotosInteractor.swift in Sources */,
 				8C7786A21F3F38F0005CB432 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				7C4484FE1F0FC607003AF631 /* ButtonWithGrayCorner.swift in Sources */,
