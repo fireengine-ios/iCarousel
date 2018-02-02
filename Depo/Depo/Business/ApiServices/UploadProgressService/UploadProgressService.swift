@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol UploadProgressServiceDelegate: class {
+protocol OperationProgressServiceDelegate: class {
     func didSend(ratio: Float, for tempUUID: String)
 }
