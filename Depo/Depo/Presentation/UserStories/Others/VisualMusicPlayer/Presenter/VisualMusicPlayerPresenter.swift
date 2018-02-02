@@ -17,6 +17,7 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
     func operationFailed(withType type: ElementTypes) {}
     func selectModeSelected() {}
     func selectAllModeSelected() {}
+    func deSelectAll() {}
     func stopModeSelected() {}
     func printSelected() {}
     var selectedItems: [BaseDataSourceItem] {

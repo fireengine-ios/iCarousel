@@ -650,6 +650,7 @@ struct TextConstants {
     
     static let actionSheetSelect = NSLocalizedString("Select", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetSelectAll = NSLocalizedString("Select All", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetDeSelectAll = NSLocalizedString("Deselect All", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let actionSheetRename = NSLocalizedString("Rename", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     

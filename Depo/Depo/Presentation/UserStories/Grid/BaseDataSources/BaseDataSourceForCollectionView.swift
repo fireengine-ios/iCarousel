@@ -523,6 +523,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func selectAll(isTrue: Bool){
         if (isTrue) {
+            selectedItemsArray.removeAll()
             for array in allItems{
                 for object in array{
                     onSelectObject(object: object)
@@ -533,6 +534,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }else{
             selectedItemsArray.removeAll()
             updateVisibleCells()
+            for header in headers{
+                header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
+                                        activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
+            }
+            
+            updateSelectionCount()
         }
     }
     

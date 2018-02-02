@@ -325,6 +325,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     self.basePassingPresenter?.selectAllModeSelected()
                     //                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
                 })
+            case .deSelectAll:
+                action = UIAlertAction(title: TextConstants.actionSheetDeSelectAll, style: .default, handler: { _ in
+                    self.basePassingPresenter?.deSelectAll()
+                })
             case .print:
                 action = UIAlertAction(title: "Print", style: .default, handler: { _ in
                     self.basePassingPresenter?.printSelected()
