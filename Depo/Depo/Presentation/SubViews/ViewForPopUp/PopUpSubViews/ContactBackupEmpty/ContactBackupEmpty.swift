@@ -22,6 +22,11 @@ class ContactBackupEmpty: ContactBackupOld {
     
     
     @IBAction override func onCloseButton(){
+        deleteCard()
+    }
+    
+    override func deleteCard() {
+        super.deleteCard()
         CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
     }
     
