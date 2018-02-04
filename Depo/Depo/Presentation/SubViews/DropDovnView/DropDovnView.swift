@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol DropDovnViewDelegate {
-    func onSelectItemAtIndx(index: Int)
+    func onSelectItem(atIndex index: Int)
 }
 
 class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
@@ -63,7 +63,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         constraints.append(NSLayoutConstraint(item: bgView!, attribute: .bottom, relatedBy: .equal, toItem: cornerView!, attribute: .bottom, multiplier: 1, constant: -1))
         
         
-        titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: cornerView!.frame.size.width - 20, height: cornerView!.frame.size.height))
+        titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: cornerView!.frame.size.width - 25, height: cornerView!.frame.size.height))
         titleLabel!.font = UIFont.TurkcellSaturaRegFont(size: 14)
         titleLabel!.textColor = ColorConstants.darcBlueColor
         titleLabel!.textAlignment = .left
@@ -74,7 +74,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         bgView!.addSubview(titleLabel!)
         constraints.append(NSLayoutConstraint(item: titleLabel!, attribute: .left, relatedBy: .equal, toItem: bgView!, attribute: .left, multiplier: 1, constant: 12))
         constraints.append(NSLayoutConstraint(item: titleLabel!, attribute: .top, relatedBy: .equal, toItem: bgView!, attribute: .top, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: titleLabel!, attribute: .right, relatedBy: .equal, toItem: bgView!, attribute: .right, multiplier: 1, constant: -20))
+        constraints.append(NSLayoutConstraint(item: titleLabel!, attribute: .right, relatedBy: .equal, toItem: bgView!, attribute: .right, multiplier: 1, constant: -25))
         constraints.append(NSLayoutConstraint(item: titleLabel!, attribute: .bottom, relatedBy: .equal, toItem: bgView!, attribute: .bottom, multiplier: 1, constant: 0))
         
         dropDovnImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 8, height: 5))
@@ -123,26 +123,24 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         
     }
 
-    func setTableDataObjects(objects: [String]){
+    func setTableDataObjects(objects: [String], defaultObject: String?) {
         tableDataArray.removeAll()
-        tableDataArray.append(contentsOf: objects)
-        if let titleLabelText = titleLabel?.text{
-            if !self.tableDataArray.contains(titleLabelText) {
-                titleLabel?.text = self.tableDataArray.first
-            }
+        tableDataArray.append(contentsOf: objects)        
+        if let defaultObject = defaultObject {
+            titleLabel?.text = defaultObject
         }
         tableView?.reloadData()
     }
     
-    @objc func onDropDovnButton(){
+    @objc func onDropDovnButton() {
         if let supView = superview {
             supView.bringSubview(toFront: self)
         }
         onShowTable(show: true)
     }
     
-    func onShowTable(show: Bool){
-        if (show){
+    func onShowTable(show: Bool) {
+        if (show) {
             originTableViewH = self.constraint!.constant
         }
         
@@ -206,9 +204,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
         onShowTable(show: false)
         
-        if (delegate != nil){
-            delegate!.onSelectItemAtIndx(index: indexPath.row)
-        }
+        delegate?.onSelectItem(atIndex: indexPath.row)
     }
     
 }

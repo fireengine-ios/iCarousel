@@ -13,7 +13,6 @@ final class FilterPhotoCard: BaseView {
     
     private lazy var imageManager = ImageManager()
     private lazy var filesDataSource = FilesDataSource()
-    private lazy var homeCardsService: HomeCardsService = factory.resolve()
     
     @IBOutlet private weak var headerLabel: UILabel! {
         didSet {
@@ -76,7 +75,7 @@ final class FilterPhotoCard: BaseView {
     }
     
     private func loadImage(from item: WrapData) {
-        filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
+        filesDataSource.getImage(for: item, isOriginal: true) { [weak self] image in
             DispatchQueue.main.async {
                 guard let image = image else { return }
                 self?.set(image: image)
@@ -93,28 +92,23 @@ final class FilterPhotoCard: BaseView {
         deleteCard()
     }
     
-    private func deleteCard() {
-        guard let id = cardObject?.id else {
-            return
-        }
-        homeCardsService.delete(with: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    CardsManager.default.stopOperationWithType(type: .stylizedPhoto)
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
-                }
-            }
-        }
+    override func deleteCard() {
+        super.deleteCard()
+        CardsManager.default.stopOperationWithType(type: .stylizedPhoto)
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
-        guard let image = photoImageView.image else { return }
-        
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
-        RouterVC().pushViewController(viewController: vc)
+        switch cardType {
+        case .save:
+            guard let image = photoImageView.image else { return }
+            
+            let vc = PVViewerController.initFromNib()
+            vc.image = image
+            RouterVC().pushViewController(viewController: vc)
+            
+        case .display:
+            getLastImageAssetAndShowImage()
+        }
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {

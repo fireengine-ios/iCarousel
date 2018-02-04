@@ -601,6 +601,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.selectAll(isTrue: true)
     }
     
+    func deSelectAll() {
+        dataSource.selectAll(isTrue: false)
+    }
+    
     func stopModeSelected() {
          stopEditing() 
     }

@@ -17,7 +17,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
 
     private let contactsSyncService = ContactsSyncService()
     
-    private var currentPage = 0
+    private var currentPage = 1
     private var numberOfPages = Int.max
     private var contacts = [RemoteContact]()
     private var lastQuery: String?
@@ -34,7 +34,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
         }
         mode = .browse
         
-        guard currentPage < numberOfPages, !isLoadingData else {
+        guard currentPage <= numberOfPages, !isLoadingData else {
             output.asyncOperationFinished()
             return
         }
@@ -61,7 +61,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
         }
         mode = .search
         
-        guard currentPage < numberOfPages, !isLoadingData else {
+        guard currentPage <= numberOfPages, !isLoadingData else {
             output.asyncOperationFinished()
             return
         }
@@ -124,7 +124,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
     
     private func reset() {
         lastQuery = nil
-        currentPage = 0
+        currentPage = 1
         numberOfPages = Int.max
         contacts = [RemoteContact]()
         output.didLoadContacts(contacts)

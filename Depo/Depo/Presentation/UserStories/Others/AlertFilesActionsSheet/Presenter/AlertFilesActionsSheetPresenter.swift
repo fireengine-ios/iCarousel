@@ -156,6 +156,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
                 filteredActionTypes.remove(at: removeFromFavorites)
             }
+            
+            let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems)
+            if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal){
+                filteredActionTypes.remove(at: index)
+            }
         } else {
             if let printIndex = filteredActionTypes.index(of: .print) {
                 filteredActionTypes.remove(at: printIndex)
@@ -319,6 +324,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
                     self.basePassingPresenter?.selectAllModeSelected()
                     //                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
+                })
+            case .deSelectAll:
+                action = UIAlertAction(title: TextConstants.actionSheetDeSelectAll, style: .default, handler: { _ in
+                    self.basePassingPresenter?.deSelectAll()
                 })
             case .print:
                 action = UIAlertAction(title: "Print", style: .default, handler: { _ in

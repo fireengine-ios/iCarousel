@@ -17,7 +17,7 @@
 "Lifebox campaign" = "Lifebox campaign";
 "Success" = "Success";
 "Apply" = "Apply";
-"Please check your internet connection is active and Cellular Data is ON under Settings/lifebox." = "Please check your internet connection is active and Cellular Data is ON under Settings/lifebox.";
+"Please check your internet connection is active and Mobile Data is ON." = "Please check your internet connection is active and Mobile Data is ON.";
 "Invalid passcode. %@ attempts left. Please try again" = "Invalid passcode. %@ attempts left. Please try again";
 "Touch ID" = "Touch ID";
 "Face ID" = "Face ID";
@@ -117,6 +117,7 @@
 "Document Details" = "Document Details";
 "Rename" = "Rename";
 "Select All" = "Select All";
+"Deselect All" = "Deselect All";
 "Select" = "Select";
 "More" = "More";
 "lifebox" = "lifebox";
@@ -174,7 +175,7 @@
 "Error" = "Error";
 "Please configurate email client" = "Please configurate email client";
 "DESTEK-LIFEBOX@TURKCELL.COM.TR" = "DESTEK-LIFEBOX@TURKCELL.COM.TR";
-"Select" = "Select";
+"Please select a language option" = "Please select a language option";
 "Send" = "Send";
 "You need to specify your language preference so that we can serve you better." = "You need to specify your language preference so that we can serve you better.";
 "%@ about Lifebox" = "%@ about Lifebox";
@@ -255,7 +256,7 @@
 "Continue" = "Continue";
 "Please Choose 20 files at most" = "Please Choose 20 files at most";
 "Sorry, but story name should not be empty" = "Sorry, but story name should not be empty";
-"You need to enable access to Contacts to continue. \"Settings - Privacy - Contacts\"." = "You need to enable access to Contacts to continue. \"Settings - Privacy - Contacts\".";
+"You need to enable access to Contacts to continue" = "You need to enable access to Contacts to continue";
 "SAVE" = "SAVE";
 "Name" = "Name";
 "Create a Name" = "Create a Name";
@@ -274,13 +275,14 @@
 "Clear BackUp" = "Clear BackUp";
 "Restore" = "Restore";
 "Back-Up" = "Back-Up";
-"Your last backup was on %@" = "Your last backup was on %@";
+"Your last back was on %@" = "Your last back was on %@";
+"There are %d duplicated contacts." = "There are %d duplicated contacts.";
 "Your last back up was a few seconds ago." = "Your last back up was a few seconds ago.";
 "You never backed up your contacts" = "You never backed up your contacts";
 "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.";
-"%d%% Restored up…" = "%d%% Restored up…";
 "Are you sure you want to delete?" = "Are you sure you want to delete?";
 "This duplicated contacts will be deleted from your contacts." = "This duplicated contacts will be deleted from your contacts.";
+"%%%d Restored…" = "%%%d Restored…";
 "%%%d Analyzed…" = "%%%d Analyzed…";
 "%%%d Backed up…" = "%%%d Backed up…";
 "Restored %d Contacts" = "Restored %d Contacts";
@@ -380,9 +382,9 @@
 "Your storage is almost full!" = "Your storage is almost full!";
 "Your storage is empty!" = "Your storage is empty!";
 "Your storage is almost full!" = "Your storage is almost full!";
-"You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %.2f of your disk space! It’s a great time to expand your storage.";
+"You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your disk space! It’s a great time to expand your storage.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You seem to have no uploaded files. Start uploading your memories on Lifebox!";
-"You are using %f of your device storage. It’s a great time to freeup space on your device." = "You are using %.2f of your device storage. It’s a great time to freeup space on your device.";
+"You are using %f of your device storage. It’s a great time to freeup space on your device." = "You are using %d%% of your device storage. It’s a great time to freeup space on your device.";
 "Expand My Storage" = "Expand My Storage";
 "Upload Files" = "Upload Files";
 "Free Up Space" = "Free Up Space";

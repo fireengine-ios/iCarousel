@@ -95,7 +95,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         }
     }
     
-    func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) -> URL? {
+    @discardableResult func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) -> URL? {
         if isOriginal {
             switch item.patchToPreview {
             case let .localMediaContent(local):
@@ -125,7 +125,7 @@ extension FilesDataSource {
     private func defaultImageRequestOptions() -> PHImageRequestOptions {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
-        options.isSynchronous = false
+        options.isSynchronous = true
         options.version = .current
         options.deliveryMode = .opportunistic
         options.resizeMode = .exact

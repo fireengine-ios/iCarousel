@@ -32,7 +32,7 @@ class RequestService {
                             method: RequestMethod,
                             timeoutInterval: TimeInterval,
                             response: @escaping RequestResponse ) -> URLSessionTask {
-        log.debug("RequestService downloadRequestTask")
+        log.debug("RequestService requestTask")
         
         var request = URLRequest(url: patch)
             request.timeoutInterval = timeoutInterval
@@ -182,10 +182,11 @@ class RequestService {
     }
     
     func requestProgressHander(_ progress: Alamofire.Progress, request: URLRequest) {
-        guard let delegate = SingletonStorage.shared.uploadProgressDelegate,
-            let tempUUIDfromURL = request.url?.lastPathComponent
+        guard let tempUUIDfromURL = request.url?.lastPathComponent
             else { return }
         
-        delegate.didSend(ratio: Float(progress.fractionCompleted), for: tempUUIDfromURL)
+        SingletonStorage.shared.progressDelegates.invoke(invocation: { (delegate) in
+            delegate.didSend(ratio: Float(progress.fractionCompleted), for: tempUUIDfromURL)
+        })
     }
 }

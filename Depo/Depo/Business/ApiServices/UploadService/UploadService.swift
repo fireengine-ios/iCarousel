@@ -18,7 +18,7 @@ final class UploadService: BaseRequestService {
     private let dispatchQueue = DispatchQueue(label: "com.lifebox.upload")
     
     private var uploadQueue = OperationQueue()
-    private var uploadOperations = [UploadOperations]()
+    private var uploadOperations = SynchronizedArray<UploadOperations>()
     
     
     private var allSyncOperationsCount: Int {
@@ -49,7 +49,6 @@ final class UploadService: BaseRequestService {
         uploadQueue.underlyingQueue = dispatchQueue
     
         super.init()
-        SingletonStorage.shared.uploadProgressDelegate = self
     }
 
     
@@ -144,7 +143,7 @@ final class UploadService: BaseRequestService {
             return (self.uploadOperations.first(where: { (operation) -> Bool in
                 if operation.item.md5 == item.md5 && operation.uploadType?.isContained(in: [.autoSync, .fromHomePage]) ?? false {
                     operation.cancel()
-                    self.uploadOperations.removeFirstIfExists(operation)
+                    self.uploadOperations.removeIfExists(operation)
                     return false
                 }
                 return operation.item.md5 == item.md5
@@ -178,7 +177,7 @@ final class UploadService: BaseRequestService {
                 if let error = error {
                     print("AUTOSYNC: \(error.localizedDescription)")
                     if error.description != TextConstants.canceledOperationTextError {
-                        self.uploadOperations.removeFirstIfExists(finishedOperation)
+                        self.uploadOperations.removeIfExists(finishedOperation)
                     }
 //                        //operation was cancelled - not an actual error
 //                        self.showUploadCardProgress()
@@ -190,7 +189,7 @@ final class UploadService: BaseRequestService {
                     return
                 }
                 
-                self.uploadOperations.removeFirstIfExists(finishedOperation)
+                self.uploadOperations.removeIfExists(finishedOperation)
                 
                 self.finishedSyncToUseOperationsCount += 1
                 
@@ -209,7 +208,7 @@ final class UploadService: BaseRequestService {
             operation.queuePriority = .veryHigh
             return operation
         }
-        uploadOperations.insert(contentsOf: operations, at: 0)
+        uploadOperations.append(operations)
 
         uploadQueue.addOperations(operations, waitUntilFinished: false)
         print("UPLOADING upload: \(operations.count) have been added to the upload queue")
@@ -223,7 +222,7 @@ final class UploadService: BaseRequestService {
             return (self.uploadOperations.first(where: { (operation) -> Bool in
                 if operation.item.md5 == item.md5 && operation.uploadType == .autoSync && !operation.isExecuting {
                     operation.cancel()
-                    self.uploadOperations.removeFirstIfExists(operation)
+                    self.uploadOperations.removeIfExists(operation)
                     return false
                 }
                 return operation.item.md5 == item.md5
@@ -262,13 +261,13 @@ final class UploadService: BaseRequestService {
                         self.showUploadCardProgress()
                         checkIfFinished()
                     } else {
-                        self.uploadOperations.removeFirstIfExists(finishedOperation)
+                        self.uploadOperations.removeIfExists(finishedOperation)
                         fail?(error)
                     }
                     return
                 }
                 
-                self.uploadOperations.removeFirstIfExists(finishedOperation)
+                self.uploadOperations.removeIfExists(finishedOperation)
 
                 self.finishedUploadOperationsCount += 1
                 
@@ -287,7 +286,7 @@ final class UploadService: BaseRequestService {
             operation.queuePriority = .high
             return operation
         }
-        uploadOperations.insert(contentsOf: operations, at: 0)
+        uploadOperations.append(operations)
         
         uploadQueue.addOperations(operations, waitUntilFinished: false)
         print("UPLOADING upload: \(operations.count) have been added to the upload queue")
@@ -332,7 +331,7 @@ final class UploadService: BaseRequestService {
                 if let error = error {
 //                    print("AUTOSYNC: \(error.localizedDescription)")
                     if error.description != TextConstants.canceledOperationTextError {
-                        self.uploadOperations.removeFirstIfExists(finishedOperation)
+                        self.uploadOperations.removeIfExists(finishedOperation)
                     }
 //                        //operation was cancelled - not an actual error
 //                        self.showSyncCardProgress()
@@ -343,7 +342,7 @@ final class UploadService: BaseRequestService {
                     return
                 }
                 
-                self.uploadOperations.removeFirstIfExists(finishedOperation)
+                self.uploadOperations.removeIfExists(finishedOperation)
 
                 if finishedOperation.item.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 }
                 else if finishedOperation.item.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
@@ -364,7 +363,7 @@ final class UploadService: BaseRequestService {
             operation.queuePriority = firstObject.fileType == .image ? .normal : .low // start images sync first
             return operation
         }
-        uploadOperations.append(contentsOf: operations)
+        uploadOperations.append(operations)
         
         uploadQueue.addOperations(operations, waitUntilFinished: false)
         print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
@@ -389,7 +388,7 @@ final class UploadService: BaseRequestService {
         
         operationsToRemove.forEach { (operation) in
             operation.cancel()
-            uploadOperations.removeFirstIfExists(operation)
+            uploadOperations.removeIfExists(operation)
         }
         print("AUTOSYNC: removed \(operationsToRemove.count) operations")
         operationsToRemove.removeAll()
@@ -400,7 +399,7 @@ final class UploadService: BaseRequestService {
         
         operationsToRemove.forEach { (operation) in
             operation.cancel()
-            uploadOperations.removeFirstIfExists(operation)
+            uploadOperations.removeIfExists(operation)
         }
         operationsToRemove.removeAll()
     }
@@ -415,7 +414,7 @@ final class UploadService: BaseRequestService {
         
         operationsToRemove.forEach { (operation) in
             operation.cancel()
-            uploadOperations.removeFirstIfExists(operation)
+            uploadOperations.removeIfExists(operation)
         }
         print("AUTOSYNC: removed \(operationsToRemove.count) operations in \(Date().timeIntervalSince(time)) secs")
         operationsToRemove.removeAll()
@@ -426,6 +425,8 @@ final class UploadService: BaseRequestService {
         if video {
             finishedVideoSyncOperationsCount = 0
         }
+        
+        showSyncCardProgress()
     }
     
     func cancelOperations(with assets: [PHAsset]?) {
@@ -442,7 +443,7 @@ final class UploadService: BaseRequestService {
         
         operationsToRemove.forEach { (operation) in
             operation.cancel()
-            uploadOperations.removeFirstIfExists(operation)
+            uploadOperations.removeIfExists(operation)
         }
         print("AUTOSYNC: removed \(operationsToRemove.count) operations")
         operationsToRemove.removeAll()
@@ -473,11 +474,6 @@ final class UploadService: BaseRequestService {
     
         let request = executeUploadRequest(param: uploadParam, response: { (data, response, error) in
             
-            guard error == nil else {
-                fail?(.error(error!))
-                return
-            }
-            
             if let httpResponse = response as? HTTPURLResponse {
                 if 200...299 ~= httpResponse.statusCode {
                     success?()
@@ -486,6 +482,9 @@ final class UploadService: BaseRequestService {
                     fail?(.httpCode(httpResponse.statusCode))
                     return
                 }
+            } else if let error = error {
+                fail?(.error(error))
+                return
             }
             
             fail?(.string("Error upload"))
@@ -509,17 +508,6 @@ final class UploadService: BaseRequestService {
     }
 }
 
-extension UploadService: UploadProgressServiceDelegate {
-
-    func didSend(ratio: Float, for tempUUID: String) {
-        if let uploadOperation = uploadOperations.first(where: {$0.item.uuid == tempUUID}){
-            if let uploadType = uploadOperation.uploadType{
-                CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: uploadOperation.item)
-            }
-            ItemOperationManager.default.setProgressForUploadingFile(file: uploadOperation.item, progress: ratio)
-        }
-    }
-}
 
 extension UploadService {
     fileprivate func showOutOfSpaceAlert() {
@@ -577,7 +565,7 @@ class UploadOperations: Operation {
         
         super.init()
         self.qualityOfService = (uploadType == .autoSync) ? .background : .userInitiated
-        
+        SingletonStorage.shared.progressDelegates.add(self)
     }
     
     init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: UploadOperationSuccess?, fail: FailResponse?) {
@@ -595,7 +583,7 @@ class UploadOperations: Operation {
         
         super.init()
         self.qualityOfService = (uploadType == .autoSync) ? .default : .userInitiated
-        
+        SingletonStorage.shared.progressDelegates.add(self)
     }
     
     override func cancel() {
@@ -707,4 +695,20 @@ class UploadOperations: Operation {
                                            fail: fail)
     }
 }
+
+
+extension UploadOperations: OperationProgressServiceDelegate {
+    func didSend(ratio: Float, for tempUUID: String) {
+        guard !isRealCancel else {
+            return
+        }
+        
+        if item.uuid == tempUUID, let uploadType = uploadType {
+            CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: item)
+            ItemOperationManager.default.setProgressForUploadingFile(file: item, progress: ratio)
+        }
+    }
+}
+
+
 

@@ -45,7 +45,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         group.enter()
         
         let albumService = AlbumService(requestSize: 4)
-        albumService.allAlbums(sortBy: .albumName, sortOrder: .asc, success: { [weak self] albums in
+        albumService.allAlbums(sortBy: .date, sortOrder: .desc, success: { [weak self] albums in
             DispatchQueue.main.async {
                 self?.dataStorage.addNew(item: SliderItem(withAlbumItems: albums))
                 group.leave()
@@ -154,23 +154,21 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     //Protocol ItemOperationManagerViewProtocol
     
-//    func newAlbumCreated() {
-//        requestAllItems()
-//    }
-//
-//    func albumsDeleted(albums: [AlbumItem]) {
-//        if !albums.isEmpty, !albumItems.isEmpty {
-//            var newArray = [AlbumItem]()
-//            let albumsUUIDS = albums.map { $0.uuid }
-//            for object in albumItems {
-//                if !albumsUUIDS.contains(object.uuid) {
-//                    newArray.append(object)
-//                }
-//            }
-//            albumItems = newArray
-//            output.preparedAlbumbs(albumbs: albumItems)
-//        }
-//    }
+    func newAlbumCreated() {
+        requestAllItems()
+    }
+    
+    func newStoryCreated() {
+        requestAllItems()
+    }
+    
+    func albumsDeleted(albums: [AlbumItem]) {
+        requestAllItems()
+    }
+    
+    func fileAddedToAlbum() {
+        requestAllItems()
+    }
 
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         if let compairedView = object as? LBAlbumLikePreviewSliderInteractor {

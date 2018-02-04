@@ -28,6 +28,8 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func newAlbumCreated()
     
+    func newStoryCreated()
+    
     func albumsDeleted(albums: [AlbumItem])
     
     func fileAddedToAlbum()
@@ -60,6 +62,8 @@ extension ItemOperationManagerViewProtocol {
     func newFolderCreated() {}
     
     func newAlbumCreated() {}
+    
+    func newStoryCreated() {}
     
     func albumsDeleted(albums: [AlbumItem]) {}
     
@@ -223,6 +227,14 @@ class ItemOperationManager: NSObject {
         DispatchQueue.main.async {
             for view in self.views{
                 view.syncFinished()
+            }
+        }
+    }
+    
+    func newStoryCreated() {
+        DispatchQueue.main.async {
+            for view in self.views {
+                view.newStoryCreated()
             }
         }
     }

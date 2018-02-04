@@ -16,7 +16,7 @@ class SingletonStorage {
     var accountInfo: AccountInfoResponse?
     var signUpInfo: RegistrationUserInfoModel?
     var referenceToken: String?
-    weak var uploadProgressDelegate: UploadProgressServiceDelegate?
+    var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
     func getAccountInfoForUser(success:@escaping (AccountInfoResponse) -> Swift.Void, fail: @escaping (ErrorResponse?) -> Swift.Void ){
         if let info = accountInfo{

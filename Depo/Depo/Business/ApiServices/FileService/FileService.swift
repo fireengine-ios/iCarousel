@@ -506,14 +506,17 @@ class DownLoadOperation: Operation {
         self.success = success
         self.fail = fail
         self.semaphore = DispatchSemaphore(value: 0)
+        
         super.init()
+        
+        SingletonStorage.shared.progressDelegates.add(self)
     }
     
     override func main() {
-        
         if isCancelled {
             return
         }
+        
         FileService().downloadToCameraRoll(downloadParam: param, success: {
             self.customSuccess()
         }) { (error) in
@@ -532,3 +535,20 @@ class DownLoadOperation: Operation {
         semaphore.signal()
     }
 }
+
+
+extension DownLoadOperation: OperationProgressServiceDelegate {
+    
+    func didSend(ratio: Float, for tempUUID: String) {
+        guard !isCancelled else {
+            return
+        }
+        
+        if let item = param.item, item.uuid == tempUUID {
+            CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
+//            ItemOperationManager.default.setProgressForUploadingFile(file: item, progress: ratio)
+        }
+    }
+}
+
+

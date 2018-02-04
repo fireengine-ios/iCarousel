@@ -26,6 +26,8 @@ class BaseMediaContent: Equatable, Hashable {
     
     let asset: PHAsset
     
+    let originalName: String
+    
     var location: LocationMediaContent {
         // TODO:
         return .local
@@ -40,11 +42,7 @@ class BaseMediaContent: Equatable, Hashable {
             case .unknown : return .unknown
         }
     }
-    
-    var name: String {
-        return asset.value(forKey: "filename") as! String
-    }
-    
+
     var dateOfCreation: Date? {
         return asset.creationDate
     }
@@ -57,11 +55,13 @@ class BaseMediaContent: Equatable, Hashable {
         return (urlToFile).hashValue
     }
     
-    init(curentAsset: PHAsset, urlToFile: URL, size:UInt64, md5: String) {
+    init(curentAsset: PHAsset, generalInfo: AssetInfo) {
         self.asset = curentAsset
-        self.urlToFile = urlToFile
-        self.size = Int64(size)
-        self.md5 = md5
+        self.urlToFile = generalInfo.url
+        self.size = Int64(generalInfo.size)
+        self.md5 = generalInfo.md5
+        self.originalName = generalInfo.name
+        
     }
 
     func getCellReUseID() -> String {

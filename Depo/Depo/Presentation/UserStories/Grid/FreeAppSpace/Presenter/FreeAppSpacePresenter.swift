@@ -52,7 +52,15 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
      override func moreActionsPressed(sender: Any) {
         let selectionMode = dataSource.isInSelectionMode()
         if selectionMode {
-            let actionTypes = interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? []
+            var actionTypes = interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? []
+                
+            if dataSource.allMediaItems.count == dataSource.selectedItemsArray.count{
+                if let index = actionTypes.index(of: .selectAll){
+                    actionTypes.remove(at: index)
+                    actionTypes.insert(.deSelectAll, at: index)
+                }
+            }
+            
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,

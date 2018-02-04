@@ -13,7 +13,6 @@ final class MovieCard: BaseView {
     
     private lazy var imageManager = ImageManager()
     private lazy var filesDataSource = FilesDataSource()
-    private lazy var homeCardsService: HomeCardsService = factory.resolve()
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -77,44 +76,16 @@ final class MovieCard: BaseView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
-        loadImage(from: item)
-    }
-    
-    private func loadImage(from item: WrapData) {
-        filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
-            DispatchQueue.main.async {
-                if let image = image {
-                    self?.set(image: image)
-                } else {
-                    UIApplication.showErrorAlert(message: TextConstants.getImageError)
-                }
-            }
-        }
-    }
-    
-    private func set(image: UIImage) {
-        cardType = .save
-        videoPreviewImageView.image = image
+        videoPreviewImageView.loadImageForItem(object: item)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){
         deleteCard()
     }
     
-    private func deleteCard() {
-        guard let id = cardObject?.id else {
-            return
-        }
-        homeCardsService.delete(with: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    CardsManager.default.stopOperationWithType(type: .movieCard)
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
-                }
-            }
-        }
+    override func deleteCard() {
+        super.deleteCard()
+        CardsManager.default.stopOperationWithType(type: .movieCard)
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
