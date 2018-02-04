@@ -55,24 +55,13 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
         
         for contact in contacts {
             let firstLetter = contact.name.uppercased().first
-            if let index = sortedContacts.index(where: { $0.name == firstLetter } ) {
-                sortedContacts[index].contacts.append(contact)
+            if let lastGroup = sortedContacts.last, lastGroup.name == firstLetter {
+                sortedContacts[sortedContacts.count - 1].contacts.append(contact)
             } else {
                 guard let groupName = firstLetter else { continue }
                 let group = ManageContacts.Group(name: groupName, contacts: [contact])
                 sortedContacts.append(group)
             }
-        }
-        
-        sortedContacts = sortedContacts.sorted(by: { (group1, group2) -> Bool in
-            group1.name.getFirstUnicode().compareWithCyrillicPriority(with: group2.name.getFirstUnicode()) != .orderedAscending
-        })
-        
-        for i in 0..<sortedContacts.count {
-            let contacts = sortedContacts[i].contacts.sorted(by: { (contact1, contact2) -> Bool in
-                contact1.name.compareWithCyrillicPriority(with: contact2.name)
-            })
-            sortedContacts[i] = ManageContacts.Group(name: sortedContacts[i].name, contacts: contacts)
         }
         
         return sortedContacts
