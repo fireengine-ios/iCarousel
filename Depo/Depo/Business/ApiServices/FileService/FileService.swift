@@ -526,6 +526,9 @@ class DownLoadOperation: Operation {
     }
     
     func customSuccess(){
+        if let item = param.item{
+            ItemOperationManager.default.finishedDowloadFile(file: item)
+        }
         success?()
         semaphore.signal()
     }
@@ -547,6 +550,7 @@ extension DownLoadOperation: OperationProgressServiceDelegate {
         if let item = param.item, item.uuid == tempUUID {
             CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
 //            ItemOperationManager.default.setProgressForUploadingFile(file: item, progress: ratio)
+            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
         }
     }
 }

@@ -260,8 +260,11 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
         
         if file.isLocalItem{
-            file.metaData?.takenDate = Date()
-            duplicatesArray.append(file)
+            if localMD5Array.index(of: file.md5) == nil{
+                file.metaData?.takenDate = Date()
+                duplicatesArray.append(file)
+                localMD5Array.append(file.md5)
+            }
         }else{
             print("uploaded server object")
             let serverObjectsUUIDs = serverDuplicatesArray.map({ $0.uuid })
@@ -279,13 +282,35 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     return
                 }
                 let localObjects = fetchResult.map{ return WrapData(mediaItem: $0) }
-                duplicatesArray.append(contentsOf: localObjects)
+                for localObject in localObjects{
+                    if localMD5Array.index(of: localObject.md5) == nil{
+                        file.metaData?.takenDate = Date()
+                        duplicatesArray.append(localObject)
+                        localMD5Array.append(localObject.md5)
+                    }
+                }
             }
         }
         
         sortDuplicatesArray()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.showFreeAppSpaceCard()
+        }
+    }
+    
+    func finishedDownloadFile(file: WrapData) {
+        if !file.isLocalItem{
+            let localObjects = CoreDataStack.default.getLocalDuplicates(remoteItems: [file])
+            if !localObjects.isEmpty{
+                for localObject in localObjects{
+                    if localMD5Array.index(of: localObject.md5) == nil{
+                        file.metaData?.takenDate = Date()
+                        duplicatesArray.append(localObject)
+                        localMD5Array.append(localObject.md5)
+                    }
+                }
+                sortDuplicatesArray()
+            }
         }
     }
     
