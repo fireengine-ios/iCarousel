@@ -13,7 +13,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     //Connect with object on storyboard
     var photovideodetailViewController: PhotoVideoDetailViewController!
 
-    class func initializeViewController(with nibName:String, selectedItem: Item, allItems: [Item]) -> UIViewController {
+    class func initializeViewController(with nibName:String, selectedItem: Item, allItems: [Item], hideActions: Bool = false) -> UIViewController {
         let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit],
                                                          style: .blackOpaque, tintColor: nil)
         let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .delete],
@@ -24,11 +24,12 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                  photoVideoBottomBarConfig: photoVideoBottomBarConfig,
                                                  documentsBottomBarConfig: documentsBottomBarConfig,
                                                  selecetedItem: selectedItem,
-                                                 allItems: allItems)
+                                                 allItems: allItems,
+                                                 hideActions: hideActions)
         return viewController
     }
     
-    class func initializeAlbumViewController(with nibName:String, selectedItem: Item, allItems: [Item], albumUUID: String) -> UIViewController {
+    class func initializeAlbumViewController(with nibName:String, selectedItem: Item, allItems: [Item], albumUUID: String, hideActions: Bool = false) -> UIViewController {
         let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit, .removeFromAlbum],
                                                          style: .blackOpaque, tintColor: nil)
         let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .removeFromAlbum],
@@ -41,7 +42,8 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                           documentsBottomBarConfig: documentsBottomBarConfig,
                                                           selecetedItem: selectedItem,
                                                           allItems: allItems,
-                                                          albumUUID: albumUUID)
+                                                          albumUUID: albumUUID,
+                                                          hideActions: hideActions)
         
         return viewController
     }

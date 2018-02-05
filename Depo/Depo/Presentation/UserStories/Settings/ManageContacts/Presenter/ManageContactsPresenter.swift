@@ -7,7 +7,9 @@
 //
 
 class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageContactsViewOutput, ManageContactsInteractorOutput {
+    
     weak var view: ManageContactsViewInput!
+    weak var moduleOutput: ManageContactsModuleOutput?
     var interactor: ManageContactsInteractorInput!
     var router: ManageContactsRouterInput!
     
@@ -44,6 +46,10 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
         }
     }
     
+    func didDeleteContact() {
+        moduleOutput?.didDeleteContact()
+    }
+    
     private func sortContacts(_ contacts: [RemoteContact]) -> [ManageContacts.Group]  {
         var sortedContacts = [ManageContacts.Group]()
         
@@ -58,7 +64,18 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
             }
         }
         
-        return sortedContacts.sorted(by: { $0.name < $1.name } )
+        sortedContacts = sortedContacts.sorted(by: { (group1, group2) -> Bool in
+            group1.name.getFirstUnicode().compareWithCyrillicPriority(with: group2.name.getFirstUnicode()) != .orderedAscending
+        })
+        
+        for i in 0..<sortedContacts.count {
+            let contacts = sortedContacts[i].contacts.sorted(by: { (contact1, contact2) -> Bool in
+                contact1.name.compareWithCyrillicPriority(with: contact2.name)
+            })
+            sortedContacts[i] = ManageContacts.Group(name: sortedContacts[i].name, contacts: contacts)
+        }
+        
+        return sortedContacts
     }
     
     func asyncOperationStarted() {

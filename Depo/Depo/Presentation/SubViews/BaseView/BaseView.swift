@@ -8,41 +8,49 @@
 
 import UIKit
 
-class BaseView: UIView {
+class BaseView: UIView, NibInit {
     
     @IBOutlet weak var whiteView: UIView?
+    
     var canSwipe: Bool = true
-    
     static let baseViewCornerRadius: CGFloat = 5
-    
-    class func initFromNib() -> BaseView{
-        let nibName = String(describing: self)
-        let nibs = Bundle.main.loadNibNamed(nibName, owner: self, options: nil)
-        guard let view = nibs?[0] else {
-            return BaseView()
-        }
-        
-        if let baseView = view as? BaseView{
-            baseView.configurateView()
-            return baseView
-        }
-        return BaseView()
-    }
+    var calculatedH: CGFloat = 0
+    var cardObject: HomeCardResponse? = nil
+    lazy var homeCardsService: HomeCardsService = factory.resolve()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         configurateView()
     }
     
-    func configurateView(){
-        if let wView = whiteView {
-            wView.layer.cornerRadius = BaseView.baseViewCornerRadius
-        }
+    func configurateView() {
+        whiteView?.layer.cornerRadius = BaseView.baseViewCornerRadius
+        calculatedH = frame.size.height
+    }
+    
+    func set(object: HomeCardResponse?) {
+        cardObject = object
     }
     
     func viewDeletedBySwipe(){
+        deleteCard()
+    }
+    
+    func deleteCard(){
+        guard let id = cardObject?.id else {
+            return
+        }
         
+        homeCardsService.delete(with: id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    return
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                }
+            }
+        }
     }
     
 }

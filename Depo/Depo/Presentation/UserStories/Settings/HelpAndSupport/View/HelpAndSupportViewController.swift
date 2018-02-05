@@ -118,7 +118,6 @@ extension HelpAndSupportViewController: ExpandableTableViewDelegate {
         self.expandableTableView.deselectRowAtExpandableIndexPath(expandableIndexPath, animated: false)
         let item = tableSectionDataArray[expandableIndexPath.row]
         item.selected = !item.selected
-        self.expandableTableView.reloadData()
     }
     
     // SubRows

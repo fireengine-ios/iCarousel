@@ -44,31 +44,24 @@ extension CoreDataStack {
             let newBgcontext = self.newChildBackgroundContext
             let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
             
-            debugPrint("number of not saved  ", notSaved.count)
             let start = Date().timeIntervalSince1970
             var i = 0
             var addedObjects = [WrapData]()
             
             let totalNotSavedItems = Float(notSaved.count)
+            debugPrint("number of not saved  ", totalNotSavedItems)
             
             notSaved.forEach {
                 i += 1
                 debugPrint("local ", i)
-                let info = localMediaStorage.fullInfoAboutImageAsset(asset: $0)//shortInfoAboutAsset(asset: $0)
                 
-                let baseMediaContent = BaseMediaContent(curentAsset: $0,
-                                                        urlToFile: info.url,
-                                                        size: info.size,
-                                                        md5: info.md5)
-                
-                let wrapData = WrapData(baseModel: baseMediaContent)
-                _ = MediaItem(wrapData: wrapData, context:newBgcontext)
-                debugPrint(i)
+                let wrapedItem =  WrapData(asset: $0)
+                _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
                 
                 if i % 10 == 0 {
                     self.saveDataForContext(context: newBgcontext, saveAndWait: true)
                 }
-                addedObjects.append(wrapData)
+                addedObjects.append(wrapedItem)
                 
                 progress?(Float(i)/totalNotSavedItems)
             }
@@ -155,6 +148,9 @@ extension CoreDataStack {
     }
     
     func allLocalItemsForSync(video: Bool, image: Bool) -> [WrapData] {
+        let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+        let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap{ $0.localIdentifier }
+        
         var filesTypesArray = [Int16]()
         if (video){
             filesTypesArray.append(FileType.video.valueForCoreDataMapping())
@@ -162,11 +158,11 @@ extension CoreDataStack {
         if (image){
             filesTypesArray.append(FileType.image.valueForCoreDataMapping())
         }
+
         let context = mainContext
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@)", filesTypesArray)
+        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
         let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
         let sortedItems = items.sorted { (item1, item2) -> Bool in
-            //< correct
             return item1.fileSizeValue < item2.fileSizeValue
         }
         let currentUserID = SingletonStorage.shared.unigueUserID

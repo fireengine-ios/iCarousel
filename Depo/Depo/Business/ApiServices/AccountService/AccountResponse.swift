@@ -96,6 +96,14 @@ class SecuritySettingsInfoResponse: ObjectRequestResponse {
     
 }
 
+class FaceImageAllowedResponse: ObjectRequestResponse {
+    var allowed: Bool?
+    
+    override func mapping() {
+        allowed = json?.bool
+    }
+}
+
 class QuotaInfoResponse: ObjectRequestResponse {
     
     var bytes: Int64?

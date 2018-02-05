@@ -290,39 +290,23 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     func showInfoButton(forType type: UserValidationResults) {
+        var textCell: ProtoInputTextCell?
         switch type {//FIXME: change it to more reasanble way 
         case .mailIsEmpty:
-            
-                guard let tempoCell = userRegistrationTable.cellForRow(at: IndexPath(item: 0, section: 0)) as? BaseUserInputCellView else {
-                    break
-                }
-                tempoCell.changeInfoButtonTo(hidden: false)
+            textCell = userRegistrationTable.cellForRow(at: IndexPath(item: 1, section: 0)) as? BaseUserInputCellView
         case .passwordIsEmpty:
-            
-                guard let tempoCell = userRegistrationTable.cellForRow(at: IndexPath(item: 2, section: 0)) as? PasswordCell else {
-                    break
-                }
-                tempoCell.changeInfoButtonTo(hidden: false)
-
+            textCell = userRegistrationTable.cellForRow(at: IndexPath(item: 2, section: 0)) as? PasswordCell
         case .phoneIsEmpty:
-            
-                guard let tempoCell = userRegistrationTable.cellForRow(at: IndexPath(item: 1, section: 0)) as? GSMUserInputCell else {
-                    break
-                }
-                tempoCell.changeInfoButtonTo(hidden: false)
-            
+            textCell = userRegistrationTable.cellForRow(at: IndexPath(item: 0, section: 0)) as? GSMUserInputCell
         case .repasswordIsEmpty:
-            
-                guard let tempoCell = userRegistrationTable.cellForRow(at: IndexPath(item: 3, section: 0)) as? PasswordCell else {
-                    break
-                }
-                tempoCell.changeInfoButtonTo(hidden: false)
-            
+            textCell = userRegistrationTable.cellForRow(at: IndexPath(item: 3, section: 0)) as? PasswordCell
         default:
             break
         }
+        if let textCell = textCell {
+            textCell.changeInfoButtonTo(hidden: false)
+        }
     }
-    
     
     // MARK: - Actions
     

@@ -24,31 +24,30 @@ class UserValidator {
         var warningsArray: [UserValidationResults] = []
         
         let mailLenght = mail.count
-        if mail.count == 0 {
+        if mail.isEmpty {
             warningsArray.append(.mailIsEmpty)
         } else if (regularExpressionMailVer?.matches(in: mail, options: .reportCompletion, range: NSMakeRange(0, mailLenght)).count)! == 0 {
             warningsArray.append(.mailNotValid)
         }
         
-        if phone.count == 0 || code.count == 0 {//< 10 {
+        if phone.isEmpty || code.isEmpty {//< 10 {
             warningsArray.append(.phoneIsEmpty)//phoneNotValid)
         }
         
         let passwordLenght = password.count
-        if passwordLenght == 0 {
+        if password.isEmpty {
             warningsArray.append(.passwordIsEmpty)
         } else if regularExpressionPassword?.matches(in: password, options: .reportCompletion, range: NSMakeRange(0,passwordLenght)).count == 0 {
             warningsArray.append(.passwordNotValid)
-
         }
         
-        if repassword.count == 0 {
+        if repassword.isEmpty {
             warningsArray.append(.repasswordIsEmpty)
         } else if password != repassword {
             warningsArray.append(.passwodsNotMatch)
         }
         
-        if warningsArray.count == 0 {
+        if warningsArray.isEmpty {
             return []//.allValid
         }
         return warningsArray

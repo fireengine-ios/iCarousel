@@ -89,12 +89,6 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             return
         }
         
-        /// if accessToken is invalid
-//        if response.statusCode != 403 {
-//            completion(false, 0.0)
-//            return
-//        }
-        
         /// save request
         requestsToRetry.append(completion)
         

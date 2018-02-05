@@ -8,7 +8,7 @@
 //
 
 class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
-    
+
     typealias Item = WrapData
     
     lazy var player: MediaPlayer = factory.resolve()
@@ -239,8 +239,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view.showCustomPopUpWithInformationAboutAccessToMediaLibrary()
     }
     
-    func needShowNoFileView()-> Bool {
-        return dataSource.allMediaItems.count == 0
+    func needShowNoFileView() -> Bool {
+        return dataSource.getAllObjects().isEmpty
     }
     
     func getRemoteItemsService() -> RemoteItemsService{
@@ -406,13 +406,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
             dataSource.updateDisplayngType(type: .greed)
             type = .List
-            moduleOutput?.reloadType(type, sortedType: sortedType)
+            moduleOutput?.reloadType(type, sortedType: sortedType, fieldType: getFileFilter())
         }else{
             log.debug("BaseFilesGreedPresenter viewAppearanceChanged List")
 
             dataSource.updateDisplayngType(type: .list)
             type = .Grid
-            moduleOutput?.reloadType(type, sortedType: sortedType)
+            moduleOutput?.reloadType(type, sortedType: sortedType, fieldType: getFileFilter())
         }
     }
     
@@ -422,7 +422,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
         dataSource.currentSortType = rule
-        moduleOutput?.reloadType(type, sortedType: sortedType)
+        moduleOutput?.reloadType(type, sortedType: sortedType, fieldType: getFileFilter())
         reloadData()
     }
     
@@ -601,6 +601,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.selectAll(isTrue: true)
     }
     
+    func deSelectAll() {
+        dataSource.selectAll(isTrue: false)
+    }
+    
     func stopModeSelected() {
          stopEditing() 
     }
@@ -623,7 +627,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     //MARK: - BaseFilesGreedModuleOutput
     
-    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType) {
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
         log.debug("BaseFilesGreedPresenter reloadType")
 
         self.type = type

@@ -14,7 +14,41 @@ final class HomeCardResponse {
     var type: HomeCardTypes?
     var saved: Bool = false
     var actionable: Bool = false
-    var details: Any?
+    var details: JSON?
+    var order = 0
+    
+    func getOperationType() -> OperationType?{
+        guard let type = type else {
+            return nil
+        }
+        switch type {
+        case .emptyStorage:
+            return .emptyStorage
+        case .storageAlert:
+            return .freeAppSpaceCloudWarning
+        case .latestUploads:
+            return .latestUploads
+        case .movie:
+            return .movieCard
+        case .collage:
+            return .collage
+        case .stylizedPhoto:
+            return .stylizedPhoto
+        case .contactBackup:
+            if ContactBackupOld.isContactInfoObjectEmpty(object: details){
+                return .contactBacupEmpty
+            }
+            return .contactBacupOld
+        case .album:
+            return .albumCard
+        case .autoSyncWatingForWifi:
+            return .waitingForWiFi
+        case .autoSyncOff:
+            return .autoUploadIsOff
+        case .freeUpSpace:
+            return .freeAppSpace
+        }
+    }
 }
 
 extension HomeCardResponse: Map {

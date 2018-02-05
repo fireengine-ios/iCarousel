@@ -146,6 +146,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
     }
     
+    func deSelectAll(){
+        
+    }
+    
     func printSelected() { }
     func stopModeSelected() { }
     

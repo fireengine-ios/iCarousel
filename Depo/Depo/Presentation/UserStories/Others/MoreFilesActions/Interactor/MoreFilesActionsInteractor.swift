@@ -555,6 +555,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let failClosure: FailResponse = { [weak self] (errorResponse) in
             DispatchQueue.main.async {
                 self?.output?.compliteAsyncOperationEnableScreen()
+                if errorResponse.errorDescription == TextConstants.canceledOperationTextError {
+                    cancel()
+                    return
+                }
                 fail?(errorResponse)
             }
         }

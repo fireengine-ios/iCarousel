@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -66,12 +67,19 @@
                             <constraint firstItem="aXF-q3-q7j" firstAttribute="top" secondItem="ICB-ZY-xuu" secondAttribute="bottom" constant="1" id="ypn-bK-qCF"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9LX-Q4-Kta">
+                        <rect key="frame" x="0.0" y="0.0" width="186" height="131"/>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="9LX-Q4-Kta" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5I5-jZ-Ztg"/>
+                <constraint firstItem="9LX-Q4-Kta" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9T2-NP-tKv"/>
                 <constraint firstAttribute="trailing" secondItem="TbP-rD-dRR" secondAttribute="trailing" id="GjN-yZ-DYK"/>
+                <constraint firstItem="XSq-I2-uPu" firstAttribute="top" secondItem="9LX-Q4-Kta" secondAttribute="bottom" id="I5g-f5-Sp7"/>
                 <constraint firstAttribute="bottom" secondItem="XSq-I2-uPu" secondAttribute="bottom" id="X6k-jY-zK9"/>
                 <constraint firstItem="XSq-I2-uPu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oc3-K6-Up6"/>
+                <constraint firstAttribute="trailing" secondItem="9LX-Q4-Kta" secondAttribute="trailing" id="w5X-qU-Zr2"/>
                 <constraint firstItem="TbP-rD-dRR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xXs-08-8zp"/>
                 <constraint firstItem="XSq-I2-uPu" firstAttribute="top" secondItem="TbP-rD-dRR" secondAttribute="bottom" id="yAt-s8-gNa"/>
                 <constraint firstAttribute="trailing" secondItem="XSq-I2-uPu" secondAttribute="trailing" id="z7p-Wr-cCl"/>
@@ -79,6 +87,7 @@
             </constraints>
             <size key="customSize" width="186" height="151"/>
             <connections>
+                <outlet property="placeholderImage" destination="9LX-Q4-Kta" id="7d0-QZ-0yM"/>
                 <outlet property="previewBackView" destination="TbP-rD-dRR" id="6JY-eq-xjp"/>
                 <outlet property="previewImage1" destination="0rl-uE-Kzb" id="ikU-sU-iEJ"/>
                 <outlet property="previewImage2" destination="ICB-ZY-xuu" id="05A-A5-y7x"/>

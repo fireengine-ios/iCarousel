@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="1hH-31-UT2" id="tpf-st-dHZ"/>
-                <outlet property="containerViewBottomConstraint" destination="hG6-Qx-lnz" id="IgS-Nz-Zta"/>
                 <outlet property="floatingHeaderContainerHeightConstraint" destination="pMc-9l-rlR" id="MeZ-qO-blL"/>
                 <outlet property="musicBarContainer" destination="KvD-De-0PR" id="1ek-CL-FKi"/>
                 <outlet property="musicBarContainerHeightConstraint" destination="m4J-tT-zr0" id="Ana-4k-E7C"/>
