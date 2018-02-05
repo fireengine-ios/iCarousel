@@ -28,6 +28,19 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         return duplicatesArray
     }
     
+    func getCheckedDuplicatesArray(checkedArray: @escaping([WrapData]) -> Void){
+        DispatchQueue.main.async {[weak self] in
+            if let `self` = self{
+                let array = CoreDataStack.default.getLocalDuplicates(remoteItems: self.getDuplicatesObjects())
+                self.duplicatesArray.removeAll()
+                self.duplicatesArray.append(contentsOf: array)
+                self.localMD5Array.removeAll()
+                self.localMD5Array.append(contentsOf: array.map({ $0.md5 }))
+                checkedArray(array)
+            }
+        }
+    }
+    
     func clear(){
         localtemsArray.removeAll()
         localMD5Array.removeAll()
@@ -356,8 +369,9 @@ class FreeAppService: RemoteItemsService {
             return
         }else{
             isGotAll = true
-            let array = FreeAppSpace.default.getDuplicatesObjects()
-            success?(array)
+            FreeAppSpace.default.getCheckedDuplicatesArray(checkedArray: { (array) in
+                success?(array)
+            })
         }
     }
     
