@@ -349,7 +349,6 @@ class FileService: BaseRequestService {
         dispatchQueue.async {
             self.downloadOperation.addOperations(operations, waitUntilFinished: true)
             CardsManager.default.stopOperationWithType(type: .download)
-            FreeAppSpace.default.checkFreeAppSpace()
             success?()
         }
     }
@@ -526,11 +525,13 @@ class DownLoadOperation: Operation {
     }
     
     func customSuccess(){
-        if let item = param.item{
-            ItemOperationManager.default.finishedDowloadFile(file: item)
-        }
         success?()
         semaphore.signal()
+        if let item = param.item{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                ItemOperationManager.default.finishedDowloadFile(file: item)
+            })
+        }
     }
     
     func customFail(_ value: ErrorResponse){

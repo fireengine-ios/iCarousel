@@ -311,6 +311,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 }
                 sortDuplicatesArray()
             }
+            checkFreeAppSpaceAfterAutoSync()
         }
     }
     
