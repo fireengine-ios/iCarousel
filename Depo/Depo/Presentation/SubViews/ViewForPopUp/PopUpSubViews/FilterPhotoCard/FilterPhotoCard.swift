@@ -75,7 +75,7 @@ final class FilterPhotoCard: BaseView {
     }
     
     private func loadImage(from item: WrapData) {
-        filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
+        filesDataSource.getImage(for: item, isOriginal: true) { [weak self] image in
             DispatchQueue.main.async {
                 guard let image = image else { return }
                 self?.set(image: image)
@@ -98,11 +98,17 @@ final class FilterPhotoCard: BaseView {
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
-        guard let image = photoImageView.image else { return }
-        
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
-        RouterVC().pushViewController(viewController: vc)
+        switch cardType {
+        case .save:
+            guard let image = photoImageView.image else { return }
+            
+            let vc = PVViewerController.initFromNib()
+            vc.image = image
+            RouterVC().pushViewController(viewController: vc)
+            
+        case .display:
+            getLastImageAssetAndShowImage()
+        }
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {

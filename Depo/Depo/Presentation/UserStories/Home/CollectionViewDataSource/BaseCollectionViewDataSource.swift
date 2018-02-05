@@ -29,7 +29,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     var isEnable: Bool = true
     var isActive: Bool = false
     
-    func configurateWith(collectionView: UICollectionView, viewController:UIViewController, data:[UIViewController], delegate:BaseCollectionViewDataSourceDelegate?){
+    func configurateWith(collectionView: UICollectionView, viewController:UIViewController, delegate:BaseCollectionViewDataSourceDelegate?){
         
         self.collectionView = collectionView
         collectionView.dataSource = self

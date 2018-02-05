@@ -59,7 +59,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     }
     
     func showBack() {
-        view.dismiss(animated: true, completion: nil)
+        view.dismiss(animated: true, completion: {})
     }
         
 }

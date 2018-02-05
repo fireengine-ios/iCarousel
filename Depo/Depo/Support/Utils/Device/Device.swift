@@ -11,6 +11,9 @@ import UIKit
 
 class Device {
 
+    static private let supportedLanguages = ["tr","en","uk","ru","de","ar","ro","es"]
+    static private let defaultLocale = "en"
+    
     static func documentsFolderUrl(withComponent: String ) -> URL {
         let documentsUrl = FileManager.default.urls(for: .documentDirectory,
                                                    in: .userDomainMask).last
@@ -86,10 +89,19 @@ class Device {
     }
     
     static var locale: String {
-        guard let preferedLanguadge = Locale.preferredLanguages.first else {
-            return "en"
+        guard let preferedLanguage = Locale.preferredLanguages.first else {
+            return defaultLocale
         }
-        return String(preferedLanguadge[..<String.Index(encodedOffset: 2)])
+        return String(preferedLanguage[..<String.Index(encodedOffset: 2)])
+    }
+    
+    static var supportedLocale: String {
+        let locale = Device.locale
+        if supportedLanguages.contains(locale) {
+            return locale
+        } else {
+            return defaultLocale
+        }
     }
     
     static var winSize = UIScreen.main.bounds

@@ -452,7 +452,7 @@ struct TextConstants {
     static let settingsBackUpTotalNumberOfDuplicatedContacts = NSLocalizedString("There are %d duplicated contacts.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpKeepButton = NSLocalizedString("Keep", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpDeleteAllButton = NSLocalizedString("Delete All", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsContactsPermissionDeniedMessage = NSLocalizedString("You need to enable access to Contacts to continue. \"Settings - Privacy - Contacts\".", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsContactsPermissionDeniedMessage = NSLocalizedString("You need to enable access to Contacts to continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: ActionsMenuAction
     static let actionsMenuActionMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -783,7 +783,7 @@ struct TextConstants {
     static let passcodeFaceID = NSLocalizedString("Face ID", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passcodeTouchID = NSLocalizedString("Touch ID", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passcodeNumberOfTries = NSLocalizedString("Invalid passcode. %@ attempts left. Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let errorConnectedToNetwork = NSLocalizedString("Please check your internet connection is active and Cellular Data is ON under Settings/lifebox.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let errorConnectedToNetwork = NSLocalizedString("Please check your internet connection is active and Mobile Data is ON.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let apply = NSLocalizedString("Apply", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let success = NSLocalizedString("Success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

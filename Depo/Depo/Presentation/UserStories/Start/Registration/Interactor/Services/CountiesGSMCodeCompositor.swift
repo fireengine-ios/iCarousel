@@ -9,10 +9,7 @@
 import Foundation
 
 class CounrtiesGSMCodeCompositor {
-    
-    private let supportedLanguages = ["tr","en","ua","ru","de","ar","ro","es"]
-    private let defaultLanguage = "en"
-    
+        
     func getGSMCCModels() -> [GSMCodeModel] {
         return getLocals()
     }
@@ -23,7 +20,7 @@ class CounrtiesGSMCodeCompositor {
         let coreTelephonyService = CoreTelephonyService()
         let countryCodes = coreTelephonyService.callingCodeMap()
         let isoCodes = NSLocale.isoCountryCodes
-        let locale = NSLocale(localeIdentifier: preferredLanguage())
+        let locale = NSLocale(localeIdentifier: Device.supportedLocale)
         
         resulArray = isoCodes.flatMap {
             
@@ -45,10 +42,4 @@ class CounrtiesGSMCodeCompositor {
         
         return resulArray
     }
-    
-    private func preferredLanguage() -> String {
-        let preferredLanguages = Locale.preferredLanguages.flatMap {$0.components(separatedBy: "-").first?.lowercased()}
-        return preferredLanguages.first(where: {supportedLanguages.contains($0)}) ?? defaultLanguage
-    }
-
 }

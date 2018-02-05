@@ -76,24 +76,7 @@ final class MovieCard: BaseView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
-        loadImage(from: item)
-    }
-    
-    private func loadImage(from item: WrapData) {
-        filesDataSource.getImage(patch: item.patchToPreview) { [weak self] image in
-            DispatchQueue.main.async {
-                if let image = image {
-                    self?.set(image: image)
-                } else {
-                    UIApplication.showErrorAlert(message: TextConstants.getImageError)
-                }
-            }
-        }
-    }
-    
-    private func set(image: UIImage) {
-        cardType = .save
-        videoPreviewImageView.image = image
+        videoPreviewImageView.loadImageForItem(object: item)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){
