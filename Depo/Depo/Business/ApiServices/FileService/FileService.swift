@@ -540,7 +540,7 @@ class DownLoadOperation: Operation {
 extension DownLoadOperation: OperationProgressServiceDelegate {
     
     func didSend(ratio: Float, for tempUUID: String) {
-        guard !isCancelled else {
+        guard isExecuting else {
             return
         }
         
