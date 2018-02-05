@@ -58,7 +58,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
                 if let presenter = self?.output as? AlbumSelectionPresenter{
                     presenter.photoAddedToAlbum()
                 }
-                ItemOperationManager.default.fileAddedToAlbum()
+                ItemOperationManager.default.filesAddedToAlbum()
             }
         }) { [weak self] (error) in
             log.debug("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum error")

@@ -64,6 +64,11 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         let isFavorites = router.isOnFavoritesView()
         let rooutUUID = router.getParentUUID()
         let isFromAlbum = router.isRootViewControllerAlbumDetail()
+        
+        if isFromAlbum {
+            ItemOperationManager.default.startUploadFilesToAlbum(files: uploadItems)
+        }
+        
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: {
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
 

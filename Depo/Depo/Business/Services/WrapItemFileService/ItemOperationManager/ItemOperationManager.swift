@@ -12,6 +12,8 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func startUploadFile(file: WrapData)
     
+    func startUploadFilesToAlbum(files: [WrapData])
+    
     func setProgressForUploadingFile(file: WrapData, progress: Float)
     
     func finishedUploadFile(file: WrapData)
@@ -32,7 +34,11 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func albumsDeleted(albums: [AlbumItem])
     
-    func fileAddedToAlbum()
+    func fileAddedToAlbum(item: WrapData, error: Bool)
+    
+    func filesAddedToAlbum()
+    
+    func filesUploadToFolder()
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String)
     
@@ -46,6 +52,8 @@ protocol ItemOperationManagerViewProtocol: class {
 
 extension ItemOperationManagerViewProtocol {
     func startUploadFile(file: WrapData) {}
+    
+    func startUploadFilesToAlbum(files: [WrapData]) {}
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}
     
@@ -67,7 +75,11 @@ extension ItemOperationManagerViewProtocol {
     
     func albumsDeleted(albums: [AlbumItem]) {}
     
-    func fileAddedToAlbum() {}
+    func fileAddedToAlbum(item: WrapData, error: Bool) {}
+    
+    func filesAddedToAlbum() {}
+    
+    func filesUploadToFolder() {}
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String) {}
     
@@ -109,6 +121,14 @@ class ItemOperationManager: NSObject {
         DispatchQueue.main.async {
             for view in self.views{
                 view.startUploadFile(file: file)
+            }
+        }
+    }
+    
+    func startUploadFilesToAlbum(files: [WrapData]) {
+        DispatchQueue.main.async {
+            for view in self.views {
+                view.startUploadFilesToAlbum(files: files)
             }
         }
     }
@@ -199,10 +219,26 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func fileAddedToAlbum(){
+    func filesAddedToAlbum() {
         DispatchQueue.main.async {
-            for view in self.views{
-                view.fileAddedToAlbum()
+            for view in self.views {
+                view.filesAddedToAlbum()
+            }
+        }
+    }
+    
+    func fileAddedToAlbum(item: WrapData, error: Bool = false) {
+        DispatchQueue.main.async {
+            for view in self.views {
+                view.fileAddedToAlbum(item: item, error: error)
+            }
+        }
+    }
+    
+    func filesUploadToFolder() {
+        DispatchQueue.main.async {
+            for view in self.views {
+                view.filesUploadToFolder()
             }
         }
     }
