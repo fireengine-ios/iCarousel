@@ -344,7 +344,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         folderSelector.selectFolder(select: { [weak self] (folder) in
             self?.output?.operationStarted(type: .move)
             self?.fileService.move(items: item, toPath: folder.uuid,
-                                   success: {
+                                   success: { [weak self] in
                                     self?.succesAction(elementType: .move)()
                                     //because we have animation of dismiss for this stack of view controllers we have some troubles with reloading data in root collection view
                                     //data will be updated after 0.3 seconds (time of aimation)
