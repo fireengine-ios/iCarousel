@@ -25,10 +25,6 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
         
     }
     
-    override func onChangeSelectedItemsCount(selectedItemsCount: Int){
-        //view.setTitle(title: "", subTitle: "")
-    }
-    
     override func onMaxSelectionExeption(){
         log.debug("UploadFromLifeBoxPhotosPresenter onMaxSelectionExeption")
 
