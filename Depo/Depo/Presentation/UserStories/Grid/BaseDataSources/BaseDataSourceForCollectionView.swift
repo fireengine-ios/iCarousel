@@ -51,6 +51,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     internal var preferedCellReUseID: String?
     
+    var canSelectionState = true
+    
     private var isSelectionStateActive = false
     
     var selectedItemsArray = Set<String>()
@@ -565,6 +567,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     //MARK: LBCellsDelegate
     
     func onLongPress(cell: UICollectionViewCell){
+        if !canSelectionState {
+            return
+        }
+        
         if maxSelectionCount == selectedItemsArray.count {
             if let cell = cell as? CollectionViewCellForStoryPhoto  {
                 cell.setSelection(isSelectionActive: false, isSelected: false)
