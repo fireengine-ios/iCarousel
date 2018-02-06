@@ -47,7 +47,8 @@ class CreatesFolder: BaseRequestParametrs {
     }
     
     override var header: RequestHeaderParametrs {
-        return super.header + ["Folder-Name":folderName]
+        let name = folderName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? folderName
+        return super.header + ["Folder-Name": name]
     }
 }
 
@@ -151,7 +152,8 @@ class RenameFile: BaseRequestParametrs {
     }
     
     override var header: RequestHeaderParametrs {
-        return super.header + ["New-Name":newName]
+        let name = newName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? newName
+        return super.header + ["New-Name": name]
     }
 }
 
