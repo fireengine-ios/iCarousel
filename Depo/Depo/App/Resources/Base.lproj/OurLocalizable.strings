@@ -539,7 +539,7 @@
 "Please check the e-mail address." = "Please check the e-mail address.";
 "Please enter a valid email adress" = "Please enter a valid email adress";
 "Please type the text" = "Please type the text";
-"You have performed too many attempts. Please try again 1 hour later." = "You have performed too many attempts. Please try again 1 hour later.";
+"You have performed too many attempts. Please try again later." = "You have performed too many attempts. Please try again later.";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
 "The Internet connection appears to be offline." = "The Internet connection appears to be offline.";
 "Please enter your password" = "Please enter your password";
