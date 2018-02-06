@@ -43,6 +43,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         configurateView()
         onStopPlay()
         rootNavController(vizible: true)
@@ -71,6 +72,14 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         floatingView.hideView(animated: true)
         output.viewWillDisappear()
+        
+        /// set previous state of orientation or any new one
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateFramesForViews()
     }
     
     private func configureNavigationBar() {

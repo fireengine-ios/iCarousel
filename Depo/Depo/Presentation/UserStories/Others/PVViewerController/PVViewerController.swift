@@ -16,6 +16,7 @@ final class PVViewerController: UIViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         view.backgroundColor = UIColor.black
@@ -32,6 +33,12 @@ final class PVViewerController: UIViewController, NibInit {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         imageScrollView.updateZoom()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        /// set previous state of orientation or any new one
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
     }
 }
 
