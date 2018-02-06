@@ -100,16 +100,19 @@ final class FilterPhotoCard: BaseView {
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
         switch cardType {
         case .save:
-            guard let image = photoImageView.image else { return }
-            
-            let vc = PVViewerController.initFromNib()
-            vc.image = image
-            RouterVC().pushViewController(viewController: vc)
-            
+            displayNotSavedPhoto()
         case .display:
             getLastImageAssetAndShowImage()
         }
     }
+    
+    private func displayNotSavedPhoto(){
+        guard let image = photoImageView.image else { return }
+        let vc = PVViewerController.initFromNib()
+        vc.image = image
+        RouterVC().pushViewController(viewController: vc)
+    }
+
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
         guard let image = photoImageView.image else { return }
