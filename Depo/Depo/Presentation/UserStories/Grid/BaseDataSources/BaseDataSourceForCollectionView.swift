@@ -73,6 +73,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var allItems = [[WrapData]]()
     var allLocalItems = [WrapData]()
     var uploadedObjectID = [String]()
+    var uploadToAlbumItems = [String]()
     
     var needShowProgressInCell: Bool = false
     var needShowCloudIcon: Bool = true
@@ -177,6 +178,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         for filter in filters {
             switch filter {
             case   .fileType(.photoAlbum):
+                return true
+            default:
+                break
+            }
+        }
+        return false
+    }
+    
+    func canUploadFromLifeBox(filters: [GeneralFilesFiltrationType]) -> Bool {
+        for filter in filters {
+            switch filter {
+            case .fileType(.photoAlbum):
+                return true
+            case .fileType(.folder):
                 return true
             default:
                 break
@@ -1252,9 +1267,37 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
-    func fileAddedToAlbum() {
+    func startUploadFilesToAlbum(files: [WrapData]) {
+        guard let unwrapedFilters = originalFilters,
+            isAlbumDetail(filters: unwrapedFilters) else {
+            return
+        }
+        uploadToAlbumItems.append(contentsOf: files.map {$0.uuid})
+    }
+    
+    func fileAddedToAlbum(item: WrapData, error: Bool) {
+        guard let unwrapedFilters = originalFilters,
+            isAlbumDetail(filters: unwrapedFilters) else {
+                return
+        }
+        if let index = uploadToAlbumItems.index(of: item.uuid) {
+            uploadToAlbumItems.remove(at: index)
+        }
+        if uploadToAlbumItems.isEmpty {
+            delegate?.needReloadData?()
+        }
+    }
+    
+    func filesAddedToAlbum() {
         if let unwrapedFilters = originalFilters,
             isAlbumDetail(filters: unwrapedFilters) {
+            delegate?.needReloadData?()
+        }
+    }
+    
+    func filesUploadToFolder() {
+        if let unwrapedFilters = originalFilters,
+            canUploadFromLifeBox(filters: unwrapedFilters) {
             delegate?.needReloadData?()
         }
     }

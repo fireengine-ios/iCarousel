@@ -166,7 +166,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         requestAllItems()
     }
     
-    func fileAddedToAlbum() {
+    func filesAddedToAlbum() {
         requestAllItems()
     }
 
