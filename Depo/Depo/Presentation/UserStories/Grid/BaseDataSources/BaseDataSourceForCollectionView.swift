@@ -790,7 +790,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
                     DispatchQueue.main.async {
                         if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
-                            cell_.setImage(image: image)
+                            cell_.setImage(image: image, animated:  false)
                         } else {
                             cell_.setPlaceholderImage(fileType: wraped.fileType)
                         }
