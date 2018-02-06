@@ -138,6 +138,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         configurateViewForPopUp()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        /// need when device was rotated
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     func configurateViewForPopUp(){
         CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
     }

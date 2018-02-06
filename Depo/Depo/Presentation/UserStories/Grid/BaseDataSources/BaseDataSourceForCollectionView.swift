@@ -1025,6 +1025,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
+    func setProgressForDownloadingFile(file: WrapData, progress: Float) {
+        if !needShowProgressInCell{
+            return
+        }
+        
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.setProgressForObject(progress: progress)
+        }
+    }
+    
+    func finishedDownloadFile(file: WrapData) {
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.finishedDownloadForObject()
+        }
+    }
+    
     func updateFavoritesCellStatus(items: [Item], isFavorites: Bool){
         var arrayOfPath = [IndexPath]()
         

@@ -16,6 +16,10 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func finishedUploadFile(file: WrapData)
     
+    func setProgressForDownloadingFile(file: WrapData, progress: Float)
+    
+    func finishedDownloadFile(file: WrapData)
+    
     func addFilesToFavorites(items: [Item])
     
     func addedLocalFiles(items: [Item])
@@ -51,6 +55,10 @@ extension ItemOperationManagerViewProtocol {
     
     func finishedUploadFile(file: WrapData) {}
     
+    func setProgressForDownloadingFile(file: WrapData, progress: Float) {}
+    
+    func finishedDownloadFile(file: WrapData) {}
+    
     func addFilesToFavorites(items: [Item]) {}
     
     func addedLocalFiles(items: [Item]) {}
@@ -85,6 +93,9 @@ class ItemOperationManager: NSObject {
     
     private var currentUploadingObject: WrapData?
     private var currentUploadProgress: Float = 0
+    
+    private var currentDownloadingObject: WrapData?
+    private var currentDownloadingProgress: Float = 0
     
     func startUpdateView(view: ItemOperationManagerViewProtocol){
         if views.index(where: {$0.isEqual(object: view)}) == nil{
@@ -124,10 +135,34 @@ class ItemOperationManager: NSObject {
         currentUploadProgress = progress
     }
     
+    
+    
     func finishedUploadFile(file: WrapData){
         DispatchQueue.main.async {
             for view in self.views{
                 view.finishedUploadFile(file: file)
+            }
+        }
+        
+        currentUploadingObject = nil
+        currentUploadProgress = 0
+    }
+    
+    func setProgressForDownloadingFile(file: WrapData, progress: Float) {
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.setProgressForDownloadingFile(file: file, progress: progress)
+            }
+        }
+        
+        currentDownloadingObject = file
+        currentDownloadingProgress = progress
+    }
+    
+    func finishedDowloadFile(file: WrapData) {
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.finishedDownloadFile(file: file)
             }
         }
         

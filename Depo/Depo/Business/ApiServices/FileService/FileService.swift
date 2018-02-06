@@ -47,7 +47,8 @@ class CreatesFolder: BaseRequestParametrs {
     }
     
     override var header: RequestHeaderParametrs {
-        return super.header + ["Folder-Name":folderName]
+        let name = folderName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? folderName
+        return super.header + ["Folder-Name": name]
     }
 }
 
@@ -151,7 +152,8 @@ class RenameFile: BaseRequestParametrs {
     }
     
     override var header: RequestHeaderParametrs {
-        return super.header + ["New-Name":newName]
+        let name = newName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? newName
+        return super.header + ["New-Name": name]
     }
 }
 
@@ -349,7 +351,6 @@ class FileService: BaseRequestService {
         dispatchQueue.async {
             self.downloadOperation.addOperations(operations, waitUntilFinished: true)
             CardsManager.default.stopOperationWithType(type: .download)
-            FreeAppSpace.default.checkFreeAppSpace()
             success?()
         }
     }
@@ -528,6 +529,11 @@ class DownLoadOperation: Operation {
     func customSuccess(){
         success?()
         semaphore.signal()
+        if let item = param.item{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                ItemOperationManager.default.finishedDowloadFile(file: item)
+            })
+        }
     }
     
     func customFail(_ value: ErrorResponse){
@@ -547,6 +553,7 @@ extension DownLoadOperation: OperationProgressServiceDelegate {
         if let item = param.item, item.uuid == tempUUID {
             CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
 //            ItemOperationManager.default.setProgressForUploadingFile(file: item, progress: ratio)
+            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
         }
     }
 }
