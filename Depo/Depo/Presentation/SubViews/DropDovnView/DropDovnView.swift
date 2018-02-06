@@ -9,6 +9,10 @@
 import UIKit
 
 @objc protocol DropDovnViewDelegate {
+    @objc optional func onWillShow()
+    @objc optional func onDidShow()
+    @objc optional func onWillHide()
+    @objc optional func onDidHide()
     func onSelectItem(atIndex index: Int)
 }
 
@@ -132,14 +136,20 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         tableView?.reloadData()
     }
     
-    @objc func onDropDovnButton() {
+    @objc private func onDropDovnButton() {
         if let supView = superview {
             supView.bringSubview(toFront: self)
         }
         onShowTable(show: true)
     }
     
-    func onShowTable(show: Bool) {
+    func hideViewIfNeeded() {
+        if let shown = tableView?.isHidden, !shown {
+            onShowTable(show: false)
+        }
+    }
+    
+    private func onShowTable(show: Bool) {
         if (show) {
             originTableViewH = self.constraint!.constant
         }
@@ -147,11 +157,22 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         tableView!.isHidden = false
         let h = show ? self.maxTableViewH : self.originTableViewH
         
+        if show {
+            delegate?.onWillShow?()
+        } else {
+            delegate?.onWillHide?()
+        }
+        
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.constraint!.constant = h
             self.cornerView!.setNeedsUpdateConstraints()
         }) { [weak self] (flag) in
             self?.tableView!.isHidden = !show
+            if show {
+                self?.delegate?.onDidShow?()
+            } else {
+                self?.delegate?.onDidHide?()
+            }
         }
         
     }
