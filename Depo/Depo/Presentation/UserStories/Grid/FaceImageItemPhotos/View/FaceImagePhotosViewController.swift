@@ -8,14 +8,22 @@
 
 import UIKit
 
-class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController {
+class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController, FaceImagePhotosViewInput {
+    
+    @IBOutlet private weak var headerImage: UIImageView!
+    
+    func setHeaderImage(with url: URL) {
+        headerImage.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in
+            self?.headerImage.image = image
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTitle(withString: mainTitle )
     }
     
-    override func  configurateNavigationBar() {
+    override func configurateNavigationBar() {
         configureFaceImageItemsPhotoActions()
     }
     

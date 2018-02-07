@@ -55,6 +55,7 @@
 		2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */; };
 		2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282E581C729D5E96D07CE3D1 /* AlbumDetailRouter.swift */; };
 		2B5261513879D04FFE1D241C /* SettingsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1BED0751734B73B9583DD /* SettingsViewOutput.swift */; };
+		2B96AEA2202B6A5100F066F9 /* FaceImagePhotosViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */; };
 		2BA37C2D2028374E00660394 /* FaceImageChangeCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C2B2028374D00660394 /* FaceImageChangeCoverViewController.swift */; };
 		2BA37C2E2028374E00660394 /* FaceImageChangeCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA37C2C2028374E00660394 /* FaceImageChangeCoverViewController.xib */; };
 		2BA37C312028376500660394 /* FaceImageChangeCoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C2F2028376500660394 /* FaceImageChangeCoverRouter.swift */; };
@@ -3329,6 +3330,7 @@
 		2944E4D7E97575567829EB5C /* HomeHeaderInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderInteractorOutput.swift; sourceTree = "<group>"; };
 		2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewOutput.swift; sourceTree = "<group>"; };
 		2B67E3929C50D3031AE4A70F /* CompleteProfileViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompleteProfileViewController.swift; sourceTree = "<group>"; };
+		2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewInput.swift; sourceTree = "<group>"; };
 		2BA37C2B2028374D00660394 /* FaceImageChangeCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverViewController.swift; sourceTree = "<group>"; };
 		2BA37C2C2028374E00660394 /* FaceImageChangeCoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceImageChangeCoverViewController.xib; sourceTree = "<group>"; };
 		2BA37C2F2028376500660394 /* FaceImageChangeCoverRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverRouter.swift; sourceTree = "<group>"; };
@@ -6702,6 +6704,7 @@
 			children = (
 				78E8E2A52023186C00A979AB /* FaceImagePhotosViewController.swift */,
 				78E8E2A62023186C00A979AB /* FaceImagePhotosViewController.xib */,
+				2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -14219,6 +14222,7 @@
 				CE3F33AF1F34881800EE37E7 /* SharedService.swift in Sources */,
 				CE51AC221EF90853005DCEE0 /* CellsConstant.swift in Sources */,
 				CEAE3FF11EFD517300A405B2 /* GradientView.swift in Sources */,
+				2B96AEA2202B6A5100F066F9 /* FaceImagePhotosViewInput.swift in Sources */,
 				D498865E1F3EFBE200F50C95 /* ImportPhotosRouterInput.swift in Sources */,
 				CE51AC2D1EF90853005DCEE0 /* ProtoInputTextCell.swift in Sources */,
 				7CAC23C21F4ADC3900607660 /* RemoteSearchService.swift in Sources */,

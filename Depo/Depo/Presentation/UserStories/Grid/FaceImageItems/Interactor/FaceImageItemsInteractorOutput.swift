@@ -7,6 +7,6 @@
 //
 
 protocol FaceImageItemsInteractorOutput {
-    func didLoadAlbum(_ albumUUID: String, forItem item: Item)
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
     func didSaveChanges(_ items: [PeopleItem])
 }

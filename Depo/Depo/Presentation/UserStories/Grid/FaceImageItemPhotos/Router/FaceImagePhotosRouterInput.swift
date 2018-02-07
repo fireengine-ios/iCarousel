@@ -2,7 +2,7 @@
 //  FaceImagePhotosRouterInput.swift
 //  Depo_LifeTech
 //
-//  Created by Constantine N on 2/5/18.
+//  Created by Raman Harhun on 2/5/18.
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 

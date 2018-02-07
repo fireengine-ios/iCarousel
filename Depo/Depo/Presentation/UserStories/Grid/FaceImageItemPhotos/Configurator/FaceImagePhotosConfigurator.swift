@@ -10,7 +10,7 @@ import UIKit
 
 class FaceImagePhotosConfigurator {
     
-    func configure(viewController: FaceImagePhotosViewController, albumUUID: String, item: Item) {
+    func configure(viewController: FaceImagePhotosViewController, albumUUID: String, coverPhotoURL: URL, item: Item) {
         let router = FaceImagePhotosRouter()
         
         let presenter = FaceImagePhotosPresenter()
@@ -48,5 +48,6 @@ class FaceImagePhotosConfigurator {
         interactor.bottomBarOriginalConfig = bottomBarConfig
         
         viewController.mainTitle = item.name ?? ""
+        viewController.setHeaderImage(with: coverPhotoURL)
     }
 }
