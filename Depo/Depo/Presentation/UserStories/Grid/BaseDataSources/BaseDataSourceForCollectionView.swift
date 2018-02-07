@@ -55,7 +55,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var isSelectionStateActive = false
     
-    var selectedItemsArray = Set<String>()
+    var selectedItemsArray = Set<BaseDataSourceItem>()
     
     private var headers = Set([CollectionViewSimpleHeaderWithText]())
     
@@ -576,10 +576,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
-        let selectedItemsTempo = allMediaItems.filter{ selectedItemsArray.contains($0.uuid) }
-        //        let array = CoreDataStack.default.mediaItemByUUIDs(uuidList: Array(selectedItemsArray))
-        //        return Array(selectedItemsArray)
-        return selectedItemsTempo
+        return Array(selectedItemsArray)
     }
     
     
@@ -619,12 +616,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func isObjctSelected(object: BaseDataSourceItem) -> Bool {
-        return selectedItemsArray.contains(object.uuid)
+        return selectedItemsArray.contains(object)
     }
     
     func onSelectObject(object: BaseDataSourceItem){
         if (isObjctSelected(object: object)){
-            selectedItemsArray.remove(object.uuid)
+            selectedItemsArray.remove(object)
         }else{
             if (maxSelectionCount >= 0){
                 if (selectedItemsArray.count >= maxSelectionCount){
@@ -637,7 +634,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                 }
             }
-            selectedItemsArray.insert(object.uuid)
+            selectedItemsArray.insert(object)
         }
         
         for header in headers{
@@ -652,9 +649,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         guard section < allItems.count else {
             return false
         }
-        let array = allItems[section]
-        let result: [String] = array.map { $0.uuid }
-        let subSet = Set<String>(result)
+        let arrayOfObjectsInSection: [BaseDataSourceItem] = allItems[section]
+        let subSet = Set<BaseDataSourceItem>(arrayOfObjectsInSection)
         
         return subSet.isSubset(of: selectedItemsArray)
         
@@ -666,11 +662,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if (isHeaderSelected(section: section)){
             for obj in objectsArray {
-                selectedItemsArray.remove(obj.uuid)
+                selectedItemsArray.remove(obj)
             }
         }else{
             for obj in objectsArray {
-                selectedItemsArray.insert(obj.uuid)
+                selectedItemsArray.insert(obj)
             }
         }
         

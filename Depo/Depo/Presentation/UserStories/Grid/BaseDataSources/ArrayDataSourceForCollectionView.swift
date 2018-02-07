@@ -42,10 +42,8 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     }
     
     override func isHeaderSelected(section: Int) -> Bool{
-        let array = tableDataMArray[section]
-        let result: [String] = array.flatMap { $0.uuid}
-        let subSet = Set<String>(result)
-        
+        let arrayOfObjectsInSction = tableDataMArray[section]
+        let subSet = Set<BaseDataSourceItem>(arrayOfObjectsInSction)
         return subSet.isSubset(of: selectedItemsArray)
     }
     
@@ -53,7 +51,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         var resultArray = [BaseDataSourceItem]()
         for array in tableDataMArray{
             for object in array{
-                if (selectedItemsArray.contains(object.uuid)){
+                if (selectedItemsArray.contains(object)){
                     resultArray.append(object)
                 }
             }
