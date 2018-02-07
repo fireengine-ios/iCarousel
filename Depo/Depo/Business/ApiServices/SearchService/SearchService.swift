@@ -211,7 +211,8 @@ class UnifiedSearchParameters: BaseRequestParametrs {
 //        let searchWithParam = String(format:RouteRequests.unifiedSearch,
 //                                     text, category.rawValue,
 //                                     page.description, size.description)
-        return URL(string: searchWithParam.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!, relativeTo:RouteRequests.BaseUrl)!
+        let params = searchWithParam.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? searchWithParam
+        return URL(string: params, relativeTo:RouteRequests.BaseUrl)!
     }
     
 }
@@ -225,8 +226,9 @@ class SuggestionParametrs: BaseRequestParametrs {
     }
 
     override var patch: URL {
-        let suggestionParametrs = String(format: RouteRequests.suggestion, text)
-        return URL(string: suggestionParametrs.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!, relativeTo: RouteRequests.BaseUrl)!
+        let suggestionParameters = String(format: RouteRequests.suggestion, text)
+        let params = suggestionParameters.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? suggestionParameters
+        return URL(string: params, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 

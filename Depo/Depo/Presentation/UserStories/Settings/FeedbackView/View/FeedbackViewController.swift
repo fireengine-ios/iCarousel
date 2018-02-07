@@ -197,7 +197,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     @objc func hideKeyboard() {
-        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.scrollView.contentInset = .zero
     }
 
     // MARK: FeedbackViewViewInput
@@ -269,6 +269,10 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         }
     }
     
+    func onWillShow() {
+        onHideKeyboard()
+    }
+    
     private func toggleButtons() {
         suggeston = !suggeston
         complaint = !complaint
@@ -286,6 +290,11 @@ extension FeedbackViewController: UITextViewDelegate {
         }
         
         output.onTextDidChange(text: textView.text)
+    }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        dropDovnView.hideViewIfNeeded()
+        return true
     }
 }
 
