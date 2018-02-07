@@ -12,6 +12,8 @@ typealias ListRemoveItems = ( [WrapData] ) -> Void
 
 typealias ListRemoveAlbums = ( [AlbumItem] ) -> Void
 
+typealias AlbumCoverPhoto = ( Item ) -> Void
+
 typealias FailRemoteItems = () -> Void
 
 
