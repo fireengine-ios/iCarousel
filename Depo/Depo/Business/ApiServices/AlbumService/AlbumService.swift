@@ -13,6 +13,7 @@ struct AlbumsPatch  {
     static let addPhotosToAlbum = "/api/album/addFiles/%@"
     static let deletePhotosFromAlbum = "/api/album/removeFiles/%@"
     static let renameAlbum = "/api/album/rename/%@?newLabel=%@"
+    static let changeCoverPhoto = "/api/album/coverPhoto/%@?coverPhotoUuid=%@"
     
 }
 
@@ -69,6 +70,25 @@ class AddPhotosToAlbum: BaseRequestParametrs {
     
     override var patch: URL {
         let path: String = String(format: AlbumsPatch.addPhotosToAlbum, albumUUID)
+        return URL(string: path, relativeTo: super.patch)!
+    }
+}
+
+class ChangeCoverPhoto: BaseRequestParametrs {
+    let albumUUID: String
+    let photoUUID: String
+    
+    init (albumUUID: String, photoUUID: String) {
+        self.albumUUID = albumUUID
+        self.photoUUID = photoUUID
+    }
+    
+    override var requestParametrs: Any {
+        return [Any]()
+    }
+    
+    override var patch: URL {
+        let path: String = String(format: AlbumsPatch.changeCoverPhoto, albumUUID, photoUUID)
         return URL(string: path, relativeTo: super.patch)!
     }
 }
@@ -197,6 +217,16 @@ class PhotosAlbumService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             log.debug("PhotosAlbumService deletePhotosFromAlbum success")
 
+            success?()
+        }, fail: fail)
+        executePutRequest(param: parameters, handler: handler)
+    }
+    
+    func changeCoverPhoto(parameters: ChangeCoverPhoto, success: PhotosAlbumOperation?, fail: FailResponse?) {
+        log.debug("PhotosAlbumService changeCoverPhoto")
+        
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { (response)  in
+            
             success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)

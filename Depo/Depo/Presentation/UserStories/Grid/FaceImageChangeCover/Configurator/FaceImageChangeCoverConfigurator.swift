@@ -1,22 +1,21 @@
 //
-//  FaceImagePhotosConfigurator.swift
-//  Depo_LifeTech
+//  FaceImageChangeCoverConfigurator.swift
+//  Depo
 //
-//  Created by Harbros Agency on 2/1/18.
+//  Created by Harbros on 30.01.2018.
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-import UIKit
-
-class FaceImagePhotosConfigurator {
+class FaceImageChangeCoverConfigurator {
     
-    func configure(viewController: FaceImagePhotosViewController, albumUUID: String, item: Item) {
-        let router = FaceImagePhotosRouter()
+    func configure(viewController: FaceImageChangeCoverViewController,
+                   itemsService: FaceImageDetailService) {
+        let router = FaceImageChangeCoverRouter()
         
-        let presenter = FaceImagePhotosPresenter()
+        let presenter = FaceImageChangeCoverPresenter()
         
-        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
-                                                                   selectionModeTypes: [.createStory, .delete])
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+                                                                   selectionModeTypes: [.createStory,.addToFavorites,.delete])
         
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()
@@ -28,9 +27,7 @@ class FaceImagePhotosConfigurator {
         presenter.view = viewController
         presenter.router = router
         
-        let remoteServices = FaceImageDetailService(albumUUID: albumUUID, requestSize: 40)
-        
-        let interactor = FaceImagePhotosInteractor(remoteItems: remoteServices)
+        let interactor = FaceImageChangeCoverInteractor(remoteItems: itemsService)
         interactor.output = presenter
         interactor.alertSheetConfig = alertSheetConfig
         
@@ -46,7 +43,5 @@ class FaceImagePhotosConfigurator {
         bottomBarVCmodule.presenter?.basePassingPresenter = presenter
         
         interactor.bottomBarOriginalConfig = bottomBarConfig
-        
-        viewController.mainTitle = item.name ?? ""
     }
 }
