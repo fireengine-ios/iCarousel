@@ -474,7 +474,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             var selectedItems = [WrapData]()
             
             for items in dataSource.allItems {
-                selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
+                selectedItems += items.filter { selectedItemsUUIDs.contains($0) }
             }
             
             //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
