@@ -176,13 +176,6 @@ struct TextConstants {
     
     //MARK: - More actions Collection view section titles
     
-    static let syncTypeTitle = NSLocalizedString("Sync Type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let viewTypeTitle = NSLocalizedString("View Type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let sortTypeTitle = NSLocalizedString("Sort Type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let fileTypeTitle = NSLocalizedString("File Type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let selectionTypeTitle = NSLocalizedString("Selection Type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    
     static let viewTypeListTitle = NSLocalizedString("List", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let viewTypeGridTitle = NSLocalizedString("Grid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -388,14 +381,6 @@ struct TextConstants {
     static let settingsBackUpKeepButton = NSLocalizedString("Keep", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpDeleteAllButton = NSLocalizedString("Delete All", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsContactsPermissionDeniedMessage = NSLocalizedString("You need to enable access to Contacts to continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    //MARK: ActionsMenuAction
-    static let actionsMenuActionMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let actionsMenuActionRemoveFromAlbum = NSLocalizedString("Remove from album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let actionsMenuActionAddToFavorites = NSLocalizedString("Add to favorites", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let actionsMenuActionDeleteDeviceOriginal = NSLocalizedString("Delete device original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let actionsMenuActionCopy = NSLocalizedString("Copy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let actionsMenuActionDocumentDetail = NSLocalizedString("Document Details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: Create story Name
     static let createStoryNameTitle = NSLocalizedString("Create a Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

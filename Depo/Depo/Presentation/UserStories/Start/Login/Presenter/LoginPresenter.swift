@@ -187,10 +187,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         RouterVC().presentViewController(controller: textEnterVC)
     }
     
-    func failedAccountInfo(errorResponse: ErrorResponse) {
-        compliteAsyncOperationEnableScreen()
-    }
-    
     func successed(tokenUpdatePhone: SignUpSuccessResponse) {
         referenceToken = tokenUpdatePhone.referenceToken
         textEnterVC?.stopLoading()

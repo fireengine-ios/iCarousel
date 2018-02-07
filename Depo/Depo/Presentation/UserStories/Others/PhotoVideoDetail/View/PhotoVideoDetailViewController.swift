@@ -257,13 +257,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             configurateAll()
         }
     }
-    
-    func getActionMenyItemsForObject(object: WrapData) -> [ActionMenyItem] {
-        if (object.fileType.isApplication) {
-            return getActionsForDocumentObject(object: object)
-        }
-        return getActionsForMostPartOfObjects(object: object)
-    }
 
     @objc func onRightBarButtonItem(sender: UIButton) {
         
@@ -356,48 +349,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         if Device.operationSystemVersionLessThen(11) {
             UIApplication.shared.isStatusBarHidden = false
         }
-    }
-    
-    
-    //MARK actions meny 
-    
-    func getActionsForDocumentObject(object: WrapData) -> [ActionMenyItem] {
-        var actions = [ActionMenyItem]()
-        
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionCopy, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionDocumentDetail, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionAddToFavorites, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        return actions
-    }
-    
-    func getActionsForMostPartOfObjects(object: WrapData) -> [ActionMenyItem] {
-        var actions = [ActionMenyItem]()
-        
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionMove, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionRemoveFromAlbum, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionAddToFavorites, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionDeleteDeviceOriginal, action: { [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        return actions
     }
     
     func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {

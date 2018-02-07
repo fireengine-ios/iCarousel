@@ -87,23 +87,6 @@ enum SortedRules: Int {
 
 class MoreActionsConfig {
     
-    enum CellSyncType: CustomStringConvertible {
-        case all
-        case sync
-        case notSync
-        
-        var description: String {
-            switch self {
-            case .all:
-                return "All"
-            case .sync:
-                return "Sync"
-            case .notSync:
-                return "Not Sync"
-            }
-        }
-    }
-    
     enum ViewType: CustomStringConvertible {
         case Grid
         case List

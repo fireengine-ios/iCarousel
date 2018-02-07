@@ -25,7 +25,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     var tabBarActionHandler: TabBarActionHandler { return self }
 
     var filters: [MoreActionsConfig.MoreActionsFileType] = []
-    var syncType: MoreActionsConfig.CellSyncType = MoreActionsConfig.CellSyncType.all
     
     var sortedRule: SortedRules = .timeDown
     

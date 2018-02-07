@@ -55,10 +55,6 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         tableView.dataSource = self
         tableView.isScrollEnabled = false
     }
-    
-    func setHConstraint(hConstraint: NSLayoutConstraint){
-        self.hConstraint = hConstraint
-    }
 
     func addPopUpSubView(popUp: BaseView){
         DispatchQueue.main.async {

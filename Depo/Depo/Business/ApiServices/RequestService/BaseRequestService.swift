@@ -75,18 +75,6 @@ class BaseDownloadRequestParametrs: DownloadRequestParametrs {
     }
 }
 
-class DownloadFileResponse: ObjectRequestResponse {
-    
-    var eTag: String?
-    var lenghth: Int64?
-    
-    override func mapping() {
-//        eTag = response?["Etag"]
-//        lenghth = response?["Content-Length"]
-    }
-}
-
-
 class BaseRequestParametrs: RequestParametrs {
     
     var requestParametrs: Any {
@@ -105,11 +93,6 @@ class BaseRequestParametrs: RequestParametrs {
         return NumericConstants.defaultTimeout
     }
 }
-
-class BaseUploadDowbloadRequestParametrs {
-    
-}
-
 
 class JsonConvertor {
     private let value: RequestParametrs

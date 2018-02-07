@@ -46,13 +46,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationShowPlusTabBar = "ShowMainTabBarPlusNotification"
     static let notificationHideTabBar = "HideMainTabBarNotification"
     static let notificationShowTabBar = "ShowMainTabBarNotification"
-    static let notificationMusicStartedPlaying = "MusicStartedPlaying"
     static let notificationMusicDrop = "MusicDrop"
-    static let notificationMusicStop = "MusicStop"
     static let notificationPhotosScreen = "PhotosScreenOn"
     static let notificationVideoScreen = "VideoScreenOn"
-    
-    let originalPlusBotttomConstraint: CGFloat = 10
     
     fileprivate var photoBtn            : SubPlussButtonView!
     fileprivate var uploadBtn           : SubPlussButtonView!
@@ -291,11 +287,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBAction func plussBtnAction(_ sender: Any) {
         changeViewState(state: !plussButton.isSelected)
-    }
-    
-    func changeTabBarAppearance(editingMode: Bool = false) {
-        plussButton.isHidden = editingMode
-        plussButton.isEnabled = !editingMode
     }
     
     func setupCustomNavControllers() {
@@ -585,22 +576,6 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         } else {
             handleAction(action)
         }
-    }
-    
-    func getDataSource() -> RemoteItemsService{
-        var searchService: RemoteItemsService? = nil
-        if let nController = selectedViewController as? UINavigationController{
-            let viewConroller = nController.viewControllers.last
-            if let contr = viewConroller as? BaseFilesGreedViewController{
-                searchService = contr.getRemoteItemsService()
-            }
-        }
-        
-        if (searchService == nil){
-            searchService = AllFilesService(requestSize: 999)
-        }
-        
-        return searchService!
     }
     
     func getFolderUUID() -> String? {

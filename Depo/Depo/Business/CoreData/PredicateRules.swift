@@ -56,16 +56,6 @@ class PredicateRules {
         return predicate
     }
     
-    func allLocalObjectsForObjectsByMd5(objects:[Item]) -> NSPredicate{
-        let serverObjects = objects.filter {
-            return !$0.isLocalItem
-        }
-        let list = serverObjects.map{ $0.md5 }
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND md5Value IN %@",  list)
-        return predicate
-    }
-    
-    
     // MARK: By favorite staus
     
     var favorite: NSPredicate {
