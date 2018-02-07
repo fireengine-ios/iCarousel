@@ -15,8 +15,10 @@ struct AlbumDetailJsonKey {
 class AlbumDetailResponse: ObjectRequestResponse {
     
     var list: Array<SearchItemResponse> = []
+    var coverPhoto: SearchItemResponse?
     
     override func mapping() {
+        coverPhoto = SearchItemResponse(withJSON: json?[AlbumJsonKey.coverPhoto])
         let  tmpList = json?[AlbumDetailJsonKey.albumDetailFiles].array
         if let result = tmpList?.flatMap({ SearchItemResponse(withJSON: $0)}){
             list = result

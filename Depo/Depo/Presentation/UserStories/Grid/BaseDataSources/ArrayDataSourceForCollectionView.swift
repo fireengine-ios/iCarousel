@@ -105,4 +105,26 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         
     }
     
+    override func updatedAlbumCoverPhoto(item: AlbumItem) {
+        guard let unwrapedFilters = originalFilters,
+            canShowAlbumsFilters(filters: unwrapedFilters) else {
+                return
+        }
+        var section = 0
+        for array in tableDataMArray {
+            var row = 0
+            for album in array {
+                if album.uuid == item.uuid {
+                    let indexPath = IndexPath(row: row, section: section)
+                    collectionView?.performBatchUpdates({
+                        collectionView?.reloadItems(at: [indexPath])
+                    }, completion: nil)
+                    break
+                }
+                row += 1
+            }
+            section += 1
+        }
+    }
+    
 }

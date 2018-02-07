@@ -1273,6 +1273,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
+    func updatedAlbumCoverPhoto(item: AlbumItem) {
+        
+    }
+    
     func albumsDeleted(albums: [AlbumItem]) {
         
     }
@@ -1295,6 +1299,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         if uploadToAlbumItems.isEmpty {
             delegate?.needReloadData?()
+            updateCoverPhoto()
         }
     }
     
@@ -1303,6 +1308,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             isAlbumDetail(filters: unwrapedFilters) {
             delegate?.needReloadData?()
         }
+        updateCoverPhoto()
     }
     
     func filesUploadToFolder() {
@@ -1310,6 +1316,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             canUploadFromLifeBox(filters: unwrapedFilters) {
             delegate?.needReloadData?()
         }
+        updateCoverPhoto()
     }
     
     func addedLocalFiles(items: [Item]){
@@ -1329,6 +1336,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if let uuid = parentUUID, uuid == albumUUID{
             deleteItems(items: items)
         }
+        updateCoverPhoto()
     }
     
     func filesMoved(items: [Item], toFolder folderUUID: String){
@@ -1360,6 +1368,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return compairedView == self
         }
         return false
+    }
+    
+    func updateCoverPhoto() {
+        if let delegate = delegate as? AlbumDetailPresenter {
+            delegate.updateCoverPhotoIfNeeded()
+        }
     }
     
 }
