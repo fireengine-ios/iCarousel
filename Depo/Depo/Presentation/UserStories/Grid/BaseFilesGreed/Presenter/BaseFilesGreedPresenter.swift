@@ -640,5 +640,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         setupTopBar()
     }
     
+    func changeCover() { }
 }
 

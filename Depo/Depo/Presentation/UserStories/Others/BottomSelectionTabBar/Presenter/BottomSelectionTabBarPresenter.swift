@@ -405,6 +405,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: "Print", style: .default, handler: { _ in
                       //TODO: will be implemented in the next package
                     })
+
             default:
                 action = UIAlertAction(title: "TEST", style: .default, handler: { _ in
                     

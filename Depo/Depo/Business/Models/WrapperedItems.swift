@@ -661,7 +661,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         patchToPreview = .remoteUrl(URL(string: ""))
         fileSize = remote.bytes ?? Int64(0)
         status = Status(string: remote.status)
-        super.init()
+        
+        super.init(uuid: remote.uuid)
         md5 = remote.hash ?? "not hash "
         
         albums = remote.albums

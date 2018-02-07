@@ -15,6 +15,7 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
     }
     
     func operationFailed(withType type: ElementTypes) {}
+    func changeCover() {}
     func selectModeSelected() {}
     func selectAllModeSelected() {}
     func stopModeSelected() {}

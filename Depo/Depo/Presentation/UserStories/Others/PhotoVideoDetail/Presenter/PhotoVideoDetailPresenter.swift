@@ -146,9 +146,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
     }
     
+    func changeCover() { }
     func printSelected() { }
     func stopModeSelected() { }
-    
     
     //MARK : BasePresenter
     

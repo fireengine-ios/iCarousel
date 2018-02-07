@@ -354,6 +354,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 action = UIAlertAction()
             case .undetermend:
                 action = UIAlertAction()
+            case .changeCoverPhoto:
+                action = UIAlertAction(title: TextConstants.actionSheetChangeCover, style: .default, handler: { _ in
+                    self.basePassingPresenter?.changeCover()
+                })
             }
             return action
         }
