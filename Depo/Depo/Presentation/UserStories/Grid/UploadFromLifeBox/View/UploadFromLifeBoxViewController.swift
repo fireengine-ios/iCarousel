@@ -64,6 +64,16 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         return false
     }
     
+    override func stopSelection() {
+        super.stopSelection()
+        
+        setTitle(withString: TextConstants.uploadFromLifeBoxTitle)
+        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1{
+            let barButtonLeft = UIBarButtonItem(customView: cancelButton)
+            navigationItem.leftBarButtonItem = barButtonLeft
+        }
+    }
+    
     func getNavigationController() -> UINavigationController?{
         return navigationController
     }

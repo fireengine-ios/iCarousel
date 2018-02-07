@@ -158,17 +158,17 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     private func showSettingsAlert(completionHandler: @escaping ContactsPermissionCallback) {
-        let controller = PopUpController.with(title: nil,
+        let controller = PopUpController.with(title: TextConstants.errorAlert,
                                               message: TextConstants.settingsContactsPermissionDeniedMessage,
                                               image: .error,
-                                              firstButtonTitle: TextConstants.ok,
-                                              secondButtonTitle: TextConstants.cancel,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
                                               firstAction: { vc in
                                                 vc.close { completionHandler(false) }
-                                                UIApplication.shared.openGlobalSettings()
                                               },
                                               secondAction: { vc in
                                                 vc.close { completionHandler(false) }
+                                                UIApplication.shared.openSettings()
                                               })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }

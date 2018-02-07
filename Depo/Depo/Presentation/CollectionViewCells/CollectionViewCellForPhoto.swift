@@ -135,6 +135,10 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         cloudStatusImage.image = UIImage(named: "objectInCloud")
     }
     
+    func finishedDownloadForObject(){
+        progressView.isHidden = true
+    }
+    
     func resetCloudImage(){
         cloudStatusImage.image = UIImage()
     }

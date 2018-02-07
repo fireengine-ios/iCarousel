@@ -28,6 +28,19 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         return duplicatesArray
     }
     
+    func getCheckedDuplicatesArray(checkedArray: @escaping([WrapData]) -> Void){
+        DispatchQueue.main.async {[weak self] in
+            if let `self` = self{
+                let array = CoreDataStack.default.getLocalDuplicates(remoteItems: self.getDuplicatesObjects())
+                self.duplicatesArray.removeAll()
+                self.duplicatesArray.append(contentsOf: array)
+                self.localMD5Array.removeAll()
+                self.localMD5Array.append(contentsOf: array.map({ $0.md5 }))
+                checkedArray(array)
+            }
+        }
+    }
+    
     func clear(){
         localtemsArray.removeAll()
         localMD5Array.removeAll()
@@ -260,8 +273,11 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
         
         if file.isLocalItem{
-            file.metaData?.takenDate = Date()
-            duplicatesArray.append(file)
+            if localMD5Array.index(of: file.md5) == nil{
+                file.metaData?.takenDate = Date()
+                duplicatesArray.append(file)
+                localMD5Array.append(file.md5)
+            }
         }else{
             print("uploaded server object")
             let serverObjectsUUIDs = serverDuplicatesArray.map({ $0.uuid })
@@ -279,13 +295,36 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     return
                 }
                 let localObjects = fetchResult.map{ return WrapData(mediaItem: $0) }
-                duplicatesArray.append(contentsOf: localObjects)
+                for localObject in localObjects{
+                    if localMD5Array.index(of: localObject.md5) == nil{
+                        file.metaData?.takenDate = Date()
+                        duplicatesArray.append(localObject)
+                        localMD5Array.append(localObject.md5)
+                    }
+                }
             }
         }
         
         sortDuplicatesArray()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.showFreeAppSpaceCard()
+        }
+    }
+    
+    func finishedDownloadFile(file: WrapData) {
+        if !file.isLocalItem{
+            let localObjects = CoreDataStack.default.getLocalDuplicates(remoteItems: [file])
+            if !localObjects.isEmpty{
+                for localObject in localObjects{
+                    if localMD5Array.index(of: localObject.md5) == nil{
+                        file.metaData?.takenDate = Date()
+                        duplicatesArray.append(localObject)
+                        localMD5Array.append(localObject.md5)
+                    }
+                }
+                sortDuplicatesArray()
+            }
+            checkFreeAppSpaceAfterAutoSync()
         }
     }
     
@@ -356,8 +395,9 @@ class FreeAppService: RemoteItemsService {
             return
         }else{
             isGotAll = true
-            let array = FreeAppSpace.default.getDuplicatesObjects()
-            success?(array)
+            FreeAppSpace.default.getCheckedDuplicatesArray(checkedArray: { (array) in
+                success?(array)
+            })
         }
     }
     

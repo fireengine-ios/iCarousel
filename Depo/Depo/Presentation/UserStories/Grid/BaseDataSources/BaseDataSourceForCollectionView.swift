@@ -51,6 +51,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     internal var preferedCellReUseID: String?
     
+    var canSelectionState = true
+    
     private var isSelectionStateActive = false
     
     var selectedItemsArray = Set<String>()
@@ -73,6 +75,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var allItems = [[WrapData]]()
     var allLocalItems = [WrapData]()
     var uploadedObjectID = [String]()
+    var uploadToAlbumItems = [String]()
     
     var needShowProgressInCell: Bool = false
     var needShowCloudIcon: Bool = true
@@ -177,6 +180,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         for filter in filters {
             switch filter {
             case   .fileType(.photoAlbum):
+                return true
+            default:
+                break
+            }
+        }
+        return false
+    }
+    
+    func canUploadFromLifeBox(filters: [GeneralFilesFiltrationType]) -> Bool {
+        for filter in filters {
+            switch filter {
+            case .fileType(.photoAlbum):
+                return true
+            case .fileType(.folder):
                 return true
             default:
                 break
@@ -485,7 +502,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         preferedCellReUseID = reUseID
     }
     
-    func setSelectionState(selectionState: Bool){
+    func setSelectionState(selectionState: Bool){        
         if (isSelectionStateActive == selectionState){
             return
         }
@@ -518,7 +535,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getAllObjects() -> [[BaseDataSourceItem]] {
-        return  allItems
+        return allItems
+    }
+    
+    func setAllItems(items: [[BaseDataSourceItem]]) {
+        allItems = items as! [[WrapData]]
     }
     
     func selectAll(isTrue: Bool){
@@ -565,6 +586,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     //MARK: LBCellsDelegate
     
     func onLongPress(cell: UICollectionViewCell){
+        if !canSelectionState {
+            return
+        }
+        
         if maxSelectionCount == selectedItemsArray.count {
             if let cell = cell as? CollectionViewCellForStoryPhoto  {
                 cell.setSelection(isSelectionActive: false, isSelected: false)
@@ -774,7 +799,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         cell_.updating()
-        //let selected = isObjctSelected(object: unwrapedObject)
         cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
         cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
         cell_.setDelegateObject(delegateObject: self)
@@ -786,17 +810,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             cell_.setAssetId(local.asset.localIdentifier)
-            DispatchQueue.global().async {
-                self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
-                    DispatchQueue.main.async {
-                        if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
-                            cell_.setImage(image: image)
-                        } else {
-                            cell_.setPlaceholderImage(fileType: wraped.fileType)
-                        }
+            self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
+                DispatchQueue.main.async {
+                    if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
+                        cell_.setImage(image: image)
+                    } else {
+                        cell_.setPlaceholderImage(fileType: wraped.fileType)
                     }
-                })
-            }
+                }
+            })
             
         case let .remoteUrl(url):
             if let url = url {
@@ -920,14 +942,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     //MARK: UploadNotificationManagerProtocol
     
-    func getIndexPathForObject(objectUUID: String) -> IndexPath?{
+    func getIndexPathForObject(objectUUID: String) -> IndexPath? {
         var indexPath: IndexPath? = nil
         var section = 0
         var row = 0
-        for array in allItems{
+        let items = getAllObjects()
+        for array in items {
             row = 0
-            for arraysObject in array{
-                if arraysObject.uuid == objectUUID{
+            for arraysObject in array {
+                if arraysObject.uuid == objectUUID {
                     indexPath = IndexPath(row: row, section: section)
                 }
                 row += 1
@@ -1019,6 +1042,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
+    func setProgressForDownloadingFile(file: WrapData, progress: Float) {
+        if !needShowProgressInCell{
+            return
+        }
+        
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.setProgressForObject(progress: progress)
+        }
+    }
+    
+    func finishedDownloadFile(file: WrapData) {
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.finishedDownloadForObject()
+        }
+    }
+    
     func updateFavoritesCellStatus(items: [Item], isFavorites: Bool){
         var arrayOfPath = [IndexPath]()
         
@@ -1064,8 +1103,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func deleteItems(items: [Item]){
-        if (items.count == 0){
+    func deleteItems(items: [Item]) {
+        if (items.count == 0) {
             return
         }
         var objectsForRemoving = [Item]()
@@ -1076,18 +1115,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             var serverObjects = [Item]()
             
-            for object in items{
-                if object.isLocalItem{
+            for object in items {
+                if object.isLocalItem {
                     objectsForRemoving.append(object)
-                }else{
+                } else {
                     serverObjects.append(object)
                 }
             }
             
             
             var serversUUIDs = [String]()
-            for array in allItems{
-                for arraysObject in array{
+            for array in allItems {
+                for arraysObject in array {
                     if !arraysObject.isLocalItem {
                         serversUUIDs.append(arraysObject.uuid)
                     }
@@ -1111,53 +1150,54 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             localObjectsForReplace = fetchResult.map{ return WrapData(mediaItem: $0) }
             let uuids = localObjectsForReplace.map({ $0.uuid })
             
-            if (localObjectsForReplace.count != serverObjects.count){
+            if (localObjectsForReplace.count != serverObjects.count) {
                 for object in serverObjects {
-                    if !uuids.contains(object.uuid){
+                    if !uuids.contains(object.uuid) {
                         objectsForRemoving.append(object)
                     }
                 }
             }
             
-            for object in localObjectsForReplace{
-                if let index = serversUUIDs.index(of: object.uuid){
+            for object in localObjectsForReplace {
+                if let index = serversUUIDs.index(of: object.uuid) {
                     serversUUIDs.remove(at: index)
                 }
             }
             
-            for localObject in localObjectsForReplace{
-                for (index, object) in allMediaItems.enumerated(){
+            for localObject in localObjectsForReplace {
+                for (index, object) in allMediaItems.enumerated() {
                     if object.uuid == localObject.uuid {
                         allMediaItems[index] = localObject
                     }
                 }
             }
             
-            if (localObjectsForReplace.count > 0){
-                var newArray = [[Item]]()
-                for array in allItems{
-                    var sectionArray = [Item]()
-                    for arraysObject in array{
-                        if let index = uuids.index(of: arraysObject.uuid){
+            if (localObjectsForReplace.count > 0) {
+                var newArray = [[BaseDataSourceItem]]()
+                let items = getAllObjects()
+                for array in items {
+                    var sectionArray = [BaseDataSourceItem]()
+                    for arraysObject in array {
+                        if let index = uuids.index(of: arraysObject.uuid) {
                             sectionArray.append(localObjectsForReplace[index])
-                        }else{
+                        } else {
                             sectionArray.append(arraysObject)
                         }
                     }
                     newArray.append(sectionArray)
                 }
                 
-                allItems = newArray
+                setAllItems(items: newArray)
             }
-        }else{
+        }else {
             objectsForRemoving = items
         }
         
         updateCellsForObjects(objectsForDelete: objectsForRemoving, objectsForUpdate: localObjectsForReplace)
     }
     
-    private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]){
-        if objectsForDelete.isEmpty && objectsForUpdate.isEmpty{
+    private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]) {
+        if objectsForDelete.isEmpty && objectsForUpdate.isEmpty {
             return
         }
         
@@ -1165,41 +1205,42 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var arrayOfPathForUpdate = [IndexPath]()
         var arrayOfSection = [Int]()
         
-        for item in objectsForDelete{
-            if let path = getIndexPathForObject(objectUUID: item.uuid){
+        for item in objectsForDelete {
+            if let path = getIndexPathForObject(objectUUID: item.uuid) {
                 arrayOfPathForDelete.append(path)
             }
         }
         
         if arrayOfPathForDelete.count > 0{
-            var newArray = [[Item]]()
+            var newArray = [[BaseDataSourceItem]]()
             var uuids = objectsForDelete.map { $0.uuid }
             
             var section = 0
-            for array in allItems{
-                var newSectionArray = [Item]()
-                for arraysObject in array{
-                    if let index = uuids.index(of: arraysObject.uuid){
+            let items = getAllObjects()
+            for array in items {
+                var newSectionArray = [BaseDataSourceItem]()
+                for arraysObject in array {
+                    if let index = uuids.index(of: arraysObject.uuid) {
                         uuids.remove(at: index)
-                    }else{
+                    } else {
                         newSectionArray.append(arraysObject)
                     }
                 }
                 
-                if newSectionArray.count > 0{
+                if newSectionArray.count > 0 {
                     newArray.append(newSectionArray)
-                }else{
+                } else {
                     arrayOfSection.append(section)
                 }
                 
                 section += 1
             }
             
-            allItems = newArray
+            setAllItems(items: newArray)
         }
         
-        for item in objectsForUpdate{
-            if let path = getIndexPathForObject(objectUUID: item.uuid){
+        for item in objectsForUpdate {
+            if let path = getIndexPathForObject(objectUUID: item.uuid) {
                 arrayOfPathForUpdate.append(path)
             }
         }
@@ -1236,9 +1277,37 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
-    func fileAddedToAlbum() {
+    func startUploadFilesToAlbum(files: [WrapData]) {
+        guard let unwrapedFilters = originalFilters,
+            isAlbumDetail(filters: unwrapedFilters) else {
+            return
+        }
+        uploadToAlbumItems.append(contentsOf: files.map {$0.uuid})
+    }
+    
+    func fileAddedToAlbum(item: WrapData, error: Bool) {
+        guard let unwrapedFilters = originalFilters,
+            isAlbumDetail(filters: unwrapedFilters) else {
+                return
+        }
+        if let index = uploadToAlbumItems.index(of: item.uuid) {
+            uploadToAlbumItems.remove(at: index)
+        }
+        if uploadToAlbumItems.isEmpty {
+            delegate?.needReloadData?()
+        }
+    }
+    
+    func filesAddedToAlbum() {
         if let unwrapedFilters = originalFilters,
             isAlbumDetail(filters: unwrapedFilters) {
+            delegate?.needReloadData?()
+        }
+    }
+    
+    func filesUploadToFolder() {
+        if let unwrapedFilters = originalFilters,
+            canUploadFromLifeBox(filters: unwrapedFilters) {
             delegate?.needReloadData?()
         }
     }

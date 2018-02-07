@@ -19,6 +19,11 @@ let log = setupLog()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    func application(_ application: UIApplication,
+                     supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return OrientationManager.shared.orientationLock
+    }
+    
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
