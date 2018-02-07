@@ -11,10 +11,13 @@ import UIKit
 
 class UserValidator {
     
-    let regularExpressionPassword = "^(?=.*\\d)(?=.*[a-zA-Z]).{5,16}$"//"^(?!\\D*\\d{3,}\\D*)(?![^A-Za-z]*[A-Za-z]{3,}[^A-Za-z]*).{5,16}$"
+    private static let passwordMinLength = 6
+    private static let passwordMaxLength = 16
+    
+    let regularExpressionPassword = "^(?=.*\\d)(?=.*[a-zA-Z]).{\(passwordMinLength),\(passwordMaxLength)}$"//"^(?!\\D*\\d{3,}\\D*)(?![^A-Za-z]*[A-Za-z]{3,}[^A-Za-z]*).{5,16}$"
     //"^(?=.*\\d)(?=.*[a-zA-Z]).{5,16}$" // At least one digit, one lowcase pr one uppercase latter, more than 6 less than 16
     let regularExpressionMail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{1,}$"
-    let regularExpressionSimplePass = "^(?=.).{5,16}$"
+    let regularExpressionSimplePass = "^(?=.).{\(passwordMinLength),\(passwordMaxLength)}$"
     
     func validateUserInfo(mail: String, code: String, phone: String, password: String, repassword: String) -> [UserValidationResults] {
 

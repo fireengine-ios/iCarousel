@@ -30,6 +30,8 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func deleteItems(items: [Item])
     
+    func deleteStories(items: [Item])
+    
     func newFolderCreated()
     
     func newAlbumCreated()
@@ -74,6 +76,8 @@ extension ItemOperationManagerViewProtocol {
     func removeFileFromFavorites(items: [Item]) {}
     
     func deleteItems(items: [Item]) {}
+    
+    func deleteStories(items: [Item]) {}
     
     func newFolderCreated() {}
     
@@ -214,6 +218,18 @@ class ItemOperationManager: NSObject {
         DispatchQueue.main.async {
             for view in self.views{
                 view.deleteItems(items: items)
+            }
+        }
+    }
+    
+    func deleteStories(items: [Item]) {
+        if items.count == 0 {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            for view in self.views {
+                view.deleteStories(items: items)
             }
         }
     }

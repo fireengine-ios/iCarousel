@@ -37,4 +37,8 @@ protocol BaseFilesGreedViewInput: class {
     func showNoFilesTop()
     
     func hideNoFiles()
+    
+    func requestStarted()
+    
+    func requestStopped() 
 }

@@ -9,7 +9,11 @@
 class AlbumsPresenter: BaseFilesGreedPresenter {
 
     override func viewIsReady(collectionView: UICollectionView) {
-        dataSource = ArrayDataSourceForCollectionView()
+        if (interactor.remoteItems is AlbumService) {
+            dataSource = ArrayDataSourceForCollectionView()
+        } else {
+            dataSource = StoriesDataSourceForCollectionView()
+        }
         interactor.viewIsReady()
         sortedRule = .timeUp
         dataSource.setPreferedCellReUseID(reUseID: nil)

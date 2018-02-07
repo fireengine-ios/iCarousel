@@ -10,7 +10,7 @@ import Photos
 
 class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
 
-    var uploadOutput: UploadFilesSelectionInteractorOutput?
+    weak var uploadOutput: UploadFilesSelectionInteractorOutput?
     var rootUIID: String?
     
     let localMediaStorage = LocalMediaStorage.default

@@ -166,6 +166,10 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         requestAllItems()
     }
     
+    func deleteStories(items: [Item]) {
+        requestAllItems()
+    }
+    
     func filesAddedToAlbum() {
         requestAllItems()
     }

@@ -28,6 +28,10 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         return tableDataMArray
     }
     
+    override func setAllItems(items: [[BaseDataSourceItem]]) {
+        tableDataMArray = items
+    }
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return tableDataMArray.count
     }
