@@ -281,6 +281,14 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         topBarContainer.isHidden = false
     }
     
+    func requestStarted() {
+        backAsCancelBarButton?.isEnabled = false
+    }
+    
+    func requestStopped() {
+        backAsCancelBarButton?.isEnabled = true
+    }
+    
     @objc func onCancelSelectionButton(){
         output.onCancelSelection()
     }
