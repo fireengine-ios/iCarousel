@@ -278,11 +278,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         continue
                     }
                 case .sizeAZ:
-                    if localItem.fileSize > lastRemoteObject.fileSize {
+                    if localItem.fileSize < lastRemoteObject.fileSize {
                         continue
                     }
                 case .sizeZA:
-                    if localItem.fileSize < lastRemoteObject.fileSize {
+                    if localItem.fileSize > lastRemoteObject.fileSize {
                         continue
                     }
                 case .metaDataTimeUp:
