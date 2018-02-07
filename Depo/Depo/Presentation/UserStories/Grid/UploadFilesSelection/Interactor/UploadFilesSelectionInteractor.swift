@@ -69,14 +69,14 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             ItemOperationManager.default.startUploadFilesToAlbum(files: uploadItems)
         }
         
-        UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: {
+        UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
 
-            self.output.asyncOperationSucces()
-        }) { (errorResponse) in
+            self?.output.asyncOperationSucces()
+        }) { [weak self] errorResponse in
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList fail")
 
-            self.output.asyncOperationSucces()
+            self?.output.asyncOperationSucces()
         }
 //        UploadService.default.uploadOnDemandFileList(items: uploadItems,
 //                                                     uploadType: .autoSync,
