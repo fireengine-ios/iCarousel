@@ -1054,20 +1054,23 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func updateFavoritesCellStatus(items: [Item], isFavorites: Bool){
+    func updateFavoritesCellStatus(items: [Item], isFavorites: Bool) {
         var arrayOfPath = [IndexPath]()
         
-        for item in items{
-            if let path = getIndexPathForObject(objectUUID: item.uuid){
+        for item in items {
+            if let path = getIndexPathForObject(objectUUID: item.uuid) {
                 arrayOfPath.append(path)
             }
         }
         
-        if arrayOfPath.count > 0{
+        if arrayOfPath.count > 0 {
             var uuids = items.map { $0.uuid }
-            for array in allItems{
-                for arraysObject in array{
-                    if let index = uuids.index(of: arraysObject.uuid){
+            guard let items = getAllObjects() as? [[Item]] else {
+                return
+            }
+            for array in items {
+                for arraysObject in array {
+                    if let index = uuids.index(of: arraysObject.uuid) {
                         arraysObject.favorites = isFavorites
                         uuids.remove(at: index)
                     }
