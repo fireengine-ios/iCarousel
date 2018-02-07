@@ -8,7 +8,6 @@
 
 import UIKit
 
-protocol FaceImageItemsInteractorInput {
-    func loadItem(_ item: BaseDataSourceItem)
-    func onSaveVisibilityChanges(_ items: [PeopleItem])
+protocol FaceImageChangeCoverInteractorInput {
+    func setAlbumCoverWithPhoto(_ photoUUID: String)
 }

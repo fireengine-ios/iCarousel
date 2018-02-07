@@ -126,6 +126,7 @@
 "Take Photo" = "Take Photo";
 
 "Remove from album" = "Remove from album";
+"Change cover photo" = "Change cover photo";
 "Back Up" = "Back Up";
 "Add to album" = "Add to album";
 "Remove from Favorites" = "Remove from Favorites";
@@ -583,6 +584,7 @@
 "Selected" = "Selected";
 "Show & Hide" = "Show & Hide";
 "Show and Hide" = "Show and Hide";
+"Apply" = "Apply";
 "Not selected" = "Not selected";
 "E-mail is empty" = "E-mail is empty";
 "Filter Card" = "Filter Card";

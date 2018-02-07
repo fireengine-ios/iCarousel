@@ -8,7 +8,12 @@
 
 import Foundation
 
-class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractorOutput {
+class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractorOutput, FaceImageItemsViewOutput {
+    
+    private var isChangeVisibilityMode: Bool = false
+    
+    private var visibilityItems: [WrapData] = []
+    private var allItmes: [WrapData] = []
     
     override func viewIsReady(collectionView: UICollectionView) {
         super.viewIsReady(collectionView: collectionView)
@@ -22,13 +27,31 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
         }
     }
     
+    override func getContentWithSuccess(items: [WrapData]) {
+        allItmes = items
+        
+        clearItems()
+        
+        items.forEach {
+            if isChangeVisibilityMode {
+                visibilityItems.append($0)
+            } else {
+                if let peopleItem = $0 as? PeopleItem,
+                    let isVisible = peopleItem.responseObject.visible
+                    {
+                        if isVisible {
+                            visibilityItems.append($0)
+                        }
+                } else {
+                    visibilityItems.append($0)
+                }
+            }
+        }
+        
+        super.getContentWithSuccess(items: visibilityItems)
+    }
+    
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
-    
-    override func selectPressed(type: MoreActionsConfig.SelectedType) { }
-    
-    override func selectModeSelected() { }
-    
-    override func onLongPressInCell() { }
     
     // MARK: - Interactor Output
     
@@ -37,4 +60,66 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
             router.openFaceImageItemPhotosWith(item, albumUUID: albumUUID)
         }
     }
+    
+    func didSaveChanges(_ items: [PeopleItem]) {
+        isChangeVisibilityMode = false
+        dataSource.setSelectionState(selectionState: false)
+        
+        view.stopSelection()
+        
+        allItmes.forEach { (item) in
+            items.forEach({
+                if (item.id == $0.id) {
+                    if let peopleItem = item as? PeopleItem,
+                        let isVisible = peopleItem.responseObject.visible
+                    {
+                        peopleItem.responseObject.visible = !isVisible
+                    }
+                }
+            })
+        }
+        
+        getContentWithSuccess(items: allItmes)
+    }
+    
+    // MARK: - FaceImageItemsViewOutput
+    
+    func switchVisibilityMode() {
+        switchVisibilityMode(!isChangeVisibilityMode)
+    }
+    
+    func saveVisibilityChanges() {
+        if let interactor = interactor as? FaceImageItemsInteractor,
+            selectedItems.count > 0 {
+            var peopleItems: [PeopleItem] = []
+            selectedItems.forEach({
+                if let item = $0 as? PeopleItem {
+                    peopleItems.append(item)
+                }
+            })
+            
+            interactor.onSaveVisibilityChanges(peopleItems)
+        } else {
+            view.stopSelection()
+            
+            switchVisibilityMode(!isChangeVisibilityMode)
+        }
+    }
+    
+    // MARK: -  Utility methods
+    
+    private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
+        self.isChangeVisibilityMode = isChangeVisibilityMode
+        
+        dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
+        
+        getContentWithSuccess(items: allItmes)
+    }
+    
+    private func clearItems() {
+        visibilityItems = [WrapData]()
+        dataSource.allMediaItems = [WrapData]()
+        dataSource.allItems = [[WrapData]]()
+    }
+    
 }

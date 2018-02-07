@@ -9,9 +9,12 @@
 import Foundation
 
 class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteractorInput {
+    
     let peopleService = PeopleService()
     let thingsService = ThingsService()
     let placesService = PlacesService()
+    
+    // MARK: - FaceImageItemsInteractorInput
     
     func loadItem(_ item: BaseDataSourceItem) {
         
@@ -53,6 +56,19 @@ class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteract
                 }, fail: { [weak self] (error) in
                     self?.output.asyncOperationFail(errorMessage: error.description)
             })
+        }
+    }
+    
+    func onSaveVisibilityChanges(_ items: [PeopleItem]) {
+        output.startAsyncOperation()
+        peopleService.changePeopleVisibility(peoples: items, success: { [weak self] _ in
+            if let output = self?.output as? FaceImageItemsInteractorOutput {
+                output.didSaveChanges(items)
+            }
+            
+            self?.output.asyncOperationSucces()
+        }) { [weak self] (error) in
+            self?.output.asyncOperationFail(errorMessage: error.description)
         }
     }
 }

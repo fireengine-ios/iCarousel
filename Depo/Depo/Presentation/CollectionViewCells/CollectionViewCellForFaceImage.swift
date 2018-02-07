@@ -24,6 +24,14 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         nameLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
     }
     
+    override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
+        if (isSelectionActive) {
+            visibleImageView.isHidden = !visibleImageView.isHidden
+            
+            transperentView.alpha = transperentView.alpha > 0 ? 0 : 0.6
+        }
+    }
+    
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
         guard let item = wrappedObj as? Item else{
             return
@@ -32,7 +40,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         visibleImageView.isHidden = true
         transperentView.alpha = 0
         
-        if (isAlreadyConfigured){
+        if (isAlreadyConfigured) {
             return
         }
         
@@ -42,7 +50,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
 
         if let peopleItem = wrappedObj as? PeopleItem,
             let isVisible = peopleItem.responseObject.visible,
-            isVisible == false{
+            !isVisible {
             visibleImageView.isHidden = isVisible
             transperentView.alpha = 0.6
         }
@@ -55,6 +63,8 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         self.imageView.sd_cancelCurrentImageLoad()
         self.isAlreadyConfigured = false
     }
+    
+    override func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) { }
     
     override func setImage(image: UIImage?) {
         imageView.contentMode = .scaleAspectFill

@@ -595,6 +595,11 @@ class RouterVC: NSObject {
         return controller as! BaseFilesGreedChildrenViewController
     }
     
+    func faceImageChangeCoverController(albumUUID: String)  -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageChangeCoverInitializer.initializeController(with: "BaseFilesGreedViewController", albumUUID: albumUUID)
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
     //MARK: Free App Space
     
     func freeAppSpace() -> UIViewController{

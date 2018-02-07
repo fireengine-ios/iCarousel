@@ -51,6 +51,13 @@ class PeopleService: BaseRequestService {
         
         executeGetRequest(param: param, handler: handler)
     }
+    
+    func changePeopleVisibility(peoples: [PeopleItem], success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+        let param = PeopleChangeVisibilityParameters(peoples: peoples)
+        
+        let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePutRequest(param: param, handler: handler)
+    }
 }
 
 class PeopleItemsService: RemoteItemsService {
@@ -120,6 +127,32 @@ class PeoplePageParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peoplePage, pageSize, pageNumber)
+        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+    }
+}
+
+class PeopleChangeVisibilityParameters: BaseRequestParametrs {
+    let peoples: [PeopleItem]
+    
+    init(peoples: [PeopleItem]) {
+        self.peoples = peoples
+    }
+    
+    override var requestParametrs: Any {
+        var dict: [String: Any] = [:]
+        
+        peoples.forEach {
+            if let id = $0.responseObject.id
+                ,let isVisibility = $0.responseObject.visible{
+                dict.updateValue(!isVisibility, forKey: "\(id)")
+            }
+        }
+    
+        return dict
+    }
+    
+    override var patch: URL {
+        let searchWithParam = String(format: RouteRequests.personVisibility)
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }

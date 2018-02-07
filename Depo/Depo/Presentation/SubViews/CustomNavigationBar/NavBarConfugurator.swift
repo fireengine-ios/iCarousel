@@ -23,6 +23,8 @@ class NavigationBarList {
     
     let showHide: UIBarButtonItem
     
+    let apply: UIBarButtonItem
+    
     init(){
         settings = UIBarButtonItem(image: UIImage(named: TextConstants.cogBtnImgName),
                              style: .plain,
@@ -54,6 +56,13 @@ class NavigationBarList {
                                         target: nil,
                                         action: nil)
         showHide.accessibilityLabel = TextConstants.accessibilityshowHide
+        
+        apply = UIBarButtonItem(image: #imageLiteral(resourceName: "Arrow"),
+                                style: .plain,
+                                target: nil,
+                                action: nil)
+        
+        apply.accessibilityLabel = TextConstants.accessibilityApply
         
         // upload 
         // create
