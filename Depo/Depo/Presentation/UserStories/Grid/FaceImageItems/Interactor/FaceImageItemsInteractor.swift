@@ -14,17 +14,24 @@ class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteract
     let placesService = PlacesService()
     
     func loadItem(_ item: BaseDataSourceItem) {
+        
         guard let item = item as? Item, let id = item.id else { return }
         
         if let item = item as? PeopleItem {
-            output.startAsyncOperation()
-            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] (uuid) in
-                if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.didLoadAlbum(uuid, forItem: item)
-                }
-                self?.output.asyncOperationSucces()
-            }, fail: { [weak self] (error) in
-                self?.output.asyncOperationFail(errorMessage: error.description)
+//            output.startAsyncOperation()
+//            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] (uuid) in
+//                if let output = self?.output as? FaceImageItemsInteractorOutput {
+//                    output.didLoadAlbum(uuid, forItem: item)
+//                }
+//                self?.output.asyncOperationSucces()
+//            }, fail: { [weak self] (error) in
+//                self?.output.asyncOperationFail(errorMessage: error.description)
+//            })
+            
+            peopleService.getAlbumsForPeopleItemWithID(Int(id), success: { (response) in
+                
+            }, fail: { (error) in
+                
             })
         } else if let item = item as? ThingsItem {
             output.startAsyncOperation()

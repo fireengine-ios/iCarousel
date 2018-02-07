@@ -10,21 +10,21 @@ import UIKit
 
 class PeopleService: BaseRequestService {
     
-    func getPeopleList(param: PeopleParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+    func getPeopleList(param: PeopleParameters, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
         log.debug("SearchService suggestion")
         
         let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getPeoplePage(param: PeoplePageParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+    func getPeoplePage(param: PeoplePageParameters, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
         log.debug("SearchService suggestion")
         
         let handler = BaseResponseHandler<PeoplePageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getPeopleAlbum(id: Int, success:@escaping (_ uuid: String) -> Void, fail:@escaping FailResponse) {
+    func getPeopleAlbum(id: Int, success: @escaping (_ uuid: String) -> Void, fail: @escaping FailResponse) {
         let param = PeopleAlbumParameters(id: id)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
@@ -36,6 +36,20 @@ class PeopleService: BaseRequestService {
         }, fail: fail)
         
        executeGetRequest(param: param, handler: handler)
+    }
+    
+    func getAlbumsForPeopleItemWithID(_ id: Int, success: @escaping (_ albums: [AlbumServiceResponse]) -> Void, fail: @escaping FailResponse) {
+        let param = PeopleAlbumsParameters(id: id)
+        
+        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
+            if let response = response as? AlbumResponse {
+                success(response.list)
+            } else {
+                fail(ErrorResponse.failResponse(response))
+            }
+        }, fail: fail)
+        
+        executeGetRequest(param: param, handler: handler)
     }
 }
 
@@ -78,6 +92,19 @@ class PeopleAlbumParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleAlbum, id)
+        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+    }
+}
+
+class PeopleAlbumsParameters: BaseRequestParametrs {
+    let id: Int
+    
+    init(id: Int) {
+        self.id = id
+    }
+    
+    override var patch: URL {
+        let searchWithParam = String(format: RouteRequests.peopleAlbums, id)
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }

@@ -11,7 +11,8 @@ import UIKit
 class LBAlbumLikePreviewSliderModuleConfigurator {
 
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController,
-                                     inputPresenter: LBAlbumLikePreviewSliderPresenter?) {
+                                                       inputPresenter: LBAlbumLikePreviewSliderPresenter?,
+                                                       peopleItem: PeopleItem? = nil) {
 
         if let viewController = viewInput as? LBAlbumLikePreviewSliderViewController {
             configure(viewController: viewController, inputPresenter: inputPresenter)
@@ -19,7 +20,8 @@ class LBAlbumLikePreviewSliderModuleConfigurator {
     }
 
     private func configure(viewController: LBAlbumLikePreviewSliderViewController,
-                           inputPresenter: LBAlbumLikePreviewSliderPresenter?) {
+                           inputPresenter: LBAlbumLikePreviewSliderPresenter?,
+                           peopleItem: PeopleItem? = nil) {
 
         let router = LBAlbumLikePreviewSliderRouter()
 
