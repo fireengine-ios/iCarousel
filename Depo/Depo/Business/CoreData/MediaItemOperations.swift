@@ -94,15 +94,6 @@ extension CoreDataStack {
         }
     }
     
-    func removeFromStorage(wrapData: [WrapData]) {
-        
-        //let context = mainContext
-        //wrapData.forEach {
-            //context.delete( $0.coreDataObject! )
-        //}
-        //saveDataForContext(context: context, saveAndWait: true)
-    }
-    
     
     // MARK:  MediaItem
     

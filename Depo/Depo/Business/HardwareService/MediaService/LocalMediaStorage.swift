@@ -137,8 +137,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func getAllAlbums(completion: @escaping (_ albums: [AlbumItem])->Void) {
         log.debug("LocalMediaStorage getAllAlbums")
 
-        askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] (accessGranted, _) in
-            guard accessGranted, let `self` = self else {
+        askPermissionForPhotoFramework(redirectToSettings: true) { (accessGranted, _) in
+            guard accessGranted else {
                 completion([])
                 return
             }

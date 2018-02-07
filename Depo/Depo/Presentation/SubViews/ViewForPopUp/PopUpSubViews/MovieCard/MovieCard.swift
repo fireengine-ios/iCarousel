@@ -11,9 +11,6 @@ import SwiftyJSON
 
 final class MovieCard: BaseView {
     
-    private lazy var imageManager = ImageManager()
-    private lazy var filesDataSource = FilesDataSource()
-    
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)

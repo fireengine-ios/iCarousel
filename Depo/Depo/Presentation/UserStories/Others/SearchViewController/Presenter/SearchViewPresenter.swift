@@ -195,11 +195,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.setSelectionState(selectionState: true)
     }
     
-    
-    private func stopEditing() {
-        dataSource.setSelectionState(selectionState: false)
-    }
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         self.view.scrollViewDidScroll(scrollView: scrollView)
     }

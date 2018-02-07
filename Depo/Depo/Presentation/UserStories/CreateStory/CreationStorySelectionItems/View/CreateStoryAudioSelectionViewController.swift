@@ -54,9 +54,7 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
     }
     
     func hideView(){
-        dismiss(animated: true) {
-            
-        }
+        dismiss(animated: true, completion: nil)
     }
     
     override func isNeedShowTabBar() -> Bool{

@@ -39,34 +39,6 @@ protocol DownloadRequestParametrs: RequestParametrs {
     var urlToRemoteFile: URL { get }
 }
 
-
-class BaseUploadRequestParametrs: UploadRequestParametrs {
-    
-    var urlToLocalFile: URL?
-
-    var fileData: Data?
-    
-    var requestParametrs: Any {
-        return Data()
-    }
-    
-    var patch: URL {
-        return RouteRequests.BaseUrl
-    }
-    
-    var header: RequestHeaderParametrs {
-        return RequestHeaders.authification()
-    }
-    
-    var timeout: TimeInterval{
-        return 2000.0
-    }
-    
-    init(urlToFile: URL) {
-        urlToLocalFile = urlToFile
-    }
-}
-
 class BaseDownloadRequestParametrs: DownloadRequestParametrs {
     let urlToRemoteFile: URL
     

@@ -452,17 +452,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if dataSource.selectedItemsArray.count > 0 {
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
-//        UploadService.default.uploadOnDemand(success: {
-//            DispatchQueue.main.async {
-//                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
-//            }
-//            print("Upload success")
-//        }) { (errorResponse) in
-//            print("Upload fail")
-//        }
-//        
-//        reloadData()
-
     }
     
     func moreActionsPressed(sender: Any) {

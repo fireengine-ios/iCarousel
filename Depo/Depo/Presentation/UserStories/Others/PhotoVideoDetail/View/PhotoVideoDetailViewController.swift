@@ -303,7 +303,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                 return
             }
             
-//            SingleSong.default.pause()
             player.pause()
             
             playerController?.player = nil
@@ -315,7 +314,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             
             switch file.patchToPreview {
             case let .localMediaContent(local):
-                //localManager.getPreviewImage(asset: local.asset, image: compliteImage)
                 let option = PHVideoRequestOptions()
                 option.isNetworkAccessAllowed = true
                 
@@ -333,11 +331,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                         
                     })
                 }
-                
-//                [[PHImageManager defaultManager] requestAVAssetForVideo:videoAsset options:option resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
-//                    resultAsset = avasset;
-//                    dispatch_semaphore_signal(semaphore);
-//                    }];
                 
             case .remoteUrl(_):
                 let playerItem = AVPlayerItem(url:url)
@@ -363,13 +356,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         if Device.operationSystemVersionLessThen(11) {
             UIApplication.shared.isStatusBarHidden = false
         }
-//        playerController?.player = nil
-//        playerController?.removeFromParentViewController()
-//        playerController = nil
-//        player?.pause()
-//        player = nil
-//        player = AVPlayer()
-//        player!.replaceCurrentItem(with: nil)
     }
     
     

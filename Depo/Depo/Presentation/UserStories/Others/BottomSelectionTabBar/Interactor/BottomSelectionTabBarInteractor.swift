@@ -8,9 +8,6 @@
 
 class BottomSelectionTabBarInteractor: MoreFilesActionsInteractor, BottomSelectionTabBarInteractorInput {
     
-//    weak var output: BottomSelectionTabBarInteractorOutput!
-    private var fileService = WrapItemFileService()
-    
     let dataStorage = BottomSelectionTabBarDataStorage()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void

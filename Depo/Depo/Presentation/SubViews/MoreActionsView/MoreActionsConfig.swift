@@ -6,16 +6,6 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-struct MoreActionsSetupConfig {
-    let syncTypes: [MoreActionsConfig.CellSyncType]
-    let selectedSyncTypeIndex: Int
-    let availableViewType: [MoreActionsConfig.ViewType]
-    let selectedViewTypeIndex: Int
-    let availableSortTypes: [MoreActionsConfig.SortRullesType], selectedSortTypeIndex: Int
-    let filterTypes: [MoreActionsConfig.MoreActionsFileType], selectedFilterFileTypeIndexes: [Bool]
-    let selectionTypes: [MoreActionsConfig.SelectedType]
-}
-
 enum SortedRules: Int {
     case timeUp = 1
     case timeDown = 2
@@ -112,46 +102,6 @@ class MoreActionsConfig {
                 return "Not Sync"
             }
         }
-        
-        func convertToSyncWrapperedStatus() -> SyncWrapperedStatus {
-            
-            switch self {
-            case .notSync:
-                return .notSynced
-            case .sync:
-                return .synced
-            case.all:
-                return .synced
-            }
-        }
-    }
-    
-    enum CellSectionType: CustomStringConvertible {
-        case syncType
-        case viewType
-        case sortType
-        case filterType
-        case selectionType
-        
-        var description: String {
-            switch self {
-            case .syncType:
-                return TextConstants.syncTypeTitle
-            case .viewType:
-                return TextConstants.viewTypeTitle
-            case .sortType:
-                return TextConstants.sortTypeTitle
-            case .filterType:
-                return  TextConstants.fileTypeTitle
-            case .selectionType:
-                return TextConstants.selectionTypeTitle
-            }
-        }
-    }
-    
-    enum MoreActionsViewAppearance {
-        case regular
-        case tableLike
     }
     
     enum ViewType: CustomStringConvertible {
@@ -290,46 +240,6 @@ class MoreActionsConfig {
                 
             default:
                 return .unknown
-            }
-        }
-        
-        func convertToGeneralFilterFileType() -> GeneralFilesFiltrationType {
-            switch self {
-            case .Video:
-                return .fileType(.video)
-                
-            case .Music:
-                return .fileType(.audio)
-                
-            case .Photo:
-                return .fileType(.image)
-                
-            case .Folder:
-                return .fileType(.folder)
-                
-            case .Docs:
-                // don't use only
-                return .fileType(.unknown)
-                
-            case .All:
-                return .fileType(.unknown)
-                
-            case .Album:
-                return .fileType(.photoAlbum)
-                
-            default:
-                return .fileType(.unknown)
-            }
-        }
-        
-        func convertToSearchRequestFieldValue() -> FieldValue? {
-            switch self {
-            case .Video:
-                return .video
-            case .Photo:
-                return .image
-            default:
-                return nil//.all
             }
         }
     }

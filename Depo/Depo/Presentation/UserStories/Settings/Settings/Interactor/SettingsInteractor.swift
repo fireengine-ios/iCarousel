@@ -11,8 +11,6 @@ class SettingsInteractor: SettingsInteractorInput {
     weak var output: SettingsInteractorOutput!
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
-    private lazy var biometricsManager: BiometricsManager = factory.resolve()
-    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     private var userInfoResponse: AccountInfoResponse?
     let authService = AuthenticationService()

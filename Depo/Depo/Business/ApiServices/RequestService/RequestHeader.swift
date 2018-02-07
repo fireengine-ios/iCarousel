@@ -15,8 +15,6 @@ struct HeaderConstant {
     
     static let ContentType = "Content-Type"
     static let ApplicationJsonUtf8 = "application/json; encoding=utf-8"
-    static let ApplicationImagePng = "image/png"
-    static let ApplicationAudioWave  = "audio/wave"
     
     static let ContentLength = "Content-Length"
     static let XMetaStrategy = "X-Meta-Strategy"
@@ -36,7 +34,6 @@ struct HeaderConstant {
     
     static let AuthToken = "X-Auth-Token"
     static let RememberMeToken = "X-Remember-Me-Token"
-    static let newUser = "X-New-User"
     static let migration = "X-Migration-User"
     static let accountWarning = "X-Account-Warning"
     
