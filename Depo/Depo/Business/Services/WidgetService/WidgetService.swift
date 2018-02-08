@@ -20,6 +20,7 @@ final class WidgetService {
     
     
     func notifyWidgetAbout(_ synced: Int, of total: Int) {
-        
+        wormhole.passMessageObject(synced as NSCoding, identifier: "EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER")
+        wormhole.passMessageObject(total as NSCoding, identifier: "EXTENSION_WORMHOLE_TOTAL_COUNT_IDENTIFIER")
     }
 }

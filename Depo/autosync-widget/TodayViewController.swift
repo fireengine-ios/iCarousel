@@ -82,26 +82,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     private func setupWormhole() {
         let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.turkcell.akillidepo", optionalDirectory: "EXTENSION_WORMHOLE_DIR")
+        
         wormhole.listenForMessage(withIdentifier: "EXTENSION_WORMHOLE_TOTAL_COUNT_IDENTIFIER") { [weak self] (messageObject) in
-            if let messageObject = messageObject as? [String: Any] {
-                if let total = messageObject["totalCount"] as? Int {
-                    self?.totalCount = total
-                    self?.updateFields()
-                }
-                
+            if let messageObject = messageObject as? Int {
+                self?.totalCount = messageObject
+                self?.updateFields()
             }
         }
+        
         wormhole.listenForMessage(withIdentifier: "EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER") { [weak self] (messageObject) in
-            if let messageObject = messageObject as? [String: Any] {
-                if let finished = messageObject["finishedCount"] as? Int {
-                    self?.finishedCount = finished
-                    self?.updateFields()
-                }
-                
+            if let messageObject = messageObject as? Int {
+                self?.finishedCount = messageObject
+                self?.updateFields()
             }
         }
     }
-    
 }
 
 
