@@ -14,8 +14,7 @@ class AlbumSelectionViewController: BaseFilesGreedChildrenViewController {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
         
-        navigationItem.rightBarButtonItems = NavigationBarConfigurator().rightItems//navigationBarTwoRightItem()
-        //navigationItem.titleView = navigationBar(title: TextConstants.createStoryPhotosTitle, subtitle: "")
+        navigationItem.rightBarButtonItems = NavigationBarConfigurator().rightItems
         
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
         button.setTitle(TextConstants.selectAlbumButtonTitle, for: .normal)
@@ -25,11 +24,6 @@ class AlbumSelectionViewController: BaseFilesGreedChildrenViewController {
         let barButton = UIBarButtonItem(customView: button)
         
         navigationItem.rightBarButtonItem = barButton
-        
-        //static let uploadFilesNextButton = "Upload"
-        //static let uploadFilesSingleHeader = "Item Selected"
-        //static let uploadFilesMultipleHeader = "Items Selected"
-        
     }
     
     ///need override this method for correct configuration UINavigationBar

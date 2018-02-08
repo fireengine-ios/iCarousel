@@ -11,8 +11,6 @@ import UIKit
 class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, UICollectionViewDelegate, SearchModuleOutput {
 
     var output: HomePageViewOutput!
-    
-    var navBarConfigure = NavigationBarConfigurator()
 
     @IBOutlet weak var contentView: UIView!
     

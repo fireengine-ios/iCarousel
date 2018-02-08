@@ -6,6 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol OTPViewModuleInput: class {
+//protocol OTPViewModuleInput: class {
+//
+//}
 
-}

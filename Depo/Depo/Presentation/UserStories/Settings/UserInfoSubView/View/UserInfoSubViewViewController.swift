@@ -114,21 +114,6 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
         }
         let remaindSize = remaind.bytesString
         userStorrageInformationLabel.text = String(format: TextConstants.usageInfoBytesRemained, remaindSize, quotaString)
-        
-        
-        
-//        let all = Float(quotoInfo.bytes ?? 0)
-//        let used = Float(quotoInfo.bytesUsed ?? 1)
-//        let persent = used/all
-//
-//        self.usersStorrageUssesProgress.progress = persent
-//
-//        let allSize = ByteCountFormatter.string(fromByteCount: quotoInfo.bytes ?? 0, countStyle: .binary)
-//        let remaind = (quotoInfo.bytes ?? 0) - (quotoInfo.bytesUsed ?? 0)
-//        let usedSize = ByteCountFormatter.string(fromByteCount: remaind, countStyle: .binary)
-//
-//        userStorrageInformationLabel.text = String(format: TextConstants.settingsUserInfoViewQuota, usedSize, allSize)
-        
     }
 
     // MARK: UserInfoSubViewViewInput

@@ -11,7 +11,7 @@ import UIKit
 class PackagesViewController: UIViewController {
     var output: PackagesViewOutput!
     
-    @IBOutlet weak private var collectionView: UICollectionView!
+    @IBOutlet weak private var collectionView: ResizableCollectionView!
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
     

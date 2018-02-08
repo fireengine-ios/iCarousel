@@ -65,11 +65,11 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        UIApplication.shared.setStatusBarStyle(.default, animated: true)
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     deinit {

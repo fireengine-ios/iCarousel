@@ -14,6 +14,7 @@ protocol UploadFromLifeBoxViewInput: class {
     func hideView()
 }
 
-protocol UploadFromLifeBoxViewOutput: class {
-    func viewIsReady()
-}
+//protocol UploadFromLifeBoxViewOutput: class {
+//    func viewIsReady()
+//}
+

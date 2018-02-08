@@ -42,23 +42,6 @@ class ActionsMenuView: UIView, ActionsMenuViewInput, UITableViewDelegate, UITabl
         return 65.0
     }
     
-    func calculateHeightForAllCells() -> CGFloat{
-        let count: CGFloat = CGFloat(tableDataMArray.count)
-        let h: CGFloat = count * heightForCell()
-        return h
-    }
-    
-    func getSizeForView() -> CGSize{
-        let h = calculateHeightForAllCells()
-        var w: CGFloat = 320.0
-        if (!Device.isIpad){
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            w = appDelegate.window?.frame.size.width ?? 0
-        }
-        return CGSize(width: w, height: h)
-    }
-    
-    
     // MARK: UITableView delegate
     
     func numberOfSections(in tableView: UITableView) -> Int {

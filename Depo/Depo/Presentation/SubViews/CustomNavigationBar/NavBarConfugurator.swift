@@ -78,10 +78,6 @@ class NavigationBarConfigurator {
          return self.right?.flatMap { $0.navItem }
     }
     
-    var leftItems: [UIBarButtonItem]? {
-        return self.left?.flatMap { $0.navItem }
-    }
-    
     func configure(right:[NavBarWithAction]?, left:[NavBarWithAction]?) {
         self.right = right
         self.right?.forEach {

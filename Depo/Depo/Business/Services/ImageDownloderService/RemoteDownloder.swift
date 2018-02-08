@@ -102,14 +102,6 @@ class ImageDownloder {
 typealias FilesDownloaderResponse = (_ fileURLs: [URL], _ directoryURL: URL) -> Swift.Void
 typealias FilesDownloaderFail = (_ errorMessage: String) -> Swift.Void
 
-class FileDownloadRequestParameters: BaseRequestParametrs, DownloadRequestParametrs {
-    var urlToRemoteFile: URL
-    
-    init(url: URL) {
-        urlToRemoteFile = url
-    }
-}
-
 class FilesDownloader {
     
     let fileManager = FileManager.default

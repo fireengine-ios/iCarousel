@@ -19,14 +19,10 @@ struct CellsIdConstants {
     static let settingsTableViewSwitchCellID = "SettingsTableViewSwitchCell"
     static let actionsMenuCellID = "ActionsMenuTableViewCell"
     static let dropDovnCellID = "DropDovnTableViewCell"
-    static let popUpCellID = "PopUpSwipeCell"
     static let suggestionTableSectionHeaderID = "SuggestionTableSectionHeader"
 }
 
 struct CollectionViewCellsIdsConstant {
-    static let baseWithSwipe = "BaseCollectionViewCellWithSwipe"
-    static let homeSimpleText = "HomeCollectionViewCellSimpleText"
-    static let homeLikeFiture = "HomeCollectionViewCellLikeFiture"
     static let cellForController = "CollectionViewCellForController"
     static let cellForImage = "CollectionViewCellForPhoto"
     static let cellForStoryImage = "CollectionViewCellForStoryPhoto"
@@ -41,8 +37,6 @@ struct CollectionViewCellsIdsConstant {
 }
 
 struct CollectionViewSuplementaryConstants {
-    static let baseCollectionSuplementaryHeaderXIBName = "SupplementaryLabelHeader"
-    static let baseCollectionSuplementaryHeaderReuseID =  "SupplementaryLabelHeaderID"
     static let baseDataSourceForCollectionViewReuseID = "CollectionViewSimpleHeaderWithText"
     static let collectionViewStoryReorderView = "CollectionViewStoryReorderView"
     static let collectionViewHeaderWithText = "CollectionViewHeaderWithText"

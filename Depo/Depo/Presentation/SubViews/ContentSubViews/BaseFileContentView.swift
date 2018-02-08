@@ -17,10 +17,6 @@ protocol BaseFileContentViewDeleGate: class {
 
 class BaseFileContentView: UIView {
     
-    let turnPageOffset: CGFloat = 30
-    
-    typealias Item = WrapData
-    
     weak var delegate: BaseFileContentViewDeleGate? // Dele Gate ?
     var index: Int = -1
 

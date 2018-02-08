@@ -46,13 +46,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationShowPlusTabBar = "ShowMainTabBarPlusNotification"
     static let notificationHideTabBar = "HideMainTabBarNotification"
     static let notificationShowTabBar = "ShowMainTabBarNotification"
-    static let notificationMusicStartedPlaying = "MusicStartedPlaying"
     static let notificationMusicDrop = "MusicDrop"
-    static let notificationMusicStop = "MusicStop"
     static let notificationPhotosScreen = "PhotosScreenOn"
     static let notificationVideoScreen = "VideoScreenOn"
-    
-    let originalPlusBotttomConstraint: CGFloat = 10
     
     fileprivate var photoBtn            : SubPlussButtonView!
     fileprivate var uploadBtn           : SubPlussButtonView!
@@ -293,11 +289,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeViewState(state: !plussButton.isSelected)
     }
     
-    func changeTabBarAppearance(editingMode: Bool = false) {
-        plussButton.isHidden = editingMode
-        plussButton.isEnabled = !editingMode
-    }
-    
     func setupCustomNavControllers() {
         let router = RouterVC()
         let list = [router.homePageScreen,
@@ -529,15 +520,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }, completion: nil)
     }
     
-    private func setupOriginalPlustBtnConstraint(forView unconstrainedView: SubPlussButtonView) {
-//        let centerX = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: unconstrainedView.button, attribute: .centerX, multiplier: 1, constant: 0)
-//        let bot = NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: unconstrainedView, attribute: .bottom, multiplier: 1, constant: 10)
-//        unconstrainedView.centerXConstraint = centerX
-//        unconstrainedView.botConstraint = bot
-//        view.addConstraints([centerX, bot])
-        view.layoutIfNeeded()
-    }
-    
     
     //MARK: - tab bar delegate
     
@@ -596,22 +578,6 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         }
     }
     
-    func getDataSource() -> RemoteItemsService{
-        var searchService: RemoteItemsService? = nil
-        if let nController = selectedViewController as? UINavigationController{
-            let viewConroller = nController.viewControllers.last
-            if let contr = viewConroller as? BaseFilesGreedViewController{
-                searchService = contr.getRemoteItemsService()
-            }
-        }
-        
-        if (searchService == nil){
-            searchService = AllFilesService(requestSize: 999)
-        }
-        
-        return searchService!
-    }
-    
     func getFolderUUID() -> String? {
         if let viewConroller = currentViewController as? BaseFilesGreedViewController {
             return viewConroller.getFolder()?.uuid
@@ -624,15 +590,9 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             let data = UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
             else { return }
         
-        /// IF WILL BE NEED TO SAVE FILE
-        //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-
         let wrapData = WrapData(imageData: data)
         
         UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {
-//            DispatchQueue.main.async {
-//                UIApplication.showSuccessAlert(message: TextConstants.photoUploadedMessage )
-//            }
         }) { (error) in
             DispatchQueue.main.async {
                 UIApplication.showErrorAlert(message: error.localizedDescription)

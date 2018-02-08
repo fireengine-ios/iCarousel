@@ -68,4 +68,22 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
                 self?.output.asyncOperationFail(errorMessage: nil)
         })
     }
+    
+    func updateCoverPhotoIfNeeded() {
+        if let album = album {
+            update(album: album)
+        }
+    }
+    
+    fileprivate func update(album: AlbumItem) {
+        let service = AlbumDetailService(requestSize: 1)
+        service.albumCoverPhoto(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { coverPhoto in
+            if album.preview?.uuid != coverPhoto.uuid {
+                album.preview = coverPhoto
+                ItemOperationManager.default.updatedAlbumCoverPhoto(item: album)
+            }
+        }) {
+            
+        }
+    }
 }

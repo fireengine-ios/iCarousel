@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InsetsLabel: UILabel {
+final class InsetsLabel: UILabel {
     
     var insets: UIEdgeInsets = .zero {
         didSet {

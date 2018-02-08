@@ -162,6 +162,10 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         requestAllItems()
     }
     
+    func updatedAlbumCoverPhoto(item: AlbumItem) {
+        requestAllItems()
+    }
+    
     func albumsDeleted(albums: [AlbumItem]) {
         requestAllItems()
     }
