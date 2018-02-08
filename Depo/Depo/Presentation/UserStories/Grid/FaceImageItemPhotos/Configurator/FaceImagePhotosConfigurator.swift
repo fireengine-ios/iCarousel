@@ -48,6 +48,6 @@ class FaceImagePhotosConfigurator {
         interactor.bottomBarOriginalConfig = bottomBarConfig
         
         viewController.mainTitle = item.name ?? ""
-        viewController.setHeaderImage(with: coverPhotoURL)
+        presenter.coverPhotoURL = coverPhotoURL
     }
 }

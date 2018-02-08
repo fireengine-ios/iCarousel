@@ -25,7 +25,7 @@ class PeopleService: BaseRequestService {
     }
     
     func getPeopleAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
-        let param = PlacesAlbumParameters(id: id)
+        let param = PeopleAlbumParameters(id: id)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
             if let response = response as? AlbumResponse, let album = response.list.first {

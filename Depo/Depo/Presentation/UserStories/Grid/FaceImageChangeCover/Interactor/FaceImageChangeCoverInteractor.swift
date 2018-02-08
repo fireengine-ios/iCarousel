@@ -12,17 +12,17 @@ class FaceImageChangeCoverInteractor: BaseFilesGreedInteractor, FaceImageChangeC
     
     let albumService = PhotosAlbumService()
     
-    func setAlbumCoverWithPhoto(_ photoUUID: String) {
+    func setAlbumCoverWithItem(_ item: BaseDataSourceItem) {
         guard let remoteItems = remoteItems as? FaceImageDetailService else {
             return
         }
         output.startAsyncOperation()
         let params = ChangeCoverPhoto(albumUUID: remoteItems.albumUUID,
-                                      photoUUID: photoUUID)
+                                      photoUUID: item.uuid)
         albumService.changeCoverPhoto(parameters: params, success: { [weak self] in
             self?.output.asyncOperationSucces()
             if let output = self?.output as? FaceImageChangeCoverInteractorOutput {
-                output.didSetCover()
+                output.didSetCover(item: item)
             }
         }) { [weak self] (error) in
             self?.output.asyncOperationFail(errorMessage: error.description)

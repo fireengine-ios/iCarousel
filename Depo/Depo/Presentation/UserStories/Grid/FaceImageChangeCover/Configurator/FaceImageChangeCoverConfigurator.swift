@@ -9,7 +9,7 @@
 class FaceImageChangeCoverConfigurator {
     
     func configure(viewController: FaceImageChangeCoverViewController,
-                   itemsService: FaceImageDetailService) {
+                   itemsService: FaceImageDetailService, moduleOutput: FaceImageChangeCoverModuleOutput?) {
         let router = FaceImageChangeCoverRouter()
         
         let presenter = FaceImageChangeCoverPresenter()
@@ -26,6 +26,7 @@ class FaceImageChangeCoverConfigurator {
         
         presenter.view = viewController
         presenter.router = router
+        presenter.customModuleOutput = moduleOutput
         
         let interactor = FaceImageChangeCoverInteractor(remoteItems: itemsService)
         interactor.output = presenter

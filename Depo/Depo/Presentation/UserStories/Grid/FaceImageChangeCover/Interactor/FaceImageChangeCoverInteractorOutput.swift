@@ -7,5 +7,5 @@
 //
 
 protocol FaceImageChangeCoverInteractorOutput {
-    func didSetCover()
+    func didSetCover(item: BaseDataSourceItem)
 }

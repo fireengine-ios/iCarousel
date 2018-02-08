@@ -9,10 +9,29 @@
 import UIKit
 
 class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
+    
+    var coverPhotoURL = URL(string: "")
+    
+    override func viewIsReady(collectionView: UICollectionView) {
+        super.viewIsReady(collectionView: collectionView)
+        
+        if let view = view as? FaceImagePhotosViewController, let url = coverPhotoURL {
+            view.setHeaderImage(with: url)
+        }
+    }
+    
     override func changeCover() {
         if let itemsService = interactor.remoteItems as? FaceImageDetailService,
            let router = router as? FaceImagePhotosRouter {
-              router.openChangeCoverWith(itemsService.albumUUID)
+              router.openChangeCoverWith(itemsService.albumUUID, moduleOutput: self)
+        }
+    }
+}
+
+extension FaceImagePhotosPresenter: FaceImageChangeCoverModuleOutput {
+    func onAlbumCoverSelected(item: WrapData) {
+        if let view = view as? FaceImagePhotosViewController, let coverURL = item.tmpDownloadUrl {
+            view.setHeaderImage(with: coverURL)
         }
     }
 }

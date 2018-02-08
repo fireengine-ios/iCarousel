@@ -10,6 +10,8 @@ import Foundation
 
 class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter, FaceImageChangeCoverInteractorOutput {
     
+    weak var customModuleOutput: FaceImageChangeCoverModuleOutput?
+    
     override func viewIsReady(collectionView: UICollectionView) {
         super.viewIsReady(collectionView: collectionView)
         
@@ -18,7 +20,7 @@ class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter, FaceImageChangeCov
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         if let interactor = interactor as? FaceImageChangeCoverInteractor {
-            interactor.setAlbumCoverWithPhoto(item.uuid)
+            interactor.setAlbumCoverWithItem(item)
         }
     }
     
@@ -35,9 +37,13 @@ class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter, FaceImageChangeCov
         
     }
 
-    func didSetCover() {
+    func didSetCover(item: BaseDataSourceItem) {
         if let router = router as? FaceImageChangeCoverRouterInput {
             router.back()
+        }
+        
+        if let item = item as? WrapData {
+            customModuleOutput?.onAlbumCoverSelected(item: item)
         }
     }
     

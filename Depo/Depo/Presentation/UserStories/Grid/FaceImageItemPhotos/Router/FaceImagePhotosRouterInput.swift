@@ -7,5 +7,5 @@
 //
 
 protocol FaceImagePhotosRouterInput {
-    func openChangeCoverWith(_ albumUUID: String)
+    func openChangeCoverWith(_ albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput)
 }
