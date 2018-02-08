@@ -116,11 +116,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         if let imageView = isBigSize() ? self.bigContentImageView : self.smallContentImageView {
             imageView.contentMode = .center
             imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { (image, error, cacheType, url) in
-//                imageView.layer.opacity = 0.1
                 self.setImage(image: image, animated: true)
-//                UIView.animate(withDuration: 0.2, animations: {
-//                    imageView.layer.opacity = 1.0
-//                })
             }
         }
     }
