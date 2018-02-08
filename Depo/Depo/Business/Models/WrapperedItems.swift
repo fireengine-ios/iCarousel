@@ -139,10 +139,6 @@ enum FileType: Equatable {
         
     }
     
-    var isApplication: Bool {
-        return true
-    }
-    
     var  isUnSupportedOpenType: Bool {
         
         return  self != .application(.zip) &&
@@ -478,10 +474,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var status: Status
     
-    /* for remote content*/
     var tmpDownloadUrl: URL?
-    
-    var isUploading: Bool = false
     
     var urlToFile: URL? {
         return tmpDownloadUrl

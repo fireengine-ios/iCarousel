@@ -48,9 +48,9 @@ class ActivityTimelineSectionsBuider {
     private func setupActivityByDays(with activities: [ActivityTimelineServiceResponse]) {
         
         for activity in activities {
-            
             guard let date = activity.createdDate,
-                let activityType = activity.activityType
+                let activityType = activity.activityType,
+                activityType != .welcome /// activity is empty
                 else { continue }
             let daysInDate = Calendar.current.component(.day, from: date)
             
@@ -70,11 +70,20 @@ class ActivityTimelineSectionsBuider {
                 
             /// create new days section
             } else {
+                
                 let activityByDaysNew = ActivitiesByDay(date: date, days: daysInDate)
                 timelineActivities.append(activityByDaysNew)
                 
+                /// https://wiki.life.com.by/display/LTFizy/Timeline+actions
+                let activityTypeNew: ActivityType
+                if activityType == .added, (activity.activityFileType == .directory) || (activity.activityFileType == .dir) {
+                    activityTypeNew = .welcome
+                } else {
+                    activityTypeNew = activityType
+                }
+                
                 let activityByMinutesAndTypeNew = ActivitiesByMinutesAndType(date: date,
-                                                                             type: activityType)
+                                                                             type: activityTypeNew)
                 activityByMinutesAndTypeNew.list.append(activity)
                 activityByDaysNew.list.append(activityByMinutesAndTypeNew)
             }

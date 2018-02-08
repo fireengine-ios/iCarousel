@@ -15,28 +15,27 @@ struct HeaderConstant {
     
     static let ContentType = "Content-Type"
     static let ApplicationJsonUtf8 = "application/json; encoding=utf-8"
-    static let ApplicationImagePng = "image/png"
-    static let ApplicationAudioWave  = "audio/wave"
     
-    static let ContentLength = "Content-Length"
+    
     static let XMetaStrategy = "X-Meta-Strategy"
     static let XMetaRecentServerHash = "X-Meta-Recent-Server-Hash"
     static let XObjectMetaFileName = "X-Object-Meta-File-Name"
     static let XObjectMetaParentUuid = "X-Object-Meta-Parent-Uuid"
-    static let XObjectMetaSpecialFolder = "X-Object-Meta-Special-Folder"
-    static let XObjectMetaIosMetadataHash = "X-Object-Meta-Ios-Metadata-Hash"
-    static let XObjectMetaAlbumLabel = "X-Object-Meta-Album-Label"
-    static let XObjectMetaFolderLabel = "X-Object-Meta-Folder-Label"
     static let XObjectMetaFavorites = "X-Object-Meta-Favourite"
     static let Expect = "Expect"
-    static let Etag = "ETag"
+    
+//    static let ContentLength = "Content-Length"
+//    static let XObjectMetaSpecialFolder = "X-Object-Meta-Special-Folder"
+//    static let XObjectMetaIosMetadataHash = "X-Object-Meta-Ios-Metadata-Hash"
+//    static let XObjectMetaAlbumLabel = "X-Object-Meta-Album-Label"
+//    static let XObjectMetaFolderLabel = "X-Object-Meta-Folder-Label"
+//    static let Etag = "ETag"
     
     static let CaptchaId = "X-Captcha-Id"
     static let CaptchaAnswer = "X-Captcha-Answer"
     
     static let AuthToken = "X-Auth-Token"
     static let RememberMeToken = "X-Remember-Me-Token"
-    static let newUser = "X-New-User"
     static let migration = "X-Migration-User"
     static let accountWarning = "X-Account-Warning"
     

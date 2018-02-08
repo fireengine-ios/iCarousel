@@ -62,6 +62,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     let underNavBarBarHeight: CGFloat = 53
     
     @IBOutlet private weak var topCarouselConstraint: NSLayoutConstraint!
+    
     // MARK: Life cycle
     
     override func viewDidLoad() {
@@ -102,12 +103,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
         
         output.viewIsReady(collectionView: collectionView)
-        
-        //carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
-        
-//        if #available(iOS 11.0, *) {
-//            topCarouselConstraint.constant = underNavBarBarHeight//0
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,9 +113,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
-//        if let unwrapedSlider = contentSlider { //FIXME: shiwt reload mechanic to presenter, so modules would speak as normal
-//            unwrapedSlider.reloadAllData()
-//        }
         
         let allVisibleCells = collectionView.indexPathsForVisibleItems
         if !allVisibleCells.isEmpty{
@@ -178,14 +170,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         })
         let rightActions: [NavBarWithAction] = isSelecting ? [more] : [more, search]
         navBarConfigurator.configure(right: rightActions, left: [])
-        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
-    }
-    
-    func configurateDeleteNavBarActions(deleteAction: @escaping () -> Swift.Void) {
-        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
-            deleteAction()
-        })
-        navBarConfigurator.configure(right: [delete], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
@@ -283,10 +267,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func requestStarted() {
         backAsCancelBarButton?.isEnabled = false
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     func requestStopped() {
         backAsCancelBarButton?.isEnabled = true
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     @objc func onCancelSelectionButton(){

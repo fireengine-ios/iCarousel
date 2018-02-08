@@ -44,10 +44,4 @@ class SettingsTableViewSwitchCell: UITableViewCell {
         titleLabel.text = titleText
         separator.isHidden = !needShowSeparator
     }
-    
-    func changeSwithcState(turnOn: Bool) {
-        if stateSwitch.isOn != turnOn {
-          stateSwitch.setOn(turnOn, animated: true)
-        }
-    }
 }

@@ -91,6 +91,19 @@ class ImageDownloder {
         }
     }
     
+    func removeImageFromCache(url: URL?, completion: @escaping () -> Swift.Void) {
+        var cachePath: String?
+        if let path = url?.absoluteString, let query = url?.query, let imageCache = SDWebImageManager.shared().imageCache {            
+            cachePath = path.replacingOccurrences(of: "?"+query, with: "")
+            
+            imageCache.removeImage(forKey: cachePath, withCompletion: {
+                completion()
+            })
+        } else {
+            completion()
+        }
+    }
+    
     func cancelRequest(path: URL) -> Void {
         guard let item = tokenList[path] else {
             return
@@ -101,14 +114,6 @@ class ImageDownloder {
 
 typealias FilesDownloaderResponse = (_ fileURLs: [URL], _ directoryURL: URL) -> Swift.Void
 typealias FilesDownloaderFail = (_ errorMessage: String) -> Swift.Void
-
-class FileDownloadRequestParameters: BaseRequestParametrs, DownloadRequestParametrs {
-    var urlToRemoteFile: URL
-    
-    init(url: URL) {
-        urlToRemoteFile = url
-    }
-}
 
 class FilesDownloader {
     

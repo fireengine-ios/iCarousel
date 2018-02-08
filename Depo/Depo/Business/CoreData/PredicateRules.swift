@@ -47,10 +47,6 @@ class PredicateRules {
         return NSCompoundPredicate(andPredicateWithSubpredicates: list)
     }
     
-    func folderContent(rootFolder:String) -> NSPredicate {
-        return NSPredicate(format: "== %@",rootFolder)
-    }
-    
     func allLocalObjectsForObjects(objects:[Item]) -> NSPredicate{
         let serverObjects = objects.filter {
             return !$0.isLocalItem
@@ -60,16 +56,6 @@ class PredicateRules {
         return predicate
     }
     
-    func allLocalObjectsForObjectsByMd5(objects:[Item]) -> NSPredicate{
-        let serverObjects = objects.filter {
-            return !$0.isLocalItem
-        }
-        let list = serverObjects.map{ $0.md5 }
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND md5Value IN %@",  list)
-        return predicate
-    }
-    
-    
     // MARK: By favorite staus
     
     var favorite: NSPredicate {
@@ -78,18 +64,6 @@ class PredicateRules {
     
     
     // MARK: By sync status
-    
-    private static func predicateBySyncStatus(syncStatus: MoreActionsConfig.CellSyncType) -> NSPredicate {
-        switch syncStatus {
-        case .notSync, .sync :
-            return NSPredicate(format: "syncStatusValue = %d", syncStatus.convertToSyncWrapperedStatus().valueForCoreDataMapping())
-            
-        case .all :
-            let start = SyncWrapperedStatus.notSynced.valueForCoreDataMapping()
-            let end = SyncWrapperedStatus.synced.valueForCoreDataMapping()
-            return NSPredicate(format: "syncStatusValue BETWEEN {%d,%d}", start, end)
-        }
-    }
     
     private static func predicateFromFileType(type: MoreActionsConfig.MoreActionsFileType) -> NSPredicate? {
         return NSPredicate(format: "fileTypeValue == %d", type.convertToFileType().valueForCoreDataMapping() )

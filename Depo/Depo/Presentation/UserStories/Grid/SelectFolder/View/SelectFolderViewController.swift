@@ -65,12 +65,6 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         navigationItem.rightBarButtonItem = barButtonRight
     }
     
-    func showBackButton(){
-        let backBarButton = UIBarButtonItem(customView: backButton)
-        
-        navigationItem.leftBarButtonItem = backBarButton
-    }
-    
     @objc func onNextButton(){
         output.onNextButton()
     }
@@ -81,9 +75,7 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
     }
     
     func hide(){
-        dismiss(animated: true) {
-            
-        }
+        dismiss(animated: true, completion: nil)
     }
     
     func selectFolder(select: @escaping SelectFolder, cancel: @escaping CancelSelectFolder){
@@ -100,5 +92,4 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         selectFolderBlock?(folder)
         hide()
     }
-    
 }

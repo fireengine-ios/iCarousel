@@ -73,7 +73,8 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     
     func uploadOperationSuccess(){
         log.debug("UploadFromLifeBoxPhotosPresenter uploadOperationSuccess")
-
+        dataSource.setSelectionState(selectionState: false)
+        stopModeSelected()
         guard let uploadView = view as? UploadFromLifeBoxViewInput else{
             return
         }

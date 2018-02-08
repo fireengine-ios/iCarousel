@@ -21,7 +21,6 @@ class PasscodeEnterViewController: UIViewController {
     }
     
     var passcodeManager: PasscodeManager!
-    private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
     var state: PasscodeState!
     var navigationTitle = ""

@@ -42,10 +42,8 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     }
     
     override func isHeaderSelected(section: Int) -> Bool{
-        let array = tableDataMArray[section]
-        let result: [String] = array.flatMap { $0.uuid}
-        let subSet = Set<String>(result)
-        
+        let arrayOfObjectsInSction = tableDataMArray[section]
+        let subSet = Set<BaseDataSourceItem>(arrayOfObjectsInSction)
         return subSet.isSubset(of: selectedItemsArray)
     }
     
@@ -53,7 +51,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         var resultArray = [BaseDataSourceItem]()
         for array in tableDataMArray{
             for object in array{
-                if (selectedItemsArray.contains(object.uuid)){
+                if (selectedItemsArray.contains(object)){
                     resultArray.append(object)
                 }
             }
@@ -69,30 +67,25 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         return CGSize.zero
     }
     
-    override func albumsDeleted(albums: [AlbumItem]){
+    override func albumsDeleted(albums: [AlbumItem]) {
         if let unwrapedFilters = originalFilters,
             canShowAlbumsFilters(filters: unwrapedFilters) {
             let uuids = albums.map({ $0.uuid })
             var arrayOfIndexes = [IndexPath]()
-            var section = 0
             var newArray = [[BaseDataSourceItem]]()
-            for array in tableDataMArray{
-                var row = 0
+            for (section, array) in tableDataMArray.enumerated() {
                 var newSectionArray = [BaseDataSourceItem]()
-                for album in array{
-                    if uuids.contains(album.uuid){
+                for (row, album) in array.enumerated() {
+                    if uuids.contains(album.uuid) {
                         let path = IndexPath(row: row, section: section)
                         arrayOfIndexes.append(path)
-                    }else{
+                    } else {
                         newSectionArray.append(album)
                     }
-                    row = row + 1
                 }
-                section = section + 1
                 newArray.append(newSectionArray)
             }
-            
-            
+        
             if arrayOfIndexes.count > 0 {
                 tableDataMArray = newArray
                 collectionView?.performBatchUpdates({ [weak self] in
@@ -103,6 +96,24 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
             }
         }
         
+    }
+    
+    override func updatedAlbumCoverPhoto(item: AlbumItem) {
+        guard let unwrapedFilters = originalFilters,
+            canShowAlbumsFilters(filters: unwrapedFilters) else {
+                return
+        }
+        for (section, array) in tableDataMArray.enumerated() {
+            for (row, album) in array.enumerated() {
+                if album.uuid == item.uuid {
+                    let indexPath = IndexPath(row: row, section: section)
+                    collectionView?.performBatchUpdates({
+                        collectionView?.reloadItems(at: [indexPath])
+                    }, completion: nil)
+                    return
+                }
+            }
+        }
     }
     
 }

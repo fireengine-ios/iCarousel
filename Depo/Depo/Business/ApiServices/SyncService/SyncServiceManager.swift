@@ -16,7 +16,6 @@ class SyncServiceManager {
     private let dispatchQueue = DispatchQueue(label: "com.lifebox.autosync")
     
     private let reachabilityService = Reachability()
-    private let autoSyncStorage = AutoSyncDataStorage()
     
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()

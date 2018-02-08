@@ -11,8 +11,6 @@ import SwiftyJSON
 
 final class CollageCard: BaseView {
     
-    private lazy var filesDataSource = FilesDataSource()
-    
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)

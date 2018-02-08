@@ -36,8 +36,6 @@ class MusicBar: UIView {
     @IBAction func actionPlayPauseButton(_ sender: UIButton) {
         player.togglePlayPause()
     }
-    
-    private var configureVisualMusicPlayerModule: VisualMusicPlayerModuleInitializer?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -114,20 +112,6 @@ class MusicBar: UIView {
     }
 
     func configurateFromPLayer() {
-//        player.play(at: player.currentIndex)
-//        guard let currentItem = SingleSong.default.getCurrentItemModel() else {
-//            return
-//        }
-//        playPauseButton.isSelected = false
-//        if let metadata = currentItem.metaData, let actualMeta = metadata.medaData as? MusicMetaData {
-//
-//            if let name = actualMeta.title {
-//                musicNameLabel.text = name
-//            }
-//            if let artist = actualMeta.artist {
-//                artistLabel.text = artist
-//            }
-//        }
         frame.origin.x = 0
     }
 }

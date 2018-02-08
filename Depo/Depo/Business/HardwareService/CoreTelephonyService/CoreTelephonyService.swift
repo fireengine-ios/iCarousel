@@ -25,16 +25,6 @@ import CoreTelephony
         return carrier?.mobileCountryCode
     }
     
-    func isTurkcellOperator() -> Bool {
-        
-        guard let mcc_ = mcc,
-            let mnc_ = mnc
-            else {
-                return false
-        }
-        return (mcc_ == "286") && (mnc_ == "01")
-    }
-    
     func operatorName() -> String? {
         
         guard let mcc_ = mcc,

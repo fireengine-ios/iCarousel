@@ -6,12 +6,13 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-import Foundation
+//import Foundation
+//
+//protocol OTPViewInteractorInput: class {
+//    func viewIsRady()
+//}
+//
+//protocol OTPViewInteractorOutput: class {
+//    func configurateWithResponce(responce: SignUpSuccessResponse)
+//}
 
-protocol OTPViewInteractorInput: class {
-    func viewIsRady()
-}
-
-protocol OTPViewInteractorOutput: class {
-    func configurateWithResponce(responce: SignUpSuccessResponse)
-}

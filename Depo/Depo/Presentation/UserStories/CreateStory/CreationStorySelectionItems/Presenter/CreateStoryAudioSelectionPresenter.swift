@@ -50,7 +50,6 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
             UIApplication.showErrorAlert(message: TextConstants.createStoryNoSelectedAudioError)
         }
         
-//        SingleSong.default.stop()
         player.stop()
     }
     
@@ -64,18 +63,4 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
     override func getCellSizeForList() -> CGSize{
         return CGSize(width: view.getCollectionViewWidth(), height: 46)
     }
-    
-//    override func getContentWithSuccess(array: [[WrapData]]){
-//        if (view == nil){
-//            return
-//        }
-//        //
-//        asyncOperationSucces()
-//        view.stopRefresher()
-//        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
-//            dataSourceForArray.configurateWithArray(array: array)
-//        }else{
-//            dataSource.reloadData()
-//        }
-//    }
 }

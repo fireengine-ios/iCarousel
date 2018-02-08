@@ -11,9 +11,11 @@ import UIKit
 class PackagesViewController: UIViewController {
     var output: PackagesViewOutput!
     
-    @IBOutlet weak private var collectionView: UICollectionView!
+    @IBOutlet weak private var collectionView: ResizableCollectionView!
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     
     private lazy var activityManager = ActivityIndicatorManager()
     
@@ -26,6 +28,7 @@ class PackagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        automaticallyAdjustsScrollViewInsets = false
         setTitle(withString: TextConstants.packages)
         activityManager.delegate = self
         promoView.deleagte = self
@@ -64,6 +67,7 @@ extension PackagesViewController: PackagesViewInput {
     func show(promocodeError: String) {
         stopActivityIndicator()
         promoView.errorLabel.text = promocodeError
+        scrollView.scrollToBottom(animated: true)
     }
     
     func display(error: ErrorResponse) {

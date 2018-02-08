@@ -10,32 +10,33 @@ import Foundation
 
 extension CoreDataStack {
     
-    func appendOnlyNewItems(items: [WrapData]) {
-        DispatchQueue.main.async {
-            let uuidList = items.map{ $0.uuid }
-            let predicateForRemoteFile = NSPredicate(format: "uuidValue IN %@", uuidList)
-            
-            let childrenContext = self.mainContext//backgroundContext
-            
-            let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: childrenContext)
-            
-            self.updateSavedItems(savedItems: alreadySavedMediaItems, remoteItems: items, context: childrenContext)
-            
-            let inCoreData = alreadySavedMediaItems.flatMap{ $0.uuidValue }
-            
-            let appendItems = items.filter { !inCoreData.contains($0.uuid) }
-            
-            if appendItems.count == 0 {
-                return
-            }
-            
-            appendItems.forEach {
-                _ = MediaItem(wrapData: $0, context: childrenContext)
-            }
-            
-            self.saveDataForContext(context: childrenContext, saveAndWait: true)
-        }
-    }
+    // FIXME: maybe delete and commented code used appendOnlyNewItems
+//    func appendOnlyNewItems(items: [WrapData]) {
+//        DispatchQueue.main.async {
+//            let uuidList = items.map{ $0.uuid }
+//            let predicateForRemoteFile = NSPredicate(format: "uuidValue IN %@", uuidList)
+//            
+//            let childrenContext = self.mainContext//backgroundContext
+//            
+//            let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: childrenContext)
+//            
+//            self.updateSavedItems(savedItems: alreadySavedMediaItems, remoteItems: items, context: childrenContext)
+//            
+//            let inCoreData = alreadySavedMediaItems.flatMap{ $0.uuidValue }
+//            
+//            let appendItems = items.filter { !inCoreData.contains($0.uuid) }
+//            
+//            if appendItems.count == 0 {
+//                return
+//            }
+//            
+//            appendItems.forEach {
+//                _ = MediaItem(wrapData: $0, context: childrenContext)
+//            }
+//            
+//            self.saveDataForContext(context: childrenContext, saveAndWait: true)
+//        }
+//    }
     
     func updateSavedItems(savedItems: [MediaItem], remoteItems: [WrapData], context: NSManagedObjectContext) {
         guard savedItems.count > 0 else {
@@ -92,15 +93,6 @@ extension CoreDataStack {
             })
             self.saveDataForContext(context: self.mainContext)
         }
-    }
-    
-    func removeFromStorage(wrapData: [WrapData]) {
-        
-        //let context = mainContext
-        //wrapData.forEach {
-            //context.delete( $0.coreDataObject! )
-        //}
-        //saveDataForContext(context: context, saveAndWait: true)
     }
     
     

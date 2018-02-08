@@ -66,10 +66,6 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
         outputView()?.hideSpiner()
     }
     
-    func asyncProgressOperationSucces() {
-        outputView()?.hideSpiner()
-    }
-    
     func asyncOperationFail(errorMessage: String?) {
         asyncOperationSucces()
         showMessage(errorMessage: errorMessage)

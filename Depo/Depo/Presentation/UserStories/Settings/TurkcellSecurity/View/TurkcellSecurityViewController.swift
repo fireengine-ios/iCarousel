@@ -14,8 +14,6 @@ class TurkcellSecurityViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var statuses = [Bool]()
-    
     let cellHeight: CGFloat = 62
     
     let turkCellSecurityPasscodeCellIndex = IndexPath(row: 0, section: 0)
@@ -32,22 +30,6 @@ class TurkcellSecurityViewController: UIViewController {
   
         output.viewIsReady()
     }
-    
-//    if indexPath == turkCellSecurityPasscodeCellIndex {
-//    
-//    let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID, for: indexPath) as! SettingsTableViewSwitchCell
-//    cell.actionDelegate = self
-//    cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-//    cell.stateSwitch.setOn(turkCellSeuritySettingsPassState ?? false, animated: false)
-//    return cell
-//    } else if indexPath == turkCellSecurityAutologinCellIndex {
-//    
-//    let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID, for: indexPath) as! SettingsTableViewSwitchCell
-//    cell.actionDelegate = self
-//    cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-//    cell.stateSwitch.setOn(turkCellSeuritySettingsAutoLoginState ?? false, animated: false)
-//    return cell
-//    } else {
 }
 
 // MARK: TurkcellSecurityViewInput
