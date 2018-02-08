@@ -460,9 +460,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         var actionTypes = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
         if selectionMode {
             let selectedItemsUUIDs = Array(dataSource.selectedItemsArray)
-            var selectedItems = [WrapData]()
+            var selectedItems = [BaseDataSourceItem]()
             
-            for items in dataSource.allItems {
+            for items in dataSource.getAllObjects() {
                 selectedItems += items.filter { selectedItemsUUIDs.contains($0) }
             }
             
@@ -489,8 +489,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 let serverObjects = selectedItems.filter({ return !$0.isLocalItem })
                 if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
-                }else{
-                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
+                } else if selectedItems is [Item] {
+                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item])
                     if localDuplicates.count == 0 {
                         //selectedItems = localDuplicates
                         actionTypes.remove(at: deleteOriginalIndex)
