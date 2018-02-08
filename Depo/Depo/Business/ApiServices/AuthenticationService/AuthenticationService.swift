@@ -66,28 +66,6 @@ class Authentication3G: BaseRequestParametrs {
     }
 }
 
-
-struct AuthenticationUserByRememberMe: RequestParametrs {
-    var timeout: TimeInterval {
-        return NumericConstants.defaultTimeout
-    }
-    
-    var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.deviceInfo : Device.deviceInfo]
-        return dict
-    }
-    
-    var patch: URL {
-        return URL(string: RouteRequests.authificationByRememberMe,
-                   relativeTo:RouteRequests.BaseUrl)!
-    }
-    
-    var header: RequestHeaderParametrs {
-        return RequestHeaders.authificationByRememberMe()
-    }
-}
-
-
 class AuthenticationUserByToken: BaseRequestParametrs {
     
     override var requestParametrs: Any {
@@ -134,26 +112,6 @@ class SignUpUser: BaseRequestParametrs  {
         self.eulaId = eulaId
     }
 }
-
-
-struct LogoutUser: RequestParametrs  {
-    var timeout: TimeInterval {
-        return NumericConstants.defaultTimeout
-    }
-    
-    var requestParametrs: Any {
-        return ""
-    }
-    
-    var patch: URL {
-        return URL(string: RouteRequests.logout, relativeTo:RouteRequests.BaseUrl)!
-    }
-    
-    var header: RequestHeaderParametrs {
-        return RequestHeaders.logout()
-    }
-}
-
 
 struct SignUpUserPhoveVerification: RequestParametrs  {
     var timeout: TimeInterval {

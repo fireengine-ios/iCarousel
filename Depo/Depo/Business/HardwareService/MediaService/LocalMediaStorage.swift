@@ -137,8 +137,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func getAllAlbums(completion: @escaping (_ albums: [AlbumItem])->Void) {
         log.debug("LocalMediaStorage getAllAlbums")
 
-        askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] (accessGranted, _) in
-            guard accessGranted, let `self` = self else {
+        askPermissionForPhotoFramework(redirectToSettings: true) { (accessGranted, _) in
+            guard accessGranted else {
                 completion([])
                 return
             }
@@ -465,40 +465,41 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     // MARK: Asset info
     
-    func shortInfoAboutAsset(asset: PHAsset) -> AssetInfo {
-        log.debug("\(#function)")
-        
-        switch asset.mediaType {
-        case .image:
-            return shortInfoAboutImageAsset(asset:asset)
-            
-        case . video:
-            return shortInfoAboutVideoAsset(asset:asset)
-            
-        default:
-            return (url: LocalMediaStorage.defaultUrl, name: "", size: 0, md5: LocalMediaStorage.noneMD5)
-        }
-    }
-    
-    func shortInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
-        log.debug("\(#function)")
-        
-        let url: URL =  LocalMediaStorage.defaultUrl
-        let md5: String = LocalMediaStorage.noneMD5
-        let size: UInt64 = 0
-
-        return (url: url, name:"", size: size, md5: md5)
-    }
-    
-    func shortInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
-        log.debug("\(#function)")
-        
-        let url: URL = LocalMediaStorage.defaultUrl
-        let md5: String = LocalMediaStorage.noneMD5
-        let size: UInt64 = 0
-
-        return (url: url, name:"", size: size, md5: md5)
-    }
+    /// maybe will be need
+//    func shortInfoAboutAsset(asset: PHAsset) -> AssetInfo {
+//        log.debug("\(#function)")
+//        
+//        switch asset.mediaType {
+//        case .image:
+//            return shortInfoAboutImageAsset(asset:asset)
+//            
+//        case . video:
+//            return shortInfoAboutVideoAsset(asset:asset)
+//            
+//        default:
+//            return (url: LocalMediaStorage.defaultUrl, name: "", size: 0, md5: LocalMediaStorage.noneMD5)
+//        }
+//    }
+//    
+//    func shortInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
+//        log.debug("\(#function)")
+//        
+//        let url: URL =  LocalMediaStorage.defaultUrl
+//        let md5: String = LocalMediaStorage.noneMD5
+//        let size: UInt64 = 0
+//
+//        return (url: url, name:"", size: size, md5: md5)
+//    }
+//    
+//    func shortInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
+//        log.debug("\(#function)")
+//        
+//        let url: URL = LocalMediaStorage.defaultUrl
+//        let md5: String = LocalMediaStorage.noneMD5
+//        let size: UInt64 = 0
+//
+//        return (url: url, name:"", size: size, md5: md5)
+//    }
     
     func fullInfoAboutAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutAsset")
@@ -529,9 +530,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 do {
                     url = urlToFile
                     size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).uint64Value
-//                    if let fileName = asset.value(forKey: "filename") as? String {
-//                        md5 = String(format: "%@%i", fileName, size) //MD5().hexMD5fromFileUrl(urlToFile)
-//                    }
                     let resources = PHAssetResource.assetResources(for: asset)
                     if let resource = resources.first {
                         originalFileName = resource.originalFilename

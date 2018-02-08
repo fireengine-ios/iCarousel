@@ -106,14 +106,14 @@ class OfferAllResponse: ObjectRequestResponse {
     }
 }
 
-class ValidateApplePurchaseResponse: ObjectRequestResponse {
-    
-    var offer: String?
-    
-    override func mapping() {
-        offer = json?.string
-    }
-}
+//class ValidateApplePurchaseResponse: ObjectRequestResponse {
+//    
+//    var offer: String?
+//    
+//    override func mapping() {
+//        offer = json?.string
+//    }
+//}
 
 final class InitOfferResponse: ObjectRequestResponse {
     
@@ -132,14 +132,14 @@ final class InitOfferResponse: ObjectRequestResponse {
     }
 }
 
-final class VerifyOfferResponse: ObjectRequestResponse {
-    
-    var error: String?
-    
-    override func mapping() {
-        error = json?.string
-    }
-}
+//final class VerifyOfferResponse: ObjectRequestResponse {
+//    
+//    var error: String?
+//    
+//    override func mapping() {
+//        error = json?.string
+//    }
+//}
 
 final class JobExistsResponse: ObjectRequestResponse {
     

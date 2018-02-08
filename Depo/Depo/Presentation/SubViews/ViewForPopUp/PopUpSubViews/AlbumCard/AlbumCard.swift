@@ -10,8 +10,6 @@ import UIKit
 import SwiftyJSON
 
 final class AlbumCard: BaseView {
-
-    private lazy var filesDataSource = FilesDataSource()
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {

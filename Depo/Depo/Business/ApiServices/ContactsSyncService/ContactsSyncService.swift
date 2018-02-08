@@ -7,11 +7,9 @@
 //
 
 
-struct ContactsSyncServiceConstant {
-    
-    static let debugURL = "http://contactsync.test.valven.com/ttyapi/"
-    
-    static let prodURL =  "https://adepo.turkcell.com.tr/ttyapi/"
+enum ContactsSyncServiceConstant {
+//    static let debugURL = "http://contactsync.test.valven.com/ttyapi/"
+//    static let prodURL =  "https://adepo.turkcell.com.tr/ttyapi/"
     static let webProdURL =  "https://contactsync.turkcell.com.tr/ttyapi/"
 }
 

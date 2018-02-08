@@ -25,7 +25,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     var tabBarActionHandler: TabBarActionHandler { return self }
 
     var filters: [MoreActionsConfig.MoreActionsFileType] = []
-    var syncType: MoreActionsConfig.CellSyncType = MoreActionsConfig.CellSyncType.all
     
     var sortedRule: SortedRules = .timeDown
     
@@ -193,11 +192,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     private func startEditing() {
         dataSource.setSelectionState(selectionState: true)
-    }
-    
-    
-    private func stopEditing() {
-        dataSource.setSelectionState(selectionState: false)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

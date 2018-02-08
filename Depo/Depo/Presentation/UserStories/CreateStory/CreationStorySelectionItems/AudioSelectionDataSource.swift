@@ -9,7 +9,7 @@
 class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelectionCollectionViewCellDelegate {
     
     lazy var player: MediaPlayer = factory.resolve()
-    let smallPlayer = SmallBasePlayer()
+    private lazy var smallPlayer: MediaPlayer = MediaPlayer()
     
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
         super.setupCollectionView(collectionView: collectionView, filters: [.fileType(.audio)])
@@ -18,10 +18,7 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.audioSelectionCell, for: indexPath)
-        
-        return  cell
+        return collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.audioSelectionCell, for: indexPath)
     }
     
     
@@ -38,21 +35,19 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
             return
         }
         
-//        SingleSong.default.stop()
         player.stop()
         
-        
-        inCell.playingButton.isSelected ? smallPlayer.stop() : smallPlayer.playWithItem(object: unwrapedObject)
+        inCell.playingButton.isSelected ? smallPlayer.stop() : smallPlayer.play(list: [unwrapedObject], startAt: 0)
         
         unplayOtherCells(currentlyPlayingCell: inCell)
    
-        inCell.changeButtonState(playing: smallPlayer.isPlaying())
+        inCell.changeButtonState(playing: smallPlayer.isPlaying)
     }
     
     private func unplayOtherCells(currentlyPlayingCell: AudioSelectionCollectionViewCell) {
         collectionView?.visibleCells.forEach {
             if let audioCell = $0 as? AudioSelectionCollectionViewCell, audioCell != currentlyPlayingCell {
-                audioCell.changeButtonState(playing: false)//playingButton.isSelected = false
+                audioCell.changeButtonState(playing: false)
             }
         }
     }

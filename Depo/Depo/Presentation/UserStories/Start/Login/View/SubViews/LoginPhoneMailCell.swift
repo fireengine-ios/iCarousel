@@ -41,7 +41,7 @@ class LoginPhoneMailCell: BaseUserInputCellView {
         }
         
         if text.startIndex == range.lowerBound {
-            text.remove(at: text[6])
+            text.remove(at: text[5])
             textInputField.text = text
         }
     

@@ -133,12 +133,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         return actionTypes
     }
     
-    override func infoAction() {
-        debugPrint("info File acton pressed, no action available")
-        //        self.router.onInfo(object: currentItems.first!)
-        //        self.view.unselectAll()
-    }
-    
     private func constractSpecifiedActions(with types: [ElementTypes],
                                            for items: [BaseDataSourceItem]?,
                                            excludeTypes: [ElementTypes] = [ElementTypes]()) -> [UIAlertAction] {

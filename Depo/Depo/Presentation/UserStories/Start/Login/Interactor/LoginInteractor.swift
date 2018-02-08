@@ -38,12 +38,14 @@ class LoginInteractor: LoginInteractorInput {
         
         if login.isEmpty {
             output?.loginFieldIsEmpty()
-            return
         }
         if password.isEmpty {
             output?.passwordFieldIsEmpty()
+        }
+        if login.isEmpty || password.isEmpty {
             return
         }
+        
         if isBlocked(userName: login)  {
             output?.userStillBlocked(user: login)
             return

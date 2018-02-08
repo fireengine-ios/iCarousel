@@ -44,20 +44,6 @@ class Device {
         return ProcessInfo().operatingSystemVersion.majorVersion < version
     }
     
-    static var getFreeDiskspace: UInt64 {
-        var totalFreeSpace: UInt64 = 0
-        
-        do {
-           let dict = try FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString())
-            
-            totalFreeSpace = (dict[.systemFreeSize] as! NSNumber).uint64Value
-            
-        } catch {
-            print("Can't calculate file size")
-        }
-         return totalFreeSpace
-    }
-    
     static var getFreeDiskSpaceInPercent: Double {
         var totalFreeSpace: Double = 0
         var totalSpace: Double = 0

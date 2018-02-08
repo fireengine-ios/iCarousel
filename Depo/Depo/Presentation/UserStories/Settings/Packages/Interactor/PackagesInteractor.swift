@@ -294,11 +294,12 @@ extension PackagesInteractor: PackagesInteractorInput {
             return subscriptionPlanWith(name: name, priceString: priceString, type: .default, model: offer)
         }
     }
-    
-    func sendReciept() {
-        guard let receipt = iapManager.receipt else { return }
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: nil) { _ in }
-    }
+
+    /// maybe will be need
+//    func sendReciept() {
+//        guard let receipt = iapManager.receipt else { return }
+//        offersService.validateApplePurchase(with: receipt, productId: nil, success: nil) { _ in }
+//    }
     
     private func getCurrency(for accountType: AccountType) -> String {
         switch accountType {

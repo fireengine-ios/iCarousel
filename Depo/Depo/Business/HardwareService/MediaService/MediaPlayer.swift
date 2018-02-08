@@ -17,12 +17,6 @@ enum MediaPlayerPlayMode {
     case shaffle
 }
 
-enum MediaPlayerRepeateMode {
-    case none
-    case one
-    case all
-}
-
 final class MediaPlayer: NSObject {
     
     var currentItem: Item? {
@@ -393,25 +387,15 @@ final class MediaPlayer: NSObject {
         }
     }
     
-    func clearCurrentItem() {
-        currentItem = nil
-        player?.replaceCurrentItem(with: nil)
-    }
-    
     func seek(to time: Float) {
         let showingTime = CMTimeMake(Int64(time) * 1000, 1000)
         player.seek(to: showingTime)
-//        { [weak self] result in
-//            self?.play()
-//        }
     }
     
     func resetTime() {
         player.seek(to: kCMTimeZero)
     }
     
-    
-    var repeateMode: MediaPlayerRepeateMode = .none
     var playMode: MediaPlayerPlayMode = .normal {
         didSet {
             switch playMode {
@@ -448,7 +432,6 @@ final class MediaPlayer: NSObject {
         shuffledList.append(list[currentIndex])
         
         shuffledIndexes.swapAt(0, currentIndex)
-//        currentIndex = 0
         
         /// generated random indexes array
         for i in 1..<list.count {
