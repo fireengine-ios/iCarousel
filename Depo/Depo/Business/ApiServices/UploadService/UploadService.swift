@@ -333,7 +333,7 @@ final class UploadService: BaseRequestService {
                 
                 if let error = error {
 //                    print("AUTOSYNC: \(error.localizedDescription)")
-                    if error.description == TextConstants.canceledOperationTextError, error.description == TextConstants.loginScreenNoInternetError {
+                    if error.description == TextConstants.canceledOperationTextError || error.description == TextConstants.loginScreenNoInternetError {
                         checkIfFinished()
                     } else {
                         fail(error)
