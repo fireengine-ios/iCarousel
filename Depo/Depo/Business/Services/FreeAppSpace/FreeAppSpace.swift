@@ -34,9 +34,10 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 let array = CoreDataStack.default.getLocalDuplicates(remoteItems: self.getDuplicatesObjects())
                 self.duplicatesArray.removeAll()
                 self.duplicatesArray.append(contentsOf: array)
+                self.sortDuplicatesArray()
                 self.localMD5Array.removeAll()
                 self.localMD5Array.append(contentsOf: array.map({ $0.md5 }))
-                checkedArray(array)
+                checkedArray(self.duplicatesArray)
             }
         }
     }
