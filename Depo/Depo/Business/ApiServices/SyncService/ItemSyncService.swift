@@ -125,7 +125,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
-        localItemsMD5s.append(contentsOf: localItems.map({ $0.md5 }))
+        localItemsMD5s = localItems.map({ $0.md5 })
         lastSyncedMD5s = localItemsMD5s
         
         guard let oldestItemDate = localItems.last?.metaDate else {
