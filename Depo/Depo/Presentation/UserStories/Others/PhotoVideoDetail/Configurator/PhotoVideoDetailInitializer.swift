@@ -10,9 +10,6 @@ import UIKit
 
 class PhotoVideoDetailModuleInitializer: NSObject {
 
-    //Connect with object on storyboard
-    var photovideodetailViewController: PhotoVideoDetailViewController!
-
     class func initializeViewController(with nibName:String, selectedItem: Item, allItems: [Item], hideActions: Bool = false) -> UIViewController {
         let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit],
                                                          style: .blackOpaque, tintColor: nil)

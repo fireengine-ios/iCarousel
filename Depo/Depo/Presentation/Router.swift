@@ -102,13 +102,6 @@ class RouterVC: NSObject {
         }
     }
     
-    func popViewControllerFromTableViewNavBar() {
-        if let tabBarVc = tabBarVC {
-            tabBarVc.popViewController(animated: true)
-            return
-        }
-    }
-    
     func pushViewController(viewController: UIViewController) {
         let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
         NotificationCenter.default.post(name: notificationName, object: nil)
@@ -162,28 +155,6 @@ class RouterVC: NSObject {
             
             })
         }
-    }
-    
-    func pushToCustomNavController(customNavController: UINavigationController?, pushedController: UIViewController) {
-        var activeNavController: UINavigationController?
-        
-        if customNavController == nil {
-            activeNavController = navigationController
-        } else {
-            activeNavController = customNavController
-        }
-        activeNavController?.pushViewController(pushedController, animated: true)
-    }
-    
-    func presentOnCustomViewController(customNavController: UINavigationController?, presentedController: UIViewController) {
-        var activeNavController: UINavigationController?
-        
-        if customNavController == nil {
-            activeNavController = navigationController
-        } else {
-            activeNavController = customNavController
-        }
-        activeNavController?.present(presentedController, animated: true, completion: {})
     }
     
     func isOnFavoritesView() -> Bool {
@@ -484,22 +455,13 @@ class RouterVC: NSObject {
     
     //MARK: Upload All files
     
-    func uploadAllFiles(searchService: RemoteItemsService) -> UIViewController {
-        let controller = UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController", searchService: searchService)
-        return controller
-    }
-    
-    //MARK: Upload All files
-    
     func uploadPhotos() -> UIViewController {
         let controller = LocalAlbumModuleInitializer.initializeLocalAlbumsController(with: "BaseFilesGreedViewController")
-        //UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }
     
     func uploadPhotos(rootUUID: String) -> UIViewController {
         let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID)
-        //UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }
     

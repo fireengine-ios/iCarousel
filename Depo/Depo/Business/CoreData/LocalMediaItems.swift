@@ -91,14 +91,15 @@ extension CoreDataStack {
         return allList.filter { !alredySavedIDs.contains( $0.localIdentifier )}
     }
         
-    func localStorageContains(assetId: String) -> Bool {
-        
-        let context = mainContext
-        let predicate = NSPredicate(format: "localFileID == %@", assetId)
-        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
-        
-        return Bool(items.count != 0)
-    }
+    /// maybe will be need
+//    func localStorageContains(assetId: String) -> Bool {
+//        
+//        let context = mainContext
+//        let predicate = NSPredicate(format: "localFileID == %@", assetId)
+//        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
+//        
+//        return Bool(items.count != 0)
+//    }
         
     func removeLocalMediaItemswithAssetID(list: [String]) {
         guard list.count > 0 else {
@@ -127,24 +128,6 @@ extension CoreDataStack {
         let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
         let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
         return items.flatMap{ $0.wrapedObject }
-    }
-    
-    func allLocalNotSyncedItems(md5Array: [String], video: Bool, image: Bool) -> [WrapData] {
-        var filesTypesArray = [Int16]()
-        if (video){
-            filesTypesArray.append(FileType.video.valueForCoreDataMapping())
-        }
-        if (image){
-            filesTypesArray.append(FileType.image.valueForCoreDataMapping())
-        }
-        let context = mainContext
-        let predicate = NSPredicate(format: "NOT (md5Value IN %@) AND (isLocalItemValue == true) AND (fileTypeValue IN %@)",  md5Array, filesTypesArray)
-        let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
-        let sortedItems = items.sorted { (item1, item2) -> Bool in
-            //< correct
-            return item1.fileSizeValue < item2.fileSizeValue
-        }
-        return sortedItems.flatMap{ $0.wrapedObject }
     }
     
     func allLocalItemsForSync(video: Bool, image: Bool) -> [WrapData] {

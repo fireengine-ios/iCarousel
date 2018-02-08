@@ -464,12 +464,6 @@ final class UploadService: BaseRequestService {
         finishedVideoSyncOperationsCount = 0
     }
     
-    private func resetSyncCounters(for type: FileType) {
-        print("AUTOSYNC: reseting sync counters for \(type) type")
-        if type == .image { finishedPhotoSyncOperationsCount = 0 }
-        else if type == .video { finishedVideoSyncOperationsCount = 0 }
-    }
-    
     func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask {
     
         let request = executeUploadRequest(param: uploadParam, response: { (data, response, error) in
@@ -662,12 +656,6 @@ class UploadOperations: Operation {
                             })
                         }
                     }
-                    
-//                    if let response = baseurlResponse as? UploadNotifyResponse,
-//                        let uploadedFileDetail = response.itemResponse {
-//                        let wrapDataValue = WrapData(remote: uploadedFileDetail)
-//                        CoreDataStack.default.appendOnlyNewItems(items: [wrapDataValue])
-//                    }
                     
                     customSucces()
                     
