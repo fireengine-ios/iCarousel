@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE51AAF51EF90853005DCEE0"
-               BuildableName = "Depo_LifeTech.app"
+               BuildableName = "lifebox.app"
                BlueprintName = "Depo_LifeTech"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE51AAF51EF90853005DCEE0"
-            BuildableName = "Depo_LifeTech.app"
+            BuildableName = "lifebox.app"
             BlueprintName = "Depo_LifeTech"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
@@ -68,7 +68,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE51AAF51EF90853005DCEE0"
-            BuildableName = "Depo_LifeTech.app"
+            BuildableName = "lifebox.app"
             BlueprintName = "Depo_LifeTech"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
@@ -87,7 +87,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE51AAF51EF90853005DCEE0"
-            BuildableName = "Depo_LifeTech.app"
+            BuildableName = "lifebox.app"
             BlueprintName = "Depo_LifeTech"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
