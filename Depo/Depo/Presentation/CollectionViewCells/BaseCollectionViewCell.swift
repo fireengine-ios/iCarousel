@@ -70,7 +70,7 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         
     }
     
-    func setImage(image: UIImage?){
+    func setImage(image: UIImage?, animated: Bool){
 
     }
     

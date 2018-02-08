@@ -12,7 +12,7 @@ protocol CollectionViewCellDataProtocol {
     
     func confireWithWrapperd(wrappedObj: BaseDataSourceItem)
     
-    func setImage(image: UIImage?)
+    func setImage(image: UIImage?, animated: Bool)
     
     func setImage(with url: URL)
     
