@@ -30,7 +30,16 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
     }
     
     func onDeleteAllTapped() {
-        moduleOutput?.deleteDuplicatedContacts()
-        router.back()
+        let vc = PopUpController.with(title: TextConstants.settingsDeleteDuplicatedAlertTitle,
+                             message: TextConstants.settingsDeleteDuplicatedAlertText,
+                             image: .delete,
+                             firstButtonTitle: TextConstants.cancel,
+                             secondButtonTitle: TextConstants.ok,
+                             secondAction: { [weak self] (vc) in
+                                self?.moduleOutput?.deleteDuplicatedContacts()
+                                self?.router.back()
+                                vc.close()
+                             })
+        UIApplication.topController()?.present(vc, animated: false, completion: nil)
     }
 }

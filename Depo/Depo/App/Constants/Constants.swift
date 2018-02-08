@@ -364,6 +364,8 @@ struct TextConstants {
     static let settingsRestoredText = NSLocalizedString("Restored %d Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpingText = NSLocalizedString("%%%d Backed up…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsDeletingText = NSLocalizedString("%d%% of Duplicated Contacts Deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsDeleteDuplicatedAlertTitle = NSLocalizedString("Are you sure you want to delete?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsDeleteDuplicatedAlertText = NSLocalizedString("This duplicated contacts will be deleted from your contacts.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsRestoringText = NSLocalizedString("%%%d Restored…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsAnalyzingText = NSLocalizedString("%%%d Analyzed…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpNeverDidIt = NSLocalizedString("You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
