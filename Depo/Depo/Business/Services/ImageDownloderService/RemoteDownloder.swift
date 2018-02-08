@@ -91,6 +91,19 @@ class ImageDownloder {
         }
     }
     
+    func removeImageFromCache(url: URL?, completion: @escaping () -> Swift.Void) {
+        var cachePath: String?
+        if let path = url?.absoluteString, let query = url?.query {
+            cachePath = path.replacingOccurrences(of: "?"+query, with: "")
+            
+            SDWebImageManager.shared().imageCache?.removeImage(forKey: cachePath, withCompletion: {
+                completion()
+            })
+        } else {
+            completion()
+        }
+    }
+    
     func cancelRequest(path: URL) -> Void {
         guard let item = tokenList[path] else {
             return
