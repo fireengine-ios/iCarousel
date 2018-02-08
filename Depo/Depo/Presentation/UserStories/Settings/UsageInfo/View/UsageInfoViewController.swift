@@ -45,7 +45,7 @@ class UsageInfoViewController: UIViewController {
     @IBOutlet weak private var pricesTitleLabel: UILabel!
     @IBOutlet weak private var notesLabel: UILabel!
     
-    @IBOutlet weak private var tableView: UITableView!
+    @IBOutlet weak private var tableView: ResizableTableView!
     
     private var internetDataUsages: [InternetDataUsage] = []
     

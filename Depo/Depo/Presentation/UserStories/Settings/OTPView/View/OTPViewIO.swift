@@ -6,12 +6,13 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-import Foundation
+//import Foundation
+//
+//protocol OTPViewInput: class {
+//    func configurateWithResponce(responce: SignUpSuccessResponse)
+//}
+//
+//protocol OTPViewOutput: class {
+//    func viewIsReady()
+//}
 
-protocol OTPViewInput: class {
-    func configurateWithResponce(responce: SignUpSuccessResponse)
-}
-
-protocol OTPViewOutput: class {
-    func viewIsReady()
-}

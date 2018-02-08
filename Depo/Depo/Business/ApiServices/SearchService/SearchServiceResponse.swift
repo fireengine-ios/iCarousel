@@ -16,7 +16,6 @@ struct SearchJsonKey {
     static let takenDate = "Image-DateTime"
     static let id = "id"
     static let hash = "hash"
-    static let iOSMetaHash = "X-Object-Meta-Ios-Metadata-Hash"
     static let name = "name"
     static let uuid = "uuid"
     static let bytes = "bytes"
@@ -138,29 +137,6 @@ class BaseMetaData: ObjectRequestResponse {
         videoHLSPreview = json?[SearchJsonKey.VideoHLSPreview].url
     }
 }
-
-
-class BaseAlbumResponse: ObjectRequestResponse {
-    var uuid: String?
-    
-    
-    required init(withJSON: JSON?) {
-        super.init(withJSON: withJSON)
-    }
-    
-    required init(json: Data?, headerResponse: HTTPURLResponse?) {
-        fatalError("init(json:headerResponse:) has not been implemented")
-    }
-    
-    override init() {
-        super.init()
-    }
-    
-    override func mapping() {
-        uuid = json?[SearchJsonKey.uuid].string
-    }
-}
-
 
 class SearchItemResponse: ObjectRequestResponse {
     

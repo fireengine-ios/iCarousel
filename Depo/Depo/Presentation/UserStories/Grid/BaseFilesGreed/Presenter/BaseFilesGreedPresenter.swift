@@ -452,17 +452,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if dataSource.selectedItemsArray.count > 0 {
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
-//        UploadService.default.uploadOnDemand(success: {
-//            DispatchQueue.main.async {
-//                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
-//            }
-//            print("Upload success")
-//        }) { (errorResponse) in
-//            print("Upload fail")
-//        }
-//        
-//        reloadData()
-
     }
     
     func moreActionsPressed(sender: Any) {
@@ -474,7 +463,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             var selectedItems = [WrapData]()
             
             for items in dataSource.allItems {
-                selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
+                selectedItems += items.filter { selectedItemsUUIDs.contains($0) }
             }
             
             //let remoteItems = selectedItems.filter {$0.isLocalItem == false}

@@ -117,21 +117,6 @@ class CopyFiles: BaseRequestParametrs {
     }
 }
 
-
-class UploadFile: BaseRequestParametrs {
-    
-    let urlToFile: URL
-    
-    init(url: URL) {
-        urlToFile = url
-    }
-    
-    override var patch: URL {
-        return urlToFile
-    }
-}
-
-
 class RenameFile: BaseRequestParametrs {
     
     let uuid: String
@@ -243,13 +228,6 @@ class FileList: BaseRequestParametrs{
 }
 
 class DetailResponse: ObjectRequestResponse {
-    
-    override func mapping() {
-        print("A")
-    }
-}
-
-class DetailsResponse: ObjectRequestResponse {
     
     override func mapping() {
         print("A")

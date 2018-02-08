@@ -15,57 +15,7 @@ class FloatingView: UIViewController, UIPopoverPresentationControllerDelegate {
     var currentContentView: UIView?
     
     private var visibleOriginalY: CGFloat = 0
-    private let statusBarHeightSize: CGFloat = 20
     private var hiddenOriginalFrame = CGRect()
-    
-    
-    private func setupFloatingView(contentView: UIView, animated: Bool, popUpSize: CGSize, arrowDirection: UIPopoverArrowDirection, sourceRect: CGRect, onViewController sourceViewController: UIViewController) {
-        
-        visibleOriginalY = (sourceViewController.navigationController?.navigationBar.frame.size.height ?? 0) + statusBarHeightSize
-        
-        view.frame = CGRect(x: 0, y: visibleOriginalY, width: popUpSize.width, height: popUpSize.height)
- 
-        setupShadowView(onViewController: sourceViewController)
-        
-        if Device.isIpad {
-            modalPresentationStyle = .popover
-            preferredContentSize = CGSize(width: popUpSize.width, height: popUpSize.height)
-            popoverPresentationController?.sourceRect = sourceRect
-            popoverPresentationController?.sourceView = sourceViewController.view
-            popoverPresentationController?.permittedArrowDirections = arrowDirection
-            popoverPresentationController?.delegate = self
-            
-        } else {
-            
-            if view.superview == nil {
-                
-                hiddenOriginalFrame = CGRect(x: 0, y: -popUpSize.height, width: sourceViewController.view.bounds.width, height: popUpSize.height)
-                view.frame = hiddenOriginalFrame
-                sourceViewController.view.addSubview(self.view)
-            }
-        }
-        
-        if currentContentView == nil {
-            contentView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
-            view.addSubview(contentView)
-            currentContentView = contentView
-        }
-        
-    }
-    
-    private func setupShadowView(onViewController viewcontroller: UIViewController) {
-        if shadowView.superview != nil {
-            return
-        }
-        shadowView.frame = viewcontroller.view.bounds
-        shadowView.backgroundColor = UIColor.black
-        shadowView.alpha = 0.6
-        
-        shadowView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(shadowViewGotTouched(sender:))))
-        
-        viewcontroller.view.addSubview(shadowView)
-        shadowView.isHidden = true
-    }
     
     func dismissView() {
         
@@ -82,19 +32,6 @@ class FloatingView: UIViewController, UIPopoverPresentationControllerDelegate {
             self.shadowView.removeFromSuperview()
         })
         
-    }
-    
-    func showView(contentView: UIView, animated: Bool, popUpSize: CGSize, arrowDirection: UIPopoverArrowDirection, sourceRect: CGRect, onViewController sourceViewController: UIViewController) {
-        
-        setupFloatingView(contentView: contentView, animated: animated, popUpSize: popUpSize, arrowDirection: arrowDirection, sourceRect: sourceRect, onViewController: sourceViewController)
-        
-        if Device.isIpad {
-            sourceViewController.present(self, animated: animated, completion: {
-                self.shadowView.isHidden = !self.shadowView.isHidden
-            })
-        } else {
-            changeViewState(animated: animated)
-        }
     }
     
     func hideView(animated: Bool) {

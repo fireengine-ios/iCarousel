@@ -38,6 +38,8 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func newStoryCreated()
     
+    func updatedAlbumCoverPhoto(item: AlbumItem)
+    
     func albumsDeleted(albums: [AlbumItem])
     
     func fileAddedToAlbum(item: WrapData, error: Bool)
@@ -84,6 +86,8 @@ extension ItemOperationManagerViewProtocol {
     func newAlbumCreated() {}
     
     func newStoryCreated() {}
+    
+    func updatedAlbumCoverPhoto(item: AlbumItem) {}
     
     func albumsDeleted(albums: [AlbumItem]) {}
     
@@ -258,6 +262,14 @@ class ItemOperationManager: NSObject {
         DispatchQueue.main.async {
             for view in self.views{
                 view.newAlbumCreated()
+            }
+        }
+    }
+    
+    func updatedAlbumCoverPhoto(item: AlbumItem) {
+        DispatchQueue.main.async {
+            for view in self.views{
+                view.updatedAlbumCoverPhoto(item: item)
             }
         }
     }

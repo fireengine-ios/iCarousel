@@ -15,10 +15,6 @@ protocol OptInControllerDelegate: class {
     func optInReachedMaxAttempts(_ optInVC: OptInController)
 }
 
-final class OptInCustomizator {
-    
-}
-
 final class OptInController: UIViewController {
 
     @IBOutlet var keyboardHideManager: KeyboardHideManager!

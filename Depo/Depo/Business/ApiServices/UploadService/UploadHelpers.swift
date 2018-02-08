@@ -26,12 +26,6 @@ enum MetaStrategy: String {
     case WithoutConflictControl = "1"
 }
 
-enum UploadPriority {
-    case low
-    case normal
-    case critical
-}
-
 typealias UploadServiceBaseUrlResponse  = (_ resonse: UploadBaseURLResponse?) -> Swift.Void
 typealias FileUploadOperationSucces = (_ item: WrapData) -> Swift.Void
 

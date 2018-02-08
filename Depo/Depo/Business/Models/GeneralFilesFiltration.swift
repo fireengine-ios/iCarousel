@@ -29,14 +29,3 @@ enum FavoriteGeneralFilter {
     case notFavorites
     case all
 }
-
-//enum Foler {
-//    case roo
-//}
-
-//struct GeneralFilesFiltrationTypeConfig {
-//    let fileTypes: [FileType]
-//    let favoritesOnly: Bool
-//    let syncStatus: MoreActionsConfig.CellSyncType
-//}
-

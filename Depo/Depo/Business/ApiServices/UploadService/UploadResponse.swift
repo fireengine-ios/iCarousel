@@ -8,38 +8,7 @@
 
 import Foundation
 
-class UploadNotifyResponse: ObjectRequestResponse {
-    
-    var itemResponse : SearchItemResponse?
-    
-    override func mapping() {
-        itemResponse = SearchItemResponse(withJSON: self.json)
-    }
-}
-
-class UploadResponse: ObjectRequestResponse {
-    
-    var url: URL?
-    var userUniqueValue: String?
-    
-    override func mapping() {
-        
-        if let st = json?["value"].string, isOkStatus {
-            
-            url = json?["value"].url
-            
-            userUniqueValue = st.components(separatedBy: "/")
-                .filter{ $0.hasPrefix("AUTH_")}
-                .first
-        }
-    }
-}
-
-class UloadSuccess: ObjectRequestResponse {
-    override func mapping() {
-        print("A")
-    }
-}
+typealias Item = WrapData
 
 class UploadBaseURLResponse: ObjectRequestResponse {
     

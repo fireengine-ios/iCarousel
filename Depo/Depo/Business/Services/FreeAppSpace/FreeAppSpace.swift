@@ -136,10 +136,6 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
     }
     
-    func isDuplicatesNotAvailable() -> Bool{
-        return duplicatesArray.count == 0
-    }
-    
     func startSearchDuplicates(finished: @escaping() -> Swift.Void) {
         if (isSearchRunning){
             needSearchAgain = true

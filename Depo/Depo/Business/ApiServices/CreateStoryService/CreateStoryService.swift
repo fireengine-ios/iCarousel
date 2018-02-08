@@ -122,20 +122,6 @@ class CreateResponse: ObjectRequestResponse  {
     }
 }
 
-class PreviewResponse: ObjectRequestResponse  {
-    let data: Data?
-    
-    required init(json: Data?, headerResponse: HTTPURLResponse?) {
-        self.data = json
-        super.init(json: nil, headerResponse: headerResponse)
-    }
-    
-    required init(withJSON: JSON?) {
-        fatalError("init(withJSON:) has not been implemented")
-    }
-    
-}
-
 class CreateStoryMusicService: RemoteItemsService {
     
     /// server request don't have pagination

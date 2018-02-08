@@ -314,6 +314,8 @@ final class UploadService: BaseRequestService {
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
+        var successHandled = false
+        
         let operations: [UploadOperations] = itemsToSync.flatMap {
             
             let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] (finishedOperation, error) in
@@ -322,7 +324,8 @@ final class UploadService: BaseRequestService {
                 }
                 
                 let checkIfFinished = {
-                    if self.uploadOperations.filter({ $0.uploadType == .autoSync }).isEmpty {
+                    if !successHandled, self.uploadOperations.filter({ $0.uploadType == .autoSync }).isEmpty {
+                        successHandled = true
                         success()
                         return
                     }
@@ -330,15 +333,11 @@ final class UploadService: BaseRequestService {
                 
                 if let error = error {
 //                    print("AUTOSYNC: \(error.localizedDescription)")
-                    if error.description != TextConstants.canceledOperationTextError {
-                        self.uploadOperations.removeIfExists(finishedOperation)
-                    }
-//                        //operation was cancelled - not an actual error
-//                        self.showSyncCardProgress()
-//                        checkIfFinished()
-//                    } else {
+                    if error.description == TextConstants.canceledOperationTextError || error.description == TextConstants.loginScreenNoInternetError {
+                        checkIfFinished()
+                    } else {
                         fail(error)
-//                    }
+                    }
                     return
                 }
                 
@@ -462,12 +461,6 @@ final class UploadService: BaseRequestService {
         print("AUTOSYNC: clearing sync counters")
         finishedPhotoSyncOperationsCount = 0
         finishedVideoSyncOperationsCount = 0
-    }
-    
-    private func resetSyncCounters(for type: FileType) {
-        print("AUTOSYNC: reseting sync counters for \(type) type")
-        if type == .image { finishedPhotoSyncOperationsCount = 0 }
-        else if type == .video { finishedVideoSyncOperationsCount = 0 }
     }
     
     func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask {
@@ -662,12 +655,6 @@ class UploadOperations: Operation {
                             })
                         }
                     }
-                    
-//                    if let response = baseurlResponse as? UploadNotifyResponse,
-//                        let uploadedFileDetail = response.itemResponse {
-//                        let wrapDataValue = WrapData(remote: uploadedFileDetail)
-//                        CoreDataStack.default.appendOnlyNewItems(items: [wrapDataValue])
-//                    }
                     
                     customSucces()
                     

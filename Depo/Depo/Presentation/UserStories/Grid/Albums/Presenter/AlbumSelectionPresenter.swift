@@ -24,9 +24,9 @@ class AlbumSelectionPresenter: AlbumsPresenter {
         if let interact = interactor as? AlbumsInteractor {
             if (dataSource.selectedItemsArray.count > 0){
                 ///!!!!!!!!!!!
-                let list = Array(dataSource.selectedItemsArray)
-                //let array = CoreDataStack.default.mediaItemByUUIDs(uuidList: list)
-                interact.onAddPhotosToAlbum(selectedAlbumUUID: list.first!)
+                if let firsObject = Array(dataSource.selectedItemsArray).first{
+                    interact.onAddPhotosToAlbum(selectedAlbumUUID: firsObject.uuid)
+                }
             }
         }
     }

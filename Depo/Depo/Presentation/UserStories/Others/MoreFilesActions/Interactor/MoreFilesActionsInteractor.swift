@@ -119,26 +119,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         })
     }
     
-    private func shareImagesByURLs(images: [ImageForDowload], sourceRect: CGRect?){
-        let downloader = ImageDownloder()
-        output?.operationStarted(type: .share)
-        
-        downloader.getImagesByImagesURLs(list: images) { [weak self] (imagesArray) in
-            DispatchQueue.main.async {
-                self?.output?.operationFinished(type: .share)
-                
-                let activityVC = UIActivityViewController(activityItems: imagesArray, applicationActivities: nil)
-                
-                if let tempoRect = sourceRect {//if ipad
-                    activityVC.popoverPresentationController?.sourceRect = tempoRect
-                }
-                
-                let router = RouterVC()
-                router.presentViewController(controller: activityVC)
-            }
-        }
-    }
-    
     func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?) {
         if (item.count == 0){
             return

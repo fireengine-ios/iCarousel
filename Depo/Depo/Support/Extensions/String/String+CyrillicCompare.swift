@@ -105,12 +105,3 @@ extension Unicode.Scalar {
         return false
     }
 }
-
-extension Character {
-    func getFirstUnicode() -> Unicode.Scalar {
-        let characterString = String(self)
-        let scalars = characterString.unicodeScalars
-        
-        return scalars[scalars.startIndex]
-    }
-}

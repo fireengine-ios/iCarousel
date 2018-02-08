@@ -6,6 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol AlertFilesActionsSheetInteractorOutput: MoreFilesActionsInteractorOutput {
-    
-}
+//protocol AlertFilesActionsSheetInteractorOutput: MoreFilesActionsInteractorOutput {
+//    
+//}
+
