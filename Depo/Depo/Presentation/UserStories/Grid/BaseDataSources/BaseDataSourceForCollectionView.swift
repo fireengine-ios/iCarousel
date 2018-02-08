@@ -1124,7 +1124,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             
             var serversUUIDs = [String]()
-            for array in allItems {
+            let items = getAllObjects()
+            for array in items {
                 for arraysObject in array {
                     if !arraysObject.isLocalItem {
                         serversUUIDs.append(arraysObject.uuid)

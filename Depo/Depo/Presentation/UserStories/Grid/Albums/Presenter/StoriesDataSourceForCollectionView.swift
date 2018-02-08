@@ -11,6 +11,7 @@ import UIKit
 class StoriesDataSourceForCollectionView: ArrayDataSourceForCollectionView {
 
     override func deleteItems(items: [Item]) {
+        super.deleteItems(items: items)
         ItemOperationManager.default.deleteStories(items: items)
     }
 }
