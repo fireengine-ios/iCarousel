@@ -11,16 +11,61 @@ import MMWormhole
 
 
 final class WidgetService {
+    static let shared = WidgetService()
     
-    let shared = WidgetService()
+    //Using Wormhole is overkill but it's in the old app and we'll probably need it in a future
+    private (set) lazy var wormhole: MMWormhole = {
+        return MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier,
+                          optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
+    }()
     
-    private lazy var wormhole: MMWormhole = {
-        return MMWormhole(applicationGroupIdentifier: "group.com.turkcell.akillidepo", optionalDirectory: "EXTENSION_WORMHOLE_DIR")
+    private lazy var defaults: UserDefaults? = {
+        return UserDefaults(suiteName: SharedConstants.groupIdentifier)
     }()
     
     
+    private (set) var totalCount: Int {
+        get { return defaults?.integer(forKey: SharedConstants.totalAutoSyncCountKey) ?? 0 }
+        set { defaults?.set(newValue, forKey: SharedConstants.totalAutoSyncCountKey) }
+    }
+    
+    private (set) var finishedCount: Int {
+        get { return defaults?.integer(forKey: SharedConstants.finishedAutoSyncCountKey) ?? 0 }
+        set { defaults?.set(newValue, forKey: SharedConstants.finishedAutoSyncCountKey) }
+    }
+    
+    private (set) var lastSyncedDate: String {
+        get { return defaults?.string(forKey: SharedConstants.lastSyncDateKey) ?? "" }
+        set {  defaults?.set(newValue, forKey: SharedConstants.lastSyncDateKey) }
+    }
+    
+    private (set) var syncStatus: AutoSyncStatus {
+        get {
+            let statusValue = defaults?.string(forKey: SharedConstants.syncStatusKey) ?? ""
+            return AutoSyncStatus(rawValue: statusValue) ?? .undetermined
+        }
+        set { defaults?.set(newValue.rawValue, forKey: SharedConstants.syncStatusKey) }
+    }
+    
+    
     func notifyWidgetAbout(_ synced: Int, of total: Int) {
-        wormhole.passMessageObject(synced as NSCoding, identifier: "EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER")
-        wormhole.passMessageObject(total as NSCoding, identifier: "EXTENSION_WORMHOLE_TOTAL_COUNT_IDENTIFIER")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
+        let currentDate = dateFormatter.string(from: Date())
+        
+        finishedCount = synced
+        totalCount = total
+        lastSyncedDate = currentDate
+        
+        wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
+    }
+    
+    func notifyWidgetAbout(status: AutoSyncStatus) {
+        syncStatus = status
+        
+        wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
 }
+
+
+

@@ -10,7 +10,6 @@ import UIKit
 import NotificationCenter
 import MMWormhole
 
-//FIXME: all text constants
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var successImage: UIImageView!
@@ -18,21 +17,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var bottomLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var totalCount = 0
-    var finishedCount = 0
     
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        preferredContentSize = CGSize(width: 320, height: 72)
-        
-        topLabel.text = TextConstants.widgetTitleFinished
-        bottomLabel.text = "-- / --";
+        preferredContentSize = CGSize(width: 320, height: 64)
         
         setupWormhole()
         
-        let tapGestureRecognizer = UIGestureRecognizer(target: self, action: #selector(routeToTheApp))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openApp))
+        tapGestureRecognizer.numberOfTapsRequired = 1
         tapGestureRecognizer.isEnabled = true
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tapGestureRecognizer)
@@ -43,72 +37,51 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        guard let defaults = UserDefaults(suiteName: "GROUP_NAME_SUITE_NSUSERDEFAULTS") else {
-            completionHandler(NCUpdateResult.noData)
-            return
-        }
-        
-        totalCount = defaults.integer(forKey: "totalAutoSyncCount")
-        finishedCount = defaults.integer(forKey: "finishedAutoSyncCount")
-        
         updateFields()
-        
-        // If an error is encountered, use NCUpdateResult.failed
-        // If there's no update required, use NCUpdateResult.noData
-        // If there's an update, use NCUpdateResult.newData
-        
+ 
         completionHandler(NCUpdateResult.newData)
     }
     
-    func updateFields() {
-        if finishedCount == totalCount {
-            let defaults = UserDefaults.init(suiteName: "GROUP_NAME_SUITE_NSUSERDEFAULTS")
-            let lastSyncDateInReadableFormat = defaults?.string(forKey: "lastSyncDate")
-            
-            topLabel.text = TextConstants.widgetTitleFinished
-            bottomLabel.text = lastSyncDateInReadableFormat
-            
-            activityIndicator.isHidden = true
-            successImage.isHidden = false
-            
-        } else {
+    
+    //MARK: - Private
+    
+    private func updateFields() {
+        switch WidgetService.shared.syncStatus {
+        case .executing :
             topLabel.text = TextConstants.widgetTitleInProgress
-            bottomLabel.text = "\(finishedCount + 1) / \(totalCount)"
+            bottomLabel.text = "\(WidgetService.shared.finishedCount) / \(WidgetService.shared.totalCount)"
             activityIndicator.isHidden = false
             successImage.isHidden = true
             activityIndicator.startAnimating()
+        default:
+            if WidgetService.shared.lastSyncedDate.isEmpty {
+                topLabel.text = TextConstants.widgetTitleIsStoped
+                bottomLabel.text =  String.init(format: TextConstants.widgetTitleLastSyncFormat, TextConstants.widgetTitleNeverSynchronized)
+            } else {
+                topLabel.text = TextConstants.widgetTitleFinished
+                bottomLabel.text =  String.init(format: TextConstants.widgetTitleLastSyncFormat, WidgetService.shared.lastSyncedDate)
+            }
+            
+            activityIndicator.isHidden = true
+            successImage.isHidden = false
+            activityIndicator.stopAnimating()
         }
     }
     
     private func setupWormhole() {
-        let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.turkcell.akillidepo", optionalDirectory: "EXTENSION_WORMHOLE_DIR")
-        
-        wormhole.listenForMessage(withIdentifier: "EXTENSION_WORMHOLE_TOTAL_COUNT_IDENTIFIER") { [weak self] (messageObject) in
-            if let messageObject = messageObject as? Int {
-                self?.totalCount = messageObject
-                self?.updateFields()
-            }
-        }
-        
-        wormhole.listenForMessage(withIdentifier: "EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER") { [weak self] (messageObject) in
-            if let messageObject = messageObject as? Int {
-                self?.finishedCount = messageObject
-                self?.updateFields()
-            }
+        WidgetService.shared.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] (messageObject) in
+            self?.updateFields()
         }
     }
-}
-
-
-//MARK: - Action handlers
-
-extension TodayViewController {
-    @objc private func routeToTheApp() {
+    
+    
+    //MARK: Tap handler
+    
+    @objc private func openApp() {
         if let url = URL(string: "akillidepo://") {
             extensionContext?.open(url, completionHandler: nil)
         }
     }
 }
-
 
 

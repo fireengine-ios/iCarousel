@@ -124,6 +124,8 @@ final class UploadService: BaseRequestService {
                                                          object: nil,
                                                          allOperations: allSyncOperationsCount,
                                                          completedOperations: finishedSyncOperationsCount)
+        
+        WidgetService.shared.notifyWidgetAbout(finishedSyncOperationsCount, of: allSyncOperationsCount)
     }
     
     private func showUploadCardProgress() {

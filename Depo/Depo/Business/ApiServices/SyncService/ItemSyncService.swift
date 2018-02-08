@@ -8,16 +8,6 @@
 
 import Foundation
 
-enum AutoSyncStatus {
-    case undetermined
-    case waitingForWifi
-    case prepairing
-    case executing
-    case stoped
-    case synced
-    case failed
-}
-
 
 public let autoSyncStatusDidChangeNotification = NSNotification.Name("AutoSyncStatusChangedNotification")
 
