@@ -69,16 +69,6 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         return array
     }
     
-    func deleteDuplicates(serverItems: [BaseDataSourceItem]) {
-        var array = [WrapData]()
-        for serverObject in serverItems {
-            if let index = localMD5Array.index(of: serverObject.md5){
-                array.append(localtemsArray[index])
-                
-            }
-        }
-    }
-    
     func checkFreeAppSpaceAfterAutoSync(){
         if (isSearchRunning){
             needSearchAgain = true
@@ -140,10 +130,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func deleteDeletedLocalPhotos(deletedPhotos:[WrapData]){
-        var array = duplicatesArray.map { $0.md5 }
         for object in deletedPhotos {
-            if let index = array.index(of: object.md5){
-                array.remove(at: index)
+            if let index = duplicatesArray.index(of: object){
                 duplicatesArray.remove(at: index)
             }
         }
@@ -251,12 +239,14 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     func getLocalFiesComaredWithServerObjects(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData]{
         var comparedFiles = [WrapData]()
-        let localObjectMD5 = localObjects.map { $0.md5 }
-        for serverObject in serverObjects{
-            if let index = localObjectMD5.index(of: serverObject.md5) {
-                comparedFiles.append(localObjects[index])
+        
+        let serverObjectMD5Array = serverObjects.map { $0.md5 }
+        for localObject in localObjects{
+            if serverObjectMD5Array.index(of: localObject.md5) != nil {
+                comparedFiles.append(localObject)
             }
         }
+        
         return comparedFiles
     }
     
@@ -341,24 +331,14 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             return
         }
         
-        let md5Array = items.map { $0.md5 }
-        var newDuplicatesArray = [WrapData]()
-        for object in duplicatesArray {
-            if !md5Array.contains(object.md5){
-                newDuplicatesArray.append(object)
+        for object in items{
+            if let index = duplicatesArray.index(of: object){
+                duplicatesArray.remove(at: index)
+            }
+            if let index = localMD5Array.index(of: object.md5){
+                localMD5Array.remove(at: index)
             }
         }
-        duplicatesArray.removeAll()
-        duplicatesArray.append(contentsOf: newDuplicatesArray)
-        
-        var newServerDuplicatesArray = [WrapData]()
-        for object in serverDuplicatesArray{
-            if !md5Array.contains(object.md5){
-                newServerDuplicatesArray.append(object)
-            }
-        }
-        serverDuplicatesArray.removeAll()
-        serverDuplicatesArray.append(contentsOf: newServerDuplicatesArray)
         
         if (duplicatesArray.count == 0){
             CardsManager.default.stopOperationWithType(type: .freeAppSpace)

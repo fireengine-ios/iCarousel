@@ -44,6 +44,8 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
     }
     override func reloadData() {
         super.reloadData()
+        dataSource.selectedItemsArray.removeAll()
+        dataSource.updateSelectionCount()
         if let view = view as? BaseFilesGreedViewController{
             view.requestStopped()
         }
