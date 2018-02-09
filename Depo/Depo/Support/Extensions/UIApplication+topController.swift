@@ -25,8 +25,9 @@ extension UIApplication {
         return controller
     }
     
-    static func showErrorAlert(message: String, in controller: UIViewController? = topController()) {
-        if topController() is PopUpController {
+    static func showErrorAlert(message: String) {
+        let controller = topController()
+        if controller is PopUpController {
             return
         }
         let vc = PopUpController.with(title: TextConstants.errorAlert, message: message, image: .error, buttonTitle: TextConstants.ok)

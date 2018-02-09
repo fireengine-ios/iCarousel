@@ -272,7 +272,12 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         userInfoSubView.reloadUserInfo()
     }
     
-    func profileWontChange() {
+    func profileWontChangeWith(error: Error) {
+        let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                      message: error.localizedDescription,
+                                      image: .error,
+                                      buttonTitle: TextConstants.ok)
+        present(vc, animated: true, completion: nil)
         userInfoSubView.dismissLoadingSpinner()
     }
     

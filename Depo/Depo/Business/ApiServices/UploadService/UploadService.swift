@@ -256,6 +256,7 @@ final class UploadService: BaseRequestService {
                     }
                 }
 
+                /// HERE MUST BE ERROR HANDLER
                 if let error = error {
                     print("AUTOSYNC: \(error.localizedDescription)")
                     if error.description == TextConstants.canceledOperationTextError {

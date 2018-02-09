@@ -131,9 +131,8 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         view.profileInfoChanged()
     }
     
-    func profilePhotoUploadFailed(error: Error){
-        UIApplication.showErrorAlert(message: error.localizedDescription)
-        view.profileWontChange()
+    func profilePhotoUploadFailed(error: Error) {
+        view.profileWontChangeWith(error: error)
     }
     
     func connectToNetworkFailed() {

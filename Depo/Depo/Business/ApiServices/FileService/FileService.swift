@@ -323,6 +323,7 @@ class FileService: BaseRequestService {
                                                                             completedOperations: completedOperationsCount)
             }, fail: { (error) in
                 log.debug("FileService download DownLoadOperation fail")
+                /// HERE MUST BE ERROR HANDLER
             })
         }
         
