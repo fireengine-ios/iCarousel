@@ -11,13 +11,17 @@ import UIKit
 class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     
     var coverPhotoURL = URL(string: "")
+    let item: Item
+    
+    init(item: Item) {
+        self.item = item
+        super.init()
+    }
     
     override func viewIsReady(collectionView: UICollectionView) {
         super.viewIsReady(collectionView: collectionView)
         
-        if let view = view as? FaceImagePhotosViewController, let url = coverPhotoURL {
-            view.setHeaderImage(with: url)
-        }
+        loadItem()
     }
     
     override func changeCover() {
@@ -25,6 +29,25 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
            let router = router as? FaceImagePhotosRouter {
               router.openChangeCoverWith(itemsService.albumUUID, moduleOutput: self)
         }
+    }
+    
+    private func loadItem() {
+        guard let view = view as? FaceImagePhotosViewController else {
+            return
+        }
+        
+        guard let item = item as? PeopleItem else {
+            view.setHeaderViewHidden(true)
+            return
+        }
+        
+        view.loadAlbumsForPeopleItem(item)
+        
+        if let url = coverPhotoURL {
+            view.setHeaderImage(with: url)
+        }
+        
+        view.setHeaderViewHidden(false)
     }
 }
 

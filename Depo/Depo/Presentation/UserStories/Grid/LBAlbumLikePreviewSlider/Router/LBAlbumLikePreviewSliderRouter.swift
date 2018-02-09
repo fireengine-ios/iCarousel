@@ -10,16 +10,22 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
     
     let router = RouterVC()
     
-    func onItemSelected(type: MyStreamType?) {
-        guard let type = type else {
+    func onItemSelected(_ item: SliderItem) {
+        guard let type = item.type else {
             return
         }
+        
         switch type {
-        case .album: goToAlbumListView()
+        case .albums: goToAlbumListView()
         case .story: goToStoryListView()
         case .people: goToPeopleListView()
         case .things: goToThingListView()
         case .places: goToPlaceListView()
+        case .album:
+            guard let albumItem = item.albumItem else {
+                break
+            }
+            goToAlbumDetailView(album: albumItem)
         }
     }
     

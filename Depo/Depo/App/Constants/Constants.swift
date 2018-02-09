@@ -684,7 +684,7 @@ struct TextConstants {
     //MARK: -
     
     static let albumLikeSlidertitle = NSLocalizedString("My Stream", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let albumLikeSliderWithPerson = NSLocalizedString("Albums with %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     // MARK: - ActivityTimeline
     static let activityTimelineFiles = NSLocalizedString("file(s)", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let activityTimelineTitle = NSLocalizedString("My Activity Timeline", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

@@ -18,7 +18,20 @@ class PeopleAlbumSliderInteractor: LBAlbumLikePreviewSliderInteractor {
     }
     
     override func requestAllItems() {
-        
+        guard let id = peopleItem.id else {
+            return
+        }
+        peopleService.getAlbumsForPeopleItemWithID(Int(id), success: { [weak self] (albums) in
+            let albumItems = albums.map({ AlbumItem(remote: $0) })
+            albumItems.forEach({ (album) in
+                self?.dataStorage.addNew(item: SliderItem(withAlbum: album))
+            })
+            if let currentItems = self?.currentItems {
+                self?.output.operationSuccessed(withItems: currentItems)
+            }
+        }) { [weak self] (error) in
+            self?.output.operationFailed()
+        }
     }
     
 }

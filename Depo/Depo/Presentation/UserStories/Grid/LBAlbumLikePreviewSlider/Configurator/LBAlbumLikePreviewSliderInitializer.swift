@@ -17,6 +17,6 @@ class LBAlbumLikePreviewSliderModuleInitializer: NSObject {
     func initialise(inputPresenter: LBAlbumLikePreviewSliderPresenter?, peopleItem: PeopleItem? = nil) {
         lbAlbumLikeSliderPresenter = inputPresenter
         let configurator = LBAlbumLikePreviewSliderModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: lbAlbumLikeSliderVC, inputPresenter: inputPresenter)
+        configurator.configureModuleForViewInput(viewInput: lbAlbumLikeSliderVC, inputPresenter: inputPresenter, peopleItem: peopleItem)
     }
 }

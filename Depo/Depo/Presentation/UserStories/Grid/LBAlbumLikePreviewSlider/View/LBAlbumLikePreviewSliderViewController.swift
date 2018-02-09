@@ -11,6 +11,8 @@ import UIKit
 final class LBAlbumLikePreviewSliderViewController: UIViewController {
     var output: LBAlbumLikePreviewSliderViewOutput!
     
+    var sliderTitle: String?
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -48,7 +50,7 @@ extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewIn
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel.textColor = UIColor.gray
         titleLabel.alpha = 0.5
-        titleLabel.text = TextConstants.albumLikeSlidertitle
+        titleLabel.text = sliderTitle ?? TextConstants.albumLikeSlidertitle
         titleLabel.isUserInteractionEnabled = true
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTouchRecognition))

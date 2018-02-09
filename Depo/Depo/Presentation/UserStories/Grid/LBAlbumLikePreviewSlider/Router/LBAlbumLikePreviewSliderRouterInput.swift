@@ -10,7 +10,7 @@ import Foundation
 
 protocol LBAlbumLikePreviewSliderRouterInput {
 
-    func onItemSelected(type: MyStreamType?)
+    func onItemSelected(_ item: SliderItem)
     
     func goToAlbumbsGreedView()
     

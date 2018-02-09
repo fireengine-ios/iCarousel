@@ -13,7 +13,7 @@ class FaceImagePhotosConfigurator {
     func configure(viewController: FaceImagePhotosViewController, albumUUID: String, coverPhotoURL: URL, item: Item) {
         let router = FaceImagePhotosRouter()
         
-        let presenter = FaceImagePhotosPresenter()
+        let presenter = FaceImagePhotosPresenter(item: item)
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
                                                                    selectionModeTypes: [.createStory, .delete])
