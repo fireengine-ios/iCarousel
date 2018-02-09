@@ -331,13 +331,41 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             return
         }
         
-        for object in items{
+        var localObjects = items.filter{
+            $0.isLocalItem == true
+        }
+        
+        for object in localObjects{
             if let index = duplicatesArray.index(of: object){
                 duplicatesArray.remove(at: index)
             }
             if let index = localMD5Array.index(of: object.md5){
                 localMD5Array.remove(at: index)
             }
+        }
+        
+        let networksObjects = items.filter{
+            $0.isLocalItem == false
+        }
+        
+        localObjects = CoreDataStack.default.getLocalDuplicates(remoteItems: networksObjects)
+        for object in localObjects{
+            var newDuplicatesArray = [WrapData]()
+            for duplicateObject in duplicatesArray{
+                if duplicateObject.md5 != object.md5{
+                    newDuplicatesArray.append(duplicateObject)
+                }
+            }
+            
+            var newMD5Arrary = [String]()
+            for duplicateMD5Object in localMD5Array{
+                if duplicateMD5Object != object.md5{
+                    newMD5Arrary.append(duplicateMD5Object)
+                }
+            }
+            
+            duplicatesArray = newDuplicatesArray
+            localMD5Array = newMD5Arrary
         }
         
         if (duplicatesArray.count == 0){
