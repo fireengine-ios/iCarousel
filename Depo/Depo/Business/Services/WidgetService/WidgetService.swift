@@ -47,15 +47,17 @@ final class WidgetService {
         set { defaults?.set(newValue.rawValue, forKey: SharedConstants.syncStatusKey) }
     }
     
-    
-    func notifyWidgetAbout(_ synced: Int, of total: Int) {
+    private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
-        let currentDate = dateFormatter.string(from: Date())
-        
+        return dateFormatter
+    }()
+    
+    
+    func notifyWidgetAbout(_ synced: Int, of total: Int) {
         finishedCount = synced
         totalCount = total
-        lastSyncedDate = currentDate
+        lastSyncedDate = dateFormatter.string(from: Date())
         
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
