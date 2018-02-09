@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseFileContentViewDeleGate: class {
+protocol BaseFileContentViewDelegate: class {
     func tapOnSelectedItem()
     
     func pageToRight()
@@ -17,7 +17,7 @@ protocol BaseFileContentViewDeleGate: class {
 
 class BaseFileContentView: UIView {
     
-    weak var delegate: BaseFileContentViewDeleGate? // Dele Gate ?
+    weak var delegate: BaseFileContentViewDelegate?
     var index: Int = -1
 
     @IBOutlet weak var imageView: LoadingImageView!

@@ -124,6 +124,8 @@ final class UploadService: BaseRequestService {
                                                          object: nil,
                                                          allOperations: allSyncOperationsCount,
                                                          completedOperations: finishedSyncOperationsCount)
+        
+        WidgetService.shared.notifyWidgetAbout(finishedSyncOperationsCount, of: allSyncOperationsCount)
     }
     
     private func showUploadCardProgress() {
@@ -687,7 +689,7 @@ class UploadOperations: Operation {
 
 extension UploadOperations: OperationProgressServiceDelegate {
     func didSend(ratio: Float, for tempUUID: String) {
-        guard !isRealCancel else {
+        guard isExecuting else {
             return
         }
         

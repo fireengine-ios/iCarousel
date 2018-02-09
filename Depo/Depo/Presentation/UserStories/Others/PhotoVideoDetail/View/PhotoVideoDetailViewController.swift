@@ -11,7 +11,7 @@ import AVKit
 import AVFoundation
 import Photos
 
-class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewInput, BaseFileContentViewDeleGate {
+class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewInput, BaseFileContentViewDelegate, ItemOperationManagerViewProtocol {
     
     typealias Item = WrapData
     
@@ -43,6 +43,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        ItemOperationManager.default.startUpdateView(view: self)
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         configurateView()
         onStopPlay()
@@ -57,6 +58,10 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         if hideActions {
             editingTabBar.view.isHidden = true
         }
+    }
+    
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -402,6 +407,19 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     func pageToLeft() {
         swipeRight(competition: {})
+    }
+    
+    // MARK: ItemOperationManagerViewProtocol
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        if let compairedView = object as? PhotoVideoDetailViewController {
+            return compairedView == self
+        }
+        return false
+    }
+    
+    func finishedUploadFile(file: WrapData){
+        output.setSelectedItemIndex(selectedIndex: selectedIndex)
+        configureNavigationBar()
     }
     
 }
