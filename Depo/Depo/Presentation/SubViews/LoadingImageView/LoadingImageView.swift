@@ -99,8 +99,11 @@ class LoadingImageView: UIImageView {
         })
     }
     
-    func loadImageForItem(object: Item?) {
-        self.image = nil
+    func loadImageForItem(object: Item?, smooth: Bool = false) {
+        if !smooth{
+            self.image = nil
+        }
+        
         if (object == nil) {
             checkIsNeedCancelRequest()
             activity.stopAnimating()
@@ -108,12 +111,15 @@ class LoadingImageView: UIImageView {
             return
         }
         
-        activity.startAnimating()
+        if !smooth{
+            activity.startAnimating()
+        }
+        
         path = object!.patchToPreview
         
         url = filesDataSource.getImage(patch: object!.patchToPreview) { [weak self] (image) in
             if self?.path == object!.patchToPreview {
-                self?.finishImageLoading(image)
+                self?.finishImageLoading(image, withAnimation: smooth)
             }
         }
     }
@@ -144,9 +150,17 @@ class LoadingImageView: UIImageView {
         }
     }
     
-    private func finishImageLoading(_ image: UIImage?) {
+    private func finishImageLoading(_ image: UIImage?, withAnimation: Bool = false) {
         activity.stopAnimating()
-        self.image = image
+        if withAnimation{
+            UIView.transition(with: self,
+                              duration: 0.3,
+                              options: .transitionCrossDissolve,
+                              animations: { self.image = image },
+                              completion: nil)
+        }else{
+            self.image = image
+        }
         path = nil
         url = nil
         delegate?.onImageLoaded()
