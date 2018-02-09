@@ -154,7 +154,7 @@ class LoadingImageView: UIImageView {
         activity.stopAnimating()
         if withAnimation{
             UIView.transition(with: self,
-                              duration: 0.3,
+                              duration: NumericConstants.animationDuration,
                               options: .transitionCrossDissolve,
                               animations: { self.image = image },
                               completion: nil)
