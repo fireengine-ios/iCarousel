@@ -17,7 +17,7 @@ protocol SettingsInteractorOutput: class {
     func goToContactSync()
     
     func profilePhotoUploadSuccessed()
-    func profilePhotoUploadFailed()
+    func profilePhotoUploadFailed(error: Error)
     
     func connectToNetworkFailed()
     

@@ -2369,14 +2369,6 @@
 		B54BFF4D202C73790018AF82 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
 		B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
-		B54BFF51202C75840018AF82 /* TurkcellSaturaBol.ttf in Sources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
-		B54BFF52202C75840018AF82 /* TurkcellSaturaBolIta.ttf in Sources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
-		B54BFF53202C75840018AF82 /* TurkcellSaturaDem.ttf in Sources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
-		B54BFF54202C75840018AF82 /* TurkcellSaturaDemIta.ttf in Sources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
-		B54BFF55202C75840018AF82 /* TurkcellSaturaIta.ttf in Sources */ = {isa = PBXBuildFile; fileRef = CEBBDE031F01E69B00CDF527 /* TurkcellSaturaIta.ttf */; };
-		B54BFF56202C75840018AF82 /* TurkcellSaturaMed.ttf in Sources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
-		B54BFF57202C75840018AF82 /* TurkcellSaturaMedIta.ttf in Sources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
-		B54BFF58202C75840018AF82 /* TurkcellSaturaReg.ttf in Sources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
 		B54BFF5A202C86F30018AF82 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
@@ -12883,14 +12875,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B54BFF51202C75840018AF82 /* TurkcellSaturaBol.ttf in Sources */,
-				B54BFF52202C75840018AF82 /* TurkcellSaturaBolIta.ttf in Sources */,
-				B54BFF53202C75840018AF82 /* TurkcellSaturaDem.ttf in Sources */,
-				B54BFF54202C75840018AF82 /* TurkcellSaturaDemIta.ttf in Sources */,
-				B54BFF55202C75840018AF82 /* TurkcellSaturaIta.ttf in Sources */,
-				B54BFF56202C75840018AF82 /* TurkcellSaturaMed.ttf in Sources */,
-				B54BFF57202C75840018AF82 /* TurkcellSaturaMedIta.ttf in Sources */,
-				B54BFF58202C75840018AF82 /* TurkcellSaturaReg.ttf in Sources */,
 				B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */,
 				B54BFF4D202C73790018AF82 /* SharedConstants.swift in Sources */,
 				B54BFF44202B2B350018AF82 /* TextConstants.swift in Sources */,

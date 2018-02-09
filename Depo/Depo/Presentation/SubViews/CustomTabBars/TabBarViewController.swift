@@ -595,7 +595,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {
         }) { (error) in
             DispatchQueue.main.async {
-                UIApplication.showErrorAlert(message: error.localizedDescription)
+                UIApplication.showErrorAlert(message: error.localizedDescription, in: self)
             }
         }
         

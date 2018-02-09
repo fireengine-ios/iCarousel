@@ -461,8 +461,8 @@ class FileService: BaseRequestService {
                 return
             }
             success?(resultResponse)
-//            self.page += 1
-        }, fail: { (error) in
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
             fail?()
         })
         
