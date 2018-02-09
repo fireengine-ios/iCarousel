@@ -687,7 +687,7 @@ class UploadOperations: Operation {
 
 extension UploadOperations: OperationProgressServiceDelegate {
     func didSend(ratio: Float, for tempUUID: String) {
-        guard !isRealCancel else {
+        guard isExecuting else {
             return
         }
         
