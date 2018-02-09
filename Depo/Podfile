@@ -38,11 +38,17 @@ def core_pods
     #logger
     pod 'XCGLogger', '~> 6.0.1'
     
+    #widget
+    pod 'MMWormhole', '~> 2.0.0'
+    
 end
 
 target 'Depo_LifeTech' do
-
 	core_pods
+
+	target 'autosync-widget' do
+    	inherit! :search_paths
+	end
 
 #  target 'DepoTests' do
 #    inherit! :search_paths
@@ -54,6 +60,7 @@ end
 target ‘TC_Depo_LifeTech’ do
 	core_pods
 end
+
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
