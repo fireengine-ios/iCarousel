@@ -104,6 +104,15 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         }
     }
     
+    func needSignUp(message: String) {
+        compliteAsyncOperationEnableScreen()
+        UIApplication.showErrorAlert(message: message) { controller in
+            controller.close(completion: {
+                self.router.goToRegistration()
+            })            
+        }
+    }
+    
     func startedEnteringPhoneNumberPlus() {
         interactor.findCoutryPhoneCode(plus: true)
     }
