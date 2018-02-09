@@ -35,6 +35,7 @@ final class ServerStatusError {
         
         static let TOO_MANY_REQUESTS = "TOO_MANY_REQUESTS"
         static let EMAIL_IS_INVALID = "EMAIL_IS_INVALID"
+        static let EMAIL_IS_ALREADY_EXIST = "EMAIL_IS_ALREADY_EXIST"
     }
 }
 extension ServerStatusError: LocalizedError {
@@ -87,6 +88,9 @@ extension ServerStatusError: LocalizedError {
             
         case ErrorKeys.EMAIL_IS_INVALID:
             return TextConstants.EMAIL_IS_INVALID
+            
+        case ErrorKeys.EMAIL_IS_ALREADY_EXIST:
+            return TextConstants.EMAIL_IS_ALREADY_EXIST
             
         default:
             return status
