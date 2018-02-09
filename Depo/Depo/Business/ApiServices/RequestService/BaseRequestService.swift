@@ -208,6 +208,16 @@ class BaseRequestService {
         task.resume()
     }
     
+    func executePatchRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
+        let task = requestService.requestTask(patch: param.patch,
+                                              headerParametrs: param.header,
+                                              body: JsonConvertor(parametrs: param).convertToData(),
+                                              method:RequestMethod.Patch,
+                                              timeoutInterval: param.timeout,
+                                              response: handler.response)
+        task.resume()
+    }
+    
     func executeDownloadRequest(param: DownloadRequestParametrs, response:@escaping RequestFileDownloadResponse) {
         let task  = requestService.downloadFileRequestTask(patch: param.patch,
                                                            headerParametrs: param.header,

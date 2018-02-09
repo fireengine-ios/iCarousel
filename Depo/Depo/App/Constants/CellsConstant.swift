@@ -39,6 +39,7 @@ struct CollectionViewCellsIdsConstant {
     static let albumCell = "AlbumCollectionViewCell"
     static let localAlbumCell = "LocalAlbumCollectionViewCell"
     static let cellForFaceImage = "CollectionViewCellForFaceImage"
+    static let cellForFaceImageAddName = "CollectionViewCellForFaceImageAddName"
 }
 
 struct CollectionViewSuplementaryConstants {

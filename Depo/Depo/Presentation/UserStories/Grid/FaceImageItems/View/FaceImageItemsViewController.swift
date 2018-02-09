@@ -20,7 +20,7 @@ class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     override func configurateNavigationBar(){
         if (isCanChangeVisibility) {
             configurateFaceImagePeopleActions { [weak self] in
-                self?.configureApplyNavBarActions()
+                self?.configureDoneNavBarActions()
             }
         } else {
             navigationItem.rightBarButtonItems = nil
@@ -29,7 +29,7 @@ class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     
     override func stopSelection() {
         configurateFaceImagePeopleActions { [weak self] in
-            self?.configureApplyNavBarActions()
+            self?.configureDoneNavBarActions()
         }
     }
     
@@ -41,15 +41,16 @@ class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
         }
     }
     
-    private func configureApplyNavBarActions() {
+    private func configureDoneNavBarActions() {
         if let output = output as? FaceImageItemsViewOutput {
             output.switchVisibilityMode()
         }
         
-        let apply = NavBarWithAction(navItem: NavigationBarList().apply, action: { [weak self] (_) in
+        let done = NavBarWithAction(navItem: NavigationBarList().done, action: { [weak self] (_) in
             self?.onApplySelection()
         })
-        navBarConfigurator.configure(right: [apply], left: [])
+        
+        navBarConfigurator.configure(right: [done], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
 

@@ -14,6 +14,7 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
     
     override func viewDidLoad() {
         
+        
         scrolliblePopUpView.isEnable = false
         
         duplicatesTextLabel.textColor = ColorConstants.darkText

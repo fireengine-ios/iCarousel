@@ -14,4 +14,10 @@ class FaceImagePhotosRouter: BaseFilesGreedRouter, FaceImagePhotosRouterInput {
         let vc = router.faceImageChangeCoverController(albumUUID: albumUUID)
         router.pushViewController(viewController: vc)
     }
+    
+    func openAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) {
+        let vc = RouterVC().faceImageAddName(item, moduleOutput: moduleOutput)
+        
+        RouterVC().pushViewController(viewController: vc)
+    }
 }

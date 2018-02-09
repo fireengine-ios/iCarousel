@@ -11,6 +11,8 @@ class FaceImageItemsConfigurator {
     func configure(viewController: FaceImageItemsViewController, remoteServices: RemoteItemsService, title: String) {
         let router = FaceImageItemsRouter()
         
+        router.view = viewController
+        
         let presenter = FaceImageItemsPresenter()
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],

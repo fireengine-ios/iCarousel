@@ -19,6 +19,7 @@ enum RequestMethod: String {
     case Delete = "DELETE"
     case Put    = "PUT"
     case Head    = "HEAD"
+    case Patch  = "PATCH"
 }
 
 import Alamofire

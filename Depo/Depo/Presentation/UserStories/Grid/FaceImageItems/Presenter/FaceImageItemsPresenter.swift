@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractorOutput, FaceImageItemsViewOutput {
+class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractorOutput, FaceImageItemsViewOutput, FaceImageItemsModuleOutput {
     
     private var isChangeVisibilityMode: Bool = false
     
@@ -17,6 +17,7 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
     
     override func viewIsReady(collectionView: UICollectionView) {
         super.viewIsReady(collectionView: collectionView)
+        
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
         dataSource.isHeaderless = true
     }
@@ -57,7 +58,7 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
     
     func didLoadAlbum(_ albumUUID: String, forItem item: Item) {
         if let router = router as? FaceImageItemsRouter {
-            router.openFaceImageItemPhotosWith(item, albumUUID: albumUUID)
+            router.openFaceImageItemPhotosWith(item, albumUUID: albumUUID, moduleOutput: self)
         }
     }
     
@@ -104,6 +105,22 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
             
             switchVisibilityMode(!isChangeVisibilityMode)
         }
+    }
+    
+    // MARK: - FaceImageItemsModuleOutput
+    
+    func didChangeName(item: WrapData) {
+        allItmes.forEach {
+            if $0.id == item.id {
+                $0.name = item.name
+            }
+        }
+        
+        getContentWithSuccess(items: allItmes)
+    }
+    
+    func didMergePeople() {
+        reloadData()
     }
     
     // MARK: -  Utility methods

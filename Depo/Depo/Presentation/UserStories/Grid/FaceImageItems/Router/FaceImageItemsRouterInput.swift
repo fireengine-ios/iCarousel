@@ -7,5 +7,5 @@
 //
 
 protocol FaceImageItemsRouterInput {
-    func openFaceImageItemPhotosWith(_ item: Item, albumUUID: String)
+    func openFaceImageItemPhotosWith(_ item: Item, albumUUID: String, moduleOutput: FaceImageItemsModuleOutput?)
 }

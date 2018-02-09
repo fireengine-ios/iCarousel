@@ -8,4 +8,5 @@
 
 protocol FaceImagePhotosRouterInput {
     func openChangeCoverWith(_ albumUUID: String)
+    func openAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?)
 }
