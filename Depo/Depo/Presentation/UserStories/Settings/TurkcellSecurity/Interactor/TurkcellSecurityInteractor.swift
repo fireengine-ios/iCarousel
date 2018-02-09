@@ -64,10 +64,9 @@ extension TurkcellSecurityInteractor: TurkcellSecurityInteractorInput {
                 self?.output?.acquiredTurkcellSecurityState(passcode: turkCellPasswordOn, autoLogin: turkCellAutoLogin)
             }
             debugPrint("response")
-        }) { [weak self] (error) in
-            debugPrint("error")
+        }) { [weak self] error in
             DispatchQueue.main.async {
-                self?.output?.changeTurkcellSecurityFailed()
+                self?.output?.changeTurkcellSecurityFailed(error: error)
             }
         }
     }

@@ -54,7 +54,8 @@ extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
 
 // MARK: TurkcellSecurityInteractorOutput
 extension TurkcellSecurityPresenter: TurkcellSecurityInteractorOutput {
-    func changeTurkcellSecurityFailed() {
+    func changeTurkcellSecurityFailed(error: ErrorResponse) {
+        UIApplication.showErrorAlert(message: error.localizedDescription)
         asyncOperationSucces()
     }
     

@@ -20,5 +20,5 @@ protocol TurkcellSecurityInteractorInput: class {
 protocol TurkcellSecurityInteractorOutput: class {
     func acquiredTurkcellSecurityState(passcode: Bool, autoLogin: Bool)
     func failedToAcquireTurkcellSecurityState()
-    func changeTurkcellSecurityFailed()
+    func changeTurkcellSecurityFailed(error: ErrorResponse)
 }

@@ -119,7 +119,7 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
     
     func failedFacebookStatus(errorMessage: String) {
         isFBConnected = false
-        print(errorMessage)
+        UIApplication.showErrorAlert(message: errorMessage)
     }
     
     func succeedFacebookStart() {
@@ -128,7 +128,7 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
     
     func failedFacebookStart(errorMessage: String) {
         isFBConnected = false
-        print(errorMessage)
+        UIApplication.showErrorAlert(message: errorMessage)
     }
     
     func succeedFacebookStop() {
@@ -137,7 +137,7 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
     
     func failedFacebookStop(errorMessage: String) {
         isFBConnected = true
-        print(errorMessage)
+        UIApplication.showErrorAlert(message: errorMessage)
     }
 }
 
@@ -174,7 +174,7 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
     
     func failedDropboxStart(errorMessage: String) {
         isDBConnected = false
-        print(errorMessage)
+        UIApplication.showErrorAlert(message: errorMessage)
     }
 }
 
@@ -198,7 +198,7 @@ extension ImportPhotosViewController: ImportFromInstagramViewInput {
     
     func instagramStartFailure(errorMessage: String) {
         isInstagramConnected = false
-        print(errorMessage)
+        UIApplication.showErrorAlert(message: errorMessage)
     }
     
     // MARK: Stop
@@ -209,6 +209,6 @@ extension ImportPhotosViewController: ImportFromInstagramViewInput {
     
     func instagramStopFailure(errorMessage: String) {
         isInstagramConnected = true
-        print(errorMessage)
+        UIApplication.showErrorAlert(message: errorMessage)
     }
 }

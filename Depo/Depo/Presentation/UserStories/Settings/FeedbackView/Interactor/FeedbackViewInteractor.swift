@@ -28,7 +28,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             }
         }) { [weak self] (fail) in
             DispatchQueue.main.async {
-                self?.output.fail(text: "fail")
+                self?.output.fail(text: fail.localizedDescription)
             }
         }
     }
@@ -43,7 +43,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             }
             }, fail: { [weak self] (fail) in
                 DispatchQueue.main.async {
-                    self?.output.fail(text: "fail")
+                    self?.output.fail(text: fail.localizedDescription)
                 }
         })
         

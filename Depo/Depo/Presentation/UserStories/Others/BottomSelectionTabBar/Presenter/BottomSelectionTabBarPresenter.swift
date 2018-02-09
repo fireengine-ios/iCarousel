@@ -88,15 +88,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
     }
     
-    // Presenter Input
-    func preparedSelectedItems(items: [Item]) {
-        debugPrint("number of selected items ", items.count)
-    }
-    
     override func dismiss(animated: Bool) {
         view.hideBar(animated: animated)
-        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
-        debugPrint("Editing bar Dismiss")
     }
     
     func show(animated: Bool, onView sourceView: UIView?) {

@@ -27,6 +27,9 @@ extension ErrorResponse: LocalizedError {
         case .string(let errorString):
             return errorString
         case .error(let recivedError):
+            if recivedError is URLError {
+                return TextConstants.errorConnectedToNetwork
+            }
             return recivedError.localizedDescription
         case .httpCode(let code):
             return String(code)
