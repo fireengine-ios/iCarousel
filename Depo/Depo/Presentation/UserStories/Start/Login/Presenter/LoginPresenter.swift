@@ -69,6 +69,10 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         router.goToForgotPassword()
     }
     
+    func onOpenSignUp() {
+        router.goToRegistration()
+    }
+    
     func viewAppeared() {
 //        interactor.prepareTimePassed()
     }
@@ -106,11 +110,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func needSignUp(message: String) {
         compliteAsyncOperationEnableScreen()
-        UIApplication.showErrorAlert(message: message) { controller in
-            controller.close(completion: {
-                self.router.goToRegistration()
-            })            
-        }
+        view.showNeedSignUp(message: message)
     }
     
     func startedEnteringPhoneNumberPlus() {
