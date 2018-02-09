@@ -16,6 +16,10 @@ class ActivityTimelinePresenter: BasePresenter, ActivityTimelineModuleInput {
     override func outputView() -> Waiting? {
         return view
     }
+    
+    private func isActivitiesEnded(in array: [ActivityTimelineServiceResponse]) -> Bool {
+        return (array.count == 1) && (array.first?.activityType == .welcome)
+    }
 }
 extension ActivityTimelinePresenter: ActivityTimelineViewOutput {
     func viewIsReady() {
@@ -31,7 +35,11 @@ extension ActivityTimelinePresenter: ActivityTimelineViewOutput {
 }
 extension ActivityTimelinePresenter: ActivityTimelineInteractorOutput {
     func successedTimelineActivities(with array: [ActivityTimelineServiceResponse]) {
-        view.displayTimelineActivities(with: array)
+        if isActivitiesEnded(in: array) {
+            view.endInfinityScrollWithNoMoreData()
+        } else {
+            view.displayTimelineActivities(with: array)
+        }
     }
     func refreshTimelineActivities(with array: [ActivityTimelineServiceResponse]) {
         view.refreshTimelineActivities(with: array)

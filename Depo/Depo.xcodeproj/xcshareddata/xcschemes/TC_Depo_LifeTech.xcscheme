@@ -34,7 +34,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C0E8C611FDEBDFF00789C91"
-            BuildableName = "TC_Depo_LifeTech.app"
+            BuildableName = "lifebox.app"
             BlueprintName = "TC_Depo_LifeTech"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
@@ -58,7 +58,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C0E8C611FDEBDFF00789C91"
-            BuildableName = "TC_Depo_LifeTech.app"
+            BuildableName = "lifebox.app"
             BlueprintName = "TC_Depo_LifeTech"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
