@@ -422,6 +422,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
         dataSource.currentSortType = rule
+        (rule == .sizeAZ || rule == .sizeZA) ? (dataSource.isHeaderless = true) : (dataSource.isHeaderless = false)
+
         moduleOutput?.reloadType(type, sortedType: sortedType, fieldType: getFileFilter())
         reloadData()
     }
