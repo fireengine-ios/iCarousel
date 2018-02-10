@@ -326,23 +326,69 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func deleteItems(items: [Item]){
-        if (isSearchRunning){
-            needSearchAgain = true
-            return
-        }
-        
-        for object in items{
-            if let index = duplicatesArray.index(of: object){
-                duplicatesArray.remove(at: index)
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let `self` = self else{
+                return
             }
-            if let index = localMD5Array.index(of: object.md5){
-                localMD5Array.remove(at: index)
+            
+            if (self.isSearchRunning){
+                self.needSearchAgain = true
+                return
             }
-        }
-        
-        if (duplicatesArray.count == 0){
-            CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-            CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
+            
+            var localObjects = items.filter{
+                $0.isLocalItem
+            }
+            
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else{
+                    return
+                }
+                for object in localObjects{
+                    if let index = self.duplicatesArray.index(of: object){
+                        self.duplicatesArray.remove(at: index)
+                    }
+                    if let index = self.localMD5Array.index(of: object.md5){
+                        self.localMD5Array.remove(at: index)
+                    }
+                }
+            }
+            
+            let networksObjects = items.filter{
+                !$0.isLocalItem
+            }
+            
+            localObjects = CoreDataStack.default.getLocalDuplicates(remoteItems: networksObjects)
+            for object in localObjects{
+                var newDuplicatesArray = [WrapData]()
+                for duplicateObject in self.duplicatesArray{
+                    if duplicateObject.md5 != object.md5{
+                        newDuplicatesArray.append(duplicateObject)
+                    }
+                }
+                
+                var newMD5Arrary = [String]()
+                for duplicateMD5Object in self.localMD5Array{
+                    if duplicateMD5Object != object.md5{
+                        newMD5Arrary.append(duplicateMD5Object)
+                    }
+                }
+                
+                DispatchQueue.main.async { [weak self] in
+                    guard let `self` = self else{
+                        return
+                    }
+                    self.duplicatesArray = newDuplicatesArray
+                    self.localMD5Array = newMD5Arrary
+                }
+                
+            }
+            
+            if (self.duplicatesArray.count == 0){
+                CardsManager.default.stopOperationWithType(type: .freeAppSpace)
+                CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
+            }
         }
     }
     
