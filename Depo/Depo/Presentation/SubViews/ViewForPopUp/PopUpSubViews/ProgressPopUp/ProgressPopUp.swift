@@ -75,23 +75,24 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     func configurateWithType(viewType: OperationType){
         let isWiFi = ReachabilityService().isReachableViaWiFi
         let networkType = isWiFi ? TextConstants.networkTypeWiFi : TextConstants.mobileData
+        let iconImage = isWiFi ? UIImage(named: "WiFiIcon") : UIImage(named: "SyncingPopUpImage")
         typeOfOperation = viewType
         
         switch viewType {
         case .sync:
             operationLabel.text = ""
             titleLabel.text = TextConstants.popUpSyncing + " " + networkType
-            imageView.image = UIImage(named: "SyncingPopUpImage")
+            imageView.image = iconImage
             
         case .upload:
             operationLabel.text = ""
             titleLabel.text = TextConstants.popUpUploading + " " + networkType
-            imageView.image = UIImage(named: "SyncingPopUpImage")
+            imageView.image = iconImage
             
         case .download:
             operationLabel.text = ""
             titleLabel.text = TextConstants.popUpDownload
-            imageView.image = UIImage(named: "SyncingPopUpImage")
+            imageView.image = iconImage
             
         default:
             operationLabel.text = ""
