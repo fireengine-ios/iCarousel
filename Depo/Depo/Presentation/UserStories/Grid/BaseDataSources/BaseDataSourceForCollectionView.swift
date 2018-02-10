@@ -94,7 +94,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
-        isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
+        isHeaderless ? setupOneSectionMediaItemsArray(items: allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
+    }
+    
+    private func setupOneSectionMediaItemsArray(items: [WrapData]) {
+        allItems.removeAll()
+        allItems.append(items)
     }
     
     private func isLocalOnly() -> Bool {
@@ -472,8 +477,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         self.allLocalItems.append(contentsOf: self.getAllLocalItems())
         
         DispatchQueue.main.async {
-            
-            
             if self.isLocalOnly() {
                 self.allItems = [self.allLocalItems]
                 self.reloadData()

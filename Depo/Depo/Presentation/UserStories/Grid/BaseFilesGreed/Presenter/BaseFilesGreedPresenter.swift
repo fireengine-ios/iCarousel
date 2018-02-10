@@ -194,7 +194,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (view == nil){
             return
         }
-        debugPrint("???getContentWithSuccess()")
         asyncOperationSucces()
         view.stopRefresher()
         
