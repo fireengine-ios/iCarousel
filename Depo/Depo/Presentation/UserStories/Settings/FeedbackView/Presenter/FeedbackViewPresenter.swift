@@ -27,10 +27,12 @@ class FeedbackViewPresenter:BasePresenter, FeedbackViewModuleInput, FeedbackView
     //interactor output
     
     func languagesUploaded(lanuages:[LanguageModel]){
+        asyncOperationSucces()
         view.languagesUploaded(lanuages: lanuages)
     }
     
     func fail(text: String){
+        asyncOperationSucces()
         view.fail(text: text)
     }
     

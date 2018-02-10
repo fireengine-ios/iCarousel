@@ -18,6 +18,12 @@ extension ErrorResponse: CustomStringConvertible {
     var description: String {
         return errorDescription ?? TextConstants.errorUnknown
     }
+    
+    func showInternetErrorGlobal() {
+        if case ErrorResponse.error(let error) = self, error is URLError {
+            UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+        }
+    }
 }
 extension ErrorResponse: LocalizedError {
     var errorDescription: String? {
@@ -27,6 +33,9 @@ extension ErrorResponse: LocalizedError {
         case .string(let errorString):
             return errorString
         case .error(let recivedError):
+            if recivedError is URLError {
+                return TextConstants.errorConnectedToNetwork
+            }
             return recivedError.localizedDescription
         case .httpCode(let code):
             return String(code)

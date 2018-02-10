@@ -323,6 +323,7 @@ class FileService: BaseRequestService {
                                                                             completedOperations: completedOperationsCount)
             }, fail: { (error) in
                 log.debug("FileService download DownLoadOperation fail")
+                /// HERE MUST BE ERROR HANDLER
             })
         }
         
@@ -461,8 +462,8 @@ class FileService: BaseRequestService {
                 return
             }
             success?(resultResponse)
-//            self.page += 1
-        }, fail: { (error) in
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
             fail?()
         })
         

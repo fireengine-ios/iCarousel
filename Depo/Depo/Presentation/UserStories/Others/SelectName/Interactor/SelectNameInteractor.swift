@@ -94,7 +94,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
             }
         }) { (error) in
             DispatchQueue.main.async {[weak self] in
-                self?.output.operationFaildWithError(error: "")
+                self?.output.operationFaildWithError(errorMessage: error.localizedDescription)
             }
         }
     }
@@ -109,18 +109,17 @@ class SelectNameInteractor: SelectNameInteractorInput {
                                                isFavourite: isFavorite ?? false)
         
         WrapItemFileService().createsFolder(createFolder: createfolderParam,
-                                            success: { [weak self] in
-                                                DispatchQueue.main.async {
-                                                    if let self_ = self{
-                                                        self_.output.operationSucces(operation: self_.moduleType)
-                                                        ItemOperationManager.default.newFolderCreated()
-                                                    }
-                                                }
-            },
-                                            fail: {[weak self] (error) in
-                                                DispatchQueue.main.async {
-                                                    self?.output.operationFaildWithError(error: "")
-                                                }
+            success: { [weak self] in
+                DispatchQueue.main.async {
+                    if let self_ = self{
+                        self_.output.operationSucces(operation: self_.moduleType)
+                        ItemOperationManager.default.newFolderCreated()
+                    }
+                }
+            }, fail: {[weak self] (error) in
+                DispatchQueue.main.async {
+                    self?.output.operationFaildWithError(errorMessage: error.localizedDescription)
+                }
         })
     }
 

@@ -341,12 +341,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
         let lastItemCreatedDate =  isMetaDate ? lastItem.metaDate : lastItem.creationDate!
         let newItemCreationDate = isMetaDate ? newItem.metaDate : newItem.creationDate!
-        //        if var lastItemCreatedDate = lastItem.creationDate,
-        //            var newItemCreationDate = newItem.creationDate {
-        //            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
-        //                let newItemMetaDate = newItem.metaData?.takenDate {
         
-        //            }
         if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
             lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
             
@@ -355,11 +350,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         } else {
             allItems.append([newItem])
         }
-        //        }
-        //    else {
-        //            allItems.append([newItem])
-        //        }
-        
     }
     
     private func addByName(lastItem: WrapData, newItem: WrapData) {

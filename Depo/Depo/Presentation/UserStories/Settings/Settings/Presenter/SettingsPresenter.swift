@@ -118,8 +118,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func onChooseFromPhotoLibriary(onViewController viewController: UIViewController){
-        CameraService().showImagesPicker(onViewController: viewController)//showCamera(onViewController: viewController)
-        
+        CameraService().showImagesPicker(onViewController: viewController)
     }
     
     func onChooseFromPhotoCamera(onViewController viewController: UIViewController){
@@ -132,8 +131,8 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         view.profileInfoChanged()
     }
     
-    func profilePhotoUploadFailed(){
-        view.profileWontChange()
+    func profilePhotoUploadFailed(error: Error) {
+        view.profileWontChangeWith(error: error)
     }
     
     func connectToNetworkFailed() {

@@ -22,8 +22,6 @@ protocol BaseItemInputPassingProtocol: class {
 }
 
 protocol BaseItemOuputPassingProtocol: class {
-    func preparedSelectedItems(items: [Item])
-    
     func dismiss(animated: Bool)
     func show(animated: Bool, onView sourceView: UIView?)//
 }
