@@ -68,7 +68,7 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     func setImageForUploadingItem(item: WrapData){
         if wrapItem != item{
             wrapItem = item
-            iconImageViewForCurrentFile.loadImageForItem(object: item)
+            iconImageViewForCurrentFile.loadImageForItem(object: item, smooth: true)
         }
     }
     
