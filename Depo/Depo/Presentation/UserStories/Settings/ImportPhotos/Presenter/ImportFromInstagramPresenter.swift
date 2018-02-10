@@ -82,7 +82,6 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
     func syncStatusFailure(errorMessage: String) {
         view?.stopActivityIndicator()
         view?.instagramStatusFailure()
-        UIApplication.showErrorAlert(message: errorMessage)
     }
     
     // MARK: config

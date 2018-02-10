@@ -29,6 +29,7 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {
+                errorResponse.showInternetErrorGlobal()
                 self?.instOutput.syncStatusFailure(errorMessage: errorResponse.description)
             }
         })
