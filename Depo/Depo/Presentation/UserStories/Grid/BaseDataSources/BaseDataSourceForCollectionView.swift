@@ -66,6 +66,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var canReselect: Bool = false
     
     var currentSortType: SortedRules = .timeUp
+//    {
+//        didSet {// IN our current implementation it might break some other screens such as search and upload.
+//            (currentSortType == .sizeAZ || currentSortType == .sizeZA) ? (isHeaderless = true) : (isHeaderless = false)
+//        }
+//    }
     
     var originalFilters: [GeneralFilesFiltrationType]?
     

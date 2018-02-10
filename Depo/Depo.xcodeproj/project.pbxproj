@@ -2340,7 +2340,6 @@
 		98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FC663D1385AB04CA228302 /* FeedbackViewOutput.swift */; };
-		9B7A9D2763E1466AF6B0B41D /* Pods_autosync_widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA832A180EC983270F5B10A /* Pods_autosync_widget.framework */; };
 		9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */; };
 		9BBF662583E415D3BC0ED486 /* PhotoVideoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */; };
 		9E4E918E6877B531674D260E /* SettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F4E84C509D07D9BC4F909 /* SettingsConfigurator.swift */; };
@@ -2898,6 +2897,7 @@
 		DAFC0963466EA8E360C3FC67 /* BaseFilesGreedConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7ECB6D4F000A77B89C5008 /* BaseFilesGreedConfigurator.swift */; };
 		DB6E1B2B2651A46923CB165B /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD80CEB97E85BA37E721D389 /* FeedbackViewController.swift */; };
 		DC071DDDCA7525DF55B43B69 /* PhotoVideoDetailInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */; };
+		DC98D0DEE777FE6941C39610 /* Pods_autosync_widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA832A180EC983270F5B10A /* Pods_autosync_widget.framework */; };
 		DD99F320480D3A98D286DB95 /* PhotoVideoDetailRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE7FB78D23D9EC5719125BB /* PhotoVideoDetailRouterInput.swift */; };
 		DE10EF65DE653E0EDBEC8C17 /* BaseFilesGreedViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D21B416D68E0EDD1E1DB16 /* BaseFilesGreedViewInput.swift */; };
 		DEE642813D2C3E1B9FDC7D3C /* PhotoVideoDetailViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC47E8ECC19A0C3CC7C7CCEF /* PhotoVideoDetailViewOutput.swift */; };
@@ -2951,7 +2951,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B54BFF39202B20250018AF82 /* PBXContainerItemProxy */ = {
+		B5E1D980202DB4800022F0E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
 			proxyType = 1;
@@ -3064,6 +3064,7 @@
 		1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouter.swift; sourceTree = "<group>"; };
 		1AB80F562E2E268C766082D5 /* SettingsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInitializer.swift; sourceTree = "<group>"; };
 		1BCD54E34E004AFFD765CE3B /* SplashPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		1FB7C07A080A85C63EAA4DC4 /* Pods-Depo_LifeTech-autosync-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.debug.xcconfig"; sourceTree = "<group>"; };
 		20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderConfigurator.swift; sourceTree = "<group>"; };
 		20BCBDB527895B614215B1EC /* BaseFilesGreedInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractor.swift; sourceTree = "<group>"; };
 		22EE7E386FBD5473EAA3840B /* SplashInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInitializer.swift; sourceTree = "<group>"; };
@@ -3079,6 +3080,7 @@
 		284E2CF83DB7FBCE9558A617 /* UserInfoSubViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewPresenter.swift; sourceTree = "<group>"; };
 		2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewOutput.swift; sourceTree = "<group>"; };
 		2E50FCBA00A2EB5EF92BED07 /* UserInfoSubViewViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewViewInput.swift; sourceTree = "<group>"; };
+		2EDC08542508B91094154180 /* Pods-Depo_LifeTech-autosync-widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.release.xcconfig"; sourceTree = "<group>"; };
 		2FA162F32D68FC71BB6EDF2E /* SettingsRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		30889CD8C0EE339E19DF61B6 /* ActivityTimelineInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInteractorOutput.swift; sourceTree = "<group>"; };
 		32FC300467ABAFFB82063918 /* PhotoVideoDetailConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailConfigurator.swift; sourceTree = "<group>"; };
@@ -3155,6 +3157,7 @@
 		59360E3550649CF1052921A7 /* LBAlbumLikePreviewSliderInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderInteractor.swift; sourceTree = "<group>"; };
 		5972C1527D3AC05E1DB65B4B /* SelectNameInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameInteractorOutput.swift; sourceTree = "<group>"; };
 		5A790A17A1745A0D85ECB596 /* FileInfoConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoConfigurator.swift; sourceTree = "<group>"; };
+		5AAEBE1A76149DDF9869754A /* Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		5B17E6F8BC6EF2FCF5C768A7 /* SyncContactsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewInput.swift; sourceTree = "<group>"; };
 		5C1481F6939E81618738C7DE /* ForgotPasswordViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewInput.swift; sourceTree = "<group>"; };
 		5C58EB76B3E755EF8CB5B029 /* SplashInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractorOutput.swift; sourceTree = "<group>"; };
@@ -4340,6 +4343,7 @@
 		A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailPresenter.swift; sourceTree = "<group>"; };
 		A44DB6B541540CC3F60A6E22 /* RegistrationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		A4A4A9F285CF79F4800E7BAD /* ActivityTimelineRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineRouterInput.swift; sourceTree = "<group>"; };
+		A7B1B7B35486CF4F7EA97FCD /* Pods-Depo_LifeTech-autosync-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		A8CEE7F449AB04C7F484C5F1 /* RegistrationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInteractorOutput.swift; sourceTree = "<group>"; };
 		A8EBD4DA3306AA75754215A6 /* SelectNameRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameRouterInput.swift; sourceTree = "<group>"; };
 		A9A18BA44717122453DCA565 /* LBAlbumLikePreviewSliderViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderViewOutput.swift; sourceTree = "<group>"; };
@@ -4834,7 +4838,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */,
-				9B7A9D2763E1466AF6B0B41D /* Pods_autosync_widget.framework in Frameworks */,
+				DC98D0DEE777FE6941C39610 /* Pods_autosync_widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10417,6 +10421,10 @@
 				76B1160903EAC577E57F21A0 /* Pods-autosync-widget.release.xcconfig */,
 				FFA713DFFEF8A0A618B462F5 /* Pods-autosync-widget.appstore.xcconfig */,
 				A3E3BDF23BBE84B495BAA606 /* Pods-autosync-widget.enterprise.xcconfig */,
+				1FB7C07A080A85C63EAA4DC4 /* Pods-Depo_LifeTech-autosync-widget.debug.xcconfig */,
+				2EDC08542508B91094154180 /* Pods-Depo_LifeTech-autosync-widget.release.xcconfig */,
+				5AAEBE1A76149DDF9869754A /* Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig */,
+				A7B1B7B35486CF4F7EA97FCD /* Pods-Depo_LifeTech-autosync-widget.enterprise.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -10483,7 +10491,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				B54BFF3A202B20250018AF82 /* PBXTargetDependency */,
+				B5E1D981202DB4800022F0E8 /* PBXTargetDependency */,
 			);
 			name = Depo_LifeTech;
 			productName = Depo;
@@ -13810,10 +13818,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B54BFF3A202B20250018AF82 /* PBXTargetDependency */ = {
+		B5E1D981202DB4800022F0E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B54BFF2F202B20250018AF82 /* autosync-widget */;
-			targetProxy = B54BFF39202B20250018AF82 /* PBXContainerItemProxy */;
+			targetProxy = B5E1D980202DB4800022F0E8 /* PBXContainerItemProxy */;
 		};
 		CE79E4AB1F695DA200C1F151 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

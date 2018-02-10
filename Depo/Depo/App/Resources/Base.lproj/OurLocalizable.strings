@@ -53,7 +53,7 @@
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
 "Unknown error" = "Unknown error";
-"Too many invalid attempts, please try again later" = "Too many invalid attempts, please try again later";
+"Too many verification code requested for this msisdn. Please try again later" = "Too many verification code requested for this msisdn. Please try again later";
 "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry." = "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry.";
 "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response.";
 "The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response.";
@@ -569,6 +569,7 @@
 "I have an account, let me log in" = "I have an account, let me log in";
 "Start using Lifebox now!" = "Start using Lifebox now!";
 "E-mail field is invalid" = "E-mail field is invalid";
+"E-mail is already exist" = "E-mail is already exist";
 "Please enter your GSM number"="Please enter your GSM number";
 "GSM number"="GSM number";
 "Plus" = "Plus";

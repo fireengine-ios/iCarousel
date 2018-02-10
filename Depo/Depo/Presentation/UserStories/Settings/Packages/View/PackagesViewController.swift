@@ -67,6 +67,7 @@ extension PackagesViewController: PackagesViewInput {
     func show(promocodeError: String) {
         stopActivityIndicator()
         promoView.errorLabel.text = promocodeError
+        view.layoutIfNeeded()
         scrollView.scrollToBottom(animated: true)
     }
     

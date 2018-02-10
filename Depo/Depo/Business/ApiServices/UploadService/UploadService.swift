@@ -67,10 +67,12 @@ final class UploadService: BaseRequestService {
     @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: FileOperationSucces?, fail: FailResponse? ) -> [UploadOperations]? {
         switch uploadType {
         case .autoSync:
-            return self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: {
+            return self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                 success?()
-            }, fail: { (errorResponse) in
-                fail?(errorResponse)
+                self?.clearSyncCounters()
+                }, fail: { [weak self] (errorResponse) in
+                    fail?(errorResponse)
+                    self?.clearSyncCounters()
             })
         case .syncToUse:
             return self.syncToUseFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
@@ -337,6 +339,7 @@ final class UploadService: BaseRequestService {
                 if let error = error {
 //                    print("AUTOSYNC: \(error.localizedDescription)")
                     if error.description == TextConstants.canceledOperationTextError || error.description == TextConstants.loginScreenNoInternetError {
+                        self.uploadOperations.removeIfExists(finishedOperation)
                         checkIfFinished()
                     } else {
                         fail(error)
