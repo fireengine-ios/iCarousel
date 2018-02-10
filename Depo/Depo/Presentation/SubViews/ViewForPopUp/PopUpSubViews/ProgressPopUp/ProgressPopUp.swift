@@ -74,7 +74,7 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     
     func configurateWithType(viewType: OperationType){
         let isWiFi = ReachabilityService().isReachableViaWiFi
-        let networkType = isWiFi ? TextConstants.networkTypeWiFi : TextConstants.networkType3g
+        let networkType = isWiFi ? TextConstants.networkTypeWiFi : TextConstants.mobileData
         typeOfOperation = viewType
         
         switch viewType {

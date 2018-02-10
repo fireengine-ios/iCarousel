@@ -501,6 +501,7 @@ struct TextConstants {
     static let freeAppSpacePopUpButtonTitle = NSLocalizedString("Free up space", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let networkTypeWiFi = NSLocalizedString("Wi-Fi", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let networkType3g = NSLocalizedString("3G", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobileData = NSLocalizedString("Mobile Data", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoUploaOffPopUpText = NSLocalizedString("Auto Upload is off.\nGo to setting to auto sync.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoUploaOffCancel = NSLocalizedString("Cancel", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoUploaOffSettings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
