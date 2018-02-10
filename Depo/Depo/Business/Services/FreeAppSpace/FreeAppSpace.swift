@@ -340,12 +340,18 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 $0.isLocalItem
             }
             
-            for object in localObjects{
-                if let index = self.duplicatesArray.index(of: object){
-                    self.duplicatesArray.remove(at: index)
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else{
+                    return
                 }
-                if let index = self.localMD5Array.index(of: object.md5){
-                    self.localMD5Array.remove(at: index)
+                for object in localObjects{
+                    if let index = self.duplicatesArray.index(of: object){
+                        self.duplicatesArray.remove(at: index)
+                    }
+                    if let index = self.localMD5Array.index(of: object.md5){
+                        self.localMD5Array.remove(at: index)
+                    }
                 }
             }
             
@@ -369,8 +375,14 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     }
                 }
                 
-                self.duplicatesArray = newDuplicatesArray
-                self.localMD5Array = newMD5Arrary
+                DispatchQueue.main.async { [weak self] in
+                    guard let `self` = self else{
+                        return
+                    }
+                    self.duplicatesArray = newDuplicatesArray
+                    self.localMD5Array = newMD5Arrary
+                }
+                
             }
             
             if (self.duplicatesArray.count == 0){
