@@ -454,6 +454,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         compliteAsyncOperationEnableScreen()
         view.unselectAll()
         basePassingPresenter?.operationFailed(withType: type)
+        UIApplication.showErrorAlert(message: message)
     }
     
     override func operationStarted(type: ElementTypes) {
