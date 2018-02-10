@@ -18,5 +18,14 @@ class CreateStorySelectionInteractor: BaseFilesGreedInteractor {
             out.configurateWithPhotoStory(story: story)
         }
     }
+    
+    func onChangeSorce(isYourUpload: Bool){
+        if isYourUpload {
+            remoteItems = MusicService(requestSize: 100)
+        }else{
+            remoteItems = CreateStoryMusicService()
+        }
+        
+    }
 
 }

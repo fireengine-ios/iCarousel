@@ -13,9 +13,15 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
     let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
     let selectButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
     
+    @IBOutlet weak var segmentControll: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTitle = ""
+        
+        segmentControll.setTitle(TextConstants.createStoryAudioMusics, forSegmentAt: 0)
+        segmentControll.setTitle(TextConstants.createStoryAudioYourUploads, forSegmentAt: 1)
+        segmentControll.tintColor = ColorConstants.darcBlueColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +65,12 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
     
     override func isNeedShowTabBar() -> Bool{
         return false
+    }
+    
+    @IBAction func segmentControlValueChanged(sender: UISegmentedControl){
+        if let presenter = output as? CreateStoryAudioSelectionPresenter{
+            presenter.onChangeSorce(isYourUpload: sender.selectedSegmentIndex == 1)
+        }
     }
     
 }

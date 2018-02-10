@@ -63,4 +63,14 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
     override func getCellSizeForList() -> CGSize{
         return CGSize(width: view.getCollectionViewWidth(), height: 46)
     }
+    
+    func onChangeSorce(isYourUpload: Bool){
+        if let interactor = interactor as? CreateStorySelectionInteractor{
+            if let dataSource = dataSource as? AudioSelectionDataSource{
+                dataSource.tableDataMArray.removeAll()
+            }
+            interactor.onChangeSorce(isYourUpload: isYourUpload)
+            needReloadData()
+        }
+    }
 }
