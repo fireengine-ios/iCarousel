@@ -219,11 +219,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 actionTypes = [.createStory, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                 actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
-                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
+                actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
             case .video:
                 actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
+                actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
                 
             case .photoAlbum: // TODO add for Alboum
                 break
