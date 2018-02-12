@@ -253,7 +253,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var allItemsMD5 = allItemsArray.map{return $0.md5}
         
         if !isPaginationDidEnd {
-            guard let lastRemoteObject = originalItemsArray.last else {
+            guard let lastRemoteObject = getLastNonMetaEmptyItem(items: originalItemsArray) else {
                 return originalItemsArray + tempoLocalArray
             }
             for localItem in tempoLocalArray {
@@ -336,6 +336,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
         return tempoArray
+    }
+    
+    private func getLastNonMetaEmptyItem(items: [WrapData]) -> WrapData? {
+        for item in items.reversed() {
+            if item.metaData?.takenDate != nil {
+                return item
+            }
+        }
+        return items.last
     }
     
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
