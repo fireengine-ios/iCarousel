@@ -36,6 +36,8 @@ struct TextConstants {
     static let loginScreenCredentialsError = NSLocalizedString("Login denied. Please check your credentials.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenInvalidCaptchaError = NSLocalizedString("This text doesn't match. Please try again.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginScreenInvalidLoginError = NSLocalizedString("Please enter a valid login.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginScreenAuthWithTurkcellError = NSLocalizedString("Authentication with Turkcell Password is disabled for the account", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginScreenNeedSignUpError = NSLocalizedString("You don't have any lifebox account. Please signup before using the application", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationPasswordError = NSLocalizedString("Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hourBlockLoginError = NSLocalizedString("You have performed too many attempts. Please try again later.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationMailError = NSLocalizedString("Please check the e-mail address.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -406,6 +408,8 @@ struct TextConstants {
     //MARK: Create story Audio
     static let createStoryNoSelectedAudioError = NSLocalizedString("Sorry, but story audio should not be empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryAudioSelected = NSLocalizedString("Add Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryAudioMusics = NSLocalizedString("Musics", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let createStoryAudioYourUploads = NSLocalizedString("Your Uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
     //MARK: Create story Photo Order

@@ -124,7 +124,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             
             if let createdDate = obj.creationDate {
                 uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
-                if obj.isSynced(), let takenDate = obj.metaData?.takenDate, createdDate != takenDate {
+                if !obj.isLocalItem, let takenDate = obj.metaData?.takenDate, createdDate != takenDate {
                     takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
                 } else {
                     takenDateLabel.isHidden = true

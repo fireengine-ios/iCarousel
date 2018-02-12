@@ -15,7 +15,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaseFilesGreedViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateStoryAudioSelectionViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="0Sm-wn-Msc" id="6uf-wF-aXI"/>
                 <outlet property="floatingHeaderContainerHeightConstraint" destination="J3A-WS-4mi" id="c9c-o0-s47"/>
@@ -24,6 +24,7 @@
                 <outlet property="noFilesTopLabel" destination="0lC-K4-1ac" id="TJd-tm-6eI"/>
                 <outlet property="noFilesView" destination="ZI3-Dh-bXS" id="Tf2-p8-qvW"/>
                 <outlet property="noFilesViewCenterOffsetConstraint" destination="ecm-g2-fmI" id="Fcz-05-QYh"/>
+                <outlet property="segmentControll" destination="zbJ-nq-R7K" id="ssb-3q-0Z8"/>
                 <outlet property="startCreatingFilesButton" destination="UTy-IA-Avr" id="Sud-hD-HCs"/>
                 <outlet property="topBarContainer" destination="Stl-Nh-W5a" id="rEa-AX-y5Q"/>
                 <outlet property="topCarouselConstraint" destination="4Ku-N6-Bxb" id="eh8-Yy-iOw"/>
@@ -40,7 +41,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Sm-wn-Msc">
-                    <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                    <rect key="frame" x="0.0" y="134" width="414" height="602"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zh9-vP-dOD">
                         <size key="itemSize" width="50" height="50"/>
@@ -105,21 +106,38 @@
                         <constraint firstAttribute="height" id="J3A-WS-4mi"/>
                     </constraints>
                 </view>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zbJ-nq-R7K">
+                    <rect key="frame" x="97.666666666666686" y="77" width="219" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="219" id="9ap-bP-AuX"/>
+                        <constraint firstAttribute="height" constant="28" id="v7E-gt-cOw"/>
+                    </constraints>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                    <color key="tintColor" red="0.019607843137254902" green="0.1764705882352941" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="segmentControlValueChangedWithSender:" destination="-1" eventType="valueChanged" id="wAn-Yt-a2p"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="0lC-K4-1ac" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="1b8-sN-taw"/>
                 <constraint firstItem="Stl-Nh-W5a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="4Ku-N6-Bxb"/>
+                <constraint firstItem="zbJ-nq-R7K" firstAttribute="top" secondItem="Stl-Nh-W5a" secondAttribute="bottom" constant="13" id="9tv-X3-NoZ"/>
                 <constraint firstAttribute="bottom" secondItem="Umz-wA-WsK" secondAttribute="bottom" id="BPZ-rn-X4w"/>
                 <constraint firstAttribute="bottom" secondItem="0Sm-wn-Msc" secondAttribute="bottom" id="CRt-nA-Xxz"/>
                 <constraint firstItem="ZI3-Dh-bXS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="KWm-Z2-COp"/>
                 <constraint firstItem="Umz-wA-WsK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KWu-1M-rJ8"/>
                 <constraint firstItem="Umz-wA-WsK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="TwY-91-F59"/>
-                <constraint firstItem="0Sm-wn-Msc" firstAttribute="top" secondItem="Stl-Nh-W5a" secondAttribute="bottom" id="Tzl-Wf-Mm3"/>
+                <constraint firstItem="zbJ-nq-R7K" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VUv-XZ-kwc"/>
                 <constraint firstAttribute="trailing" secondItem="Umz-wA-WsK" secondAttribute="trailing" id="X5G-x9-7Af"/>
                 <constraint firstItem="0Sm-wn-Msc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YzH-h9-xQd">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
+                <constraint firstItem="0Sm-wn-Msc" firstAttribute="top" secondItem="zbJ-nq-R7K" secondAttribute="bottom" constant="29" id="bgb-Ds-Te0"/>
                 <constraint firstAttribute="trailing" secondItem="0Sm-wn-Msc" secondAttribute="trailing" id="dLF-Ta-wrF">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>

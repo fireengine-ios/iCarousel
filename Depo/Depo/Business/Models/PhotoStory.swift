@@ -18,12 +18,15 @@ class PhotoStory: NSObject {
     }
     
     func photoStoryRequestParameter() -> CreateStory?{
-        if let music_ = music{
+        if let music = music{
             let idsArray = storyPhotos.map{
                 $0.uuid
             }
-            let story = CreateStory(name: storyName, imageuuid: idsArray, musicId: music_.id)
-            return story
+            if music.metaData != nil{
+                return CreateStory(name: storyName, imageuuid: idsArray, musicUUID: music.uuid)
+            }else{
+                return CreateStory(name: storyName, imageuuid: idsArray, musicId: music.id)
+            }
         }
         return nil
     }
