@@ -94,7 +94,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
-        isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
+        isHeaderless ? setupOneSectionMediaItemsArray(items: allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
+    }
+    
+    private func setupOneSectionMediaItemsArray(items: [WrapData]) {
+        allItems.removeAll()
+        allItems.append(items)
     }
     
     private func isLocalOnly() -> Bool {
@@ -405,6 +410,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getAllLocalItems() -> [WrapData] {
+        guard let unwrapedFilters = originalFilters,
+            let specificFilters = getFileFilterType(filters: unwrapedFilters),
+            isOnlyNonLocal(filters: unwrapedFilters),
+            specificFilters == .video && specificFilters == .image else {
+            return []
+        }
+
         let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
         let predicate = PredicateRules().predicate(filters: [.localStatus(.local)])
         let sortDescriptors = CollectionSortingRules(sortingRules: currentSortType).rule.sortDescriptors
@@ -432,8 +444,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         allItems.removeAll()
         allMediaItems.removeAll()
-        self.allLocalItems.removeAll()
-        self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+        allLocalItems.removeAll()
+        allLocalItems.append(contentsOf: getAllLocalItems())
         DispatchQueue.main.async {
             
             if self.isLocalOnly() {
@@ -465,8 +477,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         self.allLocalItems.append(contentsOf: self.getAllLocalItems())
         
         DispatchQueue.main.async {
-            
-            
             if self.isLocalOnly() {
                 self.allItems = [self.allLocalItems]
                 self.reloadData()
