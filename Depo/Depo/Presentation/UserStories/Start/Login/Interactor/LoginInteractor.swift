@@ -84,7 +84,7 @@ class LoginInteractor: LoginInteractorInput {
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.output?.needShowCaptcha()
                 } else if (!self.checkInternetConnection()) {
-                    self.output?.failLogin(message: TextConstants.loginScreenNoInternetError)
+                    self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
                 } else if self.isAuthenticationDisabledForAccount(forResponse: errorResponse) {
                     self.output?.failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
                 } else if self.isNeedSignUp(forResponse: errorResponse) {
