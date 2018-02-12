@@ -161,7 +161,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private func isOnlyNonLocal(filters: [GeneralFilesFiltrationType]) -> Bool {
         for filter in filters {
             switch filter {
-            case   .localStatus(.nonLocal):
+            case .localStatus(.nonLocal):
                 return true
             default:
                 break
@@ -410,10 +410,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getAllLocalItems() -> [WrapData] {
-        guard let unwrapedFilters = originalFilters,
+        guard
+            let unwrapedFilters = originalFilters,
             let specificFilters = getFileFilterType(filters: unwrapedFilters),
-            isOnlyNonLocal(filters: unwrapedFilters),
-            specificFilters == .video && specificFilters == .image else {
+            !isOnlyNonLocal(filters: unwrapedFilters),
+            (specificFilters == .video || specificFilters == .image)
+        else {
             return []
         }
 

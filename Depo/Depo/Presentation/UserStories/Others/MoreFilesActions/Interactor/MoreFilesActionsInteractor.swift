@@ -44,7 +44,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] (action) in
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareSmallSize(sourceRect: sourceRect)
-            }, cancel: {})
+            }, cancel: {}, fail: { errorResponse in
+                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+            })
         }
         
         controler.addAction(smallAction)
@@ -52,14 +54,18 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] (action) in
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareOrignalSize(sourceRect: sourceRect)
-            }, cancel: {})
+            }, cancel: {}, fail: { errorResponse in
+                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+            })
         }
         controler.addAction(originalAction)
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] (action) in
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
-            }, cancel: {})
+            }, cancel: {}, fail: { errorResponse in
+                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+            })
         }
         controler.addAction(shareViaLinkAction)
         
@@ -387,7 +393,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             DispatchQueue.main.async {
                 router.createStoryName(items: items)
             }
-        }, cancel: {})
+        }, cancel: {}, fail: { errorResponse in
+            UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+        })
     }
     
     func addToFavorites(items: [BaseDataSourceItem]) {
@@ -417,7 +425,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             DispatchQueue.main.async {
                 router.pushViewController(viewController: vc)
             }
-        }, cancel: {})
+        }, cancel: {}, fail: { errorResponse in
+            UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+        })
     }
     
     func backUp(items: [BaseDataSourceItem]) {
@@ -524,7 +534,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         return failResponse
     }
     
-    private func sync(items: [BaseDataSourceItem]?, action: @escaping () -> Void, cancel: @escaping () -> Void, fail: FailResponse? = nil) {
+    private func sync(items: [BaseDataSourceItem]?, action: @escaping () -> Void, cancel: @escaping () -> Void, fail: FailResponse?) {
         guard let items = items as? [WrapData] else { return }
         let successClosure = { [weak self] in
             DispatchQueue.main.async {
@@ -532,6 +542,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 action()
             }
         }
+        
         let failClosure: FailResponse = { [weak self] (errorResponse) in
             DispatchQueue.main.async {
                 self?.output?.compliteAsyncOperationEnableScreen()

@@ -176,7 +176,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                 return
             }
             
-            if case ErrorResponse.httpCode(413) = error {
+            if error.isOutOfSpaceError {
                 self.delegate?.didReceiveOutOfSpaceError()
             } else {
                 self.delegate?.didReceiveError()
