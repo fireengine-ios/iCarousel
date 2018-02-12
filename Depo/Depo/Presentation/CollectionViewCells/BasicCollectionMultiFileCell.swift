@@ -85,21 +85,21 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         }
     }
     
-    override func setPlaceholderImage(fileType: FileType) {
-        var image: UIImage?
-        
-        switch fileType {
-        case .folder:
-            image = isBigSize() ? UIImage(named: "fileBigIconFolder") : UIImage(named: "fileIconFolder")
-        case .audio:
-            image = isBigSize() ? UIImage(named: "fileBigIconAudio") : UIImage(named: "fileIconAudio")
-        case let .application(applicationType):
-            image = isBigSize() ? applicationType.bigIconImage() : applicationType.smallIconImage()
-        default:
-            image = nil
-        }
-        setImage(image: image, animated: false)
-    }
+//    override func setPlaceholderImage(fileType: FileType) {
+//        var image: UIImage?
+//        
+//        switch fileType {
+//        case .folder:
+//            image = isBigSize() ? UIImage(named: "fileBigIconFolder") : UIImage(named: "fileIconFolder")
+//        case .audio:
+//            image = isBigSize() ? UIImage(named: "fileBigIconAudio") : UIImage(named: "fileIconAudio")
+//        case let .application(applicationType):
+//            image = isBigSize() ? applicationType.bigIconImage() : applicationType.smallIconImage()
+//        default:
+//            image = nil
+//        }
+//        setImage(image: image, animated: false)
+//    }
     
     private func isBigSize() -> Bool{
         return frame.size.height > BasicCollectionMultiFileCell.frameSize
