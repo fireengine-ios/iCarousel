@@ -11,8 +11,6 @@ import UIKit
 class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, UICollectionViewDelegate, SearchModuleOutput {
 
     var output: HomePageViewOutput!
-    
-    var navBarConfigure = NavigationBarConfigurator()
 
     @IBOutlet weak var contentView: UIView!
     
@@ -63,31 +61,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         
-        var controllersArray = [UIViewController]()
-        
-        let viewContr0 = WelcomeModuleInitializer.initializeViewController(with: "WelcomeViewController")
-        let viewContr1 = CompleteProfileModuleInitializer.initializeViewController(with: "CompleteProfileViewController")
-        let viewContr2 = WiFiSyncModuleInitializer.initializeViewController(with: "WiFiSyncViewController")
-        let viewContr3 = ExpandStorageModuleInitializer.initializeViewController(with: "ExpandStorageViewController")
-        let viewContr4 = UploadedItemsModuleInitializer.initializeViewController(with: "UploadedItemsViewController")
-        let viewContr5 = LikeFilterModuleInitializer.initializeViewController(with: "LikeFilterViewController")
-        
-        if (Device.isIpad){
-            controllersArray.append(viewContr0)
-            controllersArray.append(viewContr1)
-            controllersArray.append(viewContr2)
-            controllersArray.append(viewContr3)
-            controllersArray.append(viewContr4)
-            controllersArray.append(viewContr5)
-        }else{
-            controllersArray.append(viewContr0)
-            controllersArray.append(viewContr2)
-            controllersArray.append(viewContr4)
-            controllersArray.append(viewContr1)
-            controllersArray.append(viewContr3)
-            controllersArray.append(viewContr5)
-        }
-        homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, data: controllersArray, delegate: self)
+        homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         
         output.homePagePresented()
     }

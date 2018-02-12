@@ -14,7 +14,6 @@ struct RouteRequests {
     
     static let BaseUrl: URL = URL(string: "https://adepo.turkcell.com.tr/")!
     static let BaseContactsUrl: URL = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
-    static let TestUrl = "https://tcloudstb.turkcell.com.tr/"
     static let NewURL: URL = URL(string: "https://mylifebox.com/")!
     
     static let httpAuthification = "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
@@ -75,7 +74,6 @@ struct RouteRequests {
     
     static let albumList    = "/api/album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"
     static let details      = "/api/album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
-    static let setCoverPhoo = "/api/album/coverPhoto/%@?coverPhotoUuid=%@"
     
     // MARK: My Streams
     

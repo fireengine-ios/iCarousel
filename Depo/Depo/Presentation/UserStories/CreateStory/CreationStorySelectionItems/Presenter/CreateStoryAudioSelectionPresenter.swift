@@ -50,7 +50,6 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
             UIApplication.showErrorAlert(message: TextConstants.createStoryNoSelectedAudioError)
         }
         
-//        SingleSong.default.stop()
         player.stop()
     }
     
@@ -65,17 +64,13 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
         return CGSize(width: view.getCollectionViewWidth(), height: 46)
     }
     
-//    override func getContentWithSuccess(array: [[WrapData]]){
-//        if (view == nil){
-//            return
-//        }
-//        //
-//        asyncOperationSucces()
-//        view.stopRefresher()
-//        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
-//            dataSourceForArray.configurateWithArray(array: array)
-//        }else{
-//            dataSource.reloadData()
-//        }
-//    }
+    func onChangeSorce(isYourUpload: Bool){
+        if let interactor = interactor as? CreateStorySelectionInteractor{
+            if let dataSource = dataSource as? AudioSelectionDataSource{
+                dataSource.tableDataMArray.removeAll()
+            }
+            interactor.onChangeSorce(isYourUpload: isYourUpload)
+            needReloadData()
+        }
+    }
 }

@@ -63,10 +63,6 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
     var subscriptionPlanInAppPurchaseId: String?
     var subscriptionPlanType: String?
     
-    func parseSubScription() {
-        
-    }
-    
     override func mapping() {
         createdDate = json?[SubscriptionConstants.createdDate].number
         lastModifiedDate = json?[SubscriptionConstants.lastModifiedDate].number

@@ -92,7 +92,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="bacgroundView" destination="Oa9-hs-Yj6" id="3pT-8C-eJy"/>
+                <outlet property="backgroundView" destination="Oa9-hs-Yj6" id="p1b-2f-ckD"/>
                 <outlet property="bottomButton" destination="M5S-bt-Nck" id="TfC-0U-18C"/>
                 <outlet property="iconView" destination="Qe9-qo-i3A" id="sVz-Hv-RdK"/>
                 <outlet property="subTileLabel" destination="mY8-Qy-c8h" id="N7R-qx-SF2"/>

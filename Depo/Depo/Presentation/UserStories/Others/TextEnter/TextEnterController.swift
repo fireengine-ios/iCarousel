@@ -12,10 +12,6 @@ typealias TextEnterHandler = (_ text: String, _ vc: TextEnterController) -> Void
 
 final class TextEnterController: UIViewController {
     
-    deinit {
-        print("--- TextEnterController")
-    }
-    
     // MARK: - Static
     
     static func with(title: String, textPlaceholder: String? = nil, buttonTitle: String, buttonAction: TextEnterHandler? = nil) -> TextEnterController {

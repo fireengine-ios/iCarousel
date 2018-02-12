@@ -29,10 +29,4 @@ class DataStorage {
     func getModels() -> [BaseCellModel] {
         return models
     }
-    
-    func configurateModel(forIndex index: Int, withValue value: String) {
-        let model = models[index]
-        let newModel = BaseCellModel(withTitle: model.title, initialText: value)
-        models[index] = newModel
-    }
 }

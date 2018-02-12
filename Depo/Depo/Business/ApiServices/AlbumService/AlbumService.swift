@@ -7,14 +7,12 @@
 //
 
 struct AlbumsPatch  {
-    
     static let album =  "/api/album"
-    static let deleteAlbumss =  "/api/album"
+//    static let deleteAlbumss =  "/api/album"
     static let addPhotosToAlbum = "/api/album/addFiles/%@"
     static let deletePhotosFromAlbum = "/api/album/removeFiles/%@"
     static let renameAlbum = "/api/album/rename/%@?newLabel=%@"
     static let changeCoverPhoto = "/api/album/coverPhoto/%@?coverPhotoUuid=%@"
-    
 }
 
 class CreatesAlbum: BaseRequestParametrs {
@@ -26,7 +24,8 @@ class CreatesAlbum: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
-        let dict: [String: Any] = [SearchJsonKey.albumName: albumName, SearchJsonKey.contentType: SearchJsonKey.contentTypeAlbum]
+        let dict: [String: Any] = [SearchJsonKey.albumName: albumName,
+                                   SearchJsonKey.contentType: SearchJsonKey.contentTypeAlbum]
         return dict
     }
     
@@ -110,7 +109,8 @@ class RenameAlbum: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format: AlbumsPatch.renameAlbum, albumUUID, newName)
+        let encodingName = newName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? newName
+        let path: String = String(format: AlbumsPatch.renameAlbum, albumUUID, encodingName)
         return URL(string: path, relativeTo: super.patch)!
     }
 }
@@ -148,7 +148,8 @@ class AlbumService: RemoteItemsService {
             self?.currentPage += 1
             let list = resultResponse.list.flatMap { AlbumItem(remote: $0) }
             success(list)
-        }, fail: { _ in
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
             log.debug("AlbumService remote searchAlbums fail")
 
             fail()

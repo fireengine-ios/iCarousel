@@ -9,7 +9,7 @@
 import Foundation
 
 class CounrtiesGSMCodeCompositor {
-    
+        
     func getGSMCCModels() -> [GSMCodeModel] {
         return getLocals()
     }
@@ -20,13 +20,13 @@ class CounrtiesGSMCodeCompositor {
         let coreTelephonyService = CoreTelephonyService()
         let countryCodes = coreTelephonyService.callingCodeMap()
         let isoCodes = NSLocale.isoCountryCodes
+        let locale = NSLocale(localeIdentifier: Device.supportedLocale)
         
         resulArray = isoCodes.flatMap {
             
             let countryCode: String = $0
-            let contryName = (NSLocale.system as NSLocale).displayName(forKey:NSLocale.Key.countryCode,
-                                                                   value: countryCode)
-            guard let phoneCode  = countryCodes[countryCode.uppercased()],
+            let contryName = locale.displayName(forKey:NSLocale.Key.countryCode, value: countryCode)
+            guard let phoneCode = countryCodes[countryCode.uppercased()],
                   let unwrapedcontryName = contryName
             else {
                 return nil
@@ -42,5 +42,4 @@ class CounrtiesGSMCodeCompositor {
         
         return resulArray
     }
-
 }

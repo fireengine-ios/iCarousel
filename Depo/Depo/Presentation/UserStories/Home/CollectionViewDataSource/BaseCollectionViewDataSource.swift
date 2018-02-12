@@ -29,7 +29,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     var isEnable: Bool = true
     var isActive: Bool = false
     
-    func configurateWith(collectionView: UICollectionView, viewController:UIViewController, data:[UIViewController], delegate:BaseCollectionViewDataSourceDelegate?){
+    func configurateWith(collectionView: UICollectionView, viewController:UIViewController, delegate:BaseCollectionViewDataSourceDelegate?){
         
         self.collectionView = collectionView
         collectionView.dataSource = self
@@ -120,27 +120,6 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 print("finished competition")
             })
         }else{
-            collectionView.reloadData()
-        }
-    }
-    
-    func deleteCellAtIndex(index: Int){
-        var needReload = true
-        if (isActive){
-            let rowIndexes = collectionView.indexPathsForVisibleItems.map({ $0.row })
-            if rowIndexes.contains(index){
-                needReload = false
-                popUps.remove(at: index)
-                collectionView.performBatchUpdates({
-                    let indexPath = IndexPath(row: index, section: 0)
-                    self.collectionView.deleteItems(at: [indexPath])
-                }, completion: { (succes) in
-                    print("finished competition")
-                })
-            }
-        }
-        
-        if needReload {
             collectionView.reloadData()
         }
     }

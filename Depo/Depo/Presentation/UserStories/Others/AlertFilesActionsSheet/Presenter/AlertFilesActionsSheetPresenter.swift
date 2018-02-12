@@ -94,14 +94,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 actionTypes = [.createStory, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                 actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
-                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
-                if item.isSynced() {
+                actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
+                if !item.isLocalItem {
                     actionTypes.append(.delete)
                 }
             case .video:
                 actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
+                actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
                 
             case .photoAlbum: // TODO add for Alboum
                 break
@@ -133,12 +133,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         return actionTypes
     }
     
-    override func infoAction() {
-        debugPrint("info File acton pressed, no action available")
-        //        self.router.onInfo(object: currentItems.first!)
-        //        self.view.unselectAll()
-    }
-    
     private func constractSpecifiedActions(with types: [ElementTypes],
                                            for items: [BaseDataSourceItem]?,
                                            excludeTypes: [ElementTypes] = [ElementTypes]()) -> [UIAlertAction] {
@@ -155,6 +149,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 filteredActionTypes.append(.removeFromFavorites)
             } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
                 filteredActionTypes.remove(at: removeFromFavorites)
+            }
+            
+            let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems)
+            if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal){
+                filteredActionTypes.remove(at: index)
             }
         } else {
             if let printIndex = filteredActionTypes.index(of: .print) {
@@ -319,6 +318,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
                     self.basePassingPresenter?.selectAllModeSelected()
                     //                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
+                })
+            case .deSelectAll:
+                action = UIAlertAction(title: TextConstants.actionSheetDeSelectAll, style: .default, handler: { _ in
+                    self.basePassingPresenter?.deSelectAll()
                 })
             case .print:
                 action = UIAlertAction(title: "Print", style: .default, handler: { _ in

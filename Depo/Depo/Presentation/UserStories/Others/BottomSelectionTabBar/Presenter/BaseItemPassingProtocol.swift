@@ -13,6 +13,7 @@ protocol BaseItemInputPassingProtocol: class {
     
     func selectModeSelected()
     func selectAllModeSelected()
+    func deSelectAll()
     func stopModeSelected()
 
     func printSelected()
@@ -22,8 +23,6 @@ protocol BaseItemInputPassingProtocol: class {
 }
 
 protocol BaseItemOuputPassingProtocol: class {
-    func preparedSelectedItems(items: [Item])
-    
     func dismiss(animated: Bool)
     func show(animated: Bool, onView sourceView: UIView?)//
 }

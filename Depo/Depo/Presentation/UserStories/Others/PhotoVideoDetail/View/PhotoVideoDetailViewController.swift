@@ -11,7 +11,7 @@ import AVKit
 import AVFoundation
 import Photos
 
-class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewInput, BaseFileContentViewDeleGate {
+class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewInput, BaseFileContentViewDelegate, ItemOperationManagerViewProtocol {
     
     typealias Item = WrapData
     
@@ -43,6 +43,8 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        ItemOperationManager.default.startUpdateView(view: self)
+        OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         configurateView()
         onStopPlay()
         rootNavController(vizible: true)
@@ -58,6 +60,10 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         }
     }
     
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateFramesForViews()
@@ -71,6 +77,14 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         floatingView.hideView(animated: true)
         output.viewWillDisappear()
+        
+        /// set previous state of orientation or any new one
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateFramesForViews()
     }
     
     private func configureNavigationBar() {
@@ -79,7 +93,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             if hideActions {
                 navigationItem.rightBarButtonItem?.customView?.isHidden = true
             } else {
-                navigationItem.rightBarButtonItem?.customView?.isHidden = !item.isSynced()
+                navigationItem.rightBarButtonItem?.customView?.isHidden = item.isLocalItem
             }
         }
     }
@@ -248,13 +262,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             configurateAll()
         }
     }
-    
-    func getActionMenyItemsForObject(object: WrapData) -> [ActionMenyItem] {
-        if (object.fileType.isApplication) {
-            return getActionsForDocumentObject(object: object)
-        }
-        return getActionsForMostPartOfObjects(object: object)
-    }
 
     @objc func onRightBarButtonItem(sender: UIButton) {
         
@@ -294,7 +301,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                 return
             }
             
-//            SingleSong.default.pause()
             player.pause()
             
             playerController?.player = nil
@@ -306,7 +312,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             
             switch file.patchToPreview {
             case let .localMediaContent(local):
-                //localManager.getPreviewImage(asset: local.asset, image: compliteImage)
                 let option = PHVideoRequestOptions()
                 option.isNetworkAccessAllowed = true
                 
@@ -324,11 +329,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                         
                     })
                 }
-                
-//                [[PHImageManager defaultManager] requestAVAssetForVideo:videoAsset options:option resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
-//                    resultAsset = avasset;
-//                    dispatch_semaphore_signal(semaphore);
-//                    }];
                 
             case .remoteUrl(_):
                 let playerItem = AVPlayerItem(url:url)
@@ -354,55 +354,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         if Device.operationSystemVersionLessThen(11) {
             UIApplication.shared.isStatusBarHidden = false
         }
-//        playerController?.player = nil
-//        playerController?.removeFromParentViewController()
-//        playerController = nil
-//        player?.pause()
-//        player = nil
-//        player = AVPlayer()
-//        player!.replaceCurrentItem(with: nil)
-    }
-    
-    
-    //MARK actions meny 
-    
-    func getActionsForDocumentObject(object: WrapData) -> [ActionMenyItem] {
-        var actions = [ActionMenyItem]()
-        
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionCopy, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionDocumentDetail, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionAddToFavorites, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        return actions
-    }
-    
-    func getActionsForMostPartOfObjects(object: WrapData) -> [ActionMenyItem] {
-        var actions = [ActionMenyItem]()
-        
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionMove, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionRemoveFromAlbum, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionAddToFavorites, action: {
-            [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        actions.append(ActionMenyItem.init(name: TextConstants.actionsMenuActionDeleteDeviceOriginal, action: { [weak self] in
-            self?.floatingView.hideView(animated: true)
-        }))
-        return actions
     }
     
     func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
@@ -456,6 +407,19 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     func pageToLeft() {
         swipeRight(competition: {})
+    }
+    
+    // MARK: ItemOperationManagerViewProtocol
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        if let compairedView = object as? PhotoVideoDetailViewController {
+            return compairedView == self
+        }
+        return false
+    }
+    
+    func finishedUploadFile(file: WrapData){
+        output.setSelectedItemIndex(selectedIndex: selectedIndex)
+        configureNavigationBar()
     }
     
 }

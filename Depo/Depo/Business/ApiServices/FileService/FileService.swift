@@ -47,7 +47,8 @@ class CreatesFolder: BaseRequestParametrs {
     }
     
     override var header: RequestHeaderParametrs {
-        return super.header + ["Folder-Name":folderName]
+        let name = folderName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? folderName
+        return super.header + ["Folder-Name": name]
     }
 }
 
@@ -116,21 +117,6 @@ class CopyFiles: BaseRequestParametrs {
     }
 }
 
-
-class UploadFile: BaseRequestParametrs {
-    
-    let urlToFile: URL
-    
-    init(url: URL) {
-        urlToFile = url
-    }
-    
-    override var patch: URL {
-        return urlToFile
-    }
-}
-
-
 class RenameFile: BaseRequestParametrs {
     
     let uuid: String
@@ -151,7 +137,8 @@ class RenameFile: BaseRequestParametrs {
     }
     
     override var header: RequestHeaderParametrs {
-        return super.header + ["New-Name":newName]
+        let name = newName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? newName
+        return super.header + ["New-Name": name]
     }
 }
 
@@ -247,13 +234,6 @@ class DetailResponse: ObjectRequestResponse {
     }
 }
 
-class DetailsResponse: ObjectRequestResponse {
-    
-    override func mapping() {
-        print("A")
-    }
-}
-
 typealias FileOperation = () -> Swift.Void
 
 class FileService: BaseRequestService {
@@ -324,6 +304,8 @@ class FileService: BaseRequestService {
     
     //MARK: download && upload
     
+    private var error: ErrorResponse?
+    
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail:FailResponse?) {
         log.debug("FileService download")
 
@@ -341,16 +323,23 @@ class FileService: BaseRequestService {
                 CardsManager.default.setProgressForOperationWith(type: .download,
                                                                             allOperations: allOperationsCount,
                                                                             completedOperations: completedOperationsCount)
-            }, fail: { (error) in
+            }, fail: { [weak self] error in
                 log.debug("FileService download DownLoadOperation fail")
+                
+                self?.error = error
+                /// HERE MUST BE ERROR HANDLER
             })
         }
         
         dispatchQueue.async {
             self.downloadOperation.addOperations(operations, waitUntilFinished: true)
             CardsManager.default.stopOperationWithType(type: .download)
-            FreeAppSpace.default.checkFreeAppSpace()
-            success?()
+            
+            if let error = self.error {
+                fail?(error)
+            } else {
+                success?()
+            }
         }
     }
     
@@ -482,8 +471,8 @@ class FileService: BaseRequestService {
                 return
             }
             success?(resultResponse)
-//            self.page += 1
-        }, fail: { (error) in
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
             fail?()
         })
         
@@ -506,14 +495,17 @@ class DownLoadOperation: Operation {
         self.success = success
         self.fail = fail
         self.semaphore = DispatchSemaphore(value: 0)
+        
         super.init()
+        
+        SingletonStorage.shared.progressDelegates.add(self)
     }
     
     override func main() {
-        
         if isCancelled {
             return
         }
+        
         FileService().downloadToCameraRoll(downloadParam: param, success: {
             self.customSuccess()
         }) { (error) in
@@ -525,6 +517,11 @@ class DownLoadOperation: Operation {
     func customSuccess(){
         success?()
         semaphore.signal()
+        if let item = param.item{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                ItemOperationManager.default.finishedDowloadFile(file: item)
+            })
+        }
     }
     
     func customFail(_ value: ErrorResponse){
@@ -532,3 +529,21 @@ class DownLoadOperation: Operation {
         semaphore.signal()
     }
 }
+
+
+extension DownLoadOperation: OperationProgressServiceDelegate {
+    
+    func didSend(ratio: Float, for tempUUID: String) {
+        guard isExecuting else {
+            return
+        }
+        
+        if let item = param.item, item.uuid == tempUUID {
+            CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
+//            ItemOperationManager.default.setProgressForUploadingFile(file: item, progress: ratio)
+            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
+        }
+    }
+}
+
+

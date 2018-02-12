@@ -11,10 +11,6 @@ import iCarousel
 import SDWebImage
 import MediaPlayer
 
-protocol VisualMusicPlayerViewControllerDelegate: class {
-    func playPauseButtonGotSelected(selected: Bool)
-}
-
 class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewInput {
     var output: VisualMusicPlayerViewOutput!
     

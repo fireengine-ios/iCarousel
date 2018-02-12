@@ -57,6 +57,11 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         interactor.login()
     }
     
+    func failedWithInternetError(errorMessage: String) {
+        view?.stopActivityIndicator()
+        view?.failedDropboxStart(errorMessage: errorMessage)
+    }
+    
     // MARK: login, Token
     
     func loginSuccessCallback(token: String) {

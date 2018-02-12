@@ -23,7 +23,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                         }
                         out.uploadOperationSuccess()
                     }
-                    ItemOperationManager.default.fileAddedToAlbum()
+                    ItemOperationManager.default.filesAddedToAlbum()
                 }
             }, fail: { [weak self] (error) in
                 DispatchQueue.main.async {
@@ -44,6 +44,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                         }
                         out.uploadOperationSuccess()
                     }
+                    ItemOperationManager.default.filesUploadToFolder()
                 }
             }, fail: { [weak self] (fail) in
                 DispatchQueue.main.async {

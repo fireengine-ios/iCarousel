@@ -13,7 +13,7 @@ protocol CustomNavBarViewActionDelegate: class {
     func navBarBackButtonPressed()
 }
 
-class CustomNavBarView: UIView, CustomNavigationButtonContainerActionsDelegate, UISearchBarDelegate {
+class CustomNavBarView: UIView, UISearchBarDelegate {
     
     static let nibName = "CustomNavBar"
     
@@ -29,11 +29,6 @@ class CustomNavBarView: UIView, CustomNavigationButtonContainerActionsDelegate, 
         get {
             return logoImage.isHidden
         }
-    }
-
-    func checkIs11IOS() -> Bool{
-        let os = ProcessInfo().operatingSystemVersion
-        return os.majorVersion == 11
     }
     
     class func getFromNib() -> CustomNavBarView? {
@@ -57,13 +52,5 @@ class CustomNavBarView: UIView, CustomNavigationButtonContainerActionsDelegate, 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         
         return false
-    }
-    
-    
-    //MARK: - actionDelegate
-    
-    func buttonGotPressed(withCustomButton customNavButton: CustomNavBarButton) {
-        actionDelegate?.navBarButtonGotPressed(button: customNavButton)
-        
     }
 }

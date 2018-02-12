@@ -95,12 +95,7 @@ class SliderItem {
 
 class LBAlbumLikePreviewSliderDataStorage {
     
-    var albumItems: [AlbumItem] = []
     var storyItems: [Item] = []
-    var peopleItems: [Item] = []
-    var thingItems: [Item] = []
-    var placeItems: [Item] = []
-    
     var currentItems: [SliderItem] = []
     
     func addNew(item: SliderItem) {

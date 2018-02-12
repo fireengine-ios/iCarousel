@@ -15,9 +15,9 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
         switch selectedItem.fileType {
         case .image, .video:
             var barConfig = photoVideoBottomBarConfig!
-            if !selectedItem.isSynced() {
+            if selectedItem.isLocalItem {
                 barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.sync], style: .black, tintColor: nil)
-            } else if selectedItem.isSynced() {
+            } else {
                 barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.download], style: .black, tintColor: nil)
             }
             return barConfig

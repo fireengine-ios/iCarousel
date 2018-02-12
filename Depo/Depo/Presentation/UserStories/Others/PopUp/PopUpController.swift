@@ -224,7 +224,7 @@ final class PopUpController: UIViewController {
         button.isExclusiveTouch = true
         button.setTitleColor(ColorConstants.blueColor, for: .normal)
         button.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
-        button.setBackgroundColor(ColorConstants.blueColor.darker(by: 10), for: .highlighted)
+        button.setBackgroundColor(ColorConstants.blueColor, for: .highlighted)
         button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
         button.layer.borderColor = ColorConstants.blueColor.cgColor
         button.layer.borderWidth = 1

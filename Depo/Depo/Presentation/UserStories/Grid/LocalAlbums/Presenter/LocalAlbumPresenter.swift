@@ -14,6 +14,7 @@ class LocalAlbumPresenter: BaseFilesGreedPresenter {
         dataSource = ArrayDataSourceForCollectionView()
         interactor.viewIsReady()
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.localAlbumCell)
+        dataSource.canSelectionState = false
         
         super.viewIsReady(collectionView: collectionView)
         

@@ -12,6 +12,8 @@ typealias ListRemoveItems = ( [WrapData] ) -> Void
 
 typealias ListRemoveAlbums = ( [AlbumItem] ) -> Void
 
+typealias AlbumCoverPhoto = ( Item ) -> Void
+
 typealias FailRemoteItems = () -> Void
 
 
@@ -135,10 +137,11 @@ class RemoteItemsService {
             log.debug("RemoteItemsService getSuggestion SearchService suggestion success")
             
             success((suggestList as! SuggestionResponse).list)
-        }) { (error) in
+        }) { errorResponce in
+            errorResponce.showInternetErrorGlobal()
             log.debug("RemoteItemsService getSuggestion SearchService suggestion fail")
 
-            fail(error)
+            fail(errorResponce)
         }
     }
     
@@ -198,7 +201,8 @@ class NextPageOperation: Operation {
             self.success?(list)
             semaphore.signal()
             
-        }, fail: { [weak self]_ in
+        }, fail: { [weak self] errorResponce in
+            errorResponce.showInternetErrorGlobal()
             self?.fail?()
             semaphore.signal()
         })
@@ -287,11 +291,11 @@ class StoryService: RemoteItemsService {
             self?.currentPage += 1
             let list = resultResponse.list.flatMap{ Item(remote: $0) }
             success?(list)
-            }, fail: { _ in
-                    log.debug("StoryService remote searchStories fail")
-    
-                    fail?()
-            })
+        }, fail: {  errorResponce in
+            errorResponce.showInternetErrorGlobal()
+            log.debug("StoryService remote searchStories fail")
+            fail?()
+        })
     }
 }
 

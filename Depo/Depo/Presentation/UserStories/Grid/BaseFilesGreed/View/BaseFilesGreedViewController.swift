@@ -62,6 +62,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     let underNavBarBarHeight: CGFloat = 53
     
     @IBOutlet private weak var topCarouselConstraint: NSLayoutConstraint!
+    
     // MARK: Life cycle
     
     override func viewDidLoad() {
@@ -102,12 +103,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
         
         output.viewIsReady(collectionView: collectionView)
-        
-        //carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
-        
-//        if #available(iOS 11.0, *) {
-//            topCarouselConstraint.constant = underNavBarBarHeight//0
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,9 +113,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
-//        if let unwrapedSlider = contentSlider { //FIXME: shiwt reload mechanic to presenter, so modules would speak as normal
-//            unwrapedSlider.reloadAllData()
-//        }
         
         let allVisibleCells = collectionView.indexPathsForVisibleItems
         if !allVisibleCells.isEmpty{
@@ -136,6 +128,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         super.viewDidAppear(animated)
         configurateNavigationBar()
         configurateViewForPopUp()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        /// need when device was rotated
+        collectionView.collectionViewLayout.invalidateLayout()
     }
     
     func configurateViewForPopUp(){
@@ -174,20 +173,16 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    func configurateDeleteNavBarActions(deleteAction: @escaping () -> Swift.Void) {
-        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
-            deleteAction()
-        })
-        navBarConfigurator.configure(right: [delete], left: [])
-        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
-    }
-    
     func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Swift.Void) {
         let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
             deleteAction()
         })
-
-        navBarConfigurator.configure(right: [delete], left: [])
+        
+        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+        })
+        
+        navBarConfigurator.configure(right: [more, delete], left: [])
         
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
         navigationItem.leftBarButtonItem = backAsCancelBarButton
@@ -288,6 +283,16 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesView.isHidden = true
         noFilesTopLabel?.isHidden = true
         topBarContainer.isHidden = false
+    }
+    
+    func requestStarted() {
+        backAsCancelBarButton?.isEnabled = false
+        navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
+    func requestStopped() {
+        backAsCancelBarButton?.isEnabled = true
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     @objc func onCancelSelectionButton(){

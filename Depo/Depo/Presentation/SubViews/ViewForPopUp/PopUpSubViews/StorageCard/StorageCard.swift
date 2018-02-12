@@ -14,9 +14,11 @@ class StorageCard: BaseView {
     @IBOutlet weak var subTileLabel: UILabel!
     @IBOutlet weak var bottomButton: UIButton!
     @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var bacgroundView: UIView!
+    @IBOutlet weak var backgroundView: UIView!
+    
     var operationType: OperationType?
     
+    private var gradient: CAGradientLayer?
     
     override func configurateView() {
         super.configurateView()
@@ -27,7 +29,14 @@ class StorageCard: BaseView {
         subTileLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         subTileLabel.textColor = ColorConstants.whiteColor
             
-        bacgroundView.clipsToBounds = true
+        backgroundView.clipsToBounds = true
+    }
+    
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
+        if self.layer == layer {
+            gradient?.frame = backgroundView.bounds
+        } 
     }
     
     @IBAction func onBottomButton(){
@@ -55,6 +64,11 @@ class StorageCard: BaseView {
     }
     
     @IBAction func onCloseButton(){
+        deleteCard()
+    }
+    
+    override func deleteCard() {
+        super.deleteCard()
         if let type = operationType{
             CardsManager.default.stopOperationWithType(type: type)
         }
@@ -88,9 +102,8 @@ class StorageCard: BaseView {
             iconView.image = UIImage(named: "CardIconLamp")
             
             titleLabel.text = TextConstants.homeStorageCardLocalTitle
-            let percent = Device.getFreeDiskSpaceInPercent
+            let percent = Int(exactly: Device.getFreeDiskSpaceInPercent) ?? 0
             subTileLabel.text = String(format: TextConstants.homeStorageCardLocalSubTitle, percent)
-            
             
             bottomButton.setTitle(TextConstants.homeStorageCardLocalBottomButtonTitle, for: .normal)
             bottomButton.setTitleColor(ColorConstants.redGradientEnd, for: .normal)
@@ -109,19 +122,20 @@ class StorageCard: BaseView {
     }
     
     func configurateByResponceObject(){
-        if operationType == .freeAppSpaceCloudWarning, let percent = cardObject?.details?["usage-percentage"].float{
+        if operationType == .freeAppSpaceCloudWarning, let percent = cardObject?.details?["usage-percentage"].int{
             subTileLabel.text = String(format: TextConstants.homeStorageCardCloudSubTitle, percent)
         }
     }
     
     func setGradient(colorTop: UIColor, colorBottom: UIColor){
-        let gradient: CAGradientLayer = CAGradientLayer()
+        let gradient = CAGradientLayer()
         gradient.colors = [colorBottom.cgColor, colorTop.cgColor]
         gradient.locations = [0.0 , 1.0]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.frame = CGRect(x: 0.0, y: 0.0, width: bacgroundView.frame.size.width, height: bacgroundView.frame.size.height)
-        bacgroundView.layer.insertSublayer(gradient, at: 0)
+        gradient.frame = backgroundView.frame
+        backgroundView.layer.insertSublayer(gradient, at: 0)
+        self.gradient = gradient
     }
 
 }

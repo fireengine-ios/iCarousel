@@ -34,11 +34,8 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     @IBOutlet weak var versionLabel: UILabel!
     
     var tableDataArray: [[String]] = []
-    var turkCellSeuritySettingsPassState: Bool?
-    var turkCellSeuritySettingsAutoLoginState: Bool?
-    
-    
     var output: SettingsViewOutput!
+    
     var userInfoSubView = UserInfoSubViewModuleInitializer.initializeViewController(with: "UserInfoSubViewViewController") as! UserInfoSubViewViewController
     
     weak var settingsDelegate: SettingsDelegate?
@@ -283,7 +280,12 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         userInfoSubView.reloadUserInfo()
     }
     
-    func profileWontChange() {
+    func profileWontChangeWith(error: Error) {
+        let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                      message: error.localizedDescription,
+                                      image: .error,
+                                      buttonTitle: TextConstants.ok)
+        present(vc, animated: true, completion: nil)
         userInfoSubView.dismissLoadingSpinner()
     }
     
@@ -331,18 +333,4 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
-//    func changeTurkCellSecurity(passcode: Bool, autologin: Bool) {
-//
-//        turkCellSeuritySettingsPassState = passcode
-//        turkCellSeuritySettingsAutoLoginState = autologin
-//        
-//        guard let securityPasscodeCell = tableView.cellForRow(at: turkCellSecurityPasscodeCellIndex) as? SettingsTableViewSwitchCell,
-//            let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
-//                return
-//        }
-// 
-//        securityPasscodeCell.changeSwithcState(turnOn: passcode)
-//        securityAutoLoginCell.changeSwithcState(turnOn: autologin)
-//    }
 }

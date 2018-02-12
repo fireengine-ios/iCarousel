@@ -9,11 +9,7 @@
 import Foundation
 
 protocol SelectNameInteractorOutput: class {
-    
     func startProgress()
-    
     func operationSucces(operation: SelectNameScreenType)
-    
-    func operationFaildWithError(error: String)
-    
+    func operationFaildWithError(errorMessage: String)
 }

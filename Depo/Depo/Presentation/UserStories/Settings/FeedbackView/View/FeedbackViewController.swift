@@ -26,7 +26,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
-    private var selectedLanguage = LanguageModel() {
+    private var selectedLanguage: LanguageModel? {
         didSet {
             self.setupTexts()
         }
@@ -42,9 +42,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.languagesArray.append(self.selectedLanguage)
-        
-        self.setupTexts()
+        setupTexts()
         
         sendButton.isEnabled = false
         
@@ -101,29 +99,28 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         feedbackTextView.textAlignment = .natural
     }
     
-    func languagesUploaded(lanuages:[LanguageModel]){
+    func languagesUploaded(lanuages:[LanguageModel]) {
         languagesArray.removeAll()
         languagesArray.append(contentsOf: lanuages)
-        languagesArray.sort { (first, _) -> Bool in
-            return first.languageCode == self.selectedLanguage.languageCode
-        }
+
         let array = languagesArray.map({ (object) -> String in
             object.displayLanguage ?? ""
         })
         
-        if let currentLanguage = languagesArray.first {
+        if let languageCode = NSLocale.current.languageCode, languageCode == "tr",
+           let currentLanguage = languagesArray.first(where: {$0.languageCode == "tr"}) {
             selectedLanguage = currentLanguage
         }
-        
-        dropDovnView!.setTableDataObjects(objects: array)
+            
+        dropDovnView!.setTableDataObjects(objects: array, defaultObject: selectedLanguage?.displayLanguage)
     }
     
     func fail(text: String) {
         UIApplication.showErrorAlert(message: text)
     }
     
-    func languageRequestSended(text: String){
-        if (Mail.canSendEmail()){
+    func languageRequestSended(text: String) {
+        if (Mail.canSendEmail()) {
             let stringForLetter = String(format: "%@\n\n%@", self.feedbackTextView!.text, text)
             self.dismiss(animated: true, completion: nil)
             Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [TextConstants.feedbackEmail], success: {
@@ -168,39 +165,39 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         feedbackTextView.resignFirstResponder()
     }
     
-    private func getMainYForView(view: UIView)->CGFloat{
-        if (view.superview == self.view){
+    private func getMainYForView(view: UIView) -> CGFloat {
+        if (view.superview == self.view) {
             return view.frame.origin.y
-        }else{
-            if (view.superview != nil){
+        } else {
+            if (view.superview != nil) {
                 return view.frame.origin.y + getMainYForView(view:view.superview!)
-            }else{
+            } else {
                 return 0
             }
         }
     }
     
-    @objc func showKeyBoard(notification: NSNotification){
+    @objc func showKeyBoard(notification: NSNotification) {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         let y = allertView.frame.size.height + getMainYForView(view: allertView)
-        if (view.frame.size.height - y) < keyboardHeight{
+        
+        if (view.frame.size.height - y) < keyboardHeight {
             let dy = keyboardHeight - (view.frame.size.height - y)
             self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, dy + 10, 0)
             let yText = feedbackTextView.frame.size.height + getMainYForView(view: feedbackTextView)
             let dyText = keyboardHeight - (view.frame.size.height - yText) + 10
-            if (dyText > 0){
+            if (dyText > 0) {
                 let point = CGPoint(x: 0, y: dyText)
                 scrollView.setContentOffset(point, animated: true)
             }
-            
         }
     }
     
     @objc func hideKeyboard() {
-        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.scrollView.contentInset = .zero
     }
 
     // MARK: FeedbackViewViewInput
@@ -225,7 +222,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         }
     }
     
-    @IBAction func onSuggestionButton(){
+    @IBAction func onSuggestionButton() {
         guard !suggeston else {
             return
         }
@@ -233,7 +230,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         toggleButtons()
     }
     
-    @IBAction func onComplaintButton(){
+    @IBAction func onComplaintButton() {
         guard !complaint else {
             return
         }
@@ -241,25 +238,24 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         toggleButtons()
     }
     
-    @IBAction func onSendButton(){
-        if feedbackTextView.text.count > 0 {
-            output.onSend(selectedLanguage: selectedLanguage)
-        } else {
-            let string = TextConstants.feedbackErrorTextError
-            
-            let controller = UIAlertController(title: TextConstants.feedbackErrorEmptyDataTitle, message: string, preferredStyle: .alert)
-
-            let action = UIAlertAction(title: TextConstants.ok, style: .cancel, handler: nil)
-            controller.addAction(action)
-            self.present(controller, animated: true, completion: {})
+    @IBAction func onSendButton() {
+        guard !feedbackTextView.text.isEmpty else {
+            UIApplication.showErrorAlert(message: TextConstants.feedbackErrorTextError)
+            return
         }
+        guard let selectedLanguage = selectedLanguage else {
+            UIApplication.showErrorAlert(message: TextConstants.feedbackErrorLanguageError)
+            return
+        }
+        view.endEditing(true)
+        output.onSend(selectedLanguage: selectedLanguage)
     }
     
-    func getSubject()-> String{
-        if (suggeston){
+    func getSubject() -> String {
+        if (suggeston) {
             return String(format: TextConstants.feedbackViewSubjectFormat, TextConstants.feedbackViewSuggestion)
         }
-        if (complaint){
+        if (complaint) {
             return String(format: TextConstants.feedbackViewSubjectFormat, TextConstants.feedbackViewComplaint)
         }
         return ""
@@ -267,10 +263,14 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     
     // MARK: DropDovnViewDelegate
     
-    func onSelectItemAtIndx(index: Int){
-        if (index < languagesArray.count){
+    func onSelectItem(atIndex index: Int) {
+        if (index < languagesArray.count) {
             selectedLanguage = languagesArray[index]
         }
+    }
+    
+    func onWillShow() {
+        onHideKeyboard()
     }
     
     private func toggleButtons() {
@@ -290,6 +290,11 @@ extension FeedbackViewController: UITextViewDelegate {
         }
         
         output.onTextDidChange(text: textView.text)
+    }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        dropDovnView.hideViewIfNeeded()
+        return true
     }
 }
 

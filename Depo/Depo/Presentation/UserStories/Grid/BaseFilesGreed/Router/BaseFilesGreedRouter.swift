@@ -41,7 +41,6 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         case .audio:
             player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
-//            SingleSong.default.playWithItem(object: wrappered)
         default:
             let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray)
             router.pushViewController(viewController: controller)

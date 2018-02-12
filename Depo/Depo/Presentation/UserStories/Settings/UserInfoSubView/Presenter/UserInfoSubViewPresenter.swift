@@ -42,6 +42,10 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
         asyncOperationSucces()
     }
     
+    func failedWith(error: Error) {
+        UIApplication.showErrorAlert(message: error.localizedDescription)
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {

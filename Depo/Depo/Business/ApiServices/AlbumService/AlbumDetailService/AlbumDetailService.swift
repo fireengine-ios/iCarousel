@@ -43,4 +43,25 @@ class AlbumDetailService: RemoteItemsService {
         })
     }
     
+    func albumCoverPhoto(albumUUID: String, sortBy: SortType, sortOrder: SortOrder, success: @escaping AlbumCoverPhoto, fail:@escaping FailRemoteItems) {
+        log.debug("AlbumDetailService albumFirstItem")
+        
+        currentPage = 0
+        requestSize = 1
+        
+        let serchParam = AlbumDetalParameters (albumUuid: albumUUID, sortBy: sortBy, sortOrder: sortOrder, page: currentPage, size: requestSize)
+        remote.searchContentAlbum(param: serchParam, success: { (response) in
+            guard let coverPhoto = (response as? AlbumDetailResponse)?.coverPhoto else {
+                fail()
+                return
+            }
+            log.debug("AlbumDetailService albumCoverPhoto success")
+
+            success(WrapData(remote: coverPhoto))
+        }, fail: { _ in
+            log.debug("AlbumDetailService albumCoverPhoto fail")
+            
+            fail()
+        })
+    }
 }

@@ -32,11 +32,6 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
     func goToAlbumbsGreedView() {
         router.pushViewControllertoTableViewNavBar(viewController: router.albumsListController())
     }
-
-    private func goToAlbumDetailView(album: AlbumItem) {
-        let controller = router.albumDetailController(album: album, type: .List, moduleOutput: nil)
-        router.pushViewControllertoTableViewNavBar(viewController: controller)
-    }
     
     private func goToAlbumListView() {
         let controller = router.albumsListController()

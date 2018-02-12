@@ -194,7 +194,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (view == nil){
             return
         }
-        debugPrint("???getContentWithSuccess()")
         asyncOperationSucces()
         view.stopRefresher()
         
@@ -422,6 +421,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
         dataSource.currentSortType = rule
+        (rule == .sizeAZ || rule == .sizeZA) ? (dataSource.isHeaderless = true) : (dataSource.isHeaderless = false)
+
         moduleOutput?.reloadType(type, sortedType: sortedType, fieldType: getFileFilter())
         reloadData()
     }
@@ -452,17 +453,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if dataSource.selectedItemsArray.count > 0 {
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
-//        UploadService.default.uploadOnDemand(success: {
-//            DispatchQueue.main.async {
-//                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
-//            }
-//            print("Upload success")
-//        }) { (errorResponse) in
-//            print("Upload fail")
-//        }
-//        
-//        reloadData()
-
     }
     
     func moreActionsPressed(sender: Any) {
@@ -471,10 +461,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         var actionTypes = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
         if selectionMode {
             let selectedItemsUUIDs = Array(dataSource.selectedItemsArray)
-            var selectedItems = [WrapData]()
+            var selectedItems = [BaseDataSourceItem]()
             
-            for items in dataSource.allItems {
-                selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
+            for items in dataSource.getAllObjects() {
+                selectedItems += items.filter { selectedItemsUUIDs.contains($0) }
             }
             
             //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
@@ -500,8 +490,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 let serverObjects = selectedItems.filter({ return !$0.isLocalItem })
                 if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
-                }else{
-                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
+                } else if selectedItems is [Item] {
+                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item])
                     if localDuplicates.count == 0 {
                         //selectedItems = localDuplicates
                         actionTypes.remove(at: deleteOriginalIndex)
@@ -599,6 +589,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         view.startSelection(with: dataSource.selectedItemsArray.count)
         dataSource.selectAll(isTrue: true)
+    }
+    
+    func deSelectAll() {
+        dataSource.selectAll(isTrue: false)
     }
     
     func stopModeSelected() {

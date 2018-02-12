@@ -11,6 +11,9 @@ import UIKit
 
 class Device {
 
+    static private let supportedLanguages = ["tr","en","uk","ru","de","ar","ro","es"]
+    static private let defaultLocale = "en"
+    
     static func documentsFolderUrl(withComponent: String ) -> URL {
         let documentsUrl = FileManager.default.urls(for: .documentDirectory,
                                                    in: .userDomainMask).last
@@ -39,20 +42,6 @@ class Device {
     
     static func operationSystemVersionLessThen(_ version: Int) -> Bool {
         return ProcessInfo().operatingSystemVersion.majorVersion < version
-    }
-    
-    static var getFreeDiskspace: UInt64 {
-        var totalFreeSpace: UInt64 = 0
-        
-        do {
-           let dict = try FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString())
-            
-            totalFreeSpace = (dict[.systemFreeSize] as! NSNumber).uint64Value
-            
-        } catch {
-            print("Can't calculate file size")
-        }
-         return totalFreeSpace
     }
     
     static var getFreeDiskSpaceInPercent: Double {
@@ -86,10 +75,19 @@ class Device {
     }
     
     static var locale: String {
-        guard let preferedLanguadge = Locale.preferredLanguages.first else {
-            return "en"
+        guard let preferedLanguage = Locale.preferredLanguages.first else {
+            return defaultLocale
         }
-        return String(preferedLanguadge[..<String.Index(encodedOffset: 2)])
+        return String(preferedLanguage[..<String.Index(encodedOffset: 2)])
+    }
+    
+    static var supportedLocale: String {
+        let locale = Device.locale
+        if supportedLanguages.contains(locale) {
+            return locale
+        } else {
+            return defaultLocale
+        }
     }
     
     static var winSize = UIScreen.main.bounds

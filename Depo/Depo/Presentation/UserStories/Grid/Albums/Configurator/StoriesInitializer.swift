@@ -42,7 +42,7 @@ class StoriesInitializer: NSObject {
                                bottomBarConfig: bottomBarConfig, router: router,
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                                     selectionModeTypes: [.completelyDeleteAlbums]),
+                                                                                     selectionModeTypes: [.addToAlbum]),
                                topBarConfig: gridListTopBarConfig)
         
         interactor.originalFilters = [.fileType(.photoAlbum)]

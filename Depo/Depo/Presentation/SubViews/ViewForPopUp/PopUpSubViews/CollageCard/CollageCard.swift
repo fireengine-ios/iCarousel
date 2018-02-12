@@ -11,9 +11,6 @@ import SwiftyJSON
 
 final class CollageCard: BaseView {
     
-    private lazy var filesDataSource = FilesDataSource()
-    private lazy var homeCardsService: HomeCardsService = factory.resolve()
-    
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
@@ -68,27 +65,16 @@ final class CollageCard: BaseView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
-        photoImageView.loadImageForItem(object: item)
+        photoImageView.loadImage(with: item, isOriginalImage: true)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){
         deleteCard()
     }
     
-    private func deleteCard() {
-        guard let id = cardObject?.id else {
-            return
-        }
-        homeCardsService.delete(with: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    CardsManager.default.stopOperationWithType(type: .collage)
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
-                }
-            }
-        }
+    override func deleteCard() {
+        super.deleteCard()
+        CardsManager.default.stopOperationWithType(type: .collage)
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {

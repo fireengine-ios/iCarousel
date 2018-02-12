@@ -64,9 +64,9 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
         }
     }
     
-    func operationFaildWithError(error: String){
+    func operationFaildWithError(errorMessage: String) {
         asyncOperationSucces()
-        
+        UIApplication.showErrorAlert(message: errorMessage)
     }
     
     

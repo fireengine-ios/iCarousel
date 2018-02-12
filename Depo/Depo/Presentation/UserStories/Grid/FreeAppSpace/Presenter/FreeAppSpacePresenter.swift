@@ -28,6 +28,9 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         if let int = interactor as? FreeAppSpaceInteractor {
             if let array = dataSource.getSelectedItems() as? [WrapData] {
                 startAsyncOperation()
+                if let view = view as? BaseFilesGreedViewController{
+                    view.requestStarted()
+                }
                 int.onDeleteSelectedItems(selectedItems: array)
             }
         }
@@ -39,6 +42,14 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
             router_.onBack()
         }
     }
+    override func reloadData() {
+        super.reloadData()
+        dataSource.selectedItemsArray.removeAll()
+        dataSource.updateSelectionCount()
+        if let view = view as? BaseFilesGreedViewController{
+            view.requestStopped()
+        }
+    }
     
     func onItemDeleted(){
         let count = dataSource.selectedItemsArray.count
@@ -47,12 +58,24 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         
         let text = String(format: TextConstants.freeAppSpaceAlertSuccesTitle, count)
         UIApplication.showSuccessAlert(message: text)
+        
+        if let view = view as? BaseFilesGreedViewController{
+            view.requestStopped()
+        }
     }
     
      override func moreActionsPressed(sender: Any) {
         let selectionMode = dataSource.isInSelectionMode()
         if selectionMode {
-            let actionTypes = interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? []
+            var actionTypes = interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? []
+                
+            if dataSource.allMediaItems.count == dataSource.selectedItemsArray.count{
+                if let index = actionTypes.index(of: .selectAll){
+                    actionTypes.remove(at: index)
+                    actionTypes.insert(.deSelectAll, at: index)
+                }
+            }
+            
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,

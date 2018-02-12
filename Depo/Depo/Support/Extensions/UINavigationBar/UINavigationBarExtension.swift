@@ -156,12 +156,6 @@ extension UIViewController {
         }
     }
     
-    func customNavigationBarPushToBack() {
-        if let view = customNavBarView {
-            navBar?.sendSubview(toBack: view)
-        }
-    }
-    
     //MARK : ToolBar
     
     func barButtonItemsWithRitht(button: UIBarButtonItem) -> UIToolbar {

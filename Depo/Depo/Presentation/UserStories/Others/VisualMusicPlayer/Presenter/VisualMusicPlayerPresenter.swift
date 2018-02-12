@@ -18,6 +18,7 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
     func changeCover() {}
     func selectModeSelected() {}
     func selectAllModeSelected() {}
+    func deSelectAll() {}
     func stopModeSelected() {}
     func printSelected() {}
     var selectedItems: [BaseDataSourceItem] {

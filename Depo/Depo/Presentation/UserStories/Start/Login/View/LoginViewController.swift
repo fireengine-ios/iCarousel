@@ -201,6 +201,15 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         
     }
     
+    func showNeedSignUp(message: String) {
+        let vc = PopUpController.with(title: TextConstants.errorAlert, message: message, image: .error, buttonTitle: TextConstants.ok) { [weak self] controller in
+            controller.close { [weak self] in
+                self?.output.onOpenSignUp()
+            }
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
     func hideErrorMessage() {
         errorLabel.isHidden = true
     }

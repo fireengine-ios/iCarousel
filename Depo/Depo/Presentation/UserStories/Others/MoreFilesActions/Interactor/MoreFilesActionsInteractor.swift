@@ -44,7 +44,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] (action) in
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareSmallSize(sourceRect: sourceRect)
-            }, cancel: {})
+            }, cancel: {}, fail: { errorResponse in
+                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+            })
         }
         
         controler.addAction(smallAction)
@@ -52,14 +54,18 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] (action) in
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareOrignalSize(sourceRect: sourceRect)
-            }, cancel: {})
+            }, cancel: {}, fail: { errorResponse in
+                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+            })
         }
         controler.addAction(originalAction)
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] (action) in
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
-            }, cancel: {})
+            }, cancel: {}, fail: { errorResponse in
+                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+            })
         }
         controler.addAction(shareViaLinkAction)
         
@@ -117,26 +123,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }, fail: { [weak self] (errorMessage) in
                 self?.output?.operationFailed(type: .share, message: errorMessage)
         })
-    }
-    
-    private func shareImagesByURLs(images: [ImageForDowload], sourceRect: CGRect?){
-        let downloader = ImageDownloder()
-        output?.operationStarted(type: .share)
-        
-        downloader.getImagesByImagesURLs(list: images) { [weak self] (imagesArray) in
-            DispatchQueue.main.async {
-                self?.output?.operationFinished(type: .share)
-                
-                let activityVC = UIActivityViewController(activityItems: imagesArray, applicationActivities: nil)
-                
-                if let tempoRect = sourceRect {//if ipad
-                    activityVC.popoverPresentationController?.sourceRect = tempoRect
-                }
-                
-                let router = RouterVC()
-                router.presentViewController(controller: activityVC)
-            }
-        }
     }
     
     func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?) {
@@ -344,7 +330,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         folderSelector.selectFolder(select: { [weak self] (folder) in
             self?.output?.operationStarted(type: .move)
             self?.fileService.move(items: item, toPath: folder.uuid,
-                                   success: {
+                                   success: { [weak self] in
                                     self?.succesAction(elementType: .move)()
                                     //because we have animation of dismiss for this stack of view controllers we have some troubles with reloading data in root collection view
                                     //data will be updated after 0.3 seconds (time of aimation)
@@ -407,7 +393,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             DispatchQueue.main.async {
                 router.createStoryName(items: items)
             }
-        }, cancel: {})
+        }, cancel: {}, fail: { errorResponse in
+            UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+        })
     }
     
     func addToFavorites(items: [BaseDataSourceItem]) {
@@ -437,7 +425,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             DispatchQueue.main.async {
                 router.pushViewController(viewController: vc)
             }
-        }, cancel: {})
+        }, cancel: {}, fail: { errorResponse in
+            UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+        })
     }
     
     func backUp(items: [BaseDataSourceItem]) {
@@ -544,7 +534,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         return failResponse
     }
     
-    private func sync(items: [BaseDataSourceItem]?, action: @escaping () -> Void, cancel: @escaping () -> Void, fail: FailResponse? = nil) {
+    private func sync(items: [BaseDataSourceItem]?, action: @escaping () -> Void, cancel: @escaping () -> Void, fail: FailResponse?) {
         guard let items = items as? [WrapData] else { return }
         let successClosure = { [weak self] in
             DispatchQueue.main.async {
@@ -552,6 +542,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 action()
             }
         }
+        
         let failClosure: FailResponse = { [weak self] (errorResponse) in
             DispatchQueue.main.async {
                 self?.output?.compliteAsyncOperationEnableScreen()

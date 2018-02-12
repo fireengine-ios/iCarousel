@@ -60,7 +60,6 @@ class CollectionViewLayout: UICollectionViewLayout {
                 
                 let width = columnWidth - cellPadding*2
                 let cellHeight = delegate.collectionView(collectionView: collectionView!, heightForCellAtIndexPath: indexPath, withWidth: width)
-                print("cell h = ", cellHeight)
                 let height = cellPadding +  cellHeight + cellPadding
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
                 let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)

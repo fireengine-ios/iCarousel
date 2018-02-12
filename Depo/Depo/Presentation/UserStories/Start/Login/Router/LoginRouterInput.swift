@@ -19,5 +19,7 @@ protocol LoginRouterInput {
     func goToTermsAndServices()
     
     func goToSyncSettingsView()
+    
+    func goToRegistration()
 
 }

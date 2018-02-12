@@ -44,31 +44,24 @@ extension CoreDataStack {
             let newBgcontext = self.newChildBackgroundContext
             let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
             
-            debugPrint("number of not saved  ", notSaved.count)
             let start = Date().timeIntervalSince1970
             var i = 0
             var addedObjects = [WrapData]()
             
             let totalNotSavedItems = Float(notSaved.count)
+            debugPrint("number of not saved  ", totalNotSavedItems)
             
             notSaved.forEach {
                 i += 1
                 debugPrint("local ", i)
-                let info = localMediaStorage.fullInfoAboutImageAsset(asset: $0)//shortInfoAboutAsset(asset: $0)
                 
-                let baseMediaContent = BaseMediaContent(curentAsset: $0,
-                                                        urlToFile: info.url,
-                                                        size: info.size,
-                                                        md5: info.md5)
-                
-                let wrapData = WrapData(baseModel: baseMediaContent)
-                _ = MediaItem(wrapData: wrapData, context:newBgcontext)
-                debugPrint(i)
+                let wrapedItem =  WrapData(asset: $0)
+                _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
                 
                 if i % 10 == 0 {
                     self.saveDataForContext(context: newBgcontext, saveAndWait: true)
                 }
-                addedObjects.append(wrapData)
+                addedObjects.append(wrapedItem)
                 
                 progress?(Float(i)/totalNotSavedItems)
             }
@@ -98,14 +91,15 @@ extension CoreDataStack {
         return allList.filter { !alredySavedIDs.contains( $0.localIdentifier )}
     }
         
-    func localStorageContains(assetId: String) -> Bool {
-        
-        let context = mainContext
-        let predicate = NSPredicate(format: "localFileID == %@", assetId)
-        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
-        
-        return Bool(items.count != 0)
-    }
+    /// maybe will be need
+//    func localStorageContains(assetId: String) -> Bool {
+//        
+//        let context = mainContext
+//        let predicate = NSPredicate(format: "localFileID == %@", assetId)
+//        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
+//        
+//        return Bool(items.count != 0)
+//    }
         
     func removeLocalMediaItemswithAssetID(list: [String]) {
         guard list.count > 0 else {
@@ -134,24 +128,6 @@ extension CoreDataStack {
         let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
         let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
         return items.flatMap{ $0.wrapedObject }
-    }
-    
-    func allLocalNotSyncedItems(md5Array: [String], video: Bool, image: Bool) -> [WrapData] {
-        var filesTypesArray = [Int16]()
-        if (video){
-            filesTypesArray.append(FileType.video.valueForCoreDataMapping())
-        }
-        if (image){
-            filesTypesArray.append(FileType.image.valueForCoreDataMapping())
-        }
-        let context = mainContext
-        let predicate = NSPredicate(format: "NOT (md5Value IN %@) AND (isLocalItemValue == true) AND (fileTypeValue IN %@)",  md5Array, filesTypesArray)
-        let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
-        let sortedItems = items.sorted { (item1, item2) -> Bool in
-            //< correct
-            return item1.fileSizeValue < item2.fileSizeValue
-        }
-        return sortedItems.flatMap{ $0.wrapedObject }
     }
     
     func allLocalItemsForSync(video: Bool, image: Bool) -> [WrapData] {

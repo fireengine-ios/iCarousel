@@ -16,7 +16,6 @@ class SyncServiceManager {
     private let dispatchQueue = DispatchQueue(label: "com.lifebox.autosync")
     
     private let reachabilityService = Reachability()
-    private let autoSyncStorage = AutoSyncDataStorage()
     
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()
@@ -247,12 +246,14 @@ extension SyncServiceManager {
         if hasExecutingSync {
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            WidgetService.shared.notifyWidgetAbout(status: .executing)
             return
         }
         
         CardsManager.default.stopOperationWithType(type: .sync)
         FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
         ItemOperationManager.default.syncFinished()
+        WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if hasPrepairingSync {
             CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)

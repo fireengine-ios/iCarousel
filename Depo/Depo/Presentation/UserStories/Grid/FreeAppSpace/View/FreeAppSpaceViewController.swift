@@ -19,7 +19,12 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
         
         duplicatesTextLabel.textColor = ColorConstants.darkText
         duplicatesTextLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
-        duplicatesTextLabel.text = String(format: TextConstants.freeAppSpaceTitle, FreeAppSpace.default.getDuplicatesObjects().count)
+        duplicatesTextLabel.text = ""
+        
+        FreeAppSpace.default.getCheckedDuplicatesArray { [weak self] (duplicatesArray) in
+            self?.duplicatesTextLabel?.text = String(format: TextConstants.freeAppSpaceTitle, FreeAppSpace.default.getDuplicatesObjects().count)
+        }
+        
         mainTitle = ""
         
         super.viewDidLoad()
