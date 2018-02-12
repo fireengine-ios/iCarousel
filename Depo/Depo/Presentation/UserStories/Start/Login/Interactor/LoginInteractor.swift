@@ -84,7 +84,7 @@ class LoginInteractor: LoginInteractorInput {
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.output?.needShowCaptcha()
                 } else if (!self.checkInternetConnection()) {
-                    self.output?.failLogin(message: TextConstants.loginScreenNoInternetError)
+                    self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
                 } else if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.attempts += 1
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)

@@ -304,7 +304,7 @@ class FileService: BaseRequestService {
     
     //MARK: download && upload
     
-    var error: ErrorResponse?
+    private var error: ErrorResponse?
     
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail:FailResponse?) {
         log.debug("FileService download")
