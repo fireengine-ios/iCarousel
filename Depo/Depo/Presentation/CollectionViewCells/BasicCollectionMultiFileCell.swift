@@ -86,8 +86,6 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     }
     
 //    override func setPlaceholderImage(fileType: FileType) {
-//        var image: UIImage?
-//        
 //        switch fileType {
 //        case .folder:
 //            image = isBigSize() ? UIImage(named: "fileBigIconFolder") : UIImage(named: "fileIconFolder")
@@ -158,14 +156,14 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         }
 
         bigContentImageView.image = nil
-        bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(object: wrappered)
+        bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         if (isBigSize()){
-            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(object: wrappered)
+            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         }else{
             if (isCellSelectionEnabled){
-                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(object: wrappered)
+                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: wrappered.fileType)
             }else{
-                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(object: wrappered)
+                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
             }
         }
         
