@@ -411,12 +411,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getAllLocalItems() -> [WrapData] {
-        if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters),
-            !isOnlyNonLocal(filters: unwrapedFilters), specificFilters != .video && specificFilters != .image {
-//            if specificFilters != .video && specificFilters != .image {
-                return []
-//            }
+        guard let unwrapedFilters = originalFilters,
+            let specificFilters = getFileFilterType(filters: unwrapedFilters),
+            isOnlyNonLocal(filters: unwrapedFilters),
+            specificFilters == .video && specificFilters == .image else {
+            return []
         }
+
         let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
         let predicate = PredicateRules().predicate(filters: [.localStatus(.local)])
         let sortDescriptors = CollectionSortingRules(sortingRules: currentSortType).rule.sortDescriptors
@@ -445,7 +446,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         allItems.removeAll()
         allMediaItems.removeAll()
         allLocalItems.removeAll()
-        allLocalItems.append(contentsOf: self.getAllLocalItems())
+        allLocalItems.append(contentsOf: getAllLocalItems())
         DispatchQueue.main.async {
             
             if self.isLocalOnly() {
