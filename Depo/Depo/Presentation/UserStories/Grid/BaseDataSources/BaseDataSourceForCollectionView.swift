@@ -344,7 +344,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return item
             }
         }
-        return nil
+        return items.last
     }
     
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
