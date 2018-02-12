@@ -93,17 +93,34 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
     }
     
     func deleteContact(_ contact: RemoteContact) {
-        contactsSyncService.deleteRemoteContacts([contact], success: { [weak self] _ in
-            guard let `self` = self, let index = self.contacts.index(where: { $0.id == contact.id }) else {
-                return
+        let okHandler: () -> Void = { [weak self] in
+            guard let `self` = self else { return }
+            
+            self.output.asyncOperationStarted()
+            self.contactsSyncService.deleteRemoteContacts([contact], success: { [weak self] _ in
+                guard let `self` = self, let index = self.contacts.index(where: { $0.id == contact.id }) else {
+                    return
+                }
+                self.contacts.remove(at: index)
+                self.output.didLoadContacts(self.contacts)
+                self.output.asyncOperationFinished()
+                self.output.didDeleteContact()
+            }) { [weak self] (error) in
+                guard let `self` = self else { return }
+                self.output.asyncOperationFinished()
             }
-            self.contacts.remove(at: index)
-            self.output.didLoadContacts(self.contacts)
-            self.output.asyncOperationFinished()
-            self.output.didDeleteContact()
-        }) { (error) in
-            self.output.asyncOperationFinished()
         }
+        
+        let controller = PopUpController.with(title: TextConstants.contactConfirmDeleteTitle,
+                                              message: TextConstants.contactConfirmDeleteText,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.errorAlertNopeBtnBackupAlreadyExist,
+                                              secondButtonTitle: TextConstants.errorAlertYesBtnBackupAlreadyExist,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
     func cancelSearch() {

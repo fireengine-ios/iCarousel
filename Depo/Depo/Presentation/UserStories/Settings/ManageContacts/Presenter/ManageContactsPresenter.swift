@@ -22,7 +22,6 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
     
     func onDeleteContact(_ contact: RemoteContact) {
         interactor.deleteContact(contact)
-        asyncOperationStarted()
     }
     
     func didScrollToEnd() {
