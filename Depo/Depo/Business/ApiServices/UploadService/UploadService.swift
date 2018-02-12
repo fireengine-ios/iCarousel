@@ -83,7 +83,7 @@ final class UploadService: BaseRequestService {
                     self?.clearSyncToUseCounters()
                     self?.hideUploadCardIfNeeded()
                     
-                    if case ErrorResponse.httpCode(413) = errorResponse {
+                    if errorResponse.isOutOfSpaceError {
                         self?.cancelSyncToUseOperations()
                         self?.showOutOfSpaceAlert()
                     }
@@ -99,7 +99,7 @@ final class UploadService: BaseRequestService {
                 self?.clearUploadCounters()
                 self?.hideUploadCardIfNeeded()
                 
-                if case ErrorResponse.httpCode(413) = errorResponse {
+                if errorResponse.isOutOfSpaceError {
                     self?.cancelUploadOperations()
                     self?.showOutOfSpaceAlert()
                 }
@@ -337,8 +337,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if let error = error {
-//                    print("AUTOSYNC: \(error.localizedDescription)")
-                    if error.description == TextConstants.canceledOperationTextError || error.description == TextConstants.loginScreenNoInternetError {
+                    if error.description == TextConstants.canceledOperationTextError || error.isNetworkError {
                         self.uploadOperations.removeIfExists(finishedOperation)
                         checkIfFinished()
                     } else {

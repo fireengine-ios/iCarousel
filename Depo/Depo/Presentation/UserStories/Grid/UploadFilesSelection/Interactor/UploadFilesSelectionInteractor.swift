@@ -78,11 +78,6 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
 
             self?.output.asyncOperationSucces()
         }
-//        UploadService.default.uploadOnDemandFileList(items: uploadItems,
-//                                                     uploadType: .autoSync,
-//                                                     uploadStategy: .WithoutConflictControl,
-//                                                     uploadTo: .MOBILE_UPLOAD,
-//                                                     folder: rootUIID ?? "")
     }
 }
 
