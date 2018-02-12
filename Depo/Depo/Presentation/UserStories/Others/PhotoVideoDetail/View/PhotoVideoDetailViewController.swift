@@ -117,6 +117,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        view.layoutSubviews()
         //        updateFramesForViews()
     }
     
@@ -132,12 +133,17 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
 //            //            collectionView.performBatchUpdates({}, completion: nil)
 //        }
         
-        if objects.isEmpty, selectedIndex > objects.count - 1 {
-            return
+        if needToScrollAfterRotation {
+            needToScrollAfterRotation = false
+            if objects.isEmpty, selectedIndex > objects.count - 1 {
+                return
+            }
+            
+            let indexPath = IndexPath(item: selectedIndex, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
         
-        let indexPath = IndexPath(item: selectedIndex, section: 0)
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        
     }
     
     private func configureNavigationBar() {
@@ -472,18 +478,12 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     
     
-
-
-    var indexPath: IndexPath?
+    private var needToScrollAfterRotation = false
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
-//        var offestPoint = self.collectionView.contentOffset
-//        offestPoint.x += self.collectionView.center.x
-//        collectionView.layoutIfNeeded()
-//        indexPath = self.collectionView.indexPathForItem(at: offestPoint)
         collectionView.collectionViewLayout.invalidateLayout()
+        needToScrollAfterRotation = true
     }
     
 }
@@ -512,7 +512,6 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? PhotoVideoDetailCell else { return }
-//        let object = objects[indexPath.row]
         cell.delegate = self
         cell.setObject(object: objects[indexPath.row], index: indexPath.row)
     }
@@ -555,17 +554,16 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                 
                 output.startCreatingAVAsset()
                 
-                DispatchQueue.global(qos: .default).async  { [weak self] in
-                    PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option, resultHandler: { [weak self] (avAsset, avAudioMix, hash) in
+                DispatchQueue.global(qos: .default).async { [weak self] in
+                    PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] (asset, _, _) in
                         
                         DispatchQueue.main.async {
                             self?.output.stopCreatingAVAsset()
                             
-                            let playerItem = AVPlayerItem(asset: avAsset!)
+                            let playerItem = AVPlayerItem(asset: asset!)
                             self?.play(item: playerItem)
-                        }
-                        
-                    })
+                        }   
+                    }
                 }
                 
             case .remoteUrl(_):
