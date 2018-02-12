@@ -66,7 +66,12 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     func resendCodeRequestFailed(with error: ErrorResponse) {
         compliteAsyncOperationEnableScreen()
         view.resendButtonShow(show: true)
-        router.presentErrorPopUp(with: TextConstants.phoneVereficationResendRequestFailedErrorText)
+        if error.description == TextConstants.TOO_MANY_REQUESTS {
+            router.presentErrorPopUp(with: error.description)
+        } else {
+            router.presentErrorPopUp(with: TextConstants.phoneVereficationResendRequestFailedErrorText)
+        }
+        
     }
     
     func resendCodeRequestSuccesed() {
