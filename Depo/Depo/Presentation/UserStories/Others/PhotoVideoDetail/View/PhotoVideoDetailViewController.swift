@@ -93,7 +93,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             if hideActions {
                 navigationItem.rightBarButtonItem?.customView?.isHidden = true
             } else {
-                navigationItem.rightBarButtonItem?.customView?.isHidden = !item.isSynced()
+                navigationItem.rightBarButtonItem?.customView?.isHidden = item.isLocalItem
             }
         }
     }
