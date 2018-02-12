@@ -23,6 +23,8 @@ class AudioSelectionCollectionViewCell: BaseCollectionViewCell {
         // Initialization code
         nameLabel.textColor = ColorConstants.textGrayColor
         nameLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        
+        contentView.backgroundColor = ColorConstants.whiteColor
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem){
