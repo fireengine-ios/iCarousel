@@ -12,7 +12,9 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func succesLogin()
     
-    func failLogin(message:String)
+    func failLogin(message: String)
+    
+    func needSignUp(message: String)
     
     func models(models:[BaseCellModel])
     

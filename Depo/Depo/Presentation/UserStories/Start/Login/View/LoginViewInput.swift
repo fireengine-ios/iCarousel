@@ -24,6 +24,7 @@ protocol LoginViewInput: class, Waiting {
     
     func showErrorMessage(with text: String)
     func showInfoButton(in field: LoginViewInputField)
+    func showNeedSignUp(message: String)
     
     func hideErrorMessage()
     

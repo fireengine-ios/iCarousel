@@ -548,6 +548,8 @@
 "Please enter your password" = "Please enter your password";
 "Please check the GSM number" = "Please check the GSM number";
 "Login denied. Please check your credentials." = "Login denied. Please check your credentials.";
+"Authentication with Turkcell Password is disabled for the account" = "You can not login to lifebox with your Turkcell password because you have deactivated login with Turkcell password feature. Please, try to login with your lifebox password.";
+"You don't have any lifebox account. Please signup before using the application" = "You don't have any lifebox account. Please signup before using the application";
 "This text doesn't match. Please try again." = "This text doesn't match. Please try again.";
 "Request failed \n Please try again" = "Request failed \n Please try again";
 "Verification code is invalid. \n Please try again." = "Verification code is invalid. \n Please try again.";
