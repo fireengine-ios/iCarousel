@@ -22,6 +22,8 @@ protocol BaseFilesGreedViewInput: class {
     
     func stopSelection()
     
+    func getCurrentSortRule() -> SortedRules
+    
     func getFolder() -> Item?
 
     func changeSortingRepresentation(sortType type: SortedRules)

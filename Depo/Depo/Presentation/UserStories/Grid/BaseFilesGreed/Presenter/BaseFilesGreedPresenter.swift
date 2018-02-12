@@ -242,6 +242,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return dataSource.getAllObjects().isEmpty
     }
     
+    func getCurrentSortRule() -> SortedRules {
+        return sortedRule
+    }
+    
     func getRemoteItemsService() -> RemoteItemsService{
         return interactor.getRemoteItemsService()
     }

@@ -656,7 +656,12 @@ extension TabBarViewController: TabBarActionHandler {
             
         case .uploadFromLifeBox:
             let parentFolder = router.getParentUUID()
-            let controller = router.uploadFromLifeBox(folderUUID: parentFolder)
+            var controller: UIViewController
+            if let currentVC = currentViewController as? BaseFilesGreedViewController {
+                controller = router.uploadFromLifeBox(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule())
+            } else {
+                controller = router.uploadFromLifeBox(folderUUID: parentFolder)
+            }
             let navigationController = UINavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
