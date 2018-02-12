@@ -2680,6 +2680,8 @@
 		CE57DFA81FDE663C0065B688 /* DarkPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57DFA61FDE663C0065B688 /* DarkPopUpController.swift */; };
 		CE57DFA91FDE663C0065B688 /* DarkPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57DFA71FDE663C0065B688 /* DarkPopUpController.xib */; };
 		CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
+		CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
+		CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
 		CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */; };
 		CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7441FCBE84100C23CBD /* DropboxStatusValue.swift */; };
 		CE6DE7511FCBE84100C23CBD /* DropboxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7451FCBE84100C23CBD /* DropboxResponse.swift */; };
@@ -4525,6 +4527,8 @@
 		CE57DFA61FDE663C0065B688 /* DarkPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkPopUpController.swift; sourceTree = "<group>"; };
 		CE57DFA71FDE663C0065B688 /* DarkPopUpController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkPopUpController.xib; sourceTree = "<group>"; };
 		CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardsService.swift; sourceTree = "<group>"; };
+		CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailCell.swift; sourceTree = "<group>"; };
+		CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoVideoDetailCell.xib; sourceTree = "<group>"; };
 		CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetsLabel.swift; sourceTree = "<group>"; };
 		CE6DE7441FCBE84100C23CBD /* DropboxStatusValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropboxStatusValue.swift; sourceTree = "<group>"; };
 		CE6DE7451FCBE84100C23CBD /* DropboxResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropboxResponse.swift; sourceTree = "<group>"; };
@@ -9997,10 +10001,12 @@
 		D20F573D805868F3E9E2A8E7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7C3A74541F07B20600124DF5 /* PhotoVideoDetailViewController.xib */,
+				7A39EC58D2D1F5BD26616C89 /* PhotoVideoDetailViewController.swift */,
 				DAE9AC6D7DD62C5A26F74CFE /* PhotoVideoDetailViewInput.swift */,
 				DC47E8ECC19A0C3CC7C7CCEF /* PhotoVideoDetailViewOutput.swift */,
-				7A39EC58D2D1F5BD26616C89 /* PhotoVideoDetailViewController.swift */,
-				7C3A74541F07B20600124DF5 /* PhotoVideoDetailViewController.xib */,
+				CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */,
+				CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -11233,6 +11239,7 @@
 				8C06B0E22008AD71003D8E05 /* sample_vintage@3x.png in Resources */,
 				9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */,
 				CE51AE291EF90853005DCEE0 /* GSMUInputCell.xib in Resources */,
+				CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */,
 				CEAE3FB91EFD4F0D00A405B2 /* HomePage.xib in Resources */,
 				7CFE92EC1F5E7DEC008A3B72 /* DropDovnTableViewCell.xib in Resources */,
 				CE51AE371EF90853005DCEE0 /* TermsAndServicesScreen.xib in Resources */,
@@ -13030,6 +13037,7 @@
 				8DCB21671F3C7CBF00BAFE1E /* SearchViewInitializer.swift in Sources */,
 				CE51ABAD1EF90853005DCEE0 /* Configuration.m in Sources */,
 				B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */,
+				CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */,
 				CE3AA9D91F4EB153000157AF /* FetchService.swift in Sources */,
 				8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE51ABB31EF90853005DCEE0 /* AutoSyncModuleInput.swift in Sources */,
