@@ -586,11 +586,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     //MARK: LBCellsDelegate
     
-    func onLongPress(cell: UICollectionViewCell){
-        if !canSelectionState {
-            return
-        }
-        
+    func canLongPress() -> Bool {
+        return canSelectionState
+    }
+    
+    func onLongPress(cell: UICollectionViewCell) {
         if maxSelectionCount == selectedItemsArray.count {
             if let cell = cell as? CollectionViewCellForStoryPhoto  {
                 cell.setSelection(isSelectionActive: false, isSelected: false)
@@ -601,11 +601,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             let path = collectionView?.indexPath(for: cell),
             let object = itemForIndexPath(indexPath: path) {
             
-            if !isObjctSelected(object: object){
+            if !isObjctSelected(object: object) {
                 onSelectObject(object: object)
             }
             
-            if !isSelectionStateActive{
+            if !isSelectionStateActive {
                 forwardDelegate.onLongPressInCell()
             }
         }
