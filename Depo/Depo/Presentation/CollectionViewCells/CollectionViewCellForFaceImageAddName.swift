@@ -43,13 +43,18 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
     
     override func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) { }
     
-    override func setImage(image: UIImage?) {
+    override func setImage(image: UIImage?, animated: Bool) {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.opacity = 0.1
         imageView.image = image
-        UIView.animate(withDuration: 0.2, animations: {
-            self.imageView.layer.opacity = 1.0
-        })
+        if animated {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.imageView.layer.opacity = 1.0
+            })
+        } else {
+            imageView.layer.opacity = 1.0
+        }
+        
         backgroundColor = ColorConstants.fileGreedCellColor
         
         isAlreadyConfigured = true
@@ -67,7 +72,7 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
                 return
             }
             
-            self.setImage(image: image)
+            self.setImage(image: image, animated: true)
         }
         
         isAlreadyConfigured = true
