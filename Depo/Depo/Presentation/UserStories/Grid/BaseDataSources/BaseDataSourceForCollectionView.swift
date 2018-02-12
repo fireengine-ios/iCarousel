@@ -339,13 +339,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func getLastNonMetaEmptyItem(items: [WrapData]) -> WrapData? {
-        for i in (0..<items.count).reversed() {
-            debugPrint("stride index is ", i)
-            if let _ = items[i].metaData?.takenDate {
-                return items[i]
+        for item in items.reversed() {
+            if item.metaData?.takenDate != nil {
+                return item
             }
         }
-        return items.last
+        return nil
     }
     
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
