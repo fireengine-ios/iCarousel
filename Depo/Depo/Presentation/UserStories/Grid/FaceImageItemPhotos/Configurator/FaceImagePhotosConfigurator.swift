@@ -10,11 +10,11 @@ import UIKit
 
 class FaceImagePhotosConfigurator {
     
-    func configure(viewController: FaceImagePhotosViewController, albumUUID: String, item: Item, moduleOutput: FaceImageItemsModuleOutput?) {
+    func configure(viewController: FaceImagePhotosViewController, albumUUID: String, item: Item, coverPhotoURL: URL, moduleOutput: FaceImageItemsModuleOutput?) {
         let router = FaceImagePhotosRouter()
         router.view = viewController
         
-        let presenter = FaceImagePhotosPresenter()
+        let presenter = FaceImagePhotosPresenter(item: item)
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
                                                                    selectionModeTypes: [.createStory, .delete])
@@ -51,6 +51,7 @@ class FaceImagePhotosConfigurator {
         
         viewController.mainTitle = item.name ?? ""
         
-        presenter.currentItem = item
+        presenter.item = item
+        presenter.coverPhotoURL = coverPhotoURL
     }
 }

@@ -9,9 +9,9 @@
 import UIKit
 
 class FaceImagePhotosRouter: BaseFilesGreedRouter, FaceImagePhotosRouterInput {
-    func openChangeCoverWith(_ albumUUID: String) {
+    func openChangeCoverWith(_ albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput) {
         let router = RouterVC()
-        let vc = router.faceImageChangeCoverController(albumUUID: albumUUID)
+        let vc = router.faceImageChangeCoverController(albumUUID: albumUUID, moduleOutput: moduleOutput)
         router.pushViewController(viewController: vc)
     }
     

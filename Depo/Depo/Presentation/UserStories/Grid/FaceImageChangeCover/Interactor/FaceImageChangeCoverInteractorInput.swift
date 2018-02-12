@@ -9,5 +9,5 @@
 import UIKit
 
 protocol FaceImageChangeCoverInteractorInput {
-    func setAlbumCoverWithPhoto(_ photoUUID: String)
+    func setAlbumCoverWithItem(_ item: BaseDataSourceItem)
 }

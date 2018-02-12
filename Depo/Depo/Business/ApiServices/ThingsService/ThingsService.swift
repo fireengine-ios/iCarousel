@@ -24,12 +24,12 @@ class ThingsService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getThingsAlbum(id: Int, success:@escaping (_ uuid: String) -> Void, fail:@escaping FailResponse) {
+    func getThingsAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
         let param = ThingsAlbumParameters(id: id)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
-            if let response = response as? AlbumResponse, let albumUUID = response.list.first?.uuid {
-                success(albumUUID)
+            if let response = response as? AlbumResponse, let album = response.list.first {
+                success(album)
             } else {
                 fail(ErrorResponse.failResponse(response))
             }

@@ -55,6 +55,7 @@
 		2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */; };
 		2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282E581C729D5E96D07CE3D1 /* AlbumDetailRouter.swift */; };
 		2B5261513879D04FFE1D241C /* SettingsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1BED0751734B73B9583DD /* SettingsViewOutput.swift */; };
+		2B96AEA2202B6A5100F066F9 /* FaceImagePhotosViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */; };
 		2BA37C2D2028374E00660394 /* FaceImageChangeCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C2B2028374D00660394 /* FaceImageChangeCoverViewController.swift */; };
 		2BA37C2E2028374E00660394 /* FaceImageChangeCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA37C2C2028374E00660394 /* FaceImageChangeCoverViewController.xib */; };
 		2BA37C312028376500660394 /* FaceImageChangeCoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C2F2028376500660394 /* FaceImageChangeCoverRouter.swift */; };
@@ -173,8 +174,6 @@
 		4ADE0882202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */; };
 		4ADE0887202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
 		4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
-		4ADE0890202DF1EE0095346F /* FaceImagePhotosViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE088F202DF1EE0095346F /* FaceImagePhotosViewInput.swift */; };
-		4ADE0891202DF1EE0095346F /* FaceImagePhotosViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE088F202DF1EE0095346F /* FaceImagePhotosViewInput.swift */; };
 		4AFAEAC12027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
 		4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
 		4BCD0211E6F3ED79A879D88B /* CompleteProfileInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C66D262F6A075566FD30AC /* CompleteProfileInitializer.swift */; };
@@ -273,6 +272,7 @@
 		78E8E2B4202360C700A979AB /* FaceImageItemsInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B3202360C700A979AB /* FaceImageItemsInteractorInput.swift */; };
 		78E8E2B62023638E00A979AB /* FaceImageItemsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B52023638E00A979AB /* FaceImageItemsInteractorOutput.swift */; };
 		78E8E2B820236D6900A979AB /* FaceImageItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B720236D6900A979AB /* FaceImageItemsRouterInput.swift */; };
+		78F674932024BC91006B0911 /* PeopleAlbumSliderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */; };
 		78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */; };
 		78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */; };
 		7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */; };
@@ -3364,6 +3364,7 @@
 		2944E4D7E97575567829EB5C /* HomeHeaderInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderInteractorOutput.swift; sourceTree = "<group>"; };
 		2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewOutput.swift; sourceTree = "<group>"; };
 		2B67E3929C50D3031AE4A70F /* CompleteProfileViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompleteProfileViewController.swift; sourceTree = "<group>"; };
+		2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewInput.swift; sourceTree = "<group>"; };
 		2BA37C2B2028374D00660394 /* FaceImageChangeCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverViewController.swift; sourceTree = "<group>"; };
 		2BA37C2C2028374E00660394 /* FaceImageChangeCoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceImageChangeCoverViewController.xib; sourceTree = "<group>"; };
 		2BA37C2F2028376500660394 /* FaceImageChangeCoverRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverRouter.swift; sourceTree = "<group>"; };
@@ -3443,7 +3444,6 @@
 		4ADE087D202DC7890095346F /* FaceImagePhotosModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosModuleOutput.swift; sourceTree = "<group>"; };
 		4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsModuleOutput.swift; sourceTree = "<group>"; };
 		4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewOutput.swift; sourceTree = "<group>"; };
-		4ADE088F202DF1EE0095346F /* FaceImagePhotosViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewInput.swift; sourceTree = "<group>"; };
 		4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewOutput.swift; sourceTree = "<group>"; };
 		4B1BD4C7B771F9CAD4F9CE5D /* LikeFilterRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterRouter.swift; sourceTree = "<group>"; };
 		4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderViewController.swift; sourceTree = "<group>"; };
@@ -3582,6 +3582,7 @@
 		78E8E2B52023638E00A979AB /* FaceImageItemsInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsInteractorOutput.swift; sourceTree = "<group>"; };
 		78E8E2B720236D6900A979AB /* FaceImageItemsRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsRouterInput.swift; sourceTree = "<group>"; };
 		78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorInput.swift; sourceTree = "<group>"; };
+		78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleAlbumSliderInteractor.swift; sourceTree = "<group>"; };
 		78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactTableViewCell.swift; sourceTree = "<group>"; };
 		78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DuplicatedContactTableViewCell.xib; sourceTree = "<group>"; };
 		797B0A89F74D79DE19756139 /* IntroducePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroducePresenter.swift; sourceTree = "<group>"; };
@@ -5542,6 +5543,7 @@
 				8325E4AA32B488A637E3E308 /* LBAlbumLikePreviewSliderInteractorInput.swift */,
 				5F7E2D395BBA8DC5D0612F29 /* LBAlbumLikePreviewSliderInteractorOutput.swift */,
 				59360E3550649CF1052921A7 /* LBAlbumLikePreviewSliderInteractor.swift */,
+				78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -6814,7 +6816,7 @@
 				78E8E2A52023186C00A979AB /* FaceImagePhotosViewController.swift */,
 				78E8E2A62023186C00A979AB /* FaceImagePhotosViewController.xib */,
 				4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */,
-				4ADE088F202DF1EE0095346F /* FaceImagePhotosViewInput.swift */,
+				2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -14360,6 +14362,7 @@
 				CE3F33AF1F34881800EE37E7 /* SharedService.swift in Sources */,
 				CE51AC221EF90853005DCEE0 /* CellsConstant.swift in Sources */,
 				CEAE3FF11EFD517300A405B2 /* GradientView.swift in Sources */,
+				2B96AEA2202B6A5100F066F9 /* FaceImagePhotosViewInput.swift in Sources */,
 				D498865E1F3EFBE200F50C95 /* ImportPhotosRouterInput.swift in Sources */,
 				CE51AC2D1EF90853005DCEE0 /* ProtoInputTextCell.swift in Sources */,
 				7CAC23C21F4ADC3900607660 /* RemoteSearchService.swift in Sources */,
@@ -14823,6 +14826,7 @@
 				CEE9B4EC1F78FD85002DAF81 /* InternetDataUsageCell.swift in Sources */,
 				D498865F1F3EFBE200F50C95 /* ImportPhotosViewController.swift in Sources */,
 				CEDFECA81F10C77E003D1A75 /* UIviewControlllerExtensions.swift in Sources */,
+				78F674932024BC91006B0911 /* PeopleAlbumSliderInteractor.swift in Sources */,
 				CEDFECB91F11D1D0003D1A75 /* Dictionary.swift in Sources */,
 				D47863F31F3F18FA00EFDC6D /* UsageInfoInteractor.swift in Sources */,
 				7C6E2FA71F3304D700536DB6 /* AudioSelectionDataSource.swift in Sources */,

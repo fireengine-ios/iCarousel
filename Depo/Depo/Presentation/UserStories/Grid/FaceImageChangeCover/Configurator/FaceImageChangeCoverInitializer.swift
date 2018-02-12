@@ -8,14 +8,18 @@
 
 import Foundation
 
+protocol FaceImageChangeCoverModuleOutput: class {
+    func onAlbumCoverSelected(item: WrapData)
+}
+
 class FaceImageChangeCoverInitializer: NSObject {
 
-    class func initializeController(with nibName:String, albumUUID: String) -> UIViewController {
+    class func initializeController(with nibName:String, albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?) -> UIViewController {
         let viewController = FaceImageChangeCoverViewController(nibName: nibName, bundle: nil)
     
         let configurator = FaceImageChangeCoverConfigurator()
         let itemsService = FaceImageDetailService(albumUUID: albumUUID, requestSize: 100)
-        configurator.configure(viewController: viewController, itemsService: itemsService)
+        configurator.configure(viewController: viewController, itemsService: itemsService, moduleOutput: moduleOutput)
         
         return viewController
     }

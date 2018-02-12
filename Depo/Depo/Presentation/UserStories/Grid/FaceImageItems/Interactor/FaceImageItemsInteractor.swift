@@ -17,6 +17,7 @@ class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteract
     // MARK: - FaceImageItemsInteractorInput
     
     func loadItem(_ item: BaseDataSourceItem) {
+        
         guard let item = item as? Item, let id = item.id else { return }
         
         if let item = item as? PeopleItem {
@@ -31,9 +32,9 @@ class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteract
             })
         } else if let item = item as? ThingsItem {
             output.startAsyncOperation()
-            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] (uuid) in
+            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] (album) in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.didLoadAlbum(uuid, forItem: item)
+                    output.didLoadAlbum(album, forItem: item)
                 }
                 self?.output.asyncOperationSucces()
                 }, fail: { [weak self] (error) in
@@ -41,9 +42,9 @@ class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteract
             })
         } else if let item = item as? PlacesItem {
             output.startAsyncOperation()
-            placesService.getPlacesAlbum(id: Int(id), success: { [weak self] (uuid) in
+            placesService.getPlacesAlbum(id: Int(id), success: { [weak self] (album) in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.didLoadAlbum(uuid, forItem: item)
+                    output.didLoadAlbum(album, forItem: item)
                 }
                 self?.output.asyncOperationSucces()
                 }, fail: { [weak self] (error) in

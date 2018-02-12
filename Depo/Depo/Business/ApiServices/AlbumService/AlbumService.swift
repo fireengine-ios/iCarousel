@@ -226,7 +226,6 @@ class PhotosAlbumService: BaseRequestService {
         log.debug("PhotosAlbumService changeCoverPhoto")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { (response)  in
-            
             success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)

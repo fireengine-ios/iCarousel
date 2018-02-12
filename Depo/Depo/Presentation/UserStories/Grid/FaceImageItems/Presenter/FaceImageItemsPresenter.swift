@@ -56,9 +56,9 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
     
     // MARK: - Interactor Output
     
-    func didLoadAlbum(_ albumUUID: String, forItem item: Item) {
-        if let router = router as? FaceImageItemsRouter {
-            router.openFaceImageItemPhotosWith(item, albumUUID: albumUUID, moduleOutput: self)
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
+        if let router = router as? FaceImageItemsRouter, let uuid = album.uuid, let coverPhotoURL = album.coverPhoto?.tempDownloadURL {
+            router.openFaceImageItemPhotosWith(item, albumUUID: uuid, coverPhotoURL: coverPhotoURL, moduleOutput: self)
         }
     }
     

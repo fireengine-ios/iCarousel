@@ -1,11 +1,17 @@
 //
 //  FaceImagePhotosViewInput.swift
-//  Depo
+
+//  Depo_LifeTech
 //
-//  Created by Harhun Brothers on 09.02.2018.
+//  Created by Raman Harhun on 2/7/18.
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol FaceImagePhotosViewInput {
+import UIKit
+
+protocol FaceImagePhotosViewInput: class {
+    func setHeaderImage(with url: URL)
+    func loadAlbumsForPeopleItem(_ peopleItem: PeopleItem)
+    func setHeaderViewHidden(_ isHidden: Bool)
     func reloadName(_ name: String)
 }
