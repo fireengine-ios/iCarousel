@@ -2357,6 +2357,7 @@
 		B51FD6391FD18FDB000344BD /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD6261FD135CB000344BD /* libMPush.a */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
+		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
 		B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
 		B54BFF34202B20250018AF82 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF33202B20250018AF82 /* TodayViewController.swift */; };
 		B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54BFF35202B20250018AF82 /* MainInterface.storyboard */; };
@@ -4362,6 +4363,7 @@
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
+		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
 		B54BFF30202B20250018AF82 /* autosync-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "autosync-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54BFF33202B20250018AF82 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		B54BFF36202B20250018AF82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -8762,6 +8764,7 @@
 				B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */,
 				B579E8181FE288A500F47B0A /* PhotoSyncService.swift */,
 				B579E81A1FE2892200F47B0A /* VideoSyncService.swift */,
+				B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */,
 			);
 			path = SyncService;
 			sourceTree = "<group>";
@@ -13750,6 +13753,7 @@
 				98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
 				2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */,
 				CE2F56301F75548500F49DA1 /* SubscriptionsService.swift in Sources */,
+				B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */,
 				9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */,
 				7C66E8AC1F979C3300D98F27 /* CreateStoryPreviyInteractorIO.swift in Sources */,
 				DB6E1B2B2651A46923CB165B /* FeedbackViewController.swift in Sources */,
