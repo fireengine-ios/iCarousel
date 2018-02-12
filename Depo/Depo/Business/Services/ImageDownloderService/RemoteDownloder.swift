@@ -120,6 +120,8 @@ class FilesDownloader {
     let fileManager = FileManager.default
     let requestService = BaseRequestService()
     
+    var error: Error?
+    
     func getFiles(filesForDownload: [FileForDownload], response: @escaping FilesDownloaderResponse, fail: @escaping FilesDownloaderFail) {
         guard filesForDownload.count > 0 else {
             fail(TextConstants.errorFileSystemAccessDenied)
@@ -145,22 +147,28 @@ class FilesDownloader {
             group.enter()
             let params = BaseDownloadRequestParametrs(urlToFile: file.url, fileName: file.name, contentType: file.type)
             
-            requestService.executeDownloadRequest(param: params) { (urlToTmpFile, response, error) in
+            requestService.executeDownloadRequest(param: params) { [weak self] (urlToTmpFile, response, error) in
                 if let urlToTmpFile = urlToTmpFile {
                     let destinationURL = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
                     do {
                         try FileManager.default.moveItem(at: urlToTmpFile, to: destinationURL)
                         localURLs.append(destinationURL)
                     } catch {
-                        print(error.localizedDescription)
+                        self?.error = error
                     }
+                } else {
+                    self?.error = error
                 }
                 group.leave()
             }
         }
         
         group.notify(queue: DispatchQueue.main) {
-            response(localURLs, tmpDirectoryURL)
+            if let error = self.error, localURLs.isEmpty { 
+                fail(error.description)
+            } else {
+                response(localURLs, tmpDirectoryURL)
+            }
         }
     }
     

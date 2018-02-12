@@ -9,30 +9,27 @@
 import UIKit
 
 class AlbumSelectionPresenter: AlbumsPresenter {
+    
     override func viewIsReady(collectionView: UICollectionView) {
         super.viewIsReady(collectionView: collectionView)
         sortedRule = .timeUp
-        dataSource.displayingType = .list
+        dataSource.displayingType = .greed
         dataSource.setPreferedCellReUseID(reUseID: nil)
         dataSource.canReselect = true
+        dataSource.canSelectionState = false
         dataSource.maxSelectionCount = 1
         dataSource.enableSelectionOnHeader = false
-        dataSource.setSelectionState(selectionState: true)
+        dataSource.setSelectionState(selectionState: false)
     }
     
-    override func onNextButton() {
-        if let interact = interactor as? AlbumsInteractor {
-            if (dataSource.selectedItemsArray.count > 0){
-                ///!!!!!!!!!!!
-                if let firsObject = Array(dataSource.selectedItemsArray).first{
-                    interact.onAddPhotosToAlbum(selectedAlbumUUID: firsObject.uuid)
-                }
-            }
+    override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
+        if let interact = interactor as? AlbumsInteractor, let album = item as? AlbumItem {
+            interact.onAddPhotosToAlbum(selectedAlbumUUID: album.uuid)
         }
     }
     
-    func photoAddedToAlbum(){
-        if let view_ = view as? UIViewController{
+    func photoAddedToAlbum() {
+        if let view_ = view as? UIViewController {
             view_.navigationController?.popViewController(animated: true)
         }
     }

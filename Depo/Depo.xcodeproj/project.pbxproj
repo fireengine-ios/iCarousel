@@ -154,6 +154,8 @@
 		7C04350B1F4EF3DA00193C75 /* AlbumDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */; };
 		7C04350D1F4F17E800193C75 /* AlbumDetailResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */; };
 		7C04350F1F50B6E200193C75 /* AlbumSelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350E1F50B6E200193C75 /* AlbumSelectionPresenter.swift */; };
+		7C0D5DF2202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0D5DF1202F108900DE953F /* CreateStoryAudioSelectionViewController.xib */; };
+		7C0D5DF3202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0D5DF1202F108900DE953F /* CreateStoryAudioSelectionViewController.xib */; };
 		7C0DBC311F2F2CE000F90590 /* SelectionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0DBC301F2F2CE000F90590 /* SelectionImageView.swift */; };
 		7C0EBD001F4C5B5100283ECF /* BaseDataSourceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0EBCFF1F4C5B5100283ECF /* BaseDataSourceItem.swift */; };
 		7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18D75C1F9F461A00F8679D /* ShadowView.swift */; };
@@ -3256,6 +3258,7 @@
 		7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailService.swift; sourceTree = "<group>"; };
 		7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailResponce.swift; sourceTree = "<group>"; };
 		7C04350E1F50B6E200193C75 /* AlbumSelectionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumSelectionPresenter.swift; sourceTree = "<group>"; };
+		7C0D5DF1202F108900DE953F /* CreateStoryAudioSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateStoryAudioSelectionViewController.xib; sourceTree = "<group>"; };
 		7C0DBC301F2F2CE000F90590 /* SelectionImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionImageView.swift; sourceTree = "<group>"; };
 		7C0EBCFF1F4C5B5100283ECF /* BaseDataSourceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDataSourceItem.swift; sourceTree = "<group>"; };
 		7C0EFB4EB989796A6FE4FDA8 /* IntroduceInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractorInput.swift; sourceTree = "<group>"; };
@@ -6599,6 +6602,7 @@
 			children = (
 				7C6E2F731F31E4C900536DB6 /* CreateStoryPhotoSelectionViewController.swift */,
 				7C6E2F9B1F31E79100536DB6 /* CreateStoryAudioSelectionViewController.swift */,
+				7C0D5DF1202F108900DE953F /* CreateStoryAudioSelectionViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -10810,6 +10814,7 @@
 				8C0E902C1FDEBDFF00789C91 /* BaseFileContentView.xib in Resources */,
 				8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */,
 				8C06AF6F2008AD70003D8E05 /* duz_cizgi_selected@3x.png in Resources */,
+				7C0D5DF3202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */,
 				8C0E902F1FDEBDFF00789C91 /* ActivityTimelineTimeCell.xib in Resources */,
 				8C06AEE92008AD70003D8E05 /* Buyuk.png in Resources */,
 				8C06B0572008AD71003D8E05 /* parlaklik_secili@3x.png in Resources */,
@@ -11191,6 +11196,7 @@
 				CE51AD6A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.xib in Resources */,
 				CE51AD771EF90853005DCEE0 /* updater_strings.plist in Resources */,
 				7C4485031F0FC87A003AF631 /* SettingHeaderView.xib in Resources */,
+				7C0D5DF2202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */,
 				8C06B0202008AD71003D8E05 /* lifebox@2x.png in Resources */,
 				8C06B1AA2008AD72003D8E05 /* CRYFilterCell.nib in Resources */,
 				CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */,
@@ -14339,7 +14345,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "autosync-widget/Info.plist";

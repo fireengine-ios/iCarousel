@@ -304,6 +304,8 @@ class FileService: BaseRequestService {
     
     //MARK: download && upload
     
+    private var error: ErrorResponse?
+    
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail:FailResponse?) {
         log.debug("FileService download")
 
@@ -321,15 +323,23 @@ class FileService: BaseRequestService {
                 CardsManager.default.setProgressForOperationWith(type: .download,
                                                                             allOperations: allOperationsCount,
                                                                             completedOperations: completedOperationsCount)
-            }, fail: { (error) in
+            }, fail: { [weak self] error in
                 log.debug("FileService download DownLoadOperation fail")
+                
+                self?.error = error
+                /// HERE MUST BE ERROR HANDLER
             })
         }
         
         dispatchQueue.async {
             self.downloadOperation.addOperations(operations, waitUntilFinished: true)
             CardsManager.default.stopOperationWithType(type: .download)
-            success?()
+            
+            if let error = self.error {
+                fail?(error)
+            } else {
+                success?()
+            }
         }
     }
     
@@ -461,8 +471,8 @@ class FileService: BaseRequestService {
                 return
             }
             success?(resultResponse)
-//            self.page += 1
-        }, fail: { (error) in
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
             fail?()
         })
         

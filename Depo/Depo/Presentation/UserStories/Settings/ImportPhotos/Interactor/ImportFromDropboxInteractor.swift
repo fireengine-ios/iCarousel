@@ -66,9 +66,12 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
             DispatchQueue.main.async {
                 self?.output.statusForStartSuccessCallback(status: dropboxStatus)
             }
-        }) { [weak self] error in
+        }) { [weak self] errorResponse in
             DispatchQueue.main.async {
-                self?.output.statusForStartFailureCallback(errorMessage: error.description)
+                if case ErrorResponse.error(let error) = errorResponse, error is URLError {
+                    self?.output.failedWithInternetError(errorMessage: error.localizedDescription)
+                }
+                self?.output.statusForStartFailureCallback(errorMessage: errorResponse.localizedDescription)
             }
         }
     }

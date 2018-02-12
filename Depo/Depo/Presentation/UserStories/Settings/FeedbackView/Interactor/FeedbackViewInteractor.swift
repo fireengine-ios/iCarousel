@@ -20,15 +20,13 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
                     return
                 }
                 
-                self_.output.asyncOperationSucces()
-                
                 if let responce = successResponce as? FeedbackLanguagesListResponse{
                     self_.output.languagesUploaded(lanuages: responce.languagesList)
                 }
             }
         }) { [weak self] (fail) in
             DispatchQueue.main.async {
-                self?.output.fail(text: "fail")
+                self?.output.fail(text: fail.localizedDescription)
             }
         }
     }
@@ -43,7 +41,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             }
             }, fail: { [weak self] (fail) in
                 DispatchQueue.main.async {
-                    self?.output.fail(text: "fail")
+                    self?.output.fail(text: fail.localizedDescription)
                 }
         })
         

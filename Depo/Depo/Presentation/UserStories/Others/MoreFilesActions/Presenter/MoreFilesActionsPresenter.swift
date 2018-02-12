@@ -26,14 +26,11 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
         startAsyncOperationDisableScreen()
     }
     
-    func dismiss(animated: Bool) {
-        debugPrint("Dismiss")
-    }
+    func dismiss(animated: Bool) {} /// overriding
     
     //MARK: - Base presenter
     
     override func outputView() -> Waiting? {
-        let router = RouterVC()
-        return router.rootViewController
+        return RouterVC().rootViewController
     }
 }

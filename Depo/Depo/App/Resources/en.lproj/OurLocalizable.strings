@@ -159,6 +159,7 @@
 "4G" = "4G";
 "3G" = "3G";
 "2G" = "2G";
+"Mobile Data" = "Mobile Data";
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Free up space";
 "Your device memory is almost full" = "Your device memory is almost full";
@@ -243,6 +244,8 @@
 "Add Music" = "Add Music";
 "Sorry, but story audio should not be empty" = "Sorry, but story audio should not be empty";
 "Add music" = "Add music";
+"Musics" = "Musics";
+"Your Uploads" = "Your Uploads";
 "You did not choose music for your story" = "You did not choose music for your story";
 "Fail while adding to album" = "Fail while adding to album";
 "Story not created" = "Story not created";
@@ -546,6 +549,8 @@
 "Please enter your password" = "Please enter your password";
 "Please check the GSM number" = "Please check the GSM number";
 "Login denied. Please check your credentials." = "Login denied. Please check your credentials.";
+"Authentication with Turkcell Password is disabled for the account" = "You can not login to lifebox with your Turkcell password because you have deactivated login with Turkcell password feature. Please, try to login with your lifebox password.";
+"You don't have any lifebox account. Please signup before using the application" = "You don't have any lifebox account. Please signup before using the application";
 "This text doesn't match. Please try again." = "This text doesn't match. Please try again.";
 "Request failed \n Please try again" = "Request failed \n Please try again";
 "Verification code is invalid. \n Please try again." = "Verification code is invalid. \n Please try again.";

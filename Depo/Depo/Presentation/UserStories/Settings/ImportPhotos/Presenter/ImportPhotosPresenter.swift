@@ -33,7 +33,10 @@ extension ImportFromFBPresenter: ImportFromFBViewOutput {
     }
     
     func startFacebook() {
-        guard let fbStatus = facebookStatus else { return }
+        guard let fbStatus = facebookStatus else {
+            interactor.requestStatus()
+            return
+        }
         if fbStatus.connected == true {
             interactor.requestStart()
         } else {

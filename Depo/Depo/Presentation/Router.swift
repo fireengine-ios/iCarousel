@@ -432,7 +432,7 @@ class RouterVC: NSObject {
     //MARK: CreateStory audio selection
     
     func audioSelection(forStory story:PhotoStory) -> UIViewController {
-        let controller = CreateStoryModuleInitializer.initializeAudioSelectionViewControllerForStory(with: "BaseFilesGreedViewController", story: story)
+        let controller = CreateStoryModuleInitializer.initializeAudioSelectionViewControllerForStory(with: "CreateStoryAudioSelectionViewController", story: story)
         return controller
     }
     

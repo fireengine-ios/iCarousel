@@ -14,11 +14,29 @@ enum ErrorResponse {
     case string(String)
     case httpCode(NSInteger)
 }
-extension ErrorResponse: CustomStringConvertible {
-    var description: String {
-        return errorDescription ?? TextConstants.errorUnknown
+
+extension ErrorResponse {
+    func showInternetErrorGlobal() {
+        if case ErrorResponse.error(let error) = self, error is URLError {
+            UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+        }
+    }
+    
+    var isOutOfSpaceError: Bool {
+        if case ErrorResponse.httpCode(413) = self {
+            return true
+        }
+        return false
     }
 }
+
+extension ErrorResponse: CustomStringConvertible {
+    /// need to optimize this (remove from using)
+    var description: String {
+        return localizedDescription
+    }
+}
+
 extension ErrorResponse: LocalizedError {
     var errorDescription: String? {
         switch self {
@@ -27,9 +45,21 @@ extension ErrorResponse: LocalizedError {
         case .string(let errorString):
             return errorString
         case .error(let recivedError):
+            if recivedError.isNetworkError {
+                return TextConstants.errorConnectedToNetwork
+            }
             return recivedError.localizedDescription
         case .httpCode(let code):
             return String(code)
         }
+    }
+}
+
+extension Error {
+    var isNetworkError: Bool {
+        return self is URLError
+    }
+    var description: String {
+        return isNetworkError ? TextConstants.errorConnectedToNetwork : localizedDescription
     }
 }

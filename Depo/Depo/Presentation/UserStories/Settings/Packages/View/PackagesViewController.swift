@@ -72,7 +72,7 @@ extension PackagesViewController: PackagesViewInput {
     }
     
     func display(error: ErrorResponse) {
-        UIApplication.showErrorAlert(message: TextConstants.errorAlert)
+        UIApplication.showErrorAlert(message: error.localizedDescription)
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan]) {

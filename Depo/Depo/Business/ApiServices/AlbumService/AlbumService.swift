@@ -128,7 +128,8 @@ class AlbumService: RemoteItemsService {
             self?.currentPage += 1
             let list = resultResponse.list.flatMap { AlbumItem(remote: $0) }
             success(list)
-        }, fail: { _ in
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
             log.debug("AlbumService remote searchAlbums fail")
 
             fail()

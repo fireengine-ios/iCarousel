@@ -78,7 +78,7 @@ final class AlbumCard: BaseView {
         
         if let searchItem = album?.coverPhoto {
             let item = WrapData(remote: searchItem)
-            previewImageView.loadImageForItem(object: item)
+            previewImageView.loadImage(with: item, isOriginalImage: true)
         }
         
         let photosJson = object[AlbumDetailJsonKey.albumDetailFiles].array

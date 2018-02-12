@@ -20,7 +20,8 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         
         super.viewIsReady(collectionView: collectionView)
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar)
+        NotificationCenter.default.post(name: notificationName, object: nil)
     }
 
     override func uploadData(_ searchText: String! = nil) {
@@ -37,27 +38,15 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func getCellSizeForGreed() -> CGSize {
-//        if (Device.isIpad){
-            return CGSize(width: 100, height: 136)
-//        }
-//        
-//        let w = view.getCollectionViewWidth()
-//        let cellW: CGFloat = (w - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * NumericConstants.numerCellInLineOnIphone)/NumericConstants.numerCellInLineOnIphone
-//        return CGSize(width: cellW, height: cellW)
+        return CGSize(width: 100, height: 136)
     }
     
     override func sortedPushed(with rule: SortedRules){
         log.debug("AlbumsPresenter sortedPushed")
-
-        //sortedRule = rule
+        
         sortedRule = rule
         interactor.getAllItems(sortBy: rule)
         view.changeSortingRepresentation(sortType: rule)
-        
-        
-//        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-//                                             filtes: filters)
-//        dataSource.reloadData()
     }
     
     override func reloadData() {
@@ -96,12 +85,6 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         }
         sortedPushed(with: sortRule)
     }
-
-    //  override func getNextItems() { //TODO: implement pagination
-//        interactor.nextItems(nil, sortBy: .albumName,
-//                         sortOrder: .asc)
-//
-//    }
 }
 
 extension AlbumsPresenter: AlbumDetailModuleOutput {

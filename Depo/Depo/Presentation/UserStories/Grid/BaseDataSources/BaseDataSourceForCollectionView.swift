@@ -94,7 +94,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
-        isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
+        isHeaderless ? setupOneSectionMediaItemsArray(items: allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
+    }
+    
+    private func setupOneSectionMediaItemsArray(items: [WrapData]) {
+        allItems.removeAll()
+        allItems.append(items)
     }
     
     private func isLocalOnly() -> Bool {
@@ -156,7 +161,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private func isOnlyNonLocal(filters: [GeneralFilesFiltrationType]) -> Bool {
         for filter in filters {
             switch filter {
-            case   .localStatus(.nonLocal):
+            case .localStatus(.nonLocal):
                 return true
             default:
                 break
@@ -253,7 +258,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var allItemsMD5 = allItemsArray.map{return $0.md5}
         
         if !isPaginationDidEnd {
-            guard let lastRemoteObject = originalItemsArray.last else {
+            guard let lastRemoteObject = getLastNonMetaEmptyItem(items: originalItemsArray) else {
                 return originalItemsArray + tempoLocalArray
             }
             for localItem in tempoLocalArray {
@@ -338,15 +343,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return tempoArray
     }
     
+    private func getLastNonMetaEmptyItem(items: [WrapData]) -> WrapData? {
+        for item in items.reversed() {
+            if item.metaData?.takenDate != nil {
+                return item
+            }
+        }
+        return items.last
+    }
+    
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
         let lastItemCreatedDate =  isMetaDate ? lastItem.metaDate : lastItem.creationDate!
         let newItemCreationDate = isMetaDate ? newItem.metaDate : newItem.creationDate!
-        //        if var lastItemCreatedDate = lastItem.creationDate,
-        //            var newItemCreationDate = newItem.creationDate {
-        //            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
-        //                let newItemMetaDate = newItem.metaData?.takenDate {
         
-        //            }
         if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
             lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
             
@@ -355,11 +364,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         } else {
             allItems.append([newItem])
         }
-        //        }
-        //    else {
-        //            allItems.append([newItem])
-        //        }
-        
     }
     
     private func addByName(lastItem: WrapData, newItem: WrapData) {
@@ -406,6 +410,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getAllLocalItems() -> [WrapData] {
+        guard
+            let unwrapedFilters = originalFilters,
+            let specificFilters = getFileFilterType(filters: unwrapedFilters),
+            !isOnlyNonLocal(filters: unwrapedFilters),
+            (specificFilters == .video || specificFilters == .image)
+        else {
+            return []
+        }
+
         let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
         let predicate = PredicateRules().predicate(filters: [.localStatus(.local)])
         let sortDescriptors = CollectionSortingRules(sortingRules: currentSortType).rule.sortDescriptors
@@ -433,8 +446,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         allItems.removeAll()
         allMediaItems.removeAll()
-        self.allLocalItems.removeAll()
-        self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+        allLocalItems.removeAll()
+        allLocalItems.append(contentsOf: getAllLocalItems())
         DispatchQueue.main.async {
             
             if self.isLocalOnly() {
@@ -466,8 +479,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         self.allLocalItems.append(contentsOf: self.getAllLocalItems())
         
         DispatchQueue.main.async {
-            
-            
             if self.isLocalOnly() {
                 self.allItems = [self.allLocalItems]
                 self.reloadData()
@@ -587,11 +598,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     //MARK: LBCellsDelegate
     
-    func onLongPress(cell: UICollectionViewCell){
-        if !canSelectionState {
-            return
-        }
-        
+    func canLongPress() -> Bool {
+        return canSelectionState
+    }
+    
+    func onLongPress(cell: UICollectionViewCell) {
         if maxSelectionCount == selectedItemsArray.count {
             if let cell = cell as? CollectionViewCellForStoryPhoto  {
                 cell.setSelection(isSelectionActive: false, isSelected: false)
@@ -602,11 +613,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             let path = collectionView?.indexPath(for: cell),
             let object = itemForIndexPath(indexPath: path) {
             
-            if !isObjctSelected(object: object){
+            if !isObjctSelected(object: object) {
                 onSelectObject(object: object)
             }
             
-            if !isSelectionStateActive{
+            if !isSelectionStateActive {
                 forwardDelegate.onLongPressInCell()
             }
         }

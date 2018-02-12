@@ -46,6 +46,7 @@ extension ActivityTimelinePresenter: ActivityTimelineInteractorOutput {
         asyncOperationSucces()
     }
     func failedTimelineActivities(with error: ErrorResponse) {
+        UIApplication.showErrorAlert(message: error.localizedDescription)
         view.endInfinityScrollWithNoMoreData()
         asyncOperationSucces()
     }

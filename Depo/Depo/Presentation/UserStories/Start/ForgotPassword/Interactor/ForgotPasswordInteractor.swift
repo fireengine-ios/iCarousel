@@ -40,23 +40,19 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
             }
         }, fail: { [weak self] response in
             DispatchQueue.main.async {
-                debugPrint("forgot password response fail", response.description)
-                self?.output.requestFailed(withError: self?.checkErrorService(withErrorResponse: response.description) ?? "Error")
+                let errorMessage = self?.checkErrorService(withErrorResponse: response.description) ?? response.description
+                self?.output.requestFailed(withError:  errorMessage)
             }
         })
     }
     
-    func checkErrorService(withErrorResponse response: Any) -> String {
-        guard let response1 = response as? String else {
-            return TextConstants.forgotPasswordErrorHandlingText
-        }
-        
-        if response1.contains("ACCOUNT_NOT_FOUND_FOR_EMAIL") {
+    func checkErrorService(withErrorResponse response: String) -> String? {
+        if response.contains("ACCOUNT_NOT_FOUND_FOR_EMAIL") {
             return TextConstants.forgotPasswordErrorNotRegisteredText
         }
-        if response1 == "This package activation code is invalid" {
+        if response == "This package activation code is invalid" {
             return TextConstants.forgotPasswordErrorCaptchaText
         }
-        return TextConstants.forgotPasswordCommonErrorText
+        return nil
     }
 }

@@ -162,14 +162,12 @@ extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, 
     }
     
     func infoButtonGotPressed(with sender: Any?, andType type: UserValidationResults) {
-//        debugPrint("sender is ", sender)
         var errorType = type
         if let cell = sender as? PasswordCell, cell.type == .reEnter {
             errorType = .passwodsNotMatch
         }
         
         output?.infoButtonGotPressed(withType: errorType)
-//        passwordNotValid
     }
     
     

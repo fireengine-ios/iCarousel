@@ -8,13 +8,8 @@
 
 protocol SettingsViewInput: class {
     func setupVersionLabel()
-    
     func showCellsData(array: [[String]])
-    
     func showPhotoAlertSheet()
-    
     func profileInfoChanged()
-    func profileWontChange()
-
-//    func changeTurkCellSecurity(passcode: Bool, autologin: Bool)
+    func profileWontChangeWith(error: Error)
 }
