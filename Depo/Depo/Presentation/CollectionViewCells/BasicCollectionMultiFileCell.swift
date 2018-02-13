@@ -85,21 +85,19 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         }
     }
     
-    override func setPlaceholderImage(fileType: FileType) {
-        var image: UIImage?
-        
-        switch fileType {
-        case .folder:
-            image = isBigSize() ? UIImage(named: "fileBigIconFolder") : UIImage(named: "fileIconFolder")
-        case .audio:
-            image = isBigSize() ? UIImage(named: "fileBigIconAudio") : UIImage(named: "fileIconAudio")
-        case let .application(applicationType):
-            image = isBigSize() ? applicationType.bigIconImage() : applicationType.smallIconImage()
-        default:
-            image = nil
-        }
-        setImage(image: image, animated: false)
-    }
+//    override func setPlaceholderImage(fileType: FileType) {
+//        switch fileType {
+//        case .folder:
+//            image = isBigSize() ? UIImage(named: "fileBigIconFolder") : UIImage(named: "fileIconFolder")
+//        case .audio:
+//            image = isBigSize() ? UIImage(named: "fileBigIconAudio") : UIImage(named: "fileIconAudio")
+//        case let .application(applicationType):
+//            image = isBigSize() ? applicationType.bigIconImage() : applicationType.smallIconImage()
+//        default:
+//            image = nil
+//        }
+//        setImage(image: image, animated: false)
+//    }
     
     private func isBigSize() -> Bool{
         return frame.size.height > BasicCollectionMultiFileCell.frameSize
@@ -158,14 +156,14 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         }
 
         bigContentImageView.image = nil
-        bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(object: wrappered)
+        bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         if (isBigSize()){
-            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(object: wrappered)
+            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         }else{
             if (isCellSelectionEnabled){
-                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(object: wrappered)
+                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: wrappered.fileType)
             }else{
-                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(object: wrappered)
+                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
             }
         }
         
