@@ -105,10 +105,10 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
                 self.output.didLoadContacts(self.contacts)
                 self.output.asyncOperationFinished()
                 self.output.didDeleteContact()
-            }) { [weak self] (error) in
+            }, fail: { [weak self] error in
                 guard let `self` = self else { return }
                 self.output.asyncOperationFinished()
-            }
+            })
         }
         
         output.deleteContact(okHandler)
