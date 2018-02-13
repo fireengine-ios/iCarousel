@@ -20,9 +20,6 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
         contentView.backgroundColor = .white
     }
     
-    override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
-    }
-    
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
         guard let item = wrappedObj as? Item else{
             return
@@ -45,14 +42,14 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
     
     override func setImage(image: UIImage?, animated: Bool) {
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.opacity = 0.1
+        imageView.layer.opacity = NumericConstants.numberCellDefaultOpacity
         imageView.image = image
         if animated {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.imageView.layer.opacity = 1.0
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+                self.imageView.layer.opacity = NumericConstants.numberCellAnimateOpacity
             })
         } else {
-            imageView.layer.opacity = 1.0
+            imageView.layer.opacity = NumericConstants.numberCellAnimateOpacity
         }
         
         backgroundColor = ColorConstants.fileGreedCellColor

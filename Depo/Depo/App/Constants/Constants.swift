@@ -779,4 +779,9 @@ struct NumericConstants {
     static let minute: TimeInterval = 60
     static let defaultTimeout: TimeInterval = 30.0
     
+    static let faceImageCellTransperentAlpha: CGFloat = 0.6
+    
+    static let numberCellDefaultOpacity: Float = 0.1
+    static let numberCellAnimateOpacity: Float = 1
+    
 }

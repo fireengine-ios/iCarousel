@@ -28,7 +28,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         if (isSelectionActive) {
             visibleImageView.isHidden = !visibleImageView.isHidden
             
-            transperentView.alpha = transperentView.alpha > 0 ? 0 : 0.6
+            transperentView.alpha = transperentView.alpha > 0 ? 0 : NumericConstants.faceImageCellTransperentAlpha
         }
     }
     
@@ -52,7 +52,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
             let isVisible = peopleItem.responseObject.visible,
             !isVisible {
             visibleImageView.isHidden = isVisible
-            transperentView.alpha = 0.6
+            transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
         }
     }
     
@@ -68,14 +68,14 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     
     override func setImage(image: UIImage?, animated: Bool) {
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.opacity = 0.1
+        imageView.layer.opacity = NumericConstants.numberCellDefaultOpacity
         imageView.image = image
         if animated {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.imageView.layer.opacity = 1.0
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+                self.imageView.layer.opacity = NumericConstants.numberCellAnimateOpacity
             })
         } else {
-            imageView.layer.opacity = 1.0
+            imageView.layer.opacity = NumericConstants.numberCellAnimateOpacity
         }
         
         backgroundColor = ColorConstants.fileGreedCellColor
