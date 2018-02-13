@@ -24,9 +24,9 @@
                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <dataDetectorType key="dataDetectorTypes"/>
                     </webView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SUZ-t1-yzj" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGW-xm-Jy7" customClass="ImageScrollView" customModule="lifebox" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
-                    </imageView>
+                    </scrollView>
                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="JVY-Sc-8sq">
                         <rect key="frame" x="124.5" y="115" width="20" height="20"/>
                     </activityIndicatorView>
@@ -40,26 +40,26 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="vGW-xm-Jy7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8wZ-NE-75O"/>
                 <constraint firstAttribute="trailing" secondItem="slB-Qr-paR" secondAttribute="trailing" id="9js-d9-vzO"/>
                 <constraint firstItem="zrl-EP-Pgx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CIV-G6-Rfc"/>
                 <constraint firstAttribute="bottom" secondItem="slB-Qr-paR" secondAttribute="bottom" id="Gow-81-ter"/>
+                <constraint firstItem="vGW-xm-Jy7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JVq-N4-FDW"/>
+                <constraint firstAttribute="bottom" secondItem="vGW-xm-Jy7" secondAttribute="bottom" id="Ppj-jx-2QC"/>
+                <constraint firstAttribute="trailing" secondItem="vGW-xm-Jy7" secondAttribute="trailing" id="TTN-TF-VwY"/>
                 <constraint firstItem="slB-Qr-paR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Unx-kw-eNP"/>
                 <constraint firstItem="JVY-Sc-8sq" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="aYa-9y-9oN"/>
-                <constraint firstAttribute="bottom" secondItem="SUZ-t1-yzj" secondAttribute="bottom" id="aae-dI-UuW"/>
-                <constraint firstItem="SUZ-t1-yzj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bTY-nJ-Pds"/>
                 <constraint firstItem="zrl-EP-Pgx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hWB-yg-9Tp"/>
                 <constraint firstAttribute="trailing" secondItem="zrl-EP-Pgx" secondAttribute="trailing" id="lFM-o6-HU4"/>
                 <constraint firstItem="JVY-Sc-8sq" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="off-Ep-f2O"/>
                 <constraint firstAttribute="bottom" secondItem="zrl-EP-Pgx" secondAttribute="bottom" id="pP1-kF-XSu"/>
-                <constraint firstAttribute="trailing" secondItem="SUZ-t1-yzj" secondAttribute="trailing" id="vGV-Ph-hZl"/>
                 <constraint firstItem="slB-Qr-paR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zAM-58-59d"/>
-                <constraint firstItem="SUZ-t1-yzj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zQc-k0-hU2"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="269" height="250"/>
             <connections>
                 <outlet property="activity" destination="JVY-Sc-8sq" id="nRu-oT-LPY"/>
-                <outlet property="imageView" destination="SUZ-t1-yzj" id="e7V-E7-yDZ"/>
+                <outlet property="imageScrollView" destination="vGW-xm-Jy7" id="zw5-gl-tsP"/>
                 <outlet property="playVideoButton" destination="slB-Qr-paR" id="G49-3u-rfr"/>
                 <outlet property="webView" destination="zrl-EP-Pgx" id="uV2-m1-yr1"/>
             </connections>

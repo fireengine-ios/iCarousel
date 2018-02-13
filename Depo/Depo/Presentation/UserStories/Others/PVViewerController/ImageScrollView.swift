@@ -12,11 +12,16 @@ final class ImageScrollView: UIScrollView {
     
     private(set) var imageView = UIImageView()
     
-    var image = UIImage() {
+    var image: UIImage? {
         didSet {
+            guard let image = image else {
+                return
+            }
             imageView.image = image
             imageView.frame.size = image.size
             contentSize = image.size
+//            adjustFrameToCenter()
+            updateZoom()
         }
     }
     
@@ -44,6 +49,9 @@ final class ImageScrollView: UIScrollView {
     }
     
     func updateZoom() {
+        guard let image = image else {
+            return
+        }
         setMaxMinZoomScales(for: image.size)
     }
     

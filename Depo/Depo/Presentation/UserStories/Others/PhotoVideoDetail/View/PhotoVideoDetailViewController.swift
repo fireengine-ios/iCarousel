@@ -11,6 +11,17 @@ import AVKit
 import AVFoundation
 import Photos
 
+class PreventCollectionView: UICollectionView {
+    
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        if view is UIButton {
+            return true
+        }
+        return super.touchesShouldCancel(in: view)
+
+    }
+}
+
 //BaseFileContentViewDelegate
 class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewInput {
     
@@ -73,7 +84,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.delaysContentTouches = false
     }
     
     

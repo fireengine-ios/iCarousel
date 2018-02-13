@@ -16,7 +16,10 @@ protocol PhotoVideoDetailCellDelegate: class {
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
     
-    @IBOutlet private weak var imageView: LoadingImageView!
+    private lazy var filesDataSource = FilesDataSource()
+    
+//    @IBOutlet private weak var imageView: LoadingImageView!
+    @IBOutlet private weak var imageScrollView: ImageScrollView!
     @IBOutlet private weak var activity: UIActivityIndicatorView!
     @IBOutlet private weak var playVideoButton: UIButton!
     @IBOutlet private weak var webView: UIWebView!
@@ -30,19 +33,32 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         backgroundColor = UIColor.clear
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageScrollView.updateZoom()
+    }
+    
     func setObject(object:Item, index: Int) {
         webView.isHidden = true
         
-        imageView.image = nil
+        imageScrollView.imageView.image = nil
         playVideoButton.isHidden = true
         self.index = index
         
         if object.fileType == .video || object.fileType == .image {
-            imageView.loadImage(with: object, isOriginalImage: true)
+//            imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
+            filesDataSource.getImage(for: object, isOriginal: true) { [weak self] image in
+                DispatchQueue.main.async {
+                    self?.imageScrollView.delegate = self
+                    self?.imageScrollView.image = image
+                    
+//                    guard let image = image else { return }
+                }
+            }
             playVideoButton.isHidden = !(object.fileType == FileType.video)
             
         } else if object.fileType != .audio, object.fileType.isUnSupportedOpenType {
-            imageView.isHidden = true
+            imageScrollView.imageView.isHidden = true
             webView.isHidden = false
             if let url = object.urlToFile {
                 webView.delegate = self
@@ -69,7 +85,15 @@ extension PhotoVideoDetailCell: UIScrollViewDelegate {
 //        } else if scrollOffsetX < 0 - scrollWidth * 0.15 {
 //            delegate?.pageToLeft()
 //        }
-//        
+    }
+    
+    // MARK: - imageScrollView
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageScrollView.imageView
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        imageScrollView.adjustFrameToCenter()
     }
 }
 
