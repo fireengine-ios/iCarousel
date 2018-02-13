@@ -656,7 +656,7 @@ extension TabBarViewController: TabBarActionHandler {
             
         case .uploadFromLifeBox:
             let parentFolder = router.getParentUUID()
-            var controller: UIViewController
+            let controller: UIViewController
             if let currentVC = currentViewController as? BaseFilesGreedViewController {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule())
             } else {
