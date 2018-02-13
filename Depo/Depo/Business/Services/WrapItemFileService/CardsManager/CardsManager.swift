@@ -211,10 +211,8 @@ class CardsManager: NSObject {
     
     private func serverOperationFor(type: OperationType) -> HomeCardResponse? {
         for serverObject in homeCardsObjects {
-            if type == .freeAppSpaceLocalWarning{
-                if serverObject.getOperationType() == .freeAppSpace {
-                    return serverObject
-                }
+            if type == .freeAppSpaceLocalWarning, serverObject.getOperationType() == .freeAppSpace{
+                return serverObject
             }
             
             if serverObject.getOperationType() == type{
