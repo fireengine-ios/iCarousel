@@ -145,7 +145,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         case .denied:
             showSettingsAlert(completionHandler: completionHandler)
         case .restricted, .notDetermined:
-            CNContactStore().requestAccess(for: .contacts) { granted, error in
+            CNContactStore().requestAccess(for: .contacts) { [weak self] granted, error in
+                guard let `self` = self else { return }
                 DispatchQueue.main.async {
                     if granted {
                         completionHandler(true)
