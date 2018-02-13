@@ -18,6 +18,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
 
     var contactSyncResponse: ContactSync.SyncResponse?
     var isBackUpAvailable: Bool { return contactSyncResponse != nil }
+    let reachability = ReachabilityService()
     
     //MARK: view out
     func viewIsReady() {
@@ -120,6 +121,12 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     private func proccessOperation(_ operationType: SyncOperationType) {
+        if !self.reachability.isReachable &&
+            (operationType == .backup || operationType == .restore || operationType == .analyze)  {
+            router.goToConnectedToNetworkFailed()
+            return
+        }
+        
         if isBackUpAvailable, operationType == .backup {
             let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
                                                   message: TextConstants.errorAlertTextBackupAlreadyExist,
