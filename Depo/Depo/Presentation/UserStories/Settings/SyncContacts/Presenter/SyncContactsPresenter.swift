@@ -146,10 +146,10 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             showSettingsAlert(completionHandler: completionHandler)
         case .restricted, .notDetermined:
             CNContactStore().requestAccess(for: .contacts) { granted, error in
-                if granted {
-                    completionHandler(true)
-                } else {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    if granted {
+                        completionHandler(true)
+                    } else {
                         self.showSettingsAlert(completionHandler: completionHandler)
                     }
                 }
