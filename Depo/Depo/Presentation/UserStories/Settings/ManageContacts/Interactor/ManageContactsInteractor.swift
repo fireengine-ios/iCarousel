@@ -111,16 +111,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
             }
         }
         
-        let controller = PopUpController.with(title: TextConstants.contactConfirmDeleteTitle,
-                                              message: TextConstants.contactConfirmDeleteText,
-                                              image: .delete,
-                                              firstButtonTitle: TextConstants.errorAlertNopeBtnBackupAlreadyExist,
-                                              secondButtonTitle: TextConstants.errorAlertYesBtnBackupAlreadyExist,
-                                              secondAction: { vc in
-                                                vc.close(completion: okHandler)
-        })
-        
-        RouterVC().presentViewController(controller: controller)
+        output.deleteContact(okHandler)
     }
     
     func cancelSearch() {

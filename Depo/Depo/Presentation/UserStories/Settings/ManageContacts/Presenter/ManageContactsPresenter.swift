@@ -38,6 +38,10 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
     
     //MARK: Interactor Output
     
+    func deleteContact(_ completion: @escaping (() -> Void)) {
+        router.deleteContact(completion)
+    }
+    
     func didLoadContacts(_ contacts: [RemoteContact]) {
         let sortedContacts = sortContacts(contacts)
         DispatchQueue.main.async {
