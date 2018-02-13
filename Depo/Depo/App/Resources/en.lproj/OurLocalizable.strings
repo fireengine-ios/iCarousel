@@ -49,6 +49,7 @@
 "Account cannot be found" = "Account cannot be found";
 "cancelled" = "cancelled";
 "The network connection was lost." = "The network connection was lost.";
+"ServiceError" = "ServiceError";
 "Nothing to download" = "Nothing to download";
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
@@ -294,6 +295,8 @@
 "Updated" = "Updated";
 "New Contact" = "New Contact";
 "Back Up My Contacts" = "Back Up My Contacts";
+"Are you sure you want to delete?" = "Are you sure you want to delete?";
+"This contact will be deleted from your contacts." = "This contact will be deleted from your contacts.";
 "%@ of %@ has remained" = "%@ of %@ has remained";
 "UPGRADE" = "UPGRADE";
 "Upgrade" = "Upgrade";

@@ -267,7 +267,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         log.debug("BaseFilesGreedPresenter onItemSelected")
 
         if item.fileType.isUnSupportedOpenType {
-            let sameTypeFiles: [BaseDataSourceItem] = data.flatMap{ return $0 }.filter{ $0.fileType == item.fileType }
+            let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
                                   type: type, sortType: sortedType, moduleOutput: self)
         } else {
@@ -275,6 +275,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                           image: .error, buttonTitle: TextConstants.ok)
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
+    }
+    
+    private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
+        let allItems = items.flatMap{ return $0 }
+        if item.fileType.isDocument {
+            return allItems.filter{ $0.fileType.isDocument }
+        } else if item.fileType == .video || item.fileType == .image {
+            return allItems.filter{ ($0.fileType == .video) || ($0.fileType == .image) }
+        }
+        return allItems.filter{ $0.fileType == item.fileType }
     }
     
     func getCellSizeForList() -> CGSize {
