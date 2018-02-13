@@ -32,16 +32,11 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     @IBOutlet weak var pickerBottomConstraint: NSLayoutConstraint!
     
-
     @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var errorLabelHeight: NSLayoutConstraint!
 
-    
     private var originBottomH:CGFloat = -1
     private var originSpaceBetweenNextButtonAndTable: CGFloat = -1
-
     
-    private let errorLabelConstraintOriginalHeight: CGFloat = 73
     private let erroredSpaceBetweenNextButtonAndTable: CGFloat = 20
     
     // MARK: Life cycle
@@ -52,9 +47,8 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
             setNavigationTitle(title: TextConstants.registerTitle)
         }
         
-        errorLabel.text = TextConstants.registrationPasswordError
+        errorLabel.text = ""
         errorLabel.textColor = ColorConstants.yellowColor
-        errorLabelHeight.constant = 0
         errorLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
         if (Device.isIpad){
             navigationItem.title = ""
@@ -117,7 +111,6 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     func showErrorTitle(withText: String) {
-//        errorLabel.text = withText
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 3
         errorLabel.attributedText = NSAttributedString(string: withText, attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
@@ -128,14 +121,14 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     func changeErrorLabelAppearance(status: Bool) {
-        errorLabelHeight.constant = status ? errorLabelConstraintOriginalHeight : 0
-        
         if status {
             hideKeyboardAndPicker()
 //            spaceBetweenNextButtonAndTable.constant = erroredSpaceBetweenNextButtonAndTable
             
 //            let point = CGPoint(x: 0, y: 0)
 //            scrollView.setContentOffset(point, animated: true)
+        } else {
+            errorLabel.text = ""
         }
         view.updateConstraints()
         view.layoutIfNeeded()
@@ -225,11 +218,10 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     @objc private func hideKeyboard() {
         view.endEditing(true)
-        self.bottomConstraint.constant = originBottomH//
-//        spaceBetweenNextButtonAndTable.constant = erroredSpaceBetweenNextButtonAndTable
+        bottomConstraint.constant = originBottomH
         
-        spaceBetweenNextButtonAndTable.constant = (errorLabelHeight.constant == 0) ? originSpaceBetweenNextButtonAndTable : erroredSpaceBetweenNextButtonAndTable
-        self.view.layoutIfNeeded()
+        spaceBetweenNextButtonAndTable.constant = errorLabel.text!.isEmpty ? originSpaceBetweenNextButtonAndTable : erroredSpaceBetweenNextButtonAndTable
+        view.layoutIfNeeded()
     }
     
     private func handleNextAction() {

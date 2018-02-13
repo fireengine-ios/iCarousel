@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -13,11 +14,10 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegistrationViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegistrationViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="bottomConstraint" destination="2gx-QT-P6F" id="bua-Im-WLu"/>
                 <outlet property="errorLabel" destination="i69-kg-6FH" id="O38-wt-SBH"/>
-                <outlet property="errorLabelHeight" destination="0pw-6T-Ng0" id="Sdd-yA-Lbr"/>
                 <outlet property="iPadTitleLabel" destination="5VP-G7-Jqt" id="489-ch-hCy"/>
                 <outlet property="nextBtn" destination="pdV-lc-PZm" id="dFy-WB-W6I"/>
                 <outlet property="pickerBottomConstraint" destination="Mmb-vD-xV3" id="lP4-e8-aH0"/>
@@ -50,7 +50,7 @@
                     <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kkP-qM-De4">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="680"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="628.5"/>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="1000" id="FUf-r3-ek0"/>
@@ -69,23 +69,23 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" bounces="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="TYi-I0-oIL">
-                            <rect key="frame" x="0.0" y="141" width="320" height="369"/>
+                            <rect key="frame" x="0.0" y="89.5" width="320" height="369"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="369" id="tgp-Hr-Ih2"/>
                             </constraints>
                         </tableView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i69-kg-6FH" userLabel="ErrorLabel">
-                            <rect key="frame" x="30" y="48" width="262" height="73"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Error label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i69-kg-6FH" userLabel="ErrorLabel">
+                            <rect key="frame" x="30" y="48" width="262" height="21.5"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="73" id="0pw-6T-Ng0"/>
+                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="90" id="0pw-6T-Ng0"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdV-lc-PZm" customClass="WhiteButtonWithRoundedCorner" customModule="Depo_LifeTech" customModuleProvider="target">
-                            <rect key="frame" x="89.5" y="590" width="141" height="55"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdV-lc-PZm" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
+                            <rect key="frame" x="89.5" y="538.5" width="141" height="55"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="141" id="9TT-Wd-DJU">
