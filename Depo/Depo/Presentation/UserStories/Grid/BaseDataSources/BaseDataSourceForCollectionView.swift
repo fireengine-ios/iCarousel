@@ -36,6 +36,8 @@ enum BaseDataSourceDisplayingType{
     
     @objc optional func scrollViewDidScroll(scrollView: UIScrollView)
     
+    @objc optional func didChangeSelection(state: Bool)
+    
 }
 
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
@@ -548,6 +550,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         for header in headers{
             header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
         }
+        
+        delegate?.didChangeSelection?(state: isSelectionStateActive)
     }
     
     func getAllObjects() -> [[BaseDataSourceItem]] {

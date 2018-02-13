@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractorOutput, BaseDataSourceForCollectionViewDelegate {
+class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleInput {
     
     weak var view: SearchViewInput!
     var interactor: SearchViewInteractorInput!
@@ -27,6 +27,12 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     var filters: [MoreActionsConfig.MoreActionsFileType] = []
     
     var sortedRule: SortedRules = .timeDown
+    
+    var alertSheetModule: AlertFilesActionsSheetModuleInput?
+    var alertSheetExcludeTypes = [ElementTypes]()
+    
+    var bottomBarConfig: EditingBarConfig?    
+    weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
     
     //MARK : BasePresenter
     
@@ -131,7 +137,11 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func tapCancel() {
-        moduleOutput?.cancelSearch()
+        if dataSource.isInSelectionMode() {
+            stopEditing()
+        } else {
+            moduleOutput?.cancelSearch()
+        }
     }
     
     func onClearRecentSearchesTapped() {
@@ -188,25 +198,53 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         startEditing()
     }
     
-    private func startEditing() {
-        dataSource.setSelectionState(selectionState: true)
-    }
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         self.view.scrollViewDidScroll(scrollView: scrollView)
     }
     
-    func onChangeSelectedItemsCount(selectedItemsCount: Int) {}
+    func onChangeSelectedItemsCount(selectedItemsCount: Int) {
+        setupNewBottomBarConfig()
+        log.debug("SearchViewPresenter onChangeSelectedItemsCount")
+        
+        if (selectedItemsCount == 0){
+            log.debug("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
+            
+            bottomBarPresenter?.dismiss(animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        }else{
+            log.debug("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
+            
+            bottomBarPresenter?.show(animated: true, onView: nil)
+        }
+        
+        view.setNavBarRigthItem(active: canShow3DotsButton())
+        view.selectedItemsCountChange(with: selectedItemsCount)
+    }
+    
+    func setupNewBottomBarConfig() {
+        guard let barConfig = interactor.bottomBarConfig,
+            let array = dataSource.getSelectedItems() as? [Item] else {
+                return
+        }
+        bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
+    }
+    
     func onMaxSelectionExeption() {}
     func onMoreActions(ofItem: Item?, sender: Any) {}
     
-    func getNextItems() {
-        
+    func getNextItems() { }
+    
+    func didChangeSelection(state: Bool) {
+        view.onSetSelection(state: state)
     }
     
     private func createStory() {
-        var items = dataSource.allItems.flatMap { $0 }
-        items = items.filter { $0.fileType == .image }
+        let items: [BaseDataSourceItem]
+        if dataSource.isInSelectionMode() {
+            items = dataSource.selectedItemsArray.flatMap { $0 }.filter { $0.fileType == .image }
+        } else {
+            items = dataSource.allItems.flatMap { $0 }.filter { $0.fileType == .image }
+        }
         
         if items.isEmpty {
             router.showNoFilesToCreateStoryAlert()
@@ -214,6 +252,96 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             router.createStoryWithItems(items)
         }
     }
+    
+    func moreActionsPressed(sender: Any) {
+
+        let selectionMode = dataSource.isInSelectionMode()
+        var actionTypes = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
+        if selectionMode {
+            let selectedItemsUUIDs = Array(dataSource.selectedItemsArray)
+            var selectedItems = [BaseDataSourceItem]()
+            
+            for items in dataSource.getAllObjects() {
+                selectedItems += items.filter { selectedItemsUUIDs.contains($0) }
+            }
+            
+            //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
+            
+            if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image } ) {
+                let index = actionTypes.index(where: { return $0 == .createStory})!
+                actionTypes.remove(at: index)
+            }
+            
+            if selectedItems.count != 1, let renameIndex = actionTypes.index(of: .rename) {
+                actionTypes.remove(at: renameIndex)
+            }
+            
+            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: {$0.fileType == .image}) {
+                actionTypes.remove(at: printIndex)
+            }
+            
+            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: {$0.fileType == .image}) {
+                actionTypes.remove(at: editIndex)
+            }
+            
+            if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
+                let serverObjects = selectedItems.filter({ return !$0.isLocalItem })
+                if serverObjects.isEmpty {
+                    actionTypes.remove(at: deleteOriginalIndex)
+                } else if selectedItems is [Item] {
+                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item])
+                    if localDuplicates.count == 0 {
+                        //selectedItems = localDuplicates
+                        actionTypes.remove(at: deleteOriginalIndex)
+                    } else {
+                        
+                    }
+                }
+                
+            }
+            
+            alertSheetModule?.showAlertSheet(with: actionTypes,
+                                             items: selectedItems,
+                                             presentedBy: sender,
+                                             onSourceView: nil,
+                                             excludeTypes: alertSheetExcludeTypes)
+        } else {
+            actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.index(of: .download) {
+                actionTypes.remove(at: downloadIdex)
+            }
+            alertSheetModule?.showAlertSheet(with: actionTypes,
+                                             presentedBy: sender,
+                                             onSourceView: nil)
+        }
+        
+    }
+    
+    // MARK: Bottom Bar
+    
+    private func canShow3DotsButton() -> Bool {
+        let array = dataSource.getSelectedItems().filter {
+            if $0.isLocalItem && $0.fileType == .video {
+                return false
+            }
+            return true
+        }
+        return !array.isEmpty
+    }
+    
+    private func startEditing() {
+        view.setNavBarRigthItem(active: false)
+        dataSource.setSelectionState(selectionState: true)
+    }
+    
+    
+    private func stopEditing() {
+        bottomBarPresenter?.dismiss(animated: true)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        dataSource.setSelectionState(selectionState: false)
+        view.setNavBarRigthItem(active: true)
+    }
+    
     
     //MARK: - View output/TopBar/UnderNavBarBar Delegates
     
@@ -238,6 +366,36 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             dataSource.updateDisplayngType(type: .list)
         }
     }
+    
+    //MARK: - BaseFilesGreedModuleInput
+    
+    var selectedItems: [BaseDataSourceItem] {
+        return dataSource.getSelectedItems()
+    }
+    
+    func operationFinished(withType type: ElementTypes, response: Any?) {
+        log.debug("BaseFilesGreedPresenter operationFinished")
+        debugPrint("finished")
+        dataSource.setSelectionState(selectionState: false)
+    }
+    
+    func operationFailed(withType type: ElementTypes) {
+        log.debug("BaseFilesGreedPresenter operationFailed")
+        debugPrint("failed")
+        dataSource.setSelectionState(selectionState: false)
+    }
+    
+    func selectModeSelected() {
+        log.debug("BaseFilesGreedPresenter selectModeSelected")
+        
+        startEditing()
+    }
+    
+    func printSelected() { }
+    func moveBack() { }
+    func selectAllModeSelected() { }
+    func deSelectAll() { }
+    func stopModeSelected() { }
 }
 
 extension SearchViewPresenter: TabBarActionHandler {

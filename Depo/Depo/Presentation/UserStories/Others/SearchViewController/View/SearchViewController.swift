@@ -25,13 +25,13 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     @IBOutlet weak var topBarContainer: UIView!
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
-     let underNavBarBarHeight: CGFloat = 53
     
-    let musicBar = MusicBar(frame: CGRect.zero)
-
     @IBOutlet weak var musicBarContainer: UIView!
     @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
-
+    
+    let underNavBarBarHeight: CGFloat = 53
+    let musicBar = MusicBar(frame: CGRect.zero)
+    
     // MARK: - Variables
     var underNavBarBar: GridListTopBar?
     var output: SearchViewOutput!
@@ -41,16 +41,19 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     var tabBarActionHandler: TabBarActionHandler? { return output.tabBarActionHandler }
     
+    var searchBar: UISearchBar!
+    var navBarConfigurator = NavigationBarConfigurator()
+    var editingTabBar: BottomSelectionTabBarViewController?
+    
     // MARK: - Life Cicle
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.isOpaque = false
-        self.view.backgroundColor = ColorConstants.searchShadowColor
-        self.collectionView.isHidden = true
-        self.noFilesLabel.text = TextConstants.noFilesFoundInSearch
-        self.topBarContainer.isHidden = true
+        view.isOpaque = false
+        view.backgroundColor = ColorConstants.searchShadowColor
+        collectionView.isHidden = true
+        noFilesLabel.text = TextConstants.noFilesFoundInSearch
+        topBarContainer.isHidden = true
        
         suggestTableView.register(UINib(nibName: CellsIdConstants.suggestionTableSectionHeaderID, bundle: nil),
                                   forCellReuseIdentifier: CellsIdConstants.suggestionTableSectionHeaderID)
@@ -64,8 +67,11 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.setNavigationBarHidden(true, animated: false)
         UIApplication.shared.statusBarStyle = .default
+        
+        editingTabBar?.view.layoutIfNeeded()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -139,14 +145,16 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     // MARK: - Configuration
     
-    func configureNavigationBar() {
-        self.navigationBar.topItem?.rightBarButtonItems = []
-        let searchBar = UISearchBar()
+    private func configureNavigationBar() {
+        navigationBar.topItem?.rightBarButtonItems = []
+        
+        searchBar = UISearchBar()
         searchBar.sizeToFit()
         searchBar.showsCancelButton = true
         searchBar.tintColor = ColorConstants.darcBlueColor
         searchBar.delegate = self
         searchBar.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
+        searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
         for subView in (searchBar.subviews.first?.subviews)! {
             if subView.isKind(of: UITextField.self) {
                 let textFileld = (subView as! UITextField)
@@ -160,13 +168,51 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
                 (subView as! UIButton).titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
             }
         }
-        if Device.isIpad {
-            self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: TextConstants.cancel, style: .plain, target: self, action: #selector(self.searchBarCancelButtonClicked(_:)))
-            self.navigationBar.topItem?.rightBarButtonItem?.tintColor = ColorConstants.darcBlueColor
-        }
-        self.navigationBar.topItem?.titleView = searchBar
+        
+        setupNavigationBarForSelectionState(state: false)
         searchBar.becomeFirstResponder()
         output.viewIsReady(collectionView: collectionView)
+    }
+    
+    private func setupNavigationBarForSelectionState(state: Bool) {
+        if state {
+            navigationBar.topItem?.titleView = nil
+            
+            let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 56))
+            cancelButton.addTarget(self, action: #selector(onCancelSelectionButton), for: .touchUpInside)
+            cancelButton.setTitle(TextConstants.cancelSelectionButtonTitle, for: .normal)
+            cancelButton.setTitleColor(ColorConstants.darcBlueColor, for: .normal)
+            cancelButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 19)
+            
+            let moreButton = UIBarButtonItem(image: UIImage(named: TextConstants.moreBtnImgName), style: .plain, target: self, action: #selector(onMoreButton(_:)))
+            moreButton.tintColor = ColorConstants.darcBlueColor
+            moreButton.accessibilityLabel = TextConstants.accessibilityMore
+
+            navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
+            navigationBar.topItem?.rightBarButtonItem = moreButton            
+        } else {
+            if Device.isIpad {
+                navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: TextConstants.cancel, style: .plain, target: self, action: #selector(searchBarCancelButtonClicked(_:)))
+                navigationBar.topItem?.rightBarButtonItem?.tintColor = ColorConstants.darcBlueColor
+            } else {
+                navigationBar.topItem?.rightBarButtonItem = nil
+            }
+            navigationBar.topItem?.title = ""
+            navigationBar.topItem?.titleView = searchBar
+            navigationBar.topItem?.leftBarButtonItem = nil
+        }
+    }
+    
+    @objc func onCancelSelectionButton() {
+        output.tapCancel()
+    }
+    
+    @objc func onMoreButton(_ sender: UIBarButtonItem) {
+        output.moreActionsPressed(sender: sender)
+    }
+    
+    func selectedItemsCountChange(with count: Int) {
+        navigationBar.topItem?.title = "\(count) \(TextConstants.accessibilitySelected)"
     }
     
     // MARK: - UISearchbarDelegate
@@ -200,7 +246,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     @objc func searchTimerIsOver(timer: Timer) {
-        self.output.getSuggestion(text: timer.userInfo as! String)
+        let text = timer.userInfo as! String
+        self.output.getSuggestion(text: text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? text)
     }
     
     func endSearchRequestWith(text: String) {
@@ -248,6 +295,14 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func dismissController() {
         navigationController?.popViewController(animated: false)
+    }
+    
+    func onSetSelection(state: Bool) {
+        setupNavigationBarForSelectionState(state: state)
+    }
+    
+    func setNavBarRigthItem(active isActive: Bool) {
+        navigationBar.topItem?.rightBarButtonItem?.isEnabled = isActive
     }
     
     //MARK: - Under nav bar
