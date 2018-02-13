@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FaceImageInitializer: NSObject {
+final class FaceImageInitializer: NSObject {
     
     var faceImageViewController: FaceImageViewController!
     

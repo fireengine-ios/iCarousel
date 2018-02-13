@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FaceImagePhotosConfigurator {
+final class FaceImagePhotosConfigurator {
     
     func configure(viewController: FaceImagePhotosViewController, albumUUID: String, item: Item, coverPhotoURL: URL, moduleOutput: FaceImageItemsModuleOutput?) {
         let router = FaceImagePhotosRouter()

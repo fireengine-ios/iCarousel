@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FaceImagePhotosInitializer {
+final class FaceImagePhotosInitializer {
     class func initializeController(with nibName:String, albumUUID: String, item: Item, coverPhotoURL: URL, moduleOutput: FaceImageItemsModuleOutput?) -> UIViewController {
         let viewController = FaceImagePhotosViewController(nibName: nibName, bundle: nil)
         

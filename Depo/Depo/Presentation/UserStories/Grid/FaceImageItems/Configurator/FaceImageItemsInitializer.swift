@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FaceImageItemsInitializer: NSObject {
+final class FaceImageItemsInitializer: NSObject {
 
     class func initializePeopleController(with nibName:String) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)

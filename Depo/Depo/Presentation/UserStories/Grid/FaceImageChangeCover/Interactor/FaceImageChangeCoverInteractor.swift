@@ -8,9 +8,15 @@
 
 import Foundation
 
-class FaceImageChangeCoverInteractor: BaseFilesGreedInteractor, FaceImageChangeCoverInteractorInput {
+final class FaceImageChangeCoverInteractor: BaseFilesGreedInteractor {
     
     let albumService = PhotosAlbumService()
+    
+}
+
+//MARK: - FaceImageChangeCoverInteractorInput
+
+extension FaceImageChangeCoverInteractor: FaceImageChangeCoverInteractorInput {
     
     func setAlbumCoverWithItem(_ item: BaseDataSourceItem) {
         guard let remoteItems = remoteItems as? FaceImageDetailService else {
@@ -24,9 +30,9 @@ class FaceImageChangeCoverInteractor: BaseFilesGreedInteractor, FaceImageChangeC
             if let output = self?.output as? FaceImageChangeCoverInteractorOutput {
                 output.didSetCover(item: item)
             }
-        }) { [weak self] (error) in
-            self?.output.asyncOperationFail(errorMessage: error.description)
-        }
-        
+            }, fail: { [weak self] error in
+                self?.output.asyncOperationFail(errorMessage: error.description)
+        })
     }
+    
 }

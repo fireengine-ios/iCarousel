@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractorOutput, FaceImageItemsViewOutput, FaceImageItemsModuleOutput {
+final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var isChangeVisibilityMode: Bool = false
     
@@ -33,19 +33,17 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
         
         clearItems()
         
-        items.forEach {
+        items.forEach { item in
             if isChangeVisibilityMode {
-                visibilityItems.append($0)
+                visibilityItems.append(item)
+            } else if let peopleItem = item as? PeopleItem,
+                let isVisible = peopleItem.responseObject.visible
+                {
+                    if isVisible {
+                        visibilityItems.append(item)
+                    }
             } else {
-                if let peopleItem = $0 as? PeopleItem,
-                    let isVisible = peopleItem.responseObject.visible
-                    {
-                        if isVisible {
-                            visibilityItems.append($0)
-                        }
-                } else {
-                    visibilityItems.append($0)
-                }
+                visibilityItems.append(item)
             }
         }
         
@@ -54,7 +52,27 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
     
-    // MARK: - Interactor Output
+    // MARK: -  Utility methods
+    
+    private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
+        self.isChangeVisibilityMode = isChangeVisibilityMode
+        
+        dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
+        
+        getContentWithSuccess(items: allItmes)
+    }
+    
+    private func clearItems() {
+        visibilityItems = [WrapData]()
+        dataSource.allMediaItems = [WrapData]()
+        dataSource.allItems = [[WrapData]]()
+    }
+    
+}
+
+// MARK: FaceImageItemsInteractorOutput
+
+extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
         if let router = router as? FaceImageItemsRouter, let uuid = album.uuid, let coverPhotoURL = album.coverPhoto?.tempDownloadURL {
@@ -68,22 +86,25 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
         
         view.stopSelection()
         
-        allItmes.forEach { (item) in
-            items.forEach({
-                if (item.id == $0.id) {
-                    if let peopleItem = item as? PeopleItem,
-                        let isVisible = peopleItem.responseObject.visible
-                    {
-                        peopleItem.responseObject.visible = !isVisible
-                    }
+        for item in allItmes {
+            for changeItem in items {
+                if (item.id == changeItem.id),
+                    let peopleItem = item as? PeopleItem,
+                    let isVisible = peopleItem.responseObject.visible
+                {
+                    peopleItem.responseObject.visible = !isVisible
                 }
-            })
+            }
         }
         
         getContentWithSuccess(items: allItmes)
     }
     
-    // MARK: - FaceImageItemsViewOutput
+}
+
+// MARK: FaceImageItemsViewOutput
+
+extension FaceImageItemsPresenter: FaceImageItemsViewOutput {
     
     func switchVisibilityMode() {
         switchVisibilityMode(!isChangeVisibilityMode)
@@ -107,12 +128,18 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
         }
     }
     
-    // MARK: - FaceImageItemsModuleOutput
+}
+
+// MARK: FaceImageItemsViewOutput
+
+extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
     
     func didChangeName(item: WrapData) {
         allItmes.forEach {
             if $0.id == item.id {
                 $0.name = item.name
+                
+                return
             }
         }
         
@@ -121,22 +148,6 @@ class FaceImageItemsPresenter: BaseFilesGreedPresenter, FaceImageItemsInteractor
     
     func didMergePeople() {
         reloadData()
-    }
-    
-    // MARK: -  Utility methods
-    
-    private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
-        self.isChangeVisibilityMode = isChangeVisibilityMode
-        
-        dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
-        
-        getContentWithSuccess(items: allItmes)
-    }
-    
-    private func clearItems() {
-        visibilityItems = [WrapData]()
-        dataSource.allMediaItems = [WrapData]()
-        dataSource.allItems = [[WrapData]]()
     }
     
 }

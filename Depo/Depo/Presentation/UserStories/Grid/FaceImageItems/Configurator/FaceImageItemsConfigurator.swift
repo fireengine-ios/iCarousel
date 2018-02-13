@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class FaceImageItemsConfigurator {
+final class FaceImageItemsConfigurator {
     
     func configure(viewController: FaceImageItemsViewController, remoteServices: RemoteItemsService, title: String) {
         let router = FaceImageItemsRouter()

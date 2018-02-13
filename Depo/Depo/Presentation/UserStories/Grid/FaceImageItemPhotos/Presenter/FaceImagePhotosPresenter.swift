@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FaceImagePhotosPresenter: BaseFilesGreedPresenter, FaceImagePhotosModuleOutput, FaceImagePhotosViewOutput {
+class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
 
     weak var faceImageItemsModuleOutput: FaceImageItemsModuleOutput?
     
@@ -53,14 +53,21 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter, FaceImagePhotosModuleOu
     }
 }
 
+// MARK: FaceImageChangeCoverModuleOutput
+
 extension FaceImagePhotosPresenter: FaceImageChangeCoverModuleOutput {
+    
     func onAlbumCoverSelected(item: WrapData) {
         if let view = view as? FaceImagePhotosViewController, let coverURL = item.tmpDownloadUrl {
             view.setHeaderImage(with: coverURL)
         }
     }
     
-    // MARK: FaceImagePhotosViewOutput
+}
+
+// MARK: FaceImagePhotosViewOutput
+
+extension FaceImagePhotosPresenter: FaceImagePhotosViewOutput {
     
     func openAddName() {
         if let router = router as? FaceImagePhotosRouter {
@@ -68,13 +75,17 @@ extension FaceImagePhotosPresenter: FaceImageChangeCoverModuleOutput {
         }
     }
     
-    // MARK: FaceImagePhotosModuleOutput
+}
+
+// MARK: FaceImagePhotosModuleOutput
+
+extension FaceImagePhotosPresenter: FaceImagePhotosModuleOutput {
     
     func didChangeName(item: WrapData) {
         if let view = view as? FaceImagePhotosViewInput,
             let name = item.name {
-                view.reloadName(name)
-                faceImageItemsModuleOutput?.didChangeName(item: item)
+            view.reloadName(name)
+            faceImageItemsModuleOutput?.didChangeName(item: item)
         }
     }
     

@@ -8,6 +8,6 @@
 
 import UIKit
 
-class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
+final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
 
 }

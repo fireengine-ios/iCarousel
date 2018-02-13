@@ -8,7 +8,14 @@
 
 import UIKit
 
-class FaceImagePhotosRouter: BaseFilesGreedRouter, FaceImagePhotosRouterInput {
+final class FaceImagePhotosRouter: BaseFilesGreedRouter {
+    
+}
+
+// MARK: FaceImagePhotosRouterInput
+
+extension FaceImagePhotosRouter: FaceImagePhotosRouterInput {
+    
     func openChangeCoverWith(_ albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput) {
         let router = RouterVC()
         let vc = router.faceImageChangeCoverController(albumUUID: albumUUID, moduleOutput: moduleOutput)
@@ -20,4 +27,5 @@ class FaceImagePhotosRouter: BaseFilesGreedRouter, FaceImagePhotosRouterInput {
         
         RouterVC().pushViewController(viewController: vc)
     }
+    
 }

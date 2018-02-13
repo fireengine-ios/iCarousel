@@ -8,10 +8,19 @@
 
 import Foundation
 
-class FaceImageItemsRouter: BaseFilesGreedRouter, FaceImageItemsRouterInput {
+final class FaceImageItemsRouter: BaseFilesGreedRouter {
+    
+}
+
+// MARK: FaceImageItemsRouterInput
+
+extension FaceImageItemsRouter: FaceImageItemsRouterInput {
+    
     func openFaceImageItemPhotosWith(_ item: Item, albumUUID: String, coverPhotoURL: URL, moduleOutput: FaceImageItemsModuleOutput?) {
         let router = RouterVC()
         let vc = router.imageFacePhotosController(albumUUID: albumUUID, item: item, coverPhotoURL: coverPhotoURL, moduleOutput: moduleOutput)
         router.pushViewController(viewController: vc)
     }
+    
 }
+

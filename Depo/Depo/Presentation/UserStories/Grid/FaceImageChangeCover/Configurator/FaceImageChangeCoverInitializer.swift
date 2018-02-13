@@ -12,7 +12,7 @@ protocol FaceImageChangeCoverModuleOutput: class {
     func onAlbumCoverSelected(item: WrapData)
 }
 
-class FaceImageChangeCoverInitializer: NSObject {
+final class FaceImageChangeCoverInitializer: NSObject {
 
     class func initializeController(with nibName:String, albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?) -> UIViewController {
         let viewController = FaceImageChangeCoverViewController(nibName: nibName, bundle: nil)

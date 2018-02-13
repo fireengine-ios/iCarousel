@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class FaceImageAddNamePresenter: BaseFilesGreedPresenter, FaceImageAddNameViewOutput, FaceImageAddNameInteractorOutput {
+final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
     
     var currentItem: WrapData?
     
@@ -49,8 +49,20 @@ class FaceImageAddNamePresenter: BaseFilesGreedPresenter, FaceImageAddNameViewOu
             router.showMerge(firstUrl: currentItemURL, secondUrl: itemUrl, completion: yesHandler)
         }
     }
+
+    // MARK: -  Utility methods
     
-    // MARK: - FaceImageViewOutput
+    private func clearItems() {
+        dataSource.allLocalItems = [WrapData]()
+        dataSource.allMediaItems = [WrapData]()
+        dataSource.allItems = [[WrapData]]()
+    }
+
+}
+
+// MARK: - FaceImageAddNameViewOutput
+
+extension FaceImageAddNamePresenter: FaceImageAddNameViewOutput {
     
     func onSearchPeople(_ text: String) {
         if let interactor = interactor as? FaceImageAddNameInteractorInput {
@@ -68,7 +80,11 @@ class FaceImageAddNamePresenter: BaseFilesGreedPresenter, FaceImageAddNameViewOu
         }
     }
     
-    // MARK: - FaceImageInteractorOutput
+}
+
+// MARK: - FaceImageInteractorOutput
+    
+extension FaceImageAddNamePresenter: FaceImageAddNameInteractorOutput {
     
     func didChangeName(_ name: String) {
         if let item = currentItem {
@@ -83,12 +99,4 @@ class FaceImageAddNamePresenter: BaseFilesGreedPresenter, FaceImageAddNameViewOu
         router.showBack()
     }
     
-    // MARK: -  Utility methods
-    
-    private func clearItems() {
-        dataSource.allLocalItems = [WrapData]()
-        dataSource.allMediaItems = [WrapData]()
-        dataSource.allItems = [[WrapData]]()
-    }
-
 }

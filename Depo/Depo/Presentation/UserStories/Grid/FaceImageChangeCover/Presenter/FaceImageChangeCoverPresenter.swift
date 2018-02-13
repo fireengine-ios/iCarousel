@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter, FaceImageChangeCoverInteractorOutput {
+final class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter {
     
     weak var customModuleOutput: FaceImageChangeCoverModuleOutput?
     
@@ -24,19 +24,19 @@ class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter, FaceImageChangeCov
         }
     }
     
-    override func selectPressed(type: MoreActionsConfig.SelectedType) {
-    }
+    override func selectPressed(type: MoreActionsConfig.SelectedType) { }
     
-    override func selectModeSelected() {
-    }
+    override func selectModeSelected() { }
     
-    override func onLongPressInCell() {
-    }
+    override func onLongPressInCell() { }
     
-    override func onChangeSelectedItemsCount(selectedItemsCount: Int) {
-        
-    }
+    override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
+}
 
+//MARK: - FaceImageChangeCoverInteractorOutput
+
+extension FaceImageChangeCoverPresenter: FaceImageChangeCoverInteractorOutput {
+    
     func didSetCover(item: BaseDataSourceItem) {
         if let router = router as? FaceImageChangeCoverRouterInput {
             router.back()

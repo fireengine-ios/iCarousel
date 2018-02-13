@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
+final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     
     var isCanChangeVisibility: Bool = false
     

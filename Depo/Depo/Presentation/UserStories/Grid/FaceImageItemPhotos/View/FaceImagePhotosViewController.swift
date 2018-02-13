@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController, FaceImagePhotosViewInput {
+ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController {
 
     private let albumsSliderHeight: CGFloat = 170
     private let headerImageHeight: CGFloat = 190
@@ -65,36 +65,7 @@ class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController, FaceI
     
     // MARK: - FaceImagePhotosViewInput
     
-    func reloadName(_ name: String) {
-        mainTitle = name
-        
-        setTitle(withString: mainTitle)
-    }
-
-    // MARK: - FaceImagePhotosViewInput
     
-    func setHeaderImage(with url: URL) {
-        headerImage.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in
-            self?.headerImage.image = image
-        }
-    }
-    
-    func loadAlbumsForPeopleItem(_ peopleItem: PeopleItem) {
-        setupHeaderViewWith(peopleItem: peopleItem)
-    }
-    
-    func setHeaderViewHidden(_ isHidden: Bool) {
-        if isHidden {
-            albumsHeightConstraint?.constant = 0
-            headerImageHeightConstraint?.constant = 0
-        } else {
-            albumsHeightConstraint?.constant = albumsSliderHeight
-            headerImageHeightConstraint?.constant = headerImageHeight
-        }
-        
-        albumsSlider?.view.isHidden = isHidden
-        headerImage.isHidden = isHidden
-    }
     
     // MARK: - Header View Methods
     
@@ -148,6 +119,41 @@ class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController, FaceI
     
     private func updateHeaderPosition() {
         collectionView.contentInset.top = headerView.frame.height;
+    }
+    
+}
+
+//MARK: - FaceImagePhotosViewInput
+
+extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
+    
+    func reloadName(_ name: String) {
+        mainTitle = name
+        
+        setTitle(withString: mainTitle)
+    }
+        
+    func setHeaderImage(with url: URL) {
+        headerImage.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in
+            self?.headerImage.image = image
+        }
+    }
+    
+    func loadAlbumsForPeopleItem(_ peopleItem: PeopleItem) {
+        setupHeaderViewWith(peopleItem: peopleItem)
+    }
+    
+    func setHeaderViewHidden(_ isHidden: Bool) {
+        if isHidden {
+            albumsHeightConstraint?.constant = 0
+            headerImageHeightConstraint?.constant = 0
+        } else {
+            albumsHeightConstraint?.constant = albumsSliderHeight
+            headerImageHeightConstraint?.constant = headerImageHeight
+        }
+        
+        albumsSlider?.view.isHidden = isHidden
+        headerImage.isHidden = isHidden
     }
     
 }

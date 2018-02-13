@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class FaceImageChangeCoverConfigurator {
+final class FaceImageChangeCoverConfigurator {
     
     func configure(viewController: FaceImageChangeCoverViewController,
                    itemsService: FaceImageDetailService, moduleOutput: FaceImageChangeCoverModuleOutput?) {

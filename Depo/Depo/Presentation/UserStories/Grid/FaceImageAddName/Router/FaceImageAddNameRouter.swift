@@ -6,19 +6,24 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class FaceImageAddNameRouter: BaseFilesGreedRouter, FaceImageAddNameRouterInput {
-    func showMerge(firstUrl: URL, secondUrl: URL, completion: @escaping (() -> Void)) {
-        
-        let vc = PopUpController.with(title: TextConstants.faceImageCheckTheSamePerson, message: TextConstants.faceImageWillMergedTogether, firstUrl: firstUrl, secondUrl: secondUrl, firstButtonTitle: TextConstants.faceImageNope, secondButtonTitle: TextConstants.ok, firstAction: { (vc) in
-            vc.close()
-        }) { (vc) in
-            vc.close(completion: completion)
-        }
-        
-        RouterVC().presentViewController(controller: vc)
-    }
+final class FaceImageAddNameRouter: BaseFilesGreedRouter {
     
     override func showBack() {
         RouterVC().popViewController()
     }
+}
+
+//MARK: - FaceImageAddNameRouterInput
+
+extension FaceImageAddNameRouter: FaceImageAddNameRouterInput {
+    
+    func showMerge(firstUrl: URL, secondUrl: URL, completion: @escaping (() -> Void)) {
+    
+        let vc = PopUpController.with(title: TextConstants.faceImageCheckTheSamePerson, message: TextConstants.faceImageWillMergedTogether, image: .success, firstButtonTitle: TextConstants.faceImageNope, secondButtonTitle: TextConstants.ok, firstUrl: firstUrl, secondUrl: secondUrl,secondAction: { vc in
+            vc.close(completion: completion)
+        })
+        
+        RouterVC().presentViewController(controller: vc)
+    }
+
 }

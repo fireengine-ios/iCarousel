@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FaceImageConfigurator {
+final class FaceImageConfigurator {
     
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
         

@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class FaceImageAddNameInteractor: BaseFilesGreedInteractor, FaceImageAddNameInteractorInput {
+final class FaceImageAddNameInteractor: BaseFilesGreedInteractor {
     
     private let peopleService = PeopleService()
     
@@ -20,8 +20,12 @@ class FaceImageAddNameInteractor: BaseFilesGreedInteractor, FaceImageAddNameInte
         output.getContentWithSuccessEnd()
     }
     
-    //MARK: - FaceImageAddNameInteractorInput
+}
 
+//MARK: - FaceImageAddNameInteractorInput
+
+extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
+    
     func getSearchPeople(_ text: String) {
         guard isUpdating == false else {
             return
@@ -30,7 +34,7 @@ class FaceImageAddNameInteractor: BaseFilesGreedInteractor, FaceImageAddNameInte
         if let service = remoteItems as? PeopleItemsService {
             service.searchPeople(text: text, success: { [weak self] (items) in
                 self?.output.getContentWithSuccess(items: items)
-                }, fail: { [weak self] in
+                }, fail: { [weak self]  in
                     self?.output.getContentWithSuccess(items: [])
             })
         }
@@ -49,9 +53,10 @@ class FaceImageAddNameInteractor: BaseFilesGreedInteractor, FaceImageAddNameInte
                 let name = self?.currentName {
                 output.didChangeName(name)
             }
-        }) { [weak self] (error) in
-            self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
-        }
+            
+            }, fail: { [weak self] error in
+                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+        })
     }
     
     func mergePeople(_ id: Int64, personId: Int64) {
@@ -61,13 +66,14 @@ class FaceImageAddNameInteractor: BaseFilesGreedInteractor, FaceImageAddNameInte
         
         peopleService.mergePeople(personId: id, targetPersonId: personId, success: { [weak self] (response) in
             self?.output.asyncOperationSucces()
-
+            
             if let output = self?.output as? FaceImageAddNameInteractorOutput {
                 output.didMergePeople()
             }
-        }) { [weak self] (error) in
-            self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
-        }
+            }, fail: { [weak self] error in
+                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+        })
     }
+    
 }
 

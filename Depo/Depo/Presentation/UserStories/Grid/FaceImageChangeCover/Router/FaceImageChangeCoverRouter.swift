@@ -8,8 +8,16 @@
 
 import Foundation
 
-class FaceImageChangeCoverRouter: BaseFilesGreedRouter, FaceImageChangeCoverRouterInput {
+final class FaceImageChangeCoverRouter: BaseFilesGreedRouter {
+    
+}
+
+//MARK: - FaceImageChangeCoverRouterInput
+
+extension FaceImageChangeCoverRouter: FaceImageChangeCoverRouterInput {
+    
     func back() {
         RouterVC().popViewController()
     }
+    
 }

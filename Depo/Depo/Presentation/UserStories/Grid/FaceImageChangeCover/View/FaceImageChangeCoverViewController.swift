@@ -8,10 +8,12 @@
 
 import UIKit
 
-class FaceImageChangeCoverViewController: BaseFilesGreedChildrenViewController {
+final class FaceImageChangeCoverViewController: BaseFilesGreedChildrenViewController {
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         navigationItem.rightBarButtonItems = nil
     }
+    
 }
