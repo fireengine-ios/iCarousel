@@ -139,6 +139,15 @@ enum FileType: Equatable {
         
     }
     
+    var isDocument: Bool {
+        return self == .application(.doc) ||
+                self == .application(.txt) ||
+                self == .application(.html) ||
+                self == .application(.xls) ||
+                self == .application(.pdf) ||
+                self == .application(.ppt)
+    }
+    
     var  isUnSupportedOpenType: Bool {
         
         return  self != .application(.zip) &&
