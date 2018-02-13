@@ -263,7 +263,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         log.debug("BaseFilesGreedPresenter onItemSelected")
 
         if item.fileType.isUnSupportedOpenType {
-            let sameTypeFiles: [BaseDataSourceItem] = getSameTypeItems(item: item, items: data)
+            let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
                                   type: type, sortType: sortedType, moduleOutput: self)
         } else {

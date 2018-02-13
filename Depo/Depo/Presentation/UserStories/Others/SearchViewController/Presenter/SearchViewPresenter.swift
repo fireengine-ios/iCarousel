@@ -148,7 +148,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
         if item.fileType.isUnSupportedOpenType {
-            let sameTypeFiles: [BaseDataSourceItem] = getSameTypeItems(item: item, items: data)
+            let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
             moduleOutput?.previewSearchResultsHide()
         } else {
