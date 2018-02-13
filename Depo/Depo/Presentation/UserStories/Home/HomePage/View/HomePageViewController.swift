@@ -56,6 +56,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
+        needShowTabBar = true
         
         let headerNib = UINib(nibName: "HomeViewTopView", bundle: nil)
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
