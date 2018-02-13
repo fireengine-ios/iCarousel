@@ -102,7 +102,8 @@ class StorageCard: BaseView {
             iconView.image = UIImage(named: "CardIconLamp")
             
             titleLabel.text = TextConstants.homeStorageCardLocalTitle
-            let percent = Int(exactly: Device.getFreeDiskSpaceInPercent) ?? 0
+            let percentDouble = 1 - Device.getFreeDiskSpaceInPercent
+            let percent = Int(percentDouble * 100)
             subTileLabel.text = String(format: TextConstants.homeStorageCardLocalSubTitle, percent)
             
             bottomButton.setTitle(TextConstants.homeStorageCardLocalBottomButtonTitle, for: .normal)
