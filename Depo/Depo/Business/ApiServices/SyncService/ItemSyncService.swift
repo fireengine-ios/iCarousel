@@ -29,7 +29,6 @@ protocol ItemSyncServiceDelegate: class {
 
 
 class ItemSyncServiceImpl: ItemSyncService {
-    private var dispatchQueue = DispatchQueue(label: "com.lifebox.autosync")
     
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
@@ -52,14 +51,13 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func start(newItems: Bool) {
         log.debug("ItemSyncServiceImpl start")
-        dispatchQueue.async {
-            guard !(newItems && self.status.isContained(in: [.prepairing, .executing])) else {
-                self.appendNewUnsyncedItems()
-                return
-            }
-            
-            self.sync()
+        
+        guard !(newItems && self.status.isContained(in: [.prepairing, .executing])) else {
+            self.appendNewUnsyncedItems()
+            return
         }
+        
+        self.sync()
     }
     
     func stop() {
@@ -146,24 +144,15 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
-        let group = DispatchGroup()
-        var localUnsynced = [WrapData]()
+        let localUnsynced = itemsSortedToUpload()
         
-        group.enter()
-        DispatchQueue.main.async {
-            localUnsynced = self.itemsSortedToUpload()
-            group.leave()
+        let newUnsyncedLocalItems = localUnsynced.filter({ !self.lastSyncedMD5s.contains($0.md5) })
+        
+        guard !newUnsyncedLocalItems.isEmpty else {
+            return
         }
-    
-        group.notify(queue: dispatchQueue) {
-            let newUnsyncedLocalItems = localUnsynced.filter({ !self.lastSyncedMD5s.contains($0.md5) })
-            
-            guard !newUnsyncedLocalItems.isEmpty else {
-                return
-            }
-            
-            self.upload(items: newUnsyncedLocalItems)
-        }
+        
+        self.upload(items: newUnsyncedLocalItems)
     }
     
     private func postNotification() {
@@ -196,6 +185,7 @@ extension CoreDataStack {
             queue.async {
                 self.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { (items, error) in
                     guard error == nil, let unsyncedItems = items else {
+                        print(error!.localizedDescription)
                         semaphore.signal()
                         return
                     }
@@ -222,8 +212,7 @@ extension CoreDataStack {
         var finished = false
         service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
             guard let `self` = self else {
-                //TODO: Error handling
-                handler(nil, ErrorResponse.string("SelfNil") )
+                handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
                 return
             }
             
@@ -255,8 +244,7 @@ extension CoreDataStack {
                 handler(localItems, nil)
             }
             }, fail: {
-                //TODO: Error handling
-                handler(nil, ErrorResponse.string("RequestError"))
+                handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
         }, newFieldValue: fieldValue)
     }
 }

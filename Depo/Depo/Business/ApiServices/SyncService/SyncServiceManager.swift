@@ -20,6 +20,7 @@ class SyncServiceManager {
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
+        queue.underlyingQueue = dispatchQueue
         return queue
     }()
     
@@ -180,8 +181,8 @@ class SyncServiceManager {
             
             if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
                 if reachability.connection == .wifi {
-//                    self.start(photo: true, video: true, newItems: newItems)
-//                } else if reachability.connection == .cellular {
+                    self.start(photo: true, video: true, newItems: newItems)
+                } else if reachability.connection == .cellular {
                     let photoEnabled = syncSettings.mobileDataPhotos
                     let videoEnabled = syncSettings.mobileDataVideo
                     

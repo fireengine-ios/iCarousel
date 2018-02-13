@@ -15,6 +15,8 @@ final class ItemSyncOperation: Operation {
     private var service: ItemSyncService?
     private var newItems: Bool = false
     
+    private var isRealCancel = false
+    
     
     init(service: ItemSyncService, newItems: Bool) {
         super.init()
@@ -24,13 +26,13 @@ final class ItemSyncOperation: Operation {
     }
     
     override func cancel() {
+        isRealCancel = true
         service = nil
         semaphore.signal()
     }
     
     override func main() {
-        if isCancelled {
-            semaphore.signal()
+        if isRealCancel {
             return
         }
         
