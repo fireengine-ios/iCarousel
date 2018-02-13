@@ -74,9 +74,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             
             if !selectedItem.isLocalItem {
                 elementsConfig = elementsConfig + [.delete]
-                elementsConfig = elementsConfig + [.sync]
-            } else {
                 elementsConfig = elementsConfig + [.download]
+            } else {
+                elementsConfig = elementsConfig + [.sync]
             }
             
             return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
