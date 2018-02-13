@@ -28,6 +28,10 @@ extension ErrorResponse {
         }
         return false
     }
+    
+    var isServiceError: Bool {
+        return errorDescription == TextConstants.commonServiceError
+    }
 }
 
 extension ErrorResponse: CustomStringConvertible {

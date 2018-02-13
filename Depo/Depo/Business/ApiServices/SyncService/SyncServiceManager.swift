@@ -17,6 +17,13 @@ class SyncServiceManager {
     
     private let reachabilityService = Reachability()
     
+    private lazy var operationQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        queue.underlyingQueue = dispatchQueue
+        return queue
+    }()
+    
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()
     private var settings: SettingsAutoSyncModel?
@@ -63,8 +70,10 @@ class SyncServiceManager {
     init() {
         photoSyncService.delegate = self
         videoSyncService.delegate = self
+        
         setupReachability()
         setupAPIReachability()
+        
         subscribeForNotifications()
     }
     
@@ -103,6 +112,7 @@ class SyncServiceManager {
     }
     
     func stopSync() {
+        operationQueue.cancelAllOperations()
         stop(reachabilityDidChange: false, photo: true, video: true)
     }
     
@@ -191,12 +201,23 @@ class SyncServiceManager {
 
     //start to sync
     private func start(photo: Bool, video: Bool, newItems: Bool) {
-        if photo { photoSyncService.start(newItems: newItems) }
-        if video { videoSyncService.start(newItems: newItems) }
+        operationQueue.cancelAllOperations()
+        
+        if photo {
+            let operation = ItemSyncOperation(service: photoSyncService, newItems: newItems)
+            operationQueue.addOperation(operation)
+        }
+        
+        if video {
+            let operation = ItemSyncOperation(service: videoSyncService, newItems: newItems)
+            operationQueue.addOperation(operation)
+        }
     }
     
     //stop/cancel completely
     private func stop(reachabilityDidChange: Bool, photo: Bool, video: Bool) {
+        operationQueue.cancelAllOperations()
+        
         if reachabilityDidChange {
             if photo { photoSyncService.waitForWiFi() }
             if video { videoSyncService.waitForWiFi() }

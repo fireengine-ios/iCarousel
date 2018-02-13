@@ -465,20 +465,25 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func uploadFromLifeBox(folderUUID: String, soorceUUID: String = "") -> UIViewController {
-        if isRootViewControllerAlbumDetail(){
+    func uploadFromLifeBox(folderUUID: String, soorceUUID: String = "", sortRule: SortedRules = .timeUp) -> UIViewController {
+        if isRootViewControllerAlbumDetail() {
             let controller = UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", albumUUID: folderUUID)
             return controller
-        }else{
-            let controller = UploadFromLifeBoxModuleInitializer.initializeFilesForFolderViewController(with: "BaseFilesGreedViewController", destinationFolderUUID: folderUUID, outputFolderUUID: soorceUUID)
+        } else {
+            let controller = UploadFromLifeBoxModuleInitializer.initializeFilesForFolderViewController(with: "BaseFilesGreedViewController",
+                                                                                                       destinationFolderUUID: folderUUID,
+                                                                                                       outputFolderUUID: soorceUUID,
+                                                                                                       sortRule: sortRule)
             return controller
         }
     }
     
     //MARK: Select Folder view controller
     
-    func selectFolder(folder: Item?) -> SelectFolderViewController {
-        let controller = SelectFolderModuleInitializer.initializeSelectFolderViewController(with: "BaseFilesGreedViewController", folder: folder)
+    func selectFolder(folder: Item?, sortRule: SortedRules = .timeUp) -> SelectFolderViewController {
+        let controller = SelectFolderModuleInitializer.initializeSelectFolderViewController(with: "BaseFilesGreedViewController",
+                                                                                            folder: folder,
+                                                                                            sortRule: sortRule)
         return controller
     }
     

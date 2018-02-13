@@ -24,9 +24,9 @@ class FolderSelectionCollectionViewCell: BaseCollectionViewCell {
         fileNameLabel.text = wrappedObj.name
         
         if isCellSelectionEnabled {
-            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(object: wrappered)
+            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: wrappered.fileType)
         } else {
-            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(object: wrappered)
+            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         }
     }
     

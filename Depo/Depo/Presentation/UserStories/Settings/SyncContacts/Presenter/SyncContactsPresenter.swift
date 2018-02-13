@@ -18,6 +18,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
 
     var contactSyncResponse: ContactSync.SyncResponse?
     var isBackUpAvailable: Bool { return contactSyncResponse != nil }
+    let reachability = ReachabilityService()
     
     //MARK: view out
     func viewIsReady() {
@@ -120,6 +121,12 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     private func proccessOperation(_ operationType: SyncOperationType) {
+        if !self.reachability.isReachable &&
+            (operationType == .backup || operationType == .restore || operationType == .analyze)  {
+            router.goToConnectedToNetworkFailed()
+            return
+        }
+        
         if isBackUpAvailable, operationType == .backup {
             let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
                                                   message: TextConstants.errorAlertTextBackupAlreadyExist,
@@ -145,11 +152,12 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         case .denied:
             showSettingsAlert(completionHandler: completionHandler)
         case .restricted, .notDetermined:
-            CNContactStore().requestAccess(for: .contacts) { granted, error in
-                if granted {
-                    completionHandler(true)
-                } else {
-                    DispatchQueue.main.async {
+            CNContactStore().requestAccess(for: .contacts) { [weak self] granted, error in
+                guard let `self` = self else { return }
+                DispatchQueue.main.async {
+                    if granted {
+                        completionHandler(true)
+                    } else {
                         self.showSettingsAlert(completionHandler: completionHandler)
                     }
                 }

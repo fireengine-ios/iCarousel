@@ -12,7 +12,6 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
     
     override func viewIsReady(collectionView: UICollectionView) {
         //interactor.viewIsReady()
-        sortedRule = .lettersAZ
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.baseMultiFileCell)
         
         super.viewIsReady(collectionView: collectionView)

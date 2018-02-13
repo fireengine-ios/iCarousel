@@ -309,6 +309,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
     }
     
+    func getCurrentSortRule() -> SortedRules {
+        return output.getCurrentSortRule()
+    }
+    
     func getRemoteItemsService() -> RemoteItemsService{
         return output.getRemoteItemsService()
     }
