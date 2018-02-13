@@ -20,11 +20,13 @@ final class FaceImagePresenter: BasePresenter {
 extension FaceImagePresenter: FaceImageViewOutput {
     func viewIsReady() {
         view?.startActivityIndicator()
+        
         interactor.getFaceImageStatus()
     }
     
     func changeFaceImageStatus(_ isAllowed: Bool) {
         view?.startActivityIndicator()
+        
         interactor.changeFaceImageStatus(isAllowed)
     }
 }
@@ -44,7 +46,10 @@ extension FaceImagePresenter: FaceImageInteractorOutput {
         view?.showFaceImageStatus(isFaceImageAllowed)
     }
 
-    func failedChangeFaceImageStatus() {
+    func failedChangeFaceImageStatus(error: String) {
+        UIApplication.showErrorAlert(message: error)
+        
+        view?.stopActivityIndicator()
         view?.showfailedChangeFaceImageStatus()
     }
 }

@@ -26,12 +26,14 @@ class PeopleAlbumSliderInteractor: LBAlbumLikePreviewSliderInteractor {
             albumItems.forEach({ (album) in
                 self?.dataStorage.addNew(item: SliderItem(withAlbum: album))
             })
+            
             if let currentItems = self?.currentItems {
                 self?.output.operationSuccessed(withItems: currentItems)
             }
-        }) { [weak self] (error) in
+            
+        }, fail: { [weak self] error in
             self?.output.operationFailed()
-        }
+        })
     }
     
 }

@@ -8,13 +8,17 @@
 
 import Foundation
 
-class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteractorInput {
+final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
     
-    let peopleService = PeopleService()
-    let thingsService = ThingsService()
-    let placesService = PlacesService()
-    
-    // MARK: - FaceImageItemsInteractorInput
+    private let peopleService = PeopleService()
+    private let thingsService = ThingsService()
+    private let placesService = PlacesService()
+
+}
+
+// MARK: FaceImageItemsInteractorInput
+
+extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
     
     func loadItem(_ item: BaseDataSourceItem) {
         
@@ -27,8 +31,8 @@ class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteract
                     output.didLoadAlbum(uuid, forItem: item)
                 }
                 self?.output.asyncOperationSucces()
-            }, fail: { [weak self] (error) in
-                self?.output.asyncOperationFail(errorMessage: error.description)
+                }, fail: { [weak self] fail in
+                    self?.output.asyncOperationFail(errorMessage: fail.description)
             })
         } else if let item = item as? ThingsItem {
             output.startAsyncOperation()
@@ -37,8 +41,8 @@ class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteract
                     output.didLoadAlbum(album, forItem: item)
                 }
                 self?.output.asyncOperationSucces()
-                }, fail: { [weak self] (error) in
-                    self?.output.asyncOperationFail(errorMessage: error.description)
+                }, fail: { [weak self] fail in
+                    self?.output.asyncOperationFail(errorMessage: fail.description)
             })
         } else if let item = item as? PlacesItem {
             output.startAsyncOperation()
@@ -47,8 +51,8 @@ class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteract
                     output.didLoadAlbum(album, forItem: item)
                 }
                 self?.output.asyncOperationSucces()
-                }, fail: { [weak self] (error) in
-                    self?.output.asyncOperationFail(errorMessage: error.description)
+                }, fail: { [weak self] fail in
+                    self?.output.asyncOperationFail(errorMessage: fail.description)
             })
         }
     }
@@ -61,8 +65,9 @@ class FaceImageItemsInteractor: BaseFilesGreedInteractor, FaceImageItemsInteract
             }
             
             self?.output.asyncOperationSucces()
-        }) { [weak self] (error) in
-            self?.output.asyncOperationFail(errorMessage: error.description)
-        }
+            }, fail: { [weak self] error in
+                self?.output.asyncOperationFail(errorMessage: error.description)
+        })
     }
+    
 }

@@ -82,10 +82,6 @@ class ChangeCoverPhoto: BaseRequestParametrs {
         self.photoUUID = photoUUID
     }
     
-    override var requestParametrs: Any {
-        return [Any]()
-    }
-    
     override var patch: URL {
         let path: String = String(format: AlbumsPatch.changeCoverPhoto, albumUUID, photoUUID)
         return URL(string: path, relativeTo: super.patch)!

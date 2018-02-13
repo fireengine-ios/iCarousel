@@ -33,9 +33,9 @@ final class PopUpController: UIViewController {
         return vc
     }
     
-    static func with(title: String?, message: String?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?, message: String?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstUrl: URL? = nil, secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
         
-        let vc = controllerWith(title: title, message: message, image: image)
+        let vc = controllerWith(title: title, message: message, image: image, firstUrl: firstUrl, secondUrl: secondUrl)
         vc.buttonState = .twin
         
         if let firstAction = firstAction {
@@ -51,25 +51,7 @@ final class PopUpController: UIViewController {
         return vc
     }
     
-    static func with(title: String?, message: String?, firstUrl: URL?, secondUrl: URL?, firstButtonTitle: String, secondButtonTitle: String, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
-        
-        let vc = controllerWith(title: title, message: message, firstUrl: firstUrl, secondUrl: secondUrl)
-        vc.buttonState = .twin
-        
-        if let firstAction = firstAction {
-            vc.firstAction = firstAction
-        }
-        if let secondAction = secondAction {
-            vc.secondAction = secondAction
-        }
-        
-        vc.firstButtonTitle = firstButtonTitle
-        vc.secondButtonTitle = secondButtonTitle
-        
-        return vc
-    }
-    
-    private static func controllerWith(title: String?, message: String?, image: PopUpImage) -> PopUpController {
+    private static func controllerWith(title: String?, message: String?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil) -> PopUpController {
         let vc = PopUpController(nibName: "PopUpController", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
@@ -77,21 +59,9 @@ final class PopUpController: UIViewController {
         vc.alertTitle = title
         vc.alertMessage = message
         vc.popUpImage = image
-
-        return vc
-    }
-    
-    private static func controllerWith(title: String?, message: String?, firstUrl: URL?, secondUrl: URL?) -> PopUpController {
-        let vc = PopUpController(nibName: "PopUpController", bundle: nil)
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overFullScreen
-        
-        vc.alertTitle = title
-        vc.alertMessage = message
         vc.firstUrl = firstUrl
         vc.secondUrl = secondUrl
-        vc.popUpImage = .success
-        
+
         return vc
     }
     

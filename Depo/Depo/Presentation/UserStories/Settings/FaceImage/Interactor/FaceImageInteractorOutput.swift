@@ -14,6 +14,6 @@ protocol FaceImageInteractorOutput: class {
 
     func didFaceImageStatus(_ isFaceImageAllowed: Bool)
     
-    func failedChangeFaceImageStatus()
+    func failedChangeFaceImageStatus(error: String)
     
 }

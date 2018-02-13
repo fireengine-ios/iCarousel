@@ -520,7 +520,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         status = .unknown
         patchToPreview = .remoteUrl(nil)
         // unuse parametrs
-        fileSize =  Int64(0)
+        fileSize =  0
         super.init()
         md5 = "not use "
         
@@ -534,7 +534,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     init(peopleItemResponse: PeopleItemResponse) {
         id = peopleItemResponse.id
-        fileSize =  Int64(0)
+        fileSize =  0
         favorites = false
         status = .unknown
         metaData = BaseMetaData()
@@ -551,7 +551,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     init(thingsItemResponse: ThingsItemResponse) {
         id = thingsItemResponse.id
-        fileSize =  Int64(0)
+        fileSize =  0
         favorites = false
         status = .unknown
         metaData = BaseMetaData()
@@ -568,7 +568,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     init(placesItemResponse: PlacesItemResponse) {
         id = placesItemResponse.id
-        fileSize =  Int64(0)
+        fileSize =  0
         favorites = false
         status = .unknown
         metaData = BaseMetaData()
@@ -634,7 +634,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         favorites = remote.metadata?.favourite ?? false
         tmpDownloadUrl = remote.tempDownloadURL
         patchToPreview = .remoteUrl(URL(string: ""))
-        fileSize = remote.bytes ?? Int64(0)
+        fileSize = remote.bytes ?? 0
         status = Status(string: remote.status)
         
         super.init(uuid: remote.uuid)

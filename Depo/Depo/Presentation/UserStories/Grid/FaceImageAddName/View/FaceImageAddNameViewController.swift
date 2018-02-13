@@ -8,9 +8,9 @@
 
 import UIKit
 
-class FaceImageAddNameViewController: BaseFilesGreedChildrenViewController {
+final class FaceImageAddNameViewController: BaseFilesGreedChildrenViewController {
     
-    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet private weak var searchTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,8 +32,9 @@ class FaceImageAddNameViewController: BaseFilesGreedChildrenViewController {
     override func configurateNavigationBar() {
         navigationBarWithGradientStyle()
         let done = NavBarWithAction(navItem: NavigationBarList().done, action: { [weak self] (_) in
-            if let output = self?.output as? FaceImageAddNameViewOutput {
-                output.changeName(self?.searchTextField.text ?? "")
+            if let output = self?.output as? FaceImageAddNameViewOutput,
+                let text = self?.searchTextField.text {
+                output.changeName(text)
             }
         })
 

@@ -6,14 +6,12 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class FaceImageAddNameConfigurator {
+final class FaceImageAddNameConfigurator {
     func configure(viewController: FaceImageAddNameViewController, item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) {
         let router = FaceImageAddNameRouter()
         
         let presenter = FaceImageAddNamePresenter()
-        
-        //presenter.topBarConfig = alertSheetConfig
-        
+                
         presenter.view = viewController
         presenter.router = router
         presenter.faceImagePhotosmoduleOutput = moduleOutput

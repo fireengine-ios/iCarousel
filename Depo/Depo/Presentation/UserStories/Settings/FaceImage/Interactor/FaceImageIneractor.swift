@@ -11,8 +11,9 @@ import Foundation
 final class FaceImageInteractor {
     var output: FaceImageInteractorOutput!
     
+    private let accountService = AccountService()
+
     private func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
-        let accountService = AccountService()
         accountService.faceImageAllowed(success: { [weak self] response in
             self?.output.operationFinished()
             if let response = response as? FaceImageAllowedResponse, let allowed = response.allowed {
@@ -47,8 +48,7 @@ extension FaceImageInteractor: FaceImageInteractorInput {
     
     func changeFaceImageStatus(_ isAllowed: Bool) {
         let accountService = AccountService()
-        let parameters = FaceImageAllowedParameters()
-        parameters.allowed = isAllowed
+        let parameters = FaceImageAllowedParameters(allowed: isAllowed)
         accountService.switchFaceImageAllowed(parameters: parameters, success: { [weak self] response in
             DispatchQueue.main.async {
                 self?.output.operationFinished()
@@ -56,8 +56,7 @@ extension FaceImageInteractor: FaceImageInteractorInput {
 
         }, fail: { [weak self] error in
             DispatchQueue.main.async {
-                self?.fail(error: error.localizedDescription)
-                self?.output.failedChangeFaceImageStatus()
+                self?.output.failedChangeFaceImageStatus(error: error.localizedDescription)
             }
         })
     }

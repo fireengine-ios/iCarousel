@@ -43,7 +43,7 @@ class ThingsServiceResponse: ObjectRequestResponse {
 }
 
 class ThingsPageResponse: ObjectRequestResponse {
-    var list: Array<ThingsItemResponse> = []
+    var list: [ThingsItemResponse] = []
     
     override func mapping() {
         if let result = json?[ThingsJsonKey.objectInfos].array?.flatMap( {ThingsItemResponse(withJSON: $0)}) {
