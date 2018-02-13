@@ -323,9 +323,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
             return
         }
-        let router = RouterVC()
-        let folderSelector = router.selectFolder(folder: nil)
-        
+        let folderSelector = selectFolderController()
         
         folderSelector.selectFolder(select: { [weak self] (folder) in
             self?.output?.operationStarted(type: .move)
@@ -349,9 +347,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
             return
         }
-        let router = RouterVC()
-        let folderSelector = router.selectFolder(folder: nil)
-        
+        let folderSelector = selectFolderController()
         
         folderSelector.selectFolder(select: { [weak self] (folder) in
             self?.fileService.move(items: item, toPath: folder.uuid,
@@ -360,6 +356,16 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }, cancel: { [weak self] in
                 self?.succesAction(elementType: ElementTypes.move)()
         })
+    }
+    
+    private func selectFolderController() -> SelectFolderViewController {
+        let router = RouterVC()
+        if let tabBarVC = UIApplication.topController() as? TabBarViewController,
+            let currentVC = tabBarVC.currentViewController as? BaseFilesGreedViewController {
+            return router.selectFolder(folder: nil, sortRule: currentVC.getCurrentSortRule())
+        } else {
+            return router.selectFolder(folder: nil)
+        }
     }
     
     func sync(item: [BaseDataSourceItem]) {

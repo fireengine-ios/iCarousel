@@ -27,6 +27,7 @@ class BaseFilesGreedModuleConfigurator {
             presenter?.needShowProgressInCells = true
         } else {
             presenter = DocumentsGreedPresenter()
+            presenter?.sortedRule = .timeUpWithoutSection
         }
         
         if let alertSheetExcludeTypes = alertSheetExcludeTypes {
