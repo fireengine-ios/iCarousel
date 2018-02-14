@@ -92,9 +92,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     }
     
     var alerSheetMoreActionsConfig: AlertFilesActionsSheetInitialConfig? {
-        get {
-            return alertSheetConfig
-        }
+        return alertSheetConfig        
     }
     
     var bottomBarConfig: EditingBarConfig? {
