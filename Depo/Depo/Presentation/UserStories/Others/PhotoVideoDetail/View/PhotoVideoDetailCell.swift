@@ -35,13 +35,14 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        layoutIfNeeded()
         imageScrollView.updateZoom()
     }
     
     func setObject(object:Item, index: Int) {
         webView.isHidden = true
         
-        imageScrollView.imageView.image = nil
+        imageScrollView.image = nil
         playVideoButton.isHidden = true
         self.index = index
         
@@ -51,7 +52,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 DispatchQueue.main.async {
                     self?.imageScrollView.delegate = self
                     self?.imageScrollView.image = image
-                    
+                    self?.imageScrollView.updateZoom()
 //                    guard let image = image else { return }
                 }
             }
@@ -60,6 +61,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         } else if object.fileType != .audio, object.fileType.isUnSupportedOpenType {
             imageScrollView.imageView.isHidden = true
             webView.isHidden = false
+            webView.loadRequest(URLRequest(url: URL(string: "about:blank")!))
             if let url = object.urlToFile {
                 webView.delegate = self
                 webView.loadRequest(URLRequest(url: url))
@@ -89,11 +91,18 @@ extension PhotoVideoDetailCell: UIScrollViewDelegate {
     
     // MARK: - imageScrollView
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return imageScrollView.imageView
+        if scrollView == imageScrollView {
+            return imageScrollView.imageView
+        } else if scrollView == webView.scrollView {
+            return webView.scrollView.subviews.first
+        }
+        return nil
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        imageScrollView.adjustFrameToCenter()
+        if scrollView == imageScrollView {
+            imageScrollView.adjustFrameToCenter()
+        }
     }
 }
 

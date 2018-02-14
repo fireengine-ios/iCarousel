@@ -15,13 +15,18 @@ final class ImageScrollView: UIScrollView {
     var image: UIImage? {
         didSet {
             guard let image = image else {
+                imageView.image = nil
+                imageView.frame = .zero
+                contentSize = .zero
+                maximumZoomScale = 1
+                minimumZoomScale = 1
+                zoomScale = 1
                 return
             }
             imageView.image = image
+            imageView.frame.origin = .zero
             imageView.frame.size = image.size
             contentSize = image.size
-//            adjustFrameToCenter()
-            updateZoom()
         }
     }
     
@@ -45,6 +50,8 @@ final class ImageScrollView: UIScrollView {
         decelerationRate = UIScrollViewDecelerationRateFast
         
         addSubview(imageView)
+//        imageView.frame = bounds
+//        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         imageView.isUserInteractionEnabled = true
     }
     
@@ -96,3 +103,4 @@ final class ImageScrollView: UIScrollView {
         imageView.frame = frameToCenter
     }
 }
+

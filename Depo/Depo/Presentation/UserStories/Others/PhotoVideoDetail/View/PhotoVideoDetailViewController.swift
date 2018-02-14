@@ -80,7 +80,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        automaticallyAdjustsScrollViewInsets = false
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -111,6 +111,12 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         ItemOperationManager.default.stopUpdateView(view: self)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        view.layoutSubviews()
+        //        updateFramesForViews()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -121,14 +127,13 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         floatingView.hideView(animated: true)
         output.viewWillDisappear()
         
-        /// set previous state of orientation or any new one
-        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        view.layoutSubviews()
-        //        updateFramesForViews()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        /// set previous state of orientation or any new one
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
     }
     
     override func viewDidLayoutSubviews() {
