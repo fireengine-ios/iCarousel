@@ -20,6 +20,8 @@ protocol CollectionViewCellDataProtocol {
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool)
     
+    func setSelectionWithoutAnimation(isSelectionActive: Bool, isSelected: Bool)
+    
     func setDelegateObject(delegateObject: LBCellsDelegate)
     
     func getAssetId() -> String?
