@@ -31,6 +31,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = UIColor.clear
+        webView.scalesPageToFit = true
     }
     
     override func layoutSubviews() {

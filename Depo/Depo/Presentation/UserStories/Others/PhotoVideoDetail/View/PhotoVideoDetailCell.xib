@@ -19,11 +19,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <webView contentMode="scaleToFill" scalesPageToFit="YES" allowsInlineMediaPlayback="NO" mediaPlaybackRequiresUserAction="NO" mediaPlaybackAllowsAirPlay="NO" keyboardDisplayRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrl-EP-Pgx">
-                        <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
-                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <dataDetectorType key="dataDetectorTypes"/>
-                    </webView>
                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGW-xm-Jy7" customClass="ImageScrollView" customModule="lifebox" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
                     </scrollView>
@@ -37,22 +32,26 @@
                             <action selector="onPlayVideoButton" destination="gTV-IL-0wX" eventType="touchUpInside" id="eED-3r-bCN"/>
                         </connections>
                     </button>
+                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2m8-Lr-SFe">
+                        <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
+                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </webView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="vGW-xm-Jy7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8wZ-NE-75O"/>
                 <constraint firstAttribute="trailing" secondItem="slB-Qr-paR" secondAttribute="trailing" id="9js-d9-vzO"/>
-                <constraint firstItem="zrl-EP-Pgx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CIV-G6-Rfc"/>
                 <constraint firstAttribute="bottom" secondItem="slB-Qr-paR" secondAttribute="bottom" id="Gow-81-ter"/>
                 <constraint firstItem="vGW-xm-Jy7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JVq-N4-FDW"/>
                 <constraint firstAttribute="bottom" secondItem="vGW-xm-Jy7" secondAttribute="bottom" id="Ppj-jx-2QC"/>
+                <constraint firstAttribute="trailing" secondItem="2m8-Lr-SFe" secondAttribute="trailing" id="QtW-4L-5cs"/>
                 <constraint firstAttribute="trailing" secondItem="vGW-xm-Jy7" secondAttribute="trailing" id="TTN-TF-VwY"/>
                 <constraint firstItem="slB-Qr-paR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Unx-kw-eNP"/>
                 <constraint firstItem="JVY-Sc-8sq" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="aYa-9y-9oN"/>
-                <constraint firstItem="zrl-EP-Pgx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hWB-yg-9Tp"/>
-                <constraint firstAttribute="trailing" secondItem="zrl-EP-Pgx" secondAttribute="trailing" id="lFM-o6-HU4"/>
+                <constraint firstAttribute="bottom" secondItem="2m8-Lr-SFe" secondAttribute="bottom" id="bxC-nf-Z0z"/>
+                <constraint firstItem="2m8-Lr-SFe" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jh6-lG-3RJ"/>
+                <constraint firstItem="2m8-Lr-SFe" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="m1Y-QS-8M2"/>
                 <constraint firstItem="JVY-Sc-8sq" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="off-Ep-f2O"/>
-                <constraint firstAttribute="bottom" secondItem="zrl-EP-Pgx" secondAttribute="bottom" id="pP1-kF-XSu"/>
                 <constraint firstItem="slB-Qr-paR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zAM-58-59d"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -61,7 +60,7 @@
                 <outlet property="activity" destination="JVY-Sc-8sq" id="nRu-oT-LPY"/>
                 <outlet property="imageScrollView" destination="vGW-xm-Jy7" id="zw5-gl-tsP"/>
                 <outlet property="playVideoButton" destination="slB-Qr-paR" id="G49-3u-rfr"/>
-                <outlet property="webView" destination="zrl-EP-Pgx" id="uV2-m1-yr1"/>
+                <outlet property="webView" destination="2m8-Lr-SFe" id="U4U-T5-fzh"/>
             </connections>
             <point key="canvasLocation" x="143.5" y="154"/>
         </collectionViewCell>
