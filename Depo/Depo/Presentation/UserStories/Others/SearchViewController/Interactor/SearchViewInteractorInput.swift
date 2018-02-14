@@ -9,6 +9,10 @@
 import Foundation
 
 protocol SearchViewInteractorInput {
+    
+    var alerSheetMoreActionsConfig: AlertFilesActionsSheetInitialConfig? { get }
+    var bottomBarConfig: EditingBarConfig? { get set }
+    
     func viewIsReady()
     func searchItems(by searchText: String, sortBy: SortType, sortOrder: SortOrder)
     func needShowNoFileView() -> Bool
