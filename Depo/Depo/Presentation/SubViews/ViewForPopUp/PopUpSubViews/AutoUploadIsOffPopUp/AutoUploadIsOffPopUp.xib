@@ -54,6 +54,7 @@ Go to setting to auto sync.</string>
                 <constraint firstItem="Olb-Sa-Ujd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="qTz-ku-s8r"/>
                 <constraint firstItem="R4F-J3-y81" firstAttribute="leading" secondItem="llh-MA-kwD" secondAttribute="trailing" constant="11" id="sKn-JZ-Ldh"/>
                 <constraint firstItem="Olb-Sa-Ujd" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="wK9-3m-Tv1"/>
+                <constraint firstItem="llh-MA-kwD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="17" id="zLR-72-seI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
