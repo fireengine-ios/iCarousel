@@ -57,6 +57,13 @@ extension ErrorResponse: LocalizedError {
             return String(code)
         }
     }
+    
+    var isNetworkError: Bool {
+        if case let ErrorResponse.error(error) = self {
+            return error.isNetworkError
+        }
+        return false
+    }
 }
 
 extension Error {
