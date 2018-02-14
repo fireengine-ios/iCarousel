@@ -18,6 +18,7 @@
 
 
 #import "AppRater.h"
+#import <StoreKit/StoreKit.h>
 
 /**
  *  Defines for NSUserDefaults keys
@@ -38,7 +39,7 @@
  */
 #define iOS7AppStoreURL @"itms-apps://itunes.apple.com/app/id%@"
 #define AboveiOS7AppstoreURL @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@"
-#define AppStoreLookUpURL @"http://itunes.apple.com/lookup?bundleId=%@"
+#define AppStoreLookUpURL @"http://itunes.apple.com/lookup?bundleId=%@&country=%@"
 
 #define IS_IOS7 (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1)
 
@@ -46,7 +47,7 @@
 
 @synthesize daysUntilPrompt, launchesUntilPrompt,
             versionCheckEnabled, remindMeDaysUntilPrompt,
-            remindMeLaunchesUntilPrompt, hideNoButton, preferredLanguage;
+            remindMeLaunchesUntilPrompt, hideNoButton, preferredLanguage, usesSystemAppRaterWhenAvailable;
 
 /**
  *  Creates static AppRater object and sets default values
@@ -65,6 +66,8 @@
         sharedInstance.versionCheckEnabled = NO;
         sharedInstance.hideNoButton = NO;
         sharedInstance.preferredLanguage = nil;
+        sharedInstance.countryCode = @"tr";
+        sharedInstance.usesSystemAppRaterWhenAvailable = YES;
     });
     return sharedInstance;
 }
@@ -87,7 +90,6 @@
  *  Public method checks rating prompt with given parameters version checking and remind me
  */
 -(void)appLaunched {
-    
     if (versionCheckEnabled) {
         if (![[self getCurrentVersion] isEqualToString:[self getStringFromDefaultsWithKey:APP_VERSION_KEY]]) {
             [self resetUserDefaultValues];
@@ -115,9 +117,10 @@
     NSInteger launchCount = [self getIntFromDefaultsWithKey:LAUNCH_COUNT_KEY]+1;
     [self setIntToDefaultsWithKey:LAUNCH_COUNT_KEY andValue:launchCount];
     
-    BOOL isDateExpired = [self isDateExpired:days];
-    
-    if (launchCount >= launches && isDateExpired) {
+    if (launchCount >= launches && [self isDateExpired:days]) {
+        if ([self showSystemRater]) {
+            return;
+        }
         [self getApplicationID];
     }
 
@@ -128,7 +131,7 @@
  */
 - (void)applicationWillEnterForeground {
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
-        //[self appLaunched];
+        [self appLaunched];
     }
 }
 
@@ -257,7 +260,21 @@
     
     rateDialog = [[UIAlertView alloc] initWithTitle:[self getLocalisedStringForKey:@"MessageTitle"] message:[self getLocalisedStringForKey:@"Message"] delegate:self cancelButtonTitle:noButtonTitle otherButtonTitles:[self getLocalisedStringForKey:@"NowButtonTitle"], [self getLocalisedStringForKey:@"LaterButtonTitle"], nil];
     [rateDialog show];
-    
+}
+
+- (BOOL)showSystemRater {
+    if ([SKStoreReviewController class] && self.usesSystemAppRaterWhenAvailable) {
+        [SKStoreReviewController requestReview];
+
+        [self setBoolToDefaultsWithKey:DONT_SHOW_AGAIN_KEY andValue:NO];
+        [self setBoolToDefaultsWithKey:REMIND_ME_KEY andValue:YES];
+        [self setIntToDefaultsWithKey:LAUNCH_COUNT_KEY andValue:0];
+        [self setObjectToDefaultsWithKey:FIRST_LAUNCH_KEY andValue:[NSDate date]];
+
+        return YES;
+    }
+
+    return NO;
 }
 
 /**
@@ -341,11 +358,10 @@
         return;
     }
     
-   // __block NSString *bundleIdentifier =  [[NSBundle mainBundle] bundleIdentifier];
-    __block NSString *bundleIdentifier =  @"com.turkcell.akillidepo";
+    __block NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:AppStoreLookUpURL, bundleIdentifier]]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:AppStoreLookUpURL, bundleIdentifier, self.countryCode]]];
         [request setTimeoutInterval:30.0];
         NSError *error = nil;
         NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
@@ -398,10 +414,7 @@
     if (bundle == nil) {
         bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"AppRater" ofType:@"bundle"]];
     }
-   
-    // NSString *systemLocale = [[NSLocale preferredLanguages] objectAtIndex:0];
-    NSString *languages = [[NSLocale preferredLanguages] objectAtIndex:0];
-    NSString *systemLocale = [[languages componentsSeparatedByString:@"-"] firstObject];
+    NSString *systemLocale = [[NSLocale preferredLanguages] objectAtIndex:0];
     
     static NSBundle *languageBundle = nil;
     

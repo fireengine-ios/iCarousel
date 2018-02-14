@@ -48,7 +48,8 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
             self.output.didLoadContacts(self.contacts)
             self.isLoadingData = false
             self.output.asyncOperationFinished()
-        }, fail: { (error) in
+        }, fail: { [weak self] error in
+            guard let `self` = self else { return }
             self.isLoadingData = false
             self.output.asyncOperationFinished()
         })
@@ -76,7 +77,8 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
             self.output.didLoadContacts(self.contacts)
             self.isLoadingData = false
             self.output.asyncOperationFinished()
-        }, fail: { (error) in
+        }, fail: { [weak self] error in
+            guard let `self` = self else { return }
             self.isLoadingData = false
             self.output.asyncOperationFinished()
         })
