@@ -70,9 +70,6 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar)
-        NotificationCenter.default.post(name: notificationName, object: nil)
-        
         output.viewIsReady()
         
         if _searchViewController != nil {

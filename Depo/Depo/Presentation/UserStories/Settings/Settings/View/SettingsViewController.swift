@@ -26,7 +26,7 @@ protocol SettingsDelegate: class{
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool)
 }
 
-class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: BaseViewController, SettingsViewInput, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var headerContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
