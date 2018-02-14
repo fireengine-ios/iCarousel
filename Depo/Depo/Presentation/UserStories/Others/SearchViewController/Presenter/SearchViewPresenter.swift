@@ -396,6 +396,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func selectAllModeSelected() { }
     func deSelectAll() { }
     func stopModeSelected() { }
+    func changeCover() { }
 }
 
 extension SearchViewPresenter: TabBarActionHandler {
