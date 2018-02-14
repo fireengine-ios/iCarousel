@@ -673,11 +673,11 @@ class UploadOperations: Operation {
                 
                 }, fail: { (error) in
                     if error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts) , execute: {
+                        let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
+                        DispatchQueue.global().asyncAfter(deadline: delay, execute: {
                             self.attemptsCount += 1
                             self.attempmtUpload()
                         })
-                        
                     } else {
                         customFail(error)
                     }
