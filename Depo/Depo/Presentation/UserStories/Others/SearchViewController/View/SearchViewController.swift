@@ -225,8 +225,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if searchBar.text! != "" {
-            let customAllowedSet =  CharacterSet(charactersIn:"=\"#%/<>?@\\^`{|}&").inverted
-            output.searchWith(searchText: searchBar.text!.addingPercentEncoding(withAllowedCharacters: customAllowedSet)!, sortBy: SortType.date, sortOrder: SortOrder.asc)
+            output.searchWith(searchText: searchBar.text!, sortBy: SortType.date, sortOrder: SortOrder.asc)
         } else {
             collectionView.isHidden = true
             setCurrentPlayState()
@@ -246,8 +245,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     @objc func searchTimerIsOver(timer: Timer) {
-        let text = timer.userInfo as! String
-        self.output.getSuggestion(text: text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? text)
+        self.output.getSuggestion(text: timer.userInfo as! String)
     }
     
     func endSearchRequestWith(text: String) {
