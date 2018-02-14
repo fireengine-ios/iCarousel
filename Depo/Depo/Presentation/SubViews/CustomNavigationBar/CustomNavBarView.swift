@@ -42,7 +42,7 @@ class CustomNavBarView: UIView, UISearchBarDelegate {
             bar?.bgImageView.isHidden = true
         }
         
-        return fakeNavBar as? CustomNavBarView
+        return bar
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
