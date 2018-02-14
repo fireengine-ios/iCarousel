@@ -788,4 +788,6 @@ struct NumericConstants {
     static let numberCellDefaultOpacity: Float = 0.1
     static let numberCellAnimateOpacity: Float = 1
     
+    static let maxNumberOfUploadAttempts = 5
+    static let secondsBeetweenUploadAttempts = 5
 }
