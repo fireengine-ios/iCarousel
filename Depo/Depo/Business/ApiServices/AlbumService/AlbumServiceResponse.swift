@@ -47,7 +47,6 @@ class AlbumServiceResponse: ObjectRequestResponse {
         audioCount = json?[AlbumJsonKey.audioCount].int
         coverPhoto = SearchItemResponse(withJSON: json?[AlbumJsonKey.coverPhoto])
         readOnly = json?[AlbumJsonKey.readOnly].bool
-        
     }
 }
 

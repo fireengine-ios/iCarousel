@@ -7,7 +7,7 @@
 //
 
 class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LBAlbumLikePreviewSliderViewOutput, LBAlbumLikePreviewSliderInteractorOutput {
-
+    
     weak var view: LBAlbumLikePreviewSliderViewInput!
     var interactor: LBAlbumLikePreviewSliderInteractorInput!
     var router: LBAlbumLikePreviewSliderRouterInput!
@@ -57,6 +57,6 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
 extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderDataSourceDelegate {
     
     func onItemSelected(item: SliderItem) {
-        router.onItemSelected(type: item.type)
+        router.onItemSelected(item)
     }
 }

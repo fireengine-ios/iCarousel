@@ -52,6 +52,12 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
         }
     }
     
+    func goToFaceImage() {
+        if let left = leftController{
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().faceImage])
+        }
+    }
+    
     func goToHelpAndSupport(){
         if let left = leftController{
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().helpAndSupport!])

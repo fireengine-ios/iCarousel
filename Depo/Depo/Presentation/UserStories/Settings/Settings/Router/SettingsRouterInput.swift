@@ -18,6 +18,8 @@ protocol SettingsRouterInput {
     
     func goToAutoApload()
     
+    func goToFaceImage()
+    
     func goToHelpAndSupport()
     
     func goToUsageInfo()

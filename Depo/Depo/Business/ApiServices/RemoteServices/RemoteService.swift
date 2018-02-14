@@ -354,26 +354,22 @@ class AllFilesService: RemoteItemsService {
     }
 }
 
-class FacedRemoteItemsService {
+class FaceImageDetailService: AlbumDetailService {
+    let albumUUID: String
     
-    let fetchService: FetchService
-    
-    let remoteService: RemoteItemsService
-        
-    init(remoteService: RemoteItemsService) {
-        self.remoteService = remoteService
-        self.fetchService = FetchService(batchSize: 140)
+    init(albumUUID: String, requestSize: Int) {
+        self.albumUUID = albumUUID
+        super.init(requestSize: requestSize)
     }
     
-    func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?) {
-        log.debug("FacedRemoteItemsService nextItems")
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue?) {
+        nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: { (items) in
+            if items.isEmpty {
+                fail?()
+            } else {
+                success?(items)
+            }
+        }, fail: fail)
+    }
 
-        remoteService.nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
-    }
-    
-    func performFetch(sortingRules: SortedRules, filtes: [MoreActionsConfig.MoreActionsFileType]?) {
-//        var resultFilters = filtes
-//        fetchService.performFetch(sortingRules: sortingRules, filtes: resultFilters)
-    }
 }
-

@@ -92,7 +92,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     fileprivate var previousPreheatRect = CGRect.zero
     
     
-    private func compoundItems(pageItems: [WrapData]) {
+    func compoundItems(pageItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
         isHeaderless ? setupOneSectionMediaItemsArray(items: allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
     }
@@ -433,7 +433,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func appendCollectionView(items: [WrapData]) {
-        let nonEmptyMetaItems = items.filter{
+        let nonEmptyMetaItems = items.filter {
             if $0.fileType == .image, !$0.isLocalItem {
                return ($0.metaData?.takenDate != nil)
             }
@@ -496,7 +496,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             CollectionViewCellsIdsConstant.photosOrderCell,
                             CollectionViewCellsIdsConstant.folderSelectionCell,
                             CollectionViewCellsIdsConstant.albumCell,
-                            CollectionViewCellsIdsConstant.localAlbumCell]
+                            CollectionViewCellsIdsConstant.localAlbumCell,
+                            CollectionViewCellsIdsConstant.cellForFaceImage,
+                            CollectionViewCellsIdsConstant.cellForFaceImageAddName]
         
         registreList.forEach {
             let listNib = UINib(nibName: $0, bundle: nil)

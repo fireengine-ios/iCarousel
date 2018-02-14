@@ -529,7 +529,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         status = .unknown
         patchToPreview = .remoteUrl(nil)
         // unuse parametrs
-        fileSize =  Int64(0)
+        fileSize =  0
         super.init()
         md5 = "not use "
         
@@ -539,6 +539,57 @@ class WrapData: BaseDataSourceItem, Wrappered {
         syncStatus = .notSynced
         creationDate = Date()
         lastModifiDate = Date()
+    }
+    
+    init(peopleItemResponse: PeopleItemResponse) {
+        id = peopleItemResponse.id
+        fileSize =  0
+        favorites = false
+        status = .unknown
+        metaData = BaseMetaData()
+        metaData?.takenDate = Date()
+        tmpDownloadUrl = peopleItemResponse.thumbnail
+        patchToPreview = .remoteUrl(tmpDownloadUrl)
+        super.init()
+        name = peopleItemResponse.name
+        isLocalItem = false
+        creationDate = Date()
+        syncStatus = .notSynced
+        fileType = .image
+    }
+    
+    init(thingsItemResponse: ThingsItemResponse) {
+        id = thingsItemResponse.id
+        fileSize =  0
+        favorites = false
+        status = .unknown
+        metaData = BaseMetaData()
+        metaData?.takenDate = Date()
+        tmpDownloadUrl = thingsItemResponse.thumbnail
+        patchToPreview = .remoteUrl(tmpDownloadUrl)
+        super.init()
+        name = thingsItemResponse.name
+        isLocalItem = false
+        creationDate = Date()
+        syncStatus = .notSynced
+        fileType = .image
+    }
+    
+    init(placesItemResponse: PlacesItemResponse) {
+        id = placesItemResponse.id
+        fileSize =  0
+        favorites = false
+        status = .unknown
+        metaData = BaseMetaData()
+        metaData?.takenDate = Date()
+        tmpDownloadUrl = placesItemResponse.thumbnail
+        patchToPreview = .remoteUrl(tmpDownloadUrl)
+        super.init()
+        name = placesItemResponse.name
+        isLocalItem = false
+        creationDate = Date()
+        syncStatus = .notSynced
+        fileType = .image
     }
     
     init(baseModel: BaseMediaContent) {
@@ -592,9 +643,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
         favorites = remote.metadata?.favourite ?? false
         tmpDownloadUrl = remote.tempDownloadURL
         patchToPreview = .remoteUrl(URL(string: ""))
-        fileSize = remote.bytes ?? Int64(0)
+        fileSize = remote.bytes ?? 0
         status = Status(string: remote.status)
-        super.init()
+        
+        super.init(uuid: remote.uuid)
         md5 = remote.hash ?? "not hash "
         
         albums = remote.albums
