@@ -25,6 +25,7 @@ protocol SearchViewOutput {
     
     func playerDidHide()
     func willDismissController()
+    func viewWillDisappear()
     
     func moreActionsPressed(sender: Any)
 }
