@@ -49,6 +49,7 @@
 "Account cannot be found" = "Account cannot be found";
 "cancelled" = "cancelled";
 "The network connection was lost." = "The network connection was lost.";
+"ServiceError" = "ServiceError";
 "Nothing to download" = "Nothing to download";
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
@@ -100,6 +101,7 @@
 "My Activity Timeline" = "My Activity Timeline";
 "file(s)" = "file(s)";
 "My Stream" = "My Stream";
+"Albums with %@" = "Albums with %@";
 "Cancel" = "Cancel";
 "OK" = "OK";
 "You have free space for %d more items." = "You have free space for %d more items.";
@@ -127,6 +129,7 @@
 "Take Photo" = "Take Photo";
 
 "Remove from album" = "Remove from album";
+"Change cover photo" = "Change cover photo";
 "Back Up" = "Back Up";
 "Add to album" = "Add to album";
 "Remove from Favorites" = "Remove from Favorites";
@@ -295,6 +298,8 @@
 "Updated" = "Updated";
 "New Contact" = "New Contact";
 "Back Up My Contacts" = "Back Up My Contacts";
+"Are you sure you want to delete?" = "Are you sure you want to delete?";
+"This contact will be deleted from your contacts." = "This contact will be deleted from your contacts.";
 "%@ of %@ has remained" = "%@ of %@ has remained";
 "UPGRADE" = "UPGRADE";
 "Upgrade" = "Upgrade";
@@ -332,6 +337,7 @@
 "Import From Facebook" = "Import From Facebook";
 "Import From Dropbox" = "Import From Dropbox";
 "Import Photos" = "Import Photos";
+"Face & Image Grouping" = "Face & Image Grouping";
 "Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
 "Auto-login" = "Auto-login";
 "Turkcell Password" = "Turkcell Password";
@@ -342,6 +348,7 @@
 "Recently Deleted Files" = "Recently Deleted Files";
 "My Activity Timeline" = "My Activity Timeline";
 "Auto Sync" = "Auto Sync";
+"Face & Image Grouping" = "Face & Image Grouping";
 "Import Photos" = "Import Photos";
 "Back-up my contacts" = "Back-up my contacts";
 "Leave feedback" = "Leave feedback";
@@ -589,6 +596,14 @@
 "Delete" = "Delete";
 "Favorite" = "Favorite";
 "Selected" = "Selected";
+"Show & Hide" = "Show & Hide";
+"Show and Hide" = "Show and Hide";
+"Done" = "Done";
+"+Add a Name" = "+Add a Name";
+"+Add Name" = "+Add Name";
+"Are these the same person" = "Are these the same person";
+"They will be merged together" = "They will be merged together";
+"Nope" = "Nope";
 "Not selected" = "Not selected";
 "E-mail is empty" = "E-mail is empty";
 "Filter Card" = "Filter Card";

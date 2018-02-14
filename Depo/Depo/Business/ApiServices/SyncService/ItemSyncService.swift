@@ -29,7 +29,6 @@ protocol ItemSyncServiceDelegate: class {
 
 
 class ItemSyncServiceImpl: ItemSyncService {
-    private var dispatchQueue = DispatchQueue(label: "com.lifebox.autosync")
     
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
@@ -41,8 +40,6 @@ class ItemSyncServiceImpl: ItemSyncService {
         }
     }
     
-    var photoVideoService: PhotoAndVideoService?
-    
     var localItems: [WrapData] = []
     var localItemsMD5s: [String] = []
     var lastSyncedMD5s: [String] = []
@@ -50,25 +47,17 @@ class ItemSyncServiceImpl: ItemSyncService {
     weak var delegate: ItemSyncServiceDelegate?
     
     
-    //MARK: - init
-    
-    init() {
-        photoVideoService = PhotoAndVideoService(requestSize: NumericConstants.numberOfElementsInSyncRequest)
-    }
-    
-    
     //MARK: - Public ItemSyncService functions
     
     func start(newItems: Bool) {
         log.debug("ItemSyncServiceImpl start")
-        dispatchQueue.async {
-            guard !(newItems && self.status.isContained(in: [.prepairing, .executing])) else {
-                self.appendNewUnsyncedItems()
-                return
-            }
-            
-            self.sync()
+        
+        guard !(newItems && self.status.isContained(in: [.prepairing, .executing])) else {
+            self.appendNewUnsyncedItems()
+            return
         }
+        
+        self.sync()
     }
     
     func stop() {
@@ -101,49 +90,15 @@ class ItemSyncServiceImpl: ItemSyncService {
         status = .prepairing
         
         localItems.removeAll()
-        localItemsMD5s.removeAll()
+        localItems = self.itemsSortedToUpload()
+        lastSyncedMD5s = self.localItems.map({ $0.md5 })
         
-        let semaphore = DispatchSemaphore(value: 0)
-        DispatchQueue.main.async {
-            self.localItems = self.localUnsyncedItems()
-            semaphore.signal()
-        }
-        semaphore.wait()
-
         guard !localItems.isEmpty else {
             status = .synced
             return
         }
         
-        localItemsMD5s = localItems.map({ $0.md5 })
-        lastSyncedMD5s = localItemsMD5s
-        
-        guard let oldestItemDate = localItems.last?.metaDate else {
-            status = .synced
-            return
-        }
-        
-        if let service = photoVideoService {
-            service.currentPage = 0
-        }
-        getUnsyncedObjects(oldestItemDate: oldestItemDate, success: { [weak self] in
-            log.debug("ItemSyncServiceImpl sync getUnsyncedObjects success")
-
-            if let `self` = self {
-                guard !self.localItems.isEmpty else {
-                    self.status = .synced
-                    return
-                }
-                
-                self.upload(items: self.localItems)
-            }
-        }) {[weak self] in
-            log.debug("ItemSyncServiceImpl sync getUnsyncedObjects fail")
-
-            if let `self` = self {
-                self.fail()
-            }
-        }
+        upload(items: self.localItems)
     }
     
     private func upload(items: [WrapData]) {
@@ -155,7 +110,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         status = .executing
         
-        UploadService.default.uploadFileList(items: itemsSortedToUpload(from: items),
+        UploadService.default.uploadFileList(items: items,
                                              uploadType: .autoSync,
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
@@ -188,22 +143,76 @@ class ItemSyncServiceImpl: ItemSyncService {
         
     }
     
-    private func getUnsyncedObjects(oldestItemDate: Date, success: @escaping () -> Void, fail: @escaping () -> Void) {
+    private func appendNewUnsyncedItems() {
+        let localUnsynced = itemsSortedToUpload()
         
-        log.debug("ItemSyncServiceImpl getUnsyncedObjects")
-
-        guard let service = self.photoVideoService else {
-            fail()
+        let newUnsyncedLocalItems = localUnsynced.filter({ !self.lastSyncedMD5s.contains($0.md5) })
+        
+        guard !newUnsyncedLocalItems.isEmpty else {
             return
         }
         
-        var finished = false
-        
-        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
-            log.debug("ItemSyncServiceImpl getUnsyncedObjects PhotoAndVideoService nextItemsMinified success")
+        self.upload(items: newUnsyncedLocalItems)
+    }
+    
+    private func postNotification() {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: autoSyncStatusDidChangeNotification, object: self)
+        }
+    }
+    
+    
+    //MARK: - Override me
+    
+    func itemsSortedToUpload() -> [WrapData] {
+        return []
+    }
 
+}
+
+
+
+extension CoreDataStack {
+    func getLocalUnsynced(fieldValue: FieldValue) -> [WrapData] {
+        var itemsToReturn = [WrapData]()
+        let semaphore = DispatchSemaphore(value: 0)
+        DispatchQueue.main.async {
+            let localItems = self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
+            
+            let service = PhotoAndVideoService(requestSize: NumericConstants.numberOfElementsInSyncRequest, type: fieldValue)
+            
+            let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")
+            queue.async {
+                self.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { (items, error) in
+                    guard error == nil, let unsyncedItems = items else {
+                        print(error!.localizedDescription)
+                        semaphore.signal()
+                        return
+                    }
+                    
+                    itemsToReturn = unsyncedItems
+                    semaphore.signal()
+                }
+            }
+        }
+        semaphore.wait()
+        
+        return itemsToReturn
+    }
+    
+    private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?)->() ) {
+        guard let oldestItemDate = localItems.last?.metaDate else {
+            handler([], nil)
+            return
+        }
+        
+        var localItems = localItems
+        var localMd5s = localItems.map { $0.md5 }
+        
+        var finished = false
+        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
             guard let `self` = self else {
-                fail()
+                handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
                 return
             }
             
@@ -214,15 +223,15 @@ class ItemSyncServiceImpl: ItemSyncService {
                 }
                 
                 let serverObjectMD5 = item.md5
-                if let index = self.localItemsMD5s.index(of: serverObjectMD5) {
-                    let localItem = self.localItems[index]
+                if let index = localMd5s.index(of: serverObjectMD5) {
+                    let localItem = localItems[index]
                     localItem.syncStatuses.append(SingletonStorage.shared.unigueUserID)
-                    CoreDataStack.default.updateLocalItemSyncStatus(item: localItem)
+                    self.updateLocalItemSyncStatus(item: localItem)
                     
-                    self.localItems.remove(at: index)
-                    self.localItemsMD5s.remove(at: index)
+                    localItems.remove(at: index)
+                    localMd5s.remove(at: index)
                     
-                    if self.localItems.isEmpty {
+                    if localItems.isEmpty {
                         finished = true
                         break
                     }
@@ -230,60 +239,15 @@ class ItemSyncServiceImpl: ItemSyncService {
             }
             
             if !finished, items.count == NumericConstants.numberOfElementsInSyncRequest {
-                self.getUnsyncedObjects(oldestItemDate: oldestItemDate, success: success, fail: fail)
+                self.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue, handler: handler)
             } else {
-                log.debug("ItemSyncServiceImpl getUnsyncedObjects PhotoAndVideoService nextItemsMinified success")
-
-                success()
+                handler(localItems, nil)
             }
             }, fail: {
-                log.debug("ItemSyncServiceImpl getUnsyncedObjects PhotoAndVideoService nextItemsMinified fail")
-
-                fail()
-        }, newFieldValue: fileType == .image ? .image : .video)
+                handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
+        }, newFieldValue: fieldValue)
     }
-    
-    private func appendNewUnsyncedItems() {
-        let group = DispatchGroup()
-        var localUnsynced = [WrapData]()
-        
-        group.enter()
-        DispatchQueue.main.async {
-            localUnsynced = self.localUnsyncedItems()
-            group.leave()
-        }
-    
-        group.notify(queue: dispatchQueue) {
-            let newUnsyncedLocalItems = localUnsynced.filter({ !self.lastSyncedMD5s.contains($0.md5) })
-            
-            guard !newUnsyncedLocalItems.isEmpty else {
-                return
-            }
-            
-            self.upload(items: newUnsyncedLocalItems)
-        }
-    }
-    
-    private func postNotification() {
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: autoSyncStatusDidChangeNotification, object: nil)
-        }
-    }
-    
-    
-    //MARK: - Override me
-    
-    func itemsSortedToUpload(from items: [WrapData]) -> [WrapData] {
-        return []
-    }
-    
-    func localUnsyncedItems() -> [WrapData] {
-        return []
-    }
-    
 }
-
-
 
 
 

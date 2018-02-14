@@ -242,17 +242,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeTabBarStatus(hidden: false)
         //tabBar.isHidden = false
         if (self.bottomTabBarConstraint.constant < 0){
-            if #available(iOS 10.0, *) {
-                let obj = UIViewPropertyAnimator(duration: NumericConstants.animationDuration, curve: .linear) {
-                    self.bottomTabBarConstraint.constant = 0
-                    self.tabBar.layoutIfNeeded()
-                }
-                obj.startAnimation()
-            } else {
-                UIView.animate(withDuration: NumericConstants.animationDuration) {
-                    self.bottomTabBarConstraint.constant = 0
-                    self.tabBar.layoutIfNeeded()
-                }
+            UIView.animate(withDuration: NumericConstants.animationDuration) {
+                self.bottomTabBarConstraint.constant = 0
+                self.view.layoutIfNeeded()
             }
         }
     }
@@ -264,20 +256,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             if !musicBar.isHidden {
                 bottomConstraintConstant -= self.musicBar.frame.height
             }
-            if #available(iOS 10.0, *) {
-                let obj = UIViewPropertyAnimator(duration: NumericConstants.animationDuration, curve: .linear) {
-                    self.bottomTabBarConstraint.constant = bottomConstraintConstant
-                    self.tabBar.layoutIfNeeded()
-                }
-                obj.startAnimation()
-            } else {
-                UIView.animate(withDuration: NumericConstants.animationDuration) {
-                    self.bottomTabBarConstraint.constant = bottomConstraintConstant
-                    self.tabBar.layoutIfNeeded()
-                }
+            UIView.animate(withDuration: NumericConstants.animationDuration) {
+                self.bottomTabBarConstraint.constant = bottomConstraintConstant
+                self.view.layoutIfNeeded()
             }
         }
-        
     }
     
     private func changeTabBarStatus(hidden: Bool) {
@@ -511,7 +494,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             return
         }
         
-        view.layoutIfNeeded()
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews, animations: {
             for button in buttons{
                 button.changeVisability(toHidden: hidden)
@@ -592,7 +574,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         let wrapData = WrapData(imageData: data)
         
-        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {
+        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: false, success: {
         }) { [weak self] error in
             DispatchQueue.main.async {
                 let vc = PopUpController.with(title: TextConstants.errorAlert,
@@ -656,7 +638,12 @@ extension TabBarViewController: TabBarActionHandler {
             
         case .uploadFromLifeBox:
             let parentFolder = router.getParentUUID()
-            let controller = router.uploadFromLifeBox(folderUUID: parentFolder)
+            let controller: UIViewController
+            if let currentVC = currentViewController as? BaseFilesGreedViewController {
+                controller = router.uploadFromLifeBox(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule())
+            } else {
+                controller = router.uploadFromLifeBox(folderUUID: parentFolder)
+            }
             let navigationController = UINavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)

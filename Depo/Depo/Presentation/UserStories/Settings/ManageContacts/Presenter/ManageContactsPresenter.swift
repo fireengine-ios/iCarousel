@@ -22,7 +22,6 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
     
     func onDeleteContact(_ contact: RemoteContact) {
         interactor.deleteContact(contact)
-        asyncOperationStarted()
     }
     
     func didScrollToEnd() {
@@ -38,6 +37,10 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
     }
     
     //MARK: Interactor Output
+    
+    func deleteContact(_ completion: @escaping (() -> Void)) {
+        router.deleteContact(completion)
+    }
     
     func didLoadContacts(_ contacts: [RemoteContact]) {
         let sortedContacts = sortContacts(contacts)

@@ -1,0 +1,12 @@
+//
+//  FaceImagePhotosModuleOutput.swift
+//  Depo
+//
+//  Created by Harhun Brothers on 09.02.2018.
+//  Copyright © 2018 LifeTech. All rights reserved.
+//
+
+protocol FaceImagePhotosModuleOutput: class {
+    func didChangeName(item: WrapData)
+    func didMergePeople()
+}

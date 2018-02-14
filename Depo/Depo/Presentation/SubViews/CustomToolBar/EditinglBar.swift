@@ -32,6 +32,7 @@ enum ElementTypes {
     case addToCmeraRoll
     case removeFromAlbum
     case print
+    case changeCoverPhoto
     //upload?
     case photos
     case iCloudDrive

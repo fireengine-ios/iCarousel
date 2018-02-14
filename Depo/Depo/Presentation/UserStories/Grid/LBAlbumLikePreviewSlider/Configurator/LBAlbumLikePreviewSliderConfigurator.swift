@@ -11,15 +11,17 @@ import UIKit
 class LBAlbumLikePreviewSliderModuleConfigurator {
 
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController,
-                                     inputPresenter: LBAlbumLikePreviewSliderPresenter?) {
+                                                       inputPresenter: LBAlbumLikePreviewSliderPresenter?,
+                                                       peopleItem: PeopleItem? = nil) {
 
         if let viewController = viewInput as? LBAlbumLikePreviewSliderViewController {
-            configure(viewController: viewController, inputPresenter: inputPresenter)
+            configure(viewController: viewController, inputPresenter: inputPresenter, peopleItem: peopleItem)
         }
     }
 
     private func configure(viewController: LBAlbumLikePreviewSliderViewController,
-                           inputPresenter: LBAlbumLikePreviewSliderPresenter?) {
+                           inputPresenter: LBAlbumLikePreviewSliderPresenter?,
+                           peopleItem: PeopleItem? = nil) {
 
         let router = LBAlbumLikePreviewSliderRouter()
 
@@ -35,7 +37,17 @@ class LBAlbumLikePreviewSliderModuleConfigurator {
         presenter.view = viewController
         presenter.router = router
 
-        let interactor = LBAlbumLikePreviewSliderInteractor()
+        let interactor: LBAlbumLikePreviewSliderInteractor
+        if let peopleItem = peopleItem {
+            interactor = PeopleAlbumSliderInteractor(peopleItem: peopleItem)
+            
+            let title = String(format: TextConstants.albumLikeSliderWithPerson,
+                               peopleItem.name ?? "")
+            viewController.sliderTitle = title
+        } else {
+            interactor = LBAlbumLikePreviewSliderInteractor()
+        }
+        
         interactor.output = presenter
         ItemOperationManager.default.startUpdateView(view: interactor)
 

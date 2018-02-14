@@ -21,25 +21,25 @@ class AlbumDetailService: RemoteItemsService {
         nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
     }
     
-    func nextItems(albumUUID: String, sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems ) {
+    func nextItems(albumUUID: String, sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?) {
         log.debug("AlbumDetailService nextItems")
 
         let serchParam = AlbumDetalParameters (albumUuid: albumUUID, sortBy: sortBy, sortOrder: sortOrder, page: currentPage, size: requestSize)
         
         remote.searchContentAlbum(param: serchParam, success: { (response) in
             guard let resultResponse = (response as? AlbumDetailResponse)?.list else {
-                fail()
+                fail?()
                 return
             }
             log.debug("AlbumDetailService nextItems SearchService searchContentAlbum success")
 
             let list = resultResponse.flatMap { WrapData(remote: $0) }
             self.currentPage = self.currentPage + 1
-            success(list)
+            success?(list)
         }, fail: { _ in
             log.debug("AlbumDetailService nextItems SearchService searchContentAlbum fail")
 
-            fail()
+            fail?()
         })
     }
     

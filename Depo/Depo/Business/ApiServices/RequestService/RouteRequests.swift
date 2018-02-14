@@ -78,8 +78,19 @@ struct RouteRequests {
     // MARK: My Streams
     
     static let people = "/api/person/"
+    static let peoplePage = "/api/person/page?pageSize=%d&pageNumber=%d"
+    static let peopleAlbum = "/api/album?contentType=album/person&sortBy=createdDate&sortOrder=DESC&page=0&size=1&personInfoId=%d"
+    static let peopleAlbums = "/api/person/relatedAlbums/%d"
+    static let personVisibility = "api/person/visibility/"
+    static let peopleSearch = "/api/person/label/%@"
+    static let peopleMerge = "/api/person/%d"
+    static let peopleChangeName = "/api/person/label/%d"
     static let things = "/api/object/"
+    static let thingsPage = "/api/object/page?pageSize=%d&pageNumber=%d"
+    static let thingsAlbum = "/api/album?contentType=album/object&sortBy=createdDate&sortOrder=DESC&page=0&size=1&objectInfoId=%d"
     static let places = "/api/location/"
+    static let placesPage = "/api/location/page?pageSize=%d&pageNumber=%d"
+    static let placesAlbum = "/api/album?contentType=album/location&sortBy=createdDate&sortOrder=DESC&page=0&size=1&locationInfoId=%d"
     
     //MARK : Share
     
