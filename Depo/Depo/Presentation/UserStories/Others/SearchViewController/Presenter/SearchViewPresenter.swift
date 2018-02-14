@@ -18,7 +18,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     var topBarConfig: GridListTopBarConfig?
     
-    var dataSource = BaseDataSourceForCollectionView()
+    var dataSource = SearchDataSource()
     var showedSpinner = false
     
     lazy var player: MediaPlayer = factory.resolve()
@@ -50,15 +50,25 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.isHeaderless = true
         
         setupTopBar()
+        subscribeDataSource()
 //        sortedRule = .albumlettersAZ
 //        dataSource.currentSortType = sortedRule
     }
     
+    func viewWillDisappear() {
+        stopEditing()
+    }
+       
     deinit {
         guard let view = view as? MediaPlayerDelegate else {
             return
         }
         player.delegates.remove(view)
+        ItemOperationManager.default.stopUpdateView(view: dataSource)
+    }
+    
+    func subscribeDataSource() {
+        ItemOperationManager.default.startUpdateView(view: dataSource)
     }
     
     //MARK: - UnderNavBarBar/TopBar
@@ -186,13 +196,12 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         var cellWidth:CGFloat = 180
         
         if (Device.isIpad) {
-            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIpad - 1))/NumericConstants.numerCellInLineOnIpad
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIpad - 1))/NumericConstants.numerCellInDocumentLineOnIpad
         } else {
-            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2  - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIphone - 1))/NumericConstants.numerCellInLineOnIphone
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2  - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIphone - 1))/NumericConstants.numerCellInDocumentLineOnIphone
         }
         return CGSize(width: cellWidth, height: cellWidth)
     }
-    
     
     func onLongPressInCell() {
         startEditing()
@@ -314,7 +323,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                                              presentedBy: sender,
                                              onSourceView: nil)
         }
-        
     }
     
     // MARK: Bottom Bar
@@ -395,7 +403,11 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func moveBack() { }
     func selectAllModeSelected() { }
     func deSelectAll() { }
-    func stopModeSelected() { }
+    
+    func stopModeSelected() {
+        stopEditing()
+    }
+    
     func changeCover() { }
 }
 

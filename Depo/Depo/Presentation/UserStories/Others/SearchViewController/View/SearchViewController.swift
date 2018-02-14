@@ -68,14 +68,26 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        defaultNavBarStyle()
+        
         navigationController?.setNavigationBarHidden(true, animated: false)
         UIApplication.shared.statusBarStyle = .default
         
         editingTabBar?.view.layoutIfNeeded()
+        
+        let allVisibleCells = collectionView.indexPathsForVisibleItems
+        if !allVisibleCells.isEmpty {
+            collectionView.performBatchUpdates({
+                collectionView.reloadItems(at: allVisibleCells)
+            })
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         UIApplication.shared.statusBarStyle = .lightContent
+        output.viewWillDisappear()
     }
     
     deinit {
@@ -299,6 +311,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func onSetSelection(state: Bool) {
         setupNavigationBarForSelectionState(state: state)
+    
     }
     
     func setNavBarRigthItem(active isActive: Bool) {
