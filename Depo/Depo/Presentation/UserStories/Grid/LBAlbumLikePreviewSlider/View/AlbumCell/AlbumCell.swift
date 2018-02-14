@@ -10,22 +10,40 @@ import UIKit
 
 class AlbumCell: UICollectionViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel! {
-        didSet {
-            titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
-            titleLabel.textColor = ColorConstants.darkText
-        }
-    }
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var previewBackView: UIView!
     @IBOutlet weak var previewImage1: LoadingImageView!
     @IBOutlet weak var previewImage2: LoadingImageView!
     @IBOutlet weak var previewImage3: LoadingImageView!
     @IBOutlet weak var previewImage4: LoadingImageView!
     @IBOutlet weak var placeholderImage: UIImageView!
+    @IBOutlet weak var bigPreviewImage: UIImageView!
     
     func setup(withItem item: SliderItem) {
-        titleLabel.text = item.name ?? ""
+        titleLabel.text = item.name
         
+        guard let type = item.type else {
+            return
+        }
+        
+        if type == .album {
+            setup(withAlbum: item.albumItem)
+        } else {
+            setup(withSliderItem: item)
+        }
+    }
+    
+    private func setup(withAlbum album: AlbumItem?) {
+        guard let imageURL = album?.preview?.tmpDownloadUrl else {
+            return
+        }
+        
+        bigPreviewImage.sd_setImage(with: imageURL) { [weak self] (image, error, cacheType, url) in
+            self?.bigPreviewImage.image = image
+        }
+    }
+    
+    private func setup(withSliderItem item: SliderItem) {
         if let items = item.previewItems, !items.isEmpty {
             previewBackView.isHidden = false
             placeholderImage.layer.borderColor = ColorConstants.blueColor.cgColor
@@ -50,5 +68,7 @@ class AlbumCell: UICollectionViewCell {
         super.awakeFromNib()
         titleLabel.text = ""
         placeholderImage.layer.borderWidth = 1
+        titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
+        titleLabel.textColor = ColorConstants.darkText
     }
 }

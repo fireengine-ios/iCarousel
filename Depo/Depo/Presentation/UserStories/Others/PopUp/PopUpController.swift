@@ -33,9 +33,9 @@ final class PopUpController: UIViewController {
         return vc
     }
     
-    static func with(title: String?, message: String?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?, message: String?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstUrl: URL? = nil, secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
         
-        let vc = controllerWith(title: title, message: message, image: image)
+        let vc = controllerWith(title: title, message: message, image: image, firstUrl: firstUrl, secondUrl: secondUrl)
         vc.buttonState = .twin
         
         if let firstAction = firstAction {
@@ -51,7 +51,7 @@ final class PopUpController: UIViewController {
         return vc
     }
     
-    private static func controllerWith(title: String?, message: String?, image: PopUpImage) -> PopUpController {
+    private static func controllerWith(title: String?, message: String?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil) -> PopUpController {
         let vc = PopUpController(nibName: "PopUpController", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
@@ -59,6 +59,8 @@ final class PopUpController: UIViewController {
         vc.alertTitle = title
         vc.alertMessage = message
         vc.popUpImage = image
+        vc.firstUrl = firstUrl
+        vc.secondUrl = secondUrl
 
         return vc
     }
@@ -101,7 +103,8 @@ final class PopUpController: UIViewController {
     @IBOutlet private weak var singleButton: UIButton!
     
     @IBOutlet private weak var darkView: UIView!
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var firstImageView: UIImageView!
+    @IBOutlet weak var secondIconImageView: UIImageView!
     
     @IBOutlet weak var noneImageConstraint: NSLayoutConstraint!
     
@@ -118,6 +121,9 @@ final class PopUpController: UIViewController {
     private var secondButtonTitle = ""
     private var singleButtonTitle = ""
     
+    private var firstUrl: URL?
+    private var secondUrl: URL?
+    
     lazy var firstAction: PopUpButtonHandler = { vc in
         vc.close()
     }
@@ -132,6 +138,7 @@ final class PopUpController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
     }
     
@@ -166,9 +173,20 @@ final class PopUpController: UIViewController {
     }
     
     private func setupPopUpImage() {
-        iconImageView.image = popUpImage.image
+        if let url = firstUrl {
+            firstImageView.sd_setImage(with: url, placeholderImage: UIImage())
+        } else {
+            firstImageView.image = popUpImage.image
+        }
+        
+        
         if case PopUpImage.none = popUpImage {
             noneImageConstraint.constant = 20
+        }
+        
+        if let url = secondUrl {
+            secondIconImageView.sd_setImage(with: url, placeholderImage: UIImage())
+            secondIconImageView.isHidden = false
         }
     }
     

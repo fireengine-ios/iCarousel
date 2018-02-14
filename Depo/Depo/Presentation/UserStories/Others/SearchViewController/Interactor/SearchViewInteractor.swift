@@ -12,6 +12,10 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     weak var output: SearchViewInteractorOutput?
     
+    var alertSheetConfig: AlertFilesActionsSheetInitialConfig?
+    
+    var bottomBarOriginalConfig: EditingBarConfig?
+    
     let remoteItems: RemoteSearchService
     let recentSearches: RecentSearchesService
     
@@ -85,5 +89,18 @@ class SearchViewInteractor: SearchViewInteractorInput {
     func clearRecentSearches() {
         recentSearches.clearAll()
         output?.setRecentSearches(recentSearches.searches)
+    }
+    
+    var alerSheetMoreActionsConfig: AlertFilesActionsSheetInitialConfig? {
+        return alertSheetConfig        
+    }
+    
+    var bottomBarConfig: EditingBarConfig? {
+        set {
+            bottomBarOriginalConfig = newValue
+        }
+        get {
+            return bottomBarOriginalConfig
+        }
     }
 }

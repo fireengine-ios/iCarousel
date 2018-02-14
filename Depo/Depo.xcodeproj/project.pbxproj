@@ -38,6 +38,18 @@
 		2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */; };
 		2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282E581C729D5E96D07CE3D1 /* AlbumDetailRouter.swift */; };
 		2B5261513879D04FFE1D241C /* SettingsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1BED0751734B73B9583DD /* SettingsViewOutput.swift */; };
+		2B96AEA2202B6A5100F066F9 /* FaceImagePhotosViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */; };
+		2BA37C2D2028374E00660394 /* FaceImageChangeCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C2B2028374D00660394 /* FaceImageChangeCoverViewController.swift */; };
+		2BA37C2E2028374E00660394 /* FaceImageChangeCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA37C2C2028374E00660394 /* FaceImageChangeCoverViewController.xib */; };
+		2BA37C312028376500660394 /* FaceImageChangeCoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C2F2028376500660394 /* FaceImageChangeCoverRouter.swift */; };
+		2BA37C322028376500660394 /* FaceImageChangeCoverRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C302028376500660394 /* FaceImageChangeCoverRouterInput.swift */; };
+		2BA37C342028379400660394 /* FaceImageChangeCoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C332028379400660394 /* FaceImageChangeCoverPresenter.swift */; };
+		2BA37C38202837B400660394 /* FaceImageChangeCoverInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C35202837B300660394 /* FaceImageChangeCoverInteractorInput.swift */; };
+		2BA37C39202837B400660394 /* FaceImageChangeCoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C36202837B300660394 /* FaceImageChangeCoverInteractor.swift */; };
+		2BA37C3A202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C37202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift */; };
+		2BA37C3D202837C800660394 /* FaceImageChangeCoverInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3B202837C700660394 /* FaceImageChangeCoverInitializer.swift */; };
+		2BA37C3E202837C800660394 /* FaceImageChangeCoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3C202837C800660394 /* FaceImageChangeCoverConfigurator.swift */; };
+		2BA37C40202883BF00660394 /* FaceImagePhotosRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3F202883BF00660394 /* FaceImagePhotosRouterInput.swift */; };
 		2D620A893121CE2330C18858 /* FeedbackViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9561EA6AFBC184BF853C98 /* FeedbackViewRouter.swift */; };
 		2EA03B3FBEC8D2ED563D175D /* ActionsMenuViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29E5867A0B1232EF8B56B8 /* ActionsMenuViewInput.swift */; };
 		2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BCBDB527895B614215B1EC /* BaseFilesGreedInteractor.swift */; };
@@ -61,7 +73,86 @@
 		46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF9B9785CB91B71D6E10883 /* OTPViewConfigurator.swift */; };
 		473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */; };
 		48AAD540DF9AE2C249F9B6D4 /* OTPViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */; };
+		4A56D5AF202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5AE202AF51D003A4624 /* FaceImageAddNameViewController.swift */; };
+		4A56D5B0202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5AE202AF51D003A4624 /* FaceImageAddNameViewController.swift */; };
+		4A56D5B2202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B1202AF529003A4624 /* FaceImageAddNameRouter.swift */; };
+		4A56D5B3202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B1202AF529003A4624 /* FaceImageAddNameRouter.swift */; };
+		4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B4202AF536003A4624 /* FaceImageAddNamePresenter.swift */; };
+		4A56D5B6202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B4202AF536003A4624 /* FaceImageAddNamePresenter.swift */; };
+		4A56D5B8202AF547003A4624 /* FaceImageAddNameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B7202AF547003A4624 /* FaceImageAddNameInteractor.swift */; };
+		4A56D5B9202AF547003A4624 /* FaceImageAddNameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B7202AF547003A4624 /* FaceImageAddNameInteractor.swift */; };
+		4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5BA202AF556003A4624 /* FaceImageAddNameConfigurator.swift */; };
+		4A56D5BC202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5BA202AF556003A4624 /* FaceImageAddNameConfigurator.swift */; };
+		4A56D5BE202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5BD202AF5F6003A4624 /* FaceImageAddNameInitializer.swift */; };
+		4A56D5BF202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5BD202AF5F6003A4624 /* FaceImageAddNameInitializer.swift */; };
+		4A56D5C1202AF658003A4624 /* FaceImageAddNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A56D5C0202AF658003A4624 /* FaceImageAddNameViewController.xib */; };
+		4A56D5C2202AF658003A4624 /* FaceImageAddNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A56D5C0202AF658003A4624 /* FaceImageAddNameViewController.xib */; };
+		4A56D5C8202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5C6202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift */; };
+		4A56D5C9202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5C6202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift */; };
+		4A56D5CA202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A56D5C7202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib */; };
+		4A56D5CB202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A56D5C7202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib */; };
+		4A56D5CD202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5CC202B316F003A4624 /* FaceImageAddNameDataSource.swift */; };
+		4A56D5CE202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5CC202B316F003A4624 /* FaceImageAddNameDataSource.swift */; };
+		4A8CC303201A00D400C040C4 /* FaceImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC301201A00D400C040C4 /* FaceImageViewController.swift */; };
+		4A8CC304201A00D400C040C4 /* FaceImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC301201A00D400C040C4 /* FaceImageViewController.swift */; };
+		4A8CC305201A00D400C040C4 /* FaceImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8CC302201A00D400C040C4 /* FaceImageViewController.xib */; };
+		4A8CC306201A00D400C040C4 /* FaceImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8CC302201A00D400C040C4 /* FaceImageViewController.xib */; };
+		4A8CC308201A016F00C040C4 /* FaceImageViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC307201A016F00C040C4 /* FaceImageViewInput.swift */; };
+		4A8CC309201A016F00C040C4 /* FaceImageViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC307201A016F00C040C4 /* FaceImageViewInput.swift */; };
+		4A8CC30B201A018000C040C4 /* FaceImageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC30A201A018000C040C4 /* FaceImageViewOutput.swift */; };
+		4A8CC30C201A018000C040C4 /* FaceImageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC30A201A018000C040C4 /* FaceImageViewOutput.swift */; };
+		4A8CC30E201A01BC00C040C4 /* FaceImageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC30D201A01BC00C040C4 /* FaceImageRouter.swift */; };
+		4A8CC30F201A01BC00C040C4 /* FaceImageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC30D201A01BC00C040C4 /* FaceImageRouter.swift */; };
+		4A8CC311201A01CC00C040C4 /* FaceImageRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC310201A01CC00C040C4 /* FaceImageRouterInput.swift */; };
+		4A8CC312201A01CC00C040C4 /* FaceImageRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC310201A01CC00C040C4 /* FaceImageRouterInput.swift */; };
+		4A8CC314201A023000C040C4 /* FaceImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC313201A023000C040C4 /* FaceImagePresenter.swift */; };
+		4A8CC315201A023000C040C4 /* FaceImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC313201A023000C040C4 /* FaceImagePresenter.swift */; };
+		4A8CC317201A025C00C040C4 /* FaceImageIneractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC316201A025C00C040C4 /* FaceImageIneractor.swift */; };
+		4A8CC318201A025C00C040C4 /* FaceImageIneractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC316201A025C00C040C4 /* FaceImageIneractor.swift */; };
+		4A8CC31A201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC319201A027400C040C4 /* FaceImageInteractorInput.swift */; };
+		4A8CC31B201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC319201A027400C040C4 /* FaceImageInteractorInput.swift */; };
+		4A8CC31D201A028600C040C4 /* FaceImageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC31C201A028600C040C4 /* FaceImageInteractorOutput.swift */; };
+		4A8CC31E201A028600C040C4 /* FaceImageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC31C201A028600C040C4 /* FaceImageInteractorOutput.swift */; };
+		4A8CC320201A02A600C040C4 /* FaceImageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC31F201A02A600C040C4 /* FaceImageConfigurator.swift */; };
+		4A8CC321201A02A600C040C4 /* FaceImageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC31F201A02A600C040C4 /* FaceImageConfigurator.swift */; };
+		4A8CC323201A02D900C040C4 /* FaceImageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC322201A02D900C040C4 /* FaceImageInitializer.swift */; };
+		4A8CC324201A02D900C040C4 /* FaceImageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC322201A02D900C040C4 /* FaceImageInitializer.swift */; };
 		4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7E2D395BBA8DC5D0612F29 /* LBAlbumLikePreviewSliderInteractorOutput.swift */; };
+		4A9B38F4201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */; };
+		4A9B38F5201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */; };
+		4A9B38F6201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */; };
+		4A9B38F7201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */; };
+		4A9B38FF201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38FE201F3502009FC572 /* FaceImageItemsViewController.swift */; };
+		4A9B3900201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38FE201F3502009FC572 /* FaceImageItemsViewController.swift */; };
+		4A9B3902201F3513009FC572 /* FaceImageItemsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3901201F3513009FC572 /* FaceImageItemsPresenter.swift */; };
+		4A9B3903201F3513009FC572 /* FaceImageItemsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3901201F3513009FC572 /* FaceImageItemsPresenter.swift */; };
+		4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3904201F3525009FC572 /* FaceImageItemsInteractor.swift */; };
+		4A9B3906201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3904201F3525009FC572 /* FaceImageItemsInteractor.swift */; };
+		4A9B3908201F3533009FC572 /* FaceImageItemsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3907201F3533009FC572 /* FaceImageItemsRouter.swift */; };
+		4A9B3909201F3533009FC572 /* FaceImageItemsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B3907201F3533009FC572 /* FaceImageItemsRouter.swift */; };
+		4A9B390E201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B390D201F3969009FC572 /* FaceImageItemsInitializer.swift */; };
+		4A9B390F201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B390D201F3969009FC572 /* FaceImageItemsInitializer.swift */; };
+		4A9B3911201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B3910201F5EC5009FC572 /* FaceImageItemsViewController.xib */; };
+		4A9B3912201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B3910201F5EC5009FC572 /* FaceImageItemsViewController.xib */; };
+		4AAF28B720205454007B43BA /* FaceImageItemsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF28B620205454007B43BA /* FaceImageItemsConfigurator.swift */; };
+		4AAF28B820205454007B43BA /* FaceImageItemsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF28B620205454007B43BA /* FaceImageItemsConfigurator.swift */; };
+		4AC68930202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC6892F202C5153003400D0 /* FaceImageAddNameViewOutput.swift */; };
+		4AC68931202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC6892F202C5153003400D0 /* FaceImageAddNameViewOutput.swift */; };
+		4AC68933202C5312003400D0 /* FaceImageAddNameInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC68932202C5312003400D0 /* FaceImageAddNameInteractorInput.swift */; };
+		4AC68934202C5312003400D0 /* FaceImageAddNameInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC68932202C5312003400D0 /* FaceImageAddNameInteractorInput.swift */; };
+		4AC68936202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC68935202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift */; };
+		4AC68937202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC68935202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift */; };
+		4ADE0872202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0871202D90CE0095346F /* FaceImageAddNameRouterInput.swift */; };
+		4ADE0873202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0871202D90CE0095346F /* FaceImageAddNameRouterInput.swift */; };
+		4ADE087E202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE087D202DC7890095346F /* FaceImagePhotosModuleOutput.swift */; };
+		4ADE087F202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE087D202DC7890095346F /* FaceImagePhotosModuleOutput.swift */; };
+		4ADE0881202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */; };
+		4ADE0882202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */; };
+		4ADE0887202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
+		4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
+		4AFAEAC12027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
+		4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
+		4BCD0211E6F3ED79A879D88B /* CompleteProfileInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C66D262F6A075566FD30AC /* CompleteProfileInitializer.swift */; };
 		4C625D18F465CC4F6D27A6B1 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500943E503755A25C4E6B64 /* SettingsInteractor.swift */; };
 		4C7B0D374F8DE575C03C683C /* SplashInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE7E386FBD5473EAA3840B /* SplashInitializer.swift */; };
 		4D19E8403C8694B3328BB3D2 /* BaseFilesGreedModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4FE9A3DE9EE69A1D9C29B /* BaseFilesGreedModuleInput.swift */; };
@@ -142,6 +233,17 @@
 		78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */; };
 		78DDEF9C201908C100E3530B /* String+CyrillicCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */; };
 		78DDEF9D201908CB00E3530B /* String+CyrillicCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */; };
+		78E8E2A72023186C00A979AB /* FaceImagePhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A52023186C00A979AB /* FaceImagePhotosViewController.swift */; };
+		78E8E2A82023186C00A979AB /* FaceImagePhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E8E2A62023186C00A979AB /* FaceImagePhotosViewController.xib */; };
+		78E8E2AA2023189F00A979AB /* FaceImagePhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */; };
+		78E8E2AC202318E700A979AB /* FaceImagePhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AB202318E700A979AB /* FaceImagePhotosInteractor.swift */; };
+		78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AD2023191800A979AB /* FaceImagePhotosRouter.swift */; };
+		78E8E2B02023195600A979AB /* FaceImagePhotosInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AF2023195600A979AB /* FaceImagePhotosInitializer.swift */; };
+		78E8E2B22023196B00A979AB /* FaceImagePhotosConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B12023196B00A979AB /* FaceImagePhotosConfigurator.swift */; };
+		78E8E2B4202360C700A979AB /* FaceImageItemsInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B3202360C700A979AB /* FaceImageItemsInteractorInput.swift */; };
+		78E8E2B62023638E00A979AB /* FaceImageItemsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B52023638E00A979AB /* FaceImageItemsInteractorOutput.swift */; };
+		78E8E2B820236D6900A979AB /* FaceImageItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B720236D6900A979AB /* FaceImageItemsRouterInput.swift */; };
+		78F674932024BC91006B0911 /* PeopleAlbumSliderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */; };
 		78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */; };
 		78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */; };
 		7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */; };
@@ -3082,6 +3184,19 @@
 		282E581C729D5E96D07CE3D1 /* AlbumDetailRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailRouter.swift; sourceTree = "<group>"; };
 		284E2CF83DB7FBCE9558A617 /* UserInfoSubViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewPresenter.swift; sourceTree = "<group>"; };
 		2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewOutput.swift; sourceTree = "<group>"; };
+		2B67E3929C50D3031AE4A70F /* CompleteProfileViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompleteProfileViewController.swift; sourceTree = "<group>"; };
+		2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewInput.swift; sourceTree = "<group>"; };
+		2BA37C2B2028374D00660394 /* FaceImageChangeCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverViewController.swift; sourceTree = "<group>"; };
+		2BA37C2C2028374E00660394 /* FaceImageChangeCoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceImageChangeCoverViewController.xib; sourceTree = "<group>"; };
+		2BA37C2F2028376500660394 /* FaceImageChangeCoverRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverRouter.swift; sourceTree = "<group>"; };
+		2BA37C302028376500660394 /* FaceImageChangeCoverRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverRouterInput.swift; sourceTree = "<group>"; };
+		2BA37C332028379400660394 /* FaceImageChangeCoverPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverPresenter.swift; sourceTree = "<group>"; };
+		2BA37C35202837B300660394 /* FaceImageChangeCoverInteractorInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverInteractorInput.swift; sourceTree = "<group>"; };
+		2BA37C36202837B300660394 /* FaceImageChangeCoverInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverInteractor.swift; sourceTree = "<group>"; };
+		2BA37C37202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverInteractorOutput.swift; sourceTree = "<group>"; };
+		2BA37C3B202837C700660394 /* FaceImageChangeCoverInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverInitializer.swift; sourceTree = "<group>"; };
+		2BA37C3C202837C800660394 /* FaceImageChangeCoverConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverConfigurator.swift; sourceTree = "<group>"; };
+		2BA37C3F202883BF00660394 /* FaceImagePhotosRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosRouterInput.swift; sourceTree = "<group>"; };
 		2E50FCBA00A2EB5EF92BED07 /* UserInfoSubViewViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewViewInput.swift; sourceTree = "<group>"; };
 		2EDC08542508B91094154180 /* Pods-Depo_LifeTech-autosync-widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.release.xcconfig"; sourceTree = "<group>"; };
 		2FA162F32D68FC71BB6EDF2E /* SettingsRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
@@ -3113,6 +3228,46 @@
 		495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractorInput.swift; sourceTree = "<group>"; };
 		49A793804B9422E2D6327427 /* UploadFilesSelectionPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionPresenter.swift; sourceTree = "<group>"; };
 		4A4AC5C4BDA613483E0B3CCA /* SyncContactsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsPresenter.swift; sourceTree = "<group>"; };
+		4A56D5AE202AF51D003A4624 /* FaceImageAddNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameViewController.swift; sourceTree = "<group>"; };
+		4A56D5B1202AF529003A4624 /* FaceImageAddNameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameRouter.swift; sourceTree = "<group>"; };
+		4A56D5B4202AF536003A4624 /* FaceImageAddNamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNamePresenter.swift; sourceTree = "<group>"; };
+		4A56D5B7202AF547003A4624 /* FaceImageAddNameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameInteractor.swift; sourceTree = "<group>"; };
+		4A56D5BA202AF556003A4624 /* FaceImageAddNameConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameConfigurator.swift; sourceTree = "<group>"; };
+		4A56D5BD202AF5F6003A4624 /* FaceImageAddNameInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameInitializer.swift; sourceTree = "<group>"; };
+		4A56D5C0202AF658003A4624 /* FaceImageAddNameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceImageAddNameViewController.xib; sourceTree = "<group>"; };
+		4A56D5C6202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForFaceImageAddName.swift; sourceTree = "<group>"; };
+		4A56D5C7202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCellForFaceImageAddName.xib; sourceTree = "<group>"; };
+		4A56D5CC202B316F003A4624 /* FaceImageAddNameDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameDataSource.swift; sourceTree = "<group>"; };
+		4A8CC301201A00D400C040C4 /* FaceImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageViewController.swift; sourceTree = "<group>"; };
+		4A8CC302201A00D400C040C4 /* FaceImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceImageViewController.xib; sourceTree = "<group>"; };
+		4A8CC307201A016F00C040C4 /* FaceImageViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageViewInput.swift; sourceTree = "<group>"; };
+		4A8CC30A201A018000C040C4 /* FaceImageViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageViewOutput.swift; sourceTree = "<group>"; };
+		4A8CC30D201A01BC00C040C4 /* FaceImageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageRouter.swift; sourceTree = "<group>"; };
+		4A8CC310201A01CC00C040C4 /* FaceImageRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageRouterInput.swift; sourceTree = "<group>"; };
+		4A8CC313201A023000C040C4 /* FaceImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePresenter.swift; sourceTree = "<group>"; };
+		4A8CC316201A025C00C040C4 /* FaceImageIneractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageIneractor.swift; sourceTree = "<group>"; };
+		4A8CC319201A027400C040C4 /* FaceImageInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageInteractorInput.swift; sourceTree = "<group>"; };
+		4A8CC31C201A028600C040C4 /* FaceImageInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageInteractorOutput.swift; sourceTree = "<group>"; };
+		4A8CC31F201A02A600C040C4 /* FaceImageConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageConfigurator.swift; sourceTree = "<group>"; };
+		4A8CC322201A02D900C040C4 /* FaceImageInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageInitializer.swift; sourceTree = "<group>"; };
+		4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForFaceImage.swift; sourceTree = "<group>"; };
+		4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCellForFaceImage.xib; sourceTree = "<group>"; };
+		4A9B38FE201F3502009FC572 /* FaceImageItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewController.swift; sourceTree = "<group>"; };
+		4A9B3901201F3513009FC572 /* FaceImageItemsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsPresenter.swift; sourceTree = "<group>"; };
+		4A9B3904201F3525009FC572 /* FaceImageItemsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsInteractor.swift; sourceTree = "<group>"; };
+		4A9B3907201F3533009FC572 /* FaceImageItemsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsRouter.swift; sourceTree = "<group>"; };
+		4A9B390D201F3969009FC572 /* FaceImageItemsInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsInitializer.swift; sourceTree = "<group>"; };
+		4A9B3910201F5EC5009FC572 /* FaceImageItemsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceImageItemsViewController.xib; sourceTree = "<group>"; };
+		4AAF28B620205454007B43BA /* FaceImageItemsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsConfigurator.swift; sourceTree = "<group>"; };
+		4AC6892F202C5153003400D0 /* FaceImageAddNameViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameViewOutput.swift; sourceTree = "<group>"; };
+		4AC68932202C5312003400D0 /* FaceImageAddNameInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameInteractorInput.swift; sourceTree = "<group>"; };
+		4AC68935202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameInteractrorOutput.swift; sourceTree = "<group>"; };
+		4ADE0871202D90CE0095346F /* FaceImageAddNameRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameRouterInput.swift; sourceTree = "<group>"; };
+		4ADE087D202DC7890095346F /* FaceImagePhotosModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosModuleOutput.swift; sourceTree = "<group>"; };
+		4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsModuleOutput.swift; sourceTree = "<group>"; };
+		4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewOutput.swift; sourceTree = "<group>"; };
+		4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewOutput.swift; sourceTree = "<group>"; };
+		4B1BD4C7B771F9CAD4F9CE5D /* LikeFilterRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterRouter.swift; sourceTree = "<group>"; };
 		4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderViewController.swift; sourceTree = "<group>"; };
 		4C7DA7C21EC6C571D491E359 /* OTPViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewPresenter.swift; sourceTree = "<group>"; };
 		4CDFC675B66399A57487FB85 /* UserInfoSubViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewRouter.swift; sourceTree = "<group>"; };
@@ -3233,7 +3388,18 @@
 		78D9BA452007E82700F2233F /* DuplicatedContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewController.swift; sourceTree = "<group>"; };
 		78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewOutput.swift; sourceTree = "<group>"; };
 		78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CyrillicCompare.swift"; sourceTree = "<group>"; };
+		78E8E2A52023186C00A979AB /* FaceImagePhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewController.swift; sourceTree = "<group>"; };
+		78E8E2A62023186C00A979AB /* FaceImagePhotosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceImagePhotosViewController.xib; sourceTree = "<group>"; };
+		78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosPresenter.swift; sourceTree = "<group>"; };
+		78E8E2AB202318E700A979AB /* FaceImagePhotosInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosInteractor.swift; sourceTree = "<group>"; };
+		78E8E2AD2023191800A979AB /* FaceImagePhotosRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosRouter.swift; sourceTree = "<group>"; };
+		78E8E2AF2023195600A979AB /* FaceImagePhotosInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosInitializer.swift; sourceTree = "<group>"; };
+		78E8E2B12023196B00A979AB /* FaceImagePhotosConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosConfigurator.swift; sourceTree = "<group>"; };
+		78E8E2B3202360C700A979AB /* FaceImageItemsInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsInteractorInput.swift; sourceTree = "<group>"; };
+		78E8E2B52023638E00A979AB /* FaceImageItemsInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsInteractorOutput.swift; sourceTree = "<group>"; };
+		78E8E2B720236D6900A979AB /* FaceImageItemsRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsRouterInput.swift; sourceTree = "<group>"; };
 		78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorInput.swift; sourceTree = "<group>"; };
+		78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleAlbumSliderInteractor.swift; sourceTree = "<group>"; };
 		78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactTableViewCell.swift; sourceTree = "<group>"; };
 		78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DuplicatedContactTableViewCell.xib; sourceTree = "<group>"; };
 		797B0A89F74D79DE19756139 /* IntroducePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroducePresenter.swift; sourceTree = "<group>"; };
@@ -5094,6 +5260,7 @@
 				8325E4AA32B488A637E3E308 /* LBAlbumLikePreviewSliderInteractorInput.swift */,
 				5F7E2D395BBA8DC5D0612F29 /* LBAlbumLikePreviewSliderInteractorOutput.swift */,
 				59360E3550649CF1052921A7 /* LBAlbumLikePreviewSliderInteractor.swift */,
+				78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -5189,6 +5356,63 @@
 				A5C823A29571EC9830131D66 /* Configurator */,
 			);
 			path = Registration;
+			sourceTree = "<group>";
+		};
+		2BA37C24202831BA00660394 /* FaceImageChangeCover */ = {
+			isa = PBXGroup;
+			children = (
+				2BA37C2A202836F800660394 /* View */,
+				2BA37C29202836F000660394 /* Router */,
+				2BA37C28202836E500660394 /* Presenter */,
+				2BA37C272028320800660394 /* Interactor */,
+				2BA37C25202831EF00660394 /* Configurator */,
+			);
+			path = FaceImageChangeCover;
+			sourceTree = "<group>";
+		};
+		2BA37C25202831EF00660394 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				2BA37C3C202837C800660394 /* FaceImageChangeCoverConfigurator.swift */,
+				2BA37C3B202837C700660394 /* FaceImageChangeCoverInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		2BA37C272028320800660394 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				2BA37C36202837B300660394 /* FaceImageChangeCoverInteractor.swift */,
+				2BA37C35202837B300660394 /* FaceImageChangeCoverInteractorInput.swift */,
+				2BA37C37202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		2BA37C28202836E500660394 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2BA37C332028379400660394 /* FaceImageChangeCoverPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2BA37C29202836F000660394 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				2BA37C2F2028376500660394 /* FaceImageChangeCoverRouter.swift */,
+				2BA37C302028376500660394 /* FaceImageChangeCoverRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		2BA37C2A202836F800660394 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2BA37C2B2028374D00660394 /* FaceImageChangeCoverViewController.swift */,
+				2BA37C2C2028374E00660394 /* FaceImageChangeCoverViewController.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		2DB3C638A36C929AD6FB818D /* Configurator */ = {
@@ -5490,6 +5714,183 @@
 				85FC663D1385AB04CA228302 /* FeedbackViewOutput.swift */,
 				CD80CEB97E85BA37E721D389 /* FeedbackViewController.swift */,
 				7C00FE1D1F5982FA0041D041 /* FeedbackViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A56D5A4202AF467003A4624 /* FaceImageAddName */ = {
+			isa = PBXGroup;
+			children = (
+				4A56D5A5202AF48E003A4624 /* View */,
+				4A56D5A6202AF490003A4624 /* Router */,
+				4A56D5A7202AF493003A4624 /* Presenter */,
+				4A56D5A8202AF497003A4624 /* Interactor */,
+				4A56D5AA202AF4A1003A4624 /* Configurator */,
+			);
+			path = FaceImageAddName;
+			sourceTree = "<group>";
+		};
+		4A56D5A5202AF48E003A4624 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A56D5AE202AF51D003A4624 /* FaceImageAddNameViewController.swift */,
+				4A56D5C0202AF658003A4624 /* FaceImageAddNameViewController.xib */,
+				4AC6892F202C5153003400D0 /* FaceImageAddNameViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A56D5A6202AF490003A4624 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4A56D5B1202AF529003A4624 /* FaceImageAddNameRouter.swift */,
+				4ADE0871202D90CE0095346F /* FaceImageAddNameRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		4A56D5A7202AF493003A4624 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				4A56D5B4202AF536003A4624 /* FaceImageAddNamePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4A56D5A8202AF497003A4624 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				4A56D5B7202AF547003A4624 /* FaceImageAddNameInteractor.swift */,
+				4A56D5CC202B316F003A4624 /* FaceImageAddNameDataSource.swift */,
+				4AC68932202C5312003400D0 /* FaceImageAddNameInteractorInput.swift */,
+				4AC68935202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		4A56D5AA202AF4A1003A4624 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				4A56D5BA202AF556003A4624 /* FaceImageAddNameConfigurator.swift */,
+				4A56D5BD202AF5F6003A4624 /* FaceImageAddNameInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		4A8CC2F42019FFB600C040C4 /* FaceImage */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CC2F5201A001E00C040C4 /* Configurator */,
+				4A8CC2F6201A002900C040C4 /* Interactor */,
+				4A8CC2F7201A003200C040C4 /* Presenter */,
+				4A8CC2F8201A003B00C040C4 /* Router */,
+				4A8CC2F9201A004300C040C4 /* View */,
+			);
+			path = FaceImage;
+			sourceTree = "<group>";
+		};
+		4A8CC2F5201A001E00C040C4 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CC31F201A02A600C040C4 /* FaceImageConfigurator.swift */,
+				4A8CC322201A02D900C040C4 /* FaceImageInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		4A8CC2F6201A002900C040C4 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CC316201A025C00C040C4 /* FaceImageIneractor.swift */,
+				4A8CC319201A027400C040C4 /* FaceImageInteractorInput.swift */,
+				4A8CC31C201A028600C040C4 /* FaceImageInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		4A8CC2F7201A003200C040C4 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CC313201A023000C040C4 /* FaceImagePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4A8CC2F8201A003B00C040C4 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CC30D201A01BC00C040C4 /* FaceImageRouter.swift */,
+				4A8CC310201A01CC00C040C4 /* FaceImageRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		4A8CC2F9201A004300C040C4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CC301201A00D400C040C4 /* FaceImageViewController.swift */,
+				4A8CC302201A00D400C040C4 /* FaceImageViewController.xib */,
+				4A8CC307201A016F00C040C4 /* FaceImageViewInput.swift */,
+				4A8CC30A201A018000C040C4 /* FaceImageViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A9B38F8201F3189009FC572 /* FaceImageItems */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B38FD201F3395009FC572 /* View */,
+				4A9B38FB201F3386009FC572 /* Presenter */,
+				4A9B38FA201F330F009FC572 /* Interactor */,
+				4A9B38F9201F3306009FC572 /* Router */,
+				4A9B38FC201F338D009FC572 /* Configurator */,
+			);
+			path = FaceImageItems;
+			sourceTree = "<group>";
+		};
+		4A9B38F9201F3306009FC572 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B3907201F3533009FC572 /* FaceImageItemsRouter.swift */,
+				78E8E2B720236D6900A979AB /* FaceImageItemsRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		4A9B38FA201F330F009FC572 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B3904201F3525009FC572 /* FaceImageItemsInteractor.swift */,
+				78E8E2B3202360C700A979AB /* FaceImageItemsInteractorInput.swift */,
+				78E8E2B52023638E00A979AB /* FaceImageItemsInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		4A9B38FB201F3386009FC572 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B3901201F3513009FC572 /* FaceImageItemsPresenter.swift */,
+				4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4A9B38FC201F338D009FC572 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B390D201F3969009FC572 /* FaceImageItemsInitializer.swift */,
+				4AAF28B620205454007B43BA /* FaceImageItemsConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		4A9B38FD201F3395009FC572 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A9B38FE201F3502009FC572 /* FaceImageItemsViewController.swift */,
+				4A9B3910201F5EC5009FC572 /* FaceImageItemsViewController.xib */,
+				4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5960,6 +6361,64 @@
 			children = (
 				78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */,
 				78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		78E8E29F202317A300A979AB /* FaceImageItemPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2A0202317BA00A979AB /* View */,
+				78E8E2A1202317C000A979AB /* Presenter */,
+				78E8E2A2202317C500A979AB /* Interactor */,
+				78E8E2A3202317CE00A979AB /* Router */,
+				78E8E2A4202317D600A979AB /* Configurator */,
+			);
+			path = FaceImageItemPhotos;
+			sourceTree = "<group>";
+		};
+		78E8E2A0202317BA00A979AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2A52023186C00A979AB /* FaceImagePhotosViewController.swift */,
+				78E8E2A62023186C00A979AB /* FaceImagePhotosViewController.xib */,
+				4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */,
+				2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		78E8E2A1202317C000A979AB /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */,
+				4ADE087D202DC7890095346F /* FaceImagePhotosModuleOutput.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		78E8E2A2202317C500A979AB /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2AB202318E700A979AB /* FaceImagePhotosInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		78E8E2A3202317CE00A979AB /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2AD2023191800A979AB /* FaceImagePhotosRouter.swift */,
+				2BA37C3F202883BF00660394 /* FaceImagePhotosRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		78E8E2A4202317D600A979AB /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				78E8E2AF2023195600A979AB /* FaceImagePhotosInitializer.swift */,
+				78E8E2B12023196B00A979AB /* FaceImagePhotosConfigurator.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -9115,6 +9574,7 @@
 		CE3EB30D1FC7F512000B70D6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				4A8CC2F42019FFB600C040C4 /* FaceImage */,
 				78D9BA2B2007E73A00F2233F /* DuplicatedContacts */,
 				7859297620060D72003F8AB3 /* ManageContacts */,
 				8C06ABF720066640003D8E05 /* TurkcellSecurity */,
@@ -9140,6 +9600,10 @@
 		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				4A56D5A4202AF467003A4624 /* FaceImageAddName */,
+				2BA37C24202831BA00660394 /* FaceImageChangeCover */,
+				78E8E29F202317A300A979AB /* FaceImageItemPhotos */,
+				4A9B38F8201F3189009FC572 /* FaceImageItems */,
 				7C6945D620039F4A00152344 /* FreeAppSpace */,
 				7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */,
 				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
@@ -9649,6 +10113,10 @@
 				7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */,
 				873204EE1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift */,
 				873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */,
+				4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */,
+				4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */,
+				4A56D5C6202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift */,
+				4A56D5C7202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -10644,8 +11112,10 @@
 				8C06B1392008AD72003D8E05 /* t_orta_selected@3x.png in Resources */,
 				8C06AFCF2008AD71003D8E05 /* info_icon@2x.png in Resources */,
 				8C06B1172008AD72003D8E05 /* t_buyuk.png in Resources */,
+				4A9B3912201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */,
 				8C06AF592008AD70003D8E05 /* daire@2x.png in Resources */,
 				8C06AFC12008AD71003D8E05 /* gonder_btn.png in Resources */,
+				4A56D5C2202AF658003A4624 /* FaceImageAddNameViewController.xib in Resources */,
 				8C06AFB32008AD71003D8E05 /* frekans@3x.png in Resources */,
 				8C06B0AB2008AD71003D8E05 /* renk_selected@3x.png in Resources */,
 				8C06AC292008AB9B003D8E05 /* FreeAppSpaceViewCotroller.xib in Resources */,
@@ -10721,6 +11191,7 @@
 				8C0E90121FDEBDFF00789C91 /* AutoSyncInformTableViewCell.xib in Resources */,
 				8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */,
 				8C06AF7D2008AD70003D8E05 /* edit_selected@3x.png in Resources */,
+				4A9B38F7201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
 				8C06AF1F2008AD70003D8E05 /* cizgi_1_selected@3x.png in Resources */,
 				8C06B1852008AD72003D8E05 /* underline.png in Resources */,
 				8C06B0112008AD71003D8E05 /* kucuk_ucgen@3x.png in Resources */,
@@ -10769,6 +11240,7 @@
 				8C06B0072008AD71003D8E05 /* Kucuk_Selected.png in Resources */,
 				8C06B03D2008AD71003D8E05 /* Orta_Selected@2x.png in Resources */,
 				8C06AFF32008AD71003D8E05 /* kirmizi@2x.png in Resources */,
+				4A8CC306201A00D400C040C4 /* FaceImageViewController.xib in Resources */,
 				8C06B0C72008AD71003D8E05 /* sample@2x.png in Resources */,
 				8C06B00F2008AD71003D8E05 /* kucuk_ucgen@2x.png in Resources */,
 				8C06AF9F2008AD71003D8E05 /* focus@2x.png in Resources */,
@@ -10808,6 +11280,7 @@
 				8C06AF092008AD70003D8E05 /* check-mark@2x.png in Resources */,
 				8C06AF672008AD70003D8E05 /* duz_cizgi@2x.png in Resources */,
 				8C06B1992008AD72003D8E05 /* vintage@2x.png in Resources */,
+				4A56D5CB202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
 				8C06AF6B2008AD70003D8E05 /* duz_cizgi_selected.png in Resources */,
 				8C06B1692008AD72003D8E05 /* toolbar_crop_icon@3x.png in Resources */,
 				8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */,
@@ -11174,6 +11647,7 @@
 				8C06AF962008AD71003D8E05 /* filtre_selected.png in Resources */,
 				8C06B1AC2008AD72003D8E05 /* CRYFrameCell.nib in Resources */,
 				CE6DE75D1FCC3ECF00C23CBD /* OptInController.xib in Resources */,
+				2BA37C2E2028374E00660394 /* FaceImageChangeCoverViewController.xib in Resources */,
 				7CEA863E1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib in Resources */,
 				8C06B0842008AD71003D8E05 /* paylas_mail@2x.png in Resources */,
 				8C06B0D02008AD71003D8E05 /* sample_green@2x.png in Resources */,
@@ -11255,9 +11729,11 @@
 				D47864021F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib in Resources */,
 				8C06AF402008AD70003D8E05 /* crop@2x.png in Resources */,
 				7C241EFA1F960E1C00322149 /* CollectionViewCellForStoryPhoto.xib in Resources */,
+				4A8CC305201A00D400C040C4 /* FaceImageViewController.xib in Resources */,
 				8C06B0422008AD71003D8E05 /* oval_beyaz@2x.png in Resources */,
 				7C6945E520039F4A00152344 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				8C06B0922008AD71003D8E05 /* paylas_whatsapp@3x.png in Resources */,
+				4A56D5CA202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
 				8C06B0322008AD71003D8E05 /* ok_selected@3x.png in Resources */,
 				8C06B0402008AD71003D8E05 /* oval_beyaz.png in Resources */,
 				8C06B14E2008AD72003D8E05 /* text@2x.png in Resources */,
@@ -11285,6 +11761,7 @@
 				8C06AF942008AD71003D8E05 /* filtre@3x.png in Resources */,
 				7CEEC1BD1F3326C900BD433F /* CreateStoryPhotosOrderViewController.xib in Resources */,
 				8C06AF0C2008AD70003D8E05 /* checkbox@2x.png in Resources */,
+				78E8E2A82023186C00A979AB /* FaceImagePhotosViewController.xib in Resources */,
 				8C06AFB02008AD71003D8E05 /* frekans@2x.png in Resources */,
 				CEBBDE071F01E69B00CDF527 /* TurkcellSaturaBol.ttf in Resources */,
 				8C06AF322008AD70003D8E05 /* cizgi_3_selected.png in Resources */,
@@ -11307,6 +11784,7 @@
 				8C06AEC42008AD70003D8E05 /* alt_cizgili_secili@2x.png in Resources */,
 				8C06AF882008AD70003D8E05 /* extraOptions@3x.png in Resources */,
 				8C06AFDC2008AD71003D8E05 /* italic@3x.png in Resources */,
+				4A9B3911201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */,
 				8C06B12A2008AD72003D8E05 /* t_kucuk_selected@2x.png in Resources */,
 				8C06B0302008AD71003D8E05 /* ok_selected@2x.png in Resources */,
 				8C06AFE22008AD71003D8E05 /* italic_secili@3x.png in Resources */,
@@ -11331,6 +11809,7 @@
 				8C06AF662008AD70003D8E05 /* duz_cizgi@2x.png in Resources */,
 				CE51AE7B1EF90853005DCEE0 /* PhoneVereficationScreen~iphone.xib in Resources */,
 				CEF0C28B1FC594E300105C31 /* InstagramAuthViewController.xib in Resources */,
+				4A9B38F6201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
 				8C06B1B02008AD72003D8E05 /* CRYRotateImageViewController.nib in Resources */,
 				8C06AF742008AD70003D8E05 /* edit@2x.png in Resources */,
 				8C06AF4E2008AD70003D8E05 /* crop_selected@3x.png in Resources */,
@@ -11516,6 +11995,7 @@
 				8C06B0D82008AD71003D8E05 /* sample_orange@2x.png in Resources */,
 				8C06B1182008AD72003D8E05 /* t_buyuk@2x.png in Resources */,
 				8C06AF482008AD70003D8E05 /* crop_icon@3x.png in Resources */,
+				4A56D5C1202AF658003A4624 /* FaceImageAddNameViewController.xib in Resources */,
 				8C06AF582008AD70003D8E05 /* daire@2x.png in Resources */,
 				8C06AF8E2008AD70003D8E05 /* extraOptions_selected@3x.png in Resources */,
 				8C06B0CE2008AD71003D8E05 /* sample_green.png in Resources */,
@@ -12002,6 +12482,7 @@
 				8C0E8C761FDEBDFF00789C91 /* PackagesPresenter.swift in Sources */,
 				8C0E8C771FDEBDFF00789C91 /* LocalMediaItems.swift in Sources */,
 				8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */,
+				4A9B390F201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
 				8C0E8C791FDEBDFF00789C91 /* AutoSyncInformTableViewCell.swift in Sources */,
 				7C379F41202C36BE0050C055 /* OrientationManager.swift in Sources */,
 				8C0E8C7A1FDEBDFF00789C91 /* CodeTextField.swift in Sources */,
@@ -12026,6 +12507,7 @@
 				8C0E8C8A1FDEBDFF00789C91 /* CustomIOS7AlertView.m in Sources */,
 				8C0E8C8B1FDEBDFF00789C91 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				8C0E8C8C1FDEBDFF00789C91 /* ActivityTimelineTimeCell.swift in Sources */,
+				4A56D5B6202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
 				7C6B30021FFCC6510066C818 /* ItemOperationManager.swift in Sources */,
 				8C0E8C8D1FDEBDFF00789C91 /* MusicBar.swift in Sources */,
 				8C0E8C8E1FDEBDFF00789C91 /* CustomTabBarItem.swift in Sources */,
@@ -12053,6 +12535,7 @@
 				8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */,
 				8C0E8CA71FDEBDFF00789C91 /* RequestService.swift in Sources */,
 				8C0E8CA81FDEBDFF00789C91 /* InsetsTextField.swift in Sources */,
+				4AC68937202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
 				8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */,
 				8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */,
 				8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */,
@@ -12080,6 +12563,7 @@
 				8C0E8CC31FDEBDFF00789C91 /* ActivityTimelineParameters.swift in Sources */,
 				8C0E8CC41FDEBDFF00789C91 /* PhotosOrderCollectionViewCell.swift in Sources */,
 				8C0E8CC51FDEBDFF00789C91 /* InstagramResponses.swift in Sources */,
+				4A9B3909201F3533009FC572 /* FaceImageItemsRouter.swift in Sources */,
 				8C0E8CC61FDEBDFF00789C91 /* HelpAndSupportPresenter.swift in Sources */,
 				FA793D8D201872EA00A02B46 /* ThingsService.swift in Sources */,
 				8C0E8CC71FDEBDFF00789C91 /* IntroduceDataSource.swift in Sources */,
@@ -12172,6 +12656,7 @@
 				8C0E8D191FDEBDFF00789C91 /* InfoButtonCellProtocol.swift in Sources */,
 				8C0E8D1A1FDEBDFF00789C91 /* Mail.swift in Sources */,
 				8C0E8D1B1FDEBDFF00789C91 /* CurioAction.m in Sources */,
+				4A56D5CE202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
 				8C0E8D1C1FDEBDFF00789C91 /* UIApplication+Settings.swift in Sources */,
 				8C0E8D1D1FDEBDFF00789C91 /* LoginRouterInput.swift in Sources */,
 				8C0E8D1E1FDEBDFF00789C91 /* AlbumDetailResponce.swift in Sources */,
@@ -12213,6 +12698,8 @@
 				8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */,
 				8C0E8D401FDEBDFF00789C91 /* CurioDB.m in Sources */,
 				8C0E8D411FDEBDFF00789C91 /* NavBarConfugurator.swift in Sources */,
+				4ADE0891202DF1EE0095346F /* FaceImagePhotosViewInput.swift in Sources */,
+				8C0E8D421FDEBDFF00789C91 /* WiFiSyncRouter.swift in Sources */,
 				8C0B91A720170EAB00A5BA81 /* ManageContactsViewOutput.swift in Sources */,
 				8C0E8D431FDEBDFF00789C91 /* SwiftyJSONExtension.swift in Sources */,
 				8C0E8D441FDEBDFF00789C91 /* RemoteDownloder.swift in Sources */,
@@ -12226,6 +12713,7 @@
 				8C0E8D4E1FDEBDFF00789C91 /* CurioReachabilityEx.m in Sources */,
 				8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */,
 				8C0E8D501FDEBDFF00789C91 /* SettingsAutoSyncModel.swift in Sources */,
+				4A9B3906201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				FA793D8A201872E200A02B46 /* PlacesService.swift in Sources */,
 				8C0E8D511FDEBDFF00789C91 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				8C0E8D521FDEBDFF00789C91 /* DataStorage.swift in Sources */,
@@ -12315,6 +12803,8 @@
 				8C0E8DAC1FDEBDFF00789C91 /* SearchServiceResponse.swift in Sources */,
 				8C0E8DAD1FDEBDFF00789C91 /* RegistrationModuleInput.swift in Sources */,
 				8C0E8DAE1FDEBDFF00789C91 /* RegistrationPresenter.swift in Sources */,
+				8C0E8DAF1FDEBDFF00789C91 /* SimpleButtonWithBlueText.swift in Sources */,
+				4A8CC304201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
 				8C0E8DB01FDEBDFF00789C91 /* RegistrationInteractorInput.swift in Sources */,
 				8C0E8DB21FDEBDFF00789C91 /* RegistrationInteractorOutput.swift in Sources */,
 				8C0E8DB31FDEBDFF00789C91 /* ArrayDataSourceForCollectionView.swift in Sources */,
@@ -12329,7 +12819,9 @@
 				8C0E8DB91FDEBDFF00789C91 /* VisualMusicPlayerPresenter.swift in Sources */,
 				8C0E8DBA1FDEBDFF00789C91 /* AuthenticationServiceResponse.swift in Sources */,
 				8C0E8DBB1FDEBDFF00789C91 /* RegistrationInteractor.swift in Sources */,
+				4A8CC31E201A028600C040C4 /* FaceImageInteractorOutput.swift in Sources */,
 				8C0E8DBC1FDEBDFF00789C91 /* BottomSelectionTabBarInteractor.swift in Sources */,
+				4ADE0882202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */,
 				8C0E8DBD1FDEBDFF00789C91 /* RegistrationRouterInput.swift in Sources */,
 				8C0E8DBE1FDEBDFF00789C91 /* RegistrationRouter.swift in Sources */,
 				8C0E8DBF1FDEBDFF00789C91 /* SpringLabel.swift in Sources */,
@@ -12354,6 +12846,7 @@
 				8C0E8DCF1FDEBDFF00789C91 /* TermsAndServicesModuleInput.swift in Sources */,
 				8C0E8DD01FDEBDFF00789C91 /* LoginInteractorInput.swift in Sources */,
 				8C0E8DD11FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractorOutput.swift in Sources */,
+				4A56D5B3202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,
 				8C0E8DD21FDEBDFF00789C91 /* CreateStoryNameInitializer.swift in Sources */,
 				8C0E8DD31FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				8C0E8DD41FDEBDFF00789C91 /* TermsAndServicesPresenter.swift in Sources */,
@@ -12369,6 +12862,7 @@
 				8C0E8DDD1FDEBDFF00789C91 /* TermsAndServicesConfigurator.swift in Sources */,
 				8C0E8DDE1FDEBDFF00789C91 /* TermsAndServicesInitializer.swift in Sources */,
 				8C0E8DDF1FDEBDFF00789C91 /* IntroduceViewInput.swift in Sources */,
+				4A8CC30C201A018000C040C4 /* FaceImageViewOutput.swift in Sources */,
 				8C0E8DE01FDEBDFF00789C91 /* IntroduceViewOutput.swift in Sources */,
 				8C0E8DE11FDEBDFF00789C91 /* IntroduceViewController.swift in Sources */,
 				8C0E8DE21FDEBDFF00789C91 /* IntroduceModuleInput.swift in Sources */,
@@ -12473,6 +12967,7 @@
 				8C0E8E3B1FDEBDFF00789C91 /* HelpAndSupportSectionTableViewCell.swift in Sources */,
 				8C0E8E3C1FDEBDFF00789C91 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
 				8C0E8E3D1FDEBDFF00789C91 /* FBParametrs.swift in Sources */,
+				4A9B38F5201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */,
 				8C0E8E3E1FDEBDFF00789C91 /* ForgotPasswordRouter.swift in Sources */,
 				8C0E8E3F1FDEBDFF00789C91 /* ProgressPopUp.swift in Sources */,
 				8C0E8E401FDEBDFF00789C91 /* ForgotPasswordConfigurator.swift in Sources */,
@@ -12485,6 +12980,11 @@
 				8C0E8E4A1FDEBDFF00789C91 /* SyncDBUtils.m in Sources */,
 				8C0E8E4B1FDEBDFF00789C91 /* CreateStoryNameViewOutput.swift in Sources */,
 				8C0B91B52017103900A5BA81 /* (null) in Sources */,
+				8C0E8E4C1FDEBDFF00789C91 /* CompleteProfilePresenter.swift in Sources */,
+				4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
+				8C0E8E4D1FDEBDFF00789C91 /* CompleteProfileInteractorInput.swift in Sources */,
+				8C0E8E4E1FDEBDFF00789C91 /* CompleteProfileInteractorOutput.swift in Sources */,
+				8C0E8E4F1FDEBDFF00789C91 /* CompleteProfileInteractor.swift in Sources */,
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
 				8C0E8E511FDEBDFF00789C91 /* SearchViewOutput.swift in Sources */,
@@ -12498,11 +12998,16 @@
 				8C0E8E5D1FDEBDFF00789C91 /* UserProfileConfigurator.swift in Sources */,
 				8C0B91AA20170EB400A5BA81 /* ManageContactsModuleInput.swift in Sources */,
 				8C0E8E5E1FDEBDFF00789C91 /* LocalAlbumConfigurator.swift in Sources */,
+				8C0E8E5F1FDEBDFF00789C91 /* LikeFilterViewController.swift in Sources */,
+				4A8CC318201A025C00C040C4 /* FaceImageIneractor.swift in Sources */,
 				8C0B919720170E4C00A5BA81 /* DuplicatedContactsViewController.swift in Sources */,
 				8C06AC0920066641003D8E05 /* TurkcellSecurityConfigurator.swift in Sources */,
 				8C0E8E621FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
 				8C0E8E641FDEBDFF00789C91 /* PredicateRules.swift in Sources */,
 				8C0E8E651FDEBDFF00789C91 /* DropboxResponse.swift in Sources */,
+				8C0E8E661FDEBDFF00789C91 /* LikeFilterInteractorOutput.swift in Sources */,
+				8C0E8E671FDEBDFF00789C91 /* LikeFilterInteractor.swift in Sources */,
+				4AAF28B820205454007B43BA /* FaceImageItemsConfigurator.swift in Sources */,
 				8C0E8E681FDEBDFF00789C91 /* FileService.swift in Sources */,
 				8C0E8E691FDEBDFF00789C91 /* AlertFilesActionsSheetPresenter.swift in Sources */,
 				8C0E8E6B1FDEBDFF00789C91 /* InstagramAuthViewController.swift in Sources */,
@@ -12511,6 +13016,8 @@
 				8C0E8E761FDEBDFF00789C91 /* LoadingImageView.swift in Sources */,
 				8C0E8E771FDEBDFF00789C91 /* PasscodeSettingsViewIO.swift in Sources */,
 				CE4851F12018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
+				8C0E8E781FDEBDFF00789C91 /* ExpandStoragePresenter.swift in Sources */,
+				4AC68931202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */,
 				8C0E8E791FDEBDFF00789C91 /* PrintViewController.swift in Sources */,
 				8C0E8E7A1FDEBDFF00789C91 /* AssetsCash.swift in Sources */,
 				8C0E8E7C1FDEBDFF00789C91 /* GridListTopBarConfig.swift in Sources */,
@@ -12523,11 +13030,15 @@
 				8C0B91AC20170EBB00A5BA81 /* ManageContactsInteractor.swift in Sources */,
 				FA793D8E201872EA00A02B46 /* ThingsServiceResponse.swift in Sources */,
 				8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
+				4A8CC315201A023000C040C4 /* FaceImagePresenter.swift in Sources */,
 				8C0E8E8C1FDEBDFF00789C91 /* DropDovnView.swift in Sources */,
 				8C0E8E8D1FDEBDFF00789C91 /* DropboxParametrs.swift in Sources */,
 				8C0E8E8E1FDEBDFF00789C91 /* CreateStoryNameInteractor.swift in Sources */,
 				8C0E8E8F1FDEBDFF00789C91 /* CustomErrors.swift in Sources */,
 				8C0E8E921FDEBDFF00789C91 /* CircleYellowButton.swift in Sources */,
+				4A56D5B0202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */,
+				8C0E8E931FDEBDFF00789C91 /* UploadedItemsPresenter.swift in Sources */,
+				8C0E8E941FDEBDFF00789C91 /* UploadedItemsInteractorInput.swift in Sources */,
 				8C0E8E951FDEBDFF00789C91 /* CardsManager.swift in Sources */,
 				8C0E8E961FDEBDFF00789C91 /* BytesType.swift in Sources */,
 				8C0E8E991FDEBDFF00789C91 /* ServerStatusError.swift in Sources */,
@@ -12541,7 +13052,9 @@
 				8C0E8EAF1FDEBDFF00789C91 /* BaseFilesGreedViewOutput.swift in Sources */,
 				8C0E8EB01FDEBDFF00789C91 /* SubscriptionPlan.swift in Sources */,
 				8C0E8EB11FDEBDFF00789C91 /* BaseFilesGreedViewController.swift in Sources */,
+				4A56D5BF202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
+				4A8CC30F201A01BC00C040C4 /* FaceImageRouter.swift in Sources */,
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
 				8C0E8EB41FDEBDFF00789C91 /* CreateStoryPhotosOrderViewOutput.swift in Sources */,
 				8C0E8EB51FDEBDFF00789C91 /* KeyboardHideManager.swift in Sources */,
@@ -12558,6 +13071,7 @@
 				8C0E8EC01FDEBDFF00789C91 /* DateExtension.swift in Sources */,
 				8C0E8EC11FDEBDFF00789C91 /* BaseFilesGreedRouter.swift in Sources */,
 				8C0E8EC21FDEBDFF00789C91 /* BaseFilesGreedConfigurator.swift in Sources */,
+				4A56D5B9202AF547003A4624 /* FaceImageAddNameInteractor.swift in Sources */,
 				8C06AC2A2008AB9F003D8E05 /* FreeAppSpaceInteractor.swift in Sources */,
 				8C0E8EC31FDEBDFF00789C91 /* ActionsMenuTableViewCell.swift in Sources */,
 				8C0E8EC41FDEBDFF00789C91 /* BaseFilesGreedInitializer.swift in Sources */,
@@ -12574,9 +13088,11 @@
 				8C0E8ECF1FDEBDFF00789C91 /* UserProfileRouter.swift in Sources */,
 				8C0E8ED01FDEBDFF00789C91 /* SelectionImageView.swift in Sources */,
 				8C0E8ED11FDEBDFF00789C91 /* Int64+Bytes.swift in Sources */,
+				4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
 				8C0E8ED21FDEBDFF00789C91 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				8C0E8ED31FDEBDFF00789C91 /* MediaItemOperations.swift in Sources */,
 				8C0B91912013221400A5BA81 /* CustomProgressHUD.swift in Sources */,
+				4AC68934202C5312003400D0 /* FaceImageAddNameInteractorInput.swift in Sources */,
 				8C0E8ED41FDEBDFF00789C91 /* ContactsSyncService.swift in Sources */,
 				8C0E8ED51FDEBDFF00789C91 /* ShadowView.swift in Sources */,
 				8C0E8ED61FDEBDFF00789C91 /* CreateStoryNameInteractorOutput.swift in Sources */,
@@ -12602,8 +13118,10 @@
 				8C0E8EE61FDEBDFF00789C91 /* CreateStoryNameModuleInput.swift in Sources */,
 				8C0E8EE71FDEBDFF00789C91 /* HelpAndSupportInteractor.swift in Sources */,
 				8C0E8EE81FDEBDFF00789C91 /* BottomSelectionTabBarConfigurator.swift in Sources */,
+				4A8CC312201A01CC00C040C4 /* FaceImageRouterInput.swift in Sources */,
 				8C0E8EE91FDEBDFF00789C91 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
 				8C0E8EEA1FDEBDFF00789C91 /* PhotoVideoDetailInteractor.swift in Sources */,
+				4ADE087F202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
 				8C0E8EEB1FDEBDFF00789C91 /* PackagesModuleInput.swift in Sources */,
 				8C0E8EEC1FDEBDFF00789C91 /* PhotoVideoDetailRouterInput.swift in Sources */,
 				8C0E8EED1FDEBDFF00789C91 /* PhotoVideoDetailRouter.swift in Sources */,
@@ -12660,6 +13178,7 @@
 				8C0B919220170E0500A5BA81 /* DuplicatedContactsModuleOutput.swift in Sources */,
 				8C0E8F161FDEBDFF00789C91 /* PrintInteractorInput.swift in Sources */,
 				8C0E8F171FDEBDFF00789C91 /* ImportPhotosViewInput.swift in Sources */,
+				4A8CC321201A02A600C040C4 /* FaceImageConfigurator.swift in Sources */,
 				8C0E8F181FDEBDFF00789C91 /* MoreFilesActionsModuleInput.swift in Sources */,
 				8C0E8F191FDEBDFF00789C91 /* SyncContactsRouter.swift in Sources */,
 				8C0E8F1A1FDEBDFF00789C91 /* SyncContactsConfigurator.swift in Sources */,
@@ -12715,9 +13234,11 @@
 				8C0E8F421FDEBDFF00789C91 /* SplashConfigurator.swift in Sources */,
 				8C0E8F431FDEBDFF00789C91 /* UsageInfoRouterInput.swift in Sources */,
 				8C0E8F441FDEBDFF00789C91 /* SplashInitializer.swift in Sources */,
+				4A56D5C9202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
 				8C0E8F451FDEBDFF00789C91 /* ActionsMenuViewInput.swift in Sources */,
 				8C0E8F461FDEBDFF00789C91 /* ActionsMenuView.swift in Sources */,
 				8C0E8F471FDEBDFF00789C91 /* FileInfoViewInput.swift in Sources */,
+				4A9B3900201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
 				8C0B91C02017145D00A5BA81 /* UISearchBar+Cancel.swift in Sources */,
 				8C0E8F481FDEBDFF00789C91 /* FileInfoViewOutput.swift in Sources */,
 				8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */,
@@ -12788,6 +13309,7 @@
 				8C0E8F811FDEBDFF00789C91 /* SelectNameInteractor.swift in Sources */,
 				8C0E8F821FDEBDFF00789C91 /* SelectNameRouterInput.swift in Sources */,
 				8C0E8F831FDEBDFF00789C91 /* PackagesRouterInput.swift in Sources */,
+				4A56D5BC202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				8C0E8F841FDEBDFF00789C91 /* SelectNameRouter.swift in Sources */,
 				8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */,
 				8C0E8F851FDEBDFF00789C91 /* SelectNameConfigurator.swift in Sources */,
@@ -12800,6 +13322,7 @@
 				8C0B91A220170E7B00A5BA81 /* ManageContactTableViewCell.swift in Sources */,
 				8C0E8F8C1FDEBDFF00789C91 /* GridListTopBarSortingTableCell.swift in Sources */,
 				8C0E8F8D1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
+				4A8CC31B201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */,
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				8C0B91B82017104100A5BA81 /* (null) in Sources */,
@@ -12831,6 +13354,7 @@
 				8C0E8FA71FDEBDFF00789C91 /* PasscodeSettingsInteractor.swift in Sources */,
 				8C0E8FA81FDEBDFF00789C91 /* AlbumDetailRouterInput.swift in Sources */,
 				8C0E8FA91FDEBDFF00789C91 /* PackagesRouter.swift in Sources */,
+				4A8CC309201A016F00C040C4 /* FaceImageViewInput.swift in Sources */,
 				8C0E8FAA1FDEBDFF00789C91 /* AlbumDetailRouter.swift in Sources */,
 				8C0E8FAB1FDEBDFF00789C91 /* AlbumDetailInitializer.swift in Sources */,
 				8C0E8FAC1FDEBDFF00789C91 /* VolumeSlider.swift in Sources */,
@@ -12838,6 +13362,7 @@
 				8C0E8FAE1FDEBDFF00789C91 /* SubscriptionsService.swift in Sources */,
 				8C0E8FAF1FDEBDFF00789C91 /* FeedbackViewOutput.swift in Sources */,
 				8C0E8FB01FDEBDFF00789C91 /* CreateStoryPreviyInteractorIO.swift in Sources */,
+				4A9B3903201F3513009FC572 /* FaceImageItemsPresenter.swift in Sources */,
 				8C0E8FB11FDEBDFF00789C91 /* FeedbackViewController.swift in Sources */,
 				8C0E8FB21FDEBDFF00789C91 /* FeedbackViewModuleInput.swift in Sources */,
 				8C0E8FB31FDEBDFF00789C91 /* FeedbackViewPresenter.swift in Sources */,
@@ -12865,6 +13390,7 @@
 				8C0E8FC41FDEBDFF00789C91 /* ActivityTimelineInteractorOutput.swift in Sources */,
 				8C0E8FC51FDEBDFF00789C91 /* ActivityTimelineInteractor.swift in Sources */,
 				8C0E8FC61FDEBDFF00789C91 /* ActivityTimelineRouterInput.swift in Sources */,
+				4ADE0873202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
 				8C0E8FC71FDEBDFF00789C91 /* ActivityTimelineRouter.swift in Sources */,
 				8C0E8FC91FDEBDFF00789C91 /* ActivityTimelineConfigurator.swift in Sources */,
 				8C0E8FCA1FDEBDFF00789C91 /* ActivityTimelineInitializer.swift in Sources */,
@@ -12885,6 +13411,7 @@
 				8C0E8FD71FDEBDFF00789C91 /* OTPViewInitializer.swift in Sources */,
 				8C0E8FD81FDEBDFF00789C91 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				8C0E8FDE1FDEBDFF00789C91 /* OptInController.swift in Sources */,
+				4A8CC324201A02D900C040C4 /* FaceImageInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12949,6 +13476,7 @@
 				7CDABD0A1F1E3A6300C8CC16 /* UserProfileModuleInput.swift in Sources */,
 				CE51AB361EF90853005DCEE0 /* CustomIOS7AlertView.m in Sources */,
 				EF1B60481FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift in Sources */,
+				78E8E2B62023638E00A979AB /* FaceImageItemsInteractorOutput.swift in Sources */,
 				CE8F44F71F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.swift in Sources */,
 				78D9BA422007E81200F2233F /* DuplicatedContactsRouter.swift in Sources */,
 				8C7786881F3F38D9005CB432 /* MusicBar.swift in Sources */,
@@ -12964,6 +13492,7 @@
 				8CF792AB1F10C65E00007719 /* ContactSyncModels.swift in Sources */,
 				D47864041F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */,
+				4ADE0890202DF1EE0095346F /* FaceImagePhotosViewInput.swift in Sources */,
 				7CAB66DD1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift in Sources */,
 				CEAE3FB11EFD4F0D00A405B2 /* HomePageInitializer.swift in Sources */,
 				7C233CD61FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
@@ -12980,6 +13509,7 @@
 				CE47D1FC1FD147BA00888D2E /* InsetsTextField.swift in Sources */,
 				CE907A311F94D49900D2F8CE /* MulticastDelegate.swift in Sources */,
 				7C1F89951F7140AF00740177 /* PopUpSwipeCell.swift in Sources */,
+				4AFAEAC12027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */,
 				7C6945E720039F4A00152344 /* FreeAppSpaceConfigurator.swift in Sources */,
 				CE51AB6E1EF90853005DCEE0 /* CurioLocationManager.m in Sources */,
@@ -12999,6 +13529,7 @@
 				CE51AB801EF90853005DCEE0 /* LoginRouter.swift in Sources */,
 				CE52011E1FB4348900C11DD0 /* ActivityIndicatorManager.swift in Sources */,
 				7CFE92F41F5ED498008A3B72 /* FeedbackService.swift in Sources */,
+				4ADE0872202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
 				CE51AB811EF90853005DCEE0 /* LoginModuleInput.swift in Sources */,
 				7C355E631F0123E0003B004C /* CollectionViewLayout.swift in Sources */,
 				8CFF86911F0F96E600520D18 /* SyncLogger.m in Sources */,
@@ -13008,6 +13539,7 @@
 				CE3318E11EFCF9D600E25989 /* Device.swift in Sources */,
 				CE8F44EF1F6ABB540062C2E0 /* ActivityTimelineParameters.swift in Sources */,
 				7CEEC1C01F332B0000BD433F /* PhotosOrderCollectionViewCell.swift in Sources */,
+				4AC68933202C5312003400D0 /* FaceImageAddNameInteractorInput.swift in Sources */,
 				CE6DE7541FCBE84100C23CBD /* InstagramResponses.swift in Sources */,
 				CE95ED531F516736002F923A /* HelpAndSupportPresenter.swift in Sources */,
 				CE51AB951EF90853005DCEE0 /* IntroduceDataSource.swift in Sources */,
@@ -13029,6 +13561,7 @@
 				CEAE3FB51EFD4F0D00A405B2 /* HomePageModuleInput.swift in Sources */,
 				8C0B91902013221400A5BA81 /* CustomProgressHUD.swift in Sources */,
 				CE51ABAA1EF90853005DCEE0 /* GSMCodeModel.swift in Sources */,
+				4ADE087E202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
 				CE2F55F71F75518F00F49DA1 /* PlanType.swift in Sources */,
 				8DCB21671F3C7CBF00BAFE1E /* SearchViewInitializer.swift in Sources */,
 				CE51ABAD1EF90853005DCEE0 /* Configuration.m in Sources */,
@@ -13052,6 +13585,7 @@
 				7C6E2F9C1F31E79100536DB6 /* CreateStoryAudioSelectionViewController.swift in Sources */,
 				7CD1F8D21F014EF90028F51A /* CustomSwitch.swift in Sources */,
 				CEE1D1F71F714DFE0008F4CF /* MediaItemsAlbum+CoreDataClass.swift in Sources */,
+				2BA37C312028376500660394 /* FaceImageChangeCoverRouter.swift in Sources */,
 				CE51ABC61EF90853005DCEE0 /* AutoSyncModel.swift in Sources */,
 				CE51ABCA1EF90853005DCEE0 /* Message.m in Sources */,
 				CE907A331F94D49900D2F8CE /* MediaPlayer.swift in Sources */,
@@ -13069,8 +13603,10 @@
 				CE51ABD01EF90853005DCEE0 /* UpdateServerIntegration.m in Sources */,
 				CE2F56231F7552A900F49DA1 /* ResizableCollectionView.swift in Sources */,
 				CEAE3FB71EFD4F0D00A405B2 /* HomePageRouter.swift in Sources */,
+				4A9B38F4201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */,
 				CEAE3FED1EFD517300A405B2 /* CustomNavBarView.swift in Sources */,
 				7C3A74491F07927200124DF5 /* CollectionViewCellForPhoto.swift in Sources */,
+				2BA37C3D202837C800660394 /* FaceImageChangeCoverInitializer.swift in Sources */,
 				782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */,
 				CE51ABDC1EF90853005DCEE0 /* LoginInteractor.swift in Sources */,
 				CE51ABE21EF90853005DCEE0 /* MessageView.m in Sources */,
@@ -13085,6 +13621,7 @@
 				CE95ED551F516736002F923A /* HelpAndSupportRouterInput.swift in Sources */,
 				CE51ABE91EF90853005DCEE0 /* AutoSyncDataStorage.swift in Sources */,
 				EFA74FB41FBF378F00CF946E /* PrintInitializer.swift in Sources */,
+				4A8CC31D201A028600C040C4 /* FaceImageInteractorOutput.swift in Sources */,
 				7CDABD061F1E3A6300C8CC16 /* UserProfileInitializer.swift in Sources */,
 				78D9BA3D2007E80600F2233F /* DuplicatedContactsModuleInput.swift in Sources */,
 				CE51ABEA1EF90853005DCEE0 /* BaseCellModel.swift in Sources */,
@@ -13127,6 +13664,7 @@
 				7859299020060E85003F8AB3 /* ManageContactsRouterInput.swift in Sources */,
 				78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */,
 				CE51AC0D1EF90853005DCEE0 /* UIAlertViewCustom.m in Sources */,
+				78E8E2AC202318E700A979AB /* FaceImagePhotosInteractor.swift in Sources */,
 				CE51AC151EF90853005DCEE0 /* UpdaterController.m in Sources */,
 				CE2976DD1FD58E2000350F3A /* LocalAlbumPresenter.swift in Sources */,
 				CE4140631F0A5F6D001924E1 /* CaptchaViewController.swift in Sources */,
@@ -13134,9 +13672,12 @@
 				EF1B60441FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift in Sources */,
 				CE51AC1E1EF90853005DCEE0 /* RegistrationDataSource.swift in Sources */,
 				8C6EF87E1F348B5C002AC795 /* BottomSelectionTabBarPresenter.swift in Sources */,
+				7CD1F8F91F0288CA0028F51A /* WiFiSyncPresenter.swift in Sources */,
+				2BA37C2D2028374E00660394 /* FaceImageChangeCoverViewController.swift in Sources */,
 				CE3F33AF1F34881800EE37E7 /* SharedService.swift in Sources */,
 				CE51AC221EF90853005DCEE0 /* CellsConstant.swift in Sources */,
 				CEAE3FF11EFD517300A405B2 /* GradientView.swift in Sources */,
+				2B96AEA2202B6A5100F066F9 /* FaceImagePhotosViewInput.swift in Sources */,
 				D498865E1F3EFBE200F50C95 /* ImportPhotosRouterInput.swift in Sources */,
 				CE51AC2D1EF90853005DCEE0 /* ProtoInputTextCell.swift in Sources */,
 				7CAC23C21F4ADC3900607660 /* RemoteSearchService.swift in Sources */,
@@ -13156,12 +13697,15 @@
 				CE51AC3C1EF90853005DCEE0 /* CurioUtil.m in Sources */,
 				8C6FB6981F0B9F8400B552A3 /* CustomTabBar.swift in Sources */,
 				8C6EF8791F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
+				7CD1F8FB1F0288CA0028F51A /* WiFiSyncRouterInput.swift in Sources */,
+				4A8CC314201A023000C040C4 /* FaceImagePresenter.swift in Sources */,
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				CE51AC461EF90853005DCEE0 /* CurioReachabilityEx.m in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
 				7C83B6F31F3D916F006D05E3 /* SettingsAutoSyncModel.swift in Sources */,
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */,
+				4A56D5B2202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,
 				CE51AC481EF90853005DCEE0 /* BaseUserInputCellView.swift in Sources */,
 				CE51AC4A1EF90853005DCEE0 /* LoginConfigurator.swift in Sources */,
 				CE51AC4C1EF90853005DCEE0 /* CurioSettings.m in Sources */,
@@ -13177,6 +13721,7 @@
 				CE51AC681EF90853005DCEE0 /* CurioNotificationManager.m in Sources */,
 				8CFF86941F0F96E600520D18 /* SyncStatus.m in Sources */,
 				CEC05B6A1F05399100332EBA /* PhoneVereficationDataStorage.swift in Sources */,
+				78E8E2B22023196B00A979AB /* FaceImagePhotosConfigurator.swift in Sources */,
 				8C00971A1F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				CE51AC6C1EF90853005DCEE0 /* CurioPushData.m in Sources */,
 				8C6EF8811F348B5C002AC795 /* BottomSelectionTabBarViewController.swift in Sources */,
@@ -13188,8 +13733,13 @@
 				CE2F56151F7552A900F49DA1 /* PackagesConfigurator.swift in Sources */,
 				8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */,
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
+				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
+				7CD1F8FC1F0288CA0028F51A /* WiFiSyncViewController.swift in Sources */,
+				78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */,
+				2BA37C38202837B400660394 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */,
 				CE51AC7E1EF90853005DCEE0 /* LoginInitializer.swift in Sources */,
+				4A9B3908201F3533009FC572 /* FaceImageItemsRouter.swift in Sources */,
 				CEAD6BDE1F94EF320085FF30 /* Factory.swift in Sources */,
 				7C233CD31FD51E290013CCA0 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				CE95ED511F516736002F923A /* HelpAndSupportInteractorOutput.swift in Sources */,
@@ -13206,7 +13756,9 @@
 				CE394B621F6FFA8200128324 /* Array+Safe.swift in Sources */,
 				CE51AC931EF90853005DCEE0 /* AutoSyncRouter.swift in Sources */,
 				CE51AC941EF90853005DCEE0 /* Controller.m in Sources */,
+				4A8CC308201A016F00C040C4 /* FaceImageViewInput.swift in Sources */,
 				CEAE3FB01EFD4F0D00A405B2 /* HomePageConfigurator.swift in Sources */,
+				78E8E2AA2023189F00A979AB /* FaceImagePhotosPresenter.swift in Sources */,
 				7C49881C1F3320420039C5F2 /* CreateStoryPhotosOrderRouterInput.swift in Sources */,
 				7C6E2F961F31E4F800536DB6 /* CreateStoryNameRouterInput.swift in Sources */,
 				7CCAC5331FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
@@ -13323,6 +13875,7 @@
 				CE51ACE51EF90853005DCEE0 /* IntroduceRouterInput.swift in Sources */,
 				CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */,
 				8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */,
+				4A8CC323201A02D900C040C4 /* FaceImageInitializer.swift in Sources */,
 				7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */,
 				CE51ACE71EF90853005DCEE0 /* IntroduceConfigurator.swift in Sources */,
 				CE57DFA81FDE663C0065B688 /* DarkPopUpController.swift in Sources */,
@@ -13345,6 +13898,7 @@
 				7CDB43301F8658A000789FA6 /* LocationManager.swift in Sources */,
 				EFA74F9E1FBF371200CF946E /* PrintService.swift in Sources */,
 				7CED0B141F23931C0016CE0C /* WrapperedItemUtil.swift in Sources */,
+				4AC68936202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
 				7C6E2F781F31E4C900536DB6 /* CreateStorySelectionRouter.swift in Sources */,
 				CE51ACEA1EF90853005DCEE0 /* PhoneVereficationViewOutput.swift in Sources */,
 				CE51ACEB1EF90853005DCEE0 /* PhoneVereficationViewController.swift in Sources */,
@@ -13364,10 +13918,13 @@
 				7859298D20060E7D003F8AB3 /* ManageContactsViewController.swift in Sources */,
 				CE51ACF11EF90853005DCEE0 /* PhoneVereficationInteractor.swift in Sources */,
 				D47864001F3F30BD00EFDC6D /* RoundedProgressView.swift in Sources */,
+				2BA37C40202883BF00660394 /* FaceImagePhotosRouterInput.swift in Sources */,
 				EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */,
+				4A8CC311201A01CC00C040C4 /* FaceImageRouterInput.swift in Sources */,
 				CE51ACF21EF90853005DCEE0 /* PhoneVereficationRouterInput.swift in Sources */,
 				B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */,
 				CE51ACF31EF90853005DCEE0 /* PhoneVereficationRouter.swift in Sources */,
+				2BA37C3A202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
 				CE51ACF41EF90853005DCEE0 /* PhoneVereficationConfigurator.swift in Sources */,
 				CE51ACF51EF90853005DCEE0 /* PhoneVereficationInitializer.swift in Sources */,
 				CE95ED571F516736002F923A /* HelpAndSupportViewController.swift in Sources */,
@@ -13375,6 +13932,8 @@
 				CE51ACF61EF90853005DCEE0 /* ForgotPasswordViewInput.swift in Sources */,
 				CEACBEA51F6C1120003BE328 /* ActivityTimelineTableBackView.swift in Sources */,
 				CE51ACF71EF90853005DCEE0 /* ForgotPasswordViewOutput.swift in Sources */,
+				4A56D5B8202AF547003A4624 /* FaceImageAddNameInteractor.swift in Sources */,
+				4ADE0881202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */,
 				CE51ACF81EF90853005DCEE0 /* ForgotPasswordViewController.swift in Sources */,
 				CE51ACF91EF90853005DCEE0 /* ForgotPasswordModuleInput.swift in Sources */,
 				8C6EF88F1F348B77002AC795 /* EditingBarConfig.swift in Sources */,
@@ -13391,6 +13950,7 @@
 				CE51ACFE1EF90853005DCEE0 /* ForgotPasswordInteractor.swift in Sources */,
 				CE2F56331F7554A600F49DA1 /* OffersService.swift in Sources */,
 				7CA2A7B01F14CE3F00F37E2C /* LocalMediaStorage.swift in Sources */,
+				2BA37C342028379400660394 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				8C6EF8841F348B5C002AC795 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				CE8F44E81F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift in Sources */,
 				7CDB43351F86678D00789FA6 /* AppConfigurator.swift in Sources */,
@@ -13446,6 +14006,8 @@
 				8C5408431F62895300D4717A /* GridListTopBarConfig.swift in Sources */,
 				CE2F56221F7552A900F49DA1 /* ColumnsCollectionLayout.swift in Sources */,
 				8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
+				4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
+				24A17016A49195E62A5E5DC5 /* ExpandStorageRouterInput.swift in Sources */,
 				7CF6BDBA1F0B88910066709E /* CollectionViewCellForVideo.swift in Sources */,
 				8C6EF87B1F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift in Sources */,
 				7C6E2F771F31E4C900536DB6 /* CreateStoryPhotoSelectionPresenter.swift in Sources */,
@@ -13463,12 +14025,31 @@
 				7C5526131F7B9CCD00A21F3C /* CardsManager.swift in Sources */,
 				CE4CFEC11F78F94900FB4C3D /* BytesType.swift in Sources */,
 				7C3B186E1FE0153E00FF3C39 /* PrepareToAutoSync.swift in Sources */,
+				FB274A9C777B1B0305F1B7ED /* UploadedItemsInteractorOutput.swift in Sources */,
+				D90C48A4F5649113FAF1DC94 /* UploadedItemsInteractor.swift in Sources */,
+				4ADE0887202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
 				CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */,
 				CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */,
+				8C6EF88D1F348B77002AC795 /* CustomEditingTabBarItem.swift in Sources */,
+				4A56D5CD202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
 				7859299A20060E94003F8AB3 /* ManageContactsInteractorInput.swift in Sources */,
+				F2C69F643F8005F8666F6AAF /* UploadedItemsRouterInput.swift in Sources */,
+				4AC68930202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */,
+				0B94DE553DA8501190B2CEC5 /* UploadedItemsRouter.swift in Sources */,
+				25F2EEBED80FA9650DB66A1A /* UploadedItemsConfigurator.swift in Sources */,
+				D3C1B14F5945B690203921F1 /* UploadedItemsInitializer.swift in Sources */,
+				ECB8AAA638B83B4143502385 /* HomeHeaderViewInput.swift in Sources */,
+				31000BF3193830B673A587E6 /* HomeHeaderViewOutput.swift in Sources */,
+				FDD9464A87588DD71CCC5E0C /* HomeHeaderViewController.swift in Sources */,
+				84428713753DBEA7E2910DEB /* HomeHeaderModuleInput.swift in Sources */,
 				CEC3C24A1FB99AF800C3D67F /* PasscodeSettingsRouter.swift in Sources */,
 				7C4F60B0201C674A0033C58F /* MovieCard.swift in Sources */,
 				CE6DE7581FCBE84100C23CBD /* FBResponses.swift in Sources */,
+				C065DB441478A7A0231FDCEE /* HomeHeaderRouterInput.swift in Sources */,
+				8C12F695CDDDA2217C118FAD /* HomeHeaderRouter.swift in Sources */,
+				78E8E2B02023195600A979AB /* FaceImagePhotosInitializer.swift in Sources */,
+				1DB68FAB905B6E98B07736B7 /* HomeHeaderConfigurator.swift in Sources */,
+				9C583593E55BA0F9A4F6B53D /* HomeHeaderInitializer.swift in Sources */,
 				DE10EF65DE653E0EDBEC8C17 /* BaseFilesGreedViewInput.swift in Sources */,
 				228C4DD0339279189CC9619C /* BaseFilesGreedViewOutput.swift in Sources */,
 				CE3E4D13201C70A100173045 /* ImageManager.swift in Sources */,
@@ -13485,6 +14066,7 @@
 				CE4851F02018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				8CFF868A1F0F96E600520D18 /* ContactDevice.m in Sources */,
+				4A9B3902201F3513009FC572 /* FaceImageItemsPresenter.swift in Sources */,
 				8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */,
 				78D9BA3E2007E80600F2233F /* DuplicatedContactsPresenter.swift in Sources */,
@@ -13501,6 +14083,7 @@
 				CEE9B4EC1F78FD85002DAF81 /* InternetDataUsageCell.swift in Sources */,
 				D498865F1F3EFBE200F50C95 /* ImportPhotosViewController.swift in Sources */,
 				CEDFECA81F10C77E003D1A75 /* UIviewControlllerExtensions.swift in Sources */,
+				78F674932024BC91006B0911 /* PeopleAlbumSliderInteractor.swift in Sources */,
 				CEDFECB91F11D1D0003D1A75 /* Dictionary.swift in Sources */,
 				D47863F31F3F18FA00EFDC6D /* UsageInfoInteractor.swift in Sources */,
 				7C6E2FA71F3304D700536DB6 /* AudioSelectionDataSource.swift in Sources */,
@@ -13514,6 +14097,7 @@
 				8CFF86971F0FA84A00520D18 /* ContactsSyncService.swift in Sources */,
 				CE1E26E520174DF200F49E41 /* Mapping.swift in Sources */,
 				8C06AC1820066641003D8E05 /* TurkcellSecurityViewController.swift in Sources */,
+				2BA37C3E202837C800660394 /* FaceImageChangeCoverConfigurator.swift in Sources */,
 				7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */,
 				7C6E2F921F31E4F800536DB6 /* CreateStoryNameInteractorOutput.swift in Sources */,
 				7C5549FF1F6C11C300067F99 /* CollectionViewStoryReorderView.swift in Sources */,
@@ -13563,6 +14147,7 @@
 				8C7786A51F3F38F0005CB432 /* VisualMusicPlayerRouterInput.swift in Sources */,
 				CE2F56311F75549300F49DA1 /* OfferParameters.swift in Sources */,
 				CEDFECA51F10C77E003D1A75 /* BasePresentor.swift in Sources */,
+				4A8CC30B201A018000C040C4 /* FaceImageViewOutput.swift in Sources */,
 				CEF69DE51FB5861A00FCE6AB /* UploadHelpers.swift in Sources */,
 				7CDABD0D1F1E3A6300C8CC16 /* UserProfileRouterInput.swift in Sources */,
 				C5E5EC15332297CC6F59374A /* SyncContactsViewInput.swift in Sources */,
@@ -13587,6 +14172,7 @@
 				EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */,
 				D49886611F3EFBE200F50C95 /* ImportPhotosViewInput.swift in Sources */,
 				8C0097161F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift in Sources */,
+				78E8E2A72023186C00A979AB /* FaceImagePhotosViewController.swift in Sources */,
 				876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */,
 				65F920DAC010E5F0859369FE /* SyncContactsConfigurator.swift in Sources */,
 				7859298C20060E7D003F8AB3 /* ManageContactsViewInput.swift in Sources */,
@@ -13604,6 +14190,7 @@
 				CE95ED4D1F516736002F923A /* HelpAndSupportHeaderView.swift in Sources */,
 				7C6E2F951F31E4F800536DB6 /* CreateStoryNameRouter.swift in Sources */,
 				9FAEEE54B923C711062DB111 /* SettingsInteractorOutput.swift in Sources */,
+				4A56D5C8202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
 				4C625D18F465CC4F6D27A6B1 /* SettingsInteractor.swift in Sources */,
 				D498865D1F3EFBE200F50C95 /* ImportPhotosRouter.swift in Sources */,
 				0E221DE499E4E51040E5550A /* SettingsRouterInput.swift in Sources */,
@@ -13660,9 +14247,11 @@
 				ACB080CC00E036849D63FBAD /* FileInfoConfigurator.swift in Sources */,
 				5DF885B77D64CAAB43CB969F /* FileInfoInitializer.swift in Sources */,
 				D47863FC1F3F18FA00EFDC6D /* UsageInfoViewInput.swift in Sources */,
+				78E8E2B820236D6900A979AB /* FaceImageItemsRouterInput.swift in Sources */,
 				7CEEC1BB1F33251800BD433F /* CreateStoryPhotosOrderConfigurator.swift in Sources */,
 				78D9BA492007E82800F2233F /* DuplicatedContactsViewController.swift in Sources */,
 				7C4988171F3320420039C5F2 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */,
+				4A56D5BE202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				84F590D00E5D8FE7C0F21A7E /* UploadFilesSelectionViewInput.swift in Sources */,
 				D4F104D678F058E4AF0F2045 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				CE2F562F1F75548500F49DA1 /* SubscriptionPlanBaseResponse.swift in Sources */,
@@ -13674,6 +14263,7 @@
 				86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */,
 				46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				7C203553201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
+				2BA37C322028376500660394 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				CE4CFEBF1F78F18700FB4C3D /* ResizableTableView.swift in Sources */,
 				591DE1155E5210C187678E0B /* UploadFilesSelectionInteractor.swift in Sources */,
 				CEDFDF0F1FBEE616006BFCAE /* FirstResponder.swift in Sources */,
@@ -13702,6 +14292,7 @@
 				7C1F898D1F70ECB100740177 /* BaseView.swift in Sources */,
 				7CF9A9F51FA2279500242FDD /* ImageForDowload.swift in Sources */,
 				8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
+				4A8CC320201A02A600C040C4 /* FaceImageConfigurator.swift in Sources */,
 				05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */,
 				CE3E4D0B201B63A800173045 /* ImageScrollView.swift in Sources */,
 				E197FC956A2CBF90DCEB2E3D /* SelectNameInteractorOutput.swift in Sources */,
@@ -13714,6 +14305,7 @@
 				09FD2371EC56726F74576DD7 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				CEF69DE71FB593AF00FCE6AB /* ServerError.swift in Sources */,
+				4A8CC30E201A01BC00C040C4 /* FaceImageRouter.swift in Sources */,
 				8766D2FF1FBDB06600316F46 /* PhotoSelectiondDataSource.swift in Sources */,
 				D94776BCD48BA8014675541C /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
 				8743AB471FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift in Sources */,
@@ -13721,6 +14313,7 @@
 				F80A68F35B5CBF5C9E6E0288 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
 				CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */,
 				B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
+				4A9B38FF201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
 				0D9510CB65B6DA6F2D661754 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				7859299120060E85003F8AB3 /* ManageContactsRouter.swift in Sources */,
 				4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
@@ -13737,6 +14330,7 @@
 				64E35594735C9449EB20343F /* AlbumsPresenter.swift in Sources */,
 				EB0329F2FE28E1F8F2F7ABAE /* AlbumsInteractor.swift in Sources */,
 				8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */,
+				78E8E2B4202360C700A979AB /* FaceImageItemsInteractorInput.swift in Sources */,
 				64ADD65B7FCE7BDBF07F4FA1 /* AlbumsRouter.swift in Sources */,
 				CE2F56251F75531800F49DA1 /* UICollectionView+Extensions.swift in Sources */,
 				4E2D35C770D6AD2189D274A8 /* AlbumsInitializer.swift in Sources */,
@@ -13746,6 +14340,7 @@
 				CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */,
 				C7055CAC94DC0C09FAC5F608 /* AlbumDetailPresenter.swift in Sources */,
 				CE2F56321F7554A300F49DA1 /* OfferServiceResponse.swift in Sources */,
+				4A8CC317201A025C00C040C4 /* FaceImageIneractor.swift in Sources */,
 				CECD4E541FE1150B00978BE7 /* UIButton+Color.swift in Sources */,
 				CC5705DE3B84973A3C2928C7 /* AlbumDetailInteractor.swift in Sources */,
 				CEC3C2481FB99AF800C3D67F /* PasscodeSettingsInteractor.swift in Sources */,
@@ -13754,10 +14349,12 @@
 				2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */,
 				81E0ADA871598E31E25ABC23 /* AlbumDetailInitializer.swift in Sources */,
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
+				4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
 				7825C22120179C7900AE77AE /* UIView+SubviewsVisibility.swift in Sources */,
 				CE907A321F94D49900D2F8CE /* VolumeSlider.swift in Sources */,
 				98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
 				2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */,
+				4A9B390E201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
 				CE2F56301F75548500F49DA1 /* SubscriptionsService.swift in Sources */,
 				B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */,
 				9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */,
@@ -13777,6 +14374,7 @@
 				1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */,
 				2D620A893121CE2330C18858 /* FeedbackViewRouter.swift in Sources */,
 				2EF733E89FE2194E3B6817BA /* FeedbackViewConfigurator.swift in Sources */,
+				4A8CC303201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
 				8AC9821D58B05574782F11AB /* FeedbackViewInitializer.swift in Sources */,
 				AD2151F5167A65F51A485818 /* ActivityTimelineViewInput.swift in Sources */,
 				EBE4DB98A7204834F0BB6B76 /* ActivityTimelineViewOutput.swift in Sources */,
@@ -13800,11 +14398,14 @@
 				CEC9F4AC1FB46D7000362B8C /* ImportFromDropboxPresenter.swift in Sources */,
 				0B7649A4654AF442656E21DF /* OTPViewController.swift in Sources */,
 				FA793D812018725400A02B46 /* PlacesService.swift in Sources */,
+				4A56D5AF202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */,
 				D66872AC6631A25FA11EB409 /* OTPViewIO.swift in Sources */,
 				8518B9D1741BF6B4470BCD73 /* OTPViewPresenter.swift in Sources */,
+				4AAF28B720205454007B43BA /* FaceImageItemsConfigurator.swift in Sources */,
 				C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */,
 				C16DECBEE5DA1602185ABA27 /* OTPViewInteractor.swift in Sources */,
 				759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */,
+				4A8CC31A201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */,
 				48AAD540DF9AE2C249F9B6D4 /* OTPViewRouter.swift in Sources */,
 				D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */,
 				46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */,
@@ -13814,6 +14415,7 @@
 				CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */,
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
 				78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */,
+				2BA37C39202837B400660394 /* FaceImageChangeCoverInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

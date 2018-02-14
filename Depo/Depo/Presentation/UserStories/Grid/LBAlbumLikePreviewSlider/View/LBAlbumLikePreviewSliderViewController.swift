@@ -11,6 +11,8 @@ import UIKit
 final class LBAlbumLikePreviewSliderViewController: UIViewController {
     var output: LBAlbumLikePreviewSliderViewOutput!
     
+    var sliderTitle: String?
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -21,6 +23,11 @@ final class LBAlbumLikePreviewSliderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady(collectionView: collectionView)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reloadData),
+                                               name: .changeFaceImageStatus,
+                                               object: nil)
     }
     
     @objc func labelTouchRecognition(_ sender: Any) {
@@ -28,6 +35,10 @@ final class LBAlbumLikePreviewSliderViewController: UIViewController {
     }
     
     func reloadAllData() {
+        output.reloadData()
+    }
+    
+    @objc func reloadData() {
         output.reloadData()
     }
 }
@@ -39,7 +50,7 @@ extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewIn
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel.textColor = UIColor.gray
         titleLabel.alpha = 0.5
-        titleLabel.text = TextConstants.albumLikeSlidertitle
+        titleLabel.text = sliderTitle ?? TextConstants.albumLikeSlidertitle
         titleLabel.isUserInteractionEnabled = true
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTouchRecognition))

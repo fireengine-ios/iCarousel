@@ -101,6 +101,7 @@
 "My Activity Timeline" = "My Activity Timeline";
 "file(s)" = "file(s)";
 "My Stream" = "My Stream";
+"Albums with %@" = "Albums with %@";
 "Cancel" = "Cancel";
 "OK" = "OK";
 "You have free space for %d more items." = "You have free space for %d more items.";
@@ -128,6 +129,7 @@
 "Take Photo" = "Take Photo";
 
 "Remove from album" = "Remove from album";
+"Change cover photo" = "Change cover photo";
 "Back Up" = "Back Up";
 "Add to album" = "Add to album";
 "Remove from Favorites" = "Remove from Favorites";
@@ -335,6 +337,7 @@
 "Import From Facebook" = "Import From Facebook";
 "Import From Dropbox" = "Import From Dropbox";
 "Import Photos" = "Import Photos";
+"Face & Image Grouping" = "Face & Image Grouping";
 "Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
 "Auto-login" = "Auto-login";
 "Turkcell Password" = "Turkcell Password";
@@ -345,6 +348,7 @@
 "Recently Deleted Files" = "Recently Deleted Files";
 "My Activity Timeline" = "My Activity Timeline";
 "Auto Sync" = "Auto Sync";
+"Face & Image Grouping" = "Face & Image Grouping";
 "Import Photos" = "Import Photos";
 "Back-up my contacts" = "Back-up my contacts";
 "Leave feedback" = "Leave feedback";
@@ -592,6 +596,14 @@
 "Delete" = "Delete";
 "Favorite" = "Favorite";
 "Selected" = "Selected";
+"Show & Hide" = "Show & Hide";
+"Show and Hide" = "Show and Hide";
+"Done" = "Done";
+"+Add a Name" = "+Add a Name";
+"+Add Name" = "+Add Name";
+"Are these the same person" = "Are these the same person";
+"They will be merged together" = "They will be merged together";
+"Nope" = "Nope";
 "Not selected" = "Not selected";
 "E-mail is empty" = "E-mail is empty";
 "Filter Card" = "Filter Card";

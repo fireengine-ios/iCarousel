@@ -160,7 +160,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     // MARK: - SearchBarButtonPressed
     
    func configureNavBarActions(isSelecting: Bool = false) {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { (_) in
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { _ in
             let router = RouterVC()
             let searchViewController = router.searchView()
             router.pushViewControllerWithoutAnimation(viewController: searchViewController)
@@ -173,8 +173,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Swift.Void) {
-        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
+    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Void) {
+        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { _ in
             deleteAction()
         })
         
@@ -187,6 +187,26 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
         navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
+    
+    func configurateFaceImagePeopleActions(showHideAction: @escaping () -> Void) {
+        let showHide = NavBarWithAction(navItem: NavigationBarList().showHide, action: { _ in
+            showHideAction()
+        })
+        
+        navBarConfigurator.configure(right: [showHide], left: [])
+        
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+    
+    func configureFaceImageItemsPhotoActions() {
+        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+        })
+        let rightActions: [NavBarWithAction] = [more]
+        navBarConfigurator.configure(right: rightActions, left: [])
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+
     
     @IBAction func onStartCreatingFilesButton(){
         output.onStartCreatingPhotoAndVideos()

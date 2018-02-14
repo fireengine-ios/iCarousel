@@ -534,6 +534,43 @@ class RouterVC: NSObject {
         return controller
     }
     
+    //MARK: People list
+    
+    func peopleListController() -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageItemsInitializer.initializePeopleController(with: "BaseFilesGreedViewController")
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    //MARK: Thing list
+    
+    func thingsListController() -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageItemsInitializer.initializeThingsController(with: "BaseFilesGreedViewController")
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    //MARK: Place list
+    
+    func placesListController() -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController")
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    //MARK: Face Image Recognition Photos
+    
+    func imageFacePhotosController(albumUUID: String, item: Item, coverPhotoURL: URL, moduleOutput: FaceImageItemsModuleOutput?) -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
+                                                                         albumUUID: albumUUID,
+                                                                         item: item,
+                                                                         coverPhotoURL: coverPhotoURL,
+                                                                         moduleOutput: moduleOutput)
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    func faceImageChangeCoverController(albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?)  -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageChangeCoverInitializer.initializeController(with: "BaseFilesGreedViewController", albumUUID: albumUUID, moduleOutput: moduleOutput)
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
     //MARK: Free App Space
     
     func freeAppSpace() -> UIViewController{
@@ -584,6 +621,20 @@ class RouterVC: NSObject {
     
     var importPhotos: UIViewController? {
         let controller = ImportPhotosInitializer.initializeViewController(with: "ImportPhotosViewController")
+        return controller
+    }
+    
+    // MARK: Face image
+    
+    var faceImage: UIViewController {
+        let controller = FaceImageInitializer.initializeViewController(with: "FaceImageViewController")
+        return controller
+    }
+    
+    // MARK: Face image add name
+    
+    func faceImageAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) -> UIViewController {
+    let controller = FaceImageAddNameInitializer.initializeViewController(with: "FaceImageAddNameViewController", item: item, moduleOutput: moduleOutput)
         return controller
     }
     

@@ -11,7 +11,6 @@ import UIKit
 final class AutoUploadIsOffPopUp: BaseView {
     
     @IBOutlet weak var titleText: UILabel?
-    @IBOutlet weak var cancelButton: CircleButtonWithGrayCorner?
     @IBOutlet weak var settingsButton: CircleYellowButton?
 
     override func configurateView() {
@@ -20,19 +19,17 @@ final class AutoUploadIsOffPopUp: BaseView {
         canSwipe = false
         
         titleText?.text = TextConstants.autoUploaOffPopUpText
-        titleText?.font = UIFont.TurkcellSaturaRegFont(size: 12)
+        titleText?.font = UIFont.TurkcellSaturaRegFont(size: 14)
         titleText?.textColor = ColorConstants.textGrayColor
-        
-        cancelButton?.setTitle(TextConstants.autoUploaOffCancel, for: .normal)
         
         settingsButton?.setTitle(TextConstants.autoUploaOffSettings, for: .normal)
     }
     
     override func viewDeletedBySwipe(){
-        onCancelButton()
+        onCancel()
     }
 
-    @IBAction func onCancelButton(){
+    func onCancel(){
         CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
         PopUpService.shared.resetLoginCountForUploadOffPopUp()
     }
