@@ -22,6 +22,7 @@ class ContactsSyncService: BaseRequestService {
         setup()
     }
     
+    typealias Callback = () -> Void
     typealias ProgressCallback = (_ progress: Int, _ mode: SyncOperationType) -> Void
     typealias FinishCallback = (_ response: ContactSync.SyncResponse, _ mode: SyncOperationType) -> Void
     typealias AnalyzeFinishCallback = (_ response: [ContactSync.AnalyzedContact]) -> Void
@@ -134,7 +135,7 @@ class ContactsSyncService: BaseRequestService {
         ContactSyncSDK.cancelAnalyze()
     }
     
-    func analyze(progressCallback: ProgressCallback?, finishCallback: AnalyzeFinishCallback?, errorCallback: ErrorCallback?) {
+    func analyze(progressCallback: ProgressCallback?, successCallback: AnalyzeFinishCallback?, cancelCallback: Callback?,  errorCallback: ErrorCallback?) {
         ContactSyncSDK.doAnalyze(true)
         
         SyncSettings.shared().analyzeNotifyCallback = { (_ contactsToMerge, _ contactsToDelete) in
@@ -150,12 +151,21 @@ class ContactsSyncService: BaseRequestService {
             
             let response = ContactsSyncService.mergeContacts(parsedContactsToMerge, with: parsedContactsToDelete)
             
-            finishCallback?(response)
+            successCallback?(response)
         }
         
         SyncSettings.shared().analyzeProgressCallback = {
             let progressPerecentage = AnalyzeStatus.shared().progress ?? 0
             progressCallback?(Int(truncating: progressPerecentage), .analyze)
+        }
+        
+        SyncSettings.shared().analyzeCompleteCallback = {
+            if AnalyzeStatus.shared().status == .CANCELLED {
+                SyncSettings.shared().analyzeNotifyCallback = nil
+                SyncSettings.shared().analyzeProgressCallback = nil
+                cancelCallback?()
+                return
+            }
         }
     }
     
