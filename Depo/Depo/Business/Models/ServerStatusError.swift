@@ -69,7 +69,7 @@ extension ServerStatusError: LocalizedError {
             return TextConstants.registrationPasswordError
             
         case ErrorKeys.invalidPasswordConsecutive:
-            return TextConstants.errorInvalidPasswordConsecutive
+            return TextConstants.errorInvalidPassword
             
         case ErrorKeys.invalidPasswordSame:
             return TextConstants.errorInvalidPasswordSame
