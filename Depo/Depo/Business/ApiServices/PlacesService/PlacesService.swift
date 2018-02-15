@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlacesService: BaseRequestService {
+final class PlacesService: BaseRequestService {
 
     func getPlacesList(param: PlacesParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
         log.debug("SearchService suggestion")
@@ -39,8 +39,8 @@ class PlacesService: BaseRequestService {
     }
 }
 
-class PlacesItemsService: RemoteItemsService {
-    let service = PlacesService()
+final class PlacesItemsService: RemoteItemsService {
+    private let service = PlacesService()
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .image)
@@ -62,7 +62,7 @@ class PlacesItemsService: RemoteItemsService {
     }
 }
 
-class PlacesParameters: BaseRequestParametrs {
+final class PlacesParameters: BaseRequestParametrs {
     override var patch: URL {
         let searchWithParam = String(format:RouteRequests.places)
         
@@ -70,7 +70,7 @@ class PlacesParameters: BaseRequestParametrs {
     }
 }
 
-class PlacesAlbumParameters: BaseRequestParametrs {
+final class PlacesAlbumParameters: BaseRequestParametrs {
     let id: Int
     
     init(id: Int) {
@@ -83,7 +83,7 @@ class PlacesAlbumParameters: BaseRequestParametrs {
     }
 }
 
-class PlacesPageParameters: BaseRequestParametrs {
+final class PlacesPageParameters: BaseRequestParametrs {
     let pageSize: Int
     let pageNumber: Int
     
@@ -98,7 +98,7 @@ class PlacesPageParameters: BaseRequestParametrs {
     }
 }
 
-class PlacesItem: Item {
+final class PlacesItem: Item {
     let responseObject: PlacesItemResponse
     
     init(response: PlacesItemResponse) {

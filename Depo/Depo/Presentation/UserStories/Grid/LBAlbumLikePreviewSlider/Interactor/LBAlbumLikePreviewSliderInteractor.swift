@@ -11,6 +11,8 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     weak var output: LBAlbumLikePreviewSliderInteractorOutput!
 
     let dataStorage = LBAlbumLikePreviewSliderDataStorage()
+    
+    let faceImageService = FaceImageService()
 
     //MARK: - Interactor Input
     
@@ -72,46 +74,57 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         
         faceImageAllowed { [weak self] result in
             if result == true {
-                let peopleService = PeopleService()
-                peopleService.getPeopleList(param: PeopleParameters(), success: { [weak self] response in
-                    if let people = response as? PeopleServiceResponse {
-                        self?.dataStorage.addNew(item: SliderItem(withPeopleItems: people.list))
-                    }
+                self?.faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .people), success: { [weak self] response in
+                    log.debug("FaceImageService Peolpe Thumbnails success")
+                    
                     DispatchQueue.main.async {
+                        if let thumbnails = (response as? FaceImageThumbnailsResponse)?.list {
+                            self?.dataStorage.addNew(item: SliderItem(withThumbnails: thumbnails.map { URL(string: $0) }, type: .people))
+                        }
                         group.leave()
                     }
                     
                     }, fail: { [weak self] error in
+                        log.debug("FaceImageService Peolpe Thumbnails fail")
+                        
+                        DispatchQueue.main.async {
+                            self?.output.operationFailed()
+                            group.leave()
+                    }
+                })
+                
+                self?.faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .things), success: { [weak self] response in
+                    log.debug("FaceImageService Things Thumbnails success")
+                    
+                    DispatchQueue.main.async {
+                        if let thumbnails = (response as? FaceImageThumbnailsResponse)?.list {
+                            self?.dataStorage.addNew(item: SliderItem(withThumbnails: thumbnails.map { URL(string: $0) }, type: .things))
+                        }                    
+                        group.leave()
+                    }
+                    
+                    }, fail: { [weak self] error in
+                        log.debug("FaceImageService Things Thumbnails fail")
+                        
                         DispatchQueue.main.async {
                             self?.output.operationFailed()
                             group.leave()
                         }
                 })
                 
-                let thingsService = ThingsService()
-                thingsService.getThingsList(param: ThingsParameters(), success: { [weak self] response in
-                    if let things = response as? ThingsServiceResponse {
-                        self?.dataStorage.addNew(item: SliderItem(withThingItems: things.list))
-                    }
+                self?.faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .places), success: { [weak self] response in
+                    log.debug("FaceImageService Places Thumbnails success")
+                    
                     DispatchQueue.main.async {
-                        group.leave()
-                    }
-                    }, fail: { [weak self] error in
-                        DispatchQueue.main.async {
-                            self?.output.operationFailed()
-                            group.leave()
+                        if let thumbnails = (response as? FaceImageThumbnailsResponse)?.list {
+                            self?.dataStorage.addNew(item: SliderItem(withThumbnails: thumbnails.map { URL(string: $0) }, type: .places))
                         }
-                })
-                
-                let placesService = PlacesService()
-                placesService.getPlacesList(param: PlacesParameters(), success: { [weak self] response in
-                    if let places = response as? PlacesServiceResponse {
-                        self?.dataStorage.addNew(item: SliderItem(withPlaceItems: places.list))
-                    }
-                    DispatchQueue.main.async {
                         group.leave()
                     }
+                    
                     }, fail: { [weak self] error in
+                        log.debug("FaceImageService Places Thumbnails fail")
+                        
                         DispatchQueue.main.async {
                             self?.output.operationFailed()
                             group.leave()

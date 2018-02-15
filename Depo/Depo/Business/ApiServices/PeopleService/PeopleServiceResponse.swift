@@ -18,7 +18,7 @@ struct PeopleJsonKey {
 }
 
 
-class PeopleItemResponse: ObjectRequestResponse {
+final class PeopleItemResponse: ObjectRequestResponse {
 
     var id: Int64?
     var ugglaId: Int64?
@@ -35,7 +35,7 @@ class PeopleItemResponse: ObjectRequestResponse {
     }
 }
 
-class PeopleServiceResponse: ObjectRequestResponse {
+final class PeopleServiceResponse: ObjectRequestResponse {
     
     var list: Array<PeopleItemResponse> = []
     
@@ -46,7 +46,7 @@ class PeopleServiceResponse: ObjectRequestResponse {
     }
 }
 
-class PeoplePageResponse: ObjectRequestResponse {
+final class PeoplePageResponse: ObjectRequestResponse {
     
     var list: [PeopleItemResponse] = []
     
@@ -55,4 +55,16 @@ class PeoplePageResponse: ObjectRequestResponse {
             list = result
         }
     }
+}
+
+final class FaceImageThumbnailsResponse: ObjectRequestResponse {
+    
+    var list: [String] = []
+    
+    override func mapping() {
+        if let result = json?.arrayObject as? [String] {
+            list = result
+        }
+    }
+
 }
