@@ -18,7 +18,16 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.audioSelectionCell, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.audioSelectionCell, for: indexPath)
+        if let cell = cell as? AudioSelectionCollectionViewCell {
+            if smallPlayer.isPlaying{
+                let item = tableDataMArray[indexPath.section][indexPath.row]
+                cell.playingButton.isSelected = isObjectPlaying(item: item)
+            }else{
+                cell.playingButton.isSelected = false
+            }
+        }
+        return cell
     }
     
     override func isObjctSelected(object: BaseDataSourceItem) -> Bool {
@@ -27,6 +36,20 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
                 return firstObject.uuid == item.uuid
             }else{
                 return firstObject.id == item.id
+            }
+        }
+        return false
+    }
+    
+    func isObjectPlaying(item: BaseDataSourceItem) -> Bool {
+        guard let item = item as? Item else{
+            return false
+        }
+        if let itemThatPlayingRightNow = smallPlayer.currentItem {
+            if itemThatPlayingRightNow.metaData != nil, item.metaData != nil{
+                return itemThatPlayingRightNow.uuid == item.uuid
+            }else{
+                return itemThatPlayingRightNow.id == item.id
             }
         }
         return false
