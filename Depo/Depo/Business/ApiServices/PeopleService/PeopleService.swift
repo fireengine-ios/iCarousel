@@ -14,7 +14,7 @@ enum FaceImageType {
     case things
 }
 
-class FaceImageService: BaseRequestService {
+final class FaceImageService: BaseRequestService {
     
     func getThumbnails(param: FaceImageThumbnailsParameters, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
         log.debug("FaceImageService Thumbnails")
@@ -24,9 +24,9 @@ class FaceImageService: BaseRequestService {
     }
 }
 
-class FaceImageThumbnailsParameters: BaseRequestParametrs {
+final class FaceImageThumbnailsParameters: BaseRequestParametrs {
     
-    var type: FaceImageType
+    private let type: FaceImageType
     
     init(withType type: FaceImageType) {
         self.type = type
@@ -46,7 +46,7 @@ class FaceImageThumbnailsParameters: BaseRequestParametrs {
 }
 
 
-class PeopleService: BaseRequestService {
+final class PeopleService: BaseRequestService {
     
     func getPeopleList(param: PeopleParameters, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
         log.debug("PeopleService getPeopleList")
@@ -131,7 +131,7 @@ class PeopleService: BaseRequestService {
     }
 }
 
-class PeopleItemsService: RemoteItemsService {
+final class PeopleItemsService: RemoteItemsService {
     let service = PeopleService()
     
     init(requestSize: Int) {
@@ -167,14 +167,14 @@ class PeopleItemsService: RemoteItemsService {
 
 }
 
-class PeopleParameters: BaseRequestParametrs {
+final class PeopleParameters: BaseRequestParametrs {
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.people)
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }
 
-class PeopleAlbumParameters: BaseRequestParametrs {
+final class PeopleAlbumParameters: BaseRequestParametrs {
     let id: Int
     
     init(id: Int) {
@@ -187,7 +187,7 @@ class PeopleAlbumParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleAlbumsParameters: BaseRequestParametrs {
+final class PeopleAlbumsParameters: BaseRequestParametrs {
     let id: Int
     
     init(id: Int) {
@@ -200,7 +200,7 @@ class PeopleAlbumsParameters: BaseRequestParametrs {
     }
 }
 
-class PeoplePageParameters: BaseRequestParametrs {
+final class PeoplePageParameters: BaseRequestParametrs {
     let pageSize: Int
     let pageNumber: Int
     
@@ -215,7 +215,7 @@ class PeoplePageParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleChangeVisibilityParameters: BaseRequestParametrs {
+final class PeopleChangeVisibilityParameters: BaseRequestParametrs {
     let peoples: [PeopleItem]
     
     init(peoples: [PeopleItem]) {
@@ -241,7 +241,7 @@ class PeopleChangeVisibilityParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleSearchParameters: BaseRequestParametrs {
+final class PeopleSearchParameters: BaseRequestParametrs {
     let text: String
     
     init(text: String) {
@@ -254,7 +254,7 @@ class PeopleSearchParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleMergeParameters: BaseRequestParametrs {
+final class PeopleMergeParameters: BaseRequestParametrs {
     let personId: Int64
     let targetPersonId: Int64
     
@@ -273,7 +273,7 @@ class PeopleMergeParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleChangeNameParameters: BaseRequestParametrs {
+final class PeopleChangeNameParameters: BaseRequestParametrs {
     let personId: Int64
     let name: String
     
@@ -292,7 +292,7 @@ class PeopleChangeNameParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleItem: Item {
+final class PeopleItem: Item {
     let responseObject: PeopleItemResponse
     
     init(response: PeopleItemResponse) {

@@ -11,6 +11,8 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     weak var output: LBAlbumLikePreviewSliderInteractorOutput!
 
     let dataStorage = LBAlbumLikePreviewSliderDataStorage()
+    
+    let faceImageService = FaceImageService()
 
     //MARK: - Interactor Input
     
@@ -72,8 +74,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         
         faceImageAllowed { [weak self] result in
             if result == true {
-                let faceImageService = FaceImageService()
-                faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .people), success: { [weak self] response in
+                self?.faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .people), success: { [weak self] response in
                     log.debug("FaceImageService Peolpe Thumbnails success")
                     
                     DispatchQueue.main.async {
@@ -92,7 +93,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
                     }
                 })
                 
-                faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .things), success: { [weak self] response in
+                self?.faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .things), success: { [weak self] response in
                     log.debug("FaceImageService Things Thumbnails success")
                     
                     DispatchQueue.main.async {
@@ -111,7 +112,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
                         }
                 })
                 
-                faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .places), success: { [weak self] response in
+                self?.faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .places), success: { [weak self] response in
                     log.debug("FaceImageService Places Thumbnails success")
                     
                     DispatchQueue.main.async {
