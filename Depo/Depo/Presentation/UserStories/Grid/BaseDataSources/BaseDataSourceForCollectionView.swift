@@ -1225,7 +1225,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         updateCellsForObjects(objectsForDelete: objectsForRemoving, objectsForUpdate: localObjectsForReplace)
     }
     
-    private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]) {
+    private func updateCellsForObjects(objectsForDelete: [BaseDataSourceItem], objectsForUpdate:[BaseDataSourceItem]) {
         if objectsForDelete.isEmpty && objectsForUpdate.isEmpty {
             return
         }
@@ -1302,8 +1302,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func updatedAlbumCoverPhoto(item: AlbumItem) {
-        
+    func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
+        updateCellsForObjects(objectsForDelete: [BaseDataSourceItem](), objectsForUpdate: [item])
     }
     
     func albumsDeleted(albums: [AlbumItem]) {
