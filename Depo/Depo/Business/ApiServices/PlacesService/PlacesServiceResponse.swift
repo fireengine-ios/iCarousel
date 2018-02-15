@@ -16,7 +16,7 @@ struct PlacesJsonKey {
     static let locationInfos = "locationInfos"
 }
 
-class PlacesItemResponse: ObjectRequestResponse {
+final class PlacesItemResponse: ObjectRequestResponse {
     
     var id: Int64?
     var adminLevel: String?
@@ -32,7 +32,7 @@ class PlacesItemResponse: ObjectRequestResponse {
     }
 }
 
-class PlacesServiceResponse: ObjectRequestResponse {
+final class PlacesServiceResponse: ObjectRequestResponse {
     var list: Array<PlacesItemResponse> = []
     
     override func mapping() {
@@ -42,7 +42,7 @@ class PlacesServiceResponse: ObjectRequestResponse {
     }
 }
 
-class PlacesPageResponse: ObjectRequestResponse {
+final class PlacesPageResponse: ObjectRequestResponse {
     var list: Array<PlacesItemResponse> = []
     
     override func mapping() {

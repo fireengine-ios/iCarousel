@@ -867,7 +867,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         guard let cell_ = cell as? CollectionViewCellDataProtocol else {
                 return
         }
-        cell_.setSelectionWithoutAnimation(isSelectionActive: isSelectionStateActive, isSelected: false)
+        cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: false)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -1496,10 +1496,3 @@ extension BaseDataSourceForCollectionView {
     }
 
 }
-
-
-
-
-
-
-
