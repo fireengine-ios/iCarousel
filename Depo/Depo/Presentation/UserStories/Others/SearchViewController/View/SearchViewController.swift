@@ -224,8 +224,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if searchBar.text! != "" {
-            output.searchWith(searchText: searchBar.text!, sortBy: SortType.date, sortOrder: SortOrder.asc)
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            output.searchWith(searchText: searchText, sortBy: SortType.date, sortOrder: SortOrder.asc)
         } else {
             collectionView.isHidden = true
             setCurrentPlayState()
@@ -245,7 +245,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     @objc func searchTimerIsOver(timer: Timer) {
-        self.output.getSuggestion(text: timer.userInfo as! String)
+        if let searchText = timer.userInfo as? String {
+            self.output.getSuggestion(text: searchText)
+        }
     }
     
     func endSearchRequestWith(text: String) {
