@@ -12,6 +12,10 @@ protocol LoadingImageViewDelegate: class{
     func onImageLoaded(image: UIImage?)
     func onLoadingImageCanceled()
 }
+extension LoadingImageViewDelegate {
+    func onImageLoaded(image: UIImage?) {}
+    func onLoadingImageCanceled() {}
+}
 
 class LoadingImageView: UIImageView {
 

@@ -10,7 +10,7 @@ import UIKit
 
 final class ImageScrollView: UIScrollView {
     
-    private(set) var imageView = UIImageView()
+    private(set) var imageView = LoadingImageView()
     
     var image: UIImage? {
         didSet {
@@ -49,10 +49,11 @@ final class ImageScrollView: UIScrollView {
         bouncesZoom = true
         decelerationRate = UIScrollViewDecelerationRateFast
         
-        addSubview(imageView)
-//        imageView.frame = bounds
+        
+        imageView.frame = bounds
 //        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         imageView.isUserInteractionEnabled = true
+        addSubview(imageView)
     }
     
     func updateZoom() {
@@ -61,7 +62,7 @@ final class ImageScrollView: UIScrollView {
         }
         setMaxMinZoomScales(for: image.size)
     }
-    
+     
     private func setMaxMinZoomScales(for imageSize: CGSize) {
         let xScale = bounds.width / imageSize.width
         let yScale = bounds.height / imageSize.height
