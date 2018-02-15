@@ -17,7 +17,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     private var photoVideoService : PhotoAndVideoService? = nil
     private var isSearchRunning = false
     private var needSearchAgain = false
-    private let numberElementsInRequest = 100
+    private let numberElementsInRequest = 50000
     
     private var localtemsArray = [WrapData]()
     private var localMD5Array = [String]()
