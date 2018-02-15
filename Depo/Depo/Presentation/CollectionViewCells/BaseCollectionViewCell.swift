@@ -87,7 +87,7 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         
     }
     
-    func setSelectionWithoutAnimation(isSelectionActive: Bool, isSelected: Bool){
+    func setSelectionWithAnimation(isSelectionActive: Bool, isSelected: Bool){
         
     }
     
