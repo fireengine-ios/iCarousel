@@ -118,6 +118,12 @@ extension HelpAndSupportViewController: ExpandableTableViewDelegate {
         self.expandableTableView.deselectRowAtExpandableIndexPath(expandableIndexPath, animated: false)
         let item = tableSectionDataArray[expandableIndexPath.row]
         item.selected = !item.selected
+        let indexPath = IndexPath(row: expandableIndexPath.row, section: expandableIndexPath.section)
+        
+        let when = DispatchTime.now() + 0.1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            expandableTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
     }
     
     // SubRows
