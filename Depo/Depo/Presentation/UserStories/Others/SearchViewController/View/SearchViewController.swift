@@ -68,18 +68,30 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        defaultNavBarStyle()
+        
         navigationController?.setNavigationBarHidden(true, animated: false)
         UIApplication.shared.statusBarStyle = .default
         
         editingTabBar?.view.layoutIfNeeded()
+        
+        let allVisibleCells = collectionView.indexPathsForVisibleItems
+        if !allVisibleCells.isEmpty {
+            collectionView.performBatchUpdates({
+                collectionView.reloadItems(at: allVisibleCells)
+            })
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         UIApplication.shared.statusBarStyle = .lightContent
+        output.viewWillDisappear()
     }
     
     deinit {
-        self.unSubscribeFromNotifications()
+        unSubscribeFromNotifications()
     }
     
     fileprivate func subscribeToNotifications() {
@@ -224,9 +236,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if searchBar.text! != "" {
-            let customAllowedSet =  CharacterSet(charactersIn:"=\"#%/<>?@\\^`{|}&").inverted
-            output.searchWith(searchText: searchBar.text!.addingPercentEncoding(withAllowedCharacters: customAllowedSet)!, sortBy: SortType.date, sortOrder: SortOrder.asc)
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            output.searchWith(searchText: searchText, sortBy: SortType.date, sortOrder: SortOrder.asc)
         } else {
             collectionView.isHidden = true
             setCurrentPlayState()
@@ -240,29 +251,30 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !output.isShowedSpinner() {
-            self.timerToSearch.invalidate()
-            self.timerToSearch = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.searchTimerIsOver(timer:)), userInfo: searchText, repeats: false)
+            timerToSearch.invalidate()
+            timerToSearch = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(searchTimerIsOver(timer:)), userInfo: searchText, repeats: false)
         }
     }
     
     @objc func searchTimerIsOver(timer: Timer) {
-        let text = timer.userInfo as! String
-        self.output.getSuggestion(text: text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? text)
+        if let searchText = timer.userInfo as? String {
+            output.getSuggestion(text: searchText)
+        }
     }
     
     func endSearchRequestWith(text: String) {
-        self.collectionView.isHidden = !noFilesView.isHidden
+        collectionView.isHidden = !noFilesView.isHidden
         setCurrentPlayState()
         
-        if let searchBar = self.navigationBar.topItem?.titleView as? UISearchBar, let searchBarText = searchBar.text {
+        if let searchBar = navigationBar.topItem?.titleView as? UISearchBar, let searchBarText = searchBar.text {
             let requestText = text.removingPercentEncoding ?? text
             if requestText != searchBarText {
-                self.timerToSearch.invalidate()
-                self.timerToSearch = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.searchTimerIsOver(timer:)), userInfo: text, repeats: false)
+                timerToSearch.invalidate()
+                timerToSearch = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(searchTimerIsOver(timer:)), userInfo: text, repeats: false)
             }
         }
 
-        self.topBarContainer.isHidden = false
+        topBarContainer.isHidden = false
     }
     
     // MARK: - SearchViewInput
@@ -290,7 +302,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
     func dismissController() {
@@ -299,6 +311,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func onSetSelection(state: Bool) {
         setupNavigationBarForSelectionState(state: state)
+    
     }
     
     func setNavBarRigthItem(active isActive: Bool) {

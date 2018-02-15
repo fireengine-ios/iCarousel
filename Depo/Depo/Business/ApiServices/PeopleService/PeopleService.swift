@@ -200,7 +200,7 @@ class PeopleSearchParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleSearch, text)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL.encodingURL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }
 

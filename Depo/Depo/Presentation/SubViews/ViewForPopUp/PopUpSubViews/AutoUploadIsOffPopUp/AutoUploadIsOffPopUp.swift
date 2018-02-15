@@ -19,10 +19,12 @@ final class AutoUploadIsOffPopUp: BaseView {
         canSwipe = false
         
         titleText?.text = TextConstants.autoUploaOffPopUpText
-        titleText?.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        titleText?.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleText?.textColor = ColorConstants.textGrayColor
+        titleText?.sizeToFit()
         
         settingsButton?.setTitle(TextConstants.autoUploaOffSettings, for: .normal)
+        calculatedH = (titleText?.frame.size.height ?? 0.0) + 17.0 + 10.0
     }
     
     override func viewDeletedBySwipe(){

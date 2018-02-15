@@ -33,15 +33,19 @@ class AudioSelectionCollectionViewCell: BaseCollectionViewCell {
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool){
         if (isSelectionActive){
-            
             UIView.transition(with: selectionImage,
                               duration: NumericConstants.animationDuration,
                               options: .transitionCrossDissolve,
                               animations: {
-                let image = UIImage(named: isSelected ? "selectedList": "pselected")
-                self.selectionImage.image = image
+                                let image = UIImage(named: isSelected ? "selectedList": "pselected")
+                                self.selectionImage.image = image
             }, completion: nil)
         }
+    }
+    
+    override func setSelectionWithoutAnimation(isSelectionActive: Bool, isSelected: Bool){
+        let image = UIImage(named: isSelected ? "selectedList": "pselected")
+        self.selectionImage.image = image
     }
     
     func changeButtonState(playing: Bool) {

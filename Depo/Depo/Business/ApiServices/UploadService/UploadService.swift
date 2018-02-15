@@ -539,8 +539,9 @@ class UploadOperations: Operation {
     var isRealCancel = false
     var isFavorites: Bool = false
     var isPhotoAlbum: Bool = false
-    
+    private var attemptsCount = 0
     private let semaphore: DispatchSemaphore
+    
     
     init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, handler: @escaping (_ uploadOberation: UploadOperations, _ value: ErrorResponse?)->Void) {
         self.item = item
@@ -586,8 +587,6 @@ class UploadOperations: Operation {
     }
     
     override func main() {
-        let isPhotoAlbum_ = isPhotoAlbum
-        
         if isRealCancel {
             if let req = requestObject {
                 req.cancel()
@@ -605,6 +604,15 @@ class UploadOperations: Operation {
             return
         }
         
+        ItemOperationManager.default.startUploadFile(file: item)
+
+        attemptsCount = 0
+        attempmtUpload()
+        
+        semaphore.wait()
+    }
+    
+    private func attempmtUpload() {
         let customSucces: FileOperationSucces = {
             self.success?(self)
             self.handler?(self, nil)
@@ -617,11 +625,9 @@ class UploadOperations: Operation {
             self.semaphore.signal()
         }
         
-        ItemOperationManager.default.startUploadFile(file: item)
-        
         baseUrl(success: { [weak self] baseurlResponse in
             guard let `self` = self else{
-                customFail(ErrorResponse.string("Unknown error"))
+                customFail(ErrorResponse.string(TextConstants.commonServiceError))
                 return
             }
             
@@ -637,12 +643,12 @@ class UploadOperations: Operation {
                 let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
                                                     fileUUID:uploadParam.tmpUUId )
                 
-                self?.uploadNotify(param: uploadNotifParam, success: { baseurlResponse in
+                self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
                     if let localURL = uploadParam.urlToLocalFile {
                         try? FileManager.default.removeItem(at: localURL)
                     }
                     
-                    if isPhotoAlbum_{
+                    if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
                         if let resp = baseurlResponse as? SearchItemResponse{
                             let item = Item.init(remote: resp)
                             let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
@@ -659,11 +665,19 @@ class UploadOperations: Operation {
                     
                 }, fail: customFail)
                 
-                }, fail: customFail)
+                }, fail: { (error) in
+                    if error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                        let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
+                        DispatchQueue.global().asyncAfter(deadline: delay, execute: {
+                            self.attemptsCount += 1
+                            self.attempmtUpload()
+                        })
+                    } else {
+                        customFail(error)
+                    }
+            })
             
             }, fail: customFail)
-        
-        semaphore.wait()
     }
     
     private func baseUrl(success: @escaping UploadServiceBaseUrlResponse, fail:FailResponse?) {

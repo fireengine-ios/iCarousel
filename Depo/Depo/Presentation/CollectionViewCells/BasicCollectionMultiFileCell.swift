@@ -242,7 +242,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                     smallCellSelectionView.isHidden = !isSelected
                     smallContentImageView.isHidden = isSelected
                 }
-                smallContentImageView.setSelection(selection: isSelected, showSelectonBorder: isSelectionActive)
+                //because if we have image for object and object is not selected we should not show empty circle in top right corner of image
+                smallContentImageView.setSelection(selection: isSelected, showSelectonBorder: isSelected)
             }
         }else{
             if (isBigSize()){

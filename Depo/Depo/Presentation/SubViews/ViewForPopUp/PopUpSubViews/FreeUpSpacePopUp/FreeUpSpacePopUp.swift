@@ -20,10 +20,10 @@ final class FreeUpSpacePopUp: BaseView {
     override func configurateView() {
         super.configurateView()
         
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel.textColor = ColorConstants.textGrayColor
         
-        bigTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        bigTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         bigTitleLabel.textColor = ColorConstants.textGrayColor
         
         freeAppSpaceButton.setTitle(TextConstants.freeAppSpacePopUpButtonTitle, for: .normal)

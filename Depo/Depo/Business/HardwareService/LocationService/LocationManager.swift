@@ -22,7 +22,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private func configurateLocationManager(){
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.distanceFilter = 100 //kCLDistanceFilterNone - any changes
         locationManager.pausesLocationUpdatesAutomatically = false
         

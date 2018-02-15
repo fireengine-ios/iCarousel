@@ -55,7 +55,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var canSelectionState = true
     
-    private var isSelectionStateActive = false
+    var isSelectionStateActive = false
     
     var selectedItemsArray = Set<BaseDataSourceItem>()
     
@@ -863,6 +863,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell_ = cell as? CollectionViewCellDataProtocol else {
+                return
+        }
+        cell_.setSelectionWithoutAnimation(isSelectionActive: isSelectionStateActive, isSelected: false)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let object = itemForIndexPath(indexPath: indexPath)
@@ -1489,10 +1496,3 @@ extension BaseDataSourceForCollectionView {
     }
 
 }
-
-
-
-
-
-
-

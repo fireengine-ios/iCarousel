@@ -21,6 +21,17 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
         return collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.audioSelectionCell, for: indexPath)
     }
     
+    override func isObjctSelected(object: BaseDataSourceItem) -> Bool {
+        if let firstObject = selectedItemsArray.first as? WrapData, let item = object as? WrapData{
+            if firstObject.metaData != nil{
+                return firstObject.uuid == item.uuid
+            }else{
+                return firstObject.id == item.id
+            }
+        }
+        return false
+    }
+    
     
     // MARK: AudioSelectionCollectionViewCellDelegate
     
