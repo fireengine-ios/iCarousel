@@ -51,12 +51,12 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             collectionView.reloadData()
             collectionView.layoutIfNeeded()
             
-            if objects.isEmpty, selectedIndex > objects.count - 1 {
-                return
-            }
-            
-            let indexPath = IndexPath(item: selectedIndex, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+//            if objects.isEmpty, selectedIndex > objects.count - 1 {
+//                return
+//            }
+//            
+//            let indexPath = IndexPath(item: selectedIndex, section: 0)
+//            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
         
     }
@@ -84,6 +84,8 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+//        collectionView.collectionViewLayout.invalidateLayout()
     }
     
     
@@ -148,15 +150,24 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
 //            //            collectionView.performBatchUpdates({}, completion: nil)
 //        }
         
-        if needToScrollAfterRotation {
-            needToScrollAfterRotation = false
-            if objects.isEmpty, selectedIndex > objects.count - 1 {
-                return
-            }
-            
-            let indexPath = IndexPath(item: selectedIndex, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        collectionView.performBatchUpdates(nil, completion: nil)
+        
+        if objects.isEmpty, selectedIndex > objects.count - 1 {
+            return
         }
+        
+        let indexPath = IndexPath(item: selectedIndex, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        
+//        if needToScrollAfterRotation {
+//            needToScrollAfterRotation = false
+//            if objects.isEmpty, selectedIndex > objects.count - 1 {
+//                return
+//            }
+//            
+//            let indexPath = IndexPath(item: selectedIndex, section: 0)
+//            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+//        }
         
         
     }
@@ -497,7 +508,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        collectionView.collectionViewLayout.invalidateLayout()
+//        collectionView.collectionViewLayout.invalidateLayout()
         needToScrollAfterRotation = true
     }
     

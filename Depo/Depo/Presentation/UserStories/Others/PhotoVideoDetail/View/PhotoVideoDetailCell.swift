@@ -32,6 +32,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         super.awakeFromNib()
         backgroundColor = UIColor.clear
         webView.scalesPageToFit = true
+        imageScrollView.delegate = self
     }
     
     override func layoutSubviews() {
@@ -40,21 +41,20 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         imageScrollView.updateZoom()
     }
     
+//    private var imageID: String? 
+    
     func setObject(object:Item, index: Int) {
         webView.isHidden = true
         
         imageScrollView.image = nil
         playVideoButton.isHidden = true
         self.index = index
-        
         if object.fileType == .video || object.fileType == .image {
 //            imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
             filesDataSource.getImage(for: object, isOriginal: true) { [weak self] image in
                 DispatchQueue.main.async {
-                    self?.imageScrollView.delegate = self
                     self?.imageScrollView.image = image
                     self?.imageScrollView.updateZoom()
-//                    guard let image = image else { return }
                 }
             }
             playVideoButton.isHidden = !(object.fileType == FileType.video)
