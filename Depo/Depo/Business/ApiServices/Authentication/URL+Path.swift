@@ -14,4 +14,12 @@ extension URL {
     static func +/ (lhs: URL, rhs: String) -> URL {
         return lhs.appendingPathComponent(rhs)
     }
+
+    static func encodingURL(string: String, relativeTo url: URL?) -> URL? {
+        var url = URL(string: string, relativeTo: url)
+        if url == nil, let params = string.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) {
+            url = URL(string: params, relativeTo: RouteRequests.BaseUrl)
+        }
+        return url
+    }
 }
