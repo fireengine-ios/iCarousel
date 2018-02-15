@@ -87,6 +87,10 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         
     }
     
+    func setSelectionWithoutAnimation(isSelectionActive: Bool, isSelected: Bool){
+        
+    }
+    
     func getAssetId() -> String? {
         return assetId
     }

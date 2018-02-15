@@ -13,8 +13,8 @@ class ManageContactsViewController: BaseViewController, ManageContactsViewInput 
     @IBOutlet weak var tableView: UITableView!
     
     var output: ManageContactsViewOutput!
-
-    @IBOutlet weak var searchBar: UISearchBar!
+    
+    private var searchBar = UISearchBar()
 
     private var contactGroups = [ManageContacts.Group]()
     
@@ -26,13 +26,24 @@ class ManageContactsViewController: BaseViewController, ManageContactsViewInput 
         
         backButtonForNavigationItem(title: TextConstants.backTitle)
         setTitle(withString: TextConstants.manageContacts)
-        configureSearchBar()
 
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         output.viewIsReady()
+        
+        configureSearchBar()
     }
     
     private func configureSearchBar() {
+        
+        var searchBarHeight : CGFloat = 44
+        
+        if #available(iOS 11.0, *) {
+            searchBarHeight = 56
+        }
+        
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: searchBarHeight))
+        self.searchBar = searchBar
+        
         searchBar.backgroundColor = ColorConstants.whiteColor
         searchBar.tintColor = ColorConstants.darcBlueColor
         searchBar.delegate = self
@@ -51,6 +62,8 @@ class ManageContactsViewController: BaseViewController, ManageContactsViewInput 
                 (subView as! UIButton).titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
             }
         }
+        
+        self.tableView.tableHeaderView = searchBar
     }
     
     // MARK: Actions

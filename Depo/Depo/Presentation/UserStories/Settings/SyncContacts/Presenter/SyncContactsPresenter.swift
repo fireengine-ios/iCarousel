@@ -68,13 +68,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func cancelSuccess() {
-        guard let view = view else { return }
-        
-        if isBackUpAvailable {
-            view.setStateWithBackUp()
-        } else {
-            view.setStateWithoutBackUp()
-        }
+        guard let _ = view else { return }
+        updateContactsStatus()
     }
     
     func onManageContacts() {

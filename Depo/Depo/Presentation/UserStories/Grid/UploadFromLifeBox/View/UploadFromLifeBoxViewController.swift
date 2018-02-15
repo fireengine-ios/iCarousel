@@ -12,15 +12,17 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
     
     let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
+        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         scrolliblePopUpView.isEnable = false
         
         super.viewDidAppear(animated)
-        
-        cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
-        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +36,6 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
     }
     
     override func configureNavBarActions(isSelecting: Bool = false) {
-        navigationBarWithGradientStyle()
         setTitle(withString: TextConstants.uploadFromLifeBoxTitle)
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
         button.setTitle(TextConstants.uploadFromLifeBoxNextButton, for: .normal)

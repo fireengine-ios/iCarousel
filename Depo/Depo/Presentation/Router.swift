@@ -103,8 +103,10 @@ class RouterVC: NSObject {
     }
     
     func pushViewController(viewController: UIViewController) {
-        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-        NotificationCenter.default.post(name: notificationName, object: nil)
+        if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar{
+            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
+            NotificationCenter.default.post(name: notificationName, object: nil)
+        }
         
         navigationController?.pushViewController(viewController, animated: true)
         viewController.navigationController?.isNavigationBarHidden = false

@@ -10,12 +10,9 @@ import Foundation
 
 class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     
-//    var viewTitle: String
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
-        
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
@@ -38,10 +35,6 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
             subTitle = output.getSortTypeString()
         }
         setTitle(withString: mainTitle, andSubTitle: subTitle)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     override func configurateViewForPopUp() {

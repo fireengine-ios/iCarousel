@@ -105,9 +105,8 @@ class RenameAlbum: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let encodingName = newName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? newName
-        let path: String = String(format: AlbumsPatch.renameAlbum, albumUUID, encodingName)
-        return URL(string: path, relativeTo: super.patch)!
+        let path = String(format: AlbumsPatch.renameAlbum, albumUUID, newName)
+        return URL.encodingURL(string: path, relativeTo: super.patch)!
     }
 }
 
