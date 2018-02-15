@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
                 <outlet property="bottomConstraint" destination="svp-Vq-1Gs" id="Qyd-Le-rMy"/>
                 <outlet property="cantLoginButton" destination="sKm-UQ-Thl" id="8qA-wp-4nS"/>
@@ -45,26 +44,27 @@
                     <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="346" translatesAutoresizingMaskIntoConstraints="NO" id="HCp-Ig-1We">
-                            <rect key="frame" x="30" y="8" width="354" height="21"/>
+                            <rect key="frame" x="30" y="7" width="354" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="21" id="M9I-Yl-i63"/>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="Nbz-2e-iiP"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBi-l1-gsZ" userLabel="Error Label">
-                            <rect key="frame" x="30" y="79" width="354" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="jBi-l1-gsZ" userLabel="Error Label">
+                            <rect key="frame" x="30" y="78" width="354" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="19o-jF-f0m"/>
-                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="90" id="P1S-D7-2fm"/>
                             </constraints>
-                            <string key="text">You can not login to lifebox with your Turkcell password because you have deactivated login with Turkcell password feature. Please, try to login with your lifebox password.</string>
-                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BuA-r0-ykZ">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="519"/>
+                            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZUi-xv-OhT">
                             <rect key="frame" x="0.0" y="100" width="414" height="222"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -73,7 +73,7 @@
                             </constraints>
                             <color key="sectionIndexBackgroundColor" red="0.023596025971353463" green="0.0" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         </tableView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kfw-l0-Y4i">
+                        <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Kfw-l0-Y4i">
                             <rect key="frame" x="0.0" y="322" width="414" height="30"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqD-Ug-1FL">
@@ -118,7 +118,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F62-WO-wVy" userLabel="bottom view ">
                             <rect key="frame" x="0.0" y="362" width="414" height="157"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTQ-k6-noA" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTQ-k6-noA" customClass="WhiteButtonWithRoundedCorner" customModule="Depo_LifeTech" customModuleProvider="target">
                                     <rect key="frame" x="148.66666666666666" y="30" width="116.99999999999997" height="55"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="55" id="ChL-oB-er0">
@@ -133,7 +133,7 @@
                                         <action selector="onLoginButton" destination="-1" eventType="touchUpInside" id="4fX-3z-4jF"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKm-UQ-Thl" customClass="ButtonWithCorner" customModule="lifebox" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKm-UQ-Thl" customClass="ButtonWithCorner" customModule="Depo_LifeTech" customModuleProvider="target">
                                     <rect key="frame" x="164.66666666666666" y="110" width="85" height="29"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="85" id="WW1-MF-3cn">
@@ -160,22 +160,24 @@
                                 <constraint firstAttribute="bottom" secondItem="sKm-UQ-Thl" secondAttribute="bottom" constant="18" id="svp-Vq-1Gs">
                                     <variation key="widthClass=regular" constant="203"/>
                                 </constraint>
-                                <constraint firstAttribute="height" constant="157" id="uVb-Li-Cho"/>
                             </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="HCp-Ig-1We" firstAttribute="trailing" secondItem="ZUi-xv-OhT" secondAttribute="trailing" constant="-30" id="5Es-US-qZN"/>
-                        <constraint firstAttribute="trailing" secondItem="ZUi-xv-OhT" secondAttribute="trailing" constant="30" id="91x-Q8-ohh">
+                        <constraint firstItem="ZUi-xv-OhT" firstAttribute="top" secondItem="kNq-kb-jWD" secondAttribute="top" constant="100" id="7CU-Ep-xaX">
+                            <variation key="widthClass=regular" constant="270"/>
+                        </constraint>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZUi-xv-OhT" secondAttribute="trailing" constant="30" id="91x-Q8-ohh">
                             <variation key="widthClass=compact" constant="0.0"/>
                         </constraint>
                         <constraint firstItem="jBi-l1-gsZ" firstAttribute="leading" secondItem="HCp-Ig-1We" secondAttribute="leading" id="CzA-qA-UHY"/>
-                        <constraint firstItem="HCp-Ig-1We" firstAttribute="top" secondItem="kNq-kb-jWD" secondAttribute="top" constant="8" id="D7W-Jq-9WW"/>
                         <constraint firstItem="crD-Uh-f0U" firstAttribute="centerX" secondItem="ZUi-xv-OhT" secondAttribute="centerX" id="DUP-eu-7hF"/>
                         <constraint firstItem="jBi-l1-gsZ" firstAttribute="trailing" secondItem="HCp-Ig-1We" secondAttribute="trailing" id="DvM-VU-PYx"/>
                         <constraint firstAttribute="bottom" secondItem="F62-WO-wVy" secondAttribute="bottom" id="LGY-ed-rux"/>
                         <constraint firstItem="crD-Uh-f0U" firstAttribute="width" secondItem="ZUi-xv-OhT" secondAttribute="width" id="NSR-n6-MQw"/>
+                        <constraint firstItem="BuA-r0-ykZ" firstAttribute="top" secondItem="kNq-kb-jWD" secondAttribute="top" id="Nh5-iU-zBv"/>
                         <constraint firstItem="jBi-l1-gsZ" firstAttribute="centerX" secondItem="kNq-kb-jWD" secondAttribute="centerX" id="OfS-hE-m6k"/>
                         <constraint firstItem="crD-Uh-f0U" firstAttribute="top" secondItem="Kfw-l0-Y4i" secondAttribute="bottom" constant="10" id="Qc4-qN-bKp"/>
                         <constraint firstItem="ZUi-xv-OhT" firstAttribute="top" secondItem="jBi-l1-gsZ" secondAttribute="bottom" id="TYg-92-NcE">
@@ -187,8 +189,11 @@
                         </constraint>
                         <constraint firstItem="HCp-Ig-1We" firstAttribute="centerX" secondItem="kNq-kb-jWD" secondAttribute="centerX" id="WYe-GL-03W"/>
                         <constraint firstItem="Kfw-l0-Y4i" firstAttribute="centerX" secondItem="ZUi-xv-OhT" secondAttribute="centerX" id="a8a-fM-sdL"/>
+                        <constraint firstItem="BuA-r0-ykZ" firstAttribute="leading" secondItem="kNq-kb-jWD" secondAttribute="leading" id="cpS-Se-Ph7"/>
                         <constraint firstItem="HCp-Ig-1We" firstAttribute="leading" secondItem="ZUi-xv-OhT" secondAttribute="leading" constant="30" id="gLE-Ut-9Ld"/>
+                        <constraint firstAttribute="trailing" secondItem="BuA-r0-ykZ" secondAttribute="trailing" id="gyi-mG-nQ1"/>
                         <constraint firstItem="F62-WO-wVy" firstAttribute="top" secondItem="crD-Uh-f0U" secondAttribute="bottom" id="ljx-4k-eRR"/>
+                        <constraint firstAttribute="bottom" secondItem="BuA-r0-ykZ" secondAttribute="bottom" id="oJI-bG-bhk"/>
                         <constraint firstItem="jBi-l1-gsZ" firstAttribute="top" secondItem="HCp-Ig-1We" secondAttribute="bottom" constant="50" id="oSk-pH-sBe">
                             <variation key="widthClass=regular" constant="32"/>
                         </constraint>
@@ -197,12 +202,14 @@
                         <constraint firstItem="ZUi-xv-OhT" firstAttribute="leading" secondItem="kNq-kb-jWD" secondAttribute="leading" constant="126" id="ru1-cA-Wy8">
                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                         </constraint>
+                        <constraint firstItem="jBi-l1-gsZ" firstAttribute="width" relation="lessThanOrEqual" secondItem="ZUi-xv-OhT" secondAttribute="width" id="shg-W5-ZUJ"/>
                         <constraint firstAttribute="trailing" secondItem="F62-WO-wVy" secondAttribute="trailing" id="xGH-N2-QBe"/>
                     </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.38853236607142855" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="BuA-r0-ykZ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="0Qk-3b-fRW"/>
                 <constraint firstItem="Xtp-x9-4nT" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3it-Up-q3B"/>
                 <constraint firstItem="kNq-kb-jWD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6PU-81-qTI"/>
                 <constraint firstAttribute="bottom" secondItem="kNq-kb-jWD" secondAttribute="bottom" id="BgH-ii-Tmx"/>
