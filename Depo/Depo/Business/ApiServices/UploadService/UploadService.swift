@@ -64,21 +64,15 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: FileOperationSucces?, fail: FailResponse? ) -> [UploadOperations]? {
+    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
         switch uploadType {
         case .autoSync:
-            return self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
-                success?()
-                self?.clearSyncCounters()
-                }, fail: { [weak self] (errorResponse) in
-                    fail?(errorResponse)
-                    self?.clearSyncCounters()
-            })
+            return self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail)
         case .syncToUse:
             return self.syncToUseFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                 self?.clearSyncToUseCounters()
                 self?.hideUploadCardIfNeeded()
-                success?()
+                success()
                 }, fail: { [weak self] (errorResponse) in
                     self?.clearSyncToUseCounters()
                     self?.hideUploadCardIfNeeded()
@@ -88,13 +82,13 @@ final class UploadService: BaseRequestService {
                         self?.showOutOfSpaceAlert()
                     }
                     
-                    fail?(errorResponse)
+                    fail(errorResponse)
             })
         default:
             return self.uploadFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                 self?.clearUploadCounters()
                 self?.hideUploadCardIfNeeded()
-                success?()
+                success()
             }, fail: { [weak self] (errorResponse) in
                 self?.clearUploadCounters()
                 self?.hideUploadCardIfNeeded()
@@ -104,7 +98,7 @@ final class UploadService: BaseRequestService {
                     self?.showOutOfSpaceAlert()
                 }
                 
-                fail?(errorResponse)
+                fail(errorResponse)
             })
         }
     
@@ -118,6 +112,7 @@ final class UploadService: BaseRequestService {
     
     private func showSyncCardProgress() {
         guard allSyncOperationsCount != 0, allSyncOperationsCount != finishedSyncOperationsCount else {
+            clearSyncCounters()
             return
         }
         
@@ -140,7 +135,7 @@ final class UploadService: BaseRequestService {
                                                          completedOperations: finishedUploadOperationsCount + finishedSyncToUseOperationsCount)
     }
     
-    @discardableResult private func syncToUseFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: FileOperationSucces?, fail: FailResponse? ) -> [UploadOperations]? {
+    @discardableResult private func syncToUseFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse ) -> [UploadOperations]? {
         // filter all items which md5's are not in the uploadOperations
         let itemsToUpload = items.filter { (item) -> Bool in
             return (self.uploadOperations.first(where: { (operation) -> Bool in
@@ -172,7 +167,7 @@ final class UploadService: BaseRequestService {
                 
                 let checkIfFinished = {
                     if self.uploadOperations.filter({ $0.uploadType == .syncToUse }).isEmpty {
-                        success?()
+                        success()
                         return
                     }
                 }
@@ -187,7 +182,7 @@ final class UploadService: BaseRequestService {
 //                        checkIfFinished()
 //                    } else {
                         //sync failed
-                        fail?(.error(error))
+                        fail(.error(error))
 //                    }
                     return
                 }
@@ -219,7 +214,7 @@ final class UploadService: BaseRequestService {
         return uploadOperations.filter({ $0.uploadType == .syncToUse })
     }
     
-    @discardableResult private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: FileOperationSucces?, fail: FailResponse? ) -> [UploadOperations]? {
+    @discardableResult private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
         // filter all items which md5's are not in the uploadOperations
         let itemsToUpload = items.filter { (item) -> Bool in
             return (self.uploadOperations.first(where: { (operation) -> Bool in
@@ -252,13 +247,12 @@ final class UploadService: BaseRequestService {
                 
                 let checkIfFinished = {
                     if self.uploadOperations.filter({ $0.uploadType == .fromHomePage }).isEmpty {
-                        success?()
+                        success()
                         ItemOperationManager.default.syncFinished()
                         return
                     }
                 }
 
-                /// HERE MUST BE ERROR HANDLER
                 if let error = error {
                     print("AUTOSYNC: \(error.localizedDescription)")
                     if finishedOperation.isRealCancel {
@@ -267,7 +261,7 @@ final class UploadService: BaseRequestService {
                         checkIfFinished()
                     } else {
                         self.uploadOperations.removeIfExists(finishedOperation)
-                        fail?(error)
+                        fail(error)
                     }
                     return
                 }
@@ -329,7 +323,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 let checkIfFinished = {
-                    if !successHandled, self.uploadOperations.filter({ $0.uploadType == .autoSync }).isEmpty {
+                    if !successHandled, self.uploadOperations.filter({ $0.uploadType == .autoSync && $0.item.fileType == finishedOperation.item.fileType }).isEmpty {
                         successHandled = true
                         success()
                         return
@@ -337,7 +331,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if let error = error {
-                    if finishedOperation.isRealCancel || error.isNetworkError {
+                    if finishedOperation.isRealCancel {
                         self.uploadOperations.removeIfExists(finishedOperation)
                         checkIfFinished()
                     } else {
