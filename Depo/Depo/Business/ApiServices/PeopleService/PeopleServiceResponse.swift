@@ -56,3 +56,15 @@ class PeoplePageResponse: ObjectRequestResponse {
         }
     }
 }
+
+class FaceImageThumbnailsResponse: ObjectRequestResponse {
+    
+    var list: [String] = []
+    
+    override func mapping() {
+        if let result = json?.arrayObject as? [String] {
+            list = result
+        }
+    }
+
+}
