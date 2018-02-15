@@ -146,7 +146,7 @@ extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
         getContentWithSuccess(items: allItmes)
     }
     
-    func didMergePeople() {
+    func didReloadData() {
         reloadData()
     }
     
