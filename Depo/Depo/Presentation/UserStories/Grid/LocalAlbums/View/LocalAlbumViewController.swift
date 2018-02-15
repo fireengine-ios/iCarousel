@@ -14,6 +14,10 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
+        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -22,19 +26,12 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
     }
     
     override func configureNavBarActions(isSelecting: Bool = false) {
-        super.configureNavBarActions(isSelecting: isSelecting)
         visibleNavigationBarStyle()
         setNavigationTitle(title: mainTitle)
-        navigationItem.leftBarButtonItem = nil
-        navigationItem.rightBarButtonItems = nil
-        
-        cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
-        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
-        
+
         let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-        
         navigationItem.leftBarButtonItem = barButtonLeft
+        navigationItem.rightBarButtonItems = nil
     }
     
     @objc func onCancelButton(){
