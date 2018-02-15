@@ -15,8 +15,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     var navBarConfigurator = NavigationBarConfigurator()
 
     var refresher:UIRefreshControl!
-    
-    let floatingView = FloatingView()
         
     var cancelSelectionButton: UIBarButtonItem?
     
@@ -148,7 +146,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        floatingView.hideView(animated: true)
         output.viewWillDisappear()
     }
     

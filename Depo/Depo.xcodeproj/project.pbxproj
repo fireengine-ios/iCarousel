@@ -1975,7 +1975,6 @@
 		8C0E8EFB1FDEBDFF00789C91 /* UserInfoSubViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */; };
 		8C0E8EFC1FDEBDFF00789C91 /* UserInfoSubViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFC675B66399A57487FB85 /* UserInfoSubViewRouter.swift */; };
 		8C0E8EFD1FDEBDFF00789C91 /* UserInfoSubViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */; };
-		8C0E8EFE1FDEBDFF00789C91 /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F01F1CC3FD00F1257B /* FloatingView.swift */; };
 		8C0E8EFF1FDEBDFF00789C91 /* UserInfoSubViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26960B2B062ACC0F92ACEE26 /* UserInfoSubViewInitializer.swift */; };
 		8C0E8F001FDEBDFF00789C91 /* VisualMusicPlayerRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786971F3F38EF005CB432 /* VisualMusicPlayerRouterInput.swift */; };
 		8C0E8F011FDEBDFF00789C91 /* OfferParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56271F7553B500F49DA1 /* OfferParameters.swift */; };
@@ -2398,7 +2397,6 @@
 		8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
 		8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AB461FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift */; };
-		8CD8F4F11F1CC3FD00F1257B /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F01F1CC3FD00F1257B /* FloatingView.swift */; };
 		8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */; };
 		8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */; };
 		8CF792AB1F10C65E00007719 /* ContactSyncModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */; };
@@ -2959,6 +2957,10 @@
 		CEF0C2861FC549C400105C31 /* ImportFromInstagramInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */; };
 		CEF0C28A1FC594E300105C31 /* InstagramAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */; };
 		CEF0C28B1FC594E300105C31 /* InstagramAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */; };
+		CEF41E9B2035B2BF0008FCD5 /* PreventCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF41E9A2035B2BF0008FCD5 /* PreventCollectionView.swift */; };
+		CEF41E9C2035B2DB0008FCD5 /* PreventCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF41E9A2035B2BF0008FCD5 /* PreventCollectionView.swift */; };
+		CEF41E9D2035B2DF0008FCD5 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
+		CEF41E9E2035B2DF0008FCD5 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
 		CEF619EC1F79222600BECF03 /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF619EB1F79222600BECF03 /* AccountType.swift */; };
 		CEF69DDD1FB584CD00FCE6AB /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		CEF69DDF1FB584F700FCE6AB /* UploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */; };
@@ -4432,7 +4434,6 @@
 		8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetPresenterModuleInitialiser.swift; sourceTree = "<group>"; };
 		8CBA3E931EF5D0B100072983 /* ValidationResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResults.swift; sourceTree = "<group>"; };
 		8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationUserInfoModel.swift; sourceTree = "<group>"; };
-		8CD8F4F01F1CC3FD00F1257B /* FloatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingView.swift; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
@@ -4866,6 +4867,7 @@
 		CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramInteractor.swift; sourceTree = "<group>"; };
 		CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAuthViewController.swift; sourceTree = "<group>"; };
 		CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstagramAuthViewController.xib; sourceTree = "<group>"; };
+		CEF41E9A2035B2BF0008FCD5 /* PreventCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventCollectionView.swift; sourceTree = "<group>"; };
 		CEF619EB1F79222600BECF03 /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
 		CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseResult.swift; sourceTree = "<group>"; };
 		CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadResponse.swift; sourceTree = "<group>"; };
@@ -8631,7 +8633,6 @@
 		8CD8F4EF1F1CC3C100F1257B /* FloatingView */ = {
 			isa = PBXGroup;
 			children = (
-				8CD8F4F01F1CC3FD00F1257B /* FloatingView.swift */,
 				8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */,
 			);
 			path = FloatingView;
@@ -10446,6 +10447,15 @@
 			path = InstagramAuth;
 			sourceTree = "<group>";
 		};
+		CEF41E99203593BE0008FCD5 /* PhotoVideoDetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */,
+				CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */,
+			);
+			path = PhotoVideoDetailCell;
+			sourceTree = "<group>";
+		};
 		CF539B0CC93BBDEBCE241308 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -10480,8 +10490,8 @@
 				7A39EC58D2D1F5BD26616C89 /* PhotoVideoDetailViewController.swift */,
 				DAE9AC6D7DD62C5A26F74CFE /* PhotoVideoDetailViewInput.swift */,
 				DC47E8ECC19A0C3CC7C7CCEF /* PhotoVideoDetailViewOutput.swift */,
-				CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */,
-				CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */,
+				CEF41E9A2035B2BF0008FCD5 /* PreventCollectionView.swift */,
+				CEF41E99203593BE0008FCD5 /* PhotoVideoDetailCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -11599,6 +11609,7 @@
 				8C06AEF32008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
 				8C06B0C32008AD71003D8E05 /* sag_ok@2x.png in Resources */,
 				8C06AFDB2008AD71003D8E05 /* italic@2x.png in Resources */,
+				CEF41E9E2035B2DF0008FCD5 /* PhotoVideoDetailCell.xib in Resources */,
 				8C06B1C32008AD72003D8E05 /* lookup_soft_elegance_1.png in Resources */,
 				8C06B0E52008AD71003D8E05 /* sample_yellow.png in Resources */,
 				8C06B0DD2008AD71003D8E05 /* sample_red@2x.png in Resources */,
@@ -12869,6 +12880,7 @@
 				8C0E8DDC1FDEBDFF00789C91 /* TermsAndServicesRouter.swift in Sources */,
 				8C0E8DDD1FDEBDFF00789C91 /* TermsAndServicesConfigurator.swift in Sources */,
 				8C0E8DDE1FDEBDFF00789C91 /* TermsAndServicesInitializer.swift in Sources */,
+				CEF41E9C2035B2DB0008FCD5 /* PreventCollectionView.swift in Sources */,
 				8C0E8DDF1FDEBDFF00789C91 /* IntroduceViewInput.swift in Sources */,
 				4A8CC30C201A018000C040C4 /* FaceImageViewOutput.swift in Sources */,
 				8C0E8DE01FDEBDFF00789C91 /* IntroduceViewOutput.swift in Sources */,
@@ -13143,7 +13155,6 @@
 				8C0E8EFB1FDEBDFF00789C91 /* UserInfoSubViewRouterInput.swift in Sources */,
 				8C0E8EFC1FDEBDFF00789C91 /* UserInfoSubViewRouter.swift in Sources */,
 				8C0E8EFD1FDEBDFF00789C91 /* UserInfoSubViewConfigurator.swift in Sources */,
-				8C0E8EFE1FDEBDFF00789C91 /* FloatingView.swift in Sources */,
 				8C0E8EFF1FDEBDFF00789C91 /* UserInfoSubViewInitializer.swift in Sources */,
 				8C0E8F001FDEBDFF00789C91 /* VisualMusicPlayerRouterInput.swift in Sources */,
 				8C06AC262008AB8C003D8E05 /* FreeAppSpaceConfigurator.swift in Sources */,
@@ -13261,6 +13272,7 @@
 				8C0E8F591FDEBDFF00789C91 /* UsageInfoViewInput.swift in Sources */,
 				8C0E8F5A1FDEBDFF00789C91 /* CreateStoryPhotosOrderConfigurator.swift in Sources */,
 				8C0E8F5B1FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */,
+				CEF41E9D2035B2DF0008FCD5 /* PhotoVideoDetailCell.swift in Sources */,
 				8C0E8F5C1FDEBDFF00789C91 /* UploadFilesSelectionViewInput.swift in Sources */,
 				8C0E8F5D1FDEBDFF00789C91 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				8CD2B3B31FE7B41E00280547 /* PrepareToAutoSync.swift in Sources */,
@@ -13721,6 +13733,7 @@
 				CEC05B6A1F05399100332EBA /* PhoneVereficationDataStorage.swift in Sources */,
 				78E8E2B22023196B00A979AB /* FaceImagePhotosConfigurator.swift in Sources */,
 				8C00971A1F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift in Sources */,
+				CEF41E9B2035B2BF0008FCD5 /* PreventCollectionView.swift in Sources */,
 				CE51AC6C1EF90853005DCEE0 /* CurioPushData.m in Sources */,
 				8C6EF8811F348B5C002AC795 /* BottomSelectionTabBarViewController.swift in Sources */,
 				7C3A74361F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift in Sources */,
@@ -14123,7 +14136,6 @@
 				956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */,
 				0817E8DE5620F2988297FF52 /* UserInfoSubViewRouter.swift in Sources */,
 				1356E354CDA8AA7567B09334 /* UserInfoSubViewConfigurator.swift in Sources */,
-				8CD8F4F11F1CC3FD00F1257B /* FloatingView.swift in Sources */,
 				D73FF82F7346FCEFE69CD6B1 /* UserInfoSubViewInitializer.swift in Sources */,
 				8C7786A51F3F38F0005CB432 /* VisualMusicPlayerRouterInput.swift in Sources */,
 				CE2F56311F75549300F49DA1 /* OfferParameters.swift in Sources */,

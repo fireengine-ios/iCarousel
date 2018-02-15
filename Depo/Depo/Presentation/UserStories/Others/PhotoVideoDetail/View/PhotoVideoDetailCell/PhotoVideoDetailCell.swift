@@ -10,8 +10,6 @@ import UIKit
 
 protocol PhotoVideoDetailCellDelegate: class {
     func tapOnSelectedItem()
-    func pageToRight()
-    func pageToLeft()
 }
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
@@ -20,8 +18,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     @IBOutlet private weak var activity: UIActivityIndicatorView!
     @IBOutlet private weak var playVideoButton: UIButton!
     @IBOutlet private weak var webView: UIWebView!
-    
-    private var index: Int = -1
     
     weak var delegate: PhotoVideoDetailCellDelegate?
     
@@ -39,11 +35,10 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         imageScrollView.updateZoom()
     }
     
-    func setObject(object:Item, index: Int) {
+    func setObject(object:Item) {
         webView.isHidden = true
         imageScrollView.image = nil
         playVideoButton.isHidden = true
-        self.index = index
         
         if object.fileType == .video || object.fileType == .image {
             imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
