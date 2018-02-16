@@ -284,15 +284,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func deleteFromAlbums(items: [BaseDataSourceItem]){
         let okHandler: () -> Void = { [weak self] in
             self?.output?.operationStarted(type: .removeFromAlbum)
-            
-            var album = ""
-            
-            for item in items {
-                if let item = item as? WrapData, let albumID = item.albums?.first {
-                    album = albumID
-                    break
-                }
-            }
+            let album = RouterVC().getParentUUID()
             
             let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items as! [Item])
             PhotosAlbumService().deletePhotosFromAlbum(parameters: parameters, success: { [weak self] in

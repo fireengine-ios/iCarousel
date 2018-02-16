@@ -38,7 +38,7 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func newStoryCreated()
     
-    func updatedAlbumCoverPhoto(item: AlbumItem)
+    func updatedAlbumCoverPhoto(item: BaseDataSourceItem)
     
     func albumsDeleted(albums: [AlbumItem])
     
@@ -87,7 +87,7 @@ extension ItemOperationManagerViewProtocol {
     
     func newStoryCreated() {}
     
-    func updatedAlbumCoverPhoto(item: AlbumItem) {}
+    func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {}
     
     func albumsDeleted(albums: [AlbumItem]) {}
     
@@ -266,7 +266,7 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func updatedAlbumCoverPhoto(item: AlbumItem) {
+    func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
         DispatchQueue.main.async {
             for view in self.views{
                 view.updatedAlbumCoverPhoto(item: item)

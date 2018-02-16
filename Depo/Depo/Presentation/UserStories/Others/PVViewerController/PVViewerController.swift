@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PVViewerController: UIViewController, NibInit {
+final class PVViewerController: BaseViewController, NibInit {
     
     @IBOutlet private weak var imageScrollView: ImageScrollView!
     
