@@ -44,6 +44,11 @@ class ItemSyncServiceImpl: ItemSyncService {
     var localItemsMD5s: [String] = []
     var lastSyncedMD5s: [String] = []
     
+    var photoVideoService: PhotoAndVideoService {
+        let fieldValue: FieldValue = (fileType == .image) ? .image : .video
+        return PhotoAndVideoService(requestSize: NumericConstants.numberOfElementsInSyncRequest, type: fieldValue)
+    }
+    
     weak var delegate: ItemSyncServiceDelegate?
     
     
@@ -90,15 +95,20 @@ class ItemSyncServiceImpl: ItemSyncService {
         status = .prepairing
         
         localItems.removeAll()
-        localItems = self.itemsSortedToUpload()
-        lastSyncedMD5s = self.localItems.map({ $0.md5 })
-        
-        guard !localItems.isEmpty else {
-            status = .synced
-            return
+        self.itemsSortedToUpload { (items) in
+            if self.status == .prepairing {
+                self.localItems = items
+                self.lastSyncedMD5s = self.localItems.map({ $0.md5 })
+                
+                guard !self.localItems.isEmpty else {
+                    self.status = .synced
+                    return
+                }
+                
+                self.upload(items: self.localItems)
+            }
         }
         
-        upload(items: self.localItems)
     }
     
     private func upload(items: [WrapData]) {
@@ -144,15 +154,15 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
-        let localUnsynced = itemsSortedToUpload()
-        
-        let newUnsyncedLocalItems = localUnsynced.filter({ !self.lastSyncedMD5s.contains($0.md5) })
-        
-        guard !newUnsyncedLocalItems.isEmpty else {
-            return
+        itemsSortedToUpload { (items) in
+            let newUnsyncedLocalItems = items.filter({ !self.lastSyncedMD5s.contains($0.md5) })
+            
+            guard !newUnsyncedLocalItems.isEmpty else {
+                return
+            }
+            
+            self.upload(items: newUnsyncedLocalItems)
         }
-        
-        self.upload(items: newUnsyncedLocalItems)
     }
     
     private func postNotification() {
@@ -164,8 +174,8 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     //MARK: - Override me
     
-    func itemsSortedToUpload() -> [WrapData] {
-        return []
+    func itemsSortedToUpload(completion: @escaping (_ items: [WrapData])->Void) {
+        //
     }
 
 }
@@ -173,31 +183,23 @@ class ItemSyncServiceImpl: ItemSyncService {
 
 
 extension CoreDataStack {
-    func getLocalUnsynced(fieldValue: FieldValue) -> [WrapData] {
-        var itemsToReturn = [WrapData]()
-        let semaphore = DispatchSemaphore(value: 0)
+    func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData])->Void) {
         DispatchQueue.main.async {
             let localItems = self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
             
-            let service = PhotoAndVideoService(requestSize: NumericConstants.numberOfElementsInSyncRequest, type: fieldValue)
-            
-            let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")
-            queue.async {
+            self.queue.async {
                 self.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { (items, error) in
                     guard error == nil, let unsyncedItems = items else {
                         print(error!.localizedDescription)
-                        semaphore.signal()
+                        completion([])
                         return
                     }
                     
-                    itemsToReturn = unsyncedItems
-                    semaphore.signal()
+                    completion(unsyncedItems)
                 }
             }
+            
         }
-        semaphore.wait()
-        
-        return itemsToReturn
     }
     
     private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?)->() ) {
