@@ -20,7 +20,7 @@ class SyncServiceManager {
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
-        queue.underlyingQueue = dispatchQueue
+//        queue.underlyingQueue = dispatchQueue
         return queue
     }()
     

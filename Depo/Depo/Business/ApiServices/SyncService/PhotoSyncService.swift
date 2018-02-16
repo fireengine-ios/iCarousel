@@ -16,10 +16,10 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         self.fileType = .image
     }
     
-    override func itemsSortedToUpload() -> [WrapData] {
-        return CoreDataStack.default.getLocalUnsynced(fieldValue: .image)
-            .filter { $0.fileSize < NumericConstants.fourGigabytes }
-            .sorted(by: { $0.metaDate > $1.metaDate } )
+    override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData])->Void) {
+        CoreDataStack.default.getLocalUnsynced(fieldValue: .image, service: photoVideoService) { (items) in
+            completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.metaDate > $1.metaDate }))
+        }
     }
     
     override func stop() {
@@ -44,6 +44,7 @@ final class PhotoSyncService: ItemSyncServiceImpl {
             return
         }
         
+        photoVideoService.stopAllOperations()
         UploadService.default.cancelSyncOperations(photo: true, video: false)
     }
 }

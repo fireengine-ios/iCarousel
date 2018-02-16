@@ -51,6 +51,9 @@ class CoreDataStack: NSObject {
     
     var backgroundContext: NSManagedObjectContext
     
+    let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")
+    
+    
     override init() {
 
         mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
