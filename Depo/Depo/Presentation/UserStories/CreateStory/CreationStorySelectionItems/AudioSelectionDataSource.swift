@@ -13,8 +13,7 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
         super.setupCollectionView(collectionView: collectionView, filters: [.fileType(.audio)])
-        let nib = UINib(nibName: CollectionViewCellsIdsConstant.audioSelectionCell, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.audioSelectionCell)
+        collectionView.register(nibCell: AudioSelectionCollectionViewCell.self)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
