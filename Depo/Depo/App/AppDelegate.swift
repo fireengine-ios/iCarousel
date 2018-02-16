@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     var window: UIWindow?
     
@@ -88,7 +89,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         firstResponder = application.firstResponder
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
+        
+        if tokenStorage.refreshToken != nil {
+            LocationManager.shared.startUpdateLocation()
+        }
     }
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillEnterForeground")
 
@@ -132,7 +138,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         log.debug("AppDelegate applicationDidBecomeActive")
-        LocationManager.shared.startUpdateLocation()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
