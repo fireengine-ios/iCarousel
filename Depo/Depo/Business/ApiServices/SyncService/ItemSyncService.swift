@@ -187,8 +187,8 @@ extension CoreDataStack {
         DispatchQueue.main.async {
             let localItems = self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
             
-            self.queue.async {
-                self.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { (items, error) in
+            self.queue.async { [weak self] in
+                self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { (items, error) in
                     guard error == nil, let unsyncedItems = items else {
                         print(error!.localizedDescription)
                         completion([])
