@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ThingsService: BaseRequestService {
+final class ThingsService: BaseRequestService {
 
     func getThingsList(param: ThingsParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
         log.debug("SearchService suggestion")
@@ -39,7 +39,7 @@ class ThingsService: BaseRequestService {
     }
 }
 
-class ThingsParameters: BaseRequestParametrs {
+final class ThingsParameters: BaseRequestParametrs {
     override var patch: URL {
         let searchWithParam = String(format:RouteRequests.things)
         
@@ -47,8 +47,8 @@ class ThingsParameters: BaseRequestParametrs {
     }
 }
 
-class ThingsItemsService: RemoteItemsService {
-    let service = ThingsService()
+final class ThingsItemsService: RemoteItemsService {
+    private let service = ThingsService()
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .image)
@@ -70,8 +70,8 @@ class ThingsItemsService: RemoteItemsService {
     }
 }
 
-class ThingsItem: Item {
-    let responseObject: ThingsItemResponse
+final class ThingsItem: Item {
+    private let responseObject: ThingsItemResponse
     
     init(response: ThingsItemResponse) {
         responseObject = response
@@ -79,8 +79,8 @@ class ThingsItem: Item {
     }
 }
 
-class ThingsAlbumParameters: BaseRequestParametrs {
-    let id: Int
+final class ThingsAlbumParameters: BaseRequestParametrs {
+    private let id: Int
     
     init(id: Int) {
         self.id = id
@@ -92,7 +92,7 @@ class ThingsAlbumParameters: BaseRequestParametrs {
     }
 }
 
-class ThingsPageParameters: BaseRequestParametrs {
+final class ThingsPageParameters: BaseRequestParametrs {
     let pageSize: Int
     let pageNumber: Int
     

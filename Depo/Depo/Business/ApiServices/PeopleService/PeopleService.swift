@@ -8,23 +8,63 @@
 
 import UIKit
 
-class PeopleService: BaseRequestService {
+enum FaceImageType {
+    case people
+    case places
+    case things
+}
+
+final class FaceImageService: BaseRequestService {
+    
+    func getThumbnails(param: FaceImageThumbnailsParameters, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
+        log.debug("FaceImageService Thumbnails")
+        
+        let handler = BaseResponseHandler<FaceImageThumbnailsResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+}
+
+final class FaceImageThumbnailsParameters: BaseRequestParametrs {
+    
+    private let type: FaceImageType
+    
+    init(withType type: FaceImageType) {
+        self.type = type
+    }
+    
+    override var patch: URL {
+        let format: String
+        switch type {
+            case .people: format = RouteRequests.peopleThumbnails
+            case .places: format = RouteRequests.placesThumbnails
+            case .things: format = RouteRequests.thingsThumbnails
+        }
+        
+        let searchWithParam = String(format: format)
+        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+    }
+}
+
+
+final class PeopleService: BaseRequestService {
     
     func getPeopleList(param: PeopleParameters, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
-        log.debug("SearchService suggestion")
+        log.debug("PeopleService getPeopleList")
         
         let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func getPeoplePage(param: PeoplePageParameters, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
-        log.debug("SearchService suggestion")
+        log.debug("PeopleService getPeoplePage")
         
         let handler = BaseResponseHandler<PeoplePageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func getPeopleAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+        log.debug("PeopleService getPeopleAlbum")
+        
         let param = PeopleAlbumParameters(id: id)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
@@ -39,6 +79,8 @@ class PeopleService: BaseRequestService {
     }
     
     func getAlbumsForPeopleItemWithID(_ id: Int, success: @escaping (_ albums: [AlbumServiceResponse]) -> Void, fail: @escaping FailResponse) {
+        log.debug("PeopleService getAlbumsForPeopleItemWithID")
+        
         let param = PeopleAlbumsParameters(id: id)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
@@ -53,6 +95,8 @@ class PeopleService: BaseRequestService {
     }
     
     func searchPeople(text: String, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+        log.debug("PeopleService searchPeople")
+        
         let param = PeopleSearchParameters(text: text)
         
         let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -60,6 +104,8 @@ class PeopleService: BaseRequestService {
     }
     
     func changePeopleVisibility(peoples: [PeopleItem], success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+        log.debug("PeopleService changePeopleVisibility")
+        
         let param = PeopleChangeVisibilityParameters(peoples: peoples)
         
         let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -67,6 +113,8 @@ class PeopleService: BaseRequestService {
     }
     
     func mergePeople(personId: Int64, targetPersonId: Int64, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+        log.debug("PeopleService mergePeople")
+        
         let param = PeopleMergeParameters(personId: personId, targetPersonId: targetPersonId)
 
         let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -74,6 +122,8 @@ class PeopleService: BaseRequestService {
     }
     
     func changePeopleName(personId: Int64, name: String, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+        log.debug("PeopleService changePeopleName")
+        
         let param = PeopleChangeNameParameters(personId: personId, name: name)
         
         let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -81,7 +131,7 @@ class PeopleService: BaseRequestService {
     }
 }
 
-class PeopleItemsService: RemoteItemsService {
+final class PeopleItemsService: RemoteItemsService {
     let service = PeopleService()
     
     init(requestSize: Int) {
@@ -117,14 +167,14 @@ class PeopleItemsService: RemoteItemsService {
 
 }
 
-class PeopleParameters: BaseRequestParametrs {
+final class PeopleParameters: BaseRequestParametrs {
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.people)
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }
 
-class PeopleAlbumParameters: BaseRequestParametrs {
+final class PeopleAlbumParameters: BaseRequestParametrs {
     let id: Int
     
     init(id: Int) {
@@ -137,7 +187,7 @@ class PeopleAlbumParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleAlbumsParameters: BaseRequestParametrs {
+final class PeopleAlbumsParameters: BaseRequestParametrs {
     let id: Int
     
     init(id: Int) {
@@ -150,7 +200,7 @@ class PeopleAlbumsParameters: BaseRequestParametrs {
     }
 }
 
-class PeoplePageParameters: BaseRequestParametrs {
+final class PeoplePageParameters: BaseRequestParametrs {
     let pageSize: Int
     let pageNumber: Int
     
@@ -165,7 +215,7 @@ class PeoplePageParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleChangeVisibilityParameters: BaseRequestParametrs {
+final class PeopleChangeVisibilityParameters: BaseRequestParametrs {
     let peoples: [PeopleItem]
     
     init(peoples: [PeopleItem]) {
@@ -191,7 +241,7 @@ class PeopleChangeVisibilityParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleSearchParameters: BaseRequestParametrs {
+final class PeopleSearchParameters: BaseRequestParametrs {
     let text: String
     
     init(text: String) {
@@ -200,11 +250,11 @@ class PeopleSearchParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleSearch, text)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL.encodingURL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }
 
-class PeopleMergeParameters: BaseRequestParametrs {
+final class PeopleMergeParameters: BaseRequestParametrs {
     let personId: Int64
     let targetPersonId: Int64
     
@@ -223,7 +273,7 @@ class PeopleMergeParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleChangeNameParameters: BaseRequestParametrs {
+final class PeopleChangeNameParameters: BaseRequestParametrs {
     let personId: Int64
     let name: String
     
@@ -242,7 +292,7 @@ class PeopleChangeNameParameters: BaseRequestParametrs {
     }
 }
 
-class PeopleItem: Item {
+final class PeopleItem: Item {
     let responseObject: PeopleItemResponse
     
     init(response: PeopleItemResponse) {

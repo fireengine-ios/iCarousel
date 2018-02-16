@@ -28,7 +28,7 @@ class PeopleAlbumSliderInteractor: LBAlbumLikePreviewSliderInteractor {
             })
             
             if let currentItems = self?.currentItems {
-                self?.output.operationSuccessed(withItems: currentItems)
+                self?.output?.operationSuccessed(withItems: currentItems)
             }
             
         }, fail: { [weak self] error in

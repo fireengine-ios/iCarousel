@@ -16,7 +16,7 @@ struct ThingsJsonKey {
     static let objectInfos = "objectInfos"
 }
 
-class ThingsItemResponse: ObjectRequestResponse {
+final class ThingsItemResponse: ObjectRequestResponse {
     
     var id: Int64?
     var code: String?
@@ -32,7 +32,7 @@ class ThingsItemResponse: ObjectRequestResponse {
     }
 }
 
-class ThingsServiceResponse: ObjectRequestResponse {
+final class ThingsServiceResponse: ObjectRequestResponse {
     var list: Array<ThingsItemResponse> = []
     
     override func mapping() {
@@ -42,7 +42,7 @@ class ThingsServiceResponse: ObjectRequestResponse {
     }
 }
 
-class ThingsPageResponse: ObjectRequestResponse {
+final class ThingsPageResponse: ObjectRequestResponse {
     var list: [ThingsItemResponse] = []
     
     override func mapping() {

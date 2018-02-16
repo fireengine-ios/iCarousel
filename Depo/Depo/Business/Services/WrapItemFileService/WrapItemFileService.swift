@@ -21,7 +21,7 @@ protocol  WrapItemFileOperations {
     
     func copy(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?)
     
-    func upload(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?)
+    func upload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
     
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?)
     
@@ -106,7 +106,7 @@ class WrapItemFileService: WrapItemFileOperations {
         remoteFileService.copy(copyparam: param, success: success, fail: fail)
     }
     
-    func upload(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
+    func upload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
         let localFiles = localWrapedData(files: items)
         
         uploadService.uploadFileList(items: localFiles,
@@ -117,10 +117,10 @@ class WrapItemFileService: WrapItemFileOperations {
                                      fail: fail)
     }
     
-    func syncItemsIfNeeded(_ items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) -> [UploadOperations]? {
+    func syncItemsIfNeeded(_ items: [WrapData], success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
         let localFiles = localWrapedData(files: items)
         guard localFiles.count > 0 else {
-            success?()
+            success()
             return nil
         }
 
@@ -139,7 +139,7 @@ class WrapItemFileService: WrapItemFileOperations {
                                                 if error.description == TextConstants.canceledOperationTextError {
                                                     return
                                                 }
-                                                fail?(error)
+                                                fail(error)
         })
     }
     

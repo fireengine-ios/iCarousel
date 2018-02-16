@@ -27,6 +27,8 @@ final class FaceImageViewController: UIViewController {
         super.viewDidLoad()
                 
         activityManager.delegate = self
+        
+        faceImageAllowedLabel.text = TextConstants.faceImageGrouping
 
         configureNavBar()
 
