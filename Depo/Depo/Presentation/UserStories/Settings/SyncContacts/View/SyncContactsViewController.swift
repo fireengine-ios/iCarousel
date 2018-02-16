@@ -209,7 +209,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         }
 
         
-        let t = String.init(format: template, response.totalNumberOfContacts)
+        let t = String(format: template, response.totalNumberOfContacts)
         let text = t as NSString
         let attributedText = NSMutableAttributedString(string: t)
         

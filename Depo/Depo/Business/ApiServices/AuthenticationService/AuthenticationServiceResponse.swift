@@ -21,7 +21,7 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
             
             /// JSON(data: data) can not correct string
             if ((json?.count)!>0  && jsonFromData.type == Type.null){
-                jsonString = String.init(data: json! as Data, encoding: .utf8)
+                jsonString = String(data: json! as Data, encoding: .utf8)
             }
             
         } else {
