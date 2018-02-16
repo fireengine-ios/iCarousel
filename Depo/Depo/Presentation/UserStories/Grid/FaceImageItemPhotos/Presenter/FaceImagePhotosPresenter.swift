@@ -12,7 +12,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
 
     weak var faceImageItemsModuleOutput: FaceImageItemsModuleOutput?
     
-    var coverPhotoURL = URL(string: "")
+    var coverPhoto: Item?
     var item: Item
     
     init(item: Item) {
@@ -52,11 +52,17 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         
         view.loadAlbumsForPeopleItem(item)
         
-        if let url = coverPhotoURL {
-            view.setHeaderImage(with: url)
+        if let path = coverPhoto?.patchToPreview {
+            view.setHeaderImage(with: path)
         }
         
         view.setHeaderViewHidden(false)
+    }
+    
+    func updateCoverPhotoIfNeeded() {
+        if let interactor = interactor as? FaceImagePhotosInteractor {
+            interactor.updateCoverPhotoIfNeeded()
+        }
     }
 }
 
@@ -65,8 +71,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
 extension FaceImagePhotosPresenter: FaceImageChangeCoverModuleOutput {
     
     func onAlbumCoverSelected(item: WrapData) {
-        if let view = view as? FaceImagePhotosViewController, let coverURL = item.tmpDownloadUrl {
-            view.setHeaderImage(with: coverURL)
+        if let view = view as? FaceImagePhotosViewController {
+            view.setHeaderImage(with: item.patchToPreview)
         }
     }
     

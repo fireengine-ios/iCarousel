@@ -10,7 +10,7 @@
 import UIKit
 
 protocol FaceImagePhotosViewInput: class {
-    func setHeaderImage(with url: URL)
+    func setHeaderImage(with path: PathForItem)
     func loadAlbumsForPeopleItem(_ peopleItem: PeopleItem)
     func setHeaderViewHidden(_ isHidden: Bool)
     func reloadName(_ name: String)
