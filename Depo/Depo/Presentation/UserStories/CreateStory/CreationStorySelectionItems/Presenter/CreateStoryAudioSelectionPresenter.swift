@@ -37,11 +37,7 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
         guard  let story = photoStory else {
             return
         }
-        let array = dataSource.getSelectedItems()
-        if (array.count > 0){
-            guard let music = array.first! as? Item else{
-                return
-            }
+        if (dataSource.selectedItemsArray.count > 0), let music = dataSource.selectedItemsArray.first! as? Item{
             story.music = music
             if let viewController = view as? CreateStoryAudioSelectionViewController{
                viewController.hideView()
