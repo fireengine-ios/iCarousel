@@ -45,18 +45,12 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
             return
         }
         
-        guard let item = item as? PeopleItem else {
-            view.setHeaderViewHidden(true)
-            return
-        }
-        
-        view.loadAlbumsForPeopleItem(item)
+        view.setupHeader(forPeopleItem: item as? PeopleItem)
         
         if let path = coverPhoto?.patchToPreview {
             view.setHeaderImage(with: path)
         }
-        
-        view.setHeaderViewHidden(false)
+ 
     }
     
     func updateCoverPhotoIfNeeded() {
