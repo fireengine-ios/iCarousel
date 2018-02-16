@@ -16,7 +16,7 @@ import UIKit
     private var albumsSlider: LBAlbumLikePreviewSliderViewController?
     private var albumsSliderModule: LBAlbumLikePreviewSliderPresenter?
     private var headerView = UIView()
-    private var headerImage = UIImageView()
+    private var headerImage = LoadingImageView()
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
     
@@ -111,7 +111,7 @@ import UIKit
     }
     
     private func createHeaderImage() {
-        headerImage = UIImageView()
+        headerImage = LoadingImageView()
         headerImage.translatesAutoresizingMaskIntoConstraints = false
         headerImage.contentMode = .scaleAspectFill
         headerImage.clipsToBounds = true
@@ -132,11 +132,9 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         
         setTitle(withString: mainTitle)
     }
-        
-    func setHeaderImage(with url: URL) {
-        headerImage.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in
-            self?.headerImage.image = image
-        }
+    
+    func setHeaderImage(with path: PathForItem) {
+        headerImage.loadImageByPath(path_: path)
     }
     
     func loadAlbumsForPeopleItem(_ peopleItem: PeopleItem) {

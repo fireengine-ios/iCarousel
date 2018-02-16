@@ -38,6 +38,7 @@ enum BaseDataSourceDisplayingType{
     
     @objc optional func didChangeSelection(state: Bool)
     
+    @objc optional func updateCoverPhotoIfNeeded()
 }
 
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
@@ -1400,9 +1401,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func updateCoverPhoto() {
-        if let delegate = delegate as? AlbumDetailPresenter {
-            delegate.updateCoverPhotoIfNeeded()
-        }
+        delegate?.updateCoverPhotoIfNeeded?()
     }
     
 }

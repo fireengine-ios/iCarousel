@@ -10,7 +10,7 @@ import UIKit
 
 final class FaceImagePhotosConfigurator {
     
-    func configure(viewController: FaceImagePhotosViewController, albumUUID: String, item: Item, coverPhotoURL: URL, moduleOutput: FaceImageItemsModuleOutput?) {
+    func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) {
         let router = FaceImagePhotosRouter()
         router.view = viewController
         
@@ -30,10 +30,11 @@ final class FaceImagePhotosConfigurator {
         presenter.router = router
         presenter.faceImageItemsModuleOutput = moduleOutput
         
-        let remoteServices = FaceImageDetailService(albumUUID: albumUUID, requestSize: 40)
+        let remoteServices = FaceImageDetailService(albumUUID: album.uuid, requestSize: 40)
         
         let interactor = FaceImagePhotosInteractor(remoteItems: remoteServices)
         interactor.output = presenter
+        interactor.album = album
         interactor.alertSheetConfig = alertSheetConfig
         
         presenter.interactor = interactor
@@ -52,6 +53,6 @@ final class FaceImagePhotosConfigurator {
         viewController.mainTitle = item.name ?? ""
         
         presenter.item = item
-        presenter.coverPhotoURL = coverPhotoURL
+        presenter.coverPhoto = album.preview
     }
 }
