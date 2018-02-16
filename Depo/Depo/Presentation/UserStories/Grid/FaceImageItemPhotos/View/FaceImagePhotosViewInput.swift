@@ -11,7 +11,6 @@ import UIKit
 
 protocol FaceImagePhotosViewInput: class {
     func setHeaderImage(with path: PathForItem)
-    func loadAlbumsForPeopleItem(_ peopleItem: PeopleItem)
-    func setHeaderViewHidden(_ isHidden: Bool)
+    func setupHeader(forPeopleItem item: PeopleItem?)
     func reloadName(_ name: String)
 }
