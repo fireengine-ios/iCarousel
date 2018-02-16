@@ -16,7 +16,7 @@ import UIKit
     private var albumsSlider: LBAlbumLikePreviewSliderViewController?
     private var albumsSliderModule: LBAlbumLikePreviewSliderPresenter?
     private var headerView = UIView()
-    private var headerImage = UIImageView()
+    private var headerImage = LoadingImageView()
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
     
@@ -63,13 +63,9 @@ import UIKit
         navigationItem.titleView?.addGestureRecognizer(tap)
     }
     
-    // MARK: - FaceImagePhotosViewInput
-    
-    
-    
     // MARK: - Header View Methods
     
-    private func setupHeaderViewWith(peopleItem: PeopleItem) {
+    private func setupHeaderViewWith(peopleItem: PeopleItem?) {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.addSubview(headerView)
         headerView.bottomAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
@@ -82,19 +78,23 @@ import UIKit
         headerImage.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
         headerImage.leftAnchor.constraint(equalTo: headerView.leftAnchor).isActive = true
         headerImage.rightAnchor.constraint(equalTo: headerView.rightAnchor).isActive = true
-        headerImageHeightConstraint = headerImage.heightAnchor.constraint(equalToConstant: 0)
+        headerImageHeightConstraint = headerImage.heightAnchor.constraint(equalToConstant: headerImageHeight)
         headerImageHeightConstraint?.isActive = true
         
-        createAlbumsSliderWith(peopleItem: peopleItem)
-        if let albumsView = albumsSlider?.view {
-            albumsView.translatesAutoresizingMaskIntoConstraints = false
-            headerView.addSubview(albumsView)
-            headerImage.bottomAnchor.constraint(equalTo: albumsView.topAnchor).isActive = true
-            albumsView.leftAnchor.constraint(equalTo: headerView.leftAnchor).isActive = true
-            albumsView.rightAnchor.constraint(equalTo: headerView.rightAnchor).isActive = true
-            albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
-            albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
-            albumsHeightConstraint?.isActive = true
+        if let peopleItem = peopleItem {
+            createAlbumsSliderWith(peopleItem: peopleItem)
+            if let albumsView = albumsSlider?.view {
+                albumsView.translatesAutoresizingMaskIntoConstraints = false
+                headerView.addSubview(albumsView)
+                headerImage.bottomAnchor.constraint(equalTo: albumsView.topAnchor).isActive = true
+                albumsView.leftAnchor.constraint(equalTo: headerView.leftAnchor).isActive = true
+                albumsView.rightAnchor.constraint(equalTo: headerView.rightAnchor).isActive = true
+                albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+                albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: albumsSliderHeight)
+                albumsHeightConstraint?.isActive = true
+            }
+        } else {
+            headerImage.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
         }
     }
     
@@ -111,14 +111,14 @@ import UIKit
     }
     
     private func createHeaderImage() {
-        headerImage = UIImageView()
+        headerImage = LoadingImageView()
         headerImage.translatesAutoresizingMaskIntoConstraints = false
         headerImage.contentMode = .scaleAspectFill
         headerImage.clipsToBounds = true
     }
     
     private func updateHeaderPosition() {
-        collectionView.contentInset.top = headerView.frame.height;
+        collectionView.contentInset.top = headerView.frame.height
     }
     
 }
@@ -132,28 +132,13 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         
         setTitle(withString: mainTitle)
     }
-        
-    func setHeaderImage(with url: URL) {
-        headerImage.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in
-            self?.headerImage.image = image
-        }
+    
+    func setHeaderImage(with path: PathForItem) {
+        headerImage.loadImageByPath(path_: path)
     }
     
-    func loadAlbumsForPeopleItem(_ peopleItem: PeopleItem) {
-        setupHeaderViewWith(peopleItem: peopleItem)
-    }
-    
-    func setHeaderViewHidden(_ isHidden: Bool) {
-        if isHidden {
-            albumsHeightConstraint?.constant = 0
-            headerImageHeightConstraint?.constant = 0
-        } else {
-            albumsHeightConstraint?.constant = albumsSliderHeight
-            headerImageHeightConstraint?.constant = headerImageHeight
-        }
-        
-        albumsSlider?.view.isHidden = isHidden
-        headerImage.isHidden = isHidden
+    func setupHeader(forPeopleItem item: PeopleItem?) {
+        setupHeaderViewWith(peopleItem: item)
     }
     
 }

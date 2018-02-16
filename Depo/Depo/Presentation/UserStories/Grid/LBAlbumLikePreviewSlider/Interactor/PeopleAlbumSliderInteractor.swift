@@ -22,18 +22,20 @@ class PeopleAlbumSliderInteractor: LBAlbumLikePreviewSliderInteractor {
             return
         }
         peopleService.getAlbumsForPeopleItemWithID(Int(id), success: { [weak self] (albums) in
-            let albumItems = albums.map({ AlbumItem(remote: $0) })
-            albumItems.forEach({ (album) in
-                self?.dataStorage.addNew(item: SliderItem(withAlbum: album))
-            })
+            self?.currentItems = albums.flatMap { SliderItem(withAlbum: AlbumItem(remote: $0)) }
             
             if let currentItems = self?.currentItems {
-                self?.output.operationSuccessed(withItems: currentItems)
+                DispatchQueue.main.async {
+                    self?.output?.operationSuccessed(withItems: currentItems)
+                }
             }
             
-        }, fail: { [weak self] error in
-            self?.output.operationFailed()
+            }, fail: { [weak self] error in
+                self?.output.operationFailed()
         })
     }
     
+    override func newStoryCreated() { }
+    
 }
+

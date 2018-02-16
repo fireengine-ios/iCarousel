@@ -38,6 +38,7 @@ enum BaseDataSourceDisplayingType{
     
     @objc optional func didChangeSelection(state: Bool)
     
+    @objc optional func updateCoverPhotoIfNeeded()
 }
 
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
@@ -261,6 +262,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if !isPaginationDidEnd {
             guard let lastRemoteObject = getLastNonMetaEmptyItem(items: originalItemsArray) else {
+                allLocalItems.removeAll()
                 return originalItemsArray + tempoLocalArray
             }
             for localItem in tempoLocalArray {
@@ -1225,7 +1227,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         updateCellsForObjects(objectsForDelete: objectsForRemoving, objectsForUpdate: localObjectsForReplace)
     }
     
-    private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]) {
+    private func updateCellsForObjects(objectsForDelete: [BaseDataSourceItem], objectsForUpdate:[BaseDataSourceItem]) {
         if objectsForDelete.isEmpty && objectsForUpdate.isEmpty {
             return
         }
@@ -1302,8 +1304,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func updatedAlbumCoverPhoto(item: AlbumItem) {
-        
+    func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
+        updateCellsForObjects(objectsForDelete: [BaseDataSourceItem](), objectsForUpdate: [item])
     }
     
     func albumsDeleted(albums: [AlbumItem]) {
@@ -1400,9 +1402,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func updateCoverPhoto() {
-        if let delegate = delegate as? AlbumDetailPresenter {
-            delegate.updateCoverPhotoIfNeeded()
-        }
+        delegate?.updateCoverPhotoIfNeeded?()
     }
     
 }
