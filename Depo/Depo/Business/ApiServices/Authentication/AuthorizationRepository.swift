@@ -1,5 +1,5 @@
 //
-//  AuthorizationManager.swift
+//  AuthorizationRepository.swift
 //  LifeBox-new
 //
 //  Created by Bondar Yaroslav on 10/10/2017.
@@ -77,11 +77,12 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             completion(false, 0.0)
             return
         }
-        
-        if request.request?.url?.absoluteString.contains("account/info") == true {
-            completion(false, 0.0)
-            return
-        }
+
+        /// maybe will be need
+//        if tokenStorage.refreshToken == nil, request.request?.url?.absoluteString.contains("account/info") == true {
+//            completion(false, 0.0)
+//            return
+//        }
         
         /// if accessToken is valid
         guard response.statusCode == 401 else {
