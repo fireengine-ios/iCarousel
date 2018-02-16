@@ -9,8 +9,12 @@
 import UIKit
 
 protocol LoadingImageViewDelegate: class{
-    func onImageLoaded()
+    func onImageLoaded(image: UIImage?)
     func onLoadingImageCanceled()
+}
+extension LoadingImageViewDelegate {
+    func onImageLoaded(image: UIImage?) {}
+    func onLoadingImageCanceled() {}
 }
 
 class LoadingImageView: UIImageView {
@@ -163,7 +167,7 @@ class LoadingImageView: UIImageView {
         }
         path = nil
         url = nil
-        delegate?.onImageLoaded()
+        delegate?.onImageLoaded(image: image)
     }
 
 }

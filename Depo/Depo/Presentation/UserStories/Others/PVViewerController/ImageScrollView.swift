@@ -10,11 +10,21 @@ import UIKit
 
 final class ImageScrollView: UIScrollView {
     
-    private(set) var imageView = UIImageView()
+    private(set) var imageView = LoadingImageView()
     
-    var image = UIImage() {
+    var image: UIImage? {
         didSet {
+            guard let image = image else {
+                imageView.image = nil
+                imageView.frame = .zero
+                contentSize = .zero
+                maximumZoomScale = 1
+                minimumZoomScale = 1
+                zoomScale = 1
+                return
+            }
             imageView.image = image
+            imageView.frame.origin = .zero
             imageView.frame.size = image.size
             contentSize = image.size
         }
@@ -22,6 +32,7 @@ final class ImageScrollView: UIScrollView {
     
     private let maxScaleFromMinScale: CGFloat = 5.0
     private let multiplyScrollGuardFactor: CGFloat = 0.999
+    private let zoomFactorFromMinWhenDoubleTap: CGFloat = 2
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,14 +50,50 @@ final class ImageScrollView: UIScrollView {
         bouncesZoom = true
         decelerationRate = UIScrollViewDecelerationRateFast
         
-        addSubview(imageView)
+        
+        imageView.frame = bounds
+//        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         imageView.isUserInteractionEnabled = true
+        addSubview(imageView)
+        addDoubleTapZoom()
+    }
+    
+    private func addDoubleTapZoom() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognizer))
+        tapGesture.numberOfTapsRequired = 2
+        imageView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func doubleTapGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
+        // zoom out if it bigger than middle scale point. Else, zoom in
+        if zoomScale > minimumZoomScale {
+            setZoomScale(minimumZoomScale, animated: true)
+        } else {
+            let center = gestureRecognizer.location(in: gestureRecognizer.view)
+            let zoomRect = zoomRectForScale(zoomFactorFromMinWhenDoubleTap * minimumZoomScale, center: center)
+            zoom(to: zoomRect, animated: true)
+        }
+    }
+    
+    fileprivate func zoomRectForScale(_ scale: CGFloat, center: CGPoint) -> CGRect {
+        var zoomRect = CGRect.zero
+        
+        zoomRect.size.height = frame.height / scale
+        zoomRect.size.width  = frame.width  / scale
+        
+        zoomRect.origin.x = center.x - (zoomRect.width  / 2.0)
+        zoomRect.origin.y = center.y - (zoomRect.height / 2.0)
+        
+        return zoomRect
     }
     
     func updateZoom() {
+        guard let image = image else {
+            return
+        }
         setMaxMinZoomScales(for: image.size)
     }
-    
+     
     private func setMaxMinZoomScales(for imageSize: CGSize) {
         let xScale = bounds.width / imageSize.width
         let yScale = bounds.height / imageSize.height
@@ -88,3 +135,4 @@ final class ImageScrollView: UIScrollView {
         imageView.frame = frameToCenter
     }
 }
+

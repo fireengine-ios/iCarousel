@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13529"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="ZzB-kC-yvt" id="Ggb-ac-yeQ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kbZ-Zd-ek1"/>
-                <outlet property="viewForContent" destination="Mzo-qJ-vRH" id="a8n-7t-F9A"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,17 +20,24 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mzo-qJ-vRH">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-kC-yvt" customClass="PreventCollectionView" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zTm-wi-nWa">
+                        <size key="itemSize" width="161" height="137"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Mzo-qJ-vRH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ww2-Ky-awz"/>
-                <constraint firstAttribute="trailing" secondItem="Mzo-qJ-vRH" secondAttribute="trailing" id="tQ9-gc-PpY"/>
-                <constraint firstItem="Mzo-qJ-vRH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uy6-Ja-8MB"/>
-                <constraint firstAttribute="bottom" secondItem="Mzo-qJ-vRH" secondAttribute="bottom" id="wYh-rm-1jl"/>
+                <constraint firstItem="ZzB-kC-yvt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0Oi-mw-S6T"/>
+                <constraint firstAttribute="trailing" secondItem="ZzB-kC-yvt" secondAttribute="trailing" id="3ng-rw-A6D"/>
+                <constraint firstAttribute="bottom" secondItem="ZzB-kC-yvt" secondAttribute="bottom" id="66o-Uz-bgS"/>
+                <constraint firstItem="ZzB-kC-yvt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Eg9-Gp-OCq"/>
             </constraints>
             <point key="canvasLocation" x="32.5" y="63.5"/>
         </view>
