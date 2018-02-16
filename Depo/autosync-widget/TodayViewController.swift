@@ -75,7 +75,7 @@ extension TodayViewController: NCWidgetProviding {
                 bottomLabel.text =  String(format: TextConstants.widgetTitleLastSyncFormat, TextConstants.widgetTitleNeverSynchronized)
             } else {
                 topLabel.text = TextConstants.widgetTitleFinished
-                bottomLabel.text =  String.init(format: TextConstants.widgetTitleLastSyncFormat, widgetService.lastSyncedDate)
+                bottomLabel.text =  String(format: TextConstants.widgetTitleLastSyncFormat, widgetService.lastSyncedDate)
             }
             
             activityIndicator.isHidden = true
