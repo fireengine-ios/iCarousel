@@ -33,6 +33,13 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func operationFinished(withType type: ElementTypes, response: Any?) {
+        if type == .removeFromAlbum {
+            reloadData()
+            faceImageItemsModuleOutput?.didReloadData()
+        }
+    }
+    
     private func loadItem() {
         guard let view = view as? FaceImagePhotosViewController else {
             return
@@ -90,7 +97,7 @@ extension FaceImagePhotosPresenter: FaceImagePhotosModuleOutput {
     }
     
     func didMergePeople() {
-        faceImageItemsModuleOutput?.didMergePeople()
+        faceImageItemsModuleOutput?.didReloadData()
         reloadData()
     }
     

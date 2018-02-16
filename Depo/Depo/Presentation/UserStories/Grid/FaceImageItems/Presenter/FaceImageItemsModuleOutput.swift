@@ -8,5 +8,5 @@
 
 protocol FaceImageItemsModuleOutput: class {
     func didChangeName(item: WrapData)
-    func didMergePeople()
+    func didReloadData()
 }

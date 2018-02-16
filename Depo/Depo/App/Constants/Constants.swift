@@ -765,7 +765,7 @@ struct NumericConstants {
     static let creationStoryOrderingCountPhotosInLineiPad: Int = 6
     static let albumCellListHeight: CGFloat = 100
     
-    static let numberOfElementsInSyncRequest: Int = 1000
+    static let numberOfElementsInSyncRequest: Int = 30000
     
     static let animationDuration: Double = 0.3
     
