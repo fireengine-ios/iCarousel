@@ -34,7 +34,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if reloadTytpes == .removeFromAlbum {
+        if type == .removeFromAlbum {
             reloadData()
             faceImageItemsModuleOutput?.didReloadData()
         }
