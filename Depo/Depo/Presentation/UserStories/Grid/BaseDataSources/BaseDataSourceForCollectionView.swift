@@ -261,6 +261,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if !isPaginationDidEnd {
             guard let lastRemoteObject = getLastNonMetaEmptyItem(items: originalItemsArray) else {
+                allLocalItems.removeAll()
                 return originalItemsArray + tempoLocalArray
             }
             for localItem in tempoLocalArray {
