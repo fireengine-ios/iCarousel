@@ -10,6 +10,8 @@ import UIKit
 
 final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
     
+    let service = AlbumDetailService(requestSize: 1)
+    
     var album: AlbumItem?
     
     func updateCoverPhotoIfNeeded() {
@@ -19,14 +21,13 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
     }
     
     fileprivate func update(album: AlbumItem) {
-        let service = AlbumDetailService(requestSize: 1)
         service.albumCoverPhoto(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { coverPhoto in
             if album.preview?.uuid != coverPhoto.uuid {
                 album.preview = coverPhoto
                 ItemOperationManager.default.updatedAlbumCoverPhoto(item: album)
             }
-        }) {
-            
-        }
+        }, fail: {
+            // TODO: NEED TO CHANGE SERVICE FOR ERROR HANDLER
+        })
     }
 }

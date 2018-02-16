@@ -76,7 +76,7 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
         if let router = router as? FaceImageItemsRouter {
-            let albumItem = AlbumItem.init(remote: album)
+            let albumItem = AlbumItem(remote: album)
             router.openFaceImageItemPhotosWith(item, album: albumItem, moduleOutput: self)
         }
     }
