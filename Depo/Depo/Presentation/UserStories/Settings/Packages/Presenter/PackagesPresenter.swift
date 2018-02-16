@@ -191,10 +191,10 @@ extension PackagesPresenter: PackagesInteractorOutput {
         case .moldovian:
             break
         case .all:
-            break
+//            break
             /// in app purchase
 //            view?.startActivityIndicator()
-//            interactor.getOfferApples()
+            interactor.getOfferApples()
         }
         
         let subscriptionPlans = interactor.convertToASubscriptionList(activeSubscriptionList: activeSubscriptions, accountType: accountType)
