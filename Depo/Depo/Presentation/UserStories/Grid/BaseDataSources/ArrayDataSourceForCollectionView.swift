@@ -98,7 +98,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         
     }
     
-    override func updatedAlbumCoverPhoto(item: AlbumItem) {
+    override func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
         guard let unwrapedFilters = originalFilters,
             canShowAlbumsFilters(filters: unwrapedFilters) else {
                 return
