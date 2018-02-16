@@ -29,25 +29,23 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     override func getContentWithSuccess(items: [WrapData]) {
-        allItmes = items
-        
-        clearItems()
+        allItmes = []
         
         items.forEach { item in
             if isChangeVisibilityMode {
-                visibilityItems.append(item)
+                allItmes.append(item)
             } else if let peopleItem = item as? PeopleItem,
                 let isVisible = peopleItem.responseObject.visible
                 {
                     if isVisible {
-                        visibilityItems.append(item)
+                        allItmes.append(item)
                     }
             } else {
-                visibilityItems.append(item)
+                allItmes.append(item)
             }
         }
         
-        super.getContentWithSuccess(items: visibilityItems)
+        super.getContentWithSuccess(items: allItmes)
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
@@ -59,7 +57,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
         
-        getContentWithSuccess(items: allItmes)
+        reloadData()
     }
     
     private func clearItems() {
@@ -87,18 +85,7 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         
         view.stopSelection()
         
-        for item in allItmes {
-            for changeItem in items {
-                if (item.id == changeItem.id),
-                    let peopleItem = item as? PeopleItem,
-                    let isVisible = peopleItem.responseObject.visible
-                {
-                    peopleItem.responseObject.visible = !isVisible
-                }
-            }
-        }
-        
-        getContentWithSuccess(items: allItmes)
+        reloadData()
     }
     
 }
@@ -136,15 +123,7 @@ extension FaceImageItemsPresenter: FaceImageItemsViewOutput {
 extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
     
     func didChangeName(item: WrapData) {
-        allItmes.forEach {
-            if $0.id == item.id {
-                $0.name = item.name
-                
-                return
-            }
-        }
-        
-        getContentWithSuccess(items: allItmes)
+        reloadData()
     }
     
     func didReloadData() {
