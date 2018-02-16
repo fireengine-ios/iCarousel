@@ -42,7 +42,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         if object.fileType == .video || object.fileType == .image {
             imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
-            playVideoButton.isHidden = !(object.fileType == FileType.video)
+            playVideoButton.isHidden = (object.fileType != .video)
             
         } else if object.fileType != .audio, object.fileType.isUnSupportedOpenType {
             imageScrollView.imageView.isHidden = true

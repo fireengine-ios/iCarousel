@@ -313,8 +313,6 @@
 		7C3A74521F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74501F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift */; };
 		7C3A74531F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74511F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.xib */; };
 		7C3A74551F07B20600124DF5 /* PhotoVideoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74541F07B20600124DF5 /* PhotoVideoDetailViewController.xib */; };
-		7C3A74581F07C27900124DF5 /* BaseFileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74571F07C27900124DF5 /* BaseFileContentView.swift */; };
-		7C3A745A1F07C28D00124DF5 /* BaseFileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74591F07C28D00124DF5 /* BaseFileContentView.xib */; };
 		7C3B186E1FE0153E00FF3C39 /* PrepareToAutoSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */; };
 		7C3B186F1FE0153E00FF3C39 /* PrepareToAutoSync.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */; };
 		7C4484FE1F0FC607003AF631 /* ButtonWithGrayCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4484FD1F0FC607003AF631 /* ButtonWithGrayCorner.swift */; };
@@ -1713,7 +1711,6 @@
 		8C0E8DB41FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4988071F3320420039C5F2 /* CreateStoryPhotosOrderInteractor.swift */; };
 		8C0E8DB51FDEBDFF00789C91 /* ImportPhotosInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D498864C1F3EFBE200F50C95 /* ImportPhotosInteractorOutput.swift */; };
 		8C0E8DB61FDEBDFF00789C91 /* LoginPhoneMailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF89EF81F1351A800F1A2D0 /* LoginPhoneMailCell.swift */; };
-		8C0E8DB71FDEBDFF00789C91 /* BaseFileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74571F07C27900124DF5 /* BaseFileContentView.swift */; };
 		8C0E8DB81FDEBDFF00789C91 /* GradientLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */; };
 		8C0E8DB91FDEBDFF00789C91 /* VisualMusicPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786941F3F38EF005CB432 /* VisualMusicPlayerPresenter.swift */; };
 		8C0E8DBA1FDEBDFF00789C91 /* AuthenticationServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3471861F02F38400B97AC3 /* AuthenticationServiceResponse.swift */; };
@@ -2259,7 +2256,6 @@
 		8C0E90291FDEBDFF00789C91 /* PhoneVereficationScreen~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572D31EF1331C005C69DA /* PhoneVereficationScreen~iphone.xib */; };
 		8C0E902A1FDEBDFF00789C91 /* InstagramAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */; };
 		8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
-		8C0E902C1FDEBDFF00789C91 /* BaseFileContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74591F07C28D00124DF5 /* BaseFileContentView.xib */; };
 		8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
 		8C0E902F1FDEBDFF00789C91 /* ActivityTimelineTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44F61F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib */; };
 		8C0E90301FDEBDFF00789C91 /* HelpAndSupportHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE95ED391F516736002F923A /* HelpAndSupportHeaderView.xib */; };
@@ -3475,8 +3471,6 @@
 		7C3A74501F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSimpleHeaderWithText.swift; sourceTree = "<group>"; };
 		7C3A74511F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewSimpleHeaderWithText.xib; sourceTree = "<group>"; };
 		7C3A74541F07B20600124DF5 /* PhotoVideoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoVideoDetailViewController.xib; sourceTree = "<group>"; };
-		7C3A74571F07C27900124DF5 /* BaseFileContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFileContentView.swift; sourceTree = "<group>"; };
-		7C3A74591F07C28D00124DF5 /* BaseFileContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseFileContentView.xib; sourceTree = "<group>"; };
 		7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareToAutoSync.swift; sourceTree = "<group>"; };
 		7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrepareToAutoSync.xib; sourceTree = "<group>"; };
 		7C4484FD1F0FC607003AF631 /* ButtonWithGrayCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithGrayCorner.swift; sourceTree = "<group>"; };
@@ -6512,7 +6506,6 @@
 				8CD8F4F21F1E1FF700F1257B /* GradientLoadingIndicator */,
 				8CD8F4EF1F1CC3C100F1257B /* FloatingView */,
 				8C6FB6771F0B9F7600B552A3 /* MoreActionsView */,
-				7C3A74561F07C22A00124DF5 /* ContentSubViews */,
 				7C3A744B1F07963D00124DF5 /* CollectionViewHeaders */,
 				7CD1F8D01F014EF90028F51A /* CustomSwitch */,
 				CEAE3FDF1EFD517300A405B2 /* CustomNavigationBar */,
@@ -6758,15 +6751,6 @@
 				9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */,
 			);
 			path = CollectionViewHeaders;
-			sourceTree = "<group>";
-		};
-		7C3A74561F07C22A00124DF5 /* ContentSubViews */ = {
-			isa = PBXGroup;
-			children = (
-				7C3A74571F07C27900124DF5 /* BaseFileContentView.swift */,
-				7C3A74591F07C28D00124DF5 /* BaseFileContentView.xib */,
-			);
-			path = ContentSubViews;
 			sourceTree = "<group>";
 		};
 		7C3B186B1FE0148900FF3C39 /* PrepareToAutoSync */ = {
@@ -11304,7 +11288,6 @@
 				8C06AF6B2008AD70003D8E05 /* duz_cizgi_selected.png in Resources */,
 				8C06B1692008AD72003D8E05 /* toolbar_crop_icon@3x.png in Resources */,
 				8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */,
-				8C0E902C1FDEBDFF00789C91 /* BaseFileContentView.xib in Resources */,
 				8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */,
 				8C06AF6F2008AD70003D8E05 /* duz_cizgi_selected@3x.png in Resources */,
 				7C0D5DF3202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */,
@@ -11846,7 +11829,6 @@
 				8C06AFFC2008AD71003D8E05 /* kontrast_secili@2x.png in Resources */,
 				8C06AEEA2008AD70003D8E05 /* Buyuk@2x.png in Resources */,
 				8C06B0662008AD71003D8E05 /* Paylas_butnuna_basin@2x.png in Resources */,
-				7C3A745A1F07C28D00124DF5 /* BaseFileContentView.xib in Resources */,
 				CE51AEC41EF90853005DCEE0 /* RegistrationScreen.xib in Resources */,
 				CE8F44F81F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib in Resources */,
 				78D9BA472007E82800F2233F /* DuplicatedContactsViewController.xib in Resources */,
@@ -12831,7 +12813,6 @@
 				8C0E8DB51FDEBDFF00789C91 /* ImportPhotosInteractorOutput.swift in Sources */,
 				8C0E8DB61FDEBDFF00789C91 /* LoginPhoneMailCell.swift in Sources */,
 				7C379F3F202C35F00050C055 /* ManageContactsModuleOutput.swift in Sources */,
-				8C0E8DB71FDEBDFF00789C91 /* BaseFileContentView.swift in Sources */,
 				8CD2B3AD1FE7B2A500280547 /* PopUpService.swift in Sources */,
 				8C0E8DB81FDEBDFF00789C91 /* GradientLoadingIndicator.swift in Sources */,
 				8C0B91B220170F4D00A5BA81 /* ContactSyncResponse.swift in Sources */,
@@ -13824,7 +13805,6 @@
 				D498865B1F3EFBE200F50C95 /* ImportPhotosInteractorOutput.swift in Sources */,
 				8CF89EF91F1351A800F1A2D0 /* LoginPhoneMailCell.swift in Sources */,
 				787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */,
-				7C3A74581F07C27900124DF5 /* BaseFileContentView.swift in Sources */,
 				8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */,
 				8C7786A31F3F38F0005CB432 /* VisualMusicPlayerPresenter.swift in Sources */,
 				CE3471871F02F38400B97AC3 /* AuthenticationServiceResponse.swift in Sources */,
