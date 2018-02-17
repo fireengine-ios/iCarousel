@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Facebook
 
-protocol ImportFromFBInteractorOutput {
+protocol ImportFromFBInteractorOutput: class {
 
     func permissionsSuccessCallback(permissions: FBPermissionsObject)
     func permissionsFailureCallback(errorMessage: String)
@@ -38,7 +38,7 @@ protocol ImportFromFBInteractorOutput {
 
 // MARK: - Dropbox
 
-protocol ImportFromDropboxInteractorOutput {
+protocol ImportFromDropboxInteractorOutput: class {
     
     func loginSuccessCallback(token: String)
     func loginFailureCallback(errorMessage: String)
@@ -65,7 +65,7 @@ protocol ImportFromDropboxInteractorOutput {
 
 // MARK: - Instagram
 
-protocol ImportFromInstagramInteractorOutput {
+protocol ImportFromInstagramInteractorOutput: class {
     
     func connectionSuccess(isConnected: Bool)
     func connectionFailure(errorMessage: String)
