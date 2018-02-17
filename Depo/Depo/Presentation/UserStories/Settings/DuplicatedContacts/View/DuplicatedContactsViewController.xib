@@ -19,7 +19,7 @@
             <connections>
                 <outlet property="deleteAllButton" destination="P7z-te-2rn" id="9es-Xd-8XL"/>
                 <outlet property="keepButton" destination="TFU-Lz-2ek" id="Pfz-Aj-OLS"/>
-                <outlet property="tableView" destination="qNy-pN-2dH" id="CMa-d4-cqd"/>
+                <outlet property="tableView" destination="l1M-6Z-A1n" id="dak-Cy-AJU"/>
                 <outlet property="titleLabel" destination="fgS-mi-6YC" id="e5Q-a8-42J"/>
                 <outlet property="view" destination="iN0-l3-epB" id="yFs-l3-TK9"/>
             </connections>
@@ -29,13 +29,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="38" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qNy-pN-2dH">
-                    <rect key="frame" x="40" y="193.5" width="295" height="290"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="FeJ-Ma-Gbg"/>
-                    </connections>
-                </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7z-te-2rn" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="22" y="562" width="161.5" height="45"/>
                     <constraints>
@@ -54,28 +47,35 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="There are 20 duplicated contacts." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgS-mi-6YC">
-                    <rect key="frame" x="22" y="119" width="331" height="22.5"/>
+                    <rect key="frame" x="22" y="119.5" width="331" height="21.5"/>
                     <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="19"/>
                     <color key="textColor" red="0.38714492321014404" green="0.38746166229248047" blue="0.38719403743743896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="38" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l1M-6Z-A1n">
+                    <rect key="frame" x="40" y="193.5" width="295" height="290"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="5tO-Ob-v8g"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="TFU-Lz-2ek" secondAttribute="trailing" constant="22" id="2Bm-gL-oKA"/>
+                <constraint firstAttribute="trailing" secondItem="l1M-6Z-A1n" secondAttribute="trailing" constant="40" id="7IY-0b-TcW"/>
                 <constraint firstItem="fgS-mi-6YC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="B7h-Q6-aS0"/>
-                <constraint firstItem="qNy-pN-2dH" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.45" id="KVX-4e-Sxm"/>
+                <constraint firstItem="l1M-6Z-A1n" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.45" id="HnO-FI-NRF"/>
                 <constraint firstItem="P7z-te-2rn" firstAttribute="width" secondItem="TFU-Lz-2ek" secondAttribute="width" id="Ljn-4V-Mp6"/>
                 <constraint firstItem="P7z-te-2rn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="MHT-lx-WXU"/>
                 <constraint firstItem="fgS-mi-6YC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.39" id="Vie-Gw-v2u"/>
-                <constraint firstItem="qNy-pN-2dH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.58" id="bpa-ee-y1y"/>
                 <constraint firstItem="TFU-Lz-2ek" firstAttribute="leading" secondItem="P7z-te-2rn" secondAttribute="trailing" constant="8" id="cXf-SI-Vm1"/>
                 <constraint firstAttribute="trailing" secondItem="fgS-mi-6YC" secondAttribute="trailing" constant="22" id="elD-R1-sHl"/>
+                <constraint firstItem="l1M-6Z-A1n" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.58" id="iO8-vB-d7x"/>
                 <constraint firstItem="P7z-te-2rn" firstAttribute="centerY" secondItem="TFU-Lz-2ek" secondAttribute="centerY" id="ixE-HZ-r64"/>
-                <constraint firstItem="qNy-pN-2dH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="kiq-S8-zdw"/>
+                <constraint firstItem="l1M-6Z-A1n" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="jsx-gj-Qld"/>
                 <constraint firstAttribute="bottom" secondItem="P7z-te-2rn" secondAttribute="bottom" constant="60" id="oND-Rg-6VH"/>
                 <constraint firstItem="TFU-Lz-2ek" firstAttribute="height" secondItem="P7z-te-2rn" secondAttribute="height" id="p22-An-G3U"/>
-                <constraint firstAttribute="trailing" secondItem="qNy-pN-2dH" secondAttribute="trailing" constant="40" id="ulu-C5-tde"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
