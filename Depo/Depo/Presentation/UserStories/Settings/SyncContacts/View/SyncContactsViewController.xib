@@ -19,7 +19,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SyncContactsViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SyncContactsViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="backUpButton" destination="4we-6Z-PGt" id="UgJ-MV-4R0"/>
                 <outlet property="backUpContactsImageView" destination="f0F-dP-E3S" id="bGd-ME-cOM"/>
@@ -52,31 +52,30 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tib-1p-vqS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="666"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="688.66666666666663"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvS-vM-9ef" userLabel="View for loading">
-                                    <rect key="frame" x="126" y="30" width="162" height="162"/>
+                                    <rect key="frame" x="91" y="90.333333333333314" width="232" height="232"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bacupContacts" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-dP-E3S">
-                                            <rect key="frame" x="0.0" y="0.0" width="162" height="162"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="232" height="232"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="f0F-dP-E3S" secondAttribute="bottom" id="0Tq-5v-fIM"/>
                                         <constraint firstAttribute="trailing" secondItem="f0F-dP-E3S" secondAttribute="trailing" id="Hiu-cM-QYl"/>
-                                        <constraint firstAttribute="width" constant="162" id="QyL-rD-eQ9"/>
+                                        <constraint firstAttribute="width" secondItem="LvS-vM-9ef" secondAttribute="height" multiplier="1:1" id="LDt-Yk-7Qi"/>
                                         <constraint firstItem="f0F-dP-E3S" firstAttribute="leading" secondItem="LvS-vM-9ef" secondAttribute="leading" id="Ry7-3C-Vlo"/>
                                         <constraint firstItem="f0F-dP-E3S" firstAttribute="top" secondItem="LvS-vM-9ef" secondAttribute="top" id="fTG-dN-2eZ"/>
-                                        <constraint firstAttribute="height" constant="162" id="oMq-zC-mjU"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkl-kE-oQ1" customClass="GradientLoadingIndicator" customModule="Depo_LifeTech" customModuleProvider="target">
-                                    <rect key="frame" x="109" y="13" width="196" height="196"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkl-kE-oQ1" customClass="GradientLoadingIndicator" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="74" y="73.333333333333314" width="266" height="266"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="rX0-8z-yJA">
-                                    <rect key="frame" x="0.0" y="217" width="414" height="66.333333333333314"/>
+                                    <rect key="frame" x="0.0" y="347.33333333333331" width="414" height="66.333333333333314"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KrQ-Cb-oUZ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="20.333333333333332"/>
@@ -137,7 +136,7 @@
                                                     <rect key="frame" x="131.33333333333331" y="0.0" width="131.33333333333331" height="50"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xik-dx-lLj">
-                                                            <rect key="frame" x="0.0" y="11.666666666666686" width="1" height="28"/>
+                                                            <rect key="frame" x="0.0" y="11.666666666666629" width="1" height="28"/>
                                                             <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="1" id="YcM-bm-RcT"/>
@@ -231,9 +230,9 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BjP-ys-4HT">
-                                            <rect key="frame" x="11.666666666666657" y="70" width="370.66666666666674" height="50"/>
+                                            <rect key="frame" x="11.666666666666657" y="74.999999999999943" width="370.66666666666674" height="50"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4we-6Z-PGt" customClass="BlueButtonWithMediumWhiteText" customModule="Depo_LifeTech" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4we-6Z-PGt" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="118.33333333333333" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="65R-wG-sGq"/>
@@ -265,7 +264,7 @@
                                             </constraints>
                                         </stackView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy9-O6-ddF">
-                                            <rect key="frame" x="176.33333333333334" y="140" width="41.666666666666657" height="21"/>
+                                            <rect key="frame" x="176.33333333333334" y="149.99999999999994" width="41.666666666666657" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="WOl-ef-EvQ"/>
                                             </constraints>
@@ -280,9 +279,9 @@
                                     </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gb-gd-cDY">
-                                    <rect key="frame" x="152" y="617" width="111" height="29"/>
+                                    <rect key="frame" x="152" y="639.66666666666663" width="111" height="29"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34w-gh-gNj" customClass="ButtonWithGrayCorner" customModule="Depo_LifeTech" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34w-gh-gNj" customClass="ButtonWithGrayCorner" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="111" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="29" id="SLt-IX-zYY"/>
