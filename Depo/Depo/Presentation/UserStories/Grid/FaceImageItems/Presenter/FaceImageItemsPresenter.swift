@@ -32,18 +32,15 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         allItmes = []
         
         items.forEach { item in
-            if let _ = item.urlToFile {
-                if isChangeVisibilityMode {
-                    allItmes.append(item)
-                } else if let peopleItem = item as? PeopleItem,
-                    let isVisible = peopleItem.responseObject.visible
-                {
-                    if isVisible {
-                        allItmes.append(item)
-                    }
-                } else {
-                    allItmes.append(item)
-                }
+            guard item.urlToFile != nil else { return }
+
+            if isChangeVisibilityMode {
+                allItmes.append(item)
+            } else if let peopleItem = item as? PeopleItem,
+                let isVisible = peopleItem.responseObject.visible {
+                if isVisible { allItmes.append(item) }
+            } else {
+                allItmes.append(item)
             }
         }
         
