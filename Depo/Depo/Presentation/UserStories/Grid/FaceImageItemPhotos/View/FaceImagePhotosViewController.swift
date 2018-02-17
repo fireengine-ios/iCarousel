@@ -131,6 +131,7 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         mainTitle = name
         
         setTitle(withString: mainTitle)
+        albumsSlider?.setTitle(String(format: TextConstants.albumLikeSliderWithPerson, name))
     }
     
     func setHeaderImage(with path: PathForItem) {

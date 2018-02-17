@@ -56,4 +56,8 @@ extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewIn
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTouchRecognition))
         titleLabel.addGestureRecognizer(tapGesture)
     }
+    
+    func setTitle(_ title: String) {
+        titleLabel.text = title
+    }
 }
