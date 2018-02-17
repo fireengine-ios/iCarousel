@@ -530,9 +530,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 do {
                     url = urlToFile
                     size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).uint64Value
-                    let resources = PHAssetResource.assetResources(for: asset)
-                    if let resource = resources.first {
-                        originalFileName = resource.originalFilename
+                    if let name = asset.originalFilename {
+                        originalFileName = name
                     }
                     md5 = String(format: "%@%i", originalFileName, size)
                     semaphore.signal()
@@ -562,10 +561,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let operation = GetOriginalImageOperation(photoManager: self.photoManger,
                                                   asset: asset) { (data, string, orientation, dict) in
             if let wrapDict = dict, let dataValue  = data {
-
-                let resources = PHAssetResource.assetResources(for: asset)
-                if let resource = resources.first {
-                    originalFileName = resource.originalFilename
+                if let name = asset.originalFilename {
+                    originalFileName = name
                 }
                 if let unwrapedUrl = wrapDict["PHImageFileURLKey"] as? URL {
                     url = unwrapedUrl

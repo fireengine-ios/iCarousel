@@ -32,20 +32,6 @@ class Upload: UploadRequestParametrs {
     
     private let isFavorite: Bool
     
-    var contentType: String {
-        switch item.fileType {
-            
-        case .image :
-            return "image/jpg"
-            
-        case .video :
-            return "video/mp4"
-            
-        default:
-            return "unknown"
-        }
-    }
-    
     var contentLenght:String {
         return String(format: "%lu", item.fileSize)
     }
@@ -96,7 +82,7 @@ class Upload: UploadRequestParametrs {
     var header: RequestHeaderParametrs {
         var header  = RequestHeaders.authification()
         
-        header = header + [ HeaderConstant.ContentType : contentType,
+        header = header + [ HeaderConstant.ContentType : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,

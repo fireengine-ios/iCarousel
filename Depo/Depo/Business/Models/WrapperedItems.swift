@@ -8,6 +8,7 @@
 
 import Foundation
 import Photos
+import SDWebImage
 
 typealias RemoteImage = (_ image: UIImage?) -> Swift.Void
 
@@ -447,7 +448,6 @@ protocol  Wrappered  {
     var albums: [String]? { get set }
 }
 
-
 class WrapData: BaseDataSourceItem, Wrappered {
     enum Status: String {
         case active = "ACTIVE"
@@ -492,13 +492,27 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var fileData: Data?
     
     var asset: PHAsset? {
-        
         switch patchToPreview  {
-            
         case let .localMediaContent(local):
             return local.asset
         case .remoteUrl(_):
             return nil
+        }
+    }
+    
+    var uploadContentType: String {
+        switch fileType {
+        case .image:
+            if let type = urlToFile?.pathExtension.lowercased() {
+                return "image/\(type)"
+            } else if let data = fileData {
+                return ImageFormat.get(from: data).contentType
+            }
+            return "image/jpg"
+        case .video:
+            return "video/mp4"
+        default:
+            return "unknown"
         }
     }
     
