@@ -42,3 +42,14 @@ extension UIImage {
         return newImg
     }
 }
+
+extension UIImageView {
+    
+    func addBlackGradientLayer(colors: [UIColor]){
+        let gradient = CAGradientLayer()
+        gradient.frame = frame
+        gradient.colors = colors.map{$0.cgColor}
+        layer.addSublayer(gradient)
+    }
+    
+}
