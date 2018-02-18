@@ -42,7 +42,7 @@ class LBAlbumLikePreviewSliderModuleConfigurator {
             interactor = PeopleAlbumSliderInteractor(peopleItem: peopleItem)
             
             let title = String(format: TextConstants.albumLikeSliderWithPerson,
-                               peopleItem.name ?? "")
+                               peopleItem.name ?? TextConstants.faceImageThisPerson)
             viewController.sliderTitle = title
         } else {
             interactor = LBAlbumLikePreviewSliderInteractor()

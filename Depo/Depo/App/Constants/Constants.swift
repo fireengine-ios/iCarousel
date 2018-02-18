@@ -337,6 +337,7 @@ struct TextConstants {
     static let faceImageCheckTheSamePerson = NSLocalizedString("Are these the same person", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageWillMergedTogether = NSLocalizedString("They will be merged together", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageNope = NSLocalizedString("Nope", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageThisPerson = NSLocalizedString("this person", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: userProfile
     static let userProfileTitle = NSLocalizedString("Your Profile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
