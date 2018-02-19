@@ -54,6 +54,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
         self.isChangeVisibilityMode = isChangeVisibilityMode
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
+        reloadData()
     }
     
     private func clearItems() {
