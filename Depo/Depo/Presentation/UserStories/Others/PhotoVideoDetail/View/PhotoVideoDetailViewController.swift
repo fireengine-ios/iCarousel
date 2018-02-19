@@ -156,6 +156,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewWillTransition(to: size, with: coordinator)
         needToScrollAfterRotation = true
     }
+    
+    override func getBacgroundColor() -> UIColor {
+        return UIColor.black
+    }
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {

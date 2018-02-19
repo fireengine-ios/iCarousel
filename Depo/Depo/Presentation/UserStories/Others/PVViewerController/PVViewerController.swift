@@ -40,6 +40,10 @@ final class PVViewerController: BaseViewController, NibInit {
         /// set previous state of orientation or any new one
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
     }
+    
+    override func getBacgroundColor() -> UIColor {
+        return UIColor.black
+    }
 }
 
 extension PVViewerController: UIScrollViewDelegate {

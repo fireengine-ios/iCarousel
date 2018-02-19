@@ -29,6 +29,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var contentView: UIView!
     
+    @IBOutlet weak var mainContentView: UIView!
+    
+    @IBOutlet weak var bottomBGView: UIView!
+    
     @IBOutlet weak var plusButtonBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var plusButtonHeightConstraint: NSLayoutConstraint!
@@ -242,10 +246,16 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeTabBarStatus(hidden: false)
         //tabBar.isHidden = false
         if (self.bottomTabBarConstraint.constant < 0){
-            UIView.animate(withDuration: NumericConstants.animationDuration) {
+            bottomBGView.isHidden = false
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
                 self.view.layoutIfNeeded()
-            }
+                self.tabBar.isHidden = false
+            }, completion: { (flag) in
+                
+            })
+            
+            
         }
     }
     
@@ -256,11 +266,18 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             if !musicBar.isHidden {
                 bottomConstraintConstant -= self.musicBar.frame.height
             }
-            UIView.animate(withDuration: NumericConstants.animationDuration) {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.view.layoutIfNeeded()
-            }
+            }, completion: { (flag) in
+                self.tabBar.isHidden = true
+                self.bottomBGView.isHidden = true
+            })
         }
+    }
+    
+    func setBGColor(color: UIColor){
+        view.backgroundColor = color
     }
     
     private func changeTabBarStatus(hidden: Bool) {
@@ -322,6 +339,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     private func showCurtainView(show: Bool) {
         curtainView.isHidden = !show
         curtainView.isUserInteractionEnabled = show
+        contentView.bringSubview(toFront: curtainView)
         
         currentViewController?.navigationItem.rightBarButtonItems?.forEach {
             $0.isEnabled = !show
@@ -354,7 +372,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
         albumBtn?.changeVisability(toHidden: true)
         
-        view.bringSubview(toFront: plussButton)
+        mainContentView.bringSubview(toFront: plussButton)
     }
 
     func createSubButton(withText text: String, imageName: String, asLeft: Bool) -> SubPlussButtonView? {
@@ -364,10 +382,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             
             subButton.translatesAutoresizingMaskIntoConstraints = false
             
-            subButton.bottomConstraint = NSLayoutConstraint(item: subButton, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+            subButton.bottomConstraint = NSLayoutConstraint(item: subButton, attribute: .bottom, relatedBy: .equal, toItem: mainContentView, attribute: .bottom, multiplier: 1, constant: 0)
             subButton.bottomConstraintOrigialConstant = 0
             
-            subButton.centerXConstraint = NSLayoutConstraint(item: subButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+            subButton.centerXConstraint = NSLayoutConstraint(item: subButton, attribute: .centerX, relatedBy: .equal, toItem: mainContentView, attribute: .centerX, multiplier: 1, constant: 0)
             subButton.centerXConstraintOriginalConstant = 0
             
             var constraintsArray = [NSLayoutConstraint]()
