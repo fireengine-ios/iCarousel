@@ -19,26 +19,28 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
         nameLabel.textColor = ColorConstants.whiteColor
         nameLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
+        isCellSelected = isSelected
+        isCellSelectionEnabled = isSelectionActive
+        
         if (isSelectionActive) {
-            visibleImageView.isHidden = !visibleImageView.isHidden
-            
-            transperentView.alpha = transperentView.alpha > 0 ? 0 : NumericConstants.faceImageCellTransperentAlpha
+            visibleImageView.isHidden = !isSelected
+            transperentView.alpha = isSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
         }
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
-        guard let item = wrappedObj as? Item else{
+        guard let item = wrappedObj as? Item else {
             return
         }
         
-        visibleImageView.isHidden = true
-        transperentView.alpha = 0
+        visibleImageView.isHidden = !isCellSelected
+        transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
         
         if (isAlreadyConfigured) {
             return
@@ -59,9 +61,9 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.imageView.image = nil
-        self.imageView.sd_cancelCurrentImageLoad()
-        self.isAlreadyConfigured = false
+        imageView.image = nil
+        imageView.sd_cancelCurrentImageLoad()
+        isAlreadyConfigured = false
     }
     
     override func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) { }
@@ -78,31 +80,26 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
             imageView.layer.opacity = NumericConstants.numberCellAnimateOpacity
         }
         
-        backgroundColor = ColorConstants.fileGreedCellColor
-        
         isAlreadyConfigured = true
+        backgroundColor = ColorConstants.fileGreedCellColor
     }
     
     override func setImage(with url: URL) {
-        self.imageView.contentMode = .center
-        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] (image, error, cacheType, url) in
-            guard let `self` = self else {
-                return
-            }
-            
+        imageView.contentMode = .scaleAspectFill
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] (image, error, cacheType, url) in
             guard error == nil else {
                 print("SD_WebImage_setImage error: \(error!.localizedDescription)")
                 return
             }
             
-            self.setImage(image: image, animated: true)
+            self?.setImage(image: image, animated: true)
         }
         
         isAlreadyConfigured = true
-        self.backgroundColor = ColorConstants.fileGreedCellColor
+        backgroundColor = ColorConstants.fileGreedCellColor
     }
     
-    class func getCellSise()->CGSize{
+    class func getCellSise() -> CGSize {
         return CGSize(width: 90.0, height: 90.0)
     }
     

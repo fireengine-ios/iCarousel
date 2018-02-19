@@ -53,10 +53,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
         self.isChangeVisibilityMode = isChangeVisibilityMode
-        
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
-        
-        reloadData()
     }
     
     private func clearItems() {
@@ -99,15 +96,11 @@ extension FaceImageItemsPresenter: FaceImageItemsViewOutput {
     
     func saveVisibilityChanges() {
         if let interactor = interactor as? FaceImageItemsInteractor,
-            selectedItems.count > 0 {
-            var peopleItems: [PeopleItem] = []
-            selectedItems.forEach({
-                if let item = $0 as? PeopleItem {
-                    peopleItems.append(item)
-                }
-            })
+            !selectedItems.isEmpty {
             
+            let peopleItems = selectedItems.flatMap { $0 as? PeopleItem }
             interactor.onSaveVisibilityChanges(peopleItems)
+            
         } else {
             view.stopSelection()
             
