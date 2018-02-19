@@ -18,6 +18,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
 
     var contactSyncResponse: ContactSync.SyncResponse?
     var isBackUpAvailable: Bool { return contactSyncResponse != nil }
+    let reachability = ReachabilityService()
     
     //MARK: view out
     func viewIsReady() {
@@ -67,13 +68,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func cancelSuccess() {
-        guard let view = view else { return }
-        
-        if isBackUpAvailable {
-            view.setStateWithBackUp()
-        } else {
-            view.setStateWithoutBackUp()
-        }
+        guard let _ = view else { return }
+        updateContactsStatus()
     }
     
     func onManageContacts() {
@@ -120,6 +116,12 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     private func proccessOperation(_ operationType: SyncOperationType) {
+        if !self.reachability.isReachable &&
+            (operationType == .backup || operationType == .restore || operationType == .analyze)  {
+            router.goToConnectedToNetworkFailed()
+            return
+        }
+        
         if isBackUpAvailable, operationType == .backup {
             let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
                                                   message: TextConstants.errorAlertTextBackupAlreadyExist,
@@ -145,11 +147,12 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         case .denied:
             showSettingsAlert(completionHandler: completionHandler)
         case .restricted, .notDetermined:
-            CNContactStore().requestAccess(for: .contacts) { granted, error in
-                if granted {
-                    completionHandler(true)
-                } else {
-                    DispatchQueue.main.async {
+            CNContactStore().requestAccess(for: .contacts) { [weak self] granted, error in
+                guard let `self` = self else { return }
+                DispatchQueue.main.async {
+                    if granted {
+                        completionHandler(true)
+                    } else {
                         self.showSettingsAlert(completionHandler: completionHandler)
                     }
                 }
@@ -158,17 +161,17 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     private func showSettingsAlert(completionHandler: @escaping ContactsPermissionCallback) {
-        let controller = PopUpController.with(title: nil,
+        let controller = PopUpController.with(title: TextConstants.errorAlert,
                                               message: TextConstants.settingsContactsPermissionDeniedMessage,
                                               image: .error,
-                                              firstButtonTitle: TextConstants.ok,
-                                              secondButtonTitle: TextConstants.cancel,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
                                               firstAction: { vc in
                                                 vc.close { completionHandler(false) }
-                                                UIApplication.shared.openGlobalSettings()
                                               },
                                               secondAction: { vc in
                                                 vc.close { completionHandler(false) }
+                                                UIApplication.shared.openSettings()
                                               })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }

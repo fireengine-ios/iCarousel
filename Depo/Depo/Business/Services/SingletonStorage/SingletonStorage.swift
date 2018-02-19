@@ -18,17 +18,20 @@ class SingletonStorage {
     var referenceToken: String?
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
-    func getAccountInfoForUser(success:@escaping (AccountInfoResponse) -> Swift.Void, fail: @escaping (ErrorResponse?) -> Swift.Void ){
-        if let info = accountInfo{
+    func getAccountInfoForUser(success:@escaping (AccountInfoResponse) -> Swift.Void, fail: @escaping (ErrorResponse?) -> Swift.Void ) {
+        if let info = accountInfo {
             success(info)
-        }else{
+        } else {
             AccountService().info(success: { (accountInfoResponce) in
-                if let resp = accountInfoResponce as? AccountInfoResponse{
+                if let resp = accountInfoResponce as? AccountInfoResponse {
                     self.accountInfo = resp
-                    DispatchQueue.main.async {
-                        success(resp)
-                    }
-                }else{
+                    //remove user photo from cache on start application
+                    ImageDownloder().removeImageFromCache(url: resp.urlForPhoto, completion: {
+                        DispatchQueue.main.async {
+                            success(resp)
+                        }
+                    })
+                } else {
                     DispatchQueue.main.async {
                         fail(nil)
                     }
@@ -41,11 +44,11 @@ class SingletonStorage {
         }
     }
     
-    var unigueUserID: String{
+    var unigueUserID: String {
         return accountInfo?.projectID ?? ""
     }
     
-    func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), faill:@escaping (() -> Void)){
+    func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), faill:@escaping (() -> Void)) {
         getAccountInfoForUser(success: { (info) in
             success(info.projectID ?? "")
         }) { (error) in

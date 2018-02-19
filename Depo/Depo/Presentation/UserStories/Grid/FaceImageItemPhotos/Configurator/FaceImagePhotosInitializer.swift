@@ -1,0 +1,20 @@
+//
+//  FaceImagePhotosInitializer.swift
+//  Depo_LifeTech
+//
+//  Created by Harbros Agency on 2/1/18.
+//  Copyright © 2018 LifeTech. All rights reserved.
+//
+
+import UIKit
+
+final class FaceImagePhotosInitializer {
+    class func initializeController(with nibName:String, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) -> UIViewController {
+        let viewController = FaceImagePhotosViewController(nibName: nibName, bundle: nil)
+        
+        let configurator = FaceImagePhotosConfigurator()
+        configurator.configure(viewController: viewController, album: album, item: item, moduleOutput: moduleOutput)
+        
+        return viewController
+    }
+}

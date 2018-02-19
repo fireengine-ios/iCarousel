@@ -16,9 +16,11 @@ class LatestUpladsCard: BaseView {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var viewRecentActivitiesButton: UIButton!
     @IBOutlet weak var viewAllPhotosButton: UIButton!
+    @IBOutlet weak var collectionViewH: NSLayoutConstraint!
+    
     var collectionViewDataSource = [WrapData]()
     
-    let numberOfСellInRow: CGFloat = 7
+    let numberOfСellInRow: Int = 7
     let minSeparatorSize: CGFloat = 2
     var collectionViewW: CGFloat = 0
     
@@ -62,17 +64,23 @@ class LatestUpladsCard: BaseView {
         }
     }
     
-    
     private func set(details object: JSON) {
         if let arrayOfJsons = object.array {
             for itemObject in arrayOfJsons{
                 let searchItem = SearchItemResponse(withJSON: itemObject)
                 let item = WrapData(remote: searchItem)
                 collectionViewDataSource.append(item)
-                if collectionViewDataSource.count == 14{
+                if collectionViewDataSource.count == numberOfСellInRow * 2{
                     break
                 }
             }
+        }
+        
+        if collectionViewDataSource.count <= numberOfСellInRow {
+            let deltaH : CGFloat = 45
+            collectionViewH.constant = collectionViewH.constant - deltaH
+            calculatedH = frame.size.height - deltaH
+            layoutIfNeeded()
         }
         
         collectionView.reloadData()
@@ -128,7 +136,7 @@ extension LatestUpladsCard: UICollectionViewDelegateFlowLayout {
     
     private func calculateLinearDimensionsForCell() -> CGFloat{
         let w = collectionView.frame.size.width
-        let cellW = (w - minSeparatorSize*numberOfСellInRow + minSeparatorSize)/numberOfСellInRow
+        let cellW = (w - minSeparatorSize * CGFloat(numberOfСellInRow) + minSeparatorSize)/CGFloat(numberOfСellInRow)
         return cellW
     }
 }

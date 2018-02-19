@@ -60,29 +60,6 @@ struct CaptchaParametrAnswer: RequestParametrs {
     }
 }
 
-struct ValidateCaptchaParametr: RequestParametrs {
-    var timeout: TimeInterval {
-        return NumericConstants.defaultTimeout
-    }
-    
-    let uuid: String
-    let value: String
-    
-    var requestParametrs: Any {
-        return ""
-    }
-    
-    var patch: URL {
-        return URL(string: "", relativeTo:RouteRequests.BaseUrl)!
-    }
-    
-    var header: RequestHeaderParametrs {
-        
-        return [ HeaderConstant.CaptchaAnswer: value,
-                 HeaderConstant.CaptchaId:  uuid ]
-    }
-}
-
 class CaptchaResponse: ObjectRequestResponse  {
     var data: Data?
     var type: CaptchaType? {

@@ -27,14 +27,9 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var iPadLogoImage: UIImageView!
-
-    private var originBottomH:CGFloat = -1
     
-    private let capthcaVC = CaptchaViewController.initFromXib()
-    
+    private let capthcaVC = CaptchaViewController.initFromXib()    
     
     // MARK: Life cycle
     override func viewWillAppear(_ animated: Bool) {
@@ -81,11 +76,10 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        originBottomH = bottomConstraint.constant
         output.viewAppeared()
     }
     
-    func configurateView(){
+    func configurateView() {
         tableView.backgroundColor = UIColor.clear
         
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 22)
@@ -95,9 +89,9 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         errorLabel.textColor = ColorConstants.yellowColor
         errorLabel.text = TextConstants.loginScreenCredentialsError
         errorLabel.isHidden = true
-        if (Device.isIpad){
+        if (Device.isIpad) {
             titleLabel.text = TextConstants.loginTableTitle
-        }else{
+        } else {
             setNavigationTitle(title: TextConstants.loginTitle)
             iPadLogoImage.isHidden = true
             titleLabel.text = ""
@@ -111,25 +105,23 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         rememberLoginLabel.font = UIFont.TurkcellSaturaBolFont(size: 15)
     }
     
-    @objc func showKeyBoard(notification: NSNotification){
+    @objc func showKeyBoard(notification: NSNotification) {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         
         let yNextButton = getMainYForView(view: cantLoginButton) + cantLoginButton.frame.size.height
-        if (view.frame.size.height - yNextButton < keyboardHeight){
+        if (view.frame.size.height - yNextButton < keyboardHeight) {
             
-            bottomConstraint.constant = keyboardHeight + 40.0
-            view.layoutIfNeeded()
-            
+            scrollView.contentInset.bottom = keyboardHeight + 40
             
             let textField = searchActiveTextField(view: self.view)
-            if (textField != nil){
+            if (textField != nil) {
                 var yOfTextField: CGFloat = 0
-                if (textField?.tag == 33){
+                if (textField?.tag == 33) {
                     yOfTextField = getMainYForView(view: loginButton) + loginButton.frame.size.height + 20
-                }else{
+                } else {
                     yOfTextField = getMainYForView(view: textField!) + textField!.frame.size.height + 20
                 }
                 if (yOfTextField > view.frame.size.height - keyboardHeight){
@@ -144,8 +136,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     
     @objc private func hideKeyboard() {
         view.endEditing(true)
-        self.bottomConstraint.constant = self.originBottomH
-        self.view.layoutIfNeeded()
+        scrollView.contentInset = .zero
     }
     
     private func searchActiveTextField(view: UIView) -> UITextField? {
@@ -157,20 +148,20 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         }
         for subView in view.subviews {
             let textField = searchActiveTextField(view: subView)
-            if (textField != nil){
+            if (textField != nil) {
                 return textField
             }
         }
         return nil
     }
     
-    private func getMainYForView(view: UIView)->CGFloat{
-        if (view.superview == self.view){
+    private func getMainYForView(view: UIView)->CGFloat {
+        if (view.superview == self.view) {
             return view.frame.origin.y
-        }else{
-            if (view.superview != nil){
+        } else {
+            if (view.superview != nil) {
                 return view.frame.origin.y + getMainYForView(view:view.superview!)
-            }else{
+            } else {
                 return 0
             }
         }
@@ -201,7 +192,17 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         
     }
     
+    func showNeedSignUp(message: String) {
+        let vc = PopUpController.with(title: TextConstants.errorAlert, message: message, image: .error, buttonTitle: TextConstants.ok) { [weak self] controller in
+            controller.close { [weak self] in
+                self?.output.onOpenSignUp()
+            }
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
     func hideErrorMessage() {
+        errorLabel.text = ""
         errorLabel.isHidden = true
     }
     
@@ -263,7 +264,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     
     // MARK: Buttons action
     
-    @IBAction func onLoginButton() {
+    @IBAction func onLoginButton() {        
         let password = dataSource.getPassword()
         let login = dataSource.getLogin()
         hideKeyboard()

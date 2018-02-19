@@ -11,8 +11,6 @@ import UIKit
 class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, UICollectionViewDelegate, SearchModuleOutput {
 
     var output: HomePageViewOutput!
-    
-    var navBarConfigure = NavigationBarConfigurator()
 
     @IBOutlet weak var contentView: UIView!
     
@@ -58,6 +56,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
+        needShowTabBar = true
         
         let headerNib = UINib(nibName: "HomeViewTopView", bundle: nil)
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
@@ -70,9 +69,6 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar)
-        NotificationCenter.default.post(name: notificationName, object: nil)
         
         output.viewIsReady()
         

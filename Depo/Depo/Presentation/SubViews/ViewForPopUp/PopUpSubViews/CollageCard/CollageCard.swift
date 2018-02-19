@@ -11,8 +11,6 @@ import SwiftyJSON
 
 final class CollageCard: BaseView {
     
-    private lazy var filesDataSource = FilesDataSource()
-    
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
@@ -67,7 +65,7 @@ final class CollageCard: BaseView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
-        photoImageView.loadImageForItem(object: item)
+        photoImageView.loadImage(with: item, isOriginalImage: true)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){

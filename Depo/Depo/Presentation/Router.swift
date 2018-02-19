@@ -102,16 +102,11 @@ class RouterVC: NSObject {
         }
     }
     
-    func popViewControllerFromTableViewNavBar() {
-        if let tabBarVc = tabBarVC {
-            tabBarVc.popViewController(animated: true)
-            return
-        }
-    }
-    
     func pushViewController(viewController: UIViewController) {
-        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-        NotificationCenter.default.post(name: notificationName, object: nil)
+        if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar{
+            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
+            NotificationCenter.default.post(name: notificationName, object: nil)
+        }
         
         navigationController?.pushViewController(viewController, animated: true)
         viewController.navigationController?.isNavigationBarHidden = false
@@ -162,28 +157,6 @@ class RouterVC: NSObject {
             
             })
         }
-    }
-    
-    func pushToCustomNavController(customNavController: UINavigationController?, pushedController: UIViewController) {
-        var activeNavController: UINavigationController?
-        
-        if customNavController == nil {
-            activeNavController = navigationController
-        } else {
-            activeNavController = customNavController
-        }
-        activeNavController?.pushViewController(pushedController, animated: true)
-    }
-    
-    func presentOnCustomViewController(customNavController: UINavigationController?, presentedController: UIViewController) {
-        var activeNavController: UINavigationController?
-        
-        if customNavController == nil {
-            activeNavController = navigationController
-        } else {
-            activeNavController = customNavController
-        }
-        activeNavController?.present(presentedController, animated: true, completion: {})
     }
     
     func isOnFavoritesView() -> Bool {
@@ -461,7 +434,7 @@ class RouterVC: NSObject {
     //MARK: CreateStory audio selection
     
     func audioSelection(forStory story:PhotoStory) -> UIViewController {
-        let controller = CreateStoryModuleInitializer.initializeAudioSelectionViewControllerForStory(with: "BaseFilesGreedViewController", story: story)
+        let controller = CreateStoryModuleInitializer.initializeAudioSelectionViewControllerForStory(with: "CreateStoryAudioSelectionViewController", story: story)
         return controller
     }
     
@@ -484,39 +457,35 @@ class RouterVC: NSObject {
     
     //MARK: Upload All files
     
-    func uploadAllFiles(searchService: RemoteItemsService) -> UIViewController {
-        let controller = UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController", searchService: searchService)
-        return controller
-    }
-    
-    //MARK: Upload All files
-    
     func uploadPhotos() -> UIViewController {
         let controller = LocalAlbumModuleInitializer.initializeLocalAlbumsController(with: "BaseFilesGreedViewController")
-        //UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }
     
     func uploadPhotos(rootUUID: String) -> UIViewController {
         let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID)
-        //UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }
     
-    func uploadFromLifeBox(folderUUID: String, soorceUUID: String = "") -> UIViewController {
-        if isRootViewControllerAlbumDetail(){
+    func uploadFromLifeBox(folderUUID: String, soorceUUID: String = "", sortRule: SortedRules = .timeUp) -> UIViewController {
+        if isRootViewControllerAlbumDetail() {
             let controller = UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", albumUUID: folderUUID)
             return controller
-        }else{
-            let controller = UploadFromLifeBoxModuleInitializer.initializeFilesForFolderViewController(with: "BaseFilesGreedViewController", destinationFolderUUID: folderUUID, outputFolderUUID: soorceUUID)
+        } else {
+            let controller = UploadFromLifeBoxModuleInitializer.initializeFilesForFolderViewController(with: "BaseFilesGreedViewController",
+                                                                                                       destinationFolderUUID: folderUUID,
+                                                                                                       outputFolderUUID: soorceUUID,
+                                                                                                       sortRule: sortRule)
             return controller
         }
     }
     
     //MARK: Select Folder view controller
     
-    func selectFolder(folder: Item?) -> SelectFolderViewController {
-        let controller = SelectFolderModuleInitializer.initializeSelectFolderViewController(with: "BaseFilesGreedViewController", folder: folder)
+    func selectFolder(folder: Item?, sortRule: SortedRules = .timeUp) -> SelectFolderViewController {
+        let controller = SelectFolderModuleInitializer.initializeSelectFolderViewController(with: "BaseFilesGreedViewController",
+                                                                                            folder: folder,
+                                                                                            sortRule: sortRule)
         return controller
     }
     
@@ -565,6 +534,42 @@ class RouterVC: NSObject {
     func storiesListController() -> BaseFilesGreedChildrenViewController {
         let controller = StoriesInitializer.initializeStoriesController(with: "BaseFilesGreedViewController")
         return controller
+    }
+    
+    //MARK: People list
+    
+    func peopleListController() -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageItemsInitializer.initializePeopleController(with: "BaseFilesGreedViewController")
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    //MARK: Thing list
+    
+    func thingsListController() -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageItemsInitializer.initializeThingsController(with: "BaseFilesGreedViewController")
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    //MARK: Place list
+    
+    func placesListController() -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController")
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    //MARK: Face Image Recognition Photos
+    
+    func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
+                                                                         album: album,
+                                                                         item: item,
+                                                                         moduleOutput: moduleOutput)
+        return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    func faceImageChangeCoverController(albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?)  -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageChangeCoverInitializer.initializeController(with: "BaseFilesGreedViewController", albumUUID: albumUUID, moduleOutput: moduleOutput)
+        return controller as! BaseFilesGreedChildrenViewController
     }
     
     //MARK: Free App Space
@@ -617,6 +622,20 @@ class RouterVC: NSObject {
     
     var importPhotos: UIViewController? {
         let controller = ImportPhotosInitializer.initializeViewController(with: "ImportPhotosViewController")
+        return controller
+    }
+    
+    // MARK: Face image
+    
+    var faceImage: UIViewController {
+        let controller = FaceImageInitializer.initializeViewController(with: "FaceImageViewController")
+        return controller
+    }
+    
+    // MARK: Face image add name
+    
+    func faceImageAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) -> UIViewController {
+    let controller = FaceImageAddNameInitializer.initializeViewController(with: "FaceImageAddNameViewController", item: item, moduleOutput: moduleOutput)
         return controller
     }
     

@@ -78,13 +78,18 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         self.backgroundColor = UIColor.white
     }
     
-    override func setImage(image: UIImage?) {
+    override func setImage(image: UIImage?, animated: Bool) {
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.opacity = 0.1
-        imageView.image = image
-        UIView.animate(withDuration: 0.2, animations: {
-            self.imageView.layer.opacity = 1.0
-        })
+        if animated {
+            imageView.layer.opacity = NumericConstants.numberCellDefaultOpacity
+            imageView.image = image
+            UIView.animate(withDuration: 0.2, animations: {
+                self.imageView.layer.opacity = NumericConstants.numberCellAnimateOpacity
+            })
+        } else {
+            imageView.image = image
+        }
+        
         backgroundColor = ColorConstants.fileGreedCellColor
         
         isAlreadyConfigured = true
@@ -102,7 +107,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
                 return
             }
             
-            self.setImage(image: image)
+            self.setImage(image: image, animated: true)
         }
         
         isAlreadyConfigured = true
@@ -133,6 +138,10 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     func finishedUploadForObject(){
         progressView.isHidden = true
         cloudStatusImage.image = UIImage(named: "objectInCloud")
+    }
+    
+    func finishedDownloadForObject(){
+        progressView.isHidden = true
     }
     
     func resetCloudImage(){

@@ -38,12 +38,14 @@ class LoginInteractor: LoginInteractorInput {
         
         if login.isEmpty {
             output?.loginFieldIsEmpty()
-            return
         }
         if password.isEmpty {
             output?.passwordFieldIsEmpty()
+        }
+        if login.isEmpty || password.isEmpty {
             return
         }
+        
         if isBlocked(userName: login)  {
             output?.userStillBlocked(user: login)
             return
@@ -82,7 +84,11 @@ class LoginInteractor: LoginInteractorInput {
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.output?.needShowCaptcha()
                 } else if (!self.checkInternetConnection()) {
-                    self.output?.failLogin(message: TextConstants.loginScreenNoInternetError)
+                    self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
+                } else if self.isAuthenticationDisabledForAccount(forResponse: errorResponse) {
+                    self.output?.failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
+                } else if self.isNeedSignUp(forResponse: errorResponse) {
+                    self.output?.needSignUp(message: TextConstants.loginScreenNeedSignUpError)
                 } else if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
                     self.attempts += 1
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
@@ -139,6 +145,14 @@ class LoginInteractor: LoginInteractorInput {
     
     private func inNeedOfCaptcha(forResponse errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains("Captcha required")
+    }
+    
+    private func isAuthenticationDisabledForAccount(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("Authentication with Turkcell Password is disabled for the account")
+    }
+    
+    private func isNeedSignUp(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("Signup required")
     }
     
     private func isAuthenticationError(forResponse errorResponse: ErrorResponse) -> Bool {

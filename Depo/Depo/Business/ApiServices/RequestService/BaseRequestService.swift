@@ -39,34 +39,6 @@ protocol DownloadRequestParametrs: RequestParametrs {
     var urlToRemoteFile: URL { get }
 }
 
-
-class BaseUploadRequestParametrs: UploadRequestParametrs {
-    
-    var urlToLocalFile: URL?
-
-    var fileData: Data?
-    
-    var requestParametrs: Any {
-        return Data()
-    }
-    
-    var patch: URL {
-        return RouteRequests.BaseUrl
-    }
-    
-    var header: RequestHeaderParametrs {
-        return RequestHeaders.authification()
-    }
-    
-    var timeout: TimeInterval{
-        return 2000.0
-    }
-    
-    init(urlToFile: URL) {
-        urlToLocalFile = urlToFile
-    }
-}
-
 class BaseDownloadRequestParametrs: DownloadRequestParametrs {
     let urlToRemoteFile: URL
     
@@ -103,18 +75,6 @@ class BaseDownloadRequestParametrs: DownloadRequestParametrs {
     }
 }
 
-class DownloadFileResponse: ObjectRequestResponse {
-    
-    var eTag: String?
-    var lenghth: Int64?
-    
-    override func mapping() {
-//        eTag = response?["Etag"]
-//        lenghth = response?["Content-Length"]
-    }
-}
-
-
 class BaseRequestParametrs: RequestParametrs {
     
     var requestParametrs: Any {
@@ -133,11 +93,6 @@ class BaseRequestParametrs: RequestParametrs {
         return NumericConstants.defaultTimeout
     }
 }
-
-class BaseUploadDowbloadRequestParametrs {
-    
-}
-
 
 class JsonConvertor {
     private let value: RequestParametrs
@@ -205,6 +160,16 @@ class BaseRequestService {
                                                       method:RequestMethod.Put,
                                                       timeoutInterval: param.timeout,
                                                       response: handler.response)
+        task.resume()
+    }
+    
+    func executePatchRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
+        let task = requestService.requestTask(patch: param.patch,
+                                              headerParametrs: param.header,
+                                              body: JsonConvertor(parametrs: param).convertToData(),
+                                              method:RequestMethod.Patch,
+                                              timeoutInterval: param.timeout,
+                                              response: handler.response)
         task.resume()
     }
     

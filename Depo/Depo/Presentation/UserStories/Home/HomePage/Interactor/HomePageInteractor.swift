@@ -21,10 +21,9 @@ class HomePageInteractor: HomePageInteractorInput {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let array):
-                    print(array)
                     CardsManager.default.startOperatonsForCardsResponces(cardsResponces: array)
                 case .failed(let error):
-                    print(error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
                 }
             }
         }

@@ -48,7 +48,8 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
             self.output.didLoadContacts(self.contacts)
             self.isLoadingData = false
             self.output.asyncOperationFinished()
-        }, fail: { (error) in
+        }, fail: { [weak self] error in
+            guard let `self` = self else { return }
             self.isLoadingData = false
             self.output.asyncOperationFinished()
         })
@@ -76,7 +77,8 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
             self.output.didLoadContacts(self.contacts)
             self.isLoadingData = false
             self.output.asyncOperationFinished()
-        }, fail: { (error) in
+        }, fail: { [weak self] error in
+            guard let `self` = self else { return }
             self.isLoadingData = false
             self.output.asyncOperationFinished()
         })
@@ -93,17 +95,25 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
     }
     
     func deleteContact(_ contact: RemoteContact) {
-        contactsSyncService.deleteRemoteContacts([contact], success: { [weak self] _ in
-            guard let `self` = self, let index = self.contacts.index(where: { $0.id == contact.id }) else {
-                return
-            }
-            self.contacts.remove(at: index)
-            self.output.didLoadContacts(self.contacts)
-            self.output.asyncOperationFinished()
-            self.output.didDeleteContact()
-        }) { (error) in
-            self.output.asyncOperationFinished()
+        let okHandler: () -> Void = { [weak self] in
+            guard let `self` = self else { return }
+            
+            self.output.asyncOperationStarted()
+            self.contactsSyncService.deleteRemoteContacts([contact], success: { [weak self] _ in
+                guard let `self` = self, let index = self.contacts.index(where: { $0.id == contact.id }) else {
+                    return
+                }
+                self.contacts.remove(at: index)
+                self.output.didLoadContacts(self.contacts)
+                self.output.asyncOperationFinished()
+                self.output.didDeleteContact()
+            }, fail: { [weak self] error in
+                guard let `self` = self else { return }
+                self.output.asyncOperationFinished()
+            })
         }
+        
+        output.deleteContact(okHandler)
     }
     
     func cancelSearch() {

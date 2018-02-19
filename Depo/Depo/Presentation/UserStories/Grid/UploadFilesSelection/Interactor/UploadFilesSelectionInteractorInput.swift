@@ -6,10 +6,9 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-import Foundation
+//import Foundation
+//
+//protocol UploadFilesSelectionInteractorInput {
+//    func uploadItems(items: [BaseDataSourceItem])   
+//}
 
-protocol UploadFilesSelectionInteractorInput {
-    
-    func uploadItems(items: [BaseDataSourceItem])
-    
-}

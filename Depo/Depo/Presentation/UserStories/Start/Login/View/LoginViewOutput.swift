@@ -16,6 +16,8 @@ protocol LoginViewOutput {
     
     func onCantLoginButton()
     
+    func onOpenSignUp()
+    
     func rememberMe(remember: Bool)
     
     func startedEnteringPhoneNumber()

@@ -37,11 +37,7 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
         guard  let story = photoStory else {
             return
         }
-        let array = dataSource.getSelectedItems()
-        if (array.count > 0){
-            guard let music = array.first! as? Item else{
-                return
-            }
+        if let music = dataSource.selectedItemsArray.first as? Item{
             story.music = music
             if let viewController = view as? CreateStoryAudioSelectionViewController{
                viewController.hideView()
@@ -50,7 +46,6 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
             UIApplication.showErrorAlert(message: TextConstants.createStoryNoSelectedAudioError)
         }
         
-//        SingleSong.default.stop()
         player.stop()
     }
     
@@ -65,17 +60,13 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
         return CGSize(width: view.getCollectionViewWidth(), height: 46)
     }
     
-//    override func getContentWithSuccess(array: [[WrapData]]){
-//        if (view == nil){
-//            return
-//        }
-//        //
-//        asyncOperationSucces()
-//        view.stopRefresher()
-//        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
-//            dataSourceForArray.configurateWithArray(array: array)
-//        }else{
-//            dataSource.reloadData()
-//        }
-//    }
+    func onChangeSorce(isYourUpload: Bool){
+        if let interactor = interactor as? CreateStorySelectionInteractor{
+            if let dataSource = dataSource as? AudioSelectionDataSource{
+                dataSource.tableDataMArray.removeAll()
+            }
+            interactor.onChangeSorce(isYourUpload: isYourUpload)
+            needReloadData()
+        }
+    }
 }

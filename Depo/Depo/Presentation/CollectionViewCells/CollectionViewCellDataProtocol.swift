@@ -12,13 +12,15 @@ protocol CollectionViewCellDataProtocol {
     
     func confireWithWrapperd(wrappedObj: BaseDataSourceItem)
     
-    func setImage(image: UIImage?)
+    func setImage(image: UIImage?, animated: Bool)
     
     func setImage(with url: URL)
     
     func setPlaceholderImage(fileType: FileType)
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool)
+    
+    func setSelectionWithAnimation(isSelectionActive: Bool, isSelected: Bool)
     
     func setDelegateObject(delegateObject: LBCellsDelegate)
     

@@ -7,13 +7,12 @@
 //
 
 struct AlbumsPatch  {
-    
     static let album =  "/api/album"
-    static let deleteAlbumss =  "/api/album"
+//    static let deleteAlbumss =  "/api/album"
     static let addPhotosToAlbum = "/api/album/addFiles/%@"
     static let deletePhotosFromAlbum = "/api/album/removeFiles/%@"
     static let renameAlbum = "/api/album/rename/%@?newLabel=%@"
-    
+    static let changeCoverPhoto = "/api/album/coverPhoto/%@?coverPhotoUuid=%@"
 }
 
 class CreatesAlbum: BaseRequestParametrs {
@@ -25,7 +24,8 @@ class CreatesAlbum: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
-        let dict: [String: Any] = [SearchJsonKey.albumName: albumName, SearchJsonKey.contentType: SearchJsonKey.contentTypeAlbum]
+        let dict: [String: Any] = [SearchJsonKey.albumName: albumName,
+                                   SearchJsonKey.contentType: SearchJsonKey.contentTypeAlbum]
         return dict
     }
     
@@ -73,6 +73,21 @@ class AddPhotosToAlbum: BaseRequestParametrs {
     }
 }
 
+class ChangeCoverPhoto: BaseRequestParametrs {
+    let albumUUID: String
+    let photoUUID: String
+    
+    init (albumUUID: String, photoUUID: String) {
+        self.albumUUID = albumUUID
+        self.photoUUID = photoUUID
+    }
+    
+    override var patch: URL {
+        let path: String = String(format: AlbumsPatch.changeCoverPhoto, albumUUID, photoUUID)
+        return URL(string: path, relativeTo: super.patch)!
+    }
+}
+
 class DeletePhotosFromAlbum: AddPhotosToAlbum{
     override var patch: URL {
         let path: String = String(format: AlbumsPatch.deletePhotosFromAlbum, albumUUID)
@@ -90,8 +105,8 @@ class RenameAlbum: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format: AlbumsPatch.renameAlbum, albumUUID, newName)
-        return URL(string: path, relativeTo: super.patch)!
+        let path = String(format: AlbumsPatch.renameAlbum, albumUUID, newName)
+        return URL.encodingURL(string: path, relativeTo: super.patch)!
     }
 }
 
@@ -128,7 +143,8 @@ class AlbumService: RemoteItemsService {
             self?.currentPage += 1
             let list = resultResponse.list.flatMap { AlbumItem(remote: $0) }
             success(list)
-        }, fail: { _ in
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
             log.debug("AlbumService remote searchAlbums fail")
 
             fail()
@@ -202,6 +218,15 @@ class PhotosAlbumService: BaseRequestService {
         executePutRequest(param: parameters, handler: handler)
     }
     
+    func changeCoverPhoto(parameters: ChangeCoverPhoto, success: PhotosAlbumOperation?, fail: FailResponse?) {
+        log.debug("PhotosAlbumService changeCoverPhoto")
+        
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { (response)  in
+            success?()
+        }, fail: fail)
+        executePutRequest(param: parameters, handler: handler)
+    }
+    
     func renameAlbum(parameters: RenameAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         log.debug("PhotosAlbumService renameAlbum")
 
@@ -264,5 +289,4 @@ class PhotosAlbumService: BaseRequestService {
             success?(allItems)
         }
     }
-    
 }

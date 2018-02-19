@@ -1,4 +1,4 @@
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 inhibit_all_warnings!
 
@@ -38,22 +38,23 @@ def core_pods
     #logger
     pod 'XCGLogger', '~> 6.0.1'
     
+    #widget
+    pod 'MMWormhole', '~> 2.0.0'
+    
 end
 
 target 'Depo_LifeTech' do
-
 	core_pods
+end
 
-#  target 'DepoTests' do
-#    inherit! :search_paths
-#    # Pods for testing
-#  end
-
+target 'autosync-widget' do
+    pod 'MMWormhole', '~> 2.0.0'
 end
 
 target ‘TC_Depo_LifeTech’ do
 	core_pods
 end
+
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|

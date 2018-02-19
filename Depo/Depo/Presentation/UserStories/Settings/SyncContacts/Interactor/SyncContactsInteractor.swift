@@ -77,24 +77,24 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     private func analyze() {
+        
         contactsSyncService.analyze(progressCallback: { [weak self] (progressPercentage, type) in
             DispatchQueue.main.async {
                 self?.output?.showProggress(progress: progressPercentage, forOperation: type)
             }
-        }, finishCallback: { [weak self] (response) in
+        }, successCallback: { [weak self] (response) in
             DispatchQueue.main.async {
                 self?.output?.analyzeSuccess(response: response)
             }
-        }) { [weak self] (errorType, type) in
+        }, cancelCallback: nil,
+           errorCallback: { [weak self] (errorType, type) in
             DispatchQueue.main.async {
                 self?.output?.showError(errorType: errorType)
             }
-        }
+        })
     }
     
     private func deleteDuplicated() {
         contactsSyncService.deleteDuplicates()
     }
 }
-
-

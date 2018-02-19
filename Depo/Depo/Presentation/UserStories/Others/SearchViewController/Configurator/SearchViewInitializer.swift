@@ -26,7 +26,17 @@ class SearchViewInitializer {
             showGridListButton: true
         )
         
-        configurator.configure(viewController: viewController, remoteServices: RemoteSearchService(requestSize: 100), recentSearches: RecentSearchesService.shared, output: output, topBarConfig: gridListTopBarConfig)
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
+                                               style: .default, tintColor: nil)
+        
+        configurator.configure(viewController: viewController,
+                               remoteServices: RemoteSearchService(requestSize: 100),
+                               recentSearches: RecentSearchesService.shared,
+                               output: output,
+                               topBarConfig: gridListTopBarConfig,
+                               bottomBarConfig: bottomBarConfig,
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select], selectionModeTypes: [.rename]),
+                               alertSheetExcludeTypes: [.print])
         
         return viewController
     }

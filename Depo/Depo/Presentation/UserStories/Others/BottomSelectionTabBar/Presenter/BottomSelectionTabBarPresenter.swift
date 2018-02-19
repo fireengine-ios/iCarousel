@@ -88,15 +88,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
     }
     
-    // Presenter Input
-    func preparedSelectedItems(items: [Item]) {
-        debugPrint("number of selected items ", items.count)
-    }
-    
     override func dismiss(animated: Bool) {
         view.hideBar(animated: animated)
-        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
-        debugPrint("Editing bar Dismiss")
     }
     
     func show(animated: Bool, onView sourceView: UIView?) {
@@ -226,11 +219,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 actionTypes = [.createStory, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                 actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
-                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
+                actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
             case .video:
                 actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
+                actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
                 
             case .photoAlbum: // TODO add for Alboum
                 break
@@ -405,6 +398,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: "Print", style: .default, handler: { _ in
                       //TODO: will be implemented in the next package
                     })
+
             default:
                 action = UIAlertAction(title: "TEST", style: .default, handler: { _ in
                     
@@ -461,6 +455,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         compliteAsyncOperationEnableScreen()
         view.unselectAll()
         basePassingPresenter?.operationFailed(withType: type)
+        UIApplication.showErrorAlert(message: message)
     }
     
     override func operationStarted(type: ElementTypes) {

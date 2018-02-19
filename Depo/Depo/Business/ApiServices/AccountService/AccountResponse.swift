@@ -125,13 +125,6 @@ class QuotaInfoResponse: ObjectRequestResponse {
     }
 }
 
-class LanguageListItem: ObjectRequestResponse {
-    override func mapping() {
-        
-    }
-}
-
-
 class LanguageListResponse: ObjectRequestResponse {
     override func mapping() {
     }

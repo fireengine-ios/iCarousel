@@ -156,12 +156,6 @@ extension UIViewController {
         }
     }
     
-    func customNavigationBarPushToBack() {
-        if let view = customNavBarView {
-            navBar?.sendSubview(toBack: view)
-        }
-    }
-    
     //MARK : ToolBar
     
     func barButtonItemsWithRitht(button: UIBarButtonItem) -> UIToolbar {
@@ -211,5 +205,19 @@ extension UIViewController {
             self.navigationItem.title = title
         }
     }
+    
+    func setTouchableTitle(title: String) {
+        self.navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
+        let titleLabel = UILabel()
+        titleLabel.tag = tagTitleView
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = UIColor.white
+        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 19.0)
+        titleLabel.text = title
+        self.navigationItem.titleView = titleLabel
+        
+        navigationItem.titleView?.isUserInteractionEnabled = true
+    }
+
     
 }

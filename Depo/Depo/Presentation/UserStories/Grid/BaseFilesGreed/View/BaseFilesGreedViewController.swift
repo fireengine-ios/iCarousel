@@ -15,8 +15,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     var navBarConfigurator = NavigationBarConfigurator()
 
     var refresher:UIRefreshControl!
-    
-    let floatingView = FloatingView()
         
     var cancelSelectionButton: UIBarButtonItem?
     
@@ -62,6 +60,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     let underNavBarBarHeight: CGFloat = 53
     
     @IBOutlet private weak var topCarouselConstraint: NSLayoutConstraint!
+    
     // MARK: Life cycle
     
     override func viewDidLoad() {
@@ -102,12 +101,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
         
         output.viewIsReady(collectionView: collectionView)
-        
-        //carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
-        
-//        if #available(iOS 11.0, *) {
-//            topCarouselConstraint.constant = underNavBarBarHeight//0
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,9 +111,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
-//        if let unwrapedSlider = contentSlider { //FIXME: shiwt reload mechanic to presenter, so modules would speak as normal
-//            unwrapedSlider.reloadAllData()
-//        }
         
         let allVisibleCells = collectionView.indexPathsForVisibleItems
         if !allVisibleCells.isEmpty{
@@ -138,6 +128,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         configurateViewForPopUp()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        /// need when device was rotated
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     func configurateViewForPopUp(){
         CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
@@ -149,7 +146,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        floatingView.hideView(animated: true)
         output.viewWillDisappear()
     }
     
@@ -161,7 +157,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     // MARK: - SearchBarButtonPressed
     
    func configureNavBarActions(isSelecting: Bool = false) {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { (_) in
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { _ in
             let router = RouterVC()
             let searchViewController = router.searchView()
             router.pushViewControllerWithoutAnimation(viewController: searchViewController)
@@ -174,16 +170,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    func configurateDeleteNavBarActions(deleteAction: @escaping () -> Swift.Void) {
-        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
-            deleteAction()
-        })
-        navBarConfigurator.configure(right: [delete], left: [])
-        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
-    }
-    
-    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Swift.Void) {
-        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
+    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Void) {
+        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { _ in
             deleteAction()
         })
         
@@ -196,6 +184,26 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
         navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
+    
+    func configurateFaceImagePeopleActions(showHideAction: @escaping () -> Void) {
+        let showHide = NavBarWithAction(navItem: NavigationBarList().showHide, action: { _ in
+            showHideAction()
+        })
+        
+        navBarConfigurator.configure(right: [showHide], left: [])
+        
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+    
+    func configureFaceImageItemsPhotoActions() {
+        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+        })
+        let rightActions: [NavBarWithAction] = [more]
+        navBarConfigurator.configure(right: rightActions, left: [])
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+
     
     @IBAction func onStartCreatingFilesButton(){
         output.onStartCreatingPhotoAndVideos()
@@ -274,6 +282,16 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         topBarContainer.isHidden = false
     }
     
+    func requestStarted() {
+        backAsCancelBarButton?.isEnabled = false
+        navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
+    func requestStopped() {
+        backAsCancelBarButton?.isEnabled = true
+        navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+    
     @objc func onCancelSelectionButton(){
         output.onCancelSelection()
     }
@@ -286,6 +304,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if self.mainTitle != "" {
             self.setTitle(withString: self.mainTitle, andSubTitle: type.descriptionForTitle)
         }
+    }
+    
+    func getCurrentSortRule() -> SortedRules {
+        return output.getCurrentSortRule()
     }
     
     func getRemoteItemsService() -> RemoteItemsService{

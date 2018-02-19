@@ -9,6 +9,7 @@
 import UIKit
 
 protocol LBCellsDelegate: class {
+    func canLongPress() -> Bool
     func onLongPress(cell: UICollectionViewCell)
 }
 
@@ -38,13 +39,13 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         contentView.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
     }
     
-    @objc func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
+    @objc func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer) {
         
-        guard let  d = delegate else{
+        guard let d = delegate, d.canLongPress() else {
             return
         }
         
-        if (gestureRecognizer.state == UIGestureRecognizerState.began){
+        if (gestureRecognizer.state == UIGestureRecognizerState.began) {
             setSelection(isSelectionActive: true, isSelected: true)
             d.onLongPress(cell: self)
         }
@@ -61,16 +62,16 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         
     }
     
-    func setDelegateObject(delegateObject: LBCellsDelegate){
+    func setDelegateObject(delegateObject: LBCellsDelegate) {
         self.delegate = delegateObject
     }
     
     
-    func confireWithWrapperd(wrappedObj: BaseDataSourceItem){
+    func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
         
     }
     
-    func setImage(image: UIImage?){
+    func setImage(image: UIImage?, animated: Bool) {
 
     }
     
@@ -82,7 +83,11 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
 
     }
     
-    func setSelection(isSelectionActive: Bool, isSelected: Bool){
+    func setSelection(isSelectionActive: Bool, isSelected: Bool) {
+        
+    }
+    
+    func setSelectionWithAnimation(isSelectionActive: Bool, isSelected: Bool){
         
     }
     
@@ -94,7 +99,7 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         assetId = id
     }
     
-    func updating(){
+    func updating() {
         isAlreadyConfigured = false
     }
 }

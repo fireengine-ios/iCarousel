@@ -70,7 +70,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     var itemModel: Item?
 
-    override func setImage(image: UIImage?) {
+    override func setImage(image: UIImage?, animated: Bool) {
         isAlreadyConfigured = true
 
         if (isBigSize()){
@@ -85,21 +85,19 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         }
     }
     
-    override func setPlaceholderImage(fileType: FileType) {
-        var image: UIImage?
-        
-        switch fileType {
-        case .folder:
-            image = isBigSize() ? UIImage(named: "fileBigIconFolder") : UIImage(named: "fileIconFolder")
-        case .audio:
-            image = isBigSize() ? UIImage(named: "fileBigIconAudio") : UIImage(named: "fileIconAudio")
-        case let .application(applicationType):
-            image = isBigSize() ? applicationType.bigIconImage() : applicationType.smallIconImage()
-        default:
-            image = nil
-        }
-        setImage(image: image)
-    }
+//    override func setPlaceholderImage(fileType: FileType) {
+//        switch fileType {
+//        case .folder:
+//            image = isBigSize() ? UIImage(named: "fileBigIconFolder") : UIImage(named: "fileIconFolder")
+//        case .audio:
+//            image = isBigSize() ? UIImage(named: "fileBigIconAudio") : UIImage(named: "fileIconAudio")
+//        case let .application(applicationType):
+//            image = isBigSize() ? applicationType.bigIconImage() : applicationType.smallIconImage()
+//        default:
+//            image = nil
+//        }
+//        setImage(image: image, animated: false)
+//    }
     
     private func isBigSize() -> Bool{
         return frame.size.height > BasicCollectionMultiFileCell.frameSize
@@ -116,11 +114,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         if let imageView = isBigSize() ? self.bigContentImageView : self.smallContentImageView {
             imageView.contentMode = .center
             imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { (image, error, cacheType, url) in
-                imageView.layer.opacity = 0.1
-                self.setImage(image: image)
-                UIView.animate(withDuration: 0.2, animations: {
-                    imageView.layer.opacity = 1.0
-                })
+                self.setImage(image: image, animated: true)
             }
         }
     }
@@ -162,14 +156,14 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         }
 
         bigContentImageView.image = nil
-        bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(object: wrappered)
+        bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         if (isBigSize()){
-            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(object: wrappered)
+            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         }else{
             if (isCellSelectionEnabled){
-                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(object: wrappered)
+                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: wrappered.fileType)
             }else{
-                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(object: wrappered)
+                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
             }
         }
         
@@ -248,7 +242,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                     smallCellSelectionView.isHidden = !isSelected
                     smallContentImageView.isHidden = isSelected
                 }
-                smallContentImageView.setSelection(selection: isSelected, showSelectonBorder: isSelectionActive)
+                //because if we have image for object and object is not selected we should not show empty circle in top right corner of image
+                smallContentImageView.setSelection(selection: isSelected, showSelectonBorder: isSelected)
             }
         }else{
             if (isBigSize()){

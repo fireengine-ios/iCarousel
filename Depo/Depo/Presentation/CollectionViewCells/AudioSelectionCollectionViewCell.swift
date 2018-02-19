@@ -23,6 +23,8 @@ class AudioSelectionCollectionViewCell: BaseCollectionViewCell {
         // Initialization code
         nameLabel.textColor = ColorConstants.textGrayColor
         nameLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        
+        contentView.backgroundColor = ColorConstants.whiteColor
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem){
@@ -30,16 +32,18 @@ class AudioSelectionCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool){
-        if (isSelectionActive){
-            
-            UIView.transition(with: selectionImage,
-                              duration: NumericConstants.animationDuration,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                let image = UIImage(named: isSelected ? "selectedList": "pselected")
-                self.selectionImage.image = image
-            }, completion: nil)
-        }
+        let image = UIImage(named: isSelected ? "selectedList": "pselected")
+        self.selectionImage.image = image
+    }
+    
+    override func setSelectionWithAnimation(isSelectionActive: Bool, isSelected: Bool){
+        UIView.transition(with: selectionImage,
+                          duration: NumericConstants.animationDuration,
+                          options: .transitionCrossDissolve,
+                          animations: {
+                            let image = UIImage(named: isSelected ? "selectedList": "pselected")
+                            self.selectionImage.image = image
+        }, completion: nil)
     }
     
     func changeButtonState(playing: Bool) {

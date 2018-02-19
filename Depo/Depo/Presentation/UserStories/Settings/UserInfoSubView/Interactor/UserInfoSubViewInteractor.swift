@@ -10,7 +10,7 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
 
     weak var output: UserInfoSubViewInteractorOutput!
 
-    private var userInfoResponse: AccountInfoResponse?
+    private var userInfoResponse: AccountInfoResponse? = SingletonStorage.shared.accountInfo
     
     func onStartRequests() {
         
@@ -20,29 +20,33 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
         group.enter()
         group.enter()
         
-        
         AccountService().info(success: { [weak self] (response) in
-            self?.userInfoResponse = response as? AccountInfoResponse
-            DispatchQueue.main.async {
-                self?.output.setUserInfo(userInfo: response as! AccountInfoResponse)
-                group.leave()
+            if let userInfo = response as? AccountInfoResponse {
+                self?.userInfoResponse = userInfo
+                SingletonStorage.shared.accountInfo = userInfo
+                DispatchQueue.main.async {
+                    self?.output.setUserInfo(userInfo: userInfo)
+                }
             }
-        }) { (error) in
             group.leave()
-        }
+            
+        }, fail: { [weak self] error in
+            self?.output.failedWith(error: error)
+            group.leave()
+        })
         
         AccountService().quotaInfo(success: { [weak self] (response) in
             DispatchQueue.main.async {
                 self?.output.setQuotaInfo(quotoInfo: response as! QuotaInfoResponse)
             }
             group.leave()
-        }) { (error) in
+        }, fail: { [weak self] error in
+            self?.output.failedWith(error: error)
             group.leave()
-        }
+        })
         
         group.notify(queue: queue) { [weak self] in
             self?.output.requestsFinished()
         }
-    }
-    
+    }    
 }

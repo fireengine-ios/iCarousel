@@ -16,15 +16,6 @@ import AVFoundation
     
     typealias  Photo = (_ image: UIImage?) -> Swift.Void
     
-//    private let viewController: UIViewController
-    private var photoCallBack: Photo?
-//    private let picker = UIImagePickerController()
-    
-//    init(with viewController: UIViewController) {
-//        self.viewController = viewController
-//        
-//    }
-    
     func cameraIsAvalible (cameraGranted: @escaping CameraGranted) {
         log.debug("CameraService cameraIsAvalible")
 

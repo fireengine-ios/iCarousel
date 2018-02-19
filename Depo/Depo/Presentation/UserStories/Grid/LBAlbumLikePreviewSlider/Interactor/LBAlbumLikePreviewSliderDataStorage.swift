@@ -7,19 +7,32 @@
 //
 
 enum MyStreamType: Int {
-    case album = 0
+    case albums = 0
     case story
     case people
     case things
     case places
+    case album
     
     var title: String {
         switch self {
-        case .album: return TextConstants.myStreamAlbumsTitle
+        case .albums: return TextConstants.myStreamAlbumsTitle
         case .story: return TextConstants.myStreamStoriesTitle
         case .people: return TextConstants.myStreamPeopleTitle
         case .things: return TextConstants.myStreamThingsTitle
         case .places: return TextConstants.myStreamPlacesTitle
+        default: return ""
+        }
+    }
+    
+    var placeholder: UIImage {
+        switch self {
+        case .albums: return UIImage()
+        case .story: return UIImage()
+        case .people: return #imageLiteral(resourceName: "people")
+        case .things: return #imageLiteral(resourceName: "things")
+        case .places: return #imageLiteral(resourceName: "places")
+        default: return UIImage()
         }
     }
 }
@@ -27,70 +40,56 @@ enum MyStreamType: Int {
 class SliderItem {
     var name: String?
     var previewItems: [PathForItem]?
+    var type: MyStreamType? {
+        didSet {
+            placeholderImage = type?.placeholder
+            name = type?.title
+        }
+    }
     var placeholderImage: UIImage?
-    var type: MyStreamType?
+    var albumItem: AlbumItem?
     
     init(name: String?, previewItems:[PathForItem]?, placeholder: UIImage?, type: MyStreamType?) {
+        self.type = type
         self.name = name
         self.previewItems = previewItems
         self.placeholderImage = placeholder
-        self.type = type
     }
     
     init(withAlbumItems items: [AlbumItem]?) {
-        name = TextConstants.myStreamAlbumsTitle
         if let items = items {
             previewItems = Array(items.prefix(4).flatMap {$0.preview?.patchToPreview})
         }
-        type = .album
-        placeholderImage = UIImage() //TODO: No image
+        setType(.albums)
     }
     
     init(withStoriesItems items: [Item]?) {
-        name = TextConstants.myStreamStoriesTitle
         if let items = items {
             previewItems = Array(items.prefix(4).flatMap {$0.patchToPreview})
         }
-        type = .story
-        placeholderImage = UIImage() //TODO: No image
+        setType(.story)
     }
     
-    init(withPeopleItems items: [PeopleItemResponse]?) {
-        name = TextConstants.myStreamPeopleTitle
-        if let items = items {
-            previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
-        }
-        type = .people
-        placeholderImage = #imageLiteral(resourceName: "people")
+    init(withAlbum album: AlbumItem) {
+        setType(.album)
+        name = album.name
+        previewItems = [PathForItem.remoteUrl(album.preview?.tmpDownloadUrl)]
+        albumItem = album
     }
     
-    init(withThingItems items: [ThingsItemResponse]?) {
-        name = TextConstants.myStreamThingsTitle
-        if let items = items {
-            previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
-        }
-        type = .things
-        placeholderImage = #imageLiteral(resourceName: "things")
+    init(withThumbnails items:[URL?], type: MyStreamType) {
+        previewItems = items.flatMap { PathForItem.remoteUrl($0) }
+        setType(type)
     }
     
-    init(withPlaceItems items: [PlacesItemResponse]?) {
-        name = TextConstants.myStreamPlacesTitle
-        if let items = items {
-            previewItems = Array(items.prefix(4).flatMap {PathForItem.remoteUrl($0.thumbnail)})
-        }
-        type = .places
-        placeholderImage = #imageLiteral(resourceName: "places")
+    private func setType(_ type: MyStreamType?) {
+        self.type = type
     }
 }
 
 class LBAlbumLikePreviewSliderDataStorage {
     
-    var albumItems: [AlbumItem] = []
     var storyItems: [Item] = []
-    var peopleItems: [Item] = []
-    var thingItems: [Item] = []
-    var placeItems: [Item] = []
-    
     var currentItems: [SliderItem] = []
     
     func addNew(item: SliderItem) {

@@ -36,19 +36,16 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     private let localManager = LocalMediaStorage.default
     
-//    private let remoteManager = SearchService()
-    
     private let getImageServise = ImageDownloder()
     
-    private var assetCache: PHCachingImageManager? {
-        var cachingManager: PHCachingImageManager?
-        if LocalMediaStorage.default.photoLibraryIsAvailible() {
-            cachingManager = PHCachingImageManager()
-            cachingManager?.allowsCachingHighQualityImages = false
+    private lazy var assetCache: PHCachingImageManager? = {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return nil
         }
+        let cachingManager = PHCachingImageManager()
+        cachingManager.allowsCachingHighQualityImages = false
         return cachingManager
-    }
-    
+    }()
     
     // MARK: PhotoDataSource
 
@@ -95,7 +92,8 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         }
     }
     
-    @discardableResult func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) -> URL? {
+    @discardableResult
+    func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) -> URL? {
         if isOriginal {
             switch item.patchToPreview {
             case let .localMediaContent(local):
@@ -116,66 +114,37 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         
         return nil
     }
+    
+    private let targetSize = CGSize(width: 300, height: 300)
+    
+    private lazy var defaultImageRequestOptions: PHImageRequestOptions = {
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = true
+        options.isSynchronous = true
+        return options
+    }()
 }
 
 extension FilesDataSource {
     
     //Mark: - Sync Image
     
-    private func defaultImageRequestOptions() -> PHImageRequestOptions {
-        let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = true
-        options.isSynchronous = true
-        options.version = .current
-        options.deliveryMode = .opportunistic
-        options.resizeMode = .exact
-        
-        return options
-    }
-    
     func stopCahcingAllImages() {
-        guard let cachingManager = assetCache else {
-            return
-        }
-        
-        cachingManager.stopCachingImagesForAllAssets()
+        assetCache?.stopCachingImagesForAllAssets()
     }
     
     func startCahcingImages(for assets: [PHAsset]) {
-        guard let cachingManager = assetCache else {
-            return
-        }
-        
-        let targetSize = CGSize(width: 300, height: 300)
-        
-        let options = defaultImageRequestOptions()
-        
-        cachingManager.startCachingImages(for: assets, targetSize: targetSize, contentMode: .aspectFill, options: options)
+        assetCache?.startCachingImages(for: assets, targetSize: targetSize, contentMode: .aspectFill, options: defaultImageRequestOptions)
     }
     
     func stopCahcingImages(for assets: [PHAsset]) {
-        guard let cachingManager = assetCache else {
-            return
-        }
-        
-        let targetSize = CGSize(width: 300, height: 300)
-        
-        let options = defaultImageRequestOptions()
-        
-        cachingManager.stopCachingImages(for: assets, targetSize: targetSize, contentMode: .aspectFill, options: options)
+        assetCache?.stopCachingImages(for: assets, targetSize: targetSize, contentMode: .aspectFill, options: defaultImageRequestOptions)
     }
     
     func getAssetThumbnail(asset: PHAsset, indexPath: IndexPath, completion: @escaping (_ image: UIImage?, _ indexPath: IndexPath)->Void) {
-        guard let cachingManager = assetCache else {
-            return
-        }
-        
-        let targetSize = CGSize(width: 300, height: 300)
-        
-        let options = defaultImageRequestOptions()
-        
-        cachingManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
-            completion(result, indexPath)
+        assetCache?.requestImage(for: asset, targetSize: targetSize, contentMode: .default, options: defaultImageRequestOptions, resultHandler: { (image, _) in
+            completion(image, indexPath)
         })
     }
 }

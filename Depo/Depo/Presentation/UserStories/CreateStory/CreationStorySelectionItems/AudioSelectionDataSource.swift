@@ -9,19 +9,45 @@
 class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelectionCollectionViewCellDelegate {
     
     lazy var player: MediaPlayer = factory.resolve()
-    let smallPlayer = SmallBasePlayer()
+    private lazy var smallPlayer: MediaPlayer = MediaPlayer()
     
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
         super.setupCollectionView(collectionView: collectionView, filters: [.fileType(.audio)])
-        let nib = UINib(nibName: CollectionViewCellsIdsConstant.audioSelectionCell, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.audioSelectionCell)
+        collectionView.register(nibCell: AudioSelectionCollectionViewCell.self)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeue(cell: AudioSelectionCollectionViewCell.self, for: indexPath)
+        if smallPlayer.isPlaying {
+            let item = tableDataMArray[indexPath.section][indexPath.row]
+            cell.playingButton.isSelected = isObjectPlaying(item: item)
+        } else {
+            cell.playingButton.isSelected = false
+        }
+        return cell
+    }
+    
+    override func isObjctSelected(object: BaseDataSourceItem) -> Bool {
+        if let firstObject = selectedItemsArray.first as? WrapData, let item = object as? WrapData{
+            if firstObject.metaData != nil{
+                return firstObject.uuid == item.uuid
+            }else{
+                return firstObject.id == item.id
+            }
+        }
+        return false
+    }
+    
+    func isObjectPlaying(item: BaseDataSourceItem) -> Bool {
+        guard let item = item as? Item, let itemThatPlayingRightNow = smallPlayer.currentItem else{
+            return false
+        }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.audioSelectionCell, for: indexPath)
-        
-        return  cell
+        if itemThatPlayingRightNow.metaData != nil, item.metaData != nil{
+            return itemThatPlayingRightNow.uuid == item.uuid
+        }else{
+            return itemThatPlayingRightNow.id == item.id
+        }
     }
     
     
@@ -38,21 +64,19 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
             return
         }
         
-//        SingleSong.default.stop()
         player.stop()
         
-        
-        inCell.playingButton.isSelected ? smallPlayer.stop() : smallPlayer.playWithItem(object: unwrapedObject)
+        inCell.playingButton.isSelected ? smallPlayer.stop() : smallPlayer.play(list: [unwrapedObject], startAt: 0)
         
         unplayOtherCells(currentlyPlayingCell: inCell)
    
-        inCell.changeButtonState(playing: smallPlayer.isPlaying())
+        inCell.changeButtonState(playing: smallPlayer.isPlaying)
     }
     
     private func unplayOtherCells(currentlyPlayingCell: AudioSelectionCollectionViewCell) {
         collectionView?.visibleCells.forEach {
             if let audioCell = $0 as? AudioSelectionCollectionViewCell, audioCell != currentlyPlayingCell {
-                audioCell.changeButtonState(playing: false)//playingButton.isSelected = false
+                audioCell.changeButtonState(playing: false)
             }
         }
     }

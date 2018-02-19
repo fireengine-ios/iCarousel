@@ -9,6 +9,10 @@
 class SyncContactsRouter: SyncContactsRouterInput {
     let router = RouterVC()
     
+    func goToConnectedToNetworkFailed() {
+        UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+    }
+    
     func goToManageContacts(moduleOutput: ManageContactsModuleOutput?) {
         router.pushViewController(viewController: router.manageContacts(moduleOutput: moduleOutput))
     }

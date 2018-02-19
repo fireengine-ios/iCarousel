@@ -32,20 +32,6 @@ class Upload: UploadRequestParametrs {
     
     private let isFavorite: Bool
     
-    var contentType: String {
-        switch item.fileType {
-            
-        case .image :
-            return "image/jpg"
-            
-        case .video :
-            return "video/mp4"
-            
-        default:
-            return "unknown"
-        }
-    }
-    
     var contentLenght:String {
         return String(format: "%lu", item.fileSize)
     }
@@ -96,7 +82,7 @@ class Upload: UploadRequestParametrs {
     var header: RequestHeaderParametrs {
         var header  = RequestHeaders.authification()
         
-        header = header + [ HeaderConstant.ContentType : contentType,
+        header = header + [ HeaderConstant.ContentType : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
@@ -123,52 +109,6 @@ class Upload: UploadRequestParametrs {
         return 2000.0
     }
 }
-
-final class UploadDataParametrs: UploadDataRequestParametrs {
-    
-    let data: Data
-    let url: URL
-    var parentUuid: String = ""
-    var isFavorites: Bool = false
-    
-    init(data: Data, url: URL) {
-        self.data = data
-        self.url = url
-    }
-    
-    var requestParametrs: Any {
-        return Data()
-    }
-    
-    let tmpUUId = UUID().description
-    
-    var md5: String {
-        return MD5().hexMD5fromData(data)
-    }
-    
-    var header: RequestHeaderParametrs {
-        return RequestHeaders.authification() + [
-            HeaderConstant.ContentType: "image/jpg",
-            HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
-            HeaderConstant.XMetaRecentServerHash: "s",
-//            HeaderConstant.Etag: md5,
-            HeaderConstant.XObjectMetaFileName: tmpUUId,
-            HeaderConstant.XObjectMetaParentUuid: parentUuid,
-            HeaderConstant.XObjectMetaFavorites: isFavorites ? "true" : "false"
-        ]
-    }
-    
-    var patch: URL {
-        return URL(string: url.absoluteString
-            .appending("/")
-            .appending(tmpUUId))!
-    }
-    
-    var timeout: TimeInterval{
-        return 2000.0
-    }
-}
-
 
 class UploadNotify: BaseRequestParametrs {
     

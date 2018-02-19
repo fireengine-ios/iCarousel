@@ -46,13 +46,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationShowPlusTabBar = "ShowMainTabBarPlusNotification"
     static let notificationHideTabBar = "HideMainTabBarNotification"
     static let notificationShowTabBar = "ShowMainTabBarNotification"
-    static let notificationMusicStartedPlaying = "MusicStartedPlaying"
     static let notificationMusicDrop = "MusicDrop"
-    static let notificationMusicStop = "MusicStop"
     static let notificationPhotosScreen = "PhotosScreenOn"
     static let notificationVideoScreen = "VideoScreenOn"
-    
-    let originalPlusBotttomConstraint: CGFloat = 10
     
     fileprivate var photoBtn            : SubPlussButtonView!
     fileprivate var uploadBtn           : SubPlussButtonView!
@@ -246,17 +242,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeTabBarStatus(hidden: false)
         //tabBar.isHidden = false
         if (self.bottomTabBarConstraint.constant < 0){
-            if #available(iOS 10.0, *) {
-                let obj = UIViewPropertyAnimator(duration: NumericConstants.animationDuration, curve: .linear) {
-                    self.bottomTabBarConstraint.constant = 0
-                    self.tabBar.layoutIfNeeded()
-                }
-                obj.startAnimation()
-            } else {
-                UIView.animate(withDuration: NumericConstants.animationDuration) {
-                    self.bottomTabBarConstraint.constant = 0
-                    self.tabBar.layoutIfNeeded()
-                }
+            UIView.animate(withDuration: NumericConstants.animationDuration) {
+                self.bottomTabBarConstraint.constant = 0
+                self.view.layoutIfNeeded()
             }
         }
     }
@@ -268,20 +256,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             if !musicBar.isHidden {
                 bottomConstraintConstant -= self.musicBar.frame.height
             }
-            if #available(iOS 10.0, *) {
-                let obj = UIViewPropertyAnimator(duration: NumericConstants.animationDuration, curve: .linear) {
-                    self.bottomTabBarConstraint.constant = bottomConstraintConstant
-                    self.tabBar.layoutIfNeeded()
-                }
-                obj.startAnimation()
-            } else {
-                UIView.animate(withDuration: NumericConstants.animationDuration) {
-                    self.bottomTabBarConstraint.constant = bottomConstraintConstant
-                    self.tabBar.layoutIfNeeded()
-                }
+            UIView.animate(withDuration: NumericConstants.animationDuration) {
+                self.bottomTabBarConstraint.constant = bottomConstraintConstant
+                self.view.layoutIfNeeded()
             }
         }
-        
     }
     
     private func changeTabBarStatus(hidden: Bool) {
@@ -291,11 +270,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBAction func plussBtnAction(_ sender: Any) {
         changeViewState(state: !plussButton.isSelected)
-    }
-    
-    func changeTabBarAppearance(editingMode: Bool = false) {
-        plussButton.isHidden = editingMode
-        plussButton.isEnabled = !editingMode
     }
     
     func setupCustomNavControllers() {
@@ -520,22 +494,12 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             return
         }
         
-        view.layoutIfNeeded()
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews, animations: {
             for button in buttons{
                 button.changeVisability(toHidden: hidden)
             }
             self.view.layoutIfNeeded()
         }, completion: nil)
-    }
-    
-    private func setupOriginalPlustBtnConstraint(forView unconstrainedView: SubPlussButtonView) {
-//        let centerX = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: unconstrainedView.button, attribute: .centerX, multiplier: 1, constant: 0)
-//        let bot = NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: unconstrainedView, attribute: .bottom, multiplier: 1, constant: 10)
-//        unconstrainedView.centerXConstraint = centerX
-//        unconstrainedView.botConstraint = bot
-//        view.addConstraints([centerX, bot])
-        view.layoutIfNeeded()
     }
     
     
@@ -596,22 +560,6 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         }
     }
     
-    func getDataSource() -> RemoteItemsService{
-        var searchService: RemoteItemsService? = nil
-        if let nController = selectedViewController as? UINavigationController{
-            let viewConroller = nController.viewControllers.last
-            if let contr = viewConroller as? BaseFilesGreedViewController{
-                searchService = contr.getRemoteItemsService()
-            }
-        }
-        
-        if (searchService == nil){
-            searchService = AllFilesService(requestSize: 999)
-        }
-        
-        return searchService!
-    }
-    
     func getFolderUUID() -> String? {
         if let viewConroller = currentViewController as? BaseFilesGreedViewController {
             return viewConroller.getFolder()?.uuid
@@ -624,18 +572,16 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             let data = UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
             else { return }
         
-        /// IF WILL BE NEED TO SAVE FILE
-        //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-
         let wrapData = WrapData(imageData: data)
         
-        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {
-//            DispatchQueue.main.async {
-//                UIApplication.showSuccessAlert(message: TextConstants.photoUploadedMessage )
-//            }
-        }) { (error) in
+        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: false, success: {
+        }) { [weak self] error in
             DispatchQueue.main.async {
-                UIApplication.showErrorAlert(message: error.localizedDescription)
+                let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                              message: error.localizedDescription,
+                                              image: .error,
+                                              buttonTitle: TextConstants.ok)
+                self?.present(vc, animated: true, completion: nil)
             }
         }
         
@@ -692,7 +638,12 @@ extension TabBarViewController: TabBarActionHandler {
             
         case .uploadFromLifeBox:
             let parentFolder = router.getParentUUID()
-            let controller = router.uploadFromLifeBox(folderUUID: parentFolder)
+            let controller: UIViewController
+            if let currentVC = currentViewController as? BaseFilesGreedViewController {
+                controller = router.uploadFromLifeBox(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule())
+            } else {
+                controller = router.uploadFromLifeBox(folderUUID: parentFolder)
+            }
             let navigationController = UINavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)

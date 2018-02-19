@@ -12,6 +12,8 @@ typealias ListRemoveItems = ( [WrapData] ) -> Void
 
 typealias ListRemoveAlbums = ( [AlbumItem] ) -> Void
 
+typealias AlbumCoverPhoto = ( Item ) -> Void
+
 typealias FailRemoteItems = () -> Void
 
 
@@ -135,10 +137,11 @@ class RemoteItemsService {
             log.debug("RemoteItemsService getSuggestion SearchService suggestion success")
             
             success((suggestList as! SuggestionResponse).list)
-        }) { (error) in
+        }) { errorResponce in
+            errorResponce.showInternetErrorGlobal()
             log.debug("RemoteItemsService getSuggestion SearchService suggestion fail")
 
-            fail(error)
+            fail(errorResponce)
         }
     }
     
@@ -198,7 +201,8 @@ class NextPageOperation: Operation {
             self.success?(list)
             semaphore.signal()
             
-        }, fail: { [weak self]_ in
+        }, fail: { [weak self] errorResponce in
+            errorResponce.showInternetErrorGlobal()
             self?.fail?()
             semaphore.signal()
         })
@@ -287,11 +291,11 @@ class StoryService: RemoteItemsService {
             self?.currentPage += 1
             let list = resultResponse.list.flatMap{ Item(remote: $0) }
             success?(list)
-            }, fail: { _ in
-                    log.debug("StoryService remote searchStories fail")
-    
-                    fail?()
-            })
+        }, fail: {  errorResponce in
+            errorResponce.showInternetErrorGlobal()
+            log.debug("StoryService remote searchStories fail")
+            fail?()
+        })
     }
 }
 
@@ -350,26 +354,22 @@ class AllFilesService: RemoteItemsService {
     }
 }
 
-class FacedRemoteItemsService {
+class FaceImageDetailService: AlbumDetailService {
+    let albumUUID: String
     
-    let fetchService: FetchService
-    
-    let remoteService: RemoteItemsService
-        
-    init(remoteService: RemoteItemsService) {
-        self.remoteService = remoteService
-        self.fetchService = FetchService(batchSize: 140)
+    init(albumUUID: String, requestSize: Int) {
+        self.albumUUID = albumUUID
+        super.init(requestSize: requestSize)
     }
     
-    func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?) {
-        log.debug("FacedRemoteItemsService nextItems")
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue?) {
+        nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: { (items) in
+            if items.isEmpty {
+                fail?()
+            } else {
+                success?(items)
+            }
+        }, fail: fail)
+    }
 
-        remoteService.nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
-    }
-    
-    func performFetch(sortingRules: SortedRules, filtes: [MoreActionsConfig.MoreActionsFileType]?) {
-//        var resultFilters = filtes
-//        fetchService.performFetch(sortingRules: sortingRules, filtes: resultFilters)
-    }
 }
-

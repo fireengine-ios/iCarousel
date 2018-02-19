@@ -19,4 +19,9 @@ protocol SearchViewInput: class {
     func setupUnderNavBarBar(withConfig config: GridListTopBarConfig)
     func dismissController()
     func showMusicBar()
+    
+    func onSetSelection(state: Bool)
+    func selectedItemsCountChange(with count: Int)
+    
+    func setNavBarRigthItem(active isActive: Bool)
 }

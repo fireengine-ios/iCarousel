@@ -21,7 +21,7 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
             
             /// JSON(data: data) can not correct string
             if ((json?.count)!>0  && jsonFromData.type == Type.null){
-                jsonString = String.init(data: json! as Data, encoding: .utf8)
+                jsonString = String(data: json! as Data, encoding: .utf8)
             }
             
         } else {
@@ -61,37 +61,6 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
     
     var responseHeader: [AnyHashable:Any]? {
         return response?.allHeaderFields
-    }
-}
-
-//class LoginResponse: ObjectRequestResponse {
-//    
-//    var rememberMeToken: String?
-//    var token: String?
-//    var newUser: Bool?
-//    var migration: Bool?
-//    var accountWarning: String?
-//
-//    override func mapping() {
-//
-//        rememberMeToken = self.responseHeader?[HeaderConstant.RememberMeToken] as? String
-//        
-//        //Need set remember me Token because we need to store it.
-//        //As we can understand API documentation, we should receive it but server did not send X-Remember-Me-Token in remember me login method
-//        if (rememberMeToken == nil){
-////            rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
-//        }
-//        
-//        token = self.responseHeader?[HeaderConstant.AuthToken] as? String
-//        newUser = self.responseHeader?[HeaderConstant.newUser] as? Bool
-//        migration = self.responseHeader?[HeaderConstant.migration] as? Bool
-//        accountWarning = self.responseHeader?[HeaderConstant.accountWarning] as? String
-//    }
-//}
-
-class FailLoginResponse: ObjectRequestResponse {
-    
-    override func mapping() {
     }
 }
 

@@ -194,7 +194,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (view == nil){
             return
         }
-        debugPrint("???getContentWithSuccess()")
         asyncOperationSucces()
         view.stopRefresher()
         
@@ -243,6 +242,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return dataSource.getAllObjects().isEmpty
     }
     
+    func getCurrentSortRule() -> SortedRules {
+        return sortedRule
+    }
+    
     func getRemoteItemsService() -> RemoteItemsService{
         return interactor.getRemoteItemsService()
     }
@@ -264,7 +267,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         log.debug("BaseFilesGreedPresenter onItemSelected")
 
         if item.fileType.isUnSupportedOpenType {
-            let sameTypeFiles: [BaseDataSourceItem] = data.flatMap{ return $0 }.filter{ $0.fileType == item.fileType }
+            let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
                                   type: type, sortType: sortedType, moduleOutput: self)
         } else {
@@ -272,6 +275,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                           image: .error, buttonTitle: TextConstants.ok)
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
+    }
+    
+    private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
+        let allItems = items.flatMap{ return $0 }
+        if item.fileType.isDocument {
+            return allItems.filter{ $0.fileType.isDocument }
+        } else if item.fileType == .video || item.fileType == .image {
+            return allItems.filter{ ($0.fileType == .video) || ($0.fileType == .image) }
+        }
+        return allItems.filter{ $0.fileType == item.fileType }
     }
     
     func getCellSizeForList() -> CGSize {
@@ -422,6 +435,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
         dataSource.currentSortType = rule
+        (rule == .sizeAZ || rule == .sizeZA) ? (dataSource.isHeaderless = true) : (dataSource.isHeaderless = false)
+
         moduleOutput?.reloadType(type, sortedType: sortedType, fieldType: getFileFilter())
         reloadData()
     }
@@ -452,17 +467,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if dataSource.selectedItemsArray.count > 0 {
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
-//        UploadService.default.uploadOnDemand(success: {
-//            DispatchQueue.main.async {
-//                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
-//            }
-//            print("Upload success")
-//        }) { (errorResponse) in
-//            print("Upload fail")
-//        }
-//        
-//        reloadData()
-
     }
     
     func moreActionsPressed(sender: Any) {
@@ -471,10 +475,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         var actionTypes = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
         if selectionMode {
             let selectedItemsUUIDs = Array(dataSource.selectedItemsArray)
-            var selectedItems = [WrapData]()
+            var selectedItems = [BaseDataSourceItem]()
             
-            for items in dataSource.allItems {
-                selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
+            for items in dataSource.getAllObjects() {
+                selectedItems += items.filter { selectedItemsUUIDs.contains($0) }
             }
             
             //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
@@ -500,8 +504,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 let serverObjects = selectedItems.filter({ return !$0.isLocalItem })
                 if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
-                }else{
-                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems)
+                } else if selectedItems is [Item] {
+                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item])
                     if localDuplicates.count == 0 {
                         //selectedItems = localDuplicates
                         actionTypes.remove(at: deleteOriginalIndex)
@@ -644,5 +648,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         setupTopBar()
     }
     
+    func changeCover() { }
 }
 

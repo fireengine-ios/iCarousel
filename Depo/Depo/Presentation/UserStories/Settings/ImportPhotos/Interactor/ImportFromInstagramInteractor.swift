@@ -9,8 +9,8 @@
 import Foundation
 
 class ImportFromInstagramInteractor {
-    var instOutput: ImportFromInstagramInteractorOutput!
-    let instService = InstagramService()
+    weak var instOutput: ImportFromInstagramInteractorOutput?
+    private let instService = InstagramService()
 }
 
 extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
@@ -24,12 +24,13 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
                 self?.getSyncStatus()
             } else {
                 DispatchQueue.main.async {
-                    self?.instOutput.syncStatusFailure(errorMessage: "Instagram is not connected")
+                    self?.instOutput?.syncStatusFailure(errorMessage: "Instagram is not connected")
                 }
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {
-                self?.instOutput.syncStatusFailure(errorMessage: errorResponse.description)
+                errorResponse.showInternetErrorGlobal()
+                self?.instOutput?.syncStatusFailure(errorMessage: errorResponse.description)
             }
         })
     }
@@ -40,11 +41,11 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
                 let status = response.status
                 else { return }
             DispatchQueue.main.async {
-                self?.instOutput.syncStatusSuccess(status: status)
+                self?.instOutput?.syncStatusSuccess(status: status)
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {
-                self?.instOutput.syncStatusFailure(errorMessage: errorResponse.description)
+                self?.instOutput?.syncStatusFailure(errorMessage: errorResponse.description)
             }
         })
     }
@@ -55,11 +56,11 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
                 let isConnected = response.instagram
                 else { return }
             DispatchQueue.main.async {
-                self?.instOutput.connectionSuccess(isConnected: isConnected)
+                self?.instOutput?.connectionSuccess(isConnected: isConnected)
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {
-                self?.instOutput.connectionFailure(errorMessage: errorResponse.description)
+                self?.instOutput?.connectionFailure(errorMessage: errorResponse.description)
             }
         })
     }
@@ -68,11 +69,11 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
         instService.getInstagramConfig(success: { [weak self] response in
             guard let response = response as? InstagramConfigResponse else { return }
             DispatchQueue.main.async {
-                self?.instOutput.configSuccess(instagramConfig: response)
+                self?.instOutput?.configSuccess(instagramConfig: response)
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {
-                self?.instOutput.configFailure(errorMessage: errorResponse.description)
+                self?.instOutput?.configFailure(errorMessage: errorResponse.description)
             }
         })
     }
@@ -83,17 +84,17 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
             guard let _ = response as? SendSocialSyncStatusResponse else { return }
             DispatchQueue.main.async {
                 if status {
-                    self?.instOutput.startAsyncSuccess()
+                    self?.instOutput?.startAsyncSuccess()
                 } else {
-                    self?.instOutput.stopAsyncSuccess()
+                    self?.instOutput?.stopAsyncSuccess()
                 }
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {
                 if status {
-                    self?.instOutput.startAsyncFailure(errorMessage: errorResponse.description)
+                    self?.instOutput?.startAsyncFailure(errorMessage: errorResponse.description)
                 } else {
-                    self?.instOutput.stopAsyncFailure(errorMessage: errorResponse.description)
+                    self?.instOutput?.stopAsyncFailure(errorMessage: errorResponse.description)
                 }
             }
         })
@@ -103,11 +104,11 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
         instService.createMigration(success: { [weak self] response in
             guard let _ = response as? CreateMigrationResponse else { return }
             DispatchQueue.main.async {
-                self?.instOutput.uploadCurrentSuccess()
+                self?.instOutput?.uploadCurrentSuccess()
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {
-                self?.instOutput.uploadCurrentFailure(errorMessage: errorResponse.description)
+                self?.instOutput?.uploadCurrentFailure(errorMessage: errorResponse.description)
             }
         })
     }
@@ -116,11 +117,11 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
         instService.cancelMigration(success: { [weak self] response in
             guard let _ = response as? CancelMigrationResponse else { return }
             DispatchQueue.main.async {
-                self?.instOutput.cancelUploadSuccess()
+                self?.instOutput?.cancelUploadSuccess()
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {
-                self?.instOutput.cancelUploadFailure(errorMessage: errorResponse.description)
+                self?.instOutput?.cancelUploadFailure(errorMessage: errorResponse.description)
             }
         })
     }

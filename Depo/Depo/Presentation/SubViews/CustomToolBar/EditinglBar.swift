@@ -32,6 +32,7 @@ enum ElementTypes {
     case addToCmeraRoll
     case removeFromAlbum
     case print
+    case changeCoverPhoto
     //upload?
     case photos
     case iCloudDrive
@@ -72,12 +73,9 @@ class EditinglBar: CustomTabBar {
         static let download = ("downloadTB", TextConstants.tabBarDownloadLabel)
     }
     
-    private var currentVC: UIViewController?
-    
     private let tabBarHeight: CGFloat = 49
     
     private let originalY: CGFloat = -49
-    private let visibleY: CGFloat = 0
     private let originalX: CGFloat = 0
     
 
@@ -96,15 +94,10 @@ class EditinglBar: CustomTabBar {
         isTranslucent = false
     }
     
-    func show(animated: Bool = true, onView sourceView: UIView) {//(onViewController sourceVC: UIViewController) {
-//        currentVC = sourceVC
-        if self.superview != nil {
+    func show(animated: Bool = true, onView sourceView: UIView) {
+        if superview != nil {
             return
         }
-//        guard let appDelegate = UIApplication.shared.delegate,let window: UIWindow = appDelegate.window as? UIWindow else {
-//            return
-//        }
-//        window.addSubview(self)
         sourceView.addSubview(self)
         sourceView.bringSubview(toFront: self)
         let sourceViewSize = sourceView.frame.size
@@ -135,10 +128,6 @@ class EditinglBar: CustomTabBar {
         }, completion: { _ in
             completionBlock?()
         })
-    }
-    
-    private func baseAction() { //currently does nothing
-        
     }
     
     override func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple]) {

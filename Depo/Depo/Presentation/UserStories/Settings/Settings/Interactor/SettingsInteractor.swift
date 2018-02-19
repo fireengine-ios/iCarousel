@@ -11,8 +11,6 @@ class SettingsInteractor: SettingsInteractorInput {
     weak var output: SettingsInteractorOutput!
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
-    private lazy var biometricsManager: BiometricsManager = factory.resolve()
-    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     private var userInfoResponse: AccountInfoResponse?
     let authService = AuthenticationService()
@@ -41,7 +39,8 @@ class SettingsInteractor: SettingsInteractorInput {
         
         var array = [[TextConstants.settingsViewCellBeckup,
                       TextConstants.settingsViewCellImportPhotos,
-                      TextConstants.settingsViewCellAutoUpload],
+                      TextConstants.settingsViewCellAutoUpload,
+                      TextConstants.settingsViewCellFaceAndImageGrouping],
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
                       TextConstants.settingsViewCellLogout]]
@@ -74,12 +73,15 @@ class SettingsInteractor: SettingsInteractorInput {
     
     func uploadPhoto(withPhoto photo: Data) {
         accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] (response) in
-            DispatchQueue.main.async {
-                self?.output.profilePhotoUploadSuccessed()
-            }
-            }, fail: { [weak self] (error) in
+            ImageDownloder().removeImageFromCache(url: self?.userInfoResponse?.urlForPhoto, completion: {
                 DispatchQueue.main.async {
-                    self?.output.profilePhotoUploadFailed()
+                    self?.output.profilePhotoUploadSuccessed()
+                }
+            })
+            
+            }, fail: { [weak self] error in
+                DispatchQueue.main.async {
+                    self?.output.profilePhotoUploadFailed(error: error)
                 }
                 
         })

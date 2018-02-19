@@ -34,8 +34,7 @@ class SearchContacts: BaseRequestParametrs {
     
     override var patch: URL {
         let path = String(format: RouteRequests.searchContacts, query, page)
-        return URL(string: path.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!,
-                   relativeTo: RouteRequests.BaseContactsUrl)!
+        return URL.encodingURL(string: path, relativeTo: RouteRequests.BaseContactsUrl)!
     }
 }
 

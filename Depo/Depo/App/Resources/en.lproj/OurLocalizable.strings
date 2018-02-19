@@ -49,11 +49,12 @@
 "Account cannot be found" = "Account cannot be found";
 "cancelled" = "cancelled";
 "The network connection was lost." = "The network connection was lost.";
+"ServiceError" = "ServiceError";
 "Nothing to download" = "Nothing to download";
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
 "Unknown error" = "Unknown error";
-"Too many invalid attempts, please try again later" = "Too many invalid attempts, please try again later";
+"Too many verification code requested for this msisdn. Please try again later" = "Too many verification code requested for this msisdn. Please try again later";
 "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry." = "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry.";
 "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response.";
 "The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response.";
@@ -100,6 +101,7 @@
 "My Activity Timeline" = "My Activity Timeline";
 "file(s)" = "file(s)";
 "My Stream" = "My Stream";
+"Albums with %@" = "Albums with %@";
 "Cancel" = "Cancel";
 "OK" = "OK";
 "You have free space for %d more items." = "You have free space for %d more items.";
@@ -127,6 +129,7 @@
 "Take Photo" = "Take Photo";
 
 "Remove from album" = "Remove from album";
+"Change cover photo" = "Change cover photo";
 "Back Up" = "Back Up";
 "Add to album" = "Add to album";
 "Remove from Favorites" = "Remove from Favorites";
@@ -159,6 +162,7 @@
 "4G" = "4G";
 "3G" = "3G";
 "2G" = "2G";
+"Mobile Data" = "Mobile Data";
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Free up space";
 "Your device memory is almost full" = "Your device memory is almost full";
@@ -243,6 +247,8 @@
 "Add Music" = "Add Music";
 "Sorry, but story audio should not be empty" = "Sorry, but story audio should not be empty";
 "Add music" = "Add music";
+"Musics" = "Musics";
+"Your Uploads" = "Your Uploads";
 "You did not choose music for your story" = "You did not choose music for your story";
 "Fail while adding to album" = "Fail while adding to album";
 "Story not created" = "Story not created";
@@ -256,7 +262,7 @@
 "Continue" = "Continue";
 "Please Choose 20 files at most" = "Please Choose 20 files at most";
 "Sorry, but story name should not be empty" = "Sorry, but story name should not be empty";
-"You need to enable access to Contacts to continue. \"Settings - Privacy - Contacts\"." = "You need to enable access to Contacts to continue. \"Settings - Privacy - Contacts\".";
+"You need to enable access to Contacts to continue" = "You need to enable access to Contacts to continue";
 "SAVE" = "SAVE";
 "Name" = "Name";
 "Create a Name" = "Create a Name";
@@ -279,6 +285,8 @@
 "Your last back up was a few seconds ago." = "Your last back up was a few seconds ago.";
 "You never backed up your contacts" = "You never backed up your contacts";
 "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.";
+"Are you sure you want to delete?" = "Are you sure you want to delete?";
+"This duplicated contacts will be deleted from your contacts." = "This duplicated contacts will be deleted from your contacts.";
 "%%%d Restored…" = "%%%d Restored…";
 "%%%d Analyzed…" = "%%%d Analyzed…";
 "%%%d Backed up…" = "%%%d Backed up…";
@@ -289,6 +297,8 @@
 "Updated" = "Updated";
 "New Contact" = "New Contact";
 "Back Up My Contacts" = "Back Up My Contacts";
+"Are you sure you want to delete?" = "Are you sure you want to delete?";
+"This contact will be deleted from your contacts." = "This contact will be deleted from your contacts.";
 "%@ of %@ has remained" = "%@ of %@ has remained";
 "UPGRADE" = "UPGRADE";
 "Upgrade" = "Upgrade";
@@ -326,6 +336,8 @@
 "Import From Facebook" = "Import From Facebook";
 "Import From Dropbox" = "Import From Dropbox";
 "Import Photos" = "Import Photos";
+"Face image grouping" = "Face image grouping";
+"Face & Image Grouping" = "Face & Image Grouping";
 "Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
 "Auto-login" = "Auto-login";
 "Turkcell Password" = "Turkcell Password";
@@ -336,6 +348,7 @@
 "Recently Deleted Files" = "Recently Deleted Files";
 "My Activity Timeline" = "My Activity Timeline";
 "Auto Sync" = "Auto Sync";
+"Face & Image Grouping" = "Face & Image Grouping";
 "Import Photos" = "Import Photos";
 "Back-up my contacts" = "Back-up my contacts";
 "Leave feedback" = "Leave feedback";
@@ -538,12 +551,14 @@
 "Please check the e-mail address." = "Please check the e-mail address.";
 "Please enter a valid email adress" = "Please enter a valid email adress";
 "Please type the text" = "Please type the text";
-"You have performed too many attempts. Please try again 1 hour later." = "You have performed too many attempts. Please try again 1 hour later.";
+"You have performed too many attempts. Please try again later." = "You have performed too many attempts. Please try again later.";
 "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
 "The Internet connection appears to be offline." = "The Internet connection appears to be offline.";
 "Please enter your password" = "Please enter your password";
 "Please check the GSM number" = "Please check the GSM number";
 "Login denied. Please check your credentials." = "Login denied. Please check your credentials.";
+"Authentication with Turkcell Password is disabled for the account" = "You can not login to lifebox with your Turkcell password because you have deactivated login with Turkcell password feature. Please, try to login with your lifebox password.";
+"You don't have any lifebox account. Please signup before using the application" = "You don't have any lifebox account. Please signup before using the application";
 "This text doesn't match. Please try again." = "This text doesn't match. Please try again.";
 "Request failed \n Please try again" = "Request failed \n Please try again";
 "Verification code is invalid. \n Please try again." = "Verification code is invalid. \n Please try again.";
@@ -566,6 +581,7 @@
 "I have an account, let me log in" = "I have an account, let me log in";
 "Start using Lifebox now!" = "Start using Lifebox now!";
 "E-mail field is invalid" = "E-mail field is invalid";
+"E-mail is already exist" = "E-mail is already exist";
 "Please enter your GSM number"="Please enter your GSM number";
 "GSM number"="GSM number";
 "Plus" = "Plus";
@@ -580,6 +596,15 @@
 "Delete" = "Delete";
 "Favorite" = "Favorite";
 "Selected" = "Selected";
+"Show & Hide" = "Show & Hide";
+"Show and Hide" = "Show and Hide";
+"Done" = "Done";
+"+Add a Name" = "+Add a Name";
+"+Add Name" = "+Add Name";
+"Are these the same person" = "Are these the same person";
+"Nope" = "Nope";
+"this person" = "this person";
+"They will be merged together" = "They will be merged together";
 "Not selected" = "Not selected";
 "E-mail is empty" = "E-mail is empty";
 "Filter Card" = "Filter Card";

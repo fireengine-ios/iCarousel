@@ -25,10 +25,6 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
         
     }
     
-    override func onChangeSelectedItemsCount(selectedItemsCount: Int){
-        //view.setTitle(title: "", subTitle: "")
-    }
-    
     override func onMaxSelectionExeption(){
         log.debug("UploadFromLifeBoxPhotosPresenter onMaxSelectionExeption")
 
@@ -54,8 +50,18 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     }
     
     override func getContentWithSuccess(array: [[BaseDataSourceItem]]){
-        //DBDROP
         super.getContentWithSuccess(array: array)
+    }
+    
+    override func getContentWithSuccess(items: [WrapData]){
+        if let interactor = interactor as? UploadFromLifeBoxInteractor {
+            let filtredArray = items.filter({
+                return $0.uuid != interactor.rootFolderUUID
+            })
+            super.getContentWithSuccess(items: filtredArray)
+        }else{
+            super.getContentWithSuccess(items: items)
+        }
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]){
@@ -77,7 +83,8 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     
     func uploadOperationSuccess(){
         log.debug("UploadFromLifeBoxPhotosPresenter uploadOperationSuccess")
-
+        dataSource.setSelectionState(selectionState: false)
+        stopModeSelected()
         guard let uploadView = view as? UploadFromLifeBoxViewInput else{
             return
         }

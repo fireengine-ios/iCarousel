@@ -18,6 +18,8 @@ protocol BaseFilesGreedViewOutput {
     
     func needShowNoFileView()-> Bool
     
+    func getCurrentSortRule() -> SortedRules
+    
     func getRemoteItemsService() -> RemoteItemsService
     
     func getFolder() -> Item?

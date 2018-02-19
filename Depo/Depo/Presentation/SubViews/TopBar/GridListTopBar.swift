@@ -143,9 +143,7 @@ class GridListTopBar: UIViewController {
                                                                popOverSize: CGSize(width: floatingContainerWidth,
                                                                                    height: popUpHeight))
         
-        rootVC?.present(floatingVC, animated: true, completion: {
-
-        })
+        rootVC?.present(floatingVC, animated: true, completion: nil)
     }
     
     @IBAction func gridListAction(_ sender: Any) {

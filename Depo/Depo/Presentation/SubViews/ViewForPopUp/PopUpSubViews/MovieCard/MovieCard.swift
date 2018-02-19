@@ -11,9 +11,6 @@ import SwiftyJSON
 
 final class MovieCard: BaseView {
     
-    private lazy var imageManager = ImageManager()
-    private lazy var filesDataSource = FilesDataSource()
-    
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
@@ -76,7 +73,7 @@ final class MovieCard: BaseView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
-        videoPreviewImageView.loadImageForItem(object: item)
+        videoPreviewImageView.loadImage(with: item, isOriginalImage: true)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton){

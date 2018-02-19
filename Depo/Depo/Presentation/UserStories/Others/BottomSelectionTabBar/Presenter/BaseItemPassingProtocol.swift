@@ -17,13 +17,12 @@ protocol BaseItemInputPassingProtocol: class {
     func stopModeSelected()
 
     func printSelected()
+    func changeCover()
     
     var selectedItems: [BaseDataSourceItem] { get }//FOR NOW
 }
 
 protocol BaseItemOuputPassingProtocol: class {
-    func preparedSelectedItems(items: [Item])
-    
     func dismiss(animated: Bool)
     func show(animated: Bool, onView sourceView: UIView?)//
 }

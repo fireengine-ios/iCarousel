@@ -37,7 +37,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
             let fileService = WrapItemFileService()
             fileService.deleteLocalFiles(deleteFiles: array, success: {
                 
-                FreeAppSpace.default.deleteDeletedLocalPhotos(deletedPhotos: array)
+                FreeAppSpace.default.deleteDeletedLocalPhotos(deletedPhotos: selectedItems)
                 
                 guard let self_ = self else{
                    return

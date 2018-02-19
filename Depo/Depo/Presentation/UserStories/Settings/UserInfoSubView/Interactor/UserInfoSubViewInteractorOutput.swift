@@ -9,11 +9,8 @@
 import Foundation
 
 protocol UserInfoSubViewInteractorOutput: class {
-    
     func requestsFinished()
-    
     func setUserInfo(userInfo: AccountInfoResponse)
-    
     func setQuotaInfo(quotoInfo: QuotaInfoResponse)
-
+    func failedWith(error: Error)
 }

@@ -22,6 +22,8 @@ protocol BaseFilesGreedViewInput: class {
     
     func stopSelection()
     
+    func getCurrentSortRule() -> SortedRules
+    
     func getFolder() -> Item?
 
     func changeSortingRepresentation(sortType type: SortedRules)
@@ -37,4 +39,8 @@ protocol BaseFilesGreedViewInput: class {
     func showNoFilesTop()
     
     func hideNoFiles()
+    
+    func requestStarted()
+    
+    func requestStopped() 
 }

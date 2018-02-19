@@ -10,64 +10,6 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     var interactor: MoreFilesActionsInteractorInput!
     weak var basePassingPresenter: BaseItemInputPassingProtocol? //do I need it here?
     
-    private func adjastActionTypes(forItems items: [Item]) -> [ElementTypes] {
-        var actionTypes: [ElementTypes] = []
-        if items.count == 1, let item = items.first {
-            
-            switch item.fileType {
-            case .audio:
-                //This on for player
-                actionTypes = [.musicDetails, .addToPlaylist]//, .move]
-                actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append(.delete)
-                
-            case .folder:
-                break
-            case .image:
-                actionTypes = [.createStory, .move]
-                actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
-                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
-            case .video:
-                actionTypes = [.move]
-                actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
-                
-            case .photoAlbum: // TODO add for Alboum
-                break
-                
-            case .musicPlayList: // TODO Add for MUsic
-                break
-                
-            case .application(let fileExtencion):
-                switch fileExtencion {
-                    
-                case .rar, .zip:
-                    actionTypes = [.copy, .move]
-                    actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                    actionTypes.append(.delete)
-                    
-                case .doc, .pdf, .txt, .ppt, .xls, .html:
-                    actionTypes = [.move, .copy, .documentDetails]
-                    actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                    actionTypes.append(.delete)
-                    
-                default:
-                    break
-                }
-            default:
-                break
-            }
-            
-        }
-        return actionTypes
-    }
-    
-    func infoAction() {
-        //        self.router.onInfo(object: currentItems.first!)
-        //        self.view.unselectAll()
-    }
-    
     //MARK: - Interactor output
     
     func operationFinished(type: ElementTypes) {
@@ -84,14 +26,11 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
         startAsyncOperationDisableScreen()
     }
     
-    func dismiss(animated: Bool) {
-        debugPrint("Dismiss")
-    }
+    func dismiss(animated: Bool) {} /// overriding
     
     //MARK: - Base presenter
     
     override func outputView() -> Waiting? {
-        let router = RouterVC()
-        return router.rootViewController
+        return RouterVC().rootViewController
     }
 }

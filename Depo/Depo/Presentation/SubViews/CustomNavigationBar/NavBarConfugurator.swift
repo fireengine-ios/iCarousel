@@ -21,6 +21,10 @@ class NavigationBarList {
     
     let delete: UIBarButtonItem
     
+    let showHide: UIBarButtonItem
+    
+    let done: UIBarButtonItem
+    
     init(){
         settings = UIBarButtonItem(image: UIImage(named: TextConstants.cogBtnImgName),
                              style: .plain,
@@ -46,6 +50,19 @@ class NavigationBarList {
                                  target: nil,
                                  action: nil)
         delete.accessibilityLabel = TextConstants.accessibilityDelete
+        
+        showHide = UIBarButtonItem.init(title: TextConstants.showHideBtnTitleName,
+                                        style: .plain,
+                                        target: nil,
+                                        action: nil)
+        showHide.accessibilityLabel = TextConstants.accessibilityshowHide
+        
+        done = UIBarButtonItem(title: TextConstants.faceImageDone,
+                                style: .plain,
+                                target: nil,
+                                action: nil)
+        
+        done.accessibilityLabel = TextConstants.accessibilityDone
         
         // upload 
         // create
@@ -76,10 +93,6 @@ class NavigationBarConfigurator {
     
     var rightItems: [UIBarButtonItem]? {
          return self.right?.flatMap { $0.navItem }
-    }
-    
-    var leftItems: [UIBarButtonItem]? {
-        return self.left?.flatMap { $0.navItem }
     }
     
     func configure(right:[NavBarWithAction]?, left:[NavBarWithAction]?) {

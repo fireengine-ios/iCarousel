@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ManageContactsRouterInput {
-
+    func deleteContact(_ completion: @escaping (() -> Void))
 }

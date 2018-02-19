@@ -53,19 +53,10 @@ public class MediaItem: NSManagedObject {
         switch wrapData.patchToPreview {
         case let .remoteUrl(url):
             patchToPreviewValue =  url?.absoluteString
-//            isLocalItemValue = false
         case let .localMediaContent(assetContent):
             localFileID = assetContent.asset.localIdentifier
             patchToPreviewValue = nil
-//            isLocalItemValue = true
         }
-        
-//        var duration: Double = 0
-//        if let durSr = wrapData.duration,
-//            let dur = Double(durSr){
-//            duration = dur
-//        }
-//        durationValue = duration
         
         uuidValue = wrapData.uuid
         md5Value = wrapData.md5
@@ -85,10 +76,6 @@ public class MediaItem: NSManagedObject {
         self.albums = NSOrderedSet(array: albums ?? [])
         
         objectSyncStatus = NSSet(array: wrapData.syncStatuses)
-
-//        isUploading
-//        PHAsset
-
     }
     
     var wrapedObject: WrapData {

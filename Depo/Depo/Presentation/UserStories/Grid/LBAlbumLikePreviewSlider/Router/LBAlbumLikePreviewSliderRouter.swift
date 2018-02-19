@@ -10,26 +10,32 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
     
     let router = RouterVC()
     
-    func onItemSelected(type: MyStreamType?) {
-        guard let type = type else {
+    func onItemSelected(_ item: SliderItem) {
+        guard let type = item.type else {
             return
         }
+        
         switch type {
-        case .album: goToAlbumListView()
+        case .albums: goToAlbumListView()
         case .story: goToStoryListView()
         case .people: goToPeopleListView()
         case .things: goToThingListView()
         case .places: goToPlaceListView()
+        case .album:
+            guard let albumItem = item.albumItem else {
+                break
+            }
+            goToAlbumDetailView(album: albumItem)
         }
-    }
-    
-    func goToAlbumbsGreedView() {
-        router.pushViewControllertoTableViewNavBar(viewController: router.albumsListController())
     }
 
     private func goToAlbumDetailView(album: AlbumItem) {
         let controller = router.albumDetailController(album: album, type: .List, moduleOutput: nil)
         router.pushViewControllertoTableViewNavBar(viewController: controller)
+    }
+    
+    func goToAlbumbsGreedView() {
+        router.pushViewControllertoTableViewNavBar(viewController: router.albumsListController())
     }
     
     private func goToAlbumListView() {
@@ -43,15 +49,18 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
     }
     
     private func goToPeopleListView() {
-        
+        let controller = router.peopleListController()
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
     private func goToThingListView() {
-        
+        let controller = router.thingsListController()
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
     private func goToPlaceListView() {
-        
+        let controller = router.placesListController()
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
 }

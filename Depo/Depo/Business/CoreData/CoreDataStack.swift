@@ -51,6 +51,9 @@ class CoreDataStack: NSObject {
     
     var backgroundContext: NSManagedObjectContext
     
+    let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")
+    
+    
     override init() {
 
         mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
@@ -106,19 +109,13 @@ class CoreDataStack: NSObject {
         
         return localDuplicatesMediaItems.flatMap{return WrapData(mediaItem: $0)}
     }
-    
-    private func clearAllEntities() {
-        let allEnteties = persistentStoreCoordinator.managedObjectModel.entities
-        allEnteties.forEach {
-            self.deleteAllObjects(forEntity: $0)
-        }
-    }
-    
-    private func deleteAllObjects(forEntity entity: NSEntityDescription) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
-        fetchRequest.entity = entity
-        deleteObjects(fromFetch: fetchRequest)
-    }
+
+    /// MAYBE WILL BE NEED
+//    private func deleteAllObjects(forEntity entity: NSEntityDescription) {
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+//        fetchRequest.entity = entity
+//        deleteObjects(fromFetch: fetchRequest)
+//    }
     
     private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>]) {
         for fetchRequest in fetchRequests {

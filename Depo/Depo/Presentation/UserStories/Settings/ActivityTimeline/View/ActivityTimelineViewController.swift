@@ -22,6 +22,8 @@ class ActivityTimelineViewController: UIViewController {
         setTitle(withString: TextConstants.activityTimelineTitle)
         setupTableView()
         setupPullToRefresh()
+        
+        isLoadingMore = true
         output.viewIsReady()
     }
     
@@ -79,6 +81,7 @@ extension ActivityTimelineViewController: ActivityTimelineViewInput {
     func refreshTimelineActivities(with array: [ActivityTimelineServiceResponse]) {
         sectionBuilder.clear()
         sectionBuilder.setup(with: array)
+        endFooterRefreshing()
         refreshControl?.endRefreshing()
         tableView.reloadData()
         

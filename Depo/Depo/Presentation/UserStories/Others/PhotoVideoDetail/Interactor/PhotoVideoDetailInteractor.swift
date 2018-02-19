@@ -30,17 +30,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     func onSelectItem(fileObject: Item, from items: [Item]) {
         array.removeAll()
         array.append(contentsOf: items)
-      
-//        if fileObject.fileType == .image || fileObject.fileType == .video {
-////            let wrapperedArray = WrapperedItemsSorting().filterByType(itemsArray: array,
-////                                                                      types: [FileType.video, FileType.image])
-////            guard let buf = wrapperedArray as? [Item] else {
-////                return
-////            }
-////            array = buf
-//        } else {
-////            array = [fileObject]
-//        }
         selectedIndex = array.index(of: fileObject) ?? 0
     }
     
@@ -83,15 +72,13 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 }
             }
             
-            if selectedItem.syncStatus != .notSynced {
+            if !selectedItem.isLocalItem {
                 elementsConfig = elementsConfig + [.delete]
+                elementsConfig = elementsConfig + [.download]
+            } else {
+                elementsConfig = elementsConfig + [.sync]
             }
             
-            if !selectedItem.isSynced() {
-                elementsConfig = elementsConfig + [.sync]
-            } else if selectedItem.isSynced() {
-                elementsConfig = elementsConfig + [.download]
-            }
             return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
         case .application:
             return documentsBottomBarConfig

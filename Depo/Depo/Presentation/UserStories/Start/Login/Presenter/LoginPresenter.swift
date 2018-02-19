@@ -69,6 +69,10 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         router.goToForgotPassword()
     }
     
+    func onOpenSignUp() {
+        router.goToRegistration()
+    }
+    
     func viewAppeared() {
 //        interactor.prepareTimePassed()
     }
@@ -102,6 +106,11 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         if captchaShowed {
             view.refreshCaptcha()
         }
+    }
+    
+    func needSignUp(message: String) {
+        compliteAsyncOperationEnableScreen()
+        view.showNeedSignUp(message: message)
     }
     
     func startedEnteringPhoneNumberPlus() {
@@ -185,10 +194,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         }
         self.textEnterVC = textEnterVC
         RouterVC().presentViewController(controller: textEnterVC)
-    }
-    
-    func failedAccountInfo(errorResponse: ErrorResponse) {
-        compliteAsyncOperationEnableScreen()
     }
     
     func successed(tokenUpdatePhone: SignUpSuccessResponse) {

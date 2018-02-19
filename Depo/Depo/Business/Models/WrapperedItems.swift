@@ -8,6 +8,7 @@
 
 import Foundation
 import Photos
+import SDWebImage
 
 typealias RemoteImage = (_ image: UIImage?) -> Swift.Void
 
@@ -139,8 +140,13 @@ enum FileType: Equatable {
         
     }
     
-    var isApplication: Bool {
-        return true
+    var isDocument: Bool {
+        return self == .application(.doc) ||
+                self == .application(.txt) ||
+                self == .application(.html) ||
+                self == .application(.xls) ||
+                self == .application(.pdf) ||
+                self == .application(.ppt)
     }
     
     var  isUnSupportedOpenType: Bool {
@@ -442,7 +448,6 @@ protocol  Wrappered  {
     var albums: [String]? { get set }
 }
 
-
 class WrapData: BaseDataSourceItem, Wrappered {
     enum Status: String {
         case active = "ACTIVE"
@@ -478,10 +483,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var status: Status
     
-    /* for remote content*/
     var tmpDownloadUrl: URL?
-    
-    var isUploading: Bool = false
     
     var urlToFile: URL? {
         return tmpDownloadUrl
@@ -490,13 +492,27 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var fileData: Data?
     
     var asset: PHAsset? {
-        
         switch patchToPreview  {
-            
         case let .localMediaContent(local):
             return local.asset
         case .remoteUrl(_):
             return nil
+        }
+    }
+    
+    var uploadContentType: String {
+        switch fileType {
+        case .image:
+            if let type = urlToFile?.pathExtension.lowercased() {
+                return "image/\(type)"
+            } else if let data = fileData {
+                return ImageFormat.get(from: data).contentType
+            }
+            return "image/jpg"
+        case .video:
+            return "video/mp4"
+        default:
+            return "unknown"
         }
     }
     
@@ -527,7 +543,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         status = .unknown
         patchToPreview = .remoteUrl(nil)
         // unuse parametrs
-        fileSize =  Int64(0)
+        fileSize =  0
         super.init()
         md5 = "not use "
         
@@ -537,6 +553,57 @@ class WrapData: BaseDataSourceItem, Wrappered {
         syncStatus = .notSynced
         creationDate = Date()
         lastModifiDate = Date()
+    }
+    
+    init(peopleItemResponse: PeopleItemResponse) {
+        id = peopleItemResponse.id
+        fileSize =  0
+        favorites = false
+        status = .unknown
+        metaData = BaseMetaData()
+        metaData?.takenDate = Date()
+        tmpDownloadUrl = peopleItemResponse.thumbnail
+        patchToPreview = .remoteUrl(tmpDownloadUrl)
+        super.init()
+        name = peopleItemResponse.name
+        isLocalItem = false
+        creationDate = Date()
+        syncStatus = .notSynced
+        fileType = .image
+    }
+    
+    init(thingsItemResponse: ThingsItemResponse) {
+        id = thingsItemResponse.id
+        fileSize =  0
+        favorites = false
+        status = .unknown
+        metaData = BaseMetaData()
+        metaData?.takenDate = Date()
+        tmpDownloadUrl = thingsItemResponse.thumbnail
+        patchToPreview = .remoteUrl(tmpDownloadUrl)
+        super.init()
+        name = thingsItemResponse.name
+        isLocalItem = false
+        creationDate = Date()
+        syncStatus = .notSynced
+        fileType = .image
+    }
+    
+    init(placesItemResponse: PlacesItemResponse) {
+        id = placesItemResponse.id
+        fileSize =  0
+        favorites = false
+        status = .unknown
+        metaData = BaseMetaData()
+        metaData?.takenDate = Date()
+        tmpDownloadUrl = placesItemResponse.thumbnail
+        patchToPreview = .remoteUrl(tmpDownloadUrl)
+        super.init()
+        name = placesItemResponse.name
+        isLocalItem = false
+        creationDate = Date()
+        syncStatus = .notSynced
+        fileType = .image
     }
     
     init(baseModel: BaseMediaContent) {
@@ -590,9 +657,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
         favorites = remote.metadata?.favourite ?? false
         tmpDownloadUrl = remote.tempDownloadURL
         patchToPreview = .remoteUrl(URL(string: ""))
-        fileSize = remote.bytes ?? Int64(0)
+        fileSize = remote.bytes ?? 0
         status = Status(string: remote.status)
-        super.init()
+        
+        super.init(uuid: remote.uuid)
         md5 = remote.hash ?? "not hash "
         
         albums = remote.albums

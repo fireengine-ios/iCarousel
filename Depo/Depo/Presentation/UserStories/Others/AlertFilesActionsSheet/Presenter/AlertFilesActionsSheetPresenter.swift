@@ -94,14 +94,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 actionTypes = [.createStory, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                 actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
-                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
-                if item.isSynced() {
+                actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
+                if !item.isLocalItem {
                     actionTypes.append(.delete)
                 }
             case .video:
                 actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((!item.isSynced()) ? .backUp : .addToCmeraRoll)
+                actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
                 
             case .photoAlbum: // TODO add for Alboum
                 break
@@ -131,12 +131,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
         }
         return actionTypes
-    }
-    
-    override func infoAction() {
-        debugPrint("info File acton pressed, no action available")
-        //        self.router.onInfo(object: currentItems.first!)
-        //        self.view.unselectAll()
     }
     
     private func constractSpecifiedActions(with types: [ElementTypes],
@@ -363,6 +357,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 action = UIAlertAction()
             case .undetermend:
                 action = UIAlertAction()
+            case .changeCoverPhoto:
+                action = UIAlertAction(title: TextConstants.actionSheetChangeCover, style: .default, handler: { _ in
+                    self.basePassingPresenter?.changeCover()
+                })
             }
             return action
         }

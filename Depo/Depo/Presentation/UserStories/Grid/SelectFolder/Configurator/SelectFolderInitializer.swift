@@ -11,7 +11,7 @@ import UIKit
 class SelectFolderModuleInitializer: NSObject {
 
     //Connect with object on storyboard
-    class func initializeSelectFolderViewController(with nibName:String, folder: Item?) -> SelectFolderViewController {
+    class func initializeSelectFolderViewController(with nibName:String, folder: Item?, sortRule: SortedRules) -> SelectFolderViewController {
         let viewController = SelectFolderViewController(nibName: nibName, bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         
@@ -19,6 +19,7 @@ class SelectFolderModuleInitializer: NSObject {
                                                style: .default, tintColor: nil)
         
         let presentor = SelectFolderPresenter()
+        presentor.sortedRule = sortRule
         
         var filters: [GeneralFilesFiltrationType] = [.fileType(.folder)]
         

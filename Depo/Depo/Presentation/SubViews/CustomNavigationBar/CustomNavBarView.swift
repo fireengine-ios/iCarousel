@@ -13,7 +13,7 @@ protocol CustomNavBarViewActionDelegate: class {
     func navBarBackButtonPressed()
 }
 
-class CustomNavBarView: UIView, CustomNavigationButtonContainerActionsDelegate, UISearchBarDelegate {
+class CustomNavBarView: UIView, UISearchBarDelegate {
     
     static let nibName = "CustomNavBar"
     
@@ -30,11 +30,6 @@ class CustomNavBarView: UIView, CustomNavigationButtonContainerActionsDelegate, 
             return logoImage.isHidden
         }
     }
-
-    func checkIs11IOS() -> Bool{
-        let os = ProcessInfo().operatingSystemVersion
-        return os.majorVersion == 11
-    }
     
     class func getFromNib() -> CustomNavBarView? {
         let fakeNavBar = Bundle.main.loadNibNamed(CustomNavBarView.nibName,
@@ -47,7 +42,7 @@ class CustomNavBarView: UIView, CustomNavigationButtonContainerActionsDelegate, 
             bar?.bgImageView.isHidden = true
         }
         
-        return fakeNavBar as? CustomNavBarView
+        return bar
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -57,13 +52,5 @@ class CustomNavBarView: UIView, CustomNavigationButtonContainerActionsDelegate, 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         
         return false
-    }
-    
-    
-    //MARK: - actionDelegate
-    
-    func buttonGotPressed(withCustomButton customNavButton: CustomNavBarButton) {
-        actionDelegate?.navBarButtonGotPressed(button: customNavButton)
-        
     }
 }

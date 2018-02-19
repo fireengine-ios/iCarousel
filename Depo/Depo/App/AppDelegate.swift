@@ -19,10 +19,15 @@ let log = setupLog()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    func application(_ application: UIApplication,
+                     supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return OrientationManager.shared.orientationLock
+    }
+    
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
-    private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     var window: UIWindow?
     
@@ -84,7 +89,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         firstResponder = application.firstResponder
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
+        
+        if tokenStorage.refreshToken != nil {
+            LocationManager.shared.startUpdateLocation()
+        }
     }
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillEnterForeground")
 
@@ -128,7 +138,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         log.debug("AppDelegate applicationDidBecomeActive")
-        LocationManager.shared.startUpdateLocation()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
