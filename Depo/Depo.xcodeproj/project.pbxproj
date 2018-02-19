@@ -2490,6 +2490,10 @@
 		CDE2227E3AD0825FD2B61890 /* BaseFilesGreedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F31D403CF3A25954AE0EF /* BaseFilesGreedViewController.swift */; };
 		CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */; };
 		CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
+		CE055F3F20383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE055F3E20383A3400E6BFE8 /* PHAsset+Properties.swift */; };
+		CE055F4020383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE055F3E20383A3400E6BFE8 /* PHAsset+Properties.swift */; };
+		CE0596F320385E950083D6FC /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0596F220385E940083D6FC /* ImageFormat.swift */; };
+		CE0596F420385E950083D6FC /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0596F220385E940083D6FC /* ImageFormat.swift */; };
 		CE08BDE61FC8403C00440CA0 /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
 		CE08BDE71FC8403C00440CA0 /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
 		CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
@@ -4576,6 +4580,8 @@
 		CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewRouterInput.swift; sourceTree = "<group>"; };
 		CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpImage.swift; sourceTree = "<group>"; };
 		CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarConfugurator.swift; sourceTree = "<group>"; };
+		CE055F3E20383A3400E6BFE8 /* PHAsset+Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHAsset+Properties.swift"; sourceTree = "<group>"; };
+		CE0596F220385E940083D6FC /* ImageFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFormat.swift; sourceTree = "<group>"; };
 		CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationURLs.swift; sourceTree = "<group>"; };
 		CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationRepository.swift; sourceTree = "<group>"; };
 		CE08BDE91FC8404600440CA0 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
@@ -7147,6 +7153,7 @@
 				7CFE92ED1F5EC5C9008A3B72 /* Mail */,
 				CE3318E41EFCFE1800E25989 /* ApplicationPalette */,
 				CE3318DF1EFCF9D600E25989 /* Device */,
+				CE0596F220385E940083D6FC /* ImageFormat.swift */,
 				CE3A3002200F4B030028C900 /* Validator.swift */,
 			);
 			path = Utils;
@@ -9478,6 +9485,7 @@
 				7825C22020179C7900AE77AE /* UIView+SubviewsVisibility.swift */,
 				CE3E4D0C201B696500173045 /* UIButton+Properties.swift */,
 				CE1049512035858500898879 /* UIWebView+Clear.swift */,
+				CE055F3E20383A3400E6BFE8 /* PHAsset+Properties.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -12896,6 +12904,7 @@
 				8C0E8DFA1FDEBDFF00789C91 /* AccountService.swift in Sources */,
 				8C0E8DFB1FDEBDFF00789C91 /* GridListTopBarSortingTableView.swift in Sources */,
 				8C0E8DFC1FDEBDFF00789C91 /* PHAssetCollection.swift in Sources */,
+				CE055F4020383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */,
 				8C0E8DFD1FDEBDFF00789C91 /* HomePageInteractor.swift in Sources */,
 				8C0E8DFE1FDEBDFF00789C91 /* PhoneVereficationViewInput.swift in Sources */,
 				8C0E8DFF1FDEBDFF00789C91 /* SplitIpadViewContoller.swift in Sources */,
@@ -13339,6 +13348,7 @@
 				8C0E8FA11FDEBDFF00789C91 /* AlbumDetailViewController.swift in Sources */,
 				8C0B919D20170E6400A5BA81 /* DuplicatedContactsInteractor.swift in Sources */,
 				8C0E8FA21FDEBDFF00789C91 /* SingletonStorage.swift in Sources */,
+				CE0596F420385E950083D6FC /* ImageFormat.swift in Sources */,
 				8C0E8FA31FDEBDFF00789C91 /* HelpAndSupportViewOutput.swift in Sources */,
 				8C0E8FA41FDEBDFF00789C91 /* AlbumDetailPresenter.swift in Sources */,
 				8C0E8FA51FDEBDFF00789C91 /* OfferServiceResponse.swift in Sources */,
@@ -13708,6 +13718,7 @@
 				CE51AC591EF90853005DCEE0 /* IntroduceSubView.swift in Sources */,
 				78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */,
 				CE51AC641EF90853005DCEE0 /* LoginInteractorOutput.swift in Sources */,
+				CE0596F320385E950083D6FC /* ImageFormat.swift in Sources */,
 				D47863F21F3F18FA00EFDC6D /* UsageInfoInitializer.swift in Sources */,
 				CE51AC681EF90853005DCEE0 /* CurioNotificationManager.m in Sources */,
 				8CFF86941F0F96E600520D18 /* SyncStatus.m in Sources */,
@@ -14290,6 +14301,7 @@
 				4A9B38FF201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
 				0D9510CB65B6DA6F2D661754 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				7859299120060E85003F8AB3 /* ManageContactsRouter.swift in Sources */,
+				CE055F3F20383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */,
 				4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				016636E0593FCDC66B6F5CD0 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				7C6945E820039F4A00152344 /* FreeAppSpaceInteractor.swift in Sources */,

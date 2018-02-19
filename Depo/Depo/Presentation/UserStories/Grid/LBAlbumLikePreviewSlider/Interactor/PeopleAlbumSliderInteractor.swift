@@ -31,7 +31,7 @@ class PeopleAlbumSliderInteractor: LBAlbumLikePreviewSliderInteractor {
             }
             
             }, fail: { [weak self] error in
-                self?.output.operationFailed()
+                self?.output?.operationFailed()
         })
     }
     

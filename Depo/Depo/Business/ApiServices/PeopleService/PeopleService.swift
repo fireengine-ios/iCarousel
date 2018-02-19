@@ -132,7 +132,7 @@ final class PeopleService: BaseRequestService {
 }
 
 final class PeopleItemsService: RemoteItemsService {
-    let service = PeopleService()
+    private let service = PeopleService()
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .image)
@@ -175,7 +175,7 @@ final class PeopleParameters: BaseRequestParametrs {
 }
 
 final class PeopleAlbumParameters: BaseRequestParametrs {
-    let id: Int
+    private let id: Int
     
     init(id: Int) {
         self.id = id
@@ -188,7 +188,7 @@ final class PeopleAlbumParameters: BaseRequestParametrs {
 }
 
 final class PeopleAlbumsParameters: BaseRequestParametrs {
-    let id: Int
+    private let id: Int
     
     init(id: Int) {
         self.id = id
@@ -201,8 +201,8 @@ final class PeopleAlbumsParameters: BaseRequestParametrs {
 }
 
 final class PeoplePageParameters: BaseRequestParametrs {
-    let pageSize: Int
-    let pageNumber: Int
+    private let pageSize: Int
+    private let pageNumber: Int
     
     init(pageSize: Int, pageNumber: Int) {
         self.pageSize = pageSize
@@ -216,7 +216,7 @@ final class PeoplePageParameters: BaseRequestParametrs {
 }
 
 final class PeopleChangeVisibilityParameters: BaseRequestParametrs {
-    let peoples: [PeopleItem]
+    private let peoples: [PeopleItem]
     
     init(peoples: [PeopleItem]) {
         self.peoples = peoples
@@ -242,7 +242,7 @@ final class PeopleChangeVisibilityParameters: BaseRequestParametrs {
 }
 
 final class PeopleSearchParameters: BaseRequestParametrs {
-    let text: String
+    private let text: String
     
     init(text: String) {
         self.text = text
@@ -255,8 +255,8 @@ final class PeopleSearchParameters: BaseRequestParametrs {
 }
 
 final class PeopleMergeParameters: BaseRequestParametrs {
-    let personId: Int64
-    let targetPersonId: Int64
+    private let personId: Int64
+    private let targetPersonId: Int64
     
     init(personId: Int64, targetPersonId: Int64) {
         self.personId = personId
@@ -274,8 +274,8 @@ final class PeopleMergeParameters: BaseRequestParametrs {
 }
 
 final class PeopleChangeNameParameters: BaseRequestParametrs {
-    let personId: Int64
-    let name: String
+    private let personId: Int64
+    private let name: String
     
     init(personId: Int64, name: String) {
         self.personId = personId
@@ -286,11 +286,18 @@ final class PeopleChangeNameParameters: BaseRequestParametrs {
         return name
     }
     
+    override var header: RequestHeaderParametrs {
+        var dict = super.header
+        dict[HeaderConstant.ContentType] = "application/json;charset=UTF-8"
+        return dict
+    }
+    
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleChangeName, personId)
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }
+
 
 final class PeopleItem: Item {
     let responseObject: PeopleItemResponse
