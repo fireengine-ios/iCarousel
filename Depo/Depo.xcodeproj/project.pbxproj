@@ -14858,7 +14858,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -14884,8 +14884,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
-				PROVISIONING_PROFILE = "c7326830-eaca-4f1e-9bbb-765e70c0d2fc";
-				PROVISIONING_PROFILE_SPECIFIER = "c7326830-eaca-4f1e-9bbb-765e70c0d2fc";
+				PROVISIONING_PROFILE = "8c40575c-decc-4227-ac97-05bfd2184acb";
+				PROVISIONING_PROFILE_SPECIFIER = "8c40575c-decc-4227-ac97-05bfd2184acb";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;
@@ -14933,7 +14933,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
 				PRODUCT_NAME = lifebox;
-				PROVISIONING_PROFILE = "3d2683f7-410b-4d3d-82ee-4404d6095878";
+				PROVISIONING_PROFILE = "4b43f284-4a1e-4a29-9b9e-c38d774e58aa";
 				PROVISIONING_PROFILE_SPECIFIER = "3d2683f7-410b-4d3d-82ee-4404d6095878";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
