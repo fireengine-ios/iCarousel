@@ -40,6 +40,10 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func getSortTypeString() -> String {
+        return ""
+    }
+    
     private func loadItem() {
         guard let view = view as? FaceImagePhotosViewController else {
             return
@@ -80,6 +84,19 @@ extension FaceImagePhotosPresenter: FaceImagePhotosViewOutput {
         if let router = router as? FaceImagePhotosRouter {
             router.openAddName(item, moduleOutput: self)
         }
+    }
+    
+    func faceImageType() -> FaceImageType? {
+        if item is PeopleItem {
+            return .people
+        }
+        if item is ThingsItem {
+            return .things
+        }
+        if item is PlacesItem {
+            return .places
+        }
+        return nil
     }
     
 }

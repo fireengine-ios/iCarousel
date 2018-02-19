@@ -29,11 +29,7 @@ import UIKit
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if mainTitle.count == 0 {
-            mainTitle = TextConstants.faceImageAddName
-        }
-        
+
         configureTitleNavigationBar()
     }
     
@@ -57,12 +53,20 @@ import UIKit
     }
     
     private func configureTitleNavigationBar() {
-        setTouchableTitle(title: mainTitle)
+        if mainTitle.count == 0 {
+            mainTitle = TextConstants.faceImageAddName
+        }
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
-        navigationItem.titleView?.addGestureRecognizer(tap)
+        if let output = output as? FaceImagePhotosViewOutput,
+            let type = output.faceImageType(), type == .people {
+            
+            setTouchableTitle(title: mainTitle)
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
+            navigationItem.titleView?.addGestureRecognizer(tap)
+        }
     }
-    
+
     // MARK: - Header View Methods
     
     private func setupHeaderViewWith(peopleItem: PeopleItem?) {
@@ -92,6 +96,9 @@ import UIKit
                 albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
                 albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: albumsSliderHeight)
                 albumsHeightConstraint?.isActive = true
+                headerView.setNeedsLayout()
+                headerView.layoutIfNeeded()
+                headerImage.addBlackGradientLayer(colors: [.clear, .black])
             }
         } else {
             headerImage.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
