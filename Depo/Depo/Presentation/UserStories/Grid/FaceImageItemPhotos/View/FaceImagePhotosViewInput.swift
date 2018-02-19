@@ -13,4 +13,5 @@ protocol FaceImagePhotosViewInput: class {
     func setHeaderImage(with path: PathForItem)
     func setupHeader(forPeopleItem item: PeopleItem?)
     func reloadName(_ name: String)
+    func dismiss()
 }

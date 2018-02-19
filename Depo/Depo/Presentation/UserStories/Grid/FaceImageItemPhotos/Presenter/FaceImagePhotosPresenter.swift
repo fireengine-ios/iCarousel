@@ -23,6 +23,9 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     override func viewIsReady(collectionView: UICollectionView) {
         super.viewIsReady(collectionView: collectionView)
         
+        if let interactor = interactor as? FaceImagePhotosInteractor {
+            dataSource.parentUUID = interactor.album?.uuid
+        }
         loadItem()
     }
     
@@ -57,9 +60,20 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
  
     }
     
+    //MARK: - BaseDataSourceForCollectionViewDelegate
+    
     func updateCoverPhotoIfNeeded() {
         if let interactor = interactor as? FaceImagePhotosInteractor {
             interactor.updateCoverPhotoIfNeeded()
+        }
+    }
+    
+    func didDelete(items: [BaseDataSourceItem]) {
+        if dataSource.getAllObjects().isEmpty {
+            faceImageItemsModuleOutput?.delete(item: item)
+            if let view = view as? FaceImagePhotosViewInput {
+                view.dismiss()
+            }
         }
     }
 }
