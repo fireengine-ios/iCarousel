@@ -149,4 +149,8 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         setupHeaderViewWith(peopleItem: item)
     }
     
+    func dismiss() {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }

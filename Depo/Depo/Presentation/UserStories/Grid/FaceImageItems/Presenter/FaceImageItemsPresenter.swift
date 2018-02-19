@@ -128,5 +128,8 @@ extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
     func didReloadData() {
         reloadData()
     }
-    
+
+    func delete(item: Item) {
+        dataSource.deleteItems(items: [item])
+    }
 }
