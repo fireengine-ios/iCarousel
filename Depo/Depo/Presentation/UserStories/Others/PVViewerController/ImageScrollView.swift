@@ -34,6 +34,12 @@ final class ImageScrollView: UIScrollView {
     private let multiplyScrollGuardFactor: CGFloat = 0.999
     private let zoomFactorFromMinWhenDoubleTap: CGFloat = 2
     
+    lazy var doubleTapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognizer))
+        gesture.numberOfTapsRequired = 2
+        return gesture
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -55,13 +61,7 @@ final class ImageScrollView: UIScrollView {
 //        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         imageView.isUserInteractionEnabled = true
         addSubview(imageView)
-        addDoubleTapZoom()
-    }
-    
-    private func addDoubleTapZoom() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognizer))
-        tapGesture.numberOfTapsRequired = 2
-        imageView.addGestureRecognizer(tapGesture)
+        imageView.addGestureRecognizer(doubleTapGesture)
     }
     
     @objc private func doubleTapGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {

@@ -10,6 +10,7 @@ import UIKit
 
 protocol PhotoVideoDetailCellDelegate: class {
     func tapOnSelectedItem()
+    func tapOnCellForFullScreen()
 }
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
@@ -21,12 +22,24 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     
     weak var delegate: PhotoVideoDetailCellDelegate?
     
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(actionTapGesture))
+        gesture.require(toFail: imageScrollView.doubleTapGesture)
+        return gesture
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = UIColor.clear
         webView.scalesPageToFit = true /// enable zoom
         imageScrollView.delegate = self
         imageScrollView.imageView.delegate = self
+        
+        addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func actionTapGesture(_ gesture: UITapGestureRecognizer) {
+        delegate?.tapOnCellForFullScreen()
     }
     
     override func layoutSubviews() {
@@ -43,6 +56,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         if object.fileType == .video || object.fileType == .image {
             imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
             playVideoButton.isHidden = (object.fileType != .video)
+            tapGesture.isEnabled = (object.fileType != .video)
             
         } else if object.fileType != .audio, object.fileType.isUnSupportedOpenType {
             imageScrollView.imageView.isHidden = true
