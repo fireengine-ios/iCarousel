@@ -1406,7 +1406,6 @@
 		8C0B91C22017149600A5BA81 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
 		8C0B91C3201714CC00A5BA81 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
 		8C0B91C42017150400A5BA81 /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 780ACF992004D6D1009CA4F5 /* AnalyzeStatus.m */; };
-		8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633D1F6FC3D3004724BF /* ActivitiesByDay.swift */; };
 		8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633E1F6FC3D3004724BF /* ActivitiesByMinutesAndType.swift */; };
 		8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633F1F6FC3D3004724BF /* ActivityFileType.swift */; };
 		8C0E8C671FDEBDFF00789C91 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4363401F6FC3D3004724BF /* ActivityType.swift */; };
@@ -2344,7 +2343,6 @@
 		8C655DB1203ACB940082726E /* FaceImagePhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */; };
 		8C655DB2203ACB9C0082726E /* FaceImagePhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AB202318E700A979AB /* FaceImagePhotosInteractor.swift */; };
 		8C655DB3203ACB9E0082726E /* FaceImagePhotosRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AD2023191800A979AB /* FaceImagePhotosRouter.swift */; };
-		8C655DB4203ACBA10082726E /* FaceImagePhotosRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3F202883BF00660394 /* FaceImagePhotosRouterInput.swift */; };
 		8C655DB5203ACBA30082726E /* FaceImagePhotosInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AF2023195600A979AB /* FaceImagePhotosInitializer.swift */; };
 		8C655DB6203ACBA60082726E /* FaceImagePhotosConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B12023196B00A979AB /* FaceImagePhotosConfigurator.swift */; };
 		8C655DB7203ACBBF0082726E /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
@@ -2356,6 +2354,8 @@
 		8C655DBE203ACF000082726E /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
 		8C655DBF203ACF120082726E /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		8C655DC0203ACF1B0082726E /* PeopleAlbumSliderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */; };
+		8C655DC2203B0D130082726E /* FaceImagePhotosRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3F202883BF00660394 /* FaceImagePhotosRouterInput.swift */; };
+		8C655DC3203B0D180082726E /* ActivitiesByDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633D1F6FC3D3004724BF /* ActivitiesByDay.swift */; };
 		8C6CC55E1F879A72007D49C6 /* GeneralFilesFiltration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CC55D1F879A72007D49C6 /* GeneralFilesFiltration.swift */; };
 		8C6EF8761F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8621F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift */; };
 		8C6EF8771F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8631F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift */; };
@@ -12500,8 +12500,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */,
-				8C655DB4203ACBA10082726E /* FaceImagePhotosRouterInput.swift in Sources */,
 				8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */,
 				8C0B919420170E3800A5BA81 /* DuplicatedContactsModuleInput.swift in Sources */,
 				8C0B91A820170EAD00A5BA81 /* ManageContactsRouterInput.swift in Sources */,
@@ -12819,6 +12817,7 @@
 				8C0E8D8A1FDEBDFF00789C91 /* BasicCustomNavBarViewController.swift in Sources */,
 				8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */,
 				8C0E8D8D1FDEBDFF00789C91 /* SearchService.swift in Sources */,
+				8C655DC2203B0D130082726E /* FaceImagePhotosRouterInput.swift in Sources */,
 				8C0E8D901FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
 				8C0E8D921FDEBDFF00789C91 /* AutoSyncInteractorInput.swift in Sources */,
@@ -12955,6 +12954,7 @@
 				8C0E8DFD1FDEBDFF00789C91 /* HomePageInteractor.swift in Sources */,
 				8C0E8DFE1FDEBDFF00789C91 /* PhoneVereficationViewInput.swift in Sources */,
 				8C0E8DFF1FDEBDFF00789C91 /* SplitIpadViewContoller.swift in Sources */,
+				8C655DC3203B0D180082726E /* ActivitiesByDay.swift in Sources */,
 				8C0E8E001FDEBDFF00789C91 /* InstagramService.swift in Sources */,
 				8C0E8E011FDEBDFF00789C91 /* LocationManager.swift in Sources */,
 				7C257B3820174D2500CB56F8 /* ContactBackupOld.swift in Sources */,
