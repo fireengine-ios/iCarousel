@@ -36,9 +36,9 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
                              firstButtonTitle: TextConstants.cancel,
                              secondButtonTitle: TextConstants.ok,
                              secondAction: { [weak self] (vc) in
-                                self?.moduleOutput?.deleteDuplicatedContacts()
                                 self?.router.back()
                                 vc.close()
+                                self?.moduleOutput?.deleteDuplicatedContacts()
                              })
         UIApplication.topController()?.present(vc, animated: false, completion: nil)
     }
