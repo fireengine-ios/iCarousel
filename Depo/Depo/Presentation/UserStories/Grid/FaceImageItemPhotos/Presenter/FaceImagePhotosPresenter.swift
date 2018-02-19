@@ -132,4 +132,11 @@ extension FaceImagePhotosPresenter: FaceImagePhotosModuleOutput {
         reloadData()
     }
     
+    func getCountSliderItmes(count: Int) {
+        if let view = view as? FaceImagePhotosViewInput,
+            (count == 0) {
+            view.hiddenSlider()
+        }
+    }
+    
 }
