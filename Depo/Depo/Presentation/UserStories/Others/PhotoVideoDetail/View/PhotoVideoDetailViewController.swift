@@ -23,7 +23,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     var hideActions = false
     var editingTabBar: BottomSelectionTabBarViewController!
-    private var needToScrollAfterRotation = false
+    private var needToScrollAfterRotation = true
     
     private var selectedIndex = 0 {
         didSet {
@@ -53,6 +53,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +77,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
         output.viewIsReady(view: view)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.isHidden = false
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -96,15 +102,20 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         collectionView.performBatchUpdates(nil, completion: nil)
         
-//        if needToScrollAfterRotation {
-            guard !objects.isEmpty, selectedIndex < objects.count else {
-                return
-            }
-            
-            let indexPath = IndexPath(item: selectedIndex, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-//        }
+        if needToScrollAfterRotation {
+            needToScrollAfterRotation = false
+            scrollToSelectedIndex()
+        }
     }
+    
+    private func scrollToSelectedIndex() {
+        guard !objects.isEmpty, selectedIndex < objects.count else {
+            return
+        }
+        
+        let indexPath = IndexPath(item: selectedIndex, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+    } 
     
     deinit {
         ItemOperationManager.default.stopUpdateView(view: self)
