@@ -27,29 +27,29 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     private var isFullScreen = false {
         didSet {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { 
-                UIApplication.shared.isStatusBarHidden = self.isFullScreen
-            }
-            navigationController?.setNavigationBarHidden(self.isFullScreen, animated: true)
-            
-            if isFullScreen {
-                UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-                    self.editingTabBar.view.transform = CGAffineTransform(translationX: 0, y: self.editingTabBar.view.bounds.height)
-                }, completion: {_ in
-                    self.editingTabBar.view.isHidden = self.isFullScreen
-                })
-                
-            } else {      
-                editingTabBar.view.isHidden = self.isFullScreen
-                UIView.animate(withDuration: NumericConstants.animationDuration) { 
-                    self.editingTabBar.view.transform = .identity
-                }
-            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { 
+//                UIApplication.shared.isStatusBarHidden = self.isFullScreen
+//            }
+//            navigationController?.setNavigationBarHidden(self.isFullScreen, animated: true)
+//            
+//            if isFullScreen {
+//                UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+//                    self.editingTabBar.view.transform = CGAffineTransform(translationX: 0, y: self.editingTabBar.view.bounds.height)
+//                }, completion: {_ in
+//                    self.editingTabBar.view.isHidden = self.isFullScreen
+//                })
+//                
+//            } else {      
+//                editingTabBar.view.isHidden = self.isFullScreen
+//                UIView.animate(withDuration: NumericConstants.animationDuration) { 
+//                    self.editingTabBar.view.transform = .identity
+//                }
+//            }
             
             /// without animation
-//            UIApplication.shared.isStatusBarHidden = self.isFullScreen
-//            editingTabBar.view.isHidden = isFullScreen
-//            navigationController?.navigationBar.isHidden = isFullScreen
+            UIApplication.shared.isStatusBarHidden = self.isFullScreen
+            editingTabBar.view.isHidden = isFullScreen
+            navigationController?.navigationBar.isHidden = isFullScreen
         }
     } 
     

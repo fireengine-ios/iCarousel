@@ -25,8 +25,11 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     private lazy var tapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(actionTapGesture))
         gesture.require(toFail: imageScrollView.doubleTapGesture)
+        gesture.delegate = self
         return gesture
     }()
+    
+    private var doubleTapWebViewGesture: UITapGestureRecognizer?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,17 +38,41 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         imageScrollView.delegate = self
         imageScrollView.imageView.delegate = self
         
+        for view in webView.scrollView.subviews {
+            if String(describing: view.classForCoder) == "UIWebBrowserView",
+                let gestures = view.gestureRecognizers {
+                
+                for gesture in gestures {
+                    if let gesture = gesture as? UITapGestureRecognizer,
+                        gesture.numberOfTapsRequired == 2 {
+                        doubleTapWebViewGesture = gesture
+                        tapGesture.require(toFail: gesture)
+                    }
+                }
+            }
+        }
+        
+        
+        
         addGestureRecognizer(tapGesture)
     }
     
+    var isNeedLayout = true
+    
     @objc private func actionTapGesture(_ gesture: UITapGestureRecognizer) {
         delegate?.tapOnCellForFullScreen()
+        isNeedLayout = false
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
-        imageScrollView.updateZoom()
+        if Device.operationSystemVersionLessThen(11) || isNeedLayout {
+            imageScrollView.updateZoom()
+        }
+        if !isNeedLayout {
+            isNeedLayout = true
+        }
     }
     
     func setObject(object:Item) {
@@ -102,5 +129,14 @@ extension PhotoVideoDetailCell: LoadingImageViewDelegate {
     func onImageLoaded(image: UIImage?) {
         imageScrollView.image = image
         imageScrollView.updateZoom()
+    }
+}
+
+extension PhotoVideoDetailCell: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == tapGesture, otherGestureRecognizer == doubleTapWebViewGesture {
+            return false
+        }
+        return true
     }
 }
