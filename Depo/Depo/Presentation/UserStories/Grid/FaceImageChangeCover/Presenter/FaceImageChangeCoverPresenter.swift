@@ -16,6 +16,7 @@ final class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter {
         super.viewIsReady(collectionView: collectionView)
         
         dataSource.isHeaderless = true
+        dataSource.canSelectionState = false
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
