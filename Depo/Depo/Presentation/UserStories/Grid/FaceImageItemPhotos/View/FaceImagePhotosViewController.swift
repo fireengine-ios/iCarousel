@@ -43,7 +43,8 @@ import UIKit
         super.stopSelection()
         
         configureFaceImageItemsPhotoActions()
-        setTitle(withString: mainTitle)
+        
+        configureNavBarWithTouch()
     }
     
     @objc func addNameAction() {
@@ -59,11 +60,7 @@ import UIKit
         
         if let output = output as? FaceImagePhotosViewOutput,
             let type = output.faceImageType(), type == .people {
-            
-            setTouchableTitle(title: mainTitle)
-            
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
-            navigationItem.titleView?.addGestureRecognizer(tap)
+            configureNavBarWithTouch()
         }
     }
 
@@ -126,6 +123,13 @@ import UIKit
     
     private func updateHeaderPosition() {
         collectionView.contentInset.top = headerView.frame.height
+    }
+    
+    private func configureNavBarWithTouch() {
+        setTouchableTitle(title: mainTitle)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
+        navigationItem.titleView?.addGestureRecognizer(tap)
     }
     
 }
