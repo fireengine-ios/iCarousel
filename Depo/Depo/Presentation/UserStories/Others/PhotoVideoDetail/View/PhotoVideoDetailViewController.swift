@@ -75,7 +75,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         output.viewIsReady(view: view)
-        setStatusBarBackgroundColor(color: UIColor.clear)
+        setStatusBarBackgroundColor(color: UIColor.black)
     }
     
     override func viewDidAppear(_ animated: Bool) {

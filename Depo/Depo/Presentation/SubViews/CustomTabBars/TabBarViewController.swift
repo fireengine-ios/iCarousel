@@ -23,9 +23,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var plussButton: UIButton!
     
-    @IBOutlet weak var curtainView: UIView!
-    
-    @IBOutlet weak var curtainColorView: UIView!
+    var curtainView =  UIView()
     
     @IBOutlet weak var contentView: UIView!
     
@@ -328,10 +326,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     private func setupCurtainView() {
         curtainView.layer.masksToBounds = true
-        curtainView.backgroundColor = UIColor.clear
         
-        curtainColorView.backgroundColor = ColorConstants.whiteColor
-        curtainColorView.alpha = 0.88
+        curtainView.backgroundColor = ColorConstants.whiteColor
+        curtainView.alpha = 0.88
         showCurtainView(show: false)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(TabBarViewController.closeCurtainView))
@@ -339,13 +336,19 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
     
     private func showCurtainView(show: Bool) {
-        curtainView.isHidden = !show
-        curtainView.isUserInteractionEnabled = show
-        contentView.bringSubview(toFront: curtainView)
         
         currentViewController?.navigationItem.rightBarButtonItems?.forEach {
             $0.isEnabled = !show
         }
+        
+        if show{
+            curtainView.frame = currentViewController?.view.frame ?? CGRect.zero
+            currentViewController?.view.addSubview(curtainView)
+            currentViewController?.view.bringSubview(toFront: curtainView)
+        }else{
+            curtainView.removeFromSuperview()
+        }
+        
 
         currentViewController?.navigationItem.hidesBackButton = show
     }
