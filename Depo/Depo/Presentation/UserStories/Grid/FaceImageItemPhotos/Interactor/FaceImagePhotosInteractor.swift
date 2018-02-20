@@ -14,6 +14,13 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
     
     var album: AlbumItem?
     
+    override func viewIsReady() {
+        if let output = output as? FaceImagePhotosInteractorOutput,
+            let album = album {
+            output.didCountImage(album.imageCount ?? 0)
+        }
+    }
+    
     func updateCoverPhotoIfNeeded() {
         if let album = album {
             update(album: album)

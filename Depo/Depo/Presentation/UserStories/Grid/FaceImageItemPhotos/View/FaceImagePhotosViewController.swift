@@ -17,6 +17,7 @@ import UIKit
     private var albumsSliderModule: LBAlbumLikePreviewSliderPresenter?
     private var headerView = UIView()
     private var headerImage = LoadingImageView()
+    private var countPhotosLabel = UILabel()
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
     
@@ -43,7 +44,8 @@ import UIKit
         super.stopSelection()
         
         configureFaceImageItemsPhotoActions()
-        setTitle(withString: mainTitle)
+        
+        configureNavBarWithTouch()
     }
     
     @objc func addNameAction() {
@@ -59,11 +61,7 @@ import UIKit
         
         if let output = output as? FaceImagePhotosViewOutput,
             let type = output.faceImageType(), type == .people {
-            
-            setTouchableTitle(title: mainTitle)
-            
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
-            navigationItem.titleView?.addGestureRecognizer(tap)
+            configureNavBarWithTouch()
         }
     }
 
@@ -84,7 +82,19 @@ import UIKit
         headerImage.rightAnchor.constraint(equalTo: headerView.rightAnchor).isActive = true
         headerImageHeightConstraint = headerImage.heightAnchor.constraint(equalToConstant: headerImageHeight)
         headerImageHeightConstraint?.isActive = true
+
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        headerImage.addBlackGradientLayer(colors: [.clear, UIColor.gray.withAlphaComponent(0.9)])
         
+        countPhotosLabel.backgroundColor = UIColor.clear
+        countPhotosLabel.textColor = UIColor.white
+        countPhotosLabel.font = UIFont.TurkcellSaturaDemFont(size: 17.0)
+        countPhotosLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(countPhotosLabel)
+        countPhotosLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        countPhotosLabel.bottomAnchor.constraint(equalTo: headerImage.bottomAnchor, constant: -16).isActive = true
+
         if let peopleItem = peopleItem {
             createAlbumsSliderWith(peopleItem: peopleItem)
             if let albumsView = albumsSlider?.view {
@@ -96,9 +106,6 @@ import UIKit
                 albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
                 albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: albumsSliderHeight)
                 albumsHeightConstraint?.isActive = true
-                headerView.setNeedsLayout()
-                headerView.layoutIfNeeded()
-                headerImage.addBlackGradientLayer(colors: [.clear, .black])
             }
         } else {
             headerImage.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
@@ -108,7 +115,9 @@ import UIKit
     private func createAlbumsSliderWith(peopleItem: PeopleItem) {
         let sliderModuleConfigurator = LBAlbumLikePreviewSliderModuleInitializer()
         let sliderPresenter = LBAlbumLikePreviewSliderPresenter()
-        sliderModuleConfigurator.initialise(inputPresenter: sliderPresenter, peopleItem: peopleItem)
+        if let output = output as? FaceImagePhotosPresenter {
+            sliderModuleConfigurator.initialise(inputPresenter: sliderPresenter, peopleItem: peopleItem, moduleOutput: output)
+        }
         let sliderVC = sliderModuleConfigurator.lbAlbumLikeSliderVC
         albumsSlider = sliderVC
         albumsSliderModule = sliderPresenter
@@ -126,6 +135,13 @@ import UIKit
     
     private func updateHeaderPosition() {
         collectionView.contentInset.top = headerView.frame.height
+    }
+    
+    private func configureNavBarWithTouch() {
+        setTouchableTitle(title: mainTitle)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
+        navigationItem.titleView?.addGestureRecognizer(tap)
     }
     
 }
@@ -147,6 +163,21 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     
     func setupHeader(forPeopleItem item: PeopleItem?) {
         setupHeaderViewWith(peopleItem: item)
+    }
+    
+    func dismiss() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func hiddenSlider() {
+        if let albumsView = albumsSlider?.view {
+            albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
+            albumsHeightConstraint?.isActive = true
+        }
+    }
+        
+    func setCountImage(_ count: String) {
+        countPhotosLabel.text = count
     }
     
 }

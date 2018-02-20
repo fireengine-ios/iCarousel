@@ -88,11 +88,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         navigationBarWithGradientStyle()
         setTitle(withString: "")
     }
-    
-    override func willMove(toParentViewController parent: UIViewController?) {
-        blackNavigationBarStyle()
-    }
-    
+        
     func setObject(object: BaseDataSourceItem) {
         
         fileName.text = object.name

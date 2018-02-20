@@ -254,6 +254,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         stopEditing()
     }
     
+    func isSelectionState() -> Bool {
+        return dataSource.isSelectionStateActive
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {

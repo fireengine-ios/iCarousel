@@ -9,4 +9,5 @@
 protocol FaceImageItemsModuleOutput: class {
     func didChangeName(item: WrapData)
     func didReloadData()
+    func delete(item: Item)
 }

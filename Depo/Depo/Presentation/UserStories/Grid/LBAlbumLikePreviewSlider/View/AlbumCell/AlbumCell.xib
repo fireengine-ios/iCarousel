@@ -67,7 +67,7 @@
                             <constraint firstItem="aXF-q3-q7j" firstAttribute="top" secondItem="ICB-ZY-xuu" secondAttribute="bottom" constant="1" id="ypn-bK-qCF"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q9c-AG-hk6" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q9c-AG-hk6" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="131"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9LX-Q4-Kta">

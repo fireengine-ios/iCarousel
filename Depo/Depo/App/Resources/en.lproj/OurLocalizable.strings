@@ -292,6 +292,7 @@
 "%%%d Backed up…" = "%%%d Backed up…";
 "Restored %d Contacts" = "Restored %d Contacts";
 "Backed up %d Contacts" = "Backed up %d Contacts";
+"%d Duplicated Contacts Deleted" = "%d Duplicated Contacts Deleted";
 "You have %d numbers on your contacts backup." = "You have %d numbers on your contacts backup.";
 "Removed" = "Removed";
 "Updated" = "Updated";
@@ -604,6 +605,7 @@
 "Are these the same person" = "Are these the same person";
 "Nope" = "Nope";
 "this person" = "this person";
+"Photos" = "Photos";
 "They will be merged together" = "They will be merged together";
 "Not selected" = "Not selected";
 "E-mail is empty" = "E-mail is empty";
