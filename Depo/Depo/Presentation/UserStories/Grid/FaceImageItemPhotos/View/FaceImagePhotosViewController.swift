@@ -108,7 +108,9 @@ import UIKit
     private func createAlbumsSliderWith(peopleItem: PeopleItem) {
         let sliderModuleConfigurator = LBAlbumLikePreviewSliderModuleInitializer()
         let sliderPresenter = LBAlbumLikePreviewSliderPresenter()
-        sliderModuleConfigurator.initialise(inputPresenter: sliderPresenter, peopleItem: peopleItem)
+        if let output = output as? FaceImagePhotosPresenter {
+            sliderModuleConfigurator.initialise(inputPresenter: sliderPresenter, peopleItem: peopleItem, moduleOutput: output)
+        }
         let sliderVC = sliderModuleConfigurator.lbAlbumLikeSliderVC
         albumsSlider = sliderVC
         albumsSliderModule = sliderPresenter
@@ -151,6 +153,13 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     
     func dismiss() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func hiddenSlider() {
+        if let albumsView = albumsSlider?.view {
+            albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
+            albumsHeightConstraint?.isActive = true
+        }
     }
     
 }
