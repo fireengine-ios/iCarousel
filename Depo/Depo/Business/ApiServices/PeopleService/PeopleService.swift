@@ -12,6 +12,28 @@ enum FaceImageType {
     case people
     case places
     case things
+    
+    var description: String {
+        switch self {
+        case .people:
+            return "People"
+        case .places:
+            return "Places"
+        case .things:
+            return "Things"
+        }
+    }
+    
+    var myStreamType: MyStreamType {
+        switch self {
+        case .people:
+            return .people
+        case .places:
+            return .places
+        case .things:
+            return .things
+        }
+    }
 }
 
 final class FaceImageService: BaseRequestService {
