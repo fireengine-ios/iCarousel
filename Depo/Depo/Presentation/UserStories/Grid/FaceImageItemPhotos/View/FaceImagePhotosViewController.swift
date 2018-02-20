@@ -43,7 +43,8 @@ import UIKit
         super.stopSelection()
         
         configureFaceImageItemsPhotoActions()
-        setTitle(withString: mainTitle)
+        
+        configureNavBarWithTouch()
     }
     
     @objc func addNameAction() {
@@ -59,11 +60,7 @@ import UIKit
         
         if let output = output as? FaceImagePhotosViewOutput,
             let type = output.faceImageType(), type == .people {
-            
-            setTouchableTitle(title: mainTitle)
-            
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
-            navigationItem.titleView?.addGestureRecognizer(tap)
+            configureNavBarWithTouch()
         }
     }
 
@@ -108,7 +105,9 @@ import UIKit
     private func createAlbumsSliderWith(peopleItem: PeopleItem) {
         let sliderModuleConfigurator = LBAlbumLikePreviewSliderModuleInitializer()
         let sliderPresenter = LBAlbumLikePreviewSliderPresenter()
-        sliderModuleConfigurator.initialise(inputPresenter: sliderPresenter, peopleItem: peopleItem)
+        if let output = output as? FaceImagePhotosPresenter {
+            sliderModuleConfigurator.initialise(inputPresenter: sliderPresenter, peopleItem: peopleItem, moduleOutput: output)
+        }
         let sliderVC = sliderModuleConfigurator.lbAlbumLikeSliderVC
         albumsSlider = sliderVC
         albumsSliderModule = sliderPresenter
@@ -126,6 +125,13 @@ import UIKit
     
     private func updateHeaderPosition() {
         collectionView.contentInset.top = headerView.frame.height
+    }
+    
+    private func configureNavBarWithTouch() {
+        setTouchableTitle(title: mainTitle)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
+        navigationItem.titleView?.addGestureRecognizer(tap)
     }
     
 }
@@ -147,6 +153,17 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     
     func setupHeader(forPeopleItem item: PeopleItem?) {
         setupHeaderViewWith(peopleItem: item)
+    }
+    
+    func dismiss() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func hiddenSlider() {
+        if let albumsView = albumsSlider?.view {
+            albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
+            albumsHeightConstraint?.isActive = true
+        }
     }
     
 }

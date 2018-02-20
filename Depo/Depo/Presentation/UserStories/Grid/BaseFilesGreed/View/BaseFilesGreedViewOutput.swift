@@ -26,6 +26,8 @@ protocol BaseFilesGreedViewOutput {
     
     func onCancelSelection()
     
+    func isSelectionState() -> Bool
+    
     func viewWillDisappear()
     
     func viewWillAppear()

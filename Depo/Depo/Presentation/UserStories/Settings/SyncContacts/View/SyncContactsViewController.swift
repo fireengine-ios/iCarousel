@@ -171,7 +171,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         }
     }
     
-    func showProggress(progress: Int, forOperation operation: SyncOperationType){
+    func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
         gradientLoaderIndicator.progress = CGFloat(progress) / 100
         
         switch operation {
@@ -182,7 +182,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         case .analyze:
             titleLabel.text = String(format: TextConstants.settingsAnalyzingText, progress)
         case .deleteDuplicated:
-            titleLabel.text = String(format: TextConstants.settingsDeletingText, progress)
+            titleLabel.text = String(format: TextConstants.settingsDeletingText, count)
         default:
             break
         }
