@@ -46,8 +46,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         contactSyncResponse = nil
     }
     
-    func showProggress(progress: Int, forOperation operation: SyncOperationType) {
-        view.showProggress(progress: progress, forOperation: operation)
+    func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
+        view.showProggress(progress: progress, count: count, forOperation: operation)
     }
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {

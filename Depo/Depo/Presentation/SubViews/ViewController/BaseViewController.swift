@@ -41,6 +41,7 @@ class BaseViewController: UIViewController {
         super.viewDidAppear(animated)
         
         showTabBarIfNeed()
+        RouterVC().setBacgroundColor(color: getBacgroundColor())
     }
     
     func getMainYForView(view: UIView)->CGFloat{
@@ -95,6 +96,10 @@ class BaseViewController: UIViewController {
     
     func isNeedShowTabBar() -> Bool{
         return needShowTabBar
+    }
+    
+    func getBacgroundColor() -> UIColor {
+        return UIColor.white
     }
     
 }

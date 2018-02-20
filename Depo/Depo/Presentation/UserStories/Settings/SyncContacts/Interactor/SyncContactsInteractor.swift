@@ -48,9 +48,9 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     func performOperation(forType type: SYNCMode) {
-        contactsSyncService.executeOperation(type: type, progress: { [weak self] (progressPercentage, type) in
+        contactsSyncService.executeOperation(type: type, progress: { [weak self] (progressPercentage, count, type) in
                 DispatchQueue.main.async {
-                    self?.output?.showProggress(progress: progressPercentage, forOperation: type)
+                    self?.output?.showProggress(progress: progressPercentage, count: 0, forOperation: type)
                 }
             }, finishCallback: { [weak self] (result, type) in
                 DispatchQueue.main.async {
@@ -77,10 +77,9 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     private func analyze() {
-        
-        contactsSyncService.analyze(progressCallback: { [weak self] (progressPercentage, type) in
+        contactsSyncService.analyze(progressCallback: { [weak self] (progressPercentage, count, type) in
             DispatchQueue.main.async {
-                self?.output?.showProggress(progress: progressPercentage, forOperation: type)
+                self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)
             }
         }, successCallback: { [weak self] (response) in
             DispatchQueue.main.async {

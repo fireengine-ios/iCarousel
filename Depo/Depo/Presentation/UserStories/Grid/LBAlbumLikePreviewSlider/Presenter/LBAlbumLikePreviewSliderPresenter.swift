@@ -11,6 +11,8 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
     weak var view: LBAlbumLikePreviewSliderViewInput!
     var interactor: LBAlbumLikePreviewSliderInteractorInput!
     var router: LBAlbumLikePreviewSliderRouterInput!
+    
+    weak var faceImagePhotosModuleOutput: FaceImagePhotosModuleOutput?
 
     weak var baseGreedPresenterModule: BaseFilesGreedModuleInput?
     var dataSource: LBAlbumLikePreviewSliderDataSource = LBAlbumLikePreviewSliderDataSource()
@@ -46,6 +48,7 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
     //MARK: - Iteractor output
     
     func operationSuccessed(withItems items:[SliderItem]) {
+        faceImagePhotosModuleOutput?.getCountSliderItmes(count: items.count)
         dataSource.setCollectionView(items: items)
     }
     

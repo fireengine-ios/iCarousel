@@ -110,6 +110,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         output.viewIsReady(view: view)
+        setStatusBarBackgroundColor(color: UIColor.black)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,7 +122,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewWillDisappear(animated)
         
         setNavigationBackgroundColor(color: UIColor.clear)
-        setStatusBarBackgroundColor(color: UIColor.clear)
+        
         visibleNavigationBarStyle()
         output.viewWillDisappear()
     }
@@ -201,6 +202,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         needToScrollAfterRotation = true
+    }
+    
+    override func getBacgroundColor() -> UIColor {
+        return UIColor.black
     }
 }
 

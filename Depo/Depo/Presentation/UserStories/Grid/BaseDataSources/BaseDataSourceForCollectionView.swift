@@ -39,6 +39,8 @@ enum BaseDataSourceDisplayingType{
     @objc optional func didChangeSelection(state: Bool)
     
     @objc optional func updateCoverPhotoIfNeeded()
+    
+    @objc optional func didDelete(items: [BaseDataSourceItem])
 }
 
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
@@ -1225,6 +1227,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         updateCellsForObjects(objectsForDelete: objectsForRemoving, objectsForUpdate: localObjectsForReplace)
+        
+        delegate?.didDelete?(items: items)
     }
     
     private func updateCellsForObjects(objectsForDelete: [BaseDataSourceItem], objectsForUpdate:[BaseDataSourceItem]) {

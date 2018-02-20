@@ -111,6 +111,16 @@ class RouterVC: NSObject {
         navigationController?.pushViewController(viewController, animated: true)
         viewController.navigationController?.isNavigationBarHidden = false
         
+        if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
+            tabBarViewController.setBGColor(color: baseView.getBacgroundColor())
+        }
+        
+    }
+    
+    func setBacgroundColor(color: UIColor){
+        if let tabBarViewController = rootViewController as? TabBarViewController {
+            tabBarViewController.setBGColor(color: color)
+        }
     }
     
     func pushViewControllerWithoutAnimation(viewController: UIViewController) {
