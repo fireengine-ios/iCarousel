@@ -101,7 +101,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         if let newSourceView = sourceView {
             shownSourceView = newSourceView
         } else {
-            shownSourceView = rootVC.view
+            if let tabBarViewController = rootVC as? TabBarViewController{
+                shownSourceView = tabBarViewController.mainContentView
+            }else{
+                shownSourceView = rootVC.view
+            }
         }
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHidePlusTabBar), object: nil)
         view.showBar(animated: animated, onView: shownSourceView)
