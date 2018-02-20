@@ -48,8 +48,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
             
             /// without animation
             UIApplication.shared.isStatusBarHidden = self.isFullScreen
-            editingTabBar.view.isHidden = isFullScreen
-            navigationController?.navigationBar.isHidden = isFullScreen
+            editingTabBar.view.isHidden = self.isFullScreen
+            navigationController?.navigationBar.isHidden = self.isFullScreen
+            if self.isFullScreen{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOn), object: nil)
+                navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+            }else{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOff), object: nil)
+                navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+            }
         }
     } 
     

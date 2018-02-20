@@ -46,6 +46,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var musicBar: MusicBar!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     static let notificationHidePlusTabBar = "HideMainTabBarPlusNotification"
     static let notificationShowPlusTabBar = "ShowMainTabBarPlusNotification"
     static let notificationHideTabBar = "HideMainTabBarNotification"
@@ -53,6 +57,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationMusicDrop = "MusicDrop"
     static let notificationPhotosScreen = "PhotosScreenOn"
     static let notificationVideoScreen = "VideoScreenOn"
+    static let notificationFullScreenOn = "FullScreenOn"
+    static let notificationFullScreenOff = "FullScreenOff"
     
     fileprivate var photoBtn            : SubPlussButtonView!
     fileprivate var uploadBtn           : SubPlussButtonView!
@@ -200,6 +206,15 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                                                name:  NSNotification.Name(rawValue: TabBarViewController.notificationVideoScreen),
                                                object: nil)
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(fullScreenOn),
+                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOn),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(fullScreenOff),
+                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOff),
+                                               object: nil)
+        
     }
     
     @objc func showPhotosScreen(_ sender: Any) {
@@ -239,6 +254,22 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     @objc private func hidePlusTabBar(_ sender: Any) {
         if (bottomTabBarConstraint.constant == 0){
             changeTabBarStatus(hidden: true)
+        }
+    }
+    
+    @objc func fullScreenOn(){
+        if topConstraint.constant >= 0{
+            topConstraint.constant = -statusBarBG.frame.size.height
+            bottomConstraint.constant = bottomBGView.frame.size.height
+            view.layoutSubviews()
+        }
+    }
+    
+    @objc func fullScreenOff(){
+        if topConstraint.constant != 0{
+            topConstraint.constant = 0
+            bottomConstraint.constant = 0
+            view.layoutSubviews()
         }
     }
     

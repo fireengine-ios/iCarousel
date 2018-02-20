@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="bottomBGView" destination="a7w-UJ-tHf" id="cMl-yI-8Wd"/>
+                <outlet property="bottomConstraint" destination="DYb-pY-0Zn" id="Qd2-B4-GXU"/>
                 <outlet property="bottomTabBarConstraint" destination="Nv2-yE-i9E" id="iIg-GK-gy1"/>
                 <outlet property="contentView" destination="i0i-at-wPy" id="UmC-zb-APO"/>
                 <outlet property="mainContentView" destination="FJl-Cl-AGP" id="bHk-JG-24y"/>
@@ -22,6 +23,7 @@
                 <outlet property="plussButton" destination="HTg-Qb-BHM" id="xi3-JD-RNS"/>
                 <outlet property="statusBarBG" destination="WMk-8F-khr" id="kLr-O0-r8r"/>
                 <outlet property="tabBar" destination="Pdh-iF-uTx" id="M3i-be-cg9"/>
+                <outlet property="topConstraint" destination="Yvj-PI-e9N" id="HkE-3N-khs"/>
                 <outlet property="view" destination="iN0-l3-epB" id="mau-IS-hKw"/>
             </connections>
         </placeholder>
