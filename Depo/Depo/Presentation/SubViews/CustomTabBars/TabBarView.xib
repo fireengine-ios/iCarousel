@@ -22,6 +22,7 @@
                 <outlet property="musicBarHeightConstraint" destination="oLW-8y-KOm" id="Xal-XQ-eOu"/>
                 <outlet property="plusButtonHeightConstraint" destination="eNR-wi-msA" id="BjE-qO-7Pk"/>
                 <outlet property="plussButton" destination="HTg-Qb-BHM" id="xi3-JD-RNS"/>
+                <outlet property="statusBarBG" destination="WMk-8F-khr" id="kLr-O0-r8r"/>
                 <outlet property="tabBar" destination="Pdh-iF-uTx" id="M3i-be-cg9"/>
                 <outlet property="view" destination="iN0-l3-epB" id="mau-IS-hKw"/>
             </connections>
@@ -31,6 +32,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBarBackground" translatesAutoresizingMaskIntoConstraints="NO" id="WMk-8F-khr">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJl-Cl-AGP">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
@@ -90,7 +95,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="W0f-ko-odc" secondAttribute="trailing" id="2vE-tf-F6n"/>
                         <constraint firstItem="W0f-ko-odc" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="CUn-UV-qbO"/>
@@ -113,11 +118,15 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="WMk-8F-khr" firstAttribute="leading" secondItem="W6w-TK-LSF" secondAttribute="leading" id="0Pu-zT-2YW"/>
                 <constraint firstItem="a7w-UJ-tHf" firstAttribute="top" secondItem="FJl-Cl-AGP" secondAttribute="bottom" id="6Tz-je-hFR"/>
                 <constraint firstAttribute="bottom" secondItem="a7w-UJ-tHf" secondAttribute="bottom" id="88e-iQ-tFi"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="leading" secondItem="W6w-TK-LSF" secondAttribute="leading" id="9wa-HG-Fvr"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="trailing" secondItem="W6w-TK-LSF" secondAttribute="trailing" id="COT-s0-gxJ"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="bottom" secondItem="W6w-TK-LSF" secondAttribute="bottom" id="DYb-pY-0Zn"/>
+                <constraint firstItem="W6w-TK-LSF" firstAttribute="trailing" secondItem="WMk-8F-khr" secondAttribute="trailing" id="FUD-cq-UST"/>
+                <constraint firstItem="WMk-8F-khr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HtR-TI-OaJ"/>
+                <constraint firstItem="FJl-Cl-AGP" firstAttribute="top" secondItem="WMk-8F-khr" secondAttribute="bottom" constant="-44" id="Qit-3D-MoV"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="top" secondItem="W6w-TK-LSF" secondAttribute="top" id="Yvj-PI-e9N"/>
                 <constraint firstItem="a7w-UJ-tHf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kG4-NC-nhH"/>
                 <constraint firstAttribute="trailing" secondItem="a7w-UJ-tHf" secondAttribute="trailing" id="wAP-cW-Kg3"/>
@@ -131,6 +140,7 @@
     </objects>
     <resources>
         <image name="CenterButton" width="64" height="64"/>
+        <image name="NavigationBarBackground" width="520" height="88"/>
         <image name="add" width="64" height="64"/>
     </resources>
 </document>

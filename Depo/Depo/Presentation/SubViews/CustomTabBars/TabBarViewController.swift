@@ -33,6 +33,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var bottomBGView: UIView!
     
+    @IBOutlet weak var statusBarBG: UIImageView!
+    
     @IBOutlet weak var plusButtonBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var plusButtonHeightConstraint: NSLayoutConstraint!

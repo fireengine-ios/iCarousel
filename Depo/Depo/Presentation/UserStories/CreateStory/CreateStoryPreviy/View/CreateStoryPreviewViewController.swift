@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class CreateStoryPreviewViewController: UIViewController, AVPlayerViewControllerDelegate {
+class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControllerDelegate {
 
     var output: CreateStoryPreviewViewOutput!
     
@@ -57,6 +57,7 @@ class CreateStoryPreviewViewController: UIViewController, AVPlayerViewController
         navigationItem.rightBarButtonItem = barButton
         
         output.viewIsReady()
+        setStatusBarBackgroundColor(color: viewForPlayer.backgroundColor ?? UIColor.black)
     }
     
     @IBAction func onPlayButton(){
@@ -73,6 +74,10 @@ class CreateStoryPreviewViewController: UIViewController, AVPlayerViewController
     
     @objc func onSaveButton(){
         output.onSaveStory()
+    }
+    
+    override func getBacgroundColor() -> UIColor {
+        return viewForPlayer.backgroundColor ?? UIColor.black
     }
     
 }
