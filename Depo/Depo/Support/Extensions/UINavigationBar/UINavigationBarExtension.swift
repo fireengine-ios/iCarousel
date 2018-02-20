@@ -207,14 +207,15 @@ extension UIViewController {
     }
     
     func setTouchableTitle(title: String) {
-        self.navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
-        let titleLabel = UILabel()
+        navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
+        let titleLabel = UILabel()        
         titleLabel.tag = tagTitleView
         titleLabel.backgroundColor = UIColor.clear
         titleLabel.textColor = UIColor.white
         titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 19.0)
         titleLabel.text = title
-        self.navigationItem.titleView = titleLabel
+        titleLabel.sizeToFit()
+        navigationItem.titleView = titleLabel
         
         navigationItem.titleView?.isUserInteractionEnabled = true
     }
