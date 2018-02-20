@@ -33,6 +33,11 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        if #available(iOS 11.0, *) {
+            imageScrollView.contentInsetAdjustmentBehavior = .never
+        }
+        
         backgroundColor = UIColor.clear
         webView.scalesPageToFit = true /// enable zoom
         imageScrollView.delegate = self
@@ -52,26 +57,22 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             }
         }
         
-        
-        
         addGestureRecognizer(tapGesture)
     }
     
-    var isNeedLayout = true
-    
     @objc private func actionTapGesture(_ gesture: UITapGestureRecognizer) {
         delegate?.tapOnCellForFullScreen()
-        isNeedLayout = false
     }
     
+    private var oldFrame = CGRect.zero
+    
     override func layoutSubviews() {
-        super.layoutSubviews()
-        layoutIfNeeded()
-        if Device.operationSystemVersionLessThen(11) || isNeedLayout {
+        /// fixed bug in iOS 11: setNavigationBarHidden calls cell layout
+        if oldFrame != frame {
+            oldFrame = frame
+            super.layoutSubviews()
+            layoutIfNeeded()
             imageScrollView.updateZoom()
-        }
-        if !isNeedLayout {
-            isNeedLayout = true
         }
     }
     

@@ -76,8 +76,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 11.0, *) {
+            collectionView.contentInsetAdjustmentBehavior = .never
+        } else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
+        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        automaticallyAdjustsScrollViewInsets = false
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
