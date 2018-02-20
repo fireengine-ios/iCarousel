@@ -15,4 +15,5 @@ protocol FaceImagePhotosViewInput: class {
     func reloadName(_ name: String)
     func hiddenSlider()
     func dismiss()
+    func setCountImage(_ count: String)
 }

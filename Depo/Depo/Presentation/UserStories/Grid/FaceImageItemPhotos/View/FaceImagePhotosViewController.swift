@@ -17,6 +17,7 @@ import UIKit
     private var albumsSliderModule: LBAlbumLikePreviewSliderPresenter?
     private var headerView = UIView()
     private var headerImage = LoadingImageView()
+    private var countPhotosLabel = UILabel()
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
     
@@ -81,7 +82,19 @@ import UIKit
         headerImage.rightAnchor.constraint(equalTo: headerView.rightAnchor).isActive = true
         headerImageHeightConstraint = headerImage.heightAnchor.constraint(equalToConstant: headerImageHeight)
         headerImageHeightConstraint?.isActive = true
+
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        headerImage.addBlackGradientLayer(colors: [.clear, UIColor.gray.withAlphaComponent(0.9)])
         
+        countPhotosLabel.backgroundColor = UIColor.clear
+        countPhotosLabel.textColor = UIColor.white
+        countPhotosLabel.font = UIFont.TurkcellSaturaDemFont(size: 17.0)
+        countPhotosLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(countPhotosLabel)
+        countPhotosLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        countPhotosLabel.bottomAnchor.constraint(equalTo: headerImage.bottomAnchor, constant: -16).isActive = true
+
         if let peopleItem = peopleItem {
             createAlbumsSliderWith(peopleItem: peopleItem)
             if let albumsView = albumsSlider?.view {
@@ -93,9 +106,6 @@ import UIKit
                 albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
                 albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: albumsSliderHeight)
                 albumsHeightConstraint?.isActive = true
-                headerView.setNeedsLayout()
-                headerView.layoutIfNeeded()
-                headerImage.addBlackGradientLayer(colors: [.clear, .black])
             }
         } else {
             headerImage.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
@@ -164,6 +174,10 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
             albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
             albumsHeightConstraint?.isActive = true
         }
+    }
+        
+    func setCountImage(_ count: String) {
+        countPhotosLabel.text = count
     }
     
 }
