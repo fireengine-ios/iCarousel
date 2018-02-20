@@ -106,6 +106,10 @@ import UIKit
                 albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
                 albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: albumsSliderHeight)
                 albumsHeightConstraint?.isActive = true
+
+                headerView.setNeedsLayout()
+                headerView.layoutIfNeeded()
+                headerImage.addBlackGradientLayer(colors: [.clear, UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)])
             }
         } else {
             headerImage.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
