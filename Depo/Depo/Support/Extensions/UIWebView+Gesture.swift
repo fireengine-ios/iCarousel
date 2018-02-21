@@ -9,6 +9,24 @@
 import UIKit
 
 extension UIWebView {
+    /// Usage
+    /**
+    save gesture
+     
+     if let zoomGesture = webView.doubleTapZoomGesture {
+        doubleTapWebViewGesture = zoomGesture
+        tapGesture.require(toFail: zoomGesture)
+     }
+     
+    add UIGestureRecognizerDelegate
+     
+     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == tapGesture, otherGestureRecognizer == doubleTapWebViewGesture {
+            return false
+        }
+        return true
+     }
+    */
     var doubleTapZoomGesture: UITapGestureRecognizer? {
         for view in scrollView.subviews {
             guard String(describing: view.classForCoder) == "UIWebBrowserView",
