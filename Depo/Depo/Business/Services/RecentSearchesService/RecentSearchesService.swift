@@ -6,34 +6,51 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-final class RecentSearchesObject: NSObject, NSCoding {
-   
-    var text: String?
-    var type: SuggestionType?
+import SwiftyJSON
+
+enum SearchCategory: Int {
+    case suggestion = 0, recent, people, things
     
-    init(withText text: String?, type: SuggestionType?) {
-        self.text = text
-        self.type = type
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(text ?? "", forKey: "text")
-        aCoder.encode(type?.rawValue ?? "", forKey: "type")
-    }
-    
-    init?(coder aDecoder: NSCoder) {
-        text = aDecoder.decodeObject(forKey: "text") as? String
-        if let type = aDecoder.decodeObject(forKey: "type") as? String {
-            self.type = SuggestionType(rawValue: type)
+    var searchKey: String {
+        switch self {
+        case .recent: return "kRecentSearchesObjects"
+        case .people: return "kRecentSearchesPeople"
+        case .things: return "kRecentSearchesThings"
+        default:
+            return ""
         }
-    }    
+    }
+    
+    var maxSearches: Int {
+        switch self {
+        case .recent: return NumericConstants.maxRecentSearchesObjects
+        case .people: return NumericConstants.maxRecentSearchesPeople
+        case .things: return NumericConstants.maxRecentSearchesThings
+        default:
+            return 0
+        }
+    }
+    
+    init(withSuggestionType type: SuggestionType?) {
+        guard let type = type else {
+            self = .recent
+            return
+        }
+        
+        switch type {
+        case .people: self = .people
+        case .thing: self = .things
+        default:
+            self = .recent
+        }
+    }
 }
 
 final class RecentSearchesService {
     
     private let recentSearchesKey = "kRecentSearches"
-    private let recentSearchesObjectsKey = "kRecentSearchesObjects"
-    private(set) var searches: [RecentSearchesObject] = []
+    
+    private(set) var searches = [SearchCategory: [SuggestionObject]]()
     
     static let shared = RecentSearchesService()
     
@@ -41,59 +58,85 @@ final class RecentSearchesService {
         searches = loadRecentSearches()
     }
     
-    private func loadRecentSearches() -> [RecentSearchesObject] {
+    private func loadRecentSearches() -> [SearchCategory: [SuggestionObject]] {
         convertOldSearches()
         
-        var result = [RecentSearchesObject]()
+        var result = [SearchCategory: [SuggestionObject]]()
         
-        if let data = UserDefaults.standard.object(forKey: recentSearchesObjectsKey) as? Data,
-            let recentSearchesObjects = NSKeyedUnarchiver.unarchiveObject(with: data) as? [RecentSearchesObject] {
-            result.append(contentsOf: recentSearchesObjects)
-        }
+        result[.recent] = loadRecentSearches(forCategory: .recent)
+        result[.people] = loadRecentSearches(forCategory: .people)
+        result[.things] = loadRecentSearches(forCategory: .things)
 
-        if result.isEmpty {
+        return result
+    }
+    
+    private func loadRecentSearches(forCategory category: SearchCategory) -> [SuggestionObject] {
+        var result = [SuggestionObject]()
+        
+        if let data = UserDefaults.standard.object(forKey: category.searchKey) as? Data,
+            let objects = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String] {
+            result = objects.map { SuggestionObject(withJSON: JSON(parseJSON: $0)) }
+        }
+        
+        if category == .recent, result.isEmpty {
             let currentYear = Date().getYear()
-            result = [RecentSearchesObject(withText: "\(currentYear)", type: .time)]
-            save(searches: result)
+            let object = SuggestionObject()
+            object.text = String(currentYear)
+            object.type = .time
+            result.append(object)
         }
         return result
     }
     
-    func addSearch(_ searchText: String, type: SuggestionType?) {
+    func addSearch(_ searchText: String) {
         guard !searchText.isEmpty else {
             return
         }
-        
-        if let existingIndex = searches.index(where: {$0.text == searchText}) {
-            searches.remove(at: existingIndex)
-        } else if searches.count >= NumericConstants.maxRecentSearches {
-            searches.removeLast(1)
-        }
-        let searchObject = RecentSearchesObject(withText: searchText, type: type)
-        searches.insert(searchObject, at: 0)
-        save(searches: searches)
+        let searchObject = SuggestionObject()
+        searchObject.text = searchText
+        add(item: searchObject, toCategory: .recent)
     }
-
     
-    private func save(searches: [RecentSearchesObject]) {
-        let data = NSKeyedArchiver.archivedData(withRootObject: searches)
-        UserDefaults.standard.set(data, forKey: recentSearchesObjectsKey)
+    func addSearch(item: SuggestionObject) {
+        if item.info != nil {
+            add(item: item, toCategory: SearchCategory(withSuggestionType: item.type))
+        } else {
+            add(item: item, toCategory: .recent)
+        }
+    }
+    
+    private func add(item: SuggestionObject, toCategory category: SearchCategory) {
+        var objects = searches[category]!
+        
+        if let existingIndex = objects.index(where: {$0.text == item.text}) {
+            objects.remove(at: existingIndex)
+        } else if objects.count >= category.maxSearches {
+            objects.removeLast(1)
+        }
+        objects.insert(item, at: 0)
+        searches[category] = objects
+        save(searches: objects, category: category)
+    }
+    
+    private func save(searches: [SuggestionObject], category: SearchCategory) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: searches.flatMap {$0.jsonString})
+        UserDefaults.standard.set(data, forKey: category.searchKey)
         UserDefaults.standard.synchronize()
     }
     
     private func convertOldSearches() {
         if let recentSearches = UserDefaults.standard.object(forKey: recentSearchesKey) as? [String] {
             recentSearches.forEach({ search in
-                self.addSearch(search, type: nil)
+                self.addSearch(search)
             })
             UserDefaults.standard.set(nil, forKey: recentSearchesKey)
-            UserDefaults.standard.synchronize()
         }
     }
     
     func clearAll() {
-        searches = [RecentSearchesObject]()
-        UserDefaults.standard.set(searches, forKey: recentSearchesObjectsKey)
+        UserDefaults.standard.set([String](), forKey: SearchCategory.recent.searchKey)
+        UserDefaults.standard.set([String](), forKey: SearchCategory.people.searchKey)
+        UserDefaults.standard.set([String](), forKey: SearchCategory.recent.searchKey)
         UserDefaults.standard.set(nil, forKey: recentSearchesKey)
         UserDefaults.standard.synchronize()
     }

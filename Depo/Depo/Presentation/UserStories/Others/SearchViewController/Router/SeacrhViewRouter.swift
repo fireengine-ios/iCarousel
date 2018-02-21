@@ -39,4 +39,12 @@ class SeacrhViewRouter: SearchViewRouterInput {
     func showNoFilesToCreateStoryAlert() {
         UIApplication.showErrorAlert(message: TextConstants.searchNoFilesToCreateStoryError)
     }
+    
+    func openFaceImageItems(category: SearchCategory) {
+        
+    }
+    
+    func openFaceImage(item: SuggestionObject) {
+        
+    }
 }

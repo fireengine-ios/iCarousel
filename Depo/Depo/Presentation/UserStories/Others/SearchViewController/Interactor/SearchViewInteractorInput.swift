@@ -14,9 +14,10 @@ protocol SearchViewInteractorInput {
     var bottomBarConfig: EditingBarConfig? { get set }
     
     func viewIsReady()
-    func searchItems(by searchText: String, type: SuggestionType?, sortBy: SortType, sortOrder: SortOrder)
+    func searchItems(by searchText: String, sortBy: SortType, sortOrder: SortOrder)
     func needShowNoFileView() -> Bool
     func getSuggetion(text: String)
     func getDefaultSuggetion(text: String)
     func clearRecentSearches()
+    func addSearch(item: SuggestionObject)
 }

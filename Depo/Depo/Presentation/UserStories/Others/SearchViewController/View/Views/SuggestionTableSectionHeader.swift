@@ -14,10 +14,6 @@ protocol SuggestionTableSectionHeaderDelegate: class {
 
 class SuggestionTableSectionHeader: UITableViewHeaderFooterView {
     
-    enum Category: Int {
-        case suggestion = 0, recent
-    }
-    
     private weak var delegate: SuggestionTableSectionHeaderDelegate?
     
     @IBOutlet private weak var clearButton: UIButton!
@@ -31,7 +27,7 @@ class SuggestionTableSectionHeader: UITableViewHeaderFooterView {
         backgroundColor = .clear
     }
     
-    func configureWith(category: Category, delegate: SuggestionTableSectionHeaderDelegate? = nil) {
+    func configureWith(category: SearchCategory, delegate: SuggestionTableSectionHeaderDelegate? = nil) {
         self.delegate = delegate
         
         switch category {
@@ -41,6 +37,9 @@ class SuggestionTableSectionHeader: UITableViewHeaderFooterView {
         case .recent:
             titleLabel.text = TextConstants.searchRecentSearchTitle
             clearButton.isHidden = false
+        default:
+            titleLabel.text = ""
+            clearButton.isHidden = true
         }
     }
     

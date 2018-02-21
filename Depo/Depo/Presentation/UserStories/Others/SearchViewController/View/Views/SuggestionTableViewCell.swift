@@ -22,29 +22,19 @@ class SuggestionTableViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
     }
     
-    func configure(withSuggest suggest: SuggestionObject?) {
-        guard let suggest = suggest else {
+    func configure(withItem item: SuggestionObject?) {
+        guard let item = item else {
             return
         }
         
-        typeImageView.image = suggest.type?.image
+        typeImageView.image = item.type?.image
         typeImageView.isHidden = typeImageView.image == nil ? true : false
         
-        if let highlightedText = suggest.highlightedText {
+        if let highlightedText = item.highlightedText {
             nameLabel.attributedText = highlightedText
-        } else if let text = suggest.text {
+        } else if let text = item.text {
             nameLabel.text = text
         }
-    }
-
-    func configure(withRecent recent: RecentSearchesObject?) {
-        guard let recent = recent else {
-            return
-        }
-        
-        typeImageView.image = recent.type?.image
-        typeImageView.isHidden = typeImageView.image == nil ? true : false
-        nameLabel.text = recent.text ?? ""
     }
     
 }

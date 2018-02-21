@@ -36,8 +36,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     var underNavBarBar: GridListTopBar?
     var output: SearchViewOutput!
     
-    var suggestionList = [SuggestionObject]()
-    var recentSearchList = [RecentSearchesObject]()
+    var items = [SearchCategory: [SuggestionObject]]()
     
     var tabBarActionHandler: TabBarActionHandler? { return output.tabBarActionHandler }
     
@@ -163,6 +162,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         suggestTableView.register(UINib(nibName: CellsIdConstants.suggestionTableViewCellID, bundle: nil),
                                   forCellReuseIdentifier: CellsIdConstants.suggestionTableViewCellID)
         
+        suggestTableView.register(UINib(nibName: CellsIdConstants.recentlySearchedTableViewCellID, bundle: nil),
+                                  forCellReuseIdentifier: CellsIdConstants.recentlySearchedTableViewCellID)
+        
         suggestTableView.backgroundColor = .clear
         suggestTableView.separatorColor = .white
     }
@@ -255,7 +257,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        search(text: searchBar.text, type: nil)
+        search(text: searchBar.text)
     }
     
     var timerToSearch = Timer()
@@ -291,9 +293,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         topBarContainer.isHidden = false
     }
     
-    private func search(text: String?, type: SuggestionType?) {
+    private func search(text: String?) {
         if let searchText = text, !searchText.isEmpty {
-            output.searchWith(searchText: searchText, type: type, sortBy: SortType.date, sortOrder: SortOrder.asc)
+            output.searchWith(searchText: searchText, sortBy: SortType.date, sortOrder: SortOrder.asc)
         } else {
             collectionView.isHidden = true
             setCurrentPlayState()
@@ -316,14 +318,23 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func successWithSuggestList(list: [SuggestionObject]) {
-        suggestionList = list
-        suggestTableView.isHidden = suggestionList.count == 0 && recentSearchList.count == 0
+        items[.suggestion] = list
+        suggestTableView.isHidden = isEmptyItems()
         suggestTableView.reloadData()
     }
     
-    func setRecentSearches(_ recentSearches: [RecentSearchesObject]) {
-        recentSearchList = recentSearches
+    func setRecentSearches(_ recentSearches: [SearchCategory: [SuggestionObject]]) {
+        recentSearches.forEach { category, list in
+            self.items[category] = list
+        }
         suggestTableView.reloadData()
+    }
+    
+    private func isEmptyItems() -> Bool {
+        for list in items.values {
+            if !list.isEmpty { return false }
+        }
+        return true
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -378,47 +389,77 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        var sections = 2
+        if let items = items[.people], !items.isEmpty {
+            sections += 1
+        }
+        if let items = items[.things], !items.isEmpty {
+            sections += 1
+        }
+        return sections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let category = SuggestionTableSectionHeader.Category(rawValue: section) else {
+        guard let category = SearchCategory(rawValue: section) else {
             return 0
         }
+        
         switch category {
-        case .suggestion:
-            return suggestionList.count
-        case .recent:
-            return recentSearchList.count
+        case .suggestion, .recent:
+            return items[category]?.count ?? 0
+        case .people, .things:
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let category = SearchCategory(rawValue: indexPath.section) else {
+            return UITableViewAutomaticDimension
+        }
+        
+        switch category {
+        case .suggestion, .recent:
+            return UITableViewAutomaticDimension
+        case .people, .things:
+            return RecentlySearchedFaceImageTableViewCell.height()
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.suggestionTableViewCellID, for: indexPath) as? SuggestionTableViewCell,
-            let category = SuggestionTableSectionHeader.Category(rawValue: indexPath.section) else {
+        guard let category = SearchCategory(rawValue: indexPath.section) else {
             return UITableViewCell()
         }
         
         switch category {
-        case .recent:
-            let recent = recentSearchList[indexPath.row]
-            cell.configure(withRecent: recent)
-        case .suggestion:
-            let suggest = suggestionList[indexPath.row]
-            cell.configure(withSuggest: suggest)
+        case .recent, .suggestion:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.suggestionTableViewCellID, for: indexPath) as? SuggestionTableViewCell,
+                let item = items[category]?[indexPath.item] {
+                cell.configure(withItem: item)
+                return cell
+            }
+        case .people, .things:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.recentlySearchedTableViewCellID, for: indexPath) as? RecentlySearchedFaceImageTableViewCell {
+                cell.configure(withItems: items[category], category: category)
+                return cell
+            }
         }
-        
-        return cell
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if let category = SearchCategory(rawValue: section), category == .recent || category == .suggestion {
+             return 44
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CellsIdConstants.suggestionTableSectionHeaderID) as? SuggestionTableSectionHeader
-        
-        if let category = SuggestionTableSectionHeader.Category(rawValue: section) {
+        if let category = SearchCategory(rawValue: section), category == .recent || category == .suggestion {
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CellsIdConstants.suggestionTableSectionHeaderID) as? SuggestionTableSectionHeader
             header?.configureWith(category: category, delegate: self)
+            return header
         }
-        
-        return header
+        return nil
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -426,26 +467,18 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let category = SuggestionTableSectionHeader.Category(rawValue: indexPath.section) else {
+        guard let category = SearchCategory(rawValue: indexPath.section),
+            let item = items[category]?[indexPath.item] else {
             return
         }
         
-        let searchText: String
-        let type: SuggestionType?
-        switch category {
-        case .recent:
-            let recent = recentSearchList[indexPath.row]
-            searchText = recent.text ?? ""
-            type = recent.type
-        case .suggestion:
-            let suggest = suggestionList[indexPath.row]
-            searchText = suggest.text ?? ""
-            type = suggest.type
+        if (item.type == .people || item.type == .thing) && item.info != nil {
+            output.openFaceImage(item: item)
+        } else {
+            let searchBar = navigationBar.topItem?.titleView as! UISearchBar
+            searchBar.text = item.text?.removingPercentEncoding ?? item.text
+            search(text: searchBar.text)
         }
-        
-        let searchBar = navigationBar.topItem?.titleView as! UISearchBar
-        searchBar.text = searchText.removingPercentEncoding ?? searchText
-        search(text: searchBar.text, type: type)
     }
     
     func musicBarZoomWillOpen() {
@@ -485,6 +518,18 @@ extension SearchViewController: SuggestionTableSectionHeaderDelegate {
     
     func onClearRecentSearchesTapped() {
         output.onClearRecentSearchesTapped()
+    }
+    
+}
+
+extension SearchViewController: RecentlySearchedFaceImageCellDelegate {
+
+    func select(item: SuggestionObject) {
+        output.openFaceImage(item: item)
+    }
+    
+    func tapArrow(category: SearchCategory) {
+        output.openFaceImageItems(category: category)
     }
     
 }

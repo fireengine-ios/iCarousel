@@ -11,7 +11,7 @@ import Foundation
 protocol SearchViewInput: class {
     func endSearchRequestWith(text: String)
     func successWithSuggestList(list: [SuggestionObject])
-    func setRecentSearches(_ recentSearches: [RecentSearchesObject])
+    func setRecentSearches(_ recentSearches: [SearchCategory: [SuggestionObject]])
     
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool)
     func getCollectionViewWidth() -> CGFloat

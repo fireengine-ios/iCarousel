@@ -12,4 +12,6 @@ protocol SearchViewRouterInput {
     func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem])
     func createStoryWithItems(_ items: [BaseDataSourceItem])
     func showNoFilesToCreateStoryAlert()
+    func openFaceImageItems(category: SearchCategory)
+    func openFaceImage(item: SuggestionObject)
 }
