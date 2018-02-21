@@ -142,10 +142,9 @@ final class FilterPhotoCard: BaseView {
         let item = WrapData(asset: asset)
         
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
-
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
-        RouterVC().pushViewController(viewController: controller)
+        let nController = UINavigationController(rootViewController: controller)
+        RouterVC().presentViewController(controller: nController)
     }
     
     private func saveToDevice(image: UIImage) {

@@ -103,7 +103,10 @@ class RouterVC: NSObject {
     }
     
     func pushOnPresentedView(viewController: UIViewController){
-        getViewControllerForPresent()?.navigationController?.pushViewController(viewController, animated: true)
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.getViewControllerForPresent()?.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     func pushViewController(viewController: UIViewController) {

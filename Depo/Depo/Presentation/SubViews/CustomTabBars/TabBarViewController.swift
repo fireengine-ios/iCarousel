@@ -33,14 +33,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var statusBarBG: UIImageView!
     
-    @IBOutlet weak var plusButtonBottomConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var plusButtonHeightConstraint: NSLayoutConstraint!
     
-    
     @IBOutlet weak var musicBarHeightConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var bottomTabBarConstraint: NSLayoutConstraint!
     
@@ -232,11 +227,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     @objc func showMusicBar(_ sender: Any) {
         musicBar.configurateFromPLayer()
         changeVisibleStatus(hidden: false)
-        containerViewBottomConstraint.constant = musicBarHeightConstraint.constant
     }
     
     @objc func hideMusicBar(_ sender: Any) {
-        containerViewBottomConstraint.constant = 0
         changeVisibleStatus(hidden: true)
     }
 

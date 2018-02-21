@@ -154,12 +154,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         output.viewWillDisappear()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -176,6 +170,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     func hideView(){
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         dismiss(animated: true) {
             
         }

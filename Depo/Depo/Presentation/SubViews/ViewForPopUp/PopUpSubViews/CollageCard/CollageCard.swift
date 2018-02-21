@@ -117,9 +117,8 @@ final class CollageCard: BaseView {
         guard let item = item else { return }
         
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
-        
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
-        RouterVC().pushViewController(viewController: controller)
+        let nController = UINavigationController(rootViewController: controller)
+        RouterVC().presentViewController(controller: nController)
     }
 }

@@ -132,7 +132,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         super.viewWillLayoutSubviews()
         
         /// need when device was rotated
-        collectionView.collectionViewLayout.invalidateLayout()
+        //collectionView.collectionViewLayout.invalidateLayout()
     }
     
     func configurateViewForPopUp(){
@@ -341,7 +341,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
         collectionView.updateConstraints()
         
-        collectionView.clipsToBounds = false
         collectionView.contentInset = UIEdgeInsets(top: BaseFilesGreedViewController.sliderH + hTopPopUpView, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(subView)
         sliderController.view.frame = subView.bounds
@@ -369,7 +368,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     private func setupViewForPopUp(){
-        collectionView.clipsToBounds = false
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(scrolliblePopUpView)
         

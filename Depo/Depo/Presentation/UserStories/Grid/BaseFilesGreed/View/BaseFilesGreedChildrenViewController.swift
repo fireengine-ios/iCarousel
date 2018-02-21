@@ -10,6 +10,12 @@ import Foundation
 
 class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     
+    override func configureNavBarActions(isSelecting: Bool = false) {
+        super.configureNavBarActions(isSelecting: isSelecting)
+        defaultNavBarStyle()
+        navigationBarWithGradientStyle()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
