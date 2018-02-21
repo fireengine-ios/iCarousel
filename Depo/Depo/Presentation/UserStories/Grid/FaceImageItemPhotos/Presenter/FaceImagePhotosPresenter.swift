@@ -140,3 +140,13 @@ extension FaceImagePhotosPresenter: FaceImagePhotosModuleOutput {
     }
     
 }
+
+// MARK: FaceImagePhotosModuleOutput
+
+extension FaceImagePhotosPresenter: FaceImagePhotosInteractorOutput {
+    func didCountImage(_ count: Int) {
+        if let view = view as? FaceImagePhotosViewInput {
+            view.setCountImage("\(count) \(TextConstants.faceImagePhotos)")
+        }
+    }
+}

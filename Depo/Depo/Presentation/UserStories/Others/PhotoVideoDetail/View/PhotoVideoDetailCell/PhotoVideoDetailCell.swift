@@ -36,6 +36,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         if #available(iOS 11.0, *) {
             imageScrollView.contentInsetAdjustmentBehavior = .never
+            webView.scrollView.contentInsetAdjustmentBehavior = .never
         }
         
         backgroundColor = UIColor.clear
@@ -43,18 +44,9 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         imageScrollView.delegate = self
         imageScrollView.imageView.delegate = self
         
-        for view in webView.scrollView.subviews {
-            if String(describing: view.classForCoder) == "UIWebBrowserView",
-                let gestures = view.gestureRecognizers {
-                
-                for gesture in gestures {
-                    if let gesture = gesture as? UITapGestureRecognizer,
-                        gesture.numberOfTapsRequired == 2 {
-                        doubleTapWebViewGesture = gesture
-                        tapGesture.require(toFail: gesture)
-                    }
-                }
-            }
+        if let zoomGesture = webView.doubleTapZoomGesture {
+            doubleTapWebViewGesture = zoomGesture
+            tapGesture.require(toFail: zoomGesture)
         }
         
         addGestureRecognizer(tapGesture)

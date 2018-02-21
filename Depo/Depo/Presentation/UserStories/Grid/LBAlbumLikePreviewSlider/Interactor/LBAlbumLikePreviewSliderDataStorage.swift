@@ -35,6 +35,15 @@ enum MyStreamType: Int {
         default: return UIImage()
         }
     }
+    
+    func isMyStreamSliderType() -> Bool {
+        switch self {
+        case .albums, .story, .people, .things, .places:
+            return true
+        case .album:
+            return false
+        }
+    }
 }
 
 class SliderItem {
@@ -93,6 +102,11 @@ class LBAlbumLikePreviewSliderDataStorage {
     var currentItems: [SliderItem] = []
     
     func addNew(item: SliderItem) {
-        currentItems.append(item)
+        if let type = item.type, type.isMyStreamSliderType(),
+           let index = currentItems.index(where: {$0.type == item.type}) {
+            currentItems[index] = item
+        } else {
+            currentItems.append(item)
+        }
     }
 }

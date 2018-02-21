@@ -53,9 +53,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //            }
             
             /// without animation
-            UIApplication.shared.isStatusBarHidden = self.isFullScreen
-            editingTabBar.view.isHidden = self.isFullScreen
-            navigationController?.navigationBar.isHidden = self.isFullScreen
+            UIApplication.shared.isStatusBarHidden = isFullScreen
+            editingTabBar.view.isHidden = isFullScreen
+            navigationController?.navigationBar.isHidden = isFullScreen
             
             bottomBlackView.isHidden = self.isFullScreen
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
