@@ -25,6 +25,34 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
     
+    private var isFullScreen = false {
+        didSet {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { 
+//                UIApplication.shared.isStatusBarHidden = self.isFullScreen
+//            }
+//            navigationController?.setNavigationBarHidden(self.isFullScreen, animated: true)
+//            
+//            if isFullScreen {
+//                UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+//                    self.editingTabBar.view.transform = CGAffineTransform(translationX: 0, y: self.editingTabBar.view.bounds.height)
+//                }, completion: {_ in
+//                    self.editingTabBar.view.isHidden = self.isFullScreen
+//                })
+//                
+//            } else {      
+//                editingTabBar.view.isHidden = self.isFullScreen
+//                UIView.animate(withDuration: NumericConstants.animationDuration) { 
+//                    self.editingTabBar.view.transform = .identity
+//                }
+//            }
+            
+            /// without animation
+            UIApplication.shared.isStatusBarHidden = isFullScreen
+            editingTabBar.view.isHidden = isFullScreen
+            navigationController?.navigationBar.isHidden = isFullScreen
+        }
+    } 
+    
     private var selectedIndex = 0 {
         didSet {
             guard !objects.isEmpty, selectedIndex < objects.count else {
@@ -48,11 +76,18 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 11.0, *) {
+            collectionView.contentInsetAdjustmentBehavior = .never
+        } else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
+        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        automaticallyAdjustsScrollViewInsets = false
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.isHidden = true
     }
     
@@ -205,6 +240,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
+        self.objects = objectsArray
         self.selectedIndex = selectedIndex
     }
     
@@ -248,6 +284,10 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
+    func tapOnCellForFullScreen() {
+        isFullScreen = !isFullScreen
+    }
+    
     func tapOnSelectedItem() {
         let file = objects[selectedIndex]
         
