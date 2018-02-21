@@ -2432,6 +2432,10 @@
 		97E245036F6119CDFA534B88 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD920B02D55872C2278EC4BE /* SplashViewController.swift */; };
 		9807260D203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
 		9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
+		98072619203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */; };
+		9807261A203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */; };
+		9807261C203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */; };
+		9807261D203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */; };
 		9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */; };
 		9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
 		984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
@@ -4498,6 +4502,8 @@
 		95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorInput.swift; sourceTree = "<group>"; };
 		96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorInput.swift; sourceTree = "<group>"; };
 		9807260C203468D9004E1505 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
+		98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionTableViewCell.xib; sourceTree = "<group>"; };
+		9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableViewCell.swift; sourceTree = "<group>"; };
 		9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderWithText.swift; sourceTree = "<group>"; };
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInteractor.swift; sourceTree = "<group>"; };
@@ -6199,6 +6205,8 @@
 			children = (
 				780400F71FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift */,
 				780400F81FE7E6FB00560EEF /* SuggestionTableSectionHeader.xib */,
+				9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */,
+				98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -11141,6 +11149,7 @@
 				8C06B1652008AD72003D8E05 /* toolbar_crop_icon.png in Resources */,
 				8C06B18B2008AD72003D8E05 /* underline_sari.png in Resources */,
 				8C06AF832008AD70003D8E05 /* error_icon@3x.png in Resources */,
+				9807261A203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */,
 				8C0E90021FDEBDFF00789C91 /* AppRater.bundle in Resources */,
 				8C06AFC92008AD71003D8E05 /* header_icon@2x.png in Resources */,
 				8C06AECF2008AD70003D8E05 /* beyaz_cerceve.png in Resources */,
@@ -11921,6 +11930,7 @@
 				8C06B1282008AD72003D8E05 /* t_kucuk_selected.png in Resources */,
 				8C06AFB42008AD71003D8E05 /* frekans_secili.png in Resources */,
 				8C06B1C62008AD72003D8E05 /* sticker_close.png in Resources */,
+				98072619203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */,
 				8C06B1D02008AD72003D8E05 /* sticker_resize@3x.png in Resources */,
 				8C5408411F61C0E000D4717A /* GridListTopBar.xib in Resources */,
 				8C06B0362008AD71003D8E05 /* Orta@2x.png in Resources */,
@@ -12858,6 +12868,7 @@
 				8C0E8DD21FDEBDFF00789C91 /* CreateStoryNameInitializer.swift in Sources */,
 				8C0E8DD31FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				8C0E8DD41FDEBDFF00789C91 /* TermsAndServicesPresenter.swift in Sources */,
+				9807261D203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
 				8C0E8DD51FDEBDFF00789C91 /* TermsAndServicesInteractorInput.swift in Sources */,
 				CED4B0282017505300D06CA9 /* Mapping.swift in Sources */,
 				8C0E8DD61FDEBDFF00789C91 /* TermsAndServicesInteractorOutput.swift in Sources */,
@@ -14362,6 +14373,7 @@
 				2EF733E89FE2194E3B6817BA /* FeedbackViewConfigurator.swift in Sources */,
 				4A8CC303201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
 				8AC9821D58B05574782F11AB /* FeedbackViewInitializer.swift in Sources */,
+				9807261C203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
 				AD2151F5167A65F51A485818 /* ActivityTimelineViewInput.swift in Sources */,
 				EBE4DB98A7204834F0BB6B76 /* ActivityTimelineViewOutput.swift in Sources */,
 				0A2DCCF755BD78D7EE5ABDAB /* ActivityTimelineViewController.swift in Sources */,

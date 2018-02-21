@@ -29,13 +29,13 @@ class SearchViewInteractor: SearchViewInteractorInput {
         getDefaultSuggetion(text: "")
     }
     
-    func searchItems(by searchText: String, sortBy: SortType, sortOrder: SortOrder) {
+    func searchItems(by searchText: String, type: SuggestionType?, sortBy: SortType, sortOrder: SortOrder) {
         remoteItems.allItems(searchText, sortBy: sortBy, sortOrder: sortOrder,
              success: { [weak self] (items) in
                 guard let `self` = self else { return }
                 self.items(items: items)
                 DispatchQueue.main.async {
-                    self.recentSearches.addSearch(searchText)
+                    self.recentSearches.addSearch(searchText, type: type)
                     self.output?.setRecentSearches(self.recentSearches.searches)
                     self.output?.endSearchRequestWith(text: searchText)
                 }

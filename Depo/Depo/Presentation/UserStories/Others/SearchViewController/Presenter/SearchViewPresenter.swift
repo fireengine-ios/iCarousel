@@ -81,12 +81,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         sortedRule = unwrapedConfig.defaultSortType.sortedRulesConveted
     }
 
-    func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder) {
+    func searchWith(searchText: String, type: SuggestionType?, sortBy: SortType, sortOrder: SortOrder) {
         showedSpinner = true
         self.outputView()?.showSpiner()
-//        dataSource.configurateWithData(collectionData: [[Item]]())
-//        dataSource.updateDisplayngType(type: .list)
-        interactor.searchItems(by: searchText, sortBy: sortBy, sortOrder: sortOrder)
+        interactor.searchItems(by: searchText, type: type, sortBy: sortBy, sortOrder: sortOrder)
     }
     
     func getSuggestion(text: String) {
@@ -97,7 +95,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         view.successWithSuggestList(list: list)
     }
     
-    func setRecentSearches(_ recentSearches: [String]) {
+    func setRecentSearches(_ recentSearches: [RecentSearchesObject]) {
         view.setRecentSearches(recentSearches)
     }
     

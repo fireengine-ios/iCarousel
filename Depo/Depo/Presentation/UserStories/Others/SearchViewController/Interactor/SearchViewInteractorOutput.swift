@@ -12,6 +12,6 @@ protocol SearchViewInteractorOutput: class {
     func endSearchRequestWith(text: String)
     func getContentWithSuccess(items: [Item])
     func successWithSuggestList(list: [SuggestionObject])
-    func setRecentSearches(_ recentSearches: [String])
+    func setRecentSearches(_ recentSearches: [RecentSearchesObject])
     func failedSearch()
 }

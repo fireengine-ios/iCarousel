@@ -20,6 +20,7 @@ struct CellsIdConstants {
     static let actionsMenuCellID = "ActionsMenuTableViewCell"
     static let dropDovnCellID = "DropDovnTableViewCell"
     static let suggestionTableSectionHeaderID = "SuggestionTableSectionHeader"
+    static let suggestionTableViewCellID = "SuggestionTableViewCell"
 }
 
 struct CollectionViewCellsIdsConstant {

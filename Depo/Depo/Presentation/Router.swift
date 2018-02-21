@@ -414,6 +414,8 @@ class RouterVC: NSObject {
     
     func searchView(output: SearchModuleOutput? = nil) -> UIViewController {
         let controller = SearchViewInitializer.initializeAllFilesViewController(with: "SearchView", output: output)
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
         return controller
     }
     

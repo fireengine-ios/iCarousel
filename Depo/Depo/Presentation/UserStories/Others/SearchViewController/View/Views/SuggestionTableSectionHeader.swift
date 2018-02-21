@@ -12,7 +12,7 @@ protocol SuggestionTableSectionHeaderDelegate: class {
     func onClearRecentSearchesTapped()
 }
 
-class SuggestionTableSectionHeader: UITableViewCell {
+class SuggestionTableSectionHeader: UITableViewHeaderFooterView {
     
     enum Category: Int {
         case suggestion = 0, recent
@@ -26,8 +26,9 @@ class SuggestionTableSectionHeader: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)
-        titleLabel.textColor = ColorConstants.darcBlueColor
+        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        titleLabel.textColor = .white
+        backgroundColor = .clear
     }
     
     func configureWith(category: Category, delegate: SuggestionTableSectionHeaderDelegate? = nil) {
