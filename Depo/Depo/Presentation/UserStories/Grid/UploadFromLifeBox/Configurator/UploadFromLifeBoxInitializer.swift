@@ -65,6 +65,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         
         let router: BaseFilesGreedRouter = UploadFromLifeBoxRouter()
         presenter.router = router
+        router.presenter = presenter
         
         return viewController
     }

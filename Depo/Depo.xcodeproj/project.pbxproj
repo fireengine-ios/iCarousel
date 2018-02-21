@@ -73,6 +73,8 @@
 		46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF9B9785CB91B71D6E10883 /* OTPViewConfigurator.swift */; };
 		473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */; };
 		48AAD540DF9AE2C249F9B6D4 /* OTPViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */; };
+		4A3F4119203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3F4118203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift */; };
+		4A3F411A203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3F4118203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift */; };
 		4A56D5AF202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5AE202AF51D003A4624 /* FaceImageAddNameViewController.swift */; };
 		4A56D5B0202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5AE202AF51D003A4624 /* FaceImageAddNameViewController.swift */; };
 		4A56D5B2202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B1202AF529003A4624 /* FaceImageAddNameRouter.swift */; };
@@ -3236,6 +3238,7 @@
 		492FFCA73A2AFF885199E9CF /* FeedbackViewInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractorOutput.swift; sourceTree = "<group>"; };
 		495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractorInput.swift; sourceTree = "<group>"; };
 		49A793804B9422E2D6327427 /* UploadFilesSelectionPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionPresenter.swift; sourceTree = "<group>"; };
+		4A3F4118203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosInteractorOutput.swift; sourceTree = "<group>"; };
 		4A4AC5C4BDA613483E0B3CCA /* SyncContactsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsPresenter.swift; sourceTree = "<group>"; };
 		4A56D5AE202AF51D003A4624 /* FaceImageAddNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameViewController.swift; sourceTree = "<group>"; };
 		4A56D5B1202AF529003A4624 /* FaceImageAddNameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameRouter.swift; sourceTree = "<group>"; };
@@ -6417,6 +6420,7 @@
 			isa = PBXGroup;
 			children = (
 				78E8E2AB202318E700A979AB /* FaceImagePhotosInteractor.swift */,
+				4A3F4118203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -13285,6 +13289,7 @@
 				8C0E8F621FDEBDFF00789C91 /* UploadFilesSelectionPresenter.swift in Sources */,
 				8C0E8F631FDEBDFF00789C91 /* InsetsLabel.swift in Sources */,
 				8C0E8F641FDEBDFF00789C91 /* UploadFilesSelectionInteractorInput.swift in Sources */,
+				4A3F411A203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */,
 				8C0E8F651FDEBDFF00789C91 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				8C0E8F661FDEBDFF00789C91 /* ResizableTableView.swift in Sources */,
 				8C0E8F671FDEBDFF00789C91 /* UploadFilesSelectionInteractor.swift in Sources */,
@@ -13639,6 +13644,7 @@
 				7CDABD061F1E3A6300C8CC16 /* UserProfileInitializer.swift in Sources */,
 				78D9BA3D2007E80600F2233F /* DuplicatedContactsModuleInput.swift in Sources */,
 				CE51ABEA1EF90853005DCEE0 /* BaseCellModel.swift in Sources */,
+				4A3F4119203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */,
 				CE1E26E320174DC600F49E41 /* MappingError.swift in Sources */,
 				7CCAC5311FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				CE95ED2D1F516225002F923A /* FaqUrlService.swift in Sources */,
