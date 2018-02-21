@@ -152,7 +152,7 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     private func isNeedSignUp(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Signup required")
+        return errorResponse.description.contains("Sign up required")
     }
     
     private func isAuthenticationError(forResponse errorResponse: ErrorResponse) -> Bool {
