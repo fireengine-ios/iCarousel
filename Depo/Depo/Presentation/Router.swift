@@ -157,8 +157,16 @@ class RouterVC: NSObject {
         }
     }
     
+    func getViewControllerForPresent() -> UIViewController?{
+        if let nController = navigationController?.presentedViewController as? UINavigationController,
+            let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController{
+            return viewController
+        }
+        return navigationController?.viewControllers.last
+    }
+    
     func presentViewController(controller: UIViewController){
-        if let lastViewController = navigationController?.viewControllers.last{
+        if let lastViewController = getViewControllerForPresent(){
             if controller.popoverPresentationController?.sourceView == nil,
                 controller.popoverPresentationController?.barButtonItem == nil {
                 controller.popoverPresentationController?.sourceView = lastViewController.view

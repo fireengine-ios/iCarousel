@@ -16,6 +16,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    @IBOutlet private weak var viewForBottomBar: UIView!
+    
+    @IBOutlet private weak var bottomBlackView: UIView!
+    
     private lazy var player: MediaPlayer = factory.resolve()
     
     private var localPlayer: AVPlayer?
@@ -24,6 +28,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var hideActions = false
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
+    
+    let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
     
     private var isFullScreen = false {
         didSet {
@@ -50,13 +56,18 @@ final class PhotoVideoDetailViewController: BaseViewController {
             UIApplication.shared.isStatusBarHidden = self.isFullScreen
             editingTabBar.view.isHidden = self.isFullScreen
             navigationController?.navigationBar.isHidden = self.isFullScreen
-            if self.isFullScreen{
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOn), object: nil)
-                navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-            }else{
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOff), object: nil)
-                navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-            }
+            
+            bottomBlackView.isHidden = self.isFullScreen
+            viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
+            
+//            if self.isFullScreen{
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOn), object: nil)
+//                navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//            }else{
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOff), object: nil)
+//                navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//            }
+            
         }
     } 
     
@@ -96,6 +107,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isHidden = true
+        
+        cancelButton.setTitle(TextConstants.backTitle, for: .normal)
+        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,8 +131,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
             editingTabBar.view.isHidden = true
         }
         
-        output.viewIsReady(view: view)
+        output.viewIsReady(view: viewForBottomBar)
         setStatusBarBackgroundColor(color: UIColor.black)
+        
+        if navigationItem.leftBarButtonItem == nil{
+            let barButtonLeft = UIBarButtonItem(customView: cancelButton)
+            navigationItem.leftBarButtonItem = barButtonLeft
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -148,6 +168,16 @@ final class PhotoVideoDetailViewController: BaseViewController {
         if needToScrollAfterRotation {
             needToScrollAfterRotation = false
             scrollToSelectedIndex()
+        }
+    }
+    
+    @objc func onCancelButton(){
+        hideView()
+    }
+    
+    func hideView(){
+        dismiss(animated: true) {
+            
         }
     }
     
