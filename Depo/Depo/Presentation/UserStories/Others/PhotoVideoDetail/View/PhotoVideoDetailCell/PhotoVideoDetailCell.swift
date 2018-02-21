@@ -36,6 +36,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         if #available(iOS 11.0, *) {
             imageScrollView.contentInsetAdjustmentBehavior = .never
+            webView.scrollView.contentInsetAdjustmentBehavior = .never
         }
         
         backgroundColor = UIColor.clear
