@@ -205,6 +205,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
+        self.objects = objectsArray
         self.selectedIndex = selectedIndex
     }
     
