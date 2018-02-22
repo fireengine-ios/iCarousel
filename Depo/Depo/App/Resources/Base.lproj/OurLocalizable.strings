@@ -602,9 +602,10 @@
 "Done" = "Done";
 "+Add a Name" = "+Add a Name";
 "+Add Name" = "+Add Name";
-"Are these the same person" = "Are these the same person";
+"Are these the same person?" = "Are these the same person?";
 "They will be merged together" = "They will be merged together";
 "Nope" = "Nope";
+"Yes" = "Yes";
 "this person" = "this person";
 "Photos" = "Photos";
 "Not selected" = "Not selected";
