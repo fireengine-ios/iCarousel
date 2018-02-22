@@ -32,13 +32,17 @@ class SearchViewInteractor: SearchViewInteractorInput {
         getDefaultSuggetion(text: "")
     }
     
-    func searchItems(by searchText: String, sortBy: SortType, sortOrder: SortOrder) {
+    func searchItems(by searchText: String, item: SuggestionObject?, sortBy: SortType, sortOrder: SortOrder) {
         remoteItems.allItems(searchText, sortBy: sortBy, sortOrder: sortOrder,
              success: { [weak self] (items) in
                 guard let `self` = self else { return }
                 self.items(items: items)
                 DispatchQueue.main.async {
-                    self.recentSearches.addSearch(searchText)
+                    if let searchItem = item {
+                        self.recentSearches.addSearch(item: searchItem)
+                    } else {
+                        self.recentSearches.addSearch(searchText)
+                    }
                     self.output?.setRecentSearches(self.recentSearches.searches)
                     self.output?.endSearchRequestWith(text: searchText)
                 }
@@ -95,10 +99,13 @@ class SearchViewInteractor: SearchViewInteractorInput {
     }
     
     func openFaceImage(forItem item: SuggestionObject) {
+        saveSearch(item: item)
+        getAlbumItem(forSearchItem: item)
+    }
+    
+    func saveSearch(item: SuggestionObject) {
         recentSearches.addSearch(item: item)
         output?.setRecentSearches(recentSearches.searches)
-    
-        getAlbumItem(forSearchItem: item)
     }
     
     private func getAlbumItem(forSearchItem item: SuggestionObject) {

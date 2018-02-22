@@ -80,9 +80,9 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         sortedRule = unwrapedConfig.defaultSortType.sortedRulesConveted
     }
 
-    func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder) {
+    func searchWith(searchText: String, item: SuggestionObject?, sortBy: SortType, sortOrder: SortOrder) {
         showSpinner()
-        interactor.searchItems(by: searchText, sortBy: sortBy, sortOrder: sortOrder)
+        interactor.searchItems(by: searchText, item: item, sortBy: sortBy, sortOrder: sortOrder)
     }
     
     func getSuggestion(text: String) {

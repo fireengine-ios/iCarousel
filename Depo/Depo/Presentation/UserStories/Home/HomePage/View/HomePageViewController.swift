@@ -31,6 +31,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
                 let router = RouterVC()
                 let searchViewController = router.searchView(output: self)                
                 _searchViewController = searchViewController
+                _searchViewController?.transitioningDelegate = self
+                navigationController?.delegate = searchViewController as? BaseViewController
                 return _searchViewController!
             }
         }

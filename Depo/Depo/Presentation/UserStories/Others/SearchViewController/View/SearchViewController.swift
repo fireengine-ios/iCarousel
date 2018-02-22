@@ -184,26 +184,35 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar = UISearchBar()
         searchBar.sizeToFit()
         searchBar.showsCancelButton = true
+        searchBar.backgroundImage = UIImage(color: ColorConstants.searchBarColor)
         searchBar.tintColor = ColorConstants.darcBlueColor
         searchBar.delegate = self
         searchBar.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
         searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        for subView in (searchBar.subviews.first?.subviews)! {
-            if subView.isKind(of: UITextField.self) {
-                let textFileld = (subView as! UITextField)
-                textFileld.backgroundColor = ColorConstants.searchBarColor
-                textFileld.placeholder = TextConstants.search
-                textFileld.font = UIFont.TurkcellSaturaBolFont(size: 19)
-                textFileld.textColor = ColorConstants.darcBlueColor
-                textFileld.keyboardAppearance = .dark
-            }
-            if subView.isKind(of: UIButton.self) {
-                (subView as! UIButton).titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
-            }
+        
+        let view = UIView(frame: searchBar.frame)
+        view.backgroundColor = .clear
+        searchBar.addSubview(view)
+        searchBar.sendSubview(toBack: view)
+        
+        if let subviews = searchBar.subviews.first?.subviews {
+            subviews.forEach({ subview in
+                if subview is UITextField {
+                    let textFileld = (subview as! UITextField)
+                    textFileld.backgroundColor = ColorConstants.searchBarColor
+                    textFileld.placeholder = TextConstants.search
+                    textFileld.font = UIFont.TurkcellSaturaBolFont(size: 19)
+                    textFileld.textColor = ColorConstants.darcBlueColor
+                    textFileld.keyboardAppearance = .dark
+                }
+                if subview is UIButton {
+                    (subview as! UIButton).titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
+                    (subview as! UIButton).isEnabled = true
+                }
+            })
         }
         
         setupNavigationBarForSelectionState(state: false)
-        
         output.viewIsReady(collectionView: collectionView)
     }
     
@@ -222,7 +231,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             moreButton.accessibilityLabel = TextConstants.accessibilityMore
 
             navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
-            navigationBar.topItem?.rightBarButtonItem = moreButton            
+            navigationBar.topItem?.rightBarButtonItem = moreButton
         } else {
             if Device.isIpad {
                 navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: TextConstants.cancel, style: .plain, target: self, action: #selector(searchBarCancelButtonClicked(_:)))
@@ -293,9 +302,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         topBarContainer.isHidden = false
     }
     
-    private func search(text: String?) {
+    private func search(text: String?, forItem item: SuggestionObject? = nil) {
         if let searchText = text, !searchText.isEmpty {
-            output.searchWith(searchText: searchText, sortBy: SortType.date, sortOrder: SortOrder.asc)
+            output.searchWith(searchText: searchText, item: item, sortBy: .date, sortOrder: .asc)
         } else {
             collectionView.isHidden = true
             setCurrentPlayState()
@@ -509,10 +518,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         if (item.type == .people || item.type == .thing) && item.info != nil {
             output.openFaceImage(item: item)
-        } else {
-            let searchBar = navigationBar.topItem?.titleView as! UISearchBar
+        } else if let searchBar = navigationBar.topItem?.titleView as? UISearchBar {
             searchBar.text = item.text?.removingPercentEncoding ?? item.text
-            search(text: searchBar.text)
+            search(text: searchBar.text, forItem: item)
         }
     }
     

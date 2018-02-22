@@ -160,6 +160,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { _ in
             let router = RouterVC()
             let searchViewController = router.searchView()
+            searchViewController.transitioningDelegate = self
             router.pushViewController(viewController: searchViewController)
         })
         let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in

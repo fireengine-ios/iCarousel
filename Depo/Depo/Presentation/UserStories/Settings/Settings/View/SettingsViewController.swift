@@ -307,7 +307,7 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
 }
 
 //MARK: - photo picker delegatess
-extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+extension SettingsViewController: UIImagePickerControllerDelegate  {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         

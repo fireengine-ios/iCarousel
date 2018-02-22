@@ -21,6 +21,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BsR-E5-j4p">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Jlm-um-Qar">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="light"/>
+                </visualEffectView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUGGESTIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OET-Bz-hzA">
                     <rect key="frame" x="16" y="14" width="321" height="17.5"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -43,7 +51,11 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="zNl-jb-YaJ" firstAttribute="trailing" secondItem="BsR-E5-j4p" secondAttribute="trailing" id="EHc-4x-ZuN"/>
                 <constraint firstItem="zNl-jb-YaJ" firstAttribute="trailing" secondItem="e7B-II-NyN" secondAttribute="trailing" constant="8" id="KQj-k2-SOL"/>
+                <constraint firstItem="BsR-E5-j4p" firstAttribute="leading" secondItem="zNl-jb-YaJ" secondAttribute="leading" id="Xet-9i-0KN"/>
+                <constraint firstItem="BsR-E5-j4p" firstAttribute="bottom" secondItem="zNl-jb-YaJ" secondAttribute="bottom" id="bAF-DF-KE9"/>
+                <constraint firstItem="BsR-E5-j4p" firstAttribute="top" secondItem="zNl-jb-YaJ" secondAttribute="top" id="c3t-Pr-TaL"/>
                 <constraint firstItem="OET-Bz-hzA" firstAttribute="leading" secondItem="zNl-jb-YaJ" secondAttribute="leading" constant="16" id="e6w-0u-6Hc"/>
                 <constraint firstItem="e7B-II-NyN" firstAttribute="leading" secondItem="OET-Bz-hzA" secondAttribute="trailing" constant="8" id="egO-VZ-dqo"/>
                 <constraint firstItem="OET-Bz-hzA" firstAttribute="centerY" secondItem="wfj-GQ-wJX" secondAttribute="centerY" id="ibq-6t-nYc"/>
@@ -55,7 +67,7 @@
                 <outlet property="clearButton" destination="e7B-II-NyN" id="aqR-Kq-gjF"/>
                 <outlet property="titleLabel" destination="OET-Bz-hzA" id="AAa-87-An5"/>
             </connections>
-            <point key="canvasLocation" x="30.5" y="-230.5"/>
+            <point key="canvasLocation" x="30.5" y="-231"/>
         </view>
     </objects>
     <resources>
