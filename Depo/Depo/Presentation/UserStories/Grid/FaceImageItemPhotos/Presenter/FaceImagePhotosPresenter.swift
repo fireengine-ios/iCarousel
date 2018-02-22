@@ -43,6 +43,14 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func getContentWithSuccess(items: [WrapData]) {
+        super.getContentWithSuccess(items: items)
+        
+        if let view = view as? FaceImagePhotosViewInput {
+            view.setCountImage("\(items.count) \(TextConstants.faceImagePhotos)")
+        }
+    }
+    
     override func getSortTypeString() -> String {
         return ""
     }
@@ -132,10 +140,9 @@ extension FaceImagePhotosPresenter: FaceImagePhotosModuleOutput {
         reloadData()
     }
     
-    func getCountSliderItmes(count: Int) {
-        if let view = view as? FaceImagePhotosViewInput,
-            (count == 0) {
-            view.hiddenSlider()
+    func getSliderItmes(items: [SliderItem]) {
+        if let view = view as? FaceImagePhotosViewInput {
+            view.hiddenSlider(isHidden: items.count == 0)
         }
     }
     

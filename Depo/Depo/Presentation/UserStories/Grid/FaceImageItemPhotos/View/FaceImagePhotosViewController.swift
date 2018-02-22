@@ -20,7 +20,7 @@ import UIKit
     private var countPhotosLabel = UILabel()
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
-    
+        
     // MARK: - UIViewController lifecycle
     
     override func viewDidLayoutSubviews() {
@@ -134,7 +134,11 @@ import UIKit
     }
     
     private func updateHeaderPosition() {
-        collectionView.contentInset.top = headerView.frame.height
+        if let albumHeight = albumsHeightConstraint?.constant,
+            let headerImageHeight = headerImageHeightConstraint?.constant {
+            
+            collectionView.contentInset.top = albumHeight + headerImageHeight
+        }
     }
     
     private func configureNavBarWithTouch() {
@@ -169,10 +173,24 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         navigationController?.popViewController(animated: true)
     }
     
-    func hiddenSlider() {
+    func hiddenSlider(isHidden: Bool) {
         if let albumsView = albumsSlider?.view {
-            albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
+            if isHidden {
+                albumsHeightConstraint?.isActive = false
+                albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
+                albumsView.isHidden = true
+            } else {
+                albumsHeightConstraint?.isActive = false
+                albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: albumsSliderHeight)
+                headerImage.bottomAnchor.constraint(equalTo: albumsView.topAnchor).isActive = true
+                albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+                albumsView.isHidden = false
+            }
             albumsHeightConstraint?.isActive = true
+
+            headerImage.layoutIfNeeded()
+
+            updateHeaderPosition()
         }
     }
         
