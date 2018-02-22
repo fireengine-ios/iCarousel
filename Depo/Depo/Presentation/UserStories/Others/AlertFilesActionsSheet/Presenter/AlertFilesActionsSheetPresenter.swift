@@ -374,7 +374,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             vc = unwrapedVC
             
         } else {
-            guard let rootVC = RouterVC().navigationController else {
+            guard let rootVC = RouterVC().getViewControllerForPresent() else {
                 return
             }
             vc = rootVC

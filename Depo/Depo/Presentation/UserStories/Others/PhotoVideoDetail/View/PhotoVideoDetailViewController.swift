@@ -16,6 +16,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    @IBOutlet private weak var viewForBottomBar: UIView!
+    
+    @IBOutlet private weak var bottomBlackView: UIView!
+    
     private lazy var player: MediaPlayer = factory.resolve()
     
     private var localPlayer: AVPlayer?
@@ -27,6 +31,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     private var isFullScreen = false {
         didSet {
+            ///  ANIMATION
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { 
 //                UIApplication.shared.isStatusBarHidden = self.isFullScreen
 //            }
@@ -47,9 +52,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //            }
             
             /// without animation
-            UIApplication.shared.isStatusBarHidden = isFullScreen
+            
+            Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.navigationBar.isHidden = isFullScreen
+            
+            bottomBlackView.isHidden = self.isFullScreen
+            viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
         }
     } 
     
@@ -89,6 +98,14 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isHidden = true
+        
+        let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+        cancelButton.setTitle(TextConstants.backTitle, for: .normal)
+        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
+        
+        let barButtonLeft = UIBarButtonItem(customView: cancelButton)
+        navigationItem.leftBarButtonItem = barButtonLeft
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,7 +126,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
             editingTabBar.view.isHidden = true
         }
         
-        output.viewIsReady(view: view)
+        output.viewIsReady(view: viewForBottomBar)
+        setStatusBarBackgroundColor(color: UIColor.black)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,15 +140,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewWillDisappear(animated)
         
         setNavigationBackgroundColor(color: UIColor.clear)
-        setStatusBarBackgroundColor(color: UIColor.clear)
+        
         visibleNavigationBarStyle()
         output.viewWillDisappear()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
     }
     
     override func viewDidLayoutSubviews() {
@@ -141,6 +154,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
             needToScrollAfterRotation = false
             scrollToSelectedIndex()
         }
+    }
+    
+    @objc private func onCancelButton(){
+        hideView()
+    }
+    
+    private func hideView(){
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
+        dismiss(animated: true)
     }
     
     private func scrollToSelectedIndex() {
@@ -200,7 +222,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        
         needToScrollAfterRotation = true
+        Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+    }
+    
+    override func getBacgroundColor() -> UIColor {
+        return UIColor.black
     }
 }
 

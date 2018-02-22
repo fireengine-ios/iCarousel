@@ -14,14 +14,14 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
         guard let fileInfo = viewContr as? FileInfoViewController else{
             return
         }
-        router.pushViewController(viewController: fileInfo)
+        router.pushOnPresentedView(viewController: fileInfo)
         fileInfo.interactor.setObject(object: object)
     }
     
     func addToAlbum(items: [BaseDataSourceItem]){
         let router = RouterVC()
         let controller = router.addPhotosToAlbum(photos: items)
-        router.pushViewControllertoTableViewNavBar(viewController: controller)
+        router.pushOnPresentedView(viewController: controller)
     }
     
     func showPrint(items: [BaseDataSourceItem]) {
@@ -31,7 +31,7 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
         let router = RouterVC()
         let imagesOnly = wrapperedArray.filter{$0.fileType == .image}
         let vc = PrintInitializer.viewController(data: imagesOnly)
-        router.pushViewController(viewController: vc)
+        router.pushOnPresentedView(viewController: vc)
     }
     
     func showSelectFolder(selectFolder: SelectFolderViewController) { }
