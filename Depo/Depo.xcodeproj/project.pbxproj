@@ -345,6 +345,8 @@
 		7C4F60B1201C674A0033C58F /* MovieCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F60AF201C674A0033C58F /* MovieCard.swift */; };
 		7C4F60B3201C675F0033C58F /* MovieCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60B2201C675F0033C58F /* MovieCard.xib */; };
 		7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60B2201C675F0033C58F /* MovieCard.xib */; };
+		7C529688203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C529687203EFE9D00BF3FBE /* SyncedBlock.swift */; };
+		7C529689203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C529687203EFE9D00BF3FBE /* SyncedBlock.swift */; };
 		7C5358101F9492DA00EABBAF /* OTPViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C53580E1F9492DA00EABBAF /* OTPViewController~iphone.xib */; };
 		7C5358111F9492DA00EABBAF /* OTPViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C53580F1F9492DA00EABBAF /* OTPViewController~ipad.xib */; };
 		7C5526131F7B9CCD00A21F3C /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526121F7B9CCD00A21F3C /* CardsManager.swift */; };
@@ -3504,6 +3506,7 @@
 		7C4F60AB2019E2BC0033C58F /* AlbumCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCard.xib; sourceTree = "<group>"; };
 		7C4F60AF201C674A0033C58F /* MovieCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCard.swift; sourceTree = "<group>"; };
 		7C4F60B2201C675F0033C58F /* MovieCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCard.xib; sourceTree = "<group>"; };
+		7C529687203EFE9D00BF3FBE /* SyncedBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncedBlock.swift; sourceTree = "<group>"; };
 		7C53580E1F9492DA00EABBAF /* OTPViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OTPViewController~iphone.xib"; sourceTree = "<group>"; };
 		7C53580F1F9492DA00EABBAF /* OTPViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OTPViewController~ipad.xib"; sourceTree = "<group>"; };
 		7C5526121F7B9CCD00A21F3C /* CardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsManager.swift; sourceTree = "<group>"; };
@@ -6861,6 +6864,14 @@
 			path = MovieCard;
 			sourceTree = "<group>";
 		};
+		7C529686203EFE3A00BF3FBE /* SyncedBlock */ = {
+			isa = PBXGroup;
+			children = (
+				7C529687203EFE9D00BF3FBE /* SyncedBlock.swift */,
+			);
+			path = SyncedBlock;
+			sourceTree = "<group>";
+		};
 		7C5526141F7BA16100A21F3C /* CardsManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -7168,6 +7179,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7C529686203EFE3A00BF3FBE /* SyncedBlock */,
 				B54BFF45202B43CE0018AF82 /* WidgetService */,
 				782E40B11FE7D05F007F7838 /* RecentSearchesService */,
 				7CC11AA91FE1360B00AF022D /* PopUpService */,
@@ -12520,6 +12532,7 @@
 				8C0E8C841FDEBDFF00789C91 /* PasscodeEnterViewController.swift in Sources */,
 				8C0E8C851FDEBDFF00789C91 /* CreateStoryPreviewViewController.swift in Sources */,
 				8C0E8C861FDEBDFF00789C91 /* FullyLoaded.m in Sources */,
+				7C529689203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
 				8C0E8C871FDEBDFF00789C91 /* UIImageView.swift in Sources */,
 				8C0E8C881FDEBDFF00789C91 /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				8C0E8C891FDEBDFF00789C91 /* UserProfileModuleInput.swift in Sources */,
@@ -14322,6 +14335,7 @@
 				41A69B03298B6F93F851567F /* LBAlbumLikePreviewSliderInitializer.swift in Sources */,
 				CE2F56171F7552A900F49DA1 /* PackagesInteractor.swift in Sources */,
 				85AAD0E4BD93A160437B1236 /* AlbumSelectionViewController.swift in Sources */,
+				7C529688203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
 				64E35594735C9449EB20343F /* AlbumsPresenter.swift in Sources */,
 				EB0329F2FE28E1F8F2F7ABAE /* AlbumsInteractor.swift in Sources */,
 				8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */,
