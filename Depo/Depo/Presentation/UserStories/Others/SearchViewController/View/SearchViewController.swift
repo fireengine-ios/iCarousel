@@ -203,7 +203,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         }
         
         setupNavigationBarForSelectionState(state: false)
-        searchBar.becomeFirstResponder()
+        
         output.viewIsReady(collectionView: collectionView)
     }
     
@@ -311,10 +311,16 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         return collectionView.frame.size.width
     }
     
-    func setCollectionViewVisibilityStatus(visibilityStatus: Bool){
+    func setCollectionViewVisibilityStatus(visibilityStatus: Bool) {
         collectionView.isHidden = visibilityStatus
         noFilesView.isHidden = !visibilityStatus
         setCurrentPlayState()
+        
+        if visibilityStatus {
+            hideTabBar()
+        } else {
+            showTabBar()
+        }
     }
     
     func successWithSuggestList(list: [SuggestionObject]) {
@@ -342,12 +348,11 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func dismissController() {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     func onSetSelection(state: Bool) {
         setupNavigationBarForSelectionState(state: state)
-    
     }
     
     func setNavBarRigthItem(active isActive: Bool) {
@@ -382,6 +387,32 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
     }
     
+    //MARK: - Keyboard
+    
+    @objc override func showKeyBoard(notification: NSNotification) {
+        super.showKeyBoard(notification: notification)
+        
+        suggestTableView.contentInset.bottom = keyboardHeight
+        collectionView.contentInset.bottom = keyboardHeight
+    }
+    
+    @objc override func hideKeyboard() {
+        view.endEditing(true)
+        suggestTableView.contentInset = .zero
+        collectionView.contentInset = .zero
+    }
+    
+    //MARK: - TabBar
+    
+    private func showTabBar() {
+        needShowTabBar = true
+        showTabBarIfNeed()
+    }
+    
+    private func hideTabBar() {
+        needShowTabBar = false
+        showTabBarIfNeed()
+    }
 }
 
 //MARK: - UITableViewDelagate & DataSource 
@@ -440,6 +471,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         case .people, .things:
             if let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.recentlySearchedTableViewCellID, for: indexPath) as? RecentlySearchedFaceImageTableViewCell {
                 cell.configure(withItems: items[category], category: category)
+                cell.delegate = self
                 return cell
             }
         }
@@ -468,7 +500,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let category = SearchCategory(rawValue: indexPath.section),
-            let item = items[category]?[indexPath.item] else {
+            category == .recent || category == .suggestion else {
+            return
+        }
+        guard let item = items[category]?[indexPath.item] else {
             return
         }
         

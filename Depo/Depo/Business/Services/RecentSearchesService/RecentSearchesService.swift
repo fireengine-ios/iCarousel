@@ -74,10 +74,10 @@ final class RecentSearchesService {
         var result = [SuggestionObject]()
         
         if let data = UserDefaults.standard.object(forKey: category.searchKey) as? Data,
-            let objects = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String] {
-            result = objects.map { SuggestionObject(withJSON: JSON(parseJSON: $0)) }
+            let objects = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Any] {
+            result = objects.map { SuggestionObject(withJSON: JSON($0)) }
         }
-        
+    
         if category == .recent, result.isEmpty {
             let currentYear = Date().getYear()
             let object = SuggestionObject()
@@ -106,7 +106,7 @@ final class RecentSearchesService {
     }
     
     private func add(item: SuggestionObject, toCategory category: SearchCategory) {
-        var objects = searches[category]!
+        var objects = searches[category] ?? [SuggestionObject]()
         
         if let existingIndex = objects.index(where: {$0.text == item.text}) {
             objects.remove(at: existingIndex)
@@ -119,7 +119,7 @@ final class RecentSearchesService {
     }
     
     private func save(searches: [SuggestionObject], category: SearchCategory) {
-        let data = NSKeyedArchiver.archivedData(withRootObject: searches.flatMap {$0.jsonString})
+        let data = NSKeyedArchiver.archivedData(withRootObject: searches.flatMap {$0.json?.object})
         UserDefaults.standard.set(data, forKey: category.searchKey)
         UserDefaults.standard.synchronize()
     }

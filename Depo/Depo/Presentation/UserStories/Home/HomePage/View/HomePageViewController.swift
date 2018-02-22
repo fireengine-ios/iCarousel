@@ -72,7 +72,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         if _searchViewController != nil {
             let router = RouterVC()
-            router.presentViewController(controller: searchViewController)
+            router.pushViewController(viewController: searchViewController)
         }
     }
 
@@ -104,7 +104,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
                 return
             }
             let router = RouterVC()
-            router.presentViewController(controller: self.searchViewController)
+            router.pushViewController(viewController: self.searchViewController)
         })
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.output.showSettings()

@@ -19,5 +19,5 @@ protocol SearchViewInteractorInput {
     func getSuggetion(text: String)
     func getDefaultSuggetion(text: String)
     func clearRecentSearches()
-    func addSearch(item: SuggestionObject)
+    func openFaceImage(forItem item: SuggestionObject)
 }

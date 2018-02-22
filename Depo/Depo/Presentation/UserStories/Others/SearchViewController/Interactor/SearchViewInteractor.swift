@@ -19,6 +19,9 @@ class SearchViewInteractor: SearchViewInteractorInput {
     let remoteItems: RemoteSearchService
     let recentSearches: RecentSearchesService
     
+    private let peopleService = PeopleService()
+    private let thingsService = ThingsService()
+    
     init(remoteItems: RemoteSearchService, recentSearches: RecentSearchesService) {
         self.remoteItems = remoteItems
         self.recentSearches = recentSearches
@@ -91,9 +94,51 @@ class SearchViewInteractor: SearchViewInteractorInput {
         output?.setRecentSearches(recentSearches.searches)
     }
     
-    func addSearch(item: SuggestionObject) {
+    func openFaceImage(forItem item: SuggestionObject) {
         recentSearches.addSearch(item: item)
         output?.setRecentSearches(recentSearches.searches)
+    
+        getAlbumItem(forSearchItem: item)
+    }
+    
+    private func getAlbumItem(forSearchItem item: SuggestionObject) {
+        guard let id = item.info?.id, let type = item.type else {
+            return
+        }
+        
+        if type == .people {            
+            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] albumResponse in
+                
+                let peopleItemResponse = PeopleItemResponse()
+                peopleItemResponse.id = id
+                peopleItemResponse.name = item.info?.name
+
+                DispatchQueue.main.async {
+                    self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
+                                           forItem: PeopleItem(response: peopleItemResponse))
+                }
+            }, fail: { fail in
+                DispatchQueue.main.async {
+                    self.output?.failedGetAlbum()
+                }
+            })
+        } else if type == .thing {
+            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] albumResponse in
+                
+                let thingItemResponse = ThingsItemResponse()
+                thingItemResponse.id = id
+                thingItemResponse.name = item.info?.name
+                
+                DispatchQueue.main.async {
+                    self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
+                                           forItem: ThingsItem(response: thingItemResponse))
+                }
+            }, fail:  { fail in
+                DispatchQueue.main.async {
+                    self.output?.failedGetAlbum()
+                }
+            })
+        }
     }
     
     var alerSheetMoreActionsConfig: AlertFilesActionsSheetInitialConfig? {

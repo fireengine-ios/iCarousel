@@ -13,5 +13,5 @@ protocol SearchViewRouterInput {
     func createStoryWithItems(_ items: [BaseDataSourceItem])
     func showNoFilesToCreateStoryAlert()
     func openFaceImageItems(category: SearchCategory)
-    func openFaceImage(item: SuggestionObject)
+    func openFaceImageItemPhotos(item: Item, album: AlbumItem)
 }

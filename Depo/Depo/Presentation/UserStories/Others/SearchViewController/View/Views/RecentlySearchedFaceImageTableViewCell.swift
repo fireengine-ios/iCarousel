@@ -32,7 +32,9 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
     }
     
     func configure(withItems items:[SuggestionObject]?, category: SearchCategory?) {
+        self.category = category
         if let items = items {
+            self.items = items
             if stackView.arrangedSubviews.isEmpty {
                 for (index, item) in items.enumerated() {
                     self.add(item: item, atIndex: index)
@@ -43,11 +45,14 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
     
     private func add(item: SuggestionObject, atIndex index: Int) {
         let frame = CGRect(origin: .zero, size: itemSize)
-        let thumbnailImageView = LoadingImageView(frame: frame)
-        thumbnailImageView.widthAnchor.constraint(equalToConstant: itemSize.width).isActive = true
-        thumbnailImageView.contentMode = .scaleAspectFill
-        thumbnailImageView.clipsToBounds = true
-        thumbnailImageView.loadImageByURL(url: item.info?.thumbnail)
+        
+        let button = UIButton(frame: frame)
+        button.widthAnchor.constraint(equalToConstant: itemSize.width).isActive = true
+        button.contentMode = .scaleAspectFill
+        button.clipsToBounds = true
+        button.sd_setImage(with: item.info?.thumbnail, for: .normal, completed: nil)
+        button.tag = index
+        button.addTarget(self, action: #selector(selectItem(_:)), for: .touchUpInside)
         
         if let type = item.type, type == .thing,
            let name = item.info?.name {
@@ -55,19 +60,14 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
             title.text = name
             title.textColor = .white
             title.font = UIFont.TurkcellSaturaBolFont(size: 12)
-            thumbnailImageView.addSubview(title)
+            button.addSubview(title)
         }
         
-        let button = UIButton(frame: frame)
-        button.tag = index
-        button.addTarget(self, action: #selector(selectItem(_:)), for: .touchUpInside)
-        thumbnailImageView.addSubview(button)
-        
-        stackView.addArrangedSubview(thumbnailImageView)
+        stackView.addArrangedSubview(button)
     }
 
-    @objc func selectItem(_ sender: UIButton) {
-        if items.count <= sender.tag {
+    @IBAction func selectItem(_ sender: UIButton) {
+        if items.count > sender.tag {
             delegate?.select(item: items[sender.tag])
         }
     }

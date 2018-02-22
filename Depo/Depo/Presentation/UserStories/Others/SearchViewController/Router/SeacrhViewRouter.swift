@@ -10,8 +10,9 @@ import Foundation
 
 class SeacrhViewRouter: SearchViewRouterInput {
 
+    private let router = RouterVC()
+    
     func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem]) {
-        let router = RouterVC()
         guard let wrapperedItem = selectedItem as? Item,
               let wrapperedArray = sameTypeItems as? [Item] else {
             return
@@ -41,10 +42,20 @@ class SeacrhViewRouter: SearchViewRouterInput {
     }
     
     func openFaceImageItems(category: SearchCategory) {
-        
+        switch category {
+        case .people:
+            let controller = router.peopleListController()
+            router.pushViewController(viewController: controller)
+        case .things:
+            let controller = router.thingsListController()
+            router.pushViewController(viewController: controller)
+        default:
+            return
+        }
     }
     
-    func openFaceImage(item: SuggestionObject) {
-        
+    func openFaceImageItemPhotos(item: Item, album: AlbumItem) {
+        let controller = router.imageFacePhotosController(album: album, item: item, moduleOutput: nil)
+        router.pushViewController(viewController: controller)
     }
 }
