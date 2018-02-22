@@ -109,7 +109,7 @@ import UIKit
 
                 headerView.setNeedsLayout()
                 headerView.layoutIfNeeded()
-                headerImage.addBlackGradientLayer(colors: [.clear, UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)])
+                headerImage.addBlackGradientLayer(colors: [.clear, .brownishGrey])
             }
         } else {
             headerImage.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true

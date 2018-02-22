@@ -10,6 +10,8 @@ import UIKit
 
 extension UIColor {
     
+    static let brownishGrey = UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)
+    
     open func lighter(by percentage: CGFloat = 30) -> UIColor {
         return adjust(by: abs(percentage) )
     }
@@ -29,4 +31,5 @@ extension UIColor {
                        blue: min(b + percentage/100, 1.0),
                        alpha: a)
     }
+    
 }
