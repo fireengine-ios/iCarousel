@@ -85,7 +85,7 @@ import UIKit
 
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
-        headerImage.addBlackGradientLayer(colors: [.clear, UIColor.gray.withAlphaComponent(0.9)])
+        headerImage.addGradientLayer(colors: [.clear, ColorConstants.brownishGrey])
         
         countPhotosLabel.backgroundColor = UIColor.clear
         countPhotosLabel.textColor = UIColor.white
@@ -106,10 +106,6 @@ import UIKit
                 albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
                 albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: albumsSliderHeight)
                 albumsHeightConstraint?.isActive = true
-
-                headerView.setNeedsLayout()
-                headerView.layoutIfNeeded()
-                headerImage.addBlackGradientLayer(colors: [.clear, .brownishGrey])
             }
         } else {
             headerImage.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
