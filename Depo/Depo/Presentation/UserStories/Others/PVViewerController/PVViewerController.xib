@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PVViewerController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PVViewerController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="imageScrollView" destination="z2I-wO-QDN" id="OGr-ty-5s4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -21,16 +21,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2I-wO-QDN" customClass="ImageScrollView" customModule="Depo_LifeTech" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2I-wO-QDN" customClass="ImageScrollView" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="z2I-wO-QDN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="XIo-hI-NdC"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="z2I-wO-QDN" secondAttribute="bottom" id="fjj-FT-sYH"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="z2I-wO-QDN" secondAttribute="trailing" id="iz4-hI-waH"/>
-                <constraint firstItem="z2I-wO-QDN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mT7-k2-oke"/>
+                <constraint firstAttribute="trailing" secondItem="z2I-wO-QDN" secondAttribute="trailing" id="PLA-vR-nwh"/>
+                <constraint firstItem="z2I-wO-QDN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jeC-wi-h3Z"/>
+                <constraint firstItem="z2I-wO-QDN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sbC-Dx-FVb"/>
+                <constraint firstAttribute="bottom" secondItem="z2I-wO-QDN" secondAttribute="bottom" id="wWO-Gn-spW"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

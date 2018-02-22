@@ -29,7 +29,8 @@ class SeacrhViewRouter: SearchViewRouterInput {
             player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
         default:
             let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray)
-            router.pushViewController(viewController: controller)
+            let nController = UINavigationController(rootViewController: controller)
+            router.presentViewController(controller: nController)
         }
     }
     

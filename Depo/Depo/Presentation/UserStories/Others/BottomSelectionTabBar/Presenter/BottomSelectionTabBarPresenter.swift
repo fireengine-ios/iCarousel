@@ -101,7 +101,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         if let newSourceView = sourceView {
             shownSourceView = newSourceView
         } else {
-            shownSourceView = rootVC.view
+            if let tabBarViewController = rootVC as? TabBarViewController{
+                shownSourceView = tabBarViewController.mainContentView
+            }else{
+                shownSourceView = rootVC.view
+            }
         }
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHidePlusTabBar), object: nil)
         view.showBar(animated: animated, onView: shownSourceView)
@@ -127,9 +131,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             basePassingPresenter?.stopModeSelected()
             interactor.download(item: selectedItems)
         case .edit:
-            RouterVC().tabBarVC?.showSpiner()
+            RouterVC().getViewControllerForPresent()?.showSpiner()
             self.interactor.edit(item: selectedItems, complition: {
-                RouterVC().tabBarVC?.hideSpiner()
+                RouterVC().getViewControllerForPresent()?.hideSpiner()
             })
         case .info:
             if let firstSelected = selectedItems.first as? Item {

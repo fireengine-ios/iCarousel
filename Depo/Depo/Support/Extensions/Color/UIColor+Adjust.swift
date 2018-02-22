@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIColor {
-    
+        
     open func lighter(by percentage: CGFloat = 30) -> UIColor {
         return adjust(by: abs(percentage) )
     }
@@ -29,4 +29,5 @@ extension UIColor {
                        blue: min(b + percentage/100, 1.0),
                        alpha: a)
     }
+    
 }

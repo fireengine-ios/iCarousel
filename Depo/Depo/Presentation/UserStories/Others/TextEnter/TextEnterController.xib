@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextEnterController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextEnterController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="containerView" destination="bLR-M0-Hgx" id="2nK-Kf-gdD"/>
                 <outlet property="doneButton" destination="yg1-Ed-Ew3" id="kfC-SP-Rnu"/>
@@ -57,13 +57,18 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="On1-rN-vMI"/>
+                                            </connections>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yg1-Ed-Ew3">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yg1-Ed-Ew3">
                                             <rect key="frame" x="-1" y="135.5" width="258" height="46"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="46" id="GFI-c7-0Sa"/>
                                             </constraints>
-                                            <state key="normal" title="Button"/>
+                                            <state key="normal" title="Button">
+                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                             <connections>
                                                 <action selector="actionDoneButton:" destination="-1" eventType="touchUpInside" id="Nks-ca-93a"/>
                                             </connections>
@@ -143,7 +148,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="6nt-fi-0gf" secondAttribute="trailing" id="f6O-yi-V8O"/>
-                <constraint firstAttribute="bottom" secondItem="6nt-fi-0gf" secondAttribute="bottom" id="jug-Jb-y4B" customClass="KeyboardLayoutConstraint" customModule="Depo_LifeTech" customModuleProvider="target"/>
+                <constraint firstAttribute="bottom" secondItem="6nt-fi-0gf" secondAttribute="bottom" id="jug-Jb-y4B" customClass="KeyboardLayoutConstraint" customModule="lifebox" customModuleProvider="target"/>
                 <constraint firstItem="6nt-fi-0gf" firstAttribute="leading" secondItem="6V6-VG-ZMj" secondAttribute="leading" id="qYU-FD-Oia"/>
                 <constraint firstItem="6nt-fi-0gf" firstAttribute="top" secondItem="6V6-VG-ZMj" secondAttribute="top" id="xav-gV-OiE"/>
             </constraints>

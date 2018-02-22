@@ -79,12 +79,14 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
                 collectionView.reloadItems(at: allVisibleCells)
             })
         }
+        setStatusBarBackgroundColor(color: UIColor.white)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         UIApplication.shared.statusBarStyle = .lightContent
+        setStatusBarBackgroundColor(color: UIColor.clear)
         output.viewWillDisappear()
         setStatusBarBackgroundColor(color: .clear)
     }

@@ -96,15 +96,13 @@ class LoginInteractor: LoginInteractorInput {
                     self.output?.failLogin(message: TextConstants.loginScreenInvalidCaptchaError)
                 } else if self.isInternetError(forResponse: errorResponse) {
                     self.output?.failLogin(message: errorResponse.description)
-                } else {
-                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
-                }
-                if self.isEmptyPhoneError(for: errorResponse) {
+                } else if self.isEmptyPhoneError(for: errorResponse) {
                     self.login = login
                     self.password = password
                     self.atachedCaptcha = atachedCaptcha
                     self.output?.openEmptyPhone()
-                    return
+                } else {
+                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
             }
         })

@@ -162,7 +162,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         if let infoController = router.fileInfo as? FileInfoViewController, let object = item.first {
             infoController.interactor.setObject(object: object)
-            router.pushViewController(viewController: infoController)
+            router.pushOnPresentedView(viewController: infoController)
             if isRenameMode {
                 infoController.startRenaming()
             }
@@ -421,7 +421,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             let router = RouterVC()
             let vc = router.addPhotosToAlbum(photos: items)
             DispatchQueue.main.async {
-                router.pushViewController(viewController: vc)
+                router.pushOnPresentedView(viewController: vc)
             }
         }, cancel: {}, fail: { errorResponse in
             UIApplication.showErrorAlert(message: errorResponse.localizedDescription)

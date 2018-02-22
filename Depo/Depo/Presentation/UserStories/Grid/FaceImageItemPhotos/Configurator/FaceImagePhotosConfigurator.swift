@@ -10,6 +10,10 @@ import UIKit
 
 final class FaceImagePhotosConfigurator {
     
+    var baseSortTypes: [MoreActionsConfig.SortRullesType] {
+        return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+    }
+    
     func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) {
         let router = FaceImagePhotosRouter()
         router.view = viewController
@@ -54,5 +58,21 @@ final class FaceImagePhotosConfigurator {
         
         presenter.item = item
         presenter.coverPhoto = album.preview
+        
+        let gridListTopBarConfig = GridListTopBarConfig(
+            defaultGridListViewtype: .List,
+            availableSortTypes: baseSortTypes,
+            defaultSortType: .TimeNewOld,
+            availableFilter: false,
+            showGridListButton: false
+        )
+        
+        presenter.topBarConfig = gridListTopBarConfig
+        let gridListTopBar = GridListTopBar.initFromXib()
+        viewController.underNavBarBar = gridListTopBar
+        gridListTopBar.delegate = viewController
+            
+        
+
     }
 }
