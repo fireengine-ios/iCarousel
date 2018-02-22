@@ -26,8 +26,8 @@ final class MediaPlayer: NSObject {
     }
     private var currentMetaData: BaseMetaData? {
         didSet {
-            currentArtist = currentMetaData?.artist ?? "Artist \(duration)"
-            currentMusicName = currentMetaData?.title ?? "Title \(duration)"
+            currentMusicName = currentMetaData?.title ?? currentItem?.name ?? ""
+            currentArtist = currentMetaData?.artist ?? ""
             
             SDWebImageManager.shared().loadImage(with: currentMetaData?.mediumUrl, options: [], progress: nil) { [weak self] (image, data, error, type, result, url) in
                 

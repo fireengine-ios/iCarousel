@@ -110,7 +110,8 @@ final class FilterPhotoCard: BaseView {
         guard let image = photoImageView.image else { return }
         let vc = PVViewerController.initFromNib()
         vc.image = image
-        RouterVC().pushViewController(viewController: vc)
+        let nController = UINavigationController(rootViewController: vc)
+        RouterVC().presentViewController(controller: nController)
     }
 
     

@@ -53,7 +53,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //            }
             
             /// without animation
-            UIApplication.shared.isStatusBarHidden = isFullScreen
+            
+            Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.navigationBar.isHidden = isFullScreen
             
@@ -233,7 +234,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        
         needToScrollAfterRotation = true
+        Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
     }
     
     override func getBacgroundColor() -> UIColor {

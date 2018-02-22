@@ -82,7 +82,8 @@ final class CollageCard: BaseView {
         
         let vc = PVViewerController.initFromNib()
         vc.image = image
-        RouterVC().pushViewController(viewController: vc)
+        let nController = UINavigationController(rootViewController: vc)
+        RouterVC().presentViewController(controller: nController)
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
