@@ -163,6 +163,10 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     func filesAddedToAlbum() {
         requestAllItems()
     }
+    
+    func filesRomovedFromAlbum(items: [Item], albumUUID: String) {
+        requestAllItems()
+    }
 
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         if let compairedView = object as? LBAlbumLikePreviewSliderInteractor {

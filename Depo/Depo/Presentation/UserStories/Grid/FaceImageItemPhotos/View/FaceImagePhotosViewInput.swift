@@ -13,7 +13,7 @@ protocol FaceImagePhotosViewInput: class {
     func setHeaderImage(with path: PathForItem)
     func setupHeader(forPeopleItem item: PeopleItem?)
     func reloadName(_ name: String)
-    func hiddenSlider()
+    func hiddenSlider(isHidden: Bool)
     func dismiss()
     func setCountImage(_ count: String)
 }
