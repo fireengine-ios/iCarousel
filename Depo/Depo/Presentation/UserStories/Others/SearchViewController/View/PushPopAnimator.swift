@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PushPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+final class PushPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     var presenting: Bool = false
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -29,13 +29,13 @@ class PushPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         if presenting {
             container.addSubview(animationView!)
         }
-        
+    
         UIView.animate(withDuration: 0.35, animations: {
             toController.view.alpha = 1
             if !self.presenting {
                 fromController.view.alpha = 0
             }
-        }) { (completed) in
+        }, completion: { completed in
             let cancelled = transitionContext.transitionWasCancelled
             transitionContext.completeTransition(!cancelled)
 
@@ -44,6 +44,6 @@ class PushPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             } else if fromController.navigationController != nil, cancelled {
                 container.insertSubview(toController.view, belowSubview: fromController.view)
             }
-        }
+        })
     }
 }

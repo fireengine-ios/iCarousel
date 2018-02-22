@@ -475,7 +475,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         case .recent, .suggestion:
             if let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.suggestionTableViewCellID, for: indexPath) as? SuggestionTableViewCell,
                 let item = items[category]?[indexPath.item] {
-                cell.configure(withItem: item)
+                cell.configure(with: item)
                 return cell
             }
         case .people, .things:

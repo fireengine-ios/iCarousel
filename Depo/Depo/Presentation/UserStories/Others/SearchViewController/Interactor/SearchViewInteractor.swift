@@ -124,9 +124,9 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
                                            forItem: PeopleItem(response: peopleItemResponse))
                 }
-            }, fail: { fail in
+            }, fail: { [weak self] fail in
                 DispatchQueue.main.async {
-                    self.output?.failedGetAlbum()
+                    self?.output?.failedGetAlbum()
                 }
             })
         } else if type == .thing {
@@ -140,9 +140,9 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
                                            forItem: ThingsItem(response: thingItemResponse))
                 }
-            }, fail:  { fail in
+            }, fail:  { [weak self] fail in
                 DispatchQueue.main.async {
-                    self.output?.failedGetAlbum()
+                    self?.output?.failedGetAlbum()
                 }
             })
         }

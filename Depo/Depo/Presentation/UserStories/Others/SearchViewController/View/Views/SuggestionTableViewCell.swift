@@ -22,7 +22,7 @@ class SuggestionTableViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
     }
     
-    func configure(withItem item: SuggestionObject?) {
+    func configure(with item: SuggestionObject?) {
         guard let item = item else {
             return
         }
