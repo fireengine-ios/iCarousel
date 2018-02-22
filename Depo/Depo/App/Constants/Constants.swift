@@ -643,7 +643,6 @@ struct TextConstants {
     static let errorInvalidPasswordSame = NSLocalizedString("It is not allowed that the password consists of all the same characters.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorInvalidPasswordLengthExceeded = NSLocalizedString("The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorInvalidPasswordBelowLimit = NSLocalizedString("The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let errorManyRequest = NSLocalizedString("It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let TOO_MANY_REQUESTS = NSLocalizedString("Too many verification code requested for this msisdn. Please try again later", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let EMAIL_IS_INVALID = NSLocalizedString("E-mail field is invalid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
