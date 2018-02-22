@@ -38,11 +38,9 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
             let item = item as? WrapData,
             let itemUrl = item.urlToFile {
             let yesHandler: () -> Void = { [weak self] in
-                if let interactor = self?.interactor as? FaceImageAddNameInteractorInput,
-                    let id = currentItem.id,
-                    let personId = item.id {
+                if let interactor = self?.interactor as? FaceImageAddNameInteractorInput {
                     self?.startAsyncOperation()
-                    interactor.mergePeople(id, personId: personId)
+                    interactor.mergePeople(currentItem, otherPerson: item)
                 }
             }
 
@@ -94,7 +92,11 @@ extension FaceImageAddNamePresenter: FaceImageAddNameInteractorOutput {
         router.showBack()
     }
     
-    func didMergePeople() {
+    func didMergePeople(_ name: String) {
+        if let item = currentItem {
+            currentItem?.name = name
+            faceImagePhotosmoduleOutput?.didChangeName(item: item)
+        }
         faceImagePhotosmoduleOutput?.didMergePeople()
         router.showBack()
     }

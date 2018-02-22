@@ -8,5 +8,6 @@
 
 protocol FaceImageAddNameInteractorOutput {
     func didChangeName(_ name: String)
-    func didMergePeople()
+    func didMergePeople(_ name: String)
+    
 }
