@@ -48,12 +48,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             
             /// without animation
             
-            if !Device.isIpad, UIDevice.current.orientation.isContained(in: [.landscapeLeft, .landscapeRight]) {
-                UIApplication.shared.isStatusBarHidden = true
-            } else {
-                UIApplication.shared.isStatusBarHidden = isFullScreen
-            }
-            
+            Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.navigationBar.isHidden = isFullScreen
         }
@@ -206,13 +201,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        needToScrollAfterRotation = true
         
-        if !Device.isIpad, UIDevice.current.orientation.isContained(in: [.landscapeLeft, .landscapeRight]) {
-            UIApplication.shared.isStatusBarHidden = true
-        } else {
-            UIApplication.shared.isStatusBarHidden = self.isFullScreen
-        }
+        needToScrollAfterRotation = true
+        Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
     }
 }
 

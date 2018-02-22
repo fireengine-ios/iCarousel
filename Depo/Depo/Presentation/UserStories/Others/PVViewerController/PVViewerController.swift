@@ -20,9 +20,14 @@ final class PVViewerController: BaseViewController, NibInit {
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         view.backgroundColor = UIColor.black
+        view.addGestureRecognizer(tapGesture)
         
         imageScrollView.delegate = self
         imageScrollView.image = image
+        
+        if #available(iOS 11.0, *) {
+            imageScrollView.contentInsetAdjustmentBehavior = .never
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +44,30 @@ final class PVViewerController: BaseViewController, NibInit {
         super.viewWillDisappear(animated)
         /// set previous state of orientation or any new one
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
+    }
+    
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(actionTapGesture))
+        gesture.require(toFail: imageScrollView.doubleTapGesture)
+        //gesture.delegate = self
+        return gesture
+    }()
+    
+    @objc private func actionTapGesture(_ gesture: UITapGestureRecognizer) {
+        isFullScreen = !isFullScreen 
+    }
+    
+    private var isFullScreen = false {
+        didSet {
+            Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+            navigationController?.navigationBar.isHidden = isFullScreen
+        }
+    } 
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
     }
 }
 
