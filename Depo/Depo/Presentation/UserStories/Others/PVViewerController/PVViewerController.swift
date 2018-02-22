@@ -35,10 +35,9 @@ final class PVViewerController: BaseViewController, NibInit {
         cancelButton.setTitle(TextConstants.backTitle, for: .normal)
         cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
         cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
-        if navigationItem.leftBarButtonItem == nil{
-            let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-            navigationItem.leftBarButtonItem = barButtonLeft
-        }
+        let barButtonLeft = UIBarButtonItem(customView: cancelButton)
+        navigationItem.leftBarButtonItem = barButtonLeft
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,15 +64,13 @@ final class PVViewerController: BaseViewController, NibInit {
         isFullScreen = !isFullScreen 
     }
     
-    @objc func onCancelButton(){
+    @objc private func onCancelButton(){
         hideView()
     }
     
-    func hideView(){
+    private func hideView(){
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
-        dismiss(animated: true) {
-            
-        }
+        dismiss(animated: true)
     }
     
     private var isFullScreen = false {

@@ -275,7 +275,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                 self.bottomTabBarConstraint.constant = 0
                 self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
-            }, completion: { (flag) in
+            }, completion: { (_) in
                 
             })
             
@@ -293,7 +293,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.view.layoutIfNeeded()
-            }, completion: { (flag) in
+            }, completion: { (_) in
                 self.tabBar.isHidden = true
                 self.bottomBGView.isHidden = true
             })
