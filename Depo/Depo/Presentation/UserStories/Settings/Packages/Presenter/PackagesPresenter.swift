@@ -191,6 +191,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
         case .moldovian:
             break
         case .all:
+            //show restore
 //            break
             /// in app purchase
 //            view?.startActivityIndicator()

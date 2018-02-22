@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PackagesViewController: UIViewController {
+final class PackagesViewController: UIViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak private var collectionView: ResizableCollectionView!
@@ -33,6 +33,7 @@ class PackagesViewController: UIViewController {
         activityManager.delegate = self
         promoView.deleagte = self
         setupCollectionView()
+        setupNavBarButtons()
         output.viewIsReady()
     }
     
@@ -44,6 +45,20 @@ class PackagesViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
     }
+    
+    private func setupNavBarButtons() {
+        //IF THE USER NON CELL USER
+        
+        
+//        let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(actionMoreButton(_:)))
+//        moreButton.tintColor = UIColor.white
+//        navigationItem.rightBarButtonItem = moreButton
+    }
+    
+    @objc private func restorePurhases() {
+        
+    }
+    
 }
 
 // MARK: PackagesViewInput
