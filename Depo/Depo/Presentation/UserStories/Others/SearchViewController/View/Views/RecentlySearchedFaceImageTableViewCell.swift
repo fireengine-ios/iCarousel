@@ -59,6 +59,7 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
             let title = UILabel(frame: CGRect(x: 0, y: itemSize.height - 15, width: itemSize.width, height: 14))
             title.text = name
             title.textColor = .white
+            title.textAlignment = .center
             title.font = UIFont.TurkcellSaturaBolFont(size: 12)
             button.addSubview(title)
         }
@@ -79,6 +80,6 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
     }
     
     static func height() -> CGFloat {
-        return Device.winSize.size.width * 40/375
+        return Device.winSize.size.width * 40/375 + 12
     }
 }

@@ -167,6 +167,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         
         suggestTableView.backgroundColor = .clear
         suggestTableView.separatorColor = .white
+        suggestTableView.tableFooterView = UIView()
     }
     
     private func setupBlurBackground() {
@@ -492,6 +493,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
              return 44
         }
         return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let category = SearchCategory(rawValue: section) else {
+            return 0
+        }
+        switch category {
+        case .suggestion: return 20
+        case .recent: return 8
+        default: return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
