@@ -54,6 +54,11 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
+    func onSignUp() {
+        let tag = MenloworksTags.SignUpCompleted()
+        hitTag(tag)
+    }
+    
     // MARK: - Accessory methods
     
     private func hitTag(_ tag: MenloworksTag) {

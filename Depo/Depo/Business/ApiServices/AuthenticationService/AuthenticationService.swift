@@ -357,7 +357,11 @@ class AuthenticationService: BaseRequestService {
     func signUp(user: SignUpUser, sucess:SuccessResponse?, fail: FailResponse?) {
         log.debug("AuthenticationService logout")
         
-        let handler = BaseResponseHandler<SignUpSuccessResponse,SignUpFailResponse>(success: sucess, fail: fail)
+        let handler = BaseResponseHandler<SignUpSuccessResponse,SignUpFailResponse>(success: { (value) in
+            MenloworksTagsService.shared.onSignUp()
+            sucess?(value)
+        }
+            , fail: fail)
         executePostRequest(param: user, handler: handler)
     }
     

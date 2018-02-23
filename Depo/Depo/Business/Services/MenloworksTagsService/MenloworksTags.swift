@@ -54,6 +54,12 @@ class MenloworksTags {
             super.init(name: NameConstants.loginCompleted)
         }
     }
+    
+    class SignUpCompleted: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.signupCompleted)
+        }
+    }
 }
 
 class MenloworksTag {

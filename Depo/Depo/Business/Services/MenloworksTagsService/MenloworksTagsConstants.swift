@@ -16,6 +16,7 @@ extension MenloworksTags {
         static let wifi3g = "wifi/3g"
         static let loggedIn = "logged_in"
         static let loginCompleted = "logincompleted"
+        static let signupCompleted = "signupcompleted"
     }
     
     class ValueConstants {
