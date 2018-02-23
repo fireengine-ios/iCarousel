@@ -9,7 +9,7 @@
 class MenloworksTagsService {
     
     private let reachabilityService = ReachabilityService()
-    private init() {}
+    private init() { }
     
     static let shared = MenloworksTagsService()
     

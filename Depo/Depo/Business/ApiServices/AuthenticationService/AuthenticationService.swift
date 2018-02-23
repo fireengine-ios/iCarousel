@@ -277,7 +277,7 @@ class AuthenticationService: BaseRequestService {
                         }
 
                         sucess?()
-                        MenloworksTagsService.shared.onLogin()
+                        MenloworksAppEvents.onLogin()
                         
                     case .failure(let error):
                         fail?(ErrorResponse.error(error))
@@ -358,7 +358,7 @@ class AuthenticationService: BaseRequestService {
         log.debug("AuthenticationService logout")
         
         let handler = BaseResponseHandler<SignUpSuccessResponse,SignUpFailResponse>(success: { (value) in
-            MenloworksTagsService.shared.onSignUp()
+            MenloworksAppEvents.onSignUp()
             sucess?(value)
         }
             , fail: fail)

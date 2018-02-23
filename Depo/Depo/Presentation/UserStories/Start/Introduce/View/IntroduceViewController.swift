@@ -27,7 +27,7 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
         dataSource.pageControll = pageControll
         configurateView()
         output.viewIsReady()
-        MenloworksTagsService.shared.onTutorial()
+        MenloworksAppEvents.onTutorial()
     }
     
     func configurateView(){

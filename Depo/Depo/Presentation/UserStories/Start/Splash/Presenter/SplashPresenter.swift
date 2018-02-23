@@ -52,12 +52,12 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func onSuccessLogin(){
         interactor.checkEULA()
-        MenloworksTagsService.shared.onStartWithLogin(true)
+        MenloworksAppEvents.onStartWithLogin(true)
     }
     
     func onFailLogin(){
         router.navigateToOnboarding()
-        MenloworksTagsService.shared.onStartWithLogin(false)
+        MenloworksAppEvents.onStartWithLogin(false)
     }
     
     func onNetworkFail() {

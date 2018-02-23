@@ -172,7 +172,7 @@ class ItemOperationManager: NSObject {
             }
         }
         
-        MenloworksTagsService.shared.onFileUploadedWithType(file.fileType)
+        MenloworksAppEvents.onFileUploadedWithType(file.fileType)
         
         currentUploadingObject = nil
         currentUploadProgress = 0
