@@ -9,6 +9,17 @@
 import Foundation
 import Photos
 
+struct MetaAssetInfo {
+    var asset: PHAsset
+    var url: URL
+    var fileSize = UInt64(0)
+    var originalName = ""
+    var md5: String {
+        return "\(originalName)\(fileSize)"
+    }
+}
+
+
 extension CoreDataStack {
     
     @objc func appendLocalMediaItems(progress: AppendingLocaclItemsProgressCallback?,
@@ -27,6 +38,54 @@ extension CoreDataStack {
             }
         }
     }
+    
+    func insertFromGallery(progress: AppendingLocaclItemsProgressCallback?, allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
+        let localMediaStorage = LocalMediaStorage.default
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
+            guard accessGranted, let `self` = self,
+                !self.inProcessAppendingLocalFiles else {
+                    return
+            }
+            
+            self.inProcessAppendingLocalFiles = true
+            
+            let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
+            let newBgcontext = self.newChildBackgroundContext
+            let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
+            let totalNotSavedItems = notSaved.count
+            
+            let start = Date()
+            var addedObjects = [WrapData]()
+            
+            localMediaStorage.getAllInfo(from: notSaved, completion: { (assetsInfo) in
+                var i = 0
+                assetsInfo.forEach {
+                    i += 1
+                    debugPrint("local ", i)
+                    
+                    let wrapedItem =  WrapData(info: $0)
+                    _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
+                    
+                    if i % 10 == 0 {
+                        self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+                    }
+                    addedObjects.append(wrapedItem)
+                    
+                    progress?(Float(i)/Float(totalNotSavedItems))
+                }
+            })
+            
+            self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+            
+            self.inProcessAppendingLocalFiles = false
+            allItemsAddedCallBack?()
+            
+            debugPrint("All images and videos have been saved in \(start.timeIntervalSince(Date())) seconds")
+            
+            ItemOperationManager.default.addedLocalFiles(items: addedObjects)
+        }
+    }
+    
     
     func insertFromPhotoFramework(progress: AppendingLocaclItemsProgressCallback?,
                                   allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {

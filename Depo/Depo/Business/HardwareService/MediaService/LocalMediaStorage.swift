@@ -72,6 +72,48 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return status == .authorized
     }
     
+    func getAllInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [MetaAssetInfo])->Void) {
+        let dispatchQueue = DispatchQueue(label: "com.test.load")
+        
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isNetworkAccessAllowed = false
+        requestOptions.isSynchronous = false
+        requestOptions.version = .current
+        requestOptions.deliveryMode = .highQualityFormat
+        
+        dispatchQueue.async {
+            var assetsInfo = [MetaAssetInfo]()
+            
+            let start = Date()
+            var i = 0
+            for asset in assets {
+                autoreleasepool {
+                    self.photoManger.requestImageData(for: asset, options: requestOptions, resultHandler: { (data, utType, orientation, info) in
+                        guard let fileSize = data?.count else {
+                            return
+                        }
+                        i += 1
+                        
+                        guard let name = asset.originalFilename, let unwrapedUrl = info?["PHImageFileURLKey"] as? URL else {
+                            return
+                        }
+                        
+                        let assetInfo = MetaAssetInfo(asset: asset, url: unwrapedUrl, fileSize: UInt64(fileSize), originalName: name)
+                        assetsInfo.append(assetInfo)
+                        print("local file: \(i)")
+                        
+                        if i == assets.count {
+                            print("\(Date().timeIntervalSince(start))")
+                            completion(assetsInfo)
+                        }
+                    })
+                    
+                }
+                
+            }
+        }
+    }
+    
     
     //MARK: Alerts
     private func showAccessAlert() {
@@ -627,7 +669,7 @@ class GetImageOperation: Operation {
         options.version = .current
         options.resizeMode = .none
         options.deliveryMode = .highQualityFormat
-        options.isSynchronous = true
+        options.isSynchronous = false
         
         photoManager.requestImage(for: asset,
                                   targetSize: targetSize,
@@ -663,8 +705,8 @@ class GetOriginalImageOperation: Operation {
         let options = PHImageRequestOptions()
         options.version = .current
         options.deliveryMode = .highQualityFormat
-        options.isSynchronous = true
-        options.isNetworkAccessAllowed = true
+        options.isSynchronous = false
+        options.isNetworkAccessAllowed = false
         
         photoManager.requestImageData(for: asset, options: options, resultHandler: callback)
     }
@@ -694,7 +736,7 @@ class GetOriginalVideoOperation: Operation {
         let options = PHVideoRequestOptions()
         options.version = .original
         options.deliveryMode = .highQualityFormat
-        options.isNetworkAccessAllowed = true
+        options.isNetworkAccessAllowed = false
         photoManager.requestAVAsset(forVideo: asset, options: options, resultHandler: callback)
     }
 }

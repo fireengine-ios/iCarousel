@@ -536,6 +536,11 @@ class WrapData: BaseDataSourceItem, Wrappered {
         self.init(baseModel: BaseMediaContent(curentAsset: asset, generalInfo: info))
     }
     
+    convenience init(info: MetaAssetInfo) {
+        let assetInfo = (url: info.url, name: info.originalName, size: info.fileSize, md5: info.md5)
+        self.init(baseModel: BaseMediaContent(curentAsset: info.asset, generalInfo: assetInfo))
+    }
+    
     init(musicForCreateStory: CreateStoryMusicItem) {
         id = musicForCreateStory.id
         tmpDownloadUrl = musicForCreateStory.path

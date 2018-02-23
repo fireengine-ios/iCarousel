@@ -120,8 +120,8 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     private lazy var defaultImageRequestOptions: PHImageRequestOptions = {
         let options = PHImageRequestOptions()
         options.deliveryMode = .highQualityFormat
-        options.isNetworkAccessAllowed = true
-        options.isSynchronous = true
+        options.isNetworkAccessAllowed = false
+        options.isSynchronous = false
         return options
     }()
 }
