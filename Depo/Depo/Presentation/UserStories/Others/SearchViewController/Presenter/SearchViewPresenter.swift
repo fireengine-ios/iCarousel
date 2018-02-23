@@ -51,8 +51,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         
         setupTopBar()
         subscribeDataSource()
-//        sortedRule = .albumlettersAZ
-//        dataSource.currentSortType = sortedRule
+
     }
     
     func viewWillDisappear() {
@@ -81,12 +80,9 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         sortedRule = unwrapedConfig.defaultSortType.sortedRulesConveted
     }
 
-    func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder) {
-        showedSpinner = true
-        self.outputView()?.showSpiner()
-//        dataSource.configurateWithData(collectionData: [[Item]]())
-//        dataSource.updateDisplayngType(type: .list)
-        interactor.searchItems(by: searchText, sortBy: sortBy, sortOrder: sortOrder)
+    func searchWith(searchText: String, item: SuggestionObject?, sortBy: SortType, sortOrder: SortOrder) {
+        showSpinner()
+        interactor.searchItems(by: searchText, item: item, sortBy: sortBy, sortOrder: sortOrder)
     }
     
     func getSuggestion(text: String) {
@@ -97,13 +93,21 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         view.successWithSuggestList(list: list)
     }
     
-    func setRecentSearches(_ recentSearches: [String]) {
+    func setRecentSearches(_ recentSearches: [SearchCategory: [SuggestionObject]]) {
         view.setRecentSearches(recentSearches)
     }
     
     func failedSearch() {
-        showedSpinner = false
-        self.outputView()?.hideSpiner()
+        hideSpinner()
+    }
+    
+    func getAlbum(albumItem: AlbumItem, forItem item: Item) {
+        hideSpinner()
+        router.openFaceImageItemPhotos(item: item, album: albumItem)
+    }
+    
+    func failedGetAlbum() {
+        hideSpinner()
     }
     
     func isShowedSpinner() -> Bool {
@@ -111,20 +115,20 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func getContentWithSuccess(items: [Item]) {
-        if (view == nil){
+        if view == nil {
             return
         }
         asyncOperationSucces()
         
-        self.showedSpinner = false
+        showedSpinner = false
         //items.sorted(by: {$0.creationDate! > $1.creationDate!})
         dataSource.dropData()
 //        dataSource.configurateWithSimpleData(collectionData: files, sortingRules: sortedRule, types: filters, syncType: syncType)
         
-        if (items.count == 0){
+        if items.isEmpty {
             let flag = interactor.needShowNoFileView()
             view.setCollectionViewVisibilityStatus(visibilityStatus: flag)
-        }else{
+        } else {
             view.setCollectionViewVisibilityStatus(visibilityStatus: false)
             dataSource.appendCollectionView(items: items)
         }
@@ -132,8 +136,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func endSearchRequestWith(text: String) {
-        showedSpinner = false
-        outputView()?.hideSpiner()
+        hideSpinner()
         view.endSearchRequestWith(text: text)
         //DBOUT
 //        dataSource.fetchService.performFetch(sortingRules: .timeUp, filtes: [.name(text)])
@@ -323,6 +326,27 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                                              presentedBy: sender,
                                              onSourceView: nil)
         }
+    }
+    
+    func openFaceImageItems(category: SearchCategory) {
+        router.openFaceImageItems(category: category)
+    }
+    
+    func openFaceImage(item: SuggestionObject) {
+        showSpinner()
+        interactor.openFaceImage(forItem: item)
+    }
+    
+    //MARK: - Spineer
+    
+    private func showSpinner() {
+        showedSpinner = true
+        outputView()?.showSpiner()
+    }
+    
+    private func hideSpinner() {
+        showedSpinner = false
+        outputView()?.hideSpiner()
     }
     
     // MARK: Bottom Bar

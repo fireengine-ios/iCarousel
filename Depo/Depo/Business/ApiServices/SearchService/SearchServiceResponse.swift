@@ -204,6 +204,40 @@ class UnifiedSearchResponse: ObjectRequestResponse {
     }
 }
 
+//MARK: - Suggestion
+
+struct SuggestionJsonKey {
+    
+    static let type = "type"
+    static let text = "text"
+    static let highlightedText = "highlightedText"
+    static let albumUuid = "albumUUID"
+    
+    //objectInfo
+    static let id = "id"
+    static let code = "code"
+    static let name = "name"
+    static let thumbnail = "thumbnail"
+}
+
+enum SuggestionType: String {
+    case time = "TIME"
+    case place = "LOCATION"
+    case category = "CATEGORY"
+    case people = "PERSON"
+    case thing = "OBJECT"
+    
+    var image: UIImage {
+        switch self {
+            case .time: return #imageLiteral(resourceName: "search_time")
+            case .place: return #imageLiteral(resourceName: "search_places")
+            case .category: return #imageLiteral(resourceName: "search_categories")
+            case .people: return #imageLiteral(resourceName: "search_people")
+            case .thing: return #imageLiteral(resourceName: "search_things")
+        }
+    }
+}
+
 class SuggestionResponse: ObjectRequestResponse {
     var list: Array<SuggestionObject> = []
     
@@ -218,12 +252,21 @@ class SuggestionResponse: ObjectRequestResponse {
 class SuggestionObject: ObjectRequestResponse {
     var text: String?
     var highlightedText: NSMutableAttributedString!
+    var type: SuggestionType?
+    var albumUuid: String?
+    var info: SuggestionInfo?
     
     override func mapping() {
-        self.text = json?["text"].string
-        self.highlightedText = getHighlightedText(string: json?["highlightedText"].string)
+        text = json?[SuggestionJsonKey.text].string
+        highlightedText = getHighlightedText(string: json?[SuggestionJsonKey.highlightedText].string)
+        if let suggestionType = json?[SuggestionJsonKey.type].string {
+            type = SuggestionType(rawValue: suggestionType)
+            
+            let infoKey = "\(suggestionType.lowercased())Info"
+            info = SuggestionInfo(withJSON: json?[infoKey])
+        }
+        albumUuid = json?[SuggestionJsonKey.albumUuid].string
     }
-    
     
     func getHighlightedText(string: String!) -> NSMutableAttributedString! {
         if let _ = string {
@@ -239,11 +282,25 @@ class SuggestionObject: ObjectRequestResponse {
                 highlightedText = highlightedText.replacingOccurrences(of: "</m>", with: "") as NSString
             }
             let attributedString = NSMutableAttributedString(string: highlightedText as String)
-            attributedString.addAttributes([NSAttributedStringKey.foregroundColor : ColorConstants.darcBlueColor], range: NSMakeRange(0, highlightedText.length))
+            attributedString.addAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], range: NSMakeRange(0, highlightedText.length))
             attributedString.addAttributes([NSAttributedStringKey.foregroundColor : ColorConstants.blueColor], range: highlightedText.range(of: sub))
             attributedString.addAttributes([NSAttributedStringKey.font : UIFont.TurkcellSaturaDemFont(size: 15)], range: NSMakeRange(0, highlightedText.length))
             return attributedString
         }
         return nil
+    }
+}
+
+final class SuggestionInfo: ObjectRequestResponse {
+    var id: Int64?
+    var code: String?
+    var name: String?
+    var thumbnail: URL?
+    
+    override func mapping() {
+        id = json?[SuggestionJsonKey.id].int64
+        code = json?[SuggestionJsonKey.code].string
+        name = json?[SuggestionJsonKey.name].string
+        thumbnail = json?[SuggestionJsonKey.thumbnail].url
     }
 }
