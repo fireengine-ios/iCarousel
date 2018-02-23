@@ -29,7 +29,7 @@ final class FaceImageItemsConfigurator {
         presenter.router = router
         
         if let moduleOutput = moduleOutput {
-            presenter.albumSliderModuleInput = moduleOutput
+            presenter.albumSliderModuleOutput = moduleOutput
         }
         
         let interactor = FaceImageItemsInteractor(remoteItems: remoteServices)
