@@ -22,7 +22,7 @@ final class FaceImageAddNameConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
         
-        viewController.mainTitle = TextConstants.faceImageAddName
+        viewController.mainTitle = item.name ?? TextConstants.faceImageAddName
         presenter.currentItem = item
     }
 }
