@@ -15,6 +15,7 @@ extension MenloworksTags {
         static let fileUpload = "file_uploaded"
         static let wifi3g = "wifi/3g"
         static let loggedIn = "logged_in"
+        static let loginCompleted = "logincompleted"
     }
     
     class ValueConstants {

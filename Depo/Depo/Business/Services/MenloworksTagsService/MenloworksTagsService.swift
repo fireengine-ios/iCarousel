@@ -42,8 +42,11 @@ class MenloworksTagsService {
     }
     
     func onLogin() {
-        let tag = MenloworksTags.WiFi3G(isWiFi: reachabilityService.isReachableViaWiFi)
-        hitTag(tag)
+        let tagWiFi3G = MenloworksTags.WiFi3G(isWiFi: reachabilityService.isReachableViaWiFi)
+        hitTag(tagWiFi3G)
+        
+        let tagLogginCompleted = MenloworksTags.LogginCompleted()
+        hitTag(tagLogginCompleted)
     }
     
     func onStartWithLogin(_ isLoggedIn: Bool) {

@@ -48,6 +48,12 @@ class MenloworksTags {
             super.init(name: NameConstants.loggedIn, value: isLoggedIn, boolType: .yesNo)
         }
     }
+    
+    class LogginCompleted: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.loginCompleted)
+        }
+    }
 }
 
 class MenloworksTag {
