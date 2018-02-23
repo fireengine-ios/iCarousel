@@ -9,5 +9,5 @@
 protocol FaceImageAddNameInteractorInput {
     func getSearchPeople(_ text: String)
     func setNewNameForPeople(_ text: String, personId: Int64)
-    func mergePeople(_ id: Int64, personId: Int64)
+    func mergePeople(_ currentPerson: Item, otherPerson: Item)
 }
