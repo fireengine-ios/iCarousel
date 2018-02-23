@@ -319,13 +319,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         folderSelector.selectFolder(select: { [weak self] (folder) in
             self?.output?.operationStarted(type: .move)
-            self?.fileService.move(items: item, toPath: folder.uuid,
+            self?.fileService.move(items: item, toPath: folder,
                                    success: { [weak self] in
                                     self?.succesAction(elementType: .move)()
                                     //because we have animation of dismiss for this stack of view controllers we have some troubles with reloading data in root collection view
                                     //data will be updated after 0.3 seconds (time of aimation)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 , execute: {
-                                        ItemOperationManager.default.filesMoved(items: item, toFolder: folder.uuid)
+                                        ItemOperationManager.default.filesMoved(items: item, toFolder: folder)
                                     })
                                     
             },fail: self?.failAction(elementType: .move))
@@ -342,7 +342,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let folderSelector = selectFolderController()
         
         folderSelector.selectFolder(select: { [weak self] (folder) in
-            self?.fileService.move(items: item, toPath: folder.uuid,
+            self?.fileService.move(items: item, toPath: folder,
                                    success: self?.succesAction(elementType: .copy),
                                    fail: self?.failAction(elementType: .copy))
             }, cancel: { [weak self] in
