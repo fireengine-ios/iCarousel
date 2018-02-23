@@ -85,7 +85,7 @@ import UIKit
 
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
-        headerImage.addGradientLayer(colors: [.clear, ColorConstants.brownishGrey])
+        headerImage.addGradientLayer(colors: [.clear, ColorConstants.textGrayColor])
         
         countPhotosLabel.backgroundColor = UIColor.clear
         countPhotosLabel.textColor = UIColor.white
