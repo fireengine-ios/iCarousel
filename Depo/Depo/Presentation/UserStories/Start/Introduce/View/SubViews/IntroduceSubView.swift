@@ -12,7 +12,6 @@ class IntroduceSubView: UIView {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var textLabelW: NSLayoutConstraint!
     
     class func initFromNib() -> IntroduceSubView{
         let nibName = String(describing: self)
@@ -31,14 +30,6 @@ class IntroduceSubView: UIView {
         titleLabel.textColor = ColorConstants.whiteColor
         titleLabel.minimumScaleFactor = 0.5
         titleLabel.adjustsFontSizeToFitWidth = true;
-    }
-
-    override func layoutSubviews() {
-        let image = imageView.image
-        let coef = (image?.size.width)! / (image?.size.height)!
-        let textW = frame.size.height * coef * 0.8
-        textLabelW.constant = textW
-        layoutIfNeeded()
     }
 
     func setModel(model: IntroduceModel){

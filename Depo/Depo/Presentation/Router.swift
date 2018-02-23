@@ -102,6 +102,13 @@ class RouterVC: NSObject {
         }
     }
     
+    func pushOnPresentedView(viewController: UIViewController){
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.getViewControllerForPresent()?.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func pushViewController(viewController: UIViewController) {
         if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar{
             let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
@@ -111,6 +118,16 @@ class RouterVC: NSObject {
         navigationController?.pushViewController(viewController, animated: true)
         viewController.navigationController?.isNavigationBarHidden = false
         
+        if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
+            tabBarViewController.setBGColor(color: baseView.getBacgroundColor())
+        }
+        
+    }
+    
+    func setBacgroundColor(color: UIColor){
+        if let tabBarViewController = rootViewController as? TabBarViewController {
+            tabBarViewController.setBGColor(color: color)
+        }
     }
     
     func pushViewControllerWithoutAnimation(viewController: UIViewController) {
@@ -147,8 +164,16 @@ class RouterVC: NSObject {
         }
     }
     
+    func getViewControllerForPresent() -> UIViewController?{
+        if let nController = navigationController?.presentedViewController as? UINavigationController,
+            let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController{
+            return viewController
+        }
+        return navigationController?.viewControllers.last
+    }
+    
     func presentViewController(controller: UIViewController){
-        if let lastViewController = navigationController?.viewControllers.last{
+        if let lastViewController = getViewControllerForPresent(){
             if controller.popoverPresentationController?.sourceView == nil,
                 controller.popoverPresentationController?.barButtonItem == nil {
                 controller.popoverPresentationController?.sourceView = lastViewController.view
@@ -414,6 +439,8 @@ class RouterVC: NSObject {
     
     func searchView(output: SearchModuleOutput? = nil) -> UIViewController {
         let controller = SearchViewInitializer.initializeAllFilesViewController(with: "SearchView", output: output)
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
         return controller
     }
     

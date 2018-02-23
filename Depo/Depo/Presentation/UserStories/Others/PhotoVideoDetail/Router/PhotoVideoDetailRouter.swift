@@ -14,7 +14,7 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
         guard let fileInfo = viewContr as? FileInfoViewController else{
             return
         }
-        router.pushViewController(viewController: fileInfo)
+        router.pushOnPresentedView(viewController: fileInfo)
         fileInfo.interactor.setObject(object: object) //FIXME: AGAIN!>!?!@>!@ interactor in vc!!@@!!@!@
     }
     

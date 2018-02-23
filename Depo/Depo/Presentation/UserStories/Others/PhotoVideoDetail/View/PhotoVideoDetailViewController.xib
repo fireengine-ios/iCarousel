@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="bottomBlackView" destination="XFi-qo-p1Z" id="n2g-5n-Pae"/>
                 <outlet property="collectionView" destination="ZzB-kC-yvt" id="Ggb-ac-yeQ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kbZ-Zd-ek1"/>
+                <outlet property="viewForBottomBar" destination="EkB-f5-2OH" id="vOp-R9-AI9"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,14 +34,33 @@
                     </collectionViewFlowLayout>
                     <cells/>
                 </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EkB-f5-2OH">
+                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="DHo-1v-JvR"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFi-qo-p1Z">
+                    <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ZzB-kC-yvt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0Oi-mw-S6T"/>
                 <constraint firstAttribute="trailing" secondItem="ZzB-kC-yvt" secondAttribute="trailing" id="3ng-rw-A6D"/>
                 <constraint firstAttribute="bottom" secondItem="ZzB-kC-yvt" secondAttribute="bottom" id="66o-Uz-bgS"/>
+                <constraint firstAttribute="trailing" secondItem="EkB-f5-2OH" secondAttribute="trailing" id="6NC-Rh-Ca5"/>
                 <constraint firstItem="ZzB-kC-yvt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Eg9-Gp-OCq"/>
+                <constraint firstItem="hTs-d8-e25" firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="NfP-1l-2sH"/>
+                <constraint firstItem="XFi-qo-p1Z" firstAttribute="top" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="Owt-Hz-Qzd"/>
+                <constraint firstItem="XFi-qo-p1Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PdC-Bv-kNa"/>
+                <constraint firstAttribute="trailing" secondItem="XFi-qo-p1Z" secondAttribute="trailing" id="b47-g1-8Ia"/>
+                <constraint firstAttribute="bottom" secondItem="XFi-qo-p1Z" secondAttribute="bottom" id="ugz-9B-4IC"/>
+                <constraint firstItem="EkB-f5-2OH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vGC-fV-ORB"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="hTs-d8-e25"/>
             <point key="canvasLocation" x="32.5" y="63.5"/>
         </view>
     </objects>

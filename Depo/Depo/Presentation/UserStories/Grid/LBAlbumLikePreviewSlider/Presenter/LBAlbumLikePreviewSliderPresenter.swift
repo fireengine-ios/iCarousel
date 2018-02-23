@@ -48,13 +48,14 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
     //MARK: - Iteractor output
     
     func operationSuccessed(withItems items:[SliderItem]) {
-        faceImagePhotosModuleOutput?.getCountSliderItmes(count: items.count)
         dataSource.setCollectionView(items: items)
+        faceImagePhotosModuleOutput?.getSliderItmes(items: items)
     }
     
     func operationFailed() {
         
     }
+
 }
 
 extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderDataSourceDelegate {

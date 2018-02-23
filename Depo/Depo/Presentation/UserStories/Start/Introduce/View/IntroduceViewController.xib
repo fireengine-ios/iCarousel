@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroduceViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroduceViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="haveAccountButton" destination="STK-bc-GEv" id="2a3-aN-a84"/>
                 <outlet property="pageControll" destination="uNr-bn-y2s" id="05I-E2-oyP"/>
@@ -45,13 +45,13 @@
                                     <variation key="widthClass=regular" image="Logo-Ipad"/>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXL-QX-kgV">
-                                    <rect key="frame" x="0.0" y="113" width="320" height="297"/>
+                                    <rect key="frame" x="0.0" y="113" width="320" height="280"/>
                                     <subviews>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2P-V1-ajw">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="244"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
                                         </scrollView>
                                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="uNr-bn-y2s">
-                                            <rect key="frame" x="8" y="252" width="304" height="37"/>
+                                            <rect key="frame" x="8" y="235" width="304" height="37"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="37" id="FPr-6s-iL3"/>
                                             </constraints>
@@ -59,16 +59,16 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="uNr-bn-y2s" firstAttribute="top" secondItem="j2P-V1-ajw" secondAttribute="bottom" constant="8" id="4EF-kP-vif"/>
                                         <constraint firstItem="j2P-V1-ajw" firstAttribute="leading" secondItem="hXL-QX-kgV" secondAttribute="leading" id="Dgd-8s-Ebk"/>
                                         <constraint firstAttribute="bottom" secondItem="uNr-bn-y2s" secondAttribute="bottom" constant="8" id="EoD-DY-TW5"/>
                                         <constraint firstItem="j2P-V1-ajw" firstAttribute="top" secondItem="hXL-QX-kgV" secondAttribute="top" id="WDa-ei-x4u"/>
                                         <constraint firstItem="uNr-bn-y2s" firstAttribute="leading" secondItem="hXL-QX-kgV" secondAttribute="leading" constant="8" id="YpZ-Yf-WVh"/>
                                         <constraint firstAttribute="trailing" secondItem="uNr-bn-y2s" secondAttribute="trailing" constant="8" id="aa1-IB-LNi"/>
+                                        <constraint firstAttribute="bottom" secondItem="j2P-V1-ajw" secondAttribute="bottom" id="mRF-ui-AD7"/>
                                         <constraint firstAttribute="trailing" secondItem="j2P-V1-ajw" secondAttribute="trailing" id="tnr-AZ-94Y"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="ButtonWithCorner" customModule="Depo_LifeTech" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="ButtonWithCorner" customModule="lifebox" customModuleProvider="target">
                                     <rect key="frame" x="70.5" y="511" width="178" height="29"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="29" id="GPS-RI-Ueo">
@@ -83,7 +83,7 @@
                                         <action selector="onHaveAccountButton" destination="-1" eventType="touchUpInside" id="zQD-23-R0A"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="WhiteButtonWithRoundedCorner" customModule="Depo_LifeTech" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
                                     <rect key="frame" x="30" y="423" width="260" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="width" priority="750" constant="303" id="0QQ-jr-zZ0">
@@ -113,7 +113,7 @@
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="N29-gd-nz6" secondAttribute="trailing" constant="30" id="n9p-wA-SFz"/>
                                 <constraint firstItem="hXL-QX-kgV" firstAttribute="top" secondItem="LEY-g9-CGx" secondAttribute="bottom" constant="32" id="qcf-o5-KdD"/>
                                 <constraint firstAttribute="trailing" secondItem="hXL-QX-kgV" secondAttribute="trailing" id="yYg-3E-krt"/>
-                                <constraint firstItem="N29-gd-nz6" firstAttribute="top" secondItem="hXL-QX-kgV" secondAttribute="bottom" constant="13" id="z5b-nG-0bU">
+                                <constraint firstItem="N29-gd-nz6" firstAttribute="top" secondItem="hXL-QX-kgV" secondAttribute="bottom" constant="30" id="z5b-nG-0bU">
                                     <variation key="widthClass=regular" constant="82"/>
                                 </constraint>
                             </constraints>

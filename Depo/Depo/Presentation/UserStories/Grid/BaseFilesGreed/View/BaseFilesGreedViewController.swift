@@ -128,13 +128,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         configurateViewForPopUp()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        /// need when device was rotated
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
     func configurateViewForPopUp(){
         CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
@@ -160,7 +153,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { _ in
             let router = RouterVC()
             let searchViewController = router.searchView()
-            router.pushViewControllerWithoutAnimation(viewController: searchViewController)
+            searchViewController.transitioningDelegate = self
+            router.pushViewController(viewController: searchViewController)
         })
         let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
             self?.output.moreActionsPressed(sender: NavigationBarList().more)
@@ -341,7 +335,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
         collectionView.updateConstraints()
         
-        collectionView.clipsToBounds = false
         collectionView.contentInset = UIEdgeInsets(top: BaseFilesGreedViewController.sliderH + hTopPopUpView, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(subView)
         sliderController.view.frame = subView.bounds
@@ -369,7 +362,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     private func setupViewForPopUp(){
-        collectionView.clipsToBounds = false
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(scrolliblePopUpView)
         

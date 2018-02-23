@@ -12,11 +12,7 @@ protocol SuggestionTableSectionHeaderDelegate: class {
     func onClearRecentSearchesTapped()
 }
 
-class SuggestionTableSectionHeader: UITableViewCell {
-    
-    enum Category: Int {
-        case suggestion = 0, recent
-    }
+class SuggestionTableSectionHeader: UITableViewHeaderFooterView {
     
     private weak var delegate: SuggestionTableSectionHeaderDelegate?
     
@@ -26,11 +22,12 @@ class SuggestionTableSectionHeader: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)
-        titleLabel.textColor = ColorConstants.darcBlueColor
+        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        titleLabel.textColor = .white
+        backgroundColor = .clear
     }
     
-    func configureWith(category: Category, delegate: SuggestionTableSectionHeaderDelegate? = nil) {
+    func configureWith(category: SearchCategory, delegate: SuggestionTableSectionHeaderDelegate? = nil) {
         self.delegate = delegate
         
         switch category {
@@ -40,6 +37,9 @@ class SuggestionTableSectionHeader: UITableViewCell {
         case .recent:
             titleLabel.text = TextConstants.searchRecentSearchTitle
             clearButton.isHidden = false
+        default:
+            titleLabel.text = ""
+            clearButton.isHidden = true
         }
     }
     
