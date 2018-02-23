@@ -22,6 +22,7 @@ final class FaceImageAddNameViewController: BaseFilesGreedChildrenViewController
         super.viewDidLoad()
         
         searchTextField.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        searchTextField.text = mainTitle == TextConstants.faceImageSearchAddName ? "" : mainTitle
         searchTextField.placeholder = TextConstants.faceImageSearchAddName
         searchTextField.becomeFirstResponder()
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
