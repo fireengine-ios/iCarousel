@@ -106,6 +106,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         let barButtonLeft = UIBarButtonItem(customView: cancelButton)
         navigationItem.leftBarButtonItem = barButtonLeft
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -176,6 +178,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     deinit {
         ItemOperationManager.default.stopUpdateView(view: self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupNavigationBar() {
@@ -229,6 +232,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func getBacgroundColor() -> UIColor {
         return UIColor.black
+    }
+    
+    @objc private func applicationDidEnterBackground(_ application: UIApplication) {
+        localPlayer?.pause()
     }
 }
 
