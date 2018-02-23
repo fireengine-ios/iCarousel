@@ -10,6 +10,8 @@ import Foundation
 
 final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
+    weak var albumSliderModuleOutput: LBAlbumLikePreviewSliderModuleInput?
+    
     private var isChangeVisibilityMode: Bool = false
     
     private var visibilityItems: [WrapData] = []
@@ -45,6 +47,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
         
         super.getContentWithSuccess(items: allItmes)
+        
+        albumSliderModuleInput?.reload()
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
@@ -55,12 +59,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         self.isChangeVisibilityMode = isChangeVisibilityMode
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
         reloadData()
-    }
-    
-    private func clearItems() {
-        visibilityItems = [WrapData]()
-        dataSource.allMediaItems = [WrapData]()
-        dataSource.allItems = [[WrapData]]()
     }
     
 }

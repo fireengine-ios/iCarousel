@@ -565,8 +565,8 @@ class RouterVC: NSObject {
     
     //MARK: People list
     
-    func peopleListController() -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageItemsInitializer.initializePeopleController(with: "BaseFilesGreedViewController")
+    func peopleListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageItemsInitializer.initializePeopleController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
     }
     

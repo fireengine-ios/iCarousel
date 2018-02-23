@@ -8,7 +8,7 @@
 
 final class FaceImageItemsConfigurator {
     
-    func configure(viewController: FaceImageItemsViewController, remoteServices: RemoteItemsService, title: String) {
+    func configure(viewController: FaceImageItemsViewController, remoteServices: RemoteItemsService, title: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) {
         let router = FaceImageItemsRouter()
         
         router.view = viewController
@@ -27,6 +27,10 @@ final class FaceImageItemsConfigurator {
         
         presenter.view = viewController
         presenter.router = router
+        
+        if let moduleOutput = moduleOutput {
+            presenter.albumSliderModuleInput = moduleOutput
+        }
         
         let interactor = FaceImageItemsInteractor(remoteItems: remoteServices)
         interactor.output = presenter
