@@ -48,7 +48,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         super.getContentWithSuccess(items: allItmes)
         
-        albumSliderModuleInput?.reload()
+        albumSliderModuleOutput?.reload()
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
