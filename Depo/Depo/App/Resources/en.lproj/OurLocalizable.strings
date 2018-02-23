@@ -157,7 +157,8 @@
 "Waiting for Wi-Fi connection to auto-sync" = "Waiting for Wi-Fi connection to auto-sync";
 "Settings" = "Settings";
 "Cancel" = "Cancel";
-"Auto Upload is off.\nGo to setting to auto sync." = "Auto Upload is off.\nGo to setting to auto sync.";
+"Auto Upload is off." = "Auto Upload is off.";
+"Photos and videos waiting to be synced" = "Photos and videos waiting to be synced";
 "LTE" = "LTE";
 "4G" = "4G";
 "3G" = "3G";
