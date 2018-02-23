@@ -28,6 +28,8 @@
                 <outlet property="segmentControll" destination="zbJ-nq-R7K" id="ssb-3q-0Z8"/>
                 <outlet property="startCreatingFilesButton" destination="UTy-IA-Avr" id="Sud-hD-HCs"/>
                 <outlet property="topBarContainer" destination="Stl-Nh-W5a" id="rEa-AX-y5Q"/>
+                <outlet property="topIOS10Contraint" destination="f5N-jL-CYf" id="uJT-Dm-COb"/>
+                <outlet property="topIOS11Contraint" destination="VHU-J3-eKm" id="GVP-W5-Von"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Mx3-n5-cYr"/>
             </connections>
         </placeholder>
@@ -37,7 +39,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Umz-wA-WsK">
-                    <rect key="frame" x="0.0" y="104" width="414" height="632"/>
+                    <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Sm-wn-Msc">
@@ -125,12 +127,12 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="0lC-K4-1ac" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="1b8-sN-taw"/>
+                <constraint firstItem="Umz-wA-WsK" firstAttribute="top" secondItem="Stl-Nh-W5a" secondAttribute="top" id="9UC-vs-Xwi"/>
                 <constraint firstItem="zbJ-nq-R7K" firstAttribute="top" secondItem="Stl-Nh-W5a" secondAttribute="bottom" constant="13" id="9tv-X3-NoZ"/>
                 <constraint firstAttribute="bottom" secondItem="Umz-wA-WsK" secondAttribute="bottom" id="BPZ-rn-X4w"/>
                 <constraint firstAttribute="bottom" secondItem="0Sm-wn-Msc" secondAttribute="bottom" id="CRt-nA-Xxz"/>
                 <constraint firstItem="ZI3-Dh-bXS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="KWm-Z2-COp"/>
                 <constraint firstItem="Umz-wA-WsK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KWu-1M-rJ8"/>
-                <constraint firstItem="Umz-wA-WsK" firstAttribute="top" secondItem="Byn-OZ-gPB" secondAttribute="top" constant="40" id="Nn6-Gv-zf8"/>
                 <constraint firstItem="Stl-Nh-W5a" firstAttribute="top" secondItem="Byn-OZ-gPB" secondAttribute="top" id="VHU-J3-eKm"/>
                 <constraint firstItem="zbJ-nq-R7K" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VUv-XZ-kwc"/>
                 <constraint firstAttribute="trailing" secondItem="Umz-wA-WsK" secondAttribute="trailing" id="X5G-x9-7Af"/>
@@ -142,6 +144,7 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
                 <constraint firstItem="ZI3-Dh-bXS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.07" id="ecm-g2-fmI"/>
+                <constraint firstItem="Stl-Nh-W5a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="f5N-jL-CYf"/>
                 <constraint firstAttribute="trailing" secondItem="ZI3-Dh-bXS" secondAttribute="trailing" constant="16" id="fRH-8S-qhb"/>
                 <constraint firstAttribute="trailing" secondItem="0lC-K4-1ac" secondAttribute="trailing" constant="16" id="hq9-pl-y0n"/>
                 <constraint firstAttribute="trailing" secondItem="Stl-Nh-W5a" secondAttribute="trailing" id="vnj-3r-PKk"/>

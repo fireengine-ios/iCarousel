@@ -59,21 +59,27 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
         })
     }
     
-    func mergePeople(_ id: Int64, personId: Int64) {
-        guard isUpdating == false else {
+    func mergePeople(_ currentPerson: Item, otherPerson: Item) {
+        guard isUpdating == false,
+        let currentPersonId = currentPerson.id,
+        let otherPersonId = otherPerson.id,
+            let name = otherPerson.name else {
             return
         }
         
-        peopleService.mergePeople(personId: id, targetPersonId: personId, success: { [weak self] (response) in
-            self?.output.asyncOperationSucces()
-            
-            if let output = self?.output as? FaceImageAddNameInteractorOutput {
-                output.didMergePeople()
-            }
+        peopleService.mergePeople(personId: currentPersonId, targetPersonId: otherPersonId, success: { [weak self] (response) in
+            self?.peopleService.changePeopleName(personId: currentPersonId, name: name, success: { [weak self] (response) in
+                self?.output.asyncOperationSucces()
+                
+                if let output = self?.output as? FaceImageAddNameInteractorOutput {
+                    output.didMergePeople(name)
+                }
             }, fail: { [weak self] error in
                 self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+            })
+        }, fail: { [weak self] error in
+            self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
         })
     }
-    
 }
 
