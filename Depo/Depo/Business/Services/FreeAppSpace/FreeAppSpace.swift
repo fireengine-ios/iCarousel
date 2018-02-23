@@ -344,31 +344,24 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 let duplicatesMD5Set = Set<String>(localObjects.map({ $0.md5 }))
                 for object in self.duplicatesArray{
                     if !duplicatesMD5Set.contains(object.md5){
-                        
+                        newDuplicatesArray.append(object)
                     }
                 }
-                
-                for object in localObjects{
-                    if let index = self.localMD5Array.index(of: object.md5){
-                        self.localMD5Array.remove(at: index)
-                    }
-                }
-                
+                self.duplicatesArray = newDuplicatesArray
                 
                 let networksObjects = items.filter{
                     !$0.isLocalItem
                 }
                 
                 localObjects = CoreDataStack.default.getLocalDuplicates(remoteItems: networksObjects)
-                for object in localObjects{
-                    var newDuplicatesArray = [WrapData]()
-                    for duplicateObject in self.duplicatesArray{
-                        if duplicateObject.md5 != object.md5{
-                            newDuplicatesArray.append(duplicateObject)
-                        }
+                let duplicatesServerMD5Set = Set<String>(localObjects.map({ $0.md5 }))
+                newDuplicatesArray.removeAll()
+                for object in self.duplicatesArray{
+                    if !duplicatesServerMD5Set.contains(object.md5){
+                        newDuplicatesArray.append(object)
                     }
-                    self.duplicatesArray = newDuplicatesArray
                 }
+                self.duplicatesArray = newDuplicatesArray
                 
                 if (self.duplicatesArray.count == 0){
                     CardsManager.default.stopOperationWithType(type: .freeAppSpace)
