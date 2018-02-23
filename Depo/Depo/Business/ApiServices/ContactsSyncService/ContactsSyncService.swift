@@ -260,7 +260,8 @@ class ContactsSyncService: BaseRequestService {
     }
     
     private func setup() {
-        SyncSettings.shared().token = TokenStorageUserDefaults().accessToken
+        let tokenStorage: TokenStorage = factory.resolve()
+        SyncSettings.shared().token = tokenStorage.accessToken
         SyncSettings.shared().url =  ContactsSyncServiceConstant.webProdURL
         SyncSettings.shared().environment = .productionEnvironment//.developmentEnvironment
     }
