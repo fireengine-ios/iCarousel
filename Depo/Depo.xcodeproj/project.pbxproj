@@ -2807,6 +2807,9 @@
 		CE7467011FD6B61600D0885D /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7467001FD6B61600D0885D /* ErrorResponse.swift */; };
 		CE79E4A81F695DA200C1F151 /* Depo_LifeTechUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE79E4A71F695DA200C1F151 /* Depo_LifeTechUITests.swift */; };
 		CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4B0292017731400D06CA9 /* Alamofire+Response.swift */; };
+		CE827586203FEC6600067724 /* UIWebView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE878C44203D4E5000458E0B /* UIWebView+Gesture.swift */; };
+		CE827587203FEC6B00067724 /* UIWebView+Clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1049512035858500898879 /* UIWebView+Clear.swift */; };
+		CE827588203FEC7800067724 /* UIScrollView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE2843F202C7549003855C1 /* UIScrollView+Scroll.swift */; };
 		CE878C45203D4E5000458E0B /* UIWebView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE878C44203D4E5000458E0B /* UIWebView+Gesture.swift */; };
 		CE8F44E41F6AAFA80062C2E0 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
 		CE8F44E61F6AB59C0062C2E0 /* ActivityTimelineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E51F6AB59C0062C2E0 /* ActivityTimelineService.swift */; };
@@ -12603,6 +12606,7 @@
 				8C0E8CD61FDEBDFF00789C91 /* HomePageModuleInput.swift in Sources */,
 				8C0E8CD71FDEBDFF00789C91 /* GSMCodeModel.swift in Sources */,
 				8C0E8CD81FDEBDFF00789C91 /* PlanType.swift in Sources */,
+				CE827588203FEC7800067724 /* UIScrollView+Scroll.swift in Sources */,
 				8C0E8CD91FDEBDFF00789C91 /* SearchViewInitializer.swift in Sources */,
 				8C0E8CDA1FDEBDFF00789C91 /* Configuration.m in Sources */,
 				8C0B919520170E3E00A5BA81 /* DuplicatedContactTableViewCell.swift in Sources */,
@@ -12789,6 +12793,7 @@
 				8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
 				8C0E8D921FDEBDFF00789C91 /* AutoSyncInteractorInput.swift in Sources */,
 				8C0E8D931FDEBDFF00789C91 /* CustomNavBarButton.swift in Sources */,
+				CE827587203FEC6B00067724 /* UIWebView+Clear.swift in Sources */,
 				8C0E8D941FDEBDFF00789C91 /* UserProfileViewOutput.swift in Sources */,
 				8C0E8D951FDEBDFF00789C91 /* UploadResponse.swift in Sources */,
 				8C0E8D961FDEBDFF00789C91 /* UsageInfoInteractorInput.swift in Sources */,
@@ -12882,6 +12887,7 @@
 				8C0E8DE01FDEBDFF00789C91 /* IntroduceViewOutput.swift in Sources */,
 				8C0E8DE11FDEBDFF00789C91 /* IntroduceViewController.swift in Sources */,
 				8C0E8DE21FDEBDFF00789C91 /* IntroduceModuleInput.swift in Sources */,
+				CE827586203FEC6600067724 /* UIWebView+Gesture.swift in Sources */,
 				8C0E8DE31FDEBDFF00789C91 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				8C0E8DE41FDEBDFF00789C91 /* UserProfileInteractorOutput.swift in Sources */,
 				8C0E8DE51FDEBDFF00789C91 /* IntroducePresenter.swift in Sources */,
