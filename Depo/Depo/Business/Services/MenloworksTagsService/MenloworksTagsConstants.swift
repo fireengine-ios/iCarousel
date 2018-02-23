@@ -14,6 +14,7 @@ extension MenloworksTags {
         static let musicUpload = "music_uploaded"
         static let fileUpload = "file_uploaded"
         static let wifi3g = "wifi/3g"
+        static let loggedIn = "logged_in"
     }
     
     class ValueConstants {
@@ -21,6 +22,10 @@ extension MenloworksTags {
         static let wifi = "wifi"
         static let `true` = "true"
         static let `false` = "false"
+        static let yes = "yes"
+        static let no = "no"
+        static let on = "on"
+        static let off = "off"
         static let granted = "granted"
         static let denied = "denied"
     }

@@ -46,6 +46,11 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
+    func onStartWithLogin(_ isLoggedIn: Bool) {
+        let tag = MenloworksTags.LoggedIn(isLoggedIn: isLoggedIn)
+        hitTag(tag)
+    }
+    
     // MARK: - Accessory methods
     
     private func hitTag(_ tag: MenloworksTag) {

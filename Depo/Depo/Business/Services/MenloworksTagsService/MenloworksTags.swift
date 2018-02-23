@@ -13,15 +13,15 @@ class MenloworksTags {
         }
     }
     
-    class PhotoUpload: MenloworksIsWiFiTag {
+    class PhotoUpload: MenloworksBoolTag {
         init(isWiFi: Bool) {
-            super.init(name: NameConstants.photoUpload, isWiFi: isWiFi)
+            super.init(name: NameConstants.photoUpload, value: isWiFi, boolType: .wifi)
         }
     }
     
-    class WiFi3G: MenloworksIsWiFiTag {
+    class WiFi3G: MenloworksBoolTag {
         init(isWiFi: Bool) {
-            super.init(name: NameConstants.wifi3g, isWiFi: isWiFi)
+            super.init(name: NameConstants.wifi3g, value: isWiFi, boolType: .wifi)
         }
     }
     
@@ -42,6 +42,12 @@ class MenloworksTags {
             super.init(name: NameConstants.fileUpload)
         }
     }
+    
+    class LoggedIn: MenloworksBoolTag {
+        init(isLoggedIn: Bool) {
+            super.init(name: NameConstants.loggedIn, value: isLoggedIn, boolType: .yesNo)
+        }
+    }
 }
 
 class MenloworksTag {
@@ -59,17 +65,31 @@ class MenloworksTag {
     }
 }
 
-class MenloworksIsWiFiTag: MenloworksTag {
-    init(name: String, isWiFi: Bool) {
-        super.init(name: name,
-                   value: isWiFi ? MenloworksTags.ValueConstants.wifi : MenloworksTags.ValueConstants.mobile)
-    }
-}
-
 class MenloworksBoolTag: MenloworksTag {
-    init(name: String, value: Bool) {
-        super.init(name: name,
-                   value: value ? MenloworksTags.ValueConstants.true : MenloworksTags.ValueConstants.false)
+    enum BoolType {
+        case trueFalse
+        case yesNo
+        case onOff
+        case permission
+        case wifi
+    }
+    
+    init(name: String, value: Bool, boolType: BoolType) {
+        let stringValue: String
+        switch boolType {
+        case .trueFalse:
+            stringValue = value ? MenloworksTags.ValueConstants.true : MenloworksTags.ValueConstants.false
+        case .yesNo:
+            stringValue = value ? MenloworksTags.ValueConstants.yes : MenloworksTags.ValueConstants.no
+        case .onOff:
+            stringValue = value ? MenloworksTags.ValueConstants.on : MenloworksTags.ValueConstants.off
+        case .permission:
+            stringValue = value ? MenloworksTags.ValueConstants.granted : MenloworksTags.ValueConstants.denied
+        case .wifi:
+            stringValue = value ? MenloworksTags.ValueConstants.wifi : MenloworksTags.ValueConstants.mobile
+        }
+        
+        super.init(name: name, value: stringValue)
     }
 }
 
