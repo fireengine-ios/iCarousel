@@ -234,6 +234,9 @@
 		78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */; };
 		78DDEF9C201908C100E3530B /* String+CyrillicCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */; };
 		78DDEF9D201908CB00E3530B /* String+CyrillicCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */; };
+		78E3D518203FF9D600FA3478 /* MenloworksTagsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D517203FF9D600FA3478 /* MenloworksTagsService.swift */; };
+		78E3D51A203FFEC800FA3478 /* MenloworksTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D519203FFEC800FA3478 /* MenloworksTags.swift */; };
+		78E3D51C204006FA00FA3478 /* MenloworksTagsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D51B204006FA00FA3478 /* MenloworksTagsConstants.swift */; };
 		78E8E2A72023186C00A979AB /* FaceImagePhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A52023186C00A979AB /* FaceImagePhotosViewController.swift */; };
 		78E8E2A82023186C00A979AB /* FaceImagePhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E8E2A62023186C00A979AB /* FaceImagePhotosViewController.xib */; };
 		78E8E2AA2023189F00A979AB /* FaceImagePhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */; };
@@ -3406,6 +3409,9 @@
 		78D9BA452007E82700F2233F /* DuplicatedContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewController.swift; sourceTree = "<group>"; };
 		78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewOutput.swift; sourceTree = "<group>"; };
 		78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CyrillicCompare.swift"; sourceTree = "<group>"; };
+		78E3D517203FF9D600FA3478 /* MenloworksTagsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenloworksTagsService.swift; sourceTree = "<group>"; };
+		78E3D519203FFEC800FA3478 /* MenloworksTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenloworksTags.swift; sourceTree = "<group>"; };
+		78E3D51B204006FA00FA3478 /* MenloworksTagsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenloworksTagsConstants.swift; sourceTree = "<group>"; };
 		78E8E2A52023186C00A979AB /* FaceImagePhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewController.swift; sourceTree = "<group>"; };
 		78E8E2A62023186C00A979AB /* FaceImagePhotosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceImagePhotosViewController.xib; sourceTree = "<group>"; };
 		78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosPresenter.swift; sourceTree = "<group>"; };
@@ -6397,6 +6403,16 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		78E3D516203FF9A000FA3478 /* MenloworksTagsService */ = {
+			isa = PBXGroup;
+			children = (
+				78E3D517203FF9D600FA3478 /* MenloworksTagsService.swift */,
+				78E3D519203FFEC800FA3478 /* MenloworksTags.swift */,
+				78E3D51B204006FA00FA3478 /* MenloworksTagsConstants.swift */,
+			);
+			path = MenloworksTagsService;
+			sourceTree = "<group>";
+		};
 		78E8E29F202317A300A979AB /* FaceImageItemPhotos */ = {
 			isa = PBXGroup;
 			children = (
@@ -7187,6 +7203,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				78E3D516203FF9A000FA3478 /* MenloworksTagsService */,
 				B54BFF45202B43CE0018AF82 /* WidgetService */,
 				782E40B11FE7D05F007F7838 /* RecentSearchesService */,
 				7CC11AA91FE1360B00AF022D /* PopUpService */,
@@ -13869,6 +13886,7 @@
 				CE95ED501F516736002F923A /* HelpAndSupportInteractorInput.swift in Sources */,
 				78052965200DD3470051FA78 /* ManageContactsModels.swift in Sources */,
 				CE51ACD01EF90853005DCEE0 /* TermsAndServicesViewInput.swift in Sources */,
+				78E3D51C204006FA00FA3478 /* MenloworksTagsConstants.swift in Sources */,
 				7C66E8B21F979C3300D98F27 /* CreateStoryPreviewViewIO.swift in Sources */,
 				CEAE3F981EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift in Sources */,
 				7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */,
@@ -14043,6 +14061,7 @@
 				8C5408431F62895300D4717A /* GridListTopBarConfig.swift in Sources */,
 				CE2F56221F7552A900F49DA1 /* ColumnsCollectionLayout.swift in Sources */,
 				8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
+				78E3D51A203FFEC800FA3478 /* MenloworksTags.swift in Sources */,
 				4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				7CF6BDBA1F0B88910066709E /* CollectionViewCellForVideo.swift in Sources */,
 				8C6EF87B1F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift in Sources */,
@@ -14371,6 +14390,7 @@
 				227254E0DCD67B9CEB06CD58 /* AlbumDetailRouterInput.swift in Sources */,
 				CE2F561C1F7552A900F49DA1 /* PackagesRouter.swift in Sources */,
 				2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */,
+				78E3D518203FF9D600FA3478 /* MenloworksTagsService.swift in Sources */,
 				81E0ADA871598E31E25ABC23 /* AlbumDetailInitializer.swift in Sources */,
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
 				4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
