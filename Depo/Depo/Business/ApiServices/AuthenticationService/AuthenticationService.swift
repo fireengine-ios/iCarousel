@@ -277,6 +277,7 @@ class AuthenticationService: BaseRequestService {
                         }
 
                         sucess?()
+                        MenloworksTagsService.shared.onLogin()
                         
                     case .failure(let error):
                         fail?(ErrorResponse.error(error))
