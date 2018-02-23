@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias SelectFolder = (_ folder: Item) -> Void
+typealias SelectFolder = (_ folderID: String) -> Void
 typealias CancelSelectFolder = ()-> Void
 
 class SelectFolderViewController: BaseFilesGreedChildrenViewController {
@@ -53,9 +53,7 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
             navigationItem.leftBarButtonItem = barButtonLeft
         }
 
-        if (selectedFolder != nil) {
-            showRightButton()
-        }
+        showRightButton()
     }
     
     func showRightButton(){
@@ -88,8 +86,8 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         router.presentViewController(controller: nContr)
     }
     
-    func onFolderSelected(folder: Item){
-        selectFolderBlock?(folder)
+    func onFolderSelected(folderID: String){
+        selectFolderBlock?(folderID)
         hide()
     }
 }

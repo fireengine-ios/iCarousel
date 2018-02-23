@@ -33,7 +33,7 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
         let folderSelector = router.selectFolder(folder: nil)
         folderSelector.selectFolderBlock = { [weak self] (folder) in
             self?.output?.operationStarted(type: .move)
-            self?.fileService.move(items: item, toPath: folder.uuid,
+            self?.fileService.move(items: item, toPath: folder,
                                    success: self?.succesAction(elementType: .move),
                                    fail: self?.failAction(elementType: .move))
             
