@@ -796,3 +796,9 @@ struct NumericConstants {
     static let maxNumberOfUploadAttempts = 5
     static let secondsBeetweenUploadAttempts = 5
 }
+
+struct RequestSizeConstant {
+    
+    static let faceImageItemsRequestSize = 100
+
+}

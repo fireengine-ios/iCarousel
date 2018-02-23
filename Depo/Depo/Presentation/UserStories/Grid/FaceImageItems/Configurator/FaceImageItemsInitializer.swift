@@ -16,7 +16,7 @@ final class FaceImageItemsInitializer: NSObject {
     
         let configurator = FaceImageItemsConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: PeopleItemsService(requestSize: 100), title: TextConstants.myStreamPeopleTitle, moduleOutput:  moduleOutput)
+        configurator.configure(viewController: viewController, remoteServices: PeopleItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamPeopleTitle, moduleOutput:  moduleOutput)
         
         return viewController
     }
@@ -26,7 +26,7 @@ final class FaceImageItemsInitializer: NSObject {
         
         let configurator = FaceImageItemsConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: ThingsItemsService(requestSize: 100), title: TextConstants.myStreamThingsTitle)
+        configurator.configure(viewController: viewController, remoteServices: ThingsItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamThingsTitle)
         
         return viewController
     }
@@ -36,7 +36,7 @@ final class FaceImageItemsInitializer: NSObject {
         
         let configurator = FaceImageItemsConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: PlacesItemsService(requestSize: 100), title: TextConstants.myStreamPlacesTitle)
+        configurator.configure(viewController: viewController, remoteServices: PlacesItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamPlacesTitle)
         
         return viewController
     }
