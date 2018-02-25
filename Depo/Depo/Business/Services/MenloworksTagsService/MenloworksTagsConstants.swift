@@ -17,6 +17,13 @@ extension MenloworksTags {
         static let loggedIn = "logged_in"
         static let loginCompleted = "logincompleted"
         static let signupCompleted = "signupcompleted"
+        static let faceImageRecognitionStatus = "face_image_recognition"
+        static let instagramImportStatus = "instagram_import"
+        static let facebookImportStatus = "facebook_import"
+        static let passcodeStatus = "passcode_set"
+        static let touchIDStatus = "touchid_set"
+        static let turckcellPasswordStatus = "turkcell_password"
+        static let autologinStatus = "auto_login"
     }
     
     class ValueConstants {

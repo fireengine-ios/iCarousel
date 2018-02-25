@@ -60,6 +60,48 @@ class MenloworksTags {
             super.init(name: NameConstants.signupCompleted)
         }
     }
+    
+    class FaceImageRecognitionStatus: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.faceImageRecognitionStatus, value: isEnabled, boolType: .trueFalse)
+        }
+    }
+    
+    class InstagramImportStatus: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.instagramImportStatus, value: isEnabled, boolType: .trueFalse)
+        }
+    }
+    
+    class FacebookImportStatus: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.facebookImportStatus, value: isEnabled, boolType: .trueFalse)
+        }
+    }
+    
+    class PasscodeStatus: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.passcodeStatus, value: isEnabled, boolType: .trueFalse)
+        }
+    }
+    
+    class TouchIDStatus: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.touchIDStatus, value: isEnabled, boolType: .trueFalse)
+        }
+    }
+    
+    class TurkcellPasswordStatus: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.turckcellPasswordStatus, value: isEnabled, boolType: .trueFalse)
+        }
+    }
+    
+    class AutologinStatus: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.autologinStatus, value: isEnabled, boolType: .trueFalse)
+        }
+    }
 }
 
 class MenloworksTag {

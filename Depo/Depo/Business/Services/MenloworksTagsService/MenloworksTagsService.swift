@@ -52,6 +52,12 @@ class MenloworksTagsService {
     func onStartWithLogin(_ isLoggedIn: Bool) {
         let tag = MenloworksTags.LoggedIn(isLoggedIn: isLoggedIn)
         hitTag(tag)
+        
+        if isLoggedIn {
+            sendInstagramImportStatus()
+            sendFacebookImportStatus()
+            sendFIRStatus()
+        }
     }
     
     func onSignUp() {
@@ -69,4 +75,30 @@ class MenloworksTagsService {
         }
     }
     
+    private func sendInstagramImportStatus() {
+        InstagramService().getSyncStatus(success: { (response) in
+            guard let response = response as? SocialSyncStatusResponse,
+                  let status = response.status else { return }
+            let tag = MenloworksTags.InstagramImportStatus(isEnabled: status)
+            self.hitTag(tag)
+        }, fail: nil)
+    }
+    
+    private func sendFacebookImportStatus() {
+        FBService().requestStatus(success: { (response) in
+            guard let response = response as? FBStatusObject,
+                  let status = response.syncEnabled else { return }
+            let tag = MenloworksTags.FacebookImportStatus(isEnabled: status)
+            self.hitTag(tag)
+        }, fail: nil)
+    }
+    
+    private func sendFIRStatus() {
+        AccountService().faceImageAllowed(success: { (response) in
+            guard let response = response as? FaceImageAllowedResponse,
+                  let status = response.allowed else { return }
+            let tag = MenloworksTags.FaceImageRecognitionStatus(isEnabled: status)
+            self.hitTag(tag)
+        }, fail: { _ in })
+    }
 }
