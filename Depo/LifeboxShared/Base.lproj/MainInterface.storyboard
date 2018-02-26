@@ -15,7 +15,7 @@
         <!--Share View Controller-->
         <scene sceneID="ceB-am-kn3">
             <objects>
-                <viewController id="j1y-V4-xli" customClass="ShareViewController" customModule="LifeboxShare" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="j1y-V4-xli" customClass="ShareViewController" customModule="LifeboxShared" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="wbc-yd-nQP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,6 +101,9 @@
                                                 </view>
                                             </collectionViewCell>
                                         </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="j1y-V4-xli" id="foR-wU-DZG"/>
+                                        </connections>
                                     </collectionView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3dG-p4-Y18">
                                         <rect key="frame" x="8" y="171" width="15" height="45"/>
@@ -162,10 +165,19 @@
                         <viewLayoutGuide key="safeArea" id="1Xd-am-t49"/>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="Jtv-eS-1Np" id="i8P-Wc-GXt"/>
                         <outlet property="containerView" destination="MFa-ng-Ixs" id="Ylg-YP-FvQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-Cv-SGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="sxS-CI-no5" customClass="ShareCustomizator" customModule="LifeboxShared" customModuleProvider="target">
+                    <connections>
+                        <outlet property="cancelButton" destination="lqF-nr-rL7" id="s6v-0M-RWM"/>
+                        <outlet property="lineView" destination="YNR-DK-2NA" id="Oo3-bf-oRC"/>
+                        <outlet property="mainView" destination="wbc-yd-nQP" id="z89-Kd-dBg"/>
+                        <outlet property="uploadButton" destination="a0q-rA-0Qv" id="3gd-Ks-pcj"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="138.75" y="120"/>
         </scene>

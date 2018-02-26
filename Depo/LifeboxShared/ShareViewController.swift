@@ -12,31 +12,6 @@ import Alamofire
 
 let factory: SharedFactory = FactoryBase()
 
-final class ShareCustomizator: NSObject {
-//    @IBOutlet private weak var cancelButton: UIButton! {
-//        didSet {
-//            cancelButton.isExclusiveTouch = true
-//            cancelButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-//            cancelButton.setTitle("", for: .normal)
-//            cancelButton.setTitleColor(ColorConstants.lightText, for: .normal)
-//            cancelButton.setTitleColor(ColorConstants.darkText, for: .highlighted)
-//        }
-//    }
-//    @IBOutlet private weak var uploadButton: UIButton! {
-//        didSet {
-//            uploadButton.isExclusiveTouch = true
-//            uploadButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-//            uploadButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-//            uploadButton.setTitleColor(ColorConstants.blueColor.darker(), for: .highlighted)
-//        }
-//    }
-//    @IBOutlet private weak var lineView: UIView! {
-//        didSet {
-//            lineView.backgroundColor = ColorConstants.blueColor
-//        }
-//    }
-}
-
 //final class ShareConfigurator {
 //    
 //    func setup() {
@@ -85,8 +60,6 @@ final class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        view.backgroundColor = ColorConstants.searchShadowColor
-        
         getSharedItems { sharedItems in
             print(sharedItems)
             print()
@@ -134,6 +107,15 @@ final class ShareViewController: UIViewController {
     //        return []
     //    }
     
+}
+
+extension ShareViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
 }
 
 extension ShareViewController {

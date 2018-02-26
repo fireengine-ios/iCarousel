@@ -2802,6 +2802,9 @@
 		CE58FB0120444525007F3F54 /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
 		CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
 		CE58FB03204445E0007F3F54 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
+		CE58FB0620444BE8007F3F54 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
+		CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
+		CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
 		CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
 		CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
@@ -2915,6 +2918,17 @@
 		CEBBDE0C1F01E69B00CDF527 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
 		CEBBDE0D1F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
 		CEBBDE0E1F01E69B00CDF527 /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
+		CEBDB1D720444C73007EE1AE /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
+		CEBDB1D920444D97007EE1AE /* ShareCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDB1D820444D97007EE1AE /* ShareCustomizator.swift */; };
+		CEBDB1DB20444DEE007EE1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
+		CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
+		CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
+		CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
+		CEBDB1DF20444E50007EE1AE /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
+		CEBDB1E020444E50007EE1AE /* TurkcellSaturaIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE031F01E69B00CDF527 /* TurkcellSaturaIta.ttf */; };
+		CEBDB1E120444E50007EE1AE /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
+		CEBDB1E220444E50007EE1AE /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
+		CEBDB1E320444E50007EE1AE /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
 		CEC05B671F05333800332EBA /* PhoneVereficationScreen~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6BF9461EFA7AF200D73B62 /* PhoneVereficationScreen~ipad.xib */; };
 		CEC05B6A1F05399100332EBA /* PhoneVereficationDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC05B691F05399100332EBA /* PhoneVereficationDataStorage.swift */; };
 		CEC3C21E1FB9961900C3D67F /* PasscodeEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2081FB9961900C3D67F /* PasscodeEnterViewController.swift */; };
@@ -4747,6 +4761,7 @@
 		CE58FAF420444493007F3F54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		CE58FAF620444493007F3F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE58FAFF20444524007F3F54 /* SharedFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFactory.swift; sourceTree = "<group>"; };
+		CE58FB0520444BE8007F3F54 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardsService.swift; sourceTree = "<group>"; };
 		CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailCell.swift; sourceTree = "<group>"; };
 		CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoVideoDetailCell.xib; sourceTree = "<group>"; };
@@ -4856,6 +4871,7 @@
 		CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TurkcellSaturaMed.ttf; sourceTree = "<group>"; };
 		CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TurkcellSaturaMedIta.ttf; sourceTree = "<group>"; };
 		CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TurkcellSaturaReg.ttf; sourceTree = "<group>"; };
+		CEBDB1D820444D97007EE1AE /* ShareCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCustomizator.swift; sourceTree = "<group>"; };
 		CEC05B691F05399100332EBA /* PhoneVereficationDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVereficationDataStorage.swift; sourceTree = "<group>"; };
 		CEC3C2081FB9961900C3D67F /* PasscodeEnterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeEnterViewController.swift; sourceTree = "<group>"; };
 		CEC3C2121FB9961900C3D67F /* PasscodeEnterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasscodeEnterViewController.xib; sourceTree = "<group>"; };
@@ -9530,6 +9546,7 @@
 			isa = PBXGroup;
 			children = (
 				CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */,
+				CE58FB0520444BE8007F3F54 /* ColorConstants.swift */,
 			);
 			path = ApplicationPalette;
 			sourceTree = "<group>";
@@ -9838,8 +9855,9 @@
 		CE58FAF020444493007F3F54 /* LifeboxShared */ = {
 			isa = PBXGroup;
 			children = (
-				CE58FAF120444493007F3F54 /* ShareViewController.swift */,
 				CE58FAF320444493007F3F54 /* MainInterface.storyboard */,
+				CE58FAF120444493007F3F54 /* ShareViewController.swift */,
+				CEBDB1D820444D97007EE1AE /* ShareCustomizator.swift */,
 				CE58FAF620444493007F3F54 /* Info.plist */,
 			);
 			path = LifeboxShared;
@@ -12313,6 +12331,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */,
+				CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */,
+				CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */,
+				CEBDB1DF20444E50007EE1AE /* TurkcellSaturaDemIta.ttf in Resources */,
+				CEBDB1E020444E50007EE1AE /* TurkcellSaturaIta.ttf in Resources */,
+				CEBDB1E120444E50007EE1AE /* TurkcellSaturaMed.ttf in Resources */,
+				CEBDB1E220444E50007EE1AE /* TurkcellSaturaMedIta.ttf in Resources */,
+				CEBDB1E320444E50007EE1AE /* TurkcellSaturaReg.ttf in Resources */,
+				CEBDB1DB20444DEE007EE1AE /* Images.xcassets in Resources */,
 				CE58FAF520444493007F3F54 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -12812,6 +12839,7 @@
 				8C0E8D011FDEBDFF00789C91 /* MessageView.m in Sources */,
 				8C0E8D021FDEBDFF00789C91 /* FLImageView.m in Sources */,
 				8C0E8D031FDEBDFF00789C91 /* ProgressPopUpProtocol.swift in Sources */,
+				CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */,
 				8C0E8D041FDEBDFF00789C91 /* LocalAlbumModuleInitializer.swift in Sources */,
 				8C0E8D051FDEBDFF00789C91 /* ContactSyncSDK.m in Sources */,
 				8C0E8D061FDEBDFF00789C91 /* ActivityTimelineService.swift in Sources */,
@@ -14003,6 +14031,7 @@
 				8C6EF8831F348B5C002AC795 /* BottomSelectionTabBarViewInput.swift in Sources */,
 				CE51ACCE1EF90853005DCEE0 /* RegistrationConfigurator.swift in Sources */,
 				CE2976DE1FD58E2000350F3A /* LocalAlbumViewController.swift in Sources */,
+				CE58FB0620444BE8007F3F54 /* ColorConstants.swift in Sources */,
 				7C66E8AA1F979C3300D98F27 /* CreateStoryPreviewInitializer.swift in Sources */,
 				CE37FF091F7BEB7600EF5FF1 /* PurchaseResult.swift in Sources */,
 				CE51ACCF1EF90853005DCEE0 /* RegistrationInitializer.swift in Sources */,
@@ -14593,6 +14622,9 @@
 				CE58FAF220444493007F3F54 /* ShareViewController.swift in Sources */,
 				CE58FB03204445E0007F3F54 /* TokenStorage.swift in Sources */,
 				CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */,
+				CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */,
+				CEBDB1D720444C73007EE1AE /* UIColor+Adjust.swift in Sources */,
+				CEBDB1D920444D97007EE1AE /* ShareCustomizator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
