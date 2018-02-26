@@ -785,6 +785,7 @@ struct NumericConstants {
     static let maxRecentSearchesObjects: Int = 4
     static let maxRecentSearchesPeople: Int = 6
     static let maxRecentSearchesThings: Int = 6
+    static let maxSuggestions: Int = 3  
     
     static let minute: TimeInterval = 60
     static let defaultTimeout: TimeInterval = 30.0
