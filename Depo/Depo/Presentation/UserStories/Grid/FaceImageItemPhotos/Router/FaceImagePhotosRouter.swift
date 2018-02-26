@@ -16,10 +16,14 @@ final class FaceImagePhotosRouter: BaseFilesGreedRouter {
         guard let wrappered = selectedItem as? Item else { return }
         guard let wrapperedArray = sameTypeItems as? [Item] else { return }
         
-        let albumUUID = RouterVC().getParentUUID()
+        let albumUUID = router.getParentUUID()
         let controller = router.filesDetailAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID)
         let nController = UINavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
+    }
+    
+    override func showBack() {
+        RouterVC().popViewController()
     }
 }
 
@@ -34,7 +38,9 @@ extension FaceImagePhotosRouter: FaceImagePhotosRouterInput {
     }
     
     func openAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) {
-        let vc = RouterVC().faceImageAddName(item, moduleOutput: moduleOutput)
+        let router = RouterVC()
+        
+        let vc = router.faceImageAddName(item, moduleOutput: moduleOutput)
         
         RouterVC().pushViewController(viewController: vc)
     }

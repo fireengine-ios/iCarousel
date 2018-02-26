@@ -7,10 +7,7 @@
 //
 
 final class FaceImageAddNameRouter: BaseFilesGreedRouter {
-    
-    override func showBack() {
-        RouterVC().popViewController()
-    }
+
 }
 
 //MARK: - FaceImageAddNameRouterInput
@@ -24,6 +21,15 @@ extension FaceImageAddNameRouter: FaceImageAddNameRouterInput {
         })
         
         RouterVC().presentViewController(controller: vc)
+    }
+    
+    func popToPeopleItems() {
+        for vc in (RouterVC().navigationController?.viewControllers ?? []) {
+            if vc is FaceImageItemsViewController {
+                RouterVC().popToViewController(vc)
+                break
+            }
+        }
     }
 
 }
