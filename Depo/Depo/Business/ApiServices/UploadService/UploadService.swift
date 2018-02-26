@@ -42,6 +42,16 @@ final class UploadService: BaseRequestService {
     }
     private var finishedSyncToUseOperationsCount = 0
     
+    //specific UI counters
+    
+    private var currentSyncOperationNumber: Int {
+        return finishedSyncOperationsCount + 1
+    }
+    
+    private var currentUploadOperationNumber: Int {
+        return finishedUploadOperationsCount + finishedSyncToUseOperationsCount + 1
+    }
+    
 
     override init() {
         uploadQueue.maxConcurrentOperationCount = 1
@@ -119,20 +129,21 @@ final class UploadService: BaseRequestService {
         CardsManager.default.setProgressForOperationWith(type: .sync,
                                                          object: nil,
                                                          allOperations: allSyncOperationsCount,
-                                                         completedOperations: finishedSyncOperationsCount)
+                                                         completedOperations: currentSyncOperationNumber)
         
-        WidgetService.shared.notifyWidgetAbout(finishedSyncOperationsCount, of: allSyncOperationsCount)
+        WidgetService.shared.notifyWidgetAbout(currentSyncOperationNumber, of: allSyncOperationsCount)
     }
     
     private func showUploadCardProgress() {
-        guard allSyncToUseOperationsCount + allUploadOperationsCount != 0 else {
+        let allOperations = allSyncToUseOperationsCount + allUploadOperationsCount
+        guard allOperations != 0, currentUploadOperationNumber <= allOperations else {
             return
         }
         
         CardsManager.default.setProgressForOperationWith(type: .upload,
                                                          object: nil,
-                                                         allOperations: allSyncToUseOperationsCount + allUploadOperationsCount,
-                                                         completedOperations: finishedUploadOperationsCount + finishedSyncToUseOperationsCount)
+                                                         allOperations: allOperations,
+                                                         completedOperations: currentUploadOperationNumber)
     }
     
     @discardableResult private func syncToUseFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse ) -> [UploadOperations]? {
@@ -155,7 +166,7 @@ final class UploadService: BaseRequestService {
         CardsManager.default.setProgressForOperationWith(type: .upload,
                                                          object: firstObject,
                                                          allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
-                                                         completedOperations: self.finishedUploadOperationsCount + self.finishedSyncToUseOperationsCount)
+                                                         completedOperations: self.currentUploadOperationNumber)
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
@@ -234,8 +245,8 @@ final class UploadService: BaseRequestService {
 
         CardsManager.default.setProgressForOperationWith(type: .upload,
                                                          object: firstObject,
-                                                         allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
-                                                         completedOperations: self.finishedUploadOperationsCount + self.finishedSyncToUseOperationsCount)
+                                                         allOperations: allSyncToUseOperationsCount + allUploadOperationsCount + itemsToUpload.count,
+                                                         completedOperations: currentUploadOperationNumber)
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
@@ -308,8 +319,8 @@ final class UploadService: BaseRequestService {
         print("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
         CardsManager.default.setProgressForOperationWith(type: .sync,
                                                          object: firstObject,
-                                                         allOperations: self.allSyncOperationsCount + itemsToSync.count,
-                                                         completedOperations: self.finishedSyncOperationsCount)
+                                                         allOperations: allSyncOperationsCount + itemsToSync.count,
+                                                         completedOperations: currentSyncOperationNumber)
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
