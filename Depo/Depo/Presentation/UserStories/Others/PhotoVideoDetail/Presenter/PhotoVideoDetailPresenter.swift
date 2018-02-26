@@ -119,7 +119,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch type {
         case .delete, .removeFromAlbum, .removeFromFaceImageAlbum:
-            asyncOperationSucces()
+            outputView()?.hideSpiner()
             interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
@@ -130,7 +130,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func operationFailed(withType type: ElementTypes) {
-        asyncOperationSucces()
+        outputView()?.hideSpiner()
 
         debugPrint("failed")
     }
@@ -157,8 +157,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
         if let item = item,
-            let id = item.id {
-            startAsyncOperation()
+            let id = item.id {            
             if item is PeopleItem {
                 interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
             } else if item is ThingsItem {
@@ -173,8 +172,16 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
     }
     
+    func didRemoveFromAlbum(completion: @escaping (() -> Void)) {
+        router.showRemoveFromAlbum(completion: completion)
+    }
+    
     func printSelected() { }
     func stopModeSelected() { }
+    
+    override func startAsyncOperation() {
+        outputView()?.showSpiner()
+    }
     
     //MARK : BasePresenter
     

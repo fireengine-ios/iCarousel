@@ -25,4 +25,17 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
         nController.popViewController(animated: true)
     }
     
+    func showRemoveFromAlbum(completion: @escaping (() -> Void)) {
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                              message: TextConstants.removeFromAlbum,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: completion)
+        })
+        
+        RouterVC().presentViewController(controller: controller)
+    }
+    
 }

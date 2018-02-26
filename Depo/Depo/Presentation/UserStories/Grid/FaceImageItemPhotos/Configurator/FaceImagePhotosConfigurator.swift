@@ -35,7 +35,7 @@ final class FaceImagePhotosConfigurator {
         presenter.router = router
         presenter.faceImageItemsModuleOutput = moduleOutput
         
-        let remoteServices = FaceImageDetailService(albumUUID: album.uuid, requestSize: 40)
+        let remoteServices = FaceImageDetailService(albumUUID: album.uuid, requestSize: RequestSizeConstant.faceImageItemsRequestSize)
         
         let interactor = FaceImagePhotosInteractor(remoteItems: remoteServices)
         interactor.output = presenter

@@ -44,48 +44,71 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
 extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
     
     func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) {
-        if let items = items as? [Item] {
-            PeopleService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
-                self?.output.asyncOperationSucces()
-                DispatchQueue.main.async {
-                    if let output = self?.output as? BaseItemInputPassingProtocol {
-                        output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+        let okHandler: () -> Void = { [weak self] in
+            if let items = items as? [Item] {
+                self?.output.startAsyncOperation()
+
+                PeopleService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                    self?.output.asyncOperationSucces()
+                    DispatchQueue.main.async {
+                        if let output = self?.output as? BaseItemInputPassingProtocol {
+                            output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+                        }
                     }
+                }) { [weak self] (error) in
+                    self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
                 }
-            }) { [weak self] (error) in
-                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
             }
+        }
+        
+        if let output = output as? FaceImagePhotosInteractorOutput {
+            output.didRemoveFromAlbum(completion: okHandler)
         }
     }
     
     func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) {
-        if let items = items as? [Item] {
-            ThingsService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
-                self?.output.asyncOperationSucces()
-                DispatchQueue.main.async {
-                    if let output = self?.output as? BaseItemInputPassingProtocol {
-                        output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+        let okHandler: () -> Void = { [weak self] in
+            if let items = items as? [Item] {
+                self?.output.startAsyncOperation()
+
+                ThingsService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                    self?.output.asyncOperationSucces()
+                    DispatchQueue.main.async {
+                        if let output = self?.output as? BaseItemInputPassingProtocol {
+                            output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+                        }
                     }
+                }) { [weak self] (error) in
+                    self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
                 }
-            }) { [weak self] (error) in
-                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
             }
+        }
+        
+        if let output = output as? FaceImagePhotosInteractorOutput {
+            output.didRemoveFromAlbum(completion: okHandler)
         }
     }
     
     func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], id: Int64) {
-        if let items = items as? [Item] {
-            PlacesService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
-                self?.output.asyncOperationSucces()
-                
-                DispatchQueue.main.async {
-                    if let output = self?.output as? BaseItemInputPassingProtocol {
-                        output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+        let okHandler: () -> Void = { [weak self] in
+            if let items = items as? [Item] {
+                self?.output.startAsyncOperation()
+
+                PlacesService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                    self?.output.asyncOperationSucces()
+                    DispatchQueue.main.async {
+                        if let output = self?.output as? BaseItemInputPassingProtocol {
+                            output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+                        }
                     }
+                }) { [weak self] (error) in
+                    self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
                 }
-            }) { [weak self] (error) in
-                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
             }
+        }
+        
+        if let output = output as? FaceImagePhotosInteractorOutput {
+            output.didRemoveFromAlbum(completion: okHandler)
         }
     }
     
