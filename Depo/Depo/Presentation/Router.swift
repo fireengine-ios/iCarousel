@@ -143,6 +143,10 @@ class RouterVC: NSObject {
         navigationController?.popViewController(animated: true)
     }
     
+    func popToViewController(_ vc: UIViewController) {
+        navigationController?.popToViewController(vc, animated: true)
+    }
+    
     func popCreateStory() {
         if let viewControllers = navigationController?.viewControllers {
             var index: Int? = nil

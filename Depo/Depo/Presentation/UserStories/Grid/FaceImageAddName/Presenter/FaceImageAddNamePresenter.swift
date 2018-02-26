@@ -92,13 +92,11 @@ extension FaceImageAddNamePresenter: FaceImageAddNameInteractorOutput {
         router.showBack()
     }
     
-    func didMergePeople(_ name: String) {
-        if let item = currentItem {
-            currentItem?.name = name
-            faceImagePhotosmoduleOutput?.didChangeName(item: item)
-        }
+    func didMergePeople() {
         faceImagePhotosmoduleOutput?.didMergePeople()
-        router.showBack()
+        
+        if let router = router as? FaceImageAddNameRouter {
+            router.popToPeopleItems()
+        }
     }
-    
 }
