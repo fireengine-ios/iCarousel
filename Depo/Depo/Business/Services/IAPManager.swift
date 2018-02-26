@@ -8,6 +8,13 @@
 
 import StoreKit
 
+enum ProductRestoreCallBack {
+    case success(Set<String>)
+    case fail(Error)
+}
+
+typealias RestoreHandler = (_ productCallBack: ProductRestoreCallBack) -> ()
+
 final class IAPManager: NSObject {
     
     static let shared = IAPManager()
@@ -15,16 +22,17 @@ final class IAPManager: NSObject {
     typealias OfferAppleHandler = ([OfferApple]) -> Void
     typealias PurchaseHandler = (_ isSuccess: PurchaseResult) -> Void
     
-    override private init() {
-        super.init()
-        setupSKPaymentQueue()
-    }
-    
-    var offerAppleHandler: OfferAppleHandler = {_ in }
-    var purchaseHandler: PurchaseHandler = {_ in }
+    private var restorePurchasesCallback: RestoreHandler?
+    private var offerAppleHandler: OfferAppleHandler = {_ in }
+    private var purchaseHandler: PurchaseHandler = {_ in }
     
     var canMakePayments: Bool {
         return SKPaymentQueue.canMakePayments()
+    }
+    
+    override private init() {
+        super.init()
+        setupSKPaymentQueue()
     }
     
     private func setupSKPaymentQueue() {
@@ -46,6 +54,11 @@ final class IAPManager: NSObject {
         purchaseHandler = handler
         let payment = SKPayment(product: offerApple.skProduct)
         SKPaymentQueue.default().add(payment)
+    }
+    
+    func restorePurchases(restoreCallBack: @escaping RestoreHandler) {
+        restorePurchasesCallback = restoreCallBack
+        SKPaymentQueue.default().restoreCompletedTransactions()
     }
     
     var receipt: String? {

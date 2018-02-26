@@ -295,6 +295,10 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
     }
 
+    func restorePurchases() {
+        iapManager
+    }
+    
     /// maybe will be need
 //    func sendReciept() {
 //        guard let receipt = iapManager.receipt else { return }

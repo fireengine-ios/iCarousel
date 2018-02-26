@@ -33,7 +33,7 @@ final class PackagesViewController: UIViewController {
         activityManager.delegate = self
         promoView.deleagte = self
         setupCollectionView()
-        setupNavBarButtons()
+        
         output.viewIsReady()
     }
     
@@ -45,18 +45,17 @@ final class PackagesViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
     }
-    
-    private func setupNavBarButtons() {
+
+    func showRestoreButton() {
         //IF THE USER NON CELL USER
-        
-        
-//        let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(actionMoreButton(_:)))
-//        moreButton.tintColor = UIColor.white
-//        navigationItem.rightBarButtonItem = moreButton
+        let moreButton = UIBarButtonItem(image: UIImage(named: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
+        moreButton.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem = moreButton
+
     }
     
     @objc private func restorePurhases() {
-        
+        output.restorePurchasesPressed()
     }
     
 }

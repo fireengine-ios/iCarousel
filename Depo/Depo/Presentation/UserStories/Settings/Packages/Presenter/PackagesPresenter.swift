@@ -92,6 +92,10 @@ extension PackagesPresenter: PackagesViewOutput {
             }
         })
     }
+    
+    func restorePurchasesPressed() {
+        
+    }
 }
 
 // MARK: - OptInControllerDelegate
@@ -192,6 +196,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
             break
         case .all:
             //show restore
+            view?.showRestoreButton()
 //            break
             /// in app purchase
 //            view?.startActivityIndicator()
@@ -224,6 +229,10 @@ extension PackagesPresenter: PackagesInteractorOutput {
         optInVC?.stopActivityIndicator()
         view?.stopActivityIndicator()
         view?.display(error: error)
+    }
+    
+    func purchasesRestored(text: String) {
+        
     }
 }
 

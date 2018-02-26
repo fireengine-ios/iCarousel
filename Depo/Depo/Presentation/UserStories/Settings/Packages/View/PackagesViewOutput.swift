@@ -11,4 +11,5 @@ protocol PackagesViewOutput {
     func didPressOn(plan: SubscriptionPlan)
     func buy(offer: OfferServiceResponse)
     func submit(promocode: String)
+    func restorePurchasesPressed()
 }
