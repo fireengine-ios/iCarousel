@@ -9,7 +9,7 @@
 import UIKit
 
 class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
-
+    
     override var bottomBarConfig: EditingBarConfig {
         let selectedItem = array[selectedIndex]
         switch selectedItem.fileType {
@@ -25,6 +25,60 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
             return documentsBottomBarConfig
         default:
             return photoVideoBottomBarConfig
+        }
+    }
+    
+    override func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) {
+        if let items = items as? [Item] {
+            PeopleService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                DispatchQueue.main.async {
+                    if let output = self?.output as? BaseItemInputPassingProtocol {
+                        output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+                    }
+                }
+            }) { [weak self] (error) in
+                DispatchQueue.main.async {
+                    if let output = self?.output as? BaseItemInputPassingProtocol {
+                        output.operationFailed(withType: .removeFromFaceImageAlbum)
+                    }
+                }
+            }
+        }
+    }
+    
+    override func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) {
+        if let items = items as? [Item] {
+            ThingsService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                DispatchQueue.main.async {
+                    if let output = self?.output as? BaseItemInputPassingProtocol {
+                        output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+                    }
+                }
+            }) { [weak self] (error) in
+                DispatchQueue.main.async {
+                    if let output = self?.output as? BaseItemInputPassingProtocol {
+                        output.operationFailed(withType: .removeFromFaceImageAlbum)
+                    }
+                }
+            }
+        }
+    }
+
+    override func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], id: Int64) {
+        if let items = items as? [Item] {
+            PlacesService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                DispatchQueue.main.async {
+                    if let output = self?.output as? BaseItemInputPassingProtocol {
+                        output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+                    }
+                }
+            }) { [weak self] (error) in
+                DispatchQueue.main.async {
+                    if let output = self?.output as? BaseItemInputPassingProtocol {
+                        output.operationFailed(withType: .removeFromFaceImageAlbum)
+                    }
+                }
+            }
         }
     }
     

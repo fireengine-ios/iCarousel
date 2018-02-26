@@ -29,6 +29,7 @@ class PhotoVideoDetailModuleConfigurator {
                                                                 selecetedItem: Item,
                                                                 allItems: [Item],
                                                                 albumUUID: String,
+                                                                albumItem: Item? = nil,
                                                                 hideActions: Bool = false) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
             let interactor = PhotoVideoAlbumDetailInteractor()
@@ -38,7 +39,7 @@ class PhotoVideoDetailModuleConfigurator {
                       documentsBottomBarConfig: documentsBottomBarConfig,
                       interactor: interactor,
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.delete],
-                      selecetedItem: selecetedItem, allItems: allItems, hideActions: hideActions)
+                      selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem, hideActions: hideActions)
         }
     }
     
@@ -51,6 +52,7 @@ class PhotoVideoDetailModuleConfigurator {
                            photoDetailMoreMenu: [ElementTypes],
                            selecetedItem: Item,
                            allItems: [Item],
+                           albumItem: Item? = nil,
                            hideActions: Bool) {
         let router = PhotoVideoDetailRouter()
 
@@ -58,6 +60,10 @@ class PhotoVideoDetailModuleConfigurator {
         presenter.view = viewController
         presenter.router = router
         presenter.alertSheetExcludeTypes = alertSheetExcludeTypes
+        
+        if let albumItem = albumItem {
+            presenter.item = albumItem
+        }
         
         interactor.output = presenter
         interactor.photoVideoBottomBarConfig = photoVideoBottomBarConfig

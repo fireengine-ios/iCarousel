@@ -19,6 +19,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     var alertSheetExcludeTypes = [ElementTypes]()
     
+    var item: Item?
+    
     func viewIsReady(view: UIView) {
         interactor.onViewIsReady()
         bottomBarPresenter?.show(animated: false, onView: view)
@@ -116,7 +118,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch type {
-        case .delete, .removeFromAlbum:
+        case .delete, .removeFromAlbum, .removeFromFaceImageAlbum:
+            asyncOperationSucces()
             interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
@@ -127,6 +130,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func operationFailed(withType type: ElementTypes) {
+        asyncOperationSucces()
+
         debugPrint("failed")
     }
     
@@ -148,6 +153,20 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func changeCover() { 
     
+    }
+    
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
+        if let item = item,
+            let id = item.id {
+            startAsyncOperation()
+            if item is PeopleItem {
+                interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
+            } else if item is ThingsItem {
+                interactor.deletePhotosFromThingsAlbum(items: items, id: id)
+            } else if item is PlacesItem {
+                interactor.deletePhotosFromPlacesAlbum(items: items, id: id)
+            }
+        }
     }
     
     func deSelectAll(){

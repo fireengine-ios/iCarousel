@@ -138,6 +138,8 @@ import UIKit
             let headerImageHeight = headerImageHeightConstraint?.constant {
             
             collectionView.contentInset.top = albumHeight + headerImageHeight
+        } else {
+            collectionView.contentInset.top = headerImageHeight
         }
     }
     

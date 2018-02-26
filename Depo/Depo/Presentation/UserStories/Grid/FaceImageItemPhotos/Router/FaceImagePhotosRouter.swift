@@ -9,6 +9,9 @@
 import UIKit
 
 final class FaceImagePhotosRouter: BaseFilesGreedRouter {
+    
+    var item: Item?
+    
     override func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
         
         let router = RouterVC()
@@ -17,7 +20,7 @@ final class FaceImagePhotosRouter: BaseFilesGreedRouter {
         guard let wrapperedArray = sameTypeItems as? [Item] else { return }
         
         let albumUUID = router.getParentUUID()
-        let controller = router.filesDetailAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID)
+        let controller = router.filesDetailFaceImageAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID, albumItem: item)
         let nController = UINavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
-
+    
     weak var faceImageItemsModuleOutput: FaceImageItemsModuleOutput?
     
     var coverPhoto: Item?
@@ -36,8 +36,22 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
+        if let interactor = interactor as? FaceImagePhotosInteractor,
+            let id = item.id {
+            startAsyncOperation()
+            if item is PeopleItem {
+                interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
+            } else if item is ThingsItem {
+                interactor.deletePhotosFromThingsAlbum(items: items, id: id)
+            } else if item is PlacesItem {
+                interactor.deletePhotosFromPlacesAlbum(items: items, id: id)
+            }
+        }
+    }
+    
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .removeFromAlbum {
+        if type == .removeFromAlbum || type == .removeFromFaceImageAlbum {
             reloadData()
             faceImageItemsModuleOutput?.didReloadData()
         }

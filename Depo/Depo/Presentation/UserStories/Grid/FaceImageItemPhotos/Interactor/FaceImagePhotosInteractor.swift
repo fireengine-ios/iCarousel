@@ -38,3 +38,55 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
         })
     }
 }
+
+// MARK: - FaceImagePhotosInteractorInput
+
+extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
+    
+    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) {
+        if let items = items as? [Item] {
+            PeopleService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                self?.output.asyncOperationSucces()
+                DispatchQueue.main.async {
+                    if let output = self?.output as? BaseItemInputPassingProtocol {
+                        output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+                    }
+                }
+            }) { [weak self] (error) in
+                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+            }
+        }
+    }
+    
+    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) {
+        if let items = items as? [Item] {
+            ThingsService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                self?.output.asyncOperationSucces()
+                DispatchQueue.main.async {
+                    if let output = self?.output as? BaseItemInputPassingProtocol {
+                        output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+                    }
+                }
+            }) { [weak self] (error) in
+                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+            }
+        }
+    }
+    
+    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], id: Int64) {
+        if let items = items as? [Item] {
+            PlacesService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                self?.output.asyncOperationSucces()
+                
+                DispatchQueue.main.async {
+                    if let output = self?.output as? BaseItemInputPassingProtocol {
+                        output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
+                    }
+                }
+            }) { [weak self] (error) in
+                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+            }
+        }
+    }
+    
+}
