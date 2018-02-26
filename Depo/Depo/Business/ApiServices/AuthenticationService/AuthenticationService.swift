@@ -332,6 +332,7 @@ class AuthenticationService: BaseRequestService {
             CoreDataStack.default.clearDataBase()
             FreeAppSpace.default.clear()
             CardsManager.default.stopAllOperations()
+            CardsManager.default.clear()
             self.player.stop()
             self.cancellAllRequests()
             success?()

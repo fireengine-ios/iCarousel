@@ -44,11 +44,16 @@ class CardsManager: NSObject {
     private var foloversArray = [CardsManagerViewProtocol]()
     private var progresForOperation = [OperationType: Progress]()
     private var homeCardsObjects = [HomeCardResponse]()
+    private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice : [OperationType]{
         get{
             return [.upload, .sync, .download, .prepareToAutoSync, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
         }
+    }
+    
+    func clear(){
+        deletedCards.removeAll()
     }
     
     //MARK: registration view
@@ -114,6 +119,10 @@ class CardsManager: NSObject {
             if (!self.canShowPopUpByDepends(type: type)){
                 return
             }
+            if self.deletedCards.contains(type){
+                return
+            }
+            
             self.hidePopUpsByDepends(type: type)
             
             self.setProgressForOperationWith(type: type, allOperations: allOperations ?? 0, completedOperations: completedOperations ?? 0)
@@ -158,6 +167,10 @@ class CardsManager: NSObject {
     func stopOperationWithType(type: OperationType){
         
         print("operation stopped ", type.rawValue)
+        
+        if type == .freeAppSpace || type == .freeAppSpaceLocalWarning {
+            deletedCards.insert(type)
+        }
         
         DispatchQueue.main.async {
             self.progresForOperation[type] = nil
