@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FileInfoViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FileInfoViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="durationH" destination="OP5-ta-oD6" id="ppW-QC-IV5"/>
                 <outlet property="durationLabel" destination="Sws-0u-8c8" id="Wwj-ai-7tj"/>
@@ -180,6 +181,7 @@
                 <constraint firstAttribute="trailing" secondItem="4aH-FR-8Sf" secondAttribute="trailing" constant="22" id="NRF-jS-Xkd"/>
                 <constraint firstItem="77o-rW-aKy" firstAttribute="top" secondItem="kIx-nZ-QgV" secondAttribute="bottom" constant="16" id="NYq-2Y-zwO"/>
                 <constraint firstItem="Sws-0u-8c8" firstAttribute="top" secondItem="6gm-iK-w9c" secondAttribute="bottom" id="OIE-vR-Hhh"/>
+                <constraint firstItem="kIx-nZ-QgV" firstAttribute="top" secondItem="miw-2C-Mdw" secondAttribute="top" constant="66" id="Pwz-MX-X65"/>
                 <constraint firstItem="Of7-IW-hVl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="7" id="Qat-0l-qsy"/>
                 <constraint firstAttribute="trailing" secondItem="6gm-iK-w9c" secondAttribute="trailing" constant="22" id="SZ5-he-J40"/>
                 <constraint firstAttribute="trailing" secondItem="abs-2N-74x" secondAttribute="trailing" id="SiO-0z-nRm"/>
@@ -189,7 +191,6 @@
                 <constraint firstItem="4aH-FR-8Sf" firstAttribute="top" secondItem="Sws-0u-8c8" secondAttribute="bottom" id="YTF-o1-RrV"/>
                 <constraint firstItem="hem-zh-lNu" firstAttribute="top" secondItem="77o-rW-aKy" secondAttribute="bottom" constant="12" id="Ybz-C7-BPK"/>
                 <constraint firstItem="qsp-jh-5I9" firstAttribute="top" secondItem="zZh-Wh-hzn" secondAttribute="bottom" constant="29" id="Ye6-f0-nFG"/>
-                <constraint firstItem="kIx-nZ-QgV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="86" id="cn9-IO-70k"/>
                 <constraint firstItem="4t8-mh-2vG" firstAttribute="width" secondItem="VnX-Ji-QDm" secondAttribute="width" id="d7M-r3-Xyj"/>
                 <constraint firstItem="6gm-iK-w9c" firstAttribute="leading" secondItem="qsp-jh-5I9" secondAttribute="trailing" id="erM-Rm-WzX"/>
                 <constraint firstItem="boz-R0-aEv" firstAttribute="width" secondItem="m5X-lA-kgv" secondAttribute="width" id="eza-kk-XcH"/>
@@ -212,6 +213,7 @@
                 <constraint firstAttribute="trailing" secondItem="zZh-Wh-hzn" secondAttribute="trailing" constant="22" id="yyj-Gb-YTk"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <viewLayoutGuide key="safeArea" id="miw-2C-Mdw"/>
             <point key="canvasLocation" x="25.5" y="51.5"/>
         </view>
     </objects>
