@@ -237,6 +237,10 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func setupInitialState() { }
     
     func onItemSelected(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
+        if items.isEmpty {
+            return
+        }
+        
         let item = items[index]
         if item.isLocalItem && item.fileType == .image {
             setThreeDotsMenu(active: false)
