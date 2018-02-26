@@ -2794,6 +2794,9 @@
 		CE52011E1FB4348900C11DD0 /* ActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */; };
 		CE57DFA81FDE663C0065B688 /* DarkPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57DFA61FDE663C0065B688 /* DarkPopUpController.swift */; };
 		CE57DFA91FDE663C0065B688 /* DarkPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57DFA71FDE663C0065B688 /* DarkPopUpController.xib */; };
+		CE58FAF220444493007F3F54 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAF120444493007F3F54 /* ShareViewController.swift */; };
+		CE58FAF520444493007F3F54 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE58FAF320444493007F3F54 /* MainInterface.storyboard */; };
+		CE58FAF920444493007F3F54 /* LifeboxShared.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
 		CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
@@ -3087,6 +3090,13 @@
 			remoteGlobalIDString = B54BFF2F202B20250018AF82;
 			remoteInfo = "autosync-widget";
 		};
+		CE58FAF720444493007F3F54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE58FAEE20444492007F3F54;
+			remoteInfo = LifeboxShared;
+		};
 		CE79E4AA1F695DA200C1F151 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -3114,6 +3124,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				B54BFF3B202B20250018AF82 /* autosync-widget.appex in Embed App Extensions */,
+				CE58FAF920444493007F3F54 /* LifeboxShared.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4721,6 +4732,10 @@
 		CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		CE57DFA61FDE663C0065B688 /* DarkPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkPopUpController.swift; sourceTree = "<group>"; };
 		CE57DFA71FDE663C0065B688 /* DarkPopUpController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkPopUpController.xib; sourceTree = "<group>"; };
+		CE58FAEF20444492007F3F54 /* LifeboxShared.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxShared.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE58FAF120444493007F3F54 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		CE58FAF420444493007F3F54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		CE58FAF620444493007F3F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardsService.swift; sourceTree = "<group>"; };
 		CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailCell.swift; sourceTree = "<group>"; };
 		CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoVideoDetailCell.xib; sourceTree = "<group>"; };
@@ -5084,6 +5099,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE58FAEC20444492007F3F54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE79E4A21F695DA200C1F151 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -5101,6 +5123,7 @@
 				CE79E4A61F695DA200C1F151 /* Depo_LifeTechUITests */,
 				B54BFF4A202C734C0018AF82 /* Shared */,
 				B54BFF32202B20250018AF82 /* autosync-widget */,
+				CE58FAF020444493007F3F54 /* LifeboxShared */,
 				051E1DF519CAC2F900FD1E03 /* Frameworks */,
 				051E1DF419CAC2F900FD1E03 /* Products */,
 				FA9ABBCB19DCF3FFE7B413C8 /* Pods */,
@@ -5115,6 +5138,7 @@
 				CE79E4A51F695DA200C1F151 /* Depo_LifeTechUITests.xctest */,
 				B54BFF30202B20250018AF82 /* autosync-widget.appex */,
 				8C0E907E1FDEBE0000789C91 /* lifebox.app */,
+				CE58FAEF20444492007F3F54 /* LifeboxShared.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -9797,6 +9821,16 @@
 			path = DarkPopUp;
 			sourceTree = "<group>";
 		};
+		CE58FAF020444493007F3F54 /* LifeboxShared */ = {
+			isa = PBXGroup;
+			children = (
+				CE58FAF120444493007F3F54 /* ShareViewController.swift */,
+				CE58FAF320444493007F3F54 /* MainInterface.storyboard */,
+				CE58FAF620444493007F3F54 /* Info.plist */,
+			);
+			path = LifeboxShared;
+			sourceTree = "<group>";
+		};
 		CE6DE7421FCBE84000C23CBD /* Socials */ = {
 			isa = PBXGroup;
 			children = (
@@ -11021,11 +11055,29 @@
 			);
 			dependencies = (
 				B5E1D981202DB4800022F0E8 /* PBXTargetDependency */,
+				CE58FAF820444493007F3F54 /* PBXTargetDependency */,
 			);
 			name = Depo_LifeTech;
 			productName = Depo;
 			productReference = CE51B0011EF90853005DCEE0 /* lifebox.app */;
 			productType = "com.apple.product-type.application";
+		};
+		CE58FAEE20444492007F3F54 /* LifeboxShared */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE58FAFE20444493007F3F54 /* Build configuration list for PBXNativeTarget "LifeboxShared" */;
+			buildPhases = (
+				CE58FAEB20444492007F3F54 /* Sources */,
+				CE58FAEC20444492007F3F54 /* Frameworks */,
+				CE58FAED20444492007F3F54 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LifeboxShared;
+			productName = LifeboxShared;
+			productReference = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		CE79E4A41F695DA200C1F151 /* Depo_LifeTechUITests */ = {
 			isa = PBXNativeTarget;
@@ -11086,6 +11138,11 @@
 							};
 						};
 					};
+					CE58FAEE20444492007F3F54 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = 7A7F3AW7RP;
+						ProvisioningStyle = Automatic;
+					};
 					CE79E4A41F695DA200C1F151 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 7A7F3AW7RP;
@@ -11130,6 +11187,7 @@
 				CE79E4A41F695DA200C1F151 /* Depo_LifeTechUITests */,
 				8C0E8C611FDEBDFF00789C91 /* TC_Depo_LifeTech */,
 				B54BFF2F202B20250018AF82 /* autosync-widget */,
+				CE58FAEE20444492007F3F54 /* LifeboxShared */,
 			);
 		};
 /* End PBXProject section */
@@ -12228,6 +12286,14 @@
 				8C06AED02008AD70003D8E05 /* beyaz_cerceve@2x.png in Resources */,
 				8C06B0F02008AD72003D8E05 /* serbest_cizgi@3x.png in Resources */,
 				7C66E8B41F979C6800D98F27 /* CreateStoryPreviewViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE58FAED20444492007F3F54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE58FAF520444493007F3F54 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14465,6 +14531,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE58FAEB20444492007F3F54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE58FAF220444493007F3F54 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE79E4A11F695DA200C1F151 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -14480,6 +14554,11 @@
 			isa = PBXTargetDependency;
 			target = B54BFF2F202B20250018AF82 /* autosync-widget */;
 			targetProxy = B5E1D980202DB4800022F0E8 /* PBXContainerItemProxy */;
+		};
+		CE58FAF820444493007F3F54 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE58FAEE20444492007F3F54 /* LifeboxShared */;
+			targetProxy = CE58FAF720444493007F3F54 /* PBXContainerItemProxy */;
 		};
 		CE79E4AB1F695DA200C1F151 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -14541,6 +14620,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				B54BFF36202B20250018AF82 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		CE58FAF320444493007F3F54 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE58FAF420444493007F3F54 /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -15278,6 +15365,115 @@
 			};
 			name = Enterprise;
 		};
+		CE58FAFA20444493007F3F54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxShared/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxShared;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE58FAFB20444493007F3F54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxShared/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxShared;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CE58FAFC20444493007F3F54 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxShared/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxShared;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AppStore;
+		};
+		CE58FAFD20444493007F3F54 /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxShared/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxShared;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Enterprise;
+		};
 		CE79E4AD1F695DA200C1F151 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -15418,6 +15614,17 @@
 				CE51AFFE1EF90853005DCEE0 /* Release */,
 				CE51AFFF1EF90853005DCEE0 /* AppStore */,
 				CE51B0001EF90853005DCEE0 /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE58FAFE20444493007F3F54 /* Build configuration list for PBXNativeTarget "LifeboxShared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE58FAFA20444493007F3F54 /* Debug */,
+				CE58FAFB20444493007F3F54 /* Release */,
+				CE58FAFC20444493007F3F54 /* AppStore */,
+				CE58FAFD20444493007F3F54 /* Enterprise */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
