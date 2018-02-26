@@ -10,6 +10,12 @@ import UIKit
 
 class CreateStoryPhotoSelectionViewController: BaseFilesGreedViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        MenloworksTagsService.shared.onCreateStoryPageOpen()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         configurateNavigationBar()
         configurateViewForPopUp()

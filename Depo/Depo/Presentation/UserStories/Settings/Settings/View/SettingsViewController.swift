@@ -57,6 +57,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         userInfoSubView.actionsDelegate = self
         output.viewIsReady()
         setupVersionLabel()
+        
+        MenloworksTagsService.shared.onPreferencesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {

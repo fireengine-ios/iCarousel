@@ -43,8 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = RouterVC().vcForCurrentState()
         window?.makeKeyAndVisible()
         
-        
-        
+
         Fabric.with([Crashlytics.self])
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -56,6 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }()
         let logPath: NSURL = documentDirectory.appendingPathComponent("app.log")! as NSURL
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: logPath, fileLevel: .debug)
+        
+        MenloworksTagsService.shared.onFirstLaunch()
+        MenloworksTagsService.shared.passcodeStatus(!passcodeStorage.isEmpty)
         
         return true
     }

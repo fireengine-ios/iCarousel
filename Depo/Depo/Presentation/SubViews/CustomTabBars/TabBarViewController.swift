@@ -536,6 +536,19 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeButtonsAppearance(toHidden: true, withAnimation: true, forButtons: buttonsArray)
     }
     
+    fileprivate func log(for index: TabScreenIndex) {
+        switch index {
+        case .photosScreenIndex:
+            MenloworksTagsService.shared.onPhotosAndVideosOpen ()
+        case .musicScreenIndex:
+            MenloworksTagsService.shared.onMusicOpen()
+        case .documentsScreenIndex:
+            MenloworksTagsService.shared.onDocumentsOpen()
+        default:
+            break
+        }
+    }
+    
     private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool, forButtons buttons:[SubPlussButtonView]) {
         if buttons.count == 0 {
             return
@@ -567,6 +580,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             }
             
             selectedIndex = tabbarSelectedIndex
+            
+            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
+                log(for: tabScreenIndex)
+            }
         }
     }
 }

@@ -7,6 +7,13 @@
 //
 
 class MenloworksTags {
+    
+    class Firstsession: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstsession)
+        }
+    }
+    
     class Tutorial: MenloworksTag {
         init() {
             super.init(name: NameConstants.tutorial)
@@ -58,6 +65,156 @@ class MenloworksTags {
     class SignUpCompleted: MenloworksTag {
         init() {
             super.init(name: NameConstants.signupCompleted)
+        }
+    }
+    
+    class AllFilesOpen: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.allFilesOpen)
+        }
+    }
+    
+    class PhotosAndVideosOpen: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.photosAndVideosOpen)
+        }
+    }
+    
+    class MusicOpen: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.musicOpen)
+        }
+    }
+    
+    class DocumentsOpen: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.documentsOpen)
+        }
+    }
+    
+    class ContactSyncPageOpen: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.documentsOpen)
+        }
+    }
+
+    class CreateStoryPageOpen: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.storyPageOpen)
+        }
+    }
+    
+    class PreferencesOpen: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.preferencesOpen)
+        }
+    }
+    
+    class PackagesOpen: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.packagesOpen)
+        }
+    }
+    
+    class AutoSyncVideosViaWifi: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.autoSyncVideosViaWifi)
+        }
+    }
+    
+    class AutoSyncVideosViaLte: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.autoSyncVideosViaLte)
+        }
+    }
+    
+    class AutoSyncPhotosViaWifi: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.autoSyncPhotosViaWifi)
+        }
+    }
+    
+    class AutoSyncPhotosViaLte: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.autoSyncPhotosViaLte)
+        }
+    }
+    
+    class ContactUploaded: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.contactUploaded)
+        }
+    }
+    
+    class ContactDownloaded: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.contactDownloaded)
+        }
+    }
+    
+    class EditClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.photoEdit)
+        }
+    }
+    
+    class VideoDisplayed: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.videoDisplayed)
+        }
+    }
+    
+    class StoryCreated: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.storyCreated)
+        }
+    }
+    
+    class RemoveFromAlbumClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.removeFromAlbumClicked)
+        }
+    }
+    
+    class PrintClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.cellographClicked)
+        }
+    }
+    
+    class SyncClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.syncClicked)
+        }
+    }
+    
+    class DownloadClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.downloadClicked)
+        }
+    }
+    
+    class DeleteClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.deleteClicked)
+        }
+    }
+    
+    class ShareClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.shareClicked)
+        }
+    }
+    
+    class FavoritesOpen: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.favoritesClicked)
+        }
+    }
+    
+    class SearchOpen: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.search)
         }
     }
     

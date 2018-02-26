@@ -196,7 +196,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .edit:
                 action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                    
                     UIApplication.topController()?.showSpiner()
                     self.interactor.edit(item: currentItems, complition: {
                         UIApplication.topController()?.hideSpiner()
@@ -204,11 +203,13 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .download:
                 action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
+                    MenloworksTagsService.shared.onDownloadClicked()
                     self.interactor.download(item: currentItems)
                     self.basePassingPresenter?.stopModeSelected()
                 })
             case .delete:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                    MenloworksTagsService.shared.onDeleteClicked()
                     self.interactor.delete(item: currentItems)
                     self.basePassingPresenter?.stopModeSelected()
                 })
@@ -218,6 +219,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .share:
                 action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
+                    MenloworksTagsService.shared.onShareClicked()
                     self.interactor.share(item: currentItems, sourceRect: nil)
                 })
             //Photos and albumbs
@@ -239,6 +241,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .shareAlbum:
                 action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
+                    MenloworksTagsService.shared.onShareClicked()
                     self.interactor.shareAlbum(items: currentItems)
                 })
             case .makeAlbumCover:
@@ -247,6 +250,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .removeFromAlbum:
                 action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
+                    MenloworksTagsService.shared.onRemoveFromAlbumClicked()
                     self.interactor.removeFromAlbum(items: currentItems)
                     self.basePassingPresenter?.stopModeSelected()
                 })
@@ -325,6 +329,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .print:
                 action = UIAlertAction(title: "Print", style: .default, handler: { _ in
+                    MenloworksTagsService.shared.onPrintClicked()
                     self.basePassingPresenter?.printSelected()
                 })
             case .rename:
@@ -333,6 +338,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .completelyDeleteAlbums:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                    MenloworksTagsService.shared.onDeleteClicked()
                     self.interactor.completelyDelete(albums: currentItems)
                 })
             case .removeAlbum:
@@ -346,10 +352,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                     let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects)
                     action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
+                        MenloworksTagsService.shared.onDeleteClicked()
                         self.interactor.deleteDeviceOriginal(items: localDuplicates)
                     })
                 }else{
                     action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
+                        MenloworksTagsService.shared.onDeleteClicked()
                         self.interactor.deleteDeviceOriginal(items: currentItems)
                     })
                 }

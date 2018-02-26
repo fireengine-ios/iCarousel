@@ -34,6 +34,8 @@ class PackagesViewController: UIViewController {
         promoView.deleagte = self
         setupCollectionView()
         output.viewIsReady()
+        
+        MenloworksTagsService.shared.onPackagesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
