@@ -89,6 +89,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var needShowProgressInCell: Bool = false
     var needShowCloudIcon: Bool = true
+    var needShow3DotsInCell: Bool = true
     
     var parentUUID: String?
     
@@ -809,7 +810,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 cell.cloudStatusImage.isHidden = true
             }
         }
-        
+
         return  cell
     }
     
@@ -865,6 +866,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
+        if let cell = cell as? BasicCollectionMultiFileCell {
+            cell.moreButton.isHidden = !needShow3DotsInCell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
