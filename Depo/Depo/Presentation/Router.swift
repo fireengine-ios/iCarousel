@@ -184,6 +184,18 @@ class RouterVC: NSObject {
         }
     }
     
+    func showSpiner(){
+        if let lastViewController = getViewControllerForPresent(){
+            lastViewController.showSpinerIncludeNavigatinBar()
+        }
+    }
+    
+    func hideSpiner(){
+        if let lastViewController = getViewControllerForPresent(){
+            lastViewController.hideSpinerIncludeNavigatinBar()
+        }
+    }
+    
     func isOnFavoritesView() -> Bool {
         if let tabBarVc = tabBarVC {
             if let contr = tabBarVc.viewControllers.last as? BaseFilesGreedViewController{
