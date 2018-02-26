@@ -400,10 +400,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             
             self.view.layoutIfNeeded()
             self.collectionView.contentInset = UIEdgeInsets(top: h + sliderH, left: 0, bottom: 25, right: 0)
-            let point = CGPoint(x: 0, y: -h - sliderH)
-            self.collectionView.setContentOffset(point, animated: true)
-            
-            
         }
         
         refresherY = -calculatedH + 30
