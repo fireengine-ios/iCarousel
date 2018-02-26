@@ -10,7 +10,7 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
     
     let router = RouterVC()
     
-    func onItemSelected(_ item: SliderItem) {
+    func onItemSelected(_ item: SliderItem, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
         guard let type = item.type else {
             return
         }
@@ -18,7 +18,7 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
         switch type {
         case .albums: goToAlbumListView()
         case .story: goToStoryListView()
-        case .people: goToPeopleListView()
+        case .people: goToPeopleListView(moduleOutput)
         case .things: goToThingListView()
         case .places: goToPlaceListView()
         case .album:
@@ -48,8 +48,8 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
-    private func goToPeopleListView() {
-        let controller = router.peopleListController()
+    private func goToPeopleListView(_ moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
+        let controller = router.peopleListController(moduleOutput: moduleOutput)
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
