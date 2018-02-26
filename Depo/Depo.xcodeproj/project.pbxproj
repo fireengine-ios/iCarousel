@@ -26,6 +26,7 @@
 		0E221DE499E4E51040E5550A /* SettingsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFF44F88C9F0080E5FADF47 /* SettingsRouterInput.swift */; };
 		124B2508A085C281AB2765AF /* SelectNameViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */; };
 		1356E354CDA8AA7567B09334 /* UserInfoSubViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */; };
+		161684F8B98A4DD3AC164E2F /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */; };
 		1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */; };
 		205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */; };
 		2108C2EF8209265F3A1A5B4D /* SelectNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */; };
@@ -2797,6 +2798,10 @@
 		CE58FAF220444493007F3F54 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAF120444493007F3F54 /* ShareViewController.swift */; };
 		CE58FAF520444493007F3F54 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE58FAF320444493007F3F54 /* MainInterface.storyboard */; };
 		CE58FAF920444493007F3F54 /* LifeboxShared.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CE58FB0020444525007F3F54 /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
+		CE58FB0120444525007F3F54 /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
+		CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
+		CE58FB03204445E0007F3F54 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
 		CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
 		CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
@@ -3199,6 +3204,8 @@
 		0F26225A3A888399391D9BFF /* OTPViewInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewInteractor.swift; sourceTree = "<group>"; };
 		0F6EB6455E73609F1B5249AF /* UploadFilesSelectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionViewController.swift; sourceTree = "<group>"; };
 		10F040044EA7ABA90A56F70F /* BaseFilesGreedRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedRouterInput.swift; sourceTree = "<group>"; };
+		116F0D4A7EDE2EA38E1B57BC /* Pods-LifeboxShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.appstore.xcconfig"; sourceTree = "<group>"; };
+		14B63501F537CEC2931A734D /* Pods-LifeboxShared.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.enterprise.xcconfig"; sourceTree = "<group>"; };
 		14DC6D877F96EAC0DCE038CA /* SyncContactsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewController.swift; sourceTree = "<group>"; };
 		16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInput.swift; sourceTree = "<group>"; };
 		1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouter.swift; sourceTree = "<group>"; };
@@ -3237,6 +3244,7 @@
 		30889CD8C0EE339E19DF61B6 /* ActivityTimelineInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInteractorOutput.swift; sourceTree = "<group>"; };
 		32FC300467ABAFFB82063918 /* PhotoVideoDetailConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailConfigurator.swift; sourceTree = "<group>"; };
 		3309397E1E165E22E97EC338 /* ForgotPasswordInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractor.swift; sourceTree = "<group>"; };
+		332BC9156196CAFE4CD77111 /* Pods-LifeboxShared.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.release.xcconfig"; sourceTree = "<group>"; };
 		337DC5A97025ED1E39054877 /* LBAlbumLikePreviewSliderViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderViewInput.swift; sourceTree = "<group>"; };
 		33958523B000589CFD45EB83 /* Pods-TC_Depo_LifeTech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.release.xcconfig"; path = "Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.release.xcconfig"; sourceTree = "<group>"; };
 		3401A289CD07E14553A6CB87 /* OTPViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
@@ -4528,6 +4536,7 @@
 		94E5A70D0BAB72F0D8679BB8 /* TermsAndServicesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractor.swift; sourceTree = "<group>"; };
 		95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorInput.swift; sourceTree = "<group>"; };
 		96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorInput.swift; sourceTree = "<group>"; };
+		9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9807260C203468D9004E1505 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableViewCell.swift; sourceTree = "<group>"; };
@@ -4605,6 +4614,7 @@
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
 		C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
 		C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInitializer.swift; sourceTree = "<group>"; };
+		C7EA8E62DD494F5240389C2E /* Pods-LifeboxShared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.debug.xcconfig"; sourceTree = "<group>"; };
 		C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA3578DCC250EB72513FBF71 /* SyncContactsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewOutput.swift; sourceTree = "<group>"; };
 		CB4BCE425BAA49DA8EBEEA39 /* SelectFolderInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderInitializer.swift; sourceTree = "<group>"; };
@@ -4736,6 +4746,7 @@
 		CE58FAF120444493007F3F54 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		CE58FAF420444493007F3F54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		CE58FAF620444493007F3F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE58FAFF20444524007F3F54 /* SharedFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFactory.swift; sourceTree = "<group>"; };
 		CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardsService.swift; sourceTree = "<group>"; };
 		CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailCell.swift; sourceTree = "<group>"; };
 		CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoVideoDetailCell.xib; sourceTree = "<group>"; };
@@ -5103,6 +5114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				161684F8B98A4DD3AC164E2F /* Pods_LifeboxShared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5178,6 +5190,7 @@
 				C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */,
 				71B96A7DFCCC030C408B1635 /* Pods_TC_Depo_LifeTech.framework */,
 				7EA832A180EC983270F5B10A /* Pods_autosync_widget.framework */,
+				9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -9386,6 +9399,7 @@
 			isa = PBXGroup;
 			children = (
 				CEAD6BDD1F94EF320085FF30 /* Factory.swift */,
+				CE58FAFF20444524007F3F54 /* SharedFactory.swift */,
 				CE3AA9831F4D648C000157AF /* CoreData */,
 				7C3A74371F04F47500124DF5 /* Models */,
 				CE51A0C61EF8ED38005DCEE0 /* ApiServices */,
@@ -10988,6 +11002,10 @@
 				2EDC08542508B91094154180 /* Pods-Depo_LifeTech-autosync-widget.release.xcconfig */,
 				5AAEBE1A76149DDF9869754A /* Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig */,
 				A7B1B7B35486CF4F7EA97FCD /* Pods-Depo_LifeTech-autosync-widget.enterprise.xcconfig */,
+				C7EA8E62DD494F5240389C2E /* Pods-LifeboxShared.debug.xcconfig */,
+				332BC9156196CAFE4CD77111 /* Pods-LifeboxShared.release.xcconfig */,
+				116F0D4A7EDE2EA38E1B57BC /* Pods-LifeboxShared.appstore.xcconfig */,
+				14B63501F537CEC2931A734D /* Pods-LifeboxShared.enterprise.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -11066,9 +11084,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE58FAFE20444493007F3F54 /* Build configuration list for PBXNativeTarget "LifeboxShared" */;
 			buildPhases = (
+				7745E7DF35170131924746B7 /* [CP] Check Pods Manifest.lock */,
 				CE58FAEB20444492007F3F54 /* Sources */,
 				CE58FAEC20444492007F3F54 /* Frameworks */,
 				CE58FAED20444492007F3F54 /* Resources */,
+				D87015A847755B08A12DE815 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -12358,6 +12378,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7745E7DF35170131924746B7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeboxShared-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -12558,6 +12596,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#./unused xcode\n#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00";
+		};
+		D87015A847755B08A12DE815 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		F3E6DEE177E5F63A19094B25 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12960,6 +13013,7 @@
 				8C8711701FDFF35800F66396 /* OperationProgressService.swift in Sources */,
 				8C0E8DC71FDEBDFF00789C91 /* TermsAndServicesViewInput.swift in Sources */,
 				8C0E8DC81FDEBDFF00789C91 /* CreateStoryPreviewViewIO.swift in Sources */,
+				CE58FB0120444525007F3F54 /* SharedFactory.swift in Sources */,
 				8C0E8DC91FDEBDFF00789C91 /* WhiteButtonWithRoundedCorner.swift in Sources */,
 				8C0E8DCA1FDEBDFF00789C91 /* AlbumService.swift in Sources */,
 				8C0E8DCB1FDEBDFF00789C91 /* TermsAndServicesViewOutput.swift in Sources */,
@@ -13806,6 +13860,7 @@
 				7CAC23C21F4ADC3900607660 /* RemoteSearchService.swift in Sources */,
 				7C355E611F01226B003B004C /* BaseCollectionViewDataSource.swift in Sources */,
 				7C3A74521F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
+				CE58FB0020444525007F3F54 /* SharedFactory.swift in Sources */,
 				CEAE3FDD1EFD500B00A405B2 /* HomeViewTopView.swift in Sources */,
 				CE51AC351EF90853005DCEE0 /* CurioDB.m in Sources */,
 				CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */,
@@ -14536,6 +14591,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE58FAF220444493007F3F54 /* ShareViewController.swift in Sources */,
+				CE58FB03204445E0007F3F54 /* TokenStorage.swift in Sources */,
+				CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -15367,6 +15424,7 @@
 		};
 		CE58FAFA20444493007F3F54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7EA8E62DD494F5240389C2E /* Pods-LifeboxShared.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15395,6 +15453,7 @@
 		};
 		CE58FAFB20444493007F3F54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 332BC9156196CAFE4CD77111 /* Pods-LifeboxShared.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15422,6 +15481,7 @@
 		};
 		CE58FAFC20444493007F3F54 /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 116F0D4A7EDE2EA38E1B57BC /* Pods-LifeboxShared.appstore.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15449,6 +15509,7 @@
 		};
 		CE58FAFD20444493007F3F54 /* Enterprise */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14B63501F537CEC2931A734D /* Pods-LifeboxShared.enterprise.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
