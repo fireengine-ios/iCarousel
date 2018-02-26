@@ -85,7 +85,8 @@ extension ServerStatusError: LocalizedError {
             return TextConstants.EMAIL_IS_INVALID
             
         case ErrorKeys.EMAIL_IS_ALREADY_EXIST:
-            return TextConstants.EMAIL_IS_ALREADY_EXIST
+            return TextConstants.errorExistEmail
+            //return TextConstants.EMAIL_IS_ALREADY_EXIST
             
         default:
             return status
