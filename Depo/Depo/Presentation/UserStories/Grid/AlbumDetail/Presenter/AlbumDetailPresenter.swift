@@ -72,4 +72,31 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
             interactor.updateCoverPhotoIfNeeded()
         }
     }
+    
+    override func viewAppearanceChanged(asGrid: Bool) {
+        log.debug("AlbumDetailPresenter viewAppearanceChanged")
+        
+        if  asGrid {
+            log.debug("AlbumDetailPresenter viewAppearanceChanged Grid")
+            
+            dataSource.updateDisplayngType(type: .greed)
+            type = .List
+        } else {
+            log.debug("AlbumDetailPresenter viewAppearanceChanged List")
+            
+            dataSource.updateDisplayngType(type: .list)
+            type = .Grid
+        }
+    }
+    
+    override func sortedPushed(with rule: SortedRules) {
+        log.debug("AlbumDetailPresenter sortedPushed")
+        
+        sortedRule = rule
+        view.changeSortingRepresentation(sortType: rule)
+        dataSource.currentSortType = rule
+        (rule == .sizeAZ || rule == .sizeZA) ? (dataSource.isHeaderless = true) : (dataSource.isHeaderless = false)
+        
+        reloadData()
+    }
 }
