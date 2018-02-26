@@ -20,6 +20,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     @IBOutlet weak var bacgroundImage: UIImageView!
     
     var fromSettings: Bool = false
+    var isFirstTime = true
     
     let dataSource = AutoSyncDataSource()
 
@@ -104,4 +105,24 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     func enableAutoSync() {
         output.enableAutoSync()
     }
+    
+    func mobileDataEnabledFor(model: AutoSyncModel) {
+        if fromSettings, isFirstTime{
+            isFirstTime = false
+            
+            let router = RouterVC()
+            let controller = PopUpController.with(title: TextConstants.autoSyncSyncOverTitle,
+                                                  message: TextConstants.autoSyncSyncOverMessage,
+                                                  image: .none,
+                                                  firstButtonTitle: TextConstants.cancel,
+                                                  secondButtonTitle: TextConstants.autoSyncSyncOverOn,
+                                                  firstAction: { vc in
+                                                    model.isSelected = false
+                                                    self.tableView.reloadData()
+                                                    vc.close()
+            })
+            router.presentViewController(controller: controller)
+        }
+    }
+    
 }
