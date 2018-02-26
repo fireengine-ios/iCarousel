@@ -19,10 +19,7 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
     }
     
     func goBack(navigationConroller: UINavigationController?){
-        guard let nController = navigationConroller else { //TODO: change to global router
-            return
-        }
-        nController.popViewController(animated: true)
+        navigationConroller?.dismiss(animated: true, completion: nil)
     }
     
 }
