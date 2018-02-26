@@ -10,13 +10,13 @@ import Foundation
 
 final class FaceImageItemsInitializer: NSObject {
 
-    class func initializePeopleController(with nibName:String) -> UIViewController {
+    class func initializePeopleController(with nibName:String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
         viewController.isCanChangeVisibility = true
     
         let configurator = FaceImageItemsConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: PeopleItemsService(requestSize: 100), title: TextConstants.myStreamPeopleTitle)
+        configurator.configure(viewController: viewController, remoteServices: PeopleItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamPeopleTitle, moduleOutput:  moduleOutput)
         
         return viewController
     }
@@ -26,7 +26,7 @@ final class FaceImageItemsInitializer: NSObject {
         
         let configurator = FaceImageItemsConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: ThingsItemsService(requestSize: 100), title: TextConstants.myStreamThingsTitle)
+        configurator.configure(viewController: viewController, remoteServices: ThingsItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamThingsTitle)
         
         return viewController
     }
@@ -36,7 +36,7 @@ final class FaceImageItemsInitializer: NSObject {
         
         let configurator = FaceImageItemsConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: PlacesItemsService(requestSize: 100), title: TextConstants.myStreamPlacesTitle)
+        configurator.configure(viewController: viewController, remoteServices: PlacesItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamPlacesTitle)
         
         return viewController
     }

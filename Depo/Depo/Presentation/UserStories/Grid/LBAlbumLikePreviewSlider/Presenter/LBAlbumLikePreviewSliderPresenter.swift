@@ -61,6 +61,6 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
 extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderDataSourceDelegate {
     
     func onItemSelected(item: SliderItem) {
-        router.onItemSelected(item)
+        router.onItemSelected(item, moduleOutput: self)
     }
 }
