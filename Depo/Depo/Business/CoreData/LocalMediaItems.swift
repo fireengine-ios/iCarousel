@@ -121,7 +121,7 @@ extension CoreDataStack {
 
     }
 //
-    func getLocalFilesPhotoVideoPage(filesType: FileType, sortType: SortedRules,
+    func getLocalFilesForPhotoVideoPage(filesType: FileType, sortType: SortedRules,
                        pageUUIDS: [String], pageMD5s: [String],
                        lastRemoteItem: Item?, paginationEnd: Bool,
                        filesCallBack: @escaping LocalFilesCallBack ) {
