@@ -9,19 +9,25 @@
 import Foundation
 
 final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
-    
+
     weak var albumSliderModuleOutput: LBAlbumLikePreviewSliderModuleInput?
+    
+    var faceImageType: FaceImageType?
     
     private var isChangeVisibilityMode: Bool = false
     
     private var visibilityItems: [WrapData] = []
     private var allItmes: [WrapData] = []
     
-    override func viewIsReady(collectionView: UICollectionView) {
+    override func viewIsReady(collectionView: UICollectionView) {        
         super.viewIsReady(collectionView: collectionView)
         
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
         dataSource.isHeaderless = true
+        
+        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+            view.configurateUgglaView()
+        }
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
@@ -52,6 +58,19 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+            view.scrollViewDidScroll(scrollView: scrollView)
+        }
+    }
+    
+    private func hasUgglaLabel() -> Bool {
+        if let faceImageType = faceImageType, faceImageType == .people || faceImageType == .things {
+            return true
+        }
+        return false
+    }
     
     // MARK: -  Utility methods
     
