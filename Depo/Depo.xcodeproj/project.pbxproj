@@ -2523,6 +2523,11 @@
 		CE1049522035858500898879 /* UIWebView+Clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1049512035858500898879 /* UIWebView+Clear.swift */; };
 		CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1353342004F0F90004CBBE /* TextEnterController.swift */; };
 		CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1353382004F1530004CBBE /* TextEnterController.xib */; };
+		CE1458C62045617600812544 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
+		CE1458C72045618800812544 /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
+		CE1458C82045619500812544 /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33DFFE1F0296C000706C40 /* RequestHeader.swift */; };
+		CE1458C9204561CC00812544 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
+		CE1458CB2045633D00812544 /* ShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CA2045633D00812544 /* ShareConfigurator.swift */; };
 		CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
@@ -2810,6 +2815,8 @@
 		CE654FB120454AAD00232025 /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
 		CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		CE654FB520454B3900232025 /* UICollectionView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB420454B3900232025 /* UICollectionView+Layout.swift */; };
+		CE654FB62045613A00232025 /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
+		CE654FB72045613F00232025 /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
 		CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
 		CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */; };
@@ -4663,6 +4670,7 @@
 		CE1049512035858500898879 /* UIWebView+Clear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWebView+Clear.swift"; sourceTree = "<group>"; };
 		CE1353342004F0F90004CBBE /* TextEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterController.swift; sourceTree = "<group>"; };
 		CE1353382004F1530004CBBE /* TextEnterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextEnterController.xib; sourceTree = "<group>"; };
+		CE1458CA2045633D00812544 /* ShareConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareConfigurator.swift; sourceTree = "<group>"; };
 		CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
@@ -9304,6 +9312,26 @@
 			path = TextEnter;
 			sourceTree = "<group>";
 		};
+		CE1458CC2045645000812544 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CE58FAF320444493007F3F54 /* MainInterface.storyboard */,
+				CE58FAF120444493007F3F54 /* ShareViewController.swift */,
+				CEBDB1D820444D97007EE1AE /* ShareCustomizator.swift */,
+				CEBDB1E420452F6E007EE1AE /* ImageColCell.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CE1458CD2045645F00812544 /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				CE1458CA2045633D00812544 /* ShareConfigurator.swift */,
+				CE654FAE20454A4400232025 /* ShareData.swift */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
 		CE2469F31F3BF8F3008DF705 /* CreateStoryService */ = {
 			isa = PBXGroup;
 			children = (
@@ -9869,11 +9897,8 @@
 		CE58FAF020444493007F3F54 /* LifeboxShared */ = {
 			isa = PBXGroup;
 			children = (
-				CE58FAF320444493007F3F54 /* MainInterface.storyboard */,
-				CE58FAF120444493007F3F54 /* ShareViewController.swift */,
-				CEBDB1D820444D97007EE1AE /* ShareCustomizator.swift */,
-				CEBDB1E420452F6E007EE1AE /* ImageColCell.swift */,
-				CE654FAE20454A4400232025 /* ShareData.swift */,
+				CE1458CC2045645000812544 /* Presentation */,
+				CE1458CD2045645F00812544 /* Business */,
 				CE58FAF620444493007F3F54 /* Info.plist */,
 			);
 			path = LifeboxShared;
@@ -14639,14 +14664,21 @@
 				CE58FB03204445E0007F3F54 /* TokenStorage.swift in Sources */,
 				CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */,
 				CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */,
+				CE1458C72045618800812544 /* URL+Path.swift in Sources */,
+				CE1458C9204561CC00812544 /* Dictionary.swift in Sources */,
 				CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */,
 				CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */,
+				CE1458C62045617600812544 /* RouteRequests.swift in Sources */,
 				CE654FB520454B3900232025 /* UICollectionView+Layout.swift in Sources */,
 				CE654FAF20454A4400232025 /* ShareData.swift in Sources */,
+				CE654FB62045613A00232025 /* AuthorizationRepository.swift in Sources */,
+				CE1458CB2045633D00812544 /* ShareConfigurator.swift in Sources */,
+				CE1458C82045619500812544 /* RequestHeader.swift in Sources */,
 				CEBDB1D720444C73007EE1AE /* UIColor+Adjust.swift in Sources */,
 				CE654FB120454AAD00232025 /* URL+Video.swift in Sources */,
 				CEBDB1E520452F6E007EE1AE /* ImageColCell.swift in Sources */,
 				CEBDB1D920444D97007EE1AE /* ShareCustomizator.swift in Sources */,
+				CE654FB72045613F00232025 /* AuthorizationURLs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

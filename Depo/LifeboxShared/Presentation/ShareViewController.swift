@@ -8,27 +8,6 @@
 
 import UIKit
 import MobileCoreServices
-import Alamofire
-
-let factory: SharedFactory = FactoryBase()
-
-//final class ShareConfigurator {
-//    
-//    func setup() {
-//        let urls: AuthorizationURLs = AuthorizationURLsImp()
-//        let tokenStorage: TokenStorage = factory.resolve()
-//        
-//        var auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
-//        auth.refreshFailedHandler = { [weak self] in
-////            self?.dismiss(animated: true, completion: nil)
-//        }
-//        
-//        let sessionManager = SessionManager.default
-//        sessionManager.retrier = auth
-//        sessionManager.adapter = auth
-//    }
-//}
-
 
 /// example of types in Info.plist
 //
@@ -48,19 +27,23 @@ let factory: SharedFactory = FactoryBase()
 /// customize types for share extension
 /// https://pspdfkit.com/blog/2016/hiding-action-share-extensions-in-your-own-apps/
 /// https://stackoverflow.com/questions/46826806/ios-11-pdf-share-extension
+
 final class ShareViewController: UIViewController {
     
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var currentPhotoImageView: UIImageView!
     @IBOutlet private weak var currentNameLabel: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var uploadProgress: UIProgressView!
     
+    private let shareConfigurator = ShareConfigurator()
     private var sharedItems = [ShareData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSharedItems()
         
+        setupSharedItems()
+        shareConfigurator.setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,7 +53,6 @@ final class ShareViewController: UIViewController {
     
     @IBAction private func actionCancelButton(_ sender: UIButton) {
         animateDismiss()
-        
     }
     
     private func setupSharedItems() {
@@ -106,6 +88,7 @@ final class ShareViewController: UIViewController {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension ShareViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sharedItems.count
@@ -118,6 +101,7 @@ extension ShareViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - SharedItems
 extension ShareViewController {
     func getSharedItems(handler: @escaping ([ShareData]) -> Void) {
         

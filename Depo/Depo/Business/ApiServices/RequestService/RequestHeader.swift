@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias RequestHeaderParametrs = [String:String]
+
 struct HeaderConstant {
     
     static let Accept = "Accept"

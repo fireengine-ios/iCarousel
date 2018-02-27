@@ -8,7 +8,6 @@
 
 import Foundation
 
-typealias RequestHeaderParametrs = [String:String]
 typealias RequestResponse = (Data?, URLResponse?, Error?) -> Swift.Void
 typealias RequestFileDownloadResponse = (URL?, URLResponse?, Error?) -> Swift.Void
 typealias RequestFileUploadResponse =  (Data?, URLResponse?, Error?) -> Swift.Void

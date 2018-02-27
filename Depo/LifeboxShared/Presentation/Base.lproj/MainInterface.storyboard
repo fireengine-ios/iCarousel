@@ -193,6 +193,7 @@
                         <outlet property="containerView" destination="MFa-ng-Ixs" id="Ylg-YP-FvQ"/>
                         <outlet property="currentNameLabel" destination="hWc-SD-XbG" id="hCk-de-H1g"/>
                         <outlet property="currentPhotoImageView" destination="1t9-8h-hwr" id="pa5-cG-oEs"/>
+                        <outlet property="uploadProgress" destination="JbH-Rf-Mv4" id="aBy-Jm-Bgx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-Cv-SGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
