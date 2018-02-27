@@ -9,6 +9,13 @@
 import UIKit
 
 final class ShareCustomizator: NSObject {
+    
+    @IBOutlet private weak var mainView: UIView! {
+        didSet {
+            mainView.backgroundColor = ColorConstants.searchShadowColor
+        }
+    }
+    
     @IBOutlet private weak var cancelButton: UIButton! {
         didSet {
             cancelButton.isExclusiveTouch = true
@@ -18,6 +25,7 @@ final class ShareCustomizator: NSObject {
             cancelButton.setTitle("Cancel", for: .normal)
         }
     }
+    
     @IBOutlet private weak var uploadButton: UIButton! {
         didSet {
             uploadButton.isExclusiveTouch = true
@@ -27,14 +35,41 @@ final class ShareCustomizator: NSObject {
             uploadButton.setTitle("Upload", for: .normal)
         }
     }
+    
     @IBOutlet private weak var lineView: UIView! {
         didSet {
             lineView.backgroundColor = ColorConstants.blueColor
         }
     }
-    @IBOutlet private weak var mainView: UIView! {
+    
+    @IBOutlet private weak var currentNameLabel: UILabel! {
         didSet {
-            mainView.backgroundColor = ColorConstants.searchShadowColor
+            currentNameLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
+            currentNameLabel.textColor = ColorConstants.darkText
+            currentNameLabel.text = " "
+        }
+    }
+    
+    @IBOutlet private weak var collectionView: UICollectionView! {
+        didSet {
+            collectionView.showsVerticalScrollIndicator = false
+            collectionView.showsHorizontalScrollIndicator = false
+            collectionView.setLayout(itemSize: CGSize(width: 40, height: 40), lineSpacing: 1, itemSpacing: 0)
+        }
+    }
+    
+    @IBOutlet private weak var uploadProgress: UIProgressView! {
+        didSet {
+            uploadProgress.trackTintColor = ColorConstants.lightGrayColor
+            uploadProgress.progressTintColor = ColorConstants.greenColor
+        }
+    }
+    
+    @IBOutlet private weak var progressLabel: UILabel! {
+        didSet {
+            progressLabel.font = UIFont.TurkcellSaturaRegFont(size: 20)
+            progressLabel.textColor = ColorConstants.blueColor
+            progressLabel.text = "Uploading..."
         }
     }
 }

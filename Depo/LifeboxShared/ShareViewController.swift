@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Social
+import MobileCoreServices
 import Alamofire
 
 let factory: SharedFactory = FactoryBase()
@@ -29,47 +29,62 @@ let factory: SharedFactory = FactoryBase()
 //    }
 //}
 
-import MobileCoreServices
 
-open class ShareData {
-    let url: URL
-    
-    init(url: URL) {
-        self.url = url
-    }
-}
+/// example of types in Info.plist
+//
+//<key>NSExtensionAttributes</key>
+//<dict>
+//<key>NSExtensionActivationRule</key>
+//<dict>
+//<key>NSExtensionActivationSupportsFileWithMaxCount</key>
+//<integer>100</integer>
+//<key>NSExtensionActivationSupportsImageWithMaxCount</key>
+//<integer>100</integer>
+//<key>NSExtensionActivationSupportsMovieWithMaxCount</key>
+//<integer>100</integer>
+//</dict>
+//</dict>
 
-final class ShareImage: ShareData {
-    
-}
-final class ShareVideo: ShareData {
-    
-}
-
-
-//SLComposeServiceViewController
+/// customize types for share extension
+/// https://pspdfkit.com/blog/2016/hiding-action-share-extensions-in-your-own-apps/
+/// https://stackoverflow.com/questions/46826806/ios-11-pdf-share-extension
 final class ShareViewController: UIViewController {
     
+    @IBOutlet private weak var containerView: UIView!
+    @IBOutlet private weak var currentPhotoImageView: UIImageView!
+    @IBOutlet private weak var currentNameLabel: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet weak var containerView: UIView!
     
-    @IBAction func actionCancelButton(_ sender: UIButton) {
-        animateDismiss()
-    }
+    private var sharedItems = [ShareData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSharedItems()
         
-        getSharedItems { sharedItems in
-            print(sharedItems)
-            print()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         animateAppear()
+    }
+    
+    @IBAction private func actionCancelButton(_ sender: UIButton) {
+        animateDismiss()
+        
+    }
+    
+    private func setupSharedItems() {
+        DispatchQueue.global().async {
+            self.getSharedItems { sharedItems in
+                self.sharedItems = sharedItems
+                
+                DispatchQueue.main.async {
+                    self.currentNameLabel.text = sharedItems.first?.name
+                    self.currentPhotoImageView.image = sharedItems.first?.image
+                    self.collectionView.reloadData()
+                }
+            }
+        }
     }
     
     private func animateAppear() {
@@ -89,37 +104,23 @@ final class ShareViewController: UIViewController {
             self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
         })
     }
-    
-    //    override func isContentValid() -> Bool {
-    //        // Do validation of contentText and/or NSExtensionContext attachments here
-    //        return true
-    //    }
-    //
-    //    override func didSelectPost() {
-    //        // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
-    //    
-    //        // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
-    //        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
-    //    }
-    //
-    //    override func configurationItems() -> [Any]! {
-    //        // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
-    //        return []
-    //    }
-    
 }
 
 extension ShareViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return sharedItems.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeue(cell: ImageColCell.self, for: indexPath)
+        let image = sharedItems[indexPath.row].image
+        cell.setImage(image)
+        return cell
     }
 }
 
 extension ShareViewController {
     func getSharedItems(handler: @escaping ([ShareData]) -> Void) {
+        
         guard
             let inputItem = extensionContext?.inputItems.first as? NSExtensionItem,
             let attachments = inputItem.attachments as? [NSItemProvider]
@@ -127,15 +128,23 @@ extension ShareViewController {
             return
         }
         
+        /// type constatnts
+        let imageType = kUTTypeImage as String
+        let pdfType = kUTTypePDF as String
+        let dataType = "public.data"
+        let videoTypes = [kUTTypeMovie,
+                          kUTTypeVideo,
+                          kUTTypeMPEG,
+                          kUTTypeMPEG4,
+                          kUTTypeAVIMovie,
+                          kUTTypeQuickTimeMovie] as [String]
+        
         var shareItems: [ShareData] = []
         let group = DispatchGroup()
         
         attachmentsFor: for itemProvider in attachments {
             
-            let imageType = kUTTypeImage as String
-            let pdfType = kUTTypePDF as String
-            
-            /// IMAGE
+                /// IMAGE
             if itemProvider.hasItemConformingToTypeIdentifier(imageType) {
                 
                 group.enter()
@@ -164,8 +173,6 @@ extension ShareViewController {
             } else {
                 
                 /// VIDEO
-                let videoTypes = [kUTTypeMovie, kUTTypeVideo, kUTTypeMPEG, kUTTypeMPEG4, kUTTypeAVIMovie, kUTTypeQuickTimeMovie] as [String]
-                
                 for type in videoTypes {
                     if itemProvider.hasItemConformingToTypeIdentifier(type) {
                         
@@ -186,8 +193,6 @@ extension ShareViewController {
                 
                 /// if not any type try to take data
                 /// DATA 2
-                let dataType = "public.data"
-                
                 if itemProvider.hasItemConformingToTypeIdentifier(dataType) {
                     
                     group.enter()
