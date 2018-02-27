@@ -31,6 +31,15 @@ extension CoreDataStack {
             }
         }
     }
+    
+    func append(localMediaItems: [PHAsset], completion: @escaping ()->Void) {
+        let newBgcontext = self.newChildBackgroundContext
+        save(items: localMediaItems, context: newBgcontext, completion: {})
+    }
+    
+    func remove(localMediaItems: [PHAsset], completion: @escaping ()->Void) {
+        removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier })
+    }
 
     func insertFromGallery() {
         guard !inProcessAppendingLocalFiles else {
@@ -49,10 +58,11 @@ extension CoreDataStack {
         save(items: notSaved, context: newBgcontext) { [weak self] in
             print("All local files added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
+            NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
         }
     }
     
-    func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping ()->Void ) {
+    private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping ()->Void ) {
         guard !items.isEmpty else {
             completion()
             return
@@ -78,58 +88,6 @@ extension CoreDataStack {
         }
     }
     
-    
-//    func insertFromPhotoFramework(progress: AppendingLocaclItemsProgressCallback?,
-//                                  allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
-//        let localMediaStorage = LocalMediaStorage.default
-//        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
-//            guard accessGranted, let `self` = self,
-//                !self.inProcessAppendingLocalFiles else {
-//                return
-//            }
-//
-//            self.inProcessAppendingLocalFiles = true
-//
-//            let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
-//
-//            let newBgcontext = self.newChildBackgroundContext
-//            let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
-//
-//            let start = Date().timeIntervalSince1970
-//            var i = 0
-//            var addedObjects = [WrapData]()
-//
-//            let totalNotSavedItems = Float(notSaved.count)
-//            debugPrint("number of not saved  ", totalNotSavedItems)
-//
-//            notSaved.forEach {
-//                i += 1
-//                debugPrint("local ", i)
-//
-//                let wrapedItem =  WrapData(asset: $0)
-//                _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
-//
-//                if i % 10 == 0 {
-//                    self.saveDataForContext(context: newBgcontext, saveAndWait: true)
-//                }
-//                addedObjects.append(wrapedItem)
-//
-//                progress?(Float(i)/totalNotSavedItems)
-//            }
-//
-//            self.saveDataForContext(context: newBgcontext, saveAndWait: true)
-//
-//            self.inProcessAppendingLocalFiles = false
-//            allItemsAddedCallBack?()
-//
-//            let finish = Date().timeIntervalSince1970
-//            debugPrint("All images and videos have been saved in \(finish - start) seconds")
-//
-//            ItemOperationManager.default.addedLocalFiles(items: addedObjects)
-//        }
-//
-//    }
-    
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
         let currentlyInLibriaryIDs: [String] = allList.flatMap{ $0.localIdentifier }
         let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
@@ -152,13 +110,13 @@ extension CoreDataStack {
 //        return Bool(items.count != 0)
 //    }
         
-    func removeLocalMediaItemswithAssetID(list: [String]) {
-        guard list.count > 0 else {
+    func removeLocalMediaItems(with assetIdList: [String]) {
+        guard assetIdList.count > 0 else {
             return
         }
         DispatchQueue.main.async {
             let context = self.mainContext//newChildBackgroundContext
-            let predicate = NSPredicate(format: "localFileID IN %@", list)
+            let predicate = NSPredicate(format: "localFileID IN %@", assetIdList)
             let items:[MediaItem] = self.executeRequest(predicate: predicate, context:context)
             items.forEach { context.delete($0) }
             

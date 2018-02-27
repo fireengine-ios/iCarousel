@@ -26,20 +26,25 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
             self.fetchResult = changes.fetchResultAfterChanges
             if changes.hasIncrementalChanges, changes.insertedIndexes != nil || changes.removedIndexes != nil {
                 let previosFetch = changes.fetchResultBeforeChanges
-                var phChanges = [PhotoLibraryChangeType: [PHAsset]]()
                 
                 if let addedIndexes = changes.insertedIndexes {
-                    phChanges[.added] = self.fetchResult.objects(at: addedIndexes)
+                    var phChanges = [PhotoLibraryChangeType: [PHAsset]]()
+                    let addedItems = self.fetchResult.objects(at: addedIndexes)
+                    phChanges[.added] = addedItems
+                    CoreDataStack.default.append(localMediaItems: addedItems, completion: {
+                        NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
+                    })
                 }
                 
                 if let removedIndexes = changes.removedIndexes {
-                    phChanges[.removed] = previosFetch.objects(at: removedIndexes)
+                    var phChanges = [PhotoLibraryChangeType: [PHAsset]]()
+                    let removedItems = previosFetch.objects(at: removedIndexes)
+                    phChanges[.removed] = removedItems
+                    CoreDataStack.default.remove(localMediaItems: removedItems, completion: {
+                        UploadService.default.cancelOperations(with: removedItems)
+                        NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
+                    })
                 }
-                //FIXME: uncomment and change
-//                CoreDataStack.default.appendLocalMediaItems(progress: nil, {
-//                    UploadService.default.cancelOperations(with: phChanges[.removed])
-//                    NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
-//                })
             }
         }
 
