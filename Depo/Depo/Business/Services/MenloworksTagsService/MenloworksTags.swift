@@ -32,6 +32,36 @@ class MenloworksTags {
         }
     }
     
+    class TurkcellPasswordChanged: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.turkcellPasswordChanged, value: isEnabled, boolType: .yesNo)
+        }
+    }
+    
+    class AutoLoginChanged: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.autoLoginChanged, value: isEnabled, boolType: .yesNo)
+        }
+    }
+    
+    class FiftyGBClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.fiftyGBClicked)
+        }
+    }
+    
+    class FiveHundredGBClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.fiveHundredGBClicked)
+        }
+    }
+    
+    class TwoThousandFiveHundredGBClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.twoThousandFiveHundredGBClicked)
+        }
+    }
+    
     class MusicUpload: MenloworksTag {
         init() {
             super.init(name: NameConstants.musicUpload)
@@ -67,6 +97,25 @@ class MenloworksTags {
             super.init(name: NameConstants.signupCompleted)
         }
     }
+    
+    class PromocodeActivated: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.promocodeActivated)
+        }
+    }
+    
+    class FacebookConnected: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.facebookConnected)
+        }
+    }
+    
+    class InstagramConnected: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.instagramConnected)
+        }
+    }
+    
     
     class AllFilesOpen: MenloworksTag {
         init() {
@@ -215,6 +264,18 @@ class MenloworksTags {
     class SearchOpen: MenloworksTag {
         init() {
             super.init(name: NameConstants.search)
+        }
+    }
+    
+    class UserPackageStatus: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.userPackage)
+        }
+    }
+    
+    class NoUserPackageStatus: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.noUserPackage)
         }
     }
     

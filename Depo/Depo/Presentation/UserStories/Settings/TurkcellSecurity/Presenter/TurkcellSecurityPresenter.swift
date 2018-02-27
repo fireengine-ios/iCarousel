@@ -40,6 +40,15 @@ extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
             router.rootViewController?.present(popUP, animated: true, completion: nil)
         } else {
             startAsyncOperation()
+            
+            if passcode != interactor.turkcellPasswordOn {
+                MenloworksTagsService.shared.onTurkcellPasswordSettingsChanged(passcode)
+            }
+            
+            if autoLogin != interactor.turkcellAutoLoginOn {
+                MenloworksTagsService.shared.onAutoLoginSettingsChanged(autoLogin)
+            }
+                
             interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
         }
         

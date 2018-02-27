@@ -135,7 +135,12 @@ extension PackagesViewController: UICollectionViewDataSource {
 // MARK: SubscriptionPlanCellDelegate
 extension PackagesViewController: SubscriptionPlanCellDelegate {
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
-        output.didPressOn(plan: plans[indexPath.row])
+        let plan = plans[indexPath.row]
+        
+        if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
+            MenloworksTagsService.shared.onSubscriptionClicked(tag)
+        }
+        output.didPressOn(plan: plan)
     }
 }
 

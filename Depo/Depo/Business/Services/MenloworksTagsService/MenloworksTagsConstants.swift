@@ -50,6 +50,17 @@ extension MenloworksTags {
         static let documentsOpen = "documents"
         static let photosAndVideosOpen = "photos_and_videos"
         static let allFilesOpen = "all_files"
+        static let instagramConnected = "instagram_done"
+        static let facebookConnected = "facebook_done"
+        static let promocodeActivated = "promocode_activated"
+        static let fiftyGBClicked = "50_gb_button_clicked"
+        static let fiveHundredGBClicked = "500_gb_button_clicked"
+        static let twoThousandFiveHundredGBClicked = "2_5_tb_button_clicked"
+        static let userPackage = "user_package"
+        static let noUserPackage = "no_package"
+        static let autoLoginChanged = "auto_login"
+        static let turkcellPasswordChanged = "turkcell_password"
+
     }
     
     class ValueConstants {

@@ -6,6 +6,12 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+enum MenloworksSubscriptionStorage: String {
+    case fiftyGB = "50 GB"
+    case fiveHundredGB = "500 GB"
+    case twoThousandFiveHundredGB = "2.5 TB"
+}
+
 class MenloworksTagsService {
     
     private let reachabilityService = ReachabilityService()
@@ -50,6 +56,23 @@ class MenloworksTagsService {
         }
     }
     
+    func onSubscriptionClicked(_ type: MenloworksSubscriptionStorage) {
+        var tag: MenloworksTag?
+        
+        switch type {
+        case .fiftyGB:
+            tag = MenloworksTags.FiftyGBClicked()
+        case .fiveHundredGB:
+            tag = MenloworksTags.FiveHundredGBClicked()
+        case .twoThousandFiveHundredGB:
+            tag = MenloworksTags.TwoThousandFiveHundredGBClicked()
+        }
+        
+        if let tag = tag {
+            hitTag(tag)
+        }
+    }
+    
     func onLogin() {
         let tagWiFi3G = MenloworksTags.WiFi3G(isWiFi: reachabilityService.isReachableViaWiFi)
         hitTag(tagWiFi3G)
@@ -66,7 +89,38 @@ class MenloworksTagsService {
             sendInstagramImportStatus()
             sendFacebookImportStatus()
             sendFIRStatus()
+            sendSubscriptionsStatus()
         }
+    }
+    
+    func onTouchIDSettingsChanged(_ isEnabled: Bool) {
+        let tag = MenloworksTags.TouchIDStatus(isEnabled: isEnabled)
+        hitTag(tag)
+    }
+
+    func onAutoLoginSettingsChanged(_ isEnabled: Bool) {
+        let tag = MenloworksTags.AutoLoginChanged(isEnabled: isEnabled)
+        hitTag(tag)
+    }
+    
+    func onTurkcellPasswordSettingsChanged(_ isEnabled: Bool) {
+        let tag = MenloworksTags.TurkcellPasswordChanged(isEnabled: isEnabled)
+        hitTag(tag)
+    }
+    
+    func onPromocodeActivated() {
+        let tag = MenloworksTags.PromocodeActivated()
+        hitTag(tag)
+    }
+    
+    func onFacebookConnected() {
+        let tag = MenloworksTags.FacebookConnected()
+        hitTag(tag)
+    }
+    
+    func onInstagramConnected() {
+        let tag = MenloworksTags.InstagramConnected()
+        hitTag(tag)
     }
     
     func onAllFilesOpen() {
@@ -239,5 +293,33 @@ class MenloworksTagsService {
             let tag = MenloworksTags.FaceImageRecognitionStatus(isEnabled: status)
             self.hitTag(tag)
         }, fail: { _ in })
+    }
+    
+    private func sendSubscriptionsStatus() {
+        SubscriptionsServiceIml().activeSubscriptions(success: { response in
+            guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
+            
+            let list = subscriptionsResponce.list.sorted(by: { (sub1, sub2) -> Bool in
+                guard let sub1Quota = sub1.subscriptionPlanQuota,
+                    let sub2Quota = sub2.subscriptionPlanQuota else {
+                        return true
+                }
+                return sub1Quota < sub2Quota
+            })
+            
+            let subLength = list.count
+            
+            for i in 0...4 {
+                let packageName = String(format: "%@%d", MenloworksTags.UserPackageStatus().name, i+1)
+                var displayName = MenloworksTags.NoUserPackageStatus().name
+                
+                if i < subLength {
+                    let subscription = list[i]
+                    displayName = subscription.subscriptionPlanDisplayName ?? ""
+                }
+                
+                MPush.hitTag(packageName, withValue: displayName)
+            }
+        }) { _ in }
     }
 }
