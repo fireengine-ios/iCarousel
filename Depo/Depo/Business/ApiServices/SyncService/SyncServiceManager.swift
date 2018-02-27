@@ -174,6 +174,11 @@ class SyncServiceManager {
             
             CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
             
+            guard !CoreDataStack.default.inProcessAppendingLocalFiles else {
+                CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+                return
+            }
+            
             guard let reachability = self.reachabilityService else {
                 print("\(#function): reachabilityService is nil")
                 return
@@ -248,6 +253,11 @@ extension SyncServiceManager {
                                        selector: #selector(onAPIReachabilityDidChange),
                                        name: APIReachabilityService.APIReachabilityDidChangeName,
                                        object: nil)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(onLocalFilesHaveBeenLoaded),
+                                       name: Notification.Name.allLocalMediaItemsHaveBeenLoaded,
+                                       object: nil)
     }
     
     @objc private func onPhotoLibraryDidChange(notification: Notification) {
@@ -261,6 +271,10 @@ extension SyncServiceManager {
     
     @objc private func onAPIReachabilityDidChange() {
         self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
+    }
+    
+    @objc private func onLocalFilesHaveBeenLoaded() {
+        self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
     }
     
     @objc private func onAutoSyncStatusDidChange() {

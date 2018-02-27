@@ -78,9 +78,9 @@ extension CoreDataStack {
                     let wrapedItem =  WrapData(info: $0)
                     _ = MediaItem(wrapData: wrapedItem, context: context)
                     
-                    self?.saveDataForContext(context: context, saveAndWait: true)
                     addedObjects.append(wrapedItem)
                 }
+                self?.saveDataForContext(context: context, saveAndWait: true)
                 ItemOperationManager.default.addedLocalFiles(items: addedObjects)
                 
                 self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
