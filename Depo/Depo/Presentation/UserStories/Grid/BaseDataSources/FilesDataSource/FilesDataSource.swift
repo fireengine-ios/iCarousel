@@ -124,6 +124,14 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         options.isSynchronous = false
         return options
     }()
+    
+    private lazy var defaultVideoRequestOptions: PHVideoRequestOptions = {
+        let options = PHVideoRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = false
+        return options
+    }()
+    
 }
 
 extension FilesDataSource {
@@ -148,3 +156,51 @@ extension FilesDataSource {
         })
     }
 }
+
+
+extension FilesDataSource {
+    func requestInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL) -> Void) {
+        switch asset.mediaType {
+        case .image:
+            requestImageInfo(for: asset, completion: completion)
+        case .video:
+            requestVideoInfo(for: asset, completion: completion)
+        default:
+            completion(0, URL(string: "")!)
+        }
+    }
+    
+    private func requestImageInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL) -> Void) {
+        assetCache?.requestImageData(for: asset, options: defaultImageRequestOptions, resultHandler: { (data, utType, orientation, info) in
+            guard let data = data,
+                let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool, !isDegraded,
+                let url = info?["PHImageFileURLKey"] as? URL
+            else {
+                return
+            }
+            
+            completion(UInt64(data.count), url)
+        })
+    }
+    
+    private func requestVideoInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL) -> Void) {
+        assetCache?.requestAVAsset(forVideo: asset, options: defaultVideoRequestOptions, resultHandler: { (avAsset, avAudioMix, info) in
+            guard let isICloud = info?[PHImageResultIsInCloudKey] as? Bool, !isICloud,
+                let urlToFile = (avAsset as? AVURLAsset)?.url
+            else {
+                return
+            }
+            
+            var size = UInt64(0)
+            do {
+                size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).uint64Value
+            } catch  {
+                return
+            }
+
+            completion(size, urlToFile)
+        })
+    }
+}
+
+

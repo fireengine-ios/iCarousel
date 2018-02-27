@@ -73,29 +73,23 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func getInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [MetaAssetInfo])->Void) {
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isNetworkAccessAllowed = false
-        requestOptions.isSynchronous = false
-        requestOptions.version = .current
-        requestOptions.deliveryMode = .highQualityFormat
-        
+
+        let fileDataSource = FilesDataSource()
         var assetsInfo = [MetaAssetInfo]()
         
         var i = 0
         for asset in assets {
             let _ = autoreleasepool {
-                self.photoManger.requestImageData(for: asset, options: requestOptions, resultHandler: { (data, utType, orientation, info) in
-                    guard let fileSize = data?.count else {
-                        return
-                    }
+                fileDataSource.requestInfo(for: asset, completion: { (size, url) in
                     i += 1
                     
-                    guard let name = asset.originalFilename, let unwrapedUrl = info?["PHImageFileURLKey"] as? URL else {
+                    guard let assetName = asset.originalFilename  else {
                         return
                     }
                     
-                    let assetInfo = MetaAssetInfo(asset: asset, url: unwrapedUrl, fileSize: UInt64(fileSize), originalName: name)
+                    let assetInfo = MetaAssetInfo(asset: asset, url: url, fileSize: size, originalName: assetName)
                     assetsInfo.append(assetInfo)
+                    
                     print("local file: \(i)")
                     
                     if i == assets.count {
@@ -495,45 +489,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         semaphore.wait()
         return url
     }
-    
-    
-    // MARK: Asset info
-    
-    /// maybe will be need
-//    func shortInfoAboutAsset(asset: PHAsset) -> AssetInfo {
-//        log.debug("\(#function)")
-//        
-//        switch asset.mediaType {
-//        case .image:
-//            return shortInfoAboutImageAsset(asset:asset)
-//            
-//        case . video:
-//            return shortInfoAboutVideoAsset(asset:asset)
-//            
-//        default:
-//            return (url: LocalMediaStorage.defaultUrl, name: "", size: 0, md5: LocalMediaStorage.noneMD5)
-//        }
-//    }
-//    
-//    func shortInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
-//        log.debug("\(#function)")
-//        
-//        let url: URL =  LocalMediaStorage.defaultUrl
-//        let md5: String = LocalMediaStorage.noneMD5
-//        let size: UInt64 = 0
-//
-//        return (url: url, name:"", size: size, md5: md5)
-//    }
-//    
-//    func shortInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
-//        log.debug("\(#function)")
-//        
-//        let url: URL = LocalMediaStorage.defaultUrl
-//        let md5: String = LocalMediaStorage.noneMD5
-//        let size: UInt64 = 0
-//
-//        return (url: url, name:"", size: size, md5: md5)
-//    }
+
     
     func fullInfoAboutAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutAsset")

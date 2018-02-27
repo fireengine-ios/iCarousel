@@ -44,7 +44,10 @@ extension CoreDataStack {
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
         let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
     
+        let start = Date()
+        
         save(items: notSaved, context: newBgcontext) { [weak self] in
+            print("All local files added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
         }
     }
