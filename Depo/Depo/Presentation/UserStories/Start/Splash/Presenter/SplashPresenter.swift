@@ -63,12 +63,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onSuccessEULA() {
-        
         CoreDataStack.default.appendLocalMediaItems()
-        
-        DispatchQueue.main.async {
-            self.router.navigateToApplication()
-        }
+        router.navigateToApplication()
     }
     
     func onFailEULA() {

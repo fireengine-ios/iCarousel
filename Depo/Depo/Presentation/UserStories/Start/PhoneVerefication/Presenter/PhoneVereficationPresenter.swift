@@ -86,10 +86,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         view.dropTimer()
         
         CoreDataStack.default.appendLocalMediaItems()
-        
-        DispatchQueue.main.async {
-            self.router.goAutoSync()
-        }
+        router.goAutoSync()
     }
     
     func failLogin(message: String) {
