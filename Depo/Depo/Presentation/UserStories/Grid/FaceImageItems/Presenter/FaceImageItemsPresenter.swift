@@ -66,10 +66,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     private func hasUgglaLabel() -> Bool {
-        if let faceImageType = faceImageType, faceImageType == .people || faceImageType == .things {
-            return true
-        }
-        return false
+        return faceImageType == .people || faceImageType == .things
     }
     
     // MARK: -  Utility methods

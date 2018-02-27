@@ -69,7 +69,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
     func configurateUgglaView() {
         ugglaImageView = UIImageView(frame: CGRect(x: 0, y: view.bounds.size.height - ugglaViewHeight, width: view.bounds.size.width, height: ugglaViewHeight))
         ugglaImageView.contentMode = .center
-        ugglaImageView.image = #imageLiteral(resourceName: "poweredByUggla")
+        ugglaImageView.image = UIImage(named: "poweredByUggla")
         view.addSubview(ugglaImageView)
         
         ugglaImageView.translatesAutoresizingMaskIntoConstraints = false
