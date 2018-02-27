@@ -15,6 +15,20 @@ class AssetsСache {
     
     private var storage: [String: PHAsset] = [:]
     
+    func assets(before oldest: Date) -> [PHAsset] {
+        var assets = [PHAsset]()
+        dispatchQueue.sync {
+            assets = storage.values.filter({ (asset) -> Bool in
+                guard let creationDate = asset.creationDate else {
+                    return false
+                }
+                
+                return creationDate > oldest
+            })
+        }
+        return assets
+    }
+    
     func append(asset:PHAsset) {
         dispatchQueue.sync {
             storage[asset.localIdentifier] = asset

@@ -85,15 +85,10 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         compliteAsyncOperationEnableScreen()
         view.dropTimer()
         
-        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
-            }
-        }) { [weak self] in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.hideProgressSpinner()
-                self?.router.goAutoSync()
-            }
+        CoreDataStack.default.appendLocalMediaItems()
+        
+        DispatchQueue.main.async {
+            self.router.goAutoSync()
         }
     }
     

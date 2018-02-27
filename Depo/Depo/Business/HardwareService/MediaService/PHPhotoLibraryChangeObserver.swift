@@ -35,11 +35,11 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                 if let removedIndexes = changes.removedIndexes {
                     phChanges[.removed] = previosFetch.objects(at: removedIndexes)
                 }
-                
-                CoreDataStack.default.appendLocalMediaItems(progress: nil, {
-                    UploadService.default.cancelOperations(with: phChanges[.removed])
-                    NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
-                })
+                //FIXME: uncomment and change
+//                CoreDataStack.default.appendLocalMediaItems(progress: nil, {
+//                    UploadService.default.cancelOperations(with: phChanges[.removed])
+//                    NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
+//                })
             }
         }
 

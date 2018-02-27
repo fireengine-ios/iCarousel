@@ -64,16 +64,10 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func onSuccessEULA() {
         
-        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercentage in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.showProgressSpinner(progress: progressPercentage)
-            }
+        CoreDataStack.default.appendLocalMediaItems()
         
-        }){ [weak self] in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.hideProgressSpinner()
-                self?.router.navigateToApplication()
-            }
+        DispatchQueue.main.async {
+            self.router.navigateToApplication()
         }
     }
     

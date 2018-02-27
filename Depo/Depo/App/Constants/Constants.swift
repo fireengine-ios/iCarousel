@@ -770,6 +770,8 @@ struct NumericConstants {
     
     static let numberOfElementsInSyncRequest: Int = 30000
     
+    static let numberOfLocalItemsOnPage: Int = 100
+    
     static let animationDuration: Double = 0.3
     
     static let timeIntervalBetweenAutoSync: TimeInterval = 10*60

@@ -19,124 +19,113 @@ struct MetaAssetInfo {
     }
 }
 
-
 extension CoreDataStack {
-    
-    @objc func appendLocalMediaItems(progress: AppendingLocaclItemsProgressCallback?,
-                                     _ end: AppendingLocaclItemsFinishCallback?) {
-        let queue = DispatchQueue(label: "Append Local Item ")
-        queue.async {
-            let localMediaStorage = LocalMediaStorage.default
-            localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
-                if authorized {
-                    self.insertFromPhotoFramework(progress: progress, allItemsAddedCallBack: end)
-                }
-                if status == .denied {
-                    self.deleteLocalFiles()
-                    end?()
-                }
+    @objc func appendLocalMediaItems() {
+        let localMediaStorage = LocalMediaStorage.default
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
+            if authorized {
+                self.insertFromGallery()
+            }
+            if status == .denied {
+                self.deleteLocalFiles()
             }
         }
     }
-    
-    func insertFromGallery(progress: AppendingLocaclItemsProgressCallback?, allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
-        let localMediaStorage = LocalMediaStorage.default
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
-            guard accessGranted, let `self` = self,
-                !self.inProcessAppendingLocalFiles else {
-                    return
-            }
-            
-            self.inProcessAppendingLocalFiles = true
-            
+
+    func insertFromGallery() {
+        guard !inProcessAppendingLocalFiles else {
+            return
+        }
+        
+        inProcessAppendingLocalFiles = true
+        
+        DispatchQueue(label: "com.lifebox.localFles").async {
+            let localMediaStorage = LocalMediaStorage.default
             let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
             let newBgcontext = self.newChildBackgroundContext
             let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
-            let totalNotSavedItems = notSaved.count
             
             let start = Date()
             var addedObjects = [WrapData]()
             
-            localMediaStorage.getAllInfo(from: notSaved, completion: { (assetsInfo) in
-                var i = 0
-                assetsInfo.forEach {
-                    i += 1
-                    debugPrint("local ", i)
-                    
-                    let wrapedItem =  WrapData(info: $0)
-                    _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
-                    
-                    if i % 10 == 0 {
+            let semaphore = DispatchSemaphore(value: 0)
+            var readyItemsCount = 0
+            while readyItemsCount < notSaved.count {
+                let nextItemsAmount = min(notSaved.count - readyItemsCount, NumericConstants.numberOfLocalItemsOnPage)
+                let pageItems = Array(notSaved[readyItemsCount..<nextItemsAmount])
+                
+                localMediaStorage.getInfo(from: pageItems, completion: { (assetsInfo) in
+                    assetsInfo.forEach {
+                        let wrapedItem =  WrapData(info: $0)
+                        _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
+                        
                         self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+                        addedObjects.append(wrapedItem)
+                        readyItemsCount += nextItemsAmount
                     }
-                    addedObjects.append(wrapedItem)
                     
-                    progress?(Float(i)/Float(totalNotSavedItems))
-                }
-            })
+                    ItemOperationManager.default.addedLocalFiles(items: addedObjects)
+                    semaphore.signal()
+                })
+                semaphore.wait()
+            }
             
-            self.saveDataForContext(context: newBgcontext, saveAndWait: true)
-            
+            debugPrint("All images and videos have been saved in \(Date().timeIntervalSince(start)) seconds")
             self.inProcessAppendingLocalFiles = false
-            allItemsAddedCallBack?()
-            
-            debugPrint("All images and videos have been saved in \(start.timeIntervalSince(Date())) seconds")
-            
-            ItemOperationManager.default.addedLocalFiles(items: addedObjects)
         }
     }
-    
-    
-    func insertFromPhotoFramework(progress: AppendingLocaclItemsProgressCallback?,
-                                  allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
-        let localMediaStorage = LocalMediaStorage.default
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
-            guard accessGranted, let `self` = self,
-                !self.inProcessAppendingLocalFiles else {
-                return
-            }
-            
-            self.inProcessAppendingLocalFiles = true
-            
-            let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
-            
-            let newBgcontext = self.newChildBackgroundContext
-            let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
-            
-            let start = Date().timeIntervalSince1970
-            var i = 0
-            var addedObjects = [WrapData]()
-            
-            let totalNotSavedItems = Float(notSaved.count)
-            debugPrint("number of not saved  ", totalNotSavedItems)
-            
-            notSaved.forEach {
-                i += 1
-                debugPrint("local ", i)
-                
-                let wrapedItem =  WrapData(asset: $0)
-                _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
-                
-                if i % 10 == 0 {
-                    self.saveDataForContext(context: newBgcontext, saveAndWait: true)
-                }
-                addedObjects.append(wrapedItem)
-                
-                progress?(Float(i)/totalNotSavedItems)
-            }
-            
-            self.saveDataForContext(context: newBgcontext, saveAndWait: true)
 
-            self.inProcessAppendingLocalFiles = false
-            allItemsAddedCallBack?()
-            
-            let finish = Date().timeIntervalSince1970
-            debugPrint("All images and videos have been saved in \(finish - start) seconds")
-            
-            ItemOperationManager.default.addedLocalFiles(items: addedObjects)
-        }
-        
-    }
+    
+//    func insertFromPhotoFramework(progress: AppendingLocaclItemsProgressCallback?,
+//                                  allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
+//        let localMediaStorage = LocalMediaStorage.default
+//        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
+//            guard accessGranted, let `self` = self,
+//                !self.inProcessAppendingLocalFiles else {
+//                return
+//            }
+//
+//            self.inProcessAppendingLocalFiles = true
+//
+//            let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
+//
+//            let newBgcontext = self.newChildBackgroundContext
+//            let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
+//
+//            let start = Date().timeIntervalSince1970
+//            var i = 0
+//            var addedObjects = [WrapData]()
+//
+//            let totalNotSavedItems = Float(notSaved.count)
+//            debugPrint("number of not saved  ", totalNotSavedItems)
+//
+//            notSaved.forEach {
+//                i += 1
+//                debugPrint("local ", i)
+//
+//                let wrapedItem =  WrapData(asset: $0)
+//                _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
+//
+//                if i % 10 == 0 {
+//                    self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+//                }
+//                addedObjects.append(wrapedItem)
+//
+//                progress?(Float(i)/totalNotSavedItems)
+//            }
+//
+//            self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+//
+//            self.inProcessAppendingLocalFiles = false
+//            allItemsAddedCallBack?()
+//
+//            let finish = Date().timeIntervalSince1970
+//            debugPrint("All images and videos have been saved in \(finish - start) seconds")
+//
+//            ItemOperationManager.default.addedLocalFiles(items: addedObjects)
+//        }
+//
+//    }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
         let currentlyInLibriaryIDs: [String] = allList.flatMap{ $0.localIdentifier }

@@ -72,44 +72,36 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return status == .authorized
     }
     
-    func getAllInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [MetaAssetInfo])->Void) {
-        let dispatchQueue = DispatchQueue(label: "com.test.load")
-        
+    func getInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [MetaAssetInfo])->Void) {
         let requestOptions = PHImageRequestOptions()
         requestOptions.isNetworkAccessAllowed = false
         requestOptions.isSynchronous = false
         requestOptions.version = .current
         requestOptions.deliveryMode = .highQualityFormat
         
-        dispatchQueue.async {
-            var assetsInfo = [MetaAssetInfo]()
-            
-            let start = Date()
-            var i = 0
-            for asset in assets {
-                autoreleasepool {
-                    self.photoManger.requestImageData(for: asset, options: requestOptions, resultHandler: { (data, utType, orientation, info) in
-                        guard let fileSize = data?.count else {
-                            return
-                        }
-                        i += 1
-                        
-                        guard let name = asset.originalFilename, let unwrapedUrl = info?["PHImageFileURLKey"] as? URL else {
-                            return
-                        }
-                        
-                        let assetInfo = MetaAssetInfo(asset: asset, url: unwrapedUrl, fileSize: UInt64(fileSize), originalName: name)
-                        assetsInfo.append(assetInfo)
-                        print("local file: \(i)")
-                        
-                        if i == assets.count {
-                            print("\(Date().timeIntervalSince(start))")
-                            completion(assetsInfo)
-                        }
-                    })
+        var assetsInfo = [MetaAssetInfo]()
+        
+        var i = 0
+        for asset in assets {
+            let _ = autoreleasepool {
+                self.photoManger.requestImageData(for: asset, options: requestOptions, resultHandler: { (data, utType, orientation, info) in
+                    guard let fileSize = data?.count else {
+                        return
+                    }
+                    i += 1
                     
-                }
-                
+                    guard let name = asset.originalFilename, let unwrapedUrl = info?["PHImageFileURLKey"] as? URL else {
+                        return
+                    }
+                    
+                    let assetInfo = MetaAssetInfo(asset: asset, url: unwrapedUrl, fileSize: UInt64(fileSize), originalName: name)
+                    assetsInfo.append(assetInfo)
+                    print("local file: \(i)")
+                    
+                    if i == assets.count {
+                        completion(assetsInfo)
+                    }
+                })
             }
         }
     }
@@ -163,7 +155,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         let options = PHFetchOptions()
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         fetchResult = PHAsset.fetchAssets(with: options)
         
         var mediaContent = [PHAsset]()

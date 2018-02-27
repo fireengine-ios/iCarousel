@@ -134,16 +134,11 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func onSuccessEULA() {
         compliteAsyncOperationEnableScreen()
-        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
-            }
-            
-        }) { [weak self] in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.hideProgressSpinner()
-                self?.router.goToSyncSettingsView()
-            }
+        
+        CoreDataStack.default.appendLocalMediaItems()
+        
+        DispatchQueue.main.async {
+            self.router.goToSyncSettingsView()
         }
     }
     
