@@ -37,6 +37,20 @@ final class ThingsService: BaseRequestService {
         
         executeGetRequest(param: param, handler: handler)
     }
+    
+    func deletePhotosFromAlbum(id: Int64, photos: [Item], success: PhotosAlbumOperation?, fail: FailResponse?) {
+        log.debug("PeopleService deletePhotosFromAlbum")
+        
+        let parameters = DeletePhotosFromThingsAlbum(id: id, photos: photos)
+        
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+            log.debug("PeopleService deletePhotosFromAlbum success")
+            
+            success?()
+        }, fail: fail)
+        executePostRequest(param: parameters, handler: handler)
+    }
+    
 }
 
 final class ThingsParameters: BaseRequestParametrs {
@@ -106,3 +120,24 @@ final class ThingsPageParameters: BaseRequestParametrs {
         return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
     }
 }
+
+final class DeletePhotosFromThingsAlbum: BaseRequestParametrs {
+    let id: Int64
+    let photos: [Item]
+    
+    init (id: Int64, photos: [Item]){
+        self.id = id
+        self.photos = photos
+    }
+    
+    override var requestParametrs: Any{
+        let photosUUID = photos.map { $0.id }
+        return photosUUID
+    }
+    
+    override var patch: URL {
+        let path: String = String(format: RouteRequests.thingsDeletePhotos, id)
+        return URL(string: path, relativeTo: super.patch)!
+    }
+}
+
