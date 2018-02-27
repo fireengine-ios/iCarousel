@@ -168,16 +168,20 @@ class CardsManager: NSObject {
         
         print("operation stopped ", type.rawValue)
         
-        if type == .freeAppSpace || type == .freeAppSpaceLocalWarning {
-            deletedCards.insert(type)
-        }
-        
         DispatchQueue.main.async {
             self.progresForOperation[type] = nil
             for notificationView in self.foloversArray{
                 notificationView.stopOperationWithType(type: type)
             }
         }
+    }
+    
+    func manuallyDeleteCardsByType(type: OperationType){
+        if type == .freeAppSpaceLocalWarning || type == .freeAppSpace{
+            deletedCards.insert(type)
+        }
+        
+        stopOperationWithType(type: type)
     }
     
     func stopAllOperations(){
