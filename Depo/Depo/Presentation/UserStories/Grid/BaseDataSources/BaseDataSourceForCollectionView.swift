@@ -599,7 +599,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){
         displayingType = type
+        let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+            return first < second
+        })
         collectionView?.reloadData()
+        if let firstVisibleIndexPath = firstVisibleIndexPath {
+            collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
+        }
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
