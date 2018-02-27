@@ -35,10 +35,13 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
         self.category = category
         if let items = items {
             self.items = items
-            if stackView.arrangedSubviews.isEmpty {
-                for (index, item) in items.enumerated() {
-                    self.add(item: item, atIndex: index)
-                }
+            
+            for view in stackView.arrangedSubviews {
+                view.removeFromSuperview()
+            }
+            
+            for (index, item) in items.enumerated() {
+                self.add(item: item, atIndex: index)
             }
         }
     }
