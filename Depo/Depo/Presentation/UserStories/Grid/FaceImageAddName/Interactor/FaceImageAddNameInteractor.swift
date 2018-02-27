@@ -9,9 +9,9 @@
 final class FaceImageAddNameInteractor: BaseFilesGreedInteractor {
     
     private let peopleService = PeopleService()
-    
-    private var currentName: String?
         
+    private var currentName: String?
+            
     override func viewIsReady() {
         output.getContentWithSuccess(items: [])
     }
@@ -62,21 +62,16 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
     func mergePeople(_ currentPerson: Item, otherPerson: Item) {
         guard isUpdating == false,
         let currentPersonId = currentPerson.id,
-        let otherPersonId = otherPerson.id,
-            let name = otherPerson.name else {
+        let otherPersonId = otherPerson.id else {
             return
         }
-        
-        peopleService.mergePeople(personId: currentPersonId, targetPersonId: otherPersonId, success: { [weak self] (response) in
-            self?.peopleService.changePeopleName(personId: currentPersonId, name: name, success: { [weak self] (response) in
-                self?.output.asyncOperationSucces()
-                
-                if let output = self?.output as? FaceImageAddNameInteractorOutput {
-                    output.didMergePeople(name)
-                }
-            }, fail: { [weak self] error in
-                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
-            })
+
+        peopleService.mergePeople(personId: otherPersonId, targetPersonId: currentPersonId, success: { [weak self] (response) in
+            self?.output.asyncOperationSucces()
+
+            if let output = self?.output as? FaceImageAddNameInteractorOutput {
+                output.didMergePeople()
+            }
         }, fail: { [weak self] error in
             self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
         })

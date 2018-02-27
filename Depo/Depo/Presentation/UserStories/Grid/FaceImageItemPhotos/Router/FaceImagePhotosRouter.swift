@@ -9,6 +9,9 @@
 import UIKit
 
 final class FaceImagePhotosRouter: BaseFilesGreedRouter {
+    
+    var item: Item?
+    
     override func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
         
         let router = RouterVC()
@@ -16,10 +19,14 @@ final class FaceImagePhotosRouter: BaseFilesGreedRouter {
         guard let wrappered = selectedItem as? Item else { return }
         guard let wrapperedArray = sameTypeItems as? [Item] else { return }
         
-        let albumUUID = RouterVC().getParentUUID()
-        let controller = router.filesDetailAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID)
+        let albumUUID = router.getParentUUID()
+        let controller = router.filesDetailFaceImageAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID, albumItem: item)
         let nController = UINavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
+    }
+    
+    override func showBack() {
+        RouterVC().popViewController()
     }
 }
 
@@ -34,9 +41,24 @@ extension FaceImagePhotosRouter: FaceImagePhotosRouterInput {
     }
     
     func openAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) {
-        let vc = RouterVC().faceImageAddName(item, moduleOutput: moduleOutput)
+        let router = RouterVC()
+        
+        let vc = router.faceImageAddName(item, moduleOutput: moduleOutput)
         
         RouterVC().pushViewController(viewController: vc)
+    }
+    
+    func showRemoveFromAlbum(completion: @escaping (() -> Void)) {
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                              message: TextConstants.removeFromAlbum,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: completion)
+        })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
 }

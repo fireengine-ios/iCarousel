@@ -19,6 +19,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     var alertSheetExcludeTypes = [ElementTypes]()
     
+    var item: Item?
+    
     func viewIsReady(view: UIView) {
         interactor.onViewIsReady()
         bottomBarPresenter?.show(animated: false, onView: view)
@@ -116,7 +118,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch type {
-        case .delete, .removeFromAlbum:
+        case .delete, .removeFromAlbum, .removeFromFaceImageAlbum:
+            outputView()?.hideSpiner()
             interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
@@ -127,6 +130,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func operationFailed(withType type: ElementTypes) {
+        outputView()?.hideSpiner()
+
         debugPrint("failed")
     }
     
@@ -150,12 +155,33 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     }
     
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
+        if let item = item,
+            let id = item.id {            
+            if item is PeopleItem {
+                interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
+            } else if item is ThingsItem {
+                interactor.deletePhotosFromThingsAlbum(items: items, id: id)
+            } else if item is PlacesItem {
+                interactor.deletePhotosFromPlacesAlbum(items: items, id: id)
+            }
+        }
+    }
+    
     func deSelectAll(){
         
     }
     
+    func didRemoveFromAlbum(completion: @escaping (() -> Void)) {
+        router.showRemoveFromAlbum(completion: completion)
+    }
+    
     func printSelected() { }
     func stopModeSelected() { }
+    
+    override func startAsyncOperation() {
+        outputView()?.showSpiner()
+    }
     
     //MARK : BasePresenter
     

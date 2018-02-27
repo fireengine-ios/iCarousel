@@ -503,7 +503,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var uploadContentType: String {
         switch fileType {
         case .image:
-            if let type = urlToFile?.pathExtension.lowercased() {
+            if let type = urlToFile?.pathExtension.lowercased(), !type.isEmpty {
                 return "image/\(type)"
             } else if let data = fileData {
                 return ImageFormat.get(from: data).contentType

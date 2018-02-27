@@ -233,6 +233,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func deleteItems(items: [Item]) {
+        RouterVC().showSpiner()
         let okHandler: () -> Void = { [weak self] in
             self?.output?.operationStarted(type: .delete)
             self?.player.remove(listItems: items)
@@ -251,6 +252,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         })
         
         RouterVC().presentViewController(controller: controller)
+        RouterVC().hideSpiner()
     }
     
     private func deleteAlbumbs(albumbs: [AlbumItem]) {

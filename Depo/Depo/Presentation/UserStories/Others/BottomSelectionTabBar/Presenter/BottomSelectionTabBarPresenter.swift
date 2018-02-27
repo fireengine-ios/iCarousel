@@ -28,6 +28,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             switch type {
             case .delete:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
+            case .deleteFaceImage:
+                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .download:
                 itemTupple.append(EditinglBar.PreDetermendTypes.download)
             case .edit:
@@ -42,6 +44,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.sync)
             case .removeFromAlbum:
                 itemTupple.append(EditinglBar.PreDetermendTypes.removeFromAlbum)
+            case .removeFromFaceImageAlbum:
+                itemTupple.append(EditinglBar.PreDetermendTypes.removeFromFaceImageAlbum)
             case .addToAlbum:
                 itemTupple.append(EditinglBar.PreDetermendTypes.addToAlbum)
             case .makeAlbumCover:
@@ -127,6 +131,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         case .delete:
             interactor.delete(item: selectedItems)
             basePassingPresenter?.stopModeSelected()
+        case .deleteFaceImage:
+            basePassingPresenter?.stopModeSelected()
+            basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
         case .download:
             basePassingPresenter?.stopModeSelected()
             interactor.download(item: selectedItems)
@@ -160,6 +167,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         case .removeFromAlbum:
             interactor.removeFromAlbum(items: selectedItems)
             basePassingPresenter?.stopModeSelected()
+        case .removeFromFaceImageAlbum:
+            self.basePassingPresenter?.stopModeSelected()
+            basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
         case .addToAlbum:
             interactor.addToAlbum(items: selectedItems)
         case .print:
@@ -304,6 +314,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                     
                     self.interactor.delete(item: currentItems)
+                })
+            case .deleteFaceImage:
+                action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
                 })
             case .move:
                 action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in

@@ -143,6 +143,10 @@ class RouterVC: NSObject {
         navigationController?.popViewController(animated: true)
     }
     
+    func popToViewController(_ vc: UIViewController) {
+        navigationController?.popToViewController(vc, animated: true)
+    }
+    
     func popCreateStory() {
         if let viewControllers = navigationController?.viewControllers {
             var index: Int? = nil
@@ -181,6 +185,18 @@ class RouterVC: NSObject {
             lastViewController.present(controller, animated: true, completion: {
             
             })
+        }
+    }
+    
+    func showSpiner(){
+        if let lastViewController = getViewControllerForPresent(){
+            lastViewController.showSpinerIncludeNavigatinBar()
+        }
+    }
+    
+    func hideSpiner(){
+        if let lastViewController = getViewControllerForPresent(){
+            lastViewController.hideSpinerIncludeNavigatinBar()
         }
     }
     
@@ -530,6 +546,17 @@ class RouterVC: NSObject {
                                                                                          selectedItem: fileObject,
                                                                                          allItems: items,
                                                                                          albumUUID: albumUUID)
+        let c = controller as! PhotoVideoDetailViewController
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return c
+    }
+    
+    func filesDetailFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController {
+        let controller = PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                         selectedItem: fileObject,
+                                                                                         allItems: items,
+                                                                                         albumUUID: albumUUID,
+                                                                                         albumItem: albumItem)
         let c = controller as! PhotoVideoDetailViewController
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c

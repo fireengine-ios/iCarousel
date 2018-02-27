@@ -361,6 +361,16 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 action = UIAlertAction(title: TextConstants.actionSheetChangeCover, style: .default, handler: { _ in
                     self.basePassingPresenter?.changeCover()
                 })
+            case .removeFromFaceImageAlbum:
+                action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
+                    self.basePassingPresenter?.stopModeSelected()
+                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
+                })
+            case .deleteFaceImage:
+                action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
+                    self.basePassingPresenter?.stopModeSelected()
+                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
+                })
             }
             return action
         }

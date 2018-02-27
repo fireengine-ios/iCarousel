@@ -51,6 +51,10 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         }
     }
     
+    func canceled() {
+        asyncOperationSucces()
+    }
+    
     func onItemDeleted(){
         let count = dataSource.selectedItemsArray.count
         dataSource.selectedItemsArray.removeAll()

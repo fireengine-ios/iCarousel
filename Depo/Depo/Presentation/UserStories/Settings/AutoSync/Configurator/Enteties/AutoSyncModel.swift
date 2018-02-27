@@ -15,11 +15,11 @@ enum AutoSyncCellType {
     case typeInformation
 }
 
-struct AutoSyncModel {
+class AutoSyncModel {
     let titleString: String
     let subTitleString: String
     let cellType: AutoSyncCellType
-    let isSelected: Bool
+    var isSelected: Bool
     
     init(title: String, subTitle: String, type: AutoSyncCellType, selected: Bool) {
         titleString = title
