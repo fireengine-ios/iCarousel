@@ -29,6 +29,8 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
 
         backgroundColor = .clear
         contentView.backgroundColor = .clear
+        stackView.spacing = 3
+        separatorInset.left = Device.winSize.width
     }
     
     func configure(withItems items:[SuggestionObject]?, category: SearchCategory?) {

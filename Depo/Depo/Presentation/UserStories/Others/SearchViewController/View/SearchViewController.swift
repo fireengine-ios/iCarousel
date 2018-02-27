@@ -159,7 +159,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     private func configureTableView() {
         suggestTableView.register(UINib(nibName: CellsIdConstants.suggestionTableSectionHeaderID, bundle: nil),
-                                  forHeaderFooterViewReuseIdentifier: CellsIdConstants.suggestionTableSectionHeaderID)
+                                  forCellReuseIdentifier: CellsIdConstants.suggestionTableSectionHeaderID)
         
         suggestTableView.register(UINib(nibName: CellsIdConstants.suggestionTableViewCellID, bundle: nil),
                                   forCellReuseIdentifier: CellsIdConstants.suggestionTableViewCellID)
@@ -169,7 +169,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         
         suggestTableView.backgroundColor = .clear
         suggestTableView.separatorColor = .white
+        suggestTableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 10)
         suggestTableView.tableFooterView = UIView()
+        suggestTableView.sectionHeaderHeight = 0
     }
     
     private func setupBlurBackground() {
@@ -432,7 +434,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        var sections = 2
+        var sections = 4
         if let items = items[.people], !items.isEmpty {
             sections += 1
         }
@@ -450,7 +452,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         switch category {
         case .suggestion, .recent:
             return items[category]?.count ?? 0
-        case .people, .things:
+        case .suggestionHeader, .recentHeader, .people, .things:
             return 1
         }
     }
@@ -465,6 +467,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewAutomaticDimension
         case .people, .things:
             return RecentlySearchedFaceImageTableViewCell.height()
+        case .suggestionHeader, .recentHeader:
+            return SuggestionTableSectionHeader.heightFor(category: category)
         }
     }
     
@@ -474,6 +478,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         switch category {
+        case .suggestionHeader, .recentHeader:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.suggestionTableSectionHeaderID, for: indexPath) as?  SuggestionTableSectionHeader {
+                cell.configureWith(category: category, delegate: self)
+                return cell
+            }
+        
         case .recent, .suggestion:
             if let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.suggestionTableViewCellID, for: indexPath) as? SuggestionTableViewCell,
                 let item = items[category]?[indexPath.item] {
@@ -489,38 +499,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableViewCell()
     }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let category = SearchCategory(rawValue: section), category == .recent || category == .suggestion {
-             return 44
-        }
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        guard let category = SearchCategory(rawValue: section) else {
-            return 0
-        }
-        switch category {
-        case .suggestion: return 20
-        case .recent: return 8
-        default: return 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let category = SearchCategory(rawValue: section), category == .recent || category == .suggestion {
-            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CellsIdConstants.suggestionTableSectionHeaderID) as? SuggestionTableSectionHeader
-            header?.configureWith(category: category, delegate: self)
-            return header
-        }
-        return nil
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
+ 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let category = SearchCategory(rawValue: indexPath.section),
             category == .recent || category == .suggestion else {

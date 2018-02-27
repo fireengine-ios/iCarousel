@@ -134,8 +134,8 @@ struct TextConstants {
     
 
     static let search = NSLocalizedString("Search", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let searchRecentSearchTitle = NSLocalizedString("RECENT SEARCHES", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let searchSuggestionsTitle = NSLocalizedString("SUGGESTIONS", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let searchRecentSearchTitle = NSLocalizedString("Recent Searches", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let searchSuggestionsTitle = NSLocalizedString("Suggestions", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let searchNoFilesToCreateStoryError = NSLocalizedString("No files to create a story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let noFilesFoundInSearch = NSLocalizedString("No results found for your query.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

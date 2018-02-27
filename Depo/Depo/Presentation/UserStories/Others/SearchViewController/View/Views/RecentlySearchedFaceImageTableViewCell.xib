@@ -19,10 +19,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="IrV-nn-jW2">
-                        <rect key="frame" x="24" y="6" width="311" height="43.5"/>
+                        <rect key="frame" x="48" y="6" width="279" height="43.5"/>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWp-JA-1y2">
-                        <rect key="frame" x="335" y="0.0" width="25" height="55.5"/>
+                        <rect key="frame" x="327" y="0.0" width="25" height="55.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="bWO-i6-oBj"/>
                         </constraints>
@@ -38,11 +38,17 @@
                     <constraint firstItem="sWp-JA-1y2" firstAttribute="top" secondItem="Zl8-Vj-fzl" secondAttribute="top" id="GoO-PG-JGv"/>
                     <constraint firstItem="IrV-nn-jW2" firstAttribute="top" secondItem="Zl8-Vj-fzl" secondAttribute="top" constant="6" id="Nv8-Pb-AKx"/>
                     <constraint firstAttribute="bottom" secondItem="IrV-nn-jW2" secondAttribute="bottom" constant="6" id="O2W-ZR-26J"/>
-                    <constraint firstItem="IrV-nn-jW2" firstAttribute="leading" secondItem="Zl8-Vj-fzl" secondAttribute="leading" constant="24" id="Sj1-qw-X9D"/>
+                    <constraint firstItem="IrV-nn-jW2" firstAttribute="leading" secondItem="Zl8-Vj-fzl" secondAttribute="leading" constant="48" id="Sj1-qw-X9D"/>
                     <constraint firstItem="sWp-JA-1y2" firstAttribute="leading" secondItem="IrV-nn-jW2" secondAttribute="trailing" id="cUh-IW-N5J"/>
+                    <constraint firstItem="IrV-nn-jW2" firstAttribute="centerX" secondItem="Zl8-Vj-fzl" secondAttribute="centerX" id="jtH-hV-gAH"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sWp-JA-1y2" secondAttribute="trailing" constant="15" id="sS6-7v-Tbd"/>
                     <constraint firstAttribute="bottom" secondItem="sWp-JA-1y2" secondAttribute="bottom" id="tp2-Qq-Ayz"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="jtH-hV-gAH"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="stackView" destination="IrV-nn-jW2" id="bhq-Fy-oId"/>
