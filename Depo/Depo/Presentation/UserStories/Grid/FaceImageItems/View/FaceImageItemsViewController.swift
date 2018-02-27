@@ -28,8 +28,10 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     }
     
     override func stopSelection() {
-        configurateFaceImagePeopleActions { [weak self] in
-            self?.configureDoneNavBarActions()
+        if (isCanChangeVisibility) {
+            configurateFaceImagePeopleActions { [weak self] in
+                self?.configureDoneNavBarActions()
+            }
         }
     }
     
