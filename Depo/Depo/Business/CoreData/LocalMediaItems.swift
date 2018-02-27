@@ -39,42 +39,42 @@ extension CoreDataStack {
         
         inProcessAppendingLocalFiles = true
         
-        DispatchQueue(label: "com.lifebox.localFles").async {
-            let localMediaStorage = LocalMediaStorage.default
-            let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
-            let newBgcontext = self.newChildBackgroundContext
-            let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
-            
-            let start = Date()
-            var addedObjects = [WrapData]()
-            
-            let semaphore = DispatchSemaphore(value: 0)
-            var readyItemsCount = 0
-            while readyItemsCount < notSaved.count {
-                let nextItemsAmount = min(notSaved.count - readyItemsCount, NumericConstants.numberOfLocalItemsOnPage)
-                let pageItems = Array(notSaved[readyItemsCount..<nextItemsAmount])
-                
-                localMediaStorage.getInfo(from: pageItems, completion: { (assetsInfo) in
-                    assetsInfo.forEach {
-                        let wrapedItem =  WrapData(info: $0)
-                        _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
-                        
-                        self.saveDataForContext(context: newBgcontext, saveAndWait: true)
-                        addedObjects.append(wrapedItem)
-                        readyItemsCount += nextItemsAmount
-                    }
-                    
-                    ItemOperationManager.default.addedLocalFiles(items: addedObjects)
-                    semaphore.signal()
-                })
-                semaphore.wait()
-            }
-            
-            debugPrint("All images and videos have been saved in \(Date().timeIntervalSince(start)) seconds")
-            self.inProcessAppendingLocalFiles = false
+        let localMediaStorage = LocalMediaStorage.default
+        let newBgcontext = self.newChildBackgroundContext
+        let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
+        let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
+    
+        save(items: notSaved, context: newBgcontext) { [weak self] in
+            self?.inProcessAppendingLocalFiles = false
         }
     }
+    
+    func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping ()->Void ) {
+        guard !items.isEmpty else {
+            completion()
+            return
+        }
 
+        let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
+
+        DispatchQueue(label: "com.lifebox.saveFromGallery").async {
+            LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] (assetsInfo) in
+                //assetsInfo.count can be less than pageItems.count
+                var addedObjects = [WrapData]()
+                assetsInfo.forEach {
+                    let wrapedItem =  WrapData(info: $0)
+                    _ = MediaItem(wrapData: wrapedItem, context: context)
+                    
+                    self?.saveDataForContext(context: context, saveAndWait: true)
+                    addedObjects.append(wrapedItem)
+                }
+                ItemOperationManager.default.addedLocalFiles(items: addedObjects)
+                
+                self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
+            })
+        }
+    }
+    
     
 //    func insertFromPhotoFramework(progress: AppendingLocaclItemsProgressCallback?,
 //                                  allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
