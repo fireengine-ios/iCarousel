@@ -7,6 +7,10 @@
 //
 
 final class FaceImageAddNameRouter: BaseFilesGreedRouter {
+    
+    override func showBack() {
+        RouterVC().popViewController()
+    }
 
 }
 
@@ -15,7 +19,6 @@ final class FaceImageAddNameRouter: BaseFilesGreedRouter {
 extension FaceImageAddNameRouter: FaceImageAddNameRouterInput {
     
     func showMerge(firstUrl: URL, secondUrl: URL, completion: @escaping (() -> Void)) {
-    
         let vc = PopUpController.with(title: TextConstants.faceImageCheckTheSamePerson, message: TextConstants.faceImageWillMergedTogether, image: .success, firstButtonTitle: TextConstants.faceImageNope, secondButtonTitle: TextConstants.faceImageYes, firstUrl: firstUrl, secondUrl: secondUrl,secondAction: { vc in
             vc.close(completion: completion)
         })
