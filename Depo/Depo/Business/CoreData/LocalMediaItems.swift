@@ -19,6 +19,19 @@ struct MetaAssetInfo {
     }
 }
 
+//enum DBSortType {
+//    case dateUp(Date?)
+//    case dateDown(Date?)
+//    case lettersAZ(String?)
+//    case lettersZA(String?)
+//    case sizeAZ(UInt64?)
+//    case sizeZA(UInt64?)
+//    case metaDateTimeUp(Date?)
+//    case metaDateTimeDown(Date?)
+//}
+
+typealias LocalFilesCallBack = (_ localFiles: [WrapData]) -> Void
+
 extension CoreDataStack {
     @objc func appendLocalMediaItems() {
         let localMediaStorage = LocalMediaStorage.default
@@ -48,6 +61,7 @@ extension CoreDataStack {
         
         inProcessAppendingLocalFiles = true
         
+
         let localMediaStorage = LocalMediaStorage.default
         let newBgcontext = self.newChildBackgroundContext
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
@@ -61,6 +75,61 @@ extension CoreDataStack {
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
         }
     }
+//
+//        DispatchQueue(label: "com.lifebox.localFles").async {
+//            let localMediaStorage = LocalMediaStorage.default
+//            let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
+//            let newBgcontext = self.newChildBackgroundContext
+//            let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
+//
+//            let start = Date()
+//            var addedObjects = [WrapData]()
+//
+//            let semaphore = DispatchSemaphore(value: 0)
+//            var readyItemsCount = 0
+////            while readyItemsCount < notSaved.count {
+//                let nextItemsAmount = min(notSaved.count - readyItemsCount, NumericConstants.numberOfLocalItemsOnPage)
+//                let pageItems = Array(notSaved[readyItemsCount..<nextItemsAmount])
+//
+//                localMediaStorage.getInfo(from: pageItems, completion: { (assetsInfo) in
+//                    assetsInfo.forEach {
+//                        let wrapedItem =  WrapData(info: $0)
+//                        _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
+//
+//                        self.saveDataForContext(context: newBgcontext, saveAndWait: true)
+//                        addedObjects.append(wrapedItem)
+//                        readyItemsCount += nextItemsAmount
+//                    }
+//
+//                    ItemOperationManager.default.addedLocalFiles(items: addedObjects)
+//                    semaphore.signal()
+//                })
+//                semaphore.wait()
+////            }
+//
+//            debugPrint("All images and videos have been saved in \(Date().timeIntervalSince(start)) seconds")
+//            self.inProcessAppendingLocalFiles = false
+//        }
+//    }
+//
+    func getLocalFiles(filesType: FileType, sortType: /*DBSortType*/SortedRules,
+                       pageUUIDS: [String], pageMD5s: [String],
+                       lastRemoteItem: Item?, paginationEnd: Bool,
+                       filesCallBack: @escaping LocalFilesCallBack ) {
+
+
+
+    }
+//
+    func getLocalFilesPhotoVideoPage(filesType: FileType, sortType: SortedRules,
+                       pageUUIDS: [String], pageMD5s: [String],
+                       lastRemoteItem: Item?, paginationEnd: Bool,
+                       filesCallBack: @escaping LocalFilesCallBack ) {
+
+
+
+    }
+//>>>>>>> Stashed changes
     
     private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping ()->Void ) {
         guard !items.isEmpty else {

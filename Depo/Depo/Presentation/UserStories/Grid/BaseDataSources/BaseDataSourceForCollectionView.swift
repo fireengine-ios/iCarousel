@@ -99,8 +99,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     
     func compoundItems(pageItems: [WrapData]) {
+        
+        allMediaItems.append(contentsOf: pageItems)
+        appendLocalItems(originalItemsArray: allMediaItems)
+        /*
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
+        
         isHeaderless ? setupOneSectionMediaItemsArray(items: allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
+         */
     }
     
     private func setupOneSectionMediaItemsArray(items: [WrapData]) {
@@ -246,13 +252,34 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var tempoArray = originalItemsArray
         var tempoLocalArray = [WrapData]()
         
+        let allItemsArray = allMediaItems + originalItemsArray
+        
         if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters),
             !isOnlyNonLocal(filters: unwrapedFilters) {
             switch specificFilters {
-            case .video:
-                tempoLocalArray = allLocalItems.filter{$0.fileType == .video}
-            case .image:
-                tempoLocalArray = allLocalItems.filter{$0.fileType == .image}
+            case .video, .image:
+//                tempoLocalArray =
+                var md5s = [String]()
+                var uuids = [String]()
+                originalItemsArray.forEach{
+                    md5s.append($0.md5)
+                    uuids.append($0.uuid)
+                }
+                CoreDataStack.default.getLocalFiles(filesType: specificFilters, sortType: currentSortType,
+                                                    pageUUIDS: uuids, pageMD5s: md5s,
+                                                    lastRemoteItem: allItemsArray.last,
+                                                    paginationEnd: isPaginationDidEnd,
+                                                    filesCallBack: { [weak self] localItems in
+                       tempoLocalArray = localItems
+                                                        
+                                                        
+                                                        
+                })
+                
+                
+                //allLocalItems.filter{$0.fileType == .video}
+//            case .image:
+//                tempoLocalArray = //allLocalItems.filter{$0.fileType == .image}
             default:
                 break
             }
@@ -260,73 +287,73 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if tempoLocalArray.count == 0 {
             return originalItemsArray
         }
-        let allItemsArray = allMediaItems + originalItemsArray
-        var allItemsMD5 = allItemsArray.map{return $0.md5}
         
-        if !isPaginationDidEnd {
-            guard let lastRemoteObject = getLastNonMetaEmptyItem(items: originalItemsArray) else {
-                allLocalItems.removeAll()
-                return originalItemsArray + tempoLocalArray
-            }
-            for localItem in tempoLocalArray {
-                if allItemsMD5.contains(localItem.md5) {
-                    if let unwrpedIndex = allLocalItems.index(of: localItem) {
-                        allLocalItems.remove(at: unwrpedIndex)
-                    }
-                    continue
-                }
-                
-                switch currentSortType {
-                case .timeUp, .timeUpWithoutSection:
-                    
-                    if localItem.creationDate! < lastRemoteObject.creationDate! {
-                        continue
-                    }
-                case .timeDown, .timeDownWithoutSection:
-                    if localItem.creationDate! > lastRemoteObject.creationDate! {
-                        continue
-                    }
-                case .lettersAZ, .albumlettersAZ:
-                    if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
-                        continue
-                    }
-                case .lettersZA, .albumlettersZA:
-                    if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
-                        continue
-                    }
-                case .sizeAZ:
-                    if localItem.fileSize < lastRemoteObject.fileSize {
-                        continue
-                    }
-                case .sizeZA:
-                    if localItem.fileSize > lastRemoteObject.fileSize {
-                        continue
-                    }
-                case .metaDataTimeUp:
-                    if localItem.metaDate < lastRemoteObject.metaDate {
-                        continue
-                    }
-                case .metaDataTimeDown:
-                    if localItem.metaDate > lastRemoteObject.metaDate {
-                        continue
-                    }
-                }
-                tempoArray.append(localItem)
-                allItemsMD5.append(localItem.md5)
-                if let unwrpedIndex = allLocalItems.index(of: localItem) {
-                    allLocalItems.remove(at: unwrpedIndex)
-                }
-            }
-        } else {
-            debugPrint("!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
-            tempoArray.append(contentsOf: tempoLocalArray)
-            tempoLocalArray.forEach{
-                if let unwrpedIndex = allLocalItems.index(of: $0) {
-                    allLocalItems.remove(at: unwrpedIndex)
-                }
-            }
-            //            allLocalItems.removeAll()
-        }
+//        var allItemsMD5 = allItemsArray.map{return $0.md5}
+//
+//        if !isPaginationDidEnd {
+//            guard let lastRemoteObject = getLastNonMetaEmptyItem(items: originalItemsArray) else {
+//                allLocalItems.removeAll()
+//                return originalItemsArray + tempoLocalArray
+//            }
+//            for localItem in tempoLocalArray {
+//                if allItemsMD5.contains(localItem.md5) {
+//                    if let unwrpedIndex = allLocalItems.index(of: localItem) {
+//                        allLocalItems.remove(at: unwrpedIndex)
+//                    }
+//                    continue
+//                }
+//
+//                switch currentSortType {
+//                case .timeUp, .timeUpWithoutSection:
+//
+//                    if localItem.creationDate! < lastRemoteObject.creationDate! {
+//                        continue
+//                    }
+//                case .timeDown, .timeDownWithoutSection:
+//                    if localItem.creationDate! > lastRemoteObject.creationDate! {
+//                        continue
+//                    }
+//                case .lettersAZ, .albumlettersAZ:
+//                    if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
+//                        continue
+//                    }
+//                case .lettersZA, .albumlettersZA:
+//                    if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
+//                        continue
+//                    }
+//                case .sizeAZ:
+//                    if localItem.fileSize < lastRemoteObject.fileSize {
+//                        continue
+//                    }
+//                case .sizeZA:
+//                    if localItem.fileSize > lastRemoteObject.fileSize {
+//                        continue
+//                    }
+//                case .metaDataTimeUp:
+//                    if localItem.metaDate < lastRemoteObject.metaDate {
+//                        continue
+//                    }
+//                case .metaDataTimeDown:
+//                    if localItem.metaDate > lastRemoteObject.metaDate {
+//                        continue
+//                    }
+//                }
+//                tempoArray.append(localItem)
+//                allItemsMD5.append(localItem.md5)
+//                if let unwrpedIndex = allLocalItems.index(of: localItem) {
+//                    allLocalItems.remove(at: unwrpedIndex)
+//                }
+//            }
+//        } else {
+//            debugPrint("!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
+//            tempoArray.append(contentsOf: tempoLocalArray)
+//            tempoLocalArray.forEach{
+//                if let unwrpedIndex = allLocalItems.index(of: $0) {
+//                    allLocalItems.remove(at: unwrpedIndex)
+//                }
+//            }
+//            //            allLocalItems.removeAll()
+//        }
         
         switch currentSortType {
         case .timeUp, .timeUpWithoutSection:
