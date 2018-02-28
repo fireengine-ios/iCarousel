@@ -83,11 +83,6 @@ enum SortedRules: Int {
         }
     }
     
-//    func convertToDBSortType(lastItemSortValue: ) -> DBSortType {
-//        
-//        return .dateUp(nil)
-//    }
-    
 }
 
 class MoreActionsConfig {

@@ -100,13 +100,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func compoundItems(pageItems: [WrapData]) {
         
-        allMediaItems.append(contentsOf: pageItems)
-        appendLocalItems(originalItemsArray: allMediaItems)
-        /*
-        allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
+//        allMediaItems.append(contentsOf: pageItems)
+//        appendLocalItems(originalItemsArray: allMediaItems)
+        appendLocalItems(originalItemsArray: pageItems, localFileasAppendedCallback: {[weak self] imbededwithLocalsItems in
+            guard let `self` = self else {
+                return
+            }
+            self.allMediaItems.append(contentsOf: imbededwithLocalsItems)
+            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+            self.reloadData()
+        })
         
-        isHeaderless ? setupOneSectionMediaItemsArray(items: allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
-         */
+        
     }
     
     private func setupOneSectionMediaItemsArray(items: [WrapData]) {
@@ -248,34 +253,74 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return false
     }
     
-    private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
+    private func appendLocalItems(originalItemsArray: [WrapData], localFileasAppendedCallback: @escaping ([WrapData])->()) {
         var tempoArray = originalItemsArray
-        var tempoLocalArray = [WrapData]()
+//        var tempoLocalArray = [WrapData]()
         
-        let allItemsArray = allMediaItems + originalItemsArray
+//        let allItemsArray = allMediaItems + originalItemsArray
         
         if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters),
             !isOnlyNonLocal(filters: unwrapedFilters) {
             switch specificFilters {
             case .video, .image:
-//                tempoLocalArray =
-                var md5s = [String]()
-                var uuids = [String]()
-                originalItemsArray.forEach{
-                    md5s.append($0.md5)
-                    uuids.append($0.uuid)
-                }
-                CoreDataStack.default.getLocalFiles(filesType: specificFilters, sortType: currentSortType,
-                                                    pageUUIDS: uuids, pageMD5s: md5s,
-                                                    lastRemoteItem: allItemsArray.last,
-                                                    paginationEnd: isPaginationDidEnd,
-                                                    filesCallBack: { [weak self] localItems in
-                       tempoLocalArray = localItems
-                                                        
-                                                        
-                                                        
+////                tempoLocalArray =
+//                var md5s = [String]()
+//                var uuids = [String]()
+//                originalItemsArray.forEach{
+//                    md5s.append($0.md5)
+//                    uuids.append($0.uuid)
+//                }
+//                CoreDataStack.default.getLocalFiles(filesType: specificFilters, sortType: currentSortType,
+//                                                    pageUUIDS: uuids, pageMD5s: md5s,
+//                                                    firstRemoteItem: originalItemsArray.first,
+//                                                    lastRemoteItem: allItemsArray.last,
+//                                                    paginationEnd: isPaginationDidEnd,
+//                                                    filesCallBack: { [weak self] localItems in
+//                       tempoLocalArray = localItems
+//
+//
+//
+//                })
+                CoreDataStack.default.getLocalFilesForPhotoVideoPage(filesType: specificFilters,
+                                                                     sortType: currentSortType,
+                                                                     pageRemoteItem: originalItemsArray,
+                                                                     paginationEnd: isPaginationDidEnd,
+                                                                     filesCallBack: { [weak self] localItems in
+                                                                        guard let `self` = self else {
+                                                                            return
+                                                                        }
+                        if localItems.count == 0 {
+                            localFileasAppendedCallback(originalItemsArray)
+                            return
+                        }
+                                                                        
+                          tempoArray.append(contentsOf: localItems)
+                                                                        
+                                                                        
+                            switch self.currentSortType {
+                            case .timeUp, .timeUpWithoutSection:
+                                tempoArray.sort{$0.creationDate! > $1.creationDate!}
+                            case .timeDown, .timeDownWithoutSection:
+                                tempoArray.sort{$0.creationDate! < $1.creationDate!}
+                            case .lettersAZ, .albumlettersAZ:
+                                tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
+                            case .lettersZA, .albumlettersZA:
+                                tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
+                            case .sizeAZ:
+                                tempoArray.sort{$0.fileSize > $1.fileSize}
+                            case .sizeZA:
+                                tempoArray.sort{$0.fileSize < $1.fileSize}
+                            case .metaDataTimeUp:
+                                tempoArray.sort{$0.metaDate > $1.metaDate}
+                            case .metaDataTimeDown:
+                                tempoArray.sort{$0.metaDate < $1.metaDate}
+                            }
+                                                                        
+                    localFileasAppendedCallback(tempoArray)
+                     debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
+                     debugPrint("ON PHOTO PAGE NOW")
+                                                                        
                 })
-                
                 
                 //allLocalItems.filter{$0.fileType == .video}
 //            case .image:
@@ -284,9 +329,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 break
             }
         }
-        if tempoLocalArray.count == 0 {
-            return originalItemsArray
-        }
+//        if tempoLocalArray.count == 0 {
+//            return originalItemsArray
+//        }
         
 //        var allItemsMD5 = allItemsArray.map{return $0.md5}
 //
@@ -355,26 +400,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 //            //            allLocalItems.removeAll()
 //        }
         
-        switch currentSortType {
-        case .timeUp, .timeUpWithoutSection:
-            tempoArray.sort{$0.creationDate! > $1.creationDate!}
-        case .timeDown, .timeDownWithoutSection:
-            tempoArray.sort{$0.creationDate! < $1.creationDate!}
-        case .lettersAZ, .albumlettersAZ:
-            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
-        case .lettersZA, .albumlettersZA:
-            tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
-        case .sizeAZ:
-            tempoArray.sort{$0.fileSize > $1.fileSize}
-        case .sizeZA:
-            tempoArray.sort{$0.fileSize < $1.fileSize}
-        case .metaDataTimeUp:
-            tempoArray.sort{$0.metaDate > $1.metaDate}
-        case .metaDataTimeDown:
-            tempoArray.sort{$0.metaDate < $1.metaDate}
-        }
-        debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
-        return tempoArray
+        
+//        return tempoArray
     }
     
     private func getLastNonMetaEmptyItem(items: [WrapData]) -> WrapData? {
@@ -1385,17 +1412,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         updateCoverPhoto()
     }
     
-    func addedLocalFiles(items: [Item]){
-        if let unwrapedFilters = originalFilters,
-            isAlbumDetail(filters: unwrapedFilters) {
-            return
-        }
-        
-        if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
-            return
-        }
-        allLocalItems.append(contentsOf: items)
-        delegate?.needReloadData?()
+    func addedLocalFiles(items: [Item]) {
+//        if let unwrapedFilters = originalFilters,
+//            isAlbumDetail(filters: unwrapedFilters) {
+//            return
+//        }
+//        
+//        if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
+//            return
+//        }
+//        allLocalItems.append(contentsOf: items)
+//        delegate?.needReloadData?()
     }
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String){

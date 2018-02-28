@@ -184,7 +184,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
         dataSource.appendCollectionView(items: [])
-        dataSource.reloadData()
+//        dataSource.reloadData()
         updateNoFilesView()
     }
     
@@ -201,7 +201,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         dataSource.appendCollectionView(items: items)
 
-        dataSource.reloadData()
+//        dataSource.reloadData()
         updateNoFilesView()
     }
     

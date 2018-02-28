@@ -114,6 +114,7 @@ extension CoreDataStack {
 //
     func getLocalFiles(filesType: FileType, sortType: /*DBSortType*/SortedRules,
                        pageUUIDS: [String], pageMD5s: [String],
+                       firstRemoteItem: Item?,
                        lastRemoteItem: Item?, paginationEnd: Bool,
                        filesCallBack: @escaping LocalFilesCallBack ) {
 
@@ -122,14 +123,48 @@ extension CoreDataStack {
     }
 //
     func getLocalFilesForPhotoVideoPage(filesType: FileType, sortType: SortedRules,
-                       pageUUIDS: [String], pageMD5s: [String],
-                       lastRemoteItem: Item?, paginationEnd: Bool,
+                       pageRemoteItem: [Item], paginationEnd: Bool,
                        filesCallBack: @escaping LocalFilesCallBack ) {
-
-
+        var md5s = [String]()
+        var uuids = [String]()
+        pageRemoteItem.forEach{
+            md5s.append($0.md5)
+            uuids.append($0.uuid)
+        }
+        
+        let request = NSFetchRequest<MediaItem>()
+        
+        
+        let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR uuidValue IN %@)", md5s, uuids )
+        
+        var datePredicate = NSPredicate()
+        
+        if let lastRemoteItem = pageRemoteItem.last {
+            //convert to NSPredicate?
+            datePredicate = NSPredicate(format: "creationDateValue > %@", lastRemoteItem.metaDate as NSDate)
+//            NSPredicate(format: "creationDateValue > %@", lastRemoteItem.metaDate as NSDate)
+        }
+        
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicateString, datePredicate])
+        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
+                                                    in: backgroundContext)
+        //NSPredicate(format: "%@ AND %@", basePredicateString, datePredicate )
+        
+        if let localItems = try? backgroundContext.fetch(request), (localItems.count >= 100 || !inProcessAppendingLocalFiles) {
+            let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
+            filesCallBack(wrapedLocalItems)
+        } else {
+            pageAppendedCallBack = { [weak self] localItems in
+                debugPrint("callback")
+                filesCallBack(localItems)
+                self?.pageAppendedCallBack = nil
+            }
+            //we realize finishing or progress build here
+        }
 
     }
-//>>>>>>> Stashed changes
+    
+    
     
     private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping ()->Void ) {
         guard !items.isEmpty else {
@@ -138,9 +173,11 @@ extension CoreDataStack {
         }
 
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
+
         
         queue.async {
-            LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] (assetsInfo) in
+            LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] assetsInfo in
+
                 var addedObjects = [WrapData]()
                 assetsInfo.forEach {
                     let wrapedItem =  WrapData(info: $0)
@@ -150,7 +187,10 @@ extension CoreDataStack {
                 }
                 
                 self?.saveDataForContext(context: context, saveAndWait: true)
-                ItemOperationManager.default.addedLocalFiles(items: addedObjects)
+                ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
+                
+                
+                self?.pageAppendedCallBack?(addedObjects)
                 
                 print("local files added: \(assetsInfo.count)")
                 

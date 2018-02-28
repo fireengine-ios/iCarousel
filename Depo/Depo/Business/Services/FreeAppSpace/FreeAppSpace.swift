@@ -314,10 +314,10 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
     }
     
-    func addedLocalFiles(items: [Item]){
-        let serverObjectsUUIDs = serverDuplicatesArray.map({ $0.uuid })
+    func addedLocalFiles(items: [Item]) {
+        let serverObjectsUUIDs = serverDuplicatesArray.map{ $0.uuid }
         for item in items {
-            if serverObjectsUUIDs.contains(item.uuid){
+            if serverObjectsUUIDs.contains(item.uuid) {
                 localtemsArray.append(item)
                 duplicatesArray.append(item)
             }

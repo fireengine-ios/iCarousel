@@ -19,6 +19,8 @@ class CoreDataStack: NSObject {
     typealias AppendingLocaclItemsFinishCallback = ()->Void
     typealias AppendingLocaclItemsProgressCallback = (Float)->Void
     
+    typealias AppendingLocalItemsPageAppended = ([Item])->Void
+    
     @objc static let `default` = CoreDataStack()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
@@ -57,6 +59,7 @@ class CoreDataStack: NSObject {
     
     let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")
     
+    var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     
     override init() {
 
