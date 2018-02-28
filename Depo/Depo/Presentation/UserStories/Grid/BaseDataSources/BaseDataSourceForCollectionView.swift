@@ -552,6 +552,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
             cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+            
+            if let cell = cell as? BasicCollectionMultiFileCell {
+                cell.moreButton.isHidden = !needShow3DotsInCell
+            }
         }
         
         for header in headers{
