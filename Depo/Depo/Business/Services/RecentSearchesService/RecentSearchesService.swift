@@ -108,7 +108,7 @@ final class RecentSearchesService {
     private func add(item: SuggestionObject, toCategory category: SearchCategory) {
         var objects = searches[category] ?? [SuggestionObject]()
         
-        if let existingIndex = objects.index(where: {$0.info?.id == item.info?.id}) {
+        if let existingIndex = objects.index(where: {$0.info?.id == item.info?.id && $0.text == item.text}) {
             objects.remove(at: existingIndex)
         } else if objects.count >= category.maxSearches {
             objects.removeLast(1)
