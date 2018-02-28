@@ -9,7 +9,12 @@
 import SwiftyJSON
 
 enum SearchCategory: Int {
-    case suggestion = 0, recent, people, things
+    case suggestionHeader = 0
+    case suggestion
+    case recentHeader
+    case recent
+    case people
+    case things
     
     var searchKey: String {
         switch self {
