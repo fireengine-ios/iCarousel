@@ -8,11 +8,11 @@
 
 class ManageContactsRouter: ManageContactsRouterInput {
     
-    func deleteContact(_ completion: @escaping (() -> Void)) {
+    func deleteContact(_ completion: @escaping VoidHandler) {
         self.showDeleteContactPopUp(okHandler: completion)
     }
     
-    func showDeleteContactPopUp(okHandler: @escaping () -> Void) {
+    func showDeleteContactPopUp(okHandler: @escaping VoidHandler) {
         let controller = PopUpController.with(title: TextConstants.contactConfirmDeleteTitle,
                                               message: TextConstants.contactConfirmDeleteText,
                                               image: .delete,

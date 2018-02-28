@@ -38,5 +38,5 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
     
     func showShare(rect: CGRect?, urls: [String]) { }
     
-    func showDeleteMusic(_ completion: @escaping (() -> Void)) { }
+    func showDeleteMusic(_ completion: @escaping VoidHandler) { }
 }

@@ -8,5 +8,5 @@
 
 protocol FaceImageAddNameRouterInput {
     func popToPeopleItems()
-    func showMerge(firstUrl: URL, secondUrl: URL, completion: @escaping (() -> Void))
+    func showMerge(firstUrl: URL, secondUrl: URL, completion: @escaping VoidHandler)
 }

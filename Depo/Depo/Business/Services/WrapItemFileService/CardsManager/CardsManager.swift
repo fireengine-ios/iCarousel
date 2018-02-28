@@ -30,7 +30,7 @@ enum OperationType: String{
     case movieCard                  = "movieCard"
 }
 
-typealias BlockObject = () -> Void
+typealias BlockObject = VoidHandler
 
 class Progress {
     var allOperations: Int?
