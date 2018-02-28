@@ -211,6 +211,7 @@
             <color key="backgroundColor" red="0.38853236607142855" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="BuA-r0-ykZ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="0Qk-3b-fRW"/>
+                <constraint firstItem="kNq-kb-jWD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="750" constant="64" id="2ed-V7-gas"/>
                 <constraint firstItem="Xtp-x9-4nT" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3it-Up-q3B"/>
                 <constraint firstItem="kNq-kb-jWD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6PU-81-qTI"/>
                 <constraint firstAttribute="bottom" secondItem="kNq-kb-jWD" secondAttribute="bottom" id="BgH-ii-Tmx"/>
@@ -220,7 +221,7 @@
                 <constraint firstAttribute="trailing" secondItem="kNq-kb-jWD" secondAttribute="trailing" id="cpc-I4-Dgh"/>
                 <constraint firstAttribute="trailing" secondItem="VaL-qI-xdB" secondAttribute="trailing" id="g8T-rg-Qu4"/>
                 <constraint firstAttribute="bottom" secondItem="VaL-qI-xdB" secondAttribute="bottom" id="rDi-bM-Mv5"/>
-                <constraint firstItem="kNq-kb-jWD" firstAttribute="top" secondItem="CuU-dk-aut" secondAttribute="top" id="uw9-H5-5w1"/>
+                <constraint firstItem="kNq-kb-jWD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CuU-dk-aut" secondAttribute="top" id="uw9-H5-5w1"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>

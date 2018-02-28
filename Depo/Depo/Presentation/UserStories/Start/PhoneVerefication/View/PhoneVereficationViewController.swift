@@ -40,7 +40,7 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        visibleNavigationBarStyle()
+        hidenNavigationBarStyle()
     }
     
     @IBAction func ResendCode(_ sender: Any) {

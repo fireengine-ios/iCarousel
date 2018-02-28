@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,11 +24,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="0bQ-SL-aJn">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WO4-Cf-nbi">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H69-E9-iAk">
                             <rect key="frame" x="0.0" y="195.5" width="375" height="212"/>
@@ -79,7 +80,7 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hIP-nQ-ZI7">
-                    <rect key="frame" x="0.0" y="137" width="375" height="530"/>
+                    <rect key="frame" x="0.0" y="72" width="375" height="531"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SlL-tu-bDK">
                         <size key="itemSize" width="50" height="50"/>
@@ -89,7 +90,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJp-Dc-fL1">
-                    <rect key="frame" x="0.0" y="65" width="375" height="60"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="You next" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sSz-PO-qCR">
                             <rect key="frame" x="20" y="0.0" width="335" height="60"/>
@@ -112,7 +113,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWb-5t-5wg" userLabel="carouselContainer">
-                    <rect key="frame" x="0.0" y="682" width="375" height="0.0"/>
+                    <rect key="frame" x="0.0" y="618" width="375" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" id="D2v-TW-meD"/>
@@ -125,12 +126,12 @@
                 <constraint firstAttribute="trailing" secondItem="gWb-5t-5wg" secondAttribute="trailing" id="6gs-G4-JlH"/>
                 <constraint firstAttribute="bottom" secondItem="WO4-Cf-nbi" secondAttribute="bottom" id="ARd-2G-jC9"/>
                 <constraint firstAttribute="trailing" secondItem="WO4-Cf-nbi" secondAttribute="trailing" id="Cz8-gX-mCF"/>
-                <constraint firstItem="WO4-Cf-nbi" firstAttribute="top" secondItem="0bQ-SL-aJn" secondAttribute="top" constant="64" id="Kh1-6E-VAw"/>
+                <constraint firstItem="WO4-Cf-nbi" firstAttribute="top" secondItem="Hb0-3T-8y4" secondAttribute="top" id="QhI-F7-12E"/>
                 <constraint firstItem="gWb-5t-5wg" firstAttribute="bottom" secondItem="hIP-nQ-ZI7" secondAttribute="bottom" constant="15" id="Rch-Uo-waz"/>
                 <constraint firstItem="WO4-Cf-nbi" firstAttribute="leading" secondItem="0bQ-SL-aJn" secondAttribute="leading" id="TVZ-VK-cpZ"/>
                 <constraint firstItem="MJp-Dc-fL1" firstAttribute="leading" secondItem="0bQ-SL-aJn" secondAttribute="leading" id="Y7E-Iq-J3V"/>
                 <constraint firstAttribute="trailing" secondItem="MJp-Dc-fL1" secondAttribute="trailing" id="Z3Y-ZN-FRf"/>
-                <constraint firstItem="MJp-Dc-fL1" firstAttribute="top" secondItem="0bQ-SL-aJn" secondAttribute="top" constant="65" id="bgH-yC-CUr"/>
+                <constraint firstItem="MJp-Dc-fL1" firstAttribute="top" secondItem="Hb0-3T-8y4" secondAttribute="top" id="Zvd-Kt-XWQ"/>
                 <constraint firstAttribute="trailing" secondItem="hIP-nQ-ZI7" secondAttribute="trailing" id="mUF-Rn-9Ox">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
@@ -142,7 +143,8 @@
                 </constraint>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="Hb0-3T-8y4"/>
             <point key="canvasLocation" x="24.5" y="50.5"/>
         </view>
     </objects>

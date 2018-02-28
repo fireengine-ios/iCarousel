@@ -34,9 +34,8 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     // MARK: Life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        hidenNavigationBarStyle()
         
-        defaultNavBarStyle()
-        visibleNavigationBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
         scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         
