@@ -68,7 +68,7 @@ final class ShareViewController: UIViewController {
                 return
             }
             
-            self.uploadService.addShareData(self.sharedItems, progressHandler: { [weak self] progress in
+            self.uploadService.addShareData(self.sharedItems, progress: { [weak self] progress in
                 DispatchQueue.main.async {
                     self?.uploadProgress.progress = Float(progress.fractionCompleted)
                 }

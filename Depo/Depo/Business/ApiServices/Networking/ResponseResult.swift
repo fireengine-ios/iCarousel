@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias HandlerVoid = () -> Void
+typealias VoidHandler = () -> Void
 typealias ResponseVoid = (ResponseResult<Void>) -> Void
 typealias ResponseHandler<T> = (ResponseResult<T>) -> Void
 typealias ResponseArrayHandler<T> = (ResponseResult<[T]>) -> Void

@@ -13,7 +13,7 @@ enum URLs {
     static let uploadContainer = RouteRequests.BaseUrl +/ "/api/container/baseUrl"
 }
 
-typealias HandlerDataRequest = (DataRequest) -> Void
+typealias DataRequestHandler = (DataRequest) -> Void
 
 final class UploadService {
     
@@ -42,7 +42,7 @@ final class UploadService {
         }
     }
     
-    func upload(url: URL, contentType: String, progressHandler: @escaping Request.ProgressHandler, handlerDataRequest: HandlerDataRequest?, complition: @escaping ResponseVoid) {
+    func upload(url: URL, contentType: String, progressHandler: @escaping Request.ProgressHandler, dataRequestHandler: DataRequestHandler?, complition: @escaping ResponseVoid) {
         
         let dataRequest = getBaseUploadUrl { [weak self] result in
             
@@ -77,11 +77,11 @@ final class UploadService {
                             complition(ResponseResult.failed(error))
                         }
                 }
-                handlerDataRequest?(dataRequest)
+                dataRequestHandler?(dataRequest)
             case .failed(let error):
                 complition(ResponseResult.failed(error))
             }
         }
-        handlerDataRequest?(dataRequest)
+        dataRequestHandler?(dataRequest)
     }
 }

@@ -16,7 +16,7 @@ final class UploadOperation: AsyncOperation {
     private let url: URL
     private let contentType: String
     private let progressHandler: Request.ProgressHandler
-    private let didStartUpload: HandlerVoid?
+    private let didStartUpload: VoidHandler?
     private let complition: ResponseVoid
     private var dataRequest: DataRequest?
     
@@ -27,7 +27,7 @@ final class UploadOperation: AsyncOperation {
     init(url: URL,
          contentType: String,
          progressHandler: @escaping Request.ProgressHandler,
-         didStartUpload: HandlerVoid?,
+         didStartUpload: VoidHandler?,
          complition: @escaping ResponseVoid)
     {
         self.url = url
@@ -41,7 +41,7 @@ final class UploadOperation: AsyncOperation {
     override func main() {
         didStartUpload?()
         
-        uploadService.upload(url: url, contentType: contentType, progressHandler: progressHandler, handlerDataRequest: { [weak self] dataRequest in
+        uploadService.upload(url: url, contentType: contentType, progressHandler: progressHandler, dataRequestHandler: { [weak self] dataRequest in
             self?.dataRequest = dataRequest
         }, complition: { [weak self] result in
             
