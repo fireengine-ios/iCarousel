@@ -69,10 +69,10 @@ class Upload: UploadRequestParametrs {
 
         self.isFavorite = isFavorite
 
-        if item.isLocalItem, item.uuid.count > 0 {
+        if item.isLocalItem, !item.syncStatus.isContained(in: [.synced]) , !item.uuid.isEmpty {
             self.tmpUUId = item.uuid
         } else {
-            self.tmpUUId = UUID().description
+            self.tmpUUId = UUID().uuidString
         }
     }
     
@@ -90,7 +90,6 @@ class Upload: UploadRequestParametrs {
             HeaderConstant.XObjectMetaParentUuid : rootFolder
 //            HeaderConstant.Etag                   : md5
             //                  HeaderConstant.ContentLength         : contentLenght,
-            //                  HeaderConstant.XObjectMetaParentUuid : rootFolder,
             //                  HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue,
             //                  HeaderConstant.XObjectMetaAlbumLabel  : "",
             //                  HeaderConstant.XObjectMetaFolderLabel : "",
