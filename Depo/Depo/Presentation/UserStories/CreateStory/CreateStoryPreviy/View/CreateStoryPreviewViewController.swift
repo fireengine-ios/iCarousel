@@ -47,7 +47,6 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //defaultNavBarStyle()
         blackNavigationBarStyle()
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
         button.setTitle(TextConstants.createStorySave, for: .normal)
@@ -58,7 +57,6 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         navigationItem.rightBarButtonItem = barButton
         
         output.viewIsReady()
-        //setStatusBarBackgroundColor(color: viewForPlayer.backgroundColor ?? UIColor.black)
     }
     
     @IBAction func onPlayButton(){
