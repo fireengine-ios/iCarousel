@@ -2528,6 +2528,11 @@
 		CE1458C82045619500812544 /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33DFFE1F0296C000706C40 /* RequestHeader.swift */; };
 		CE1458C9204561CC00812544 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
 		CE1458CB2045633D00812544 /* ShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CA2045633D00812544 /* ShareConfigurator.swift */; };
+		CE1458CF2045734200812544 /* Alamofire+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CE2045734200812544 /* Alamofire+Validate.swift */; };
+		CE1458D02045734900812544 /* Alamofire+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CE2045734200812544 /* Alamofire+Validate.swift */; };
+		CE1458D12045734A00812544 /* Alamofire+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CE2045734200812544 /* Alamofire+Validate.swift */; };
+		CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
+		CE1458D520458D9100812544 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
 		CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
@@ -2810,6 +2815,9 @@
 		CE58FB0620444BE8007F3F54 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
 		CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
 		CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
+		CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
+		CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
+		CE61D1BB20459718001D01DC /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0596F220385E940083D6FC /* ImageFormat.swift */; };
 		CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
 		CE654FAF20454A4400232025 /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FAE20454A4400232025 /* ShareData.swift */; };
 		CE654FB120454AAD00232025 /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
@@ -4671,6 +4679,7 @@
 		CE1353342004F0F90004CBBE /* TextEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterController.swift; sourceTree = "<group>"; };
 		CE1353382004F1530004CBBE /* TextEnterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextEnterController.xib; sourceTree = "<group>"; };
 		CE1458CA2045633D00812544 /* ShareConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareConfigurator.swift; sourceTree = "<group>"; };
+		CE1458CE2045734200812544 /* Alamofire+Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Validate.swift"; sourceTree = "<group>"; };
 		CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
@@ -4776,6 +4785,7 @@
 		CE58FAF620444493007F3F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE58FAFF20444524007F3F54 /* SharedFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFactory.swift; sourceTree = "<group>"; };
 		CE58FB0520444BE8007F3F54 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxShared.entitlements; sourceTree = "<group>"; };
 		CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardsService.swift; sourceTree = "<group>"; };
 		CE654FAE20454A4400232025 /* ShareData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 		CE654FB020454AAD00232025 /* URL+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Video.swift"; sourceTree = "<group>"; };
@@ -5246,6 +5256,7 @@
 			children = (
 				CE6FBFBB1FB2DC3F008FC18C /* AppDelegate.swift */,
 				7CDB43341F86678D00789FA6 /* AppConfigurator.swift */,
+				CE1458CE2045734200812544 /* Alamofire+Validate.swift */,
 				CE3B3AF0202888240002558C /* OrientationManager.swift */,
 				672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */,
 				7C032B801EEFE408006532C8 /* Constants */,
@@ -9897,6 +9908,7 @@
 		CE58FAF020444493007F3F54 /* LifeboxShared */ = {
 			isa = PBXGroup;
 			children = (
+				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
 				CE1458CC2045645000812544 /* Presentation */,
 				CE1458CD2045645F00812544 /* Business */,
 				CE58FAF620444493007F3F54 /* Info.plist */,
@@ -11221,6 +11233,11 @@
 						CreatedOnToolsVersion = 9.2;
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					CE79E4A41F695DA200C1F151 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -12746,6 +12763,7 @@
 				8C0E8C841FDEBDFF00789C91 /* PasscodeEnterViewController.swift in Sources */,
 				8C0E8C851FDEBDFF00789C91 /* CreateStoryPreviewViewController.swift in Sources */,
 				8C0E8C861FDEBDFF00789C91 /* FullyLoaded.m in Sources */,
+				CE1458D02045734900812544 /* Alamofire+Validate.swift in Sources */,
 				7C529689203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
 				8C0E8C871FDEBDFF00789C91 /* UIImageView.swift in Sources */,
 				8C0E8C881FDEBDFF00789C91 /* PHPhotoLibraryChangeObserver.swift in Sources */,
@@ -12900,6 +12918,7 @@
 				8C0E8D151FDEBDFF00789C91 /* ButtonWithCorner.swift in Sources */,
 				8C0E8D161FDEBDFF00789C91 /* SettingHeaderView.swift in Sources */,
 				8C0E8D171FDEBDFF00789C91 /* IntroduceDataStorage.swift in Sources */,
+				CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */,
 				8C0E8D181FDEBDFF00789C91 /* AccountType.swift in Sources */,
 				8C0E8D191FDEBDFF00789C91 /* InfoButtonCellProtocol.swift in Sources */,
 				8C0E8D1A1FDEBDFF00789C91 /* Mail.swift in Sources */,
@@ -13702,6 +13721,7 @@
 				CE3318E61EFCFE1800E25989 /* ApplicationPalette.swift in Sources */,
 				CE51AB1C1EF90853005DCEE0 /* AutoSyncInformTableViewCell.swift in Sources */,
 				7C257B3720174D2500CB56F8 /* ContactBackupOld.swift in Sources */,
+				CE1458D12045734A00812544 /* Alamofire+Validate.swift in Sources */,
 				CE6DE7621FCD8A8000C23CBD /* CodeTextField.swift in Sources */,
 				7C6E2F7A1F31E4C900536DB6 /* CreateStoryPhotoSelectionViewController.swift in Sources */,
 				CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */,
@@ -14660,17 +14680,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE61D1BB20459718001D01DC /* ImageFormat.swift in Sources */,
+				CE1458CF2045734200812544 /* Alamofire+Validate.swift in Sources */,
 				CE58FAF220444493007F3F54 /* ShareViewController.swift in Sources */,
 				CE58FB03204445E0007F3F54 /* TokenStorage.swift in Sources */,
 				CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */,
 				CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */,
 				CE1458C72045618800812544 /* URL+Path.swift in Sources */,
 				CE1458C9204561CC00812544 /* Dictionary.swift in Sources */,
+				CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */,
 				CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */,
 				CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */,
+				CE1458D520458D9100812544 /* CustomErrors.swift in Sources */,
 				CE1458C62045617600812544 /* RouteRequests.swift in Sources */,
 				CE654FB520454B3900232025 /* UICollectionView+Layout.swift in Sources */,
 				CE654FAF20454A4400232025 /* ShareData.swift in Sources */,
+				CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */,
 				CE654FB62045613A00232025 /* AuthorizationRepository.swift in Sources */,
 				CE1458CB2045633D00812544 /* ShareConfigurator.swift in Sources */,
 				CE1458C82045619500812544 /* RequestHeader.swift in Sources */,
@@ -15517,6 +15542,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeboxShared/LifeboxShared.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -15546,6 +15572,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeboxShared/LifeboxShared.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Automatic;
@@ -15574,6 +15601,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeboxShared/LifeboxShared.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
@@ -15602,6 +15630,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeboxShared/LifeboxShared.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Automatic;

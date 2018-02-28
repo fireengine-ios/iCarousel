@@ -49,6 +49,9 @@
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="2Qq-24-odN"/>
                                                 </constraints>
                                                 <state key="normal" title="Upload"/>
+                                                <connections>
+                                                    <action selector="actionUploadButton:" destination="j1y-V4-xli" eventType="touchUpInside" id="ZRO-v1-9Df"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lifebox_small" translatesAutoresizingMaskIntoConstraints="NO" id="TKl-Sm-Usw">
                                                 <rect key="frame" x="96" y="9" width="32" height="32"/>
@@ -193,6 +196,7 @@
                         <outlet property="containerView" destination="MFa-ng-Ixs" id="Ylg-YP-FvQ"/>
                         <outlet property="currentNameLabel" destination="hWc-SD-XbG" id="hCk-de-H1g"/>
                         <outlet property="currentPhotoImageView" destination="1t9-8h-hwr" id="pa5-cG-oEs"/>
+                        <outlet property="progressLabel" destination="g49-Tf-IHm" id="UFT-HH-819"/>
                         <outlet property="uploadProgress" destination="JbH-Rf-Mv4" id="aBy-Jm-Bgx"/>
                     </connections>
                 </viewController>

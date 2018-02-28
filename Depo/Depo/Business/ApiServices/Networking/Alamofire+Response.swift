@@ -9,10 +9,6 @@
 import Foundation
 import Alamofire
 
-typealias ResponseVoid = (ResponseResult<Void>) -> Void
-typealias ResponseHandler<T> = (ResponseResult<T>) -> Void
-typealias ResponseArrayHandler<T> = (ResponseResult<[T]>) -> Void
-
 extension Alamofire.DataRequest {
     
     func responseArray<T: DataMapArray>(_ handler: @escaping ResponseArrayHandler<T>) {

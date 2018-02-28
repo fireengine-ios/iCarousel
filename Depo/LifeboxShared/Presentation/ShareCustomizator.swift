@@ -62,6 +62,7 @@ final class ShareCustomizator: NSObject {
         didSet {
             uploadProgress.trackTintColor = ColorConstants.lightGrayColor
             uploadProgress.progressTintColor = ColorConstants.greenColor
+            uploadProgress.progress = 0
         }
     }
     
@@ -69,7 +70,7 @@ final class ShareCustomizator: NSObject {
         didSet {
             progressLabel.font = UIFont.TurkcellSaturaRegFont(size: 20)
             progressLabel.textColor = ColorConstants.blueColor
-            progressLabel.text = "Uploading..."
+            progressLabel.text = " "
         }
     }
 }

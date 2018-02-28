@@ -102,18 +102,3 @@ class AppConfigurator {
     }
     
 }
-
-/// here we can change global requests validation
-extension DataRequest {
-    @discardableResult
-    public func customValidate() -> Self {
-        return validate(statusCode: 200..<300)
-    }
-}
-
-extension DownloadRequest {
-    @discardableResult
-    public func customValidate() -> Self {
-        return validate(statusCode: 200..<300)
-    }
-}
