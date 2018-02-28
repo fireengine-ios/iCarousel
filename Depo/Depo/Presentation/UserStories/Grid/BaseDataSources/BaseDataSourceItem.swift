@@ -40,7 +40,7 @@ class BaseDataSourceItem: NSObject {
          syncStatus: SyncWrapperedStatus = .notSynced,
          isLocalItem: Bool = true ) {
         
-        self.uuid = uuid ?? UUID().description
+        self.uuid = uuid ?? UUID().uuidString
         self.name = name
         self.creationDate = creationDate
         self.lastModifiDate = lastModifiDate
