@@ -97,16 +97,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func showPasscodeIfNeed() {
+        let topVC = UIApplication.topController()
+        
         /// don't show at all or new PasscodeEnterViewController
-        if passcodeStorage.isEmpty {
+        if passcodeStorage.isEmpty || topVC is PasscodeEnterViewController {
             return
         }
         
+        if topVC is UIAlertController {
+            topVC?.dismiss(animated: false, completion: {
+                self.showPasscode()
+            })
+        } else {
+            showPasscode()
+        } 
+    }
+    
+    private func showPasscode() {
         let topVC = UIApplication.topController()
-        /// don't show on request biometrics
-        if topVC is PasscodeEnterViewController {
-            return
-        }
         
         /// remove PasscodeEnterViewController if was on the screen
         if let tabBarVC = topVC as? TabBarViewController,
