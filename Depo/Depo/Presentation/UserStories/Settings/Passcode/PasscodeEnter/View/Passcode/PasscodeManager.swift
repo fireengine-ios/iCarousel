@@ -16,6 +16,7 @@ protocol PasscodeManager: class {
     weak var delegate: PasscodeManagerDelegate? { get set }
     func authenticateWithBiometrics()
     var maximumInccorectPasscodeAttempts: Int { get }
+    var finishBiometrics: Bool { get set }
 }
 
 protocol PasscodeManagerDelegate: class {
@@ -29,6 +30,8 @@ final class PasscodeManagerImp {
     let storage: PasscodeStorage
     var state: PasscodeState
     let biometricsManager: BiometricsManager
+    var biometricsOnScreen: Bool = false
+    var finishBiometrics: Bool = false
     
     weak var delegate: PasscodeManagerDelegate?
     
@@ -71,7 +74,14 @@ extension PasscodeManagerImp: PasscodeManager {
         if biometricsManager.status != .available || !biometricsManager.isEnabled {
             return
         }
+        
+        if !canShowBiometrics() {
+            return
+        }
+        
         view.resignResponder()
+        
+        biometricsOnScreen = true
         
         biometricsManager.authenticate(reason: state.title) { success in
             DispatchQueue.main.async {
@@ -86,8 +96,17 @@ extension PasscodeManagerImp: PasscodeManager {
                         self.view.becomeResponder()
                     }
                 }
+                self.biometricsOnScreen = false
+                self.finishBiometrics = true
             }
         }
+    }
+    
+    private func canShowBiometrics() -> Bool {
+        if UIApplication.shared.applicationState != .active || biometricsOnScreen || finishBiometrics {
+            return false
+        }
+        return true
     }
 }
 
