@@ -22,6 +22,21 @@ open class ShareData {
     var name: String {
         return url.lastPathComponent
     }
+    
+    var contentType: String {
+        let contentType: String
+        
+        if self is ShareImage {
+            contentType = url.imageContentType
+        } else if self is ShareVideo {
+            contentType = "video/mp4"
+        } else if url.pathExtension.lowercased() == "pdf" {
+            contentType = "application/pdf"
+        } else {
+            contentType = "application/octet-stream"
+        }
+        return contentType
+    }
 }
 
 final class ShareImage: ShareData {

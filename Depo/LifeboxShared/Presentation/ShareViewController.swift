@@ -40,7 +40,7 @@ final class ShareViewController: UIViewController {
     private let shareConfigurator = ShareConfigurator()
     private var sharedItems = [ShareData]()
     
-    lazy var uploadService = UploadService()
+    lazy var uploadService = UploadQueueService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,23 +55,40 @@ final class ShareViewController: UIViewController {
     }
     
     @IBAction private func actionCancelButton(_ sender: UIButton) {
+        uploadService.cancelAll()
         animateDismiss()
     }
     
     @IBAction private func actionUploadButton(_ sender: UIButton) {
         progressLabel.text = "Uploading..."
-        let url = sharedItems.first!.url
         
-        uploadService.upload(url: url, progressHandler: { [weak self] progress in
-            self?.uploadProgress.progress = Float(progress.fractionCompleted)
-        }, complition: { [weak self] result in
-            switch result {
-            case .success(_):
-                self?.animateDismiss()
-            case .failed(let error):
-                self?.progressLabel.text = error.localizedDescription
+        sender.isEnabled = false
+        DispatchQueue.global().async { [weak self] in
+            guard let `self` = self else {
+                return
             }
-        })
+            
+            self.uploadService.addShareData(self.sharedItems, progressHandler: { [weak self] progress in
+                DispatchQueue.main.async {
+                    self?.uploadProgress.progress = Float(progress.fractionCompleted)
+                }
+            }, didStartUpload: { shareData in
+                DispatchQueue.main.async {
+                    self.updateCurrentUI(for: shareData)
+                }
+            }, complition: { [weak self] result in
+                DispatchQueue.main.async {
+                    sender.isEnabled = true
+                    switch result {
+                    case .success(_):
+                        self?.animateDismiss()
+                    case .failed(let error):
+                        self?.progressLabel.text = error.localizedDescription
+                    }
+                }
+            })
+        }
+
     }
     
     private func setupSharedItems() {
@@ -80,12 +97,18 @@ final class ShareViewController: UIViewController {
                 self.sharedItems = sharedItems
                 
                 DispatchQueue.main.async {
-                    self.currentNameLabel.text = sharedItems.first?.name
-                    self.currentPhotoImageView.image = sharedItems.first?.image
+                    if let shareData = sharedItems.first {
+                        self.updateCurrentUI(for: shareData)
+                    }
                     self.collectionView.reloadData()
                 }
             }
         }
+    }
+    
+    private func updateCurrentUI(for shareData: ShareData) {
+        currentNameLabel.text = shareData.name
+        currentPhotoImageView.image = shareData.image
     }
     
     private func animateAppear() {

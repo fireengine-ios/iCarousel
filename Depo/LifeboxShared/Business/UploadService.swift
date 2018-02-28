@@ -13,63 +13,7 @@ enum URLs {
     static let uploadContainer = RouteRequests.BaseUrl +/ "/api/container/baseUrl"
 }
 
-final class UploadQueueService {
-    let queue = OperationQueue()
-    
-    func add(_ operationsons: [Operation], progressHandler: @escaping Request.ProgressHandler, complition: @escaping ResponseVoid) {
-        let operation = UploadOperation(url: URL(string: "")!, progressHandler: progressHandler) { (result) in
-            switch result {
-            case .success(_):
-                break
-            case .failed(let error):
-                self.queue.cancelAllOperations()
-                break
-            }
-        }
-        operation.completionBlock = {
-            
-        }
-        queue.addOperation(operation)
-        
-        queue.waitUntilAllOperationsAreFinished()
-        complition(ResponseResult.success(()))
-    }
-}
-
-final class UploadOperation: AsyncOperation {
-    
-    lazy var uploadService = UploadService()
-    
-    let url: URL
-    let progressHandler: Request.ProgressHandler
-    let complition: ResponseVoid
-    var dataRequest: DataRequest?
-    
-    init(url: URL, progressHandler: @escaping Request.ProgressHandler, complition: @escaping ResponseVoid) {
-        self.url = url
-        self.progressHandler = progressHandler
-        self.complition = complition
-        super.init()
-    }
-    
-    override func main() {
-        dataRequest = uploadService.upload(url: url, progressHandler: progressHandler, complition: { [weak self] result in
-//            switch result {
-//            case .success(_):
-//                self?.animateDismiss()
-//            case .failed(let error):
-//                self?.progressLabel.text = error.localizedDescription
-//            }
-            self?.complition(result)
-            self?.finish()
-        })
-    }
-    
-    override func cancel() {
-        dataRequest?.cancel()
-        finish()
-    }
-}
+typealias HandlerDataRequest = (DataRequest) -> Void
 
 final class UploadService {
     
@@ -79,8 +23,8 @@ final class UploadService {
         self.sessionManager = sessionManager
     }
     
-    func getBaseUploadUrl(handler: @escaping ResponseHandler<String>) {
-        sessionManager
+    func getBaseUploadUrl(handler: @escaping ResponseHandler<String>) -> DataRequest {
+        return sessionManager
             .request(URLs.uploadContainer)
             .customValidate()
             .responseJSON { response in
@@ -89,7 +33,7 @@ final class UploadService {
                     if let json = json as? [String: String], let path = json["value"] {
                         handler(ResponseResult.success(path))
                     } else {
-                        let error = CustomErrors.text("Server error \(json)")
+                        let error = CustomErrors.text("Server error: \(json)")
                         handler(ResponseResult.failed(error))
                     }
                 case .failure(let error):
@@ -98,19 +42,18 @@ final class UploadService {
         }
     }
     
-    @discardableResult
-    func upload(url: URL, progressHandler: @escaping Request.ProgressHandler, complition: @escaping ResponseVoid) -> DataRequest? {
+    func upload(url: URL, contentType: String, progressHandler: @escaping Request.ProgressHandler, handlerDataRequest: HandlerDataRequest?, complition: @escaping ResponseVoid) {
         
-        var dataRequest: DataRequest?
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        getBaseUploadUrl { result in
+        let dataRequest = getBaseUploadUrl { [weak self] result in
+            
             switch result {
             case .success(let path):
-                guard let serverUrl = URL(string: path) else {
+                
+                guard let `self` = self else {
                     return
                 }
-                let uploadUrl = serverUrl +/ UUID().uuidString
+                
+                let uploadUrl = path + "/" + UUID().uuidString
                 
                 let headers: HTTPHeaders = [
                     HeaderConstant.XObjectMetaFavorites: "false",
@@ -118,11 +61,11 @@ final class UploadService {
                     HeaderConstant.Expect: "100-continue",
                     HeaderConstant.XObjectMetaParentUuid: "",
                     HeaderConstant.XObjectMetaFileName: url.lastPathComponent,
-                    HeaderConstant.ContentType: url.imageContentType,
+                    HeaderConstant.ContentType: contentType,
                     HeaderConstant.XObjectMetaSpecialFolder: "MOBILE_UPLOAD"
                 ]
                 
-                dataRequest = self.sessionManager
+                let dataRequest = self.sessionManager
                     .upload(url, to: uploadUrl, method: .put, headers: headers)
                     .customValidate()
                     .uploadProgress(closure: progressHandler)
@@ -131,20 +74,14 @@ final class UploadService {
                         case .success(_):
                             complition(ResponseResult.success(()))
                         case .failure(let error):
-                            //if
-                            self.upload(url: url, progressHandler: progressHandler, complition: complition)
                             complition(ResponseResult.failed(error))
                         }
                 }
-                semaphore.signal()
-                
+                handlerDataRequest?(dataRequest)
             case .failed(let error):
                 complition(ResponseResult.failed(error))
-                semaphore.signal()
             }
         }
-        
-        semaphore.wait()
-        return dataRequest
+        handlerDataRequest?(dataRequest)
     }
 }
