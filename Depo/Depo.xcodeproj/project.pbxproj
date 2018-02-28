@@ -2818,6 +2818,14 @@
 		CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		CE61D1BB20459718001D01DC /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0596F220385E940083D6FC /* ImageFormat.swift */; };
+		CE61D1BD2046872A001D01DC /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1BC2046872A001D01DC /* URL+ContentType.swift */; };
+		CE61D1BE2046872A001D01DC /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1BC2046872A001D01DC /* URL+ContentType.swift */; };
+		CE61D1BF2046872A001D01DC /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1BC2046872A001D01DC /* URL+ContentType.swift */; };
+		CE61D1C12046873A001D01DC /* ClearUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1C02046873A001D01DC /* ClearUploadService.swift */; };
+		CE61D1C22046873A001D01DC /* ClearUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1C02046873A001D01DC /* ClearUploadService.swift */; };
+		CE61D1C32046873A001D01DC /* ClearUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1C02046873A001D01DC /* ClearUploadService.swift */; };
+		CE61D1C420468759001D01DC /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
+		CE61D1C52046875A001D01DC /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
 		CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
 		CE654FAF20454A4400232025 /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FAE20454A4400232025 /* ShareData.swift */; };
 		CE654FB120454AAD00232025 /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
@@ -4786,6 +4794,8 @@
 		CE58FAFF20444524007F3F54 /* SharedFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFactory.swift; sourceTree = "<group>"; };
 		CE58FB0520444BE8007F3F54 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxShared.entitlements; sourceTree = "<group>"; };
+		CE61D1BC2046872A001D01DC /* URL+ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ContentType.swift"; sourceTree = "<group>"; };
+		CE61D1C02046873A001D01DC /* ClearUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearUploadService.swift; sourceTree = "<group>"; };
 		CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardsService.swift; sourceTree = "<group>"; };
 		CE654FAE20454A4400232025 /* ShareData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 		CE654FB020454AAD00232025 /* URL+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Video.swift"; sourceTree = "<group>"; };
@@ -9339,6 +9349,7 @@
 			children = (
 				CE1458CA2045633D00812544 /* ShareConfigurator.swift */,
 				CE654FAE20454A4400232025 /* ShareData.swift */,
+				CE61D1C02046873A001D01DC /* ClearUploadService.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -9636,6 +9647,7 @@
 				CE055F3E20383A3400E6BFE8 /* PHAsset+Properties.swift */,
 				CE878C44203D4E5000458E0B /* UIWebView+Gesture.swift */,
 				CE654FB020454AAD00232025 /* URL+Video.swift */,
+				CE61D1BC2046872A001D01DC /* URL+ContentType.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -13166,6 +13178,7 @@
 				8C0E8DFC1FDEBDFF00789C91 /* PHAssetCollection.swift in Sources */,
 				CE055F4020383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */,
 				8C0E8DFD1FDEBDFF00789C91 /* HomePageInteractor.swift in Sources */,
+				CE61D1C420468759001D01DC /* URL+Video.swift in Sources */,
 				8C0E8DFE1FDEBDFF00789C91 /* PhoneVereficationViewInput.swift in Sources */,
 				8C0E8DFF1FDEBDFF00789C91 /* SplitIpadViewContoller.swift in Sources */,
 				8C0E8E001FDEBDFF00789C91 /* InstagramService.swift in Sources */,
@@ -13482,6 +13495,7 @@
 				8C0E8F3B1FDEBDFF00789C91 /* SplashInteractorOutput.swift in Sources */,
 				8C0B919320170E0D00A5BA81 /* DuplicatedContactsPresenter.swift in Sources */,
 				8C06AC0D20066641003D8E05 /* TurkcellSecurityInteractor.swift in Sources */,
+				CE61D1C22046873A001D01DC /* ClearUploadService.swift in Sources */,
 				8C0E8F3C1FDEBDFF00789C91 /* SplashInteractor.swift in Sources */,
 				8C0E8F3D1FDEBDFF00789C91 /* MailVerificationViewController.swift in Sources */,
 				8C0B919C20170E5C00A5BA81 /* DuplicatedContactsRouter.swift in Sources */,
@@ -13580,6 +13594,7 @@
 				8C0E8F881FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */,
 				8C0E8F891FDEBDFF00789C91 /* ServerError.swift in Sources */,
+				CE61D1BE2046872A001D01DC /* URL+ContentType.swift in Sources */,
 				8C0E8F8A1FDEBDFF00789C91 /* PhotoSelectiondDataSource.swift in Sources */,
 				8C0E8F8B1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
 				8C0B91A220170E7B00A5BA81 /* ManageContactTableViewCell.swift in Sources */,
@@ -13723,6 +13738,7 @@
 				7C257B3720174D2500CB56F8 /* ContactBackupOld.swift in Sources */,
 				CE1458D12045734A00812544 /* Alamofire+Validate.swift in Sources */,
 				CE6DE7621FCD8A8000C23CBD /* CodeTextField.swift in Sources */,
+				CE61D1C12046873A001D01DC /* ClearUploadService.swift in Sources */,
 				7C6E2F7A1F31E4C900536DB6 /* CreateStoryPhotoSelectionViewController.swift in Sources */,
 				CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */,
 				7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */,
@@ -14462,6 +14478,7 @@
 				8C6EF8771F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift in Sources */,
 				3E9E7380965142B606376820 /* SplashInteractorOutput.swift in Sources */,
 				8C06AC1620066641003D8E05 /* TurkcellSecurityRouterInput.swift in Sources */,
+				CE61D1BD2046872A001D01DC /* URL+ContentType.swift in Sources */,
 				B54BFF4C202C73790018AF82 /* SharedConstants.swift in Sources */,
 				C116353E0B4CB7B653684344 /* SplashInteractor.swift in Sources */,
 				8C881BD21FCFFAF100C86236 /* MailVerificationViewController.swift in Sources */,
@@ -14578,6 +14595,7 @@
 				07BD09833626CA46F3CE945C /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
 				8C0097121F6BDA5000FA069C /* MoreFilesActionsInteractorInput.swift in Sources */,
 				7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */,
+				CE61D1C52046875A001D01DC /* URL+Video.swift in Sources */,
 				41A69B03298B6F93F851567F /* LBAlbumLikePreviewSliderInitializer.swift in Sources */,
 				CE2F56171F7552A900F49DA1 /* PackagesInteractor.swift in Sources */,
 				85AAD0E4BD93A160437B1236 /* AlbumSelectionViewController.swift in Sources */,
@@ -14690,12 +14708,14 @@
 				CE1458C9204561CC00812544 /* Dictionary.swift in Sources */,
 				CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */,
 				CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */,
+				CE61D1C32046873A001D01DC /* ClearUploadService.swift in Sources */,
 				CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */,
 				CE1458D520458D9100812544 /* CustomErrors.swift in Sources */,
 				CE1458C62045617600812544 /* RouteRequests.swift in Sources */,
 				CE654FB520454B3900232025 /* UICollectionView+Layout.swift in Sources */,
 				CE654FAF20454A4400232025 /* ShareData.swift in Sources */,
 				CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */,
+				CE61D1BF2046872A001D01DC /* URL+ContentType.swift in Sources */,
 				CE654FB62045613A00232025 /* AuthorizationRepository.swift in Sources */,
 				CE1458CB2045633D00812544 /* ShareConfigurator.swift in Sources */,
 				CE1458C82045619500812544 /* RequestHeader.swift in Sources */,
