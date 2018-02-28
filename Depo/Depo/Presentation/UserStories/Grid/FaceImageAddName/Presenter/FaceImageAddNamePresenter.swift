@@ -29,6 +29,7 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
     override func getContentWithSuccess(items: [WrapData]) {
         clearItems()
         super.getContentWithSuccess(items: items.filter {$0.id != currentItem?.id})
+        asyncOperationSucces()
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
@@ -64,7 +65,6 @@ extension FaceImageAddNamePresenter: FaceImageAddNameViewOutput {
     
     func onSearchPeople(_ text: String) {
         if let interactor = interactor as? FaceImageAddNameInteractorInput {
-            startAsyncOperation()
             interactor.getSearchPeople(text)
         }
     }

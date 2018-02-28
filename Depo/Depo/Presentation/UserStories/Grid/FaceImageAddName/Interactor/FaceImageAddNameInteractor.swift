@@ -31,6 +31,8 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
             return
         }
         
+        output.startAsyncOperation()
+        
         if let service = remoteItems as? PeopleItemsService {
             service.searchPeople(text: text, success: { [weak self] (items) in
                 self?.output.getContentWithSuccess(items: items)
