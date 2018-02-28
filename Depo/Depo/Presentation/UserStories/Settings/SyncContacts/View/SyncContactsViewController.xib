@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -45,17 +46,17 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6co-Ab-n7k">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tib-1p-vqS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="688.66666666666663"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="699"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvS-vM-9ef" userLabel="View for loading">
-                                    <rect key="frame" x="91" y="90.333333333333314" width="232" height="232"/>
+                                    <rect key="frame" x="91" y="100.66666666666666" width="232" height="231.99999999999997"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bacupContacts" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-dP-E3S">
                                             <rect key="frame" x="0.0" y="0.0" width="232" height="232"/>
@@ -71,20 +72,20 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkl-kE-oQ1" customClass="GradientLoadingIndicator" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="74" y="73.333333333333314" width="266" height="266"/>
+                                    <rect key="frame" x="74" y="83.666666666666657" width="266" height="266"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="rX0-8z-yJA">
-                                    <rect key="frame" x="0.0" y="347.33333333333331" width="414" height="66.333333333333314"/>
+                                    <rect key="frame" x="0.0" y="357.66666666666669" width="414" height="66.333333333333314"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KrQ-Cb-oUZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="20.333333333333332"/>
+                                            <rect key="frame" x="20" y="0.0" width="414" height="20.333333333333332"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iM8-Y4-P5K" customClass="ButtonWithGrayCorner" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="147" y="37.333333333333371" width="120" height="29"/>
+                                            <rect key="frame" x="147" y="37.333333333333314" width="120" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="29" id="Zm0-6y-rlt"/>
                                                 <constraint firstAttribute="width" constant="120" id="hRE-w6-A69"/>
@@ -97,7 +98,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="hZZ-dA-LwW">
-                                    <rect key="frame" x="10" y="463.66666666666674" width="394" height="171"/>
+                                    <rect key="frame" x="10" y="474" width="394" height="171"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="dxs-eW-wJ3">
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
@@ -230,7 +231,7 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BjP-ys-4HT">
-                                            <rect key="frame" x="11.666666666666657" y="74.999999999999943" width="370.66666666666674" height="50"/>
+                                            <rect key="frame" x="11.666666666666657" y="75" width="370.66666666666674" height="50"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4we-6Z-PGt" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="118.33333333333333" height="50"/>
@@ -264,7 +265,7 @@
                                             </constraints>
                                         </stackView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy9-O6-ddF">
-                                            <rect key="frame" x="176.33333333333334" y="149.99999999999994" width="41.666666666666657" height="21"/>
+                                            <rect key="frame" x="176.33333333333334" y="150" width="41.666666666666657" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="WOl-ef-EvQ"/>
                                             </constraints>
@@ -279,7 +280,7 @@
                                     </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gb-gd-cDY">
-                                    <rect key="frame" x="152" y="639.66666666666663" width="111" height="29"/>
+                                    <rect key="frame" x="152" y="650" width="111" height="29"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34w-gh-gNj" customClass="ButtonWithGrayCorner" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="111" height="29"/>
@@ -328,15 +329,14 @@
             <constraints>
                 <constraint firstItem="LvS-vM-9ef" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.3" id="3ln-J1-Qep"/>
                 <constraint firstAttribute="trailing" secondItem="6co-Ab-n7k" secondAttribute="trailing" id="4Ps-3t-5Bv"/>
+                <constraint firstItem="6co-Ab-n7k" firstAttribute="bottom" secondItem="EhW-oV-Nif" secondAttribute="bottom" id="DvL-HR-hxy"/>
                 <constraint firstItem="6co-Ab-n7k" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E1x-nK-UUd"/>
-                <constraint firstItem="6co-Ab-n7k" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Hh3-z4-vbe">
-                    <variation key="widthClass=regular" constant="64"/>
-                </constraint>
-                <constraint firstAttribute="bottom" secondItem="6co-Ab-n7k" secondAttribute="bottom" id="KE4-tO-ehT"/>
+                <constraint firstItem="6co-Ab-n7k" firstAttribute="top" secondItem="EhW-oV-Nif" secondAttribute="top" id="R4m-LK-YYk"/>
                 <constraint firstItem="LvS-vM-9ef" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.56" id="e6P-if-mzN"/>
             </constraints>
-            <nil key="simulatedTopBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <nil key="simulatedBottomBarMetrics"/>
+            <viewLayoutGuide key="safeArea" id="EhW-oV-Nif"/>
             <point key="canvasLocation" x="32" y="53"/>
         </view>
     </objects>

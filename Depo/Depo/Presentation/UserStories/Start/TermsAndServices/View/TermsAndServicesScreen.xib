@@ -43,6 +43,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="w4a-fl-80T" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="81c-4g-bTt"/>
+                <constraint firstItem="dLS-x4-Wl9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="750" constant="64" id="9Hl-b0-v6z"/>
                 <constraint firstAttribute="bottom" secondItem="eZu-ok-HGO" secondAttribute="bottom" id="Cbi-zX-YYa"/>
                 <constraint firstAttribute="bottom" secondItem="dLS-x4-Wl9" secondAttribute="bottom" id="JSv-wx-l67"/>
                 <constraint firstItem="3Nh-mu-fNi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="LIZ-3K-2e2"/>
@@ -55,7 +56,7 @@
                 <constraint firstItem="dLS-x4-Wl9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lUi-Qr-cFb">
                     <variation key="widthClass=regular" constant="43"/>
                 </constraint>
-                <constraint firstItem="dLS-x4-Wl9" firstAttribute="top" secondItem="xou-y7-pRa" secondAttribute="top" id="n4U-N4-J8n"/>
+                <constraint firstItem="dLS-x4-Wl9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xou-y7-pRa" secondAttribute="top" id="n4U-N4-J8n"/>
                 <constraint firstItem="w4a-fl-80T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="41" id="ohi-3E-wHg"/>
                 <constraint firstItem="eZu-ok-HGO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rLH-Ob-ego"/>
             </constraints>

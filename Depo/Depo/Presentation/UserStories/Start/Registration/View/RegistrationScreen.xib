@@ -47,17 +47,17 @@
                     </constraints>
                     <variation key="widthClass=regular" image="Logo-Ipad"/>
                 </imageView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfM-YV-oKw">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfM-YV-oKw">
                     <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kkP-qM-De4">
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kkP-qM-De4">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="628.5"/>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="1000" id="FUf-r3-ek0"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5VP-G7-Jqt">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5VP-G7-Jqt">
                             <rect key="frame" x="30" y="30" width="260" height="0.0"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" id="HkW-dv-hBf">
@@ -69,14 +69,14 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" bounces="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="TYi-I0-oIL">
+                        <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" ambiguous="YES" bounces="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="TYi-I0-oIL">
                             <rect key="frame" x="0.0" y="89.5" width="320" height="369"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="369" id="tgp-Hr-Ih2"/>
                             </constraints>
                         </tableView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Error label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i69-kg-6FH" userLabel="ErrorLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" ambiguous="YES" text="Error label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i69-kg-6FH" userLabel="ErrorLabel">
                             <rect key="frame" x="30" y="48" width="262" height="21.5"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="90" id="0pw-6T-Ng0"/>
@@ -85,7 +85,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdV-lc-PZm" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdV-lc-PZm" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
                             <rect key="frame" x="89.5" y="538.5" width="141" height="55"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -173,9 +173,10 @@
                 <constraint firstItem="Rmp-60-G1Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VC1-AL-HZw"/>
                 <constraint firstItem="4l6-KR-Kcg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dsX-JN-Nra"/>
                 <constraint firstAttribute="trailing" secondItem="Rmp-60-G1Z" secondAttribute="trailing" id="dzU-Pl-XtC"/>
-                <constraint firstItem="TfM-YV-oKw" firstAttribute="top" secondItem="06u-7P-N8R" secondAttribute="top" constant="44" id="hCs-rc-xOe"/>
+                <constraint firstItem="TfM-YV-oKw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="06u-7P-N8R" secondAttribute="top" id="hCs-rc-xOe"/>
                 <constraint firstAttribute="bottom" secondItem="TfM-YV-oKw" secondAttribute="bottom" id="iOD-PE-OdM"/>
                 <constraint firstItem="TfM-YV-oKw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jUB-so-Ndt"/>
+                <constraint firstItem="TfM-YV-oKw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="750" constant="64" id="ljt-GI-vT4"/>
                 <constraint firstItem="pff-nq-J3Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="nS4-qi-sJg"/>
                 <constraint firstAttribute="bottom" secondItem="DWV-5a-Udx" secondAttribute="bottom" id="qnI-L7-H6X"/>
                 <constraint firstItem="4l6-KR-Kcg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sKw-9T-CWo"/>

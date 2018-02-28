@@ -18,6 +18,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     @IBOutlet weak var skipButton: ButtonWithCorner!
     @IBOutlet weak var tableHConstaint: NSLayoutConstraint!
     @IBOutlet weak var bacgroundImage: UIImageView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     var fromSettings: Bool = false
     var isFirstTime = true
@@ -37,7 +38,9 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
             navigationBarWithGradientStyle()
         } else {
             view.backgroundColor = UIColor.lrTiffanyBlue
-            defaultNavBarStyle()
+            hidenNavigationBarStyle()
+            topConstraint.constant = 64
+            view.layoutIfNeeded()
         }
     }
     
