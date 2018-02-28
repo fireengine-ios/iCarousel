@@ -183,11 +183,11 @@ class RequestService {
     }
     
     func requestProgressHander(_ progress: Alamofire.Progress, request: URLRequest) {
-        guard let tempUUIDfromURL = request.url?.lastPathComponent
+        guard let url = request.url
             else { return }
         
         SingletonStorage.shared.progressDelegates.invoke(invocation: { (delegate) in
-            delegate.didSend(ratio: Float(progress.fractionCompleted), for: tempUUIDfromURL)
+            delegate.didSend(ratio: Float(progress.fractionCompleted), for: url)
         })
     }
 }
