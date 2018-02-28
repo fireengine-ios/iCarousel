@@ -85,7 +85,7 @@ final class ThingsItemsService: RemoteItemsService {
 }
 
 final class ThingsItem: Item {
-    private let responseObject: ThingsItemResponse
+    let responseObject: ThingsItemResponse
     
     init(response: ThingsItemResponse) {
         responseObject = response
