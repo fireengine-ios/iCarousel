@@ -40,7 +40,7 @@ final class ShareViewController: UIViewController {
     private let shareConfigurator = ShareConfigurator()
     private var sharedItems = [ShareData]()
     
-    lazy var uploadService = ClearUploadService()
+    lazy var uploadService = UploadService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -2821,11 +2821,10 @@
 		CE61D1BD2046872A001D01DC /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1BC2046872A001D01DC /* URL+ContentType.swift */; };
 		CE61D1BE2046872A001D01DC /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1BC2046872A001D01DC /* URL+ContentType.swift */; };
 		CE61D1BF2046872A001D01DC /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1BC2046872A001D01DC /* URL+ContentType.swift */; };
-		CE61D1C12046873A001D01DC /* ClearUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1C02046873A001D01DC /* ClearUploadService.swift */; };
-		CE61D1C22046873A001D01DC /* ClearUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1C02046873A001D01DC /* ClearUploadService.swift */; };
-		CE61D1C32046873A001D01DC /* ClearUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1C02046873A001D01DC /* ClearUploadService.swift */; };
+		CE61D1C32046873A001D01DC /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1C02046873A001D01DC /* UploadService.swift */; };
 		CE61D1C420468759001D01DC /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
 		CE61D1C52046875A001D01DC /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
+		CE61D1CA20468DFE001D01DC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1C720468DFE001D01DC /* AsyncOperation.swift */; };
 		CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
 		CE654FAF20454A4400232025 /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FAE20454A4400232025 /* ShareData.swift */; };
 		CE654FB120454AAD00232025 /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
@@ -4795,7 +4794,8 @@
 		CE58FB0520444BE8007F3F54 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxShared.entitlements; sourceTree = "<group>"; };
 		CE61D1BC2046872A001D01DC /* URL+ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ContentType.swift"; sourceTree = "<group>"; };
-		CE61D1C02046873A001D01DC /* ClearUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearUploadService.swift; sourceTree = "<group>"; };
+		CE61D1C02046873A001D01DC /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
+		CE61D1C720468DFE001D01DC /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardsService.swift; sourceTree = "<group>"; };
 		CE654FAE20454A4400232025 /* ShareData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 		CE654FB020454AAD00232025 /* URL+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Video.swift"; sourceTree = "<group>"; };
@@ -9349,7 +9349,8 @@
 			children = (
 				CE1458CA2045633D00812544 /* ShareConfigurator.swift */,
 				CE654FAE20454A4400232025 /* ShareData.swift */,
-				CE61D1C02046873A001D01DC /* ClearUploadService.swift */,
+				CE61D1C02046873A001D01DC /* UploadService.swift */,
+				CE61D1C720468DFE001D01DC /* AsyncOperation.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -13495,7 +13496,6 @@
 				8C0E8F3B1FDEBDFF00789C91 /* SplashInteractorOutput.swift in Sources */,
 				8C0B919320170E0D00A5BA81 /* DuplicatedContactsPresenter.swift in Sources */,
 				8C06AC0D20066641003D8E05 /* TurkcellSecurityInteractor.swift in Sources */,
-				CE61D1C22046873A001D01DC /* ClearUploadService.swift in Sources */,
 				8C0E8F3C1FDEBDFF00789C91 /* SplashInteractor.swift in Sources */,
 				8C0E8F3D1FDEBDFF00789C91 /* MailVerificationViewController.swift in Sources */,
 				8C0B919C20170E5C00A5BA81 /* DuplicatedContactsRouter.swift in Sources */,
@@ -13738,7 +13738,6 @@
 				7C257B3720174D2500CB56F8 /* ContactBackupOld.swift in Sources */,
 				CE1458D12045734A00812544 /* Alamofire+Validate.swift in Sources */,
 				CE6DE7621FCD8A8000C23CBD /* CodeTextField.swift in Sources */,
-				CE61D1C12046873A001D01DC /* ClearUploadService.swift in Sources */,
 				7C6E2F7A1F31E4C900536DB6 /* CreateStoryPhotoSelectionViewController.swift in Sources */,
 				CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */,
 				7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */,
@@ -14704,11 +14703,12 @@
 				CE58FB03204445E0007F3F54 /* TokenStorage.swift in Sources */,
 				CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */,
 				CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */,
+				CE61D1CA20468DFE001D01DC /* AsyncOperation.swift in Sources */,
 				CE1458C72045618800812544 /* URL+Path.swift in Sources */,
 				CE1458C9204561CC00812544 /* Dictionary.swift in Sources */,
 				CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */,
 				CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */,
-				CE61D1C32046873A001D01DC /* ClearUploadService.swift in Sources */,
+				CE61D1C32046873A001D01DC /* UploadService.swift in Sources */,
 				CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */,
 				CE1458D520458D9100812544 /* CustomErrors.swift in Sources */,
 				CE1458C62045617600812544 /* RouteRequests.swift in Sources */,

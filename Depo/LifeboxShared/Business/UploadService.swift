@@ -1,5 +1,5 @@
 //
-//  ClearUploadService.swift
+//  UploadService.swift
 //  Depo
 //
 //  Created by Bondar Yaroslav on 2/28/18.
@@ -13,7 +13,65 @@ enum URLs {
     static let uploadContainer = RouteRequests.BaseUrl +/ "/api/container/baseUrl"
 }
 
-final class ClearUploadService {
+final class UploadQueueService {
+    let queue = OperationQueue()
+    
+    func add(_ operationsons: [Operation], progressHandler: @escaping Request.ProgressHandler, complition: @escaping ResponseVoid) {
+        let operation = UploadOperation(url: URL(string: "")!, progressHandler: progressHandler) { (result) in
+            switch result {
+            case .success(_):
+                break
+            case .failed(let error):
+                self.queue.cancelAllOperations()
+                break
+            }
+        }
+        operation.completionBlock = {
+            
+        }
+        queue.addOperation(operation)
+        
+        queue.waitUntilAllOperationsAreFinished()
+        complition(ResponseResult.success(()))
+    }
+}
+
+final class UploadOperation: AsyncOperation {
+    
+    lazy var uploadService = UploadService()
+    
+    let url: URL
+    let progressHandler: Request.ProgressHandler
+    let complition: ResponseVoid
+    var dataRequest: DataRequest?
+    
+    init(url: URL, progressHandler: @escaping Request.ProgressHandler, complition: @escaping ResponseVoid) {
+        self.url = url
+        self.progressHandler = progressHandler
+        self.complition = complition
+        super.init()
+    }
+    
+    override func main() {
+        dataRequest = uploadService.upload(url: url, progressHandler: progressHandler, complition: { [weak self] result in
+//            switch result {
+//            case .success(_):
+//                self?.animateDismiss()
+//            case .failed(let error):
+//                self?.progressLabel.text = error.localizedDescription
+//            }
+            self?.complition(result)
+            self?.finish()
+        })
+    }
+    
+    override func cancel() {
+        dataRequest?.cancel()
+        finish()
+    }
+}
+
+final class UploadService {
     
     let sessionManager: SessionManager
     
@@ -40,7 +98,11 @@ final class ClearUploadService {
         }
     }
     
-    func upload(url: URL, progressHandler: @escaping Request.ProgressHandler, complition: @escaping ResponseVoid) {
+    @discardableResult
+    func upload(url: URL, progressHandler: @escaping Request.ProgressHandler, complition: @escaping ResponseVoid) -> DataRequest? {
+        
+        var dataRequest: DataRequest?
+        let semaphore = DispatchSemaphore(value: 0)
         
         getBaseUploadUrl { result in
             switch result {
@@ -60,7 +122,7 @@ final class ClearUploadService {
                     HeaderConstant.XObjectMetaSpecialFolder: "MOBILE_UPLOAD"
                 ]
                 
-                self.sessionManager
+                dataRequest = self.sessionManager
                     .upload(url, to: uploadUrl, method: .put, headers: headers)
                     .customValidate()
                     .uploadProgress(closure: progressHandler)
@@ -69,15 +131,20 @@ final class ClearUploadService {
                         case .success(_):
                             complition(ResponseResult.success(()))
                         case .failure(let error):
+                            //if
+                            self.upload(url: url, progressHandler: progressHandler, complition: complition)
                             complition(ResponseResult.failed(error))
                         }
                 }
+                semaphore.signal()
                 
             case .failed(let error):
                 complition(ResponseResult.failed(error))
+                semaphore.signal()
             }
         }
         
-        
+        semaphore.wait()
+        return dataRequest
     }
 }
