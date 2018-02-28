@@ -69,10 +69,9 @@ extension CoreDataStack {
         }
 
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
-
-        DispatchQueue(label: "com.lifebox.saveFromGallery").async {
+        
+        queue.async {
             LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] (assetsInfo) in
-                //assetsInfo.count can be less than pageItems.count
                 var addedObjects = [WrapData]()
                 assetsInfo.forEach {
                     let wrapedItem =  WrapData(info: $0)
@@ -80,8 +79,11 @@ extension CoreDataStack {
                     
                     addedObjects.append(wrapedItem)
                 }
+                
                 self?.saveDataForContext(context: context, saveAndWait: true)
                 ItemOperationManager.default.addedLocalFiles(items: addedObjects)
+                
+                print("local files added: \(assetsInfo.count)")
                 
                 self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
             })

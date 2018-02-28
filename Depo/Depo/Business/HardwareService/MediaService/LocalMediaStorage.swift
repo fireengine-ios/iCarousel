@@ -90,8 +90,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     let assetInfo = MetaAssetInfo(asset: asset, url: url, fileSize: size, originalName: assetName)
                     assetsInfo.append(assetInfo)
                     
-                    print("local file: \(i)")
-                    
                     if i == assets.count {
                         completion(assetsInfo)
                     }

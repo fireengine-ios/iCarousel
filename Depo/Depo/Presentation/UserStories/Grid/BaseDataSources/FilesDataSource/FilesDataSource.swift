@@ -172,8 +172,9 @@ extension FilesDataSource {
     
     private func requestImageInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL) -> Void) {
         assetCache?.requestImageData(for: asset, options: defaultImageRequestOptions, resultHandler: { (data, utType, orientation, info) in
-            guard let data = data,
+            guard let isICloud = info?[PHImageResultIsInCloudKey] as? Bool, !isICloud,
                 let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool, !isDegraded,
+                let data = data,
                 let url = info?["PHImageFileURLKey"] as? URL
             else {
                 return
