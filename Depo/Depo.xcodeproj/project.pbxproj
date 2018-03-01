@@ -9941,10 +9941,10 @@
 		CE58FAF020444493007F3F54 /* LifeboxShared */ = {
 			isa = PBXGroup;
 			children = (
-				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
 				CE1458CC2045645000812544 /* Presentation */,
 				CE1458CD2045645F00812544 /* Business */,
 				CE58FAF620444493007F3F54 /* Info.plist */,
+				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
 				CEE10CCD2047EA6300D97B9F /* Localizable.strings */,
 				CEA629FE2047ED3200215811 /* L10n.swift */,
 			);

@@ -23,9 +23,9 @@ extension Error {
     
     var parsedDescription: String {
         if isNetworkError {
-            return L10n.Error.internet
+            return L10n.errorInternet
         } else if notAuthorized {
-            return L10n.Error.login
+            return L10n.errorLogin
         }
         return localizedDescription
     }

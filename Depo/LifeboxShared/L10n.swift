@@ -18,17 +18,14 @@ import Foundation
 enum L10n {
     /// Cancel
     static let cancel = L10n.tr("Localizable", "cancel")
+    /// Please check your internet connection is active and Mobile Data is ON.
+    static let errorInternet = L10n.tr("Localizable", "error_internet")
+    /// You have not login via app yet
+    static let errorLogin = L10n.tr("Localizable", "error_login")
     /// Upload
     static let upload = L10n.tr("Localizable", "upload")
     /// Uploading...
     static let uploading = L10n.tr("Localizable", "uploading")
-    
-    enum Error {
-        /// Please check your internet connection is active and Mobile Data is ON.
-        static let internet = L10n.tr("Localizable", "error.internet")
-        /// You have not login via app yet
-        static let login = L10n.tr("Localizable", "error.login")
-    }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 
