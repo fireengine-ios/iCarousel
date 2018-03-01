@@ -168,7 +168,6 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         let captchaUdid = captchaModuleView.currenrtCapthcaID
         let captchaEntered = captchaModuleView.inputTextField.text
         output.onSendPassword(withEmail: obtainEmail(), enteredCaptcha: captchaEntered ?? "", captchaUDID: captchaUdid)
-        //showCapcha()
     }
     
     private func obtainEmail() -> String {
