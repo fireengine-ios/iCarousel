@@ -159,36 +159,38 @@ extension FilesDataSource {
 
 
 extension FilesDataSource {
-    func requestInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL) -> Void) {
+    func requestInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL?, _ isICloud: Bool) -> Void) {
         switch asset.mediaType {
         case .image:
             requestImageInfo(for: asset, completion: completion)
         case .video:
             requestVideoInfo(for: asset, completion: completion)
         default:
-            completion(0, URL(string: "")!)
+            completion(0, nil, false)
         }
     }
     
-    private func requestImageInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL) -> Void) {
+    private func requestImageInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL?, _ isICloud: Bool) -> Void) {
         assetCache?.requestImageData(for: asset, options: defaultImageRequestOptions, resultHandler: { (data, utType, orientation, info) in
             guard let isICloud = info?[PHImageResultIsInCloudKey] as? Bool, !isICloud,
                 let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool, !isDegraded,
                 let data = data,
                 let url = info?["PHImageFileURLKey"] as? URL
             else {
+                completion(0, nil, true)
                 return
             }
             
-            completion(UInt64(data.count), url)
+            completion(UInt64(data.count), url, false)
         })
     }
     
-    private func requestVideoInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL) -> Void) {
+    private func requestVideoInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL?, _ isICloud: Bool) -> Void) {
         assetCache?.requestAVAsset(forVideo: asset, options: defaultVideoRequestOptions, resultHandler: { (avAsset, avAudioMix, info) in
             guard let isICloud = info?[PHImageResultIsInCloudKey] as? Bool, !isICloud,
                 let urlToFile = (avAsset as? AVURLAsset)?.url
             else {
+                completion(0, nil, true)
                 return
             }
             
@@ -196,10 +198,10 @@ extension FilesDataSource {
             do {
                 size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).uint64Value
             } catch  {
-                return
+                return completion(0, nil, true)
             }
 
-            completion(size, urlToFile)
+            completion(size, urlToFile, false)
         })
     }
 }

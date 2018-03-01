@@ -80,19 +80,24 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         var i = 0
         for asset in assets {
             let _ = autoreleasepool {
-                fileDataSource.requestInfo(for: asset, completion: { (size, url) in
+                fileDataSource.requestInfo(for: asset, completion: { (size, url, isICloud) in
                     i += 1
                     
-                    guard let assetName = asset.originalFilename  else {
+                    let success = {
+                        if i == assets.count {
+                            completion(assetsInfo)
+                        }
+                    }
+                    
+                    guard !isICloud, let url = url, let assetName = asset.originalFilename  else {
+                        success()
                         return
                     }
                     
                     let assetInfo = MetaAssetInfo(asset: asset, url: url, fileSize: size, originalName: assetName)
                     assetsInfo.append(assetInfo)
                     
-                    if i == assets.count {
-                        completion(assetsInfo)
-                    }
+                    success()
                 })
             }
         }
