@@ -49,7 +49,7 @@ class AlbumCell: UICollectionViewCell {
             setupImage(previewImage4, path: items[safe: 3])
         } else {
             previewBackView.isHidden = true
-            placeholderImage.layer.borderColor = ColorConstants.orangeBorder.cgColor
+            placeholderImage.layer.borderColor = item.type?.placeholderBorderColor ?? ColorConstants.blueColor.cgColor
             placeholderImage.image = item.placeholderImage
         }
     }
