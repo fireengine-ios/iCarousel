@@ -69,6 +69,13 @@ extension CoreDataStack {
     
         let start = Date()
         
+        guard !notSaved.isEmpty else {
+            inProcessAppendingLocalFiles = false
+            print("All local files added in \(Date().timeIntervalSince(start)) seconds")
+            NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
+            return
+        }
+        
         save(items: notSaved, context: newBgcontext) { [weak self] in
             print("All local files added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
@@ -202,7 +209,6 @@ extension CoreDataStack {
 
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
 
-        
         queue.async {
             LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] assetsInfo in
 
