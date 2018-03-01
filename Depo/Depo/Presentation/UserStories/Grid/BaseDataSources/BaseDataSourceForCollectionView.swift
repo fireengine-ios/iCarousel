@@ -569,6 +569,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return allItems
     }
     
+    func allObjectIsEmpty() -> Bool {
+        var result = true
+        getAllObjects().forEach { items in
+            if !items.isEmpty {
+                result = false
+                return
+            }
+        }
+        return result
+    }
+    
     func setAllItems(items: [[BaseDataSourceItem]]) {
         allItems = items as! [[WrapData]]
     }
@@ -1320,6 +1331,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             canShowAlbumsFilters(filters: unwrapedFilters) {
             delegate?.needReloadData?()
         }
+    }
+    
+    func newStoryCreated() {
+        
     }
     
     func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {

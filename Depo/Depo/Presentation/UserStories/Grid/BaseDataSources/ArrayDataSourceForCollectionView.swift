@@ -89,10 +89,10 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
             if arrayOfIndexes.count > 0 {
                 tableDataMArray = newArray
                 collectionView?.performBatchUpdates({ [weak self] in
-                    if let `self` = self{
-                        self.collectionView?.deleteItems(at: arrayOfIndexes)
-                    }
-                }, completion: nil)
+                    self?.collectionView?.deleteItems(at: arrayOfIndexes)
+                }, completion: { [weak self] finished in
+                    self?.delegate?.didDelete?(items: albums)
+                })
             }
         }
         

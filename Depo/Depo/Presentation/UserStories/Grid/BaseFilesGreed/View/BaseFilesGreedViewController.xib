@@ -59,18 +59,18 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI3-Dh-bXS">
-                    <rect key="frame" x="16" y="306.66666666666669" width="382" height="106"/>
+                    <rect key="frame" x="16" y="279" width="382" height="162"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdq-Cf-39W">
-                            <rect key="frame" x="8" y="106" width="366" height="0.0"/>
+                            <rect key="frame" x="8" y="112" width="366" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTy-IA-Avr" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
-                            <rect key="frame" x="62" y="106" width="258" height="0.0"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTy-IA-Avr" customClass="BlueButtonWithNoFilesWhiteText" customModule="lifebox" customModuleProvider="target">
+                            <rect key="frame" x="62" y="123" width="258" height="39"/>
                             <constraints>
-                                <constraint firstAttribute="height" id="03I-TC-x2h"/>
+                                <constraint firstAttribute="height" constant="39" id="03I-TC-x2h"/>
                                 <constraint firstAttribute="width" constant="258" id="YLS-oM-nxu">
                                     <variation key="widthClass=regular" constant="258"/>
                                 </constraint>
@@ -89,10 +89,10 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="qz2-SP-6oQ" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="6A0-hR-1ae"/>
-                        <constraint firstItem="UTy-IA-Avr" firstAttribute="top" secondItem="fdq-Cf-39W" secondAttribute="bottom" id="9ks-nj-hts"/>
+                        <constraint firstItem="UTy-IA-Avr" firstAttribute="top" secondItem="fdq-Cf-39W" secondAttribute="bottom" constant="11" id="9ks-nj-hts"/>
                         <constraint firstAttribute="bottom" secondItem="UTy-IA-Avr" secondAttribute="bottom" id="KV4-aB-0vn"/>
                         <constraint firstItem="fdq-Cf-39W" firstAttribute="leading" secondItem="ZI3-Dh-bXS" secondAttribute="leading" constant="8" id="QSi-hF-074"/>
-                        <constraint firstItem="fdq-Cf-39W" firstAttribute="top" secondItem="qz2-SP-6oQ" secondAttribute="bottom" constant="10" id="SPi-rc-70a"/>
+                        <constraint firstItem="fdq-Cf-39W" firstAttribute="top" secondItem="qz2-SP-6oQ" secondAttribute="bottom" constant="16" id="SPi-rc-70a"/>
                         <constraint firstAttribute="trailing" secondItem="fdq-Cf-39W" secondAttribute="trailing" constant="8" id="dtr-Zd-aRq"/>
                         <constraint firstItem="qz2-SP-6oQ" firstAttribute="top" secondItem="ZI3-Dh-bXS" secondAttribute="top" id="dz2-C0-o9S"/>
                         <constraint firstItem="UTy-IA-Avr" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="gSt-4w-qVr"/>
