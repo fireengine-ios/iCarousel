@@ -83,7 +83,7 @@ final class ShareViewController: UIViewController {
                     case .success(_):
                         self?.animateDismiss()
                     case .failed(let error):
-                        self?.progressLabel.text = error.localizedDescription
+                        self?.progressLabel.text = error.parsedDescription
                     }
                 }
             })
