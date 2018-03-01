@@ -70,6 +70,11 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         ItemOperationManager.default.startUpdateView(view: dataSource)
     }
     
+    func filesAppendedAndSorted() {
+        dataSource.reloadData()
+
+    }
+    
     //MARK: - UnderNavBarBar/TopBar
     
     private func setupTopBar() {

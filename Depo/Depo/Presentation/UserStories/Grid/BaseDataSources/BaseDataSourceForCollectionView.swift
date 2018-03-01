@@ -32,6 +32,8 @@ enum BaseDataSourceDisplayingType{
     
     func getNextItems()
     
+    func filesAppendedAndSorted()
+    
     @objc optional func needReloadData()
     
     @objc optional func scrollViewDidScroll(scrollView: UIScrollView)
@@ -109,6 +111,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             self.allMediaItems.append(contentsOf: imbededwithLocalsItems)
             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
             self.reloadData()
+            self.delegate?.filesAppendedAndSorted()
         })
         
         
@@ -409,6 +412,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                return ($0.metaData?.takenDate != nil)
             }
             return $0.metaData != nil
+        }
+        if nonEmptyMetaItems.isEmpty {
+            isPaginationDidEnd = true
         }
         compoundItems(pageItems: nonEmptyMetaItems)
     }
