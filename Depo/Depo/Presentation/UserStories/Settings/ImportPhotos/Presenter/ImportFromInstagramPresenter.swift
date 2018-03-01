@@ -55,7 +55,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
 
     func connectionSuccess(isConnected: Bool) {
         if isConnected {
-            MenloworksTagsService.shared.onInstagramConnected()
+            MenloworksAppEvents.onInstagramConnected()
             start()
             view?.stopActivityIndicator()
         } else {

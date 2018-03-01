@@ -124,7 +124,7 @@ extension PackagesPresenter: OptInControllerDelegate {
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
     func successedPromocode() {
-        MenloworksTagsService.shared.onPromocodeActivated()
+        MenloworksAppEvents.onPromocodeActivated()
         view?.successedPromocode()
     }
     

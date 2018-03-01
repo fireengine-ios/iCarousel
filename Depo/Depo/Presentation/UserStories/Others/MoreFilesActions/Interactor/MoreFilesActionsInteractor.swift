@@ -42,7 +42,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         controler.view.tintColor = ColorConstants.darcBlueColor
         
         let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] (action) in
-            MenloworksTagsService.shared.onShareClicked()
+            MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareSmallSize(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
@@ -53,7 +53,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         controler.addAction(smallAction)
         
         let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] (action) in
-            MenloworksTagsService.shared.onShareClicked()
+            MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareOrignalSize(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
@@ -63,7 +63,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         controler.addAction(originalAction)
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] (action) in
-            MenloworksTagsService.shared.onShareClicked()
+            MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
@@ -516,6 +516,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     text = TextConstants.popUpDownloadComplete
                 case .delete:
                     text = TextConstants.popUpDeleteComplete
+                    MenloworksAppEvents.onFileDeleted()
                 default:
                     return
                 }

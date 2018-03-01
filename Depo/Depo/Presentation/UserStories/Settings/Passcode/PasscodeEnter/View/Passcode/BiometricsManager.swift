@@ -33,6 +33,9 @@ final class BiometricsManagerImp: BiometricsManager {
             if isEnabled != newValue {
                 MenloworksTagsService.shared.onTouchIDSettingsChanged(newValue)
             }
+            if newValue {
+                MenloworksEventsService.shared.onTouchIDSet()
+            }
             UserDefaults.standard.set(newValue, forKey: BiometricsManagerImp.isEnabledKey)
         }
     }

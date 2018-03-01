@@ -60,12 +60,24 @@ extension MenloworksTags {
         static let noUserPackage = "no_package"
         static let autoLoginChanged = "auto_login"
         static let turkcellPasswordChanged = "turkcell_password"
-
+        static let platinUserStatus = "platin_user"
+        static let notificationsPermissionStatus = "notification_permission"
+        static let galleryPermissionStatus = "gallery_permission"
+        static let locationPermissionStatus = "location_permission"
+        static let fileDeleted = "deleted"
+        static let quotaStatus = "quota_status"
+        static let autosyncStatus = "autosync"
+        static let autosyncPhotosStatus = "autosyncPhotos"
+        static let autosyncVideosStatus = "autosyncVideos"
+        static let satınalındı50GBStatus = "Satınalındı50GB"
+        static let satınalındı500GBStatus = "Satınalındı500GB"
+        static let satınalındı25TB = "Satınalındı25TB"
     }
     
     class ValueConstants {
         static let mobile = "mobile"
         static let wifi = "wifi"
+        static let lte = "lte"
         static let `true` = "true"
         static let `false` = "false"
         static let yes = "yes"

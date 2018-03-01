@@ -6,12 +6,6 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-enum MenloworksSubscriptionStorage: String {
-    case fiftyGB = "50 GB"
-    case fiveHundredGB = "500 GB"
-    case twoThousandFiveHundredGB = "2.5 TB"
-}
-
 class MenloworksTagsService {
     
     private let reachabilityService = ReachabilityService()
@@ -22,9 +16,9 @@ class MenloworksTagsService {
     // MARK: - Event methods
     
     func onFirstLaunch() {
-        let launchedBefore = UserDefaults.standard.bool(forKey: "LifeboxLaunchedBefore")
+        let launchedBefore = UserDefaults.standard.bool(forKey: "LifeboxLaunchedBeforeTag")
         if !launchedBefore {
-            UserDefaults.standard.set(true, forKey: "LifeboxLaunchedBefore")
+            UserDefaults.standard.set(true, forKey: "LifeboxLaunchedBeforeTag")
             let tag = MenloworksTags.Firstsession()
             hitTag(tag)
         }
@@ -73,6 +67,23 @@ class MenloworksTagsService {
         }
     }
     
+    func onSubscriptionPurchaseCompleted(_ type: MenloworksSubscriptionProductID) {
+        var tag: MenloworksTag?
+        
+        switch type {
+        case .fiftyGbID:
+            tag = MenloworksTags.Satınalındı50GBStatus()
+        case .fiveHundredGbID:
+            tag = MenloworksTags.Satınalındı500GBStatus()
+        case .twoThousandFiveHundredGbID:
+            tag = MenloworksTags.Satınalındı25TB()
+        }
+        
+        if let tag = tag {
+            hitTag(tag)
+        }
+    }
+    
     func onLogin() {
         let tagWiFi3G = MenloworksTags.WiFi3G(isWiFi: reachabilityService.isReachableViaWiFi)
         hitTag(tagWiFi3G)
@@ -91,6 +102,25 @@ class MenloworksTagsService {
             sendFIRStatus()
             sendSubscriptionsStatus()
         }
+    }
+    
+    func onNotificationPermissionChanged(_ isEnabled: Bool) {
+        guard !UserDefaults.standard.bool(forKey: "onNotificationPermissionChanged") else { return }
+        
+        UserDefaults.standard.set(true, forKey: "onNotificationPermissionChanged")
+        
+        let tag = MenloworksTags.NotificationPermissionStatus(isEnabled: isEnabled)
+        hitTag(tag)
+    }
+    
+    func onGalleryPermissionChanged(_ isEnabled: Bool) {
+        let tag = MenloworksTags.GalleryPermissionStatus(isEnabled: isEnabled)
+        hitTag(tag)
+    }
+    
+    func onLocationPermissionChanged(_ isEnabled: Bool) {
+        let tag = MenloworksTags.LocationPermissionStatus(isEnabled: isEnabled)
+        hitTag(tag)
     }
     
     func onTouchIDSettingsChanged(_ isEnabled: Bool) {
@@ -228,7 +258,7 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
-    func onSynchClicked() {
+    func onSyncClicked() {
         let tag = MenloworksTags.SyncClicked()
         hitTag(tag)
     }
@@ -255,6 +285,54 @@ class MenloworksTagsService {
     
     func onSearchOpen() {
         let tag = MenloworksTags.SearchOpen()
+        hitTag(tag)
+    }
+    
+    func onFileDeleted() {
+        let tag = MenloworksTags.FileDeleted()
+        hitTag(tag)
+    }
+    
+    func onQuotaStatus(percentageValue: Int) {
+        let tag = MenloworksTags.QuotaStatus(percentageValue: percentageValue)
+        hitTag(tag)
+    }
+    
+    func onAutosyncStatus(isOn: Bool) {
+        let tag = MenloworksTags.AutosyncStatus(isOn: isOn)
+        hitTag(tag)
+    }
+    
+    func onAutosyncPhotosStatusOff() {
+        MPush.hitTag(MenloworksTags.NameConstants.autosyncPhotosStatus, withValue: MenloworksTags.ValueConstants.off)
+    }
+    
+    func onAutosyncPhotosStatusOn(isWifi: Bool) {
+        let tag = MenloworksTags.AutosyncPhotosStatus(isWifi: isWifi)
+        hitTag(tag)
+    }
+    
+    func onAutosyncVideosStatusOff() {
+        MPush.hitTag(MenloworksTags.NameConstants.autosyncVideosStatus, withValue: MenloworksTags.ValueConstants.off)
+    }
+    
+    func onAutosyncVideosStatusOn(isWifi: Bool) {
+        let tag = MenloworksTags.AutosyncVideosStatus(isWifi: isWifi)
+        hitTag(tag)
+    }
+    
+    func onSatınalındı50GBStatus() {
+        let tag = MenloworksTags.Satınalındı50GBStatus()
+        hitTag(tag)
+    }
+    
+    func onSatınalındı500GBStatus() {
+        let tag = MenloworksTags.Satınalındı500GBStatus()
+        hitTag(tag)
+    }
+    
+    func onSatınalındı25TB() {
+        let tag = MenloworksTags.Satınalındı25TB()
         hitTag(tag)
     }
     
@@ -308,6 +386,13 @@ class MenloworksTagsService {
             })
             
             let subLength = list.count
+            
+            for subscription in list {
+                if subscription.subscriptionPlanCometOfferId == "581814" {
+                    let tag = MenloworksTags.PlatinUserStatus()
+                    self.hitTag(tag)
+                }
+            }
             
             for i in 0...4 {
                 let packageName = String(format: "%@%d", MenloworksTags.UserPackageStatus().name, i+1)

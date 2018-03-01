@@ -539,11 +539,22 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     fileprivate func log(for index: TabScreenIndex) {
         switch index {
         case .photosScreenIndex:
-            MenloworksTagsService.shared.onPhotosAndVideosOpen ()
+            MenloworksAppEvents.onPhotosAndVideosOpen()
+            
+            guard let settings = SyncServiceManager.shared.getSettings() else { return }
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnable)
+            
+            if settings.isAutoSyncEnable {
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !settings.mobileDataPhotos)
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !settings.mobileDataVideo)
+            } else {
+                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
+            }
         case .musicScreenIndex:
-            MenloworksTagsService.shared.onMusicOpen()
+            MenloworksAppEvents.onMusicOpen()
         case .documentsScreenIndex:
-            MenloworksTagsService.shared.onDocumentsOpen()
+            MenloworksAppEvents.onDocumentsOpen()
         default:
             break
         }

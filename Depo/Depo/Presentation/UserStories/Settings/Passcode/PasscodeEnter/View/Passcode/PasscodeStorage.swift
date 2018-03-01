@@ -39,6 +39,9 @@ extension PasscodeStorageDefaults: PasscodeStorage {
     }
     
     func save(passcode: Passcode) {
+        if self.passcode.count == 0 && passcode.count > 0 {
+            MenloworksEventsService.shared.onPasscodeSet()
+        }
         self.passcode = passcode
     }
     

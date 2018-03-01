@@ -32,10 +32,10 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     func startOperation(operationType: SyncOperationType){
         switch operationType {
         case .backup:
-            MenloworksTagsService.shared.onContactUploaded()
+            MenloworksAppEvents.onContactUploaded()
             performOperation(forType: .backup)
         case .restore:
-            MenloworksTagsService.shared.onContactDownloaded()
+            MenloworksAppEvents.onContactDownloaded()
             performOperation(forType: .restore)
         case .cancel:
             contactsSyncService.cancel()

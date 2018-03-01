@@ -88,6 +88,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
             let parameters = UserEmailParameters(userEmail: email)
             AccountService().updateUserEmail(parameters: parameters,
                                              success: { [weak self] (responce) in
+                                                MenloworksEventsService.shared.onEmailChanged()
                 self?.userInfo?.email = email
                 self?.updatePhoneIfNeed(number: number)
             }, fail: { [weak self] (error) in

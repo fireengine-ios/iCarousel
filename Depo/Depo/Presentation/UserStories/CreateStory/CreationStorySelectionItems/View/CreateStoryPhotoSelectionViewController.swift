@@ -13,7 +13,7 @@ class CreateStoryPhotoSelectionViewController: BaseFilesGreedViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MenloworksTagsService.shared.onCreateStoryPageOpen()
+        MenloworksAppEvents.onCreateStoryPageOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {

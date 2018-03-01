@@ -58,7 +58,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         output.viewIsReady()
         setupVersionLabel()
         
-        MenloworksTagsService.shared.onPreferencesOpen()
+        MenloworksAppEvents.onPreferencesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -2497,6 +2497,10 @@
 		C31A7AB8B8824DB84111E8FB /* SplashInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */; };
 		C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */; };
 		C5E5EC15332297CC6F59374A /* SyncContactsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B17E6F8BC6EF2FCF5C768A7 /* SyncContactsViewInput.swift */; };
+		C65DCBDE204683820083A965 /* MenloworksEventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65DCBDB204683820083A965 /* MenloworksEventsService.swift */; };
+		C65DCBDF204683820083A965 /* MenloworksEventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65DCBDB204683820083A965 /* MenloworksEventsService.swift */; };
+		C65DCBE0204683820083A965 /* MenloworksEventsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */; };
+		C65DCBE1204683820083A965 /* MenloworksEventsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */; };
 		C7055CAC94DC0C09FAC5F608 /* AlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30F701A47CF5B8D685D062 /* AlbumDetailPresenter.swift */; };
 		C8DE09849CB5200793B94E8A /* SelectNameConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9373EA2411B8180CA5FE65D7 /* SelectNameConfigurator.swift */; };
 		C9C861DC0DEC3C4584CBF425 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B2FD70EACA38EF90262C71 /* SettingsPresenter.swift */; };
@@ -4596,6 +4600,8 @@
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
 		C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
 		C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInitializer.swift; sourceTree = "<group>"; };
+		C65DCBDB204683820083A965 /* MenloworksEventsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsService.swift; sourceTree = "<group>"; };
+		C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsConstants.swift; sourceTree = "<group>"; };
 		C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA3578DCC250EB72513FBF71 /* SyncContactsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewOutput.swift; sourceTree = "<group>"; };
 		CB4BCE425BAA49DA8EBEEA39 /* SelectFolderInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderInitializer.swift; sourceTree = "<group>"; };
@@ -7205,6 +7211,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C65DCBDA204683820083A965 /* MenloworksEventsService */,
 				78E3D516203FF9A000FA3478 /* MenloworksTagsService */,
 				B54BFF45202B43CE0018AF82 /* WidgetService */,
 				782E40B11FE7D05F007F7838 /* RecentSearchesService */,
@@ -9155,6 +9162,15 @@
 				7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C65DCBDA204683820083A965 /* MenloworksEventsService */ = {
+			isa = PBXGroup;
+			children = (
+				C65DCBDB204683820083A965 /* MenloworksEventsService.swift */,
+				C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */,
+			);
+			path = MenloworksEventsService;
 			sourceTree = "<group>";
 		};
 		C7EF66C623C833B469A51536 /* View */ = {
@@ -12647,6 +12663,7 @@
 				8C0E8CD61FDEBDFF00789C91 /* HomePageModuleInput.swift in Sources */,
 				8C0E8CD71FDEBDFF00789C91 /* GSMCodeModel.swift in Sources */,
 				8C0E8CD81FDEBDFF00789C91 /* PlanType.swift in Sources */,
+				C65DCBE1204683820083A965 /* MenloworksEventsConstants.swift in Sources */,
 				8C0E8CD91FDEBDFF00789C91 /* SearchViewInitializer.swift in Sources */,
 				8C0E8CDA1FDEBDFF00789C91 /* Configuration.m in Sources */,
 				8C0B919520170E3E00A5BA81 /* DuplicatedContactTableViewCell.swift in Sources */,
@@ -13213,6 +13230,7 @@
 				8C0E8F091FDEBDFF00789C91 /* PasscodeSettingsInitializer.swift in Sources */,
 				8C0E8F0A1FDEBDFF00789C91 /* SyncContactsModuleInput.swift in Sources */,
 				8C0B919B20170E5900A5BA81 /* DuplicatedContactsRouterInput.swift in Sources */,
+				C65DCBDF204683820083A965 /* MenloworksEventsService.swift in Sources */,
 				8C0E8F0B1FDEBDFF00789C91 /* SyncContactsPresenter.swift in Sources */,
 				8C0E8F0C1FDEBDFF00789C91 /* UserProfileViewInput.swift in Sources */,
 				8C0E8F0D1FDEBDFF00789C91 /* SyncContactsInteractorInput.swift in Sources */,
@@ -14163,6 +14181,7 @@
 				7C6E2F931F31E4F800536DB6 /* CreateStoryNameModuleInput.swift in Sources */,
 				CE95ED4F1F516736002F923A /* HelpAndSupportInteractor.swift in Sources */,
 				8C6EF8761F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift in Sources */,
+				C65DCBDE204683820083A965 /* MenloworksEventsService.swift in Sources */,
 				A1CEB018812ED0593B7A063B /* PhotoVideoDetailInteractorOutput.swift in Sources */,
 				7809A32D1FED09EF00954A5F /* AsyncOperation.swift in Sources */,
 				473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */,
@@ -14308,6 +14327,7 @@
 				86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */,
 				46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				7C203553201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
+				C65DCBE0204683820083A965 /* MenloworksEventsConstants.swift in Sources */,
 				2BA37C322028376500660394 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				CE4CFEBF1F78F18700FB4C3D /* ResizableTableView.swift in Sources */,
 				591DE1155E5210C187678E0B /* UploadFilesSelectionInteractor.swift in Sources */,

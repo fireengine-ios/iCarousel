@@ -22,13 +22,31 @@ class MenloworksTags {
     
     class PhotoUpload: MenloworksBoolTag {
         init(isWiFi: Bool) {
-            super.init(name: NameConstants.photoUpload, value: isWiFi, boolType: .wifi)
+            super.init(name: NameConstants.photoUpload, value: isWiFi, boolType: .wifiMobile)
         }
     }
     
     class WiFi3G: MenloworksBoolTag {
         init(isWiFi: Bool) {
-            super.init(name: NameConstants.wifi3g, value: isWiFi, boolType: .wifi)
+            super.init(name: NameConstants.wifi3g, value: isWiFi, boolType: .wifiMobile)
+        }
+    }
+    
+    class NotificationPermissionStatus: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.notificationsPermissionStatus, value: isEnabled, boolType: .permission)
+        }
+    }
+    
+    class GalleryPermissionStatus: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.galleryPermissionStatus, value: isEnabled, boolType: .permission)
+        }
+    }
+    
+    class LocationPermissionStatus: MenloworksBoolTag {
+        init(isEnabled: Bool) {
+            super.init(name: NameConstants.locationPermissionStatus, value: isEnabled, boolType: .permission)
         }
     }
     
@@ -95,6 +113,12 @@ class MenloworksTags {
     class SignUpCompleted: MenloworksTag {
         init() {
             super.init(name: NameConstants.signupCompleted)
+        }
+    }
+    
+    class PlatinUserStatus: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.platinUserStatus)
         }
     }
     
@@ -320,6 +344,54 @@ class MenloworksTags {
             super.init(name: NameConstants.autologinStatus, value: isEnabled, boolType: .trueFalse)
         }
     }
+    
+    class FileDeleted: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.fileDeleted)
+        }
+    }
+    
+    class QuotaStatus: MenloworksPercentageTag {
+        init(percentageValue: Int) {
+            super.init(name: NameConstants.quotaStatus, percentageValue: percentageValue)
+        }
+    }
+    
+    class AutosyncStatus: MenloworksBoolTag {
+        init(isOn: Bool) {
+            super.init(name: NameConstants.autosyncStatus, value: isOn, boolType: .onOff)
+        }
+    }
+    
+    class AutosyncPhotosStatus: MenloworksBoolTag {
+        init(isWifi: Bool) {
+            super.init(name: NameConstants.autosyncPhotosStatus, value: isWifi, boolType: .wifiLTE)
+        }
+    }
+    
+    class AutosyncVideosStatus: MenloworksBoolTag {
+        init(isWifi: Bool) {
+            super.init(name: NameConstants.autosyncVideosStatus, value: isWifi, boolType: .wifiLTE)
+        }
+    }
+    
+    class Satınalındı50GBStatus: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.satınalındı50GBStatus)
+        }
+    }
+    
+    class Satınalındı500GBStatus: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.satınalındı500GBStatus)
+        }
+    }
+    
+    class Satınalındı25TB: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.satınalındı25TB)
+        }
+    }
 }
 
 class MenloworksTag {
@@ -343,7 +415,8 @@ class MenloworksBoolTag: MenloworksTag {
         case yesNo
         case onOff
         case permission
-        case wifi
+        case wifiMobile
+        case wifiLTE
     }
     
     init(name: String, value: Bool, boolType: BoolType) {
@@ -357,8 +430,10 @@ class MenloworksBoolTag: MenloworksTag {
             stringValue = value ? MenloworksTags.ValueConstants.on : MenloworksTags.ValueConstants.off
         case .permission:
             stringValue = value ? MenloworksTags.ValueConstants.granted : MenloworksTags.ValueConstants.denied
-        case .wifi:
+        case .wifiMobile:
             stringValue = value ? MenloworksTags.ValueConstants.wifi : MenloworksTags.ValueConstants.mobile
+        case .wifiLTE:
+            stringValue = value ? MenloworksTags.ValueConstants.wifi : MenloworksTags.ValueConstants.lte
         }
         
         super.init(name: name, value: stringValue)
@@ -369,5 +444,11 @@ class MenloworksPermissionTag: MenloworksTag {
     init(name: String, isGranted: Bool) {
         super.init(name: name,
                    value: isGranted ? MenloworksTags.ValueConstants.granted : MenloworksTags.ValueConstants.denied)
+    }
+}
+
+class MenloworksPercentageTag: MenloworksTag {
+    init(name: String, percentageValue: Int) {
+        super.init(name: name, value: String(percentageValue))
     }
 }

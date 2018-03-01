@@ -87,7 +87,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         deleteDuplicatedButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         output.viewIsReady()
         
-        MenloworksTagsService.shared.onContactSyncPageOpen()
+        MenloworksAppEvents.onContactSyncPageOpen()
     }
     
     deinit {

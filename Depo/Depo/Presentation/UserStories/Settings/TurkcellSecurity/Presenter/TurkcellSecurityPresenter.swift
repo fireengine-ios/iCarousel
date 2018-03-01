@@ -45,10 +45,18 @@ extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
                 MenloworksTagsService.shared.onTurkcellPasswordSettingsChanged(passcode)
             }
             
+            if passcode {
+                MenloworksEventsService.shared.onTurkcellPasswordSet()
+            }
+            
             if autoLogin != interactor.turkcellAutoLoginOn {
                 MenloworksTagsService.shared.onAutoLoginSettingsChanged(autoLogin)
             }
-                
+            
+            if autoLogin {
+                MenloworksEventsService.shared.onAutoLoginSet()
+            }
+            
             interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
         }
         

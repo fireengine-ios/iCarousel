@@ -60,7 +60,6 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
     func statusSuccessCallback(status: FBStatusObject) {
         facebookStatus = status
         if status.connected == true, status.syncEnabled == true {
-            MenloworksTagsService.shared.onFacebookConnected()
             view?.succeedFacebookStart()
         } else {
             view?.succeedFacebookStop()

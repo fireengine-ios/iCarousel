@@ -35,7 +35,7 @@ class PackagesViewController: UIViewController {
         setupCollectionView()
         output.viewIsReady()
         
-        MenloworksTagsService.shared.onPackagesOpen()
+        MenloworksAppEvents.onPackagesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,7 +138,7 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
         let plan = plans[indexPath.row]
         
         if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
-            MenloworksTagsService.shared.onSubscriptionClicked(tag)
+            MenloworksAppEvents.onSubscriptionClicked(tag)
         }
         output.didPressOn(plan: plan)
     }

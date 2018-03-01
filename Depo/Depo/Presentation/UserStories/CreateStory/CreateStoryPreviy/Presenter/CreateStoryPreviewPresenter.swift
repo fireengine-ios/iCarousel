@@ -32,7 +32,7 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
     
     func storyCreated(){
         asyncOperationSucces()
-        MenloworksTagsService.shared.onStoryCreated()
+        MenloworksAppEvents.onStoryCreated()
         
         let controller = PopUpController.with(title: TextConstants.pullToRefreshSuccess,
                                               message: TextConstants.createStoryCreated,

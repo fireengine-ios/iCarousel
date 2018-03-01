@@ -99,9 +99,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         log.debug("LocationManager locationManager")
 
+        var isAuthorized = false
         if ((status == .authorizedAlways) || (status == .authorizedWhenInUse) || (status == .authorizedAlways)){
+            isAuthorized = true
             startUpdateLocation()
         }
+        MenloworksTagsService.shared.onLocationPermissionChanged(isAuthorized)
     }
     
 }

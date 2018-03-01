@@ -76,6 +76,11 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     
     @IBAction func onStartUsingButton(){
         let model = dataSource.createSettingsAutoSyncModel()
+        
+        if !model.isAutoSyncEnable {
+            MenloworksEventsService.shared.onFirstAutosyncOff()
+        }
+        
         output.saveChanges(setting: model)
     }
     
