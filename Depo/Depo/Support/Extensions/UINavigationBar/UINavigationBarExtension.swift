@@ -89,7 +89,7 @@ extension UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
-        
+        navBar?.tintColor = UIColor.white
         navBar?.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white];
 
         if let view = navBar?.viewWithTag(tagHomeView)  {
@@ -200,6 +200,7 @@ extension UIViewController {
     func setTitle(withString title: String, andSubTitle subTitle: String! = nil) {
         
         navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
+        navBar?.topItem?.backBarButtonItem?.tintColor = UIColor.white
         
         if let _ = subTitle {
             navigationItem.title = nil

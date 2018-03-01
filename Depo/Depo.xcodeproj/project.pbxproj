@@ -2897,6 +2897,7 @@
 		CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524B92046C95E0036FCEA /* UploadQueueService.swift */; };
 		CEA524BC2046D6A10036FCEA /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BB2046D6A10036FCEA /* UploadOperation.swift */; };
 		CEA524BE2046EB860036FCEA /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
+		CEA629FF2047ED3200215811 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA629FE2047ED3200215811 /* L10n.swift */; };
 		CEA84C231F7CE8F7009B0769 /* UIApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84C221F7CE8F7009B0769 /* UIApplication+Settings.swift */; };
 		CEACBEA11F6C0EEA003BE328 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACBEA01F6C0EEA003BE328 /* RingView.swift */; };
 		CEACBEA31F6C1110003BE328 /* ActivityTimelineTableBackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEACBEA21F6C1110003BE328 /* ActivityTimelineTableBackView.xib */; };
@@ -3010,6 +3011,8 @@
 		CEE005741F7B7DD0004FA8DE /* AssetsCash.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE005731F7B7DD0004FA8DE /* AssetsCash.swift */; };
 		CEE005761F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE005751F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift */; };
 		CEE04E141F471AFE00D74FA1 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE04E131F471AFE00D74FA1 /* UIImageView.swift */; };
+		CEE10CCE2047EA6300D97B9F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE10CCD2047EA6300D97B9F /* Localizable.strings */; };
+		CEE10CD02047EAD000D97B9F /* CGSize+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE10CCF2047EAD000D97B9F /* CGSize+Scale.swift */; };
 		CEE1D1F61F714DFE0008F4CF /* MediaItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1F01F714DFD0008F4CF /* MediaItem+CoreDataProperties.swift */; };
 		CEE1D1F71F714DFE0008F4CF /* MediaItemsAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1F11F714DFD0008F4CF /* MediaItemsAlbum+CoreDataClass.swift */; };
 		CEE1D1F81F714DFE0008F4CF /* MediaItemsAlbum+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1F21F714DFD0008F4CF /* MediaItemsAlbum+CoreDataProperties.swift */; };
@@ -4867,6 +4870,7 @@
 		CEA524B92046C95E0036FCEA /* UploadQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadQueueService.swift; sourceTree = "<group>"; };
 		CEA524BB2046D6A10036FCEA /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		CEA524BD2046EB860036FCEA /* Error+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Network.swift"; sourceTree = "<group>"; };
+		CEA629FE2047ED3200215811 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CEA84C221F7CE8F7009B0769 /* UIApplication+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Settings.swift"; sourceTree = "<group>"; };
 		CEACBEA01F6C0EEA003BE328 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		CEACBEA21F6C1110003BE328 /* ActivityTimelineTableBackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityTimelineTableBackView.xib; sourceTree = "<group>"; };
@@ -4962,6 +4966,8 @@
 		CEE005731F7B7DD0004FA8DE /* AssetsCash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsCash.swift; sourceTree = "<group>"; };
 		CEE005751F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPhotoLibraryChangeObserver.swift; sourceTree = "<group>"; };
 		CEE04E131F471AFE00D74FA1 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		CEE10CCD2047EA6300D97B9F /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		CEE10CCF2047EAD000D97B9F /* CGSize+Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Scale.swift"; sourceTree = "<group>"; };
 		CEE1D1EC1F714DDB0008F4CF /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		CEE1D1ED1F714DE30008F4CF /* MediaItemOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemOperations.swift; sourceTree = "<group>"; };
 		CEE1D1EE1F714DEA0008F4CF /* PredicateRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateRules.swift; sourceTree = "<group>"; };
@@ -9364,6 +9370,7 @@
 				CEA524BB2046D6A10036FCEA /* UploadOperation.swift */,
 				CE61D1C720468DFE001D01DC /* AsyncOperation.swift */,
 				CEA524BD2046EB860036FCEA /* Error+Network.swift */,
+				CEE10CCF2047EAD000D97B9F /* CGSize+Scale.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -9934,10 +9941,12 @@
 		CE58FAF020444493007F3F54 /* LifeboxShared */ = {
 			isa = PBXGroup;
 			children = (
-				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
 				CE1458CC2045645000812544 /* Presentation */,
 				CE1458CD2045645F00812544 /* Business */,
 				CE58FAF620444493007F3F54 /* Info.plist */,
+				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
+				CEE10CCD2047EA6300D97B9F /* Localizable.strings */,
+				CEA629FE2047ED3200215811 /* L10n.swift */,
 			);
 			path = LifeboxShared;
 			sourceTree = "<group>";
@@ -12417,6 +12426,7 @@
 			files = (
 				CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */,
 				CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */,
+				CEE10CCE2047EA6300D97B9F /* Localizable.strings in Resources */,
 				CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */,
 				CEBDB1DF20444E50007EE1AE /* TurkcellSaturaDemIta.ttf in Resources */,
 				CEBDB1E020444E50007EE1AE /* TurkcellSaturaIta.ttf in Resources */,
@@ -14720,6 +14730,7 @@
 				CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */,
 				CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */,
 				CE61D1CA20468DFE001D01DC /* AsyncOperation.swift in Sources */,
+				CEE10CD02047EAD000D97B9F /* CGSize+Scale.swift in Sources */,
 				CE1458C72045618800812544 /* URL+Path.swift in Sources */,
 				CE1458C9204561CC00812544 /* Dictionary.swift in Sources */,
 				CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */,
@@ -14727,6 +14738,7 @@
 				CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */,
 				CE61D1C32046873A001D01DC /* UploadService.swift in Sources */,
 				CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */,
+				CEA629FF2047ED3200215811 /* L10n.swift in Sources */,
 				CE1458D520458D9100812544 /* CustomErrors.swift in Sources */,
 				CE1458C62045617600812544 /* RouteRequests.swift in Sources */,
 				CE654FB520454B3900232025 /* UICollectionView+Layout.swift in Sources */,

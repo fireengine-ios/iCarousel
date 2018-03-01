@@ -9,10 +9,6 @@
 import Foundation
 import Alamofire
 
-enum URLs {
-    static let uploadContainer = RouteRequests.BaseUrl +/ "/api/container/baseUrl"
-}
-
 typealias DataRequestHandler = (DataRequest) -> Void
 
 final class UploadService {
@@ -25,7 +21,7 @@ final class UploadService {
     
     func getBaseUploadUrl(handler: @escaping ResponseHandler<String>) -> DataRequest {
         return sessionManager
-            .request(URLs.uploadContainer)
+            .request(RouteRequests.uploadContainer)
             .customValidate()
             .responseJSON { response in
                 switch response.result {

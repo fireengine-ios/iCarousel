@@ -14,7 +14,7 @@ class UploadBaseURL: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: UploadServiceConstant.baseUrl, relativeTo:super.patch)!
+        return RouteRequests.uploadContainer
     }
 }
 
@@ -122,7 +122,7 @@ class UploadNotify: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: UploadServiceConstant.uploadNotify,
+        let str = String(format: RouteRequests.uploadNotify,
                          parentUUID, fileUUID)
         return URL(string: str, relativeTo:super.patch)!
     }

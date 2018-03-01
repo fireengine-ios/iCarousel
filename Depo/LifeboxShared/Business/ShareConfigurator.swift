@@ -17,10 +17,7 @@ final class ShareConfigurator {
         let urls: AuthorizationURLs = AuthorizationURLsImp()
         let tokenStorage: TokenStorage = factory.resolve()
         
-        var auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
-        auth.refreshFailedHandler = { [weak self] in
-            //            self?.dismiss(animated: true, completion: nil)
-        }
+        let auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
         
         let sessionManager: SessionManager = factory.resolve()
         sessionManager.retrier = auth
