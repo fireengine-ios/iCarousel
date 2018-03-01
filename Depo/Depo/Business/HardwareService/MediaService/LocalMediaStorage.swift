@@ -204,7 +204,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                         }
                     }
                 }
-                completion(albums)
+                DispatchQueue.main.async {
+                    completion(albums)
+                }
             }
             
         }
