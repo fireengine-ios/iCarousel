@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="qFJ-9X-leT">
-                        <rect key="frame" x="24" y="0.0" width="337" height="43"/>
+                        <rect key="frame" x="40" y="0.0" width="321" height="43"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a22-gn-JtU">
                                 <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
@@ -29,7 +29,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6i4-fu-OIS">
-                                <rect key="frame" x="49" y="0.0" width="288" height="43"/>
+                                <rect key="frame" x="49" y="0.0" width="272" height="43"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -40,7 +40,7 @@
                 <constraints>
                     <constraint firstItem="qFJ-9X-leT" firstAttribute="centerY" secondItem="pZk-U7-RYP" secondAttribute="centerY" id="4ud-bM-iba"/>
                     <constraint firstAttribute="trailing" secondItem="qFJ-9X-leT" secondAttribute="trailing" constant="14" id="Nt6-iA-Ul7"/>
-                    <constraint firstItem="qFJ-9X-leT" firstAttribute="leading" secondItem="pZk-U7-RYP" secondAttribute="leading" constant="24" id="V2a-eb-KaB"/>
+                    <constraint firstItem="qFJ-9X-leT" firstAttribute="leading" secondItem="pZk-U7-RYP" secondAttribute="leading" constant="40" id="V2a-eb-KaB"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol OperationProgressServiceDelegate: class {
-    func didSend(ratio: Float, for tempUUID: String)
+    func didSend(ratio: Float, for url: URL)
 }

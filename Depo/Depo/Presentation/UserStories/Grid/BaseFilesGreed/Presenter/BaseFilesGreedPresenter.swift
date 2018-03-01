@@ -578,6 +578,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
+        if type == ElementTypes.removeAlbum {
+            bottomBarPresenter?.dismiss(animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        }
     }
     
     func operationFailed(withType type: ElementTypes) {
@@ -628,6 +632,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func moveBack() {
         router.showBack()
     }
+    
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
     
     func sortType() -> MoreActionsConfig.ViewType {
         return type

@@ -51,3 +51,23 @@ final class PlacesPageResponse: ObjectRequestResponse {
         }
     }
 }
+
+final class DeletePhotosFromPlacesAlbum: BaseRequestParametrs {
+    let id: Int64
+    let photos: [Item]
+    
+    init (id: Int64, photos: [Item]){
+        self.id = id
+        self.photos = photos
+    }
+    
+    override var requestParametrs: Any{
+        let photosUUID = photos.map { $0.id }
+        return photosUUID
+    }
+    
+    override var patch: URL {
+        let path: String = String(format: RouteRequests.placesDeletePhotos, id)
+        return URL(string: path, relativeTo: super.patch)!
+    }
+}

@@ -482,8 +482,8 @@
 "Back Up My Contacts" = "Back Up My Contacts";
 "No results found for your query." = "No results found for your query.";
 "localFilesBeingProcessed" = "Processing local files.";
-"SUGGESTIONS" = "SUGGESTIONS";
-"RECENT SEARCHES" = "RECENT SEARCHES";
+"Suggestions" = "Suggestions";
+"Recent Searches" = "Recent Searches";
 "Search" = "Search";
 "Warning" = "Warning";
 "TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate login with Turkcell password feature.";

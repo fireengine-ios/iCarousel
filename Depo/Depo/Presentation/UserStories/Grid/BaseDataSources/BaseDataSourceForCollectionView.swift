@@ -552,6 +552,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
             cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+            
+            if let cell = cell as? BasicCollectionMultiFileCell {
+                cell.moreButton.isHidden = !needShow3DotsInCell
+            }
         }
         
         for header in headers{
@@ -599,7 +603,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){
         displayingType = type
+        let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+            return first < second
+        })
         collectionView?.reloadData()
+        if let firstVisibleIndexPath = firstVisibleIndexPath {
+            collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
+        }
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {

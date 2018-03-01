@@ -14,6 +14,13 @@ final class FaceImageItemsConfigurator {
         router.view = viewController
         
         let presenter = FaceImageItemsPresenter()
+        if remoteServices is PeopleItemsService {
+            presenter.faceImageType = .people
+        } else if remoteServices is ThingsItemsService {
+            presenter.faceImageType = .things
+        } else if remoteServices is PlacesItemsService {
+            presenter.faceImageType = .places
+        }
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                    selectionModeTypes: [.createStory,.addToFavorites,.delete])

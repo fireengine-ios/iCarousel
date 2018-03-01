@@ -17,11 +17,12 @@ final class FaceImagePhotosConfigurator {
     func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) {
         let router = FaceImagePhotosRouter()
         router.view = viewController
+        router.item = item
         
         let presenter = FaceImagePhotosPresenter(item: item)
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
-                                                                   selectionModeTypes: [.createStory, .delete])
+                                                                   selectionModeTypes: [.createStory, .deleteFaceImage])
         
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()
@@ -34,7 +35,7 @@ final class FaceImagePhotosConfigurator {
         presenter.router = router
         presenter.faceImageItemsModuleOutput = moduleOutput
         
-        let remoteServices = FaceImageDetailService(albumUUID: album.uuid, requestSize: 40)
+        let remoteServices = FaceImageDetailService(albumUUID: album.uuid, requestSize: RequestSizeConstant.faceImageItemsRequestSize)
         
         let interactor = FaceImagePhotosInteractor(remoteItems: remoteServices)
         interactor.output = presenter
@@ -44,7 +45,7 @@ final class FaceImagePhotosConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromAlbum],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromFaceImageAlbum],
                                                style: .default, tintColor: nil)
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
@@ -71,8 +72,5 @@ final class FaceImagePhotosConfigurator {
         let gridListTopBar = GridListTopBar.initFromXib()
         viewController.underNavBarBar = gridListTopBar
         gridListTopBar.delegate = viewController
-            
-        
-
     }
 }

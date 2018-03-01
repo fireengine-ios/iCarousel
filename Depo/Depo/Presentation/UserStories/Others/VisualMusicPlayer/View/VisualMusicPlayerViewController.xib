@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -15,9 +16,10 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VisualMusicPlayerViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VisualMusicPlayerViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="artistName" destination="Ij1-hs-gIO" id="PI3-Ha-lv0"/>
+                <outlet property="bottomView" destination="4N0-RG-EV1" id="enZ-zz-ayz"/>
                 <outlet property="carouselView" destination="Dc0-QF-4Zh" id="QuI-kI-vmT"/>
                 <outlet property="leftTimeLabel" destination="C9K-DL-jA9" id="ZUx-lu-oal"/>
                 <outlet property="musicName" destination="dZJ-Gg-jio" id="bsw-0E-FPM"/>
@@ -208,7 +210,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ks8-05-b09" customClass="VolumeSlider" customModule="Depo_LifeTech" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ks8-05-b09" customClass="VolumeSlider" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="20" y="547.5" width="335" height="32"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -232,15 +234,22 @@
                         <constraint firstAttribute="width" constant="20" id="14M-jU-kcF"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4N0-RG-EV1">
+                    <rect key="frame" x="0.0" y="584" width="375" height="83"/>
+                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="83" id="DRH-PD-Naq"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Ks8-05-b09" firstAttribute="centerX" secondItem="aiV-eJ-bmf" secondAttribute="centerX" id="20D-7D-era"/>
                 <constraint firstItem="Dc0-QF-4Zh" firstAttribute="leading" secondItem="aiV-eJ-bmf" secondAttribute="leading" id="239-Ot-WFN"/>
+                <constraint firstItem="4N0-RG-EV1" firstAttribute="leading" secondItem="5Aa-zF-fnX" secondAttribute="leading" id="2FZ-qT-oEd"/>
                 <constraint firstItem="vHm-VA-J0e" firstAttribute="leading" secondItem="aiV-eJ-bmf" secondAttribute="leading" constant="20" id="7hH-d6-m6L"/>
                 <constraint firstAttribute="trailing" secondItem="Dc0-QF-4Zh" secondAttribute="trailing" id="EXX-bx-9cF"/>
                 <constraint firstItem="Xvz-pH-Pzz" firstAttribute="centerX" secondItem="aiV-eJ-bmf" secondAttribute="centerX" id="LI7-0u-YlN"/>
-                <constraint firstAttribute="bottom" secondItem="Xvz-pH-Pzz" secondAttribute="bottom" id="MJM-aS-Jh5"/>
                 <constraint firstItem="CZG-q6-ZSJ" firstAttribute="leading" secondItem="aiV-eJ-bmf" secondAttribute="leading" id="N1Q-A5-nlp"/>
                 <constraint firstItem="Xvz-pH-Pzz" firstAttribute="top" secondItem="Ks8-05-b09" secondAttribute="bottom" id="NCO-tD-1U9"/>
                 <constraint firstItem="vHm-VA-J0e" firstAttribute="top" secondItem="CZG-q6-ZSJ" secondAttribute="bottom" constant="20" id="NFv-uI-nWc">
@@ -251,13 +260,18 @@
                 <constraint firstAttribute="trailing" secondItem="CZG-q6-ZSJ" secondAttribute="trailing" id="THx-rv-229"/>
                 <constraint firstItem="Dc0-QF-4Zh" firstAttribute="top" secondItem="aiV-eJ-bmf" secondAttribute="top" constant="66" id="X3C-Xq-AWT"/>
                 <constraint firstItem="Xvz-pH-Pzz" firstAttribute="height" secondItem="cKH-U3-HRk" secondAttribute="height" id="Xfr-O9-DHl"/>
+                <constraint firstItem="Xvz-pH-Pzz" firstAttribute="bottom" secondItem="5Aa-zF-fnX" secondAttribute="bottom" id="dGA-39-6e4"/>
                 <constraint firstItem="cKH-U3-HRk" firstAttribute="centerX" secondItem="aiV-eJ-bmf" secondAttribute="centerX" id="dcR-xf-mhy"/>
+                <constraint firstItem="5Aa-zF-fnX" firstAttribute="bottom" secondItem="4N0-RG-EV1" secondAttribute="bottom" id="dfJ-lZ-IYx"/>
                 <constraint firstAttribute="trailing" secondItem="Ks8-05-b09" secondAttribute="trailing" constant="20" id="dmC-dp-8mt"/>
                 <constraint firstAttribute="trailing" secondItem="vHm-VA-J0e" secondAttribute="trailing" constant="20" id="fgs-Mi-4xf"/>
                 <constraint firstItem="cKH-U3-HRk" firstAttribute="top" secondItem="vHm-VA-J0e" secondAttribute="bottom" id="jf4-Tz-xrk"/>
+                <constraint firstItem="4N0-RG-EV1" firstAttribute="trailing" secondItem="5Aa-zF-fnX" secondAttribute="trailing" id="koj-pg-1mT"/>
                 <constraint firstItem="Ks8-05-b09" firstAttribute="top" secondItem="cKH-U3-HRk" secondAttribute="bottom" id="pG7-Xb-esR"/>
                 <constraint firstItem="CZG-q6-ZSJ" firstAttribute="top" secondItem="Dc0-QF-4Zh" secondAttribute="bottom" id="va6-Vn-eSM"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="5Aa-zF-fnX"/>
             <variation key="heightClass=regular-widthClass=regular">
                 <mask key="constraints">
                     <exclude reference="Omv-sl-kdT"/>

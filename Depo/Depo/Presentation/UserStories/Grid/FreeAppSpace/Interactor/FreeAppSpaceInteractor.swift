@@ -62,7 +62,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                 self?.isDeleteRequestRunning = false
                 if let presenter = self?.output as? FreeAppSpacePresenter {
                     DispatchQueue.main.async {
-                        presenter.reloadData()
+                        presenter.canceled()
                     }
                 }
             })
