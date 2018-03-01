@@ -2538,6 +2538,13 @@
 		CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
+		CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE924204831CE0074BDDC /* FileProviderExtension.swift */; };
+		CE1BE927204831CE0074BDDC /* FileProviderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE926204831CE0074BDDC /* FileProviderItem.swift */; };
+		CE1BE929204831CE0074BDDC /* FileProviderEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */; };
+		CE1BE933204831CE0074BDDC /* DocumentActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE932204831CE0074BDDC /* DocumentActionViewController.swift */; };
+		CE1BE936204831CE0074BDDC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1BE934204831CE0074BDDC /* MainInterface.storyboard */; };
+		CE1BE93A204831CE0074BDDC /* LifeboxFileProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CE1BE93D204831CE0074BDDC /* LifeboxFileProvider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CE1E26E120174D7500F49E41 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E020174D7500F49E41 /* ResponseParser.swift */; };
 		CE1E26E320174DC600F49E41 /* MappingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E220174DC600F49E41 /* MappingError.swift */; };
 		CE1E26E520174DF200F49E41 /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
@@ -3145,6 +3152,20 @@
 			remoteGlobalIDString = B54BFF2F202B20250018AF82;
 			remoteInfo = "autosync-widget";
 		};
+		CE1BE938204831CE0074BDDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1BE92F204831CE0074BDDC;
+			remoteInfo = LifeboxFileProviderUI;
+		};
+		CE1BE93B204831CE0074BDDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1BE921204831CD0074BDDC;
+			remoteInfo = LifeboxFileProvider;
+		};
 		CE58FAF720444493007F3F54 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -3179,7 +3200,9 @@
 			dstSubfolderSpec = 13;
 			files = (
 				B54BFF3B202B20250018AF82 /* autosync-widget.appex in Embed App Extensions */,
+				CE1BE93D204831CE0074BDDC /* LifeboxFileProvider.appex in Embed App Extensions */,
 				CE58FAF920444493007F3F54 /* LifeboxShared.appex in Embed App Extensions */,
+				CE1BE93A204831CE0074BDDC /* LifeboxFileProviderUI.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4699,6 +4722,16 @@
 		CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
+		CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxFileProvider.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE1BE924204831CE0074BDDC /* FileProviderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderExtension.swift; sourceTree = "<group>"; };
+		CE1BE926204831CE0074BDDC /* FileProviderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderItem.swift; sourceTree = "<group>"; };
+		CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderEnumerator.swift; sourceTree = "<group>"; };
+		CE1BE92A204831CE0074BDDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE1BE92B204831CE0074BDDC /* LifeboxFileProvider.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxFileProvider.entitlements; sourceTree = "<group>"; };
+		CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxFileProviderUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE1BE932204831CE0074BDDC /* DocumentActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentActionViewController.swift; sourceTree = "<group>"; };
+		CE1BE935204831CE0074BDDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		CE1BE937204831CE0074BDDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1E26E020174D7500F49E41 /* ResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
 		CE1E26E220174DC600F49E41 /* MappingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingError.swift; sourceTree = "<group>"; };
 		CE1E26E420174DF200F49E41 /* Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapping.swift; sourceTree = "<group>"; };
@@ -5143,6 +5176,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE1BE91F204831CD0074BDDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1BE92D204831CE0074BDDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE51AD041EF90853005DCEE0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -5206,6 +5253,8 @@
 				B54BFF4A202C734C0018AF82 /* Shared */,
 				B54BFF32202B20250018AF82 /* autosync-widget */,
 				CE58FAF020444493007F3F54 /* LifeboxShared */,
+				CE1BE923204831CE0074BDDC /* LifeboxFileProvider */,
+				CE1BE931204831CE0074BDDC /* LifeboxFileProviderUI */,
 				051E1DF519CAC2F900FD1E03 /* Frameworks */,
 				051E1DF419CAC2F900FD1E03 /* Products */,
 				FA9ABBCB19DCF3FFE7B413C8 /* Pods */,
@@ -5221,6 +5270,8 @@
 				B54BFF30202B20250018AF82 /* autosync-widget.appex */,
 				8C0E907E1FDEBE0000789C91 /* lifebox.app */,
 				CE58FAEF20444492007F3F54 /* LifeboxShared.appex */,
+				CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */,
+				CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -9375,6 +9426,28 @@
 			path = Business;
 			sourceTree = "<group>";
 		};
+		CE1BE923204831CE0074BDDC /* LifeboxFileProvider */ = {
+			isa = PBXGroup;
+			children = (
+				CE1BE924204831CE0074BDDC /* FileProviderExtension.swift */,
+				CE1BE926204831CE0074BDDC /* FileProviderItem.swift */,
+				CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */,
+				CE1BE92A204831CE0074BDDC /* Info.plist */,
+				CE1BE92B204831CE0074BDDC /* LifeboxFileProvider.entitlements */,
+			);
+			path = LifeboxFileProvider;
+			sourceTree = "<group>";
+		};
+		CE1BE931204831CE0074BDDC /* LifeboxFileProviderUI */ = {
+			isa = PBXGroup;
+			children = (
+				CE1BE932204831CE0074BDDC /* DocumentActionViewController.swift */,
+				CE1BE934204831CE0074BDDC /* MainInterface.storyboard */,
+				CE1BE937204831CE0074BDDC /* Info.plist */,
+			);
+			path = LifeboxFileProviderUI;
+			sourceTree = "<group>";
+		};
 		CE2469F31F3BF8F3008DF705 /* CreateStoryService */ = {
 			isa = PBXGroup;
 			children = (
@@ -11161,6 +11234,40 @@
 			productReference = B54BFF30202B20250018AF82 /* autosync-widget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		CE1BE921204831CD0074BDDC /* LifeboxFileProvider */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE1BE947204831CE0074BDDC /* Build configuration list for PBXNativeTarget "LifeboxFileProvider" */;
+			buildPhases = (
+				CE1BE91E204831CD0074BDDC /* Sources */,
+				CE1BE91F204831CD0074BDDC /* Frameworks */,
+				CE1BE920204831CD0074BDDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LifeboxFileProvider;
+			productName = LifeboxFileProvider;
+			productReference = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		CE1BE92F204831CE0074BDDC /* LifeboxFileProviderUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE1BE946204831CE0074BDDC /* Build configuration list for PBXNativeTarget "LifeboxFileProviderUI" */;
+			buildPhases = (
+				CE1BE92C204831CE0074BDDC /* Sources */,
+				CE1BE92D204831CE0074BDDC /* Frameworks */,
+				CE1BE92E204831CE0074BDDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LifeboxFileProviderUI;
+			productName = LifeboxFileProviderUI;
+			productReference = CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE51AFFC1EF90853005DCEE0 /* Build configuration list for PBXNativeTarget "Depo_LifeTech" */;
@@ -11180,6 +11287,8 @@
 			dependencies = (
 				B5E1D981202DB4800022F0E8 /* PBXTargetDependency */,
 				CE58FAF820444493007F3F54 /* PBXTargetDependency */,
+				CE1BE939204831CE0074BDDC /* PBXTargetDependency */,
+				CE1BE93C204831CE0074BDDC /* PBXTargetDependency */,
 			);
 			name = Depo_LifeTech;
 			productName = Depo;
@@ -11245,6 +11354,16 @@
 								enabled = 1;
 							};
 						};
+					};
+					CE1BE921204831CD0074BDDC = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = 7A7F3AW7RP;
+						ProvisioningStyle = Automatic;
+					};
+					CE1BE92F204831CE0074BDDC = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = 7A7F3AW7RP;
+						ProvisioningStyle = Automatic;
 					};
 					CE51AAF51EF90853005DCEE0 = {
 						DevelopmentTeam = 7A7F3AW7RP;
@@ -11319,6 +11438,8 @@
 				8C0E8C611FDEBDFF00789C91 /* TC_Depo_LifeTech */,
 				B54BFF2F202B20250018AF82 /* autosync-widget */,
 				CE58FAEE20444492007F3F54 /* LifeboxShared */,
+				CE1BE921204831CD0074BDDC /* LifeboxFileProvider */,
+				CE1BE92F204831CE0074BDDC /* LifeboxFileProviderUI */,
 			);
 		};
 /* End PBXProject section */
@@ -11872,6 +11993,21 @@
 				B54BFF5A202C86F30018AF82 /* Images.xcassets in Resources */,
 				B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */,
 				B54BFF42202B264D0018AF82 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1BE920204831CD0074BDDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1BE92E204831CE0074BDDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1BE936204831CE0074BDDC /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13730,6 +13866,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE1BE91E204831CD0074BDDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
+				CE1BE927204831CE0074BDDC /* FileProviderItem.swift in Sources */,
+				CE1BE929204831CE0074BDDC /* FileProviderEnumerator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1BE92C204831CE0074BDDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1BE933204831CE0074BDDC /* DocumentActionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE51AAFD1EF90853005DCEE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -14773,6 +14927,16 @@
 			target = B54BFF2F202B20250018AF82 /* autosync-widget */;
 			targetProxy = B5E1D980202DB4800022F0E8 /* PBXContainerItemProxy */;
 		};
+		CE1BE939204831CE0074BDDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1BE92F204831CE0074BDDC /* LifeboxFileProviderUI */;
+			targetProxy = CE1BE938204831CE0074BDDC /* PBXContainerItemProxy */;
+		};
+		CE1BE93C204831CE0074BDDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1BE921204831CD0074BDDC /* LifeboxFileProvider */;
+			targetProxy = CE1BE93B204831CE0074BDDC /* PBXContainerItemProxy */;
+		};
 		CE58FAF820444493007F3F54 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE58FAEE20444492007F3F54 /* LifeboxShared */;
@@ -14838,6 +15002,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				B54BFF36202B20250018AF82 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		CE1BE934204831CE0074BDDC /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE1BE935204831CE0074BDDC /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -15378,6 +15550,228 @@
 			};
 			name = Enterprise;
 		};
+		CE1BE93E204831CE0074BDDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeboxFileProvider/LifeboxFileProvider.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProvider;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE1BE93F204831CE0074BDDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeboxFileProvider/LifeboxFileProvider.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProvider;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CE1BE940204831CE0074BDDC /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeboxFileProvider/LifeboxFileProvider.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProvider;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AppStore;
+		};
+		CE1BE941204831CE0074BDDC /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeboxFileProvider/LifeboxFileProvider.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProvider;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Enterprise;
+		};
+		CE1BE942204831CE0074BDDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE1BE943204831CE0074BDDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CE1BE944204831CE0074BDDC /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AppStore;
+		};
+		CE1BE945204831CE0074BDDC /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Enterprise;
+		};
 		CE51AFFD1EF90853005DCEE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4777BF7378346F081CC034A1 /* Pods-Depo_LifeTech.debug.xcconfig */;
@@ -15829,6 +16223,28 @@
 				B54BFF3D202B20260018AF82 /* Release */,
 				B54BFF3E202B20260018AF82 /* AppStore */,
 				B54BFF3F202B20260018AF82 /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE1BE946204831CE0074BDDC /* Build configuration list for PBXNativeTarget "LifeboxFileProviderUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE1BE942204831CE0074BDDC /* Debug */,
+				CE1BE943204831CE0074BDDC /* Release */,
+				CE1BE944204831CE0074BDDC /* AppStore */,
+				CE1BE945204831CE0074BDDC /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE1BE947204831CE0074BDDC /* Build configuration list for PBXNativeTarget "LifeboxFileProvider" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE1BE93E204831CE0074BDDC /* Debug */,
+				CE1BE93F204831CE0074BDDC /* Release */,
+				CE1BE940204831CE0074BDDC /* AppStore */,
+				CE1BE941204831CE0074BDDC /* Enterprise */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
