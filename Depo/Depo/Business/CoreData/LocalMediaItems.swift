@@ -124,10 +124,13 @@ extension CoreDataStack {
                        filesCallBack: @escaping LocalFilesCallBack) {
         
         let request = NSFetchRequest<MediaItem>()
+        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
+                                                    in: backgroundContext)
+        
+        let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         
         if pageRemoteItem.count == 0 {
-            request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
-                                                        in: backgroundContext)
+            
             if let localItems = try? backgroundContext.fetch(request), (localItems.count >= 100 || !inProcessAppendingLocalFiles) {
                 let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                 filesCallBack(wrapedLocalItems)
@@ -135,6 +138,15 @@ extension CoreDataStack {
                 pageAppendedCallBack = { [weak self] localItems in
                     filesCallBack(localItems)
                     self?.pageAppendedCallBack = nil
+                }
+            }
+            return
+        } else if pageRemoteItem.count == 1, paginationEnd {
+            if let lastRemoteItem = pageRemoteItem.last {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateLastPage(sortType: sortType, lastItem: lastRemoteItem)])
+                if let localItems = try? backgroundContext.fetch(request) {
+                    let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
+                    filesCallBack(wrapedLocalItems)
                 }
             }
             return
@@ -149,16 +161,13 @@ extension CoreDataStack {
 
         let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR uuidValue IN %@)", md5s, uuids)
         
-        let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
+        
         
         var datePredicate = NSPredicate()
         
-        if let lastRemoteItem = pageRemoteItem.last {
-            datePredicate = getSortingPredicate(sortType: sortType, lastItem: lastRemoteItem)
+        if let lastRemoteItem = pageRemoteItem.last, let firstItem = pageRemoteItem.first {
+            datePredicate = getSortingPredicate(sortType: sortType, firstItem: firstItem, lastItem: lastRemoteItem)
         }
-        
-        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
-                                                    in: backgroundContext)
         
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicateString, fileTypePredicate, datePredicate])
         
@@ -180,25 +189,53 @@ extension CoreDataStack {
     
 //    private func perfor
     
-    private func getSortingPredicate(sortType: SortedRules, lastItem: Item) -> NSPredicate {
+    private func getSortingPredicate(sortType: SortedRules, firstItem: Item,  lastItem: Item) -> NSPredicate {
         switch sortType {
             case .timeUp, .timeUpWithoutSection:
-                return NSPredicate(format: "creationDateValue > %@", (lastItem.creationDate ?? Date()) as NSDate)
+                return NSPredicate(format: "creationDateValue > %@ AND creationDateValue < %@",
+                                   (lastItem.creationDate ?? Date()) as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
             case .timeDown, .timeDownWithoutSection:
-                return NSPredicate(format: "creationDateValue < %@", (lastItem.creationDate ?? Date()) as NSDate)
+                return NSPredicate(format: "creationDateValue < %@ AND creationDateValue > %@", (lastItem.creationDate ?? Date()) as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
             case .lettersAZ, .albumlettersAZ:
-                return NSPredicate(format: "nameValue > %@", lastItem.name ?? "")
+                return NSPredicate(format: "nameValue > %@ AND nameValue < %@",
+                                   lastItem.name ?? "", firstItem.name ?? "")
             case .lettersZA, .albumlettersZA:
-                return NSPredicate(format: "nameValue < %@", lastItem.name ?? "")
+                return NSPredicate(format: "nameValue < %@ AND nameValue > %@",
+                                   lastItem.name ?? "", firstItem.name ?? "")
             case .sizeAZ:
-                return NSPredicate(format: "fileSizeValue > %ui", lastItem.fileSize)
+                return NSPredicate(format: "fileSizeValue > %ui AND fileSizeValue < %ui",
+                                   lastItem.fileSize, firstItem.fileSize)
             case .sizeZA:
-                return NSPredicate(format: "fileSizeValue < %ui", lastItem.fileSize)
+                return NSPredicate(format: "fileSizeValue < %ui AND fileSizeValue > %ui",
+                                   lastItem.fileSize, firstItem.fileSize)
             case .metaDataTimeUp:
-                return NSPredicate(format: "creationDateValue > %@", lastItem.metaDate as NSDate)
+                return NSPredicate(format: "creationDateValue > %@ AND creationDateValue < %@",
+                                   lastItem.metaDate as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
             case .metaDataTimeDown:
-                return NSPredicate(format: "creationDateValue < %@", lastItem.metaDate as NSDate)
+                return NSPredicate(format: "creationDateValue < %@ AND creationDateValue < %@",
+                                   lastItem.metaDate as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
             }
+    }
+    
+    private func getSortingPredicateLastPage(sortType: SortedRules, lastItem: Item) -> NSPredicate {
+        switch sortType {
+        case .timeUp, .timeUpWithoutSection:
+            return NSPredicate(format: "creationDateValue < %@", (lastItem.creationDate ?? Date()) as NSDate)
+        case .timeDown, .timeDownWithoutSection:
+            return NSPredicate(format: "creationDateValue > %@", (lastItem.creationDate ?? Date()) as NSDate)
+        case .lettersAZ, .albumlettersAZ:
+            return NSPredicate(format: "nameValue < %@", lastItem.name ?? "")
+        case .lettersZA, .albumlettersZA:
+            return NSPredicate(format: "nameValue > %@", lastItem.name ?? "")
+        case .sizeAZ:
+            return NSPredicate(format: "fileSizeValue < %ui", lastItem.fileSize)
+        case .sizeZA:
+            return NSPredicate(format: "fileSizeValue > %ui", lastItem.fileSize)
+        case .metaDataTimeUp:
+            return NSPredicate(format: "creationDateValue < %@", lastItem.metaDate as NSDate)
+        case .metaDataTimeDown:
+            return NSPredicate(format: "creationDateValue > %@", lastItem.metaDate as NSDate)
+        }
     }
     
     private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping ()->Void ) {

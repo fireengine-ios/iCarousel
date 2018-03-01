@@ -185,7 +185,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view?.stopRefresher()
         dataSource.appendCollectionView(items: [])
 //        dataSource.reloadData()
-        updateNoFilesView()
+//        updateNoFilesView()
     }
     
     func getContentWithSuccess(items: [WrapData]){
@@ -314,6 +314,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         reloadData()
     }
     
+    func filesAppendedAndSorted() {
+        updateNoFilesView()
+    }
     
     //MARK: - UnderNavBarBar/TopBar
     
