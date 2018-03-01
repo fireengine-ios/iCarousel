@@ -9,8 +9,8 @@
 import UIKit
 
 protocol FaceImageItemsInput: class {
-    func scrollViewDidScroll(scrollView: UIScrollView)
     func configurateUgglaView()
+    func updateUgglaViewPosition()
 }
 
 final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, FaceImageItemsInput {
@@ -84,26 +84,24 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         collectionView.contentInset.bottom = ugglaViewHeight
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView == collectionView {
-            let contentHeight = scrollView.contentSize.height
+    func updateUgglaViewPosition() {
+        let contentHeight = collectionView.contentSize.height
+        
+        if contentHeight < collectionView.frame.height - ugglaViewHeight {
+            ugglaViewBottomConstraint.constant = 0
+        } else {
+            let yOffset = collectionView.contentOffset.y
+            let delta = contentHeight - yOffset - collectionView.frame.height
             
-            if contentHeight < scrollView.frame.height - ugglaViewHeight {
+            if delta < 0 && abs(delta) <= ugglaViewHeight {
+                ugglaViewBottomConstraint.constant = ugglaViewHeight - abs(delta)
+            } else if delta < -ugglaViewHeight {
                 ugglaViewBottomConstraint.constant = 0
             } else {
-                let yOffset = scrollView.contentOffset.y
-                let delta = contentHeight - yOffset - scrollView.frame.height
-
-                if delta < 0 && abs(delta) < ugglaViewHeight {
-                    ugglaViewBottomConstraint.constant = ugglaViewHeight - abs(delta)
-                } else if delta < -ugglaViewHeight {
-                    ugglaViewBottomConstraint.constant = 0
-                } else {
-                    ugglaViewBottomConstraint.constant = ugglaViewHeight
-                }
+                ugglaViewBottomConstraint.constant = ugglaViewHeight
             }
-            view.layoutIfNeeded()
         }
+        view.layoutIfNeeded()
     }
 
 }
