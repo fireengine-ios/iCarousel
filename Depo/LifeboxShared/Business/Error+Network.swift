@@ -23,9 +23,9 @@ extension Error {
     
     var parsedDescription: String {
         if isNetworkError {
-            return "Please check your internet connection is active and Mobile Data is ON."
+            return L10n.Error.internet
         } else if notAuthorized {
-            return "You have not login via app yet"
+            return L10n.Error.login
         }
         return localizedDescription
     }

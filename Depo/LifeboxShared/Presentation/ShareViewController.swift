@@ -60,7 +60,7 @@ final class ShareViewController: UIViewController {
     }
     
     @IBAction private func actionUploadButton(_ sender: UIButton) {
-        progressLabel.text = "Uploading..."
+        progressLabel.text = L10n.uploading
         
         sender.isEnabled = false
         DispatchQueue.global().async { [weak self] in
