@@ -20,6 +20,8 @@ import UIKit
     private var countPhotosLabel = UILabel()
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
+    
+    private var sortType: SortedRules?
         
     // MARK: - UIViewController lifecycle
     
@@ -27,7 +29,7 @@ import UIKit
         super.viewDidLayoutSubviews()
         updateHeaderPosition()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -46,6 +48,13 @@ import UIKit
         configureFaceImageItemsPhotoActions()
         
         configureNavBarWithTouch()
+    }
+    
+    override func changeSortingRepresentation(sortType type: SortedRules) {
+        super.changeSortingRepresentation(sortType: type)
+        sortType = type
+
+        addNavBarTouch()
     }
     
     @objc func addNameAction() {
@@ -144,8 +153,15 @@ import UIKit
     }
     
     private func configureNavBarWithTouch() {
-        setTouchableTitle(title: mainTitle)
-        
+        if let sortType = sortType {
+            setTitle(withString: mainTitle, andSubTitle: sortType.descriptionForTitle)
+        } else {
+            setTouchableTitle(title: mainTitle)
+        }
+        addNavBarTouch()
+    }
+    
+    private func addNavBarTouch() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
         navigationItem.titleView?.addGestureRecognizer(tap)
     }
@@ -159,7 +175,7 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     func reloadName(_ name: String) {
         mainTitle = name
         
-        setTitle(withString: mainTitle)
+        configureNavBarWithTouch()
         albumsSlider?.setTitle(String(format: TextConstants.albumLikeSliderWithPerson, name))
     }
     
