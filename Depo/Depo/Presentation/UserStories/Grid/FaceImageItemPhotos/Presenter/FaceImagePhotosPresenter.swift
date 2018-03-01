@@ -101,8 +101,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    func didDelete(items: [BaseDataSourceItem]) {
-        if dataSource.getAllObjects().isEmpty {
+    override func didDelete(items: [BaseDataSourceItem]) {
+        if dataSource.allObjectIsEmpty() {
             faceImageItemsModuleOutput?.delete(item: item)
             if let view = view as? FaceImagePhotosViewInput {
                 view.dismiss()
