@@ -259,6 +259,9 @@ enum FileType: Equatable {
                         self = .application(.unknown)
                     }
                     return
+                case "zip":
+                    self = .application(.zip)
+                    return
                 case "vnd.ms-powerpoint":
                     self = .application(.ppt)
                     return
