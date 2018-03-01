@@ -649,7 +649,7 @@ struct TextConstants {
     
     static let TOO_MANY_REQUESTS = NSLocalizedString("Too many verification code requested for this msisdn. Please try again later", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let EMAIL_IS_INVALID = NSLocalizedString("E-mail field is invalid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let EMAIL_IS_ALREADY_EXIST = NSLocalizedString("E-mail is already exist", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let EMAIL_IS_ALREADY_EXIST = NSLocalizedString("This e-mail address is already registered. Please enter another e-mail address.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let errorUnknown = NSLocalizedString("Unknown error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorServer = NSLocalizedString("Server error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
