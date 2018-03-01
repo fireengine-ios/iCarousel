@@ -55,13 +55,19 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         super.getContentWithSuccess(items: allItmes)
         
         albumSliderModuleOutput?.reload()
+        
+        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+            DispatchQueue.main.async {
+                view.updateUgglaViewPosition()
+            }
+        }
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
-            view.scrollViewDidScroll(scrollView: scrollView)
+        if hasUgglaLabel(), let view = view as? FaceImageItemsInput, scrollView == dataSource.collectionView {
+            view.updateUgglaViewPosition()
         }
     }
     
