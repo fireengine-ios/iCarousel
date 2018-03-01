@@ -894,14 +894,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if  let forwardDelegate = self.delegate {
                 let array = getAllObjects()
                 forwardDelegate.onItemSelected(item: unwrapedObject, from: array)
-//                for subArray in array {
-//                    for obj in subArray{
-//                        if (obj.md5 == unwrapedObject.md5){
-//                            forwardDelegate.onItemSelected(item: obj, from: array)
-//                            return
-//                        }
-//                    }
-//                }
             }
         }
     }
