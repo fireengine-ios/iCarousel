@@ -37,7 +37,7 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
     
     func configure(withItems items:[SuggestionObject]?, category: SearchCategory?) {
         self.category = category
-        if let items = items {
+        if let items = items, self.items.first?.info?.id != items.first?.info?.id {
             self.items = items
             
             for view in stackView.arrangedSubviews {
