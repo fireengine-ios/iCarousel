@@ -272,6 +272,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             bottomBGView.isHidden = false
             if !musicBar.isHidden {
                 musicBar.alpha = 1
+                musicBar.isUserInteractionEnabled = true
             }
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
@@ -298,6 +299,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                 
                 if !self.musicBar.isHidden {
                     self.musicBar.alpha = 0
+                    musicBar.isUserInteractionEnabled = false
                 }
             })
         }
