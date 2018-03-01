@@ -18,7 +18,7 @@ protocol Waiting {
     
     func showSpinerIncludeNavigatinBar()
     
-    func showSpinerWithCancelClosure(_ cancel: @escaping () -> Void)
+    func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler)
     
     func hideSpinerIncludeNavigatinBar()
     
@@ -27,7 +27,7 @@ protocol Waiting {
 
 extension UIViewController: Waiting {
     
-    func showSpinerWithCancelClosure(_ cancel: @escaping () -> Void) {
+    func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler) {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)

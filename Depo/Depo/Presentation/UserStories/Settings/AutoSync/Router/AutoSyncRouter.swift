@@ -13,7 +13,7 @@ class AutoSyncRouter: AutoSyncRouterInput {
         router.setNavigationController(controller: router.tabBarScreen)
     }
     
-    func showSyncOverPopUp(okHandler: @escaping () -> Void) {
+    func showSyncOverPopUp(okHandler: @escaping VoidHandler) {
         let router = RouterVC()
         
         let controller = PopUpController.with(title: TextConstants.autoSyncSyncOverTitle,

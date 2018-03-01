@@ -10,13 +10,13 @@ import UIKit
 
 class TapGestureRecognizerWithClosure: UITapGestureRecognizer {
 
-    private var closure: (() -> Void)?
+    private var closure: VoidHandler?
     
     init() {
         super.init(target: self, action: #selector(runAction))
     }
     
-    convenience init(closure: @escaping (() -> Void)) {
+    convenience init(closure: @escaping VoidHandler) {
         self.init()
         self.closure = closure
     }

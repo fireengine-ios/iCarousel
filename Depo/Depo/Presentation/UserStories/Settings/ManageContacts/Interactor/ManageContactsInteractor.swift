@@ -95,7 +95,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
     }
     
     func deleteContact(_ contact: RemoteContact) {
-        let okHandler: () -> Void = { [weak self] in
+        let okHandler: VoidHandler = { [weak self] in
             guard let `self` = self else { return }
             
             self.output.asyncOperationStarted()

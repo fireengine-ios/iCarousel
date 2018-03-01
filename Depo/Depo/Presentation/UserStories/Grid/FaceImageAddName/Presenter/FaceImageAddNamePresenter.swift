@@ -37,7 +37,7 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
             let currentItemURL = currentItem.urlToFile,
             let item = item as? WrapData,
             let itemUrl = item.urlToFile {
-            let yesHandler: () -> Void = { [weak self] in
+            let yesHandler: VoidHandler = { [weak self] in
                 if let interactor = self?.interactor as? FaceImageAddNameInteractorInput {
                     self?.startAsyncOperation()
                     interactor.mergePeople(currentItem, otherPerson: item)

@@ -164,7 +164,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Void) {
+    func configurateFreeAppSpaceActions(deleteAction: @escaping VoidHandler) {
         let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { _ in
             deleteAction()
         })
@@ -179,7 +179,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
     
-    func configurateFaceImagePeopleActions(showHideAction: @escaping () -> Void) {
+    func configurateFaceImagePeopleActions(showHideAction: @escaping VoidHandler) {
         let showHide = NavBarWithAction(navItem: NavigationBarList().showHide, action: { _ in
             showHideAction()
         })

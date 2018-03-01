@@ -24,7 +24,7 @@ class PasscodeEnterViewController: UIViewController {
     
     var state: PasscodeState!
     var navigationTitle = ""
-    var success: (() -> Void)?
+    var success: VoidHandler?
     var isTurkCellUser: Bool?
     
     override func viewDidLoad() {
