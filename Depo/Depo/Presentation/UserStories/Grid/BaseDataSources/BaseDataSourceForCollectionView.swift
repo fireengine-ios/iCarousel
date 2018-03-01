@@ -889,11 +889,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let object = itemForIndexPath(indexPath: indexPath)
-        guard let unwrapedObject = object else {
+        guard let unwrapedObject = itemForIndexPath(indexPath: indexPath) else {
             return
         }
+        
         if (isSelectionStateActive) {
             onSelectObject(object: unwrapedObject)
             let cell = collectionView.cellForItem(at: indexPath)
@@ -904,15 +903,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         } else {
             if  let forwardDelegate = self.delegate {
                 let array = getAllObjects()
-                for subArray in array {
-                    for obj in subArray{
-                        if (obj.uuid == unwrapedObject.uuid){
-                            
-                            forwardDelegate.onItemSelected(item: obj, from: array)
-                            return
-                        }
-                    }
-                }
+                forwardDelegate.onItemSelected(item: unwrapedObject, from: array)
             }
         }
     }
