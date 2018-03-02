@@ -38,7 +38,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var noFilesViewCenterOffsetConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var startCreatingFilesButton: BlueButtonWithWhiteText!
+    @IBOutlet weak var startCreatingFilesButton: BlueButtonWithNoFilesWhiteText!
     
     @IBOutlet weak var topBarContainer: UIView!
     
@@ -91,7 +91,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
         noFilesLabel.textColor = ColorConstants.textGrayColor
-        noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         
         noFilesTopLabel?.text = TextConstants.folderEmptyText
         noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
@@ -261,12 +261,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
-    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String) {
+    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
         noFilesLabel.text = text
         noFilesImage.image = image
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
-        topBarContainer.isHidden = false
+        topBarContainer.isHidden = needHideTopBar
     }
     
     func showNoFilesTop() {
