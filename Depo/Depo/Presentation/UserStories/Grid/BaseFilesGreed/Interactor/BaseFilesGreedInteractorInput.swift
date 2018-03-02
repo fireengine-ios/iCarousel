@@ -38,4 +38,6 @@ protocol BaseFilesGreedInteractorInput {
     
     var requestPageSize: Int {get}
     
+    var requestPageNum: Int {get}
+    
 }

@@ -121,6 +121,7 @@ extension CoreDataStack {
 
     func getLocalFilesForPhotoVideoPage(filesType: FileType, sortType: SortedRules,
                        pageRemoteItem: [Item], paginationEnd: Bool,
+                       firstPage: Bool,
                        filesCallBack: @escaping LocalFilesCallBack) {
         
         let request = NSFetchRequest<MediaItem>()
@@ -150,7 +151,19 @@ extension CoreDataStack {
                 }
             }
             return
+        } else if firstPage {
+            if let lastRemoteItem = pageRemoteItem.last {
+                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem)])
+                if let localItems = try? backgroundContext.fetch(request) {
+                    let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
+                    filesCallBack(wrapedLocalItems)
+                }
+            }
+            return
+            
         }
+        
+        
         
         var md5s = [String]()
         var uuids = [String]()
@@ -210,10 +223,10 @@ extension CoreDataStack {
                                    lastItem.fileSize, firstItem.fileSize)
             case .metaDataTimeUp:
                 return NSPredicate(format: "creationDateValue > %@ AND creationDateValue < %@",
-                                   lastItem.metaDate as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
+                                   lastItem.metaDate as NSDate, firstItem.metaDate as NSDate)
             case .metaDataTimeDown:
-                return NSPredicate(format: "creationDateValue < %@ AND creationDateValue < %@",
-                                   lastItem.metaDate as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
+                return NSPredicate(format: "creationDateValue < %@ AND creationDateValue > %@",
+                                   lastItem.metaDate as NSDate, firstItem.metaDate as NSDate)
             }
     }
     
@@ -235,6 +248,27 @@ extension CoreDataStack {
             return NSPredicate(format: "creationDateValue < %@", lastItem.metaDate as NSDate)
         case .metaDataTimeDown:
             return NSPredicate(format: "creationDateValue > %@", lastItem.metaDate as NSDate)
+        }
+    }
+    
+    private func getSortingPredicateFirstPage(sortType: SortedRules, lastItem: Item) -> NSPredicate {
+        switch sortType {
+        case .timeUp, .timeUpWithoutSection:
+            return NSPredicate(format: "creationDateValue > %@", (lastItem.creationDate ?? Date()) as NSDate)
+        case .timeDown, .timeDownWithoutSection:
+            return NSPredicate(format: "creationDateValue < %@", (lastItem.creationDate ?? Date()) as NSDate)
+        case .lettersAZ, .albumlettersAZ:
+            return NSPredicate(format: "nameValue > %@", lastItem.name ?? "")
+        case .lettersZA, .albumlettersZA:
+            return NSPredicate(format: "nameValue < %@", lastItem.name ?? "")
+        case .sizeAZ:
+            return NSPredicate(format: "fileSizeValue > %ui", lastItem.fileSize)
+        case .sizeZA:
+            return NSPredicate(format: "fileSizeValue < %ui", lastItem.fileSize)
+        case .metaDataTimeUp:
+            return NSPredicate(format: "creationDateValue > %@", lastItem.metaDate as NSDate)
+        case .metaDataTimeDown:
+            return NSPredicate(format: "creationDateValue < %@", lastItem.metaDate as NSDate)
         }
     }
     

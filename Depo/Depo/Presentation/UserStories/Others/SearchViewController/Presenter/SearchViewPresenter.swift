@@ -135,7 +135,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             view.setCollectionViewVisibilityStatus(visibilityStatus: flag)
         } else {
             view.setCollectionViewVisibilityStatus(visibilityStatus: false)
-            dataSource.appendCollectionView(items: items)
+            dataSource.appendCollectionView(items: items, pageNum: 0)//
         }
         
     }

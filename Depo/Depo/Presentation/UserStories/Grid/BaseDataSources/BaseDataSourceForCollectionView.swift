@@ -100,11 +100,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     fileprivate var previousPreheatRect = CGRect.zero
     
     
-    func compoundItems(pageItems: [WrapData]) {
+    func compoundItems(pageItems: [WrapData], pageNum: Int) {
         
 //        allMediaItems.append(contentsOf: pageItems)
 //        appendLocalItems(originalItemsArray: allMediaItems)
-        appendLocalItems(originalItemsArray: pageItems, localFileasAppendedCallback: {[weak self] imbededwithLocalsItems in
+        appendLocalItems(originalItemsArray: pageItems, pageNum: pageNum, localFileasAppendedCallback: {[weak self] imbededwithLocalsItems in
             guard let `self` = self else {
                 return
             }
@@ -256,7 +256,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return false
     }
     
-    private func appendLocalItems(originalItemsArray: [WrapData], localFileasAppendedCallback: @escaping ([WrapData])->()) {
+    private func appendLocalItems(originalItemsArray: [WrapData], pageNum: Int, localFileasAppendedCallback: @escaping ([WrapData])->()) {
         var tempoArray = originalItemsArray
 //        var tempoLocalArray = [WrapData]()
         
@@ -268,14 +268,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             case .video, .image:
                 
                 var lastRemote = originalItemsArray
-                if originalItemsArray.count == 0, let lastItemFromPreviousPage = allMediaItems.last {
+                if originalItemsArray.isEmpty, let lastItemFromPreviousPage = allMediaItems.last {
                     lastRemote = [lastItemFromPreviousPage]
                 }
-                
+                let isFirstPage = (pageNum == 1)// ? true : false
                 CoreDataStack.default.getLocalFilesForPhotoVideoPage(filesType: specificFilters,
                                                                      sortType: currentSortType,
                                                                      pageRemoteItem: lastRemote,
                                                                      paginationEnd: isPaginationDidEnd,
+                                                                     firstPage: isFirstPage,
                                                                      filesCallBack: { [weak self] localItems in
                                                                         guard let `self` = self else {
                                                                             return
@@ -406,7 +407,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return fetchResult.map{ return WrapData(mediaItem: $0) }
     }
     
-    func appendCollectionView(items: [WrapData]) {
+    func appendCollectionView(items: [WrapData], pageNum: Int) {
         let nonEmptyMetaItems = items.filter {
             if $0.fileType == .image, !$0.isLocalItem {
                return ($0.metaData?.takenDate != nil)
@@ -416,7 +417,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if nonEmptyMetaItems.isEmpty {
             isPaginationDidEnd = true
         }
-        compoundItems(pageItems: nonEmptyMetaItems)
+        compoundItems(pageItems: nonEmptyMetaItems, pageNum: pageNum)
     }
     
     func dropData() {

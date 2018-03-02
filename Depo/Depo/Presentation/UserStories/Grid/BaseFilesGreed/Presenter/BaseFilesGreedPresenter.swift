@@ -183,7 +183,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
-        dataSource.appendCollectionView(items: [])
+        dataSource.appendCollectionView(items: [], pageNum: interactor.requestPageNum)
 //        dataSource.reloadData()
 //        updateNoFilesView()
     }
@@ -199,7 +199,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
 
-        dataSource.appendCollectionView(items: items)
+        dataSource.appendCollectionView(items: items, pageNum: interactor.requestPageNum)
 
 //        dataSource.reloadData()
         updateNoFilesView()
