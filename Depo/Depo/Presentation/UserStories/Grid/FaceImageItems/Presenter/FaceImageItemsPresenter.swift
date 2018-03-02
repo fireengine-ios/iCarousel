@@ -61,9 +61,15 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
                 view.updateUgglaViewPosition()
             }
         }
+        
+        updateNoFilesView()
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
+    
+    override func needShowNoFileView() -> Bool {
+        return dataSource.allMediaItems.isEmpty
+    }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if hasUgglaLabel(), let view = view as? FaceImageItemsInput, scrollView == dataSource.collectionView {
@@ -83,6 +89,13 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         reloadData()
     }
     
+    private func updateNoFilesView() {
+        if needShowNoFileView() {
+            view.showNoFilesWith(text: interactor.textForNoFileLbel(),
+                                    image: interactor.imageForNoFileImageView(),
+                                    createFilesButtonText: "", needHideTopBar: interactor.needHideTopBar())
+        }
+    }
 }
 
 // MARK: FaceImageItemsInteractorOutput
