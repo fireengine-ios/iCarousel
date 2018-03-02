@@ -375,21 +375,21 @@ class MenloworksTags {
         }
     }
     
-    class Satınalındı50GBStatus: MenloworksTag {
+    class FiftyGBPurchasedStatus: MenloworksTag {
         init() {
-            super.init(name: NameConstants.satınalındı50GBStatus)
+            super.init(name: NameConstants.fiftyGBPurchasedStatus)
         }
     }
     
-    class Satınalındı500GBStatus: MenloworksTag {
+    class FiveHundredGBPurchasedStatus: MenloworksTag {
         init() {
-            super.init(name: NameConstants.satınalındı500GBStatus)
+            super.init(name: NameConstants.fiveHundredGBPurchasedStatus)
         }
     }
     
-    class Satınalındı25TB: MenloworksTag {
+    class TwoThousandFiveHundredGBPurchasedStatus: MenloworksTag {
         init() {
-            super.init(name: NameConstants.satınalındı25TB)
+            super.init(name: NameConstants.twoThousandFiveHundredGBPurchasedStatus)
         }
     }
 }

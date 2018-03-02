@@ -69,9 +69,9 @@ extension MenloworksTags {
         static let autosyncStatus = "autosync"
         static let autosyncPhotosStatus = "autosyncPhotos"
         static let autosyncVideosStatus = "autosyncVideos"
-        static let satınalındı50GBStatus = "Satınalındı50GB"
-        static let satınalındı500GBStatus = "Satınalındı500GB"
-        static let satınalındı25TB = "Satınalındı25TB"
+        static let fiftyGBPurchasedStatus = "Satınalındı50GB"
+        static let fiveHundredGBPurchasedStatus = "Satınalındı500GB"
+        static let twoThousandFiveHundredGBPurchasedStatus = "Satınalındı25TB"
     }
     
     class ValueConstants {

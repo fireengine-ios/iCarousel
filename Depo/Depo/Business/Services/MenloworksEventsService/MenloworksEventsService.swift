@@ -104,11 +104,11 @@ class MenloworksEventsService {
     func onSubscriptionPurchaseCompleted(_ type: MenloworksSubscriptionProductID) {
         switch type {
         case .fiftyGbID:
-            MPush.hitEvent(MenloworksEventsConstants.satınalındı50GBStatus)
+            MPush.hitEvent(MenloworksEventsConstants.fiftyGBPurchasedStatus)
         case .fiveHundredGbID:
-            MPush.hitEvent(MenloworksEventsConstants.satınalındı500GBStatus)
+            MPush.hitEvent(MenloworksEventsConstants.fiveHundredGBPurchasedStatus)
         case .twoThousandFiveHundredGbID:
-            MPush.hitEvent(MenloworksEventsConstants.satınalındı25TBStatus)
+            MPush.hitEvent(MenloworksEventsConstants.twoThousandFiveHundredGBPurchasedStatus)
         }
     }
     
@@ -228,15 +228,15 @@ class MenloworksEventsService {
         MPush.hitEvent(MenloworksEventsConstants.quotaFullStatus)
     }
     
-    func onSatınalındı50GBStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.satınalındı50GBStatus)
+    func onFiftyGBPurchasedStatus() {
+        MPush.hitEvent(MenloworksEventsConstants.fiftyGBPurchasedStatus)
     }
     
-    func onSatınalındı500GBStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.satınalındı500GBStatus)
+    func onFiveHundredGBPurchasedStatus() {
+        MPush.hitEvent(MenloworksEventsConstants.fiveHundredGBPurchasedStatus)
     }
     
-    func onSatınalındı25TBStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.satınalındı25TBStatus)
+    func onTwoThousandFiveHundredGBPurchasedStatus() {
+        MPush.hitEvent(MenloworksEventsConstants.twoThousandFiveHundredGBPurchasedStatus)
     }
 }

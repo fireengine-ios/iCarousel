@@ -66,17 +66,16 @@ class MenloworksTagsService {
             hitTag(tag)
         }
     }
-    
     func onSubscriptionPurchaseCompleted(_ type: MenloworksSubscriptionProductID) {
         var tag: MenloworksTag?
         
         switch type {
         case .fiftyGbID:
-            tag = MenloworksTags.Satınalındı50GBStatus()
+            tag = MenloworksTags.FiftyGBPurchasedStatus()
         case .fiveHundredGbID:
-            tag = MenloworksTags.Satınalındı500GBStatus()
+            tag = MenloworksTags.FiveHundredGBPurchasedStatus()
         case .twoThousandFiveHundredGbID:
-            tag = MenloworksTags.Satınalındı25TB()
+            tag = MenloworksTags.TwoThousandFiveHundredGBPurchasedStatus()
         }
         
         if let tag = tag {
@@ -321,18 +320,18 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
-    func onSatınalındı50GBStatus() {
-        let tag = MenloworksTags.Satınalındı50GBStatus()
+    func onFiftyGBPurchasedStatus() {
+        let tag = MenloworksTags.FiftyGBPurchasedStatus()
         hitTag(tag)
     }
     
-    func onSatınalındı500GBStatus() {
-        let tag = MenloworksTags.Satınalındı500GBStatus()
+    func onFiveHundredGBPurchasedStatus() {
+        let tag = MenloworksTags.FiveHundredGBPurchasedStatus()
         hitTag(tag)
     }
     
-    func onSatınalındı25TB() {
-        let tag = MenloworksTags.Satınalındı25TB()
+    func onTwoThousandFiveHundredGBPurchasedStatus() {
+        let tag = MenloworksTags.TwoThousandFiveHundredGBPurchasedStatus()
         hitTag(tag)
     }
     

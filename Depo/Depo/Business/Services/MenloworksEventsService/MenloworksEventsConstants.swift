@@ -57,7 +57,7 @@ struct MenloworksEventsConstants {
     static let quotaExceeded80PercStatus = "quota_exceeded_80_perc"
     static let quotaExceeded90PercStatus = "quota_exceeded_90_perc"
     static let quotaFullStatus = "quota_full"
-    static let satınalındı50GBStatus = "Satınalındı50GB"
-    static let satınalındı500GBStatus = "Satınalındı500GB"
-    static let satınalındı25TBStatus = "Satınalındı25TB"
+    static let fiftyGBPurchasedStatus = "Satınalındı50GB"
+    static let fiveHundredGBPurchasedStatus = "Satınalındı500GB"
+    static let twoThousandFiveHundredGBPurchasedStatus = "Satınalındı25TB"
 }
