@@ -434,14 +434,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        var sections = 4
-        if let items = items[.people], !items.isEmpty {
-            sections += 1
-        }
-        if let items = items[.things], !items.isEmpty {
-            sections += 1
-        }
-        return sections
+        return 6
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -466,7 +459,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         case .suggestion, .recent:
             return UITableViewAutomaticDimension
         case .people, .things:
-            return RecentlySearchedFaceImageTableViewCell.height()
+            if let items = items[category], !items.isEmpty {
+                return RecentlySearchedFaceImageTableViewCell.height()
+            }
+            return 0
         case .suggestionHeader, .recentHeader:
             return SuggestionTableSectionHeader.heightFor(category: category)
         }
