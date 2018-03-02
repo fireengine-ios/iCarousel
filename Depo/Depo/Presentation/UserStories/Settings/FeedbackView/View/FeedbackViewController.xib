@@ -232,6 +232,7 @@
                         </view>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="fP5-Y8-Lhl" firstAttribute="height" secondItem="yP6-g8-6yZ" secondAttribute="height" id="07s-pN-Qwx"/>
                         <constraint firstItem="fP5-Y8-Lhl" firstAttribute="top" secondItem="yP6-g8-6yZ" secondAttribute="top" id="5K7-JD-r5D"/>
                         <constraint firstAttribute="bottom" secondItem="fP5-Y8-Lhl" secondAttribute="bottom" id="8kf-kW-4BD"/>
                         <constraint firstItem="Aff-mw-B7R" firstAttribute="leading" secondItem="yP6-g8-6yZ" secondAttribute="leading" constant="33" id="Cjt-7s-Cd9"/>
@@ -248,7 +249,6 @@
                 <constraint firstItem="yP6-g8-6yZ" firstAttribute="top" secondItem="iOr-kk-R7e" secondAttribute="top" id="AaM-e3-Drd"/>
                 <constraint firstAttribute="trailing" secondItem="yP6-g8-6yZ" secondAttribute="trailing" id="Bek-LF-QKM"/>
                 <constraint firstItem="yP6-g8-6yZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="e8M-hL-YvN"/>
-                <constraint firstItem="fP5-Y8-Lhl" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="iu0-4f-vN3"/>
                 <constraint firstItem="fP5-Y8-Lhl" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="sNT-O2-PfW"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
