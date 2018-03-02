@@ -21,6 +21,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
+    private let placesService = PlacesService()
     
     init(remoteItems: RemoteSearchService, recentSearches: RecentSearchesService) {
         self.remoteItems = remoteItems
@@ -98,9 +99,17 @@ class SearchViewInteractor: SearchViewInteractorInput {
         output?.setRecentSearches(recentSearches.searches)
     }
     
-    func openFaceImage(forItem item: SuggestionObject) {
+    func openFaceImageForSuggest(item: SuggestionObject) {
         saveSearch(item: item)
         getAlbumItem(forSearchItem: item)
+    }
+    
+    func openFaceImageForSearch(item: BaseDataSourceItem?) {
+        if let suggest = suggestionFrom(item: item) {
+            getAlbumItem(forSearchItem: suggest)
+        } else {
+            output?.failedGetAlbum()
+        }
     }
     
     func saveSearch(item: SuggestionObject) {
@@ -110,42 +119,104 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     private func getAlbumItem(forSearchItem item: SuggestionObject) {
         guard let id = item.info?.id, let type = item.type else {
+            output?.failedGetAlbum()
             return
         }
         
-        if type == .people {            
+        switch type {
+        case .people:
             peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] albumResponse in
                 
                 let peopleItemResponse = PeopleItemResponse()
                 peopleItemResponse.id = id
-                peopleItemResponse.name = item.info?.name
-
+                peopleItemResponse.name = item.info?.name ?? ""
+                
                 DispatchQueue.main.async {
                     self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
                                            forItem: PeopleItem(response: peopleItemResponse))
                 }
-            }, fail: { [weak self] fail in
-                DispatchQueue.main.async {
-                    self?.output?.failedGetAlbum()
-                }
+                }, fail: { [weak self] fail in
+                    DispatchQueue.main.async {
+                        self?.output?.failedGetAlbum()
+                    }
             })
-        } else if type == .thing {
+        case .thing:
             thingsService.getThingsAlbum(id: Int(id), success: { [weak self] albumResponse in
                 
                 let thingItemResponse = ThingsItemResponse()
                 thingItemResponse.id = id
-                thingItemResponse.name = item.info?.name
+                thingItemResponse.name = item.info?.name ?? ""
                 
                 DispatchQueue.main.async {
                     self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
                                            forItem: ThingsItem(response: thingItemResponse))
                 }
-            }, fail:  { [weak self] fail in
-                DispatchQueue.main.async {
-                    self?.output?.failedGetAlbum()
-                }
+                }, fail:  { [weak self] fail in
+                    DispatchQueue.main.async {
+                        self?.output?.failedGetAlbum()
+                    }
             })
+        case .place:
+            placesService.getPlacesAlbum(id: Int(id), success: { [weak self] albumResponse in
+                
+                let placeItemResponse = PlacesItemResponse()
+                placeItemResponse.id = id
+                placeItemResponse.name = item.info?.name ?? ""
+                
+                DispatchQueue.main.async {
+                    self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
+                                           forItem: PlacesItem(response: placeItemResponse))
+                }
+                }, fail:  { [weak self] fail in
+                    DispatchQueue.main.async {
+                        self?.output?.failedGetAlbum()
+                    }
+            })
+        default:
+            output?.failedGetAlbum()
+            break
         }
+    }
+    
+    private func suggestionFrom(item: BaseDataSourceItem?) -> SuggestionObject? {
+        guard let item = item else {
+            return nil
+        }
+        
+        let suggest = SuggestionObject()
+        let info = SuggestionInfo()
+        
+        switch item.fileType {
+        case .faceImage(.people):
+            guard let peopleItem = item as? PeopleItem else {
+                return nil
+            }
+            suggest.type = .people
+            info.id = peopleItem.responseObject.id
+            info.name = peopleItem.responseObject.name
+            
+        case .faceImage(.things):
+            guard let thingsItem = item as? ThingsItem else {
+                return nil
+            }
+            suggest.type = .thing
+            info.id = thingsItem.responseObject.id
+            info.name = thingsItem.responseObject.name
+            
+        case .faceImage(.places):
+            guard let placesItem = item as? PlacesItem else {
+                return nil
+            }
+            suggest.type = .place
+            info.id = placesItem.responseObject.id
+            info.name = placesItem.responseObject.name
+            
+        default:
+            return nil
+        }
+        
+        suggest.info = info
+        return suggest
     }
     
     var alerSheetMoreActionsConfig: AlertFilesActionsSheetInitialConfig? {

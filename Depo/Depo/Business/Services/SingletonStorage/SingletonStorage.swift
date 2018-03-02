@@ -48,7 +48,7 @@ class SingletonStorage {
         return accountInfo?.projectID ?? ""
     }
     
-    func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), faill:@escaping (() -> Void)) {
+    func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), faill:@escaping VoidHandler) {
         getAccountInfoForUser(success: { (info) in
             success(info.projectID ?? "")
         }) { (error) in

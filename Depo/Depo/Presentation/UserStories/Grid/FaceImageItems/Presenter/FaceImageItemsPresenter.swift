@@ -9,17 +9,25 @@
 import Foundation
 
 final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
+
+    weak var albumSliderModuleOutput: LBAlbumLikePreviewSliderModuleInput?
+    
+    var faceImageType: FaceImageType?
     
     private var isChangeVisibilityMode: Bool = false
     
     private var visibilityItems: [WrapData] = []
     private var allItmes: [WrapData] = []
     
-    override func viewIsReady(collectionView: UICollectionView) {
+    override func viewIsReady(collectionView: UICollectionView) {        
         super.viewIsReady(collectionView: collectionView)
         
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
         dataSource.isHeaderless = true
+        
+        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+            view.configurateUgglaView()
+        }
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
@@ -45,9 +53,27 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
         
         super.getContentWithSuccess(items: allItmes)
+        
+        albumSliderModuleOutput?.reload()
+        
+        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+            DispatchQueue.main.async {
+                view.updateUgglaViewPosition()
+            }
+        }
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsInput, scrollView == dataSource.collectionView {
+            view.updateUgglaViewPosition()
+        }
+    }
+    
+    private func hasUgglaLabel() -> Bool {
+        return faceImageType == .people || faceImageType == .things
+    }
     
     // MARK: -  Utility methods
     
@@ -55,12 +81,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         self.isChangeVisibilityMode = isChangeVisibilityMode
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
         reloadData()
-    }
-    
-    private func clearItems() {
-        visibilityItems = [WrapData]()
-        dataSource.allMediaItems = [WrapData]()
-        dataSource.allItems = [[WrapData]]()
     }
     
 }

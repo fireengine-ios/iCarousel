@@ -157,7 +157,8 @@
 "Waiting for Wi-Fi connection to auto-sync" = "Waiting for Wi-Fi connection to auto-sync";
 "Settings" = "Settings";
 "Cancel" = "Cancel";
-"Auto Upload is off.\nGo to setting to auto sync." = "Auto Upload is off.\nGo to setting to auto sync.";
+"Auto Upload is off." = "Auto Upload is off.";
+"Photos and videos waiting to be synced" = "Photos and videos waiting to be synced";
 "LTE" = "LTE";
 "4G" = "4G";
 "3G" = "3G";
@@ -189,6 +190,8 @@
 "Thanks for leaving a comment!" = "Thanks for leaving a comment!";
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n";
 "Upload Photos" = "Upload Photos";
+"You don’t have any albums on your Lifebox yet." = "You don’t have any albums on your Lifebox yet.";
+"Start creating albums" = "Start creating albums";
 "Add" = "Add";
 "Albums" = "Albums";
 "My Stories" = "My Stories";
@@ -242,6 +245,8 @@
 "Item Selected" = "Item Selected";
 "Upload" = "Upload";
 "You can change the sequence " = "You can change the sequence ";
+"You don’t have any stories  on your Lifebox yet." = "You don’t have any stories  on your Lifebox yet.";
+"Start creating stories" = "Start creating stories";
 "Save" = "Save";
 "Create" = "Create";
 "Add Music" = "Add Music";
@@ -481,8 +486,8 @@
 "Back Up My Contacts" = "Back Up My Contacts";
 "No results found for your query." = "No results found for your query.";
 "localFilesBeingProcessed" = "Processing local files.";
-"SUGGESTIONS" = "SUGGESTIONS";
-"RECENT SEARCHES" = "RECENT SEARCHES";
+"Suggestions" = "Suggestions";
+"Recent Searches" = "Recent Searches";
 "Search" = "Search";
 "Warning" = "Warning";
 "TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate login with Turkcell password feature.";
@@ -604,6 +609,7 @@
 "+Add Name" = "+Add Name";
 "Are these the same person?" = "Are these the same person?";
 "They will be merged together" = "They will be merged together";
+"Grouping of your photos will take some time. Please wait and then check the albums." = "Grouping of your photos will take some time. Please wait and then check the albums.";
 "Nope" = "Nope";
 "Yes" = "Yes";
 "this person" = "this person";

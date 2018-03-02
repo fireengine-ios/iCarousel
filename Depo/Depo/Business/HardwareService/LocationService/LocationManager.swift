@@ -28,7 +28,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
     }
     
-    func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping (() -> Void)){
+    func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping VoidHandler){
         log.debug("LocationManager checkDoWeNeedShowLocationPermissionAllert")
         SingletonStorage.shared.getUniqueUserID(success: { (uniqueUserID) in
             let key = uniqueUserID + "locationPermission"

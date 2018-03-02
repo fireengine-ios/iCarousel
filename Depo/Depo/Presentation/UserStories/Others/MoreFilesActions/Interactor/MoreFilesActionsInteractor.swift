@@ -175,7 +175,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     private var cropyController: CRYCropNavigationController?
     
-    func edit(item: [BaseDataSourceItem], complition: (() -> Void)?) {
+    func edit(item: [BaseDataSourceItem], complition: VoidHandler?) {
         guard let item = item.first as? Item, let url = item.tmpDownloadUrl else {
             return
         }
@@ -207,7 +207,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func completelyDelete(albums: [BaseDataSourceItem]) {
-        let okHandler: () -> Void = { [weak self] in
+        let okHandler: VoidHandler = { [weak self] in
             guard let albums = albums as? [AlbumItem] else { return }
             self?.output?.operationStarted(type: .completelyDeleteAlbums)
             let albumService = PhotosAlbumService()
@@ -236,7 +236,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func deleteItems(items: [Item]) {
-        let okHandler: () -> Void = { [weak self] in
+        RouterVC().showSpiner()
+        let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .delete)
             self?.player.remove(listItems: items)
             self?.fileService.delete(deleteFiles: items,
@@ -254,10 +255,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         })
         
         RouterVC().presentViewController(controller: controller)
+        RouterVC().hideSpiner()
     }
     
     private func deleteAlbumbs(albumbs: [AlbumItem]) {
-        let okHandler: () -> Void = { [weak self] in
+        let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .removeFromAlbum)
             let albumService = PhotosAlbumService()
             albumService.deleteAlbums(deleteAlbums: DeleteAlbums(albums: albumbs), success: { [weak self] in
@@ -285,7 +287,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func deleteFromAlbums(items: [BaseDataSourceItem]){
-        let okHandler: () -> Void = { [weak self] in
+        let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .removeFromAlbum)
             let album = RouterVC().getParentUUID()
             
@@ -322,13 +324,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         folderSelector.selectFolder(select: { [weak self] (folder) in
             self?.output?.operationStarted(type: .move)
-            self?.fileService.move(items: item, toPath: folder.uuid,
+            self?.fileService.move(items: item, toPath: folder,
                                    success: { [weak self] in
                                     self?.succesAction(elementType: .move)()
                                     //because we have animation of dismiss for this stack of view controllers we have some troubles with reloading data in root collection view
                                     //data will be updated after 0.3 seconds (time of aimation)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 , execute: {
-                                        ItemOperationManager.default.filesMoved(items: item, toFolder: folder.uuid)
+                                        ItemOperationManager.default.filesMoved(items: item, toFolder: folder)
                                     })
                                     
             },fail: self?.failAction(elementType: .move))
@@ -345,7 +347,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let folderSelector = selectFolderController()
         
         folderSelector.selectFolder(select: { [weak self] (folder) in
-            self?.fileService.move(items: item, toPath: folder.uuid,
+            self?.fileService.move(items: item, toPath: folder,
                                    success: self?.succesAction(elementType: .copy),
                                    fail: self?.failAction(elementType: .copy))
             }, cancel: { [weak self] in
@@ -536,7 +538,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         return failResponse
     }
     
-    private func sync(items: [BaseDataSourceItem]?, action: @escaping () -> Void, cancel: @escaping () -> Void, fail: FailResponse?) {
+    private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
         guard let items = items as? [WrapData] else { return }
         let successClosure = { [weak self] in
             DispatchQueue.main.async {

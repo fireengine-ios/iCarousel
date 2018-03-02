@@ -33,7 +33,7 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
         let folderSelector = router.selectFolder(folder: nil)
         folderSelector.selectFolderBlock = { [weak self] (folder) in
             self?.output?.operationStarted(type: .move)
-            self?.fileService.move(items: item, toPath: folder.uuid,
+            self?.fileService.move(items: item, toPath: folder,
                                    success: self?.succesAction(elementType: .move),
                                    fail: self?.failAction(elementType: .move))
             
@@ -50,7 +50,7 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
     
     override func delete(item: [BaseDataSourceItem]) {
         if let items = item as? [Item] {
-            let okHandler: () -> Void = { [weak self] in
+            let okHandler: VoidHandler = { [weak self] in
                 self?.output?.operationStarted(type: .delete)
                 self?.player.remove(listItems: items)
                 self?.fileService.delete(deleteFiles: items,

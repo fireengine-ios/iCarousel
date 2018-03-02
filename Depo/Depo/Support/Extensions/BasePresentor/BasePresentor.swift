@@ -16,7 +16,7 @@ protocol BaseAsyncOperationInteractorOutput {
     
     func startAsyncOperationDisableScreen()
     
-    func startCancelableAsync(cancel: @escaping () -> Void)
+    func startCancelableAsync(cancel: @escaping VoidHandler)
     
     func compliteAsyncOperationEnableScreen(errorMessage: String?)
     
@@ -30,7 +30,7 @@ protocol BaseAsyncOperationInteractorOutput {
 
 class BasePresenter: BaseAsyncOperationInteractorOutput {
     
-    func startCancelableAsync(cancel: @escaping () -> Void) {
+    func startCancelableAsync(cancel: @escaping VoidHandler) {
         outputView()?.showSpinerWithCancelClosure {
             UploadService.default.cancelSyncToUseOperations()
             cancel()

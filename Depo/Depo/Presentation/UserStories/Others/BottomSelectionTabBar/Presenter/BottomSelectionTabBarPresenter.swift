@@ -28,6 +28,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             switch type {
             case .delete:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
+            case .deleteFaceImage:
+                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .download:
                 itemTupple.append(EditinglBar.PreDetermendTypes.download)
             case .edit:
@@ -42,6 +44,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.sync)
             case .removeFromAlbum:
                 itemTupple.append(EditinglBar.PreDetermendTypes.removeFromAlbum)
+            case .removeFromFaceImageAlbum:
+                itemTupple.append(EditinglBar.PreDetermendTypes.removeFromFaceImageAlbum)
             case .addToAlbum:
                 itemTupple.append(EditinglBar.PreDetermendTypes.addToAlbum)
             case .makeAlbumCover:
@@ -128,6 +132,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             MenloworksAppEvents.onDeleteClicked()
             interactor.delete(item: selectedItems)
             basePassingPresenter?.stopModeSelected()
+        case .deleteFaceImage:
+            basePassingPresenter?.stopModeSelected()
+            basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
         case .download:
             MenloworksAppEvents.onDownloadClicked()
             basePassingPresenter?.stopModeSelected()
@@ -165,6 +172,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             MenloworksAppEvents.onRemoveFromAlbumClicked()
             interactor.removeFromAlbum(items: selectedItems)
             basePassingPresenter?.stopModeSelected()
+        case .removeFromFaceImageAlbum:
+            self.basePassingPresenter?.stopModeSelected()
+            basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
         case .addToAlbum:
             interactor.addToAlbum(items: selectedItems)
         case .print:
@@ -309,6 +319,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                     MenloworksAppEvents.onDeleteClicked()
                     self.interactor.delete(item: currentItems)
+                })
+            case .deleteFaceImage:
+                action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
                 })
             case .move:
                 action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
@@ -483,7 +497,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         router.showShare(rect: rect, urls: urls)
     }
     
-    func deleteMusic(_ completion: @escaping (() -> Void)) {
+    func deleteMusic(_ completion: @escaping VoidHandler) {
         router.showDeleteMusic(completion)
     }
     

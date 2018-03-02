@@ -10,21 +10,24 @@ import UIKit
 
 final class AutoUploadIsOffPopUp: BaseView {
     
-    @IBOutlet weak var titleText: UILabel?
-    @IBOutlet weak var settingsButton: CircleYellowButton?
+    @IBOutlet weak var titleText: UILabel!
+    @IBOutlet weak var settingsButton: CircleYellowButton!
+    @IBOutlet weak var subTitleLabel: UILabel!
 
     override func configurateView() {
         super.configurateView()
         
         canSwipe = false
         
-        titleText?.text = TextConstants.autoUploaOffPopUpText
-        titleText?.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        titleText?.textColor = ColorConstants.textGrayColor
-        titleText?.sizeToFit()
+        titleText.text = TextConstants.autoUploaOffPopUpTitleText
+        titleText.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        titleText.textColor = ColorConstants.textGrayColor
+        
+        subTitleLabel.text = TextConstants.autoUploaOffPopUpSubTitleText
+        subTitleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        subTitleLabel.textColor = ColorConstants.blueColor
         
         settingsButton?.setTitle(TextConstants.autoUploaOffSettings, for: .normal)
-        calculatedH = (titleText?.frame.size.height ?? 0.0) + 17.0 + 10.0
     }
     
     override func viewDeletedBySwipe(){

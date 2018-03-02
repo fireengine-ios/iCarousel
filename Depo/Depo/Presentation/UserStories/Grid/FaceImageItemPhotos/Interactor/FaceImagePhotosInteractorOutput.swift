@@ -8,4 +8,5 @@
 
 protocol FaceImagePhotosInteractorOutput {
     func didCountImage(_ count: Int)
+    func didRemoveFromAlbum(completion: @escaping (() -> Void))
 }

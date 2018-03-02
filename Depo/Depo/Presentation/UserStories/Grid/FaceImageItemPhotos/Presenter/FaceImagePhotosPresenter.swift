@@ -9,7 +9,7 @@
 import UIKit
 
 class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
-
+    
     weak var faceImageItemsModuleOutput: FaceImageItemsModuleOutput?
     
     var coverPhoto: Item?
@@ -36,11 +36,36 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .removeFromAlbum {
-            reloadData()
-            faceImageItemsModuleOutput?.didReloadData()
+    override func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
+        if let interactor = interactor as? FaceImagePhotosInteractor,
+            let id = item.id {
+            
+            if item is PeopleItem {
+                interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
+            } else if item is ThingsItem {
+                interactor.deletePhotosFromThingsAlbum(items: items, id: id)
+            } else if item is PlacesItem {
+                interactor.deletePhotosFromPlacesAlbum(items: items, id: id)
+            }
         }
+    }
+    
+    override func operationFinished(withType type: ElementTypes, response: Any?) {
+        if type == .removeFromAlbum || type == .removeFromFaceImageAlbum {
+            dataSource.reloadData()
+            faceImageItemsModuleOutput?.didReloadData()
+        } else if type == .changeCoverPhoto {
+            outputView()?.hideSpiner()
+
+            if let view = view as? FaceImagePhotosViewController,
+                let item = response as? Item {
+                view.setHeaderImage(with: item.patchToPreview)
+            }
+        }
+    }
+    
+    override func operationFailed(withType type: ElementTypes) {
+        outputView()?.hideSpiner()
     }
     
     override func getContentWithSuccess(items: [WrapData]) {
@@ -76,11 +101,20 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    func didDelete(items: [BaseDataSourceItem]) {
-        if dataSource.getAllObjects().isEmpty {
+    override func didDelete(items: [BaseDataSourceItem]) {
+        if dataSource.allObjectIsEmpty() {
             faceImageItemsModuleOutput?.delete(item: item)
             if let view = view as? FaceImagePhotosViewInput {
                 view.dismiss()
+            }
+        } else {
+            if let view = view as? FaceImagePhotosViewInput {
+                var count = 0
+                for items in dataSource.getAllObjects() {
+                    count += items.count
+                }
+                
+                view.setCountImage("\(count) \(TextConstants.faceImagePhotos)")
             }
         }
     }
@@ -137,7 +171,6 @@ extension FaceImagePhotosPresenter: FaceImagePhotosModuleOutput {
     
     func didMergePeople() {
         faceImageItemsModuleOutput?.didReloadData()
-        reloadData()
     }
     
     func getSliderItmes(items: [SliderItem]) {
@@ -151,9 +184,17 @@ extension FaceImagePhotosPresenter: FaceImagePhotosModuleOutput {
 // MARK: FaceImagePhotosModuleOutput
 
 extension FaceImagePhotosPresenter: FaceImagePhotosInteractorOutput {
+    
     func didCountImage(_ count: Int) {
         if let view = view as? FaceImagePhotosViewInput {
             view.setCountImage("\(count) \(TextConstants.faceImagePhotos)")
         }
     }
+    
+    func didRemoveFromAlbum(completion: @escaping (() -> Void)) {
+        if let router = router as? FaceImagePhotosRouterInput {
+            router.showRemoveFromAlbum(completion: completion)
+        }
+    }
+    
 }

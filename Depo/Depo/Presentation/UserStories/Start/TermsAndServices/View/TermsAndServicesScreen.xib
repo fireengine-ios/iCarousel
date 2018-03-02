@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsAndServicesViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsAndServicesViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="iN0-l3-epB" id="dBd-vg-Lh5"/>
                 <outlet property="webView" destination="dLS-x4-Wl9" id="37J-di-JTf"/>
@@ -42,14 +43,12 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="w4a-fl-80T" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="81c-4g-bTt"/>
+                <constraint firstItem="dLS-x4-Wl9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="750" constant="64" id="9Hl-b0-v6z"/>
                 <constraint firstAttribute="bottom" secondItem="eZu-ok-HGO" secondAttribute="bottom" id="Cbi-zX-YYa"/>
                 <constraint firstAttribute="bottom" secondItem="dLS-x4-Wl9" secondAttribute="bottom" id="JSv-wx-l67"/>
                 <constraint firstItem="3Nh-mu-fNi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="LIZ-3K-2e2"/>
                 <constraint firstAttribute="trailing" secondItem="eZu-ok-HGO" secondAttribute="trailing" id="QH7-Af-IGb"/>
                 <constraint firstItem="3Nh-mu-fNi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="SCg-o8-u6q"/>
-                <constraint firstItem="dLS-x4-Wl9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="gZh-Wz-Yfp">
-                    <variation key="widthClass=regular" constant="133"/>
-                </constraint>
                 <constraint firstAttribute="trailing" secondItem="dLS-x4-Wl9" secondAttribute="trailing" id="j6s-N1-yfe">
                     <variation key="widthClass=regular" constant="43"/>
                 </constraint>
@@ -57,10 +56,12 @@
                 <constraint firstItem="dLS-x4-Wl9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lUi-Qr-cFb">
                     <variation key="widthClass=regular" constant="43"/>
                 </constraint>
+                <constraint firstItem="dLS-x4-Wl9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xou-y7-pRa" secondAttribute="top" id="n4U-N4-J8n"/>
                 <constraint firstItem="w4a-fl-80T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="41" id="ohi-3E-wHg"/>
                 <constraint firstItem="eZu-ok-HGO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rLH-Ob-ego"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="xou-y7-pRa"/>
             <point key="canvasLocation" x="33.5" y="105.5"/>
         </view>
     </objects>

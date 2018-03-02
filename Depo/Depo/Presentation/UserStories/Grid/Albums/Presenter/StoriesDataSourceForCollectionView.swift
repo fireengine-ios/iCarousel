@@ -14,4 +14,8 @@ class StoriesDataSourceForCollectionView: ArrayDataSourceForCollectionView {
         super.deleteItems(items: items)
         ItemOperationManager.default.deleteStories(items: items)
     }
+    
+    override func newStoryCreated() {
+        delegate?.needReloadData?()
+    }
 }

@@ -80,9 +80,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
     
-    func applicationWillResignActive(_ application: UIApplication) {
-    }
-    
     private var firstResponder: UIResponder?
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -98,22 +95,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillEnterForeground")
-
-        showPasscodeIfNeed()
     }
     
     private func showPasscodeIfNeed() {
         let topVC = UIApplication.topController()
         
         /// don't show at all or new PasscodeEnterViewController
-        if passcodeStorage.isEmpty {
+        if passcodeStorage.isEmpty || topVC is PasscodeEnterViewController {
             return
         }
         
-        if let vc = topVC as? PasscodeEnterViewController {
-            vc.passcodeManager.authenticateWithBiometrics()
-            return
-        }
+        if topVC is UIAlertController {
+            topVC?.dismiss(animated: false, completion: {
+                self.showPasscode()
+            })
+        } else {
+            showPasscode()
+        } 
+    }
+    
+    private func showPasscode() {
+        let topVC = UIApplication.topController()
         
         /// remove PasscodeEnterViewController if was on the screen
         if let tabBarVC = topVC as? TabBarViewController,
@@ -122,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
             navVC.popViewController(animated: false)
         }
-        
+    
         /// present PasscodeEnterViewController
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         vc.success = {
@@ -134,11 +136,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navVC = UINavigationController(rootViewController: vc)
         vc.navigationBarWithGradientStyleWithoutInsets()
         
-        topVC?.present(navVC, animated: true,completion: nil)
+        topVC?.present(navVC, animated: false,completion: nil)
+    }
+    
+    private func checkPasscodeIfNeed() {
+        if passcodeStorage.isEmpty {
+            return
+        }
+        
+        let topVC = UIApplication.topController()
+        if let vc = topVC as? PasscodeEnterViewController, !vc.passcodeManager.finishBiometrics {
+            vc.passcodeManager.authenticateWithBiometrics()
+        }
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        log.debug("AppDelegate applicationWillResignActive")
+        
+        showPasscodeIfNeed()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         log.debug("AppDelegate applicationDidBecomeActive")
+        
+        checkPasscodeIfNeed()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
