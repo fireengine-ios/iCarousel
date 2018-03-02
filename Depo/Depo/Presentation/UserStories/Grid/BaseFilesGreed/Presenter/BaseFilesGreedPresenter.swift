@@ -145,6 +145,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         dataSource.dropData()
         dataSource.currentSortType = sortedRule
+        (sortedRule == .sizeAZ || sortedRule == .sizeZA) ? (dataSource.isHeaderless = true) : (dataSource.isHeaderless = false)
         dataSource.reloadData()
         startAsyncOperation()
         dataSource.isPaginationDidEnd = false
