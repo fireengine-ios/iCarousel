@@ -299,7 +299,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                 
                 if !self.musicBar.isHidden {
                     self.musicBar.alpha = 0
-                    musicBar.isUserInteractionEnabled = false
+                    self.musicBar.isUserInteractionEnabled = false
                 }
             })
         }
