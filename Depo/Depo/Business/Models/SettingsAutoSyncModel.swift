@@ -20,8 +20,8 @@ class SettingsAutoSyncModel {
     
     static let autoSyncEnableIndex: Int = 0
     //static let autoSyncViaWiFiIndex: Int = 1
-    static let mobileDataPhotosIndex: Int = 3
-    static let mobileDataVideoIndex: Int = 4
+    static let mobileDataPhotosIndex: Int = 1
+    static let mobileDataVideoIndex: Int = 2
 
     func configurateWithDictionary(dictionary: [String: Bool]) {
         isAutoSyncEnable = dictionary[SettingsAutoSyncModel.isAutoSyncEnableKey] ?? false
@@ -42,8 +42,8 @@ class SettingsAutoSyncModel {
     func getDataForTable() -> [AutoSyncModel]{
         var array = [AutoSyncModel]()
         array.append(AutoSyncModel.init(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, selected: isAutoSyncEnable))
-        array.append(AutoSyncModel.init(title: TextConstants.autoSyncCellWiFiTile, subTitle: TextConstants.autoSyncCellWiFiSubTitle, type: .typeInformation, selected: isSyncViaWifi))
-        array.append(AutoSyncModel.init(title: "", subTitle: TextConstants.autoSyncCellMobileDataSubTitle, type: .typeSwitherActivator, selected: true))
+//        array.append(AutoSyncModel.init(title: TextConstants.autoSyncCellWiFiTile, subTitle: TextConstants.autoSyncCellWiFiSubTitle, type: .typeInformation, selected: isSyncViaWifi))
+//        array.append(AutoSyncModel.init(title: "", subTitle: TextConstants.autoSyncCellMobileDataSubTitle, type: .typeSwitherActivator, selected: true))
         array.append(AutoSyncModel.init(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, selected: mobileDataPhotos))
         array.append(AutoSyncModel.init(title: TextConstants.autoSyncCellVideos, subTitle: "", type: .typeSwitcher, selected: mobileDataVideo))
         return array

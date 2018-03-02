@@ -12,7 +12,7 @@ enum AutoSyncCellType {
     case headerLike//same as switcher but larger
     case typeSwitcher
     case typeSwitherActivator
-    case typeInformation
+//    case typeInformation
 }
 
 class AutoSyncModel {
