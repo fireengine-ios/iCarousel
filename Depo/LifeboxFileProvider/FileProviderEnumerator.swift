@@ -16,11 +16,8 @@ class FileProviderEnumerator: NSObject {
         self.enumeratedItemIdentifier = enumeratedItemIdentifier
         super.init()
     }
-}
-
-final class FileService {
     
-    func getFiles
+    let fileService = FileService()
 }
 
 extension FileProviderEnumerator: NSFileProviderEnumerator {
@@ -31,16 +28,25 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
 
     func enumerateItems(for observer: NSFileProviderEnumerationObserver, startingAt page: NSFileProviderPage) {
         
-        let isPasscodeOn = true
-        if isPasscodeOn {
-            let error = NSError(domain: NSFileProviderErrorDomain,
-                                code: NSFileProviderError.notAuthenticated.rawValue,
-                                userInfo: [NSLocalizedDescriptionKey: "passcode"])
-            observer.finishEnumeratingWithError(error)
-        }
+//        let isPasscodeOn = true
+//        if isPasscodeOn {
+//            let error = NSError(domain: NSFileProviderErrorDomain,
+//                                code: NSFileProviderError.notAuthenticated.rawValue,
+//                                userInfo: [NSLocalizedDescriptionKey: "passcode"])
+//            observer.finishEnumeratingWithError(error)
+//        }
         
         if enumeratedItemIdentifier.rawValue == "NSFileProviderRootContainerItemIdentifier" {
             ///folderUUID = _enumeratedItemIdentifier
+        }
+        
+        fileService.getFiles(folderUUID: "", page: 0) { (result) in
+            switch result {
+            case .success(_):
+                break
+            case .failed(let error):
+                print(error.localizedDescription)
+            }
         }
         
         /// get files

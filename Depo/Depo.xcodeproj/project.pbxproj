@@ -175,6 +175,7 @@
 		5DF885B77D64CAAB43CB969F /* FileInfoInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96CB1C3C9928A6AA7F97841 /* FileInfoInitializer.swift */; };
 		5ED1673DE08513D8CA5485E3 /* FileInfoInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C6583C7BEFBA369D630046 /* FileInfoInteractorInput.swift */; };
 		617E2F43F78753FD7989435D /* UploadFilesSelectionInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70774C24E3E356684A692557 /* UploadFilesSelectionInitializer.swift */; };
+		6180818A97692FC09B156D86 /* Pods_LifeboxFileProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34640A7E6FCBDBE92CF11C /* Pods_LifeboxFileProvider.framework */; };
 		623832623FBADF19F6C0036D /* SelectFolderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6249B52DD4A8E3987667D30 /* SelectFolderPresenter.swift */; };
 		64ADD65B7FCE7BDBF07F4FA1 /* AlbumsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A5C81C98B335A572F6EDF9 /* AlbumsRouter.swift */; };
 		64E35594735C9449EB20343F /* AlbumsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9308A9A544DF5D8923C800E0 /* AlbumsPresenter.swift */; };
@@ -2545,6 +2546,19 @@
 		CE1BE936204831CE0074BDDC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1BE934204831CE0074BDDC /* MainInterface.storyboard */; };
 		CE1BE93A204831CE0074BDDC /* LifeboxFileProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CE1BE93D204831CE0074BDDC /* LifeboxFileProvider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CE1BE94820492C510074BDDC /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
+		CE1BE94920492C550074BDDC /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
+		CE1BE94A20492C5E0074BDDC /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
+		CE1BE94B20492C800074BDDC /* ShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CA2045633D00812544 /* ShareConfigurator.swift */; };
+		CE1BE94C20492C870074BDDC /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
+		CE1BE94D20492C8B0074BDDC /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
+		CE1BE94E20492C930074BDDC /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33DFFE1F0296C000706C40 /* RequestHeader.swift */; };
+		CE1BE94F20492CA60074BDDC /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
+		CE1BE95020492CB70074BDDC /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
+		CE1BE95120492CCE0074BDDC /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
+		CE1BE95220492CD50074BDDC /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
+		CE1BE95420492D040074BDDC /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE95320492D040074BDDC /* FileService.swift */; };
+		CE1BE95520492DE40074BDDC /* Alamofire+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CE2045734200812544 /* Alamofire+Validate.swift */; };
 		CE1E26E120174D7500F49E41 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E020174D7500F49E41 /* ResponseParser.swift */; };
 		CE1E26E320174DC600F49E41 /* MappingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E220174DC600F49E41 /* MappingError.swift */; };
 		CE1E26E520174DF200F49E41 /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
@@ -3278,6 +3292,7 @@
 		0F6EB6455E73609F1B5249AF /* UploadFilesSelectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionViewController.swift; sourceTree = "<group>"; };
 		10F040044EA7ABA90A56F70F /* BaseFilesGreedRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedRouterInput.swift; sourceTree = "<group>"; };
 		116F0D4A7EDE2EA38E1B57BC /* Pods-LifeboxShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.appstore.xcconfig"; sourceTree = "<group>"; };
+		13C1164C33CF7116F12CF1F9 /* Pods-LifeboxFileProvider.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.enterprise.xcconfig"; sourceTree = "<group>"; };
 		14B63501F537CEC2931A734D /* Pods-LifeboxShared.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.enterprise.xcconfig"; sourceTree = "<group>"; };
 		14DC6D877F96EAC0DCE038CA /* SyncContactsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewController.swift; sourceTree = "<group>"; };
 		16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInput.swift; sourceTree = "<group>"; };
@@ -3332,6 +3347,7 @@
 		3B18AA434F2832CFC8076AAA /* ActivityTimelineModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineModuleInput.swift; sourceTree = "<group>"; };
 		3B61F432DD637D1DC18C3689 /* UploadFilesSelectionInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionInteractor.swift; sourceTree = "<group>"; };
 		3C0817D19161BF904D94191B /* RegistrationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationModuleInput.swift; sourceTree = "<group>"; };
+		3D010A878B7C0430091742F6 /* Pods-LifeboxFileProvider.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.appstore.xcconfig"; sourceTree = "<group>"; };
 		3D263784A01AEA819EB5CA24 /* SplashRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashRouterInput.swift; sourceTree = "<group>"; };
 		412F2AB0A215CE40568819D5 /* FileInfoPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoPresenter.swift; sourceTree = "<group>"; };
 		41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoModuleInput.swift; sourceTree = "<group>"; };
@@ -4690,6 +4706,7 @@
 		C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInitializer.swift; sourceTree = "<group>"; };
 		C7EA8E62DD494F5240389C2E /* Pods-LifeboxShared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.debug.xcconfig"; sourceTree = "<group>"; };
 		C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8E6892DB1C0232B660C2CB3 /* Pods-LifeboxFileProvider.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.release.xcconfig"; sourceTree = "<group>"; };
 		CA3578DCC250EB72513FBF71 /* SyncContactsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewOutput.swift; sourceTree = "<group>"; };
 		CB4BCE425BAA49DA8EBEEA39 /* SelectFolderInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderInitializer.swift; sourceTree = "<group>"; };
 		CBF0B3F0018BAF98A072C67E /* Pods-DepoTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -4732,6 +4749,7 @@
 		CE1BE932204831CE0074BDDC /* DocumentActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentActionViewController.swift; sourceTree = "<group>"; };
 		CE1BE935204831CE0074BDDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		CE1BE937204831CE0074BDDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE1BE95320492D040074BDDC /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
 		CE1E26E020174D7500F49E41 /* ResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
 		CE1E26E220174DC600F49E41 /* MappingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingError.swift; sourceTree = "<group>"; };
 		CE1E26E420174DF200F49E41 /* Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapping.swift; sourceTree = "<group>"; };
@@ -5070,6 +5088,7 @@
 		D9D7B2B043E1B23B7911858D /* PhoneVereficationConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationConfigurator.swift; sourceTree = "<group>"; };
 		DAE9AC6D7DD62C5A26F74CFE /* PhotoVideoDetailViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailViewInput.swift; sourceTree = "<group>"; };
 		DB30F701A47CF5B8D685D062 /* AlbumDetailPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailPresenter.swift; sourceTree = "<group>"; };
+		DBB0E951C502D6894556ED12 /* Pods-LifeboxFileProvider.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.debug.xcconfig"; sourceTree = "<group>"; };
 		DC47E8ECC19A0C3CC7C7CCEF /* PhotoVideoDetailViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailViewOutput.swift; sourceTree = "<group>"; };
 		DD57D30BE3EDADF17A957953 /* UploadFilesSelectionRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionRouter.swift; sourceTree = "<group>"; };
 		DF1E41009605793D3A14AA35 /* ActivityTimelineViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineViewController.swift; sourceTree = "<group>"; };
@@ -5113,6 +5132,7 @@
 		F9490A7550A6D3619929A250 /* UserInfoSubViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewModuleInput.swift; sourceTree = "<group>"; };
 		F96CB1C3C9928A6AA7F97841 /* FileInfoInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInitializer.swift; sourceTree = "<group>"; };
 		F9ACD7C82C97B84CF13A1A92 /* PhotoVideoDetailInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInteractorInput.swift; sourceTree = "<group>"; };
+		FA34640A7E6FCBDBE92CF11C /* Pods_LifeboxFileProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxFileProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA475ACB203EAFB9008D79C2 /* PushPopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushPopAnimator.swift; sourceTree = "<group>"; };
 		FA793D782018725300A02B46 /* PlacesServiceResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesServiceResponse.swift; sourceTree = "<group>"; };
 		FA793D792018725300A02B46 /* PlacesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesService.swift; sourceTree = "<group>"; };
@@ -5180,6 +5200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6180818A97692FC09B156D86 /* Pods_LifeboxFileProvider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5312,6 +5333,7 @@
 				71B96A7DFCCC030C408B1635 /* Pods_TC_Depo_LifeTech.framework */,
 				7EA832A180EC983270F5B10A /* Pods_autosync_widget.framework */,
 				9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */,
+				FA34640A7E6FCBDBE92CF11C /* Pods_LifeboxFileProvider.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -9432,6 +9454,7 @@
 				CE1BE924204831CE0074BDDC /* FileProviderExtension.swift */,
 				CE1BE926204831CE0074BDDC /* FileProviderItem.swift */,
 				CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */,
+				CE1BE95320492D040074BDDC /* FileService.swift */,
 				CE1BE92A204831CE0074BDDC /* Info.plist */,
 				CE1BE92B204831CE0074BDDC /* LifeboxFileProvider.entitlements */,
 			);
@@ -11185,6 +11208,10 @@
 				332BC9156196CAFE4CD77111 /* Pods-LifeboxShared.release.xcconfig */,
 				116F0D4A7EDE2EA38E1B57BC /* Pods-LifeboxShared.appstore.xcconfig */,
 				14B63501F537CEC2931A734D /* Pods-LifeboxShared.enterprise.xcconfig */,
+				DBB0E951C502D6894556ED12 /* Pods-LifeboxFileProvider.debug.xcconfig */,
+				C8E6892DB1C0232B660C2CB3 /* Pods-LifeboxFileProvider.release.xcconfig */,
+				3D010A878B7C0430091742F6 /* Pods-LifeboxFileProvider.appstore.xcconfig */,
+				13C1164C33CF7116F12CF1F9 /* Pods-LifeboxFileProvider.enterprise.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -11238,9 +11265,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE1BE947204831CE0074BDDC /* Build configuration list for PBXNativeTarget "LifeboxFileProvider" */;
 			buildPhases = (
+				BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */,
 				CE1BE91E204831CD0074BDDC /* Sources */,
 				CE1BE91F204831CD0074BDDC /* Frameworks */,
 				CE1BE920204831CD0074BDDC /* Resources */,
+				A2D422BE01316E8A9A325BFC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -12841,6 +12870,39 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 74412d8a38e9c5b44ca9993298b0ec4cba26289b 23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388";
 		};
+		A2D422BE01316E8A9A325BFC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeboxFileProvider-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CE51AFFB1EF90853005DCEE0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -13870,8 +13932,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE1BE94E20492C930074BDDC /* RequestHeader.swift in Sources */,
 				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
+				CE1BE94D20492C8B0074BDDC /* AuthorizationRepository.swift in Sources */,
+				CE1BE95120492CCE0074BDDC /* Dictionary.swift in Sources */,
+				CE1BE94C20492C870074BDDC /* AuthorizationURLs.swift in Sources */,
+				CE1BE94820492C510074BDDC /* SharedFactory.swift in Sources */,
+				CE1BE94920492C550074BDDC /* TokenStorage.swift in Sources */,
 				CE1BE927204831CE0074BDDC /* FileProviderItem.swift in Sources */,
+				CE1BE95520492DE40074BDDC /* Alamofire+Validate.swift in Sources */,
+				CE1BE95420492D040074BDDC /* FileService.swift in Sources */,
+				CE1BE95220492CD50074BDDC /* URL+Path.swift in Sources */,
+				CE1BE94A20492C5E0074BDDC /* SharedConstants.swift in Sources */,
+				CE1BE94B20492C800074BDDC /* ShareConfigurator.swift in Sources */,
+				CE1BE95020492CB70074BDDC /* RouteRequests.swift in Sources */,
+				CE1BE94F20492CA60074BDDC /* ResponseResult.swift in Sources */,
 				CE1BE929204831CE0074BDDC /* FileProviderEnumerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -15552,6 +15627,7 @@
 		};
 		CE1BE93E204831CE0074BDDC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DBB0E951C502D6894556ED12 /* Pods-LifeboxFileProvider.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15581,6 +15657,7 @@
 		};
 		CE1BE93F204831CE0074BDDC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8E6892DB1C0232B660C2CB3 /* Pods-LifeboxFileProvider.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15609,6 +15686,7 @@
 		};
 		CE1BE940204831CE0074BDDC /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D010A878B7C0430091742F6 /* Pods-LifeboxFileProvider.appstore.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15637,6 +15715,7 @@
 		};
 		CE1BE941204831CE0074BDDC /* Enterprise */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13C1164C33CF7116F12CF1F9 /* Pods-LifeboxFileProvider.enterprise.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

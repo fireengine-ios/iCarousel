@@ -57,6 +57,10 @@ target 'LifeboxShared' do
     shared_pods
 end
 
+target 'LifeboxFileProvider' do
+    shared_pods
+end
+
 target 'autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
 end
