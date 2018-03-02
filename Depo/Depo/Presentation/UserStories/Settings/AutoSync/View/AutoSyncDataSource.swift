@@ -30,11 +30,16 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
         tableView?.backgroundColor = UIColor.clear
         self.tableHConstraint = tableHConstraint
         
-        let nib1 = UINib(nibName: CellsIdConstants.autoSyncSwitcherCellID, bundle: nil)
-        tableView?.register(nib1, forCellReuseIdentifier: CellsIdConstants.autoSyncSwitcherCellID)
-        
-        let nib2 = UINib(nibName: CellsIdConstants.autoSyncInformCellID, bundle: nil)
-        tableView?.register(nib2, forCellReuseIdentifier: CellsIdConstants.autoSyncInformCellID)
+        registerCells(with: [CellsIdConstants.autoSyncSwitcherCellID,
+                             CellsIdConstants.autoSyncInformCellID,
+                             CellsIdConstants.autoSyncSettingsCellID])
+    }
+    
+    private func registerCells(with identifiers: [String]) {
+        for identifier in identifiers {
+            let nib = UINib(nibName: identifier, bundle: nil)
+            tableView?.register(nib, forCellReuseIdentifier: identifier)
+        }
     }
     
     func showCellsFromModels(models:[AutoSyncModel]){
@@ -102,16 +107,15 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let model = tableDataArray[indexPath.row]
-        if (model.cellType == .typeSwitcher){
-            return 50
+        if model.cellType == .typeSwitcher {
+            return 228.0
         }
         return 83.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = tableDataArray[indexPath.row]//TODO: ework enum or change it to SWITCH - case
-        if (model.cellType == .typeSwitcher) || model.cellType == .headerLike
-         {
+        if model.cellType == .headerLike {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSwitcherCellID, for: indexPath)
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSwitcherTableViewCell
@@ -120,13 +124,13 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
             autoSyncCell.setColors(isFromSettings: isFromSettings)
             return autoSyncCell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncInformCellID, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSettingsCellID, for: indexPath)
             cell.selectionStyle = .none
-            let autoSyncCell = cell as! AutoSyncInformTableViewCell
-            autoSyncCell.stateDelegate = self
+            let autoSyncCell = cell as! AutoSyncSettingsTableViewCell
+//            autoSyncCell.delegate = self
             autoSyncCell.configurateCellWith(model: model)
-            autoSyncCell.setColors(isFromSettings: isFromSettings)
-            return cell
+//            autoSyncCell.setColors(isFromSettings: isFromSettings)
+            return autoSyncCell
         }
         
     }
