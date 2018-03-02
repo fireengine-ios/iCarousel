@@ -32,7 +32,7 @@ final class FileService {
             .request(url)
             .customValidate()
             .responseData { response in
-                print(response)
+                debugPrint(response)
                 switch response.result {
                 case .success(let data):
                     
