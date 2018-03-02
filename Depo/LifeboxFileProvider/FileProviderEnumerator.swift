@@ -18,6 +18,10 @@ class FileProviderEnumerator: NSObject {
     }
     
     let fileService = FileService()
+    var page = 0
+    
+    /// DONT NEED
+//    var items: [FileProviderItem] = []
 }
 
 extension FileProviderEnumerator: NSFileProviderEnumerator {
@@ -40,42 +44,25 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
             ///folderUUID = _enumeratedItemIdentifier
         }
         
-        fileService.getFiles(folderUUID: "", page: 0) { (result) in
+        fileService.getFiles(folderUUID: "", page: self.page) { (result) in
             switch result {
-            case .success(_):
+            case .success( let newItems):
+                if newItems.isEmpty {
+//                    observer.didEnumerate([]) /// DONT NEED
+                    observer.finishEnumerating(upTo: nil)
+                    self.page = 0
+                } else {
+//                    self.items += newItems /// DONT NEED
+                    observer.didEnumerate(newItems)
+                    self.page += 1
+                    observer.finishEnumerating(upTo: page)
+                }
                 break
             case .failed(let error):
                 print(error.localizedDescription)
+                observer.finishEnumeratingWithError(error)
             }
         }
-        
-        /// get files
-        observer.didEnumerate([])
-        observer.finishEnumerating(upTo: nil)
-        //observer.finishEnumeratingWithError(error)
-        
-        /// OLD
-        //    Service *service = [[Service alloc] init];
-        //    [service requestForFiles:self.folderUUID pageNum:self.page completion:^(NSMutableArray *fileList, NSError *error) {
-        //
-        //
-        //        if (!error) {
-        //            if (fileList.count == 0) {
-        ////              [observer didEnumerateItems:self.itemList];
-        //                [observer finishEnumeratingUpToPage:nil];
-        //                self.page = 0;
-        //            } else {
-        //                [self.itemList addObjectsFromArray:fileList];
-        //                [observer didEnumerateItems:fileList];
-        //                self.page++;
-        //                [observer finishEnumeratingUpToPage:page];
-        //            }
-        //        } else {
-        //            [observer finishEnumeratingWithError:error];
-        //        }
-        //    }];
-
-        
         
         /* TODO:
          - inspect the page to determine whether this is an initial or a follow-up request

@@ -7,31 +7,111 @@
 //
 
 import FileProvider
+import SwiftyJSON
+import MobileCoreServices
 
-class FileProviderItem: NSObject, NSFileProviderItem {
+final class FileProviderItem: NSObject, NSFileProviderItem, Map {
 
-    // TODO: implement an initializer to create an item from your extension's backing model
-    // TODO: implement the accessors to return the values from your extension's backing model
+    let itemIdentifier: NSFileProviderItemIdentifier
+    let parentItemIdentifier: NSFileProviderItemIdentifier
+    let filename: String
+    let typeIdentifier: String
     
-    var itemIdentifier: NSFileProviderItemIdentifier {
-        return NSFileProviderItemIdentifier("")
+    let bytes: Int64
+    let isFolder: Bool
+    let childCount: Int
+    let tempDownloadURL: String
+    let createdDate: Int64
+    var thumbnailURL: String?
+    
+    
+    init(itemIdentifier: String,
+         parentItemIdentifier: String,
+         filename: String,
+         typeIdentifier: String,
+         
+         bytes: Int64,
+         isFolder: Bool,
+         childCount: Int,
+         tempDownloadURL: String,
+         createdDate: Int64,
+         thumbnailURL: String?)
+    {
+        self.itemIdentifier = NSFileProviderItemIdentifier(itemIdentifier)
+        self.parentItemIdentifier = NSFileProviderItemIdentifier(parentItemIdentifier)
+        self.filename = filename
+        self.typeIdentifier = typeIdentifier
+        
+        self.bytes = bytes
+        self.isFolder = isFolder
+        self.childCount = childCount
+        self.tempDownloadURL = tempDownloadURL
+        self.createdDate = createdDate
+        self.thumbnailURL = thumbnailURL
+        super.init()
     }
     
-    var parentItemIdentifier: NSFileProviderItemIdentifier {
-        return NSFileProviderItemIdentifier("")
+    override convenience init() {
+        self.init(itemIdentifier: "", parentItemIdentifier: "", filename: "", typeIdentifier: "", bytes: 0, isFolder: false, childCount: 0, tempDownloadURL: "", createdDate: 0, thumbnailURL: nil)
     }
-    
     var capabilities: NSFileProviderItemCapabilities {
         return .allowsReading
-        //return .allowsAll
     }
     
-    var filename: String {
-        return ""
+}
+
+/// : JsonMap
+extension FileProviderItem {
+    convenience init?(json: JSON) {
+        
+//        guard
+//            
+//            
+//        else {
+//            return nil
+//        }
+        
+        let uuid = json["uuid"].string ?? ""
+        let name = json["name"].string ?? ""
+        
+        let isFolder = json["folder"].bool ?? false
+        let childCount = json["childCount"].int ?? 0
+        let bytes = json["bytes"].int64 ?? 0
+        let createdDate = json["createdDate"].int64 ?? 0
+        let tempDownloadURL = json["tempDownloadURL"].string ?? ""
+        
+        let thumbnailURL = json["metadata"]["Thumbnail-Medium"].string
+        
+        let typeIdentifier = name.utType ?? "public.folder"
+        
+        let myParentItemIdentifier = "NSFileProviderRootContainerItemIdentifier"
+        
+        self.init(itemIdentifier: uuid,
+                  parentItemIdentifier: myParentItemIdentifier,
+                  filename: name,
+                  typeIdentifier: typeIdentifier,
+                  bytes: bytes,
+                  isFolder: isFolder,
+                  childCount: childCount,
+                  tempDownloadURL: tempDownloadURL,
+                  createdDate: createdDate,
+                  thumbnailURL: thumbnailURL)
     }
-    
-    var typeIdentifier: String {
-        return ""
+}
+
+/// : DataMapArray
+extension FileProviderItem {
+    static func array(from data: Data) -> [FileProviderItem] {
+        let jsonArray = JSON(data: data)["fileList"]
+        return jsonArray.array?.flatMap { json in
+            self.init(json: json)
+        } ?? []
     }
-    
+}
+
+
+private extension String {
+    var utType: String? {
+        return UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (self as NSString).pathExtension as CFString, nil)?.takeRetainedValue() as String?
+    }
 }

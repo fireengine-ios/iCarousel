@@ -21,7 +21,7 @@ final class FileService {
     let fileListUrl = "https://adepo.turkcell.com.tr/api/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
     
     //DataRequest
-    func getFiles(folderUUID: String, page: Int, handler: @escaping ResponseHandler<String>) {
+    func getFiles(folderUUID: String, page: Int, handler: @escaping ResponseHandler<[FileProviderItem]>) {
         
         let url = String(format: fileListUrl, folderUUID, "name", "ASC", page, 100)
         
@@ -31,15 +31,24 @@ final class FileService {
         sessionManager
             .request(url)
             .customValidate()
+            
             .responseData { response in
                 debugPrint(response)
                 switch response.result {
                 case .success(let data):
-                    
-                    break
-//                    if let json = json as? [String: String], let path = json["value"] {
-//                        handler(ResponseResult.success(path))
-//                    } else {
+                    let array = FileProviderItem.array(from: data)
+                    handler(ResponseResult.success(array))
+//                    break
+//                    if let json = json as? [String: Any],
+//                        let array = json["fileList"] as? [[String: Any]]
+//                    {
+//                        for object in array {
+//                            
+//                        }
+//                        
+////                        handler(ResponseResult.success(path))
+//                    } 
+//                    else {
 //                        let error = CustomErrors.text("Server error: \(json)")
 //                        handler(ResponseResult.failed(error))
 //                    }
