@@ -21,7 +21,7 @@ class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
     
     func configurateView(){
         labelForTitle.text = ""
-        labelForTitle.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        labelForTitle.font = UIFont.TurkcellSaturaMedFont(size: 18)
         labelForTitle.textColor = ColorConstants.textGrayColor
     }
     
