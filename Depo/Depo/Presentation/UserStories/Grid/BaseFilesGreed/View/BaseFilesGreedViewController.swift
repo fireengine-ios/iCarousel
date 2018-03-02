@@ -97,7 +97,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
         noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
-        startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
         
         output.viewIsReady(collectionView: collectionView)
