@@ -72,7 +72,9 @@ class Upload: UploadRequestParametrs {
         if item.isLocalItem, !item.syncStatus.isContained(in: [.synced]) , !item.uuid.isEmpty {
             self.tmpUUId = item.uuid
         } else {
-            self.tmpUUId = UUID().uuidString
+            var newUUID = item.uuid
+            if !newUUID.contains("~") { newUUID.append("~\(UUID().uuidString)") } // compound uuid
+            self.tmpUUId = newUUID
         }
     }
     
