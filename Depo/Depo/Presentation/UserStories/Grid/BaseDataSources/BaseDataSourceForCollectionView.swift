@@ -312,10 +312,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                      debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
                                                                         
                 })
+                return
             default:
                 break
+                //localFileasAppendedCallback(originalItemsArray)
             }
         }
+        
+        localFileasAppendedCallback(originalItemsArray)
+        
     }
     
     private func getLastNonMetaEmptyItem(items: [WrapData]) -> WrapData? {
