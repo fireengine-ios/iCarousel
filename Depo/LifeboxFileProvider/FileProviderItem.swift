@@ -22,7 +22,8 @@ class FileProviderItem: NSObject, NSFileProviderItem {
     }
     
     var capabilities: NSFileProviderItemCapabilities {
-        return .allowsAll
+        return .allowsReading
+        //return .allowsAll
     }
     
     var filename: String {

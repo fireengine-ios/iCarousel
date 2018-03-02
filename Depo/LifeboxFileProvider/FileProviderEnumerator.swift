@@ -8,7 +8,7 @@
 
 import FileProvider
 
-class FileProviderEnumerator: NSObject, NSFileProviderEnumerator {
+class FileProviderEnumerator: NSObject {
     
     var enumeratedItemIdentifier: NSFileProviderItemIdentifier
     
@@ -16,12 +16,61 @@ class FileProviderEnumerator: NSObject, NSFileProviderEnumerator {
         self.enumeratedItemIdentifier = enumeratedItemIdentifier
         super.init()
     }
+}
+
+final class FileService {
+    
+    func getFiles
+}
+
+extension FileProviderEnumerator: NSFileProviderEnumerator {
 
     func invalidate() {
         // TODO: perform invalidation of server connection if necessary
     }
 
     func enumerateItems(for observer: NSFileProviderEnumerationObserver, startingAt page: NSFileProviderPage) {
+        
+        let isPasscodeOn = true
+        if isPasscodeOn {
+            let error = NSError(domain: NSFileProviderErrorDomain,
+                                code: NSFileProviderError.notAuthenticated.rawValue,
+                                userInfo: [NSLocalizedDescriptionKey: "passcode"])
+            observer.finishEnumeratingWithError(error)
+        }
+        
+        if enumeratedItemIdentifier.rawValue == "NSFileProviderRootContainerItemIdentifier" {
+            ///folderUUID = _enumeratedItemIdentifier
+        }
+        
+        /// get files
+        observer.didEnumerate([])
+        observer.finishEnumerating(upTo: nil)
+        //observer.finishEnumeratingWithError(error)
+        
+        /// OLD
+        //    Service *service = [[Service alloc] init];
+        //    [service requestForFiles:self.folderUUID pageNum:self.page completion:^(NSMutableArray *fileList, NSError *error) {
+        //
+        //
+        //        if (!error) {
+        //            if (fileList.count == 0) {
+        ////              [observer didEnumerateItems:self.itemList];
+        //                [observer finishEnumeratingUpToPage:nil];
+        //                self.page = 0;
+        //            } else {
+        //                [self.itemList addObjectsFromArray:fileList];
+        //                [observer didEnumerateItems:fileList];
+        //                self.page++;
+        //                [observer finishEnumeratingUpToPage:page];
+        //            }
+        //        } else {
+        //            [observer finishEnumeratingWithError:error];
+        //        }
+        //    }];
+
+        
+        
         /* TODO:
          - inspect the page to determine whether this is an initial or a follow-up request
          
@@ -36,6 +85,7 @@ class FileProviderEnumerator: NSObject, NSFileProviderEnumerator {
          */
     }
     
+    /// not used
     func enumerateChanges(for observer: NSFileProviderChangeObserver, from anchor: NSFileProviderSyncAnchor) {
         /* TODO:
          - query the server for updates since the passed-in sync anchor

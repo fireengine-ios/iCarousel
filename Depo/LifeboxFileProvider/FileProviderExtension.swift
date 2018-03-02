@@ -17,12 +17,16 @@ class FileProviderExtension: NSFileProviderExtension {
     }
     
     override func item(for identifier: NSFileProviderItemIdentifier) throws -> NSFileProviderItem {
+        
+        /// return item from dataBase
+        
         // resolve the given identifier to a record in the model
         
         // TODO: implement the actual lookup
         return FileProviderItem()
     }
     
+    /// apple ready !!!
     override func urlForItem(withPersistentIdentifier identifier: NSFileProviderItemIdentifier) -> URL? {
         // resolve the given identifier to a file on disk
         guard let item = try? item(for: identifier) else {
@@ -36,6 +40,7 @@ class FileProviderExtension: NSFileProviderExtension {
         return perItemDirectory.appendingPathComponent(item.filename, isDirectory:false)
     }
     
+    /// apple ready !!!
     override func persistentIdentifierForItem(at url: URL) -> NSFileProviderItemIdentifier? {
         // resolve the given URL to a persistent identifier using a database
         let pathComponents = url.pathComponents
@@ -48,6 +53,14 @@ class FileProviderExtension: NSFileProviderExtension {
     }
     
     override func providePlaceholder(at url: URL, completionHandler: @escaping (Error?) -> Void) {
+        
+        /// NEED
+//        let isPasscodeOn = true
+//        if isPasscodeOn {
+//            return
+//        }
+        
+        
         guard let identifier = persistentIdentifierForItem(at: url) else {
             completionHandler(NSFileProviderError(.noSuchItem))
             return
@@ -56,6 +69,33 @@ class FileProviderExtension: NSFileProviderExtension {
         do {
             let fileProviderItem = try item(for: identifier)
             let placeholderURL = NSFileProviderManager.placeholderURL(for: url)
+            
+            
+            //    NSURL *placecholderDirectoryUrl = [placeholderUrl URLByDeletingLastPathComponent];
+            //    if (![_fileManager fileExistsAtPath:placecholderDirectoryUrl.relativePath]) {
+            //        NSError *fcError;
+            //        [_fileCoordinator coordinateWritingItemAtURL:placecholderDirectoryUrl options:NSFileCoordinatorWritingForMerging error:&fcError byAccessor:^(NSURL * _Nonnull newURL) {
+            //            if (!fcError) {
+            //                NSError *fmError;
+            //                [_fileManager createDirectoryAtPath:newURL.relativePath withIntermediateDirectories:YES attributes:nil error:&fmError];
+            //                if (!fmError) {
+            //                    BOOL fileOlustuMu = [_fileManager fileExistsAtPath:placecholderDirectoryUrl.relativePath];
+            //                    NSLog(@"%s", fileOlustuMu ? "trueEE" : "falseEE");
+            //                    [NSFileProviderManager writePlaceholderAtURL:placeholderUrl withMetadata:item error:NULL];
+            //                } else {
+            //                    NSLog(@"FM ERROR : %@", fmError.description);
+            //                }
+            //            } else {
+            //                NSLog(@"FC ERROR : %@", fcError.description);
+            //            }
+            //        }];
+            //
+            //    }
+            //    completionHandler(nil);
+
+            
+            
+            
             try NSFileProviderManager.writePlaceholder(at: placeholderURL,withMetadata: fileProviderItem)
             completionHandler(nil)
         } catch let error {
@@ -94,6 +134,7 @@ class FileProviderExtension: NSFileProviderExtension {
     }
     
     
+    /// apple ready !!!
     override func itemChanged(at url: URL) {
         // Called at some point after the file has changed; the provider may then trigger an upload
         
@@ -141,20 +182,40 @@ class FileProviderExtension: NSFileProviderExtension {
     // MARK: - Enumeration
     
     override func enumerator(for containerItemIdentifier: NSFileProviderItemIdentifier) throws -> NSFileProviderEnumerator {
-        let maybeEnumerator: NSFileProviderEnumerator? = nil
+        
+        /// ???
+        /// It was added after the screen to share the file, since it entered here with the identifier of the file.
+        do {
+            let item = try self.item(for: containerItemIdentifier)
+            if item.typeIdentifier != "public.folder" {
+                /// ?
+                return FileProviderEnumerator(enumeratedItemIdentifier: containerItemIdentifier)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        
+        //let maybeEnumerator: NSFileProviderEnumerator? = nil
+        
         if (containerItemIdentifier == NSFileProviderItemIdentifier.rootContainer) {
-            // TODO: instantiate an enumerator for the container root
+            /// TODO: instantiate an enumerator for the container root
+            return FileProviderEnumerator(enumeratedItemIdentifier: containerItemIdentifier)
         } else if (containerItemIdentifier == NSFileProviderItemIdentifier.workingSet) {
             // TODO: instantiate an enumerator for the working set
         } else {
+            return FileProviderEnumerator(enumeratedItemIdentifier: containerItemIdentifier)
             // TODO: determine if the item is a directory or a file
             // - for a directory, instantiate an enumerator of its subitems
             // - for a file, instantiate an enumerator that observes changes to the file
         }
-        guard let enumerator = maybeEnumerator else {
-            throw NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo:[:])
-        }
-        return enumerator
+        
+        return FileProviderEnumerator(enumeratedItemIdentifier: containerItemIdentifier)
+        
+//        guard let enumerator = maybeEnumerator else {
+//            throw NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo:[:])
+//        }
+//        return enumerator
     }
     
 }
