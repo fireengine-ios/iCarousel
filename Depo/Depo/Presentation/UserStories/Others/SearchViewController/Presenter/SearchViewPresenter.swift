@@ -36,10 +36,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     //MARK : BasePresenter
     
-    override func outputView() -> Waiting? {
-        return view as? Waiting
-    }
-    
     func viewIsReady(collectionView: UICollectionView) {
         dataSource.setupCollectionView(collectionView: collectionView, filters: nil)
         dataSource.delegate = self
@@ -343,16 +339,16 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         interactor.openFaceImageForSearch(item: item)
     }
     
-    //MARK: - Spineer
+    //MARK: - Spinner
     
     private func showSpinner() {
         showedSpinner = true
-        outputView()?.showSpiner()
+        view.showSpinner()
     }
     
     private func hideSpinner() {
         showedSpinner = false
-        outputView()?.hideSpiner()
+        view.hideSpinner()
     }
     
     // MARK: Bottom Bar

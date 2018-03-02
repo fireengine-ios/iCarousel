@@ -14,6 +14,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     
+    @IBOutlet weak var outputView: UIView!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var suggestTableView: UITableView!
@@ -41,6 +43,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     var tabBarActionHandler: TabBarActionHandler? { return output.tabBarActionHandler }
     
     var searchBar: UISearchBar!
+    var searchTextField: UITextField?
     var navBarConfigurator = NavigationBarConfigurator()
     var editingTabBar: BottomSelectionTabBarViewController?
     
@@ -203,12 +206,12 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         if let subviews = searchBar.subviews.first?.subviews {
             subviews.forEach({ subview in
                 if subview is UITextField {
-                    let textFileld = (subview as! UITextField)
-                    textFileld.backgroundColor = ColorConstants.searchBarColor
-                    textFileld.placeholder = TextConstants.search
-                    textFileld.font = UIFont.TurkcellSaturaBolFont(size: 19)
-                    textFileld.textColor = ColorConstants.darcBlueColor
-                    textFileld.keyboardAppearance = .dark
+                    searchTextField = subview as? UITextField
+                    searchTextField?.backgroundColor = ColorConstants.searchBarColor
+                    searchTextField?.placeholder = TextConstants.search
+                    searchTextField?.font = UIFont.TurkcellSaturaBolFont(size: 19)
+                    searchTextField?.textColor = ColorConstants.darcBlueColor
+                    searchTextField?.keyboardAppearance = .dark
                 }
                 if subview is UIButton {
                     (subview as! UIButton).titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
@@ -426,6 +429,16 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     private func hideTabBar() {
         needShowTabBar = false
         showTabBarIfNeed()
+    }
+    
+    func showSpinner() {
+        searchTextField?.isUserInteractionEnabled = false
+        showSpinnerOnView(outputView)
+    }
+    
+    func hideSpinner() {
+        searchTextField?.isUserInteractionEnabled = true
+        hideSpinerForView(outputView)
     }
 }
 

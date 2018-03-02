@@ -24,4 +24,7 @@ protocol SearchViewInput: class {
     func selectedItemsCountChange(with count: Int)
     
     func setNavBarRigthItem(active isActive: Bool)
+    
+    func showSpinner()
+    func hideSpinner()
 }
