@@ -20,7 +20,7 @@ class FileProviderEnumerator: NSObject {
     private let fileService = FileService()
     private var page = 0
     
-    var isPasscodeOn: Bool {
+    private var isPasscodeOn: Bool {
         return false /// TEMP LOGIC
     }
 }
@@ -52,10 +52,14 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
                                 userInfo: [NSLocalizedDescriptionKey: "passcode"])
             observer.finishEnumeratingWithError(error)
         }
-        
-        if enumeratedItemIdentifier.rawValue == "NSFileProviderRootContainerItemIdentifier" {
-            ///folderUUID = _enumeratedItemIdentifier
-        }
+
+        /// dont need ???
+//        let folderUUID: String
+//        if enumeratedItemIdentifier.rawValue == "NSFileProviderRootContainerItemIdentifier" {
+//            folderUUID = enumeratedItemIdentifier.rawValue
+//        } else {
+//            folderUUID = ""
+//        }
         
         fileService.getFiles(folderUUID: "", page: self.page) { (result) in
             switch result {
@@ -63,7 +67,12 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
                 if newItems.isEmpty {
                     observer.finishEnumerating(upTo: nil)
                     self.page = 0
-                } else {
+                } else {                    
+                    
+                    for item in newItems {
+                        FileStorage.shared.write(item)
+                    }
+                    
                     observer.didEnumerate(newItems)
                     self.page += 1
                     observer.finishEnumerating(upTo: page)

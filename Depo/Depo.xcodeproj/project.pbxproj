@@ -3017,6 +3017,8 @@
 		CED4B02A2017731400D06CA9 /* Alamofire+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4B0292017731400D06CA9 /* Alamofire+Response.swift */; };
 		CED4B02C201858D500D06CA9 /* HomeCardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */; };
 		CED4B02E2018594700D06CA9 /* HomeCardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */; };
+		CED54F6E204A760900B750BB /* SwiftyJSONExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1CEA91F21E11200C9DD8F /* SwiftyJSONExtension.swift */; };
+		CED54F6F204A7D4B00B750BB /* BytesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEC01F78F94900FB4C3D /* BytesType.swift */; };
 		CEDEAB311FADA5D20046555F /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */; };
 		CEDEAB321FADA5D20046555F /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEAB301FADA5D20046555F /* AlbumCell.xib */; };
 		CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
@@ -13934,7 +13936,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED54F6F204A7D4B00B750BB /* BytesType.swift in Sources */,
 				CE1BE94E20492C930074BDDC /* RequestHeader.swift in Sources */,
+				CED54F6E204A760900B750BB /* SwiftyJSONExtension.swift in Sources */,
 				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
 				CE1BE94D20492C8B0074BDDC /* AuthorizationRepository.swift in Sources */,
 				CE1BE95120492CCE0074BDDC /* Dictionary.swift in Sources */,

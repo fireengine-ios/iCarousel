@@ -8,22 +8,24 @@
 
 import FileProvider
 
-class FileProviderExtension: NSFileProviderExtension {
+let unknownError = NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo: [:])
+
+final class FileProviderExtension: NSFileProviderExtension {
     
-    var fileManager = FileManager()
+    private let fileManager = FileManager()
+    private let fileCoordinator = NSFileCoordinator()
+    
+    private var isPasscodeOn: Bool {
+        return false /// TEMP LOGIC
+    }
     
     override init() {
         super.init()
     }
     
+    /// ready
     override func item(for identifier: NSFileProviderItemIdentifier) throws -> NSFileProviderItem {
-        
-        /// return item from dataBase
-        
-        // resolve the given identifier to a record in the model
-        
-        // TODO: implement the actual lookup
-        return FileProviderItem()
+        return FileStorage.shared.read(for: identifier)
     }
     
     /// apple ready !!!
@@ -52,14 +54,12 @@ class FileProviderExtension: NSFileProviderExtension {
         return NSFileProviderItemIdentifier(pathComponents[pathComponents.count - 2])
     }
     
+    /// ready
     override func providePlaceholder(at url: URL, completionHandler: @escaping (Error?) -> Void) {
         
-        /// NEED
-//        let isPasscodeOn = true
-//        if isPasscodeOn {
-//            return
-//        }
-        
+        if isPasscodeOn {
+            return
+        }
         
         guard let identifier = persistentIdentifierForItem(at: url) else {
             completionHandler(NSFileProviderError(.noSuchItem))
@@ -70,40 +70,114 @@ class FileProviderExtension: NSFileProviderExtension {
             let fileProviderItem = try item(for: identifier)
             let placeholderURL = NSFileProviderManager.placeholderURL(for: url)
             
+            if fileManager.fileExists(atPath: placeholderURL.relativePath) {
+                /// ???
+//                completionHandler(unknownError)
+                completionHandler(nil)
+                return
+            }
             
-            //    NSURL *placecholderDirectoryUrl = [placeholderUrl URLByDeletingLastPathComponent];
-            //    if (![_fileManager fileExistsAtPath:placecholderDirectoryUrl.relativePath]) {
-            //        NSError *fcError;
-            //        [_fileCoordinator coordinateWritingItemAtURL:placecholderDirectoryUrl options:NSFileCoordinatorWritingForMerging error:&fcError byAccessor:^(NSURL * _Nonnull newURL) {
-            //            if (!fcError) {
-            //                NSError *fmError;
-            //                [_fileManager createDirectoryAtPath:newURL.relativePath withIntermediateDirectories:YES attributes:nil error:&fmError];
-            //                if (!fmError) {
-            //                    BOOL fileOlustuMu = [_fileManager fileExistsAtPath:placecholderDirectoryUrl.relativePath];
-            //                    NSLog(@"%s", fileOlustuMu ? "trueEE" : "falseEE");
-            //                    [NSFileProviderManager writePlaceholderAtURL:placeholderUrl withMetadata:item error:NULL];
-            //                } else {
-            //                    NSLog(@"FM ERROR : %@", fmError.description);
-            //                }
-            //            } else {
-            //                NSLog(@"FC ERROR : %@", fcError.description);
-            //            }
-            //        }];
-            //
-            //    }
-            //    completionHandler(nil);
-
+            let placecholderDirectoryUrl = placeholderURL.deletingLastPathComponent()
+            var fcError: NSError?
             
-            
-            
-            try NSFileProviderManager.writePlaceholder(at: placeholderURL,withMetadata: fileProviderItem)
-            completionHandler(nil)
+            fileCoordinator.coordinate(writingItemAt: placecholderDirectoryUrl, options: .forMerging, error: &fcError) { newURL in
+                
+                if let error = fcError {
+                    completionHandler(error)
+                } else {
+                    do {
+                        try fileManager.createDirectory(at: newURL, withIntermediateDirectories: true, attributes: nil)
+                        ///fileManager.fileExists(atPath: placecholderDirectoryUrl.relativePath) //???
+                        try NSFileProviderManager.writePlaceholder(at: placeholderURL, withMetadata: fileProviderItem)
+                        completionHandler(nil)
+                    } catch {
+                        completionHandler(error)
+                    }
+                }
+            }
         } catch let error {
             completionHandler(error)
         }
     }
-
+    
+    
+    
+    override func fetchThumbnails(for itemIdentifiers: [NSFileProviderItemIdentifier], requestedSize size: CGSize, perThumbnailCompletionHandler: @escaping (NSFileProviderItemIdentifier, Data?, Error?) -> Void, completionHandler: @escaping (Error?) -> Void) -> Progress {
+        
+        let progress = Progress(totalUnitCount: Int64(itemIdentifiers.count))
+        
+        for identifier in itemIdentifiers {
+            
+            do {
+                let baseItem = try self.item(for: identifier)
+                
+                guard let item = baseItem as? FileProviderItem, let thumbnailURL = item.thumbnailURL else {
+                    completionHandler(unknownError)
+                    return progress
+                }
+                
+                URLSession.shared.downloadTask(with: thumbnailURL) { (locationUrl, response, error) in
+                    if let error = error {
+                        perThumbnailCompletionHandler(identifier, nil, error)
+                        completionHandler(error)
+                    } else if let locationUrl = locationUrl {
+                        do {
+                            let data = try Data(contentsOf: locationUrl)
+                            perThumbnailCompletionHandler(identifier, data, nil)
+                            
+                            DispatchQueue.main.async {
+                                if progress.isFinished {
+                                    completionHandler(nil)
+                                }
+                            }
+//                            try data.write(to: url, options: .atomic)
+                        } catch {
+                            perThumbnailCompletionHandler(identifier, nil, error)
+                            completionHandler(error)
+                        }
+                    }
+                }.resume()
+                
+            } catch {
+                perThumbnailCompletionHandler(identifier, nil, error)
+                completionHandler(error)
+            }
+        }
+        
+        return progress
+    }
+    
+    /// ready
     override func startProvidingItem(at url: URL, completionHandler: @escaping ((_ error: Error?) -> Void)) {
+        
+        if fileManager.fileExists(atPath: url.path) {
+            completionHandler(nil)
+            return
+        }
+        
+        guard 
+            let itemIdentifier = persistentIdentifierForItem(at: url),
+            let item = try? self.item(for: itemIdentifier) as? FileProviderItem,
+            let downloadURL = item?.tempDownloadURL
+        else {
+            completionHandler(unknownError)
+            return
+        }
+        
+        URLSession.shared.downloadTask(with: downloadURL) { (locationUrl, response, error) in
+            if let error = error {
+                completionHandler(error)
+            } else if let locationUrl = locationUrl {
+                do {
+                    let data = try Data(contentsOf: locationUrl)
+                    try data.write(to: url, options: .atomic)
+                    completionHandler(nil)
+                } catch {
+                    completionHandler(error)
+                }
+            }
+        }.resume()
+        
         // Should ensure that the actual file is in the position returned by URLForItemWithIdentifier:, then call the completion handler
         
         /* TODO:
@@ -130,7 +204,7 @@ class FileProviderExtension: NSFileProviderExtension {
          }
          */
         
-        completionHandler(NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo:[:]))
+        
     }
     
     
