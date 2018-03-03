@@ -31,8 +31,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     @IBOutlet weak var musicBarContainer: UIView!
     @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
     
-    let underNavBarBarHeight: CGFloat = 53
-    let musicBar = MusicBar(frame: CGRect.zero)
+    private let underNavBarBarHeight: CGFloat = 53
+    private let searchSectionCount = 6
+    private let musicBar = MusicBar(frame: CGRect.zero)
     
     // MARK: - Variables
     var underNavBarBar: GridListTopBar?
@@ -449,14 +450,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        var sections = 4
-        if let items = items[.people], !items.isEmpty {
-            sections += 1
-        }
-        if let items = items[.things], !items.isEmpty {
-            sections += 1
-        }
-        return sections
+        return searchSectionCount
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -481,7 +475,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         case .suggestion, .recent:
             return UITableViewAutomaticDimension
         case .people, .things:
-            return RecentlySearchedFaceImageTableViewCell.height()
+            if let items = items[category], !items.isEmpty {
+                return RecentlySearchedFaceImageTableViewCell.height()
+            }
+            return 0
         case .suggestionHeader, .recentHeader:
             return SuggestionTableSectionHeader.heightFor(category: category)
         }
