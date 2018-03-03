@@ -128,15 +128,9 @@ class SearchViewInteractor: SearchViewInteractorInput {
         remoteItems.getSuggestion(text: text, success: { [weak self] (suggestList) in
             DispatchQueue.main.async {
                 self?.faceImageAllowed { [weak self] result in
-                    if result {
-                        if let wrapOutput = self?.output {
-                            wrapOutput.successWithSuggestList(list: suggestList.filter {$0.text != nil})
-                        }
-                    } else {
-                        if let wrapOutput = self?.output {
-                            wrapOutput.successWithSuggestList(list: suggestList.filter {$0.text != nil && $0.type != .people && $0.type != .thing})
-                        }
-                    }
+                    guard let `self` = self else { return }
+                    let filteredItems = self.filterSuggetion(items: suggestList, faceImageAllowed: result)
+                    self.output?.successWithSuggestList(list: filteredItems)
                 }
             }
         }, fail: { (_) in
@@ -145,6 +139,33 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     func getDefaultSuggetion(text: String) {
         getSuggetion(text: text)
+    }
+    
+    private func filterSuggetion(items: [SuggestionObject]?, faceImageAllowed: Bool) -> [SuggestionObject] {
+        var result = [SuggestionObject]()
+        guard let items = items else {
+            return result
+        }
+ 
+        if faceImageAllowed {
+            for suggest in items {
+                var hasDuplicate = false
+                
+                if suggest.info?.id == nil, //simple suggestion
+                    let type = suggest.type, let text = suggest.text,
+                    items.first(where: {$0.type == type && $0.text == text && $0.info?.id != nil}) != nil {
+                    hasDuplicate = true
+                }
+                
+                if !hasDuplicate && suggest.text != nil {
+                    result.append(suggest)
+                }
+            }
+        } else {
+            result = items.filter { $0.text != nil && $0.type != .people && $0.type != .thing }
+        }
+        
+        return result
     }
     
     func clearRecentSearches() {
