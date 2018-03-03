@@ -961,7 +961,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
-            
+            headerView.backgroundColor = UIColor.clear
             let textHeader = headerView as! CollectionViewSimpleHeaderWithText
             
             let title = getHeaderText(indexPath: indexPath)//fetchService.headerText(indexPath: indexPath)
