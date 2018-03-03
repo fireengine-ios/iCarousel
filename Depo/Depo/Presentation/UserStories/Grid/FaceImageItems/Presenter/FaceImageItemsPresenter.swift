@@ -65,6 +65,12 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         updateNoFilesView()
     }
     
+    override func getContentWithFail(errorString: String?) {
+        super.getContentWithFail(errorString: errorString)
+        
+        updateNoFilesView()
+    }
+    
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
     
     override func needShowNoFileView() -> Bool {
