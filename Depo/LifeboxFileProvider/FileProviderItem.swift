@@ -161,8 +161,17 @@ extension FileProviderItem {
 }
 
 
+//private extension String {
+//    var utType: String? {
+//        return UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (self as NSString).pathExtension as CFString, nil)?.takeRetainedValue() as String?
+//    }
+//}
 private extension String {
     var utType: String? {
-        return UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (self as NSString).pathExtension as CFString, nil)?.takeRetainedValue() as String?
+        let q = (self as NSString).pathExtension
+        let w = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, q as CFString, nil)
+        let r = w?.takeRetainedValue()
+        return r as String?
     }
 }
+
