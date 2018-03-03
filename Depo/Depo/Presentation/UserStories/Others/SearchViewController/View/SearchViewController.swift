@@ -71,11 +71,11 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        defaultNavBarStyle()
-        setStatusBarBackgroundColor(color: .white)
-        
         navigationController?.setNavigationBarHidden(true, animated: false)
         UIApplication.shared.statusBarStyle = .default
+        
+        defaultNavBarStyle()
+        setStatusBarBackgroundColor(color: .white)
         
         editingTabBar?.view.layoutIfNeeded()
         
@@ -363,6 +363,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         return true
     }
     
+    private func isEmptyItemsCategory(_ category: SearchCategory) -> Bool {
+        return items[category] == nil || items[category]!.isEmpty
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         view.endEditing(true)
     }
@@ -475,12 +479,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         case .suggestion, .recent:
             return UITableViewAutomaticDimension
         case .people, .things:
-            if let items = items[category], !items.isEmpty {
+            if !isEmptyItemsCategory(category) {
                 return RecentlySearchedFaceImageTableViewCell.height()
             }
             return 0
-        case .suggestionHeader, .recentHeader:
+        case .suggestionHeader:
             return SuggestionTableSectionHeader.heightFor(category: category)
+        case .recentHeader:
+            if !isEmptyItemsCategory(.recent) || !isEmptyItemsCategory(.people) || !isEmptyItemsCategory(.things) {
+                return SuggestionTableSectionHeader.heightFor(category: category)
+            }
+            return 0
         }
     }
     
