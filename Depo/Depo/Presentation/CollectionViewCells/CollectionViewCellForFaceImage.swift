@@ -25,22 +25,20 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
-        isCellSelected = isSelected
         isCellSelectionEnabled = isSelectionActive
         
-        if (isSelectionActive) {
-            visibleImageView.isHidden = !isSelected
-            transperentView.alpha = isSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+        if isSelectionActive {
+            visibleImageView.isHidden = !isCellSelected
+            transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+            isCellSelected = !isCellSelected
         }
+        
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
         guard let item = wrappedObj as? Item else {
             return
         }
-        
-        visibleImageView.isHidden = !isCellSelected
-        transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
         
         if (isAlreadyConfigured) {
             return
@@ -51,11 +49,18 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         nameLabel.text = item.name
 
         if let peopleItem = wrappedObj as? PeopleItem,
-            let isVisible = peopleItem.responseObject.visible,
-            !isVisible {
-            visibleImageView.isHidden = isVisible
-            transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
+            let isVisible = peopleItem.responseObject.visible {
+            isCellSelected = isVisible
+
+            if !isVisible {
+                visibleImageView.isHidden = isVisible
+                transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
+            }
         }
+        
+        visibleImageView.isHidden = isCellSelected
+        transperentView.alpha = !isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+        
     }
     
     override func prepareForReuse() {

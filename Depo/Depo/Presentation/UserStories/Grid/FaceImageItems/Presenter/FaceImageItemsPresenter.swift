@@ -113,6 +113,8 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         isChangeVisibilityMode = false
         dataSource.setSelectionState(selectionState: false)
         
+        asyncOperationSucces()
+        
         view.stopSelection()
         
         reloadData()
