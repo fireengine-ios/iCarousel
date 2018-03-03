@@ -371,7 +371,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
         
         if show{
-            curtainView.frame = currentViewController?.view.frame ?? CGRect.zero
+            curtainView.frame =  CGRect(x: 0, y: 0, width: currentViewController?.view.frame.width ?? 0, height: currentViewController?.view.frame.height ?? 0)
             currentViewController?.view.addSubview(curtainView)
             currentViewController?.view.bringSubview(toFront: curtainView)
         }else{
