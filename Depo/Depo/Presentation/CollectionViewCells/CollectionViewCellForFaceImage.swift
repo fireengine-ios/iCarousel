@@ -44,6 +44,9 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
             return
         }
         
+        visibleImageView.isHidden = !isCellSelected
+        transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+        
         imageView.image = nil
         
         nameLabel.text = item.name
@@ -56,11 +59,11 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
                 visibleImageView.isHidden = isVisible
                 transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
             }
+            
+            visibleImageView.isHidden = isCellSelected
+            transperentView.alpha = !isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
         }
-        
-        visibleImageView.isHidden = isCellSelected
-        transperentView.alpha = !isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
-        
+    
     }
     
     override func prepareForReuse() {
