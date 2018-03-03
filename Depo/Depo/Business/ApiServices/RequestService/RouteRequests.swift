@@ -120,4 +120,8 @@ struct RouteRequests {
             return all +/ String(id)
         }
     }
+    
+    /// upload
+    static let uploadContainer = BaseUrl +/ "/api/container/baseUrl"
+    static let uploadNotify = "/api/notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
 }

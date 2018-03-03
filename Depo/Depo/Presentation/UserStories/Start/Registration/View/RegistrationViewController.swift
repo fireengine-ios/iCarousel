@@ -90,9 +90,8 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        visibleNavigationBarStyle() 
+        hidenNavigationBarStyle()
 
-        
         userRegistrationTable.register(UINib(nibName: "inputCell", bundle: nil),
                                             forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
         userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil),

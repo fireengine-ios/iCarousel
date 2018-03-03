@@ -91,14 +91,14 @@ class CaptchaService: BaseRequestService {
     var uuid: String
     
     override init() {
-        uuid = UUID().description
+        uuid = UUID().uuidString
         super.init()
     }
     
     func getCaptcha(type: CaptchaType = .image, sucess:SuccessResponse?, fail: FailResponse?   ) {
         log.debug("CaptchaService getCaptcha")
 
-        uuid = UUID().description
+        uuid = UUID().uuidString
         let param = CaptchaParametr(uuid: uuid, type: type.rawValue)
         let handler = BaseResponseHandler<CaptchaResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat:.DataFormat)
         executeGetRequest(param: param,

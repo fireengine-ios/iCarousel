@@ -144,7 +144,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToConnectedToNetworkFailed()
     }
     
-    func openPasscode(handler: @escaping () -> Void) {
+    func openPasscode(handler: @escaping VoidHandler) {
         router.openPasscode(handler: handler)
     }
 }

@@ -153,7 +153,7 @@ class CoreDataStack: NSObject {
     
     @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true) {
         debugPrint("save context")
-        let saveBlock: () -> Void = {
+        let saveBlock: VoidHandler = {
             do {
                 try context.save()
                 if !self.inProcessAppendingLocalFiles {

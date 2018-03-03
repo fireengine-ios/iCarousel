@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SuggestionTableViewCell: UITableViewCell {
+final class SuggestionTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var typeImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!

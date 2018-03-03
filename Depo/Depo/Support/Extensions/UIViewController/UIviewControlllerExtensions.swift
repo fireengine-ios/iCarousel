@@ -16,18 +16,22 @@ protocol Waiting {
     
     func showSpiner()
     
+    func showSpinnerOnView(_ view: UIView)
+    
     func showSpinerIncludeNavigatinBar()
     
-    func showSpinerWithCancelClosure(_ cancel: @escaping () -> Void)
+    func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler)
     
     func hideSpinerIncludeNavigatinBar()
     
     func hideSpiner()
+    
+    func hideSpinerForView(_ view: UIView)
 }
 
 extension UIViewController: Waiting {
     
-    func showSpinerWithCancelClosure(_ cancel: @escaping () -> Void) {
+    func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler) {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
@@ -46,6 +50,12 @@ extension UIViewController: Waiting {
         }
     }
     
+    func showSpinnerOnView(_ view: UIView) {
+        DispatchQueue.main.async {
+            _ = MBProgressHUD.showAdded(to: view, animated: true)
+        }
+    }
+    
     func showSpinerIncludeNavigatinBar() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
@@ -57,13 +67,19 @@ extension UIViewController: Waiting {
     func hideSpinerIncludeNavigatinBar() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
-            MBProgressHUD.hideAllHUDs(for: window, animated: true)
+            MBProgressHUD.hide(for: window, animated: true)
         }
     }
     
     func hideSpiner() {
         DispatchQueue.main.async {
-            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
+    
+    func hideSpinerForView(_ view: UIView) {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: view, animated: true)
         }
     }
 }

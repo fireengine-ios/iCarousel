@@ -532,15 +532,13 @@ class DownLoadOperation: Operation {
 
 
 extension DownLoadOperation: OperationProgressServiceDelegate {
-    
-    func didSend(ratio: Float, for tempUUID: String) {
+    func didSend(ratio: Float, for url: URL) {
         guard isExecuting else {
             return
         }
         
-        if let item = param.item, item.uuid == tempUUID {
+        if let item = param.item, param.urlToRemoteFile == url {
             CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
-//            ItemOperationManager.default.setProgressForUploadingFile(file: item, progress: ratio)
             ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
         }
     }

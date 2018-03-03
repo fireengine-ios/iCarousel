@@ -488,7 +488,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         router.showShare(rect: rect, urls: urls)
     }
     
-    func deleteMusic(_ completion: @escaping (() -> Void)) {
+    func deleteMusic(_ completion: @escaping VoidHandler) {
         router.showDeleteMusic(completion)
     }
     

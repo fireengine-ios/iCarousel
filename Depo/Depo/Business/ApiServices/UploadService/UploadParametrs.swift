@@ -14,7 +14,7 @@ class UploadBaseURL: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: UploadServiceConstant.baseUrl, relativeTo:super.patch)!
+        return RouteRequests.uploadContainer
     }
 }
 
@@ -69,10 +69,12 @@ class Upload: UploadRequestParametrs {
 
         self.isFavorite = isFavorite
 
-        if item.isLocalItem, item.uuid.count > 0 {
+        if item.isLocalItem, !item.syncStatus.isContained(in: [.synced]) , !item.uuid.isEmpty {
             self.tmpUUId = item.uuid
         } else {
-            self.tmpUUId = UUID().description
+            var newUUID = item.uuid
+            if !newUUID.contains("~") { newUUID.append("~\(UUID().uuidString)") } // compound uuid
+            self.tmpUUId = newUUID
         }
     }
     
@@ -90,7 +92,6 @@ class Upload: UploadRequestParametrs {
             HeaderConstant.XObjectMetaParentUuid : rootFolder
 //            HeaderConstant.Etag                   : md5
             //                  HeaderConstant.ContentLength         : contentLenght,
-            //                  HeaderConstant.XObjectMetaParentUuid : rootFolder,
             //                  HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue,
             //                  HeaderConstant.XObjectMetaAlbumLabel  : "",
             //                  HeaderConstant.XObjectMetaFolderLabel : "",
@@ -123,7 +124,7 @@ class UploadNotify: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: UploadServiceConstant.uploadNotify,
+        let str = String(format: RouteRequests.uploadNotify,
                          parentUUID, fileUUID)
         return URL(string: str, relativeTo:super.patch)!
     }

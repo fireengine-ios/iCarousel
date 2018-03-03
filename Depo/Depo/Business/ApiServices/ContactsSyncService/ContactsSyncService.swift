@@ -22,7 +22,7 @@ class ContactsSyncService: BaseRequestService {
         setup()
     }
     
-    typealias Callback = () -> Void
+    typealias Callback = VoidHandler
     typealias ProgressCallback = (_ progress: Int, _ count: Int, _ mode: SyncOperationType) -> Void
     typealias FinishCallback = (_ response: ContactSync.SyncResponse, _ mode: SyncOperationType) -> Void
     typealias AnalyzeFinishCallback = (_ response: [ContactSync.AnalyzedContact]) -> Void
@@ -52,7 +52,7 @@ class ContactsSyncService: BaseRequestService {
         ContactSyncSDK.doSync(type)
     }
     
-    func getBackUpStatus(completion: @escaping (ContactSync.SyncResponse) -> Void, fail: @escaping () -> Void) {
+    func getBackUpStatus(completion: @escaping (ContactSync.SyncResponse) -> Void, fail: @escaping VoidHandler) {
         ContactSyncSDK.getBackupStatus { (response) in
             guard let response = response as? [String: Any],
                   let contactsAmount = response["contacts"] as? Int,

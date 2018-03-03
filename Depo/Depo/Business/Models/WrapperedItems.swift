@@ -111,6 +111,7 @@ enum FileType: Equatable {
     case musicPlayList
     case allDocs
     case application(ApplicationType)
+    case faceImage(FaceImageType)
 
     
     var convertedToSearchFieldValue: FieldValue {
@@ -158,6 +159,10 @@ enum FileType: Equatable {
     
     var typeWithDuration: Bool {
         return (self == .audio) || self == (.video)
+    }
+    
+    var isFaceImageType: Bool {
+        return self == .faceImage(.people) || self == .faceImage(.things) || self == .faceImage(.places)
     }
     
     
@@ -254,6 +259,9 @@ enum FileType: Equatable {
                         self = .application(.unknown)
                     }
                     return
+                case "zip":
+                    self = .application(.zip)
+                    return
                 case "vnd.ms-powerpoint":
                     self = .application(.ppt)
                     return
@@ -347,6 +355,9 @@ enum FileType: Equatable {
             return 18
         case .allDocs:
             return 19
+            
+        default:
+            return 0
         }
     }
     
@@ -372,6 +383,19 @@ enum FileType: Equatable {
             return false
         case (.photoAlbum,.photoAlbum): return true
         case (.musicPlayList,.musicPlayList): return true
+        case (.faceImage, .faceImage):
+            switch (lhs) {
+            case .faceImage(let lhsType):
+                switch (rhs) {
+                case .faceImage(let rhsType):
+                    if lhsType == rhsType {
+                        return true
+                    }
+                default:()
+                }
+            default:()
+            }
+            return false
         default:
             return false
         }
@@ -574,7 +598,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced
-        fileType = .image
+        fileType = .faceImage(.people)
     }
     
     init(thingsItemResponse: ThingsItemResponse) {
@@ -591,7 +615,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced
-        fileType = .image
+        fileType = .faceImage(.things)
     }
     
     init(placesItemResponse: PlacesItemResponse) {
@@ -608,7 +632,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced
-        fileType = .image
+        fileType = .faceImage(.places)
     }
     
     init(baseModel: BaseMediaContent) {

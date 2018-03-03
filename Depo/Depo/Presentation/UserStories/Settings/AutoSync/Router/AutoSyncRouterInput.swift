@@ -10,5 +10,5 @@ import Foundation
 
 protocol AutoSyncRouterInput {
     func routNextVC()
-    func showSyncOverPopUp(okHandler: @escaping () -> Void)
+    func showSyncOverPopUp(okHandler: @escaping VoidHandler)
 }

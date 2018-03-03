@@ -268,9 +268,12 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @objc private func showTabBar(_ sender: Any) {
         changeTabBarStatus(hidden: false)
-        //tabBar.isHidden = false
         if (self.bottomTabBarConstraint.constant < 0){
             bottomBGView.isHidden = false
+            if !musicBar.isHidden {
+                musicBar.alpha = 1
+                musicBar.isUserInteractionEnabled = true
+            }
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
                 self.view.layoutIfNeeded()
@@ -286,16 +289,18 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     @objc private func hideTabBar(_ sender: Any) {
         changeTabBarStatus(hidden: true)
         if (bottomTabBarConstraint.constant >= 0){
-            var bottomConstraintConstant = -self.tabBar.frame.height
-            if !musicBar.isHidden {
-                bottomConstraintConstant -= self.musicBar.frame.height
-            }
+            let bottomConstraintConstant = -self.tabBar.frame.height
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.view.layoutIfNeeded()
             }, completion: { (_) in
                 self.tabBar.isHidden = true
                 self.bottomBGView.isHidden = true
+                
+                if !self.musicBar.isHidden {
+                    self.musicBar.alpha = 0
+                    self.musicBar.isUserInteractionEnabled = false
+                }
             })
         }
     }

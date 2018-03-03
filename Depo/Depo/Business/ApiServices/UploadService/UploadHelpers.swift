@@ -28,8 +28,3 @@ enum MetaStrategy: String {
 
 typealias UploadServiceBaseUrlResponse  = (_ resonse: UploadBaseURLResponse?) -> Swift.Void
 typealias FileUploadOperationSucces = (_ item: WrapData) -> Swift.Void
-
-struct UploadServiceConstant {
-    static let baseUrl = "/api/container/baseUrl"
-    static let uploadNotify = "/api/notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
-}

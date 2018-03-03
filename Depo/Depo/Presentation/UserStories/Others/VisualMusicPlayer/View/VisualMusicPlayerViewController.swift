@@ -87,6 +87,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         backButton.setImage(UIImage(named: "im_backButton"), for: .normal)
         backButton.setTitle(TextConstants.backTitle, for: .normal)
         backButton.addTarget(self, action: #selector(cancelAction(_:)), for:.touchUpInside)
+        backButton.tintColor = UIColor.white
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         
         let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(actionMoreButton(_:)))

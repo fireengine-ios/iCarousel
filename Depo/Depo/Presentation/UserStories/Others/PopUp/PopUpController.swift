@@ -223,7 +223,7 @@ final class PopUpController: UIViewController {
         }
     }
     
-    func close(completion: (() -> Void)? = nil) {
+    func close(completion: VoidHandler? = nil) {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
             self.shadowView.transform = NumericConstants.scaleTransform

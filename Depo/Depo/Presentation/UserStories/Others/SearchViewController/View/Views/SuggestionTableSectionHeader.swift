@@ -12,7 +12,7 @@ protocol SuggestionTableSectionHeaderDelegate: class {
     func onClearRecentSearchesTapped()
 }
 
-class SuggestionTableSectionHeader: UITableViewHeaderFooterView {
+final class SuggestionTableSectionHeader: UITableViewCell {
     
     private weak var delegate: SuggestionTableSectionHeaderDelegate?
     
@@ -25,16 +25,17 @@ class SuggestionTableSectionHeader: UITableViewHeaderFooterView {
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
         titleLabel.textColor = .white
         backgroundColor = .clear
+        contentView.backgroundColor = .clear
     }
     
     func configureWith(category: SearchCategory, delegate: SuggestionTableSectionHeaderDelegate? = nil) {
         self.delegate = delegate
         
         switch category {
-        case .suggestion:
+        case .suggestionHeader:
             titleLabel.text = TextConstants.searchSuggestionsTitle
             clearButton.isHidden = true
-        case .recent:
+        case .recentHeader:
             titleLabel.text = TextConstants.searchRecentSearchTitle
             clearButton.isHidden = false
         default:
@@ -45,5 +46,16 @@ class SuggestionTableSectionHeader: UITableViewHeaderFooterView {
     
     @IBAction private func onClearButtonTapped(_ sender: Any) {
         delegate?.onClearRecentSearchesTapped()
+    }
+    
+    static func heightFor(category: SearchCategory) -> CGFloat {
+        switch category {
+        case .suggestionHeader:
+            return 50
+        case .recentHeader:
+            return 64
+        default:
+            return 0
+        }
     }
 }

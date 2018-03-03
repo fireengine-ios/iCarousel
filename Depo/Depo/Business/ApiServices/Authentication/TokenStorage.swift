@@ -23,29 +23,33 @@ final class TokenStorageUserDefaults: TokenStorage {
     private let isRememberMeKey = "isRememberMeKey"
     private let isClearTokensKey = "isClearTokensKey"
     
+    private lazy var defaults: UserDefaults? = {
+        return UserDefaults(suiteName: SharedConstants.groupIdentifier)
+    }()
+    
     var accessToken: String? {
         get {
-            guard let token = UserDefaults.standard.string(forKey: accessTokenKey) else {
+            guard let token = defaults?.string(forKey: accessTokenKey) else {
                 return nil
             }
             print("- accessToken", token)
             return token
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: accessTokenKey)
+            defaults?.setValue(newValue, forKey: accessTokenKey)
         }
     }
     
     var refreshToken: String? {
         get {
-            guard let token = UserDefaults.standard.string(forKey: refreshTokenKey) else {
+            guard let token = defaults?.string(forKey: refreshTokenKey) else {
                 return nil
             }
             print("- refreshToken", token)
             return token
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: refreshTokenKey)
+            defaults?.setValue(newValue, forKey: refreshTokenKey)
         }
     }
     

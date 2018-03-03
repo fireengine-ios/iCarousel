@@ -36,10 +36,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     //MARK : BasePresenter
     
-    override func outputView() -> Waiting? {
-        return view as? Waiting
-    }
-    
     func viewIsReady(collectionView: UICollectionView) {
         dataSource.setupCollectionView(collectionView: collectionView, filters: nil)
         dataSource.delegate = self
@@ -175,7 +171,9 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
-        if item.fileType.isUnSupportedOpenType {
+        if item.fileType.isFaceImageType {
+            openFaceImage(item: item)
+        } else if item.fileType.isUnSupportedOpenType {
             let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
             moduleOutput?.previewSearchResultsHide()
@@ -197,8 +195,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func getCellSizeForList() -> CGSize {
         return CGSize(width: view.getCollectionViewWidth(), height: 65)
-    }
-    
+    }    
     
     func getCellSizeForGreed() -> CGSize {
         var cellWidth:CGFloat = 180
@@ -339,19 +336,24 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func openFaceImage(item: SuggestionObject) {
         showSpinner()
-        interactor.openFaceImage(forItem: item)
+        interactor.openFaceImageForSuggest(item: item)
     }
     
-    //MARK: - Spineer
+    func openFaceImage(item: BaseDataSourceItem) {
+        showSpinner()
+        interactor.openFaceImageForSearch(item: item)
+    }
+    
+    //MARK: - Spinner
     
     private func showSpinner() {
         showedSpinner = true
-        outputView()?.showSpiner()
+        view.showSpinner()
     }
     
     private func hideSpinner() {
         showedSpinner = false
-        outputView()?.hideSpiner()
+        view.hideSpinner()
     }
     
     // MARK: Bottom Bar

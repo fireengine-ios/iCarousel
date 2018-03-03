@@ -27,12 +27,21 @@ enum MyStreamType: Int {
     
     var placeholder: UIImage {
         switch self {
-        case .albums: return UIImage()
-        case .story: return UIImage()
+        case .albums: return #imageLiteral(resourceName: "album")
+        case .story: return #imageLiteral(resourceName: "story")
         case .people: return #imageLiteral(resourceName: "people")
         case .things: return #imageLiteral(resourceName: "things")
         case .places: return #imageLiteral(resourceName: "places")
         default: return UIImage()
+        }
+    }
+    
+    var placeholderBorderColor: CGColor {
+        switch self {
+        case .albums, .album, .story:
+            return ColorConstants.blueColor.cgColor
+        case .things, .places, .people:
+            return ColorConstants.orangeBorder.cgColor
         }
     }
     

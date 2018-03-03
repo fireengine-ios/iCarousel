@@ -711,12 +711,12 @@ class UploadOperations: Operation {
 
 
 extension UploadOperations: OperationProgressServiceDelegate {
-    func didSend(ratio: Float, for tempUUID: String) {
+    func didSend(ratio: Float, for url: URL) {
         guard isExecuting else {
             return
         }
         
-        if item.uuid == tempUUID, let uploadType = uploadType {
+        if requestObject?.currentRequest?.url == url, let uploadType = uploadType {
             CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: item)
             ItemOperationManager.default.setProgressForUploadingFile(file: item, progress: ratio)
         }

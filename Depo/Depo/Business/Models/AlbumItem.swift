@@ -33,7 +33,7 @@ class AlbumItem: BaseDataSourceItem {
         }
         
         super.init()
-        uuid = remote.uuid ?? UUID().description
+        uuid = remote.uuid ?? UUID().uuidString
         name = remote.name
         creationDate = remote.createdDate
         lastModifiDate = remote.lastModifiedDate
