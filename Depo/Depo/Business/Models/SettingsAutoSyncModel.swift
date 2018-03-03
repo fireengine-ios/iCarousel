@@ -6,6 +6,9 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
+
+
+
 class SettingsAutoSyncModel {
     
     static let isAutoSyncEnableKey  = "isAutoSyncEnable"

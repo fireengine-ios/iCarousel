@@ -13,7 +13,6 @@ struct CellsIdConstants {
     static let loginPhoneMailCellID = "LoginPhoneMailCellID"
     static let passwordCellID = "PasswordCellID"
     static let gSMUserInputCellID = "GSMUserInputCellID"
-    static let autoSyncInformCellID = "AutoSyncInformTableViewCell"
     static let autoSyncSwitcherCellID = "AutoSyncSwitcherTableViewCell"
     static let autoSyncSettingsCellID = "AutoSyncSettingsTableViewCell"
     static let settingTableViewCellID = "SettingsTableViewCell"
