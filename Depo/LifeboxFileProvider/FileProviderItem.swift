@@ -73,7 +73,7 @@ extension FileProviderItem {
         let itemIdentifier = json["uuid"].string ?? UUID().uuidString
         let myParentItemIdentifier = NSFileProviderItemIdentifier.rootContainer.rawValue
         let filename = json["name"].string ?? ""
-        let typeIdentifier = filename.utType ?? kUTTypeFolder as String
+        let typeIdentifier = filename.utTypeFromExtension ?? kUTTypeFolder as String
         
         let childItemCount = json["childCount"].number
         let documentSize = json["bytes"].number ?? 0
@@ -160,18 +160,13 @@ extension FileProviderItem {
     }
 }
 
-
-//private extension String {
-//    var utType: String? {
-//        return UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (self as NSString).pathExtension as CFString, nil)?.takeRetainedValue() as String?
-//    }
-//}
 private extension String {
-    var utType: String? {
-        let q = (self as NSString).pathExtension
-        let w = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, q as CFString, nil)
-        let r = w?.takeRetainedValue()
-        return r as String?
+    var utTypeFromExtension: String? {
+        let pathExtension = (self as NSString).pathExtension
+        if pathExtension.isEmpty {
+            return nil
+        }
+        return UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue() as String?
     }
 }
 
