@@ -367,7 +367,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
                 })
             case .deleteFaceImage:
-                action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
+                action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                     self.basePassingPresenter?.stopModeSelected()
                     self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
                 })
