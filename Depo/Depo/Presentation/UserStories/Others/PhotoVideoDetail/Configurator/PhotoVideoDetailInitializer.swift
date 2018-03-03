@@ -53,7 +53,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
         let configurator = PhotoVideoDetailModuleConfigurator()
-        configurator.configureModuleFromAlbumForViewInput(viewInput: viewController,
+        configurator.configureModuleFromFaceImageAlbumForViewInput(viewInput: viewController,
                                                           photoVideoBottomBarConfig: photoVideoBottomBarConfig,
                                                           documentsBottomBarConfig: documentsBottomBarConfig,
                                                           selecetedItem: selectedItem,

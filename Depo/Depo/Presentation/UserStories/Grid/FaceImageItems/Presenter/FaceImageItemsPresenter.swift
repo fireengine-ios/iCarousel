@@ -62,6 +62,13 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             }
         }
         
+        dataSource.isHeaderless = true
+        updateNoFilesView()
+    }
+    
+    override func getContentWithFail(errorString: String?) {
+        super.getContentWithFail(errorString: errorString)
+        
         updateNoFilesView()
     }
     
@@ -112,6 +119,8 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     func didSaveChanges(_ items: [PeopleItem]) {
         isChangeVisibilityMode = false
         dataSource.setSelectionState(selectionState: false)
+        
+        asyncOperationSucces()
         
         view.stopSelection()
         
