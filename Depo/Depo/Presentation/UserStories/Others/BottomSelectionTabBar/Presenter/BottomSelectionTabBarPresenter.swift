@@ -129,15 +129,18 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         switch type {
         case .delete:
+            MenloworksAppEvents.onDeleteClicked()
             interactor.delete(item: selectedItems)
             basePassingPresenter?.stopModeSelected()
         case .deleteFaceImage:
             basePassingPresenter?.stopModeSelected()
             basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
         case .download:
+            MenloworksAppEvents.onDownloadClicked()
             basePassingPresenter?.stopModeSelected()
             interactor.download(item: selectedItems)
         case .edit:
+            MenloworksTagsService.shared.onEditClicked()
             RouterVC().getViewControllerForPresent()?.showSpiner()
             self.interactor.edit(item: selectedItems, complition: {
                 RouterVC().getViewControllerForPresent()?.hideSpiner()
@@ -162,9 +165,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             }
             basePassingPresenter?.stopModeSelected()
         case .sync:
+            MenloworksAppEvents.onSyncClicked()
             basePassingPresenter?.stopModeSelected()
             interactor.sync(item: selectedItems)
         case .removeFromAlbum:
+            MenloworksAppEvents.onRemoveFromAlbumClicked()
             interactor.removeFromAlbum(items: selectedItems)
             basePassingPresenter?.stopModeSelected()
         case .removeFromFaceImageAlbum:
@@ -173,6 +178,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         case .addToAlbum:
             interactor.addToAlbum(items: selectedItems)
         case .print:
+            MenloworksAppEvents.onPrintClicked()
             router.showPrint(items: selectedItems)
         case .removeAlbum:
             interactor.delete(item: selectedItems)
@@ -299,7 +305,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 
             case .edit:
                 action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                    
                     RouterVC().tabBarVC?.showSpiner()
                     self.interactor.edit(item: currentItems, complition: {
                         RouterVC().tabBarVC?.hideSpiner()
@@ -307,12 +312,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 })
             case .download:
                 action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
-                    
+                    MenloworksAppEvents.onDownloadClicked()
                     self.interactor.download(item: currentItems)
                 })
             case .delete:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                    
+                    MenloworksAppEvents.onDeleteClicked()
                     self.interactor.delete(item: currentItems)
                 })
             case .deleteFaceImage:
@@ -325,6 +330,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 })
             case .share:
                 action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
+                    MenloworksAppEvents.onShareClicked()
                     self.interactor.share(item: currentItems, sourceRect: self.middleTabBarRect)
                 })
             //Photos and albumbs
@@ -342,6 +348,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 })
             case .shareAlbum:
                 action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
+                    MenloworksAppEvents.onShareClicked()
                     self.interactor.shareAlbum(items: currentItems)
                 })
             case .makeAlbumCover:
@@ -350,6 +357,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 })
             case .removeFromAlbum:
                 action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
+                    MenloworksAppEvents.onRemoveFromAlbumClicked()
                     self.interactor.removeFromAlbum(items: currentItems)
                 })
             case .backUp:
@@ -391,7 +399,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 })
             case .addToFavorites:
                 action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
-                    
+                    MenloworksEventsService.shared.onAddToFavoritesClicked()
                     self.interactor.addToFavorites(items: currentItems)
                 })
             case .removeFromFavorites:
@@ -414,6 +422,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 })
             case .print:
                     action = UIAlertAction(title: "Print", style: .default, handler: { _ in
+                        MenloworksAppEvents.onPrintClicked()
                       //TODO: will be implemented in the next package
                     })
 

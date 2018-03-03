@@ -63,6 +63,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         setCurrentPlayState()
         configureTableView()
         setupBlurBackground()
+        
+        MenloworksTagsService.shared.onSearchOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
