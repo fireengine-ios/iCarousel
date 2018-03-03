@@ -45,6 +45,14 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         }
     }
     
+    override func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
+        super.showNoFilesWith(text: text, image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
+        
+        startCreatingFilesButton.isHidden = true
+        noFilesTopLabel?.isHidden = true
+        isCanChangeVisibility = false
+    }
+    
     // MARK: - Configure navigation bar buttons
     
     private func onApplySelection() {

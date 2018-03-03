@@ -172,6 +172,8 @@ class ItemOperationManager: NSObject {
             }
         }
         
+        MenloworksAppEvents.onFileUploadedWithType(file.fileType)
+        
         currentUploadingObject = nil
         currentUploadProgress = 0
     }

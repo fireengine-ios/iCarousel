@@ -21,12 +21,8 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
     let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
     let selectButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
-        
-        navigationItem.leftBarButtonItem = nil
-        navigationItem.rightBarButtonItems = nil
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
         cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
@@ -35,10 +31,24 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         selectButton.setTitle(TextConstants.selectFolderNextButton, for: .normal)
         selectButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
         selectButton.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
-       
+        
         backButton.setTitle(TextConstants.selectFolderBackButton, for: .normal)
         backButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
         backButton.addTarget(self, action: #selector(onBackButton), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
+        
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItems = nil
+        
+        configureNavBarActions(isSelecting: false)
+    }
+    
+    override func configureNavBarActions(isSelecting: Bool = false) {
+        showRightButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {

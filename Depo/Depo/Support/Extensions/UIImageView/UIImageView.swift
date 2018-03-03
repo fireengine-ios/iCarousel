@@ -45,11 +45,12 @@ extension UIImage {
 
 extension UIImageView {
     
-    func addGradientLayer(colors: [UIColor]){
+    func addGradientLayer(colors: [UIColor]) -> CALayer {
         let gradient = CAGradientLayer()
         gradient.frame = frame
         gradient.colors = colors.map{$0.cgColor}
         layer.addSublayer(gradient)
+        return gradient
     }
     
 }
