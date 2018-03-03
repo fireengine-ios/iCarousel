@@ -12,8 +12,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
 
     // MARK: - Outlets
     
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    
     @IBOutlet weak var outputView: UIView!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -30,9 +28,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     @IBOutlet weak var musicBarContainer: UIView!
     @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var topIOS10Contraint: NSLayoutConstraint!
-    @IBOutlet weak var topIOS11Contraint: NSLayoutConstraint!
     
     private let underNavBarBarHeight: CGFloat = 53
     private let searchSectionCount = 6
@@ -62,15 +57,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         collectionView.isHidden = true
         noFilesLabel.text = TextConstants.noFilesFoundInSearch
         topBarContainer.isHidden = true
-
-        extendedLayoutIncludesOpaqueBars = true
-        automaticallyAdjustsScrollViewInsets = false
-        
-        if #available(iOS 11.0, *) {
-            view.removeConstraint(topIOS10Contraint)
-        } else {
-            view.removeConstraint(topIOS11Contraint)
-        }
         
         setupMusicBar()
         configureTableView()
