@@ -12,10 +12,19 @@ import MobileCoreServices
 
 final class FileProviderItem: NSObject, NSFileProviderItem, Map {
 
+    /// NSFileProviderItem
+    var capabilities = NSFileProviderItemCapabilities.allowsReading
+    
     let itemIdentifier: NSFileProviderItemIdentifier
     let parentItemIdentifier: NSFileProviderItemIdentifier
     let filename: String
     let typeIdentifier: String
+    
+//    @NSCopying optional public var documentSize: NSNumber? { get }
+//    @NSCopying optional public var childItemCount: NSNumber? { get }
+//    optional public var creationDate: Date? { get }
+//    optional public var contentModificationDate: Date? { get }
+    
     
     let bytes: Int64
     let isFolder: Bool
@@ -51,25 +60,15 @@ final class FileProviderItem: NSObject, NSFileProviderItem, Map {
         super.init()
     }
     
+    /// TEMP
     override convenience init() {
         self.init(itemIdentifier: "", parentItemIdentifier: "", filename: "", typeIdentifier: "", bytes: 0, isFolder: false, childCount: 0, tempDownloadURL: "", createdDate: 0, thumbnailURL: nil)
     }
-    var capabilities: NSFileProviderItemCapabilities {
-        return .allowsReading
-    }
-    
 }
 
 /// : JsonMap
 extension FileProviderItem {
     convenience init?(json: JSON) {
-        
-//        guard
-//            
-//            
-//        else {
-//            return nil
-//        }
         
         let uuid = json["uuid"].string ?? ""
         let name = json["name"].string ?? ""

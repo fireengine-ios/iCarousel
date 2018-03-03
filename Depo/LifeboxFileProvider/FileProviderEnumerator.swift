@@ -10,18 +10,19 @@ import FileProvider
 
 class FileProviderEnumerator: NSObject {
     
-    var enumeratedItemIdentifier: NSFileProviderItemIdentifier
+    private let enumeratedItemIdentifier: NSFileProviderItemIdentifier
     
     init(enumeratedItemIdentifier: NSFileProviderItemIdentifier) {
         self.enumeratedItemIdentifier = enumeratedItemIdentifier
         super.init()
     }
     
-    let fileService = FileService()
-    var page = 0
+    private let fileService = FileService()
+    private var page = 0
     
-    /// DONT NEED
-//    var items: [FileProviderItem] = []
+    var isPasscodeOn: Bool {
+        return false /// TEMP LOGIC
+    }
 }
 
 extension FileProviderEnumerator: NSFileProviderEnumerator {
@@ -30,15 +31,27 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
         // TODO: perform invalidation of server connection if necessary
     }
 
+    
+    /* Apple TODO:
+     - inspect the page to determine whether this is an initial or a follow-up request
+     
+     If this is an enumerator for a directory, the root container or all directories:
+     - perform a server request to fetch directory contents
+     If this is an enumerator for the active set:
+     - perform a server request to update your local database
+     - fetch the active set from your local database
+     
+     - inform the observer about the items returned by the server (possibly multiple times)
+     - inform the observer that you are finished with this page
+     */
     func enumerateItems(for observer: NSFileProviderEnumerationObserver, startingAt page: NSFileProviderPage) {
         
-//        let isPasscodeOn = true
-//        if isPasscodeOn {
-//            let error = NSError(domain: NSFileProviderErrorDomain,
-//                                code: NSFileProviderError.notAuthenticated.rawValue,
-//                                userInfo: [NSLocalizedDescriptionKey: "passcode"])
-//            observer.finishEnumeratingWithError(error)
-//        }
+        if isPasscodeOn {
+            let error = NSError(domain: NSFileProviderErrorDomain,
+                                code: NSFileProviderError.notAuthenticated.rawValue,
+                                userInfo: [NSLocalizedDescriptionKey: "passcode"])
+            observer.finishEnumeratingWithError(error)
+        }
         
         if enumeratedItemIdentifier.rawValue == "NSFileProviderRootContainerItemIdentifier" {
             ///folderUUID = _enumeratedItemIdentifier
@@ -48,11 +61,9 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
             switch result {
             case .success( let newItems):
                 if newItems.isEmpty {
-//                    observer.didEnumerate([]) /// DONT NEED
                     observer.finishEnumerating(upTo: nil)
                     self.page = 0
                 } else {
-//                    self.items += newItems /// DONT NEED
                     observer.didEnumerate(newItems)
                     self.page += 1
                     observer.finishEnumerating(upTo: page)
@@ -63,19 +74,6 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
                 observer.finishEnumeratingWithError(error)
             }
         }
-        
-        /* TODO:
-         - inspect the page to determine whether this is an initial or a follow-up request
-         
-         If this is an enumerator for a directory, the root container or all directories:
-         - perform a server request to fetch directory contents
-         If this is an enumerator for the active set:
-         - perform a server request to update your local database
-         - fetch the active set from your local database
-         
-         - inform the observer about the items returned by the server (possibly multiple times)
-         - inform the observer that you are finished with this page
-         */
     }
     
     /// not used

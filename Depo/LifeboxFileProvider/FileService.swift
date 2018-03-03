@@ -25,9 +25,6 @@ final class FileService {
         
         let url = String(format: fileListUrl, folderUUID, "name", "ASC", page, 100)
         
-//        [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//        [request addValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
-        
         sessionManager
             .request(url)
             .customValidate()
@@ -38,20 +35,6 @@ final class FileService {
                 case .success(let data):
                     let array = FileProviderItem.array(from: data)
                     handler(ResponseResult.success(array))
-//                    break
-//                    if let json = json as? [String: Any],
-//                        let array = json["fileList"] as? [[String: Any]]
-//                    {
-//                        for object in array {
-//                            
-//                        }
-//                        
-////                        handler(ResponseResult.success(path))
-//                    } 
-//                    else {
-//                        let error = CustomErrors.text("Server error: \(json)")
-//                        handler(ResponseResult.failed(error))
-//                    }
                 case .failure(let error):
                     handler(ResponseResult.failed(error))
                 }
