@@ -31,7 +31,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
         tableView?.dataSource = self
         tableView?.backgroundColor = UIColor.clear
         tableView?.rowHeight = UITableViewAutomaticDimension
-        tableView?.estimatedRowHeight = 83.0
+        tableView?.estimatedRowHeight = 44.0
         self.tableHConstraint = tableHConstraint
         
         registerCells(with: [CellsIdConstants.autoSyncSwitcherCellID,
@@ -47,11 +47,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
     
     func showCellsFromModels(models:[AutoSyncModel]){
         tableDataArray = models
-        tableView?.reloadData()
-        if let constraint = tableHConstraint {
-            constraint.constant = getTableH()
-            tableView?.updateConstraints()
-        }
+        reloadTableView()
     }
     
     func createSettingsAutoSyncModel () -> SettingsAutoSyncModel{
@@ -165,14 +161,11 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
             tableView?.beginUpdates()
             tableView?.endUpdates()
         }
-        
-        UIView.animate(withDuration: NumericConstants.fastAnimationDuration) {
-            if let constraint = self.tableHConstraint {
-                constraint.constant = self.getTableH()
-                self.tableView?.updateConstraints()
-            }
+
+        if let constraint = tableHConstraint {
+            constraint.constant = getTableH()
+            tableView?.updateConstraints()
         }
-        
         
     }
     
