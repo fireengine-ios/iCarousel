@@ -63,7 +63,8 @@ class SearchViewInteractor: SearchViewInteractorInput {
                         self.recentSearches.addSearch(searchText)
                     }
                     
-                    self.faceImageAllowed { result in
+                    self.faceImageAllowed { [weak self] result in
+                        guard let `self` = self else { return }
                         if result {
                             self.output?.setRecentSearches(self.recentSearches.searches)
                         } else {
@@ -131,7 +132,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
                         if let wrapOutput = self?.output {
                             wrapOutput.successWithSuggestList(list: suggestList.filter {$0.text != nil})
                         }
-                    }else {
+                    } else {
                         if let wrapOutput = self?.output {
                             wrapOutput.successWithSuggestList(list: suggestList.filter {$0.text != nil && $0.type != .people && $0.type != .thing})
                         }
