@@ -127,7 +127,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     func getSuggetion(text: String) {
         remoteItems.getSuggestion(text: text, success: { [weak self] (suggestList) in
             DispatchQueue.main.async {
-                self?.faceImageAllowed { result in
+                self?.faceImageAllowed { [weak self] result in
                     if result {
                         if let wrapOutput = self?.output {
                             wrapOutput.successWithSuggestList(list: suggestList.filter {$0.text != nil})
