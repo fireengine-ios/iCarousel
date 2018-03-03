@@ -31,6 +31,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     @IBOutlet weak var musicBarContainer: UIView!
     @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var topIOS10Contraint: NSLayoutConstraint!
+    @IBOutlet weak var topIOS11Contraint: NSLayoutConstraint!
+    
     private let underNavBarBarHeight: CGFloat = 53
     private let searchSectionCount = 6
     private let musicBar = MusicBar(frame: CGRect.zero)
@@ -48,6 +51,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     var navBarConfigurator = NavigationBarConfigurator()
     var editingTabBar: BottomSelectionTabBarViewController?
     
+    private var goBack = false
+    
     // MARK: - Life Cicle
     
     override func viewDidLoad() {
@@ -57,13 +62,21 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         collectionView.isHidden = true
         noFilesLabel.text = TextConstants.noFilesFoundInSearch
         topBarContainer.isHidden = true
-       
+
+        extendedLayoutIncludesOpaqueBars = true
+        automaticallyAdjustsScrollViewInsets = false
+        
+        if #available(iOS 11.0, *) {
+            view.removeConstraint(topIOS10Contraint)
+        } else {
+            view.removeConstraint(topIOS11Contraint)
+        }
+        
         setupMusicBar()
         subscribeToNotifications()
         configureNavigationBar()
         setCurrentPlayState()
         configureTableView()
-        setupBlurBackground()
         
         MenloworksTagsService.shared.onSearchOpen()
     }
@@ -71,10 +84,13 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.setNavigationBarHidden(true, animated: false)
         UIApplication.shared.statusBarStyle = .default
         
-        defaultNavBarStyle()
+        if #available(iOS 11.0, *) {
+            navigationBarWithGradientStyle()
+        } else {
+            defaultNavBarStyle()
+        }
         setStatusBarBackgroundColor(color: .white)
         
         editingTabBar?.view.layoutIfNeeded()
@@ -85,16 +101,26 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
                 collectionView.reloadItems(at: allVisibleCells)
             })
         }
-        setStatusBarBackgroundColor(color: UIColor.white)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if #available(iOS 11.0, *) {
+            defaultNavBarStyle()
+            setStatusBarBackgroundColor(color: .white)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         UIApplication.shared.statusBarStyle = .lightContent
-        setStatusBarBackgroundColor(color: UIColor.clear)
         output.viewWillDisappear()
         setStatusBarBackgroundColor(color: .clear)
+        if goBack {
+            homePageNavigationBarStyle()
+        }
     }
     
     deinit {
@@ -180,17 +206,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         suggestTableView.sectionHeaderHeight = 0
     }
     
-    private func setupBlurBackground() {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView)
-        view.sendSubview(toBack: blurEffectView)
-    }
-    
     private func configureNavigationBar() {
-        navigationBar.topItem?.rightBarButtonItems = []
+        navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItems = []
         
         searchBar = UISearchBar()
         searchBar.sizeToFit()
@@ -201,8 +219,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
         searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
-        let view = UIView(frame: searchBar.frame)
-        view.backgroundColor = .clear
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: 44))
+        view.backgroundColor = .white
         searchBar.addSubview(view)
         searchBar.sendSubview(toBack: view)
         
@@ -229,7 +247,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     private func setupNavigationBarForSelectionState(state: Bool) {
         if state {
-            navigationBar.topItem?.titleView = nil
+            navigationItem.titleView = nil
             
             let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 56))
             cancelButton.addTarget(self, action: #selector(onCancelSelectionButton), for: .touchUpInside)
@@ -241,18 +259,18 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             moreButton.tintColor = ColorConstants.darcBlueColor
             moreButton.accessibilityLabel = TextConstants.accessibilityMore
 
-            navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
-            navigationBar.topItem?.rightBarButtonItem = moreButton
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
+            navigationItem.rightBarButtonItem = moreButton
         } else {
             if Device.isIpad {
-                navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: TextConstants.cancel, style: .plain, target: self, action: #selector(searchBarCancelButtonClicked(_:)))
-                navigationBar.topItem?.rightBarButtonItem?.tintColor = ColorConstants.darcBlueColor
+                navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.cancel, style: .plain, target: self, action: #selector(searchBarCancelButtonClicked(_:)))
+                navigationItem.rightBarButtonItem?.tintColor = ColorConstants.darcBlueColor
             } else {
-                navigationBar.topItem?.rightBarButtonItem = nil
+                navigationItem.rightBarButtonItem = nil
             }
-            navigationBar.topItem?.title = ""
-            navigationBar.topItem?.titleView = searchBar
-            navigationBar.topItem?.leftBarButtonItem = nil
+            navigationItem.title = ""
+            navigationItem.titleView = searchBar
+            navigationItem.leftBarButtonItem = nil
         }
     }
     
@@ -265,7 +283,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func selectedItemsCountChange(with count: Int) {
-        navigationBar.topItem?.title = "\(count) \(TextConstants.accessibilitySelected)"
+        navigationItem.title = "\(count) \(TextConstants.accessibilitySelected)"
     }
     
     // MARK: - UISearchbarDelegate
@@ -302,7 +320,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         collectionView.isHidden = !noFilesView.isHidden
         setCurrentPlayState()
         
-        if let searchBar = navigationBar.topItem?.titleView as? UISearchBar, let searchBarText = searchBar.text {
+        if let searchBar = navigationItem.titleView as? UISearchBar, let searchBarText = searchBar.text {
             let requestText = text.removingPercentEncoding ?? text
             if requestText != searchBarText {
                 timerToSearch.invalidate()
@@ -372,6 +390,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func dismissController() {
+        goBack = true
         navigationController?.popViewController(animated: true)
     }
     
@@ -380,7 +399,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func setNavBarRigthItem(active isActive: Bool) {
-        navigationBar.topItem?.rightBarButtonItem?.isEnabled = isActive
+        navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
     //MARK: - Under nav bar
@@ -409,6 +428,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         topBarContainer.addConstraints(horisontalConstraints + verticalConstraints + [heightConstraint])
         
         floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
+        view.layoutIfNeeded()
     }
     
     //MARK: - Keyboard
@@ -532,7 +552,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         if (item.type == .people || item.type == .thing) && item.info != nil {
             output.openFaceImage(item: item)
-        } else if let searchBar = navigationBar.topItem?.titleView as? UISearchBar {
+        } else if let searchBar = navigationItem.titleView as? UISearchBar {
             searchBar.text = item.text?.removingPercentEncoding ?? item.text
             search(text: searchBar.text, forItem: item)
         }
