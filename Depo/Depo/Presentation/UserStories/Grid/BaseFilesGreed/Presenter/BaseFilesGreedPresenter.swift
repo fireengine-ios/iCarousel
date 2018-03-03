@@ -133,7 +133,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
         log.debug("BaseFilesGreedPresenter compoundAllFiltersAndNextItems")
-
 //        startAsyncOperation()
         interactor.nextItems(searchText,
                              sortBy: sortedRule.sortingRules,
@@ -183,7 +182,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
-        dataSource.appendCollectionView(items: [], pageNum: interactor.requestPageNum)
+        
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            self.dataSource.appendCollectionView(items: [], pageNum: self.interactor.requestPageNum)
+        }
 //        dataSource.reloadData()
 //        updateNoFilesView()
     }
@@ -197,9 +202,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         asyncOperationSucces()
         view.stopRefresher()
         
+        
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
-
-        dataSource.appendCollectionView(items: items, pageNum: interactor.requestPageNum)
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+           self.dataSource.appendCollectionView(items: items, pageNum: self.interactor.requestPageNum)
+        }
+        
 
 //        dataSource.reloadData()
         updateNoFilesView()

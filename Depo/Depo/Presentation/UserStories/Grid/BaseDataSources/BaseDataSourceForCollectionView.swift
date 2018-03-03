@@ -285,11 +285,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             localFileasAppendedCallback(originalItemsArray)
                             return
                         }
+                        tempoArray.append(contentsOf: localItems)
                                                                         
-                          tempoArray.append(contentsOf: localItems)
-                                                                        
-                                                                        
-                            switch self.currentSortType {
+                        switch self.currentSortType {
                             case .timeUp, .timeUpWithoutSection:
                                 tempoArray.sort{$0.creationDate! > $1.creationDate!}
                             case .timeDown, .timeDownWithoutSection:
@@ -306,7 +304,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 tempoArray.sort{$0.metaDate > $1.metaDate}
                             case .metaDataTimeDown:
                                 tempoArray.sort{$0.metaDate < $1.metaDate}
-                            }
+                        }
                                                                         
                     localFileasAppendedCallback(tempoArray)
                      debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
