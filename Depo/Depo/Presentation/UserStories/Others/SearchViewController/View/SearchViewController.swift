@@ -73,10 +73,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         }
         
         setupMusicBar()
+        configureTableView()
         subscribeToNotifications()
         configureNavigationBar()
         setCurrentPlayState()
-        configureTableView()
         
         MenloworksTagsService.shared.onSearchOpen()
     }
