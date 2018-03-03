@@ -221,6 +221,8 @@
 		78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */; };
 		78B02CBD200D1AD500D11CD2 /* ContactSyncResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */; };
 		78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */; };
+		78B2D344204A94E000D096DC /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78B2D343204A94E000D096DC /* MPush.framework */; };
+		78B2D345204A94E000D096DC /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78B2D343204A94E000D096DC /* MPush.framework */; };
 		78D6C8FF1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */; };
 		78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */; };
 		78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */; };
@@ -2202,7 +2204,6 @@
 		8C0E8FDE1FDEBDFF00789C91 /* OptInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE75A1FCC3ECF00C23CBD /* OptInController.swift */; };
 		8C0E8FE11FDEBDFF00789C91 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9019CAC9FE00FD1E03 /* Security.framework */; };
-		8C0E8FE31FDEBDFF00789C91 /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD6261FD135CB000344BD /* libMPush.a */; };
 		8C0E8FE41FDEBDFF00789C91 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05224A9619DC345B00214767 /* AssetsLibrary.framework */; };
 		8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CDB43311F865B0B00789FA6 /* CoreLocation.framework */; };
 		8C0E8FE61FDEBDFF00789C91 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFE92F01F5EC666008A3B72 /* MessageUI.framework */; };
@@ -2472,7 +2473,6 @@
 		AF744E3CD7A5DD8E7D6C30BB /* UserInfoSubViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021DEBE120BC8745E74C3B8B /* UserInfoSubViewViewController.swift */; };
 		B02F86BF64856149537A10F3 /* SyncContactsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD14ED875730C75E5AD4E0 /* SyncContactsRouterInput.swift */; };
 		B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */; };
-		B51FD6391FD18FDB000344BD /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD6261FD135CB000344BD /* libMPush.a */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
@@ -3504,6 +3504,7 @@
 		78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsModuleOutput.swift; sourceTree = "<group>"; };
 		78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncResponse.swift; sourceTree = "<group>"; };
 		78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncParametrs.swift; sourceTree = "<group>"; };
+		78B2D343204A94E000D096DC /* MPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPush.framework; sourceTree = "<group>"; };
 		78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
 		78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsConfigurator.swift; sourceTree = "<group>"; };
 		78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsInitializer.swift; sourceTree = "<group>"; };
@@ -4666,8 +4667,6 @@
 		B0E129D217E4E979AFF5939D /* SyncContactsInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsInteractorInput.swift; sourceTree = "<group>"; };
 		B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationRouterInput.swift; sourceTree = "<group>"; };
 		B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInitializer.swift; sourceTree = "<group>"; };
-		B51FD6251FD135CA000344BD /* MPush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPush.h; sourceTree = "<group>"; };
-		B51FD6261FD135CB000344BD /* libMPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMPush.a; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
@@ -5149,9 +5148,9 @@
 			files = (
 				8C0E8FE11FDEBDFF00789C91 /* CoreBluetooth.framework in Frameworks */,
 				8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */,
-				8C0E8FE31FDEBDFF00789C91 /* libMPush.a in Frameworks */,
 				8C0E8FE41FDEBDFF00789C91 /* AssetsLibrary.framework in Frameworks */,
 				8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */,
+				78B2D345204A94E000D096DC /* MPush.framework in Frameworks */,
 				8C0E8FE61FDEBDFF00789C91 /* MessageUI.framework in Frameworks */,
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
@@ -5196,12 +5195,12 @@
 				CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */,
 				B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */,
 				CE51AD161EF90853005DCEE0 /* Security.framework in Frameworks */,
-				B51FD6391FD18FDB000344BD /* libMPush.a in Frameworks */,
 				CE51AD121EF90853005DCEE0 /* AssetsLibrary.framework in Frameworks */,
 				7CDB43321F865B0B00789FA6 /* CoreLocation.framework in Frameworks */,
 				7CFE92F11F5EC666008A3B72 /* MessageUI.framework in Frameworks */,
 				CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */,
 				7CF6BDE41F0BA1E10066709E /* AVKit.framework in Frameworks */,
+				78B2D344204A94E000D096DC /* MPush.framework in Frameworks */,
 				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318D71EFBDDB600E25989 /* iAd.framework in Frameworks */,
 				CE3318D51EFBDDA200E25989 /* CFNetwork.framework in Frameworks */,
@@ -8892,8 +8891,8 @@
 		8CFF866E1F0F96D100520D18 /* VendorsFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				78B2D343204A94E000D096DC /* MPush.framework */,
 				8C06AC2E2008AD6F003D8E05 /* CropySDK */,
-				B51FD6241FD135BA000344BD /* Menloworks */,
 				8CFF866F1F0F96E600520D18 /* ContactSyncSDK */,
 				56B9E92B1DED750600DE1011 /* AppRater */,
 				05A938071AF6AE7C00AE2892 /* TurkcellUpdaterSDK */,
@@ -9219,15 +9218,6 @@
 				26960B2B062ACC0F92ACEE26 /* UserInfoSubViewInitializer.swift */,
 			);
 			path = Configurator;
-			sourceTree = "<group>";
-		};
-		B51FD6241FD135BA000344BD /* Menloworks */ = {
-			isa = PBXGroup;
-			children = (
-				B51FD6261FD135CB000344BD /* libMPush.a */,
-				B51FD6251FD135CA000344BD /* MPush.h */,
-			);
-			path = Menloworks;
 			sourceTree = "<group>";
 		};
 		B54BFF32202B20250018AF82 /* autosync-widget */ = {
@@ -15173,6 +15163,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -15227,6 +15218,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -15275,6 +15267,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -15324,6 +15317,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -15503,6 +15497,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -15558,6 +15553,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -15607,6 +15603,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -15657,6 +15654,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
