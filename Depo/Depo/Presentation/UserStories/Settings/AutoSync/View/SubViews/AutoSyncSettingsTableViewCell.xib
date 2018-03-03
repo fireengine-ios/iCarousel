@@ -20,21 +20,34 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="227.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twB-27-PfH">
-                        <rect key="frame" x="16" y="11" width="44" height="21.5"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gyd-QP-pVm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="wLb-6O-Doe"/>
+                        </constraints>
+                        <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="changeHeight:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YOA-JD-MqD"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IB3-TP-pf2">
+                        <rect key="frame" x="249" y="11" width="51" height="21.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxF-iC-tT5">
-                        <rect key="frame" x="293" y="11" width="11" height="24"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDownArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Her-KU-zms">
+                        <rect key="frame" x="304" y="17.5" width="8" height="8"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="24" id="3rv-yW-A7R"/>
+                            <constraint firstAttribute="height" constant="8" id="4bb-Ic-FgZ"/>
+                            <constraint firstAttribute="width" constant="8" id="qcz-f8-lax"/>
                         </constraints>
-                        <state key="normal" image="dropDownArrow"/>
-                    </button>
+                    </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1MI-yf-IMK">
-                        <rect key="frame" x="0.0" y="51" width="320" height="177"/>
+                        <rect key="frame" x="0.0" y="50.5" width="320" height="177.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRc-qb-Pue" customClass="AutoSyncSettingsOptionView" customModule="lifebox" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
@@ -73,10 +86,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61z-Jn-NEA" customClass="AutoSyncSettingsOptionView" customModule="lifebox" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="60.5" width="320" height="56"/>
+                                <rect key="frame" x="0.0" y="60.5" width="320" height="56.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCG-Fu-vEA">
-                                        <rect key="frame" x="8" y="0.0" width="312" height="56"/>
+                                        <rect key="frame" x="8" y="0.0" width="312" height="56.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Button">
@@ -87,7 +100,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="VRa-xn-4vE">
-                                        <rect key="frame" x="288" y="20" width="16" height="16"/>
+                                        <rect key="frame" x="288" y="20.5" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="1Ec-Ep-OyZ"/>
                                             <constraint firstAttribute="width" constant="16" id="FRe-5c-ZxP"/>
@@ -109,7 +122,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDh-XY-ZsJ" customClass="AutoSyncSettingsOptionView" customModule="lifebox" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="120.5" width="320" height="56.5"/>
+                                <rect key="frame" x="0.0" y="121" width="320" height="56.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJW-t7-fGg">
                                         <rect key="frame" x="8" y="0.0" width="312" height="56.5"/>
@@ -146,33 +159,35 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="177.5" id="0ei-DF-fBv"/>
+                        </constraints>
                     </stackView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IB3-TP-pf2">
-                        <rect key="frame" x="234" y="11" width="51" height="21.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstItem="Her-KU-zms" firstAttribute="centerY" secondItem="Gyd-QP-pVm" secondAttribute="centerY" id="3ON-C6-vEp"/>
                     <constraint firstAttribute="bottom" secondItem="1MI-yf-IMK" secondAttribute="bottom" id="4UL-fl-AUO"/>
-                    <constraint firstItem="twB-27-PfH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="64c-FI-Pjr"/>
-                    <constraint firstItem="uxF-iC-tT5" firstAttribute="leading" secondItem="IB3-TP-pf2" secondAttribute="trailing" constant="8" id="77G-Ut-BLR"/>
-                    <constraint firstItem="uxF-iC-tT5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="7ce-6c-n9N"/>
-                    <constraint firstItem="uxF-iC-tT5" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="H2S-jc-QI1"/>
-                    <constraint firstItem="1MI-yf-IMK" firstAttribute="top" secondItem="uxF-iC-tT5" secondAttribute="bottom" constant="16" id="KC8-hh-CHz"/>
+                    <constraint firstItem="IB3-TP-pf2" firstAttribute="centerY" secondItem="Gyd-QP-pVm" secondAttribute="centerY" id="5kd-Rl-Hkc"/>
+                    <constraint firstItem="Gyd-QP-pVm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="D00-Ah-Okg"/>
+                    <constraint firstAttribute="trailing" secondItem="Her-KU-zms" secondAttribute="trailing" constant="8" id="LWD-BL-Dow"/>
                     <constraint firstItem="IB3-TP-pf2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="PMb-t1-rkY"/>
-                    <constraint firstItem="twB-27-PfH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="PdE-a7-i7V"/>
+                    <constraint firstItem="Her-KU-zms" firstAttribute="leading" secondItem="IB3-TP-pf2" secondAttribute="trailing" constant="4" id="Sak-kX-7aS"/>
+                    <constraint firstItem="Gyd-QP-pVm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fmT-Xg-NYW"/>
                     <constraint firstItem="1MI-yf-IMK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="g7u-dJ-Cjv"/>
+                    <constraint firstItem="1MI-yf-IMK" firstAttribute="top" secondItem="Gyd-QP-pVm" secondAttribute="bottom" constant="8" id="kY2-Ay-EPw"/>
+                    <constraint firstAttribute="trailing" secondItem="Gyd-QP-pVm" secondAttribute="trailing" id="m2K-v3-vl1"/>
                     <constraint firstAttribute="trailing" secondItem="1MI-yf-IMK" secondAttribute="trailing" id="nBp-8K-b3T"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="selectLabel" destination="IB3-TP-pf2" id="Ncr-6X-j9O"/>
-                <outlet property="syncItemTypeName" destination="twB-27-PfH" id="WiA-Bw-SoA"/>
+                <outlet property="dropDownArrow" destination="Her-KU-zms" id="YZ3-LQ-wic"/>
+                <outlet property="expandButton" destination="Gyd-QP-pVm" id="uCn-eg-xRc"/>
+                <outlet property="expandHeightConstraint" destination="0ei-DF-fBv" id="CEq-vU-z5j"/>
+                <outlet property="optionLabel" destination="IB3-TP-pf2" id="2oo-Hm-DYG"/>
+                <outlet property="optionsStackView" destination="1MI-yf-IMK" id="4Tt-IV-ngo"/>
                 <outletCollection property="optionsViews" destination="VRc-qb-Pue" collectionClass="NSMutableArray" id="RP0-zY-yjY"/>
                 <outletCollection property="optionsViews" destination="61z-Jn-NEA" collectionClass="NSMutableArray" id="gC0-hG-sxf"/>
                 <outletCollection property="optionsViews" destination="aDh-XY-ZsJ" collectionClass="NSMutableArray" id="XKI-JJ-Oqo"/>

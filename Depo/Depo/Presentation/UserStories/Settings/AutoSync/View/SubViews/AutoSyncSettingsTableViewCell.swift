@@ -8,46 +8,93 @@
 
 import UIKit
 
-enum AutoSyncType {
-    case image
-    case video
+
+protocol AutoSyncSettingsTableViewCellDelegate: class {
+    func didChange(setting: AutoSyncSetting)
+    func didChangeHeight()
 }
 
 
 class AutoSyncSettingsTableViewCell: UITableViewCell {
+    weak var delegate: AutoSyncSettingsTableViewCellDelegate?
     
-    @IBOutlet private weak var syncItemTypeName: UILabel!
-    @IBOutlet private weak var selectLabel: UILabel!
+    @IBOutlet weak var expandHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var optionsStackView: UIStackView!
+    @IBOutlet private weak var dropDownArrow: UIImageView!
+    @IBOutlet private weak var optionLabel: UILabel!
+    @IBOutlet weak var expandButton: UIButton!
     @IBOutlet private var optionsViews: [AutoSyncSettingsOptionView]!
     
-    private var isFullHeight: Bool = false
-    
-    private var autoSyncType: AutoSyncType = .image
-    private let options: [AutoSyncSettingsOption] = [.never, .wifiOnly, .wifiAndCellular]
-    private var selectedOptionIndex: Int = 0
-    
-    var cellHeight: Float {
-        return isFullHeight ? 228 : 57
-    }
-    
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        for (index, view) in optionsViews.enumerated() {
-            view.configure(with: options[index], isSelected: (index == selectedOptionIndex) ? true : false)
+    private var isFullHeight: Bool = false {
+        didSet {
+            if isFullHeight != oldValue {
+                updateViews()
+                delegate?.didChangeHeight()
+            }
         }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
+    
+    private var autoSyncSetting: AutoSyncSetting! {
+        didSet {
+            if autoSyncSetting != oldValue {
+                updateViews()
+                delegate?.didChange(setting: autoSyncSetting)
+            }
+        }
+    }
+    private let options: [AutoSyncOption] = [.never, .wifiOnly, .wifiAndCellular]
+    
+    
+    private var expandHeight: CGFloat {
+        return isFullHeight ? 177.5 : 0.0
     }
     
     
-    func configurateCellWith(model: AutoSyncModel) {
+    //MARK: - Lifecycle
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
         
     }
+
+    
+    //MARK: - Public
+    
+    func configurate(with setting: AutoSyncSetting) {
+        autoSyncSetting = setting
+    }
+    
+    
+    //MARK: - Private
+
+    @IBAction func changeHeight(_ sender: Any) {
+        isFullHeight = !isFullHeight
+    }
+    
+    private func updateViews() {
+        for (index, view) in optionsViews.enumerated() {
+            let option = options[index]
+            view.configure(with: option, isSelected: autoSyncSetting.option == option)
+            view.delegate = self
+        }
+        expandButton.setTitle(autoSyncSetting.syncItemType.text(), for: .normal)
+        optionLabel.text = isFullHeight ? "Select" : autoSyncSetting.option.text()
+        optionsStackView.isHidden = !isFullHeight
+        expandHeightConstraint.constant = expandHeight
+    }
+    
     
 }
+
+
+extension AutoSyncSettingsTableViewCell: AutoSyncSettingsOptionViewDelegate {
+    func didSelect(option: AutoSyncOption) {
+        autoSyncSetting.option = option
+        updateViews()
+    }
+}
+
+
+
+

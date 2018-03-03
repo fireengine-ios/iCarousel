@@ -8,26 +8,8 @@
 
 import UIKit
 
-enum AutoSyncSettingsOption {
-    case wifiOnly
-    case wifiAndCellular
-    case never
-    
-    func text() -> String {
-        switch self {
-        case .never:
-            return "Newer"
-        case .wifiOnly:
-            return "Wi-Fi"
-        case .wifiAndCellular:
-            return "Wi-Fi and Cellular"
-        }
-    }
-}
-
-
 protocol AutoSyncSettingsOptionViewDelegate: class {
-    func didChange(isSelected: Bool, for option: AutoSyncSettingsOption)
+    func didSelect(option: AutoSyncOption)
 }
 
 
@@ -37,13 +19,17 @@ final class AutoSyncSettingsOptionView: UIView {
     @IBOutlet private weak var button: UIButton!
     @IBOutlet private weak var checkboxImageView: UIImageView!
     
-    private var option: AutoSyncSettingsOption = .never {
+    private var option: AutoSyncOption = .never {
         willSet { button.setTitle(newValue.text(), for: .normal) }
     }
     
     private var isSelected: Bool = false {
         willSet { setCheckmark(selected: newValue) }
-        didSet { delegate?.didChange(isSelected: isSelected, for: option) }
+        didSet {
+            if isSelected, isSelected != oldValue {
+                delegate?.didSelect(option: option)
+            }
+        }
     }
 
     
@@ -52,13 +38,13 @@ final class AutoSyncSettingsOptionView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        isSelected = false
+        checkboxImageView.alpha = 0.0
     }
     
     
     //MARK: - Public
     
-    func configure(with option: AutoSyncSettingsOption, isSelected: Bool) {
+    func configure(with option: AutoSyncOption, isSelected: Bool) {
         self.option = option
         self.isSelected = isSelected
     }
@@ -67,7 +53,7 @@ final class AutoSyncSettingsOptionView: UIView {
     //MARK: - Private
     
     private func setCheckmark(selected: Bool) {
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
+        UIView.animate(withDuration: NumericConstants.fastAnimationDuration) {
             self.checkboxImageView.alpha = selected ? 1.0 : 0.0
         }
     }
@@ -76,7 +62,7 @@ final class AutoSyncSettingsOptionView: UIView {
     //MARK: - Actions
     
     @IBAction private func buttonTapped() {
-        isSelected = !isSelected
+        isSelected = true
     }
     
 }

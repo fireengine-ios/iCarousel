@@ -11,7 +11,7 @@ import UIKit
 enum AutoSyncCellType {
     case headerLike//same as switcher but larger
     case typeSwitcher
-    case typeSwitherActivator
+//    case typeSwitherActivator
 //    case typeInformation
 }
 

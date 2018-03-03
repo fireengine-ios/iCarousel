@@ -13,13 +13,15 @@ protocol AutoSyncDataSourceDelegate: class {
     func mobileDataEnabledFor(model: AutoSyncModel)
 }
 
-class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource, AutoSyncSwitcherTableViewCellDelegate, AutoSyncInformTableViewCellCheckBoxStateProtocol {
+class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView?
     @IBOutlet weak var tableHConstraint: NSLayoutConstraint?
     var isFromSettings: Bool = false
     
     var tableDataArray = [AutoSyncModel]()
+    
+    private var autoSyncSettings: AutoSyncSettings?
     
     weak var delegate: AutoSyncDataSourceDelegate?
     
@@ -28,10 +30,11 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.backgroundColor = UIColor.clear
+        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.estimatedRowHeight = 83.0
         self.tableHConstraint = tableHConstraint
         
         registerCells(with: [CellsIdConstants.autoSyncSwitcherCellID,
-                             CellsIdConstants.autoSyncInformCellID,
                              CellsIdConstants.autoSyncSettingsCellID])
     }
     
@@ -55,8 +58,8 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
         let model = SettingsAutoSyncModel()
         model.isAutoSyncEnable = tableDataArray[0].isSelected
         //model.isSyncViaWifi = tableDataArray[1].isSelected
-        model.mobileDataPhotos = tableDataArray[3].isSelected
-        model.mobileDataVideo = tableDataArray[4].isSelected
+        model.mobileDataPhotos = tableDataArray[1].isSelected
+        model.mobileDataVideo = tableDataArray[2].isSelected
         return model
     }
     
@@ -95,23 +98,17 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
         //FIXME: make it more bandable
         if let model = tableDataArray.first, model.cellType == .headerLike, model.isSelected == false {
             return 1
-        } else {
-            for model in tableDataArray {
-                 if model.cellType == .typeSwitherActivator, model.isSelected == false {
-                    return 3
-                }
-            }
         }
         return tableDataArray.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = tableDataArray[indexPath.row]
-        if model.cellType == .typeSwitcher {
-            return 228.0
-        }
-        return 83.0
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let model = tableDataArray[indexPath.row]
+//        if model.cellType == .typeSwitcher {
+//            return 228.0
+//        }
+//        return 83.0
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = tableDataArray[indexPath.row]//TODO: ework enum or change it to SWITCH - case
@@ -127,40 +124,11 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSettingsCellID, for: indexPath)
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSettingsTableViewCell
-//            autoSyncCell.delegate = self
-            autoSyncCell.configurateCellWith(model: model)
-//            autoSyncCell.setColors(isFromSettings: isFromSettings)
+            autoSyncCell.configurate(with: AutoSyncSetting(syncItemType: .photo, option: .never))
+            autoSyncCell.delegate = self
             return autoSyncCell
         }
         
-    }
-    
-    // MARK: AutoSyncSwitcherTableViewCellDelegate
-    
-    func onValueChanged(model: AutoSyncModel, cell : AutoSyncSwitcherTableViewCell){
-        let indexPath = tableView?.indexPath(for: cell)
-        tableDataArray[(indexPath?.row)!] = model
-        
-        if model.cellType == .headerLike {
-            if cell.switcher.isOn {
-                delegate?.enableAutoSync()
-            } else {
-                reloadTableView()
-            }
-        }
-        if model.cellType == .typeSwitcher, model.isSelected{
-            delegate?.mobileDataEnabledFor(model: model)
-        }
-    }
-    
-    func checkBoxChangedState(state: Bool, model: AutoSyncModel, cell: AutoSyncInformTableViewCell) {
-        let indexPath = tableView?.indexPath(for: cell)
-        tableDataArray[(indexPath?.row)!] = model
-        
-        if model.cellType == .typeSwitherActivator {
-            tableView?.reloadData()
-            cell.separatorView.isHidden = state
-        }
     }
     
     func reloadTableView() {
@@ -170,5 +138,43 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
             tableView?.updateConstraints()
         }
     }
+
+}
+
+extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
+    func onValueChanged(model: AutoSyncModel, cell : AutoSyncSwitcherTableViewCell){
+        let indexPath = tableView?.indexPath(for: cell)
+        tableDataArray[(indexPath?.row)!] = model
+        
+        if model.cellType == .headerLike {
+            if cell.switcher.isOn {
+                delegate?.enableAutoSync()
+            }
+        }
+    }
+}
+
+
+extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
+    func didChange(setting: AutoSyncSetting) {
+        
+    }
+    
+    func didChangeHeight() {
+        UIView.performWithoutAnimation {
+            tableView?.beginUpdates()
+            tableView?.endUpdates()
+        }
+        
+        UIView.animate(withDuration: NumericConstants.fastAnimationDuration) {
+            if let constraint = self.tableHConstraint {
+                constraint.constant = self.getTableH()
+                self.tableView?.updateConstraints()
+            }
+        }
+        
+        
+    }
+    
     
 }
