@@ -2356,6 +2356,8 @@
 		8C6FB6981F0B9F8400B552A3 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */; };
 		8C72D3DF204A8C990086EE4B /* AssetsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72D3DE204A8C990086EE4B /* AssetsCache.swift */; };
 		8C72D3E0204A8C990086EE4B /* AssetsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72D3DE204A8C990086EE4B /* AssetsCache.swift */; };
+		8C72D3E1204C62A20086EE4B /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0A201B63A800173045 /* ImageScrollView.swift */; };
+		8C72D3E2204C62A30086EE4B /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0A201B63A800173045 /* ImageScrollView.swift */; };
 		8C75D24A1FDD1BF700CBE1A7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */; };
 		8C7786881F3F38D9005CB432 /* MusicBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786861F3F38D9005CB432 /* MusicBar.swift */; };
 		8C7786891F3F38D9005CB432 /* MusicBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C7786871F3F38D9005CB432 /* MusicBar.xib */; };
@@ -2610,10 +2612,8 @@
 		CE3B3AF1202888240002558C /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B3AF0202888240002558C /* OrientationManager.swift */; };
 		CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D05201B11BF00173045 /* PVViewerController.swift */; };
 		CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
-		CE3E4D0B201B63A800173045 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0A201B63A800173045 /* ImageScrollView.swift */; };
 		CE3E4D0D201B696500173045 /* UIButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0C201B696500173045 /* UIButton+Properties.swift */; };
 		CE3E4D0E201B698F00173045 /* UIButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0C201B696500173045 /* UIButton+Properties.swift */; };
-		CE3E4D0F201B699F00173045 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0A201B63A800173045 /* ImageScrollView.swift */; };
 		CE3E4D10201B69A200173045 /* PVViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D05201B11BF00173045 /* PVViewerController.swift */; };
 		CE3E4D11201B69A900173045 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
 		CE3E4D13201C70A100173045 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D12201C70A100173045 /* ImageManager.swift */; };
@@ -13098,7 +13098,6 @@
 				8C0E8DA61FDEBDFF00789C91 /* PasswordCell.swift in Sources */,
 				8C0B919A20170E5600A5BA81 /* DuplicatedContactsViewOutput.swift in Sources */,
 				8C0E8DA71FDEBDFF00789C91 /* RegistrationViewInput.swift in Sources */,
-				CE3E4D0F201B699F00173045 /* ImageScrollView.swift in Sources */,
 				8C0E8DA81FDEBDFF00789C91 /* RegistrationViewOutput.swift in Sources */,
 				8C0E8DA91FDEBDFF00789C91 /* RegistrationViewController.swift in Sources */,
 				8C0E8DAA1FDEBDFF00789C91 /* HelpAndSupportRouter.swift in Sources */,
@@ -13233,6 +13232,7 @@
 				8C0E8E131FDEBDFF00789C91 /* PrintInteractor.swift in Sources */,
 				8C0E8E141FDEBDFF00789C91 /* PhoneVereficationRouterInput.swift in Sources */,
 				8C0E8E151FDEBDFF00789C91 /* PhoneVereficationRouter.swift in Sources */,
+				8C72D3E2204C62A30086EE4B /* ImageScrollView.swift in Sources */,
 				8C0E8E161FDEBDFF00789C91 /* PhoneVereficationConfigurator.swift in Sources */,
 				8C0E8E171FDEBDFF00789C91 /* PhoneVereficationInitializer.swift in Sources */,
 				8C0E8E181FDEBDFF00789C91 /* HelpAndSupportViewController.swift in Sources */,
@@ -14587,7 +14587,6 @@
 				8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
 				4A8CC320201A02A600C040C4 /* FaceImageConfigurator.swift in Sources */,
 				05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */,
-				CE3E4D0B201B63A800173045 /* ImageScrollView.swift in Sources */,
 				E197FC956A2CBF90DCEB2E3D /* SelectNameInteractorOutput.swift in Sources */,
 				463A9A904E22B54222190099 /* SelectNameInteractor.swift in Sources */,
 				9807260D203468D9004E1505 /* SearchDataSource.swift in Sources */,
@@ -14611,6 +14610,7 @@
 				0D9510CB65B6DA6F2D661754 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				7859299120060E85003F8AB3 /* ManageContactsRouter.swift in Sources */,
 				CE055F3F20383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */,
+				8C72D3E1204C62A20086EE4B /* ImageScrollView.swift in Sources */,
 				4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				016636E0593FCDC66B6F5CD0 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				7C6945E820039F4A00152344 /* FreeAppSpaceInteractor.swift in Sources */,

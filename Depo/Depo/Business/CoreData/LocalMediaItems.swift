@@ -61,7 +61,6 @@ extension CoreDataStack {
         
         inProcessAppendingLocalFiles = true
         
-
         let localMediaStorage = LocalMediaStorage.default
         let newBgcontext = self.newChildBackgroundContext
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
@@ -75,55 +74,22 @@ extension CoreDataStack {
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
             return
         }
-        
+        print("All local files started  \((start)) seconds")
         save(items: notSaved, context: newBgcontext) { [weak self] in
             print("All local files added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
         }
     }
-//
-//        DispatchQueue(label: "com.lifebox.localFles").async {
-//            let localMediaStorage = LocalMediaStorage.default
-//            let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
-//            let newBgcontext = self.newChildBackgroundContext
-//            let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
-//
-//            let start = Date()
-//            var addedObjects = [WrapData]()
-//
-//            let semaphore = DispatchSemaphore(value: 0)
-//            var readyItemsCount = 0
-////            while readyItemsCount < notSaved.count {
-//                let nextItemsAmount = min(notSaved.count - readyItemsCount, NumericConstants.numberOfLocalItemsOnPage)
-//                let pageItems = Array(notSaved[readyItemsCount..<nextItemsAmount])
-//
-//                localMediaStorage.getInfo(from: pageItems, completion: { (assetsInfo) in
-//                    assetsInfo.forEach {
-//                        let wrapedItem =  WrapData(info: $0)
-//                        _ = MediaItem(wrapData: wrapedItem, context:newBgcontext)
-//
-//                        self.saveDataForContext(context: newBgcontext, saveAndWait: true)
-//                        addedObjects.append(wrapedItem)
-//                        readyItemsCount += nextItemsAmount
-//                    }
-//
-//                    ItemOperationManager.default.addedLocalFiles(items: addedObjects)
-//                    semaphore.signal()
-//                })
-//                semaphore.wait()
-////            }
-//
-//            debugPrint("All images and videos have been saved in \(Date().timeIntervalSince(start)) seconds")
-//            self.inProcessAppendingLocalFiles = false
-//        }
-//    }
 
     func getLocalFilesForPhotoVideoPage(filesType: FileType, sortType: SortedRules,
                        pageRemoteItem: [Item], paginationEnd: Bool,
                        firstPage: Bool,
                        filesCallBack: @escaping LocalFilesCallBack) {
-        
+//        ///////////
+//        filesCallBack([])
+//        return
+//        //////////
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                     in: backgroundContext)
@@ -162,9 +128,7 @@ extension CoreDataStack {
             return
             
         }
-        
-        
-        
+
         var md5s = [String]()
         var uuids = [String]()
         pageRemoteItem.forEach{
@@ -184,7 +148,7 @@ extension CoreDataStack {
         
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicateString, fileTypePredicate, datePredicate])
         
-        //NSPredicate(format: "%@ AND %@", basePredicateString, datePredicate)
+    
         
         if let localItems = try? backgroundContext.fetch(request), (localItems.count >= 100 || !inProcessAppendingLocalFiles) {
             let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
@@ -280,26 +244,32 @@ extension CoreDataStack {
 
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
 
-        queue.async {
+        queue.async { [weak self] in
             LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] assetsInfo in
-
-                var addedObjects = [WrapData]()
-                assetsInfo.forEach {
-                    let wrapedItem =  WrapData(info: $0)
-                    _ = MediaItem(wrapData: wrapedItem, context: context)
+                autoreleasepool {
+                    var addedObjects = [WrapData]()
+                    assetsInfo.forEach { element in
+                        autoreleasepool {
+                            let wrapedItem =  WrapData(info: element)
+                            _ = MediaItem(wrapData: wrapedItem, context: context)
+                        
+                            addedObjects.append(wrapedItem)
+                        }
+                    }
                     
-                    addedObjects.append(wrapedItem)
+                    self?.saveDataForContext(context: context, saveAndWait: true)
+                    
+                    ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
+                    
+                    
+                    self?.pageAppendedCallBack?(addedObjects)
+                    
+                    print("local files added: \(assetsInfo.count)")
+                    
+                    self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
+                    
                 }
-                
-                self?.saveDataForContext(context: context, saveAndWait: true)
-                ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
-                
-                
-                self?.pageAppendedCallBack?(addedObjects)
-                
-                print("local files added: \(assetsInfo.count)")
-                
-                self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
+               
             })
         }
     }

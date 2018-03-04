@@ -62,7 +62,7 @@ class CoreDataStack: NSObject {
     var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     
     override init() {
-
+        
         mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         
@@ -153,7 +153,10 @@ class CoreDataStack: NSObject {
     
     @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true) {
         debugPrint("save context")
-        let saveBlock: VoidHandler = {
+        let saveBlock: VoidHandler = { [weak self] in
+            guard let `self` = self else {
+                return
+            }
             do {
                 try context.save()
                 if !self.inProcessAppendingLocalFiles {

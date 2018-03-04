@@ -121,7 +121,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         let options = PHImageRequestOptions()
         options.deliveryMode = .highQualityFormat
         options.isNetworkAccessAllowed = false
-        options.isSynchronous = false
+        options.isSynchronous = true
         return options
     }()
     

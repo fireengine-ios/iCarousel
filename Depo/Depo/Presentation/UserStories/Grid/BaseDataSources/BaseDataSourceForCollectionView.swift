@@ -271,7 +271,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 if originalItemsArray.isEmpty, let lastItemFromPreviousPage = allMediaItems.last {
                     lastRemote = [lastItemFromPreviousPage]
                 }
-                let isFirstPage = (pageNum == 1)// ? true : false
+                let isFirstPage = (pageNum == 1)
                 CoreDataStack.default.getLocalFilesForPhotoVideoPage(filesType: specificFilters,
                                                                      sortType: currentSortType,
                                                                      pageRemoteItem: lastRemote,
@@ -761,7 +761,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     //MARK: collectionViewDataSource
     
     func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
-        guard allItems.count > 0 else {
+        guard allItems.count >= indexPath.section,
+        allItems[indexPath.section].count >= indexPath.row else {
             return nil
         }
         return allItems[indexPath.section][indexPath.row]

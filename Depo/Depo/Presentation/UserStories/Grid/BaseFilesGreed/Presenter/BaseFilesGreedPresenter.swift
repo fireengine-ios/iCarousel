@@ -179,7 +179,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func getContentWithSuccessEnd() {
         log.debug("BaseFilesGreedPresenter getContentWithSuccessEnd")
         debugPrint("???getContentWithSuccessEnd()")
-        asyncOperationSucces()
+//        asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
         
@@ -199,8 +199,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (view == nil){
             return
         }
-        asyncOperationSucces()
-        view.stopRefresher()
+//        asyncOperationSucces()
+//        view.stopRefresher()
         
         
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
@@ -213,7 +213,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
 
 //        dataSource.reloadData()
-        updateNoFilesView()
+//        updateNoFilesView()
     }
     
     func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
@@ -224,7 +224,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         debugPrint("???getContentWithSuccessEnd()")
         asyncOperationSucces()
-        view.stopRefresher()
+//        view.stopRefresher()
         if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
             dataSourceForArray.configurateWithArray(array: array)
         } else {
@@ -326,7 +326,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func filesAppendedAndSorted() {
-        updateNoFilesView()
+        DispatchQueue.main.async {
+            self.view.stopRefresher()
+            self.updateNoFilesView()
+            self.asyncOperationSucces()
+        }
     }
 
     func didDelete(items: [BaseDataSourceItem]) {
