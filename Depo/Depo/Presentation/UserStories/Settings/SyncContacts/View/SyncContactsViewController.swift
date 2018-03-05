@@ -191,7 +191,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     }
     
     func resetProgress() {
-        gradientLoaderIndicator.progress = 0
+        gradientLoaderIndicator.resetProgress()
     }
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
