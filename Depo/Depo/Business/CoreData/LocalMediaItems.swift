@@ -83,22 +83,19 @@ extension CoreDataStack {
     }
 
     func getLocalFilesForPhotoVideoPage(filesType: FileType, sortType: SortedRules,
-                       pageRemoteItem: [Item], paginationEnd: Bool,
+                       pageRemoteItems: [Item], paginationEnd: Bool,
                        firstPage: Bool,
                        filesCallBack: @escaping LocalFilesCallBack) {
-//        ///////////
-//        filesCallBack([])
-//        return
-//        //////////
+
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                     in: backgroundContext)
         
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         
-        if pageRemoteItem.count == 0 {
-            
-            if let localItems = try? backgroundContext.fetch(request), (localItems.count >= 100 || !inProcessAppendingLocalFiles) {
+        if pageRemoteItems.isEmpty {
+            if let localItems = try? backgroundContext.fetch(request),
+                (localItems.count >= 100 || !inProcessAppendingLocalFiles) {
                 let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                 filesCallBack(wrapedLocalItems)
             } else {
@@ -108,8 +105,8 @@ extension CoreDataStack {
                 }
             }
             return
-        } else if pageRemoteItem.count == 1, paginationEnd {
-            if let lastRemoteItem = pageRemoteItem.last {
+        } else if pageRemoteItems.count == 1, paginationEnd {
+            if let lastRemoteItem = pageRemoteItems.last {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateLastPage(sortType: sortType, lastItem: lastRemoteItem)])
                 if let localItems = try? backgroundContext.fetch(request) {
                     let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
@@ -118,7 +115,7 @@ extension CoreDataStack {
             }
             return
         } else if firstPage {
-            if let lastRemoteItem = pageRemoteItem.last {
+            if let lastRemoteItem = pageRemoteItems.last {
                 request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem)])
                 if let localItems = try? backgroundContext.fetch(request) {
                     let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
@@ -131,7 +128,7 @@ extension CoreDataStack {
 
         var md5s = [String]()
         var uuids = [String]()
-        pageRemoteItem.forEach{
+        pageRemoteItems.forEach{
             md5s.append($0.md5)
             uuids.append($0.uuid)
         }
@@ -142,7 +139,7 @@ extension CoreDataStack {
         
         var datePredicate = NSPredicate()
         
-        if let lastRemoteItem = pageRemoteItem.last, let firstItem = pageRemoteItem.first {
+        if let lastRemoteItem = pageRemoteItems.last, let firstItem = pageRemoteItems.first {
             datePredicate = getSortingPredicate(sortType: sortType, firstItem: firstItem, lastItem: lastRemoteItem)
         }
         

@@ -274,7 +274,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 let isFirstPage = (pageNum == 1)
                 CoreDataStack.default.getLocalFilesForPhotoVideoPage(filesType: specificFilters,
                                                                      sortType: currentSortType,
-                                                                     pageRemoteItem: lastRemote,
+                                                                     pageRemoteItems: lastRemote,
                                                                      paginationEnd: isPaginationDidEnd,
                                                                      firstPage: isFirstPage,
                                                                      filesCallBack: { [weak self] localItems in
@@ -581,9 +581,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func reloadData() {
-        collectionView?.reloadData()
-        
-        resetCachedAssets()
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+            self.resetCachedAssets()
+        }
     }
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){
