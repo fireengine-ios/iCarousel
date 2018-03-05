@@ -13,7 +13,8 @@ class SelectFolderPresenter: DocumentsGreedPresenter{
         super.viewIsReady(collectionView: collectionView)
                 
         log.debug("SelectFolderPresenter viewIsReady")
-
+        
+        dataSource.canSelectionState = false
         dataSource.canReselect = false
         dataSource.enableSelectionOnHeader = false
         dataSource.maxSelectionCount = 0
@@ -26,9 +27,9 @@ class SelectFolderPresenter: DocumentsGreedPresenter{
 
         if let view_ = view as? SelectFolderViewController {
             if (view_.selectedFolder != nil) {
-                view_.onFolderSelected(folder: view_.selectedFolder!)
+                view_.onFolderSelected(folderID: view_.selectedFolder!.uuid)
             } else {
-                UIApplication.showErrorAlert(message: TextConstants.selectFolderEmptySelectionError)
+                view_.onFolderSelected(folderID: "")
             }
         }
     }

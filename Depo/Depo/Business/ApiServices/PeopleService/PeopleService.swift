@@ -12,6 +12,28 @@ enum FaceImageType {
     case people
     case places
     case things
+    
+    var description: String {
+        switch self {
+        case .people:
+            return "People"
+        case .places:
+            return "Places"
+        case .things:
+            return "Things"
+        }
+    }
+    
+    var myStreamType: MyStreamType {
+        switch self {
+        case .people:
+            return .people
+        case .places:
+            return .places
+        case .things:
+            return .things
+        }
+    }
 }
 
 final class FaceImageService: BaseRequestService {
@@ -129,6 +151,20 @@ final class PeopleService: BaseRequestService {
         let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: param, handler: handler)
     }
+    
+    func deletePhotosFromAlbum(id: Int64, photos: [Item], success: PhotosAlbumOperation?, fail: FailResponse?) {
+        log.debug("PeopleService deletePhotosFromAlbum")
+        
+        let parameters = DeletePhotosFromPeopleAlbum(id: id, photos: photos)
+        
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+            log.debug("PeopleService deletePhotosFromAlbum success")
+            
+            success?()
+        }, fail: fail)
+        executePostRequest(param: parameters, handler: handler)
+    }
+    
 }
 
 final class PeopleItemsService: RemoteItemsService {
@@ -298,6 +334,25 @@ final class PeopleChangeNameParameters: BaseRequestParametrs {
     }
 }
 
+final class DeletePhotosFromPeopleAlbum: BaseRequestParametrs {
+    let id: Int64
+    let photos: [Item]
+    
+    init (id: Int64, photos: [Item]){
+        self.id = id
+        self.photos = photos
+    }
+    
+    override var requestParametrs: Any{
+        let photosUUID = photos.map { $0.id }
+        return photosUUID
+    }
+    
+    override var patch: URL {
+        let path: String = String(format: RouteRequests.peopleDeletePhotos, id)
+        return URL(string: path, relativeTo: super.patch)!
+    }
+}
 
 final class PeopleItem: Item {
     let responseObject: PeopleItemResponse

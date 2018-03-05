@@ -36,10 +36,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     //MARK : BasePresenter
     
-    override func outputView() -> Waiting? {
-        return view as? Waiting
-    }
-    
     func viewIsReady(collectionView: UICollectionView) {
         dataSource.setupCollectionView(collectionView: collectionView, filters: nil)
         dataSource.delegate = self
@@ -51,8 +47,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         
         setupTopBar()
         subscribeDataSource()
-//        sortedRule = .albumlettersAZ
-//        dataSource.currentSortType = sortedRule
+
     }
     
     func viewWillDisappear() {
@@ -81,12 +76,9 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         sortedRule = unwrapedConfig.defaultSortType.sortedRulesConveted
     }
 
-    func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder) {
-        showedSpinner = true
-        self.outputView()?.showSpiner()
-//        dataSource.configurateWithData(collectionData: [[Item]]())
-//        dataSource.updateDisplayngType(type: .list)
-        interactor.searchItems(by: searchText, sortBy: sortBy, sortOrder: sortOrder)
+    func searchWith(searchText: String, item: SuggestionObject?, sortBy: SortType, sortOrder: SortOrder) {
+        showSpinner()
+        interactor.searchItems(by: searchText, item: item, sortBy: sortBy, sortOrder: sortOrder)
     }
     
     func getSuggestion(text: String) {
@@ -97,13 +89,21 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         view.successWithSuggestList(list: list)
     }
     
-    func setRecentSearches(_ recentSearches: [String]) {
+    func setRecentSearches(_ recentSearches: [SearchCategory: [SuggestionObject]]) {
         view.setRecentSearches(recentSearches)
     }
     
     func failedSearch() {
-        showedSpinner = false
-        self.outputView()?.hideSpiner()
+        hideSpinner()
+    }
+    
+    func getAlbum(albumItem: AlbumItem, forItem item: Item) {
+        hideSpinner()
+        router.openFaceImageItemPhotos(item: item, album: albumItem)
+    }
+    
+    func failedGetAlbum() {
+        hideSpinner()
     }
     
     func isShowedSpinner() -> Bool {
@@ -111,20 +111,20 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func getContentWithSuccess(items: [Item]) {
-        if (view == nil){
+        if view == nil {
             return
         }
         asyncOperationSucces()
         
-        self.showedSpinner = false
+        showedSpinner = false
         //items.sorted(by: {$0.creationDate! > $1.creationDate!})
         dataSource.dropData()
 //        dataSource.configurateWithSimpleData(collectionData: files, sortingRules: sortedRule, types: filters, syncType: syncType)
         
-        if (items.count == 0){
+        if items.isEmpty {
             let flag = interactor.needShowNoFileView()
             view.setCollectionViewVisibilityStatus(visibilityStatus: flag)
-        }else{
+        } else {
             view.setCollectionViewVisibilityStatus(visibilityStatus: false)
             dataSource.appendCollectionView(items: items)
         }
@@ -132,8 +132,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func endSearchRequestWith(text: String) {
-        showedSpinner = false
-        outputView()?.hideSpiner()
+        hideSpinner()
         view.endSearchRequestWith(text: text)
         //DBOUT
 //        dataSource.fetchService.performFetch(sortingRules: .timeUp, filtes: [.name(text)])
@@ -167,7 +166,9 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
-        if item.fileType.isUnSupportedOpenType {
+        if item.fileType.isFaceImageType {
+            openFaceImage(item: item)
+        } else if item.fileType.isUnSupportedOpenType {
             let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
             moduleOutput?.previewSearchResultsHide()
@@ -189,8 +190,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func getCellSizeForList() -> CGSize {
         return CGSize(width: view.getCollectionViewWidth(), height: 65)
-    }
-    
+    }    
     
     func getCellSizeForGreed() -> CGSize {
         var cellWidth:CGFloat = 180
@@ -325,6 +325,32 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         }
     }
     
+    func openFaceImageItems(category: SearchCategory) {
+        router.openFaceImageItems(category: category)
+    }
+    
+    func openFaceImage(item: SuggestionObject) {
+        showSpinner()
+        interactor.openFaceImageForSuggest(item: item)
+    }
+    
+    func openFaceImage(item: BaseDataSourceItem) {
+        showSpinner()
+        interactor.openFaceImageForSearch(item: item)
+    }
+    
+    //MARK: - Spinner
+    
+    private func showSpinner() {
+        showedSpinner = true
+        view.showSpinner()
+    }
+    
+    private func hideSpinner() {
+        showedSpinner = false
+        view.hideSpinner()
+    }
+    
     // MARK: Bottom Bar
     
     private func canShow3DotsButton() -> Bool {
@@ -409,6 +435,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func changeCover() { }
+    
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
 }
 
 extension SearchViewPresenter: TabBarActionHandler {

@@ -29,7 +29,15 @@ final class BiometricsManagerImp: BiometricsManager {
     private static let isEnabledKey = "isEnabledKey"
     var isEnabled: Bool {
         get { return UserDefaults.standard.bool(forKey: BiometricsManagerImp.isEnabledKey) }
-        set { UserDefaults.standard.set(newValue, forKey: BiometricsManagerImp.isEnabledKey) }
+        set {
+            if isEnabled != newValue {
+                MenloworksTagsService.shared.onTouchIDSettingsChanged(newValue)
+            }
+            if newValue {
+                MenloworksEventsService.shared.onTouchIDSet()
+            }
+            UserDefaults.standard.set(newValue, forKey: BiometricsManagerImp.isEnabledKey)
+        }
     }
     
     var status: BiometricsStatus {

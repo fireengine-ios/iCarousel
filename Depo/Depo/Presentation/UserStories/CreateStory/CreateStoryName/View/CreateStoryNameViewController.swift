@@ -77,7 +77,7 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
         closeAnimation()
     }
     
-    private func closeAnimation(completion: (() -> Void)? = nil) {
+    private func closeAnimation(completion: VoidHandler? = nil) {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
             self.contentView.transform = NumericConstants.scaleTransform

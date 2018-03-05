@@ -24,15 +24,13 @@ final class ServerStatusError {
         static let invalidEmail = "EMAIL_FIELD_IS_INVALID"
         static let existPhone = "PHONE_NUMBER_IS_ALREADY_EXIST"
         static let existEmail = "EMAIL_ALREADY_EXISTS"
-        static let verifyEmail = "PASSWORD_FIELD_IS_EMPTY"
-        static let invalidPhone = "PASSWORD_FIELD_IS_EMPTY"
+        static let verifyEmail = "VERIFY_EXISTING_EMAIL"
+        static let invalidPhone = "PHONE_NUMBER_IS_INVALID"
         static let invalidPassword = "INVALID_PASSWORD"
-        static let invalidPasswordConsecutive = "PASSWORD_FIELD_IS_EMPTY"
-        static let invalidPasswordSame = "PASSWORD_FIELD_IS_EMPTY"
-        static let invalidPasswordLengthExceeded = "PASSWORD_FIELD_IS_EMPTY"
-        static let invalidPasswordBelowLimit = "PASSWORD_FIELD_IS_EMPTY"
-        static let manyRequest = "PASSWORD_FIELD_IS_EMPTY"
-        
+        static let invalidPasswordConsecutive = "SEQUENTIAL_CHARACTERS"
+        static let invalidPasswordSame = "SAME_CHARACTERS"
+        static let invalidPasswordLengthExceeded = "PASSWORD_LENGTH_EXCEEDED"
+        static let invalidPasswordBelowLimit = "PASSWORD_LENGTH_IS_BELOW_LIMIT"
         static let TOO_MANY_REQUESTS = "TOO_MANY_REQUESTS"
         static let EMAIL_IS_INVALID = "EMAIL_IS_INVALID"
         static let EMAIL_IS_ALREADY_EXIST = "EMAIL_IS_ALREADY_EXIST"
@@ -79,9 +77,6 @@ extension ServerStatusError: LocalizedError {
             
         case ErrorKeys.invalidPasswordBelowLimit:
             return TextConstants.errorInvalidPasswordBelowLimit
-            
-        case ErrorKeys.manyRequest:
-            return TextConstants.errorManyRequest
             
         case ErrorKeys.TOO_MANY_REQUESTS:
             return TextConstants.TOO_MANY_REQUESTS

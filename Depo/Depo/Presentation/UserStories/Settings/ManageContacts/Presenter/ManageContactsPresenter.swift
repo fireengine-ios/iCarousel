@@ -38,7 +38,7 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
     
     //MARK: Interactor Output
     
-    func deleteContact(_ completion: @escaping (() -> Void)) {
+    func deleteContact(_ completion: @escaping VoidHandler) {
         router.deleteContact(completion)
     }
     

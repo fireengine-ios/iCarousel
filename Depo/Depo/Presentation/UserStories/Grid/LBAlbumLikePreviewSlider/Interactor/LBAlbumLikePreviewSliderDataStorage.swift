@@ -27,12 +27,30 @@ enum MyStreamType: Int {
     
     var placeholder: UIImage {
         switch self {
-        case .albums: return UIImage()
-        case .story: return UIImage()
+        case .albums: return #imageLiteral(resourceName: "album")
+        case .story: return #imageLiteral(resourceName: "story")
         case .people: return #imageLiteral(resourceName: "people")
         case .things: return #imageLiteral(resourceName: "things")
         case .places: return #imageLiteral(resourceName: "places")
         default: return UIImage()
+        }
+    }
+    
+    var placeholderBorderColor: CGColor {
+        switch self {
+        case .albums, .album, .story:
+            return ColorConstants.blueColor.cgColor
+        case .things, .places, .people:
+            return ColorConstants.orangeBorder.cgColor
+        }
+    }
+    
+    func isMyStreamSliderType() -> Bool {
+        switch self {
+        case .albums, .story, .people, .things, .places:
+            return true
+        case .album:
+            return false
         }
     }
 }
@@ -93,6 +111,11 @@ class LBAlbumLikePreviewSliderDataStorage {
     var currentItems: [SliderItem] = []
     
     func addNew(item: SliderItem) {
-        currentItems.append(item)
+        if let type = item.type, type.isMyStreamSliderType(),
+           let index = currentItems.index(where: {$0.type == item.type}) {
+            currentItems[index] = item
+        } else {
+            currentItems.append(item)
+        }
     }
 }

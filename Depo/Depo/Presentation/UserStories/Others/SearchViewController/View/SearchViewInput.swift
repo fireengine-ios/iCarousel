@@ -11,7 +11,7 @@ import Foundation
 protocol SearchViewInput: class {
     func endSearchRequestWith(text: String)
     func successWithSuggestList(list: [SuggestionObject])
-    func setRecentSearches(_ recentSearches: [String])
+    func setRecentSearches(_ recentSearches: [SearchCategory: [SuggestionObject]])
     
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool)
     func getCollectionViewWidth() -> CGFloat
@@ -24,4 +24,7 @@ protocol SearchViewInput: class {
     func selectedItemsCountChange(with count: Int)
     
     func setNavBarRigthItem(active isActive: Bool)
+    
+    func showSpinner()
+    func hideSpinner()
 }

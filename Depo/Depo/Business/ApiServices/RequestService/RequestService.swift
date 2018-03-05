@@ -8,7 +8,6 @@
 
 import Foundation
 
-typealias RequestHeaderParametrs = [String:String]
 typealias RequestResponse = (Data?, URLResponse?, Error?) -> Swift.Void
 typealias RequestFileDownloadResponse = (URL?, URLResponse?, Error?) -> Swift.Void
 typealias RequestFileUploadResponse =  (Data?, URLResponse?, Error?) -> Swift.Void
@@ -183,11 +182,11 @@ class RequestService {
     }
     
     func requestProgressHander(_ progress: Alamofire.Progress, request: URLRequest) {
-        guard let tempUUIDfromURL = request.url?.lastPathComponent
+        guard let url = request.url
             else { return }
         
         SingletonStorage.shared.progressDelegates.invoke(invocation: { (delegate) in
-            delegate.didSend(ratio: Float(progress.fractionCompleted), for: tempUUIDfromURL)
+            delegate.didSend(ratio: Float(progress.fractionCompleted), for: url)
         })
     }
 }

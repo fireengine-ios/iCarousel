@@ -110,7 +110,8 @@ final class FilterPhotoCard: BaseView {
         guard let image = photoImageView.image else { return }
         let vc = PVViewerController.initFromNib()
         vc.image = image
-        RouterVC().pushViewController(viewController: vc)
+        let nController = UINavigationController(rootViewController: vc)
+        RouterVC().presentViewController(controller: nController)
     }
 
     
@@ -142,10 +143,9 @@ final class FilterPhotoCard: BaseView {
         let item = WrapData(asset: asset)
         
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
-
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
-        RouterVC().pushViewController(viewController: controller)
+        let nController = UINavigationController(rootViewController: controller)
+        RouterVC().presentViewController(controller: nController)
     }
     
     private func saveToDevice(image: UIImage) {

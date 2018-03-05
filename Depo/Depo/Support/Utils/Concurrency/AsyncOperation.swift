@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import Foundation
+
 open class AsyncOperation: Operation {
     public enum State {
         case ready

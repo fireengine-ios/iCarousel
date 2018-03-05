@@ -34,6 +34,12 @@ final class ImageScrollView: UIScrollView {
     private let multiplyScrollGuardFactor: CGFloat = 0.999
     private let zoomFactorFromMinWhenDoubleTap: CGFloat = 2
     
+    lazy var doubleTapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognizer))
+        gesture.numberOfTapsRequired = 2
+        return gesture
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -55,13 +61,7 @@ final class ImageScrollView: UIScrollView {
 //        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         imageView.isUserInteractionEnabled = true
         addSubview(imageView)
-        addDoubleTapZoom()
-    }
-    
-    private func addDoubleTapZoom() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognizer))
-        tapGesture.numberOfTapsRequired = 2
-        imageView.addGestureRecognizer(tapGesture)
+        imageView.addGestureRecognizer(doubleTapGesture)
     }
     
     @objc private func doubleTapGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
@@ -98,11 +98,7 @@ final class ImageScrollView: UIScrollView {
         let xScale = bounds.width / imageSize.width
         let yScale = bounds.height / imageSize.height
         
-        // fill width if the image and phone are both portrait or both landscape; otherwise take smaller scale
-        let imagePortrait = imageSize.height > imageSize.width
-        let phonePortrait = bounds.height >= bounds.width
-        
-        var minScale = (imagePortrait == phonePortrait) ? xScale : min(xScale, yScale)
+        var minScale = min(xScale, yScale)
         let maxScale = maxScaleFromMinScale * minScale
         
         /// don't let minScale exceed maxScale. (If the image is smaller than the screen, we don't want to force it to be zoomed.)
@@ -119,15 +115,15 @@ final class ImageScrollView: UIScrollView {
         var frameToCenter = imageView.frame
         
         /// center horizontally
-        if frameToCenter.size.width < bounds.width {
-            frameToCenter.origin.x = (bounds.width - frameToCenter.size.width) / 2
+        if frameToCenter.width < bounds.width {
+            frameToCenter.origin.x = (bounds.width - frameToCenter.width) / 2
         } else {
             frameToCenter.origin.x = 0
         }
         
         /// center vertically
-        if frameToCenter.size.height < bounds.height {
-            frameToCenter.origin.y = (bounds.height - frameToCenter.size.height) / 2
+        if frameToCenter.height < bounds.height {
+            frameToCenter.origin.y = (bounds.height - frameToCenter.height) / 2
         } else {
             frameToCenter.origin.y = 0
         }

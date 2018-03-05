@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosOrderViewInput, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewStoryReorderViewDelegate {
+class CreateStoryPhotosOrderViewController: BaseViewController, CreateStoryPhotosOrderViewInput, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewStoryReorderViewDelegate {
 
     var output: CreateStoryPhotosOrderViewOutput!
     

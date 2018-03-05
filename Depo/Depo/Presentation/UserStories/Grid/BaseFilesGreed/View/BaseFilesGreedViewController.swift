@@ -38,7 +38,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var noFilesViewCenterOffsetConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var startCreatingFilesButton: BlueButtonWithWhiteText!
+    @IBOutlet weak var startCreatingFilesButton: BlueButtonWithNoFilesWhiteText!
     
     @IBOutlet weak var topBarContainer: UIView!
     
@@ -91,13 +91,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
         noFilesLabel.textColor = ColorConstants.textGrayColor
-        noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         
         noFilesTopLabel?.text = TextConstants.folderEmptyText
         noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
         noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
-        startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
         
         output.viewIsReady(collectionView: collectionView)
@@ -128,13 +127,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         configurateViewForPopUp()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        /// need when device was rotated
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
     func configurateViewForPopUp(){
         CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
@@ -157,10 +149,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     // MARK: - SearchBarButtonPressed
     
    func configureNavBarActions(isSelecting: Bool = false) {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { _ in
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
             let router = RouterVC()
             let searchViewController = router.searchView()
-            router.pushViewControllerWithoutAnimation(viewController: searchViewController)
+            searchViewController.transitioningDelegate = self
+            self?.navigationController?.delegate = searchViewController as? BaseViewController
+            router.pushViewController(viewController: searchViewController)
         })
         let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
             self?.output.moreActionsPressed(sender: NavigationBarList().more)
@@ -170,7 +164,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Void) {
+    func configurateFreeAppSpaceActions(deleteAction: @escaping VoidHandler) {
         let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { _ in
             deleteAction()
         })
@@ -185,7 +179,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
     
-    func configurateFaceImagePeopleActions(showHideAction: @escaping () -> Void) {
+    func configurateFaceImagePeopleActions(showHideAction: @escaping VoidHandler) {
         let showHide = NavBarWithAction(navItem: NavigationBarList().showHide, action: { _ in
             showHideAction()
         })
@@ -226,8 +220,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     @objc func loadData() {
-        output.onReloadData()
-        contentSlider?.reloadAllData()
+        if !output.isSelectionState() {
+            output.onReloadData()
+            contentSlider?.reloadAllData()
+        } else {
+            refresher.endRefreshing()
+        }
     }
     
     func stopRefresher() {
@@ -263,12 +261,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
-    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String) {
+    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
         noFilesLabel.text = text
         noFilesImage.image = image
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
-        topBarContainer.isHidden = false
+        topBarContainer.isHidden = needHideTopBar
     }
     
     func showNoFilesTop() {
@@ -337,7 +335,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
         collectionView.updateConstraints()
         
-        collectionView.clipsToBounds = false
         collectionView.contentInset = UIEdgeInsets(top: BaseFilesGreedViewController.sliderH + hTopPopUpView, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(subView)
         sliderController.view.frame = subView.bounds
@@ -365,7 +362,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     private func setupViewForPopUp(){
-        collectionView.clipsToBounds = false
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(scrolliblePopUpView)
         
@@ -404,10 +400,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             
             self.view.layoutIfNeeded()
             self.collectionView.contentInset = UIEdgeInsets(top: h + sliderH, left: 0, bottom: 25, right: 0)
-            let point = CGPoint(x: 0, y: -h - sliderH)
-            self.collectionView.setContentOffset(point, animated: true)
-            
-            
         }
         
         refresherY = -calculatedH + 30

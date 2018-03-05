@@ -124,6 +124,7 @@ extension PackagesPresenter: OptInControllerDelegate {
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
     func successedPromocode() {
+        MenloworksAppEvents.onPromocodeActivated()
         view?.successedPromocode()
     }
     

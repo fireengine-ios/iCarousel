@@ -102,6 +102,13 @@ class RouterVC: NSObject {
         }
     }
     
+    func pushOnPresentedView(viewController: UIViewController){
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.getViewControllerForPresent()?.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func pushViewController(viewController: UIViewController) {
         if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar{
             let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
@@ -111,6 +118,16 @@ class RouterVC: NSObject {
         navigationController?.pushViewController(viewController, animated: true)
         viewController.navigationController?.isNavigationBarHidden = false
         
+        if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
+            tabBarViewController.setBGColor(color: baseView.getBacgroundColor())
+        }
+        
+    }
+    
+    func setBacgroundColor(color: UIColor){
+        if let tabBarViewController = rootViewController as? TabBarViewController {
+            tabBarViewController.setBGColor(color: color)
+        }
     }
     
     func pushViewControllerWithoutAnimation(viewController: UIViewController) {
@@ -124,6 +141,10 @@ class RouterVC: NSObject {
     
     func popViewController() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func popToViewController(_ vc: UIViewController) {
+        navigationController?.popToViewController(vc, animated: true)
     }
     
     func popCreateStory() {
@@ -147,8 +168,16 @@ class RouterVC: NSObject {
         }
     }
     
+    func getViewControllerForPresent() -> UIViewController?{
+        if let nController = navigationController?.presentedViewController as? UINavigationController,
+            let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController{
+            return viewController
+        }
+        return navigationController?.viewControllers.last
+    }
+    
     func presentViewController(controller: UIViewController){
-        if let lastViewController = navigationController?.viewControllers.last{
+        if let lastViewController = getViewControllerForPresent(){
             if controller.popoverPresentationController?.sourceView == nil,
                 controller.popoverPresentationController?.barButtonItem == nil {
                 controller.popoverPresentationController?.sourceView = lastViewController.view
@@ -156,6 +185,18 @@ class RouterVC: NSObject {
             lastViewController.present(controller, animated: true, completion: {
             
             })
+        }
+    }
+    
+    func showSpiner(){
+        if let lastViewController = getViewControllerForPresent(){
+            lastViewController.showSpinerIncludeNavigatinBar()
+        }
+    }
+    
+    func hideSpiner(){
+        if let lastViewController = getViewControllerForPresent(){
+            lastViewController.hideSpinerIncludeNavigatinBar()
         }
     }
     
@@ -414,6 +455,8 @@ class RouterVC: NSObject {
     
     func searchView(output: SearchModuleOutput? = nil) -> UIViewController {
         let controller = SearchViewInitializer.initializeAllFilesViewController(with: "SearchView", output: output)
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
         return controller
     }
     
@@ -508,6 +551,17 @@ class RouterVC: NSObject {
         return c
     }
     
+    func filesDetailFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController {
+        let controller = PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                         selectedItem: fileObject,
+                                                                                         allItems: items,
+                                                                                         albumUUID: albumUUID,
+                                                                                         albumItem: albumItem)
+        let c = controller as! PhotoVideoDetailViewController
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return c
+    }
+    
     //MARK: Albums list
     
     func albumsListController() -> BaseFilesGreedChildrenViewController {
@@ -538,8 +592,8 @@ class RouterVC: NSObject {
     
     //MARK: People list
     
-    func peopleListController() -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageItemsInitializer.initializePeopleController(with: "BaseFilesGreedViewController")
+    func peopleListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageItemsInitializer.initializePeopleController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
     }
     

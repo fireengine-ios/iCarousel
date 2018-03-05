@@ -102,7 +102,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         if type == .delete{
             ItemOperationManager.default.deleteItems(items: [removedObject])
         }
-        if type == .removeFromAlbum{
+        if type == .removeFromAlbum || type == .removeFromFaceImageAlbum {
             ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
         }
         
@@ -112,4 +112,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
         }
     }
+    
+    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) { }
+    
+    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) { }
+    
+    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String) { }
 }

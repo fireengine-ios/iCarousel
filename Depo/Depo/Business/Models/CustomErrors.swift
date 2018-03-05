@@ -16,7 +16,7 @@ extension CustomErrors: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .unknown:
-            return TextConstants.errorUnknown
+            return "Unknown error"
         case .text(let str):
             return str
         }

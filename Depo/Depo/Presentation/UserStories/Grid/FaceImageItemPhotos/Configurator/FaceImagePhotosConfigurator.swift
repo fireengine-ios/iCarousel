@@ -10,14 +10,19 @@ import UIKit
 
 final class FaceImagePhotosConfigurator {
     
+    var baseSortTypes: [MoreActionsConfig.SortRullesType] {
+        return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+    }
+    
     func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) {
         let router = FaceImagePhotosRouter()
         router.view = viewController
+        router.item = item
         
         let presenter = FaceImagePhotosPresenter(item: item)
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
-                                                                   selectionModeTypes: [.createStory, .delete])
+                                                                   selectionModeTypes: [.createStory, .deleteFaceImage])
         
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()
@@ -30,7 +35,7 @@ final class FaceImagePhotosConfigurator {
         presenter.router = router
         presenter.faceImageItemsModuleOutput = moduleOutput
         
-        let remoteServices = FaceImageDetailService(albumUUID: album.uuid, requestSize: 40)
+        let remoteServices = FaceImageDetailService(albumUUID: album.uuid, requestSize: RequestSizeConstant.faceImageItemsRequestSize)
         
         let interactor = FaceImagePhotosInteractor(remoteItems: remoteServices)
         interactor.output = presenter
@@ -40,7 +45,7 @@ final class FaceImagePhotosConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromAlbum],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromFaceImageAlbum],
                                                style: .default, tintColor: nil)
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
@@ -54,5 +59,18 @@ final class FaceImagePhotosConfigurator {
         
         presenter.item = item
         presenter.coverPhoto = album.preview
+        
+        let gridListTopBarConfig = GridListTopBarConfig(
+            defaultGridListViewtype: .List,
+            availableSortTypes: baseSortTypes,
+            defaultSortType: .TimeNewOld,
+            availableFilter: false,
+            showGridListButton: false
+        )
+        
+        presenter.topBarConfig = gridListTopBarConfig
+        let gridListTopBar = GridListTopBar.initFromXib()
+        viewController.underNavBarBar = gridListTopBar
+        gridListTopBar.delegate = viewController
     }
 }

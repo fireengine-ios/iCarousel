@@ -10,6 +10,7 @@ import UIKit
 
 protocol AutoSyncDataSourceDelegate: class {
     func enableAutoSync()
+    func mobileDataEnabledFor(model: AutoSyncModel)
 }
 
 class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource, AutoSyncSwitcherTableViewCellDelegate, AutoSyncInformTableViewCellCheckBoxStateProtocol {
@@ -142,6 +143,9 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
             } else {
                 reloadTableView()
             }
+        }
+        if model.cellType == .typeSwitcher, model.isSelected{
+            delegate?.mobileDataEnabledFor(model: model)
         }
     }
     

@@ -41,6 +41,7 @@ class BaseViewController: UIViewController {
         super.viewDidAppear(animated)
         
         showTabBarIfNeed()
+        RouterVC().setBacgroundColor(color: getBacgroundColor())
     }
     
     func getMainYForView(view: UIView)->CGFloat{
@@ -97,4 +98,29 @@ class BaseViewController: UIViewController {
         return needShowTabBar
     }
     
+    func getBacgroundColor() -> UIColor {
+        return UIColor.white
+    }
+    
+}
+
+extension BaseViewController: UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
+    
+    private func pushPopAnimatorForPresentation(presenting: Bool) -> UIViewControllerAnimatedTransitioning? {
+        let animator = PushPopAnimator()
+        animator.presenting = presenting
+        return animator
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return pushPopAnimatorForPresentation(presenting: operation == .push)
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return pushPopAnimatorForPresentation(presenting: true)
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return pushPopAnimatorForPresentation(presenting: false)
+    }
 }

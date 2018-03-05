@@ -34,7 +34,7 @@ protocol SettingsRouterInput {
     
     func closeEnterPasscode()
     
-    func openPasscode(handler: @escaping () -> Void)
+    func openPasscode(handler: @escaping VoidHandler)
 
     func goToConnectedToNetworkFailed()
     

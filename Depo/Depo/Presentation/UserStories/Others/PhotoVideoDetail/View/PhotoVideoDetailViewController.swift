@@ -16,6 +16,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    @IBOutlet private weak var viewForBottomBar: UIView!
+    
+    @IBOutlet private weak var bottomBlackView: UIView!
+    
     private lazy var player: MediaPlayer = factory.resolve()
     
     private var localPlayer: AVPlayer?
@@ -23,7 +27,40 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     var hideActions = false
     var editingTabBar: BottomSelectionTabBarViewController!
-    private var needToScrollAfterRotation = false
+    private var needToScrollAfterRotation = true
+    
+    private var isFullScreen = false {
+        didSet {
+            ///  ANIMATION
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { 
+//                UIApplication.shared.isStatusBarHidden = self.isFullScreen
+//            }
+//            navigationController?.setNavigationBarHidden(self.isFullScreen, animated: true)
+//            
+//            if isFullScreen {
+//                UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+//                    self.editingTabBar.view.transform = CGAffineTransform(translationX: 0, y: self.editingTabBar.view.bounds.height)
+//                }, completion: {_ in
+//                    self.editingTabBar.view.isHidden = self.isFullScreen
+//                })
+//                
+//            } else {      
+//                editingTabBar.view.isHidden = self.isFullScreen
+//                UIView.animate(withDuration: NumericConstants.animationDuration) { 
+//                    self.editingTabBar.view.transform = .identity
+//                }
+//            }
+            
+            /// without animation
+            
+            Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+            editingTabBar.view.isHidden = isFullScreen
+            navigationController?.navigationBar.isHidden = isFullScreen
+            
+            bottomBlackView.isHidden = self.isFullScreen
+            viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
+        }
+    } 
     
     private var selectedIndex = 0 {
         didSet {
@@ -48,11 +85,29 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 11.0, *) {
+            collectionView.contentInsetAdjustmentBehavior = .never
+        } else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
+        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        automaticallyAdjustsScrollViewInsets = false
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isHidden = true
+        
+        let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+        cancelButton.setTitle(TextConstants.backTitle, for: .normal)
+        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
+        
+        let barButtonLeft = UIBarButtonItem(customView: cancelButton)
+        navigationItem.leftBarButtonItem = barButtonLeft
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,22 +128,23 @@ final class PhotoVideoDetailViewController: BaseViewController {
             editingTabBar.view.isHidden = true
         }
         
-        output.viewIsReady(view: view)
+        output.viewIsReady(view: viewForBottomBar)
+        setStatusBarBackgroundColor(color: UIColor.black)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.isHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         setNavigationBackgroundColor(color: UIColor.clear)
-        setStatusBarBackgroundColor(color: UIColor.clear)
+        
         visibleNavigationBarStyle()
         output.viewWillDisappear()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
     }
     
     override func viewDidLayoutSubviews() {
@@ -96,18 +152,33 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         collectionView.performBatchUpdates(nil, completion: nil)
         
-//        if needToScrollAfterRotation {
-            guard !objects.isEmpty, selectedIndex < objects.count else {
-                return
-            }
-            
-            let indexPath = IndexPath(item: selectedIndex, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-//        }
+        if needToScrollAfterRotation {
+            needToScrollAfterRotation = false
+            scrollToSelectedIndex()
+        }
     }
+    
+    @objc private func onCancelButton(){
+        hideView()
+    }
+    
+    private func hideView(){
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
+        dismiss(animated: true)
+    }
+    
+    private func scrollToSelectedIndex() {
+        guard !objects.isEmpty, selectedIndex < objects.count else {
+            return
+        }
+        
+        let indexPath = IndexPath(item: selectedIndex, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+    } 
     
     deinit {
         ItemOperationManager.default.stopUpdateView(view: self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupNavigationBar() {
@@ -154,7 +225,17 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        
         needToScrollAfterRotation = true
+        Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+    }
+    
+    override func getBacgroundColor() -> UIColor {
+        return UIColor.black
+    }
+    
+    @objc private func applicationDidEnterBackground(_ application: UIApplication) {
+        localPlayer?.pause()
     }
 }
 
@@ -163,6 +244,10 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func setupInitialState() { }
     
     func onItemSelected(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
+        if items.isEmpty {
+            return
+        }
+        
         let item = items[index]
         if item.isLocalItem && item.fileType == .image {
             setThreeDotsMenu(active: false)
@@ -176,6 +261,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func play(item: AVPlayerItem) {
+        MenloworksTagsService.shared.onVideoDisplayed()
+        
         localPlayer?.replaceCurrentItem(with: item)
         playerController = AVPlayerViewController()
         playerController?.player = localPlayer
@@ -194,6 +281,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
+        self.objects = objectsArray
         self.selectedIndex = selectedIndex
     }
     
@@ -237,6 +325,10 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
+    func tapOnCellForFullScreen() {
+        isFullScreen = !isFullScreen
+    }
+    
     func tapOnSelectedItem() {
         let file = objects[selectedIndex]
         

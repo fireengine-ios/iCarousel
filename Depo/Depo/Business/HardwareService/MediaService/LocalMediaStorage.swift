@@ -99,7 +99,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             completion(true, status)
         case .notDetermined, .restricted:
             PHPhotoLibrary.requestAuthorization({ (authStatus) in
-                completion(authStatus == .authorized, authStatus)
+                let isAuthorized = authStatus == .authorized
+                MenloworksTagsService.shared.onGalleryPermissionChanged(isAuthorized)
+                completion(isAuthorized, authStatus)
             })
         case .denied:
             completion(false, status)
@@ -425,7 +427,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                     if let urlToFile = (avAsset as? AVURLAsset)?.url {
                                                         
                                                         do {
-                                                            let file = UUID().description
+                                                            let file = UUID().uuidString
                                                             url = Device.tmpFolderUrl(withComponent: file)
                                                             
                                                           try FileManager.default.copyItem(at: urlToFile, to: url)
@@ -448,7 +450,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let operation = GetOriginalImageOperation(photoManager: self.photoManger,
                                                   asset: asset) { (data, string, orientation, dict) in
-                                                    let file = UUID().description
+                                                    let file = UUID().uuidString
                                                     url = Device.tmpFolderUrl(withComponent: file)
                                                     do {
                                                         try data?.write(to: url)

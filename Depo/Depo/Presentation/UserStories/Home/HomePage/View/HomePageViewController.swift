@@ -29,10 +29,10 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
                 return svc
             } else {
                 let router = RouterVC()
-                let searchViewController = router.searchView(output: self)
-                searchViewController.modalPresentationStyle = .overCurrentContext
-                searchViewController.modalTransitionStyle = .crossDissolve
+                let searchViewController = router.searchView(output: self)                
                 _searchViewController = searchViewController
+                _searchViewController?.transitioningDelegate = self
+                navigationController?.delegate = searchViewController as? BaseViewController
                 return _searchViewController!
             }
         }
@@ -74,7 +74,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         if _searchViewController != nil {
             let router = RouterVC()
-            router.pushViewControllerWithoutAnimation(viewController: self.searchViewController)
+            router.pushViewController(viewController: searchViewController)
         }
     }
 
@@ -106,7 +106,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
                 return
             }
             let router = RouterVC()
-            router.pushViewControllerWithoutAnimation(viewController: self.searchViewController)
+            router.pushViewController(viewController: self.searchViewController)
         })
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.output.showSettings()

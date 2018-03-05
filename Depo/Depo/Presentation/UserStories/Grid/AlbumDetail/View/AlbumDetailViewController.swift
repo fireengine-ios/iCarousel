@@ -17,5 +17,6 @@ class AlbumDetailViewController: BaseFilesGreedChildrenViewController {
             mainTitle = name
         }
         super.viewWillAppear(animated)
+        configureNavBarActions()
     }
 }

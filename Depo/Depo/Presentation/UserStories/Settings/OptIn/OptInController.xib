@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -15,7 +16,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OptInController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OptInController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="codeTextField" destination="zvh-bd-Zbq" id="hAJ-1D-NbU"/>
                 <outlet property="keyboardHideManager" destination="jBJ-HU-y2A" id="JPk-af-kYM"/>
@@ -28,30 +29,30 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jhv-sh-Xib">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0g-br-DnT">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWY-pY-7FQ" userLabel="Resizing View">
-                                    <rect key="frame" x="173" y="0.0" width="30" height="205"/>
+                                    <rect key="frame" x="173" y="0.0" width="30" height="173"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="RlH-eD-HhC"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="bzw-bU-Vho">
-                                    <rect key="frame" x="43.5" y="204.5" width="288" height="21"/>
+                                    <rect key="frame" x="43.5" y="172.5" width="288" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zvh-bd-Zbq" customClass="CodeTextField" customModule="Depo_LifeTech" customModuleProvider="target">
-                                    <rect key="frame" x="30" y="259.5" width="315" height="42"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zvh-bd-Zbq" customClass="CodeTextField" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="30" y="227.5" width="315" height="42"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="42" id="fuy-x5-H0q"/>
                                     </constraints>
@@ -62,8 +63,8 @@
                                         <action selector="changedCodeTextField:" destination="-1" eventType="editingChanged" id="drS-Hb-zSx"/>
                                     </connections>
                                 </textField>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tF4-Cp-1JW" customClass="SmartTimerLabel" customModule="Depo_LifeTech" customModuleProvider="target">
-                                    <rect key="frame" x="145.5" y="311.5" width="84.5" height="45.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tF4-Cp-1JW" customClass="SmartTimerLabel" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="145.5" y="279.5" width="84.5" height="45.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45.5" id="Zvo-L8-v3W"/>
                                     </constraints>
@@ -72,14 +73,14 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pym-Ze-9xg" userLabel="Resizing View">
-                                    <rect key="frame" x="172" y="357" width="30" height="205"/>
+                                    <rect key="frame" x="172" y="325" width="30" height="173"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="PEC-aO-Aak"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkl-s2-rLo" customClass="BlueButtonWithWhiteText" customModule="Depo_LifeTech" customModuleProvider="target">
-                                    <rect key="frame" x="110" y="562" width="155" height="60"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkl-s2-rLo" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="110" y="498" width="155" height="60"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="155" id="Ose-9T-Two"/>
@@ -123,8 +124,8 @@
                         <constraint firstItem="g0g-br-DnT" firstAttribute="leading" secondItem="Jhv-sh-Xib" secondAttribute="leading" id="xcT-7b-J2U"/>
                     </constraints>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHB-aw-SyK" customClass="BlueButtonWithWhiteText" customModule="Depo_LifeTech" customModuleProvider="target">
-                    <rect key="frame" x="110" y="562" width="155" height="60"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHB-aw-SyK" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="110" y="498" width="155" height="60"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="foF-WX-lnn"/>
@@ -140,15 +141,17 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="MHB-aw-SyK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="anG-Xa-joa"/>
-                <constraint firstAttribute="bottom" secondItem="Jhv-sh-Xib" secondAttribute="bottom" id="oOW-1t-BtA" customClass="KeyboardLayoutConstraint" customModule="Depo_LifeTech" customModuleProvider="target"/>
+                <constraint firstItem="Jhv-sh-Xib" firstAttribute="top" secondItem="CYc-xl-rPs" secondAttribute="top" id="dnO-Dn-AS4"/>
+                <constraint firstItem="CYc-xl-rPs" firstAttribute="bottom" secondItem="MHB-aw-SyK" secondAttribute="bottom" constant="45" id="fkk-hu-oAB"/>
                 <constraint firstItem="Jhv-sh-Xib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rEz-Ba-nMO"/>
-                <constraint firstAttribute="bottom" secondItem="MHB-aw-SyK" secondAttribute="bottom" constant="45" id="ubp-gs-3uv"/>
                 <constraint firstAttribute="trailing" secondItem="Jhv-sh-Xib" secondAttribute="trailing" id="yMS-1A-vtC"/>
-                <constraint firstItem="Jhv-sh-Xib" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yU8-xu-IOB"/>
+                <constraint firstItem="Jhv-sh-Xib" firstAttribute="bottom" secondItem="CYc-xl-rPs" secondAttribute="bottom" id="zpM-DA-Enw"/>
             </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="CYc-xl-rPs"/>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
-        <customObject id="jBJ-HU-y2A" customClass="KeyboardHideManager" customModule="Depo_LifeTech" customModuleProvider="target">
+        <customObject id="jBJ-HU-y2A" customClass="KeyboardHideManager" customModule="lifebox" customModuleProvider="target">
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="scrollSupport" value="YES"/>
             </userDefinedRuntimeAttributes>

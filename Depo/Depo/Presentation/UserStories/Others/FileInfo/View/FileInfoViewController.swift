@@ -30,7 +30,6 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
         fileNameTitle.text = TextConstants.fileInfoFileNameTitle
@@ -88,11 +87,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         navigationBarWithGradientStyle()
         setTitle(withString: "")
     }
-    
-    override func willMove(toParentViewController parent: UIViewController?) {
-        blackNavigationBarStyle()
-    }
-    
+        
     func setObject(object: BaseDataSourceItem) {
         
         fileName.text = object.name

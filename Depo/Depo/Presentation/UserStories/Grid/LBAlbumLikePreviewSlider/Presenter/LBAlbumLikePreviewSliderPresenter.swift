@@ -11,6 +11,8 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
     weak var view: LBAlbumLikePreviewSliderViewInput!
     var interactor: LBAlbumLikePreviewSliderInteractorInput!
     var router: LBAlbumLikePreviewSliderRouterInput!
+    
+    weak var faceImagePhotosModuleOutput: FaceImagePhotosModuleOutput?
 
     weak var baseGreedPresenterModule: BaseFilesGreedModuleInput?
     var dataSource: LBAlbumLikePreviewSliderDataSource = LBAlbumLikePreviewSliderDataSource()
@@ -47,16 +49,18 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
     
     func operationSuccessed(withItems items:[SliderItem]) {
         dataSource.setCollectionView(items: items)
+        faceImagePhotosModuleOutput?.getSliderItmes(items: items)
     }
     
     func operationFailed() {
         
     }
+
 }
 
 extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderDataSourceDelegate {
     
     func onItemSelected(item: SliderItem) {
-        router.onItemSelected(item)
+        router.onItemSelected(item, moduleOutput: self)
     }
 }

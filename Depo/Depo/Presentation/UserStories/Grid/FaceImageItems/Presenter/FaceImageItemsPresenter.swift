@@ -9,17 +9,25 @@
 import Foundation
 
 final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
+
+    weak var albumSliderModuleOutput: LBAlbumLikePreviewSliderModuleInput?
+    
+    var faceImageType: FaceImageType?
     
     private var isChangeVisibilityMode: Bool = false
     
     private var visibilityItems: [WrapData] = []
     private var allItmes: [WrapData] = []
     
-    override func viewIsReady(collectionView: UICollectionView) {
+    override func viewIsReady(collectionView: UICollectionView) {        
         super.viewIsReady(collectionView: collectionView)
         
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
         dataSource.isHeaderless = true
+        
+        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+            view.configurateUgglaView()
+        }
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
@@ -45,26 +53,56 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
         
         super.getContentWithSuccess(items: allItmes)
+        
+        albumSliderModuleOutput?.reload()
+        
+        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+            DispatchQueue.main.async {
+                view.updateUgglaViewPosition()
+            }
+        }
+        
+        dataSource.isHeaderless = true
+        updateNoFilesView()
+    }
+    
+    override func getContentWithFail(errorString: String?) {
+        super.getContentWithFail(errorString: errorString)
+        
+        updateNoFilesView()
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
+    
+    override func needShowNoFileView() -> Bool {
+        return dataSource.allMediaItems.isEmpty
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsInput, scrollView == dataSource.collectionView {
+            view.updateUgglaViewPosition()
+        }
+    }
+    
+    private func hasUgglaLabel() -> Bool {
+        return faceImageType == .people || faceImageType == .things
+    }
     
     // MARK: -  Utility methods
     
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
         self.isChangeVisibilityMode = isChangeVisibilityMode
-        
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
-        
         reloadData()
     }
     
-    private func clearItems() {
-        visibilityItems = [WrapData]()
-        dataSource.allMediaItems = [WrapData]()
-        dataSource.allItems = [[WrapData]]()
+    private func updateNoFilesView() {
+        if needShowNoFileView() {
+            view.showNoFilesWith(text: interactor.textForNoFileLbel(),
+                                    image: interactor.imageForNoFileImageView(),
+                                    createFilesButtonText: "", needHideTopBar: interactor.needHideTopBar())
+        }
     }
-    
 }
 
 // MARK: FaceImageItemsInteractorOutput
@@ -81,6 +119,8 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     func didSaveChanges(_ items: [PeopleItem]) {
         isChangeVisibilityMode = false
         dataSource.setSelectionState(selectionState: false)
+        
+        asyncOperationSucces()
         
         view.stopSelection()
         
@@ -99,15 +139,11 @@ extension FaceImageItemsPresenter: FaceImageItemsViewOutput {
     
     func saveVisibilityChanges() {
         if let interactor = interactor as? FaceImageItemsInteractor,
-            selectedItems.count > 0 {
-            var peopleItems: [PeopleItem] = []
-            selectedItems.forEach({
-                if let item = $0 as? PeopleItem {
-                    peopleItems.append(item)
-                }
-            })
+            !selectedItems.isEmpty {
             
+            let peopleItems = selectedItems.flatMap { $0 as? PeopleItem }
             interactor.onSaveVisibilityChanges(peopleItems)
+            
         } else {
             view.stopSelection()
             
@@ -128,5 +164,8 @@ extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
     func didReloadData() {
         reloadData()
     }
-    
+
+    func delete(item: Item) {
+        dataSource.deleteItems(items: [item])
+    }
 }

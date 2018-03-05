@@ -16,6 +16,7 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
         dataSource.canReselect = true
         dataSource.enableSelectionOnHeader = false
         dataSource.setSelectionState(selectionState: false)
+        dataSource.needShow3DotsInCell = false
         dataSource.updateDisplayngType(type: .greed)
         dataSource.preferedCellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         

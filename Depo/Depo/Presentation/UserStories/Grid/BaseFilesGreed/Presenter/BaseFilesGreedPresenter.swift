@@ -145,6 +145,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         dataSource.dropData()
         dataSource.currentSortType = sortedRule
+        dataSource.isHeaderless = (sortedRule == .sizeAZ || sortedRule == .sizeZA)
         dataSource.reloadData()
         startAsyncOperation()
         dataSource.isPaginationDidEnd = false
@@ -239,7 +240,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func needShowNoFileView() -> Bool {
-        return dataSource.getAllObjects().isEmpty
+        return dataSource.allObjectIsEmpty()
     }
     
     func getCurrentSortRule() -> SortedRules {
@@ -252,6 +253,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onCancelSelection(){
         stopEditing()
+    }
+    
+    func isSelectionState() -> Bool {
+        return dataSource.isSelectionStateActive
     }
     
     //MARK : BasePresenter
@@ -310,6 +315,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         reloadData()
     }
     
+    func didDelete(items: [BaseDataSourceItem]) {
+        if self is AlbumsPresenter {
+            updateNoFilesView()
+        }
+    }
+    
     
     //MARK: - UnderNavBarBar/TopBar
     
@@ -351,12 +362,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func updateNoFilesView() {
         if needShowNoFileView() {
-            if interactor.remoteItems is PhotoAndVideoService ||
-                interactor.remoteItems is MusicService ||
-                interactor.remoteItems is DocumentService {
+            if interactor.canShowNoFilesView() {
                 view.showNoFilesWith(text: interactor.textForNoFileLbel(),
                                      image: interactor.imageForNoFileImageView(),
-                                     createFilesButtonText: interactor.textForNoFileButton())
+                                     createFilesButtonText: interactor.textForNoFileButton(),
+                                     needHideTopBar: interactor.needHideTopBar())
             } else {
                 view.showNoFilesTop()
             }
@@ -574,6 +584,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
+        if type == ElementTypes.removeAlbum {
+            bottomBarPresenter?.dismiss(animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        }
     }
     
     func operationFailed(withType type: ElementTypes) {
@@ -624,6 +638,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func moveBack() {
         router.showBack()
     }
+    
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
     
     func sortType() -> MoreActionsConfig.ViewType {
         return type

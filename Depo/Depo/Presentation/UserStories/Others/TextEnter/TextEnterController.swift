@@ -67,10 +67,15 @@ final class TextEnterController: UIViewController {
     @IBOutlet private weak var doneButton: UIButton! {
         didSet {
             doneButton.isExclusiveTouch = true
-            doneButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-            doneButton.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
-            doneButton.setBackgroundColor(ColorConstants.blueColor.darker(by: 10), for: .highlighted)
+            doneButton.isEnabled = false
+            
             doneButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            
+            doneButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            doneButton.setTitleColor(ColorConstants.blueColor.darker(), for: .highlighted)
+            
+            doneButton.setBackgroundColor(ColorConstants.blueColor, for: .highlighted)
+            
             doneButton.layer.borderColor = ColorConstants.blueColor.cgColor
             doneButton.layer.borderWidth = 1
         }
@@ -141,13 +146,36 @@ final class TextEnterController: UIViewController {
         }
     }
     
-    func close(completion: (() -> Void)? = nil) {
+    func close(completion: VoidHandler? = nil) {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
             self.shadowView.transform = NumericConstants.scaleTransform
             self.containerView.transform = NumericConstants.scaleTransform
-        }) { _ in
+        }, completion: { _ in
             self.dismiss(animated: false, completion: completion)
+        })
+    }
+    
+    private func isAvailableCharacters(in text: String) -> Bool {
+        return text.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    }
+}
+
+extension TextEnterController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard isAvailableCharacters(in: string) else {
+            return false
         }
+        if textField.text?.isEmpty == true {
+            textField.text = "+"
+        }
+        
+        if let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string), newString.isEmpty {
+            doneButton.isEnabled = false
+        } else {
+            doneButton.isEnabled = true
+        }
+        
+        return true
     }
 }
