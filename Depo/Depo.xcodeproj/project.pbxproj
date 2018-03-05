@@ -2540,6 +2540,12 @@
 		CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
 		CE1B7620204D2E4000B5E12A /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B761F204D2E4000B5E12A /* FileStorage.swift */; };
+		CE1B7621204D335300B5E12A /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
+		CE1B7623204D343500B5E12A /* Error+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B7622204D343500B5E12A /* Error+Localization.swift */; };
+		CE1B7624204D347C00B5E12A /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
+		CE1B7625204D347D00B5E12A /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
+		CE1B7627204D349C00B5E12A /* Error+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B7626204D349C00B5E12A /* Error+Alamofire.swift */; };
+		CE1B7628204D34B900B5E12A /* Error+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B7626204D349C00B5E12A /* Error+Alamofire.swift */; };
 		CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE924204831CE0074BDDC /* FileProviderExtension.swift */; };
 		CE1BE927204831CE0074BDDC /* FileProviderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE926204831CE0074BDDC /* FileProviderItem.swift */; };
 		CE1BE929204831CE0074BDDC /* FileProviderEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */; };
@@ -4745,6 +4751,8 @@
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
 		CE1B761F204D2E4000B5E12A /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
+		CE1B7622204D343500B5E12A /* Error+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Localization.swift"; sourceTree = "<group>"; };
+		CE1B7626204D349C00B5E12A /* Error+Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Alamofire.swift"; sourceTree = "<group>"; };
 		CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxFileProvider.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1BE924204831CE0074BDDC /* FileProviderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderExtension.swift; sourceTree = "<group>"; };
 		CE1BE926204831CE0074BDDC /* FileProviderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderItem.swift; sourceTree = "<group>"; };
@@ -9448,7 +9456,7 @@
 				CEA524B92046C95E0036FCEA /* UploadQueueService.swift */,
 				CEA524BB2046D6A10036FCEA /* UploadOperation.swift */,
 				CE61D1C720468DFE001D01DC /* AsyncOperation.swift */,
-				CEA524BD2046EB860036FCEA /* Error+Network.swift */,
+				CE1B7622204D343500B5E12A /* Error+Localization.swift */,
 				CEE10CCF2047EAD000D97B9F /* CGSize+Scale.swift */,
 			);
 			path = Business;
@@ -9772,6 +9780,8 @@
 				CE878C44203D4E5000458E0B /* UIWebView+Gesture.swift */,
 				CE654FB020454AAD00232025 /* URL+Video.swift */,
 				CE61D1BC2046872A001D01DC /* URL+ContentType.swift */,
+				CEA524BD2046EB860036FCEA /* Error+Network.swift */,
+				CE1B7626204D349C00B5E12A /* Error+Alamofire.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -12967,6 +12977,7 @@
 				8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */,
 				8C0B91B62017103D00A5BA81 /* (null) in Sources */,
 				8C0E8C671FDEBDFF00789C91 /* ActivityType.swift in Sources */,
+				CE1B7625204D347D00B5E12A /* Error+Network.swift in Sources */,
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
 				8C0E8C681FDEBDFF00789C91 /* FileServiceResponse.swift in Sources */,
 				8C0E8C691FDEBDFF00789C91 /* CreateStoryPreviewModuleInput.swift in Sources */,
@@ -13946,6 +13957,7 @@
 				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
 				CE1BE94D20492C8B0074BDDC /* AuthorizationRepository.swift in Sources */,
 				CE1BE95120492CCE0074BDDC /* Dictionary.swift in Sources */,
+				CE1B7628204D34B900B5E12A /* Error+Alamofire.swift in Sources */,
 				CE1BE94C20492C870074BDDC /* AuthorizationURLs.swift in Sources */,
 				CE1BE94820492C510074BDDC /* SharedFactory.swift in Sources */,
 				CE1BE94920492C550074BDDC /* TokenStorage.swift in Sources */,
@@ -13959,6 +13971,7 @@
 				CE1BE95020492CB70074BDDC /* RouteRequests.swift in Sources */,
 				CE1BE94F20492CA60074BDDC /* ResponseResult.swift in Sources */,
 				CE1BE929204831CE0074BDDC /* FileProviderEnumerator.swift in Sources */,
+				CE1B7621204D335300B5E12A /* Error+Network.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14489,6 +14502,7 @@
 				7CFE92EB1F5E7DEC008A3B72 /* DropDovnTableViewCell.swift in Sources */,
 				CE51ACFA1EF90853005DCEE0 /* ForgotPasswordPresenter.swift in Sources */,
 				CE8F44FD1F6BB21C0062C2E0 /* ActivityTimelineFileCell.swift in Sources */,
+				CE1B7624204D347C00B5E12A /* Error+Network.swift in Sources */,
 				7C6E2F941F31E4F800536DB6 /* CreateStoryNamePresenter.swift in Sources */,
 				CE51ACFB1EF90853005DCEE0 /* ForgotPasswordInteractorInput.swift in Sources */,
 				CE51ACFC1EF90853005DCEE0 /* ForgotPasswordInteractorOutput.swift in Sources */,
@@ -14972,11 +14986,13 @@
 				CE61D1CA20468DFE001D01DC /* AsyncOperation.swift in Sources */,
 				CEE10CD02047EAD000D97B9F /* CGSize+Scale.swift in Sources */,
 				CE1458C72045618800812544 /* URL+Path.swift in Sources */,
+				CE1B7627204D349C00B5E12A /* Error+Alamofire.swift in Sources */,
 				CE1458C9204561CC00812544 /* Dictionary.swift in Sources */,
 				CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */,
 				CEA524BE2046EB860036FCEA /* Error+Network.swift in Sources */,
 				CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */,
 				CE61D1C32046873A001D01DC /* UploadService.swift in Sources */,
+				CE1B7623204D343500B5E12A /* Error+Localization.swift in Sources */,
 				CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */,
 				CEA629FF2047ED3200215811 /* L10n.swift in Sources */,
 				CE1458D520458D9100812544 /* CustomErrors.swift in Sources */,

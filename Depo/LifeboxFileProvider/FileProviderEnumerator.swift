@@ -79,7 +79,14 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
                 }
                 break
             case .failed(let error):
-                observer.finishEnumeratingWithError(error)
+                if error.notAuthorized {
+                    let authenticationError = NSError(domain: NSFileProviderErrorDomain,
+                                                      code: NSFileProviderError.notAuthenticated.rawValue,
+                                                      userInfo: [NSLocalizedDescriptionKey: "authentication"])
+                    observer.finishEnumeratingWithError(authenticationError)
+                } else {
+                    observer.finishEnumeratingWithError(error)
+                }
             }
         }
     }

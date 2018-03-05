@@ -96,11 +96,11 @@ extension FileProviderItem {
                   tempDownloadURL: tempDownloadURL,
                   thumbnailURL: thumbnailURL)
         
-        if isFolder {
-            capabilities = [.allowsAddingSubItems, .allowsReading]
-        } else {
-            capabilities = [.allowsReparenting, .allowsReading]
-        }
+//        if isFolder {
+//            capabilities = [.allowsAddingSubItems, .allowsReading]
+//        } else {
+//            capabilities = [.allowsReparenting, .allowsReading]
+//        }
     }
 }
 
@@ -166,7 +166,13 @@ private extension String {
         if pathExtension.isEmpty {
             return nil
         }
-        return UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue() as String?
+        
+        let utType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue() as String?
+        
+        if utType?.hasPrefix("dyn.") == true {
+            return "public.data"
+        }
+        return utType
     }
 }
 
