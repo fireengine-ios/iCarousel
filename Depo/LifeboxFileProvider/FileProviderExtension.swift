@@ -116,27 +116,60 @@ final class FileProviderExtension: NSFileProviderExtension {
                     return progress
                 }
                 
-                URLSession.shared.downloadTask(with: thumbnailURL) { (locationUrl, response, error) in
-                    if let error = error {
-                        perThumbnailCompletionHandler(identifier, nil, error)
-                        completionHandler(error)
-                    } else if let locationUrl = locationUrl {
+                let downloadTask = URLSession.shared.downloadTask(with: thumbnailURL) { (tempURL, response, error) in
+                    
+                    guard !progress.isCancelled else {
+                        return
+                    }
+                    
+                    /// or 1
+                    var errorOrNil = error
+                    var dataOrNil: Data?
+                    
+                    if let fileURL = tempURL  {
                         do {
-                            let data = try Data(contentsOf: locationUrl)
-                            perThumbnailCompletionHandler(identifier, data, nil)
-                            
-                            DispatchQueue.main.async {
-                                if progress.isFinished {
-                                    completionHandler(nil)
-                                }
-                            }
-//                            try data.write(to: url, options: .atomic)
-                        } catch {
-                            perThumbnailCompletionHandler(identifier, nil, error)
-                            completionHandler(error)
+                            dataOrNil = try Data(contentsOf:fileURL, options: .alwaysMapped)
+                        } catch let mappingError {
+                            errorOrNil = mappingError
                         }
                     }
-                }.resume()
+                    
+                    perThumbnailCompletionHandler(identifier, dataOrNil, errorOrNil)
+                    
+                    DispatchQueue.main.async {
+                        if progress.isFinished {
+                            /// Call this completion handler once all thumbnails are complete
+                            completionHandler(nil)
+                        }
+                    }
+                    
+                    /// or 2
+//                    if let error = error {
+//                        perThumbnailCompletionHandler(identifier, nil, error)
+//                        completionHandler(error)
+//                    } else if let locationUrl = locationUrl {
+//                        do {
+//                            let data = try Data(contentsOf: locationUrl)
+//                            perThumbnailCompletionHandler(identifier, data, nil)
+//                            
+//                            DispatchQueue.main.async {
+//                                if progress.isFinished {
+//                                    /// Call this completion handler once all thumbnails are complete
+//                                    completionHandler(nil)
+//                                }
+//                            }
+//                        } catch {
+//                            perThumbnailCompletionHandler(identifier, nil, error)
+//                            completionHandler(error)
+//                        }
+//                    }
+                }
+                
+                // Add the download task's progress as a child to the overall progress.
+                progress.addChild(downloadTask.progress, withPendingUnitCount: 1)
+                
+                // Start the download task.
+                downloadTask.resume()
                 
             } catch {
                 perThumbnailCompletionHandler(identifier, nil, error)

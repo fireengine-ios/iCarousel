@@ -79,7 +79,7 @@
                                             <constraint firstItem="lqF-nr-rL7" firstAttribute="leading" secondItem="8mu-w3-9pI" secondAttribute="leading" constant="8" id="wib-jq-TId"/>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1t9-8h-hwr">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1t9-8h-hwr">
                                         <rect key="frame" x="16" y="90" width="429" height="205"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_left" translatesAutoresizingMaskIntoConstraints="NO" id="3dG-p4-Y18">
