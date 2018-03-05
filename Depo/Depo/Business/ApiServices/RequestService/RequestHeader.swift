@@ -28,7 +28,7 @@ struct HeaderConstant {
     
     static let XObjectMetaSpecialFolder = "X-Object-Meta-Special-Folder"
     
-//    static let ContentLength = "Content-Length"
+    static let ContentLength = "Content-Length"
 //    static let XObjectMetaIosMetadataHash = "X-Object-Meta-Ios-Metadata-Hash"
 //    static let XObjectMetaAlbumLabel = "X-Object-Meta-Album-Label"
 //    static let XObjectMetaFolderLabel = "X-Object-Meta-Folder-Label"
