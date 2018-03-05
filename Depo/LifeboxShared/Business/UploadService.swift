@@ -40,26 +40,6 @@ final class UploadService {
     
     func upload(url: URL, contentType: String, progressHandler: @escaping Request.ProgressHandler, dataRequestHandler: DataRequestHandler?, complition: @escaping ResponseVoid) {
         
-        
-//        if !FileManager.default.fileExists(atPath: url.path) {
-//            FileManager.default.createFile(atPath: url.path, contents: nil, attributes: nil)
-//            do {
-//                let fileHandle = try FileHandle(forWritingTo: url)
-//                fileHandle.seekToEndOfFile()
-//                
-////                let fileHandler = try FileHandle(forReadingFrom: url)
-////                let availableData = fileHandler.availableData
-////                let data = fileHandler.readDataToEndOfFile()
-////                FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
-//            } catch {
-//                print(error.localizedDescription)
-//                print()
-//                return
-//            }
-//            
-////            NSFileHandle *handle = [NSFileHandle fileHandleForWritingToURL:tempUrl error:nil];
-//        }
-        
         var fcError: NSError?
         let fileCoordinator = NSFileCoordinator()
         let semaphore = DispatchSemaphore(value: 0)
@@ -88,15 +68,6 @@ final class UploadService {
                 
                 let uploadUrl = path + "/" + UUID().uuidString
                 
-                let fileSizeString: String
-                if let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
-                    let fileSize = attributes[FileAttributeKey.size] as? Int64
-                {
-                   fileSizeString = String(fileSize)
-                } else {
-                    fileSizeString = ""
-                }
-                
                 let headers: HTTPHeaders = [
                     HeaderConstant.XObjectMetaFavorites: "false",
                     HeaderConstant.XMetaStrategy: "1",
@@ -105,8 +76,6 @@ final class UploadService {
                     HeaderConstant.XObjectMetaFileName: url.lastPathComponent,
                     HeaderConstant.ContentType: contentType,
                     HeaderConstant.XObjectMetaSpecialFolder: "MOBILE_UPLOAD"
-                    ,
-                    HeaderConstant.ContentLength: fileSizeString
                 ]
                 
                 let dataRequest = self.sessionManager
