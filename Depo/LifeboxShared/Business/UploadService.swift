@@ -19,6 +19,18 @@ final class UploadService {
         self.sessionManager = sessionManager
     }
     
+    private func waitFilePreparation(at url: URL, complition: ResponseVoid) {
+        var fcError: NSError? 
+        
+        NSFileCoordinator().coordinate(readingItemAt: url, options: .forUploading, error: &fcError) { _ in
+            if let error = fcError {
+                complition(ResponseResult.failed(error))
+            } else {
+                complition(ResponseResult.success(()))
+            }
+        }
+    }
+    
     func getBaseUploadUrl(handler: @escaping ResponseHandler<String>) -> DataRequest {
         return sessionManager
             .request(RouteRequests.uploadContainer)
@@ -35,41 +47,6 @@ final class UploadService {
                 case .failure(let error):
                     handler(ResponseResult.failed(error))
                 }
-        }
-    }
-    
-    private func waitFilePreparation(at url: URL, complition: ResponseVoid) {
-        var fcError: NSError?
-        let fileCoordinator = NSFileCoordinator()
-        
-        fileCoordinator.coordinate(readingItemAt: url, options: .forUploading, error: &fcError) { (readUrl) in
-            if let error = fcError {
-                complition(ResponseResult.failed(error))
-            } else {
-                complition(ResponseResult.success(()))
-            }
-        }
-    }
-    
-    
-//    do {
-//    try waitFilePreparation(at: url)
-//    } catch  {
-//    complition(ResponseResult.failed(error))
-//    return
-//    }
-    private func waitFilePreparation(at url: URL) throws {
-        var fcError: NSError?
-        let fileCoordinator = NSFileCoordinator()
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        fileCoordinator.coordinate(readingItemAt: url, options: .forUploading, error: &fcError) { (readUrl) in
-            semaphore.signal()
-        }
-        semaphore.wait()
-        
-        if let error = fcError {
-            throw error
         }
     }
     
