@@ -582,6 +582,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             bottomBarPresenter?.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         }
+        if type == ElementTypes.completelyDeleteAlbums {
+            bottomBarPresenter?.dismiss(animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        }
     }
     
     func operationFailed(withType type: ElementTypes) {
