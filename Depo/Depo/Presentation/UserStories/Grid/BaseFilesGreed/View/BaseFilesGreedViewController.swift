@@ -149,10 +149,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     // MARK: - SearchBarButtonPressed
     
    func configureNavBarActions(isSelecting: Bool = false) {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { _ in
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
             let router = RouterVC()
             let searchViewController = router.searchView()
             searchViewController.transitioningDelegate = self
+            self?.navigationController?.delegate = searchViewController as? BaseViewController
             router.pushViewController(viewController: searchViewController)
         })
         let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
