@@ -100,8 +100,6 @@ final class FileProviderExtension: NSFileProviderExtension {
         }
     }
     
-    
-    
     override func fetchThumbnails(for itemIdentifiers: [NSFileProviderItemIdentifier], requestedSize size: CGSize, perThumbnailCompletionHandler: @escaping (NSFileProviderItemIdentifier, Data?, Error?) -> Void, completionHandler: @escaping (Error?) -> Void) -> Progress {
         
         let progress = Progress(totalUnitCount: Int64(itemIdentifiers.count))
@@ -112,6 +110,7 @@ final class FileProviderExtension: NSFileProviderExtension {
                 let baseItem = try self.item(for: identifier)
                 
                 guard let item = baseItem as? FileProviderItem, let thumbnailURL = item.thumbnailURL else {
+                    perThumbnailCompletionHandler(identifier, nil, unknownError)
                     completionHandler(unknownError)
                     return progress
                 }
@@ -309,6 +308,7 @@ final class FileProviderExtension: NSFileProviderExtension {
             /// TODO: instantiate an enumerator for the container root
             return FileProviderEnumerator(enumeratedItemIdentifier: containerItemIdentifier)
         } else if (containerItemIdentifier == NSFileProviderItemIdentifier.workingSet) {
+//            throw unknownError
             // TODO: instantiate an enumerator for the working set
         } else {
             return FileProviderEnumerator(enumeratedItemIdentifier: containerItemIdentifier)

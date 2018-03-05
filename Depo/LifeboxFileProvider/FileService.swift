@@ -9,37 +9,6 @@
 import Foundation
 import Alamofire
 
-final class FileStorage {
-    
-    static let shared = FileStorage()
-    
-    let fileManager = FileManager.default
-    
-    func write(_ item: FileProviderItem) {
-        do {
-            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
-            let fileURL = documentDirectory.appendingPathComponent(item.itemIdentifier.rawValue)
-            NSKeyedArchiver.archiveRootObject(item, toFile: fileURL.path)
-        } catch {
-            print(error)
-        }
-        
-    }
-    
-    func read(for itemIdentifier: NSFileProviderItemIdentifier) -> FileProviderItem {
-        do {
-            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
-            let fileURL = documentDirectory.appendingPathComponent(itemIdentifier.rawValue)
-            let item = NSKeyedUnarchiver.unarchiveObject(withFile: fileURL.path) as? FileProviderItem
-            return item ?? FileProviderItem()
-            
-        } catch {
-            print(error)
-            return FileProviderItem()
-        }
-    }
-}
-
 final class FileService {
     
     let sessionManager: SessionManager

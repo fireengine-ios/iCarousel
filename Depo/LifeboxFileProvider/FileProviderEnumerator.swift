@@ -79,7 +79,6 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
                 }
                 break
             case .failed(let error):
-                print(error.localizedDescription)
                 observer.finishEnumeratingWithError(error)
             }
         }

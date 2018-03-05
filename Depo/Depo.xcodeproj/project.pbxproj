@@ -2539,6 +2539,7 @@
 		CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
+		CE1B7620204D2E4000B5E12A /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B761F204D2E4000B5E12A /* FileStorage.swift */; };
 		CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE924204831CE0074BDDC /* FileProviderExtension.swift */; };
 		CE1BE927204831CE0074BDDC /* FileProviderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE926204831CE0074BDDC /* FileProviderItem.swift */; };
 		CE1BE929204831CE0074BDDC /* FileProviderEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */; };
@@ -4743,6 +4744,7 @@
 		CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
+		CE1B761F204D2E4000B5E12A /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxFileProvider.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1BE924204831CE0074BDDC /* FileProviderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderExtension.swift; sourceTree = "<group>"; };
 		CE1BE926204831CE0074BDDC /* FileProviderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderItem.swift; sourceTree = "<group>"; };
@@ -9459,6 +9461,7 @@
 				CE1BE926204831CE0074BDDC /* FileProviderItem.swift */,
 				CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */,
 				CE1BE95320492D040074BDDC /* FileService.swift */,
+				CE1B761F204D2E4000B5E12A /* FileStorage.swift */,
 				CE1BE92A204831CE0074BDDC /* Info.plist */,
 				CE1BE92B204831CE0074BDDC /* LifeboxFileProvider.entitlements */,
 			);
@@ -13937,6 +13940,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED54F6F204A7D4B00B750BB /* BytesType.swift in Sources */,
+				CE1B7620204D2E4000B5E12A /* FileStorage.swift in Sources */,
 				CE1BE94E20492C930074BDDC /* RequestHeader.swift in Sources */,
 				CED54F6E204A760900B750BB /* SwiftyJSONExtension.swift in Sources */,
 				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
