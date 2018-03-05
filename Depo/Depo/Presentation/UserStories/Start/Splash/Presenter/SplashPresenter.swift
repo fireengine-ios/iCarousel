@@ -7,11 +7,14 @@
 //
 
 final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput, SplashInteractorOutput {
-
+    
+    
     weak var view: SplashViewInput!
     var interactor: SplashInteractorInput!
     var router: SplashRouterInput!
+    
     private lazy var customProgressHUD = CustomProgressHUD()
+    private var turkcellLogin = false
     
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
@@ -54,6 +57,11 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         interactor.checkEULA()
     }
     
+    func onSuccessLoginTurkcell(){
+        turkcellLogin = true
+        interactor.checkEULA()
+    }
+    
     func onFailLogin(){
         router.navigateToOnboarding()
     }
@@ -72,7 +80,12 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         }){ [weak self] in
             DispatchQueue.main.async {
                 self?.customProgressHUD.hideProgressSpinner()
-                self?.router.navigateToApplication()
+                
+                if (self?.turkcellLogin)! {
+                    self?.router.goToSyncSettingsView()
+                } else {
+                    self?.router.navigateToApplication()
+                }
             }
         }
     }
