@@ -49,7 +49,6 @@ class CaptchaViewController: UIViewController {
         activityIndicator.startAnimating()
         activityIndicator.isHidden = false
         image.image = UIImage()
-        //image.backgroundColor = UIColor.darkGray
         getCaptcha(withType: .image)
     }
     
