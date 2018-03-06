@@ -22,6 +22,8 @@
 	<string>1</string>
 	<key>NSExtension</key>
 	<dict>
+		<key>NSExtensionFileProviderDocumentGroup</key>
+		<string>group.come.life.Lifebox</string>
 		<key>NSExtensionFileProviderActions</key>
 		<array>
 			<dict>
@@ -38,5 +40,16 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.fileprovider-actionsui</string>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>TurkcellSaturaReg.ttf</string>
+		<string>TurkcellSaturaMedIta.ttf</string>
+		<string>TurkcellSaturaMed.ttf</string>
+		<string>TurkcellSaturaIta.ttf</string>
+		<string>TurkcellSaturaDemIta.ttf</string>
+		<string>TurkcellSaturaDem.ttf</string>
+		<string>TurkcellSaturaBol.ttf</string>
+		<string>TurkcellSaturaBolIta.ttf</string>
+	</array>
 </dict>
 </plist>

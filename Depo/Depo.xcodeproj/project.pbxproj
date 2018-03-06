@@ -2524,6 +2524,7 @@
 		CE0ED9761FBC0F5A00487632 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
 		CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */; };
 		CE1049522035858500898879 /* UIWebView+Clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1049512035858500898879 /* UIWebView+Clear.swift */; };
+		CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
 		CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1353342004F0F90004CBBE /* TextEnterController.swift */; };
 		CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1353382004F1530004CBBE /* TextEnterController.xib */; };
 		CE1458C62045617600812544 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
@@ -2538,6 +2539,18 @@
 		CE1458D520458D9100812544 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
 		CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
+		CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */; };
+		CE18CC7F204E85DC00FA3F44 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
+		CE18CC80204E85DC00FA3F44 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
+		CE18CC81204E85DC00FA3F44 /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
+		CE18CC82204E85DC00FA3F44 /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
+		CE18CC83204E85DC00FA3F44 /* TurkcellSaturaIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE031F01E69B00CDF527 /* TurkcellSaturaIta.ttf */; };
+		CE18CC84204E85DC00FA3F44 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
+		CE18CC85204E85DC00FA3F44 /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
+		CE18CC86204E85DC00FA3F44 /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
+		CE18CC89204E861400FA3F44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE18CC8B204E861400FA3F44 /* Localizable.strings */; };
+		CE18CC8C204E861B00FA3F44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE18CC8E204E861B00FA3F44 /* Localizable.strings */; };
+		CE18CC90204E87CE00FA3F44 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC8F204E87CE00FA3F44 /* L10n.swift */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
 		CE1B7620204D2E4000B5E12A /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B761F204D2E4000B5E12A /* FileStorage.swift */; };
 		CE1B7621204D335300B5E12A /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
@@ -3044,7 +3057,6 @@
 		CEE005741F7B7DD0004FA8DE /* AssetsCash.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE005731F7B7DD0004FA8DE /* AssetsCash.swift */; };
 		CEE005761F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE005751F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift */; };
 		CEE04E141F471AFE00D74FA1 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE04E131F471AFE00D74FA1 /* UIImageView.swift */; };
-		CEE10CCE2047EA6300D97B9F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE10CCD2047EA6300D97B9F /* Localizable.strings */; };
 		CEE10CD02047EAD000D97B9F /* CGSize+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE10CCF2047EAD000D97B9F /* CGSize+Scale.swift */; };
 		CEE1D1F61F714DFE0008F4CF /* MediaItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1F01F714DFD0008F4CF /* MediaItem+CoreDataProperties.swift */; };
 		CEE1D1F71F714DFE0008F4CF /* MediaItemsAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1F11F714DFD0008F4CF /* MediaItemsAlbum+CoreDataClass.swift */; };
@@ -4753,6 +4765,10 @@
 		CE1458CE2045734200812544 /* Alamofire+Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Validate.swift"; sourceTree = "<group>"; };
 		CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentActionCustomizator.swift; sourceTree = "<group>"; };
+		CE18CC8A204E861400FA3F44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE18CC8D204E861B00FA3F44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE18CC8F204E87CE00FA3F44 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
 		CE1B761F204D2E4000B5E12A /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		CE1B7622204D343500B5E12A /* Error+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Localization.swift"; sourceTree = "<group>"; };
@@ -5038,7 +5054,6 @@
 		CEE005731F7B7DD0004FA8DE /* AssetsCash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsCash.swift; sourceTree = "<group>"; };
 		CEE005751F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPhotoLibraryChangeObserver.swift; sourceTree = "<group>"; };
 		CEE04E131F471AFE00D74FA1 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		CEE10CCD2047EA6300D97B9F /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CEE10CCF2047EAD000D97B9F /* CGSize+Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Scale.swift"; sourceTree = "<group>"; };
 		CEE1D1EC1F714DDB0008F4CF /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		CEE1D1ED1F714DE30008F4CF /* MediaItemOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemOperations.swift; sourceTree = "<group>"; };
@@ -9471,6 +9486,16 @@
 			path = Business;
 			sourceTree = "<group>";
 		};
+		CE18CC7E204E858000FA3F44 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CE1BE934204831CE0074BDDC /* MainInterface.storyboard */,
+				CE1BE932204831CE0074BDDC /* DocumentActionViewController.swift */,
+				CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		CE1BE923204831CE0074BDDC /* LifeboxFileProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -9489,10 +9514,11 @@
 		CE1BE931204831CE0074BDDC /* LifeboxFileProviderUI */ = {
 			isa = PBXGroup;
 			children = (
+				CE18CC7E204E858000FA3F44 /* Presentation */,
 				CE125175204E74CE00886F8D /* LifeboxFileProviderUI.entitlements */,
-				CE1BE932204831CE0074BDDC /* DocumentActionViewController.swift */,
-				CE1BE934204831CE0074BDDC /* MainInterface.storyboard */,
 				CE1BE937204831CE0074BDDC /* Info.plist */,
+				CE18CC8E204E861B00FA3F44 /* Localizable.strings */,
+				CE18CC8F204E87CE00FA3F44 /* L10n.swift */,
 			);
 			path = LifeboxFileProviderUI;
 			sourceTree = "<group>";
@@ -10069,7 +10095,7 @@
 				CE1458CD2045645F00812544 /* Business */,
 				CE58FAF620444493007F3F54 /* Info.plist */,
 				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
-				CEE10CCD2047EA6300D97B9F /* Localizable.strings */,
+				CE18CC8B204E861400FA3F44 /* Localizable.strings */,
 				CEA629FE2047ED3200215811 /* L10n.swift */,
 			);
 			path = LifeboxShared;
@@ -12069,6 +12095,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE18CC7F204E85DC00FA3F44 /* TurkcellSaturaBol.ttf in Resources */,
+				CE18CC80204E85DC00FA3F44 /* TurkcellSaturaBolIta.ttf in Resources */,
+				CE18CC81204E85DC00FA3F44 /* TurkcellSaturaDem.ttf in Resources */,
+				CE18CC82204E85DC00FA3F44 /* TurkcellSaturaDemIta.ttf in Resources */,
+				CE18CC83204E85DC00FA3F44 /* TurkcellSaturaIta.ttf in Resources */,
+				CE18CC8C204E861B00FA3F44 /* Localizable.strings in Resources */,
+				CE18CC84204E85DC00FA3F44 /* TurkcellSaturaMed.ttf in Resources */,
+				CE18CC85204E85DC00FA3F44 /* TurkcellSaturaMedIta.ttf in Resources */,
+				CE18CC86204E85DC00FA3F44 /* TurkcellSaturaReg.ttf in Resources */,
 				CE1BE936204831CE0074BDDC /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -12624,7 +12659,7 @@
 			files = (
 				CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */,
 				CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */,
-				CEE10CCE2047EA6300D97B9F /* Localizable.strings in Resources */,
+				CE18CC89204E861400FA3F44 /* Localizable.strings in Resources */,
 				CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */,
 				CEBDB1DF20444E50007EE1AE /* TurkcellSaturaDemIta.ttf in Resources */,
 				CEBDB1E020444E50007EE1AE /* TurkcellSaturaIta.ttf in Resources */,
@@ -13996,7 +14031,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE18CC90204E87CE00FA3F44 /* L10n.swift in Sources */,
 				CE1BE933204831CE0074BDDC /* DocumentActionViewController.swift in Sources */,
+				CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */,
+				CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -15126,6 +15164,22 @@
 				B54BFF36202B20250018AF82 /* Base */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		CE18CC8B204E861400FA3F44 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE18CC8A204E861400FA3F44 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		CE18CC8E204E861B00FA3F44 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE18CC8D204E861B00FA3F44 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		CE1BE934204831CE0074BDDC /* MainInterface.storyboard */ = {
