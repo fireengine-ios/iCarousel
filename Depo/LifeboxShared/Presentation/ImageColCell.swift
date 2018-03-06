@@ -31,8 +31,4 @@ final class ImageColCell: UICollectionViewCell {
             }
         }
     }
-    
-    func setImage(_ image: UIImage?) {
-        photoImageView.setScreenScaledImage(image)
-    }
 }

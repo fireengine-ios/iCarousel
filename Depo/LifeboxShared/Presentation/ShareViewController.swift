@@ -150,8 +150,6 @@ extension ShareViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: ImageColCell.self, for: indexPath)
         cell.config(with: sharedItems[indexPath.row])
-//        let image = sharedItems[indexPath.row].image
-//        cell.setImage(image)
         return cell
     }
 }

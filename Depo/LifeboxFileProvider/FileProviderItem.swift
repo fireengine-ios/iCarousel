@@ -59,11 +59,6 @@ final class FileProviderItem: NSObject, NSFileProviderItem, Map {
         self.thumbnailURL = thumbnailURL
         super.init()
     }
-    
-    /// maybe will be need
-//    override convenience init() {
-//        self.init(itemIdentifier: "", parentItemIdentifier: "", filename: "", typeIdentifier: "", childItemCount: nil, documentSize: nil, createdDate: nil, contentModificationDate: nil, isFolder: false, tempDownloadURL: nil, thumbnailURL: nil)
-//    }
 }
 
 /// : JsonMap
