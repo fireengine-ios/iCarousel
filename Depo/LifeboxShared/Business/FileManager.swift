@@ -12,6 +12,9 @@ final class FileManager {
     
     static let shared = FileManager()
     
+    /// need to test:
+    /// can one NSFileCoordinator coordinate some urls?
+    /// put NSFileCoordinator() in property
     func waitFilePreparation(at url: URL, complition: ResponseVoid) {
         var fcError: NSError? 
         

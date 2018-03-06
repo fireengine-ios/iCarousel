@@ -25,7 +25,7 @@ final class FileProviderExtension: NSFileProviderExtension {
     
     /// ready
     override func item(for identifier: NSFileProviderItemIdentifier) throws -> NSFileProviderItem {
-        return FileStorage.shared.read(for: identifier)
+        return try FileStorage.shared.read(for: identifier)
     }
     
     /// apple ready !!!

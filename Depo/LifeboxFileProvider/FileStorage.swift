@@ -23,19 +23,19 @@ final class FileStorage {
         } catch {
             print(error)
         }
-        
     }
     
-    func read(for itemIdentifier: NSFileProviderItemIdentifier) -> FileProviderItem {
+    func read(for itemIdentifier: NSFileProviderItemIdentifier) throws -> FileProviderItem {
         do {
-            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
+            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let fileURL = documentDirectory.appendingPathComponent(itemIdentifier.rawValue)
-            let item = NSKeyedUnarchiver.unarchiveObject(withFile: fileURL.path) as? FileProviderItem
-            return item ?? FileProviderItem()
+            if let item = NSKeyedUnarchiver.unarchiveObject(withFile: fileURL.path) as? FileProviderItem {
+                return item
+            }
+            throw unknownError
             
         } catch {
-            print(error)
-            return FileProviderItem()
+            throw error
         }
     }
 }

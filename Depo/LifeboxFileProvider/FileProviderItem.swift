@@ -60,10 +60,10 @@ final class FileProviderItem: NSObject, NSFileProviderItem, Map {
         super.init()
     }
     
-    /// TEMP
-    override convenience init() {
-        self.init(itemIdentifier: "", parentItemIdentifier: "", filename: "", typeIdentifier: "", childItemCount: nil, documentSize: nil, createdDate: nil, contentModificationDate: nil, isFolder: false, tempDownloadURL: nil, thumbnailURL: nil)
-    }
+    /// maybe will be need
+//    override convenience init() {
+//        self.init(itemIdentifier: "", parentItemIdentifier: "", filename: "", typeIdentifier: "", childItemCount: nil, documentSize: nil, createdDate: nil, contentModificationDate: nil, isFolder: false, tempDownloadURL: nil, thumbnailURL: nil)
+//    }
 }
 
 /// : JsonMap
@@ -147,8 +147,6 @@ extension FileProviderItem: NSCoding {
         
         self.init(itemIdentifier: itemIdentifier, parentItemIdentifier: parentItemIdentifier, filename: filename, typeIdentifier: typeIdentifier, childItemCount: childItemCount, documentSize: documentSize, createdDate: createdDate, contentModificationDate: contentModificationDate, isFolder: isFolder, tempDownloadURL: tempDownloadURL, thumbnailURL: thumbnailURL)
     }
-    
-    
 }
 
 /// : DataMapArray
