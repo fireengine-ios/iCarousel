@@ -21,7 +21,7 @@ protocol BiometricsManager {
 enum BiometricsStatus {
     case available
     case notAvailable
-    case notInitialized ///"No fingers are enrolled with Touch ID."
+    case notInitialized ///"passcode is enrolled and biometrics not"
 }
 
 final class BiometricsManagerImp: BiometricsManager {
@@ -53,11 +53,16 @@ final class BiometricsManagerImp: BiometricsManager {
         }
     }
     
+    /// You need to first call canEvaluatePolicy in order to get the biometry type.
+    /// That is, if you're just doing LAContext().biometryType then you'll always get 'none' back
+    /// https://forums.developer.apple.com/thread/89043
     var isAvailableFaceID: Bool {
-        if #available(iOS 11.0, *) {
-            /// temp logic for xcode <= 9.1
+        let context = LAContext()
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) else {
             return false
-            //return LAContext().biometryType == .faceID
+        }
+        if #available(iOS 11.0, *) {
+            return context.biometryType == .faceID
         } else {
             return false
         }
