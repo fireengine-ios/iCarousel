@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     
@@ -91,6 +92,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if tokenStorage.refreshToken != nil {
             LocationManager.shared.startUpdateLocation()
         }
+        
+        if !passcodeStorage.isEmpty {
+            let topVC = UIApplication.topController()
+            
+            /// remove PasscodeEnterViewController if was on the screen
+            if let tabBarVC = topVC as? TabBarViewController,
+                let navVC = tabBarVC.activeNavigationController,
+                navVC.topViewController is PasscodeEnterViewController {
+                navVC.popViewController(animated: false)
+                showPasscodeIfNeed()
+            }
+        }
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -105,6 +118,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
+        /// remove PasscodeEnterViewController if was on the screen and biometrics is disable
+        if let tabBarVC = topVC as? TabBarViewController,
+            let navVC = tabBarVC.activeNavigationController,
+            navVC.topViewController is PasscodeEnterViewController
+        {
+            if biometricsManager.isEnabled {
+                return
+            } else {
+                navVC.popViewController(animated: false)
+            }
+        }
+        
         if topVC is UIAlertController {
             topVC?.dismiss(animated: false, completion: {
                 self.showPasscode()
@@ -117,14 +142,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func showPasscode() {
         let topVC = UIApplication.topController()
         
-        /// remove PasscodeEnterViewController if was on the screen
-        if let tabBarVC = topVC as? TabBarViewController,
-            let navVC = tabBarVC.activeNavigationController,
-            navVC.topViewController is PasscodeEnterViewController
-        {
-            navVC.popViewController(animated: false)
-        }
-    
         /// present PasscodeEnterViewController
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         vc.success = {
