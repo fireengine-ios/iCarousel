@@ -333,7 +333,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         let file = objects[selectedIndex]
         
         if file.fileType == .video {
-            guard let url = file.urlToFile else{
+            let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
+            guard let url = preUrl else {
                 return
             }
             
