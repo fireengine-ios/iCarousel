@@ -2921,6 +2921,9 @@
 		CE95ED571F516736002F923A /* HelpAndSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED461F516736002F923A /* HelpAndSupportViewController.swift */; };
 		CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED471F516736002F923A /* HelpAndSupportViewInput.swift */; };
 		CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED481F516736002F923A /* HelpAndSupportViewOutput.swift */; };
+		CE98F6D9204E6BD800433915 /* UIImageView+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6D8204E6BD800433915 /* UIImageView+Scale.swift */; };
+		CE98F6DB204E71E300433915 /* String+UTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6DA204E71E300433915 /* String+UTType.swift */; };
+		CE98F6DD204E721200433915 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6DC204E721200433915 /* FileManager.swift */; };
 		CE99AC78201CB778003DD3B7 /* CardActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99AC77201CB778003DD3B7 /* CardActionType.swift */; };
 		CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524B92046C95E0036FCEA /* UploadQueueService.swift */; };
 		CEA524BC2046D6A10036FCEA /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BB2046D6A10036FCEA /* UploadOperation.swift */; };
@@ -4931,6 +4934,9 @@
 		CE95ED461F516736002F923A /* HelpAndSupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportViewController.swift; sourceTree = "<group>"; };
 		CE95ED471F516736002F923A /* HelpAndSupportViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportViewInput.swift; sourceTree = "<group>"; };
 		CE95ED481F516736002F923A /* HelpAndSupportViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportViewOutput.swift; sourceTree = "<group>"; };
+		CE98F6D8204E6BD800433915 /* UIImageView+Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Scale.swift"; sourceTree = "<group>"; };
+		CE98F6DA204E71E300433915 /* String+UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UTType.swift"; sourceTree = "<group>"; };
+		CE98F6DC204E721200433915 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		CE99AC77201CB778003DD3B7 /* CardActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActionType.swift; sourceTree = "<group>"; };
 		CEA524B92046C95E0036FCEA /* UploadQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadQueueService.swift; sourceTree = "<group>"; };
 		CEA524BB2046D6A10036FCEA /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
@@ -9456,8 +9462,10 @@
 				CEA524B92046C95E0036FCEA /* UploadQueueService.swift */,
 				CEA524BB2046D6A10036FCEA /* UploadOperation.swift */,
 				CE61D1C720468DFE001D01DC /* AsyncOperation.swift */,
+				CE98F6DC204E721200433915 /* FileManager.swift */,
 				CE1B7622204D343500B5E12A /* Error+Localization.swift */,
 				CEE10CCF2047EAD000D97B9F /* CGSize+Scale.swift */,
+				CE98F6D8204E6BD800433915 /* UIImageView+Scale.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -9470,6 +9478,7 @@
 				CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */,
 				CE1BE95320492D040074BDDC /* FileService.swift */,
 				CE1B761F204D2E4000B5E12A /* FileStorage.swift */,
+				CE98F6DA204E71E300433915 /* String+UTType.swift */,
 				CE1BE92A204831CE0074BDDC /* Info.plist */,
 				CE1BE92B204831CE0074BDDC /* LifeboxFileProvider.entitlements */,
 			);
@@ -13956,6 +13965,7 @@
 				CED54F6E204A760900B750BB /* SwiftyJSONExtension.swift in Sources */,
 				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
 				CE1BE94D20492C8B0074BDDC /* AuthorizationRepository.swift in Sources */,
+				CE98F6DB204E71E300433915 /* String+UTType.swift in Sources */,
 				CE1BE95120492CCE0074BDDC /* Dictionary.swift in Sources */,
 				CE1B7628204D34B900B5E12A /* Error+Alamofire.swift in Sources */,
 				CE1BE94C20492C870074BDDC /* AuthorizationURLs.swift in Sources */,
@@ -14977,6 +14987,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE61D1BB20459718001D01DC /* ImageFormat.swift in Sources */,
+				CE98F6D9204E6BD800433915 /* UIImageView+Scale.swift in Sources */,
 				CE1458CF2045734200812544 /* Alamofire+Validate.swift in Sources */,
 				CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */,
 				CE58FAF220444493007F3F54 /* ShareViewController.swift in Sources */,
@@ -14994,6 +15005,7 @@
 				CE61D1C32046873A001D01DC /* UploadService.swift in Sources */,
 				CE1B7623204D343500B5E12A /* Error+Localization.swift in Sources */,
 				CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */,
+				CE98F6DD204E721200433915 /* FileManager.swift in Sources */,
 				CEA629FF2047ED3200215811 /* L10n.swift in Sources */,
 				CE1458D520458D9100812544 /* CustomErrors.swift in Sources */,
 				CE1458C62045617600812544 /* RouteRequests.swift in Sources */,

@@ -107,8 +107,20 @@ final class ShareViewController: UIViewController {
     }
     
     private func updateCurrentUI(for shareData: ShareData) {
+        DispatchQueue.global().async { [weak self] in
+            FileManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        self?.currentPhotoImageView.setScreenScaledImage(shareData.image)
+                    case .failed(_):
+                        self?.currentPhotoImageView.image = #imageLiteral(resourceName: "ImageNoDocuments")
+                    }
+                    self?.currentPhotoImageView.backgroundColor = UIColor.white
+                }
+            }
+        }
         currentNameLabel.text = shareData.name
-        currentPhotoImageView.image = shareData.image
     }
     
     private func animateAppear() {
@@ -137,8 +149,9 @@ extension ShareViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: ImageColCell.self, for: indexPath)
-        let image = sharedItems[indexPath.row].image
-        cell.setImage(image)
+        cell.config(with: sharedItems[indexPath.row])
+//        let image = sharedItems[indexPath.row].image
+//        cell.setImage(image)
         return cell
     }
 }

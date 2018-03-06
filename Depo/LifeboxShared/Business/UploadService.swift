@@ -19,18 +19,6 @@ final class UploadService {
         self.sessionManager = sessionManager
     }
     
-    private func waitFilePreparation(at url: URL, complition: ResponseVoid) {
-        var fcError: NSError? 
-        
-        NSFileCoordinator().coordinate(readingItemAt: url, options: .forUploading, error: &fcError) { _ in
-            if let error = fcError {
-                complition(ResponseResult.failed(error))
-            } else {
-                complition(ResponseResult.success(()))
-            }
-        }
-    }
-    
     func getBaseUploadUrl(handler: @escaping ResponseHandler<String>) -> DataRequest {
         return sessionManager
             .request(RouteRequests.uploadContainer)
@@ -52,7 +40,7 @@ final class UploadService {
     
     func upload(url: URL, contentType: String, progressHandler: @escaping Request.ProgressHandler, dataRequestHandler: DataRequestHandler?, complition: @escaping ResponseVoid) {
         
-        waitFilePreparation(at: url) { [weak self] result in
+        FileManager.shared.waitFilePreparation(at: url) { [weak self] result in
             switch result {
             case .success(_):
                 
