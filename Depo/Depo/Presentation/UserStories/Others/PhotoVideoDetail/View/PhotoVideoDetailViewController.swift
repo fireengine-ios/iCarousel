@@ -212,7 +212,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
-    func onShowSelectedItem(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
+    func onShowSelectedItem(at index: Int, from items: [Item]) {
         objects = items
         selectedIndex = index
     }
@@ -243,7 +243,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     
     func setupInitialState() { }
     
-    func onItemSelected(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
+    func onItemSelected(at index: Int, from items: [Item]) {
         if items.isEmpty {
             return
         }
