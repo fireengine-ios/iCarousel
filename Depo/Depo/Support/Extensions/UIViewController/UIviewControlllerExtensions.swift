@@ -16,6 +16,8 @@ protocol Waiting {
     
     func showSpiner()
     
+    func showSpinnerOnView(_ view: UIView)
+    
     func showSpinerIncludeNavigatinBar()
     
     func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler)
@@ -23,6 +25,8 @@ protocol Waiting {
     func hideSpinerIncludeNavigatinBar()
     
     func hideSpiner()
+    
+    func hideSpinerForView(_ view: UIView)
 }
 
 extension UIViewController: Waiting {
@@ -46,6 +50,12 @@ extension UIViewController: Waiting {
         }
     }
     
+    func showSpinnerOnView(_ view: UIView) {
+        DispatchQueue.main.async {
+            _ = MBProgressHUD.showAdded(to: view, animated: true)
+        }
+    }
+    
     func showSpinerIncludeNavigatinBar() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
@@ -64,6 +74,12 @@ extension UIViewController: Waiting {
     func hideSpiner() {
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
+    
+    func hideSpinerForView(_ view: UIView) {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: view, animated: true)
         }
     }
 }

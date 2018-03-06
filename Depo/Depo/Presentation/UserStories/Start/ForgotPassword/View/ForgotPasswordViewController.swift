@@ -48,6 +48,7 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         captchaModuleView.view.frame = viewForCapcha.bounds
         capchaViewH.constant = 132
         
+        
         output.viewIsReady()
         
         configureKeyboard()
@@ -147,6 +148,7 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
     }
     
     func showCapcha(){
+        captchaModuleView.refreshCapthcha()
 //        UIView.animate(withDuration: NumericConstants.animationDuration) {
 //            let dyTop = CGFloat(100.0)
 //            var dyBottom = CGFloat(0.0)
@@ -166,7 +168,6 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         let captchaUdid = captchaModuleView.currenrtCapthcaID
         let captchaEntered = captchaModuleView.inputTextField.text
         output.onSendPassword(withEmail: obtainEmail(), enteredCaptcha: captchaEntered ?? "", captchaUDID: captchaUdid)
-        showCapcha()
     }
     
     private func obtainEmail() -> String {

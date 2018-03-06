@@ -82,14 +82,6 @@ final class RecentSearchesService {
             let objects = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Any] {
             result = objects.map { SuggestionObject(withJSON: JSON($0)) }
         }
-    
-        if category == .recent, result.isEmpty {
-            let currentYear = Date().getYear()
-            let object = SuggestionObject()
-            object.text = String(currentYear)
-            object.type = .time
-            result.append(object)
-        }
         return result
     }
     
@@ -144,7 +136,7 @@ final class RecentSearchesService {
         searches[.things] = []
         UserDefaults.standard.set([Data](), forKey: SearchCategory.recent.searchKey)
         UserDefaults.standard.set([Data](), forKey: SearchCategory.people.searchKey)
-        UserDefaults.standard.set([Data](), forKey: SearchCategory.recent.searchKey)
+        UserDefaults.standard.set([Data](), forKey: SearchCategory.things.searchKey)
         UserDefaults.standard.set(nil, forKey: recentSearchesKey)
         UserDefaults.standard.synchronize()
     }

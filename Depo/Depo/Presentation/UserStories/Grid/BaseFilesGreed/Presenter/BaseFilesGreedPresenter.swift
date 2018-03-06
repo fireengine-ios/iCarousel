@@ -145,6 +145,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         dataSource.dropData()
         dataSource.currentSortType = sortedRule
+        dataSource.isHeaderless = (sortedRule == .sizeAZ || sortedRule == .sizeZA)
         dataSource.reloadData()
         startAsyncOperation()
         dataSource.isPaginationDidEnd = false
@@ -584,6 +585,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
         if type == ElementTypes.removeAlbum {
+            bottomBarPresenter?.dismiss(animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        }
+        if type == ElementTypes.completelyDeleteAlbums {
             bottomBarPresenter?.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         }

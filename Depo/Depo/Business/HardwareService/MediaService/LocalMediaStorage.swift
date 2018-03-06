@@ -99,7 +99,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             completion(true, status)
         case .notDetermined, .restricted:
             PHPhotoLibrary.requestAuthorization({ (authStatus) in
-                completion(authStatus == .authorized, authStatus)
+                let isAuthorized = authStatus == .authorized
+                MenloworksTagsService.shared.onGalleryPermissionChanged(isAuthorized)
+                completion(isAuthorized, authStatus)
             })
         case .denied:
             completion(false, status)

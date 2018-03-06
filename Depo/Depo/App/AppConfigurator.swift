@@ -96,7 +96,7 @@ class AppConfigurator {
         let notificationTypes = NSInteger(types.rawValue)
         
         DispatchQueue.main.async {
-            MPush.register(forRemoteNotificationTypes: notificationTypes)
+            MPush.register(forRemoteNotificationTypes: MNotificationType(rawValue: notificationTypes))
             MPush.applicationDidFinishLaunching(options: launchOptions)
         }
     }

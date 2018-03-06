@@ -43,8 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = RouterVC().vcForCurrentState()
         window?.makeKeyAndVisible()
         
-        
-        
+
         Fabric.with([Crashlytics.self])
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -57,6 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let logPath: NSURL = documentDirectory.appendingPathComponent("app.log")! as NSURL
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: logPath, fileLevel: .debug)
         
+        MenloworksAppEvents.onAppLaunch()
+        MenloworksTagsService.shared.passcodeStatus(!passcodeStorage.isEmpty)
         return true
     }
     
@@ -189,20 +190,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         log.debug("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
-
+        MenloworksTagsService.shared.onNotificationPermissionChanged(true)
+        
         MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         log.debug("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
+        MenloworksTagsService.shared.onNotificationPermissionChanged(false)
 
         MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         log.debug("AppDelegate didReceiveRemoteNotification")
-
-        MPush.applicationDidReceiveRemoteNotification(userInfo)
+        MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {

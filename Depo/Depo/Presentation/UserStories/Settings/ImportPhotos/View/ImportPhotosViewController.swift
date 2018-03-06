@@ -53,6 +53,8 @@ class ImportPhotosViewController: UIViewController {
         fbOutput.viewIsReady()
         dbOutput.viewIsReady()
         instOutput.viewIsReady()
+        
+        MenloworksEventsService.shared.onSocialMediaPageOpen()
     }
     
     // MARK: - Helpers
@@ -123,6 +125,8 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
     }
     
     func succeedFacebookStart() {
+        MenloworksAppEvents.onFacebookConnected()
+        MenloworksEventsService.shared.onFacebookTransfered()
         isFBConnected = true
     }
     
@@ -136,6 +140,7 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
     }
     
     func failedFacebookStop(errorMessage: String) {
+        MenloworksAppEvents.onFacebookConnected()
         isFBConnected = true
         UIApplication.showErrorAlert(message: errorMessage)
     }
@@ -151,6 +156,10 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
             return
         }
         isDBConnected = isConnected
+        
+        if isDBConnected {
+            MenloworksEventsService.shared.onDropboxTransfered()
+        }
         
         ///maybe will be
         //switch status.status {
@@ -193,6 +202,7 @@ extension ImportPhotosViewController: ImportFromInstagramViewInput {
     // MARK: Start
     
     func instagramStartSuccess() {
+        MenloworksEventsService.shared.onInstagramTransfered()
         isInstagramConnected = true
     }
     

@@ -222,6 +222,10 @@
 		78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */; };
 		78B02CBD200D1AD500D11CD2 /* ContactSyncResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */; };
 		78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */; };
+		78B2D344204A94E000D096DC /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78B2D343204A94E000D096DC /* MPush.framework */; };
+		78B2D345204A94E000D096DC /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78B2D343204A94E000D096DC /* MPush.framework */; };
+		78B2D34D204AA5F500D096DC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B2D34C204AA5F500D096DC /* NotificationService.swift */; };
+		78B2D351204AA5F500D096DC /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 78B2D34A204AA5F500D096DC /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		78D6C8FF1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */; };
 		78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */; };
 		78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */; };
@@ -238,6 +242,10 @@
 		78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */; };
 		78DDEF9C201908C100E3530B /* String+CyrillicCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */; };
 		78DDEF9D201908CB00E3530B /* String+CyrillicCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */; };
+		78E3D518203FF9D600FA3478 /* MenloworksTagsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D517203FF9D600FA3478 /* MenloworksTagsService.swift */; };
+		78E3D51A203FFEC800FA3478 /* MenloworksTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D519203FFEC800FA3478 /* MenloworksTags.swift */; };
+		78E3D51C204006FA00FA3478 /* MenloworksTagsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D51B204006FA00FA3478 /* MenloworksTagsConstants.swift */; };
+		78E3D51E20403FE100FA3478 /* MenloworksAppEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D51D20403FE100FA3478 /* MenloworksAppEvents.swift */; };
 		78E8E2A72023186C00A979AB /* FaceImagePhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A52023186C00A979AB /* FaceImagePhotosViewController.swift */; };
 		78E8E2A82023186C00A979AB /* FaceImagePhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E8E2A62023186C00A979AB /* FaceImagePhotosViewController.xib */; };
 		78E8E2AA2023189F00A979AB /* FaceImagePhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */; };
@@ -2199,7 +2207,6 @@
 		8C0E8FDE1FDEBDFF00789C91 /* OptInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE75A1FCC3ECF00C23CBD /* OptInController.swift */; };
 		8C0E8FE11FDEBDFF00789C91 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9019CAC9FE00FD1E03 /* Security.framework */; };
-		8C0E8FE31FDEBDFF00789C91 /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD6261FD135CB000344BD /* libMPush.a */; };
 		8C0E8FE41FDEBDFF00789C91 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05224A9619DC345B00214767 /* AssetsLibrary.framework */; };
 		8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CDB43311F865B0B00789FA6 /* CoreLocation.framework */; };
 		8C0E8FE61FDEBDFF00789C91 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFE92F01F5EC666008A3B72 /* MessageUI.framework */; };
@@ -2469,7 +2476,6 @@
 		AF744E3CD7A5DD8E7D6C30BB /* UserInfoSubViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021DEBE120BC8745E74C3B8B /* UserInfoSubViewViewController.swift */; };
 		B02F86BF64856149537A10F3 /* SyncContactsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD14ED875730C75E5AD4E0 /* SyncContactsRouterInput.swift */; };
 		B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */; };
-		B51FD6391FD18FDB000344BD /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD6261FD135CB000344BD /* libMPush.a */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
@@ -2499,6 +2505,40 @@
 		C31A7AB8B8824DB84111E8FB /* SplashInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */; };
 		C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */; };
 		C5E5EC15332297CC6F59374A /* SyncContactsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B17E6F8BC6EF2FCF5C768A7 /* SyncContactsViewInput.swift */; };
+		C62239A0204972080043ED44 /* MenloworksAppEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D51D20403FE100FA3478 /* MenloworksAppEvents.swift */; };
+		C62239A1204972120043ED44 /* MenloworksTagsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D51B204006FA00FA3478 /* MenloworksTagsConstants.swift */; };
+		C62239A2204972140043ED44 /* MenloworksTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D519203FFEC800FA3478 /* MenloworksTags.swift */; };
+		C62239A3204972160043ED44 /* MenloworksTagsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D517203FF9D600FA3478 /* MenloworksTagsService.swift */; };
+		C62239A4204972B00043ED44 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
+		C62239A5204972D00043ED44 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
+		C62239A6204972F40043ED44 /* FaceImageItemsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B52023638E00A979AB /* FaceImageItemsInteractorOutput.swift */; };
+		C62239A7204973120043ED44 /* FaceImageChangeCoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C332028379400660394 /* FaceImageChangeCoverPresenter.swift */; };
+		C62239A82049731B0043ED44 /* FaceImageChangeCoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C36202837B300660394 /* FaceImageChangeCoverInteractor.swift */; };
+		C62239A92049731D0043ED44 /* FaceImageChangeCoverInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C35202837B300660394 /* FaceImageChangeCoverInteractorInput.swift */; };
+		C62239AA204973200043ED44 /* FaceImageChangeCoverInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C37202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift */; };
+		C62239AB204973240043ED44 /* FaceImageChangeCoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3C202837C800660394 /* FaceImageChangeCoverConfigurator.swift */; };
+		C62239AC204973270043ED44 /* FaceImageChangeCoverInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3B202837C700660394 /* FaceImageChangeCoverInitializer.swift */; };
+		C62239AD2049732D0043ED44 /* FaceImageChangeCoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C2F2028376500660394 /* FaceImageChangeCoverRouter.swift */; };
+		C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C302028376500660394 /* FaceImageChangeCoverRouterInput.swift */; };
+		C62239AF204973330043ED44 /* FaceImageChangeCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C2B2028374D00660394 /* FaceImageChangeCoverViewController.swift */; };
+		C62239B0204973400043ED44 /* FaceImageChangeCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA37C2C2028374E00660394 /* FaceImageChangeCoverViewController.xib */; };
+		C62239B1204973720043ED44 /* FaceImageItemsInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B3202360C700A979AB /* FaceImageItemsInteractorInput.swift */; };
+		C62239B2204973830043ED44 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
+		C62239B32049738F0043ED44 /* FaceImageItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B720236D6900A979AB /* FaceImageItemsRouterInput.swift */; };
+		C62239B4204973CC0043ED44 /* FaceImagePhotosInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AF2023195600A979AB /* FaceImagePhotosInitializer.swift */; };
+		C62239B5204976DD0043ED44 /* FaceImagePhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A52023186C00A979AB /* FaceImagePhotosViewController.swift */; };
+		C62239B6204976E40043ED44 /* FaceImagePhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E8E2A62023186C00A979AB /* FaceImagePhotosViewController.xib */; };
+		C62239B7204976E80043ED44 /* FaceImagePhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */; };
+		C62239B8204976F20043ED44 /* FaceImagePhotosViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96AEA1202B6A5100F066F9 /* FaceImagePhotosViewInput.swift */; };
+		C62239B9204976FD0043ED44 /* FaceImagePhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AB202318E700A979AB /* FaceImagePhotosInteractor.swift */; };
+		C62239BA204977090043ED44 /* FaceImagePhotosRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2AD2023191800A979AB /* FaceImagePhotosRouter.swift */; };
+		C62239BB2049770C0043ED44 /* FaceImagePhotosRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3F202883BF00660394 /* FaceImagePhotosRouterInput.swift */; };
+		C62239BC204977120043ED44 /* FaceImagePhotosConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B12023196B00A979AB /* FaceImagePhotosConfigurator.swift */; };
+		C62239BD2049774B0043ED44 /* PeopleAlbumSliderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */; };
+		C65DCBDE204683820083A965 /* MenloworksEventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65DCBDB204683820083A965 /* MenloworksEventsService.swift */; };
+		C65DCBDF204683820083A965 /* MenloworksEventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65DCBDB204683820083A965 /* MenloworksEventsService.swift */; };
+		C65DCBE0204683820083A965 /* MenloworksEventsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */; };
+		C65DCBE1204683820083A965 /* MenloworksEventsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */; };
 		C7055CAC94DC0C09FAC5F608 /* AlbumDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30F701A47CF5B8D685D062 /* AlbumDetailPresenter.swift */; };
 		C8DE09849CB5200793B94E8A /* SelectNameConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9373EA2411B8180CA5FE65D7 /* SelectNameConfigurator.swift */; };
 		C9C861DC0DEC3C4584CBF425 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B2FD70EACA38EF90262C71 /* SettingsPresenter.swift */; };
@@ -3190,6 +3230,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		78B2D34F204AA5F500D096DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 78B2D349204AA5F500D096DC;
+			remoteInfo = NotificationService;
+		};
 		B5E1D980202DB4800022F0E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -3246,6 +3293,7 @@
 			files = (
 				B54BFF3B202B20250018AF82 /* autosync-widget.appex in Embed App Extensions */,
 				CE1BE93D204831CE0074BDDC /* LifeboxFileProvider.appex in Embed App Extensions */,
+				78B2D351204AA5F500D096DC /* NotificationService.appex in Embed App Extensions */,
 				CE58FAF920444493007F3F54 /* LifeboxShared.appex in Embed App Extensions */,
 				CE1BE93A204831CE0074BDDC /* LifeboxFileProviderUI.appex in Embed App Extensions */,
 			);
@@ -3536,6 +3584,11 @@
 		78A7601F200898F10023D52B /* DuplicatedContactsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsModuleOutput.swift; sourceTree = "<group>"; };
 		78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncResponse.swift; sourceTree = "<group>"; };
 		78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSyncParametrs.swift; sourceTree = "<group>"; };
+		78B2D343204A94E000D096DC /* MPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPush.framework; sourceTree = "<group>"; };
+		78B2D34A204AA5F500D096DC /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		78B2D34C204AA5F500D096DC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		78B2D34E204AA5F500D096DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78B2D357204AA69D00D096DC /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
 		78D6C8FE1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
 		78D9BA312007E7E100F2233F /* DuplicatedContactsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsConfigurator.swift; sourceTree = "<group>"; };
 		78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsInitializer.swift; sourceTree = "<group>"; };
@@ -3551,6 +3604,10 @@
 		78D9BA452007E82700F2233F /* DuplicatedContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewController.swift; sourceTree = "<group>"; };
 		78D9BA462007E82700F2233F /* DuplicatedContactsViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedContactsViewOutput.swift; sourceTree = "<group>"; };
 		78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CyrillicCompare.swift"; sourceTree = "<group>"; };
+		78E3D517203FF9D600FA3478 /* MenloworksTagsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenloworksTagsService.swift; sourceTree = "<group>"; };
+		78E3D519203FFEC800FA3478 /* MenloworksTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenloworksTags.swift; sourceTree = "<group>"; };
+		78E3D51B204006FA00FA3478 /* MenloworksTagsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenloworksTagsConstants.swift; sourceTree = "<group>"; };
+		78E3D51D20403FE100FA3478 /* MenloworksAppEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenloworksAppEvents.swift; sourceTree = "<group>"; };
 		78E8E2A52023186C00A979AB /* FaceImagePhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewController.swift; sourceTree = "<group>"; };
 		78E8E2A62023186C00A979AB /* FaceImagePhotosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceImagePhotosViewController.xib; sourceTree = "<group>"; };
 		78E8E2A92023189F00A979AB /* FaceImagePhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosPresenter.swift; sourceTree = "<group>"; };
@@ -4694,8 +4751,6 @@
 		B0E129D217E4E979AFF5939D /* SyncContactsInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsInteractorInput.swift; sourceTree = "<group>"; };
 		B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationRouterInput.swift; sourceTree = "<group>"; };
 		B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInitializer.swift; sourceTree = "<group>"; };
-		B51FD6251FD135CA000344BD /* MPush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPush.h; sourceTree = "<group>"; };
-		B51FD6261FD135CB000344BD /* libMPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMPush.a; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
@@ -4735,6 +4790,8 @@
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
 		C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
 		C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInitializer.swift; sourceTree = "<group>"; };
+		C65DCBDB204683820083A965 /* MenloworksEventsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsService.swift; sourceTree = "<group>"; };
+		C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsConstants.swift; sourceTree = "<group>"; };
 		C7EA8E62DD494F5240389C2E /* Pods-LifeboxShared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.debug.xcconfig"; sourceTree = "<group>"; };
 		C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Depo_LifeTech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8E6892DB1C0232B660C2CB3 /* Pods-LifeboxFileProvider.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.release.xcconfig"; sourceTree = "<group>"; };
@@ -5194,15 +5251,22 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		78B2D347204AA5F500D096DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C0E8FE01FDEBDFF00789C91 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8C0E8FE11FDEBDFF00789C91 /* CoreBluetooth.framework in Frameworks */,
 				8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */,
-				8C0E8FE31FDEBDFF00789C91 /* libMPush.a in Frameworks */,
 				8C0E8FE41FDEBDFF00789C91 /* AssetsLibrary.framework in Frameworks */,
 				8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */,
+				78B2D345204A94E000D096DC /* MPush.framework in Frameworks */,
 				8C0E8FE61FDEBDFF00789C91 /* MessageUI.framework in Frameworks */,
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
@@ -5262,12 +5326,12 @@
 				CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */,
 				B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */,
 				CE51AD161EF90853005DCEE0 /* Security.framework in Frameworks */,
-				B51FD6391FD18FDB000344BD /* libMPush.a in Frameworks */,
 				CE51AD121EF90853005DCEE0 /* AssetsLibrary.framework in Frameworks */,
 				7CDB43321F865B0B00789FA6 /* CoreLocation.framework in Frameworks */,
 				7CFE92F11F5EC666008A3B72 /* MessageUI.framework in Frameworks */,
 				CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */,
 				7CF6BDE41F0BA1E10066709E /* AVKit.framework in Frameworks */,
+				78B2D344204A94E000D096DC /* MPush.framework in Frameworks */,
 				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318D71EFBDDB600E25989 /* iAd.framework in Frameworks */,
 				CE3318D51EFBDDA200E25989 /* CFNetwork.framework in Frameworks */,
@@ -5318,6 +5382,7 @@
 				CE58FAF020444493007F3F54 /* LifeboxShared */,
 				CE1BE923204831CE0074BDDC /* LifeboxFileProvider */,
 				CE1BE931204831CE0074BDDC /* LifeboxFileProviderUI */,
+				78B2D34B204AA5F500D096DC /* NotificationService */,
 				051E1DF519CAC2F900FD1E03 /* Frameworks */,
 				051E1DF419CAC2F900FD1E03 /* Products */,
 				FA9ABBCB19DCF3FFE7B413C8 /* Pods */,
@@ -5335,6 +5400,7 @@
 				CE58FAEF20444492007F3F54 /* LifeboxShared.appex */,
 				CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */,
 				CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */,
+				78B2D34A204AA5F500D096DC /* NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -6545,6 +6611,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		78B2D34B204AA5F500D096DC /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				78B2D357204AA69D00D096DC /* NotificationService.entitlements */,
+				78B2D34C204AA5F500D096DC /* NotificationService.swift */,
+				78B2D34E204AA5F500D096DC /* Info.plist */,
+			);
+			path = NotificationService;
+			sourceTree = "<group>";
+		};
 		78D1DECF2CF16509DB6F1EAD /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -6624,6 +6700,16 @@
 				78D9BA322007E7E100F2233F /* DuplicatedContactsInitializer.swift */,
 			);
 			path = Configurator;
+			sourceTree = "<group>";
+		};
+		78E3D516203FF9A000FA3478 /* MenloworksTagsService */ = {
+			isa = PBXGroup;
+			children = (
+				78E3D517203FF9D600FA3478 /* MenloworksTagsService.swift */,
+				78E3D519203FFEC800FA3478 /* MenloworksTags.swift */,
+				78E3D51B204006FA00FA3478 /* MenloworksTagsConstants.swift */,
+			);
+			path = MenloworksTagsService;
 			sourceTree = "<group>";
 		};
 		78E8E29F202317A300A979AB /* FaceImageItemPhotos */ = {
@@ -7425,6 +7511,8 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C65DCBDA204683820083A965 /* MenloworksEventsService */,
+				78E3D516203FF9A000FA3478 /* MenloworksTagsService */,
 				7C529686203EFE3A00BF3FBE /* SyncedBlock */,
 				B54BFF45202B43CE0018AF82 /* WidgetService */,
 				782E40B11FE7D05F007F7838 /* RecentSearchesService */,
@@ -7438,6 +7526,7 @@
 				CE37B0211F7B7BDE00DDE209 /* IAPManager.swift */,
 				CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */,
 				CE3E4D12201C70A100173045 /* ImageManager.swift */,
+				78E3D51D20403FE100FA3478 /* MenloworksAppEvents.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -8950,8 +9039,8 @@
 		8CFF866E1F0F96D100520D18 /* VendorsFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				78B2D343204A94E000D096DC /* MPush.framework */,
 				8C06AC2E2008AD6F003D8E05 /* CropySDK */,
-				B51FD6241FD135BA000344BD /* Menloworks */,
 				8CFF866F1F0F96E600520D18 /* ContactSyncSDK */,
 				56B9E92B1DED750600DE1011 /* AppRater */,
 				05A938071AF6AE7C00AE2892 /* TurkcellUpdaterSDK */,
@@ -9279,15 +9368,6 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
-		B51FD6241FD135BA000344BD /* Menloworks */ = {
-			isa = PBXGroup;
-			children = (
-				B51FD6261FD135CB000344BD /* libMPush.a */,
-				B51FD6251FD135CA000344BD /* MPush.h */,
-			);
-			path = Menloworks;
-			sourceTree = "<group>";
-		};
 		B54BFF32202B20250018AF82 /* autosync-widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -9374,6 +9454,15 @@
 				7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C65DCBDA204683820083A965 /* MenloworksEventsService */ = {
+			isa = PBXGroup;
+			children = (
+				C65DCBDB204683820083A965 /* MenloworksEventsService.swift */,
+				C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */,
+			);
+			path = MenloworksEventsService;
 			sourceTree = "<group>";
 		};
 		C7EF66C623C833B469A51536 /* View */ = {
@@ -11280,6 +11369,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		78B2D349204AA5F500D096DC /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78B2D356204AA5F500D096DC /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				78B2D346204AA5F500D096DC /* Sources */,
+				78B2D347204AA5F500D096DC /* Frameworks */,
+				78B2D348204AA5F500D096DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationService;
+			productName = NotificationService;
+			productReference = 78B2D34A204AA5F500D096DC /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		8C0E8C611FDEBDFF00789C91 /* TC_Depo_LifeTech */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C0E90791FDEBDFF00789C91 /* Build configuration list for PBXNativeTarget "TC_Depo_LifeTech" */;
@@ -11379,6 +11485,7 @@
 				CE58FAF820444493007F3F54 /* PBXTargetDependency */,
 				CE1BE939204831CE0074BDDC /* PBXTargetDependency */,
 				CE1BE93C204831CE0074BDDC /* PBXTargetDependency */,
+				78B2D350204AA5F500D096DC /* PBXTargetDependency */,
 			);
 			name = Depo_LifeTech;
 			productName = Depo;
@@ -11432,6 +11539,16 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = LifeTech;
 				TargetAttributes = {
+					78B2D349204AA5F500D096DC = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = 7A7F3AW7RP;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
 					8C0E8C611FDEBDFF00789C91 = {
 						DevelopmentTeam = 7A7F3AW7RP;
 					};
@@ -11535,11 +11652,19 @@
 				CE58FAEE20444492007F3F54 /* LifeboxShared */,
 				CE1BE921204831CD0074BDDC /* LifeboxFileProvider */,
 				CE1BE92F204831CE0074BDDC /* LifeboxFileProviderUI */,
+				78B2D349204AA5F500D096DC /* NotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		78B2D348204AA5F500D096DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C0E8FFC1FDEBDFF00789C91 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -11834,6 +11959,7 @@
 				8C06AF992008AD71003D8E05 /* filtre_selected@2x.png in Resources */,
 				8C06B1052008AD72003D8E05 /* slider_thumb2@3x.png in Resources */,
 				8C06AFE92008AD71003D8E05 /* kare@3x.png in Resources */,
+				C62239B0204973400043ED44 /* FaceImageChangeCoverViewController.xib in Resources */,
 				8C06B1352008AD72003D8E05 /* t_orta_selected.png in Resources */,
 				8C06B1332008AD72003D8E05 /* t_orta@3x.png in Resources */,
 				8C06AFEB2008AD71003D8E05 /* kare_selected.png in Resources */,
@@ -11887,6 +12013,7 @@
 				8C06B1752008AD72003D8E05 /* toolbar_undo_icon@3x.png in Resources */,
 				8C06B19F2008AD72003D8E05 /* yesil@2x.png in Resources */,
 				8C06B08F2008AD71003D8E05 /* paylas_whatsapp.png in Resources */,
+				C62239B6204976E40043ED44 /* FaceImagePhotosViewController.xib in Resources */,
 				8C06B1B92008AD72003D8E05 /* CRYUserContractViewController.nib in Resources */,
 				8C06B0272008AD71003D8E05 /* ok@3x.png in Resources */,
 				8C0E90501FDEBDFF00789C91 /* TurkcellSaturaDem.ttf in Resources */,
@@ -13025,6 +13152,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		78B2D346204AA5F500D096DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78B2D34D204AA5F500D096DC /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C0E8C631FDEBDFF00789C91 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -13045,6 +13180,7 @@
 				8C0E8C6C1FDEBDFF00789C91 /* SyncAdapter.m in Sources */,
 				8C0E8C6D1FDEBDFF00789C91 /* PasscodeSettingsPresenter.swift in Sources */,
 				8C0E8C6E1FDEBDFF00789C91 /* Router.swift in Sources */,
+				C62239B2204973830043ED44 /* ItemSyncOperation.swift in Sources */,
 				8C0B91B320170F5B00A5BA81 /* ContactSyncParametrs.swift in Sources */,
 				8C0E8C6F1FDEBDFF00789C91 /* Filter.m in Sources */,
 				8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */,
@@ -13075,6 +13211,8 @@
 				8C0E8C841FDEBDFF00789C91 /* PasscodeEnterViewController.swift in Sources */,
 				8C0E8C851FDEBDFF00789C91 /* CreateStoryPreviewViewController.swift in Sources */,
 				8C0E8C861FDEBDFF00789C91 /* FullyLoaded.m in Sources */,
+				C62239B32049738F0043ED44 /* FaceImageItemsRouterInput.swift in Sources */,
+				C62239AF204973330043ED44 /* FaceImageChangeCoverViewController.swift in Sources */,
 				CE1458D02045734900812544 /* Alamofire+Validate.swift in Sources */,
 				7C529689203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
 				8C0E8C871FDEBDFF00789C91 /* UIImageView.swift in Sources */,
@@ -13107,6 +13245,7 @@
 				8C0E8C9F1FDEBDFF00789C91 /* ValidationService.swift in Sources */,
 				8C0E8CA01FDEBDFF00789C91 /* UserProfileViewController.swift in Sources */,
 				8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */,
+				C62239A1204972120043ED44 /* MenloworksTagsConstants.swift in Sources */,
 				8C0E8CA31FDEBDFF00789C91 /* AutoSyncRouterInput.swift in Sources */,
 				8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */,
 				8C0E8CA71FDEBDFF00789C91 /* RequestService.swift in Sources */,
@@ -13160,6 +13299,7 @@
 				8C0E8CD61FDEBDFF00789C91 /* HomePageModuleInput.swift in Sources */,
 				8C0E8CD71FDEBDFF00789C91 /* GSMCodeModel.swift in Sources */,
 				8C0E8CD81FDEBDFF00789C91 /* PlanType.swift in Sources */,
+				C65DCBE1204683820083A965 /* MenloworksEventsConstants.swift in Sources */,
 				CE827588203FEC7800067724 /* UIScrollView+Scroll.swift in Sources */,
 				8C0E8CD91FDEBDFF00789C91 /* SearchViewInitializer.swift in Sources */,
 				8C0E8CDA1FDEBDFF00789C91 /* Configuration.m in Sources */,
@@ -13168,6 +13308,7 @@
 				8C0E8CDC1FDEBDFF00789C91 /* VisualMusicPlayerViewInput.swift in Sources */,
 				8C0B91BA2017104500A5BA81 /* AuthorizationRepository.swift in Sources */,
 				8C0E8CDD1FDEBDFF00789C91 /* AutoSyncModuleInput.swift in Sources */,
+				C62239AC204973270043ED44 /* FaceImageChangeCoverInitializer.swift in Sources */,
 				8C0E8CDE1FDEBDFF00789C91 /* CoreDataStack.swift in Sources */,
 				8C0E8CDF1FDEBDFF00789C91 /* AutoSyncInteractorOutput.swift in Sources */,
 				8CD2B3AF1FE7B37600280547 /* VideoSyncService.swift in Sources */,
@@ -13196,19 +13337,24 @@
 				8C0E8CF31FDEBDFF00789C91 /* CreateStoryPreviewInteractor.swift in Sources */,
 				8C0E8CF41FDEBDFF00789C91 /* AppDelegate.swift in Sources */,
 				8C0E8CF51FDEBDFF00789C91 /* CollectionViewCellForController.swift in Sources */,
+				C62239A4204972B00043ED44 /* WidgetService.swift in Sources */,
 				8C0E8CF61FDEBDFF00789C91 /* AccountResponse.swift in Sources */,
 				8C0E8CF71FDEBDFF00789C91 /* CollectionViewCellForAudio.swift in Sources */,
 				8C0E8CF81FDEBDFF00789C91 /* KeyboardLayoutConstraint.swift in Sources */,
+				C62239B8204976F20043ED44 /* FaceImagePhotosViewInput.swift in Sources */,
 				8C0E8CF91FDEBDFF00789C91 /* AutoSyncInitializer.swift in Sources */,
 				8C0E8CFA1FDEBDFF00789C91 /* CreateStoryPhotosOrderRouter.swift in Sources */,
 				8C0E8CFB1FDEBDFF00789C91 /* UpdateServerIntegration.m in Sources */,
 				8C0E8CFC1FDEBDFF00789C91 /* ResizableCollectionView.swift in Sources */,
 				8C0E8CFD1FDEBDFF00789C91 /* HomePageRouter.swift in Sources */,
+				C62239A0204972080043ED44 /* MenloworksAppEvents.swift in Sources */,
 				8C0E8CFE1FDEBDFF00789C91 /* CustomNavBarView.swift in Sources */,
 				8C0E8CFF1FDEBDFF00789C91 /* CollectionViewCellForPhoto.swift in Sources */,
 				8C0E8D001FDEBDFF00789C91 /* LoginInteractor.swift in Sources */,
 				8C0E8D011FDEBDFF00789C91 /* MessageView.m in Sources */,
 				8C0E8D021FDEBDFF00789C91 /* FLImageView.m in Sources */,
+				C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */,
+				C62239A82049731B0043ED44 /* FaceImageChangeCoverInteractor.swift in Sources */,
 				8C0E8D031FDEBDFF00789C91 /* ProgressPopUpProtocol.swift in Sources */,
 				CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */,
 				8C0E8D041FDEBDFF00789C91 /* LocalAlbumModuleInitializer.swift in Sources */,
@@ -13276,10 +13422,12 @@
 				8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */,
 				8C0E8D401FDEBDFF00789C91 /* CurioDB.m in Sources */,
+				C62239B7204976E80043ED44 /* FaceImagePhotosPresenter.swift in Sources */,
 				8C0E8D411FDEBDFF00789C91 /* NavBarConfugurator.swift in Sources */,
 				8C0B91A720170EAB00A5BA81 /* ManageContactsViewOutput.swift in Sources */,
 				8C0E8D431FDEBDFF00789C91 /* SwiftyJSONExtension.swift in Sources */,
 				8C0E8D441FDEBDFF00789C91 /* RemoteDownloder.swift in Sources */,
+				C62239AB204973240043ED44 /* FaceImageChangeCoverConfigurator.swift in Sources */,
 				8C0E8D451FDEBDFF00789C91 /* BlueButtonWithWhiteText.swift in Sources */,
 				8C0B91BE201710EB00A5BA81 /* TitleView.swift in Sources */,
 				8C0E8D471FDEBDFF00789C91 /* String+Int.swift in Sources */,
@@ -13309,6 +13457,7 @@
 				8C0E8D611FDEBDFF00789C91 /* PhoneVereficationDataStorage.swift in Sources */,
 				8C0E8D621FDEBDFF00789C91 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				8C0E8D631FDEBDFF00789C91 /* CurioPushData.m in Sources */,
+				C62239BD2049774B0043ED44 /* PeopleAlbumSliderInteractor.swift in Sources */,
 				8C0E8D641FDEBDFF00789C91 /* BottomSelectionTabBarViewController.swift in Sources */,
 				8C0E8D651FDEBDFF00789C91 /* BaseDataSourceForCollectionView.swift in Sources */,
 				8C0E8D661FDEBDFF00789C91 /* AutoSyncViewController.swift in Sources */,
@@ -13319,6 +13468,7 @@
 				8C0E8D6C1FDEBDFF00789C91 /* PackagesConfigurator.swift in Sources */,
 				8C0E8D6D1FDEBDFF00789C91 /* EmptyContainerNavVC.swift in Sources */,
 				8C0E8D6E1FDEBDFF00789C91 /* PasscodeViewImp.swift in Sources */,
+				C62239B9204976FD0043ED44 /* FaceImagePhotosInteractor.swift in Sources */,
 				8C0E8D711FDEBDFF00789C91 /* LoginInitializer.swift in Sources */,
 				8C0E8D721FDEBDFF00789C91 /* Factory.swift in Sources */,
 				8C0E8D731FDEBDFF00789C91 /* UploadFromLifeBoxRouterInput.swift in Sources */,
@@ -13332,6 +13482,7 @@
 				8C0E8D7C1FDEBDFF00789C91 /* ReachabilityService.swift in Sources */,
 				8C06AC1520066641003D8E05 /* TurkcellSecurityRouter.swift in Sources */,
 				8C0E8D7E1FDEBDFF00789C91 /* AutoNextEditingRowPasser.swift in Sources */,
+				C62239B5204976DD0043ED44 /* FaceImagePhotosViewController.swift in Sources */,
 				8C0E8D7F1FDEBDFF00789C91 /* FloatingContainerVC.swift in Sources */,
 				8C0E8D801FDEBDFF00789C91 /* Array+Safe.swift in Sources */,
 				8C0E8D811FDEBDFF00789C91 /* AutoSyncRouter.swift in Sources */,
@@ -13353,6 +13504,7 @@
 				8C0E8D941FDEBDFF00789C91 /* UserProfileViewOutput.swift in Sources */,
 				8C0E8D951FDEBDFF00789C91 /* UploadResponse.swift in Sources */,
 				8C0E8D961FDEBDFF00789C91 /* UsageInfoInteractorInput.swift in Sources */,
+				C62239BB2049770C0043ED44 /* FaceImagePhotosRouterInput.swift in Sources */,
 				8C0E8D971FDEBDFF00789C91 /* ResponseResult.swift in Sources */,
 				8C0E8D981FDEBDFF00789C91 /* CreateStorySelectionInitializer.swift in Sources */,
 				8C0E8D991FDEBDFF00789C91 /* CoreTelephonyService.swift in Sources */,
@@ -13432,6 +13584,7 @@
 				CED4B0282017505300D06CA9 /* Mapping.swift in Sources */,
 				8C0E8DD61FDEBDFF00789C91 /* TermsAndServicesInteractorOutput.swift in Sources */,
 				8C0E8DD71FDEBDFF00789C91 /* TermsAndServicesInteractor.swift in Sources */,
+				C62239BA204977090043ED44 /* FaceImagePhotosRouter.swift in Sources */,
 				8C0E8DD81FDEBDFF00789C91 /* UploadFromLifeBoxViewIO.swift in Sources */,
 				8C0E8DD91FDEBDFF00789C91 /* TermsAndServicesDataStorage.swift in Sources */,
 				8C0E8DDA1FDEBDFF00789C91 /* TermsAndServicesRouterInput.swift in Sources */,
@@ -13450,6 +13603,7 @@
 				8C0E8DE41FDEBDFF00789C91 /* UserProfileInteractorOutput.swift in Sources */,
 				8C0E8DE51FDEBDFF00789C91 /* IntroducePresenter.swift in Sources */,
 				8C0E8DE61FDEBDFF00789C91 /* CreateStoryService.swift in Sources */,
+				C62239AA204973200043ED44 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
 				8C0E8DE71FDEBDFF00789C91 /* IntroduceInteractorInput.swift in Sources */,
 				8C0E8DE81FDEBDFF00789C91 /* AlbumServiceResponse.swift in Sources */,
 				8C0E8DE91FDEBDFF00789C91 /* IntroduceInteractorOutput.swift in Sources */,
@@ -13475,6 +13629,7 @@
 				8C0E8DF91FDEBDFF00789C91 /* ImportPhotosViewOutput.swift in Sources */,
 				8C0E8DFA1FDEBDFF00789C91 /* AccountService.swift in Sources */,
 				8C0E8DFB1FDEBDFF00789C91 /* GridListTopBarSortingTableView.swift in Sources */,
+				C62239A92049731D0043ED44 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				8C0E8DFC1FDEBDFF00789C91 /* PHAssetCollection.swift in Sources */,
 				CE055F4020383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */,
 				8C0E8DFD1FDEBDFF00789C91 /* HomePageInteractor.swift in Sources */,
@@ -13533,6 +13688,7 @@
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
 				8C0E8E2B1FDEBDFF00789C91 /* ForgotPasswordInteractor.swift in Sources */,
 				8C0E8E2C1FDEBDFF00789C91 /* OffersService.swift in Sources */,
+				C62239B4204973CC0043ED44 /* FaceImagePhotosInitializer.swift in Sources */,
 				8C0E8E2D1FDEBDFF00789C91 /* LocalMediaStorage.swift in Sources */,
 				8C0E8E2E1FDEBDFF00789C91 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				8C0E8E2F1FDEBDFF00789C91 /* ActivityTimelineServiceResponse.swift in Sources */,
@@ -13581,6 +13737,7 @@
 				8C0B919720170E4C00A5BA81 /* DuplicatedContactsViewController.swift in Sources */,
 				8C06AC0920066641003D8E05 /* TurkcellSecurityConfigurator.swift in Sources */,
 				8C0E8E621FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
+				C62239A7204973120043ED44 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				8C0E8E641FDEBDFF00789C91 /* PredicateRules.swift in Sources */,
 				8C0E8E651FDEBDFF00789C91 /* DropboxResponse.swift in Sources */,
 				4AAF28B820205454007B43BA /* FaceImageItemsConfigurator.swift in Sources */,
@@ -13661,6 +13818,7 @@
 				8C0E8ECF1FDEBDFF00789C91 /* UserProfileRouter.swift in Sources */,
 				8C0E8ED01FDEBDFF00789C91 /* SelectionImageView.swift in Sources */,
 				8C0E8ED11FDEBDFF00789C91 /* Int64+Bytes.swift in Sources */,
+				C62239A5204972D00043ED44 /* SharedEnums.swift in Sources */,
 				4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
 				8C0E8ED21FDEBDFF00789C91 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				8C0E8ED31FDEBDFF00789C91 /* MediaItemOperations.swift in Sources */,
@@ -13729,10 +13887,12 @@
 				FA475ACD203EAFB9008D79C2 /* PushPopAnimator.swift in Sources */,
 				8C0E8F061FDEBDFF00789C91 /* SyncContactsViewOutput.swift in Sources */,
 				8C0E8F071FDEBDFF00789C91 /* SyncContactsViewController.swift in Sources */,
+				C62239AD2049732D0043ED44 /* FaceImageChangeCoverRouter.swift in Sources */,
 				8C0E8F081FDEBDFF00789C91 /* FBService.swift in Sources */,
 				8C0E8F091FDEBDFF00789C91 /* PasscodeSettingsInitializer.swift in Sources */,
 				8C0E8F0A1FDEBDFF00789C91 /* SyncContactsModuleInput.swift in Sources */,
 				8C0B919B20170E5900A5BA81 /* DuplicatedContactsRouterInput.swift in Sources */,
+				C65DCBDF204683820083A965 /* MenloworksEventsService.swift in Sources */,
 				8C0E8F0B1FDEBDFF00789C91 /* SyncContactsPresenter.swift in Sources */,
 				8C0E8F0C1FDEBDFF00789C91 /* UserProfileViewInput.swift in Sources */,
 				8C0E8F0D1FDEBDFF00789C91 /* SyncContactsInteractorInput.swift in Sources */,
@@ -13773,6 +13933,7 @@
 				7CD7C2A420189C6C009F6D3D /* StorageCard.swift in Sources */,
 				8C0E8F291FDEBDFF00789C91 /* SettingsInteractor.swift in Sources */,
 				8CD2B3B71FE7B43D00280547 /* WaitingForWiFiPopUp.swift in Sources */,
+				C62239A2204972140043ED44 /* MenloworksTags.swift in Sources */,
 				8C0E8F2A1FDEBDFF00789C91 /* ImportPhotosRouter.swift in Sources */,
 				8C0B91A920170EB000A5BA81 /* ManageContactsRouter.swift in Sources */,
 				8C0E8F2B1FDEBDFF00789C91 /* SettingsRouterInput.swift in Sources */,
@@ -13868,6 +14029,7 @@
 				8C0E8F731FDEBDFF00789C91 /* VisualMusicPlayerInteractor.swift in Sources */,
 				8C0E8F741FDEBDFF00789C91 /* SelectNameViewInput.swift in Sources */,
 				8C06AC252008AB85003D8E05 /* FreeAppSpaceInitializer.swift in Sources */,
+				C62239BC204977120043ED44 /* FaceImagePhotosConfigurator.swift in Sources */,
 				8C0E8F751FDEBDFF00789C91 /* AccountParameters.swift in Sources */,
 				7C379F40202C364F0050C055 /* CardActionType.swift in Sources */,
 				8C0E8F761FDEBDFF00789C91 /* PrintViewOutput.swift in Sources */,
@@ -13876,6 +14038,7 @@
 				8C0E8F791FDEBDFF00789C91 /* SelectNameViewController.swift in Sources */,
 				8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */,
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
+				C62239A6204972F40043ED44 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				8C0E8F7C1FDEBDFF00789C91 /* BaseView.swift in Sources */,
 				8C0E8F7D1FDEBDFF00789C91 /* ImageForDowload.swift in Sources */,
 				8C0E8F7E1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
@@ -13886,9 +14049,11 @@
 				8C0E8F831FDEBDFF00789C91 /* PackagesRouterInput.swift in Sources */,
 				4A56D5BC202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				8C0E8F841FDEBDFF00789C91 /* SelectNameRouter.swift in Sources */,
+				C62239A3204972160043ED44 /* MenloworksTagsService.swift in Sources */,
 				8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */,
 				8C0E8F851FDEBDFF00789C91 /* SelectNameConfigurator.swift in Sources */,
 				8C0E8F861FDEBDFF00789C91 /* SelectNameInitializer.swift in Sources */,
+				C62239B1204973720043ED44 /* FaceImageItemsInteractorInput.swift in Sources */,
 				8C0E8F871FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				8C0E8F881FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */,
@@ -14286,6 +14451,7 @@
 				7C233CD51FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */,
 				8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */,
+				78E3D51E20403FE100FA3478 /* MenloworksAppEvents.swift in Sources */,
 				7859299020060E85003F8AB3 /* ManageContactsRouterInput.swift in Sources */,
 				78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */,
 				CE51AC0D1EF90853005DCEE0 /* UIAlertViewCustom.m in Sources */,
@@ -14457,6 +14623,7 @@
 				CE95ED501F516736002F923A /* HelpAndSupportInteractorInput.swift in Sources */,
 				78052965200DD3470051FA78 /* ManageContactsModels.swift in Sources */,
 				CE51ACD01EF90853005DCEE0 /* TermsAndServicesViewInput.swift in Sources */,
+				78E3D51C204006FA00FA3478 /* MenloworksTagsConstants.swift in Sources */,
 				7C66E8B21F979C3300D98F27 /* CreateStoryPreviewViewIO.swift in Sources */,
 				CEAE3F981EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift in Sources */,
 				7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */,
@@ -14633,6 +14800,7 @@
 				8C5408431F62895300D4717A /* GridListTopBarConfig.swift in Sources */,
 				CE2F56221F7552A900F49DA1 /* ColumnsCollectionLayout.swift in Sources */,
 				8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
+				78E3D51A203FFEC800FA3478 /* MenloworksTags.swift in Sources */,
 				4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				7CF6BDBA1F0B88910066709E /* CollectionViewCellForVideo.swift in Sources */,
 				8C6EF87B1F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift in Sources */,
@@ -14730,6 +14898,7 @@
 				7C6E2F931F31E4F800536DB6 /* CreateStoryNameModuleInput.swift in Sources */,
 				CE95ED4F1F516736002F923A /* HelpAndSupportInteractor.swift in Sources */,
 				8C6EF8761F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift in Sources */,
+				C65DCBDE204683820083A965 /* MenloworksEventsService.swift in Sources */,
 				A1CEB018812ED0593B7A063B /* PhotoVideoDetailInteractorOutput.swift in Sources */,
 				7809A32D1FED09EF00954A5F /* AsyncOperation.swift in Sources */,
 				473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */,
@@ -14876,6 +15045,7 @@
 				86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */,
 				46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				7C203553201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
+				C65DCBE0204683820083A965 /* MenloworksEventsConstants.swift in Sources */,
 				2BA37C322028376500660394 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				CE4CFEBF1F78F18700FB4C3D /* ResizableTableView.swift in Sources */,
 				591DE1155E5210C187678E0B /* UploadFilesSelectionInteractor.swift in Sources */,
@@ -14964,6 +15134,7 @@
 				227254E0DCD67B9CEB06CD58 /* AlbumDetailRouterInput.swift in Sources */,
 				CE2F561C1F7552A900F49DA1 /* PackagesRouter.swift in Sources */,
 				2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */,
+				78E3D518203FF9D600FA3478 /* MenloworksTagsService.swift in Sources */,
 				81E0ADA871598E31E25ABC23 /* AlbumDetailInitializer.swift in Sources */,
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
 				4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
@@ -15094,6 +15265,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		78B2D350204AA5F500D096DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 78B2D349204AA5F500D096DC /* NotificationService */;
+			targetProxy = 78B2D34F204AA5F500D096DC /* PBXContainerItemProxy */;
+		};
 		B5E1D981202DB4800022F0E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B54BFF2F202B20250018AF82 /* autosync-widget */;
@@ -15410,6 +15586,119 @@
 			};
 			name = Enterprise;
 		};
+		78B2D352204AA5F500D096DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		78B2D353204AA5F500D096DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		78B2D354204AA5F500D096DC /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AppStore;
+		};
+		78B2D355204AA5F500D096DC /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Enterprise;
+		};
 		8C0E907A1FDEBDFF00789C91 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 043311ABC77BBE1D80DBF183 /* Pods-TC_Depo_LifeTech.debug.xcconfig */;
@@ -15429,6 +15718,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -15483,6 +15773,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -15531,6 +15822,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -15580,6 +15872,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -16005,6 +16298,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -16060,6 +16354,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -16109,6 +16404,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -16159,6 +16455,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
@@ -16421,6 +16718,17 @@
 				051E1E1E19CAC2F900FD1E03 /* Release */,
 				0555EF2019F938350068F4CC /* AppStore */,
 				0555EF2319F9383C0068F4CC /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78B2D356204AA5F500D096DC /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78B2D352204AA5F500D096DC /* Debug */,
+				78B2D353204AA5F500D096DC /* Release */,
+				78B2D354204AA5F500D096DC /* AppStore */,
+				78B2D355204AA5F500D096DC /* Enterprise */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

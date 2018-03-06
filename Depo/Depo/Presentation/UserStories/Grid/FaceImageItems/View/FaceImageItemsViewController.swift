@@ -45,6 +45,14 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         }
     }
     
+    override func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
+        super.showNoFilesWith(text: text, image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
+        
+        startCreatingFilesButton.isHidden = true
+        noFilesTopLabel?.isHidden = true
+        isCanChangeVisibility = false
+    }
+    
     // MARK: - Configure navigation bar buttons
     
     private func onApplySelection() {
@@ -86,6 +94,8 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
     
     func updateUgglaViewPosition() {
         let contentHeight = collectionView.contentSize.height
+        
+        ugglaImageView.isHidden = contentHeight < collectionView.frame.height
         
         if contentHeight < collectionView.frame.height - ugglaViewHeight {
             ugglaViewBottomConstraint.constant = 0

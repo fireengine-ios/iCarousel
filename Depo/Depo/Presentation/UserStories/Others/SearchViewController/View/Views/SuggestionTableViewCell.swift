@@ -22,7 +22,7 @@ final class SuggestionTableViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
     }
     
-    func configure(with item: SuggestionObject?) {
+    func configure(with item: SuggestionObject?, recent: Bool) {
         guard let item = item else {
             return
         }
@@ -30,7 +30,7 @@ final class SuggestionTableViewCell: UITableViewCell {
         typeImageView.image = item.type?.image
         typeImageView.isHidden = typeImageView.image == nil ? true : false
         
-        if let highlightedText = item.highlightedText {
+        if !recent, let highlightedText = item.highlightedText {
             nameLabel.attributedText = highlightedText
         } else if let text = item.text {
             nameLabel.text = text
