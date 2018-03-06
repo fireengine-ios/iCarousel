@@ -51,3 +51,7 @@ final class PlacesPageResponse: ObjectRequestResponse {
         }
     }
 }
+
+final class DeletePhotosFromPlacesAlbum: DeletePhotosFromAlbum {
+    
+}

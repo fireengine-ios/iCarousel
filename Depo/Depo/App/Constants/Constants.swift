@@ -134,8 +134,8 @@ struct TextConstants {
     
 
     static let search = NSLocalizedString("Search", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let searchRecentSearchTitle = NSLocalizedString("RECENT SEARCHES", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let searchSuggestionsTitle = NSLocalizedString("SUGGESTIONS", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let searchRecentSearchTitle = NSLocalizedString("Recent Searches", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let searchSuggestionsTitle = NSLocalizedString("Suggestions", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let searchNoFilesToCreateStoryError = NSLocalizedString("No files to create a story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let noFilesFoundInSearch = NSLocalizedString("No results found for your query.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -291,7 +291,7 @@ struct TextConstants {
     static let audioViewNoAudioButtonText = NSLocalizedString("Start adding your music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: DocumentsView
-    static let documentsViewNoDocumenetsTitleText = NSLocalizedString("You don’t have any documents on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let documentsViewNoDocumenetsTitleText = NSLocalizedString("Start adding your documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: Folder
     static let folderEmptyText = NSLocalizedString("Folder is Empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -340,6 +340,8 @@ struct TextConstants {
     static let faceImageYes = NSLocalizedString("Yes", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageThisPerson = NSLocalizedString("this person", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImagePhotos = NSLocalizedString("Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageWaitAlbum = NSLocalizedString("Grouping of your photos will take some time. Please wait and then check the albums.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageNoPhotos = NSLocalizedString("We couldn't find anybody on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: userProfile
     static let userProfileTitle = NSLocalizedString("Your Profile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -433,6 +435,10 @@ struct TextConstants {
     static let createStorySave = NSLocalizedString("Save", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStoryPhotosOrderTitle = NSLocalizedString("You can change the sequence ", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    //MARK: Stories View
+    static let storiesViewNoStoriesTitleText = NSLocalizedString("You don’t have any stories  on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let storiesViewNoStoriesButtonText = NSLocalizedString("Start creating stories", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     //MARK: Upload
     static let uploadFilesNextButton = NSLocalizedString("Upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadFilesNothingUploadError = NSLocalizedString("Nothing to upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -485,6 +491,10 @@ struct TextConstants {
     static let albumsTitle = NSLocalizedString("Albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let selectAlbumButtonTitle = NSLocalizedString("Add", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadPhotos = NSLocalizedString("Upload Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: Albums view
+    static let albumsViewNoAlbumsTitleText = NSLocalizedString("You don’t have any albums on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let albumsViewNoAlbumsButtonText = NSLocalizedString("Start creating albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: My stream
     static let myStreamAlbumsTitle = NSLocalizedString("Albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -785,6 +795,7 @@ struct NumericConstants {
     static let maxRecentSearchesObjects: Int = 4
     static let maxRecentSearchesPeople: Int = 6
     static let maxRecentSearchesThings: Int = 6
+    static let maxSuggestions: Int = 3  
     
     static let minute: TimeInterval = 60
     static let defaultTimeout: TimeInterval = 30.0
@@ -796,4 +807,10 @@ struct NumericConstants {
     
     static let maxNumberOfUploadAttempts = 5
     static let secondsBeetweenUploadAttempts = 5
+}
+
+struct RequestSizeConstant {
+    
+    static let faceImageItemsRequestSize = 100
+
 }

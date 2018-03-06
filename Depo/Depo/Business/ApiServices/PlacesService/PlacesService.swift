@@ -37,6 +37,19 @@ final class PlacesService: BaseRequestService {
         
         executeGetRequest(param: param, handler: handler)
     }
+    
+    func deletePhotosFromAlbum(uuid: String, photos: [Item], success: PhotosAlbumOperation?, fail: FailResponse?) {
+        log.debug("PeopleService deletePhotosFromAlbum")
+        
+        let parameters = DeletePhotosFromPlacesAlbum(albumUUID: uuid, photos: photos)
+        
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+            log.debug("PeopleService deletePhotosFromAlbum success")
+            
+            success?()
+        }, fail: fail)
+        executePutRequest(param: parameters, handler: handler)
+    }
 }
 
 final class PlacesItemsService: RemoteItemsService {

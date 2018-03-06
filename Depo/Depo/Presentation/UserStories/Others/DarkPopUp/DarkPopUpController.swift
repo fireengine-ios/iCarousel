@@ -100,7 +100,7 @@ final class DarkPopUpController: UIViewController {
         }
     }
     
-    func close(animation: (() -> Void)? = nil) {
+    func close(animation: VoidHandler? = nil) {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
             self.shadowView.transform = NumericConstants.scaleTransform

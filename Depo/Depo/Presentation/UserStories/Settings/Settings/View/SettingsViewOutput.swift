@@ -41,7 +41,7 @@ protocol SettingsViewOutput {
     
     func goToPasscodeSettings()
     
-    func openPasscode(handler: @escaping () -> Void)
+    func openPasscode(handler: @escaping VoidHandler)
     
     func goTurkcellSecurity()
     

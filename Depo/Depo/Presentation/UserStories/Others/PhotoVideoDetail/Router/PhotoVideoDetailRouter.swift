@@ -19,10 +19,20 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
     }
     
     func goBack(navigationConroller: UINavigationController?){
-        guard let nController = navigationConroller else { //TODO: change to global router
-            return
-        }
-        nController.popViewController(animated: true)
+        navigationConroller?.dismiss(animated: true, completion: nil)
+    }
+    
+    func showRemoveFromAlbum(completion: @escaping (() -> Void)) {
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                              message: TextConstants.removeFromAlbum,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: completion)
+        })
+        
+        RouterVC().presentViewController(controller: controller)
     }
     
 }

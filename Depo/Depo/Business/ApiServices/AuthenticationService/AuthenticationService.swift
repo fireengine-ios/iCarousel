@@ -277,6 +277,7 @@ class AuthenticationService: BaseRequestService {
                         }
 
                         sucess?()
+                        MenloworksAppEvents.onLogin()
                         
                     case .failure(let error):
                         fail?(ErrorResponse.error(error))
@@ -332,6 +333,8 @@ class AuthenticationService: BaseRequestService {
             CoreDataStack.default.clearDataBase()
             FreeAppSpace.default.clear()
             CardsManager.default.stopAllOperations()
+            CardsManager.default.clear()
+            RecentSearchesService.shared.clearAll()
             self.player.stop()
             self.cancellAllRequests()
             success?()
@@ -356,7 +359,11 @@ class AuthenticationService: BaseRequestService {
     func signUp(user: SignUpUser, sucess:SuccessResponse?, fail: FailResponse?) {
         log.debug("AuthenticationService logout")
         
-        let handler = BaseResponseHandler<SignUpSuccessResponse,SignUpFailResponse>(success: sucess, fail: fail)
+        let handler = BaseResponseHandler<SignUpSuccessResponse,SignUpFailResponse>(success: { (value) in
+            MenloworksAppEvents.onSignUp()
+            sucess?(value)
+        }
+            , fail: fail)
         executePostRequest(param: user, handler: handler)
     }
     

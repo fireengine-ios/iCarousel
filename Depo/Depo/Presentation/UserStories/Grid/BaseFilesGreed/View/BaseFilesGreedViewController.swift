@@ -38,7 +38,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var noFilesViewCenterOffsetConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var startCreatingFilesButton: BlueButtonWithWhiteText!
+    @IBOutlet weak var startCreatingFilesButton: BlueButtonWithNoFilesWhiteText!
     
     @IBOutlet weak var topBarContainer: UIView!
     
@@ -91,13 +91,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
         noFilesLabel.textColor = ColorConstants.textGrayColor
-        noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         
         noFilesTopLabel?.text = TextConstants.folderEmptyText
         noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
         noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
-        startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
         
         output.viewIsReady(collectionView: collectionView)
@@ -150,10 +149,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     // MARK: - SearchBarButtonPressed
     
    func configureNavBarActions(isSelecting: Bool = false) {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { _ in
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
             let router = RouterVC()
             let searchViewController = router.searchView()
             searchViewController.transitioningDelegate = self
+            self?.navigationController?.delegate = searchViewController as? BaseViewController
             router.pushViewController(viewController: searchViewController)
         })
         let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
@@ -164,7 +164,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Void) {
+    func configurateFreeAppSpaceActions(deleteAction: @escaping VoidHandler) {
         let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { _ in
             deleteAction()
         })
@@ -179,7 +179,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
     
-    func configurateFaceImagePeopleActions(showHideAction: @escaping () -> Void) {
+    func configurateFaceImagePeopleActions(showHideAction: @escaping VoidHandler) {
         let showHide = NavBarWithAction(navItem: NavigationBarList().showHide, action: { _ in
             showHideAction()
         })
@@ -261,12 +261,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
-    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String) {
+    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
         noFilesLabel.text = text
         noFilesImage.image = image
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
-        topBarContainer.isHidden = false
+        topBarContainer.isHidden = needHideTopBar
     }
     
     func showNoFilesTop() {
@@ -400,10 +400,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             
             self.view.layoutIfNeeded()
             self.collectionView.contentInset = UIEdgeInsets(top: h + sliderH, left: 0, bottom: 25, right: 0)
-            let point = CGPoint(x: 0, y: -h - sliderH)
-            self.collectionView.setContentOffset(point, animated: true)
-            
-            
         }
         
         refresherY = -calculatedH + 30

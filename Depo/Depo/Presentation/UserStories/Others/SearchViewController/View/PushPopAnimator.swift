@@ -22,6 +22,7 @@ final class PushPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         }
         
         toController.view.alpha = 0
+        toController.view.frame = fromController.view.frame
         
         let container = transitionContext.containerView
         let animationView = presenting ? toController.view : fromController.view

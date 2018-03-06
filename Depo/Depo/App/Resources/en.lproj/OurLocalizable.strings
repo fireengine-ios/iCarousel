@@ -190,6 +190,8 @@
 "Thanks for leaving a comment!" = "Thanks for leaving a comment!";
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n";
 "Upload Photos" = "Upload Photos";
+"You don’t have any albums on your Lifebox yet." = "You don’t have any albums on your Lifebox yet.";
+"Start creating albums" = "Start creating albums";
 "Add" = "Add";
 "Albums" = "Albums";
 "My Stories" = "My Stories";
@@ -243,6 +245,8 @@
 "Item Selected" = "Item Selected";
 "Upload" = "Upload";
 "You can change the sequence " = "You can change the sequence ";
+"You don’t have any stories  on your Lifebox yet." = "You don’t have any stories  on your Lifebox yet.";
+"Start creating stories" = "Start creating stories";
 "Save" = "Save";
 "Create" = "Create";
 "Add Music" = "Add Music";
@@ -358,7 +362,7 @@
 "Login Settings" = "Login Settings";
 "Back to Lifebox" = "Back to Lifebox";
 "Start adding your documents" = "Start adding your documents";
-"You don’t have any documents on your Lifebox yet." = "You don’t have any documents on your Lifebox yet.";
+"Start adding your documents" = "Start adding your documents";
 "Start adding your music" = "Start adding your music";
 "You don’t have any music on your Lifebox yet." = "You don’t have any music on your Lifebox yet.";
 "Folder is Empty" = "Folder is Empty";
@@ -482,8 +486,8 @@
 "Back Up My Contacts" = "Back Up My Contacts";
 "No results found for your query." = "No results found for your query.";
 "localFilesBeingProcessed" = "Processing local files.";
-"SUGGESTIONS" = "SUGGESTIONS";
-"RECENT SEARCHES" = "RECENT SEARCHES";
+"Suggestions" = "Suggestions";
+"Recent Searches" = "Recent Searches";
 "Search" = "Search";
 "Warning" = "Warning";
 "TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate login with Turkcell password feature.";
@@ -608,7 +612,9 @@
 "Yes" = "Yes";
 "this person" = "this person";
 "Photos" = "Photos";
+"We couldn't find anybody on your Lifebox yet." = "We couldn't find anybody on your Lifebox yet.";
 "They will be merged together" = "They will be merged together";
+"Grouping of your photos will take some time. Please wait and then check the albums." = "Grouping of your photos will take some time. Please wait and then check the albums.";
 "Not selected" = "Not selected";
 "E-mail is empty" = "E-mail is empty";
 "Filter Card" = "Filter Card";

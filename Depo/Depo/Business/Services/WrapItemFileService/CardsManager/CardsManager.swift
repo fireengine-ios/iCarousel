@@ -30,7 +30,7 @@ enum OperationType: String{
     case movieCard                  = "movieCard"
 }
 
-typealias BlockObject = () -> Void
+typealias BlockObject = VoidHandler
 
 class Progress {
     var allOperations: Int?
@@ -44,11 +44,16 @@ class CardsManager: NSObject {
     private var foloversArray = [CardsManagerViewProtocol]()
     private var progresForOperation = [OperationType: Progress]()
     private var homeCardsObjects = [HomeCardResponse]()
+    private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice : [OperationType]{
         get{
             return [.upload, .sync, .download, .prepareToAutoSync, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
         }
+    }
+    
+    func clear(){
+        deletedCards.removeAll()
     }
     
     //MARK: registration view
@@ -114,6 +119,10 @@ class CardsManager: NSObject {
             if (!self.canShowPopUpByDepends(type: type)){
                 return
             }
+            if self.deletedCards.contains(type){
+                return
+            }
+            
             self.hidePopUpsByDepends(type: type)
             
             self.setProgressForOperationWith(type: type, allOperations: allOperations ?? 0, completedOperations: completedOperations ?? 0)
@@ -165,6 +174,14 @@ class CardsManager: NSObject {
                 notificationView.stopOperationWithType(type: type)
             }
         }
+    }
+    
+    func manuallyDeleteCardsByType(type: OperationType){
+        if type == .freeAppSpaceLocalWarning || type == .freeAppSpace{
+            deletedCards.insert(type)
+        }
+        
+        stopOperationWithType(type: type)
     }
     
     func stopAllOperations(){
