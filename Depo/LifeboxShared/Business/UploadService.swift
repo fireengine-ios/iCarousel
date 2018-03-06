@@ -40,44 +40,52 @@ final class UploadService {
     
     func upload(url: URL, contentType: String, progressHandler: @escaping Request.ProgressHandler, dataRequestHandler: DataRequestHandler?, complition: @escaping ResponseVoid) {
         
-        let dataRequest = getBaseUploadUrl { [weak self] result in
-            
+        FileManager.shared.waitFilePreparation(at: url) { [weak self] result in
             switch result {
-            case .success(let path):
+            case .success(_):
                 
-                guard let `self` = self else {
-                    return
-                }
-                
-                let uploadUrl = path + "/" + UUID().uuidString
-                
-                let headers: HTTPHeaders = [
-                    HeaderConstant.XObjectMetaFavorites: "false",
-                    HeaderConstant.XMetaStrategy: "1",
-                    HeaderConstant.Expect: "100-continue",
-                    HeaderConstant.XObjectMetaParentUuid: "",
-                    HeaderConstant.XObjectMetaFileName: url.lastPathComponent,
-                    HeaderConstant.ContentType: contentType,
-                    HeaderConstant.XObjectMetaSpecialFolder: "MOBILE_UPLOAD"
-                ]
-                
-                let dataRequest = self.sessionManager
-                    .upload(url, to: uploadUrl, method: .put, headers: headers)
-                    .customValidate()
-                    .uploadProgress(closure: progressHandler)
-                    .responseString { response in
-                        switch response.result {
-                        case .success(_):
-                            complition(ResponseResult.success(()))
-                        case .failure(let error):
-                            complition(ResponseResult.failed(error))
+                let dataRequest = getBaseUploadUrl { [weak self] result in
+                    switch result {
+                    case .success(let path):
+                        
+                        guard let `self` = self else {
+                            return
                         }
+                        
+                        let uploadUrl = path + "/" + UUID().uuidString
+                        
+                        let headers: HTTPHeaders = [
+                            HeaderConstant.XObjectMetaFavorites: "false",
+                            HeaderConstant.XMetaStrategy: "1",
+                            HeaderConstant.Expect: "100-continue",
+                            HeaderConstant.XObjectMetaParentUuid: "",
+                            HeaderConstant.XObjectMetaFileName: url.lastPathComponent,
+                            HeaderConstant.ContentType: contentType,
+                            HeaderConstant.XObjectMetaSpecialFolder: "MOBILE_UPLOAD"
+                        ]
+                        
+                        let dataRequest = self.sessionManager
+                            .upload(url, to: uploadUrl, method: .put, headers: headers)
+                            .customValidate()
+                            .uploadProgress(closure: progressHandler)
+                            .responseString { response in
+                                switch response.result {
+                                case .success(_):
+                                    complition(ResponseResult.success(()))
+                                case .failure(let error):
+                                    complition(ResponseResult.failed(error))
+                                }
+                        }
+                        dataRequestHandler?(dataRequest)
+                    case .failed(let error):
+                        complition(ResponseResult.failed(error))
+                    }
                 }
                 dataRequestHandler?(dataRequest)
+                
             case .failed(let error):
                 complition(ResponseResult.failed(error))
             }
         }
-        dataRequestHandler?(dataRequest)
     }
 }

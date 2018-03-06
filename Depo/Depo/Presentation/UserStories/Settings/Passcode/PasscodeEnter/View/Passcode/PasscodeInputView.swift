@@ -8,8 +8,6 @@
 
 import UIKit
 
-public typealias Passcode = String
-
 public protocol PasscodeInputViewDelegate: class {
     func finish(with passcode: Passcode)
     func finishErrorAnimation()

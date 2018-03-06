@@ -36,6 +36,16 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    func onItemSelectedActiveState(item: BaseDataSourceItem) {
+        dataSource.allMediaItems.forEach { peopleItem in
+            if let peopleItem = peopleItem as? PeopleItem,
+            let isVisible = peopleItem.responseObject.visible,
+            peopleItem.uuid == item.uuid {
+                peopleItem.responseObject.visible = !isVisible
+            }
+        }
+    }
+    
     override func getContentWithSuccess(items: [WrapData]) {
         allItmes = []
         
