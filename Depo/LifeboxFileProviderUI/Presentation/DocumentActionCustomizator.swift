@@ -6,21 +6,21 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class DocumentActionCustomizator: NSObject {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.textColor = ColorConstants.darkText
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
+            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 25)
         }
     }
     
     @IBOutlet private weak var messageLabel: UILabel!  {
         didSet {
             messageLabel.textColor = ColorConstants.lightText
-            messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+            messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
         }
     }
 }

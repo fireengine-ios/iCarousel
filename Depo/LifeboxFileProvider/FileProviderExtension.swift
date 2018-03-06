@@ -15,8 +15,10 @@ final class FileProviderExtension: NSFileProviderExtension {
     private let fileManager = FileManager()
     private let fileCoordinator = NSFileCoordinator()
     
+    private let passcodeStorage: PasscodeStorage = factory.resolve()
+    
     private var isPasscodeOn: Bool {
-        return false /// TEMP LOGIC
+        return !passcodeStorage.isEmpty
     }
     
     override init() {

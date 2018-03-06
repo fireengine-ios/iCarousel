@@ -20,8 +20,10 @@ class FileProviderEnumerator: NSObject {
     private let fileService = FileService()
     private var page = 0
     
+    private let passcodeStorage: PasscodeStorage = factory.resolve()
+    
     private var isPasscodeOn: Bool {
-        return false /// TEMP LOGIC
+        return !passcodeStorage.isEmpty
     }
 }
 
@@ -49,7 +51,7 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
         if isPasscodeOn {
             let error = NSError(domain: NSFileProviderErrorDomain,
                                 code: NSFileProviderError.notAuthenticated.rawValue,
-                                userInfo: [NSLocalizedDescriptionKey: "passcode"])
+                                userInfo: [NSLocalizedDescriptionKey: ErrorIdentificators.passcode])
             observer.finishEnumeratingWithError(error)
         }
 
@@ -82,7 +84,7 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
                 if error.notAuthorized {
                     let authenticationError = NSError(domain: NSFileProviderErrorDomain,
                                                       code: NSFileProviderError.notAuthenticated.rawValue,
-                                                      userInfo: [NSLocalizedDescriptionKey: "authentication"])
+                                                      userInfo: [NSLocalizedDescriptionKey: ErrorIdentificators.authentication])
                     observer.finishEnumeratingWithError(authenticationError)
                 } else {
                     observer.finishEnumeratingWithError(error)
