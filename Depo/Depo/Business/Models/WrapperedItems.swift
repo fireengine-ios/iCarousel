@@ -112,6 +112,7 @@ enum FileType: Equatable {
     case allDocs
     case application(ApplicationType)
     case faceImage(FaceImageType)
+    case faceImageAlbum(FaceImageType)
 
     
     var convertedToSearchFieldValue: FieldValue {
@@ -165,6 +166,10 @@ enum FileType: Equatable {
         return self == .faceImage(.people) || self == .faceImage(.things) || self == .faceImage(.places)
     }
     
+    var isFaceImageAlbum: Bool {
+        return self == .faceImageAlbum(.people) || self == .faceImageAlbum(.things) || self == .faceImageAlbum(.places)
+    }
+    
     
     init(type: String?, fileName: String?) {
         if let wrapType = type {
@@ -189,6 +194,21 @@ enum FileType: Equatable {
                 
                 if (wrapType.hasSuffix("photo")) {
                     self = .photoAlbum
+                    return
+                }
+                
+                if (wrapType.hasSuffix("object")) {
+                    self = .faceImageAlbum(.things)
+                    return
+                }
+                
+                if (wrapType.hasSuffix("person")) {
+                    self = .faceImageAlbum(.people)
+                    return
+                }
+                
+                if (wrapType.hasSuffix("location")) {
+                    self = .faceImageAlbum(.places)
                     return
                 }
             }
@@ -388,6 +408,19 @@ enum FileType: Equatable {
             case .faceImage(let lhsType):
                 switch (rhs) {
                 case .faceImage(let rhsType):
+                    if lhsType == rhsType {
+                        return true
+                    }
+                default:()
+                }
+            default:()
+            }
+            return false
+        case (.faceImageAlbum, .faceImageAlbum):
+            switch (lhs) {
+            case .faceImageAlbum(let lhsType):
+                switch (rhs) {
+                case .faceImageAlbum(let rhsType):
                     if lhsType == rhsType {
                         return true
                     }
@@ -718,7 +751,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if url == nil, fileType == .image {
                 url = remote.tempDownloadURL
             }
-
+        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places):
+            let mediumUrl = remote.metadata?.mediumUrl
+            let smallUrl = remote.metadata?.smalURl
+            url = mediumUrl ?? smallUrl ?? remote.tempDownloadURL
         default:
             break
         }
