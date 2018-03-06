@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias Item = WrapData
+//typealias Item = WrapData
 
 class UploadBaseURLResponse: ObjectRequestResponse {
     
