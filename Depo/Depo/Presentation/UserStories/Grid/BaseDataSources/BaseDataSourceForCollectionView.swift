@@ -73,15 +73,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var canReselect: Bool = false
     
     var currentSortType: SortedRules = .timeUp
-//    {
-//        didSet {// IN our current implementation it might break some other screens such as search and upload.
-//            (currentSortType == .sizeAZ || currentSortType == .sizeZA) ? (isHeaderless = true) : (isHeaderless = false)
-//        }
-//    }
-    
+
     var originalFilters: [GeneralFilesFiltrationType]?
     
     var isHeaderless = false
+    
+    var isLocalPaginationOn = false // ---------------------=======
+    var isLocalFilesRequested = false // -----------------------=========
     
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
@@ -100,95 +98,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     fileprivate var previousPreheatRect = CGRect.zero
     
     
-    func compoundItems(pageItems: [WrapData], pageNum: Int) {
-        
-//        allMediaItems.append(contentsOf: pageItems)
-//        appendLocalItems(originalItemsArray: allMediaItems)
-        appendLocalItems(originalItemsArray: pageItems, pageNum: pageNum, localFileasAppendedCallback: {[weak self] imbededwithLocalsItems in
-            guard let `self` = self else {
-                return
-            }
-            self.allMediaItems.append(contentsOf: imbededwithLocalsItems)
-            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-            self.reloadData()
-            self.delegate?.filesAppendedAndSorted()
-        })
-        
-        
-    }
-    
-    private func setupOneSectionMediaItemsArray(items: [WrapData]) {
-        allItems.removeAll()
-        allItems.append(items)
-    }
-    
-    private func isLocalOnly() -> Bool {
-        guard let unwrapedFilters = originalFilters else {
-            return false
-        }
-        for filter in unwrapedFilters {
-            switch filter {
-            case .localStatus(.local):
-                return true
-            default:
-                break
-            }
-        }
-        return false
-    }
-    
-    private func breakItemsIntoSections(breakingArray: [WrapData]) {
-        allItems.removeAll()
-        for item in breakingArray {
-            autoreleasepool {
-                if allItems.count > 0,
-                    let lastItem = allItems.last?.last {
-                    switch currentSortType {
-                    case .timeUp, .timeDown:
-                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: false)
-                    case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
-                        addByName(lastItem: lastItem, newItem: item)
-                    case .sizeAZ, .sizeZA:
-                        addBySize(lastItem: lastItem, newItem: item)
-                    case .timeUpWithoutSection, .timeDownWithoutSection:
-                        allItems.append(contentsOf: [breakingArray])
-                        return
-                    case .metaDataTimeUp, .metaDataTimeDown:
-                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: true)
-                    }
-                } else {
-                    allItems.append([item])
-                }
-            }
-        }
-        
-    }
-    
-    private func getFileFilterType(filters: [GeneralFilesFiltrationType]) -> FileType? {
-        for filter in filters {
-            switch filter {
-            case  .fileType(.image):
-                return .image
-            case .fileType(.video):
-                return .video
-            default:
-                break
-            }
-        }
-        return nil
-    }
-    
-    private func isOnlyNonLocal(filters: [GeneralFilesFiltrationType]) -> Bool {
-        for filter in filters {
-            switch filter {
-            case .localStatus(.nonLocal):
-                return true
-            default:
-                break
-            }
-        }
-        return false
-    }
+   
     
     private func canShowFolderFilters(filters: [GeneralFilesFiltrationType]) -> Bool {
         for filter in filters {
@@ -321,6 +231,103 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
+    func compoundItems(pageItems: [WrapData], pageNum: Int) {
+        self.isLocalFilesRequested = true
+        
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            self.appendLocalItems(originalItemsArray: pageItems, pageNum: pageNum, localFileasAppendedCallback: {[weak self] imbededwithLocalsItems in
+                guard let `self` = self else {
+                    return
+                }
+                self.allMediaItems.append(contentsOf: imbededwithLocalsItems)
+                self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+//                  self.reloadData()
+                self.isLocalFilesRequested =  false
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
+                }
+                self.delegate?.filesAppendedAndSorted()
+            })
+        }
+        
+    }
+    
+    private func setupOneSectionMediaItemsArray(items: [WrapData]) {
+        allItems.removeAll()
+        allItems.append(items)
+    }
+    
+    private func isLocalOnly() -> Bool {
+        guard let unwrapedFilters = originalFilters else {
+            return false
+        }
+        for filter in unwrapedFilters {
+            switch filter {
+            case .localStatus(.local):
+                return true
+            default:
+                break
+            }
+        }
+        return false
+    }
+    
+    private func breakItemsIntoSections(breakingArray: [WrapData]) {
+        allItems.removeAll()
+        for item in breakingArray {
+            autoreleasepool {
+                if allItems.count > 0,
+                    let lastItem = allItems.last?.last {
+                    switch currentSortType {
+                    case .timeUp, .timeDown:
+                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: false)
+                    case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
+                        addByName(lastItem: lastItem, newItem: item)
+                    case .sizeAZ, .sizeZA:
+                        addBySize(lastItem: lastItem, newItem: item)
+                    case .timeUpWithoutSection, .timeDownWithoutSection:
+                        allItems.append(contentsOf: [breakingArray])
+                        return
+                    case .metaDataTimeUp, .metaDataTimeDown:
+                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: true)
+                    }
+                } else {
+                    allItems.append([item])
+                }
+            }
+        }
+        
+    }
+    
+    private func getFileFilterType(filters: [GeneralFilesFiltrationType]) -> FileType? {
+        for filter in filters {
+            switch filter {
+            case  .fileType(.image):
+                return .image
+            case .fileType(.video):
+                return .video
+            default:
+                break
+            }
+        }
+        return nil
+    }
+    
+    private func isOnlyNonLocal(filters: [GeneralFilesFiltrationType]) -> Bool {
+        for filter in filters {
+            switch filter {
+            case .localStatus(.nonLocal):
+                return true
+            default:
+                break
+            }
+        }
+        return false
+    }
+    
     private func getLastNonMetaEmptyItem(items: [WrapData]) -> WrapData? {
         for item in items.reversed() {
             if item.metaData?.takenDate != nil {
@@ -418,7 +425,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return $0.metaData != nil
         }
         if nonEmptyMetaItems.isEmpty {
+            isLocalPaginationOn = true
             isPaginationDidEnd = true
+        } else {
+            isLocalPaginationOn = false
         }
         compoundItems(pageItems: nonEmptyMetaItems, pageNum: pageNum)
     }
@@ -854,6 +864,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if isLastCell, isLastSection, !isPaginationDidEnd {
             self.delegate?.getNextItems()
+        }
+        
+        if isLocalPaginationOn, isLastCell, isLastSection, let lastItem = allMediaItems.last, !isLocalFilesRequested {
+            compoundItems(pageItems: [lastItem], pageNum: 0)
         }
         
         if let photoCell = cell_ as? CollectionViewCellForPhoto{

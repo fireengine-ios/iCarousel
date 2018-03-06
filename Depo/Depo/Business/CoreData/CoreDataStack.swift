@@ -58,6 +58,7 @@ class CoreDataStack: NSObject {
     var backgroundContext: NSManagedObjectContext
     
     let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")
+    let contextSavingQueue = DispatchQueue(label: "com.lifebox.CoreDataStackSaving")//.global(qos: .)
     
     var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     
@@ -168,11 +169,14 @@ class CoreDataStack: NSObject {
         }
         
         if context.hasChanges {
-            if (saveAndWait) {
-                context.performAndWait(saveBlock)
-            } else {
+            contextSavingQueue.sync {
                 context.perform(saveBlock)
             }
+//            if (saveAndWait) {
+//                context.performAndWait(saveBlock)
+//            } else {
+//                context.perform(saveBlock)
+//            }
         }
         
         if context.parent == mainContext, context != mainContext {

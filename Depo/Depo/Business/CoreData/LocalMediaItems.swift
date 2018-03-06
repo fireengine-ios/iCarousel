@@ -105,14 +105,27 @@ extension CoreDataStack {
                 }
             }
             return
-        } else if pageRemoteItems.count == 1, paginationEnd {
-            if let lastRemoteItem = pageRemoteItems.last {
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateLastPage(sortType: sortType, lastItem: lastRemoteItem)])
-                if let localItems = try? backgroundContext.fetch(request) {
+        } else if pageRemoteItems.count == 1, paginationEnd,
+            let lastItem = pageRemoteItems.last {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)])
+            if let localItems = try? backgroundContext.fetch(request) {
+                if lastItem.isLocalItem {//
+                    if (localItems.count >= 100 || !inProcessAppendingLocalFiles) {
+                        let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
+                        filesCallBack(wrapedLocalItems)
+                    } else {
+                        pageAppendedCallBack = { [weak self] localItems in
+                            filesCallBack(localItems)
+                            self?.pageAppendedCallBack = nil
+                        }
+                    }
+     
+                } else {
                     let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                     filesCallBack(wrapedLocalItems)
                 }
             }
+            
             return
         } else if firstPage {
             if let lastRemoteItem = pageRemoteItems.last {
