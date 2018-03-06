@@ -41,6 +41,8 @@ enum BaseDataSourceDisplayingType{
     @objc optional func updateCoverPhotoIfNeeded()
     
     @objc optional func didDelete(items: [BaseDataSourceItem])
+    
+    @objc optional func onItemSelectedActiveState(item: BaseDataSourceItem)
 }
 
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
@@ -911,6 +913,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            if  let forwardDelegate = self.delegate {
+                forwardDelegate.onItemSelectedActiveState?(item: unwrapedObject)
+            }
         } else {
             if  let forwardDelegate = self.delegate {
                 let array = getAllObjects()
