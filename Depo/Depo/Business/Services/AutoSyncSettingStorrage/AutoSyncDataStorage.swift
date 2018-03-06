@@ -10,31 +10,28 @@ import UIKit
 
 class AutoSyncDataStorage: NSObject {
 
-    func getAutoSyncModelForCurrentUser(success:@escaping ([AutoSyncModel], _ uniqueUserId: String) -> Swift.Void){
+    func getAutoSyncSettingsForCurrentUser(success: @escaping (AutoSyncSettings, _ uniqueUserId: String) -> Void) {
         SingletonStorage.shared.getAccountInfoForUser(success: { (accountInfoResponce) in
-            let settings: [AutoSyncModel]
+            let settings: AutoSyncSettings
             
             let uniqueUserID = accountInfoResponce.projectID ?? ""
-            if let dict = UserDefaults.standard.object(forKey: uniqueUserID) as? [String: Bool]{
-                let autoSyncModel = SettingsAutoSyncModel()
-                autoSyncModel.configurateWithDictionary(dictionary: dict)
-                settings = autoSyncModel.getDataForTable()
-            }else{
-                settings = SettingsAutoSyncModel().getDataForTable()
+            if let dict = UserDefaults.standard.object(forKey: uniqueUserID) as? [String: Bool] {
+                settings = AutoSyncSettings(with: dict)
+            } else {
+                settings = AutoSyncSettings()
             }
-            
             success(settings, uniqueUserID)
         }) { (error) in
-            success(SettingsAutoSyncModel().getDataForTable(), "")
+            success(AutoSyncSettings(), "")
         }
     }
     
-    func saveAutoSyncModel(model: SettingsAutoSyncModel, uniqueUserId: String) {
-        let dict = model.configurateDictionary()
+    func save(autoSyncSettings: AutoSyncSettings, uniqueUserId: String) {
+        let dict = autoSyncSettings.asDictionary()
         UserDefaults.standard.set(dict, forKey: uniqueUserId)
-        if model.isAutoSyncEnable {
+        if autoSyncSettings.isAutoSyncEnabled {
             LocationManager.shared.startUpdateLocation()
-        }else{
+        } else {
             PopUpService.shared.setLoginCountForShowImmediately()
             PopUpService.shared.checkIsNeedShowUploadOffPopUp()
             LocationManager.shared.stopUpdateLocation()

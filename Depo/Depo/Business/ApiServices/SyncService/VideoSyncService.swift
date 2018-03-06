@@ -21,6 +21,14 @@ final class VideoSyncService: ItemSyncServiceImpl {
             completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by:{$0.fileSize < $1.fileSize }))
         }
     }
+    
+    override func start(newItems: Bool) {
+        super.start(newItems: newItems)
+        
+        let isWiFi = ReachabilityService().isReachableViaWiFi
+        isWiFi ? MenloworksTagsService.shared.onAutosyncVideoViaWifi() : MenloworksTagsService.shared.onAutosyncVideoViaLte()
+        
+    }
 
     override func stop() {
         stopAllOperations()

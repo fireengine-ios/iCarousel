@@ -10,9 +10,85 @@ import Foundation
 
 
 struct AutoSyncSettings {
+    
+    static let isAutoSyncEnabledKey = "isAutoSyncEnabled"
+    static let mobileDataPhotosKey = "mobileDataPhotos"
+    static let mobileDataVideoKey = "mobileDataVideo"
+    static let wifiPhotosKey = "wifiPhotos"
+    static let wifiVideoKey = "wifiVideo"
+    
     var isAutoSyncEnabled: Bool = false
-    var photoSetting = AutoSyncSetting(syncItemType: .photo, option: .never)
-    var videoSetting = AutoSyncSetting(syncItemType: .video, option: .never)
+    var photoSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiOnly)
+    var videoSetting = AutoSyncSetting(syncItemType: .video, option: .wifiOnly)
+    
+    
+    init() {
+    }
+    
+    init(with dictionary: [String: Bool]) {
+        isAutoSyncEnabled = dictionary[AutoSyncSettings.isAutoSyncEnabledKey] ?? false
+        
+        let mobileDataPhotos = dictionary[AutoSyncSettings.mobileDataPhotosKey] ?? false
+        let mobileDataVideo = dictionary[AutoSyncSettings.mobileDataVideoKey] ?? false
+        
+        let wifiPhotos = dictionary[AutoSyncSettings.wifiPhotosKey] ?? true
+        let wifiVideo = dictionary[AutoSyncSettings.wifiVideoKey] ?? true
+        
+        
+        //setup photo setting
+        
+        if mobileDataPhotos {
+            photoSetting.option = .wifiAndCellular
+        } else if wifiPhotos {
+            photoSetting.option = .wifiOnly
+        } else {
+            photoSetting.option = .never
+        }
+        
+        //setup video setting
+        
+        if mobileDataVideo {
+            videoSetting.option = .wifiAndCellular
+        } else if wifiVideo {
+            videoSetting.option = .wifiOnly
+        } else {
+            videoSetting.option = .never
+        }
+    }
+    
+    
+    mutating func disableAutoSync() {
+        isAutoSyncEnabled = false
+        photoSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiOnly)
+        photoSetting = AutoSyncSetting(syncItemType: .video, option: .wifiOnly)
+    }
+    
+    mutating func set(setting: AutoSyncSetting) {
+        switch setting.syncItemType {
+        case .photo:
+            set(photoSyncSetting: setting)
+        case .video:
+            set(videoSyncSetting: setting)
+        }
+    }
+    
+    mutating private func set(photoSyncSetting: AutoSyncSetting) {
+        photoSetting = photoSyncSetting
+    }
+    
+    mutating private func set(videoSyncSetting: AutoSyncSetting) {
+        videoSetting = videoSyncSetting
+    }
+    
+    func asDictionary() -> [String: Bool] {
+        var dict = [String: Bool]()
+        dict[AutoSyncSettings.isAutoSyncEnabledKey] = isAutoSyncEnabled
+        dict[AutoSyncSettings.mobileDataPhotosKey] = (photoSetting.option == .wifiAndCellular)
+        dict[AutoSyncSettings.mobileDataVideoKey] = (videoSetting.option == .wifiAndCellular)
+        dict[AutoSyncSettings.wifiPhotosKey] = (photoSetting.option == .wifiOnly)
+        dict[AutoSyncSettings.wifiVideoKey] = (videoSetting.option == .wifiOnly)
+        return dict
+    }
 }
 
 
@@ -20,6 +96,7 @@ struct AutoSyncSetting: Equatable {
 
     var syncItemType: AutoSyncItemType
     var option: AutoSyncOption
+    
     
     static func ==(lhs: AutoSyncSetting, rhs: AutoSyncSetting) -> Bool {
         return lhs.option == rhs.option && lhs.syncItemType == rhs.syncItemType
@@ -34,9 +111,9 @@ enum AutoSyncItemType {
     func text() -> String {
         switch self {
         case .photo:
-            return "Photos"
+            return TextConstants.autoSyncCellPhotos
         case .video:
-            return "Videos"
+            return TextConstants.autoSyncCellVideos
         }
     }
 }

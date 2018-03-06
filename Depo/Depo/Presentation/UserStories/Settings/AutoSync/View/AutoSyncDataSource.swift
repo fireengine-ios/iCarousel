@@ -17,6 +17,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
 
     @IBOutlet weak var tableView: UITableView?
     @IBOutlet weak var tableHConstraint: NSLayoutConstraint?
+    
     var isFromSettings: Bool = false
     
     var tableDataArray = [AutoSyncModel]()
@@ -24,6 +25,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
     private var autoSyncSettings: AutoSyncSettings?
     
     weak var delegate: AutoSyncDataSourceDelegate?
+    
     
     func configurateTable(table: UITableView, tableHConstraint: NSLayoutConstraint?){
         tableView = table
@@ -45,24 +47,26 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    func showCellsFromModels(models:[AutoSyncModel]){
-        tableDataArray = models
+    func showCells(from settings: AutoSyncSettings) {
+        autoSyncSettings = settings
+        let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: nil, selected: settings.isAutoSyncEnabled)
+        let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.photoSetting, selected: false)
+        let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.videoSetting, selected: false)
+        tableDataArray.append(contentsOf: [headerModel, photoSettingModel, videoSettingModel])
         reloadTableView()
     }
     
-    func createSettingsAutoSyncModel () -> SettingsAutoSyncModel{
-        let model = SettingsAutoSyncModel()
-        model.isAutoSyncEnable = tableDataArray[0].isSelected
-        //model.isSyncViaWifi = tableDataArray[1].isSelected
-        model.mobileDataPhotos = tableDataArray[1].isSelected
-        model.mobileDataVideo = tableDataArray[2].isSelected
-        return model
+    func createAutoSyncSettings() -> AutoSyncSettings {
+        guard let settings = autoSyncSettings else {
+            return AutoSyncSettings()
+        }
+        return settings
     }
     
-    func getTableH() -> CGFloat{
+    private func getTableHeight() -> CGFloat{
         let rowsCount = tableView?.numberOfRows(inSection: 0) ?? 0
         var tableH: CGFloat = 0
-        for i in 0...rowsCount{
+        for i in 0...rowsCount {
             let indexPath = IndexPath(row: i, section: 0)
             if let cellRect = tableView?.rectForRow(at: indexPath){
                 tableH = tableH + cellRect.size.height
@@ -75,7 +79,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
     func forceDisableAutoSync() {
         for index in 0..<tableDataArray.count {
             let model = tableDataArray[index]
-            if (model.cellType == .headerLike) {
+            if model.cellType == .headerLike {
                 if let cell = tableView?.cellForRow(at: IndexPath(row: index, section: 0)) as? AutoSyncSwitcherTableViewCell {
                     cell.switcher.isOn = false
                 }
@@ -98,14 +102,6 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
         return tableDataArray.count
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let model = tableDataArray[indexPath.row]
-//        if model.cellType == .typeSwitcher {
-//            return 228.0
-//        }
-//        return 83.0
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = tableDataArray[indexPath.row]//TODO: ework enum or change it to SWITCH - case
         if model.cellType == .headerLike {
@@ -120,7 +116,9 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSettingsCellID, for: indexPath)
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSettingsTableViewCell
-            autoSyncCell.configurate(with: AutoSyncSetting(syncItemType: .photo, option: .never))
+            if let syncSetting = model.syncSetting {
+                autoSyncCell.configurate(with: syncSetting)
+            }
             autoSyncCell.delegate = self
             return autoSyncCell
         }
@@ -130,7 +128,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
     func reloadTableView() {
         tableView?.reloadData()
         if let constraint = tableHConstraint {
-            constraint.constant = getTableH()
+            constraint.constant = getTableHeight()
             tableView?.updateConstraints()
         }
     }
@@ -144,7 +142,11 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
         
         if model.cellType == .headerLike {
             if cell.switcher.isOn {
+                autoSyncSettings?.isAutoSyncEnabled = true
                 delegate?.enableAutoSync()
+            } else {
+                autoSyncSettings?.disableAutoSync()
+                reloadTableView()
             }
         }
     }
@@ -153,7 +155,7 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
 
 extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
     func didChange(setting: AutoSyncSetting) {
-        
+        autoSyncSettings?.set(setting: setting)
     }
     
     func didChangeHeight() {
@@ -163,7 +165,7 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
         }
 
         if let constraint = tableHConstraint {
-            constraint.constant = getTableH()
+            constraint.constant = getTableHeight()
             tableView?.updateConstraints()
         }
         

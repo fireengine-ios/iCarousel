@@ -424,7 +424,6 @@
 		7C7ED4DD1F84C8C400DC5D33 /* CircleYellowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7ED4DC1F84C8C400DC5D33 /* CircleYellowButton.swift */; };
 		7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		7C83B6F11F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */; };
-		7C83B6F31F3D916F006D05E3 /* SettingsAutoSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */; };
 		7C849211201CB979007C502A /* LatestUpladsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C849210201CB979007C502A /* LatestUpladsCard.swift */; };
 		7C849212201CB979007C502A /* LatestUpladsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C849210201CB979007C502A /* LatestUpladsCard.swift */; };
 		7C849214201CB990007C502A /* LatestUpladsCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C849213201CB990007C502A /* LatestUpladsCard.xib */; };
@@ -1637,7 +1636,6 @@
 		8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		8C0E8D4E1FDEBDFF00789C91 /* CurioReachabilityEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6151DDDD0F600FFE63E /* CurioReachabilityEx.m */; };
 		8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
-		8C0E8D501FDEBDFF00789C91 /* SettingsAutoSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */; };
 		8C0E8D511FDEBDFF00789C91 /* UploadFromLifeBoxInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */; };
 		8C0E8D521FDEBDFF00789C91 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
 		8C0E8D531FDEBDFF00789C91 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
@@ -3289,7 +3287,6 @@
 			files = (
 				B54BFF3B202B20250018AF82 /* autosync-widget.appex in Embed App Extensions */,
 				CE1BE93D204831CE0074BDDC /* LifeboxFileProvider.appex in Embed App Extensions */,
-				78B2D351204AA5F500D096DC /* NotificationService.appex in Embed App Extensions */,
 				CE58FAF920444493007F3F54 /* LifeboxShared.appex in Embed App Extensions */,
 				CE1BE93A204831CE0074BDDC /* LifeboxFileProviderUI.appex in Embed App Extensions */,
 			);
@@ -3779,7 +3776,6 @@
 		7C7ED4DC1F84C8C400DC5D33 /* CircleYellowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleYellowButton.swift; sourceTree = "<group>"; };
 		7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FolderSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
-		7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAutoSyncModel.swift; sourceTree = "<group>"; };
 		7C849210201CB979007C502A /* LatestUpladsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestUpladsCard.swift; sourceTree = "<group>"; };
 		7C849213201CB990007C502A /* LatestUpladsCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LatestUpladsCard.xib; sourceTree = "<group>"; };
 		7C942FED1EF94A18008F8A8E /* Depo_LifeTech-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Depo_LifeTech-Info.plist"; sourceTree = "<group>"; };
@@ -7058,7 +7054,6 @@
 				CECA95961F163CC80054BDC0 /* WrapperedItems.swift */,
 				7CFF0C8D1F4C1E1800E72E6A /* AlbumItem.swift */,
 				7C6E2F531F31BD2200536DB6 /* PhotoStory.swift */,
-				7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */,
 				7CFE92F71F5EDDE4008A3B72 /* LanguageModel.swift */,
 				CE4CFEC01F78F94900FB4C3D /* BytesType.swift */,
 				CEF619EB1F79222600BECF03 /* AccountType.swift */,
@@ -11485,7 +11480,6 @@
 				CE58FAF820444493007F3F54 /* PBXTargetDependency */,
 				CE1BE939204831CE0074BDDC /* PBXTargetDependency */,
 				CE1BE93C204831CE0074BDDC /* PBXTargetDependency */,
-				78B2D350204AA5F500D096DC /* PBXTargetDependency */,
 			);
 			name = Depo_LifeTech;
 			productName = Depo;
@@ -13437,7 +13431,6 @@
 				8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				8C0E8D4E1FDEBDFF00789C91 /* CurioReachabilityEx.m in Sources */,
 				8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */,
-				8C0E8D501FDEBDFF00789C91 /* SettingsAutoSyncModel.swift in Sources */,
 				4A9B3906201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				FA793D8A201872E200A02B46 /* PlacesService.swift in Sources */,
 				8C0E8D511FDEBDFF00789C91 /* UploadFromLifeBoxInitializer.swift in Sources */,
@@ -14494,7 +14487,6 @@
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				CE51AC461EF90853005DCEE0 /* CurioReachabilityEx.m in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
-				7C83B6F31F3D916F006D05E3 /* SettingsAutoSyncModel.swift in Sources */,
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */,
 				4A56D5B2202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,

@@ -47,8 +47,8 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        let model = dataSource.createSettingsAutoSyncModel()
-        output.saveSettings(model)
+        let settings = dataSource.createAutoSyncSettings()
+        output.save(settings: settings)
     }
     
     override func viewDidLoad() {
@@ -79,13 +79,13 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     // MARK: buttons actions
     
     @IBAction func onStartUsingButton(){
-        let model = dataSource.createSettingsAutoSyncModel()
+        let settings = dataSource.createAutoSyncSettings()
         
-        if !model.isAutoSyncEnable {
+        if !settings.isAutoSyncEnabled {
             MenloworksEventsService.shared.onFirstAutosyncOff()
         }
         
-        output.saveChanges(setting: model)
+        output.change(settings: settings)
     }
     
     @IBAction func onSkipButtn(){
@@ -96,8 +96,8 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     func setupInitialState() {
     }
     
-    func preperedCellsModels(models:[AutoSyncModel]){
-        dataSource.showCellsFromModels(models: models)
+    func prepaire(syncSettings: AutoSyncSettings) {
+        dataSource.showCells(from: syncSettings)
     }
     
     func reloadTableView() {

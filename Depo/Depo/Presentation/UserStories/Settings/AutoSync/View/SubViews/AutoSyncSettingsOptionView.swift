@@ -19,7 +19,7 @@ final class AutoSyncSettingsOptionView: UIView {
     @IBOutlet private weak var button: UIButton!
     @IBOutlet private weak var checkboxImageView: UIImageView!
     
-    private var option: AutoSyncOption = .never {
+    private var option: AutoSyncOption = .wifiOnly {
         willSet { button.setTitle(newValue.text(), for: .normal) }
     }
     

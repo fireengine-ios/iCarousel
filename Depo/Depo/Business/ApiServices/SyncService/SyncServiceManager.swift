@@ -26,7 +26,7 @@ class SyncServiceManager {
     
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()
-    private var settings: SettingsAutoSyncModel?
+    private var settings: AutoSyncSettings?
     
     private var lastAutoSyncTime: TimeInterval = 0
     private var timeIntervalBetweenSyncs: TimeInterval = NumericConstants.timeIntervalBetweenAutoSync
@@ -84,27 +84,27 @@ class SyncServiceManager {
     
     //MARK: - Public
     
-    func getSettings() -> SettingsAutoSyncModel? {
+    func getSettings() -> AutoSyncSettings? {
         return settings
     }
     
-    func logChangesIfNeeded(settingsModel: SettingsAutoSyncModel) {
-        if settingsModel.isAutoSyncEnable != settings?.isAutoSyncEnable, !settingsModel.isAutoSyncEnable {
-                MenloworksEventsService.shared.onAutosyncOff()
-        }
-        if settingsModel.mobileDataPhotos != settings?.mobileDataPhotos {
-            settingsModel.mobileDataPhotos ? MenloworksTagsService.shared.onAutosyncPhotosViaLte() : MenloworksTagsService.shared.onAutosyncPhotosViaWifi()
-        }
-        
-        if settingsModel.mobileDataVideo != settings?.mobileDataVideo {
-            settingsModel.mobileDataVideo ? MenloworksTagsService.shared.onAutosyncVideoViaLte() : MenloworksTagsService.shared.onAutosyncVideoViaWifi()
-        }
-    }
+//    func logChangesIfNeeded(settings: AutoSyncSettings) {
+//        if settings.isAutoSyncEnabled != settings?.isAutoSyncEnabled, !settings.isAutoSyncEnable {
+//                MenloworksEventsService.shared.onAutosyncOff()
+//        }
+//        if settings.mobileDataPhotos != settings?.mobileDataPhotos {
+//            settings.mobileDataPhotos ? MenloworksTagsService.shared.onAutosyncPhotosViaLte() : MenloworksTagsService.shared.onAutosyncPhotosViaWifi()
+//        }
+//
+//        if settings.mobileDataVideo != settings?.mobileDataVideo {
+//            settings.mobileDataVideo ? MenloworksTagsService.shared.onAutosyncVideoViaLte() : MenloworksTagsService.shared.onAutosyncVideoViaWifi()
+//        }
+//    }
     
-    func updateSyncSettings(settingsModel: SettingsAutoSyncModel) {
+    func update(syncSettings: AutoSyncSettings) {
         log.debug("SyncServiceManager updateSyncSettings")
         
-        settings = settingsModel
+        settings = syncSettings
     
         checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
     }
@@ -165,15 +165,10 @@ class SyncServiceManager {
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         dispatchQueue.async {
             guard let syncSettings = self.settings else {
-                AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
+                AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { [weak self] (settings, _) in
                     if let `self` = self {
-                        let settings = SettingsAutoSyncModel()
-                        settings.isAutoSyncEnable = autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected
-                        settings.mobileDataPhotos = autoSyncModels[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
-                        settings.mobileDataVideo = autoSyncModels[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
-                        
                         if self.settings == nil {
-                            self.updateSyncSettings(settingsModel: settings)
+                            self.update(syncSettings: settings)
                         }
                     }
                 })
@@ -183,9 +178,10 @@ class SyncServiceManager {
             
             self.timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
             
-            guard syncSettings.isAutoSyncEnable else {
+            guard syncSettings.isAutoSyncEnabled else {
                 self.stop(reachabilityDidChange: false, photo: true, video: true)
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
+                MenloworksEventsService.shared.onAutosyncOff()
                 return
             }
             
@@ -197,16 +193,19 @@ class SyncServiceManager {
             }
             
             if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
-                if reachability.connection == .wifi {
-                    self.start(photo: true, video: true, newItems: newItems)
-                } else if reachability.connection == .cellular {
-                    let photoEnabled = syncSettings.mobileDataPhotos
-                    let videoEnabled = syncSettings.mobileDataVideo
-                    
-                    self.stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
-                    if photoEnabled || videoEnabled {
-                        self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
-                    }
+                let photoOption = syncSettings.photoSetting.option
+                let videoOption = syncSettings.videoSetting.option
+                
+                let photoEnabled = (reachability.connection == .wifi && photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
+                    (reachability.connection == .cellular && photoOption == .wifiAndCellular)
+                
+                let videoEnabled = (reachability.connection == .wifi && videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
+                    (reachability.connection == .cellular && videoOption == .wifiAndCellular)
+                
+                self.stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
+                
+                if photoEnabled || videoEnabled {
+                    self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
                 }
             } else {
                 self.stop(reachabilityDidChange: reachabilityChanged, photo: true, video: true)

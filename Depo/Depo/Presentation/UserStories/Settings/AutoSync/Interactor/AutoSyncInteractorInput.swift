@@ -9,9 +9,9 @@
 import Foundation
 
 protocol AutoSyncInteractorInput {
-    func prepareCellsModels()
+    func prepareCellModels()
 
-    func onSaveSettings(setting: SettingsAutoSyncModel)
+    func onSave(settings: AutoSyncSettings)
     
     func checkPermissionForPhoto()
 }
