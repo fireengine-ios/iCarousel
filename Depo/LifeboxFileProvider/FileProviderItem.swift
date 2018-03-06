@@ -16,7 +16,7 @@ final class FileProviderItem: NSObject, NSFileProviderItem, Map {
     var capabilities = NSFileProviderItemCapabilities.allowsReading
     
     let itemIdentifier: NSFileProviderItemIdentifier
-    let parentItemIdentifier: NSFileProviderItemIdentifier
+    var parentItemIdentifier: NSFileProviderItemIdentifier
     let filename: String
     let typeIdentifier: String
     
@@ -68,7 +68,6 @@ extension FileProviderItem {
         let itemIdentifier = json["uuid"].string ?? UUID().uuidString
         let myParentItemIdentifier = NSFileProviderItemIdentifier.rootContainer.rawValue
         let filename = json["name"].string ?? ""
-        let typeIdentifier = filename.utTypeFromExtension ?? kUTTypeFolder as String
         
         let childItemCount = json["childCount"].number
         let documentSize = json["bytes"].number ?? 0
@@ -78,6 +77,15 @@ extension FileProviderItem {
         let isFolder = json["folder"].bool ?? false
         let tempDownloadURL = json["tempDownloadURL"].url
         let thumbnailURL = json["metadata"]["Thumbnail-Medium"].url
+        
+        let typeIdentifier: String
+        if let type = filename.utTypeFromExtension {
+            typeIdentifier = type
+        } else if isFolder {
+            typeIdentifier = kUTTypeFolder as String
+        } else {
+            typeIdentifier = "public.data"
+        }
         
         self.init(itemIdentifier: itemIdentifier,
                   parentItemIdentifier: myParentItemIdentifier,
