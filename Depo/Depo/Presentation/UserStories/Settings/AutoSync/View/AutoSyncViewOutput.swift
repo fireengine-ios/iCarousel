@@ -9,7 +9,7 @@
 protocol AutoSyncViewOutput {
     func viewIsReady()
     func skipForNowPressed()
-    func saveChanges(setting: SettingsAutoSyncModel)
-    func saveSettings(_ setting: SettingsAutoSyncModel)
+    func change(settings: AutoSyncSettings)
+    func save(settings: AutoSyncSettings)
     func enableAutoSync()
 }

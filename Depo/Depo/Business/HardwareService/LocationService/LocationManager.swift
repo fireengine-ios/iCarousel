@@ -61,13 +61,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func startUpdateLocation(){
         log.debug("LocationManager startUpdateLocation")
 
-        AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
+        AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { [weak self] (settings, _) in
             
             guard let `self` = self else{
                 return
             }
             
-            if autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected {
+            if settings.isAutoSyncEnabled {
                 if CLLocationManager.locationServicesEnabled(){
                     if CLLocationManager.authorizationStatus() == .notDetermined{
                         self.locationManager.requestAlwaysAuthorization()
