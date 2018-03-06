@@ -261,6 +261,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func play(item: AVPlayerItem) {
+        MenloworksTagsService.shared.onVideoDisplayed()
+        
         localPlayer?.replaceCurrentItem(with: item)
         playerController = AVPlayerViewController()
         playerController?.player = localPlayer
@@ -331,7 +333,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         let file = objects[selectedIndex]
         
         if file.fileType == .video {
-            guard let url = file.urlToFile else{
+            let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
+            guard let url = preUrl else {
                 return
             }
             

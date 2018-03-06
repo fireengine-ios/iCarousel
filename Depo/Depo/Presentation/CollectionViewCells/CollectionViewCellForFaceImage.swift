@@ -17,6 +17,8 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     @IBOutlet private weak var visibleImageView: UIImageView!
     @IBOutlet private weak var transperentView: UIView!
     
+    private var isCellVisible = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -25,13 +27,15 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
-        isCellSelected = isSelected
         isCellSelectionEnabled = isSelectionActive
+        isCellSelected = isSelected
         
-        if (isSelectionActive) {
-            visibleImageView.isHidden = !isSelected
-            transperentView.alpha = isSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+        if isSelectionActive {
+            let highlightCell = (isCellSelected && isCellVisible) || (!isCellSelected && !isCellVisible)
+            visibleImageView.isHidden = !highlightCell
+            transperentView.alpha = highlightCell ? NumericConstants.faceImageCellTransperentAlpha : 0
         }
+        
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
@@ -39,23 +43,27 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
             return
         }
         
-        visibleImageView.isHidden = !isCellSelected
-        transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
-        
         if (isAlreadyConfigured) {
             return
         }
+        
+        visibleImageView.isHidden = !isCellSelected
+        transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
         
         imageView.image = nil
         
         nameLabel.text = item.name
 
         if let peopleItem = wrappedObj as? PeopleItem,
-            let isVisible = peopleItem.responseObject.visible,
-            !isVisible {
-            visibleImageView.isHidden = isVisible
-            transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
+            let isVisible = peopleItem.responseObject.visible {
+            
+            isCellVisible = isVisible
+            
+            let highlightCell = (isCellSelected && isCellVisible) || (!isCellSelected && !isCellVisible)
+            visibleImageView.isHidden = !highlightCell
+            transperentView.alpha = highlightCell ? NumericConstants.faceImageCellTransperentAlpha : 0
         }
+    
     }
     
     override func prepareForReuse() {

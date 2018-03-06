@@ -51,6 +51,11 @@ extension FaceImageInteractor: FaceImageInteractorInput {
         let parameters = FaceImageAllowedParameters(allowed: isAllowed)
         accountService.switchFaceImageAllowed(parameters: parameters, success: { [weak self] response in
             DispatchQueue.main.async {
+                if isAllowed {
+                    MenloworksEventsService.shared.onFaceImageRecognitionOn()
+                } else {
+                    MenloworksEventsService.shared.onFaceImageRecognitionOff()
+                }
                 self?.output.operationFinished()
             }
 

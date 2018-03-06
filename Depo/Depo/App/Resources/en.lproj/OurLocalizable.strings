@@ -362,7 +362,7 @@
 "Login Settings" = "Login Settings";
 "Back to Lifebox" = "Back to Lifebox";
 "Start adding your documents" = "Start adding your documents";
-"You don’t have any documents on your Lifebox yet." = "You don’t have any documents on your Lifebox yet.";
+"Start adding your documents" = "Start adding your documents";
 "Start adding your music" = "Start adding your music";
 "You don’t have any music on your Lifebox yet." = "You don’t have any music on your Lifebox yet.";
 "Folder is Empty" = "Folder is Empty";
@@ -612,6 +612,7 @@
 "Yes" = "Yes";
 "this person" = "this person";
 "Photos" = "Photos";
+"We couldn't find anybody on your Lifebox yet." = "We couldn't find anybody on your Lifebox yet.";
 "They will be merged together" = "They will be merged together";
 "Grouping of your photos will take some time. Please wait and then check the albums." = "Grouping of your photos will take some time. Please wait and then check the albums.";
 "Not selected" = "Not selected";

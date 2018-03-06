@@ -109,7 +109,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                 let uuid = self?.album?.uuid {
                 self?.output.startAsyncOperation()
 
-                PlacesService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                PlacesService().deletePhotosFromAlbum(uuid: uuid, photos: items, success: { [weak self] in
                     ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
                     
                     DispatchQueue.main.async {

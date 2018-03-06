@@ -87,10 +87,10 @@ class Upload: UploadRequestParametrs {
             HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
-            HeaderConstant.XObjectMetaParentUuid : rootFolder
+            HeaderConstant.XObjectMetaParentUuid : rootFolder,
+            HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue
 //            HeaderConstant.Etag                   : md5
             //                  HeaderConstant.ContentLength         : contentLenght,
-            //                  HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue,
             //                  HeaderConstant.XObjectMetaAlbumLabel  : "",
             //                  HeaderConstant.XObjectMetaFolderLabel : "",
             //                  HeaderConstant.Expect                 : "100-continue",

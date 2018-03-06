@@ -30,10 +30,8 @@ open class ShareData {
             contentType = url.imageContentType
         } else if self is ShareVideo {
             contentType = "video/mp4"
-        } else if url.pathExtension.lowercased() == "pdf" {
-            contentType = "application/pdf"
         } else {
-            contentType = "application/octet-stream"
+            contentType = url.mimeType
         }
         return contentType
     }

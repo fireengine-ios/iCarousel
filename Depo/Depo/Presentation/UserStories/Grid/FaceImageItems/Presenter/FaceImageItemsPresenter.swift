@@ -36,6 +36,16 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    func onItemSelectedActiveState(item: BaseDataSourceItem) {
+        dataSource.allMediaItems.forEach { peopleItem in
+            if let peopleItem = peopleItem as? PeopleItem,
+            let isVisible = peopleItem.responseObject.visible,
+            peopleItem.uuid == item.uuid {
+                peopleItem.responseObject.visible = !isVisible
+            }
+        }
+    }
+    
     override func getContentWithSuccess(items: [WrapData]) {
         allItmes = []
         
@@ -61,9 +71,22 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
                 view.updateUgglaViewPosition()
             }
         }
+        
+        dataSource.isHeaderless = true
+        updateNoFilesView()
+    }
+    
+    override func getContentWithFail(errorString: String?) {
+        super.getContentWithFail(errorString: errorString)
+        
+        updateNoFilesView()
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
+    
+    override func needShowNoFileView() -> Bool {
+        return dataSource.allMediaItems.isEmpty
+    }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if hasUgglaLabel(), let view = view as? FaceImageItemsInput, scrollView == dataSource.collectionView {
@@ -83,6 +106,13 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         reloadData()
     }
     
+    private func updateNoFilesView() {
+        if needShowNoFileView() {
+            view.showNoFilesWith(text: interactor.textForNoFileLbel(),
+                                    image: interactor.imageForNoFileImageView(),
+                                    createFilesButtonText: "", needHideTopBar: interactor.needHideTopBar())
+        }
+    }
 }
 
 // MARK: FaceImageItemsInteractorOutput
@@ -99,6 +129,8 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     func didSaveChanges(_ items: [PeopleItem]) {
         isChangeVisibilityMode = false
         dataSource.setSelectionState(selectionState: false)
+        
+        asyncOperationSucces()
         
         view.stopSelection()
         

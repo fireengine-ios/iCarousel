@@ -371,7 +371,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
         
         if show{
-            curtainView.frame = currentViewController?.view.frame ?? CGRect.zero
+            curtainView.frame =  CGRect(x: 0, y: 0, width: currentViewController?.view.frame.width ?? 0, height: currentViewController?.view.frame.height ?? 0)
             currentViewController?.view.addSubview(curtainView)
             currentViewController?.view.bringSubview(toFront: curtainView)
         }else{
@@ -541,6 +541,30 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeButtonsAppearance(toHidden: true, withAnimation: true, forButtons: buttonsArray)
     }
     
+    fileprivate func log(for index: TabScreenIndex) {
+        switch index {
+        case .photosScreenIndex:
+            MenloworksAppEvents.onPhotosAndVideosOpen()
+            
+            guard let settings = SyncServiceManager.shared.getSettings() else { return }
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnable)
+            
+            if settings.isAutoSyncEnable {
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !settings.mobileDataPhotos)
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !settings.mobileDataVideo)
+            } else {
+                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
+            }
+        case .musicScreenIndex:
+            MenloworksAppEvents.onMusicOpen()
+        case .documentsScreenIndex:
+            MenloworksAppEvents.onDocumentsOpen()
+        default:
+            break
+        }
+    }
+    
     private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool, forButtons buttons:[SubPlussButtonView]) {
         if buttons.count == 0 {
             return
@@ -572,6 +596,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             }
             
             selectedIndex = tabbarSelectedIndex
+            
+            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
+                log(for: tabScreenIndex)
+            }
         }
     }
 }

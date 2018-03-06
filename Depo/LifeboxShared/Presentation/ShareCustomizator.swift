@@ -73,4 +73,10 @@ final class ShareCustomizator: NSObject {
             progressLabel.text = " "
         }
     }
+    
+    @IBOutlet private weak var currentPhotoImageView: UIImageView! {
+        didSet {
+            currentPhotoImageView.backgroundColor = UIColor.lightGray
+        }
+    }
 }

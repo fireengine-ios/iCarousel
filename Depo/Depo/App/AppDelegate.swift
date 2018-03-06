@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     
@@ -43,8 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = RouterVC().vcForCurrentState()
         window?.makeKeyAndVisible()
         
-        
-        
+
         Fabric.with([Crashlytics.self])
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -57,6 +57,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let logPath: NSURL = documentDirectory.appendingPathComponent("app.log")! as NSURL
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: logPath, fileLevel: .debug)
         
+        MenloworksAppEvents.onAppLaunch()
+        MenloworksTagsService.shared.passcodeStatus(!passcodeStorage.isEmpty)
         return true
     }
     
@@ -90,6 +92,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if tokenStorage.refreshToken != nil {
             LocationManager.shared.startUpdateLocation()
         }
+        
+        if !passcodeStorage.isEmpty {
+            let topVC = UIApplication.topController()
+            
+            /// remove PasscodeEnterViewController if was on the screen
+            if let tabBarVC = topVC as? TabBarViewController,
+                let navVC = tabBarVC.activeNavigationController,
+                navVC.topViewController is PasscodeEnterViewController {
+                navVC.popViewController(animated: false)
+                showPasscodeIfNeed()
+            }
+        }
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -104,6 +118,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
+        /// remove PasscodeEnterViewController if was on the screen and biometrics is disable
+        if let tabBarVC = topVC as? TabBarViewController,
+            let navVC = tabBarVC.activeNavigationController,
+            navVC.topViewController is PasscodeEnterViewController
+        {
+            if biometricsManager.isEnabled {
+                return
+            } else {
+                navVC.popViewController(animated: false)
+            }
+        }
+        
         if topVC is UIAlertController {
             topVC?.dismiss(animated: false, completion: {
                 self.showPasscode()
@@ -116,14 +142,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func showPasscode() {
         let topVC = UIApplication.topController()
         
-        /// remove PasscodeEnterViewController if was on the screen
-        if let tabBarVC = topVC as? TabBarViewController,
-            let navVC = tabBarVC.activeNavigationController,
-            navVC.topViewController is PasscodeEnterViewController
-        {
-            navVC.popViewController(animated: false)
-        }
-    
         /// present PasscodeEnterViewController
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         vc.success = {
@@ -189,20 +207,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         log.debug("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
-
+        MenloworksTagsService.shared.onNotificationPermissionChanged(true)
+        
         MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         log.debug("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
+        MenloworksTagsService.shared.onNotificationPermissionChanged(false)
 
         MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         log.debug("AppDelegate didReceiveRemoteNotification")
-
-        MPush.applicationDidReceiveRemoteNotification(userInfo)
+        MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {

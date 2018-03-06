@@ -23,13 +23,31 @@ class SearchViewInteractor: SearchViewInteractorInput {
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
     
+    private let accountService = AccountService()
+    
     init(remoteItems: RemoteSearchService, recentSearches: RecentSearchesService) {
         self.remoteItems = remoteItems
         self.recentSearches = recentSearches
     }
     
     func viewIsReady() {
-        output?.setRecentSearches(recentSearches.searches)
+        self.faceImageAllowed { [weak self] result in
+            guard let `self` = self else { return }
+
+            if result {
+                self.output?.setRecentSearches(self.recentSearches.searches)
+            } else {
+                var searches = [SearchCategory: [SuggestionObject]]()
+            
+                self.recentSearches.searches.forEach({ (key, list) in
+                    if key != .people && key != .things {
+                        searches[key] = list
+                    }
+                })
+                self.output?.setRecentSearches(searches)
+            }
+        }
+        
         getDefaultSuggetion(text: "")
     }
     
@@ -44,7 +62,22 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     } else {
                         self.recentSearches.addSearch(searchText)
                     }
-                    self.output?.setRecentSearches(self.recentSearches.searches)
+                    
+                    self.faceImageAllowed { [weak self] result in
+                        guard let `self` = self else { return }
+                        if result {
+                            self.output?.setRecentSearches(self.recentSearches.searches)
+                        } else {
+                            var searches = [SearchCategory: [SuggestionObject]]()
+                            
+                            self.recentSearches.searches.forEach({ (key, list) in
+                                if key != .people && key != .things {
+                                    searches[key] = list
+                                }
+                            })
+                            self.output?.setRecentSearches(searches)
+                        }
+                    }
                     self.output?.endSearchRequestWith(text: searchText)
                 }
             }, fail: { [weak self] in
@@ -60,6 +93,18 @@ class SearchViewInteractor: SearchViewInteractorInput {
                 wraperdOutput.getContentWithSuccess(items: items)
             }
         }
+    }
+    
+    private func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
+        accountService.faceImageAllowed(success: { response in
+            if let response = response as? FaceImageAllowedResponse, let allowed = response.allowed {
+                completion(allowed)
+            } else {
+                completion(false)
+            }
+            }, fail: { error in
+                completion(false)
+        })
     }
     
     func nextItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder ) {
@@ -80,10 +125,12 @@ class SearchViewInteractor: SearchViewInteractorInput {
     }
     
     func getSuggetion(text: String) {
-        remoteItems.getSuggestion(text: text, success: { (suggestList) in
-            DispatchQueue.main.async { [weak self] in
-                if let wrapOutput = self?.output {
-                    wrapOutput.successWithSuggestList(list: suggestList.filter {$0.text != nil})
+        remoteItems.getSuggestion(text: text, success: { [weak self] (suggestList) in
+            DispatchQueue.main.async {
+                self?.faceImageAllowed { [weak self] result in
+                    guard let `self` = self else { return }
+                    let filteredItems = self.filterSuggetion(items: suggestList, faceImageAllowed: result)
+                    self.output?.successWithSuggestList(list: filteredItems)
                 }
             }
         }, fail: { (_) in
@@ -92,6 +139,33 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     func getDefaultSuggetion(text: String) {
         getSuggetion(text: text)
+    }
+    
+    private func filterSuggetion(items: [SuggestionObject]?, faceImageAllowed: Bool) -> [SuggestionObject] {
+        var result = [SuggestionObject]()
+        guard let items = items else {
+            return result
+        }
+ 
+        if faceImageAllowed {
+            for suggest in items {
+                var hasDuplicate = false
+                
+                if suggest.info?.id == nil, //simple suggestion
+                    let type = suggest.type, let text = suggest.text,
+                    items.first(where: {$0.type == type && $0.text == text && $0.info?.id != nil}) != nil {
+                    hasDuplicate = true
+                }
+                
+                if !hasDuplicate && suggest.text != nil {
+                    result.append(suggest)
+                }
+            }
+        } else {
+            result = items.filter { $0.text != nil && $0.type != .people && $0.type != .thing }
+        }
+        
+        return result
     }
     
     func clearRecentSearches() {

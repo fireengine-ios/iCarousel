@@ -38,6 +38,7 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
     func configure(withItems items:[SuggestionObject]?, category: SearchCategory?) {
         self.category = category
         guard let newItems = items else {
+            removeSubviews()
             return
         }
         
@@ -47,9 +48,7 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
         if oldFirstId != newFirstId {
             self.items = newItems
             
-            for view in stackView.arrangedSubviews {
-                view.removeFromSuperview()
-            }
+            removeSubviews()
             
             for (index, item) in newItems.enumerated() {
                 self.add(item: item, atIndex: index)
@@ -81,6 +80,12 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
         }
         
         stackView.addArrangedSubview(button)
+    }
+    
+    private func removeSubviews() {
+        for view in stackView.arrangedSubviews {
+            view.removeFromSuperview()
+        }
     }
 
     @IBAction func selectItem(_ sender: UIButton) {

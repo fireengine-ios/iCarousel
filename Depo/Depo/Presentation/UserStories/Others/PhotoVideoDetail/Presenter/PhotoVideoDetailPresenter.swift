@@ -163,7 +163,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             } else if item is ThingsItem {
                 interactor.deletePhotosFromThingsAlbum(items: items, id: id)
             } else if item is PlacesItem {
-                interactor.deletePhotosFromPlacesAlbum(items: items, id: id)
+                interactor.deletePhotosFromPlacesAlbum(items: items, uuid: RouterVC().getParentUUID())
             }
         }
     }
