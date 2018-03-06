@@ -67,9 +67,6 @@ extension ErrorResponse: LocalizedError {
 }
 
 extension Error {
-    var isNetworkError: Bool {
-        return self is URLError
-    }
     var description: String {
         return isNetworkError ? TextConstants.errorConnectedToNetwork : localizedDescription
     }
