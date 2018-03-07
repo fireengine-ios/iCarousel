@@ -8,6 +8,7 @@
 
 protocol PhotoVideoDetailViewInput: class {
 
+    typealias Item = WrapData
     
     func setupInitialState()
     
