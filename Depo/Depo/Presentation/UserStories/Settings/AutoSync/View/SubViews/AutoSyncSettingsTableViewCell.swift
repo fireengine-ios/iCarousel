@@ -65,6 +65,15 @@ class AutoSyncSettingsTableViewCell: UITableViewCell {
         autoSyncSetting = setting
     }
     
+    func setColors(isFromSettings: Bool) {
+        let textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        optionLabel.textColor = textColor
+        expandButton.setTitleColor(textColor, for: .normal)
+        for view in optionsViews {
+            view.setColors(isFromSettings: isFromSettings)
+        }
+    }
+    
     
     //MARK: - Private
 

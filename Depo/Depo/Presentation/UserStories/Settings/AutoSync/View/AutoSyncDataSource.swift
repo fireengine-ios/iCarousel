@@ -119,6 +119,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
             if let syncSetting = model.syncSetting {
                 autoSyncCell.configurate(with: syncSetting)
             }
+            autoSyncCell.setColors(isFromSettings: isFromSettings)
             autoSyncCell.delegate = self
             return autoSyncCell
         }
