@@ -16,9 +16,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     @IBOutlet private weak var selectionView: UIView!
     @IBOutlet private weak var visibleImageView: UIImageView!
     @IBOutlet private weak var transperentView: UIView!
-    
-    private var isCellVisible = false
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -28,12 +26,11 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         isCellSelectionEnabled = isSelectionActive
-        isCellSelected = isSelected
         
         if isSelectionActive {
-            let highlightCell = (isCellSelected && isCellVisible) || (!isCellSelected && !isCellVisible)
-            visibleImageView.isHidden = !highlightCell
-            transperentView.alpha = highlightCell ? NumericConstants.faceImageCellTransperentAlpha : 0
+            visibleImageView.isHidden = !isCellSelected
+            transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+            isCellSelected = !isCellSelected
         }
         
     }
@@ -60,12 +57,15 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         
         if let peopleItem = wrappedObj as? PeopleItem,
             let isVisible = peopleItem.responseObject.visible {
+            isCellSelected = isVisible
             
-            isCellVisible = isVisible
+            if !isVisible {
+                visibleImageView.isHidden = isVisible
+                transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
+            }
             
-            let highlightCell = (isCellSelected && isCellVisible) || (!isCellSelected && !isCellVisible)
-            visibleImageView.isHidden = !highlightCell
-            transperentView.alpha = highlightCell ? NumericConstants.faceImageCellTransperentAlpha : 0
+            visibleImageView.isHidden = isCellSelected
+            transperentView.alpha = !isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
         }
     
     }
