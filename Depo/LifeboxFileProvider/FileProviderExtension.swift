@@ -7,6 +7,7 @@
 //
 
 import FileProvider
+import MobileCoreServices
 
 let unknownError = NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo: [:])
 
@@ -290,12 +291,11 @@ final class FileProviderExtension: NSFileProviderExtension {
     // MARK: - Enumeration
     
     override func enumerator(for containerItemIdentifier: NSFileProviderItemIdentifier) throws -> NSFileProviderEnumerator {
-        
         /// ???
         /// It was added after the screen to share the file, since it entered here with the identifier of the file.
         do {
             let item = try self.item(for: containerItemIdentifier)
-            if item.typeIdentifier != "public.folder" {
+            if item.typeIdentifier != (kUTTypeFolder as String) {
                 /// ?
                 return FileProviderEnumerator(enumeratedItemIdentifier: containerItemIdentifier)
             }

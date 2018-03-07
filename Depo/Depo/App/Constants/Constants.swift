@@ -314,7 +314,7 @@ struct TextConstants {
     static let settingsViewCellFaceAndImageGrouping = NSLocalizedString("Face & Image Grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellActivityTimline = NSLocalizedString("My Activity Timeline", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellUsageInfo = NSLocalizedString("Usage Info and Packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsViewCellPasscode = NSLocalizedString("Lifebox Touch ID and Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellPasscode = NSLocalizedString("Lifebox %@ and Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellHelp = NSLocalizedString("Help & Support", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellLogout = NSLocalizedString("Logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 

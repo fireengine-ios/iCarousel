@@ -8,8 +8,6 @@
 
 import Foundation
 
-typealias Item = WrapData
-
 class UploadBaseURLResponse: ObjectRequestResponse {
     
     var url: URL?

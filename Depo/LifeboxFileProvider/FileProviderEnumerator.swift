@@ -54,16 +54,15 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
                                 userInfo: [NSLocalizedDescriptionKey: ErrorIdentificators.passcode])
             observer.finishEnumeratingWithError(error)
         }
-
-        /// dont need ???
-//        let folderUUID: String
-//        if enumeratedItemIdentifier.rawValue == "NSFileProviderRootContainerItemIdentifier" {
-//            folderUUID = enumeratedItemIdentifier.rawValue
-//        } else {
-//            folderUUID = ""
-//        }
         
-        fileService.getFiles(folderUUID: "", page: self.page) { (result) in
+        let folderUUID: String
+        if enumeratedItemIdentifier.rawValue != NSFileProviderItemIdentifier.rootContainer.rawValue {
+            folderUUID = enumeratedItemIdentifier.rawValue
+        } else {
+            folderUUID = ""
+        }
+        
+        fileService.getFiles(folderUUID: folderUUID, page: self.page) { (result) in
             switch result {
             case .success( let newItems):
                 if newItems.isEmpty {

@@ -59,4 +59,9 @@ class SeacrhViewRouter: SearchViewRouterInput {
         let controller = router.imageFacePhotosController(album: album, item: item, moduleOutput: nil)
         router.pushViewController(viewController: controller)
     }
+    
+    func openAlbum(item: AlbumItem) {
+        let controller = router.albumDetailController(album: item, type: .List, moduleOutput: nil)
+        router.pushViewController(viewController: controller)
+    }
 }

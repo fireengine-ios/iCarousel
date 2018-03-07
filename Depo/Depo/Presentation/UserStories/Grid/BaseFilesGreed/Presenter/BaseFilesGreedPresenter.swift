@@ -8,8 +8,6 @@
 //
 
 class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
-
-    typealias Item = WrapData
     
     lazy var player: MediaPlayer = factory.resolve()
     

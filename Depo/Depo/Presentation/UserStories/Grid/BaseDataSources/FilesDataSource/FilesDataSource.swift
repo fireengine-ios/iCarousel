@@ -12,8 +12,6 @@ import Photos
 
 protocol PhotoDataSource {
     
-    associatedtype Item
-    
     typealias Itemslist = (_ items: [Item]) -> Swift.Void
     
     typealias PrevieImage = (_ image: UIImage) -> Swift.Void
@@ -31,8 +29,6 @@ protocol AsynImage {
 }
 
 class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
-  
-    typealias Item = WrapData
     
     private let localManager = LocalMediaStorage.default
     

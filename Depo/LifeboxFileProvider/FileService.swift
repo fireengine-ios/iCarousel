@@ -28,12 +28,14 @@ final class FileService {
         sessionManager
             .request(url)
             .customValidate()
-            
             .responseData { response in
                 debugPrint(response)
                 switch response.result {
                 case .success(let data):
                     let array = FileProviderItem.array(from: data)
+                    if !folderUUID.isEmpty {
+                        array.forEach { $0.parentItemIdentifier = NSFileProviderItemIdentifier(rawValue: folderUUID)}
+                    }
                     handler(ResponseResult.success(array))
                 case .failure(let error):
                     handler(ResponseResult.failed(error))
