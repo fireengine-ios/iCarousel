@@ -34,6 +34,8 @@ class PackagesViewController: UIViewController {
         promoView.deleagte = self
         setupCollectionView()
         output.viewIsReady()
+        
+        MenloworksAppEvents.onPackagesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,7 +135,12 @@ extension PackagesViewController: UICollectionViewDataSource {
 // MARK: SubscriptionPlanCellDelegate
 extension PackagesViewController: SubscriptionPlanCellDelegate {
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
-        output.didPressOn(plan: plans[indexPath.row])
+        let plan = plans[indexPath.row]
+        
+        if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
+            MenloworksAppEvents.onSubscriptionClicked(tag)
+        }
+        output.didPressOn(plan: plan)
     }
 }
 

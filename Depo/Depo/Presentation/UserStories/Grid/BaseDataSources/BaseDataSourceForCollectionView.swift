@@ -41,6 +41,8 @@ enum BaseDataSourceDisplayingType{
     @objc optional func updateCoverPhotoIfNeeded()
     
     @objc optional func didDelete(items: [BaseDataSourceItem])
+    
+    @objc optional func onItemSelectedActiveState(item: BaseDataSourceItem)
 }
 
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
@@ -89,6 +91,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var needShowProgressInCell: Bool = false
     var needShowCloudIcon: Bool = true
+    var needShow3DotsInCell: Bool = true
     
     var parentUUID: String?
     
@@ -551,6 +554,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
             cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+            
+            if let cell = cell as? BasicCollectionMultiFileCell {
+                cell.moreButton.isHidden = !needShow3DotsInCell
+            }
         }
         
         for header in headers{
@@ -562,6 +569,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func getAllObjects() -> [[BaseDataSourceItem]] {
         return allItems
+    }
+    
+    func allObjectIsEmpty() -> Bool {
+        var result = true
+        getAllObjects().forEach { items in
+            if !items.isEmpty {
+                result = false
+                return
+            }
+        }
+        return result
     }
     
     func setAllItems(items: [[BaseDataSourceItem]]) {
@@ -598,7 +616,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){
         displayingType = type
+        let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+            return first < second
+        })
         collectionView?.reloadData()
+        if let firstVisibleIndexPath = firstVisibleIndexPath {
+            collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
+        }
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
@@ -809,7 +833,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 cell.cloudStatusImage.isHidden = true
             }
         }
-        
+
         return  cell
     }
     
@@ -865,6 +889,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
+        if let cell = cell as? BasicCollectionMultiFileCell {
+            cell.moreButton.isHidden = !needShow3DotsInCell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -875,11 +902,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let object = itemForIndexPath(indexPath: indexPath)
-        guard let unwrapedObject = object else {
+        guard let unwrapedObject = itemForIndexPath(indexPath: indexPath) else {
             return
         }
+        
         if (isSelectionStateActive) {
             onSelectObject(object: unwrapedObject)
             let cell = collectionView.cellForItem(at: indexPath)
@@ -887,18 +913,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            if  let forwardDelegate = self.delegate {
+                forwardDelegate.onItemSelectedActiveState?(item: unwrapedObject)
+            }
         } else {
             if  let forwardDelegate = self.delegate {
                 let array = getAllObjects()
-                for subArray in array {
-                    for obj in subArray{
-                        if (obj.uuid == unwrapedObject.uuid){
-                            
-                            forwardDelegate.onItemSelected(item: obj, from: array)
-                            return
-                        }
-                    }
-                }
+                forwardDelegate.onItemSelected(item: unwrapedObject, from: array)
             }
         }
     }
@@ -945,7 +966,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
-            
+            headerView.backgroundColor = UIColor.clear
             let textHeader = headerView as! CollectionViewSimpleHeaderWithText
             
             let title = getHeaderText(indexPath: indexPath)//fetchService.headerText(indexPath: indexPath)
@@ -1306,6 +1327,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             canShowAlbumsFilters(filters: unwrapedFilters) {
             delegate?.needReloadData?()
         }
+    }
+    
+    func newStoryCreated() {
+        
     }
     
     func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {

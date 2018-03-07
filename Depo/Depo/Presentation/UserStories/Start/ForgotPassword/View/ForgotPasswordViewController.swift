@@ -56,7 +56,7 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        visibleNavigationBarStyle()
+        hidenNavigationBarStyle()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -165,7 +165,7 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
     
     @IBAction func onSendPasswordButton(){
         endEditing()
-        let captchaUdid = captchaModuleView.currenrtCapthcaID
+        let captchaUdid = captchaModuleView.currentCaptchaID
         let captchaEntered = captchaModuleView.inputTextField.text
         output.onSendPassword(withEmail: obtainEmail(), enteredCaptcha: captchaEntered ?? "", captchaUDID: captchaUdid)
     }

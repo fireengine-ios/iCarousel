@@ -9,7 +9,12 @@
 import SwiftyJSON
 
 enum SearchCategory: Int {
-    case suggestion = 0, recent, people, things
+    case suggestionHeader = 0
+    case suggestion
+    case recentHeader
+    case recent
+    case people
+    case things
     
     var searchKey: String {
         switch self {
@@ -77,14 +82,6 @@ final class RecentSearchesService {
             let objects = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Any] {
             result = objects.map { SuggestionObject(withJSON: JSON($0)) }
         }
-    
-        if category == .recent, result.isEmpty {
-            let currentYear = Date().getYear()
-            let object = SuggestionObject()
-            object.text = String(currentYear)
-            object.type = .time
-            result.append(object)
-        }
         return result
     }
     
@@ -108,7 +105,7 @@ final class RecentSearchesService {
     private func add(item: SuggestionObject, toCategory category: SearchCategory) {
         var objects = searches[category] ?? [SuggestionObject]()
         
-        if let existingIndex = objects.index(where: {$0.text == item.text}) {
+        if let existingIndex = objects.index(where: {$0.info?.id == item.info?.id && $0.text == item.text}) {
             objects.remove(at: existingIndex)
         } else if objects.count >= category.maxSearches {
             objects.removeLast(1)
@@ -134,9 +131,12 @@ final class RecentSearchesService {
     }
     
     func clearAll() {
-        UserDefaults.standard.set([String](), forKey: SearchCategory.recent.searchKey)
-        UserDefaults.standard.set([String](), forKey: SearchCategory.people.searchKey)
-        UserDefaults.standard.set([String](), forKey: SearchCategory.recent.searchKey)
+        searches[.recent] = []
+        searches[.people] = []
+        searches[.things] = []
+        UserDefaults.standard.set([Data](), forKey: SearchCategory.recent.searchKey)
+        UserDefaults.standard.set([Data](), forKey: SearchCategory.people.searchKey)
+        UserDefaults.standard.set([Data](), forKey: SearchCategory.things.searchKey)
         UserDefaults.standard.set(nil, forKey: recentSearchesKey)
         UserDefaults.standard.synchronize()
     }

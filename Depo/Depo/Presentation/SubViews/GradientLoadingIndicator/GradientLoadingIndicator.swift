@@ -30,6 +30,13 @@ class GradientLoadingIndicator: UIView {
         }
     }
     
+    func resetProgress() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        circlePathLayer.strokeEnd = 0
+        CATransaction.commit()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configurate()

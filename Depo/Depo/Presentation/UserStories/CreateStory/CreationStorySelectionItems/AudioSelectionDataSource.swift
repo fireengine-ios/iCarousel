@@ -14,6 +14,7 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
         super.setupCollectionView(collectionView: collectionView, filters: [.fileType(.audio)])
         collectionView.register(nibCell: AudioSelectionCollectionViewCell.self)
+        smallPlayer.delegates.add(self)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -81,4 +82,10 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
         }
     }
 
+}
+
+extension AudioSelectionDataSource: MediaPlayerDelegate{
+    func didStopMediaPlayer(_ mediaPlayer: MediaPlayer){
+        collectionView?.reloadData()
+    }
 }

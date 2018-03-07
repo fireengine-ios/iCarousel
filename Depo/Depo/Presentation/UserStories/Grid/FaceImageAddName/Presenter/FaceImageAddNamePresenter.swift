@@ -29,6 +29,7 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
     override func getContentWithSuccess(items: [WrapData]) {
         clearItems()
         super.getContentWithSuccess(items: items.filter {$0.id != currentItem?.id})
+        asyncOperationSucces()
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
@@ -37,7 +38,7 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
             let currentItemURL = currentItem.urlToFile,
             let item = item as? WrapData,
             let itemUrl = item.urlToFile {
-            let yesHandler: () -> Void = { [weak self] in
+            let yesHandler: VoidHandler = { [weak self] in
                 if let interactor = self?.interactor as? FaceImageAddNameInteractorInput {
                     self?.startAsyncOperation()
                     interactor.mergePeople(currentItem, otherPerson: item)
@@ -64,7 +65,6 @@ extension FaceImageAddNamePresenter: FaceImageAddNameViewOutput {
     
     func onSearchPeople(_ text: String) {
         if let interactor = interactor as? FaceImageAddNameInteractorInput {
-            startAsyncOperation()
             interactor.getSearchPeople(text)
         }
     }
@@ -92,13 +92,11 @@ extension FaceImageAddNamePresenter: FaceImageAddNameInteractorOutput {
         router.showBack()
     }
     
-    func didMergePeople(_ name: String) {
-        if let item = currentItem {
-            currentItem?.name = name
-            faceImagePhotosmoduleOutput?.didChangeName(item: item)
-        }
+    func didMergePeople() {
         faceImagePhotosmoduleOutput?.didMergePeople()
-        router.showBack()
+        
+        if let router = router as? FaceImageAddNameRouter {
+            router.popToPeopleItems()
+        }
     }
-    
 }

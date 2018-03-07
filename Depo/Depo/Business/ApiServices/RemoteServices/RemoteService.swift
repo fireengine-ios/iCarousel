@@ -14,7 +14,7 @@ typealias ListRemoveAlbums = ( [AlbumItem] ) -> Void
 
 typealias AlbumCoverPhoto = ( Item ) -> Void
 
-typealias FailRemoteItems = () -> Void
+typealias FailRemoteItems = VoidHandler
 
 
 class RemoteItemsService {

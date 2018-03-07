@@ -8,6 +8,8 @@
 
 import Foundation
 
+public typealias Passcode = String
+
 protocol PasscodeStorage: class {
     var isEmpty: Bool { get }
     func isEqual(to passcode: Passcode) -> Bool
@@ -18,16 +20,21 @@ protocol PasscodeStorage: class {
 }
 
 final class PasscodeStorageDefaults {
+    
+    private lazy var defaults: UserDefaults? = {
+        return UserDefaults(suiteName: SharedConstants.groupIdentifier)
+    }()
+    
     static let passcodeKey = "passcodeKey"
     var passcode: Passcode {
-        get { return UserDefaults.standard.string(forKey: PasscodeStorageDefaults.passcodeKey) ?? "" }
-        set { UserDefaults.standard.set(newValue, forKey: PasscodeStorageDefaults.passcodeKey) }
+        get { return defaults?.string(forKey: PasscodeStorageDefaults.passcodeKey) ?? "" }
+        set { defaults?.set(newValue, forKey: PasscodeStorageDefaults.passcodeKey) }
     }
     
     static let numberOfTriesKey = "numberOfTriesKey"
     var numberOfTries: Int {
-        get { return UserDefaults.standard.integer(forKey: PasscodeStorageDefaults.numberOfTriesKey) }
-        set { UserDefaults.standard.set(newValue, forKey: PasscodeStorageDefaults.numberOfTriesKey) }
+        get { return defaults?.integer(forKey: PasscodeStorageDefaults.numberOfTriesKey) ?? 0 }
+        set { defaults?.set(newValue, forKey: PasscodeStorageDefaults.numberOfTriesKey) }
     }
 }
 extension PasscodeStorageDefaults: PasscodeStorage {
@@ -39,6 +46,10 @@ extension PasscodeStorageDefaults: PasscodeStorage {
     }
     
     func save(passcode: Passcode) {
+        /// maybe will be need
+//        if self.passcode.count == 0 && passcode.count > 0 {
+//            MenloworksEventsService.shared.onPasscodeSet()
+//        }
         self.passcode = passcode
     }
     

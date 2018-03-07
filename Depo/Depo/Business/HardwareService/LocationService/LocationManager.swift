@@ -28,7 +28,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
     }
     
-    func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping (() -> Void)){
+    func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping VoidHandler){
         log.debug("LocationManager checkDoWeNeedShowLocationPermissionAllert")
         SingletonStorage.shared.getUniqueUserID(success: { (uniqueUserID) in
             let key = uniqueUserID + "locationPermission"
@@ -99,9 +99,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         log.debug("LocationManager locationManager")
 
+        var isAuthorized = false
         if ((status == .authorizedAlways) || (status == .authorizedWhenInUse) || (status == .authorizedAlways)){
+            isAuthorized = true
             startUpdateLocation()
         }
+        MenloworksTagsService.shared.onLocationPermissionChanged(isAuthorized)
     }
     
 }

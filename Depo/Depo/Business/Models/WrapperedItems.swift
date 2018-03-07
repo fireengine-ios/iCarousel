@@ -10,6 +10,8 @@ import Foundation
 import Photos
 import SDWebImage
 
+typealias Item = WrapData
+
 typealias RemoteImage = (_ image: UIImage?) -> Swift.Void
 
 typealias RemoteImageError = (_ error: Error?) -> Swift.Void
@@ -111,6 +113,8 @@ enum FileType: Equatable {
     case musicPlayList
     case allDocs
     case application(ApplicationType)
+    case faceImage(FaceImageType)
+    case faceImageAlbum(FaceImageType)
 
     
     var convertedToSearchFieldValue: FieldValue {
@@ -160,6 +164,14 @@ enum FileType: Equatable {
         return (self == .audio) || self == (.video)
     }
     
+    var isFaceImageType: Bool {
+        return self == .faceImage(.people) || self == .faceImage(.things) || self == .faceImage(.places)
+    }
+    
+    var isFaceImageAlbum: Bool {
+        return self == .faceImageAlbum(.people) || self == .faceImageAlbum(.things) || self == .faceImageAlbum(.places)
+    }
+    
     
     init(type: String?, fileName: String?) {
         if let wrapType = type {
@@ -184,6 +196,21 @@ enum FileType: Equatable {
                 
                 if (wrapType.hasSuffix("photo")) {
                     self = .photoAlbum
+                    return
+                }
+                
+                if (wrapType.hasSuffix("object")) {
+                    self = .faceImageAlbum(.things)
+                    return
+                }
+                
+                if (wrapType.hasSuffix("person")) {
+                    self = .faceImageAlbum(.people)
+                    return
+                }
+                
+                if (wrapType.hasSuffix("location")) {
+                    self = .faceImageAlbum(.places)
                     return
                 }
             }
@@ -253,6 +280,9 @@ enum FileType: Equatable {
                     default:
                         self = .application(.unknown)
                     }
+                    return
+                case "zip":
+                    self = .application(.zip)
                     return
                 case "vnd.ms-powerpoint":
                     self = .application(.ppt)
@@ -347,6 +377,9 @@ enum FileType: Equatable {
             return 18
         case .allDocs:
             return 19
+            
+        default:
+            return 0
         }
     }
     
@@ -372,6 +405,32 @@ enum FileType: Equatable {
             return false
         case (.photoAlbum,.photoAlbum): return true
         case (.musicPlayList,.musicPlayList): return true
+        case (.faceImage, .faceImage):
+            switch (lhs) {
+            case .faceImage(let lhsType):
+                switch (rhs) {
+                case .faceImage(let rhsType):
+                    if lhsType == rhsType {
+                        return true
+                    }
+                default:()
+                }
+            default:()
+            }
+            return false
+        case (.faceImageAlbum, .faceImageAlbum):
+            switch (lhs) {
+            case .faceImageAlbum(let lhsType):
+                switch (rhs) {
+                case .faceImageAlbum(let rhsType):
+                    if lhsType == rhsType {
+                        return true
+                    }
+                default:()
+                }
+            default:()
+            }
+            return false
         default:
             return false
         }
@@ -503,7 +562,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var uploadContentType: String {
         switch fileType {
         case .image:
-            if let type = urlToFile?.pathExtension.lowercased() {
+            if let type = urlToFile?.pathExtension.lowercased(), !type.isEmpty {
                 return "image/\(type)"
             } else if let data = fileData {
                 return ImageFormat.get(from: data).contentType
@@ -569,7 +628,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced
-        fileType = .image
+        fileType = .faceImage(.people)
     }
     
     init(thingsItemResponse: ThingsItemResponse) {
@@ -586,7 +645,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced
-        fileType = .image
+        fileType = .faceImage(.things)
     }
     
     init(placesItemResponse: PlacesItemResponse) {
@@ -603,7 +662,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced
-        fileType = .image
+        fileType = .faceImage(.places)
     }
     
     init(baseModel: BaseMediaContent) {
@@ -694,7 +753,14 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if url == nil, fileType == .image {
                 url = remote.tempDownloadURL
             }
-
+        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places):
+            if let mediumUrl = remote.metadata?.mediumUrl {
+                url = mediumUrl
+            } else if let smallUrl = remote.metadata?.smalURl {
+                url = smallUrl
+            } else {
+                url = remote.tempDownloadURL
+            }            
         default:
             break
         }

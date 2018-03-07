@@ -107,8 +107,6 @@ class FetchService: NSObject {
 
 extension FetchService: Iterator  {
     
-    typealias Item = WrapData
-    
     var curent: WrapData? {
         get {
             return nil

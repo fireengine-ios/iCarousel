@@ -85,6 +85,18 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         }
         sortedPushed(with: sortRule)
     }
+    
+    override func onStartCreatingPhotoAndVideos() {
+        log.debug("AlbumsPresenter onStartCreatingPhotoAndVideos")
+        
+        if let router = router as? AlbumsRouter {
+            if interactor is AlbumsInteractor {
+                router.onCreateAlbum()
+            } else if interactor is StoriesInteractor {
+                router.onCreateStory()
+            }
+        }
+    }
 }
 
 extension AlbumsPresenter: AlbumDetailModuleOutput {

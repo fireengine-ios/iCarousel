@@ -106,6 +106,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         let barButtonLeft = UIBarButtonItem(customView: cancelButton)
         navigationItem.leftBarButtonItem = barButtonLeft
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -176,6 +178,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     deinit {
         ItemOperationManager.default.stopUpdateView(view: self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupNavigationBar() {
@@ -209,7 +212,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
-    func onShowSelectedItem(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
+    func onShowSelectedItem(at index: Int, from items: [Item]) {
         objects = items
         selectedIndex = index
     }
@@ -230,13 +233,21 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func getBacgroundColor() -> UIColor {
         return UIColor.black
     }
+    
+    @objc private func applicationDidEnterBackground(_ application: UIApplication) {
+        localPlayer?.pause()
+    }
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     
     func setupInitialState() { }
     
-    func onItemSelected(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
+    func onItemSelected(at index: Int, from items: [Item]) {
+        if items.isEmpty {
+            return
+        }
+        
         let item = items[index]
         if item.isLocalItem && item.fileType == .image {
             setThreeDotsMenu(active: false)
@@ -250,6 +261,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func play(item: AVPlayerItem) {
+        MenloworksTagsService.shared.onVideoDisplayed()
+        
         localPlayer?.replaceCurrentItem(with: item)
         playerController = AVPlayerViewController()
         playerController?.player = localPlayer
@@ -320,7 +333,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         let file = objects[selectedIndex]
         
         if file.fileType == .video {
-            guard let url = file.urlToFile else{
+            let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
+            guard let url = preUrl else {
                 return
             }
             

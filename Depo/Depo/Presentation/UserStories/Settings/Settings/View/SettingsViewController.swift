@@ -27,8 +27,6 @@ protocol SettingsDelegate: class{
 }
 
 class SettingsViewController: BaseViewController, SettingsViewInput, UITableViewDelegate, UITableViewDataSource {
-    
-    @IBOutlet weak var headerContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var leaveFeedbackButton: ButtonWithGrayCorner!
     @IBOutlet weak var versionLabel: UILabel!
@@ -57,6 +55,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         userInfoSubView.actionsDelegate = self
         output.viewIsReady()
         setupVersionLabel()
+        
+        MenloworksAppEvents.onPreferencesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {

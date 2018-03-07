@@ -86,6 +86,8 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         restoreButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         deleteDuplicatedButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         output.viewIsReady()
+        
+        MenloworksAppEvents.onContactSyncPageOpen()
     }
     
     deinit {
@@ -189,7 +191,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
     }
     
     func resetProgress() {
-        gradientLoaderIndicator.progress = 0
+        gradientLoaderIndicator.resetProgress()
     }
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {

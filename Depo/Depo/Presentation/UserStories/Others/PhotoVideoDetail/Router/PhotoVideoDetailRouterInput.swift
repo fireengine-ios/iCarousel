@@ -9,11 +9,10 @@
 import Foundation
 
 protocol PhotoVideoDetailRouterInput {
-
-    typealias Item = WrapData
     
     func onInfo(object: Item)
     
     func goBack(navigationConroller: UINavigationController?)
     
+    func showRemoveFromAlbum(completion: @escaping (() -> Void))
 }

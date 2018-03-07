@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wsw-lz-BVg">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Document Action View Controller-->
+        <scene sceneID="EZF-nf-i2z">
+            <objects>
+                <viewController id="wsw-lz-BVg" customClass="DocumentActionViewController" customModule="LifeboxFileProviderUI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="j94-Uc-b4p">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apx-dM-wWR">
+                                <rect key="frame" x="20" y="264" width="280" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3r-kz-zfp">
+                                <rect key="frame" x="20" y="305" width="280" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lifebox_big" translatesAutoresizingMaskIntoConstraints="NO" id="OOJ-AJ-7zx">
+                                <rect key="frame" x="80" y="84" width="160" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="JXs-cW-ugV"/>
+                                    <constraint firstAttribute="width" secondItem="OOJ-AJ-7zx" secondAttribute="height" multiplier="1:1" id="iSw-Wq-wxn"/>
+                                </constraints>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsW-74-F26">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem id="eKx-tf-ihT">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="6yJ-pv-0yz">
+                                            <connections>
+                                                <action selector="cancelButtonTapped:" destination="wsw-lz-BVg" id="nMI-uT-ngJ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AsW-74-F26" firstAttribute="leading" secondItem="LtW-2D-zeT" secondAttribute="leading" id="Bcx-dm-V0N"/>
+                            <constraint firstItem="Apx-dM-wWR" firstAttribute="top" secondItem="OOJ-AJ-7zx" secondAttribute="bottom" constant="20" id="LP1-E9-20y"/>
+                            <constraint firstItem="OOJ-AJ-7zx" firstAttribute="centerX" secondItem="LtW-2D-zeT" secondAttribute="centerX" id="Oez-S4-6Cb"/>
+                            <constraint firstItem="AsW-74-F26" firstAttribute="trailing" secondItem="LtW-2D-zeT" secondAttribute="trailing" id="PMK-Tw-HIK"/>
+                            <constraint firstItem="LtW-2D-zeT" firstAttribute="trailing" secondItem="Apx-dM-wWR" secondAttribute="trailing" constant="20" id="XqG-dE-IRw"/>
+                            <constraint firstItem="LtW-2D-zeT" firstAttribute="trailing" secondItem="h3r-kz-zfp" secondAttribute="trailing" constant="20" id="Zc3-CR-qan"/>
+                            <constraint firstItem="OOJ-AJ-7zx" firstAttribute="top" secondItem="AsW-74-F26" secondAttribute="bottom" constant="20" id="Zrh-Up-2by"/>
+                            <constraint firstItem="AsW-74-F26" firstAttribute="top" secondItem="LtW-2D-zeT" secondAttribute="top" id="jam-P9-G1g"/>
+                            <constraint firstItem="h3r-kz-zfp" firstAttribute="leading" secondItem="LtW-2D-zeT" secondAttribute="leading" constant="20" id="mAi-tq-Y8X"/>
+                            <constraint firstItem="h3r-kz-zfp" firstAttribute="top" secondItem="Apx-dM-wWR" secondAttribute="bottom" constant="20" id="nec-TQ-2bt"/>
+                            <constraint firstItem="Apx-dM-wWR" firstAttribute="leading" secondItem="LtW-2D-zeT" secondAttribute="leading" constant="20" id="wBI-sg-n6l"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LtW-2D-zeT"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KrM-cy-r2t">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="63f-iE-NGQ"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="messageLabel" destination="h3r-kz-zfp" id="3Ph-sQ-24A"/>
+                        <outlet property="titleLabel" destination="Apx-dM-wWR" id="QoZ-Ex-WpU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aJJ-cY-8O6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="4Fi-8T-ELG" customClass="DocumentActionCustomizator" customModule="LifeboxFileProviderUI" customModuleProvider="target">
+                    <connections>
+                        <outlet property="messageLabel" destination="h3r-kz-zfp" id="AZF-WT-fGS"/>
+                        <outlet property="titleLabel" destination="Apx-dM-wWR" id="6TS-hH-KUf"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="256.875" y="146.25"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="lifebox_big" width="150" height="150"/>
+    </resources>
+</document>

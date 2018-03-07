@@ -6,11 +6,16 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class AlbumsRouter: BaseFilesGreedRouter {
+protocol AlbumRouterInput {
+    func onCreateStory()
+    func onCreateAlbum()
+}
 
+final class AlbumsRouter: BaseFilesGreedRouter, AlbumRouterInput {
+
+    private let router = RouterVC()
+    
     override func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
-        let router = RouterVC()
-        
         if (selectedItem.fileType == .photoAlbum) {
             guard let album = selectedItem as? AlbumItem else {
                 return
@@ -23,6 +28,16 @@ class AlbumsRouter: BaseFilesGreedRouter {
             super.onItemSelected(selectedItem: selectedItem, sameTypeItems: sameTypeItems, type: type, sortType: sortType, moduleOutput: moduleOutput)
         }
         
+    }
+    
+    func onCreateStory() {
+        router.createStoryName()
+    }
+    
+    func onCreateAlbum() {
+        let controller = router.createNewAlbum()
+        let nController = UINavigationController(rootViewController: controller)
+        router.presentViewController(controller: nController)
     }
     
 }

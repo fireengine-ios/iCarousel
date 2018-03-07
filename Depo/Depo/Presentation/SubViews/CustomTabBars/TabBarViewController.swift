@@ -268,9 +268,12 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @objc private func showTabBar(_ sender: Any) {
         changeTabBarStatus(hidden: false)
-        //tabBar.isHidden = false
         if (self.bottomTabBarConstraint.constant < 0){
             bottomBGView.isHidden = false
+            if !musicBar.isHidden {
+                musicBar.alpha = 1
+                musicBar.isUserInteractionEnabled = true
+            }
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
                 self.view.layoutIfNeeded()
@@ -286,16 +289,18 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     @objc private func hideTabBar(_ sender: Any) {
         changeTabBarStatus(hidden: true)
         if (bottomTabBarConstraint.constant >= 0){
-            var bottomConstraintConstant = -self.tabBar.frame.height
-            if !musicBar.isHidden {
-                bottomConstraintConstant -= self.musicBar.frame.height
-            }
+            let bottomConstraintConstant = -self.tabBar.frame.height
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.view.layoutIfNeeded()
             }, completion: { (_) in
                 self.tabBar.isHidden = true
                 self.bottomBGView.isHidden = true
+                
+                if !self.musicBar.isHidden {
+                    self.musicBar.alpha = 0
+                    self.musicBar.isUserInteractionEnabled = false
+                }
             })
         }
     }
@@ -366,7 +371,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
         
         if show{
-            curtainView.frame = currentViewController?.view.frame ?? CGRect.zero
+            curtainView.frame =  CGRect(x: 0, y: 0, width: currentViewController?.view.frame.width ?? 0, height: currentViewController?.view.frame.height ?? 0)
             currentViewController?.view.addSubview(curtainView)
             currentViewController?.view.bringSubview(toFront: curtainView)
         }else{
@@ -536,6 +541,30 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeButtonsAppearance(toHidden: true, withAnimation: true, forButtons: buttonsArray)
     }
     
+    fileprivate func log(for index: TabScreenIndex) {
+        switch index {
+        case .photosScreenIndex:
+            MenloworksAppEvents.onPhotosAndVideosOpen()
+            
+            guard let settings = SyncServiceManager.shared.getSettings() else { return }
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnable)
+            
+            if settings.isAutoSyncEnable {
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !settings.mobileDataPhotos)
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !settings.mobileDataVideo)
+            } else {
+                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
+            }
+        case .musicScreenIndex:
+            MenloworksAppEvents.onMusicOpen()
+        case .documentsScreenIndex:
+            MenloworksAppEvents.onDocumentsOpen()
+        default:
+            break
+        }
+    }
+    
     private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool, forButtons buttons:[SubPlussButtonView]) {
         if buttons.count == 0 {
             return
@@ -567,6 +596,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             }
             
             selectedIndex = tabbarSelectedIndex
+            
+            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
+                log(for: tabScreenIndex)
+            }
         }
     }
 }

@@ -8,12 +8,16 @@
 
 import UIKit
 
-class CaptchaViewController: UIViewController {
+final class CaptchaViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var captchaPlaceholderLabel: UILabel!
     @IBOutlet weak var imageBackground: UIView!
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var inputTextField: UITextField!
     
-    var currenrtCapthcaID: String = ""
+    private(set) var currentCaptchaID: String = ""
+    private let captchaService = CaptchaService()
+    private var player: AVAudioPlayer?
     
     var captchaImage: UIImage? {
         didSet {
@@ -23,65 +27,91 @@ class CaptchaViewController: UIViewController {
             image.image = captchaImage!
         }
     }
-
-    @IBOutlet weak var image: UIImageView!
     
-    @IBOutlet weak var inputTextField: UITextField!
-    
-    // MARK: Life cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        activityIndicator.startAnimating()
-        getCaptcha(withType: .image)
-        captchaPlaceholderLabel.text = TextConstants.captchaPlaceholder
-        imageBackground.layer.cornerRadius = 5
-    }
-    
-    @IBAction func captchaRefresh(_ sender: Any) {
-        getNewCapthca()
-    }
-
-    func refreshCapthcha() {
-        getNewCapthca()
-    }
-    
-    private func getNewCapthca() {
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = false
-        image.image = UIImage()
-        print("Captcha refreshed")
-        //image.backgroundColor = UIColor.darkGray
-        getCaptcha(withType: .image)
-    }
-    
-    @IBAction func playAudioCaptcha(_ sender: Any) {
-
+    var captchaAudio: Data? {
+        didSet {
+            if let data = captchaAudio {
+                do {
+                    player = try AVAudioPlayer(data: data)
+                    player!.prepareToPlay()
+                    player!.play()
+                }
+                catch {
+                    
+                }
+            }
+        }
     }
     
     class func initFromXib() -> CaptchaViewController {
         return CaptchaViewController(nibName: "CaptchaViewController", bundle: nil)
     }
     
-    func getCaptcha(withType type: CaptchaType) {
-        let captchaService = CaptchaService()
-        
-        
-        captchaService.getCaptcha(type: type, sucess: { [weak self] (response) in
+    // MARK: Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityIndicator.startAnimating()
+        getImageCaptcha()
+        captchaPlaceholderLabel.text = TextConstants.captchaPlaceholder
+        imageBackground.layer.cornerRadius = 5
+    }
+    
+    // MARK: Actions
+    
+    @IBAction func captchaRefresh(_ sender: Any) {
+        getNewCaptcha()
+    }
+
+    @IBAction func playAudioCaptcha(_ sender: Any) {
+        getAudioCaptcha()
+    }
+    
+    func refreshCapthcha() {
+        getNewCaptcha()
+    }
+    
+    private func getNewCaptcha() {
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+        image.image = UIImage()
+        getImageCaptcha()
+    }
+    
+    private func getImageCaptcha() {
+        captchaService.getCaptcha(uuid: nil, type: .image, sucess: { [weak self] response in
             
             DispatchQueue.main.async { [weak self] in
                 if let captchaResponse =  response as? CaptchaResponse,
                     let _ = captchaResponse.type,
-                    let captchaData =  captchaResponse.data {
+                    let captchaData = captchaResponse.data {
                         self?.captchaImage = UIImage(data: captchaData)
                 }
             }
             
-        }) { (error) in
+        }, fail: { error in
             DispatchQueue.main.async {
                 UIApplication.showErrorAlert(message: error.description)
             }
-        }
+        })
         
-        currenrtCapthcaID = captchaService.uuid
+        currentCaptchaID = captchaService.uuid
+    }
+    
+    private func getAudioCaptcha() {
+        captchaService.getCaptcha(uuid: currentCaptchaID, type: .audio, sucess: { [weak self] response in
+            
+            DispatchQueue.main.async { [weak self] in
+                if let captchaResponse =  response as? CaptchaResponse,
+                    let _ = captchaResponse.type,
+                    let captchaData = captchaResponse.data {
+                    self?.captchaAudio = captchaData
+                }
+            }
+            
+        }, fail: { error in
+            DispatchQueue.main.async {
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        })
     }
 }

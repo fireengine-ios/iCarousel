@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +18,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptchaViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptchaViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="nHl-Sw-k61" id="CvD-Ne-MCC"/>
                 <outlet property="captchaPlaceholderLabel" destination="v6K-dc-32x" id="b9a-87-aD1"/>
@@ -65,16 +66,19 @@
                                 <action selector="captchaRefresh:" destination="-1" eventType="touchUpInside" id="PJn-Sw-fvU"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duo-dp-Lhi">
-                            <rect key="frame" x="247" y="23" width="0.0" height="34"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duo-dp-Lhi">
+                            <rect key="frame" x="221" y="108.5" width="26" height="26"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" playsSound="YES"/>
                             </accessibility>
                             <constraints>
-                                <constraint firstAttribute="width" id="uhg-9F-LS5"/>
+                                <constraint firstAttribute="height" constant="26" id="VXE-pe-Lhz"/>
+                                <constraint firstAttribute="width" secondItem="Duo-dp-Lhi" secondAttribute="height" multiplier="1:1" id="Wch-hZ-Yta"/>
                             </constraints>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="icon_captcha_audio"/>
                             <connections>
-                                <action selector="playAudioCaptcha:" destination="-1" eventType="touchUpInside" id="Koq-l2-GrW"/>
+                                <action selector="playAudioCaptcha:" destination="-1" eventType="touchUpInside" id="bRq-gp-6rO"/>
                             </connections>
                         </button>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWL-Kr-uB5">
@@ -94,7 +98,7 @@
                             </constraints>
                         </view>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4g6-uY-RRb">
-                            <rect key="frame" x="30" y="111.5" width="217" height="20"/>
+                            <rect key="frame" x="30" y="112" width="183" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="nlI-qo-EsX"/>
                             </constraints>
@@ -111,17 +115,17 @@
                         <constraint firstItem="WgY-yd-Tx6" firstAttribute="top" secondItem="4g6-uY-RRb" secondAttribute="bottom" constant="7.5" id="9HH-sP-WQP"/>
                         <constraint firstItem="v6K-dc-32x" firstAttribute="leading" secondItem="bBb-rw-22B" secondAttribute="leading" constant="30" id="CJV-LE-hIK"/>
                         <constraint firstItem="yWL-Kr-uB5" firstAttribute="leading" secondItem="bBb-rw-22B" secondAttribute="leading" constant="30" id="CsT-Fc-meX"/>
-                        <constraint firstItem="Duo-dp-Lhi" firstAttribute="centerY" secondItem="yWL-Kr-uB5" secondAttribute="centerY" id="Fms-Kd-al3"/>
                         <constraint firstAttribute="trailing" secondItem="Duo-dp-Lhi" secondAttribute="trailing" constant="30" id="HPz-m5-3lj"/>
-                        <constraint firstItem="Duo-dp-Lhi" firstAttribute="centerY" secondItem="Yxp-v2-t2S" secondAttribute="centerY" id="KMi-K2-8sm"/>
+                        <constraint firstItem="Duo-dp-Lhi" firstAttribute="centerY" secondItem="4g6-uY-RRb" secondAttribute="centerY" id="K9q-If-zZu"/>
                         <constraint firstAttribute="trailing" secondItem="WgY-yd-Tx6" secondAttribute="trailing" constant="30" id="LEw-Za-JMh"/>
+                        <constraint firstAttribute="trailing" secondItem="Yxp-v2-t2S" secondAttribute="trailing" constant="30" id="PA9-cA-MEX"/>
+                        <constraint firstItem="Duo-dp-Lhi" firstAttribute="leading" secondItem="4g6-uY-RRb" secondAttribute="trailing" constant="8" id="RVO-Bn-pJG"/>
                         <constraint firstAttribute="trailing" secondItem="v6K-dc-32x" secondAttribute="trailing" constant="30" id="Ytf-dg-fdk"/>
-                        <constraint firstAttribute="trailing" secondItem="4g6-uY-RRb" secondAttribute="trailing" constant="30" id="g5s-lb-3FI"/>
                         <constraint firstItem="Yxp-v2-t2S" firstAttribute="leading" secondItem="yWL-Kr-uB5" secondAttribute="trailing" constant="20" id="gmY-YS-JgZ"/>
+                        <constraint firstItem="Yxp-v2-t2S" firstAttribute="centerY" secondItem="0nN-Ng-TMV" secondAttribute="centerY" id="iNH-Xe-QTh"/>
                         <constraint firstItem="4g6-uY-RRb" firstAttribute="top" secondItem="v6K-dc-32x" secondAttribute="bottom" constant="8" id="iXA-5Z-a9y"/>
                         <constraint firstAttribute="bottom" secondItem="WgY-yd-Tx6" secondAttribute="bottom" priority="750" constant="1" id="pLU-zK-tuX"/>
                         <constraint firstItem="yWL-Kr-uB5" firstAttribute="top" secondItem="bBb-rw-22B" secondAttribute="top" constant="8" id="pOh-99-2OR"/>
-                        <constraint firstItem="Duo-dp-Lhi" firstAttribute="leading" secondItem="Yxp-v2-t2S" secondAttribute="trailing" id="piO-ic-fYs"/>
                     </constraints>
                 </view>
             </subviews>
@@ -140,6 +144,7 @@
         </view>
     </objects>
     <resources>
+        <image name="icon_captcha_audio" width="26" height="26"/>
         <image name="icon_captcha_refresh" width="26" height="26"/>
     </resources>
 </document>

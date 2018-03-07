@@ -60,6 +60,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     }
     
     func eulaApplied(){
+        MenloworksEventsService.shared.onApporveEulaPageClicked()
          compliteAsyncOperationEnableScreen()
         //theoreticaly we should add coredata update/append here also
         router.goToAutoSync()

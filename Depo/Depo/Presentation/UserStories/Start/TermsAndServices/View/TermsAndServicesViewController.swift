@@ -20,8 +20,7 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        defaultNavBarStyle()
-        visibleNavigationBarStyle()
+        hidenNavigationBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     

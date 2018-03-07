@@ -34,9 +34,8 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     // MARK: Life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        hidenNavigationBarStyle()
         
-        defaultNavBarStyle()
-        visibleNavigationBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
         scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         
@@ -269,7 +268,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         let login = dataSource.getLogin()
         hideKeyboard()
         if !viewForCaptcha.isHidden {
-            output.sendLoginAndPasswordWithCaptcha(login: login, password: password, captchaID: capthcaVC.currenrtCapthcaID, captchaAnswer: capthcaVC.inputTextField.text ?? "")
+            output.sendLoginAndPasswordWithCaptcha(login: login, password: password, captchaID: capthcaVC.currentCaptchaID, captchaAnswer: capthcaVC.inputTextField.text ?? "")
         } else {
             output.sendLoginAndPassword(login: login, password: password)
         }

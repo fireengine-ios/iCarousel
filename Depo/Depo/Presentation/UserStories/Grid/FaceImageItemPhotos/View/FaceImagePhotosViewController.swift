@@ -17,17 +17,21 @@ import UIKit
     private var albumsSliderModule: LBAlbumLikePreviewSliderPresenter?
     private var headerView = UIView()
     private var headerImage = LoadingImageView()
+    private var gradientHeaderLayer: CALayer?
     private var countPhotosLabel = UILabel()
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
+    
+    private var sortType: SortedRules?
         
     // MARK: - UIViewController lifecycle
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateHeaderPosition()
+        gradientHeaderLayer?.frame = headerView.bounds
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -46,6 +50,13 @@ import UIKit
         configureFaceImageItemsPhotoActions()
         
         configureNavBarWithTouch()
+    }
+    
+    override func changeSortingRepresentation(sortType type: SortedRules) {
+        super.changeSortingRepresentation(sortType: type)
+        sortType = type
+
+        addNavBarTouch()
     }
     
     @objc func addNameAction() {
@@ -85,7 +96,7 @@ import UIKit
 
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
-        headerImage.addGradientLayer(colors: [.clear, ColorConstants.textGrayColor])
+        gradientHeaderLayer = headerImage.addGradientLayer(colors: [.clear, ColorConstants.textGrayColor])
         
         countPhotosLabel.backgroundColor = UIColor.clear
         countPhotosLabel.textColor = UIColor.white
@@ -136,14 +147,23 @@ import UIKit
     private func updateHeaderPosition() {
         if let albumHeight = albumsHeightConstraint?.constant,
             let headerImageHeight = headerImageHeightConstraint?.constant {
-            
             collectionView.contentInset.top = albumHeight + headerImageHeight
+        } else {
+            collectionView.contentInset.top = headerImageHeight
         }
     }
     
     private func configureNavBarWithTouch() {
-        setTouchableTitle(title: mainTitle)
+        if let sortType = sortType {
+            setTitle(withString: mainTitle, andSubTitle: sortType.descriptionForTitle)
+        } else {
+            setTouchableTitle(title: mainTitle)
+        }
         
+        addNavBarTouch()
+    }
+    
+    private func addNavBarTouch() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
         navigationItem.titleView?.addGestureRecognizer(tap)
     }
@@ -157,7 +177,7 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     func reloadName(_ name: String) {
         mainTitle = name
         
-        setTitle(withString: mainTitle)
+        configureNavBarWithTouch()
         albumsSlider?.setTitle(String(format: TextConstants.albumLikeSliderWithPerson, name))
     }
     

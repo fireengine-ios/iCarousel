@@ -8,12 +8,19 @@
 
 final class FaceImageItemsConfigurator {
     
-    func configure(viewController: FaceImageItemsViewController, remoteServices: RemoteItemsService, title: String) {
+    func configure(viewController: FaceImageItemsViewController, remoteServices: RemoteItemsService, title: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) {
         let router = FaceImageItemsRouter()
         
         router.view = viewController
         
         let presenter = FaceImageItemsPresenter()
+        if remoteServices is PeopleItemsService {
+            presenter.faceImageType = .people
+        } else if remoteServices is ThingsItemsService {
+            presenter.faceImageType = .things
+        } else if remoteServices is PlacesItemsService {
+            presenter.faceImageType = .places
+        }
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                    selectionModeTypes: [.createStory,.addToFavorites,.delete])
@@ -27,6 +34,10 @@ final class FaceImageItemsConfigurator {
         
         presenter.view = viewController
         presenter.router = router
+        
+        if let moduleOutput = moduleOutput {
+            presenter.albumSliderModuleOutput = moduleOutput
+        }
         
         let interactor = FaceImageItemsInteractor(remoteItems: remoteServices)
         interactor.output = presenter

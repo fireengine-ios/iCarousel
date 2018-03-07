@@ -19,7 +19,7 @@ class RegistrationRouter: RegistrationRouterInput {
     
     func termsAndServices(with delegate: RegistrationViewDelegate?, email: String) {
         
-        let okHandler: () -> Void = {
+        let okHandler: VoidHandler = {
             let router = RouterVC()
             let termsAndServices = router.termsAndServicesScreen(login: false, delegate: delegate)
             router.pushViewController(viewController: termsAndServices)

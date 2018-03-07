@@ -55,6 +55,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func onSuccessLogin(){
         interactor.checkEULA()
+        MenloworksAppEvents.onStartWithLogin(true)
     }
     
     func onSuccessLoginTurkcell(){
@@ -64,6 +65,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func onFailLogin(){
         router.navigateToOnboarding()
+        MenloworksAppEvents.onStartWithLogin(false)
     }
     
     func onNetworkFail() {

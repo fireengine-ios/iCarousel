@@ -29,6 +29,8 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var carouselView: iCarousel!
     
+    @IBOutlet weak var bottomView: UIView!
+    
     let shuffleButtonOffColor = UIColor.lightGray
     @IBOutlet weak var shuffleButton: UIButton! {
         didSet {
@@ -64,7 +66,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         
         editingTabBar?.view.layoutIfNeeded()
         
-        output.viewIsReady(view: self.view)
+        output.viewIsReady(view: bottomView)
         hidenNavigationBarStyle()
     }
     
@@ -85,6 +87,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         backButton.setImage(UIImage(named: "im_backButton"), for: .normal)
         backButton.setTitle(TextConstants.backTitle, for: .normal)
         backButton.addTarget(self, action: #selector(cancelAction(_:)), for:.touchUpInside)
+        backButton.tintColor = UIColor.white
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         
         let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(actionMoreButton(_:)))
