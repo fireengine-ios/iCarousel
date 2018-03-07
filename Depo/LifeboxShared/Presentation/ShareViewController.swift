@@ -168,7 +168,7 @@ extension ShareViewController {
         /// type constatnts
         let imageType = kUTTypeImage as String
         let pdfType = kUTTypePDF as String
-        let dataType = "public.data"
+        let dataType = kUTTypeData as String
         let videoTypes = [kUTTypeMovie,
                           kUTTypeVideo,
                           kUTTypeMPEG,
