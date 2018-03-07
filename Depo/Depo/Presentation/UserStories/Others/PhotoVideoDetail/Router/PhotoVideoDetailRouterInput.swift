@@ -9,8 +9,6 @@
 import Foundation
 
 protocol PhotoVideoDetailRouterInput {
-
-    typealias Item = WrapData
     
     func onInfo(object: Item)
     

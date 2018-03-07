@@ -8,8 +8,6 @@
 
 protocol PhotoVideoDetailViewOutput {
     
-    typealias Item = WrapData
-    
     func viewIsReady(view: UIView)
     
     func setSelectedItemIndex(selectedIndex: Int)

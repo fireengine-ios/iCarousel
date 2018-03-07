@@ -7,7 +7,6 @@
 //
 
 protocol PhotoVideoDetailViewInput: class {
-
     
     func setupInitialState()
     
