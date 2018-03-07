@@ -88,12 +88,7 @@ final class CaptchaResponse: ObjectRequestResponse  {
 
 final class CaptchaService: BaseRequestService {
     
-    private(set) var uuid: String
-    
-    override init() {
-        uuid = UUID().uuidString
-        super.init()
-    }
+    private(set) var uuid: String = UUID().uuidString
     
     func getCaptcha(uuid: String? = nil, type: CaptchaType = .image, sucess:SuccessResponse?, fail: FailResponse?   ) {
         log.debug("CaptchaService getCaptcha")
