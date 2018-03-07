@@ -25,10 +25,8 @@ class SplashInteractor: SplashInteractorInput {
             if ReachabilityService().isReachableViaWiFi {
                 failLogin()
             } else {
-                /// turkcell login
                 authenticationService.turkcellAuth(success: { [weak self] in
                     self?.turkcellSuccessLogin()
-                    //self?.successLogin()
                 }, fail: { [weak self] response in
                     self?.output.asyncOperationSucces()
                     self?.output.onFailLogin()
