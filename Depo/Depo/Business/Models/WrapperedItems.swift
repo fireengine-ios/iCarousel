@@ -10,6 +10,8 @@ import Foundation
 import Photos
 import SDWebImage
 
+typealias Item = WrapData
+
 typealias RemoteImage = (_ image: UIImage?) -> Swift.Void
 
 typealias RemoteImageError = (_ error: Error?) -> Swift.Void

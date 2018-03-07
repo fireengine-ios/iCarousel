@@ -7,8 +7,6 @@
 //
 
 class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, PhotoVideoDetailViewOutput, PhotoVideoDetailInteractorOutput {
-
-    typealias Item = WrapData
     
     weak var view: PhotoVideoDetailViewInput!
     var interactor: PhotoVideoDetailInteractorInput!

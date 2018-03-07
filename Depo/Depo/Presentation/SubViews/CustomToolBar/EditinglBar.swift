@@ -58,8 +58,6 @@ enum ElementTypes {
 
 class EditinglBar: CustomTabBar {
     
-    typealias Item = WrapData
-    
     struct PreDetermendTypes { //use super setup method with these
         static let share = ("ShareButtonIcon", TextConstants.tabBarShareLabel)
         static let info = ("InfoButtonIcon", TextConstants.tabBarInfoLabel)
