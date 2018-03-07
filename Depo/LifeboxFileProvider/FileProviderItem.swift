@@ -84,7 +84,7 @@ extension FileProviderItem {
         } else if isFolder {
             typeIdentifier = kUTTypeFolder as String
         } else {
-            typeIdentifier = "public.data"
+            typeIdentifier = kUTTypeData as String
         }
         
         self.init(itemIdentifier: itemIdentifier,

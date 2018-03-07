@@ -19,7 +19,7 @@ extension String {
         let utType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue() as String?
         
         if utType?.hasPrefix("dyn.") == true {
-            return "public.data"
+            return kUTTypeData as String
         }
         return utType
     }

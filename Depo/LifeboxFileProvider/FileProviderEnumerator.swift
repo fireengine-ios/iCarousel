@@ -56,7 +56,7 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
         }
         
         let folderUUID: String
-        if enumeratedItemIdentifier.rawValue != "NSFileProviderRootContainerItemIdentifier" {
+        if enumeratedItemIdentifier.rawValue != NSFileProviderItemIdentifier.rootContainer.rawValue {
             folderUUID = enumeratedItemIdentifier.rawValue
         } else {
             folderUUID = ""
