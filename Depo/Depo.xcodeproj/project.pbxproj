@@ -1438,7 +1438,6 @@
 		8C0E8C6E1FDEBDFF00789C91 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8D41F014F150028F51A /* Router.swift */; };
 		8C0E8C6F1FDEBDFF00789C91 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9380F1AF6AE9100AE2892 /* Filter.m */; };
 		8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E931EF5D0B100072983 /* ValidationResults.swift */; };
-		8C0E8C711FDEBDFF00789C91 /* HelpAndSupportDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED321F516736002F923A /* HelpAndSupportDescriptionTableViewCell.swift */; };
 		8C0E8C721FDEBDFF00789C91 /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
 		8C0E8C731FDEBDFF00789C91 /* CurioLocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6091DDDD0F600FFE63E /* CurioLocationData.m */; };
 		8C0E8C741FDEBDFF00789C91 /* HomePageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift */; };
@@ -1858,7 +1857,6 @@
 		8C0E8E381FDEBDFF00789C91 /* ForgotPasswordRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B761C517C5341FD74BF00DF5 /* ForgotPasswordRouterInput.swift */; };
 		8C0E8E391FDEBDFF00789C91 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92F71F5EDDE4008A3B72 /* LanguageModel.swift */; };
 		8C0E8E3A1FDEBDFF00789C91 /* Equatable+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */; };
-		8C0E8E3B1FDEBDFF00789C91 /* HelpAndSupportSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED331F516736002F923A /* HelpAndSupportSectionTableViewCell.swift */; };
 		8C0E8E3C1FDEBDFF00789C91 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CD91FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift */; };
 		8C0E8E3D1FDEBDFF00789C91 /* FBParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE74F1FCBE84100C23CBD /* FBParametrs.swift */; };
 		8C0E8E3E1FDEBDFF00789C91 /* ForgotPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F233973492D247406E39E96E /* ForgotPasswordRouter.swift */; };
@@ -2027,7 +2025,6 @@
 		8C0E8F221FDEBDFF00789C91 /* SettingsModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025086696F56A3B76A70336 /* SettingsModuleInput.swift */; };
 		8C0E8F231FDEBDFF00789C91 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B2FD70EACA38EF90262C71 /* SettingsPresenter.swift */; };
 		8C0E8F241FDEBDFF00789C91 /* SettingsInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8DE4160DD052B7FC7C3B0F /* SettingsInteractorInput.swift */; };
-		8C0E8F251FDEBDFF00789C91 /* HelpAndSupportHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED381F516736002F923A /* HelpAndSupportHeaderView.swift */; };
 		8C0E8F271FDEBDFF00789C91 /* CreateStoryNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F871F31E4F800536DB6 /* CreateStoryNameRouter.swift */; };
 		8C0E8F281FDEBDFF00789C91 /* SettingsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F6A1C9F3695D2974AEF4DA /* SettingsInteractorOutput.swift */; };
 		8C0E8F291FDEBDFF00789C91 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500943E503755A25C4E6B64 /* SettingsInteractor.swift */; };
@@ -2273,7 +2270,6 @@
 		8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
 		8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
 		8C0E902F1FDEBDFF00789C91 /* ActivityTimelineTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44F61F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib */; };
-		8C0E90301FDEBDFF00789C91 /* HelpAndSupportHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE95ED391F516736002F923A /* HelpAndSupportHeaderView.xib */; };
 		8C0E90311FDEBDFF00789C91 /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE1D1F5982FA0041D041 /* FeedbackViewController.xib */; };
 		8C0E90321FDEBDFF00789C91 /* ActivityTimelineTableBackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEACBEA21F6C1110003BE328 /* ActivityTimelineTableBackView.xib */; };
 		8C0E90331FDEBDFF00789C91 /* PasscodeEnterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC3C2121FB9961900C3D67F /* PasscodeEnterViewController.xib */; };
@@ -2283,7 +2279,6 @@
 		8C0E90371FDEBDFF00789C91 /* PhotoVideoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74541F07B20600124DF5 /* PhotoVideoDetailViewController.xib */; };
 		8C0E90381FDEBDFF00789C91 /* CustomNavBar~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FE41EFD517300A405B2 /* CustomNavBar~iphone.xib */; };
 		8C0E90391FDEBDFF00789C91 /* ActivityTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE44714D1F6962F00017B4F0 /* ActivityTimelineViewController.xib */; };
-		8C0E903A1FDEBDFF00789C91 /* HelpAndSupport.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE95ED451F516736002F923A /* HelpAndSupport.storyboard */; };
 		8C0E903B1FDEBDFF00789C91 /* CollectionViewCellForAudio.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF6BDE01F0B97050066709E /* CollectionViewCellForAudio.xib */; };
 		8C0E903C1FDEBDFF00789C91 /* BaseFilesGreedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74321F04DDD300124DF5 /* BaseFilesGreedViewController.xib */; };
 		8C0E903F1FDEBDFF00789C91 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEAB301FADA5D20046555F /* AlbumCell.xib */; };
@@ -2968,12 +2963,8 @@
 		CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE89F708D1ADDEB03BE70E /* BaseFilesGreedInteractorOutput.swift */; };
 		CE95ED2D1F516225002F923A /* FaqUrlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED2C1F516225002F923A /* FaqUrlService.swift */; };
 		CE95ED2F1F5162A7002F923A /* FAQSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED2E1F5162A7002F923A /* FAQSectionItem.swift */; };
-		CE95ED491F516736002F923A /* HelpAndSupportDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED321F516736002F923A /* HelpAndSupportDescriptionTableViewCell.swift */; };
-		CE95ED4A1F516736002F923A /* HelpAndSupportSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED331F516736002F923A /* HelpAndSupportSectionTableViewCell.swift */; };
 		CE95ED4B1F516736002F923A /* HelpAndSupportConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED351F516736002F923A /* HelpAndSupportConfigurator.swift */; };
 		CE95ED4C1F516736002F923A /* HelpAndSupportInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED361F516736002F923A /* HelpAndSupportInitializer.swift */; };
-		CE95ED4D1F516736002F923A /* HelpAndSupportHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED381F516736002F923A /* HelpAndSupportHeaderView.swift */; };
-		CE95ED4E1F516736002F923A /* HelpAndSupportHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE95ED391F516736002F923A /* HelpAndSupportHeaderView.xib */; };
 		CE95ED4F1F516736002F923A /* HelpAndSupportInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED3B1F516736002F923A /* HelpAndSupportInteractor.swift */; };
 		CE95ED501F516736002F923A /* HelpAndSupportInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED3C1F516736002F923A /* HelpAndSupportInteractorInput.swift */; };
 		CE95ED511F516736002F923A /* HelpAndSupportInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED3D1F516736002F923A /* HelpAndSupportInteractorOutput.swift */; };
@@ -2981,7 +2972,6 @@
 		CE95ED531F516736002F923A /* HelpAndSupportPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED401F516736002F923A /* HelpAndSupportPresenter.swift */; };
 		CE95ED541F516736002F923A /* HelpAndSupportRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED421F516736002F923A /* HelpAndSupportRouter.swift */; };
 		CE95ED551F516736002F923A /* HelpAndSupportRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED431F516736002F923A /* HelpAndSupportRouterInput.swift */; };
-		CE95ED561F516736002F923A /* HelpAndSupport.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE95ED451F516736002F923A /* HelpAndSupport.storyboard */; };
 		CE95ED571F516736002F923A /* HelpAndSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED461F516736002F923A /* HelpAndSupportViewController.swift */; };
 		CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED471F516736002F923A /* HelpAndSupportViewInput.swift */; };
 		CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED481F516736002F923A /* HelpAndSupportViewOutput.swift */; };
@@ -5036,12 +5026,8 @@
 		CE907A301F94D49900D2F8CE /* MediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayer.swift; sourceTree = "<group>"; };
 		CE95ED2C1F516225002F923A /* FaqUrlService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaqUrlService.swift; sourceTree = "<group>"; };
 		CE95ED2E1F5162A7002F923A /* FAQSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQSectionItem.swift; sourceTree = "<group>"; };
-		CE95ED321F516736002F923A /* HelpAndSupportDescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportDescriptionTableViewCell.swift; sourceTree = "<group>"; };
-		CE95ED331F516736002F923A /* HelpAndSupportSectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportSectionTableViewCell.swift; sourceTree = "<group>"; };
 		CE95ED351F516736002F923A /* HelpAndSupportConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportConfigurator.swift; sourceTree = "<group>"; };
 		CE95ED361F516736002F923A /* HelpAndSupportInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportInitializer.swift; sourceTree = "<group>"; };
-		CE95ED381F516736002F923A /* HelpAndSupportHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportHeaderView.swift; sourceTree = "<group>"; };
-		CE95ED391F516736002F923A /* HelpAndSupportHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpAndSupportHeaderView.xib; sourceTree = "<group>"; };
 		CE95ED3B1F516736002F923A /* HelpAndSupportInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportInteractor.swift; sourceTree = "<group>"; };
 		CE95ED3C1F516736002F923A /* HelpAndSupportInteractorInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportInteractorInput.swift; sourceTree = "<group>"; };
 		CE95ED3D1F516736002F923A /* HelpAndSupportInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportInteractorOutput.swift; sourceTree = "<group>"; };
@@ -5049,7 +5035,6 @@
 		CE95ED401F516736002F923A /* HelpAndSupportPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportPresenter.swift; sourceTree = "<group>"; };
 		CE95ED421F516736002F923A /* HelpAndSupportRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportRouter.swift; sourceTree = "<group>"; };
 		CE95ED431F516736002F923A /* HelpAndSupportRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportRouterInput.swift; sourceTree = "<group>"; };
-		CE95ED451F516736002F923A /* HelpAndSupport.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HelpAndSupport.storyboard; sourceTree = "<group>"; };
 		CE95ED461F516736002F923A /* HelpAndSupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportViewController.swift; sourceTree = "<group>"; };
 		CE95ED471F516736002F923A /* HelpAndSupportViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportViewInput.swift; sourceTree = "<group>"; };
 		CE95ED481F516736002F923A /* HelpAndSupportViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportViewOutput.swift; sourceTree = "<group>"; };
@@ -10374,24 +10359,13 @@
 		CE95ED301F516736002F923A /* HelpAndSupport */ = {
 			isa = PBXGroup;
 			children = (
-				CE95ED311F516736002F923A /* Cells */,
 				CE95ED341F516736002F923A /* Configurator */,
-				CE95ED371F516736002F923A /* Header */,
 				CE95ED3A1F516736002F923A /* Interactor */,
 				CE95ED3E1F516736002F923A /* Presenter */,
 				CE95ED411F516736002F923A /* Router */,
 				CE95ED441F516736002F923A /* View */,
 			);
 			path = HelpAndSupport;
-			sourceTree = "<group>";
-		};
-		CE95ED311F516736002F923A /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				CE95ED321F516736002F923A /* HelpAndSupportDescriptionTableViewCell.swift */,
-				CE95ED331F516736002F923A /* HelpAndSupportSectionTableViewCell.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		CE95ED341F516736002F923A /* Configurator */ = {
@@ -10401,15 +10375,6 @@
 				CE95ED361F516736002F923A /* HelpAndSupportInitializer.swift */,
 			);
 			path = Configurator;
-			sourceTree = "<group>";
-		};
-		CE95ED371F516736002F923A /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				CE95ED381F516736002F923A /* HelpAndSupportHeaderView.swift */,
-				CE95ED391F516736002F923A /* HelpAndSupportHeaderView.xib */,
-			);
-			path = Header;
 			sourceTree = "<group>";
 		};
 		CE95ED3A1F516736002F923A /* Interactor */ = {
@@ -10443,7 +10408,6 @@
 		CE95ED441F516736002F923A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CE95ED451F516736002F923A /* HelpAndSupport.storyboard */,
 				CE95ED461F516736002F923A /* HelpAndSupportViewController.swift */,
 				CE95ED471F516736002F923A /* HelpAndSupportViewInput.swift */,
 				CE95ED481F516736002F923A /* HelpAndSupportViewOutput.swift */,
@@ -11925,7 +11889,6 @@
 				8C0E902F1FDEBDFF00789C91 /* ActivityTimelineTimeCell.xib in Resources */,
 				8C06AEE92008AD70003D8E05 /* Buyuk.png in Resources */,
 				8C06B0572008AD71003D8E05 /* parlaklik_secili@3x.png in Resources */,
-				8C0E90301FDEBDFF00789C91 /* HelpAndSupportHeaderView.xib in Resources */,
 				8C06AEFB2008AD70003D8E05 /* caps2.png in Resources */,
 				8C06AF512008AD70003D8E05 /* cropy_icon.png in Resources */,
 				8C0E90311FDEBDFF00789C91 /* FeedbackViewController.xib in Resources */,
@@ -11965,7 +11928,6 @@
 				8C0B91A520170EA500A5BA81 /* ManageContactsViewController.xib in Resources */,
 				8C06AF7F2008AD70003D8E05 /* error_icon.png in Resources */,
 				8C06B02D2008AD71003D8E05 /* ok_btn_kucuk@3x.png in Resources */,
-				8C0E903A1FDEBDFF00789C91 /* HelpAndSupport.storyboard in Resources */,
 				8C0E903B1FDEBDFF00789C91 /* CollectionViewCellForAudio.xib in Resources */,
 				8C06B1C72008AD72003D8E05 /* sticker_close.png in Resources */,
 				8C0E903C1FDEBDFF00789C91 /* BaseFilesGreedViewController.xib in Resources */,
@@ -12494,7 +12456,6 @@
 				78D9BA472007E82800F2233F /* DuplicatedContactsViewController.xib in Resources */,
 				78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */,
 				87FB97B02008CBAF000D8E2B /* TitleView.xib in Resources */,
-				CE95ED4E1F516736002F923A /* HelpAndSupportHeaderView.xib in Resources */,
 				8C06AFA02008AD71003D8E05 /* focus@3x.png in Resources */,
 				8C06AFBE2008AD71003D8E05 /* geri@3x.png in Resources */,
 				8C06AEC02008AD70003D8E05 /* alt_cizgili@3x.png in Resources */,
@@ -12544,7 +12505,6 @@
 				8C06B0562008AD71003D8E05 /* parlaklik_secili@3x.png in Resources */,
 				CEAE3FEF1EFD517300A405B2 /* CustomNavBar~iphone.xib in Resources */,
 				CE44714E1F6962F00017B4F0 /* ActivityTimelineViewController.xib in Resources */,
-				CE95ED561F516736002F923A /* HelpAndSupport.storyboard in Resources */,
 				8C06B02C2008AD71003D8E05 /* ok_btn_kucuk@3x.png in Resources */,
 				7CF6BDE21F0B97050066709E /* CollectionViewCellForAudio.xib in Resources */,
 				8C06B1962008AD72003D8E05 /* vintage.png in Resources */,
@@ -12947,7 +12907,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressBar/CircleProgressBar.framework",
-				"${BUILT_PRODUCTS_DIR}/ExpandableTableViewController/ExpandableTableViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
@@ -12971,7 +12930,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressBar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ExpandableTableViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
@@ -13036,7 +12994,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressBar/CircleProgressBar.framework",
-				"${BUILT_PRODUCTS_DIR}/ExpandableTableViewController/ExpandableTableViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
@@ -13060,7 +13017,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressBar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ExpandableTableViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
@@ -13236,7 +13192,6 @@
 				8C0B91B320170F5B00A5BA81 /* ContactSyncParametrs.swift in Sources */,
 				8C0E8C6F1FDEBDFF00789C91 /* Filter.m in Sources */,
 				8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */,
-				8C0E8C711FDEBDFF00789C91 /* HelpAndSupportDescriptionTableViewCell.swift in Sources */,
 				8C0E8C721FDEBDFF00789C91 /* GSMUserInputCell.swift in Sources */,
 				8C0E8C731FDEBDFF00789C91 /* CurioLocationData.m in Sources */,
 				8C0E8C741FDEBDFF00789C91 /* HomePageInteractorOutput.swift in Sources */,
@@ -13755,7 +13710,6 @@
 				8C0E8E381FDEBDFF00789C91 /* ForgotPasswordRouterInput.swift in Sources */,
 				8C0E8E391FDEBDFF00789C91 /* LanguageModel.swift in Sources */,
 				8C0E8E3A1FDEBDFF00789C91 /* Equatable+Contains.swift in Sources */,
-				8C0E8E3B1FDEBDFF00789C91 /* HelpAndSupportSectionTableViewCell.swift in Sources */,
 				8C0E8E3C1FDEBDFF00789C91 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
 				8C0E8E3D1FDEBDFF00789C91 /* FBParametrs.swift in Sources */,
 				4A9B38F5201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */,
@@ -13978,7 +13932,6 @@
 				8C0E8F221FDEBDFF00789C91 /* SettingsModuleInput.swift in Sources */,
 				8C0E8F231FDEBDFF00789C91 /* SettingsPresenter.swift in Sources */,
 				8C0E8F241FDEBDFF00789C91 /* SettingsInteractorInput.swift in Sources */,
-				8C0E8F251FDEBDFF00789C91 /* HelpAndSupportHeaderView.swift in Sources */,
 				8C0E8F271FDEBDFF00789C91 /* CreateStoryNameRouter.swift in Sources */,
 				8C0B919F20170E6A00A5BA81 /* DuplicatedContactsInteractorOutput.swift in Sources */,
 				8C0E8F281FDEBDFF00789C91 /* SettingsInteractorOutput.swift in Sources */,
@@ -14284,7 +14237,6 @@
 				7CD1F8D51F014F150028F51A /* Router.swift in Sources */,
 				CE51AB051EF90853005DCEE0 /* Filter.m in Sources */,
 				CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */,
-				CE95ED491F516736002F923A /* HelpAndSupportDescriptionTableViewCell.swift in Sources */,
 				CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */,
 				CE51AB161EF90853005DCEE0 /* CurioLocationData.m in Sources */,
 				CE3E4D0D201B696500173045 /* UIButton+Properties.swift in Sources */,
@@ -14812,7 +14764,6 @@
 				7CFE92F81F5EDDE4008A3B72 /* LanguageModel.swift in Sources */,
 				CE274D611FB4806400CD53D7 /* Equatable+Contains.swift in Sources */,
 				78DDEF9C201908C100E3530B /* String+CyrillicCompare.swift in Sources */,
-				CE95ED4A1F516736002F923A /* HelpAndSupportSectionTableViewCell.swift in Sources */,
 				7C233CDA1FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
 				CE6DE7591FCBE84100C23CBD /* FBParametrs.swift in Sources */,
 				CE51AD011EF90853005DCEE0 /* ForgotPasswordRouter.swift in Sources */,
@@ -15020,7 +14971,6 @@
 				0BC0B9C638832D70DF19F6B3 /* SettingsModuleInput.swift in Sources */,
 				C9C861DC0DEC3C4584CBF425 /* SettingsPresenter.swift in Sources */,
 				5362D573ACB91FF20AF99896 /* SettingsInteractorInput.swift in Sources */,
-				CE95ED4D1F516736002F923A /* HelpAndSupportHeaderView.swift in Sources */,
 				7C6E2F951F31E4F800536DB6 /* CreateStoryNameRouter.swift in Sources */,
 				9FAEEE54B923C711062DB111 /* SettingsInteractorOutput.swift in Sources */,
 				4A56D5C8202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
