@@ -14,7 +14,7 @@ protocol SearchModuleOutput: class {
 }
 
 class SearchViewInitializer {
-    class func initializeAllFilesViewController(with nibName:String, output: SearchModuleOutput?) -> UIViewController {
+    class func initializeAllFilesViewController(with nibName: String, output: SearchModuleOutput?) -> UIViewController {
         let viewController = SearchViewController(nibName: nibName, bundle: nil)
         let configurator = SearchViewConfigurator()
         
@@ -26,7 +26,7 @@ class SearchViewInitializer {
             showGridListButton: true
         )
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
         
         configurator.configure(viewController: viewController,

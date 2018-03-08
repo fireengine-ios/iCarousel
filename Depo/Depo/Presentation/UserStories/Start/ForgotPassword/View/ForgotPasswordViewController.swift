@@ -13,17 +13,17 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
 
     var output: ForgotPasswordViewOutput!
     
-    @IBOutlet weak var sendPasswordButton:WhiteButtonWithRoundedCorner!
-    @IBOutlet weak var subTitle:UILabel!
-    @IBOutlet weak var tableView:UITableView!
-    @IBOutlet weak var viewForCapcha:UIView!
-    @IBOutlet weak var capchaViewH:NSLayoutConstraint!
-    @IBOutlet weak var bottomSpace:NSLayoutConstraint!
-    @IBOutlet weak var scrollView:UIScrollView!
+    @IBOutlet weak var sendPasswordButton: WhiteButtonWithRoundedCorner!
+    @IBOutlet weak var subTitle: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var viewForCapcha: UIView!
+    @IBOutlet weak var capchaViewH: NSLayoutConstraint!
+    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var captchaModuleView = CaptchaViewController.initFromXib()
     
-    private var originBottomH:CGFloat = -1
+    private var originBottomH: CGFloat = -1
 
     fileprivate let keyboard = Typist.shared
 
@@ -36,7 +36,6 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         self.tableView?.backgroundColor = UIColor.clear
         
         sendPasswordButton.setTitle(TextConstants.forgotPasswordSendPassword, for: UIControlState.normal)
-        
         
         
         let nib = UINib(nibName: "inputCell", bundle: nil)
@@ -76,7 +75,7 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         endEditing()
     }
     
-    func endEditing(){
+    func endEditing() {
         view.endEditing(true)
     }
     
@@ -94,10 +93,10 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         }
         
         subTitle.textColor = ColorConstants.whiteColor
-        if (Device.isIpad){
+        if (Device.isIpad) {
             
             subTitle.font = UIFont.TurkcellSaturaDemFont(size: 24)
-        }else{
+        } else {
             subTitle.font = UIFont.TurkcellSaturaDemFont(size: 16)
             subTitle.textAlignment = .left
         }
@@ -147,7 +146,7 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         
     }
     
-    func showCapcha(){
+    func showCapcha() {
         captchaModuleView.refreshCapthcha()
 //        UIView.animate(withDuration: NumericConstants.animationDuration) {
 //            let dyTop = CGFloat(100.0)
@@ -161,9 +160,9 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
 //        }
     }
     
-    //MARK: Buttons actions 
+    // MARK: Buttons actions 
     
-    @IBAction func onSendPasswordButton(){
+    @IBAction func onSendPasswordButton() {
         endEditing()
         let captchaUdid = captchaModuleView.currentCaptchaID
         let captchaEntered = captchaModuleView.inputTextField.text
@@ -205,20 +204,20 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
     
     // MARK: ProtoInputCellProtocol
     
-    func textFinishedEditing(withCell cell: ProtoInputTextCell){
+    func textFinishedEditing(withCell cell: ProtoInputTextCell) {
         endEditing()
     }
     
     func textStartedEditing(withCell cell: ProtoInputTextCell) {
         // TODO : OLEG
-        if (view.frame.size.height <= 568){
+        if (view.frame.size.height <= 568) {
             let index = tableView.indexPath(for: cell)
             
             var topY = scrollView.frame.origin.y + tableView.frame.origin.y
             topY = topY + CGFloat((index?.row)! + 1) * cell.frame.size.height
             let dy = view.frame.size.height - 216
             var y: CGFloat = 0
-            if (dy < topY){
+            if (dy < topY) {
                 y = (topY - dy)
             }
             let point = CGPoint(x: 0, y: y)

@@ -24,7 +24,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
     override func getAllItems(sortBy: SortedRules) {
         log.debug("AlbumsInteractor getAllItems")
 
-        guard let remote =  remoteItems as? AlbumService else{
+        guard let remote =  remoteItems as? AlbumService else {
             return
         }
         remote.allAlbums(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, success: { [weak self]  albumbs in
@@ -44,7 +44,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
         })
     }
     
-    func onAddPhotosToAlbum(selectedAlbumUUID: String){
+    func onAddPhotosToAlbum(selectedAlbumUUID: String) {
         log.debug("AlbumsInteractor onAddPhotosToAlbum")
 
         output.startAsyncOperation()
@@ -56,7 +56,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
                 print("success")
                 self?.output.asyncOperationSucces()
                 
-                if let presenter = self?.output as? AlbumSelectionPresenter{
+                if let presenter = self?.output as? AlbumSelectionPresenter {
                     presenter.photoAddedToAlbum()
                 }
                 ItemOperationManager.default.filesAddedToAlbum()

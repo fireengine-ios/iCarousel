@@ -10,7 +10,7 @@ import Foundation
 
 protocol PhotoVideoDetailInteractorInput: class {
     
-    func onSelectItem(fileObject:Item, from items:[Item])
+    func onSelectItem(fileObject: Item, from items: [Item])
     
     func onViewIsReady()
     
@@ -24,7 +24,7 @@ protocol PhotoVideoDetailInteractorInput: class {
 
     func deleteSelectedItem(type: ElementTypes)
     
-    var setupedMoreMenuConfig: [ElementTypes] {get}
+    var setupedMoreMenuConfig: [ElementTypes] { get }
     
     func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64)
     func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64)

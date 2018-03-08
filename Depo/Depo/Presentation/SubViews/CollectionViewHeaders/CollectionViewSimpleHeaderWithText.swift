@@ -19,7 +19,7 @@ class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         // Initialization code
     }
     
-    func configurateView(){
+    func configurateView() {
         labelForTitle.text = ""
         labelForTitle.font = UIFont.TurkcellSaturaMedFont(size: 18)
         labelForTitle.textColor = ColorConstants.textGrayColor
@@ -29,11 +29,11 @@ class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         labelForTitle.text = text
     }
     
-    func setSelectedState(selected: Bool, activateSelectionState: Bool){
+    func setSelectedState(selected: Bool, activateSelectionState: Bool) {
         selectionImageView.isHidden = !activateSelectionState
-        if (selected){
+        if (selected) {
             selectionImageView.image = UIImage(named: "selected")
-        }else{
+        } else {
             selectionImageView.image = UIImage(named: "notSelected")
         }
     }

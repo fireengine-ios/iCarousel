@@ -17,7 +17,7 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         dataSource.needShowCloudIcon = false
     }
     
-    override func isArrayDataSource() -> Bool{
+    override func isArrayDataSource() -> Bool {
         return false
     }
     
@@ -28,7 +28,7 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         if let int = interactor as? FreeAppSpaceInteractor {
             if let array = dataSource.getSelectedItems() as? [WrapData] {
                 startAsyncOperation()
-                if let view = view as? BaseFilesGreedViewController{
+                if let view = view as? BaseFilesGreedViewController {
                     view.requestStarted()
                 }
                 int.onDeleteSelectedItems(selectedItems: array)
@@ -37,7 +37,7 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         
     }
     
-    func goBack(){
+    func goBack() {
         if let router_ = router as? FreeAppSpaceRouter {
             router_.onBack()
         }
@@ -46,19 +46,19 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         super.reloadData()
         dataSource.selectedItemsArray.removeAll()
         dataSource.updateSelectionCount()
-        if let view = view as? BaseFilesGreedViewController{
+        if let view = view as? BaseFilesGreedViewController {
             view.requestStopped()
         }
     }
     
     func canceled() {
         asyncOperationSucces()
-        if let view = view as? BaseFilesGreedViewController{
+        if let view = view as? BaseFilesGreedViewController {
             view.requestStopped()
         }
     }
     
-    func onItemDeleted(){
+    func onItemDeleted() {
         let count = dataSource.selectedItemsArray.count
         dataSource.selectedItemsArray.removeAll()
         dataSource.updateSelectionCount()
@@ -66,7 +66,7 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         let text = String(format: TextConstants.freeAppSpaceAlertSuccesTitle, count)
         UIApplication.showSuccessAlert(message: text)
         
-        if let view = view as? BaseFilesGreedViewController{
+        if let view = view as? BaseFilesGreedViewController {
             view.requestStopped()
         }
     }
@@ -76,8 +76,8 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         if selectionMode {
             var actionTypes = interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? []
                 
-            if dataSource.allMediaItems.count == dataSource.selectedItemsArray.count{
-                if let index = actionTypes.index(of: .selectAll){
+            if dataSource.allMediaItems.count == dataSource.selectedItemsArray.count {
+                if let index = actionTypes.index(of: .selectAll) {
                     actionTypes.remove(at: index)
                     actionTypes.insert(.deSelectAll, at: index)
                 }
@@ -102,4 +102,3 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
     }
     
 }
-

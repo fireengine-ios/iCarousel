@@ -11,7 +11,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     var isDeleteRequestRunning = false
     
     func onDeleteSelectedItems(selectedItems: [WrapData]) {
-        if (isDeleteRequestRunning){
+        if (isDeleteRequestRunning) {
             return
         }
         
@@ -21,9 +21,9 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         FileService().details(uuids: uuids, success: { [weak self] (objects) in
             //let localFilesForDelete = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
             let array = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
-            if (array.isEmpty){
+            if (array.isEmpty) {
                 
-                guard let self_ = self else{
+                guard let self_ = self else {
                     return
                 }
                 if let presenter = self_.output as? FreeAppSpacePresenter {
@@ -39,7 +39,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                 
                 FreeAppSpace.default.deleteDeletedLocalPhotos(deletedPhotos: selectedItems)
                 
-                guard let self_ = self else{
+                guard let self_ = self else {
                    return
                 }
                 
@@ -50,7 +50,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                 if let presenter = self_.output as? FreeAppSpacePresenter {
                     DispatchQueue.main.async {
                         presenter.onItemDeleted()
-                        if FreeAppSpace.default.getDuplicatesObjects().count == 0{
+                        if FreeAppSpace.default.getDuplicatesObjects().count == 0 {
                             CardsManager.default.stopOperationWithType(type: .freeAppSpace)
                             CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
                         }

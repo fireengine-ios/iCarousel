@@ -76,7 +76,7 @@ final class MovieCard: BaseView {
         videoPreviewImageView.loadImage(with: item, isOriginalImage: true)
     }
     
-    @IBAction private func actionCloseButton(_ sender: UIButton){
+    @IBAction private func actionCloseButton(_ sender: UIButton) {
         deleteCard()
     }
     

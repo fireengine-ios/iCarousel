@@ -10,19 +10,19 @@ class CreateStorySelectionInteractor: BaseFilesGreedInteractor {
 
     var photoStory: PhotoStory?
     
-    override func viewIsReady(){
+    override func viewIsReady() {
         guard let story = photoStory else {
             return
         }
-        if let out = output as? CreateStorySelectionInteractorOutput{
+        if let out = output as? CreateStorySelectionInteractorOutput {
             out.configurateWithPhotoStory(story: story)
         }
     }
     
-    func onChangeSorce(isYourUpload: Bool){
+    func onChangeSorce(isYourUpload: Bool) {
         if isYourUpload {
             remoteItems = MusicService(requestSize: 100)
-        }else{
+        } else {
             remoteItems = CreateStoryMusicService()
         }
         

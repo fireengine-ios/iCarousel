@@ -22,7 +22,7 @@ class BaseFilesGreedModuleConfigurator {
         let router = BaseFilesGreedRouter()
         
         var presenter: BaseFilesGreedPresenter?
-        if remoteServices is PhotoAndVideoService{
+        if remoteServices is PhotoAndVideoService {
             presenter = BaseFilesGreedPresenter()
             presenter?.needShowProgressInCells = true
         } else {

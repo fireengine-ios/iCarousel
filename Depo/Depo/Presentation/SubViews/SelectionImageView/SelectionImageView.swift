@@ -31,35 +31,35 @@ class SelectionImageView: UIImageView {
         
     }
     
-    func setSelection(selection: Bool, showSelectonBorder: Bool){
+    func setSelection(selection: Bool, showSelectonBorder: Bool) {
         isSelected = selection
         self.showSelectionBorder = showSelectonBorder
-        if (!configured){
+        if (!configured) {
             selectionImageView.removeFromSuperview()
             self.cornerView.alpha = 0
             return
         }
         
-        if (showSelectonBorder){
+        if (showSelectonBorder) {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.cornerView.alpha = selection ? 1 : 0
             })
             addSubview(selectionImageView)
-        }else{
+        } else {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.cornerView.alpha = 0
             })
             selectionImageView.removeFromSuperview()
         }
         
-        if (selection){
+        if (selection) {
             selectionImageView.image = UIImage(named: "selected")
-        }else{
+        } else {
             selectionImageView.image = UIImage(named: "notSelected")
         }
     }
     
-    func setImage(image: UIImage?){
+    func setImage(image: UIImage?) {
         self.image = image
         setSelection(selection: isSelected, showSelectonBorder: showSelectionBorder)
     }

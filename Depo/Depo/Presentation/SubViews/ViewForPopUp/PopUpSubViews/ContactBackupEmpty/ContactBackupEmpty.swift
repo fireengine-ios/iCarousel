@@ -10,7 +10,7 @@ import UIKit
 
 class ContactBackupEmpty: ContactBackupOld {
 
-    override func configurateView(){
+    override func configurateView() {
         super.configurateView()
         
         titleLabel?.text = TextConstants.homePageContactBacupEmptyTitle
@@ -21,7 +21,7 @@ class ContactBackupEmpty: ContactBackupOld {
     }
     
     
-    @IBAction override func onCloseButton(){
+    @IBAction override func onCloseButton() {
         deleteCard()
     }
     
@@ -30,7 +30,7 @@ class ContactBackupEmpty: ContactBackupOld {
         CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
     }
     
-    override func configurateByResponseObject(){
+    override func configurateByResponseObject() {
         
     }
 

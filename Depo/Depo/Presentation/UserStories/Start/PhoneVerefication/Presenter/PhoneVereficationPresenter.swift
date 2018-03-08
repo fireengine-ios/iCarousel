@@ -107,7 +107,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         view.dropTimer()
     }
     
-    //MARK: - Basic Presenter override
+    // MARK: - Basic Presenter override
     override func outputView() -> Waiting? {
         return view
     }

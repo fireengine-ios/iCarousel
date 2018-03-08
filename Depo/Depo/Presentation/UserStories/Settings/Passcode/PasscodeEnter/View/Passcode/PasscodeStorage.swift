@@ -22,7 +22,7 @@ protocol PasscodeStorage: class {
 final class PasscodeStorageDefaults {
     
     private lazy var defaults: UserDefaults? = {
-        return UserDefaults(suiteName: SharedConstants.groupIdentifier)
+        UserDefaults(suiteName: SharedConstants.groupIdentifier)
     }()
     
     static let passcodeKey = "passcodeKey"

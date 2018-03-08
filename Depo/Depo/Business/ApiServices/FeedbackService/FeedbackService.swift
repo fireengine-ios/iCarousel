@@ -9,7 +9,7 @@
 
 //class FeedbackService: NSObject {
 
-struct FeedbackPatch  {
+struct FeedbackPatch {
     
     static let languageList =  "/api/account/language/list"
     static let sendSelectedLanguage = "/api/account/language"
@@ -19,8 +19,8 @@ struct FeedbackPatch  {
 class FeedbackLanguage: BaseRequestParametrs {
     
     override var patch: URL {
-        let path: String = String(format:FeedbackPatch.languageList)
-        return URL(string: path, relativeTo:super.patch)!
+        let path: String = String(format: FeedbackPatch.languageList)
+        return URL(string: path, relativeTo: super.patch)!
     }
     
 }
@@ -29,13 +29,13 @@ class SelectedLanguage: BaseRequestParametrs {
     
     var selectedLanguage: LanguageModel
     
-    init (selectedLanguage: LanguageModel){
+    init (selectedLanguage: LanguageModel) {
         self.selectedLanguage = selectedLanguage
     }
     
     override var patch: URL {
-        let path: String = String(format:FeedbackPatch.sendSelectedLanguage)
-        return URL(string: path, relativeTo:super.patch)!
+        let path: String = String(format: FeedbackPatch.sendSelectedLanguage)
+        return URL(string: path, relativeTo: super.patch)!
     }
     
     override var requestParametrs: Any {
@@ -52,10 +52,10 @@ class FeedbackLanguagesListResponse: ObjectRequestResponse {
     
     override func mapping() {
         let dict = json?.dictionary
-        guard let objects = dict?.values else{
+        guard let objects = dict?.values else {
             return
         }
-        for obj in objects{
+        for obj in objects {
             if let model = LanguageModel(json: obj) {
                 languagesList.append(model)
             }
@@ -68,13 +68,13 @@ typealias FeedbackLanguagesListOperation = () -> Swift.Void
 
 class FeedbackService: BaseRequestService {
     
-    func getFeedbackLanguage(feedbackLanguageParameter: FeedbackLanguage, success: SuccessResponse?, fail: FailResponse?){
+    func getFeedbackLanguage(feedbackLanguageParameter: FeedbackLanguage, success: SuccessResponse?, fail: FailResponse?) {
         log.debug("FeedbackService getFeedbackLanguage")
         let handler = BaseResponseHandler<FeedbackLanguagesListResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: feedbackLanguageParameter, handler: handler)
     }
     
-    func sendSelectedLanguage(selectedLanguageParameter: SelectedLanguage, succes: SuccessResponse?, fail: FailResponse?){
+    func sendSelectedLanguage(selectedLanguageParameter: SelectedLanguage, succes: SuccessResponse?, fail: FailResponse?) {
         log.debug("FeedbackService sendSelectedLanguage")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: succes, fail: fail)

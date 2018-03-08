@@ -11,4 +11,3 @@
 //protocol UploadFilesSelectionInteractorInput {
 //    func uploadItems(items: [BaseDataSourceItem])   
 //}
-

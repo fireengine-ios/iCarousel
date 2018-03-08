@@ -27,7 +27,7 @@ final class PVViewerController: BaseViewController, NibInit {
         
         if #available(iOS 11.0, *) {
             imageScrollView.contentInsetAdjustmentBehavior = .never
-        }else{
+        } else {
             automaticallyAdjustsScrollViewInsets = false
         }
         
@@ -64,11 +64,11 @@ final class PVViewerController: BaseViewController, NibInit {
         isFullScreen = !isFullScreen 
     }
     
-    @objc private func onCancelButton(){
+    @objc private func onCancelButton() {
         hideView()
     }
     
-    private func hideView(){
+    private func hideView() {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         dismiss(animated: true)
     }

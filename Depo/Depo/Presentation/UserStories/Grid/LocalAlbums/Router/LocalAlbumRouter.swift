@@ -12,7 +12,7 @@ class LocalAlbumRouter: BaseFilesGreedRouter {
 
         let router = RouterVC()
         
-        if (selectedItem.fileType == .photoAlbum){
+        if (selectedItem.fileType == .photoAlbum) {
             guard let album = selectedItem as? AlbumItem else {
                 return
             }

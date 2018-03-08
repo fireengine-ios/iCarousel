@@ -9,7 +9,7 @@
 import UIKit
 
 typealias SelectFolder = (_ folderID: String) -> Void
-typealias CancelSelectFolder = ()-> Void
+typealias CancelSelectFolder = () -> Void
 
 class SelectFolderViewController: BaseFilesGreedChildrenViewController {
     
@@ -66,27 +66,27 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         showRightButton()
     }
     
-    func showRightButton(){
+    func showRightButton() {
         
         let barButtonRight = UIBarButtonItem(customView: selectButton)
         
         navigationItem.rightBarButtonItem = barButtonRight
     }
     
-    @objc func onNextButton(){
+    @objc func onNextButton() {
         output.onNextButton()
     }
     
-    @objc func onCancelButton(){
+    @objc func onCancelButton() {
         cancelSelectBlock?()
         hide()
     }
     
-    func hide(){
+    func hide() {
         dismiss(animated: true, completion: nil)
     }
     
-    func selectFolder(select: @escaping SelectFolder, cancel: @escaping CancelSelectFolder){
+    func selectFolder(select: @escaping SelectFolder, cancel: @escaping CancelSelectFolder) {
         selectFolderBlock = select
         cancelSelectBlock = cancel
         
@@ -96,7 +96,7 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         router.presentViewController(controller: nContr)
     }
     
-    func onFolderSelected(folderID: String){
+    func onFolderSelected(folderID: String) {
         selectFolderBlock?(folderID)
         hide()
     }

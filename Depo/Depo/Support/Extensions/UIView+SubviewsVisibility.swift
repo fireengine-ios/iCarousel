@@ -10,6 +10,6 @@ import UIKit
 
 extension UIView {
     func setSubviewsHidden(_ isHidden: Bool) {
-        subviews.forEach( { $0.isHidden = isHidden } )
+        subviews.forEach({ $0.isHidden = isHidden })
     }
 }

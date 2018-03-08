@@ -14,22 +14,22 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
 
     // interactor out
     
-    func configurateUserInfo(userInfo: AccountInfoResponse){
+    func configurateUserInfo(userInfo: AccountInfoResponse) {
         view.configurateUserInfo(userInfo: userInfo)
     }
     
-    func startNetworkOperation(){
+    func startNetworkOperation() {
         startAsyncOperation()
     }
     
-    func stopNetworkOperation(){
+    func stopNetworkOperation() {
         asyncOperationSucces()
     }
     
-    func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse){
+    func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse) {
         view.endSaving()
         view.setupEditState(false)
-        if let navigationController = view.getNavigationController(){
+        if let navigationController = view.getNavigationController() {
             router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController, phoneNumber: view.getPhoneNumber())
         }
     }

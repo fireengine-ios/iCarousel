@@ -10,7 +10,7 @@ import Foundation
 
 protocol PhotoVideoDetailInteractorOutput: class {
     
-    func onShowSelectedItem(at index: Int, from items:[Item])
+    func onShowSelectedItem(at index: Int, from items: [Item])
     
     func goBack()
     

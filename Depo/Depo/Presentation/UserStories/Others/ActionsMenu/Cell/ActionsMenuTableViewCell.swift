@@ -26,9 +26,9 @@ class ActionsMenuTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-        if (selected){
+        if (selected) {
             titleLabel.textColor = ColorConstants.selectedBottomBarButtonColor
-        }else{
+        } else {
             titleLabel.textColor = ColorConstants.textGrayColor
         }
     }

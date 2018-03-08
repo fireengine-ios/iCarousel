@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias RequestHeaderParametrs = [String:String]
+typealias RequestHeaderParametrs = [String: String]
 
 struct HeaderConstant {
     
@@ -84,5 +84,3 @@ class RequestHeaders {
     }
 
 }
-
-

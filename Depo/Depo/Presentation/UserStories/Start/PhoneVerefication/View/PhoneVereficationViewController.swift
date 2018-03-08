@@ -148,7 +148,7 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
         phoneCodeLabel.text = number
     }
     
-    func getNavigationController() -> UINavigationController?{
+    func getNavigationController() -> UINavigationController? {
         return self.navigationController
     }
     

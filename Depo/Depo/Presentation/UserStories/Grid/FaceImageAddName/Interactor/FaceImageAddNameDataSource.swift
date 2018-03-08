@@ -20,7 +20,7 @@ class FaceImageAddNameDataSource: BaseDataSourceForCollectionView {
                                                       for: indexPath)
         
         if !needShowCloudIcon {
-            if let cell = cell as? CollectionViewCellForPhoto{
+            if let cell = cell as? CollectionViewCellForPhoto {
                 cell.cloudStatusImage.isHidden = true
             }
         }

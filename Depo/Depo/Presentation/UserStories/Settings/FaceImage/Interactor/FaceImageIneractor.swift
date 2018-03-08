@@ -27,7 +27,7 @@ final class FaceImageInteractor {
         })
     }
     
-    private func fail(error: String){
+    private func fail(error: String) {
         DispatchQueue.main.async { [weak self] in
             self?.output.operationFinished()
             self?.output.showError(error: error)

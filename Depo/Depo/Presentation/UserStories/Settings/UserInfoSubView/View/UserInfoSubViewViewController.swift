@@ -98,7 +98,7 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
         
         userEmailLabel.text = userInfo.email
         userPhoneNumber.text = userInfo.phoneNumber
-        if let url = userInfo.urlForPhoto{
+        if let url = userInfo.urlForPhoto {
             userIconImageView.loadImageByURL(url: url)
         }
     }
@@ -123,7 +123,7 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
     
     // MARK: buttons actions
     @IBAction func onEditUserInformationButton() {
-        guard let userInfo_ = userInfo else{
+        guard let userInfo_ = userInfo else {
             return
         }
         actionsDelegate?.updateUserProfile(userInfo: userInfo_)

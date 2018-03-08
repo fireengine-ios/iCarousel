@@ -10,7 +10,7 @@ import UIKit
 
 class CreateStoryPreviewModuleConfigurator {
 
- func configure(viewController: CreateStoryPreviewViewController, story:PhotoStory, responce: CreateStoryResponce) {
+ func configure(viewController: CreateStoryPreviewViewController, story: PhotoStory, responce: CreateStoryResponce) {
 
         let router = CreateStoryPreviewRouter()
 

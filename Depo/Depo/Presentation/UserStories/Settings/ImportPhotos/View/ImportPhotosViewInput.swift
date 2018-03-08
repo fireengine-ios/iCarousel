@@ -49,4 +49,3 @@ protocol ImportFromInstagramViewInput: class, ActivityIndicator {
     func instagramStopSuccess()
     func instagramStopFailure(errorMessage: String)
 }
-

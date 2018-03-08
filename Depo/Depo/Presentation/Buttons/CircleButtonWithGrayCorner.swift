@@ -15,7 +15,7 @@ class CircleButtonWithGrayCorner: ButtonWithGrayCorner {
         setCornerRadius()
     }
     
-    func setCornerRadius(){
+    func setCornerRadius() {
         layer.cornerRadius = frame.size.height * 0.5
     }
     

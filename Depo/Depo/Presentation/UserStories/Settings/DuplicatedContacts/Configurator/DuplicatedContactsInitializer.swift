@@ -10,7 +10,7 @@ import UIKit
 
 class DuplicatedContactsModuleInitializer: NSObject {
 
-    class func initializeViewController(with nibName:String,
+    class func initializeViewController(with nibName: String,
                                         analyzeResponse: [ContactSync.AnalyzedContact],
                                         moduleOutput: DuplicatedContactsModuleOutput?) -> UIViewController {
         

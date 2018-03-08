@@ -116,7 +116,7 @@ class GridListTopBar: UIViewController {
         
     }
     
-    //MARK: - Actions
+    // MARK: - Actions
 
     @IBAction func sortAction(_ sender: Any) {
         guard let unwrapedConfig = currentConfig else {
@@ -124,11 +124,11 @@ class GridListTopBar: UIViewController {
         }
         let sortingTable = GridListTopBarSortingTableView(style: .plain)
         sortingTable.actionDelegate = self
-        let titles = unwrapedConfig.availableSortTypes.map({return $0.description})
+        let titles = unwrapedConfig.availableSortTypes.map({ $0.description })
         var selectedSort: Int
-        if (selectedIndex != -1){
+        if (selectedIndex != -1) {
             selectedSort = selectedIndex
-        }else{
+        } else {
             selectedSort = currentConfig?.availableSortTypes.index(of: unwrapedConfig.defaultSortType) ?? 0
         }
         sortingTable.setup(withTitles: titles, selectedIndex: selectedSort)

@@ -32,15 +32,15 @@ struct AccountPath {
 
 class AccontInfo: BaseRequestParametrs {   
     override var patch: URL {
-        return URL(string: AccountPath.info, relativeTo:super.patch)!
+        return URL(string: AccountPath.info, relativeTo: super.patch)!
     }
 }
 
-class UserNameParameters: BaseRequestParametrs{
+class UserNameParameters: BaseRequestParametrs {
     let userName: String?
     let userSurName: String?
     
-    init(userName: String? = nil, userSurName: String? = nil){
+    init(userName: String? = nil, userSurName: String? = nil) {
         self.userName = userName
         self.userSurName = userSurName
     }
@@ -51,14 +51,14 @@ class UserNameParameters: BaseRequestParametrs{
     }
     
     override var patch: URL {
-        return URL(string: AccountPath.updateUserName, relativeTo:super.patch)!
+        return URL(string: AccountPath.updateUserName, relativeTo: super.patch)!
     }
 }
 
-class UserEmailParameters: BaseRequestParametrs{
+class UserEmailParameters: BaseRequestParametrs {
     let email: String?
     
-    init(userEmail: String? = nil){
+    init(userEmail: String? = nil) {
         self.email = userEmail
     }
     
@@ -69,14 +69,14 @@ class UserEmailParameters: BaseRequestParametrs{
     }
     
     override var patch: URL {
-        return URL(string: AccountPath.updateUserEmail, relativeTo:super.patch)!
+        return URL(string: AccountPath.updateUserEmail, relativeTo: super.patch)!
     }
 }
 
-class UserPhoneNumberParameters: BaseRequestParametrs{
+class UserPhoneNumberParameters: BaseRequestParametrs {
     let phoneNumber: String?
     
-    init(phoneNumber: String){
+    init(phoneNumber: String) {
         self.phoneNumber = phoneNumber
     }
     
@@ -86,46 +86,46 @@ class UserPhoneNumberParameters: BaseRequestParametrs{
     }
     
     override var patch: URL {
-        return URL(string: AccountPath.updatePhoneNumber, relativeTo:super.patch)!
+        return URL(string: AccountPath.updatePhoneNumber, relativeTo: super.patch)!
     }
 }
 
-class VerifyPhoneNumberParameter: BaseRequestParametrs{
+class VerifyPhoneNumberParameter: BaseRequestParametrs {
     let otp: String?
     let referenceToken: String?
     
-    init(otp: String, referenceToken: String){
+    init(otp: String, referenceToken: String) {
         self.otp = otp
         self.referenceToken = referenceToken
     }
     
-    override var requestParametrs: Any{
+    override var requestParametrs: Any {
         let dict: [String: String] = [AccountJSONConstants.otp: otp ?? "",
                                       AccountJSONConstants.referenceToken: referenceToken ?? ""]
         return dict
     }
     
     override var patch: URL {
-        return URL(string: AccountPath.verifyPhoneNumber, relativeTo:super.patch)!
+        return URL(string: AccountPath.verifyPhoneNumber, relativeTo: super.patch)!
     }
     
 }
 
 class LanguageList: BaseRequestParametrs {
     override var patch: URL {
-        return URL(string: AccountPath.languageList, relativeTo:super.patch)!
+        return URL(string: AccountPath.languageList, relativeTo: super.patch)!
     }
 }
 
 class LanguageListChange: BaseRequestParametrs {
     override var patch: URL {
-        return URL(string: AccountPath.updateLanguage, relativeTo:super.patch)!
+        return URL(string: AccountPath.updateLanguage, relativeTo: super.patch)!
     }
 }
 
 class QuotaInfo: BaseRequestParametrs {
     override var patch: URL {
-        return URL(string: AccountPath.quota, relativeTo:super.patch)!
+        return URL(string: AccountPath.quota, relativeTo: super.patch)!
     }
 }
 

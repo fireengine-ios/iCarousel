@@ -27,16 +27,16 @@ class AudioSelectionCollectionViewCell: BaseCollectionViewCell {
         contentView.backgroundColor = ColorConstants.whiteColor
     }
     
-    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem){
+    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
         nameLabel.text = wrappedObj.name
     }
     
-    override func setSelection(isSelectionActive: Bool, isSelected: Bool){
+    override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         let image = UIImage(named: isSelected ? "selectedList": "pselected")
         self.selectionImage.image = image
     }
     
-    override func setSelectionWithAnimation(isSelectionActive: Bool, isSelected: Bool){
+    override func setSelectionWithAnimation(isSelectionActive: Bool, isSelected: Bool) {
         UIView.transition(with: selectionImage,
                           duration: NumericConstants.animationDuration,
                           options: .transitionCrossDissolve,
@@ -50,8 +50,8 @@ class AudioSelectionCollectionViewCell: BaseCollectionViewCell {
         playing ? (self.playingButton.isSelected = true) : (self.playingButton.isSelected = false)
     }
     
-    @IBAction func onPlayButton(){
-        if let d = delegate as? AudioSelectionCollectionViewCellDelegate{
+    @IBAction func onPlayButton() {
+        if let d = delegate as? AudioSelectionCollectionViewCellDelegate {
             d.onPlayButton(inCell: self)
         }
     }

@@ -10,7 +10,7 @@ import Foundation
 import Reachability
 
 
-protocol ReachabilityProtocol  {
+protocol ReachabilityProtocol {
     
     var isReachableViaWWAN: Bool { get }
     
@@ -31,7 +31,7 @@ class ReachabilityService: ReachabilityProtocol {
         return self.reachability.connection == .cellular
     }
     
-    var isReachable:Bool {
+    var isReachable: Bool {
         return self.reachability.connection != .none
     }
     
@@ -85,7 +85,7 @@ class APIReachabilityService {
         
     }
     
-    //MARK: - Public
+    // MARK: - Public
     
     func startNotifier() {
         guard timer == nil else {
@@ -102,7 +102,7 @@ class APIReachabilityService {
     }
     
     private func notify() {
-        NotificationCenter.default.post(name: APIReachabilityService.APIReachabilityDidChangeName , object: nil)
+        NotificationCenter.default.post(name: APIReachabilityService.APIReachabilityDidChangeName, object: nil)
     }
     
     
@@ -137,4 +137,3 @@ class APIReachabilityRequestService: BaseRequestService {
         executeHeadRequest(param: parameters, handler: responseHandler)
     }
 }
-

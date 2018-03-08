@@ -14,12 +14,12 @@ final class FaceImageAddNameRouter: BaseFilesGreedRouter {
 
 }
 
-//MARK: - FaceImageAddNameRouterInput
+// MARK: - FaceImageAddNameRouterInput
 
 extension FaceImageAddNameRouter: FaceImageAddNameRouterInput {
     
     func showMerge(firstUrl: URL, secondUrl: URL, completion: @escaping VoidHandler) {
-        let vc = PopUpController.with(title: TextConstants.faceImageCheckTheSamePerson, message: TextConstants.faceImageWillMergedTogether, image: .success, firstButtonTitle: TextConstants.faceImageNope, secondButtonTitle: TextConstants.faceImageYes, firstUrl: firstUrl, secondUrl: secondUrl,secondAction: { vc in
+        let vc = PopUpController.with(title: TextConstants.faceImageCheckTheSamePerson, message: TextConstants.faceImageWillMergedTogether, image: .success, firstButtonTitle: TextConstants.faceImageNope, secondButtonTitle: TextConstants.faceImageYes, firstUrl: firstUrl, secondUrl: secondUrl, secondAction: { vc in
             vc.close(completion: completion)
         })
         

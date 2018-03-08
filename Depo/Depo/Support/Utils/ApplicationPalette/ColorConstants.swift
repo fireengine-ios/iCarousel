@@ -94,23 +94,23 @@ extension UIColor {
 
 extension UIFont {
     
-    static func TurkcellSaturaDemFont(size:CGFloat = 9) -> UIFont {
+    static func TurkcellSaturaDemFont(size: CGFloat = 9) -> UIFont {
         return UIFont(name: "TurkcellSaturaDem", size: size)!
     }
     
-    static func TurkcellSaturaRegFont(size:CGFloat = 9) -> UIFont {
+    static func TurkcellSaturaRegFont(size: CGFloat = 9) -> UIFont {
         return UIFont(name: "TurkcellSaturaReg", size: size)!
     }
     
-    static func TurkcellSaturaBolFont(size:CGFloat = 9) -> UIFont {
+    static func TurkcellSaturaBolFont(size: CGFloat = 9) -> UIFont {
         return UIFont(name: "TurkcellSaturaBol", size: size)!
     }
     
-    static func TurkcellSaturaItaFont(size:CGFloat = 9) -> UIFont {
+    static func TurkcellSaturaItaFont(size: CGFloat = 9) -> UIFont {
         return UIFont(name: "TurkcellSaturaIta", size: size)!
     }
     
-    static func TurkcellSaturaMedFont(size:CGFloat = 9) -> UIFont {
+    static func TurkcellSaturaMedFont(size: CGFloat = 9) -> UIFont {
         return UIFont(name: "TurkcellSaturaMed", size: size)!
     }
 }

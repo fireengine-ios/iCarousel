@@ -17,7 +17,7 @@ final class HomeCardResponse {
     var details: JSON?
     var order = 0
     
-    func getOperationType() -> OperationType?{
+    func getOperationType() -> OperationType? {
         guard let type = type else {
             return nil
         }
@@ -35,7 +35,7 @@ final class HomeCardResponse {
         case .stylizedPhoto:
             return .stylizedPhoto
         case .contactBackup:
-            if ContactBackupOld.isContactInfoObjectEmpty(object: details){
+            if ContactBackupOld.isContactInfoObjectEmpty(object: details) {
                 return .contactBacupEmpty
             }
             return .contactBacupOld

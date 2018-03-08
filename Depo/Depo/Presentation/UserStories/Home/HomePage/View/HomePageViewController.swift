@@ -94,7 +94,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         homePageDataSource.isActive = false
     }
     
-    deinit{
+    deinit {
         CardsManager.default.removeViewForNotification(view: homePageDataSource)
     }
 
@@ -123,30 +123,30 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     
-    //MARK: BaseCollectionViewDataSourceDelegate
+    // MARK: BaseCollectionViewDataSourceDelegate
     
-    func onCellHasBeenRemovedWith(controller:UIViewController){
+    func onCellHasBeenRemovedWith(controller: UIViewController) {
         
     }
     
-    func numberOfColumns() -> Int{
-        if (Device.isIpad){
+    func numberOfColumns() -> Int {
+        if (Device.isIpad) {
             return 2
         }
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat{
+    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
         return HomeViewTopView.getHeight()
     }
     
     
-    //MARK: UICollectionViewDelegate
+    // MARK: UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView", for: indexPath)

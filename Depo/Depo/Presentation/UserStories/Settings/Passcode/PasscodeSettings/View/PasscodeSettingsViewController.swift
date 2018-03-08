@@ -69,7 +69,7 @@ final class PasscodeSettingsViewController: UIViewController {
     }
     
     private lazy var biometricsTitle: String = {
-        return output.isAvailableFaceID ? TextConstants.passcodeFaceID : TextConstants.passcodeTouchID
+        output.isAvailableFaceID ? TextConstants.passcodeFaceID : TextConstants.passcodeTouchID
     }()
     
     private func setupTexts() {
@@ -174,7 +174,7 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
 
     }
 }
-//MARK: - mail verification
+// MARK: - mail verification
 extension PasscodeSettingsViewController: MailVerificationViewControllerDelegate {
     func mailVerified(mail: String) {
         debugPrint("mail verified")

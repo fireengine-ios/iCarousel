@@ -76,7 +76,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executeDeleteRequest(param: param, handler: handler)
     }
     
-    //MARK: - User Profile
+    // MARK: - User Profile
 
     func updateUserProfile(parameters: UserNameParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
         log.debug("AccountService updateUserProfile")
@@ -106,7 +106,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executePostRequest(param: parameters, handler: handler)
     }
     
-    //MARK: - User Security
+    // MARK: - User Security
     
     func securitySettingsInfo(success: SuccessResponse?, fail: @escaping FailResponse) {
         log.debug("AccountService securitySettingsInfo")
@@ -126,7 +126,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executePostRequest(param: parametres, handler: handler)
     }
     
-    //MARK: - Face Image Allowed
+    // MARK: - Face Image Allowed
     func faceImageAllowed(success: SuccessResponse?, fail: @escaping FailResponse) {
         log.debug("AccountService faceImageAllowed")
         

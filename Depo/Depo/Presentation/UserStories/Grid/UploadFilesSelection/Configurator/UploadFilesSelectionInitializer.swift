@@ -10,11 +10,11 @@ import UIKit
 
 class UploadFilesSelectionModuleInitializer: NSObject {
     
-    class func initializeViewController(with nibName:String, searchService: RemoteItemsService) -> UIViewController {
+    class func initializeViewController(with nibName: String, searchService: RemoteItemsService) -> UIViewController {
         let viewController = UploadFilesSelectionViewController(nibName: nibName, bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
         
         configurator.configure(viewController: viewController,
@@ -28,7 +28,7 @@ class UploadFilesSelectionModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeViewController(with nibName:String) -> UIViewController {
+    class func initializeViewController(with nibName: String) -> UIViewController {
         let viewController = UploadFilesSelectionViewController(nibName: nibName, bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         let service = LocalPhotoAndVideoService()
@@ -55,9 +55,8 @@ class UploadFilesSelectionModuleInitializer: NSObject {
         interactor.rootUIID = rootUUID
         
         
-        
         configurator.configure(viewController: viewController,
-                               fileFilters: [.localStatus(.local)],//[.duplicates],//
+                               fileFilters: [.localStatus(.local)], //[.duplicates],//
                                bottomBarConfig: nil,
                                router: BaseFilesGreedRouter(),
                                presenter: UploadFilesSelectionPresenter(),

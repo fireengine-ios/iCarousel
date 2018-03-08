@@ -28,8 +28,7 @@ final class UploadOperation: AsyncOperation {
          contentType: String,
          progressHandler: @escaping Request.ProgressHandler,
          didStartUpload: VoidHandler?,
-         complition: @escaping ResponseVoid)
-    {
+         complition: @escaping ResponseVoid) {
         self.url = url
         self.contentType = contentType
         self.progressHandler = progressHandler

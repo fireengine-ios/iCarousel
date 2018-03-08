@@ -13,7 +13,7 @@ class FolderSelectionCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var smallContentImageView: SelectionImageView!
     @IBOutlet weak var smallCellSelectionView: UIImageView!
     @IBOutlet weak var fileNameLabel: UILabel!
-    @IBOutlet weak var rightIconImageView : UIImageView!
+    @IBOutlet weak var rightIconImageView: UIImageView!
 
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
         
@@ -30,7 +30,7 @@ class FolderSelectionCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    override func setSelection(isSelectionActive: Bool, isSelected: Bool){
+    override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         smallCellSelectionView.isHidden = true
         smallContentImageView.isHidden = false
         

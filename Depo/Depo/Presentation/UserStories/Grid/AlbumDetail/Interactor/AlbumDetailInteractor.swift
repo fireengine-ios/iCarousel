@@ -13,7 +13,7 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
     func allItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder) {
         log.debug("AlbumDetailInteractor allItems")
         
-        guard let remote =  remoteItems as? AlbumDetailService else{
+        guard let remote =  remoteItems as? AlbumDetailService else {
             return
         }
         guard let albumObject = album else {

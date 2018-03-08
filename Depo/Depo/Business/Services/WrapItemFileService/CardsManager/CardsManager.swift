@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum OperationType: String{
+enum OperationType: String {
     case upload                     = "Upload"
     case sync                       = "Sync"
     case download                   = "Download"
@@ -46,21 +46,21 @@ class CardsManager: NSObject {
     private var homeCardsObjects = [HomeCardResponse]()
     private var deletedCards = Set<OperationType>()
     
-    var cardsThatStartedByDevice : [OperationType]{
-        get{
+    var cardsThatStartedByDevice: [OperationType] {
+        get {
             return [.upload, .sync, .download, .prepareToAutoSync, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
         }
     }
     
-    func clear(){
+    func clear() {
         deletedCards.removeAll()
     }
     
-    //MARK: registration view
+    // MARK: registration view
     
-    func addViewForNotification(view: CardsManagerViewProtocol){
+    func addViewForNotification(view: CardsManagerViewProtocol) {
         
-        if foloversArray.index(where: {$0.isEqual(object: view)}) == nil{
+        if foloversArray.index(where: { $0.isEqual(object: view) }) == nil {
             foloversArray.append(view)
         }
         
@@ -71,8 +71,8 @@ class CardsManager: NSObject {
         }
     }
     
-    func removeViewForNotification(view: CardsManagerViewProtocol){
-        if let index = foloversArray.index(where: {$0.isEqual(object: view)}){
+    func removeViewForNotification(view: CardsManagerViewProtocol) {
+        if let index = foloversArray.index(where: { $0.isEqual(object: view) }) {
             foloversArray.remove(at: index)
         }
         
@@ -82,9 +82,9 @@ class CardsManager: NSObject {
         }
     }
     
-    private func setProgressForOperation(operation: OperationType, allOperations: Int?, completedOperations: Int?){
+    private func setProgressForOperation(operation: OperationType, allOperations: Int?, completedOperations: Int?) {
         var progress = progresForOperation[operation]
-        if (progress == nil){
+        if (progress == nil) {
             progress = Progress()
         }
         progress!.allOperations = allOperations
@@ -92,34 +92,34 @@ class CardsManager: NSObject {
         progresForOperation[operation] = progress
     }
     
-    //MARK: sending operation to registred subviews
-    func startOperatonsForCardsResponces(cardsResponces:[HomeCardResponse]){
+    // MARK: sending operation to registred subviews
+    func startOperatonsForCardsResponces(cardsResponces: [HomeCardResponse]) {
         let sortedArray = cardsResponces.sorted { (obj1, obj2) -> Bool in
-            return obj1.order < obj2.order
+            obj1.order < obj2.order
         }
         homeCardsObjects.removeAll()
         homeCardsObjects.append(contentsOf: sortedArray)
         sortingAllCards()
     }
     
-    private func sortingAllCards(){
+    private func sortingAllCards() {
         DispatchQueue.main.async {
-            for notificationView in self.foloversArray{
+            for notificationView in self.foloversArray {
                 notificationView.startOperationsWith(serverObjects: self.homeCardsObjects)
             }
         }
     }
     
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
-    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
         DispatchQueue.main.async {
-            if (!self.canShowPopUpByDepends(type: type)){
+            if (!self.canShowPopUpByDepends(type: type)) {
                 return
             }
-            if self.deletedCards.contains(type){
+            if self.deletedCards.contains(type) {
                 return
             }
             
@@ -127,28 +127,28 @@ class CardsManager: NSObject {
             
             self.setProgressForOperationWith(type: type, allOperations: allOperations ?? 0, completedOperations: completedOperations ?? 0)
             
-            for notificationView in self.foloversArray{
+            for notificationView in self.foloversArray {
                 notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
             }
         }
         
     }
     
-    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
+    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
         setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
-    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int){
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
         hidePopUpsByDepends(type: type)
         
         DispatchQueue.main.async {
             self.setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
             
-            for notificationView in self.foloversArray{
+            for notificationView in self.foloversArray {
                 
                 if let obj = object {
                     notificationView.setProgressForOperationWith(type: type, object: obj, allOperations: allOperations, completedOperations: completedOperations)
-                }else{
+                } else {
                     notificationView.setProgressForOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
                 }
                 
@@ -156,41 +156,41 @@ class CardsManager: NSObject {
         }
     }
     
-    func setProgress(ratio: Float, operationType: OperationType, object: WrapData?){
+    func setProgress(ratio: Float, operationType: OperationType, object: WrapData?) {
         DispatchQueue.main.async {
-            for notificationView in self.foloversArray{
+            for notificationView in self.foloversArray {
                 notificationView.setProgress(ratio: ratio, for: operationType, object: object)
             }
         }
     }
     
-    func stopOperationWithType(type: OperationType){
+    func stopOperationWithType(type: OperationType) {
         
         print("operation stopped ", type.rawValue)
         
         DispatchQueue.main.async {
             self.progresForOperation[type] = nil
-            for notificationView in self.foloversArray{
+            for notificationView in self.foloversArray {
                 notificationView.stopOperationWithType(type: type)
             }
         }
     }
     
-    func manuallyDeleteCardsByType(type: OperationType){
-        if type == .freeAppSpaceLocalWarning || type == .freeAppSpace{
+    func manuallyDeleteCardsByType(type: OperationType) {
+        if type == .freeAppSpaceLocalWarning || type == .freeAppSpace {
             deletedCards.insert(type)
         }
         
         stopOperationWithType(type: type)
     }
     
-    func stopAllOperations(){
+    func stopAllOperations() {
         for operation in progresForOperation.keys {
             stopOperationWithType(type: operation)
         }
     }
     
-    func hidePopUpsByDepends(type: OperationType){
+    func hidePopUpsByDepends(type: OperationType) {
         switch type {
         case .sync, .upload:
             stopOperationWithType(type: .prepareToAutoSync)
@@ -204,12 +204,12 @@ class CardsManager: NSObject {
         }
     }
     
-    func canShowPopUpByDepends(type: OperationType) -> Bool{
+    func canShowPopUpByDepends(type: OperationType) -> Bool {
         switch type {
         case .freeAppSpace, .freeAppSpaceLocalWarning:
             let operations: [OperationType] = [.sync, .upload]
-            for operation in operations{
-                if (progresForOperation[operation] != nil){
+            for operation in operations {
+                if (progresForOperation[operation] != nil) {
                     return false
                 }
             }
@@ -220,26 +220,26 @@ class CardsManager: NSObject {
         return true
     }
     
-    //MARK: views for operations
+    // MARK: views for operations
     
-    func checkIsThisOperationStartedByDevice(operation: OperationType) -> Bool{
+    func checkIsThisOperationStartedByDevice(operation: OperationType) -> Bool {
         return cardsThatStartedByDevice.contains(operation)
     }
     
     private func serverOperationFor(type: OperationType) -> HomeCardResponse? {
         for serverObject in homeCardsObjects {
-            if type == .freeAppSpaceLocalWarning, serverObject.getOperationType() == .freeAppSpace{
+            if type == .freeAppSpaceLocalWarning, serverObject.getOperationType() == .freeAppSpace {
                 return serverObject
             }
             
-            if serverObject.getOperationType() == type{
+            if serverObject.getOperationType() == type {
                 return serverObject
             }
         }
         return nil
     }
     
-    class func popUpViewForOperaion(type: OperationType) -> BaseView{
+    class func popUpViewForOperaion(type: OperationType) -> BaseView {
         let serverObject = CardsManager.default.serverOperationFor(type: type)
         let cardView: BaseView
         

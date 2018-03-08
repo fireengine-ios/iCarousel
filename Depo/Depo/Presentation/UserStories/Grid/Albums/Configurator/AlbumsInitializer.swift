@@ -11,10 +11,10 @@ import UIKit
 class AlbumsModuleInitializer: NSObject {
     
     static var albumsSortTypes: [MoreActionsConfig.SortRullesType] {
-        return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew]
+        return [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew]
     }
 
-    class func initializeAlbumsController(with nibName:String) -> BaseFilesGreedChildrenViewController {
+    class func initializeAlbumsController(with nibName: String) -> BaseFilesGreedChildrenViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonCreateAlbum])
@@ -51,7 +51,7 @@ class AlbumsModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeSelectAlbumsController(with nibName:String, photos:[BaseDataSourceItem]) -> AlbumSelectionViewController {
+    class func initializeSelectAlbumsController(with nibName: String, photos: [BaseDataSourceItem]) -> AlbumSelectionViewController {
         let viewController = AlbumSelectionViewController(nibName: nibName, bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         //let bottomBarConfig = EditingBarConfig(elementsConfig: [],

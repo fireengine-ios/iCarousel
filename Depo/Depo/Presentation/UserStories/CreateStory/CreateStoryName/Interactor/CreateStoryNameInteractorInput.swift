@@ -10,8 +10,8 @@ import Foundation
 
 protocol CreateStoryNameInteractorInput {
     
-    var needSelectionItems: Bool { set get }
-    var isFavorites: Bool { set get }
+    var needSelectionItems: Bool { get set }
+    var isFavorites: Bool { get set }
     
     func onCreateStory(storyName: String)
     func onCreateStory(storyName: String, items: [BaseDataSourceItem])

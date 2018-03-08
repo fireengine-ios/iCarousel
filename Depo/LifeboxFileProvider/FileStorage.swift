@@ -17,7 +17,7 @@ final class FileStorage {
     
     func write(_ item: NSFileProviderItem) {
         do {
-            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
+            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let fileURL = documentDirectory.appendingPathComponent(item.itemIdentifier.rawValue)
             NSKeyedArchiver.archiveRootObject(item, toFile: fileURL.path)
         } catch {

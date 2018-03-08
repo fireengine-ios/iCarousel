@@ -15,12 +15,12 @@ final class WidgetService {
     
     //Using Wormhole is overkill but it's in the old app and we'll probably need it in a future
     private (set) lazy var wormhole: MMWormhole = {
-        return MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier,
+        MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier,
                           optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
     }()
     
     private lazy var defaults: UserDefaults? = {
-        return UserDefaults(suiteName: SharedConstants.groupIdentifier)
+        UserDefaults(suiteName: SharedConstants.groupIdentifier)
     }()
     
     
@@ -36,7 +36,7 @@ final class WidgetService {
     
     private (set) var lastSyncedDate: String {
         get { return defaults?.string(forKey: SharedConstants.lastSyncDateKey) ?? "" }
-        set {  defaults?.set(newValue, forKey: SharedConstants.lastSyncDateKey) }
+        set { defaults?.set(newValue, forKey: SharedConstants.lastSyncDateKey) }
     }
     
     private (set) var syncStatus: AutoSyncStatus {
@@ -68,6 +68,3 @@ final class WidgetService {
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
 }
-
-
-

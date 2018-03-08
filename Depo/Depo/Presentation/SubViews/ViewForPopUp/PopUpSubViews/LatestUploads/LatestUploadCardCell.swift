@@ -12,7 +12,7 @@ class LatestUploadCardCell: UICollectionViewCell {
     
     @IBOutlet weak var iconImageView: LoadingImageView!
     
-    func setImage(image: Item){
+    func setImage(image: Item) {
         iconImageView.loadImageForItem(object: image)
     }
 }

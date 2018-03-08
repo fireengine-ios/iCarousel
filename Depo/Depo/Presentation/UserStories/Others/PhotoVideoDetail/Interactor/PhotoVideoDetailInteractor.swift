@@ -65,7 +65,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
             
             if .video == selectedItem.fileType && !selectedItem.isLocalItem {
-                if let deleteIndex = elementsConfig.index(of: .info)  {
+                if let deleteIndex = elementsConfig.index(of: .info) {
                     elementsConfig.remove(at: deleteIndex)
                 }
             }
@@ -86,18 +86,18 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
     }
     
-    func deleteSelectedItem(type: ElementTypes){
+    func deleteSelectedItem(type: ElementTypes) {
         let isRightSwipe = selectedIndex == array.count - 1
         
         let removedObject = array[selectedIndex]
             
         array.remove(at: selectedIndex)
         
-        if (selectedIndex >= array.count){
+        if (selectedIndex >= array.count) {
             selectedIndex = array.count - 1
         }
         
-        if type == .delete{
+        if type == .delete {
             ItemOperationManager.default.deleteItems(items: [removedObject])
         }
         if type == .removeFromAlbum || type == .removeFromFaceImageAlbum {

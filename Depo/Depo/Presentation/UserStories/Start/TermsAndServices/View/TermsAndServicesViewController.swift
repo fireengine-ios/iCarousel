@@ -30,7 +30,7 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
         webView.backgroundColor = UIColor.clear
         webView.isOpaque = false
         if !Device.isIpad {
-            setNavigationTitle(title:TextConstants.termsAndUsesTitile)
+            setNavigationTitle(title: TextConstants.termsAndUsesTitile)
         }
         
         
@@ -40,7 +40,7 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
         
         applyButton.setTitle(TextConstants.termsAndUsesApplyButtonText, for: .normal)
         applyButton.backgroundColor = UIColor.clear
-        applyButton.addTarget(self, action: #selector(onApplyButton), for:.touchUpInside)
+        applyButton.addTarget(self, action: #selector(onApplyButton), for: .touchUpInside)
         
         let barButton = UIBarButtonItem(customView: applyButton)
         navigationItem.rightBarButtonItem = barButton
@@ -51,7 +51,7 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
 
     // MARK: Buttons action
     
-    @objc func onApplyButton(){
+    @objc func onApplyButton() {
         output.termsApplied()
     }
 
@@ -66,7 +66,7 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
         webView.loadHTMLString(string, baseURL: nil)
     }
     
-    func failLoadTermsAndUses(errorString:String) {
+    func failLoadTermsAndUses(errorString: String) {
         //TO-DO show error
     }
     

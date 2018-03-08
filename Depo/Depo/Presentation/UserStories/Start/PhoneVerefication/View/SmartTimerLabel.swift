@@ -73,7 +73,7 @@ class SmartTimerLabel: UILabel {
     }
     
     private func stopTimer() {
-        guard let curTimer = timer else  {
+        guard let curTimer = timer else {
             return
         }
         if curTimer.isValid {
@@ -97,6 +97,6 @@ class SmartTimerLabel: UILabel {
         }
         let min = Int(spendTime) / 60
         let sec = Int(spendTime) % 60
-        text = String(format:"%02i:%02i", min, sec)
+        text = String(format: "%02i:%02i", min, sec)
     }
 }

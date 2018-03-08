@@ -10,12 +10,12 @@ class SplashRouter: SplashRouterInput {
 
     let router = RouterVC()
     
-    func navigateToApplication(){
+    func navigateToApplication() {
         let settings = router.tabBarScreen
         router.setNavigationController(controller: settings)
     }
     
-    func navigateToOnboarding(){
+    func navigateToOnboarding() {
         let settings = router.onboardingScreen
         router.setNavigationController(controller: settings)
     }

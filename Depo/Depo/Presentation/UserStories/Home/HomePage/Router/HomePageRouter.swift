@@ -13,9 +13,9 @@ class HomePageRouter: HomePageRouterInput {
     
     func moveToSettingsScreen() {
         var controller: UIViewController?
-        if (Device.isIpad){
+        if (Device.isIpad) {
             controller = router.settingsIpad
-        }else{
+        } else {
             controller = router.settings
         }
         
@@ -26,9 +26,9 @@ class HomePageRouter: HomePageRouterInput {
         
         var controller: UIViewController?
         
-        if (Device.isIpad){
+        if (Device.isIpad) {
             controller = router.settingsIpad
-        }else{
+        } else {
             controller = router.syncContacts
         }
         
@@ -46,7 +46,7 @@ class HomePageRouter: HomePageRouterInput {
         router.pushViewController(viewController: favourites)
     }
     
-    func moveToCreationStory(){
+    func moveToCreationStory() {
         let router = RouterVC()
         router.createStoryName()
     }

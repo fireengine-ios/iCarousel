@@ -29,4 +29,3 @@ protocol CollectionViewCellDataProtocol {
     func updating()
     
 }
-

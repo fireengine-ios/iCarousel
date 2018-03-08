@@ -12,20 +12,20 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
     
     private var fileService = WrapItemFileService()
     
-    override func shareViaLink(sourceRect: CGRect?){
+    override func shareViaLink(sourceRect: CGRect?) {
         output?.operationStarted(type: .share)
         fileService.share(sharedFiles: sharingItems, success: {[weak self] (url) in
                 DispatchQueue.main.async {
     
                     self?.output?.operationFinished(type: .share)                
                     if let output_ = self?.output as? BottomSelectionTabBarInteractorOutput {
-                        output_.objectsToShare(rect: sourceRect,urls: [url])
+                        output_.objectsToShare(rect: sourceRect, urls: [url])
                     }
                 }
             }, fail: failAction(elementType: .share))
     }
    
-    override func move(item: [BaseDataSourceItem], toPath:String) {
+    override func move(item: [BaseDataSourceItem], toPath: String) {
         guard let item = item as? [Item] else {
             return
         }

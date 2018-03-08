@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class FeedbackViewPresenter:BasePresenter, FeedbackViewModuleInput, FeedbackViewOutput, FeedbackViewInteractorOutput {
+class FeedbackViewPresenter: BasePresenter, FeedbackViewModuleInput, FeedbackViewOutput, FeedbackViewInteractorOutput {
 
     weak var view: FeedbackViewInput!
     var interactor: FeedbackViewInteractorInput!
@@ -16,7 +16,7 @@ class FeedbackViewPresenter:BasePresenter, FeedbackViewModuleInput, FeedbackView
         interactor.viewIsReady()
     }
     
-    func onSend(selectedLanguage: LanguageModel){
+    func onSend(selectedLanguage: LanguageModel) {
         interactor.onSend(selectedLanguage: selectedLanguage)
     }
     
@@ -26,17 +26,17 @@ class FeedbackViewPresenter:BasePresenter, FeedbackViewModuleInput, FeedbackView
     
     //interactor output
     
-    func languagesUploaded(lanuages:[LanguageModel]){
+    func languagesUploaded(lanuages: [LanguageModel]) {
         asyncOperationSucces()
         view.languagesUploaded(lanuages: lanuages)
     }
     
-    func fail(text: String){
+    func fail(text: String) {
         asyncOperationSucces()
         view.fail(text: text)
     }
     
-    func languageRequestSended(text: String){
+    func languageRequestSended(text: String) {
         view.languageRequestSended(text: text)
     }
     

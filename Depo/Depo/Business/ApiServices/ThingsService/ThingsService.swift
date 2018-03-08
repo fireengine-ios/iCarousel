@@ -55,9 +55,9 @@ final class ThingsService: BaseRequestService {
 
 final class ThingsParameters: BaseRequestParametrs {
     override var patch: URL {
-        let searchWithParam = String(format:RouteRequests.things)
+        let searchWithParam = String(format: RouteRequests.things)
         
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -68,7 +68,7 @@ final class ThingsItemsService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .image)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         let param = ThingsPageParameters(pageSize: requestSize, pageNumber: currentPage)
         
         service.getThingsPage(param: param, success: { [weak self] (response) in
@@ -102,7 +102,7 @@ final class ThingsAlbumParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.thingsAlbum, id)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -117,7 +117,7 @@ final class ThingsPageParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.thingsPage, pageSize, pageNumber)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -125,12 +125,12 @@ final class DeletePhotosFromThingsAlbum: BaseRequestParametrs {
     let id: Int64
     let photos: [Item]
     
-    init (id: Int64, photos: [Item]){
+    init (id: Int64, photos: [Item]) {
         self.id = id
         self.photos = photos
     }
     
-    override var requestParametrs: Any{
+    override var requestParametrs: Any {
         let photosUUID = photos.map { $0.id }
         return photosUUID
     }
@@ -140,4 +140,3 @@ final class DeletePhotosFromThingsAlbum: BaseRequestParametrs {
         return URL(string: path, relativeTo: super.patch)!
     }
 }
-

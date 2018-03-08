@@ -20,7 +20,7 @@ class ButtonWithCorner: UIButton {
         configurate()
     }
     
-    func configurate(){
+    func configurate() {
         layer.borderWidth = 1.0
         layer.borderColor = getColorForCorner().cgColor
         
@@ -31,7 +31,7 @@ class ButtonWithCorner: UIButton {
         
     }
 
-    func getColorForText() -> UIColor{
+    func getColorForText() -> UIColor {
         return ColorConstants.whiteColor
     }
     

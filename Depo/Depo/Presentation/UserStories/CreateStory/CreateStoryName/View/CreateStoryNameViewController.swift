@@ -86,13 +86,13 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
         }
     }
     
-    @IBAction func onCloseKeyboard(){
+    @IBAction func onCloseKeyboard() {
         storyNameTextField.resignFirstResponder()
     }
     
     // MARK: keyboard 
     
-    override func showKeyBoard(notification: NSNotification){
+    override func showKeyBoard(notification: NSNotification) {
         super.showKeyBoard(notification: notification)
         let y = contentView.frame.size.height + getMainYForView(view: contentView)
         if (view.frame.size.height - y) < keyboardHeight {
@@ -101,7 +101,7 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
             
             //let yText = storyNameTextField.frame.size.height + getMainYForView(view: storyNameTextField)
             let dyText = keyboardHeight - (view.frame.size.height - y) + 10
-            if (dyText > 0){
+            if (dyText > 0) {
                 let point = CGPoint(x: 0, y: dyText)
                 scrollView.setContentOffset(point, animated: true)
             }
@@ -110,6 +110,6 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
     
     override func hideKeyboard() {
         super.hideKeyboard()
-        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }

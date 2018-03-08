@@ -10,18 +10,18 @@ import UIKit
 
 class IntroduceDataSource: NSObject, UIScrollViewDelegate {
     
-    @IBOutlet weak var scrollView:UIScrollView!
-    @IBOutlet weak var pageControll:UIPageControl!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var pageControll: UIPageControl!
     
-    func configurateScrollViewWithModels(models:[IntroduceModel]){
+    func configurateScrollViewWithModels(models: [IntroduceModel]) {
         let w = scrollView.frame.size.width
         let h = scrollView.frame.size.height
-        for view in scrollView.subviews{
+        for view in scrollView.subviews {
             view.removeFromSuperview()
         }
         var x: CGFloat = 0
         
-        for model in models{
+        for model in models {
             let subView = IntroduceSubView.initFromNib()
             subView.frame = CGRect(x: x, y: 0, width: w, height: h)
             x = x + w
@@ -35,7 +35,7 @@ class IntroduceDataSource: NSObject, UIScrollViewDelegate {
         
         pageControll.addTarget(self, action: #selector(valueChanged), for: UIControlEvents.valueChanged)
         
-        if (models.count <= 1){
+        if (models.count <= 1) {
             pageControll.isHidden = true
         }
     }
@@ -46,7 +46,7 @@ class IntroduceDataSource: NSObject, UIScrollViewDelegate {
         pageControll.currentPage = Int(page)
     }
     
-    @objc func valueChanged(){
+    @objc func valueChanged() {
         let page = pageControll.currentPage
         let x = CGFloat(page) * scrollView.frame.size.width
         let rect = CGRect(x: x, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)

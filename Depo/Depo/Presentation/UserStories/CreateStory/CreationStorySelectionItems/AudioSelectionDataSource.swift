@@ -11,7 +11,7 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     lazy var player: MediaPlayer = factory.resolve()
     private lazy var smallPlayer: MediaPlayer = MediaPlayer()
     
-    override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
+    override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?) {
         super.setupCollectionView(collectionView: collectionView, filters: [.fileType(.audio)])
         collectionView.register(nibCell: AudioSelectionCollectionViewCell.self)
         smallPlayer.delegates.add(self)
@@ -29,10 +29,10 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     }
     
     override func isObjctSelected(object: BaseDataSourceItem) -> Bool {
-        if let firstObject = selectedItemsArray.first as? WrapData, let item = object as? WrapData{
-            if firstObject.metaData != nil{
+        if let firstObject = selectedItemsArray.first as? WrapData, let item = object as? WrapData {
+            if firstObject.metaData != nil {
                 return firstObject.uuid == item.uuid
-            }else{
+            } else {
                 return firstObject.id == item.id
             }
         }
@@ -40,13 +40,13 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     }
     
     func isObjectPlaying(item: BaseDataSourceItem) -> Bool {
-        guard let item = item as? Item, let itemThatPlayingRightNow = smallPlayer.currentItem else{
+        guard let item = item as? Item, let itemThatPlayingRightNow = smallPlayer.currentItem else {
             return false
         }
         
-        if itemThatPlayingRightNow.metaData != nil, item.metaData != nil{
+        if itemThatPlayingRightNow.metaData != nil, item.metaData != nil {
             return itemThatPlayingRightNow.uuid == item.uuid
-        }else{
+        } else {
             return itemThatPlayingRightNow.id == item.id
         }
     }
@@ -54,7 +54,7 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     
     // MARK: AudioSelectionCollectionViewCellDelegate
     
-    func onPlayButton(inCell: AudioSelectionCollectionViewCell){
+    func onPlayButton(inCell: AudioSelectionCollectionViewCell) {
         let indexPath = collectionView?.indexPath(for: inCell)
         guard let path = indexPath else {
             return
@@ -84,8 +84,8 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
 
 }
 
-extension AudioSelectionDataSource: MediaPlayerDelegate{
-    func didStopMediaPlayer(_ mediaPlayer: MediaPlayer){
+extension AudioSelectionDataSource: MediaPlayerDelegate {
+    func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {
         collectionView?.reloadData()
     }
 }

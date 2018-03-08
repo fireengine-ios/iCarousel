@@ -13,7 +13,7 @@ class UserProfileModuleInitializer: NSObject {
     //Connect with object on storyboard
     @IBOutlet weak var userprofileViewController: UserProfileViewController!
 
-    class func initializeViewController(with nibName:String, userInfo:AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController {
+    class func initializeViewController(with nibName: String, userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController {
         let viewController = UserProfileViewController(nibName: nibName, bundle: nil)
         let configurator = UserProfileModuleConfigurator()
         configurator.configure(viewController: viewController, userInfo: userInfo, isTurkcellUser: isTurkcellUser)

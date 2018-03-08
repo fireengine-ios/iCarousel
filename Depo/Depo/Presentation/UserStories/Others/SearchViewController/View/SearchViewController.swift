@@ -187,7 +187,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         
         suggestTableView.backgroundColor = .clear
         suggestTableView.separatorColor = .white
-        suggestTableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 10)
+        suggestTableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         suggestTableView.tableFooterView = UIView()
         suggestTableView.sectionHeaderHeight = 0
     }
@@ -331,7 +331,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     // MARK: - SearchViewInput
     
-    func getCollectionViewWidth() -> CGFloat{
+    func getCollectionViewWidth() -> CGFloat {
         return collectionView.frame.size.width
     }
     
@@ -388,7 +388,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
-    //MARK: - Under nav bar
+    // MARK: - Under nav bar
     
     func setupUnderNavBarBar(withConfig config: GridListTopBarConfig) {
         guard let unwrapedTopBar = underNavBarBar else {
@@ -417,7 +417,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         view.layoutIfNeeded()
     }
     
-    //MARK: - Keyboard
+    // MARK: - Keyboard
     
     @objc override func showKeyBoard(notification: NSNotification) {
         super.showKeyBoard(notification: notification)
@@ -432,7 +432,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         collectionView.contentInset = .zero
     }
     
-    //MARK: - TabBar
+    // MARK: - TabBar
     
     private func showTabBar() {
         needShowTabBar = true
@@ -455,7 +455,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
 }
 
-//MARK: - UITableViewDelagate & DataSource 
+// MARK: - UITableViewDelagate & DataSource 
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     

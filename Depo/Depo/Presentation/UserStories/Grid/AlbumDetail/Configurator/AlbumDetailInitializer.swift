@@ -11,11 +11,11 @@ import UIKit
 class AlbumDetailModuleInitializer: NSObject {
     
     static var baseSortTypes: [MoreActionsConfig.SortRullesType] {
-        return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+        return [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
     //Connect with object on storyboard
-    class func initializeAlbumDetailController(with nibName:String, album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
+    class func initializeAlbumDetailController(with nibName: String, album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.album = album
         viewController.needShowTabBar = true

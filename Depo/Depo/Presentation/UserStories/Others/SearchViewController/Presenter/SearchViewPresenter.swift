@@ -66,7 +66,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         ItemOperationManager.default.startUpdateView(view: dataSource)
     }
     
-    //MARK: - UnderNavBarBar/TopBar
+    // MARK: - UnderNavBarBar/TopBar
     
     private func setupTopBar() {
         guard let unwrapedConfig = topBarConfig else {
@@ -165,7 +165,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         moduleOutput?.previewSearchResultsHide()
     }
     
-    func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
+    func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         if item.fileType.isFaceImageType {
             openFaceImage(item: item)
         } else if item.fileType.isFaceImageAlbum {
@@ -181,13 +181,13 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
-        let allItems = items.flatMap{ return $0 }
+        let allItems = items.flatMap { $0 }
         if item.fileType.isDocument {
-            return allItems.filter{ $0.fileType.isDocument }
+            return allItems.filter { $0.fileType.isDocument }
         } else if item.fileType == .video || item.fileType == .image {
-            return allItems.filter{ ($0.fileType == .video) || ($0.fileType == .image) }
+            return allItems.filter { ($0.fileType == .video) || ($0.fileType == .image) }
         }
-        return allItems.filter{ $0.fileType == item.fileType }
+        return allItems.filter { $0.fileType == item.fileType }
     }
     
     func getCellSizeForList() -> CGSize {
@@ -195,7 +195,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }    
     
     func getCellSizeForGreed() -> CGSize {
-        var cellWidth:CGFloat = 180
+        var cellWidth: CGFloat = 180
         
         if (Device.isIpad) {
             cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIpad - 1))/NumericConstants.numerCellInDocumentLineOnIpad
@@ -217,12 +217,12 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         setupNewBottomBarConfig()
         log.debug("SearchViewPresenter onChangeSelectedItemsCount")
         
-        if (selectedItemsCount == 0){
+        if (selectedItemsCount == 0) {
             log.debug("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
             
             bottomBarPresenter?.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
-        }else{
+        } else {
             log.debug("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
             
             bottomBarPresenter?.show(animated: true, onView: nil)
@@ -278,8 +278,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             
             //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
             
-            if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image } ) {
-                let index = actionTypes.index(where: { return $0 == .createStory})!
+            if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image }) {
+                let index = actionTypes.index(where: { return $0 == .createStory })!
                 actionTypes.remove(at: index)
             }
             
@@ -287,16 +287,16 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                 actionTypes.remove(at: renameIndex)
             }
             
-            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: {$0.fileType == .image}) {
+            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
                 actionTypes.remove(at: printIndex)
             }
             
-            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: {$0.fileType == .image}) {
+            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: { $0.fileType == .image }) {
                 actionTypes.remove(at: editIndex)
             }
             
             if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                let serverObjects = selectedItems.filter({ return !$0.isLocalItem })
+                let serverObjects = selectedItems.filter({ !$0.isLocalItem })
                 if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
                 } else if selectedItems is [Item] {
@@ -352,7 +352,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         router.openAlbum(item: album)
     }
     
-    //MARK: - Spinner
+    // MARK: - Spinner
     
     private func showSpinner() {
         showedSpinner = true
@@ -390,13 +390,13 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     
-    //MARK: - View output/TopBar/UnderNavBarBar Delegates
+    // MARK: - View output/TopBar/UnderNavBarBar Delegates
     
     func viewAppearanceChangedTopBar(asGrid: Bool) {
         viewAppearanceChanged(asGrid: asGrid)
     }
     
-    func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
+    func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType) {
 //        sortedPushed(with: rule.sortedRulesConveted)
     }
     
@@ -404,17 +404,17 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         
     }
     
-    //MARK: - MoreActionsViewDelegate
+    // MARK: - MoreActionsViewDelegate
     
-    func viewAppearanceChanged(asGrid: Bool){
-        if (asGrid){
+    func viewAppearanceChanged(asGrid: Bool) {
+        if (asGrid) {
             dataSource.updateDisplayngType(type: .greed)
-        }else{
+        } else {
             dataSource.updateDisplayngType(type: .list)
         }
     }
     
-    //MARK: - BaseFilesGreedModuleInput
+    // MARK: - BaseFilesGreedModuleInput
     
     var selectedItems: [BaseDataSourceItem] {
         return dataSource.getSelectedItems()

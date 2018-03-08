@@ -10,7 +10,7 @@ import UIKit
 
 class WrapperedItemUtil: NSObject {
     
-    class func getSmallPreviewImageForWrapperedObject(fileType: FileType) -> UIImage?{
+    class func getSmallPreviewImageForWrapperedObject(fileType: FileType) -> UIImage? {
         var imageName = "fileIconUnknown"
         
         switch fileType {
@@ -67,7 +67,7 @@ class WrapperedItemUtil: NSObject {
         return UIImage(named: imageName)
     }
     
-    class func getPreviewImageForWrapperedObject(fileType: FileType) -> UIImage?{
+    class func getPreviewImageForWrapperedObject(fileType: FileType) -> UIImage? {
         var imageName = "fileBigIconUnknown"
         switch fileType {
         case .image:
@@ -124,7 +124,7 @@ class WrapperedItemUtil: NSObject {
         return UIImage(named: imageName)
     }
     
-    class func getSmallPreviewImageForNotSelectedWrapperedObject(fileType: FileType) -> UIImage?{
+    class func getSmallPreviewImageForNotSelectedWrapperedObject(fileType: FileType) -> UIImage? {
         var imageName = "fileIconSmallUnknownNotSelected"
         switch fileType {
         case .image:

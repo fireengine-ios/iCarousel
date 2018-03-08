@@ -55,4 +55,3 @@ extension FaceImagePresenter: FaceImageInteractorOutput {
         view?.showfailedChangeFaceImageStatus()
     }
 }
-
