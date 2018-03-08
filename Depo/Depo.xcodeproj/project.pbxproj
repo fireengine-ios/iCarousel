@@ -258,6 +258,7 @@
 		78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */; };
 		78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */; };
 		7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */; };
+		7A92642E2051202200D45F59 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		7C00FE191F5957570041D041 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE161F5957570041D041 /* AppRater.bundle */; };
 		7C00FE1A1F5957570041D041 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00FE181F5957570041D041 /* AppRater.m */; };
 		7C00FE1C1F5958380041D041 /* SingletonStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C00FE1B1F5958380041D041 /* SingletonStorage.swift */; };
@@ -11510,6 +11511,7 @@
 				8C06B0732008AD71003D8E05 /* paylas_fb@2x.png in Resources */,
 				8C06AEE72008AD70003D8E05 /* bottomright@3x.png in Resources */,
 				8C06B0E32008AD71003D8E05 /* sample_vintage@3x.png in Resources */,
+				7A92642E2051202200D45F59 /* PopUpController.xib in Resources */,
 				8C0E90051FDEBDFF00789C91 /* AutoSyncSwitcherTableViewCell.xib in Resources */,
 				8C06B17F2008AD72003D8E05 /* turuncu.png in Resources */,
 				8C06AFE52008AD71003D8E05 /* kare.png in Resources */,
