@@ -24,12 +24,12 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
-        interactor.prepareCellModels()
+        interactor.prepareCellsModels()
     }
     
-    func prepaire(syncSettings: AutoSyncSettings) {
-        compliteAsyncOperationEnableScreen()
-        view.prepaire(syncSettings: syncSettings)
+    func preperedCellsModels(models: [AutoSyncModel]) {
+         compliteAsyncOperationEnableScreen()
+        view.preperedCellsModels(models: models)
     }
     
     func skipForNowPressed() {
@@ -44,30 +44,29 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func change(settings: AutoSyncSettings) {
+    func saveChanges(setting: SettingsAutoSyncModel) {
         if !fromSettings {
-            let photoOption = settings.photoSetting.option
-            let videoOption = settings.videoSetting.option
-            let dataSyncEnabled = settings.isAutoSyncEnabled && (photoOption == .wifiAndCellular || videoOption == .wifiAndCellular)
+            let dataSyncEnabled = setting.isAutoSyncEnable && (setting.mobileDataPhotos == true || setting.mobileDataVideo == true)
             if dataSyncEnabled {
                 router.showSyncOverPopUp(okHandler: {[weak self] in
                     self?.router.routNextVC()
-                    self?.interactor.onSave(settings: settings)
+                    self?.interactor.onSaveSettings(setting: setting)
                 })
             } else {
                 router.routNextVC()
-                save(settings: settings)
+                saveSettings(setting)
             }
         } else {
-            save(settings: settings)
+            saveSettings(setting)
         }
     }
     
-    func save(settings: AutoSyncSettings) {
-        interactor.onSave(settings: settings)
+    func saveSettings(_ setting: SettingsAutoSyncModel) {
+        interactor.onSaveSettings(setting: setting)
     }
     
-    func onSettingSaved(){
+    
+    func onSettingSaved() {
         
     }
     

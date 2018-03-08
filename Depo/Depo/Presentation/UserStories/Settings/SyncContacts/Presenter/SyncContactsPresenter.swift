@@ -20,7 +20,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     var isBackUpAvailable: Bool { return contactSyncResponse != nil }
     let reachability = ReachabilityService()
     
-    //MARK: view out
+    // MARK: view out
     func viewIsReady() {
         view.setInitialState()
         
@@ -39,7 +39,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         }
     }
     
-    //MARK: Interactor Output
+    // MARK: Interactor Output
     
     func showError(errorType: SyncOperationErrors) {
         view.setStateWithoutBackUp()
@@ -117,7 +117,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     private func proccessOperation(_ operationType: SyncOperationType) {
         if !self.reachability.isReachable &&
-            (operationType == .backup || operationType == .restore || operationType == .analyze)  {
+            (operationType == .backup || operationType == .restore || operationType == .analyze) {
             router.goToConnectedToNetworkFailed()
             return
         }

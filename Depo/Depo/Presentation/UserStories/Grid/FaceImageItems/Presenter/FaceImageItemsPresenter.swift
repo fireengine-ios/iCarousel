@@ -98,7 +98,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         return faceImageType == .people || faceImageType == .things
     }
     
-    // MARK: -  Utility methods
+    // MARK: - Utility methods
     
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
         self.isChangeVisibilityMode = isChangeVisibilityMode

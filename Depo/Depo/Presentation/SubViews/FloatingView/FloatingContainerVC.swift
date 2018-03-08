@@ -46,7 +46,7 @@ class FloatingContainerVC: UIViewController, UIPopoverPresentationControllerDele
     }
     
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        childViewControllers.forEach({$0.removeFromParentViewController()})
+        childViewControllers.forEach({ $0.removeFromParentViewController() })
         return true
     }
     

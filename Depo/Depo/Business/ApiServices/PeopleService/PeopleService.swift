@@ -63,7 +63,7 @@ final class FaceImageThumbnailsParameters: BaseRequestParametrs {
         }
         
         let searchWithParam = String(format: format)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -174,7 +174,7 @@ final class PeopleItemsService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .image)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         let param = PeoplePageParameters(pageSize: requestSize, pageNumber: currentPage)
         
         service.getPeoplePage(param: param, success: { [weak self] (response) in
@@ -206,7 +206,7 @@ final class PeopleItemsService: RemoteItemsService {
 final class PeopleParameters: BaseRequestParametrs {
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.people)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -219,7 +219,7 @@ final class PeopleAlbumParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleAlbum, id)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -232,7 +232,7 @@ final class PeopleAlbumsParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleAlbums, id)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -247,7 +247,7 @@ final class PeoplePageParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peoplePage, pageSize, pageNumber)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -262,8 +262,7 @@ final class PeopleChangeVisibilityParameters: BaseRequestParametrs {
         var dict: [String: Any] = [:]
         
         peoples.forEach {
-            if let id = $0.responseObject.id
-                ,let isVisibility = $0.responseObject.visible{
+            if let id = $0.responseObject.id, let isVisibility = $0.responseObject.visible {
                 dict.updateValue(isVisibility, forKey: "\(id)")
             }
         }
@@ -273,7 +272,7 @@ final class PeopleChangeVisibilityParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.personVisibility)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -286,7 +285,7 @@ final class PeopleSearchParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleSearch, text)
-        return URL.encodingURL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL.encodingURL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -305,7 +304,7 @@ final class PeopleMergeParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleMerge, personId)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -330,7 +329,7 @@ final class PeopleChangeNameParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleChangeName, personId)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -338,12 +337,12 @@ final class DeletePhotosFromPeopleAlbum: BaseRequestParametrs {
     let id: Int64
     let photos: [Item]
     
-    init (id: Int64, photos: [Item]){
+    init (id: Int64, photos: [Item]) {
         self.id = id
         self.photos = photos
     }
     
-    override var requestParametrs: Any{
+    override var requestParametrs: Any {
         let photosUUID = photos.map { $0.id }
         return photosUUID
     }

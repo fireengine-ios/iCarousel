@@ -20,7 +20,7 @@ class SelectNameModuleConfigurator {
         }
     }
     
-    private func configure(viewController: SelectNameViewController, moduleType: SelectNameScreenType, rootFolderID: String? , isFavorites: Bool = false) {
+    private func configure(viewController: SelectNameViewController, moduleType: SelectNameScreenType, rootFolderID: String?, isFavorites: Bool = false) {
         
         let router = SelectNameRouter()
         

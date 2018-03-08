@@ -10,7 +10,7 @@ import UIKit
 
 class MenuButton: CircleButton {
 
-    override func configurate(){
+    override func configurate() {
         super.configurate()
         
         bottomTitleLabel?.textColor = UIColor.white
@@ -21,7 +21,7 @@ class MenuButton: CircleButton {
         setTitleColor(ColorConstants.selectedBottomBarButtonColor, for: .selected)
     }
     
-    override func getSpaceBetwinImageAndLabel() -> CGFloat{
+    override func getSpaceBetwinImageAndLabel() -> CGFloat {
         let space: CGFloat = 2
         return space
     }

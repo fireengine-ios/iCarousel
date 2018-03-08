@@ -33,7 +33,7 @@ extension UIImage {
         
         let drawRect = CGRect(x: 0, y: 0,
                               width: rect.width,
-                              height:rect.height)
+                              height: rect.height)
         
         UIGraphicsBeginImageContext(rect)
         draw(in: drawRect)
@@ -48,7 +48,7 @@ extension UIImageView {
     func addGradientLayer(colors: [UIColor]) -> CALayer {
         let gradient = CAGradientLayer()
         gradient.frame = frame
-        gradient.colors = colors.map{$0.cgColor}
+        gradient.colors = colors.map { $0.cgColor }
         layer.addSublayer(gradient)
         return gradient
     }

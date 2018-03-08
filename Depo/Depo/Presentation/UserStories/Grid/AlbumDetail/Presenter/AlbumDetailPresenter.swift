@@ -10,7 +10,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     
     weak var albumDetailModuleOutput: AlbumDetailModuleOutput?
     
-    func operationStarted(type: ElementTypes){
+    func operationStarted(type: ElementTypes) {
         
     }
     
@@ -55,7 +55,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         guard var barConfig = interactor.bottomBarConfig else {
                 return
         }
-        let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
+        let allSelectedItemsTypes = selectedItems.map { $0.fileType }
         if allSelectedItemsTypes.contains(.image) {
             let actionTypes = barConfig.elementsConfig + [.print]
             

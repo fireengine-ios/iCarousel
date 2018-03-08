@@ -131,4 +131,3 @@ final class ImageScrollView: UIScrollView {
         imageView.frame = frameToCenter
     }
 }
-

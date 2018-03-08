@@ -17,8 +17,8 @@ extension JSON {
     public var date: Date? {
         get {
             guard let doubleTime = self.number?.doubleValue else {
-                if let string = self.string{
-                    if let doubleValue = Double(string){
+                if let string = self.string {
+                    if let doubleValue = Double(string) {
                         return Date(timeIntervalSince1970: doubleValue / Milisec)
                     }
                 }

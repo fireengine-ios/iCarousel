@@ -10,7 +10,7 @@ import UIKit
 
 class CollectionViewCellForVideo: CollectionViewCellForPhoto {
     
-    @IBOutlet weak var videoLengthLabel:UILabel!
+    @IBOutlet weak var videoLengthLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,7 +21,7 @@ class CollectionViewCellForVideo: CollectionViewCellForPhoto {
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
-        guard let wrappered = wrappedObj as? WrapData else{
+        guard let wrappered = wrappedObj as? WrapData else {
             return
         }
         

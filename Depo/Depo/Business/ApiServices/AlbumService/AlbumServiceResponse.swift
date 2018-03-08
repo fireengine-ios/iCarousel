@@ -56,7 +56,7 @@ class AlbumResponse: ObjectRequestResponse {
     
     override func mapping() {
         let  tmpList = json?.array
-        if let result = tmpList?.flatMap( { AlbumServiceResponse(withJSON: $0)}) {
+        if let result = tmpList?.flatMap({ AlbumServiceResponse(withJSON: $0) }) {
             list = result
         }
     }

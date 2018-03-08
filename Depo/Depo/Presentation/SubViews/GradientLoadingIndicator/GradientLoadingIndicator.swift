@@ -58,7 +58,7 @@ class GradientLoadingIndicator: UIView {
     }
     
     private func addMaskGradient() {
-        gradientView.setup(withFrame: bounds, startColor: UIColor.lrCryonBlue, endColoer: UIColor.lrMintGreen, startPoint: CGPoint(x: 0, y: 1), endPoint: CGPoint(x:  1, y: 0))
+        gradientView.setup(withFrame: bounds, startColor: UIColor.lrCryonBlue, endColoer: UIColor.lrMintGreen, startPoint: CGPoint(x: 0, y: 1), endPoint: CGPoint(x: 1, y: 0))
         addSubview(gradientView)
         
         gradientView.layer.mask = circlePathLayer

@@ -47,8 +47,8 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        let settings = dataSource.createAutoSyncSettings()
-        output.save(settings: settings)
+        let model = dataSource.createSettingsAutoSyncModel()
+        output.saveSettings(model)
     }
     
     override func viewDidLoad() {
@@ -78,17 +78,17 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
 
     // MARK: buttons actions
     
-    @IBAction func onStartUsingButton(){
-        let settings = dataSource.createAutoSyncSettings()
+    @IBAction func onStartUsingButton() {
+        let model = dataSource.createSettingsAutoSyncModel()
         
-        if !settings.isAutoSyncEnabled {
+        if !model.isAutoSyncEnable {
             MenloworksEventsService.shared.onFirstAutosyncOff()
         }
         
-        output.change(settings: settings)
+        output.saveChanges(setting: model)
     }
     
-    @IBAction func onSkipButtn(){
+    @IBAction func onSkipButtn() {
         output.skipForNowPressed()
     }
 
@@ -96,8 +96,8 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     func setupInitialState() {
     }
     
-    func prepaire(syncSettings: AutoSyncSettings) {
-        dataSource.showCells(from: syncSettings)
+    func preperedCellsModels(models: [AutoSyncModel]) {
+        dataSource.showCellsFromModels(models: models)
     }
     
     func reloadTableView() {
@@ -115,7 +115,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     }
     
     func mobileDataEnabledFor(model: AutoSyncModel) {
-        if fromSettings, isFirstTime{
+        if fromSettings, isFirstTime {
             isFirstTime = false
             
             let router = RouterVC()

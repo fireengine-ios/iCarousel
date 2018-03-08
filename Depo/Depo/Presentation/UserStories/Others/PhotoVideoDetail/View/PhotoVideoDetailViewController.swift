@@ -158,11 +158,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
-    @objc private func onCancelButton(){
+    @objc private func onCancelButton() {
         hideView()
     }
     
-    private func hideView(){
+    private func hideView() {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         dismiss(animated: true)
     }
@@ -298,7 +298,7 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         return false
     }
     
-    func finishedUploadFile(file: WrapData){
+    func finishedUploadFile(file: WrapData) {
         output.setSelectedItemIndex(selectedIndex: selectedIndex)
         setupNavigationBar()
     }
@@ -365,7 +365,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                 }
                 
             case .remoteUrl(_):
-                let playerItem = AVPlayerItem(url:url)
+                let playerItem = AVPlayerItem(url: url)
                 play(item: playerItem)
             }
         }

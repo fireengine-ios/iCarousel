@@ -22,7 +22,7 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var greedSelectionIcon: UIImageView!
     @IBOutlet weak var greedShadowView: ShadowView!
     
-    private func isBigSize() -> Bool{
+    private func isBigSize() -> Bool {
         return frame.size.height > NumericConstants.albumCellListHeight
     }
     
@@ -38,8 +38,8 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
         
     }
     
-    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem){
-        guard let album = wrappedObj as? AlbumItem else{
+    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
+        guard let album = wrappedObj as? AlbumItem else {
             return
         }
         
@@ -54,7 +54,7 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
         
     }
     
-    override func setSelection(isSelectionActive: Bool, isSelected: Bool){
+    override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         listSelectionIcon.isHidden = !isSelectionActive
         listSelectionIcon.image = UIImage(named: isSelected ? "selected" : "notSelected")
         listViewIcon.setBorderVisibility(visibility: isSelected)

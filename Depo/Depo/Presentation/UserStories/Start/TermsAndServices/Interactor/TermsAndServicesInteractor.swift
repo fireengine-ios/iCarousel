@@ -79,8 +79,8 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         })
     }
     
-    func applyEula(){
-        guard let eula_ = eula, let eulaID = eula_.id else{
+    func applyEula() {
+        guard let eula_ = eula, let eulaID = eula_.id else {
             return
         }
         

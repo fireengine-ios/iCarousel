@@ -9,12 +9,12 @@
 import UIKit
 class CustomSwitch: UISwitch {
     
-    override init(frame:CGRect) {
-        super.init(frame:frame)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configure()
     }
     
-    required init?(coder aDecoder: NSCoder){
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configure()
     }

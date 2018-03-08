@@ -12,8 +12,8 @@ import Foundation
 public let autoSyncStatusDidChangeNotification = NSNotification.Name("AutoSyncStatusChangedNotification")
 
 protocol ItemSyncService: class {
-    var status: AutoSyncStatus {get}
-    weak var delegate: ItemSyncServiceDelegate? {get set}
+    var status: AutoSyncStatus { get }
+    weak var delegate: ItemSyncServiceDelegate? { get set }
     
     func start(newItems: Bool)
     func stop()
@@ -52,7 +52,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     weak var delegate: ItemSyncServiceDelegate?
     
     
-    //MARK: - Public ItemSyncService functions
+    // MARK: - Public ItemSyncService functions
     
     func start(newItems: Bool) {
         log.debug("ItemSyncServiceImpl start")
@@ -83,7 +83,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         status = .failed
     }
     
-    //MARK: - Private
+    // MARK: - Private
     
     private func sync() {
         log.debug("ItemSyncServiceImpl sync")
@@ -172,18 +172,17 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     
-    //MARK: - Override me
+    // MARK: - Override me
     
-    func itemsSortedToUpload(completion: @escaping (_ items: [WrapData])->Void) {
+    func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
         //
     }
 
 }
 
 
-
 extension CoreDataStack {
-    func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData])->Void) {
+    func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData]) -> Void) {
         DispatchQueue.main.async {
             let localItems = self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
             
@@ -202,7 +201,7 @@ extension CoreDataStack {
         }
     }
     
-    private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?)->() ) {
+    private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?)->Void ) {
         guard let oldestItemDate = localItems.last?.metaDate else {
             handler([], nil)
             return
@@ -250,7 +249,3 @@ extension CoreDataStack {
         }, newFieldValue: fieldValue)
     }
 }
-
-
-
-

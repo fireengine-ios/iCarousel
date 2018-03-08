@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsModuleInitializer: NSObject {
 
-    class func initializeViewController(with nibName:String) -> UIViewController {
+    class func initializeViewController(with nibName: String) -> UIViewController {
         let viewController = SettingsViewController(nibName: nibName, bundle: nil)
         let configurator = SettingsModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)

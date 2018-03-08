@@ -11,7 +11,7 @@ class IntroduceInteractor: IntroduceInteractorInput {
     weak var output: IntroduceInteractorOutput!
     let introduceDataStorage = IntroduceDataStorage()
     
-    func PrepareModels(){
+    func PrepareModels() {
         output.models(models: self.introduceDataStorage.getModels())
     }
     

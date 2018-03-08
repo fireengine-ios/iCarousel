@@ -41,7 +41,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         return CGSize(width: 100, height: 136)
     }
     
-    override func sortedPushed(with rule: SortedRules){
+    override func sortedPushed(with rule: SortedRules) {
         log.debug("AlbumsPresenter sortedPushed")
         
         sortedRule = rule
@@ -56,7 +56,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         interactor.getAllItems(sortBy: sortedRule)
     }
     
-    override func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
+    override func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType) {
         
         var sortRule: SortedRules
         switch rule {

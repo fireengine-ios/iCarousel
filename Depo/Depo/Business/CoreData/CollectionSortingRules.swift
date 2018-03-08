@@ -8,13 +8,13 @@
 
 import Foundation
 
-typealias SortingAgregate = (sortDescriptors:[NSSortDescriptor], section:String? )
+typealias SortingAgregate = (sortDescriptors: [NSSortDescriptor], section: String? )
 
 class CollectionSortingRules {
     
     let rule: SortingAgregate
     
-    init(sortingRules : SortedRules) {
+    init(sortingRules: SortedRules) {
         
         switch sortingRules {
         case .lettersAZ:
@@ -56,7 +56,7 @@ class CollectionSortingRules {
         return sorting(sortingFieldName: "nameValue", ascending: ascending, needSepareteBySection: true, sectionFieldName: "fileNameFirstChar")
     }
     
-    static func sortByCreateDate(ascending: Bool,  section: Bool) -> SortingAgregate {
+    static func sortByCreateDate(ascending: Bool, section: Bool) -> SortingAgregate {
         return sorting(sortingFieldName: "creationDateValue", ascending: ascending, needSepareteBySection: true, sectionFieldName: section ? "monthValue" : nil)
     }
     
@@ -64,7 +64,7 @@ class CollectionSortingRules {
         return sorting(sortingFieldName: "fileSizeValue", ascending: ascending)
     }
     
-    private static func sorting(sortingFieldName:String, ascending: Bool, needSepareteBySection: Bool = false, sectionFieldName: String? = nil) -> SortingAgregate {
+    private static func sorting(sortingFieldName: String, ascending: Bool, needSepareteBySection: Bool = false, sectionFieldName: String? = nil) -> SortingAgregate {
         var array = [NSSortDescriptor]()
         let sortDescr = NSSortDescriptor(key: sortingFieldName, ascending: ascending)
         array.append(sortDescr)

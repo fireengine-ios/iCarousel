@@ -10,7 +10,7 @@ import UIKit
 
 class VisualMusicPlayerModuleInitializer: NSObject {
     
-    class func initializeVisualMusicPlayerController(with nibName:String) -> UIViewController {
+    class func initializeVisualMusicPlayerController(with nibName: String) -> UIViewController {
         let viewController = VisualMusicPlayerViewController(nibName: nibName, bundle: nil)
         let configurator = VisualMusicPlayerModuleConfigurator()
         

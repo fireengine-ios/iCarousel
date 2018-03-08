@@ -11,11 +11,11 @@ import Photos
 
 typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Swift.Void
 
-typealias FileDataSorceImg = (_ image: UIImage?) -> ()
+typealias FileDataSorceImg = (_ image: UIImage?) -> Void
 
 typealias AssetInfo = (url: URL, name: String, size: UInt64, md5: String)
 
-typealias AssetsList = (_ assets: [PHAsset] ) -> ()
+typealias AssetsList = (_ assets: [PHAsset] ) -> Void
 
 
 protocol LocalMediaStorageProtocol {
@@ -26,7 +26,7 @@ protocol LocalMediaStorageProtocol {
     
     func getAllImagesAndVideoAssets() -> [PHAsset]
     
-    func removeAssets(deleteAsset: [PHAsset],success: FileOperation?, fail: FailResponse?)
+    func removeAssets(deleteAsset: [PHAsset], success: FileOperation?, fail: FailResponse?)
     
     func copyAssetToDocument(asset: PHAsset) -> URL
     
@@ -73,7 +73,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     
-    //MARK: Alerts
+    // MARK: Alerts
     private func showAccessAlert() {
         log.debug("LocalMediaStorage showAccessAlert")
 
@@ -136,7 +136,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return mediaContent
     }
     
-    func getAllAlbums(completion: @escaping (_ albums: [AlbumItem])->Void) {
+    func getAllAlbums(completion: @escaping (_ albums: [AlbumItem]) -> Void) {
         log.debug("LocalMediaStorage getAllAlbums")
 
         askPermissionForPhotoFramework(redirectToSettings: true) { (accessGranted, _) in
@@ -206,7 +206,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                  image: image)
     }
     
-    func getImage(asset: PHAsset, contentSize: CGSize, convertToSize: CGSize, image: @escaping FileDataSorceImg) -> Void {
+    func getImage(asset: PHAsset, contentSize: CGSize, convertToSize: CGSize, image: @escaping FileDataSorceImg) {
         log.debug("LocalMediaStorage getImage")
         
         let scalling: PhotoManagerCallBack = { input, dict in
@@ -224,7 +224,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         queue.addOperation(operation)
     }
     
-    func getImage(asset: PHAsset, contentSize: CGSize, image: @escaping FileDataSorceImg) -> Void {
+    func getImage(asset: PHAsset, contentSize: CGSize, image: @escaping FileDataSorceImg) {
         log.debug("LocalMediaStorage getImage")
 
         let callBack: PhotoManagerCallBack = { (newImg, _) in
@@ -240,7 +240,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     
-    // MARK:  insert remove Asset
+    // MARK: insert remove Asset
     
     func removeAssets(deleteAsset: [PHAsset], success: FileOperation?, fail: FailResponse?) {
         log.debug("LocalMediaStorage removeAssets")
@@ -405,10 +405,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         switch  asset.mediaType {
         case .image:
-            return copyImageAsset(asset:asset)
+            return copyImageAsset(asset: asset)
         
         case .video:
-            return copyVideoAsset(asset:asset)
+            return copyVideoAsset(asset: asset)
         
         default:
             return LocalMediaStorage.defaultUrl
@@ -508,10 +508,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
 
         switch asset.mediaType {
         case .image:
-            return fullInfoAboutImageAsset(asset:asset)
+            return fullInfoAboutImageAsset(asset: asset)
             
         case . video:
-            return fullInfoAboutVideoAsset(asset:asset)
+            return fullInfoAboutVideoAsset(asset: asset)
         
         default:
             return (url: LocalMediaStorage.defaultUrl, name: "", size: 0, md5: LocalMediaStorage.noneMD5)
@@ -537,7 +537,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     }
                     md5 = String(format: "%@%i", originalFileName, size)
                     semaphore.signal()
-                } catch  {
+                } catch {
                     semaphore.signal()
                 }
             } else {
@@ -586,31 +586,31 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func cancelRequest(asset: PHAsset) {
         log.debug("LocalMediaStorage cancelRequest")
 
-        if let all:[GetImageOperation] =  queue.operations as? [GetImageOperation] {
-            let forAssets = all.filter { return $0.asset == asset }
+        if let all: [GetImageOperation] =  queue.operations as? [GetImageOperation] {
+            let forAssets = all.filter { $0.asset == asset }
             forAssets.forEach { $0.cancel() }
         }
     }
 }
 
-typealias PhotoManagerCallBack = (UIImage?, [AnyHashable : Any]?) -> Swift.Void
+typealias PhotoManagerCallBack = (UIImage?, [AnyHashable: Any]?) -> Swift.Void
 
-typealias PhotoManagerOriginalVideoCallBack = (AVAsset?, AVAudioMix?, [AnyHashable : Any]?) -> Swift.Void
+typealias PhotoManagerOriginalVideoCallBack = (AVAsset?, AVAudioMix?, [AnyHashable: Any]?) -> Swift.Void
 
-typealias PhotoManagerOriginalCallBack = (Data?, String?, UIImageOrientation, [AnyHashable : Any]?) -> Swift.Void
+typealias PhotoManagerOriginalCallBack = (Data?, String?, UIImageOrientation, [AnyHashable: Any]?) -> Swift.Void
 
 
 class GetImageOperation: Operation {
     
     let photoManager: PHImageManager
     
-    let callback: (UIImage?, [AnyHashable : Any]?) -> Swift.Void
+    let callback: (UIImage?, [AnyHashable: Any]?) -> Swift.Void
     
     let asset: PHAsset
     
     let targetSize: CGSize
     
-    init(photoManager: PHImageManager, asset: PHAsset,targetSize: CGSize, callback: @escaping PhotoManagerCallBack) {
+    init(photoManager: PHImageManager, asset: PHAsset, targetSize: CGSize, callback: @escaping PhotoManagerCallBack) {
         
         self.photoManager = photoManager
         self.callback = callback

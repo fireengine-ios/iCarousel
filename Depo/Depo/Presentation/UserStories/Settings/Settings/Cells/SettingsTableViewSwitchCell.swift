@@ -40,7 +40,7 @@ class SettingsTableViewSwitchCell: UITableViewCell {
         actionDelegate?.switchToggled(positionOn: stateSwitch.isOn, cell: self)
     }
     
-    func setTextForLabel(titleText: String, needShowSeparator:Bool) {
+    func setTextForLabel(titleText: String, needShowSeparator: Bool) {
         titleLabel.text = titleText
         separator.isHidden = !needShowSeparator
     }

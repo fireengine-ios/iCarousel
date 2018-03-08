@@ -12,7 +12,7 @@ final class FaceImageChangeCoverRouter: BaseFilesGreedRouter {
     
 }
 
-//MARK: - FaceImageChangeCoverRouterInput
+// MARK: - FaceImageChangeCoverRouterInput
 
 extension FaceImageChangeCoverRouter: FaceImageChangeCoverRouterInput {
     

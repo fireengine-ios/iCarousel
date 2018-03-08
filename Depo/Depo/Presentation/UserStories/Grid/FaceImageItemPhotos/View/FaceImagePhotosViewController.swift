@@ -170,7 +170,7 @@ import UIKit
     
 }
 
-//MARK: - FaceImagePhotosViewInput
+// MARK: - FaceImagePhotosViewInput
 
 extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     

@@ -71,7 +71,7 @@ public class MediaItem: NSManagedObject {
         
         //LR-2356
         let albums = wrapData.albums?.map({ (albumUuid) -> MediaItemsAlbum in
-            return MediaItemsAlbum(uuid: albumUuid, context: context)
+            MediaItemsAlbum(uuid: albumUuid, context: context)
         })
         self.albums = NSOrderedSet(array: albums ?? [])
         

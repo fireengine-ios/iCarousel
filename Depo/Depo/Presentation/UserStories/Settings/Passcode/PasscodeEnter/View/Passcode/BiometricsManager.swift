@@ -55,7 +55,7 @@ final class BiometricsManagerImp: BiometricsManager {
     }
     
     lazy var biometricsTitle: String = {
-        return isAvailableFaceID ? TextConstants.passcodeFaceID : TextConstants.passcodeTouchID
+        isAvailableFaceID ? TextConstants.passcodeFaceID : TextConstants.passcodeTouchID
     }()
     
     /// You need to first call canEvaluatePolicy in order to get the biometry type.

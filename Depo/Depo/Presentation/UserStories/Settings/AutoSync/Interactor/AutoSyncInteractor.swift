@@ -13,20 +13,20 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     var uniqueUserID: String? = ""
     let localMediaStorage = LocalMediaStorage.default
 
-    func prepareCellModels() {
-        dataStorage.getAutoSyncSettingsForCurrentUser(success: { [weak self] (settings, uniqueUserId) in
-            self?.output.prepaire(syncSettings: settings)
+    func prepareCellsModels() {
+        dataStorage.getAutoSyncModelForCurrentUser(success: { [weak self] (models, uniqueUserId) in
+            self?.output.preperedCellsModels(models: models)
             self?.uniqueUserID = uniqueUserId
         })
     }
     
-    func onSave(settings: AutoSyncSettings) {
+    func onSaveSettings(setting: SettingsAutoSyncModel) {
         output.onSettingSaved()
         
-//        SyncServiceManager.shared.logChangesIfNeeded(settings: settings)
+        SyncServiceManager.shared.logChangesIfNeeded(settingsModel: setting)
         
-        dataStorage.save(autoSyncSettings: settings, uniqueUserId: uniqueUserID ?? "")
-        SyncServiceManager.shared.update(syncSettings: settings)
+        dataStorage.saveAutoSyncModel(model: setting, uniqueUserId: uniqueUserID ?? "")
+        SyncServiceManager.shared.updateSyncSettings(settingsModel: setting)
     }
     
     func checkPermissionForPhoto() {

@@ -10,7 +10,7 @@ import UIKit
 
 class CircleYellowButton: WhiteButtonWithRoundedCorner {
     
-    override func configurate(){
+    override func configurate() {
         super.configurate()
         backgroundColor = ColorConstants.yellowButtonColor
         setTitleColor(ColorConstants.whiteColor, for: .normal)

@@ -13,7 +13,7 @@ class FAQSectionItem {
 
     init(title: String) {
         name = title
-        selected = false;
+        selected = false
     }
     
 }

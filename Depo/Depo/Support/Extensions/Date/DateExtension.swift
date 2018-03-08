@@ -10,26 +10,26 @@ import UIKit
 
 protocol Components {
     
-    func getYear()->Int
+    func getYear() -> Int
     
-    func getMonth()->Int
+    func getMonth() -> Int
 }
 
 extension Date: Components {
     
-    func getYear()->Int{
+    func getYear() -> Int {
         let calendar = Calendar.current
         
         return calendar.component(.year, from: self)
     }
     
-    func getMonth()->Int{
+    func getMonth() -> Int {
         let calendar = Calendar.current
         
         return calendar.component(.month, from: self)
     }
     
-    func getDateInTextForCollectionViewHeader()->String{
+    func getDateInTextForCollectionViewHeader() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "LLLL yyyy"
         return formatter.string(from: self)
@@ -41,13 +41,13 @@ extension Date: Components {
         return formatter.string(from: self)
     }
     
-    func getDateInFormat(format: String)->String{
+    func getDateInFormat(format: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
     
-    func getTimeIntervalBetweenDateAndCurrentDate()->Int{
+    func getTimeIntervalBetweenDateAndCurrentDate() -> Int {
         let curentDate = Date()
         let deltaDate = curentDate - self.timeIntervalSince1970
         let calendar = Calendar.current

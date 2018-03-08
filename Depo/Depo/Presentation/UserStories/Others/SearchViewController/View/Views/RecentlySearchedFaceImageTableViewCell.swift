@@ -35,7 +35,7 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
         arrowWidth.constant = itemSize.width
     }
     
-    func configure(withItems items:[SuggestionObject]?, category: SearchCategory?) {
+    func configure(withItems items: [SuggestionObject]?, category: SearchCategory?) {
         self.category = category
         guard let newItems = items else {
             removeSubviews()

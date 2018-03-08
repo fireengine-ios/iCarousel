@@ -110,7 +110,7 @@ final class AlbumCard: BaseView {
         descriptionLabel.attributedText = attributedName
     }
     
-    @IBAction private func actionCloseButton(_ sender: UIButton){
+    @IBAction private func actionCloseButton(_ sender: UIButton) {
         deleteCard()
     }
     

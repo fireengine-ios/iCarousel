@@ -35,28 +35,28 @@ class CircleButton: UIButton {
         configurate()
     }
     
-    func configurate(){
+    func configurate() {
         bottomTitleLabel?.textAlignment = .center
         bottomTitleLabel?.textColor = ColorConstants.textGrayColor
         bottomTitleLabel?.minimumScaleFactor = 0.5
-        bottomTitleLabel?.adjustsFontSizeToFitWidth = true;
+        bottomTitleLabel?.adjustsFontSizeToFitWidth = true
         bottomTitleLabel?.numberOfLines = 0
-        var fontSize:CGFloat = 13.0
-        if (Device.isIpad){
+        var fontSize: CGFloat = 13.0
+        if (Device.isIpad) {
             fontSize = 16.0
         }
         bottomTitleLabel?.font = UIFont.TurkcellSaturaRegFont(size: fontSize)
         bottomTitleLabel?.text = titleString
     }
     
-    func setBottomTitleText(titleText: String){
+    func setBottomTitleText(titleText: String) {
         titleString = titleText
         bottomTitleLabel?.text = titleString
     }
     
-    func getSpaceBetwinImageAndLabel() -> CGFloat{
+    func getSpaceBetwinImageAndLabel() -> CGFloat {
         var space: CGFloat = 7
-        if (Device.isIpad){
+        if (Device.isIpad) {
             space = 15
         }
         return space

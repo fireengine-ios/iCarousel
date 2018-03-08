@@ -19,7 +19,7 @@ class Device {
         }
     }
 
-    static private let supportedLanguages = ["tr","en","uk","ru","de","ar","ro","es"]
+    static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es"]
     static private let defaultLocale = "en"
     
     static func documentsFolderUrl(withComponent: String ) -> URL {
@@ -49,7 +49,7 @@ class Device {
         return (UIDevice.current.userInterfaceIdiom == .phone) && (UIScreen.main.nativeBounds.height == 2436)
     }
     
-    static var isIpad:Bool {
+    static var isIpad: Bool {
         return UI_USER_INTERFACE_IDIOM() == .pad
     }
     
@@ -74,9 +74,9 @@ class Device {
         return t
     }
     
-    static var deviceInfo:[String:Any] {
+    static var deviceInfo: [String: Any] {
         
-        var result : [String:Any] = [:]
+        var result: [String: Any] = [:]
         let device =  UIDevice.current
         
         if let uuid = device.identifierForVendor?.uuidString {

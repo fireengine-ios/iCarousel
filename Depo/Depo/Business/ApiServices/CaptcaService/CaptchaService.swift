@@ -28,8 +28,8 @@ struct CaptchaParametr: RequestParametrs {
     }
     
     var patch: URL {
-        let patch_: String = String(format: RouteRequests.captcha,type, uuid)
-        return URL(string: patch_, relativeTo:RouteRequests.BaseUrl)!
+        let patch_: String = String(format: RouteRequests.captcha, type, uuid)
+        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -52,7 +52,7 @@ struct CaptchaParametrAnswer: RequestParametrs {
     
     var patch: URL {
         let patch_: String = String(format: RouteRequests.captcha, answer, uuid)
-        return URL(string: patch_, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -60,7 +60,7 @@ struct CaptchaParametrAnswer: RequestParametrs {
     }
 }
 
-final class CaptchaResponse: ObjectRequestResponse  {
+final class CaptchaResponse: ObjectRequestResponse {
     var data: Data?
     var type: CaptchaType? {
         if let htype: String = self.responseHeader?[HeaderConstant.ContentType] as? String {
@@ -90,7 +90,7 @@ final class CaptchaService: BaseRequestService {
     
     private(set) var uuid: String = UUID().uuidString
     
-    func getCaptcha(uuid: String? = nil, type: CaptchaType = .image, sucess:SuccessResponse?, fail: FailResponse?   ) {
+    func getCaptcha(uuid: String? = nil, type: CaptchaType = .image, sucess: SuccessResponse?, fail: FailResponse?   ) {
         log.debug("CaptchaService getCaptcha")
         
         if let uuid = uuid {
@@ -100,7 +100,7 @@ final class CaptchaService: BaseRequestService {
         }
         
         let param = CaptchaParametr(uuid: self.uuid, type: type.rawValue)
-        let handler = BaseResponseHandler<CaptchaResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat:.DataFormat)
+        let handler = BaseResponseHandler<CaptchaResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
         executeGetRequest(param: param, handler: handler)
     }
     

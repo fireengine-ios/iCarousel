@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MBProgressHUD
 
-//MARK:- WAITING
+// MARK: - WAITING
 
 protocol Waiting {
     
@@ -85,7 +85,7 @@ extension UIViewController: Waiting {
 }
 
 
-//MARK:- CustomNavController
+// MARK: - CustomNavController
 
 protocol CurrentNavController {
     var currentNavController: UINavigationController? { get }
@@ -96,4 +96,3 @@ extension UIViewController: CurrentNavController {
         return navigationController
     }
 }
-

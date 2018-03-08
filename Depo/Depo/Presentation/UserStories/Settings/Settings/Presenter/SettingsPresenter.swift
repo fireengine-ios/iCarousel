@@ -24,11 +24,11 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         interactor.getCellsData()
     }
     
-    func cellsDataForSettings(array: [[String]]){
+    func cellsDataForSettings(array: [[String]]) {
         view.showCellsData(array: array)
     }
     
-    func onLogout(){
+    func onLogout() {
         let controller = PopUpController.with(title: TextConstants.settingsViewLogoutCheckMessage,
                                               message: nil,
                                               image: .none,
@@ -43,7 +43,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func goToOnboarding(){
+    func goToOnboarding() {
         router.goToOnboarding()
     }
     
@@ -55,7 +55,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToImportPhotos()
     }
     
-    func goToAutoApload(){
+    func goToAutoApload() {
         router.goToAutoApload()
     }
     
@@ -63,7 +63,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToFaceImage()
     }
     
-    func goToHelpAndSupport(){
+    func goToHelpAndSupport() {
         router.goToHelpAndSupport()
     }
     
@@ -71,7 +71,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToUsageInfo()
     }
     
-    func onUpdatUserInfo(userInfo: AccountInfoResponse){
+    func onUpdatUserInfo(userInfo: AccountInfoResponse) {
         router.goToUserInfo(userInfo: userInfo, isTurkcellUser: interactor.isTurkcellUser)
     }
     
@@ -112,24 +112,24 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         return view as? Waiting
     }
     
-    //MARK: View input / PHOTO releated
+    // MARK: View input / PHOTO releated
     
     func photoCaptured(data: Data) {
         interactor.uploadPhoto(withPhoto: data)
     }
-    func onChangeUserPhoto(){
+    func onChangeUserPhoto() {
         view.showPhotoAlertSheet()
     }
     
-    func onChooseFromPhotoLibriary(onViewController viewController: UIViewController){
+    func onChooseFromPhotoLibriary(onViewController viewController: UIViewController) {
         CameraService().showImagesPicker(onViewController: viewController)
     }
     
-    func onChooseFromPhotoCamera(onViewController viewController: UIViewController){
+    func onChooseFromPhotoCamera(onViewController viewController: UIViewController) {
         CameraService().showCamera(onViewController: viewController)
     }
     
-    //MARK: - interactor output PhotoRelated
+    // MARK: - interactor output PhotoRelated
     
     func profilePhotoUploadSuccessed() {
         view.profileInfoChanged()

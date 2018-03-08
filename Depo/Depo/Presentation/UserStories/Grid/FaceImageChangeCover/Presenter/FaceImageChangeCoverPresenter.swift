@@ -34,7 +34,7 @@ final class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter {
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
 }
 
-//MARK: - FaceImageChangeCoverInteractorOutput
+// MARK: - FaceImageChangeCoverInteractorOutput
 
 extension FaceImageChangeCoverPresenter: FaceImageChangeCoverInteractorOutput {
     

@@ -61,24 +61,24 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
         navigationItem.leftBarButtonItem = barButtonLeft
     }
     
-    @objc func onNextButton(){
+    @objc func onNextButton() {
         output.onNextButton()
     }
     
-    @objc func onCancelButton(){
+    @objc func onCancelButton() {
         hideView()
     }
     
-    func hideView(){
+    func hideView() {
         dismiss(animated: true, completion: nil)
     }
     
-    override func isNeedShowTabBar() -> Bool{
+    override func isNeedShowTabBar() -> Bool {
         return false
     }
     
-    @IBAction func segmentControlValueChanged(sender: UISegmentedControl){
-        if let presenter = output as? CreateStoryAudioSelectionPresenter{
+    @IBAction func segmentControlValueChanged(sender: UISegmentedControl) {
+        if let presenter = output as? CreateStoryAudioSelectionPresenter {
             presenter.onChangeSorce(isYourUpload: sender.selectedSegmentIndex == 1)
         }
     }

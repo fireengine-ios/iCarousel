@@ -22,27 +22,27 @@ class RouterVC: NSObject {
         return rootviewController
     }
     
-    func getFloatingButtonsArray() -> [FloatingButtonsType]{
+    func getFloatingButtonsArray() -> [FloatingButtonsType] {
         let nController = navigationController
         let viewController = nController?.viewControllers.last
         
-        if let baseViewController = viewController as? BaseViewController{
+        if let baseViewController = viewController as? BaseViewController {
             return baseViewController.floatingButtonsArray
         }
         
         return [FloatingButtonsType]()
     }
     
-    func getParentUUID() -> String{
+    func getParentUUID() -> String {
         
-        if let viewController = navigationController?.viewControllers.last as? BaseViewController{
+        if let viewController = navigationController?.viewControllers.last as? BaseViewController {
             return viewController.parentUUID
         }
         
         return ""
     }
     
-    func isRootViewControllerAlbumDetail() -> Bool{
+    func isRootViewControllerAlbumDetail() -> Bool {
         return navigationController?.viewControllers.last is AlbumDetailViewController
     }
     
@@ -52,7 +52,7 @@ class RouterVC: NSObject {
         get {
             if let navController = rootViewController as? UINavigationController {
                 return navController
-            }else{
+            } else {
                 if let n = rootViewController as? TabBarViewController {
                     return n.activeNavigationController
                 }
@@ -61,7 +61,7 @@ class RouterVC: NSObject {
         }
     }
     
-    var tabBarVC:UINavigationController? {
+    var tabBarVC: UINavigationController? {
         if let nav = navigationController,
             let top = nav.topViewController {
             if let n = top as? TabBarViewController {
@@ -70,7 +70,7 @@ class RouterVC: NSObject {
             if let n = rootViewController as? TabBarViewController {
                 return n.activeNavigationController
             }
-        }else{
+        } else {
             if let n = rootViewController as? TabBarViewController {
                 return n.activeNavigationController
             }
@@ -102,7 +102,7 @@ class RouterVC: NSObject {
         }
     }
     
-    func pushOnPresentedView(viewController: UIViewController){
+    func pushOnPresentedView(viewController: UIViewController) {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.getViewControllerForPresent()?.navigationController?.pushViewController(viewController, animated: true)
@@ -110,7 +110,7 @@ class RouterVC: NSObject {
     }
     
     func pushViewController(viewController: UIViewController) {
-        if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar{
+        if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar {
             let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
@@ -124,7 +124,7 @@ class RouterVC: NSObject {
         
     }
     
-    func setBacgroundColor(color: UIColor){
+    func setBacgroundColor(color: UIColor) {
         if let tabBarViewController = rootViewController as? TabBarViewController {
             tabBarViewController.setBGColor(color: color)
         }
@@ -151,33 +151,33 @@ class RouterVC: NSObject {
         if let viewControllers = navigationController?.viewControllers {
             var index: Int? = nil
             
-            for (i, viewController) in viewControllers.enumerated(){
+            for (i, viewController) in viewControllers.enumerated() {
                 if viewController is CreateStoryPhotoSelectionViewController
-                    || viewController is CreateStoryPhotosOrderViewController{
+                    || viewController is CreateStoryPhotosOrderViewController {
                     index = i
                     break
                 }
             }
 
-            if let ind = index{
+            if let ind = index {
                 let viewController = viewControllers[ind - 1]
                 navigationController?.popToViewController(viewController, animated: true)
-            }else{
+            } else {
                 navigationController?.popToRootViewController(animated: true)
             }
         }
     }
     
-    func getViewControllerForPresent() -> UIViewController?{
+    func getViewControllerForPresent() -> UIViewController? {
         if let nController = navigationController?.presentedViewController as? UINavigationController,
-            let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController{
+            let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController {
             return viewController
         }
         return navigationController?.viewControllers.last
     }
     
-    func presentViewController(controller: UIViewController){
-        if let lastViewController = getViewControllerForPresent(){
+    func presentViewController(controller: UIViewController) {
+        if let lastViewController = getViewControllerForPresent() {
             if controller.popoverPresentationController?.sourceView == nil,
                 controller.popoverPresentationController?.barButtonItem == nil {
                 controller.popoverPresentationController?.sourceView = lastViewController.view
@@ -188,21 +188,21 @@ class RouterVC: NSObject {
         }
     }
     
-    func showSpiner(){
-        if let lastViewController = getViewControllerForPresent(){
+    func showSpiner() {
+        if let lastViewController = getViewControllerForPresent() {
             lastViewController.showSpinerIncludeNavigatinBar()
         }
     }
     
-    func hideSpiner(){
-        if let lastViewController = getViewControllerForPresent(){
+    func hideSpiner() {
+        if let lastViewController = getViewControllerForPresent() {
             lastViewController.hideSpinerIncludeNavigatinBar()
         }
     }
     
     func isOnFavoritesView() -> Bool {
         if let tabBarVc = tabBarVC {
-            if let contr = tabBarVc.viewControllers.last as? BaseFilesGreedViewController{
+            if let contr = tabBarVc.viewControllers.last as? BaseFilesGreedViewController {
                 return contr.isFavorites
             }
         }
@@ -210,15 +210,15 @@ class RouterVC: NSObject {
         return false
     }
     
-    //MARK: Splash
+    // MARK: Splash
     
-    var splash: UIViewController?{
+    var splash: UIViewController? {
         let controller = SplashModuleInitializer.initializeViewController(with: "SplashViewController")
         return controller
     }
 
     
-    //MARK: Onboarding
+    // MARK: Onboarding
     
     var onboardingScreen: UIViewController? {
         let conf = IntroduceModuleInitializer()
@@ -231,11 +231,11 @@ class RouterVC: NSObject {
     }
     
     
-    //MARK: Registartion
+    // MARK: Registartion
     var registrationScreen: UIViewController? {
         let inicializer = RegistrationModuleInitializer()
         let registerController = RegistrationViewController(nibName: "RegistrationScreen",
-                                                            bundle:nil)
+                                                            bundle: nil)
         inicializer.registrationViewController = registerController
         inicializer.setupVC()
         return registerController
@@ -270,7 +270,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    //MARK: SyncContacts
+    // MARK: SyncContacts
     
     var syncContacts: UIViewController {
         let viewController = SyncContactsModuleInitializer.initializeViewController(with: "SyncContactsViewController")
@@ -289,7 +289,7 @@ class RouterVC: NSObject {
         return viewController
     }
     
-    //MARK: Terms
+    // MARK: Terms
     
     func termsAndServicesScreen(login: Bool, delegate: RegistrationViewDelegate? = nil) -> UIViewController {
         let conf = TermsAndServicesModuleInitializer(delegate: delegate)
@@ -301,7 +301,7 @@ class RouterVC: NSObject {
     }
     
     
-    //MARK: SynchronyseSettings
+    // MARK: SynchronyseSettings
     
     var synchronyseScreen: UIViewController? {
         
@@ -313,14 +313,14 @@ class RouterVC: NSObject {
     }
     
     
-    //MARK: Capcha
+    // MARK: Capcha
     
     var capcha: UIViewController? {
         return CaptchaViewController.initFromXib()
     }
     
     
-    //MARK: TabBar
+    // MARK: TabBar
     
     var tabBarScreen: UIViewController? {
         let controller = TabBarViewController(nibName: "TabBarView", bundle: nil)
@@ -328,7 +328,7 @@ class RouterVC: NSObject {
     }
     
     
-    //MARK: Home Page
+    // MARK: Home Page
     var homePageScreen: UIViewController? {
         if (!SingletonStorage.shared.isAppraterInited) {
             AppRater.sharedInstance().daysUntilPrompt = 5
@@ -345,7 +345,7 @@ class RouterVC: NSObject {
     }
     
     
-    //MARK: Photos and Videos
+    // MARK: Photos and Videos
     
     var photosScreen: UIViewController? {
         let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Photo)
@@ -357,7 +357,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    //MARK: Music
+    // MARK: Music
     
     var musics: UIViewController? {
   
@@ -390,7 +390,7 @@ class RouterVC: NSObject {
     
     // MARK: Folder
     
-    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController{
+    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController",
                                                                                                  folder: folder,
                                                                                                  type: type,
@@ -404,7 +404,7 @@ class RouterVC: NSObject {
     
     // MARK: User profile
     
-    func userProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController{
+    func userProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController {
         let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo, isTurkcellUser: isTurkcellUser)
         return viewController
     }
@@ -412,13 +412,13 @@ class RouterVC: NSObject {
     
     // MARK: File info
     
-    var fileInfo: UIViewController?{
+    var fileInfo: UIViewController? {
         let viewController = FileInfoModuleInitializer.initializeViewController(with: "FileInfoViewController")
         return viewController
     }
     
     
-    //MARK: Documents
+    // MARK: Documents
     
     var documents: UIViewController? {
         let controller = BaseFilesGreedModuleInitializer.initializeDocumentsViewController(with: "BaseFilesGreedViewController")
@@ -428,7 +428,7 @@ class RouterVC: NSObject {
     
     // MARK: Create Folder
     
-    func createNewFolder(rootFolderID: String?, isFavorites: Bool = false) -> UIViewController{
+    func createNewFolder(rootFolderID: String?, isFavorites: Bool = false) -> UIViewController {
         let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
         return controller
     }
@@ -436,12 +436,12 @@ class RouterVC: NSObject {
     
     // MARK: Create Album
     
-    func createNewAlbum()-> UIViewController{
+    func createNewAlbum() -> UIViewController {
         let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectAlbumName)
         return controller
     }
     
-    //MARK: CreateStory name
+    // MARK: CreateStory name
     
     func createStoryName(items: [BaseDataSourceItem]? = nil, needSelectionItems: Bool = false, isFavorites: Bool = false) {
         let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController", needSelectionItems: needSelectionItems, isFavorites: isFavorites)
@@ -461,35 +461,35 @@ class RouterVC: NSObject {
     }
     
     
-    //MARK: CreateStory photos selection
+    // MARK: CreateStory photos selection
     
-    func photoSelection(forStory story:PhotoStory) -> UIViewController {
+    func photoSelection(forStory story: PhotoStory) -> UIViewController {
         let controller = CreateStoryModuleInitializer.initializePhotoSelectionViewControllerForStory(with: "BaseFilesGreedViewController", story: story)
         return controller
     }
     
-    func favoritePhotoSelection(forStory story:PhotoStory) -> UIViewController {
+    func favoritePhotoSelection(forStory story: PhotoStory) -> UIViewController {
         let controller = CreateStoryModuleInitializer.initializeFavoritePhotoSelectionViewControllerForStory(with: "BaseFilesGreedViewController", story: story)
         return controller
     }
     
     
-    //MARK: CreateStory audio selection
+    // MARK: CreateStory audio selection
     
-    func audioSelection(forStory story:PhotoStory) -> UIViewController {
+    func audioSelection(forStory story: PhotoStory) -> UIViewController {
         let controller = CreateStoryModuleInitializer.initializeAudioSelectionViewControllerForStory(with: "CreateStoryAudioSelectionViewController", story: story)
         return controller
     }
     
     
-    //MARK: CreateStory photos order 
+    // MARK: CreateStory photos order 
     
     func photosOrder(forStory story: PhotoStory) -> UIViewController {
         let controller = CreateStoryPhotosOrderModuleInitializer.initializeViewController(with: "CreateStoryPhotosOrderViewController", story: story)
         return controller
     }
     
-    //MARK: CreateStory preview
+    // MARK: CreateStory preview
     
     func storyPreview(forStory story: PhotoStory, responce: CreateStoryResponce) -> UIViewController {
         let controller = CreateStoryPreviewModuleInitializer.initializePreviewViewControllerForStory(with: "CreateStoryPreviewViewController",
@@ -498,7 +498,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    //MARK: Upload All files
+    // MARK: Upload All files
     
     func uploadPhotos() -> UIViewController {
         let controller = LocalAlbumModuleInitializer.initializeLocalAlbumsController(with: "BaseFilesGreedViewController")
@@ -523,7 +523,7 @@ class RouterVC: NSObject {
         }
     }
     
-    //MARK: Select Folder view controller
+    // MARK: Select Folder view controller
     
     func selectFolder(folder: Item?, sortRule: SortedRules = .timeUp) -> SelectFolderViewController {
         let controller = SelectFolderModuleInitializer.initializeSelectFolderViewController(with: "BaseFilesGreedViewController",
@@ -562,56 +562,56 @@ class RouterVC: NSObject {
         return c
     }
     
-    //MARK: Albums list
+    // MARK: Albums list
     
     func albumsListController() -> BaseFilesGreedChildrenViewController {
         let controller = AlbumsModuleInitializer.initializeAlbumsController(with: "BaseFilesGreedViewController")
         return controller
     }
     
-    //MARK: Adding photos to album
+    // MARK: Adding photos to album
     
     func addPhotosToAlbum(photos: [BaseDataSourceItem]) -> AlbumSelectionViewController {
         let controller = AlbumsModuleInitializer.initializeSelectAlbumsController(with: "BaseFilesGreedViewController", photos: photos)
         return controller
     }
     
-    //MARK: Album detail
+    // MARK: Album detail
     
-    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController{
+    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
         let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
         return controller
     }
     
-    //MARK: Stories list
+    // MARK: Stories list
     
     func storiesListController() -> BaseFilesGreedChildrenViewController {
         let controller = StoriesInitializer.initializeStoriesController(with: "BaseFilesGreedViewController")
         return controller
     }
     
-    //MARK: People list
+    // MARK: People list
     
     func peopleListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImageItemsInitializer.initializePeopleController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
     }
     
-    //MARK: Thing list
+    // MARK: Thing list
     
     func thingsListController() -> BaseFilesGreedChildrenViewController {
         let controller = FaceImageItemsInitializer.initializeThingsController(with: "BaseFilesGreedViewController")
         return controller as! BaseFilesGreedChildrenViewController
     }
     
-    //MARK: Place list
+    // MARK: Place list
     
     func placesListController() -> BaseFilesGreedChildrenViewController {
         let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController")
         return controller as! BaseFilesGreedChildrenViewController
     }
     
-    //MARK: Face Image Recognition Photos
+    // MARK: Face Image Recognition Photos
     
     func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
@@ -621,14 +621,14 @@ class RouterVC: NSObject {
         return controller as! BaseFilesGreedChildrenViewController
     }
     
-    func faceImageChangeCoverController(albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?)  -> BaseFilesGreedChildrenViewController {
+    func faceImageChangeCoverController(albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImageChangeCoverInitializer.initializeController(with: "BaseFilesGreedViewController", albumUUID: albumUUID, moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
     }
     
-    //MARK: Free App Space
+    // MARK: Free App Space
     
-    func freeAppSpace() -> UIViewController{
+    func freeAppSpace() -> UIViewController {
         let controller = FreeAppSpaceModuleInitializer.initializeFreeAppSpaceViewController(with: "FreeAppSpaceViewCotroller")
         return controller
     }
@@ -713,7 +713,7 @@ class RouterVC: NSObject {
     
     // MARK: feedback subView
     
-    func showFeedbackSubView(){
+    func showFeedbackSubView() {
         let controller = FeedbackViewModuleInitializer.initializeViewController(with: "FeedbackViewController")
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
@@ -730,11 +730,10 @@ class RouterVC: NSObject {
         return ActivityTimelineModuleInitializer.initialize(ActivityTimelineViewController.self)
     }
     
-
     
-    //MARK: FreeAppSpace
+    // MARK: FreeAppSpace
     
-    func showFreeAppSpace(){
+    func showFreeAppSpace() {
         let controller = freeAppSpace()
         pushViewController(viewController: controller)
     }

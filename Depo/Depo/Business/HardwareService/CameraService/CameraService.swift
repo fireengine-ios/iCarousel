@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 
-@objc class CameraService : NSObject {
+@objc class CameraService: NSObject {
     
     typealias CameraGranted = (_ granted: Bool) -> Swift.Void
     

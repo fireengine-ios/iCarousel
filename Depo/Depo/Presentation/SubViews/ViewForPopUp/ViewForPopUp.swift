@@ -8,14 +8,14 @@
 
 import UIKit
 
-@objc protocol ViewForPopUpDelegate{
+@objc protocol ViewForPopUpDelegate {
     func onUpdateViewForPopUpH(h: CGFloat)
 }
 
 class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwipeCellDelegate, CardsManagerViewProtocol {
 
-    var hConstraint: NSLayoutConstraint? = nil
-    weak var delegate: ViewForPopUpDelegate? = nil
+    var hConstraint: NSLayoutConstraint?
+    weak var delegate: ViewForPopUpDelegate?
     
     var tableView: UITableView = UITableView()
     var viewsArray = [BaseView]()
@@ -38,7 +38,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         configurate()
     }
     
-    func configurate(){
+    func configurate() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tableView)
         var constraints = [NSLayoutConstraint]()
@@ -56,7 +56,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         tableView.isScrollEnabled = false
     }
 
-    func addPopUpSubView(popUp: BaseView){
+    func addPopUpSubView(popUp: BaseView) {
         DispatchQueue.main.async {
             self.lock.lock()
             self.viewsArray.insert(popUp, at: 0)
@@ -69,9 +69,9 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         }
     }
     
-    func deletePopUpSubView(popUp: BaseView){
+    func deletePopUpSubView(popUp: BaseView) {
         DispatchQueue.main.async {
-            if let index = self.viewsArray.index(of: popUp){
+            if let index = self.viewsArray.index(of: popUp) {
                 self.lock.lock()
                 let path = IndexPath(row: index, section: 0)
                 self.viewsArray.remove(at: path.row)
@@ -84,7 +84,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         }
     }
     
-    private func updateH(){
+    private func updateH() {
         if hConstraint != nil {
             let h = calulateCurrentH()
             UIView.animate(withDuration: NumericConstants.animationDuration) {
@@ -92,7 +92,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
                 self.superview?.layoutIfNeeded()
             }
         }
-        if let delegate_ = delegate{
+        if let delegate_ = delegate {
             delegate_.onUpdateViewForPopUpH(h: calulateCurrentH())
         }
     }
@@ -105,7 +105,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         return h
     }
     
-    //MARK: UITableView delegate
+    // MARK: UITableView delegate
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -131,7 +131,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         return cell
     }
     
-    func onCellDeleted(cell: UITableViewCell){
+    func onCellDeleted(cell: UITableViewCell) {
         guard let path = tableView.indexPath(for: cell) else {
             return
         }
@@ -144,11 +144,11 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
     
     
-    //MARK: WrapItemOperationViewProtocol
+    // MARK: WrapItemOperationViewProtocol
     
-    private func checkIsThisIsPermittedType(type: OperationType) -> Bool{
+    private func checkIsThisIsPermittedType(type: OperationType) -> Bool {
         
-        if !isEnable{
+        if !isEnable {
             return false
         }
         
@@ -158,7 +158,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         return !notPermittedPopUpViewTypes.contains(type.rawValue)
     }
     
-    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool{
+    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool {
         switch operationType {
         case .prepareToAutoSync:
             return viewsByType[.sync] == nil
@@ -167,20 +167,20 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         }
     }
     
-    func getViewForOperation(operation: OperationType) -> BaseView{
+    func getViewForOperation(operation: OperationType) -> BaseView {
         return CardsManager.popUpViewForOperaion(type: operation)
     }
     
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
-    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
-        if !checkIsThisIsPermittedType(type: type){
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
+        if !checkIsThisIsPermittedType(type: type) {
             return
         }
         
-        if !checkIsNeedShowPopUpFor(operationType: type){
+        if !checkIsNeedShowPopUpFor(operationType: type) {
             return
         }
         
@@ -190,7 +190,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
             viewsByType[type] = view
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
-                if let item = object{
+                if let item = object {
                     popUp.setImageForUploadingItem(item: item)
                 }
             }
@@ -199,23 +199,23 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         }
     }
     
-    func startOperationsWith(serverObjects: [HomeCardResponse]){
+    func startOperationsWith(serverObjects: [HomeCardResponse]) {
         
     }
     
-    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ){
+    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
         setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
-    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ){
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ) {
         if let view = viewsByType[type] {
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
-                if let item = object{
+                if let item = object {
                     popUp.setImageForUploadingItem(item: item)
                 }
             }
-        }else{
+        } else {
             startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
         }
     }
@@ -226,28 +226,28 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         }
         
         popUp.setProgressBar(ratio: ratio)
-        if let `object` = object{
+        if let `object` = object {
             popUp.setImageForUploadingItem(item: object)
         }
     }
     
-    func stopOperationWithType(type: OperationType){
+    func stopOperationWithType(type: OperationType) {
         if let view = viewsByType[type] {
             viewsByType[type] = nil
             deletePopUpSubView(popUp: view)
         }
     }
     
-    func isEqual(object: CardsManagerViewProtocol) -> Bool{
-        if let compairedView = object as? ViewForPopUp{
+    func isEqual(object: CardsManagerViewProtocol) -> Bool {
+        if let compairedView = object as? ViewForPopUp {
             return compairedView == self
         }
         return false
     }
     
-    func addNotPermittedPopUpViewTypes(types: [OperationType]){
-        let array = types.map{$0.rawValue}
-        for operationName in array{
+    func addNotPermittedPopUpViewTypes(types: [OperationType]) {
+        let array = types.map { $0.rawValue }
+        for operationName in array {
             notPermittedPopUpViewTypes.insert(operationName)
         }
     }

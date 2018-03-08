@@ -16,7 +16,7 @@ struct EULAResponseKey {
     static let content = "content"
 }
 
-class Eula : ObjectRequestResponse {
+class Eula: ObjectRequestResponse {
    
     var id: Int?
    
@@ -51,7 +51,7 @@ struct EULAGet: RequestParametrs {
     
     var patch: URL {
         let patch = String(format: RouteRequests.eulaGet, Device.locale)
-        return URL(string: patch, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: patch, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -70,7 +70,7 @@ struct EULACheck: RequestParametrs {
     
     var patch: URL {
         let patch = String(format: RouteRequests.eulaCheck, Device.locale)
-        return URL(string: patch, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: patch, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -90,8 +90,8 @@ struct  EULAApprove: RequestParametrs {
     }
     
     var patch: URL {
-        let patch = String(format:RouteRequests.eulaApprove, id )
-        return URL(string:patch, relativeTo:RouteRequests.BaseUrl)!
+        let patch = String(format: RouteRequests.eulaApprove, id )
+        return URL(string: patch, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -103,7 +103,7 @@ struct  EULAApprove: RequestParametrs {
 class EulaService: BaseRequestService {
 
 
-    func eulaGet(sucess:SuccessResponse?, fail: FailResponse? ) {
+    func eulaGet(sucess: SuccessResponse?, fail: FailResponse? ) {
         log.debug("EulaService eulaGet")
 
         let eula = EULAGet()
@@ -119,7 +119,7 @@ class EulaService: BaseRequestService {
         executeGetRequest(param: eula, handler: handler)
     }
 
-    func eulaApprove(eulaId: Int, sucess:SuccessResponse?, fail: FailResponse? ) {
+    func eulaApprove(eulaId: Int, sucess: SuccessResponse?, fail: FailResponse? ) {
         log.debug("EulaService eulaApprove")
         
         let eula = EULAApprove(id: eulaId)
@@ -130,4 +130,3 @@ class EulaService: BaseRequestService {
         
     }
 }
-

@@ -10,18 +10,18 @@ import Foundation
 
 final class FaceImageItemsInitializer: NSObject {
 
-    class func initializePeopleController(with nibName:String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> UIViewController {
+    class func initializePeopleController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
         viewController.isCanChangeVisibility = true
     
         let configurator = FaceImageItemsConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: PeopleItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamPeopleTitle, moduleOutput:  moduleOutput)
+        configurator.configure(viewController: viewController, remoteServices: PeopleItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamPeopleTitle, moduleOutput: moduleOutput)
         
         return viewController
     }
     
-    class func initializeThingsController(with nibName:String) -> UIViewController {
+    class func initializeThingsController(with nibName: String) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
         
         let configurator = FaceImageItemsConfigurator()
@@ -31,7 +31,7 @@ final class FaceImageItemsInitializer: NSObject {
         return viewController
     }
     
-    class func initializePlacesController(with nibName:String) -> UIViewController {
+    class func initializePlacesController(with nibName: String) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
         
         let configurator = FaceImageItemsConfigurator()
@@ -41,4 +41,3 @@ final class FaceImageItemsInitializer: NSObject {
         return viewController
     }
 }
-

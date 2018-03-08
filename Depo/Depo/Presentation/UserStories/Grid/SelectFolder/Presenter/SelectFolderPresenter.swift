@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class SelectFolderPresenter: DocumentsGreedPresenter{
+class SelectFolderPresenter: DocumentsGreedPresenter {
 
     override func viewIsReady(collectionView: UICollectionView) {
         
@@ -22,7 +22,7 @@ class SelectFolderPresenter: DocumentsGreedPresenter{
         dataSource.updateDisplayngType(type: .list)
     }
     
-    override func onNextButton(){
+    override func onNextButton() {
         log.debug("SelectFolderPresenter onNextButton")
 
         if let view_ = view as? SelectFolderViewController {
@@ -38,7 +38,7 @@ class SelectFolderPresenter: DocumentsGreedPresenter{
 //        super .getContentWithSuccess(files: files)
 //    }
     
-    override func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
+    override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         log.debug("SelectFolderPresenter onItemSelected")
 
         guard let wraperd = item as? Item else {

@@ -20,13 +20,14 @@ class SplashInteractor: SplashInteractorInput {
         return passcodeStorage.isEmpty
     }
 
-    func startLoginInBackroung(){
+    func startLoginInBackroung() {
         if tokenStorage.accessToken == nil {
             if ReachabilityService().isReachableViaWiFi {
                 failLogin()
             } else {
+                /// turkcell login
                 authenticationService.turkcellAuth(success: { [weak self] in
-                    self?.turkcellSuccessLogin()
+                    self?.successLogin()
                 }, fail: { [weak self] response in
                     self?.output.asyncOperationSucces()
                     self?.output.onFailLogin()
@@ -37,19 +38,13 @@ class SplashInteractor: SplashInteractorInput {
         }
     }
     
-    func turkcellSuccessLogin(){
-        DispatchQueue.main.async {
-            self.output.onSuccessLoginTurkcell()
-        }
-    }
-    
-    func successLogin(){
+    func successLogin() {
         DispatchQueue.main.async {
             self.output.onSuccessLogin()
         }
     }
     
-    func failLogin(){
+    func failLogin() {
         DispatchQueue.main.async {
             self.output.onFailLogin()
             if !ReachabilityService().isReachable {

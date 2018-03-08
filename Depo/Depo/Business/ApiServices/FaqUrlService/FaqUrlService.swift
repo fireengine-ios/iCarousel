@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Faq : ObjectRequestResponse {
+class Faq: ObjectRequestResponse {
     var faqUrl: String?
     
     override func mapping() {
@@ -17,7 +17,7 @@ class Faq : ObjectRequestResponse {
     }
 }
 
-struct FAQUrl:RequestParametrs{
+struct FAQUrl: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
     }
@@ -28,7 +28,7 @@ struct FAQUrl:RequestParametrs{
     
     var patch: URL {
         let path = String(format: RouteRequests.faqUrl, Device.locale)
-        return URL(string: path, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: path, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -36,18 +36,18 @@ struct FAQUrl:RequestParametrs{
     }
 }
 
-class FaqUrlService: BaseRequestService{
+class FaqUrlService: BaseRequestService {
 
-  func requestFaqUrl(success: SuccessResponse?, fail: FailResponse?){
+  func requestFaqUrl(success: SuccessResponse?, fail: FailResponse?) {
         log.debug("FaqUrlService requestFaqUrl")
     
         let faq = FAQUrl()
-        let handler = BaseResponseHandler<Faq,ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param:faq, handler: handler)
+        let handler = BaseResponseHandler<Faq, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: faq, handler: handler)
     }
     
-  static func faqBuilder()->([FAQSectionItem], [String]){
-        let questions:[FAQSectionItem] = [FAQSectionItem(title: "What is lifebox?"),
+  static func faqBuilder() -> ([FAQSectionItem], [String]) {
+        let questions: [FAQSectionItem] = [FAQSectionItem(title: "What is lifebox?"),
                                           FAQSectionItem(title: "How Can I Reach lifebox?"),
                                           FAQSectionItem(title: "How Can I Start Using lifebox?"),
                                           FAQSectionItem(title: "How can I log In At lifebox?"),
@@ -59,7 +59,7 @@ class FaqUrlService: BaseRequestService{
                                           FAQSectionItem(title: "What will happen to my data in lifebox when I hand over my line?"),
                                           FAQSectionItem(title: "What are the terms and conditions for auto-renewing subscriptions?"),
                                           FAQSectionItem(title: "Privacy Policy")]
-        let answers:[String] = [
+        let answers: [String] = [
         "lifebox is a storage service where you can save your pictures, videos, music and files, where you can reach these files by phone, tablet or PC at any point where you have access to internet and where you can easily share these files. All subscribers who download the app and log in will receive a 5 GB storage space as a gift. You can purchase a package to increase storage space. Purchased packages are automatically renewed each month.",
         "If you are a Turkcell subscriber, write lifebox and send a free of charge SMS to 2222 or download the lifebox app from the app markets T-Market, Google Play, Apple Appstore. If you are not a Turkcell subscriber, you can download the lifebox app from the app markets Google Play and Appstore. All users can reach the app on the website www.mylifebox.com.",
         "By you can download the app on your iOS and Android device (If you are a Turkcell subscriber, write lifebox and send a free of charge SMS to 2222, If you are not a Turkcell subscriber you can obtain it on Google Play, Apple Appstore) or if you do not have a smart phone, you can log in at www.mylifebox.com and start using the service.",
@@ -74,7 +74,7 @@ class FaqUrlService: BaseRequestService{
         "Here's the link for privacy policy https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik"]
         
         
-        return (questions,answers)
+        return (questions, answers)
         
     }
 }

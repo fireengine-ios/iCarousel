@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol CardsManagerViewProtocol{
+protocol CardsManagerViewProtocol {
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?)
     
@@ -29,4 +29,3 @@ protocol CardsManagerViewProtocol{
     var isEnable: Bool { get set }
     
 }
-

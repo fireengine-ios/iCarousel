@@ -21,7 +21,7 @@ class LocalMediaContent {
     let asset: PHAsset
     let urlToFile: URL
     
-    init(asset: PHAsset, urlToFile:URL) {
+    init(asset: PHAsset, urlToFile: URL) {
         self.asset = asset
         self.urlToFile = urlToFile
     }
@@ -215,7 +215,7 @@ enum FileType: Equatable {
                 }
             }
             
-            if (wrapType.hasPrefix("text")){
+            if (wrapType.hasPrefix("text")) {
                 guard let prefix = wrapType.components(separatedBy: "/").last else {
                     self = .application(.unknown)
                     return
@@ -262,11 +262,11 @@ enum FileType: Equatable {
                     self = .application(.xls)
                     return
                 case "octet-stream":
-                    guard let name_ = fileName else{
+                    guard let name_ = fileName else {
                         self = .application(.unknown)
                         return
                     }
-                    guard let ext = name_.components(separatedBy: ".").last else{
+                    guard let ext = name_.components(separatedBy: ".").last else {
                         self = .application(.unknown)
                         return
                     }
@@ -385,11 +385,11 @@ enum FileType: Equatable {
     
     
     static func ==(lhs: FileType, rhs: FileType) -> Bool {
-        switch (lhs,rhs) {
-        case (.image,.image): return true
-        case (.video,.video): return true
-        case (.audio,.audio): return true
-        case (.folder,.folder): return true
+        switch (lhs, rhs) {
+        case (.image, .image): return true
+        case (.video, .video): return true
+        case (.audio, .audio): return true
+        case (.folder, .folder): return true
         case (.application, .application):
             switch (lhs) {
             case .application(let lhsType):
@@ -403,8 +403,8 @@ enum FileType: Equatable {
             default:()
             }
             return false
-        case (.photoAlbum,.photoAlbum): return true
-        case (.musicPlayList,.musicPlayList): return true
+        case (.photoAlbum, .photoAlbum): return true
+        case (.musicPlayList, .musicPlayList): return true
         case (.faceImage, .faceImage):
             switch (lhs) {
             case .faceImage(let lhsType):
@@ -470,7 +470,7 @@ enum SyncWrapperedStatus {
     }
 }
 
-protocol  Wrappered  {
+protocol  Wrappered {
     
     var id: Int64? { get }
     
@@ -490,7 +490,7 @@ protocol  Wrappered  {
     
     var creationDate: Date? { get }
     
-    var lastModifiDate: Date? { get}
+    var lastModifiDate: Date? { get }
     
     var patchToPreview: PathForItem { get }
     
@@ -551,7 +551,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var fileData: Data?
     
     var asset: PHAsset? {
-        switch patchToPreview  {
+        switch patchToPreview {
         case let .localMediaContent(local):
             return local.asset
         case .remoteUrl(_):
@@ -888,15 +888,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     private class func getDuration(duration: Double?) -> String {
-        if let d = duration{
+        if let d = duration {
             let s = CGFloat(d)
             let seconds = Int(s) % 60
             let minutes = Int(s) / 60
             
-            if (minutes < 100){
-                return String(format:"%02i:%02i", minutes,seconds)
-            }else{
-                return String(format:"%i:%02i", minutes,seconds)
+            if (minutes < 100) {
+                return String(format: "%02i:%02i", minutes, seconds)
+            } else {
+                return String(format: "%i:%02i", minutes, seconds)
             }
         }
         return ""

@@ -6,15 +6,15 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class CreateStorySelectionRouter:BaseFilesGreedRouter, CreateStoryRouterInput {
+class CreateStorySelectionRouter: BaseFilesGreedRouter, CreateStoryRouterInput {
     
-    func goToSelectionAudioFor(story: PhotoStory){
+    func goToSelectionAudioFor(story: PhotoStory) {
         let router = RouterVC()
         let controller = router.audioSelection(forStory: story)
         router.pushViewController(viewController: controller)
     }
     
-    func goToSelectionOrderPhotosFor(story: PhotoStory){
+    func goToSelectionOrderPhotosFor(story: PhotoStory) {
         let router = RouterVC()
         let controller = router.photosOrder(forStory: story)
         router.pushViewController(viewController: controller)

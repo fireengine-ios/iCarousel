@@ -99,7 +99,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         feedbackTextView.textAlignment = .natural
     }
     
-    func languagesUploaded(lanuages:[LanguageModel]) {
+    func languagesUploaded(lanuages: [LanguageModel]) {
         languagesArray.removeAll()
         languagesArray.append(contentsOf: lanuages)
 
@@ -108,7 +108,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         })
         
         if let languageCode = NSLocale.current.languageCode, languageCode == "tr",
-           let currentLanguage = languagesArray.first(where: {$0.languageCode == "tr"}) {
+           let currentLanguage = languagesArray.first(where: { $0.languageCode == "tr" }) {
             selectedLanguage = currentLanguage
         }
             
@@ -161,7 +161,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     
     // MARK: Keboard
     
-    @IBAction func onHideKeyboard(){
+    @IBAction func onHideKeyboard() {
         feedbackTextView.resignFirstResponder()
     }
     
@@ -170,7 +170,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
             return view.frame.origin.y
         } else {
             if (view.superview != nil) {
-                return view.frame.origin.y + getMainYForView(view:view.superview!)
+                return view.frame.origin.y + getMainYForView(view: view.superview!)
             } else {
                 return 0
             }
@@ -178,8 +178,8 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     @objc func showKeyBoard(notification: NSNotification) {
-        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         let y = allertView.frame.size.height + getMainYForView(view: allertView)
@@ -206,11 +206,11 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     
-    //MARK: IBActions
+    // MARK: IBActions
     
     func getImageForChecbox(isSelected: Bool) -> UIImage {
         let imageName = isSelected ? "roundSelectedCheckBox" : "roundEmptyCheckBox"
-        return UIImage(named:imageName)!.withRenderingMode(.alwaysTemplate)
+        return UIImage(named: imageName)!.withRenderingMode(.alwaysTemplate)
     }
     
     @IBAction func onCloseButton() {
@@ -297,4 +297,3 @@ extension FeedbackViewController: UITextViewDelegate {
         return true
     }
 }
-

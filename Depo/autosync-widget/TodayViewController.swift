@@ -44,7 +44,7 @@ final class TodayViewController: UIViewController {
     }
     
     
-    //MARK: Tap handler
+    // MARK: Tap handler
     
     @objc private func openApp() {
         if let url = URL(string: "akillidepo://") {
@@ -84,5 +84,3 @@ extension TodayViewController: NCWidgetProviding {
         }
     }
 }
-
-

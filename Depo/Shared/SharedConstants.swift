@@ -20,5 +20,3 @@ struct SharedConstants {
     static let lastSyncDateKey = "lastSyncDate"
     static let syncStatusKey = "syncStatus"
 }
-
-

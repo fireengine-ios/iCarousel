@@ -46,7 +46,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 log.debug("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems success")
                 
                 var isArrayPresenter = false
-                if let presenter = self?.output as? BaseFilesGreedPresenter{
+                if let presenter = self?.output as? BaseFilesGreedPresenter {
                     isArrayPresenter = presenter.isArrayDataSource()
                 }
                 
@@ -79,16 +79,14 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         isUpdating = true
         remoteItems.nextItems(sortBy: sortBy,
                               sortOrder: sortOrder,
-                              success:
-            { [weak self] items in
+                              success: { [weak self] items in
                 DispatchQueue.main.async {
                     log.debug("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems success")
 
                     self?.isUpdating = false
                     if items.count == 0 {
                         self?.output.getContentWithSuccessEnd()
-                    }
-                    else if let out = self?.output as? CreateStorySelectionInteractorOutput {
+                    } else if let out = self?.output as? CreateStorySelectionInteractorOutput {
                         var array = [[WrapData]]()
                         array.append(items)
                         out.getContentWithSuccess(array: array)
@@ -116,7 +114,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         return !(remoteItems is PhotoAndVideoService)
     }
     
-    func textForNoFileLbel() -> String{
+    func textForNoFileLbel() -> String {
         if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoTitleText
         } else if remoteItems is MusicService {
@@ -132,7 +130,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         return ""
     }
     
-    func textForNoFileButton() -> String{
+    func textForNoFileButton() -> String {
         if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoButtonText
         } else if remoteItems is MusicService {
@@ -163,11 +161,11 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         return UIImage()
     }
     
-    func getRemoteItemsService() -> RemoteItemsService{
+    func getRemoteItemsService() -> RemoteItemsService {
         return remoteItems
     }
     
-    func getFolder() -> Item?{
+    func getFolder() -> Item? {
         return folder
     }
     

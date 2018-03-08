@@ -55,12 +55,12 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationFullScreenOn = "FullScreenOn"
     static let notificationFullScreenOff = "FullScreenOff"
     
-    fileprivate var photoBtn            : SubPlussButtonView!
-    fileprivate var uploadBtn           : SubPlussButtonView!
-    fileprivate var storyBtn            : SubPlussButtonView!
-    fileprivate var folderBtn           : SubPlussButtonView!
-    fileprivate var albumBtn            : SubPlussButtonView!
-    fileprivate var uploadFromLifebox   : SubPlussButtonView!
+    fileprivate var photoBtn: SubPlussButtonView!
+    fileprivate var uploadBtn: SubPlussButtonView!
+    fileprivate var storyBtn: SubPlussButtonView!
+    fileprivate var folderBtn: SubPlussButtonView!
+    fileprivate var albumBtn: SubPlussButtonView!
+    fileprivate var uploadFromLifebox: SubPlussButtonView!
 
     //    let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()
@@ -84,7 +84,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
     
     var currentViewController: UIViewController? {
-        if let navigationController = selectedViewController as? UINavigationController{
+        if let navigationController = selectedViewController as? UINavigationController {
             return navigationController.viewControllers.last
         }
         return nil
@@ -159,11 +159,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
     
     private func setupTabBarItems() {
-        let items = [("outlineHome",""),
+        let items = [("outlineHome", ""),
                      ("outlinePhotosVideos", ""),
                      ("", ""),
                      ("outlineMusic", ""),
-                     ("outlineDocs",  "")]
+                     ("outlineDocs", "")]
         
         tabBar.setupItems(withImageToTitleNames: items)
     }
@@ -194,20 +194,20 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showPhotosScreen),
-                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen),
+                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen),
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showVideosScreen),
-                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationVideoScreen),
+                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationVideoScreen),
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(fullScreenOn),
-                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOn),
+                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOn),
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(fullScreenOff),
-                                               name:  NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOff),
+                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOff),
                                                object: nil)
         
     }
@@ -239,27 +239,27 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
     
     @objc private func showPlusTabBar(_ sender: Any) {
-        if (bottomTabBarConstraint.constant >= 0){
+        if (bottomTabBarConstraint.constant >= 0) {
             changeTabBarStatus(hidden: false)
         }
     }
     
     @objc private func hidePlusTabBar(_ sender: Any) {
-        if (bottomTabBarConstraint.constant == 0){
+        if (bottomTabBarConstraint.constant == 0) {
             changeTabBarStatus(hidden: true)
         }
     }
     
-    @objc func fullScreenOn(){
-        if topConstraint.constant >= 0{
+    @objc func fullScreenOn() {
+        if topConstraint.constant >= 0 {
             topConstraint.constant = -statusBarBG.frame.size.height
             bottomConstraint.constant = bottomBGView.frame.size.height
             view.layoutSubviews()
         }
     }
     
-    @objc func fullScreenOff(){
-        if topConstraint.constant != 0{
+    @objc func fullScreenOff() {
+        if topConstraint.constant != 0 {
             topConstraint.constant = 0
             bottomConstraint.constant = 0
             view.layoutSubviews()
@@ -268,7 +268,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @objc private func showTabBar(_ sender: Any) {
         changeTabBarStatus(hidden: false)
-        if (self.bottomTabBarConstraint.constant < 0){
+        if (self.bottomTabBarConstraint.constant < 0) {
             bottomBGView.isHidden = false
             if !musicBar.isHidden {
                 musicBar.alpha = 1
@@ -288,7 +288,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @objc private func hideTabBar(_ sender: Any) {
         changeTabBarStatus(hidden: true)
-        if (bottomTabBarConstraint.constant >= 0){
+        if (bottomTabBarConstraint.constant >= 0) {
             let bottomConstraintConstant = -self.tabBar.frame.height
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
@@ -305,7 +305,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
     }
     
-    func setBGColor(color: UIColor){
+    func setBGColor(color: UIColor) {
         view.backgroundColor = color
     }
     
@@ -325,7 +325,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                     router.videosScreen,
                     router.musics,
                     router.documents]
-        customNavigationControllers = list.flatMap{ UINavigationController(rootViewController: $0!)}
+        customNavigationControllers = list.flatMap { UINavigationController(rootViewController: $0!) }
     }
     
     @objc func gearButtonAction(sender: Any) {
@@ -336,9 +336,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         plussButton.isSelected = state
         
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            if state{
+            if state {
                 self.plussButton.transform = CGAffineTransform(rotationAngle: .pi/4)
-            }else{
+            } else {
                 self.plussButton.transform = CGAffineTransform(rotationAngle: 0)
             }
         }
@@ -370,11 +370,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             $0.isEnabled = !show
         }
         
-        if show{
+        if show {
             curtainView.frame =  CGRect(x: 0, y: 0, width: currentViewController?.view.frame.width ?? 0, height: currentViewController?.view.frame.height ?? 0)
             currentViewController?.view.addSubview(curtainView)
             currentViewController?.view.bringSubview(toFront: curtainView)
-        }else{
+        } else {
             curtainView.removeFromSuperview()
         }
         
@@ -410,7 +410,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
 
     func createSubButton(withText text: String, imageName: String, asLeft: Bool) -> SubPlussButtonView? {
-        if let subButton = SubPlussButtonView.getFromNib(asLeft: asLeft, withImageName: imageName, labelText: text){
+        if let subButton = SubPlussButtonView.getFromNib(asLeft: asLeft, withImageName: imageName, labelText: text) {
             subButton.actionDelegate = self
             view.addSubview(subButton)
             
@@ -437,11 +437,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         return nil
     }
     
-    private func getFloatingButtonsArray()-> [SubPlussButtonView]{
+    private func getFloatingButtonsArray() -> [SubPlussButtonView] {
         let array = RouterVC().getFloatingButtonsArray()
         var buttonsArray = [SubPlussButtonView]()
-        for type in array{
-            switch type{
+        for type in array {
+            switch type {
             case .floatingButtonCreateAlbum:
                 buttonsArray.append(albumBtn)
             case .floatingButtonCreateAStory:
@@ -457,14 +457,14 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             }
         }
         
-        if (buttonsArray.count == 0) || (buttonsArray.count > 4){
+        if (buttonsArray.count == 0) || (buttonsArray.count > 4) {
             return [SubPlussButtonView]()
         }
         
         return buttonsArray
     }
     
-    private func getAllFloatingButtonsArray()-> [SubPlussButtonView]{
+    private func getAllFloatingButtonsArray() -> [SubPlussButtonView] {
         var buttonsArray = [SubPlussButtonView]()
         buttonsArray.append(albumBtn)
         buttonsArray.append(storyBtn)
@@ -483,12 +483,12 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         let buttonsArray = getFloatingButtonsArray()
         let count = buttonsArray.count
         
-        if count == 1{
+        if count == 1 {
             let obj0 = buttonsArray[0]
             obj0.centerXConstraint!.constant = 0
             obj0.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace
         }
-        if count == 2{
+        if count == 2 {
             let obj0 = buttonsArray[0]
             let obj1 = buttonsArray[1]
             
@@ -498,7 +498,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             obj1.centerXConstraint!.constant = obj0.frame.size.width * 0.75
             obj1.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
         }
-        if count == 3{
+        if count == 3 {
             let obj0 = buttonsArray[0]
             let obj1 = buttonsArray[1]
             let obj2 = buttonsArray[2]
@@ -512,7 +512,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             obj2.centerXConstraint!.constant = obj0.frame.size.width
             obj2.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
         }
-        if count == 4{
+        if count == 4 {
             let obj0 = buttonsArray[0]
             let obj1 = buttonsArray[1]
             let obj2 = buttonsArray[2]
@@ -565,13 +565,13 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
     }
     
-    private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool, forButtons buttons:[SubPlussButtonView]) {
+    private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool, forButtons buttons: [SubPlussButtonView]) {
         if buttons.count == 0 {
             return
         }
         
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews, animations: {
-            for button in buttons{
+            for button in buttons {
                 button.changeVisability(toHidden: hidden)
             }
             self.view.layoutIfNeeded()
@@ -579,9 +579,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
     
     
-    //MARK: - tab bar delegate
+    // MARK: - tab bar delegate
     
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem)  {
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         changeViewState(state: false)
         
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
@@ -647,7 +647,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         return nil
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage,
             let data = UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
             else { return }
@@ -668,7 +668,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
 }

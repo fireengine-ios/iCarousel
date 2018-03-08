@@ -38,4 +38,3 @@ class PeopleAlbumSliderInteractor: LBAlbumLikePreviewSliderInteractor {
     override func newStoryCreated() { }
     
 }
-

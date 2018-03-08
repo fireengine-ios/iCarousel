@@ -30,7 +30,7 @@ struct RouteRequests {
     static let mailVerefication = "/api/verify/sendVerificationEmail"
     static let mailUpdate = "/api/account/email"
     
-    //MARK: EULA 
+    // MARK: EULA 
     static let eulaGet     = "api/eula/get/%@"
     static let eulaCheck   = "api/eula/check/%@"
     static let eulaApprove = "api/eula/approve/%i"
@@ -49,7 +49,7 @@ struct RouteRequests {
     static let fbStart       = "api/migration/facebook/start"
     static let fbStop        = "api/migration/facebook/stop"
     
-    //MARK: -  Instagram
+    // MARK: - Instagram
     static let socialStatus = "/api/share/social/status"
     static let instagramConfig = "/api/share/social/instagram/config"
     static let instagramSyncStatus = "/api/share/social/instagram/syncStatus"
@@ -61,7 +61,7 @@ struct RouteRequests {
     static let captcha = "/api/captcha/%@/%@"
     
     
-    //MARK: Search
+    // MARK: Search
     
     static let search = "/api/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
     
@@ -109,7 +109,7 @@ struct RouteRequests {
     static let faqUrl = "api/faq/url/%@"
     static let faqContentUrl = "http://mylifebox.life.com.by/#!/settings/info/en"
 
-    //MARK: - Contacts
+    // MARK: - Contacts
     static let getContacts = "contact?sortField=firstname&sortOrder=ASC&maxResult=16&currentPage=%d"
     static let searchContacts = "search?sortField=firstname&sortOrder=ASC&maxResult=16&query=%@&currentPage=%d"
     static let deleteContacts = "contact"

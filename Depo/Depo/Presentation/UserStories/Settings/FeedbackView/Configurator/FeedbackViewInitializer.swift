@@ -10,7 +10,7 @@ import UIKit
 
 class FeedbackViewModuleInitializer: NSObject {
 
-    class func initializeViewController(with nibName:String) -> FeedbackViewController {
+    class func initializeViewController(with nibName: String) -> FeedbackViewController {
         let viewController = FeedbackViewController(nibName: nibName, bundle: nil)
         let configurator = FeedbackViewModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)

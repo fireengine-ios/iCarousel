@@ -17,4 +17,3 @@ protocol UploadFromLifeBoxViewInput: class {
 //protocol UploadFromLifeBoxViewOutput: class {
 //    func viewIsReady()
 //}
-

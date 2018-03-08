@@ -35,8 +35,8 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
         view?.stopRefresher()
     }
     
-    override func onNextButton(){
-        if (dataSource.selectedItemsArray.count > 0){
+    override func onNextButton() {
+        if (dataSource.selectedItemsArray.count > 0) {
             startAsyncOperation()
             if let interactor_ = interactor as? UploadFilesSelectionInteractor, let dataSource = dataSource as? ArrayDataSourceForCollectionView {
 
@@ -69,7 +69,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
         
     }
     
-    func networkOperationStopped(){
+    func networkOperationStopped() {
         log.debug("UploadFilesSelectionPresenter networkOperationStopped")
 
         asyncOperationSucces()

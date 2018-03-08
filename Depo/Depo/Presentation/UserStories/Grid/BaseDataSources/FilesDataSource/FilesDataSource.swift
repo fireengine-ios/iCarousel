@@ -62,7 +62,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
          localManager.cancelRequest(asset: local.asset)
             
         case let .remoteUrl(url):
-            guard let u = url else{
+            guard let u = url else {
                 return
             }
             getImageServise.cancelRequest(path: u)
@@ -74,7 +74,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         getImageServise.cancelRequest(path: url)
     }
     
-    //MARK: AsynImage
+    // MARK: AsynImage
     
     @discardableResult
     func getImage(patch: PathForItem, compliteImage: @escaping RemoteImage) -> URL? {
@@ -138,7 +138,7 @@ extension FilesDataSource {
         assetCache?.stopCachingImages(for: assets, targetSize: targetSize, contentMode: .aspectFill, options: defaultImageRequestOptions)
     }
     
-    func getAssetThumbnail(asset: PHAsset, indexPath: IndexPath, completion: @escaping (_ image: UIImage?, _ indexPath: IndexPath)->Void) {
+    func getAssetThumbnail(asset: PHAsset, indexPath: IndexPath, completion: @escaping (_ image: UIImage?, _ indexPath: IndexPath) -> Void) {
         assetCache?.requestImage(for: asset, targetSize: targetSize, contentMode: .default, options: defaultImageRequestOptions, resultHandler: { (image, _) in
             completion(image, indexPath)
         })

@@ -22,7 +22,7 @@ final class FaceImageAddNameInteractor: BaseFilesGreedInteractor {
     
 }
 
-//MARK: - FaceImageAddNameInteractorInput
+// MARK: - FaceImageAddNameInteractorInput
 
 extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
     
@@ -79,4 +79,3 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
         })
     }
 }
-
