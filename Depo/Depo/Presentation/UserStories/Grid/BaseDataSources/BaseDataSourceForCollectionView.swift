@@ -168,10 +168,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private func appendLocalItems(originalItemsArray: [WrapData], pageNum: Int, localFileasAppendedCallback: @escaping ([WrapData])->()) {
         var tempoArray = originalItemsArray
-//        var tempoLocalArray = [WrapData]()
-        
-//        let allItemsArray = allMediaItems + originalItemsArray
-        
         if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters),
             !isOnlyNonLocal(filters: unwrapedFilters) {
             switch specificFilters {
@@ -179,7 +175,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 var lastRemote = originalItemsArray
                 if originalItemsArray.isEmpty, let lastItemFromPreviousPage = allMediaItems.last {
-                    lastRemote = [lastItemFromPreviousPage]
+                    lastRemote = all§//[lastItemFromPreviousPage]
                 }
                 let isFirstPage = (pageNum == 1)
                 CoreDataStack.default.getLocalFilesForPhotoVideoPage(filesType: specificFilters,
@@ -248,8 +244,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 self.isLocalFilesRequested =  false
                 DispatchQueue.main.async {
                     self.collectionView?.reloadData()
+                    self.delegate?.filesAppendedAndSorted()
                 }
-                self.delegate?.filesAppendedAndSorted()
             })
         }
         
@@ -772,8 +768,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     //MARK: collectionViewDataSource
     
     func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
-        guard allItems.count >= indexPath.section,
-        allItems[indexPath.section].count >= indexPath.row else {
+        guard allItems.count > indexPath.section,
+        allItems[indexPath.section].count > indexPath.row else {
             return nil
         }
         return allItems[indexPath.section][indexPath.row]
