@@ -105,7 +105,7 @@ extension CoreDataStack {
                 }
             }
             return
-        } else if pageRemoteItems.count == 1, paginationEnd,
+        } else if pageRemoteItems.count == 1, paginationEnd, //if there same md5 but later - will be error
             let lastItem = pageRemoteItems.last {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)])
             if let localItems = try? backgroundContext.fetch(request) {
@@ -129,7 +129,15 @@ extension CoreDataStack {
             return
         } else if firstPage {
             if let lastRemoteItem = pageRemoteItems.last {
-                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem)])
+                var md5s = [String]()
+                var uuids = [String]()
+                pageRemoteItems.forEach{
+                    md5s.append($0.md5)
+                    uuids.append($0.uuid)
+                }
+                
+                let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR uuidValue IN %@)", md5s, uuids)
+                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem), basePredicateString])
                 if let localItems = try? backgroundContext.fetch(request) {
                     let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                     filesCallBack(wrapedLocalItems)
