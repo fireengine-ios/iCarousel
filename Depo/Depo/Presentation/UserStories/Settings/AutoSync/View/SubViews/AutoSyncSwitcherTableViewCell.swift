@@ -56,7 +56,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
             return
         }
         
-        self.model = AutoSyncModel(model: model, selected: switcher.isOn)
+        model.isSelected = switcher.isOn
         delegate?.onValueChanged(model: model, cell: self)
     }
 
