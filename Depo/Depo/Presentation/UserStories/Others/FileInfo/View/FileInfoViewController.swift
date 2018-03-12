@@ -117,7 +117,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
                 folderSizeTitle.text = TextConstants.fileInfoFileSizeTitle
             }
             
-            if let createdDate = obj.creationDate {
+            if let createdDate = obj.creationDate, object.isSynced() {
                 uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
                 if !obj.isLocalItem, let takenDate = obj.metaData?.takenDate, createdDate != takenDate {
                     takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
