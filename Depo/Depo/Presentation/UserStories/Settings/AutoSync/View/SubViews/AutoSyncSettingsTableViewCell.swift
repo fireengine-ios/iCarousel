@@ -58,6 +58,10 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     
     //MARK: - Public
     
+    override func prepareForReuse() {
+        isFullHeight = false
+    }
+    
     func setup(with setting: AutoSyncSetting) {
         autoSyncSetting = setting
     }
