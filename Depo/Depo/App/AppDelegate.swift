@@ -231,19 +231,21 @@ private func setupLog() {
         return urls[urls.endIndex - 1] as NSURL
     }()
     
-    let logPath: NSURL = documentDirectory.appendingPathComponent("app.log")! as NSURL
-    UserDefaults.standard.set(logPath.path!, forKey: "app.log")
-    let fileDestination: AutoRotatingFileDestination = AutoRotatingFileDestination(owner: log, writeToFile: logPath, identifier: "advancedLogger", shouldAppend: true)
-    fileDestination.outputLevel = .debug
-    fileDestination.showLogIdentifier = true
-    fileDestination.showFunctionName = true
-    fileDestination.showThreadName = true
-    fileDestination.showLevel = true
-    fileDestination.showFileName = true
-    fileDestination.showLineNumber = true
-    fileDestination.showDate = true
+    if let logPath = documentDirectory.appendingPathComponent("app.log") as NSURL? {
+        UserDefaults.standard.set(logPath.path!, forKey: "app.log")
+        let fileDestination: AutoRotatingFileDestination = AutoRotatingFileDestination(owner: log, writeToFile: logPath, identifier: "advancedLogger", shouldAppend: true)
+        fileDestination.outputLevel = .debug
+        fileDestination.showLogIdentifier = true
+        fileDestination.showFunctionName = true
+        fileDestination.showThreadName = true
+        fileDestination.showLevel = true
+        fileDestination.showFileName = true
+        fileDestination.showLineNumber = true
+        fileDestination.showDate = true
+        
+        let day:TimeInterval = 24 * 60 * 60
+        fileDestination.targetMaxTimeInterval = day * 2
+        log.add(destination: fileDestination)
+    }
     
-    let day:TimeInterval = 24 * 60 * 60
-    fileDestination.targetMaxTimeInterval = day * 2
-    log.add(destination: fileDestination)
 }
