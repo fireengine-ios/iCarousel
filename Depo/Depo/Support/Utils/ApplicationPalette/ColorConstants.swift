@@ -88,6 +88,14 @@ extension UIColor {
         return UIColor(red: 254.0 / 255.0, green: 247.0 / 255.0, blue: 240.0 / 255.0, alpha: 1.0)
     }
     
+    class var lrLightYellow: UIColor {
+        return UIColor(red: 254.0 / 255.0, green: 233.0 / 255.0, blue: 188.0 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrSLightPink: UIColor {
+        return UIColor(red: 248.0 / 255.0, green: 194.0 / 255.0, blue: 190.0 / 255.0, alpha: 1.0)
+    }
+    
 }
 
 // Text Font
