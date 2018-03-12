@@ -49,7 +49,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
     
     func showCells(from settings: AutoSyncSettings) {
         autoSyncSettings = settings
-        let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: nil, selected: settings.isAutoSyncEnabled)
+        let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: nil, selected: settings.isAutoSyncOptionEnabled)
         let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.photoSetting, selected: false)
         let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.videoSetting, selected: false)
         tableDataArray.append(contentsOf: [headerModel, photoSettingModel, videoSettingModel])
@@ -138,12 +138,15 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
 
 extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
     func onValueChanged(model: AutoSyncModel, cell : AutoSyncSwitcherTableViewCell){
-        let indexPath = tableView?.indexPath(for: cell)
-        tableDataArray[(indexPath?.row)!] = model
+        guard let indexPath = tableView?.indexPath(for: cell) else {
+            return
+        }
+        
+        tableDataArray[indexPath.row] = model
         
         if model.cellType == .headerLike {
             if cell.switcher.isOn {
-                autoSyncSettings?.isAutoSyncEnabled = true
+                autoSyncSettings?.isAutoSyncOptionEnabled = true
                 delegate?.enableAutoSync()
             } else {
                 autoSyncSettings?.disableAutoSync()

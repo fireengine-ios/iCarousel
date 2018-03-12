@@ -222,6 +222,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="cellSeparator" destination="J0i-H8-32F" id="sfR-D0-mDh"/>
                 <outlet property="dropDownArrow" destination="Her-KU-zms" id="YZ3-LQ-wic"/>
                 <outlet property="expandButton" destination="Gyd-QP-pVm" id="uCn-eg-xRc"/>
                 <outlet property="expandHeightConstraint" destination="0ei-DF-fBv" id="CEq-vU-z5j"/>
@@ -230,6 +231,8 @@
                 <outletCollection property="optionsViews" destination="VRc-qb-Pue" collectionClass="NSMutableArray" id="RP0-zY-yjY"/>
                 <outletCollection property="optionsViews" destination="61z-Jn-NEA" collectionClass="NSMutableArray" id="gC0-hG-sxf"/>
                 <outletCollection property="optionsViews" destination="aDh-XY-ZsJ" collectionClass="NSMutableArray" id="XKI-JJ-Oqo"/>
+                <outletCollection property="optionSeparators" destination="gR9-Hd-zOq" collectionClass="NSMutableArray" id="pFh-O5-s99"/>
+                <outletCollection property="optionSeparators" destination="btd-CZ-dx4" collectionClass="NSMutableArray" id="5SR-do-nfb"/>
             </connections>
             <point key="canvasLocation" x="34" y="55"/>
         </tableViewCell>
