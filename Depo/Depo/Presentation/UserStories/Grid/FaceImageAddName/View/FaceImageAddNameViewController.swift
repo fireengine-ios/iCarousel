@@ -22,7 +22,7 @@ final class FaceImageAddNameViewController: BaseFilesGreedChildrenViewController
         super.viewDidLoad()
         
         searchTextField.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        if mainTitle == TextConstants.faceImageSearchAddName {
+        if mainTitle == TextConstants.faceImageAddName {
             searchTextField.text = ""
         } else {
             searchTextField.text = mainTitle
