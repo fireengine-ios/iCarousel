@@ -291,7 +291,9 @@ struct TextConstants {
     static let audioViewNoAudioButtonText = NSLocalizedString("Start adding your music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: DocumentsView
-    static let documentsViewNoDocumenetsTitleText = NSLocalizedString("Start adding your documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let documentsViewNoDocumenetsTitleText = NSLocalizedString("You don’t have any documents on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let documentsViewNoDocumentsButton = NSLocalizedString("Start adding your documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Folder
     static let folderEmptyText = NSLocalizedString("Folder is Empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

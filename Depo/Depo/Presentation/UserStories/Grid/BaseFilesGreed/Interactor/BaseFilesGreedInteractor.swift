@@ -133,10 +133,6 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     func textForNoFileButton() -> String {
         if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoButtonText
-        } else if remoteItems is MusicService {
-            return TextConstants.audioViewNoAudioButtonText
-        } else if remoteItems is DocumentService {
-            return TextConstants.documentsViewNoDocumenetsTitleText
         } else if remoteItems is StoryService {
             return TextConstants.storiesViewNoStoriesButtonText
         } else if remoteItems is AlbumService {
