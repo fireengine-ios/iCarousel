@@ -809,6 +809,8 @@ struct NumericConstants {
     
     static let maxNumberOfUploadAttempts = 5
     static let secondsBeetweenUploadAttempts = 5
+    
+    static let numberOfLocalFilesPage = 100
 }
 
 struct RequestSizeConstant {

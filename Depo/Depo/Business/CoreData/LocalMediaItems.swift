@@ -95,7 +95,7 @@ extension CoreDataStack {
         
         if pageRemoteItems.isEmpty {
             if let localItems = try? backgroundContext.fetch(request),
-                (localItems.count >= 100 || !inProcessAppendingLocalFiles) {
+                (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
                 let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                 filesCallBack(wrapedLocalItems)
             } else {
@@ -110,7 +110,7 @@ extension CoreDataStack {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)])
             if let localItems = try? backgroundContext.fetch(request) {
                 if lastItem.isLocalItem {//
-                    if (localItems.count >= 100 || !inProcessAppendingLocalFiles) {
+                    if (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
                         let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                         filesCallBack(wrapedLocalItems)
                     } else {
@@ -168,7 +168,7 @@ extension CoreDataStack {
         
     
         
-        if let localItems = try? backgroundContext.fetch(request), (localItems.count >= 100 || !inProcessAppendingLocalFiles) {
+        if let localItems = try? backgroundContext.fetch(request), (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
             let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
             filesCallBack(wrapedLocalItems)
         } else {
