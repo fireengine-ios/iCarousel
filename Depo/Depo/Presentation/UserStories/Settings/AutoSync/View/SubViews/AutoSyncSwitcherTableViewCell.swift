@@ -26,13 +26,13 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         
         titleLabel.textColor = ColorConstants.whiteColor
-        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        titleLabel.font = .TurkcellSaturaDemFont(size: 18)
         
         subTitleLabel.textColor = ColorConstants.whiteColor
-        subTitleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        subTitleLabel.font = .TurkcellSaturaBolFont(size: 14)
         
         separatorView.isHidden = true
     }
@@ -52,9 +52,12 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     }
     
     @IBAction func onSwitcherValueChanged() {
-        let newModel = AutoSyncModel(model: self.model!, selected: self.switcher.isOn)
-        model = newModel
-        delegate?.onValueChanged(model: model!, cell: self)
+        guard let model = model else {
+            return
+        }
+        
+        self.model = AutoSyncModel(model: model, selected: switcher.isOn)
+        delegate?.onValueChanged(model: model, cell: self)
     }
 
 }
