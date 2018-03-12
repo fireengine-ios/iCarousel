@@ -84,13 +84,11 @@ struct AutoSyncSettings {
     }
     
     func asDictionary() -> [String: Bool] {
-        var dict = [String: Bool]()
-        dict[AutoSyncSettings.isAutoSyncEnabledKey] = isAutoSyncOptionEnabled
-        dict[AutoSyncSettings.mobileDataPhotosKey] = (photoSetting.option == .wifiAndCellular)
-        dict[AutoSyncSettings.mobileDataVideoKey] = (videoSetting.option == .wifiAndCellular)
-        dict[AutoSyncSettings.wifiPhotosKey] = (photoSetting.option == .wifiOnly)
-        dict[AutoSyncSettings.wifiVideoKey] = (videoSetting.option == .wifiOnly)
-        return dict
+        return [AutoSyncSettings.isAutoSyncEnabledKey: isAutoSyncOptionEnabled,
+                AutoSyncSettings.mobileDataPhotosKey: (photoSetting.option == .wifiAndCellular),
+                AutoSyncSettings.mobileDataVideoKey: (videoSetting.option == .wifiAndCellular),
+                AutoSyncSettings.wifiPhotosKey: (photoSetting.option == .wifiOnly),
+                AutoSyncSettings.wifiVideoKey: (videoSetting.option == .wifiOnly)]
     }
 }
 
