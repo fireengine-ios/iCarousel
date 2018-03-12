@@ -52,7 +52,7 @@ final class AutoSyncSettingsOptionView: UIView {
         self.isSelected = isSelected
     }
     
-    func setColors(isFromSettings: Bool){
+    func setColors(isFromSettings: Bool) {
         let textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         button.setTitleColor(textColor, for: .normal)
         checkboxImageView.image = checkMarkImage
