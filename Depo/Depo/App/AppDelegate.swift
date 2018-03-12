@@ -14,7 +14,7 @@ import SDWebImage
 import XCGLogger
 
 // the global reference to logging mechanism to be available in all files
-let log = setupLog()
+var log = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -49,13 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        
-        let documentDirectory: NSURL = {
-            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            return urls[urls.endIndex - 1] as NSURL
-        }()
-        let logPath: NSURL = documentDirectory.appendingPathComponent("app.log")! as NSURL
-        log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: logPath, fileLevel: .debug)
+        setupLog()
         
         MenloworksAppEvents.onAppLaunch()
         MenloworksTagsService.shared.passcodeStatus(!passcodeStorage.isEmpty)
@@ -231,28 +225,25 @@ extension AppDelegate {
     }
 }
 
-private func setupLog() -> XCGLogger {
-    // Create a logger object with no destinations
-    let log = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
+private func setupLog() {
+    let documentDirectory: NSURL = {
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return urls[urls.endIndex - 1] as NSURL
+    }()
     
-    // Create a destination for the system console log (via NSLog)
-    let systemDestination = AppleSystemLogDestination(identifier: "advancedLogger.systemDestination")
+    let logPath: NSURL = documentDirectory.appendingPathComponent("app.log")! as NSURL
+    UserDefaults.standard.set(logPath.path!, forKey: "app.log")
+    let fileDestination: AutoRotatingFileDestination = AutoRotatingFileDestination(owner: log, writeToFile: logPath, identifier: "advancedLogger", shouldAppend: true)
+    fileDestination.outputLevel = .debug
+    fileDestination.showLogIdentifier = true
+    fileDestination.showFunctionName = true
+    fileDestination.showThreadName = true
+    fileDestination.showLevel = true
+    fileDestination.showFileName = true
+    fileDestination.showLineNumber = true
+    fileDestination.showDate = true
     
-    // Optionally set some configuration options
-    systemDestination.outputLevel = .debug
-    systemDestination.showLogIdentifier = false
-    systemDestination.showFunctionName = true
-    systemDestination.showThreadName = true
-    systemDestination.showLevel = true
-    systemDestination.showFileName = true
-    systemDestination.showLineNumber = true
-    systemDestination.showDate = true
-    
-    // Add the destination to the logger
-    log.add(destination: systemDestination)
-    
-    // Add basic app info, version info etc, to the start of the logs
-    log.logAppDetails()
-    
-    return log
+    let day:TimeInterval = 24 * 60 * 60
+    fileDestination.targetMaxTimeInterval = day * 2
+    log.add(destination: fileDestination)
 }
