@@ -19,6 +19,9 @@ final class AutoSyncSettingsOptionView: UIView {
     @IBOutlet private weak var button: UIButton!
     @IBOutlet private weak var checkboxImageView: UIImageView!
     
+    private var checkMarkImage = UIImage(named: "checkmark")?.withRenderingMode(.alwaysTemplate)
+    
+    
     private var option: AutoSyncOption = .wifiOnly {
         willSet { button.setTitle(newValue.text(), for: .normal) }
     }
@@ -52,6 +55,8 @@ final class AutoSyncSettingsOptionView: UIView {
     func setColors(isFromSettings: Bool){
         let textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         button.setTitleColor(textColor, for: .normal)
+        checkboxImageView.image = checkMarkImage
+        checkboxImageView.tintColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
     }
     
     

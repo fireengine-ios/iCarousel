@@ -17,16 +17,20 @@ struct AutoSyncSettings {
     static let wifiPhotosKey = "wifiPhotos"
     static let wifiVideoKey = "wifiVideo"
     
-    var isAutoSyncEnabled: Bool = false
+    var isAutoSyncEnabled: Bool {
+        return isAutoSyncOptionEnabled && (photoSetting.option != .never || videoSetting.option != .never)
+    }
     var photoSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiOnly)
     var videoSetting = AutoSyncSetting(syncItemType: .video, option: .wifiOnly)
+    
+    var isAutoSyncOptionEnabled: Bool = false //auto sync switcher in settings is on/off
     
     
     init() {
     }
     
     init(with dictionary: [String: Bool]) {
-        isAutoSyncEnabled = dictionary[AutoSyncSettings.isAutoSyncEnabledKey] ?? false
+        isAutoSyncOptionEnabled = dictionary[AutoSyncSettings.isAutoSyncEnabledKey] ?? false
         
         let mobileDataPhotos = dictionary[AutoSyncSettings.mobileDataPhotosKey] ?? false
         let mobileDataVideo = dictionary[AutoSyncSettings.mobileDataVideoKey] ?? false
@@ -56,11 +60,10 @@ struct AutoSyncSettings {
         }
     }
     
-    
     mutating func disableAutoSync() {
-        isAutoSyncEnabled = false
+        isAutoSyncOptionEnabled = false
         photoSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiOnly)
-        photoSetting = AutoSyncSetting(syncItemType: .video, option: .wifiOnly)
+        videoSetting = AutoSyncSetting(syncItemType: .video, option: .wifiOnly)
     }
     
     mutating func set(setting: AutoSyncSetting) {
@@ -82,7 +85,7 @@ struct AutoSyncSettings {
     
     func asDictionary() -> [String: Bool] {
         var dict = [String: Bool]()
-        dict[AutoSyncSettings.isAutoSyncEnabledKey] = isAutoSyncEnabled
+        dict[AutoSyncSettings.isAutoSyncEnabledKey] = isAutoSyncOptionEnabled
         dict[AutoSyncSettings.mobileDataPhotosKey] = (photoSetting.option == .wifiAndCellular)
         dict[AutoSyncSettings.mobileDataVideoKey] = (videoSetting.option == .wifiAndCellular)
         dict[AutoSyncSettings.wifiPhotosKey] = (photoSetting.option == .wifiOnly)

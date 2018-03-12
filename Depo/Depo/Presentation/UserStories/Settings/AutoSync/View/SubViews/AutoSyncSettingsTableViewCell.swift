@@ -20,11 +20,15 @@ class AutoSyncSettingsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var expandHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var optionsStackView: UIStackView!
+    @IBOutlet private weak var optionsStackView: UIStackView!
     @IBOutlet private weak var dropDownArrow: UIImageView!
     @IBOutlet private weak var optionLabel: UILabel!
-    @IBOutlet weak var expandButton: UIButton!
+    @IBOutlet private weak var expandButton: UIButton!
     @IBOutlet private var optionsViews: [AutoSyncSettingsOptionView]!
+    
+    @IBOutlet private var optionSeparators: [UIView]!
+    @IBOutlet private weak var cellSeparator: UIView!
+    
     
     private var isFullHeight: Bool = false {
         didSet {
@@ -55,7 +59,6 @@ class AutoSyncSettingsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
 
     
@@ -72,6 +75,14 @@ class AutoSyncSettingsTableViewCell: UITableViewCell {
         for view in optionsViews {
             view.setColors(isFromSettings: isFromSettings)
         }
+        
+        for separator in optionSeparators {
+            separator.backgroundColor = isFromSettings ? ColorConstants.lightGrayColor : ColorConstants.whiteColor
+        }
+        
+        cellSeparator.backgroundColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        
+        
     }
     
     
@@ -88,7 +99,7 @@ class AutoSyncSettingsTableViewCell: UITableViewCell {
             view.delegate = self
         }
         expandButton.setTitle(autoSyncSetting.syncItemType.text(), for: .normal)
-        optionLabel.text = isFullHeight ? "Select" : autoSyncSetting.option.text()
+        optionLabel.text = isFullHeight ? TextConstants.autoSyncSettingsSelect : autoSyncSetting.option.text()
         optionsStackView.isHidden = !isFullHeight
         expandHeightConstraint.constant = expandHeight
     }

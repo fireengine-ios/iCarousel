@@ -88,19 +88,6 @@ class SyncServiceManager {
         return settings
     }
     
-//    func logChangesIfNeeded(settings: AutoSyncSettings) {
-//        if settings.isAutoSyncEnabled != settings?.isAutoSyncEnabled, !settings.isAutoSyncEnable {
-//                MenloworksEventsService.shared.onAutosyncOff()
-//        }
-//        if settings.mobileDataPhotos != settings?.mobileDataPhotos {
-//            settings.mobileDataPhotos ? MenloworksTagsService.shared.onAutosyncPhotosViaLte() : MenloworksTagsService.shared.onAutosyncPhotosViaWifi()
-//        }
-//
-//        if settings.mobileDataVideo != settings?.mobileDataVideo {
-//            settings.mobileDataVideo ? MenloworksTagsService.shared.onAutosyncVideoViaLte() : MenloworksTagsService.shared.onAutosyncVideoViaWifi()
-//        }
-//    }
-    
     func update(syncSettings: AutoSyncSettings) {
         log.debug("SyncServiceManager updateSyncSettings")
         
