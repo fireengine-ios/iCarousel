@@ -4,6 +4,7 @@ inhibit_all_warnings!
 
 def shared_pods
   pod 'Alamofire', '~> 4.5'
+  pod 'SwiftyJSON', '~>3'
 end
 
 def core_pods
@@ -35,8 +36,6 @@ def core_pods
   pod 'iCarousel'
   pod 'SplunkMint'
 
-  # json
-  pod 'SwiftyJSON', '~>3'
   pod 'ReachabilitySwift'
   pod 'MBProgressHUD', '~> 1.0.0'
   pod 'ExpandableTableViewController'
@@ -54,6 +53,10 @@ target 'Depo_LifeTech' do
 end
 
 target 'LifeboxShared' do
+    shared_pods
+end
+
+target 'LifeboxFileProvider' do
     shared_pods
 end
 

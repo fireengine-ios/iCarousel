@@ -28,12 +28,13 @@ class LBAlbumLikePreviewSliderDataSource: NSObject, UICollectionViewDataSource, 
     func setCollectionView(items: [SliderItem]) {
         allItems = items
         reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
     }
     
     func reloadData() {
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
-        }        
+        }
     }
     
     // MARK: - UICollectionViewDataSource

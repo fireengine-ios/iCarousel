@@ -17,6 +17,8 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     @IBOutlet private weak var visibleImageView: UIImageView!
     @IBOutlet private weak var transperentView: UIView!
     
+    private var isCellVisible = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -26,11 +28,12 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         isCellSelectionEnabled = isSelectionActive
+        isCellSelected = isSelected
         
         if isSelectionActive {
-            visibleImageView.isHidden = !isCellSelected
-            transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
-            isCellSelected = !isCellSelected
+            let highlightCell = (isCellSelected && isCellVisible) || (!isCellSelected && !isCellVisible)
+            visibleImageView.isHidden = !highlightCell
+            transperentView.alpha = highlightCell ? NumericConstants.faceImageCellTransperentAlpha : 0
         }
         
     }
@@ -49,19 +52,20 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         
         imageView.image = nil
         
-        nameLabel.text = item.name
-
+        if let thing = wrappedObj as? ThingsItem {
+            nameLabel.text = thing.responseObject.code
+        } else {
+            nameLabel.text = item.name
+        }
+        
         if let peopleItem = wrappedObj as? PeopleItem,
             let isVisible = peopleItem.responseObject.visible {
-            isCellSelected = isVisible
-
-            if !isVisible {
-                visibleImageView.isHidden = isVisible
-                transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
-            }
             
-            visibleImageView.isHidden = isCellSelected
-            transperentView.alpha = !isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+            isCellVisible = isVisible
+            
+            let highlightCell = (isCellSelected && isCellVisible) || (!isCellSelected && !isCellVisible)
+            visibleImageView.isHidden = !highlightCell
+            transperentView.alpha = highlightCell ? NumericConstants.faceImageCellTransperentAlpha : 0
         }
     
     }

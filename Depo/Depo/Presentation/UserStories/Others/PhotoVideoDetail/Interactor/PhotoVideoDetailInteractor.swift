@@ -7,8 +7,6 @@
 //
 
 class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
-        
-    typealias Item = WrapData
 
     weak var output: PhotoVideoDetailInteractorOutput!
     

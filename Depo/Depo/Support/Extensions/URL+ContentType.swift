@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MobileCoreServices
 
 extension URL {
     var imageContentType: String {
@@ -19,5 +20,23 @@ extension URL {
         } else {
             return "image/jpg" 
         }
+    }
+}
+
+extension URL {
+    
+    /// UTI
+    /// https://stackoverflow.com/a/34772517/5893286
+    var utType: String? {
+        return (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
+    }
+    
+    var mimeType: String {
+        if let uti = utType,
+            let mimetype = UTTypeCopyPreferredTagWithClass(uti as CFString, kUTTagClassMIMEType)?.takeRetainedValue()
+        {
+            return mimetype as String
+        }
+        return "application/octet-stream"
     }
 }

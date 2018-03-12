@@ -8,8 +8,6 @@
 //
 
 class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
-
-    typealias Item = WrapData
     
     lazy var player: MediaPlayer = factory.resolve()
     
@@ -585,6 +583,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
         if type == ElementTypes.removeAlbum {
+            bottomBarPresenter?.dismiss(animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        }
+        if type == ElementTypes.completelyDeleteAlbums {
             bottomBarPresenter?.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         }

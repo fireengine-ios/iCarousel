@@ -147,7 +147,6 @@ import UIKit
     private func updateHeaderPosition() {
         if let albumHeight = albumsHeightConstraint?.constant,
             let headerImageHeight = headerImageHeightConstraint?.constant {
-            
             collectionView.contentInset.top = albumHeight + headerImageHeight
         } else {
             collectionView.contentInset.top = headerImageHeight
@@ -160,6 +159,7 @@ import UIKit
         } else {
             setTouchableTitle(title: mainTitle)
         }
+        
         addNavBarTouch()
     }
     

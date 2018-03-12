@@ -14,6 +14,7 @@ typealias AuthenticateHandler = (Bool) -> Void
 protocol BiometricsManager {
     var isEnabled: Bool { get set }
     var status: BiometricsStatus { get }
+    var biometricsTitle: String { get }
     var isAvailableFaceID: Bool { get }
     func authenticate(reason: String, handler: @escaping AuthenticateHandler)
 }
@@ -21,7 +22,7 @@ protocol BiometricsManager {
 enum BiometricsStatus {
     case available
     case notAvailable
-    case notInitialized ///"No fingers are enrolled with Touch ID."
+    case notInitialized ///"passcode is enrolled and biometrics not"
 }
 
 final class BiometricsManagerImp: BiometricsManager {
@@ -53,14 +54,25 @@ final class BiometricsManagerImp: BiometricsManager {
         }
     }
     
+    lazy var biometricsTitle: String = {
+        return isAvailableFaceID ? TextConstants.passcodeFaceID : TextConstants.passcodeTouchID
+    }()
+    
+    /// You need to first call canEvaluatePolicy in order to get the biometry type.
+    /// That is, if you're just doing LAContext().biometryType then you'll always get 'none' back
+    /// https://forums.developer.apple.com/thread/89043
     var isAvailableFaceID: Bool {
-        if #available(iOS 11.0, *) {
-            /// temp logic for xcode <= 9.1
-            return false
-            //return LAContext().biometryType == .faceID
-        } else {
-            return false
-        }
+        return Device.isIphoneX
+        /// old normal realization
+//        let context = LAContext()
+//        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) else {
+//            return false
+//        }
+//        if #available(iOS 11.0, *) {
+//            return context.biometryType == .faceID
+//        } else {
+//            return false
+//        }
     }
     
     func authenticate(reason: String = TextConstants.passcodeBiometricsDefault, handler: @escaping AuthenticateHandler) {

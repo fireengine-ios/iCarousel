@@ -10,8 +10,6 @@ import Foundation
 
 protocol PhotoVideoDetailInteractorInput: class {
     
-    typealias Item = WrapData
-    
     func onSelectItem(fileObject:Item, from items:[Item])
     
     func onViewIsReady()

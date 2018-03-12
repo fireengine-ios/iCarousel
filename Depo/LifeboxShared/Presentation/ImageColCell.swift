@@ -10,15 +10,30 @@ import UIKit
 
 final class ImageColCell: UICollectionViewCell {
     
-    @IBOutlet private weak var photoImageView: UIImageView!
+    private var urlIdentificator: URL?
     
-    func setImage(_ image: UIImage?) {
-        photoImageView.setScreenScaledImage(image)
+    @IBOutlet private weak var photoImageView: UIImageView! {
+        didSet {
+            photoImageView.backgroundColor = UIColor.lightGray
+        }
     }
-}
-
-private extension UIImageView {
-    func setScreenScaledImage(_ newImage: UIImage?) {
-        image = newImage?.resizedImage(to: bounds.size.screenScaled)
+    
+    func config(with shareData: ShareData) {
+        urlIdentificator = shareData.url
+        DispatchQueue.global().async { [weak self] in
+            FileManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
+                if self?.urlIdentificator == shareData.url {
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(_):
+                            self?.photoImageView.setScreenScaledImage(shareData.image)
+                        case .failed(_):
+                            self?.photoImageView.image = #imageLiteral(resourceName: "ImageNoDocuments")
+                        }
+                        self?.photoImageView.backgroundColor = UIColor.white
+                    }
+                }
+            }
+        }
     }
 }

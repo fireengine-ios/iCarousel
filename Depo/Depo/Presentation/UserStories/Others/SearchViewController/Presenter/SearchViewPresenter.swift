@@ -168,6 +168,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
         if item.fileType.isFaceImageType {
             openFaceImage(item: item)
+        } else if item.fileType.isFaceImageAlbum {
+            openFaceImageAlbum(item: item)
         } else if item.fileType.isUnSupportedOpenType {
             let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
@@ -337,6 +339,17 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func openFaceImage(item: BaseDataSourceItem) {
         showSpinner()
         interactor.openFaceImageForSearch(item: item)
+    }
+    
+    func openFaceImageAlbum(item: BaseDataSourceItem) {
+        let album = AlbumItem(uuid: item.uuid,
+                              name: item.name,
+                              creationDate: item.creationDate,
+                              lastModifiDate: item.lastModifiDate,
+                              fileType: item.fileType,
+                              syncStatus: item.syncStatus,
+                              isLocalItem: item.isLocalItem)
+        router.openAlbum(item: album)
     }
     
     //MARK: - Spinner
