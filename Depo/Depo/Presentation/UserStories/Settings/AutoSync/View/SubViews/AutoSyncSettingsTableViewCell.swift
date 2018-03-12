@@ -81,8 +81,6 @@ class AutoSyncSettingsTableViewCell: UITableViewCell {
         }
         
         cellSeparator.backgroundColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
-        
-        
     }
     
     

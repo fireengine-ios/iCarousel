@@ -130,11 +130,11 @@ enum AutoSyncOption {
     func text() -> String {
         switch self {
         case .never:
-            return "Never"
+            return TextConstants.autoSyncSettingsOptionNever
         case .wifiOnly:
-            return "Wi-Fi"
+            return TextConstants.autoSyncSettingsOptionWiFi
         case .wifiAndCellular:
-            return "Wi-Fi and Cellular"
+            return TextConstants.autoSyncSettingsOptionWiFiAndCellular
         }
     }
 }
