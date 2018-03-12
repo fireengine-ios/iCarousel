@@ -15,7 +15,7 @@ protocol AutoSyncSettingsTableViewCellDelegate: class {
 }
 
 
-class AutoSyncSettingsTableViewCell: UITableViewCell {
+final class AutoSyncSettingsTableViewCell: UITableViewCell {
     weak var delegate: AutoSyncSettingsTableViewCellDelegate?
     
     @IBOutlet weak var expandHeightConstraint: NSLayoutConstraint!
@@ -47,6 +47,7 @@ class AutoSyncSettingsTableViewCell: UITableViewCell {
             }
         }
     }
+    
     private let options: [AutoSyncOption] = [.never, .wifiOnly, .wifiAndCellular]
     
     
