@@ -67,13 +67,13 @@ extension UIViewController: Waiting {
     func hideSpinerIncludeNavigatinBar() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
-            MBProgressHUD.hide(for: window, animated: true)
+            MBProgressHUD.hideAllHUDs(for: window, animated: true)
         }
     }
     
     func hideSpiner() {
         DispatchQueue.main.async {
-            MBProgressHUD.hide(for: self.view, animated: true)
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         }
     }
     
