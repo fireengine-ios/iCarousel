@@ -20,7 +20,6 @@
             <connections>
                 <outlet property="codeTextField" destination="zvh-bd-Zbq" id="hAJ-1D-NbU"/>
                 <outlet property="keyboardHideManager" destination="jBJ-HU-y2A" id="JPk-af-kYM"/>
-                <outlet property="nextButton" destination="MHB-aw-SyK" id="NyN-Tk-nQf"/>
                 <outlet property="resendButton" destination="fkl-s2-rLo" id="fQn-WO-Rx2"/>
                 <outlet property="timerLabel" destination="tF4-Cp-1JW" id="wJ7-64-AjE"/>
                 <outlet property="titleLabel" destination="bzw-bU-Vho" id="wY7-hy-rUf"/>
@@ -124,25 +123,10 @@
                         <constraint firstItem="g0g-br-DnT" firstAttribute="leading" secondItem="Jhv-sh-Xib" secondAttribute="leading" id="xcT-7b-J2U"/>
                     </constraints>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHB-aw-SyK" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="110" y="498" width="155" height="60"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="60" id="foF-WX-lnn"/>
-                        <constraint firstAttribute="width" constant="155" id="hfI-NM-SbV"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="22"/>
-                    <state key="normal" title="next"/>
-                    <connections>
-                        <action selector="actionResendButton:" destination="-1" eventType="touchUpInside" id="5si-Sj-tQL"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="MHB-aw-SyK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="anG-Xa-joa"/>
                 <constraint firstItem="Jhv-sh-Xib" firstAttribute="top" secondItem="CYc-xl-rPs" secondAttribute="top" id="dnO-Dn-AS4"/>
-                <constraint firstItem="CYc-xl-rPs" firstAttribute="bottom" secondItem="MHB-aw-SyK" secondAttribute="bottom" constant="45" id="fkk-hu-oAB"/>
                 <constraint firstItem="Jhv-sh-Xib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rEz-Ba-nMO"/>
                 <constraint firstAttribute="trailing" secondItem="Jhv-sh-Xib" secondAttribute="trailing" id="yMS-1A-vtC"/>
                 <constraint firstItem="Jhv-sh-Xib" firstAttribute="bottom" secondItem="CYc-xl-rPs" secondAttribute="bottom" id="zpM-DA-Enw"/>
