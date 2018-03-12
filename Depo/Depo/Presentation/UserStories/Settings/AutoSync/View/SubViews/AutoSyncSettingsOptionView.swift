@@ -17,9 +17,14 @@ final class AutoSyncSettingsOptionView: UIView {
     weak var delegate: AutoSyncSettingsOptionViewDelegate?
     
     @IBOutlet private weak var button: UIButton!
-    @IBOutlet private weak var checkboxImageView: UIImageView!
+    @IBOutlet private weak var checkboxImageView: UIImageView! {
+        didSet {
+            checkboxImageView.image = checkMarkImage
+            checkboxImageView.alpha = 0.0
+        }
+    }
     
-    private var checkMarkImage = UIImage(named: "checkmark")?.withRenderingMode(.alwaysTemplate)
+    private let checkMarkImage = UIImage(named: "checkmark")
     
     
     private var option: AutoSyncOption = .wifiOnly {
@@ -27,7 +32,9 @@ final class AutoSyncSettingsOptionView: UIView {
     }
     
     private var isSelected: Bool = false {
-        willSet { setCheckmark(selected: newValue) }
+        willSet {
+            setCheckmark(selected: newValue)
+        }
         didSet {
             if isSelected, isSelected != oldValue {
                 delegate?.didSelect(option: option)
@@ -36,18 +43,9 @@ final class AutoSyncSettingsOptionView: UIView {
     }
 
     
-    //MARK: - Lifecycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        checkboxImageView.alpha = 0.0
-    }
-    
-    
     //MARK: - Public
     
-    func configure(with option: AutoSyncOption, isSelected: Bool) {
+    func setup(with option: AutoSyncOption, isSelected: Bool) {
         self.option = option
         self.isSelected = isSelected
     }
@@ -55,7 +53,6 @@ final class AutoSyncSettingsOptionView: UIView {
     func setColors(isFromSettings: Bool) {
         let textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         button.setTitleColor(textColor, for: .normal)
-        checkboxImageView.image = checkMarkImage
         checkboxImageView.tintColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
     }
     
@@ -76,9 +73,3 @@ final class AutoSyncSettingsOptionView: UIView {
     }
     
 }
-
-
-
-
-
-

@@ -24,6 +24,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     
     var delegate: AutoSyncSwitcherTableViewCellDelegate?
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .clear
@@ -37,7 +38,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         separatorView.isHidden = true
     }
     
-    func configurateCellWith(model: AutoSyncModel) {
+    func setup(with model: AutoSyncModel) {
         self.model = model
         switcher.isOn = model.isSelected
         
