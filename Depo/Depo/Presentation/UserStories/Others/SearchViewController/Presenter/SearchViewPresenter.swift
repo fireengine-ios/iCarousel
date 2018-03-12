@@ -241,6 +241,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func onMaxSelectionExeption() {}
+    
     func onMoreActions(ofItem: Item?, sender: Any) {
         guard let item = ofItem else {
             return
