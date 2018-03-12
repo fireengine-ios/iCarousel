@@ -96,6 +96,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             defaultNavBarStyle()
             setStatusBarBackgroundColor(color: .white)
         }
+        navigationController?.delegate = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -377,6 +378,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func dismissController() {
         goBack = true
+        navigationController?.delegate = self
         navigationController?.popViewController(animated: true)
     }
     

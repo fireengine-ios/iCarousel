@@ -191,6 +191,11 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         } else {
             topFavoritesStar.isHidden = true
         }
+    
+        
+        if wrappered.fileType.isFaceImageAlbum || wrappered.fileType.isFaceImageType {
+            moreButton.isHidden = true
+        }
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {

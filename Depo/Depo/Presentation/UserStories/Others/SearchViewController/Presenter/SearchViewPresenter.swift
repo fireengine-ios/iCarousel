@@ -241,7 +241,18 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func onMaxSelectionExeption() {}
-    func onMoreActions(ofItem: Item?, sender: Any) {}
+    
+    func onMoreActions(ofItem: Item?, sender: Any) {
+        guard let item = ofItem else {
+            return
+        }
+        log.debug("SearchViewPresenter onMoreActions")
+        
+        alertSheetModule?.showSpecifiedAlertSheet(with: item,
+                                                  presentedBy: sender,
+                                                  onSourceView: nil,
+                                                  viewController: nil)
+    }
     
     func getNextItems() { }
     
