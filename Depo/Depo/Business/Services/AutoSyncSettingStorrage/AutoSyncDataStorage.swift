@@ -10,16 +10,16 @@ import UIKit
 
 class AutoSyncDataStorage: NSObject {
 
-    func getAutoSyncModelForCurrentUser(success:@escaping ([AutoSyncModel], _ uniqueUserId: String) -> Swift.Void){
+    func getAutoSyncModelForCurrentUser(success:@escaping ([AutoSyncModel], _ uniqueUserId: String) -> Swift.Void) {
         SingletonStorage.shared.getAccountInfoForUser(success: { (accountInfoResponce) in
             let settings: [AutoSyncModel]
             
             let uniqueUserID = accountInfoResponce.projectID ?? ""
-            if let dict = UserDefaults.standard.object(forKey: uniqueUserID) as? [String: Bool]{
+            if let dict = UserDefaults.standard.object(forKey: uniqueUserID) as? [String: Bool] {
                 let autoSyncModel = SettingsAutoSyncModel()
                 autoSyncModel.configurateWithDictionary(dictionary: dict)
                 settings = autoSyncModel.getDataForTable()
-            }else{
+            } else {
                 settings = SettingsAutoSyncModel().getDataForTable()
             }
             
@@ -34,7 +34,7 @@ class AutoSyncDataStorage: NSObject {
         UserDefaults.standard.set(dict, forKey: uniqueUserId)
         if model.isAutoSyncEnable {
             LocationManager.shared.startUpdateLocation()
-        }else{
+        } else {
             PopUpService.shared.setLoginCountForShowImmediately()
             PopUpService.shared.checkIsNeedShowUploadOffPopUp()
             LocationManager.shared.stopUpdateLocation()

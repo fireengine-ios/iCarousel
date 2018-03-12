@@ -13,7 +13,7 @@ class FileInfoModuleInitializer: NSObject {
     //Connect with object on storyboard
     @IBOutlet weak var fileinfoViewController: FileInfoViewController!
 
-    class func initializeViewController(with nibName:String) -> UIViewController {
+    class func initializeViewController(with nibName: String) -> UIViewController {
         let viewController = FileInfoViewController(nibName: nibName, bundle: nil)
         let configurator = FileInfoModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)

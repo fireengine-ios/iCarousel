@@ -41,7 +41,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         vc.navigationBarWithGradientStyleWithoutInsets()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            rootVC.present(navVC, animated: true,completion: nil)
+            rootVC.present(navVC, animated: true, completion: nil)
         }
     }
     
@@ -53,7 +53,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     // MARK: Interactor out
     
-    func onSuccessLogin(){
+    func onSuccessLogin() {
         interactor.checkEULA()
         MenloworksAppEvents.onStartWithLogin(true)
     }
@@ -63,7 +63,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         interactor.checkEULA()
     }
     
-    func onFailLogin(){
+    func onFailLogin() {
         router.navigateToOnboarding()
         MenloworksAppEvents.onStartWithLogin(false)
     }
@@ -79,7 +79,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                 self?.customProgressHUD.showProgressSpinner(progress: progressPercentage)
             }
         
-        }){ [weak self] in
+        }) { [weak self] in
             DispatchQueue.main.async {
                 self?.customProgressHUD.hideProgressSpinner()
                 

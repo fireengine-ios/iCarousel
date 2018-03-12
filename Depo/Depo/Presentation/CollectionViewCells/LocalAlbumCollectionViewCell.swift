@@ -21,7 +21,7 @@ class LocalAlbumCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
-        guard let album = wrappedObj as? AlbumItem else{
+        guard let album = wrappedObj as? AlbumItem else {
             return
         }
         

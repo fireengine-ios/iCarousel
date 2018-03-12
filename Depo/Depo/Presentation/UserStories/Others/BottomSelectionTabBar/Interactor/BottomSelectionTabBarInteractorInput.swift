@@ -9,5 +9,5 @@
 import Foundation
 
 protocol BottomSelectionTabBarInteractorInput: MoreFilesActionsInteractorInput {
-    var currentBarcongfig: EditingBarConfig? { get set}
+    var currentBarcongfig: EditingBarConfig? { get set }
 }

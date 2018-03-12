@@ -10,7 +10,7 @@ import UIKit
 
 protocol AutoSyncSwitcherTableViewCellDelegate {
     
-    func onValueChanged(model: AutoSyncModel, cell : AutoSyncSwitcherTableViewCell)
+    func onValueChanged(model: AutoSyncModel, cell: AutoSyncSwitcherTableViewCell)
     
 }
 
@@ -20,7 +20,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var switcher: CustomSwitch!
-    var model:AutoSyncModel?
+    var model: AutoSyncModel?
     
     var delegate: AutoSyncSwitcherTableViewCellDelegate?
     
@@ -37,7 +37,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         separatorView.isHidden = true
     }
     
-    func configurateCellWith(model: AutoSyncModel){
+    func configurateCellWith(model: AutoSyncModel) {
         self.model = model
         switcher.isOn = model.isSelected
         
@@ -46,12 +46,12 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         switcher.isSelected = model.isSelected
     }
     
-    func setColors(isFromSettings: Bool){
+    func setColors(isFromSettings: Bool) {
         titleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         subTitleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
     }
     
-    @IBAction func onSwitcherValueChanged(){
+    @IBAction func onSwitcherValueChanged() {
         let newModel = AutoSyncModel(model: self.model!, selected: self.switcher.isOn)
         model = newModel
         delegate?.onValueChanged(model: model!, cell: self)

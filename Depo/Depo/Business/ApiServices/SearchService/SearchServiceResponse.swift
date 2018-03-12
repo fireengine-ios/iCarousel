@@ -188,7 +188,7 @@ final class SearchItemResponse: ObjectRequestResponse {
         tempDownloadURL = json?[SearchJsonKey.tempDownloadURL].url
         status = json?[SearchJsonKey.status].string
         subordinates = json?[SearchJsonKey.subordinates].array
-        albums = json?[SearchJsonKey.album].array?.flatMap{ $0.string }
+        albums = json?[SearchJsonKey.album].array?.flatMap { $0.string }
         childCount = json?[SearchJsonKey.ChildCount].int64
     }
 }
@@ -199,7 +199,7 @@ final class SearchResponse: ObjectRequestResponse {
     
     override func mapping() {
         let  tmpList = json?.array
-        if let result = tmpList?.flatMap( {SearchItemResponse(withJSON: $0)}) {
+        if let result = tmpList?.flatMap({ SearchItemResponse(withJSON: $0) }) {
             list = result
         }
     }
@@ -237,23 +237,23 @@ final class UnifiedSearchResponse: ObjectRequestResponse {
     var info: FoundItemsInfoResponse?
     
     override func mapping() {
-        if let foundItemsList = json?.dictionary?[SearchJsonKey.foundItems]?.array?.flatMap({ SearchItemResponse(withJSON: $0)}) {
+        if let foundItemsList = json?.dictionary?[SearchJsonKey.foundItems]?.array?.flatMap({ SearchItemResponse(withJSON: $0) }) {
             itemsList = foundItemsList
         }
-        if let objectList = json?.dictionary?[SearchJsonKey.objectList]?.array?.flatMap({ ThingsItemResponse(withJSON: $0.dictionary?[SearchJsonKey.objectInfo])}) {
+        if let objectList = json?.dictionary?[SearchJsonKey.objectList]?.array?.flatMap({ ThingsItemResponse(withJSON: $0.dictionary?[SearchJsonKey.objectInfo]) }) {
             thingsList = objectList
         }
-        if let personList = json?.dictionary?[SearchJsonKey.personList]?.array?.flatMap({ PeopleItemResponse(withJSON: $0.dictionary?[SearchJsonKey.personInfo])}) {
+        if let personList = json?.dictionary?[SearchJsonKey.personList]?.array?.flatMap({ PeopleItemResponse(withJSON: $0.dictionary?[SearchJsonKey.personInfo]) }) {
             peopleList = personList
         }
-        if let locationList = json?.dictionary?[SearchJsonKey.locationList]?.array?.flatMap({ PlacesItemResponse(withJSON: $0.dictionary?[SearchJsonKey.locationInfo])}) {
+        if let locationList = json?.dictionary?[SearchJsonKey.locationList]?.array?.flatMap({ PlacesItemResponse(withJSON: $0.dictionary?[SearchJsonKey.locationInfo]) }) {
             placesList = locationList
         }
         info = FoundItemsInfoResponse(withJSON: json?.dictionary?[SearchJsonKey.foundItemsCount])
     }
 }
 
-//MARK: - Suggestion
+// MARK: - Suggestion
 
 struct SuggestionJsonKey {
     
@@ -295,7 +295,7 @@ final class SuggestionResponse: ObjectRequestResponse {
     
     override func mapping() {
         let tmpList = json?.array
-        if let result = tmpList?.flatMap( { SuggestionObject(withJSON: $0)} ) {
+        if let result = tmpList?.flatMap({ SuggestionObject(withJSON: $0) }) {
             list = result
         }
     }

@@ -11,5 +11,5 @@ import Foundation
 protocol PasscodeSettingsRouterInput {
     func closePasscode()
     func changePasscode(isTurkCellUser: Bool)
-    func setPasscode(isTurkCellUser: Bool, finishCallBack: (()->Void)?)
+    func setPasscode(isTurkCellUser: Bool, finishCallBack: (() -> Void)?)
 }

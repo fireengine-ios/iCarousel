@@ -23,7 +23,7 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func getCellSizeForGreed() -> CGSize {
-        var cellWidth:CGFloat = 180
+        var cellWidth: CGFloat = 180
         
         if (Device.isIpad) {
             cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIpad - 1))/NumericConstants.numerCellInDocumentLineOnIpad

@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateStoryPreviewModuleInitializer: NSObject {
-    class func initializePreviewViewControllerForStory(with nibName:String, story:PhotoStory, responce: CreateStoryResponce) -> UIViewController {
+    class func initializePreviewViewControllerForStory(with nibName: String, story: PhotoStory, responce: CreateStoryResponce) -> UIViewController {
         let nibName = String(describing: CreateStoryPreviewViewController.self)
         let viewController = CreateStoryPreviewViewController(nibName: nibName, bundle: nil)
         let configurator = CreateStoryPreviewModuleConfigurator()

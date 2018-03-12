@@ -35,9 +35,9 @@ class OTPViewController: PhoneVereficationViewController {
     }
     
     override func setupPhoneLable(with number: String) {
-        if (Device.isIpad){
+        if (Device.isIpad) {
             super.setupPhoneLable(with: number)
-        }else{
+        } else {
             mainTitle.text = String(format: TextConstants.otpTitleText, number)
         }
     }

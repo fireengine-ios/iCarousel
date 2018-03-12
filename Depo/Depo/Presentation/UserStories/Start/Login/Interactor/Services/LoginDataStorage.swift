@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginDataStorage: NSObject {
-    var loginModels:[BaseCellModel] = []
+    var loginModels: [BaseCellModel] = []
     
     var blockedUsers: NSMutableDictionary? {
         get {
@@ -23,7 +23,7 @@ class LoginDataStorage: NSObject {
         }
     }
     
-    override init(){
+    override init() {
         
         loginModels.append(BaseCellModel(withTitle: TextConstants.loginCellTitleEmail,
                                          initialText: TextConstants.loginCellEmailPlaceholder))
@@ -34,7 +34,7 @@ class LoginDataStorage: NSObject {
         super.init()
     }
     
-    func getModels()->[BaseCellModel]{
+    func getModels() -> [BaseCellModel] {
         return loginModels
     }
 }

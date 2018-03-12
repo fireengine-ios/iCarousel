@@ -16,16 +16,16 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
         interactor.viewIsReady()
     }
     
-    func showStory(story: PhotoStory){
+    func showStory(story: PhotoStory) {
         view.showStory(story: story)
     }
     
-    func onNextButton(array: [Item]){
+    func onNextButton(array: [Item]) {
         startAsyncOperation()
         interactor.onNextButton(array: array)
     }
     
-    func storyCreated(){
+    func storyCreated() {
         asyncOperationSucces()
         
         let controller = PopUpController.with(title: TextConstants.success,
@@ -40,7 +40,7 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func storyCreatedWithError(){
+    func storyCreatedWithError() {
         asyncOperationSucces()
         
         let controller = PopUpController.with(title: TextConstants.errorAlert,
@@ -55,22 +55,22 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func onMusicSelection(){
+    func onMusicSelection() {
         interactor.onMusicSelection()
     }
     
-    func goToAudioSelection(story: PhotoStory){
+    func goToAudioSelection(story: PhotoStory) {
         router.goToMusicSelection(story: story, navigationController: view.getNavigationControllet())
     }
     
-    func audioNotSelectedError(){
+    func audioNotSelectedError() {
         asyncOperationSucces()
         router.showMusicEmptyPopUp { [weak self] in
             self?.interactor.onMusicSelection()
         }
     }
     
-    func goToStoryPreview(story: PhotoStory, responce: CreateStoryResponce){
+    func goToStoryPreview(story: PhotoStory, responce: CreateStoryResponce) {
         asyncOperationSucces()
         router.goToStoryPreviewViewController(forStory: story, responce: responce, navigationController: view.getNavigationControllet())
     }

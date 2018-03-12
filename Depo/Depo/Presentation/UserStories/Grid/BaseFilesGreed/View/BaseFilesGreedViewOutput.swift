@@ -16,7 +16,7 @@ protocol BaseFilesGreedViewOutput {
     
     func onStartCreatingPhotoAndVideos()
     
-    func needShowNoFileView()-> Bool
+    func needShowNoFileView() -> Bool
     
     func getCurrentSortRule() -> SortedRules
     
@@ -38,7 +38,7 @@ protocol BaseFilesGreedViewOutput {
     
     func viewAppearanceChangedTopBar(asGrid: Bool)
     
-    func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType)
+    func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType)
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType])
     

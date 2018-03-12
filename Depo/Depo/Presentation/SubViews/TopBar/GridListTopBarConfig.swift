@@ -17,7 +17,7 @@ struct GridListTopBarConfig {
     let defaultFilterState: MoreActionsConfig.MoreActionsFileType
     
     init(defaultGridListViewtype: MoreActionsConfig.ViewType = .Grid,
-         availableSortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest],
+         availableSortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest],
          defaultSortType: MoreActionsConfig.SortRullesType = .TimeNewOld,
         availableFilter: Bool = false,
         showGridListButton: Bool  = true,

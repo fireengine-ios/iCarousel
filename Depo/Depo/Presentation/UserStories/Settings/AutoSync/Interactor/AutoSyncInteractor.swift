@@ -20,7 +20,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
         })
     }
     
-    func onSaveSettings(setting: SettingsAutoSyncModel){
+    func onSaveSettings(setting: SettingsAutoSyncModel) {
         output.onSettingSaved()
         
         SyncServiceManager.shared.logChangesIfNeeded(settingsModel: setting)

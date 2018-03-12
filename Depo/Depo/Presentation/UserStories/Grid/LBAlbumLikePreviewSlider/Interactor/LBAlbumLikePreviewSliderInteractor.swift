@@ -14,7 +14,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     let faceImageService = FaceImageService()
 
-    //MARK: - Interactor Input
+    // MARK: - Interactor Input
     
     deinit {
         ItemOperationManager.default.stopUpdateView(view: self)

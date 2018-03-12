@@ -115,8 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// remove PasscodeEnterViewController if was on the screen and biometrics is disable
         if let tabBarVC = topVC as? TabBarViewController,
             let navVC = tabBarVC.activeNavigationController,
-            navVC.topViewController is PasscodeEnterViewController
-        {
+            navVC.topViewController is PasscodeEnterViewController {
             if biometricsManager.isEnabled {
                 return
             } else {
@@ -147,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navVC = UINavigationController(rootViewController: vc)
         vc.navigationBarWithGradientStyleWithoutInsets()
         
-        topVC?.present(navVC, animated: false,completion: nil)
+        topVC?.present(navVC, animated: false, completion: nil)
     }
     
     private func checkPasscodeIfNeed() {
@@ -213,7 +212,7 @@ extension AppDelegate {
         MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         log.debug("AppDelegate didReceiveRemoteNotification")
         MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
     }

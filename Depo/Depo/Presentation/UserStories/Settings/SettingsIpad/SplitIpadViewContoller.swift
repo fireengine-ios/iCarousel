@@ -13,7 +13,7 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     private var splitViewController = UISplitViewController()
     private var leftController: SettingsViewController?
     
-    func configurateWithControllers(leftViewController: SettingsViewController, controllers : [UIViewController]){
+    func configurateWithControllers(leftViewController: SettingsViewController, controllers: [UIViewController]) {
         leftViewController.settingsDelegate = self
         leftController = leftViewController
         var controllersArray = [UIViewController]()
@@ -25,7 +25,7 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
         //splitViewController.delegate = self
     }
     
-    func getSplitVC()->UISplitViewController{
+    func getSplitVC() -> UISplitViewController {
         
         return splitViewController
     }
@@ -34,45 +34,45 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     // MARK: UISplitViewControllerDelegate
     
     // MARK: SettingsDelegate
-    func goToContactSync(){
-        if let left = leftController{
+    func goToContactSync() {
+        if let left = leftController {
         configurateWithControllers(leftViewController: left, controllers: [RouterVC().syncContacts])
         }
     }
     
-    func goToIportPhotos(){
-        if let left = leftController{
+    func goToIportPhotos() {
+        if let left = leftController {
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().importPhotos!])
         }
     }
     
-    func goToAutoUpload(){
-        if let left = leftController{
+    func goToAutoUpload() {
+        if let left = leftController {
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().autoUpload])
         }
     }
     
     func goToFaceImage() {
-        if let left = leftController{
+        if let left = leftController {
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().faceImage])
         }
     }
     
-    func goToHelpAndSupport(){
-        if let left = leftController{
+    func goToHelpAndSupport() {
+        if let left = leftController {
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().helpAndSupport!])
         }
     }
     
     func goToUsageInfo() {
-        if let left = leftController{
+        if let left = leftController {
             let navVC = UINavigationController(rootViewController: RouterVC().usageInfo!)
             configurateWithControllers(leftViewController: left, controllers: [navVC])
         }
     }
     
-    func onUpdatUserInfo(userInfo:AccountInfoResponse) {
-        if let left = leftController{
+    func onUpdatUserInfo(userInfo: AccountInfoResponse) {
+        if let left = leftController {
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().userProfile(userInfo: userInfo)])
         }
     }
@@ -83,7 +83,7 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     }
     
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) {
-        if let left = leftController{
+        if let left = leftController {
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)])
         }
     }

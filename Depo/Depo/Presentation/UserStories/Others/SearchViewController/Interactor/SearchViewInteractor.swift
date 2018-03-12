@@ -153,7 +153,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
                 
                 if suggest.info?.id == nil, //simple suggestion
                     let type = suggest.type, let text = suggest.text,
-                    items.first(where: {$0.type == type && $0.text == text && $0.info?.id != nil}) != nil {
+                    items.first(where: { $0.type == type && $0.text == text && $0.info?.id != nil }) != nil {
                     hasDuplicate = true
                 }
                 
@@ -225,7 +225,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
                                            forItem: ThingsItem(response: thingItemResponse))
                 }
-                }, fail:  { [weak self] fail in
+                }, fail: { [weak self] fail in
                     DispatchQueue.main.async {
                         self?.output?.failedGetAlbum()
                     }
@@ -241,7 +241,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
                                            forItem: PlacesItem(response: placeItemResponse))
                 }
-                }, fail:  { [weak self] fail in
+                }, fail: { [weak self] fail in
                     DispatchQueue.main.async {
                         self?.output?.failedGetAlbum()
                     }

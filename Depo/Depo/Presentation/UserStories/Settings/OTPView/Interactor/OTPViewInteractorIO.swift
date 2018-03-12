@@ -15,4 +15,3 @@
 //protocol OTPViewInteractorOutput: class {
 //    func configurateWithResponce(responce: SignUpSuccessResponse)
 //}
-

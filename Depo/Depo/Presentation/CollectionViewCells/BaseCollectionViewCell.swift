@@ -21,7 +21,7 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     
     var isAlreadyConfigured             = false
     
-    static let durationOfSelection : Double = 0.5
+    static let durationOfSelection: Double = 0.5
     
     private var assetId: String?
     
@@ -29,7 +29,7 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let lpgr : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        let lpgr: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         
         lpgr.minimumPressDuration = BaseCollectionViewCell.durationOfSelection
         lpgr.delegate = self
@@ -39,7 +39,7 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         contentView.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
     }
     
-    @objc func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer) {
+    @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
         
         guard let d = delegate, d.canLongPress() else {
             return
@@ -87,7 +87,7 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         
     }
     
-    func setSelectionWithAnimation(isSelectionActive: Bool, isSelected: Bool){
+    func setSelectionWithAnimation(isSelectionActive: Bool, isSelected: Bool) {
         
     }
     

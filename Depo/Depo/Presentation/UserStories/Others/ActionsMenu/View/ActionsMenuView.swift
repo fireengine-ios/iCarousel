@@ -14,13 +14,13 @@ class ActionsMenuView: UIView, ActionsMenuViewInput, UITableViewDelegate, UITabl
     var tableDataMArray = [ActionMenyItem]()
     
     // MARK: Life cycle
-    class func initFromXib()->ActionsMenuView{
+    class func initFromXib() -> ActionsMenuView {
         let view = UINib(nibName: "ActionsMenuView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ActionsMenuView
         view.configurateView()
         return view
     }
     
-    func configurateView(){
+    func configurateView() {
         tableView.isScrollEnabled = false
         
         let nib = UINib.init(nibName: CellsIdConstants.actionsMenuCellID, bundle: nil)
@@ -29,14 +29,14 @@ class ActionsMenuView: UIView, ActionsMenuViewInput, UITableViewDelegate, UITabl
 
     // MARK: ActionsMenuViewInput
     
-    func showActions(actions:[ActionMenyItem]){
+    func showActions(actions: [ActionMenyItem]) {
         tableDataMArray.removeAll()
         tableDataMArray.append(contentsOf: actions)
         tableView.reloadData()
     }
     
-    func heightForCell() -> CGFloat{
-        if (Device.isIpad){
+    func heightForCell() -> CGFloat {
+        if (Device.isIpad) {
             return 59.0
         }
         return 65.0

@@ -27,7 +27,7 @@ extension PasscodeSettingsRouter: PasscodeSettingsRouterInput {
         routerVC.pushViewController(viewController: vc)
     }
     
-    func setPasscode(isTurkCellUser: Bool , finishCallBack: (()->Void)?) {
+    func setPasscode(isTurkCellUser: Bool, finishCallBack: (() -> Void)?) {
         let vc = PasscodeEnterViewController.with(flow: .create, navigationTitle: TextConstants.passcodeSetTitle)
         vc.isTurkCellUser = isTurkCellUser
         let routerVC = RouterVC()

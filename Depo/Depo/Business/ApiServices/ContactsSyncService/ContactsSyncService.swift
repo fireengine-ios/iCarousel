@@ -137,7 +137,7 @@ class ContactsSyncService: BaseRequestService {
         ContactSyncSDK.cancelAnalyze()
     }
     
-    func analyze(progressCallback: ProgressCallback?, successCallback: AnalyzeFinishCallback?, cancelCallback: Callback?,  errorCallback: ErrorCallback?) {
+    func analyze(progressCallback: ProgressCallback?, successCallback: AnalyzeFinishCallback?, cancelCallback: Callback?, errorCallback: ErrorCallback?) {
         ContactSyncSDK.doAnalyze(true)
         
         SyncSettings.shared().analyzeNotifyCallback = { (_ contactsToMerge, _ contactsToDelete) in
@@ -243,7 +243,7 @@ class ContactsSyncService: BaseRequestService {
         for contact in firstContacts {
             let name = contact.name
             var numberOfErrors = contact.numberOfErrors
-            if let index = secondContacts.index(where: { $0.name == name })  {
+            if let index = secondContacts.index(where: { $0.name == name }) {
                 numberOfErrors += secondContacts[index].numberOfErrors
             }
             let finalContact = ContactSync.AnalyzedContact(name: name, numberOfErrors: numberOfErrors)

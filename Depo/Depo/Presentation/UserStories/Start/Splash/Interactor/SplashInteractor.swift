@@ -20,7 +20,7 @@ class SplashInteractor: SplashInteractorInput {
         return passcodeStorage.isEmpty
     }
 
-    func startLoginInBackroung(){
+    func startLoginInBackroung() {
         if tokenStorage.accessToken == nil {
             if ReachabilityService().isReachableViaWiFi {
                 failLogin()
@@ -37,19 +37,19 @@ class SplashInteractor: SplashInteractorInput {
         }
     }
     
-    func turkcellSuccessLogin(){
+    func turkcellSuccessLogin() {
         DispatchQueue.main.async {
             self.output.onSuccessLoginTurkcell()
         }
     }
     
-    func successLogin(){
+    func successLogin() {
         DispatchQueue.main.async {
             self.output.onSuccessLogin()
         }
     }
     
-    func failLogin(){
+    func failLogin() {
         DispatchQueue.main.async {
             self.output.onFailLogin()
             if !ReachabilityService().isReachable {

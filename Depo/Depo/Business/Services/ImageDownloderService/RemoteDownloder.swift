@@ -21,7 +21,7 @@ class ImageDownloder {
     
     func getImage(patch: URL?, compliteImage:@escaping RemoteImage) {
         
-        if (patch == nil){
+        if (patch == nil) {
             DispatchQueue.main.async {
                 compliteImage(nil)
             }
@@ -54,7 +54,7 @@ class ImageDownloder {
         
     }
     
-    func getImagesByImagesURLs(list:[ImageForDowload], images: @escaping ([URL]) -> Swift.Void) {
+    func getImagesByImagesURLs(list: [ImageForDowload], images: @escaping ([URL]) -> Swift.Void) {
         if list.count > 0 {
             let imageObject = list.first
             getImage(patch: imageObject?.downloadURL, compliteImage: {(image) in
@@ -64,22 +64,22 @@ class ImageDownloder {
                 if let imageName = imageObject?.imageName {
                     url = URL(fileURLWithPath: (NSTemporaryDirectory() + imageName))
                 }
-                if let im = image, let url_ = url{
+                if let im = image, let url_ = url {
                     let data = UIImagePNGRepresentation(im) as NSData?
                     data?.write(to: url_, atomically: false)
                     urlsArray.append(url_)
-                }else{
+                } else {
                     url = nil
                 }
                 
-                if (list.count == 1){
+                if (list.count == 1) {
                     images(urlsArray)
-                }else{
+                } else {
                     let decreasedArray = Array(list.dropFirst())
                     let downloader = ImageDownloder()
                     downloader.getImagesByImagesURLs(list: decreasedArray, images: { (array) in
                         var urlsArray = [URL]()
-                        if let url_ = url{
+                        if let url_ = url {
                             urlsArray.append(url_)
                         }
                         
@@ -104,7 +104,7 @@ class ImageDownloder {
         }
     }
     
-    func cancelRequest(path: URL) -> Void {
+    func cancelRequest(path: URL) {
         guard let item = tokenList[path] else {
             return
         }
@@ -173,4 +173,3 @@ class FilesDownloader {
     }
     
 }
-

@@ -13,7 +13,7 @@ protocol AutoSyncDataSourceDelegate: class {
     func mobileDataEnabledFor(model: AutoSyncModel)
 }
 
-class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource, AutoSyncSwitcherTableViewCellDelegate, AutoSyncInformTableViewCellCheckBoxStateProtocol {
+class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, AutoSyncSwitcherTableViewCellDelegate, AutoSyncInformTableViewCellCheckBoxStateProtocol {
 
     @IBOutlet weak var tableView: UITableView?
     @IBOutlet weak var tableHConstraint: NSLayoutConstraint?
@@ -23,7 +23,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
     
     weak var delegate: AutoSyncDataSourceDelegate?
     
-    func configurateTable(table: UITableView, tableHConstraint: NSLayoutConstraint?){
+    func configurateTable(table: UITableView, tableHConstraint: NSLayoutConstraint?) {
         tableView = table
         tableView?.delegate = self
         tableView?.dataSource = self
@@ -37,7 +37,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
         tableView?.register(nib2, forCellReuseIdentifier: CellsIdConstants.autoSyncInformCellID)
     }
     
-    func showCellsFromModels(models:[AutoSyncModel]){
+    func showCellsFromModels(models: [AutoSyncModel]) {
         tableDataArray = models
         tableView?.reloadData()
         if let constraint = tableHConstraint {
@@ -46,7 +46,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
         }
     }
     
-    func createSettingsAutoSyncModel () -> SettingsAutoSyncModel{
+    func createSettingsAutoSyncModel () -> SettingsAutoSyncModel {
         let model = SettingsAutoSyncModel()
         model.isAutoSyncEnable = tableDataArray[0].isSelected
         //model.isSyncViaWifi = tableDataArray[1].isSelected
@@ -55,12 +55,12 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
         return model
     }
     
-    func getTableH() -> CGFloat{
+    func getTableH() -> CGFloat {
         let rowsCount = tableView?.numberOfRows(inSection: 0) ?? 0
         var tableH: CGFloat = 0
-        for i in 0...rowsCount{
+        for i in 0...rowsCount {
             let indexPath = IndexPath(row: i, section: 0)
-            if let cellRect = tableView?.rectForRow(at: indexPath){
+            if let cellRect = tableView?.rectForRow(at: indexPath) {
                 tableH = tableH + cellRect.size.height
             }
         }
@@ -102,7 +102,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let model = tableDataArray[indexPath.row]
-        if (model.cellType == .typeSwitcher){
+        if (model.cellType == .typeSwitcher) {
             return 50
         }
         return 83.0
@@ -110,8 +110,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = tableDataArray[indexPath.row]//TODO: ework enum or change it to SWITCH - case
-        if (model.cellType == .typeSwitcher) || model.cellType == .headerLike
-         {
+        if (model.cellType == .typeSwitcher) || model.cellType == .headerLike {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSwitcherCellID, for: indexPath)
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSwitcherTableViewCell
@@ -133,7 +132,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
     
     // MARK: AutoSyncSwitcherTableViewCellDelegate
     
-    func onValueChanged(model: AutoSyncModel, cell : AutoSyncSwitcherTableViewCell){
+    func onValueChanged(model: AutoSyncModel, cell: AutoSyncSwitcherTableViewCell) {
         let indexPath = tableView?.indexPath(for: cell)
         tableDataArray[(indexPath?.row)!] = model
         
@@ -144,7 +143,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource,
                 reloadTableView()
             }
         }
-        if model.cellType == .typeSwitcher, model.isSelected{
+        if model.cellType == .typeSwitcher, model.isSelected {
             delegate?.mobileDataEnabledFor(model: model)
         }
     }

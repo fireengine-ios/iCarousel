@@ -15,7 +15,7 @@ class BaseView: UIView, NibInit {
     var canSwipe: Bool = true
     static let baseViewCornerRadius: CGFloat = 5
     var calculatedH: CGFloat = 0
-    var cardObject: HomeCardResponse? = nil
+    var cardObject: HomeCardResponse?
     lazy var homeCardsService: HomeCardsService = factory.resolve()
     
     override func awakeFromNib() {
@@ -32,11 +32,11 @@ class BaseView: UIView, NibInit {
         cardObject = object
     }
     
-    func viewDeletedBySwipe(){
+    func viewDeletedBySwipe() {
         deleteCard()
     }
     
-    func deleteCard(){
+    func deleteCard() {
         guard let id = cardObject?.id else {
             return
         }

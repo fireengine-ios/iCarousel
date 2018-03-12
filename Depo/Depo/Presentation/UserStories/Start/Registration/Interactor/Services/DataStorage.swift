@@ -21,7 +21,7 @@ class DataStorage {
                   BaseCellModel(withTitle: TextConstants.registrationCellTitleEmail,
                                 initialText: TextConstants.registrationCellPlaceholderEmail),
         BaseCellModel(withTitle: TextConstants.registrationCellTitlePassword,
-                      initialText:TextConstants.registrationCellPlaceholderPassword),
+                      initialText: TextConstants.registrationCellPlaceholderPassword),
         BaseCellModel(withTitle: TextConstants.registrationCellTitleReEnterPassword,
                       initialText: TextConstants.registrationCellPlaceholderReFillPassword)]
     }

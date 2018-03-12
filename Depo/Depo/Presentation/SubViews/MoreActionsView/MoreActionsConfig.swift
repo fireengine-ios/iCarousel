@@ -59,7 +59,7 @@ enum SortedRules: Int {
         }
     }
     
-    var sortingRules: SortType{
+    var sortingRules: SortType {
         switch self {
         case .timeUp, .timeDown, .timeUpWithoutSection, .timeDownWithoutSection:
             return .date
@@ -74,7 +74,7 @@ enum SortedRules: Int {
         }
     }
     
-    var sortOder: SortOrder{
+    var sortOder: SortOrder {
         switch self {
         case .timeUp, .timeUpWithoutSection, .lettersAZ, .sizeAZ, .albumlettersAZ, .metaDataTimeUp:
             return .desc

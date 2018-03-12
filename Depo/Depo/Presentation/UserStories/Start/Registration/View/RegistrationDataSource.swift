@@ -17,7 +17,7 @@ protocol DataSourceOutput {
 }
 
 class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
-    var output: DataSourceOutput? = nil
+    var output: DataSourceOutput?
     var cells: [BaseCellModel] = []
     var gsmModels: [GSMCodeModel] = []
     var currentGSMCode = CoreTelephonyService().callingCountryCode()

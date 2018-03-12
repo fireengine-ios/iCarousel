@@ -114,7 +114,6 @@ extension AuthorizationRepositoryImp: RequestRetrier {
     }
     
     
-    
     // MARK: - Private - Refresh Tokens
     
     fileprivate typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?) -> Void
@@ -160,4 +159,3 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         }
     }
 }
-

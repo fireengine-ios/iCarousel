@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SplashInteractorOutput:class, BaseAsyncOperationInteractorOutput {
+protocol SplashInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func onSuccessEULA()
     func onFailEULA()

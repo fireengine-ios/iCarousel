@@ -27,7 +27,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         interactor.prepareCellsModels()
     }
     
-    func preperedCellsModels(models:[AutoSyncModel]){
+    func preperedCellsModels(models: [AutoSyncModel]) {
          compliteAsyncOperationEnableScreen()
         view.preperedCellsModels(models: models)
     }
@@ -44,7 +44,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func saveChanges(setting: SettingsAutoSyncModel){
+    func saveChanges(setting: SettingsAutoSyncModel) {
         if !fromSettings {
             let dataSyncEnabled = setting.isAutoSyncEnable && (setting.mobileDataPhotos == true || setting.mobileDataVideo == true)
             if dataSyncEnabled {
@@ -66,7 +66,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     }
     
     
-    func onSettingSaved(){
+    func onSettingSaved() {
         
     }
     

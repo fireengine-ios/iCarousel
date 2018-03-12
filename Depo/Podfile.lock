@@ -3,12 +3,12 @@ PODS:
     - Adjust/Core (= 4.12.1)
   - Adjust/Core (4.12.1)
   - Alamofire (4.6.0)
-  - Bolts (1.8.4):
-    - Bolts/AppLinks (= 1.8.4)
-    - Bolts/Tasks (= 1.8.4)
-  - Bolts/AppLinks (1.8.4):
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.8.4)
+  - Bolts/Tasks (1.9.0)
   - CircleProgressBar (0.32)
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
@@ -30,11 +30,10 @@ PODS:
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - ObjectiveDropboxOfficial (3.4.0)
   - ReachabilitySwift (4.1.0)
-  - SDWebImage (4.2.2):
-    - SDWebImage/Core (= 4.2.2)
-  - SDWebImage/Core (4.2.2)
+  - SDWebImage (4.2.3):
+    - SDWebImage/Core (= 4.2.3)
+  - SDWebImage/Core (4.2.3)
   - SimpleExif (0.0.1)
-  - SplunkMint (5.2.2)
   - SwiftyJSON (3.1.4)
   - Typist (1.1.0)
   - UIImage-Categories (1.0.0)
@@ -60,18 +59,26 @@ DEPENDENCIES:
   - ObjectiveDropboxOfficial
   - ReachabilitySwift
   - SDWebImage
-  - SimpleExif
-  - SplunkMint
+  - SimpleExif (from `https://github.com/bonyadmitr/SimpleExif.git`)
   - SwiftyJSON (~> 3)
   - Typist (~> 1.1.0)
   - UIImage-Categories
   - XCGLogger (~> 6.0.1)
   - XYPieChart
 
+EXTERNAL SOURCES:
+  SimpleExif:
+    :git: https://github.com/bonyadmitr/SimpleExif.git
+
+CHECKOUT OPTIONS:
+  SimpleExif:
+    :commit: ce65163d7bb61a3fe866b701f3464698f37208cf
+    :git: https://github.com/bonyadmitr/SimpleExif.git
+
 SPEC CHECKSUMS:
   Adjust: 3d11ee5856dd0474d26496f4fa5a110e9f3ec264
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
-  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
@@ -85,15 +92,14 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ObjectiveDropboxOfficial: 250ce53218773ba687201614ad6de03b8cb14de6
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
-  SimpleExif: 61ba6dce666641dc4b925d9d26a2694e68ebbf4b
-  SplunkMint: 8c22ce314fd7a36ee584f2e40d239e19d9fa174d
+  SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
+  SimpleExif: c7537d53f8a3854af0235ea41759a58ffc8afa11
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   Typist: 31a3eb9d6b97ea28e0e247bb8b14ed23fe624170
   UIImage-Categories: a0593f6a7991c99016b9ecadfbd38b3717ff1a73
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
 
-PODFILE CHECKSUM: b0ed54097cc4164b536aa01bc36ada653d504d4e
+PODFILE CHECKSUM: bd2c19f8ff0e395436da0973c5906a5493fad476
 
 COCOAPODS: 1.4.0

@@ -6,9 +6,9 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class RemoteSearchService: RemoteItemsService{
+class RemoteSearchService: RemoteItemsService {
     
-    init(requestSize:Int) {
+    init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .all)
     }
     

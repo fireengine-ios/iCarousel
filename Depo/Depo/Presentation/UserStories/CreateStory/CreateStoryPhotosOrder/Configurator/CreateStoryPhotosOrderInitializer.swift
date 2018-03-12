@@ -13,7 +13,7 @@ class CreateStoryPhotosOrderModuleInitializer: NSObject {
     //Connect with object on storyboard
     @IBOutlet weak var createstoryphotosorderViewController: CreateStoryPhotosOrderViewController!
 
-    class func initializeViewController(with nibName:String, story: PhotoStory) -> UIViewController {
+    class func initializeViewController(with nibName: String, story: PhotoStory) -> UIViewController {
         let viewController = CreateStoryPhotosOrderViewController(nibName: nibName, bundle: nil)
         let configurator = CreateStoryPhotosOrderModuleConfigurator()
         configurator.configure(viewController: viewController, story: story)

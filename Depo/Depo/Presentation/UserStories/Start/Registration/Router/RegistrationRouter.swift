@@ -10,7 +10,7 @@ import UIKit
 
 class RegistrationRouter: RegistrationRouterInput {
     
-    func phoneVerification(sigUpResponse:SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
+    func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
         
         let router = RouterVC()
         let phoneVerification = router.phoneVereficationScreen(withSignUpSuccessResponse: sigUpResponse, userInfo: userInfo)

@@ -85,24 +85,24 @@ final class CreateMigrationResponse: ObjectRequestResponse {
         static let isTriggeredByUser  = "isTriggeredByUser"
     }
     
-    var createDate:Date?
-    var lastModifiedDate:Date?
-    var createdBy:String?
-    var operationType:String?
-    var transactionId:String?
-    var msisdn:String?
-    var status:String?
-    var requestBody:String?
-    var responseBody:String?
-    var id:String?
-    var progress:Int?
-    var funambolContactCount:Int?
-    var successContactCount:Int?
-    var failedContactCount:Int?
-    var funambolFileCount:Int?
-    var successFileCount:Int?
-    var failedFileCount:Int?
-    var isTriggeredByUser:Bool?
+    var createDate: Date?
+    var lastModifiedDate: Date?
+    var createdBy: String?
+    var operationType: String?
+    var transactionId: String?
+    var msisdn: String?
+    var status: String?
+    var requestBody: String?
+    var responseBody: String?
+    var id: String?
+    var progress: Int?
+    var funambolContactCount: Int?
+    var successContactCount: Int?
+    var failedContactCount: Int?
+    var funambolFileCount: Int?
+    var successFileCount: Int?
+    var failedFileCount: Int?
+    var isTriggeredByUser: Bool?
     
     override func mapping() {
         createDate = json?[CreateMigrationKeys.createDate].date

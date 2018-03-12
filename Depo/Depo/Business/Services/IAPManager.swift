@@ -20,8 +20,8 @@ final class IAPManager: NSObject {
         setupSKPaymentQueue()
     }
     
-    var offerAppleHandler: OfferAppleHandler = {_ in }
-    var purchaseHandler: PurchaseHandler = {_ in }
+    var offerAppleHandler: OfferAppleHandler = { _ in }
+    var purchaseHandler: PurchaseHandler = { _ in }
     
     var canMakePayments: Bool {
         return SKPaymentQueue.canMakePayments()

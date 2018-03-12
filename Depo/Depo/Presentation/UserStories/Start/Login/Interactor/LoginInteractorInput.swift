@@ -12,10 +12,10 @@ protocol LoginInteractorInput {
     
     func prepareModels()
     
-    func rememberMe(state:Bool)
+    func rememberMe(state: Bool)
     
     func relogin()
-    func authificate(login:String, password:String, atachedCaptcha: CaptchaParametrAnswer?)
+    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?)
     
     func findCoutryPhoneCode(plus: Bool)
     

@@ -26,7 +26,7 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         return UIImage()
     }
     
-    override func textForNoFileLbel() -> String{
+    override func textForNoFileLbel() -> String {
         if remoteItems is PeopleItemsService {
             return TextConstants.faceImageNoPhotos
         } else if remoteItems is ThingsItemsService {

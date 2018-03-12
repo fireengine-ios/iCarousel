@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol PhoneVereficationViewInput: class, Waiting  {
+protocol PhoneVereficationViewInput: class, Waiting {
 
     func setupInitialState()
     

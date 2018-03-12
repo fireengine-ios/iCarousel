@@ -15,13 +15,13 @@ class AssetsСache {
     
     private var storage: [String: PHAsset] = [:]
     
-    func append(asset:PHAsset) {
+    func append(asset: PHAsset) {
         dispatchQueue.sync {
             storage[asset.localIdentifier] = asset
         }
     }
     
-    func append(list:[PHAsset]) {
+    func append(list: [PHAsset]) {
         dispatchQueue.sync {
             list.forEach {
                 storage[$0.localIdentifier] = $0

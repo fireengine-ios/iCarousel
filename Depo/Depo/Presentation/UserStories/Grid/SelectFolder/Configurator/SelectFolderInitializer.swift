@@ -11,11 +11,11 @@ import UIKit
 class SelectFolderModuleInitializer: NSObject {
 
     //Connect with object on storyboard
-    class func initializeSelectFolderViewController(with nibName:String, folder: Item?, sortRule: SortedRules) -> SelectFolderViewController {
+    class func initializeSelectFolderViewController(with nibName: String, folder: Item?, sortRule: SortedRules) -> SelectFolderViewController {
         let viewController = SelectFolderViewController(nibName: nibName, bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
         
         let presentor = SelectFolderPresenter()

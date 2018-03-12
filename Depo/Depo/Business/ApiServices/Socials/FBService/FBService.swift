@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 import FBSDKLoginKit
 
-public enum FBStatusValue: String  {
+public enum FBStatusValue: String {
     case pending = "PENDING"
     case running = "RUNNING"
     case failed = "FAILED"
@@ -22,7 +22,7 @@ public enum FBStatusValue: String  {
 }
 
 class FBService: BaseRequestService {
-    func requestToken(permissions: [String], success: ((String) -> ())?, fail: FailResponse?) {
+    func requestToken(permissions: [String], success: ((String) -> Void)?, fail: FailResponse?) {
         log.debug("FBService requestToken")
 
         let vc = (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController!

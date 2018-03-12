@@ -15,7 +15,7 @@ class PhoneVereficationModuleInitializer: NSObject {
     
     func setupConfig(with: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel ) {
         let configurator = PhoneVereficationModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: phonevereficationViewController, withResponse: with, userInfo:  userInfo)
+        configurator.configureModuleForViewInput(viewInput: phonevereficationViewController, withResponse: with, userInfo: userInfo)
     }
     
 }

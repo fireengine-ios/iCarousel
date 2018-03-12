@@ -30,7 +30,7 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
         MenloworksAppEvents.onTutorial()
     }
     
-    func configurateView(){
+    func configurateView() {
         hidenNavigationBarStyle()
         startUsingLifeBoxButton.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
         haveAccountButton.setTitle(TextConstants.introViewGoToLoginButtonText, for: .normal)
@@ -39,17 +39,17 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
 
 
     // MARK: IntroduceViewInput
-    func setupInitialState(models : [IntroduceModel]){
+    func setupInitialState(models: [IntroduceModel]) {
         dataSource.configurateScrollViewWithModels(models: models)
     }
     
     // MARK: Actions
     
-    @IBAction func onStartUsingLifeBoxButton(){
+    @IBAction func onStartUsingLifeBoxButton() {
         output.onStartUsingLifeBox()
     }
     
-    @IBAction func onHaveAccountButton(){
+    @IBAction func onHaveAccountButton() {
         output.onLoginButton()
     }
     

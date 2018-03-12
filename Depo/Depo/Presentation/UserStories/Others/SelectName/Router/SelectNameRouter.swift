@@ -8,7 +8,7 @@
 
 class SelectNameRouter: SelectNameRouterInput {
 
-    func hideScreen(){
+    func hideScreen() {
         let router = RouterVC()
         router.popViewController()
     }

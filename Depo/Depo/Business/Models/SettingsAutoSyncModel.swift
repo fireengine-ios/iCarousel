@@ -39,7 +39,7 @@ class SettingsAutoSyncModel {
         return dict
     }
     
-    func getDataForTable() -> [AutoSyncModel]{
+    func getDataForTable() -> [AutoSyncModel] {
         var array = [AutoSyncModel]()
         array.append(AutoSyncModel.init(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, selected: isAutoSyncEnable))
         array.append(AutoSyncModel.init(title: TextConstants.autoSyncCellWiFiTile, subTitle: TextConstants.autoSyncCellWiFiSubTitle, type: .typeInformation, selected: isSyncViaWifi))

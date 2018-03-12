@@ -10,7 +10,7 @@ import UIKit
 
 class UploadFromLifeBoxModuleInitializer: NSObject {
 
-    class func initializePhotoVideosViewController(with nibName:String, albumUUID: String) -> UIViewController {
+    class func initializePhotoVideosViewController(with nibName: String, albumUUID: String) -> UIViewController {
         let viewController = UploadFromLifeBoxViewController(nibName: nibName, bundle: nil)
         //viewController.needShowTabBar = true
         //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
@@ -32,7 +32,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeFilesForFolderViewController(with nibName:String, destinationFolderUUID: String, outputFolderUUID: String = "", sortRule: SortedRules) -> UIViewController {
+    class func initializeFilesForFolderViewController(with nibName: String, destinationFolderUUID: String, outputFolderUUID: String = "", sortRule: SortedRules) -> UIViewController {
         let viewController = UploadFromLifeBoxViewController(nibName: nibName, bundle: nil)
         viewController.parentUUID = destinationFolderUUID
         //viewController.needShowTabBar = true
@@ -47,7 +47,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         
         if !outputFolderUUID.isEmpty {
             fileService = FilesFromFolderService(requestSize: 100, rootFolder: outputFolderUUID)
-        }else{
+        } else {
             fileService = AllFilesService(requestSize: 100)
         }
         

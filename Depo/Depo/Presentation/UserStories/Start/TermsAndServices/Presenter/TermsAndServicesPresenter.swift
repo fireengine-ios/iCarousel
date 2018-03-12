@@ -20,7 +20,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         interactor.loadTermsAndUses()
     }
     
-    func termsApplied(){
+    func termsApplied() {
         if interactor.cameFromLogin {
             interactor.applyEula()
         } else {
@@ -31,12 +31,12 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     // MARK: OUT
     
-    func showLoadedTermsAndUses(eula: String){
+    func showLoadedTermsAndUses(eula: String) {
         view.showLoadedTermsAndUses(eula: eula)
         compliteAsyncOperationEnableScreen()
     }
     
-    func failLoadTermsAndUses(errorString:String){
+    func failLoadTermsAndUses(errorString: String) {
         compliteAsyncOperationEnableScreen(errorMessage: errorString)
         delegate?.show(errorString: errorString)
         router.closeModule()
@@ -59,7 +59,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         router.closeModule()
     }
     
-    func eulaApplied(){
+    func eulaApplied() {
         MenloworksEventsService.shared.onApporveEulaPageClicked()
          compliteAsyncOperationEnableScreen()
         //theoreticaly we should add coredata update/append here also

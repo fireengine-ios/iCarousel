@@ -12,11 +12,11 @@ class BaseDataSourceItem: NSObject {
 
     var uuid: String
     
-    var name: String? = nil
+    var name: String?
     
-    var creationDate: Date? = nil
+    var creationDate: Date?
     
-    var lastModifiDate: Date? = nil
+    var lastModifiDate: Date?
     
     var fileType: FileType = .application(.unknown)
     

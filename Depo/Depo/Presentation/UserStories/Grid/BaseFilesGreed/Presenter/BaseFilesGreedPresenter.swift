@@ -1,4 +1,3 @@
-
 //
 //  BaseFilesGreedPresenter.swift
 //  Depo
@@ -84,7 +83,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         subscribeDataSource()
     }
     
-    func subscribeDataSource(){
+    func subscribeDataSource() {
         ItemOperationManager.default.startUpdateView(view: dataSource)
     }
     
@@ -98,14 +97,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         uploadData(searchText)
     }
     
-    func onReloadData(){
+    func onReloadData() {
         log.debug("BaseFilesGreedPresenter onReloadData")
         
 //        dataSource.dropData()
         reloadData()
     }
     
-    func onStartCreatingPhotoAndVideos(){
+    func onStartCreatingPhotoAndVideos() {
         log.debug("BaseFilesGreedPresenter onStartCreatingPhotoAndVideos")
 
         getContent()
@@ -152,18 +151,18 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
     
-    func uploadData(_ searchText: String? = nil){
+    func uploadData(_ searchText: String? = nil) {
         log.debug("BaseFilesGreedPresenter uploadData")
 
         startAsyncOperation()
         compoundAllFiltersAndNextItems(searchText: searchText)
     }
     
-    func onNextButton(){
+    func onNextButton() {
         
     }
     
-    //MARK:- Request OUTPUT
+    // MARK: - Request OUTPUT
     func getContentWithFail(errorString: String?) {
         view?.stopRefresher()
         dataSource.isPaginationDidEnd = false
@@ -187,10 +186,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         updateNoFilesView()
     }
     
-    func getContentWithSuccess(items: [WrapData]){
+    func getContentWithSuccess(items: [WrapData]) {
         log.debug("BaseFilesGreedPresenter getContentWithSuccess")
 
-        if (view == nil){
+        if (view == nil) {
             return
         }
         asyncOperationSucces()
@@ -213,7 +212,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("???getContentWithSuccessEnd()")
         asyncOperationSucces()
         view.stopRefresher()
-        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
+        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView {
             dataSourceForArray.configurateWithArray(array: array)
         } else {
             dataSource.reloadData()
@@ -221,7 +220,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         updateNoFilesView()
     }
     
-    func isArrayDataSource() -> Bool{
+    func isArrayDataSource() -> Bool {
         return false
     }
     
@@ -231,7 +230,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         compoundAllFiltersAndNextItems()
     }
     
-    func showCustomPopUpWithInformationAboutAccessToMediaLibrary(){
+    func showCustomPopUpWithInformationAboutAccessToMediaLibrary() {
         log.debug("BaseFilesGreedPresenter showCustomPopUpWithInformationAboutAccessToMediaLibrary")
 
         view.showCustomPopUpWithInformationAboutAccessToMediaLibrary()
@@ -245,11 +244,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return sortedRule
     }
     
-    func getRemoteItemsService() -> RemoteItemsService{
+    func getRemoteItemsService() -> RemoteItemsService {
         return interactor.getRemoteItemsService()
     }
     
-    func onCancelSelection(){
+    func onCancelSelection() {
         stopEditing()
     }
     
@@ -264,7 +263,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     
-    //MARK: BaseGridDataSourceForCollectionView
+    // MARK: BaseGridDataSourceForCollectionView
     
     func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         log.debug("BaseFilesGreedPresenter onItemSelected")
@@ -281,13 +280,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
-        let allItems = items.flatMap{ return $0 }
+        let allItems = items.flatMap { $0 }
         if item.fileType.isDocument {
-            return allItems.filter{ $0.fileType.isDocument }
+            return allItems.filter { $0.fileType.isDocument }
         } else if item.fileType == .video || item.fileType == .image {
-            return allItems.filter{ ($0.fileType == .video) || ($0.fileType == .image) }
+            return allItems.filter { ($0.fileType == .video) || ($0.fileType == .image) }
         }
-        return allItems.filter{ $0.fileType == item.fileType }
+        return allItems.filter { $0.fileType == item.fileType }
     }
     
     func getCellSizeForList() -> CGSize {
@@ -295,7 +294,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getCellSizeForGreed() -> CGSize {
-        var cellWidth:CGFloat = 180
+        var cellWidth: CGFloat = 180
         
         if (Device.isIpad) {
             cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIpad - 1))/NumericConstants.numerCellInLineOnIpad
@@ -309,7 +308,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         startEditing()
     }
     
-    func needReloadData(){
+    func needReloadData() {
         reloadData()
     }
     
@@ -320,7 +319,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     
-    //MARK: - UnderNavBarBar/TopBar
+    // MARK: - UnderNavBarBar/TopBar
     
     private func setupTopBar() {
         guard let unwrapedConfig = topBarConfig else {
@@ -377,12 +376,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         setupNewBottomBarConfig()
         log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount")
 
-        if (selectedItemsCount == 0){
+        if (selectedItemsCount == 0) {
             log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
 
             bottomBarPresenter?.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
-        }else{
+        } else {
             log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
 
             bottomBarPresenter?.show(animated: true, onView: nil)
@@ -413,22 +412,22 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                                   viewController: nil)
     }
     
-    func onMaxSelectionExeption(){
+    func onMaxSelectionExeption() {
         
     }
     
-    //MARK: - MoreActionsViewDelegate
+    // MARK: - MoreActionsViewDelegate
     
-    func viewAppearanceChanged(asGrid: Bool){
+    func viewAppearanceChanged(asGrid: Bool) {
         log.debug("BaseFilesGreedPresenter viewAppearanceChanged")
 
-        if (asGrid){
+        if (asGrid) {
             log.debug("BaseFilesGreedPresenter viewAppearanceChanged Grid")
 
             dataSource.updateDisplayngType(type: .greed)
             type = .List
             moduleOutput?.reloadType(type, sortedType: sortedType, fieldType: getFileFilter())
-        }else{
+        } else {
             log.debug("BaseFilesGreedPresenter viewAppearanceChanged List")
 
             dataSource.updateDisplayngType(type: .list)
@@ -491,8 +490,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             
             //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
             
-            if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image } ) {
-                let index = actionTypes.index(where: { return $0 == .createStory})!
+            if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image }) {
+                let index = actionTypes.index(where: { return $0 == .createStory })!
                 actionTypes.remove(at: index)
             }
             
@@ -500,16 +499,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: renameIndex)
             }
 
-            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: {$0.fileType == .image}) {
+            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
                 actionTypes.remove(at: printIndex)
             }
             
-            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: {$0.fileType == .image}) {
+            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: { $0.fileType == .image }) {
                 actionTypes.remove(at: editIndex)
             }
             
             if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                let serverObjects = selectedItems.filter({ return !$0.isLocalItem })
+                let serverObjects = selectedItems.filter({ !$0.isLocalItem })
                 if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
                 } else if selectedItems is [Item] {
@@ -542,13 +541,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     
-    //MARK: - View outbut/ TopBar/UnderNavBarBar Delegates
+    // MARK: - View outbut/ TopBar/UnderNavBarBar Delegates
     
     func viewAppearanceChangedTopBar(asGrid: Bool) {
         viewAppearanceChanged(asGrid: asGrid)
     }
     
-    func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
+    func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType) {
         sortedType = rule
         sortedPushed(with: rule.sortedRulesConveted)
     }
@@ -608,7 +607,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func printSelected() {
         log.debug("BaseFilesGreedPresenter printSelected")
 
-        let syncPhotos = selectedItems.filter{ !$0.isLocalItem && $0.fileType == .image }
+        let syncPhotos = selectedItems.filter { !$0.isLocalItem && $0.fileType == .image }
         if !syncPhotos.isEmpty {
             router.showPrint(items: syncPhotos)
         }
@@ -647,7 +646,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return type
     }
     
-    //MARK: - BaseFilesGreedModuleOutput
+    // MARK: - BaseFilesGreedModuleOutput
     
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
         log.debug("BaseFilesGreedPresenter reloadType")
@@ -668,4 +667,3 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func changeCover() { }
 }
-

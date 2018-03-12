@@ -13,7 +13,7 @@ class HomePageInteractor: HomePageInteractorInput {
     
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
     
-    func homePagePresented(){
+    func homePagePresented() {
         FreeAppSpace.default.checkFreeAppSpace()
         SyncServiceManager.shared.updateImmediately()
         

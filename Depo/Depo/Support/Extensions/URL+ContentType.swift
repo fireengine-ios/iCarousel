@@ -33,8 +33,7 @@ extension URL {
     
     var mimeType: String {
         if let uti = utType,
-            let mimetype = UTTypeCopyPreferredTagWithClass(uti as CFString, kUTTagClassMIMEType)?.takeRetainedValue()
-        {
+            let mimetype = UTTypeCopyPreferredTagWithClass(uti as CFString, kUTTagClassMIMEType)?.takeRetainedValue() {
             return mimetype as String
         }
         return "application/octet-stream"

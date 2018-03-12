@@ -35,8 +35,7 @@ final class CaptchaViewController: UIViewController {
                     player = try AVAudioPlayer(data: data)
                     player!.prepareToPlay()
                     player!.play()
-                }
-                catch {
+                } catch {
                     
                 }
             }

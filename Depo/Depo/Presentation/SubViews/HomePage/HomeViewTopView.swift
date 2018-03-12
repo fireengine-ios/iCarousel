@@ -26,7 +26,7 @@ class HomeViewTopView: UICollectionReusableView {
     weak var actionsDelegate: HomeViewTopViewActions?
     
     class func getHeight() -> CGFloat {
-        if (Device.isIpad){
+        if (Device.isIpad) {
             return 173.0
         }
         return 136.0
@@ -38,7 +38,7 @@ class HomeViewTopView: UICollectionReusableView {
         configurateView()
     }
     
-    private func configurateView(){
+    private func configurateView() {
         allFilesButton.setImage(UIImage(named: "homeAllFiles"), for: .normal)
         allFilesButton.setBottomTitleText(titleText: TextConstants.homeButtonAllFiles)
         allFilesButton.accessibilityLabel = TextConstants.homeButtonAllFiles
@@ -58,19 +58,19 @@ class HomeViewTopView: UICollectionReusableView {
     
     // MARK: Buttons action
     
-    @IBAction func onAllFilesButton(){
+    @IBAction func onAllFilesButton() {
         actionsDelegate?.allFilesButtonGotPressed()
     }
     
-    @IBAction func onCreateAStoryButton(){
+    @IBAction func onCreateAStoryButton() {
         actionsDelegate?.createAStoryButtonGotPressed()
     }
     
-    @IBAction func onFavoritesButton(){
+    @IBAction func onFavoritesButton() {
         actionsDelegate?.favoritesButtonGotPressed()
     }
     
-    @IBAction func onSyncContactsButton(){
+    @IBAction func onSyncContactsButton() {
         actionsDelegate?.syncContactsButtonGotPressed()
     }
 

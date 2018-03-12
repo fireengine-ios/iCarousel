@@ -12,7 +12,7 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
     var interactor: ForgotPasswordInteractorInput!
     var router: ForgotPasswordRouterInput!
 
-    //MARK: input
+    // MARK: input
     func viewIsReady() {
         checkLanguadge()
     }

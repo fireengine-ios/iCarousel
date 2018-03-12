@@ -14,9 +14,9 @@ enum LoginViewInputField {
 
 protocol LoginViewInput: class, Waiting {
     
-    var captchaViewController: CaptchaViewController! { set get }
+    var captchaViewController: CaptchaViewController! { get set }
     
-    func setupInitialState(array :[BaseCellModel])
+    func setupInitialState(array: [BaseCellModel])
     
     func showCapcha()
     

@@ -16,7 +16,7 @@ class AutoSyncInformTableViewCell: UITableViewCell {
     
     @IBOutlet weak var separatorView: UIView!
     
-    @IBOutlet weak var titleLabel:UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var iconImageView: UIImageView!
     
@@ -51,7 +51,7 @@ class AutoSyncInformTableViewCell: UITableViewCell {
         descriptionLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
     }
     
-    func configurateCellWith(model: AutoSyncModel){
+    func configurateCellWith(model: AutoSyncModel) {
         self.model = model
         descriptionLableText = model.subTitleString
         titleLabel.text = model.titleString
@@ -63,7 +63,7 @@ class AutoSyncInformTableViewCell: UITableViewCell {
         configureCellsItemsWithModel()
     }
     
-    func setColors(isFromSettings: Bool){
+    func setColors(isFromSettings: Bool) {
         titleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         descriptionLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         separatorView.backgroundColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor

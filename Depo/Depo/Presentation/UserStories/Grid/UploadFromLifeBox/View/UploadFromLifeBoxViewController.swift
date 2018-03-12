@@ -29,7 +29,7 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         super.viewWillAppear(animated)
         configureNavBarActions()
         
-        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1{
+        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1 {
             let barButtonLeft = UIBarButtonItem(customView: cancelButton)
             navigationItem.leftBarButtonItem = barButtonLeft
         }
@@ -47,21 +47,21 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         navigationItem.rightBarButtonItem = barButton
     }
     
-    @objc func onNextButton(){
+    @objc func onNextButton() {
         output.onNextButton()
     }
     
-    @objc func onCancelButton(){
+    @objc func onCancelButton() {
         hideView()
     }
     
-    func hideView(){
+    func hideView() {
         dismiss(animated: true) {
             
         }
     }
     
-    override func isNeedShowTabBar() -> Bool{
+    override func isNeedShowTabBar() -> Bool {
         return false
     }
     
@@ -69,17 +69,17 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         super.stopSelection()
         
         setTitle(withString: TextConstants.uploadFromLifeBoxTitle)
-        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1{
+        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1 {
             let barButtonLeft = UIBarButtonItem(customView: cancelButton)
             navigationItem.leftBarButtonItem = barButtonLeft
         }
     }
     
-    func getNavigationController() -> UINavigationController?{
+    func getNavigationController() -> UINavigationController? {
         return navigationController
     }
     
-    func getDestinationUUID() -> String{
+    func getDestinationUUID() -> String {
         return parentUUID
     }
     

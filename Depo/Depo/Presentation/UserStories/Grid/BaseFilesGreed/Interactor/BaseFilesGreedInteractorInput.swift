@@ -40,6 +40,6 @@ protocol BaseFilesGreedInteractorInput {
     
     func getAllItems(sortBy: SortedRules)
     
-    var requestPageSize: Int {get}
+    var requestPageSize: Int { get }
     
 }

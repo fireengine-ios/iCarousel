@@ -48,7 +48,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     
     override weak var delegate: LBCellsDelegate? {
-        didSet{
+        didSet {
             if let compatableValue = delegate as? BasicCollectionMultiFileCellActionDelegate {
                 actionDelegate = compatableValue
             }
@@ -73,7 +73,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func setImage(image: UIImage?, animated: Bool) {
         isAlreadyConfigured = true
 
-        if (isBigSize()){
+        if (isBigSize()) {
             bigContentImageView.contentMode = .scaleAspectFill
             bigContentImageView.image = image
         } else {
@@ -109,7 +109,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             return
         }
         
-        if (isAlreadyConfigured){
+        if (isAlreadyConfigured) {
             return
         }
         
@@ -127,7 +127,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 } else {
                     detailsLabelText = "0 \(TextConstants.folderItemsText)"
                 }
-            case .audio,.video:
+            case .audio, .video:
                 if let duration = wrappered.duration {
                     detailsLabelText = duration
                 }

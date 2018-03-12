@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-enum SharedType:  CustomStringConvertible {
+enum SharedType: CustomStringConvertible {
     typealias RawValue = String
     
     case link
@@ -39,7 +39,7 @@ struct SharedServiceParam: RequestParametrs {
     
     let filesList: [String]
     
-    let isAlbum : Bool
+    let isAlbum: Bool
     
     let sharedType: SharedType
     
@@ -52,8 +52,8 @@ struct SharedServiceParam: RequestParametrs {
     }
     
     var patch: URL {
-        let sharedPath = String(format:RouteRequests.share, sharedType.description )
-        return URL(string: sharedPath, relativeTo:RouteRequests.BaseUrl)!
+        let sharedPath = String(format: RouteRequests.share, sharedType.description )
+        return URL(string: sharedPath, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -87,7 +87,7 @@ class SharedService: BaseRequestService {
     func share(param: SharedServiceParam, success: SuccessShared?, fail: FailResponse?) {
         log.debug("SharedService share")
         
-        let handler = BaseResponseHandler<SharedServiceResponse,ObjectRequestResponse>(success: { tmp  in
+        let handler = BaseResponseHandler<SharedServiceResponse, ObjectRequestResponse>(success: { tmp  in
             if let url = (tmp as? SharedServiceResponse)?.url {
                 log.debug("SharedService share success")
 

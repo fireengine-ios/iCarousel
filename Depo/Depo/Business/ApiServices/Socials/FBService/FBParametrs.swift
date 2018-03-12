@@ -45,6 +45,3 @@ class FBStop: BaseRequestParametrs {
         return URL(string: RouteRequests.fbStop, relativeTo: super.patch)!
     }
 }
-
-
-

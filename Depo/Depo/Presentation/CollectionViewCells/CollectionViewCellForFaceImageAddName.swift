@@ -21,7 +21,7 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
-        guard let item = wrappedObj as? Item else{
+        guard let item = wrappedObj as? Item else {
             return
         }
         
@@ -76,7 +76,7 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
         self.backgroundColor = ColorConstants.fileGreedCellColor
     }
     
-    class func getCellSise()->CGSize{
+    class func getCellSise() -> CGSize {
         return CGSize(width: 90.0, height: 90.0)
     }
 

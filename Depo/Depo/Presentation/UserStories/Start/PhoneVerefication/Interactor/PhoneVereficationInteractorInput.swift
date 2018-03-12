@@ -21,9 +21,7 @@ protocol PhoneVereficationInteractorInput {
     
     var expectedInputLength: Int? { get }
     
-    var phoneNumber: String {get}
+    var phoneNumber: String { get }
     
     var email: String { get }
 }
-
-

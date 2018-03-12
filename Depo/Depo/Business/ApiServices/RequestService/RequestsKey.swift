@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LbRequestkeys{
+struct LbRequestkeys {
     // MARK: Authificate 
     static let username = "username"
     static let password = "password"

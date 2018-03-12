@@ -42,8 +42,7 @@ final class FileProviderItem: NSObject, NSFileProviderItem, Map {
          
          isFolder: Bool,
          tempDownloadURL: URL?,
-         thumbnailURL: URL?)
-    {
+         thumbnailURL: URL?) {
         self.itemIdentifier = NSFileProviderItemIdentifier(itemIdentifier)
         self.parentItemIdentifier = NSFileProviderItemIdentifier(parentItemIdentifier)
         self.filename = filename

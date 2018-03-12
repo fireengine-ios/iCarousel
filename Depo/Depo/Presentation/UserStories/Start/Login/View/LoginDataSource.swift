@@ -34,7 +34,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
     
     weak var actionsDelegate: LoginDataSourceActionsDelegate?
     
-    func setupTableView(tableView: UITableView){
+    func setupTableView(tableView: UITableView) {
         self.tableView = tableView
 //        var nib = UINib(nibName: "inputCell", bundle: nil)
 //        tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
@@ -46,7 +46,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
         tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.passwordCellID)
     }
     
-    func setupCellsWithModels(models:[BaseCellModel]){
+    func setupCellsWithModels(models: [BaseCellModel]) {
         tableDataMArray.removeAll()
         tableDataMArray.insert(contentsOf: models, at: 0)
         tableView.reloadData()
@@ -67,7 +67,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (indexPath.row == 0){
+        if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.loginPhoneMailCellID, for: indexPath) as! LoginPhoneMailCell
             cell.loginCellActionDelegate = self
             let model = tableDataMArray[indexPath.row]
@@ -98,8 +98,8 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
     
     // MARK: ProtoInputCellProtocol
     
-    func textFinishedEditing(withCell cell: ProtoInputTextCell){
-        let _ = AutoNextEditingRowPasser.passToNextEditingRow(withEditedCell: cell, inTable: tableView)
+    func textFinishedEditing(withCell cell: ProtoInputTextCell) {
+        _ = AutoNextEditingRowPasser.passToNextEditingRow(withEditedCell: cell, inTable: tableView)
     }
     
     func getLogin() -> String {

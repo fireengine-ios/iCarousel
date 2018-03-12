@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SettingsDelegate: class{
+protocol SettingsDelegate: class {
     func goToContactSync()
     
     func goToIportPhotos()
@@ -100,7 +100,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         RouterVC().showFeedbackSubView()
     }
     
-    //MARK: UITableView delegate
+    // MARK: UITableView delegate
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return tableDataArray.count
@@ -263,7 +263,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         let actionsWithCancell: [UIAlertAction] = [cancellAction, actionPhoto, actionLibriary]
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionsWithCancell.forEach({actionSheetVC.addAction($0)})
+        actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
         actionSheetVC.popoverPresentationController?.sourceView = view
         
         let originPoint = CGPoint(x: Device.winSize.width/2 - actionSheetVC.preferredContentSize.width/2,
@@ -306,10 +306,10 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
     }
 }
 
-//MARK: - photo picker delegatess
-extension SettingsViewController: UIImagePickerControllerDelegate  {
+// MARK: - photo picker delegatess
+extension SettingsViewController: UIImagePickerControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         
         var photoData: Data?
         if let imageURL = info[UIImagePickerControllerMediaURL] as? URL,

@@ -34,9 +34,8 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
         navigationItem.rightBarButtonItems = nil
     }
     
-    @objc func onCancelButton(){
+    @objc func onCancelButton() {
         output.moveBack()
     }
     
 }
-

@@ -36,9 +36,9 @@ class CreateStory: BaseRequestParametrs {
     let title: String
     let imageUUids: [String]
     let musicId: Int64?
-    let audioUuid :String?
+    let audioUuid: String?
     
-    init (name: String, imageuuid: [String],musicUUID: String? = nil, musicId: Int64? = nil) {
+    init (name: String, imageuuid: [String], musicUUID: String? = nil, musicId: Int64? = nil) {
         self.title = name
         self.imageUUids = imageuuid
         self.musicId = musicId
@@ -46,7 +46,7 @@ class CreateStory: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
-        var param:[String : Any] =  [CreateStoryPropertyName.imageUUIDs: imageUUids,
+        var param: [String: Any] =  [CreateStoryPropertyName.imageUUIDs: imageUUids,
                                      CreateStoryPropertyName.name    :title]
         if let id = musicId {
             param = param + [CreateStoryPropertyName.audioId :id]
@@ -58,7 +58,7 @@ class CreateStory: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: CreateStoryPath.createStory, relativeTo:super.patch)!
+        return URL(string: CreateStoryPath.createStory, relativeTo: super.patch)!
     }
     
     override var header: RequestHeaderParametrs {
@@ -72,7 +72,7 @@ class CreateStoryPreview: CreateStory {
     }
     
     override var patch: URL {
-        return URL(string: CreateStoryPath.preview, relativeTo:super.patch)!
+        return URL(string: CreateStoryPath.preview, relativeTo: super.patch)!
     }
     
 }
@@ -85,12 +85,12 @@ class CreateStoryMusicList: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let patch = String(format:CreateStoryPath.audioList,Device.locale)
-        return URL(string: patch, relativeTo:super.patch)!
+        let patch = String(format: CreateStoryPath.audioList, Device.locale)
+        return URL(string: patch, relativeTo: super.patch)!
     }
 }
 
-class CreateStoryMusicListResponse:ObjectRequestResponse {
+class CreateStoryMusicListResponse: ObjectRequestResponse {
     
     var list: [CreateStoryMusicItem]?
     
@@ -100,7 +100,7 @@ class CreateStoryMusicListResponse:ObjectRequestResponse {
     }
 }
 
-class CreateStoryMusicItem: ObjectRequestResponse  {
+class CreateStoryMusicItem: ObjectRequestResponse {
     var id: Int64?
     var fileName: String?
     var type: String?
@@ -114,7 +114,7 @@ class CreateStoryMusicItem: ObjectRequestResponse  {
     }
 }
 
-class CreateResponse: ObjectRequestResponse  {
+class CreateResponse: ObjectRequestResponse {
     var id: Int64?
     
     override func mapping() {
@@ -145,7 +145,7 @@ class CreateStoryMusicService: RemoteItemsService {
                 return
             }
             if let response = resp as? CreateStoryMusicListResponse,
-                let list = response.list  {
+                let list = response.list {
                 let result = list.flatMap { WrapData(musicForCreateStory: $0) }
                 self.isGotAll = true
                 success?(result)
@@ -165,7 +165,7 @@ class CreateStoryMusicService: RemoteItemsService {
         requestService.executeGetRequest(param: CreateStoryMusicList(), handler: handler)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         log.debug("CreateStoryMusicService nextItems")
 
         allItems(success: success, fail: fail)
@@ -177,7 +177,7 @@ typealias GetPreviewStorrySyccess = (_ responce: CreateStoryResponce) -> Swift.V
 
 class CreateStoryService: BaseRequestService {
     
-    func createStory(createStory: CreateStory, success:  CreateStorSuccess?, fail:  FailResponse?) {
+    func createStory(createStory: CreateStory, success: CreateStorSuccess?, fail: FailResponse?) {
         log.debug("CreateStoryMusicService createStory")
 
         let  handler = BaseResponseHandler< CreateResponse, ObjectRequestResponse>(success: {
@@ -200,12 +200,12 @@ class CreateStoryService: BaseRequestService {
     func getPreview(preview: CreateStoryPreview, success: @escaping GetPreviewStorrySyccess, fail: @escaping FailResponse ) {
         log.debug("CreateStoryMusicService getPreview fail")
 
-        let  handler = BaseResponseHandler<CreateStoryResponce , ObjectRequestResponse>(success: {  resp  in
-            if let responce = resp as? CreateStoryResponce{
+        let  handler = BaseResponseHandler<CreateStoryResponce, ObjectRequestResponse>(success: {  resp  in
+            if let responce = resp as? CreateStoryResponce {
                 log.debug("CreateStoryMusicService getPreview success")
 
                 success(responce)
-            }else{
+            } else {
                 log.debug("CreateStoryMusicService getPreview fail")
 
                 let erorr: Error = NSError(domain: "Create story ", code: -6000, userInfo: nil)

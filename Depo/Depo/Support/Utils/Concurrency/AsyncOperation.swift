@@ -80,4 +80,3 @@ open class AsyncOperation: Operation {
         workItem()
     }
 }
-

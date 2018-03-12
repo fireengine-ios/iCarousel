@@ -32,7 +32,7 @@ class Upload: UploadRequestParametrs {
     
     private let isFavorite: Bool
     
-    var contentLenght:String {
+    var contentLenght: String {
         return String(format: "%lu", item.fileSize)
     }
     
@@ -69,7 +69,7 @@ class Upload: UploadRequestParametrs {
 
         self.isFavorite = isFavorite
 
-        if item.isLocalItem, !item.syncStatus.isContained(in: [.synced]) , !item.uuid.isEmpty {
+        if item.isLocalItem, !item.syncStatus.isContained(in: [.synced]), !item.uuid.isEmpty {
             self.tmpUUId = item.uuid
         } else {
             self.tmpUUId = UUID().uuidString
@@ -104,7 +104,7 @@ class Upload: UploadRequestParametrs {
             .appending(tmpUUId))!
     }
     
-    var timeout: TimeInterval{
+    var timeout: TimeInterval {
         return 2000.0
     }
 }
@@ -124,6 +124,6 @@ class UploadNotify: BaseRequestParametrs {
     override var patch: URL {
         let str = String(format: RouteRequests.uploadNotify,
                          parentUUID, fileUUID)
-        return URL(string: str, relativeTo:super.patch)!
+        return URL(string: str, relativeTo: super.patch)!
     }
 }
