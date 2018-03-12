@@ -39,7 +39,7 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
         }
     }
     
-    private var autoSyncSetting: AutoSyncSetting! {
+    private var autoSyncSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiOnly) {
         didSet {
             if autoSyncSetting != oldValue {
                 updateViews()
@@ -54,18 +54,11 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     private var expandHeight: CGFloat {
         return isFullHeight ? 177.5 : 0.0
     }
-    
-    
-    //MARK: - Lifecycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 
     
     //MARK: - Public
     
-    func configurate(with setting: AutoSyncSetting) {
+    func setup(with setting: AutoSyncSetting) {
         autoSyncSetting = setting
     }
     
@@ -92,9 +85,8 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     }
     
     private func updateViews() {
-        for (index, view) in optionsViews.enumerated() {
-            let option = options[index]
-            view.configure(with: option, isSelected: autoSyncSetting.option == option)
+        for (option, view) in zip(options, optionsViews) {
+            view.setup(with: option, isSelected: autoSyncSetting.option == option)
             view.delegate = self
         }
         expandButton.setTitle(autoSyncSetting.syncItemType.text(), for: .normal)

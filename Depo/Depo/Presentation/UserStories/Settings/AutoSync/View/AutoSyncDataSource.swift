@@ -109,7 +109,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSwitcherTableViewCell
             autoSyncCell.delegate = self
-            autoSyncCell.configurateCellWith(model: model)
+            autoSyncCell.setup(with: model)
             autoSyncCell.setColors(isFromSettings: isFromSettings)
             return autoSyncCell
         } else {
@@ -117,7 +117,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSettingsTableViewCell
             if let syncSetting = model.syncSetting {
-                autoSyncCell.configurate(with: syncSetting)
+                autoSyncCell.setup(with: syncSetting)
             }
             autoSyncCell.setColors(isFromSettings: isFromSettings)
             autoSyncCell.delegate = self
