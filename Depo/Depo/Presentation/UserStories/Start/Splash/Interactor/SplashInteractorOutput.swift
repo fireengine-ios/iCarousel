@@ -14,6 +14,7 @@ protocol SplashInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func onFailEULA()
     
     func onSuccessLogin()
+    func onSuccessLoginTurkcell()
     func onFailLogin()
     func onNetworkFail()
     
