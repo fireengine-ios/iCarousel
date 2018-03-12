@@ -25,9 +25,8 @@ class SplashInteractor: SplashInteractorInput {
             if ReachabilityService().isReachableViaWiFi {
                 failLogin()
             } else {
-                /// turkcell login
                 authenticationService.turkcellAuth(success: { [weak self] in
-                    self?.successLogin()
+                    self?.turkcellSuccessLogin()
                 }, fail: { [weak self] response in
                     self?.output.asyncOperationSucces()
                     self?.output.onFailLogin()
@@ -35,6 +34,12 @@ class SplashInteractor: SplashInteractorInput {
             }
         } else {
             successLogin()
+        }
+    }
+    
+    func turkcellSuccessLogin(){
+        DispatchQueue.main.async {
+            self.output.onSuccessLoginTurkcell()
         }
     }
     

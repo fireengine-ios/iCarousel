@@ -300,6 +300,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             collectionView.isHidden = true
             noFilesView.isHidden = true
             topBarContainer.isHidden = true
+            setCurrentPlayState()
+            hideTabBar()
         }
     }
     
@@ -325,9 +327,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             collectionView.isHidden = true
             setCurrentPlayState()
         }
+        searchBar.enableCancelButton()
+        searchBar.resignFirstResponder()
         view.endEditing(true)
         suggestTableView.isHidden = true
-        searchBar.enableCancelButton()
     }
     
     // MARK: - SearchViewInput
