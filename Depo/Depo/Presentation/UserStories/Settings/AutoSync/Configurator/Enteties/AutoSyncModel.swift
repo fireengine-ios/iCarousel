@@ -28,7 +28,7 @@ class AutoSyncModel {
         syncSetting = setting
     }
     
-    init(model: AutoSyncModel, selected: Bool){
+    init(model: AutoSyncModel, selected: Bool) {
         titleString = model.titleString
         subTitleString = model.subTitleString
         cellType = model.cellType

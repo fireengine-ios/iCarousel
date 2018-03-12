@@ -10,14 +10,14 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     var interactor: MoreFilesActionsInteractorInput!
     weak var basePassingPresenter: BaseItemInputPassingProtocol? //do I need it here?
     
-    //MARK: - Interactor output
+    // MARK: - Interactor output
     
     func operationFinished(type: ElementTypes) {
         compliteAsyncOperationEnableScreen()
         basePassingPresenter?.operationFinished(withType: type, response: nil)
     }
     
-    func operationFailed(type: ElementTypes, message: String){
+    func operationFailed(type: ElementTypes, message: String) {
         compliteAsyncOperationEnableScreen()
         basePassingPresenter?.operationFailed(withType: type)
     }
@@ -28,7 +28,7 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func dismiss(animated: Bool) {} /// overriding
     
-    //MARK: - Base presenter
+    // MARK: - Base presenter
     
     override func outputView() -> Waiting? {
         return RouterVC().rootViewController

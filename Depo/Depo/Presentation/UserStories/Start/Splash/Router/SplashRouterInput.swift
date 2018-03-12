@@ -18,4 +18,6 @@ protocol SplashRouterInput {
     
     func showNetworkError()
     
+    func goToSyncSettingsView()
+    
 }

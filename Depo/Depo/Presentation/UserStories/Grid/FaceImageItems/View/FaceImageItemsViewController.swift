@@ -27,7 +27,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         setTitle(withString: mainTitle )
     }
 
-    override func configurateNavigationBar(){
+    override func configurateNavigationBar() {
         if (isCanChangeVisibility) {
             configurateFaceImagePeopleActions { [weak self] in
                 self?.configureDoneNavBarActions()
@@ -51,6 +51,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         startCreatingFilesButton.isHidden = true
         noFilesTopLabel?.isHidden = true
         isCanChangeVisibility = false
+        ugglaImageView.isHidden = true
     }
     
     // MARK: - Configure navigation bar buttons
@@ -74,7 +75,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    //MARK: - FaceImageItemsInput
+    // MARK: - FaceImageItemsInput
     
     func configurateUgglaView() {
         ugglaImageView = UIImageView(frame: CGRect(x: 0, y: view.bounds.size.height - ugglaViewHeight, width: view.bounds.size.width, height: ugglaViewHeight))
@@ -94,9 +95,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
     
     func updateUgglaViewPosition() {
         let contentHeight = collectionView.contentSize.height
-        
-        ugglaImageView.isHidden = contentHeight < collectionView.frame.height
-        
+            
         if contentHeight < collectionView.frame.height - ugglaViewHeight {
             ugglaViewBottomConstraint.constant = 0
         } else {

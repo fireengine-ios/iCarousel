@@ -93,7 +93,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
  
     }
     
-    //MARK: - BaseDataSourceForCollectionViewDelegate
+    // MARK: - BaseDataSourceForCollectionViewDelegate
     
     func updateCoverPhotoIfNeeded() {
         if let interactor = interactor as? FaceImagePhotosInteractor {

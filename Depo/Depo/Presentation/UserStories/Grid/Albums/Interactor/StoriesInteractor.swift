@@ -24,7 +24,7 @@ class StoriesInteractor: BaseFilesGreedInteractor {
                 array.append(stories)
                 self?.output.getContentWithSuccess(array: array)
             }
-            }, fail:  { [weak self] in
+            }, fail: { [weak self] in
                 log.debug("StoriesInteractor getAllItems StoryService allStories fail")
                 
                 DispatchQueue.main.async {

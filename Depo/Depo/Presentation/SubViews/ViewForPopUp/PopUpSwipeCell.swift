@@ -18,7 +18,7 @@ class PopUpSwipeCell: UITableViewCell {
     private var isTouch = false
     var isSwipeEnable = true
     
-    var cellDelegate:PopUpSwipeCellDelegate?
+    var cellDelegate: PopUpSwipeCellDelegate?
     
     
     override func awakeFromNib() {
@@ -29,24 +29,24 @@ class PopUpSwipeCell: UITableViewCell {
         configurateView()
     }
     
-    func configurateView(){
+    func configurateView() {
         
     }
     
-    func addViewOnCell(subView: UIView, withShadow: Bool){
-        for view in self.contentView.subviews{
+    func addViewOnCell(subView: UIView, withShadow: Bool) {
+        for view in self.contentView.subviews {
             view.removeFromSuperview()
         }
         
-        if let baseView = subView as? BaseView{
+        if let baseView = subView as? BaseView {
             isSwipeEnable = baseView.canSwipe
         }
         
         subView.frame = CGRect(x: ViewForPopUp.indent, y: ViewForPopUp.indent, width: frame.size.width - 2 * ViewForPopUp.indent, height: subView.frame.size.height)
         
-        if (withShadow){
-            if (contentView.layer.sublayers != nil){
-                for l in contentView.layer.sublayers!{
+        if (withShadow) {
+            if (contentView.layer.sublayers != nil) {
+                for l in contentView.layer.sublayers! {
                     l.removeFromSuperlayer()
                 }
             }
@@ -75,12 +75,12 @@ class PopUpSwipeCell: UITableViewCell {
     }
     
     // MARK: update state to default
-    func setStateToDefault(){
+    func setStateToDefault() {
         contentView.frame = CGRect(x: 0.0, y: 0.0, width: frame.size.width, height: frame.size.height)
     }
     
     // MARK : touches
-    private func getXforTouch(_ touches: Set<UITouch>)-> CGFloat{
+    private func getXforTouch(_ touches: Set<UITouch>) -> CGFloat {
         let touch = touches.first
         let location = touch!.location(in: self)
         superview?.bringSubview(toFront: self)
@@ -89,7 +89,7 @@ class PopUpSwipeCell: UITableViewCell {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        if (!isSwipeEnable){
+        if (!isSwipeEnable) {
             return
         }
         isTouch = true
@@ -98,7 +98,7 @@ class PopUpSwipeCell: UITableViewCell {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        if (!isSwipeEnable){
+        if (!isSwipeEnable) {
             return
         }
         let x = startX - getXforTouch(touches)
@@ -106,14 +106,14 @@ class PopUpSwipeCell: UITableViewCell {
         contentView.frame = CGRect(x: -x, y: contentView.frame.origin.y, width: contentView.frame.size.width, height: contentView.frame.size.height)
     }
     
-    private func calculateEnd(_ touches: Set<UITouch>){
+    private func calculateEnd(_ touches: Set<UITouch>) {
         let x = startX - getXforTouch(touches)
         var endX: CGFloat = 0
         var needDeleteCell = false
-        if (abs(x) > frame.size.width * 0.3){
-            if (x < 0){
+        if (abs(x) > frame.size.width * 0.3) {
+            if (x < 0) {
                 endX = frame.size.width
-            }else{
+            } else {
                 endX = -frame.size.width
             }
             needDeleteCell = true
@@ -123,9 +123,9 @@ class PopUpSwipeCell: UITableViewCell {
             self.contentView.frame = CGRect(x: endX, y: self.contentView.frame.origin.y, width: self.contentView.frame.size.width, height: self.contentView.frame.size.height)
         }) { (animate) in
             self.isTouch = false
-            if (needDeleteCell){
-                for view in self.contentView.subviews{
-                    if let baseView = view as? BaseView{
+            if (needDeleteCell) {
+                for view in self.contentView.subviews {
+                    if let baseView = view as? BaseView {
                         baseView.viewDeletedBySwipe()
                     }
                 }
@@ -136,7 +136,7 @@ class PopUpSwipeCell: UITableViewCell {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        if (!isSwipeEnable){
+        if (!isSwipeEnable) {
             return
         }
         calculateEnd(touches)
@@ -144,7 +144,7 @@ class PopUpSwipeCell: UITableViewCell {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        if (!isSwipeEnable){
+        if (!isSwipeEnable) {
             return
         }
         calculateEnd(touches)

@@ -68,7 +68,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
     }
     
-    func setObject(object:Item) {
+    func setObject(object: Item) {
         webView.isHidden = true
         imageScrollView.image = nil
         playVideoButton.isHidden = true

@@ -13,7 +13,7 @@ class HelpAndSupportModuleInitializer: NSObject {
     //Connect with object on storyboard
     @IBOutlet weak var helpandsupportViewController: HelpAndSupportViewController!
 
-    class func initializeViewController(with nibName:String) -> UIViewController {
+    class func initializeViewController(with nibName: String) -> UIViewController {
         let viewController = HelpAndSupportViewController()
         let configurator = HelpAndSupportModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)

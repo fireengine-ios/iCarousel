@@ -10,7 +10,7 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
     
     let routerVC = RouterVC()
     
-    func goToAutoSync(){
+    func goToAutoSync() {
         routerVC.pushViewController(viewController: routerVC.synchronyseScreen!)
     }
     

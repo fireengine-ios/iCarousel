@@ -59,7 +59,7 @@ final class PlacesItemsService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .image)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         let param = PlacesPageParameters(pageSize: requestSize, pageNumber: currentPage)
 
         service.getPlacesPage(param: param, success: { [weak self] (response) in
@@ -77,9 +77,9 @@ final class PlacesItemsService: RemoteItemsService {
 
 final class PlacesParameters: BaseRequestParametrs {
     override var patch: URL {
-        let searchWithParam = String(format:RouteRequests.places)
+        let searchWithParam = String(format: RouteRequests.places)
         
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -92,7 +92,7 @@ final class PlacesAlbumParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.placesAlbum, id)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -107,7 +107,7 @@ final class PlacesPageParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.placesPage, pageSize, pageNumber)
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 

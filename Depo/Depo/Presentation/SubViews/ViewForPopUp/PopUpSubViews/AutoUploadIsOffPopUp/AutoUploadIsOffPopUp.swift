@@ -30,16 +30,16 @@ final class AutoUploadIsOffPopUp: BaseView {
         settingsButton?.setTitle(TextConstants.autoUploaOffSettings, for: .normal)
     }
     
-    override func viewDeletedBySwipe(){
+    override func viewDeletedBySwipe() {
         onCancel()
     }
 
-    func onCancel(){
+    func onCancel() {
         CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
         PopUpService.shared.resetLoginCountForUploadOffPopUp()
     }
     
-    @IBAction func onSettingsButton(){
+    @IBAction func onSettingsButton() {
         let router = RouterVC()
         router.pushViewController(viewController: router.autoUpload)
     }

@@ -12,14 +12,14 @@ import Photos
 
 class CoreDataStack: NSObject {
     
-    typealias AppendingLocaclItemsFinishCallback = ()->Void
-    typealias AppendingLocaclItemsProgressCallback = (Float)->Void
+    typealias AppendingLocaclItemsFinishCallback = () -> Void
+    typealias AppendingLocaclItemsProgressCallback = (Float) -> Void
     
     @objc static let `default` = CoreDataStack()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         
-        guard let modelURL = Bundle.main.url(forResource: "LifeBoxModel", withExtension:"momd"),
+        guard let modelURL = Bundle.main.url(forResource: "LifeBoxModel", withExtension: "momd"),
             let mom = NSManagedObjectModel(contentsOf: modelURL)
             else { fatalError("Error loading model from bundle") }
 
@@ -85,7 +85,7 @@ class CoreDataStack: NSObject {
         self.deleteObjects(fromFetches: [albumFetchRequest, mediaItemFetchRequest])
     }
 
-    func deleteLocalFiles(){
+    func deleteLocalFiles() {
         DispatchQueue.main.async {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
             let predicateRules = PredicateRules()
@@ -98,16 +98,16 @@ class CoreDataStack: NSObject {
     }
     
     func getLocalDuplicates(remoteItems: [Item]) -> [Item] {
-        let remoteMd5s = remoteItems.map{$0.md5}
+        let remoteMd5s = remoteItems.map { $0.md5 }
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        fetchRequest.predicate = NSPredicate(format: "md5Value IN %@",  remoteMd5s)
+        fetchRequest.predicate = NSPredicate(format: "md5Value IN %@", remoteMd5s)
         
         guard let localDuplicatesMediaItems = (try? CoreDataStack.default.mainContext.fetch(fetchRequest)) as? [MediaItem] else {
             return []
         }
         
-        return localDuplicatesMediaItems.flatMap{return WrapData(mediaItem: $0)}
+        return localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
     }
 
     /// MAYBE WILL BE NEED

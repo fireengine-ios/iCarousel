@@ -35,7 +35,7 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
         
     }
     
-    //MARK: WKNavigationDelegate
+    // MARK: WKNavigationDelegate
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         hideSpiner()

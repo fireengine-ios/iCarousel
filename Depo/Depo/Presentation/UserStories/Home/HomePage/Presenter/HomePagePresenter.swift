@@ -22,7 +22,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         view.setupInitialState()
     }
     
-    func homePagePresented(){
+    func homePagePresented() {
         interactor.homePagePresented()
     }
     
@@ -30,7 +30,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         router.moveToSettingsScreen()
     }
     
-    func onSyncContacts(){
+    func onSyncContacts() {
         router.moveToSyncContacts()
     }
     

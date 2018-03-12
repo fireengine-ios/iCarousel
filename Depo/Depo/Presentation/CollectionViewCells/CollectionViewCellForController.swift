@@ -10,8 +10,8 @@ import UIKit
 
 class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
     
-    func addViewOnCell(controllersView: UIView, withShadow: Bool){
-        for view in self.contentView.subviews{
+    func addViewOnCell(controllersView: UIView, withShadow: Bool) {
+        for view in self.contentView.subviews {
             view.removeFromSuperview()
         }
         
@@ -19,9 +19,9 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
             isSwipeEnable = baseView.canSwipe
         }
         
-        if (withShadow){
-            if (contentView.layer.sublayers != nil){
-                for l in contentView.layer.sublayers!{
+        if (withShadow) {
+            if (contentView.layer.sublayers != nil) {
+                for l in contentView.layer.sublayers! {
                     l.removeFromSuperlayer()
                 }
             }
@@ -30,7 +30,7 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
             controllersView.clipsToBounds = true
             
             let layer = CALayer()
-            layer.frame = CGRect(x: contentView.layer.frame.origin.x , y: contentView.layer.frame.origin.y , width: contentView.layer.frame.size.width , height: contentView.layer.frame.size.height )
+            layer.frame = CGRect(x: contentView.layer.frame.origin.x, y: contentView.layer.frame.origin.y, width: contentView.layer.frame.size.width, height: contentView.layer.frame.size.height )
             
             layer.shadowColor = UIColor.lightGray.cgColor
             layer.shadowOpacity = 1

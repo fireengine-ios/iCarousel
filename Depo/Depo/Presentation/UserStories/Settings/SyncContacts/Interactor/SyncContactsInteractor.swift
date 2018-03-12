@@ -29,7 +29,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     let contactsSyncService = ContactsSyncService()
     
-    func startOperation(operationType: SyncOperationType){
+    func startOperation(operationType: SyncOperationType) {
         switch operationType {
         case .backup:
             MenloworksAppEvents.onContactUploaded()

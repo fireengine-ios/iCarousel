@@ -59,11 +59,11 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         output.viewIsReady()
     }
     
-    @IBAction func onPlayButton(){
+    @IBAction func onPlayButton() {
         playVideoByURLString(urlSting: previewURLString)
     }
     
-    func playVideoByURLString(urlSting: String?){
+    func playVideoByURLString(urlSting: String?) {
         playerController = AVPlayerViewController()
         playerController?.player = player
         self.present(playerController!, animated: true) { [weak self] in
@@ -71,7 +71,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         }
     }
     
-    @objc func onSaveButton(){
+    @objc func onSaveButton() {
         output.onSaveStory()
     }
     
@@ -83,8 +83,8 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
 
 // MARK: CreateStoryPreviewViewInput
 extension CreateStoryPreviewViewController: CreateStoryPreviewViewInput {
-    func startShowVideoFromResponce(responce: CreateStoryResponce){
-        guard let urlString = responce.storyURLString else{
+    func startShowVideoFromResponce(responce: CreateStoryResponce) {
+        guard let urlString = responce.storyURLString else {
             return
         }
         previewURLString = urlString

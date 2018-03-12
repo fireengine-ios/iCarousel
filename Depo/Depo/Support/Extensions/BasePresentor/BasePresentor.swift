@@ -72,7 +72,7 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
     }
     
     private func showMessage(errorMessage: String?) {
-        if let message = errorMessage{
+        if let message = errorMessage {
             UIApplication.showErrorAlert(message: message)
         }
     }

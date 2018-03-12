@@ -15,12 +15,12 @@ final class Validator {
             return false
         }
         let emailRegEx = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,})$"
-        let emailTest = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
+        let emailTest = NSPredicate(format: "SELF MATCHES[c] %@", emailRegEx)
         return emailTest.evaluate(with: email)
     }
     
     static func isValid(phone: String) -> Bool {
-        var phoneNumber = phone.filter{$0 != "(" && $0 != ")"}
+        var phoneNumber = phone.filter { $0 != "(" && $0 != ")" }
         if !phone.contains("+") {
             phoneNumber = "+" + phoneNumber
         }

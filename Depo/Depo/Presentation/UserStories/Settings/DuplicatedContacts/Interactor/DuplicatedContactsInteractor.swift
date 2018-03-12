@@ -12,5 +12,3 @@ class DuplicatedContactsInteractor: DuplicatedContactsInteractorInput {
     weak var output: DuplicatedContactsInteractorOutput!
     
 }
-
-

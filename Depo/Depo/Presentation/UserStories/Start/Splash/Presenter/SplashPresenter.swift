@@ -7,11 +7,14 @@
 //
 
 final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput, SplashInteractorOutput {
-
+    
+    
     weak var view: SplashViewInput!
     var interactor: SplashInteractorInput!
     var router: SplashRouterInput!
+    
     private lazy var customProgressHUD = CustomProgressHUD()
+    private var turkcellLogin = false
     
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
@@ -38,7 +41,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         vc.navigationBarWithGradientStyleWithoutInsets()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            rootVC.present(navVC, animated: true,completion: nil)
+            rootVC.present(navVC, animated: true, completion: nil)
         }
     }
     
@@ -50,12 +53,17 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     // MARK: Interactor out
     
-    func onSuccessLogin(){
+    func onSuccessLogin() {
         interactor.checkEULA()
         MenloworksAppEvents.onStartWithLogin(true)
     }
     
-    func onFailLogin(){
+    func onSuccessLoginTurkcell(){
+        turkcellLogin = true
+        interactor.checkEULA()
+    }
+    
+    func onFailLogin() {
         router.navigateToOnboarding()
         MenloworksAppEvents.onStartWithLogin(false)
     }
@@ -71,10 +79,21 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                 self?.customProgressHUD.showProgressSpinner(progress: progressPercentage)
             }
         
-        }){ [weak self] in
+        }) { [weak self] in
             DispatchQueue.main.async {
                 self?.customProgressHUD.hideProgressSpinner()
-                self?.router.navigateToApplication()
+                
+                if (self?.turkcellLogin)! {
+                    let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+                    if launchedBefore  {
+                        self?.router.navigateToApplication()
+                    } else {
+                        self?.router.goToSyncSettingsView()
+                        UserDefaults.standard.set(true, forKey: "launchedBefore")
+                    }
+                } else {
+                    self?.router.navigateToApplication()
+                }
             }
         }
     }

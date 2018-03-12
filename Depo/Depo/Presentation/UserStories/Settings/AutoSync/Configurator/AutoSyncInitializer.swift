@@ -24,7 +24,7 @@ class AutoSyncModuleInitializer: NSObject {
         configurator.configureModuleForViewInput(viewInput: autosyncViewController)
     }
     
-    class func initializeViewController(with nibName:String, fromSettings: Bool = false) -> UIViewController {
+    class func initializeViewController(with nibName: String, fromSettings: Bool = false) -> UIViewController {
         let viewController = AutoSyncViewController(nibName: nibName, bundle: nil)
         let configurator = AutoSyncModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController, fromSettings: fromSettings)

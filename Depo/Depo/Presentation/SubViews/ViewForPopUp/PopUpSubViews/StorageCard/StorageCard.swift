@@ -39,8 +39,8 @@ class StorageCard: BaseView {
         } 
     }
     
-    @IBAction func onBottomButton(){
-        if let operationType = operationType{
+    @IBAction func onBottomButton() {
+        if let operationType = operationType {
             let router = RouterVC()
             switch operationType {
             case .freeAppSpaceCloudWarning:
@@ -63,18 +63,18 @@ class StorageCard: BaseView {
         }
     }
     
-    @IBAction func onCloseButton(){
+    @IBAction func onCloseButton() {
         deleteCard()
     }
     
     override func deleteCard() {
         super.deleteCard()
-        if let type = operationType{
+        if let type = operationType {
             CardsManager.default.stopOperationWithType(type: type)
         }
     }
     
-    func configurateWithType(viewType: OperationType){
+    func configurateWithType(viewType: OperationType) {
         operationType = viewType
         
         switch viewType {
@@ -122,16 +122,16 @@ class StorageCard: BaseView {
         configurateByResponceObject()
     }
     
-    func configurateByResponceObject(){
-        if operationType == .freeAppSpaceCloudWarning, let percent = cardObject?.details?["usage-percentage"].int{
+    func configurateByResponceObject() {
+        if operationType == .freeAppSpaceCloudWarning, let percent = cardObject?.details?["usage-percentage"].int {
             subTileLabel.text = String(format: TextConstants.homeStorageCardCloudSubTitle, percent)
         }
     }
     
-    func setGradient(colorTop: UIColor, colorBottom: UIColor){
+    func setGradient(colorTop: UIColor, colorBottom: UIColor) {
         let gradient = CAGradientLayer()
         gradient.colors = [colorBottom.cgColor, colorTop.cgColor]
-        gradient.locations = [0.0 , 1.0]
+        gradient.locations = [0.0, 1.0]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.frame = backgroundView.frame

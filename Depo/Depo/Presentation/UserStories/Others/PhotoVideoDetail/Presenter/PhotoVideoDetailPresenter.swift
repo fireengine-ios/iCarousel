@@ -24,7 +24,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         bottomBarPresenter?.show(animated: false, onView: view)
     }
     
-    func prepareBarConfigForFileTypes(fileTypes: [FileType]) -> EditingBarConfig{
+    func prepareBarConfigForFileTypes(fileTypes: [FileType]) -> EditingBarConfig {
         
         var barConfig = interactor.bottomBarConfig
         var actionTypes = barConfig.elementsConfig
@@ -46,10 +46,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         return barConfig
     }
     
-    func onShowSelectedItem(at index: Int, from items:[Item]) {
+    func onShowSelectedItem(at index: Int, from items: [Item]) {
         view.onShowSelectedItem(at: index, from: items)
 
-        let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
+        let allSelectedItemsTypes = selectedItems.map { $0.fileType }
 
         let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
@@ -61,13 +61,13 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.onItemSelected(at: selectedIndex, from: interactor.allItems)
         
         let selectedItems = [interactor.allItems[selectedIndex]]
-        let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
+        let allSelectedItemsTypes = selectedItems.map { $0.fileType }
         
         let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
     }
     
-    func onInfo(object: Item){
+    func onInfo(object: Item) {
         router.onInfo(object: object)
     }
     
@@ -79,7 +79,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 //        bottomBarPresenter?.show(animated: false, onView: self.view)
     }
     
-    func startCreatingAVAsset(){
+    func startCreatingAVAsset() {
         startAsyncOperation()
     }
     
@@ -106,7 +106,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
                                          excludeTypes: alertSheetExcludeTypes)
     }
     
-    //MARK: presenter output
+    // MARK: presenter output
     
     var selectedItems: [BaseDataSourceItem] {
         let currentItem = interactor.allItems[interactor.currentItemIndex]
@@ -166,7 +166,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         }
     }
     
-    func deSelectAll(){
+    func deSelectAll() {
         
     }
     

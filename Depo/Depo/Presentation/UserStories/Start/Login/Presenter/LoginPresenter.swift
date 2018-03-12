@@ -37,7 +37,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     private func removeBrackets(text: String) -> String {
-        return text.filter{$0 != ")" && $0 != "("}
+        return text.filter { $0 != ")" && $0 != "(" }
     }
     
     func sendLoginAndPassword(login: String, password: String) {
@@ -65,7 +65,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         interactor.rememberMe(state: remember)
     }
     
-    func onCantLoginButton(){
+    func onCantLoginButton() {
         router.goToForgotPassword()
     }
     
@@ -130,7 +130,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     
-    //MARK: - EULA
+    // MARK: - EULA
     
     func onSuccessEULA() {
         compliteAsyncOperationEnableScreen()
@@ -169,7 +169,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         debugPrint("time passed since block in minutes", timeIntervalFromBlockDate/60)
         if timeIntervalFromBlockDate/60 >= 60 {
             interactor.eraseBlockTime(forUserName: name)
-        }  else {
+        } else {
             showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
         }
     }

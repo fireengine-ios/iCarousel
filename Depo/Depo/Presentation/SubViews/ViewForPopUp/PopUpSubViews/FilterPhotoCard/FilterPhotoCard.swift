@@ -88,7 +88,7 @@ final class FilterPhotoCard: BaseView {
         photoImageView.image = image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
     }
     
-    @IBAction private func actionCloseButton(_ sender: UIButton){
+    @IBAction private func actionCloseButton(_ sender: UIButton) {
         deleteCard()
     }
     
@@ -106,7 +106,7 @@ final class FilterPhotoCard: BaseView {
         }
     }
     
-    private func displayNotSavedPhoto(){
+    private func displayNotSavedPhoto() {
         guard let image = photoImageView.image else { return }
         let vc = PVViewerController.initFromNib()
         vc.image = image

@@ -48,7 +48,7 @@ private struct PrintServiceData: Codable {
         let totalPhotos: Int
         let uid: String
         
-        enum CodingKeys : String, CodingKey {
+        enum CodingKeys: String, CodingKey {
             case dateCreated =  "date_created", dateSend =  "date_send", requestId = "request_id", totalPhotos =  "total_photos", uid, photos
         }
         
@@ -68,4 +68,3 @@ private struct PrintServiceData: Codable {
         }
     }
 }
-

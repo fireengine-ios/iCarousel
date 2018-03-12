@@ -98,7 +98,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         return faceImageType == .people || faceImageType == .things
     }
     
-    // MARK: -  Utility methods
+    // MARK: - Utility methods
     
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
         self.isChangeVisibilityMode = isChangeVisibilityMode
@@ -168,7 +168,13 @@ extension FaceImageItemsPresenter: FaceImageItemsViewOutput {
 extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
     
     func didChangeName(item: WrapData) {
-        reloadData()
+        dataSource.allMediaItems.forEach { people in
+            if people.uuid == item.uuid {
+                people.name = item.name
+            }
+        }
+
+        dataSource.reloadData()
     }
     
     func didReloadData() {

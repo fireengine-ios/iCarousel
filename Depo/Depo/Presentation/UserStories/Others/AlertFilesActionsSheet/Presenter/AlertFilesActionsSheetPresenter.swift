@@ -10,7 +10,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
 
     
     let rightButtonBox = CGRect(x: Device.winSize.width - 50, y: 64, width: 10, height: 10)
-    //MARK: Module Input
+    // MARK: Module Input
     
     func showSelectionsAlertSheet() {
         let actions = constractActions(with: [.select, .selectAll], for: nil)
@@ -138,8 +138,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                                            excludeTypes: [ElementTypes] = [ElementTypes]()) -> [UIAlertAction] {
         var filteredActionTypes = types
         
-        if let remoteItems = items?.filter({ !$0.isLocalItem}) as? [Item], remoteItems.count > 0 {
-            if remoteItems.contains(where: { !$0.favorites}) {
+        if let remoteItems = items?.filter({ !$0.isLocalItem }) as? [Item], remoteItems.count > 0 {
+            if remoteItems.contains(where: { !$0.favorites }) {
                 filteredActionTypes.append(.addToFavorites)
             } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
                 filteredActionTypes.remove(at: addToFavoritesIndex)
@@ -152,7 +152,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             }
             
             let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems)
-            if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal){
+            if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
                 filteredActionTypes.remove(at: index)
             }
         } else {
@@ -172,7 +172,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         var filteredTypes = types
         let langCode = Device.locale
         if langCode != "tr", langCode != "en" {
-            filteredTypes = types.filter({$0 != .print})
+            filteredTypes = types.filter({ $0 != .print })
         }
         
         var tempoItems = items
@@ -347,16 +347,16 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     self.interactor.delete(item: currentItems)
                 })
             case .deleteDeviceOriginal:
-                if let itemsArray = items as? [Item]{
+                if let itemsArray = items as? [Item] {
                     let serverObjects = itemsArray.filter({
-                        return !$0.isLocalItem
+                        !$0.isLocalItem
                     })
                     let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects)
                     action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
                         self.interactor.deleteDeviceOriginal(items: localDuplicates)
                     })
-                }else{
+                } else {
                     action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
                         self.interactor.deleteDeviceOriginal(items: currentItems)
@@ -406,7 +406,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         let actionsWithCancell = actions + [cancellAction]
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionsWithCancell.forEach({actionSheetVC.addAction($0)})
+        actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
         actionSheetVC.view.tintColor = UIColor.black
         
         actionSheetVC.popoverPresentationController?.sourceView = vc.view

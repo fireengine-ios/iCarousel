@@ -26,11 +26,11 @@ class LoginInteractor: LoginInteractorInput {
     /// from 0 to 11 = 12 attempts
     private let maxAttemps: Int = 11
     
-    func prepareModels(){
+    func prepareModels() {
         output?.models(models: dataStorage.getModels())
     }
     
-    func rememberMe(state:Bool){
+    func rememberMe(state: Bool) {
         rememberMe = state
     }
     
@@ -46,7 +46,7 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         
-        if isBlocked(userName: login)  {
+        if isBlocked(userName: login) {
             output?.userStillBlocked(user: login)
             return
         } else if (maxAttemps <= attempts) {
@@ -58,9 +58,9 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         
-        let user = AuthenticationUser(login          : login,
-                                      password       : password,
-                                      rememberMe     : true,//rememberMe,
+        let user = AuthenticationUser(login: login,
+                                      password: password,
+                                      rememberMe: true, //rememberMe,
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] in

@@ -20,7 +20,7 @@ protocol SearchViewOutput {
     func onClearRecentSearchesTapped()
     
     func viewAppearanceChangedTopBar(asGrid: Bool)
-    func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType)
+    func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType)
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType])
     
     func playerDidHide()

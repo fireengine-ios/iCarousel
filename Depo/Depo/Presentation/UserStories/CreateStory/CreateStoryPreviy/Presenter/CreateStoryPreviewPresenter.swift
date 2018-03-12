@@ -25,12 +25,12 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
         interactor.viewIsReady()
     }
     
-    func onSaveStory(){
+    func onSaveStory() {
         startAsyncOperation()
         interactor.onSaveStory()
     }
     
-    func storyCreated(){
+    func storyCreated() {
         asyncOperationSucces()
         MenloworksAppEvents.onStoryCreated()
         
@@ -46,7 +46,7 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func storyCreatedWithError(){
+    func storyCreatedWithError() {
         asyncOperationSucces()
         
         let controller = PopUpController.with(title: TextConstants.errorAlert,
@@ -64,7 +64,7 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
 
 // MARK: CreateStoryPreviewInteractorOutput
 extension CreateStoryPreviewPresenter: CreateStoryPreviewInteractorOutput {
-    func startShowVideoFromResponce(responce: CreateStoryResponce){
+    func startShowVideoFromResponce(responce: CreateStoryResponce) {
         view?.startShowVideoFromResponce(responce: responce)
     }
 }

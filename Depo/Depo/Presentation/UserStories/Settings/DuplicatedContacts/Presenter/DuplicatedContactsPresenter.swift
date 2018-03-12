@@ -13,7 +13,7 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
     var interactor: DuplicatedContactsInteractorInput!
     var router: DuplicatedContactsRouterInput!
     
-    //MARK: View Output
+    // MARK: View Output
     func viewIsReady() {
         
     }
@@ -23,7 +23,7 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
         moduleOutput?.backFromDuplicatedContacts()
     }
     
-    //MARK: Interactor Output
+    // MARK: Interactor Output
 
     func onKeepTapped() {
         router.back()

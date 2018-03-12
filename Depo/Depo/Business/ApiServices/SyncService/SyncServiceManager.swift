@@ -65,7 +65,7 @@ class SyncServiceManager {
     }
     
     
-    //MARK: - Init
+    // MARK: - Init
     
     init() {
         photoSyncService.delegate = self
@@ -82,7 +82,7 @@ class SyncServiceManager {
     }
     
     
-    //MARK: - Public
+    // MARK: - Public
     
     func getSettings() -> AutoSyncSettings? {
         return settings
@@ -121,7 +121,7 @@ class SyncServiceManager {
     }
     
     
-    //MARK: - Private
+    // MARK: - Private
     
     private func setupAPIReachability() {
         APIReachabilityService.shared.startNotifier()
@@ -200,7 +200,7 @@ class SyncServiceManager {
         }
     }
     
-    //MARK: Flow
+    // MARK: Flow
 
     //start to sync
     private func start(photo: Bool, video: Bool, newItems: Bool) {
@@ -232,8 +232,7 @@ class SyncServiceManager {
 }
 
 
-
-//MARK: - Notifications
+// MARK: - Notifications
 extension SyncServiceManager {
     private func subscribeForNotifications() {
         let notificationCenter = NotificationCenter.default
@@ -255,7 +254,7 @@ extension SyncServiceManager {
     
     @objc private func onPhotoLibraryDidChange(notification: Notification) {
         if let phChanges = notification.userInfo {
-            if let _ = phChanges[PhotoLibraryChangeType.added] as? [PHAsset]  {
+            if let _ = phChanges[PhotoLibraryChangeType.added] as? [PHAsset] {
                 //TODO: append only added items
                  checkReachabilityAndSettings(reachabilityChanged: false, newItems: true)
             }
@@ -306,7 +305,7 @@ extension SyncServiceManager {
 }
 
 
-//MARK: - ItemSyncServiceDelegate
+// MARK: - ItemSyncServiceDelegate
 
 extension SyncServiceManager: ItemSyncServiceDelegate {
     func didReceiveOutOfSpaceError() {
@@ -339,9 +338,3 @@ extension SyncServiceManager {
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
 }
-
-
-
-
-
-

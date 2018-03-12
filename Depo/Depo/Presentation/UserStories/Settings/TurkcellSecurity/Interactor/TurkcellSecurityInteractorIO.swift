@@ -12,9 +12,9 @@ protocol TurkcellSecurityInteractorInput: class {
     func requestTurkcellSecurityState()
     func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool)
     
-    var turkcellPasswordOn: Bool {get}
-    var turkcellAutoLoginOn: Bool {get}
-    var isPasscodeEnabled: Bool {get}
+    var turkcellPasswordOn: Bool { get }
+    var turkcellAutoLoginOn: Bool { get }
+    var isPasscodeEnabled: Bool { get }
 }
 
 protocol TurkcellSecurityInteractorOutput: class {

@@ -20,5 +20,5 @@ struct ActionMenyItem {
 
 protocol ActionsMenuViewInput: class {
 
-    func showActions(actions:[ActionMenyItem])
+    func showActions(actions: [ActionMenyItem])
 }

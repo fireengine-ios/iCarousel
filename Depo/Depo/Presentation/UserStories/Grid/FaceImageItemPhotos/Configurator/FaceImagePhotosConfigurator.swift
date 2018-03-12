@@ -11,7 +11,7 @@ import UIKit
 final class FaceImagePhotosConfigurator {
     
     var baseSortTypes: [MoreActionsConfig.SortRullesType] {
-        return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+        return [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
     func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) {

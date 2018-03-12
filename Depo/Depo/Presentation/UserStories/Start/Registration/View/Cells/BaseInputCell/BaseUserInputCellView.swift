@@ -11,7 +11,7 @@ import UIKit
 class BaseUserInputCellView: ProtoInputTextCell {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var textInputField: UITextField!{
+    @IBOutlet weak var textInputField: UITextField! {
         didSet {
             inputTextField = textInputField
         }

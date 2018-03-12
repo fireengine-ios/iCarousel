@@ -23,11 +23,11 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
         
     }
     
-    func showEmptyNamePopup(){
+    func showEmptyNamePopup() {
         UIApplication.showErrorAlert(message: TextConstants.createStoryEmptyTextError)
     }
     
-    func onCreateStory(storyName: String?){
+    func onCreateStory(storyName: String?) {
         guard let text = storyName else {
             showEmptyNamePopup()
             return
@@ -39,7 +39,7 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
             return
         }
         
-        if (text.isEmpty){
+        if (text.isEmpty) {
             showEmptyNamePopup()
         } else {
             if let items = items {

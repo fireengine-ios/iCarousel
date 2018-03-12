@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
-typealias SuccessResponse = (_ value:ObjectFromRequestResponse? ) -> Swift.Void
+typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Swift.Void
 typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
 
 class AuthenticationUser: BaseRequestParametrs {
@@ -30,9 +30,9 @@ class AuthenticationUser: BaseRequestParametrs {
     override var patch: URL {
         var patch: String = RouteRequests.httpsAuthification
         let rememberMeValue = rememberMe ? LbRequestkeys.on : LbRequestkeys.off
-        patch = String(format:patch,rememberMeValue)
+        patch = String(format: patch, rememberMeValue)
         
-        return URL(string: patch, relativeTo:super.patch)!
+        return URL(string: patch, relativeTo: super.patch)!
     }
     
     override var header: RequestHeaderParametrs {
@@ -62,7 +62,7 @@ class Authentication3G: BaseRequestParametrs {
     override var patch: URL {
         let patch = String(format: RouteRequests.httpAuthification, LbRequestkeys.on)
         return URL(string: patch,
-                   relativeTo:super.patch)!
+                   relativeTo: super.patch)!
     }
 }
 
@@ -75,7 +75,7 @@ class AuthenticationUserByToken: BaseRequestParametrs {
     
     override var patch: URL {
         return URL(string: RouteRequests.authificationByToken,
-                   relativeTo:super.patch)!
+                   relativeTo: super.patch)!
     }
     
     override var header: RequestHeaderParametrs {
@@ -84,7 +84,7 @@ class AuthenticationUserByToken: BaseRequestParametrs {
 }
 
 
-class SignUpUser: BaseRequestParametrs  {
+class SignUpUser: BaseRequestParametrs {
     
     let phone: String
     let mail: String
@@ -113,7 +113,7 @@ class SignUpUser: BaseRequestParametrs  {
     }
 }
 
-struct SignUpUserPhoveVerification: RequestParametrs  {
+struct SignUpUserPhoveVerification: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
     }
@@ -128,7 +128,7 @@ struct SignUpUserPhoveVerification: RequestParametrs  {
     }
     
     var patch: URL {
-        return URL(string: RouteRequests.phoneVerification, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: RouteRequests.phoneVerification, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -151,7 +151,7 @@ struct  ForgotPassword: RequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: RouteRequests.forgotPassword, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: RouteRequests.forgotPassword, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -174,7 +174,7 @@ class EmailUpdate: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: RouteRequests.mailUpdate, relativeTo:super.patch)!
+        return URL(string: RouteRequests.mailUpdate, relativeTo: super.patch)!
     }
     
     override var header: RequestHeaderParametrs {
@@ -195,7 +195,7 @@ class EmailVerification: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: RouteRequests.mailVerefication, relativeTo:super.patch)!
+        return URL(string: RouteRequests.mailVerefication, relativeTo: super.patch)!
     }
     
     override var header: RequestHeaderParametrs {
@@ -216,7 +216,7 @@ struct ResendVerificationSMS: RequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: RouteRequests.resendVerificationSMS, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: RouteRequests.resendVerificationSMS, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -302,13 +302,12 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
-    private func loginHandler(_ response: DataResponse<String>, _ sucess: SuccessLogin?, _ fail: FailResponse?) -> Void {
+    private func loginHandler(_ response: DataResponse<String>, _ sucess: SuccessLogin?, _ fail: FailResponse?) {
         switch response.result {
         case .success(_):
             if let headers = response.response?.allHeaderFields as? [String: Any],
                 let accessToken = headers[HeaderConstant.AuthToken] as? String,
-                let refreshToken = headers[HeaderConstant.RememberMeToken] as? String
-            {
+                let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
                 sucess?()
@@ -356,53 +355,52 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
-    func signUp(user: SignUpUser, sucess:SuccessResponse?, fail: FailResponse?) {
+    func signUp(user: SignUpUser, sucess: SuccessResponse?, fail: FailResponse?) {
         log.debug("AuthenticationService logout")
         
-        let handler = BaseResponseHandler<SignUpSuccessResponse,SignUpFailResponse>(success: { (value) in
+        let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: { (value) in
             MenloworksAppEvents.onSignUp()
             sucess?(value)
-        }
-            , fail: fail)
+        }, fail: fail)
         executePostRequest(param: user, handler: handler)
     }
     
-    func verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification, sucess:SuccessResponse?, fail:FailResponse?) {
+    func verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification, sucess: SuccessResponse?, fail: FailResponse?) {
         log.debug("AuthenticationService verificationPhoneNumber")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: phoveVerification, handler: handler)
     }
     
-    func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess:SuccessResponse?, fail:FailResponse?) {
+    func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess: SuccessResponse?, fail: FailResponse?) {
         log.debug("AuthenticationService resendVerificationSMS")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: resendVerification, handler: handler)
     }
     
-    func updateEmail(emailUpdateParameters: EmailUpdate, sucess:SuccessResponse?, fail:FailResponse?) {
+    func updateEmail(emailUpdateParameters: EmailUpdate, sucess: SuccessResponse?, fail: FailResponse?) {
         log.debug("AuthenticationService updateEmail")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailUpdateParameters, handler: handler)
     }
     
-    func verificationEmail(emailVerification:EmailVerification, sucess:SuccessResponse?, fail:FailResponse?) {
+    func verificationEmail(emailVerification: EmailVerification, sucess: SuccessResponse?, fail: FailResponse?) {
         log.debug("AuthenticationService verificationEmail")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailVerification, handler: handler)
     }
     
-    func fogotPassword(forgotPassword:ForgotPassword, success:SuccessResponse?, fail: FailResponse?) {
+    func fogotPassword(forgotPassword: ForgotPassword, success: SuccessResponse?, fail: FailResponse?) {
         log.debug("AuthenticationService fogotPassword")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: forgotPassword, handler: handler)
     }
 
-    func turkcellAuth(success:SuccessLogin?, fail: FailResponse?) {
+    func turkcellAuth(success: SuccessLogin?, fail: FailResponse?) {
         let user = Authentication3G()
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
             self?.autificationByToken(sucess: success, fail: fail)

@@ -33,7 +33,7 @@ class SettingsInteractor: SettingsInteractorInput {
          userInfoResponse?.email = mail
     }
     
-    func getCellsData(){
+    func getCellsData() {
         let passcodeCellTitle = String(format: TextConstants.settingsViewCellPasscode, biometricsManager.biometricsTitle)
         
         let securityCells = [TextConstants.settingsViewCellActivityTimline,

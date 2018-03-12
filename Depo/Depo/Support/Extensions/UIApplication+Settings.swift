@@ -17,7 +17,7 @@ extension UIApplication {
     }
     
     func openGlobalSettings() {
-        UIApplication.shared.openURL(URL(string:"App-Prefs:root")!)
+        UIApplication.shared.openURL(URL(string: "App-Prefs:root")!)
     }
     
 }

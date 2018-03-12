@@ -33,16 +33,16 @@ class PhotosOrderCollectionViewCell: UICollectionViewCell {
         
     }
 
-    func configurateWith(image: UIImage?){
+    func configurateWith(image: UIImage?) {
         progress.stopAnimating()
         imageView.image = image
     }
     
-    func setPosition(position: Int){
+    func setPosition(position: Int) {
         positionLabel.text = String(format: "%d", position)
     }
     
-    func setSelection(selection: Bool){
+    func setSelection(selection: Bool) {
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.selectionView.alpha = selection ? 1 : 0
         }

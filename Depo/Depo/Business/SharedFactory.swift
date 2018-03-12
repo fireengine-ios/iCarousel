@@ -31,4 +31,3 @@ open class FactoryBase: SharedFactory {
         return FactoryBase.passcodeStorage
     }
 }
-

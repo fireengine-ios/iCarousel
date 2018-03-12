@@ -10,7 +10,7 @@ import UIKit
 
 class SettingHeaderView: UIView {
 
-    class func viewFromNib()->SettingHeaderView{
+    class func viewFromNib() -> SettingHeaderView {
         return UINib(nibName: "SettingHeaderView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! SettingHeaderView
     }
 

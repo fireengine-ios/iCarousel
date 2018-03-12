@@ -117,28 +117,28 @@ class ItemOperationManager: NSObject {
     private var currentDownloadingObject: WrapData?
     private var currentDownloadingProgress: Float = 0
     
-    func startUpdateView(view: ItemOperationManagerViewProtocol){
-        if views.index(where: {$0.isEqual(object: view)}) == nil{
+    func startUpdateView(view: ItemOperationManagerViewProtocol) {
+        if views.index(where: { $0.isEqual(object: view) }) == nil {
             views.append(view)
         }
         
-        if currentUploadingObject != nil{
+        if currentUploadingObject != nil {
             view.startUploadFile(file: currentUploadingObject!)
             view.setProgressForUploadingFile(file: currentUploadingObject!, progress: currentUploadProgress)
         }
     }
     
-    func stopUpdateView(view: ItemOperationManagerViewProtocol){
-        if let index = views.index(where: {$0.isEqual(object: view)}){
+    func stopUpdateView(view: ItemOperationManagerViewProtocol) {
+        if let index = views.index(where: { $0.isEqual(object: view) }) {
             views.remove(at: index)
         }
     }
     
-    func startUploadFile(file: WrapData){
+    func startUploadFile(file: WrapData) {
         currentUploadingObject = file
         
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.startUploadFile(file: file)
             }
         }
@@ -152,9 +152,9 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func setProgressForUploadingFile(file: WrapData, progress: Float){
+    func setProgressForUploadingFile(file: WrapData, progress: Float) {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.setProgressForUploadingFile(file: file, progress: progress)
             }
         }
@@ -164,10 +164,9 @@ class ItemOperationManager: NSObject {
     }
     
     
-    
-    func finishedUploadFile(file: WrapData){
+    func finishedUploadFile(file: WrapData) {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.finishedUploadFile(file: file)
             }
         }
@@ -180,7 +179,7 @@ class ItemOperationManager: NSObject {
     
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.setProgressForDownloadingFile(file: file, progress: progress)
             }
         }
@@ -191,7 +190,7 @@ class ItemOperationManager: NSObject {
     
     func finishedDowloadFile(file: WrapData) {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.finishedDownloadFile(file: file)
             }
         }
@@ -200,29 +199,29 @@ class ItemOperationManager: NSObject {
         currentUploadProgress = 0
     }
     
-    func addFilesToFavorites(items: [Item]){
+    func addFilesToFavorites(items: [Item]) {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.addFilesToFavorites(items: items)
             }
         }
     }
     
-    func removeFileFromFavorites(items: [Item]){
+    func removeFileFromFavorites(items: [Item]) {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.removeFileFromFavorites(items: items)
             }
         }
     }
     
-    func deleteItems(items: [Item]){
-        if items.count == 0{
+    func deleteItems(items: [Item]) {
+        if items.count == 0 {
             return
         }
         
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.deleteItems(items: items)
             }
         }
@@ -240,29 +239,29 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func addedLocalFiles(items: [Item]){
-        if items.count == 0{
+    func addedLocalFiles(items: [Item]) {
+        if items.count == 0 {
             return
         }
         
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.addedLocalFiles(items: items)
             }
         }
     }
     
-    func newFolderCreated(){
+    func newFolderCreated() {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.newFolderCreated()
             }
         }
     }
     
-    func newAlbumCreated(){
+    func newAlbumCreated() {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.newAlbumCreated()
             }
         }
@@ -270,15 +269,15 @@ class ItemOperationManager: NSObject {
     
     func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.updatedAlbumCoverPhoto(item: item)
             }
         }
     }
     
-    func albumsDeleted(albums: [AlbumItem]){
+    func albumsDeleted(albums: [AlbumItem]) {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.albumsDeleted(albums: albums)
             }
         }
@@ -308,25 +307,25 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func filesRomovedFromAlbum(items: [Item], albumUUID: String){
+    func filesRomovedFromAlbum(items: [Item], albumUUID: String) {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.filesRomovedFromAlbum(items: items, albumUUID: albumUUID)
             }
         }
     }
     
-    func filesMoved(items: [Item], toFolder folderUUID: String){
+    func filesMoved(items: [Item], toFolder folderUUID: String) {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.filesMoved(items: items, toFolder: folderUUID)
             }
         }
     }
     
-    func syncFinished(){
+    func syncFinished() {
         DispatchQueue.main.async {
-            for view in self.views{
+            for view in self.views {
                 view.syncFinished()
             }
         }
@@ -341,4 +340,3 @@ class ItemOperationManager: NSObject {
     }
     
 }
-

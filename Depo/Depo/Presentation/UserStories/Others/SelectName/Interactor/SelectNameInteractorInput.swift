@@ -10,13 +10,13 @@ import Foundation
 
 protocol SelectNameInteractorInput {
     
-    func getTitle()-> String
+    func getTitle() -> String
     
-    func getNextButtonText()-> String
+    func getNextButtonText() -> String
     
-    func getPlaceholderText()-> String
+    func getPlaceholderText() -> String
     
-    func getTextForEmptyTextFieldAllert()-> String
+    func getTextForEmptyTextFieldAllert() -> String
     
     func onNextButton(name: String)
 }

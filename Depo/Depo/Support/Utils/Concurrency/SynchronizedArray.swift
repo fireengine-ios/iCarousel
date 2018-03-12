@@ -9,7 +9,6 @@
 import Foundation
 
 
-
 //http://basememara.com/creating-thread-safe-arrays-in-swift/
 //https://gist.github.com/basememara/afaae5310a6a6b97bdcdbe4c2fdcd0c6
 

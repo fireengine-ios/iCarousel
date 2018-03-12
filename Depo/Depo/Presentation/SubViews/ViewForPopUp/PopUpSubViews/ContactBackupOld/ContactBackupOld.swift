@@ -17,14 +17,14 @@ class ContactBackupOld: BaseView {
     @IBOutlet weak var bacupButton: UIButton?
     @IBOutlet weak var lastUpdateLabel: UILabel?
     
-    class func isContactInfoObjectEmpty(object: JSON?) -> Bool{
-        if object?["lastBackupDate"].date != nil{
+    class func isContactInfoObjectEmpty(object: JSON?) -> Bool {
+        if object?["lastBackupDate"].date != nil {
             return false
         }
         return true
     }
     
-    override func configurateView(){
+    override func configurateView() {
         super.configurateView()
         
         headerLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
@@ -51,7 +51,7 @@ class ContactBackupOld: BaseView {
         configurateByResponseObject()
     }
     
-    func configurateByResponseObject(){
+    func configurateByResponseObject() {
         let lastBackupDate = getLastBackupDate()
         let monthesAfterLastBacup = getMonthesAfterLastBacup()
         
@@ -61,23 +61,23 @@ class ContactBackupOld: BaseView {
         lastUpdateLabel?.text = String(format: "%@ %@", TextConstants.homePageContactBacupLastUpate, lastBackupDate)
     }
     
-    func getLastBackupDate()->String{
-        if let dateLastBackup = cardObject?.details?["lastBackupDate"].date{
+    func getLastBackupDate() -> String {
+        if let dateLastBackup = cardObject?.details?["lastBackupDate"].date {
            return dateLastBackup.getDateInFormat(format: "dd.MM.YYYY")
         }
         
         return ""
     }
     
-    func getMonthesAfterLastBacup()->String{
-        if let dateLastBackup = cardObject?.details?["lastBackupDate"].date{
+    func getMonthesAfterLastBacup() -> String {
+        if let dateLastBackup = cardObject?.details?["lastBackupDate"].date {
             return String(format: "%d", dateLastBackup.getTimeIntervalBetweenDateAndCurrentDate())
         }
         
         return ""
     }
     
-    @IBAction func onCloseButton(){
+    @IBAction func onCloseButton() {
         deleteCard()
     }
     
@@ -86,7 +86,7 @@ class ContactBackupOld: BaseView {
         CardsManager.default.stopOperationWithType(type: .contactBacupOld)
     }
     
-    @IBAction func onBackupButton(){
+    @IBAction func onBackupButton() {
         let router = RouterVC()
         let controller = router.syncContacts
         router.pushViewController(viewController: controller)

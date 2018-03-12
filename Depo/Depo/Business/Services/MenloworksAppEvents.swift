@@ -80,7 +80,7 @@ class MenloworksAppEvents {
                 MenloworksEventsService.shared.onQuotaExceeded80PercStatus()
             }
 
-            }, fail: { _ in } )
+            }, fail: { _ in })
     }
     
     static func onSignUp() {

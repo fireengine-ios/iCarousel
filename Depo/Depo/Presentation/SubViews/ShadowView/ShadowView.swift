@@ -13,8 +13,8 @@ class ShadowView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        if (self.layer.sublayers != nil){
-            for l in self.layer.sublayers!{
+        if (self.layer.sublayers != nil) {
+            for l in self.layer.sublayers! {
                 l.removeFromSuperlayer()
             }
         }

@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol PhoneVereficationViewInput: class, Waiting  {
+protocol PhoneVereficationViewInput: class, Waiting {
 
     func setupInitialState()
     
@@ -15,8 +15,6 @@ protocol PhoneVereficationViewInput: class, Waiting  {
     func setupTimer(withRemainingTime remainingTime: Int)
     
     func dropTimer()
-    
-    func nextButtonEnable(enable: Bool)
     
     func setupTextLengh(lenght: Int)
     

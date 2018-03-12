@@ -9,7 +9,7 @@
 import Foundation
 
 final class FaceImageAddNameInitializer: NSObject {
-    class func initializeViewController(with nibName:String, item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) -> UIViewController {
+    class func initializeViewController(with nibName: String, item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) -> UIViewController {
         let viewController = FaceImageAddNameViewController(nibName: nibName, bundle: nil)
         
         let configurator = FaceImageAddNameConfigurator()

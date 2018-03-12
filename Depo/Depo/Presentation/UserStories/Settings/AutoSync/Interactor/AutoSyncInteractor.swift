@@ -23,8 +23,6 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     func onSave(settings: AutoSyncSettings) {
         output.onSettingSaved()
         
-//        SyncServiceManager.shared.logChangesIfNeeded(settings: settings)
-        
         dataStorage.save(autoSyncSettings: settings, uniqueUserId: uniqueUserID ?? "")
         SyncServiceManager.shared.update(syncSettings: settings)
     }

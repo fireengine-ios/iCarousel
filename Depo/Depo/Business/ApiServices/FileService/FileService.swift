@@ -9,7 +9,7 @@
 import Foundation
 import Photos
 
-struct FilePatch  {
+struct FilePatch {
     static let fileList = "/api/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
     static let create = "/api/filesystem/createFolder?parentFolderUuid=%@"
     static let delete = "/api/filesystem/delete"
@@ -21,7 +21,6 @@ struct FilePatch  {
     
     static let metaData = "/api/filesystem/metadata"
 }
-
 
 
 class CreatesFolder: BaseRequestParametrs {
@@ -42,8 +41,8 @@ class CreatesFolder: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format:FilePatch.create,rootFolderName )
-        return URL(string: path, relativeTo:super.patch)!
+        let path: String = String(format: FilePatch.create, rootFolderName )
+        return URL(string: path, relativeTo: super.patch)!
     }
     
     override var header: RequestHeaderParametrs {
@@ -132,8 +131,8 @@ class RenameFile: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format:FilePatch.rename, uuid)
-        return URL(string: path, relativeTo:super.patch)!
+        let path: String = String(format: FilePatch.rename, uuid)
+        return URL(string: path, relativeTo: super.patch)!
     }
     
     override var header: RequestHeaderParametrs {
@@ -154,7 +153,7 @@ class MetaDataFile: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.metaData, relativeTo:super.patch)!
+        return URL(string: FilePatch.metaData, relativeTo: super.patch)!
     }
     
     init(items: [String], addToFavourit: Bool) {
@@ -173,7 +172,7 @@ class FileDetail: BaseRequestParametrs {
     
     override var patch: URL {
         let str = String(format: FilePatch.detail, uuid)
-        return URL(string: str, relativeTo:super.patch)!
+        return URL(string: str, relativeTo: super.patch)!
     }
     
     init(uuid: String) {
@@ -190,7 +189,7 @@ class FileDetails: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: FilePatch.details, relativeTo:super.patch)!
+        return URL(string: FilePatch.details, relativeTo: super.patch)!
     }
     
     init(uuids: [String] ) {
@@ -200,7 +199,7 @@ class FileDetails: BaseRequestParametrs {
 }
 
 
-class FileList: BaseRequestParametrs{
+class FileList: BaseRequestParametrs {
     let sortBy: SortType
     let sortOrder: SortOrder
     let folderOnly: Bool
@@ -208,7 +207,7 @@ class FileList: BaseRequestParametrs{
     let page: Int
     let size: Int
     
-    init(rootDir: String = "",  sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, folderOnly: Bool = false) {
+    init(rootDir: String = "", sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, folderOnly: Bool = false) {
         self.sortBy = sortBy
         self.sortOrder = sortOrder
         self.rootDir = rootDir
@@ -219,11 +218,11 @@ class FileList: BaseRequestParametrs{
     
     override var patch: URL {
         let folder = folderOnly ? "true": "false"
-        let path: String = String(format:FilePatch.fileList, rootDir,
+        let path: String = String(format: FilePatch.fileList, rootDir,
                                   sortBy.description, sortOrder.description,
                                   page.description, size.description, folder)
         
-        return URL(string: path, relativeTo:super.patch)!
+        return URL(string: path, relativeTo: super.patch)!
     }
 }
 
@@ -246,10 +245,10 @@ class FileService: BaseRequestService {
         downloadOperation.maxConcurrentOperationCount = 1
     }
     
-    func move(moveFiles: MoveFiles , success: FileOperation?, fail:FailResponse?) {
+    func move(moveFiles: MoveFiles, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService move")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse,ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             log.debug("FileService move success")
 
             success?()
@@ -257,10 +256,10 @@ class FileService: BaseRequestService {
         executePostRequest(param: moveFiles, handler: handler)
     }
     
-    func copy(copyparam: CopyFiles, success: FileOperation?, fail:FailResponse?) {
+    func copy(copyparam: CopyFiles, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService copy")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse,ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             log.debug("FileService copy success")
 
             success?()
@@ -268,10 +267,10 @@ class FileService: BaseRequestService {
         executePostRequest(param: copyparam, handler: handler)
     }
     
-    func delete(deleteFiles: DeleteFiles, success: FileOperation?, fail:FailResponse?) {
+    func delete(deleteFiles: DeleteFiles, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService delete")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse,ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             log.debug("FileService delete success")
 
             success?()
@@ -279,10 +278,10 @@ class FileService: BaseRequestService {
         executeDeleteRequest(param: deleteFiles, handler: handler)
     }
     
-    func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail:FailResponse?) {
+    func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService createsFolder")
         
-        let handler = BaseResponseHandler<CreateFolderResponse,ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<CreateFolderResponse, ObjectRequestResponse>(success: { _  in
             log.debug("FileService createsFolder success")
 
             success?()
@@ -290,10 +289,10 @@ class FileService: BaseRequestService {
         executePostRequest(param: createFolder, handler: handler)
     }
     
-    func rename(rename: RenameFile, success: FileOperation?, fail:FailResponse?) {
+    func rename(rename: RenameFile, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService rename")
         
-        let handler = BaseResponseHandler<SearchResponse,ObjectRequestResponse>(success: { y  in
+        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { y  in
             log.debug("FileService rename success")
 
             success?()
@@ -302,11 +301,11 @@ class FileService: BaseRequestService {
     }
     
     
-    //MARK: download && upload
+    // MARK: download && upload
     
     private var error: ErrorResponse?
     
-    func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail:FailResponse?) {
+    func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService download")
 
         let allOperationsCount = items.count
@@ -343,7 +342,7 @@ class FileService: BaseRequestService {
         }
     }
     
-    func downloadToCameraRoll(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail:FailResponse?) {
+    func downloadToCameraRoll(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService downloadToCameraRoll")
         
         executeDownloadRequest(param: downloadParam) { (url, urlResponse, error) in
@@ -402,7 +401,6 @@ class FileService: BaseRequestService {
                         })
                     }
                     
-                    
 
                 } else {
                     fail?(.string("Incorrect response "))
@@ -415,7 +413,7 @@ class FileService: BaseRequestService {
         }
     }
     
-    func detail(uuids: String, success: FileOperation?, fail:FailResponse?) {
+    func detail(uuids: String, success: FileOperation?, fail: FailResponse?) {
         let param = FileDetail(uuid: uuids)
         let handler = BaseResponseHandler<DetailResponse, ObjectRequestResponse>(success: {  detail  in
             print("s")
@@ -444,7 +442,7 @@ class FileService: BaseRequestService {
     
     // Favourits && TAG
     
-    func medaDataRequest(param: MetaDataFile, success: FileOperation?, fail:FailResponse?) {
+    func medaDataRequest(param: MetaDataFile, success: FileOperation?, fail: FailResponse?) {
         let handler = BaseResponseHandler<FileListResponse, ObjectRequestResponse>(success: { _ in
             success?()
         }, fail: fail)
@@ -490,7 +488,7 @@ class DownLoadOperation: Operation {
     
     private let semaphore: DispatchSemaphore
     
-    init(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail:FailResponse?) {
+    init(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail: FailResponse?) {
         self.param = downloadParam
         self.success = success
         self.fail = fail
@@ -514,17 +512,17 @@ class DownLoadOperation: Operation {
         semaphore.wait()
     }
     
-    func customSuccess(){
+    func customSuccess() {
         success?()
         semaphore.signal()
-        if let item = param.item{
+        if let item = param.item {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                 ItemOperationManager.default.finishedDowloadFile(file: item)
             })
         }
     }
     
-    func customFail(_ value: ErrorResponse){
+    func customFail(_ value: ErrorResponse) {
         fail?(value)
         semaphore.signal()
     }
@@ -543,5 +541,3 @@ extension DownLoadOperation: OperationProgressServiceDelegate {
         }
     }
 }
-
-

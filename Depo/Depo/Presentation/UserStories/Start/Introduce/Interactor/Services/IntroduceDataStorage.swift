@@ -11,8 +11,8 @@ import UIKit
 class IntroduceDataStorage: NSObject {
     var introModels: [IntroduceModel] = []
     
-    override init(){
-        for i in 1...1{
+    override init() {
+        for i in 1...1 {
             let model = IntroduceModel()
             let imageName = "IntroduceImage" + String(i)
             model.imageName = imageName
@@ -24,9 +24,9 @@ class IntroduceDataStorage: NSObject {
             let range = string.range(of: "\n\n")
             let attributedText = NSMutableAttributedString(string: text)
             
-            var font1Size:CGFloat = 18
-            var font2Size:CGFloat = 10
-            if (Device.isIpad){
+            var font1Size: CGFloat = 18
+            var font2Size: CGFloat = 10
+            if (Device.isIpad) {
                 font1Size = 37
                 font2Size = 25
             }
@@ -43,7 +43,7 @@ class IntroduceDataStorage: NSObject {
         }
     }
     
-    func getModels()-> [IntroduceModel]{
+    func getModels() -> [IntroduceModel] {
         return introModels
     }
     

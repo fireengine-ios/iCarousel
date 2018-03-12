@@ -74,7 +74,7 @@ class AppConfigurator {
         cropyConfig.cropHeaderTitleColor = UIColor.white
     }
     
-    //MARK: - settings bundle
+    // MARK: - settings bundle
     //Check original post here: https://medium.com/@abhimuralidharan/adding-settings-to-your-ios-app-cecef8c5497
     
     struct SettingsBundleKeys {

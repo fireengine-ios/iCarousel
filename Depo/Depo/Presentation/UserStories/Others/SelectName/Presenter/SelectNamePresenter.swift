@@ -19,15 +19,15 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
 
     }
     
-    func getTitle()-> String{
+    func getTitle() -> String {
         return interactor.getTitle()
     }
     
-    func getNextButtonText()-> String{
+    func getNextButtonText() -> String {
         return interactor.getNextButtonText()
     }
     
-    func getPlaceholderText()-> String{
+    func getPlaceholderText() -> String {
         return interactor.getPlaceholderText()
     }
     
@@ -45,11 +45,11 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
     
     //from interactor
     
-    func startProgress(){
+    func startProgress() {
         startAsyncOperation()
     }
     
-    func operationSucces(operation: SelectNameScreenType){
+    func operationSucces(operation: SelectNameScreenType) {
         asyncOperationSucces()
         switch operation {
         case .selectAlbumName:

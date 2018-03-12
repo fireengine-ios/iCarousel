@@ -13,6 +13,7 @@ protocol AutoSyncDataSourceDelegate: class {
     func mobileDataEnabledFor(model: AutoSyncModel)
 }
 
+
 class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView?
@@ -26,8 +27,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
     
     weak var delegate: AutoSyncDataSourceDelegate?
     
-    
-    func configurateTable(table: UITableView, tableHConstraint: NSLayoutConstraint?){
+    func configurateTable(table: UITableView, tableHConstraint: NSLayoutConstraint?) {
         tableView = table
         tableView?.delegate = self
         tableView?.dataSource = self
@@ -63,12 +63,12 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
         return settings
     }
     
-    private func getTableHeight() -> CGFloat{
+    private func getTableHeight() -> CGFloat {
         let rowsCount = tableView?.numberOfRows(inSection: 0) ?? 0
         var tableH: CGFloat = 0
         for i in 0...rowsCount {
             let indexPath = IndexPath(row: i, section: 0)
-            if let cellRect = tableView?.rectForRow(at: indexPath){
+            if let cellRect = tableView?.rectForRow(at: indexPath) {
                 tableH = tableH + cellRect.size.height
             }
         }
@@ -101,7 +101,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
         }
         return tableDataArray.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = tableDataArray[indexPath.row]//TODO: ework enum or change it to SWITCH - case
         if model.cellType == .headerLike {
@@ -125,7 +125,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
         }
         
     }
-    
+
     func reloadTableView() {
         tableView?.reloadData()
         if let constraint = tableHConstraint {
@@ -137,13 +137,13 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
 }
 
 extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
-    func onValueChanged(model: AutoSyncModel, cell : AutoSyncSwitcherTableViewCell){
+    func onValueChanged(model: AutoSyncModel, cell : AutoSyncSwitcherTableViewCell) {
         guard let indexPath = tableView?.indexPath(for: cell) else {
             return
         }
         
         tableDataArray[indexPath.row] = model
-        
+
         if model.cellType == .headerLike {
             if cell.switcher.isOn {
                 autoSyncSettings?.isAutoSyncOptionEnabled = true

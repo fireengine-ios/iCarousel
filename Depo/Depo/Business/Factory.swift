@@ -44,5 +44,3 @@ extension FactoryMain {
         return FactoryMain.homeCardsService
     }
 }
-
-

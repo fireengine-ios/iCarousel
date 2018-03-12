@@ -42,7 +42,7 @@ final class FileProviderExtension: NSFileProviderExtension {
         let manager = NSFileProviderManager.default
         let perItemDirectory = manager.documentStorageURL.appendingPathComponent(identifier.rawValue, isDirectory: true)
         
-        return perItemDirectory.appendingPathComponent(item.filename, isDirectory:false)
+        return perItemDirectory.appendingPathComponent(item.filename, isDirectory: false)
     }
     
     /// apple ready !!!
@@ -128,9 +128,9 @@ final class FileProviderExtension: NSFileProviderExtension {
                     var errorOrNil = error
                     var dataOrNil: Data?
                     
-                    if let fileURL = tempURL  {
+                    if let fileURL = tempURL {
                         do {
-                            dataOrNil = try Data(contentsOf:fileURL, options: .alwaysMapped)
+                            dataOrNil = try Data(contentsOf: fileURL, options: .alwaysMapped)
                         } catch let mappingError {
                             errorOrNil = mappingError
                         }

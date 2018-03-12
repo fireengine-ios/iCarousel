@@ -29,9 +29,9 @@ final class PrepareToAutoSync: BaseView {
         progressView.setProgress(0, animated: false)
         
         let isWiFi = ReachabilityService().isReachableViaWiFi
-        if (isWiFi){
+        if (isWiFi) {
             titleImageView.image = UIImage(named: "SyncingViaWiFiPopUpImage")
-        }else{
+        } else {
             titleImageView.image = UIImage(named: "SyncingPopUpImage")
         }
         
@@ -50,10 +50,10 @@ final class PrepareToAutoSync: BaseView {
         }
     }
     
-    @objc func setProgress(){
-        if progressView.progress == 1{
+    @objc func setProgress() {
+        if progressView.progress == 1 {
             progressView.progress = 0
-        }else{
+        } else {
             progressView.progress = progressView .progress + 0.02
         }
     }

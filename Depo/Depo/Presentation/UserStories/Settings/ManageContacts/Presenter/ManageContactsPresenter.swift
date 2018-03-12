@@ -13,7 +13,7 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
     var interactor: ManageContactsInteractorInput!
     var router: ManageContactsRouterInput!
     
-    //MARK: View Output
+    // MARK: View Output
     
     func viewIsReady() {
         interactor.loadContacts()
@@ -36,7 +36,7 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
         interactor.cancelSearch()
     }
     
-    //MARK: Interactor Output
+    // MARK: Interactor Output
     
     func deleteContact(_ completion: @escaping VoidHandler) {
         router.deleteContact(completion)
@@ -53,7 +53,7 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
         moduleOutput?.didDeleteContact()
     }
     
-    private func sortContacts(_ contacts: [RemoteContact]) -> [ManageContacts.Group]  {
+    private func sortContacts(_ contacts: [RemoteContact]) -> [ManageContacts.Group] {
         var sortedContacts = [ManageContacts.Group]()
         
         for contact in contacts {

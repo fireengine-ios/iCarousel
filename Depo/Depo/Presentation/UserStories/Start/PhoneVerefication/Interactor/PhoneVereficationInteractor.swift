@@ -55,13 +55,13 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func verifyCode(code: String) {
-        authenticationService.verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "", otp: code), sucess:{ [weak self]  _ in
+        authenticationService.verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "", otp: code), sucess: { [weak self]  _ in
             DispatchQueue.main.async {
                 self?.output.verificationSucces()
                 
             }
             
-        }, fail:{ [weak self] errorRespose in
+        }, fail: { [weak self] errorRespose in
             DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
@@ -89,9 +89,9 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
             return
         }
 
-        let user = AuthenticationUser(login          : dataStorage.signUpUserInfo.phone,
-                                      password       : dataStorage.signUpUserInfo.password,
-                                      rememberMe     : true,
+        let user = AuthenticationUser(login: dataStorage.signUpUserInfo.phone,
+                                      password: dataStorage.signUpUserInfo.password,
+                                      rememberMe: true,
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] in

@@ -16,11 +16,11 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
     
     required init(json: Data?, headerResponse: HTTPURLResponse?) {
         if let data = json {
-            let jsonFromData:JSON = JSON(data: data)
+            let jsonFromData: JSON = JSON(data: data)
             self.json = jsonFromData
             
             /// JSON(data: data) can not correct string
-            if ((json?.count)!>0  && jsonFromData.type == Type.null){
+            if ((json?.count)!>0  && jsonFromData.type == Type.null) {
                 jsonString = String(data: json! as Data, encoding: .utf8)
             }
             
@@ -51,7 +51,7 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
         return Bool(status.uppercased() == "OK")
     }
     
-    var valueDict: [String : JSON]? {
+    var valueDict: [String: JSON]? {
         
         guard let value = json?[LbResponseKey.value].dictionary else {
             return nil
@@ -59,19 +59,19 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
         return value
     }
     
-    var responseHeader: [AnyHashable:Any]? {
+    var responseHeader: [AnyHashable: Any]? {
         return response?.allHeaderFields
     }
 }
 
 class SignUpSuccessResponse: ObjectRequestResponse {
     
-    var action : String?
-    var referenceToken : String?
-    var remainingTimeInMinutes : Int?
-    var expectedInputLength : Int?
+    var action: String?
+    var referenceToken: String?
+    var remainingTimeInMinutes: Int?
+    var expectedInputLength: Int?
     
-    override func mapping(){
+    override func mapping() {
         if (isOkStatus && valueDict != nil) {
             action = valueDict![LbResponseKey.action]?.string
             referenceToken = valueDict![LbResponseKey.referenceToken]?.string
@@ -81,7 +81,7 @@ class SignUpSuccessResponse: ObjectRequestResponse {
     }
 }
 
-class SignUpFailResponse:ObjectRequestResponse {
+class SignUpFailResponse: ObjectRequestResponse {
     override func mapping() {
     }
 }
@@ -92,13 +92,13 @@ enum ExpectedDataFormat {
     case NoneFormat
 }
 
-class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFromRequestResponse> {
+class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: ObjectFromRequestResponse> {
     
     var response: RequestResponse {
         return wrapRequestResponse
     }
     
-    private var success:SuccessResponse?
+    private var success: SuccessResponse?
     private var fail: FailResponse?
     private let expectedDataFormat: ExpectedDataFormat
     
@@ -106,13 +106,13 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
         self.handleResponse(data: data, response: response, error: error)
     }
     
-    init(success:SuccessResponse?, fail: FailResponse?, expectedDataFormat: ExpectedDataFormat = .JSONFormat) {
+    init(success: SuccessResponse?, fail: FailResponse?, expectedDataFormat: ExpectedDataFormat = .JSONFormat) {
         self.expectedDataFormat = expectedDataFormat
         self.success = success
         self.fail = fail
     }
 
-    private func handleResponse(data: Data?, response:URLResponse?, error: Error?) {
+    private func handleResponse(data: Data?, response: URLResponse?, error: Error?) {
         if let httpResponse = response as? HTTPURLResponse {
             if 200...299 ~= httpResponse.statusCode {
                 
@@ -131,8 +131,16 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
                 } else if let status = JSON(data: data)["status"].string {
                     let error = ServerStatusError(status: status, code: httpResponse.statusCode)
                     fail?(.error(error))
-                } else if let text = String(data: data, encoding: .utf8) {
-                    fail?(.string(text))
+                } else {
+                    #if DEBUG
+                        if let text = String(data: data, encoding: .utf8) {
+                            fail?(.string(text))
+                        } else {
+                            fail?(.string(TextConstants.errorServer))
+                        }
+                    #else
+                        fail?(.string(TextConstants.errorServer))
+                    #endif
                 }
             } else {
                 fail?(.httpCode(httpResponse.statusCode))
@@ -142,5 +150,3 @@ class BaseResponseHandler <SuceesObj:ObjectFromRequestResponse, FailObj:ObjectFr
         }
     }
 }
-
-

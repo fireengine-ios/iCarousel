@@ -8,25 +8,25 @@
 
 import UIKit
 
-class PopUpService{
+class PopUpService {
     static let shared = PopUpService()
     
-    private var getKeyForLoginCountForUser: String{
+    private var getKeyForLoginCountForUser: String {
         return "loginCountForUser" + SingletonStorage.shared.unigueUserID
     }
     
-    func resetLoginCountForUploadOffPopUp(){
+    func resetLoginCountForUploadOffPopUp() {
         UserDefaults.standard.set(1, forKey: getKeyForLoginCountForUser)
     }
     
-    func setLoginCountForShowImmediately(){
+    func setLoginCountForShowImmediately() {
         UserDefaults.standard.set(NumericConstants.countOfLoginBeforeNeedShowUploadOffPopUp, forKey: getKeyForLoginCountForUser)
     }
     
-    func checkIsNeedShowUploadOffPopUp(){
+    func checkIsNeedShowUploadOffPopUp() {
         SingletonStorage.shared.getAccountInfoForUser(success: { (success) in
-            CardsManager.default.startOperationWith(type: .autoUploadIsOff , allOperations: nil, completedOperations: nil)
-        }, fail: { _ in } )
+            CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
+        }, fail: { _ in })
     }
     
 }

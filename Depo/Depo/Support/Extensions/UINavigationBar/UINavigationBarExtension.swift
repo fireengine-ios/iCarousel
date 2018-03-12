@@ -10,7 +10,7 @@ import Foundation
 
 extension UIViewController {
     
-    func rootNavController(vizible: Bool)  {
+    func rootNavController(vizible: Bool) {
         let rootNavController = RouterVC().navigationController
         rootNavController?.setNavigationBarHidden(!vizible, animated: false)
     }
@@ -45,13 +45,13 @@ extension UIViewController {
     }
     
     func defaultNavBarStyle(backgroundImg: UIImage = UIImage()) {
-        navBar?.setBackgroundImage(backgroundImg,for: UIBarMetrics.default)
+        navBar?.setBackgroundImage(backgroundImg, for: UIBarMetrics.default)
         navBar?.shadowImage = UIImage()
         navBar?.backgroundColor = UIColor.clear
         navBar?.tintColor = UIColor.white
-        navBar?.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white];
+        navBar?.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         
-        if let view = navBar?.viewWithTag(tagHomeView)  {
+        if let view = navBar?.viewWithTag(tagHomeView) {
             view.removeFromSuperview()
         }
         
@@ -90,9 +90,9 @@ extension UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
         navBar?.tintColor = UIColor.white
-        navBar?.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white];
+        navBar?.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
 
-        if let view = navBar?.viewWithTag(tagHomeView)  {
+        if let view = navBar?.viewWithTag(tagHomeView) {
             view.removeFromSuperview()
         }
         setStatusBarBackgroundColor(color: UIColor.clear)

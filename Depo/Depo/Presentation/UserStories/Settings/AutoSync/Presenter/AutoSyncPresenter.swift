@@ -67,7 +67,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         interactor.onSave(settings: settings)
     }
     
-    func onSettingSaved(){
+    func onSettingSaved() {
         
     }
     

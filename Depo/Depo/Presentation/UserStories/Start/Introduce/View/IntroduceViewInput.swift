@@ -13,5 +13,5 @@ protocol IntroduceViewInput: class {
         Setup initial state of the view
     */
 
-    func setupInitialState(models : [IntroduceModel])
+    func setupInitialState(models: [IntroduceModel])
 }

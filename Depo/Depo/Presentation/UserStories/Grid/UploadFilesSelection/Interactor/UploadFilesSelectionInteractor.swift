@@ -56,7 +56,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
     }
     
-    func addToUploadOnDemandItems(items: [BaseDataSourceItem]){
+    func addToUploadOnDemandItems(items: [BaseDataSourceItem]) {
         log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems")
 
         let uploadItems = items as! [WrapData]
@@ -80,4 +80,3 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
     }
 }
-

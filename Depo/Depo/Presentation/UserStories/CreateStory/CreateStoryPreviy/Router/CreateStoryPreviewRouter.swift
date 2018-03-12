@@ -12,7 +12,7 @@ class CreateStoryPreviewRouter {
 
 // MARK: CreateStoryPreviewRouterInput
 extension CreateStoryPreviewRouter: CreateStoryPreviewRouterInput {
-    func goToMain(){
+    func goToMain() {
         let router = RouterVC()
         router.popCreateStory()
     }

@@ -14,7 +14,7 @@ final class FaceImageChangeCoverInteractor: BaseFilesGreedInteractor {
     
 }
 
-//MARK: - FaceImageChangeCoverInteractorInput
+// MARK: - FaceImageChangeCoverInteractorInput
 
 extension FaceImageChangeCoverInteractor: FaceImageChangeCoverInteractorInput {
     

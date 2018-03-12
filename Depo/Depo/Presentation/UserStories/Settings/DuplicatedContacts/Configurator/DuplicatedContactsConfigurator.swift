@@ -17,7 +17,7 @@ class DuplicatedContactsModuleConfigurator {
         }
     }
 
-    private func configure(viewController: DuplicatedContactsViewController, analyzeResponse:[ContactSync.AnalyzedContact], moduleOutput: DuplicatedContactsModuleOutput?) {
+    private func configure(viewController: DuplicatedContactsViewController, analyzeResponse: [ContactSync.AnalyzedContact], moduleOutput: DuplicatedContactsModuleOutput?) {
         viewController.analyzeResponse = analyzeResponse
         
         let router = DuplicatedContactsRouter()

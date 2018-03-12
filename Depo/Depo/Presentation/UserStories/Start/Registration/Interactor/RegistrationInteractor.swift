@@ -21,7 +21,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
         let gsmCompositor = CounrtiesGSMCodeCompositor()
         let models = gsmCompositor.getGSMCCModels()
         dataStorage.gsmModels = models
-        output.composedGSMCCodes(models:models)
+        output.composedGSMCCodes(models: models)
     }
     
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String) {

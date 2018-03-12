@@ -41,7 +41,7 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
         }, fail: { [weak self] response in
             DispatchQueue.main.async {
                 let errorMessage = self?.checkErrorService(withErrorResponse: response.description) ?? response.description
-                self?.output.requestFailed(withError:  errorMessage)
+                self?.output.requestFailed(withError: errorMessage)
             }
         })
     }

@@ -23,7 +23,7 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
         dataSource.preferedCellReUseID = CollectionViewCellsIdsConstant.cellForStoryImage
     }
     
-    override func isArrayDataSource() -> Bool{
+    override func isArrayDataSource() -> Bool {
         return true
     }
     
@@ -36,44 +36,44 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
         bottomBarPresenter?.dismiss(animated: true)
     }
     
-    override func onChangeSelectedItemsCount(selectedItemsCount: Int){
+    override func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         startEditing()
         super.onChangeSelectedItemsCount(selectedItemsCount: selectedItemsCount)
     }
     
-    override func onMaxSelectionExeption(){
+    override func onMaxSelectionExeption() {
         let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
         UIApplication.showErrorAlert(message: text)
     }
     
-    override func onNextButton(){
+    override func onNextButton() {
         guard  let story = photoStory else {
             return
         }
         let array = dataSource.getSelectedItems()
-        if (array.count > 0){
+        if (array.count > 0) {
             guard let wrapArray = array as? [Item] else {
                 return
             }
             story.storyPhotos = wrapArray
             
-            if let rout = router as? CreateStorySelectionRouter{
+            if let rout = router as? CreateStorySelectionRouter {
                 rout.goToSelectionOrderPhotosFor(story: story)
             }
-        }else{
+        } else {
             UIApplication.showErrorAlert(message: TextConstants.createStoryNoSelectedPhotosError)
         }
     }
     
-    func configurateWithPhotoStory(story: PhotoStory){
+    func configurateWithPhotoStory(story: PhotoStory) {
         photoStory = story
     }
     
-    override func getContentWithSuccess(array: [[BaseDataSourceItem]]){
+    override func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
         //DBDROP
         var content = [[BaseDataSourceItem]]()
         array.forEach { items in
-            content.append(items.filter {$0.fileType == .image})
+            content.append(items.filter { $0.fileType == .image })
         }        
         super.getContentWithSuccess(array: content)
     }

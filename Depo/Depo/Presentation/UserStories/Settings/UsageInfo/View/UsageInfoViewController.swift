@@ -19,7 +19,7 @@ class UsageInfoViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak private var currentPlanLabel: UILabel!  {
+    @IBOutlet weak private var currentPlanLabel: UILabel! {
         didSet {
             currentPlanLabel.text = TextConstants.usageInfoQuotaInfo
             currentPlanLabel.textColor = ColorConstants.lightText

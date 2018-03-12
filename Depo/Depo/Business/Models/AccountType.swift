@@ -15,4 +15,3 @@ enum AccountType {
     case cyprus
     case moldovian
 }
-

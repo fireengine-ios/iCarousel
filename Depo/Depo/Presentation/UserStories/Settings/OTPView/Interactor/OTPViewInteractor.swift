@@ -8,12 +8,12 @@
 
 class OTPViewInteractor: PhoneVereficationInteractor {
     
-    var responce: SignUpSuccessResponse? = nil
-    var userInfo: AccountInfoResponse? = nil
-    var phoneNumberString: String? = nil
+    var responce: SignUpSuccessResponse?
+    var userInfo: AccountInfoResponse?
+    var phoneNumberString: String?
     
     override var remainingTimeInMinutes: Int {
-        if let resp = responce{
+        if let resp = responce {
             return resp.remainingTimeInMinutes ?? 1
         }
         
@@ -21,7 +21,7 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     }
     
     override var expectedInputLength: Int? {
-        if let resp = responce{
+        if let resp = responce {
             return resp.expectedInputLength ?? 1
         }
         return nil

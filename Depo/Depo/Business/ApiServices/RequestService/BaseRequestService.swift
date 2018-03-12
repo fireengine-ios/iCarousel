@@ -10,7 +10,7 @@ import Foundation
 
 protocol ObjectFromRequestResponse: class {
     
-    init(json:Data?, headerResponse:HTTPURLResponse?)
+    init(json: Data?, headerResponse: HTTPURLResponse?)
         
     func mapping()
 }
@@ -21,7 +21,7 @@ protocol RequestParametrs {
     
     var requestParametrs: Any { get }
     
-    var patch: URL {get}
+    var patch: URL { get }
     
     var header: RequestHeaderParametrs { get }
 }
@@ -62,7 +62,7 @@ class BaseDownloadRequestParametrs: DownloadRequestParametrs {
         return RequestHeaders.authification()
     }
     
-    var timeout: TimeInterval{
+    var timeout: TimeInterval {
         return 2000.0
     }
     
@@ -104,7 +104,7 @@ class JsonConvertor {
     func convertToData() -> Data? {
         var jsonData: Data? = nil
         
-        if let data = value.requestParametrs as? Data  {
+        if let data = value.requestParametrs as? Data {
             jsonData = data
         } else if let str = value.requestParametrs as? String {
             jsonData = str.data(using: .utf8)
@@ -123,51 +123,51 @@ class BaseRequestService {
     
     let requestService = RequestService.default
     
-    func executePostRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
+    func executePostRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>) {
         let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
-                                                      method:RequestMethod.Post,
+                                                      method: RequestMethod.Post,
                                                       timeoutInterval: param.timeout,
                                                       response: handler.response)
         task.resume()
     }
     
-    func executeGetRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
+    func executeGetRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>) {
         let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: nil,
-                                                      method:RequestMethod.Get,
+                                                      method: RequestMethod.Get,
                                                       timeoutInterval: param.timeout,
                                                       response: handler.response)
         task.resume()
     }
     
-    func executeDeleteRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
+    func executeDeleteRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>) {
         let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
-                                                      method:RequestMethod.Delete,
+                                                      method: RequestMethod.Delete,
                                                       timeoutInterval: param.timeout,
                                                       response: handler.response)
         task.resume()
     }
     
-    func executePutRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
+    func executePutRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>) {
         let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: JsonConvertor(parametrs: param).convertToData(),
-                                                      method:RequestMethod.Put,
+                                                      method: RequestMethod.Put,
                                                       timeoutInterval: param.timeout,
                                                       response: handler.response)
         task.resume()
     }
     
-    func executePatchRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
+    func executePatchRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>) {
         let task = requestService.requestTask(patch: param.patch,
                                               headerParametrs: param.header,
                                               body: JsonConvertor(parametrs: param).convertToData(),
-                                              method:RequestMethod.Patch,
+                                              method: RequestMethod.Patch,
                                               timeoutInterval: param.timeout,
                                               response: handler.response)
         task.resume()
@@ -221,7 +221,7 @@ class BaseRequestService {
         return task
     }
     
-    func executeHeadRequest<T,P> (param:RequestParametrs, handler:BaseResponseHandler<T,P>) {
+    func executeHeadRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>) {
         let task = requestService.headRequestTask(patch: param.patch,
                                                   headerParametrs: param.header,
                                                   method: RequestMethod.Head,
@@ -230,7 +230,7 @@ class BaseRequestService {
         task.resume()
     }
     
-    func executeUploadDataRequest(param: UploadDataRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask{
+    func executeUploadDataRequest(param: UploadDataRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask {
 
         let task = requestService.uploadFileRequestTask(path: param.patch,
                                                         headerParametrs: param.header,
@@ -242,7 +242,7 @@ class BaseRequestService {
         return task
     }
     
-    //MARK: - Helpers
+    // MARK: - Helpers
     
     private func beginBackgroundTask(with name: String?) -> UIBackgroundTaskIdentifier {
         var taskId = UIBackgroundTaskInvalid

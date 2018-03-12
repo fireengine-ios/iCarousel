@@ -78,7 +78,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
 
     // MARK: buttons actions
     
-    @IBAction func onStartUsingButton(){
+    @IBAction func onStartUsingButton() {
         let settings = dataSource.createAutoSyncSettings()
         
         if !settings.isAutoSyncEnabled {
@@ -88,10 +88,11 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
         output.change(settings: settings)
     }
     
-    @IBAction func onSkipButtn(){
+    @IBAction func onSkipButtn() {
         output.skipForNowPressed()
     }
 
+    
     // MARK: AutoSyncViewInput
     func setupInitialState() {
     }
@@ -115,7 +116,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     }
     
     func mobileDataEnabledFor(model: AutoSyncModel) {
-        if fromSettings, isFirstTime{
+        if fromSettings, isFirstTime {
             isFirstTime = false
             
             let router = RouterVC()

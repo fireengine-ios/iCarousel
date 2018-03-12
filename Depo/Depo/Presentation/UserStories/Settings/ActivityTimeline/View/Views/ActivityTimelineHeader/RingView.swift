@@ -24,7 +24,7 @@ class RingView: UIView {
         drawRingFittingInsideView(rect: rect)
     }
     
-    internal func drawRingFittingInsideView(rect: CGRect)->() {
+    internal func drawRingFittingInsideView(rect: CGRect) {
         let circlePath = UIBezierPath(ovalIn: rect)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = circlePath.cgPath

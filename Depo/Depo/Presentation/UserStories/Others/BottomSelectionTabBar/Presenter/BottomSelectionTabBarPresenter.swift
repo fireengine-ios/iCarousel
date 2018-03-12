@@ -105,9 +105,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         if let newSourceView = sourceView {
             shownSourceView = newSourceView
         } else {
-            if let tabBarViewController = rootVC as? TabBarViewController{
+            if let tabBarViewController = rootVC as? TabBarViewController {
                 shownSourceView = tabBarViewController.mainContentView
-            }else{
+            } else {
                 shownSourceView = rootVC.view
             }
         }
@@ -280,7 +280,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         var filteredTypes = types
         let langCode = Device.locale
         if langCode != "tr", langCode != "en" {
-            filteredTypes = types.filter({$0 != .print})
+            filteredTypes = types.filter({ $0 != .print })
         }
         
         var tempoItems = items
@@ -446,7 +446,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         let actionsWithCancell: [UIAlertAction] = actions + [cancellAction]
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionsWithCancell.forEach({actionSheetVC.addAction($0)})
+        actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
 
         actionSheetVC.popoverPresentationController?.sourceView = rootVC.view
 
@@ -470,7 +470,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     
-    //MARK: - Interactor output
+    // MARK: - Interactor output
     
     override func operationFinished(type: ElementTypes) {
         compliteAsyncOperationEnableScreen()
@@ -478,7 +478,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         basePassingPresenter?.operationFinished(withType: type, response: nil)
     }
     
-    override func operationFailed(type: ElementTypes, message: String){
+    override func operationFailed(type: ElementTypes, message: String) {
         compliteAsyncOperationEnableScreen()
         view.unselectAll()
         basePassingPresenter?.operationFailed(withType: type)
@@ -501,7 +501,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         router.showDeleteMusic(completion)
     }
     
-    //MARK: base presenter
+    // MARK: base presenter
     
     override func outputView() -> Waiting? {
         return view

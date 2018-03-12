@@ -67,7 +67,7 @@ class SliderItem {
     var placeholderImage: UIImage?
     var albumItem: AlbumItem?
     
-    init(name: String?, previewItems:[PathForItem]?, placeholder: UIImage?, type: MyStreamType?) {
+    init(name: String?, previewItems: [PathForItem]?, placeholder: UIImage?, type: MyStreamType?) {
         self.type = type
         self.name = name
         self.previewItems = previewItems
@@ -76,14 +76,14 @@ class SliderItem {
     
     init(withAlbumItems items: [AlbumItem]?) {
         if let items = items {
-            previewItems = Array(items.prefix(4).flatMap {$0.preview?.patchToPreview})
+            previewItems = Array(items.prefix(4).flatMap { $0.preview?.patchToPreview })
         }
         setType(.albums)
     }
     
     init(withStoriesItems items: [Item]?) {
         if let items = items {
-            previewItems = Array(items.prefix(4).flatMap {$0.patchToPreview})
+            previewItems = Array(items.prefix(4).flatMap { $0.patchToPreview })
         }
         setType(.story)
     }
@@ -95,7 +95,7 @@ class SliderItem {
         albumItem = album
     }
     
-    init(withThumbnails items:[URL?], type: MyStreamType) {
+    init(withThumbnails items: [URL?], type: MyStreamType) {
         previewItems = items.flatMap { PathForItem.remoteUrl($0) }
         setType(type)
     }
@@ -112,7 +112,7 @@ class LBAlbumLikePreviewSliderDataStorage {
     
     func addNew(item: SliderItem) {
         if let type = item.type, type.isMyStreamSliderType(),
-           let index = currentItems.index(where: {$0.type == item.type}) {
+           let index = currentItems.index(where: { $0.type == item.type }) {
             currentItems[index] = item
         } else {
             currentItems.append(item)
