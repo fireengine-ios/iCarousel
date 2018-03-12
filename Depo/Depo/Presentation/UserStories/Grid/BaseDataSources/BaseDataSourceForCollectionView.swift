@@ -555,7 +555,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
             cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
             
-            if let cell = cell as? BasicCollectionMultiFileCell {
+            if let cell = cell as? BasicCollectionMultiFileCell, !needShow3DotsInCell {
                 cell.moreButton.isHidden = !needShow3DotsInCell
             }
         }
@@ -888,7 +888,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        if let cell = cell as? BasicCollectionMultiFileCell {
+        if let cell = cell as? BasicCollectionMultiFileCell, !needShow3DotsInCell {
             cell.moreButton.isHidden = !needShow3DotsInCell
         }
     }
