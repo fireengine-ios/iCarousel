@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,13 +17,12 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneVereficationViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneVereficationViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="bacgroundImageView" destination="cVb-Te-uhX" id="qMR-XX-cbW"/>
                 <outlet property="codeVereficationField" destination="klA-ac-y0Z" id="rLD-6S-QvA"/>
                 <outlet property="infoTitle" destination="cBh-fU-kfJ" id="kvi-q6-nCx"/>
                 <outlet property="mainTitle" destination="C0W-OJ-jmF" id="1lC-rc-reK"/>
-                <outlet property="nextButton" destination="plG-4P-Sfz" id="KSu-Mj-gRd"/>
                 <outlet property="phoneCodeLabel" destination="Vi1-kn-1aU" id="igP-Hq-Tt5"/>
                 <outlet property="resendButton" destination="V1b-9v-ghZ" id="Tj8-8C-fYT"/>
                 <outlet property="timerLabel" destination="MBT-Oh-9zN" id="1CD-Vb-bIp"/>
@@ -42,13 +41,13 @@
                     <rect key="frame" x="30" y="155" width="315" height="130"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+905303171879" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vi1-kn-1aU" userLabel="phoneCode">
-                            <rect key="frame" x="0.0" y="50" width="167.5" height="27"/>
+                            <rect key="frame" x="0.0" y="50" width="135.5" height="26"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="23"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the verefication code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBh-fU-kfJ">
-                            <rect key="frame" x="0.0" y="98" width="228" height="22"/>
+                            <rect key="frame" x="0.0" y="98" width="185" height="22"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="19"/>
                             <color key="textColor" red="1" green="0.94117647058823528" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -73,41 +72,25 @@
                     </constraints>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="klA-ac-y0Z">
-                    <rect key="frame" x="30" y="316" width="315" height="44"/>
+                    <rect key="frame" x="30" y="316" width="315" height="42"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="37"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                 </textField>
                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wp9-pe-aTK">
-                    <rect key="frame" x="30" y="363" width="315" height="1"/>
+                    <rect key="frame" x="30" y="361" width="315" height="1"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="M7N-O1-8WK"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBT-Oh-9zN" customClass="SmartTimerLabel" customModule="Depo_LifeTech" customModuleProvider="target">
-                    <rect key="frame" x="30" y="399" width="78" height="47"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBT-Oh-9zN" customClass="SmartTimerLabel" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="30" y="397" width="64" height="45.5"/>
                     <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="40"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plG-4P-Sfz" customClass="WhiteButtonWithRoundedCorner" customModule="Depo_LifeTech" customModuleProvider="target">
-                    <rect key="frame" x="110" y="562" width="155" height="60"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="60" id="eQf-tH-eIl"/>
-                        <constraint firstAttribute="width" constant="155" id="r82-Uj-rfw"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="22"/>
-                    <state key="normal" title="Next"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="30"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="NextAction:" destination="-1" eventType="touchUpInside" id="gbT-4N-z8c"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1b-9v-ghZ" customClass="WhiteButtonWithRoundedCorner" customModule="Depo_LifeTech" customModuleProvider="target">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1b-9v-ghZ" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="110" y="562" width="155" height="60"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -128,19 +111,17 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="MaN-kK-HBi" secondAttribute="trailing" constant="30" id="0ys-4d-S9k"/>
                 <constraint firstItem="cVb-Te-uhX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="23W-11-DrQ"/>
+                <constraint firstAttribute="bottom" secondItem="V1b-9v-ghZ" secondAttribute="bottom" priority="750" constant="45" id="2o0-8U-zQc"/>
                 <constraint firstItem="MBT-Oh-9zN" firstAttribute="top" secondItem="Wp9-pe-aTK" secondAttribute="bottom" constant="35" id="5M8-pA-6ho"/>
                 <constraint firstItem="klA-ac-y0Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="AbD-qk-yZi"/>
-                <constraint firstAttribute="bottom" secondItem="plG-4P-Sfz" secondAttribute="bottom" priority="750" constant="45" id="AtB-sN-xrn"/>
                 <constraint firstAttribute="trailing" secondItem="cVb-Te-uhX" secondAttribute="trailing" id="BwD-n0-isU"/>
                 <constraint firstItem="MaN-kK-HBi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="OPS-au-a3I"/>
                 <constraint firstItem="Wp9-pe-aTK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="SiP-kR-I0j"/>
                 <constraint firstItem="Wp9-pe-aTK" firstAttribute="top" secondItem="klA-ac-y0Z" secondAttribute="bottom" constant="3" id="Sue-Zw-OdI"/>
                 <constraint firstAttribute="trailing" secondItem="klA-ac-y0Z" secondAttribute="trailing" constant="30" id="Tj5-mk-FOn"/>
+                <constraint firstItem="V1b-9v-ghZ" firstAttribute="centerX" secondItem="cVb-Te-uhX" secondAttribute="centerX" id="UqE-eA-FUY"/>
                 <constraint firstItem="MaN-kK-HBi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="155" id="gjL-du-7Eo"/>
-                <constraint firstItem="V1b-9v-ghZ" firstAttribute="centerY" secondItem="plG-4P-Sfz" secondAttribute="centerY" id="goy-sx-ExV"/>
-                <constraint firstItem="plG-4P-Sfz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lYu-QE-6cN"/>
                 <constraint firstItem="klA-ac-y0Z" firstAttribute="top" secondItem="MaN-kK-HBi" secondAttribute="bottom" constant="31" id="m3b-2r-5sc"/>
-                <constraint firstItem="V1b-9v-ghZ" firstAttribute="centerX" secondItem="plG-4P-Sfz" secondAttribute="centerX" id="mMi-YB-lgE"/>
                 <constraint firstItem="cVb-Te-uhX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pih-z5-P3O"/>
                 <constraint firstItem="MBT-Oh-9zN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="r9u-fv-Jns"/>
                 <constraint firstAttribute="trailing" secondItem="Wp9-pe-aTK" secondAttribute="trailing" constant="30" id="y2Y-HD-B8I"/>

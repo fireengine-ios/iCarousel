@@ -38,19 +38,11 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     }
     
     func vereficationCodeEntered(code: String) {
-        sendVereficationCode(code: code)
-    }
-    
-    func vereficationCodeNotReady() {
-    }
-    
-    private func sendVereficationCode(code: String) {
         startAsyncOperationDisableScreen()
         interactor.verifyCode(code: code)
     }
     
-    func nextButtonPressed(withVereficationCode vereficationCode: String) {
-        sendVereficationCode(code: vereficationCode)
+    func vereficationCodeNotReady() {
     }
     
     func verificationSucces() {

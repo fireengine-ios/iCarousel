@@ -16,8 +16,6 @@ protocol PhoneVereficationViewInput: class, Waiting {
     
     func dropTimer()
     
-    func nextButtonEnable(enable: Bool)
-    
     func setupTextLengh(lenght: Int)
     
     func setupPhoneLable(with number: String)
