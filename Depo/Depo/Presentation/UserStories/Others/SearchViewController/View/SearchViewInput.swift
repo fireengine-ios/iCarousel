@@ -17,7 +17,7 @@ protocol SearchViewInput: class {
     func getCollectionViewWidth() -> CGFloat
     func scrollViewDidScroll(scrollView: UIScrollView)
     func setupUnderNavBarBar(withConfig config: GridListTopBarConfig)
-    func dismissController()
+    func dismissController(animated: Bool)
     func showMusicBar()
     
     func onSetSelection(state: Bool)

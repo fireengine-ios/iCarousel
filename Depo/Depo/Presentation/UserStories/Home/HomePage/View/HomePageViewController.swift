@@ -22,25 +22,6 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     var navBarConfigurator = NavigationBarConfigurator()
     
-    private var _searchViewController: UIViewController?
-    private var searchViewController: UIViewController! {
-        get {
-            if let svc = _searchViewController {
-                return svc
-            } else {
-                let router = RouterVC()
-                let searchViewController = router.searchView(output: self)                
-                _searchViewController = searchViewController
-                _searchViewController?.transitioningDelegate = self
-                navigationController?.delegate = searchViewController as? BaseViewController
-                return _searchViewController!
-            }
-        }
-        set (new) {
-            _searchViewController = new
-        }
-    }
-    
     private var homepageIsActiveAndVisible: Bool {
         var result = false
         if let topController = navigationController?.topViewController {
@@ -72,9 +53,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         output.viewIsReady()
         
-        if _searchViewController != nil {
-            let router = RouterVC()
-            router.pushViewController(viewController: searchViewController)
+        if let searchController = navigationController?.topViewController as? SearchViewController {
+            searchController.dismissController(animated: false)
         }
     }
 
@@ -101,12 +81,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     // MARK: - SearchBarButtonPressed
     
     func configureNavBarActions() {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] (_) in
-            guard let `self` = self else {
-                return
-            }
-            let router = RouterVC()
-            router.pushViewController(viewController: self.searchViewController)
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
+            self?.output.showSearch(output: self)
         })
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.output.showSettings()
@@ -114,8 +90,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         navBarConfigurator.configure(right: [setting, search], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
-
-    
+        
     // MARK: HomePageViewInput
     
     func setupInitialState() {
@@ -161,9 +136,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         }
     }
     
-    func cancelSearch() {
-        searchViewController = nil
-    }
+    func cancelSearch() { }
     
     func previewSearchResultsHide() { }
     

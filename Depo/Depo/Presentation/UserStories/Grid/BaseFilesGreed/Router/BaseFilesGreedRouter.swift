@@ -11,9 +11,9 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     weak var view: BaseFilesGreedViewController!
     weak var presenter: BaseFilesGreedPresenter!
     
+    private let router = RouterVC()
 
      func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
-        let router = RouterVC()
         
         if (selectedItem.fileType == .photoAlbum) {
          
@@ -52,7 +52,6 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         guard let wrapperedArray = items as? [Item] else {
             return
         }
-        let router = RouterVC()
         
         let vc = PrintInitializer.viewController(data: wrapperedArray)
         router.pushViewController(viewController: vc)
@@ -60,6 +59,13 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     
     func showBack() {
         view.dismiss(animated: true, completion: {})
+    }
+    
+    func showSearchScreen(output: UIViewController?) {
+        let controller = router.searchView(output: output as? SearchModuleOutput)
+        output?.navigationController?.delegate = controller as? BaseViewController
+        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        router.pushViewController(viewController: controller)
     }
         
 }
