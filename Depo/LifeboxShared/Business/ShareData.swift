@@ -36,6 +36,11 @@ open class ShareData {
         return contentType
     }
 }
+extension ShareData: Equatable {
+    public static func ==(lhs: ShareData, rhs: ShareData) -> Bool {
+        return lhs.url == rhs.url
+    }
+}
 
 final class ShareImage: ShareData {
     override var image: UIImage? {
