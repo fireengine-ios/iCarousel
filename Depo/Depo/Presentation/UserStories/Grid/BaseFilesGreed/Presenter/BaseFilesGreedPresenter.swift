@@ -545,6 +545,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
     }
     
+    func searchPressed(output: UIViewController?) {
+        router.showSearchScreen(output: output)
+    }
+    
     
     // MARK: - View outbut/ TopBar/UnderNavBarBar Delegates
     

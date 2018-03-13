@@ -30,6 +30,10 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         router.moveToSettingsScreen()
     }
     
+    func showSearch(output: UIViewController?) {
+        router.moveToSearchScreen(output: output)
+    }
+    
     func onSyncContacts() {
         router.moveToSyncContacts()
     }

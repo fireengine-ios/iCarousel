@@ -119,6 +119,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
         
         output.viewWillAppear()
+    
+        if let searchController = navigationController?.topViewController as? SearchViewController {
+            searchController.dismissController(animated: false)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -150,11 +154,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
    func configureNavBarActions(isSelecting: Bool = false) {
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
-            let router = RouterVC()
-            let searchViewController = router.searchView()
-            searchViewController.transitioningDelegate = self
-            self?.navigationController?.delegate = searchViewController as? BaseViewController
-            router.pushViewController(viewController: searchViewController)
+            self?.output.searchPressed(output: self)
         })
         let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
             self?.output.moreActionsPressed(sender: NavigationBarList().more)

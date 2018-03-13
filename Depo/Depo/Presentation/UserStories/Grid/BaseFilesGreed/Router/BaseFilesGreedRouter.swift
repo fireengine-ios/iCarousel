@@ -10,8 +10,8 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     lazy var player: MediaPlayer = factory.resolve()
     weak var view: BaseFilesGreedViewController!
     weak var presenter: BaseFilesGreedPresenter!
-    private let router = RouterVC()
     
+    private let router = RouterVC()
 
      func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
         
@@ -52,7 +52,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         guard let wrapperedArray = items as? [Item] else {
             return
         }
-                
+        
         let vc = PrintInitializer.viewController(data: wrapperedArray)
         router.pushViewController(viewController: vc)
     }
@@ -61,11 +61,11 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         view.dismiss(animated: true, completion: {})
     }
     
-    func showUpload() {
-        let controller = router.uploadPhotos()
-        let navigation = UINavigationController(rootViewController: controller)
-        navigation.navigationBar.isHidden = false
-        router.presentViewController(controller: navigation)
+    func showSearchScreen(output: UIViewController?) {
+        let controller = router.searchView(output: output as? SearchModuleOutput)
+        output?.navigationController?.delegate = controller as? BaseViewController
+        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        router.pushViewController(viewController: controller)
     }
         
 }

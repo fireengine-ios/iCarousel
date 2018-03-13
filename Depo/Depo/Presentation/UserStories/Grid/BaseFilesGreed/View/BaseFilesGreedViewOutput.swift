@@ -44,6 +44,8 @@ protocol BaseFilesGreedViewOutput {
     
     func moreActionsPressed(sender: Any)
     
+    func searchPressed(output: UIViewController?)
+    
     func moveBack()
     
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue)

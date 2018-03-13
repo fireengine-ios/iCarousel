@@ -260,7 +260,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
-        dismissController()
+        dismissController(animated: true)
         output.tapCancel()
     }
     
@@ -358,10 +358,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         view.endEditing(true)
     }
     
-    func dismissController() {
+    func dismissController(animated: Bool) {
         goBack = true
         navigationController?.delegate = self
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: animated)
     }
     
     func onSetSelection(state: Bool) {
@@ -530,7 +530,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func musicBarZoomWillOpen() {
         output.willDismissController()
-        dismissController()
+        dismissController(animated: true)
     }
 }
 
