@@ -165,6 +165,7 @@
 "2G" = "2G";
 "Mobile Data" = "Mobile Data";
 "Wi-Fi" = "Wi-Fi";
+"Wi-Fi and Cellular" = "Wi-Fi and Cellular";
 "Free up space" = "Free up space";
 "Your device memory is almost full" = "Your device memory is almost full";
 "There are some duplicated items both in your device and lifebox" = "There are some duplicated items both in your device and lifebox";
@@ -535,7 +536,7 @@
 "Mobile Data" = "Mobile Data";
 "When syncing via Wi-Fi, your photos and videos are uploaded by default." = "When syncing via Wi-Fi, your photos and videos are uploaded by default.";
 "Wi-fi" = "Wi-fi";
-"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Lifebox can sync your files automatically. Would you like to have this feature right now?";
+"Lifebox can sync your files automatically." = "Lifebox can sync your files automatically.";
 "Auto Sync" = "Auto Sync";
 "You have to fill in a password" = "You have to fill in a password";
 "You have to fill in your mail or GSM Number" =  "You have to fill in your mail or GSM Number";
@@ -621,3 +622,4 @@
 "Filter Card" = "Filter Card";
 "View" = "View";
 "photos" = "photos";
+"Never" = "Never";

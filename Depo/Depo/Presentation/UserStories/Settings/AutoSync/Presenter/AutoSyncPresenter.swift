@@ -24,12 +24,12 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
-        interactor.prepareCellsModels()
+        interactor.prepareCellModels()
     }
     
-    func preperedCellsModels(models: [AutoSyncModel]) {
-         compliteAsyncOperationEnableScreen()
-        view.preperedCellsModels(models: models)
+    func prepaire(syncSettings: AutoSyncSettings) {
+        compliteAsyncOperationEnableScreen()
+        view.prepaire(syncSettings: syncSettings)
     }
     
     func skipForNowPressed() {
@@ -44,27 +44,28 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func saveChanges(setting: SettingsAutoSyncModel) {
+    func change(settings: AutoSyncSettings) {
         if !fromSettings {
-            let dataSyncEnabled = setting.isAutoSyncEnable && (setting.mobileDataPhotos == true || setting.mobileDataVideo == true)
+            let photoOption = settings.photoSetting.option
+            let videoOption = settings.videoSetting.option
+            let dataSyncEnabled = settings.isAutoSyncOptionEnabled && (photoOption == .wifiAndCellular || videoOption == .wifiAndCellular)
             if dataSyncEnabled {
                 router.showSyncOverPopUp(okHandler: {[weak self] in
                     self?.router.routNextVC()
-                    self?.interactor.onSaveSettings(setting: setting)
+                    self?.interactor.onSave(settings: settings)
                 })
             } else {
                 router.routNextVC()
-                saveSettings(setting)
+                save(settings: settings)
             }
         } else {
-            saveSettings(setting)
+            save(settings: settings)
         }
     }
     
-    func saveSettings(_ setting: SettingsAutoSyncModel) {
-        interactor.onSaveSettings(setting: setting)
+    func save(settings: AutoSyncSettings) {
+        interactor.onSave(settings: settings)
     }
-    
     
     func onSettingSaved() {
         

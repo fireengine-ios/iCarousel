@@ -547,11 +547,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             MenloworksAppEvents.onPhotosAndVideosOpen()
             
             guard let settings = SyncServiceManager.shared.getSettings() else { return }
-            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnable)
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
             
-            if settings.isAutoSyncEnable {
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !settings.mobileDataPhotos)
-                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !settings.mobileDataVideo)
+            if settings.isAutoSyncEnabled {
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
             } else {
                 MenloworksTagsService.shared.onAutosyncVideosStatusOff()
                 MenloworksTagsService.shared.onAutosyncPhotosStatusOff()

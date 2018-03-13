@@ -424,7 +424,6 @@
 		7C7ED4DD1F84C8C400DC5D33 /* CircleYellowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7ED4DC1F84C8C400DC5D33 /* CircleYellowButton.swift */; };
 		7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		7C83B6F11F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */; };
-		7C83B6F31F3D916F006D05E3 /* SettingsAutoSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */; };
 		7C849211201CB979007C502A /* LatestUpladsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C849210201CB979007C502A /* LatestUpladsCard.swift */; };
 		7C849212201CB979007C502A /* LatestUpladsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C849210201CB979007C502A /* LatestUpladsCard.swift */; };
 		7C849214201CB990007C502A /* LatestUpladsCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C849213201CB990007C502A /* LatestUpladsCard.xib */; };
@@ -1441,7 +1440,6 @@
 		8C0E8C761FDEBDFF00789C91 /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		8C0E8C771FDEBDFF00789C91 /* LocalMediaItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0056D1F7A75EE004FA8DE /* LocalMediaItems.swift */; };
 		8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */; };
-		8C0E8C791FDEBDFF00789C91 /* AutoSyncInformTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814691EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.swift */; };
 		8C0E8C7A1FDEBDFF00789C91 /* CodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7611FCD8A8000C23CBD /* CodeTextField.swift */; };
 		8C0E8C7B1FDEBDFF00789C91 /* CreateStoryPhotoSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F731F31E4C900536DB6 /* CreateStoryPhotoSelectionViewController.swift */; };
 		8C0E8C7C1FDEBDFF00789C91 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */; };
@@ -1637,7 +1635,6 @@
 		8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		8C0E8D4E1FDEBDFF00789C91 /* CurioReachabilityEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6151DDDD0F600FFE63E /* CurioReachabilityEx.m */; };
 		8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
-		8C0E8D501FDEBDFF00789C91 /* SettingsAutoSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */; };
 		8C0E8D511FDEBDFF00789C91 /* UploadFromLifeBoxInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */; };
 		8C0E8D521FDEBDFF00789C91 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
 		8C0E8D531FDEBDFF00789C91 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
@@ -2241,7 +2238,6 @@
 		8C0E900C1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C0E900D1FDEBDFF00789C91 /* TabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FE91EFD517300A405B2 /* TabBarView.xib */; };
 		8C0E90101FDEBDFF00789C91 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C44850A1F1351A4003AF631 /* SplashViewController.xib */; };
-		8C0E90121FDEBDFF00789C91 /* AutoSyncInformTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC8146A1EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.xib */; };
 		8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
 		8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FAC1EFD4F0D00A405B2 /* HomePage.xib */; };
 		8C0E90151FDEBDFF00789C91 /* DropDovnTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFE92EA1F5E7DEC008A3B72 /* DropDovnTableViewCell.xib */; };
@@ -2489,6 +2485,14 @@
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
+		B5C4C8A22049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
+		B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
+		B5C4C8A42049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
+		B5C4C8A52049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
+		B5C4C8A7204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */; };
+		B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */; };
+		B5F40BB1204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
+		B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
 		B73973BC5864F1C639D252EA /* SyncContactsModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC575D9B71AAF95E3625985 /* SyncContactsModuleInput.swift */; };
 		B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E5B07CCA1DEE8EE3F7BCD /* LBAlbumLikePreviewSliderPresenter.swift */; };
@@ -2720,7 +2724,6 @@
 		CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E931EF5D0B100072983 /* ValidationResults.swift */; };
 		CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
 		CE51AB161EF90853005DCEE0 /* CurioLocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6091DDDD0F600FFE63E /* CurioLocationData.m */; };
-		CE51AB1C1EF90853005DCEE0 /* AutoSyncInformTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814691EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.swift */; };
 		CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */; };
 		CE51AB221EF90853005DCEE0 /* UpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9381C1AF6AE9100AE2892 /* UpdateCheck.m */; };
 		CE51AB231EF90853005DCEE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
@@ -2873,7 +2876,6 @@
 		CE51AD3C1EF90853005DCEE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */; };
 		CE51AD6A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */; };
 		CE51AD771EF90853005DCEE0 /* updater_strings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05A9381E1AF6AE9100AE2892 /* updater_strings.plist */; };
-		CE51ADF61EF90853005DCEE0 /* AutoSyncInformTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC8146A1EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.xib */; };
 		CE51AE291EF90853005DCEE0 /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
 		CE51AE371EF90853005DCEE0 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
 		CE51AE6C1EF90853005DCEE0 /* AutoSyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC814651EF7A93E001DFCF0 /* AutoSyncViewController.xib */; };
@@ -3764,7 +3766,6 @@
 		7C7ED4DC1F84C8C400DC5D33 /* CircleYellowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleYellowButton.swift; sourceTree = "<group>"; };
 		7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FolderSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
-		7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAutoSyncModel.swift; sourceTree = "<group>"; };
 		7C849210201CB979007C502A /* LatestUpladsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestUpladsCard.swift; sourceTree = "<group>"; };
 		7C849213201CB990007C502A /* LatestUpladsCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LatestUpladsCard.xib; sourceTree = "<group>"; };
 		7C942FED1EF94A18008F8A8E /* Depo_LifeTech-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Depo_LifeTech-Info.plist"; sourceTree = "<group>"; };
@@ -3799,8 +3800,6 @@
 		7CC814651EF7A93E001DFCF0 /* AutoSyncViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncViewController.xib; sourceTree = "<group>"; };
 		7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncViewInput.swift; sourceTree = "<group>"; };
 		7CC814671EF7A93E001DFCF0 /* AutoSyncViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncViewOutput.swift; sourceTree = "<group>"; };
-		7CC814691EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncInformTableViewCell.swift; sourceTree = "<group>"; };
-		7CC8146A1EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncInformTableViewCell.xib; sourceTree = "<group>"; };
 		7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSwitcherTableViewCell.swift; sourceTree = "<group>"; };
 		7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSwitcherTableViewCell.xib; sourceTree = "<group>"; };
 		7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaItemsObjectSyncStatus+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -4749,6 +4748,10 @@
 		B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncService.swift; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
+		B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsTableViewCell.swift; sourceTree = "<group>"; };
+		B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSettingsTableViewCell.xib; sourceTree = "<group>"; };
+		B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsOptionView.swift; sourceTree = "<group>"; };
+		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
 		B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationProgressService.swift; sourceTree = "<group>"; };
 		B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
 		B761C517C5341FD74BF00DF5 /* ForgotPasswordRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouterInput.swift; sourceTree = "<group>"; };
@@ -7036,7 +7039,6 @@
 				CECA95961F163CC80054BDC0 /* WrapperedItems.swift */,
 				7CFF0C8D1F4C1E1800E72E6A /* AlbumItem.swift */,
 				7C6E2F531F31BD2200536DB6 /* PhotoStory.swift */,
-				7C83B6F21F3D916F006D05E3 /* SettingsAutoSyncModel.swift */,
 				7CFE92F71F5EDDE4008A3B72 /* LanguageModel.swift */,
 				CE4CFEC01F78F94900FB4C3D /* BytesType.swift */,
 				CEF619EB1F79222600BECF03 /* AccountType.swift */,
@@ -7051,6 +7053,7 @@
 				CE7467001FD6B61600D0885D /* ErrorResponse.swift */,
 				781839851FE9140E0046D73C /* FileForDownload.swift */,
 				CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */,
+				B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -7622,8 +7625,9 @@
 		7CC814681EF7A93E001DFCF0 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				7CC814691EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.swift */,
-				7CC8146A1EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.xib */,
+				B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */,
+				B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */,
+				B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */,
 				7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */,
 				7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */,
 			);
@@ -11726,7 +11730,6 @@
 				8C06B04D2008AD71003D8E05 /* parlaklik.png in Resources */,
 				8C06B0B12008AD71003D8E05 /* rotate.png in Resources */,
 				8C06B1092008AD72003D8E05 /* slider_thumb@3x.png in Resources */,
-				8C0E90121FDEBDFF00789C91 /* AutoSyncInformTableViewCell.xib in Resources */,
 				8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */,
 				8C06AF7D2008AD70003D8E05 /* edit_selected@3x.png in Resources */,
 				4A9B38F7201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
@@ -12114,6 +12117,7 @@
 				8C06AF652008AD70003D8E05 /* duz_cizgi.png in Resources */,
 				8C06AECB2008AD70003D8E05 /* back_icon@2x.png in Resources */,
 				8C0E90681FDEBDFF00789C91 /* ActionsMenuView.xib in Resources */,
+				B5C4C8A52049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				8C06B00B2008AD71003D8E05 /* Kucuk_Selected@3x.png in Resources */,
 				8C0E90691FDEBDFF00789C91 /* UsageInfoViewController.xib in Resources */,
 				8C06AF0D2008AD70003D8E05 /* checkbox@2x.png in Resources */,
@@ -12267,7 +12271,6 @@
 				8C06B09A2008AD71003D8E05 /* refresh.png in Resources */,
 				7C4F60A52019D0440033C58F /* CollageCard.xib in Resources */,
 				8C06B1042008AD72003D8E05 /* slider_thumb2@3x.png in Resources */,
-				CE51ADF61EF90853005DCEE0 /* AutoSyncInformTableViewCell.xib in Resources */,
 				8C06B1922008AD72003D8E05 /* undo@2x.png in Resources */,
 				8C06B1202008AD72003D8E05 /* t_buyuk_selected@3x.png in Resources */,
 				8C06AEE42008AD70003D8E05 /* bottomright@2x.png in Resources */,
@@ -12277,6 +12280,7 @@
 				CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */,
 				CEAE3FB91EFD4F0D00A405B2 /* HomePage.xib in Resources */,
 				7CFE92EC1F5E7DEC008A3B72 /* DropDovnTableViewCell.xib in Resources */,
+				B5C4C8A42049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				CE51AE371EF90853005DCEE0 /* TermsAndServicesScreen.xib in Resources */,
 				7C634FA31F0F81EA00B5B93D /* SyncContactsViewController.xib in Resources */,
 				8C06B0222008AD71003D8E05 /* ok.png in Resources */,
@@ -13113,6 +13117,7 @@
 				8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */,
 				8C0B919420170E3800A5BA81 /* DuplicatedContactsModuleInput.swift in Sources */,
 				8C0B91A820170EAD00A5BA81 /* ManageContactsRouterInput.swift in Sources */,
+				B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
 				8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */,
 				8C0B91B62017103D00A5BA81 /* (null) in Sources */,
 				8C0E8C671FDEBDFF00789C91 /* ActivityType.swift in Sources */,
@@ -13137,7 +13142,6 @@
 				8C0E8C771FDEBDFF00789C91 /* LocalMediaItems.swift in Sources */,
 				8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */,
 				4A9B390F201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
-				8C0E8C791FDEBDFF00789C91 /* AutoSyncInformTableViewCell.swift in Sources */,
 				7C379F41202C36BE0050C055 /* OrientationManager.swift in Sources */,
 				8C0E8C7A1FDEBDFF00789C91 /* CodeTextField.swift in Sources */,
 				8C0E8C7B1FDEBDFF00789C91 /* CreateStoryPhotoSelectionViewController.swift in Sources */,
@@ -13208,6 +13212,7 @@
 				8C0E8CB41FDEBDFF00789C91 /* ButtonWithGrayCorner.swift in Sources */,
 				8C0E8CB51FDEBDFF00789C91 /* SubscriptionParameters.swift in Sources */,
 				8C0E8CB61FDEBDFF00789C91 /* TabBarViewController.swift in Sources */,
+				B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				8C0E8CB71FDEBDFF00789C91 /* CreateStoryPhotosOrderPresenter.swift in Sources */,
 				8C0E8CB91FDEBDFF00789C91 /* LoginRouter.swift in Sources */,
 				8C0E8CBA1FDEBDFF00789C91 /* ActivityIndicatorManager.swift in Sources */,
@@ -13381,7 +13386,6 @@
 				8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				8C0E8D4E1FDEBDFF00789C91 /* CurioReachabilityEx.m in Sources */,
 				8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */,
-				8C0E8D501FDEBDFF00789C91 /* SettingsAutoSyncModel.swift in Sources */,
 				4A9B3906201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				FA793D8A201872E200A02B46 /* PlacesService.swift in Sources */,
 				8C0E8D511FDEBDFF00789C91 /* UploadFromLifeBoxInitializer.swift in Sources */,
@@ -13437,6 +13441,7 @@
 				8C0E8D861FDEBDFF00789C91 /* AutoSyncConfigurator.swift in Sources */,
 				8C0E8D871FDEBDFF00789C91 /* CreateStoryPhotosOrderInitializer.swift in Sources */,
 				8C0E8D891FDEBDFF00789C91 /* GZIP.m in Sources */,
+				B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */,
 				8C0E8D8A1FDEBDFF00789C91 /* BasicCustomNavBarViewController.swift in Sources */,
 				8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */,
 				8C0E8D8D1FDEBDFF00789C91 /* SearchService.swift in Sources */,
@@ -14183,7 +14188,6 @@
 				CEE0056E1F7A75EE004FA8DE /* LocalMediaItems.swift in Sources */,
 				984F8E7F200CE10100D9D595 /* StoriesInitializer.swift in Sources */,
 				CE3318E61EFCFE1800E25989 /* ApplicationPalette.swift in Sources */,
-				CE51AB1C1EF90853005DCEE0 /* AutoSyncInformTableViewCell.swift in Sources */,
 				7C257B3720174D2500CB56F8 /* ContactBackupOld.swift in Sources */,
 				CE1458D12045734A00812544 /* Alamofire+Validate.swift in Sources */,
 				CE6DE7621FCD8A8000C23CBD /* CodeTextField.swift in Sources */,
@@ -14365,6 +14369,7 @@
 				8C06AC1420066641003D8E05 /* TurkcellSecurityRouter.swift in Sources */,
 				CECD4E4E1FDFD69500978BE7 /* PopUpController.swift in Sources */,
 				CE7467011FD6B61600D0885D /* ErrorResponse.swift in Sources */,
+				B5F40BB1204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */,
 				CEAE3F961EFD4E6200A405B2 /* ButtonWithCorner.swift in Sources */,
 				7C4485011F0FC86B003AF631 /* SettingHeaderView.swift in Sources */,
 				CE51ABF91EF90853005DCEE0 /* IntroduceDataStorage.swift in Sources */,
@@ -14415,6 +14420,7 @@
 				7C355E611F01226B003B004C /* BaseCollectionViewDataSource.swift in Sources */,
 				7C3A74521F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CE58FB0020444525007F3F54 /* SharedFactory.swift in Sources */,
+				B5C4C8A7204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
 				CEAE3FDD1EFD500B00A405B2 /* HomeViewTopView.swift in Sources */,
 				CE51AC351EF90853005DCEE0 /* CurioDB.m in Sources */,
 				CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */,
@@ -14433,7 +14439,6 @@
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				CE51AC461EF90853005DCEE0 /* CurioReachabilityEx.m in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
-				7C83B6F31F3D916F006D05E3 /* SettingsAutoSyncModel.swift in Sources */,
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */,
 				4A56D5B2202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,
@@ -14671,6 +14676,7 @@
 				CE51ACF81EF90853005DCEE0 /* ForgotPasswordViewController.swift in Sources */,
 				CE51ACF91EF90853005DCEE0 /* ForgotPasswordModuleInput.swift in Sources */,
 				8C6EF88F1F348B77002AC795 /* EditingBarConfig.swift in Sources */,
+				B5C4C8A22049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				CE2F561E1F7552A900F49DA1 /* PackagesViewController.swift in Sources */,
 				CEC3C2411FB99AF800C3D67F /* PasscodeSettingsModuleInput.swift in Sources */,
 				7CFE92EB1F5E7DEC008A3B72 /* DropDovnTableViewCell.swift in Sources */,
