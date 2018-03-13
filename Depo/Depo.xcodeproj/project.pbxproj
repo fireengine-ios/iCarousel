@@ -2567,6 +2567,7 @@
 		CE0ED9761FBC0F5A00487632 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
 		CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */; };
 		CE1049522035858500898879 /* UIWebView+Clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1049512035858500898879 /* UIWebView+Clear.swift */; };
+		CE109C2B2057A9C9006C9FA0 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE109C2A2057A9C9006C9FA0 /* ShareController.swift */; };
 		CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
 		CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1353342004F0F90004CBBE /* TextEnterController.swift */; };
 		CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1353382004F1530004CBBE /* TextEnterController.xib */; };
@@ -4849,6 +4850,7 @@
 		CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeStorage.swift; sourceTree = "<group>"; };
 		CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeManager.swift; sourceTree = "<group>"; };
 		CE1049512035858500898879 /* UIWebView+Clear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWebView+Clear.swift"; sourceTree = "<group>"; };
+		CE109C2A2057A9C9006C9FA0 /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		CE125175204E74CE00886F8D /* LifeboxFileProviderUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxFileProviderUI.entitlements; sourceTree = "<group>"; };
 		CE1353342004F0F90004CBBE /* TextEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterController.swift; sourceTree = "<group>"; };
 		CE1353382004F1530004CBBE /* TextEnterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextEnterController.xib; sourceTree = "<group>"; };
@@ -9585,6 +9587,7 @@
 			children = (
 				CE58FAF320444493007F3F54 /* MainInterface.storyboard */,
 				CE58FAF120444493007F3F54 /* ShareViewController.swift */,
+				CE109C2A2057A9C9006C9FA0 /* ShareController.swift */,
 				CEBDB1D820444D97007EE1AE /* ShareCustomizator.swift */,
 				CEBDB1E420452F6E007EE1AE /* ImageColCell.swift */,
 			);
@@ -15240,6 +15243,7 @@
 				CE1458D520458D9100812544 /* CustomErrors.swift in Sources */,
 				CE1458C62045617600812544 /* RouteRequests.swift in Sources */,
 				CE654FB520454B3900232025 /* UICollectionView+Layout.swift in Sources */,
+				CE109C2B2057A9C9006C9FA0 /* ShareController.swift in Sources */,
 				CEA524BC2046D6A10036FCEA /* UploadOperation.swift in Sources */,
 				CE654FAF20454A4400232025 /* ShareData.swift in Sources */,
 				CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */,
