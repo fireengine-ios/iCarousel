@@ -8,12 +8,7 @@
 
 import UIKit
 
-protocol FaceImageItemsInput: class {
-    func configurateUgglaView()
-    func updateUgglaViewPosition()
-}
-
-final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, FaceImageItemsInput {
+final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     
     private let ugglaViewHeight: CGFloat = 50
     
@@ -45,15 +40,6 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         }
     }
     
-    override func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
-        super.showNoFilesWith(text: text, image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
-        
-        startCreatingFilesButton.isHidden = true
-        noFilesTopLabel?.isHidden = true
-        isCanChangeVisibility = false
-        ugglaImageView.isHidden = true
-    }
-    
     // MARK: - Configure navigation bar buttons
     
     private func onApplySelection() {
@@ -76,6 +62,12 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
     }
     
     // MARK: - FaceImageItemsInput
+
+}
+
+//MARK: - FaceImageItemsViewInput
+
+extension FaceImageItemsViewController: FaceImageItemsViewInput {
     
     func configurateUgglaView() {
         ugglaImageView = UIImageView(frame: CGRect(x: 0, y: view.bounds.size.height - ugglaViewHeight, width: view.bounds.size.width, height: ugglaViewHeight))
@@ -95,7 +87,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
     
     func updateUgglaViewPosition() {
         let contentHeight = collectionView.contentSize.height
-            
+        
         if contentHeight < collectionView.frame.height - ugglaViewHeight {
             ugglaViewBottomConstraint.constant = 0
         } else {
@@ -112,5 +104,15 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         }
         view.layoutIfNeeded()
     }
-
+    
+    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool, isShowUggla: Bool) {
+        showNoFilesWith(text: text, image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
+        startCreatingFilesButton.isHidden = true
+        noFilesTopLabel?.isHidden = true
+        isCanChangeVisibility = false
+        if isShowUggla {
+            ugglaImageView.isHidden = true
+        }
+    }
+    
 }

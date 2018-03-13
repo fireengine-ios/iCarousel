@@ -51,6 +51,7 @@
 "The network connection was lost." = "The network connection was lost.";
 "ServiceError" = "ServiceError";
 "Nothing to download" = "Nothing to download";
+"Destination folder can not be the same folder" = "Destination folder can not be the same folder";
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
 "Unknown error" = "Unknown error";
@@ -375,6 +376,9 @@
 "info" = "info";
 "Share" = "Share";
 "Enable photo permissions in settings" = "Enable photo permissions in settings";
+"You don’t have any files on your Lifebox yet." = "You don’t have any files on your Lifebox yet.";
+"You don’t have any favorited files on your Lifebox yet." = "You don’t have any favorited files on your Lifebox yet.";
+"Start adding your files" = "Start adding your files";
 "Start adding your photos" = "Start adding your photos";
 "You don’t have anything on your photo roll." = "You don’t have anything on your photo roll.";
 "OK" = "OK";

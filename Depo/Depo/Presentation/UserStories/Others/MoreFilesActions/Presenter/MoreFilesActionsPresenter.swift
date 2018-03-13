@@ -28,6 +28,10 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func dismiss(animated: Bool) {} /// overriding
     
+    func showWrongFolderPopup() {
+        basePassingPresenter?.showAlert(with: TextConstants.errorSameDestinationFolder)
+    }
+    
     // MARK: - Base presenter
     
     override func outputView() -> Waiting? {

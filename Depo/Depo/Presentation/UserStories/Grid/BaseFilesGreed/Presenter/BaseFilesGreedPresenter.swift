@@ -107,6 +107,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func onStartCreatingPhotoAndVideos() {
         log.debug("BaseFilesGreedPresenter onStartCreatingPhotoAndVideos")
 
+        let service = interactor.getRemoteItemsService()
+        if service is AllFilesService ||
+            service is FavouritesService ||
+            service is PhotoAndVideoService {
+            router.showUpload()
+        }
+        
         getContent()
     }
     
@@ -313,9 +320,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func didDelete(items: [BaseDataSourceItem]) {
-        if self is AlbumsPresenter {
-            updateNoFilesView()
-        }
+        updateNoFilesView()
     }
     
     
