@@ -268,6 +268,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
         topBarContainer.isHidden = needHideTopBar
+        
+        let service = output.getRemoteItemsService()
+        if service is DocumentService || service is MusicService {
+            startCreatingFilesButton.isHidden = true
+        }
     }
     
     func showNoFilesTop() {
