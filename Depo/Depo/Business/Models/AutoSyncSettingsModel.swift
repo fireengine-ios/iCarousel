@@ -23,14 +23,14 @@ struct AutoSyncSettings {
     var photoSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiOnly)
     var videoSetting = AutoSyncSetting(syncItemType: .video, option: .wifiOnly)
     
-    var isAutoSyncOptionEnabled: Bool = false //auto sync switcher in settings is on/off
+    var isAutoSyncOptionEnabled: Bool = true //auto sync switcher in settings is on/off
     
     
     init() {
     }
     
     init(with dictionary: [String: Bool]) {
-        isAutoSyncOptionEnabled = dictionary[AutoSyncSettings.isAutoSyncEnabledKey] ?? false
+        isAutoSyncOptionEnabled = dictionary[AutoSyncSettings.isAutoSyncEnabledKey] ?? true
         
         let mobileDataPhotos = dictionary[AutoSyncSettings.mobileDataPhotosKey] ?? false
         let mobileDataVideo = dictionary[AutoSyncSettings.mobileDataVideoKey] ?? false
