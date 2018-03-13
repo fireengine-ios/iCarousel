@@ -21,7 +21,8 @@ class MusicBar: UIView {
     @IBOutlet weak var zoomUpButton: UIButton!
     @IBOutlet weak var musicNameLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
-    @IBOutlet weak var progressViewContainer: UIView!
+    @IBOutlet weak var progressViewContainer: GradientView!
+    @IBOutlet weak var progressView: UIView!
     @IBOutlet var contentView: UIView!
     
     @IBAction func actionZoomUpButton(_ sender: UIButton) {
@@ -63,15 +64,30 @@ class MusicBar: UIView {
         
         musicNameLabel.text = player.currentMusicName
         artistLabel.text = player.currentArtist
+        
+        makeProgress(value: 0)
     }
     
     private func setupGradientView() {
-        let rect = CGRect(x: 0, y: 0, width: Device.winSize.width, height: bounds.height)
-        gradientView.setup(withFrame: rect,
+        let gradientViewRect = CGRect(x: 0, y: 0, width: Device.winSize.width, height: bounds.height)
+        gradientView.setup(withFrame: gradientViewRect,
                            startColor: UIColor.lrRedOrange,
                            endColoer: UIColor.lrYellowSun,
                            startPoint: CGPoint(x: 0, y: 0.5),
                            endPoint: CGPoint(x: 1, y: 0.5))
+        
+        let progressViewRect = CGRect(x: 0, y: 0, width: Device.winSize.width, height: progressViewContainer.bounds.height)
+        progressViewContainer.setup(withFrame: progressViewRect,
+                                    startColor: UIColor.lrSLightPink,
+                                    endColoer: UIColor.lrLightYellow,
+                                    startPoint: CGPoint(x: 0, y: 0.5),
+                                    endPoint: CGPoint(x: 1, y: 0.5))
+    }
+    
+    private func makeProgress(value: Float) {
+        progressView.isHidden = value == 0
+
+        progressView.frame = CGRect(x: 0, y: 0, width: progressViewContainer.bounds.width * CGFloat(value), height: progressViewContainer.bounds.height)
     }
 
     deinit {
@@ -121,12 +137,15 @@ extension MusicBar: MediaPlayerDelegate {
         musicNameLabel.text = player.currentMusicName
         artistLabel.text = player.currentArtist
     }
+    
     func mediaPlayer(_ musicPlayer: MediaPlayer, changedCurrentTime time: Float) {
-        
+        makeProgress(value: time / musicPlayer.duration)
     }
+    
     func didStartMediaPlayer(_ mediaPlayer: MediaPlayer) {
         playPauseButton.isSelected = false
     }
+    
     func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {
         playPauseButton.isSelected = true
     }
