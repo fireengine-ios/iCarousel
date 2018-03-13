@@ -62,7 +62,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         configureTableView()
         subscribeToNotifications()
         configureNavigationBar()
-        setCurrentPlayState()
         
         MenloworksTagsService.shared.onSearchOpen()
     }
@@ -151,22 +150,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         collectionView.contentInset.bottom = 0
         changeVisibleStatus(hidden: true)
         output.playerDidHide()
-    }
-    
-    private func setCurrentPlayState() {
-        var hidden = true
-        if collectionView.isHidden == true {
-            hidden = true
-        } else {
-            if output.player.isPlaying {
-                hidden = false
-            }
-        }
-        if !hidden {
-            showMusicBar()
-        } else {
-            hideMusicBar(self)
-        }
     }
     
     private func changeVisibleStatus(hidden: Bool) {
@@ -300,14 +283,12 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             collectionView.isHidden = true
             noFilesView.isHidden = true
             topBarContainer.isHidden = true
-            setCurrentPlayState()
             hideTabBar()
         }
     }
     
     func endSearchRequestWith(text: String) {
         collectionView.isHidden = !noFilesView.isHidden
-        setCurrentPlayState()
         
         if let searchBar = navigationItem.titleView as? UISearchBar, let searchBarText = searchBar.text {
             let requestText = text.removingPercentEncoding ?? text
@@ -325,7 +306,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             output.searchWith(searchText: searchText, item: item, sortBy: .date, sortOrder: .asc)
         } else {
             collectionView.isHidden = true
-            setCurrentPlayState()
         }
         searchBar.enableCancelButton()
         searchBar.resignFirstResponder()
@@ -342,7 +322,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool) {
         collectionView.isHidden = visibilityStatus
         noFilesView.isHidden = !visibilityStatus
-        setCurrentPlayState()
         
         if visibilityStatus {
             hideTabBar()
