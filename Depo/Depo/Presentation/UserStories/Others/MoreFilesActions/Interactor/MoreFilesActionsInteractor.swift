@@ -320,9 +320,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
             return
         }
+        let itemsFolders = item.flatMap { $0.parent }
         let folderSelector = selectFolderController()
         
         folderSelector.selectFolder(select: { [weak self] (folder) in
+            if itemsFolders.contains(folder) {
+                folderSelector.dismiss(animated: true, completion: {
+                    self?.output?.showWrongFolderPopup()
+                })
+                return
+            }
+            
             self?.output?.operationStarted(type: .move)
             self?.fileService.move(items: item, toPath: folder,
                                    success: { [weak self] in

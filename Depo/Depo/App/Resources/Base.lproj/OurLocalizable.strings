@@ -51,6 +51,7 @@
 "The network connection was lost." = "The network connection was lost.";
 "ServiceError" = "ServiceError";
 "Nothing to download" = "Nothing to download";
+"Destination folder can not be the same folder" = "Destination folder can not be the same folder";
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
 "Unknown error" = "Unknown error";
