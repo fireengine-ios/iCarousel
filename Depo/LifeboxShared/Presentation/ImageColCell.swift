@@ -18,7 +18,7 @@ final class ImageColCell: UICollectionViewCell {
         }
     }
     
-    func config(with shareData: ShareData) {
+    func setup(with shareData: ShareData) {
         urlIdentificator = shareData.url
         DispatchQueue.global().async { [weak self] in
             FileManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in

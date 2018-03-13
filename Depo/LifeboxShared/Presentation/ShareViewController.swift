@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MobileCoreServices
 
 /// example of types in Info.plist
 //
@@ -28,7 +27,7 @@ import MobileCoreServices
 /// https://pspdfkit.com/blog/2016/hiding-action-share-extensions-in-your-own-apps/
 /// https://stackoverflow.com/questions/46826806/ios-11-pdf-share-extension
 
-final class ShareViewController: UIViewController {
+final class ShareViewController: UIViewController, ShareController {
     
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var currentPhotoImageView: UIImageView!
@@ -40,7 +39,7 @@ final class ShareViewController: UIViewController {
     private let shareConfigurator = ShareConfigurator()
     private var sharedItems = [ShareData]()
     
-    lazy var uploadService = UploadQueueService()
+    private lazy var uploadService = UploadQueueService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,104 +148,7 @@ extension ShareViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: ImageColCell.self, for: indexPath)
-        cell.config(with: sharedItems[indexPath.row])
+        cell.setup(with: sharedItems[indexPath.row])
         return cell
-    }
-}
-
-// MARK: - SharedItems
-extension ShareViewController {
-    func getSharedItems(handler: @escaping ([ShareData]) -> Void) {
-        
-        guard
-            let inputItem = extensionContext?.inputItems.first as? NSExtensionItem,
-            let attachments = inputItem.attachments as? [NSItemProvider]
-        else {
-            return
-        }
-        
-        /// type constatnts
-        let imageType = kUTTypeImage as String
-        let pdfType = kUTTypePDF as String
-        let dataType = kUTTypeData as String
-        let videoTypes = [kUTTypeMovie,
-                          kUTTypeVideo,
-                          kUTTypeMPEG,
-                          kUTTypeMPEG4,
-                          kUTTypeAVIMovie,
-                          kUTTypeQuickTimeMovie] as [String]
-        
-        var shareItems: [ShareData] = []
-        let group = DispatchGroup()
-        
-        attachmentsFor: for itemProvider in attachments {
-            
-                /// IMAGE
-            if itemProvider.hasItemConformingToTypeIdentifier(imageType) {
-                
-                group.enter()
-                itemProvider.loadItem(forTypeIdentifier: imageType, options: nil) { (item, error) in
-                    guard let path = item as? URL else {
-                        group.leave()
-                        return
-                    }
-                    shareItems.append(ShareImage(url: path))
-                    group.leave()
-                }
-                
-                /// DATA 1
-            } else if itemProvider.hasItemConformingToTypeIdentifier(pdfType) {
-                
-                group.enter()
-                itemProvider.loadItem(forTypeIdentifier: pdfType, options: nil) { (item, error) in
-                    guard let path = item as? URL else {
-                        group.leave()
-                        return
-                    }
-                    shareItems.append(ShareData(url: path))
-                    group.leave()
-                }
-                
-            } else {
-                
-                /// VIDEO
-                for type in videoTypes {
-                    if itemProvider.hasItemConformingToTypeIdentifier(type) {
-                        
-                        group.enter()
-                        itemProvider.loadItem(forTypeIdentifier: type, options: nil) { (item, error) in
-                            guard let path = item as? URL else {
-                                group.leave()
-                                return
-                            }
-                            shareItems.append(ShareVideo(url: path))
-                            group.leave()
-                        }
-                        
-                        /// we found video type. parse next itemProvider
-                        continue attachmentsFor
-                    }
-                }
-                
-                /// if not any type try to take data
-                /// DATA 2
-                if itemProvider.hasItemConformingToTypeIdentifier(dataType) {
-                    
-                    group.enter()
-                    itemProvider.loadItem(forTypeIdentifier: dataType, options: nil) { (item, error) in
-                        guard let path = item as? URL else {
-                            group.leave()
-                            return
-                        }
-                        shareItems.append(ShareData(url: path))
-                        group.leave()
-                    }
-                }
-            }
-        }
-        
-        group.notify(queue: .main) {
-            handler(shareItems)
-        }
     }
 }
