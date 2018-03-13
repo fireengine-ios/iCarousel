@@ -753,7 +753,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if url == nil, fileType == .image {
                 url = remote.tempDownloadURL
             }
-        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places):
+        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
             if let mediumUrl = remote.metadata?.mediumUrl {
                 url = mediumUrl
             } else if let smallUrl = remote.metadata?.smalURl {
