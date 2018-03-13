@@ -9,7 +9,7 @@
 protocol AutoSyncViewInput: class {
 
     func setupInitialState()
-    func preperedCellsModels(models: [AutoSyncModel])
+    func prepaire(syncSettings: AutoSyncSettings)
     func reloadTableView()
     func disableAutoSync()
 }

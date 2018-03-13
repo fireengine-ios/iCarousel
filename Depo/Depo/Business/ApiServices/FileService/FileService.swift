@@ -16,7 +16,7 @@ struct FilePatch {
     static let rename = "/api/filesystem/rename/%@"
     static let move =   "/api/filesystem/move?targetFolderUuid=%@"
     static let copy =   "/api/filesystem/copy?targetFolderUuid=%@"
-    static let details = "/api/filesystem/details"
+    static let details = "/api/filesystem/details?minified=true"
     static let detail =  "/api/filesystem/detail/%@"
     
     static let metaData = "/api/filesystem/metadata"

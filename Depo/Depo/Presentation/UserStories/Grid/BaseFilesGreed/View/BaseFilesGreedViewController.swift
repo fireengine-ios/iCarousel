@@ -264,6 +264,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
         noFilesLabel.text = text
         noFilesImage.image = image
+        startCreatingFilesButton.isHidden = createFilesButtonText.isEmpty
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
         topBarContainer.isHidden = needHideTopBar

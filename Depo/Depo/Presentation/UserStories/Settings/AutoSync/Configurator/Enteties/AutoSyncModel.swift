@@ -11,21 +11,21 @@ import UIKit
 enum AutoSyncCellType {
     case headerLike//same as switcher but larger
     case typeSwitcher
-    case typeSwitherActivator
-    case typeInformation
 }
 
 class AutoSyncModel {
     let titleString: String
     let subTitleString: String
     let cellType: AutoSyncCellType
+    var syncSetting: AutoSyncSetting?
     var isSelected: Bool
     
-    init(title: String, subTitle: String, type: AutoSyncCellType, selected: Bool) {
+    init(title: String, subTitle: String, type: AutoSyncCellType, setting: AutoSyncSetting?, selected: Bool) {
         titleString = title
         subTitleString = subTitle
         cellType = type
         isSelected = selected
+        syncSetting = setting
     }
     
     init(model: AutoSyncModel, selected: Bool) {
@@ -33,6 +33,7 @@ class AutoSyncModel {
         subTitleString = model.subTitleString
         cellType = model.cellType
         isSelected = selected
+        syncSetting = model.syncSetting
     }
     
 }

@@ -22,6 +22,14 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         }
     }
     
+    override func start(newItems: Bool) {
+        super.start(newItems: newItems)
+        
+        let isWiFi = ReachabilityService().isReachableViaWiFi
+        isWiFi ? MenloworksTagsService.shared.onAutosyncPhotosViaWifi() : MenloworksTagsService.shared.onAutosyncPhotosViaLte()
+        
+    }
+    
     override func stop() {
         stopAllOperations()
         super.stop()
