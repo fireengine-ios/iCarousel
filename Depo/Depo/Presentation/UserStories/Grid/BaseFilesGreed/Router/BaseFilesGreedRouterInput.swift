@@ -15,4 +15,6 @@ protocol BaseFilesGreedRouterInput {
     func showPrint(items: [BaseDataSourceItem])
     
     func showBack()
+    
+    func showUpload()
 }
