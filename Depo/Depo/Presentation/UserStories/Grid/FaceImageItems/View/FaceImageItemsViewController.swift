@@ -106,7 +106,7 @@ extension FaceImageItemsViewController: FaceImageItemsViewInput {
     }
     
     func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool, isShowUggla: Bool) {
-        super.showNoFilesWith(text: text, image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
+        showNoFilesWith(text: text, image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
         startCreatingFilesButton.isHidden = true
         noFilesTopLabel?.isHidden = true
         isCanChangeVisibility = false
