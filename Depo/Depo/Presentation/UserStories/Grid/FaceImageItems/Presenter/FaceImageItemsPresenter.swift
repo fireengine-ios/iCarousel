@@ -25,7 +25,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
         dataSource.isHeaderless = true
         
-        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             view.configurateUgglaView()
         }
     }
@@ -66,7 +66,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         albumSliderModuleOutput?.reload()
         
-        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             DispatchQueue.main.async {
                 view.updateUgglaViewPosition()
             }
@@ -89,7 +89,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if hasUgglaLabel(), let view = view as? FaceImageItemsInput, scrollView == dataSource.collectionView {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput, scrollView == dataSource.collectionView {
             view.updateUgglaViewPosition()
         }
     }
@@ -108,9 +108,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private func updateNoFilesView() {
         if needShowNoFileView() {
-            view.showNoFilesWith(text: interactor.textForNoFileLbel(),
-                                    image: interactor.imageForNoFileImageView(),
-                                    createFilesButtonText: "", needHideTopBar: interactor.needHideTopBar())
+            if let view = view as? FaceImageItemsViewInput {
+                view.showNoFilesWith(text: interactor.textForNoFileLbel(),
+                                     image: interactor.imageForNoFileImageView(),
+                                     createFilesButtonText: "", needHideTopBar: interactor.needHideTopBar(), isShowUggla: hasUgglaLabel())
+            }
         }
     }
 }
