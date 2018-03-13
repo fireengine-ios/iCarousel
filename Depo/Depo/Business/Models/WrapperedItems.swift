@@ -575,8 +575,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    var parent: String?
-    
     var isFolder: Bool?
     
     var childCount: Int64?
@@ -811,8 +809,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         tmpDownloadUrl =  url
         
-        parent = mediaItem.parent
-        
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
             
@@ -840,6 +836,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         id = mediaItem.idValue
         super.init()
+        parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
         uuid = mediaItem.uuidValue ?? ""//UUID().description
         isLocalItem = mediaItem.isLocalItemValue

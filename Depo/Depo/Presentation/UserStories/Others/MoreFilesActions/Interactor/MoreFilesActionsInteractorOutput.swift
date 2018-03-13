@@ -10,6 +10,7 @@ protocol MoreFilesActionsInteractorOutput: class, BaseAsyncOperationInteractorOu
     func operationFinished(type: ElementTypes)//add type?
     func operationFailed(type: ElementTypes, message: String)
     func operationStarted(type: ElementTypes)
+    func showWrongFolderPopup()
     
     func dismiss(animated: Bool)
 }

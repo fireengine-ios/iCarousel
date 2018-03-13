@@ -28,6 +28,8 @@ class BaseDataSourceItem: NSObject {
     
     var md5: String = ""
     
+    var parent: String?
+    
     func getCellReUseID() -> String {
         return CollectionViewCellsIdsConstant.cellForImage
     }
