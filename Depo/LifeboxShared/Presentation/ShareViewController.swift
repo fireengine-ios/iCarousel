@@ -38,6 +38,7 @@ final class ShareViewController: UIViewController, ShareController {
     
     private let shareConfigurator = ShareConfigurator()
     private var sharedItems = [ShareData]()
+    private var currentUploadIndex = -1
     
     private lazy var uploadService = UploadQueueService()
     
@@ -71,10 +72,9 @@ final class ShareViewController: UIViewController, ShareController {
                 DispatchQueue.main.async {
                     self?.uploadProgress.progress = Float(progress.fractionCompleted)
                 }
-            }, didStartUpload: { shareData in
-                DispatchQueue.main.async {
-                    self.updateCurrentUI(for: shareData)
-                }
+            }, didStartUpload: { [weak self] shareData in
+                self?.updateCurrentUI(for: shareData)
+                self?.updateCurrentUploadInCollectionView(with: shareData)
             }, complition: { [weak self] result in
                 DispatchQueue.main.async {
                     sender.isEnabled = true
@@ -84,10 +84,13 @@ final class ShareViewController: UIViewController, ShareController {
                     case .failed(let error):
                         self?.progressLabel.text = error.parsedDescription
                     }
+                    
+                    self?.currentUploadIndex = -1
+                    //                self?.collectionView.performBatchUpdates(nil, completion: nil)
+                    self?.collectionView.reloadData()
                 }
             })
         }
-
     }
     
     private func setupSharedItems() {
@@ -108,18 +111,50 @@ final class ShareViewController: UIViewController, ShareController {
     private func updateCurrentUI(for shareData: ShareData) {
         DispatchQueue.global().async { [weak self] in
             FileManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
+                guard let `self` = self else {
+                    return
+                }
                 DispatchQueue.main.async {
                     switch result {
                     case .success(_):
-                        self?.currentPhotoImageView.setScreenScaledImage(shareData.image)
+                        self.currentPhotoImageView.setScreenScaledImage(shareData.image)
                     case .failed(_):
-                        self?.currentPhotoImageView.image = #imageLiteral(resourceName: "ImageNoDocuments")
+                        self.currentPhotoImageView.image = #imageLiteral(resourceName: "ImageNoDocuments")
                     }
-                    self?.currentPhotoImageView.backgroundColor = UIColor.white
+                    self.currentPhotoImageView.backgroundColor = UIColor.white
                 }
             }
         }
-        currentNameLabel.text = shareData.name
+        DispatchQueue.main.async {
+            self.currentNameLabel.text = shareData.name
+        }
+    }
+    
+    private func updateCurrentUploadInCollectionView(with shareData: ShareData) {
+        guard let index = sharedItems.index(of: shareData) else {
+            return
+        }
+        
+        currentUploadIndex = index
+        let currentCellIndex = IndexPath(row: index, section: 0)
+        
+        DispatchQueue.main.async {
+            self.collectionView.performBatchUpdates({
+                if index > 0 {
+                    let previusCellIndex = IndexPath(row: index - 1, section: 0)
+                    self.collectionView.reloadItems(at: [previusCellIndex, currentCellIndex])
+                } else {
+                    self.collectionView.reloadItems(at: [currentCellIndex])
+                }
+            }, completion: { _ in
+                self.collectionView.scrollToItem(at: currentCellIndex, at: .left, animated: true)
+            })
+        }
+
+//        DispatchQueue.main.async {
+//            self.collectionView.reloadData()
+//            self.collectionView.scrollToItem(at: currentCellIndex, at: .left, animated: true)
+//        }
     }
     
     private func animateAppear() {
@@ -149,6 +184,7 @@ extension ShareViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: ImageColCell.self, for: indexPath)
         cell.setup(with: sharedItems[indexPath.row])
+        cell.setup(isCurrentUploading: indexPath.row == currentUploadIndex)
         return cell
     }
 }

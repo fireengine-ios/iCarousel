@@ -43,7 +43,14 @@ class AsyncOperation: Operation {
     }
     
     func finish() {
-        state = .finished
+        if isExecuting {
+            state = .finished
+        } else if isFinished {
+            return
+        } else {
+            state = .executing
+            state = .finished
+        }
     }
 }
 
@@ -70,8 +77,13 @@ extension AsyncOperation {
             finish()
             return
         }
-        main()
+        if isFinished {
+//            finish()
+            return
+        }
+        
         state = .executing
+        main()
     }
     
     override func cancel() {
