@@ -139,7 +139,9 @@ extension MusicBar: MediaPlayerDelegate {
     }
     
     func mediaPlayer(_ musicPlayer: MediaPlayer, changedCurrentTime time: Float) {
-        makeProgress(value: time / musicPlayer.duration)
+        if musicPlayer.duration != 0 {
+            makeProgress(value: time / musicPlayer.duration)
+        }
     }
     
     func didStartMediaPlayer(_ mediaPlayer: MediaPlayer) {
