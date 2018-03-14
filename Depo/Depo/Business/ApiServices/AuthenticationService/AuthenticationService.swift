@@ -334,6 +334,8 @@ class AuthenticationService: BaseRequestService {
             CardsManager.default.stopAllOperations()
             CardsManager.default.clear()
             RecentSearchesService.shared.clearAll()
+            SyncServiceManager.shared.stopSync()
+            AutoSyncDataStorage.shared.clear()
             self.player.stop()
             self.cancellAllRequests()
             success?()

@@ -138,12 +138,12 @@ class SyncServiceManager {
             print("\(#function): can't start reachability notifier")
         }
 
-        reachability.whenReachable = { reachability in
+        reachability.whenReachable = { (reachability) in
             print("AUTOSYNC: is reachable")
             self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
         }
         
-        reachability.whenUnreachable = { reachability in
+        reachability.whenUnreachable = { (reachability) in
             print("AUTOSYNC: is unreachable")
             self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
         }
@@ -152,7 +152,7 @@ class SyncServiceManager {
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         dispatchQueue.async {
             guard let syncSettings = self.settings else {
-                AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, _ in
+                AutoSyncDataStorage.shared.getAutoSyncSettingsForCurrentUser(success: { [weak self] (settings, _) in
                     if let `self` = self {
                         if self.settings == nil {
                             self.update(syncSettings: settings)
