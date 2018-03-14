@@ -96,7 +96,7 @@ class LoadingImageView: UIImageView {
         activity.startAnimating()
         let path_: PathForItem = PathForItem.remoteUrl(url)
         path = path_
-        self.url = filesDataSource.getImage(patch: PathForItem.remoteUrl(url), compliteImage: { [weak self] (image) in
+        self.url = filesDataSource.getImage(patch: PathForItem.remoteUrl(url), compliteImage: { [weak self] image in
             if self?.path == path_ {
                 self?.finishImageLoading(image)
             }
@@ -121,7 +121,7 @@ class LoadingImageView: UIImageView {
         
         path = object!.patchToPreview
         
-        url = filesDataSource.getImage(patch: object!.patchToPreview) { [weak self] (image) in
+        url = filesDataSource.getImage(patch: object!.patchToPreview) { [weak self] image in
             if self?.path == object!.patchToPreview {
                 self?.finishImageLoading(image, withAnimation: smooth)
             }
@@ -139,7 +139,7 @@ class LoadingImageView: UIImageView {
         
         activity.startAnimating()
         path = path_
-        url = filesDataSource.getImage(patch: path_!) { [weak self] (image) in
+        url = filesDataSource.getImage(patch: path_!) { [weak self] image in
             if self?.path == path_ {
                 self?.finishImageLoading(image)
             }

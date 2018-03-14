@@ -95,7 +95,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         status = .prepairing
         
         localItems.removeAll()
-        self.itemsSortedToUpload { (items) in
+        self.itemsSortedToUpload { items in
             if self.status == .prepairing {
                 self.localItems = items
                 self.lastSyncedMD5s = self.localItems.map({ $0.md5 })
@@ -129,7 +129,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                                                 if self?.status == .executing {
                                                     self?.status = .synced
                                                 }
-        }, fail: { [weak self] (error) in
+        }, fail: { [weak self] error in
             guard let `self` = self else {
                 print("\(#function): self == nil")
                 return
@@ -154,7 +154,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
-        itemsSortedToUpload { (items) in
+        itemsSortedToUpload { items in
             let newUnsyncedLocalItems = items.filter({ !self.lastSyncedMD5s.contains($0.md5) })
             
             guard !newUnsyncedLocalItems.isEmpty else {
@@ -187,7 +187,7 @@ extension CoreDataStack {
             let localItems = self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
             
             self.queue.async { [weak self] in
-                self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { (items, error) in
+                self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { items, error in
                     guard error == nil, let unsyncedItems = items else {
                         print(error!.localizedDescription)
                         completion([])
@@ -201,7 +201,7 @@ extension CoreDataStack {
         }
     }
     
-    private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?)->Void ) {
+    private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?) -> Void ) {
         guard let oldestItemDate = localItems.last?.metaDate else {
             handler([], nil)
             return
@@ -211,7 +211,7 @@ extension CoreDataStack {
         var localMd5s = localItems.map { $0.md5 }
         
         var finished = false
-        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
+        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] items in
             guard let `self` = self else {
                 handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
                 return

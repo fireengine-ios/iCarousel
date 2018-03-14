@@ -354,7 +354,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                 output.startCreatingAVAsset()
                 
                 DispatchQueue.global(qos: .default).async { [weak self] in
-                    PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] (asset, _, _) in
+                    PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
                         
                         DispatchQueue.main.async {
                             self?.output.stopCreatingAVAsset()
@@ -383,7 +383,7 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
     private func updateSelectedIndex() {
         let x = collectionView.contentOffset.x
         let w = collectionView.bounds.size.width
-        var currentPage = Int(ceil(x/w))
+        var currentPage = Int(ceil(x / w))
         
         if currentPage >= objects.count {
             currentPage = objects.count - 1

@@ -98,7 +98,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     
     override func setImage(with url: URL) {
         imageView.contentMode = .scaleAspectFill
-        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] (image, error, cacheType, url) in
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] image, error, cacheType, url in
             guard error == nil else {
                 print("SD_WebImage_setImage error: \(error!.localizedDescription)")
                 return

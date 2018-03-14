@@ -55,11 +55,11 @@ class SplashInteractor: SplashInteractorInput {
     
     func checkEULA() {
         let eulaService = EulaService()
-        eulaService.eulaCheck(success: { [weak self] (successResponce) in
+        eulaService.eulaCheck(success: { [weak self] successResponce in
             DispatchQueue.main.async {
                 self?.output.onSuccessEULA()
             }
-        }) { [weak self] (errorResponce) in
+        }) { [weak self] errorResponce in
             DispatchQueue.main.async {
                 if case ErrorResponse.error(let error) = errorResponce, error is URLError {
                     UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)

@@ -60,12 +60,12 @@ class MenloworksAppEvents {
     }
     
      static func onQuotaInfo() {
-        AccountService().quotaInfo(success: { (response) in
+        AccountService().quotaInfo(success: { response in
             guard let quotoInfo = response as? QuotaInfoResponse,
                 let quotaBytes = quotoInfo.bytes,
                 let usedBytes = quotoInfo.bytesUsed else { return }
             
-            let busyStorage = 1 - Float(usedBytes)/Float(quotaBytes)
+            let busyStorage = 1 - Float(usedBytes) / Float(quotaBytes)
             
             MenloworksTagsService.shared.onQuotaStatus(percentageValue: Int(busyStorage * 100))
             

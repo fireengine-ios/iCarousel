@@ -29,7 +29,7 @@ final class MediaPlayer: NSObject {
             currentMusicName = currentMetaData?.title ?? currentItem?.name ?? " "
             currentArtist = currentMetaData?.artist ?? " "
             
-            SDWebImageManager.shared().loadImage(with: currentMetaData?.mediumUrl, options: [], progress: nil) { [weak self] (image, data, error, type, result, url) in
+            SDWebImageManager.shared().loadImage(with: currentMetaData?.mediumUrl, options: [], progress: nil) { [weak self] image, data, error, type, result, url in
                 
                 if url == self?.currentMetaData?.mediumUrl, let image = image {
                     let artwork = MPMediaItemArtwork(image: image)

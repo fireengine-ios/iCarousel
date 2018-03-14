@@ -10,7 +10,7 @@ import Foundation
 
 typealias RequestResponse = (Data?, URLResponse?, Error?) -> Swift.Void
 typealias RequestFileDownloadResponse = (URL?, URLResponse?, Error?) -> Swift.Void
-typealias RequestFileUploadResponse =  (Data?, URLResponse?, Error?) -> Swift.Void
+typealias RequestFileUploadResponse = (Data?, URLResponse?, Error?) -> Swift.Void
 
 enum RequestMethod: String {
     case Post   = "POST"
@@ -185,7 +185,7 @@ class RequestService {
         guard let url = request.url
             else { return }
         
-        SingletonStorage.shared.progressDelegates.invoke(invocation: { (delegate) in
+        SingletonStorage.shared.progressDelegates.invoke(invocation: { delegate in
             delegate.didSend(ratio: Float(progress.fractionCompleted), for: url)
         })
     }

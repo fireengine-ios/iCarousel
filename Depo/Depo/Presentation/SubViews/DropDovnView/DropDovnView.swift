@@ -166,7 +166,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.constraint!.constant = h
             self.cornerView!.setNeedsUpdateConstraints()
-        }) { [weak self] (flag) in
+        }) { [weak self] flag in
             self?.tableView!.isHidden = !show
             if show {
                 self?.delegate?.onDidShow?()

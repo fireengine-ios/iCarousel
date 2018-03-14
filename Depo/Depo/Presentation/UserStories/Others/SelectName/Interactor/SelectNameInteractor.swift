@@ -92,7 +92,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
                     ItemOperationManager.default.newAlbumCreated()
                 }
             }
-        }) { (error) in
+        }) { error in
             DispatchQueue.main.async {[weak self] in
                 self?.output.operationFaildWithError(errorMessage: error.localizedDescription)
             }
@@ -104,7 +104,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
     }
     
     private func onCreateFolderWithName(name: String) {
-        let createfolderParam  = CreatesFolder(folderName: name,
+        let createfolderParam = CreatesFolder(folderName: name,
                                                rootFolderName: rootFolderID ?? "",
                                                isFavourite: isFavorite ?? false)
         
@@ -116,7 +116,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
                         ItemOperationManager.default.newFolderCreated()
                     }
                 }
-            }, fail: {[weak self] (error) in
+            }, fail: {[weak self] error in
                 DispatchQueue.main.async {
                     self?.output.operationFaildWithError(errorMessage: error.localizedDescription)
                 }

@@ -105,7 +105,7 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
     
     func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
         guard let quotaBytes = quotoInfo.bytes, let usedBytes = quotoInfo.bytesUsed else { return }
-        usersStorrageUssesProgress.progress = 1 - Float(usedBytes)/Float(quotaBytes)
+        usersStorrageUssesProgress.progress = 1 - Float(usedBytes) / Float(quotaBytes)
         
         let quotaString = quotaBytes.bytesString
         var remaind = quotaBytes - usedBytes

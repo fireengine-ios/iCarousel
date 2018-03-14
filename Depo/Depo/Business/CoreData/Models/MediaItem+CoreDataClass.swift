@@ -52,7 +52,7 @@ public class MediaItem: NSManagedObject {
         
         switch wrapData.patchToPreview {
         case let .remoteUrl(url):
-            patchToPreviewValue =  url?.absoluteString
+            patchToPreviewValue = url?.absoluteString
         case let .localMediaContent(assetContent):
             localFileID = assetContent.asset.localIdentifier
             patchToPreviewValue = nil
@@ -70,7 +70,7 @@ public class MediaItem: NSManagedObject {
         self.metadata = metaData
         
         //LR-2356
-        let albums = wrapData.albums?.map({ (albumUuid) -> MediaItemsAlbum in
+        let albums = wrapData.albums?.map({ albumUuid -> MediaItemsAlbum in
             MediaItemsAlbum(uuid: albumUuid, context: context)
         })
         self.albums = NSOrderedSet(array: albums ?? [])

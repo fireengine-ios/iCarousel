@@ -51,12 +51,12 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     }
     
     func requestStatus() {
-        fbService.requestStatus(success: { [weak self] (responseObject) in
+        fbService.requestStatus(success: { [weak self] responseObject in
             let fbStatus = responseObject as! FBStatusObject
             DispatchQueue.main.async {
                 self?.output?.statusSuccessCallback(status: fbStatus)
             }
-        }) { [weak self] (error) in
+        }) { [weak self] error in
             DispatchQueue.main.async {
                 self?.output?.statusFailureCallback(errorMessage: error.description)
             }
@@ -64,11 +64,11 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     }
     
     func requestStart() {
-        fbService.requestStart(success: { [weak self] (_) in
+        fbService.requestStart(success: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.output?.startSuccessCallback()
             }
-        }) { [weak self] (error) in
+        }) { [weak self] error in
             DispatchQueue.main.async {
                 self?.output?.startFailureCallback(errorMessage: error.description)
             }
@@ -76,12 +76,12 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     }
     
     func requestStop() {
-        fbService.requestStop(success: { [weak self] (_) in
+        fbService.requestStop(success: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.output?.stopSuccessCallback()
             }
             
-        }) { [weak self] (error) in
+        }) { [weak self] error in
             DispatchQueue.main.async {
                 self?.output?.stopFailureCallback(errorMessage: error.description)
             }

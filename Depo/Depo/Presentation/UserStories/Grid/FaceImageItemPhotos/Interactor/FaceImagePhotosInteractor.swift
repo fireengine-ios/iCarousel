@@ -67,7 +67,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
                 }
             }
@@ -92,7 +92,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
                 }
             }
@@ -117,7 +117,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
                 }
             }

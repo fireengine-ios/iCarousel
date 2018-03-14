@@ -41,7 +41,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darcBlueColor
         
-        let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] (action) in
+        let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
             MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareSmallSize(sourceRect: sourceRect)
@@ -52,7 +52,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         controler.addAction(smallAction)
         
-        let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] (action) in
+        let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
             MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareOrignalSize(sourceRect: sourceRect)
@@ -62,7 +62,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         controler.addAction(originalAction)
         
-        let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] (action) in
+        let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
             MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
@@ -102,13 +102,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let downloader = FilesDownloader()
         output?.operationStarted(type: .share)
         
-        downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] (fileURLs, directoryURL) in
+        downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] fileURLs, directoryURL in
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .share)
                     
                     let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
                     
-                    activityVC.completionWithItemsHandler = { (_, _, _, _) in
+                    activityVC.completionWithItemsHandler = { _, _, _, _ in
                         do {
                             try FileManager.default.removeItem(at: directoryURL)
                         } catch {
@@ -123,7 +123,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     let router = RouterVC()
                     router.presentViewController(controller: activityVC)
                 }
-            }, fail: { [weak self] (errorMessage) in
+            }, fail: { [weak self] errorMessage in
                 self?.output?.operationFailed(type: .share, message: errorMessage)
         })
     }
@@ -140,7 +140,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func shareViaLink(sourceRect: CGRect?) {
         output?.operationStarted(type: .share)
-        fileService.share(sharedFiles: sharingItems, success: {[weak self] (url) in
+        fileService.share(sharedFiles: sharingItems, success: {[weak self] url in
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: .share)
                 
@@ -323,7 +323,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let itemsFolders = item.flatMap { $0.parent }
         let folderSelector = selectFolderController()
         
-        folderSelector.selectFolder(select: { [weak self] (folder) in
+        folderSelector.selectFolder(select: { [weak self] folder in
             if itemsFolders.contains(folder) {
                 folderSelector.dismiss(animated: true, completion: {
                     self?.output?.showWrongFolderPopup()
@@ -354,7 +354,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         let folderSelector = selectFolderController()
         
-        folderSelector.selectFolder(select: { [weak self] (folder) in
+        folderSelector.selectFolder(select: { [weak self] folder in
             self?.fileService.move(items: item, toPath: folder,
                                    success: self?.succesAction(elementType: .copy),
                                    fail: self?.failAction(elementType: .copy))
@@ -390,7 +390,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                  fail: failAction(elementType: .download))
         } else if let albums = item as? [AlbumItem] {
             
-            photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] (itemsByAlbums) in
+            photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] itemsByAlbums in
                 self?.fileService.download(itemsByAlbums: itemsByAlbums,
                                           success: self?.succesAction(elementType: .download),
                                           fail: self?.failAction(elementType: .download))
@@ -555,7 +555,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
         }
         
-        let failClosure: FailResponse = { [weak self] (errorResponse) in
+        let failClosure: FailResponse = { [weak self] errorResponse in
             DispatchQueue.main.async {
                 self?.output?.compliteAsyncOperationEnableScreen()
                 if errorResponse.errorDescription == TextConstants.canceledOperationTextError {

@@ -16,10 +16,10 @@ protocol LBCellsDelegate: class {
 class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate, CollectionViewCellDataProtocol {
     
     internal weak var delegate: LBCellsDelegate?
-    var isCellSelected: Bool            = false
-    var isCellSelectionEnabled: Bool    = false
+    var isCellSelected: Bool = false
+    var isCellSelectionEnabled: Bool = false
     
-    var isAlreadyConfigured             = false
+    var isAlreadyConfigured = false
     
     static let durationOfSelection: Double = 0.5
     

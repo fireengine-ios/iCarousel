@@ -80,7 +80,7 @@ final class CaptchaViewController: UIViewController {
         captchaService.getCaptcha(uuid: nil, type: .image, sucess: { [weak self] response in
             
             DispatchQueue.main.async { [weak self] in
-                if let captchaResponse =  response as? CaptchaResponse,
+                if let captchaResponse = response as? CaptchaResponse,
                     let _ = captchaResponse.type,
                     let captchaData = captchaResponse.data {
                         self?.captchaImage = UIImage(data: captchaData)
@@ -100,7 +100,7 @@ final class CaptchaViewController: UIViewController {
         captchaService.getCaptcha(uuid: currentCaptchaID, type: .audio, sucess: { [weak self] response in
             
             DispatchQueue.main.async { [weak self] in
-                if let captchaResponse =  response as? CaptchaResponse,
+                if let captchaResponse = response as? CaptchaResponse,
                     let _ = captchaResponse.type,
                     let captchaData = captchaResponse.data {
                     self?.captchaAudio = captchaData
