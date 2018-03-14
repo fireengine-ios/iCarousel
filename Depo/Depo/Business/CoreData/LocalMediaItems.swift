@@ -133,10 +133,13 @@ extension CoreDataStack {
                 var uuids = [String]()
                 pageRemoteItems.forEach{
                     md5s.append($0.md5)
-                    uuids.append($0.uuid)
+                    let splitedUuid = $0.uuid.split(separator: "~")
+                    if let localID = splitedUuid.first {
+                        uuids.append(String(localID))
+                    }
                 }
                 
-                let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR uuidValue IN %@)", md5s, uuids)
+                let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR localFileID IN %@)", md5s, uuids)
                 request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem), basePredicateString])
                 if let localItems = try? backgroundContext.fetch(request) {
                     let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
@@ -151,12 +154,13 @@ extension CoreDataStack {
         var uuids = [String]()
         pageRemoteItems.forEach{
             md5s.append($0.md5)
-            uuids.append($0.uuid)
+            let splitedUuid = $0.uuid.split(separator: "~")
+            if let localID = splitedUuid.first {
+                uuids.append(String(localID))
+            }
         }
 
-        let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR uuidValue IN %@)", md5s, uuids)
-        
-        
+        let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR localFileID IN %@)", md5s, uuids)
         
         var datePredicate = NSPredicate()
         
@@ -303,17 +307,7 @@ extension CoreDataStack {
         
         return allList.filter { !alredySavedIDs.contains( $0.localIdentifier )}
     }
-        
-    /// maybe will be need
-//    func localStorageContains(assetId: String) -> Bool {
-//        
-//        let context = mainContext
-//        let predicate = NSPredicate(format: "localFileID == %@", assetId)
-//        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
-//        
-//        return Bool(items.count != 0)
-//    }
-        
+    
     func removeLocalMediaItems(with assetIdList: [String]) {
         guard assetIdList.count > 0 else {
             return
