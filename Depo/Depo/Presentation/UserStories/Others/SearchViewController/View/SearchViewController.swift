@@ -86,6 +86,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
                 collectionView.reloadItems(at: allVisibleCells)
             })
         }
+        navigationItem.hidesBackButton = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
