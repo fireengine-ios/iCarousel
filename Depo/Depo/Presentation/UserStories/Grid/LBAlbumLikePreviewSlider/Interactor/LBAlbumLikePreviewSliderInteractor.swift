@@ -88,9 +88,17 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         
         group.notify(queue: queue) { [weak self] in
              DispatchQueue.main.async {
-                if let `self` = self {
-                    self.output.operationSuccessed(withItems: self.currentItems)
+                guard let `self` = self else {
+                    return
                 }
+                
+                let items = self.currentItems.sorted(by: { item1, item2 -> Bool in
+                    let type1 = item1.type ?? .album
+                    let type2 = item2.type ?? .album
+                    return type1.rawValue < type2.rawValue
+                })
+                
+                self.output.operationSuccessed(withItems: items)
             }
         }
     }
