@@ -25,7 +25,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                     }
                     ItemOperationManager.default.filesAddedToAlbum()
                 }
-            }, fail: { [weak self] (error) in
+            }, fail: { [weak self] error in
                 DispatchQueue.main.async {
                     if let `self` = self {
                         self.output.asyncOperationFail(errorMessage: TextConstants.failWhileAddingToAlbum)
@@ -46,7 +46,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                     }
                     ItemOperationManager.default.filesUploadToFolder()
                 }
-            }, fail: { [weak self] (fail) in
+            }, fail: { [weak self] fail in
                 DispatchQueue.main.async {
                     if let `self` = self {
                         self.output.asyncOperationFail(errorMessage: TextConstants.failWhileuploadFromLifeBoxCopy)

@@ -185,7 +185,7 @@ extension ShareViewController {
             if itemProvider.hasItemConformingToTypeIdentifier(imageType) {
                 
                 group.enter()
-                itemProvider.loadItem(forTypeIdentifier: imageType, options: nil) { (item, error) in
+                itemProvider.loadItem(forTypeIdentifier: imageType, options: nil) { item, error in
                     guard let path = item as? URL else {
                         group.leave()
                         return
@@ -198,7 +198,7 @@ extension ShareViewController {
             } else if itemProvider.hasItemConformingToTypeIdentifier(pdfType) {
                 
                 group.enter()
-                itemProvider.loadItem(forTypeIdentifier: pdfType, options: nil) { (item, error) in
+                itemProvider.loadItem(forTypeIdentifier: pdfType, options: nil) { item, error in
                     guard let path = item as? URL else {
                         group.leave()
                         return
@@ -214,7 +214,7 @@ extension ShareViewController {
                     if itemProvider.hasItemConformingToTypeIdentifier(type) {
                         
                         group.enter()
-                        itemProvider.loadItem(forTypeIdentifier: type, options: nil) { (item, error) in
+                        itemProvider.loadItem(forTypeIdentifier: type, options: nil) { item, error in
                             guard let path = item as? URL else {
                                 group.leave()
                                 return
@@ -233,7 +233,7 @@ extension ShareViewController {
                 if itemProvider.hasItemConformingToTypeIdentifier(dataType) {
                     
                     group.enter()
-                    itemProvider.loadItem(forTypeIdentifier: dataType, options: nil) { (item, error) in
+                    itemProvider.loadItem(forTypeIdentifier: dataType, options: nil) { item, error in
                         guard let path = item as? URL else {
                             group.leave()
                             return

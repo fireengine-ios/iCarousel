@@ -30,7 +30,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping VoidHandler) {
         log.debug("LocationManager checkDoWeNeedShowLocationPermissionAllert")
-        SingletonStorage.shared.getUniqueUserID(success: { (uniqueUserID) in
+        SingletonStorage.shared.getUniqueUserID(success: { uniqueUserID in
             let key = uniqueUserID + "locationPermission"
             let permission = UserDefaults.standard.integer(forKey: key)
             if permission == 0 {
@@ -48,7 +48,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 
         self.checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
             let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { (action) in
+            let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { action in
                 UIApplication.shared.openGlobalSettings()
             })
             let cancelAction = UIAlertAction(title: TextConstants.cancel, style: .cancel, handler: nil)
@@ -61,8 +61,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func startUpdateLocation() {
         log.debug("LocationManager startUpdateLocation")
 
-        AutoSyncDataStorage.shared.getAutoSyncSettingsForCurrentUser(success: { [weak self] (settings, _) in
-            
+        AutoSyncDataStorage.shared.getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, _ in
             guard let `self` = self else {
                 return
             }

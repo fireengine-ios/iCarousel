@@ -107,10 +107,10 @@ class CreateStoryMusicItem: ObjectRequestResponse {
     var path: URL?
     
     override func mapping() {
-        id          = json?[CreateStoryPropertyName.idString].int64
-        fileName    = json?[CreateStoryPropertyName.fileName].string
-        type        = json?[CreateStoryPropertyName.type].string
-        path        = json?[CreateStoryPropertyName.path].url
+        id = json?[CreateStoryPropertyName.idString].int64
+        fileName = json?[CreateStoryPropertyName.fileName].string
+        type = json?[CreateStoryPropertyName.type].string
+        path = json?[CreateStoryPropertyName.path].url
     }
 }
 

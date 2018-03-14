@@ -101,7 +101,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     // MARK: - SearchBarButtonPressed
     
     func configureNavBarActions() {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] (_) in
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
             guard let `self` = self else {
                 return
             }

@@ -51,7 +51,6 @@ struct SearchJsonKey {
     static let ImageWidth = "Image-Width"
     static let ImageDateTime = "Image-DateTime"
     static let VideoPreview = "Video-Preview"
-    static let DocumentPreview = "Document-Preview"
     
     // music metadata
     
@@ -90,7 +89,6 @@ final class BaseMetaData: ObjectRequestResponse {
     var mediumUrl: URL?
     var smalURl: URL?
     var videoPreviewURL: URL?
-    var documentPreviewURL: URL?
     
     // music
     var artist: String?
@@ -124,11 +122,10 @@ final class BaseMetaData: ObjectRequestResponse {
         height = json?[SearchJsonKey.ImageHeight].int16
         width = json?[SearchJsonKey.ImageWidth].int16
         takenDate = json?[SearchJsonKey.ImageDateTime].date
-        largeUrl =  json?[SearchJsonKey.ThumbnailLarge].url
+        largeUrl = json?[SearchJsonKey.ThumbnailLarge].url
         mediumUrl = json?[SearchJsonKey.Thumbnail_Medium].url
         smalURl = json?[SearchJsonKey.ThumbnailSmall].url
         videoPreviewURL = json?[SearchJsonKey.VideoPreview].url
-        documentPreviewURL = json?[SearchJsonKey.DocumentPreview].url
         
         artist = json?[SearchJsonKey.Artist].string
         album = json?[SearchJsonKey.Album].string

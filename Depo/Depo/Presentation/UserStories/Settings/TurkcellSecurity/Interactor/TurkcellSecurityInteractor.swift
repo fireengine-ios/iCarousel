@@ -32,7 +32,7 @@ class TurkcellSecurityInteractor {
 // MARK: TurkcellSecurityInteractorInput
 extension TurkcellSecurityInteractor: TurkcellSecurityInteractorInput {
     func requestTurkcellSecurityState() {
-        AccountService().securitySettingsInfo(success: { [weak self] (response) in
+        AccountService().securitySettingsInfo(success: { [weak self] response in
             guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
                 let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
                 let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
@@ -44,7 +44,7 @@ extension TurkcellSecurityInteractor: TurkcellSecurityInteractorInput {
                 self?.output?.acquiredTurkcellSecurityState(passcode: turkCellPasswordOn, autoLogin: turkCellAutoLogin)
             }
             
-        }) { [weak self] (error) in
+        }) { [weak self] error in
             DispatchQueue.main.async {
                 self?.output?.failedToAcquireTurkcellSecurityState()
             }
@@ -52,7 +52,7 @@ extension TurkcellSecurityInteractor: TurkcellSecurityInteractorInput {
     }
     
     func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool) {
-        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: passcode, mobileNetworkAuthEnabled: autoLogin, success: { [weak self] (response) in
+        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: passcode, mobileNetworkAuthEnabled: autoLogin, success: { [weak self] response in
             guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
                 let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
                 let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {

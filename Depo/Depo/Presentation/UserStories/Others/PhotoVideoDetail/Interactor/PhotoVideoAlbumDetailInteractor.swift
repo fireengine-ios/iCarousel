@@ -39,7 +39,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFailed(withType: .removeFromFaceImageAlbum)
@@ -63,7 +63,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFailed(withType: .removeFromFaceImageAlbum)
@@ -87,7 +87,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFailed(withType: .removeFromFaceImageAlbum)

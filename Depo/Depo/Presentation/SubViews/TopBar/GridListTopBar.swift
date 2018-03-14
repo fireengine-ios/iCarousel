@@ -28,7 +28,7 @@ class GridListTopBar: UIViewController {
     
     weak var delegate: GridListTopBarDelegate?
     
-    let sortButtonImageInset =  UIEdgeInsets(top: 0, left: 60, bottom: 0, right: -20)
+    let sortButtonImageInset = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: -20)
     
     var selectedIndex = -1
     
@@ -136,7 +136,7 @@ class GridListTopBar: UIViewController {
         let router = RouterVC()
         let rootVC = router.tabBarVC
 
-        let popUpHeight = sortingTable.defaultCellHeight*CGFloat(titles.count)
+        let popUpHeight = sortingTable.defaultCellHeight * CGFloat(titles.count)
         
         let floatingVC = FloatingContainerVC.createContainerVC(withContentView: sortingTable,
                                                                sourceView: sortByButton.imageView!,

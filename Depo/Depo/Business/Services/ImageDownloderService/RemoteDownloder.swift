@@ -41,7 +41,7 @@ class ImageDownloder {
         
         let item = downloder.downloadImage(with: patch,
                                            options: [.lowPriority/*,.useNSURLCache*/],
-                                           progress: nil) { (image, data, error, bool) in
+                                           progress: nil) { image, data, error, bool in
                                             
                                             SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
                                             compliteImage(image)
@@ -57,7 +57,7 @@ class ImageDownloder {
     func getImagesByImagesURLs(list: [ImageForDowload], images: @escaping ([URL]) -> Swift.Void) {
         if list.count > 0 {
             let imageObject = list.first
-            getImage(patch: imageObject?.downloadURL, compliteImage: {(image) in
+            getImage(patch: imageObject?.downloadURL, compliteImage: {image in
                 var urlsArray = [URL]()
                 
                 var url: URL? = nil
@@ -77,7 +77,7 @@ class ImageDownloder {
                 } else {
                     let decreasedArray = Array(list.dropFirst())
                     let downloader = ImageDownloder()
-                    downloader.getImagesByImagesURLs(list: decreasedArray, images: { (array) in
+                    downloader.getImagesByImagesURLs(list: decreasedArray, images: { array in
                         var urlsArray = [URL]()
                         if let url_ = url {
                             urlsArray.append(url_)
@@ -147,7 +147,7 @@ class FilesDownloader {
             group.enter()
             let params = BaseDownloadRequestParametrs(urlToFile: file.url, fileName: file.name, contentType: file.type)
             
-            requestService.executeDownloadRequest(param: params) { [weak self] (urlToTmpFile, response, error) in
+            requestService.executeDownloadRequest(param: params) { [weak self] urlToTmpFile, response, error in
                 if let urlToTmpFile = urlToTmpFile {
                     let destinationURL = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
                     do {

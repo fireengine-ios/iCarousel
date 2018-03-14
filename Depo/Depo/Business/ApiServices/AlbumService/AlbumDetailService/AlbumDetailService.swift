@@ -26,7 +26,7 @@ class AlbumDetailService: RemoteItemsService {
 
         let serchParam = AlbumDetalParameters (albumUuid: albumUUID, sortBy: sortBy, sortOrder: sortOrder, page: currentPage, size: requestSize)
         
-        remote.searchContentAlbum(param: serchParam, success: { (response) in
+        remote.searchContentAlbum(param: serchParam, success: { response in
             guard let resultResponse = (response as? AlbumDetailResponse)?.list else {
                 fail?()
                 return
@@ -50,7 +50,7 @@ class AlbumDetailService: RemoteItemsService {
         requestSize = 1
         
         let serchParam = AlbumDetalParameters (albumUuid: albumUUID, sortBy: sortBy, sortOrder: sortOrder, page: currentPage, size: requestSize)
-        remote.searchContentAlbum(param: serchParam, success: { (response) in
+        remote.searchContentAlbum(param: serchParam, success: { response in
             guard let coverPhoto = (response as? AlbumDetailResponse)?.coverPhoto else {
                 fail()
                 return

@@ -80,7 +80,7 @@ final class BiometricsManagerImp: BiometricsManager {
             return handler(false)
         }
         
-        LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { (success, error) in
+        LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
             DispatchQueue.main.async {
                 handler(success)
             }

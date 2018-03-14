@@ -360,7 +360,7 @@ class AuthenticationService: BaseRequestService {
     func signUp(user: SignUpUser, sucess: SuccessResponse?, fail: FailResponse?) {
         log.debug("AuthenticationService logout")
         
-        let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: { (value) in
+        let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: { value in
             MenloworksAppEvents.onSignUp()
             sucess?(value)
         }, fail: fail)

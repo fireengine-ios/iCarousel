@@ -56,7 +56,7 @@ class SmartTimerLabel: UILabel {
             }
             let currentDate = Date()
             
-            let timeIntervalFromStartCurrentDate =  currentDate.timeIntervalSince(startDateUnwraped)
+            let timeIntervalFromStartCurrentDate = currentDate.timeIntervalSince(startDateUnwraped)
             if Int(timeIntervalFromStartCurrentDate) > self.lifeLimit {
                 self.timerCycle = self.lifeLimit
                 return

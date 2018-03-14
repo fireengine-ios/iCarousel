@@ -14,7 +14,7 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
     
     override func shareViaLink(sourceRect: CGRect?) {
         output?.operationStarted(type: .share)
-        fileService.share(sharedFiles: sharingItems, success: {[weak self] (url) in
+        fileService.share(sharedFiles: sharingItems, success: {[weak self] url in
                 DispatchQueue.main.async {
     
                     self?.output?.operationFinished(type: .share)                
@@ -32,7 +32,7 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
         let itemsFolders = item.flatMap { $0.parent }
         let router = RouterVC()
         let folderSelector = router.selectFolder(folder: nil)
-        folderSelector.selectFolderBlock = { [weak self] (folder) in
+        folderSelector.selectFolderBlock = { [weak self] folder in
             if itemsFolders.contains(folder) {
                 folderSelector.dismiss(animated: true, completion: {
                     self?.output?.showWrongFolderPopup()

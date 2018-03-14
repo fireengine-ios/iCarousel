@@ -18,7 +18,7 @@ class AutoSyncDataStorage: NSObject {
             guard let `self` = self else {
                 return
             }
-            
+
             let settings: AutoSyncSettings
             
             self.uniqueUserID = accountInfoResponce.projectID ?? ""

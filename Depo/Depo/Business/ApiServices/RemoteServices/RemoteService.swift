@@ -178,7 +178,7 @@ class NextPageOperation: Operation {
             return
         }
         let semaphore = DispatchSemaphore(value: 0)
-        searchService.searchByField(param: requestParam, success: { [weak self] (response)  in
+        searchService.searchByField(param: requestParam, success: { [weak self] response  in
             
             guard let `self` = self else {
                 return
@@ -360,7 +360,7 @@ class FaceImageDetailService: AlbumDetailService {
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue?) {
-        nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: { (items) in
+        nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: { items in
             if items.isEmpty {
                 fail?()
             } else {

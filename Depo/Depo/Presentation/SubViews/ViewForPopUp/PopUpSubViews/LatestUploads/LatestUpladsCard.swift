@@ -136,7 +136,7 @@ extension LatestUpladsCard: UICollectionViewDelegateFlowLayout {
     
     private func calculateLinearDimensionsForCell() -> CGFloat {
         let w = collectionView.frame.size.width
-        let cellW = (w - minSeparatorSize * CGFloat(numberOfСellInRow) + minSeparatorSize)/CGFloat(numberOfСellInRow)
+        let cellW = (w - minSeparatorSize * CGFloat(numberOfСellInRow) + minSeparatorSize) / CGFloat(numberOfСellInRow)
         return cellW
     }
 }

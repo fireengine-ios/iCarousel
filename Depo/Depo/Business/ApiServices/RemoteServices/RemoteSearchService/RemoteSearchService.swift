@@ -19,7 +19,7 @@ class RemoteSearchService: RemoteItemsService {
                                                   sortOrder: sortOrder,
                                                   page: currentPage,
                                                   size: requestSize)
-        remote.unifiedSearch(param: searchParam, success: { [weak self] (response) in
+        remote.unifiedSearch(param: searchParam, success: { [weak self] response in
             guard let response = response as? UnifiedSearchResponse else {
                 fail()
                 return

@@ -99,7 +99,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
             DispatchQueue.main.async {
                 self?.output.succesLogin()
             }
-        }, fail: { [weak self] (errorResponse)  in
+        }, fail: { [weak self] errorResponse  in
             
             let incorrectCredentioal = true
             if (incorrectCredentioal) {

@@ -61,7 +61,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     }
     
     func requestStatusForStart() {
-        dbService.requestStatus(success: { [weak self] (responseObject) in
+        dbService.requestStatus(success: { [weak self] responseObject in
             let dropboxStatus = responseObject as! DropboxStatusObject
             DispatchQueue.main.async {
                 self?.output?.statusForStartSuccessCallback(status: dropboxStatus)
