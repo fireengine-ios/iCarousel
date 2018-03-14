@@ -29,8 +29,6 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
         
         if #available(iOS 11.0, *) {
             view.removeConstraint(topIOS10Contraint)
-        } else {
-            view.removeConstraint(topIOS11Contraint)
         }
     }
     
