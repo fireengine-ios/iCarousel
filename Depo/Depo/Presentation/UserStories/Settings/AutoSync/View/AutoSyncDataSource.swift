@@ -56,6 +56,19 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         reloadTableView()
     }
     
+    private func updateCells() {
+        guard let settings = autoSyncSettings else {
+            return
+        }
+        
+        tableDataArray.removeAll()
+        let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: nil, selected: settings.isAutoSyncOptionEnabled)
+        let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.photoSetting, selected: false)
+        let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.videoSetting, selected: false)
+        tableDataArray.append(contentsOf: [headerModel, photoSettingModel, videoSettingModel])
+        reloadTableView()
+    }
+    
     func createAutoSyncSettings() -> AutoSyncSettings {
         guard let settings = autoSyncSettings else {
             return AutoSyncSettings()
@@ -160,6 +173,10 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
 extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
     func didChange(setting: AutoSyncSetting) {
         autoSyncSettings?.set(setting: setting)
+        if autoSyncSettings?.photoSetting.option == .never, autoSyncSettings?.videoSetting.option == .never {
+            autoSyncSettings?.disableAutoSync()
+            updateCells()
+        }
     }
     
     func didChangeHeight() {
@@ -172,8 +189,5 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
             constraint.constant = getTableHeight()
             tableView?.updateConstraints()
         }
-        
     }
-    
-    
 }
