@@ -26,7 +26,6 @@ import UIKit
 /// customize types for share extension
 /// https://pspdfkit.com/blog/2016/hiding-action-share-extensions-in-your-own-apps/
 /// https://stackoverflow.com/questions/46826806/ios-11-pdf-share-extension
-
 final class ShareViewController: UIViewController, ShareController {
     
     @IBOutlet private weak var containerView: UIView!
@@ -44,7 +43,6 @@ final class ShareViewController: UIViewController, ShareController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupSharedItems()
         shareConfigurator.setup()
     }
@@ -118,7 +116,7 @@ final class ShareViewController: UIViewController, ShareController {
                     case .success(_):
                         self.currentPhotoImageView.setScreenScaledImage(shareData.image)
                     case .failed(_):
-                        self.currentPhotoImageView.image = #imageLiteral(resourceName: "ImageNoDocuments")
+                        self.currentPhotoImageView.image = Images.noDocuments
                     }
                     self.currentPhotoImageView.backgroundColor = UIColor.white
                 }

@@ -230,18 +230,6 @@ class BaseRequestService {
         task.resume()
     }
     
-    func executeUploadDataRequest(param: UploadDataRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask {
-
-        let task = requestService.uploadFileRequestTask(path: param.patch,
-                                                        headerParametrs: param.header,
-                                                        fileData: param.data,
-                                                        method: RequestMethod.Put,
-                                                        timeoutInterval: 2000,
-                                                        response: response)
-        task.resume()
-        return task
-    }
-    
     // MARK: - Helpers
     
     private func beginBackgroundTask(with name: String?) -> UIBackgroundTaskIdentifier {
