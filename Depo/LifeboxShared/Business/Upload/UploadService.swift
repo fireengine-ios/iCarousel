@@ -46,13 +46,13 @@ final class UploadService {
                 
                 let dataRequest = getBaseUploadUrl { [weak self] result in
                     switch result {
-                    case .success(let path):
+                    case .success(let baseUploadUrl):
                         
                         guard let `self` = self else {
                             return
                         }
                         
-                        let uploadUrl = path + "/" + UUID().uuidString
+                        let uploadUrl = baseUploadUrl + "/" + UUID().uuidString
                         
                         let headers: HTTPHeaders = [
                             HeaderConstant.XObjectMetaFavorites: "false",

@@ -2644,6 +2644,7 @@
 		CE2976E21FD58E2000350F3A /* LocalAlbumRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976DC1FD58E1F00350F3A /* LocalAlbumRouter.swift */; };
 		CE2BA7CE1FC70B1100AA3EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		CE2DBA152058EC7B00D08C5E /* FaceImageItemsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DBA142058EC7A00D08C5E /* FaceImageItemsViewInput.swift */; };
+		CE2DBA192059043200D08C5E /* ShareDataImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DBA182059043200D08C5E /* ShareDataImageLoader.swift */; };
 		CE2F55F71F75518F00F49DA1 /* PlanType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F55F51F75515C00F49DA1 /* PlanType.swift */; };
 		CE2F55F81F7551A100F49DA1 /* SubscriptionPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F55F61F75515C00F49DA1 /* SubscriptionPlan.swift */; };
 		CE2F55FC1F7551CD00F49DA1 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F55F91F7551CD00F49DA1 /* AccountService.swift */; };
@@ -2910,7 +2911,6 @@
 		CE61D1C32046873A001D01DC /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1C02046873A001D01DC /* UploadService.swift */; };
 		CE61D1C420468759001D01DC /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
 		CE61D1C52046875A001D01DC /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
-		CE61D1CA20468DFE001D01DC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1C720468DFE001D01DC /* AsyncOperation.swift */; };
 		CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
 		CE654FAF20454A4400232025 /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FAE20454A4400232025 /* ShareData.swift */; };
 		CE654FB120454AAD00232025 /* URL+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB020454AAD00232025 /* URL+Video.swift */; };
@@ -4851,6 +4851,7 @@
 		CE2976DC1FD58E1F00350F3A /* LocalAlbumRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumRouter.swift; sourceTree = "<group>"; };
 		CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE2DBA142058EC7A00D08C5E /* FaceImageItemsViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewInput.swift; sourceTree = "<group>"; };
+		CE2DBA182059043200D08C5E /* ShareDataImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataImageLoader.swift; sourceTree = "<group>"; };
 		CE2F55F51F75515C00F49DA1 /* PlanType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanType.swift; sourceTree = "<group>"; };
 		CE2F55F61F75515C00F49DA1 /* SubscriptionPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlan.swift; sourceTree = "<group>"; };
 		CE2F55F91F7551CD00F49DA1 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
@@ -4940,7 +4941,6 @@
 		CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxShared.entitlements; sourceTree = "<group>"; };
 		CE61D1BC2046872A001D01DC /* URL+ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ContentType.swift"; sourceTree = "<group>"; };
 		CE61D1C02046873A001D01DC /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
-		CE61D1C720468DFE001D01DC /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardsService.swift; sourceTree = "<group>"; };
 		CE654FAE20454A4400232025 /* ShareData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 		CE654FB020454AAD00232025 /* URL+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Video.swift"; sourceTree = "<group>"; };
@@ -9543,7 +9543,6 @@
 			children = (
 				CE58FAF320444493007F3F54 /* MainInterface.storyboard */,
 				CE58FAF120444493007F3F54 /* ShareViewController.swift */,
-				CE109C2A2057A9C9006C9FA0 /* ShareController.swift */,
 				CEBDB1D820444D97007EE1AE /* ShareCustomizator.swift */,
 				CEBDB1E420452F6E007EE1AE /* ImageColCell.swift */,
 			);
@@ -9553,16 +9552,10 @@
 		CE1458CD2045645F00812544 /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				CE1458CA2045633D00812544 /* ShareConfigurator.swift */,
-				CE654FAE20454A4400232025 /* ShareData.swift */,
-				CE61D1C02046873A001D01DC /* UploadService.swift */,
-				CEA524B92046C95E0036FCEA /* UploadQueueService.swift */,
-				CEA524BB2046D6A10036FCEA /* UploadOperation.swift */,
-				CE61D1C720468DFE001D01DC /* AsyncOperation.swift */,
-				CE98F6DC204E721200433915 /* FileManager.swift */,
-				CE1B7622204D343500B5E12A /* Error+Localization.swift */,
-				CEE10CCF2047EAD000D97B9F /* CGSize+Scale.swift */,
-				CE98F6D8204E6BD800433915 /* UIImageView+Scale.swift */,
+				CE8BB5B420590677002EE9EA /* Entities */,
+				CE8BB5B22059062E002EE9EA /* Upload */,
+				CE8BB5B320590650002EE9EA /* Classes */,
+				CE2DBA1A2059055100D08C5E /* Extensions */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -9744,6 +9737,17 @@
 				7C942FE81EF931A7008F8A8E /* Utils */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		CE2DBA1A2059055100D08C5E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE109C2A2057A9C9006C9FA0 /* ShareController.swift */,
+				CE1B7622204D343500B5E12A /* Error+Localization.swift */,
+				CEE10CCF2047EAD000D97B9F /* CGSize+Scale.swift */,
+				CE98F6D8204E6BD800433915 /* UIImageView+Scale.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CE2F55F41F75515C00F49DA1 /* Packages */ = {
@@ -10250,6 +10254,34 @@
 				7CAC23BB1F45718700607660 /* RemoteService.swift */,
 			);
 			path = RemoteServices;
+			sourceTree = "<group>";
+		};
+		CE8BB5B22059062E002EE9EA /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				CEA524B92046C95E0036FCEA /* UploadQueueService.swift */,
+				CEA524BB2046D6A10036FCEA /* UploadOperation.swift */,
+				CE61D1C02046873A001D01DC /* UploadService.swift */,
+			);
+			path = Upload;
+			sourceTree = "<group>";
+		};
+		CE8BB5B320590650002EE9EA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CE1458CA2045633D00812544 /* ShareConfigurator.swift */,
+				CE2DBA182059043200D08C5E /* ShareDataImageLoader.swift */,
+				CE98F6DC204E721200433915 /* FileManager.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		CE8BB5B420590677002EE9EA /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				CE654FAE20454A4400232025 /* ShareData.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		CE8F44ED1F6AB7790062C2E0 /* ActivityTimelineService */ = {
@@ -15173,7 +15205,6 @@
 				CE58FB03204445E0007F3F54 /* TokenStorage.swift in Sources */,
 				CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */,
 				CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */,
-				CE61D1CA20468DFE001D01DC /* AsyncOperation.swift in Sources */,
 				CEE10CD02047EAD000D97B9F /* CGSize+Scale.swift in Sources */,
 				CE1458C72045618800812544 /* URL+Path.swift in Sources */,
 				CE1B7627204D349C00B5E12A /* Error+Alamofire.swift in Sources */,
@@ -15201,6 +15232,7 @@
 				CEBDB1D720444C73007EE1AE /* UIColor+Adjust.swift in Sources */,
 				CE18CC95204E8AC000FA3F44 /* PasscodeStorage.swift in Sources */,
 				CE654FB120454AAD00232025 /* URL+Video.swift in Sources */,
+				CE2DBA192059043200D08C5E /* ShareDataImageLoader.swift in Sources */,
 				CEBDB1E520452F6E007EE1AE /* ImageColCell.swift in Sources */,
 				CEBDB1D920444D97007EE1AE /* ShareCustomizator.swift in Sources */,
 				CE654FB72045613F00232025 /* AuthorizationURLs.swift in Sources */,
