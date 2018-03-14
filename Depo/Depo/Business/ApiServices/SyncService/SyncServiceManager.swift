@@ -152,7 +152,7 @@ class SyncServiceManager {
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         dispatchQueue.async {
             guard let syncSettings = self.settings else {
-                AutoSyncDataStorage.shared.getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, _ in
+                AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, _ in
                     if let `self` = self {
                         if self.settings == nil {
                             self.update(syncSettings: settings)
