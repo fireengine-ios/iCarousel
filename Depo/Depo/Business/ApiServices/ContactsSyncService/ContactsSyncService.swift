@@ -48,12 +48,12 @@ class ContactsSyncService: BaseRequestService {
             progress?(Int(truncating: progressPerecentage), 0, status)
         }
         
-        SyncSettings.shared().mode  = type
+        SyncSettings.shared().mode = type
         ContactSyncSDK.doSync(type)
     }
     
     func getBackUpStatus(completion: @escaping (ContactSync.SyncResponse) -> Void, fail: @escaping VoidHandler) {
-        ContactSyncSDK.getBackupStatus { (response) in
+        ContactSyncSDK.getBackupStatus { response in
             guard let response = response as? [String: Any],
                   let contactsAmount = response["contacts"] as? Int,
                   let updatedContactsAmount = response["updated"] as? Int,
@@ -140,7 +140,7 @@ class ContactsSyncService: BaseRequestService {
     func analyze(progressCallback: ProgressCallback?, successCallback: AnalyzeFinishCallback?, cancelCallback: Callback?, errorCallback: ErrorCallback?) {
         ContactSyncSDK.doAnalyze(true)
         
-        SyncSettings.shared().analyzeNotifyCallback = { (_ contactsToMerge, _ contactsToDelete) in
+        SyncSettings.shared().analyzeNotifyCallback = { contactsToMerge, contactsToDelete in
             progressCallback?(100, contactsToDelete?.count ?? 0, AnalyzeStatus.shared().analyzeStep == .ANALYZE_STEP_CLEAR_DUPLICATES ? .deleteDuplicated : .analyze)
             guard let contactsToMerge = contactsToMerge as? [String: Int],
                   let contactsToDelete = contactsToDelete as? [String] else {
@@ -262,7 +262,7 @@ class ContactsSyncService: BaseRequestService {
     private func setup() {
         let tokenStorage: TokenStorage = factory.resolve()
         SyncSettings.shared().token = tokenStorage.accessToken
-        SyncSettings.shared().url =  ContactsSyncServiceConstant.webProdURL
+        SyncSettings.shared().url = ContactsSyncServiceConstant.webProdURL
         SyncSettings.shared().environment = .productionEnvironment//.developmentEnvironment
     }
     

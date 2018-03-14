@@ -801,9 +801,9 @@ struct NumericConstants {
     static let animationDuration: Double = 0.3
     static let fastAnimationDuration: Double = 0.1
     
-    static let timeIntervalBetweenAutoSync: TimeInterval = 10*60
+    static let timeIntervalBetweenAutoSync: TimeInterval = 10 * 60
     
-    static let timeIntervalBetweenAutoSyncAfterOutOfSpaceError: TimeInterval = 60*60*12 // 12 hours
+    static let timeIntervalBetweenAutoSyncAfterOutOfSpaceError: TimeInterval = 60 * 60 * 12 // 12 hours
 
     static let freeAppSpaceLimit = 0.2
     

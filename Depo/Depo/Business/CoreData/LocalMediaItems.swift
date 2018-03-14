@@ -16,7 +16,7 @@ extension CoreDataStack {
         let queue = DispatchQueue(label: "Append Local Item ")
         queue.async {
             let localMediaStorage = LocalMediaStorage.default
-            localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
+            localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { authorized, status in
                 if authorized {
                     self.insertFromPhotoFramework(progress: progress, allItemsAddedCallBack: end)
                 }
@@ -31,7 +31,7 @@ extension CoreDataStack {
     func insertFromPhotoFramework(progress: AppendingLocaclItemsProgressCallback?,
                                   allItemsAddedCallBack: AppendingLocaclItemsFinishCallback?) {
         let localMediaStorage = LocalMediaStorage.default
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] accessGranted, _ in
             guard accessGranted, let `self` = self,
                 !self.inProcessAppendingLocalFiles else {
                 return
@@ -55,7 +55,7 @@ extension CoreDataStack {
                 i += 1
                 debugPrint("local ", i)
                 
-                let wrapedItem =  WrapData(asset: $0)
+                let wrapedItem = WrapData(asset: $0)
                 _ = MediaItem(wrapData: wrapedItem, context: newBgcontext)
                 
                 if i % 10 == 0 {
@@ -63,7 +63,7 @@ extension CoreDataStack {
                 }
                 addedObjects.append(wrapedItem)
                 
-                progress?(Float(i)/totalNotSavedItems)
+                progress?(Float(i) / totalNotSavedItems)
             }
             
             self.saveDataForContext(context: newBgcontext, saveAndWait: true)
@@ -145,7 +145,7 @@ extension CoreDataStack {
         let context = mainContext
         let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
         let items: [MediaItem] =  executeRequest(predicate: predicate, context: context)
-        let sortedItems = items.sorted { (item1, item2) -> Bool in
+        let sortedItems = items.sorted { item1, item2 -> Bool in
             item1.fileSizeValue < item2.fileSizeValue
         }
         let currentUserID = SingletonStorage.shared.unigueUserID

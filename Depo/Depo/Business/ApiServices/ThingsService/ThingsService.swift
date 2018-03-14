@@ -27,7 +27,7 @@ final class ThingsService: BaseRequestService {
     func getThingsAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
         let param = ThingsAlbumParameters(id: id)
         
-        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
+        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
             if let response = response as? AlbumResponse, let album = response.list.first {
                 success(album)
             } else {
@@ -71,14 +71,14 @@ final class ThingsItemsService: RemoteItemsService {
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         let param = ThingsPageParameters(pageSize: requestSize, pageNumber: currentPage)
         
-        service.getThingsPage(param: param, success: { [weak self] (response) in
+        service.getThingsPage(param: param, success: { [weak self] response in
             if let response = response as? ThingsPageResponse, !response.list.isEmpty {
                 success?(response.list.map({ ThingsItem(response: $0) }))
                 self?.currentPage += 1
             } else {
                 fail?()
             }
-        }) { (error) in
+        }) { error in
             fail?()
         }
     }

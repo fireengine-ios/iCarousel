@@ -57,7 +57,7 @@ import CoreTelephony
 //            return ""
 //        }
         
-        let dict  = callingCodeMap()
+        let dict = callingCodeMap()
         guard let isoCountryCode = carrier?.isoCountryCode?.uppercased() else {
             return ""
         }

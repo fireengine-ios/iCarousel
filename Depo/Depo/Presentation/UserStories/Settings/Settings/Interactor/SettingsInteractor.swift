@@ -47,7 +47,7 @@ class SettingsInteractor: SettingsInteractorInput {
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
                       TextConstants.settingsViewCellLogout]]
-        accountSerivese.info(success: { [weak self] (responce) in
+        accountSerivese.info(success: { [weak self] responce in
             guard let `self` = self else {
                 return
             }
@@ -59,7 +59,7 @@ class SettingsInteractor: SettingsInteractorInput {
                 self.output.cellsDataForSettings(array: array)
             }
             
-        }, fail: { [weak self] (error) in
+        }, fail: { [weak self] error in
             DispatchQueue.main.async {
                 self?.output.cellsDataForSettings(array: array)
             }
@@ -76,7 +76,7 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     func uploadPhoto(withPhoto photo: Data) {
-        accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] (response) in
+        accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] response in
             ImageDownloder().removeImageFromCache(url: self?.userInfoResponse?.urlForPhoto, completion: {
                 DispatchQueue.main.async {
                     self?.output.profilePhotoUploadSuccessed()

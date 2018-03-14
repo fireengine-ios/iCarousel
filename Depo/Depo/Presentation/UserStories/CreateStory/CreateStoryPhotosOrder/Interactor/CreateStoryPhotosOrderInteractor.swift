@@ -46,14 +46,14 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
                                        musicUUID: parameter_.audioUuid,
                                        musicId: parameter_.musicId)
             
-            CreateStoryService().getPreview(preview: t, success: { [weak self] (responce) in
+            CreateStoryService().getPreview(preview: t, success: { [weak self] responce in
                 if let self_ = self {
                     self_.isRequestStarted = false
                     DispatchQueue.main.async {
                         self_.output.goToStoryPreview(story: story_, responce: responce)
                     }
                 }
-            }, fail: { [weak self] (fail) in
+            }, fail: { [weak self] fail in
                 if let self_ = self {
                     self_.isRequestStarted = false
                     DispatchQueue.main.async {

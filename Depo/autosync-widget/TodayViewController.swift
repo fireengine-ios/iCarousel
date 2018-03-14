@@ -30,7 +30,7 @@ final class TodayViewController: UIViewController {
     }
     
     private func setupWormhole() {
-        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] (messageObject) in
+        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] messageObject in
             self?.updateFields()
         }
     }
@@ -72,10 +72,10 @@ extension TodayViewController: NCWidgetProviding {
         default:
             if WidgetService.shared.lastSyncedDate.isEmpty {
                 topLabel.text = TextConstants.widgetTitleIsStoped
-                bottomLabel.text =  String(format: TextConstants.widgetTitleLastSyncFormat, TextConstants.widgetTitleNeverSynchronized)
+                bottomLabel.text = String(format: TextConstants.widgetTitleLastSyncFormat, TextConstants.widgetTitleNeverSynchronized)
             } else {
                 topLabel.text = TextConstants.widgetTitleFinished
-                bottomLabel.text =  String(format: TextConstants.widgetTitleLastSyncFormat, widgetService.lastSyncedDate)
+                bottomLabel.text = String(format: TextConstants.widgetTitleLastSyncFormat, widgetService.lastSyncedDate)
             }
             
             activityIndicator.isHidden = true

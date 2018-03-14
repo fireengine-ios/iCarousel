@@ -362,7 +362,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
-        let lastItemCreatedDate =  isMetaDate ? lastItem.metaDate : lastItem.creationDate!
+        let lastItemCreatedDate = isMetaDate ? lastItem.metaDate : lastItem.creationDate!
         let newItemCreationDate = isMetaDate ? newItem.metaDate : newItem.creationDate!
         
         if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
@@ -391,7 +391,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func addBySize(lastItem: WrapData, newItem: WrapData) {
-        allItems[allItems.count-1].append(newItem)
+        allItems[allItems.count - 1].append(newItem)
     }
     
     private func getHeaderText(indexPath: IndexPath) -> String {
@@ -855,7 +855,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             cell_.setAssetId(local.asset.localIdentifier)
-            self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
+            self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { image, path in
                 DispatchQueue.main.async {
                     if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
                         cell_.setImage(image: image, animated: false)
@@ -1466,7 +1466,7 @@ extension BaseDataSourceForCollectionView {
         let (addedRects, removedRects) = differencesBetweenRects(previousPreheatRect, preheatRect)
         let addedAssets = addedRects
             .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
-            .flatMap { (indexPath) -> PHAsset? in
+            .flatMap { indexPath -> PHAsset? in
                 var asset: PHAsset?
                 if let item = itemForIndexPath(indexPath: indexPath) as? Item {
                     if case let PathForItem.localMediaContent(local) = item.patchToPreview {
@@ -1477,7 +1477,7 @@ extension BaseDataSourceForCollectionView {
         }
         let removedAssets = removedRects
             .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
-            .flatMap {  (indexPath) -> PHAsset? in
+            .flatMap {  indexPath -> PHAsset? in
                 var asset: PHAsset?
                 if let item = itemForIndexPath(indexPath: indexPath) as? Item {
                     if case let PathForItem.localMediaContent(local) = item.patchToPreview {

@@ -43,7 +43,7 @@ final class AutoSyncSettingsOptionView: UIView {
     }
 
     
-    //MARK: - Public
+    // MARK: - Public
     
     func setup(with option: AutoSyncOption, isSelected: Bool) {
         self.option = option
@@ -57,7 +57,7 @@ final class AutoSyncSettingsOptionView: UIView {
     }
     
     
-    //MARK: - Private
+    // MARK: - Private
     
     private func setCheckmark(selected: Bool) {
         UIView.animate(withDuration: NumericConstants.fastAnimationDuration) {
@@ -66,7 +66,7 @@ final class AutoSyncSettingsOptionView: UIView {
     }
     
     
-    //MARK: - Actions
+    // MARK: - Actions
     
     @IBAction private func buttonTapped() {
         isSelected = true

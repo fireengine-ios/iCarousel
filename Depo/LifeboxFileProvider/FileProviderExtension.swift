@@ -118,7 +118,7 @@ final class FileProviderExtension: NSFileProviderExtension {
                     return progress
                 }
                 
-                let downloadTask = URLSession.shared.downloadTask(with: thumbnailURL) { (tempURL, response, error) in
+                let downloadTask = URLSession.shared.downloadTask(with: thumbnailURL) { tempURL, response, error in
                     
                     guard !progress.isCancelled else {
                         return
@@ -199,7 +199,7 @@ final class FileProviderExtension: NSFileProviderExtension {
             return
         }
         
-        URLSession.shared.downloadTask(with: downloadURL) { (locationUrl, response, error) in
+        URLSession.shared.downloadTask(with: downloadURL) { locationUrl, response, error in
             if let error = error {
                 completionHandler(error)
             } else if let locationUrl = locationUrl {

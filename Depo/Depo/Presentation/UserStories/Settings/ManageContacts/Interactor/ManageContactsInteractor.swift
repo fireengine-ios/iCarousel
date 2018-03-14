@@ -39,7 +39,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
             return
         }
         isLoadingData = true
-        contactsSyncService.getContacts(with: currentPage, success: { [weak self] (response) in
+        contactsSyncService.getContacts(with: currentPage, success: { [weak self] response in
             guard let `self` = self else { return }
             
             self.numberOfPages = response.numberOfPages
@@ -67,7 +67,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
             return
         }
         isLoadingData = true
-        contactsSyncService.searchRemoteContacts(with: query, page: currentPage, success: { [weak self] (response) in
+        contactsSyncService.searchRemoteContacts(with: query, page: currentPage, success: { [weak self] response in
             guard let `self` = self else { return }
             
             self.numberOfPages = response.numberOfPages

@@ -53,7 +53,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
             output.switchVisibilityMode()
         }
         
-        let done = NavBarWithAction(navItem: NavigationBarList().done, action: { [weak self] (_) in
+        let done = NavBarWithAction(navItem: NavigationBarList().done, action: { [weak self] _ in
             self?.onApplySelection()
         })
         
@@ -65,7 +65,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
 
 }
 
-//MARK: - FaceImageItemsViewInput
+// MARK: - FaceImageItemsViewInput
 
 extension FaceImageItemsViewController: FaceImageItemsViewInput {
     

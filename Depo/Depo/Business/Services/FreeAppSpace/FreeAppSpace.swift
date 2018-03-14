@@ -56,7 +56,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         let serverHash = serverDuplicatesArray.map { $0.md5 }
         var array = [String]()
         for item in itemsArray {
-            let index  = serverHash.index(of: item.md5)
+            let index = serverHash.index(of: item.md5)
             if let index_ = index {
                 let serverObject = serverDuplicatesArray[index_]
                 array.append(serverObject.uuid)
@@ -82,7 +82,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func sortDuplicatesArray() {
-        duplicatesArray = duplicatesArray.sorted(by: { (obj1, obj2) -> Bool in
+        duplicatesArray = duplicatesArray.sorted(by: { obj1, obj2 -> Bool in
             if let date1 = obj1.creationDate, let date2 = obj2.creationDate, date1 > date2 {
                 return true
             }
@@ -151,7 +151,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         serverDuplicatesArray.removeAll()
         
         DispatchQueue.main.async {
-            self.localtemsArray.append(contentsOf: self.allLocalItems().sorted { (item1, item2) -> Bool in
+            self.localtemsArray.append(contentsOf: self.allLocalItems().sorted { item1, item2 -> Bool in
                 if let date1 = item1.creationDate, let date2 = item2.creationDate {
                     if (date1 > date2) {
                         return true
@@ -196,7 +196,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
         var finished = false
         
-        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
+        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] items in
             guard let self_ = self else {
                 fail()
                 return
@@ -397,7 +397,7 @@ class FreeAppService: RemoteItemsService {
             return
         } else {
             isGotAll = true
-            FreeAppSpace.default.getCheckedDuplicatesArray(checkedArray: { (array) in
+            FreeAppSpace.default.getCheckedDuplicatesArray(checkedArray: { array in
                 success?(array)
             })
         }

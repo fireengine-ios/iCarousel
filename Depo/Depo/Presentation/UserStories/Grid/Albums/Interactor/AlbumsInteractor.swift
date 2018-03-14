@@ -24,7 +24,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
     override func getAllItems(sortBy: SortedRules) {
         log.debug("AlbumsInteractor getAllItems")
 
-        guard let remote =  remoteItems as? AlbumService else {
+        guard let remote = remoteItems as? AlbumService else {
             return
         }
         remote.allAlbums(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, success: { [weak self]  albumbs in
@@ -61,7 +61,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
                 }
                 ItemOperationManager.default.filesAddedToAlbum()
             }
-        }) { [weak self] (error) in
+        }) { [weak self] error in
             log.debug("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum error")
 
             DispatchQueue.main.async {

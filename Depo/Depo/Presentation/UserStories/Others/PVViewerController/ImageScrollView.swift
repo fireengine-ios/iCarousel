@@ -79,9 +79,9 @@ final class ImageScrollView: UIScrollView {
         var zoomRect = CGRect.zero
         
         zoomRect.size.height = frame.height / scale
-        zoomRect.size.width  = frame.width  / scale
+        zoomRect.size.width = frame.width / scale
         
-        zoomRect.origin.x = center.x - (zoomRect.width  / 2.0)
+        zoomRect.origin.x = center.x - (zoomRect.width / 2.0)
         zoomRect.origin.y = center.y - (zoomRect.height / 2.0)
         
         return zoomRect
