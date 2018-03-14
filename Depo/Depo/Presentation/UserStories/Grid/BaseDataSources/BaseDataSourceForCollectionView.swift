@@ -78,14 +78,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var isHeaderless = false
     
-    var isLocalPaginationOn = false // ---------------------=======
-    var isLocalFilesRequested = false // -----------------------=========
+    private var isLocalPaginationOn = false // ---------------------=======
+    private var isLocalFilesRequested = false // -----------------------=========
     
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
-    var allLocalItems = [WrapData]()
-    var uploadedObjectID = [String]()
-    var uploadToAlbumItems = [String]()
+    private var allRemoteItems = [WrapData]() // -----------------------=========
+    private var uploadedObjectID = [String]()
+    private var uploadToAlbumItems = [String]()
     
     var needShowProgressInCell: Bool = false
     var needShowCloudIcon: Bool = true
@@ -96,9 +96,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     let filesDataSource = FilesDataSource()
     
     fileprivate var previousPreheatRect = CGRect.zero
-    
-    
-   
+
     
     private func canShowFolderFilters(filters: [GeneralFilesFiltrationType]) -> Bool {
         for filter in filters {
@@ -168,16 +166,24 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private func appendLocalItems(originalItemsArray: [WrapData], pageNum: Int, localFileasAppendedCallback: @escaping ([WrapData])->()) {
         var tempoArray = originalItemsArray
-        if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters),
+        
+        if let unwrapedFilters = originalFilters,
+            let specificFilters = getFileFilterType(filters: unwrapedFilters),
             !isOnlyNonLocal(filters: unwrapedFilters) {
+            
             switch specificFilters {
             case .video, .image:
                 
                 var lastRemote = originalItemsArray
                 if originalItemsArray.isEmpty, let lastItemFromPreviousPage = allMediaItems.last {
-                    lastRemote = all§//[lastItemFromPreviousPage]
+                    lastRemote = [lastItemFromPreviousPage]// all§MediaItems//
                 }
                 let isFirstPage = (pageNum == 1)
+                
+                if isPaginationDidEnd {
+                    debugPrint("LastPage")
+                }
+                
                 CoreDataStack.default.getLocalFilesForPhotoVideoPage(filesType: specificFilters,
                                                                      sortType: currentSortType,
                                                                      pageRemoteItems: lastRemote,
@@ -228,13 +234,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func compoundItems(pageItems: [WrapData], pageNum: Int) {
-        self.isLocalFilesRequested = true
+        isLocalFilesRequested = true
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let `self` = self else {
                 return
             }
-            self.appendLocalItems(originalItemsArray: pageItems, pageNum: pageNum, localFileasAppendedCallback: {[weak self] imbededwithLocalsItems in
+            self.appendLocalItems(originalItemsArray: pageItems, pageNum: pageNum, localFileasAppendedCallback: { [weak self] imbededwithLocalsItems in
                 guard let `self` = self else {
                     return
                 }
@@ -243,6 +249,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 //                  self.reloadData()
                 self.isLocalFilesRequested =  false
                 DispatchQueue.main.async {
+                    if self.isPaginationDidEnd {
+                        debugPrint("LastPage Reload compoundItems")
+                    }
+                    debugPrint("Reload compoundItems")
                     self.collectionView?.reloadData()
                     self.delegate?.filesAppendedAndSorted()
                 }
@@ -369,6 +379,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private func getHeaderText(indexPath: IndexPath) -> String {
         var headerText = ""
         
+        guard allItems.count > indexPath.section,
+            allItems[indexPath.section].count > indexPath.row else {
+                return headerText
+        }
+        
         switch currentSortType {
         case .timeUp, .timeUpWithoutSection, .timeDown, .timeDownWithoutSection:
             if let date = allItems[indexPath.section].first?.creationDate {
@@ -426,6 +441,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         } else {
             isLocalPaginationOn = false
         }
+        allRemoteItems.append(contentsOf: nonEmptyMetaItems)
         compoundItems(pageItems: nonEmptyMetaItems, pageNum: pageNum)
     }
     
@@ -433,15 +449,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         allItems.removeAll()
         allMediaItems.removeAll()
-        allLocalItems.removeAll()
-        allLocalItems.append(contentsOf: getAllLocalItems())
-        DispatchQueue.main.async {
-            
-            if self.isLocalOnly() {
-                self.allItems = [self.allLocalItems]
-            }
-            self.reloadData()
-        }
+//        allLocalItems.removeAll()
+//        allLocalItems.append(contentsOf: getAllLocalItems())
+//        DispatchQueue.main.async {
+//
+////            if self.isLocalOnly() {
+////                self.allItems = [self.allLocalItems]
+////            }
+////            self.reloadData()
+//        }
     }
     
     private var sortingRules: SortedRules
@@ -462,15 +478,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         registerHeaders()
         registerCells()
         
-        self.allLocalItems.removeAll()
-        self.allLocalItems.append(contentsOf: self.getAllLocalItems())
-        
-        DispatchQueue.main.async {
-            if self.isLocalOnly() {
-                self.allItems = [self.allLocalItems]
-                self.reloadData()
-            }
-        }
+//        self.allLocalItems.removeAll()
+//        self.allLocalItems.append(contentsOf: self.getAllLocalItems())
+//
+//        DispatchQueue.main.async {
+//            if self.isLocalOnly() {
+//                self.allItems = [self.allLocalItems]
+//                self.reloadData()
+//            }
+//        }
     }
     
     private func registerCells() {
@@ -588,16 +604,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func reloadData() {
         DispatchQueue.main.async {
+            debugPrint("Reload reloadData")
             self.collectionView?.reloadData()
             self.resetCachedAssets()
         }
     }
     
-    func updateDisplayngType(type: BaseDataSourceDisplayingType){
+    func updateDisplayngType(type: BaseDataSourceDisplayingType) {
         displayingType = type
         let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
             return first < second
         })
+        debugPrint("Reload updateDisplayngType")
         collectionView?.reloadData()
         if let firstVisibleIndexPath = firstVisibleIndexPath {
             collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
@@ -648,10 +666,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return selectedItemsArray.contains(object)
     }
     
-    func onSelectObject(object: BaseDataSourceItem){
-        if (isObjctSelected(object: object)){
+    func onSelectObject(object: BaseDataSourceItem) {
+        if (isObjctSelected(object: object)) {
             selectedItemsArray.remove(object)
-        }else{
+        } else {
             if (maxSelectionCount >= 0){
                 if (selectedItemsArray.count >= maxSelectionCount){
                     if (canReselect){
@@ -805,11 +823,21 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             cellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         }
         
+        // ---------------------=======
+        if cellReUseID == nil {
+            debugPrint("LastPage Reload EMPTY CELL ID")
+            if isPaginationDidEnd {
+                debugPrint("LastPage Reload collectionView")
+            }
+            cellReUseID = CollectionViewCellsIdsConstant.cellForImage// ---------------------=======
+        }
+        // ---------------------=======
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReUseID!,
                                                       for: indexPath)
         
         if !needShowCloudIcon {
-            if let cell = cell as? CollectionViewCellForPhoto{
+            if let cell = cell as? CollectionViewCellForPhoto {
                 cell.cloudStatusImage.isHidden = true
             }
         }
@@ -862,7 +890,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             self.delegate?.getNextItems()
         }
         
-        if isLocalPaginationOn, isLastCell, isLastSection, let lastItem = allMediaItems.last, !isLocalFilesRequested {
+        if isLocalPaginationOn, isLastCell, isLastSection,
+            let lastItem = allMediaItems.last, !isLocalFilesRequested,
+            allRemoteItems.isEmpty {
             compoundItems(pageItems: [lastItem], pageNum: 0)
         }
         
@@ -1282,6 +1312,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
+        /////
+        if isPaginationDidEnd {
+            debugPrint("LastPage Reload updateCellsForObjects")
+        }
+        debugPrint("Reload updateCellsForObjects")
         collectionView?.reloadData()
         
 //        collectionView.performBatchUpdates({[weak self] in

@@ -57,8 +57,8 @@ class CoreDataStack: NSObject {
     
     var backgroundContext: NSManagedObjectContext
     
-    let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")
-    let contextSavingQueue = DispatchQueue(label: "com.lifebox.CoreDataStackSaving")//.global(qos: .)
+    let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")//, attributes: .concurrent)//DispatchQueue(label: "com.lifebox.CoreDataStack")
+    let contextSavingQueue = DispatchQueue(label: "com.lifebox.CoreDataStackSaving")
     
     var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     
@@ -67,6 +67,7 @@ class CoreDataStack: NSObject {
         mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         
+//        contextSavingQueue.
         
         super.init()
         mainContext.persistentStoreCoordinator = persistentStoreCoordinator
@@ -149,7 +150,18 @@ class CoreDataStack: NSObject {
     
     func saveMainContext() {
         mainContext.processPendingChanges()
-        saveDataForContext(context: mainContext, saveAndWait: true)
+        if mainContext.hasChanges {
+            mainContext.performAndWait{
+                do {
+                    try mainContext.save()
+//                    if !self.inProcessAppendingLocalFiles {
+//                        //TODO: some NOTIFICATION OR ACTUAL finished block
+//                    }
+                } catch {
+                    print("Error saving context ___ ")
+                }
+            }
+        }
     }
     
     @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true) {
@@ -166,24 +178,19 @@ class CoreDataStack: NSObject {
             } catch {
                 print("Error saving context ___ ")
             }
+            
+            if context.parent == self.mainContext, context != self.mainContext {
+                DispatchQueue.main.async {
+                    self.saveMainContext()
+                }
+                return
+            }
         }
         
         if context.hasChanges {
             contextSavingQueue.sync {
                 context.perform(saveBlock)
             }
-//            if (saveAndWait) {
-//                context.performAndWait(saveBlock)
-//            } else {
-//                context.perform(saveBlock)
-//            }
-        }
-        
-        if context.parent == mainContext, context != mainContext {
-            DispatchQueue.main.async {
-                self.saveMainContext()
-            }
-            return
         }
     }
 }
