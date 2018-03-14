@@ -14,7 +14,7 @@ protocol AutoSyncDataSourceDelegate: class {
 }
 
 
-class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource {
+class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView?
     @IBOutlet weak var tableHConstraint: NSLayoutConstraint?
@@ -137,7 +137,7 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
 }
 
 extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
-    func onValueChanged(model: AutoSyncModel, cell : AutoSyncSwitcherTableViewCell) {
+    func onValueChanged(model: AutoSyncModel, cell: AutoSyncSwitcherTableViewCell) {
         guard let indexPath = tableView?.indexPath(for: cell) else {
             return
         }

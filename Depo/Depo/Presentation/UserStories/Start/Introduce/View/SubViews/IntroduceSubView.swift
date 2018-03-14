@@ -43,11 +43,11 @@ class IntroduceSubView: UIView {
         if let image = imageView.image {
             let hImage = image.size.height
             let wImage = image.size.width
-            let kImage = hImage/wImage
+            let kImage = hImage / wImage
             
             let hView = imageView.frame.height
             let wView = imageView.frame.width
-            let kView = hView/wView
+            let kView = hView / wView
             
             var hDispl: CGFloat = 0
             var wDispl: CGFloat = 0
@@ -60,14 +60,14 @@ class IntroduceSubView: UIView {
                 dy = (hView - hDispl) * 0.5
             } else {
                 hDispl = hView
-                wDispl = hDispl/kImage
+                wDispl = hDispl / kImage
                 dx = (wView - wDispl) * 0.5
             }
             
             //Numbers calculated for image that should be displayed
-            let wLabel = wDispl/1.24
-            let hLabel = hDispl/4.4
-            let bottom = hDispl/25.25
+            let wLabel = wDispl / 1.24
+            let hLabel = hDispl / 4.4
+            let bottom = hDispl / 25.25
             
             let xPositionForLabel = dx + imageView.frame.origin.x + (wDispl - wLabel) * 0.5
             let yPositionForLabel = dy + imageView.frame.origin.y + (hDispl - hLabel - bottom)

@@ -39,7 +39,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
             } else {
                 var searches = [SearchCategory: [SuggestionObject]]()
             
-                self.recentSearches.searches.forEach({ (key, list) in
+                self.recentSearches.searches.forEach({ key, list in
                     if key != .people && key != .things {
                         searches[key] = list
                     }
@@ -53,7 +53,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     func searchItems(by searchText: String, item: SuggestionObject?, sortBy: SortType, sortOrder: SortOrder) {
         remoteItems.allItems(searchText, sortBy: sortBy, sortOrder: sortOrder,
-             success: { [weak self] (items) in
+             success: { [weak self] items in
                 guard let `self` = self else { return }
                 self.items(items: items)
                 DispatchQueue.main.async {
@@ -70,7 +70,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
                         } else {
                             var searches = [SearchCategory: [SuggestionObject]]()
                             
-                            self.recentSearches.searches.forEach({ (key, list) in
+                            self.recentSearches.searches.forEach({ key, list in
                                 if key != .people && key != .things {
                                     searches[key] = list
                                 }
@@ -109,13 +109,13 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     func nextItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder ) {
         remoteItems.nextItems(searchText, sortBy: sortBy, sortOrder: sortOrder,
-                              success: { [weak self] (items) in
+                              success: { [weak self] items in
                                 self?.items(items: items)
             }, fail: { })
     }
     
     func allItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder) {
-        remoteItems.allItems(searchText, sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] (items) in
+        remoteItems.allItems(searchText, sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
             self?.items(items: items)
             }, fail: { })
     }
@@ -125,7 +125,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     }
     
     func getSuggetion(text: String) {
-        remoteItems.getSuggestion(text: text, success: { [weak self] (suggestList) in
+        remoteItems.getSuggestion(text: text, success: { [weak self] suggestList in
             DispatchQueue.main.async {
                 self?.faceImageAllowed { [weak self] result in
                     guard let `self` = self else { return }
@@ -133,7 +133,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     self.output?.successWithSuggestList(list: filteredItems)
                 }
             }
-        }, fail: { (_) in
+        }, fail: { _ in
         })
     }
     

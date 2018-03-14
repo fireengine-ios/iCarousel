@@ -44,7 +44,7 @@ class CoreDataStack: NSObject {
     var mainContext: NSManagedObjectContext
     
     var newChildBackgroundContext: NSManagedObjectContext {
-        let children =  NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        let children = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         children.parent = mainContext
         return children
     }

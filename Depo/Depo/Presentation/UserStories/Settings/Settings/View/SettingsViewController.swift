@@ -266,8 +266,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
         actionSheetVC.popoverPresentationController?.sourceView = view
         
-        let originPoint = CGPoint(x: Device.winSize.width/2 - actionSheetVC.preferredContentSize.width/2,
-                                  y: Device.winSize.height/2 - actionSheetVC.preferredContentSize.height/2)
+        let originPoint = CGPoint(x: Device.winSize.width / 2 - actionSheetVC.preferredContentSize.width / 2,
+                                  y: Device.winSize.height / 2 - actionSheetVC.preferredContentSize.height / 2)
         
         let sizePoint = actionSheetVC.preferredContentSize
         actionSheetVC.popoverPresentationController?.sourceRect = CGRect(origin: originPoint, size: sizePoint)

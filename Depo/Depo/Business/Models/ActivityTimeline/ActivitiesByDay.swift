@@ -33,7 +33,7 @@ class ActivitiesByDay {
         var newIndex = index
         for i in 1 ..< list.count {
             totalCount += list[i].list.count
-            newIndex -= list[i-1].list.count
+            newIndex -= list[i - 1].list.count
             if index < totalCount {
                 return list[i].list[newIndex]
             }

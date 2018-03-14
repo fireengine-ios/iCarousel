@@ -80,7 +80,7 @@ class Upload: UploadRequestParametrs {
         return Data()
     }
     var header: RequestHeaderParametrs {
-        var header  = RequestHeaders.authification()
+        var header = RequestHeaders.authification()
         
         header = header + [ HeaderConstant.ContentType : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,

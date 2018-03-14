@@ -17,7 +17,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
     }
 
     override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
-        CoreDataStack.default.getLocalUnsynced(fieldValue: .video, service: photoVideoService) { (items) in
+        CoreDataStack.default.getLocalUnsynced(fieldValue: .video, service: photoVideoService) { items in
             completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.fileSize < $1.fileSize }))
         }
     }

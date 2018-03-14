@@ -242,7 +242,7 @@ private func setupLog() {
         fileDestination.showLineNumber = true
         fileDestination.showDate = true
         
-        let day:TimeInterval = 24 * 60 * 60
+        let day: TimeInterval = 24 * 60 * 60
         fileDestination.targetMaxTimeInterval = day * 2
         log.add(destination: fileDestination)
     }

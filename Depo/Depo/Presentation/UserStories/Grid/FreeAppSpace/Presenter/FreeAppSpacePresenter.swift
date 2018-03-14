@@ -89,7 +89,7 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
                                              onSourceView: nil,
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
-            let actionTypes  = interactor.alerSheetMoreActionsConfig?.initialTypes ?? []
+            let actionTypes = interactor.alerSheetMoreActionsConfig?.initialTypes ?? []
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              presentedBy: sender,
                                              onSourceView: nil)
