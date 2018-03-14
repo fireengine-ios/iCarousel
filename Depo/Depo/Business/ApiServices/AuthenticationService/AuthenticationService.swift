@@ -325,7 +325,6 @@ class AuthenticationService: BaseRequestService {
 
     func logout(async: Bool = true, success: SuccessLogout?) {
         func logout() {
-            SingletonStorage.shared.accountInfo = nil
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
@@ -335,7 +334,8 @@ class AuthenticationService: BaseRequestService {
             CardsManager.default.clear()
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
-            AutoSyncDataStorage.shared.clear()
+            AutoSyncDataStorage.clear()
+            SingletonStorage.shared.accountInfo = nil
             self.player.stop()
             self.cancellAllRequests()
             success?()

@@ -9,7 +9,7 @@
 class AutoSyncInteractor: AutoSyncInteractorInput {
 
     weak var output: AutoSyncInteractorOutput!
-    var dataStorage = AutoSyncDataStorage.shared
+    var dataStorage = AutoSyncDataStorage()
     var uniqueUserID: String? = ""
     let localMediaStorage = LocalMediaStorage.default
 
