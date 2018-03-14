@@ -27,8 +27,8 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
         
         self.title = TextConstants.faqViewTitle
         
-        if let url = URL(string: RouteRequests.faqContentUrl) {
-            let request = URLRequest.init(url: url)
+        if let url = URL(string: String(format: RouteRequests.faqContentUrl, Device.supportedLocale)) {
+            let request = URLRequest(url: url)
             webView.load(request)
             showSpiner()
         }
