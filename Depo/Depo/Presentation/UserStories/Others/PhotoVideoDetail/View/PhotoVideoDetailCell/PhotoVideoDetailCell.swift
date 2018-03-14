@@ -77,15 +77,12 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             imageScrollView.imageView.loadImage(with: object, isOriginalImage: true)
             playVideoButton.isHidden = (object.fileType != .video)
             tapGesture.isEnabled = (object.fileType != .video)
+            
         } else if object.fileType != .audio, object.fileType.isUnSupportedOpenType {
             imageScrollView.imageView.isHidden = true
             webView.isHidden = false
             webView.clearPage()
-            
-            if object.fileType.isDocument, let preview = object.metaData?.documentPreviewURL {
-                webView.delegate = self
-                webView.loadRequest(URLRequest(url: preview))
-            } else if let url = object.urlToFile {
+            if let url = object.urlToFile {
                 webView.delegate = self
                 webView.loadRequest(URLRequest(url: url))
             }
