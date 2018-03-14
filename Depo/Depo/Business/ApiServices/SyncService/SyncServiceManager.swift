@@ -117,7 +117,7 @@ class SyncServiceManager {
     
     func stopSync() {
         operationQueue.cancelAllOperations()
-        stop(reachabilityDidChange: false, photo: true, video: true)
+        stop(waitingForWiFi: false, photo: true, video: true)
     }
     
     
@@ -166,7 +166,7 @@ class SyncServiceManager {
             self.timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
             
             guard syncSettings.isAutoSyncEnabled else {
-                self.stop(reachabilityDidChange: false, photo: true, video: true)
+                self.stop(waitingForWiFi: false, photo: true, video: true)
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
                 MenloworksEventsService.shared.onAutosyncOff()
                 return
@@ -189,13 +189,15 @@ class SyncServiceManager {
                 let videoEnabled = (reachability.connection == .wifi && videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
                     (reachability.connection == .cellular && videoOption == .wifiAndCellular)
                 
-                self.stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
+                let waitingForWiFi = reachability.connection == .cellular && (photoOption == .wifiOnly || videoOption == .wifiOnly)
+                
+                self.stop(waitingForWiFi: waitingForWiFi, photo: !photoEnabled, video: !videoEnabled)
                 
                 if photoEnabled || videoEnabled {
                     self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
                 }
             } else {
-                self.stop(reachabilityDidChange: reachabilityChanged, photo: true, video: true)
+                self.stop(waitingForWiFi: reachabilityChanged, photo: true, video: true)
             }
         }
     }
@@ -218,10 +220,10 @@ class SyncServiceManager {
     }
     
     //stop/cancel completely
-    private func stop(reachabilityDidChange: Bool, photo: Bool, video: Bool) {
+    private func stop(waitingForWiFi: Bool, photo: Bool, video: Bool) {
         operationQueue.cancelAllOperations()
         
-        if reachabilityDidChange {
+        if waitingForWiFi {
             if photo { photoSyncService.waitForWiFi() }
             if video { videoSyncService.waitForWiFi() }
         } else {
@@ -309,7 +311,7 @@ extension SyncServiceManager {
 
 extension SyncServiceManager: ItemSyncServiceDelegate {
     func didReceiveOutOfSpaceError() {
-        stop(reachabilityDidChange: false, photo: true, video: true)
+        stop(waitingForWiFi: false, photo: true, video: true)
         if UIApplication.shared.applicationState == .background {
             timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
         }
@@ -317,7 +319,7 @@ extension SyncServiceManager: ItemSyncServiceDelegate {
     }
     
     func didReceiveError() {
-        stop(reachabilityDidChange: false, photo: true, video: true)
+        stop(waitingForWiFi: false, photo: true, video: true)
     }
 }
 
