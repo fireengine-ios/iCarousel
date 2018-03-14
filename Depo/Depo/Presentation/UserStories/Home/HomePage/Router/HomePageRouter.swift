@@ -8,7 +8,7 @@
 
 class HomePageRouter: HomePageRouterInput {
     
-    let router = RouterVC()
+    private let router = RouterVC()
     weak var presenter: HomePagePresenter!
     
     func moveToSettingsScreen() {
@@ -47,7 +47,13 @@ class HomePageRouter: HomePageRouterInput {
     }
     
     func moveToCreationStory() {
-        let router = RouterVC()
         router.createStoryName()
+    }
+    
+    func moveToSearchScreen(output: UIViewController?) {
+        let controller = router.searchView(output: output as? SearchModuleOutput)
+        output?.navigationController?.delegate = controller as? BaseViewController
+        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        router.pushViewController(viewController: controller)
     }
 }
