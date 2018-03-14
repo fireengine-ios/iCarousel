@@ -15,7 +15,7 @@ protocol RecentlySearchedFaceImageCellDelegate: class {
 
 final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
 
-    private let itemSize: CGSize = CGSize(width: Device.winSize.size.width * 40/375, height: Device.winSize.size.width * 40/375)
+    private let itemSize: CGSize = CGSize(width: Device.winSize.size.width * 40 / 375, height: Device.winSize.size.width * 40 / 375)
     
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var arrowWidth: NSLayoutConstraint!
@@ -101,6 +101,6 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
     }
     
     static func height() -> CGFloat {
-        return Device.winSize.size.width * 40/375 + 14
+        return Device.winSize.size.width * 40 / 375 + 14
     }
 }

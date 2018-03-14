@@ -185,7 +185,7 @@ class PhotosAlbumService: BaseRequestService {
     func completelyDelete(albums: DeleteAlbums, success: PhotosAlbumOperation?, fail: FailResponse?) {
         log.debug("PhotosAlbumService completelyDelete")
 
-        loadAllItemsFrom(albums: albums.albums) { (items) in
+        loadAllItemsFrom(albums: albums.albums) { items in
             log.debug("PhotosAlbumService loadAllItemsFrom")
 
             let fileService = WrapItemFileService()
@@ -220,7 +220,7 @@ class PhotosAlbumService: BaseRequestService {
     func changeCoverPhoto(parameters: ChangeCoverPhoto, success: PhotosAlbumOperation?, fail: FailResponse?) {
         log.debug("PhotosAlbumService changeCoverPhoto")
         
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { (response)  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response  in
             success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
@@ -246,7 +246,7 @@ class PhotosAlbumService: BaseRequestService {
         for album in albums {
             group.enter()
             let albumService = AlbumDetailService(requestSize: 100)
-            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { (items) in
+            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { items in
                 log.debug("PhotosAlbumService loadAllItemsFrom albumService allItems success")
 
                 allItems.append(contentsOf: items)
@@ -273,7 +273,7 @@ class PhotosAlbumService: BaseRequestService {
         for album in albums {
             group.enter()
             let albumService = AlbumDetailService(requestSize: 100)
-            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { (items) in
+            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { items in
                 log.debug("PhotosAlbumService loadItemsBy AlbumDetailService allItems success")
 
                 allItems[album] = items

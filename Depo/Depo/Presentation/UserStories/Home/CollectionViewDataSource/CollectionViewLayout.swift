@@ -23,7 +23,7 @@ class CollectionViewLayout: UICollectionViewLayout {
     
     fileprivate var cache = [UICollectionViewLayoutAttributes]()
     
-    fileprivate var contentHeight: CGFloat  = 0.0
+    fileprivate var contentHeight: CGFloat = 0.0
     fileprivate var contentWidth: CGFloat {
         let insets = collectionView!.contentInset
         return collectionView!.bounds.width - (insets.left + insets.right)
@@ -58,9 +58,9 @@ class CollectionViewLayout: UICollectionViewLayout {
                 
                 let indexPath = IndexPath(item: item, section: 0)
                 
-                let width = columnWidth - cellPadding*2
+                let width = columnWidth - cellPadding * 2
                 let cellHeight = delegate.collectionView(collectionView: collectionView!, heightForCellAtIndexPath: indexPath, withWidth: width)
-                let height = cellPadding +  cellHeight + cellPadding
+                let height = cellPadding + cellHeight + cellPadding
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
                 let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
                 

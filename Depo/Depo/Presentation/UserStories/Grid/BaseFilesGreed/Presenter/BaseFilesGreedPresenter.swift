@@ -107,6 +107,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func onStartCreatingPhotoAndVideos() {
         log.debug("BaseFilesGreedPresenter onStartCreatingPhotoAndVideos")
 
+        let service = interactor.getRemoteItemsService()
+        if service is AllFilesService ||
+            service is FavouritesService ||
+            service is PhotoAndVideoService {
+            router.showUpload()
+        }
+        
         getContent()
     }
     
@@ -297,9 +304,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         var cellWidth: CGFloat = 180
         
         if (Device.isIpad) {
-            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIpad - 1))/NumericConstants.numerCellInLineOnIpad
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2 - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIpad - 1)) / NumericConstants.numerCellInLineOnIpad
         } else {
-            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2  - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIphone - 1))/NumericConstants.numerCellInLineOnIphone
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIphone - 1)) / NumericConstants.numerCellInLineOnIphone
         }
         return CGSize(width: cellWidth, height: cellWidth)
     }
@@ -313,9 +320,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func didDelete(items: [BaseDataSourceItem]) {
-        if self is AlbumsPresenter {
-            updateNoFilesView()
-        }
+        updateNoFilesView()
     }
     
     
@@ -529,7 +534,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                              onSourceView: nil,
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
-            actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.index(of: .download) {
                 actionTypes.remove(at: downloadIdex)
             }

@@ -89,7 +89,7 @@ final class PeopleService: BaseRequestService {
         
         let param = PeopleAlbumParameters(id: id)
         
-        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
+        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
             if let response = response as? AlbumResponse, let album = response.list.first {
                 success(album)
             } else {
@@ -105,7 +105,7 @@ final class PeopleService: BaseRequestService {
         
         let param = PeopleAlbumsParameters(id: id)
         
-        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
+        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
             if let response = response as? AlbumResponse {
                 success(response.list)
             } else {
@@ -177,26 +177,26 @@ final class PeopleItemsService: RemoteItemsService {
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         let param = PeoplePageParameters(pageSize: requestSize, pageNumber: currentPage)
         
-        service.getPeoplePage(param: param, success: { [weak self] (response) in
+        service.getPeoplePage(param: param, success: { [weak self] response in
             if let response = response as? PeoplePageResponse, !response.list.isEmpty {
                 success?(response.list.map({ PeopleItem(response: $0) }))
                 self?.currentPage += 1
             } else {
                 fail?()
             }
-        }) { (error) in
+        }) { error in
             fail?()
         }
     }
     
     func searchPeople(text: String, success: ListRemoveItems?, fail: FailRemoteItems?) {
-        service.searchPeople(text: text, success: { (response) in
+        service.searchPeople(text: text, success: { response in
             if let response = response as? PeopleServiceResponse, !response.list.isEmpty {
                 success?(response.list.map({ PeopleItem(response: $0) }))
             } else {
                 fail?()
             }
-        }) { (error) in
+        }) { error in
             fail?()
         }
     }

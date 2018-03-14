@@ -20,7 +20,7 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
         group.enter()
         group.enter()
         
-        AccountService().info(success: { [weak self] (response) in
+        AccountService().info(success: { [weak self] response in
             if let userInfo = response as? AccountInfoResponse {
                 self?.userInfoResponse = userInfo
                 SingletonStorage.shared.accountInfo = userInfo
@@ -35,7 +35,7 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
             group.leave()
         })
         
-        AccountService().quotaInfo(success: { [weak self] (response) in
+        AccountService().quotaInfo(success: { [weak self] response in
             DispatchQueue.main.async {
                 self?.output.setQuotaInfo(quotoInfo: response as! QuotaInfoResponse)
             }

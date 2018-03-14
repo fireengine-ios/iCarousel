@@ -77,7 +77,7 @@ class Device {
     static var deviceInfo: [String: Any] {
         
         var result: [String: Any] = [:]
-        let device =  UIDevice.current
+        let device = UIDevice.current
         
         if let uuid = device.identifierForVendor?.uuidString {
             result["uuid"] = uuid

@@ -575,8 +575,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    var parent: String?
-    
     var isFolder: Bool?
     
     var childCount: Int64?
@@ -602,7 +600,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         status = .unknown
         patchToPreview = .remoteUrl(nil)
         // unuse parametrs
-        fileSize =  0
+        fileSize = 0
         super.init()
         md5 = "not use "
         
@@ -616,7 +614,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     init(peopleItemResponse: PeopleItemResponse) {
         id = peopleItemResponse.id
-        fileSize =  0
+        fileSize = 0
         favorites = false
         status = .unknown
         metaData = BaseMetaData()
@@ -633,7 +631,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     init(thingsItemResponse: ThingsItemResponse) {
         id = thingsItemResponse.id
-        fileSize =  0
+        fileSize = 0
         favorites = false
         status = .unknown
         metaData = BaseMetaData()
@@ -650,7 +648,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     init(placesItemResponse: PlacesItemResponse) {
         id = placesItemResponse.id
-        fileSize =  0
+        fileSize = 0
         favorites = false
         status = .unknown
         metaData = BaseMetaData()
@@ -668,7 +666,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     init(baseModel: BaseMediaContent) {
 
         fileSize = baseModel.size
-        let tmp  = LocalMediaContent(asset: baseModel.asset,
+        let tmp = LocalMediaContent(asset: baseModel.asset,
                                      urlToFile: baseModel.urlToFile)
         patchToPreview = .localMediaContent(tmp)
         tmpDownloadUrl = baseModel.urlToFile
@@ -753,7 +751,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if url == nil, fileType == .image {
                 url = remote.tempDownloadURL
             }
-        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places):
+        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
             if let mediumUrl = remote.metadata?.mediumUrl {
                 url = mediumUrl
             } else if let smallUrl = remote.metadata?.smalURl {
@@ -809,9 +807,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let url_ = mediaItem.urlToFileValue {
             url = URL(string: url_)
         }
-        tmpDownloadUrl =  url
-        
-        parent = mediaItem.parent
+        tmpDownloadUrl = url
         
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
@@ -820,7 +816,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
             if let asset = avalibleAsset {
                 let urlToFile = URL(string: url)!
-                let tmp  = LocalMediaContent(asset: asset,
+                let tmp = LocalMediaContent(asset: asset,
                                              urlToFile: urlToFile)
                 mediaItem.metadata?.duration = asset.duration
                 patchToPreview = .localMediaContent(tmp)
@@ -840,13 +836,14 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         id = mediaItem.idValue
         super.init()
+        parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
         uuid = mediaItem.uuidValue ?? ""//UUID().description
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
         creationDate = mediaItem.creationDateValue as Date?
         lastModifiDate = mediaItem.lastModifiDateValue as Date?
-        syncStatus =  SyncWrapperedStatus(value: mediaItem.syncStatusValue)
+        syncStatus = SyncWrapperedStatus(value: mediaItem.syncStatusValue)
         syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         fileType = FileType(value: mediaItem.fileTypeValue)
         isFolder = mediaItem.isFolder

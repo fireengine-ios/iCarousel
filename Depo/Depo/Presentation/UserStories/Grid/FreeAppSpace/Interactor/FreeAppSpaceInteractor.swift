@@ -10,6 +10,8 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     
     var isDeleteRequestRunning = false
     
+    private let fileService = FileService()
+    
     func onDeleteSelectedItems(selectedItems: [WrapData]) {
         if (isDeleteRequestRunning) {
             return
@@ -18,7 +20,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         isDeleteRequestRunning = true
         let uuids = FreeAppSpace.default.getUIDSForObjects(itemsArray: selectedItems)
         
-        FileService().details(uuids: uuids, success: { [weak self] (objects) in
+        fileService.details(uuids: uuids, success: { [weak self] objects in
             //let localFilesForDelete = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
             let array = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
             if (array.isEmpty) {
@@ -66,9 +68,15 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     }
                 }
             })
-        }) { (error) in
-            
-        }
+        }, fail: { [weak self] error in
+            self?.isDeleteRequestRunning = false
+            if let presenter = self?.output as? FreeAppSpacePresenter {
+                DispatchQueue.main.async {
+                    presenter.canceled()
+                }
+            }
+            UIApplication.showErrorAlert(message: error.localizedDescription)
+        })
     }
     
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {

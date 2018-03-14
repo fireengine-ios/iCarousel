@@ -12,7 +12,7 @@ class CreateStoryPhotosOrderViewController: BaseViewController, CreateStoryPhoto
 
     var output: CreateStoryPhotosOrderViewOutput!
     
-    private var fileDataSource =  FilesDataSource()
+    private var fileDataSource = FilesDataSource()
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -152,7 +152,7 @@ class CreateStoryPhotosOrderViewController: BaseViewController, CreateStoryPhoto
         
         let object = collectionViewData[indexPath.row]
         cell_.setPosition(position: indexPath.row + 1)
-        fileDataSource.getImage(patch: object.patchToPreview) { [weak self] (image) in
+        fileDataSource.getImage(patch: object.patchToPreview) { [weak self] image in
             
             let contains = self?.collectionView.indexPathsForVisibleItems.contains(indexPath)
             if let value = contains,
@@ -223,7 +223,7 @@ class CreateStoryPhotosOrderViewController: BaseViewController, CreateStoryPhoto
         
         let screenSize = view.frame.size.width
         
-        let cellW: CGFloat = (screenSize - 2 * inset - horizontalSpace * CGFloat(countCellInLine - 1))/countCellInLine
+        let cellW: CGFloat = (screenSize - 2 * inset - horizontalSpace * CGFloat(countCellInLine - 1)) / countCellInLine
         
         return CGSize(width: cellW, height: cellW)
     }

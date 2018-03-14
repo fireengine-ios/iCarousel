@@ -8,21 +8,18 @@
 
 import UIKit
 
-class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
-
-    @IBOutlet weak var labelForTitle: UILabel!
-    @IBOutlet weak var selectionImageView: UIImageView!
-    @IBOutlet weak var selectionView: UIView!
+final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet public weak var selectionView: UIView!
     
-    func configurateView() {
-        labelForTitle.text = ""
-        labelForTitle.font = UIFont.TurkcellSaturaMedFont(size: 18)
-        labelForTitle.textColor = ColorConstants.textGrayColor
+    @IBOutlet private weak var selectionImageView: UIImageView!
+    
+    @IBOutlet private weak var labelForTitle: UILabel! {
+        didSet {
+            labelForTitle.text = ""
+            labelForTitle.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            labelForTitle.textColor = ColorConstants.textGrayColor
+        }
     }
     
     func setText(text: String?) {
@@ -31,11 +28,8 @@ class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
     
     func setSelectedState(selected: Bool, activateSelectionState: Bool) {
         selectionImageView.isHidden = !activateSelectionState
-        if (selected) {
-            selectionImageView.image = UIImage(named: "selected")
-        } else {
-            selectionImageView.image = UIImage(named: "notSelected")
-        }
+        
+        let imageName = selected ? "selected" : "notSelected"
+        selectionImageView.image = UIImage(named: imageName)
     }
-    
 }

@@ -98,7 +98,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         case .authorized:
             completion(true, status)
         case .notDetermined, .restricted:
-            PHPhotoLibrary.requestAuthorization({ (authStatus) in
+            PHPhotoLibrary.requestAuthorization({ authStatus in
                 let isAuthorized = authStatus == .authorized
                 MenloworksTagsService.shared.onGalleryPermissionChanged(isAuthorized)
                 completion(isAuthorized, authStatus)
@@ -128,7 +128,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         var mediaContent = [PHAsset]()
         
-        fetchResult.enumerateObjects({ (avalibleAset, index, a) in
+        fetchResult.enumerateObjects({ avalibleAset, index, a in
             mediaContent.append(avalibleAset)
         })
         
@@ -139,7 +139,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func getAllAlbums(completion: @escaping (_ albums: [AlbumItem]) -> Void) {
         log.debug("LocalMediaStorage getAllAlbums")
 
-        askPermissionForPhotoFramework(redirectToSettings: true) { (accessGranted, _) in
+        askPermissionForPhotoFramework(redirectToSettings: true) { accessGranted, _ in
             guard accessGranted else {
                 completion([])
                 return
@@ -151,7 +151,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             var albums = [AlbumItem]()
             
             [album, smartAlbum].forEach { album in
-                album.enumerateObjects { (object, index, stop) in
+                album.enumerateObjects { object, index, stop in
                     if object.photosCount > 0 || object.videosCount > 0 {
                         let item = AlbumItem(uuid: object.localIdentifier,
                                              name: object.localizedTitle,
@@ -227,7 +227,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func getImage(asset: PHAsset, contentSize: CGSize, image: @escaping FileDataSorceImg) {
         log.debug("LocalMediaStorage getImage")
 
-        let callBack: PhotoManagerCallBack = { (newImg, _) in
+        let callBack: PhotoManagerCallBack = { newImg, _ in
             DispatchQueue.main.async {
                 image(newImg)
             }
@@ -256,7 +256,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             PHAssetChangeRequest.deleteAssets(listToDelete)
             
-        }, completionHandler: { (status, error) in
+        }, completionHandler: { status, error in
             log.debug("LocalMediaStorage removeAssets PHPhotoLibrary performChanges success")
             
             if (status) {
@@ -293,7 +293,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 fail?(.string("Only for photo & Video"))
             }
             
-        }, completionHandler: { [weak self] (status, error) in
+        }, completionHandler: { [weak self] status, error in
             if status {
                 if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
                     DispatchQueue.main.async {
@@ -339,7 +339,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     fileprivate func add(asset assetIdentifier: String, to album: String) {
-        askPermissionForPhotoFramework(redirectToSettings: true, completion: { (accessGranted, _) in
+        askPermissionForPhotoFramework(redirectToSettings: true, completion: { accessGranted, _ in
             if accessGranted {
                 let operation = AddAssetToCollectionOperation(albumName: album, assetIdentifier: assetIdentifier)
                 self.addAssetToCollectionQueue.addOperation(operation)
@@ -418,11 +418,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func copyVideoAsset(asset: PHAsset) -> URL {
         log.debug("LocalMediaStorage copyVideoAsset")
 
-        var url =  LocalMediaStorage.defaultUrl
+        var url = LocalMediaStorage.defaultUrl
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalVideoOperation(photoManager: self.photoManger,
-                                                  asset: asset) { (avAsset, aVAudioMix, Dict) in
+                                                  asset: asset) { avAsset, aVAudioMix, Dict in
                                                     
                                                     if let urlToFile = (avAsset as? AVURLAsset)?.url {
                                                         
@@ -449,7 +449,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalImageOperation(photoManager: self.photoManger,
-                                                  asset: asset) { (data, string, orientation, dict) in
+                                                  asset: asset) { data, string, orientation, dict in
                                                     let file = UUID().uuidString
                                                     url = Device.tmpFolderUrl(withComponent: file)
                                                     do {
@@ -521,13 +521,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func fullInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutVideoAsset")
 
-        var url: URL =  LocalMediaStorage.defaultUrl
+        var url: URL = LocalMediaStorage.defaultUrl
         var md5: String = LocalMediaStorage.noneMD5
         var size: UInt64 = 0
         let semaphore = DispatchSemaphore(value: 0)
         var originalFileName = ""
         
-        let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { (avAsset, aVAudioMix, Dict) in
+        let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, Dict in
             if let urlToFile = (avAsset as? AVURLAsset)?.url {
                 do {
                     url = urlToFile
@@ -561,8 +561,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         let operation = GetOriginalImageOperation(photoManager: self.photoManger,
-                                                  asset: asset) { (data, string, orientation, dict) in
-            if let wrapDict = dict, let dataValue  = data {
+                                                  asset: asset) { data, string, orientation, dict in
+            if let wrapDict = dict, let dataValue = data {
                 if let name = asset.originalFilename {
                     originalFileName = name
                 }
@@ -718,7 +718,7 @@ class AddAssetToCollectionOperation: AsyncOperation {
             mediaStorage.add(asset: assetIdentifier, to: collection)
             markFinished()
         } else {
-            mediaStorage.createAlbum(albumName, completion: { [weak self] (collection) in
+            mediaStorage.createAlbum(albumName, completion: { [weak self] collection in
                 if let collection = collection, let `self` = self {
                     self.mediaStorage.add(asset: self.assetIdentifier, to: collection)
                     self.markFinished()

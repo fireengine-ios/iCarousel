@@ -29,7 +29,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     func startOperation(operationType: SyncOperationType) {
         if operationType != .getBackUpStatus {
-            requesetAccess { (success) in
+            requesetAccess { success in
                 if success {
                     self.proccessOperation(operationType)
                 }
@@ -73,7 +73,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func onManageContacts() {
-        requesetAccess { (success) in
+        requesetAccess { success in
             if success {
                 self.router.goToManageContacts(moduleOutput: self)
             }

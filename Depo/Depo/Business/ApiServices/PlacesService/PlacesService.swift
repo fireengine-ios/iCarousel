@@ -27,7 +27,7 @@ final class PlacesService: BaseRequestService {
     func getPlacesAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
         let param = PlacesAlbumParameters(id: id)
         
-        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { (response) in
+        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
             if let response = response as? AlbumResponse, let album = response.list.first {
                 success(album)
             } else {
@@ -62,14 +62,14 @@ final class PlacesItemsService: RemoteItemsService {
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         let param = PlacesPageParameters(pageSize: requestSize, pageNumber: currentPage)
 
-        service.getPlacesPage(param: param, success: { [weak self] (response) in
+        service.getPlacesPage(param: param, success: { [weak self] response in
             if let response = response as? PlacesPageResponse, !response.list.isEmpty {
                 success?(response.list.map({ PlacesItem(response: $0) }))
                 self?.currentPage += 1
             } else {
                 fail?()
             }
-        }) { (error) in
+        }) { error in
             fail?()
         }
     }

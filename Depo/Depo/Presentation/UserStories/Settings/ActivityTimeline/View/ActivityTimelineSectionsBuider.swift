@@ -97,7 +97,7 @@ class ActivityTimelineSectionsBuider {
             minutesIndexPathsNew.removeLast()
             minutesIndexPathsNew.insert(0, at: 0)
             for i in 1..<minutesIndexPathsNew.count {
-                minutesIndexPathsNew[i] += minutesIndexPathsNew[i-1] + 1
+                minutesIndexPathsNew[i] += minutesIndexPathsNew[i - 1] + 1
             }
             minutesSectionsIndexPaths.append(minutesIndexPathsNew)
         }

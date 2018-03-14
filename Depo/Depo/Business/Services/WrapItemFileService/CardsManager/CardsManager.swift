@@ -94,7 +94,7 @@ class CardsManager: NSObject {
     
     // MARK: sending operation to registred subviews
     func startOperatonsForCardsResponces(cardsResponces: [HomeCardResponse]) {
-        let sortedArray = cardsResponces.sorted { (obj1, obj2) -> Bool in
+        let sortedArray = cardsResponces.sorted { obj1, obj2 -> Bool in
             obj1.order < obj2.order
         }
         homeCardsObjects.removeAll()

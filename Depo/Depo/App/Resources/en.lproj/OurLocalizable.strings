@@ -51,6 +51,7 @@
 "The network connection was lost." = "The network connection was lost.";
 "ServiceError" = "ServiceError";
 "Nothing to download" = "Nothing to download";
+"Destination folder can not be the same folder" = "Destination folder can not be the same folder";
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
 "Unknown error" = "Unknown error";
@@ -165,6 +166,7 @@
 "2G" = "2G";
 "Mobile Data" = "Mobile Data";
 "Wi-Fi" = "Wi-Fi";
+"Wi-Fi and Cellular" = "Wi-Fi and Cellular";
 "Free up space" = "Free up space";
 "Your device memory is almost full" = "Your device memory is almost full";
 "There are some duplicated items both in your device and lifebox" = "There are some duplicated items both in your device and lifebox";
@@ -362,7 +364,7 @@
 "Upload Photo" = "Upload Photo";
 "Login Settings" = "Login Settings";
 "Back to Lifebox" = "Back to Lifebox";
-"Start adding your documents" = "Start adding your documents";
+"You don’t have any documents on your Lifebox yet." = "You don’t have any documents on your Lifebox yet.";
 "Start adding your documents" = "Start adding your documents";
 "Start adding your music" = "Start adding your music";
 "You don’t have any music on your Lifebox yet." = "You don’t have any music on your Lifebox yet.";
@@ -374,6 +376,9 @@
 "info" = "info";
 "Share" = "Share";
 "Enable photo permissions in settings" = "Enable photo permissions in settings";
+"You don’t have any files on your Lifebox yet." = "You don’t have any files on your Lifebox yet.";
+"You don’t have any favorited files on your Lifebox yet." = "You don’t have any favorited files on your Lifebox yet.";
+"Start adding your files" = "Start adding your files";
 "Start adding your photos" = "Start adding your photos";
 "You don’t have anything on your photo roll." = "You don’t have anything on your photo roll.";
 "OK" = "OK";
@@ -535,7 +540,7 @@
 "Mobile Data" = "Mobile Data";
 "When syncing via Wi-Fi, your photos and videos are uploaded by default." = "When syncing via Wi-Fi, your photos and videos are uploaded by default.";
 "Wi-fi" = "Wi-fi";
-"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Lifebox can sync your files automatically. Would you like to have this feature right now?";
+"Lifebox can sync your files automatically." = "Lifebox can sync your files automatically.";
 "Auto Sync" = "Auto Sync";
 "You have to fill in a password" = "You have to fill in a password";
 "You have to fill in your mail or GSM Number" =  "You have to fill in your mail or GSM Number";
@@ -621,3 +626,4 @@
 "Filter Card" = "Filter Card";
 "View" = "View";
 "photos" = "photos";
+"Never" = "Never";

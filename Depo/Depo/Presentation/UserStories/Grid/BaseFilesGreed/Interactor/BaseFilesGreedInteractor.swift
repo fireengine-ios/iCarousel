@@ -107,7 +107,9 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             remoteItems is MusicService || 
             remoteItems is DocumentService ||
             remoteItems is StoryService ||
-            remoteItems is AlbumService
+            remoteItems is AlbumService ||
+            remoteItems is AllFilesService ||
+            remoteItems is FavouritesService
     }
     
     func needHideTopBar() -> Bool {
@@ -125,6 +127,10 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             return TextConstants.storiesViewNoStoriesTitleText
         } else if remoteItems is AlbumService {
             return TextConstants.albumsViewNoAlbumsTitleText
+        } else if remoteItems is AllFilesService {
+            return TextConstants.allFilesViewNoFilesTitleText
+        } else if remoteItems is FavouritesService {
+            return TextConstants.favoritesViewNoFilesTitleText
         }
         
         return ""
@@ -133,14 +139,14 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     func textForNoFileButton() -> String {
         if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoButtonText
-        } else if remoteItems is MusicService {
-            return TextConstants.audioViewNoAudioButtonText
-        } else if remoteItems is DocumentService {
-            return TextConstants.documentsViewNoDocumenetsTitleText
         } else if remoteItems is StoryService {
             return TextConstants.storiesViewNoStoriesButtonText
         } else if remoteItems is AlbumService {
             return TextConstants.albumsViewNoAlbumsButtonText
+        } else if remoteItems is AllFilesService {
+            return TextConstants.allFilesViewNoFilesButtonText
+        } else if remoteItems is FavouritesService {
+            return TextConstants.favoritesViewNoFilesButtonText
         }
     
         return ""
@@ -157,6 +163,10 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             return UIImage(named: "ImageNoStories")!
         } else if remoteItems is AlbumService {
             return UIImage(named: "ImageNoAlbums")!
+        } else if remoteItems is AllFilesService {
+            return UIImage(named: "ImageNoAllFiles")!
+        } else if remoteItems is FavouritesService {
+            return UIImage(named: "ImageNoFavorites")!
         }
         return UIImage()
     }

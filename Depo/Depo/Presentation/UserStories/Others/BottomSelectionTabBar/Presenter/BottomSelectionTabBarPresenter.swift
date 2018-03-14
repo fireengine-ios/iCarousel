@@ -12,7 +12,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
 //    var interactor: BottomSelectionTabBarInteractorInput!
     var router: BottomSelectionTabBarRouterInput!
     
-    let middleTabBarRect = CGRect(x: Device.winSize.width/2 - 5, y: Device.winSize.height - 49, width: 10, height: 50)
+    let middleTabBarRect = CGRect(x: Device.winSize.width / 2 - 5, y: Device.winSize.height - 49, width: 10, height: 50)
     
     func viewIsReady() {
         guard let bottomBarInteractor = interactor as? BottomSelectionTabBarInteractorInput,

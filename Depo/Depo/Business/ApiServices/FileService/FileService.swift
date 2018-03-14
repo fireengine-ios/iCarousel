@@ -16,7 +16,7 @@ struct FilePatch {
     static let rename = "/api/filesystem/rename/%@"
     static let move =   "/api/filesystem/move?targetFolderUuid=%@"
     static let copy =   "/api/filesystem/copy?targetFolderUuid=%@"
-    static let details = "/api/filesystem/details"
+    static let details = "/api/filesystem/details?minified=true"
     static let detail =  "/api/filesystem/detail/%@"
     
     static let metaData = "/api/filesystem/metadata"
@@ -345,7 +345,7 @@ class FileService: BaseRequestService {
     func downloadToCameraRoll(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService downloadToCameraRoll")
         
-        executeDownloadRequest(param: downloadParam) { (url, urlResponse, error) in
+        executeDownloadRequest(param: downloadParam) { url, urlResponse, error in
             
             if let err = error {
                 fail?(.error(err))
@@ -395,7 +395,7 @@ class FileService: BaseRequestService {
                         success: {
                             removeDestinationFile()
                             success?()
-                        }, fail: { (error) in
+                        }, fail: { error in
                             removeDestinationFile()
                             fail?(error)
                         })
@@ -425,7 +425,7 @@ class FileService: BaseRequestService {
     func details(uuids: [String], success: ListRemoveItems?, fail: FailResponse?) {
         
         let param = FileDetails(uuids: uuids)
-        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { (responce) in
+        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { responce in
             guard let resultResponse = (responce as? SearchResponse)?.list else {
                 let error = ErrorResponse.string("Unknown error")
                 fail?(error)
@@ -463,7 +463,7 @@ class FileService: BaseRequestService {
                                     page: page,
                                     size: size,
                                     folderOnly: folderOnly)
-        let handler = BaseResponseHandler<FileListResponse, ObjectRequestResponse>(success: { (response) in
+        let handler = BaseResponseHandler<FileListResponse, ObjectRequestResponse>(success: { response in
             guard let resultResponse = (response as? FileListResponse)?.fileList else {
                 fail?()
                 return
@@ -506,7 +506,7 @@ class DownLoadOperation: Operation {
         
         FileService().downloadToCameraRoll(downloadParam: param, success: {
             self.customSuccess()
-        }) { (error) in
+        }) { error in
             self.customFail(error)
         }
         semaphore.wait()

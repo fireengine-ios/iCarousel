@@ -10,7 +10,7 @@ import Foundation
 
 protocol AutoSyncInteractorOutput: class {
     
-    func preperedCellsModels(models: [AutoSyncModel])
+    func prepaire(syncSettings: AutoSyncSettings)
     
     func onSettingSaved()
     

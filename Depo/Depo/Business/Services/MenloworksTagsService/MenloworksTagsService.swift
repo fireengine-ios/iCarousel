@@ -346,7 +346,7 @@ class MenloworksTagsService {
     }
     
     private func sendInstagramImportStatus() {
-        InstagramService().getSyncStatus(success: { (response) in
+        InstagramService().getSyncStatus(success: { response in
             guard let response = response as? SocialSyncStatusResponse,
                   let status = response.status else { return }
             let tag = MenloworksTags.InstagramImportStatus(isEnabled: status)
@@ -355,7 +355,7 @@ class MenloworksTagsService {
     }
     
     private func sendFacebookImportStatus() {
-        FBService().requestStatus(success: { (response) in
+        FBService().requestStatus(success: { response in
             guard let response = response as? FBStatusObject,
                   let status = response.syncEnabled else { return }
             let tag = MenloworksTags.FacebookImportStatus(isEnabled: status)
@@ -364,7 +364,7 @@ class MenloworksTagsService {
     }
     
     private func sendFIRStatus() {
-        AccountService().faceImageAllowed(success: { (response) in
+        AccountService().faceImageAllowed(success: { response in
             guard let response = response as? FaceImageAllowedResponse,
                   let status = response.allowed else { return }
             let tag = MenloworksTags.FaceImageRecognitionStatus(isEnabled: status)
@@ -376,7 +376,7 @@ class MenloworksTagsService {
         SubscriptionsServiceIml().activeSubscriptions(success: { response in
             guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
             
-            let list = subscriptionsResponce.list.sorted(by: { (sub1, sub2) -> Bool in
+            let list = subscriptionsResponce.list.sorted(by: { sub1, sub2 -> Bool in
                 guard let sub1Quota = sub1.subscriptionPlanQuota,
                     let sub2Quota = sub2.subscriptionPlanQuota else {
                         return true
@@ -394,7 +394,7 @@ class MenloworksTagsService {
             }
             
             for i in 0...4 {
-                let packageName = String(format: "%@%d", MenloworksTags.UserPackageStatus().name, i+1)
+                let packageName = String(format: "%@%d", MenloworksTags.UserPackageStatus().name, i + 1)
                 var displayName = MenloworksTags.NoUserPackageStatus().name
                 
                 if i < subLength {

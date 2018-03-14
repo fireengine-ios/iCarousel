@@ -293,7 +293,7 @@ class RouterVC: NSObject {
     
     func termsAndServicesScreen(login: Bool, delegate: RegistrationViewDelegate? = nil) -> UIViewController {
         let conf = TermsAndServicesModuleInitializer(delegate: delegate)
-        let viewController =  TermsAndServicesViewController(nibName: "TermsAndServicesScreen",
+        let viewController = TermsAndServicesViewController(nibName: "TermsAndServicesScreen",
                                                              bundle: nil)
         
         conf.setupConfig(withViewController: viewController, fromLogin: login)

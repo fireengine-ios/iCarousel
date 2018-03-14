@@ -58,7 +58,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         MenloworksAppEvents.onStartWithLogin(true)
     }
     
-    func onSuccessLoginTurkcell(){
+    func onSuccessLoginTurkcell() {
         turkcellLogin = true
         interactor.checkEULA()
     }
@@ -85,7 +85,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                 
                 if (self?.turkcellLogin)! {
                     let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-                    if launchedBefore  {
+                    if launchedBefore {
                         self?.router.navigateToApplication()
                     } else {
                         self?.router.goToSyncSettingsView()

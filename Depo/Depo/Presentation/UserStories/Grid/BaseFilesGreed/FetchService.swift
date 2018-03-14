@@ -152,7 +152,7 @@ extension FetchService: Iterator {
             
             let rowsInSection: Int = controller.sections?[indexPath.section].numberOfObjects ?? 0
             let isAvaliblePrevItemInRow: Bool = rowsInSection > 1
-            let isAvaliblePrevSection: Bool =  indexPath.section > 0
+            let isAvaliblePrevSection: Bool = indexPath.section > 0
             
             if isAvaliblePrevItemInRow {
                 newIndexPath = IndexPath(row: indexPath.row - 1,

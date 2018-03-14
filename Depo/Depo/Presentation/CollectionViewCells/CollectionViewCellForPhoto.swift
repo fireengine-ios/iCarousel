@@ -97,7 +97,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
 
     override func setImage(with url: URL) {
         self.imageView.contentMode = .center
-        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] (image, error, cacheType, url) in
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
             guard let `self` = self else {
                 return
             }

@@ -116,7 +116,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 print(Date().timeIntervalSince1970)
                 let indexPath = IndexPath(row: index, section: 0)
                 self.collectionView.insertItems(at: [indexPath])
-            }, completion: { (succes) in
+            }, completion: { succes in
                 print("finished competition")
             })
         } else {
@@ -188,7 +188,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 }
             }
         }
-        popUps = popUps.sorted(by: { (view1, view2) -> Bool in
+        popUps = popUps.sorted(by: { view1, view2 -> Bool in
             let order1 = view1.cardObject?.order ?? 0
             let order2 = view2.cardObject?.order ?? 0
             return order1 < order2
@@ -217,7 +217,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             viewsByType[type] = view
             let index = 0
             popUps.insert(view, at: index)
-            popUps = popUps.sorted(by: { (view1, view2) -> Bool in
+            popUps = popUps.sorted(by: { view1, view2 -> Bool in
                 let order1 = view1.cardObject?.order ?? 0
                 let order2 = view2.cardObject?.order ?? 0
                 return order1 < order2

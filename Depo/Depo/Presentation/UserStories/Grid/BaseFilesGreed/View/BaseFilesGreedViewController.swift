@@ -264,9 +264,15 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
         noFilesLabel.text = text
         noFilesImage.image = image
+        startCreatingFilesButton.isHidden = createFilesButtonText.isEmpty
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
         topBarContainer.isHidden = needHideTopBar
+        
+        let service = output.getRemoteItemsService()
+        if service is DocumentService || service is MusicService {
+            startCreatingFilesButton.isHidden = true
+        }
     }
     
     func showNoFilesTop() {
@@ -358,7 +364,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         refresherY =  -hTopPopUpView - BaseFilesGreedViewController.sliderH + 30
         updateRefresher()
         
-        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH/2
+        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH / 2
     }
     
     private func setupViewForPopUp() {

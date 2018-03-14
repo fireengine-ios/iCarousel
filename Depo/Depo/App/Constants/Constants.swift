@@ -66,7 +66,7 @@ struct TextConstants {
     static let loginCellPasswordPlaceholder = NSLocalizedString("You have to fill in a password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let autoSyncNavigationTitle = NSLocalizedString("Auto Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let autoSyncTitle = NSLocalizedString("Lifebox can sync your files automatically. Would you like to have this feature right now?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let autoSyncTitle = NSLocalizedString("Lifebox can sync your files automatically.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncCellWiFiTile = NSLocalizedString("Wi-fi", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncCellWiFiSubTitle = NSLocalizedString("When syncing via Wi-Fi, your photos and videos are uploaded by default.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncCellMobileDataSubTitle = NSLocalizedString("Select the items to sync with mobile data.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -281,6 +281,14 @@ struct TextConstants {
     // MARK: Popup
     static let ok = NSLocalizedString("OK", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    // MARK: All files
+    static let allFilesViewNoFilesTitleText = NSLocalizedString("You don’t have any files on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let allFilesViewNoFilesButtonText = NSLocalizedString("Start adding your files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    // MARK: Favorites
+    static let favoritesViewNoFilesTitleText = NSLocalizedString("You don’t have any favorited files on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let favoritesViewNoFilesButtonText = NSLocalizedString("Start adding your files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     // MARK: PhotosVideosView
     static let photosVideosViewNoPhotoTitleText = NSLocalizedString("You don’t have anything on your photo roll.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photosVideosViewNoPhotoButtonText = NSLocalizedString("Start adding your photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -291,7 +299,9 @@ struct TextConstants {
     static let audioViewNoAudioButtonText = NSLocalizedString("Start adding your music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: DocumentsView
-    static let documentsViewNoDocumenetsTitleText = NSLocalizedString("Start adding your documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let documentsViewNoDocumenetsTitleText = NSLocalizedString("You don’t have any documents on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let documentsViewNoDocumentsButton = NSLocalizedString("Start adding your documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Folder
     static let folderEmptyText = NSLocalizedString("Folder is Empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -405,6 +415,10 @@ struct TextConstants {
     static let settingsBackUpKeepButton = NSLocalizedString("Keep", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpDeleteAllButton = NSLocalizedString("Delete All", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsContactsPermissionDeniedMessage = NSLocalizedString("You need to enable access to Contacts to continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let autoSyncSettingsSelect = NSLocalizedString("Select", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let autoSyncSettingsOptionNever = NSLocalizedString("Never", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let autoSyncSettingsOptionWiFi = NSLocalizedString("Wi-Fi", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let autoSyncSettingsOptionWiFiAndCellular = NSLocalizedString("Wi-Fi and Cellular", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Create story Name
     static let createStoryNameTitle = NSLocalizedString("Create a Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -667,6 +681,7 @@ struct TextConstants {
     
     static let errorFileSystemAccessDenied = NSLocalizedString("Can't get access to file system", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorNothingToDownload = NSLocalizedString("Nothing to download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let errorSameDestinationFolder = NSLocalizedString("Destination folder can not be the same folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let canceledOperationTextError = NSLocalizedString("cancelled", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let networkConnectionLostTextError = NSLocalizedString("The network connection was lost.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -784,10 +799,11 @@ struct NumericConstants {
     static let numberOfElementsInSyncRequest: Int = 30000
     
     static let animationDuration: Double = 0.3
+    static let fastAnimationDuration: Double = 0.1
     
-    static let timeIntervalBetweenAutoSync: TimeInterval = 10*60
+    static let timeIntervalBetweenAutoSync: TimeInterval = 10 * 60
     
-    static let timeIntervalBetweenAutoSyncAfterOutOfSpaceError: TimeInterval = 60*60*12 // 12 hours
+    static let timeIntervalBetweenAutoSyncAfterOutOfSpaceError: TimeInterval = 60 * 60 * 12 // 12 hours
 
     static let freeAppSpaceLimit = 0.2
     

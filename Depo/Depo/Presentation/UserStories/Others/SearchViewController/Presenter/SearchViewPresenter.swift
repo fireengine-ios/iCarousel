@@ -168,8 +168,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         if item.fileType.isFaceImageType {
             openFaceImage(item: item)
-        } else if item.fileType.isFaceImageAlbum {
-            openFaceImageAlbum(item: item)
+        } else if item.fileType.isFaceImageAlbum || item.fileType == .photoAlbum {
+            openAlbum(item: item)
         } else if item.fileType.isUnSupportedOpenType {
             let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
@@ -198,9 +198,9 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         var cellWidth: CGFloat = 180
         
         if (Device.isIpad) {
-            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2  - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIpad - 1))/NumericConstants.numerCellInDocumentLineOnIpad
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2 - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIpad - 1)) / NumericConstants.numerCellInDocumentLineOnIpad
         } else {
-            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2  - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIphone - 1))/NumericConstants.numerCellInDocumentLineOnIphone
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIphone - 1)) / NumericConstants.numerCellInDocumentLineOnIphone
         }
         return CGSize(width: cellWidth, height: cellWidth)
     }
@@ -328,7 +328,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                                              onSourceView: nil,
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
-            actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.index(of: .download) {
                 actionTypes.remove(at: downloadIdex)
             }
@@ -352,7 +352,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         interactor.openFaceImageForSearch(item: item)
     }
     
-    func openFaceImageAlbum(item: BaseDataSourceItem) {
+    func openAlbum(item: BaseDataSourceItem) {
         let album = AlbumItem(uuid: item.uuid,
                               name: item.name,
                               creationDate: item.creationDate,

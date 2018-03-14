@@ -23,7 +23,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var plussButton: UIButton!
     
-    var curtainView =  UIView()
+    var curtainView = UIView()
     
     @IBOutlet weak var contentView: UIView!
     
@@ -278,7 +278,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                 self.bottomTabBarConstraint.constant = 0
                 self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
-            }, completion: { (_) in
+            }, completion: { _ in
                 
             })
             
@@ -293,7 +293,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.view.layoutIfNeeded()
-            }, completion: { (_) in
+            }, completion: { _ in
                 self.tabBar.isHidden = true
                 self.bottomBGView.isHidden = true
                 
@@ -337,7 +337,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             if state {
-                self.plussButton.transform = CGAffineTransform(rotationAngle: .pi/4)
+                self.plussButton.transform = CGAffineTransform(rotationAngle: .pi / 4)
             } else {
                 self.plussButton.transform = CGAffineTransform(rotationAngle: 0)
             }
@@ -371,7 +371,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
         
         if show {
-            curtainView.frame =  CGRect(x: 0, y: 0, width: currentViewController?.view.frame.width ?? 0, height: currentViewController?.view.frame.height ?? 0)
+            curtainView.frame = CGRect(x: 0, y: 0, width: currentViewController?.view.frame.width ?? 0, height: currentViewController?.view.frame.height ?? 0)
             currentViewController?.view.addSubview(curtainView)
             currentViewController?.view.bringSubview(toFront: curtainView)
         } else {
@@ -547,11 +547,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             MenloworksAppEvents.onPhotosAndVideosOpen()
             
             guard let settings = SyncServiceManager.shared.getSettings() else { return }
-            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnable)
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
             
-            if settings.isAutoSyncEnable {
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !settings.mobileDataPhotos)
-                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !settings.mobileDataVideo)
+            if settings.isAutoSyncEnabled {
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
             } else {
                 MenloworksTagsService.shared.onAutosyncVideosStatusOff()
                 MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
