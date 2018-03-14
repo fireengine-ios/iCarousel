@@ -21,7 +21,7 @@ class AutoSyncDataStorage: NSObject {
                 settings = AutoSyncSettings()
             }
             success(settings, uniqueUserID)
-        }) { (error) in
+        }) { error in
             success(AutoSyncSettings(), "")
         }
     }
