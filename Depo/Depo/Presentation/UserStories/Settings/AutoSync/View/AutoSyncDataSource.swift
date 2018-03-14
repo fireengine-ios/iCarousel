@@ -16,6 +16,8 @@ protocol AutoSyncDataSourceDelegate: class {
 
 class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
 
+    private let estimatedRowHeight: CGFloat = 88.0
+    
     @IBOutlet weak var tableView: UITableView?
     @IBOutlet weak var tableHConstraint: NSLayoutConstraint?
     
@@ -27,14 +29,15 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     weak var delegate: AutoSyncDataSourceDelegate?
     
-    func configurateTable(table: UITableView, tableHConstraint: NSLayoutConstraint?) {
+    func setup(table: UITableView, with heightConstratint: NSLayoutConstraint?) {
         tableView = table
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.backgroundColor = UIColor.clear
         tableView?.rowHeight = UITableViewAutomaticDimension
-        tableView?.estimatedRowHeight = 44.0
-        self.tableHConstraint = tableHConstraint
+        tableView?.estimatedRowHeight = estimatedRowHeight
+        tableView?.separatorStyle = .none
+        tableHConstraint = heightConstratint
         
         registerCells(with: [CellsIdConstants.autoSyncSwitcherCellID,
                              CellsIdConstants.autoSyncSettingsCellID])
@@ -78,7 +81,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     private func getTableHeight() -> CGFloat {
         let rowsCount = tableView?.numberOfRows(inSection: 0) ?? 0
-        var tableH: CGFloat = 0
+        var tableH: CGFloat = 0.0
         for i in 0...rowsCount {
             let indexPath = IndexPath(row: i, section: 0)
             if let cellRect = tableView?.rectForRow(at: indexPath) {
@@ -113,6 +116,14 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             return 1
         }
         return tableDataArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let model = tableDataArray[indexPath.row]
+        if model.cellType == .headerLike {
+            return 88.0
+        }
+        return UITableViewAutomaticDimension
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

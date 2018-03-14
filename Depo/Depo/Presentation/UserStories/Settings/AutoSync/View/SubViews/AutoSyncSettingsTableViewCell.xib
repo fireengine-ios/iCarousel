@@ -52,13 +52,6 @@
                             <constraint firstAttribute="width" constant="8" id="qcz-f8-lax"/>
                         </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0i-H8-32F">
-                        <rect key="frame" x="27" y="49.5" width="277" height="1"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="Dd0-c6-AYP"/>
-                        </constraints>
-                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1MI-yf-IMK">
                         <rect key="frame" x="27" y="50.5" width="277" height="177.5"/>
                         <subviews>
@@ -199,6 +192,13 @@
                             <constraint firstAttribute="height" constant="177.5" id="0ei-DF-fBv"/>
                         </constraints>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lw5-hQ-Qsb">
+                        <rect key="frame" x="27" y="226.5" width="277" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="FSb-96-iRd"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
@@ -206,23 +206,23 @@
                     <constraint firstAttribute="bottom" secondItem="1MI-yf-IMK" secondAttribute="bottom" id="4UL-fl-AUO"/>
                     <constraint firstItem="IB3-TP-pf2" firstAttribute="centerY" secondItem="Gyd-QP-pVm" secondAttribute="centerY" id="5kd-Rl-Hkc"/>
                     <constraint firstItem="Gyd-QP-pVm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="D00-Ah-Okg"/>
-                    <constraint firstItem="J0i-H8-32F" firstAttribute="trailing" secondItem="1MI-yf-IMK" secondAttribute="trailing" id="EAc-x9-bKe"/>
                     <constraint firstAttribute="trailing" secondItem="Her-KU-zms" secondAttribute="trailing" constant="24" id="LWD-BL-Dow"/>
+                    <constraint firstItem="lw5-hQ-Qsb" firstAttribute="leading" secondItem="1MI-yf-IMK" secondAttribute="leading" id="NrY-VO-hqW"/>
                     <constraint firstItem="IB3-TP-pf2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="PMb-t1-rkY"/>
                     <constraint firstItem="Her-KU-zms" firstAttribute="leading" secondItem="IB3-TP-pf2" secondAttribute="trailing" constant="4" id="Sak-kX-7aS"/>
-                    <constraint firstItem="J0i-H8-32F" firstAttribute="bottom" secondItem="1MI-yf-IMK" secondAttribute="top" id="Vhq-vS-Htv"/>
+                    <constraint firstItem="lw5-hQ-Qsb" firstAttribute="trailing" secondItem="1MI-yf-IMK" secondAttribute="trailing" id="aId-7c-UXI"/>
                     <constraint firstItem="Gyd-QP-pVm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="27" id="fmT-Xg-NYW"/>
                     <constraint firstItem="1MI-yf-IMK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="27" id="g7u-dJ-Cjv"/>
-                    <constraint firstItem="J0i-H8-32F" firstAttribute="leading" secondItem="1MI-yf-IMK" secondAttribute="leading" id="gzV-II-b6w"/>
                     <constraint firstItem="1MI-yf-IMK" firstAttribute="top" secondItem="Gyd-QP-pVm" secondAttribute="bottom" constant="8" id="kY2-Ay-EPw"/>
                     <constraint firstAttribute="trailing" secondItem="Gyd-QP-pVm" secondAttribute="trailing" id="m2K-v3-vl1"/>
                     <constraint firstAttribute="trailing" secondItem="1MI-yf-IMK" secondAttribute="trailing" constant="16" id="nBp-8K-b3T"/>
+                    <constraint firstAttribute="bottom" secondItem="lw5-hQ-Qsb" secondAttribute="bottom" id="p5r-9r-A2F"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="cellSeparator" destination="J0i-H8-32F" id="sfR-D0-mDh"/>
+                <outlet property="cellSeparator" destination="lw5-hQ-Qsb" id="VXd-No-aH6"/>
                 <outlet property="dropDownArrow" destination="Her-KU-zms" id="YZ3-LQ-wic"/>
                 <outlet property="expandButton" destination="Gyd-QP-pVm" id="uCn-eg-xRc"/>
                 <outlet property="expandHeightConstraint" destination="0ei-DF-fBv" id="CEq-vU-z5j"/>
