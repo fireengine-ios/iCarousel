@@ -51,7 +51,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         if let item = item as? PeopleItem {
             output.startAsyncOperation()
             
-            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] (uuid) in
+            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] uuid in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
                     output.didLoadAlbum(uuid, forItem: item)
                 }
@@ -63,7 +63,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         } else if let item = item as? ThingsItem {
             output.startAsyncOperation()
             
-            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] (album) in
+            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] album in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
                     output.didLoadAlbum(album, forItem: item)
                 }
@@ -75,7 +75,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         } else if let item = item as? PlacesItem {
             output.startAsyncOperation()
             
-            placesService.getPlacesAlbum(id: Int(id), success: { [weak self] (album) in
+            placesService.getPlacesAlbum(id: Int(id), success: { [weak self] album in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
                     output.didLoadAlbum(album, forItem: item)
                 }

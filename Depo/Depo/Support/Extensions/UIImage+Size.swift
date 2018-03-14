@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImage {
     func resizedImage(to targetSize: CGSize) -> UIImage? {
-        let widthRatio  = targetSize.width  / size.width
+        let widthRatio = targetSize.width / size.width
         let heightRatio = targetSize.height / size.height
         
         let newSize = widthRatio > heightRatio ?

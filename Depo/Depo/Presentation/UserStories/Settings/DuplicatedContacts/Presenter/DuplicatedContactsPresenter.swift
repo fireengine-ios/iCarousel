@@ -35,7 +35,7 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
                              image: .delete,
                              firstButtonTitle: TextConstants.cancel,
                              secondButtonTitle: TextConstants.ok,
-                             secondAction: { [weak self] (vc) in
+                             secondAction: { [weak self] vc in
                                 self?.router.back()
                                 vc.close()
                                 self?.moduleOutput?.deleteDuplicatedContacts()

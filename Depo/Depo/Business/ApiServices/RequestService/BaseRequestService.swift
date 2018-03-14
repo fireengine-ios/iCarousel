@@ -174,7 +174,7 @@ class BaseRequestService {
     }
     
     func executeDownloadRequest(param: DownloadRequestParametrs, response:@escaping RequestFileDownloadResponse) {
-        let task  = requestService.downloadFileRequestTask(patch: param.patch,
+        let task = requestService.downloadFileRequestTask(patch: param.patch,
                                                            headerParametrs: param.header,
                                                            body: nil,
                                                            method: RequestMethod.Get,
@@ -195,7 +195,7 @@ class BaseRequestService {
                                                             fromFile: localURL,
                                                             method: RequestMethod.Put,
                                                             timeoutInterval: param.timeout,
-                                                            response: { (data, urlResponse, error) in
+                                                            response: { data, urlResponse, error in
                                                                 response(data, urlResponse, error)
                                                                 UIApplication.shared.endBackgroundTask(backgroundTaskID)
             })
@@ -208,7 +208,7 @@ class BaseRequestService {
                                                         fileData: fileData,
                                                         method: RequestMethod.Put,
                                                         timeoutInterval: param.timeout,
-                                                        response: { (data, urlResponse, error) in
+                                                        response: { data, urlResponse, error in
                                                             response(data, urlResponse, error)
                                                             UIApplication.shared.endBackgroundTask(backgroundTaskID)
             })

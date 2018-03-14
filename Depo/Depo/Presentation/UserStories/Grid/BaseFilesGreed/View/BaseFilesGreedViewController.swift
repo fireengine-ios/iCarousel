@@ -364,7 +364,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         refresherY =  -hTopPopUpView - BaseFilesGreedViewController.sliderH + 30
         updateRefresher()
         
-        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH/2
+        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH / 2
     }
     
     private func setupViewForPopUp() {

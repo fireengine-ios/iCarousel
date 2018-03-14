@@ -14,7 +14,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     let localMediaStorage = LocalMediaStorage.default
 
     func prepareCellModels() {
-        dataStorage.getAutoSyncSettingsForCurrentUser(success: { [weak self] (settings, uniqueUserId) in
+        dataStorage.getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, uniqueUserId in
             self?.output.prepaire(syncSettings: settings)
             self?.uniqueUserID = uniqueUserId
         })
@@ -28,7 +28,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     }
     
     func checkPermissionForPhoto() {
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] (accessGranted, _) in
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
             self?.output.onCheckPermissionForPhoto(accessGranted: accessGranted)
         }
     }

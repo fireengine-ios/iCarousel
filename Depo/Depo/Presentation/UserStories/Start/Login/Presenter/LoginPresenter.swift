@@ -165,9 +165,9 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func preparedTimePassed(date: Date, forUserName name: String) {
         let currentTime = Date()
-        let timeIntervalFromBlockDate =  currentTime.timeIntervalSince(date)
-        debugPrint("time passed since block in minutes", timeIntervalFromBlockDate/60)
-        if timeIntervalFromBlockDate/60 >= 60 {
+        let timeIntervalFromBlockDate = currentTime.timeIntervalSince(date)
+        debugPrint("time passed since block in minutes", timeIntervalFromBlockDate / 60)
+        if timeIntervalFromBlockDate / 60 >= 60 {
             interactor.eraseBlockTime(forUserName: name)
         } else {
             showMessageHideSpinner(text: TextConstants.hourBlockLoginError)

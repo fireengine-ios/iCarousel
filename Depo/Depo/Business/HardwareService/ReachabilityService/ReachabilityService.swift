@@ -21,7 +21,7 @@ protocol ReachabilityProtocol {
 
 class ReachabilityService: ReachabilityProtocol {
     
-    private let reachability  = Reachability()!
+    private let reachability = Reachability()!
     
     var isReachableViaWiFi: Bool {
         return self.reachability.connection == .wifi
@@ -36,11 +36,11 @@ class ReachabilityService: ReachabilityProtocol {
     }
     
     init() {
-        self.reachability.whenReachable = { (Reachability) in
+        self.reachability.whenReachable = { Reachability in
             //
         }
         
-        self.reachability.whenUnreachable = { (Reachability) in
+        self.reachability.whenUnreachable = { Reachability in
             //
         }
         
@@ -107,7 +107,7 @@ class APIReachabilityService {
     
     
     @objc private func checkAPI() {
-        requestService.sendPingRequest { [weak self] (isReachable) in
+        requestService.sendPingRequest { [weak self] isReachable in
             guard let `self` = self else {
                 return
             }

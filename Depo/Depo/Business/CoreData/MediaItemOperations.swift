@@ -50,7 +50,7 @@ extension CoreDataStack {
                     }
                     if let unwrapedAlbumbs = remoteWrapedItem.albums {
                         //LR-2356
-                        let albums = unwrapedAlbumbs.map({ (albumUuid) -> MediaItemsAlbum in
+                        let albums = unwrapedAlbumbs.map({ albumUuid -> MediaItemsAlbum in
                             MediaItemsAlbum(uuid: albumUuid, context: context)
                         })
                         savedMediaItem.albums = NSOrderedSet(array: albums)
@@ -108,7 +108,7 @@ extension CoreDataStack {
         do {
             let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
             request.predicate = predicate
-            result =  try context.fetch(request)
+            result = try context.fetch(request)
         } catch {
             print("exeption Coredata  ")
         }

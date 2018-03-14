@@ -36,7 +36,7 @@ class CounrtiesGSMCodeCompositor {
                                 withGSMCode: phoneCode)
         }
         
-        resulArray = resulArray.sorted(by: { (firt, second) -> Bool in
+        resulArray = resulArray.sorted(by: { firt, second -> Bool in
             return firt.countryName < second.countryName
         })
         

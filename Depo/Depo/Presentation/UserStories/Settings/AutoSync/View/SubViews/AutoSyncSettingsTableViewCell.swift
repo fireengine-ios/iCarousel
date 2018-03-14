@@ -56,7 +56,7 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     }
 
     
-    //MARK: - Public
+    // MARK: - Public
     
     override func prepareForReuse() {
         isFullHeight = false
@@ -82,7 +82,7 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     }
     
     
-    //MARK: - Private
+    // MARK: - Private
 
     @IBAction func changeHeight(_ sender: Any) {
         isFullHeight = !isFullHeight
@@ -109,7 +109,3 @@ extension AutoSyncSettingsTableViewCell: AutoSyncSettingsOptionViewDelegate {
         updateViews()
     }
 }
-
-
-
-

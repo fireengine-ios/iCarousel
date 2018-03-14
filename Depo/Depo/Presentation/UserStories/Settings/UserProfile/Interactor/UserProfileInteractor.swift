@@ -72,10 +72,10 @@ class UserProfileInteractor: UserProfileInteractorInput {
             let names = getSepareteName(nameString: name)
             let parameters = UserNameParameters(userName: names.name, userSurName: names.surName)
             AccountService().updateUserProfile(parameters: parameters,
-                                               success: {[weak self] (responce) in
+                                               success: {[weak self] responce in
                 self?.userInfo?.name = name
                 self?.updateEmailIfNeed(email: email, number: number)
-            }, fail: { [weak self] (error) in
+            }, fail: { [weak self] error in
                 self?.fail(error: error.description)
             })
         } else {
@@ -87,11 +87,11 @@ class UserProfileInteractor: UserProfileInteractorInput {
         if (isEmailChanged(email: email)) {
             let parameters = UserEmailParameters(userEmail: email)
             AccountService().updateUserEmail(parameters: parameters,
-                                             success: { [weak self] (responce) in
+                                             success: { [weak self] responce in
                                                 MenloworksEventsService.shared.onEmailChanged()
                 self?.userInfo?.email = email
                 self?.updatePhoneIfNeed(number: number)
-            }, fail: { [weak self] (error) in
+            }, fail: { [weak self] error in
                 self?.fail(error: error.description)
             })
         } else {
@@ -103,7 +103,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
         if (isPhoneChanged(phone: number)) {
             let parameters = UserPhoneNumberParameters(phoneNumber: number)
             AccountService().updateUserPhone(parameters: parameters,
-                                             success: { [weak self] (responce) in
+                                             success: { [weak self] responce in
                                                 self?.userInfo?.phoneNumber = number
                                                 if let resp = responce as? SignUpSuccessResponse {
                                                     self?.needSendOTP(responce: resp)
@@ -111,7 +111,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
                                                     self?.fail(error: TextConstants.errorUnknown)
                                                 }
                 
-            }, fail: { [weak self] (error) in
+            }, fail: { [weak self] error in
                 self?.fail(error: error.description)
             })
         } else {

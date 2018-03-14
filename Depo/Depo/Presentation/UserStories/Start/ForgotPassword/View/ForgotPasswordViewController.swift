@@ -108,7 +108,7 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
     
     fileprivate func configureKeyboard() {
         
-        keyboard.on(event: .didChangeFrame) { [weak self] (options) in
+        keyboard.on(event: .didChangeFrame) { [weak self] options in
             guard let wSelf = self else {
                 return
             }
@@ -121,7 +121,7 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
                 wSelf.scrollView.setContentOffset(bottomOffset, animated: true)
             }
             }
-            .on(event: .willHide) { [weak self] (_) in
+            .on(event: .willHide) { [weak self] _ in
                 guard let wSelf = self else {
                     return
                 }

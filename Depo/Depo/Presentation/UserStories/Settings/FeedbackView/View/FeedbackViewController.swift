@@ -103,7 +103,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         languagesArray.removeAll()
         languagesArray.append(contentsOf: lanuages)
 
-        let array = languagesArray.map({ (object) -> String in
+        let array = languagesArray.map({ object -> String in
             object.displayLanguage ?? ""
         })
         
@@ -125,7 +125,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
             self.dismiss(animated: true, completion: nil)
             Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [TextConstants.feedbackEmail], success: {
                 //
-            }, fail: { (error) in
+            }, fail: { error in
                 UIApplication.showErrorAlert(message: error?.localizedDescription ?? TextConstants.feedbackEmailError)
             })
         } else {

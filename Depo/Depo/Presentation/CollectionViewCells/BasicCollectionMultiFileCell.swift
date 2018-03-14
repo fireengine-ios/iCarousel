@@ -57,16 +57,16 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     weak var actionDelegate: BasicCollectionMultiFileCellActionDelegate?
     
-    static let smallH: CGFloat                          = 37
-    static let bigH: CGFloat                            = 65
-    static let frameSize: CGFloat                       = 66
+    static let smallH: CGFloat = 37
+    static let bigH: CGFloat = 65
+    static let frameSize: CGFloat = 66
     
-    static let smallContentImageViewWConst: CGFloat     = 20
-    static let smallContentImageViewHConst: CGFloat     = 24
-    static let smallContentImageViewBigSize: CGFloat    = 42
+    static let smallContentImageViewWConst: CGFloat = 20
+    static let smallContentImageViewHConst: CGFloat = 24
+    static let smallContentImageViewBigSize: CGFloat = 42
     
-    static let leftSpaceBigCell: CGFloat                = 6
-    static let leftSpaceSmallCell: CGFloat              = 14
+    static let leftSpaceBigCell: CGFloat = 6
+    static let leftSpaceSmallCell: CGFloat = 14
     
     var itemModel: Item?
 
@@ -98,7 +98,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     override func setImage(with url: URL) {
         if let imageView = isBigSize() ? bigContentImageView : smallContentImageView {
-            imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] (image, error, cacheType, url) in
+            imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] image, error, cacheType, url in
                 self?.setImage(image: image, animated: true)
             }
         }

@@ -124,7 +124,7 @@ final class BaseMetaData: ObjectRequestResponse {
         height = json?[SearchJsonKey.ImageHeight].int16
         width = json?[SearchJsonKey.ImageWidth].int16
         takenDate = json?[SearchJsonKey.ImageDateTime].date
-        largeUrl =  json?[SearchJsonKey.ThumbnailLarge].url
+        largeUrl = json?[SearchJsonKey.ThumbnailLarge].url
         mediumUrl = json?[SearchJsonKey.Thumbnail_Medium].url
         smalURl = json?[SearchJsonKey.ThumbnailSmall].url
         videoPreviewURL = json?[SearchJsonKey.VideoPreview].url

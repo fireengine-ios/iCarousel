@@ -20,7 +20,7 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
             self.json = jsonFromData
             
             /// JSON(data: data) can not correct string
-            if ((json?.count)!>0  && jsonFromData.type == Type.null) {
+            if ((json?.count)!>0 && jsonFromData.type == Type.null) {
                 jsonString = String(data: json! as Data, encoding: .utf8)
             }
             
@@ -102,7 +102,7 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
     private var fail: FailResponse?
     private let expectedDataFormat: ExpectedDataFormat
     
-    lazy var wrapRequestResponse: RequestResponse = { (data, response, error) in
+    lazy var wrapRequestResponse: RequestResponse = { data, response, error in
         self.handleResponse(data: data, response: response, error: error)
     }
     

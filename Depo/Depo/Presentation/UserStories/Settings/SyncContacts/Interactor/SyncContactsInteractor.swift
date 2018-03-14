@@ -50,17 +50,17 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     func performOperation(forType type: SYNCMode) {
-        contactsSyncService.executeOperation(type: type, progress: { [weak self] (progressPercentage, count, type) in
+        contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, type in
                 DispatchQueue.main.async {
                     self?.output?.showProggress(progress: progressPercentage, count: 0, forOperation: type)
                 }
-            }, finishCallback: { [weak self] (result, type) in
+            }, finishCallback: { [weak self] result, type in
                 DispatchQueue.main.async {
                     self?.output?.success(response: result, forOperation: type)
                     CardsManager.default.stopOperationWithType(type: .contactBacupOld)
                     CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
                 }
-        }, errorCallback: { [weak self] (errorType, type) in
+        }, errorCallback: { [weak self] errorType, type in
             DispatchQueue.main.async {
                 self?.output?.showError(errorType: errorType)
             }
@@ -69,7 +69,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     private func loadLastBackUp() {
         output?.asyncOperationStarted()
-        contactsSyncService.getBackUpStatus(completion: { [weak self] (model) in
+        contactsSyncService.getBackUpStatus(completion: { [weak self] model in
             self?.output?.success(response: model, forOperation: .getBackUpStatus)
             self?.output?.asyncOperationFinished()
         }, fail: { [weak self] in
@@ -79,16 +79,16 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     private func analyze() {
-        contactsSyncService.analyze(progressCallback: { [weak self] (progressPercentage, count, type) in
+        contactsSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
             DispatchQueue.main.async {
                 self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)
             }
-        }, successCallback: { [weak self] (response) in
+        }, successCallback: { [weak self] response in
             DispatchQueue.main.async {
                 self?.output?.analyzeSuccess(response: response)
             }
         }, cancelCallback: nil,
-           errorCallback: { [weak self] (errorType, type) in
+           errorCallback: { [weak self] errorType, type in
             DispatchQueue.main.async {
                 self?.output?.showError(errorType: errorType)
             }

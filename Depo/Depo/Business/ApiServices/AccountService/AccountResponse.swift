@@ -79,7 +79,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         countryCode = json?[AccountJSONConstants.countryCode].string
         phoneNumber = json?[AccountJSONConstants.phoneNumber].string
         email = json?[AccountJSONConstants.email].string
-        emailVerified =  json?[AccountJSONConstants.emailVerified].bool
+        emailVerified = json?[AccountJSONConstants.emailVerified].bool
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
     }
@@ -90,8 +90,8 @@ class SecuritySettingsInfoResponse: ObjectRequestResponse {
     var mobileNetworkAuthEnabled: Bool?
     
     override func mapping() {
-        turkcellPasswordAuthEnabled =  json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
-        mobileNetworkAuthEnabled =  json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
+        turkcellPasswordAuthEnabled = json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
+        mobileNetworkAuthEnabled = json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
     }
     
 }

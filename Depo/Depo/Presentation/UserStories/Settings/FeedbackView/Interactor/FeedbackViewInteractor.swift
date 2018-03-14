@@ -14,7 +14,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         output.startAsyncOperation()
         
         let obj = FeedbackLanguage()
-        FeedbackService().getFeedbackLanguage(feedbackLanguageParameter: obj, success: { [weak self] (successResponce) in
+        FeedbackService().getFeedbackLanguage(feedbackLanguageParameter: obj, success: { [weak self] successResponce in
             DispatchQueue.main.async {
                 guard let self_ = self else {
                     return
@@ -24,7 +24,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
                     self_.output.languagesUploaded(lanuages: responce.languagesList)
                 }
             }
-        }) { [weak self] (fail) in
+        }) { [weak self] fail in
             DispatchQueue.main.async {
                 self?.output.fail(text: fail.localizedDescription)
             }
@@ -35,11 +35,11 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         output.startAsyncOperation()
         
         let parameter = SelectedLanguage(selectedLanguage: selectedLanguage)
-        FeedbackService().sendSelectedLanguage(selectedLanguageParameter: parameter, succes: {[weak self] (success) in
+        FeedbackService().sendSelectedLanguage(selectedLanguageParameter: parameter, succes: {[weak self] success in
             DispatchQueue.main.async {
                 self?.getUserInfoString(with: selectedLanguage.displayLanguage ?? "")
             }
-            }, fail: { [weak self] (fail) in
+            }, fail: { [weak self] fail in
                 DispatchQueue.main.async {
                     self?.output.fail(text: fail.localizedDescription)
                 }
@@ -59,22 +59,22 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         var quotaUsed: Int64 = 0
         var subscriptions: [SubscriptionPlanBaseResponse] = []
         
-        AccountService().info(success: {(responce) in
+        AccountService().info(success: {responce in
             let userInfoResponse = responce as? AccountInfoResponse
-            if let phone  = userInfoResponse?.phoneNumber {
+            if let phone = userInfoResponse?.phoneNumber {
                 phoneString = phone
             }
             group.leave()
-        }) { (error) in
+        }) { error in
             group.leave()
         }
         
-        AccountService().quotaInfo(success: {(respoce) in
+        AccountService().quotaInfo(success: {respoce in
             let quotaInfoResponse = respoce as? QuotaInfoResponse
             quota = quotaInfoResponse?.bytes ?? 0
             quotaUsed = quotaInfoResponse?.bytesUsed ?? 0
             group.leave()
-        }) { (error) in
+        }) { error in
             group.leave()
         }
         
