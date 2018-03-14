@@ -40,7 +40,7 @@ final class ShareDataImageLoader {
                     }
                 case .failed(_):
                     DispatchQueue.main.async {
-                        imageView.image = #imageLiteral(resourceName: "ImageNoDocuments")
+                        imageView.image = Images.noDocuments
                     }
                 }
                 
