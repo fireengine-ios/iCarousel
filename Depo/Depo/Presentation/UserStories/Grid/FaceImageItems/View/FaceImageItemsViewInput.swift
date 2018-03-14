@@ -6,6 +6,8 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 protocol FaceImageItemsViewInput: class {
     func configurateUgglaView()
     func updateUgglaViewPosition()
