@@ -9,18 +9,25 @@
 import UIKit
 
 class AutoSyncDataStorage: NSObject {
+    static let shared = AutoSyncDataStorage()
+    
+    private var uniqueUserID = ""
 
     func getAutoSyncSettingsForCurrentUser(success: @escaping (AutoSyncSettings, _ uniqueUserId: String) -> Void) {
-        SingletonStorage.shared.getAccountInfoForUser(success: { (accountInfoResponce) in
+        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] accountInfoResponce in
+            guard let `self` = self else {
+                return
+            }
+            
             let settings: AutoSyncSettings
             
-            let uniqueUserID = accountInfoResponce.projectID ?? ""
-            if let dict = UserDefaults.standard.object(forKey: uniqueUserID) as? [String: Bool] {
+            self.uniqueUserID = accountInfoResponce.projectID ?? ""
+            if let dict = UserDefaults.standard.object(forKey: self.uniqueUserID) as? [String: Bool] {
                 settings = AutoSyncSettings(with: dict)
             } else {
                 settings = AutoSyncSettings()
             }
-            success(settings, uniqueUserID)
+            success(settings, self.uniqueUserID)
         }) { (error) in
             success(AutoSyncSettings(), "")
         }
@@ -37,6 +44,11 @@ class AutoSyncDataStorage: NSObject {
             LocationManager.shared.stopUpdateLocation()
         }
         
+    }
+    
+    func clear() {
+        UserDefaults.standard.removeObject(forKey: uniqueUserID)
+        uniqueUserID = ""
     }
     
 }

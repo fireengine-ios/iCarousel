@@ -70,8 +70,6 @@ class SettingsInteractor: SettingsInteractorInput {
         authService.logout { [weak self] in
             MenloworksEventsService.shared.onLoggedOut()
             self?.output.goToOnboarding()
-            SyncServiceManager.shared.stopSync()
-
         }
     }
     
