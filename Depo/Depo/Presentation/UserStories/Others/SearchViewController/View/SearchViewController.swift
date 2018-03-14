@@ -324,12 +324,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool) {
         collectionView.isHidden = visibilityStatus
         noFilesView.isHidden = !visibilityStatus
-        
-        if visibilityStatus {
-            hideTabBar()
-        } else {
-            showTabBar()
-        }
     }
     
     func successWithSuggestList(list: [SuggestionObject]) {
@@ -372,6 +366,19 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func setNavBarRigthItem(active isActive: Bool) {
         navigationItem.rightBarButtonItem?.isEnabled = isActive
+    }
+    
+    func setEnabledSearchBar(_ isEnabled: Bool) {
+        searchBar.isUserInteractionEnabled = isEnabled
+        searchBar.alpha = isEnabled ? 1 : 0.5
+    }
+    
+    func setVisibleTabBar(_ isVisible: Bool) {
+        if isVisible {
+            showTabBar()
+        } else {
+            hideTabBar()
+        }
     }
     
     // MARK: - Under nav bar
