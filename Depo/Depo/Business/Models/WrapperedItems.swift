@@ -254,7 +254,7 @@ enum FileType: Equatable {
                         self = .application(.unknown)
                     }
                     return
-                case "zip":
+                case "zip", "x-zip-compressed", "tar", ".7z":
                     self = .application(.zip)
                     return
                 case "vnd.ms-powerpoint":
