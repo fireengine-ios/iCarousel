@@ -12,6 +12,8 @@ protocol HomePageRouterInput {
     
     func moveToSettingsScreen()
     
+    func moveToSearchScreen(output: UIViewController?)
+    
     func moveToSyncContacts()
     
     func moveToAllFilesPage()
