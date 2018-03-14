@@ -62,7 +62,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         log.debug("LocationManager startUpdateLocation")
 
         AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, _ in
-            
             guard let `self` = self else {
                 return
             }
