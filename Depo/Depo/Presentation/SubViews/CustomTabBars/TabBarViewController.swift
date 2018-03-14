@@ -377,9 +377,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         } else {
             curtainView.removeFromSuperview()
         }
-        
-
-        currentViewController?.navigationItem.hidesBackButton = show
+                
+        if !(currentViewController is SearchViewController) {
+            currentViewController?.navigationItem.hidesBackButton = show
+        }
     }
     
     @objc func closeCurtainView() {
