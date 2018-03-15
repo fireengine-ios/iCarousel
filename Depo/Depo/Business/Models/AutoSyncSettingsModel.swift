@@ -9,7 +9,7 @@
 import Foundation
 
 
-class AutoSyncSettings {
+final class AutoSyncSettings {
     
     private struct SettingsKeys {
         private init() {}
