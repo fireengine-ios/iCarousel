@@ -27,6 +27,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     static let borderW: CGFloat = 3
     
+    private var visualEffectBlur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,6 +40,9 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         imageView.backgroundColor = UIColor.clear
         
         favoriteIcon.accessibilityLabel = TextConstants.accessibilityFavorite
+        
+        imageView.addSubview(visualEffectBlur)
+        visualEffectBlur.isHidden = true
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
@@ -130,12 +135,18 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         return CGSize(width: 90.0, height: 90.0)
     }
     
-    func setProgressForObject(progress: Float) {
+    func setProgressForObject(progress: Float, blurOn: Bool = false) {
+        if visualEffectBlur.isHidden, blurOn {
+            visualEffectBlur.frame = imageView.bounds
+        }
+        visualEffectBlur.isHidden = !blurOn
+        
         progressView.isHidden = false
         progressView.setProgress(progress, animated: false)
     }
     
     func finishedUploadForObject() {
+        visualEffectBlur.isHidden = true
         progressView.isHidden = true
         cloudStatusImage.image = UIImage(named: "objectInCloud")
     }

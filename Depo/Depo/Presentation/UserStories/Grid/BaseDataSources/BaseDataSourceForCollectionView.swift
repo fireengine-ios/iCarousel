@@ -1020,22 +1020,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func startUploadFile(file: WrapData) {
-        if !needShowProgressInCell {
+        guard needShowProgressInCell, file.isLocalItem else {
             return
         }
         
         if let cell = getCellForFile(objectUUID: file.uuid) {
-            cell.setProgressForObject(progress: 0)
+            cell.setProgressForObject(progress: 0, blurOn: true)
         }
     }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {
-        if !needShowProgressInCell {
+        guard needShowProgressInCell, file.isLocalItem else {
             return
         }
         
         if let cell = getCellForFile(objectUUID: file.uuid) {
-            cell.setProgressForObject(progress: progress)
+            cell.setProgressForObject(progress: progress, blurOn: true)
         }
     }
     
