@@ -997,7 +997,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var row = 0
         let items = getAllObjects()
         for array in items {
-            row = 0
+            
             for arraysObject in array {
                 if arraysObject.uuid == objectUUID {
                     indexPath = IndexPath(row: row, section: section)
@@ -1010,21 +1010,48 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getCellForFile(objectUUID: String) -> CollectionViewCellForPhoto? {
-        if let path = getIndexPathForObject(objectUUID: objectUUID) {
-            let cell = collectionView?.cellForItem(at: path)
-            if let cell = cell as? CollectionViewCellForPhoto {
-                return cell
-            }
+        guard let path = getIndexPathForObject(objectUUID: objectUUID),
+            let cell = collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto else {
+                return nil
         }
-        return nil
+        return cell
     }
+    
+    //Actualy those "new methods" wont needed if we just update Item model(UUID espetialy)
+    
+    func getIndexPathForLocalObject(objectUUID: String) -> IndexPath? {
+        var indexPath: IndexPath? = nil
+        var section = 0
+        var row = 0
+        let items = getAllObjects()
+        for array in items {
+            
+            for arraysObject in array {
+                if arraysObject.uuid == objectUUID, arraysObject.isLocalItem {
+                    indexPath = IndexPath(row: row, section: section)
+                }
+                row += 1
+            }
+            section += 1
+        }
+        return indexPath
+    }
+    
+    func getCellForLocalFile(objectUUID: String) -> CollectionViewCellForPhoto? {
+        guard let path = getIndexPathForLocalObject(objectUUID: objectUUID),
+            let cell = collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto else {
+                return nil
+        }
+        return cell
+    }
+    //----
     
     func startUploadFile(file: WrapData) {
         guard needShowProgressInCell, file.isLocalItem else {
             return
         }
         
-        if let cell = getCellForFile(objectUUID: file.uuid) {
+        if let cell = getCellForLocalFile(objectUUID: file.uuid) {
             cell.setProgressForObject(progress: 0, blurOn: true)
         }
     }
@@ -1034,7 +1061,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        if let cell = getCellForFile(objectUUID: file.uuid) {
+        if let cell = getCellForLocalFile(objectUUID: file.uuid) {
             cell.setProgressForObject(progress: progress, blurOn: true)
         }
     }
@@ -1073,10 +1100,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         
-        if let cell = getCellForFile(objectUUID: file.uuid) {
+        if let cell = getCellForLocalFile(objectUUID: file.uuid) {
             cell.finishedUploadForObject()
         }
-        
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
             if let `self` = self {
