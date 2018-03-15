@@ -91,6 +91,8 @@ class AutoSyncSettings {
     
     func migrate() {
         defer {
+            UserDefaults.standard.removeObject(forKey: MigrationKeys.settingsUploadPhotosVideos)
+            UserDefaults.standard.removeObject(forKey: MigrationKeys.settingsUploadMediaType)
             UserDefaults.standard.set(true, forKey: MigrationKeys.migrationCompletedKey)
         }
         
