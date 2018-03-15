@@ -377,8 +377,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         } else {
             curtainView.removeFromSuperview()
         }
-                
-        if !(currentViewController is SearchViewController) {
+        
+        
+        if let searchController = currentViewController as? SearchViewController {
+            searchController.setEnabledSearchBar(!show)
+        } else {
             currentViewController?.navigationItem.hidesBackButton = show
         }
     }
