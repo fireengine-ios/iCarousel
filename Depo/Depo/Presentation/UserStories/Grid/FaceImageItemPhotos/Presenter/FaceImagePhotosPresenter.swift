@@ -51,7 +51,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .removeFromAlbum || type == .removeFromFaceImageAlbum || type == .delete {
+        if type.isContained(in: [.removeFromAlbum, .removeFromFaceImageAlbum, .delete]) {
             dataSource.reloadData()
             faceImageItemsModuleOutput?.didReloadData()
         } else if type == .changeCoverPhoto {
