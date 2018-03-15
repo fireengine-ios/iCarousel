@@ -12,14 +12,15 @@ class AutoSyncDataStorage: NSObject {
 
     func getAutoSyncSettingsForCurrentUser(success: @escaping (AutoSyncSettings, _ uniqueUserId: String) -> Void) {
         SingletonStorage.shared.getAccountInfoForUser(success: { accountInfoResponce in
-            let settings: AutoSyncSettings
+            var settings = AutoSyncSettings()
             
             let uniqueUserID = accountInfoResponce.projectID ?? ""
             if let dict = UserDefaults.standard.object(forKey: uniqueUserID) as? [String: Bool] {
                 settings = AutoSyncSettings(with: dict)
-            } else {
-                settings = AutoSyncSettings()
+            } else if !settings.isMigrationCompleted {
+                settings.migrate()
             }
+            
             success(settings, uniqueUserID)
         }) { error in
             success(AutoSyncSettings(), "")
