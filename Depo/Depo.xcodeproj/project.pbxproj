@@ -13143,7 +13143,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./unused xcode\n#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00";
+			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00";
 		};
 		D87015A847755B08A12DE815 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

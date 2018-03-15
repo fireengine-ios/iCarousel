@@ -31,10 +31,6 @@ protocol UploadRequestParametrs: RequestParametrs {
     var fileData: Data? { get }
 }
 
-protocol UploadDataRequestParametrs: RequestParametrs {
-    var data: Data { get }
-}
-
 protocol DownloadRequestParametrs: RequestParametrs {
     var urlToRemoteFile: URL { get }
 }

@@ -16,7 +16,7 @@ struct AccountPath {
     static let usages = accountBase + "usages"
     static let provision = accountBase + "provision"
     static let profilePhoto = accountBase + "profilePhoto"
-    static let storeProducNames = accountBase + "allAccessOffers/APPLE"
+//    static let storeProducNames = accountBase + "allAccessOffers/APPLE"
     static let offers = accountBase + "offers"
     static let activateOffer = accountBase + "activateOffer"
     static let updateUserName = accountBase + "nameSurname"
