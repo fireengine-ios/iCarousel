@@ -86,6 +86,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
                 collectionView.reloadItems(at: allVisibleCells)
             })
         }
+        navigationItem.hidesBackButton = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -107,6 +108,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         if goBack {
             homePageNavigationBarStyle()
         }
+        
+        searchBar.resignFirstResponder()
     }
     
     deinit {
@@ -259,8 +262,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     // MARK: - UISearchbarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(true)
-        dismissController()
+        searchBar.resignFirstResponder()
+        dismissController(animated: true)
         output.tapCancel()
     }
     
@@ -307,9 +310,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         } else {
             collectionView.isHidden = true
         }
-        searchBar.enableCancelButton()
         searchBar.resignFirstResponder()
-        view.endEditing(true)
+        searchBar.enableCancelButton()
         suggestTableView.isHidden = true
     }
     
@@ -322,12 +324,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool) {
         collectionView.isHidden = visibilityStatus
         noFilesView.isHidden = !visibilityStatus
-        
-        if visibilityStatus {
-            hideTabBar()
-        } else {
-            showTabBar()
-        }
     }
     
     func successWithSuggestList(list: [SuggestionObject]) {
@@ -355,13 +351,13 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        view.endEditing(true)
+        searchBar.resignFirstResponder()
     }
     
-    func dismissController() {
+    func dismissController(animated: Bool) {
         goBack = true
         navigationController?.delegate = self
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: animated)
     }
     
     func onSetSelection(state: Bool) {
@@ -370,6 +366,19 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func setNavBarRigthItem(active isActive: Bool) {
         navigationItem.rightBarButtonItem?.isEnabled = isActive
+    }
+    
+    func setEnabledSearchBar(_ isEnabled: Bool) {
+        searchBar.isUserInteractionEnabled = isEnabled
+        searchBar.alpha = isEnabled ? 1 : 0.5
+    }
+    
+    func setVisibleTabBar(_ isVisible: Bool) {
+        if isVisible {
+            showTabBar()
+        } else {
+            hideTabBar()
+        }
     }
     
     // MARK: - Under nav bar
@@ -411,7 +420,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     @objc override func hideKeyboard() {
-        view.endEditing(true)
         suggestTableView.contentInset = .zero
         collectionView.contentInset = .zero
     }
@@ -530,7 +538,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func musicBarZoomWillOpen() {
         output.willDismissController()
-        dismissController()
+        dismissController(animated: true)
     }
 }
 

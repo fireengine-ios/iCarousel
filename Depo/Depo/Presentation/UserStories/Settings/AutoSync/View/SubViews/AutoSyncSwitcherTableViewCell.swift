@@ -41,6 +41,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     func setup(with model: AutoSyncModel) {
         self.model = model
         switcher.isOn = model.isSelected
+        separatorView.isHidden = !model.isSelected
         
         titleLabel.text = model.titleString
         subTitleLabel.text = model.subTitleString
@@ -50,6 +51,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     func setColors(isFromSettings: Bool) {
         titleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         subTitleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        separatorView.backgroundColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
     }
     
     @IBAction func onSwitcherValueChanged() {
@@ -58,6 +60,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         }
         
         model.isSelected = switcher.isOn
+        separatorView.isHidden = !switcher.isOn
         delegate?.onValueChanged(model: model, cell: self)
     }
 

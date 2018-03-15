@@ -14,6 +14,8 @@ protocol HomePageViewOutput {
     
     func showSettings()
     
+    func showSearch(output: UIViewController?)
+    
     func onSyncContacts()
     
     func allFilesPressed()
