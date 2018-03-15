@@ -535,9 +535,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
             actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
-            if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.index(of: .download) {
-                actionTypes.remove(at: downloadIdex)
+            
+            if dataSource.allMediaItems.isEmpty {
+                if let downloadIdex = actionTypes.index(of: .download) {
+                    actionTypes.remove(at: downloadIdex)
+                }
+                
+                if let selectIndex = actionTypes.index(of: .select) {
+                    actionTypes.remove(at: selectIndex)
+                }
             }
+            
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              presentedBy: sender,
                                              onSourceView: nil)
