@@ -9,13 +9,43 @@
 import Foundation
 
 
-struct AutoSyncSettings {
+class AutoSyncSettings {
     
-    static let isAutoSyncEnabledKey = "isAutoSyncEnabled"
-    static let mobileDataPhotosKey = "mobileDataPhotos"
-    static let mobileDataVideoKey = "mobileDataVideo"
-    static let wifiPhotosKey = "wifiPhotos"
-    static let wifiVideoKey = "wifiVideo"
+    private struct SettingsKeys {
+        private init() {}
+        
+        static let isAutoSyncEnabledKey = "isAutoSyncEnabled"
+        static let mobileDataPhotosKey = "mobileDataPhotos"
+        static let mobileDataVideoKey = "mobileDataVideo"
+        static let wifiPhotosKey = "wifiPhotos"
+        static let wifiVideoKey = "wifiVideo"
+    }
+    
+    
+    private struct MigrationKeys {
+        private init() {}
+        
+        static let settingsUploadPhotosVideos = "SETTINGS_UPLOAD_PHOTOSVIDEOS"
+        static let settingsUploadMediaType = "SETTINGS_UPLOAD_SYNC_MEDIA_TYPE"
+        static let migrationCompletedKey = "SETTINGS_UPLOAD_MIGRATION_COMPLETED"
+    }
+    
+    private enum MigrationEnableOption: Int {
+        case off = 1
+        case on
+        case auto
+    }
+    
+    private enum MigrationSyncMediaType: Int {
+        case all = 1
+        case photos
+        case videos
+        case none
+    }
+    
+    var isMigrationCompleted: Bool {
+        return UserDefaults.standard.bool(forKey: MigrationKeys.migrationCompletedKey)
+    }
     
     var isAutoSyncEnabled: Bool {
         return isAutoSyncOptionEnabled && (photoSetting.option != .never || videoSetting.option != .never)
@@ -29,13 +59,13 @@ struct AutoSyncSettings {
     init() { }
     
     init(with dictionary: [String: Bool]) {
-        isAutoSyncOptionEnabled = dictionary[AutoSyncSettings.isAutoSyncEnabledKey] ?? true
+        isAutoSyncOptionEnabled = dictionary[SettingsKeys.isAutoSyncEnabledKey] ?? true
         
-        let mobileDataPhotos = dictionary[AutoSyncSettings.mobileDataPhotosKey] ?? true
-        let mobileDataVideo = dictionary[AutoSyncSettings.mobileDataVideoKey] ?? false
+        let mobileDataPhotos = dictionary[SettingsKeys.mobileDataPhotosKey] ?? true
+        let mobileDataVideo = dictionary[SettingsKeys.mobileDataVideoKey] ?? false
         
-        let wifiPhotos = dictionary[AutoSyncSettings.wifiPhotosKey] ?? false
-        let wifiVideo = dictionary[AutoSyncSettings.wifiVideoKey] ?? true
+        let wifiPhotos = dictionary[SettingsKeys.wifiPhotosKey] ?? false
+        let wifiVideo = dictionary[SettingsKeys.wifiVideoKey] ?? true
         
         
         //setup photo setting
@@ -59,13 +89,44 @@ struct AutoSyncSettings {
         }
     }
     
-    mutating func disableAutoSync() {
+    func migrate() {
+        defer {
+            UserDefaults.standard.set(true, forKey: MigrationKeys.migrationCompletedKey)
+        }
+        
+        let oldValueAutoSyncState = UserDefaults.standard.integer(forKey: MigrationKeys.settingsUploadPhotosVideos)
+        let oldValueMediaType = UserDefaults.standard.integer(forKey: MigrationKeys.settingsUploadMediaType)
+        
+        guard let oldAutoSyncState = MigrationEnableOption(rawValue: oldValueAutoSyncState),
+            let oldMediaType = MigrationSyncMediaType(rawValue: oldValueMediaType) else {
+                return
+        }
+        
+        isAutoSyncOptionEnabled = (oldAutoSyncState != .off)
+        
+        if isAutoSyncOptionEnabled {
+            switch oldMediaType {
+            case .photos:
+                photoSetting.option = .wifiAndCellular
+            case .videos:
+                videoSetting.option = .wifiAndCellular
+            case .all:
+                photoSetting.option = .wifiAndCellular
+                videoSetting.option = .wifiAndCellular
+            case .none:
+                photoSetting.option = .wifiOnly
+                videoSetting.option = .wifiOnly
+            }
+        }
+    }
+    
+    func disableAutoSync() {
         isAutoSyncOptionEnabled = false
         photoSetting.option = .wifiAndCellular
         videoSetting.option = .wifiOnly
     }
     
-    mutating func set(setting: AutoSyncSetting) {
+    func set(setting: AutoSyncSetting) {
         switch setting.syncItemType {
         case .photo:
             set(photoSyncSetting: setting)
@@ -74,20 +135,21 @@ struct AutoSyncSettings {
         }
     }
     
-    mutating private func set(photoSyncSetting: AutoSyncSetting) {
+    private func set(photoSyncSetting: AutoSyncSetting) {
         photoSetting = photoSyncSetting
     }
     
-    mutating private func set(videoSyncSetting: AutoSyncSetting) {
+    private func set(videoSyncSetting: AutoSyncSetting) {
         videoSetting = videoSyncSetting
     }
     
+    
     func asDictionary() -> [String: Bool] {
-        return [AutoSyncSettings.isAutoSyncEnabledKey: isAutoSyncOptionEnabled,
-                AutoSyncSettings.mobileDataPhotosKey: (photoSetting.option == .wifiAndCellular),
-                AutoSyncSettings.mobileDataVideoKey: (videoSetting.option == .wifiAndCellular),
-                AutoSyncSettings.wifiPhotosKey: (photoSetting.option == .wifiOnly),
-                AutoSyncSettings.wifiVideoKey: (videoSetting.option == .wifiOnly)]
+        return [SettingsKeys.isAutoSyncEnabledKey: isAutoSyncOptionEnabled,
+                SettingsKeys.mobileDataPhotosKey: (photoSetting.option == .wifiAndCellular),
+                SettingsKeys.mobileDataVideoKey: (videoSetting.option == .wifiAndCellular),
+                SettingsKeys.wifiPhotosKey: (photoSetting.option == .wifiOnly),
+                SettingsKeys.wifiVideoKey: (videoSetting.option == .wifiOnly)]
     }
 }
 
