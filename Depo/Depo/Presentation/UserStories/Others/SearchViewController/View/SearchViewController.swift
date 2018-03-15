@@ -108,6 +108,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         if goBack {
             homePageNavigationBarStyle()
         }
+        
+        searchBar.resignFirstResponder()
     }
     
     deinit {
@@ -260,7 +262,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     // MARK: - UISearchbarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(true)
+        searchBar.resignFirstResponder()
         dismissController(animated: true)
         output.tapCancel()
     }
@@ -308,9 +310,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         } else {
             collectionView.isHidden = true
         }
-        searchBar.enableCancelButton()
         searchBar.resignFirstResponder()
-        view.endEditing(true)
+        searchBar.enableCancelButton()
         suggestTableView.isHidden = true
     }
     
@@ -350,7 +351,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        view.endEditing(true)
+        searchBar.resignFirstResponder()
     }
     
     func dismissController(animated: Bool) {
@@ -419,7 +420,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     @objc override func hideKeyboard() {
-        view.endEditing(true)
         suggestTableView.contentInset = .zero
         collectionView.contentInset = .zero
     }
