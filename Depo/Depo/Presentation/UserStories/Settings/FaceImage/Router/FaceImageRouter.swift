@@ -14,4 +14,11 @@ final class FaceImageRouter {
 
 extension FaceImageRouter: FaceImageRouterInput {
     
+    func showPopUp() {
+        let popUp = PopUpController.with(title: nil, message: TextConstants.faceImageWaitAlbum, image: .none, buttonTitle: TextConstants.ok)
+        
+        RouterVC().presentViewController(controller: popUp)
+    }
+
+    
 }

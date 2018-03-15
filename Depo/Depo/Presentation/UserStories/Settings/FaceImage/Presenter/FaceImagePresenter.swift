@@ -28,6 +28,10 @@ extension FaceImagePresenter: FaceImageViewOutput {
         view?.startActivityIndicator()
         
         interactor.changeFaceImageStatus(isAllowed)
+        
+        if isAllowed {
+            router.showPopUp()
+        }
     }
 }
 
