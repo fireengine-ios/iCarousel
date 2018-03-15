@@ -373,12 +373,13 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .removeFromFaceImageAlbum:
                 action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
                     self.basePassingPresenter?.stopModeSelected()
-                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems, title: TextConstants.actionSheetRemove, message: TextConstants.removeFromAlbum)
+                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
                 })
             case .deleteFaceImage:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                    MenloworksAppEvents.onDeleteClicked()
+                    self.interactor.delete(item: currentItems)
                     self.basePassingPresenter?.stopModeSelected()
-                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems, title: TextConstants.actionSheetDelete, message: TextConstants.deleteFilesText)
                 })
             }
             return action

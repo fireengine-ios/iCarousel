@@ -22,9 +22,9 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
         navigationConroller?.dismiss(animated: true, completion: nil)
     }
     
-    func showRemoveFromAlbum(completion: @escaping (() -> Void), title: String, message: String) {
-        let controller = PopUpController.with(title: title,
-                                              message: message,
+    func showRemoveFromAlbum(completion: @escaping (() -> Void)) {
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                              message: TextConstants.removeFromAlbum,
                                               image: .delete,
                                               firstButtonTitle: TextConstants.cancel,
                                               secondButtonTitle: TextConstants.ok,

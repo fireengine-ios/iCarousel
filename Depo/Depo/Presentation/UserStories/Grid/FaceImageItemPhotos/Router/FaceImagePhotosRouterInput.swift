@@ -9,5 +9,5 @@
 protocol FaceImagePhotosRouterInput {
     func openAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?)
     func openChangeCoverWith(_ albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput)
-    func showRemoveFromAlbum(completion: @escaping (() -> Void), title: String, message: String)
+    func showRemoveFromAlbum(completion: @escaping (() -> Void))
 }

@@ -67,7 +67,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
     }
     
-    func updateCoverPhotoIfNeeded() {
+    override func updateCoverPhotoIfNeeded() {
         if let interactor = interactor as? AlbumDetailInteractor {
             interactor.updateCoverPhotoIfNeeded()
         }

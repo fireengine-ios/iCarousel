@@ -36,22 +36,22 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    override func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], title: String, message: String) {
+    override func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
         if let interactor = interactor as? FaceImagePhotosInteractor,
             let id = item.id {
             
             if item is PeopleItem {
-                interactor.deletePhotosFromPeopleAlbum(items: items, id: id, title: title, message: message)
+                interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
             } else if item is ThingsItem {
-                interactor.deletePhotosFromThingsAlbum(items: items, id: id, title: title, message: message)
+                interactor.deletePhotosFromThingsAlbum(items: items, id: id)
             } else if item is PlacesItem {
-                interactor.deletePhotosFromPlacesAlbum(items: items, id: id, title: title, message: message)
+                interactor.deletePhotosFromPlacesAlbum(items: items, id: id)
             }
         }
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .removeFromAlbum || type == .removeFromFaceImageAlbum {
+        if type == .removeFromAlbum || type == .removeFromFaceImageAlbum || type == .delete {
             dataSource.reloadData()
             faceImageItemsModuleOutput?.didReloadData()
         } else if type == .changeCoverPhoto {
@@ -95,7 +95,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     
     // MARK: - BaseDataSourceForCollectionViewDelegate
     
-    func updateCoverPhotoIfNeeded() {
+    override func updateCoverPhotoIfNeeded() {
         if let interactor = interactor as? FaceImagePhotosInteractor {
             interactor.updateCoverPhotoIfNeeded()
         }
@@ -115,6 +115,10 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
                 }
                 
                 view.setCountImage("\(count) \(TextConstants.faceImagePhotos)")
+                
+                if let interactor = interactor as? FaceImagePhotosInteractor {
+                    interactor.updateCoverPhotoIfNeeded()
+                }
             }
         }
     }
@@ -191,9 +195,9 @@ extension FaceImagePhotosPresenter: FaceImagePhotosInteractorOutput {
         }
     }
     
-    func didRemoveFromAlbum(completion: @escaping (() -> Void), title: String, message: String) {
+    func didRemoveFromAlbum(completion: @escaping (() -> Void)) {
         if let router = router as? FaceImagePhotosRouterInput {
-            router.showRemoveFromAlbum(completion: completion, title: title, message: message)
+            router.showRemoveFromAlbum(completion: completion)
         }
     }
     
