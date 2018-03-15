@@ -258,8 +258,6 @@
 		78F674932024BC91006B0911 /* PeopleAlbumSliderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */; };
 		78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */; };
 		78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */; };
-		7A2B8987205A89E300281FEA /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A2B8986205A89E300281FEA /* Info-AppStore.plist */; };
-		7A2B8989205A89FE00281FEA /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A2B8988205A89FE00281FEA /* Info-Enterprise.plist */; };
 		7A2B8990205AB69500281FEA /* LifeboxShared.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7A2B8991205AB69500281FEA /* LifeboxFileProvider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7A2B8992205AB69500281FEA /* LifeboxFileProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -12235,10 +12233,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A2B8987205A89E300281FEA /* Info-AppStore.plist in Resources */,
 				B54BFF5A202C86F30018AF82 /* Images.xcassets in Resources */,
 				B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */,
-				7A2B8989205A89FE00281FEA /* Info-Enterprise.plist in Resources */,
 				B54BFF42202B264D0018AF82 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
