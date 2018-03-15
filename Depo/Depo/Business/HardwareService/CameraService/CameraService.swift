@@ -16,6 +16,8 @@ import AVFoundation
     
     typealias  Photo = (_ image: UIImage?) -> Swift.Void
     
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    
     func cameraIsAvalible (cameraGranted: @escaping CameraGranted) {
         log.debug("CameraService cameraIsAvalible")
 
@@ -23,7 +25,13 @@ import AVFoundation
         case .authorized:
             cameraGranted(true)
         case .notDetermined, .restricted: //restricted?
-            AVCaptureDevice.requestAccess(for: .video, completionHandler: cameraGranted)
+            passcodeStorage.systemCallOnScreen = true
+            
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { [weak self] granted in
+                self?.passcodeStorage.systemCallOnScreen = false
+                cameraGranted(granted)
+            })
+
         case .denied:
             showAccessAlert()
         }
