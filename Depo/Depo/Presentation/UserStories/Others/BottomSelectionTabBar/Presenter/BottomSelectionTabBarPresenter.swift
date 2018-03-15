@@ -134,7 +134,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             basePassingPresenter?.stopModeSelected()
         case .deleteFaceImage:
             basePassingPresenter?.stopModeSelected()
-            basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
+            basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems, title: TextConstants.actionSheetDelete, message: TextConstants.deleteFilesText)
         case .download:
             MenloworksAppEvents.onDownloadClicked()
             basePassingPresenter?.stopModeSelected()
@@ -174,7 +174,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             basePassingPresenter?.stopModeSelected()
         case .removeFromFaceImageAlbum:
             self.basePassingPresenter?.stopModeSelected()
-            basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
+            basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems, title: TextConstants.actionSheetRemove, message: TextConstants.removeFromAlbum)
         case .addToAlbum:
             interactor.addToAlbum(items: selectedItems)
         case .print:
@@ -322,7 +322,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 })
             case .deleteFaceImage:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
+                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems, title: TextConstants.actionSheetDelete, message: TextConstants.deleteFilesText)
                 })
             case .move:
                 action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in

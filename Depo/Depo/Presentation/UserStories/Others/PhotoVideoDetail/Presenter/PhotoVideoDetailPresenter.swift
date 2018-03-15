@@ -153,15 +153,15 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     }
     
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], title: String, message: String) {
         if let item = item,
             let id = item.id {            
             if item is PeopleItem {
-                interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
+                interactor.deletePhotosFromPeopleAlbum(items: items, id: id, title: title, message: message)
             } else if item is ThingsItem {
-                interactor.deletePhotosFromThingsAlbum(items: items, id: id)
+                interactor.deletePhotosFromThingsAlbum(items: items, id: id, title: title, message: message)
             } else if item is PlacesItem {
-                interactor.deletePhotosFromPlacesAlbum(items: items, uuid: RouterVC().getParentUUID())
+                interactor.deletePhotosFromPlacesAlbum(items: items, uuid: RouterVC().getParentUUID(), title: title, message: message)
             }
         }
     }
@@ -170,8 +170,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
     }
     
-    func didRemoveFromAlbum(completion: @escaping (() -> Void)) {
-        router.showRemoveFromAlbum(completion: completion)
+    func didRemoveFromAlbum(completion: @escaping (() -> Void), title: String, message: String) {
+        router.showRemoveFromAlbum(completion: completion, title: title, message: message)
     }
     
     func printSelected() { }

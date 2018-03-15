@@ -21,7 +21,7 @@ protocol BaseItemInputPassingProtocol: class {
     func printSelected()
     func changeCover()
     
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem])
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], title: String, message: String)
     
     var selectedItems: [BaseDataSourceItem] { get }//FOR NOW
 }

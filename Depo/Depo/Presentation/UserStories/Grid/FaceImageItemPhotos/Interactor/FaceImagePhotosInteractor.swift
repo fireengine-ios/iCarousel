@@ -53,7 +53,7 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
 
 extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
     
-    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) {
+    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64, title: String, message: String) {
         let okHandler: () -> Void = { [weak self] in
             if let items = items as? [Item],
                 let uuid = self?.album?.uuid {
@@ -74,11 +74,11 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
         }
         
         if let output = output as? FaceImagePhotosInteractorOutput {
-            output.didRemoveFromAlbum(completion: okHandler)
+            output.didRemoveFromAlbum(completion: okHandler, title: title, message: message)
         }
     }
     
-    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) {
+    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64, title: String, message: String) {
         let okHandler: () -> Void = { [weak self] in
             if let items = items as? [Item],
                 let uuid = self?.album?.uuid {
@@ -99,11 +99,11 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
         }
         
         if let output = output as? FaceImagePhotosInteractorOutput {
-            output.didRemoveFromAlbum(completion: okHandler)
+            output.didRemoveFromAlbum(completion: okHandler, title: title, message: message)
         }
     }
     
-    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], id: Int64) {
+    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], id: Int64, title: String, message: String) {
         let okHandler: () -> Void = { [weak self] in
             if let items = items as? [Item],
                 let uuid = self?.album?.uuid {
@@ -124,7 +124,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
         }
         
         if let output = output as? FaceImagePhotosInteractorOutput {
-            output.didRemoveFromAlbum(completion: okHandler)
+            output.didRemoveFromAlbum(completion: okHandler, title: title, message: message)
         }
     }
     

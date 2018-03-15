@@ -649,7 +649,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         router.showBack()
     }
     
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], title: String, message: String) { }
     
     func sortType() -> MoreActionsConfig.ViewType {
         return type
