@@ -258,10 +258,10 @@
 		78F674932024BC91006B0911 /* PeopleAlbumSliderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F674922024BC91006B0911 /* PeopleAlbumSliderInteractor.swift */; };
 		78FA7AD82008D5D800E0747F /* DuplicatedContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */; };
 		78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */; };
-		7A2B89A3205AE26300281FEA /* autosync-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B54BFF30202B20250018AF82 /* autosync-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		7A2B89A6205AE26400281FEA /* LifeboxShared.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		7A2B89A9205AE26400281FEA /* LifeboxFileProvider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		7A2B89AC205AE26400281FEA /* LifeboxFileProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7A2B89B4205AE80F00281FEA /* autosync-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B54BFF30202B20250018AF82 /* autosync-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7A2B89B7205AE80F00281FEA /* LifeboxShared.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7A2B89BA205AE80F00281FEA /* LifeboxFileProvider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7A2B89BD205AE80F00281FEA /* LifeboxFileProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */; };
 		7A652F2C2058051100612D93 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		7C00FE191F5957570041D041 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE161F5957570041D041 /* AppRater.bundle */; };
@@ -3234,28 +3234,28 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7A2B89A4205AE26300281FEA /* PBXContainerItemProxy */ = {
+		7A2B89B5205AE80F00281FEA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B54BFF2F202B20250018AF82;
 			remoteInfo = "autosync-widget";
 		};
-		7A2B89A7205AE26400281FEA /* PBXContainerItemProxy */ = {
+		7A2B89B8205AE80F00281FEA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CE58FAEE20444492007F3F54;
 			remoteInfo = LifeboxShared;
 		};
-		7A2B89AA205AE26400281FEA /* PBXContainerItemProxy */ = {
+		7A2B89BB205AE80F00281FEA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CE1BE921204831CD0074BDDC;
 			remoteInfo = LifeboxFileProvider;
 		};
-		7A2B89AD205AE26400281FEA /* PBXContainerItemProxy */ = {
+		7A2B89BE205AE80F00281FEA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
 			proxyType = 1;
@@ -3300,16 +3300,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7A2B89AF205AE26400281FEA /* Embed App Extensions */ = {
+		7A2B89C0205AE80F00281FEA /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				7A2B89A3205AE26300281FEA /* autosync-widget.appex in Embed App Extensions */,
-				7A2B89AC205AE26400281FEA /* LifeboxFileProviderUI.appex in Embed App Extensions */,
-				7A2B89A6205AE26400281FEA /* LifeboxShared.appex in Embed App Extensions */,
-				7A2B89A9205AE26400281FEA /* LifeboxFileProvider.appex in Embed App Extensions */,
+				7A2B89B4205AE80F00281FEA /* autosync-widget.appex in Embed App Extensions */,
+				7A2B89BD205AE80F00281FEA /* LifeboxFileProviderUI.appex in Embed App Extensions */,
+				7A2B89B7205AE80F00281FEA /* LifeboxShared.appex in Embed App Extensions */,
+				7A2B89BA205AE80F00281FEA /* LifeboxFileProvider.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3651,7 +3651,10 @@
 		78FA7AD62008D5D800E0747F /* DuplicatedContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedContactTableViewCell.swift; sourceTree = "<group>"; };
 		78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DuplicatedContactTableViewCell.xib; sourceTree = "<group>"; };
 		797B0A89F74D79DE19756139 /* IntroducePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroducePresenter.swift; sourceTree = "<group>"; };
-		7A2B898E205A8C1400281FEA /* autosync-widget-appleStore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-appleStore.entitlements"; sourceTree = "<group>"; };
+		7A2B898E205A8C1400281FEA /* autosync-widget-appstore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-appstore.entitlements"; sourceTree = "<group>"; };
+		7A2B89B1205AE6D400281FEA /* LifeboxFileProvider-appstore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "LifeboxFileProvider-appstore.entitlements"; sourceTree = "<group>"; };
+		7A2B89B2205AE76600281FEA /* LifeboxShared-appstore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "LifeboxShared-appstore.entitlements"; sourceTree = "<group>"; };
+		7A2B89B3205AE78800281FEA /* LifeboxFileProviderUI-appstore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "LifeboxFileProviderUI-appstore.entitlements"; sourceTree = "<group>"; };
 		7A39EC58D2D1F5BD26616C89 /* PhotoVideoDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailViewController.swift; sourceTree = "<group>"; };
 		7A66ADEE205A5F3C00D4CF83 /* autosync-widget-enterprise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-enterprise.entitlements"; sourceTree = "<group>"; };
 		7A66ADEF205A5F8000D4CF83 /* LifeboxShared-enterprise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "LifeboxShared-enterprise.entitlements"; sourceTree = "<group>"; };
@@ -9406,7 +9409,7 @@
 			children = (
 				B54BFF48202B45490018AF82 /* autosync-widget.entitlements */,
 				7A66ADEE205A5F3C00D4CF83 /* autosync-widget-enterprise.entitlements */,
-				7A2B898E205A8C1400281FEA /* autosync-widget-appleStore.entitlements */,
+				7A2B898E205A8C1400281FEA /* autosync-widget-appstore.entitlements */,
 				B54BFF33202B20250018AF82 /* TodayViewController.swift */,
 				B54BFF35202B20250018AF82 /* MainInterface.storyboard */,
 				B54BFF38202B20250018AF82 /* Info.plist */,
@@ -9639,6 +9642,7 @@
 				CE1BE92A204831CE0074BDDC /* Info.plist */,
 				CE1BE92B204831CE0074BDDC /* LifeboxFileProvider.entitlements */,
 				7A66ADF0205A5FAD00D4CF83 /* LifeboxFileProvider-enterprise.entitlements */,
+				7A2B89B1205AE6D400281FEA /* LifeboxFileProvider-appstore.entitlements */,
 			);
 			path = LifeboxFileProvider;
 			sourceTree = "<group>";
@@ -9649,6 +9653,7 @@
 				CE18CC7E204E858000FA3F44 /* Presentation */,
 				CE125175204E74CE00886F8D /* LifeboxFileProviderUI.entitlements */,
 				7A66ADF1205A5FCC00D4CF83 /* LifeboxFileProviderUI-enterprise.entitlements */,
+				7A2B89B3205AE78800281FEA /* LifeboxFileProviderUI-appstore.entitlements */,
 				CE1BE937204831CE0074BDDC /* Info.plist */,
 				CE18CC8E204E861B00FA3F44 /* Localizable.strings */,
 				CE18CC8F204E87CE00FA3F44 /* L10n.swift */,
@@ -10229,6 +10234,7 @@
 				CE58FAF620444493007F3F54 /* Info.plist */,
 				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
 				7A66ADEF205A5F8000D4CF83 /* LifeboxShared-enterprise.entitlements */,
+				7A2B89B2205AE76600281FEA /* LifeboxShared-appstore.entitlements */,
 				CE18CC8B204E861400FA3F44 /* Localizable.strings */,
 				CEA629FE2047ED3200215811 /* L10n.swift */,
 			);
@@ -11436,15 +11442,15 @@
 				8C0E90751FDEBDFF00789C91 /* [CP] Embed Pods Frameworks */,
 				8C0E90761FDEBDFF00789C91 /* [CP] Copy Pods Resources */,
 				8C0E90771FDEBDFF00789C91 /* ShellScript */,
-				7A2B89AF205AE26400281FEA /* Embed App Extensions */,
+				7A2B89C0205AE80F00281FEA /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7A2B89A5205AE26300281FEA /* PBXTargetDependency */,
-				7A2B89A8205AE26400281FEA /* PBXTargetDependency */,
-				7A2B89AB205AE26400281FEA /* PBXTargetDependency */,
-				7A2B89AE205AE26400281FEA /* PBXTargetDependency */,
+				7A2B89B6205AE80F00281FEA /* PBXTargetDependency */,
+				7A2B89B9205AE80F00281FEA /* PBXTargetDependency */,
+				7A2B89BC205AE80F00281FEA /* PBXTargetDependency */,
+				7A2B89BF205AE80F00281FEA /* PBXTargetDependency */,
 			);
 			name = TC_Depo_LifeTech;
 			productName = Depo;
@@ -15306,25 +15312,25 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7A2B89A5205AE26300281FEA /* PBXTargetDependency */ = {
+		7A2B89B6205AE80F00281FEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B54BFF2F202B20250018AF82 /* autosync-widget */;
-			targetProxy = 7A2B89A4205AE26300281FEA /* PBXContainerItemProxy */;
+			targetProxy = 7A2B89B5205AE80F00281FEA /* PBXContainerItemProxy */;
 		};
-		7A2B89A8205AE26400281FEA /* PBXTargetDependency */ = {
+		7A2B89B9205AE80F00281FEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE58FAEE20444492007F3F54 /* LifeboxShared */;
-			targetProxy = 7A2B89A7205AE26400281FEA /* PBXContainerItemProxy */;
+			targetProxy = 7A2B89B8205AE80F00281FEA /* PBXContainerItemProxy */;
 		};
-		7A2B89AB205AE26400281FEA /* PBXTargetDependency */ = {
+		7A2B89BC205AE80F00281FEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE1BE921204831CD0074BDDC /* LifeboxFileProvider */;
-			targetProxy = 7A2B89AA205AE26400281FEA /* PBXContainerItemProxy */;
+			targetProxy = 7A2B89BB205AE80F00281FEA /* PBXContainerItemProxy */;
 		};
-		7A2B89AE205AE26400281FEA /* PBXTargetDependency */ = {
+		7A2B89BF205AE80F00281FEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE1BE92F204831CE0074BDDC /* LifeboxFileProviderUI */;
-			targetProxy = 7A2B89AD205AE26400281FEA /* PBXContainerItemProxy */;
+			targetProxy = 7A2B89BE205AE80F00281FEA /* PBXContainerItemProxy */;
 		};
 		B5E1D981202DB4800022F0E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -16037,7 +16043,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget-enterprise.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				CODE_SIGN_STYLE = Manual;
@@ -16046,7 +16052,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget/Info-AppStore.plist";
+				INFOPLIST_FILE = "autosync-widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -16078,7 +16084,7 @@
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget/Info-Enterprise.plist";
+				INFOPLIST_FILE = "autosync-widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -16164,7 +16170,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeboxFileProvider-enterprise.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeboxFileProvider-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				CODE_SIGN_STYLE = Manual;
@@ -16286,7 +16292,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeboxFileProviderUI-enterprise.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeboxFileProviderUI-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				CODE_SIGN_STYLE = Manual;
@@ -16619,7 +16625,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeboxShared-enterprise.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeboxShared-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				CODE_SIGN_STYLE = Manual;
