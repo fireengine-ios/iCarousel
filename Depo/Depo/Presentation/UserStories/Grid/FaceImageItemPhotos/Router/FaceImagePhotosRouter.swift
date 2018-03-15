@@ -48,9 +48,9 @@ extension FaceImagePhotosRouter: FaceImagePhotosRouterInput {
         RouterVC().pushViewController(viewController: vc)
     }
     
-    func showRemoveFromAlbum(completion: @escaping (() -> Void)) {
-        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
-                                              message: TextConstants.removeFromAlbum,
+    func showRemoveFromAlbum(completion: @escaping (() -> Void), title: String, message: String) {
+        let controller = PopUpController.with(title: title,
+                                              message: message,
                                               image: .delete,
                                               firstButtonTitle: TextConstants.cancel,
                                               secondButtonTitle: TextConstants.ok,

@@ -460,7 +460,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func changeCover() { }
     
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], title: String, message: String) { }
 }
 
 extension SearchViewPresenter: TabBarActionHandler {

@@ -7,7 +7,7 @@
 //
 
 protocol FaceImagePhotosInteractorInput {
-    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64)
-    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64)
-    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], id: Int64)
+    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64, title: String, message: String)
+    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64, title: String, message: String)
+    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], id: Int64, title: String, message: String)
 }
