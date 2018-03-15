@@ -20,6 +20,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     var isBackUpAvailable: Bool { return contactSyncResponse != nil }
     let reachability = ReachabilityService()
     
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    
     // MARK: view out
     func viewIsReady() {
         view.setInitialState()
@@ -147,8 +149,11 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         case .denied:
             showSettingsAlert(completionHandler: completionHandler)
         case .restricted, .notDetermined:
+            passcodeStorage.systemCallOnScreen = true
+            
             CNContactStore().requestAccess(for: .contacts) { [weak self] granted, error in
                 guard let `self` = self else { return }
+                self.passcodeStorage.systemCallOnScreen = false
                 DispatchQueue.main.async {
                     if granted {
                         completionHandler(true)
