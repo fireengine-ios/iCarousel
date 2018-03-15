@@ -54,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         MenloworksAppEvents.onAppLaunch()
         MenloworksTagsService.shared.passcodeStatus(!passcodeStorage.isEmpty)
+        
+        passcodeStorage.systemCallOnScreen = false
         return true
     }
     
@@ -97,6 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 navVC.topViewController is PasscodeEnterViewController {
                 navVC.popViewController(animated: false)
                 showPasscodeIfNeed()
+            } else if passcodeStorage.systemCallOnScreen {
+                passcodeStorage.systemCallOnScreen = false
+                showPasscodeIfNeed()
             }
         }
     }
@@ -109,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let topVC = UIApplication.topController()
         
         /// don't show at all or new PasscodeEnterViewController
-        if passcodeStorage.isEmpty || topVC is PasscodeEnterViewController {
+        if passcodeStorage.isEmpty || passcodeStorage.systemCallOnScreen || topVC is PasscodeEnterViewController {
             return
         }
         
