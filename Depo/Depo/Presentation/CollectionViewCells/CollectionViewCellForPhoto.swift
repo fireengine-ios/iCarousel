@@ -140,9 +140,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     func setProgressForObject(progress: Float, blurOn: Bool = false) {
-//        if visualEffectBlur.isHidden, blurOn {
-//            visualEffectBlur.frame = imageView.bounds
-//        }
         visualEffectBlur.isHidden = !blurOn
         
         progressView.isHidden = false
