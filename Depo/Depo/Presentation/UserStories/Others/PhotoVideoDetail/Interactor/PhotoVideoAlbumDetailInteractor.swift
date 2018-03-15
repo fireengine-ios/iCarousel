@@ -28,7 +28,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
         }
     }
     
-    override func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64, title: String, message: String) {
+    override func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) {
         let okHandler: () -> Void = { [weak self] in
             if let items = items as? [Item] {
                 self?.output.startAsyncOperation()
@@ -49,10 +49,10 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
             }
         }
         
-        output.didRemoveFromAlbum(completion: okHandler, title: title, message: message)
+        output.didRemoveFromAlbum(completion: okHandler)
     }
     
-    override func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64, title: String, message: String) {
+    override func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) {
         let okHandler: () -> Void = { [weak self] in
             if let items = items as? [Item] {
                 self?.output.startAsyncOperation()
@@ -73,10 +73,10 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
             }
         }
         
-        output.didRemoveFromAlbum(completion: okHandler, title: title, message: message)
+        output.didRemoveFromAlbum(completion: okHandler)
     }
 
-    override func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String, title: String, message: String) {
+    override func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String) {
         let okHandler: () -> Void = { [weak self] in
             if let items = items as? [Item] {
                 self?.output.startAsyncOperation()
@@ -97,7 +97,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
             }
         }
         
-        output.didRemoveFromAlbum(completion: okHandler, title: title, message: message)
+        output.didRemoveFromAlbum(completion: okHandler)
     }
     
 }

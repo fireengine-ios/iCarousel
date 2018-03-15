@@ -14,5 +14,5 @@ protocol PhotoVideoDetailRouterInput {
     
     func goBack(navigationConroller: UINavigationController?)
     
-    func showRemoveFromAlbum(completion: @escaping (() -> Void), title: String, message: String)
+    func showRemoveFromAlbum(completion: @escaping (() -> Void))
 }

@@ -87,6 +87,16 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         return dataSource.allMediaItems.isEmpty
     }
     
+    // MARK: - BaseDataSourceForCollectionViewDelegate
+    
+    override func didDelete(items: [BaseDataSourceItem]) {
+        reloadData()
+    }
+    
+    override func updateCoverPhotoIfNeeded() {
+        reloadData()
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput, scrollView == dataSource.collectionView {
             view.updateUgglaViewPosition()
