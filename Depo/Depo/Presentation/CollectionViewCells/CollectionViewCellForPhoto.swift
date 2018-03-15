@@ -41,8 +41,12 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         
         favoriteIcon.accessibilityLabel = TextConstants.accessibilityFavorite
         
-        imageView.addSubview(visualEffectBlur)
         visualEffectBlur.isHidden = true
+        visualEffectBlur.frame = imageView.bounds
+        visualEffectBlur.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        imageView.addSubview(visualEffectBlur)
+        
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
@@ -136,9 +140,9 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     func setProgressForObject(progress: Float, blurOn: Bool = false) {
-        if visualEffectBlur.isHidden, blurOn {
-            visualEffectBlur.frame = imageView.bounds
-        }
+//        if visualEffectBlur.isHidden, blurOn {
+//            visualEffectBlur.frame = imageView.bounds
+//        }
         visualEffectBlur.isHidden = !blurOn
         
         progressView.isHidden = false
