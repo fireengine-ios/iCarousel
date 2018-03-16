@@ -965,7 +965,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
-            headerView.backgroundColor = UIColor.clear
             let textHeader = headerView as! CollectionViewSimpleHeaderWithText
             
             let title = getHeaderText(indexPath: indexPath)//fetchService.headerText(indexPath: indexPath)
@@ -986,6 +985,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         default:
             assert(false, "Unexpected element kind")
             return UICollectionReusableView()
+        }
+    }
+    
+    /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
+    /// https://stackoverflow.com/a/46930410/5893286
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        
+        if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
+            view.layer.zPosition = 0
         }
     }
     
