@@ -47,7 +47,7 @@ final class BiometricsManagerImp: BiometricsManager {
         
         if result {
             return .available
-        } else if error?.code == -7 {
+        } else if error?.code == -5 || error?.code == -7 {
             return .notInitialized
         } else {
             return .notAvailable
