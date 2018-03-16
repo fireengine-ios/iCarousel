@@ -15,7 +15,6 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
     
     @IBOutlet weak var segmentControll: UISegmentedControl!
     @IBOutlet weak var topIOS10Contraint: NSLayoutConstraint!
-    @IBOutlet weak var topIOS11Contraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
