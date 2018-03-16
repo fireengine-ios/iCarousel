@@ -40,16 +40,16 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IB3-TP-pf2">
-                        <rect key="frame" x="241.5" y="11" width="42.5" height="21.5"/>
+                        <rect key="frame" x="237.5" y="11" width="42.5" height="21.5"/>
                         <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDownArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Her-KU-zms">
-                        <rect key="frame" x="288" y="17.5" width="8" height="8"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Her-KU-zms">
+                        <rect key="frame" x="284" y="17.5" width="12" height="8"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="8" id="4bb-Ic-FgZ"/>
-                            <constraint firstAttribute="width" constant="8" id="qcz-f8-lax"/>
+                            <constraint firstAttribute="width" constant="12" id="qcz-f8-lax"/>
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1MI-yf-IMK">
@@ -239,6 +239,6 @@
     </objects>
     <resources>
         <image name="checkmark" width="16" height="12"/>
-        <image name="dropDownArrow" width="11" height="7"/>
+        <image name="downArrow" width="13" height="8"/>
     </resources>
 </document>
