@@ -16,7 +16,7 @@ open class ShareData {
     }
     
     var image: UIImage? {
-        return #imageLiteral(resourceName: "ImageNoDocuments")
+        return Images.noDocuments
     }
     
     var name: String {

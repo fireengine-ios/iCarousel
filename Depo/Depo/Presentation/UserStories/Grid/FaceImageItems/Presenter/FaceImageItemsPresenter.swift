@@ -16,7 +16,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var isChangeVisibilityMode: Bool = false
     
-    private var visibilityItems: [WrapData] = []
     private var allItmes: [WrapData] = []
     
     override func viewIsReady(collectionView: UICollectionView) {        

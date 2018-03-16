@@ -53,7 +53,7 @@ extension PasscodeStorageDefaults: PasscodeStorage {
     }
     
     func save(passcode: Passcode) {
-        /// maybe will be need
+        /// commented bcz of using in LifeboxShared target
 //        if self.passcode.count == 0 && passcode.count > 0 {
 //            MenloworksEventsService.shared.onPasscodeSet()
 //        }

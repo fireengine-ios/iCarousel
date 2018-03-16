@@ -41,7 +41,6 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     var localItems: [WrapData] = []
-    var localItemsMD5s: [String] = []
     var lastSyncedMD5s: [String] = []
     
     var photoVideoService: PhotoAndVideoService {
