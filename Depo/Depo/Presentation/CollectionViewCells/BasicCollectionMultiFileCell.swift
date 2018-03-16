@@ -48,7 +48,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     
     override weak var delegate: LBCellsDelegate? {
-        didSet{
+        didSet {
             if let compatableValue = delegate as? BasicCollectionMultiFileCellActionDelegate {
                 actionDelegate = compatableValue
             }
@@ -57,23 +57,23 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     weak var actionDelegate: BasicCollectionMultiFileCellActionDelegate?
     
-    static let smallH: CGFloat                          = 37
-    static let bigH: CGFloat                            = 65
-    static let frameSize: CGFloat                       = 66
+    static let smallH: CGFloat = 37
+    static let bigH: CGFloat = 65
+    static let frameSize: CGFloat = 66
     
-    static let smallContentImageViewWConst: CGFloat     = 20
-    static let smallContentImageViewHConst: CGFloat     = 24
-    static let smallContentImageViewBigSize: CGFloat    = 42
+    static let smallContentImageViewWConst: CGFloat = 20
+    static let smallContentImageViewHConst: CGFloat = 24
+    static let smallContentImageViewBigSize: CGFloat = 42
     
-    static let leftSpaceBigCell: CGFloat                = 6
-    static let leftSpaceSmallCell: CGFloat              = 14
+    static let leftSpaceBigCell: CGFloat = 6
+    static let leftSpaceSmallCell: CGFloat = 14
     
     var itemModel: Item?
 
     override func setImage(image: UIImage?, animated: Bool) {
         isAlreadyConfigured = true
 
-        if (isBigSize()){
+        if (isBigSize()) {
             bigContentImageView.contentMode = .scaleAspectFill
             bigContentImageView.image = image
         } else {
@@ -98,7 +98,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     override func setImage(with url: URL) {
         if let imageView = isBigSize() ? bigContentImageView : smallContentImageView {
-            imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] (image, error, cacheType, url) in
+            imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] image, error, cacheType, url in
                 self?.setImage(image: image, animated: true)
             }
         }
@@ -109,7 +109,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             return
         }
         
-        if (isAlreadyConfigured){
+        if (isAlreadyConfigured) {
             return
         }
         
@@ -127,7 +127,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 } else {
                     detailsLabelText = "0 \(TextConstants.folderItemsText)"
                 }
-            case .audio,.video:
+            case .audio, .video:
                 if let duration = wrappered.duration {
                     detailsLabelText = duration
                 }
@@ -190,6 +190,11 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             bottomFavoritesStar.isHidden = true
         } else {
             topFavoritesStar.isHidden = true
+        }
+    
+        
+        if wrappered.fileType.isFaceImageAlbum || wrappered.fileType.isFaceImageType {
+            moreButton.isHidden = true
         }
     }
     

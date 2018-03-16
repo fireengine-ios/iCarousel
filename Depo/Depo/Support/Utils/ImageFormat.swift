@@ -29,8 +29,7 @@ extension ImageFormat {
             
             if let dataString = String(data: subdata, encoding: .ascii),
                 dataString.hasPrefix("RIFF"),
-                dataString.hasSuffix("WEBP")
-            {    
+                dataString.hasSuffix("WEBP") {    
                 return .webp
             }
             
@@ -53,4 +52,3 @@ extension ImageFormat {
         return "image/\(rawValue)"
     }
 }
-

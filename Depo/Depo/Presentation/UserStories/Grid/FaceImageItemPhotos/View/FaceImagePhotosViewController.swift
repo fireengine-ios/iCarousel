@@ -17,6 +17,7 @@ import UIKit
     private var albumsSliderModule: LBAlbumLikePreviewSliderPresenter?
     private var headerView = UIView()
     private var headerImage = LoadingImageView()
+    private var gradientHeaderLayer: CALayer?
     private var countPhotosLabel = UILabel()
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
@@ -28,6 +29,7 @@ import UIKit
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateHeaderPosition()
+        gradientHeaderLayer?.frame = headerView.bounds
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -94,7 +96,7 @@ import UIKit
 
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
-        headerImage.addGradientLayer(colors: [.clear, ColorConstants.textGrayColor])
+        gradientHeaderLayer = headerImage.addGradientLayer(colors: [.clear, ColorConstants.textGrayColor])
         
         countPhotosLabel.backgroundColor = UIColor.clear
         countPhotosLabel.textColor = UIColor.white
@@ -145,7 +147,6 @@ import UIKit
     private func updateHeaderPosition() {
         if let albumHeight = albumsHeightConstraint?.constant,
             let headerImageHeight = headerImageHeightConstraint?.constant {
-            
             collectionView.contentInset.top = albumHeight + headerImageHeight
         } else {
             collectionView.contentInset.top = headerImageHeight
@@ -158,6 +159,7 @@ import UIKit
         } else {
             setTouchableTitle(title: mainTitle)
         }
+        
         addNavBarTouch()
     }
     
@@ -168,7 +170,7 @@ import UIKit
     
 }
 
-//MARK: - FaceImagePhotosViewInput
+// MARK: - FaceImagePhotosViewInput
 
 extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     

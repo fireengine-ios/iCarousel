@@ -13,7 +13,7 @@ class CreateStoryResponce: ObjectRequestResponse {
     var uuid: String?
     
     override func mapping() {
-        storyURLString  = json?[CreateStoryPropertyName.downloadUrl].string
-        uuid            = json?[CreateStoryPropertyName.uuid].string
+        storyURLString = json?[CreateStoryPropertyName.downloadUrl].string
+        uuid = json?[CreateStoryPropertyName.uuid].string
     }
 }

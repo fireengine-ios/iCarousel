@@ -68,7 +68,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
     }
     
-    func setObject(object:Item) {
+    func setObject(object: Item) {
         webView.isHidden = true
         imageScrollView.image = nil
         playVideoButton.isHidden = true
@@ -82,7 +82,11 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             imageScrollView.imageView.isHidden = true
             webView.isHidden = false
             webView.clearPage()
-            if let url = object.urlToFile {
+            
+            if object.fileType.isDocument, let preview = object.metaData?.documentPreviewURL {
+                webView.delegate = self
+                webView.loadRequest(URLRequest(url: preview))
+            } else if let url = object.urlToFile {
                 webView.delegate = self
                 webView.loadRequest(URLRequest(url: url))
             }

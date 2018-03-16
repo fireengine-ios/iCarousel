@@ -8,7 +8,7 @@
 
 #import "AppRater.h"
 #import "MD5.h"
-#import "MPush.h"
+#import <MPush/MPush.h>
 
 #import "CropySDK.h"
 #import "CRYConfiguration.h"

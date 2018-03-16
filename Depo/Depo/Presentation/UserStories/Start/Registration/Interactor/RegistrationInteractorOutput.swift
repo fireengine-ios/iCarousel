@@ -8,8 +8,8 @@
 
 protocol RegistrationInteractorOutput: class {
     
-    func prepearedModels(models:[BaseCellModel])
-    func composedGSMCCodes(models:[GSMCodeModel])
+    func prepearedModels(models: [BaseCellModel])
+    func composedGSMCCodes(models: [GSMCodeModel])
     
     func userValid(email: String, phone: String, passpword: String)
     func userInvalid(withResult result: [UserValidationResults])

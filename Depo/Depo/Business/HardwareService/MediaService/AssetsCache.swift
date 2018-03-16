@@ -15,6 +15,7 @@ class AssetsСache {
     
     private var storage: [String: PHAsset] = [:]
     
+
     func assets(before oldest: Date) -> [PHAsset] {
         var assets = [PHAsset]()
         dispatchQueue.sync {
@@ -35,7 +36,7 @@ class AssetsСache {
         }
     }
     
-    func append(list:[PHAsset]) {
+    func append(list: [PHAsset]) {
         dispatchQueue.sync {
             list.forEach {
                 storage[$0.localIdentifier] = $0

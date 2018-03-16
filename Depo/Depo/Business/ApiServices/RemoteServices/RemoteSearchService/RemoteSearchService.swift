@@ -6,9 +6,9 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class RemoteSearchService: RemoteItemsService{
+class RemoteSearchService: RemoteItemsService {
     
-    init(requestSize:Int) {
+    init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .all)
     }
     
@@ -19,7 +19,7 @@ class RemoteSearchService: RemoteItemsService{
                                                   sortOrder: sortOrder,
                                                   page: currentPage,
                                                   size: requestSize)
-        remote.unifiedSearch(param: searchParam, success: { [weak self] (response) in
+        remote.unifiedSearch(param: searchParam, success: { [weak self] response in
             guard let response = response as? UnifiedSearchResponse else {
                 fail()
                 return

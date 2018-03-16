@@ -27,50 +27,49 @@ class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeB
         
     }
     
-    override func onChangeSelectedItemsCount(selectedItemsCount: Int){
+    override func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         //view.setTitle(title: "", subTitle: "")
     }
     
-    override func onMaxSelectionExeption(){
+    override func onMaxSelectionExeption() {
         log.debug("UploadFromLifeBoxPhotosPresenter onMaxSelectionExeption")
 
         let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
         UIApplication.showErrorAlert(message: text)
     }
     
-    override func onNextButton(){
+    override func onNextButton() {
         log.debug("UploadFromLifeBoxPhotosPresenter onNextButton")
 
         let array = dataSource.getSelectedItems()
         if array.isEmpty {
             UIApplication.showErrorAlert(message: TextConstants.uploadFromLifeBoxNoSelectedPhotosError)
-        }else{
+        } else {
             guard let wrapArray = array as? [Item] else {
                 return
             }
-            if let uploadInteractor = interactor as? UploadFromLifeBoxInteractorInput{
+            if let uploadInteractor = interactor as? UploadFromLifeBoxInteractorInput {
                 startAsyncOperation()
                 uploadInteractor.onUploadItems(items: wrapArray)
             }
         }
     }
     
-    override func getContentWithSuccess(array: [[BaseDataSourceItem]]){
+    override func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
         log.debug("UploadFromLifeBoxPhotosPresenter getContentWithSuccess")
 
         //DBDROP
         super.getContentWithSuccess(array: array)
     }
     
-    func uploadOperationSuccess(){
+    func uploadOperationSuccess() {
         log.debug("UploadFromLifeBoxPhotosPresenter uploadOperationSuccess")
         dataSource.setSelectionState(selectionState: false)
         stopModeSelected()
-        guard let uploadView = view as? UploadFromLifeBoxViewInput else{
+        guard let uploadView = view as? UploadFromLifeBoxViewInput else {
             return
         }
         uploadView.hideView()
     }
     
 }
-

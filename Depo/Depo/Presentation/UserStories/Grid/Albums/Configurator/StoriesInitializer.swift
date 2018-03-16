@@ -11,10 +11,10 @@ import UIKit
 class StoriesInitializer: NSObject {
     
     static var storiesSortTypes: [MoreActionsConfig.SortRullesType] {
-        return [.LettersAZ,.LettersZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
+        return [.LettersAZ, .LettersZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
-    class func initializeStoriesController(with nibName:String) -> BaseFilesGreedChildrenViewController {
+    class func initializeStoriesController(with nibName: String) -> BaseFilesGreedChildrenViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonCreateAStory])

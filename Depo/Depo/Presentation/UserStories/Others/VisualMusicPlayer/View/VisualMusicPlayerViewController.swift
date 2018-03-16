@@ -86,7 +86,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         backButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         backButton.setImage(UIImage(named: "im_backButton"), for: .normal)
         backButton.setTitle(TextConstants.backTitle, for: .normal)
-        backButton.addTarget(self, action: #selector(cancelAction(_:)), for:.touchUpInside)
+        backButton.addTarget(self, action: #selector(cancelAction(_:)), for: .touchUpInside)
         backButton.tintColor = UIColor.white
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         
@@ -112,7 +112,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
             player.resetTime()
         } else {
             let previousIndex = player.playPrevious()
-            if previousIndex >= 0  {
+            if previousIndex >= 0 {
                 carouselView.scrollToItem(at: previousIndex, animated: true)
             }
         }
@@ -167,7 +167,7 @@ extension VisualMusicPlayerViewController: MediaPlayerDelegate {
 }
 
 
-//MARK: - Carousel
+// MARK: - Carousel
 
 extension VisualMusicPlayerViewController: iCarouselDataSource, iCarouselDelegate {
 

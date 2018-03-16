@@ -58,8 +58,6 @@ enum ElementTypes {
 
 class EditinglBar: CustomTabBar {
     
-    typealias Item = WrapData
-    
     struct PreDetermendTypes { //use super setup method with these
         static let share = ("ShareButtonIcon", TextConstants.tabBarShareLabel)
         static let info = ("InfoButtonIcon", TextConstants.tabBarInfoLabel)
@@ -83,7 +81,7 @@ class EditinglBar: CustomTabBar {
     private let originalX: CGFloat = 0
     
 
-    //MARK: -
+    // MARK: -
     
     class func getFromXib() -> EditinglBar? {
         guard let view = UINib(nibName: "EditinglBar", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? EditinglBar else {
@@ -109,24 +107,24 @@ class EditinglBar: CustomTabBar {
         if animated {
             animateAppearance(with: sourceViewSize.height - tabBarHeight, completionBlock: nil)
         } else {
-            frame.origin = CGPoint(x: 0, y:  sourceViewSize.height - tabBarHeight)
+            frame.origin = CGPoint(x: 0, y: sourceViewSize.height - tabBarHeight)
         }
         
     }
     
     func dismiss(animated: Bool = true) {
         if animated {
-            animateAppearance(with: frame.origin.y - originalY , completionBlock: {
+            animateAppearance(with: frame.origin.y - originalY, completionBlock: {
                 self.removeFromSuperview()
             })
         } else {
-            self.frame.origin = CGPoint(x: 0, y:  frame.origin.y - originalY)
+            self.frame.origin = CGPoint(x: 0, y: frame.origin.y - originalY)
             self.removeFromSuperview()
         }
         
     }
     
-    private func animateAppearance(with newY: CGFloat, completionBlock: (()->Void)?) {
+    private func animateAppearance(with newY: CGFloat, completionBlock: (() -> Void)?) {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.frame.origin = CGPoint(x: 0, y: newY)
         }, completion: { _ in
@@ -135,8 +133,8 @@ class EditinglBar: CustomTabBar {
     }
     
     override func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple]) {
-        let items = names.map{ CustomTabBarItem(title: $0.title,
-                                                image: UIImage(named:$0.imageName),
+        let items = names.map { CustomTabBarItem(title: $0.title,
+                                                image: UIImage(named: $0.imageName),
                                                 tag: 0)
         }
   

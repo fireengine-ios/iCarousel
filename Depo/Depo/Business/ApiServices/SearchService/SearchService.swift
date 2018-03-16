@@ -46,7 +46,7 @@ enum SortOrder: CustomStringConvertible {
 }
 
 
-enum FieldValue: CustomStringConvertible  {
+enum FieldValue: CustomStringConvertible {
     case image
     case imageAndVideo
     case albums
@@ -110,7 +110,7 @@ enum SearchContentType: CustomStringConvertible {
     }
 }
 
-class SearchByFieldParameters: BaseRequestParametrs,Equatable {
+class SearchByFieldParameters: BaseRequestParametrs, Equatable {
     let fieldName: SearchContentType
     let fieldValue: FieldValue
     let sortBy: SortType
@@ -120,7 +120,7 @@ class SearchByFieldParameters: BaseRequestParametrs,Equatable {
     let minified: Bool
     
     init(fieldName: SearchContentType = .content_type, fieldValue: FieldValue, sortBy: SortType, sortOrder: SortOrder, page: Int,
-         size: Int, minified :Bool = false) {
+         size: Int, minified: Bool = false) {
         self.fieldName = fieldName
         self.fieldValue = fieldValue
         self.sortBy = sortBy
@@ -131,7 +131,7 @@ class SearchByFieldParameters: BaseRequestParametrs,Equatable {
     }
     
     override var patch: URL {
-        var searchWithParam = String(format:RouteRequests.search,
+        var searchWithParam = String(format: RouteRequests.search,
                                      fieldName.description,
                                      fieldValue.description,
                                      sortBy.description,
@@ -140,10 +140,10 @@ class SearchByFieldParameters: BaseRequestParametrs,Equatable {
                                      size.description)
         
         let mini = minified ? "true": "false"
-        let mimifidedStr = String(format:"&minified=%@",mini)
+        let mimifidedStr = String(format: "&minified=%@", mini)
         searchWithParam = searchWithParam.appending(mimifidedStr)
         
-        return URL(string: searchWithParam, relativeTo:super.patch)!
+        return URL(string: searchWithParam, relativeTo: super.patch)!
     }
 }
 
@@ -167,13 +167,13 @@ struct AdvancedSearchParameters: RequestParametrs {
     
     var patch: URL {
         let name: String = "LifeBox"
-        let searchWithParam = String(format:RouteRequests.advanceSearch,
+        let searchWithParam = String(format: RouteRequests.advanceSearch,
                                      name, from.description,
                                      size.description,
                                      sortBy.description,
                                      sortOrder.description)
         
-        return URL(string: searchWithParam, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -183,7 +183,7 @@ struct AdvancedSearchParameters: RequestParametrs {
 
 class UnifiedSearchParameters: BaseRequestParametrs {
     let text: String
-    let category : FieldValue
+    let category: FieldValue
     let sortBy: SortType
     let sortOrder: SortOrder
     let page: Int
@@ -200,11 +200,11 @@ class UnifiedSearchParameters: BaseRequestParametrs {
     
     override var patch: URL {
         var searchWithParam = ""
-        if (category == .all){
-            searchWithParam = String(format:RouteRequests.unifiedSearchWithoutCategory,
+        if (category == .all) {
+            searchWithParam = String(format: RouteRequests.unifiedSearchWithoutCategory,
                                      text, page.description, size.description)
-        }else{
-            searchWithParam = String(format:RouteRequests.unifiedSearch,
+        } else {
+            searchWithParam = String(format: RouteRequests.unifiedSearch,
                    text, category.rawValue,
                    page.description, size.description)
         }
@@ -250,7 +250,7 @@ class AlbumParameters: BaseRequestParametrs {
     override var patch: URL {
         //static let albumList    = "/api/album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"
         //'/album'+pagination parameters + 'contentType=' + contentType
-        let searchWithParam = String(format:RouteRequests.albumList,
+        let searchWithParam = String(format: RouteRequests.albumList,
                                      fieldName.description,
                                      page.description,
                                      size.description,
@@ -258,7 +258,7 @@ class AlbumParameters: BaseRequestParametrs {
                                      sortOrder.description
                                      )
         
-        return URL(string: searchWithParam, relativeTo:RouteRequests.NewURL)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.NewURL)!
     }
 }
 
@@ -279,7 +279,7 @@ class AlbumDetalParameters: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let searchWithParam = String(format:RouteRequests.details,
+        let searchWithParam = String(format: RouteRequests.details,
                                      albumUUID.description,
                                      page.description,
                                      size.description,
@@ -287,41 +287,41 @@ class AlbumDetalParameters: BaseRequestParametrs {
                                      sortOrder.description
         )
         
-        return URL(string: searchWithParam, relativeTo:RouteRequests.NewURL)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.NewURL)!
     }
 }
 
 class SearchService: BaseRequestService {
     
-    func searchByField(param:SearchByFieldParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
+    func searchByField(param: SearchByFieldParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
         log.debug("SearchService searchByField")
 
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
-    func searchByName(param:AdvancedSearchParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
+    func searchByName(param: AdvancedSearchParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
         log.debug("SearchService searchByName")
 
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
-    func searchAlbums(param:AlbumParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ){
+    func searchAlbums(param: AlbumParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
         log.debug("SearchService searchAlbums")
 
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
-    func searchContentAlbum(param:AlbumDetalParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ){
+    func searchContentAlbum(param: AlbumDetalParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
         log.debug("SearchService searchContentAlbum")
 
         let handler = BaseResponseHandler<AlbumDetailResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
-    func unifiedSearch(param:UnifiedSearchParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
+    func unifiedSearch(param: UnifiedSearchParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
         log.debug("SearchService unifiedSearch")
 
         let handler = BaseResponseHandler<UnifiedSearchResponse, ObjectRequestResponse>(success: success, fail: fail)

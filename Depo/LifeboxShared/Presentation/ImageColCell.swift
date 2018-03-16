@@ -10,15 +10,17 @@ import UIKit
 
 final class ImageColCell: UICollectionViewCell {
     
-    @IBOutlet private weak var photoImageView: UIImageView!
-    
-    func setImage(_ image: UIImage?) {
-        photoImageView.setScreenScaledImage(image)
+    @IBOutlet private weak var photoImageView: UIImageView! {
+        didSet {
+            photoImageView.backgroundColor = UIColor.lightGray
+        }
     }
-}
-
-private extension UIImageView {
-    func setScreenScaledImage(_ newImage: UIImage?) {
-        image = newImage?.resizedImage(to: bounds.size.screenScaled)
+    
+    func setup(with shareData: ShareData) {
+        ShareDataImageLoader.shared.loadImage(for: photoImageView, with: shareData)
+    }
+    
+    func setup(isCurrentUploading: Bool) {
+        photoImageView.alpha = isCurrentUploading ? 1 : 0.6 /// design constants
     }
 }

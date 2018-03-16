@@ -16,7 +16,7 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func needSignUp(message: String)
     
-    func models(models:[BaseCellModel])
+    func models(models: [BaseCellModel])
     
     func needShowCaptcha()
     func failedBlockError()

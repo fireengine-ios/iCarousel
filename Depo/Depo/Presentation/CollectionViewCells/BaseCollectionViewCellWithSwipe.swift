@@ -18,7 +18,7 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
     private var isTouch = false
     var isSwipeEnable = true
     
-    var cellDelegate:BaseCollectionViewCellWithSwipeDelegate?
+    var cellDelegate: BaseCollectionViewCellWithSwipeDelegate?
     
 
     override func awakeFromNib() {
@@ -29,17 +29,17 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
         configurateView()
     }
     
-    func configurateView(){
+    func configurateView() {
         
     }
     
     // MARK: update state to default
-    func setStateToDefault(){
+    func setStateToDefault() {
         contentView.frame = CGRect(x: 0.0, y: 0.0, width: frame.size.width, height: frame.size.height)
     }
     
     // MARK : touches
-    private func getXforTouch(_ touches: Set<UITouch>)-> CGFloat{
+    private func getXforTouch(_ touches: Set<UITouch>) -> CGFloat {
         let touch = touches.first
         let location = touch!.location(in: self)
         superview?.bringSubview(toFront: self)
@@ -48,7 +48,7 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        if (!isSwipeEnable){
+        if (!isSwipeEnable) {
             return
         }
         isTouch = true
@@ -57,7 +57,7 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        if (!isSwipeEnable){
+        if (!isSwipeEnable) {
             return
         }
         let x = startX - getXforTouch(touches)
@@ -65,14 +65,14 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
         contentView.frame = CGRect(x: -x, y: contentView.frame.origin.y, width: contentView.frame.size.width, height: contentView.frame.size.height)
     }
     
-    private func calculateEnd(_ touches: Set<UITouch>){
+    private func calculateEnd(_ touches: Set<UITouch>) {
         let x = startX - getXforTouch(touches)
         var endX: CGFloat = 0
         var needDeleteCell = false
-        if (abs(x) > frame.size.width * 0.3){
-            if (x < 0){
+        if (abs(x) > frame.size.width * 0.3) {
+            if (x < 0) {
                 endX = frame.size.width
-            }else{
+            } else {
                 endX = -frame.size.width
             }
             needDeleteCell = true
@@ -80,11 +80,11 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
         
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.contentView.frame = CGRect(x: endX, y: self.contentView.frame.origin.y, width: self.contentView.frame.size.width, height: self.contentView.frame.size.height)
-        }) { (animate) in
+        }) { animate in
             self.isTouch = false
-            if (needDeleteCell){
-                for view in self.contentView.subviews{
-                    if let baseView = view as? BaseView{
+            if (needDeleteCell) {
+                for view in self.contentView.subviews {
+                    if let baseView = view as? BaseView {
                         baseView.viewDeletedBySwipe()
                     }
                 }
@@ -96,7 +96,7 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        if (!isSwipeEnable){
+        if (!isSwipeEnable) {
             return
         }
         calculateEnd(touches)
@@ -105,7 +105,7 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        if (!isSwipeEnable){
+        if (!isSwipeEnable) {
             return
         }
         calculateEnd(touches)

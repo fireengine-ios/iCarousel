@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-enum SelectNameScreenType: Int{
+enum SelectNameScreenType: Int {
     case selectAlbumName = 1
     case selectPlayListName = 2
     case selectFolderName = 3
@@ -21,7 +21,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
     var rootFolderID: String?
     var isFavorite: Bool?
     
-    func getTitle()-> String{
+    func getTitle() -> String {
         switch moduleType {
         case .selectAlbumName:
             return TextConstants.selectNameTitleAlbum
@@ -32,7 +32,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
         }
     }
     
-    func getNextButtonText()-> String{
+    func getNextButtonText() -> String {
         switch moduleType {
         case .selectAlbumName:
             return TextConstants.selectNameNextButtonAlbum
@@ -43,7 +43,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
         }
     }
     
-    func getPlaceholderText()-> String{
+    func getPlaceholderText() -> String {
         switch moduleType {
         case .selectAlbumName:
             return TextConstants.selectNamePlaceholderAlbum
@@ -54,7 +54,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
         }
     }
     
-    func getTextForEmptyTextFieldAllert()-> String{
+    func getTextForEmptyTextFieldAllert() -> String {
         switch moduleType {
         case .selectAlbumName:
             return TextConstants.selectNameEmptyNameAlbum
@@ -65,7 +65,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
         }
     }
     
-    func onNextButton(name: String){
+    func onNextButton(name: String) {
         output.startProgress()
         switch moduleType {
         case .selectAlbumName:
@@ -81,42 +81,42 @@ class SelectNameInteractor: SelectNameInteractorInput {
     }
     
     
-    //MARK: requests
+    // MARK: requests
     
-    private func onCreateAlbumWithName(name: String){
+    private func onCreateAlbumWithName(name: String) {
         let createAlbumParams = CreatesAlbum(albumName: name)
         PhotosAlbumService().createAlbum(createAlbum: createAlbumParams, success: { [weak self] in
             DispatchQueue.main.async {
-                if let self_ = self{
+                if let self_ = self {
                     self_.output.operationSucces(operation: self_.moduleType)
                     ItemOperationManager.default.newAlbumCreated()
                 }
             }
-        }) { (error) in
+        }) { error in
             DispatchQueue.main.async {[weak self] in
                 self?.output.operationFaildWithError(errorMessage: error.localizedDescription)
             }
         }
     }
     
-    private func onCreatePlayListWithName(name: String){
+    private func onCreatePlayListWithName(name: String) {
         
     }
     
-    private func onCreateFolderWithName(name: String){
-        let createfolderParam  = CreatesFolder(folderName: name,
-                                               rootFolderName:rootFolderID ?? "",
+    private func onCreateFolderWithName(name: String) {
+        let createfolderParam = CreatesFolder(folderName: name,
+                                               rootFolderName: rootFolderID ?? "",
                                                isFavourite: isFavorite ?? false)
         
         WrapItemFileService().createsFolder(createFolder: createfolderParam,
             success: { [weak self] in
                 DispatchQueue.main.async {
-                    if let self_ = self{
+                    if let self_ = self {
                         self_.output.operationSucces(operation: self_.moduleType)
                         ItemOperationManager.default.newFolderCreated()
                     }
                 }
-            }, fail: {[weak self] (error) in
+            }, fail: {[weak self] error in
                 DispatchQueue.main.async {
                     self?.output.operationFaildWithError(errorMessage: error.localizedDescription)
                 }

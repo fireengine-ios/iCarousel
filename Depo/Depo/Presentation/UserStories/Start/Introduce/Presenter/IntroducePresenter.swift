@@ -20,13 +20,13 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceIn
         view.setupInitialState(models: models)
     }
     
-    //MARK: router
+    // MARK: router
     
-    func onStartUsingLifeBox(){
+    func onStartUsingLifeBox() {
         router.onGoToRegister()
     }
     
-    func onLoginButton(){
+    func onLoginButton() {
         router.onGoToLogin()
     }
 }

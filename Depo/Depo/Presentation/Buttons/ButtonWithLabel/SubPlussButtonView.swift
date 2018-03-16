@@ -49,7 +49,7 @@ class SubPlussButtonView: UIView {
     func changeVisability(toHidden hidden: Bool) {
         button.isEnabled = !hidden
         alpha = hidden ? 0 : 1
-        if hidden{
+        if hidden {
             bottomConstraint?.constant = bottomConstraintOrigialConstant
             centerXConstraint?.constant = centerXConstraintOriginalConstant
         }

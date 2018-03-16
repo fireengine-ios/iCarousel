@@ -33,6 +33,7 @@ struct MetaAssetInfo {
 typealias LocalFilesCallBack = (_ localFiles: [WrapData]) -> Void
 
 extension CoreDataStack {
+
     @objc func appendLocalMediaItems() {
         let localMediaStorage = LocalMediaStorage.default
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
@@ -62,6 +63,7 @@ extension CoreDataStack {
         inProcessAppendingLocalFiles = true
         
         let localMediaStorage = LocalMediaStorage.default
+
         let newBgcontext = self.newChildBackgroundContext
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
         let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
@@ -86,7 +88,8 @@ extension CoreDataStack {
                        pageRemoteItems: [Item], paginationEnd: Bool,
                        firstPage: Bool,
                        filesCallBack: @escaping LocalFilesCallBack) {
-
+        log.info("getLocalFilesForPhotoVideoPage()")
+        log.debug("getLocalFilesForPhotoVideoPage()")
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                     in: backgroundContext)
@@ -96,10 +99,15 @@ extension CoreDataStack {
         if pageRemoteItems.isEmpty {
             if let localItems = try? backgroundContext.fetch(request),
                 (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
+                log.info("pageRemoteItems.isEmpty let localItems = try? backgroundContext.fetch(request)")
+                log.debug("pageRemoteItems.isEmpty let localItems = try? backgroundContext.fetch(request)")
                 let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                 filesCallBack(wrapedLocalItems)
             } else {
+               
                 pageAppendedCallBack = { [weak self] localItems in
+                    log.info("pageRemoteItems.isEmpty pageAppendedCallBack")
+                    log.debug("pageRemoteItems.isEmpty pageAppendedCallBack")
                     filesCallBack(localItems)
                     self?.pageAppendedCallBack = nil
                 }
@@ -109,18 +117,26 @@ extension CoreDataStack {
             let lastItem = pageRemoteItems.last {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)])
             if let localItems = try? backgroundContext.fetch(request) {
+                log.info("pageRemoteItems.count == 1, paginationEnd ")
+                log.debug("pageRemoteItems.count == 1, paginationEnd ")
                 if lastItem.isLocalItem {//
                     if (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
+                        log.info("pageRemoteItems.count == 1, paginationEnd lastItem.isLocalItem localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles")
+                        log.debug("pageRemoteItems.count == 1, paginationEnd lastItem.isLocalItem localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles")
                         let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                         filesCallBack(wrapedLocalItems)
                     } else {
                         pageAppendedCallBack = { [weak self] localItems in
+                            log.info("pageRemoteItems.count == 1, paginationEnd pageAppendedCallBack")
+                            log.debug("pageRemoteItems.count == 1, paginationEnd pageAppendedCallBack")
                             filesCallBack(localItems)
                             self?.pageAppendedCallBack = nil
                         }
                     }
      
                 } else {
+                    log.info("pageRemoteItems.count == 1, paginationEnd not lastItem.isLocalItem ")
+                    log.debug("pageRemoteItems.count == 1, paginationEnd not lastItem.isLocalItem ")
                     let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                     filesCallBack(wrapedLocalItems)
                 }
@@ -128,7 +144,12 @@ extension CoreDataStack {
             
             return
         } else if firstPage {
+            log.info("firstPage")
+            log.debug("firstPage ")
             if let lastRemoteItem = pageRemoteItems.last {
+                
+                log.info("firstPage lastRemoteItem")
+                log.debug("firstPage lastRemoteItem")
                 var md5s = [String]()
                 var uuids = [String]()
                 pageRemoteItems.forEach{
@@ -139,12 +160,14 @@ extension CoreDataStack {
                     }
                 }
                 
+
                 let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR localFileID IN %@)", md5s, uuids)
                 request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem), basePredicateString])
                 if let localItems = try? backgroundContext.fetch(request) {
                     let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                     filesCallBack(wrapedLocalItems)
                 }
+
             }
             return
             
@@ -173,10 +196,14 @@ extension CoreDataStack {
     
         
         if let localItems = try? backgroundContext.fetch(request), (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
+            log.info("let localItems = try? backgroundContext.fetch(request)")
+            log.debug("let localItems = try? backgroundContext.fetch(request) ")
             let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
             filesCallBack(wrapedLocalItems)
         } else {
             pageAppendedCallBack = { [weak self] localItems in
+                log.info("let localItems = try? backgroundContext.fetch(request) pageAppendedCallBack")
+                log.debug("let localItems = try? backgroundContext.fetch(request)  pageAppendedCallBack")
                 debugPrint("callback")
                 filesCallBack(localItems)
                 self?.pageAppendedCallBack = nil
@@ -297,15 +324,15 @@ extension CoreDataStack {
     }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        let currentlyInLibriaryIDs: [String] = allList.flatMap{ $0.localIdentifier }
+        let currentlyInLibriaryIDs: [String] = allList.flatMap { $0.localIdentifier }
         let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
         let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
         
-        let alredySavedIDs = alredySaved.flatMap{ $0.localFileID }
+        let alredySavedIDs = alredySaved.flatMap { $0.localFileID }
         
-        checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs, context:context)
+        checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs, context: context)
         
-        return allList.filter { !alredySavedIDs.contains( $0.localIdentifier )}
+        return allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) }
     }
     
     func removeLocalMediaItems(with assetIdList: [String]) {
@@ -314,8 +341,10 @@ extension CoreDataStack {
         }
         DispatchQueue.main.async {
             let context = self.mainContext//newChildBackgroundContext
+
             let predicate = NSPredicate(format: "localFileID IN %@", assetIdList)
             let items:[MediaItem] = self.executeRequest(predicate: predicate, context:context)
+
             items.forEach { context.delete($0) }
             
             self.saveDataForContext(context: context)
@@ -326,49 +355,49 @@ extension CoreDataStack {
     func  allLocalItems() -> [WrapData] {
         let context = mainContext
         let predicate = NSPredicate(format: "localFileID != nil")
-        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
-        return items.flatMap{ $0.wrapedObject }
+        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
+        return items.flatMap { $0.wrapedObject }
     }
     
     func  allLocalItems(with localIds: [String]) -> [WrapData] {
         let context = mainContext
         let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
-        let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
-        return items.flatMap{ $0.wrapedObject }
+        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
+        return items.flatMap { $0.wrapedObject }
     }
     
     func allLocalItemsForSync(video: Bool, image: Bool) -> [WrapData] {
         let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
-        let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap{ $0.localIdentifier }
+        let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap { $0.localIdentifier }
         
         var filesTypesArray = [Int16]()
-        if (video){
+        if (video) {
             filesTypesArray.append(FileType.video.valueForCoreDataMapping())
         }
-        if (image){
+        if (image) {
             filesTypesArray.append(FileType.image.valueForCoreDataMapping())
         }
 
         let context = mainContext
         let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
-        let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
-        let sortedItems = items.sorted { (item1, item2) -> Bool in
-            return item1.fileSizeValue < item2.fileSizeValue
+        let items: [MediaItem] =  executeRequest(predicate: predicate, context: context)
+        let sortedItems = items.sorted { item1, item2 -> Bool in
+            item1.fileSizeValue < item2.fileSizeValue
         }
         let currentUserID = SingletonStorage.shared.unigueUserID
         
         let filtredArray = sortedItems.filter {
             
-            return !$0.syncStatusesArray.contains(currentUserID)
+            !$0.syncStatusesArray.contains(currentUserID)
         }
         
-        return filtredArray.flatMap{ $0.wrapedObject }
+        return filtredArray.flatMap { $0.wrapedObject }
     }
     
     func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], context: NSManagedObjectContext) {
         let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", actualPhotoLibItemsIDs)
         let allNonAccurateSavedLocalFiles: [MediaItem] = executeRequest(predicate: predicate,
-                                                            context:context)
+                                                            context: context)
         
         allNonAccurateSavedLocalFiles.forEach {
             context.delete($0)

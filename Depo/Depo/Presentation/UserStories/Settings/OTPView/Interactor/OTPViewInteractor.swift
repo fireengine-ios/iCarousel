@@ -8,12 +8,12 @@
 
 class OTPViewInteractor: PhoneVereficationInteractor {
     
-    var responce: SignUpSuccessResponse? = nil
-    var userInfo: AccountInfoResponse? = nil
-    var phoneNumberString: String? = nil
+    var responce: SignUpSuccessResponse?
+    var userInfo: AccountInfoResponse?
+    var phoneNumberString: String?
     
     override var remainingTimeInMinutes: Int {
-        if let resp = responce{
+        if let resp = responce {
             return resp.remainingTimeInMinutes ?? 1
         }
         
@@ -21,7 +21,7 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     }
     
     override var expectedInputLength: Int? {
-        if let resp = responce{
+        if let resp = responce {
             return resp.expectedInputLength ?? 1
         }
         return nil
@@ -41,12 +41,12 @@ class OTPViewInteractor: PhoneVereficationInteractor {
         }
         
         let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: responce!.referenceToken ?? "")
-        AccountService().verifyPhoneNumber(parameters: parameters, success: {[weak self] (responce) in
+        AccountService().verifyPhoneNumber(parameters: parameters, success: {[weak self] responce in
             DispatchQueue.main.async {
                 self?.userInfo?.phoneNumber = self?.phoneNumber
                 self?.output.verificationSucces()
             }
-        }) { [weak self] (errorRespose) in
+        }) { [weak self] errorRespose in
             DispatchQueue.main.async {
                 guard let `self` = self else {
                     return

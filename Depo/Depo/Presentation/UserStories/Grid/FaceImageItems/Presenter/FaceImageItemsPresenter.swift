@@ -16,7 +16,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var isChangeVisibilityMode: Bool = false
     
-    private var visibilityItems: [WrapData] = []
     private var allItmes: [WrapData] = []
     
     override func viewIsReady(collectionView: UICollectionView) {        
@@ -25,7 +24,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
         dataSource.isHeaderless = true
         
-        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             view.configurateUgglaView()
         }
     }
@@ -33,6 +32,16 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         if let interactor = interactor as? FaceImageItemsInteractor {
             interactor.loadItem(item)
+        }
+    }
+    
+    func onItemSelectedActiveState(item: BaseDataSourceItem) {
+        dataSource.allMediaItems.forEach { peopleItem in
+            if let peopleItem = peopleItem as? PeopleItem,
+            let isVisible = peopleItem.responseObject.visible,
+            peopleItem.uuid == item.uuid {
+                peopleItem.responseObject.visible = !isVisible
+            }
         }
     }
     
@@ -56,17 +65,40 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         albumSliderModuleOutput?.reload()
         
-        if hasUgglaLabel(), let view = view as? FaceImageItemsInput {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             DispatchQueue.main.async {
                 view.updateUgglaViewPosition()
             }
         }
+        
+        dataSource.isHeaderless = true
+        updateNoFilesView()
+    }
+    
+    override func getContentWithFail(errorString: String?) {
+        super.getContentWithFail(errorString: errorString)
+        
+        updateNoFilesView()
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
     
+    override func needShowNoFileView() -> Bool {
+        return dataSource.allMediaItems.isEmpty
+    }
+    
+    // MARK: - BaseDataSourceForCollectionViewDelegate
+    
+    override func didDelete(items: [BaseDataSourceItem]) {
+        reloadData()
+    }
+    
+    override func updateCoverPhotoIfNeeded() {
+        reloadData()
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if hasUgglaLabel(), let view = view as? FaceImageItemsInput, scrollView == dataSource.collectionView {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput, scrollView == dataSource.collectionView {
             view.updateUgglaViewPosition()
         }
     }
@@ -75,7 +107,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         return faceImageType == .people || faceImageType == .things
     }
     
-    // MARK: -  Utility methods
+    // MARK: - Utility methods
     
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
         self.isChangeVisibilityMode = isChangeVisibilityMode
@@ -83,6 +115,15 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         reloadData()
     }
     
+    private func updateNoFilesView() {
+        if needShowNoFileView() {
+            if let view = view as? FaceImageItemsViewInput {
+                view.showNoFilesWith(text: interactor.textForNoFileLbel(),
+                                     image: interactor.imageForNoFileImageView(),
+                                     createFilesButtonText: "", needHideTopBar: interactor.needHideTopBar(), isShowUggla: hasUgglaLabel())
+            }
+        }
+    }
 }
 
 // MARK: FaceImageItemsInteractorOutput
@@ -99,6 +140,8 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     func didSaveChanges(_ items: [PeopleItem]) {
         isChangeVisibilityMode = false
         dataSource.setSelectionState(selectionState: false)
+        
+        asyncOperationSucces()
         
         view.stopSelection()
         
@@ -136,7 +179,13 @@ extension FaceImageItemsPresenter: FaceImageItemsViewOutput {
 extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
     
     func didChangeName(item: WrapData) {
-        reloadData()
+        dataSource.allMediaItems.forEach { people in
+            if people.uuid == item.uuid {
+                people.name = item.name
+            }
+        }
+
+        dataSource.reloadData()
     }
     
     func didReloadData() {

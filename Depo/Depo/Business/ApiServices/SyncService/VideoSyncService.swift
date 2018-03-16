@@ -16,10 +16,18 @@ final class VideoSyncService: ItemSyncServiceImpl {
         self.fileType = .video
     }
 
-    override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData])->Void) {
-        CoreDataStack.default.getLocalUnsynced(fieldValue: .video, service: photoVideoService) { (items) in
-            completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by:{$0.fileSize < $1.fileSize }))
+    override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
+        CoreDataStack.default.getLocalUnsynced(fieldValue: .video, service: photoVideoService) { items in
+            completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.fileSize < $1.fileSize }))
         }
+    }
+    
+    override func start(newItems: Bool) {
+        super.start(newItems: newItems)
+        
+        let isWiFi = ReachabilityService().isReachableViaWiFi
+        isWiFi ? MenloworksTagsService.shared.onAutosyncVideoViaWifi() : MenloworksTagsService.shared.onAutosyncVideoViaLte()
+        
     }
 
     override func stop() {
@@ -33,7 +41,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
     }
     
     
-    //MARK: - Private
+    // MARK: - Private
     
     private func stopAllOperations() {
         guard self.status.isContained(in: [.prepairing, .executing]) else {

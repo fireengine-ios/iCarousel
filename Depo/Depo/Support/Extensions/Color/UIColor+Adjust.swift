@@ -24,9 +24,9 @@ extension UIColor {
         guard getRed(&r, green: &g, blue: &b, alpha: &a) else {
             return self
         }
-        return UIColor(red: min(r + percentage/100, 1.0),
-                       green: min(g + percentage/100, 1.0),
-                       blue: min(b + percentage/100, 1.0),
+        return UIColor(red: min(r + percentage / 100, 1.0),
+                       green: min(g + percentage / 100, 1.0),
+                       blue: min(b + percentage / 100, 1.0),
                        alpha: a)
     }
     

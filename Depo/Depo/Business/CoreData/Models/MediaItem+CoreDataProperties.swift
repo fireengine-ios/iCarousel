@@ -42,14 +42,14 @@ extension MediaItem {
 
 extension MediaItem {
     public var albumsUUIDs: [String] {
-        return self.albums?.flatMap({ (album) -> String? in
-            return (album as? MediaItemsAlbum)?.uuid
+        return self.albums?.flatMap({ album -> String? in
+            (album as? MediaItemsAlbum)?.uuid
         }) ?? []
     }
     
     public var syncStatusesArray: [String] {
-        return objectSyncStatus?.allObjects.flatMap({ (syncStatus) -> String? in
-            return (syncStatus as? MediaItemsObjectSyncStatus)?.userID
+        return objectSyncStatus?.allObjects.flatMap({ syncStatus -> String? in
+            (syncStatus as? MediaItemsObjectSyncStatus)?.userID
         }) ?? []
     }
 }
@@ -69,7 +69,6 @@ extension MediaItem {
     
     @objc(removeAlbums:)
     @NSManaged public func removeFromAlbums(_ values: NSSet)
-    
     
     
     @objc(addObjectSyncStatusObject:)

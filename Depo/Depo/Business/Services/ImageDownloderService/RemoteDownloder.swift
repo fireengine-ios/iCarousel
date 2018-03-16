@@ -21,7 +21,7 @@ class ImageDownloder {
     
     func getImage(patch: URL?, compliteImage:@escaping RemoteImage) {
         
-        if (patch == nil){
+        if (patch == nil) {
             DispatchQueue.main.async {
                 compliteImage(nil)
             }
@@ -41,7 +41,7 @@ class ImageDownloder {
         
         let item = downloder.downloadImage(with: patch,
                                            options: [.lowPriority/*,.useNSURLCache*/],
-                                           progress: nil) { (image, data, error, bool) in
+                                           progress: nil) { image, data, error, bool in
                                             
                                             SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
                                             compliteImage(image)
@@ -54,32 +54,32 @@ class ImageDownloder {
         
     }
     
-    func getImagesByImagesURLs(list:[ImageForDowload], images: @escaping ([URL]) -> Swift.Void) {
+    func getImagesByImagesURLs(list: [ImageForDowload], images: @escaping ([URL]) -> Swift.Void) {
         if list.count > 0 {
             let imageObject = list.first
-            getImage(patch: imageObject?.downloadURL, compliteImage: {(image) in
+            getImage(patch: imageObject?.downloadURL, compliteImage: {image in
                 var urlsArray = [URL]()
                 
                 var url: URL? = nil
                 if let imageName = imageObject?.imageName {
                     url = URL(fileURLWithPath: (NSTemporaryDirectory() + imageName))
                 }
-                if let im = image, let url_ = url{
+                if let im = image, let url_ = url {
                     let data = UIImagePNGRepresentation(im) as NSData?
                     data?.write(to: url_, atomically: false)
                     urlsArray.append(url_)
-                }else{
+                } else {
                     url = nil
                 }
                 
-                if (list.count == 1){
+                if (list.count == 1) {
                     images(urlsArray)
-                }else{
+                } else {
                     let decreasedArray = Array(list.dropFirst())
                     let downloader = ImageDownloder()
-                    downloader.getImagesByImagesURLs(list: decreasedArray, images: { (array) in
+                    downloader.getImagesByImagesURLs(list: decreasedArray, images: { array in
                         var urlsArray = [URL]()
-                        if let url_ = url{
+                        if let url_ = url {
                             urlsArray.append(url_)
                         }
                         
@@ -104,7 +104,7 @@ class ImageDownloder {
         }
     }
     
-    func cancelRequest(path: URL) -> Void {
+    func cancelRequest(path: URL) {
         guard let item = tokenList[path] else {
             return
         }
@@ -147,7 +147,7 @@ class FilesDownloader {
             group.enter()
             let params = BaseDownloadRequestParametrs(urlToFile: file.url, fileName: file.name, contentType: file.type)
             
-            requestService.executeDownloadRequest(param: params) { [weak self] (urlToTmpFile, response, error) in
+            requestService.executeDownloadRequest(param: params) { [weak self] urlToTmpFile, response, error in
                 if let urlToTmpFile = urlToTmpFile {
                     let destinationURL = tmpDirectoryURL.appendingPathComponent(file.name, isDirectory: false)
                     do {
@@ -173,4 +173,3 @@ class FilesDownloader {
     }
     
 }
-

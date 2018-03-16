@@ -23,7 +23,7 @@ final class FaceImageItemsConfigurator {
         }
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                   selectionModeTypes: [.createStory,.addToFavorites,.delete])
+                                                                   selectionModeTypes: [.createStory, .addToFavorites, .delete])
         
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()

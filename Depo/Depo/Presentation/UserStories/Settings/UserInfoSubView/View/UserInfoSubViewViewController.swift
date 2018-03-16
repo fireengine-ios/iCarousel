@@ -98,14 +98,14 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
         
         userEmailLabel.text = userInfo.email
         userPhoneNumber.text = userInfo.phoneNumber
-        if let url = userInfo.urlForPhoto{
+        if let url = userInfo.urlForPhoto {
             userIconImageView.loadImageByURL(url: url)
         }
     }
     
     func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
         guard let quotaBytes = quotoInfo.bytes, let usedBytes = quotoInfo.bytesUsed else { return }
-        usersStorrageUssesProgress.progress = 1 - Float(usedBytes)/Float(quotaBytes)
+        usersStorrageUssesProgress.progress = 1 - Float(usedBytes) / Float(quotaBytes)
         
         let quotaString = quotaBytes.bytesString
         var remaind = quotaBytes - usedBytes
@@ -123,7 +123,7 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
     
     // MARK: buttons actions
     @IBAction func onEditUserInformationButton() {
-        guard let userInfo_ = userInfo else{
+        guard let userInfo_ = userInfo else {
             return
         }
         actionsDelegate?.updateUserProfile(userInfo: userInfo_)

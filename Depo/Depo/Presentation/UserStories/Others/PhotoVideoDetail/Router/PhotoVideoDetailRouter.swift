@@ -8,17 +8,17 @@
 
 class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
 
-    func onInfo(object: Item){
+    func onInfo(object: Item) {
         let router = RouterVC()
         let viewContr = router.fileInfo!
-        guard let fileInfo = viewContr as? FileInfoViewController else{
+        guard let fileInfo = viewContr as? FileInfoViewController else {
             return
         }
         router.pushOnPresentedView(viewController: fileInfo)
         fileInfo.interactor.setObject(object: object) //FIXME: AGAIN!>!?!@>!@ interactor in vc!!@@!!@!@
     }
     
-    func goBack(navigationConroller: UINavigationController?){
+    func goBack(navigationConroller: UINavigationController?) {
         navigationConroller?.dismiss(animated: true, completion: nil)
     }
     

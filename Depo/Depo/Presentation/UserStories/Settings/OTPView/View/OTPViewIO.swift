@@ -15,4 +15,3 @@
 //protocol OTPViewOutput: class {
 //    func viewIsReady()
 //}
-

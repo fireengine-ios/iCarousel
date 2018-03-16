@@ -10,7 +10,7 @@ import UIKit
 
 class CreateStoryModuleInitializer: BaseFilesGreedModuleInitializer {
 
-    class func initializePhotoSelectionViewControllerForStory(with nibName:String, story:PhotoStory) -> UIViewController {
+    class func initializePhotoSelectionViewControllerForStory(with nibName: String, story: PhotoStory) -> UIViewController {
         let viewController = CreateStoryPhotoSelectionViewController(nibName: nibName, bundle: nil)
         viewController.scrolliblePopUpView.isEnable = false
         let configurator = CreateStorySelectionConfigurator()
@@ -20,7 +20,7 @@ class CreateStoryModuleInitializer: BaseFilesGreedModuleInitializer {
         return viewController
     }
     
-    class func initializeFavoritePhotoSelectionViewControllerForStory(with nibName:String, story:PhotoStory) -> UIViewController {
+    class func initializeFavoritePhotoSelectionViewControllerForStory(with nibName: String, story: PhotoStory) -> UIViewController {
         let viewController = CreateStoryPhotoSelectionViewController(nibName: nibName, bundle: nil)
         viewController.scrolliblePopUpView.isEnable = false
         viewController.isFavorites = true
@@ -31,7 +31,7 @@ class CreateStoryModuleInitializer: BaseFilesGreedModuleInitializer {
         return viewController
     }
     
-    class func initializeAudioSelectionViewControllerForStory(with nibName:String, story:PhotoStory) -> UIViewController {
+    class func initializeAudioSelectionViewControllerForStory(with nibName: String, story: PhotoStory) -> UIViewController {
         let viewController = CreateStoryAudioSelectionViewController(nibName: nibName, bundle: nil)
         viewController.scrolliblePopUpView.isEnable = false
         let configurator = CreateStorySelectionConfigurator()

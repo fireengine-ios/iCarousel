@@ -13,7 +13,7 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
     var interactor: DuplicatedContactsInteractorInput!
     var router: DuplicatedContactsRouterInput!
     
-    //MARK: View Output
+    // MARK: View Output
     func viewIsReady() {
         
     }
@@ -23,7 +23,7 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
         moduleOutput?.backFromDuplicatedContacts()
     }
     
-    //MARK: Interactor Output
+    // MARK: Interactor Output
 
     func onKeepTapped() {
         router.back()
@@ -35,7 +35,7 @@ class DuplicatedContactsPresenter: DuplicatedContactsModuleInput, DuplicatedCont
                              image: .delete,
                              firstButtonTitle: TextConstants.cancel,
                              secondButtonTitle: TextConstants.ok,
-                             secondAction: { [weak self] (vc) in
+                             secondAction: { [weak self] vc in
                                 self?.router.back()
                                 vc.close()
                                 self?.moduleOutput?.deleteDuplicatedContacts()

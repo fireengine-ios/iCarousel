@@ -30,7 +30,7 @@ struct RouteRequests {
     static let mailVerefication = "/api/verify/sendVerificationEmail"
     static let mailUpdate = "/api/account/email"
     
-    //MARK: EULA 
+    // MARK: EULA 
     static let eulaGet     = "api/eula/get/%@"
     static let eulaCheck   = "api/eula/check/%@"
     static let eulaApprove = "api/eula/approve/%i"
@@ -49,7 +49,7 @@ struct RouteRequests {
     static let fbStart       = "api/migration/facebook/start"
     static let fbStop        = "api/migration/facebook/stop"
     
-    //MARK: -  Instagram
+    // MARK: - Instagram
     static let socialStatus = "/api/share/social/status"
     static let instagramConfig = "/api/share/social/instagram/config"
     static let instagramSyncStatus = "/api/share/social/instagram/syncStatus"
@@ -61,7 +61,7 @@ struct RouteRequests {
     static let captcha = "/api/captcha/%@/%@"
     
     
-    //MARK: Search
+    // MARK: Search
     
     static let search = "/api/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
     
@@ -87,28 +87,26 @@ struct RouteRequests {
     static let peopleMerge = "/api/person/%d"
     static let peopleChangeName = "/api/person/label/%d"
     static let peopleDeletePhotos = "/api/person/photo/delete/%d"
-    static let peopleDeletePhoto = "/person/photo/%d/%d"
+//    static let peopleDeletePhoto = "/person/photo/%d/%d"
     static let things = "/api/object/"
     static let thingsThumbnails = "/api/object/thumbnails"
     static let thingsPage = "/api/object/page?pageSize=%d&pageNumber=%d"
     static let thingsAlbum = "/api/album?contentType=album/object&sortBy=createdDate&sortOrder=DESC&page=0&size=1&objectInfoId=%d"
     static let thingsDeletePhotos = "/api/object/photo/%d"
-    static let thingsDeletePhoto = "/api/object/photo/%d/%d"
+//    static let thingsDeletePhoto = "/api/object/photo/%d/%d"
     static let places = "/api/location/"
     static let placesThumbnails = "/api/location/thumbnails"
     static let placesPage = "/api/location/page?pageSize=%d&pageNumber=%d"
     static let placesAlbum = "/api/album?contentType=album/location&sortBy=createdDate&sortOrder=DESC&page=0&size=1&locationInfoId=%d"
-    static let placesDeletePhotos = "/api/location/%d"
+//    static let placesDeletePhotos = "/api/location/%d"
     
     //MARK : Share
-    
     static let share = "/api/share/%@"
     
     //MARK : Faq 
-    
-    static let faqUrl = "api/faq/url/%@"
+    static let faqContentUrl = "http://mylifebox.life.com.by/faq/?lang=%@"
 
-    //MARK: - Contacts
+    // MARK: - Contacts
     static let getContacts = "contact?sortField=firstname&sortOrder=ASC&maxResult=16&currentPage=%d"
     static let searchContacts = "search?sortField=firstname&sortOrder=ASC&maxResult=16&query=%@&currentPage=%d"
     static let deleteContacts = "contact"

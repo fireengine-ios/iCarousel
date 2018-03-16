@@ -22,7 +22,7 @@ protocol Iterator {
     
     func all() -> [Item]
     
-    func object(at:IndexPath) -> Item?
+    func object(at: IndexPath) -> Item?
 }
 
 
@@ -42,7 +42,7 @@ class FetchService: NSObject {
     static func createController(batchSize: Int,
                                  sortingAgrifate: SortingAgregate,
                                  prediicate: NSPredicate?,
-                                 delegate:NSFetchedResultsControllerDelegate?) -> (NSFetchedResultsController<MediaItem>) {
+                                 delegate: NSFetchedResultsControllerDelegate?) -> (NSFetchedResultsController<MediaItem>) {
         
         let fetchRequest_ = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
         fetchRequest_.fetchBatchSize = batchSize
@@ -105,9 +105,7 @@ class FetchService: NSObject {
     }
 }
 
-extension FetchService: Iterator  {
-    
-    typealias Item = WrapData
+extension FetchService: Iterator {
     
     var curent: WrapData? {
         get {
@@ -154,7 +152,7 @@ extension FetchService: Iterator  {
             
             let rowsInSection: Int = controller.sections?[indexPath.section].numberOfObjects ?? 0
             let isAvaliblePrevItemInRow: Bool = rowsInSection > 1
-            let isAvaliblePrevSection: Bool =  indexPath.section > 0
+            let isAvaliblePrevSection: Bool = indexPath.section > 0
             
             if isAvaliblePrevItemInRow {
                 newIndexPath = IndexPath(row: indexPath.row - 1,
@@ -176,10 +174,10 @@ extension FetchService: Iterator  {
     
     
     func all() -> [WrapData] {
-        guard let allItems:[MediaItem] = controller.fetchedObjects else {
+        guard let allItems: [MediaItem] = controller.fetchedObjects else {
             return []
         }
-        let result: [WrapData] =  allItems.flatMap{ $0.wrapedObject }
+        let result: [WrapData] =  allItems.flatMap { $0.wrapedObject }
         return result
     }
     

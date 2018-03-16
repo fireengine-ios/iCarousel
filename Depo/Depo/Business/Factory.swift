@@ -31,11 +31,6 @@ final class FactoryMain: FactoryBase, Factory {
         return FactoryMain.dropboxManager
     }
     
-    private static let passcodeStorage = PasscodeStorageDefaults()
-    func resolve() -> PasscodeStorage {
-        return FactoryMain.passcodeStorage
-    }
-    
     private static let biometricsManager = BiometricsManagerImp()
     func resolve() -> BiometricsManager {
         return FactoryMain.biometricsManager
@@ -49,5 +44,3 @@ extension FactoryMain {
         return FactoryMain.homeCardsService
     }
 }
-
-

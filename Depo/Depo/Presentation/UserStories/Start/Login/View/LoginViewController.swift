@@ -14,7 +14,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     var output: LoginViewOutput!
     var dataSource: LoginDataSource = LoginDataSource()
     
-    var tableDataMArray:Array<UITableViewCell> = Array()
+    var tableDataMArray: Array<UITableViewCell> = Array()
     
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -24,7 +24,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     @IBOutlet weak var rememberLoginLabel: UILabel!
     @IBOutlet weak var viewForCaptcha: UIView!
     @IBOutlet weak var captchaViewH: NSLayoutConstraint!
-    @IBOutlet weak var titleLabel:UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var iPadLogoImage: UIImageView!
@@ -70,7 +70,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self);
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,8 +105,8 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     }
     
     @objc func showKeyBoard(notification: NSNotification) {
-        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         
@@ -123,7 +123,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
                 } else {
                     yOfTextField = getMainYForView(view: textField!) + textField!.frame.size.height + 20
                 }
-                if (yOfTextField > view.frame.size.height - keyboardHeight){
+                if (yOfTextField > view.frame.size.height - keyboardHeight) {
                     let dy = yOfTextField - (view.frame.size.height - keyboardHeight)
                     
                     let point = CGPoint(x: 0, y: dy + 10)
@@ -154,12 +154,12 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         return nil
     }
     
-    private func getMainYForView(view: UIView)->CGFloat {
+    private func getMainYForView(view: UIView) -> CGFloat {
         if (view.superview == self.view) {
             return view.frame.origin.y
         } else {
             if (view.superview != nil) {
-                return view.frame.origin.y + getMainYForView(view:view.superview!)
+                return view.frame.origin.y + getMainYForView(view: view.superview!)
             } else {
                 return 0
             }
@@ -232,7 +232,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     }
 
     
-    //MARK: - DATA SOURCE DELEGATES
+    // MARK: - DATA SOURCE DELEGATES
     
     func textStrtedEditing() {
         self.hideErrorMessage()
@@ -268,7 +268,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         let login = dataSource.getLogin()
         hideKeyboard()
         if !viewForCaptcha.isHidden {
-            output.sendLoginAndPasswordWithCaptcha(login: login, password: password, captchaID: capthcaVC.currenrtCapthcaID, captchaAnswer: capthcaVC.inputTextField.text ?? "")
+            output.sendLoginAndPasswordWithCaptcha(login: login, password: password, captchaID: capthcaVC.currentCaptchaID, captchaAnswer: capthcaVC.inputTextField.text ?? "")
         } else {
             output.sendLoginAndPassword(login: login, password: password)
         }
@@ -283,7 +283,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
         guard let button = sender as? UIButton else {
             return
         }
-        button.isSelected = !button.isSelected;
+        button.isSelected = !button.isSelected
 
         output.rememberMe(remember: button.isSelected)
     }
@@ -291,7 +291,7 @@ class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActi
     
     // MARK: LoginViewInput
     
-    func setupInitialState(array :[BaseCellModel]){
+    func setupInitialState(array: [BaseCellModel]) {
         dataSource.setupCellsWithModels(models: array)
     }
     

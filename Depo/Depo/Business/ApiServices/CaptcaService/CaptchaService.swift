@@ -28,8 +28,8 @@ struct CaptchaParametr: RequestParametrs {
     }
     
     var patch: URL {
-        let patch_: String = String(format: RouteRequests.captcha,type, uuid)
-        return URL(string: patch_, relativeTo:RouteRequests.BaseUrl)!
+        let patch_: String = String(format: RouteRequests.captcha, type, uuid)
+        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -52,7 +52,7 @@ struct CaptchaParametrAnswer: RequestParametrs {
     
     var patch: URL {
         let patch_: String = String(format: RouteRequests.captcha, answer, uuid)
-        return URL(string: patch_, relativeTo:RouteRequests.BaseUrl)!
+        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -60,7 +60,7 @@ struct CaptchaParametrAnswer: RequestParametrs {
     }
 }
 
-class CaptchaResponse: ObjectRequestResponse  {
+final class CaptchaResponse: ObjectRequestResponse {
     var data: Data?
     var type: CaptchaType? {
         if let htype: String = self.responseHeader?[HeaderConstant.ContentType] as? String {
@@ -86,23 +86,22 @@ class CaptchaResponse: ObjectRequestResponse  {
 }
 
 
-class CaptchaService: BaseRequestService {
+final class CaptchaService: BaseRequestService {
     
-    var uuid: String
+    private(set) var uuid: String = UUID().uuidString
     
-    override init() {
-        uuid = UUID().uuidString
-        super.init()
-    }
-    
-    func getCaptcha(type: CaptchaType = .image, sucess:SuccessResponse?, fail: FailResponse?   ) {
+    func getCaptcha(uuid: String? = nil, type: CaptchaType = .image, sucess: SuccessResponse?, fail: FailResponse?   ) {
         log.debug("CaptchaService getCaptcha")
-
-        uuid = UUID().uuidString
-        let param = CaptchaParametr(uuid: uuid, type: type.rawValue)
-        let handler = BaseResponseHandler<CaptchaResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat:.DataFormat)
-        executeGetRequest(param: param,
-                          handler: handler)
+        
+        if let uuid = uuid {
+            self.uuid = uuid
+        } else {
+            self.uuid = UUID().uuidString
+        }
+        
+        let param = CaptchaParametr(uuid: self.uuid, type: type.rawValue)
+        let handler = BaseResponseHandler<CaptchaResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
+        executeGetRequest(param: param, handler: handler)
     }
     
 }

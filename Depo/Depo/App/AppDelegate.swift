@@ -14,7 +14,7 @@ import SDWebImage
 import XCGLogger
 
 // the global reference to logging mechanism to be available in all files
-let log = setupLog()
+var log = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     
@@ -43,20 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = RouterVC().vcForCurrentState()
         window?.makeKeyAndVisible()
         
-        
-        
+
         Fabric.with([Crashlytics.self])
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        setupLog()
         
-        let documentDirectory: NSURL = {
-            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            return urls[urls.endIndex - 1] as NSURL
-        }()
-        let logPath: NSURL = documentDirectory.appendingPathComponent("app.log")! as NSURL
-        log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: logPath, fileLevel: .debug)
+        MenloworksAppEvents.onAppLaunch()
+        MenloworksTagsService.shared.passcodeStatus(!passcodeStorage.isEmpty)
         
+        passcodeStorage.systemCallOnScreen = false
         return true
     }
     
@@ -90,6 +88,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if tokenStorage.refreshToken != nil {
             LocationManager.shared.startUpdateLocation()
         }
+        
+        if !passcodeStorage.isEmpty {
+            let topVC = UIApplication.topController()
+            
+            /// remove PasscodeEnterViewController if was on the screen
+            if let tabBarVC = topVC as? TabBarViewController,
+                let navVC = tabBarVC.activeNavigationController,
+                navVC.topViewController is PasscodeEnterViewController {
+                navVC.popViewController(animated: false)
+                showPasscodeIfNeed()
+            } else if passcodeStorage.systemCallOnScreen {
+                passcodeStorage.systemCallOnScreen = false
+                showPasscodeIfNeed()
+            }
+        }
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -100,8 +113,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let topVC = UIApplication.topController()
         
         /// don't show at all or new PasscodeEnterViewController
-        if passcodeStorage.isEmpty || topVC is PasscodeEnterViewController {
+        if passcodeStorage.isEmpty || passcodeStorage.systemCallOnScreen || topVC is PasscodeEnterViewController {
             return
+        }
+        
+        /// remove PasscodeEnterViewController if was on the screen and biometrics is disable
+        if let tabBarVC = topVC as? TabBarViewController,
+            let navVC = tabBarVC.activeNavigationController,
+            navVC.topViewController is PasscodeEnterViewController {
+            if biometricsManager.isEnabled {
+                return
+            } else {
+                navVC.popViewController(animated: false)
+            }
         }
         
         if topVC is UIAlertController {
@@ -116,14 +140,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func showPasscode() {
         let topVC = UIApplication.topController()
         
-        /// remove PasscodeEnterViewController if was on the screen
-        if let tabBarVC = topVC as? TabBarViewController,
-            let navVC = tabBarVC.activeNavigationController,
-            navVC.topViewController is PasscodeEnterViewController
-        {
-            navVC.popViewController(animated: false)
-        }
-    
         /// present PasscodeEnterViewController
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         vc.success = {
@@ -135,7 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navVC = UINavigationController(rootViewController: vc)
         vc.navigationBarWithGradientStyleWithoutInsets()
         
-        topVC?.present(navVC, animated: false,completion: nil)
+        topVC?.present(navVC, animated: false, completion: nil)
     }
     
     private func checkPasscodeIfNeed() {
@@ -189,20 +205,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         log.debug("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
-
+        MenloworksTagsService.shared.onNotificationPermissionChanged(true)
+        
         MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         log.debug("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
+        MenloworksTagsService.shared.onNotificationPermissionChanged(false)
 
         MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         log.debug("AppDelegate didReceiveRemoteNotification")
-
-        MPush.applicationDidReceiveRemoteNotification(userInfo)
+        MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
@@ -212,28 +229,27 @@ extension AppDelegate {
     }
 }
 
-private func setupLog() -> XCGLogger {
-    // Create a logger object with no destinations
-    let log = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
+private func setupLog() {
+    let documentDirectory: NSURL = {
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return urls[urls.endIndex - 1] as NSURL
+    }()
     
-    // Create a destination for the system console log (via NSLog)
-    let systemDestination = AppleSystemLogDestination(identifier: "advancedLogger.systemDestination")
+    if let logPath = documentDirectory.appendingPathComponent("app.log") as NSURL? {
+        UserDefaults.standard.set(logPath.path!, forKey: "app.log")
+        let fileDestination: AutoRotatingFileDestination = AutoRotatingFileDestination(owner: log, writeToFile: logPath, identifier: "advancedLogger", shouldAppend: true)
+        fileDestination.outputLevel = .debug
+        fileDestination.showLogIdentifier = true
+        fileDestination.showFunctionName = true
+        fileDestination.showThreadName = true
+        fileDestination.showLevel = true
+        fileDestination.showFileName = true
+        fileDestination.showLineNumber = true
+        fileDestination.showDate = true
+        
+        let day: TimeInterval = 24 * 60 * 60
+        fileDestination.targetMaxTimeInterval = day * 2
+        log.add(destination: fileDestination)
+    }
     
-    // Optionally set some configuration options
-    systemDestination.outputLevel = .debug
-    systemDestination.showLogIdentifier = false
-    systemDestination.showFunctionName = true
-    systemDestination.showThreadName = true
-    systemDestination.showLevel = true
-    systemDestination.showFileName = true
-    systemDestination.showLineNumber = true
-    systemDestination.showDate = true
-    
-    // Add the destination to the logger
-    log.add(destination: systemDestination)
-    
-    // Add basic app info, version info etc, to the start of the logs
-    log.logAppDetails()
-    
-    return log
 }

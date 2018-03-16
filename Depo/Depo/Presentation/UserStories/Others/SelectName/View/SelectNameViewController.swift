@@ -44,7 +44,7 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         
         navigationBarWithGradientStyle()
         
-        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1{
+        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1 {
             let barButtonLeft = UIBarButtonItem(customView: cancelButton)
             navigationItem.leftBarButtonItem = barButtonLeft
         }
@@ -56,11 +56,11 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         textField.becomeFirstResponder()
     }
     
-    @objc func onCancelButton(){
+    @objc func onCancelButton() {
         hideView()
     }
     
-    func hideView(){
+    func hideView() {
         dismiss(animated: true) {
             
         }
@@ -74,7 +74,7 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
     
     // MARK: Buttons actions
     
-    @objc func onNextButton(){
+    @objc func onNextButton() {
         textField.resignFirstResponder()
         output.onNextButton(name: textField.text ?? "")
     }

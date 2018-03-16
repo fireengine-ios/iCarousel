@@ -20,7 +20,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     var sharingItems = [BaseDataSourceItem]()
     
     func share(item: [BaseDataSourceItem], sourceRect: CGRect?) {
-        if (item.count == 0){
+        if (item.count == 0) {
             return
         }
         sharingItems.removeAll()
@@ -41,7 +41,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darcBlueColor
         
-        let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] (action) in
+        let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
+            MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareSmallSize(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
@@ -51,7 +52,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         controler.addAction(smallAction)
         
-        let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] (action) in
+        let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
+            MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareOrignalSize(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
@@ -60,7 +62,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         controler.addAction(originalAction)
         
-        let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] (action) in
+        let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
+            MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
@@ -80,7 +83,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: controler)
     }
     
-    func shareSmallSize(sourceRect: CGRect?){
+    func shareSmallSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
             let files: [FileForDownload] = items.flatMap({ FileForDownload(forMediumURL: $0) })
             shareFiles(filesForDownload: files, sourceRect: sourceRect)
@@ -88,7 +91,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
     }
     
-    func shareOrignalSize(sourceRect: CGRect?){
+    func shareOrignalSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
             let files: [FileForDownload] = items.flatMap({ FileForDownload(forOriginalURL: $0) })
             shareFiles(filesForDownload: files, sourceRect: sourceRect)
@@ -99,13 +102,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let downloader = FilesDownloader()
         output?.operationStarted(type: .share)
         
-        downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] (fileURLs, directoryURL) in
+        downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] fileURLs, directoryURL in
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .share)
                     
                     let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
                     
-                    activityVC.completionWithItemsHandler = { (_, _, _, _) in
+                    activityVC.completionWithItemsHandler = { _, _, _, _ in
                         do {
                             try FileManager.default.removeItem(at: directoryURL)
                         } catch {
@@ -120,13 +123,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     let router = RouterVC()
                     router.presentViewController(controller: activityVC)
                 }
-            }, fail: { [weak self] (errorMessage) in
+            }, fail: { [weak self] errorMessage in
                 self?.output?.operationFailed(type: .share, message: errorMessage)
         })
     }
     
     func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?) {
-        if (item.count == 0){
+        if (item.count == 0) {
             return
         }
         sharingItems.removeAll()
@@ -135,9 +138,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         shareViaLink(sourceRect: sourceRect)
     }
     
-    func shareViaLink(sourceRect: CGRect?){
+    func shareViaLink(sourceRect: CGRect?) {
         output?.operationStarted(type: .share)
-        fileService.share(sharedFiles: sharingItems, success: {[weak self] (url) in
+        fileService.share(sharedFiles: sharingItems, success: {[weak self] url in
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: .share)
                 
@@ -283,7 +286,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         RouterVC().presentViewController(controller: controller)
     }
     
-    private func deleteFromAlbums(items: [BaseDataSourceItem]){
+    private func deleteFromAlbums(items: [BaseDataSourceItem]) {
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .removeFromAlbum)
             let album = RouterVC().getParentUUID()
@@ -313,28 +316,36 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         RouterVC().presentViewController(controller: controller)
     }
     
-    func move(item: [BaseDataSourceItem], toPath:String) {
+    func move(item: [BaseDataSourceItem], toPath: String) {
         guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
             return
         }
+        let itemsFolders = item.flatMap { $0.parent }
         let folderSelector = selectFolderController()
         
-        folderSelector.selectFolder(select: { [weak self] (folder) in
+        folderSelector.selectFolder(select: { [weak self] folder in
+            if itemsFolders.contains(folder) {
+                folderSelector.dismiss(animated: true, completion: {
+                    self?.output?.showWrongFolderPopup()
+                })
+                return
+            }
+            
             self?.output?.operationStarted(type: .move)
             self?.fileService.move(items: item, toPath: folder,
                                    success: { [weak self] in
                                     self?.succesAction(elementType: .move)()
                                     //because we have animation of dismiss for this stack of view controllers we have some troubles with reloading data in root collection view
                                     //data will be updated after 0.3 seconds (time of aimation)
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 , execute: {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                                         ItemOperationManager.default.filesMoved(items: item, toFolder: folder)
                                     })
                                     
-            },fail: self?.failAction(elementType: .move))
+            }, fail: self?.failAction(elementType: .move))
             
             }, cancel: { [weak self] in
                 self?.succesAction(elementType: ElementTypes.move)()
-        } )
+        })
     }
     
     func copy(item: [BaseDataSourceItem], toPath: String) {
@@ -343,7 +354,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         let folderSelector = selectFolderController()
         
-        folderSelector.selectFolder(select: { [weak self] (folder) in
+        folderSelector.selectFolder(select: { [weak self] folder in
             self?.fileService.move(items: item, toPath: folder,
                                    success: self?.succesAction(elementType: .copy),
                                    fail: self?.failAction(elementType: .copy))
@@ -379,7 +390,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                  fail: failAction(elementType: .download))
         } else if let albums = item as? [AlbumItem] {
             
-            photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] (itemsByAlbums) in
+            photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] itemsByAlbums in
                 self?.fileService.download(itemsByAlbums: itemsByAlbums,
                                           success: self?.succesAction(elementType: .download),
                                           fail: self?.failAction(elementType: .download))
@@ -411,7 +422,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         output?.operationStarted(type: .removeFromFavorites)
         fileService.removeFromFavourite(files: items,
-                                        success:succesAction(elementType: .removeFromFavorites),
+                                        success: succesAction(elementType: .removeFromFavorites),
                                         fail: failAction(elementType: .removeFromFavorites))
     }
     
@@ -515,6 +526,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     text = TextConstants.popUpDownloadComplete
                 case .delete:
                     text = TextConstants.popUpDeleteComplete
+                    MenloworksAppEvents.onFileDeleted()
                 default:
                     return
                 }
@@ -526,7 +538,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func failAction(elementType: ElementTypes) -> FailResponse {
         
-        let failResponse : FailResponse  = { [weak self] value in
+        let failResponse: FailResponse  = { [weak self] value in
             DispatchQueue.main.async {
                 self?.output?.operationFailed(type: elementType, message: value.description)
             }
@@ -543,7 +555,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
         }
         
-        let failClosure: FailResponse = { [weak self] (errorResponse) in
+        let failClosure: FailResponse = { [weak self] errorResponse in
             DispatchQueue.main.async {
                 self?.output?.compliteAsyncOperationEnableScreen()
                 if errorResponse.errorDescription == TextConstants.canceledOperationTextError {

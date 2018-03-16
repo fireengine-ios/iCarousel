@@ -34,10 +34,13 @@ class OTPViewController: PhoneVereficationViewController {
         bacgroundImageView.isHidden = true
     }
     
+    /// dont call super.viewWillAppear(animated) for hidenNavigationBarStyle
+    override func viewWillAppear(_ animated: Bool) {}
+    
     override func setupPhoneLable(with number: String) {
-        if (Device.isIpad){
+        if (Device.isIpad) {
             super.setupPhoneLable(with: number)
-        }else{
+        } else {
             mainTitle.text = String(format: TextConstants.otpTitleText, number)
         }
     }

@@ -86,7 +86,7 @@ extension PackagesPresenter: PackagesViewOutput {
                 self?.interactor.getToken(for: offer)
                 self?.view?.stopActivityIndicator()
             }
-        },  fail: { [weak self] failResponse in
+        }, fail: { [weak self] failResponse in
             DispatchQueue.main.async {
                 self?.view?.stopActivityIndicator()
             }
@@ -124,6 +124,7 @@ extension PackagesPresenter: OptInControllerDelegate {
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
     func successedPromocode() {
+        MenloworksAppEvents.onPromocodeActivated()
         view?.successedPromocode()
     }
     

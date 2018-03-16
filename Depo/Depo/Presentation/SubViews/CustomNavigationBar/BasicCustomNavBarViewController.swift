@@ -25,7 +25,7 @@ extension BasicCustomNavBarViewController: CustomNavBarViewActionDelegate {
     }
 }
 
-//MARK: - MoreActions(UIPopoverController) appearance delegate
+// MARK: - MoreActions(UIPopoverController) appearance delegate
 
 extension BasicCustomNavBarViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {

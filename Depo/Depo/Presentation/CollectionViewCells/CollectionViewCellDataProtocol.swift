@@ -8,8 +8,6 @@
 
 protocol CollectionViewCellDataProtocol {
     
-    typealias Item = WrapData
-    
     func confireWithWrapperd(wrappedObj: BaseDataSourceItem)
     
     func setImage(image: UIImage?, animated: Bool)
@@ -31,4 +29,3 @@ protocol CollectionViewCellDataProtocol {
     func updating()
     
 }
-

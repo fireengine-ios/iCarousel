@@ -20,14 +20,13 @@ class SplashInteractor: SplashInteractorInput {
         return passcodeStorage.isEmpty
     }
 
-    func startLoginInBackroung(){
+    func startLoginInBackroung() {
         if tokenStorage.accessToken == nil {
             if ReachabilityService().isReachableViaWiFi {
                 failLogin()
             } else {
-                /// turkcell login
                 authenticationService.turkcellAuth(success: { [weak self] in
-                    self?.successLogin()
+                    self?.turkcellSuccessLogin()
                 }, fail: { [weak self] response in
                     self?.output.asyncOperationSucces()
                     self?.output.onFailLogin()
@@ -38,13 +37,19 @@ class SplashInteractor: SplashInteractorInput {
         }
     }
     
-    func successLogin(){
+    func turkcellSuccessLogin() {
+        DispatchQueue.main.async {
+            self.output.onSuccessLoginTurkcell()
+        }
+    }
+    
+    func successLogin() {
         DispatchQueue.main.async {
             self.output.onSuccessLogin()
         }
     }
     
-    func failLogin(){
+    func failLogin() {
         DispatchQueue.main.async {
             self.output.onFailLogin()
             if !ReachabilityService().isReachable {
@@ -55,11 +60,11 @@ class SplashInteractor: SplashInteractorInput {
     
     func checkEULA() {
         let eulaService = EulaService()
-        eulaService.eulaCheck(success: { [weak self] (successResponce) in
+        eulaService.eulaCheck(success: { [weak self] successResponce in
             DispatchQueue.main.async {
                 self?.output.onSuccessEULA()
             }
-        }) { [weak self] (errorResponce) in
+        }) { [weak self] errorResponce in
             DispatchQueue.main.async {
                 if case ErrorResponse.error(let error) = errorResponce, error is URLError {
                     UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)

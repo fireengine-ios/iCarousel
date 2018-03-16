@@ -11,4 +11,3 @@ import Foundation
 protocol FaceImageRouterInput: class {
     func showPopUp()
 }
-

@@ -12,7 +12,7 @@ protocol TermsAndServicesInteractorOutput: class {
     
     func showLoadedTermsAndUses(eula: String)
     
-    func failLoadTermsAndUses(errorString:String)
+    func failLoadTermsAndUses(errorString: String)
     
     func signUpSuccessed()
     

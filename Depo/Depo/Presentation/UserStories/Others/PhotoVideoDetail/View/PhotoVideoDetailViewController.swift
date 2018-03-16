@@ -158,11 +158,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
-    @objc private func onCancelButton(){
+    @objc private func onCancelButton() {
         hideView()
     }
     
-    private func hideView(){
+    private func hideView() {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         dismiss(animated: true)
     }
@@ -212,7 +212,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
-    func onShowSelectedItem(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
+    func onShowSelectedItem(at index: Int, from items: [Item]) {
         objects = items
         selectedIndex = index
     }
@@ -243,7 +243,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     
     func setupInitialState() { }
     
-    func onItemSelected(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
+    func onItemSelected(at index: Int, from items: [Item]) {
         if items.isEmpty {
             return
         }
@@ -261,6 +261,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func play(item: AVPlayerItem) {
+        MenloworksTagsService.shared.onVideoDisplayed()
+        
         localPlayer?.replaceCurrentItem(with: item)
         playerController = AVPlayerViewController()
         playerController?.player = localPlayer
@@ -296,7 +298,7 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         return false
     }
     
-    func finishedUploadFile(file: WrapData){
+    func finishedUploadFile(file: WrapData) {
         output.setSelectedItemIndex(selectedIndex: selectedIndex)
         setupNavigationBar()
     }
@@ -331,7 +333,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         let file = objects[selectedIndex]
         
         if file.fileType == .video {
-            guard let url = file.urlToFile else{
+            let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
+            guard let url = preUrl else {
                 return
             }
             
@@ -351,7 +354,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                 output.startCreatingAVAsset()
                 
                 DispatchQueue.global(qos: .default).async { [weak self] in
-                    PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] (asset, _, _) in
+                    PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
                         
                         DispatchQueue.main.async {
                             self?.output.stopCreatingAVAsset()
@@ -362,7 +365,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                 }
                 
             case .remoteUrl(_):
-                let playerItem = AVPlayerItem(url:url)
+                let playerItem = AVPlayerItem(url: url)
                 play(item: playerItem)
             }
         }
@@ -380,7 +383,7 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
     private func updateSelectedIndex() {
         let x = collectionView.contentOffset.x
         let w = collectionView.bounds.size.width
-        var currentPage = Int(ceil(x/w))
+        var currentPage = Int(ceil(x / w))
         
         if currentPage >= objects.count {
             currentPage = objects.count - 1

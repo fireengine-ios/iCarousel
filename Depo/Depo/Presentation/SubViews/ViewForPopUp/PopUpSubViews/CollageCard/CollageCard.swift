@@ -68,7 +68,7 @@ final class CollageCard: BaseView {
         photoImageView.loadImage(with: item, isOriginalImage: true)
     }
     
-    @IBAction private func actionCloseButton(_ sender: UIButton){
+    @IBAction private func actionCloseButton(_ sender: UIButton) {
         deleteCard()
     }
     

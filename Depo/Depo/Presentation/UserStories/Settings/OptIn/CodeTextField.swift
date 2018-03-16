@@ -39,7 +39,7 @@ class CodeTextField: UITextField {
         textColor = ColorConstants.darkText
         textAlignment = .center
         
-        bottomBorder.frame = CGRect(x: 0, y: frame.height - underlineWidth, width: frame.width, height: underlineWidth);
+        bottomBorder.frame = CGRect(x: 0, y: frame.height - underlineWidth, width: frame.width, height: underlineWidth)
         bottomBorder.backgroundColor = underlineColor.cgColor
         layer.addSublayer(bottomBorder)
     }
@@ -56,11 +56,10 @@ extension CodeTextField: UITextFieldDelegate {
         guard isAvailableCharacters(in: string),
             let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string),
             newString.count <= inputTextLimit
-            else { return false}
+            else { return false }
         
         typingAttributes?[NSAttributedStringKey.kern.rawValue] = fontKern
         
         return true
     }
 }
-

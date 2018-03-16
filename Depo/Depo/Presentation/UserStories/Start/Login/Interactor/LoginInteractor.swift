@@ -26,11 +26,11 @@ class LoginInteractor: LoginInteractorInput {
     /// from 0 to 11 = 12 attempts
     private let maxAttemps: Int = 11
     
-    func prepareModels(){
+    func prepareModels() {
         output?.models(models: dataStorage.getModels())
     }
     
-    func rememberMe(state:Bool){
+    func rememberMe(state: Bool) {
         rememberMe = state
     }
     
@@ -46,7 +46,7 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         
-        if isBlocked(userName: login)  {
+        if isBlocked(userName: login) {
             output?.userStillBlocked(user: login)
             return
         } else if (maxAttemps <= attempts) {
@@ -58,9 +58,9 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         
-        let user = AuthenticationUser(login          : login,
-                                      password       : password,
-                                      rememberMe     : true,//rememberMe,
+        let user = AuthenticationUser(login: login,
+                                      password: password,
+                                      rememberMe: true, //rememberMe,
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] in
@@ -71,7 +71,7 @@ class LoginInteractor: LoginInteractorInput {
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }
-        }, fail: { [weak self] (errorResponse)  in
+        }, fail: { [weak self] errorResponse  in
             
             DispatchQueue.main.async {
                 guard let `self` = self else {
@@ -131,8 +131,8 @@ class LoginInteractor: LoginInteractorInput {
         }
         
         let currentTime = Date()
-        let timeIntervalFromBlockDate =  currentTime.timeIntervalSince(blokedDate)
-        if timeIntervalFromBlockDate/60 >= 60 {
+        let timeIntervalFromBlockDate = currentTime.timeIntervalSince(blokedDate)
+        if timeIntervalFromBlockDate / 60 >= 60 {
             let blockedUsersDic = NSMutableDictionary(dictionary: blockedUsers)
             blockedUsersDic.removeObject(forKey: userName)
             dataStorage.blockedUsers = blockedUsersDic
@@ -189,11 +189,11 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     func checkEULA() {
-        eulaService.eulaCheck(success: { [weak self] (succesResponce) in
+        eulaService.eulaCheck(success: { [weak self] succesResponce in
             DispatchQueue.main.async {
                 self?.output?.onSuccessEULA()
             }
-        }) { [weak self] (failResponce) in
+        }) { [weak self] failResponce in
             DispatchQueue.main.async {
                 //TODO: what do we do on other errors?
                 ///https://wiki.life.com.by/pages/viewpage.action?pageId=62456128
@@ -230,7 +230,7 @@ class LoginInteractor: LoginInteractorInput {
             DispatchQueue.main.async {
                 self?.output?.successed(tokenUpdatePhone: signUpResponce)
             }
-        }, fail: { [weak self] (error) in
+        }, fail: { [weak self] error in
             DispatchQueue.main.async {
                 self?.output?.failedUpdatePhone(errorResponse: error)
             }
@@ -246,7 +246,7 @@ class LoginInteractor: LoginInteractorInput {
             DispatchQueue.main.async {
                 self?.output?.successed(resendUpdatePhone: signUpResponce)
             }
-            }, fail: { [weak self] (error) in
+            }, fail: { [weak self] error in
                 DispatchQueue.main.async {
                     self?.output?.failedResendUpdatePhone(errorResponse: error)
                 }
@@ -255,11 +255,11 @@ class LoginInteractor: LoginInteractorInput {
     
     func verifyPhoneNumber(token: String, code: String) {
         let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: token)
-        accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] (responce) in
+        accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] responce in
             DispatchQueue.main.async {
                 self?.output?.successedVerifyPhone()
             }
-        }) { [weak self] (errorRespose) in
+        }) { [weak self] errorRespose in
             DispatchQueue.main.async {
                 self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
             }

@@ -29,11 +29,11 @@ final class FreeUpSpacePopUp: BaseView {
         freeAppSpaceButton.setTitle(TextConstants.freeAppSpacePopUpButtonTitle, for: .normal)
     }
     
-    override func viewDeletedBySwipe(){
+    override func viewDeletedBySwipe() {
         onCancelButton()
     }
     
-    @IBAction func onCancelButton(){
+    @IBAction func onCancelButton() {
         deleteCard()
     }
     
@@ -42,11 +42,11 @@ final class FreeUpSpacePopUp: BaseView {
         CardsManager.default.manuallyDeleteCardsByType(type: operation ?? .freeAppSpace)
     }
     
-    @IBAction func onFreeAppSpaceButton(){
+    @IBAction func onFreeAppSpaceButton() {
         RouterVC().showFreeAppSpace()
     }
     
-    func configurateWithType(viewType: OperationType){
+    func configurateWithType(viewType: OperationType) {
         operation = viewType
         
         switch viewType {

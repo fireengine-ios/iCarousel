@@ -22,14 +22,12 @@ class HelpAndSupportModuleConfigurator {
         let router = HelpAndSupportRouter()
 
         let presenter = HelpAndSupportPresenter()
-        presenter.view = viewController
         presenter.router = router
 
         let interactor = HelpAndSupportInteractor()
         interactor.output = presenter
 
         presenter.interactor = interactor
-        viewController.output = presenter
     }
 
 }

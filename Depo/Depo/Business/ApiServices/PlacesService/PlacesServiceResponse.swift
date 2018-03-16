@@ -36,7 +36,7 @@ final class PlacesServiceResponse: ObjectRequestResponse {
     var list: Array<PlacesItemResponse> = []
     
     override func mapping() {
-        if let result = json?.array?.flatMap( {PlacesItemResponse(withJSON: $0)}) {
+        if let result = json?.array?.flatMap({ PlacesItemResponse(withJSON: $0) }) {
             list = result
         }
     }
@@ -46,28 +46,12 @@ final class PlacesPageResponse: ObjectRequestResponse {
     var list: Array<PlacesItemResponse> = []
     
     override func mapping() {
-        if let result = json?[PlacesJsonKey.locationInfos].array?.flatMap( {PlacesItemResponse(withJSON: $0)}) {
+        if let result = json?[PlacesJsonKey.locationInfos].array?.flatMap({ PlacesItemResponse(withJSON: $0) }) {
             list = result
         }
     }
 }
 
-final class DeletePhotosFromPlacesAlbum: BaseRequestParametrs {
-    let id: Int64
-    let photos: [Item]
+final class DeletePhotosFromPlacesAlbum: DeletePhotosFromAlbum {
     
-    init (id: Int64, photos: [Item]){
-        self.id = id
-        self.photos = photos
-    }
-    
-    override var requestParametrs: Any{
-        let photosUUID = photos.map { $0.id }
-        return photosUUID
-    }
-    
-    override var patch: URL {
-        let path: String = String(format: RouteRequests.placesDeletePhotos, id)
-        return URL(string: path, relativeTo: super.patch)!
-    }
 }

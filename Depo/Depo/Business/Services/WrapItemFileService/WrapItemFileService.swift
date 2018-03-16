@@ -77,7 +77,7 @@ class WrapItemFileService: WrapItemFileOperations {
         let localAssets = assetsForlocalItems(files: deleteFiles)
         if let localAssetsW = localAssets,
             localAssetsW.count > 0 {
-            LocalMediaStorage.default.removeAssets(deleteAsset: localAssetsW, success:  {
+            LocalMediaStorage.default.removeAssets(deleteAsset: localAssetsW, success: {
                 
                 let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
                 DispatchQueue.main.async {
@@ -158,7 +158,7 @@ class WrapItemFileService: WrapItemFileOperations {
             group.enter()
             remoteFileService.download(items: downloadItems, album: album, success: {
                 group.leave()
-            }, fail: { (error) in
+            }, fail: { error in
                 group.leave()
             })
         }
@@ -178,11 +178,11 @@ class WrapItemFileService: WrapItemFileOperations {
     
     // MARK: File detail
     
-    func detail(item: WrapData, success: FileOperation?, fail:FailResponse?) {
+    func detail(item: WrapData, success: FileOperation?, fail: FailResponse?) {
         remoteFileService.detail(uuids: item.uuid, success: success, fail: fail)
     }
     
-    func details(items: [WrapData], success: ListRemoveItems?, fail:FailResponse?) {
+    func details(items: [WrapData], success: ListRemoveItems?, fail: FailResponse?) {
         let items = remoteItemsUUID(files: items)
         remoteFileService.details(uuids: items, success: success, fail: fail)
     }
@@ -198,7 +198,7 @@ class WrapItemFileService: WrapItemFileOperations {
         metadataFile(files: files, favouritse: false, success: success, fail: fail)
     }
     
-    private func metadataFile(files: [WrapData],favouritse: Bool ,success: FileOperationSucces?, fail: FailResponse?){
+    private func metadataFile(files: [WrapData], favouritse: Bool, success: FileOperationSucces?, fail: FailResponse?) {
         
         let items = remoteItemsUUID(files: files)
         let param = MetaDataFile(items: items, addToFavourit: favouritse)
@@ -207,9 +207,9 @@ class WrapItemFileService: WrapItemFileOperations {
             files.forEach {
                 $0.coreDataObject?.favoritesValue = favouritse
             }
-            if (favouritse){
+            if (favouritse) {
                 ItemOperationManager.default.addFilesToFavorites(items: files)
-            }else{
+            } else {
                 ItemOperationManager.default.removeFileFromFavorites(items: files)
             }
         }
@@ -219,30 +219,30 @@ class WrapItemFileService: WrapItemFileOperations {
     
 
     private func remoteWrapDataItems(files: [WrapData]) -> [WrapData] {
-        let items = files.filter{  !$0.isLocalItem }
+        let items = files.filter { !$0.isLocalItem }
         return items
     }
     
-    private func localWrapedData(files:[WrapData]) -> [WrapData] {
-        let items = files.filter{ $0.isLocalItem }
+    private func localWrapedData(files: [WrapData]) -> [WrapData] {
+        let items = files.filter { $0.isLocalItem }
         return items
     }
     
     private func assetsForlocalItems(files: [WrapData]) -> [PHAsset]? {
-        let assets = files.flatMap{ $0.asset }
+        let assets = files.flatMap { $0.asset }
         return assets
     }
     
     
     private func remoteItemsUUID(files: [BaseDataSourceItem]) -> [String] {
-        let items: [String] = files.filter{ !$0.isLocalItem }
-                                   .flatMap{ $0.uuid }
+        let items: [String] = files.filter { !$0.isLocalItem }
+                                   .flatMap { $0.uuid }
         return items
     }
 
     static private func waitItemsDetails(for items: [WrapData], currentAttempt: Int = 0, maxAttempts: Int, success: FileOperationSucces?, fail: FailResponse?) {
         let fileService = FileService()
-        fileService.details(uuids: items.map({ $0.uuid }), success: { (updatedItems) in
+        fileService.details(uuids: items.map({ $0.uuid }), success: { updatedItems in
             for item in updatedItems {
                 if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
                     itemToUpdate.metaData = item.metaData

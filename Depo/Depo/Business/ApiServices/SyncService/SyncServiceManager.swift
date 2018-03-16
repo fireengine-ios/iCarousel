@@ -26,7 +26,7 @@ class SyncServiceManager {
     
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()
-    private var settings: SettingsAutoSyncModel?
+    private var settings: AutoSyncSettings?
     
     private var lastAutoSyncTime: TimeInterval = 0
     private var timeIntervalBetweenSyncs: TimeInterval = NumericConstants.timeIntervalBetweenAutoSync
@@ -65,7 +65,7 @@ class SyncServiceManager {
     }
     
     
-    //MARK: - Init
+    // MARK: - Init
     
     init() {
         photoSyncService.delegate = self
@@ -82,12 +82,16 @@ class SyncServiceManager {
     }
     
     
-    //MARK: - Public
+    // MARK: - Public
     
-    func updateSyncSettings(settingsModel: SettingsAutoSyncModel) {
+    func getSettings() -> AutoSyncSettings? {
+        return settings
+    }
+    
+    func update(syncSettings: AutoSyncSettings) {
         log.debug("SyncServiceManager updateSyncSettings")
         
-        settings = settingsModel
+        settings = syncSettings
     
         checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
     }
@@ -117,7 +121,7 @@ class SyncServiceManager {
     }
     
     
-    //MARK: - Private
+    // MARK: - Private
     
     private func setupAPIReachability() {
         APIReachabilityService.shared.startNotifier()
@@ -134,12 +138,12 @@ class SyncServiceManager {
             print("\(#function): can't start reachability notifier")
         }
 
-        reachability.whenReachable = { (reachability) in
+        reachability.whenReachable = { reachability in
             print("AUTOSYNC: is reachable")
             self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
         }
         
-        reachability.whenUnreachable = { (reachability) in
+        reachability.whenUnreachable = { reachability in
             print("AUTOSYNC: is unreachable")
             self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
         }
@@ -148,15 +152,10 @@ class SyncServiceManager {
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         dispatchQueue.async {
             guard let syncSettings = self.settings else {
-                AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (autoSyncModels, _) in
+                AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, _ in
                     if let `self` = self {
-                        let settings = SettingsAutoSyncModel()
-                        settings.isAutoSyncEnable = autoSyncModels[SettingsAutoSyncModel.autoSyncEnableIndex].isSelected
-                        settings.mobileDataPhotos = autoSyncModels[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
-                        settings.mobileDataVideo = autoSyncModels[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
-                        
                         if self.settings == nil {
-                            self.updateSyncSettings(settingsModel: settings)
+                            self.update(syncSettings: settings)
                         }
                     }
                 })
@@ -166,9 +165,10 @@ class SyncServiceManager {
             
             self.timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
             
-            guard syncSettings.isAutoSyncEnable else {
+            guard syncSettings.isAutoSyncEnabled else {
                 self.stop(reachabilityDidChange: false, photo: true, video: true)
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
+                MenloworksEventsService.shared.onAutosyncOff()
                 return
             }
             
@@ -185,16 +185,19 @@ class SyncServiceManager {
             }
             
             if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
-                if reachability.connection == .wifi {
-                    self.start(photo: true, video: true, newItems: newItems)
-                } else if reachability.connection == .cellular {
-                    let photoEnabled = syncSettings.mobileDataPhotos
-                    let videoEnabled = syncSettings.mobileDataVideo
-                    
-                    self.stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
-                    if photoEnabled || videoEnabled {
-                        self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
-                    }
+                let photoOption = syncSettings.photoSetting.option
+                let videoOption = syncSettings.videoSetting.option
+                
+                let photoEnabled = (reachability.connection == .wifi && photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
+                    (reachability.connection == .cellular && photoOption == .wifiAndCellular)
+                
+                let videoEnabled = (reachability.connection == .wifi && videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
+                    (reachability.connection == .cellular && videoOption == .wifiAndCellular)
+                
+                self.stop(reachabilityDidChange: true, photo: !photoEnabled, video: !videoEnabled)
+                
+                if photoEnabled || videoEnabled {
+                    self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
                 }
             } else {
                 self.stop(reachabilityDidChange: reachabilityChanged, photo: true, video: true)
@@ -202,7 +205,7 @@ class SyncServiceManager {
         }
     }
     
-    //MARK: Flow
+    // MARK: Flow
 
     //start to sync
     private func start(photo: Bool, video: Bool, newItems: Bool) {
@@ -234,8 +237,7 @@ class SyncServiceManager {
 }
 
 
-
-//MARK: - Notifications
+// MARK: - Notifications
 extension SyncServiceManager {
     private func subscribeForNotifications() {
         let notificationCenter = NotificationCenter.default
@@ -262,7 +264,7 @@ extension SyncServiceManager {
     
     @objc private func onPhotoLibraryDidChange(notification: Notification) {
         if let phChanges = notification.userInfo {
-            if let _ = phChanges[PhotoLibraryChangeType.added] as? [PHAsset]  {
+            if let _ = phChanges[PhotoLibraryChangeType.added] as? [PHAsset] {
                 //TODO: append only added items
                  checkReachabilityAndSettings(reachabilityChanged: false, newItems: true)
             }
@@ -317,7 +319,7 @@ extension SyncServiceManager {
 }
 
 
-//MARK: - ItemSyncServiceDelegate
+// MARK: - ItemSyncServiceDelegate
 
 extension SyncServiceManager: ItemSyncServiceDelegate {
     func didReceiveOutOfSpaceError() {
@@ -350,9 +352,3 @@ extension SyncServiceManager {
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
 }
-
-
-
-
-
-

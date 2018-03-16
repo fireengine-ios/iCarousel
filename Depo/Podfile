@@ -1,9 +1,11 @@
 platform :ios, '9.0'
 use_frameworks!
 inhibit_all_warnings!
+ENV['COCOAPODS_DISABLE_STATS'] = "true"
 
 def shared_pods
   pod 'Alamofire', '~> 4.5'
+  pod 'SwiftyJSON', '~>3'
 end
 
 def core_pods
@@ -28,18 +30,14 @@ def core_pods
   pod 'ObjectiveDropboxOfficial'
 
 
-  pod 'SimpleExif'
+  pod 'SimpleExif', :git => 'https://github.com/bonyadmitr/SimpleExif.git'
   pod 'XYPieChart'
   pod 'CircleProgressBar', '~> 0.32'
   pod 'UIImage-Categories'
   pod 'iCarousel'
-  pod 'SplunkMint'
 
-  # json
-  pod 'SwiftyJSON', '~>3'
   pod 'ReachabilitySwift'
   pod 'MBProgressHUD', '~> 1.0.0'
-  pod 'ExpandableTableViewController'
 
   #logger
   pod 'XCGLogger', '~> 6.0.1'
@@ -57,11 +55,15 @@ target 'LifeboxShared' do
     shared_pods
 end
 
+target 'LifeboxFileProvider' do
+    shared_pods
+end
+
 target 'autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
 end
 
-target ‘TC_Depo_LifeTech’ do
+target 'TC_Depo_LifeTech' do
 	core_pods
 end
 
@@ -79,7 +81,7 @@ post_install do |installer|
             end
         end
     end
-    
+
     print "Setting the default SWIFT_VERSION to 3.0\n"
     installer.pods_project.build_configurations.each do |config|
         config.build_settings['SWIFT_VERSION'] = '3.0'

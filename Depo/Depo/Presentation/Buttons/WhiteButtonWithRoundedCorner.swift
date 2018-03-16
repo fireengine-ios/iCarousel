@@ -25,14 +25,14 @@ class WhiteButtonWithRoundedCorner: UIButton {
         setCornerRadius()
     }
     
-    func configurate(){
+    func configurate() {
         backgroundColor = ColorConstants.whiteColor
         setTitleColor(ColorConstants.blueColor, for: UIControlState.normal)
         titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         setCornerRadius()
     }
     
-    func setCornerRadius(){
+    func setCornerRadius() {
         layer.cornerRadius = frame.size.height * 0.5
     }
     

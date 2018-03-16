@@ -16,7 +16,7 @@ class MulticastDelegate <T> {
     }
     
     func remove(_ delegate: T) {
-        weakDelegates = weakDelegates.filter {$0.value !== delegate as AnyObject}
+        weakDelegates = weakDelegates.filter { $0.value !== delegate as AnyObject }
     }
     
     func invoke(invocation: (T) -> Void) {

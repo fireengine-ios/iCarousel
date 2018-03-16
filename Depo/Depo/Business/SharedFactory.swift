@@ -12,6 +12,7 @@ import Alamofire
 protocol SharedFactory {
     func resolve() -> TokenStorage
     func resolve() -> SessionManager
+    func resolve() -> PasscodeStorage
 }
 
 open class FactoryBase: SharedFactory {
@@ -24,5 +25,9 @@ open class FactoryBase: SharedFactory {
     func resolve() -> SessionManager {
         return SessionManager.default
     }
+    
+    private static let passcodeStorage = PasscodeStorageDefaults()
+    func resolve() -> PasscodeStorage {
+        return FactoryBase.passcodeStorage
+    }
 }
-

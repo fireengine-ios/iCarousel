@@ -12,7 +12,7 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
     var interactor: ForgotPasswordInteractorInput!
     var router: ForgotPasswordRouterInput!
 
-    //MARK: input
+    // MARK: input
     func viewIsReady() {
         checkLanguadge()
     }
@@ -39,6 +39,7 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
     func requestFailed(withError error: String) {
         
         compliteAsyncOperationEnableScreen(errorMessage: error)
+        view.showCapcha()
         //TODO: PEstyakov request new captcha here
     }
     

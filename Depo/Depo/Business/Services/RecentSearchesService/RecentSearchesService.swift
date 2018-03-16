@@ -82,14 +82,6 @@ final class RecentSearchesService {
             let objects = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Any] {
             result = objects.map { SuggestionObject(withJSON: JSON($0)) }
         }
-    
-        if category == .recent, result.isEmpty {
-            let currentYear = Date().getYear()
-            let object = SuggestionObject()
-            object.text = String(currentYear)
-            object.type = .time
-            result.append(object)
-        }
         return result
     }
     
@@ -113,7 +105,7 @@ final class RecentSearchesService {
     private func add(item: SuggestionObject, toCategory category: SearchCategory) {
         var objects = searches[category] ?? [SuggestionObject]()
         
-        if let existingIndex = objects.index(where: {$0.info?.id == item.info?.id && $0.text == item.text}) {
+        if let existingIndex = objects.index(where: { $0.info?.id == item.info?.id && $0.text == item.text }) {
             objects.remove(at: existingIndex)
         } else if objects.count >= category.maxSearches {
             objects.removeLast(1)
@@ -124,7 +116,7 @@ final class RecentSearchesService {
     }
     
     private func save(searches: [SuggestionObject], category: SearchCategory) {
-        let data = NSKeyedArchiver.archivedData(withRootObject: searches.flatMap {$0.json?.object})
+        let data = NSKeyedArchiver.archivedData(withRootObject: searches.flatMap { $0.json?.object })
         UserDefaults.standard.set(data, forKey: category.searchKey)
         UserDefaults.standard.synchronize()
     }
@@ -144,7 +136,7 @@ final class RecentSearchesService {
         searches[.things] = []
         UserDefaults.standard.set([Data](), forKey: SearchCategory.recent.searchKey)
         UserDefaults.standard.set([Data](), forKey: SearchCategory.people.searchKey)
-        UserDefaults.standard.set([Data](), forKey: SearchCategory.recent.searchKey)
+        UserDefaults.standard.set([Data](), forKey: SearchCategory.things.searchKey)
         UserDefaults.standard.set(nil, forKey: recentSearchesKey)
         UserDefaults.standard.synchronize()
     }

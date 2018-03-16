@@ -39,7 +39,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFailed(withType: .removeFromFaceImageAlbum)
@@ -63,7 +63,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFailed(withType: .removeFromFaceImageAlbum)
@@ -72,22 +72,22 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                 }
             }
         }
-            
+        
         output.didRemoveFromAlbum(completion: okHandler)
     }
 
-    override func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], id: Int64) {
+    override func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String) {
         let okHandler: () -> Void = { [weak self] in
             if let items = items as? [Item] {
                 self?.output.startAsyncOperation()
                 
-                PlacesService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                PlacesService().deletePhotosFromAlbum(uuid: uuid, photos: items, success: { [weak self] in
                     DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFailed(withType: .removeFromFaceImageAlbum)
@@ -96,7 +96,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                 }
             }
         }
-            
+        
         output.didRemoveFromAlbum(completion: okHandler)
     }
     

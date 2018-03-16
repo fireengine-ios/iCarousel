@@ -14,7 +14,7 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     var router: RegistrationRouterInput!
     
     
-    //MARK: - View output
+    // MARK: - View output
     func viewIsReady() {
         //request info here
         interactor.prepareModels()
@@ -32,13 +32,13 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     func infoButtonGotPressed(with type: UserValidationResults) {
         showPopUp(forType: type)
     }
-    //MARK: - Interactor output
+    // MARK: - Interactor output
     
     func prepearedModels(models: [BaseCellModel]) {
         view.setupInitialState(withModels: models)
     }
     
-    func composedGSMCCodes(models:[GSMCodeModel]) {
+    func composedGSMCCodes(models: [GSMCodeModel]) {
         view.setupPicker(withModels: models)
     }
     

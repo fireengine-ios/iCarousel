@@ -15,7 +15,6 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
     
     @IBOutlet weak var segmentControll: UISegmentedControl!
     @IBOutlet weak var topIOS10Contraint: NSLayoutConstraint!
-    @IBOutlet weak var topIOS11Contraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +28,6 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
         
         if #available(iOS 11.0, *) {
             view.removeConstraint(topIOS10Contraint)
-        } else {
-            view.removeConstraint(topIOS11Contraint)
         }
     }
     
@@ -61,24 +58,24 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
         navigationItem.leftBarButtonItem = barButtonLeft
     }
     
-    @objc func onNextButton(){
+    @objc func onNextButton() {
         output.onNextButton()
     }
     
-    @objc func onCancelButton(){
+    @objc func onCancelButton() {
         hideView()
     }
     
-    func hideView(){
+    func hideView() {
         dismiss(animated: true, completion: nil)
     }
     
-    override func isNeedShowTabBar() -> Bool{
+    override func isNeedShowTabBar() -> Bool {
         return false
     }
     
-    @IBAction func segmentControlValueChanged(sender: UISegmentedControl){
-        if let presenter = output as? CreateStoryAudioSelectionPresenter{
+    @IBAction func segmentControlValueChanged(sender: UISegmentedControl) {
+        if let presenter = output as? CreateStoryAudioSelectionPresenter {
             presenter.onChangeSorce(isYourUpload: sender.selectedSegmentIndex == 1)
         }
     }

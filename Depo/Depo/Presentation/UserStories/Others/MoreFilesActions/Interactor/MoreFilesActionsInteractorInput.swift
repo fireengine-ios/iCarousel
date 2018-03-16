@@ -20,18 +20,18 @@ protocol MoreFilesActionsInteractorInput {
     
     func completelyDelete(albums: [BaseDataSourceItem])
     
-    func move(item: [BaseDataSourceItem], toPath:String)
+    func move(item: [BaseDataSourceItem], toPath: String)
     
     func sync(item: [BaseDataSourceItem])
     
     func download(item: [BaseDataSourceItem])
     
     
-    //MARK: Actions Sheet
+    // MARK: Actions Sheet
     
     func createStory(items: [BaseDataSourceItem])
     
-    func copy(item: [BaseDataSourceItem], toPath:String)
+    func copy(item: [BaseDataSourceItem], toPath: String)
     
     func addToFavorites(items: [BaseDataSourceItem])
     

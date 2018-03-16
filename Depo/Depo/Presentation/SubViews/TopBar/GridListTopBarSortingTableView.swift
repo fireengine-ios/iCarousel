@@ -10,8 +10,7 @@ protocol GridListTopBarSortingTableViewDelegate: class {
     func gridListTopBarSortingTableView(_ gridListTopBarSortingTableView: GridListTopBarSortingTableView, didSelectItemAtIndex index: IndexPath)
 }
 
-class GridListTopBarSortingTableView: UITableViewController
-{
+class GridListTopBarSortingTableView: UITableViewController {
     
     private var currentTitles: [String]?
     private var currentlySelectedIndex: Int?
@@ -22,7 +21,7 @@ class GridListTopBarSortingTableView: UITableViewController
     
     let gridListTableCellNibName = "GridListTopBarSortingTableCell"
     let gridListTableCellReuseIdentifier = "GridListTopBarSortingTableCell"
-    let separatorInset = UIEdgeInsetsMake(0, 10, 0, 10)
+    let separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     
     override func viewDidLoad() {
         super.viewDidLoad()

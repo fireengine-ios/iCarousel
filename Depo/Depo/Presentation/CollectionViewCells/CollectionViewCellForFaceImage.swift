@@ -16,7 +16,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     @IBOutlet private weak var selectionView: UIView!
     @IBOutlet private weak var visibleImageView: UIImageView!
     @IBOutlet private weak var transperentView: UIView!
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -25,13 +25,14 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
-        isCellSelected = isSelected
         isCellSelectionEnabled = isSelectionActive
         
-        if (isSelectionActive) {
-            visibleImageView.isHidden = !isSelected
-            transperentView.alpha = isSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+        if isSelectionActive {
+            visibleImageView.isHidden = !isCellSelected
+            transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+            isCellSelected = !isCellSelected
         }
+        
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
@@ -39,23 +40,34 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
             return
         }
         
-        visibleImageView.isHidden = !isCellSelected
-        transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
-        
         if (isAlreadyConfigured) {
             return
         }
         
+        visibleImageView.isHidden = !isCellSelected
+        transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+        
         imageView.image = nil
         
-        nameLabel.text = item.name
-
-        if let peopleItem = wrappedObj as? PeopleItem,
-            let isVisible = peopleItem.responseObject.visible,
-            !isVisible {
-            visibleImageView.isHidden = isVisible
-            transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
+        if let thing = wrappedObj as? ThingsItem {
+            nameLabel.text = thing.responseObject.code
+        } else {
+            nameLabel.text = item.name
         }
+        
+        if let peopleItem = wrappedObj as? PeopleItem,
+            let isVisible = peopleItem.responseObject.visible {
+            isCellSelected = isVisible
+            
+            if !isVisible {
+                visibleImageView.isHidden = isVisible
+                transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
+            }
+            
+            visibleImageView.isHidden = isCellSelected
+            transperentView.alpha = !isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+        }
+    
     }
     
     override func prepareForReuse() {
@@ -86,7 +98,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     
     override func setImage(with url: URL) {
         imageView.contentMode = .scaleAspectFill
-        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] (image, error, cacheType, url) in
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] image, error, cacheType, url in
             guard error == nil else {
                 print("SD_WebImage_setImage error: \(error!.localizedDescription)")
                 return

@@ -10,9 +10,7 @@ import Foundation
 
 protocol PhotoVideoDetailInteractorOutput: class {
     
-    typealias Item = WrapData
-    
-    func onShowSelectedItem(at index: Int, from items:[Item])
+    func onShowSelectedItem(at index: Int, from items: [Item])
     
     func goBack()
     

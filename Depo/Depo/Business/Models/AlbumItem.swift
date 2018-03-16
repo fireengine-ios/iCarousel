@@ -28,7 +28,7 @@ class AlbumItem: BaseDataSourceItem {
         audioCount = remote.audioCount
         readOnly = remote.readOnly
         
-        if let pr = remote.coverPhoto{
+        if let pr = remote.coverPhoto {
             preview = WrapData(remote: pr)
         }
         

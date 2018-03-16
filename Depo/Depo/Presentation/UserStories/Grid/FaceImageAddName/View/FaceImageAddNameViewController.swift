@@ -22,7 +22,7 @@ final class FaceImageAddNameViewController: BaseFilesGreedChildrenViewController
         super.viewDidLoad()
         
         searchTextField.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        if mainTitle == TextConstants.faceImageSearchAddName {
+        if mainTitle == TextConstants.faceImageAddName {
             searchTextField.text = ""
         } else {
             searchTextField.text = mainTitle
@@ -36,7 +36,7 @@ final class FaceImageAddNameViewController: BaseFilesGreedChildrenViewController
     
     override func configurateNavigationBar() {
         navigationBarWithGradientStyle()
-        let done = NavBarWithAction(navItem: NavigationBarList().done, action: { [weak self] (_) in
+        let done = NavBarWithAction(navItem: NavigationBarList().done, action: { [weak self] _ in
             if let output = self?.output as? FaceImageAddNameViewOutput,
                 let text = self?.searchTextField.text {
                 output.changeName(text)

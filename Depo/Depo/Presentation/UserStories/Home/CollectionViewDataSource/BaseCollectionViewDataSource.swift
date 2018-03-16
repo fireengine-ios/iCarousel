@@ -9,8 +9,8 @@
 import UIKit
 
 protocol BaseCollectionViewDataSourceDelegate {
-    func onCellHasBeenRemovedWith(controller:UIViewController)
-    func numberOfColumns()->Int
+    func onCellHasBeenRemovedWith(controller: UIViewController)
+    func numberOfColumns() -> Int
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
 }
@@ -20,7 +20,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     var collectionView: UICollectionView!
     var viewController: UIViewController!
     
-    var delegate:BaseCollectionViewDataSourceDelegate?
+    var delegate: BaseCollectionViewDataSourceDelegate?
     
     var viewsByType = [OperationType: BaseView]()
     
@@ -29,7 +29,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     var isEnable: Bool = true
     var isActive: Bool = false
     
-    func configurateWith(collectionView: UICollectionView, viewController:UIViewController, delegate:BaseCollectionViewDataSourceDelegate?){
+    func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: BaseCollectionViewDataSourceDelegate?) {
         
         self.collectionView = collectionView
         collectionView.dataSource = self
@@ -37,9 +37,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         
         if let layout = collectionView.collectionViewLayout as? CollectionViewLayout {
             layout.delegate = self
-            if (delegate != nil){
+            if (delegate != nil) {
                 layout.numberOfColumns = delegate!.numberOfColumns()
-            }else{
+            } else {
                 layout.numberOfColumns = 1
             }
         }
@@ -49,19 +49,19 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         collectionView.reloadData()
     }
     
-    func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth:CGFloat) -> CGFloat{
-        if (isPopUpCell(path: indexPath)){
+    func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
+        if (isPopUpCell(path: indexPath)) {
             let popUpView = popUps[indexPath.row]
             return popUpView.calculatedH
         }
         return 40
     }
     
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat{
+    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
         return HomeViewTopView.getHeight()
     }
     
-    func isPopUpCell(path: IndexPath) -> Bool{
+    func isPopUpCell(path: IndexPath) -> Bool {
         return path.row < popUps.count
     }
     
@@ -76,7 +76,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if (self.delegate != nil){
+        if (self.delegate != nil) {
             return self.delegate!.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         }
         assert(false, "Unexpected element kind")
@@ -98,7 +98,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     // MARK: BaseCollectionViewCellWithSwipeDelegate
     
-    func onCellDeleted(cell: UICollectionViewCell){
+    func onCellDeleted(cell: UICollectionViewCell) {
         let indehPath = collectionView.indexPath(for: cell)
         guard let path = indehPath else {
             return
@@ -107,28 +107,28 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         collectionView.deleteItems(at: [path])
     }
     
-    //MARK: animation of collectionView
+    // MARK: animation of collectionView
     
-    func addCellAtIndex(index: Int){
-        if (isActive){
+    func addCellAtIndex(index: Int) {
+        if (isActive) {
             print(Date().timeIntervalSince1970)
             self.collectionView.performBatchUpdates({
                 print(Date().timeIntervalSince1970)
                 let indexPath = IndexPath(row: index, section: 0)
                 self.collectionView.insertItems(at: [indexPath])
-            }, completion: { (succes) in
+            }, completion: { succes in
                 print("finished competition")
             })
-        }else{
+        } else {
             collectionView.reloadData()
         }
     }
     
-    //MARK: WrapItemOperationViewProtocol
+    // MARK: WrapItemOperationViewProtocol
     
-    private func checkIsThisIsPermittedType(type: OperationType) -> Bool{
+    private func checkIsThisIsPermittedType(type: OperationType) -> Bool {
         
-        if !isEnable{
+        if !isEnable {
             return false
         }
         
@@ -138,7 +138,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         return !notPermittedPopUpViewTypes.contains(type.rawValue)
     }
     
-    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool{
+    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool {
         switch operationType {
         case .prepareToAutoSync:
             return viewsByType[.sync] == nil
@@ -147,11 +147,11 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
     }
     
-    func getViewForOperation(operation: OperationType) -> BaseView{
+    func getViewForOperation(operation: OperationType) -> BaseView {
         return CardsManager.popUpViewForOperaion(type: operation)
     }
     
-    func startOperationWith(type: OperationType){
+    func startOperationWith(type: OperationType) {
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
             viewsByType[type] = view
@@ -163,23 +163,23 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
     }
     
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?){
+    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
-    func startOperationsWith(serverObjects: [HomeCardResponse]){
-        for object in serverObjects{
-            if let type = object.getOperationType(){
+    func startOperationsWith(serverObjects: [HomeCardResponse]) {
+        for object in serverObjects {
+            if let type = object.getOperationType() {
                 if let view = viewsByType[type] {
                     view.cardObject = object
-                }else{
-                    if !checkIsThisIsPermittedType(type: type){
+                } else {
+                    if !checkIsThisIsPermittedType(type: type) {
                         continue
                     }
-                    if !checkIsNeedShowPopUpFor(operationType: type){
+                    if !checkIsNeedShowPopUpFor(operationType: type) {
                         continue
                     }
-                    if !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type){
+                    if !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
                         let view = getViewForOperation(operation: type)
                         view.layoutIfNeeded()
                         popUps.insert(view, at: 0)
@@ -188,7 +188,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 }
             }
         }
-        popUps = popUps.sorted(by: { (view1, view2) -> Bool in
+        popUps = popUps.sorted(by: { view1, view2 -> Bool in
             let order1 = view1.cardObject?.order ?? 0
             let order2 = view2.cardObject?.order ?? 0
             return order1 < order2
@@ -196,11 +196,11 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         collectionView.reloadData()
     }
     
-    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?){
-        if !checkIsThisIsPermittedType(type: type){
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
+        if !checkIsThisIsPermittedType(type: type) {
             return
         }
-        if !checkIsNeedShowPopUpFor(operationType: type){
+        if !checkIsNeedShowPopUpFor(operationType: type) {
             return
         }
         
@@ -209,7 +209,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             view.layoutIfNeeded()
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
-                if let item = object{
+                if let item = object {
                     popUp.setImageForUploadingItem(item: item)
                 }
             }
@@ -217,7 +217,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             viewsByType[type] = view
             let index = 0
             popUps.insert(view, at: index)
-            popUps = popUps.sorted(by: { (view1, view2) -> Bool in
+            popUps = popUps.sorted(by: { view1, view2 -> Bool in
                 let order1 = view1.cardObject?.order ?? 0
                 let order2 = view2.cardObject?.order ?? 0
                 return order1 < order2
@@ -234,7 +234,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         if let view = viewsByType[type] {
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
-                if let item = object{
+                if let item = object {
                     popUp.setImageForUploadingItem(item: item)
                 }
             }
@@ -249,37 +249,37 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
         
         popUp.setProgressBar(ratio: ratio)
-        if let object = object{
+        if let object = object {
             popUp.setImageForUploadingItem(item: object)
         }
     }
     
     
-    func stopOperationWithType(type: OperationType){
+    func stopOperationWithType(type: OperationType) {
         if let view = self.viewsByType[type] {
             self.viewsByType[type] = nil
-            if let index = self.popUps.index(of: view){
+            if let index = self.popUps.index(of: view) {
                 
                 print("delete at index ", index, type.rawValue)
                 
                 popUps.remove(at: index)
                 collectionView.reloadData()
-            }else{
+            } else {
                 
             }
         }
     }
     
-    func isEqual(object: CardsManagerViewProtocol) -> Bool{
-        if let compairedView = object as? BaseCollectionViewDataSource{
+    func isEqual(object: CardsManagerViewProtocol) -> Bool {
+        if let compairedView = object as? BaseCollectionViewDataSource {
             return compairedView == self
         }
         return false
     }
     
-    func addNotPermittedPopUpViewTypes(types: [OperationType]){
-        let array = types.map{$0.rawValue}
-        for operationName in array{
+    func addNotPermittedPopUpViewTypes(types: [OperationType]) {
+        let array = types.map { $0.rawValue }
+        for operationName in array {
             notPermittedPopUpViewTypes.insert(operationName)
         }
     }

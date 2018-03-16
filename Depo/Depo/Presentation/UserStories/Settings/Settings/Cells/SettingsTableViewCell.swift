@@ -25,10 +25,10 @@ class SettingsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         //let bgView = UIView()
-        if (selected){
+        if (selected) {
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
             backgroundColor = ColorConstants.selectedCellBlueColor
-        }else{
+        } else {
             titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
             backgroundColor = ColorConstants.whiteColor
         }
@@ -36,7 +36,7 @@ class SettingsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setTextForLabel(titleText: String, needShowSeparator:Bool){
+    func setTextForLabel(titleText: String, needShowSeparator: Bool) {
         titleLabel.text = titleText
         separatorView.isHidden = !needShowSeparator
     }

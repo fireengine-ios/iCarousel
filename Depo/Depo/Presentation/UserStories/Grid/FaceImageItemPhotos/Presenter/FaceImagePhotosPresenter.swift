@@ -51,7 +51,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .removeFromAlbum || type == .removeFromFaceImageAlbum {
+        if type.isContained(in: [.removeFromAlbum, .removeFromFaceImageAlbum, .delete]) {
             dataSource.reloadData()
             faceImageItemsModuleOutput?.didReloadData()
         } else if type == .changeCoverPhoto {
@@ -93,9 +93,9 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
  
     }
     
-    //MARK: - BaseDataSourceForCollectionViewDelegate
+    // MARK: - BaseDataSourceForCollectionViewDelegate
     
-    func updateCoverPhotoIfNeeded() {
+    override func updateCoverPhotoIfNeeded() {
         if let interactor = interactor as? FaceImagePhotosInteractor {
             interactor.updateCoverPhotoIfNeeded()
         }
@@ -115,6 +115,10 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
                 }
                 
                 view.setCountImage("\(count) \(TextConstants.faceImagePhotos)")
+                
+                if let interactor = interactor as? FaceImagePhotosInteractor {
+                    interactor.updateCoverPhotoIfNeeded()
+                }
             }
         }
     }

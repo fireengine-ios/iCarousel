@@ -8,8 +8,6 @@
 
 import Foundation
 
-typealias Item = WrapData
-
 class UploadBaseURLResponse: ObjectRequestResponse {
     
     var url: URL?
@@ -19,7 +17,7 @@ class UploadBaseURLResponse: ObjectRequestResponse {
         url = json?["value"].url
         let list = json?["value"].string?
             .components(separatedBy: "/")
-            .filter{ $0.hasPrefix("AUTH_")}
+            .filter { $0.hasPrefix("AUTH_") }
         uniqueValueByBaseUrl = list?.first ?? ""
     }
 }

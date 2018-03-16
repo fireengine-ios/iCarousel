@@ -27,7 +27,7 @@ final class FaceImageInteractor {
         })
     }
     
-    private func fail(error: String){
+    private func fail(error: String) {
         DispatchQueue.main.async { [weak self] in
             self?.output.operationFinished()
             self?.output.showError(error: error)
@@ -51,6 +51,11 @@ extension FaceImageInteractor: FaceImageInteractorInput {
         let parameters = FaceImageAllowedParameters(allowed: isAllowed)
         accountService.switchFaceImageAllowed(parameters: parameters, success: { [weak self] response in
             DispatchQueue.main.async {
+                if isAllowed {
+                    MenloworksEventsService.shared.onFaceImageRecognitionOn()
+                } else {
+                    MenloworksEventsService.shared.onFaceImageRecognitionOff()
+                }
                 self?.output.operationFinished()
             }
 

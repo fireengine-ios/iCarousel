@@ -13,7 +13,7 @@ class SelectNameModuleInitializer: NSObject {
     //Connect with object on storyboard
     @IBOutlet weak var selectnameViewController: SelectNameViewController!
 
-    class func initializeViewController(with nibName:String, viewType: SelectNameScreenType, rootFolderID: String? = nil, isFavorites: Bool = false) -> UIViewController {
+    class func initializeViewController(with nibName: String, viewType: SelectNameScreenType, rootFolderID: String? = nil, isFavorites: Bool = false) -> UIViewController {
         let viewController = SelectNameViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         let configurator = SelectNameModuleConfigurator()

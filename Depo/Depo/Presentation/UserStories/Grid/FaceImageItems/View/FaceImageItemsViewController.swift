@@ -8,12 +8,7 @@
 
 import UIKit
 
-protocol FaceImageItemsInput: class {
-    func configurateUgglaView()
-    func updateUgglaViewPosition()
-}
-
-final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, FaceImageItemsInput {
+final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     
     private let ugglaViewHeight: CGFloat = 50
     
@@ -27,7 +22,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         setTitle(withString: mainTitle )
     }
 
-    override func configurateNavigationBar(){
+    override func configurateNavigationBar() {
         if (isCanChangeVisibility) {
             configurateFaceImagePeopleActions { [weak self] in
                 self?.configureDoneNavBarActions()
@@ -58,7 +53,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
             output.switchVisibilityMode()
         }
         
-        let done = NavBarWithAction(navItem: NavigationBarList().done, action: { [weak self] (_) in
+        let done = NavBarWithAction(navItem: NavigationBarList().done, action: { [weak self] _ in
             self?.onApplySelection()
         })
         
@@ -66,7 +61,13 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    //MARK: - FaceImageItemsInput
+    // MARK: - FaceImageItemsInput
+
+}
+
+// MARK: - FaceImageItemsViewInput
+
+extension FaceImageItemsViewController: FaceImageItemsViewInput {
     
     func configurateUgglaView() {
         ugglaImageView = UIImageView(frame: CGRect(x: 0, y: view.bounds.size.height - ugglaViewHeight, width: view.bounds.size.width, height: ugglaViewHeight))
@@ -103,5 +104,15 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController, 
         }
         view.layoutIfNeeded()
     }
-
+    
+    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool, isShowUggla: Bool) {
+        showNoFilesWith(text: text, image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
+        startCreatingFilesButton.isHidden = true
+        noFilesTopLabel?.isHidden = true
+        isCanChangeVisibility = false
+        if isShowUggla {
+            ugglaImageView.isHidden = true
+        }
+    }
+    
 }

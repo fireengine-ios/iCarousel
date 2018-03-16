@@ -15,7 +15,7 @@ protocol RecentlySearchedFaceImageCellDelegate: class {
 
 final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
 
-    private let itemSize: CGSize = CGSize(width: Device.winSize.size.width * 40/375, height: Device.winSize.size.width * 40/375)
+    private let itemSize: CGSize = CGSize(width: Device.winSize.size.width * 40 / 375, height: Device.winSize.size.width * 40 / 375)
     
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var arrowWidth: NSLayoutConstraint!
@@ -35,9 +35,10 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
         arrowWidth.constant = itemSize.width
     }
     
-    func configure(withItems items:[SuggestionObject]?, category: SearchCategory?) {
+    func configure(withItems items: [SuggestionObject]?, category: SearchCategory?) {
         self.category = category
         guard let newItems = items else {
+            removeSubviews()
             return
         }
         
@@ -47,9 +48,7 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
         if oldFirstId != newFirstId {
             self.items = newItems
             
-            for view in stackView.arrangedSubviews {
-                view.removeFromSuperview()
-            }
+            removeSubviews()
             
             for (index, item) in newItems.enumerated() {
                 self.add(item: item, atIndex: index)
@@ -82,6 +81,12 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
         
         stackView.addArrangedSubview(button)
     }
+    
+    private func removeSubviews() {
+        for view in stackView.arrangedSubviews {
+            view.removeFromSuperview()
+        }
+    }
 
     @IBAction func selectItem(_ sender: UIButton) {
         if items.count > sender.tag {
@@ -96,6 +101,6 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
     }
     
     static func height() -> CGFloat {
-        return Device.winSize.size.width * 40/375 + 14
+        return Device.winSize.size.width * 40 / 375 + 14
     }
 }

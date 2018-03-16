@@ -29,7 +29,9 @@ extension FaceImagePresenter: FaceImageViewOutput {
         
         interactor.changeFaceImageStatus(isAllowed)
         
-        router.showPopUp()
+        if isAllowed {
+            router.showPopUp()
+        }
     }
 }
 
@@ -55,4 +57,3 @@ extension FaceImagePresenter: FaceImageInteractorOutput {
         view?.showfailedChangeFaceImageStatus()
     }
 }
-

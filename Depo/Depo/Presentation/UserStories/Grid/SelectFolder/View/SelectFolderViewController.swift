@@ -9,7 +9,7 @@
 import UIKit
 
 typealias SelectFolder = (_ folderID: String) -> Void
-typealias CancelSelectFolder = ()-> Void
+typealias CancelSelectFolder = () -> Void
 
 class SelectFolderViewController: BaseFilesGreedChildrenViewController {
     
@@ -21,12 +21,8 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
     let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
     let selectButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
-        
-        navigationItem.leftBarButtonItem = nil
-        navigationItem.rightBarButtonItems = nil
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
         cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
@@ -35,10 +31,24 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         selectButton.setTitle(TextConstants.selectFolderNextButton, for: .normal)
         selectButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
         selectButton.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
-       
+        
         backButton.setTitle(TextConstants.selectFolderBackButton, for: .normal)
         backButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
         backButton.addTarget(self, action: #selector(onBackButton), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
+        
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItems = nil
+        
+        configureNavBarActions(isSelecting: false)
+    }
+    
+    override func configureNavBarActions(isSelecting: Bool = false) {
+        showRightButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,27 +66,27 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         showRightButton()
     }
     
-    func showRightButton(){
+    func showRightButton() {
         
         let barButtonRight = UIBarButtonItem(customView: selectButton)
         
         navigationItem.rightBarButtonItem = barButtonRight
     }
     
-    @objc func onNextButton(){
+    @objc func onNextButton() {
         output.onNextButton()
     }
     
-    @objc func onCancelButton(){
+    @objc func onCancelButton() {
         cancelSelectBlock?()
         hide()
     }
     
-    func hide(){
+    func hide() {
         dismiss(animated: true, completion: nil)
     }
     
-    func selectFolder(select: @escaping SelectFolder, cancel: @escaping CancelSelectFolder){
+    func selectFolder(select: @escaping SelectFolder, cancel: @escaping CancelSelectFolder) {
         selectFolderBlock = select
         cancelSelectBlock = cancel
         
@@ -86,7 +96,7 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         router.presentViewController(controller: nContr)
     }
     
-    func onFolderSelected(folderID: String){
+    func onFolderSelected(folderID: String) {
         selectFolderBlock?(folderID)
         hide()
     }

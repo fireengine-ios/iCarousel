@@ -30,6 +30,13 @@ class GradientLoadingIndicator: UIView {
         }
     }
     
+    func resetProgress() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        circlePathLayer.strokeEnd = 0
+        CATransaction.commit()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configurate()
@@ -51,7 +58,7 @@ class GradientLoadingIndicator: UIView {
     }
     
     private func addMaskGradient() {
-        gradientView.setup(withFrame: bounds, startColor: UIColor.lrCryonBlue, endColoer: UIColor.lrMintGreen, startPoint: CGPoint(x: 0, y: 1), endPoint: CGPoint(x:  1, y: 0))
+        gradientView.setup(withFrame: bounds, startColor: UIColor.lrCryonBlue, endColoer: UIColor.lrMintGreen, startPoint: CGPoint(x: 0, y: 1), endPoint: CGPoint(x: 1, y: 0))
         addSubview(gradientView)
         
         gradientView.layer.mask = circlePathLayer
@@ -61,6 +68,7 @@ class GradientLoadingIndicator: UIView {
         super.layoutSubviews()
         circlePathLayer.frame = bounds
         circlePathLayer.path = circlePath().cgPath
+        gradientView.update(withFrame: bounds, startColor: UIColor.lrCryonBlue, endColoer: UIColor.lrMintGreen, startPoint: CGPoint(x: 0, y: 1), endPoint: CGPoint(x: 1, y: 0))
     }
     
     func circleFrame() -> CGRect {
@@ -74,6 +82,4 @@ class GradientLoadingIndicator: UIView {
                             startAngle: -CGFloat.pi * 3 / 2,
                             endAngle: CGFloat.pi / 2, clockwise: true)
     }
-
-    
 }

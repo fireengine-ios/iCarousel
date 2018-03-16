@@ -25,7 +25,7 @@ class NavigationBarList {
     
     let done: UIBarButtonItem
     
-    init(){
+    init() {
         settings = UIBarButtonItem(image: UIImage(named: TextConstants.cogBtnImgName),
                              style: .plain,
                              target: nil,
@@ -76,7 +76,7 @@ class NavBarWithAction: NSObject {
     
     var navItem: UIBarButtonItem
     
-    let action : ContainsAction
+    let action: ContainsAction
     
     init(navItem: UIBarButtonItem, action : @escaping ContainsAction) {
         self.navItem = navItem
@@ -89,13 +89,13 @@ class NavigationBarConfigurator {
     
     private var right: [NavBarWithAction]?
     
-    private var left : [NavBarWithAction]?
+    private var left: [NavBarWithAction]?
     
     var rightItems: [UIBarButtonItem]? {
          return self.right?.flatMap { $0.navItem }
     }
     
-    func configure(right:[NavBarWithAction]?, left:[NavBarWithAction]?) {
+    func configure(right: [NavBarWithAction]?, left: [NavBarWithAction]?) {
         self.right = right
         self.right?.forEach {
             
@@ -115,4 +115,3 @@ class NavigationBarConfigurator {
 
     }
 }
-

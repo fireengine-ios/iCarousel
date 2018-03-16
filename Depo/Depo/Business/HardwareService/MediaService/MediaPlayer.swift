@@ -29,7 +29,7 @@ final class MediaPlayer: NSObject {
             currentMusicName = currentMetaData?.title ?? currentItem?.name ?? " "
             currentArtist = currentMetaData?.artist ?? " "
             
-            SDWebImageManager.shared().loadImage(with: currentMetaData?.mediumUrl, options: [], progress: nil) { [weak self] (image, data, error, type, result, url) in
+            SDWebImageManager.shared().loadImage(with: currentMetaData?.mediumUrl, options: [], progress: nil) { [weak self] image, data, error, type, result, url in
                 
                 if url == self?.currentMetaData?.mediumUrl, let image = image {
                     let artwork = MPMediaItemArtwork(image: image)
@@ -108,15 +108,14 @@ final class MediaPlayer: NSObject {
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), options: [.new], context: nil)
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
 //        guard keyPath != nil else {
 //            return super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
 //        }
         
         if keyPath == #keyPath(AVPlayer.status) {
             play()
-        }
-        else if keyPath == #keyPath(AVPlayer.currentItem) {
+        } else if keyPath == #keyPath(AVPlayer.currentItem) {
             let index = chooseIndex(for: currentIndex)
             if items.count <= index || index < 0 {
                 return
@@ -131,11 +130,9 @@ final class MediaPlayer: NSObject {
             }
             
             play()
-        }
-        else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp), player.currentItem?.status == .readyToPlay, isPlaying {
+        } else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp), player.currentItem?.status == .readyToPlay, isPlaying {
             play()
-        }
-        else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), player.currentItem?.status == .readyToPlay {
+        } else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), player.currentItem?.status == .readyToPlay {
             play()
         }
     }

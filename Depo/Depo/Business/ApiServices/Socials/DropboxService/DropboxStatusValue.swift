@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum DropboxStatusValue: String  {
+enum DropboxStatusValue: String {
     case pending = "PENDING"
     case running = "RUNNING"
     case failed = "FAILED"

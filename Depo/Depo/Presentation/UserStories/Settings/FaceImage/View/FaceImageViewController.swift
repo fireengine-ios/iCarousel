@@ -56,7 +56,7 @@ extension FaceImageViewController: ActivityIndicator {
     }
     
     func stopActivityIndicator() {
-        NotificationCenter.default.post(name: .changeFaceImageStatus, object:self)
+        NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
         activityManager.stop()
     }
 }

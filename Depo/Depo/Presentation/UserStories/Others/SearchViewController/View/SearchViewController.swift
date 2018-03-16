@@ -12,8 +12,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
 
     // MARK: - Outlets
     
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    
     @IBOutlet weak var outputView: UIView!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -31,8 +29,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     @IBOutlet weak var musicBarContainer: UIView!
     @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
     
-    let underNavBarBarHeight: CGFloat = 53
-    let musicBar = MusicBar(frame: CGRect.zero)
+    private let underNavBarBarHeight: CGFloat = 53
+    private let searchSectionCount = 6
+    private let musicBar = MusicBar(frame: CGRect.zero)
     
     // MARK: - Variables
     var underNavBarBar: GridListTopBar?
@@ -47,6 +46,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     var navBarConfigurator = NavigationBarConfigurator()
     var editingTabBar: BottomSelectionTabBarViewController?
     
+    private var goBack = false
+    
     // MARK: - Life Cicle
     
     override func viewDidLoad() {
@@ -56,23 +57,26 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         collectionView.isHidden = true
         noFilesLabel.text = TextConstants.noFilesFoundInSearch
         topBarContainer.isHidden = true
-       
+        
         setupMusicBar()
+        configureTableView()
         subscribeToNotifications()
         configureNavigationBar()
-        setCurrentPlayState()
-        configureTableView()
-        setupBlurBackground()
+        
+        MenloworksTagsService.shared.onSearchOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        defaultNavBarStyle()
-        setStatusBarBackgroundColor(color: .white)
-        
-        navigationController?.setNavigationBarHidden(true, animated: false)
         UIApplication.shared.statusBarStyle = .default
+        
+        if #available(iOS 11.0, *) {
+            navigationBarWithGradientStyle()
+        } else {
+            defaultNavBarStyle()
+        }
+        setStatusBarBackgroundColor(color: .white)
         
         editingTabBar?.view.layoutIfNeeded()
         
@@ -82,16 +86,30 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
                 collectionView.reloadItems(at: allVisibleCells)
             })
         }
-        setStatusBarBackgroundColor(color: UIColor.white)
+        navigationItem.hidesBackButton = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if #available(iOS 11.0, *) {
+            defaultNavBarStyle()
+            setStatusBarBackgroundColor(color: .white)
+        }
+        navigationController?.delegate = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         UIApplication.shared.statusBarStyle = .lightContent
-        setStatusBarBackgroundColor(color: UIColor.clear)
         output.viewWillDisappear()
         setStatusBarBackgroundColor(color: .clear)
+        if goBack {
+            homePageNavigationBarStyle()
+        }
+        
+        searchBar.resignFirstResponder()
     }
     
     deinit {
@@ -137,22 +155,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         output.playerDidHide()
     }
     
-    private func setCurrentPlayState() {
-        var hidden = true
-        if collectionView.isHidden == true {
-            hidden = true
-        } else {
-            if output.player.isPlaying {
-                hidden = false
-            }
-        }
-        if !hidden {
-            showMusicBar()
-        } else {
-            hideMusicBar(self)
-        }
-    }
-    
     private func changeVisibleStatus(hidden: Bool) {
         musicBarContainer.isHidden = hidden
         musicBarContainer.isUserInteractionEnabled = !hidden
@@ -172,22 +174,14 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         
         suggestTableView.backgroundColor = .clear
         suggestTableView.separatorColor = .white
-        suggestTableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 10)
+        suggestTableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         suggestTableView.tableFooterView = UIView()
         suggestTableView.sectionHeaderHeight = 0
     }
     
-    private func setupBlurBackground() {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView)
-        view.sendSubview(toBack: blurEffectView)
-    }
-    
     private func configureNavigationBar() {
-        navigationBar.topItem?.rightBarButtonItems = []
+        navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItems = []
         
         searchBar = UISearchBar()
         searchBar.sizeToFit()
@@ -198,8 +192,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
         searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
-        let view = UIView(frame: searchBar.frame)
-        view.backgroundColor = .clear
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: 44))
+        view.backgroundColor = .white
         searchBar.addSubview(view)
         searchBar.sendSubview(toBack: view)
         
@@ -226,7 +220,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     private func setupNavigationBarForSelectionState(state: Bool) {
         if state {
-            navigationBar.topItem?.titleView = nil
+            navigationItem.titleView = nil
             
             let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 56))
             cancelButton.addTarget(self, action: #selector(onCancelSelectionButton), for: .touchUpInside)
@@ -238,18 +232,18 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             moreButton.tintColor = ColorConstants.darcBlueColor
             moreButton.accessibilityLabel = TextConstants.accessibilityMore
 
-            navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
-            navigationBar.topItem?.rightBarButtonItem = moreButton
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
+            navigationItem.rightBarButtonItem = moreButton
         } else {
             if Device.isIpad {
-                navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: TextConstants.cancel, style: .plain, target: self, action: #selector(searchBarCancelButtonClicked(_:)))
-                navigationBar.topItem?.rightBarButtonItem?.tintColor = ColorConstants.darcBlueColor
+                navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.cancel, style: .plain, target: self, action: #selector(searchBarCancelButtonClicked(_:)))
+                navigationItem.rightBarButtonItem?.tintColor = ColorConstants.darcBlueColor
             } else {
-                navigationBar.topItem?.rightBarButtonItem = nil
+                navigationItem.rightBarButtonItem = nil
             }
-            navigationBar.topItem?.title = ""
-            navigationBar.topItem?.titleView = searchBar
-            navigationBar.topItem?.leftBarButtonItem = nil
+            navigationItem.title = ""
+            navigationItem.titleView = searchBar
+            navigationItem.leftBarButtonItem = nil
         }
     }
     
@@ -262,14 +256,14 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func selectedItemsCountChange(with count: Int) {
-        navigationBar.topItem?.title = "\(count) \(TextConstants.accessibilitySelected)"
+        navigationItem.title = "\(count) \(TextConstants.accessibilitySelected)"
     }
     
     // MARK: - UISearchbarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(true)
-        dismissController()
+        searchBar.resignFirstResponder()
+        dismissController(animated: true)
         output.tapCancel()
     }
     
@@ -292,14 +286,14 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             collectionView.isHidden = true
             noFilesView.isHidden = true
             topBarContainer.isHidden = true
+            hideTabBar()
         }
     }
     
     func endSearchRequestWith(text: String) {
         collectionView.isHidden = !noFilesView.isHidden
-        setCurrentPlayState()
         
-        if let searchBar = navigationBar.topItem?.titleView as? UISearchBar, let searchBarText = searchBar.text {
+        if let searchBar = navigationItem.titleView as? UISearchBar, let searchBarText = searchBar.text {
             let requestText = text.removingPercentEncoding ?? text
             if requestText != searchBarText {
                 timerToSearch.invalidate()
@@ -315,29 +309,21 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             output.searchWith(searchText: searchText, item: item, sortBy: .date, sortOrder: .asc)
         } else {
             collectionView.isHidden = true
-            setCurrentPlayState()
         }
-        view.endEditing(true)
-        suggestTableView.isHidden = true
+        searchBar.resignFirstResponder()
         searchBar.enableCancelButton()
+        suggestTableView.isHidden = true
     }
     
     // MARK: - SearchViewInput
     
-    func getCollectionViewWidth() -> CGFloat{
+    func getCollectionViewWidth() -> CGFloat {
         return collectionView.frame.size.width
     }
     
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool) {
         collectionView.isHidden = visibilityStatus
         noFilesView.isHidden = !visibilityStatus
-        setCurrentPlayState()
-        
-        if visibilityStatus {
-            hideTabBar()
-        } else {
-            showTabBar()
-        }
     }
     
     func successWithSuggestList(list: [SuggestionObject]) {
@@ -360,12 +346,18 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         return true
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        view.endEditing(true)
+    private func isEmptyItemsCategory(_ category: SearchCategory) -> Bool {
+        return items[category] == nil || items[category]!.isEmpty
     }
     
-    func dismissController() {
-        navigationController?.popViewController(animated: true)
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func dismissController(animated: Bool) {
+        goBack = true
+        navigationController?.delegate = self
+        navigationController?.popViewController(animated: animated)
     }
     
     func onSetSelection(state: Bool) {
@@ -373,10 +365,23 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func setNavBarRigthItem(active isActive: Bool) {
-        navigationBar.topItem?.rightBarButtonItem?.isEnabled = isActive
+        navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
-    //MARK: - Under nav bar
+    func setEnabledSearchBar(_ isEnabled: Bool) {
+        searchBar.isUserInteractionEnabled = isEnabled
+        searchBar.alpha = isEnabled ? 1 : 0.5
+    }
+    
+    func setVisibleTabBar(_ isVisible: Bool) {
+        if isVisible {
+            showTabBar()
+        } else {
+            hideTabBar()
+        }
+    }
+    
+    // MARK: - Under nav bar
     
     func setupUnderNavBarBar(withConfig config: GridListTopBarConfig) {
         guard let unwrapedTopBar = underNavBarBar else {
@@ -402,9 +407,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         topBarContainer.addConstraints(horisontalConstraints + verticalConstraints + [heightConstraint])
         
         floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
+        view.layoutIfNeeded()
     }
     
-    //MARK: - Keyboard
+    // MARK: - Keyboard
     
     @objc override func showKeyBoard(notification: NSNotification) {
         super.showKeyBoard(notification: notification)
@@ -414,12 +420,11 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     @objc override func hideKeyboard() {
-        view.endEditing(true)
         suggestTableView.contentInset = .zero
         collectionView.contentInset = .zero
     }
     
-    //MARK: - TabBar
+    // MARK: - TabBar
     
     private func showTabBar() {
         needShowTabBar = true
@@ -442,19 +447,12 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
 }
 
-//MARK: - UITableViewDelagate & DataSource 
+// MARK: - UITableViewDelagate & DataSource 
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        var sections = 4
-        if let items = items[.people], !items.isEmpty {
-            sections += 1
-        }
-        if let items = items[.things], !items.isEmpty {
-            sections += 1
-        }
-        return sections
+        return searchSectionCount
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -479,9 +477,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         case .suggestion, .recent:
             return UITableViewAutomaticDimension
         case .people, .things:
-            return RecentlySearchedFaceImageTableViewCell.height()
-        case .suggestionHeader, .recentHeader:
+            if !isEmptyItemsCategory(category) {
+                return RecentlySearchedFaceImageTableViewCell.height()
+            }
+            return 0
+        case .suggestionHeader:
             return SuggestionTableSectionHeader.heightFor(category: category)
+        case .recentHeader:
+            if !isEmptyItemsCategory(.recent) || !isEmptyItemsCategory(.people) || !isEmptyItemsCategory(.things) {
+                return SuggestionTableSectionHeader.heightFor(category: category)
+            }
+            return 0
         }
     }
     
@@ -500,7 +506,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         case .recent, .suggestion:
             if let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.suggestionTableViewCellID, for: indexPath) as? SuggestionTableViewCell,
                 let item = items[category]?[indexPath.item] {
-                cell.configure(with: item)
+                cell.configure(with: item, recent: category == .recent)
                 return cell
             }
         case .people, .things:
@@ -524,7 +530,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         if (item.type == .people || item.type == .thing) && item.info != nil {
             output.openFaceImage(item: item)
-        } else if let searchBar = navigationBar.topItem?.titleView as? UISearchBar {
+        } else if let searchBar = navigationItem.titleView as? UISearchBar {
             searchBar.text = item.text?.removingPercentEncoding ?? item.text
             search(text: searchBar.text, forItem: item)
         }
@@ -532,7 +538,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func musicBarZoomWillOpen() {
         output.willDismissController()
-        dismissController()
+        dismissController(animated: true)
     }
 }
 

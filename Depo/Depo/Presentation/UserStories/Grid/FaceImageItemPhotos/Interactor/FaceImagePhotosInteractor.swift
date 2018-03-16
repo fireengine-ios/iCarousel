@@ -67,7 +67,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
                 }
             }
@@ -92,7 +92,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
                 }
             }
@@ -109,7 +109,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                 let uuid = self?.album?.uuid {
                 self?.output.startAsyncOperation()
 
-                PlacesService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
+                PlacesService().deletePhotosFromAlbum(uuid: uuid, photos: items, success: { [weak self] in
                     ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
                     
                     DispatchQueue.main.async {
@@ -117,7 +117,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
-                }) { [weak self] (error) in
+                }) { [weak self] error in
                     self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
                 }
             }

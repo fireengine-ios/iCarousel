@@ -10,7 +10,7 @@ import UIKit
 
 class SyncContactsModuleInitializer: NSObject {
 
-    class func initializeViewController(with nibName:String) -> UIViewController {
+    class func initializeViewController(with nibName: String) -> UIViewController {
         let viewController = SyncContactsViewController(nibName: nibName, bundle: nil)
         let configurator = SyncContactsModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)

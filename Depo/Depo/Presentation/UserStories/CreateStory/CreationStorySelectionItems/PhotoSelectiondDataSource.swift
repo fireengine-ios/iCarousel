@@ -8,7 +8,7 @@
 
 class PhotoSelectionDataSource: ArrayDataSourceForCollectionView {
     
-    override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
+    override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?) {
         super.setupCollectionView(collectionView: collectionView, filters: [.fileType(.audio)])
         
         let nib = UINib(nibName: CollectionViewCellsIdsConstant.cellForStoryImage, bundle: nil)
@@ -44,7 +44,7 @@ class PhotoSelectionDataSource: ArrayDataSourceForCollectionView {
         }
     }
     
-    override func configurateWithArray(array: [[BaseDataSourceItem]]){
+    override func configurateWithArray(array: [[BaseDataSourceItem]]) {
         tableDataMArray.append(contentsOf: array)
         collectionView?.reloadData()
     }

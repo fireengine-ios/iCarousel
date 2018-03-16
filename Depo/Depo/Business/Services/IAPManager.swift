@@ -20,8 +20,8 @@ final class IAPManager: NSObject {
         setupSKPaymentQueue()
     }
     
-    var offerAppleHandler: OfferAppleHandler = {_ in }
-    var purchaseHandler: PurchaseHandler = {_ in }
+    var offerAppleHandler: OfferAppleHandler = { _ in }
+    var purchaseHandler: PurchaseHandler = { _ in }
     
     var canMakePayments: Bool {
         return SKPaymentQueue.canMakePayments()
@@ -72,6 +72,10 @@ extension IAPManager: SKPaymentTransactionObserver {
             //let productId = transaction.payment.productIdentifier
             switch transaction.transactionState {
             case .purchased:
+                if let productId = transaction.transactionIdentifier,
+                    let type = MenloworksSubscriptionProductID(rawValue: productId) {
+                    MenloworksAppEvents.onSubscriptionPurchaseCompleted(type)
+                }
                 purchaseHandler(.success)
             case .failed:
                 guard let error = transaction.error else { break }

@@ -10,7 +10,7 @@ import Foundation
 
 typealias RequestResponse = (Data?, URLResponse?, Error?) -> Swift.Void
 typealias RequestFileDownloadResponse = (URL?, URLResponse?, Error?) -> Swift.Void
-typealias RequestFileUploadResponse =  (Data?, URLResponse?, Error?) -> Swift.Void
+typealias RequestFileUploadResponse = (Data?, URLResponse?, Error?) -> Swift.Void
 
 enum RequestMethod: String {
     case Post   = "POST"
@@ -26,7 +26,7 @@ class RequestService {
     
     static let `default` = RequestService()
     
-    public func requestTask(patch:URL,
+    public func requestTask(patch: URL,
                             headerParametrs: RequestHeaderParametrs,
                             body: Data?,
                             method: RequestMethod,
@@ -50,7 +50,7 @@ class RequestService {
         return sessionRequest.task!
     }
     
-    public func uploadRequestTask(patch:URL,
+    public func uploadRequestTask(patch: URL,
                               headerParametrs: RequestHeaderParametrs,
                               body: Data?,
                               method: RequestMethod,
@@ -75,7 +75,7 @@ class RequestService {
     }
     
     
-    public func downloadFileRequestTask(patch:URL,
+    public func downloadFileRequestTask(patch: URL,
                                         headerParametrs: RequestHeaderParametrs,
                                         body: Data?,
                                         method: RequestMethod,
@@ -107,7 +107,7 @@ class RequestService {
         return sessionRequest.task!
     }
     
-    public func uploadFileRequestTask(patch:URL,
+    public func uploadFileRequestTask(patch: URL,
                                   headerParametrs: RequestHeaderParametrs,
                                   fromFile: URL,
                                   method: RequestMethod,
@@ -133,7 +133,7 @@ class RequestService {
         return sessionRequest.task!
     }
     
-    public func uploadFileRequestTask(path:URL,
+    public func uploadFileRequestTask(path: URL,
                                       headerParametrs: RequestHeaderParametrs,
                                       fileData: Data,
                                       method: RequestMethod,
@@ -159,7 +159,7 @@ class RequestService {
         return sessionRequest.task!
     }
     
-    public func headRequestTask(patch:URL,
+    public func headRequestTask(patch: URL,
                                 headerParametrs: RequestHeaderParametrs,
                                 method: RequestMethod,
                                 timeoutInterval: TimeInterval,
@@ -185,7 +185,7 @@ class RequestService {
         guard let url = request.url
             else { return }
         
-        SingletonStorage.shared.progressDelegates.invoke(invocation: { (delegate) in
+        SingletonStorage.shared.progressDelegates.invoke(invocation: { delegate in
             delegate.didSend(ratio: Float(progress.fractionCompleted), for: url)
         })
     }

@@ -16,8 +16,8 @@ extension Notification.Name {
 
 class CoreDataStack: NSObject {
     
-    typealias AppendingLocaclItemsFinishCallback = ()->Void
-    typealias AppendingLocaclItemsProgressCallback = (Float)->Void
+    typealias AppendingLocaclItemsFinishCallback = () -> Void
+    typealias AppendingLocaclItemsProgressCallback = (Float) -> Void
     
     typealias AppendingLocalItemsPageAppended = ([Item])->Void
     
@@ -25,7 +25,7 @@ class CoreDataStack: NSObject {
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         
-        guard let modelURL = Bundle.main.url(forResource: "LifeBoxModel", withExtension:"momd"),
+        guard let modelURL = Bundle.main.url(forResource: "LifeBoxModel", withExtension: "momd"),
             let mom = NSManagedObjectModel(contentsOf: modelURL)
             else { fatalError("Error loading model from bundle") }
 
@@ -50,7 +50,7 @@ class CoreDataStack: NSObject {
     var mainContext: NSManagedObjectContext
     
     var newChildBackgroundContext: NSManagedObjectContext {
-        let children =  NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        let children = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         children.parent = mainContext
         return children
     }
@@ -94,7 +94,7 @@ class CoreDataStack: NSObject {
         self.deleteObjects(fromFetches: [albumFetchRequest, mediaItemFetchRequest])
     }
 
-    func deleteLocalFiles(){
+    func deleteLocalFiles() {
         DispatchQueue.main.async {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
             let predicateRules = PredicateRules()
@@ -107,16 +107,16 @@ class CoreDataStack: NSObject {
     }
     
     func getLocalDuplicates(remoteItems: [Item]) -> [Item] {
-        let remoteMd5s = remoteItems.map{$0.md5}
+        let remoteMd5s = remoteItems.map { $0.md5 }
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        fetchRequest.predicate = NSPredicate(format: "md5Value IN %@",  remoteMd5s)
+        fetchRequest.predicate = NSPredicate(format: "md5Value IN %@", remoteMd5s)
         
         guard let localDuplicatesMediaItems = (try? CoreDataStack.default.mainContext.fetch(fetchRequest)) as? [MediaItem] else {
             return []
         }
         
-        return localDuplicatesMediaItems.flatMap{return WrapData(mediaItem: $0)}
+        return localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
     }
 
     /// MAYBE WILL BE NEED
@@ -149,15 +149,21 @@ class CoreDataStack: NSObject {
     }
     
     func saveMainContext() {
+        log.info("saveMainContext()")
+        log.debug("saveMainContext()")
         mainContext.processPendingChanges()
         if mainContext.hasChanges {
             mainContext.performAndWait{
                 do {
+                    log.info("mainContext.save()()")
+                    log.debug("mainContext.save()()")
                     try mainContext.save()
 //                    if !self.inProcessAppendingLocalFiles {
 //                        //TODO: some NOTIFICATION OR ACTUAL finished block
 //                    }
                 } catch {
+                    log.info("Error saving context mainContext.save()()")
+                    log.debug("Error saving context mainContext.save()()")
                     print("Error saving context ___ ")
                 }
             }
@@ -165,12 +171,16 @@ class CoreDataStack: NSObject {
     }
     
     @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true) {
-        debugPrint("save context")
+
+        log.info("saveDataForContext()")
+        log.debug("saveDataForContext()")
         let saveBlock: VoidHandler = { [weak self] in
             guard let `self` = self else {
                 return
             }
             do {
+                log.info("saveDataForContext() save()")
+                log.debug("saveDataForContext() save()")
                 try context.save()
                 if !self.inProcessAppendingLocalFiles {
                     //TODO: some NOTIFICATION OR ACTUAL finished block

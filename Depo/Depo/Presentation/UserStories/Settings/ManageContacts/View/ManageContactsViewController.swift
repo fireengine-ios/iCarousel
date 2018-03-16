@@ -35,7 +35,7 @@ class ManageContactsViewController: BaseViewController, ManageContactsViewInput 
     
     private func configureSearchBar() {
         
-        var searchBarHeight : CGFloat = 44
+        var searchBarHeight: CGFloat = 44
         
         if #available(iOS 11.0, *) {
             searchBarHeight = 56
