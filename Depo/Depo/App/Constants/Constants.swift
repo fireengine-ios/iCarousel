@@ -811,6 +811,8 @@ struct NumericConstants {
     
     static let maxNumberOfUploadAttempts = 5
     static let secondsBeetweenUploadAttempts = 5
+    
+    static let emptyEmailUserCloseLimit = 3
 }
 
 struct RequestSizeConstant {
