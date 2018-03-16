@@ -146,9 +146,9 @@ final class MediaPlayer: NSObject {
     }
     
     @objc private func headphoneRemoved(notification:NSNotification) {
-        guard let audioRouteChangeReason = notification.userInfo![AVAudioSessionRouteChangeReasonKey] else {return}
+        guard let audioRouteChangeReason = notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt else {return}
         
-        switch audioRouteChangeReason as! UInt {
+        switch audioRouteChangeReason {
         case AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue:
             DispatchQueue.main.async {
                 self.pause()
