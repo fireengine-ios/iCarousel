@@ -260,9 +260,7 @@
 		78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78FA7AD72008D5D800E0747F /* DuplicatedContactTableViewCell.xib */; };
 		7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */; };
 		7A652F2C2058051100612D93 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
-		7AC8AB4A205BD7A20053EC80 /* autosync-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B54BFF30202B20250018AF82 /* autosync-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7AC8AB4D205BD7A20053EC80 /* LifeboxShared.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		7AC8AB50205BD7A20053EC80 /* LifeboxFileProvider.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7AC8AB53205BD7A20053EC80 /* LifeboxFileProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7C00FE191F5957570041D041 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE161F5957570041D041 /* AppRater.bundle */; };
 		7C00FE1A1F5957570041D041 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00FE181F5957570041D041 /* AppRater.m */; };
@@ -3234,26 +3232,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7AC8AB4B205BD7A20053EC80 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B54BFF2F202B20250018AF82;
-			remoteInfo = "autosync-widget";
-		};
 		7AC8AB4E205BD7A20053EC80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CE58FAEE20444492007F3F54;
 			remoteInfo = LifeboxShared;
-		};
-		7AC8AB51205BD7A20053EC80 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CE1BE921204831CD0074BDDC;
-			remoteInfo = LifeboxFileProvider;
 		};
 		7AC8AB54205BD7A20053EC80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -3306,10 +3290,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				7AC8AB4A205BD7A20053EC80 /* autosync-widget.appex in Embed App Extensions */,
 				7AC8AB53205BD7A20053EC80 /* LifeboxFileProviderUI.appex in Embed App Extensions */,
 				7AC8AB4D205BD7A20053EC80 /* LifeboxShared.appex in Embed App Extensions */,
-				7AC8AB50205BD7A20053EC80 /* LifeboxFileProvider.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -11451,9 +11433,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				7AC8AB4C205BD7A20053EC80 /* PBXTargetDependency */,
 				7AC8AB4F205BD7A20053EC80 /* PBXTargetDependency */,
-				7AC8AB52205BD7A20053EC80 /* PBXTargetDependency */,
 				7AC8AB55205BD7A20053EC80 /* PBXTargetDependency */,
 			);
 			name = TC_Depo_LifeTech;
@@ -15316,20 +15296,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7AC8AB4C205BD7A20053EC80 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B54BFF2F202B20250018AF82 /* autosync-widget */;
-			targetProxy = 7AC8AB4B205BD7A20053EC80 /* PBXContainerItemProxy */;
-		};
 		7AC8AB4F205BD7A20053EC80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE58FAEE20444492007F3F54 /* LifeboxShared */;
 			targetProxy = 7AC8AB4E205BD7A20053EC80 /* PBXContainerItemProxy */;
-		};
-		7AC8AB52205BD7A20053EC80 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CE1BE921204831CD0074BDDC /* LifeboxFileProvider */;
-			targetProxy = 7AC8AB51205BD7A20053EC80 /* PBXContainerItemProxy */;
 		};
 		7AC8AB55205BD7A20053EC80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
