@@ -35,6 +35,7 @@ struct ColorConstants {
     static let darkBorder = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1)
     static let orangeBorder = UIColor(red: 249 / 255, green: 206 / 255, blue: 107 / 255, alpha: 1)
     static let oldieFilterColor = UIColor(red: 1, green: 230.0 / 255.0, blue: 0, alpha: 0.4)
+    static let bottomViewGrayColor = UIColor(red: 248 / 255, green: 248 / 255, blue: 248 / 255, alpha: 1)
     
     static let orangeGradientStart = UIColor(red: 255 / 255, green: 177 / 255, blue: 33 / 255, alpha: 1)
     static let orangeGradientEnd = UIColor(red: 255 / 255, green: 183 / 255, blue: 116 / 255, alpha: 1)
