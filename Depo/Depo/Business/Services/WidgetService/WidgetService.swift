@@ -65,6 +65,11 @@ final class WidgetService {
     func notifyWidgetAbout(status: AutoSyncStatus) {
         syncStatus = status
         
+        if syncStatus != .executing {
+            finishedCount = 0
+            totalCount = 0
+        }
+        
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
 }
