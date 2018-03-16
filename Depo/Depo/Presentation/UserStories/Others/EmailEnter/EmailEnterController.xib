@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneEnterController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmailEnterController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="customizator" destination="wuF-8v-HYt" id="olg-H9-7pr"/>
                 <outlet property="emailTextField" destination="ZJv-1L-0Ej" id="EQr-ND-i33"/>
@@ -111,7 +111,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
-        <customObject id="wuF-8v-HYt" customClass="PhoneEnterCustomizator" customModule="lifebox" customModuleProvider="target">
+        <customObject id="wuF-8v-HYt" customClass="EmailEnterCustomizator" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="approveButton" destination="j5u-7h-WiS" id="KiQ-cW-2eY"/>
                 <outlet property="emailLabel" destination="wDF-Tb-d2k" id="Vr4-zG-ZIL"/>

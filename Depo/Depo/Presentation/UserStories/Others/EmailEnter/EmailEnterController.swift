@@ -1,5 +1,5 @@
 //
-//  PhoneEnterController.swift
+//  EmailEnterController.swift
 //  Depo_LifeTech
 //
 //  Created by Bondar Yaroslav on 3/16/18.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-final class PhoneEnterController: UIViewController, NibInit {
+final class EmailEnterController: UIViewController, NibInit {
     
-    @IBOutlet private var customizator: PhoneEnterCustomizator!
+    @IBOutlet private var customizator: EmailEnterCustomizator!
     
 //    @IBOutlet private weak var approveButton: UIButton!
     @IBOutlet private weak var emailTextField: UnderlineTextField!
     
-    private lazy var attemptsCounter = AttemptsCounter(limit: NumericConstants.emptyEmailUserCloseLimit, complition: { 
+    private lazy var attemptsCounter = SavingAttemptsCounter(limit: NumericConstants.emptyEmailUserCloseLimit, limitHandler: { 
         AppConfigurator.logout()
     })
     
@@ -34,9 +34,9 @@ final class PhoneEnterController: UIViewController, NibInit {
     }
 }
 
-final class AttemptsCounter {
+final class SavingAttemptsCounter {
     
-    static func unicID(function: String = #function, file: String = #file, line: Int = #line) -> String {
+    static func uniqueID(function: String = #function, file: String = #file, line: Int = #line) -> String {
         return "\(function).\(file).\(line)"
     }
     
@@ -47,19 +47,22 @@ final class AttemptsCounter {
     }
     
     private let limit: Int
-    private let complition: VoidHandler
+    private let limitHandler: VoidHandler
     
-    init(limit: Int, userDefaultsKey: String = AttemptsCounter.unicID(), complition: @escaping VoidHandler) {
+    init(limit: Int,
+         userDefaultsKey: String = SavingAttemptsCounter.uniqueID(),
+         limitHandler: @escaping VoidHandler)
+    {
         self.userDefaultsKey = userDefaultsKey
         self.limit = limit
-        self.complition = complition
+        self.limitHandler = limitHandler
     }
     
     func up() {
         attempts += 1
         if attempts >= limit {
             reset()
-            complition()
+            limitHandler()
         }
     }
     

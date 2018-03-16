@@ -3013,9 +3013,9 @@
 		CEAE3FF41EFD517300A405B2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FEA1EFD517300A405B2 /* TabBarViewController.swift */; };
 		CEAFCF661F2AD7DE00ECA8D1 /* BaseFilesGreedChildrenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCF651F2AD7DE00ECA8D1 /* BaseFilesGreedChildrenViewController.swift */; };
 		CEB1CEAA1F21E11200C9DD8F /* SwiftyJSONExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1CEA91F21E11200C9DD8F /* SwiftyJSONExtension.swift */; };
-		CEB27348205BE3DC00E1AE9C /* PhoneEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB27346205BE3DC00E1AE9C /* PhoneEnterController.swift */; };
-		CEB27349205BE3DC00E1AE9C /* PhoneEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB27347205BE3DC00E1AE9C /* PhoneEnterController.xib */; };
-		CEB2734C205BF56600E1AE9C /* PhoneEnterCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734B205BF56600E1AE9C /* PhoneEnterCustomizator.swift */; };
+		CEB27348205BE3DC00E1AE9C /* EmailEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB27346205BE3DC00E1AE9C /* EmailEnterController.swift */; };
+		CEB27349205BE3DC00E1AE9C /* EmailEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */; };
+		CEB2734C205BF56600E1AE9C /* EmailEnterCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734B205BF56600E1AE9C /* EmailEnterCustomizator.swift */; };
 		CEB2734E205BF57B00E1AE9C /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */; };
 		CEB76EB01FE9094700B679EB /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB76EAF1FE9094600B679EB /* UIScrollView+Refresh.swift */; };
 		CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
@@ -5039,9 +5039,9 @@
 		CEAE3FEA1EFD517300A405B2 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		CEAFCF651F2AD7DE00ECA8D1 /* BaseFilesGreedChildrenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedChildrenViewController.swift; sourceTree = "<group>"; };
 		CEB1CEA91F21E11200C9DD8F /* SwiftyJSONExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSONExtension.swift; sourceTree = "<group>"; };
-		CEB27346205BE3DC00E1AE9C /* PhoneEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneEnterController.swift; sourceTree = "<group>"; };
-		CEB27347205BE3DC00E1AE9C /* PhoneEnterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneEnterController.xib; sourceTree = "<group>"; };
-		CEB2734B205BF56600E1AE9C /* PhoneEnterCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneEnterCustomizator.swift; sourceTree = "<group>"; };
+		CEB27346205BE3DC00E1AE9C /* EmailEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailEnterController.swift; sourceTree = "<group>"; };
+		CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailEnterController.xib; sourceTree = "<group>"; };
+		CEB2734B205BF56600E1AE9C /* EmailEnterCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailEnterCustomizator.swift; sourceTree = "<group>"; };
 		CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineTextField.swift; sourceTree = "<group>"; };
 		CEB76EAF1FE9094600B679EB /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
 		CEB996CE1F0770470074E264 /* RequestsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsKey.swift; sourceTree = "<group>"; };
@@ -9410,7 +9410,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				CEB2734A205BE3E500E1AE9C /* PhoneEnter */,
+				CEB2734A205BE3E500E1AE9C /* EmailEnter */,
 				CE1353332004F0D20004CBBE /* TextEnter */,
 				8C6EF8601F348B5C002AC795 /* BottomSelectionTabBar */,
 				8C7786851F3F38D9005CB432 /* MusicBar */,
@@ -10593,15 +10593,15 @@
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
-		CEB2734A205BE3E500E1AE9C /* PhoneEnter */ = {
+		CEB2734A205BE3E500E1AE9C /* EmailEnter */ = {
 			isa = PBXGroup;
 			children = (
-				CEB27347205BE3DC00E1AE9C /* PhoneEnterController.xib */,
-				CEB27346205BE3DC00E1AE9C /* PhoneEnterController.swift */,
-				CEB2734B205BF56600E1AE9C /* PhoneEnterCustomizator.swift */,
+				CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */,
+				CEB27346205BE3DC00E1AE9C /* EmailEnterController.swift */,
+				CEB2734B205BF56600E1AE9C /* EmailEnterCustomizator.swift */,
 				CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */,
 			);
-			path = PhoneEnter;
+			path = EmailEnter;
 			sourceTree = "<group>";
 		};
 		CEBBDDD91F01E4CF00CDF527 /* Resources */ = {
@@ -12271,7 +12271,7 @@
 				8C06B0062008AD71003D8E05 /* Kucuk_Selected.png in Resources */,
 				8C6EF8821F348B5C002AC795 /* BottomSelectionTabBarViewController.xib in Resources */,
 				8C06B04A2008AD71003D8E05 /* oval_siyah@3x.png in Resources */,
-				CEB27349205BE3DC00E1AE9C /* PhoneEnterController.xib in Resources */,
+				CEB27349205BE3DC00E1AE9C /* EmailEnterController.xib in Resources */,
 				8C06B0D62008AD71003D8E05 /* sample_oldie@3x.png in Resources */,
 				8C06B0602008AD71003D8E05 /* paylas_bip@2x.png in Resources */,
 				8C06B0342008AD71003D8E05 /* Orta.png in Resources */,
@@ -14203,7 +14203,7 @@
 			files = (
 				CE4363411F6FC43F004724BF /* ActivitiesByDay.swift in Sources */,
 				CE4363421F6FC43F004724BF /* ActivitiesByMinutesAndType.swift in Sources */,
-				CEB2734C205BF56600E1AE9C /* PhoneEnterCustomizator.swift in Sources */,
+				CEB2734C205BF56600E1AE9C /* EmailEnterCustomizator.swift in Sources */,
 				CE4363431F6FC43F004724BF /* ActivityFileType.swift in Sources */,
 				CE4363441F6FC43F004724BF /* ActivityType.swift in Sources */,
 				78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */,
@@ -15068,7 +15068,7 @@
 				F3E679ACEE5BB82BEA6E79CC /* SelectNameInitializer.swift in Sources */,
 				09FD2371EC56726F74576DD7 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
-				CEB27348205BE3DC00E1AE9C /* PhoneEnterController.swift in Sources */,
+				CEB27348205BE3DC00E1AE9C /* EmailEnterController.swift in Sources */,
 				CEF69DE71FB593AF00FCE6AB /* ServerError.swift in Sources */,
 				4A8CC30E201A01BC00C040C4 /* FaceImageRouter.swift in Sources */,
 				8766D2FF1FBDB06600316F46 /* PhotoSelectiondDataSource.swift in Sources */,

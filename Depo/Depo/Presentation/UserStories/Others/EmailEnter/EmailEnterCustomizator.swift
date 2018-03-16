@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PhoneEnterCustomizator: NSObject {
+final class EmailEnterCustomizator: NSObject {
     
     @IBOutlet private weak var approveButton: BlueButtonWithWhiteText! {
         didSet {
