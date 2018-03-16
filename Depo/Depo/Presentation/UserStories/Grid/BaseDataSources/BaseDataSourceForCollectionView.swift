@@ -1081,14 +1081,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         let uuid = file.uuid
-        file.isLocalItem = false
+//        file.isLocalItem = false
         if uploadedObjectID.index(of: file.uuid) == nil {
             uploadedObjectID.append(uuid)
         }
         
+        var localFinishedItemUUID: String?// (Stirng, Bool)?
+        
         finished: for (section, array) in allItems.enumerated() {
             for (row, object) in array.enumerated() {
                 if object.uuid == uuid {
+                    if object.isLocalItem {
+                        localFinishedItemUUID = object.uuid//.copy() as? Item
+                        file.isLocalItem = false
+                    }
                     allItems[section][row] = file
                     break finished
                 }
@@ -1098,6 +1104,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         for (index, object) in allMediaItems.enumerated() {
             if object.uuid == file.uuid {
+                file.isLocalItem = false
                 allMediaItems[index] = file
             }
         }
@@ -1108,7 +1115,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         
-        if let cell = getCellForLocalFile(objectUUID: file.uuid) {
+        if let localFinishedItemUUID = localFinishedItemUUID, let cell = getCellForFile(objectUUID: file.uuid) {
             cell.finishedUploadForObject()
         }
         
