@@ -22,6 +22,11 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = ColorConstants.bottomViewGrayColor
+    }
+    
     func setText(text: String?) {
         labelForTitle.text = text
     }
