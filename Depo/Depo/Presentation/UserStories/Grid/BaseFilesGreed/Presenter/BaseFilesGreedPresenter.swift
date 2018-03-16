@@ -7,7 +7,7 @@
 //
 
 class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
-    
+
     lazy var player: MediaPlayer = factory.resolve()
     
     var dataSource: BaseDataSourceForCollectionView
@@ -323,6 +323,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         updateNoFilesView()
     }
     
+    func updateCoverPhotoIfNeeded() { }
     
     // MARK: - UnderNavBarBar/TopBar
     

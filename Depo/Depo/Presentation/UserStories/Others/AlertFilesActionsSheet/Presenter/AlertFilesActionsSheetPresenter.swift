@@ -377,8 +377,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .deleteFaceImage:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                    MenloworksAppEvents.onDeleteClicked()
+                    self.interactor.delete(item: currentItems)
                     self.basePassingPresenter?.stopModeSelected()
-                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
                 })
             }
             return action
