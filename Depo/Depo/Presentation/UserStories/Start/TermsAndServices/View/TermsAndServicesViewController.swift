@@ -107,14 +107,4 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
     func popNavigationVC() {
         navigationController?.popViewController(animated: true)
     }
-    
-//    // MARK: UITextViewDelegate
-//    
-//    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-//        return true
-//    }
-//    
-//    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange) -> Bool {
-//        return true
-//    }
 }
