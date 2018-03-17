@@ -14,7 +14,5 @@ protocol TermsAndServicesViewInput: class, Waiting {
     
     func failLoadTermsAndUses(errorString: String)
     
-    func noConfirmAgreements(errorString: String)
-    
     func popNavigationVC()
 }

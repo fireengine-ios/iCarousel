@@ -11,7 +11,6 @@ import UIKit
 struct ColorConstants {
     static let whiteColor = UIColor.white
     static let blueColor = UIColor(red: 68 / 255, green: 204 / 255, blue: 208 / 255, alpha: 1)
-    static let lightBlueColor = UIColor(red: 180 / 255, green: 241 / 255, blue: 241 / 255, alpha: 1)
     static let yellowColor = UIColor(red: 1, green: 240 / 255, blue: 149 / 255, alpha: 1)
     static let switcherGrayColor = UIColor(red: 114 / 255, green: 114 / 255, blue: 114 / 255, alpha: 1)
     static let switcherGreenColor = UIColor(red: 68 / 255, green: 219 / 255, blue: 94 / 255, alpha: 1)

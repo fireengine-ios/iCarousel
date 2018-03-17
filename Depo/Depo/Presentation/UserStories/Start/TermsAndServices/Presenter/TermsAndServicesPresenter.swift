@@ -13,7 +13,6 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     var router: TermsAndServicesRouterInput!
     
     weak var delegate: RegistrationViewDelegate?
-    private var confirmAgreements = false
 
     // MARK: IN
     func viewIsReady() {
@@ -21,21 +20,13 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         interactor.loadTermsAndUses()
     }
     
-    func startUsing() {
-        if confirmAgreements {
-            if interactor.cameFromLogin {
-                interactor.applyEula()
-            } else {
-                interactor.signUpUser()
-            }
-            startAsyncOperationDisableScreen()
+    func termsApplied() {
+        if interactor.cameFromLogin {
+            interactor.applyEula()
         } else {
-            view.noConfirmAgreements(errorString: TextConstants.termsAndUseCheckboxErrorText)
+            interactor.signUpUser()
         }
-    }
-    
-    func confirmAgreements(_ confirm: Bool) {
-        confirmAgreements = confirm
+        startAsyncOperationDisableScreen()
     }
     
     // MARK: OUT
