@@ -26,7 +26,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gyd-QP-pVm">
-                        <rect key="frame" x="27" y="0.0" width="293" height="42"/>
+                        <rect key="frame" x="20" y="0.0" width="300" height="42"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="42" id="wLb-6O-Doe"/>
                         </constraints>
@@ -40,29 +40,29 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IB3-TP-pf2">
-                        <rect key="frame" x="241.5" y="11" width="42.5" height="21.5"/>
+                        <rect key="frame" x="237.5" y="11" width="42.5" height="21.5"/>
                         <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDownArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Her-KU-zms">
-                        <rect key="frame" x="288" y="17.5" width="8" height="8"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Her-KU-zms">
+                        <rect key="frame" x="284" y="17.5" width="12" height="8"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="8" id="4bb-Ic-FgZ"/>
-                            <constraint firstAttribute="width" constant="8" id="qcz-f8-lax"/>
+                            <constraint firstAttribute="width" constant="12" id="qcz-f8-lax"/>
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1MI-yf-IMK">
-                        <rect key="frame" x="27" y="50.5" width="277" height="177.5"/>
+                        <rect key="frame" x="20" y="50.5" width="284" height="177.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRc-qb-Pue" customClass="AutoSyncSettingsOptionView" customModule="lifebox" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="277" height="56.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="284" height="56.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W63-qF-pfU">
-                                        <rect key="frame" x="8" y="0.0" width="269" height="56.5"/>
+                                        <rect key="frame" x="8" y="0.0" width="276" height="56.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
-                                        <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Button">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -71,14 +71,14 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="HxC-mn-dmR">
-                                        <rect key="frame" x="245" y="20" width="16" height="16"/>
+                                        <rect key="frame" x="252" y="20" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="16" id="j1b-cE-xLv"/>
                                             <constraint firstAttribute="height" constant="16" id="qqO-Ed-P0Q"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gR9-Hd-zOq">
-                                        <rect key="frame" x="8" y="55.5" width="269" height="1"/>
+                                        <rect key="frame" x="16" y="55.5" width="268" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="fyV-Hx-NcK"/>
@@ -95,7 +95,7 @@
                                     <constraint firstAttribute="trailing" secondItem="W63-qF-pfU" secondAttribute="trailing" id="Ozt-hd-zKF"/>
                                     <constraint firstItem="HxC-mn-dmR" firstAttribute="trailing" secondItem="VRc-qb-Pue" secondAttribute="trailingMargin" constant="-8" id="nZD-gm-H6f"/>
                                     <constraint firstItem="W63-qF-pfU" firstAttribute="leading" secondItem="VRc-qb-Pue" secondAttribute="leading" constant="8" id="o2M-jb-SAB"/>
-                                    <constraint firstItem="gR9-Hd-zOq" firstAttribute="leading" secondItem="W63-qF-pfU" secondAttribute="leading" id="ukY-3W-dky"/>
+                                    <constraint firstItem="gR9-Hd-zOq" firstAttribute="leading" secondItem="W63-qF-pfU" secondAttribute="leading" constant="8" id="ukY-3W-dky"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="button" destination="W63-qF-pfU" id="aLI-Z5-adh"/>
@@ -103,13 +103,13 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61z-Jn-NEA" customClass="AutoSyncSettingsOptionView" customModule="lifebox" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="60.5" width="277" height="56.5"/>
+                                <rect key="frame" x="0.0" y="60.5" width="284" height="56.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCG-Fu-vEA">
-                                        <rect key="frame" x="8" y="0.0" width="269" height="56.5"/>
+                                        <rect key="frame" x="8" y="0.0" width="276" height="56.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
-                                        <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Button">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -118,14 +118,14 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="VRa-xn-4vE">
-                                        <rect key="frame" x="245" y="20.5" width="16" height="16"/>
+                                        <rect key="frame" x="252" y="20.5" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="1Ec-Ep-OyZ"/>
                                             <constraint firstAttribute="width" constant="16" id="FRe-5c-ZxP"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btd-CZ-dx4">
-                                        <rect key="frame" x="8" y="55.5" width="269" height="1"/>
+                                        <rect key="frame" x="16" y="55.5" width="268" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Hgh-SO-gXH"/>
@@ -136,7 +136,7 @@
                                 <constraints>
                                     <constraint firstItem="btd-CZ-dx4" firstAttribute="trailing" secondItem="sCG-Fu-vEA" secondAttribute="trailing" id="5w2-52-efj"/>
                                     <constraint firstAttribute="trailing" secondItem="sCG-Fu-vEA" secondAttribute="trailing" id="85b-Xv-yAa"/>
-                                    <constraint firstItem="btd-CZ-dx4" firstAttribute="leading" secondItem="sCG-Fu-vEA" secondAttribute="leading" id="AiP-MM-nEc"/>
+                                    <constraint firstItem="btd-CZ-dx4" firstAttribute="leading" secondItem="sCG-Fu-vEA" secondAttribute="leading" constant="8" id="AiP-MM-nEc"/>
                                     <constraint firstItem="btd-CZ-dx4" firstAttribute="bottom" secondItem="sCG-Fu-vEA" secondAttribute="bottom" id="JW0-4B-uUS"/>
                                     <constraint firstAttribute="bottom" secondItem="sCG-Fu-vEA" secondAttribute="bottom" id="S8S-j9-QYo"/>
                                     <constraint firstItem="VRa-xn-4vE" firstAttribute="centerY" secondItem="61z-Jn-NEA" secondAttribute="centerY" id="W3W-CW-37T"/>
@@ -150,13 +150,13 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDh-XY-ZsJ" customClass="AutoSyncSettingsOptionView" customModule="lifebox" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="121" width="277" height="56.5"/>
+                                <rect key="frame" x="0.0" y="121" width="284" height="56.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJW-t7-fGg">
-                                        <rect key="frame" x="8" y="0.0" width="269" height="56.5"/>
+                                        <rect key="frame" x="8" y="0.0" width="276" height="56.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
-                                        <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Button">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -165,7 +165,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="nrH-uM-PfU">
-                                        <rect key="frame" x="245" y="20.5" width="16" height="16"/>
+                                        <rect key="frame" x="252" y="20.5" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="LpP-oh-wXx"/>
                                             <constraint firstAttribute="width" constant="16" id="Nj7-7D-iOL"/>
@@ -207,12 +207,12 @@
                     <constraint firstItem="IB3-TP-pf2" firstAttribute="centerY" secondItem="Gyd-QP-pVm" secondAttribute="centerY" id="5kd-Rl-Hkc"/>
                     <constraint firstItem="Gyd-QP-pVm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="D00-Ah-Okg"/>
                     <constraint firstAttribute="trailing" secondItem="Her-KU-zms" secondAttribute="trailing" constant="24" id="LWD-BL-Dow"/>
-                    <constraint firstItem="lw5-hQ-Qsb" firstAttribute="leading" secondItem="1MI-yf-IMK" secondAttribute="leading" id="NrY-VO-hqW"/>
+                    <constraint firstItem="lw5-hQ-Qsb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="27" id="NrY-VO-hqW"/>
                     <constraint firstItem="IB3-TP-pf2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="PMb-t1-rkY"/>
                     <constraint firstItem="Her-KU-zms" firstAttribute="leading" secondItem="IB3-TP-pf2" secondAttribute="trailing" constant="4" id="Sak-kX-7aS"/>
                     <constraint firstItem="lw5-hQ-Qsb" firstAttribute="trailing" secondItem="1MI-yf-IMK" secondAttribute="trailing" id="aId-7c-UXI"/>
-                    <constraint firstItem="Gyd-QP-pVm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="27" id="fmT-Xg-NYW"/>
-                    <constraint firstItem="1MI-yf-IMK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="27" id="g7u-dJ-Cjv"/>
+                    <constraint firstItem="Gyd-QP-pVm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="fmT-Xg-NYW"/>
+                    <constraint firstItem="1MI-yf-IMK" firstAttribute="leading" secondItem="Gyd-QP-pVm" secondAttribute="leading" id="g7u-dJ-Cjv"/>
                     <constraint firstItem="1MI-yf-IMK" firstAttribute="top" secondItem="Gyd-QP-pVm" secondAttribute="bottom" constant="8" id="kY2-Ay-EPw"/>
                     <constraint firstAttribute="trailing" secondItem="Gyd-QP-pVm" secondAttribute="trailing" id="m2K-v3-vl1"/>
                     <constraint firstAttribute="trailing" secondItem="1MI-yf-IMK" secondAttribute="trailing" constant="16" id="nBp-8K-b3T"/>
@@ -239,6 +239,6 @@
     </objects>
     <resources>
         <image name="checkmark" width="16" height="12"/>
-        <image name="dropDownArrow" width="11" height="7"/>
+        <image name="downArrow" width="13" height="8"/>
     </resources>
 </document>

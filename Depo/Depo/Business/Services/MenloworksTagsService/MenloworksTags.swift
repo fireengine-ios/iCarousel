@@ -333,17 +333,17 @@ class MenloworksTags {
         }
     }
     
-    class TurkcellPasswordStatus: MenloworksBoolTag {
-        init(isEnabled: Bool) {
-            super.init(name: NameConstants.turckcellPasswordStatus, value: isEnabled, boolType: .trueFalse)
-        }
-    }
-    
-    class AutologinStatus: MenloworksBoolTag {
-        init(isEnabled: Bool) {
-            super.init(name: NameConstants.autologinStatus, value: isEnabled, boolType: .trueFalse)
-        }
-    }
+//    class TurkcellPasswordStatus: MenloworksBoolTag {
+//        init(isEnabled: Bool) {
+//            super.init(name: NameConstants.turckcellPasswordStatus, value: isEnabled, boolType: .trueFalse)
+//        }
+//    }
+//    
+//    class AutologinStatus: MenloworksBoolTag {
+//        init(isEnabled: Bool) {
+//            super.init(name: NameConstants.autologinStatus, value: isEnabled, boolType: .trueFalse)
+//        }
+//    }
     
     class FileDeleted: MenloworksTag {
         init() {
@@ -440,12 +440,12 @@ class MenloworksBoolTag: MenloworksTag {
     }
 }
 
-class MenloworksPermissionTag: MenloworksTag {
-    init(name: String, isGranted: Bool) {
-        super.init(name: name,
-                   value: isGranted ? MenloworksTags.ValueConstants.granted : MenloworksTags.ValueConstants.denied)
-    }
-}
+//class MenloworksPermissionTag: MenloworksTag {
+//    init(name: String, isGranted: Bool) {
+//        super.init(name: name,
+//                   value: isGranted ? MenloworksTags.ValueConstants.granted : MenloworksTags.ValueConstants.denied)
+//    }
+//}
 
 class MenloworksPercentageTag: MenloworksTag {
     init(name: String, percentageValue: Int) {

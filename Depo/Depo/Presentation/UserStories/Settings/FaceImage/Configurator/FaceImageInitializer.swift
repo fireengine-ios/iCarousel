@@ -10,7 +10,7 @@ import UIKit
 
 final class FaceImageInitializer: NSObject {
     
-    var faceImageViewController: FaceImageViewController!
+//    var faceImageViewController: FaceImageViewController!
     
     class func initializeViewController(with nibName: String) -> UIViewController {
         let viewController = FaceImageViewController(nibName: nibName, bundle: nil)

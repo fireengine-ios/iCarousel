@@ -32,9 +32,9 @@ class Upload: UploadRequestParametrs {
     
     private let isFavorite: Bool
     
-    var contentLenght: String {
-        return String(format: "%lu", item.fileSize)
-    }
+//    var contentLenght: String {
+//        return String(format: "%lu", item.fileSize)
+//    }
     
     var fileName: String {
         return item.name ?? "unknown"

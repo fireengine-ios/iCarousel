@@ -15,6 +15,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     static let shared = LocationManager()
     
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    
     private override init() {
         super.init()
         configurateLocationManager()
@@ -69,6 +71,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             if settings.isAutoSyncEnabled {
                 if CLLocationManager.locationServicesEnabled() {
                     if CLLocationManager.authorizationStatus() == .notDetermined {
+                        self.passcodeStorage.systemCallOnScreen = true
                         self.locationManager.requestAlwaysAuthorization()
                     } else {
                         self.locationManager.startMonitoringSignificantLocationChanges()
@@ -98,6 +101,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         log.debug("LocationManager locationManager")
 
+        passcodeStorage.systemCallOnScreen = false
+        
         var isAuthorized = false
         if ((status == .authorizedAlways) || (status == .authorizedWhenInUse) || (status == .authorizedAlways)) {
             isAuthorized = true

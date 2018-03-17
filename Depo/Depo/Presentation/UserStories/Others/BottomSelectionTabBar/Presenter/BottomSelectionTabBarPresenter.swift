@@ -133,8 +133,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             interactor.delete(item: selectedItems)
             basePassingPresenter?.stopModeSelected()
         case .deleteFaceImage:
+            MenloworksAppEvents.onDeleteClicked()
+            interactor.delete(item: selectedItems)
             basePassingPresenter?.stopModeSelected()
-            basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
         case .download:
             MenloworksAppEvents.onDownloadClicked()
             basePassingPresenter?.stopModeSelected()
@@ -322,7 +323,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 })
             case .deleteFaceImage:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                    self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
+                    MenloworksAppEvents.onDeleteClicked()
+                    self.interactor.delete(item: currentItems)
                 })
             case .move:
                 action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in

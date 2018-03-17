@@ -14,7 +14,7 @@ class OfferApple {
     var name: String?
     var rawPrice: Float = 0
     var price: String?
-    var offerType: String?
+//    var offerType: String?
     var description: String?
     var skProduct: SKProduct
     

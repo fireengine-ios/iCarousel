@@ -41,6 +41,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private let photoLibrary = PHPhotoLibrary.shared()
     
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    
     private let queue = OperationQueue()
     
     private let getDetailQueue = OperationQueue()
@@ -98,7 +100,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         case .authorized:
             completion(true, status)
         case .notDetermined, .restricted:
-            PHPhotoLibrary.requestAuthorization({ authStatus in
+            passcodeStorage.systemCallOnScreen = true
+            PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
+                self?.passcodeStorage.systemCallOnScreen = false
                 let isAuthorized = authStatus == .authorized
                 MenloworksTagsService.shared.onGalleryPermissionChanged(isAuthorized)
                 completion(isAuthorized, authStatus)
@@ -250,14 +254,18 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             return
         }
         
+        passcodeStorage.systemCallOnScreen = true
+        
         PHPhotoLibrary.shared().performChanges({
             
             let listToDelete = NSArray(array: deleteAsset)
             
             PHAssetChangeRequest.deleteAssets(listToDelete)
             
-        }, completionHandler: { status, error in
+        }, completionHandler: { [weak self] status, error in
             log.debug("LocalMediaStorage removeAssets PHPhotoLibrary performChanges success")
+            
+            self?.passcodeStorage.systemCallOnScreen = false
             
             if (status) {
                 success?()
@@ -281,6 +289,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             return
         }
         
+        passcodeStorage.systemCallOnScreen = true
+        
         var assetPlaceholder: PHObjectPlaceholder?
         PHPhotoLibrary.shared().performChanges({
             switch type {
@@ -294,6 +304,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             }
             
         }, completionHandler: { [weak self] status, error in
+            self?.passcodeStorage.systemCallOnScreen = false
+            
             if status {
                 if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
                     DispatchQueue.main.async {
@@ -363,8 +375,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     fileprivate func add(asset assetIdentifier: String, to collection: PHAssetCollection) {
+        passcodeStorage.systemCallOnScreen = true
         let assetRequest = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil)
-        PHPhotoLibrary.shared().performChanges({
+        PHPhotoLibrary.shared().performChanges({ [weak self] in
+            self?.passcodeStorage.systemCallOnScreen = false
             let request = PHAssetCollectionChangeRequest(for: collection)
             request?.addAssets(assetRequest)
         }, completionHandler: nil)
@@ -375,11 +389,15 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func createAlbum(_ name: String, completion: @escaping AssetCollectionCompletion) {
         log.debug("LocalMediaStorage createAlbum")
 
+        passcodeStorage.systemCallOnScreen = true
+        
         var assetCollectionPlaceholder: PHObjectPlaceholder?
         PHPhotoLibrary.shared().performChanges({
             let createAlbumRequest : PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: name)
             assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
-        }, completionHandler: { success, error in
+        }, completionHandler: { [weak self] success, error in
+            self?.passcodeStorage.systemCallOnScreen = false
+            
             if success, let localIdentifier = assetCollectionPlaceholder?.localIdentifier {
                 log.debug("LocalMediaStorage createAlbum PHPhotoLibrary performChanges success")
 

@@ -121,6 +121,8 @@ final class UploadService: BaseRequestService {
     }
     
     private func showSyncCardProgress() {
+        WidgetService.shared.notifyWidgetAbout(currentSyncOperationNumber, of: allSyncOperationsCount)
+        
         guard allSyncOperationsCount != 0, allSyncOperationsCount != finishedSyncOperationsCount else {
             clearSyncCounters()
             return
@@ -130,8 +132,6 @@ final class UploadService: BaseRequestService {
                                                          object: nil,
                                                          allOperations: allSyncOperationsCount,
                                                          completedOperations: currentSyncOperationNumber)
-        
-        WidgetService.shared.notifyWidgetAbout(currentSyncOperationNumber, of: allSyncOperationsCount)
     }
     
     private func showUploadCardProgress() {
@@ -321,6 +321,7 @@ final class UploadService: BaseRequestService {
                                                          object: firstObject,
                                                          allOperations: allSyncOperationsCount + itemsToSync.count,
                                                          completedOperations: currentSyncOperationNumber)
+        WidgetService.shared.notifyWidgetAbout(currentSyncOperationNumber, of: allSyncOperationsCount + itemsToSync.count)
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         

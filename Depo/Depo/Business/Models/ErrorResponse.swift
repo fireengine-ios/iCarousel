@@ -19,7 +19,7 @@ extension ErrorResponse {
     func showInternetErrorGlobal() {
         if case ErrorResponse.error(let error) = self, error is URLError {
             UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
-        }
+        }   
     }
     
     var isOutOfSpaceError: Bool {
@@ -27,10 +27,6 @@ extension ErrorResponse {
             return true
         }
         return false
-    }
-    
-    var isServiceError: Bool {
-        return errorDescription == TextConstants.commonServiceError
     }
 }
 

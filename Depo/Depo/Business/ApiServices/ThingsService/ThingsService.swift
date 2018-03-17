@@ -10,12 +10,12 @@ import UIKit
 
 final class ThingsService: BaseRequestService {
 
-    func getThingsList(param: ThingsParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("SearchService suggestion")
-        
-        let handler = BaseResponseHandler<ThingsServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
-    }
+//    func getThingsList(param: ThingsParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+//        log.debug("SearchService suggestion")
+//        
+//        let handler = BaseResponseHandler<ThingsServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
+//        executeGetRequest(param: param, handler: handler)
+//    }
     
     func getThingsPage(param: ThingsPageParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
         log.debug("SearchService suggestion")
@@ -53,13 +53,13 @@ final class ThingsService: BaseRequestService {
     
 }
 
-final class ThingsParameters: BaseRequestParametrs {
-    override var patch: URL {
-        let searchWithParam = String(format: RouteRequests.things)
-        
-        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
-    }
-}
+//final class ThingsParameters: BaseRequestParametrs {
+//    override var patch: URL {
+//        let searchWithParam = String(format: RouteRequests.things)
+//        
+//        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+//    }
+//}
 
 final class ThingsItemsService: RemoteItemsService {
     private let service = ThingsService()

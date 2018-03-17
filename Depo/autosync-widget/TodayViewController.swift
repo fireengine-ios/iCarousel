@@ -64,18 +64,18 @@ extension TodayViewController: NCWidgetProviding {
     private func updateFields() {
         switch widgetService.syncStatus {
         case .executing :
-            topLabel.text = TextConstants.widgetTitleInProgress
+            topLabel.text = L10n.widgetTopTitleInProgress
             bottomLabel.text = "\(widgetService.finishedCount) / \(widgetService.totalCount)"
             activityIndicator.isHidden = false
             successImage.isHidden = true
             activityIndicator.startAnimating()
         default:
             if WidgetService.shared.lastSyncedDate.isEmpty {
-                topLabel.text = TextConstants.widgetTitleIsStoped
-                bottomLabel.text = String(format: TextConstants.widgetTitleLastSyncFormat, TextConstants.widgetTitleNeverSynchronized)
+                topLabel.text = L10n.widgetTopTitleInactive
+                bottomLabel.text = L10n.widgetBottomTitleLastSyncFormat(L10n.widgetBottomTitleNewerSyncronized)
             } else {
-                topLabel.text = TextConstants.widgetTitleFinished
-                bottomLabel.text = String(format: TextConstants.widgetTitleLastSyncFormat, widgetService.lastSyncedDate)
+                topLabel.text = L10n.widgetTopTitleFinished
+                bottomLabel.text = L10n.widgetBottomTitleLastSyncFormat(widgetService.lastSyncedDate)
             }
             
             activityIndicator.isHidden = true

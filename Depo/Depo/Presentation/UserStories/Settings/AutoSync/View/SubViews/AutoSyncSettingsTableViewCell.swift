@@ -79,6 +79,8 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
         }
         
         cellSeparator.backgroundColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        
+        dropDownArrow.tintColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
     }
     
     
