@@ -1078,13 +1078,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             uploadedObjectID.append(uuid)
         }
         
-        var localFinishedItemUUID: String?// (Stirng, Bool)?
+        var localFinishedItemUUID: String?
         
         finished: for (section, array) in allItems.enumerated() {
             for (row, object) in array.enumerated() {
                 if object.uuid == uuid {
                     if object.isLocalItem {
-                        localFinishedItemUUID = object.uuid//.copy() as? Item
+                        localFinishedItemUUID = object.uuid
                         file.isLocalItem = false
                     }
                     allItems[section][row] = file
@@ -1107,7 +1107,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         
-        if let localFinishedItemUUID = localFinishedItemUUID, let cell = getCellForFile(objectUUID: file.uuid) {
+        if localFinishedItemUUID != nil, let cell = getCellForFile(objectUUID: file.uuid) {
             cell.finishedUploadForObject()
         }
         
