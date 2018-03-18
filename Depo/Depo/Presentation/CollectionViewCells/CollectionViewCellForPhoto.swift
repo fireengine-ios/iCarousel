@@ -41,6 +41,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         
         favoriteIcon.accessibilityLabel = TextConstants.accessibilityFavorite
         
+        visualEffectBlur.alpha = 0.75
         visualEffectBlur.isHidden = true
         visualEffectBlur.frame = imageView.bounds
         visualEffectBlur.autoresizingMask = [.flexibleWidth, .flexibleHeight]
