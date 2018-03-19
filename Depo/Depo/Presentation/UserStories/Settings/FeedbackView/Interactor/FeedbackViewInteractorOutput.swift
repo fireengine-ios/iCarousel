@@ -10,8 +10,6 @@ import Foundation
 
 protocol FeedbackViewInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
-    func languagesUploaded(lanuages: [LanguageModel])
     func fail(text: String)
-    func languageRequestSended(text: String)
-    
+    func languageRequestSended(text: String)    
 }

@@ -8,11 +8,6 @@
 
 protocol FeedbackViewInput: class {
 
-    /**
-        @author Oleg
-        Setup initial state of the view
-    */
-
     func setupInitialState()
     func languagesUploaded(lanuages: [LanguageModel])
     func fail(text: String)

@@ -13,7 +13,7 @@ class FeedbackViewPresenter: BasePresenter, FeedbackViewModuleInput, FeedbackVie
     var router: FeedbackViewRouterInput!
 
     func viewIsReady() {
-        interactor.viewIsReady()
+        view.languagesUploaded(lanuages: LanguageModel.availableLanguages())
     }
     
     func onSend(selectedLanguage: LanguageModel) {
@@ -25,11 +25,6 @@ class FeedbackViewPresenter: BasePresenter, FeedbackViewModuleInput, FeedbackVie
     }
     
     //interactor output
-    
-    func languagesUploaded(lanuages: [LanguageModel]) {
-        asyncOperationSucces()
-        view.languagesUploaded(lanuages: lanuages)
-    }
     
     func fail(text: String) {
         asyncOperationSucces()

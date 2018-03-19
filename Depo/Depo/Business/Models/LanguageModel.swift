@@ -39,4 +39,20 @@ class LanguageModel {
         }
     }
     
+    init(code: String, displayValue: String, countryCode: String) {
+        languageCode = code
+        displayLanguage = displayValue
+        defaultCountryCode = countryCode
+    }
+    
+    static func availableLanguages() -> [LanguageModel] {
+        var result = [LanguageModel]()
+        
+        result.append(LanguageModel(code: "tr", displayValue: TextConstants.turkishLanguageDisplayValue, countryCode: "90"))
+        result.append(LanguageModel(code: "en", displayValue: TextConstants.englishLanguageDisplayValue, countryCode: "1"))
+        result.append(LanguageModel(code: "ar", displayValue: TextConstants.arabicLanguageDisplayValue, countryCode: "966"))
+        
+        return result
+    }
+    
 }

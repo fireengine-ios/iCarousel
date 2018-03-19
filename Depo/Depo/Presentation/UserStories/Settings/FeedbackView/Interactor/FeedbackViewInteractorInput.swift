@@ -10,8 +10,6 @@ import Foundation
 
 protocol FeedbackViewInteractorInput {
 
-    func viewIsReady()
-    
     func onSend(selectedLanguage: LanguageModel)
     
 }
