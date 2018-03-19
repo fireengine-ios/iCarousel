@@ -47,6 +47,9 @@ final class BiometricsManagerImp: BiometricsManager {
         
         if result {
             return .available
+        /// biometrics are available on device, but is not turn on.
+        /// -5, -7 hardcoded, not documented constants to detect it.
+        /// may not be working for some devices.
         } else if error?.code == -5 || error?.code == -7 {
             return .notInitialized
         } else {
