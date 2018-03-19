@@ -66,18 +66,28 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func stop() {
         log.debug("ItemSyncServiceImpl stop")
+        
         lastSyncedMD5s.removeAll()
-        status = .stoped
+        if status != .synced {
+            status = .stoped
+        }
     }
     
     func waitForWiFi() {
         log.debug("ItemSyncServiceImpl waitForWiFi")
+        
         lastSyncedMD5s.removeAll()
-        status = .waitingForWifi
+        
+        let hasItemsToSync = CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image)
+        
+        if hasItemsToSync {
+            status = .waitingForWifi
+        }
     }
     
     func fail() {
         log.debug("ItemSyncServiceImpl fail")
+        
         lastSyncedMD5s.removeAll()
         status = .failed
     }
@@ -173,9 +183,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     // MARK: - Override me
     
-    func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
-        //
-    }
+    func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {}
 
 }
 
