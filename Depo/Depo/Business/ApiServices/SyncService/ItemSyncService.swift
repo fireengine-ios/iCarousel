@@ -182,21 +182,22 @@ class ItemSyncServiceImpl: ItemSyncService {
 
 extension CoreDataStack {
     func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData]) -> Void) {
-        DispatchQueue.main.async {
-            let localItems = self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
-            
-            self.queue.async { [weak self] in
-                self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { items, error in
-                    guard error == nil, let unsyncedItems = items else {
-                        print(error!.localizedDescription)
-                        completion([])
-                        return
-                    }
-                    
-                    completion(unsyncedItems)
-                }
+        
+        backgroundContext.perform { [weak self] in
+            guard let `self` = self else {
+                completion([])
+                return
             }
-            
+            let localItems = self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
+            self.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { items, error in
+                guard error == nil, let unsyncedItems = items else {
+                    print(error!.localizedDescription)
+                    completion([])
+                    return
+                }
+                
+                completion(unsyncedItems)
+            }
         }
     }
     

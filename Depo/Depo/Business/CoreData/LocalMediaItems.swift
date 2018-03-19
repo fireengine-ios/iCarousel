@@ -19,17 +19,6 @@ struct MetaAssetInfo {
     }
 }
 
-//enum DBSortType {
-//    case dateUp(Date?)
-//    case dateDown(Date?)
-//    case lettersAZ(String?)
-//    case lettersZA(String?)
-//    case sizeAZ(UInt64?)
-//    case sizeZA(UInt64?)
-//    case metaDateTimeUp(Date?)
-//    case metaDateTimeDown(Date?)
-//}
-
 typealias LocalFilesCallBack = (_ localFiles: [WrapData]) -> Void
 
 extension CoreDataStack {
@@ -64,9 +53,8 @@ extension CoreDataStack {
         
         let localMediaStorage = LocalMediaStorage.default
 
-        let newBgcontext = self.newChildBackgroundContext
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
-        let notSaved = self.listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
+        let notSaved = listAssetIdIsNotSaved(allList: assetsList, context: newChildBackgroundContext)
     
         let start = Date()
         
@@ -77,7 +65,7 @@ extension CoreDataStack {
             return
         }
         print("All local files started  \((start)) seconds")
-        save(items: notSaved, context: newBgcontext) { [weak self] in
+        save(items: notSaved, context: newChildBackgroundContext) { [weak self] in
             print("All local files added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
@@ -88,8 +76,11 @@ extension CoreDataStack {
                        pageRemoteItems: [Item], paginationEnd: Bool,
                        firstPage: Bool,
                        filesCallBack: @escaping LocalFilesCallBack) {
-        log.info("getLocalFilesForPhotoVideoPage()")
+        
         log.debug("getLocalFilesForPhotoVideoPage()")
+        
+        
+        
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                     in: backgroundContext)
@@ -99,7 +90,7 @@ extension CoreDataStack {
         if pageRemoteItems.isEmpty {
             if let localItems = try? backgroundContext.fetch(request),
                 (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
-                log.info("pageRemoteItems.isEmpty let localItems = try? backgroundContext.fetch(request)")
+                
                 log.debug("pageRemoteItems.isEmpty let localItems = try? backgroundContext.fetch(request)")
                 let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                 filesCallBack(wrapedLocalItems)
@@ -293,7 +284,7 @@ extension CoreDataStack {
 
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
 
-        queue.async { [weak self] in
+        context.perform { [weak self] in
             LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] assetsInfo in
                 autoreleasepool {
                     var addedObjects = [WrapData]()
@@ -301,7 +292,7 @@ extension CoreDataStack {
                         autoreleasepool {
                             let wrapedItem =  WrapData(info: element)
                             _ = MediaItem(wrapData: wrapedItem, context: context)
-                        
+                            
                             addedObjects.append(wrapedItem)
                         }
                     }
@@ -318,7 +309,7 @@ extension CoreDataStack {
                     self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
                     
                 }
-               
+                
             })
         }
     }
@@ -339,16 +330,21 @@ extension CoreDataStack {
         guard assetIdList.count > 0 else {
             return
         }
-        DispatchQueue.main.async {
-            let context = self.mainContext//newChildBackgroundContext
-
-            let predicate = NSPredicate(format: "localFileID IN %@", assetIdList)
-            let items:[MediaItem] = self.executeRequest(predicate: predicate, context:context)
-
-            items.forEach { context.delete($0) }
+        backgroundContext.perform { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+//            let context = self.mainContext//newChildBackgroundContext
             
-            self.saveDataForContext(context: context)
+            let predicate = NSPredicate(format: "localFileID IN %@", assetIdList)
+            let items:[MediaItem] = self.executeRequest(predicate: predicate, context: self.backgroundContext)
+            
+            items.forEach { self.backgroundContext.delete($0) }
+            
+            self.saveDataForContext(context: self.backgroundContext)
         }
+        
+        
         
     }
     
@@ -395,14 +391,18 @@ extension CoreDataStack {
     }
     
     func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], context: NSManagedObjectContext) {
-        let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", actualPhotoLibItemsIDs)
-        let allNonAccurateSavedLocalFiles: [MediaItem] = executeRequest(predicate: predicate,
-                                                            context: context)
-        
-        allNonAccurateSavedLocalFiles.forEach {
-            context.delete($0)
+        context.perform { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", actualPhotoLibItemsIDs)
+            let allNonAccurateSavedLocalFiles: [MediaItem] = self.executeRequest(predicate: predicate,
+                                                                            context: context)
+            allNonAccurateSavedLocalFiles.forEach {
+                context.delete($0)
+            }
+            let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
+            ItemOperationManager.default.deleteItems(items: items)
         }
-        let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
-        ItemOperationManager.default.deleteItems(items: items)
     }
 }

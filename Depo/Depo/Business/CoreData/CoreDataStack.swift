@@ -57,8 +57,8 @@ class CoreDataStack: NSObject {
     
     var backgroundContext: NSManagedObjectContext
     
-    let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")//, attributes: .concurrent)//DispatchQueue(label: "com.lifebox.CoreDataStack")
-    let contextSavingQueue = DispatchQueue(label: "com.lifebox.CoreDataStackSaving")
+//    let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")//, attributes: .concurrent)//DispatchQueue(label: "com.lifebox.CoreDataStack")
+//    let contextSavingQueue = DispatchQueue(label: "com.lifebox.CoreDataStackSaving")
     
     var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     
@@ -66,8 +66,6 @@ class CoreDataStack: NSObject {
         
         mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        
-//        contextSavingQueue.
         
         super.init()
         mainContext.persistentStoreCoordinator = persistentStoreCoordinator
@@ -77,8 +75,6 @@ class CoreDataStack: NSObject {
     func clearDataBase() {
         deleteRemoteFiles()
     }
-    
-//    func
     
     func deleteRemoteFiles() {
         // Album has remote status by default for now
@@ -95,7 +91,7 @@ class CoreDataStack: NSObject {
     }
 
     func deleteLocalFiles() {
-        DispatchQueue.main.async {
+        
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
             let predicateRules = PredicateRules()
             guard let predicate = predicateRules.predicate(filters: [.localStatus(.local)]) else {
@@ -103,7 +99,7 @@ class CoreDataStack: NSObject {
             }
             fetchRequest.predicate = predicate
             self.deleteObjects(fromFetch: fetchRequest)
-        }
+        
     }
     
     func getLocalDuplicates(remoteItems: [Item]) -> [Item] {
@@ -119,13 +115,6 @@ class CoreDataStack: NSObject {
         return localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
     }
 
-    /// MAYBE WILL BE NEED
-//    private func deleteAllObjects(forEntity entity: NSEntityDescription) {
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
-//        fetchRequest.entity = entity
-//        deleteObjects(fromFetch: fetchRequest)
-//    }
-    
     private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>]) {
         for fetchRequest in fetchRequests {
             self.deleteObjects(fromFetch: fetchRequest)
@@ -149,20 +138,16 @@ class CoreDataStack: NSObject {
     }
     
     func saveMainContext() {
-        log.info("saveMainContext()")
-        log.debug("saveMainContext()")
         mainContext.processPendingChanges()
         if mainContext.hasChanges {
             mainContext.performAndWait{
                 do {
-                    log.info("mainContext.save()()")
                     log.debug("mainContext.save()()")
                     try mainContext.save()
 //                    if !self.inProcessAppendingLocalFiles {
 //                        //TODO: some NOTIFICATION OR ACTUAL finished block
 //                    }
                 } catch {
-                    log.info("Error saving context mainContext.save()()")
                     log.debug("Error saving context mainContext.save()()")
                     print("Error saving context ___ ")
                 }
@@ -172,35 +157,30 @@ class CoreDataStack: NSObject {
     
     @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true) {
 
-        log.info("saveDataForContext()")
         log.debug("saveDataForContext()")
         let saveBlock: VoidHandler = { [weak self] in
             guard let `self` = self else {
                 return
             }
             do {
-                log.info("saveDataForContext() save()")
                 log.debug("saveDataForContext() save()")
                 try context.save()
-                if !self.inProcessAppendingLocalFiles {
-                    //TODO: some NOTIFICATION OR ACTUAL finished block
-                }
+//                if !self.inProcessAppendingLocalFiles {
+//                    //TODO: some NOTIFICATION OR ACTUAL finished block
+//                }
             } catch {
+                log.debug("saveDataForContext() save() Error saving contex")
                 print("Error saving context ___ ")
             }
             
             if context.parent == self.mainContext, context != self.mainContext {
-                DispatchQueue.main.async {
-                    self.saveMainContext()
-                }
+                self.saveMainContext()
                 return
             }
         }
         
         if context.hasChanges {
-            contextSavingQueue.sync {
-                context.perform(saveBlock)
-            }
+            context.perform(saveBlock)
         }
     }
 }

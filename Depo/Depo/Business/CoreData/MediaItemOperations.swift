@@ -71,7 +71,12 @@ extension CoreDataStack {
     }
     
     func updateLocalItemSyncStatus(item: Item) {
-        DispatchQueue.main.async {
+        backgroundContext.perform { [weak self] in
+            
+            guard let `self` = self else {
+                return
+            }
+            
             let predicateForRemoteFile = NSPredicate(format: "uuidValue == %@", item.uuid)
             let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: self.mainContext)
             
