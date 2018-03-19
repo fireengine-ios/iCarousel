@@ -458,7 +458,6 @@ struct TextConstants {
     static let uploadFromLifeBoxTitle = NSLocalizedString("Upload from lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadFromLifeBoxNextButton = NSLocalizedString("Next", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadFromLifeBoxNoSelectedPhotosError = NSLocalizedString("Sorry, but photos not selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let failWhileuploadFromLifeBoxCopy = NSLocalizedString("Fail while uploading from LifeBox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Select Folder
     static let selectFolderNextButton = NSLocalizedString("Select", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
