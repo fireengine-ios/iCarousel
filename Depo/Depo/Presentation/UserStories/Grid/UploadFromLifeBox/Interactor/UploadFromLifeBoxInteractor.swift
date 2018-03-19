@@ -49,7 +49,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
             }, fail: { [weak self] fail in
                 DispatchQueue.main.async {
                     if let `self` = self {
-                        self.output.asyncOperationFail(errorMessage: TextConstants.failWhileuploadFromLifeBoxCopy)
+                        self.output.asyncOperationFail(errorMessage: fail.description)
                     }
                 }
             })
