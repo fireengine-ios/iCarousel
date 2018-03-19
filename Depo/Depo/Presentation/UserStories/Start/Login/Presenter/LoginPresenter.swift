@@ -129,7 +129,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         plus ? view.enterPhoneCountryCode(countryCode: countryCode) : view.incertPhoneCountryCode(countryCode: code)
     }
     
-    
     // MARK: - EULA
     
     func onSuccessEULA() {
@@ -138,13 +137,28 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
             DispatchQueue.main.async {
                 self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
             }
-            
-        }) { [weak self] in
+        }, end: { [weak self] in
             DispatchQueue.main.async {
                 self?.customProgressHUD.hideProgressSpinner()
-                self?.router.goToSyncSettingsView()
+                self?.openEmptyEmailIfNeedOrOpenSyncSettings()
             }
+        })
+    }
+    
+    private func openEmptyEmailIfNeedOrOpenSyncSettings() {
+        if interactor.isShowEmptyEmail {
+            openEmptyEmail()
+        } else {
+            router.goToSyncSettingsView()
         }
+    }
+    
+    private func openEmptyEmail() {
+        let vc = EmailEnterController.initFromNib()
+        vc.approveCancelHandler = { [weak self] in
+            self?.router.goToSyncSettingsView()
+        }
+        RouterVC().presentViewController(controller: vc)
     }
     
     func onFailEULA() {
@@ -194,14 +208,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         }
         self.textEnterVC = textEnterVC
         RouterVC().presentViewController(controller: textEnterVC)
-    }
-    
-    func openEmptyEmail() {
-        let vc = EmailEnterController.initFromNib()
-        vc.approveCancelHandler = { [weak self] in
-            
-        }
-        RouterVC().presentViewController(controller: vc)
     }
     
     func successed(tokenUpdatePhone: SignUpSuccessResponse) {

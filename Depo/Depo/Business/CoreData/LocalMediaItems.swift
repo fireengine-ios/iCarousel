@@ -12,7 +12,7 @@ import Photos
 extension CoreDataStack {
     
     @objc func appendLocalMediaItems(progress: AppendingLocaclItemsProgressCallback?,
-                                     _ end: AppendingLocaclItemsFinishCallback?) {
+                                     end: AppendingLocaclItemsFinishCallback?) {
         let queue = DispatchQueue(label: "Append Local Item ")
         queue.async {
             let localMediaStorage = LocalMediaStorage.default

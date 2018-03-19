@@ -23,6 +23,8 @@ class LoginInteractor: LoginInteractorInput {
     private var password: String?
     private var atachedCaptcha: CaptchaParametrAnswer?
     
+    var isShowEmptyEmail = false
+    
     /// from 0 to 11 = 12 attempts
     private let maxAttemps: Int = 11
     
@@ -102,10 +104,7 @@ class LoginInteractor: LoginInteractorInput {
                     self.atachedCaptcha = atachedCaptcha
                     self.output?.openEmptyPhone()
                 } else if self.isEmptyEmailError(for: errorResponse) {
-                    self.login = login
-                    self.password = password
-                    self.atachedCaptcha = atachedCaptcha
-                    self.output?.openEmptyEmail()
+                    self.isShowEmptyEmail = true
                 } else {
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
