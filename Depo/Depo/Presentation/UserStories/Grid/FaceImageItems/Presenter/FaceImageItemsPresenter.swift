@@ -73,12 +73,14 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         dataSource.isHeaderless = true
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     override func getContentWithFail(errorString: String?) {
         super.getContentWithFail(errorString: errorString)
         
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
