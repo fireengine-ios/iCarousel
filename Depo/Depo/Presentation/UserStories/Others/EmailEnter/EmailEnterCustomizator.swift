@@ -13,9 +13,6 @@ final class EmailEnterCustomizator: NSObject {
     @IBOutlet private weak var approveButton: BlueButtonWithWhiteText! {
         didSet {
             approveButton.isExclusiveTouch = true
-            //            approveButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            //            approveButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-            //            approveButton.setTitleColor(ColorConstants.blueColor.darker(), for: .highlighted)
             approveButton.setTitle(TextConstants.approve, for: .normal)
         }
     }

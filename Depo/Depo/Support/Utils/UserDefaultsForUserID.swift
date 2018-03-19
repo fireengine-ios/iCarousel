@@ -9,15 +9,23 @@
 import Foundation
 
 final class UserDefaultsForUserID {
+    private let userID: String
     
-    static func set(_ object: Any, for key: String) {
+    init(userID: String) {
+        self.userID = userID
+    }
+    
+    func set(_ object: Any, for key: String) {
         var dict = UserDefaults.standard.object(forKey: key) as? [String: Any] ?? [:]
-        dict[SingletonStorage.shared.unigueUserID] = object
+        dict[userID] = object
         UserDefaults.standard.set(dict, forKey: key)
     }
     
-    static func object(for key: String) -> Any? {
+    func object(for key: String) -> Any? {
         let dict = UserDefaults.standard.object(forKey: key) as? [String: Any]
-        return dict?[SingletonStorage.shared.unigueUserID]
+        return dict?[userID]
     }
+}
+extension UserDefaultsForUserID {
+    static let shared = UserDefaultsForUserID(userID: SingletonStorage.shared.unigueUserID)
 }

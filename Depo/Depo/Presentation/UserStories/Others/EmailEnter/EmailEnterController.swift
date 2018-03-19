@@ -8,18 +8,18 @@
 
 import UIKit
 
-final class EmailEnterController: UIViewController, NibInit {
-    
-    deinit {
-        print("- deint EmailEnterController")
-    }
+final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
     
     @IBOutlet private var customizator: EmailEnterCustomizator!
     @IBOutlet private weak var emailTextField: UnderlineTextField!
     
-    private lazy var attemptsCounter = SavingAttemptsCounterByUnigueUserID(limit: NumericConstants.emptyEmailUserCloseLimit, userDefaultsKey: "EmailSavingAttemptsCounter", limitHandler: {
-        self.attemptsCounter.reset()
-        AppConfigurator.logout()
+    private lazy var attemptsCounter = SavingAttemptsCounterByUnigueUserID(
+        limit: NumericConstants.emptyEmailUserCloseLimit,
+        userDefaultsKey: "EmailSavingAttemptsCounter",
+        limitHandler: { [weak self] in
+            self?.attemptsCounter.reset()
+            self?.view.endEditing(true)
+            AppConfigurator.logout()
     })
     
     private lazy var authService = AuthenticationService()
@@ -30,8 +30,9 @@ final class EmailEnterController: UIViewController, NibInit {
     }
     
     @objc private func actionCloseButton(_ sender: UIBarButtonItem) {
-        attemptsCounter.up()
-        closeAnimated()
+        if attemptsCounter.up() {
+            closeAnimated()
+        }
     }
     
     override func viewDidLoad() {
@@ -39,7 +40,7 @@ final class EmailEnterController: UIViewController, NibInit {
         
         emailTextField.becomeFirstResponder()
         title = TextConstants.emptyEmailTitle
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "CloseCardIconWhite"), style: .plain, target: self, action: #selector(actionCloseButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.exitWhite, style: .plain, target: self, action: #selector(actionCloseButton))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,13 +49,14 @@ final class EmailEnterController: UIViewController, NibInit {
     }
     
     private func closeAnimated() {
+        view.endEditing(true)
         dismiss(animated: true) {
             self.approveCancelHandler?()
         }
     }
     
     private func verifyMail() {
-        guard let email = emailTextField.text, email.isEmpty else {
+        guard let email = emailTextField.text, !email.isEmpty else {
             showErrorAlert(message: TextConstants.registrationCellPlaceholderEmail)
             return
         }
@@ -77,10 +79,5 @@ final class EmailEnterController: UIViewController, NibInit {
                     self?.hideSpiner()
                 }
         })
-    }
-    
-    func showErrorAlert(message: String) {
-        let vc = PopUpController.with(errorMessage: message)
-        present(vc, animated: false, completion: nil)
     }
 }

@@ -12,8 +12,8 @@ final class SavingAttemptsCounterByUnigueUserID {
     
     private let userDefaultsKey: String
     private var attempts: Int {
-        get { return UserDefaultsForUserID.object(for: userDefaultsKey) as? Int ?? 0 }
-        set { UserDefaultsForUserID.set(newValue, for: userDefaultsKey) }
+        get { return UserDefaultsForUserID.shared.object(for: userDefaultsKey) as? Int ?? 0 }
+        set { UserDefaultsForUserID.shared.set(newValue, for: userDefaultsKey) }
     }
     
     private let limit: Int
@@ -28,12 +28,15 @@ final class SavingAttemptsCounterByUnigueUserID {
         self.limitHandler = limitHandler
     }
     
-    func up() {
+    @discardableResult
+    func up() -> Bool {
         attempts += 1
         if attempts >= limit {
             reset()
             limitHandler()
+            return false
         }
+        return true
     }
     
     func reset() {

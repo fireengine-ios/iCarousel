@@ -29,7 +29,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lW5-zg-yKb" userLabel="Insets View">
-                                    <rect key="frame" x="30" y="30" width="260" height="111"/>
+                                    <rect key="frame" x="30" y="30" width="260" height="101"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Jn-Ma-14r">
                                             <rect key="frame" x="0.0" y="0.0" width="260" height="21"/>
@@ -44,9 +44,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZJv-1L-0Ej" customClass="UnderlineTextField" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="51" width="260" height="60"/>
+                                            <rect key="frame" x="0.0" y="51" width="260" height="50"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="60" id="pyO-aC-BBu"/>
+                                                <constraint firstAttribute="height" constant="50" id="pyO-aC-BBu"/>
                                             </constraints>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -69,7 +69,7 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5u-7h-WiS" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="89" y="171" width="142" height="54"/>
+                                    <rect key="frame" x="89" y="161" width="142" height="54"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="54" id="dcq-eC-3JN"/>
                                         <constraint firstAttribute="width" constant="142" id="oRC-QQ-Lij"/>

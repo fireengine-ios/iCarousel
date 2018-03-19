@@ -32,6 +32,7 @@ final class UnderlineTextField: UITextField {
     
     private func setup() {
         layer.addSublayer(underlineLayer)
+        contentVerticalAlignment = .bottom
     }
     
     override func layoutSubviews() {
