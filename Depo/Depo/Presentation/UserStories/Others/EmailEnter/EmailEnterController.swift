@@ -17,7 +17,7 @@ final class EmailEnterController: UIViewController, NibInit {
     @IBOutlet private var customizator: EmailEnterCustomizator!
     @IBOutlet private weak var emailTextField: UnderlineTextField!
     
-    private lazy var attemptsCounter = SavingAttemptsCounter(limit: NumericConstants.emptyEmailUserCloseLimit, userDefaultsKey: "EmailSavingAttemptsCounter", limitHandler: {
+    private lazy var attemptsCounter = SavingAttemptsCounterByUnigueUserID(limit: NumericConstants.emptyEmailUserCloseLimit, userDefaultsKey: "EmailSavingAttemptsCounter", limitHandler: {
         self.attemptsCounter.reset()
         AppConfigurator.logout()
     })
@@ -29,9 +29,22 @@ final class EmailEnterController: UIViewController, NibInit {
         verifyMail()
     }
     
-    @IBAction private func actionCloseButton(_ sender: UIButton) {
+    @objc private func actionCloseButton(_ sender: UIBarButtonItem) {
         attemptsCounter.up()
         closeAnimated()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        emailTextField.becomeFirstResponder()
+        title = TextConstants.emptyEmailTitle
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "CloseCardIconWhite"), style: .plain, target: self, action: #selector(actionCloseButton))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
     }
     
     private func closeAnimated() {

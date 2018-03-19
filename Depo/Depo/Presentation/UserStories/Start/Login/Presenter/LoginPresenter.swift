@@ -146,11 +146,12 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     private func openEmptyEmailIfNeedOrOpenSyncSettings() {
-        if interactor.isShowEmptyEmail {
-            openEmptyEmail()
-        } else {
-            router.goToSyncSettingsView()
-        }
+        openEmptyEmail()
+//        if interactor.isShowEmptyEmail {
+//            openEmptyEmail()
+//        } else {
+//            router.goToSyncSettingsView()
+//        }
     }
     
     private func openEmptyEmail() {
@@ -158,7 +159,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         vc.approveCancelHandler = { [weak self] in
             self?.router.goToSyncSettingsView()
         }
-        RouterVC().presentViewController(controller: vc)
+        let navVC = UINavigationController(rootViewController: vc)
+        RouterVC().presentViewController(controller: navVC)
     }
     
     func onFailEULA() {

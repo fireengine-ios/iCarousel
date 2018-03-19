@@ -360,6 +360,7 @@ struct TextConstants {
     static let userProfileEditButton = NSLocalizedString("Edit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileDoneButton = NSLocalizedString("Done", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let emptyEmail = NSLocalizedString("E-mail is empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let emptyEmailTitle = NSLocalizedString("E-Mail Entry", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: fileInfo
     static let fileInfoFileNameTitle = NSLocalizedString("File Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
