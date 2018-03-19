@@ -122,8 +122,8 @@ class CoreDataStack: NSObject {
     }
     
     private func deleteObjects(fromFetch fetchRequest: NSFetchRequest<NSFetchRequestResult>) {
-//        let context = mainContext
-        backgroundContext.perform {
+        let context = backgroundContext
+        backgroundContext.perform { [weak self] in
             guard let fetchResult = try? context.fetch(fetchRequest),
                 let unwrapedObjects = fetchResult as? [NSManagedObject],
                 unwrapedObjects.count > 0 else {
@@ -131,9 +131,9 @@ class CoreDataStack: NSObject {
                     return
             }
             for object in unwrapedObjects {
-                backgroundContext.delete(object)
+                context.delete(object)
             }
-            saveDataForContext(context: context, saveAndWait: true)
+            self?.saveDataForContext(context: context, saveAndWait: true)
             debugPrint("Data base should be cleared any moment now")
         }
     }
