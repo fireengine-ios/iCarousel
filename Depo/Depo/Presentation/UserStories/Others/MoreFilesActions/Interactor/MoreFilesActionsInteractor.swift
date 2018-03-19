@@ -331,6 +331,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 return
             }
             
+            //case when moving file from main folder to main folder
+            if itemsFolders.isEmpty && folder.isEmpty {
+                folderSelector.dismiss(animated: true, completion: {
+                    self?.output?.showWrongFolderPopup()
+                })
+                return
+            }
+            
             self?.output?.operationStarted(type: .move)
             self?.fileService.move(items: item, toPath: folder,
                                    success: { [weak self] in
