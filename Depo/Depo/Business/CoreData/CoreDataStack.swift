@@ -122,19 +122,20 @@ class CoreDataStack: NSObject {
     }
     
     private func deleteObjects(fromFetch fetchRequest: NSFetchRequest<NSFetchRequestResult>) {
-        let context = mainContext
-        
-        guard let fetchResult = try? context.fetch(fetchRequest),
-            let unwrapedObjects = fetchResult as? [NSManagedObject],
-            unwrapedObjects.count > 0 else {
-                
-                return
+//        let context = mainContext
+        backgroundContext.perform {
+            guard let fetchResult = try? context.fetch(fetchRequest),
+                let unwrapedObjects = fetchResult as? [NSManagedObject],
+                unwrapedObjects.count > 0 else {
+                    
+                    return
+            }
+            for object in unwrapedObjects {
+                backgroundContext.delete(object)
+            }
+            saveDataForContext(context: context, saveAndWait: true)
+            debugPrint("Data base should be cleared any moment now")
         }
-        for object in unwrapedObjects {
-            context.delete(object)
-        }
-        saveDataForContext(context: context, saveAndWait: true)
-        debugPrint("Data base should be cleared any moment now")
     }
     
     func saveMainContext() {

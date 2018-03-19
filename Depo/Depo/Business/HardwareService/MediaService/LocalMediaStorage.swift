@@ -526,7 +526,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         switch asset.mediaType {
         case .image:
             return fullInfoAboutImageAsset(asset: asset)
-            
+
         case . video:
             return fullInfoAboutVideoAsset(asset: asset)
         

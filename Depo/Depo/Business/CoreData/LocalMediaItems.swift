@@ -36,7 +36,7 @@ extension CoreDataStack {
     }
     
     func append(localMediaItems: [PHAsset], completion: @escaping ()->Void) {
-        let newBgcontext = self.newChildBackgroundContext
+        let newBgcontext = backgroundContext//self.newChildBackgroundContext
         save(items: localMediaItems, context: newBgcontext, completion: {})
     }
     
@@ -54,7 +54,7 @@ extension CoreDataStack {
         let localMediaStorage = LocalMediaStorage.default
 
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
-        let notSaved = listAssetIdIsNotSaved(allList: assetsList, context: newChildBackgroundContext)
+        let notSaved = listAssetIdIsNotSaved(allList: assetsList, context: backgroundContext)
     
         let start = Date()
         
@@ -65,7 +65,7 @@ extension CoreDataStack {
             return
         }
         print("All local files started  \((start)) seconds")
-        save(items: notSaved, context: newChildBackgroundContext) { [weak self] in
+        save(items: notSaved, context: backgroundContext) { [weak self] in
             print("All local files added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
