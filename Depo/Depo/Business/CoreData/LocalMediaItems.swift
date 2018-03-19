@@ -291,6 +291,7 @@ extension CoreDataStack {
                     assetsInfo.forEach { element in
                         autoreleasepool {
                             let wrapedItem =  WrapData(info: element)
+                            log.debug("LocalMediaItem save(items: assetsInfo.forEach { element in")
                             _ = MediaItem(wrapData: wrapedItem, context: context)
                             
                             addedObjects.append(wrapedItem)
@@ -298,7 +299,7 @@ extension CoreDataStack {
                     }
                     
                     self?.saveDataForContext(context: context, saveAndWait: true)
-                    
+                    log.debug("LocalMediaItem saveDataForContext(")
                     ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
                     
                     

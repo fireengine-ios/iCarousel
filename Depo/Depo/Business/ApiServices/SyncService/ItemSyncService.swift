@@ -206,7 +206,7 @@ extension CoreDataStack {
             handler([], nil)
             return
         }
-        
+        log.debug("LocalMediaStorage compareRemoteItems")
         var localItems = localItems
         var localMd5s = localItems.map { $0.md5 }
         
