@@ -67,8 +67,8 @@ final class FeedbackViewController: UIViewController, FeedbackViewInput, DropDov
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let dy = (view.frame.size.height - allertView.frame.size.height) * 0.5
-        bottomConstraint.constant = dy
+
+        bottomConstraint.constant = (view.frame.height - allertView.frame.height) * 0.5
         view.layoutIfNeeded()
         animateView()
     }
