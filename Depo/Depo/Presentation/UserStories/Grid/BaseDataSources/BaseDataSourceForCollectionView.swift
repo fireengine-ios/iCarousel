@@ -1001,18 +1001,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func getIndexPathForObject(objectUUID: String) -> IndexPath? {
         var indexPath: IndexPath? = nil
-        var section = 0
-        var row = 0
         let items = getAllObjects()
-        for array in items {
-            
-            for arraysObject in array {
+        
+        for (section, array) in items.enumerated() {
+            for (row, arraysObject) in array.enumerated() {
                 if arraysObject.uuid == objectUUID {
                     indexPath = IndexPath(row: row, section: section)
                 }
-                row += 1
             }
-            section += 1
         }
         return indexPath
     }
@@ -1029,18 +1025,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func getIndexPathForLocalObject(objectUUID: String) -> IndexPath? {
         var indexPath: IndexPath? = nil
-        var section = 0
-        var row = 0
         let items = getAllObjects()
-        for array in items {
-            
-            for arraysObject in array {
+        
+        for (section, array) in items.enumerated() {
+            for (row, arraysObject) in array.enumerated() {
                 if arraysObject.uuid == objectUUID, arraysObject.isLocalItem {
                     indexPath = IndexPath(row: row, section: section)
                 }
-                row += 1
             }
-            section += 1
         }
         return indexPath
     }

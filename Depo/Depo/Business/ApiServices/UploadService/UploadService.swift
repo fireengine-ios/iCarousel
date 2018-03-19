@@ -638,13 +638,14 @@ class UploadOperations: Operation {
         
         baseUrl(success: { [weak self] baseurlResponse in
             guard let `self` = self,
-                let baseurlResponse = baseurlResponse else {
+                let baseurlResponse = baseurlResponse,
+                let responseURL = baseurlResponse.url else {
                 customFail(ErrorResponse.string(TextConstants.commonServiceError))
                 return
             }
             
             let uploadParam = Upload(item: self.item,
-                                     destitantion: baseurlResponse.url!,
+                                     destitantion: responseURL,
                                       uploadStategy: self.uploadStategy,
                                       uploadTo: self.uploadTo,
                                       rootFolder: self.folder,
