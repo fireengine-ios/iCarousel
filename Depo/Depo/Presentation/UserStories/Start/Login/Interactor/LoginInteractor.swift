@@ -101,6 +101,11 @@ class LoginInteractor: LoginInteractorInput {
                     self.password = password
                     self.atachedCaptcha = atachedCaptcha
                     self.output?.openEmptyPhone()
+                } else if self.isEmptyEmailError(for: errorResponse) {
+                    self.login = login
+                    self.password = password
+                    self.atachedCaptcha = atachedCaptcha
+                    self.output?.openEmptyEmail()
                 } else {
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
@@ -171,6 +176,10 @@ class LoginInteractor: LoginInteractorInput {
     
     private func isEmptyPhoneError(for errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains(HeaderConstant.emptyMSISDN)
+    }
+    
+    private func isEmptyEmailError(for errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains(HeaderConstant.emptyEmail)
     }
     
     private func checkInternetConnection() -> Bool {

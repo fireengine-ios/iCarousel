@@ -3017,6 +3017,7 @@
 		CEB27349205BE3DC00E1AE9C /* EmailEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */; };
 		CEB2734C205BF56600E1AE9C /* EmailEnterCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734B205BF56600E1AE9C /* EmailEnterCustomizator.swift */; };
 		CEB2734E205BF57B00E1AE9C /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */; };
+		CEB27350205F997700E1AE9C /* SavingAttemptsCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734F205F997700E1AE9C /* SavingAttemptsCounter.swift */; };
 		CEB76EB01FE9094700B679EB /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB76EAF1FE9094600B679EB /* UIScrollView+Refresh.swift */; };
 		CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
 		CEBB2DD61F76550A00D725F0 /* String+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9A5FA1F23308800ED8610 /* String+Int.swift */; };
@@ -5043,6 +5044,7 @@
 		CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailEnterController.xib; sourceTree = "<group>"; };
 		CEB2734B205BF56600E1AE9C /* EmailEnterCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailEnterCustomizator.swift; sourceTree = "<group>"; };
 		CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineTextField.swift; sourceTree = "<group>"; };
+		CEB2734F205F997700E1AE9C /* SavingAttemptsCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAttemptsCounter.swift; sourceTree = "<group>"; };
 		CEB76EAF1FE9094600B679EB /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
 		CEB996CE1F0770470074E264 /* RequestsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsKey.swift; sourceTree = "<group>"; };
 		CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Bytes.swift"; sourceTree = "<group>"; };
@@ -7486,6 +7488,7 @@
 				CE3318DF1EFCF9D600E25989 /* Device */,
 				CE0596F220385E940083D6FC /* ImageFormat.swift */,
 				CE3A3002200F4B030028C900 /* Validator.swift */,
+				CEB2734F205F997700E1AE9C /* SavingAttemptsCounter.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -15061,6 +15064,7 @@
 				E197FC956A2CBF90DCEB2E3D /* SelectNameInteractorOutput.swift in Sources */,
 				463A9A904E22B54222190099 /* SelectNameInteractor.swift in Sources */,
 				9807260D203468D9004E1505 /* SearchDataSource.swift in Sources */,
+				CEB27350205F997700E1AE9C /* SavingAttemptsCounter.swift in Sources */,
 				54702BD5C12348C54DF56381 /* SelectNameRouterInput.swift in Sources */,
 				CE2F561D1F7552A900F49DA1 /* PackagesRouterInput.swift in Sources */,
 				B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */,

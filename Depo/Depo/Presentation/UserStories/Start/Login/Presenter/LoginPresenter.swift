@@ -196,6 +196,14 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         RouterVC().presentViewController(controller: textEnterVC)
     }
     
+    func openEmptyEmail() {
+        let vc = EmailEnterController.initFromNib()
+        vc.approveCancelHandler = { [weak self] in
+            
+        }
+        RouterVC().presentViewController(controller: vc)
+    }
+    
     func successed(tokenUpdatePhone: SignUpSuccessResponse) {
         referenceToken = tokenUpdatePhone.referenceToken
         textEnterVC?.stopLoading()

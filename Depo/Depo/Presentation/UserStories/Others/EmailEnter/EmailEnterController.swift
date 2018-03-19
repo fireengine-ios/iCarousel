@@ -10,63 +10,40 @@ import UIKit
 
 final class EmailEnterController: UIViewController, NibInit {
     
+    deinit {
+        print("- deint EmailEnterController")
+    }
+    
     @IBOutlet private var customizator: EmailEnterCustomizator!
     
 //    @IBOutlet private weak var approveButton: UIButton!
     @IBOutlet private weak var emailTextField: UnderlineTextField!
     
-    private lazy var attemptsCounter = SavingAttemptsCounter(limit: NumericConstants.emptyEmailUserCloseLimit, limitHandler: { 
+    private lazy var attemptsCounter = SavingAttemptsCounter(limit: NumericConstants.emptyEmailUserCloseLimit, userDefaultsKey: "EmailSavingAttemptsCounter", limitHandler: {
+        self.attemptsCounter.reset()
         AppConfigurator.logout()
     })
+    
+    var approveCancelHandler: VoidHandler? 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
+    private func closeAnimated() {
+        dismiss(animated: true, completion: {
+            self.approveCancelHandler?()
+        })
+    }
+    
     @IBAction private func actionApproveButton(_ sender: UIButton) {
         print("actionApproveButton")
+        closeAnimated()
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {
         attemptsCounter.up()
-        dismiss(animated: true, completion: nil)
-    }
-}
-
-final class SavingAttemptsCounter {
-    
-    static func uniqueID(function: String = #function, file: String = #file, line: Int = #line) -> String {
-        return "\(function).\(file).\(line)"
-    }
-    
-    private let userDefaultsKey: String
-    private var attempts: Int {
-        get { return UserDefaults.standard.integer(forKey: userDefaultsKey) }
-        set { UserDefaults.standard.set(newValue, forKey: userDefaultsKey) }
-    }
-    
-    private let limit: Int
-    private let limitHandler: VoidHandler
-    
-    init(limit: Int,
-         userDefaultsKey: String = SavingAttemptsCounter.uniqueID(),
-         limitHandler: @escaping VoidHandler)
-    {
-        self.userDefaultsKey = userDefaultsKey
-        self.limit = limit
-        self.limitHandler = limitHandler
-    }
-    
-    func up() {
-        attempts += 1
-        if attempts >= limit {
-            reset()
-            limitHandler()
-        }
-    }
-    
-    func reset() {
-        attempts = 0
+        closeAnimated()
     }
 }
