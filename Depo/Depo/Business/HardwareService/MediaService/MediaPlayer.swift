@@ -83,6 +83,7 @@ final class MediaPlayer: NSObject {
         //player.appliesMediaSelectionCriteriaAutomatically = false
         setupPlayerTimeObserver()
         setupPlayerObservers()
+        setupHeadphoneObserver()
     }
     
     private func setupPlayerTimeObserver() {
@@ -134,6 +135,26 @@ final class MediaPlayer: NSObject {
             play()
         } else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), player.currentItem?.status == .readyToPlay {
             play()
+        }
+    }
+    
+    private func setupHeadphoneObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(headphoneRemoved),
+                                               name: NSNotification.Name.AVAudioSessionRouteChange,
+                                               object: nil)
+    }
+    
+    @objc private func headphoneRemoved(notification:NSNotification) {
+        guard let audioRouteChangeReason = notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt else {return}
+        
+        switch audioRouteChangeReason {
+        case AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue:
+            DispatchQueue.main.async {
+                self.pause()
+            }
+        default:
+            break
         }
     }
     
