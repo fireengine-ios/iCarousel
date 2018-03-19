@@ -191,6 +191,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.appendCollectionView(items: [])
         dataSource.reloadData()
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     func getContentWithSuccess(items: [WrapData]) {
@@ -208,6 +209,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         dataSource.reloadData()
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
@@ -225,6 +227,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             dataSource.reloadData()
         }
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     func isArrayDataSource() -> Bool {
@@ -321,6 +324,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func didDelete(items: [BaseDataSourceItem]) {
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     func updateCoverPhotoIfNeeded() { }
@@ -376,6 +380,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             view.hideNoFiles()
         }
+    }
+    
+    func updateThreeDotsButton() {
+        view.setThreeDotsMenu(active: !needShowNoFileView())
     }
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
