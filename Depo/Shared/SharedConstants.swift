@@ -10,6 +10,8 @@ import Foundation
 
 
 struct SharedConstants {
+    private init() {}
+    
     static let groupIdentifier = "group.come.life.Lifebox"
     
     static let wormholeDirectoryIdentifier = "wormhole"

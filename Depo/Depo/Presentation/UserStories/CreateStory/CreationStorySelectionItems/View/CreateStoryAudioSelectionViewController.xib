@@ -29,7 +29,6 @@
                 <outlet property="startCreatingFilesButton" destination="UTy-IA-Avr" id="Sud-hD-HCs"/>
                 <outlet property="topBarContainer" destination="Stl-Nh-W5a" id="rEa-AX-y5Q"/>
                 <outlet property="topIOS10Contraint" destination="f5N-jL-CYf" id="uJT-Dm-COb"/>
-                <outlet property="topIOS11Contraint" destination="VHU-J3-eKm" id="GVP-W5-Von"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Mx3-n5-cYr"/>
             </connections>
         </placeholder>
