@@ -129,6 +129,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         super.viewDidAppear(animated)
         configurateNavigationBar()
         configurateViewForPopUp()
+        output.updateThreeDotsButton()
     }
     
     func configurateViewForPopUp() {
@@ -259,6 +260,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func setThreeDotsMenu(active isActive: Bool) {
         navigationItem.rightBarButtonItem?.isEnabled = isActive
+        
+        if let threeDotsItem = navigationItem.rightBarButtonItems?.first(where: {$0.accessibilityLabel == TextConstants.accessibilityMore}) {
+            threeDotsItem.isEnabled = isActive
+        }        
     }
     
     func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
