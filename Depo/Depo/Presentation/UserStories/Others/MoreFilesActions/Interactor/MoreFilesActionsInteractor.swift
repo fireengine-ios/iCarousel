@@ -324,7 +324,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let folderSelector = selectFolderController()
         
         folderSelector.selectFolder(select: { [weak self] folder in
-            if itemsFolders.contains(folder) {
+            if itemsFolders.contains(folder) ||
+                //case when moving file from main folder to main folder
+                itemsFolders.isEmpty && folder.isEmpty{
                 folderSelector.dismiss(animated: true, completion: {
                     self?.output?.showWrongFolderPopup()
                 })
