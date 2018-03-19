@@ -7,11 +7,11 @@
 //
 
 enum MyStreamType: Int {
-    case albums = 0
-    case story
-    case people
+    case people = 0
     case things
     case places
+    case story
+    case albums
     case album
     
     var title: String {

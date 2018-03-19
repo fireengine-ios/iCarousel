@@ -44,7 +44,7 @@ import CoreTelephony
                 return nil
             }
         } else {
-            return String(format: "%-%", mcc_, mnc_ )
+            return String(format: "%@-%@", mcc_, mnc_ )
         }
     }
     

@@ -16,7 +16,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var isChangeVisibilityMode: Bool = false
     
-    private var visibilityItems: [WrapData] = []
     private var allItmes: [WrapData] = []
     
     override func viewIsReady(collectionView: UICollectionView) {        
@@ -86,6 +85,16 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     override func needShowNoFileView() -> Bool {
         return dataSource.allMediaItems.isEmpty
+    }
+    
+    // MARK: - BaseDataSourceForCollectionViewDelegate
+    
+    override func didDelete(items: [BaseDataSourceItem]) {
+        reloadData()
+    }
+    
+    override func updateCoverPhotoIfNeeded() {
+        reloadData()
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

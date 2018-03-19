@@ -42,7 +42,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0a-Fb-cdS">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="237"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEu-DX-PF4">
@@ -58,7 +58,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eMi-2n-lOY">
-                            <rect key="frame" x="0.0" y="77" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="50" width="375" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" id="aZo-no-IqB"/>
@@ -68,7 +68,7 @@
                             </constraints>
                         </tableView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qlX-Jm-OtF" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
-                            <rect key="frame" x="58.5" y="120" width="257" height="54"/>
+                            <rect key="frame" x="58.5" y="93" width="257" height="54"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="54" id="WVk-C7-sHk">
                                     <variation key="widthClass=regular" constant="64"/>
@@ -83,7 +83,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytR-ZC-xBW" customClass="ButtonWithCorner" customModule="lifebox" customModuleProvider="target">
-                            <rect key="frame" x="138.5" y="191" width="99" height="29"/>
+                            <rect key="frame" x="138.5" y="164" width="99" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="99" id="fIg-o5-sm2"/>
                                 <constraint firstAttribute="height" constant="29" id="zbt-Cl-Yqs">
@@ -110,7 +110,7 @@
                         <constraint firstItem="qlX-Jm-OtF" firstAttribute="centerX" secondItem="Qwb-4L-VLL" secondAttribute="centerX" id="P8l-cK-fre"/>
                         <constraint firstItem="eMi-2n-lOY" firstAttribute="centerX" secondItem="Qwb-4L-VLL" secondAttribute="centerX" id="RHg-60-Izy"/>
                         <constraint firstItem="qlX-Jm-OtF" firstAttribute="top" secondItem="eMi-2n-lOY" secondAttribute="bottom" priority="250" constant="43" id="XWJ-uC-dzr"/>
-                        <constraint firstItem="eMi-2n-lOY" firstAttribute="top" secondItem="NEu-DX-PF4" secondAttribute="bottom" constant="27" id="fbQ-yH-Jt9"/>
+                        <constraint firstItem="eMi-2n-lOY" firstAttribute="top" secondItem="NEu-DX-PF4" secondAttribute="bottom" id="fbQ-yH-Jt9"/>
                         <constraint firstItem="NEu-DX-PF4" firstAttribute="top" secondItem="Qwb-4L-VLL" secondAttribute="top" constant="20" id="kwK-jo-ffO">
                             <variation key="widthClass=regular" constant="207"/>
                         </constraint>

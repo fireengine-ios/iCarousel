@@ -87,27 +87,24 @@ struct RouteRequests {
     static let peopleMerge = "/api/person/%d"
     static let peopleChangeName = "/api/person/label/%d"
     static let peopleDeletePhotos = "/api/person/photo/delete/%d"
-    static let peopleDeletePhoto = "/person/photo/%d/%d"
+//    static let peopleDeletePhoto = "/person/photo/%d/%d"
     static let things = "/api/object/"
     static let thingsThumbnails = "/api/object/thumbnails"
     static let thingsPage = "/api/object/page?pageSize=%d&pageNumber=%d"
     static let thingsAlbum = "/api/album?contentType=album/object&sortBy=createdDate&sortOrder=DESC&page=0&size=1&objectInfoId=%d"
     static let thingsDeletePhotos = "/api/object/photo/%d"
-    static let thingsDeletePhoto = "/api/object/photo/%d/%d"
+//    static let thingsDeletePhoto = "/api/object/photo/%d/%d"
     static let places = "/api/location/"
     static let placesThumbnails = "/api/location/thumbnails"
     static let placesPage = "/api/location/page?pageSize=%d&pageNumber=%d"
     static let placesAlbum = "/api/album?contentType=album/location&sortBy=createdDate&sortOrder=DESC&page=0&size=1&locationInfoId=%d"
-    static let placesDeletePhotos = "/api/location/%d"
+//    static let placesDeletePhotos = "/api/location/%d"
     
     //MARK : Share
-    
     static let share = "/api/share/%@"
     
     //MARK : Faq 
-    
-    static let faqUrl = "api/faq/url/%@"
-    static let faqContentUrl = "http://mylifebox.life.com.by/#!/settings/info/en"
+    static let faqContentUrl = "http://mylifebox.life.com.by/faq/?lang=%@"
 
     // MARK: - Contacts
     static let getContacts = "contact?sortField=firstname&sortOrder=ASC&maxResult=16&currentPage=%d"

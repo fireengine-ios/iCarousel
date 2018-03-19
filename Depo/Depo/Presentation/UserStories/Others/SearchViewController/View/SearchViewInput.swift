@@ -27,4 +27,7 @@ protocol SearchViewInput: class {
     
     func showSpinner()
     func hideSpinner()
+    
+    func setEnabledSearchBar(_ isEnabled: Bool)
+    func setVisibleTabBar(_ isVisible: Bool)
 }

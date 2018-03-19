@@ -70,7 +70,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
         startButton.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
         skipButton.setTitle(TextConstants.autoSyncskipForNowButton, for: .normal)
         
-        dataSource.configurateTable(table: tableView, tableHConstraint: tableHConstaint)
+        dataSource.setup(table: tableView, with: tableHConstaint)
         dataSource.delegate = self
         
         output.viewIsReady()

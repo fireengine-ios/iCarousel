@@ -177,6 +177,7 @@ class RouterVC: NSObject {
     }
     
     func presentViewController(controller: UIViewController) {
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         if let lastViewController = getViewControllerForPresent() {
             if controller.popoverPresentationController?.sourceView == nil,
                 controller.popoverPresentationController?.barButtonItem == nil {

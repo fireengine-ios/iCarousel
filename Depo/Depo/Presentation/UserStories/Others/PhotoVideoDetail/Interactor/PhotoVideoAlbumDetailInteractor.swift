@@ -72,7 +72,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                 }
             }
         }
-            
+        
         output.didRemoveFromAlbum(completion: okHandler)
     }
 
@@ -96,7 +96,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                 }
             }
         }
-            
+        
         output.didRemoveFromAlbum(completion: okHandler)
     }
     
