@@ -33,8 +33,8 @@ class ItemSyncServiceImpl: ItemSyncService {
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
         didSet {
-            debugPrint("AUTOSYNC: \(fileType) status = \(status)")
             if oldValue != status {
+                debugPrint("AUTOSYNC: \(fileType) status = \(status)")
                 postNotification()
             }
         }
