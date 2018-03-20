@@ -9,11 +9,14 @@
 class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     weak var output: MoreFilesActionsInteractorOutput?
-    private var fileService = WrapItemFileService()
     
     lazy var player: MediaPlayer = factory.resolve()
-    let photosAlbumService = PhotosAlbumService()
     
+    private let router = RouterVC()
+    
+    private var fileService = WrapItemFileService()
+    private let photosAlbumService = PhotosAlbumService()
+    private let albumService = PhotosAlbumService()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
     
@@ -79,7 +82,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             controler.popoverPresentationController?.sourceRect = tempoRect
         }
         
-        let router = RouterVC()
         router.presentViewController(controller: controler)
     }
     
@@ -119,9 +121,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     if let tempoRect = sourceRect {//if ipad
                         activityVC.popoverPresentationController?.sourceRect = tempoRect
                     }
-                    
-                    let router = RouterVC()
-                    router.presentViewController(controller: activityVC)
+
+                    self?.router.presentViewController(controller: activityVC)
                 }
             }, fail: { [weak self] errorMessage in
                 self?.output?.operationFailed(type: .share, message: errorMessage)
@@ -140,7 +141,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func shareViaLink(sourceRect: CGRect?) {
         output?.operationStarted(type: .share)
-        fileService.share(sharedFiles: sharingItems, success: {[weak self] url in
+        fileService.share(sharedFiles: sharingItems, success: { [weak self] url in
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: .share)
                 
@@ -151,8 +152,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     activityVC.popoverPresentationController?.sourceRect = tempoRect
                 }
                 
-                let router = RouterVC()
-                router.presentViewController(controller: activityVC)
+                self?.router.presentViewController(controller: activityVC)
             }
             
         }, fail: failAction(elementType: .share))
@@ -160,8 +160,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool) {
         self.output?.operationFinished(type: .info)
-        
-        let router = RouterVC()
         
         if let infoController = router.fileInfo as? FileInfoViewController, let object = item.first {
             infoController.interactor.setObject(object: object)
@@ -194,7 +192,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self.cropyController = vc
             
             complition?()
-            RouterVC().presentViewController(controller: vc)
+            self.router.presentViewController(controller: vc)
         }
     }
     
@@ -211,10 +209,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             guard let albums = albums as? [AlbumItem] else { return }
             self?.output?.operationStarted(type: .completelyDeleteAlbums)
             let albumService = PhotosAlbumService()
-            albumService.completelyDelete(albums: DeleteAlbums(albums: albums), success: {
+            albumService.completelyDelete(albums: albums, success: { deletedAlbums in
                 DispatchQueue.main.async { [weak self] in
                     self?.output?.operationFinished(type: .completelyDeleteAlbums)
-                    ItemOperationManager.default.albumsDeleted(albums: albums)
+                    ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
                 }
             }, fail: { [weak self] errorRespone in
                 DispatchQueue.main.async {
@@ -232,7 +230,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                 vc.close(completion: okHandler)
         })
         
-        RouterVC().presentViewController(controller: controller)
+        router.presentViewController(controller: controller)
     }
     
     private func deleteItems(items: [Item]) {
@@ -254,24 +252,25 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                 vc.close(completion: okHandler)
         })
         
-        RouterVC().presentViewController(controller: controller)
-        RouterVC().hideSpiner()
+        router.presentViewController(controller: controller)
+        router.hideSpiner()
     }
     
     private func deleteAlbumbs(albumbs: [AlbumItem]) {
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .removeFromAlbum)
-            let albumService = PhotosAlbumService()
-            albumService.deleteAlbums(deleteAlbums: DeleteAlbums(albums: albumbs), success: { [weak self] in
+
+            self?.albumService.delete(albums: albumbs, success: { [weak self] deletedAlbums in
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .removeAlbum)
-                    ItemOperationManager.default.albumsDeleted(albums: albumbs)
+                    ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
                 }
             }, fail: { [weak self] errorRespone in
                 DispatchQueue.main.async {
                     self?.output?.operationFailed(type: .removeAlbum, message: errorRespone.description)
                 }
             })
+
         }
         
         let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
@@ -283,17 +282,21 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                 vc.close(completion: okHandler)
         })
         
-        RouterVC().presentViewController(controller: controller)
+        router.presentViewController(controller: controller)
     }
     
     private func deleteFromAlbums(items: [BaseDataSourceItem]) {
         let okHandler: VoidHandler = { [weak self] in
-            self?.output?.operationStarted(type: .removeFromAlbum)
-            let album = RouterVC().getParentUUID()
+            guard let album = self?.router.getParentUUID(),
+                let items = items as? [Item] else {
+                return
+            }
             
-            let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items as! [Item])
+            self?.output?.operationStarted(type: .removeFromAlbum)
+            
+            let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items)
             PhotosAlbumService().deletePhotosFromAlbum(parameters: parameters, success: { [weak self] in
-                ItemOperationManager.default.filesRomovedFromAlbum(items: items as! [Item], albumUUID: album)
+                ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: album)
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .removeFromAlbum)
                 }
@@ -313,7 +316,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                 vc.close(completion: okHandler)
         })
         
-        RouterVC().presentViewController(controller: controller)
+        router.presentViewController(controller: controller)
     }
     
     func move(item: [BaseDataSourceItem], toPath: String) {
@@ -366,7 +369,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func selectFolderController() -> SelectFolderViewController {
-        let router = RouterVC()
         if let tabBarVC = UIApplication.topController() as? TabBarViewController,
             let currentVC = tabBarVC.currentViewController as? BaseFilesGreedViewController {
             return router.selectFolder(folder: nil, sortRule: currentVC.getCurrentSortRule())
@@ -401,10 +403,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func createStory(items: [BaseDataSourceItem]) {
-        let router = RouterVC()
-        sync(items: items, action: {
-            DispatchQueue.main.async {
-                router.createStoryName(items: items)
+        sync(items: items, action: { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                self?.router.createStoryName(items: items)
             }
         }, cancel: {}, fail: { errorResponse in
             UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
@@ -432,11 +433,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     // Photo Action
     
     func addToAlbum(items: [BaseDataSourceItem]) {
-        sync(items: items, action: {
-            let router = RouterVC()
-            let vc = router.addPhotosToAlbum(photos: items)
-            DispatchQueue.main.async {
-                router.pushOnPresentedView(viewController: vc)
+        sync(items: items, action: { [weak self] in
+            if let vc = self?.router.addPhotosToAlbum(photos: items) {
+                DispatchQueue.main.async { [weak self] in
+                    self?.router.pushOnPresentedView(viewController: vc)
+                }
             }
         }, cancel: {}, fail: { errorResponse in
             UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
@@ -499,7 +500,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func albumDetails(items: [BaseDataSourceItem]) {
-        let router = RouterVC()
         let albumDetailVC = router.fileInfo as? FileInfoViewController
         albumDetailVC?.interactor.setObject(object: items.first!)
         router.pushViewController(viewController: albumDetailVC!)

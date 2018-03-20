@@ -155,6 +155,7 @@ class AlbumService: RemoteItemsService {
 
 
 typealias PhotosAlbumOperation = () -> Swift.Void
+typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Swift.Void
 typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Swift.Void
 typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Swift.Void
 
@@ -171,33 +172,39 @@ class PhotosAlbumService: BaseRequestService {
         executePostRequest(param: createAlbum, handler: handler)
     }
     
-    func deleteAlbums(deleteAlbums: DeleteAlbums, success: PhotosAlbumOperation?, fail: FailResponse?) {
+    func delete(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
         log.debug("PhotosAlbumService deleteAlbums")
 
-        let albums = deleteAlbums.albums.filter { $0.readOnly == nil || $0.readOnly! == false }
-        
-        guard !albums.isEmpty else {
+        let deleteAlbums = albums.filter { $0.readOnly == nil || $0.readOnly! == false }
+        guard !deleteAlbums.isEmpty else {
             fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
             return
         }
         
+        let params = DeleteAlbums(albums: deleteAlbums)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             log.debug("PhotosAlbumService deleteAlbums success")
 
-            success?()
+            success?(deleteAlbums)
         }, fail: fail)
-        executeDeleteRequest(param: deleteAlbums, handler: handler)
+        executeDeleteRequest(param: params, handler: handler)
     }
     
-    func completelyDelete(albums: DeleteAlbums, success: PhotosAlbumOperation?, fail: FailResponse?) {
+    func completelyDelete(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
         log.debug("PhotosAlbumService completelyDelete")
-
-        loadAllItemsFrom(albums: albums.albums) { items in
+        
+        let deleteAlbums = albums.filter { $0.readOnly == nil || $0.readOnly! == false }
+        guard !deleteAlbums.isEmpty else {
+            fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
+            return
+        }
+        
+        loadAllItemsFrom(albums: deleteAlbums) { items in
             log.debug("PhotosAlbumService loadAllItemsFrom")
 
             let fileService = WrapItemFileService()
             fileService.delete(deleteFiles: items, success: nil, fail: nil)
-            self.deleteAlbums(deleteAlbums: albums, success: success, fail: fail)
+            self.delete(albums: deleteAlbums, success: success, fail: fail)
         }
     }
     
