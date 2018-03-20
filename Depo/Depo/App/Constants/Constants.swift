@@ -755,11 +755,6 @@ struct TextConstants {
     static let accessibilityDone = NSLocalizedString("Done", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let photos = NSLocalizedString("photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
-    // MARK: - Languages Display Values
-    static let turkishLanguageDisplayValue = NSLocalizedString("Türkçe", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let englishLanguageDisplayValue = NSLocalizedString("English", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let arabicLanguageDisplayValue = NSLocalizedString("العربية", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
 
