@@ -141,7 +141,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             count += album.videoCount ?? 0
             folderSizeLabel.text = String(count)
             
-            if let readOnly = album.readOnly, readOnly {
+            if album.readOnly == true {
                 fileName.isEnabled = false
             }
         }

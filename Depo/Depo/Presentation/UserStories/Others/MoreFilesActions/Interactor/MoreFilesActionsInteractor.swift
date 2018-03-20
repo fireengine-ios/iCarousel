@@ -209,8 +209,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             guard let albums = albums as? [AlbumItem] else { return }
             self?.output?.operationStarted(type: .completelyDeleteAlbums)
             let albumService = PhotosAlbumService()
-            albumService.completelyDelete(albums: albums, success: { deletedAlbums in
-                DispatchQueue.main.async { [weak self] in
+            albumService.completelyDelete(albums: albums, success: { [weak self] deletedAlbums in
+                DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .completelyDeleteAlbums)
                     ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
                 }
@@ -404,7 +404,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func createStory(items: [BaseDataSourceItem]) {
         sync(items: items, action: { [weak self] in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 self?.router.createStoryName(items: items)
             }
         }, cancel: {}, fail: { errorResponse in
@@ -435,7 +435,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func addToAlbum(items: [BaseDataSourceItem]) {
         sync(items: items, action: { [weak self] in
             if let vc = self?.router.addPhotosToAlbum(photos: items) {
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.main.async {
                     self?.router.pushOnPresentedView(viewController: vc)
                 }
             }
