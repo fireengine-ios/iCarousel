@@ -174,6 +174,13 @@ class PhotosAlbumService: BaseRequestService {
     func deleteAlbums(deleteAlbums: DeleteAlbums, success: PhotosAlbumOperation?, fail: FailResponse?) {
         log.debug("PhotosAlbumService deleteAlbums")
 
+        let albums = deleteAlbums.albums.filter { $0.readOnly == nil || $0.readOnly! == false }
+        
+        guard !albums.isEmpty else {
+            fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
+            return
+        }
+        
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             log.debug("PhotosAlbumService deleteAlbums success")
 
