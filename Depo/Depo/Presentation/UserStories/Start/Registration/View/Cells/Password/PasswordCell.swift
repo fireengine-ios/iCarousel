@@ -33,6 +33,8 @@ class PasswordCell: ProtoInputTextCell {
                 title = TextConstants.showPassword
             }
             textInput.isSecureTextEntry = newValue
+            textInput.font = nil
+            textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
             showBtn.setTitle(title, for: .normal)
         }
     }
