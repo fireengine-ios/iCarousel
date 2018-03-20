@@ -12,6 +12,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     var router: LoginRouterInput!
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     var optInVC: OptInController?
     var textEnterVC: TextEnterController?
@@ -152,7 +153,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     private func openEmptyEmail() {
-        UserDefaultsVars.emptyEmailUp = true
+        storageVars.emptyEmailUp = true
         let vc = EmailEnterController.initFromNib()
         vc.approveCancelHandler = { [weak self] in
             self?.router.goToSyncSettingsView()

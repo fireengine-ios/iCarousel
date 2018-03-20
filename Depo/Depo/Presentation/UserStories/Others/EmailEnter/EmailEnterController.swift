@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// doc https://wiki.life.com.by/display/LTFizy/Empty+e-mail+iOS
 final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
     
     @IBOutlet private var customizator: EmailEnterCustomizator!

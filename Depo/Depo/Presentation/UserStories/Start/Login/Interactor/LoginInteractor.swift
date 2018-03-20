@@ -14,6 +14,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
+    private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var eulaService = EulaService()
     
     private var rememberMe: Bool = true
@@ -65,7 +66,7 @@ class LoginInteractor: LoginInteractorInput {
                                       rememberMe: true, //rememberMe,
                                       attachedCaptcha: atachedCaptcha)
         
-        UserDefaultsVars.currentUserID = login
+        storageVars.currentUserID = login
         
         authenticationService.login(user: user, sucess: { [weak self] in
             guard let `self` = self else {

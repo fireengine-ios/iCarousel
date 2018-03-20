@@ -1,5 +1,5 @@
 //
-//  UserDefaultsVars.swift
+//  StorageVars.swift
 //  Depo_LifeTech
 //
 //  Created by Bondar Yaroslav on 3/20/18.
@@ -8,13 +8,16 @@
 
 import Foundation
 
-final class UserDefaultsVars {
-    private static let userDefaults = UserDefaults.standard
+protocol StorageVars: class {
+    var currentUserID: String? { get set }
+    var emptyEmailUp: Bool { get set }
+}
+
+final class UserDefaultsVars: StorageVars {
+    private let userDefaults = UserDefaults.standard
     
-    static let emailSavingAttemptsCounterKey = "EmailSavingAttemptsCounter"
-    
-    private static let currentUserIDKey = "CurrentUserIDKey"
-    static var currentUserID: String? {
+    private let currentUserIDKey = "CurrentUserIDKey"
+    var currentUserID: String? {
         get { return userDefaults.string(forKey: currentUserIDKey) }
         set { userDefaults.set(newValue, forKey: currentUserIDKey) }
     }
@@ -22,8 +25,8 @@ final class UserDefaultsVars {
     /// need flag for SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
     /// when user logged in but drop app at EmailEnterController (func openEmptyEmail)
     /// used in AppConfigurator emptyEmailUpIfNeed()
-    private static let emptyEmailUpKey = "emptyEmailUpKey"
-    static var emptyEmailUp: Bool {
+    private let emptyEmailUpKey = "emptyEmailUpKey"
+    var emptyEmailUp: Bool {
         get { return userDefaults.bool(forKey: emptyEmailUpKey) }
         set { userDefaults.set(newValue, forKey: emptyEmailUpKey) }
     }

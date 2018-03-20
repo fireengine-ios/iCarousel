@@ -48,8 +48,10 @@ class AppConfigurator {
     }
     
     private class func emptyEmailUpIfNeed() {
-        if UserDefaultsVars.emptyEmailUp {
-            UserDefaultsVars.emptyEmailUp = false
+        let storageVars: StorageVars = factory.resolve()
+        
+        if storageVars.emptyEmailUp {
+            storageVars.emptyEmailUp = false
             let attemptsCounter = SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
             attemptsCounter.up(limitHandler: {
                 AuthenticationService().logout(async: false, success: nil)

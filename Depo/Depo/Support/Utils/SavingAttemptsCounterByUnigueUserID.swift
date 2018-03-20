@@ -24,7 +24,8 @@ final class SavingAttemptsCounterByUnigueUserID {
         self.userDefaultsKey = userDefaultsKey
         self.limit = limit
         
-        let userID = UserDefaultsVars.currentUserID ?? UUID().uuidString
+        let storageVars: StorageVars = factory.resolve()
+        let userID = storageVars.currentUserID ?? UUID().uuidString
         self.userDefaultsForUserID = UserDefaultsForUserID(userID: userID)
     }
     
@@ -47,5 +48,5 @@ final class SavingAttemptsCounterByUnigueUserID {
 extension SavingAttemptsCounterByUnigueUserID {
     static let emptyEmailCounter = SavingAttemptsCounterByUnigueUserID(
         limit: NumericConstants.emptyEmailUserCloseLimit,
-        userDefaultsKey: UserDefaultsVars.emailSavingAttemptsCounterKey)
+        userDefaultsKey: Keys.emailSavingAttemptsCounter)
 }

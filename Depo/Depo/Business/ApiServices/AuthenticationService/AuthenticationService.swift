@@ -237,6 +237,7 @@ class AuthenticationService: BaseRequestService {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     // MARK: - Login
     
@@ -339,8 +340,8 @@ class AuthenticationService: BaseRequestService {
             self.player.stop()
             self.cancellAllRequests()
             
-            UserDefaultsVars.currentUserID = nil
-            UserDefaultsVars.emptyEmailUp = false
+            self.storageVars.currentUserID = nil
+            self.storageVars.emptyEmailUp = false
             
             success?()
         }
