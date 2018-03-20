@@ -31,6 +31,7 @@ class LoginRouter: LoginRouterInput {
     }
     
     func goToSyncSettingsView() {
+        UserDefaultsVars.emptyEmailUp = false
         router.pushViewController(viewController: router.synchronyseScreen!)
     }
     

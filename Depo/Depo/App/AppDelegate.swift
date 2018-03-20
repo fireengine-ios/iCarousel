@@ -182,15 +182,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SyncServiceManager.shared.stopSync()
         UserDefaults.standard.synchronize()
         player.stop()
-        
-        if UIApplication.topController() is EmailEnterController {
-            let attemptsCounter = SavingAttemptsCounterByUnigueUserID(limit: NumericConstants.emptyEmailUserCloseLimit,
-                                                                      userDefaultsKey: "EmailSavingAttemptsCounter")
-            attemptsCounter.up(limitHandler: {
-                attemptsCounter.reset()
-                AppConfigurator.logout()
-            })
-        }
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {

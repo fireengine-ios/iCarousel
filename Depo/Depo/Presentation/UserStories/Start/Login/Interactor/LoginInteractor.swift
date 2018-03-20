@@ -65,10 +65,13 @@ class LoginInteractor: LoginInteractorInput {
                                       rememberMe: true, //rememberMe,
                                       attachedCaptcha: atachedCaptcha)
         
+        UserDefaultsVars.currentUserID = login
+        
         authenticationService.login(user: user, sucess: { [weak self] in
             guard let `self` = self else {
                 return
             }
+            
             self.tokenStorage.isRememberMe = self.rememberMe
             DispatchQueue.main.async {
                 self.output?.succesLogin()

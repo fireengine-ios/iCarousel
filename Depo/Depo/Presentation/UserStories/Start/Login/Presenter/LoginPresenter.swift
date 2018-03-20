@@ -73,9 +73,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         router.goToRegistration()
     }
     
-    func viewAppeared() {
-//        interactor.prepareTimePassed()
-    }
+    func viewAppeared() {}
     
     func needShowCaptcha() {
         compliteAsyncOperationEnableScreen()
@@ -146,15 +144,15 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     private func openEmptyEmailIfNeedOrOpenSyncSettings() {
-        openEmptyEmail()
-//        if interactor.isShowEmptyEmail {
-//            openEmptyEmail()
-//        } else {
-//            router.goToSyncSettingsView()
-//        }
+        if interactor.isShowEmptyEmail {
+            openEmptyEmail()
+        } else {
+            router.goToSyncSettingsView()
+        }
     }
     
     private func openEmptyEmail() {
+        UserDefaultsVars.emptyEmailUp = true
         let vc = EmailEnterController.initFromNib()
         vc.approveCancelHandler = { [weak self] in
             self?.router.goToSyncSettingsView()

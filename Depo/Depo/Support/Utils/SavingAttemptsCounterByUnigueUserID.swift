@@ -10,10 +10,12 @@ import Foundation
 
 final class SavingAttemptsCounterByUnigueUserID {
     
+    private let userDefaultsForUserID: UserDefaultsForUserID
     private let userDefaultsKey: String
+    
     private var attempts: Int {
-        get { return UserDefaultsForUserID.shared.object(for: userDefaultsKey) as? Int ?? 0 }
-        set { UserDefaultsForUserID.shared.set(newValue, for: userDefaultsKey) }
+        get { return userDefaultsForUserID.object(for: userDefaultsKey) as? Int ?? 0 }
+        set { userDefaultsForUserID.set(newValue, for: userDefaultsKey) }
     }
     
     private let limit: Int
@@ -21,6 +23,9 @@ final class SavingAttemptsCounterByUnigueUserID {
     init(limit: Int, userDefaultsKey: String) {
         self.userDefaultsKey = userDefaultsKey
         self.limit = limit
+        
+        let userID = UserDefaultsVars.currentUserID ?? UUID().uuidString
+        self.userDefaultsForUserID = UserDefaultsForUserID(userID: userID)
     }
     
     @discardableResult
@@ -37,4 +42,10 @@ final class SavingAttemptsCounterByUnigueUserID {
     func reset() {
         attempts = 0
     }
+}
+
+extension SavingAttemptsCounterByUnigueUserID {
+    static let emptyEmailCounter = SavingAttemptsCounterByUnigueUserID(
+        limit: NumericConstants.emptyEmailUserCloseLimit,
+        userDefaultsKey: UserDefaultsVars.emailSavingAttemptsCounterKey)
 }

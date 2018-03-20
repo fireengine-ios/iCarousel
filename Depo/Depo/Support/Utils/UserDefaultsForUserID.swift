@@ -26,6 +26,3 @@ final class UserDefaultsForUserID {
         return dict?[key]
     }
 }
-extension UserDefaultsForUserID {
-    static let shared = UserDefaultsForUserID(userID: SingletonStorage.shared.unigueUserID)
-}

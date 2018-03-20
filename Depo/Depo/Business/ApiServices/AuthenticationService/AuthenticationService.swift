@@ -338,6 +338,10 @@ class AuthenticationService: BaseRequestService {
             SingletonStorage.shared.accountInfo = nil
             self.player.stop()
             self.cancellAllRequests()
+            
+            UserDefaultsVars.currentUserID = nil
+            UserDefaultsVars.emptyEmailUp = false
+            
             success?()
         }
         if async {
