@@ -131,20 +131,7 @@ extension CoreDataStack {
     }
     
     func hasLocalItemsForSync(video: Bool, image: Bool) -> Bool {
-        let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
-        let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap { $0.localIdentifier }
-        
-        var filesTypesArray = [Int16]()
-        if (video) {
-            filesTypesArray.append(FileType.video.valueForCoreDataMapping())
-        }
-        if (image) {
-            filesTypesArray.append(FileType.image.valueForCoreDataMapping())
-        }
-        
-        let context = mainContext
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
-        let items: [MediaItem] =  executeRequest(predicate: predicate, context: context)
+        let items = getUnsyncsedMediaItems(video: video, image: image)
 
         let currentUserID = SingletonStorage.shared.unigueUserID
         
@@ -157,20 +144,8 @@ extension CoreDataStack {
     }
     
     func allLocalItemsForSync(video: Bool, image: Bool) -> [WrapData] {
-        let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
-        let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap { $0.localIdentifier }
+        let items = getUnsyncsedMediaItems(video: video, image: image)
         
-        var filesTypesArray = [Int16]()
-        if (video) {
-            filesTypesArray.append(FileType.video.valueForCoreDataMapping())
-        }
-        if (image) {
-            filesTypesArray.append(FileType.image.valueForCoreDataMapping())
-        }
-
-        let context = backgroundContext
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
-        let items: [MediaItem] =  executeRequest(predicate: predicate, context: context)
         let sortedItems = items.sorted { item1, item2 -> Bool in
             item1.fileSizeValue < item2.fileSizeValue
         }
@@ -182,6 +157,23 @@ extension CoreDataStack {
         }
         
         return filtredArray.flatMap { $0.wrapedObject }
+    }
+    
+    private func getUnsyncsedMediaItems(video: Bool, image: Bool) -> [MediaItem] {
+        let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+        let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap { $0.localIdentifier }
+        
+        var filesTypesArray = [Int16]()
+        if (video) {
+            filesTypesArray.append(FileType.video.valueForCoreDataMapping())
+        }
+        if (image) {
+            filesTypesArray.append(FileType.image.valueForCoreDataMapping())
+        }
+        
+        let context = backgroundContext
+        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
+        return executeRequest(predicate: predicate, context: context)
     }
     
     func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], context: NSManagedObjectContext) {
