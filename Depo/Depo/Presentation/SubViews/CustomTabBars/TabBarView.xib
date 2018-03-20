@@ -44,10 +44,10 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0f-ko-odc" customClass="MusicBar" customModule="lifebox" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="528" width="375" height="70"/>
+                            <rect key="frame" x="0.0" y="598" width="375" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="70" id="oLW-8y-KOm"/>
+                                <constraint firstAttribute="height" id="oLW-8y-KOm"/>
                             </constraints>
                         </view>
                         <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="CustomTabBar" customModule="lifebox" customModuleProvider="target">
@@ -79,12 +79,12 @@
                         <constraint firstItem="HTg-Qb-BHM" firstAttribute="centerX" secondItem="FJl-Cl-AGP" secondAttribute="centerX" id="FKi-fA-q2I"/>
                         <constraint firstItem="i0i-at-wPy" firstAttribute="top" secondItem="FJl-Cl-AGP" secondAttribute="top" id="GsX-8P-b56"/>
                         <constraint firstItem="i0i-at-wPy" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="KUC-Ts-NXO"/>
-                        <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="i0i-at-wPy" secondAttribute="bottom" id="Mjl-HE-WsZ"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="W0f-ko-odc" secondAttribute="bottom" id="N1V-LQ-PIK"/>
                         <constraint firstAttribute="trailing" secondItem="i0i-at-wPy" secondAttribute="trailing" id="NOK-Ih-oLn"/>
                         <constraint firstAttribute="bottom" secondItem="Pdh-iF-uTx" secondAttribute="bottom" id="Nv2-yE-i9E"/>
                         <constraint firstAttribute="bottom" secondItem="HTg-Qb-BHM" secondAttribute="bottom" constant="10" id="fwk-B8-P1O"/>
                         <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="iee-hk-ssn"/>
+                        <constraint firstItem="W0f-ko-odc" firstAttribute="top" secondItem="i0i-at-wPy" secondAttribute="bottom" id="rlX-hu-WYO"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="uSv-rF-MBk"/>
                     </constraints>
                 </view>
