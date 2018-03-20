@@ -9,28 +9,7 @@
 class FeedbackViewInteractor: FeedbackViewInteractorInput {
 
     weak var output: FeedbackViewInteractorOutput!
-    
-    func viewIsReady() {
-        output.startAsyncOperation()
         
-        let obj = FeedbackLanguage()
-        FeedbackService().getFeedbackLanguage(feedbackLanguageParameter: obj, success: { [weak self] successResponce in
-            DispatchQueue.main.async {
-                guard let self_ = self else {
-                    return
-                }
-                
-                if let responce = successResponce as? FeedbackLanguagesListResponse {
-                    self_.output.languagesUploaded(lanuages: responce.languagesList)
-                }
-            }
-        }) { [weak self] fail in
-            DispatchQueue.main.async {
-                self?.output.fail(text: fail.localizedDescription)
-            }
-        }
-    }
-    
     func onSend(selectedLanguage: LanguageModel) {
         output.startAsyncOperation()
         
