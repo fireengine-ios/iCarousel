@@ -57,6 +57,7 @@ final class PackagesViewController: UIViewController {
     }
     
     @objc private func restorePurhases() {
+        startActivityIndicator()
         output.restorePurchasesPressed()
     }
     

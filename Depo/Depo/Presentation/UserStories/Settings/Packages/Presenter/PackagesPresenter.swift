@@ -94,7 +94,7 @@ extension PackagesPresenter: PackagesViewOutput {
     }
     
     func restorePurchasesPressed() {
-        
+        interactor.restorePurchases()
     }
 }
 

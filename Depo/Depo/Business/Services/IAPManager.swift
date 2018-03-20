@@ -81,6 +81,9 @@ extension IAPManager: SKProductsRequestDelegate {
 extension IAPManager: SKPaymentTransactionObserver {
     
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        var restoredIds: Set<String> = []
+        var restoreError: Error? = nil
+        
         for transaction in transactions {
             //let productId = transaction.payment.productIdentifier
             switch transaction.transactionState {
@@ -98,7 +101,11 @@ extension IAPManager: SKPaymentTransactionObserver {
                     purchaseHandler(.error(error))
                 }
             case .restored:
-                break
+                restoredIds.insert(transaction.payment.productIdentifier)
+                
+                if let error = transaction.error {
+                    restoreError = error
+                }
             case .purchasing:
                 break
             case .deferred:
@@ -107,13 +114,28 @@ extension IAPManager: SKPaymentTransactionObserver {
             
             SKPaymentQueue.default().finishTransaction(transaction)
         }
+        
+        if !restoredIds.isEmpty {
+            restorePurchasesCallback?(.success(restoredIds))
+        } else if let error = restoreError {
+            restorePurchasesCallback?(.fail(error))
+        }
     }
     
     public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-        print("- paymentQueueRestoreCompletedTransactionsFinished", queue)
+        debugPrint("- paymentQueueRestoreCompletedTransactionsFinished", queue)
+        
+        var purchasedIDs: Set<String> = []
+        queue.transactions.forEach { transaction in
+            let productId = transaction.payment.productIdentifier
+            purchasedIDs.insert(productId)
+            SKPaymentQueue.default().finishTransaction(transaction)
+        }
+        restorePurchasesCallback?(.success(purchasedIDs))
     }
     
     public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
-        print("- ", queue, error)
+        debugPrint("- ", queue, error)
+        restorePurchasesCallback?(.fail(error))
     }
 }

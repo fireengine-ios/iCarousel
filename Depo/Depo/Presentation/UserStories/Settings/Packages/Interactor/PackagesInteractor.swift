@@ -169,18 +169,25 @@ extension PackagesInteractor: PackagesInteractorInput {
         iapManager.purchase(offerApple: offerApple) { [weak self] result in
             switch result {
             case .success:
-                if let receipt = self?.iapManager.receipt, let productId = offerApple.storeProductIdentifier {
-                    self?.offersService.validateApplePurchase(with: receipt, productId: productId, success: nil) { _ in }
-                }
-                DispatchQueue.main.async {
-                    self?.output.successed(offerApple: offerApple)
-                }
+                self?.validatePurchase(offersApple: [offerApple])
             case .canceled: break
             case .error(let error):
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
                 }
             }
+        }
+    }
+    
+    private func validatePurchase(offersApple: [OfferApple]) {
+        offersApple.forEach { offer in
+            if let receipt = iapManager.receipt, let productId = offer.storeProductIdentifier {
+                offersService.validateApplePurchase(with: receipt, productId: productId, success: nil) { _ in }
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.output.successed(offerApples: offersApple)
         }
     }
     
@@ -305,7 +312,23 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
 
     func restorePurchases() {
-        iapManager
+        iapManager.restorePurchases { [weak self] result in
+            switch result {
+            case .success(let productIds):
+                var offers = [OfferApple]()
+                productIds.forEach({ productId in
+                    let offer = OfferApple()
+                    offer.storeProductIdentifier = productId
+                    offers.append(offer)
+                })
+                self?.validatePurchase(offersApple: offers)
+
+            case .fail(let error):
+                DispatchQueue.main.async {
+                    self?.output.failedUsage(with: ErrorResponse.error(error))
+                }
+            }
+        }
     }
     
     /// maybe will be need
