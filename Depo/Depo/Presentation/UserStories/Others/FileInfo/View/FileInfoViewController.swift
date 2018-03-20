@@ -188,6 +188,9 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         fileName.becomeFirstResponder()
     }
     
+    func goBack(){
+        self.navigationController?.popViewController(animated: true)
+    }
     
     // MARK: UITextFieldDelegate
     

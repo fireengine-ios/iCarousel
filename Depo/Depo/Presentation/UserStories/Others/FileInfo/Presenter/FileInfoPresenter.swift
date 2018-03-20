@@ -27,6 +27,7 @@ class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput,
     
     func updated() {
         asyncOperationSucces()
+        view.goBack()
     }
     
     //MARK : BasePresenter
