@@ -283,7 +283,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             }
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
-                self.musicBarHeightConstraint.constant = self.musicBarH
+                self.musicBarHeightConstraint.constant = self.musicBar.isHidden ? 0 : self.musicBarH
                 self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
             }, completion: { _ in
