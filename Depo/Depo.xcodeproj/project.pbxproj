@@ -3661,8 +3661,6 @@
 		7A66ADF0205A5FAD00D4CF83 /* LifeboxFileProvider-enterprise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "LifeboxFileProvider-enterprise.entitlements"; sourceTree = "<group>"; };
 		7A66ADF1205A5FCC00D4CF83 /* LifeboxFileProviderUI-enterprise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "LifeboxFileProviderUI-enterprise.entitlements"; sourceTree = "<group>"; };
 		7A7ECB6D4F000A77B89C5008 /* BaseFilesGreedConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedConfigurator.swift; sourceTree = "<group>"; };
-		7AC8AB46205BAE990053EC80 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
-		7AC8AB47205BAE990053EC80 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		7C00FE161F5957570041D041 /* AppRater.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AppRater.bundle; sourceTree = "<group>"; };
 		7C00FE171F5957570041D041 /* AppRater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppRater.h; sourceTree = "<group>"; };
 		7C00FE181F5957570041D041 /* AppRater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppRater.m; sourceTree = "<group>"; };
@@ -9415,8 +9413,6 @@
 				B54BFF33202B20250018AF82 /* TodayViewController.swift */,
 				B54BFF35202B20250018AF82 /* MainInterface.storyboard */,
 				B54BFF38202B20250018AF82 /* Info.plist */,
-				7AC8AB46205BAE990053EC80 /* Info-AppStore.plist */,
-				7AC8AB47205BAE990053EC80 /* Info-Enterprise.plist */,
 				B54BFF41202B264D0018AF82 /* Localizable.strings */,
 				B54BFF43202B2B350018AF82 /* TextConstants.swift */,
 			);
