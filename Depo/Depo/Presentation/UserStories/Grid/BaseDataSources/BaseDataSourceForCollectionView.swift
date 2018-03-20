@@ -96,7 +96,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     let filesDataSource = FilesDataSource()
     
     fileprivate var previousPreheatRect = CGRect.zero
-
+    
+    private var sortingRules: SortedRules
     
     private func canShowFolderFilters(filters: [GeneralFilesFiltrationType]) -> Bool {
         for filter in filters {
@@ -166,7 +167,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private func appendLocalItems(originalItemsArray: [WrapData], pageNum: Int, localFileasAppendedCallback: @escaping ([WrapData])->()) {
         log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems")
-        log.info("BaseDataSourceForCollectionViewDelegate appendLocalItems")
+        debugPrint("BaseDataSourceForCollectionViewDelegate appendLocalItems")
         var tempoArray = originalItemsArray
         
         if let unwrapedFilters = originalFilters,
@@ -228,15 +229,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                      debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
                                                                         
                 })
-                return
+//                return
             default:
                 localFileasAppendedCallback(originalItemsArray)
             }
         } else {
             localFileasAppendedCallback(originalItemsArray)
         }
- 
-        
+  
     }
     
     func compoundItems(pageItems: [WrapData], pageNum: Int) {
@@ -253,7 +253,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     return
                 }
                 log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems callback")
-                log.info("BaseDataSourceForCollectionViewDelegate appendLocalItems callback")
+                
                 self.allMediaItems.append(contentsOf: imbededwithLocalsItems)
                 self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
 //                  self.reloadData()
@@ -262,12 +262,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     if self.isPaginationDidEnd {
                         debugPrint("LastPage Reload compoundItems")
                     }
-                    debugPrint("Reload compoundItems")
                     log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems callback going to reload")
-                    log.info("BaseDataSourceForCollectionViewDelegate appendLocalItems callback going to reload")
+
                     self.collectionView?.reloadData()
                     self.delegate?.filesAppendedAndSorted()
-                    
                 }
             })
         }
@@ -455,28 +453,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             isLocalPaginationOn = false
         }
         log.debug("BaseDataSourceForCollectionViewDelegate appendCollectionView \(nonEmptyMetaItems.count)")
-        log.info("BaseDataSourceForCollectionViewDelegate appendCollectionView \(nonEmptyMetaItems.count)")
+        debugPrint("BaseDataSourceForCollectionViewDelegate appendCollectionView \(nonEmptyMetaItems.count)")
         allRemoteItems.append(contentsOf: nonEmptyMetaItems)
         compoundItems(pageItems: nonEmptyMetaItems, pageNum: pageNum)
     }
     
     func dropData() {
         log.debug("BaseDataSourceForCollectionViewDelegate dropData()")
-        log.info("BaseDataSourceForCollectionViewDelegate dropData()")
+        debugPrint("BaseDataSourceForCollectionViewDelegate dropData()")
         allItems.removeAll()
         allMediaItems.removeAll()
-//        allLocalItems.removeAll()
-//        allLocalItems.append(contentsOf: getAllLocalItems())
-//        DispatchQueue.main.async {
-//
-////            if self.isLocalOnly() {
-////                self.allItems = [self.allLocalItems]
-////            }
-////            self.reloadData()
-//        }
     }
-    
-    private var sortingRules: SortedRules
     
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
@@ -493,16 +480,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         registerHeaders()
         registerCells()
-        
-//        self.allLocalItems.removeAll()
-//        self.allLocalItems.append(contentsOf: self.getAllLocalItems())
-//
-//        DispatchQueue.main.async {
-//            if self.isLocalOnly() {
-//                self.allItems = [self.allLocalItems]
-//                self.reloadData()
-//            }
-//        }
     }
     
     private func registerCells() {
@@ -621,7 +598,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func reloadData() {
         DispatchQueue.main.async {
             log.debug("BaseDataSourceForCollectionViewDelegate reloadData")
-            log.info("BaseDataSourceForCollectionViewDelegate reloadData")
+            debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
             self.collectionView?.reloadData()
             self.resetCachedAssets()
         }
@@ -908,14 +885,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if isLastCell, isLastSection, !isPaginationDidEnd {
             self.delegate?.getNextItems()
             log.debug("BaseDataSourceForCollectionViewDelegate isLastCell, isLastSection, !isPaginationDidEnd ")
-            log.info("BaseDataSourceForCollectionViewDelegate isLastCell, isLastSection, !isPaginationDidEnd ")
+            debugPrint("BaseDataSourceForCollectionViewDelegate isLastCell, isLastSection, !isPaginationDidEnd ")
         }
         
         if isLocalPaginationOn, isLastCell, isLastSection,
             let lastItem = allMediaItems.last, !isLocalFilesRequested,
             allRemoteItems.isEmpty {
             log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems sLocalPaginationOn, isLastCell, isLastSection let lastItem = allMediaItems.last, !isLocalFilesRequested,")
-            log.info("BaseDataSourceForCollectionViewDelegate appendLocalItems sLocalPaginationOn, isLastCell, isLastSection let lastItem = allMediaItems.last, !isLocalFilesRequested,")
+            debugPrint("BaseDataSourceForCollectionViewDelegate appendLocalItems sLocalPaginationOn, isLastCell, isLastSection let lastItem = allMediaItems.last, !isLocalFilesRequested,")
             compoundItems(pageItems: [lastItem], pageNum: 0)
         }
         
