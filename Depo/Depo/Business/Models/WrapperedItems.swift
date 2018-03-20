@@ -814,6 +814,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         tmpDownloadUrl = url
         
+        var assetDuration : Double?
+        
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
             
@@ -823,7 +825,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
                 let urlToFile = URL(string: url)!
                 let tmp = LocalMediaContent(asset: asset,
                                              urlToFile: urlToFile)
-                mediaItem.metadata?.duration = asset.duration
+                assetDuration = asset.duration
+//                mediaItem.metadata?.duration = asset.duration
                 patchToPreview = .localMediaContent(tmp)
             } else {
                 // WARNIG: THIS CASE INCOREECTif 
@@ -863,7 +866,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         metaData?.favourite = mediaItem.favoritesValue
         //        metaData?.album = mediaItem.metadata?.album //FIXME: currently disabled
         metaData?.artist = mediaItem.metadata?.artist
-        metaData?.duration = mediaItem.metadata?.duration
+
+        metaData?.duration = (assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration
+        
         metaData?.genre = mediaItem.metadata?.genre ?? []
         metaData?.height = mediaItem.metadata?.height
         metaData?.title = mediaItem.metadata?.title

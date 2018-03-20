@@ -145,9 +145,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
     func reloadData() {
         log.debug("BaseFilesGreedPresenter reloadData")
-        log.info("BaseFilesGreedPresenter reloadData")
-        
-        
+        debugPrint("BaseFilesGreedPresenter reloadData")
+
         dataSource.dropData()
         dataSource.currentSortType = sortedRule
         dataSource.isHeaderless = (sortedRule == .sizeAZ || sortedRule == .sizeZA)

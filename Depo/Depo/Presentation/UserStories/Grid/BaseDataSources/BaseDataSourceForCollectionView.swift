@@ -242,7 +242,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func compoundItems(pageItems: [WrapData], pageNum: Int) {
         isLocalFilesRequested = true
         log.debug("BaseDataSourceForCollectionViewDelegate compoundItems")
-        log.info("BaseDataSourceForCollectionViewDelegate compoundItems")
+        debugPrint("BaseDataSourceForCollectionViewDelegate compoundItems")
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let `self` = self else {
@@ -269,7 +269,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             })
         }
-        
     }
     
     private func setupOneSectionMediaItemsArray(items: [WrapData]) {
