@@ -18,18 +18,18 @@ import UIKit
 
 class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
     
-    private var tableView: UITableView? = nil
-    private var titleLabel: UILabel? = nil
-    private var dropDovnImage: UIImageView? = nil
-    private var dropDovnButton: UIButton? = nil
-    private var cornerView: UIView? = nil
-    private var bgView: UIView? = nil
-    private var constraint: NSLayoutConstraint? = nil
+    private var tableView: UITableView?
+    private var titleLabel: UILabel?
+    private var dropDovnImage: UIImageView?
+    private var dropDovnButton: UIButton?
+    private var cornerView: UIView?
+    private var bgView: UIView?
+    private var constraint: NSLayoutConstraint?
     private var originTableViewH: CGFloat = 0
     
     var tableDataArray = [String]()
     var maxTableViewH: CGFloat = 100
-    var selectedString: String? = nil
+    var selectedString: String?
     
     weak var delegate: DropDovnViewDelegate?
     
@@ -166,7 +166,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.constraint!.constant = h
             self.cornerView!.setNeedsUpdateConstraints()
-        }) { [weak self] (flag) in
+        }) { [weak self] flag in
             self?.tableView!.isHidden = !show
             if show {
                 self?.delegate?.onDidShow?()
@@ -194,7 +194,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     
-    //MARK: UITableView delegate
+    // MARK: UITableView delegate
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -211,7 +211,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.dropDovnCellID, for: indexPath)
         let string = tableDataArray[indexPath.row]
-        guard let cell_ = cell as? DropDovnTableViewCell else{
+        guard let cell_ = cell as? DropDovnTableViewCell else {
             return cell
         }
         cell_.titleTextLabel!.text = string

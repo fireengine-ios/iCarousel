@@ -26,10 +26,10 @@ final class MediaPlayer: NSObject {
     }
     private var currentMetaData: BaseMetaData? {
         didSet {
-            currentArtist = currentMetaData?.artist ?? "Artist \(duration)"
-            currentMusicName = currentMetaData?.title ?? "Title \(duration)"
+            currentMusicName = currentMetaData?.title ?? currentItem?.name ?? " "
+            currentArtist = currentMetaData?.artist ?? " "
             
-            SDWebImageManager.shared().loadImage(with: currentMetaData?.mediumUrl, options: [], progress: nil) { [weak self] (image, data, error, type, result, url) in
+            SDWebImageManager.shared().loadImage(with: currentMetaData?.mediumUrl, options: [], progress: nil) { [weak self] image, data, error, type, result, url in
                 
                 if url == self?.currentMetaData?.mediumUrl, let image = image {
                     let artwork = MPMediaItemArtwork(image: image)
@@ -40,8 +40,8 @@ final class MediaPlayer: NSObject {
             }
         }
     }
-    var currentArtist = ""
-    var currentMusicName = ""
+    var currentArtist = " "
+    var currentMusicName = " "
     
     var list = [Item]()
     
@@ -83,6 +83,7 @@ final class MediaPlayer: NSObject {
         //player.appliesMediaSelectionCriteriaAutomatically = false
         setupPlayerTimeObserver()
         setupPlayerObservers()
+        setupHeadphoneObserver()
     }
     
     private func setupPlayerTimeObserver() {
@@ -108,15 +109,14 @@ final class MediaPlayer: NSObject {
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), options: [.new], context: nil)
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
 //        guard keyPath != nil else {
 //            return super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
 //        }
         
         if keyPath == #keyPath(AVPlayer.status) {
             play()
-        }
-        else if keyPath == #keyPath(AVPlayer.currentItem) {
+        } else if keyPath == #keyPath(AVPlayer.currentItem) {
             let index = chooseIndex(for: currentIndex)
             if items.count <= index || index < 0 {
                 return
@@ -131,12 +131,30 @@ final class MediaPlayer: NSObject {
             }
             
             play()
-        }
-        else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp), player.currentItem?.status == .readyToPlay, isPlaying {
+        } else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp), player.currentItem?.status == .readyToPlay, isPlaying {
+            play()
+        } else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), player.currentItem?.status == .readyToPlay {
             play()
         }
-        else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), player.currentItem?.status == .readyToPlay {
-            play()
+    }
+    
+    private func setupHeadphoneObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(headphoneRemoved),
+                                               name: NSNotification.Name.AVAudioSessionRouteChange,
+                                               object: nil)
+    }
+    
+    @objc private func headphoneRemoved(notification:NSNotification) {
+        guard let audioRouteChangeReason = notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt else {return}
+        
+        switch audioRouteChangeReason {
+        case AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue:
+            DispatchQueue.main.async {
+                self.pause()
+            }
+        default:
+            break
         }
     }
     

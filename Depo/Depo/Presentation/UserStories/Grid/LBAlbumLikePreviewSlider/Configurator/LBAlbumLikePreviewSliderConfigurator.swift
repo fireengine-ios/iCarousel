@@ -12,16 +12,18 @@ class LBAlbumLikePreviewSliderModuleConfigurator {
 
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController,
                                                        inputPresenter: LBAlbumLikePreviewSliderPresenter?,
-                                                       peopleItem: PeopleItem? = nil) {
+                                                       peopleItem: PeopleItem? = nil,
+                                                       moduleOutput: FaceImagePhotosModuleOutput?) {
 
         if let viewController = viewInput as? LBAlbumLikePreviewSliderViewController {
-            configure(viewController: viewController, inputPresenter: inputPresenter, peopleItem: peopleItem)
+            configure(viewController: viewController, inputPresenter: inputPresenter, peopleItem: peopleItem, moduleOutput: moduleOutput)
         }
     }
 
     private func configure(viewController: LBAlbumLikePreviewSliderViewController,
                            inputPresenter: LBAlbumLikePreviewSliderPresenter?,
-                           peopleItem: PeopleItem? = nil) {
+                           peopleItem: PeopleItem? = nil,
+                           moduleOutput: FaceImagePhotosModuleOutput?) {
 
         let router = LBAlbumLikePreviewSliderRouter()
 
@@ -42,7 +44,7 @@ class LBAlbumLikePreviewSliderModuleConfigurator {
             interactor = PeopleAlbumSliderInteractor(peopleItem: peopleItem)
             
             let title = String(format: TextConstants.albumLikeSliderWithPerson,
-                               peopleItem.name ?? "")
+                               peopleItem.name ?? TextConstants.faceImageThisPerson)
             viewController.sliderTitle = title
         } else {
             interactor = LBAlbumLikePreviewSliderInteractor()
@@ -53,6 +55,7 @@ class LBAlbumLikePreviewSliderModuleConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
+        presenter.faceImagePhotosModuleOutput = moduleOutput
     }
 
 }

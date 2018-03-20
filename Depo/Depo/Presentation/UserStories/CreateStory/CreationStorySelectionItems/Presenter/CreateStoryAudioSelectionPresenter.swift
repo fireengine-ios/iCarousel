@@ -22,7 +22,7 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
         dataSource.updateDisplayngType(type: .list)
     }
     
-    override func isArrayDataSource() -> Bool{
+    override func isArrayDataSource() -> Bool {
         return true
     }
     
@@ -30,43 +30,39 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
 
     }
     
-    override func onChangeSelectedItemsCount(selectedItemsCount: Int){
+    override func onChangeSelectedItemsCount(selectedItemsCount: Int) {
     }
     
     override func onNextButton() {
         guard  let story = photoStory else {
             return
         }
-        let array = dataSource.getSelectedItems()
-        if (array.count > 0){
-            guard let music = array.first! as? Item else{
-                return
-            }
+        if let music = dataSource.selectedItemsArray.first as? Item {
             story.music = music
-            if let viewController = view as? CreateStoryAudioSelectionViewController{
+            if let viewController = view as? CreateStoryAudioSelectionViewController {
                viewController.hideView()
             }
-        }else{
+        } else {
             UIApplication.showErrorAlert(message: TextConstants.createStoryNoSelectedAudioError)
         }
         
         player.stop()
     }
     
-    func configurateWithPhotoStory(story: PhotoStory){
+    func configurateWithPhotoStory(story: PhotoStory) {
         photoStory = story
-        if let music = story.music{
+        if let music = story.music {
             dataSource.onSelectObject(object: music)
         }
     }
     
-    override func getCellSizeForList() -> CGSize{
+    override func getCellSizeForList() -> CGSize {
         return CGSize(width: view.getCollectionViewWidth(), height: 46)
     }
     
-    func onChangeSorce(isYourUpload: Bool){
-        if let interactor = interactor as? CreateStorySelectionInteractor{
-            if let dataSource = dataSource as? AudioSelectionDataSource{
+    func onChangeSorce(isYourUpload: Bool) {
+        if let interactor = interactor as? CreateStorySelectionInteractor {
+            if let dataSource = dataSource as? AudioSelectionDataSource {
                 dataSource.tableDataMArray.removeAll()
             }
             interactor.onChangeSorce(isYourUpload: isYourUpload)

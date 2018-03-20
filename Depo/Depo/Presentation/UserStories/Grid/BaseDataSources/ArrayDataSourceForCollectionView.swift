@@ -12,7 +12,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
     var tableDataMArray = [[BaseDataSourceItem]]()
     
-    func configurateWithArray(array: [[BaseDataSourceItem]]){
+    func configurateWithArray(array: [[BaseDataSourceItem]]) {
         tableDataMArray.removeAll()
         tableDataMArray.append(contentsOf: array)
         collectionView?.reloadData()
@@ -24,7 +24,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         return array[indexPath.row]
     }
     
-    override func getAllObjects() -> [[BaseDataSourceItem]]{
+    override func getAllObjects() -> [[BaseDataSourceItem]] {
         return tableDataMArray
     }
     
@@ -41,7 +41,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         return array.count
     }
     
-    override func isHeaderSelected(section: Int) -> Bool{
+    override func isHeaderSelected(section: Int) -> Bool {
         let arrayOfObjectsInSction = tableDataMArray[section]
         let subSet = Set<BaseDataSourceItem>(arrayOfObjectsInSction)
         return subSet.isSubset(of: selectedItemsArray)
@@ -49,9 +49,9 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
     override func getSelectedItems() -> [BaseDataSourceItem] {
         var resultArray = [BaseDataSourceItem]()
-        for array in tableDataMArray{
-            for object in array{
-                if (selectedItemsArray.contains(object)){
+        for array in tableDataMArray {
+            for object in array {
+                if (selectedItemsArray.contains(object)) {
                     resultArray.append(object)
                 }
             }
@@ -86,19 +86,19 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
                 newArray.append(newSectionArray)
             }
         
-            if arrayOfIndexes.count > 0 {
-                tableDataMArray = newArray
+            if !arrayOfIndexes.isEmpty {
                 collectionView?.performBatchUpdates({ [weak self] in
-                    if let `self` = self{
-                        self.collectionView?.deleteItems(at: arrayOfIndexes)
-                    }
-                }, completion: nil)
+                    self?.tableDataMArray = newArray
+                    self?.collectionView?.deleteItems(at: arrayOfIndexes)
+                }, completion: { [weak self] finished in
+                    self?.delegate?.didDelete?(items: albums)
+                })
             }
         }
         
     }
     
-    override func updatedAlbumCoverPhoto(item: AlbumItem) {
+    override func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
         guard let unwrapedFilters = originalFilters,
             canShowAlbumsFilters(filters: unwrapedFilters) else {
                 return

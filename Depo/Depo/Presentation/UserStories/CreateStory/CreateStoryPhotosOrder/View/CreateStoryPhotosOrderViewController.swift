@@ -8,11 +8,11 @@
 
 import UIKit
 
-class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosOrderViewInput, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewStoryReorderViewDelegate {
+class CreateStoryPhotosOrderViewController: BaseViewController, CreateStoryPhotosOrderViewInput, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewStoryReorderViewDelegate {
 
     var output: CreateStoryPhotosOrderViewOutput!
     
-    private var fileDataSource =  FilesDataSource()
+    private var fileDataSource = FilesDataSource()
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -73,20 +73,20 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         }
     }
     
-    func setSelectionForCellSelectedBy(gesture: UILongPressGestureRecognizer, selection: Bool){
-        if (!selection){
+    func setSelectionForCellSelectedBy(gesture: UILongPressGestureRecognizer, selection: Bool) {
+        if (!selection) {
             
         }
         guard let selectedIndexPath = self.collectionView.indexPathForItem(at: gesture.location(in: self.collectionView)) else {
-            if (selectedCell != nil){
+            if (selectedCell != nil) {
                 selectedCell?.setSelection(selection: false)
             }
             return
         }
         
         let cell = collectionView.cellForItem(at: selectedIndexPath)
-        if let cell_ = cell as? PhotosOrderCollectionViewCell{
-            if (selection){
+        if let cell_ = cell as? PhotosOrderCollectionViewCell {
+            if (selection) {
                 selectedCell = cell_
             }
             cell_.setSelection(selection: selection)
@@ -94,7 +94,7 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
     }
     
     
-    @objc func onNextButton(){
+    @objc func onNextButton() {
         navigationItem.rightBarButtonItem?.isEnabled = false
         output.onNextButton(array: collectionViewData)
     }
@@ -106,20 +106,20 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
     }
     
     
-    //MARK: Input
+    // MARK: Input
     
-    func showStory(story: PhotoStory){
+    func showStory(story: PhotoStory) {
         collectionViewData.removeAll()
         collectionViewData.append(contentsOf: story.storyPhotos)
         collectionView.reloadData()
     }
     
-    func getNavigationControllet() -> UINavigationController?{
+    func getNavigationControllet() -> UINavigationController? {
         return navigationController
     }
     
     
-    //MARK: UICollectionView delegate
+    // MARK: UICollectionView delegate
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -133,7 +133,7 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewStoryReorderView, for: indexPath)
-            if let header = headerView as? CollectionViewStoryReorderView{
+            if let header = headerView as? CollectionViewStoryReorderView {
                 header.delegate = self
             }
             return headerView
@@ -152,7 +152,7 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         
         let object = collectionViewData[indexPath.row]
         cell_.setPosition(position: indexPath.row + 1)
-        fileDataSource.getImage(patch: object.patchToPreview) { [weak self] (image) in
+        fileDataSource.getImage(patch: object.patchToPreview) { [weak self] image in
             
             let contains = self?.collectionView.indexPathsForVisibleItems.contains(indexPath)
             if let value = contains,
@@ -171,7 +171,7 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if (collectionViewData.count == 0){
+        if (collectionViewData.count == 0) {
             return
         }
         
@@ -186,25 +186,25 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         var inset = NumericConstants.iPadGreedInset
-        if (Device.isIpad){
+        if (Device.isIpad) {
             inset = NumericConstants.iPhoneGreedInset
         }
         return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if (Device.isIpad){
+        if (Device.isIpad) {
             return NumericConstants.iPadGreedHorizontalSpace
-        }else{
+        } else {
             return NumericConstants.iPhoneGreedHorizontalSpace
         }
     }
     
     //|||||
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        if (Device.isIpad){
+        if (Device.isIpad) {
             return NumericConstants.iPadGreedHorizontalSpace
-        }else{
+        } else {
             return NumericConstants.iPhoneGreedHorizontalSpace
         }
     }
@@ -215,7 +215,7 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         var inset = NumericConstants.iPadGreedInset
         var horizontalSpace = NumericConstants.iPhoneGreedHorizontalSpace
         
-        if (Device.isIpad){
+        if (Device.isIpad) {
             countCellInLine = CGFloat(NumericConstants.creationStoryOrderingCountPhotosInLineiPad)
             inset = NumericConstants.iPhoneGreedInset
             horizontalSpace = NumericConstants.iPadGreedHorizontalSpace
@@ -223,7 +223,7 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         
         let screenSize = view.frame.size.width
         
-        let cellW: CGFloat = (screenSize - 2 * inset - horizontalSpace * CGFloat(countCellInLine - 1))/countCellInLine
+        let cellW: CGFloat = (screenSize - 2 * inset - horizontalSpace * CGFloat(countCellInLine - 1)) / countCellInLine
         
         return CGSize(width: cellW, height: cellW)
     }
@@ -243,19 +243,19 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         updateAllVisibleCell()
     }
     
-    func updateAllVisibleCell(){
+    func updateAllVisibleCell() {
         let array = collectionView.visibleCells
-        for cell in array{
-            if let cell_ = cell as? PhotosOrderCollectionViewCell{
+        for cell in array {
+            if let cell_ = cell as? PhotosOrderCollectionViewCell {
                 let indexPath = collectionView.indexPath(for: cell)
-                if let indexPath_ = indexPath{
+                if let indexPath_ = indexPath {
                     cell_.setPosition(position: indexPath_.row + 1)
                 }
             }
         }
     }
     
-    //MARK: CollectionViewStoryReorderViewDelegate
+    // MARK: CollectionViewStoryReorderViewDelegate
     
     func goToSelectionMusick() {
         output.onMusicSelection()

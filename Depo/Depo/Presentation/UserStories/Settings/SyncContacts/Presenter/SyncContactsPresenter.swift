@@ -20,7 +20,9 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     var isBackUpAvailable: Bool { return contactSyncResponse != nil }
     let reachability = ReachabilityService()
     
-    //MARK: view out
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    
+    // MARK: view out
     func viewIsReady() {
         view.setInitialState()
         
@@ -29,7 +31,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     func startOperation(operationType: SyncOperationType) {
         if operationType != .getBackUpStatus {
-            requesetAccess { (success) in
+            requesetAccess { success in
                 if success {
                     self.proccessOperation(operationType)
                 }
@@ -39,15 +41,15 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         }
     }
     
-    //MARK: Interactor Output
+    // MARK: Interactor Output
     
     func showError(errorType: SyncOperationErrors) {
         view.setStateWithoutBackUp()
         contactSyncResponse = nil
     }
     
-    func showProggress(progress: Int, forOperation operation: SyncOperationType) {
-        view.showProggress(progress: progress, forOperation: operation)
+    func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
+        view.showProggress(progress: progress, count: count, forOperation: operation)
     }
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
@@ -73,7 +75,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func onManageContacts() {
-        requesetAccess { (success) in
+        requesetAccess { success in
             if success {
                 self.router.goToManageContacts(moduleOutput: self)
             }
@@ -117,7 +119,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     private func proccessOperation(_ operationType: SyncOperationType) {
         if !self.reachability.isReachable &&
-            (operationType == .backup || operationType == .restore || operationType == .analyze)  {
+            (operationType == .backup || operationType == .restore || operationType == .analyze) {
             router.goToConnectedToNetworkFailed()
             return
         }
@@ -147,8 +149,11 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         case .denied:
             showSettingsAlert(completionHandler: completionHandler)
         case .restricted, .notDetermined:
+            passcodeStorage.systemCallOnScreen = true
+            
             CNContactStore().requestAccess(for: .contacts) { [weak self] granted, error in
                 guard let `self` = self else { return }
+                self.passcodeStorage.systemCallOnScreen = false
                 DispatchQueue.main.async {
                     if granted {
                         completionHandler(true)

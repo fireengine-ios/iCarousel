@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewDelegate {
+final class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewDelegate {
     
     @IBOutlet weak var allertView: UIView!
     
@@ -35,8 +35,9 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
 
     var output: FeedbackViewOutput!
     
-    var suggeston: Bool = true
-    var complaint: Bool = false
+    private var suggeston = true
+    private var complaint = false
+    private var isShown = false
 
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -62,6 +63,18 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         dropDovnView.delegate = self
         
         output.viewIsReady()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        bottomConstraint.constant = (view.frame.height - allertView.frame.height) * 0.5
+        view.layoutIfNeeded()
+        animateView()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupTexts() {
@@ -99,16 +112,16 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         feedbackTextView.textAlignment = .natural
     }
     
-    func languagesUploaded(lanuages:[LanguageModel]) {
+    func languagesUploaded(lanuages: [LanguageModel]) {
         languagesArray.removeAll()
         languagesArray.append(contentsOf: lanuages)
 
-        let array = languagesArray.map({ (object) -> String in
+        let array = languagesArray.map({ object -> String in
             object.displayLanguage ?? ""
         })
         
         if let languageCode = NSLocale.current.languageCode, languageCode == "tr",
-           let currentLanguage = languagesArray.first(where: {$0.languageCode == "tr"}) {
+           let currentLanguage = languagesArray.first(where: { $0.languageCode == "tr" }) {
             selectedLanguage = currentLanguage
         }
             
@@ -120,12 +133,12 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     func languageRequestSended(text: String) {
-        if (Mail.canSendEmail()) {
+        if Mail.canSendEmail() {
             let stringForLetter = String(format: "%@\n\n%@", self.feedbackTextView!.text, text)
             self.dismiss(animated: true, completion: nil)
             Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [TextConstants.feedbackEmail], success: {
                 //
-            }, fail: { (error) in
+            }, fail: { error in
                 UIApplication.showErrorAlert(message: error?.localizedDescription ?? TextConstants.feedbackEmailError)
             })
         } else {
@@ -133,16 +146,6 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         }
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let dy = (view.frame.size.height - allertView.frame.size.height) * 0.5
-        bottomConstraint.constant = dy
-        view.layoutIfNeeded()
-        animateView()
-    }
-    
-    private var isShown = false
     private func animateView() {
         if isShown {
             return
@@ -161,7 +164,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     
     // MARK: Keboard
     
-    @IBAction func onHideKeyboard(){
+    @IBAction func onHideKeyboard() {
         feedbackTextView.resignFirstResponder()
     }
     
@@ -170,7 +173,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
             return view.frame.origin.y
         } else {
             if (view.superview != nil) {
-                return view.frame.origin.y + getMainYForView(view:view.superview!)
+                return view.frame.origin.y + getMainYForView(view: view.superview!)
             } else {
                 return 0
             }
@@ -178,8 +181,8 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     @objc func showKeyBoard(notification: NSNotification) {
-        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         let y = allertView.frame.size.height + getMainYForView(view: allertView)
@@ -206,11 +209,11 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     
-    //MARK: IBActions
+    // MARK: IBActions
     
     func getImageForChecbox(isSelected: Bool) -> UIImage {
         let imageName = isSelected ? "roundSelectedCheckBox" : "roundEmptyCheckBox"
-        return UIImage(named:imageName)!.withRenderingMode(.alwaysTemplate)
+        return UIImage(named: imageName)!.withRenderingMode(.alwaysTemplate)
     }
     
     @IBAction func onCloseButton() {
@@ -252,10 +255,10 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     func getSubject() -> String {
-        if (suggeston) {
+        if suggeston {
             return String(format: TextConstants.feedbackViewSubjectFormat, TextConstants.feedbackViewSuggestion)
         }
-        if (complaint) {
+        if complaint {
             return String(format: TextConstants.feedbackViewSubjectFormat, TextConstants.feedbackViewComplaint)
         }
         return ""
@@ -264,7 +267,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     // MARK: DropDovnViewDelegate
     
     func onSelectItem(atIndex index: Int) {
-        if (index < languagesArray.count) {
+        if index < languagesArray.count {
             selectedLanguage = languagesArray[index]
         }
     }
@@ -297,4 +300,3 @@ extension FeedbackViewController: UITextViewDelegate {
         return true
     }
 }
-

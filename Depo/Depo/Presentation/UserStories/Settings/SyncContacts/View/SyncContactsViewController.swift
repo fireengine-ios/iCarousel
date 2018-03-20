@@ -86,6 +86,8 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         restoreButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         deleteDuplicatedButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         output.viewIsReady()
+        
+        MenloworksAppEvents.onContactSyncPageOpen()
     }
     
     deinit {
@@ -171,7 +173,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         }
     }
     
-    func showProggress(progress: Int, forOperation operation: SyncOperationType){
+    func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
         gradientLoaderIndicator.progress = CGFloat(progress) / 100
         
         switch operation {
@@ -182,14 +184,14 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         case .analyze:
             titleLabel.text = String(format: TextConstants.settingsAnalyzingText, progress)
         case .deleteDuplicated:
-            titleLabel.text = String(format: TextConstants.settingsDeletingText, progress)
+            titleLabel.text = String(format: TextConstants.settingsDeletingText, count)
         default:
             break
         }
     }
     
     func resetProgress() {
-        gradientLoaderIndicator.progress = 0
+        gradientLoaderIndicator.resetProgress()
     }
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
@@ -209,7 +211,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput {
         }
 
         
-        let t = String.init(format: template, response.totalNumberOfContacts)
+        let t = String(format: template, response.totalNumberOfContacts)
         let text = t as NSString
         let attributedText = NSMutableAttributedString(string: t)
         

@@ -16,7 +16,7 @@ protocol BaseFilesGreedViewOutput {
     
     func onStartCreatingPhotoAndVideos()
     
-    func needShowNoFileView()-> Bool
+    func needShowNoFileView() -> Bool
     
     func getCurrentSortRule() -> SortedRules
     
@@ -25,6 +25,8 @@ protocol BaseFilesGreedViewOutput {
     func getFolder() -> Item?
     
     func onCancelSelection()
+    
+    func isSelectionState() -> Bool
     
     func viewWillDisappear()
     
@@ -36,13 +38,17 @@ protocol BaseFilesGreedViewOutput {
     
     func viewAppearanceChangedTopBar(asGrid: Bool)
     
-    func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType)
+    func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType)
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType])
     
     func moreActionsPressed(sender: Any)
     
+    func searchPressed(output: UIViewController?)
+    
     func moveBack()
     
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue)
+    
+    func updateThreeDotsButton()
 }

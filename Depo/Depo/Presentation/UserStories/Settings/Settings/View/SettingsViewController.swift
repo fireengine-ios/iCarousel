@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SettingsDelegate: class{
+protocol SettingsDelegate: class {
     func goToContactSync()
     
     func goToIportPhotos()
@@ -27,8 +27,6 @@ protocol SettingsDelegate: class{
 }
 
 class SettingsViewController: BaseViewController, SettingsViewInput, UITableViewDelegate, UITableViewDataSource {
-    
-    @IBOutlet weak var headerContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var leaveFeedbackButton: ButtonWithGrayCorner!
     @IBOutlet weak var versionLabel: UILabel!
@@ -57,6 +55,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         userInfoSubView.actionsDelegate = self
         output.viewIsReady()
         setupVersionLabel()
+        
+        MenloworksAppEvents.onPreferencesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +100,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         RouterVC().showFeedbackSubView()
     }
     
-    //MARK: UITableView delegate
+    // MARK: UITableView delegate
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return tableDataArray.count
@@ -263,11 +263,11 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         let actionsWithCancell: [UIAlertAction] = [cancellAction, actionPhoto, actionLibriary]
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionsWithCancell.forEach({actionSheetVC.addAction($0)})
+        actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
         actionSheetVC.popoverPresentationController?.sourceView = view
         
-        let originPoint = CGPoint(x: Device.winSize.width/2 - actionSheetVC.preferredContentSize.width/2,
-                                  y: Device.winSize.height/2 - actionSheetVC.preferredContentSize.height/2)
+        let originPoint = CGPoint(x: Device.winSize.width / 2 - actionSheetVC.preferredContentSize.width / 2,
+                                  y: Device.winSize.height / 2 - actionSheetVC.preferredContentSize.height / 2)
         
         let sizePoint = actionSheetVC.preferredContentSize
         actionSheetVC.popoverPresentationController?.sourceRect = CGRect(origin: originPoint, size: sizePoint)
@@ -306,10 +306,10 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
     }
 }
 
-//MARK: - photo picker delegatess
-extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+// MARK: - photo picker delegatess
+extension SettingsViewController: UIImagePickerControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         
         var photoData: Data?
         if let imageURL = info[UIImagePickerControllerMediaURL] as? URL,

@@ -25,7 +25,7 @@ class CounrtiesGSMCodeCompositor {
         resulArray = isoCodes.flatMap {
             
             let countryCode: String = $0
-            let contryName = locale.displayName(forKey:NSLocale.Key.countryCode, value: countryCode)
+            let contryName = locale.displayName(forKey: NSLocale.Key.countryCode, value: countryCode)
             guard let phoneCode = countryCodes[countryCode.uppercased()],
                   let unwrapedcontryName = contryName
             else {
@@ -36,7 +36,7 @@ class CounrtiesGSMCodeCompositor {
                                 withGSMCode: phoneCode)
         }
         
-        resulArray = resulArray.sorted(by: { (firt, second) -> Bool in
+        resulArray = resulArray.sorted(by: { firt, second -> Bool in
             return firt.countryName < second.countryName
         })
         

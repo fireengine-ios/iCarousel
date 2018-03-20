@@ -76,7 +76,7 @@ final class MovieCard: BaseView {
         videoPreviewImageView.loadImage(with: item, isOriginalImage: true)
     }
     
-    @IBAction private func actionCloseButton(_ sender: UIButton){
+    @IBAction private func actionCloseButton(_ sender: UIButton) {
         deleteCard()
     }
     
@@ -121,9 +121,8 @@ final class MovieCard: BaseView {
         guard let item = item else { return }
         
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], hideActions: hideActions)
-        
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
-        RouterVC().pushViewController(viewController: controller)
+        let nController = UINavigationController(rootViewController: controller)
+        RouterVC().presentViewController(controller: nController)
     }
 }

@@ -9,10 +9,10 @@
 import UIKit
 
 class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
-
+    
     weak var faceImageItemsModuleOutput: FaceImageItemsModuleOutput?
     
-    var coverPhotoURL = URL(string: "")
+    var coverPhoto: Item?
     var item: Item
     
     init(item: Item) {
@@ -23,6 +23,9 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     override func viewIsReady(collectionView: UICollectionView) {
         super.viewIsReady(collectionView: collectionView)
         
+        if let interactor = interactor as? FaceImagePhotosInteractor {
+            dataSource.parentUUID = interactor.album?.uuid
+        }
         loadItem()
     }
     
@@ -33,11 +36,52 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .removeFromAlbum {
-            reloadData()
-            faceImageItemsModuleOutput?.didReloadData()
+    override func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
+        if let interactor = interactor as? FaceImagePhotosInteractor,
+            let id = item.id {
+            
+            if item is PeopleItem {
+                interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
+            } else if item is ThingsItem {
+                interactor.deletePhotosFromThingsAlbum(items: items, id: id)
+            } else if item is PlacesItem {
+                interactor.deletePhotosFromPlacesAlbum(items: items, id: id)
+            }
         }
+    }
+    
+    override func operationFinished(withType type: ElementTypes, response: Any?) {
+        if type.isContained(in: [.removeFromAlbum, .removeFromFaceImageAlbum, .delete]) {
+            dataSource.reloadData()
+            faceImageItemsModuleOutput?.didReloadData()
+            
+            if let interactor = interactor as? FaceImagePhotosInteractorInput {
+                interactor.loadItem(item)
+            }
+        } else if type == .changeCoverPhoto {
+            outputView()?.hideSpiner()
+
+            if let view = view as? FaceImagePhotosViewController,
+                let item = response as? Item {
+                view.setHeaderImage(with: item.patchToPreview)
+            }
+        }
+    }
+    
+    override func operationFailed(withType type: ElementTypes) {
+        outputView()?.hideSpiner()
+    }
+    
+    override func getContentWithSuccess(items: [WrapData]) {
+        super.getContentWithSuccess(items: items)
+        
+        if let interactor = interactor as? FaceImagePhotosInteractorInput {
+            interactor.loadItem(item)
+        }
+    }
+    
+    override func getSortTypeString() -> String {
+        return ""
     }
     
     private func loadItem() {
@@ -45,18 +89,33 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
             return
         }
         
-        guard let item = item as? PeopleItem else {
-            view.setHeaderViewHidden(true)
-            return
+        view.setupHeader(forPeopleItem: item as? PeopleItem)
+        
+        if let path = coverPhoto?.patchToPreview {
+            view.setHeaderImage(with: path)
         }
-        
-        view.loadAlbumsForPeopleItem(item)
-        
-        if let url = coverPhotoURL {
-            view.setHeaderImage(with: url)
+ 
+    }
+    
+    // MARK: - BaseDataSourceForCollectionViewDelegate
+    
+    override func updateCoverPhotoIfNeeded() {
+        if let interactor = interactor as? FaceImagePhotosInteractor {
+            interactor.updateCoverPhotoIfNeeded()
         }
-        
-        view.setHeaderViewHidden(false)
+    }
+    
+    override func didDelete(items: [BaseDataSourceItem]) {
+        if dataSource.allObjectIsEmpty() {
+            faceImageItemsModuleOutput?.delete(item: item)
+            if let view = view as? FaceImagePhotosViewInput {
+                view.dismiss()
+            }
+        } else {
+            if let interactor = interactor as? FaceImagePhotosInteractorInput {
+                interactor.loadItem(item)
+            }
+        }
     }
 }
 
@@ -65,8 +124,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
 extension FaceImagePhotosPresenter: FaceImageChangeCoverModuleOutput {
     
     func onAlbumCoverSelected(item: WrapData) {
-        if let view = view as? FaceImagePhotosViewController, let coverURL = item.tmpDownloadUrl {
-            view.setHeaderImage(with: coverURL)
+        if let view = view as? FaceImagePhotosViewController {
+            view.setHeaderImage(with: item.patchToPreview)
         }
     }
     
@@ -80,6 +139,19 @@ extension FaceImagePhotosPresenter: FaceImagePhotosViewOutput {
         if let router = router as? FaceImagePhotosRouter {
             router.openAddName(item, moduleOutput: self)
         }
+    }
+    
+    func faceImageType() -> FaceImageType? {
+        if item is PeopleItem {
+            return .people
+        }
+        if item is ThingsItem {
+            return .things
+        }
+        if item is PlacesItem {
+            return .places
+        }
+        return nil
     }
     
 }
@@ -98,7 +170,30 @@ extension FaceImagePhotosPresenter: FaceImagePhotosModuleOutput {
     
     func didMergePeople() {
         faceImageItemsModuleOutput?.didReloadData()
-        reloadData()
+    }
+    
+    func getSliderItmes(items: [SliderItem]) {
+        if let view = view as? FaceImagePhotosViewInput {
+            view.hiddenSlider(isHidden: items.count == 0)
+        }
+    }
+    
+}
+
+// MARK: FaceImagePhotosInteractorOutput
+
+extension FaceImagePhotosPresenter: FaceImagePhotosInteractorOutput {
+    
+    func didCountImage(_ count: Int) {
+        if let view = view as? FaceImagePhotosViewInput {
+            view.setCountImage("\(count) \(TextConstants.faceImagePhotos)")
+        }
+    }
+    
+    func didRemoveFromAlbum(completion: @escaping (() -> Void)) {
+        if let router = router as? FaceImagePhotosRouterInput {
+            router.showRemoveFromAlbum(completion: completion)
+        }
     }
     
 }

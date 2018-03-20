@@ -22,7 +22,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             return
         }
         
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) {[weak self] (accessGranted, _) in
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) {[weak self] accessGranted, _ in
             guard accessGranted else {
                 return
             }
@@ -34,11 +34,11 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             if let album = collectionFetchResult.firstObject {
                 let assetsFetchResult = PHAsset.fetchAssets(in: album, options: nil)
                 var assets = [PHAsset]()
-                assetsFetchResult.enumerateObjects({ (asset, index, stop) in
+                assetsFetchResult.enumerateObjects({ asset, index, stop in
                     assets.append(asset)
                 })
                 
-                var items  = CoreDataStack.default.allLocalItems(with: assets.map({ $0.localIdentifier }))
+                var items = CoreDataStack.default.allLocalItems(with: assets.map({ $0.localIdentifier }))
 
                 items.sort {
                     guard let firstDate = $0.creationDate else {
@@ -56,7 +56,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
     }
     
-    func addToUploadOnDemandItems(items: [BaseDataSourceItem]){
+    func addToUploadOnDemandItems(items: [BaseDataSourceItem]) {
         log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems")
 
         let uploadItems = items as! [WrapData]
@@ -80,4 +80,3 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
     }
 }
-

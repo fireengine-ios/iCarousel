@@ -30,7 +30,6 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
         fileNameTitle.text = TextConstants.fileInfoFileNameTitle
@@ -88,11 +87,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         navigationBarWithGradientStyle()
         setTitle(withString: "")
     }
-    
-    override func willMove(toParentViewController parent: UIViewController?) {
-        blackNavigationBarStyle()
-    }
-    
+        
     func setObject(object: BaseDataSourceItem) {
         
         fileName.text = object.name
@@ -122,7 +117,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
                 folderSizeTitle.text = TextConstants.fileInfoFileSizeTitle
             }
             
-            if let createdDate = obj.creationDate {
+            if let createdDate = obj.creationDate, object.isSynced() {
                 uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
                 if !obj.isLocalItem, let takenDate = obj.metaData?.takenDate, createdDate != takenDate {
                     takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
@@ -152,13 +147,13 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         view.layoutIfNeeded()
     }
 
-    func addReturnIfNeed(string: inout String){
+    func addReturnIfNeed(string: inout String) {
         if string.count > 0 {
             string.append("\n")
         }
     }
     
-    func configurateAudioMethadataFor(object: Item){
+    func configurateAudioMethadataFor(object: Item) {
         if let musickMethadata = object.metaData {
             var string = ""
             if let album = musickMethadata.album {
@@ -188,13 +183,16 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     
     func startRenaming() {
         if fileName == nil {
-            let _ = view
+            _ = view
         }
         fileName.becomeFirstResponder()
     }
     
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
+    }
     
-    //MARK: UITextFieldDelegate
+    // MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

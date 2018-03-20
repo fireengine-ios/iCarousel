@@ -21,7 +21,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var iPadTitleLabel: UILabel!
     
-    @IBOutlet weak var spaceBetweenNextButtonAndTable :NSLayoutConstraint!
+    @IBOutlet weak var spaceBetweenNextButtonAndTable: NSLayoutConstraint!
     
     var output: RegistrationViewOutput!
     let dataSource = RegistrationDataSource()
@@ -34,7 +34,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     @IBOutlet weak var errorLabel: UILabel!
 
-    private var originBottomH:CGFloat = -1
+    private var originBottomH: CGFloat = -1
     private var originSpaceBetweenNextButtonAndTable: CGFloat = -1
     
     private let erroredSpaceBetweenNextButtonAndTable: CGFloat = 20
@@ -50,7 +50,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         errorLabel.text = ""
         errorLabel.textColor = ColorConstants.yellowColor
         errorLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
-        if (Device.isIpad){
+        if (Device.isIpad) {
             navigationItem.title = ""
             iPadTitleLabel.text = TextConstants.registrationTitleText
             iPadTitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
@@ -60,7 +60,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         
         nextBtn.setTitle(TextConstants.registrationNextButtonText, for: .normal)
 
-        backButtonForNavigationItem(title:TextConstants.backTitle)
+        backButtonForNavigationItem(title: TextConstants.backTitle)
 
         
         let doneButton = UIBarButtonItem(title: TextConstants.chooseTitle,
@@ -80,19 +80,18 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self);
+        NotificationCenter.default.removeObserver(self)
     }
     
-    @objc func donePicker(sender:AnyObject) {
+    @objc func donePicker(sender: AnyObject) {
         chooseButtonPressed()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        visibleNavigationBarStyle() 
+        hidenNavigationBarStyle()
 
-        
         userRegistrationTable.register(UINib(nibName: "inputCell", bundle: nil),
                                             forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
         userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil),
@@ -149,26 +148,26 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         userRegistrationTable.delegate = dataSource
     }
     
-    @objc func showKeyBoard(notification: NSNotification){
-        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+    @objc func showKeyBoard(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         
         let yNextButton = getMainYForView(view: nextBtn) + nextBtn.frame.size.height
-        if (view.frame.size.height - yNextButton < keyboardHeight){
+        if (view.frame.size.height - yNextButton < keyboardHeight) {
             
             bottomConstraint.constant = keyboardHeight + 40.0
             spaceBetweenNextButtonAndTable.constant = 5.0
             view.layoutIfNeeded()
             
             let textField = searchActiveTextField(view: self.view)
-            if (textField != nil){
+            if (textField != nil) {
                 var yOfTextField = getMainYForView(view: textField!) + textField!.frame.size.height + 20
-                if (textField!.tag == 33){
+                if (textField!.tag == 33) {
                     yOfTextField = getMainYForView(view: nextBtn) + nextBtn.frame.size.height
                 }
-                if (yOfTextField > view.frame.size.height - keyboardHeight){
+                if (yOfTextField > view.frame.size.height - keyboardHeight) {
                     let dy = yOfTextField - (view.frame.size.height - keyboardHeight)
                     
                     let point = CGPoint(x: 0, y: dy + 10)
@@ -188,20 +187,20 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         }
         for subView in view.subviews {
             let textField = searchActiveTextField(view: subView)
-            if (textField != nil){
+            if (textField != nil) {
                 return textField
             }
         }
         return nil
     }
     
-    private func getMainYForView(view: UIView)->CGFloat{
-        if (view.superview == self.view){
+    private func getMainYForView(view: UIView) -> CGFloat {
+        if (view.superview == self.view) {
             return view.frame.origin.y
-        }else{
-            if (view.superview != nil){ 
-                return view.frame.origin.y + getMainYForView(view:view.superview!)
-            }else{
+        } else {
+            if (view.superview != nil) { 
+                return view.frame.origin.y + getMainYForView(view: view.superview!)
+            } else {
                 return 0
             }
         }
@@ -252,7 +251,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     private func findNextProtoCell(fromEditedCell editedCell: ProtoInputTextCell) {
-     let _ = AutoNextEditingRowPasser.passToNextEditingRow(withEditedCell: editedCell, inTable: userRegistrationTable)
+     _ = AutoNextEditingRowPasser.passToNextEditingRow(withEditedCell: editedCell, inTable: userRegistrationTable)
     }
     
     private func hidePicker() {
@@ -337,7 +336,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     
-    //MARK: - DataSource output
+    // MARK: - DataSource output
     
     func protoCellTextFinishedEditing(cell: ProtoInputTextCell) {
         findNextProtoCell(fromEditedCell: cell)
@@ -353,7 +352,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     
-    //MARK: - Picker Choose
+    // MARK: - Picker Choose
     
     func chooseButtonPressed() {
         hidePicker()

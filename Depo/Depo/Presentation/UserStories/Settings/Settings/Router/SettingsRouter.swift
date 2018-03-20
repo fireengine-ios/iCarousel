@@ -10,19 +10,19 @@ class SettingsRouter: SettingsRouterInput {
     
     let router = RouterVC()
     
-    func goToOnboarding(){
+    func goToOnboarding() {
         router.setNavigationController(controller: router.onboardingScreen)
     }
     
-    func goToContactSync(){
-        router.pushViewController(viewController:router.syncContacts)
+    func goToContactSync() {
+        router.pushViewController(viewController: router.syncContacts)
     }
     
     func goToImportPhotos() {
-        router.pushViewController(viewController:router.importPhotos!)
+        router.pushViewController(viewController: router.importPhotos!)
     }
     
-    func goToAutoApload(){
+    func goToAutoApload() {
         router.pushViewController(viewController: router.autoUpload)
     }
     
@@ -30,7 +30,7 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.faceImage)
     }
 
-    func goToHelpAndSupport(){
+    func goToHelpAndSupport() {
         router.pushViewController(viewController: router.helpAndSupport!)
     }
     
@@ -58,7 +58,7 @@ class SettingsRouter: SettingsRouterInput {
         router.popViewController()
     }
     
-    func openPasscode(handler: @escaping () -> Void) {
+    func openPasscode(handler: @escaping VoidHandler) {
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         
         vc.success = { [weak self] in

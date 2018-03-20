@@ -20,15 +20,14 @@ extension UIButton {
             return
         }
         
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 1.0);
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 1.0)
         UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).addClip()
         image?.draw(in: bounds)
         let clippedBackgroundImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext()
         
         setBackgroundImage(clippedBackgroundImage, for: state)
     }
-    
     
     
 }

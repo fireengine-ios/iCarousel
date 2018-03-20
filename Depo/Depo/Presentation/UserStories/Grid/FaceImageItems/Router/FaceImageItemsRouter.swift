@@ -16,11 +16,10 @@ final class FaceImageItemsRouter: BaseFilesGreedRouter {
 
 extension FaceImageItemsRouter: FaceImageItemsRouterInput {
     
-    func openFaceImageItemPhotosWith(_ item: Item, albumUUID: String, coverPhotoURL: URL, moduleOutput: FaceImageItemsModuleOutput?) {
+    func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?) {
         let router = RouterVC()
-        let vc = router.imageFacePhotosController(albumUUID: albumUUID, item: item, coverPhotoURL: coverPhotoURL, moduleOutput: moduleOutput)
+        let vc = router.imageFacePhotosController(album: album, item: item, moduleOutput: moduleOutput)
         router.pushViewController(viewController: vc)
     }
     
 }
-

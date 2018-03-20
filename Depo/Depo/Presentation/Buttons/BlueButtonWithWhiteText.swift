@@ -20,11 +20,29 @@ class BlueButtonWithWhiteText: WhiteButtonWithRoundedCorner {
     }
 }
 
-class BlueButtonWithMediumWhiteText: BlueButtonWithWhiteText {
+final class BlueButtonWithMediumWhiteText: BlueButtonWithWhiteText {
     
     override func configurate() {
         super.configurate()
         titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
+        titleLabel?.numberOfLines = 0
+        titleLabel?.textAlignment = .center
+    }
+    
+    override func setCornerRadius() {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            layer.cornerRadius = frame.size.height * 0.4
+        } else {
+            layer.cornerRadius = frame.size.height * 0.5
+        }
+    }
+}
+
+final class BlueButtonWithNoFilesWhiteText: BlueButtonWithWhiteText {
+    
+    override func configurate() {
+        super.configurate()
+        titleLabel?.font = ApplicationPalette.noFilesRoundButtonFont
         titleLabel?.numberOfLines = 0
         titleLabel?.textAlignment = .center
     }

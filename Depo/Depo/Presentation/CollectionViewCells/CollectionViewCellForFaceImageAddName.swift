@@ -21,7 +21,7 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
-        guard let item = wrappedObj as? Item else{
+        guard let item = wrappedObj as? Item else {
             return
         }
         
@@ -59,7 +59,7 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
     
     override func setImage(with url: URL) {
         self.imageView.contentMode = .center
-        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] (image, error, cacheType, url) in
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
             guard let `self` = self else {
                 return
             }
@@ -76,7 +76,7 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
         self.backgroundColor = ColorConstants.fileGreedCellColor
     }
     
-    class func getCellSise()->CGSize{
+    class func getCellSise() -> CGSize {
         return CGSize(width: 90.0, height: 90.0)
     }
 

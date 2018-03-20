@@ -85,6 +85,10 @@ extension IAPManager: SKPaymentTransactionObserver {
             //let productId = transaction.payment.productIdentifier
             switch transaction.transactionState {
             case .purchased:
+                if let productId = transaction.transactionIdentifier,
+                    let type = MenloworksSubscriptionProductID(rawValue: productId) {
+                    MenloworksAppEvents.onSubscriptionPurchaseCompleted(type)
+                }
                 purchaseHandler(.success)
             case .failed:
                 guard let error = transaction.error else { break }

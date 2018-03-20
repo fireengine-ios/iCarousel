@@ -51,6 +51,7 @@
 "The network connection was lost." = "The network connection was lost.";
 "ServiceError" = "ServiceError";
 "Nothing to download" = "Nothing to download";
+"Destination folder can not be the same folder" = "Destination folder can not be the same folder";
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
 "Unknown error" = "Unknown error";
@@ -157,13 +158,15 @@
 "Waiting for Wi-Fi connection to auto-sync" = "Waiting for Wi-Fi connection to auto-sync";
 "Settings" = "Settings";
 "Cancel" = "Cancel";
-"Auto Upload is off.\nGo to setting to auto sync." = "Auto Upload is off.\nGo to setting to auto sync.";
+"Auto Upload is off." = "Auto Upload is off.";
+"Photos and videos waiting to be synced" = "Photos and videos waiting to be synced";
 "LTE" = "LTE";
 "4G" = "4G";
 "3G" = "3G";
 "2G" = "2G";
 "Mobile Data" = "Mobile Data";
 "Wi-Fi" = "Wi-Fi";
+"Wi-Fi and Cellular" = "Wi-Fi and Cellular";
 "Free up space" = "Free up space";
 "Your device memory is almost full" = "Your device memory is almost full";
 "There are some duplicated items both in your device and lifebox" = "There are some duplicated items both in your device and lifebox";
@@ -189,6 +192,8 @@
 "Thanks for leaving a comment!" = "Thanks for leaving a comment!";
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n";
 "Upload Photos" = "Upload Photos";
+"You don’t have any albums on your Lifebox yet." = "You don’t have any albums on your Lifebox yet.";
+"Start creating albums" = "Start creating albums";
 "Add" = "Add";
 "Albums" = "Albums";
 "My Stories" = "My Stories";
@@ -229,7 +234,6 @@
 "Back" = "Back";
 "Cancel" = "Cancel";
 "Select" = "Select";
-"Fail while uploading from LifeBox" = "Fail while uploading from LifeBox";
 "Ok" = "Ok";
 "Sorry, but photos not selected" = "Sorry, but photos not selected";
 "Next" = "Next";
@@ -242,6 +246,8 @@
 "Item Selected" = "Item Selected";
 "Upload" = "Upload";
 "You can change the sequence " = "You can change the sequence ";
+"You don’t have any stories  on your Lifebox yet." = "You don’t have any stories  on your Lifebox yet.";
+"Start creating stories" = "Start creating stories";
 "Save" = "Save";
 "Create" = "Create";
 "Add Music" = "Add Music";
@@ -332,6 +338,7 @@
 "E-Mail" = "E-Mail";
 "Name and Surname" = "Name and Surname";
 "Your Profile" = "Your Profile";
+"Help and Support" = "Help and Support";
 "Import From Cropy" = "Import From Cropy";
 "Import From Instagram" = "Import From Instagram";
 "Import From Facebook" = "Import From Facebook";
@@ -356,8 +363,8 @@
 "Upload Photo" = "Upload Photo";
 "Login Settings" = "Login Settings";
 "Back to Lifebox" = "Back to Lifebox";
-"Start adding your documents" = "Start adding your documents";
 "You don’t have any documents on your Lifebox yet." = "You don’t have any documents on your Lifebox yet.";
+"Start adding your documents" = "Start adding your documents";
 "Start adding your music" = "Start adding your music";
 "You don’t have any music on your Lifebox yet." = "You don’t have any music on your Lifebox yet.";
 "Folder is Empty" = "Folder is Empty";
@@ -368,6 +375,9 @@
 "info" = "info";
 "Share" = "Share";
 "Enable photo permissions in settings" = "Enable photo permissions in settings";
+"You don’t have any files on your Lifebox yet." = "You don’t have any files on your Lifebox yet.";
+"You don’t have any favorited files on your Lifebox yet." = "You don’t have any favorited files on your Lifebox yet.";
+"Start adding your files" = "Start adding your files";
 "Start adding your photos" = "Start adding your photos";
 "You don’t have anything on your photo roll." = "You don’t have anything on your photo roll.";
 "OK" = "OK";
@@ -481,8 +491,8 @@
 "Back Up My Contacts" = "Back Up My Contacts";
 "No results found for your query." = "No results found for your query.";
 "localFilesBeingProcessed" = "Processing local files.";
-"SUGGESTIONS" = "SUGGESTIONS";
-"RECENT SEARCHES" = "RECENT SEARCHES";
+"Suggestions" = "Suggestions";
+"Recent Searches" = "Recent Searches";
 "Search" = "Search";
 "Warning" = "Warning";
 "TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate login with Turkcell password feature.";
@@ -529,7 +539,7 @@
 "Mobile Data" = "Mobile Data";
 "When syncing via Wi-Fi, your photos and videos are uploaded by default." = "When syncing via Wi-Fi, your photos and videos are uploaded by default.";
 "Wi-fi" = "Wi-fi";
-"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Lifebox can sync your files automatically. Would you like to have this feature right now?";
+"Lifebox can sync your files automatically." = "Lifebox can sync your files automatically.";
 "Auto Sync" = "Auto Sync";
 "You have to fill in a password" = "You have to fill in a password";
 "You have to fill in your mail or GSM Number" =  "You have to fill in your mail or GSM Number";
@@ -541,6 +551,10 @@
 "Login" = "Login";
 "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>";
 "Accept  Terms" = "Accept  Terms";
+"Start Using" = "Start Using";
+"I have read and accepted terms of use" = "I have read and accepted terms of use";
+"Welcome to Lifebox!" = "Welcome to Lifebox!";
+"You need to confirm the User Agreement to continue." = "You need to confirm the User Agreement to continue.";
 "Sign Up" = "Sign Up";
 "Password fields do not match" = "Password fields do not match";
 "Please enter your password" = "Please enter your password";
@@ -602,11 +616,17 @@
 "Done" = "Done";
 "+Add a Name" = "+Add a Name";
 "+Add Name" = "+Add Name";
-"Are these the same person" = "Are these the same person";
+"Are these the same person?" = "Are these the same person?";
 "They will be merged together" = "They will be merged together";
+"Grouping of your photos will take some time. Please wait and then check the albums." = "Grouping of your photos will take some time. Please wait and then check the albums.";
 "Nope" = "Nope";
+"Yes" = "Yes";
+"this person" = "this person";
+"Photos" = "Photos";
+"We couldn't find anybody on your Lifebox yet." = "We couldn't find anybody on your Lifebox yet.";
 "Not selected" = "Not selected";
 "E-mail is empty" = "E-mail is empty";
 "Filter Card" = "Filter Card";
 "View" = "View";
 "photos" = "photos";
+"Never" = "Never";

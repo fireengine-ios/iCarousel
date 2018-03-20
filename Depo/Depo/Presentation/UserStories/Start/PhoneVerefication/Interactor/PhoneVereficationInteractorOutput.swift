@@ -17,7 +17,7 @@ protocol PhoneVereficationInteractorOutput: class {
     func resendCodeRequestSuccesed()
     
     func succesLogin()
-    func failLogin(message:String)
+    func failLogin(message: String)
     
     func reachedMaxAttempts()
 }

@@ -7,11 +7,11 @@
 //
 
 enum MyStreamType: Int {
-    case albums = 0
-    case story
-    case people
+    case people = 0
     case things
     case places
+    case story
+    case albums
     case album
     
     var title: String {
@@ -27,12 +27,30 @@ enum MyStreamType: Int {
     
     var placeholder: UIImage {
         switch self {
-        case .albums: return UIImage()
-        case .story: return UIImage()
+        case .albums: return #imageLiteral(resourceName: "album")
+        case .story: return #imageLiteral(resourceName: "story")
         case .people: return #imageLiteral(resourceName: "people")
         case .things: return #imageLiteral(resourceName: "things")
         case .places: return #imageLiteral(resourceName: "places")
         default: return UIImage()
+        }
+    }
+    
+    var placeholderBorderColor: CGColor {
+        switch self {
+        case .albums, .album, .story:
+            return ColorConstants.blueColor.cgColor
+        case .things, .places, .people:
+            return ColorConstants.orangeBorder.cgColor
+        }
+    }
+    
+    func isMyStreamSliderType() -> Bool {
+        switch self {
+        case .albums, .story, .people, .things, .places:
+            return true
+        case .album:
+            return false
         }
     }
 }
@@ -49,7 +67,7 @@ class SliderItem {
     var placeholderImage: UIImage?
     var albumItem: AlbumItem?
     
-    init(name: String?, previewItems:[PathForItem]?, placeholder: UIImage?, type: MyStreamType?) {
+    init(name: String?, previewItems: [PathForItem]?, placeholder: UIImage?, type: MyStreamType?) {
         self.type = type
         self.name = name
         self.previewItems = previewItems
@@ -58,14 +76,14 @@ class SliderItem {
     
     init(withAlbumItems items: [AlbumItem]?) {
         if let items = items {
-            previewItems = Array(items.prefix(4).flatMap {$0.preview?.patchToPreview})
+            previewItems = Array(items.prefix(4).flatMap { $0.preview?.patchToPreview })
         }
         setType(.albums)
     }
     
     init(withStoriesItems items: [Item]?) {
         if let items = items {
-            previewItems = Array(items.prefix(4).flatMap {$0.patchToPreview})
+            previewItems = Array(items.prefix(4).flatMap { $0.patchToPreview })
         }
         setType(.story)
     }
@@ -77,7 +95,7 @@ class SliderItem {
         albumItem = album
     }
     
-    init(withThumbnails items:[URL?], type: MyStreamType) {
+    init(withThumbnails items: [URL?], type: MyStreamType) {
         previewItems = items.flatMap { PathForItem.remoteUrl($0) }
         setType(type)
     }
@@ -93,6 +111,11 @@ class LBAlbumLikePreviewSliderDataStorage {
     var currentItems: [SliderItem] = []
     
     func addNew(item: SliderItem) {
-        currentItems.append(item)
+        if let type = item.type, type.isMyStreamSliderType(),
+           let index = currentItems.index(where: { $0.type == item.type }) {
+            currentItems[index] = item
+        } else {
+            currentItems.append(item)
+        }
     }
 }

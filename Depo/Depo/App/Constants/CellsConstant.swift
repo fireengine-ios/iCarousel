@@ -13,13 +13,15 @@ struct CellsIdConstants {
     static let loginPhoneMailCellID = "LoginPhoneMailCellID"
     static let passwordCellID = "PasswordCellID"
     static let gSMUserInputCellID = "GSMUserInputCellID"
-    static let autoSyncInformCellID = "AutoSyncInformTableViewCell"
     static let autoSyncSwitcherCellID = "AutoSyncSwitcherTableViewCell"
+    static let autoSyncSettingsCellID = "AutoSyncSettingsTableViewCell"
     static let settingTableViewCellID = "SettingsTableViewCell"
     static let settingsTableViewSwitchCellID = "SettingsTableViewSwitchCell"
     static let actionsMenuCellID = "ActionsMenuTableViewCell"
     static let dropDovnCellID = "DropDovnTableViewCell"
     static let suggestionTableSectionHeaderID = "SuggestionTableSectionHeader"
+    static let suggestionTableViewCellID = "SuggestionTableViewCell"
+    static let recentlySearchedTableViewCellID = "RecentlySearchedFaceImageTableViewCell"
 }
 
 struct CollectionViewCellsIdsConstant {

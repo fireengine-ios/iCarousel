@@ -11,11 +11,13 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
     weak var view: LBAlbumLikePreviewSliderViewInput!
     var interactor: LBAlbumLikePreviewSliderInteractorInput!
     var router: LBAlbumLikePreviewSliderRouterInput!
+    
+    weak var faceImagePhotosModuleOutput: FaceImagePhotosModuleOutput?
 
     weak var baseGreedPresenterModule: BaseFilesGreedModuleInput?
     var dataSource: LBAlbumLikePreviewSliderDataSource = LBAlbumLikePreviewSliderDataSource()
     
-    //MARK: - View output
+    // MARK: - View output
     
     func viewIsReady(collectionView: UICollectionView) {
         dataSource.setupCollectionView(collectionView: collectionView)
@@ -32,7 +34,7 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
         interactor.requestAllItems()
     }
     
-    //MARK: - Presenter input
+    // MARK: - Presenter input
     
     func setup(withItems items: [SliderItem]) {
         interactor.currentItems = items        
@@ -43,20 +45,22 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
         interactor.requestAllItems()
     }
     
-    //MARK: - Iteractor output
+    // MARK: - Iteractor output
     
-    func operationSuccessed(withItems items:[SliderItem]) {
+    func operationSuccessed(withItems items: [SliderItem]) {
         dataSource.setCollectionView(items: items)
+        faceImagePhotosModuleOutput?.getSliderItmes(items: items)
     }
     
     func operationFailed() {
         
     }
+
 }
 
 extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderDataSourceDelegate {
     
     func onItemSelected(item: SliderItem) {
-        router.onItemSelected(item)
+        router.onItemSelected(item, moduleOutput: self)
     }
 }

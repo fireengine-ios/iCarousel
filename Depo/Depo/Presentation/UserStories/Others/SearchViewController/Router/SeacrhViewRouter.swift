@@ -10,8 +10,9 @@ import Foundation
 
 class SeacrhViewRouter: SearchViewRouterInput {
 
+    private let router = RouterVC()
+    
     func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem]) {
-        let router = RouterVC()
         guard let wrapperedItem = selectedItem as? Item,
               let wrapperedArray = sameTypeItems as? [Item] else {
             return
@@ -28,7 +29,8 @@ class SeacrhViewRouter: SearchViewRouterInput {
             player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
         default:
             let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray)
-            router.pushViewController(viewController: controller)
+            let nController = UINavigationController(rootViewController: controller)
+            router.presentViewController(controller: nController)
         }
     }
     
@@ -38,5 +40,28 @@ class SeacrhViewRouter: SearchViewRouterInput {
     
     func showNoFilesToCreateStoryAlert() {
         UIApplication.showErrorAlert(message: TextConstants.searchNoFilesToCreateStoryError)
+    }
+    
+    func openFaceImageItems(category: SearchCategory) {
+        switch category {
+        case .people:
+            let controller = router.peopleListController()
+            router.pushViewController(viewController: controller)
+        case .things:
+            let controller = router.thingsListController()
+            router.pushViewController(viewController: controller)
+        default:
+            return
+        }
+    }
+    
+    func openFaceImageItemPhotos(item: Item, album: AlbumItem) {
+        let controller = router.imageFacePhotosController(album: album, item: item, moduleOutput: nil)
+        router.pushViewController(viewController: controller)
+    }
+    
+    func openAlbum(item: AlbumItem) {
+        let controller = router.albumDetailController(album: item, type: .List, moduleOutput: nil)
+        router.pushViewController(viewController: controller)
     }
 }

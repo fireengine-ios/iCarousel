@@ -8,12 +8,12 @@
 
 class CreateStoryPhotosOrderRouter: CreateStoryPhotosOrderRouterInput {
 
-    func goToMain(){
+    func goToMain() {
         let router = RouterVC()
         router.popToRootViewController()
     }
     
-    func goToMusicSelection(story: PhotoStory, navigationController: UINavigationController?){
+    func goToMusicSelection(story: PhotoStory, navigationController: UINavigationController?) {
         let router = RouterVC()
         let controller = router.audioSelection(forStory: story)
         let navigation = UINavigationController(rootViewController: controller)
@@ -22,8 +22,8 @@ class CreateStoryPhotosOrderRouter: CreateStoryPhotosOrderRouterInput {
         router.presentViewController(controller: navigation)
     }
     
-    func goToStoryPreviewViewController(forStory story: PhotoStory, responce: CreateStoryResponce, navigationController: UINavigationController?){
-        guard let nController = navigationController else{
+    func goToStoryPreviewViewController(forStory story: PhotoStory, responce: CreateStoryResponce, navigationController: UINavigationController?) {
+        guard let nController = navigationController else {
             return
         }
         let router = RouterVC()
@@ -32,7 +32,7 @@ class CreateStoryPhotosOrderRouter: CreateStoryPhotosOrderRouterInput {
         nController.pushViewController(controller, animated: true)
     }
     
-    func showMusicEmptyPopUp(okHandler: @escaping () -> Void) {
+    func showMusicEmptyPopUp(okHandler: @escaping VoidHandler) {
         let controller = PopUpController.with(title: TextConstants.createStoryMusicEmpty, message: nil, image: .music, firstButtonTitle: TextConstants.ok, secondButtonTitle: TextConstants.createStoryAddMusic, secondAction: { vc in
             vc.close(completion: okHandler)
         })

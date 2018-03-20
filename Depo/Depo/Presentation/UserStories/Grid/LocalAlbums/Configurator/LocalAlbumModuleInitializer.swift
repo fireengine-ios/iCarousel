@@ -10,7 +10,7 @@ import UIKit
 
 class LocalAlbumModuleInitializer: BaseFilesGreedModuleInitializer {
     
-    class func initializeLocalAlbumsController(with nibName:String) -> UIViewController {
+    class func initializeLocalAlbumsController(with nibName: String) -> UIViewController {
         let viewController = LocalAlbumViewController(nibName: nibName, bundle: nil)
         let configurator = LocalAlbumConfigurator()
         
@@ -22,4 +22,3 @@ class LocalAlbumModuleInitializer: BaseFilesGreedModuleInitializer {
     }
     
 }
-

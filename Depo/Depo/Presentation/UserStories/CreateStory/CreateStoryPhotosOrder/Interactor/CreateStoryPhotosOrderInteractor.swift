@@ -14,22 +14,22 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
     
     var isRequestStarted = false
 
-    func viewIsReady(){
-        if (story != nil){
+    func viewIsReady() {
+        if (story != nil) {
             output.showStory(story: story!)
         }
     }
     
-    func onNextButton(array: [Item]){
-        if isRequestStarted{
+    func onNextButton(array: [Item]) {
+        if isRequestStarted {
             return
         }
         
-        guard let story_ = story else{
+        guard let story_ = story else {
             return
         }
         
-        if story_.music == nil{
+        if story_.music == nil {
             output.audioNotSelectedError()
             return
         }
@@ -46,14 +46,14 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
                                        musicUUID: parameter_.audioUuid,
                                        musicId: parameter_.musicId)
             
-            CreateStoryService().getPreview(preview: t, success: { [weak self] (responce) in
+            CreateStoryService().getPreview(preview: t, success: { [weak self] responce in
                 if let self_ = self {
                     self_.isRequestStarted = false
                     DispatchQueue.main.async {
                         self_.output.goToStoryPreview(story: story_, responce: responce)
                     }
                 }
-            }, fail: { [weak self] (fail) in
+            }, fail: { [weak self] fail in
                 if let self_ = self {
                     self_.isRequestStarted = false
                     DispatchQueue.main.async {
@@ -61,7 +61,7 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
                     }
                 }
             })
-        }else{
+        } else {
             isRequestStarted = false
         }
         
@@ -92,7 +92,7 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
         
     }
     
-    func onMusicSelection(){
+    func onMusicSelection() {
         guard let story_ = story else {
             return
         }

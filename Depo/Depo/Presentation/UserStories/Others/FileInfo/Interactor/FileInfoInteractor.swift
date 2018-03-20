@@ -32,7 +32,7 @@ class FileInfoInteractor: FileInfoInteractorInput {
                         file.name = newName
                     }
                 }
-            }, fail: { (error) in
+            }, fail: { error in
                 DispatchQueue.main.async { [weak self] in
                     self?.output.updated()
                 }
@@ -49,7 +49,7 @@ class FileInfoInteractor: FileInfoInteractorInput {
                         file.name = newName
                     }
                 }
-            }, fail: { (error) in
+            }, fail: { error in
                 DispatchQueue.main.async { [weak self] in
                     self?.output.updated()
                 }

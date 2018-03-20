@@ -8,6 +8,9 @@
 
 import Foundation
 import Photos
+import SDWebImage
+
+typealias Item = WrapData
 
 typealias RemoteImage = (_ image: UIImage?) -> Swift.Void
 
@@ -18,7 +21,7 @@ class LocalMediaContent {
     let asset: PHAsset
     let urlToFile: URL
     
-    init(asset: PHAsset, urlToFile:URL) {
+    init(asset: PHAsset, urlToFile: URL) {
         self.asset = asset
         self.urlToFile = urlToFile
     }
@@ -59,45 +62,45 @@ enum ApplicationType: String {
     case pdf = "pdf"
     case ppt = "ppt"
     
-    func bigIconImage() -> UIImage? {
-        switch self {
-        case .rar, .zip:
-            return #imageLiteral(resourceName: "fileBigIconAchive")
-        case .doc:
-            return #imageLiteral(resourceName: "fileBigIconDoc")
-        case .txt:
-            return #imageLiteral(resourceName: "fileBigIconTxt")
-        case .xls:
-            return #imageLiteral(resourceName: "fileBigIconXls")
-        case .pdf:
-            return #imageLiteral(resourceName: "fileBigIconPdf")
-        case .ppt:
-            return #imageLiteral(resourceName: "fileBigIconPpt")
-        default:
-            return nil
-        }
-    }
-    
-    func smallIconImage() -> UIImage? {
-        switch self {
-        case .rar:
-            return #imageLiteral(resourceName: "fileIconRar")
-        case .zip:
-            return #imageLiteral(resourceName: "fileIconZip")
-        case .doc:
-            return #imageLiteral(resourceName: "fileIconDoc")
-        case .txt:
-            return #imageLiteral(resourceName: "fileIconTxt")
-        case .xls:
-            return #imageLiteral(resourceName: "fileIconXls")
-        case .pdf:
-            return #imageLiteral(resourceName: "fileIconPdf")
-        case .ppt:
-            return #imageLiteral(resourceName: "fileIconPpt")
-        default:
-            return #imageLiteral(resourceName: "fileIconUnknown")
-        }
-    }
+//    func bigIconImage() -> UIImage? {
+//        switch self {
+//        case .rar, .zip:
+//            return #imageLiteral(resourceName: "fileBigIconAchive")
+//        case .doc:
+//            return #imageLiteral(resourceName: "fileBigIconDoc")
+//        case .txt:
+//            return #imageLiteral(resourceName: "fileBigIconTxt")
+//        case .xls:
+//            return #imageLiteral(resourceName: "fileBigIconXls")
+//        case .pdf:
+//            return #imageLiteral(resourceName: "fileBigIconPdf")
+//        case .ppt:
+//            return #imageLiteral(resourceName: "fileBigIconPpt")
+//        default:
+//            return nil
+//        }
+//    }
+//    
+//    func smallIconImage() -> UIImage? {
+//        switch self {
+//        case .rar:
+//            return #imageLiteral(resourceName: "fileIconRar")
+//        case .zip:
+//            return #imageLiteral(resourceName: "fileIconZip")
+//        case .doc:
+//            return #imageLiteral(resourceName: "fileIconDoc")
+//        case .txt:
+//            return #imageLiteral(resourceName: "fileIconTxt")
+//        case .xls:
+//            return #imageLiteral(resourceName: "fileIconXls")
+//        case .pdf:
+//            return #imageLiteral(resourceName: "fileIconPdf")
+//        case .ppt:
+//            return #imageLiteral(resourceName: "fileIconPpt")
+//        default:
+//            return #imageLiteral(resourceName: "fileIconUnknown")
+//        }
+//    }
 }
 
 enum FileType: Equatable {
@@ -110,6 +113,8 @@ enum FileType: Equatable {
     case musicPlayList
     case allDocs
     case application(ApplicationType)
+    case faceImage(FaceImageType)
+    case faceImageAlbum(FaceImageType)
 
     
     var convertedToSearchFieldValue: FieldValue {
@@ -159,6 +164,14 @@ enum FileType: Equatable {
         return (self == .audio) || self == (.video)
     }
     
+    var isFaceImageType: Bool {
+        return self == .faceImage(.people) || self == .faceImage(.things) || self == .faceImage(.places)
+    }
+    
+    var isFaceImageAlbum: Bool {
+        return self == .faceImageAlbum(.people) || self == .faceImageAlbum(.things) || self == .faceImageAlbum(.places)
+    }
+    
     
     init(type: String?, fileName: String?) {
         if let wrapType = type {
@@ -185,9 +198,24 @@ enum FileType: Equatable {
                     self = .photoAlbum
                     return
                 }
+                
+                if (wrapType.hasSuffix("object")) {
+                    self = .faceImageAlbum(.things)
+                    return
+                }
+                
+                if (wrapType.hasSuffix("person")) {
+                    self = .faceImageAlbum(.people)
+                    return
+                }
+                
+                if (wrapType.hasSuffix("location")) {
+                    self = .faceImageAlbum(.places)
+                    return
+                }
             }
             
-            if (wrapType.hasPrefix("text")){
+            if (wrapType.hasPrefix("text")) {
                 guard let prefix = wrapType.components(separatedBy: "/").last else {
                     self = .application(.unknown)
                     return
@@ -234,11 +262,11 @@ enum FileType: Equatable {
                     self = .application(.xls)
                     return
                 case "octet-stream":
-                    guard let name_ = fileName else{
+                    guard let name_ = fileName else {
                         self = .application(.unknown)
                         return
                     }
-                    guard let ext = name_.components(separatedBy: ".").last else{
+                    guard let ext = name_.components(separatedBy: ".").last else {
                         self = .application(.unknown)
                         return
                     }
@@ -252,6 +280,9 @@ enum FileType: Equatable {
                     default:
                         self = .application(.unknown)
                     }
+                    return
+                case "zip", "x-zip-compressed", "tar", ".7z":
+                    self = .application(.zip)
                     return
                 case "vnd.ms-powerpoint":
                     self = .application(.ppt)
@@ -346,16 +377,19 @@ enum FileType: Equatable {
             return 18
         case .allDocs:
             return 19
+            
+        default:
+            return 0
         }
     }
     
     
     static func ==(lhs: FileType, rhs: FileType) -> Bool {
-        switch (lhs,rhs) {
-        case (.image,.image): return true
-        case (.video,.video): return true
-        case (.audio,.audio): return true
-        case (.folder,.folder): return true
+        switch (lhs, rhs) {
+        case (.image, .image): return true
+        case (.video, .video): return true
+        case (.audio, .audio): return true
+        case (.folder, .folder): return true
         case (.application, .application):
             switch (lhs) {
             case .application(let lhsType):
@@ -369,8 +403,34 @@ enum FileType: Equatable {
             default:()
             }
             return false
-        case (.photoAlbum,.photoAlbum): return true
-        case (.musicPlayList,.musicPlayList): return true
+        case (.photoAlbum, .photoAlbum): return true
+        case (.musicPlayList, .musicPlayList): return true
+        case (.faceImage, .faceImage):
+            switch (lhs) {
+            case .faceImage(let lhsType):
+                switch (rhs) {
+                case .faceImage(let rhsType):
+                    if lhsType == rhsType {
+                        return true
+                    }
+                default:()
+                }
+            default:()
+            }
+            return false
+        case (.faceImageAlbum, .faceImageAlbum):
+            switch (lhs) {
+            case .faceImageAlbum(let lhsType):
+                switch (rhs) {
+                case .faceImageAlbum(let rhsType):
+                    if lhsType == rhsType {
+                        return true
+                    }
+                default:()
+                }
+            default:()
+            }
+            return false
         default:
             return false
         }
@@ -410,7 +470,7 @@ enum SyncWrapperedStatus {
     }
 }
 
-protocol  Wrappered  {
+protocol  Wrappered {
     
     var id: Int64? { get }
     
@@ -430,7 +490,7 @@ protocol  Wrappered  {
     
     var creationDate: Date? { get }
     
-    var lastModifiDate: Date? { get}
+    var lastModifiDate: Date? { get }
     
     var patchToPreview: PathForItem { get }
     
@@ -446,7 +506,6 @@ protocol  Wrappered  {
     
     var albums: [String]? { get set }
 }
-
 
 class WrapData: BaseDataSourceItem, Wrappered {
     enum Status: String {
@@ -492,9 +551,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var fileData: Data?
     
     var asset: PHAsset? {
-        
-        switch patchToPreview  {
-            
+        switch patchToPreview {
         case let .localMediaContent(local):
             return local.asset
         case .remoteUrl(_):
@@ -502,7 +559,21 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    var parent: String?
+    var uploadContentType: String {
+        switch fileType {
+        case .image:
+            if let type = urlToFile?.pathExtension.lowercased(), !type.isEmpty {
+                return "image/\(type)"
+            } else if let data = fileData {
+                return ImageFormat.get(from: data).contentType
+            }
+            return "image/jpg"
+        case .video:
+            return "video/mp4"
+        default:
+            return "unknown"
+        }
+    }
     
     var isFolder: Bool?
     
@@ -529,7 +600,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         status = .unknown
         patchToPreview = .remoteUrl(nil)
         // unuse parametrs
-        fileSize =  0
+        fileSize = 0
         super.init()
         md5 = "not use "
         
@@ -543,7 +614,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     init(peopleItemResponse: PeopleItemResponse) {
         id = peopleItemResponse.id
-        fileSize =  0
+        fileSize = 0
         favorites = false
         status = .unknown
         metaData = BaseMetaData()
@@ -555,12 +626,12 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced
-        fileType = .image
+        fileType = .faceImage(.people)
     }
     
     init(thingsItemResponse: ThingsItemResponse) {
         id = thingsItemResponse.id
-        fileSize =  0
+        fileSize = 0
         favorites = false
         status = .unknown
         metaData = BaseMetaData()
@@ -572,12 +643,12 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced
-        fileType = .image
+        fileType = .faceImage(.things)
     }
     
     init(placesItemResponse: PlacesItemResponse) {
         id = placesItemResponse.id
-        fileSize =  0
+        fileSize = 0
         favorites = false
         status = .unknown
         metaData = BaseMetaData()
@@ -589,13 +660,13 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isLocalItem = false
         creationDate = Date()
         syncStatus = .notSynced
-        fileType = .image
+        fileType = .faceImage(.places)
     }
     
     init(baseModel: BaseMediaContent) {
 
         fileSize = baseModel.size
-        let tmp  = LocalMediaContent(asset: baseModel.asset,
+        let tmp = LocalMediaContent(asset: baseModel.asset,
                                      urlToFile: baseModel.urlToFile)
         patchToPreview = .localMediaContent(tmp)
         tmpDownloadUrl = baseModel.urlToFile
@@ -680,7 +751,14 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if url == nil, fileType == .image {
                 url = remote.tempDownloadURL
             }
-
+        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
+            if let mediumUrl = remote.metadata?.mediumUrl {
+                url = mediumUrl
+            } else if let smallUrl = remote.metadata?.smalURl {
+                url = smallUrl
+            } else {
+                url = remote.tempDownloadURL
+            }            
         default:
             break
         }
@@ -729,9 +807,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let url_ = mediaItem.urlToFileValue {
             url = URL(string: url_)
         }
-        tmpDownloadUrl =  url
-        
-        parent = mediaItem.parent
+        tmpDownloadUrl = url
         
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
@@ -740,7 +816,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
             if let asset = avalibleAsset {
                 let urlToFile = URL(string: url)!
-                let tmp  = LocalMediaContent(asset: asset,
+                let tmp = LocalMediaContent(asset: asset,
                                              urlToFile: urlToFile)
                 mediaItem.metadata?.duration = asset.duration
                 patchToPreview = .localMediaContent(tmp)
@@ -760,13 +836,14 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         id = mediaItem.idValue
         super.init()
+        parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
         uuid = mediaItem.uuidValue ?? ""//UUID().description
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
         creationDate = mediaItem.creationDateValue as Date?
         lastModifiDate = mediaItem.lastModifiDateValue as Date?
-        syncStatus =  SyncWrapperedStatus(value: mediaItem.syncStatusValue)
+        syncStatus = SyncWrapperedStatus(value: mediaItem.syncStatusValue)
         syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         fileType = FileType(value: mediaItem.fileTypeValue)
         isFolder = mediaItem.isFolder
@@ -808,15 +885,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     private class func getDuration(duration: Double?) -> String {
-        if let d = duration{
+        if let d = duration {
             let s = CGFloat(d)
             let seconds = Int(s) % 60
             let minutes = Int(s) / 60
             
-            if (minutes < 100){
-                return String(format:"%02i:%02i", minutes,seconds)
-            }else{
-                return String(format:"%i:%02i", minutes,seconds)
+            if (minutes < 100) {
+                return String(format: "%02i:%02i", minutes, seconds)
+            } else {
+                return String(format: "%i:%02i", minutes, seconds)
             }
         }
         return ""

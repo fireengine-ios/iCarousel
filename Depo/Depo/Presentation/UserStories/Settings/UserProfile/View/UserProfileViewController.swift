@@ -12,7 +12,7 @@ class UserProfileViewController: UIViewController, UserProfileViewInput, UITextF
     var output: UserProfileViewOutput!
     
     @IBOutlet var keyboardHideManager: KeyboardHideManager! /// not weak
-    @IBOutlet weak var scrollView : UIScrollView!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewForContent: UIView!
     
     @IBOutlet weak var nameSubTitle: UILabel!
@@ -75,7 +75,7 @@ class UserProfileViewController: UIViewController, UserProfileViewInput, UITextF
         let range = string.range(of: TextConstants.userProfileBottomLabelText2)
         let attributedText = NSMutableAttributedString(string: text)
         
-        let fontSize:CGFloat = 16
+        let fontSize: CGFloat = 16
         
         let font1 = UIFont.TurkcellSaturaDemFont(size: fontSize)
         let font2 = UIFont.TurkcellSaturaItaFont(size: fontSize)
@@ -120,7 +120,7 @@ class UserProfileViewController: UIViewController, UserProfileViewInput, UITextF
         return navigationController
     }
     
-    func getPhoneNumber() -> String{
+    func getPhoneNumber() -> String {
         return gsmNumberTextField.text ?? ""
     }
     
@@ -213,7 +213,7 @@ class UserProfileViewController: UIViewController, UserProfileViewInput, UITextF
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string == " " && textField == emailTextField{
+        if string == " " && textField == emailTextField {
             return false
         }
         

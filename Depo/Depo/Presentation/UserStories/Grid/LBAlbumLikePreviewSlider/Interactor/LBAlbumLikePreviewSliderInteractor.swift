@@ -14,7 +14,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     let faceImageService = FaceImageService()
 
-    //MARK: - Interactor Input
+    // MARK: - Interactor Input
     
     deinit {
         ItemOperationManager.default.stopUpdateView(view: self)
@@ -74,62 +74,9 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         
         faceImageAllowed { [weak self] result in
             if result == true {
-                self?.faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .people), success: { [weak self] response in
-                    log.debug("FaceImageService Peolpe Thumbnails success")
-                    
-                    DispatchQueue.main.async {
-                        if let thumbnails = (response as? FaceImageThumbnailsResponse)?.list {
-                            self?.dataStorage.addNew(item: SliderItem(withThumbnails: thumbnails.map { URL(string: $0) }, type: .people))
-                        }
-                        group.leave()
-                    }
-                    
-                    }, fail: { [weak self] error in
-                        log.debug("FaceImageService Peolpe Thumbnails fail")
-                        
-                        DispatchQueue.main.async {
-                            self?.output.operationFailed()
-                            group.leave()
-                    }
-                })
-                
-                self?.faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .things), success: { [weak self] response in
-                    log.debug("FaceImageService Things Thumbnails success")
-                    
-                    DispatchQueue.main.async {
-                        if let thumbnails = (response as? FaceImageThumbnailsResponse)?.list {
-                            self?.dataStorage.addNew(item: SliderItem(withThumbnails: thumbnails.map { URL(string: $0) }, type: .things))
-                        }                    
-                        group.leave()
-                    }
-                    
-                    }, fail: { [weak self] error in
-                        log.debug("FaceImageService Things Thumbnails fail")
-                        
-                        DispatchQueue.main.async {
-                            self?.output.operationFailed()
-                            group.leave()
-                        }
-                })
-                
-                self?.faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: .places), success: { [weak self] response in
-                    log.debug("FaceImageService Places Thumbnails success")
-                    
-                    DispatchQueue.main.async {
-                        if let thumbnails = (response as? FaceImageThumbnailsResponse)?.list {
-                            self?.dataStorage.addNew(item: SliderItem(withThumbnails: thumbnails.map { URL(string: $0) }, type: .places))
-                        }
-                        group.leave()
-                    }
-                    
-                    }, fail: { [weak self] error in
-                        log.debug("FaceImageService Places Thumbnails fail")
-                        
-                        DispatchQueue.main.async {
-                            self?.output.operationFailed()
-                            group.leave()
-                        }
-                })
+                self?.getThumbnails(forType: .people, group: group)
+                self?.getThumbnails(forType: .things, group: group)
+                self?.getThumbnails(forType: .places, group: group)
             } else {
                 DispatchQueue.main.async {
                     group.leave()
@@ -141,9 +88,17 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         
         group.notify(queue: queue) { [weak self] in
              DispatchQueue.main.async {
-                if let `self` = self {
-                    self.output.operationSuccessed(withItems: self.currentItems)
+                guard let `self` = self else {
+                    return
                 }
+                
+                let items = self.currentItems.sorted(by: { item1, item2 -> Bool in
+                    let type1 = item1.type ?? .album
+                    let type2 = item2.type ?? .album
+                    return type1.rawValue < type2.rawValue
+                })
+                
+                self.output.operationSuccessed(withItems: items)
             }
         }
     }
@@ -165,6 +120,32 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         })
     }
     
+    fileprivate func getThumbnails(forType type: FaceImageType, group: DispatchGroup) {
+        faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: type), success: { [weak self] response in
+            log.debug("FaceImageService \(type.description) Thumbnails success")
+            
+            let item: SliderItem
+            if let thumbnails = (response as? FaceImageThumbnailsResponse)?.list {
+                item = SliderItem(withThumbnails: thumbnails.map { URL(string: $0) }, type: type.myStreamType)
+            } else {
+                item = SliderItem(withThumbnails: [], type: type.myStreamType)
+            }
+
+            DispatchQueue.main.async {
+                self?.dataStorage.addNew(item: item)
+                group.leave()
+            }
+            
+            }, fail: { [weak self] error in
+                log.debug("FaceImageService \(type.description) Thumbnails fail")
+                
+                DispatchQueue.main.async {
+                    self?.output.operationFailed()
+                    group.leave()
+                }
+        })
+    }
+    
     //Protocol ItemOperationManagerViewProtocol
     
     func newAlbumCreated() {
@@ -175,7 +156,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         requestAllItems()
     }
     
-    func updatedAlbumCoverPhoto(item: AlbumItem) {
+    func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
         requestAllItems()
     }
     
@@ -188,6 +169,10 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     }
     
     func filesAddedToAlbum() {
+        requestAllItems()
+    }
+    
+    func filesRomovedFromAlbum(items: [Item], albumUUID: String) {
         requestAllItems()
     }
 

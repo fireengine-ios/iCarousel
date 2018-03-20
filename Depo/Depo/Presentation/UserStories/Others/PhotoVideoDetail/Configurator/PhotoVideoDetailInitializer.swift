@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoVideoDetailModuleInitializer: NSObject {
 
-    class func initializeViewController(with nibName:String, selectedItem: Item, allItems: [Item], hideActions: Bool = false) -> UIViewController {
+    class func initializeViewController(with nibName: String, selectedItem: Item, allItems: [Item], hideActions: Bool = false) -> UIViewController {
         let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit],
                                                          style: .blackOpaque, tintColor: nil)
         let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .delete],
@@ -26,7 +26,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeAlbumViewController(with nibName:String, selectedItem: Item, allItems: [Item], albumUUID: String, hideActions: Bool = false) -> UIViewController {
+    class func initializeAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, hideActions: Bool = false) -> UIViewController {
         let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit, .removeFromAlbum],
                                                          style: .blackOpaque, tintColor: nil)
         let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .removeFromAlbum],
@@ -40,6 +40,26 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                           selecetedItem: selectedItem,
                                                           allItems: allItems,
                                                           albumUUID: albumUUID,
+                                                          hideActions: hideActions)
+        
+        return viewController
+    }
+    
+    class func initializeFaceImageAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, hideActions: Bool = false) -> UIViewController {
+        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit, .removeFromFaceImageAlbum],
+                                                         style: .blackOpaque, tintColor: nil)
+        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .removeFromFaceImageAlbum],
+                                                        style: .blackOpaque, tintColor: nil)
+        
+        let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
+        let configurator = PhotoVideoDetailModuleConfigurator()
+        configurator.configureModuleFromFaceImageAlbumForViewInput(viewInput: viewController,
+                                                          photoVideoBottomBarConfig: photoVideoBottomBarConfig,
+                                                          documentsBottomBarConfig: documentsBottomBarConfig,
+                                                          selecetedItem: selectedItem,
+                                                          allItems: allItems,
+                                                          albumUUID: albumUUID,
+                                                          albumItem: albumItem,
                                                           hideActions: hideActions)
         
         return viewController

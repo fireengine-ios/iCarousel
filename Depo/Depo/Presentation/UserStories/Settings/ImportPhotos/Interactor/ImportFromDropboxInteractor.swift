@@ -9,10 +9,10 @@
 import Foundation
 
 class ImportFromDropboxInteractor {
-    var output: ImportFromDropboxInteractorOutput!
+    weak var output: ImportFromDropboxInteractorOutput?
     
-    var dbService = DropboxService()
-    lazy var dropboxManager: DropboxManager = factory.resolve()
+    private var dbService = DropboxService()
+    private lazy var dropboxManager: DropboxManager = factory.resolve()
 }
 
 extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
@@ -21,12 +21,12 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
         dbService.requestStatus(success: { [weak self] responseObject in
             let dropboxStatus = responseObject as! DropboxStatusObject
             DispatchQueue.main.async {
-                self?.output.statusSuccessCallback(status: dropboxStatus)
+                self?.output?.statusSuccessCallback(status: dropboxStatus)
             }
             
         }) { [weak self] error in
             DispatchQueue.main.async {
-                self?.output.statusFailureCallback(errorMessage: error.description)
+                self?.output?.statusFailureCallback(errorMessage: error.description)
             }
         }
     }
@@ -36,11 +36,11 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let token):
-                    self?.output.loginSuccessCallback(token: token)
+                    self?.output?.loginSuccessCallback(token: token)
                 case .cancel:
-                    self?.output.loginFailureCallback(errorMessage: "Canceled")
+                    self?.output?.loginFailureCallback(errorMessage: "Canceled")
                 case .failed(let errorString):
-                    self?.output.loginFailureCallback(errorMessage: errorString)
+                    self?.output?.loginFailureCallback(errorMessage: errorString)
                 }
             }
         }
@@ -49,29 +49,29 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     func requestConnect(withToken token: String) {
         dbService.requestConnect(withToken: token, success: { [weak self] _ in
             DispatchQueue.main.async {
-                self?.output.connectSuccessCallback()
+                self?.output?.connectSuccessCallback()
             }
         }) { [weak self] error in
             DispatchQueue.main.async {
                 self?.dropboxManager.logout()
                 self?.login()
-                self?.output.connectFailureCallback(errorMessage: error.description)
+                self?.output?.connectFailureCallback(errorMessage: error.description)
             }
         }
     }
     
     func requestStatusForStart() {
-        dbService.requestStatus(success: { [weak self] (responseObject) in
+        dbService.requestStatus(success: { [weak self] responseObject in
             let dropboxStatus = responseObject as! DropboxStatusObject
             DispatchQueue.main.async {
-                self?.output.statusForStartSuccessCallback(status: dropboxStatus)
+                self?.output?.statusForStartSuccessCallback(status: dropboxStatus)
             }
         }) { [weak self] errorResponse in
             DispatchQueue.main.async {
                 if case ErrorResponse.error(let error) = errorResponse, error is URLError {
-                    self?.output.failedWithInternetError(errorMessage: error.localizedDescription)
+                    self?.output?.failedWithInternetError(errorMessage: error.localizedDescription)
                 }
-                self?.output.statusForStartFailureCallback(errorMessage: errorResponse.localizedDescription)
+                self?.output?.statusForStartFailureCallback(errorMessage: errorResponse.localizedDescription)
             }
         }
     }
@@ -79,11 +79,11 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     func requestStart() {
         dbService.requestStart(success: { [weak self] _ in
             DispatchQueue.main.async {
-                self?.output.startSuccessCallback()
+                self?.output?.startSuccessCallback()
             }
         }) { [weak self] error in
             DispatchQueue.main.async {
-                self?.output.startFailureCallback(errorMessage: error.description)
+                self?.output?.startFailureCallback(errorMessage: error.description)
             }
         }
     }

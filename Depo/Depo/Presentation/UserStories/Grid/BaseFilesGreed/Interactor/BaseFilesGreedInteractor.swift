@@ -46,7 +46,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 log.debug("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems success")
                 
                 var isArrayPresenter = false
-                if let presenter = self?.output as? BaseFilesGreedPresenter{
+                if let presenter = self?.output as? BaseFilesGreedPresenter {
                     isArrayPresenter = presenter.isArrayDataSource()
                 }
                 
@@ -79,16 +79,14 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         isUpdating = true
         remoteItems.nextItems(sortBy: sortBy,
                               sortOrder: sortOrder,
-                              success:
-            { [weak self] items in
+                              success: { [weak self] items in
                 DispatchQueue.main.async {
                     log.debug("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems success")
 
                     self?.isUpdating = false
                     if items.count == 0 {
                         self?.output.getContentWithSuccessEnd()
-                    }
-                    else if let out = self?.output as? CreateStorySelectionInteractorOutput {
+                    } else if let out = self?.output as? CreateStorySelectionInteractorOutput {
                         var array = [[WrapData]]()
                         array.append(items)
                         out.getContentWithSuccess(array: array)
@@ -104,25 +102,51 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         }, newFieldValue: newFieldValue)
     }
     
-    func textForNoFileLbel() -> String{
+    func canShowNoFilesView() -> Bool {
+        return remoteItems is PhotoAndVideoService ||
+            remoteItems is MusicService || 
+            remoteItems is DocumentService ||
+            remoteItems is StoryService ||
+            remoteItems is AlbumService ||
+            remoteItems is AllFilesService ||
+            remoteItems is FavouritesService
+    }
+    
+    func needHideTopBar() -> Bool {
+        return !(remoteItems is PhotoAndVideoService)
+    }
+    
+    func textForNoFileLbel() -> String {
         if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoTitleText
         } else if remoteItems is MusicService {
             return TextConstants.audioViewNoAudioTitleText
         } else if remoteItems is DocumentService {
             return TextConstants.documentsViewNoDocumenetsTitleText
+        } else if remoteItems is StoryService {
+            return TextConstants.storiesViewNoStoriesTitleText
+        } else if remoteItems is AlbumService {
+            return TextConstants.albumsViewNoAlbumsTitleText
+        } else if remoteItems is AllFilesService {
+            return TextConstants.allFilesViewNoFilesTitleText
+        } else if remoteItems is FavouritesService {
+            return TextConstants.favoritesViewNoFilesTitleText
         }
         
         return ""
     }
     
-    func textForNoFileButton() -> String{
+    func textForNoFileButton() -> String {
         if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoButtonText
-        } else if remoteItems is MusicService {
-            return TextConstants.audioViewNoAudioButtonText
-        } else if remoteItems is DocumentService {
-            return TextConstants.documentsViewNoDocumenetsTitleText
+        } else if remoteItems is StoryService {
+            return TextConstants.storiesViewNoStoriesButtonText
+        } else if remoteItems is AlbumService {
+            return TextConstants.albumsViewNoAlbumsButtonText
+        } else if remoteItems is AllFilesService {
+            return TextConstants.allFilesViewNoFilesButtonText
+        } else if remoteItems is FavouritesService {
+            return TextConstants.favoritesViewNoFilesButtonText
         }
     
         return ""
@@ -135,16 +159,23 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             return UIImage(named: "ImageNoMusics")!
         } else if remoteItems is DocumentService {
             return UIImage(named: "ImageNoDocuments")!
+        } else if remoteItems is StoryService {
+            return UIImage(named: "ImageNoStories")!
+        } else if remoteItems is AlbumService {
+            return UIImage(named: "ImageNoAlbums")!
+        } else if remoteItems is AllFilesService {
+            return UIImage(named: "ImageNoAllFiles")!
+        } else if remoteItems is FavouritesService {
+            return UIImage(named: "ImageNoFavorites")!
         }
-        
         return UIImage()
     }
     
-    func getRemoteItemsService() -> RemoteItemsService{
+    func getRemoteItemsService() -> RemoteItemsService {
         return remoteItems
     }
     
-    func getFolder() -> Item?{
+    func getFolder() -> Item? {
         return folder
     }
     

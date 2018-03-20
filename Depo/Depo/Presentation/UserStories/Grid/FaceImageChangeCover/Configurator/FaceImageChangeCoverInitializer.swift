@@ -14,7 +14,7 @@ protocol FaceImageChangeCoverModuleOutput: class {
 
 final class FaceImageChangeCoverInitializer: NSObject {
 
-    class func initializeController(with nibName:String, albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?) -> UIViewController {
+    class func initializeController(with nibName: String, albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?) -> UIViewController {
         let viewController = FaceImageChangeCoverViewController(nibName: nibName, bundle: nil)
     
         let configurator = FaceImageChangeCoverConfigurator()
@@ -24,4 +24,3 @@ final class FaceImageChangeCoverInitializer: NSObject {
         return viewController
     }
 }
-

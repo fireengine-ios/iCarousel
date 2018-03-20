@@ -10,7 +10,7 @@ import Foundation
 import Reachability
 
 
-protocol ReachabilityProtocol  {
+protocol ReachabilityProtocol {
     
     var isReachableViaWWAN: Bool { get }
     
@@ -21,7 +21,7 @@ protocol ReachabilityProtocol  {
 
 class ReachabilityService: ReachabilityProtocol {
     
-    private let reachability  = Reachability()!
+    private let reachability = Reachability()!
     
     var isReachableViaWiFi: Bool {
         return self.reachability.connection == .wifi
@@ -31,16 +31,16 @@ class ReachabilityService: ReachabilityProtocol {
         return self.reachability.connection == .cellular
     }
     
-    var isReachable:Bool {
+    var isReachable: Bool {
         return self.reachability.connection != .none
     }
     
     init() {
-        self.reachability.whenReachable = { (Reachability) in
+        self.reachability.whenReachable = { Reachability in
             //
         }
         
-        self.reachability.whenUnreachable = { (Reachability) in
+        self.reachability.whenUnreachable = { Reachability in
             //
         }
         
@@ -85,7 +85,7 @@ class APIReachabilityService {
         
     }
     
-    //MARK: - Public
+    // MARK: - Public
     
     func startNotifier() {
         guard timer == nil else {
@@ -102,12 +102,12 @@ class APIReachabilityService {
     }
     
     private func notify() {
-        NotificationCenter.default.post(name: APIReachabilityService.APIReachabilityDidChangeName , object: nil)
+        NotificationCenter.default.post(name: APIReachabilityService.APIReachabilityDidChangeName, object: nil)
     }
     
     
     @objc private func checkAPI() {
-        requestService.sendPingRequest { [weak self] (isReachable) in
+        requestService.sendPingRequest { [weak self] isReachable in
             guard let `self` = self else {
                 return
             }
@@ -137,4 +137,3 @@ class APIReachabilityRequestService: BaseRequestService {
         executeHeadRequest(param: parameters, handler: responseHandler)
     }
 }
-

@@ -10,7 +10,7 @@ import UIKit
 
 class RegistrationRouter: RegistrationRouterInput {
     
-    func phoneVerification(sigUpResponse:SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
+    func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
         
         let router = RouterVC()
         let phoneVerification = router.phoneVereficationScreen(withSignUpSuccessResponse: sigUpResponse, userInfo: userInfo)
@@ -19,7 +19,7 @@ class RegistrationRouter: RegistrationRouterInput {
     
     func termsAndServices(with delegate: RegistrationViewDelegate?, email: String) {
         
-        let okHandler: () -> Void = {
+        let okHandler: VoidHandler = {
             let router = RouterVC()
             let termsAndServices = router.termsAndServicesScreen(login: false, delegate: delegate)
             router.pushViewController(viewController: termsAndServices)

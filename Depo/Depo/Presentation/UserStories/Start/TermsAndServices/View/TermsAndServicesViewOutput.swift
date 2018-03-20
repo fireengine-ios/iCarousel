@@ -10,5 +10,7 @@ protocol TermsAndServicesViewOutput {
     
     func viewIsReady()
     
-    func termsApplied()
+    func startUsing()
+    
+    func confirmAgreements(_ confirm: Bool)
 }

@@ -36,7 +36,7 @@ final class PlacesServiceResponse: ObjectRequestResponse {
     var list: Array<PlacesItemResponse> = []
     
     override func mapping() {
-        if let result = json?.array?.flatMap( {PlacesItemResponse(withJSON: $0)}) {
+        if let result = json?.array?.flatMap({ PlacesItemResponse(withJSON: $0) }) {
             list = result
         }
     }
@@ -46,8 +46,12 @@ final class PlacesPageResponse: ObjectRequestResponse {
     var list: Array<PlacesItemResponse> = []
     
     override func mapping() {
-        if let result = json?[PlacesJsonKey.locationInfos].array?.flatMap( {PlacesItemResponse(withJSON: $0)}) {
+        if let result = json?[PlacesJsonKey.locationInfos].array?.flatMap({ PlacesItemResponse(withJSON: $0) }) {
             list = result
         }
     }
+}
+
+final class DeletePhotosFromPlacesAlbum: DeletePhotosFromAlbum {
+    
 }

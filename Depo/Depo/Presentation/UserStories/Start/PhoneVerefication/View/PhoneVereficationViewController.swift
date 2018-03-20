@@ -20,8 +20,6 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
     
     @IBOutlet weak var resendButton: WhiteButtonWithRoundedCorner!
     
-    @IBOutlet weak var nextButton: WhiteButtonWithRoundedCorner!
-    
     @IBOutlet weak var mainTitle: UILabel!
     
     @IBOutlet weak var infoTitle: UILabel!
@@ -40,18 +38,11 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        visibleNavigationBarStyle()
+        hidenNavigationBarStyle()
     }
     
     @IBAction func ResendCode(_ sender: Any) {
         output.resendButtonPressed()
-    }
-    
-    @IBAction func NextAction(_ sender: Any) {
-        guard let code = codeVereficationField.text else {
-            return
-        }
-        output.nextButtonPressed(withVereficationCode: code)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -71,7 +62,6 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
         navigationItem.backBarButtonItem?.title = TextConstants.backTitle
         codeVereficationField.delegate = self
         resendButton.setTitle(TextConstants.registrationResendButtonText, for: .normal)
-        nextButton.setTitle(TextConstants.checkPhoneNextButtonText, for: .normal)
         
         mainTitle.font = UIFont.TurkcellSaturaBolFont(size: 18)
         mainTitle.textColor = UIColor.white
@@ -94,8 +84,6 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
     func setupButtonsInitialState() {
         resendButton.isHidden = true
         resendButton.isEnabled = false
-//        nextButton.isEnabled = false
-//        nextButton.alpha = 0.5
     }
     
     func setupTimer(withRemainingTime remainingTime: Int) {
@@ -108,36 +96,11 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
         timerLabel.dropTimer()
     }
     
-    func addBarToKeyboard() {
-        
-        let doneButton = UIBarButtonItem(title: TextConstants.nextTitle,
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(nextBarButtonPressed(sender:)))
-        let toolBar = barButtonItemsWithRitht(button: doneButton)
-        
-        codeVereficationField.inputAccessoryView = toolBar
-    }
-    
-    @objc func nextBarButtonPressed(sender: Any?) {
-        codeVereficationField.resignFirstResponder()
-        guard let code = codeVereficationField.text, code.count == 6 else {
-            return
-        }
-        output.nextButtonPressed(withVereficationCode: code)
-    }
-    
     func resendButtonShow(show: Bool) {
         resendButton.isHidden = !show
         resendButton.isEnabled = show
         codeVereficationField.text = show ? "" : codeVereficationField.text
         codeVereficationField.isEnabled = !show
-    }
-    
-    func nextButtonEnable(enable: Bool) {
-        nextButton.isEnabled = enable
-//        nextButton.isHidden = !enable
-        nextButton.alpha = enable ? 1.0 : 0.6
     }
     
     func setupTextLengh(lenght: Int) {
@@ -148,10 +111,9 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
         phoneCodeLabel.text = number
     }
     
-    func getNavigationController() -> UINavigationController?{
+    func getNavigationController() -> UINavigationController? {
         return self.navigationController
     }
-    
 }
 
 extension PhoneVereficationViewController: UITextFieldDelegate, SmartTimerLabelDelegate {

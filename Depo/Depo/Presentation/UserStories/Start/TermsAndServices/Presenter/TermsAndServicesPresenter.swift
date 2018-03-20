@@ -13,6 +13,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     var router: TermsAndServicesRouterInput!
     
     weak var delegate: RegistrationViewDelegate?
+    private var confirmAgreements = false
 
     // MARK: IN
     func viewIsReady() {
@@ -20,23 +21,31 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         interactor.loadTermsAndUses()
     }
     
-    func termsApplied(){
-        if interactor.cameFromLogin {
-            interactor.applyEula()
+    func startUsing() {
+        if confirmAgreements {
+            if interactor.cameFromLogin {
+                interactor.applyEula()
+            } else {
+                interactor.signUpUser()
+            }
+            startAsyncOperationDisableScreen()
         } else {
-            interactor.signUpUser()
+            view.noConfirmAgreements(errorString: TextConstants.termsAndUseCheckboxErrorText)
         }
-        startAsyncOperationDisableScreen()
+    }
+    
+    func confirmAgreements(_ confirm: Bool) {
+        confirmAgreements = confirm
     }
     
     // MARK: OUT
     
-    func showLoadedTermsAndUses(eula: String){
+    func showLoadedTermsAndUses(eula: String) {
         view.showLoadedTermsAndUses(eula: eula)
         compliteAsyncOperationEnableScreen()
     }
     
-    func failLoadTermsAndUses(errorString:String){
+    func failLoadTermsAndUses(errorString: String) {
         compliteAsyncOperationEnableScreen(errorMessage: errorString)
         delegate?.show(errorString: errorString)
         router.closeModule()
@@ -59,7 +68,8 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         router.closeModule()
     }
     
-    func eulaApplied(){
+    func eulaApplied() {
+        MenloworksEventsService.shared.onApporveEulaPageClicked()
          compliteAsyncOperationEnableScreen()
         //theoreticaly we should add coredata update/append here also
         router.goToAutoSync()

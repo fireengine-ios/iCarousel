@@ -13,6 +13,16 @@ class GradientView: UIView {
     
     let gradientLayer = CAGradientLayer()
     
+    func update(withFrame newFrame: CGRect, startColor: UIColor, endColoer: UIColor, startPoint: CGPoint, endPoint: CGPoint) {
+        
+        frame = newFrame
+        
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [startColor.cgColor, endColoer.cgColor]
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+    }
+    
     func setup(withFrame newFrame: CGRect, startColor: UIColor, endColoer: UIColor, startPoint: CGPoint, endPoint: CGPoint) {
         
         frame = newFrame

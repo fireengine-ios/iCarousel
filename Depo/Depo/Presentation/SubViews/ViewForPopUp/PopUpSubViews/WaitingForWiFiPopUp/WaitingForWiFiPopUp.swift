@@ -23,7 +23,7 @@ final class WaitingForWiFiPopUp: BaseView {
         settingsButton?.setTitle(TextConstants.waitingForWiFiPopUpSettingsButton, for: .normal)
     }
     
-    @IBAction func onSettingsButton(){
+    @IBAction func onSettingsButton() {
         let router = RouterVC()
         router.pushViewController(viewController: router.autoUpload)
     }

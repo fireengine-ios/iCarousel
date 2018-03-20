@@ -28,7 +28,8 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
     
     override func getContentWithSuccess(items: [WrapData]) {
         clearItems()
-        super.getContentWithSuccess(items: items)
+        super.getContentWithSuccess(items: items.filter { $0.id != currentItem?.id })
+        asyncOperationSucces()
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
@@ -37,12 +38,10 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
             let currentItemURL = currentItem.urlToFile,
             let item = item as? WrapData,
             let itemUrl = item.urlToFile {
-            let yesHandler: () -> Void = { [weak self] in
-                if let interactor = self?.interactor as? FaceImageAddNameInteractorInput,
-                    let id = currentItem.id,
-                    let personId = item.id {
+            let yesHandler: VoidHandler = { [weak self] in
+                if let interactor = self?.interactor as? FaceImageAddNameInteractorInput {
                     self?.startAsyncOperation()
-                    interactor.mergePeople(id, personId: personId)
+                    interactor.mergePeople(currentItem, otherPerson: item)
                 }
             }
 
@@ -50,7 +49,7 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
         }
     }
 
-    // MARK: -  Utility methods
+    // MARK: - Utility methods
     
     private func clearItems() {
         dataSource.allLocalItems = [WrapData]()
@@ -66,7 +65,6 @@ extension FaceImageAddNamePresenter: FaceImageAddNameViewOutput {
     
     func onSearchPeople(_ text: String) {
         if let interactor = interactor as? FaceImageAddNameInteractorInput {
-            startAsyncOperation()
             interactor.getSearchPeople(text)
         }
     }
@@ -96,7 +94,9 @@ extension FaceImageAddNamePresenter: FaceImageAddNameInteractorOutput {
     
     func didMergePeople() {
         faceImagePhotosmoduleOutput?.didMergePeople()
-        router.showBack()
+        
+        if let router = router as? FaceImageAddNameRouter {
+            router.popToPeopleItems()
+        }
     }
-    
 }

@@ -16,6 +16,8 @@ class SettingsInteractor: SettingsInteractorInput {
     let authService = AuthenticationService()
     let accountSerivese = AccountService()
     
+    private lazy var biometricsManager: BiometricsManager = factory.resolve()
+    
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
@@ -31,11 +33,12 @@ class SettingsInteractor: SettingsInteractorInput {
          userInfoResponse?.email = mail
     }
     
-    func getCellsData(){
+    func getCellsData() {
+        let passcodeCellTitle = String(format: TextConstants.settingsViewCellPasscode, biometricsManager.biometricsTitle)
         
         let securityCells = [TextConstants.settingsViewCellActivityTimline,
                              TextConstants.settingsViewCellUsageInfo,
-                             TextConstants.settingsViewCellPasscode]
+                             passcodeCellTitle]
         
         var array = [[TextConstants.settingsViewCellBeckup,
                       TextConstants.settingsViewCellImportPhotos,
@@ -44,7 +47,7 @@ class SettingsInteractor: SettingsInteractorInput {
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
                       TextConstants.settingsViewCellLogout]]
-        accountSerivese.info(success: { [weak self] (responce) in
+        accountSerivese.info(success: { [weak self] responce in
             guard let `self` = self else {
                 return
             }
@@ -56,7 +59,7 @@ class SettingsInteractor: SettingsInteractorInput {
                 self.output.cellsDataForSettings(array: array)
             }
             
-        }, fail: { [weak self] (error) in
+        }, fail: { [weak self] error in
             DispatchQueue.main.async {
                 self?.output.cellsDataForSettings(array: array)
             }
@@ -65,14 +68,13 @@ class SettingsInteractor: SettingsInteractorInput {
 
     func onLogout() {
         authService.logout { [weak self] in
+            MenloworksEventsService.shared.onLoggedOut()
             self?.output.goToOnboarding()
-            SyncServiceManager.shared.stopSync()
-
         }
     }
     
     func uploadPhoto(withPhoto photo: Data) {
-        accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] (response) in
+        accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] response in
             ImageDownloder().removeImageFromCache(url: self?.userInfoResponse?.urlForPhoto, completion: {
                 DispatchQueue.main.async {
                     self?.output.profilePhotoUploadSuccessed()

@@ -12,7 +12,7 @@ protocol SearchViewOutput {
     var player: MediaPlayer { get }
     var tabBarActionHandler: TabBarActionHandler { get }
     
-    func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder)
+    func searchWith(searchText: String, item: SuggestionObject?, sortBy: SortType, sortOrder: SortOrder)
     func viewIsReady(collectionView: UICollectionView)
     func isShowedSpinner() -> Bool
     func getSuggestion(text: String)
@@ -20,7 +20,7 @@ protocol SearchViewOutput {
     func onClearRecentSearchesTapped()
     
     func viewAppearanceChangedTopBar(asGrid: Bool)
-    func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType)
+    func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType)
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType])
     
     func playerDidHide()
@@ -28,4 +28,7 @@ protocol SearchViewOutput {
     func viewWillDisappear()
     
     func moreActionsPressed(sender: Any)
+    
+    func openFaceImageItems(category: SearchCategory)
+    func openFaceImage(item: SuggestionObject)
 }

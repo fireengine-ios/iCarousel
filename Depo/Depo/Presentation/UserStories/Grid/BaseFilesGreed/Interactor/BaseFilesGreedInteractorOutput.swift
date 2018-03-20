@@ -22,6 +22,6 @@ protocol BaseFilesGreedInteractorOutput: class, BaseAsyncOperationInteractorOutp
     
     var sortedRule: SortedRules { get set }
     
-    var filters: [GeneralFilesFiltrationType] {get set}
+    var filters: [GeneralFilesFiltrationType] { get set }
     
 }

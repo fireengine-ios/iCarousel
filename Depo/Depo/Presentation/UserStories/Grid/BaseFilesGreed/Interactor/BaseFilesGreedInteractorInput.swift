@@ -18,6 +18,10 @@ protocol BaseFilesGreedInteractorInput {
     
     func reloadItems (_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?)
     
+    func canShowNoFilesView() -> Bool
+    
+    func needHideTopBar() -> Bool 
+    
     func textForNoFileLbel() -> String
     
     func textForNoFileButton() -> String
@@ -36,6 +40,6 @@ protocol BaseFilesGreedInteractorInput {
     
     func getAllItems(sortBy: SortedRules)
     
-    var requestPageSize: Int {get}
+    var requestPageSize: Int { get }
     
 }

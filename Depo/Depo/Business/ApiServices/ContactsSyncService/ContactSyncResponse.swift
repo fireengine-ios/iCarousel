@@ -40,6 +40,6 @@ class ContactsResponse: ObjectRequestResponse {
         guard let list = json?[ContactSyncJsonKey.items].array else {
             return
         }
-        contacts = list.flatMap{ RemoteContact(withJSON: $0) }
+        contacts = list.flatMap { RemoteContact(withJSON: $0) }
     }
 }

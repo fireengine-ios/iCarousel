@@ -14,7 +14,7 @@ class OfferApple {
     var name: String?
     var rawPrice: Float = 0
     var price: String?
-    var offerType: String?
+//    var offerType: String?
     var description: String?
     var skProduct: SKProduct
     
@@ -41,16 +41,13 @@ class OfferApple {
                 let lastItem = splittedList[splittedList.count - 1].uppercased()
                 if lastItem == "MONTH" {
                     return "MONTH"
-                }
-                else if lastItem == "MONTHS" {
+                } else if lastItem == "MONTHS" {
                     let length = splittedList[splittedList.count - 2]
                     return "\(length)_\("MONTHS")"
-                }
-                else if lastItem == "DAYS" {
+                } else if lastItem == "DAYS" {
                     let length = splittedList[splittedList.count - 2]
                     return "\(length)_\("DAYS")"
-                }
-                else if lastItem == "YEAR" {
+                } else if lastItem == "YEAR" {
                     return "YEAR"
                 }
             }

@@ -41,7 +41,7 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
         progressLabel.text = ""
     }
     
-    func setProgress(allItems: Int?, readyItems: Int?){
+    func setProgress(allItems: Int?, readyItems: Int?) {
         guard let all = allItems else {
             return
         }
@@ -53,26 +53,26 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
         let progressText = String(format: TextConstants.popUpProgress, ready, all)
         progressLabel.text = progressText
         
-        if let typeOfOperation = typeOfOperation{
+        if let typeOfOperation = typeOfOperation {
             configurateWithType(viewType: typeOfOperation)
         }
     }
     
     func setProgressBar(ratio: Float) {
         progress.progress = ratio
-        if let typeOfOperation = typeOfOperation{
+        if let typeOfOperation = typeOfOperation {
             configurateWithType(viewType: typeOfOperation)
         }
     }
     
-    func setImageForUploadingItem(item: WrapData){
-        if wrapItem != item{
+    func setImageForUploadingItem(item: WrapData) {
+        if wrapItem != item {
             wrapItem = item
             iconImageViewForCurrentFile.loadImageForItem(object: item, smooth: true)
         }
     }
     
-    func configurateWithType(viewType: OperationType){
+    func configurateWithType(viewType: OperationType) {
         let isWiFi = ReachabilityService().isReachableViaWiFi
         let networkType = isWiFi ? TextConstants.networkTypeWiFi : TextConstants.mobileData
         let iconImage = isWiFi ? UIImage(named: "WiFiIcon") : UIImage(named: "SyncingPopUpImage")

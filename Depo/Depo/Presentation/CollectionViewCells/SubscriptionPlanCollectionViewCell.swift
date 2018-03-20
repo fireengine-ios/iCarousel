@@ -43,6 +43,8 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         freeButton.layer.borderWidth = borderWidth
         freeButton.layer.borderColor = UIColor.lrTealishTwo.cgColor
         freeButton.isUserInteractionEnabled = false
+        
+        checkmarkImageView.tintColor = ColorConstants.blueColor
     }
     
     override func layoutSubviews() {
@@ -61,8 +63,9 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
             layer.borderColor = ColorConstants.lightPeach.cgColor
             upgradeButton.isHidden = false
         case .free:
-            layer.borderColor = ColorConstants.lightPeach.cgColor
+            layer.borderColor = ColorConstants.darcBlueColor.cgColor
             freeButton.isHidden = false
+            checkmarkImageView.isHidden = false
         case .current:
             layer.borderColor = ColorConstants.darcBlueColor.cgColor
             cancelButton.isHidden = false

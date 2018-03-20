@@ -22,7 +22,7 @@ class SingletonStorage {
         if let info = accountInfo {
             success(info)
         } else {
-            AccountService().info(success: { (accountInfoResponce) in
+            AccountService().info(success: { accountInfoResponce in
                 if let resp = accountInfoResponce as? AccountInfoResponse {
                     self.accountInfo = resp
                     //remove user photo from cache on start application
@@ -36,7 +36,7 @@ class SingletonStorage {
                         fail(nil)
                     }
                 }
-            }) { (error) in
+            }) { error in
                 DispatchQueue.main.async {
                     fail(error)
                 }
@@ -48,10 +48,10 @@ class SingletonStorage {
         return accountInfo?.projectID ?? ""
     }
     
-    func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), faill:@escaping (() -> Void)) {
-        getAccountInfoForUser(success: { (info) in
+    func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), faill:@escaping VoidHandler) {
+        getAccountInfoForUser(success: { info in
             success(info.projectID ?? "")
-        }) { (error) in
+        }) { error in
             faill()
         }
     }

@@ -29,6 +29,8 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var carouselView: iCarousel!
     
+    @IBOutlet weak var bottomView: UIView!
+    
     let shuffleButtonOffColor = UIColor.lightGray
     @IBOutlet weak var shuffleButton: UIButton! {
         didSet {
@@ -64,7 +66,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         
         editingTabBar?.view.layoutIfNeeded()
         
-        output.viewIsReady(view: self.view)
+        output.viewIsReady(view: bottomView)
         hidenNavigationBarStyle()
     }
     
@@ -84,7 +86,8 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         backButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         backButton.setImage(UIImage(named: "im_backButton"), for: .normal)
         backButton.setTitle(TextConstants.backTitle, for: .normal)
-        backButton.addTarget(self, action: #selector(cancelAction(_:)), for:.touchUpInside)
+        backButton.addTarget(self, action: #selector(cancelAction(_:)), for: .touchUpInside)
+        backButton.tintColor = UIColor.white
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         
         let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(actionMoreButton(_:)))
@@ -109,7 +112,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
             player.resetTime()
         } else {
             let previousIndex = player.playPrevious()
-            if previousIndex >= 0  {
+            if previousIndex >= 0 {
                 carouselView.scrollToItem(at: previousIndex, animated: true)
             }
         }
@@ -164,7 +167,7 @@ extension VisualMusicPlayerViewController: MediaPlayerDelegate {
 }
 
 
-//MARK: - Carousel
+// MARK: - Carousel
 
 extension VisualMusicPlayerViewController: iCarouselDataSource, iCarouselDelegate {
 

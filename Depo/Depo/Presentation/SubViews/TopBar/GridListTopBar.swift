@@ -28,7 +28,7 @@ class GridListTopBar: UIViewController {
     
     weak var delegate: GridListTopBarDelegate?
     
-    let sortButtonImageInset =  UIEdgeInsets(top: 0, left: 60, bottom: 0, right: -20)
+    let sortButtonImageInset = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: -20)
     
     var selectedIndex = -1
     
@@ -116,7 +116,7 @@ class GridListTopBar: UIViewController {
         
     }
     
-    //MARK: - Actions
+    // MARK: - Actions
 
     @IBAction func sortAction(_ sender: Any) {
         guard let unwrapedConfig = currentConfig else {
@@ -124,11 +124,11 @@ class GridListTopBar: UIViewController {
         }
         let sortingTable = GridListTopBarSortingTableView(style: .plain)
         sortingTable.actionDelegate = self
-        let titles = unwrapedConfig.availableSortTypes.map({return $0.description})
+        let titles = unwrapedConfig.availableSortTypes.map({ $0.description })
         var selectedSort: Int
-        if (selectedIndex != -1){
+        if (selectedIndex != -1) {
             selectedSort = selectedIndex
-        }else{
+        } else {
             selectedSort = currentConfig?.availableSortTypes.index(of: unwrapedConfig.defaultSortType) ?? 0
         }
         sortingTable.setup(withTitles: titles, selectedIndex: selectedSort)
@@ -136,16 +136,14 @@ class GridListTopBar: UIViewController {
         let router = RouterVC()
         let rootVC = router.tabBarVC
 
-        let popUpHeight = sortingTable.defaultCellHeight*CGFloat(titles.count)
+        let popUpHeight = sortingTable.defaultCellHeight * CGFloat(titles.count)
         
         let floatingVC = FloatingContainerVC.createContainerVC(withContentView: sortingTable,
                                                                sourceView: sortByButton.imageView!,
                                                                popOverSize: CGSize(width: floatingContainerWidth,
                                                                                    height: popUpHeight))
         
-        rootVC?.present(floatingVC, animated: true, completion: {
-
-        })
+        rootVC?.present(floatingVC, animated: true, completion: nil)
     }
     
     @IBAction func gridListAction(_ sender: Any) {

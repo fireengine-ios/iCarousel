@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AlbumCell" customModule="Depo_LifeTech" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AlbumCell" customModule="lifebox" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="186" height="151"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -30,16 +30,16 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TbP-rD-dRR">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="131"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0rl-uE-Kzb" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0rl-uE-Kzb" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="92.5" height="65"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICB-ZY-xuu" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICB-ZY-xuu" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                                 <rect key="frame" x="93.5" y="0.0" width="92.5" height="65"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aXF-q3-q7j" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aXF-q3-q7j" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                                 <rect key="frame" x="93" y="66" width="92.5" height="65"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bfe-Cc-K0B" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bfe-Cc-K0B" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="66" width="92.5" height="65"/>
                             </imageView>
                         </subviews>
@@ -67,7 +67,7 @@
                             <constraint firstItem="aXF-q3-q7j" firstAttribute="top" secondItem="ICB-ZY-xuu" secondAttribute="bottom" constant="1" id="ypn-bK-qCF"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q9c-AG-hk6">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q9c-AG-hk6" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="131"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9LX-Q4-Kta">

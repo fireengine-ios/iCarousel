@@ -14,7 +14,7 @@ class UploadBaseURL: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: UploadServiceConstant.baseUrl, relativeTo:super.patch)!
+        return RouteRequests.uploadContainer
     }
 }
 
@@ -32,23 +32,9 @@ class Upload: UploadRequestParametrs {
     
     private let isFavorite: Bool
     
-    var contentType: String {
-        switch item.fileType {
-            
-        case .image :
-            return "image/jpg"
-            
-        case .video :
-            return "video/mp4"
-            
-        default:
-            return "unknown"
-        }
-    }
-    
-    var contentLenght:String {
-        return String(format: "%lu", item.fileSize)
-    }
+//    var contentLenght: String {
+//        return String(format: "%lu", item.fileSize)
+//    }
     
     var fileName: String {
         return item.name ?? "unknown"
@@ -83,10 +69,12 @@ class Upload: UploadRequestParametrs {
 
         self.isFavorite = isFavorite
 
-        if item.isLocalItem, item.uuid.count > 0 {
+        if item.isLocalItem, !item.syncStatus.isContained(in: [.synced]), !item.uuid.isEmpty {
             self.tmpUUId = item.uuid
         } else {
-            self.tmpUUId = UUID().description
+            var newUUID = item.uuid
+            if !newUUID.contains("~") { newUUID.append("~\(UUID().uuidString)") } // compound uuid
+            self.tmpUUId = newUUID
         }
     }
     
@@ -94,18 +82,17 @@ class Upload: UploadRequestParametrs {
         return Data()
     }
     var header: RequestHeaderParametrs {
-        var header  = RequestHeaders.authification()
+        var header = RequestHeaders.authification()
         
-        header = header + [ HeaderConstant.ContentType : contentType,
+        header = header + [ HeaderConstant.ContentType : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
-            HeaderConstant.XObjectMetaParentUuid : rootFolder
+            HeaderConstant.XObjectMetaParentUuid : rootFolder,
+            HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue
 //            HeaderConstant.Etag                   : md5
             //                  HeaderConstant.ContentLength         : contentLenght,
-            //                  HeaderConstant.XObjectMetaParentUuid : rootFolder,
-            //                  HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue,
             //                  HeaderConstant.XObjectMetaAlbumLabel  : "",
             //                  HeaderConstant.XObjectMetaFolderLabel : "",
             //                  HeaderConstant.Expect                 : "100-continue",
@@ -119,7 +106,7 @@ class Upload: UploadRequestParametrs {
             .appending(tmpUUId))!
     }
     
-    var timeout: TimeInterval{
+    var timeout: TimeInterval {
         return 2000.0
     }
 }
@@ -137,8 +124,8 @@ class UploadNotify: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let str = String(format: UploadServiceConstant.uploadNotify,
+        let str = String(format: RouteRequests.uploadNotify,
                          parentUUID, fileUUID)
-        return URL(string: str, relativeTo:super.patch)!
+        return URL(string: str, relativeTo: super.patch)!
     }
 }

@@ -64,7 +64,7 @@ class MailVerificationViewController: BaseViewController {
         closeAnimation()
     }
     
-    private func closeAnimation(completion: (() -> Void)? = nil) {
+    private func closeAnimation(completion: VoidHandler? = nil) {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
             self.contentView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
@@ -119,7 +119,7 @@ class MailVerificationViewController: BaseViewController {
     
     override func hideKeyboard() {
         super.hideKeyboard()
-        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
 }

@@ -19,7 +19,7 @@ class UsageInfoViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak private var currentPlanLabel: UILabel!  {
+    @IBOutlet weak private var currentPlanLabel: UILabel! {
         didSet {
             currentPlanLabel.text = TextConstants.usageInfoQuotaInfo
             currentPlanLabel.textColor = ColorConstants.lightText
@@ -86,7 +86,7 @@ extension UsageInfoViewController: UsageInfoViewInput {
         
         
         guard let quotaBytes = usage.quotaBytes, let usedBytes = usage.usedBytes else { return }
-        memoryUsageProgressView.progress = 1 - Float(usedBytes)/Float(quotaBytes)
+        memoryUsageProgressView.progress = 1 - Float(usedBytes) / Float(quotaBytes)
         
         let quotaString = quotaBytes.bytesString
         var remaind = quotaBytes - usedBytes

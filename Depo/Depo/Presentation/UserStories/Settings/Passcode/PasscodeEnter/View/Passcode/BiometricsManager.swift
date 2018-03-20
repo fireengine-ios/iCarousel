@@ -14,6 +14,7 @@ typealias AuthenticateHandler = (Bool) -> Void
 protocol BiometricsManager {
     var isEnabled: Bool { get set }
     var status: BiometricsStatus { get }
+    var biometricsTitle: String { get }
     var isAvailableFaceID: Bool { get }
     func authenticate(reason: String, handler: @escaping AuthenticateHandler)
 }
@@ -21,7 +22,7 @@ protocol BiometricsManager {
 enum BiometricsStatus {
     case available
     case notAvailable
-    case notInitialized ///"No fingers are enrolled with Touch ID."
+    case notInitialized ///"passcode is enrolled and biometrics not"
 }
 
 final class BiometricsManagerImp: BiometricsManager {
@@ -29,7 +30,15 @@ final class BiometricsManagerImp: BiometricsManager {
     private static let isEnabledKey = "isEnabledKey"
     var isEnabled: Bool {
         get { return UserDefaults.standard.bool(forKey: BiometricsManagerImp.isEnabledKey) }
-        set { UserDefaults.standard.set(newValue, forKey: BiometricsManagerImp.isEnabledKey) }
+        set {
+            if isEnabled != newValue {
+                MenloworksTagsService.shared.onTouchIDSettingsChanged(newValue)
+            }
+            if newValue {
+                MenloworksEventsService.shared.onTouchIDSet()
+            }
+            UserDefaults.standard.set(newValue, forKey: BiometricsManagerImp.isEnabledKey)
+        }
     }
     
     var status: BiometricsStatus {
@@ -38,21 +47,35 @@ final class BiometricsManagerImp: BiometricsManager {
         
         if result {
             return .available
-        } else if error?.code == -7 {
+        /// biometrics are available on device, but is not turn on.
+        /// -5, -7 hardcoded, not documented constants to detect it.
+        /// may not be working for some devices.
+        } else if error?.code == -5 || error?.code == -7 {
             return .notInitialized
         } else {
             return .notAvailable
         }
     }
     
+    lazy var biometricsTitle: String = {
+        isAvailableFaceID ? TextConstants.passcodeFaceID : TextConstants.passcodeTouchID
+    }()
+    
+    /// You need to first call canEvaluatePolicy in order to get the biometry type.
+    /// That is, if you're just doing LAContext().biometryType then you'll always get 'none' back
+    /// https://forums.developer.apple.com/thread/89043
     var isAvailableFaceID: Bool {
-        if #available(iOS 11.0, *) {
-            /// temp logic for xcode <= 9.1
-            return false
-            //return LAContext().biometryType == .faceID
-        } else {
-            return false
-        }
+        return Device.isIphoneX
+        /// old normal realization
+//        let context = LAContext()
+//        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) else {
+//            return false
+//        }
+//        if #available(iOS 11.0, *) {
+//            return context.biometryType == .faceID
+//        } else {
+//            return false
+//        }
     }
     
     func authenticate(reason: String = TextConstants.passcodeBiometricsDefault, handler: @escaping AuthenticateHandler) {
@@ -60,7 +83,7 @@ final class BiometricsManagerImp: BiometricsManager {
             return handler(false)
         }
         
-        LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { (success, error) in
+        LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
             DispatchQueue.main.async {
                 handler(success)
             }

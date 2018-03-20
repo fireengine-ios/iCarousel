@@ -10,11 +10,21 @@ import UIKit
 
 final class ImageScrollView: UIScrollView {
     
-    private(set) var imageView = UIImageView()
+    private(set) var imageView = LoadingImageView()
     
-    var image = UIImage() {
+    var image: UIImage? {
         didSet {
+            guard let image = image else {
+                imageView.image = nil
+                imageView.frame = .zero
+                contentSize = .zero
+                maximumZoomScale = 1
+                minimumZoomScale = 1
+                zoomScale = 1
+                return
+            }
             imageView.image = image
+            imageView.frame.origin = .zero
             imageView.frame.size = image.size
             contentSize = image.size
         }
@@ -22,6 +32,13 @@ final class ImageScrollView: UIScrollView {
     
     private let maxScaleFromMinScale: CGFloat = 5.0
     private let multiplyScrollGuardFactor: CGFloat = 0.999
+    private let zoomFactorFromMinWhenDoubleTap: CGFloat = 2
+    
+    lazy var doubleTapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognizer))
+        gesture.numberOfTapsRequired = 2
+        return gesture
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,23 +56,49 @@ final class ImageScrollView: UIScrollView {
         bouncesZoom = true
         decelerationRate = UIScrollViewDecelerationRateFast
         
-        addSubview(imageView)
+        
+        imageView.frame = bounds
+//        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         imageView.isUserInteractionEnabled = true
+        addSubview(imageView)
+        imageView.addGestureRecognizer(doubleTapGesture)
+    }
+    
+    @objc private func doubleTapGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
+        // zoom out if it bigger than middle scale point. Else, zoom in
+        if zoomScale > minimumZoomScale {
+            setZoomScale(minimumZoomScale, animated: true)
+        } else {
+            let center = gestureRecognizer.location(in: gestureRecognizer.view)
+            let zoomRect = zoomRectForScale(zoomFactorFromMinWhenDoubleTap * minimumZoomScale, center: center)
+            zoom(to: zoomRect, animated: true)
+        }
+    }
+    
+    fileprivate func zoomRectForScale(_ scale: CGFloat, center: CGPoint) -> CGRect {
+        var zoomRect = CGRect.zero
+        
+        zoomRect.size.height = frame.height / scale
+        zoomRect.size.width = frame.width / scale
+        
+        zoomRect.origin.x = center.x - (zoomRect.width / 2.0)
+        zoomRect.origin.y = center.y - (zoomRect.height / 2.0)
+        
+        return zoomRect
     }
     
     func updateZoom() {
+        guard let image = image else {
+            return
+        }
         setMaxMinZoomScales(for: image.size)
     }
-    
+     
     private func setMaxMinZoomScales(for imageSize: CGSize) {
         let xScale = bounds.width / imageSize.width
         let yScale = bounds.height / imageSize.height
         
-        // fill width if the image and phone are both portrait or both landscape; otherwise take smaller scale
-        let imagePortrait = imageSize.height > imageSize.width
-        let phonePortrait = bounds.height >= bounds.width
-        
-        var minScale = (imagePortrait == phonePortrait) ? xScale : min(xScale, yScale)
+        var minScale = min(xScale, yScale)
         let maxScale = maxScaleFromMinScale * minScale
         
         /// don't let minScale exceed maxScale. (If the image is smaller than the screen, we don't want to force it to be zoomed.)
@@ -72,15 +115,15 @@ final class ImageScrollView: UIScrollView {
         var frameToCenter = imageView.frame
         
         /// center horizontally
-        if frameToCenter.size.width < bounds.width {
-            frameToCenter.origin.x = (bounds.width - frameToCenter.size.width) / 2
+        if frameToCenter.width < bounds.width {
+            frameToCenter.origin.x = (bounds.width - frameToCenter.width) / 2
         } else {
             frameToCenter.origin.x = 0
         }
         
         /// center vertically
-        if frameToCenter.size.height < bounds.height {
-            frameToCenter.origin.y = (bounds.height - frameToCenter.size.height) / 2
+        if frameToCenter.height < bounds.height {
+            frameToCenter.origin.y = (bounds.height - frameToCenter.height) / 2
         } else {
             frameToCenter.origin.y = 0
         }

@@ -68,14 +68,14 @@ final class PasscodeSettingsViewController: UIViewController {
         output.viewIsReady()
     }
     
-    lazy var biometricsText: String = {
-        return output.isAvailableFaceID ? TextConstants.passcodeFaceID : TextConstants.passcodeTouchID
+    private lazy var biometricsTitle: String = {
+        output.isAvailableFaceID ? TextConstants.passcodeFaceID : TextConstants.passcodeTouchID
     }()
     
     private func setupTexts() {
         setTitle(withString: TextConstants.passcodeLifebox)
         
-        let enableText = TextConstants.passcodeEnable + " " + biometricsText
+        let enableText = TextConstants.passcodeEnable + " " + biometricsTitle
         biometricsLabel.text = enableText
     }
     
@@ -94,7 +94,7 @@ final class PasscodeSettingsViewController: UIViewController {
         case .notInitialized:
             touchIdView.isHidden = false
             biometricsSwitch.isEnabled = false
-            biometricsErrorLabel.text = String(format: TextConstants.passcodeBiometricsError, biometricsText)
+            biometricsErrorLabel.text = String(format: TextConstants.passcodeBiometricsError, biometricsTitle)
         }
         
         passcodeSwitch.isOn = !output.isPasscodeEmpty
@@ -174,7 +174,7 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
 
     }
 }
-//MARK: - mail verification
+// MARK: - mail verification
 extension PasscodeSettingsViewController: MailVerificationViewControllerDelegate {
     func mailVerified(mail: String) {
         debugPrint("mail verified")

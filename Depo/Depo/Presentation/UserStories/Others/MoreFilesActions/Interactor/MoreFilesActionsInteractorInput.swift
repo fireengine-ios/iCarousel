@@ -14,24 +14,24 @@ protocol MoreFilesActionsInteractorInput {
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool)
     
-    func edit(item: [BaseDataSourceItem], complition: (() -> Void)?)
+    func edit(item: [BaseDataSourceItem], complition: VoidHandler?)
     
     func delete(item: [BaseDataSourceItem])
     
     func completelyDelete(albums: [BaseDataSourceItem])
     
-    func move(item: [BaseDataSourceItem], toPath:String)
+    func move(item: [BaseDataSourceItem], toPath: String)
     
     func sync(item: [BaseDataSourceItem])
     
     func download(item: [BaseDataSourceItem])
     
     
-    //MARK: Actions Sheet
+    // MARK: Actions Sheet
     
     func createStory(items: [BaseDataSourceItem])
     
-    func copy(item: [BaseDataSourceItem], toPath:String)
+    func copy(item: [BaseDataSourceItem], toPath: String)
     
     func addToFavorites(items: [BaseDataSourceItem])
     

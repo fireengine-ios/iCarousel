@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class LatestUpladsCard: BaseView {
 
-    @IBOutlet weak var title:UILabel!
+    @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subTitle: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var viewRecentActivitiesButton: UIButton!
@@ -49,7 +49,7 @@ class LatestUpladsCard: BaseView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        if collectionViewW != collectionView.frame.size.width{
+        if collectionViewW != collectionView.frame.size.width {
             collectionViewW = collectionView.frame.size.width
             collectionView.layoutSubviews()
             collectionView.reloadData()
@@ -66,18 +66,18 @@ class LatestUpladsCard: BaseView {
     
     private func set(details object: JSON) {
         if let arrayOfJsons = object.array {
-            for itemObject in arrayOfJsons{
+            for itemObject in arrayOfJsons {
                 let searchItem = SearchItemResponse(withJSON: itemObject)
                 let item = WrapData(remote: searchItem)
                 collectionViewDataSource.append(item)
-                if collectionViewDataSource.count == numberOfСellInRow * 2{
+                if collectionViewDataSource.count == numberOfСellInRow * 2 {
                     break
                 }
             }
         }
         
         if collectionViewDataSource.count <= numberOfСellInRow {
-            let deltaH : CGFloat = 45
+            let deltaH: CGFloat = 45
             collectionViewH.constant = collectionViewH.constant - deltaH
             calculatedH = frame.size.height - deltaH
             layoutIfNeeded()
@@ -86,17 +86,17 @@ class LatestUpladsCard: BaseView {
         collectionView.reloadData()
     }
     
-    @IBAction func onViewRecentActivitiesButton(){
+    @IBAction func onViewRecentActivitiesButton() {
         let router = RouterVC()
         let controller = router.vcActivityTimeline
         router.pushViewController(viewController: controller)
     }
 
-    @IBAction func onViewAllPhotosButton(){
+    @IBAction func onViewAllPhotosButton() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen), object: nil, userInfo: nil)
     }
     
-    @IBAction func onCloseButton(){
+    @IBAction func onCloseButton() {
         deleteCard()
     }
     
@@ -134,9 +134,9 @@ extension LatestUpladsCard: UICollectionViewDelegateFlowLayout {
         return CGSize(width: calculateLinearDimensionsForCell(), height: calculateLinearDimensionsForCell())
     }
     
-    private func calculateLinearDimensionsForCell() -> CGFloat{
+    private func calculateLinearDimensionsForCell() -> CGFloat {
         let w = collectionView.frame.size.width
-        let cellW = (w - minSeparatorSize * CGFloat(numberOfСellInRow) + minSeparatorSize)/CGFloat(numberOfСellInRow)
+        let cellW = (w - minSeparatorSize * CGFloat(numberOfСellInRow) + minSeparatorSize) / CGFloat(numberOfСellInRow)
         return cellW
     }
 }

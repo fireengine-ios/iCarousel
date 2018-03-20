@@ -11,7 +11,7 @@ import CoreData
 
 class PredicateRules {
     
-//    MARK: By file type
+// MARK: By file type
     
     var music: NSPredicate {
         return PredicateRules.predicateFromFileType(type: .Music)!
@@ -47,12 +47,12 @@ class PredicateRules {
         return NSCompoundPredicate(andPredicateWithSubpredicates: list)
     }
     
-    func allLocalObjectsForObjects(objects:[Item]) -> NSPredicate{
+    func allLocalObjectsForObjects(objects: [Item]) -> NSPredicate {
         let serverObjects = objects.filter {
-            return !$0.isLocalItem
+            !$0.isLocalItem
         }
-        let list = serverObjects.map{ $0.uuid }
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND uuidValue IN %@",  list)
+        let list = serverObjects.map { $0.uuid }
+        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND uuidValue IN %@", list)
         return predicate
     }
     
@@ -84,7 +84,7 @@ class PredicateRules {
                     [.fileType(.application(.doc)), .fileType(.application(.txt)),
                      .fileType(.application(.pdf)), .fileType(.application(.xls)),
                      .fileType(.application(.html)), .fileType(.application(.ppt))]
-                let predicates = allDocsTypes.flatMap{ return predicateFromGeneralFilterType(type: $0) }
+                let predicates = allDocsTypes.flatMap { predicateFromGeneralFilterType(type: $0) }
                 return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
             default:
                 return NSPredicate(format: "fileTypeValue == %d", specificType.valueForCoreDataMapping())
@@ -101,19 +101,19 @@ class PredicateRules {
                 return nil
             }
         case .duplicates:
-            let server = NSPredicate(format: "(isLocalItemValue == false) AND (fileTypeValue == %d)",  FileType.image.valueForCoreDataMapping())
-            let serverList =  CoreDataStack.default.executeRequest(predicate: server, context: CoreDataStack.default.mainContext)
-            let list = serverList.map{ $0.md5Value }
-            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND md5Value IN %@",  list)
+            let server = NSPredicate(format: "(isLocalItemValue == false) AND (fileTypeValue == %d)", FileType.image.valueForCoreDataMapping())
+            let serverList = CoreDataStack.default.executeRequest(predicate: server, context: CoreDataStack.default.mainContext)
+            let list = serverList.map { $0.md5Value }
+            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND md5Value IN %@", list)
             return predicate
         case .rootFolder(let rootUUID):
-            let rootFolderPredicate = NSPredicate(format: "parent = %@",  rootUUID)
+            let rootFolderPredicate = NSPredicate(format: "parent = %@", rootUUID)
             return rootFolderPredicate
         case .rootAlbum(let albumUUID):
-            let rootAlbumPredicate = NSPredicate(format: "ANY albums.uuid == %@",  albumUUID) //LR-2356
+            let rootAlbumPredicate = NSPredicate(format: "ANY albums.uuid == %@", albumUUID) //LR-2356
             return rootAlbumPredicate
         case .name(let text):
-            return NSPredicate(format: "nameValue CONTAINS[cd] %@",  text)
+            return NSPredicate(format: "nameValue CONTAINS[cd] %@", text)
         case .parentless:
             let rootFolderPredicate = NSPredicate(format: "(parent == nil OR parent == %@)", "")
             return rootFolderPredicate
@@ -127,7 +127,7 @@ class PredicateRules {
         }
         
         if let list = filtersPredicates,
-            list.count > 0  {
+            list.count > 0 {
             let fil = NSCompoundPredicate(andPredicateWithSubpredicates: list)
             let fetchTest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
             fetchTest.predicate = fil

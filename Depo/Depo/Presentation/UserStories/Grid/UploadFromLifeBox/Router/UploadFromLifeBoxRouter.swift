@@ -13,7 +13,7 @@ class UploadFromLifeBoxRouter: BaseFilesGreedRouter {
 // MARK: UploadFromLifeBoxRouterInput
 extension UploadFromLifeBoxRouter: UploadFromLifeBoxRouterInput {
     
-    func goToFolder(destinationFolderUUID: String, outputFolderUUID: String, nController: UINavigationController){
+    func goToFolder(destinationFolderUUID: String, outputFolderUUID: String, nController: UINavigationController) {
         let viewController = RouterVC().uploadFromLifeBox(folderUUID: destinationFolderUUID, soorceUUID: outputFolderUUID, sortRule: presenter.sortedRule)
         nController.pushViewController(viewController, animated: true)
     }

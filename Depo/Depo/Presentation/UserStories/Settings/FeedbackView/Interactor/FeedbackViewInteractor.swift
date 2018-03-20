@@ -9,37 +9,16 @@
 class FeedbackViewInteractor: FeedbackViewInteractorInput {
 
     weak var output: FeedbackViewInteractorOutput!
-    
-    func viewIsReady(){
-        output.startAsyncOperation()
         
-        let obj = FeedbackLanguage()
-        FeedbackService().getFeedbackLanguage(feedbackLanguageParameter: obj, success: { [weak self] (successResponce) in
-            DispatchQueue.main.async {
-                guard let self_ = self else{
-                    return
-                }
-                
-                if let responce = successResponce as? FeedbackLanguagesListResponse{
-                    self_.output.languagesUploaded(lanuages: responce.languagesList)
-                }
-            }
-        }) { [weak self] (fail) in
-            DispatchQueue.main.async {
-                self?.output.fail(text: fail.localizedDescription)
-            }
-        }
-    }
-    
-    func onSend(selectedLanguage: LanguageModel){
+    func onSend(selectedLanguage: LanguageModel) {
         output.startAsyncOperation()
         
         let parameter = SelectedLanguage(selectedLanguage: selectedLanguage)
-        FeedbackService().sendSelectedLanguage(selectedLanguageParameter: parameter, succes: {[weak self] (success) in
+        FeedbackService().sendSelectedLanguage(selectedLanguageParameter: parameter, succes: {[weak self] success in
             DispatchQueue.main.async {
                 self?.getUserInfoString(with: selectedLanguage.displayLanguage ?? "")
             }
-            }, fail: { [weak self] (fail) in
+            }, fail: { [weak self] fail in
                 DispatchQueue.main.async {
                     self?.output.fail(text: fail.localizedDescription)
                 }
@@ -47,7 +26,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         
     }
     
-    func getUserInfoString(with languageName: String){
+    func getUserInfoString(with languageName: String) {
         let group = DispatchGroup()
         let queue = DispatchQueue(label: "GetUserInfo")
         group.enter()
@@ -59,28 +38,28 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         var quotaUsed: Int64 = 0
         var subscriptions: [SubscriptionPlanBaseResponse] = []
         
-        AccountService().info(success: {(responce) in
+        AccountService().info(success: {responce in
             let userInfoResponse = responce as? AccountInfoResponse
-            if let phone  = userInfoResponse?.phoneNumber{
+            if let phone = userInfoResponse?.phoneNumber {
                 phoneString = phone
             }
             group.leave()
-        }) { (error) in
+        }) { error in
             group.leave()
         }
         
-        AccountService().quotaInfo(success: {(respoce) in
+        AccountService().quotaInfo(success: {respoce in
             let quotaInfoResponse = respoce as? QuotaInfoResponse
             quota = quotaInfoResponse?.bytes ?? 0
             quotaUsed = quotaInfoResponse?.bytesUsed ?? 0
             group.leave()
-        }) { (error) in
+        }) { error in
             group.leave()
         }
         
         SubscriptionsServiceIml().activeSubscriptions(success: { response in
             let subscriptionsResponce = response as? ActiveSubscriptionResponse
-            if let array = subscriptionsResponce?.list{
+            if let array = subscriptionsResponce?.list {
                 subscriptions.append(contentsOf: array)
             }
             group.leave()
@@ -92,9 +71,9 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             DispatchQueue.main.async {
                 let versionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
                 let packages = subscriptions
-                    .flatMap { $0.subscriptionPlanName }
+                    .flatMap { $0.subscriptionPlanDisplayName }
                     .joined(separator: ", ")
-                let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "" , UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WWAN" : "WIFI", quota, quotaUsed, packages)
+                let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN", quota, quotaUsed, packages)
                 
                 self?.output.asyncOperationSucces()
                 self?.output.languageRequestSended(text: userInfoString)

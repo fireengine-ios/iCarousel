@@ -14,7 +14,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     static let `default` = FreeAppSpace()
     
-    private var photoVideoService : PhotoAndVideoService? = nil
+    private var photoVideoService: PhotoAndVideoService?
     private var isSearchRunning = false
     private var needSearchAgain = false
     private let numberElementsInRequest = 50000
@@ -24,87 +24,85 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     private var duplicatesArray = [WrapData]()
     private var serverDuplicatesArray = [WrapData]()
     
-    func getDuplicatesObjects() -> [WrapData]{
+    func getDuplicatesObjects() -> [WrapData] {
         return duplicatesArray
     }
     
-    func getCheckedDuplicatesArray(checkedArray: @escaping([WrapData]) -> Void){
+    func getCheckedDuplicatesArray(checkedArray: @escaping([WrapData]) -> Void) {
         DispatchQueue.main.async {[weak self] in
-            if let `self` = self{
+            if let `self` = self {
                 let array = CoreDataStack.default.getLocalDuplicates(remoteItems: self.getDuplicatesObjects())
                 self.duplicatesArray.removeAll()
                 self.duplicatesArray.append(contentsOf: array)
                 self.sortDuplicatesArray()
-                self.localMD5Array.removeAll()
-                self.localMD5Array.append(contentsOf: array.map({ $0.md5 }))
                 checkedArray(self.duplicatesArray)
             }
         }
     }
     
-    func clear(){
+    func clear() {
         localtemsArray.removeAll()
         localMD5Array.removeAll()
         duplicatesArray.removeAll()
         serverDuplicatesArray.removeAll()
         isSearchRunning = false
-        if let service = photoVideoService{
+        if let service = photoVideoService {
             service.stopAllOperations()
             photoVideoService = nil
         }
     }
     
-    func getUIDSForObjects(itemsArray: [BaseDataSourceItem]) -> [String]{
+    func getUIDSForObjects(itemsArray: [BaseDataSourceItem]) -> [String] {
         let serverHash = serverDuplicatesArray.map { $0.md5 }
         var array = [String]()
         for item in itemsArray {
-            let index  = serverHash.index(of: item.md5)
+            let index = serverHash.index(of: item.md5)
             if let index_ = index {
                 let serverObject = serverDuplicatesArray[index_]
                 array.append(serverObject.uuid)
-            }else{
+            } else {
                 array.append(item.uuid)
             }
         }
         return array
     }
     
-    func checkFreeAppSpaceAfterAutoSync(){
-        if (isSearchRunning){
+    func checkFreeAppSpaceAfterAutoSync() {
+        if (isSearchRunning) {
             needSearchAgain = true
             return
         }
         
         if duplicatesArray.count > 0 {
             showFreeAppSpaceCard()
-        }else{
+        } else {
             checkFreeAppSpace()
         }
         
     }
     
-    func sortDuplicatesArray(){
-        duplicatesArray = duplicatesArray.sorted(by: { (obj1, obj2) -> Bool in
-            if let date1 = obj1.creationDate, let date2 = obj2.creationDate, date1 > date2{
+    func sortDuplicatesArray() {
+        duplicatesArray = duplicatesArray.sorted(by: { obj1, obj2 -> Bool in
+            if let date1 = obj1.creationDate, let date2 = obj2.creationDate, date1 > date2 {
                 return true
             }
             return false
         })
     }
     
-    func checkFreeAppSpace(){
+    func checkFreeAppSpace() {
         if tokenStorage.refreshToken == nil {
             return
         }
         photoVideoService?.currentPage = 0
         startSearchDuplicates(finished: { [weak self] in
-            guard let self_ = self else{
+            guard let self_ = self else {
                 return
             }
             
             self_.isSearchRunning = false
             
-            if (self_.needSearchAgain){
+            if (self_.needSearchAgain) {
                 self_.needSearchAgain = false
                 self_.checkFreeAppSpace()
                 return
@@ -116,29 +114,29 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         })
     }
     
-    func showFreeAppSpaceCard(){
-        if (duplicatesArray.count > 0){
+    func showFreeAppSpaceCard() {
+        if (duplicatesArray.count > 0) {
             let freeSpace = Device.getFreeDiskSpaceInPercent
-            if freeSpace < NumericConstants.freeAppSpaceLimit{
+            if freeSpace < NumericConstants.freeAppSpaceLimit {
                 CardsManager.default.startOperationWith(type: .freeAppSpaceLocalWarning, allOperations: nil, completedOperations: nil)
-            }else{
+            } else {
                 CardsManager.default.startOperationWith(type: .freeAppSpace, allOperations: nil, completedOperations: nil)
             }
-        }else{
+        } else {
             print("have no duplicates")
         }
     }
     
-    func deleteDeletedLocalPhotos(deletedPhotos:[WrapData]){
+    func deleteDeletedLocalPhotos(deletedPhotos: [WrapData]) {
         for object in deletedPhotos {
-            if let index = duplicatesArray.index(of: object){
+            if let index = duplicatesArray.index(of: object) {
                 duplicatesArray.remove(at: index)
             }
         }
     }
     
     func startSearchDuplicates(finished: @escaping() -> Swift.Void) {
-        if (isSearchRunning){
+        if (isSearchRunning) {
             needSearchAgain = true
             return
         }
@@ -153,35 +151,35 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         serverDuplicatesArray.removeAll()
         
         DispatchQueue.main.async {
-            self.localtemsArray.append(contentsOf: self.allLocalItems().sorted { (item1, item2) -> Bool in
+            self.localtemsArray.append(contentsOf: self.allLocalItems().sorted { item1, item2 -> Bool in
                 if let date1 = item1.creationDate, let date2 = item2.creationDate {
-                    if (date1 > date2){
+                    if (date1 > date2) {
                         return true
                     }
                 }
                 return false
             })
             
-            self.localMD5Array.append(contentsOf: self.localtemsArray.map({$0.md5}))
+            self.localMD5Array.append(contentsOf: self.localtemsArray.map({ $0.md5 }))
             let latestDate = self.localtemsArray.last?.creationDate ?? Date()
             
             //need to check have we duplicates
             if self.localtemsArray.count > 0 {
                 self.photoVideoService = PhotoAndVideoService(requestSize: self.numberElementsInRequest)
                 self.getDuplicatesObjects(latestDate: latestDate, success: { [weak self] in
-                    guard let self_ = self else{
+                    guard let self_ = self else {
                         return
                     }
                     if (self_.duplicatesArray.count > 0) {
                         debugPrint("duplicates count = ", self_.duplicatesArray.count)
-                    }else{
+                    } else {
                         debugPrint("have no duplicates")
                     }
                     finished()
                     }, fail: {
                         finished()
                 })
-            }else{
+            } else {
                 finished()
             }
         }
@@ -190,22 +188,22 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     private func getDuplicatesObjects(latestDate: Date,
                                       success: @escaping ()-> Swift.Void,
-                                      fail: @escaping ()-> Swift.Void){
+                                      fail: @escaping ()-> Swift.Void) {
 
-        guard let service = self.photoVideoService else{
+        guard let service = self.photoVideoService else {
             fail()
             return
         }
         var finished = false
         
-        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
-            guard let self_ = self else{
+        service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] items in
+            guard let self_ = self else {
                 fail()
                 return
             }
             
-            for item in items{
-                if let date = item.creationDate, date < latestDate{
+            for item in items {
+                if let date = item.creationDate, date < latestDate {
                     finished = true
                     break
                 }
@@ -216,16 +214,16 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     self_.localtemsArray.remove(at: index_)
                     self_.localMD5Array.remove(at: index_)
                     
-                    if (self_.localtemsArray.count == 0){
+                    if (self_.localtemsArray.count == 0) {
                         finished = true
                         break
                     }
                 }
             }
             
-            if (!finished) && (items.count == self_.numberElementsInRequest){
+            if (!finished) && (items.count == self_.numberElementsInRequest) {
                 self_.getDuplicatesObjects(latestDate: latestDate, success: success, fail: fail)
-            }else{
+            } else {
                 success()
             }
         }, fail: {
@@ -237,11 +235,11 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         return CoreDataStack.default.allLocalItems()
     }
     
-    func getLocalFiesComaredWithServerObjects(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData]{
+    func getLocalFiesComaredWithServerObjects(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData] {
         var comparedFiles = [WrapData]()
         
         let serverObjectMD5Array = serverObjects.map { $0.md5 }
-        for localObject in localObjects{
+        for localObject in localObjects {
             if serverObjectMD5Array.index(of: localObject.md5) != nil {
                 comparedFiles.append(localObject)
             }
@@ -250,46 +248,47 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         return comparedFiles
     }
     
-    //MARK: UploadNotificationManagerProtocol
+    // MARK: UploadNotificationManagerProtocol
     
-    func finishedUploadFile(file: WrapData){
+    func finishedUploadFile(file: WrapData) {
         print("uploaded object with uuid - ", file.uuid)
-        if (isSearchRunning){
+        if (isSearchRunning) {
             needSearchAgain = true
             return
         }
         
-        if file.isLocalItem{
-            if localMD5Array.index(of: file.md5) == nil{
+        if file.isLocalItem {
+            if localMD5Array.index(of: file.md5) == nil {
                 file.metaData?.takenDate = Date()
-                duplicatesArray.append(file)
                 localMD5Array.append(file.md5)
             }
-        }else{
+            duplicatesArray.append(file)
+        } else {
             print("uploaded server object")
             let serverObjectsUUIDs = serverDuplicatesArray.map({ $0.uuid })
-            if !serverObjectsUUIDs.contains(file.uuid){
+            if !serverObjectsUUIDs.contains(file.uuid) {
                 serverDuplicatesArray.append(file)
-                
-                let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
-                let predicate = PredicateRules().allLocalObjectsForObjects(objects: [file])
-                let sortDescriptors = CollectionSortingRules(sortingRules: .timeUp).rule.sortDescriptors
-                
-                fetchRequest.predicate = predicate
-                fetchRequest.sortDescriptors = sortDescriptors
-                
-                guard let fetchResult = try? CoreDataStack.default.mainContext.fetch(fetchRequest) else {
-                    return
-                }
-                let localObjects = fetchResult.map{ return WrapData(mediaItem: $0) }
-                for localObject in localObjects{
-                    if localMD5Array.index(of: localObject.md5) == nil{
-                        file.metaData?.takenDate = Date()
-                        duplicatesArray.append(localObject)
-                        localMD5Array.append(localObject.md5)
-                    }
-                }
             }
+                
+            let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
+            let predicate = PredicateRules().allLocalObjectsForObjects(objects: [file])
+            let sortDescriptors = CollectionSortingRules(sortingRules: .timeUp).rule.sortDescriptors
+            
+            fetchRequest.predicate = predicate
+            fetchRequest.sortDescriptors = sortDescriptors
+            
+            guard let fetchResult = try? CoreDataStack.default.mainContext.fetch(fetchRequest) else {
+                return
+            }
+            let localObjects = fetchResult.map { WrapData(mediaItem: $0) }
+            for localObject in localObjects {
+                if localMD5Array.index(of: localObject.md5) == nil {
+                    file.metaData?.takenDate = Date()
+                    localMD5Array.append(localObject.md5)
+                }
+                duplicatesArray.append(localObject)
+            }
+            
         }
         
         sortDuplicatesArray()
@@ -299,11 +298,11 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func finishedDownloadFile(file: WrapData) {
-        if !file.isLocalItem{
+        if !file.isLocalItem {
             let localObjects = CoreDataStack.default.getLocalDuplicates(remoteItems: [file])
-            if !localObjects.isEmpty{
-                for localObject in localObjects{
-                    if localMD5Array.index(of: localObject.md5) == nil{
+            if !localObjects.isEmpty {
+                for localObject in localObjects {
+                    if localMD5Array.index(of: localObject.md5) == nil {
                         file.metaData?.takenDate = Date()
                         duplicatesArray.append(localObject)
                         localMD5Array.append(localObject.md5)
@@ -315,84 +314,64 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
     }
     
-    func addedLocalFiles(items: [Item]){
+    func addedLocalFiles(items: [Item]) {
         let serverObjectsUUIDs = serverDuplicatesArray.map({ $0.uuid })
         for item in items {
-            if serverObjectsUUIDs.contains(item.uuid){
+            if serverObjectsUUIDs.contains(item.uuid) {
                 localtemsArray.append(item)
                 duplicatesArray.append(item)
             }
         }
     }
     
-    func deleteItems(items: [Item]){
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let `self` = self else{
-                return
-            }
-            
-            if (self.isSearchRunning){
-                self.needSearchAgain = true
-                return
-            }
-            
-            var localObjects = items.filter{
-                $0.isLocalItem
-            }
-            
-            
-            DispatchQueue.main.async { [weak self] in
-                guard let `self` = self else{
+    func deleteItems(items: [Item]) {
+        SyncedBlock.synced(self) {
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                guard let `self` = self else {
                     return
                 }
-                for object in localObjects{
-                    if let index = self.duplicatesArray.index(of: object){
-                        self.duplicatesArray.remove(at: index)
-                    }
-                    if let index = self.localMD5Array.index(of: object.md5){
-                        self.localMD5Array.remove(at: index)
-                    }
+                
+                if (self.isSearchRunning) {
+                    self.needSearchAgain = true
+                    return
                 }
-            }
-            
-            let networksObjects = items.filter{
-                !$0.isLocalItem
-            }
-            
-            localObjects = CoreDataStack.default.getLocalDuplicates(remoteItems: networksObjects)
-            for object in localObjects{
+                
+                var localObjects = items.filter {
+                    $0.isLocalItem
+                }
+                
                 var newDuplicatesArray = [WrapData]()
-                for duplicateObject in self.duplicatesArray{
-                    if duplicateObject.md5 != object.md5{
-                        newDuplicatesArray.append(duplicateObject)
+                let duplicatesMD5Set = Set<String>(localObjects.map({ $0.md5 }))
+                for object in self.duplicatesArray {
+                    if !duplicatesMD5Set.contains(object.md5) {
+                        newDuplicatesArray.append(object)
                     }
                 }
+                self.duplicatesArray = newDuplicatesArray
                 
-                var newMD5Arrary = [String]()
-                for duplicateMD5Object in self.localMD5Array{
-                    if duplicateMD5Object != object.md5{
-                        newMD5Arrary.append(duplicateMD5Object)
-                    }
+                let networksObjects = items.filter {
+                    !$0.isLocalItem
                 }
                 
-                DispatchQueue.main.async { [weak self] in
-                    guard let `self` = self else{
-                        return
+                localObjects = CoreDataStack.default.getLocalDuplicates(remoteItems: networksObjects)
+                let duplicatesServerMD5Set = Set<String>(localObjects.map({ $0.md5 }))
+                newDuplicatesArray.removeAll()
+                for object in self.duplicatesArray {
+                    if !duplicatesServerMD5Set.contains(object.md5) {
+                        newDuplicatesArray.append(object)
                     }
-                    self.duplicatesArray = newDuplicatesArray
-                    self.localMD5Array = newMD5Arrary
                 }
+                self.duplicatesArray = newDuplicatesArray
                 
-            }
-            
-            if (self.duplicatesArray.count == 0){
-                CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-                CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
+                if (self.duplicatesArray.count == 0) {
+                    CardsManager.default.stopOperationWithType(type: .freeAppSpace)
+                    CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
+                }
             }
         }
     }
     
-    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool{
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         if let compairedView = object as? FreeAppSpace {
             return compairedView == self
         }
@@ -416,19 +395,19 @@ class FreeAppService: RemoteItemsService {
         if self.isGotAll {
             success?([])
             return
-        }else{
+        } else {
             isGotAll = true
-            FreeAppSpace.default.getCheckedDuplicatesArray(checkedArray: { (array) in
+            FreeAppSpace.default.getCheckedDuplicatesArray(checkedArray: { array in
                 success?(array)
             })
         }
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         allItems(success: success, fail: fail)
     }
     
-    func clear(){
+    func clear() {
         isGotAll = false
     }
 }

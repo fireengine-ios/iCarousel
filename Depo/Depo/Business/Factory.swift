@@ -7,22 +7,19 @@
 //
 
 import Foundation
-import Alamofire
 
 let factory: Factory = FactoryMain()
 
-protocol Factory {
+protocol Factory: SharedFactory {
     func resolve() -> MediaPlayer
     func resolve() -> DropboxManager
     func resolve() -> PasscodeStorage
     func resolve() -> BiometricsManager
-    func resolve() -> TokenStorage
-    func resolve() -> SessionManager
     
     func resolve() -> HomeCardsService
 }
 
-final class FactoryMain: Factory {
+final class FactoryMain: FactoryBase, Factory {
     
     private static let mediaPlayer = MediaPlayer()
     func resolve() -> MediaPlayer {
@@ -34,23 +31,9 @@ final class FactoryMain: Factory {
         return FactoryMain.dropboxManager
     }
     
-    private static let passcodeStorage = PasscodeStorageDefaults()
-    func resolve() -> PasscodeStorage {
-        return FactoryMain.passcodeStorage
-    }
-    
     private static let biometricsManager = BiometricsManagerImp()
     func resolve() -> BiometricsManager {
         return FactoryMain.biometricsManager
-    }
-    
-    private static let tokenStorage = TokenStorageUserDefaults()
-    func resolve() -> TokenStorage {
-        return FactoryMain.tokenStorage
-    }
-    
-    func resolve() -> SessionManager {
-        return SessionManager.default
     }
 }
 

@@ -27,6 +27,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     static let borderW: CGFloat = 3
     
+    private var visualEffectBlur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,20 +40,28 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         imageView.backgroundColor = UIColor.clear
         
         favoriteIcon.accessibilityLabel = TextConstants.accessibilityFavorite
+        
+        visualEffectBlur.alpha = 0.75
+        visualEffectBlur.isHidden = true
+        visualEffectBlur.frame = imageView.bounds
+        visualEffectBlur.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        imageView.addSubview(visualEffectBlur)
+        
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
-        guard let wrappered = wrappedObj as? WrapData else{
+        guard let wrappered = wrappedObj as? WrapData else {
             return
         }
         
-        if (isAlreadyConfigured){
+        if (isAlreadyConfigured) {
             return
         }
         
         progressView.isHidden = true
         
-        if let item = wrappedObj as? Item{
+        if let item = wrappedObj as? Item {
             favoriteIcon.isHidden = !item.favorites
         }
         
@@ -73,7 +83,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         self.isAlreadyConfigured = false
     }
     
-    override func updating(){
+    override func updating() {
         super.updating()
         self.backgroundColor = UIColor.white
     }
@@ -97,7 +107,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
 
     override func setImage(with url: URL) {
         self.imageView.contentMode = .center
-        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] (image, error, cacheType, url) in
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
             guard let `self` = self else {
                 return
             }
@@ -114,7 +124,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         self.backgroundColor = ColorConstants.fileGreedCellColor
     }
 
-    override func setSelection(isSelectionActive: Bool, isSelected: Bool){
+    override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         selectionImageView.isHidden = !isSelectionActive
         selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
         
@@ -126,25 +136,28 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
 
     
-    class func getCellSise()->CGSize{
+    class func getCellSise() -> CGSize {
         return CGSize(width: 90.0, height: 90.0)
     }
     
-    func setProgressForObject(progress: Float){
+    func setProgressForObject(progress: Float, blurOn: Bool = false) {
+        visualEffectBlur.isHidden = !blurOn
+        
         progressView.isHidden = false
         progressView.setProgress(progress, animated: false)
     }
     
-    func finishedUploadForObject(){
+    func finishedUploadForObject() {
+        visualEffectBlur.isHidden = true
         progressView.isHidden = true
         cloudStatusImage.image = UIImage(named: "objectInCloud")
     }
     
-    func finishedDownloadForObject(){
+    func finishedDownloadForObject() {
         progressView.isHidden = true
     }
     
-    func resetCloudImage(){
+    func resetCloudImage() {
         cloudStatusImage.image = UIImage()
     }
 

@@ -24,7 +24,7 @@ class HomePageModuleInitializer: NSObject {
         configurator.configureModuleForViewInput(viewInput: homepageViewController)
     }
 
-    class func initializeViewController(with nibName:String) -> UIViewController {
+    class func initializeViewController(with nibName: String) -> UIViewController {
         let viewController = HomePageViewController(nibName: nibName, bundle: nil)
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonNewFolder])
         let configurator = HomePageModuleConfigurator()

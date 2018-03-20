@@ -14,9 +14,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var navBarConfigurator = NavigationBarConfigurator()
 
-    var refresher:UIRefreshControl!
-    
-    let floatingView = FloatingView()
+    var refresher: UIRefreshControl!
         
     var cancelSelectionButton: UIBarButtonItem?
     
@@ -40,7 +38,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var noFilesViewCenterOffsetConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var startCreatingFilesButton: BlueButtonWithWhiteText!
+    @IBOutlet weak var startCreatingFilesButton: BlueButtonWithNoFilesWhiteText!
     
     @IBOutlet weak var topBarContainer: UIView!
     
@@ -51,8 +49,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
     
     var contentSlider: LBAlbumLikePreviewSliderViewController?
-    weak var contentSliderTopY: NSLayoutConstraint? = nil
-    weak var contentSliderH: NSLayoutConstraint? = nil
+    weak var contentSliderTopY: NSLayoutConstraint?
+    weak var contentSliderH: NSLayoutConstraint?
     
     var underNavBarBar: GridListTopBar?
     
@@ -93,14 +91,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
         noFilesLabel.textColor = ColorConstants.textGrayColor
-        noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         
         noFilesTopLabel?.text = TextConstants.folderEmptyText
         noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
         noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
-        startCreatingFilesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
-        startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText , for: .normal)
+        startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText, for: .normal)
         
         output.viewIsReady(collectionView: collectionView)
     }
@@ -115,29 +112,27 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
         
         let allVisibleCells = collectionView.indexPathsForVisibleItems
-        if !allVisibleCells.isEmpty{
+        if !allVisibleCells.isEmpty {
             collectionView.performBatchUpdates({
                 collectionView.reloadItems(at: allVisibleCells)
             })
         }
         
         output.viewWillAppear()
+    
+        if let searchController = navigationController?.topViewController as? SearchViewController {
+            searchController.dismissController(animated: false)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         configurateNavigationBar()
         configurateViewForPopUp()
+        output.updateThreeDotsButton()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        /// need when device was rotated
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
-    func configurateViewForPopUp(){
+    func configurateViewForPopUp() {
         CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
     
@@ -148,11 +143,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        floatingView.hideView(animated: true)
         output.viewWillDisappear()
     }
     
-    deinit{
+    deinit {
          CardsManager.default.removeViewForNotification(view: scrolliblePopUpView)
          NotificationCenter.default.removeObserver(self)
     }
@@ -160,10 +154,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     // MARK: - SearchBarButtonPressed
     
    func configureNavBarActions(isSelecting: Bool = false) {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { _ in
-            let router = RouterVC()
-            let searchViewController = router.searchView()
-            router.pushViewControllerWithoutAnimation(viewController: searchViewController)
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
+            self?.output.searchPressed(output: self)
         })
         let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
             self?.output.moreActionsPressed(sender: NavigationBarList().more)
@@ -173,7 +165,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    func configurateFreeAppSpaceActions(deleteAction: @escaping () -> Void) {
+    func configurateFreeAppSpaceActions(deleteAction: @escaping VoidHandler) {
         let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { _ in
             deleteAction()
         })
@@ -188,7 +180,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
     
-    func configurateFaceImagePeopleActions(showHideAction: @escaping () -> Void) {
+    func configurateFaceImagePeopleActions(showHideAction: @escaping VoidHandler) {
         let showHide = NavBarWithAction(navItem: NavigationBarList().showHide, action: { _ in
             showHideAction()
         })
@@ -208,7 +200,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
 
     
-    @IBAction func onStartCreatingFilesButton(){
+    @IBAction func onStartCreatingFilesButton() {
         output.onStartCreatingPhotoAndVideos()
     }
     
@@ -224,13 +216,17 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     // MARK: In
     
-    func getCollectionViewWidth() -> CGFloat{
+    func getCollectionViewWidth() -> CGFloat {
         return collectionView.frame.size.width
     }
     
     @objc func loadData() {
-        output.onReloadData()
-        contentSlider?.reloadAllData()
+        if !output.isSelectionState() {
+            output.onReloadData()
+            contentSlider?.reloadAllData()
+        } else {
+            refresher.endRefreshing()
+        }
     }
     
     func stopRefresher() {
@@ -239,11 +235,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
     }
     
-    func showCustomPopUpWithInformationAboutAccessToMediaLibrary(){
+    func showCustomPopUpWithInformationAboutAccessToMediaLibrary() {
         UIApplication.showErrorAlert(message: TextConstants.photosVideosViewHaveNoPermissionsAllertText)
     }
     
-    func setCollectionViewVisibilityStatus(visibilityStatus: Bool){
+    func setCollectionViewVisibilityStatus(visibilityStatus: Bool) {
         collectionView.isHidden = visibilityStatus
     }
     
@@ -264,14 +260,24 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func setThreeDotsMenu(active isActive: Bool) {
         navigationItem.rightBarButtonItem?.isEnabled = isActive
+        
+        if let threeDotsItem = navigationItem.rightBarButtonItems?.first(where: {$0.accessibilityLabel == TextConstants.accessibilityMore}) {
+            threeDotsItem.isEnabled = isActive
+        }        
     }
     
-    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String) {
+    func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
         noFilesLabel.text = text
         noFilesImage.image = image
+        startCreatingFilesButton.isHidden = createFilesButtonText.isEmpty
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false
-        topBarContainer.isHidden = false
+        topBarContainer.isHidden = needHideTopBar
+        
+        let service = output.getRemoteItemsService()
+        if service is DocumentService || service is MusicService {
+            startCreatingFilesButton.isHidden = true
+        }
     }
     
     func showNoFilesTop() {
@@ -295,11 +301,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
-    @objc func onCancelSelectionButton(){
+    @objc func onCancelSelectionButton() {
         output.onCancelSelection()
     }
     
-    @objc func onBackButton(){
+    @objc func onBackButton() {
         RouterVC().popViewController()
     }
     
@@ -313,11 +319,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         return output.getCurrentSortRule()
     }
     
-    func getRemoteItemsService() -> RemoteItemsService{
+    func getRemoteItemsService() -> RemoteItemsService {
         return output.getRemoteItemsService()
     }
     
-    func getFolder() -> Item?{
+    func getFolder() -> Item? {
         return output.getFolder()
     }
     
@@ -325,7 +331,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         setTitle(withString: String(count) + " Selected")
     }
     
-    static let sliderH : CGFloat = 180
+    static let sliderH: CGFloat = 180
     
     private func setupSlider(sliderController: LBAlbumLikePreviewSliderViewController) {
         contentSlider = sliderController
@@ -340,7 +346,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
         collectionView.updateConstraints()
         
-        collectionView.clipsToBounds = false
         collectionView.contentInset = UIEdgeInsets(top: BaseFilesGreedViewController.sliderH + hTopPopUpView, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(subView)
         sliderController.view.frame = subView.bounds
@@ -364,11 +369,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         refresherY =  -hTopPopUpView - BaseFilesGreedViewController.sliderH + 30
         updateRefresher()
         
-        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH/2
+        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH / 2
     }
     
-    private func setupViewForPopUp(){
-        collectionView.clipsToBounds = false
+    private func setupViewForPopUp() {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(scrolliblePopUpView)
         
@@ -387,9 +391,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         scrolliblePopUpView.delegate = self
     }
     
-    //MARK: ViewForPopUpDelegate
+    // MARK: ViewForPopUpDelegate
     
-    func onUpdateViewForPopUpH(h: CGFloat){
+    func onUpdateViewForPopUpH(h: CGFloat) {
         var sliderH: CGFloat = 0
         if let slider = self.contentSlider {
             sliderH = sliderH + slider.view.frame.size.height
@@ -407,17 +411,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             
             self.view.layoutIfNeeded()
             self.collectionView.contentInset = UIEdgeInsets(top: h + sliderH, left: 0, bottom: 25, right: 0)
-            let point = CGPoint(x: 0, y: -h - sliderH)
-            self.collectionView.setContentOffset(point, animated: true)
-            
-            
         }
         
         refresherY = -calculatedH + 30
         updateRefresher()
     }
     
-    func updateRefresher(){
+    func updateRefresher() {
         guard let refresherView = refresher.subviews.first else {
             return
         }
@@ -451,7 +451,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     
-    //MARK: - TopBar/UnderNavBarBar
+    // MARK: - TopBar/UnderNavBarBar
     
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
          output.filtersTopBar(cahngedTo: [filter])
@@ -467,4 +467,3 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         output.viewAppearanceChangedTopBar(asGrid: asGrid)
     }
 }
-

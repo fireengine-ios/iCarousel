@@ -8,11 +8,9 @@
 
 import Foundation
 
-protocol PhotoVideoDetailInteractorInput {
+protocol PhotoVideoDetailInteractorInput: class {
     
-    typealias Item = WrapData
-    
-    func onSelectItem(fileObject:Item, from items:[Item])
+    func onSelectItem(fileObject: Item, from items: [Item])
     
     func onViewIsReady()
     
@@ -26,6 +24,10 @@ protocol PhotoVideoDetailInteractorInput {
 
     func deleteSelectedItem(type: ElementTypes)
     
-    var setupedMoreMenuConfig: [ElementTypes] {get}
+    var setupedMoreMenuConfig: [ElementTypes] { get }
+    
+    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64)
+    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64)
+    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String)
     
 }

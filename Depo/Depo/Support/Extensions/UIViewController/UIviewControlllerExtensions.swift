@@ -10,24 +10,28 @@ import Foundation
 import UIKit
 import MBProgressHUD
 
-//MARK:- WAITING
+// MARK: - WAITING
 
 protocol Waiting {
     
     func showSpiner()
     
+    func showSpinnerOnView(_ view: UIView)
+    
     func showSpinerIncludeNavigatinBar()
     
-    func showSpinerWithCancelClosure(_ cancel: @escaping () -> Void)
+    func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler)
     
     func hideSpinerIncludeNavigatinBar()
     
     func hideSpiner()
+    
+    func hideSpinerForView(_ view: UIView)
 }
 
 extension UIViewController: Waiting {
     
-    func showSpinerWithCancelClosure(_ cancel: @escaping () -> Void) {
+    func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler) {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
@@ -43,6 +47,12 @@ extension UIViewController: Waiting {
     func showSpiner() {
         DispatchQueue.main.async {
             _ = MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
+    }
+    
+    func showSpinnerOnView(_ view: UIView) {
+        DispatchQueue.main.async {
+            _ = MBProgressHUD.showAdded(to: view, animated: true)
         }
     }
     
@@ -66,10 +76,16 @@ extension UIViewController: Waiting {
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         }
     }
+    
+    func hideSpinerForView(_ view: UIView) {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: view, animated: true)
+        }
+    }
 }
 
 
-//MARK:- CustomNavController
+// MARK: - CustomNavController
 
 protocol CurrentNavController {
     var currentNavController: UINavigationController? { get }
@@ -80,4 +96,3 @@ extension UIViewController: CurrentNavController {
         return navigationController
     }
 }
-

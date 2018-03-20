@@ -16,10 +16,10 @@ extension URL {
     }
 
     static func encodingURL(string: String, relativeTo url: URL?) -> URL? {
-        var url = URL(string: string, relativeTo: url)
-        if url == nil, let params = string.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) {
-            url = URL(string: params, relativeTo: RouteRequests.BaseUrl)
+        var result = URL(string: string, relativeTo: url)
+        if result == nil, let params = string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            result = URL(string: params, relativeTo: url)
         }
-        return url
+        return result
     }
 }

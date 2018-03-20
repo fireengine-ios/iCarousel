@@ -30,6 +30,7 @@ struct SearchJsonKey {
     static let album = "album"
     static let location = "location"
     static let foundItems = "found_items"
+    static let foundItemsCount = "found_items_count"
     
     //Album
     static let albumName = "label"
@@ -50,6 +51,7 @@ struct SearchJsonKey {
     static let ImageWidth = "Image-Width"
     static let ImageDateTime = "Image-DateTime"
     static let VideoPreview = "Video-Preview"
+    static let DocumentPreview = "Document-Preview"
     
     // music metadata
     
@@ -66,9 +68,17 @@ struct SearchJsonKey {
 
     //folder
     static let ChildCount = "childCount"
+    
+    //face image
+    static let objectList = "object_list"
+    static let personList = "person_list"
+    static let locationList = "location_list"
+    static let personInfo = "personInfo"
+    static let locationInfo = "locationInfo"
+    static let objectInfo = "objectInfo"
 }
 
-class BaseMetaData: ObjectRequestResponse {
+final class BaseMetaData: ObjectRequestResponse {
     
     var favourite: Bool?
     
@@ -80,6 +90,7 @@ class BaseMetaData: ObjectRequestResponse {
     var mediumUrl: URL?
     var smalURl: URL?
     var videoPreviewURL: URL?
+    var documentPreviewURL: URL?
     
     // music
     var artist: String?
@@ -113,10 +124,11 @@ class BaseMetaData: ObjectRequestResponse {
         height = json?[SearchJsonKey.ImageHeight].int16
         width = json?[SearchJsonKey.ImageWidth].int16
         takenDate = json?[SearchJsonKey.ImageDateTime].date
-        largeUrl =  json?[SearchJsonKey.ThumbnailLarge].url
+        largeUrl = json?[SearchJsonKey.ThumbnailLarge].url
         mediumUrl = json?[SearchJsonKey.Thumbnail_Medium].url
         smalURl = json?[SearchJsonKey.ThumbnailSmall].url
         videoPreviewURL = json?[SearchJsonKey.VideoPreview].url
+        documentPreviewURL = json?[SearchJsonKey.DocumentPreview].url
         
         artist = json?[SearchJsonKey.Artist].string
         album = json?[SearchJsonKey.Album].string
@@ -138,7 +150,7 @@ class BaseMetaData: ObjectRequestResponse {
     }
 }
 
-class SearchItemResponse: ObjectRequestResponse {
+final class SearchItemResponse: ObjectRequestResponse {
     
     var createdDate: Date?
     var lastModifiedDate: Date?
@@ -176,54 +188,137 @@ class SearchItemResponse: ObjectRequestResponse {
         tempDownloadURL = json?[SearchJsonKey.tempDownloadURL].url
         status = json?[SearchJsonKey.status].string
         subordinates = json?[SearchJsonKey.subordinates].array
-        albums = json?[SearchJsonKey.album].array?.flatMap{ $0.string }
+        albums = json?[SearchJsonKey.album].array?.flatMap { $0.string }
         childCount = json?[SearchJsonKey.ChildCount].int64
     }
 }
 
-class SearchResponse: ObjectRequestResponse {
+final class SearchResponse: ObjectRequestResponse {
     
     var list: Array<SearchItemResponse> = []
     
     override func mapping() {
         let  tmpList = json?.array
-        if let result = tmpList?.flatMap( {SearchItemResponse(withJSON: $0)}) {
+        if let result = tmpList?.flatMap({ SearchItemResponse(withJSON: $0) }) {
             list = result
         }
     }
 }
 
-class UnifiedSearchResponse: ObjectRequestResponse {
-    var list: Array<SearchItemResponse> = []
+struct FoundItemsInfoJsonKey {
+    static let allFiles = "all_files"
+    static let albums = "albums"
+    static let documents = "documents"
+    static let musics = "musics"
+    static let photosAndVideos = "photos_and_videos"
+}
+
+final class FoundItemsInfoResponse: ObjectRequestResponse {
+    var allFiles: Int64?
+    var albums: Int64?
+    var documents: Int64?
+    var musics: Int64?
+    var photosAndVideos: Int64?
     
     override func mapping() {
-        let tmpList = json?.dictionary?[SearchJsonKey.foundItems]?.array
-        if let result = tmpList?.flatMap({ SearchItemResponse(withJSON: $0)}) {
-            list = result
+        allFiles = json?.dictionary?[FoundItemsInfoJsonKey.allFiles]?.int64
+        albums = json?.dictionary?[FoundItemsInfoJsonKey.albums]?.int64
+        documents = json?.dictionary?[FoundItemsInfoJsonKey.documents]?.int64
+        musics = json?.dictionary?[FoundItemsInfoJsonKey.musics]?.int64
+        photosAndVideos = json?.dictionary?[FoundItemsInfoJsonKey.photosAndVideos]?.int64
+    }
+}
+
+final class UnifiedSearchResponse: ObjectRequestResponse {
+    var itemsList = [SearchItemResponse]()
+    var peopleList = [PeopleItemResponse]()
+    var thingsList = [ThingsItemResponse]()
+    var placesList = [PlacesItemResponse]()
+    var info: FoundItemsInfoResponse?
+    
+    override func mapping() {
+        if let foundItemsList = json?.dictionary?[SearchJsonKey.foundItems]?.array?.flatMap({ SearchItemResponse(withJSON: $0) }) {
+            itemsList = foundItemsList
+        }
+        if let objectList = json?.dictionary?[SearchJsonKey.objectList]?.array?.flatMap({ ThingsItemResponse(withJSON: $0.dictionary?[SearchJsonKey.objectInfo]) }) {
+            thingsList = objectList
+        }
+        if let personList = json?.dictionary?[SearchJsonKey.personList]?.array?.flatMap({ PeopleItemResponse(withJSON: $0.dictionary?[SearchJsonKey.personInfo]) }) {
+            peopleList = personList
+        }
+        if let locationList = json?.dictionary?[SearchJsonKey.locationList]?.array?.flatMap({ PlacesItemResponse(withJSON: $0.dictionary?[SearchJsonKey.locationInfo]) }) {
+            placesList = locationList
+        }
+        info = FoundItemsInfoResponse(withJSON: json?.dictionary?[SearchJsonKey.foundItemsCount])
+    }
+}
+
+// MARK: - Suggestion
+
+struct SuggestionJsonKey {
+    
+    static let type = "type"
+    static let text = "text"
+    static let highlightedText = "highlightedText"
+    static let albumUuid = "albumUUID"
+    
+    //objectInfo
+    static let id = "id"
+    static let code = "code"
+    static let name = "name"
+    static let thumbnail = "thumbnail"
+    static let ugglaId = "ugglaId"
+    static let visible = "visible"
+    static let adminLevel = "adminLevel"
+}
+
+enum SuggestionType: String {
+    case time = "TIME"
+    case place = "LOCATION"
+    case category = "CATEGORY"
+    case people = "PERSON"
+    case thing = "OBJECT"
+    
+    var image: UIImage {
+        switch self {
+            case .time: return #imageLiteral(resourceName: "search_time")
+            case .place: return #imageLiteral(resourceName: "search_places")
+            case .category: return #imageLiteral(resourceName: "search_categories")
+            case .people: return #imageLiteral(resourceName: "search_people")
+            case .thing: return #imageLiteral(resourceName: "search_things")
         }
     }
 }
 
-class SuggestionResponse: ObjectRequestResponse {
+final class SuggestionResponse: ObjectRequestResponse {
     var list: Array<SuggestionObject> = []
     
     override func mapping() {
         let tmpList = json?.array
-        if let result = tmpList?.flatMap( { SuggestionObject(withJSON: $0)} ) {
+        if let result = tmpList?.flatMap({ SuggestionObject(withJSON: $0) }) {
             list = result
         }
     }
 }
 
-class SuggestionObject: ObjectRequestResponse {
+final class SuggestionObject: ObjectRequestResponse {
     var text: String?
     var highlightedText: NSMutableAttributedString!
+    var type: SuggestionType?
+    var albumUuid: String?
+    var info: SuggestionInfo?
     
     override func mapping() {
-        self.text = json?["text"].string
-        self.highlightedText = getHighlightedText(string: json?["highlightedText"].string)
+        text = json?[SuggestionJsonKey.text].string
+        highlightedText = getHighlightedText(string: json?[SuggestionJsonKey.highlightedText].string)
+        if let suggestionType = json?[SuggestionJsonKey.type].string {
+            type = SuggestionType(rawValue: suggestionType)
+            
+            let infoKey = "\(suggestionType.lowercased())Info"
+            info = SuggestionInfo(withJSON: json?[infoKey])
+        }
+        albumUuid = json?[SuggestionJsonKey.albumUuid].string
     }
-    
     
     func getHighlightedText(string: String!) -> NSMutableAttributedString! {
         if let _ = string {
@@ -239,11 +334,28 @@ class SuggestionObject: ObjectRequestResponse {
                 highlightedText = highlightedText.replacingOccurrences(of: "</m>", with: "") as NSString
             }
             let attributedString = NSMutableAttributedString(string: highlightedText as String)
-            attributedString.addAttributes([NSAttributedStringKey.foregroundColor : ColorConstants.darcBlueColor], range: NSMakeRange(0, highlightedText.length))
+            attributedString.addAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], range: NSMakeRange(0, highlightedText.length))
             attributedString.addAttributes([NSAttributedStringKey.foregroundColor : ColorConstants.blueColor], range: highlightedText.range(of: sub))
             attributedString.addAttributes([NSAttributedStringKey.font : UIFont.TurkcellSaturaDemFont(size: 15)], range: NSMakeRange(0, highlightedText.length))
             return attributedString
         }
         return nil
+    }
+}
+
+final class SuggestionInfo: ObjectRequestResponse {
+    var id: Int64?
+    var code: String?
+    var name: String?
+    var thumbnail: URL?
+    var ugglaId: Int64?
+    var visible: Bool?
+    var adminLevel: String?
+    
+    override func mapping() {
+        id = json?[SuggestionJsonKey.id].int64
+        code = json?[SuggestionJsonKey.code].string
+        name = json?[SuggestionJsonKey.name].string
+        thumbnail = json?[SuggestionJsonKey.thumbnail].url
     }
 }

@@ -10,8 +10,16 @@ import Foundation
 import UIKit
 
 class Device {
+    
+    static func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {
+        if !Device.isIpad, UIDevice.current.orientation.isContained(in: [.landscapeLeft, .landscapeRight]) {
+            UIApplication.shared.isStatusBarHidden = true
+        } else {
+            UIApplication.shared.isStatusBarHidden = hidden
+        }
+    }
 
-    static private let supportedLanguages = ["tr","en","uk","ru","de","ar","ro","es"]
+    static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es"]
     static private let defaultLocale = "en"
     
     static func documentsFolderUrl(withComponent: String ) -> URL {
@@ -36,7 +44,12 @@ class Device {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
     }
     
-    static var isIpad:Bool {
+    /// https://stackoverflow.com/questions/46192280/detect-if-the-device-is-iphone-x
+    static var isIphoneX: Bool {
+        return (UIDevice.current.userInterfaceIdiom == .phone) && (UIScreen.main.nativeBounds.height == 2436)
+    }
+    
+    static var isIpad: Bool {
         return UI_USER_INTERFACE_IDIOM() == .pad
     }
     
@@ -61,10 +74,10 @@ class Device {
         return t
     }
     
-    static var deviceInfo:[String:Any] {
+    static var deviceInfo: [String: Any] {
         
-        var result : [String:Any] = [:]
-        let device =  UIDevice.current
+        var result: [String: Any] = [:]
+        let device = UIDevice.current
         
         if let uuid = device.identifierForVendor?.uuidString {
             result["uuid"] = uuid

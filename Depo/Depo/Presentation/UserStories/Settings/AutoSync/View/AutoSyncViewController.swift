@@ -18,8 +18,10 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     @IBOutlet weak var skipButton: ButtonWithCorner!
     @IBOutlet weak var tableHConstaint: NSLayoutConstraint!
     @IBOutlet weak var bacgroundImage: UIImageView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     var fromSettings: Bool = false
+    var isFirstTime = true
     
     let dataSource = AutoSyncDataSource()
 
@@ -36,15 +38,17 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
             navigationBarWithGradientStyle()
         } else {
             view.backgroundColor = UIColor.lrTiffanyBlue
-            defaultNavBarStyle()
+            hidenNavigationBarStyle()
+            topConstraint.constant = 64
+            view.layoutIfNeeded()
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        let model = dataSource.createSettingsAutoSyncModel()
-        output.saveSettings(model)
+        let settings = dataSource.createAutoSyncSettings()
+        output.save(settings: settings)
     }
     
     override func viewDidLoad() {
@@ -66,7 +70,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
         startButton.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
         skipButton.setTitle(TextConstants.autoSyncskipForNowButton, for: .normal)
         
-        dataSource.configurateTable(table: tableView, tableHConstraint: tableHConstaint)
+        dataSource.setup(table: tableView, with: tableHConstaint)
         dataSource.delegate = self
         
         output.viewIsReady()
@@ -74,21 +78,27 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
 
     // MARK: buttons actions
     
-    @IBAction func onStartUsingButton(){
-        let model = dataSource.createSettingsAutoSyncModel()
-        output.saveChanges(setting: model)
+    @IBAction func onStartUsingButton() {
+        let settings = dataSource.createAutoSyncSettings()
+        
+        if !settings.isAutoSyncEnabled {
+            MenloworksEventsService.shared.onFirstAutosyncOff()
+        }
+        
+        output.change(settings: settings)
     }
     
-    @IBAction func onSkipButtn(){
+    @IBAction func onSkipButtn() {
         output.skipForNowPressed()
     }
 
+    
     // MARK: AutoSyncViewInput
     func setupInitialState() {
     }
     
-    func preperedCellsModels(models:[AutoSyncModel]){
-        dataSource.showCellsFromModels(models: models)
+    func prepaire(syncSettings: AutoSyncSettings) {
+        dataSource.showCells(from: syncSettings)
     }
     
     func reloadTableView() {
@@ -104,4 +114,24 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     func enableAutoSync() {
         output.enableAutoSync()
     }
+    
+    func mobileDataEnabledFor(model: AutoSyncModel) {
+        if fromSettings, isFirstTime {
+            isFirstTime = false
+            
+            let router = RouterVC()
+            let controller = PopUpController.with(title: TextConstants.autoSyncSyncOverTitle,
+                                                  message: TextConstants.autoSyncSyncOverMessage,
+                                                  image: .none,
+                                                  firstButtonTitle: TextConstants.cancel,
+                                                  secondButtonTitle: TextConstants.autoSyncSyncOverOn,
+                                                  firstAction: { vc in
+                                                    model.isSelected = false
+                                                    self.tableView.reloadData()
+                                                    vc.close()
+            })
+            router.presentViewController(controller: controller)
+        }
+    }
+    
 }

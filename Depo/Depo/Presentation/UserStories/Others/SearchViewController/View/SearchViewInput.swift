@@ -11,17 +11,23 @@ import Foundation
 protocol SearchViewInput: class {
     func endSearchRequestWith(text: String)
     func successWithSuggestList(list: [SuggestionObject])
-    func setRecentSearches(_ recentSearches: [String])
+    func setRecentSearches(_ recentSearches: [SearchCategory: [SuggestionObject]])
     
     func setCollectionViewVisibilityStatus(visibilityStatus: Bool)
     func getCollectionViewWidth() -> CGFloat
     func scrollViewDidScroll(scrollView: UIScrollView)
     func setupUnderNavBarBar(withConfig config: GridListTopBarConfig)
-    func dismissController()
+    func dismissController(animated: Bool)
     func showMusicBar()
     
     func onSetSelection(state: Bool)
     func selectedItemsCountChange(with count: Int)
     
     func setNavBarRigthItem(active isActive: Bool)
+    
+    func showSpinner()
+    func hideSpinner()
+    
+    func setEnabledSearchBar(_ isEnabled: Bool)
+    func setVisibleTabBar(_ isVisible: Bool)
 }

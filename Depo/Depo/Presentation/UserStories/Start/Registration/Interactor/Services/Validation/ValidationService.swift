@@ -29,7 +29,7 @@ class UserValidator {
         let mailLenght = mail.count
         if mail.isEmpty {
             warningsArray.append(.mailIsEmpty)
-        } else if (regularExpressionMailVer?.matches(in: mail, options: .reportCompletion, range: NSMakeRange(0, mailLenght)).count)! == 0 {
+        } else if (regularExpressionMailVer?.matches(in: mail, options: .reportCompletion, range: NSRange(location: 0, length: mailLenght)).count)! == 0 {
             warningsArray.append(.mailNotValid)
         }
         
@@ -40,7 +40,7 @@ class UserValidator {
         let passwordLenght = password.count
         if password.isEmpty {
             warningsArray.append(.passwordIsEmpty)
-        } else if regularExpressionPassword?.matches(in: password, options: .reportCompletion, range: NSMakeRange(0,passwordLenght)).count == 0 {
+        } else if regularExpressionPassword?.matches(in: password, options: .reportCompletion, range: NSRange(location: 0, length: passwordLenght)).count == 0 {
             warningsArray.append(.passwordNotValid)
         }
         

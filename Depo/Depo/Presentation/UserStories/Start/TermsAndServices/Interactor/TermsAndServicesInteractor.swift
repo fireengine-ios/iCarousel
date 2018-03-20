@@ -20,7 +20,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     func loadTermsAndUses() {
         
-    eulaService.eulaGet(sucess: { [weak self] (eula) in
+    eulaService.eulaGet(sucess: { [weak self] eula in
         guard let eulaR = eula as? Eula else {
             return
         }
@@ -28,7 +28,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         DispatchQueue.main.async { [weak self] in
             self?.output.showLoadedTermsAndUses(eula: eulaR.content!)
         }
-        }, fail: { [weak self] (errorResponse) in
+        }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async { [weak self] in
                 self?.output.failLoadTermsAndUses(errorString: errorResponse.description)
             }
@@ -79,12 +79,12 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         })
     }
     
-    func applyEula(){
-        guard let eula_ = eula, let eulaID = eula_.id else{
+    func applyEula() {
+        guard let eula_ = eula, let eulaID = eula_.id else {
             return
         }
         
-        eulaService.eulaApprove(eulaId: eulaID, sucess: { [weak self] (successResponce) in
+        eulaService.eulaApprove(eulaId: eulaID, sucess: { [weak self] successResponce in
             DispatchQueue.main.async {
                 self?.output.eulaApplied()
             }

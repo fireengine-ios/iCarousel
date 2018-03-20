@@ -34,6 +34,15 @@ class PackagesInteractor {
                                     priceString: priceString,
                                     type: type,
                                     model: model)
+        } else if name.contains("100") {
+            return SubscriptionPlan(name: name,
+                                    photosCount: 100_000,
+                                    videosCount: 10_000,
+                                    songsCount: 50_000,
+                                    docsCount: 1_000_000,
+                                    priceString: priceString,
+                                    type: type,
+                                    model: model)
         } else if name.contains("500") {
             return SubscriptionPlan(name: name,
                                     photosCount: 500_000,
@@ -268,7 +277,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             let currency = getCurrency(for: accountType)
             let priceString = String(format: TextConstants.offersPrice, price, currency)
             
-            if price == 0 {
+            if price == 0, name == "5 GB" {
                 return SubscriptionPlan(name: name,
                                         photosCount: 5_000,
                                         videosCount: 500,

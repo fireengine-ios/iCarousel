@@ -8,22 +8,22 @@
 
 class CreateStoryPreviewInteractor {
     weak var output: CreateStoryPreviewInteractorOutput?
-    var story:PhotoStory? = nil
-    var responce: CreateStoryResponce? = nil
+    var story: PhotoStory?
+    var responce: CreateStoryResponce?
     var isRequestStarted = false
 }
 
 // MARK: CreateStoryPreviewInteractorInput
 extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
     
-    func viewIsReady(){
+    func viewIsReady() {
         guard let resp = responce else {
             return
         }
         output?.startShowVideoFromResponce(responce: resp)
     }
     
-    func onSaveStory(){
+    func onSaveStory() {
         if isRequestStarted {
             return
         }
@@ -32,7 +32,7 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
             return
         }
         
-        guard let parameter = story_.photoStoryRequestParameter() else{
+        guard let parameter = story_.photoStoryRequestParameter() else {
             return
         }
         
@@ -44,7 +44,7 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
                 ItemOperationManager.default.newStoryCreated()
             }
             
-            }, fail: {[weak self] (error) in
+            }, fail: {[weak self] error in
                 DispatchQueue.main.async {
                     self?.output?.storyCreatedWithError()
                     self?.isRequestStarted = false

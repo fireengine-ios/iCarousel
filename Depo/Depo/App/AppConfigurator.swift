@@ -74,7 +74,7 @@ class AppConfigurator {
         cropyConfig.cropHeaderTitleColor = UIColor.white
     }
     
-    //MARK: - settings bundle
+    // MARK: - settings bundle
     //Check original post here: https://medium.com/@abhimuralidharan/adding-settings-to-your-ios-app-cecef8c5497
     
     struct SettingsBundleKeys {
@@ -96,24 +96,9 @@ class AppConfigurator {
         let notificationTypes = NSInteger(types.rawValue)
         
         DispatchQueue.main.async {
-            MPush.register(forRemoteNotificationTypes: notificationTypes)
+            MPush.register(forRemoteNotificationTypes: MNotificationType(rawValue: notificationTypes))
             MPush.applicationDidFinishLaunching(options: launchOptions)
         }
     }
     
-}
-
-/// here we can change global requests validation
-extension DataRequest {
-    @discardableResult
-    public func customValidate() -> Self {
-        return validate(statusCode: 200..<300)
-    }
-}
-
-extension DownloadRequest {
-    @discardableResult
-    public func customValidate() -> Self {
-        return validate(statusCode: 200..<300)
-    }
 }

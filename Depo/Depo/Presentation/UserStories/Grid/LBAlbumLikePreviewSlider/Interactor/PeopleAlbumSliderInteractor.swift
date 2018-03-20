@@ -21,7 +21,7 @@ class PeopleAlbumSliderInteractor: LBAlbumLikePreviewSliderInteractor {
         guard let id = peopleItem.id else {
             return
         }
-        peopleService.getAlbumsForPeopleItemWithID(Int(id), success: { [weak self] (albums) in
+        peopleService.getAlbumsForPeopleItemWithID(Int(id), success: { [weak self] albums in
             self?.currentItems = albums.flatMap { SliderItem(withAlbum: AlbumItem(remote: $0)) }
             
             if let currentItems = self?.currentItems {
@@ -31,11 +31,10 @@ class PeopleAlbumSliderInteractor: LBAlbumLikePreviewSliderInteractor {
             }
             
             }, fail: { [weak self] error in
-                self?.output.operationFailed()
+                self?.output?.operationFailed()
         })
     }
     
     override func newStoryCreated() { }
     
 }
-

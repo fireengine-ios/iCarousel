@@ -11,18 +11,18 @@ import MessageUI
 
 class Mail: NSObject, MFMailComposeViewControllerDelegate {
     
-    typealias MailSuccessHandler = ()->Void
-    typealias MailFailHandler = (_ error: Error?)->Void
+    typealias MailSuccessHandler = () -> Void
+    typealias MailFailHandler = (_ error: Error?) -> Void
     
     private static var uniqueInstance: Mail?
     
-    private var mailController: MFMailComposeViewController? = nil
+    private var mailController: MFMailComposeViewController?
     private var successHandler: MailSuccessHandler?
     private var failHandler: MailFailHandler?
     
     private override init() {}
     
-    class func canSendEmail() -> Bool{
+    class func canSendEmail() -> Bool {
         return MFMailComposeViewController.canSendMail()
     }
     
@@ -33,11 +33,11 @@ class Mail: NSObject, MFMailComposeViewControllerDelegate {
         return uniqueInstance!
     }
     
-    func sendEmail(emailBody: String, subject: String, emails: [String], success: MailSuccessHandler?, fail: MailFailHandler?){
+    func sendEmail(emailBody: String, subject: String, emails: [String], success: MailSuccessHandler?, fail: MailFailHandler?) {
         successHandler = success
         failHandler = fail
         
-        if (!Mail.canSendEmail()){
+        if (!Mail.canSendEmail()) {
             failHandler?(nil) // TODO: custom error
             return
         }
@@ -59,7 +59,7 @@ class Mail: NSObject, MFMailComposeViewControllerDelegate {
         }
         
         let controller = RouterVC().rootViewController
-        guard let contr_ = controller else{
+        guard let contr_ = controller else {
             return
         }
         contr_.present(mailController!, animated: true) { 
@@ -67,7 +67,7 @@ class Mail: NSObject, MFMailComposeViewControllerDelegate {
         }
     }
     
-    //MARK: MFMailComposeViewControllerDelegate
+    // MARK: MFMailComposeViewControllerDelegate
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         mailController!.dismiss(animated: true) { [weak self] in

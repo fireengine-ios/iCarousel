@@ -17,7 +17,7 @@ class AlbumCell: UICollectionViewCell {
     @IBOutlet weak var previewImage3: LoadingImageView!
     @IBOutlet weak var previewImage4: LoadingImageView!
     @IBOutlet weak var placeholderImage: UIImageView!
-    @IBOutlet weak var bigPreviewImage: UIImageView!
+    @IBOutlet weak var bigPreviewImage: LoadingImageView!
     
     func setup(withItem item: SliderItem) {
         titleLabel.text = item.name
@@ -34,13 +34,8 @@ class AlbumCell: UICollectionViewCell {
     }
     
     private func setup(withAlbum album: AlbumItem?) {
-        guard let imageURL = album?.preview?.tmpDownloadUrl else {
-            return
-        }
-        
-        bigPreviewImage.sd_setImage(with: imageURL) { [weak self] (image, error, cacheType, url) in
-            self?.bigPreviewImage.image = image
-        }
+        placeholderImage.layer.borderColor = ColorConstants.blueColor.cgColor
+        bigPreviewImage.loadImageForItem(object: album?.preview)
     }
     
     private func setup(withSliderItem item: SliderItem) {
@@ -54,7 +49,7 @@ class AlbumCell: UICollectionViewCell {
             setupImage(previewImage4, path: items[safe: 3])
         } else {
             previewBackView.isHidden = true
-            placeholderImage.layer.borderColor = ColorConstants.orangeBorder.cgColor
+            placeholderImage.layer.borderColor = item.type?.placeholderBorderColor ?? ColorConstants.blueColor.cgColor
             placeholderImage.image = item.placeholderImage
         }
     }

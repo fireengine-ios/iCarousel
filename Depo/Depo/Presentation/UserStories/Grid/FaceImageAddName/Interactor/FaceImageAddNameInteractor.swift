@@ -9,9 +9,9 @@
 final class FaceImageAddNameInteractor: BaseFilesGreedInteractor {
     
     private let peopleService = PeopleService()
-    
-    private var currentName: String?
         
+    private var currentName: String?
+            
     override func viewIsReady() {
         output.getContentWithSuccess(items: [])
     }
@@ -22,7 +22,7 @@ final class FaceImageAddNameInteractor: BaseFilesGreedInteractor {
     
 }
 
-//MARK: - FaceImageAddNameInteractorInput
+// MARK: - FaceImageAddNameInteractorInput
 
 extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
     
@@ -31,8 +31,10 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
             return
         }
         
+        output.startAsyncOperation()
+        
         if let service = remoteItems as? PeopleItemsService {
-            service.searchPeople(text: text, success: { [weak self] (items) in
+            service.searchPeople(text: text, success: { [weak self] items in
                 self?.output.getContentWithSuccess(items: items)
                 }, fail: { [weak self]  in
                     self?.output.getContentWithSuccess(items: [])
@@ -47,7 +49,7 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
         
         currentName = text
         
-        peopleService.changePeopleName(personId: personId, name: text, success: { [weak self] (response) in
+        peopleService.changePeopleName(personId: personId, name: text, success: { [weak self] response in
             self?.output.asyncOperationSucces()
             if let output = self?.output as? FaceImageAddNameInteractorOutput,
                 let name = self?.currentName {
@@ -59,21 +61,21 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
         })
     }
     
-    func mergePeople(_ id: Int64, personId: Int64) {
-        guard isUpdating == false else {
+    func mergePeople(_ currentPerson: Item, otherPerson: Item) {
+        guard isUpdating == false,
+        let currentPersonId = currentPerson.id,
+        let otherPersonId = otherPerson.id else {
             return
         }
-        
-        peopleService.mergePeople(personId: id, targetPersonId: personId, success: { [weak self] (response) in
+
+        peopleService.mergePeople(personId: otherPersonId, targetPersonId: currentPersonId, success: { [weak self] response in
             self?.output.asyncOperationSucces()
-            
+
             if let output = self?.output as? FaceImageAddNameInteractorOutput {
                 output.didMergePeople()
             }
-            }, fail: { [weak self] error in
-                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+        }, fail: { [weak self] error in
+            self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
         })
     }
-    
 }
-

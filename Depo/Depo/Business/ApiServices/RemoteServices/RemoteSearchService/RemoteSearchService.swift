@@ -6,9 +6,9 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class RemoteSearchService: RemoteItemsService{
+class RemoteSearchService: RemoteItemsService {
     
-    init(requestSize:Int) {
+    init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .all)
     }
     
@@ -19,18 +19,18 @@ class RemoteSearchService: RemoteItemsService{
                                                   sortOrder: sortOrder,
                                                   page: currentPage,
                                                   size: requestSize)
-        remote.unifiedSearch(param: searchParam, success: { [weak self] (response) in
-            guard let resultResponse = (response as? UnifiedSearchResponse)?.list else {
+        remote.unifiedSearch(param: searchParam, success: { [weak self] response in
+            guard let response = response as? UnifiedSearchResponse else {
                 fail()
                 return
             }
-            guard let `self` = self else {
-                return
-            }
             
-            let list = resultResponse.flatMap { WrapData(remote: $0) }
-            self.currentPage = self.currentPage + 1
-//            CoreDataStack.default.appendOnlyNewItems(items: list)
+            var list = response.itemsList.flatMap { WrapData(remote: $0) }
+            list.append(contentsOf: response.peopleList.flatMap { PeopleItem(response: $0) })
+            list.append(contentsOf: response.thingsList.flatMap { ThingsItem(response: $0) })
+            list.append(contentsOf: response.placesList.flatMap { PlacesItem(response: $0) })
+
+            self?.currentPage += 1
             success(list)
         }, fail: { error in
             fail()

@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class CreateStoryPreviewViewController: UIViewController, AVPlayerViewControllerDelegate {
+class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControllerDelegate {
 
     var output: CreateStoryPreviewViewOutput!
     
@@ -47,7 +47,7 @@ class CreateStoryPreviewViewController: UIViewController, AVPlayerViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        defaultNavBarStyle()
+        blackNavigationBarStyle()
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
         button.setTitle(TextConstants.createStorySave, for: .normal)
         button.setTitleColor(ColorConstants.whiteColor, for: .normal)
@@ -59,11 +59,11 @@ class CreateStoryPreviewViewController: UIViewController, AVPlayerViewController
         output.viewIsReady()
     }
     
-    @IBAction func onPlayButton(){
+    @IBAction func onPlayButton() {
         playVideoByURLString(urlSting: previewURLString)
     }
     
-    func playVideoByURLString(urlSting: String?){
+    func playVideoByURLString(urlSting: String?) {
         playerController = AVPlayerViewController()
         playerController?.player = player
         self.present(playerController!, animated: true) { [weak self] in
@@ -71,16 +71,20 @@ class CreateStoryPreviewViewController: UIViewController, AVPlayerViewController
         }
     }
     
-    @objc func onSaveButton(){
+    @objc func onSaveButton() {
         output.onSaveStory()
+    }
+    
+    override func getBacgroundColor() -> UIColor {
+        return viewForPlayer.backgroundColor ?? UIColor.black
     }
     
 }
 
 // MARK: CreateStoryPreviewViewInput
 extension CreateStoryPreviewViewController: CreateStoryPreviewViewInput {
-    func startShowVideoFromResponce(responce: CreateStoryResponce){
-        guard let urlString = responce.storyURLString else{
+    func startShowVideoFromResponce(responce: CreateStoryResponce) {
+        guard let urlString = responce.storyURLString else {
             return
         }
         previewURLString = urlString

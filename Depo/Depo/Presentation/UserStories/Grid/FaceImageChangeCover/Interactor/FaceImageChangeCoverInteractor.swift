@@ -14,7 +14,7 @@ final class FaceImageChangeCoverInteractor: BaseFilesGreedInteractor {
     
 }
 
-//MARK: - FaceImageChangeCoverInteractorInput
+// MARK: - FaceImageChangeCoverInteractorInput
 
 extension FaceImageChangeCoverInteractor: FaceImageChangeCoverInteractorInput {
     
@@ -30,6 +30,7 @@ extension FaceImageChangeCoverInteractor: FaceImageChangeCoverInteractorInput {
             if let output = self?.output as? FaceImageChangeCoverInteractorOutput {
                 output.didSetCover(item: item)
             }
+            ItemOperationManager.default.updatedAlbumCoverPhoto(item: item)
             }, fail: { [weak self] error in
                 self?.output.asyncOperationFail(errorMessage: error.description)
         })

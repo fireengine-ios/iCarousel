@@ -8,8 +8,6 @@
 
 import UIKit
 
-public typealias Passcode = String
-
 public protocol PasscodeInputViewDelegate: class {
     func finish(with passcode: Passcode)
     func finishErrorAnimation()
@@ -77,7 +75,7 @@ public class PasscodeInputView: UIControl, PasscodeInput {
     }
     
     private lazy var radius: CGFloat = {
-        return dotDiametr / 2
+        dotDiametr / 2
     }()
     
     private func setup(for rect: CGRect) {
@@ -90,7 +88,7 @@ public class PasscodeInputView: UIControl, PasscodeInput {
             let x = CGFloat(i) * freeSpace + CGFloat(i) * dotDiametr + radius
             let circlePath = UIBezierPath(arcCenter: CGPoint(x: x, y: rect.height / 2),
                                           radius: radius, startAngle: 0,
-                                          endAngle:CGFloat(Double.pi * 2), clockwise: true)
+                                          endAngle: CGFloat(Double.pi * 2), clockwise: true)
             
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circlePath.cgPath

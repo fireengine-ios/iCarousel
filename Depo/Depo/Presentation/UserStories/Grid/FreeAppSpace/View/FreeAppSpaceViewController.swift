@@ -21,7 +21,7 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
         duplicatesTextLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
         duplicatesTextLabel.text = ""
         
-        FreeAppSpace.default.getCheckedDuplicatesArray { [weak self] (duplicatesArray) in
+        FreeAppSpace.default.getCheckedDuplicatesArray { [weak self] duplicatesArray in
             self?.duplicatesTextLabel?.text = String(format: TextConstants.freeAppSpaceTitle, FreeAppSpace.default.getDuplicatesObjects().count)
         }
         
@@ -30,10 +30,10 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
         super.viewDidLoad()
     }
     
-    override func configurateNavigationBar(){
+    override func configurateNavigationBar() {
         navigationBarWithGradientStyle()
         configurateFreeAppSpaceActions {[weak self] in
-            guard let self_ = self else{
+            guard let self_ = self else {
                 return
             }
             self_.output.onNextButton()
@@ -46,4 +46,3 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
     }
 
 }
-

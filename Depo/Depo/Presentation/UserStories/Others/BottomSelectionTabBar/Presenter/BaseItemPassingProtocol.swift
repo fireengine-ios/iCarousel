@@ -11,6 +11,8 @@ protocol BaseItemInputPassingProtocol: class {
     func operationFinished(withType type: ElementTypes, response: Any?)
     func operationFailed(withType type: ElementTypes)
     
+    func showAlert(with message: String)
+    
     func selectModeSelected()
     func selectAllModeSelected()
     func deSelectAll()
@@ -19,10 +21,21 @@ protocol BaseItemInputPassingProtocol: class {
     func printSelected()
     func changeCover()
     
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem])
+    
     var selectedItems: [BaseDataSourceItem] { get }//FOR NOW
 }
 
 protocol BaseItemOuputPassingProtocol: class {
     func dismiss(animated: Bool)
     func show(animated: Bool, onView sourceView: UIView?)//
+}
+
+
+extension BaseItemInputPassingProtocol {
+    func showAlert(with message: String) {
+        DispatchQueue.main.async {
+            UIApplication.showErrorAlert(message: message)
+        }
+    }
 }

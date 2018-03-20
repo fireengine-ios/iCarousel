@@ -12,11 +12,11 @@ protocol FileInfoViewInput: class {
         @author Oleg
         Setup initial state of the view
     */
-    
-    typealias Item = WrapData
 
     func startRenaming()
     
     func setObject(object: BaseDataSourceItem)
+    
+    func goBack()
     
 }

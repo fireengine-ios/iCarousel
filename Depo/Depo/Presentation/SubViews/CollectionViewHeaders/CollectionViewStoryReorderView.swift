@@ -16,7 +16,7 @@ class CollectionViewStoryReorderView: UICollectionReusableView {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    weak var delegate: CollectionViewStoryReorderViewDelegate? = nil
+    weak var delegate: CollectionViewStoryReorderViewDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +27,7 @@ class CollectionViewStoryReorderView: UICollectionReusableView {
         titleLabel.textColor = ColorConstants.lightGrayColor
     }
     
-    @IBAction func onSelectMusicButton(){
+    @IBAction func onSelectMusicButton() {
         guard let unwrappedDelegate = delegate else {
             return
         }

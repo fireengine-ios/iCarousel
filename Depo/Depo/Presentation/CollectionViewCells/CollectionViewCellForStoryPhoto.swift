@@ -10,13 +10,13 @@ import UIKit
 
 class CollectionViewCellForStoryPhoto: CollectionViewCellForPhoto {
     
-    override func setSelection(isSelectionActive: Bool, isSelected: Bool){
+    override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         favoriteIcon.alpha = isSelectionActive ? 0 : 1
         
         selectionImageView.isHidden = !isSelectionActive
-        if (isSelected){
-            selectionImageView.image = UIImage(named:"selected")
-        }else{
+        if (isSelected) {
+            selectionImageView.image = UIImage(named: "selected")
+        } else {
             selectionImageView.image = nil
         }
         

@@ -30,7 +30,7 @@ final class TodayViewController: UIViewController {
     }
     
     private func setupWormhole() {
-        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] (messageObject) in
+        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] messageObject in
             self?.updateFields()
         }
     }
@@ -44,7 +44,7 @@ final class TodayViewController: UIViewController {
     }
     
     
-    //MARK: Tap handler
+    // MARK: Tap handler
     
     @objc private func openApp() {
         if let url = URL(string: "akillidepo://") {
@@ -64,18 +64,18 @@ extension TodayViewController: NCWidgetProviding {
     private func updateFields() {
         switch widgetService.syncStatus {
         case .executing :
-            topLabel.text = TextConstants.widgetTitleInProgress
+            topLabel.text = L10n.widgetTopTitleInProgress
             bottomLabel.text = "\(widgetService.finishedCount) / \(widgetService.totalCount)"
             activityIndicator.isHidden = false
             successImage.isHidden = true
             activityIndicator.startAnimating()
         default:
             if WidgetService.shared.lastSyncedDate.isEmpty {
-                topLabel.text = TextConstants.widgetTitleIsStoped
-                bottomLabel.text =  String(format: TextConstants.widgetTitleLastSyncFormat, TextConstants.widgetTitleNeverSynchronized)
+                topLabel.text = L10n.widgetTopTitleInactive
+                bottomLabel.text = L10n.widgetBottomTitleLastSyncFormat(L10n.widgetBottomTitleNewerSyncronized)
             } else {
-                topLabel.text = TextConstants.widgetTitleFinished
-                bottomLabel.text =  String.init(format: TextConstants.widgetTitleLastSyncFormat, widgetService.lastSyncedDate)
+                topLabel.text = L10n.widgetTopTitleFinished
+                bottomLabel.text = L10n.widgetBottomTitleLastSyncFormat(widgetService.lastSyncedDate)
             }
             
             activityIndicator.isHidden = true
@@ -84,5 +84,3 @@ extension TodayViewController: NCWidgetProviding {
         }
     }
 }
-
-

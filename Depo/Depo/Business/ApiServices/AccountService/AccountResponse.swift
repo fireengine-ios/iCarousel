@@ -48,13 +48,13 @@ class AccountInfoResponse: ObjectRequestResponse {
     var name: String?
     var surname: String?
     var accountType: String?
-    var language:String?
-    var countryCode:String?
-    var phoneNumber:String?
-    var email:String?
+    var language: String?
+    var countryCode: String?
+    var phoneNumber: String?
+    var email: String?
     var emailVerified: Bool?
-    var username:String?
-    var dob:String?
+    var username: String?
+    var dob: String?
     var urlForPhoto: URL?
     var projectID: String?
     
@@ -79,7 +79,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         countryCode = json?[AccountJSONConstants.countryCode].string
         phoneNumber = json?[AccountJSONConstants.phoneNumber].string
         email = json?[AccountJSONConstants.email].string
-        emailVerified =  json?[AccountJSONConstants.emailVerified].bool
+        emailVerified = json?[AccountJSONConstants.emailVerified].bool
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
     }
@@ -90,8 +90,8 @@ class SecuritySettingsInfoResponse: ObjectRequestResponse {
     var mobileNetworkAuthEnabled: Bool?
     
     override func mapping() {
-        turkcellPasswordAuthEnabled =  json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
-        mobileNetworkAuthEnabled =  json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
+        turkcellPasswordAuthEnabled = json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
+        mobileNetworkAuthEnabled = json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
     }
     
 }
@@ -112,14 +112,14 @@ class QuotaInfoResponse: ObjectRequestResponse {
     var objectsCount: Int64?
     
     override func mapping() {
-        if let buf1 = json?[AccountJSONConstants.quotaBytes].string{
+        if let buf1 = json?[AccountJSONConstants.quotaBytes].string {
             bytes = Int64(buf1)
         }
-        if let buf2 = json?[AccountJSONConstants.bytesUsed].string{
+        if let buf2 = json?[AccountJSONConstants.bytesUsed].string {
             bytesUsed = Int64(buf2)
         }
         exceeded = json?[AccountJSONConstants.quotaExceeded].bool
-        if let buf3 = json?[AccountJSONConstants.objectCount].int64{
+        if let buf3 = json?[AccountJSONConstants.objectCount].int64 {
             objectsCount = Int64(buf3)
         }
     }
@@ -143,7 +143,7 @@ class UserPhoto: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: AccountPath.profilePhoto, relativeTo:super.patch)!
+        return URL(string: AccountPath.profilePhoto, relativeTo: super.patch)!
     }
 }
 
@@ -296,4 +296,3 @@ class InternetDataUsage: ObjectRequestResponse {
 //        unit = json?[InternetDataUsageKeys.unit].string
 //    }
 //}
-

@@ -22,25 +22,6 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     var navBarConfigurator = NavigationBarConfigurator()
     
-    private var _searchViewController: UIViewController?
-    private var searchViewController: UIViewController! {
-        get {
-            if let svc = _searchViewController {
-                return svc
-            } else {
-                let router = RouterVC()
-                let searchViewController = router.searchView(output: self)
-                searchViewController.modalPresentationStyle = .overCurrentContext
-                searchViewController.modalTransitionStyle = .crossDissolve
-                _searchViewController = searchViewController
-                return _searchViewController!
-            }
-        }
-        set (new) {
-            _searchViewController = new
-        }
-    }
-    
     private var homepageIsActiveAndVisible: Bool {
         var result = false
         if let topController = navigationController?.topViewController {
@@ -72,9 +53,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         output.viewIsReady()
         
-        if _searchViewController != nil {
-            let router = RouterVC()
-            router.pushViewControllerWithoutAnimation(viewController: self.searchViewController)
+        if let searchController = navigationController?.topViewController as? SearchViewController {
+            searchController.dismissController(animated: false)
         }
     }
 
@@ -94,19 +74,15 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         homePageDataSource.isActive = false
     }
     
-    deinit{
+    deinit {
         CardsManager.default.removeViewForNotification(view: homePageDataSource)
     }
 
     // MARK: - SearchBarButtonPressed
     
     func configureNavBarActions() {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] (_) in
-            guard let `self` = self else {
-                return
-            }
-            let router = RouterVC()
-            router.pushViewControllerWithoutAnimation(viewController: self.searchViewController)
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
+            self?.output.showSearch(output: self)
         })
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.output.showSettings()
@@ -114,8 +90,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         navBarConfigurator.configure(right: [setting, search], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
-
-    
+        
     // MARK: HomePageViewInput
     
     func setupInitialState() {
@@ -123,30 +98,30 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     
-    //MARK: BaseCollectionViewDataSourceDelegate
+    // MARK: BaseCollectionViewDataSourceDelegate
     
-    func onCellHasBeenRemovedWith(controller:UIViewController){
+    func onCellHasBeenRemovedWith(controller: UIViewController) {
         
     }
     
-    func numberOfColumns() -> Int{
-        if (Device.isIpad){
+    func numberOfColumns() -> Int {
+        if (Device.isIpad) {
             return 2
         }
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat{
+    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
         return HomeViewTopView.getHeight()
     }
     
     
-    //MARK: UICollectionViewDelegate
+    // MARK: UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView", for: indexPath)
@@ -161,9 +136,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         }
     }
     
-    func cancelSearch() {
-        searchViewController = nil
-    }
+    func cancelSearch() { }
     
     func previewSearchResultsHide() { }
     

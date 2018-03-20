@@ -12,11 +12,11 @@ class BaseDataSourceItem: NSObject {
 
     var uuid: String
     
-    var name: String? = nil
+    var name: String?
     
-    var creationDate: Date? = nil
+    var creationDate: Date?
     
-    var lastModifiDate: Date? = nil
+    var lastModifiDate: Date?
     
     var fileType: FileType = .application(.unknown)
     
@@ -27,6 +27,8 @@ class BaseDataSourceItem: NSObject {
     var isLocalItem: Bool
     
     var md5: String = ""
+    
+    var parent: String?
     
     func getCellReUseID() -> String {
         return CollectionViewCellsIdsConstant.cellForImage
@@ -40,7 +42,7 @@ class BaseDataSourceItem: NSObject {
          syncStatus: SyncWrapperedStatus = .notSynced,
          isLocalItem: Bool = true ) {
         
-        self.uuid = uuid ?? UUID().description
+        self.uuid = uuid ?? UUID().uuidString
         self.name = name
         self.creationDate = creationDate
         self.lastModifiDate = lastModifiDate

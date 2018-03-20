@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-struct AlbumsPatch  {
+struct AlbumsPatch {
     static let album =  "/api/album"
 //    static let deleteAlbumss =  "/api/album"
     static let addPhotosToAlbum = "/api/album/addFiles/%@"
@@ -30,19 +30,19 @@ class CreatesAlbum: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path: String = String(format:AlbumsPatch.album)
-        return URL(string: path, relativeTo:super.patch)!
+        let path: String = String(format: AlbumsPatch.album)
+        return URL(string: path, relativeTo: super.patch)!
     }
 }
 
 class DeleteAlbums: BaseRequestParametrs {
     let albums: [AlbumItem]
     
-    init (albums: [AlbumItem]){
+    init (albums: [AlbumItem]) {
         self.albums = albums
     }
     
-    override var requestParametrs: Any{
+    override var requestParametrs: Any {
         let albumsUUIDS = albums.map { $0.uuid }
         return albumsUUIDS
     }
@@ -57,12 +57,12 @@ class AddPhotosToAlbum: BaseRequestParametrs {
     let albumUUID: String
     let photos: [Item]
     
-    init (albumUUID: String, photos: [Item]){
+    init (albumUUID: String, photos: [Item]) {
         self.albumUUID = albumUUID
         self.photos = photos
     }
     
-    override var requestParametrs: Any{
+    override var requestParametrs: Any {
         let photosUUID = photos.map { $0.uuid }
         return photosUUID
     }
@@ -88,7 +88,7 @@ class ChangeCoverPhoto: BaseRequestParametrs {
     }
 }
 
-class DeletePhotosFromAlbum: AddPhotosToAlbum{
+class DeletePhotosFromAlbum: AddPhotosToAlbum {
     override var patch: URL {
         let path: String = String(format: AlbumsPatch.deletePhotosFromAlbum, albumUUID)
         return URL(string: path, relativeTo: super.patch)!
@@ -99,7 +99,7 @@ class RenameAlbum: BaseRequestParametrs {
     let albumUUID: String
     let newName: String
     
-    init (albumUUID: String, newName: String){
+    init (albumUUID: String, newName: String) {
         self.albumUUID = albumUUID
         self.newName = newName
     }
@@ -154,7 +154,6 @@ class AlbumService: RemoteItemsService {
 }
 
 
-
 typealias PhotosAlbumOperation = () -> Swift.Void
 typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Swift.Void
 typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Swift.Void
@@ -186,7 +185,7 @@ class PhotosAlbumService: BaseRequestService {
     func completelyDelete(albums: DeleteAlbums, success: PhotosAlbumOperation?, fail: FailResponse?) {
         log.debug("PhotosAlbumService completelyDelete")
 
-        loadAllItemsFrom(albums: albums.albums) { (items) in
+        loadAllItemsFrom(albums: albums.albums) { items in
             log.debug("PhotosAlbumService loadAllItemsFrom")
 
             let fileService = WrapItemFileService()
@@ -195,7 +194,7 @@ class PhotosAlbumService: BaseRequestService {
         }
     }
     
-    func addPhotosToAlbum(parameters: AddPhotosToAlbum, success: PhotosAlbumOperation?, fail: FailResponse?){
+    func addPhotosToAlbum(parameters: AddPhotosToAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         log.debug("PhotosAlbumService addPhotosToAlbum")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
@@ -221,7 +220,7 @@ class PhotosAlbumService: BaseRequestService {
     func changeCoverPhoto(parameters: ChangeCoverPhoto, success: PhotosAlbumOperation?, fail: FailResponse?) {
         log.debug("PhotosAlbumService changeCoverPhoto")
         
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { (response)  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response  in
             success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
@@ -247,7 +246,7 @@ class PhotosAlbumService: BaseRequestService {
         for album in albums {
             group.enter()
             let albumService = AlbumDetailService(requestSize: 100)
-            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { (items) in
+            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { items in
                 log.debug("PhotosAlbumService loadAllItemsFrom albumService allItems success")
 
                 allItems.append(contentsOf: items)
@@ -274,7 +273,7 @@ class PhotosAlbumService: BaseRequestService {
         for album in albums {
             group.enter()
             let albumService = AlbumDetailService(requestSize: 100)
-            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { (items) in
+            albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { items in
                 log.debug("PhotosAlbumService loadItemsBy AlbumDetailService allItems success")
 
                 allItems[album] = items

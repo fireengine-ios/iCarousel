@@ -10,7 +10,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     
     weak var albumDetailModuleOutput: AlbumDetailModuleOutput?
     
-    func operationStarted(type: ElementTypes){
+    func operationStarted(type: ElementTypes) {
         
     }
     
@@ -55,7 +55,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         guard var barConfig = interactor.bottomBarConfig else {
                 return
         }
-        let allSelectedItemsTypes = selectedItems.map{return $0.fileType}
+        let allSelectedItemsTypes = selectedItems.map { $0.fileType }
         if allSelectedItemsTypes.contains(.image) {
             let actionTypes = barConfig.elementsConfig + [.print]
             
@@ -67,9 +67,36 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
     }
     
-    func updateCoverPhotoIfNeeded() {
+    override func updateCoverPhotoIfNeeded() {
         if let interactor = interactor as? AlbumDetailInteractor {
             interactor.updateCoverPhotoIfNeeded()
         }
+    }
+    
+    override func viewAppearanceChanged(asGrid: Bool) {
+        log.debug("AlbumDetailPresenter viewAppearanceChanged")
+        
+        if  asGrid {
+            log.debug("AlbumDetailPresenter viewAppearanceChanged Grid")
+            
+            dataSource.updateDisplayngType(type: .greed)
+            type = .List
+        } else {
+            log.debug("AlbumDetailPresenter viewAppearanceChanged List")
+            
+            dataSource.updateDisplayngType(type: .list)
+            type = .Grid
+        }
+    }
+    
+    override func sortedPushed(with rule: SortedRules) {
+        log.debug("AlbumDetailPresenter sortedPushed")
+        
+        sortedRule = rule
+        view.changeSortingRepresentation(sortType: rule)
+        dataSource.currentSortType = rule
+        (rule == .sizeAZ || rule == .sizeZA) ? (dataSource.isHeaderless = true) : (dataSource.isHeaderless = false)
+        
+        reloadData()
     }
 }

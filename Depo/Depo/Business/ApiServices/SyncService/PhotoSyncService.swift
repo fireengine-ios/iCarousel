@@ -16,10 +16,18 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         self.fileType = .image
     }
     
-    override func itemsSortedToUpload() -> [WrapData] {
-        return CoreDataStack.default.getLocalUnsynced(fieldValue: .image)
-            .filter { $0.fileSize < NumericConstants.fourGigabytes }
-            .sorted(by: { $0.metaDate > $1.metaDate } )
+    override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
+        CoreDataStack.default.getLocalUnsynced(fieldValue: .image, service: photoVideoService) { items in
+            completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.metaDate > $1.metaDate }))
+        }
+    }
+    
+    override func start(newItems: Bool) {
+        super.start(newItems: newItems)
+        
+        let isWiFi = ReachabilityService().isReachableViaWiFi
+        isWiFi ? MenloworksTagsService.shared.onAutosyncPhotosViaWifi() : MenloworksTagsService.shared.onAutosyncPhotosViaLte()
+        
     }
     
     override func stop() {
@@ -30,24 +38,21 @@ final class PhotoSyncService: ItemSyncServiceImpl {
     }
     
     override func waitForWiFi() {
+        log.debug("PhotoSyncService waitForWiFi")
+        
         stopAllOperations()
         super.waitForWiFi()
-        
-        log.debug("PhotoSyncService waitForWiFi")
     }
     
     
-    //MARK: - Private
+    // MARK: - Private
     
     private func stopAllOperations() {
         guard self.status.isContained(in: [.prepairing, .executing]) else {
             return
         }
         
+        photoVideoService.stopAllOperations()
         UploadService.default.cancelSyncOperations(photo: true, video: false)
     }
 }
-
-
-
-

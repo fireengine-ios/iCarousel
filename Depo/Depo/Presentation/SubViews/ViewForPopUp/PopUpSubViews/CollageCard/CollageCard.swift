@@ -68,7 +68,7 @@ final class CollageCard: BaseView {
         photoImageView.loadImage(with: item, isOriginalImage: true)
     }
     
-    @IBAction private func actionCloseButton(_ sender: UIButton){
+    @IBAction private func actionCloseButton(_ sender: UIButton) {
         deleteCard()
     }
     
@@ -82,7 +82,8 @@ final class CollageCard: BaseView {
         
         let vc = PVViewerController.initFromNib()
         vc.image = image
-        RouterVC().pushViewController(viewController: vc)
+        let nController = UINavigationController(rootViewController: vc)
+        RouterVC().presentViewController(controller: nController)
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
@@ -117,9 +118,8 @@ final class CollageCard: BaseView {
         guard let item = item else { return }
         
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
-        
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
-        RouterVC().pushViewController(viewController: controller)
+        let nController = UINavigationController(rootViewController: controller)
+        RouterVC().presentViewController(controller: nController)
     }
 }
