@@ -10,7 +10,10 @@ import UIKit
 
 final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
     
-    let service = AlbumDetailService(requestSize: 1)
+    private let service = AlbumDetailService(requestSize: 1)
+    private let peopleService = PeopleService()
+    private let thingsService = ThingsService()
+    private let placesService = PlacesService()
     
     var album: AlbumItem?
     
@@ -27,7 +30,7 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
         }
     }
     
-    fileprivate func update(album: AlbumItem) {
+    private func update(album: AlbumItem) {
         service.albumCoverPhoto(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { [weak self] coverPhoto in
             if album.preview?.uuid != coverPhoto.uuid {
                 album.preview = coverPhoto
@@ -47,6 +50,7 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
             // TODO: NEED TO CHANGE SERVICE FOR ERROR HANDLER
         })
     }
+    
 }
 
 // MARK: - FaceImagePhotosInteractorInput
@@ -125,6 +129,51 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
         
         if let output = output as? FaceImagePhotosInteractorOutput {
             output.didRemoveFromAlbum(completion: okHandler)
+        }
+    }
+    
+    func loadItem(_ item: BaseDataSourceItem) {
+        guard let item = item as? Item, let id = item.id else { return }
+        
+        if item is PeopleItem {
+            output.startAsyncOperation()
+            
+            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] album in
+                if let output = self?.output as? FaceImagePhotosInteractorOutput,
+                    let count = album.imageCount{
+                    output.didCountImage(count)
+                }
+                
+                self?.output.asyncOperationSucces()
+                }, fail: { [weak self] fail in
+                    self?.output.asyncOperationFail(errorMessage: fail.description)
+            })
+        } else if item is ThingsItem {
+            output.startAsyncOperation()
+            
+            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] album in
+                if let output = self?.output as? FaceImagePhotosInteractorOutput,
+                    let count = album.imageCount{
+                    output.didCountImage(count)
+                }
+                
+                self?.output.asyncOperationSucces()
+                }, fail: { [weak self] fail in
+                    self?.output.asyncOperationFail(errorMessage: fail.description)
+            })
+        } else if item is PlacesItem {
+            output.startAsyncOperation()
+            
+            placesService.getPlacesAlbum(id: Int(id), success: { [weak self] album in
+                if let output = self?.output as? FaceImagePhotosInteractorOutput,
+                    let count = album.imageCount{
+                    output.didCountImage(count)
+                }
+                
+                self?.output.asyncOperationSucces()
+                }, fail: { [weak self] fail in
+                    self?.output.asyncOperationFail(errorMessage: fail.description)
+            })
         }
     }
     
