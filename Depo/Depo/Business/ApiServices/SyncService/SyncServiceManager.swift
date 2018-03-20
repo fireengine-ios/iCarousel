@@ -83,11 +83,6 @@ class SyncServiceManager {
     
     
     // MARK: - Public
-    
-    func getSettings() -> AutoSyncSettings? {
-        return settings
-    }
-    
     func update(syncSettings: AutoSyncSettings) {
         log.debug("SyncServiceManager updateSyncSettings")
         
