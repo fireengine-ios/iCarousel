@@ -43,6 +43,8 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         freeButton.layer.borderWidth = borderWidth
         freeButton.layer.borderColor = UIColor.lrTealishTwo.cgColor
         freeButton.isUserInteractionEnabled = false
+        
+        checkmarkImageView.tintColor = ColorConstants.blueColor
     }
     
     override func layoutSubviews() {
