@@ -15,8 +15,6 @@ final class ItemSyncOperation: Operation {
     private var service: ItemSyncService?
     private var newItems: Bool = false
     
-    private var isRealCancel = false
-    
     
     init(service: ItemSyncService, newItems: Bool) {
         super.init()
@@ -26,16 +24,15 @@ final class ItemSyncOperation: Operation {
     }
     
     override func cancel() {
-        isRealCancel = true
+        super.cancel()
+        
+        NotificationCenter.default.removeObserver(self)
         service = nil
+        
         semaphore.signal()
     }
     
     override func main() {
-        if isRealCancel {
-            return
-        }
-        
         service?.start(newItems: newItems)
         
         if !newItems, service?.status != .executing {
@@ -46,7 +43,6 @@ final class ItemSyncOperation: Operation {
     @objc
     private func itemStatusChanged() {
         if let prepairing = service?.status.isContained(in: [ .undetermined, .prepairing]), !prepairing {
-            NotificationCenter.default.removeObserver(self)
             cancel()
         }
     }

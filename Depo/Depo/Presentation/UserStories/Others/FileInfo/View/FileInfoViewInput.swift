@@ -17,4 +17,6 @@ protocol FileInfoViewInput: class {
     
     func setObject(object: BaseDataSourceItem)
     
+    func goBack()
+    
 }

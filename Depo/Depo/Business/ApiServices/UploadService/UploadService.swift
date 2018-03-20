@@ -206,7 +206,7 @@ final class UploadService: BaseRequestService {
                 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
-                finishedOperation.item.isLocalItem = false
+//                finishedOperation.item.isLocalItem = false
                 
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                 
@@ -285,7 +285,7 @@ final class UploadService: BaseRequestService {
                 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
-                finishedOperation.item.isLocalItem = false
+//                finishedOperation.item.isLocalItem = false
 
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                 
@@ -360,7 +360,7 @@ final class UploadService: BaseRequestService {
                 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
-                finishedOperation.item.isLocalItem = false
+//                finishedOperation.item.isLocalItem = false
                 
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                 
@@ -637,13 +637,15 @@ class UploadOperations: Operation {
         }
         
         baseUrl(success: { [weak self] baseurlResponse in
-            guard let `self` = self else {
+            guard let `self` = self,
+                let baseurlResponse = baseurlResponse,
+                let responseURL = baseurlResponse.url else {
                 customFail(ErrorResponse.string(TextConstants.commonServiceError))
                 return
             }
             
             let uploadParam = Upload(item: self.item,
-                                      destitantion: (baseurlResponse?.url!)!,
+                                     destitantion: responseURL,
                                       uploadStategy: self.uploadStategy,
                                       uploadTo: self.uploadTo,
                                       rootFolder: self.folder,

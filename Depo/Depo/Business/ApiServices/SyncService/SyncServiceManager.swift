@@ -110,7 +110,6 @@ class SyncServiceManager {
     }
     
     func stopSync() {
-        operationQueue.cancelAllOperations()
         stop(photo: true, video: true)
     }
     
@@ -160,7 +159,7 @@ class SyncServiceManager {
             self.timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
             
             guard syncSettings.isAutoSyncEnabled else {
-                self.stop(photo: true, video: true)
+                self.stopSync()
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
                 MenloworksEventsService.shared.onAutosyncOff()
                 return
@@ -199,7 +198,7 @@ class SyncServiceManager {
                 if reachabilityChanged {
                     self.waitForWifi(photo: true, video: true)
                 } else {
-                    self.stop(photo: true, video: true)
+                    self.stopSync()
                 }
             }
         }
@@ -231,6 +230,8 @@ class SyncServiceManager {
     }
     
     private func stop(photo: Bool, video: Bool) {
+        operationQueue.cancelAllOperations()
+        
         if photo { photoSyncService.stop() }
         if video { videoSyncService.stop() }
     }
@@ -317,7 +318,7 @@ extension SyncServiceManager {
 
 extension SyncServiceManager: ItemSyncServiceDelegate {
     func didReceiveOutOfSpaceError() {
-        stop(photo: true, video: true)
+        stopSync()
         if UIApplication.shared.applicationState == .background {
             timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
         }
@@ -325,7 +326,7 @@ extension SyncServiceManager: ItemSyncServiceDelegate {
     }
     
     func didReceiveError() {
-        stop(photo: true, video: true)
+        stopSync()
     }
 }
 

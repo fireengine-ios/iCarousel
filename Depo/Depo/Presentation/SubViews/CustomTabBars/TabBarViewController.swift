@@ -66,6 +66,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     lazy var player: MediaPlayer = factory.resolve()
     let cameraService: CameraService = CameraService()
     
+    let musicBarH : CGFloat = 70
+    
     enum TabScreenIndex: Int {
         case homePageScreenIndex = 0
         case photosScreenIndex = 1
@@ -227,10 +229,15 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     @objc func showMusicBar(_ sender: Any) {
         musicBar.configurateFromPLayer()
         changeVisibleStatus(hidden: false)
+        
+        musicBarHeightConstraint.constant = musicBarH
+        mainContentView.layoutIfNeeded()
     }
     
     @objc func hideMusicBar(_ sender: Any) {
         changeVisibleStatus(hidden: true)
+        musicBarHeightConstraint.constant = 0
+        mainContentView.layoutIfNeeded()
     }
 
     private func changeVisibleStatus(hidden: Bool) {
@@ -276,6 +283,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             }
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
+                self.musicBarHeightConstraint.constant = self.musicBar.isHidden ? 0 : self.musicBarH
                 self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
             }, completion: { _ in
@@ -292,6 +300,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             let bottomConstraintConstant = -self.tabBar.frame.height
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
+                self.musicBarHeightConstraint.constant = 0
                 self.view.layoutIfNeeded()
             }, completion: { _ in
                 self.tabBar.isHidden = true

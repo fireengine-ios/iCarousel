@@ -54,6 +54,10 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         if type.isContained(in: [.removeFromAlbum, .removeFromFaceImageAlbum, .delete]) {
             dataSource.reloadData()
             faceImageItemsModuleOutput?.didReloadData()
+            
+            if let interactor = interactor as? FaceImagePhotosInteractorInput {
+                interactor.loadItem(item)
+            }
         } else if type == .changeCoverPhoto {
             outputView()?.hideSpiner()
 
@@ -71,8 +75,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     override func getContentWithSuccess(items: [WrapData]) {
         super.getContentWithSuccess(items: items)
         
-        if let view = view as? FaceImagePhotosViewInput {
-            view.setCountImage("\(items.count) \(TextConstants.faceImagePhotos)")
+        if let interactor = interactor as? FaceImagePhotosInteractorInput {
+            interactor.loadItem(item)
         }
     }
     
@@ -108,17 +112,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
                 view.dismiss()
             }
         } else {
-            if let view = view as? FaceImagePhotosViewInput {
-                var count = 0
-                for items in dataSource.getAllObjects() {
-                    count += items.count
-                }
-                
-                view.setCountImage("\(count) \(TextConstants.faceImagePhotos)")
-                
-                if let interactor = interactor as? FaceImagePhotosInteractor {
-                    interactor.updateCoverPhotoIfNeeded()
-                }
+            if let interactor = interactor as? FaceImagePhotosInteractorInput {
+                interactor.loadItem(item)
             }
         }
     }
@@ -185,7 +180,7 @@ extension FaceImagePhotosPresenter: FaceImagePhotosModuleOutput {
     
 }
 
-// MARK: FaceImagePhotosModuleOutput
+// MARK: FaceImagePhotosInteractorOutput
 
 extension FaceImagePhotosPresenter: FaceImagePhotosInteractorOutput {
     
