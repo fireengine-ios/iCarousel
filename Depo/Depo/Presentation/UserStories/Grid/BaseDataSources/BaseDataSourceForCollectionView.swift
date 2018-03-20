@@ -230,12 +230,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 })
                 return
             default:
-                break
-                //localFileasAppendedCallback(originalItemsArray)
+                localFileasAppendedCallback(originalItemsArray)
             }
+        } else {
+            localFileasAppendedCallback(originalItemsArray)
         }
-        
-        localFileasAppendedCallback(originalItemsArray)
+ 
         
     }
     

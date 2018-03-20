@@ -36,8 +36,8 @@ extension CoreDataStack {
     }
     
     func append(localMediaItems: [PHAsset], completion: @escaping ()->Void) {
-        let newBgcontext = backgroundContext//self.newChildBackgroundContext
-        save(items: localMediaItems, context: newBgcontext, completion: {})
+//        let newBgcontext = backgroundContext//self.newChildBackgroundContext
+        save(items: localMediaItems, context: backgroundContext, completion: {})
     }
     
     func remove(localMediaItems: [PHAsset], completion: @escaping ()->Void) {
@@ -284,9 +284,8 @@ extension CoreDataStack {
 
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
 
-        context.perform { [weak self] in
             LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] assetsInfo in
-                autoreleasepool {
+                context.perform { [weak self] in
                     var addedObjects = [WrapData]()
                     assetsInfo.forEach { element in
                         autoreleasepool {
@@ -309,10 +308,10 @@ extension CoreDataStack {
                     
                     self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
                     
-                }
                 
+                }
             })
-        }
+        
     }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
