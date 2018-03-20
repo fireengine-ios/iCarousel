@@ -17,19 +17,14 @@ final class SavingAttemptsCounterByUnigueUserID {
     }
     
     private let limit: Int
-    private let limitHandler: VoidHandler
     
-    init(limit: Int,
-         userDefaultsKey: String,
-         limitHandler: @escaping VoidHandler)
-    {
+    init(limit: Int, userDefaultsKey: String) {
         self.userDefaultsKey = userDefaultsKey
         self.limit = limit
-        self.limitHandler = limitHandler
     }
     
     @discardableResult
-    func up() -> Bool {
+    func up(limitHandler: @escaping VoidHandler) -> Bool {
         attempts += 1
         if attempts >= limit {
             reset()

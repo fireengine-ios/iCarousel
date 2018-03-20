@@ -15,12 +15,7 @@ final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
     
     private lazy var attemptsCounter = SavingAttemptsCounterByUnigueUserID(
         limit: NumericConstants.emptyEmailUserCloseLimit,
-        userDefaultsKey: "EmailSavingAttemptsCounter",
-        limitHandler: { [weak self] in
-            self?.attemptsCounter.reset()
-            self?.view.endEditing(true)
-            AppConfigurator.logout()
-    })
+        userDefaultsKey: "EmailSavingAttemptsCounter")
     
     private lazy var authService = AuthenticationService()
     var approveCancelHandler: VoidHandler?
@@ -30,7 +25,13 @@ final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
     }
     
     @objc private func actionCloseButton(_ sender: UIBarButtonItem) {
-        if attemptsCounter.up() {
+        let isUpped = attemptsCounter.up(limitHandler: { [weak self] in
+            self?.attemptsCounter.reset()
+            self?.view.endEditing(true)
+            AppConfigurator.logout()
+        })
+        
+        if isUpped {
             closeAnimated()
         }
     }
