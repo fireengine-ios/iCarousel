@@ -93,15 +93,8 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func forceDisableAutoSync() {
-        for index in 0..<tableDataArray.count {
-            let model = tableDataArray[index]
-            if model.cellType == .headerLike {
-                if let cell = tableView?.cellForRow(at: IndexPath(row: index, section: 0)) as? AutoSyncSwitcherTableViewCell {
-                    cell.switcher.isOn = false
-                }
-                break
-            }
-        }
+        autoSyncSettings?.disableAutoSync()
+        updateCells()
     }
     
     // MARK: UITableView delegate
@@ -185,8 +178,7 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
     func didChange(setting: AutoSyncSetting) {
         autoSyncSettings?.set(setting: setting)
         if autoSyncSettings?.photoSetting.option == .never, autoSyncSettings?.videoSetting.option == .never {
-            autoSyncSettings?.disableAutoSync()
-            updateCells()
+            forceDisableAutoSync()
         }
     }
     

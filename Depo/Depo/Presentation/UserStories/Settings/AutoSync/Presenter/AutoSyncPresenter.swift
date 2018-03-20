@@ -32,13 +32,14 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         view.prepaire(syncSettings: syncSettings)
     }
     
-    func skipForNowPressed() {
+    func skipForNowPressed(onSyncDisabled: @escaping () -> Void) {
         let controller = PopUpController.with(title: TextConstants.autoSyncAlertTitle,
                                               message: TextConstants.autoSyncAlertText,
                                               image: .none,
                                               firstButtonTitle: TextConstants.autoSyncAlertNo,
                                               secondButtonTitle: TextConstants.autoSyncAlertYes,
                                               secondAction: { [weak self] vc in
+                                                onSyncDisabled()
                                                 self?.router.routNextVC()
         })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
