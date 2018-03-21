@@ -57,7 +57,7 @@ class CoreDataStack: NSObject {
     
     var backgroundContext: NSManagedObjectContext
     
-//    let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")//, attributes: .concurrent)//DispatchQueue(label: "com.lifebox.CoreDataStack")
+    let privateQueue = DispatchQueue(label: "com.lifebox.CoreDataStack")//, attributes: .concurrent)//DispatchQueue(label: "com.lifebox.CoreDataStack")
 //    let contextSavingQueue = DispatchQueue(label: "com.lifebox.CoreDataStackSaving")
     
     var pageAppendedCallBack: AppendingLocalItemsPageAppended?
@@ -108,7 +108,7 @@ class CoreDataStack: NSObject {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
         fetchRequest.predicate = NSPredicate(format: "md5Value IN %@", remoteMd5s)
         
-        guard let localDuplicatesMediaItems = (try? CoreDataStack.default.mainContext.fetch(fetchRequest)) as? [MediaItem] else {
+        guard let localDuplicatesMediaItems = (try? CoreDataStack.default.newChildBackgroundContext.fetch(fetchRequest)) as? [MediaItem] else {
             return []
         }
         

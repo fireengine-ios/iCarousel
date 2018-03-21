@@ -97,10 +97,11 @@ extension CoreDataStack {
             } else {
                
                 pageAppendedCallBack = { [weak self] localItems in
-                    log.info("pageRemoteItems.isEmpty pageAppendedCallBack")
-                    log.debug("pageRemoteItems.isEmpty pageAppendedCallBack")
-                    filesCallBack(localItems)
+//                    log.info("pageRemoteItems.isEmpty pageAppendedCallBack")
+//                    log.debug("pageRemoteItems.isEmpty pageAppendedCallBack")
+                    filesCallBack([])
                     self?.pageAppendedCallBack = nil
+//                    self?.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, pageRemoteItems: pageRemoteItems, paginationEnd: paginationEnd, firstPage: firstPage, filesCallBack: filesCallBack)
                 }
             }
             return
@@ -120,8 +121,9 @@ extension CoreDataStack {
                         pageAppendedCallBack = { [weak self] localItems in
                             log.info("pageRemoteItems.count == 1, paginationEnd pageAppendedCallBack")
                             log.debug("pageRemoteItems.count == 1, paginationEnd pageAppendedCallBack")
-                            filesCallBack(localItems)
+                            filesCallBack([])
                             self?.pageAppendedCallBack = nil
+//                            self?.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, pageRemoteItems: pageRemoteItems, paginationEnd: paginationEnd, firstPage: firstPage, filesCallBack: filesCallBack)
                         }
                     }
      
@@ -195,9 +197,10 @@ extension CoreDataStack {
             pageAppendedCallBack = { [weak self] localItems in
                 log.info("let localItems = try? backgroundContext.fetch(request) pageAppendedCallBack")
                 log.debug("let localItems = try? backgroundContext.fetch(request)  pageAppendedCallBack")
-                debugPrint("callback")
-                filesCallBack(localItems)
+//                debugPrint("callback")
+                filesCallBack([])
                 self?.pageAppendedCallBack = nil
+//                self?.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, pageRemoteItems: pageRemoteItems, paginationEnd: paginationEnd, firstPage: firstPage, filesCallBack: filesCallBack)
             }
             //we realize finishing or progress build here
         }
@@ -283,34 +286,34 @@ extension CoreDataStack {
         }
 
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
-
-            LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] assetsInfo in
-                context.perform { [weak self] in
-                    var addedObjects = [WrapData]()
-                    assetsInfo.forEach { element in
-                        autoreleasepool {
-                            let wrapedItem =  WrapData(info: element)
-                            log.debug("LocalMediaItem save(items: assetsInfo.forEach { element in")
-                            _ = MediaItem(wrapData: wrapedItem, context: context)
-                            
-                            addedObjects.append(wrapedItem)
-                        }
+        
+        LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] assetsInfo in
+            context.perform { [weak self] in
+                var addedObjects = [WrapData]()
+                assetsInfo.forEach { element in
+                    autoreleasepool {
+                        let wrapedItem =  WrapData(info: element)
+                        log.debug("LocalMediaItem save(items: assetsInfo.forEach { element in")
+                        _ = MediaItem(wrapData: wrapedItem, context: context)
+                        
+                        addedObjects.append(wrapedItem)
                     }
-                    
-                    self?.saveDataForContext(context: context, saveAndWait: true)
-                    log.debug("LocalMediaItem saveDataForContext(")
-                    ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
-                    
-                    
-                    self?.pageAppendedCallBack?(addedObjects)
-                    
-                    print("local files added: \(assetsInfo.count)")
-                    
-                    self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
-                    
-                
                 }
-            })
+                
+                self?.saveDataForContext(context: context, saveAndWait: true)
+                log.debug("LocalMediaItem saveDataForContext(")
+                ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
+                
+                
+                self?.pageAppendedCallBack?(addedObjects)
+                
+                print("local files added: \(assetsInfo.count)")
+                
+                self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
+                
+                
+            }
+        })
         
     }
     
