@@ -298,6 +298,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         if let searchText = timer.userInfo as? String {
             output.getSuggestion(text: searchText)
             collectionView.isHidden = true
+            suggestTableView.isHidden = isEmptyItems()
             noFilesView.isHidden = true
             topBarContainer.isHidden = true
             setCurrentPlayState()
@@ -353,7 +354,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func successWithSuggestList(list: [SuggestionObject]) {
         items[.suggestion] = Array(list.prefix(NumericConstants.maxSuggestions))
-        suggestTableView.isHidden = isEmptyItems()
+        if collectionView.isHidden {
+            suggestTableView.isHidden = isEmptyItems()
+        }
         suggestTableView.reloadData()
     }
     
