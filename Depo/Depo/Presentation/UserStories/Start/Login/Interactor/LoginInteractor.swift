@@ -68,10 +68,12 @@ class LoginInteractor: LoginInteractorInput {
         
         storageVars.currentUserID = login
         
-        authenticationService.login(user: user, sucess: { [weak self] in
+        authenticationService.login(user: user, sucess: { [weak self] headers in
             guard let `self` = self else {
                 return
             }
+            
+            self.emptyEmailCheck(for: headers)
             
             self.tokenStorage.isRememberMe = self.rememberMe
             DispatchQueue.main.async {
@@ -107,8 +109,6 @@ class LoginInteractor: LoginInteractorInput {
                     self.password = password
                     self.atachedCaptcha = atachedCaptcha
                     self.output?.openEmptyPhone()
-                } else if self.isEmptyEmailError(for: errorResponse) {
-                    self.isShowEmptyEmail = true
                 } else {
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
@@ -181,12 +181,14 @@ class LoginInteractor: LoginInteractorInput {
         return errorResponse.description.contains(HeaderConstant.emptyMSISDN)
     }
     
-    private func isEmptyEmailError(for errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains(HeaderConstant.emptyEmail)
-    }
-    
     private func checkInternetConnection() -> Bool {
         return ReachabilityService().isReachable
+    }
+    
+    private func emptyEmailCheck(for headers: [String: Any]) {
+        if let warning = headers[HeaderConstant.accountWarning] as? String, warning == HeaderConstant.emptyEmail {
+            self.isShowEmptyEmail = true
+        }
     }
     
     func findCoutryPhoneCode(plus: Bool) {

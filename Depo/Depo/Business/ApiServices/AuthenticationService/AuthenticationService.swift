@@ -227,9 +227,8 @@ struct ResendVerificationSMS: RequestParametrs {
 
 typealias  SuccessLogin = () -> Swift.Void
 typealias  SuccessLogout = () -> Swift.Void
-
 typealias  FailLoginType = FailResponse
-
+typealias  HeadersHandler = ([String: Any]) -> Void
 
 class AuthenticationService: BaseRequestService {
     
@@ -241,7 +240,7 @@ class AuthenticationService: BaseRequestService {
     
     // MARK: - Login
     
-    func login(user: AuthenticationUser, sucess: SuccessLogin?, fail: FailResponse?) {
+    func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?) {
         let params: [String: Any] = ["username": user.login,
                                      "password": user.password,
                                      "deviceInfo": Device.deviceInfo]
@@ -277,7 +276,7 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
 
-                        sucess?()
+                        sucess?(headers)
                         MenloworksAppEvents.onLogin()
                         
                     case .failure(let error):
