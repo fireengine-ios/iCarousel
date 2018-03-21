@@ -10,7 +10,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 
     override func viewIsReady(collectionView: UICollectionView) {
         if (interactor.remoteItems is AlbumService) {
-            dataSource = ArrayDataSourceForCollectionView()
+            dataSource = AlbumsDataSourceForCollectionView()
         } else {
             dataSource = StoriesDataSourceForCollectionView()
         }
@@ -38,7 +38,11 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func getCellSizeForGreed() -> CGSize {
-        return CGSize(width: 100, height: 136)
+        if dataSource is AlbumsDataSourceForCollectionView {
+            return CGSize(width: NumericConstants.albumCellGreedWidth, height: NumericConstants.albumCellGreedHeight)
+        } else {
+            return CGSize(width: NumericConstants.albumCellGreedWidth, height: NumericConstants.storiesCellGreedHeight)
+        }
     }
     
     override func sortedPushed(with rule: SortedRules) {

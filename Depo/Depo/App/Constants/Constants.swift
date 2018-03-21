@@ -783,6 +783,11 @@ struct NumericConstants {
     static let creationStoryOrderingCountPhotosInLineiPhone: Int = 4
     static let creationStoryOrderingCountPhotosInLineiPad: Int = 6
     static let albumCellListHeight: CGFloat = 100
+    static let albumCellGreedHeight: CGFloat = 136
+    static let albumCellGreedWidth: CGFloat = 100
+    static let storiesCellGreedHeight: CGFloat = 100
+    
+    static let insetAlbumCellGreed: CGFloat = 8
     
     static let numberOfElementsInSyncRequest: Int = 30000
     
