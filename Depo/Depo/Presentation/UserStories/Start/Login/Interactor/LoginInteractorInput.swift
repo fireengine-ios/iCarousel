@@ -29,4 +29,6 @@ protocol LoginInteractorInput {
     func getTokenToUpdatePhone(for phoneNumber: String)
     func getResendTokenToUpdatePhone(for phoneNumber: String)
     func verifyPhoneNumber(token: String, code: String)
+    
+    var isShowEmptyEmail: Bool { get }
 }

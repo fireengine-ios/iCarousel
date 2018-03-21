@@ -20,6 +20,10 @@ final class PopUpController: UIViewController {
 
     // MARK: - Static
     
+    static func with(errorMessage: String) -> PopUpController {
+        return with(title: TextConstants.errorAlert, message: errorMessage, image: .error, buttonTitle: TextConstants.ok)
+    }
+    
     static func with(title: String?, message: String?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil) -> PopUpController {
 
         let vc = controllerWith(title: title, message: message, image: image)

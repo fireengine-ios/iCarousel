@@ -17,6 +17,8 @@ class AppConfigurator {
     class func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         dropboxManager.start()
         
+        emptyEmailUpIfNeed()
+        
         let urls: AuthorizationURLs = AuthorizationURLsImp()
         let tokenStorage: TokenStorage = factory.resolve()
         
@@ -43,6 +45,18 @@ class AppConfigurator {
 //        CoreDataStack.default.appendLocalMediaItems {
             startMenloworks(with: launchOptions)
 //        }
+    }
+    
+    private class func emptyEmailUpIfNeed() {
+        let storageVars: StorageVars = factory.resolve()
+        
+        if storageVars.emptyEmailUp {
+            storageVars.emptyEmailUp = false
+            let attemptsCounter = SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
+            attemptsCounter.up(limitHandler: {
+                AuthenticationService().logout(async: false, success: nil)
+            })
+        }
     }
     
     class func logout() {

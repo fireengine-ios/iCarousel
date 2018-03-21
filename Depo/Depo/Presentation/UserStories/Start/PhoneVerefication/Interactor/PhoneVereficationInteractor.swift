@@ -94,7 +94,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                                       rememberMe: true,
                                       attachedCaptcha: atachedCaptcha)
         
-        authenticationService.login(user: user, sucess: { [weak self] in
+        authenticationService.login(user: user, sucess: { [weak self] _ in
             self?.tokenStorage.isRememberMe = true
             DispatchQueue.main.async {
                 self?.output.succesLogin()
