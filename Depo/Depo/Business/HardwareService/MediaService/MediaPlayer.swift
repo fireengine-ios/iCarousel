@@ -212,7 +212,7 @@ final class MediaPlayer: NSObject {
             }
         }
         
-        deleteIndexes.forEach { i in
+        deleteIndexes.reversed().forEach { i in
             list.remove(at: i)
             urls.remove(at: i)
             items.remove(at: i)
