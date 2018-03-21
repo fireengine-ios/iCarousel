@@ -70,11 +70,6 @@ class SyncServiceManager {
     init() {
         photoSyncService.delegate = self
         videoSyncService.delegate = self
-        
-        setupReachability()
-        setupAPIReachability()
-        
-        subscribeForNotifications()
     }
     
     deinit {
@@ -83,13 +78,10 @@ class SyncServiceManager {
     
     
     // MARK: - Public
-    
-    func getSettings() -> AutoSyncSettings? {
-        return settings
-    }
-    
     func update(syncSettings: AutoSyncSettings) {
         log.debug("SyncServiceManager updateSyncSettings")
+        
+        subscribeForNotifications()
         
         settings = syncSettings
     
@@ -99,6 +91,8 @@ class SyncServiceManager {
     func updateImmediately() {
         log.debug("SyncServiceManager updateImmediately")
 
+        subscribeForNotifications()
+        
         lastAutoSyncTime = NSDate().timeIntervalSince1970
         
         checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
@@ -247,6 +241,9 @@ class SyncServiceManager {
 // MARK: - Notifications
 extension SyncServiceManager {
     private func subscribeForNotifications() {
+        setupReachability()
+        setupAPIReachability()
+        
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
                                        selector: #selector(onPhotoLibraryDidChange(notification:)),

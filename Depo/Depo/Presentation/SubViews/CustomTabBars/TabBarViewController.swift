@@ -559,16 +559,17 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         case .photosScreenIndex:
             MenloworksAppEvents.onPhotosAndVideosOpen()
             
-            guard let settings = SyncServiceManager.shared.getSettings() else { return }
-            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
-            
-            if settings.isAutoSyncEnabled {
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
-                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
-            } else {
-                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
-            }
+            AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { settings, userId in
+                MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
+                
+                if settings.isAutoSyncEnabled {
+                    MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
+                    MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
+                } else {
+                    MenloworksTagsService.shared.onAutosyncVideosStatusOff()
+                    MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
+                }
+            })
         case .musicScreenIndex:
             MenloworksAppEvents.onMusicOpen()
         case .documentsScreenIndex:
