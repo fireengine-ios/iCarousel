@@ -78,17 +78,17 @@ extension CoreDataStack {
                        filesCallBack: @escaping LocalFilesCallBack) {
         
         log.debug("getLocalFilesForPhotoVideoPage()")
-        
+        let requestContext = newChildBackgroundContext
         
         
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
-                                                    in: backgroundContext)
+                                                    in: requestContext)
         
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         
         if pageRemoteItems.isEmpty {
-            if let localItems = try? newChildBackgroundContext.fetch(request),
+            if let localItems = try? requestContext.fetch(request),
                 (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
                 
                 log.debug("pageRemoteItems.isEmpty let localItems = try? backgroundContext.fetch(request)")
@@ -108,18 +108,18 @@ extension CoreDataStack {
         } else if pageRemoteItems.count == 1, paginationEnd, //if there same md5 but later - will be error
             let lastItem = pageRemoteItems.last {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)])
-            if let localItems = try? newChildBackgroundContext.fetch(request) {
-                log.info("pageRemoteItems.count == 1, paginationEnd ")
+            if let localItems = try? requestContext.fetch(request) {
+                
                 log.debug("pageRemoteItems.count == 1, paginationEnd ")
                 if lastItem.isLocalItem {//
                     if (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
-                        log.info("pageRemoteItems.count == 1, paginationEnd lastItem.isLocalItem localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles")
+
                         log.debug("pageRemoteItems.count == 1, paginationEnd lastItem.isLocalItem localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles")
                         let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                         filesCallBack(wrapedLocalItems)
                     } else {
                         pageAppendedCallBack = { [weak self] localItems in
-                            log.info("pageRemoteItems.count == 1, paginationEnd pageAppendedCallBack")
+                            
                             log.debug("pageRemoteItems.count == 1, paginationEnd pageAppendedCallBack")
                             filesCallBack([])
                             self?.pageAppendedCallBack = nil
@@ -156,7 +156,7 @@ extension CoreDataStack {
 
                 let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR localFileID IN %@)", md5s, uuids)
                 request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem), basePredicateString])
-                if let localItems = try? newChildBackgroundContext.fetch(request) {
+                if let localItems = try? requestContext.fetch(request) {
                     let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
                     filesCallBack(wrapedLocalItems)
                 }
@@ -188,7 +188,7 @@ extension CoreDataStack {
         
     
         
-        if let localItems = try? newChildBackgroundContext.fetch(request), (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
+        if let localItems = try? requestContext.fetch(request), (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
             log.info("let localItems = try? backgroundContext.fetch(request)")
             log.debug("let localItems = try? backgroundContext.fetch(request) ")
             let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
