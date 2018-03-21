@@ -367,33 +367,34 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }()
     
     private func merge(asset assetIdentifier: String, with item: WrapData) {
-        
-        if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
-   
-            let wrapData = WrapData(asset: asset)
-            wrapData.copyFileData(from: item)
-            
-            let context = CoreDataStack.default.mainContext
-            let mediaItem: MediaItem
-            if let existingMediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
-                mediaItem = existingMediaItem
-            } else {
-                mediaItem = MediaItem(wrapData: wrapData, context: context)
-            }
-        
-            
-            mediaItem.localFileID = assetIdentifier
-            CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)
-        }
+//
+//        if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
+//
+//            let wrapData = WrapData(asset: asset)
+//            wrapData.copyFileData(from: item)
+//
+//            let context = CoreDataStack.default.newChildBackgroundContext//mainContext
+//            let mediaItem: MediaItem
+//            if let existingMediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
+//                mediaItem = existingMediaItem
+//            } else {
+//                mediaItem = MediaItem(wrapData: wrapData, context: context)
+//            }
+//
+//            context.perform {
+//                mediaItem.localFileID = assetIdentifier
+//                CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)
+//            }
+//        }
     }
     
     fileprivate func add(asset assetIdentifier: String, to album: String) {
-        askPermissionForPhotoFramework(redirectToSettings: true, completion: { accessGranted, _ in
-            if accessGranted {
-                let operation = AddAssetToCollectionOperation(albumName: album, assetIdentifier: assetIdentifier)
-                self.addAssetToCollectionQueue.addOperation(operation)
-            }
-        })
+//        askPermissionForPhotoFramework(redirectToSettings: true, completion: { accessGranted, _ in
+//            if accessGranted {
+//                let operation = AddAssetToCollectionOperation(albumName: album, assetIdentifier: assetIdentifier)
+//                self.addAssetToCollectionQueue.addOperation(operation)
+//            }
+//        })
     }
     
     fileprivate func createRequestAppendImageToAlbum(fileUrl: URL) -> PHObjectPlaceholder? {
@@ -412,13 +413,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     fileprivate func add(asset assetIdentifier: String, to collection: PHAssetCollection) {
-        passcodeStorage.systemCallOnScreen = true
-        let assetRequest = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil)
-        PHPhotoLibrary.shared().performChanges({ [weak self] in
-            self?.passcodeStorage.systemCallOnScreen = false
-            let request = PHAssetCollectionChangeRequest(for: collection)
-            request?.addAssets(assetRequest)
-        }, completionHandler: nil)
+//        passcodeStorage.systemCallOnScreen = true
+//        let assetRequest = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil)
+//        PHPhotoLibrary.shared().performChanges({ [weak self] in
+//            self?.passcodeStorage.systemCallOnScreen = false
+//            let request = PHAssetCollectionChangeRequest(for: collection)
+//            request?.addAssets(assetRequest)
+//        }, completionHandler: nil)
     }
     
     typealias AssetCollectionCompletion = (_ collection: PHAssetCollection?) -> Void

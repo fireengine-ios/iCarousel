@@ -105,7 +105,7 @@ extension CoreDataStack {
     
     func mediaItemByUUIDs(uuidList: [String]) -> [MediaItem] {
         let predicate = NSPredicate(format: "uuidValue IN %@", uuidList)
-        return executeRequest(predicate: predicate, context: mainContext)
+        return executeRequest(predicate: predicate, context: newChildBackgroundContext)
     }
     
     func executeRequest(predicate: NSPredicate, context: NSManagedObjectContext) -> [MediaItem] {
