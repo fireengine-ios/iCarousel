@@ -19,7 +19,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     private let estimatedRowHeight: CGFloat = 88.0
     
     @IBOutlet weak var tableView: UITableView?
-    @IBOutlet weak var tableHConstraint: NSLayoutConstraint?
     
     var isFromSettings: Bool = false
     
@@ -29,7 +28,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     weak var delegate: AutoSyncDataSourceDelegate?
     
-    func setup(table: UITableView, with heightConstratint: NSLayoutConstraint?) {
+    func setup(table: UITableView) {
         tableView = table
         tableView?.delegate = self
         tableView?.dataSource = self
@@ -37,7 +36,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.estimatedRowHeight = estimatedRowHeight
         tableView?.separatorStyle = .none
-        tableHConstraint = heightConstratint
         
         registerCells(with: [CellsIdConstants.autoSyncSwitcherCellID,
                              CellsIdConstants.autoSyncSettingsCellID])
@@ -145,10 +143,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
 
     func reloadTableView() {
         tableView?.reloadData()
-        if let constraint = tableHConstraint {
-            constraint.constant = getTableHeight()
-            tableView?.updateConstraints()
-        }
     }
 
 }
@@ -186,11 +180,6 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
         UIView.performWithoutAnimation {
             tableView?.beginUpdates()
             tableView?.endUpdates()
-        }
-
-        if let constraint = tableHConstraint {
-            constraint.constant = getTableHeight()
-            tableView?.updateConstraints()
         }
     }
 }
