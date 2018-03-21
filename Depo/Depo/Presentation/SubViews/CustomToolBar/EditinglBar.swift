@@ -137,6 +137,11 @@ class EditinglBar: CustomTabBar {
                                                 image: UIImage(named: $0.imageName),
                                                 tag: 0)
         }
+        
+        items.forEach { item in
+            item.isAccessibilityElement = true
+            item.accessibilityLabel = item.title
+        }
   
         setItems(items, animated: false)
     }
