@@ -542,6 +542,7 @@
 "When syncing via Wi-Fi, your photos and videos are uploaded by default." = "When syncing via Wi-Fi, your photos and videos are uploaded by default.";
 "Wi-fi" = "Wi-fi";
 "Lifebox can sync your files automatically." = "Lifebox can sync your files automatically.";
+"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Lifebox can sync your files automatically. Would you like to have this feature right now?";
 "Auto Sync" = "Auto Sync";
 "You have to fill in a password" = "You have to fill in a password";
 "You have to fill in your mail or GSM Number" =  "You have to fill in your mail or GSM Number";
