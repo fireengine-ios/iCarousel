@@ -498,6 +498,8 @@ struct TextConstants {
     // MARK: Albums
     static let albumsTitle = NSLocalizedString("Albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadPhotos = NSLocalizedString("Upload Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let removeReadOnlyAlbumError = NSLocalizedString("Video album is automatically created, therefore cannot be deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uploadVideoToReadOnlyAlbumError = NSLocalizedString("You cannot upload any video to auto generated video album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Albums view
     static let albumsViewNoAlbumsTitleText = NSLocalizedString("You don’t have any albums on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

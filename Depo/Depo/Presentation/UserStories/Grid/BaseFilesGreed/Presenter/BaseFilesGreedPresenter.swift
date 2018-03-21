@@ -360,11 +360,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     
     private func stopEditing() {
-        bottomBarPresenter?.dismiss(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        dismissBottomBar(animated: true)
         view.stopSelection()
         dataSource.setSelectionState(selectionState: false)
         view.setThreeDotsMenu(active: true)
+    }
+    
+    private func dismissBottomBar(animated: Bool) {
+        bottomBarPresenter?.dismiss(animated: animated)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
     }
     
     private func updateNoFilesView() {
@@ -393,8 +397,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (selectedItemsCount == 0) {
             log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
 
-            bottomBarPresenter?.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+            dismissBottomBar(animated: true)
         } else {
             log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
 
@@ -607,19 +610,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
-        if type == ElementTypes.removeAlbum {
-            bottomBarPresenter?.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
-        }
-        if type == ElementTypes.completelyDeleteAlbums {
-            bottomBarPresenter?.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        if type == .removeAlbum || type == .completelyDeleteAlbums {
+            dismissBottomBar(animated: true)
         }
     }
     
     func operationFailed(withType type: ElementTypes) {
         log.debug("BaseFilesGreedPresenter operationFailed")
         debugPrint("failed")
+        dismissBottomBar(animated: true)
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
     }
