@@ -75,6 +75,10 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         navigationBarWithGradientStyle()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        backButtonForNavigationItem(title: TextConstants.backTitle)
+    }
+    
     // MARK: SettingsViewInput
     
     func setupVersionLabel() {
