@@ -80,6 +80,8 @@
 "Cancel" = "Cancel";
 "Info" = "Info";
 "You can open settings and cancel subscption." = "You can open settings and cancel subscption.";
+"Google Play Store" = "Google Play Store";
+"AppStore" = "AppStore";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription";
 "You can visit iTunes to cancel your subscription" = "You can visit iTunes to cancel your subscription";
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2";

@@ -22,6 +22,8 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak fileprivate var songsCountLabel: UILabel!
     @IBOutlet weak fileprivate var docsCountLabel: UILabel!
     @IBOutlet weak fileprivate var priceLabel: UILabel!
+    @IBOutlet weak fileprivate var renewalDateLabel: UILabel!
+    @IBOutlet weak fileprivate var storeLabel: UILabel!
     @IBOutlet weak fileprivate var freeButton: UIButton!
     @IBOutlet weak fileprivate var upgradeButton: UIButton!
     @IBOutlet weak fileprivate var cancelButton: UIButton!
@@ -43,8 +45,12 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         freeButton.layer.borderWidth = borderWidth
         freeButton.layer.borderColor = UIColor.lrTealishTwo.cgColor
         freeButton.isUserInteractionEnabled = false
-        
+
         checkmarkImageView.tintColor = ColorConstants.blueColor
+        
+        renewalDateLabel.isHidden = true
+        storeLabel.isHidden = true
+        storeLabel.text = TextConstants.createStoryEmptyTextError
     }
     
     override func layoutSubviews() {
@@ -78,6 +84,18 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         songsCountLabel.text = String(format: TextConstants.usageInfoSongs, plan.songsCount)
         docsCountLabel.text = String(format: TextConstants.usageInfoDocs, plan.docsCount)
         priceLabel.text = plan.priceString
+        
+        if let model = plan.model as? SubscriptionPlanBaseResponse, let renewalDate = model.nextRenewalDate {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd MMM yy"
+            renewalDateLabel.text = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(renewalDate.intValue)))
+            renewalDateLabel.isHidden = false
+            
+            if let type = model.type {
+                storeLabel.isHidden = false
+                storeLabel.text = type.description
+            }
+        }
     }
     
     // MARK: - IBActions
