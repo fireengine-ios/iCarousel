@@ -205,7 +205,7 @@ final class UploadService: BaseRequestService {
                 self.showUploadCardProgress()
                 
                 finishedOperation.item.syncStatus = .synced
-                finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
+                finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
 //                finishedOperation.item.isLocalItem = false
                 
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
@@ -284,7 +284,7 @@ final class UploadService: BaseRequestService {
                 self.showUploadCardProgress()
                 
                 finishedOperation.item.syncStatus = .synced
-                finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
+                finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
 //                finishedOperation.item.isLocalItem = false
 
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
@@ -359,7 +359,7 @@ final class UploadService: BaseRequestService {
                 self.showSyncCardProgress()
                 
                 finishedOperation.item.syncStatus = .synced
-                finishedOperation.item.syncStatuses.append(SingletonStorage.shared.unigueUserID)
+                finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
 //                finishedOperation.item.isLocalItem = false
                 
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
