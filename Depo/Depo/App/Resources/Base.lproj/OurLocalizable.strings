@@ -192,6 +192,8 @@
 "Thanks for leaving a comment!" = "Thanks for leaving a comment!";
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n";
 "Upload Photos" = "Upload Photos";
+"Video album is automatically created, therefore cannot be deleted" = "Video album is automatically created, therefore cannot be deleted";
+"You cannot upload any video to auto generated video album" = "You cannot upload any video to auto generated video album";
 "You don’t have any albums on your Lifebox yet." = "You don’t have any albums on your Lifebox yet.";
 "Start creating albums" = "Start creating albums";
 "Add" = "Add";

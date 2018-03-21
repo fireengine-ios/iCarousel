@@ -498,6 +498,8 @@ struct TextConstants {
     // MARK: Albums
     static let albumsTitle = NSLocalizedString("Albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadPhotos = NSLocalizedString("Upload Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let removeReadOnlyAlbumError = NSLocalizedString("Video album is automatically created, therefore cannot be deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uploadVideoToReadOnlyAlbumError = NSLocalizedString("You cannot upload any video to auto generated video album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Albums view
     static let albumsViewNoAlbumsTitleText = NSLocalizedString("You don’t have any albums on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -781,6 +783,11 @@ struct NumericConstants {
     static let creationStoryOrderingCountPhotosInLineiPhone: Int = 4
     static let creationStoryOrderingCountPhotosInLineiPad: Int = 6
     static let albumCellListHeight: CGFloat = 100
+    static let albumCellGreedHeight: CGFloat = 136
+    static let albumCellGreedWidth: CGFloat = 100
+    static let storiesCellGreedHeight: CGFloat = 100
+    
+    static let insetAlbumCellGreed: CGFloat = 8
     
     static let numberOfElementsInSyncRequest: Int = 30000
     

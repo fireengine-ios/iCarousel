@@ -20,6 +20,7 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     func operationFailed(type: ElementTypes, message: String) {
         compliteAsyncOperationEnableScreen()
         basePassingPresenter?.operationFailed(withType: type)
+        UIApplication.showErrorAlert(message: message)
     }
     
     func operationStarted(type: ElementTypes) {
