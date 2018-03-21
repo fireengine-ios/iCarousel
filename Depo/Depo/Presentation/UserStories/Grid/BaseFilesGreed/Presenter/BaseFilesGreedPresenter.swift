@@ -609,6 +609,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         log.debug("BaseFilesGreedPresenter operationFinished")
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
+        dismissBottomBar(animated: true)
         view.stopSelection()
         if type == .removeAlbum || type == .completelyDeleteAlbums {
             dismissBottomBar(animated: true)

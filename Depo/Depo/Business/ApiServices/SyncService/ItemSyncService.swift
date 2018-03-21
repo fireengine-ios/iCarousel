@@ -229,7 +229,7 @@ extension CoreDataStack {
                     let serverObjectMD5 = item.md5
                     if let index = localMd5s.index(of: serverObjectMD5) {
                         let localItem = localItems[index]
-                        localItem.syncStatuses.append(SingletonStorage.shared.unigueUserID)
+                        localItem.setSyncStatusesAsSyncedForCurrentUser()
                         self?.updateLocalItemSyncStatus(item: localItem)
                         
                         localItems.remove(at: index)
