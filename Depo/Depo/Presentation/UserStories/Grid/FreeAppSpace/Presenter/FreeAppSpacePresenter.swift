@@ -17,6 +17,10 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         dataSource.needShowCloudIcon = false
     }
     
+    override func subscribeDataSource() {
+        
+    }
+    
     override func isArrayDataSource() -> Bool {
         return false
     }
