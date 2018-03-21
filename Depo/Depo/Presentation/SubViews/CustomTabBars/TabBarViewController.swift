@@ -559,16 +559,17 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         case .photosScreenIndex:
             MenloworksAppEvents.onPhotosAndVideosOpen()
             
-            guard let settings = SyncServiceManager.shared.getSettings() else { return }
-            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
-            
-            if settings.isAutoSyncEnabled {
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
-                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
-            } else {
-                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
-            }
+            AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { settings, userId in
+                MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
+                
+                if settings.isAutoSyncEnabled {
+                    MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
+                    MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
+                } else {
+                    MenloworksTagsService.shared.onAutosyncVideosStatusOff()
+                    MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
+                }
+            })
         case .musicScreenIndex:
             MenloworksAppEvents.onMusicOpen()
         case .documentsScreenIndex:
@@ -706,6 +707,8 @@ extension TabBarViewController: TabBarActionHandler {
         
         switch action {
         case .takePhoto:
+            guard !checkReadOnlyPermission() else { return }
+            
             cameraService.showCamera(onViewController: self)
             
         case .createFolder:
@@ -719,6 +722,8 @@ extension TabBarViewController: TabBarActionHandler {
             router.createStoryName(items: nil, needSelectionItems: false, isFavorites: isFavorites)
             
         case .upload:
+            guard !checkReadOnlyPermission() else { return }
+
             let controller = router.uploadPhotos()
             let navigation = UINavigationController(rootViewController: controller)
             navigation.navigationBar.isHidden = false
@@ -730,6 +735,8 @@ extension TabBarViewController: TabBarActionHandler {
             router.presentViewController(controller: nController)
             
         case .uploadFromLifeBox:
+            guard !checkReadOnlyPermission() else { return }
+            
             let parentFolder = router.getParentUUID()
             let controller: UIViewController
             if let currentVC = currentViewController as? BaseFilesGreedViewController {
@@ -743,4 +750,12 @@ extension TabBarViewController: TabBarActionHandler {
         }
     }
     
+    private func checkReadOnlyPermission() -> Bool {
+        if let currentVC = currentViewController as? AlbumDetailViewController,
+            let readOnly = currentVC.album?.readOnly, readOnly {
+            UIApplication.showErrorAlert(message: TextConstants.uploadVideoToReadOnlyAlbumError)
+            return true
+        }
+        return false
+    }
 }
