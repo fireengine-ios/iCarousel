@@ -186,50 +186,63 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 if isPaginationDidEnd {
                     debugPrint("LastPage")
                 }
+//                allRemoteItems
+                
+                var md5s = [String]()
+                var localIDs = [String]()
+                allRemoteItems.forEach{
+                    md5s.append($0.md5)
+                    let splitedUuid = $0.uuid.split(separator: "~")
+                    if let localID = splitedUuid.first {
+                        localIDs.append(String(localID))
+                    }
+                }
                 
                 CoreDataStack.default.getLocalFilesForPhotoVideoPage(filesType: specificFilters,
                                                                      sortType: currentSortType,
+                                                                     paginationEnd: isPaginationDidEnd, firstPage: isFirstPage,
                                                                      pageRemoteItems: lastRemote,
-                                                                     paginationEnd: isPaginationDidEnd,
-                                                                     firstPage: isFirstPage,
-                                                                     filesCallBack: { [weak self] localItems in
-                                                                        guard let `self` = self else {
-                                                                            return
-                                                                        }
-                                                                        log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage \(localItems.count)")
-                                                                        log.info("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage \(localItems.count)")
+                                                                     notAllowedMD5: md5s,
+                                                                     notAllowedLocalIDs: localIDs,
+                                                                     filesCallBack:
+                    { [weak self] localItems in
+                        guard let `self` = self else {
+                            return
+                        }
+                        log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage \(localItems.count)")
+                        log.info("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage \(localItems.count)")
                         if localItems.count == 0 {
                             localFileasAppendedCallback(originalItemsArray)
                             return
                         }
                         tempoArray.append(contentsOf: localItems)
-                                                                        
+                        
                         switch self.currentSortType {
-                            case .timeUp, .timeUpWithoutSection:
-                                tempoArray.sort{$0.creationDate! > $1.creationDate!}
-                            case .timeDown, .timeDownWithoutSection:
-                                tempoArray.sort{$0.creationDate! < $1.creationDate!}
-                            case .lettersAZ, .albumlettersAZ:
-                                tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
-                            case .lettersZA, .albumlettersZA:
-                                tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
-                            case .sizeAZ:
-                                tempoArray.sort{$0.fileSize > $1.fileSize}
-                            case .sizeZA:
-                                tempoArray.sort{$0.fileSize < $1.fileSize}
-                            case .metaDataTimeUp:
-                                tempoArray.sort{$0.metaDate > $1.metaDate}
-                            case .metaDataTimeDown:
-                                tempoArray.sort{$0.metaDate < $1.metaDate}
+                        case .timeUp, .timeUpWithoutSection:
+                            tempoArray.sort{$0.creationDate! > $1.creationDate!}
+                        case .timeDown, .timeDownWithoutSection:
+                            tempoArray.sort{$0.creationDate! < $1.creationDate!}
+                        case .lettersAZ, .albumlettersAZ:
+                            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
+                        case .lettersZA, .albumlettersZA:
+                            tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
+                        case .sizeAZ:
+                            tempoArray.sort{$0.fileSize > $1.fileSize}
+                        case .sizeZA:
+                            tempoArray.sort{$0.fileSize < $1.fileSize}
+                        case .metaDataTimeUp:
+                            tempoArray.sort{$0.metaDate > $1.metaDate}
+                        case .metaDataTimeDown:
+                            tempoArray.sort{$0.metaDate < $1.metaDate}
                         }
-                                                                        
-                    localFileasAppendedCallback(tempoArray)
-                                                                        log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage page items \(tempoArray.count)")
-                                                                        log.info("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage page items \(tempoArray.count)")
-                     debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
-                                                                        
+                        
+                        localFileasAppendedCallback(tempoArray)
+                        log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage page items \(tempoArray.count)")
+                        log.info("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage page items \(tempoArray.count)")
+                        debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
+                        
                 })
-//                return
+            //                return
             default:
                 localFileasAppendedCallback(originalItemsArray)
             }
