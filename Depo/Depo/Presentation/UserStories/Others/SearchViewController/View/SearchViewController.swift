@@ -329,7 +329,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func successWithSuggestList(list: [SuggestionObject]) {
         items[.suggestion] = Array(list.prefix(NumericConstants.maxSuggestions))
-        if collectionView.isHidden {
+        if collectionView.isHidden && noFilesView.isHidden {
             suggestTableView.isHidden = isEmptyItems()
         }
         suggestTableView.reloadData()
