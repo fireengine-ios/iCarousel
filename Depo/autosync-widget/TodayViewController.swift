@@ -40,9 +40,10 @@ final class TodayViewController: UIViewController {
                 return
             }
             
-            UIView.animate(withDuration: 0.3, animations: {
-                self.currentImage.image = image
-            })
+            UIView.transition(with: self.currentImage,
+                              duration: 0.3,
+                              options: .transitionCrossDissolve, animations: { self.currentImage.image = image },
+                              completion: nil)
         }
     }
     
