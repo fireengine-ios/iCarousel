@@ -168,6 +168,7 @@ class LoadingImageView: UIImageView {
         path = nil
         url = nil
         delegate?.onImageLoaded(image: image)
+        WidgetService.shared.notifyWidgetAbout(currentImage: image)
     }
 
 }
