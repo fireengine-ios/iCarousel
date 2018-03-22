@@ -68,6 +68,12 @@ final class MediaPlayer: NSObject {
         UIApplication.shared.beginReceivingRemoteControlEvents()
     }
     
+    private func guardAudioSession() {
+        if AVAudioSession.sharedInstance().category != AVAudioSessionCategoryPlayback {
+            try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        }
+    }
+    
     private func setup(player: AVPlayer) {
         self.player?.replaceCurrentItem(with: nil)
         removePeriodicTimeObserver()
@@ -84,6 +90,7 @@ final class MediaPlayer: NSObject {
         setupPlayerTimeObserver()
         setupPlayerObservers()
         setupHeadphoneObserver()
+        guardAudioSession()
     }
     
     private func setupPlayerTimeObserver() {
@@ -228,7 +235,7 @@ final class MediaPlayer: NSObject {
         if deleteIndexes.contains(currentIndex) {
             // TODO: CHECK ALL STATES
             if play(at: currentIndex) {
-                currentIndex -= 1
+//                currentIndex -= 1
             } else if list.count > 0 {
                 currentIndex = list.count - 1
                 play(at: currentIndex)
@@ -236,9 +243,10 @@ final class MediaPlayer: NSObject {
                 currentIndex = 0
                 stop()
             }
-        } else {
-            stop()
         }
+//        else {
+//            stop()
+//        }
         
         delegates.invoke { delegate in
             delegate.changedListItemsInMediaPlayer(self)
