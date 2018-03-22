@@ -16,7 +16,7 @@ final class PackagesViewController: UIViewController {
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    
+    private var itemSize = SubscriptionPlanCollectionViewCell.sizeForAccount(type: .all)
     private lazy var activityManager = ActivityIndicatorManager()
     
     private var plans = [SubscriptionPlan]() {
@@ -93,6 +93,7 @@ extension PackagesViewController: PackagesViewInput {
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan]) {
+        itemSize = SubscriptionPlanCollectionViewCell.sizeForAccount(type: output.getAccountType())
         plans += array
     }
     
@@ -142,7 +143,7 @@ extension PackagesViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeue(cell: SubscriptionPlanCollectionViewCell.self, for: indexPath)
         cell.delegate = self
         cell.indexPath = indexPath
-        cell.configure(with: plans[indexPath.item])
+        cell.configure(with: plans[indexPath.item], accountType: output.getAccountType())
         return cell
     }
 }
@@ -161,10 +162,10 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
 
 // MARK: UICollectionViewDelegateFlowLayout
 extension PackagesViewController: UICollectionViewDelegateFlowLayout {
-}
-
-// MARK: UICollectionViewDelegate
-extension PackagesViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return itemSize
+    }
 }
 
 // MARK: - ActivityIndicator

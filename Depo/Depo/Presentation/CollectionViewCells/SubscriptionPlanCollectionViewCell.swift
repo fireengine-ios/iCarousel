@@ -27,12 +27,21 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak fileprivate var freeButton: UIButton!
     @IBOutlet weak fileprivate var upgradeButton: UIButton!
     @IBOutlet weak fileprivate var cancelButton: UIButton!
+    @IBOutlet weak fileprivate var priceHeightConstraint: NSLayoutConstraint!
     
     let borderWidth: CGFloat = 2
     let cornerRadius: CGFloat = 5
     
     weak var delegate: SubscriptionPlanCellDelegate?
     var indexPath = IndexPath()
+    
+    static func sizeForAccount(type: AccountType) -> CGSize {
+        if type == .all {
+            return CGSize(width: 140, height: 255)
+        } else {
+            return CGSize(width: 140, height: 220)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,9 +57,8 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
 
         checkmarkImageView.tintColor = ColorConstants.blueColor
         
-        renewalDateLabel.isHidden = true
-        storeLabel.isHidden = true
-        storeLabel.text = TextConstants.createStoryEmptyTextError
+        renewalDateLabel.text = ""
+        storeLabel.text = ""
     }
     
     override func layoutSubviews() {
@@ -58,7 +66,7 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         freeButton.layer.cornerRadius = freeButton.bounds.height / 2
     }
     
-    func configure(with plan: SubscriptionPlan) {
+    func configure(with plan: SubscriptionPlan, accountType: AccountType) {
         freeButton.isHidden = true
         upgradeButton.isHidden = true
         cancelButton.isHidden = true
@@ -85,16 +93,21 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         docsCountLabel.text = String(format: TextConstants.usageInfoDocs, plan.docsCount)
         priceLabel.text = plan.priceString
         
-        if let model = plan.model as? SubscriptionPlanBaseResponse, let renewalDate = model.nextRenewalDate {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd MMM yy"
-            renewalDateLabel.text = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(renewalDate.intValue)))
-            renewalDateLabel.isHidden = false
-            
-            if let type = model.type {
-                storeLabel.isHidden = false
-                storeLabel.text = type.description
+        if accountType == .all {
+            if let model = plan.model as? SubscriptionPlanBaseResponse, let renewalDate = model.nextRenewalDate {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "dd MMM yy"
+                renewalDateLabel.text = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(renewalDate.intValue)))
+                
+                if let type = model.type {
+                    storeLabel.text = type.description
+                }
             }
+            priceHeightConstraint.constant = 18
+        } else {
+            renewalDateLabel.isHidden = true
+            storeLabel.isHidden = true
+            priceHeightConstraint.constant = 30
         }
     }
     

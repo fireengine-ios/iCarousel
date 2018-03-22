@@ -12,4 +12,6 @@ protocol PackagesViewOutput {
     func buy(offer: OfferServiceResponse)
     func submit(promocode: String)
     func restorePurchasesPressed()
+    
+    func getAccountType() -> AccountType
 }

@@ -12,7 +12,7 @@ class PackagesPresenter {
     var router: PackagesRouterInput!
     
     var activeSubscriptions: [SubscriptionPlanBaseResponse] = []
-    var accountType = AccountType.all
+    private var accountType = AccountType.all
     
     private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
         if accountType == "TURKCELL" {
@@ -40,6 +40,11 @@ class PackagesPresenter {
 
 // MARK: PackagesViewOutput
 extension PackagesPresenter: PackagesViewOutput {
+    
+    func getAccountType() -> AccountType {
+        return accountType
+    }
+    
     func submit(promocode: String) {
         interactor.submit(promocode: promocode)
     }
