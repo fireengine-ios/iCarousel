@@ -36,7 +36,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func onNextButton() {
-        if (dataSource.selectedItemsArray.count > 0) {
+        if !dataSource.selectedItemsArray.isEmpty {
             startAsyncOperation()
             if let interactor_ = interactor as? UploadFilesSelectionInteractor, let dataSource = dataSource as? ArrayDataSourceForCollectionView {
 
