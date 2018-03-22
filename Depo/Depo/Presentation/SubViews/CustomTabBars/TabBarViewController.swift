@@ -161,11 +161,11 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     }
     
     private func setupTabBarItems() {
-        let items = [("outlineHome", ""),
-                     ("outlinePhotosVideos", ""),
-                     ("", ""),
-                     ("outlineMusic", ""),
-                     ("outlineDocs", "")]
+        let items = [("outlineHome", "", TextConstants.accessibilityHome),
+                     ("outlinePhotosVideos", "", TextConstants.accessibilityPhotosVideos),
+                     ("", "", ""),
+                     ("outlineMusic", "", TextConstants.accessibilityMusic),
+                     ("outlineDocs", "", TextConstants.accessibilityDocuments)]
         
         tabBar.setupItems(withImageToTitleNames: items)
     }

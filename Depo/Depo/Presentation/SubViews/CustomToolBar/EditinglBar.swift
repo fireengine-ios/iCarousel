@@ -59,20 +59,20 @@ enum ElementTypes {
 class EditinglBar: CustomTabBar {
     
     struct PreDetermendTypes { //use super setup method with these
-        static let share = ("ShareButtonIcon", TextConstants.tabBarShareLabel)
-        static let info = ("InfoButtonIcon", TextConstants.tabBarInfoLabel)
-        static let edit = ("EditButtonIcon", TextConstants.tabBarEditeLabel)
-        static let print = ("PrintButtonIcon", TextConstants.tabBarPrintLabel)
-        static let delete = ("DeleteShareButton", TextConstants.tabBarDeleteLabel)
-        static let deleteFaceImage = ("DeleteShareButton", TextConstants.tabBarDeleteLabel)
-        static let removeAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveAlbumLabel)
-        static let move = ("MoveButtonIcon", TextConstants.tabBarMoveLabel)
-        static let addToAlbum = ("MoveButtonIcon", TextConstants.tabBarAddToAlbumLabel)
-        static let makeCover = ("MoveButtonIcon", TextConstants.tabAlbumCoverAlbumLabel)
-        static let removeFromAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel)//from album
-        static let removeFromFaceImageAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel)//from album
-        static let sync = ("tabbarSync", TextConstants.tabBarSyncLabel)
-        static let download = ("downloadTB", TextConstants.tabBarDownloadLabel)
+        static let share = ("ShareButtonIcon", TextConstants.tabBarShareLabel, "")
+        static let info = ("InfoButtonIcon", TextConstants.tabBarInfoLabel, "")
+        static let edit = ("EditButtonIcon", TextConstants.tabBarEditeLabel, "")
+        static let print = ("PrintButtonIcon", TextConstants.tabBarPrintLabel, "")
+        static let delete = ("DeleteShareButton", TextConstants.tabBarDeleteLabel, "")
+        static let deleteFaceImage = ("DeleteShareButton", TextConstants.tabBarDeleteLabel, "")
+        static let removeAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveAlbumLabel, "")
+        static let move = ("MoveButtonIcon", TextConstants.tabBarMoveLabel, "")
+        static let addToAlbum = ("MoveButtonIcon", TextConstants.tabBarAddToAlbumLabel, "")
+        static let makeCover = ("MoveButtonIcon", TextConstants.tabAlbumCoverAlbumLabel, "")
+        static let removeFromAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
+        static let removeFromFaceImageAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
+        static let sync = ("tabbarSync", TextConstants.tabBarSyncLabel, "")
+        static let download = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
     }
     
     private let tabBarHeight: CGFloat = 49

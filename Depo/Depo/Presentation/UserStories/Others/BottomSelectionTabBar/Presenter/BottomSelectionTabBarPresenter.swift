@@ -23,7 +23,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func setupConfig(withConfig config: EditingBarConfig) {
-        var itemTupple: [(String, String)] = []
+        var itemTupple: [(String, String, String)] = []
         for type in config.elementsConfig {
             switch type {
             case .delete:
