@@ -10,17 +10,30 @@ import UIKit
 
 final class ImageColCell: UICollectionViewCell {
     
+    private var urlIdentificator: URL?
+    
     @IBOutlet private weak var photoImageView: UIImageView! {
         didSet {
             photoImageView.backgroundColor = UIColor.lightGray
         }
     }
     
-    func setup(with shareData: ShareData) {
-        ShareDataImageLoader.shared.loadImage(for: photoImageView, with: shareData)
-    }
-    
-    func setup(isCurrentUploading: Bool) {
-        photoImageView.alpha = isCurrentUploading ? 1 : 0.6 /// design constants
+    func config(with shareData: ShareData) {
+        urlIdentificator = shareData.url
+        DispatchQueue.global().async { [weak self] in
+            FileManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
+                if self?.urlIdentificator == shareData.url {
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(_):
+                            self?.photoImageView.setScreenScaledImage(shareData.image)
+                        case .failed(_):
+                            self?.photoImageView.image = #imageLiteral(resourceName: "ImageNoDocuments")
+                        }
+                        self?.photoImageView.backgroundColor = UIColor.white
+                    }
+                }
+            }
+        }
     }
 }

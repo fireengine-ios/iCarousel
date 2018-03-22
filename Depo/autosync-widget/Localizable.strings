@@ -6,8 +6,8 @@
   Copyright © 2018 LifeTech. All rights reserved.
 */
 
-"widgetTopTitleInProgress" = "Photo synchronization is in progress";
-"widgetTopTitleFinished" = "Photos are up-to-date";
-"widgetTopTitleInactive" = "Photo synchronization is inactive";
-"widgetBottomTitleNewerSyncronized" = "never";
-"widgetBottomTitleLastSyncFormat" = "Last upload: %@";
+"WidgetTopTitleInProgress" = "Photo synchronization is in progress";
+"WidgetTopTitleFinished" = "Photos are up-to-date";
+"WidgetTopTitleStoped" = "Photo synchronization is stoped";
+"WidgetBottomTitleNewerSyncronized" = "never";
+"WidgetBottomTitleLastSyncFormat" = "Last upload: %@";

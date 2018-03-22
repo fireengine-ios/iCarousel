@@ -17,7 +17,7 @@ final class DocumentActionCustomizator: NSObject {
         }
     }
     
-    @IBOutlet private weak var messageLabel: UILabel! {
+    @IBOutlet private weak var messageLabel: UILabel!  {
         didSet {
             messageLabel.textColor = ColorConstants.lightText
             messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)

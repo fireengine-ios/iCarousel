@@ -32,7 +32,7 @@ final class UploadQueueService {
         
         let operations: [Operation] = shareDataArray.flatMap { shareData in
             
-            UploadOperation(url: shareData.url, contentType: shareData.contentType, progressHandler: progress, didStartUpload: {
+            return UploadOperation(url: shareData.url, contentType: shareData.contentType, progressHandler: progress, didStartUpload: {
                 didStartUpload?(shareData)
             }, complition: { [weak self] result in
                 

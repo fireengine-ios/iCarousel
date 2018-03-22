@@ -62,7 +62,7 @@ extension FileProviderEnumerator: NSFileProviderEnumerator {
             folderUUID = ""
         }
         
-        fileService.getFiles(folderUUID: folderUUID, page: self.page) { result in
+        fileService.getFiles(folderUUID: folderUUID, page: self.page) { (result) in
             switch result {
             case .success( let newItems):
                 if newItems.isEmpty {

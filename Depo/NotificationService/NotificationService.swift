@@ -29,7 +29,7 @@ class NotificationService: UNNotificationServiceExtension {
             return
         }
         
-        session.downloadTask(with: pictureURL, completionHandler: { tmpPictureLocationURL, response, error in
+        session.downloadTask(with: pictureURL, completionHandler: { (tmpPictureLocationURL, response, error) in
             guard error != nil, let tmpPictureLocationURL = tmpPictureLocationURL, let fileName = response?.url?.lastPathComponent else {
                 contentHandler(bestAttemptContent)
                 return
@@ -53,7 +53,7 @@ class NotificationService: UNNotificationServiceExtension {
     override func serviceExtensionTimeWillExpire() {
         // Called just before the extension will be terminated by the system.
         // Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
-        if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
+        if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
             contentHandler(bestAttemptContent)
         }
     }
