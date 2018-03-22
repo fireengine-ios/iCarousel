@@ -110,6 +110,7 @@ class SyncServiceManager {
     }
     
     func stopSync() {
+        WidgetService.shared.notifyWidgetAbout(status: .stoped)
         stop(photo: true, video: true)
     }
     

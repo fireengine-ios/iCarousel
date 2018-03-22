@@ -17,6 +17,11 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         dataSource.needShowCloudIcon = false
     }
     
+    //Need override because freeAppSpace should not receive notifications about operations on files. Behaviour as on Android
+    override func subscribeDataSource() {
+        
+    }
+    
     override func isArrayDataSource() -> Bool {
         return false
     }
