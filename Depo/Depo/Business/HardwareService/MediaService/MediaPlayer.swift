@@ -216,8 +216,13 @@ final class MediaPlayer: NSObject {
             list.remove(at: i)
             urls.remove(at: i)
             items.remove(at: i)
-            self.shuffleCurrentList()
+            
+            if i < currentIndex {
+                currentIndex -= 1
+            }
         }
+        
+        shuffleCurrentList()
         
         /// check current playing item for delete indexes
         if deleteIndexes.contains(currentIndex) {
@@ -462,7 +467,6 @@ final class MediaPlayer: NSObject {
         for i in 1..<list.count {
             shuffledList.append(list[shuffledIndexes[i]])
         }
-        
     }
     
     @objc func handle(event: UIEvent?) {
