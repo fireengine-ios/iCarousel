@@ -548,7 +548,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             
-            if dataSource.allMediaItems.isEmpty {
+            if dataSource.allObjectIsEmpty() {
                 if let downloadIdex = actionTypes.index(of: .download) {
                     actionTypes.remove(at: downloadIdex)
                 }
