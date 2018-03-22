@@ -67,7 +67,7 @@ extension CoreDataStack {
                 }
             }
         }
-        saveDataForContext(context: context)
+        saveDataForContext(context: context, savedCallBack: nil)
     }
     
     func updateLocalItemSyncStatus(item: Item) {
@@ -96,7 +96,7 @@ extension CoreDataStack {
                 
                 //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
             })
-            self.saveDataForContext(context: self.mainContext)
+            self.saveDataForContext(context: self.mainContext, savedCallBack: nil)
         }
     }
     

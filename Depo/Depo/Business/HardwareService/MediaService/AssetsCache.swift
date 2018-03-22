@@ -15,16 +15,50 @@ class AssetsСache {
     
     private var storage: [String: PHAsset] = [:]
     
-
-    func assets(before oldest: Date) -> [PHAsset] {
+    private var sortedStorage: [PHAsset] {
+        return storage.values.sorted{
+            guard let creationDate1 = $0.creationDate,
+                let creationDate2 = $1.creationDate else {
+                    return false
+            }
+           return creationDate1 > creationDate2
+            
+        }
+    }
+    
+    func assets(before oldest: Date, mediaType: PHAssetMediaType) -> [PHAsset] {
         var assets = [PHAsset]()
         dispatchQueue.sync {
-            assets = storage.values.filter({ (asset) -> Bool in
-                guard let creationDate = asset.creationDate else {
+            assets = sortedStorage.filter({ (asset) -> Bool in
+                guard let creationDate = asset.creationDate, asset.mediaType == mediaType else {
                     return false
                 }
                 
                 return creationDate > oldest
+            })
+        }
+        return assets
+    }
+
+    func assets(beforeDate: Date, afterDate: Date, mediaType: PHAssetMediaType) -> [PHAsset]{
+        return sortedStorage.filter{ (asset) -> Bool in
+            guard let creationDate = asset.creationDate, asset.mediaType == mediaType else {
+                return false
+            }
+            
+            return (creationDate > beforeDate) && (creationDate < afterDate)
+        }
+    }
+    
+    func assets(afterDate: Date, mediaType: PHAssetMediaType) -> [PHAsset] {
+        var assets = [PHAsset]()
+        dispatchQueue.sync {
+            assets = sortedStorage.filter({ (asset) -> Bool in
+                guard let creationDate = asset.creationDate, asset.mediaType == mediaType else {
+                    return false
+                }
+                
+                return creationDate < afterDate
             })
         }
         return assets

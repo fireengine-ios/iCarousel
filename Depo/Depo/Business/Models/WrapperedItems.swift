@@ -144,6 +144,19 @@ enum FileType: Equatable {
         
     }
     
+    var convertedToPHMediaType: PHAssetMediaType {
+        switch self {
+        case .image:
+            return .image
+        case .video:
+            return .video
+        case .audio:
+            return .audio
+        default:
+            return .unknown
+        }
+    }
+    
     var isDocument: Bool {
         return self == .application(.doc) ||
                 self == .application(.txt) ||

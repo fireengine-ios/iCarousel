@@ -92,6 +92,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     }
                     
                     guard !isICloud, let url = url, let assetName = asset.originalFilename  else {
+                        CoreDataStack.default.originalAssetsBeingAppended.remove(identifier: asset.originalFilename ?? "")
                         success()
                         return
                     }

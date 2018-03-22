@@ -43,9 +43,6 @@ class CoreDataStack: NSObject {
         
         return coordinator
     }()
-    
-//    var appendingItemsFinishBlock: AppendingLocaclItemsFinishCallback?
-    var inProcessAppendingLocalFiles = false
 
     var mainContext: NSManagedObjectContext
     
@@ -57,10 +54,13 @@ class CoreDataStack: NSObject {
     
     var backgroundContext: NSManagedObjectContext
     
-    let privateQueue = DispatchQueue(label: "com.lifebox.CoreDataStack")//, attributes: .concurrent)//DispatchQueue(label: "com.lifebox.CoreDataStack")
-//    let contextSavingQueue = DispatchQueue(label: "com.lifebox.CoreDataStackSaving")
+    let privateQueue = DispatchQueue(label: "com.lifebox.CoreDataStack")
     
     var pageAppendedCallBack: AppendingLocalItemsPageAppended?
+    
+    var inProcessAppendingLocalFiles = false
+    
+    var originalAssetsBeingAppended = AssetsСache()
     
     override init() {
         
@@ -122,8 +122,8 @@ class CoreDataStack: NSObject {
     }
     
     private func deleteObjects(fromFetch fetchRequest: NSFetchRequest<NSFetchRequestResult>) {
-        let context = backgroundContext
-        backgroundContext.perform { [weak self] in
+        let context = newChildBackgroundContext
+        context.perform { [weak self] in
             guard let fetchResult = try? context.fetch(fetchRequest),
                 let unwrapedObjects = fetchResult as? [NSManagedObject],
                 unwrapedObjects.count > 0 else {
@@ -133,21 +133,24 @@ class CoreDataStack: NSObject {
             for object in unwrapedObjects {
                 context.delete(object)
             }
-            self?.saveDataForContext(context: context, saveAndWait: true)
-            debugPrint("Data base should be cleared any moment now")
+            self?.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
+                debugPrint("Data base deleted objects")
+            })
+            
         }
     }
     
-    func saveMainContext() {
+    func saveMainContext(savedMainCallBack: VoidHandler?) {
         mainContext.processPendingChanges()
         if mainContext.hasChanges {
             mainContext.performAndWait{
                 do {
                     log.debug("mainContext.save()()")
                     try mainContext.save()
-//                    if !self.inProcessAppendingLocalFiles {
-//                        //TODO: some NOTIFICATION OR ACTUAL finished block
-//                    }
+                    
+                    privateQueue.async {
+                        savedMainCallBack?()
+                    }
                 } catch {
                     log.debug("Error saving context mainContext.save()()")
                     print("Error saving context ___ ")
@@ -156,7 +159,8 @@ class CoreDataStack: NSObject {
         }
     }
     
-    @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true) {
+    @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true,
+                                  savedCallBack: VoidHandler?) {
 
         log.debug("saveDataForContext()")
         let saveBlock: VoidHandler = { [weak self] in
@@ -166,16 +170,15 @@ class CoreDataStack: NSObject {
             do {
                 log.debug("saveDataForContext() save()")
                 try context.save()
-//                if !self.inProcessAppendingLocalFiles {
-//                    //TODO: some NOTIFICATION OR ACTUAL finished block
-//                }
             } catch {
                 log.debug("saveDataForContext() save() Error saving contex")
                 print("Error saving context ___ ")
             }
             
             if context.parent == self.mainContext, context != self.mainContext {
-                self.saveMainContext()
+                self.saveMainContext(savedMainCallBack: {
+                    savedCallBack?()
+                })
                 return
             }
         }
