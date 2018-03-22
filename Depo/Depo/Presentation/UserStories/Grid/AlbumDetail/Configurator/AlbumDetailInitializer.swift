@@ -36,7 +36,7 @@ class AlbumDetailModuleInitializer: NSObject {
             availableSortTypes: baseSortTypes,
             defaultSortType: .TimeNewOld,
             availableFilter: false,
-            showGridListButton: true
+            showGridListButton: false
         )
         
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid), .localStatus(.nonLocal)],
