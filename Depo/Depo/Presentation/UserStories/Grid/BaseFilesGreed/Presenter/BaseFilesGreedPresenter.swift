@@ -387,7 +387,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func updateThreeDotsButton() {
-        view.setThreeDotsMenu(active: !needShowNoFileView())
+        if !(getRemoteItemsService() is AlbumDetailService) {
+            view.setThreeDotsMenu(active: !needShowNoFileView())
+        }
     }
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
