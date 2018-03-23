@@ -86,9 +86,9 @@ class AssetsСache {
     
     func assetBy(identifier: String) -> PHAsset? {
         var assets: PHAsset?
-        dispatchQueue.sync {
+//        dispatchQueue.sync {
             assets = storage[identifier]
-        }
+//        }
         return assets
     }
     
