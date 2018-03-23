@@ -312,6 +312,10 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
 
     func restorePurchases() {
+        guard !sendReciept() else {
+            return
+        }
+        
         iapManager.restorePurchases { [weak self] result in
             switch result {
             case .success(let productIds):
@@ -331,11 +335,32 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
     }
     
-    /// maybe will be need
-//    func sendReciept() {
-//        guard let receipt = iapManager.receipt else { return }
-//        offersService.validateApplePurchase(with: receipt, productId: nil, success: nil) { _ in }
-//    }
+    private func sendReciept() -> Bool {
+        guard let receipt = iapManager.receipt else {
+            return false
+        }
+        
+        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+            guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                return
+            }
+            
+            if status == .restored || status == .success {
+                self?.getActiveSubscriptions()
+            } else {
+                DispatchQueue.main.async {
+                    self?.output.failedUsage(with: ErrorResponse.string(status.description))
+                }
+            }
+            
+        }, fail: { [weak self] errorResponse in
+            DispatchQueue.main.async {
+                self?.output.failedUsage(with: errorResponse)
+            }
+        })
+        
+        return true
+    }
     
     private func getCurrency(for accountType: AccountType) -> String {
         switch accountType {
