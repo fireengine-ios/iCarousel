@@ -22,20 +22,16 @@ class CustomTabBar: UITabBar {
     func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple]) {
         tintColor = ColorConstants.blueColor
         
-        var items: [CustomTabBarItem] = []
-
-        names.forEach { item in
-            let tabBarItem: CustomTabBarItem = CustomTabBarItem(title: item.title.isEmpty ? nil : item.title,
-                                                               image: UIImage(named: item.imageName),
-                                                               tag: 0)
+        let items: [CustomTabBarItem] = names.map { item in
             
+            let tabBarItem = CustomTabBarItem(title: item.title, image: UIImage(named: item.imageName), tag: 0)
             tabBarItem.isAccessibilityElement = true
 
-            if item.accessibilityTitle.count > 0 {
+            if !item.accessibilityTitle.isEmpty {
                 tabBarItem.accessibilityLabel = item.accessibilityTitle
             }
         
-            items.append(tabBarItem)
+            return tabBarItem
         }
         
         items[2].isEnabled = false
