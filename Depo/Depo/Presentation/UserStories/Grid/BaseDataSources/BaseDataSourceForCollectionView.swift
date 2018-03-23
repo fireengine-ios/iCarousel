@@ -371,7 +371,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         let newItemCreationDate = isMetaDate ? newItem.metaDate : newItem.creationDate!
         
         if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
-            lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
+            lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth(),
+            !allItems.isEmpty{
             
             allItems[allItems.count - 1].append(newItem)
             

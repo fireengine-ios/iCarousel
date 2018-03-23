@@ -83,9 +83,6 @@ extension CoreDataStack {
                                         notAllowedLocalIDs: [String],
                                         filesCallBack: @escaping LocalFilesCallBack) {
         
-//        var totalILocaltemsNumForRemotePage: Int = 0
-        
-        
         let requestContext = newChildBackgroundContext
         
         let request = NSFetchRequest<MediaItem>()
@@ -101,274 +98,104 @@ extension CoreDataStack {
         let compundedPredicate: NSCompoundPredicate
         compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:[fileTypePredicate, cahchePredicate])
         
-        
-        
+
         request.predicate = compundedPredicate
-        //        debugPrint("!LOCAL FILES BEING REQUESTED, total items asset is \(totalILocaltemsNumForRemotePage)")
         guard let localDataBaseItems = try? requestContext.fetch(request) else {
             filesCallBack([])
             return
         }
         
+        let arrayLocalItems = NSArray(array: localDataBaseItems)
         
         
         if pageRemoteItems.isEmpty {
-            
-//            compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:[fileTypePredicate, cahchePredicate])
-            ///??
+            if inProcessAppendingLocalFiles {
+            //local pagination here
+            }
             
         } else if firstPage {
-            guard let lastRemoteItem = pageRemoteItems.last else {
+            guard let lastRemoteItem = pageRemoteItems.last,
+            let localFiltered = arrayLocalItems.filtered(using: getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem)) as? [MediaItem] else {
                 filesCallBack([])
                 return
             }
-          
-//            sortingPredicate =  getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem)
-//            compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:[fileTypePredicate, cahchePredicate, sortingPredicate])
-//            if inProcessAppendingLocalFiles {
-//                switch sortType {
-//                case .metaDataTimeDown, .metaDataTimeUp,
-//                     .timeDown, .timeUp,
-//                     .timeDownWithoutSection, .timeUpWithoutSection:
-//
-////                    LocalMediaStorage.default.assetsCache.assets(before: <#T##Date#>)
-//
-//                    totalILocaltemsNumForRemotePage = originalAssetsBeingAppended.assets(before: lastRemoteItem.metaDate, mediaType: filesType.convertedToPHMediaType).count
-//                default:
-//                    break
-//                }
-//            }
+            
+            if inProcessAppendingLocalFiles {
+                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue as? Date,
+                    lastRemoteItem.metaDate > lastAppendedToDBItemDate {
+                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+                } else if localFiltered.count >= 100 {
+                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+                } else {
+                    pageAppendedCallBack = { [weak self] localItems in
+                        guard let `self` = self else {
+                            filesCallBack([])
+                            return
+                        }
+                        self.pageAppendedCallBack = nil
+                        self.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, paginationEnd: paginationEnd, firstPage: firstPage, pageRemoteItems: pageRemoteItems, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, filesCallBack: filesCallBack)
+                    }
+                }
+            } else {
+                filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+            }
             
         } else if pageRemoteItems.count == 1,
             paginationEnd,
             let lastItem = pageRemoteItems.last {
-            
-//            sortingPredicate = getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)
-//            compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:[fileTypePredicate, cahchePredicate, sortingPredicate])
-            
-//            if inProcessAppendingLocalFiles {
-//                switch sortType {
-//                case .metaDataTimeDown, .metaDataTimeUp,
-//                     .timeDown, .timeUp,
-//                     .timeDownWithoutSection, .timeUpWithoutSection:
-//                    totalILocaltemsNumForRemotePage = originalAssetsBeingAppended.assets(afterDate: lastItem.metaDate, mediaType: filesType.convertedToPHMediaType).count
-//                default:
-//                    break
-//                }
-//            }
-            
+            debugPrint("!LOCAL END PAGE")
+            guard let localFiltered = arrayLocalItems.filtered(using: getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)) as? [MediaItem] else {
+                filesCallBack([])
+                return
+            }
+ 
+            if inProcessAppendingLocalFiles {
+                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue,
+                     lastItem.metaDate < lastAppendedToDBItemDate as Date {
+                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+                } else {
+                    pageAppendedCallBack = { [weak self] localItems in
+                        guard let `self` = self else {
+                            filesCallBack([])
+                            return
+                        }
+                        self.pageAppendedCallBack = nil
+                        self.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, paginationEnd: paginationEnd, firstPage: firstPage, pageRemoteItems: pageRemoteItems, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, filesCallBack: filesCallBack)
+                    }
+                }
+            } else {
+                filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+            }
         } else {
-            guard let lastRemoteItem = pageRemoteItems.last, let firstItem = pageRemoteItems.first else {
+            guard let lastRemoteItem = pageRemoteItems.last,
+                let firstRemoteItem = pageRemoteItems.first,
+            let localFiltered = arrayLocalItems.filtered(using: getSortingPredicate(sortType: sortType, firstItem: firstRemoteItem, lastItem: lastRemoteItem)) as? [MediaItem] else {
                 filesCallBack([])
                 return
             }
             
-//            sortingPredicate = getSortingPredicate(sortType: sortType, firstItem: firstItem, lastItem: lastRemoteItem)
-//            compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:[fileTypePredicate, cahchePredicate, sortingPredicate])
-            
-//            if inProcessAppendingLocalFiles {
-//                switch sortType {
-//                case .metaDataTimeDown, .metaDataTimeUp,
-//                     .timeDown, .timeUp,
-//                     .timeDownWithoutSection, .timeUpWithoutSection:
-//
-//
-//                    totalILocaltemsNumForRemotePage = originalAssetsBeingAppended.assets(beforeDate: lastRemoteItem.metaDate, afterDate: firstItem.metaDate, mediaType: filesType.convertedToPHMediaType).count
-//
-//                default:
-//                    break
-//                }
-//            }
-            
-        }
-//        request.predicate = compundedPredicate
-//        debugPrint("!LOCAL FILES BEING REQUESTED, total items asset is \(totalILocaltemsNumForRemotePage)")
-//        guard let localDataBaseItems = try? requestContext.fetch(request) else {
-//            filesCallBack([])
-//            return
-//        }
-
-        
-//        if inProcessAppendingLocalFiles,
-//            localItems.count >= totalILocaltemsNumForRemotePage {
-//
-//            debugPrint("!LOCAL CALLBACK")
-//            filesCallBack(localItems.map{return WrapData(mediaItem: $0)})
-//
-//        }
-//        else
-        
-//        if  inProcessAppendingLocalFiles, localDataBaseItems.count >= 100 {
-//            debugPrint("!LOCAL CALLBACK MORE THEN 100")
-//            filesCallBack(localDataBaseItems.map{return WrapData(mediaItem: $0)})
-//
-//        }
-//        else {
-//            pageAppendedCallBack = { [weak self] localItems in
-//                guard let `self` = self else {
-//                    filesCallBack([])
-//                    return
-//                }
-//                self.pageAppendedCallBack = nil
-//                if self.inProcessAppendingLocalFiles,
-//                    let firstAppendedLocal = localItems.first,
-//                    let lastRemote = pageRemoteItems.last,
-//                    firstAppendedLocal.metaDate > lastRemote.metaDate {
-//                    self.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, paginationEnd: paginationEnd, firstPage: firstPage, pageRemoteItems: pageRemoteItems, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, filesCallBack: filesCallBack)
-//                } else {
-//                    debugPrint("!LOCAL CALLBACK ITEM COUNT is \(localDataBaseItems.count)")
-//                    filesCallBack(localDataBaseItems.map{return WrapData(mediaItem: $0)})
-//                }
-//
-//
-//            }
-        }
-  
-    }
-    
-    func OLDgetLocalFilesForPhotoVideoPage(filesType: FileType, sortType: SortedRules,
-                       pageRemoteItems: [Item], paginationEnd: Bool,
-                       firstPage: Bool,
-                       filesCallBack: @escaping LocalFilesCallBack) {
-        
-        log.debug("getLocalFilesForPhotoVideoPage()")
-        let requestContext = newChildBackgroundContext
-        
-        
-        let request = NSFetchRequest<MediaItem>()
-        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
-                                                    in: requestContext)
-        
-        let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
-        
-        if pageRemoteItems.isEmpty {
-            if let localItems = try? requestContext.fetch(request),
-                (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
-                
-                log.debug("pageRemoteItems.isEmpty let localItems = try? backgroundContext.fetch(request)")
-                let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
-                filesCallBack(wrapedLocalItems)
-            } else {
-               
-                pageAppendedCallBack = { [weak self] localItems in
-//                    log.debug("pageRemoteItems.isEmpty pageAppendedCallBack")
-                    filesCallBack([])
-                    self?.pageAppendedCallBack = nil
-//                    self?.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, pageRemoteItems: pageRemoteItems, paginationEnd: paginationEnd, firstPage: firstPage, filesCallBack: filesCallBack)
-                }
-            }
-            return
-        } else
-            /*-- Last Page, Pagination Ended, LastItem not nill*/
-            
-            if pageRemoteItems.count == 1,
-            paginationEnd, //if there same md5 but later - will be error
-            let lastItem = pageRemoteItems.last {
-            
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)])
-            
-            if let localItems = try? requestContext.fetch(request) {
-                log.debug("pageRemoteItems.count == 1, paginationEnd ")
-                if lastItem.isLocalItem {
-                    /*---Last item is Local*/
-                    if (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
-                        
-                        log.debug("pageRemoteItems.count == 1, paginationEnd lastItem.isLocalItem localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles")
-                        let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
-                        filesCallBack(wrapedLocalItems)
-                    } else {
-                        pageAppendedCallBack = { [weak self] localItems in
-                            
-                            log.debug("pageRemoteItems.count == 1, paginationEnd pageAppendedCallBack")
-                            filesCallBack([])
-                            self?.pageAppendedCallBack = nil
-//                            self?.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, pageRemoteItems: pageRemoteItems, paginationEnd: paginationEnd, firstPage: firstPage, filesCallBack: filesCallBack)
-                        }
-                    }
-     
+            debugPrint("!LOCAL MIDDLE")
+            if inProcessAppendingLocalFiles {
+                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue as? Date ,
+                (firstRemoteItem.metaDate > lastAppendedToDBItemDate/* || localFiltered.count > 100*/){
+                    debugPrint("!LOCAL MIDDLE files founded \(localFiltered.count), original count \(arrayLocalItems.count)")
+                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
                 } else {
-                     /*---Last item is Remote*/
-                    log.info("pageRemoteItems.count == 1, paginationEnd not lastItem.isLocalItem ")
-                    log.debug("pageRemoteItems.count == 1, paginationEnd not lastItem.isLocalItem ")
-                    let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
-                    filesCallBack(wrapedLocalItems)
-                }
-            }
-            
-            return
-        } else
-        /* --- FIST PAGE*/
-                if firstPage {
-                    
-                    log.debug("firstPage ")
-                    if let lastRemoteItem = pageRemoteItems.last {
-                        
-                        log.debug("firstPage lastRemoteItem")
-                        var md5s = [String]()
-                        var uuids = [String]()
-                        pageRemoteItems.forEach{
-                            md5s.append($0.md5)
-                            let splitedUuid = $0.uuid.split(separator: "~")
-                            if let localID = splitedUuid.first {
-                                uuids.append(String(localID))
-                            }
+                    pageAppendedCallBack = { [weak self] localItems in
+                        guard let `self` = self else {
+                            filesCallBack([])
+                            return
                         }
-                        
-                        
-                        let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR localFileID IN %@)", md5s, uuids)
-                        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem), basePredicateString])
-                        if let localItems = try? requestContext.fetch(request) {
-                            let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
-                            filesCallBack(wrapedLocalItems)
-                        }
-                        
+                        self.pageAppendedCallBack = nil
+                        self.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, paginationEnd: paginationEnd, firstPage: firstPage, pageRemoteItems: pageRemoteItems, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, filesCallBack: filesCallBack)
                     }
-                    return
-                    
-        }
-
-        var md5s = [String]()
-        var uuids = [String]()
-        pageRemoteItems.forEach{
-            md5s.append($0.md5)
-            let splitedUuid = $0.uuid.split(separator: "~")
-            if let localID = splitedUuid.first {
-                uuids.append(String(localID))
+                }
+            } else {
+                filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
             }
         }
-
-        let basePredicateString = NSPredicate(format: "NOT (md5Value IN %@ OR localFileID IN %@)", md5s, uuids)
-        
-        var datePredicate = NSPredicate()
-        
-        if let lastRemoteItem = pageRemoteItems.last, let firstItem = pageRemoteItems.first {
-            datePredicate = getSortingPredicate(sortType: sortType, firstItem: firstItem, lastItem: lastRemoteItem)
-        }
-        
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [basePredicateString, fileTypePredicate, datePredicate])
-        
-    
-        
-        if let localItems = try? requestContext.fetch(request), (localItems.count >= NumericConstants.numberOfLocalFilesPage || !inProcessAppendingLocalFiles) {
-            log.info("let localItems = try? backgroundContext.fetch(request)")
-            log.debug("let localItems = try? backgroundContext.fetch(request) ")
-            let wrapedLocalItems = localItems.map{return WrapData(mediaItem: $0)}
-            filesCallBack(wrapedLocalItems)
-        } else {
-            pageAppendedCallBack = { [weak self] localItems in
-                log.info("let localItems = try? backgroundContext.fetch(request) pageAppendedCallBack")
-                log.debug("let localItems = try? backgroundContext.fetch(request)  pageAppendedCallBack")
-//                debugPrint("callback")
-                filesCallBack([])
-                self?.pageAppendedCallBack = nil
-//                self?.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, pageRemoteItems: pageRemoteItems, paginationEnd: paginationEnd, firstPage: firstPage, filesCallBack: filesCallBack)
-            }
-            //we realize finishing or progress build here
-        }
-
     }
     
-//    private func perfor
     
     private func getSortingPredicate(sortType: SortedRules, firstItem: Item,  lastItem: Item) -> NSPredicate {
         switch sortType {
