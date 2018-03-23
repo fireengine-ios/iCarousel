@@ -55,6 +55,7 @@ enum ElementTypes {
     case completelyDeleteAlbums
 }
 
+typealias AnimationBlock = () -> Void
 
 class EditinglBar: CustomTabBar {
     
@@ -80,6 +81,7 @@ class EditinglBar: CustomTabBar {
     private let originalY: CGFloat = -49
     private let originalX: CGFloat = 0
     
+    private var animationsArray = [AnimationBlock]()
 
     // MARK: -
     
@@ -96,32 +98,16 @@ class EditinglBar: CustomTabBar {
         isTranslucent = false
     }
     
+    deinit{
+        animationsArray.removeAll()
+    }
+    
     func show(animated: Bool = true, onView sourceView: UIView) {
-        if superview != nil {
-            return
-        }
-        sourceView.addSubview(self)
-        sourceView.bringSubview(toFront: self)
-        let sourceViewSize = sourceView.frame.size
-        frame = CGRect(x: originalX, y: sourceViewSize.height - originalY, width: sourceViewSize.width, height: tabBarHeight)
-        if animated {
-            animateAppearance(with: sourceViewSize.height - tabBarHeight, completionBlock: nil)
-        } else {
-            frame.origin = CGPoint(x: 0, y: sourceViewSize.height - tabBarHeight)
-        }
-        
+        animationWithBlock(needShow: true, withAnimation: animated, onView: sourceView)
     }
     
     func dismiss(animated: Bool = true) {
-        if animated {
-            animateAppearance(with: frame.origin.y - originalY, completionBlock: {
-                self.removeFromSuperview()
-            })
-        } else {
-            self.frame.origin = CGPoint(x: 0, y: frame.origin.y - originalY)
-            self.removeFromSuperview()
-        }
-        
+        animationWithBlock(needShow: false, withAnimation: animated)
     }
     
     private func animateAppearance(with newY: CGFloat, completionBlock: (() -> Void)?) {
@@ -130,6 +116,74 @@ class EditinglBar: CustomTabBar {
         }, completion: { _ in
             completionBlock?()
         })
+    }
+    
+    private func animationWithBlock(needShow: Bool, withAnimation: Bool, onView: UIView? = nil) {
+        let animationBlock : AnimationBlock = ({ [weak self, weak onView] in
+            guard let `self` = self else {
+                return
+            }
+            
+            if needShow {
+                guard let sourceView = onView else{
+                    self.nextAnimation()
+                    return
+                }
+                
+                if self.superview != nil {
+                    self.nextAnimation()
+                    return
+                }
+                
+                sourceView.addSubview(self)
+                sourceView.bringSubview(toFront: self)
+                let sourceViewSize = sourceView.frame.size
+                self.frame = CGRect(x: self.originalX, y: sourceViewSize.height - self.originalY, width: sourceViewSize.width, height: self.tabBarHeight)
+                if withAnimation {
+                    self.animateAppearance(with: sourceViewSize.height - self.tabBarHeight, completionBlock: { [weak self] in
+                        guard let `self` = self else {
+                            return
+                        }
+                        
+                        self.nextAnimation()
+                    })
+                } else {
+                    self.frame.origin = CGPoint(x: 0, y: sourceViewSize.height - self.tabBarHeight)
+                    self.nextAnimation()
+                }
+            }else {
+                if withAnimation {
+                    self.animateAppearance(with: self.frame.origin.y - self.originalY, completionBlock: { [weak self] in
+                        guard let `self` = self else {
+                            return
+                        }
+                        
+                        self.removeFromSuperview()
+                        self.nextAnimation()
+                    })
+                } else {
+                    self.frame.origin = CGPoint(x: 0, y: self.frame.origin.y - self.originalY)
+                    self.removeFromSuperview()
+                    self.nextAnimation()
+                }
+            }
+        })
+        
+        animationsArray.append(animationBlock)
+        if animationsArray.count == 1{
+            animationBlock()
+        }
+    }
+    
+    private func nextAnimation() {
+        if animationsArray.count > 1 {
+            if let lastBlock = animationsArray.last{
+                animationsArray = [lastBlock]
+                lastBlock()
+            }
+        }else{
+            animationsArray.removeAll()
+        }
     }
     
     override func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple]) {

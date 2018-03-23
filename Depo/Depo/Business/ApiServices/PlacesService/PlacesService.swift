@@ -63,7 +63,7 @@ final class PlacesItemsService: RemoteItemsService {
         let param = PlacesPageParameters(pageSize: requestSize, pageNumber: currentPage)
 
         service.getPlacesPage(param: param, success: { [weak self] response in
-            if let response = response as? PlacesPageResponse, !response.list.isEmpty {
+            if let response = response as? PlacesPageResponse {
                 success?(response.list.map({ PlacesItem(response: $0) }))
                 self?.currentPage += 1
             } else {
