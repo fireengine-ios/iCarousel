@@ -8,6 +8,7 @@
 
 import Foundation
 import Photos
+import JDStatusBarNotification
 
 struct MetaAssetInfo {
     var asset: PHAsset
@@ -66,8 +67,12 @@ extension CoreDataStack {
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
             return
         }
+        JDStatusBarNotification.show(withStatus: "LOCAL FILES BEING POCCESSED", styleName: "JDStatusBarStyleWarning")//(withStatus: "LOCAL FILES BEING POCCESSED")
+        JDStatusBarNotification.showActivityIndicator(true, indicatorStyle: .gray)
         print("All local files started  \((start)) seconds")
         save(items: notSaved, context: backgroundContext) { [weak self] in
+            JDStatusBarNotification.show(withStatus: "ALL DONE", styleName: "JDStatusBarStyleSuccess")
+            JDStatusBarNotification.dismiss(animated: true)
             self?.originalAssetsBeingAppended.dropAll()///tempo assets
             print("All local files added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false

@@ -21,7 +21,7 @@ def core_pods
   pod 'GoogleConversionTracking'
   pod 'Adjust'
   #pod 'ActiveLabel'
-
+  pod 'JDStatusBarNotification'
 
 
   #Keyboard

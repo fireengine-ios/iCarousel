@@ -13,3 +13,4 @@
 #import "CropySDK.h"
 #import "CRYConfiguration.h"
 
+#import <JDStatusBarNotification/JDStatusBarNotification.h>

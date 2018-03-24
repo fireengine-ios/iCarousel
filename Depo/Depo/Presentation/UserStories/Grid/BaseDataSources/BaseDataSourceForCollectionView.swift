@@ -492,6 +492,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         collectionView.delegate = self
         
         registerHeaders()
+        registerFooters()
         registerCells()
     }
     
@@ -523,6 +524,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
         
+    }
+    
+    private func registerFooters() {
+        let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter,
+                              bundle: nil)
+        collectionView?.register(headerNib,
+                                 forSupplementaryViewOfKind: UICollectionElementKindSectionFooter  ,
+                                 withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter)
     }
     
     func setPreferedCellReUseID(reUseID: String?){
@@ -986,6 +995,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return CGSize(width: collectionView.contentSize.width, height: h)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        let h: CGFloat = isPaginationDidEnd ? 0 : 50
+        return CGSize(width: collectionView.contentSize.width, height: h)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
@@ -1007,7 +1021,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             headers.insert(textHeader)
             return headerView
-            
+        case UICollectionElementKindSectionFooter:
+            if indexPath.section == allItems.count - 1, !isPaginationDidEnd,
+                 let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter, for: indexPath) as? CollectionViewSpinnerFooter
+                {
+                footerView.startSpinner()
+                return footerView
+                
+            } else {
+                return UICollectionReusableView()
+            }
         default:
             assert(false, "Unexpected element kind")
             return UICollectionReusableView()
