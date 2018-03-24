@@ -179,14 +179,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 var lastRemote = originalItemsArray
                 if originalItemsArray.isEmpty, let lastItemFromPreviousPage = allMediaItems.last {
-                    lastRemote = [lastItemFromPreviousPage]// all§MediaItems//
+                    lastRemote = [lastItemFromPreviousPage]
                 }
                 let isFirstPage = (pageNum == 1)
-                
-                if isPaginationDidEnd {
-                    debugPrint("LastPage")
-                }
-//                allRemoteItems
                 
                 var md5s = [String]()
                 var localIDs = [String]()
@@ -210,7 +205,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             return
                         }
                         log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage \(localItems.count)")
-                        log.info("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage \(localItems.count)")
+    
                         if localItems.count == 0 {
                             localFileasAppendedCallback(originalItemsArray)
                             return
@@ -238,7 +233,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         
                         localFileasAppendedCallback(tempoArray)
                         log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage page items \(tempoArray.count)")
-                        log.info("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage page items \(tempoArray.count)")
                         debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
                         
                 })
