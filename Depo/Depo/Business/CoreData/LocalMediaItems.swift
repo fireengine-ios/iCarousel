@@ -128,7 +128,10 @@ extension CoreDataStack {
                     filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
                 } else {
                     pageAppendedCallBack = { [weak self] localItems in
-                        guard let `self` = self else {
+                        guard let `self` = self,
+                            let lastAppendedToDBItemDate = localItems.last?.metaDate,
+                            lastRemoteItem.metaDate < lastAppendedToDBItemDate
+                            else {
                             filesCallBack([])
                             return
                         }
@@ -155,7 +158,10 @@ extension CoreDataStack {
                     filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
                 } else {
                     pageAppendedCallBack = { [weak self] localItems in
-                        guard let `self` = self else {
+                        guard let `self` = self,
+                            let lastAppendedToDBItemDate = localItems.last?.metaDate,
+                            lastItem.metaDate > lastAppendedToDBItemDate
+                            else {
                             filesCallBack([])
                             return
                         }
@@ -177,12 +183,15 @@ extension CoreDataStack {
             debugPrint("!LOCAL MIDDLE")
             if inProcessAppendingLocalFiles {
                 if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue as? Date ,
-                (firstRemoteItem.metaDate > lastAppendedToDBItemDate/* || localFiltered.count > 100*/){
+                firstRemoteItem.metaDate > lastAppendedToDBItemDate{
                     debugPrint("!LOCAL MIDDLE files founded \(localFiltered.count), original count \(arrayLocalItems.count)")
                     filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
                 } else {
                     pageAppendedCallBack = { [weak self] localItems in
-                        guard let `self` = self else {
+                        guard let `self` = self,
+                            let lastAppendedToDBItemDate = localItems.last?.metaDate,
+                            firstRemoteItem.metaDate < lastAppendedToDBItemDate
+                             else {
                             filesCallBack([])
                             return
                         }
