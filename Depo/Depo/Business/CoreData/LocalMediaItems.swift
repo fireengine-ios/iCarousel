@@ -109,13 +109,19 @@ extension CoreDataStack {
         
         
         if pageRemoteItems.isEmpty {
+            //
+            filesCallBack([])
+            //
             if inProcessAppendingLocalFiles {
             //local pagination here
             }
             
         } else if firstPage {
+            debugPrint("!LOCAL FIRST PAGE")
+            
             guard let lastRemoteItem = pageRemoteItems.last,
-            let localFiltered = arrayLocalItems.filtered(using: getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem)) as? [MediaItem] else {
+            let localFiltered = arrayLocalItems.filtered(using: getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem)) as? [MediaItem],
+            !originalAssetsBeingAppended.assets(before: lastRemoteItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty else {
                 filesCallBack([])
                 return
             }
@@ -147,7 +153,8 @@ extension CoreDataStack {
             paginationEnd,
             let lastItem = pageRemoteItems.last {
             debugPrint("!LOCAL END PAGE")
-            guard let localFiltered = arrayLocalItems.filtered(using: getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)) as? [MediaItem] else {
+            guard let localFiltered = arrayLocalItems.filtered(using: getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)) as? [MediaItem],
+                !originalAssetsBeingAppended.assets(afterDate: lastItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty else {
                 filesCallBack([])
                 return
             }
@@ -155,6 +162,8 @@ extension CoreDataStack {
             if inProcessAppendingLocalFiles {
                 if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue,
                      lastItem.metaDate < lastAppendedToDBItemDate as Date {
+                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+                } else if localFiltered.count >= 100 {
                     filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
                 } else {
                     pageAppendedCallBack = { [weak self] localItems in
@@ -175,14 +184,15 @@ extension CoreDataStack {
         } else {
             guard let lastRemoteItem = pageRemoteItems.last,
                 let firstRemoteItem = pageRemoteItems.first,
-            let localFiltered = arrayLocalItems.filtered(using: getSortingPredicate(sortType: sortType, firstItem: firstRemoteItem, lastItem: lastRemoteItem)) as? [MediaItem] else {
+                let localFiltered = arrayLocalItems.filtered(using: getSortingPredicate(sortType: sortType, firstItem: firstRemoteItem, lastItem: lastRemoteItem)) as? [MediaItem],
+                !originalAssetsBeingAppended.assets(beforeDate: lastRemoteItem.metaDate, afterDate: firstRemoteItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty else {
                 filesCallBack([])
                 return
             }
             
             debugPrint("!LOCAL MIDDLE")
             if inProcessAppendingLocalFiles {
-                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue as? Date ,
+                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue as? Date,
                 firstRemoteItem.metaDate > lastAppendedToDBItemDate{
                     debugPrint("!LOCAL MIDDLE files founded \(localFiltered.count), original count \(arrayLocalItems.count)")
                     filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
