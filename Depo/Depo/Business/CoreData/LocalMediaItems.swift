@@ -303,7 +303,7 @@ extension CoreDataStack {
         }
 
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
-        privateQueue.async { [weak self] in
+//        privateQueue.async { [weak self] in
         
         LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] assetsInfo in
             context.perform { [weak self] in
@@ -336,7 +336,7 @@ extension CoreDataStack {
                 
             }
         })
-        }
+//        }
     }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
