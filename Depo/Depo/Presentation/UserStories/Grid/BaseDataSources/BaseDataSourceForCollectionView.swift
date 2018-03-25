@@ -990,7 +990,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let h: CGFloat = isPaginationDidEnd ? 0 : 50
+        let isLastSection = (section == allItems.count - 1)
+        
+        let h: CGFloat// = (isPaginationDidEnd && !isLastSection) ? 0 : 50
+        if !isLastSection {
+            h = 0
+        } else if isPaginationDidEnd {
+            h = 0
+        } else  {
+            h = 50
+        }
         return CGSize(width: collectionView.contentSize.width, height: h)
     }
     
@@ -1023,7 +1032,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return footerView
                 
             } else {
-                return UICollectionReusableView()
+                return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter, for: indexPath)
             }
         default:
             assert(false, "Unexpected element kind")
