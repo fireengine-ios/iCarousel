@@ -26,7 +26,9 @@ final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
     @objc private func actionCloseButton(_ sender: UIBarButtonItem) {
         let isUpped = attemptsCounter.up(limitHandler: { [weak self] in
             self?.view.endEditing(true)
-            AppConfigurator.logout()
+            self?.dismiss(animated: true) { 
+                AppConfigurator.logout()
+            }
         })
         
         if isUpped {
