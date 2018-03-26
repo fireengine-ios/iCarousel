@@ -56,12 +56,12 @@ class ItemSyncServiceImpl: ItemSyncService {
     func start(newItems: Bool) {
         log.debug("ItemSyncServiceImpl start")
         
-        guard !(newItems && self.status.isContained(in: [.prepairing, .executing])) else {
-            self.appendNewUnsyncedItems()
+        guard !(newItems && status.isContained(in: [.prepairing, .executing])) else {
+            appendNewUnsyncedItems()
             return
         }
         
-        self.sync()
+        sync()
     }
     
     func stop() {

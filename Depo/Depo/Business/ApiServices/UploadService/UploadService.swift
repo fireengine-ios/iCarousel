@@ -75,7 +75,7 @@ final class UploadService: BaseRequestService {
     }
     
     @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
-        let filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes }
+        let filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes && $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
         //TODO: Show 4 gigabytes error here?
         switch uploadType {
         case .autoSync:
