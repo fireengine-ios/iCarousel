@@ -25,7 +25,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         dataSource.isHeaderless = true
         
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
-            view.configurateUgglaView()
+            view.configurateUgglaView(hidden: !dataSource.isPaginationDidEnd)
         }
     }
     
@@ -73,12 +73,21 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         dataSource.isHeaderless = true
         updateNoFilesView()
+        updateThreeDotsButton()
+    }
+    
+    override func getContentWithSuccessEnd() {
+        super.getContentWithSuccessEnd()
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
+            view.showUgglaView()
+        }
     }
     
     override func getContentWithFail(errorString: String?) {
         super.getContentWithFail(errorString: errorString)
         
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }

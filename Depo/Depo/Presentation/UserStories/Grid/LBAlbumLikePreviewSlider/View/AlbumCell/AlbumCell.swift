@@ -31,6 +31,10 @@ class AlbumCell: UICollectionViewCell {
         } else {
             setup(withSliderItem: item)
         }
+        
+        isAccessibilityElement = true
+        accessibilityTraits = UIAccessibilityTraitNone
+        accessibilityLabel = item.name
     }
     
     private func setup(withAlbum album: AlbumItem?) {

@@ -24,7 +24,11 @@ class AlbumSelectionPresenter: AlbumsPresenter {
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         if let interact = interactor as? AlbumsInteractor, let album = item as? AlbumItem {
-            interact.onAddPhotosToAlbum(selectedAlbumUUID: album.uuid)
+            if album.readOnly == true {
+                UIApplication.showErrorAlert(message: TextConstants.uploadVideoToReadOnlyAlbumError)
+            } else {
+                interact.onAddPhotosToAlbum(selectedAlbumUUID: album.uuid)
+            }
         }
     }
     

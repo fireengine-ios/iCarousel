@@ -12,6 +12,7 @@ import MMWormhole
 
 
 final class TodayViewController: UIViewController {
+    @IBOutlet private weak var currentImage: UIImageView!
     @IBOutlet private weak var successImage: UIImageView!
     @IBOutlet private weak var topLabel: UILabel!
     @IBOutlet private weak var bottomLabel: UILabel!
@@ -30,8 +31,19 @@ final class TodayViewController: UIViewController {
     }
     
     private func setupWormhole() {
-        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] (messageObject) in
+        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] messageObject in
             self?.updateFields()
+        }
+        
+        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeCurrentImageIdentifier) { [weak self] messageObject in
+            guard let `self` = self, let image = messageObject as? UIImage else {
+                return
+            }
+            
+            UIView.transition(with: self.currentImage,
+                              duration: 0.3,
+                              options: .transitionCrossDissolve, animations: { self.currentImage.image = image },
+                              completion: nil)
         }
     }
     
@@ -44,7 +56,7 @@ final class TodayViewController: UIViewController {
     }
     
     
-    //MARK: Tap handler
+    // MARK: Tap handler
     
     @objc private func openApp() {
         if let url = URL(string: "akillidepo://") {
@@ -64,25 +76,26 @@ extension TodayViewController: NCWidgetProviding {
     private func updateFields() {
         switch widgetService.syncStatus {
         case .executing :
-            topLabel.text = TextConstants.widgetTitleInProgress
+            topLabel.text = L10n.widgetTopTitleInProgress
             bottomLabel.text = "\(widgetService.finishedCount) / \(widgetService.totalCount)"
-            activityIndicator.isHidden = false
             successImage.isHidden = true
+            currentImage.isHidden = false
+            activityIndicator.isHidden = (currentImage.image != nil)
             activityIndicator.startAnimating()
         default:
             if WidgetService.shared.lastSyncedDate.isEmpty {
-                topLabel.text = TextConstants.widgetTitleIsStoped
-                bottomLabel.text =  String(format: TextConstants.widgetTitleLastSyncFormat, TextConstants.widgetTitleNeverSynchronized)
+                topLabel.text = L10n.widgetTopTitleInactive
+                bottomLabel.text = L10n.widgetBottomTitleLastSyncFormat(L10n.widgetBottomTitleNewerSyncronized)
             } else {
-                topLabel.text = TextConstants.widgetTitleFinished
-                bottomLabel.text =  String(format: TextConstants.widgetTitleLastSyncFormat, widgetService.lastSyncedDate)
+                topLabel.text = L10n.widgetTopTitleFinished
+                bottomLabel.text = L10n.widgetBottomTitleLastSyncFormat(widgetService.lastSyncedDate)
             }
             
             activityIndicator.isHidden = true
             successImage.isHidden = false
+            currentImage.isHidden = true
+            currentImage.image = nil
             activityIndicator.stopAnimating()
         }
     }
 }
-
-

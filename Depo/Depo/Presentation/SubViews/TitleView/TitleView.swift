@@ -19,6 +19,7 @@ class TitleView: UIView {
     }
     
     func setTitle(_ title: String) {
+        titleLabel?.isHidden = false
         titleLabel?.textAlignment = .center
         titleLabel?.backgroundColor = UIColor.clear
         titleLabel?.textColor = UIColor.white
@@ -27,6 +28,7 @@ class TitleView: UIView {
     }
     
     func setSubTitle(_ title: String) {
+        subTitleLabel?.isHidden = false
         subTitleLabel?.textAlignment = .center
         subTitleLabel?.backgroundColor = UIColor.clear
         subTitleLabel?.textColor = UIColor.white

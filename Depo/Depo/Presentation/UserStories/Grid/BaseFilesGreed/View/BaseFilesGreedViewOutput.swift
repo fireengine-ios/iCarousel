@@ -49,4 +49,6 @@ protocol BaseFilesGreedViewOutput {
     func moveBack()
     
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue)
+    
+    func updateThreeDotsButton()
 }

@@ -73,6 +73,9 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             cloudStatusImage.image = UIImage()
         }
         
+        isAccessibilityElement = true
+        accessibilityTraits = UIAccessibilityTraitImage
+        accessibilityLabel = wrappered.name
     }
     
     override func prepareForReuse() {

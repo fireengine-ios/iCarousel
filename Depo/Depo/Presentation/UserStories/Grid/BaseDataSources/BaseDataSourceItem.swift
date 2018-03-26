@@ -72,4 +72,10 @@ class BaseDataSourceItem: NSObject {
         return syncStatuses.contains(SingletonStorage.shared.unigueUserID)
     }
     
+    func setSyncStatusesAsSyncedForCurrentUser() {
+        if !syncStatuses.contains(SingletonStorage.shared.unigueUserID) {
+            syncStatuses.append(SingletonStorage.shared.unigueUserID)
+        }
+    }
+    
 }

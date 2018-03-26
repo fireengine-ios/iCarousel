@@ -191,6 +191,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.appendCollectionView(items: [])
         dataSource.reloadData()
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     func getContentWithSuccess(items: [WrapData]) {
@@ -208,6 +209,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         dataSource.reloadData()
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
@@ -225,6 +227,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             dataSource.reloadData()
         }
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     func isArrayDataSource() -> Bool {
@@ -321,6 +324,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func didDelete(items: [BaseDataSourceItem]) {
         updateNoFilesView()
+        updateThreeDotsButton()
     }
     
     func updateCoverPhotoIfNeeded() { }
@@ -356,11 +360,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     
     private func stopEditing() {
-        bottomBarPresenter?.dismiss(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        dismissBottomBar(animated: true)
         view.stopSelection()
         dataSource.setSelectionState(selectionState: false)
         view.setThreeDotsMenu(active: true)
+    }
+    
+    private func dismissBottomBar(animated: Bool) {
+        bottomBarPresenter?.dismiss(animated: animated)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
     }
     
     private func updateNoFilesView() {
@@ -378,6 +386,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
     }
     
+    func updateThreeDotsButton() {
+        if !(getRemoteItemsService() is AlbumDetailService), !(getRemoteItemsService() is PeopleItemsService) {
+            view.setThreeDotsMenu(active: !needShowNoFileView())
+        }
+    }
+    
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         setupNewBottomBarConfig()
         log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount")
@@ -385,8 +399,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (selectedItemsCount == 0) {
             log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
 
-            bottomBarPresenter?.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+            dismissBottomBar(animated: true)
         } else {
             log.debug("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
 
@@ -537,7 +550,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             
-            if dataSource.allMediaItems.isEmpty {
+            if dataSource.allObjectIsEmpty() {
                 if let downloadIdex = actionTypes.index(of: .download) {
                     actionTypes.remove(at: downloadIdex)
                 }
@@ -598,20 +611,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         log.debug("BaseFilesGreedPresenter operationFinished")
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
+        dismissBottomBar(animated: true)
         view.stopSelection()
-        if type == ElementTypes.removeAlbum {
-            bottomBarPresenter?.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
-        }
-        if type == ElementTypes.completelyDeleteAlbums {
-            bottomBarPresenter?.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        if type == .removeAlbum || type == .completelyDeleteAlbums {
+            dismissBottomBar(animated: true)
         }
     }
     
     func operationFailed(withType type: ElementTypes) {
         log.debug("BaseFilesGreedPresenter operationFailed")
         debugPrint("failed")
+        dismissBottomBar(animated: true)
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
     }

@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-final class UploadOperation: AsyncOperation {
+final class UploadOperation: Operation {
     
     private lazy var uploadService = UploadService()
     
@@ -20,6 +20,7 @@ final class UploadOperation: AsyncOperation {
     private let complition: ResponseVoid
     private var dataRequest: DataRequest?
     
+    private let semaphore = DispatchSemaphore(value: 0)
     private let attemptWaitSeconds = 5
     private let attemptsMax = 5
     private var attempts = 0
@@ -28,8 +29,7 @@ final class UploadOperation: AsyncOperation {
          contentType: String,
          progressHandler: @escaping Request.ProgressHandler,
          didStartUpload: VoidHandler?,
-         complition: @escaping ResponseVoid)
-    {
+         complition: @escaping ResponseVoid) {
         self.url = url
         self.contentType = contentType
         self.progressHandler = progressHandler
@@ -40,36 +40,40 @@ final class UploadOperation: AsyncOperation {
     
     override func main() {
         didStartUpload?()
-        
+        upload()
+    }
+    
+    private func upload() {
         uploadService.upload(url: url, contentType: contentType, progressHandler: progressHandler, dataRequestHandler: { [weak self] dataRequest in
             self?.dataRequest = dataRequest
-        }, complition: { [weak self] result in
-            
-            guard let `self` = self else {
-                return
-            }
-            
-            switch result {
-            case .success(_):
-                self.complition(result)
-                self.finish()
+            }, complition: { [weak self] result in
                 
-            case .failed(let error):
-                if error.isNetworkError, self.attempts < self.attemptsMax {
-                    DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(self.attemptWaitSeconds)) {
-                        self.attempts += 1
-                        self.main()
-                    }
-                } else {
-                    self.complition(result)
-                    self.finish()
+                guard let `self` = self else {
+                    return
                 }
-            }
+                
+                switch result {
+                case .success(_):
+                    self.complition(result)
+                    self.semaphore.signal()
+                    
+                case .failed(let error):
+                    if error.isNetworkError, self.attempts < self.attemptsMax {
+                        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(self.attemptWaitSeconds)) {
+                            self.attempts += 1
+                            self.upload()
+                        }
+                    } else {
+                        self.complition(result)
+                        self.semaphore.signal()
+                    }
+                }
         })
+        semaphore.wait()
     }
     
     override func cancel() {
+        super.cancel()
         dataRequest?.cancel()
-        finish()
     }
 }

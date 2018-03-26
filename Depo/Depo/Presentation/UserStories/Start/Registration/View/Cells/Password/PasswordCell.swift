@@ -8,32 +8,30 @@
 
 import UIKit
 
-class PasswordCell: ProtoInputTextCell {
+final class PasswordCell: ProtoInputTextCell {
     
     enum PasswordCellType {
         case regular
         case reEnter
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var showBtn: UIButton!
+    @IBOutlet private weak var infoImage: UIImageView!
+    @IBOutlet private weak var infoButton: UIButton!
     @IBOutlet weak var textInput: UITextField! {
-        didSet {
-            inputTextField = textInput
-        }
+        didSet { inputTextField = textInput }
     }
-    @IBOutlet weak var showBtn: UIButton!
-    @IBOutlet weak var infoImage: UIImageView!
     
-    @IBOutlet weak var infoButton: UIButton!
-    var sequreTexieldAndMessage: Bool = true {
-        
-        willSet (newValue) {
-            var title = TextConstants.hidePassword
-            if (newValue) {
-                title = TextConstants.showPassword
-            }
-            textInput.isSecureTextEntry = newValue
+    private var isSecureTextFieldAndMessage: Bool = true {
+        willSet {
+            let title = newValue ? TextConstants.showPassword : TextConstants.hidePassword
             showBtn.setTitle(title, for: .normal)
+            
+            /// https://stackoverflow.com/a/35295940/5893286
+            textInput.isSecureTextEntry = newValue
+            textInput.font = nil
+            textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
         }
     }
     
@@ -44,18 +42,16 @@ class PasswordCell: ProtoInputTextCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         textInput.delegate = self
-//        textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
+        textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
         titleLabel.textColor = ColorConstants.whiteColor
         backgroundColor = UIColor.clear
         changeInfoButtonTo(hidden: true)
     }
     
     func setupInitialState(withLabelTitle title: String, placeHolderText placeholder: String) {
-        
         titleLabel.text = title
         placeholderText = placeholder
         changeTitleHeighlight(heighlight: true)
-        
     }
     
     override func changeReturnKey(to key: UIReturnKeyType) {
@@ -67,8 +63,6 @@ class PasswordCell: ProtoInputTextCell {
         if heighlight {
             textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
             titleLabel.textColor = ColorConstants.whiteColor
-         
-            
         } else {
             titleLabel.textColor = ColorConstants.yellowColor
             if let savedPlaceholder = placeholderText {
@@ -79,24 +73,20 @@ class PasswordCell: ProtoInputTextCell {
             }
         }
         
-        
-        textInput.attributedPlaceholder = NSAttributedString(string: placeholder,
-                                                             attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor])
+        textInput.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor])
     }
-
+    
     override func changeInfoButtonTo(hidden: Bool) {
-//        infoButton.isEnabled = false//!hidden
-//        infoButton.isHidden = hidden
         infoImage.isHidden = hidden
         changeTitleHeighlight(heighlight: hidden)
     }
     
-    @IBAction func showButtonPressed(_ sender: Any) {
-        sequreTexieldAndMessage = !sequreTexieldAndMessage
+    @IBAction private func showButtonPressed(_ sender: Any) {
+        isSecureTextFieldAndMessage = !isSecureTextFieldAndMessage
     }
     
-    @IBAction func InfoButtonAction(_ sender: Any) {
-//        infoButtonDelegate?.infoButtonGotPressed(with: self, andType: .passwordNotValid)
+    @IBAction private func InfoButtonAction(_ sender: Any) {
+        //        infoButtonDelegate?.infoButtonGotPressed(with: self, andType: .passwordNotValid)
     }
     
     override func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -104,3 +94,4 @@ class PasswordCell: ProtoInputTextCell {
         changeInfoButtonTo(hidden: true)
     }
 }
+

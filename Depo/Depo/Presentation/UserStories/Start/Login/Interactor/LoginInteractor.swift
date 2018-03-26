@@ -14,6 +14,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
+    private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var eulaService = EulaService()
     
     private var rememberMe: Bool = true
@@ -22,6 +23,8 @@ class LoginInteractor: LoginInteractorInput {
     private var login: String?
     private var password: String?
     private var atachedCaptcha: CaptchaParametrAnswer?
+    
+    var isShowEmptyEmail = false
     
     /// from 0 to 11 = 12 attempts
     private let maxAttemps: Int = 11
@@ -63,10 +66,15 @@ class LoginInteractor: LoginInteractorInput {
                                       rememberMe: true, //rememberMe,
                                       attachedCaptcha: atachedCaptcha)
         
-        authenticationService.login(user: user, sucess: { [weak self] in
+        storageVars.currentUserID = login
+        
+        authenticationService.login(user: user, sucess: { [weak self] headers in
             guard let `self` = self else {
                 return
             }
+            
+            self.emptyEmailCheck(for: headers)
+            
             self.tokenStorage.isRememberMe = self.rememberMe
             DispatchQueue.main.async {
                 self.output?.succesLogin()
@@ -175,6 +183,12 @@ class LoginInteractor: LoginInteractorInput {
     
     private func checkInternetConnection() -> Bool {
         return ReachabilityService().isReachable
+    }
+    
+    private func emptyEmailCheck(for headers: [String: Any]) {
+        if let warning = headers[HeaderConstant.accountWarning] as? String, warning == HeaderConstant.emptyEmail {
+            self.isShowEmptyEmail = true
+        }
     }
     
     func findCoutryPhoneCode(plus: Bool) {

@@ -16,7 +16,7 @@ open class ShareData {
     }
     
     var image: UIImage? {
-        return #imageLiteral(resourceName: "ImageNoDocuments")
+        return Images.noDocuments
     }
     
     var name: String {
@@ -34,6 +34,11 @@ open class ShareData {
             contentType = url.mimeType
         }
         return contentType
+    }
+}
+extension ShareData: Equatable {
+    public static func ==(lhs: ShareData, rhs: ShareData) -> Bool {
+        return lhs.url == rhs.url
     }
 }
 

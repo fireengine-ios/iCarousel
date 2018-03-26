@@ -17,6 +17,8 @@ protocol Factory: SharedFactory {
     func resolve() -> BiometricsManager
     
     func resolve() -> HomeCardsService
+    
+    func resolve() -> StorageVars
 }
 
 final class FactoryMain: FactoryBase, Factory {
@@ -34,6 +36,11 @@ final class FactoryMain: FactoryBase, Factory {
     private static let biometricsManager = BiometricsManagerImp()
     func resolve() -> BiometricsManager {
         return FactoryMain.biometricsManager
+    }
+    
+    private static let storageVars = UserDefaultsVars()
+    func resolve() -> StorageVars {
+        return FactoryMain.storageVars
     }
 }
 

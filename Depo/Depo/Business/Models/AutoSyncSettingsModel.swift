@@ -110,7 +110,9 @@ final class AutoSyncSettings {
             switch oldMediaType {
             case .photos:
                 photoSetting.option = .wifiAndCellular
+                videoSetting.option = .wifiOnly
             case .videos:
+                photoSetting.option = .wifiOnly
                 videoSetting.option = .wifiAndCellular
             case .all:
                 photoSetting.option = .wifiAndCellular

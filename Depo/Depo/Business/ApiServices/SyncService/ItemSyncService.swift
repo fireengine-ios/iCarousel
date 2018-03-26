@@ -33,8 +33,8 @@ class ItemSyncServiceImpl: ItemSyncService {
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
         didSet {
-            debugPrint("AUTOSYNC: \(fileType) status = \(status)")
             if oldValue != status {
+                debugPrint("AUTOSYNC: \(fileType) status = \(status)")
                 postNotification()
             }
         }
@@ -66,18 +66,28 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func stop() {
         log.debug("ItemSyncServiceImpl stop")
+        
         lastSyncedMD5s.removeAll()
-        status = .stoped
+        if status != .synced {
+            status = .stoped
+        }
     }
     
     func waitForWiFi() {
         log.debug("ItemSyncServiceImpl waitForWiFi")
+        
         lastSyncedMD5s.removeAll()
-        status = .waitingForWifi
+        
+        let hasItemsToSync = CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image)
+        
+        if hasItemsToSync {
+            status = .waitingForWifi
+        }
     }
     
     func fail() {
         log.debug("ItemSyncServiceImpl fail")
+        
         lastSyncedMD5s.removeAll()
         status = .failed
     }
@@ -173,30 +183,24 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     // MARK: - Override me
     
-    func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
-        //
-    }
+    func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {}
 
 }
 
 
 extension CoreDataStack {
     func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData]) -> Void) {
-        DispatchQueue.main.async {
-            let localItems = self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
-            
-            self.queue.async { [weak self] in
-                self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { items, error in
-                    guard error == nil, let unsyncedItems = items else {
-                        print(error!.localizedDescription)
-                        completion([])
-                        return
-                    }
-                    
-                    completion(unsyncedItems)
+        let localItems = allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
+        self.queue.async { [weak self] in
+            self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { items, error in
+                guard error == nil, let unsyncedItems = items else {
+                    print(error!.localizedDescription)
+                    completion([])
+                    return
                 }
+                
+                completion(unsyncedItems)
             }
-            
         }
     }
     
@@ -215,34 +219,37 @@ extension CoreDataStack {
                 handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
                 return
             }
-            
-            for item in items {
-                if item.metaDate < oldestItemDate {
-                    finished = true
-                    break
-                }
-                
-                let serverObjectMD5 = item.md5
-                if let index = localMd5s.index(of: serverObjectMD5) {
-                    let localItem = localItems[index]
-                    localItem.syncStatuses.append(SingletonStorage.shared.unigueUserID)
-                    self.updateLocalItemSyncStatus(item: localItem)
-                    
-                    localItems.remove(at: index)
-                    localMd5s.remove(at: index)
-                    
-                    if localItems.isEmpty {
+            self.queue.async { [weak self] in
+                for item in items {
+                    if item.metaDate < oldestItemDate {
                         finished = true
                         break
                     }
+                    
+                    let serverObjectMD5 = item.md5
+                    if let index = localMd5s.index(of: serverObjectMD5) {
+                        let localItem = localItems[index]
+                        localItem.setSyncStatusesAsSyncedForCurrentUser()
+                        self?.updateLocalItemSyncStatus(item: localItem)
+                        
+                        localItems.remove(at: index)
+                        localMd5s.remove(at: index)
+                        
+                        if localItems.isEmpty {
+                            finished = true
+                            break
+                        }
+                    }
+                }
+                
+                if !finished, items.count == NumericConstants.numberOfElementsInSyncRequest {
+                    self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue, handler: handler)
+                } else {
+                    handler(localItems, nil)
                 }
             }
             
-            if !finished, items.count == NumericConstants.numberOfElementsInSyncRequest {
-                self.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue, handler: handler)
-            } else {
-                handler(localItems, nil)
-            }
+            
             }, fail: {
                 handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
         }, newFieldValue: fieldValue)
