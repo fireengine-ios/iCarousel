@@ -18,4 +18,9 @@ class StoriesDataSourceForCollectionView: ArrayDataSourceForCollectionView {
     override func newStoryCreated() {
         delegate?.needReloadData?()
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: NumericConstants.insetAlbumCellGreed, bottom: 0, right: NumericConstants.insetAlbumCellGreed)
+    }
+    
 }

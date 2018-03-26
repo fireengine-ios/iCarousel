@@ -12,6 +12,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     var router: LoginRouterInput!
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     var optInVC: OptInController?
     var textEnterVC: TextEnterController?
@@ -73,9 +74,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         router.goToRegistration()
     }
     
-    func viewAppeared() {
-//        interactor.prepareTimePassed()
-    }
+    func viewAppeared() {}
     
     func needShowCaptcha() {
         compliteAsyncOperationEnableScreen()
@@ -129,14 +128,38 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         plus ? view.enterPhoneCountryCode(countryCode: countryCode) : view.incertPhoneCountryCode(countryCode: code)
     }
     
-    
     // MARK: - EULA
     
     func onSuccessEULA() {
         compliteAsyncOperationEnableScreen()
-        
-        CoreDataStack.default.appendLocalMediaItems()
-        router.goToSyncSettingsView()
+        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
+            DispatchQueue.main.async {
+                self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
+            }
+        }, end: { [weak self] in
+            DispatchQueue.main.async {
+                self?.customProgressHUD.hideProgressSpinner()
+                self?.openEmptyEmailIfNeedOrOpenSyncSettings()
+            }
+        })
+    }
+    
+    private func openEmptyEmailIfNeedOrOpenSyncSettings() {
+        if interactor.isShowEmptyEmail {
+            openEmptyEmail()
+        } else {
+            router.goToSyncSettingsView()
+        }
+    }
+    
+    private func openEmptyEmail() {
+        storageVars.emptyEmailUp = true
+        let vc = EmailEnterController.initFromNib()
+        vc.approveCancelHandler = { [weak self] in
+            self?.router.goToSyncSettingsView()
+        }
+        let navVC = UINavigationController(rootViewController: vc)
+        RouterVC().presentViewController(controller: navVC)
     }
     
     func onFailEULA() {

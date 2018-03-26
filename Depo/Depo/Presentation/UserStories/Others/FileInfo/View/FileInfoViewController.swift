@@ -140,6 +140,10 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             count += album.imageCount ?? 0
             count += album.videoCount ?? 0
             folderSizeLabel.text = String(count)
+            
+            if album.readOnly == true {
+                fileName.isEnabled = false
+            }
         }
         
         durationH.constant = 0
@@ -188,6 +192,9 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         fileName.becomeFirstResponder()
     }
     
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     // MARK: UITextFieldDelegate
     

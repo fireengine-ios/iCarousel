@@ -227,9 +227,8 @@ struct ResendVerificationSMS: RequestParametrs {
 
 typealias  SuccessLogin = () -> Swift.Void
 typealias  SuccessLogout = () -> Swift.Void
-
 typealias  FailLoginType = FailResponse
-
+typealias  HeadersHandler = ([String: Any]) -> Void
 
 class AuthenticationService: BaseRequestService {
     
@@ -237,10 +236,11 @@ class AuthenticationService: BaseRequestService {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     // MARK: - Login
     
-    func login(user: AuthenticationUser, sucess: SuccessLogin?, fail: FailResponse?) {
+    func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?) {
         let params: [String: Any] = ["username": user.login,
                                      "password": user.password,
                                      "deviceInfo": Device.deviceInfo]
@@ -276,7 +276,7 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
 
-                        sucess?()
+                        sucess?(headers)
                         MenloworksAppEvents.onLogin()
                         
                     case .failure(let error):
@@ -336,8 +336,13 @@ class AuthenticationService: BaseRequestService {
             SyncServiceManager.shared.stopSync()
             AutoSyncDataStorage.clear()
             SingletonStorage.shared.accountInfo = nil
+            ItemOperationManager.default.clear()
             self.player.stop()
             self.cancellAllRequests()
+            
+            self.storageVars.currentUserID = nil
+            self.storageVars.emptyEmailUp = false
+            
             success?()
         }
         if async {

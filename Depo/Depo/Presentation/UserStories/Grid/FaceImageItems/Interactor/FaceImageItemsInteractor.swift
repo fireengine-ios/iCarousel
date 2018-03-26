@@ -51,9 +51,9 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         if let item = item as? PeopleItem {
             output.startAsyncOperation()
             
-            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] uuid in
+            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] album in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.didLoadAlbum(uuid, forItem: item)
+                    output.didLoadAlbum(album, forItem: item)
                 }
                 
                 self?.output.asyncOperationSucces()

@@ -144,6 +144,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setNavigationBackgroundColor(color: UIColor.clear)
         
         visibleNavigationBarStyle()
+        setStatusBarBackgroundColor(color: .clear)
+        
         output.viewWillDisappear()
     }
     

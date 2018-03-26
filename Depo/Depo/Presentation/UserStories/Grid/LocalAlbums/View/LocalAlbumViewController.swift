@@ -34,6 +34,11 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
         navigationItem.rightBarButtonItems = nil
     }
     
+    override func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
+        super.showNoFilesWith(text: TextConstants.haveNoAnyFiles , image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
+        startCreatingFilesButton.isHidden = true
+    }
+    
     @objc func onCancelButton() {
         output.moveBack()
     }

@@ -45,6 +45,7 @@ struct HeaderConstant {
     static let Authorization = "Authorization"
     
     static let emptyMSISDN = "EMPTY_MSISDN"
+    static let emptyEmail = "EMPTY_EMAIL"
 }
 
 class RequestHeaders {

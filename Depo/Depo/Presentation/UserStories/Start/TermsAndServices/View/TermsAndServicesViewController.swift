@@ -17,13 +17,17 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var checkboxButton: UIButton!
     @IBOutlet weak var checkboxLabel: UILabel!
-    @IBOutlet weak var acceptButton: BlueButtonWithWhiteText!    
+    @IBOutlet weak var acceptButton: BlueButtonWithWhiteText!
+    
+    @IBOutlet weak var topContraintIOS10: NSLayoutConstraint!
+    @IBOutlet weak var topContraintIOS11: NSLayoutConstraint!
     
     // MARK: Life cycle
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        hidenNavigationBarStyle()
+
+        hidenNavigationBarStyle()        
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
@@ -34,6 +38,12 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
             setNavigationTitle(title: TextConstants.termsAndUsesTitile)
         }
 
+        if #available(iOS 11.0, *) {
+            topContraintIOS10.isActive = false
+        } else {
+            topContraintIOS11.isActive = false
+        }
+        
         configureUI()
         
         output.viewIsReady()
@@ -50,7 +60,7 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
         
         acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
         
-        textView.contentInset.right = 10
+        textView.textContainerInset.right = 10
         textView.text = ""
         textView.dataDetectorTypes = [.phoneNumber, .link]
         textView.indicatorStyle = .white

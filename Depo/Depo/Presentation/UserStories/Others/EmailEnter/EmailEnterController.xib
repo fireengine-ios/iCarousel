@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmailEnterController" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="customizator" destination="wuF-8v-HYt" id="olg-H9-7pr"/>
+                <outlet property="emailTextField" destination="ZJv-1L-0Ej" id="EQr-ND-i33"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Lp-MB-hvl">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9JX-NF-yV3" userLabel="View in scroll">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lW5-zg-yKb" userLabel="Insets View">
+                                    <rect key="frame" x="30" y="30" width="260" height="101"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Jn-Ma-14r">
+                                            <rect key="frame" x="0.0" y="0.0" width="260" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDF-Tb-d2k">
+                                            <rect key="frame" x="0.0" y="51" width="260" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZJv-1L-0Ej" customClass="UnderlineTextField" customModule="lifebox" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="51" width="260" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="pyO-aC-BBu"/>
+                                            </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="wDF-Tb-d2k" firstAttribute="leading" secondItem="ZJv-1L-0Ej" secondAttribute="leading" id="BSN-pO-u3l"/>
+                                        <constraint firstItem="wDF-Tb-d2k" firstAttribute="top" secondItem="ZJv-1L-0Ej" secondAttribute="top" id="EAf-bA-hHm"/>
+                                        <constraint firstAttribute="bottom" secondItem="ZJv-1L-0Ej" secondAttribute="bottom" id="MdS-Oc-X7E"/>
+                                        <constraint firstItem="7Jn-Ma-14r" firstAttribute="leading" secondItem="lW5-zg-yKb" secondAttribute="leading" id="QQg-n3-qyz"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZJv-1L-0Ej" secondAttribute="trailing" id="S18-o9-GsH"/>
+                                        <constraint firstItem="ZJv-1L-0Ej" firstAttribute="top" secondItem="7Jn-Ma-14r" secondAttribute="bottom" constant="30" id="X91-pA-chp"/>
+                                        <constraint firstAttribute="trailing" secondItem="7Jn-Ma-14r" secondAttribute="trailing" id="Y3V-I7-GI1"/>
+                                        <constraint firstItem="7Jn-Ma-14r" firstAttribute="top" secondItem="lW5-zg-yKb" secondAttribute="top" id="YZx-6a-qaU"/>
+                                        <constraint firstItem="7Jn-Ma-14r" firstAttribute="top" secondItem="lW5-zg-yKb" secondAttribute="top" id="Zhq-Du-1Ou"/>
+                                        <constraint firstItem="wDF-Tb-d2k" firstAttribute="trailing" secondItem="ZJv-1L-0Ej" secondAttribute="trailing" id="gLs-Dp-gK2"/>
+                                        <constraint firstItem="ZJv-1L-0Ej" firstAttribute="leading" secondItem="lW5-zg-yKb" secondAttribute="leading" id="soM-rq-YV4"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5u-7h-WiS" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="89" y="161" width="142" height="54"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="54" id="dcq-eC-3JN"/>
+                                        <constraint firstAttribute="width" constant="142" id="oRC-QQ-Lij"/>
+                                    </constraints>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="actionApproveButton:" destination="-1" eventType="touchUpInside" id="zmT-f5-6xB"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="lW5-zg-yKb" firstAttribute="top" secondItem="9JX-NF-yV3" secondAttribute="top" constant="30" id="Hdg-PN-eqc"/>
+                                <constraint firstItem="lW5-zg-yKb" firstAttribute="leading" secondItem="9JX-NF-yV3" secondAttribute="leading" constant="30" id="Kdh-el-gpS"/>
+                                <constraint firstItem="j5u-7h-WiS" firstAttribute="centerX" secondItem="9JX-NF-yV3" secondAttribute="centerX" id="Mej-UK-gCM"/>
+                                <constraint firstItem="j5u-7h-WiS" firstAttribute="top" secondItem="lW5-zg-yKb" secondAttribute="bottom" constant="30" id="OMv-Jg-9kG"/>
+                                <constraint firstAttribute="trailing" secondItem="lW5-zg-yKb" secondAttribute="trailing" constant="30" id="hNN-tp-thh"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="9JX-NF-yV3" secondAttribute="bottom" id="1GK-De-Cea"/>
+                        <constraint firstItem="9JX-NF-yV3" firstAttribute="leading" secondItem="7Lp-MB-hvl" secondAttribute="leading" id="FAw-Lq-osw"/>
+                        <constraint firstItem="9JX-NF-yV3" firstAttribute="width" secondItem="7Lp-MB-hvl" secondAttribute="width" id="a0r-k4-Aun"/>
+                        <constraint firstItem="9JX-NF-yV3" firstAttribute="top" secondItem="7Lp-MB-hvl" secondAttribute="top" id="csZ-0b-OLi"/>
+                        <constraint firstItem="9JX-NF-yV3" firstAttribute="height" secondItem="7Lp-MB-hvl" secondAttribute="height" priority="250" id="hCh-Tz-A0f"/>
+                        <constraint firstAttribute="trailing" secondItem="9JX-NF-yV3" secondAttribute="trailing" id="hT7-YU-aem"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="7Lp-MB-hvl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Zrp-Ap-GZk"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7Lp-MB-hvl" secondAttribute="bottom" id="lHy-x1-Q3I"/>
+                <constraint firstAttribute="trailing" secondItem="7Lp-MB-hvl" secondAttribute="trailing" id="lUW-gA-Acb"/>
+                <constraint firstItem="7Lp-MB-hvl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rF6-Tn-mog"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+        <customObject id="wuF-8v-HYt" customClass="EmailEnterCustomizator" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="approveButton" destination="j5u-7h-WiS" id="KiQ-cW-2eY"/>
+                <outlet property="emailLabel" destination="wDF-Tb-d2k" id="Vr4-zG-ZIL"/>
+                <outlet property="emailTextField" destination="ZJv-1L-0Ej" id="p3b-41-mwP"/>
+                <outlet property="informationLabel" destination="7Jn-Ma-14r" id="pdt-1M-mEF"/>
+            </connections>
+        </customObject>
+    </objects>
+</document>

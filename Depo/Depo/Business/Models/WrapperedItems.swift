@@ -747,7 +747,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         fileType = FileType(type: remote.contentType, fileName: name)
         isFolder = remote.folder
         syncStatus = .synced
-        syncStatuses.append(SingletonStorage.shared.unigueUserID)
+        setSyncStatusesAsSyncedForCurrentUser()
         creationDate = remote.createdDate
         
         parent = remote.parent
@@ -868,6 +868,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isFolder = mediaItem.isFolder
         log.debug("Wrap initializer from media Item, before getting duration")
         duration = WrapData.getDuration(duration: mediaItem.metadata?.duration)
+
         log.debug("Wrap initializer from media Item, after getting duration")
 //        syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         

@@ -8,7 +8,7 @@
 
 protocol AutoSyncViewOutput {
     func viewIsReady()
-    func skipForNowPressed()
+    func skipForNowPressed(onSyncDisabled: @escaping VoidHandler)
     func change(settings: AutoSyncSettings)
     func save(settings: AutoSyncSettings)
     func enableAutoSync()
