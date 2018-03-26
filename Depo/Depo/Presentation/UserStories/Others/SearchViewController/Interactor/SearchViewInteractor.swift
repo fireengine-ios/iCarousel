@@ -148,7 +148,9 @@ class SearchViewInteractor: SearchViewInteractorInput {
         }
  
         if faceImageAllowed {
-            for suggest in items {
+            result = items.filter { $0.text != nil }
+            /// maybe will be need
+            /*for suggest in items {
                 var hasDuplicate = false
                 
                 if suggest.info?.id == nil, //simple suggestion
@@ -160,7 +162,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
                 if !hasDuplicate && suggest.text != nil {
                     result.append(suggest)
                 }
-            }
+            }*/
         } else {
             result = items.filter { $0.text != nil && $0.type != .people && $0.type != .thing }
         }
