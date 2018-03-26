@@ -72,12 +72,10 @@ class BaseDataSourceItem: NSObject {
         if let obj = object as? BaseDataSourceItem {
             if isLocalItem != obj.isLocalItem {
                 return false
-            } else {
-                if !isLocalItem {
-                    return uuid == obj.uuid
-                } else if let selfObj = self as? WrapData, let comparableObject = object as? WrapData {
-                   return selfObj.asset?.localIdentifier == comparableObject.asset?.localIdentifier
-                }
+            } else if !isLocalItem {
+                return uuid == obj.uuid
+            } else if let selfObj = self as? WrapData, let comparableObject = object as? WrapData {
+                return selfObj.asset?.localIdentifier == comparableObject.asset?.localIdentifier
             }
         }
         return false
