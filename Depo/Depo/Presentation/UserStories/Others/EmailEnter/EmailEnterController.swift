@@ -55,7 +55,7 @@ final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
     }
     
     private func verifyMail() {
-        guard let email = emailTextField.text, !email.isEmpty else {
+        guard let email = emailTextField.text?.lowercased(), !email.isEmpty else {
             showErrorAlert(message: TextConstants.registrationCellPlaceholderEmail)
             return
         }

@@ -1413,7 +1413,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func addedLocalFiles(items: [Item]) {
         if let unwrapedFilters = originalFilters,
-            isAlbumDetail(filters: unwrapedFilters) {
+            isOnlyNonLocal(filters: unwrapedFilters) || isAlbumDetail(filters: unwrapedFilters){
             return
         }
         

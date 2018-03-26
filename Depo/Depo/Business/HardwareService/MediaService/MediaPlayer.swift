@@ -49,7 +49,7 @@ final class MediaPlayer: NSObject {
     private var urls = [URL]()
     private var player: AVPlayer!
     private var playerTimeObserver: Any?
-    private let playDidEndNotification = NSNotification.Name.AVPlayerItemDidPlayToEndTime
+    private let playDidEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime
     
     // MARK: - Setup
     
@@ -68,6 +68,12 @@ final class MediaPlayer: NSObject {
         UIApplication.shared.beginReceivingRemoteControlEvents()
     }
     
+    private func guardAudioSession() {
+        if AVAudioSession.sharedInstance().category != AVAudioSessionCategoryPlayback {
+            try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        }
+    }
+    
     private func setup(player: AVPlayer) {
         self.player?.replaceCurrentItem(with: nil)
         removePeriodicTimeObserver()
@@ -84,6 +90,7 @@ final class MediaPlayer: NSObject {
         setupPlayerTimeObserver()
         setupPlayerObservers()
         setupHeadphoneObserver()
+        guardAudioSession()
     }
     
     private func setupPlayerTimeObserver() {
@@ -141,15 +148,20 @@ final class MediaPlayer: NSObject {
     private func setupHeadphoneObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(headphoneRemoved),
-                                               name: NSNotification.Name.AVAudioSessionRouteChange,
+                                               name: Notification.Name.AVAudioSessionRouteChange,
                                                object: nil)
     }
     
-    @objc private func headphoneRemoved(notification:NSNotification) {
-        guard let audioRouteChangeReason = notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt else {return}
+    @objc private func headphoneRemoved(_ notification: Notification) {
+        guard
+            let audioRouteChangeReasonRaw = notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt,
+            let changeReason = AVAudioSessionRouteChangeReason(rawValue: audioRouteChangeReasonRaw)
+        else {
+            return
+        }
         
-        switch audioRouteChangeReason {
-        case AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue:
+        switch changeReason {
+        case .oldDeviceUnavailable:
             DispatchQueue.main.async {
                 self.pause()
             }
@@ -165,8 +177,10 @@ final class MediaPlayer: NSObject {
                                                object: nil)
     }
     
-    @objc private func finishedPlaying(_ notification: NSNotification) {
-        guard let item = notification.object as? AVPlayerItem, item == player.currentItem else { return }
+    @objc private func finishedPlaying(_ notification: Notification) {
+        guard let item = notification.object as? AVPlayerItem, item == player.currentItem else {
+            return
+        }
         
         if playNext() >= 0 {
             play()
@@ -189,7 +203,9 @@ final class MediaPlayer: NSObject {
     
     private func removePlayerObservers() {
         NotificationCenter.default.removeObserver(self, name: playDidEndNotification, object: nil)
-        guard let player = self.player else { return }
+        guard let player = player else {
+            return
+        }
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.status))
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem))
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.status))
@@ -216,14 +232,19 @@ final class MediaPlayer: NSObject {
             list.remove(at: i)
             urls.remove(at: i)
             items.remove(at: i)
-            self.shuffleCurrentList()
+            
+            if i < currentIndex {
+                currentIndex -= 1
+            }
         }
+        
+        shuffleCurrentList()
         
         /// check current playing item for delete indexes
         if deleteIndexes.contains(currentIndex) {
             // TODO: CHECK ALL STATES
             if play(at: currentIndex) {
-                currentIndex -= 1
+//                currentIndex -= 1 /// check
             } else if list.count > 0 {
                 currentIndex = list.count - 1
                 play(at: currentIndex)
@@ -231,8 +252,6 @@ final class MediaPlayer: NSObject {
                 currentIndex = 0
                 stop()
             }
-        } else {
-            stop()
         }
         
         delegates.invoke { delegate in
@@ -462,7 +481,6 @@ final class MediaPlayer: NSObject {
         for i in 1..<list.count {
             shuffledList.append(list[shuffledIndexes[i]])
         }
-        
     }
     
     @objc func handle(event: UIEvent?) {

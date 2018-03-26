@@ -55,7 +55,7 @@ struct TextConstants {
     static let termsAndUsesTitile = NSLocalizedString("Sign Up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUsesApplyButtonText = NSLocalizedString("Accept  Terms", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseTextFormat = NSLocalizedString("<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let termsAndUseStartUsingText = NSLocalizedString("Start Using", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsAndUseStartUsingText = NSLocalizedString("Get Started", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseCheckboxText = NSLocalizedString("I have read and accepted terms of use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseWelcomeText = NSLocalizedString("Welcome to Lifebox!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseCheckboxErrorText = NSLocalizedString("You need to confirm the User Agreement to continue.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -390,12 +390,12 @@ struct TextConstants {
     static let settingsBackupedText = NSLocalizedString("Backed up %d Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackupStatusText = NSLocalizedString("You have %d numbers on your contacts backup.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsRestoredText = NSLocalizedString("Restored %d Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBackUpingText = NSLocalizedString("%%d% Backed up…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsBackUpingText = NSLocalizedString("%d%% Backed up…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsDeletingText = NSLocalizedString("%d Duplicated Contacts Deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsDeleteDuplicatedAlertTitle = NSLocalizedString("Are you sure you want to delete?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsDeleteDuplicatedAlertText = NSLocalizedString("This duplicated contacts will be deleted from your contacts.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsRestoringText = NSLocalizedString("%%d% Restored…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsAnalyzingText = NSLocalizedString("%%d% Analyzed…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsRestoringText = NSLocalizedString("%d%% Restored…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsAnalyzingText = NSLocalizedString("%d%% Analyzed…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpNeverDidIt = NSLocalizedString("You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpNewer = NSLocalizedString("You never backed up your contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpLessAMinute = NSLocalizedString("Your last back up was a few seconds ago.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -502,6 +502,7 @@ struct TextConstants {
     static let uploadPhotos = NSLocalizedString("Upload Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let removeReadOnlyAlbumError = NSLocalizedString("Video album is automatically created, therefore cannot be deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadVideoToReadOnlyAlbumError = NSLocalizedString("You cannot upload any video to auto generated video album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let haveNoAnyFiles = NSLocalizedString("You have no any files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Albums view
     static let albumsViewNoAlbumsTitleText = NSLocalizedString("You don’t have any albums on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -764,6 +765,11 @@ struct TextConstants {
     static let accessibilityNotSelected = NSLocalizedString("Not selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityshowHide = NSLocalizedString("Show and Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityDone = NSLocalizedString("Done", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessibilityHome = NSLocalizedString("Home", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessibilityPhotosVideos = NSLocalizedString("Photos and Videos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessibilityMusic = NSLocalizedString("Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessibilityDocuments = NSLocalizedString("Documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     
     static let photos = NSLocalizedString("photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let approve = NSLocalizedString("Approve", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -832,7 +838,7 @@ struct NumericConstants {
     static let maxNumberOfUploadAttempts = 5
     static let secondsBeetweenUploadAttempts = 5
     
-    static let emptyEmailUserCloseLimit = 4
+    static let emptyEmailUserCloseLimit = 3
 }
 
 struct RequestSizeConstant {

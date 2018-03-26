@@ -44,6 +44,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.displayingType = .list
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.baseMultiFileCell)
         dataSource.isHeaderless = true
+        dataSource.canSelectionState = false
         
         setupTopBar()
         subscribeDataSource()
@@ -434,19 +435,19 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func operationFinished(withType type: ElementTypes, response: Any?) {
-        log.debug("BaseFilesGreedPresenter operationFinished")
+        log.debug("SearchViewPresenter operationFinished")
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
     }
     
     func operationFailed(withType type: ElementTypes) {
-        log.debug("BaseFilesGreedPresenter operationFailed")
+        log.debug("SearchViewPresenter operationFailed")
         debugPrint("failed")
         dataSource.setSelectionState(selectionState: false)
     }
     
     func selectModeSelected() {
-        log.debug("BaseFilesGreedPresenter selectModeSelected")
+        log.debug("SearchViewPresenter selectModeSelected")
         
         startEditing()
     }

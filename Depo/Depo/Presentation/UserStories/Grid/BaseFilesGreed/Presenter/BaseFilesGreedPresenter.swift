@@ -387,7 +387,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func updateThreeDotsButton() {
-        view.setThreeDotsMenu(active: !needShowNoFileView())
+        if !(getRemoteItemsService() is AlbumDetailService), !(getRemoteItemsService() is PeopleItemsService) {
+            view.setThreeDotsMenu(active: !needShowNoFileView())
+        }
     }
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
@@ -548,7 +550,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             
-            if dataSource.allMediaItems.isEmpty {
+            if dataSource.allObjectIsEmpty() {
                 if let downloadIdex = actionTypes.index(of: .download) {
                     actionTypes.remove(at: downloadIdex)
                 }

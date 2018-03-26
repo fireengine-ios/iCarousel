@@ -12,6 +12,7 @@ import MMWormhole
 
 
 final class TodayViewController: UIViewController {
+    @IBOutlet private weak var currentImage: UIImageView!
     @IBOutlet private weak var successImage: UIImageView!
     @IBOutlet private weak var topLabel: UILabel!
     @IBOutlet private weak var bottomLabel: UILabel!
@@ -32,6 +33,17 @@ final class TodayViewController: UIViewController {
     private func setupWormhole() {
         widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] messageObject in
             self?.updateFields()
+        }
+        
+        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeCurrentImageIdentifier) { [weak self] messageObject in
+            guard let `self` = self, let image = messageObject as? UIImage else {
+                return
+            }
+            
+            UIView.transition(with: self.currentImage,
+                              duration: 0.3,
+                              options: .transitionCrossDissolve, animations: { self.currentImage.image = image },
+                              completion: nil)
         }
     }
     
@@ -66,8 +78,9 @@ extension TodayViewController: NCWidgetProviding {
         case .executing :
             topLabel.text = L10n.widgetTopTitleInProgress
             bottomLabel.text = "\(widgetService.finishedCount) / \(widgetService.totalCount)"
-            activityIndicator.isHidden = false
             successImage.isHidden = true
+            currentImage.isHidden = false
+            activityIndicator.isHidden = (currentImage.image != nil)
             activityIndicator.startAnimating()
         default:
             if WidgetService.shared.lastSyncedDate.isEmpty {
@@ -80,6 +93,8 @@ extension TodayViewController: NCWidgetProviding {
             
             activityIndicator.isHidden = true
             successImage.isHidden = false
+            currentImage.isHidden = true
+            currentImage.image = nil
             activityIndicator.stopAnimating()
         }
     }

@@ -201,6 +201,7 @@
 "Upload Photos" = "Upload Photos";
 "Video album is automatically created, therefore cannot be deleted" = "Video album is automatically created, therefore cannot be deleted";
 "You cannot upload any video to auto generated video album" = "You cannot upload any video to auto generated video album";
+"You have no any files" = "You have no any files";
 "You don’t have any albums on your Lifebox yet." = "You don’t have any albums on your Lifebox yet.";
 "Start creating albums" = "Start creating albums";
 "Add" = "Add";
@@ -561,7 +562,7 @@
 "Login" = "Login";
 "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>";
 "Accept  Terms" = "Accept  Terms";
-"Start Using" = "Start Using";
+"Get Started" = "Get Started";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
 "Welcome to Lifebox!" = "Welcome to Lifebox!";
 "You need to confirm the User Agreement to continue." = "You need to confirm the User Agreement to continue.";
@@ -623,6 +624,10 @@
 "Selected" = "Selected";
 "Show & Hide" = "Show & Hide";
 "Show and Hide" = "Show and Hide";
+"Home" = "Home";
+"PhotosAndViedos" = "Photos and Videos";
+"Music" = "Music";
+"Documents" = "Documents";
 "Done" = "Done";
 "+Add a Name" = "+Add a Name";
 "+Add Name" = "+Add Name";

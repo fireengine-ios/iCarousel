@@ -62,6 +62,10 @@ final class WidgetService {
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
     
+    func notifyWidgetAbout(currentImage: UIImage?) {
+        wormhole.passMessageObject(currentImage, identifier: SharedConstants.wormholeCurrentImageIdentifier)
+    }
+    
     func notifyWidgetAbout(status: AutoSyncStatus) {
         syncStatus = status
         

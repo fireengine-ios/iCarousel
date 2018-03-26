@@ -28,6 +28,10 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
         imageView.image = nil
         
         nameLabel.text = item.name
+        
+        isAccessibilityElement = true
+        accessibilityTraits = UIAccessibilityTraitImage
+        accessibilityLabel = item.name
     }
     
     override func prepareForReuse() {
