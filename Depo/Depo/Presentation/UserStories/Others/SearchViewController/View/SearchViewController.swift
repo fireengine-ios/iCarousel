@@ -262,7 +262,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     // MARK: - UISearchbarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+        self.searchBar.resignFirstResponder()
         dismissController(animated: true)
         output.tapCancel()
     }
