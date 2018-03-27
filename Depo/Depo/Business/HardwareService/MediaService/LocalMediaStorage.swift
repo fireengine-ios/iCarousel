@@ -684,7 +684,6 @@ class GetOriginalImageOperation: Operation {
         options.version = .current
         options.deliveryMode = .highQualityFormat
         options.isSynchronous = true
-        options.isNetworkAccessAllowed = true
         
         photoManager.requestImageData(for: asset, options: options, resultHandler: callback)
     }
@@ -714,7 +713,6 @@ class GetOriginalVideoOperation: Operation {
         let options = PHVideoRequestOptions()
         options.version = .original
         options.deliveryMode = .highQualityFormat
-        options.isNetworkAccessAllowed = true
         photoManager.requestAVAsset(forVideo: asset, options: options, resultHandler: callback)
     }
 }
