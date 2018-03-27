@@ -75,6 +75,19 @@ class SplashInteractor: SplashInteractorInput {
         }
     }
     
+    func checkEmptyEmail() {
+        authService.checkEmptyEmail { [weak self] result in
+            switch result {
+            case .success(let show):
+                DispatchQueue.main.async {
+                    self?.output.showEmptyEmail(show: show)
+                }
+            case .failed(let error):
+                print(error.description)
+            }
+        }
+    }
+    
     func clearAllPreviouslyStoredInfo() {
         CoreDataStack.default.clearDataBase()
     }

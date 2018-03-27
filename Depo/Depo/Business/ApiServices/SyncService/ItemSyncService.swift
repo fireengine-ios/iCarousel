@@ -56,12 +56,12 @@ class ItemSyncServiceImpl: ItemSyncService {
     func start(newItems: Bool) {
         log.debug("ItemSyncServiceImpl start")
         
-        guard !(newItems && self.status.isContained(in: [.prepairing, .executing])) else {
-            self.appendNewUnsyncedItems()
+        guard !(newItems && status.isContained(in: [.prepairing, .executing])) else {
+            appendNewUnsyncedItems()
             return
         }
         
-        self.sync()
+        sync()
     }
     
     func stop() {
@@ -104,10 +104,14 @@ class ItemSyncServiceImpl: ItemSyncService {
         status = .prepairing
         
         localItems.removeAll()
-        self.itemsSortedToUpload { items in
+        itemsSortedToUpload { [weak self] items in
+            guard let `self` = self else {
+                return
+            }
+            
             if self.status == .prepairing {
                 self.localItems = items
-                self.lastSyncedMD5s = self.localItems.map({ $0.md5 })
+                self.lastSyncedMD5s = self.localItems.map { $0.md5 }
                 
                 guard !self.localItems.isEmpty else {
                     self.status = .synced
@@ -163,12 +167,18 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
-        itemsSortedToUpload { items in
+        itemsSortedToUpload { [weak self] items in
+            guard let `self` = self else {
+                return
+            }
+            
             let newUnsyncedLocalItems = items.filter({ !self.lastSyncedMD5s.contains($0.md5) })
             
             guard !newUnsyncedLocalItems.isEmpty else {
                 return
             }
+            
+            self.lastSyncedMD5s.append(contentsOf: newUnsyncedLocalItems.map { $0.md5 })
             
             self.upload(items: newUnsyncedLocalItems)
         }
