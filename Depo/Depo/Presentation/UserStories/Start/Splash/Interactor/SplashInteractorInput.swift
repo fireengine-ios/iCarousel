@@ -13,4 +13,5 @@ protocol SplashInteractorInput {
     func checkEULA()
     func clearAllPreviouslyStoredInfo()
     var isPasscodeEmpty: Bool { get }
+    func checkEmptyEmail()
 }

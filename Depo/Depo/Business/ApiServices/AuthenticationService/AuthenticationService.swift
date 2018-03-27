@@ -413,4 +413,32 @@ class AuthenticationService: BaseRequestService {
             self?.autificationByToken(sucess: success, fail: fail)
         })
     }
+    
+    
+    // MARK: - With new SessionManager
+    
+    private let sessionManager: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+        return SessionManager(configuration: configuration)
+    }()
+    
+    func checkEmptyEmail(handler: @escaping ResponseBool) {
+        let headers = [HeaderConstant.RememberMeToken: tokenStorage.refreshToken ?? ""]
+        let refreshAccessTokenUrl = RouteRequests.BaseUrl +/ RouteRequests.authificationByRememberMe
+        
+        sessionManager
+            .request(refreshAccessTokenUrl, method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers)
+            .customValidate()
+            .responseJSON { response in
+                if let headers = response.response?.allHeaderFields as? [String: Any],
+                    let warning = headers[HeaderConstant.accountWarning] as? String,
+                    warning == HeaderConstant.emptyEmail
+                {
+                    handler(ResponseResult.success(true))
+                } else {
+                    handler(ResponseResult.success(false))
+                }
+        }
+    }
 }

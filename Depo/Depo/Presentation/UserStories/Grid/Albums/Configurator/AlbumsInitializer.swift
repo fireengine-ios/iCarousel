@@ -34,7 +34,7 @@ class AlbumsModuleInitializer: NSObject {
             availableSortTypes: albumsSortTypes,
             defaultSortType: .TimeNewOld,
             availableFilter: false,
-            showGridListButton: false
+            showGridListButton: true
         )
         
         

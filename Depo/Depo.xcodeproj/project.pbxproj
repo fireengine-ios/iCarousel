@@ -2486,6 +2486,11 @@
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
+		B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
+		B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
+		B5BA98792066830A00CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
+		B5BA987A206684B300CA3BF9 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
+		B5BA987B2068C6F200CA3BF9 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		B5C4C8A22049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
 		B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
 		B5C4C8A42049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
@@ -4809,6 +4814,7 @@
 		B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncService.swift; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
+		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
 		B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsOptionView.swift; sourceTree = "<group>"; };
@@ -9987,6 +9993,7 @@
 				CEA524BD2046EB860036FCEA /* Error+Network.swift */,
 				CE1B7626204D349C00B5E12A /* Error+Alamofire.swift */,
 				CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */,
+				B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -13402,6 +13409,7 @@
 				8C0E8CE71FDEBDFF00789C91 /* LoginViewOutput.swift in Sources */,
 				8C06AC1E2008AA93003D8E05 /* TabBarActionHandler.swift in Sources */,
 				8C0E8CE81FDEBDFF00789C91 /* SettingsTableViewCell.swift in Sources */,
+				B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				8C0E8CE91FDEBDFF00789C91 /* HelpAndSupportModuleInput.swift in Sources */,
 				8C0E8CEA1FDEBDFF00789C91 /* BaseFilesGreedChildrenViewController.swift in Sources */,
 				8C0E8CEC1FDEBDFF00789C91 /* CreateStoryAudioSelectionViewController.swift in Sources */,
@@ -14244,8 +14252,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */,
+				B5BA987A206684B300CA3BF9 /* UIImage+Size.swift in Sources */,
 				B54BFF4D202C73790018AF82 /* SharedConstants.swift in Sources */,
 				B54BFF34202B20250018AF82 /* TodayViewController.swift in Sources */,
+				B5BA98792066830A00CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */,
 				B5513AF9205BAED70016C344 /* L10n.swift in Sources */,
 			);
@@ -14459,6 +14469,7 @@
 				CE23A0FA205FF5AE0048267D /* Images.swift in Sources */,
 				CE51ABCA1EF90853005DCEE0 /* Message.m in Sources */,
 				CE907A331F94D49900D2F8CE /* MediaPlayer.swift in Sources */,
+				B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				8C6EF87A1F348B5C002AC795 /* BottomSelectionTabBarInteractorOutput.swift in Sources */,
 				7859298B20060E7D003F8AB3 /* ManageContactsViewOutput.swift in Sources */,
 				7C66E8AB1F979C3300D98F27 /* CreateStoryPreviewInteractor.swift in Sources */,
@@ -14886,6 +14897,7 @@
 				CE2F56221F7552A900F49DA1 /* ColumnsCollectionLayout.swift in Sources */,
 				8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				78E3D51A203FFEC800FA3478 /* MenloworksTags.swift in Sources */,
+				B5BA987B2068C6F200CA3BF9 /* UIImage+Size.swift in Sources */,
 				4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				CEB2734E205BF57B00E1AE9C /* UnderlineTextField.swift in Sources */,
 				7CF6BDBA1F0B88910066709E /* CollectionViewCellForVideo.swift in Sources */,
