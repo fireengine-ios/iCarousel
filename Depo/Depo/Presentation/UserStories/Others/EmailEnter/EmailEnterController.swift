@@ -76,7 +76,7 @@ final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
                 }
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {
-                    self?.showErrorAlert(message: TextConstants.notCorrectEmail)
+                    self?.showErrorAlert(message: error.description)
                     self?.hideSpiner()
                 }
         })
