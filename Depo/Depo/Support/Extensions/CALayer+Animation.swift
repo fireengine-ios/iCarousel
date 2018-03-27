@@ -11,7 +11,7 @@ import Foundation
 extension CALayer {
     static func performWithoutAnimation(_ actionsWithoutAnimation: () -> Void){
         CATransaction.begin()
-        CATransaction.setValue(true, forKey: kCATransactionDisableActions)
+        CATransaction.setDisableActions(true)
         actionsWithoutAnimation()
         CATransaction.commit()
     }
