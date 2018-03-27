@@ -58,7 +58,7 @@ class BaseMediaContent: Equatable, Hashable {
     init(curentAsset: PHAsset, generalInfo: AssetInfo) {
         self.asset = curentAsset
         self.urlToFile = generalInfo.url
-        self.size = Int64(generalInfo.size)
+        self.size = generalInfo.size
         self.md5 = generalInfo.md5
         self.originalName = generalInfo.name
         
