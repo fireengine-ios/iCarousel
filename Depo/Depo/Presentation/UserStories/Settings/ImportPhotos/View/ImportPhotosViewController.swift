@@ -8,31 +8,29 @@
 
 import UIKit
 
-class ImportPhotosViewController: UIViewController {
+class ImportPhotosViewController: UIViewController, ErrorPresenter {
     var fbOutput: ImportFromFBViewOutput!
     var dbOutput: ImportFromDropboxViewOutput!
     var instOutput: ImportFromInstagramViewOutput!
     
-    @IBOutlet weak fileprivate var importDropboxLabel: UILabel!
-    @IBOutlet weak fileprivate var importFacebookLabel: UILabel!
-    @IBOutlet weak fileprivate var importInstagramLabel: UILabel!
-    @IBOutlet weak fileprivate var importCropyLabel: UILabel!
-    @IBOutlet weak fileprivate var importDropboxSwitch: UISwitch!
-    @IBOutlet weak fileprivate var importFacebookSwitch: UISwitch!
-    @IBOutlet weak fileprivate var importInstagramSwitch: UISwitch!
-    @IBOutlet weak fileprivate var importCropySwitch: UISwitch!
+    @IBOutlet weak private var importDropboxLabel: UILabel!
+    @IBOutlet weak private var importFacebookLabel: UILabel!
+    @IBOutlet weak private var importInstagramLabel: UILabel!
+    @IBOutlet weak private var importCropyLabel: UILabel!
+//    @IBOutlet weak private var importDropboxSwitch: UISwitch!
+    @IBOutlet weak private var importFacebookSwitch: UISwitch!
+    @IBOutlet weak private var importInstagramSwitch: UISwitch!
+    @IBOutlet weak private var importCropySwitch: UISwitch!
+    
+    @IBOutlet weak private var dropboxButton: UIButton!
+    @IBOutlet weak private var dropboxLoaderImageView: UIImageView!
+    @IBOutlet weak private var dropboxLoadingLabel: UILabel!
     
     private lazy var activityManager = ActivityIndicatorManager()
     
     var isFBConnected: Bool = false {
         didSet {
             importFacebookSwitch.setOn(isFBConnected, animated: true)
-        }
-    }
-    
-    var isDBConnected: Bool = false {
-        didSet {
-            importDropboxSwitch.setOn(isDBConnected, animated: true)
         }
     }
     
@@ -46,6 +44,9 @@ class ImportPhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dropboxLoaderImageView.isHidden = true
+        dropboxLoaderImageView.infinityRotate360Degrees()
         
         activityManager.delegate = self
         configureLabels()
@@ -76,12 +77,8 @@ class ImportPhotosViewController: UIViewController {
     
     // MARK: - IBActions
     
-    @IBAction fileprivate func importFromDropboxSwitchValueChanged(_ sender: UISwitch) {
-        if sender.isOn {
-            dbOutput.startDropbox()
-        } else {
-            /// nothing here
-        }
+    @IBAction private func actionDropboxButton(_ sender: UIButton) {
+        dbOutput.startDropbox()
     }
     
     @IBAction fileprivate func importFromFacebookSwitchValueChanged(_ sender: UISwitch) {
@@ -121,7 +118,7 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
     
     func failedFacebookStatus(errorMessage: String) {
         isFBConnected = false
-        UIApplication.showErrorAlert(message: errorMessage)
+        showErrorAlert(message: errorMessage)
     }
     
     func succeedFacebookStart() {
@@ -132,7 +129,7 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
     
     func failedFacebookStart(errorMessage: String) {
         isFBConnected = false
-        UIApplication.showErrorAlert(message: errorMessage)
+        showErrorAlert(message: errorMessage)
     }
     
     func succeedFacebookStop() {
@@ -142,7 +139,7 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
     func failedFacebookStop(errorMessage: String) {
         MenloworksAppEvents.onFacebookConnected()
         isFBConnected = true
-        UIApplication.showErrorAlert(message: errorMessage)
+        showErrorAlert(message: errorMessage)
     }
 }
 
@@ -155,11 +152,11 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
         guard let isConnected = status.connected else {
             return
         }
-        isDBConnected = isConnected
-        
-        if isDBConnected {
-            MenloworksEventsService.shared.onDropboxTransfered()
-        }
+//        isDBConnected = isConnected
+//        
+//        if isDBConnected {
+//            MenloworksEventsService.shared.onDropboxTransfered()
+//        }
         
         ///maybe will be
         //switch status.status {
@@ -173,7 +170,7 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
     }
     
     func dbStatusFailureCallback() {
-        isDBConnected = false
+//        isDBConnected = false
     }
     
     // MARK: Start
@@ -182,8 +179,8 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
     func dbStartSuccessCallback() {}
     
     func failedDropboxStart(errorMessage: String) {
-        isDBConnected = false
-        UIApplication.showErrorAlert(message: errorMessage)
+//        isDBConnected = false
+        showErrorAlert(message: errorMessage)
     }
 }
 
@@ -208,7 +205,7 @@ extension ImportPhotosViewController: ImportFromInstagramViewInput {
     
     func instagramStartFailure(errorMessage: String) {
         isInstagramConnected = false
-        UIApplication.showErrorAlert(message: errorMessage)
+        showErrorAlert(message: errorMessage)
     }
     
     // MARK: Stop
@@ -219,6 +216,6 @@ extension ImportPhotosViewController: ImportFromInstagramViewInput {
     
     func instagramStopFailure(errorMessage: String) {
         isInstagramConnected = true
-        UIApplication.showErrorAlert(message: errorMessage)
+        showErrorAlert(message: errorMessage)
     }
 }
