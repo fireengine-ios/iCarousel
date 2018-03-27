@@ -66,8 +66,7 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     
     func goToUsageInfo() {
         if let left = leftController {
-            let navVC = UINavigationController(rootViewController: RouterVC().usageInfo!)
-            configurateWithControllers(leftViewController: left, controllers: [navVC])
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().usageInfo!])
         }
     }
     
