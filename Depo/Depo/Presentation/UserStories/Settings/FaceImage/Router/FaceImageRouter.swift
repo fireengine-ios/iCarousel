@@ -20,5 +20,4 @@ extension FaceImageRouter: FaceImageRouterInput {
         RouterVC().presentViewController(controller: popUp)
     }
 
-    
 }

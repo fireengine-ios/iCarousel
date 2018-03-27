@@ -78,6 +78,9 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     override func getContentWithSuccessEnd() {
         super.getContentWithSuccessEnd()
+        
+        updateNoFilesView()
+
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             view.showUgglaView()
         }
@@ -104,6 +107,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     override func updateCoverPhotoIfNeeded() {
         reloadData()
+    }
+    
+    override func startAsyncOperation() {
+        outputView()?.showSpiner()
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -155,6 +162,12 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         view.stopSelection()
         
         reloadData()
+    }
+    
+    func didShowPopUp() {        
+        if let router = router as? FaceImageItemsRouterInput {
+            router.showPopUp()
+        }
     }
     
 }

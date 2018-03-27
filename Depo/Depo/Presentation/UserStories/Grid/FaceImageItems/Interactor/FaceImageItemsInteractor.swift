@@ -13,6 +13,26 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
+    private let remoteItemsService: RemoteItemsService = RemoteItemsService.init(requestSize: 999, fieldValue: FieldValue.image)
+
+    
+    private var isCheckPhotos: Bool = true
+    
+    private func checkPhotos(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        output.startAsyncOperation()
+        
+        remoteItemsService.nextItems(fileType: FieldValue.image, sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
+            if let output = self?.output as? FaceImageItemsInteractorOutput,
+                !items.isEmpty {
+                output.didShowPopUp()
+            }
+            
+            self?.output.asyncOperationSucces()
+            }, fail: { [weak self] in
+                self?.output.getContentWithFail(errorString: nil)//asyncOperationFail(errorMessage: nil)
+            })
+        
+    }
     
     override func imageForNoFileImageView() -> UIImage {
         if remoteItems is PeopleItemsService {
@@ -37,7 +57,15 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         
         return ""
     }
-
+    
+    override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        super.reloadItems(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: FieldValue.image)
+        if (isCheckPhotos) {
+            isCheckPhotos = false
+            checkPhotos(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
+        }
+    }
+    
 }
 
 // MARK: FaceImageItemsInteractorInput
