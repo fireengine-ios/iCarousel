@@ -179,7 +179,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillTerminate")
-        SyncServiceManager.shared.stopSync()
+        
+        if !tokenStorage.isRememberMe {
+            SyncServiceManager.shared.stopSync()
+            AutoSyncDataStorage.clear()
+        }
+        
         UserDefaults.standard.synchronize()
         player.stop()
     }
