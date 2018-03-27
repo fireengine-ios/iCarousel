@@ -484,42 +484,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     
     // MARK: Asset info
-    
-    /// maybe will be need
-//    func shortInfoAboutAsset(asset: PHAsset) -> AssetInfo {
-//        log.debug("\(#function)")
-//        
-//        switch asset.mediaType {
-//        case .image:
-//            return shortInfoAboutImageAsset(asset:asset)
-//            
-//        case . video:
-//            return shortInfoAboutVideoAsset(asset:asset)
-//            
-//        default:
-//            return (url: LocalMediaStorage.defaultUrl, name: "", size: 0, md5: LocalMediaStorage.noneMD5)
-//        }
-//    }
-//    
-//    func shortInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
-//        log.debug("\(#function)")
-//        
-//        let url: URL =  LocalMediaStorage.defaultUrl
-//        let md5: String = LocalMediaStorage.noneMD5
-//        let size: UInt64 = 0
-//
-//        return (url: url, name:"", size: size, md5: md5)
-//    }
-//    
-//    func shortInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
-//        log.debug("\(#function)")
-//        
-//        let url: URL = LocalMediaStorage.defaultUrl
-//        let md5: String = LocalMediaStorage.noneMD5
-//        let size: UInt64 = 0
-//
-//        return (url: url, name:"", size: size, md5: md5)
-//    }
+
     
     func fullInfoAboutAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutAsset")

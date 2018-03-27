@@ -188,9 +188,12 @@ class SyncServiceManager {
                 
                 if photoServiceWaitingForWiFi || videoServiceWaitingForWiFi {
                     self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
-                } else {
+                }
+                
+                if !photoEnabled || !videoEnabled {
                     self.stop(photo: !photoEnabled, video: !videoEnabled)
                 }
+                
                 
                 if photoEnabled || videoEnabled {
                     self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
