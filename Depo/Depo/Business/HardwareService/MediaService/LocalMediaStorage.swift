@@ -552,7 +552,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         var assetInfo = AssetInfo()
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, Dict in
+        let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, dict in
+            if let error = dict?[PHImageErrorKey] as? NSError, let inCloud = dict?[PHImageResultIsInCloudKey] as? Bool, inCloud {
+                print(error.localizedDescription)
+                semaphore.signal()
+                return
+            }
+            
             if let urlToFile = (avAsset as? AVURLAsset)?.url {
                 do {
                     assetInfo.url = urlToFile
@@ -583,6 +589,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         let operation = GetOriginalImageOperation(photoManager: self.photoManger,
                                                   asset: asset) { data, string, orientation, dict in
+                                                    if let error = dict?[PHImageErrorKey] as? NSError, let inCloud = dict?[PHImageResultIsInCloudKey] as? Bool, inCloud {
+                                                        print(error.localizedDescription)
+                                                        semaphore.signal()
+                                                        return
+                                                    }
             if let wrapDict = dict, let dataValue = data {
                 if let name = asset.originalFilename {
                     assetInfo.name = name
