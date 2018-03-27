@@ -67,7 +67,10 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
             visibleImageView.isHidden = isCellSelected
             transperentView.alpha = !isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
         }
-    
+        
+        isAccessibilityElement = true
+        accessibilityTraits = UIAccessibilityTraitImage
+        accessibilityLabel = item.name
     }
     
     override func prepareForReuse() {

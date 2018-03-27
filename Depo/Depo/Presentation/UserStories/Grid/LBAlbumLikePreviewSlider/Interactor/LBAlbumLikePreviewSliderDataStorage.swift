@@ -53,6 +53,10 @@ enum MyStreamType: Int {
             return false
         }
     }
+    
+    func isFaceImageType() -> Bool {
+        return self == .people || self == .things || self == .places
+    }
 }
 
 class SliderItem {
