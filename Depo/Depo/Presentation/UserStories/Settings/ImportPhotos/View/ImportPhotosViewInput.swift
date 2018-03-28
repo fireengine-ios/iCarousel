@@ -35,6 +35,10 @@ protocol ImportFromDropboxViewInput: class, ActivityIndicator {
     
     func dbStartSuccessCallback()
     func failedDropboxStart(errorMessage: String)
+    
+    func startStatus()
+    func updateStatus(progressPercent: Int)
+    func stopStatus()
 }
 
 // MARK: - Instagram

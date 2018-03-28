@@ -57,6 +57,9 @@ protocol ImportFromDropboxInteractorOutput: class {
     
     func failedWithInternetError(errorMessage: String)
     
+    func statusForCompletionSuccessCallback(dropboxStatus: DropboxStatusObject)
+    func statusForCompletionFailureCallback(errorMessage: String)
+    
 //    func statusSuccessCallback(status: DropboxStatusObject)
 //    func statusFailureCallback(errorMessage: String)
 //    

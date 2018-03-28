@@ -23,7 +23,7 @@ class ImportPhotosViewController: UIViewController, ErrorPresenter {
     @IBOutlet weak private var importCropySwitch: UISwitch!
     
     @IBOutlet weak private var dropboxButton: UIButton!
-    @IBOutlet weak private var dropboxLoaderImageView: UIImageView!
+    @IBOutlet weak private var dropboxLoaderImageView: RotatingImageView!
     @IBOutlet weak private var dropboxLoadingLabel: UILabel!
     
     private lazy var activityManager = ActivityIndicatorManager()
@@ -46,7 +46,7 @@ class ImportPhotosViewController: UIViewController, ErrorPresenter {
         super.viewDidLoad()
         
         dropboxLoaderImageView.isHidden = true
-        dropboxLoaderImageView.infinityRotate360Degrees()
+        dropboxLoadingLabel.text = " "
         
         activityManager.delegate = self
         configureLabels()
@@ -146,6 +146,25 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
 // MARK: - ImportFromDropboxViewInput
 extension ImportPhotosViewController: ImportFromDropboxViewInput {
     
+    func startStatus() {
+        dropboxButton.isEnabled = false
+        dropboxLoaderImageView.startInfinityRotate360Degrees(duration: 2)
+        dropboxLoaderImageView.startInfinityRotate360Degrees(duration: 2)
+        dropboxLoaderImageView.isHidden = false
+        dropboxLoadingLabel.text = TextConstants.importFiles
+    }
+    
+    func updateStatus(progressPercent: Int) {
+        dropboxLoadingLabel.text = String(format: TextConstants.importFiles, String(progressPercent))
+    }
+    
+    func stopStatus() {
+        dropboxButton.isEnabled = true
+        dropboxLoaderImageView.stopInfinityRotate360Degrees()
+        dropboxLoaderImageView.isHidden = true
+        dropboxLoadingLabel.text = " "
+    }
+    
     // MARK: Status
     
     func dbStatusSuccessCallback(status: DropboxStatusObject) {
@@ -157,16 +176,6 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
 //        if isDBConnected {
 //            MenloworksEventsService.shared.onDropboxTransfered()
 //        }
-        
-        ///maybe will be
-        //switch status.status {
-        //case .finished, .failed, .cancelled:
-        //    isDBConnected = false
-        //case .running, .pending, .scheduled:
-        //    isDBConnected = true
-        //case .none, .some(_):
-        //   isDBConnected = false
-        //}
     }
     
     func dbStatusFailureCallback() {

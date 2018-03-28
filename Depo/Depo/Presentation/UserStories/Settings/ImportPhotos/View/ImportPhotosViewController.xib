@@ -60,7 +60,7 @@
                             <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropbox_progress" translatesAutoresizingMaskIntoConstraints="NO" id="E8I-Td-65B">
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropbox_progress" translatesAutoresizingMaskIntoConstraints="NO" id="E8I-Td-65B" customClass="RotatingImageView" customModule="lifebox" customModuleProvider="target">
                             <rect key="frame" x="275.5" y="-1" width="51" height="51"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="E8I-Td-65B" secondAttribute="height" id="KMt-vc-RY0"/>
@@ -73,6 +73,9 @@
                                 <constraint firstAttribute="width" constant="50" id="LmK-HV-BeZ"/>
                             </constraints>
                             <state key="normal" image="dropbox_button"/>
+                            <connections>
+                                <action selector="actionDropboxButton:" destination="-1" eventType="touchUpInside" id="fYx-n0-4Hd"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
