@@ -288,6 +288,10 @@ enum SuggestionType: String {
             case .thing: return #imageLiteral(resourceName: "search_things")
         }
     }
+    
+    func isFaceImageType() -> Bool {
+        return self == .people || self == .thing || self == .place
+    }
 }
 
 final class SuggestionResponse: ObjectRequestResponse {
