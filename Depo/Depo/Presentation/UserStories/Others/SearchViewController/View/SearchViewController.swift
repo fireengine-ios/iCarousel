@@ -31,7 +31,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     private let underNavBarBarHeight: CGFloat = 53
     private let searchSectionCount = 6
-    private let musicBar = MusicBar(frame: CGRect.zero)
+    private let musicBar = MusicBar(frame: CGRect(x: 0, y: 0, width: 300, height: 70))
     
     // MARK: - Variables
     var underNavBarBar: GridListTopBar?
