@@ -231,7 +231,9 @@ extension AppDelegate {
         log.debug("AppDelegate didReceiveRemoteNotification")
         MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
-        PushNotificationService.shared.assignNotificationActionBy(userInfo: userInfo)
+        if PushNotificationService.shared.assignNotificationActionBy(userInfo: userInfo) {
+            PushNotificationService.shared.openActionScreen()
+        }
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {

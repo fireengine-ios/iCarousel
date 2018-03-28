@@ -20,9 +20,9 @@ final class PushNotificationService {
     
     //MARK: -
     
-    func assignNotificationActionBy(userInfo: [AnyHashable: Any]) {
+    func assignNotificationActionBy(userInfo: [AnyHashable: Any]) -> Bool {
         guard let actionString = userInfo["action"] as? String else {
-            return
+            return false
         }
 
         notificationAction = PushNotificationAction(rawValue: actionString)
@@ -30,6 +30,8 @@ final class PushNotificationService {
         if notificationAction == .http {
             notificationActionURLString = actionString
         }
+        
+        return notificationAction != nil
     }
     
     func openActionScreen() {
@@ -75,10 +77,12 @@ final class PushNotificationService {
             return
         }
         
-        if router.navigationController?.presentedViewController != nil {
-            router.pushOnPresentedView(viewController: controller)
-        } else {
-            router.pushViewController(viewController: controller)
+        DispatchQueue.main.async {
+            if self.router.navigationController?.presentedViewController != nil {
+                self.router.pushOnPresentedView(viewController: controller)
+            } else {
+                self.router.pushViewController(viewController: controller)
+            }
         }
     }
     
@@ -88,6 +92,7 @@ final class PushNotificationService {
         }
         
         if tabBarVC.selectedIndex != index.rawValue {
+            tabBarVC.tabBar.selectedItem = tabBarVC.tabBar.items?[index.rawValue]
             tabBarVC.selectedIndex = index.rawValue
         }
     }
