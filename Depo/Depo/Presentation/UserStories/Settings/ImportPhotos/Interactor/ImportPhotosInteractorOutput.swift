@@ -59,11 +59,6 @@ protocol ImportFromDropboxInteractorOutput: class {
     
     func statusForCompletionSuccessCallback(dropboxStatus: DropboxStatusObject)
     func statusForCompletionFailureCallback(errorMessage: String)
-    
-//    func statusSuccessCallback(status: DropboxStatusObject)
-//    func statusFailureCallback(errorMessage: String)
-//    
-//    func goToOnboarding()
 }
 
 // MARK: - Instagram

@@ -146,40 +146,22 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
 // MARK: - ImportFromDropboxViewInput
 extension ImportPhotosViewController: ImportFromDropboxViewInput {
     
-    func startStatus() {
+    func startDropboxStatus() {
         dropboxButton.isEnabled = false
-        dropboxLoaderImageView.startInfinityRotate360Degrees(duration: 2)
-        dropboxLoaderImageView.startInfinityRotate360Degrees(duration: 2)
         dropboxLoaderImageView.isHidden = false
-        dropboxLoadingLabel.text = TextConstants.importFiles
+        dropboxLoaderImageView.startInfinityRotate360Degrees(duration: 2)
+        dropboxLoadingLabel.text = String(format: TextConstants.importFiles, String(0))
     }
     
-    func updateStatus(progressPercent: Int) {
+    func updateDropboxStatus(progressPercent: Int) {
         dropboxLoadingLabel.text = String(format: TextConstants.importFiles, String(progressPercent))
     }
     
-    func stopStatus() {
+    func stopDropboxStatus() {
         dropboxButton.isEnabled = true
-        dropboxLoaderImageView.stopInfinityRotate360Degrees()
         dropboxLoaderImageView.isHidden = true
+        dropboxLoaderImageView.stopInfinityRotate360Degrees()
         dropboxLoadingLabel.text = " "
-    }
-    
-    // MARK: Status
-    
-    func dbStatusSuccessCallback(status: DropboxStatusObject) {
-        guard let isConnected = status.connected else {
-            return
-        }
-//        isDBConnected = isConnected
-//        
-//        if isDBConnected {
-//            MenloworksEventsService.shared.onDropboxTransfered()
-//        }
-    }
-    
-    func dbStatusFailureCallback() {
-//        isDBConnected = false
     }
     
     // MARK: Start
@@ -188,8 +170,12 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
     func dbStartSuccessCallback() {}
     
     func failedDropboxStart(errorMessage: String) {
-//        isDBConnected = false
-        showErrorAlert(message: errorMessage)
+        let isDropboxAuthorisationError = errorMessage.contains("invalid_access_token") 
+        if isDropboxAuthorisationError {
+            showErrorAlert(message: TextConstants.dropboxAuthorisationError)
+        } else {
+            showErrorAlert(message: errorMessage)
+        }
     }
 }
 

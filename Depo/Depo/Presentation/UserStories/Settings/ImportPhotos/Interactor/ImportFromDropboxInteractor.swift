@@ -24,7 +24,8 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
                 case .success(let status):
                     self?.output?.statusSuccessCallback(status: status)
                 case .failed(let error):
-                    self?.output?.statusFailureCallback(errorMessage: error.description)
+                    let errorMessage = (error as? ErrorResponse)?.description ?? error.description
+                    self?.output?.statusFailureCallback(errorMessage: errorMessage)
                 }
             }
         }
@@ -70,7 +71,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
                         case ErrorResponse.error(let error) = errorResponse,
                         error is URLError
                     {
-                        self?.output?.failedWithInternetError(errorMessage: error.localizedDescription)
+                        self?.output?.failedWithInternetError(errorMessage: error.description)
                     }
                     self?.output?.statusForStartFailureCallback(errorMessage: error.description)
                 }
@@ -97,7 +98,8 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
                 case .success(let status):
                     self?.output?.statusForCompletionSuccessCallback(dropboxStatus: status)
                 case .failed(let error):
-                    self?.output?.statusFailureCallback(errorMessage: error.description)
+                    let errorMessage = (error as? ErrorResponse)?.description ?? error.description
+                    self?.output?.statusForCompletionFailureCallback(errorMessage: errorMessage)
                 }
             }
         }
