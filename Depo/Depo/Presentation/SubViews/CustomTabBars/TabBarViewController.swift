@@ -323,6 +323,12 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         plussButton.isEnabled = !hidden
     }
     
+    func showRainbowIfNeed() {
+        if !plussButton.isSelected {
+            plussBtnAction(plussButton)
+        }
+    }
+    
     @IBAction func plussBtnAction(_ sender: Any) {
         changeViewState(state: !plussButton.isSelected)
     }

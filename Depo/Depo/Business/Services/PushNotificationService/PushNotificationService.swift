@@ -45,11 +45,14 @@ final class PushNotificationService {
         case .floatingMenu: openFloatingMenu()
         case .packages: openPackages()
         case .photos: openPhotos()
+        case .videos: openVideos()
         case .albums: openAlbums()
+        case .stories: openStories()
         case .allFiles: openAllFiles()
         case .music: openMusic()
         case .documents: openDocuments()
         case .contactSync: openContactSync()
+        case .periodicContactSync: openContactSync()
         case .favorites: openFavorites()
         case .createStory: openCreateStory()
         case .contactUs: openContactUs()
@@ -92,8 +95,15 @@ final class PushNotificationService {
         }
         
         if tabBarVC.selectedIndex != index.rawValue {
-            tabBarVC.tabBar.selectedItem = tabBarVC.tabBar.items?[index.rawValue]
-            tabBarVC.selectedIndex = index.rawValue
+            switch index {
+            case .homePageScreenIndex, .musicScreenIndex, .documentsScreenIndex:
+                tabBarVC.tabBar.selectedItem = tabBarVC.tabBar.items?[index.rawValue]
+                tabBarVC.selectedIndex = index.rawValue
+            case .photosScreenIndex:
+                tabBarVC.showPhotosScreen(self)
+            case .videosScreenIndex:
+                tabBarVC.showVideosScreen(self)
+            }
         }
     }
     
@@ -108,7 +118,11 @@ final class PushNotificationService {
     }
     
     private func openFloatingMenu() {
+        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
+            return
+        }
         
+        tabBarVC.showRainbowIfNeed()
     }
     
     private func openPackages() {
@@ -119,8 +133,16 @@ final class PushNotificationService {
         openTabBarItem(index: .photosScreenIndex)
     }
     
+    private func openVideos() {
+        openTabBarItem(index: .videosScreenIndex)
+    }
+    
     private func openAlbums() {
         pushTo(router.albumsListController())
+    }
+    
+    private func openStories() {
+        pushTo(router.storiesListController())
     }
     
     private func openAllFiles() {
@@ -137,6 +159,10 @@ final class PushNotificationService {
     
     private func openContactSync() {
         pushTo(router.syncContacts)
+    }
+    
+    private func openPeriodicContactSync() {
+        //TODO: Need to implement
     }
     
     private func openFavorites() {
