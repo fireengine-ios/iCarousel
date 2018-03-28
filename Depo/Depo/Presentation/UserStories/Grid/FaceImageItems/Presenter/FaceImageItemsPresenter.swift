@@ -84,6 +84,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             view.showUgglaView()
         }
+        
+        if let interactor = interactor as? FaceImageItemsInteractorInput {
+            interactor.checkPhotos()
+        }
     }
     
     override func getContentWithFail(errorString: String?) {
