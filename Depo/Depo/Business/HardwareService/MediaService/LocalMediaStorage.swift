@@ -98,7 +98,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
-            completion(true, status)
+            if (Device.operationSystemVersionLessThen(10)) {
+                PHPhotoLibrary.requestAuthorization({ authStatus in
+                    let isAuthorized = authStatus == .authorized
+                    completion(isAuthorized, authStatus)
+                })
+            } else {
+                completion(true, status)
+            }
         case .notDetermined, .restricted:
             passcodeStorage.systemCallOnScreen = true
             PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
