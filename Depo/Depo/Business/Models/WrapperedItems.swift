@@ -679,8 +679,11 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         name = baseModel.originalName
         
-        if let fileName = name {
-                md5 = String(format: "%@%i", fileName, fileSize)
+        if var fileName = name {
+            if fileName.hasPrefix("/") {
+                fileName.remove(at: fileName.startIndex)
+            }
+            md5 = "\(fileName)\(fileSize)"
         }
         
         fileType = baseModel.fileType
@@ -767,8 +770,11 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         
         favorites = remote.metadata?.favourite ?? false
-        if let fileName = name {
-            md5 = String(format: "%@%i", fileName, fileSize)//remote.hash ?? ""
+        if var fileName = name {
+            if fileName.hasPrefix("/") {
+                fileName.remove(at: fileName.startIndex)
+            }
+            md5 = "\(fileName)\(fileSize)"
         }
         
         patchToPreview = .remoteUrl(url)
