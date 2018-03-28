@@ -2442,6 +2442,10 @@
 		9807261A203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */; };
 		9807261C203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */; };
 		9807261D203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */; };
+		9808A05E206A88580022376D /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A05D206A88580022376D /* PushNotificationService.swift */; };
+		9808A05F206A88580022376D /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A05D206A88580022376D /* PushNotificationService.swift */; };
+		9808A061206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
+		9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
 		9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */; };
 		9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
 		984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
@@ -4764,6 +4768,8 @@
 		9807260C203468D9004E1505 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableViewCell.swift; sourceTree = "<group>"; };
+		9808A05D206A88580022376D /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
+		9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationServiceConstants.swift; sourceTree = "<group>"; };
 		9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderWithText.swift; sourceTree = "<group>"; };
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInteractor.swift; sourceTree = "<group>"; };
@@ -7574,6 +7580,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9808A05C206A88090022376D /* PushNotificationService */,
 				C65DCBDA204683820083A965 /* MenloworksEventsService */,
 				78E3D516203FF9A000FA3478 /* MenloworksTagsService */,
 				7C529686203EFE3A00BF3FBE /* SyncedBlock */,
@@ -9275,6 +9282,15 @@
 				AC9561EA6AFBC184BF853C98 /* FeedbackViewRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		9808A05C206A88090022376D /* PushNotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				9808A05D206A88580022376D /* PushNotificationService.swift */,
+				9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */,
+			);
+			path = PushNotificationService;
 			sourceTree = "<group>";
 		};
 		992E6B5199B59ED8492AFD33 /* Router */ = {
@@ -13561,6 +13577,7 @@
 				8C0E8D741FDEBDFF00789C91 /* HelpAndSupportInteractorOutput.swift in Sources */,
 				8C0E8D751FDEBDFF00789C91 /* MoreFilesActionsInteractorOutput.swift in Sources */,
 				8C0E8D761FDEBDFF00789C91 /* ContactUtil.m in Sources */,
+				9808A05F206A88580022376D /* PushNotificationService.swift in Sources */,
 				8C0E8D781FDEBDFF00789C91 /* HomePageRouterInput.swift in Sources */,
 				8C0E8D791FDEBDFF00789C91 /* MediaItem+CoreDataProperties.swift in Sources */,
 				8C0E8D7A1FDEBDFF00789C91 /* AuthenticationService.swift in Sources */,
@@ -14032,6 +14049,7 @@
 				8C0E8F2F1FDEBDFF00789C91 /* AlertFilesActionsSheetInitialConfig.swift in Sources */,
 				8C0E8F301FDEBDFF00789C91 /* SplashViewInput.swift in Sources */,
 				8C0E8F311FDEBDFF00789C91 /* SplashViewOutput.swift in Sources */,
+				9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */,
 				8C0E8F331FDEBDFF00789C91 /* SplashViewController.swift in Sources */,
 				8C0E8F341FDEBDFF00789C91 /* SplashModuleInput.swift in Sources */,
 				8C0E8F351FDEBDFF00789C91 /* MoreFilesActionsPresenter.swift in Sources */,
@@ -14807,6 +14825,7 @@
 				7859298D20060E7D003F8AB3 /* ManageContactsViewController.swift in Sources */,
 				CE51ACF11EF90853005DCEE0 /* PhoneVereficationInteractor.swift in Sources */,
 				D47864001F3F30BD00EFDC6D /* RoundedProgressView.swift in Sources */,
+				9808A061206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */,
 				2BA37C40202883BF00660394 /* FaceImagePhotosRouterInput.swift in Sources */,
 				EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */,
 				4A8CC311201A01CC00C040C4 /* FaceImageRouterInput.swift in Sources */,
@@ -14890,6 +14909,7 @@
 				7859299520060E8B003F8AB3 /* ManageContactsModuleInput.swift in Sources */,
 				7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
+				9808A05E206A88580022376D /* PushNotificationService.swift in Sources */,
 				CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */,
 				EFA74FAF1FBF378F00CF946E /* PrintViewController.swift in Sources */,
 				CEE005741F7B7DD0004FA8DE /* AssetsCash.swift in Sources */,
