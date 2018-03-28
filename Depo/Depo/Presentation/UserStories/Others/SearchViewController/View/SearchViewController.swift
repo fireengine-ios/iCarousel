@@ -531,7 +531,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        if (item.type == .people || item.type == .thing) && item.info != nil {
+        if item.info?.id != nil, let type = item.type, type.isFaceImageType() {
             output.openFaceImage(item: item)
         } else if let searchBar = navigationItem.titleView as? UISearchBar {
             searchBar.text = item.text?.removingPercentEncoding ?? item.text
