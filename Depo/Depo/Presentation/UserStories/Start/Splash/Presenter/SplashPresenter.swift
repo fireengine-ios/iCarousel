@@ -72,8 +72,16 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         router.showNetworkError()
     }
     
-    func onSuccessEULA() {
+    func updateUserLanguageSuccess() {
         interactor.checkEmptyEmail()
+    }
+    
+    func updateUserLanguageFailed(error: Error) {
+        view.showErrorAlert(message: error.description)
+    }
+    
+    func onSuccessEULA() {
+        interactor.updateUserLanguage()
     }
     
     private func openApp() {
