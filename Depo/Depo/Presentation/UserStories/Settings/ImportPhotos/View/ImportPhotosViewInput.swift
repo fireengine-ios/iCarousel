@@ -34,7 +34,7 @@ protocol ImportFromDropboxViewInput: class, ActivityIndicator {
     
     func startDropboxStatus()
     func updateDropboxStatus(progressPercent: Int)
-    func stopDropboxStatus()
+    func stopDropboxStatus(lastUpdateMessage: String)
 }
 
 // MARK: - Instagram

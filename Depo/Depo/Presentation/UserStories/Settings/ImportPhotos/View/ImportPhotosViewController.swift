@@ -156,11 +156,11 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
         dropboxLoadingLabel.text = String(format: TextConstants.importFiles, String(progressPercent))
     }
     
-    func stopDropboxStatus() {
+    func stopDropboxStatus(lastUpdateMessage: String) {
         dropboxButton.isEnabled = true
         dropboxLoaderImageView.isHidden = true
         dropboxLoaderImageView.stopInfinityRotate360Degrees()
-        dropboxLoadingLabel.text = " "
+        dropboxLoadingLabel.text = lastUpdateMessage
     }
     
     // MARK: Start
