@@ -64,7 +64,7 @@ class FeedbackLanguagesListResponse: ObjectRequestResponse {
     
 }
 
-typealias FeedbackLanguagesListOperation = () -> Swift.Void
+typealias FeedbackLanguagesListOperation = () -> Void
 
 class FeedbackService: BaseRequestService {
     

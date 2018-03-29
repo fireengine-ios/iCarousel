@@ -28,7 +28,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     }
     
     func prepaire(syncSettings: AutoSyncSettings) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.prepaire(syncSettings: syncSettings)
     }
     

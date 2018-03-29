@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-typealias ActionClosure = () -> Swift.Void
+typealias ActionClosure = () -> Void
 
 struct ActionMenyItem {
     let name: String

@@ -42,17 +42,17 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func showLoadedTermsAndUses(eula: String) {
         view.showLoadedTermsAndUses(eula: eula)
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
     }
     
     func failLoadTermsAndUses(errorString: String) {
-        compliteAsyncOperationEnableScreen(errorMessage: errorString)
+        completeAsyncOperationEnableScreen(errorMessage: errorString)
         delegate?.show(errorString: errorString)
         router.closeModule()
     }
     
     func signUpSuccessed() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         
         if interactor.cameFromLogin {
             router.goToHomePage()
@@ -63,20 +63,20 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     }
     
     func signupFailed(errorResponce: ErrorResponse) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         delegate?.show(errorString: errorResponce.description)
         router.closeModule()
     }
     
     func eulaApplied() {
         MenloworksEventsService.shared.onApporveEulaPageClicked()
-         compliteAsyncOperationEnableScreen()
+         completeAsyncOperationEnableScreen()
         //theoreticaly we should add coredata update/append here also
         router.goToAutoSync()
     }
     
     func applyEulaFaild(errorResponce: ErrorResponse) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         delegate?.show(errorString: errorResponce.description)
         router.closeModule()
     }

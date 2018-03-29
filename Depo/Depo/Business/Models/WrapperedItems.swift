@@ -12,9 +12,9 @@ import SDWebImage
 
 typealias Item = WrapData
 
-typealias RemoteImage = (_ image: UIImage?) -> Swift.Void
+typealias RemoteImage = (_ image: UIImage?) -> Void
 
-typealias RemoteImageError = (_ error: Error?) -> Swift.Void
+typealias RemoteImageError = (_ error: Error?) -> Void
 
 class LocalMediaContent {
     
