@@ -8,9 +8,9 @@
 
 import Foundation
 
-typealias RequestResponse = (Data?, URLResponse?, Error?) -> Swift.Void
-typealias RequestFileDownloadResponse = (URL?, URLResponse?, Error?) -> Swift.Void
-typealias RequestFileUploadResponse = (Data?, URLResponse?, Error?) -> Swift.Void
+typealias RequestResponse = (Data?, URLResponse?, Error?) -> Void
+typealias RequestFileDownloadResponse = (URL?, URLResponse?, Error?) -> Void
+typealias RequestFileUploadResponse = (Data?, URLResponse?, Error?) -> Void
 
 enum RequestMethod: String {
     case Post   = "POST"

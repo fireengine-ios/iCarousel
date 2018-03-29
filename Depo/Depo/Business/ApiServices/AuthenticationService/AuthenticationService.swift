@@ -10,8 +10,8 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
-typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Swift.Void
-typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
+typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Void
+typealias FailResponse = (_ value: ErrorResponse) -> Void
 
 class AuthenticationUser: BaseRequestParametrs {
     
@@ -225,8 +225,8 @@ struct ResendVerificationSMS: RequestParametrs {
 }
 
 
-typealias  SuccessLogin = () -> Swift.Void
-typealias  SuccessLogout = () -> Swift.Void
+typealias  SuccessLogin = () -> Void
+typealias  SuccessLogout = () -> Void
 typealias  FailLoginType = FailResponse
 typealias  HeadersHandler = ([String: Any]) -> Void
 

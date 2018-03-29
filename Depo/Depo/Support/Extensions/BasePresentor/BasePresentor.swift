@@ -18,9 +18,9 @@ protocol BaseAsyncOperationInteractorOutput {
     
     func startCancelableAsync(cancel: @escaping VoidHandler)
     
-    func compliteAsyncOperationEnableScreen(errorMessage: String?)
+    func completeAsyncOperationEnableScreen(errorMessage: String?)
     
-    func compliteAsyncOperationEnableScreen()
+    func completeAsyncOperationEnableScreen()
     
     func asyncOperationSucces()
     
@@ -53,12 +53,12 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
         outputView()?.showSpinerIncludeNavigatinBar()
     }
     
-    func compliteAsyncOperationEnableScreen(errorMessage: String?) {
+    func completeAsyncOperationEnableScreen(errorMessage: String?) {
         outputView()?.hideSpinerIncludeNavigatinBar()
         showMessage(errorMessage: errorMessage)
     }
     
-    func compliteAsyncOperationEnableScreen() {
+    func completeAsyncOperationEnableScreen() {
         outputView()?.hideSpinerIncludeNavigatinBar()
     }
     
