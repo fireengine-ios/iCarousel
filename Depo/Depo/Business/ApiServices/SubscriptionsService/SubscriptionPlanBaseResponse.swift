@@ -8,6 +8,20 @@
 
 import Foundation
 
+enum SubscriptionType: String {
+    case free = "FREE_OF_CHARGE"
+    case google = "INAPP_PURCHASE_GOOGLE"
+    case apple = "INAPP_PURCHASE_APPLE"
+    
+    var description: String {
+        switch self {
+        case .google: return TextConstants.subscriptionGoogleText
+        case .apple: return TextConstants.subscriptionAppleText
+        default: return ""
+        }
+    }
+}
+
 class SubscriptionPlanBaseResponse: ObjectRequestResponse {
     
     struct SubscriptionConstants {
@@ -45,7 +59,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
     var status: String?
     var nextRenewalDate: NSNumber?
     var subscriptionEndDate: NSNumber?
-    var type: String?
+    var type: SubscriptionType?
     var renewalStatus: String?
     
     var subscriptionPlan: [AnyHashable: Any]?
@@ -72,8 +86,11 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
         status = json?[SubscriptionConstants.status].string
         nextRenewalDate = json?[SubscriptionConstants.nextRenewalDate].number
         subscriptionEndDate = json?[SubscriptionConstants.subscriptionEndDate].number
-        type = json?[SubscriptionConstants.type].string
         renewalStatus = json?[SubscriptionConstants.renewalStatus].string
+        
+        if let subscriptionType = json?[SubscriptionConstants.type].string {
+            type = SubscriptionType(rawValue: subscriptionType)
+        }        
         
         let tempoSubscriptionPlan = json?[SubscriptionConstants.subscriptionPlan].dictionary
         

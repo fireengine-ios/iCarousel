@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class OfferServiceResponse: ObjectRequestResponse {
+final class OfferServiceResponse: ObjectRequestResponse {
     
     struct OfferAllConstants {
         static let offerId = "aeOfferId"
@@ -76,7 +76,7 @@ class OfferServiceResponse: ObjectRequestResponse {
     }
 }
 
-class OfferActivateServiceResponse: ObjectRequestResponse {
+final class OfferActivateServiceResponse: ObjectRequestResponse {
     
     var offer: String?
     
@@ -86,7 +86,7 @@ class OfferActivateServiceResponse: ObjectRequestResponse {
     }
 }
 
-class OfferAllAppleServiceResponse: ObjectRequestResponse {
+final class OfferAllAppleServiceResponse: ObjectRequestResponse {
     
     var list: [String] = []
     
@@ -96,7 +96,7 @@ class OfferAllAppleServiceResponse: ObjectRequestResponse {
     }
 }
 
-class OfferAllResponse: ObjectRequestResponse {
+final class OfferAllResponse: ObjectRequestResponse {
     
     var list: [OfferServiceResponse] = []
     
@@ -106,14 +106,41 @@ class OfferAllResponse: ObjectRequestResponse {
     }
 }
 
-//class ValidateApplePurchaseResponse: ObjectRequestResponse {
-//    
-//    var offer: String?
-//    
-//    override func mapping() {
-//        offer = json?.string
-//    }
-//}
+enum ValidatePurchaseType: String {
+    case success = "SUCCESS"
+    case invalid = "INVALID_SUBSCRIPTION"
+    case temporaryError = "TEMPORARY_ERROR"
+    case alreadySubscribed = "ALREADY_SUBSCRIBED_FOR_AN_ACCOUNT"
+    case restored = "RESTORED"
+    
+    var description: String {
+        switch self {
+        case .success: return TextConstants.validatePurchaseSuccessText
+        case .invalid: return TextConstants.validatePurchaseInvalidText
+        case .temporaryError: return TextConstants.validatePurchaseTemporaryErrorText
+        case .alreadySubscribed: return TextConstants.validatePurchaseAlreadySubscribedText
+        case .restored: return TextConstants.validatePurchaseRestoredText
+        }
+    }
+}
+
+final class ValidateApplePurchaseResponse: ObjectRequestResponse {
+    
+    struct ValidateApplePurchaseConstants {
+        static let status = "status"
+        static let value = "value"
+    }
+    
+    var status: ValidatePurchaseType?
+    var value: String?
+    
+    override func mapping() {
+        if let statusString = json?[ValidateApplePurchaseConstants.status].string {
+            status = ValidatePurchaseType(rawValue: statusString)
+        }
+        value = json?[ValidateApplePurchaseConstants.value].string
+    }
+}
 
 final class InitOfferResponse: ObjectRequestResponse {
     

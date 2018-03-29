@@ -49,7 +49,7 @@ class OffersServiceIml: BaseRequestService, OffersService {
         log.debug("OffersServiceIml validateApplePurchase")
 
         let param = ValidateApplePurchaseParameters(receiptId: receiptId, productId: productId)
-        let handler = BaseResponseHandler<OfferAllAppleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
+        let handler = BaseResponseHandler<ValidateApplePurchaseResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     

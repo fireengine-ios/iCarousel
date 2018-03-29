@@ -23,6 +23,7 @@ protocol PackagesInteractorInput {
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan]
     func convertToSubscriptionPlans(offerApples: [OfferApple]) -> [SubscriptionPlan]
     
+    func restorePurchases()
     /// MAYBE WILL BE NEED
     //func getCurrentSubscription()
 }
