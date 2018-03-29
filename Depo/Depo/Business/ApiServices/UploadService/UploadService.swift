@@ -662,6 +662,8 @@ class UploadOperations: Operation {
                 let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
                                                     fileUUID: uploadParam.tmpUUId )
                 
+                self?.item.uuid = uploadParam.tmpUUId
+                
                 self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
                     if let localURL = uploadParam.urlToLocalFile {
                         try? FileManager.default.removeItem(at: localURL)
