@@ -2741,6 +2741,7 @@
 		CE4CFEC11F78F94900FB4C3D /* BytesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEC01F78F94900FB4C3D /* BytesType.swift */; };
 		CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4DBF1F14AD2A00EF1F0C /* BaseRequestService.swift */; };
 		CE4F4DC11F14BCC900EF1F0C /* EULAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AF76F1F01D63D002AD17C /* EULAService.swift */; };
+		CE4F6190206CBC8600B179DA /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CE51AB051EF90853005DCEE0 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9380F1AF6AE9100AE2892 /* Filter.m */; };
 		CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E931EF5D0B100072983 /* ValidationResults.swift */; };
 		CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
@@ -9581,7 +9582,6 @@
 				CE08BDE91FC8404600440CA0 /* TokenStorage.swift */,
 				CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */,
 				CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */,
-				CE08BDEC1FC8415600440CA0 /* URL+Path.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -9994,6 +9994,9 @@
 				CE1B7626204D349C00B5E12A /* Error+Alamofire.swift */,
 				CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */,
 				B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */,
+				CE228D532017338B0082BA14 /* Alamofire+Request.swift */,
+				CED4B0292017731400D06CA9 /* Alamofire+Response.swift */,
+				CE08BDEC1FC8415600440CA0 /* URL+Path.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -10836,8 +10839,6 @@
 		CED4B02F2018595400D06CA9 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				CE228D532017338B0082BA14 /* Alamofire+Request.swift */,
-				CED4B0292017731400D06CA9 /* Alamofire+Response.swift */,
 				CE1E26E020174D7500F49E41 /* ResponseParser.swift */,
 				CE1E26E220174DC600F49E41 /* MappingError.swift */,
 				CE1E26E420174DF200F49E41 /* Mapping.swift */,
@@ -13459,6 +13460,7 @@
 				8C0B91A120170E7000A5BA81 /* DuplicatedContactsInitializer.swift in Sources */,
 				8C0E8D131FDEBDFF00789C91 /* ImportPhotosPresenter.swift in Sources */,
 				8C0E8D141FDEBDFF00789C91 /* ErrorResponse.swift in Sources */,
+				CE4F6190206CBC8600B179DA /* CALayer+Animation.swift in Sources */,
 				8C0E8D151FDEBDFF00789C91 /* ButtonWithCorner.swift in Sources */,
 				8C0E8D161FDEBDFF00789C91 /* SettingHeaderView.swift in Sources */,
 				8C0E8D171FDEBDFF00789C91 /* IntroduceDataStorage.swift in Sources */,
