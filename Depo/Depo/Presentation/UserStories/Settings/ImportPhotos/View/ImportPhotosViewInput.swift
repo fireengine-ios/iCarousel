@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol ActivityIndicator {
-    func startActivityIndicator()
-    func stopActivityIndicator()
-}
-
 // MARK: - Facebook
 
 protocol ImportFromFBViewInput: class, ActivityIndicator {

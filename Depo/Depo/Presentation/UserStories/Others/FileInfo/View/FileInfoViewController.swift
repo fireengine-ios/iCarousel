@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDelegate {
+class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDelegate, ActivityIndicator, ErrorPresenter {
     
     @IBOutlet weak var fileNameTitle: UILabel!
     @IBOutlet weak var fileName: UITextField!
@@ -97,7 +97,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
                 configurateAudioMethadataFor(object: obj)
             }
             
-            if (obj.fileType.typeWithDuration) {
+            if obj.fileType.typeWithDuration {
                 durationLabel.text = obj.duration
             } else {
                 durationH.constant = 0
@@ -152,7 +152,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     }
 
     func addReturnIfNeed(string: inout String) {
-        if string.count > 0 {
+        if !string.isEmpty {
             string.append("\n")
         }
     }
@@ -161,21 +161,15 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         if let musickMethadata = object.metaData {
             var string = ""
             if let album = musickMethadata.album {
-                string.append(TextConstants.fileInfoAlbumTitle)
-                string.append(": ")
-                string.append(album)
+                string += TextConstants.fileInfoAlbumTitle + ": " + album
             }
             if let artist = musickMethadata.artist {
                 addReturnIfNeed(string: &string)
-                string.append(TextConstants.fileInfoArtistTitle)
-                string.append(": ")
-                string.append(artist)
+                string += TextConstants.fileInfoArtistTitle + ": " + artist
             }
             if let title = musickMethadata.title {
                 addReturnIfNeed(string: &string)
-                string.append(TextConstants.fileInfoTitleTitle)
-                string.append(": ")
-                string.append(title)
+                string += TextConstants.fileInfoTitleTitle + ": " + title
             }
             
             moreFileInfoLabel.text = string
@@ -193,7 +187,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     }
     
     func goBack() {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: UITextFieldDelegate
@@ -222,4 +216,11 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         uploadDateTitle.isHidden = true
     }
     
+    func hideInfoDateLabels() {
+        view.subviews.forEach { $0.isHidden = true }
+    }
+    
+    func showInfoDateLabels() {
+        view.subviews.forEach { $0.isHidden = false }
+    }
 }
