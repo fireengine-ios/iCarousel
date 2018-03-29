@@ -571,7 +571,7 @@ extension UploadService {
 }
 
 
-typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Swift.Void
+typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Void
 
 class UploadOperations: Operation {
     

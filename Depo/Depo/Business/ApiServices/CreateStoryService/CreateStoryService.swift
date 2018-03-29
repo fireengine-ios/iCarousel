@@ -172,8 +172,8 @@ class CreateStoryMusicService: RemoteItemsService {
     }
 }
 
-typealias CreateStorSuccess = () -> Swift.Void
-typealias GetPreviewStorrySyccess = (_ responce: CreateStoryResponce) -> Swift.Void
+typealias CreateStorSuccess = () -> Void
+typealias GetPreviewStorrySyccess = (_ responce: CreateStoryResponce) -> Void
 
 class CreateStoryService: BaseRequestService {
     

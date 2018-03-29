@@ -125,4 +125,8 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         }
     }
     
+    func changeCheckPhotosState(isCheckPhotos: Bool) {
+        self.isCheckPhotos = isCheckPhotos
+    }
+    
 }

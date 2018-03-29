@@ -23,4 +23,6 @@ protocol PackagesInteractorOutput: class {
     
     func successedPromocode()
     func failedPromocode(with errorString: String)
+    
+    func purchasesRestored(text: String)
 }

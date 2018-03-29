@@ -154,10 +154,10 @@ class AlbumService: RemoteItemsService {
 }
 
 
-typealias PhotosAlbumOperation = () -> Swift.Void
-typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Swift.Void
-typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Swift.Void
-typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Swift.Void
+typealias PhotosAlbumOperation = () -> Void
+typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Void
+typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Void
+typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Void
 
 class PhotosAlbumService: BaseRequestService {
     

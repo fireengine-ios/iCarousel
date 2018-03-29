@@ -51,12 +51,12 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     
     func vereficationFailed(with error: String) {
         view.heighlightInfoTitle()
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         router.presentErrorPopUp(with: error)
     }
     
     func resendCodeRequestFailed(with error: ErrorResponse) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.resendButtonShow(show: true)
         if error.description == TextConstants.TOO_MANY_REQUESTS {
             router.presentErrorPopUp(with: error.description)
@@ -67,14 +67,14 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     }
     
     func resendCodeRequestSuccesed() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         asyncOperationSucces()
         view.setupButtonsInitialState()
         view.setupTimer(withRemainingTime: interactor.remainingTimeInMinutes * 60 )
     }
     
     func succesLogin() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.dropTimer()
         
         CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
@@ -91,7 +91,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     
     func failLogin(message: String) {
         asyncOperationSucces()
-        compliteAsyncOperationEnableScreen(errorMessage: message)
+        completeAsyncOperationEnableScreen(errorMessage: message)
     }
     
     func reachedMaxAttempts() {

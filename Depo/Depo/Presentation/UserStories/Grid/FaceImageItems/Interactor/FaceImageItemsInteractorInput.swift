@@ -12,4 +12,5 @@ protocol FaceImageItemsInteractorInput {
     func loadItem(_ item: BaseDataSourceItem)
     func onSaveVisibilityChanges(_ items: [PeopleItem])
     func checkPhotos()
+    func changeCheckPhotosState(isCheckPhotos: Bool)
 }

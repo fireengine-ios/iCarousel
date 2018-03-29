@@ -24,7 +24,7 @@ final class ShareDataImageLoader {
         }
         
         DispatchQueue.global().async { [weak self] in
-            FileManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
+            FilesExistManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
                 
                 switch result {
                 case .success(_):
