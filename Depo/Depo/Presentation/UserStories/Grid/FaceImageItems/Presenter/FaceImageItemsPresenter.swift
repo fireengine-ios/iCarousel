@@ -46,6 +46,9 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     override func getContentWithSuccess(items: [WrapData]) {
+        if let interactor = interactor as? FaceImageItemsInteractorInput {
+            interactor.changeCheckPhotosState(isCheckPhotos: false)
+        }
         allItmes = []
         
         items.forEach { item in
