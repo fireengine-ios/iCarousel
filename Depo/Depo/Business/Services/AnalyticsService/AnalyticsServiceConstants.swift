@@ -15,10 +15,10 @@ enum AnalyticsEvent {
     case uploadMusic
     case uploadDocument
     case purchaseTurkcell50
-    case purchaseTurkcell250
+    case purchaseTurkcell500
     case purchaseTurkcell2500
     case purchaseNonTurkcell50
-    case purchaseNonTurkcell250
+    case purchaseNonTurkcell500
     case purchaseNonTurkcell2500
     case importDropbox
     case importFacebook
@@ -39,10 +39,10 @@ enum AnalyticsEvent {
         case .uploadMusic: return "ba947a"
         case .uploadDocument: return "jb1jc6"
         case .purchaseTurkcell50: return "trie85"
-        case .purchaseTurkcell250: return "wdqlvk"
+        case .purchaseTurkcell500: return "wdqlvk"
         case .purchaseTurkcell2500: return "7bf7gu"
         case .purchaseNonTurkcell50: return "q3ivog"
-        case .purchaseNonTurkcell250: return "x6zaly"
+        case .purchaseNonTurkcell500: return "x6zaly"
         case .purchaseNonTurkcell2500: return "zab8u6"
         case .importDropbox: return "tdvlrq"
         case .importFacebook: return "y5dz5j"
@@ -65,10 +65,10 @@ enum AnalyticsEvent {
         case .uploadMusic: return "UPLOAD_MUSIC"
         case .uploadDocument: return "UPLOAD_DOCUMENT"
         case .purchaseTurkcell50: return "PURCHASE_50_GB_TURKCELL"
-        case .purchaseTurkcell250: return "PURCHASE_500_GB_TURKCELL"
+        case .purchaseTurkcell500: return "PURCHASE_500_GB_TURKCELL"
         case .purchaseTurkcell2500: return "PRUCHASE_25_TB_TURKCELL"
         case .purchaseNonTurkcell50: return "PURCHASE_50_GB_NONTURKCELL"
-        case .purchaseNonTurkcell250: return "PURCHASE_500_GB_NONTURKCELL"
+        case .purchaseNonTurkcell500: return "PURCHASE_500_GB_NONTURKCELL"
         case .purchaseNonTurkcell2500: return "PRUCHASE_25_TB_NONTURKCELL"
         case .importDropbox: return "DROPBOX_IMPORT"
         case .importFacebook: return "FACEBOOK_IMPORT"
