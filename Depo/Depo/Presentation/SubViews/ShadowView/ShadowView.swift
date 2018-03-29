@@ -9,10 +9,8 @@
 import UIKit
 
 class ShadowView: UIView {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    
+    func addShadowView() {
         if (self.layer.sublayers != nil) {
             for l in self.layer.sublayers! {
                 l.removeFromSuperlayer()

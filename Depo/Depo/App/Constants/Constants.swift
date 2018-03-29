@@ -807,7 +807,9 @@ struct NumericConstants {
     static let albumCellGreedWidth: CGFloat = 100
     static let storiesCellGreedHeight: CGFloat = 100
     
-    static let insetAlbumCellGreed: CGFloat = 8
+    static let insetAlbumCellGreed: CGFloat = 16
+    static let insetBetweenAlbumCell: CGFloat = 76
+    static let heightTextAlbumCell: CGFloat = 21
     
     static let numberOfElementsInSyncRequest: Int = 30000
     
