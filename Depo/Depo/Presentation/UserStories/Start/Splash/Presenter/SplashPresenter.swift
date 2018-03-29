@@ -8,13 +8,13 @@
 
 final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput, SplashInteractorOutput {
     
-    
     weak var view: SplashViewInput!
     var interactor: SplashInteractorInput!
     var router: SplashRouterInput!
     
     private lazy var customProgressHUD = CustomProgressHUD()
     private var turkcellLogin = false
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
@@ -73,13 +73,17 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onSuccessEULA() {
-        
+        interactor.checkEmptyEmail()
+    }
+    
+    private func openApp() {
+        storageVars.emptyEmailUp = false
         CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercentage in
             DispatchQueue.main.async {
                 self?.customProgressHUD.showProgressSpinner(progress: progressPercentage)
             }
-        
-        }) { [weak self] in
+            
+        }, end: { [weak self] in
             DispatchQueue.main.async {
                 self?.customProgressHUD.hideProgressSpinner()
                 
@@ -95,7 +99,21 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                     self?.router.navigateToApplication()
                 }
             }
+        })
+    }
+    
+    func showEmptyEmail(show: Bool) {
+        show ? openEmptyEmail() : openApp()  
+    }
+    
+    private func openEmptyEmail() {
+        storageVars.emptyEmailUp = true
+        let vc = EmailEnterController.initFromNib()
+        vc.approveCancelHandler = { [weak self] in
+            self?.openApp()
         }
+        let navVC = UINavigationController(rootViewController: vc)
+        UIApplication.topController()?.present(navVC, animated: true, completion: nil)
     }
     
     func onFailEULA() {

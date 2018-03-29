@@ -34,20 +34,61 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
     // MARK: status
     
     func statusSuccessCallback(status: DropboxStatusObject) {
-        view?.dbStatusSuccessCallback(status: status)
+        view?.stopActivityIndicator()
+        
+        guard let requestStatus = status.status else {
+            return
+        }
+        
+        switch requestStatus {
+        case .scheduled, .waitingAction, .running, .pending:
+            view?.startDropboxStatus()
+            statusForCompletionSuccessCallback(dropboxStatus: status)
+        case .finished, .failed, .cancelled, .none:
+            view?.stopDropboxStatus()
+        }
+    }
+    
+    func statusFailureCallback(errorMessage: String) {  
         view?.stopActivityIndicator()
     }
     
-    func statusFailureCallback(errorMessage: String) {
-        view?.dbStatusFailureCallback()
-        view?.stopActivityIndicator()
+    // MARK: - StatusForCompletion
+    
+    func statusForCompletionSuccessCallback(dropboxStatus: DropboxStatusObject) {
+        guard let requestStatus = dropboxStatus.status else {
+            view?.stopDropboxStatus()
+            return
+        }
+        
+        switch requestStatus {
+        case .scheduled, .waitingAction, .pending:
+            view?.updateDropboxStatus(progressPercent: 0)
+            requestStatusForCompletion()
+        case .running:
+            view?.updateDropboxStatus(progressPercent: dropboxStatus.progress ?? 0)
+            requestStatusForCompletion()
+        case .finished, .failed, .cancelled, .none:
+            view?.stopDropboxStatus()
+        }
+    }
+    
+    private func requestStatusForCompletion() {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.interactor.requestStatusForCompletion()
+        }
+    }
+    
+    func statusForCompletionFailureCallback(errorMessage: String) {
+        view?.stopDropboxStatus()
+        view?.failedDropboxStart(errorMessage: errorMessage)
     }
     
     // MARK: status for start
     
     func statusForStartSuccessCallback(status: DropboxStatusObject) {
         if status.connected == true {
-            view?.stopActivityIndicator()
+            interactor.requestStart()
         } else {
             interactor.login()
         }   
@@ -88,6 +129,8 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
     
     func startSuccessCallback() {
         view?.stopActivityIndicator()
+        view?.startDropboxStatus()
+        interactor.requestStatusForCompletion()
     }
     
     func startFailureCallback(errorMessage: String) {

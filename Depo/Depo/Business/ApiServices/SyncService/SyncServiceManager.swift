@@ -188,9 +188,12 @@ class SyncServiceManager {
                 
                 if photoServiceWaitingForWiFi || videoServiceWaitingForWiFi {
                     self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
-                } else {
+                }
+                
+                if !photoEnabled || !videoEnabled {
                     self.stop(photo: !photoEnabled, video: !videoEnabled)
                 }
+                
                 
                 if photoEnabled || videoEnabled {
                     self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
@@ -342,7 +345,11 @@ extension SyncServiceManager {
                                               secondAction: { vc in
                                                 vc.close(completion: {
                                                     let router = RouterVC()
-                                                    router.pushViewController(viewController: router.packages)
+                                                    if router.navigationController?.presentedViewController != nil {
+                                                        router.pushOnPresentedView(viewController: router.packages)
+                                                    } else {
+                                                        router.pushViewController(viewController: router.packages)
+                                                    }
                                                 })
         })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)

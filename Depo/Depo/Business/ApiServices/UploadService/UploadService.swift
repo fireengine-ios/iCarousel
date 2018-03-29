@@ -75,11 +75,13 @@ final class UploadService: BaseRequestService {
     }
     
     @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
+        let filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes && $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
+        //TODO: Show 4 gigabytes error here?
         switch uploadType {
         case .autoSync:
-            return self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail)
+            return self.syncFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail)
         case .syncToUse:
-            return self.syncToUseFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
+            return self.syncToUseFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                 self?.clearSyncToUseCounters()
                 self?.hideUploadCardIfNeeded()
                 success()
@@ -95,7 +97,7 @@ final class UploadService: BaseRequestService {
                     fail(errorResponse)
             })
         default:
-            return self.uploadFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
+            return self.uploadFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                 self?.clearUploadCounters()
                 self?.hideUploadCardIfNeeded()
                 success()
@@ -523,7 +525,11 @@ extension UploadService {
                                               secondAction: { vc in
                                                 vc.close(completion: {
                                                     let router = RouterVC()
-                                                    router.pushViewController(viewController: router.packages)
+                                                    if router.navigationController?.presentedViewController != nil {
+                                                        router.pushOnPresentedView(viewController: router.packages)
+                                                    } else {
+                                                        router.pushViewController(viewController: router.packages)
+                                                    }                                                    
                                                 })
         })
         
@@ -534,7 +540,7 @@ extension UploadService {
 }
 
 
-typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Swift.Void
+typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Void
 
 class UploadOperations: Operation {
     

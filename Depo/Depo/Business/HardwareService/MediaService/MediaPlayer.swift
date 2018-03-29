@@ -182,6 +182,7 @@ final class MediaPlayer: NSObject {
             return
         }
         
+        resetTime()
         if playNext() >= 0 {
             play()
         } else {
@@ -233,7 +234,7 @@ final class MediaPlayer: NSObject {
             urls.remove(at: i)
             items.remove(at: i)
             
-            if i < currentIndex {
+            if i <= currentIndex, currentIndex != 0 {
                 currentIndex -= 1
             }
         }
@@ -244,7 +245,7 @@ final class MediaPlayer: NSObject {
         if deleteIndexes.contains(currentIndex) {
             // TODO: CHECK ALL STATES
             if play(at: currentIndex) {
-//                currentIndex -= 1 /// check
+                currentIndex -= 1
             } else if list.count > 0 {
                 currentIndex = list.count - 1
                 play(at: currentIndex)
@@ -456,7 +457,7 @@ final class MediaPlayer: NSObject {
     var shuffledIndexes = [Int]()
     
     func shuffleCurrentList() {
-        if list.count == 0 || currentIndex == list.count {
+        if list.count == 0 || currentIndex == list.count || currentIndex < 0 {
             return
         }
         

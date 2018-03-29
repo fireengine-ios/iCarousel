@@ -29,12 +29,12 @@ protocol ImportFromFBViewInput: class, ActivityIndicator {
 // MARK: - Dropbox
 
 protocol ImportFromDropboxViewInput: class, ActivityIndicator {
-    
-    func dbStatusSuccessCallback(status: DropboxStatusObject)
-    func dbStatusFailureCallback()
-    
     func dbStartSuccessCallback()
     func failedDropboxStart(errorMessage: String)
+    
+    func startDropboxStatus()
+    func updateDropboxStatus(progressPercent: Int)
+    func stopDropboxStatus()
 }
 
 // MARK: - Instagram

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,10 +18,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImportPhotosViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="dropboxButton" destination="8Tv-FM-W2Y" id="bLm-lp-d59"/>
+                <outlet property="dropboxLoaderImageView" destination="E8I-Td-65B" id="Zge-Kz-0iq"/>
+                <outlet property="dropboxLoadingLabel" destination="dkI-AE-Hu8" id="MkF-JQ-nKp"/>
                 <outlet property="importCropyLabel" destination="xmE-ya-QJp" id="Ja7-gJ-96p"/>
                 <outlet property="importCropySwitch" destination="vhu-Lb-m7J" id="ZDj-wE-DeV"/>
                 <outlet property="importDropboxLabel" destination="6bQ-nV-vDX" id="qdi-Hz-FE7"/>
-                <outlet property="importDropboxSwitch" destination="M46-Ol-r8G" id="F1z-wj-WNo"/>
                 <outlet property="importFacebookLabel" destination="VPI-Qd-fe0" id="5qC-iX-FXu"/>
                 <outlet property="importFacebookSwitch" destination="hcd-ne-ugE" id="tW0-TB-7eP"/>
                 <outlet property="importInstagramLabel" destination="LyN-rW-KDA" id="QUM-IQ-XYm"/>
@@ -40,37 +43,59 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVn-PT-4L8">
-                    <rect key="frame" x="29" y="79.5" width="326" height="31"/>
+                    <rect key="frame" x="29" y="79.5" width="326" height="48"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropox" translatesAutoresizingMaskIntoConstraints="NO" id="7VT-4i-z0z">
-                            <rect key="frame" x="0.0" y="5.5" width="22" height="20"/>
+                            <rect key="frame" x="0.0" y="10.5" width="22" height="20"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import From Dropbox" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bQ-nV-vDX">
-                            <rect key="frame" x="36" y="5" width="140" height="21"/>
+                            <rect key="frame" x="36" y="10" width="140" height="21"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="18"/>
                             <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="M46-Ol-r8G">
-                            <rect key="frame" x="277" y="0.0" width="51" height="31"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkI-AE-Hu8">
+                            <rect key="frame" x="36" y="32" width="27.5" height="16"/>
+                            <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="14"/>
+                            <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropbox_progress" translatesAutoresizingMaskIntoConstraints="NO" id="E8I-Td-65B" customClass="RotatingImageView" customModule="lifebox" customModuleProvider="target">
+                            <rect key="frame" x="275.5" y="-2" width="51" height="51"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="E8I-Td-65B" secondAttribute="height" id="KMt-vc-RY0"/>
+                                <constraint firstAttribute="width" constant="51" id="bjx-PK-rt9"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Tv-FM-W2Y">
+                            <rect key="frame" x="276" y="0.0" width="50" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="LmK-HV-BeZ"/>
+                            </constraints>
+                            <state key="normal" image="dropbox_button"/>
                             <connections>
-                                <action selector="importFromDropboxSwitchValueChanged:" destination="-1" eventType="valueChanged" id="Yh9-8l-MLx"/>
+                                <action selector="actionDropboxButton:" destination="-1" eventType="touchUpInside" id="fYx-n0-4Hd"/>
                             </connections>
-                        </switch>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="7VT-4i-z0z" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="0G8-UH-5tA"/>
+                        <constraint firstItem="E8I-Td-65B" firstAttribute="centerY" secondItem="8Tv-FM-W2Y" secondAttribute="centerY" constant="-0.5" id="6A5-WR-ZNy"/>
+                        <constraint firstItem="8Tv-FM-W2Y" firstAttribute="top" secondItem="ZVn-PT-4L8" secondAttribute="top" id="DRd-e1-2KN"/>
                         <constraint firstItem="6bQ-nV-vDX" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" constant="36" id="Gt1-Hk-kOK"/>
-                        <constraint firstItem="7VT-4i-z0z" firstAttribute="centerY" secondItem="ZVn-PT-4L8" secondAttribute="centerY" id="HX5-Bz-Ngy"/>
-                        <constraint firstItem="6bQ-nV-vDX" firstAttribute="centerY" secondItem="ZVn-PT-4L8" secondAttribute="centerY" id="W2w-Sy-piA"/>
-                        <constraint firstItem="M46-Ol-r8G" firstAttribute="centerY" secondItem="ZVn-PT-4L8" secondAttribute="centerY" id="Wvk-3b-Jj0"/>
-                        <constraint firstAttribute="height" constant="31" id="d1s-nk-4PR"/>
-                        <constraint firstAttribute="trailing" secondItem="M46-Ol-r8G" secondAttribute="trailing" id="psF-3o-PH3"/>
+                        <constraint firstItem="6bQ-nV-vDX" firstAttribute="top" secondItem="ZVn-PT-4L8" secondAttribute="top" constant="10" id="V4I-yG-pe9"/>
+                        <constraint firstItem="dkI-AE-Hu8" firstAttribute="top" secondItem="6bQ-nV-vDX" secondAttribute="bottom" constant="1" id="ZmX-No-VeE"/>
+                        <constraint firstItem="7VT-4i-z0z" firstAttribute="centerY" secondItem="6bQ-nV-vDX" secondAttribute="centerY" id="aKN-P3-53b"/>
+                        <constraint firstAttribute="bottom" secondItem="dkI-AE-Hu8" secondAttribute="bottom" id="dhq-cY-1aO"/>
+                        <constraint firstItem="E8I-Td-65B" firstAttribute="centerX" secondItem="8Tv-FM-W2Y" secondAttribute="centerX" id="hXA-Rz-ZKx"/>
+                        <constraint firstAttribute="bottom" secondItem="8Tv-FM-W2Y" secondAttribute="bottom" id="jsm-64-bjs"/>
+                        <constraint firstItem="dkI-AE-Hu8" firstAttribute="leading" secondItem="6bQ-nV-vDX" secondAttribute="leading" id="nek-6Y-eXF"/>
+                        <constraint firstAttribute="trailing" secondItem="8Tv-FM-W2Y" secondAttribute="trailing" id="tso-1W-qcD"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eqk-Rd-19j">
-                    <rect key="frame" x="29" y="132.5" width="326" height="31"/>
+                    <rect key="frame" x="29" y="137.5" width="326" height="31"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-h0-sDt">
                             <rect key="frame" x="0.0" y="4.5" width="10" height="22"/>
@@ -100,7 +125,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lug-sc-2GG">
-                    <rect key="frame" x="29" y="185.5" width="326" height="31"/>
+                    <rect key="frame" x="29" y="190.5" width="326" height="31"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="27s-Lf-hqu">
                             <rect key="frame" x="0.0" y="4.5" width="22" height="22"/>
@@ -130,7 +155,7 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9py-wk-Ufk">
-                    <rect key="frame" x="29" y="238.5" width="326" height="31"/>
+                    <rect key="frame" x="29" y="243.5" width="326" height="31"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cropy" translatesAutoresizingMaskIntoConstraints="NO" id="wWT-6u-WhK">
                             <rect key="frame" x="0.0" y="4.5" width="22" height="22"/>
@@ -169,7 +194,7 @@
                 <constraint firstItem="Zfm-OS-iBM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="A2M-Ei-0Wr"/>
                 <constraint firstItem="lug-sc-2GG" firstAttribute="top" secondItem="Eqk-Rd-19j" secondAttribute="bottom" constant="22" id="AVw-Oy-VjU"/>
                 <constraint firstItem="Eqk-Rd-19j" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="Mqp-7I-T0p"/>
-                <constraint firstItem="Eqk-Rd-19j" firstAttribute="top" secondItem="ZVn-PT-4L8" secondAttribute="bottom" constant="22" id="NHY-ta-dr5"/>
+                <constraint firstItem="Eqk-Rd-19j" firstAttribute="top" secondItem="ZVn-PT-4L8" secondAttribute="bottom" constant="10" id="NHY-ta-dr5"/>
                 <constraint firstItem="lug-sc-2GG" firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" id="QUR-9N-8cg"/>
                 <constraint firstItem="Zfm-OS-iBM" firstAttribute="top" secondItem="ChP-yJ-OMc" secondAttribute="top" constant="20" id="SdZ-tq-Uwo"/>
                 <constraint firstItem="9py-wk-Ufk" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="cwa-tx-oy9"/>
@@ -185,6 +210,8 @@
     </objects>
     <resources>
         <image name="cropy" width="22" height="22"/>
+        <image name="dropbox_button" width="32" height="32"/>
+        <image name="dropbox_progress" width="42" height="42"/>
         <image name="dropox" width="22" height="20"/>
         <image name="facebook" width="10" height="22"/>
         <image name="instagram" width="22" height="22"/>

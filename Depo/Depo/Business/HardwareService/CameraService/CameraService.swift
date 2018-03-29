@@ -12,9 +12,9 @@ import AVFoundation
 
 @objc class CameraService: NSObject {
     
-    typealias CameraGranted = (_ granted: Bool) -> Swift.Void
+    typealias CameraGranted = (_ granted: Bool) -> Void
     
-    typealias  Photo = (_ image: UIImage?) -> Swift.Void
+    typealias  Photo = (_ image: UIImage?) -> Void
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     

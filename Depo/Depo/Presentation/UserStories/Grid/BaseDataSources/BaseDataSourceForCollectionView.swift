@@ -897,6 +897,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         guard let cell_ = cell as? CollectionViewCellDataProtocol else {
                 return
         }
+        
+        if let photoCell = cell_ as? CollectionViewCellForPhoto {
+            photoCell.finishedUploadForObject()
+        }
+        
         cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: false)
     }
     

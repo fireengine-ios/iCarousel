@@ -13,12 +13,12 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     // MARK: - Interactor output
     
     func operationFinished(type: ElementTypes) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         basePassingPresenter?.operationFinished(withType: type, response: nil)
     }
     
     func operationFailed(type: ElementTypes, message: String) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         basePassingPresenter?.operationFailed(withType: type)
         if type != .deleteDeviceOriginal {
             UIApplication.showErrorAlert(message: message)
