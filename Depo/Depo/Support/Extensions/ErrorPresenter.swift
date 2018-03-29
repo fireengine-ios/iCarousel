@@ -13,6 +13,9 @@ protocol ErrorPresenter {
 }
 extension ErrorPresenter where Self: UIViewController {
     func showErrorAlert(message: String) {
+        if presentedViewController is PopUpController {
+            return
+        } 
         let vc = PopUpController.with(errorMessage: message)
         present(vc, animated: false, completion: nil)
     }
