@@ -10,6 +10,6 @@ protocol FileInfoViewInput: class, ActivityIndicator, ErrorPresenter {
     func startRenaming()
     func setObject(object: BaseDataSourceItem)
     func goBack()
-    func hideInfoDateLabels()
-    func showInfoDateLabels()
+    func hideViews()
+    func showViews()
 }

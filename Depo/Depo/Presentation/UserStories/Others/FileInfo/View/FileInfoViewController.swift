@@ -126,7 +126,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
                     takenDateTitle.isHidden = true
                 }
             } else {
-                hiddeInfoDateLabels()
+                hideInfoDateLabels()
             }
             return
         }
@@ -147,7 +147,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         }
         
         durationH.constant = 0
-        hiddeInfoDateLabels()
+        hideInfoDateLabels()
         view.layoutIfNeeded()
     }
 
@@ -209,18 +209,18 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         output.onRename(newName: fileName.text!)
     }
     
-    private func hiddeInfoDateLabels () {
+    private func hideInfoDateLabels () {
         takenDateLabel.isHidden = true
         takenDateTitle.isHidden = true
         uploadDateLabel.isHidden = true
         uploadDateTitle.isHidden = true
     }
     
-    func hideInfoDateLabels() {
+    func hideViews() {
         view.subviews.forEach { $0.isHidden = true }
     }
     
-    func showInfoDateLabels() {
+    func showViews() {
         view.subviews.forEach { $0.isHidden = false }
     }
 }

@@ -18,7 +18,7 @@ class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput,
     
     func setObject(object: BaseDataSourceItem) {
         if object.fileType == .photoAlbum {
-            view.hideInfoDateLabels()
+            view.hideViews()
             view.startActivityIndicator()
             interactor.getAlbum(for: object)
         } else {
@@ -28,7 +28,7 @@ class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput,
     
     func albumForUuidSuccessed(album: AlbumServiceResponse) {
         let albumItem = AlbumItem(remote: album)
-        view.showInfoDateLabels()
+        view.showViews()
         view.setObject(object: albumItem)
         view.stopActivityIndicator()
     }
