@@ -13,6 +13,9 @@ class ImportFromDropboxPresenter: BasePresenter {
     weak var view: ImportFromDropboxViewInput?
     var interactor: ImportFromDropboxInteractorInput!
     var router: ImportFromDropboxRouterInput!
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
 }
 
 // MARK: - ImportFromDropboxViewOutput
@@ -131,6 +134,7 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         view?.stopActivityIndicator()
         view?.startDropboxStatus()
         interactor.requestStatusForCompletion()
+        analyticsService.track(event: .importDropbox)
     }
     
     func startFailureCallback(errorMessage: String) {

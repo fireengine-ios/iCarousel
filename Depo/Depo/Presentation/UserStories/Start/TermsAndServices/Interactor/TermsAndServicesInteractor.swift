@@ -9,10 +9,11 @@
 class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
 
     weak var output: TermsAndServicesInteractorOutput!
-    let eulaService = EulaService()
+    private let eulaService = EulaService()
     
-    let dataStorage = TermsAndServicesDataStorage()
-    let authenticationService = AuthenticationService()
+    private let dataStorage = TermsAndServicesDataStorage()
+    private lazy var authenticationService = AuthenticationService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     var isFromLogin = false
     
@@ -69,8 +70,10 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 self?.dataStorage.signUpResponse = t
                 self?.dataStorage.signUpUserInfo = SingletonStorage.shared.signUpInfo
                 SingletonStorage.shared.referenceToken = t.referenceToken
+                
+                self?.analyticsService.track(event: .signUp)
+                
                 self?.output.signUpSuccessed()
-
             }
         }, fail: { [weak self] errorResponce in
             DispatchQueue.main.async {

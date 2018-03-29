@@ -20,6 +20,8 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     var fromSettings: Bool = false
 
     func viewIsReady() {
@@ -79,6 +81,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     func onCheckPermissionForPhoto(accessGranted: Bool) {
         if accessGranted {
             view.reloadTableView()
+            analyticsService.track(event: .turnOnAutosync)
         } else {
             view.disableAutoSync()
         }
