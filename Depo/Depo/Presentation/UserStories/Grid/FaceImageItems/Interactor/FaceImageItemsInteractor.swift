@@ -13,6 +13,9 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
+    private let remoteItemsService = RemoteItemsService.init(requestSize: 999, fieldValue: FieldValue.image)
+
+    private var isCheckPhotos: Bool = true
     
     override func imageForNoFileImageView() -> UIImage {
         if remoteItems is PeopleItemsService {
@@ -37,7 +40,7 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         
         return ""
     }
-
+    
 }
 
 // MARK: FaceImageItemsInteractorInput
@@ -99,6 +102,27 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
             }, fail: { [weak self] error in
                 self?.output.asyncOperationFail(errorMessage: error.description)
         })
+    }
+    
+    func checkPhotos() {
+        if (isCheckPhotos) {
+            isCheckPhotos = false
+            
+            output.startAsyncOperation()
+            
+            remoteItemsService.nextItems(fileType: .image, sortBy: .date, sortOrder: .asc, success: { [weak self] items in
+                if let output = self?.output as? FaceImageItemsInteractorOutput,
+                    !items.isEmpty {
+                    output.didShowPopUp()
+                }
+                
+                self?.output.asyncOperationSucces()
+                }, fail: { [weak self] in
+                    
+                    self?.output.getContentWithFail(errorString: nil)//asyncOperationFail(errorMessage: nil)
+                    
+            })
+        }
     }
     
 }

@@ -27,7 +27,10 @@ protocol ImportFromDropboxInteractorInput {
     func login()
     func requestConnect(withToken token: String)
     func requestStart()
+    func requestStatusForCompletion()
 }
+
+// MARK: - Instagram
 
 protocol ImportFromInstagramInteractorInput {
     func getConnectionStatus()

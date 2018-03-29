@@ -680,7 +680,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         name = baseModel.originalName
         
         if let fileName = name {
-                md5 = String(format: "%@%i", fileName, fileSize)
+            md5 = "\(WrapData.removeFirstSlash(text: fileName))\(fileSize)"
         }
         
         fileType = baseModel.fileType
@@ -768,7 +768,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         favorites = remote.metadata?.favourite ?? false
         if let fileName = name {
-            md5 = String(format: "%@%i", fileName, fileSize)//remote.hash ?? ""
+            md5 = "\(WrapData.removeFirstSlash(text: fileName))\(fileSize)"
         }
         
         patchToPreview = .remoteUrl(url)
@@ -896,5 +896,16 @@ class WrapData: BaseDataSourceItem, Wrappered {
             }
         }
         return ""
+    }
+    
+    /*
+    //Need this beacase old app shares name with slash
+    */
+    private class func removeFirstSlash(text: String) -> String {
+        var tempoString = text
+        if tempoString.hasPrefix("/") {
+            tempoString.remove(at: tempoString.startIndex)
+        }
+        return tempoString
     }
 }

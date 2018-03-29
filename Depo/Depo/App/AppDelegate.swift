@@ -222,9 +222,18 @@ extension AppDelegate {
         MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        self.application(application, didReceiveRemoteNotification: userInfo) { result in
+        }
+    }
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         log.debug("AppDelegate didReceiveRemoteNotification")
         MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+        
+        if PushNotificationService.shared.assignNotificationActionBy(userInfo: userInfo) {
+            PushNotificationService.shared.openActionScreen()
+        }
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
