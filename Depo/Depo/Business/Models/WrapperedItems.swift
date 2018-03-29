@@ -898,7 +898,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return ""
     }
     
-    private class func removeFirstSlash(text: String) -> String { //Nedd this beacase old app shares name with slash
+    private class func removeFirstSlash(text: String) -> String { //Need this beacase old app shares name with slash
         var tempoString = text
         if tempoString.hasPrefix("/") {
             tempoString.remove(at: tempoString.startIndex)
