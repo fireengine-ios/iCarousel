@@ -319,12 +319,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         iapManager.restorePurchases { [weak self] result in
             switch result {
             case .success(let productIds):
-                var offers = [OfferApple]()
-                productIds.forEach({ productId in
-                    let offer = OfferApple()
-                    offer.storeProductIdentifier = productId
-                    offers.append(offer)
-                })
+                let offers = productIds.map { OfferApple(productId: $0) }
                 self?.validatePurchase(offersApple: offers)
 
             case .fail(let error):
