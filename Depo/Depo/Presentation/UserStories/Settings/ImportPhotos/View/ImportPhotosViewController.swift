@@ -17,7 +17,6 @@ class ImportPhotosViewController: UIViewController, ErrorPresenter {
     @IBOutlet weak private var importFacebookLabel: UILabel!
     @IBOutlet weak private var importInstagramLabel: UILabel!
     @IBOutlet weak private var importCropyLabel: UILabel!
-//    @IBOutlet weak private var importDropboxSwitch: UISwitch!
     @IBOutlet weak private var importFacebookSwitch: UISwitch!
     @IBOutlet weak private var importInstagramSwitch: UISwitch!
     @IBOutlet weak private var importCropySwitch: UISwitch!
