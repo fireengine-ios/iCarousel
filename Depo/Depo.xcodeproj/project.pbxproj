@@ -272,6 +272,7 @@
 		7A9474C9206A59A400FE5CE9 /* FaceImageItemsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DBA142058EC7A00D08C5E /* FaceImageItemsViewInput.swift */; };
 		7A9474CA206A5F3B00FE5CE9 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		7A9474CB206A5F3E00FE5CE9 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
+		7AF40784206E47C0009E7ED8 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		7C00FE191F5957570041D041 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE161F5957570041D041 /* AppRater.bundle */; };
 		7C00FE1A1F5957570041D041 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00FE181F5957570041D041 /* AppRater.m */; };
 		7C00FE1C1F5958380041D041 /* SingletonStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C00FE1B1F5958380041D041 /* SingletonStorage.swift */; };
@@ -14313,6 +14314,7 @@
 				CE1BE933204831CE0074BDDC /* DocumentActionViewController.swift in Sources */,
 				CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */,
 				CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */,
+				7AF40784206E47C0009E7ED8 /* SharedConstants.swift in Sources */,
 				CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
