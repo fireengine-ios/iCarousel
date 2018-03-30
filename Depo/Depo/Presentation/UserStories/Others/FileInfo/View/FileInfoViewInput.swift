@@ -6,17 +6,10 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol FileInfoViewInput: class {
-
-    /**
-        @author Oleg
-        Setup initial state of the view
-    */
-
+protocol FileInfoViewInput: class, ActivityIndicator, ErrorPresenter {
     func startRenaming()
-    
     func setObject(object: BaseDataSourceItem)
-    
     func goBack()
-    
+    func hideViews()
+    func showViews()
 }

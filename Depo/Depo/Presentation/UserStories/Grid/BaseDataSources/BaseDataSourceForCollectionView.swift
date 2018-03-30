@@ -1213,7 +1213,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             }
             
-            
             var serversUUIDs = [String]()
             let items = getAllObjects()
             for array in items {
@@ -1226,38 +1225,32 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             objectsForRemoving = objectsForRemoving.filter({
                 !serversUUIDs.contains($0.uuid)
             })
-            
-            
-            let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
-            let predicate = PredicateRules().allLocalObjectsForObjects(objects: serverObjects)
-            let sortDescriptors = CollectionSortingRules(sortingRules: currentSortType).rule.sortDescriptors
-            
-            fetchRequest.predicate = predicate
-            fetchRequest.sortDescriptors = sortDescriptors
-            
-            guard let fetchResult = try? CoreDataStack.default.mainContext.fetch(fetchRequest) else {
-                return
+        
+            let localUUIDS = serverObjects.map {
+                $0.getUUIDAsLocal()
             }
-            localObjectsForReplace = fetchResult.map { WrapData(mediaItem: $0) }
+            
+            localObjectsForReplace = CoreDataStack.default.allLocalItems(withUUIDS: localUUIDS)
+            
             let uuids = localObjectsForReplace.map({ $0.uuid })
             
             if (localObjectsForReplace.count != serverObjects.count) {
                 for object in serverObjects {
-                    if !uuids.contains(object.uuid) {
+                    if !uuids.contains(object.getUUIDAsLocal()) {
                         objectsForRemoving.append(object)
                     }
                 }
             }
             
             for object in localObjectsForReplace {
-                if let index = serversUUIDs.index(of: object.uuid) {
+                if let index = serversUUIDs.index(of: object.getUUIDAsLocal()) {
                     serversUUIDs.remove(at: index)
                 }
             }
             
             for localObject in localObjectsForReplace {
                 for (index, object) in allMediaItems.enumerated() {
-                    if object.uuid == localObject.uuid {
+                    if object.uuid == localObject.getUUIDAsLocal() {
                         allMediaItems[index] = localObject
                     }
                 }
@@ -1269,7 +1262,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 for array in items {
                     var sectionArray = [BaseDataSourceItem]()
                     for arraysObject in array {
-                        if let index = uuids.index(of: arraysObject.uuid) {
+                        if let index = uuids.index(of: arraysObject.getUUIDAsLocal()) {
                             sectionArray.append(localObjectsForReplace[index])
                         } else {
                             sectionArray.append(arraysObject)
