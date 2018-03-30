@@ -49,11 +49,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         
         imageView.image = nil
         
-        if let thing = wrappedObj as? ThingsItem {
-            nameLabel.text = thing.responseObject.code
-        } else {
-            nameLabel.text = item.name
-        }
+        nameLabel.text = item.name
         
         if let peopleItem = wrappedObj as? PeopleItem,
             let isVisible = peopleItem.responseObject.visible {
