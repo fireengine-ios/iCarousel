@@ -37,5 +37,6 @@ enum PushNotificationAction: String {
     case things = "things"
     case places = "places"
     case http = "http"
+    case login = "login"
 }
 

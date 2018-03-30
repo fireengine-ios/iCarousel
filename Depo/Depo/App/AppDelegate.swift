@@ -249,7 +249,7 @@ extension AppDelegate {
         
         FBSDKAppEvents.logPushNotificationOpen(userInfo)
         
-        if PushNotificationService.shared.assignNotificationActionBy(userInfo: userInfo) {
+        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: userInfo) {
             PushNotificationService.shared.openActionScreen()
         }
     }

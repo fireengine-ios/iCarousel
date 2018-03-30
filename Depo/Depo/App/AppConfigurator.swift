@@ -48,6 +48,8 @@ class AppConfigurator {
 //        CoreDataStack.default.appendLocalMediaItems {
             startMenloworks(with: launchOptions)
 //        }
+        
+        _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
     }
     
     private class func emptyEmailUpIfNeed() {

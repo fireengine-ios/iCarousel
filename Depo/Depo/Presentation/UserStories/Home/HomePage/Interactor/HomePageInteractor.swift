@@ -16,6 +16,7 @@ class HomePageInteractor: HomePageInteractorInput {
     func homePagePresented() {
         FreeAppSpace.default.checkFreeAppSpace()
         SyncServiceManager.shared.updateImmediately()
+        PushNotificationService.shared.openActionScreen()
         
         homeCardsService.all { result in
             DispatchQueue.main.async {
