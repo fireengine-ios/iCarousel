@@ -150,21 +150,17 @@ class RemoteItemsService {
     }
 }
 
-class NextPageOperation: Operation {
+final class NextPageOperation: Operation {
     
-    let searchService: SearchService
+    private var requestTask: URLSessionTask?
+    private let searchService: SearchService
     
     let requestParam: SearchByFieldParameters
     
-    let success: ListRemoveItems?
-    
-    let fail: FailRemoteItems?
-    
-    var isRealCancel = false
-    
-    override func cancel() {
-        isRealCancel = true
-    }
+    private let success: ListRemoveItems?
+    private let fail: FailRemoteItems?
+    private let semaphore = DispatchSemaphore(value: 0)
+
     
     init(requestParam: SearchByFieldParameters, success: ListRemoveItems?, fail: FailRemoteItems?) {
         self.searchService = SearchService()
@@ -173,38 +169,34 @@ class NextPageOperation: Operation {
         self.success = success
     }
     
+    override func cancel() {
+        super.cancel()
+        
+        requestTask?.cancel()
+        
+        semaphore.signal()
+    }
+    
     override func main() {
-        if isCancelled {
-            return
-        }
-        let semaphore = DispatchSemaphore(value: 0)
-        searchService.searchByField(param: requestParam, success: { [weak self] response  in
-            
+        requestTask = searchService.searchByField(param: requestParam, success: { [weak self] response  in
             guard let `self` = self else {
-                return
-            }
-            
-            if self.isRealCancel {
-                //TODO: check if we need it
-//                self.fail?()
-                semaphore.signal()
                 return
             }
             
             guard let resultResponse = (response as? SearchResponse)?.list else {
                 self.fail?()
-                semaphore.signal()
+                self.semaphore.signal()
                 return
             }
             
             let list = resultResponse.flatMap { WrapData(remote: $0) }
             self.success?(list)
-            semaphore.signal()
+            self.semaphore.signal()
             
         }, fail: { [weak self] errorResponce in
             errorResponce.showInternetErrorGlobal()
             self?.fail?()
-            semaphore.signal()
+            self?.semaphore.signal()
         })
         semaphore.wait()
     }

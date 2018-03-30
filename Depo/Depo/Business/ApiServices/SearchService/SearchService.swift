@@ -293,11 +293,12 @@ class AlbumDetalParameters: BaseRequestParametrs {
 
 class SearchService: BaseRequestService {
     
-    func searchByField(param: SearchByFieldParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
+    @discardableResult
+    func searchByField(param: SearchByFieldParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) -> URLSessionTask {
         log.debug("SearchService searchByField")
 
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
+        return executeGetRequest(param: param, handler: handler)
     }
     
     func searchByName(param: AdvancedSearchParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
