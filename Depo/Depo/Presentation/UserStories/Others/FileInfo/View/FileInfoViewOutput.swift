@@ -7,13 +7,6 @@
 //
 
 protocol FileInfoViewOutput {
-
-    /**
-        @author Oleg
-        Notify presenter that view is ready
-    */
-
     func viewIsReady()
-    
     func onRename(newName: String)
 }

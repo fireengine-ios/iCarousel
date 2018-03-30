@@ -649,3 +649,5 @@
 "E-Mail Entry" = "E-Mail Entry";
 "Importing files" = "Importing files %@%%";
 "Dropbox authorisation error" = "Dropbox authorisation error";
+"dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
+"dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";

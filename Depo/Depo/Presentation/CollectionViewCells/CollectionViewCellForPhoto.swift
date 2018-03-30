@@ -121,7 +121,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
                 return
             }
             
-            let isImageLoadedNotQuickly = dateStart.timeIntervalSinceNow < -0.1
+            let isImageLoadedNotQuickly = dateStart.timeIntervalSinceNow < -0.2
             self.setImage(image: image, animated: isImageLoadedNotQuickly)
         }
         
