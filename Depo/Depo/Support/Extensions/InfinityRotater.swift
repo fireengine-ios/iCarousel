@@ -34,4 +34,35 @@ extension InfinityRotater where Self: UIView {
     }
 }
 
-final class RotatingImageView: UIImageView, InfinityRotater {}
+final class RotatingImageView: UIImageView, InfinityRotater, AnimationFlowManager {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: .UIApplicationDidEnterBackground, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    var persistentAnimations: [String: CAAnimation] = [:]
+    var persistentSpeed: Float = 0.0
+    
+    @objc private func didBecomeActive() {
+        resumeAnimations()
+    }
+    
+    @objc private func willResignActive() {
+        pauseAnimations()
+    }
+}
