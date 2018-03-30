@@ -36,7 +36,7 @@ protocol BaseFilesGreedViewInput: class {
     
     func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool)
     
-    func showNoFilesTop()
+    func showNoFilesTop(text: String)
     
     func hideNoFiles()
     

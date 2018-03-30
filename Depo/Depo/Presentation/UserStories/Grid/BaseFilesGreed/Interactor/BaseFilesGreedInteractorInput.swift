@@ -22,6 +22,8 @@ protocol BaseFilesGreedInteractorInput {
     
     func needHideTopBar() -> Bool 
     
+    func textForNoFileTopLabel() -> String
+    
     func textForNoFileLbel() -> String
     
     func textForNoFileButton() -> String
