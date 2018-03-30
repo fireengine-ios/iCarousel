@@ -6,6 +6,8 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
+import Alamofire
+
 struct AlbumsPatch {
     static let album =  "/api/album"
 //    static let deleteAlbumss =  "/api/album"
@@ -301,5 +303,12 @@ class PhotosAlbumService: BaseRequestService {
         group.notify(queue: DispatchQueue.main) {
             success?(allItems)
         }
+    }
+    
+    func getAlbum(for uuid: String, handler: @escaping ResponseHandler<AlbumServiceResponse>) {
+        let url = RouteRequests.BaseUrl +/ "api/album/\(uuid)"
+        SessionManager.default
+            .request(url)
+            .responseObject(handler)
     }
 }
