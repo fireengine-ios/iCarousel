@@ -60,6 +60,7 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
         layoutIfNeeded()
         
         greedShadowView.addShadowView()
+        listShadowView.addShadowView()
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
