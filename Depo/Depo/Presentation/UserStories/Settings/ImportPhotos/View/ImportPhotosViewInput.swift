@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol ActivityIndicator {
-    func startActivityIndicator()
-    func stopActivityIndicator()
-}
-
 // MARK: - Facebook
 
 protocol ImportFromFBViewInput: class, ActivityIndicator {
@@ -34,7 +29,7 @@ protocol ImportFromDropboxViewInput: class, ActivityIndicator {
     
     func startDropboxStatus()
     func updateDropboxStatus(progressPercent: Int)
-    func stopDropboxStatus()
+    func stopDropboxStatus(lastUpdateMessage: String)
 }
 
 // MARK: - Instagram

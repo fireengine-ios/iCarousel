@@ -13,6 +13,8 @@ class ImportFromDropboxPresenter: BasePresenter {
     weak var view: ImportFromDropboxViewInput?
     var interactor: ImportFromDropboxInteractorInput!
     var router: ImportFromDropboxRouterInput!
+    
+    private let lastUpdateEmptyMessage = " "
 }
 
 // MARK: - ImportFromDropboxViewOutput
@@ -45,7 +47,7 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
             view?.startDropboxStatus()
             statusForCompletionSuccessCallback(dropboxStatus: status)
         case .finished, .failed, .cancelled, .none:
-            view?.stopDropboxStatus()
+            view?.stopDropboxStatus(lastUpdateMessage: status.uploadDescription)
         }
     }
     
@@ -57,7 +59,7 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
     
     func statusForCompletionSuccessCallback(dropboxStatus: DropboxStatusObject) {
         guard let requestStatus = dropboxStatus.status else {
-            view?.stopDropboxStatus()
+            view?.stopDropboxStatus(lastUpdateMessage: dropboxStatus.uploadDescription)
             return
         }
         
@@ -69,7 +71,7 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
             view?.updateDropboxStatus(progressPercent: dropboxStatus.progress ?? 0)
             requestStatusForCompletion()
         case .finished, .failed, .cancelled, .none:
-            view?.stopDropboxStatus()
+            view?.stopDropboxStatus(lastUpdateMessage: dropboxStatus.uploadDescription)
         }
     }
     
@@ -80,7 +82,7 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
     }
     
     func statusForCompletionFailureCallback(errorMessage: String) {
-        view?.stopDropboxStatus()
+        view?.stopDropboxStatus(lastUpdateMessage: lastUpdateEmptyMessage)
         view?.failedDropboxStart(errorMessage: errorMessage)
     }
     
