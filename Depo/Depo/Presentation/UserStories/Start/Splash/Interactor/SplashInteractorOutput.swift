@@ -18,4 +18,8 @@ protocol SplashInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func onFailLogin()
     func onNetworkFail()
     
+    func showEmptyEmail(show: Bool)
+    
+    func updateUserLanguageSuccess()
+    func updateUserLanguageFailed(error: Error)
 }

@@ -178,10 +178,10 @@ class SyncServiceManager {
                 return
             }
             
+            let photoOption = syncSettings.photoSetting.option
+            let videoOption = syncSettings.videoSetting.option
+            
             if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
-                let photoOption = syncSettings.photoSetting.option
-                let videoOption = syncSettings.videoSetting.option
-                
                 let photoEnabled = (reachability.connection == .wifi && photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
                     (reachability.connection == .cellular && photoOption == .wifiAndCellular)
                 
@@ -191,10 +191,12 @@ class SyncServiceManager {
                 let photoServiceWaitingForWiFi = reachability.connection == .cellular && photoOption == .wifiOnly
                 let videoServiceWaitingForWiFi = reachability.connection == .cellular && videoOption == .wifiOnly
                 
+                if !photoEnabled || !videoEnabled {
+                    self.stop(photo: !photoEnabled, video: !videoEnabled)
+                }
+                
                 if photoServiceWaitingForWiFi || videoServiceWaitingForWiFi {
                     self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
-                } else {
-                    self.stop(photo: !photoEnabled, video: !videoEnabled)
                 }
                 
                 if photoEnabled || videoEnabled {
@@ -202,7 +204,9 @@ class SyncServiceManager {
                 }
             } else {
                 if reachabilityChanged {
-                    self.waitForWifi(photo: true, video: true)
+                    let photoServiceWaitingForWiFi = photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
+                    let videoServiceWaitingForWiFi = videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
+                    self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
                 } else {
                     self.stopSync()
                 }
@@ -356,7 +360,11 @@ extension SyncServiceManager {
                                               secondAction: { vc in
                                                 vc.close(completion: {
                                                     let router = RouterVC()
-                                                    router.pushViewController(viewController: router.packages)
+                                                    if router.navigationController?.presentedViewController != nil {
+                                                        router.pushOnPresentedView(viewController: router.packages)
+                                                    } else {
+                                                        router.pushViewController(viewController: router.packages)
+                                                    }
                                                 })
         })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)

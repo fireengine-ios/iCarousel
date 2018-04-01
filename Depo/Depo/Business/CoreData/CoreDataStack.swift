@@ -54,7 +54,7 @@ class CoreDataStack: NSObject {
     
     var backgroundContext: NSManagedObjectContext
     
-    let privateQueue = DispatchQueue(label: "com.lifebox.CoreDataStack")//, attributes: .concurrent)//(label: "com.lifebox.CoreDataStack")
+    let privateQueue = DispatchQueue(label: "com.lifebox.CoreDataStack", attributes: .concurrent)//(label: "com.lifebox.CoreDataStack")
     
     var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     

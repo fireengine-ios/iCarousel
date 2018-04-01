@@ -53,12 +53,12 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func loginFieldIsEmpty() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.showInfoButton(in: .login)
     }
     
     func passwordFieldIsEmpty() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.showInfoButton(in: .password)
     }
     
@@ -77,28 +77,28 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     func viewAppeared() {}
     
     func needShowCaptcha() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         captchaShowed = true
         view.showCapcha()
     }
     
     func failedBlockError() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.failedBlockError()
     }
     
     func succesLogin() {
         interactor.checkEULA()
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
     }
     
     private func showMessageHideSpinner(text: String) {
         view.showErrorMessage(with: text)
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
     }
     
     func failLogin(message: String) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.highlightLoginTitle()
         view.highlightPasswordTitle()
         showMessageHideSpinner(text: message)
@@ -108,7 +108,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func needSignUp(message: String) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.showNeedSignUp(message: message)
     }
     
@@ -131,17 +131,12 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     // MARK: - EULA
     
     func onSuccessEULA() {
-        compliteAsyncOperationEnableScreen()
-        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
-            }
-        }, end: { [weak self] in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.hideProgressSpinner()
-                self?.openEmptyEmailIfNeedOrOpenSyncSettings()
-            }
-        })
+        completeAsyncOperationEnableScreen()
+        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+ 
+       
+        openEmptyEmailIfNeedOrOpenSyncSettings()
+ 
     }
     
     private func openEmptyEmailIfNeedOrOpenSyncSettings() {
@@ -163,18 +158,18 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func onFailEULA() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         router.goToTermsAndServices()
     }
     
     func allAttemtsExhausted(user: String) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
         interactor.blockUser(user: user)
     }
     
     func userStillBlocked(user: String) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
     }
     
@@ -196,7 +191,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func openEmptyPhone() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         tokenStorage.isClearTokens = true
         
         let textEnterVC = TextEnterController.with(

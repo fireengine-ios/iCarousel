@@ -9,8 +9,8 @@
 import Foundation
 
 protocol FileInfoInteractorOutput: class {
-    
     func setObject(object: BaseDataSourceItem)
-    
     func updated()
+    func albumForUuidSuccessed(album: AlbumServiceResponse)
+    func albumForUuidFailed(error: Error)
 }

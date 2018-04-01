@@ -135,7 +135,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
     }
     
-    func startSearchDuplicates(finished: @escaping() -> Swift.Void) {
+    func startSearchDuplicates(finished: @escaping() -> Void) {
         if (isSearchRunning) {
             needSearchAgain = true
             return
@@ -187,8 +187,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     private func getDuplicatesObjects(latestDate: Date,
-                                      success: @escaping ()-> Swift.Void,
-                                      fail: @escaping ()-> Swift.Void) {
+                                      success: @escaping ()-> Void,
+                                      fail: @escaping ()-> Void) {
 
         guard let service = self.photoVideoService else {
             fail()

@@ -36,7 +36,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                     phChanges[.removed] = previosFetch.objects(at: removedIndexes)
                 }
                 
-                CoreDataStack.default.appendLocalMediaItems(progress: nil, end: {
+                CoreDataStack.default.appendLocalMediaItems(completion: {
                     UploadService.default.cancelOperations(with: phChanges[.removed])
                     NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
                 })

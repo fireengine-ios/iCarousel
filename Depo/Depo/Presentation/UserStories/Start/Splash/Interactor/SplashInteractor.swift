@@ -75,7 +75,33 @@ class SplashInteractor: SplashInteractorInput {
         }
     }
     
+    func checkEmptyEmail() {
+        authService.checkEmptyEmail { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let show):
+                    self?.output.showEmptyEmail(show: show)
+                case .failed(let error):
+                    print(error.description)
+                }
+            }
+        }
+    }
+    
     func clearAllPreviouslyStoredInfo() {
         CoreDataStack.default.clearDataBase()
+    }
+    
+    func updateUserLanguage() {
+        authService.updateUserLanguage(Device.locale) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.output.updateUserLanguageSuccess()
+                case .failed(let error):
+                    self?.output.updateUserLanguageFailed(error: error)
+                }
+            }
+        }
     }
 }

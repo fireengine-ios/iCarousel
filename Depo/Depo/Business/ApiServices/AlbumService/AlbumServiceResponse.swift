@@ -23,7 +23,7 @@ struct AlbumJsonKey {
 }
 
 
-class AlbumServiceResponse: ObjectRequestResponse {
+final class AlbumServiceResponse: ObjectRequestResponse, Map {
     
     var createdDate: Date?
     var lastModifiedDate: Date?

@@ -233,7 +233,7 @@ class DetailResponse: ObjectRequestResponse {
     }
 }
 
-typealias FileOperation = () -> Swift.Void
+typealias FileOperation = () -> Void
 
 class FileService: BaseRequestService {
     
@@ -358,7 +358,7 @@ class FileService: BaseRequestService {
                     
                     let destination = Device.documentsFolderUrl(withComponent: downloadParam.fileName)
                     
-                    let removeDestinationFile: () -> Swift.Void = {
+                    let removeDestinationFile: () -> Void = {
                         
                         do {
                             try FileManager.default.removeItem(at: destination)

@@ -24,7 +24,7 @@ typealias LocalFilesCallBack = (_ localFiles: [WrapData]) -> Void
 
 extension CoreDataStack {
 
-    @objc func appendLocalMediaItems() {
+    @objc func appendLocalMediaItems(completion: VoidHandler?) {
         let localMediaStorage = LocalMediaStorage.default
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
             if authorized {
@@ -386,6 +386,13 @@ extension CoreDataStack {
 //        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
 //        return items.flatMap { $0.wrapedObject }
         return []
+    }
+    
+    func  allLocalItems(withUUIDS uuids: [String]) -> [WrapData] {
+        let context = mainContext
+        let predicate = NSPredicate(format: "(uuidValue IN %@)", uuids)
+        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
+        return items.flatMap { $0.wrapedObject }
     }
     
     func hasLocalItemsForSync(video: Bool, image: Bool) -> Bool {

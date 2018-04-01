@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SplashViewController: UIViewController, SplashViewInput {
+class SplashViewController: UIViewController, SplashViewInput, ErrorPresenter {
 
     var output: SplashViewOutput!
 

@@ -62,6 +62,7 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
         ///iPad, iOS < 10, prevent white color
         ///https://stackoverflow.com/questions/27551291/uitableview-backgroundcolor-always-white-on-ipad
         backgroundColor = contentView.backgroundColor
+        updateViews()
     }
 
     

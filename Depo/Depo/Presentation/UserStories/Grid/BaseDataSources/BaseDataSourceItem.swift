@@ -68,6 +68,26 @@ class BaseDataSourceItem: NSObject {
         return left.hashValue == right.hashValue
     }
     
+    override func isEqual(_ object: Any?) -> Bool {
+        if let obj = object as? BaseDataSourceItem {
+            if isLocalItem != obj.isLocalItem {
+                return false
+            } else if !isLocalItem {
+                return uuid == obj.uuid
+            } else if let selfObj = self as? WrapData, let comparableObject = object as? WrapData {
+                return selfObj.asset?.localIdentifier == comparableObject.asset?.localIdentifier
+            }
+        }
+        return false
+    }
+    
+    func getUUIDAsLocal() -> String {
+        if uuid.contains("~"){
+            return uuid.components(separatedBy: "~").first ?? uuid
+        }
+        return uuid
+    }
+    
     func isSynced() -> Bool {
         return syncStatuses.contains(SingletonStorage.shared.unigueUserID)
     }

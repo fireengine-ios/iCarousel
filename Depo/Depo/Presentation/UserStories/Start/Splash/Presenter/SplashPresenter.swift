@@ -8,13 +8,13 @@
 
 final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput, SplashInteractorOutput {
     
-    
     weak var view: SplashViewInput!
     var interactor: SplashInteractorInput!
     var router: SplashRouterInput!
     
     private lazy var customProgressHUD = CustomProgressHUD()
     private var turkcellLogin = false
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
@@ -72,9 +72,50 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         router.showNetworkError()
     }
     
+    func updateUserLanguageSuccess() {
+        interactor.checkEmptyEmail()
+    }
+    
+    func updateUserLanguageFailed(error: Error) {
+        view.showErrorAlert(message: error.description)
+    }
+    
     func onSuccessEULA() {
-        CoreDataStack.default.appendLocalMediaItems()
+        CoreDataStack.default.appendLocalMediaItems(completion: nil)
         router.navigateToApplication()
+        interactor.updateUserLanguage()
+    }
+    
+    private func openApp() {
+        storageVars.emptyEmailUp = false
+        
+                
+        if turkcellLogin {
+            let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+            if launchedBefore {
+                router.navigateToApplication()
+            } else {
+                router.goToSyncSettingsView()
+                UserDefaults.standard.set(true, forKey: "launchedBefore")
+            }
+        } else {
+            router.navigateToApplication()
+        }
+  
+    }
+    
+    func showEmptyEmail(show: Bool) {
+        show ? openEmptyEmail() : openApp()  
+    }
+    
+    private func openEmptyEmail() {
+        storageVars.emptyEmailUp = true
+        let vc = EmailEnterController.initFromNib()
+        vc.approveCancelHandler = { [weak self] in
+            self?.openApp()
+        }
+        let navVC = UINavigationController(rootViewController: vc)
+        UIApplication.topController()?.present(navVC, animated: true, completion: nil)
     }
     
     func onFailEULA() {

@@ -64,6 +64,12 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
     }
 }
 
+extension JsonMap where Self: ObjectRequestResponse {
+    init?(json: JSON) {
+        self.init(withJSON: json)
+    }
+}
+
 class SignUpSuccessResponse: ObjectRequestResponse {
     
     var action: String?

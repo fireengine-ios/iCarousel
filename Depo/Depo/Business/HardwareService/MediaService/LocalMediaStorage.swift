@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Swift.Void
+typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Void
 
 typealias FileDataSorceImg = (_ image: UIImage?) -> Void
 
@@ -130,7 +130,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
-            completion(true, status)
+            if (Device.operationSystemVersionLessThen(10)) {
+                PHPhotoLibrary.requestAuthorization({ authStatus in
+                    let isAuthorized = authStatus == .authorized
+                    completion(isAuthorized, authStatus)
+                })
+            } else {
+                completion(true, status)
+            }
         case .notDetermined, .restricted:
             passcodeStorage.systemCallOnScreen = true
             PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
@@ -521,6 +528,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return url
     }
 
+    // MARK: Asset info
+
     
     func fullInfoAboutAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutAsset")
@@ -612,18 +621,18 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
 }
 
-typealias PhotoManagerCallBack = (UIImage?, [AnyHashable: Any]?) -> Swift.Void
+typealias PhotoManagerCallBack = (UIImage?, [AnyHashable: Any]?) -> Void
 
-typealias PhotoManagerOriginalVideoCallBack = (AVAsset?, AVAudioMix?, [AnyHashable: Any]?) -> Swift.Void
+typealias PhotoManagerOriginalVideoCallBack = (AVAsset?, AVAudioMix?, [AnyHashable: Any]?) -> Void
 
-typealias PhotoManagerOriginalCallBack = (Data?, String?, UIImageOrientation, [AnyHashable: Any]?) -> Swift.Void
+typealias PhotoManagerOriginalCallBack = (Data?, String?, UIImageOrientation, [AnyHashable: Any]?) -> Void
 
 
 class GetImageOperation: Operation {
     
     let photoManager: PHImageManager
     
-    let callback: (UIImage?, [AnyHashable: Any]?) -> Swift.Void
+    let callback: (UIImage?, [AnyHashable: Any]?) -> Void
     
     let asset: PHAsset
     
