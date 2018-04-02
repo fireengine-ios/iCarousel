@@ -72,27 +72,27 @@ extension CoreDataStack {
     
     func updateLocalItemSyncStatus(item: Item) {
         let context = backgroundContext
-        context.perform {
+        context.perform { [weak self] in
             let predicateForRemoteFile = NSPredicate(format: "uuidValue == %@", item.uuid)
-            let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: context)
-            
-            alreadySavedMediaItems.forEach({ savedItem in
-                //for locals
-                savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
-                
-                if savedItem.objectSyncStatus != nil {
-                    savedItem.objectSyncStatus = nil
-                }
-                
-                var array = [MediaItemsObjectSyncStatus]()
-                for userID in item.syncStatuses {
-                    array.append(MediaItemsObjectSyncStatus(userID: userID, context: context))
-                }
-                savedItem.objectSyncStatus = NSSet(array: array)
-                
-                //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
-            })
-            self.saveDataForContext(context: context)
+            if let alreadySavedMediaItems = self?.executeRequest(predicate: predicateForRemoteFile, context: context) {
+                alreadySavedMediaItems.forEach({ savedItem in
+                    //for locals
+                    savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
+                    
+                    if savedItem.objectSyncStatus != nil {
+                        savedItem.objectSyncStatus = nil
+                    }
+                    
+                    var array = [MediaItemsObjectSyncStatus]()
+                    for userID in item.syncStatuses {
+                        array.append(MediaItemsObjectSyncStatus(userID: userID, context: context))
+                    }
+                    savedItem.objectSyncStatus = NSSet(array: array)
+                    
+                    //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
+                })
+                self?.saveDataForContext(context: context)
+            }
         }
     }
     

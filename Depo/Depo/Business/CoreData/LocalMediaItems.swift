@@ -154,13 +154,13 @@ extension CoreDataStack {
             let currentUserID = SingletonStorage.shared.unigueUserID
             let filtredArray = sortedItems.filter { !$0.syncStatusesArray.contains(currentUserID) }
             
-            completion(filtredArray.flatMap { $0.wrapedObject })
+            completion(filtredArray.compactMap { $0.wrapedObject })
         })
     }
     
     private func getUnsyncsedMediaItems(video: Bool, image: Bool, completion: @escaping (_ items: [MediaItem]) -> Void) {
         let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
-        let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap { $0.localIdentifier }
+        let currentlyInLibriaryLocalIDs: [String] = assetList.compactMap { $0.localIdentifier }
         
         var filesTypesArray = [Int16]()
         if (video) {
@@ -171,9 +171,9 @@ extension CoreDataStack {
         }
         
         let context = newChildBackgroundContext
-        newChildBackgroundContext.perform {
+        newChildBackgroundContext.perform { [weak self] in
             let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
-           completion(self.executeRequest(predicate: predicate, context: context))
+           completion(self?.executeRequest(predicate: predicate, context: context) ?? [])
         }
         
         
