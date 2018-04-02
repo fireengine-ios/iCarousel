@@ -43,6 +43,8 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         return cachingManager
     }()
     
+    let privateQueue = DispatchQueue(label: "com.lifebox.FilesDataSource", attributes: .concurrent)
+    
     // MARK: PhotoDataSource
 
     func getSmalImage(path patch: PathForItem, completeImage: @escaping RemoteImage) {
@@ -156,14 +158,23 @@ extension FilesDataSource {
 
 extension FilesDataSource {
     func requestInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL?, _ isICloud: Bool) -> Void) {
-        switch asset.mediaType {
-        case .image:
-            requestImageInfo(for: asset, completion: completion)
-        case .video:
-            requestVideoInfo(for: asset, completion: completion)
-        default:
-            completion(0, nil, false)
-        }
+//        privateQueue.async { [weak self] in
+//            guard let `self` = self else {
+//                debugPrint("DED DEDEDEDEDprivateQueue.asyncprivateQueue.asyncprivateQueue.asyncprivateQueue.async")
+//                completion(0, nil, false)
+//                return
+//            }
+            debugPrint("privateQueue.asyncprivateQueue.asyncprivateQueue.asyncprivateQueue.async")
+            switch asset.mediaType {
+            case .image:
+                self.requestImageInfo(for: asset, completion: completion)
+            case .video:
+                self.requestVideoInfo(for: asset, completion: completion)
+            default:
+                completion(0, nil, false)
+            }
+//        }
+        
     }
     
     private func requestImageInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL?, _ isICloud: Bool) -> Void) {

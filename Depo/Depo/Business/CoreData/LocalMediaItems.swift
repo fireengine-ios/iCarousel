@@ -28,7 +28,7 @@ extension CoreDataStack {
         let localMediaStorage = LocalMediaStorage.default
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
             if authorized {
-                self.insertFromGallery()
+                self.insertFromGallery(completion: completion)
             }
             if status == .denied {
                 self.deleteLocalFiles()
@@ -45,7 +45,7 @@ extension CoreDataStack {
         removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier })
     }
 
-    func insertFromGallery() {
+    func insertFromGallery(completion: VoidHandler?) {
         guard !inProcessAppendingLocalFiles else {
             return
         }
@@ -82,6 +82,7 @@ extension CoreDataStack {
             print("All local files added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
+            completion?()
         }
     }
 
@@ -102,7 +103,8 @@ extension CoreDataStack {
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         
         
-        let cahchePredicate = NSPredicate(format:"NOT (md5Value IN %@)", notAllowedMD5) //"NOT (md5Value IN %@ OR localFileID IN %@)", md5s, uuids)//AND?
+        let cahchePredicate = NSPredicate(format:"NOT (md5Value IN %@)", notAllowedMD5)
+        //"NOT (md5Value IN %@ OR localFileID IN %@)", md5s, uuids)//AND?
         let sortingPredicate: NSPredicate
         
         let compundedPredicate: NSCompoundPredicate
@@ -319,16 +321,13 @@ extension CoreDataStack {
                 }
                 
                 self?.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
-                    
+                    debugPrint("Saved to Context")
+                    log.debug("LocalMediaItem saveDataForContext(")
                     self?.pageAppendedCallBack?(addedObjects)
-                    
                 })
-                log.debug("LocalMediaItem saveDataForContext(")
+                
                 ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
-                
-                
-                
-                
+
                 print("local files added: \(assetsInfo.count)")
                 
                 self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)

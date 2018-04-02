@@ -84,7 +84,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             let _ = autoreleasepool {
                 fileDataSource.requestInfo(for: asset, completion: { (size, url, isICloud) in
                     i += 1
-                    
+                    debugPrint("got requestInfo \(i)")
                     let success = {
                         if i == assets.count {
                             completion(assetsInfo)
