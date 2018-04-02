@@ -14,6 +14,8 @@ class ImportFromDropboxPresenter: BasePresenter {
     var interactor: ImportFromDropboxInteractorInput!
     var router: ImportFromDropboxRouterInput!
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
     private let lastUpdateEmptyMessage = " "
 }
 
@@ -133,6 +135,7 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         view?.stopActivityIndicator()
         view?.startDropboxStatus()
         interactor.requestStatusForCompletion()
+        analyticsService.track(event: .importDropbox)
     }
     
     func startFailureCallback(errorMessage: String) {

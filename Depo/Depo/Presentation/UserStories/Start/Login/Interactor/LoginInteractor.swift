@@ -16,6 +16,7 @@ class LoginInteractor: LoginInteractorInput {
     private lazy var authenticationService = AuthenticationService()
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var eulaService = EulaService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var rememberMe: Bool = true
     private var attempts: Int = 0
@@ -76,6 +77,7 @@ class LoginInteractor: LoginInteractorInput {
             self.emptyEmailCheck(for: headers)
             
             self.tokenStorage.isRememberMe = self.rememberMe
+            self.analyticsService.track(event: .login)
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }

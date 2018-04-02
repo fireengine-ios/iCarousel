@@ -20,8 +20,8 @@ final class PushNotificationService {
     
     //MARK: -
     
-    func assignNotificationActionBy(userInfo: [AnyHashable: Any]) -> Bool {
-        guard let actionString = userInfo["action"] as? String else {
+    func assignNotificationActionBy(launchOptions: [AnyHashable: Any]?) -> Bool {
+        guard let actionString = launchOptions?["action"] as? String else {
             return false
         }
 
@@ -35,8 +35,12 @@ final class PushNotificationService {
     }
     
     func openActionScreen() {
-        guard let action = notificationAction, tokenStorage.accessToken != nil else {
+        guard var action = notificationAction else {
             return
+        }
+        
+        if tokenStorage.accessToken == nil {
+            action = .login
         }
         
         switch action {
@@ -70,7 +74,9 @@ final class PushNotificationService {
         case .things: openThings()
         case .places: openPlaces()
         case .http: openURL(notificationActionURLString)
+        case .login: openLogin()
         }
+        notificationAction = nil
     }
     
     //MARK: -
@@ -108,6 +114,10 @@ final class PushNotificationService {
     }
     
     //MARK: - Actions
+    
+    private func openLogin() {
+        pushTo(router.loginScreen)
+    }
     
     private func openMain() {
         openTabBarItem(index: .homePageScreenIndex)

@@ -15,7 +15,7 @@ protocol PackagesInteractorInput {
     func getToken(for offer: OfferServiceResponse)
     func getResendToken(for offer: OfferServiceResponse)
     func activate(offerApple: OfferApple)
-    func verifyOffer(token: String, otp: String)
+    func verifyOffer(_ offer: OfferServiceResponse?, token: String, otp: String)
     func submit(promocode: String)
     func getActiveSubscriptions()
     func getAccountType()

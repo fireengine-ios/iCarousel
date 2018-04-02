@@ -20,6 +20,7 @@ final class UploadService: BaseRequestService {
     private var uploadQueue = OperationQueue()
     private var uploadOperations = SynchronizedArray<UploadOperations>()
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var allSyncOperationsCount: Int {
         return uploadOperations.filter({ $0.uploadType == .autoSync && !$0.isRealCancel }).count + finishedSyncOperationsCount
@@ -74,7 +75,10 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
+    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
+        
+        trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
+        
         let filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes && $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
         //TODO: Show 4 gigabytes error here?
         switch uploadType {
@@ -535,6 +539,33 @@ extension UploadService {
         
         DispatchQueue.main.async {
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        }
+    }
+}
+
+extension UploadService {
+    
+    fileprivate func trackAnalyticsFor(items: [WrapData], isFromCamera: Bool) {
+        
+        guard !isFromCamera else {
+            analyticsService.track(event: .uploadFromCamera)
+            return
+        }
+        
+        if items.first(where: { $0.fileType == .video }) != nil {
+            analyticsService.track(event: .uploadVideo)
+        }
+        
+        if items.first(where: { $0.fileType == .image }) != nil {
+            analyticsService.track(event: .uploadPhoto)
+        }
+        
+        if items.first(where: { $0.fileType == .audio }) != nil {
+            analyticsService.track(event: .uploadMusic)
+        }
+        
+        if items.first(where: { $0.fileType.isDocument }) != nil {
+            analyticsService.track(event: .uploadDocument)
         }
     }
 }

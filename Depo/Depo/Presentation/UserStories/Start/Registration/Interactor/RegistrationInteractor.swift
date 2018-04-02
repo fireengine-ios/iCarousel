@@ -9,9 +9,10 @@
 class RegistrationInteractor: RegistrationInteractorInput {
     
     weak var output: RegistrationInteractorOutput!
-    let dataStorage = DataStorage()
-    let validationService = UserValidator()
-    let authenticationService = AuthenticationService()
+    private let dataStorage = DataStorage()
+    private lazy var validationService = UserValidator()
+    private lazy var authenticationService = AuthenticationService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     func prepareModels() {
         output.prepearedModels(models: dataStorage.getModels())
@@ -48,6 +49,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                     let userRegistrationInfo = self?.dataStorage.userRegistrationInfo  else {
                         return
                 }
+                self?.analyticsService.track(event: .signUp)
                 self?.output.signUpSucces(withResult: t, userInfo: userRegistrationInfo)
             }
             }, fail: { [weak self] result in

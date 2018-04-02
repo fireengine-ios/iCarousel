@@ -14,6 +14,7 @@ class PackagesInteractor {
     private let offersService: OffersService
     private let subscriptionsService: SubscriptionsService
     private let accountService: AccountServicePrl
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
@@ -116,8 +117,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                         self?.output.failedUsage(with: ErrorResponse.string("token nil"))
                     }
                     return
-                }
-            
+                }            
                 DispatchQueue.main.async {
                     self?.output.successed(tokenForOffer: token)
                 }
@@ -128,11 +128,16 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
-    func verifyOffer(token: String, otp: String) {
+    func verifyOffer(_ offer: OfferServiceResponse?, token: String, otp: String) {
         offersService.verifyOffer(otp: otp, referenceToken: token,
             success: { [weak self] response in
                 /// maybe will be need
                 //guard let offerResponse = response as? VerifyOfferResponse else { return }
+                
+                if let offer = offer {
+                    self?.analyticsService.trackInnerPurchase(offer)
+                }
+
                 DispatchQueue.main.async {
                     self?.output.successedVerifyOffer()
                 }
@@ -169,6 +174,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         iapManager.purchase(offerApple: offerApple) { [weak self] result in
             switch result {
             case .success:
+                self?.analyticsService.trackInAppPurchase(product: offerApple.skProduct)
                 self?.validatePurchase(offersApple: [offerApple])
             case .canceled: break
             case .error(let error):
