@@ -78,11 +78,13 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         lastSyncedMD5s.removeAll()
         
-        let hasItemsToSync = CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image)
+        CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image, completion: { hasItemsToSync in
+            if hasItemsToSync {
+                self.status = .waitingForWifi
+            }
+        })
         
-        if hasItemsToSync {
-            status = .waitingForWifi
-        }
+       
     }
     
     func fail() {
@@ -200,18 +202,20 @@ class ItemSyncServiceImpl: ItemSyncService {
 
 extension CoreDataStack {
     func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData]) -> Void) {
-        let localItems = allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
-        self.queue.async { [weak self] in
-            self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { items, error in
-                guard error == nil, let unsyncedItems = items else {
-                    print(error!.localizedDescription)
-                    completion([])
-                    return
+        allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image, completion: { localItems in
+            self.queue.async { [weak self] in
+                self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { items, error in
+                    guard error == nil, let unsyncedItems = items else {
+                        print(error!.localizedDescription)
+                        completion([])
+                        return
+                    }
+                    
+                    completion(unsyncedItems)
                 }
-                
-                completion(unsyncedItems)
             }
-        }
+        })
+        
     }
     
     private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?) -> Void ) {

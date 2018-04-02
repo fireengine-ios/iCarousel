@@ -618,12 +618,7 @@ final class UploadOperations: Operation {
                                       uploadTo: self.uploadTo,
                                       rootFolder: self.folder,
                                       isFavorite: self.isFavorites)
-            
-            guard !self.isCancelled else {
-                self.semaphore.signal()
-                return
-            }
-            
+
             self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
                 
                 let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
@@ -638,7 +633,7 @@ final class UploadOperations: Operation {
                     
                     if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
                         if let resp = baseurlResponse as? SearchItemResponse {
-                            let item = Item.init(remote: resp)
+                            let item = Item(remote: resp)
                             let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
                             PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
                                 ItemOperationManager.default.fileAddedToAlbum(item: item)
