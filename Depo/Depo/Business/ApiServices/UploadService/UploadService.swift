@@ -20,6 +20,7 @@ final class UploadService: BaseRequestService {
     private var uploadQueue = OperationQueue()
     private var uploadOperations = SynchronizedArray<UploadOperations>()
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var allSyncOperationsCount: Int {
         return uploadOperations.filter({ $0.uploadType == .autoSync && !$0.isCancelled }).count + finishedSyncOperationsCount
@@ -74,7 +75,10 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
+    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
+        
+        trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
+        
         let filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes && $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
         //TODO: Show 4 gigabytes error here?
         switch uploadType {
@@ -538,6 +542,33 @@ extension UploadService {
     }
 }
 
+extension UploadService {
+    
+    fileprivate func trackAnalyticsFor(items: [WrapData], isFromCamera: Bool) {
+        
+        guard !isFromCamera else {
+            analyticsService.track(event: .uploadFromCamera)
+            return
+        }
+        
+        if items.first(where: { $0.fileType == .video }) != nil {
+            analyticsService.track(event: .uploadVideo)
+        }
+        
+        if items.first(where: { $0.fileType == .image }) != nil {
+            analyticsService.track(event: .uploadPhoto)
+        }
+        
+        if items.first(where: { $0.fileType == .audio }) != nil {
+            analyticsService.track(event: .uploadMusic)
+        }
+        
+        if items.first(where: { $0.fileType.isDocument }) != nil {
+            analyticsService.track(event: .uploadDocument)
+        }
+    }
+}
+
 
 typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Void
 typealias UploadOperationHandler = (_ uploadOberation: UploadOperations, _ value: ErrorResponse?) -> Void
@@ -594,13 +625,23 @@ final class UploadOperations: Operation {
     }
     
     private func attempmtUpload() {
-        let customSucces: FileOperationSucces = {
+        let customSucces: FileOperationSucces = { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
             self.handler?(self, nil)
             self.semaphore.signal()
         }
         
-        let customFail: FailResponse = { value in
-            self.handler?(self, value)
+        let customFail: FailResponse = { [weak self] value in
+            guard let `self` = self else {
+                return
+            }
+            
+            let errorResponse = self.isCancelled ? ErrorResponse.string(TextConstants.canceledOperationTextError) : value
+            
+            self.handler?(self, errorResponse)
             self.semaphore.signal()
         }
         
@@ -653,9 +694,7 @@ final class UploadOperations: Operation {
                         return
                     }
                     
-                    if self.isCancelled {
-                        self.semaphore.signal()
-                    } else if error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                    if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
                         let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
                         DispatchQueue.global().asyncAfter(deadline: delay, execute: {
                             self.attemptsCount += 1

@@ -19,6 +19,8 @@ protocol Factory: SharedFactory {
     func resolve() -> HomeCardsService
     
     func resolve() -> StorageVars
+    
+    func resolve() -> AnalyticsService
 }
 
 final class FactoryMain: FactoryBase, Factory {
@@ -49,5 +51,10 @@ extension FactoryMain {
     private static let homeCardsService = HomeCardsServiceImp(sessionManager: factory.resolve())
     func resolve() -> HomeCardsService {
         return FactoryMain.homeCardsService
+    }
+    
+    private static let analyticsService = AnalyticsService()
+    func resolve() -> AnalyticsService {
+        return FactoryMain.analyticsService
     }
 }

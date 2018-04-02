@@ -11,6 +11,7 @@ import UIKit
 class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     static let `default` = FreeAppSpace()
     
@@ -131,6 +132,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         for object in deletedPhotos {
             if let index = duplicatesArray.index(of: object) {
                 duplicatesArray.remove(at: index)
+                analyticsService.track(event: .freeUpSpace)
             }
         }
     }

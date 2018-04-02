@@ -113,6 +113,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
                 fileInfoTitle.text = TextConstants.fileInfoFolderInfoTitle
                 folderSizeTitle.text = TextConstants.fileInfoAlbumSizeTitle
                 folderSizeLabel.text = String(obj.childCount ?? 0)
+                uploadDateTitle.text = TextConstants.fileInfoCreationDateTitle
             } else {
                 folderSizeTitle.text = TextConstants.fileInfoFileSizeTitle
             }
@@ -132,6 +133,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         }
         
         if let album = object as? AlbumItem {
+            uploadDateTitle.text = TextConstants.fileInfoCreationDateTitle
             folderSizeTitle.text = TextConstants.fileInfoAlbumSizeTitle
             fileNameTitle.text = TextConstants.fileInfoAlbumNameTitle
             fileInfoTitle.text = TextConstants.fileInfoAlbumInfoTitle
@@ -146,8 +148,15 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             }
         }
         
+        if let createdDate = object.creationDate {
+            uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
+            takenDateLabel.isHidden = true
+            takenDateTitle.isHidden = true
+        } else {
+            hideInfoDateLabels()
+        }
+        
         durationH.constant = 0
-        hideInfoDateLabels()
         view.layoutIfNeeded()
     }
 

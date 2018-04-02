@@ -55,6 +55,12 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
         isAccessibilityElement = true
         accessibilityTraits = UIAccessibilityTraitNone
         accessibilityLabel = album.name
+        
+        setNeedsLayout()
+        layoutIfNeeded()
+        
+        greedShadowView.addShadowView()
+        listShadowView.addShadowView()
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
