@@ -284,6 +284,10 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         userInfoSubView.reloadUserInfo()
     }
     
+    func updatePhoto(image: UIImage) {
+        userInfoSubView.updatePhoto(image: image)
+    }
+    
     func profileWontChangeWith(error: Error) {
         let vc = PopUpController.with(title: TextConstants.errorAlert,
                                       message: error.localizedDescription,
