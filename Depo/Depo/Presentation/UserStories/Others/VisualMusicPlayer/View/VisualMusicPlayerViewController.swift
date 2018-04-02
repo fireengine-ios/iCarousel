@@ -31,10 +31,10 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
     
     @IBOutlet weak var bottomView: UIView!
     
-    let shuffleButtonOffColor = UIColor.lightGray
+    private let shuffleButtonOffColor = UIColor.lightGray
     @IBOutlet weak var shuffleButton: UIButton! {
         didSet {
-            shuffleButton.tintColor = shuffleButtonOffColor
+            updateShuffleButton()
         }
     }
     
@@ -95,6 +95,14 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         navigationItem.rightBarButtonItem = moreButton
     }
     
+    private func updateShuffleButton() {
+        if player.playMode == .shaffle {
+            shuffleButton.tintColor = UIColor.white
+        } else {
+            shuffleButton.tintColor = shuffleButtonOffColor
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func actionPlayButton(_ sender: UIButton) {
@@ -134,8 +142,8 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         alert.showSpecifiedMusicAlertSheet(with: item, presentedBy: sender, onSourceView: nil, viewController: self)
     }
     @IBAction func actionShuffleButton(_ sender: UIButton) {
-        sender.tintColor = (sender.tintColor == shuffleButtonOffColor) ? UIColor.white : shuffleButtonOffColor
         player.togglePlayMode()
+        updateShuffleButton()
     }
 }
 extension VisualMusicPlayerViewController: MediaPlayerDelegate {
