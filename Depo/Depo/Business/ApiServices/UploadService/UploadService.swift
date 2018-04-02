@@ -669,8 +669,8 @@ class UploadOperations: Operation {
                         try? FileManager.default.removeItem(at: localURL)
                     }
                     
-                    if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
-                        if let resp = baseurlResponse as? SearchItemResponse {
+                    if let resp = baseurlResponse as? SearchItemResponse {
+                        if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
                             let item = Item.init(remote: resp)
                             let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
                             PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
@@ -680,6 +680,7 @@ class UploadOperations: Operation {
                                 ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
                             })
                         }
+                        self?.item.tmpDownloadUrl = resp.tempDownloadURL
                     }
                     
                     customSucces()
