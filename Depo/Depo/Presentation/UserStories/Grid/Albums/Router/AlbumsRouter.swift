@@ -21,7 +21,7 @@ final class AlbumsRouter: BaseFilesGreedRouter, AlbumRouterInput {
                 return
             }
             
-            //need to show photos of the album in grid but in album detail we have convertation list to grid and grid to list
+            //need to show photos of the album in grid but in BaseFilesGreedPresenter we have convertation list to grid and grid to list
             let controller = router.albumDetailController(album: album, type: .List, moduleOutput: moduleOutput)
 
             router.pushViewController(viewController: controller)
