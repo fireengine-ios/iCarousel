@@ -20,6 +20,7 @@ final class UploadService: BaseRequestService {
     private var uploadQueue = OperationQueue()
     private var uploadOperations = SynchronizedArray<UploadOperations>()
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var allSyncOperationsCount: Int {
         return uploadOperations.filter({ $0.uploadType == .autoSync && !$0.isRealCancel }).count + finishedSyncOperationsCount
@@ -74,7 +75,10 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
+    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
+        
+        trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
+        
         let filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes && $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
         //TODO: Show 4 gigabytes error here?
         switch uploadType {
@@ -539,8 +543,35 @@ extension UploadService {
     }
 }
 
+extension UploadService {
+    
+    fileprivate func trackAnalyticsFor(items: [WrapData], isFromCamera: Bool) {
+        
+        guard !isFromCamera else {
+            analyticsService.track(event: .uploadFromCamera)
+            return
+        }
+        
+        if items.first(where: { $0.fileType == .video }) != nil {
+            analyticsService.track(event: .uploadVideo)
+        }
+        
+        if items.first(where: { $0.fileType == .image }) != nil {
+            analyticsService.track(event: .uploadPhoto)
+        }
+        
+        if items.first(where: { $0.fileType == .audio }) != nil {
+            analyticsService.track(event: .uploadMusic)
+        }
+        
+        if items.first(where: { $0.fileType.isDocument }) != nil {
+            analyticsService.track(event: .uploadDocument)
+        }
+    }
+}
 
-typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Swift.Void
+
+typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Void
 
 class UploadOperations: Operation {
     
@@ -662,13 +693,15 @@ class UploadOperations: Operation {
                 let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
                                                     fileUUID: uploadParam.tmpUUId )
                 
+                self?.item.uuid = uploadParam.tmpUUId
+                
                 self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
                     if let localURL = uploadParam.urlToLocalFile {
                         try? FileManager.default.removeItem(at: localURL)
                     }
                     
-                    if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
-                        if let resp = baseurlResponse as? SearchItemResponse {
+                    if let resp = baseurlResponse as? SearchItemResponse {
+                        if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
                             let item = Item.init(remote: resp)
                             let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
                             PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
@@ -678,6 +711,7 @@ class UploadOperations: Operation {
                                 ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
                             })
                         }
+                        self?.item.tmpDownloadUrl = resp.tempDownloadURL
                     }
                     
                     customSucces()

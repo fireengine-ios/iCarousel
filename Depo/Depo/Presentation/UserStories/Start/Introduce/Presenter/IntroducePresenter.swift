@@ -14,6 +14,7 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceIn
 
     func viewIsReady() {
         interactor.PrepareModels()
+        PushNotificationService.shared.openActionScreen()
     }
     
     func models(models: [IntroduceModel]) {

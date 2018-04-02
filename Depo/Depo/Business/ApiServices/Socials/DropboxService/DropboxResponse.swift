@@ -49,4 +49,17 @@ class DropboxStatusObject: ObjectRequestResponse {
         status = DropboxStatusValue(rawValue: (json?[DropboxStatusResponseKey.status].string) ?? "")
         date = json?[DropboxStatusResponseKey.date].date
     }
+    
+    var uploadDescription: String {
+        guard let date = date, let successCount = successCount else {
+            return " "
+        }
+        let dateString = date.getDateInFormat(format: "dd.MM.yyyy")
+        
+        if successCount == 1 {
+            return String(format: TextConstants.dropboxLastUpdatedFile, dateString, successCount)
+        } else {
+            return String(format: TextConstants.dropboxLastUpdatedFiles, dateString, successCount)
+        }
+    }
 }

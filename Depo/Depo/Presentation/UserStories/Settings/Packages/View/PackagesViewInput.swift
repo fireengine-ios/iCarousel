@@ -15,4 +15,6 @@ protocol PackagesViewInput: class, ActivityIndicator {
     func show(promocodeError: String)
     func successedPromocode()
     func showSubTurkcellOpenAlert(with text: String)
+    
+    func showRestoreButton()
 }

@@ -80,6 +80,13 @@
 "Cancel" = "Cancel";
 "Info" = "Info";
 "You can open settings and cancel subscption." = "You can open settings and cancel subscption.";
+"Google Play Store" = "Google Play Store";
+"AppStore" = "AppStore";
+"Successful purchase." = "Successful purchase.";
+"Invalid purchase. AppStore does not verify purchase for the given parameters." = "Invalid purchase. AppStore does not verify purchase for the given parameters.";
+"A temporary error has occurred due to technical reasons." = "A temporary error has occurred due to technical reasons.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation.";
+"Shows that a response operation is done for the given receipt." = "Shows that a response operation is done for the given receipt.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription";
 "You can visit iTunes to cancel your subscription" = "You can visit iTunes to cancel your subscription";
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2";
@@ -371,6 +378,7 @@
 "Start adding your music" = "Start adding your music";
 "You don’t have any music on your Lifebox yet." = "You don’t have any music on your Lifebox yet.";
 "Folder is Empty" = "Folder is Empty";
+"Album is Empty" = "Album is Empty";
 "Folder Items" = "Items";
 "Delete" = "Delete";
 "Move" = "Move";
@@ -641,3 +649,7 @@
 "Approve" = "Approve";
 "infomationEmptyEmail" = "Having an e-mail address on your account is one of the easiest and most reliable ways to help keep your account safe and ensure that you can get back into your account. Please add your e-mail address";
 "E-Mail Entry" = "E-Mail Entry";
+"Importing files" = "Importing files (%@%%)";
+"Dropbox authorisation error" = "Dropbox authorisation error";
+"dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
+"dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";

@@ -81,6 +81,13 @@ class BaseDataSourceItem: NSObject {
         return false
     }
     
+    func getUUIDAsLocal() -> String {
+        if uuid.contains("~"){
+            return uuid.components(separatedBy: "~").first ?? uuid
+        }
+        return uuid
+    }
+    
     func isSynced() -> Bool {
         return syncStatuses.contains(SingletonStorage.shared.unigueUserID)
     }

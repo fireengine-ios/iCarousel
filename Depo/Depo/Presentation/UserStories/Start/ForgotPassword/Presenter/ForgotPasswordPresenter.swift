@@ -30,7 +30,7 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
     }
     
     func requestSucceed() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         router.goToResetPassword()
         //pop back
 //        router.popBack()
@@ -38,7 +38,7 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
     
     func requestFailed(withError error: String) {
         
-        compliteAsyncOperationEnableScreen(errorMessage: error)
+        completeAsyncOperationEnableScreen(errorMessage: error)
         view.showCapcha()
         //TODO: PEstyakov request new captcha here
     }

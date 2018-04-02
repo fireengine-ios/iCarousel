@@ -18,7 +18,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private let photosAlbumService = PhotosAlbumService()
     private let albumService = PhotosAlbumService()
     
-    typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
+    typealias FailResponse = (_ value: ErrorResponse) -> Void
     
     var sharingItems = [BaseDataSourceItem]()
     
@@ -552,14 +552,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let items = items as? [WrapData] else { return }
         let successClosure = { [weak self] in
             DispatchQueue.main.async {
-                self?.output?.compliteAsyncOperationEnableScreen()
+                self?.output?.completeAsyncOperationEnableScreen()
                 action()
             }
         }
         
         let failClosure: FailResponse = { [weak self] errorResponse in
             DispatchQueue.main.async {
-                self?.output?.compliteAsyncOperationEnableScreen()
+                self?.output?.completeAsyncOperationEnableScreen()
                 if errorResponse.errorDescription == TextConstants.canceledOperationTextError {
                     cancel()
                     return

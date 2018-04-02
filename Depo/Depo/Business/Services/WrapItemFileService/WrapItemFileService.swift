@@ -9,7 +9,7 @@
 import Foundation
 import Photos
 
-typealias FileOperationSucces = () -> Swift.Void
+typealias FileOperationSucces = () -> Void
 
 protocol  WrapItemFileOperations {
     

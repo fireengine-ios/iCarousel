@@ -17,6 +17,14 @@ enum FloatingButtonsType: String {
     case floatingButtonUploadFromLifebox = "Upload from lifebox"
 }
 
+enum TabScreenIndex: Int {
+    case homePageScreenIndex = 0
+    case photosScreenIndex = 1
+    case videosScreenIndex = 2
+    case musicScreenIndex = 3
+    case documentsScreenIndex = 4
+}
+
 final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var tabBar: CustomTabBar!
@@ -67,14 +75,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     let cameraService: CameraService = CameraService()
     
     let musicBarH : CGFloat = 70
-    
-    enum TabScreenIndex: Int {
-        case homePageScreenIndex = 0
-        case photosScreenIndex = 1
-        case videosScreenIndex = 2
-        case musicScreenIndex = 3
-        case documentsScreenIndex = 4
-    }
     
     var customNavigationControllers: [UINavigationController] = []
     
@@ -321,6 +321,12 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     private func changeTabBarStatus(hidden: Bool) {
         plussButton.isHidden = hidden
         plussButton.isEnabled = !hidden
+    }
+    
+    func showRainbowIfNeed() {
+        if !plussButton.isSelected {
+            plussBtnAction(plussButton)
+        }
     }
     
     @IBAction func plussBtnAction(_ sender: Any) {
@@ -668,7 +674,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         let wrapData = WrapData(imageData: data)
         
-        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: false, success: {
+        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: false, isFromCamera: true, success: {
         }) { [weak self] error in
             DispatchQueue.main.async {
                 let vc = PopUpController.with(title: TextConstants.errorAlert,

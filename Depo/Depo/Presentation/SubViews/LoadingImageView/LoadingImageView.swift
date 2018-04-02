@@ -96,7 +96,7 @@ class LoadingImageView: UIImageView {
         activity.startAnimating()
         let path_: PathForItem = PathForItem.remoteUrl(url)
         path = path_
-        self.url = filesDataSource.getImage(patch: PathForItem.remoteUrl(url), compliteImage: { [weak self] image in
+        self.url = filesDataSource.getImage(patch: PathForItem.remoteUrl(url), completeImage: { [weak self] image in
             if self?.path == path_ {
                 self?.finishImageLoading(image)
             }

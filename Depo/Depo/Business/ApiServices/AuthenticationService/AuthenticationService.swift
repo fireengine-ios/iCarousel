@@ -10,8 +10,8 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
-typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Swift.Void
-typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
+typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Void
+typealias FailResponse = (_ value: ErrorResponse) -> Void
 
 class AuthenticationUser: BaseRequestParametrs {
     
@@ -225,8 +225,8 @@ struct ResendVerificationSMS: RequestParametrs {
 }
 
 
-typealias  SuccessLogin = () -> Swift.Void
-typealias  SuccessLogout = () -> Swift.Void
+typealias  SuccessLogin = () -> Void
+typealias  SuccessLogout = () -> Void
 typealias  FailLoginType = FailResponse
 typealias  HeadersHandler = ([String: Any]) -> Void
 
@@ -417,7 +417,7 @@ class AuthenticationService: BaseRequestService {
     
     // MARK: - With new SessionManager
     
-    private let sessionManager: SessionManager = {
+    private let sessionManagerWithoutToken: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
         return SessionManager(configuration: configuration)
@@ -427,7 +427,7 @@ class AuthenticationService: BaseRequestService {
         let headers = [HeaderConstant.RememberMeToken: tokenStorage.refreshToken ?? ""]
         let refreshAccessTokenUrl = RouteRequests.BaseUrl +/ RouteRequests.authificationByRememberMe
         
-        sessionManager
+        sessionManagerWithoutToken
             .request(refreshAccessTokenUrl, method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers)
             .customValidate()
             .responseJSON { response in
@@ -440,5 +440,12 @@ class AuthenticationService: BaseRequestService {
                     handler(ResponseResult.success(false))
                 }
         }
+    }
+    
+    func updateUserLanguage(_ language: String, handler: @escaping ResponseVoid) {
+        SessionManager.default
+            .request(RouteRequests.updateLanguage, method: .post, encoding: language)
+            .customValidate()
+            .responseVoid(handler)
     }
 }

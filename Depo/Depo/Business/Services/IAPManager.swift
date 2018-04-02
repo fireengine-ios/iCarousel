@@ -8,6 +8,13 @@
 
 import StoreKit
 
+enum ProductRestoreCallBack {
+    case success(Set<String>)
+    case fail(Error)
+}
+
+typealias RestoreHandler = (_ productCallBack: ProductRestoreCallBack) -> ()
+
 final class IAPManager: NSObject {
     
     static let shared = IAPManager()
@@ -15,16 +22,17 @@ final class IAPManager: NSObject {
     typealias OfferAppleHandler = ([OfferApple]) -> Void
     typealias PurchaseHandler = (_ isSuccess: PurchaseResult) -> Void
     
-    override private init() {
-        super.init()
-        setupSKPaymentQueue()
-    }
-    
-    var offerAppleHandler: OfferAppleHandler = { _ in }
-    var purchaseHandler: PurchaseHandler = { _ in }
+    private var restorePurchasesCallback: RestoreHandler?
+    private var offerAppleHandler: OfferAppleHandler = {_ in }
+    private var purchaseHandler: PurchaseHandler = {_ in }
     
     var canMakePayments: Bool {
         return SKPaymentQueue.canMakePayments()
+    }
+    
+    override private init() {
+        super.init()
+        setupSKPaymentQueue()
     }
     
     private func setupSKPaymentQueue() {
@@ -48,6 +56,11 @@ final class IAPManager: NSObject {
         SKPaymentQueue.default().add(payment)
     }
     
+    func restorePurchases(restoreCallBack: @escaping RestoreHandler) {
+        restorePurchasesCallback = restoreCallBack
+        SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+    
     var receipt: String? {
         guard let receiptUrl = Bundle.main.appStoreReceiptURL,
             let receiptData = try? Data(contentsOf: receiptUrl)
@@ -68,6 +81,9 @@ extension IAPManager: SKProductsRequestDelegate {
 extension IAPManager: SKPaymentTransactionObserver {
     
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        var restoredIds: Set<String> = []
+        var restoreError: Error? = nil
+        
         for transaction in transactions {
             //let productId = transaction.payment.productIdentifier
             switch transaction.transactionState {
@@ -85,7 +101,11 @@ extension IAPManager: SKPaymentTransactionObserver {
                     purchaseHandler(.error(error))
                 }
             case .restored:
-                break
+                restoredIds.insert(transaction.payment.productIdentifier)
+                
+                if let error = transaction.error {
+                    restoreError = error
+                }
             case .purchasing:
                 break
             case .deferred:
@@ -94,13 +114,28 @@ extension IAPManager: SKPaymentTransactionObserver {
             
             SKPaymentQueue.default().finishTransaction(transaction)
         }
+        
+        if !restoredIds.isEmpty {
+            restorePurchasesCallback?(.success(restoredIds))
+        } else if let error = restoreError {
+            restorePurchasesCallback?(.fail(error))
+        }
     }
     
     public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-        print("- paymentQueueRestoreCompletedTransactionsFinished", queue)
+        debugPrint("- paymentQueueRestoreCompletedTransactionsFinished", queue)
+        
+        var purchasedIDs: Set<String> = []
+        queue.transactions.forEach { transaction in
+            let productId = transaction.payment.productIdentifier
+            purchasedIDs.insert(productId)
+            SKPaymentQueue.default().finishTransaction(transaction)
+        }
+        restorePurchasesCallback?(.success(purchasedIDs))
     }
     
     public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
-        print("- ", queue, error)
+        debugPrint("- ", queue, error)
+        restorePurchasesCallback?(.fail(error))
     }
 }

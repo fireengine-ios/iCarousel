@@ -130,6 +130,13 @@ extension CoreDataStack {
         return items.flatMap { $0.wrapedObject }
     }
     
+    func  allLocalItems(withUUIDS uuids: [String]) -> [WrapData] {
+        let context = mainContext
+        let predicate = NSPredicate(format: "(uuidValue IN %@)", uuids)
+        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
+        return items.flatMap { $0.wrapedObject }
+    }
+    
     func hasLocalItemsForSync(video: Bool, image: Bool) -> Bool {
         let items = getUnsyncsedMediaItems(video: video, image: image)
 

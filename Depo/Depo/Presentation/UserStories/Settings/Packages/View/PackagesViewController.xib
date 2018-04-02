@@ -57,7 +57,7 @@
                                                 <integer key="value" value="2"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cellHeight">
-                                                <real key="value" value="220"/>
+                                                <real key="value" value="255"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </collectionViewFlowLayout>

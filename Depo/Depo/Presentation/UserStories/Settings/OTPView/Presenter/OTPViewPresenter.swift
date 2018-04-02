@@ -8,7 +8,7 @@
 
 class OTPViewPresenter: PhoneVereficationPresenter {
     override func verificationSucces() {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.getNavigationController()?.popViewController(animated: true)
     }
 }

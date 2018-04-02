@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Swift.Void
+typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Void
 
 typealias FileDataSorceImg = (_ image: UIImage?) -> Void
 
@@ -596,18 +596,18 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
 }
 
-typealias PhotoManagerCallBack = (UIImage?, [AnyHashable: Any]?) -> Swift.Void
+typealias PhotoManagerCallBack = (UIImage?, [AnyHashable: Any]?) -> Void
 
-typealias PhotoManagerOriginalVideoCallBack = (AVAsset?, AVAudioMix?, [AnyHashable: Any]?) -> Swift.Void
+typealias PhotoManagerOriginalVideoCallBack = (AVAsset?, AVAudioMix?, [AnyHashable: Any]?) -> Void
 
-typealias PhotoManagerOriginalCallBack = (Data?, String?, UIImageOrientation, [AnyHashable: Any]?) -> Swift.Void
+typealias PhotoManagerOriginalCallBack = (Data?, String?, UIImageOrientation, [AnyHashable: Any]?) -> Void
 
 
 class GetImageOperation: Operation {
     
     let photoManager: PHImageManager
     
-    let callback: (UIImage?, [AnyHashable: Any]?) -> Swift.Void
+    let callback: (UIImage?, [AnyHashable: Any]?) -> Void
     
     let asset: PHAsset
     

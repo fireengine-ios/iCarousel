@@ -12,9 +12,10 @@ struct RouteRequests {
     
     // MARK: Authentication
     
-    static let BaseUrl: URL = URL(string: "https://adepo.turkcell.com.tr/")!
-    static let BaseContactsUrl: URL = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
-    static let NewURL: URL = URL(string: "https://mylifebox.com/")!
+    static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/")!
+    static let baseApi = BaseUrl +/ "api"
+    static let BaseContactsUrl = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
+    static let NewURL = URL(string: "https://mylifebox.com/")!
     
     static let httpAuthification = "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
     static let httpsAuthification = "/api/auth/token?rememberMe=%@"
@@ -120,6 +121,8 @@ struct RouteRequests {
     }
     
     /// upload
-    static let uploadContainer = BaseUrl +/ "/api/container/baseUrl"
+    static let uploadContainer = baseApi +/ "container/baseUrl"
     static let uploadNotify = "/api/notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
+    
+    static let updateLanguage = baseApi +/ "account/language"
 }

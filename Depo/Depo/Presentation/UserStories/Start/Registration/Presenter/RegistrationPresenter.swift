@@ -75,11 +75,11 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     }
     
     func signUpFailed(withResult result: String?) {
-        compliteAsyncOperationEnableScreen(errorMessage: result)
+        completeAsyncOperationEnableScreen(errorMessage: result)
     }
     
     func signUpSucces(withResult result: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         router.phoneVerification(sigUpResponse: result, userInfo: userInfo)
 
     }

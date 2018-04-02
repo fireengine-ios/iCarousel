@@ -13,7 +13,7 @@ enum ContactsSyncServiceConstant {
     static let webProdURL =  "https://contactsync.turkcell.com.tr/ttyapi/"
 }
 
-typealias ContactsOperation = (ContactsResponse) -> Swift.Void
+typealias ContactsOperation = (ContactsResponse) -> Void
 
 class ContactsSyncService: BaseRequestService {
     
