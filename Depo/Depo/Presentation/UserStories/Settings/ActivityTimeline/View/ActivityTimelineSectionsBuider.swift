@@ -127,6 +127,7 @@ class ActivityTimelineSectionsBuider {
                 cell.timeLabel.text = timeDateFormater.string(from: activity.date)
                 cell.fileTypeLabel.text = "\(timelineActivities[indexPath.section].list[minutesSectionIndex].list.count) \(TextConstants.activityTimelineFiles) \(activity.type.displayString)"
             }
+            setupCell(cell)
             return cell
             
         } else {
@@ -134,8 +135,15 @@ class ActivityTimelineSectionsBuider {
             if let activity = activityForRow(at: indexPath) {
                 cell.fill(with: activity)
             }
+            setupCell(cell)
             return cell
         }
+    }
+    
+    private func setupCell(_ cell: UITableViewCell) {
+        /// iPad, iOS 9
+        /// https://stackoverflow.com/a/30561575/5893286
+        cell.backgroundColor = cell.contentView.backgroundColor
     }
     
     func header(for tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {

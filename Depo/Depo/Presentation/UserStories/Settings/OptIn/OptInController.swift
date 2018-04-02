@@ -83,6 +83,11 @@ final class OptInController: UIViewController, NibInit {
         }
     }
     
+    @IBAction func actionResendButton(_ sender: UIButton) {
+        attempts = 0
+        delegate?.optInResendPressed(self)
+    }
+    
     func verify(code: String) {
         delegate?.optIn(self, didEnterCode: code)
     }

@@ -351,7 +351,6 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
             switch file.patchToPreview {
             case let .localMediaContent(local):
                 let option = PHVideoRequestOptions()
-                option.isNetworkAccessAllowed = true
                 
                 output.startCreatingAVAsset()
                 
