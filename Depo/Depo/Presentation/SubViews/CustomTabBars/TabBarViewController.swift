@@ -674,7 +674,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         let wrapData = WrapData(imageData: data)
         
-        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: false, success: {
+        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: false, isFromCamera: true, success: {
         }) { [weak self] error in
             DispatchQueue.main.async {
                 let vc = PopUpController.with(title: TextConstants.errorAlert,

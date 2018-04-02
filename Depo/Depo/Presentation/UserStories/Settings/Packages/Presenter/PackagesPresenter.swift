@@ -126,7 +126,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
         optInVC.startActivityIndicator()
         self.optInVC = optInVC
-        interactor.verifyOffer(token: referenceToken, otp: code)
+        interactor.verifyOffer(offerToBuy, token: referenceToken, otp: code)
     }
 }
 

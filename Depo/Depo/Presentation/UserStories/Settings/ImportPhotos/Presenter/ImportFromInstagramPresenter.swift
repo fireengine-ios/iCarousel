@@ -19,6 +19,8 @@ class ImportFromInstagramPresenter: BasePresenter {
     weak var view: ImportFromInstagramViewInput?
     var interactor: ImportFromInstagramInteractorInput!
     var router: ImportFromInstagramRouterInput!
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 }
 
 // MARK: - ImportFromInstagramViewOutput
@@ -75,6 +77,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
         view?.stopActivityIndicator()
         if status == true {
             view?.instagramStatusSuccess()
+            analyticsService.track(event: .importInstagram)
         } else {
             view?.instagramStatusFailure()
         }
@@ -102,6 +105,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
     func startAsyncSuccess() {
         view?.stopActivityIndicator()
         view?.instagramStartSuccess()
+        analyticsService.track(event: .importInstagram)
     }
     
     func startAsyncFailure(errorMessage: String) {

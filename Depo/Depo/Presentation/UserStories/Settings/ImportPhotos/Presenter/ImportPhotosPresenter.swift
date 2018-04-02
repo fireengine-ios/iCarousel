@@ -22,6 +22,8 @@ class ImportFromFBPresenter: BasePresenter {
     var router: ImportFromFBRouterInput!
     
     var facebookStatus: FBStatusObject?
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 }
 
 // MARK: - ImportFromFBViewOutput
@@ -61,6 +63,7 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
         facebookStatus = status
         if status.connected == true, status.syncEnabled == true {
             view?.succeedFacebookStart()
+            analyticsService.track(event: .importFacebook)
         } else {
             view?.succeedFacebookStop()
         }
@@ -76,6 +79,7 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
     
     func startSuccessCallback() {
         view?.succeedFacebookStart()
+        analyticsService.track(event: .importFacebook)
     }
     
     func startFailureCallback(errorMessage: String) {

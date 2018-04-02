@@ -27,12 +27,14 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
 
     weak var output: SyncContactsInteractorOutput?
     
-    let contactsSyncService = ContactsSyncService()
+    private let contactsSyncService = ContactsSyncService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     func startOperation(operationType: SyncOperationType) {
         switch operationType {
         case .backup:
             MenloworksAppEvents.onContactUploaded()
+            analyticsService.track(event: .contactBackup)
             performOperation(forType: .backup)
         case .restore:
             MenloworksAppEvents.onContactDownloaded()

@@ -49,6 +49,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        FBSDKAppLinkUtility.fetchDeferredAppLink { url, error in
+            if let url = url {
+                if UIApplication.shared.canOpenURL(url) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+            } else {
+                log.debug("Received error while fetching deferred app link \(String(describing: error))")
+            }
+        }
+        
         setupLog()
         
         MenloworksAppEvents.onAppLaunch()
@@ -175,6 +189,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.debug("AppDelegate applicationDidBecomeActive")
         
         checkPasscodeIfNeed()
+        FBSDKAppEvents.activateApp()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -213,6 +228,7 @@ extension AppDelegate {
         MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         
         MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
+        FBSDKAppEvents.setPushNotificationsDeviceToken(deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -231,7 +247,9 @@ extension AppDelegate {
         log.debug("AppDelegate didReceiveRemoteNotification")
         MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
-        if PushNotificationService.shared.assignNotificationActionBy(userInfo: userInfo) {
+        FBSDKAppEvents.logPushNotificationOpen(userInfo)
+        
+        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: userInfo) {
             PushNotificationService.shared.openActionScreen()
         }
     }
