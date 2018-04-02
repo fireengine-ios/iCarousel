@@ -246,7 +246,7 @@ class FileService: BaseRequestService {
     }
     
     func move(moveFiles: MoveFiles, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService move")
+        log.debug("FileService moveFiles: \(moveFiles.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             log.debug("FileService move success")
@@ -257,7 +257,7 @@ class FileService: BaseRequestService {
     }
     
     func copy(copyparam: CopyFiles, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService copy")
+        log.debug("FileService copyFiles: \(copyparam.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             log.debug("FileService copy success")
@@ -268,7 +268,7 @@ class FileService: BaseRequestService {
     }
     
     func delete(deleteFiles: DeleteFiles, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService delete")
+        log.debug("FileService deleteFiles: \(deleteFiles.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             log.debug("FileService delete success")
@@ -279,10 +279,10 @@ class FileService: BaseRequestService {
     }
     
     func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService createsFolder")
+        log.debug("FileService createFolder \(createFolder.folderName)")
         
         let handler = BaseResponseHandler<CreateFolderResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("FileService createsFolder success")
+            log.debug("FileService createFolder success")
 
             success?()
         }, fail: fail)
@@ -290,7 +290,7 @@ class FileService: BaseRequestService {
     }
     
     func rename(rename: RenameFile, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService rename")
+        log.debug("FileService rename \(rename.newName)")
         
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { y  in
             log.debug("FileService rename success")
@@ -310,21 +310,17 @@ class FileService: BaseRequestService {
 
         let allOperationsCount = items.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
-        let downLoadRequests: [BaseDownloadRequestParametrs] = items.flatMap {
+        let downLoadRequests: [BaseDownloadRequestParametrs] = items.compactMap {
             BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
         var completedOperationsCount = 0
-        let operations = downLoadRequests.flatMap {
+        let operations = downLoadRequests.compactMap {
             DownLoadOperation(downloadParam: $0, success: {
-                log.debug("FileService download DownLoadOperation success")
-
                 completedOperationsCount = completedOperationsCount + 1
                 CardsManager.default.setProgressForOperationWith(type: .download,
                                                                             allOperations: allOperationsCount,
                                                                             completedOperations: completedOperationsCount)
             }, fail: { [weak self] error in
-                log.debug("FileService download DownLoadOperation fail")
-                
                 self?.error = error
                 /// HERE MUST BE ERROR HANDLER
             })
@@ -343,7 +339,7 @@ class FileService: BaseRequestService {
     }
     
     func downloadToCameraRoll(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService downloadToCameraRoll")
+        log.debug("FileService downloadToCameraRoll \(downloadParam.fileName)")
         
         executeDownloadRequest(param: downloadParam) { url, urlResponse, error in
             
@@ -432,7 +428,7 @@ class FileService: BaseRequestService {
                 return
             }
             
-            let list = resultResponse.flatMap { WrapData(remote: $0) }
+            let list = resultResponse.compactMap { WrapData(remote: $0) }
 //            CoreDataStack.default.appendOnlyNewItems(items: list)
             success?(list)
         }, fail: fail)
@@ -505,8 +501,10 @@ class DownLoadOperation: Operation {
         }
         
         FileService().downloadToCameraRoll(downloadParam: param, success: {
+            log.debug("FileService download \(self.param.fileName) success")
             self.customSuccess()
         }) { error in
+            log.debug("FileService download \(self.param.fileName) fail: \(error.errorDescription ?? "")")
             self.customFail(error)
         }
         semaphore.wait()

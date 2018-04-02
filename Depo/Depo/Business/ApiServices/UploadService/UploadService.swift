@@ -21,6 +21,8 @@ final class UploadService: BaseRequestService {
     private var uploadOperations = SynchronizedArray<UploadOperations>()
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var autoSyncStorage = AutoSyncDataStorage()
+    private lazy var reachabilityService = ReachabilityService()
     
     private var allSyncOperationsCount: Int {
         return uploadOperations.filter({ $0.uploadType == .autoSync && !$0.isRealCancel }).count + finishedSyncOperationsCount
@@ -176,7 +178,10 @@ final class UploadService: BaseRequestService {
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
-        let operations: [UploadOperations] = itemsToUpload.flatMap {
+        logEvent("StartSyncToUseFileList")
+        logSyncSettings()
+        
+        let operations: [UploadOperations] = itemsToUpload.compactMap {
             let operation = UploadOperations(item: $0, uploadType: .syncToUse, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                 guard let `self` = self else {
                     return
@@ -185,6 +190,8 @@ final class UploadService: BaseRequestService {
                 let checkIfFinished = {
                     if self.uploadOperations.filter({ $0.uploadType == .syncToUse }).isEmpty {
                         success()
+                        self.logEvent("FinishedSyncToUseFileList")
+                        self.logSyncSettings()
                         return
                     }
                 }
@@ -202,6 +209,10 @@ final class UploadService: BaseRequestService {
                         fail(.error(error))
 //                    }
                     return
+                }
+                
+                if let fileName = finishedOperation.item.name {
+                    self.logEvent("FinishUpload \(fileName)")
                 }
                 
                 self.uploadOperations.removeIfExists(finishedOperation)
@@ -256,7 +267,10 @@ final class UploadService: BaseRequestService {
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
-        let operations: [UploadOperations] = itemsToUpload.flatMap {
+        logEvent("StartUploadFileList")
+        logSyncSettings()
+        
+        let operations: [UploadOperations] = itemsToUpload.compactMap {
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                 guard let `self` = self else {
                     return
@@ -266,6 +280,8 @@ final class UploadService: BaseRequestService {
                     if self.uploadOperations.filter({ $0.uploadType == .fromHomePage }).isEmpty {
                         success()
                         ItemOperationManager.default.syncFinished()
+                        self.logEvent("FinishedUploadFileList")
+                        self.logSyncSettings()
                         return
                     }
                 }
@@ -278,9 +294,16 @@ final class UploadService: BaseRequestService {
                         checkIfFinished()
                     } else {
                         self.uploadOperations.removeIfExists(finishedOperation)
+                        if let fileName = finishedOperation.item.name {
+                            self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? error.description)")
+                        }
                         fail(error)
                     }
                     return
+                }
+                
+                if let fileName = finishedOperation.item.name {
+                    self.logEvent("FinishUpload \(fileName)")
                 }
                 
                 self.uploadOperations.removeIfExists(finishedOperation)
@@ -331,9 +354,12 @@ final class UploadService: BaseRequestService {
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
-        var successHandled = false
+        logEvent("StartSyncFileList")
+        logSyncSettings()
         
-        let operations: [UploadOperations] = itemsToSync.flatMap {
+        var successHandled = false
+            
+        let operations: [UploadOperations] = itemsToSync.compactMap {
             
             let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                 guard let `self` = self else {
@@ -344,18 +370,30 @@ final class UploadService: BaseRequestService {
                     if !successHandled, self.uploadOperations.filter({ $0.uploadType == .autoSync && $0.item.fileType == finishedOperation.item.fileType }).isEmpty {
                         successHandled = true
                         success()
+                        self.logEvent("FinishedSyncFileList")
+                        self.logSyncSettings()
                         return
                     }
                 }
                 
                 if let error = error {
                     if finishedOperation.isRealCancel {
+                        if let fileName = finishedOperation.item.name {
+                            self.logEvent("FinishUpload \(fileName) Cancelled")
+                        }
                         self.uploadOperations.removeIfExists(finishedOperation)
                         checkIfFinished()
                     } else {
+                        if let fileName = finishedOperation.item.name {
+                            self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? error.description)")
+                        }
                         fail(error)
                     }
                     return
+                }
+                
+                if let fileName = finishedOperation.item.name {
+                    self.logEvent("FinishUpload \(fileName)")
                 }
                 
                 self.uploadOperations.removeIfExists(finishedOperation)
@@ -481,6 +519,7 @@ final class UploadService: BaseRequestService {
     
     func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask {
     
+        logEvent("StartUpload \(uploadParam.fileName)")
         let request = executeUploadRequest(param: uploadParam, response: { data, response, error in
             
             if let httpResponse = response as? HTTPURLResponse {
@@ -566,6 +605,29 @@ extension UploadService {
         
         if items.first(where: { $0.fileType.isDocument }) != nil {
             analyticsService.track(event: .uploadDocument)
+        }
+    }
+}
+
+extension UploadService {
+    
+    fileprivate func logEvent(_ message: String) {
+        if UIApplication.shared.applicationState == .background {
+            log.debug("Upload Service Background sync \(message)")
+        } else {
+            log.debug("Upload Service \(message)")
+        }
+    }
+    
+    fileprivate func logSyncSettings() {
+        autoSyncStorage.getAutoSyncSettingsForCurrentUser { [weak self] settings, userId in
+            guard let `self` = self else {
+                return
+            }
+            
+            var logString = "PHOTOS: \(settings.photoSetting.option.text()) + VIDEOS: \(settings.videoSetting.option.text())"
+            logString += "; DEVICE NETWORK: \(self.reachabilityService.status)"
+            log.debug(logString)
         }
     }
 }

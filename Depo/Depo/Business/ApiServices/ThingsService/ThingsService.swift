@@ -18,13 +18,15 @@ final class ThingsService: BaseRequestService {
 //    }
     
     func getThingsPage(param: ThingsPageParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("SearchService suggestion")
+        log.debug("ThingsService getThingsPage")
         
         let handler = BaseResponseHandler<ThingsPageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func getThingsAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+        log.debug("ThingsService getThingsAlbumWithID")
+        
         let param = ThingsAlbumParameters(id: id)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
@@ -39,12 +41,12 @@ final class ThingsService: BaseRequestService {
     }
     
     func deletePhotosFromAlbum(id: Int64, photos: [Item], success: PhotosAlbumOperation?, fail: FailResponse?) {
-        log.debug("PeopleService deletePhotosFromAlbum")
+        log.debug("ThingsService deletePhotosFromAlbum")
         
         let parameters = DeletePhotosFromThingsAlbum(id: id, photos: photos)
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("PeopleService deletePhotosFromAlbum success")
+            log.debug("ThingsService deletePhotosFromAlbum success")
             
             success?()
         }, fail: fail)
