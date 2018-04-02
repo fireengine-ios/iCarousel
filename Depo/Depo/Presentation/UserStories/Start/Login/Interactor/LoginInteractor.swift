@@ -10,7 +10,8 @@ class LoginInteractor: LoginInteractorInput {
     
     weak var output: LoginInteractorOutput?
     
-    var dataStorage = LoginDataStorage()
+    private var dataStorage = LoginDataStorage()
+    private let authService = AuthenticationService()
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
@@ -278,6 +279,19 @@ class LoginInteractor: LoginInteractorInput {
         }) { [weak self] errorRespose in
             DispatchQueue.main.async {
                 self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
+            }
+        }
+    }
+    
+    func updateUserLanguage() {
+        authService.updateUserLanguage(Device.locale) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.output?.updateUserLanguageSuccess()
+                case .failed(let error):
+                    self?.output?.updateUserLanguageFailed(error: error)
+                }
             }
         }
     }

@@ -7,6 +7,7 @@
 //
 
 class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInteractorOutput {
+    
     weak var view: LoginViewInput!
     var interactor: LoginInteractorInput!
     var router: LoginRouterInput!
@@ -144,27 +145,31 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         })
     }
     
+    func onFailEULA() {
+        completeAsyncOperationEnableScreen()
+        router.goToTermsAndServices()
+    }
+    
     private func openEmptyEmailIfNeedOrOpenSyncSettings() {
         if interactor.isShowEmptyEmail {
             openEmptyEmail()
         } else {
-            router.goToSyncSettingsView()
+            interactor.updateUserLanguage()
         }
+    }
+    
+    private func openApp() {
+        router.goToSyncSettingsView()
     }
     
     private func openEmptyEmail() {
         storageVars.emptyEmailUp = true
         let vc = EmailEnterController.initFromNib()
         vc.approveCancelHandler = { [weak self] in
-            self?.router.goToSyncSettingsView()
+            self?.interactor.updateUserLanguage()
         }
         let navVC = UINavigationController(rootViewController: vc)
         RouterVC().presentViewController(controller: navVC)
-    }
-    
-    func onFailEULA() {
-        completeAsyncOperationEnableScreen()
-        router.goToTermsAndServices()
     }
     
     func allAttemtsExhausted(user: String) {
@@ -262,6 +267,16 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
             let vc = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: TextConstants.promocodeInvalid, image: .error, buttonTitle: TextConstants.ok)
             optInVC?.present(vc, animated: false, completion: nil)
         }
+    }
+    
+    func updateUserLanguageSuccess() {
+        openApp()
+        completeAsyncOperationEnableScreen()
+    }
+    
+    func updateUserLanguageFailed(error: Error) {
+        view.showErrorMessage(with: error.description)
+        completeAsyncOperationEnableScreen()
     }
 }
 

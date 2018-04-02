@@ -45,4 +45,7 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func successedVerifyPhone()
     func failedVerifyPhone(errorString: String)
+    
+    func updateUserLanguageSuccess()
+    func updateUserLanguageFailed(error: Error)
 }
