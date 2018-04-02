@@ -78,9 +78,9 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         lastSyncedMD5s.removeAll()
         
-        CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image, completion: { hasItemsToSync in
+        CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image, completion: { [weak self] hasItemsToSync in
             if hasItemsToSync {
-                self.status = .waitingForWifi
+                self?.status = .waitingForWifi
             }
         })
         
