@@ -41,6 +41,18 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         return ""
     }
     
+    override func textForNoFileButton() -> String {
+        if remoteItems is PeopleItemsService {
+            return TextConstants.faceImageNoPhotosButton
+        } else if remoteItems is ThingsItemsService {
+            return TextConstants.faceImageNoPhotosButton
+        } else if remoteItems is PlacesItemsService {
+            return TextConstants.faceImageNoPhotosButton
+        }
+        
+        return ""
+    }
+    
 }
 
 // MARK: FaceImageItemsInteractorInput
