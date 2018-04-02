@@ -26,7 +26,16 @@ class PackagesInteractor {
     }
     
     private func subscriptionPlanWith(name: String, priceString: String, type: SubscriptionPlanType, model: Any) -> SubscriptionPlan {
-        if name.contains("50") {
+        if name.contains("500") {
+            return SubscriptionPlan(name: name,
+                                    photosCount: 500_000,
+                                    videosCount: 50_000,
+                                    songsCount: 250_000,
+                                    docsCount: 5_000_000,
+                                    priceString: priceString,
+                                    type: type,
+                                    model: model)
+        } else if name.contains("50") {
             return SubscriptionPlan(name: name,
                                     photosCount: 50_000,
                                     videosCount: 5_000,
@@ -44,21 +53,21 @@ class PackagesInteractor {
                                     priceString: priceString,
                                     type: type,
                                     model: model)
-        } else if name.contains("500") {
-            return SubscriptionPlan(name: name,
-                                    photosCount: 500_000,
-                                    videosCount: 50_000,
-                                    songsCount: 250_000,
-                                    docsCount: 5_000_000,
-                                    priceString: priceString,
-                                    type: type,
-                                    model: model)
         } else if name.contains("2.5") {
             return SubscriptionPlan(name: name,
                                     photosCount: 2_560_000,
                                     videosCount: 256_000,
                                     songsCount: 1_280_000,
                                     docsCount: 25_600_000,
+                                    priceString: priceString,
+                                    type: type,
+                                    model: model)
+        } else if name.contains("5") {
+            return SubscriptionPlan(name: name,
+                                    photosCount: 5_000,
+                                    videosCount: 500,
+                                    songsCount: 2_500,
+                                    docsCount: 50_000,
                                     priceString: priceString,
                                     type: type,
                                     model: model)
@@ -269,7 +278,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func convertToSubscriptionPlans(offers: [OfferServiceResponse], accountType: AccountType) -> [SubscriptionPlan] {
-        return offers.flatMap { offer in
+        return offers.compactMap { offer in
             guard let price = offer.price, let name = offer.quota?.bytesString else {
                 return nil
             }
@@ -282,30 +291,21 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan] {
-        return activeSubscriptionList.flatMap { subscription in
+        return activeSubscriptionList.compactMap { subscription in
             guard let price = subscription.subscriptionPlanPrice, let name = subscription.subscriptionPlanQuota?.bytesString else {
                 return nil
             }
             
             let currency = getCurrency(for: accountType)
             let priceString = String(format: TextConstants.offersPrice, price, currency)
+            let type: SubscriptionPlanType = price == 0 ? .free : .current
             
-            if price == 0, name == "5 GB" {
-                return SubscriptionPlan(name: name,
-                                        photosCount: 5_000,
-                                        videosCount: 500,
-                                        songsCount: 2_500,
-                                        docsCount: 50_000,
-                                        priceString: priceString,
-                                        type: .free,
-                                        model: subscription)
-            }
-            return subscriptionPlanWith(name: name, priceString: priceString, type: .current, model: subscription)
+            return subscriptionPlanWith(name: name, priceString: priceString, type: type, model: subscription)
         }
     }
     
     func convertToSubscriptionPlans(offerApples: [OfferApple]) -> [SubscriptionPlan] {
-        return offerApples.flatMap { offer in
+        return offerApples.compactMap { offer in
             guard let name = offer.name else {
                 return nil
             }
