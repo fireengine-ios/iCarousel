@@ -54,9 +54,7 @@ class DropboxStatusObject: ObjectRequestResponse {
         guard let date = date, let successCount = successCount else {
             return " "
         }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        let dateString = formatter.string(from: date)
+        let dateString = date.getDateInFormat(format: "dd.MM.yyyy")
         
         if successCount == 1 {
             return String(format: TextConstants.dropboxLastUpdatedFile, dateString, successCount)

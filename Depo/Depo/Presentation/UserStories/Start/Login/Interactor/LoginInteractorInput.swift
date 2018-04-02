@@ -31,4 +31,6 @@ protocol LoginInteractorInput {
     func verifyPhoneNumber(token: String, code: String)
     
     var isShowEmptyEmail: Bool { get }
+    
+    func updateUserLanguage()
 }

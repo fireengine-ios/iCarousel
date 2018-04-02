@@ -20,6 +20,7 @@ final class UploadService: BaseRequestService {
     private var uploadQueue = OperationQueue()
     private var uploadOperations = SynchronizedArray<UploadOperations>()
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var allSyncOperationsCount: Int {
         return uploadOperations.filter({ $0.uploadType == .autoSync && !$0.isRealCancel }).count + finishedSyncOperationsCount
@@ -74,7 +75,10 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
+    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
+        
+        trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
+        
         let filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes && $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
         //TODO: Show 4 gigabytes error here?
         switch uploadType {
@@ -539,6 +543,33 @@ extension UploadService {
     }
 }
 
+extension UploadService {
+    
+    fileprivate func trackAnalyticsFor(items: [WrapData], isFromCamera: Bool) {
+        
+        guard !isFromCamera else {
+            analyticsService.track(event: .uploadFromCamera)
+            return
+        }
+        
+        if items.first(where: { $0.fileType == .video }) != nil {
+            analyticsService.track(event: .uploadVideo)
+        }
+        
+        if items.first(where: { $0.fileType == .image }) != nil {
+            analyticsService.track(event: .uploadPhoto)
+        }
+        
+        if items.first(where: { $0.fileType == .audio }) != nil {
+            analyticsService.track(event: .uploadMusic)
+        }
+        
+        if items.first(where: { $0.fileType.isDocument }) != nil {
+            analyticsService.track(event: .uploadDocument)
+        }
+    }
+}
+
 
 typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Void
 
@@ -657,7 +688,7 @@ class UploadOperations: Operation {
                                       rootFolder: self.folder,
                                       isFavorite: self.isFavorites)
             
-            self.requestObject = self.upload(uploadParam: uploadParam, success:{ [weak self] in
+            self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
                 
                 let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
                                                     fileUUID: uploadParam.tmpUUId )
@@ -669,47 +700,37 @@ class UploadOperations: Operation {
                         try? FileManager.default.removeItem(at: localURL)
                     }
                     
-                    let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
-                                                        fileUUID:uploadParam.tmpUUId )
-                    
-                    self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
-                        if let localURL = uploadParam.urlToLocalFile {
-                            try? FileManager.default.removeItem(at: localURL)
-                        }
-                        
+                    if let resp = baseurlResponse as? SearchItemResponse {
                         if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
-                            if let resp = baseurlResponse as? SearchItemResponse{
-                                let item = Item.init(remote: resp)
-                                let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
-                                PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
-                                    ItemOperationManager.default.fileAddedToAlbum(item: item)
-                                }, fail: { (error) in
-                                    UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
-                                    ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
-                                })
-                            }
-                        }
-                        
-                        customSucces()
-                        
-                        }, fail: customFail)
-                    }, fail:{ (error) in
-                        guard let `self` = self else {
-                            return
-                        }
-                        if error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                            let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
-                            DispatchQueue.global().asyncAfter(deadline: delay, execute: {
-                                self.attemptsCount += 1
-                                self.attempmtUpload()
+                            let item = Item.init(remote: resp)
+                            let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
+                            PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
+                                ItemOperationManager.default.fileAddedToAlbum(item: item)
+                            }, fail: { error in
+                                UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
+                                ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
                             })
-                        } else {
-                            customFail(error)
                         }
-                })
-                
+                        self?.item.tmpDownloadUrl = resp.tempDownloadURL
+                    }
+                    
+                    customSucces()
+                    
                 }, fail: customFail)
-        }, fail: customFail)
+                
+                }, fail: { error in
+                    if error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                        let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
+                        DispatchQueue.global().asyncAfter(deadline: delay, execute: {
+                            self.attemptsCount += 1
+                            self.attempmtUpload()
+                        })
+                    } else {
+                        customFail(error)
+                    }
+            })
+            
+            }, fail: customFail)
     }
     
     private func baseUrl(success: @escaping UploadServiceBaseUrlResponse, fail: FailResponse?) {

@@ -143,7 +143,9 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             if let view = view as? FaceImageItemsViewInput {
                 view.showNoFilesWith(text: interactor.textForNoFileLbel(),
                                      image: interactor.imageForNoFileImageView(),
-                                     createFilesButtonText: "", needHideTopBar: interactor.needHideTopBar(), isShowUggla: hasUgglaLabel())
+                                     createFilesButtonText: interactor.textForNoFileButton(),
+                                     needHideTopBar: interactor.needHideTopBar(),
+                                     isShowUggla: hasUgglaLabel())
             }
         }
     }

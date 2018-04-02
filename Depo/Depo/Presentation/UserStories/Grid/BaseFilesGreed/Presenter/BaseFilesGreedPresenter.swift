@@ -110,7 +110,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         let service = interactor.getRemoteItemsService()
         if service is AllFilesService ||
             service is FavouritesService ||
-            service is PhotoAndVideoService {
+            service is PhotoAndVideoService ||
+            service is ThingsItemsService ||
+            service is PlacesItemsService ||
+            service is PeopleItemsService {
             router.showUpload()
         }
         
@@ -411,7 +414,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                      createFilesButtonText: interactor.textForNoFileButton(),
                                      needHideTopBar: interactor.needHideTopBar())
             } else {
-                view.showNoFilesTop()
+                view.showNoFilesTop(text: interactor.textForNoFileTopLabel())
             }
         } else {
             view.hideNoFiles()

@@ -627,8 +627,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         })
         debugPrint("Reload updateDisplayngType")
         collectionView?.reloadData()
-        if let firstVisibleIndexPath = firstVisibleIndexPath {
-            collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
+        if let firstVisibleIndexPath = firstVisibleIndexPath{
+            if firstVisibleIndexPath.row == 0, firstVisibleIndexPath.section == 0 {
+                collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .centeredVertically, animated: false)
+            }else{
+                collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
+            }
         }
     }
     
