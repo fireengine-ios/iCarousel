@@ -77,7 +77,7 @@ class SettingsInteractor: SettingsInteractorInput {
         accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] response in
             ImageDownloder().removeImageFromCache(url: self?.userInfoResponse?.urlForPhoto, completion: {
                 DispatchQueue.main.async {
-                    self?.output.profilePhotoUploadSuccessed()
+                    self?.output.profilePhotoUploadSuccessed(image: UIImage(data: photo))
                 }
             })
             
