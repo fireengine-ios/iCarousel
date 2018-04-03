@@ -53,7 +53,7 @@ extension CoreDataStack {
         
         guard !notSaved.isEmpty else {
             inProcessAppendingLocalFiles = false
-            print("All local files added in \(Date().timeIntervalSince(start)) seconds")
+            print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
             return
         }
@@ -69,7 +69,7 @@ extension CoreDataStack {
                 JDStatusBarNotification.dismiss(animated: true)
             }
             self?.originalAssetsBeingAppended.dropAll()///tempo assets
-            print("All local files added in \(Date().timeIntervalSince(start)) seconds")
+            print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
             completion?()
@@ -290,10 +290,13 @@ extension CoreDataStack {
     
     private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping ()->Void ) {
         guard !items.isEmpty else {
+            print("LOCAL_ITEMS: no files to add")
             completion()
             return
         }
 
+        print("LOCAL_ITEMS: \(items.count) local files to add")
+        let start = Date()
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
 //        privateQueue.async { [weak self] in
         
@@ -311,18 +314,14 @@ extension CoreDataStack {
                 }
                 
                 self?.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
-                    debugPrint("Saved to Context")
+                    debugPrint("LOCAL_ITEMS: Saved to Context")
                     log.debug("LocalMediaItem saveDataForContext(")
                     self?.pageAppendedCallBack?(addedObjects)
                 })
                 
                 ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
-
-                print("local files added: \(assetsInfo.count)")
-                
+                print("LOCAL_ITEMS: page has been added in \(Date().timeIntervalSince(start)) secs")
                 self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
-                
-                
             }
         })
 //        }

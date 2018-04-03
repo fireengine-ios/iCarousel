@@ -605,15 +605,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
         let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
         self.init(baseModel: BaseMediaContent(curentAsset: asset, generalInfo: info))
     }
-    
-//    convenience init(info: MetaAssetInfo) {
-//        let assetInfo = (url: info.url, name: info.originalName, size: info.fileSize, md5: info.md5)
-//        self.init(baseModel: BaseMediaContent(curentAsset: info.asset, generalInfo: assetInfo))
-//    }
-    
+
     convenience init(info: AssetInfo) {
-//        let assetInfo = (url: info.url, name: info.name, size: info.size, md5: info.md5)
-        self.init(baseModel: BaseMediaContent(curentAsset: info.asset, generalInfo: info) )//(curentAsset: info.asset, generalInfo: assetInfo))
+        let baseModel = BaseMediaContent(curentAsset: info.asset, generalInfo: info)
+        self.init(baseModel: baseModel)
     }
     
     init(musicForCreateStory: CreateStoryMusicItem) {

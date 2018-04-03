@@ -83,7 +83,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private override init() {
         queue.maxConcurrentOperationCount = 1
-        getDetailQueue.maxConcurrentOperationCount = 1
+//        getDetailQueue.maxConcurrentOperationCount = 1
         
         super.init()
 //        askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] (accessGranted, _) in
@@ -100,45 +100,40 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return status == .authorized
     }
     
-//    func getInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [MetaAssetInfo])->Void) {
     func getInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [AssetInfo])->Void) {
-        let fileDataSource = FilesDataSource()
-        var assetsInfo = [AssetInfo]()//[MetaAssetInfo]()
+        //        let fileDataSource = FilesDataSource()
+        var assetsInfo = [AssetInfo]()
         
-        var i = 0
         for asset in assets {
             let _ = autoreleasepool {
                 let assetInfo = self.fullInfoAboutAsset(asset: asset)
-                i += 1
                 assetsInfo.append(assetInfo)
-                
-                if i == assets.count {
-                    completion(assetsInfo)
-                }
-                
-//                fileDataSource.requestInfo(for: asset, completion: { (size, url, isICloud) in
-//                    i += 1
-//                    debugPrint("got requestInfo \(i)")
-//                    let success = {
-//                        if i == assets.count {
-//                            completion(assetsInfo)
-//                        }
-//                    }
-                
-//                    guard !isICloud, let url = url, let assetName = asset.originalFilename  else {
-//                        CoreDataStack.default.originalAssetsBeingAppended.remove(identifier: asset.originalFilename ?? "")
-//                        success()
-//                        return
-//                    }
-//                    debugPrint("originalNAME is \(assetName)")
-//
-//                    let assetInfo = MetaAssetInfo(asset: asset, url: url, fileSize: size, originalName: assetName)
-//                    assetsInfo.append(assetInfo)
-//
-//                    success()
-//                })
             }
         }
+        completion(assetsInfo)
+        
+        
+        //                fileDataSource.requestInfo(for: asset, completion: { (size, url, isICloud) in
+        //                    i += 1
+        //                    debugPrint("got requestInfo \(i)")
+        //                    let success = {
+        //                        if i == assets.count {
+        //                            completion(assetsInfo)
+        //                        }
+        //                    }
+        
+        //                    guard !isICloud, let url = url, let assetName = asset.originalFilename  else {
+        //                        CoreDataStack.default.originalAssetsBeingAppended.remove(identifier: asset.originalFilename ?? "")
+        //                        success()
+        //                        return
+        //                    }
+        //                    debugPrint("originalNAME is \(assetName)")
+        //
+        //                    let assetInfo = MetaAssetInfo(asset: asset, url: url, fileSize: size, originalName: assetName)
+        //                    assetsInfo.append(assetInfo)
+        //
+        //                    success()
+        //                })
     }
     
     
@@ -388,9 +383,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             if status {
                 if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
-                    DispatchQueue.main.async {
-                        self?.merge(asset: assetIdentifier, with: item)
-                    }
+                    self?.merge(asset: assetIdentifier, with: item)
                 }
                 if let album = album, let assetPlaceholder = assetPlaceholder {
                     self?.add(asset: assetPlaceholder.localIdentifier, to: album)
@@ -416,7 +409,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             let wrapData = WrapData(asset: asset)
             wrapData.copyFileData(from: item)
 
-            let context = CoreDataStack.default.newChildBackgroundContext//mainContext
+            let context = CoreDataStack.default.backgroundContext
             let mediaItem: MediaItem
             if let existingMediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
                 mediaItem = existingMediaItem
@@ -635,7 +628,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 if let name = asset.originalFilename {
                     assetInfo.name = name
                 }
-                debugPrint("ORIGINAL NAME PHOTO is \(assetInfo.name)")
+//                debugPrint("ORIGINAL NAME PHOTO is \(assetInfo.name)")
                 if let unwrapedUrl = wrapDict["PHImageFileURLKey"] as? URL {
                     assetInfo.url = unwrapedUrl
                 }
@@ -734,7 +727,7 @@ class GetOriginalImageOperation: Operation {
         let options = PHImageRequestOptions()
         options.version = .current
         options.deliveryMode = .highQualityFormat
-        options.isSynchronous = true
+//        options.isSynchronous = true
         
         photoManager.requestImageData(for: asset, options: options, resultHandler: callback)
     }
