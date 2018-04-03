@@ -687,49 +687,49 @@ class UploadOperations: Operation {
                                       uploadTo: self.uploadTo,
                                       rootFolder: self.folder,
                                       isFavorite: self.isFavorites)
-            
-            self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
-                
-                let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
-                                                    fileUUID: uploadParam.tmpUUId )
-                
-                self?.item.uuid = uploadParam.tmpUUId
-                
-                self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
-                    if let localURL = uploadParam.urlToLocalFile {
-                        try? FileManager.default.removeItem(at: localURL)
-                    }
+            DispatchQueue.global().async {
+                self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
                     
-                    if let resp = baseurlResponse as? SearchItemResponse {
-                        if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
-                            let item = Item.init(remote: resp)
-                            let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
-                            PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
-                                ItemOperationManager.default.fileAddedToAlbum(item: item)
-                            }, fail: { error in
-                                UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
-                                ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
-                            })
+                    let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
+                                                        fileUUID: uploadParam.tmpUUId )
+                    
+                    self?.item.uuid = uploadParam.tmpUUId
+                    
+                    self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
+                        if let localURL = uploadParam.urlToLocalFile {
+                            try? FileManager.default.removeItem(at: localURL)
                         }
-                        self?.item.tmpDownloadUrl = resp.tempDownloadURL
-                    }
+                        
+                        if let resp = baseurlResponse as? SearchItemResponse {
+                            if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
+                                let item = Item.init(remote: resp)
+                                let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
+                                PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
+                                    ItemOperationManager.default.fileAddedToAlbum(item: item)
+                                }, fail: { error in
+                                    UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
+                                    ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
+                                })
+                            }
+                            self?.item.tmpDownloadUrl = resp.tempDownloadURL
+                        }
+                        
+                        customSucces()
+                        
+                        }, fail: customFail)
                     
-                    customSucces()
-                    
-                }, fail: customFail)
-                
-                }, fail: { error in
-                    if error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                        let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
-                        DispatchQueue.global().asyncAfter(deadline: delay, execute: {
-                            self.attemptsCount += 1
-                            self.attempmtUpload()
-                        })
-                    } else {
-                        customFail(error)
-                    }
-            })
-            
+                    }, fail: { error in
+                        if error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                            let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
+                            DispatchQueue.global().asyncAfter(deadline: delay, execute: {
+                                self.attemptsCount += 1
+                                self.attempmtUpload()
+                            })
+                        } else {
+                            customFail(error)
+                        }
+                })
+            }
             }, fail: customFail)
     }
     
