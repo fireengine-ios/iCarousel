@@ -90,7 +90,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func succesLogin() {
         interactor.checkEULA()
-        completeAsyncOperationEnableScreen()
     }
     
     private func showMessageHideSpinner(text: String) {
@@ -132,14 +131,15 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     // MARK: - EULA
     
     func onSuccessEULA() {
-        completeAsyncOperationEnableScreen()
         CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
             DispatchQueue.main.async {
+                self?.completeAsyncOperationEnableScreen()
                 self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
             }
         }, end: { [weak self] in
             DispatchQueue.main.async {
                 self?.customProgressHUD.hideProgressSpinner()
+                self?.completeAsyncOperationEnableScreen()
                 self?.openEmptyEmailIfNeedOrOpenSyncSettings()
             }
         })
