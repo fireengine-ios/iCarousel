@@ -62,8 +62,13 @@ final class UploadService: BaseRequestService {
         uploadQueue.underlyingQueue = dispatchQueue
     
         super.init()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSyncSettings), name: autoSyncStatusDidChangeNotification, object: nil)
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     // MARK: -
     class func convertUploadType(uploadType: UploadType) -> OperationType {
@@ -178,8 +183,7 @@ final class UploadService: BaseRequestService {
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
-        logEvent("StartSyncToUseFileList")
-        logSyncSettings()
+        logSyncSettings(state: "StartSyncToUseFileList")
         
         let operations: [UploadOperations] = itemsToUpload.compactMap {
             let operation = UploadOperations(item: $0, uploadType: .syncToUse, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
@@ -190,8 +194,7 @@ final class UploadService: BaseRequestService {
                 let checkIfFinished = {
                     if self.uploadOperations.filter({ $0.uploadType == .syncToUse }).isEmpty {
                         success()
-                        self.logEvent("FinishedSyncToUseFileList")
-                        self.logSyncSettings()
+                        self.logSyncSettings(state: "FinishedSyncToUseFileList")
                         return
                     }
                 }
@@ -267,8 +270,7 @@ final class UploadService: BaseRequestService {
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
-        logEvent("StartUploadFileList")
-        logSyncSettings()
+        logSyncSettings(state: "StartUploadFileList")
         
         let operations: [UploadOperations] = itemsToUpload.compactMap {
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
@@ -280,8 +282,7 @@ final class UploadService: BaseRequestService {
                     if self.uploadOperations.filter({ $0.uploadType == .fromHomePage }).isEmpty {
                         success()
                         ItemOperationManager.default.syncFinished()
-                        self.logEvent("FinishedUploadFileList")
-                        self.logSyncSettings()
+                        self.logSyncSettings(state: "FinishedUploadFileList")
                         return
                     }
                 }
@@ -354,8 +355,7 @@ final class UploadService: BaseRequestService {
         
         ItemOperationManager.default.startUploadFile(file: firstObject)
         
-        logEvent("StartSyncFileList")
-        logSyncSettings()
+        logSyncSettings(state: "StartSyncFileList")
         
         var successHandled = false
             
@@ -370,8 +370,7 @@ final class UploadService: BaseRequestService {
                     if !successHandled, self.uploadOperations.filter({ $0.uploadType == .autoSync && $0.item.fileType == finishedOperation.item.fileType }).isEmpty {
                         successHandled = true
                         success()
-                        self.logEvent("FinishedSyncFileList")
-                        self.logSyncSettings()
+                        self.logSyncSettings(state: "FinishedSyncFileList")
                         return
                     }
                 }
@@ -610,7 +609,7 @@ extension UploadService {
 }
 
 extension UploadService {
-    
+
     fileprivate func logEvent(_ message: String) {
         if UIApplication.shared.applicationState == .background {
             log.debug("Upload Service Background sync \(message)")
@@ -619,16 +618,21 @@ extension UploadService {
         }
     }
     
-    fileprivate func logSyncSettings() {
+    fileprivate func logSyncSettings(state: String) {
         autoSyncStorage.getAutoSyncSettingsForCurrentUser { [weak self] settings, userId in
             guard let `self` = self else {
                 return
             }
             
-            var logString = "PHOTOS: \(settings.photoSetting.option.text()) + VIDEOS: \(settings.videoSetting.option.text())"
+            var logString = "Auto Sync Settings: PHOTOS: \(settings.photoSetting.option.text()) + VIDEOS: \(settings.videoSetting.option.text())"
             logString += "; DEVICE NETWORK: \(self.reachabilityService.status)"
+            logString += " --> \(state)"
             log.debug(logString)
         }
+    }
+    
+    @objc fileprivate func updateSyncSettings() {
+        logSyncSettings(state: "Auto Sync setting changed")
     }
 }
 
