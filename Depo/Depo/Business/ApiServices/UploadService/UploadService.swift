@@ -226,7 +226,6 @@ final class UploadService: BaseRequestService {
                 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
-//                finishedOperation.item.isLocalItem = false
                 
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                 
@@ -315,7 +314,6 @@ final class UploadService: BaseRequestService {
                 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
-//                finishedOperation.item.isLocalItem = false
 
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                 
@@ -384,7 +382,7 @@ final class UploadService: BaseRequestService {
                         checkIfFinished()
                     } else {
                         if let fileName = finishedOperation.item.name {
-                            self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? error.description)")
+                            self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? "")")
                         }
                         fail(error)
                     }
@@ -403,7 +401,6 @@ final class UploadService: BaseRequestService {
                 
                 finishedOperation.item.syncStatus = .synced
                 finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
-//                finishedOperation.item.isLocalItem = false
                 
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                 
@@ -438,10 +435,8 @@ final class UploadService: BaseRequestService {
     func cancelSyncToUseOperations() {
         var operationsToRemove = uploadOperations.filter({ $0.uploadType == .syncToUse })
         
-        operationsToRemove.forEach { operation in
-            operation.cancel()
-            uploadOperations.removeIfExists(operation)
-        }
+        cancelAndRemove(operations: operationsToRemove)
+        
         print("AUTOSYNC: removed \(operationsToRemove.count) operations")
         operationsToRemove.removeAll()
     }
@@ -449,10 +444,8 @@ final class UploadService: BaseRequestService {
     func cancelUploadOperations() {
         var operationsToRemove = uploadOperations.filter({ $0.uploadType == .fromHomePage })
         
-        operationsToRemove.forEach { operation in
-            operation.cancel()
-            uploadOperations.removeIfExists(operation)
-        }
+        cancelAndRemove(operations: operationsToRemove)
+        
         operationsToRemove.removeAll()
     }
     
@@ -464,10 +457,8 @@ final class UploadService: BaseRequestService {
         
         print("AUTOSYNC: found \(operationsToRemove.count) operations to remove in \(Date().timeIntervalSince(time)) secs")
         
-        operationsToRemove.forEach { operation in
-            operation.cancel()
-            uploadOperations.removeIfExists(operation)
-        }
+        cancelAndRemove(operations: operationsToRemove)
+        
         print("AUTOSYNC: removed \(operationsToRemove.count) operations in \(Date().timeIntervalSince(time)) secs")
         operationsToRemove.removeAll()
         
@@ -493,12 +484,17 @@ final class UploadService: BaseRequestService {
             return false
         }
         
-        operationsToRemove.forEach { operation in
+        cancelAndRemove(operations: operationsToRemove)
+        
+        print("AUTOSYNC: removed \(operationsToRemove.count) operations")
+        operationsToRemove.removeAll()
+    }
+    
+    private func cancelAndRemove(operations: [UploadOperations]) {
+        operations.forEach { operation in
             operation.cancel()
             uploadOperations.removeIfExists(operation)
         }
-        print("AUTOSYNC: removed \(operationsToRemove.count) operations")
-        operationsToRemove.removeAll()
     }
     
     private func clearUploadCounters() {
@@ -638,8 +634,9 @@ extension UploadService {
 
 
 typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Void
+typealias UploadOperationHandler = (_ uploadOberation: UploadOperations, _ value: ErrorResponse?) -> Void
 
-class UploadOperations: Operation {
+final class UploadOperations: Operation {
     
     let item: WrapData
     var uploadType: UploadType?
@@ -705,7 +702,7 @@ class UploadOperations: Operation {
             if let req = requestObject {
                 req.cancel()
             }
-
+            
             if let fail_ = fail {
                 fail_(ErrorResponse.string(TextConstants.canceledOperationTextError))
             }
@@ -719,7 +716,7 @@ class UploadOperations: Operation {
         }
         
         ItemOperationManager.default.startUploadFile(file: item)
-
+        
         attemptsCount = 0
         attempmtUpload()
         
@@ -743,16 +740,16 @@ class UploadOperations: Operation {
             guard let `self` = self,
                 let baseurlResponse = baseurlResponse,
                 let responseURL = baseurlResponse.url else {
-                customFail(ErrorResponse.string(TextConstants.commonServiceError))
-                return
+                    customFail(ErrorResponse.string(TextConstants.commonServiceError))
+                    return
             }
             
             let uploadParam = Upload(item: self.item,
                                      destitantion: responseURL,
-                                      uploadStategy: self.uploadStategy,
-                                      uploadTo: self.uploadTo,
-                                      rootFolder: self.folder,
-                                      isFavorite: self.isFavorites)
+                                     uploadStategy: self.uploadStategy,
+                                     uploadTo: self.uploadTo,
+                                     rootFolder: self.folder,
+                                     isFavorite: self.isFavorites)
             
             self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
                 
@@ -782,7 +779,7 @@ class UploadOperations: Operation {
                     
                     customSucces()
                     
-                }, fail: customFail)
+                    }, fail: customFail)
                 
                 }, fail: { error in
                     if error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {

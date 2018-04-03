@@ -129,7 +129,9 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
 
     func reloadTableView() {
-        tableView?.reloadData()
+        DispatchQueue.main.async {
+            self.tableView?.reloadData()
+        }
     }
 
 }
@@ -147,7 +149,7 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
                 autoSyncSettings?.isAutoSyncOptionEnabled = true
                 delegate?.enableAutoSync()
             } else {
-                autoSyncSettings?.disableAutoSync()
+                forceDisableAutoSync()
                 reloadTableView()
             }
         }

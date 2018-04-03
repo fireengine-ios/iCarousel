@@ -144,6 +144,7 @@ class SyncServiceManager {
     }
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
+        print("AUTOSYNC: checkReachabilityAndSettings")
         dispatchQueue.async {
             guard let syncSettings = self.settings else {
                 AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, _ in
@@ -198,13 +199,11 @@ class SyncServiceManager {
                     self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
                 }
             } else {
-                if reachabilityChanged {
-                    let photoServiceWaitingForWiFi = photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
-                    let videoServiceWaitingForWiFi = videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
-                    self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
-                } else {
-                    self.stopSync()
-                }
+                self.stopSync()
+                
+                let photoServiceWaitingForWiFi = photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
+                let videoServiceWaitingForWiFi = videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
+                self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
             }
         }
     }
