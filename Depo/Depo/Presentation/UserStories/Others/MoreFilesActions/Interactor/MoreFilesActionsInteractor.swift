@@ -174,10 +174,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private var cropyController: CRYCropNavigationController?
     
     func edit(item: [BaseDataSourceItem], complition: VoidHandler?) {
-        guard let item = item.first as? Item, let url = item.tmpDownloadUrl else {
+        
+        guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
             return
         }
-        
         ImageDownloder().getImage(patch: url) { [weak self] image in
             guard let `self` = self, let image = image,
                 let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
