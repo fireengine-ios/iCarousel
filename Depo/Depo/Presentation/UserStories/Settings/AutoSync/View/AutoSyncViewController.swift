@@ -84,11 +84,14 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
             MenloworksEventsService.shared.onFirstAutosyncOff()
         }
         
+        UserDefaults.standard.set(true, forKey: "autoSyncSet")
+        
         output.change(settings: settings)
     }
     
     @IBAction func onSkipButtn() {
         output.skipForNowPressed(onSyncDisabled: { [weak self] in
+            UserDefaults.standard.set(true, forKey: "autoSyncSet")
             self?.disableAutoSync()
         })
     }

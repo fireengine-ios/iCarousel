@@ -84,12 +84,11 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                 self?.customProgressHUD.hideProgressSpinner()
                 
                 if (self?.turkcellLogin)! {
-                    let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-                    if launchedBefore {
+                    let autoSyncSet = UserDefaults.standard.bool(forKey: "autoSyncSet")
+                    if autoSyncSet {
                         self?.router.navigateToApplication()
                     } else {
                         self?.router.goToSyncSettingsView()
-                        UserDefaults.standard.set(true, forKey: "launchedBefore")
                     }
                 } else {
                     self?.router.navigateToApplication()
