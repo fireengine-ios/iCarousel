@@ -203,7 +203,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             moreButton.isHidden = true
         }
         
-        if isCellSelected {
+        if isCellSelected, !isBigSize() {
             setSelectionSmallSelectionImageView(isSelected, isHidden: !isImageOrVideoType(wrappered.fileType))
         }
     }
@@ -268,7 +268,9 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         
         bgView.backgroundColor = bgColor
         
-        if let item = itemModel, isCellSelected {
+        if let item = itemModel,
+            isCellSelected,
+            !isBigSize() {
             setSelectionSmallSelectionImageView(isSelected, isHidden: !isImageOrVideoType(item.fileType))
         }
     }
