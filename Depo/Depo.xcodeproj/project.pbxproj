@@ -2952,6 +2952,7 @@
 		CE654FB72045613F00232025 /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
 		CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
+		CE6A8F1720737E230001EB54 /* ServerMessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1620737E230001EB54 /* ServerMessageError.swift */; };
 		CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */; };
 		CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7441FCBE84100C23CBD /* DropboxStatusValue.swift */; };
 		CE6DE7511FCBE84100C23CBD /* DropboxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7451FCBE84100C23CBD /* DropboxResponse.swift */; };
@@ -5037,6 +5038,7 @@
 		CE654FB420454B3900232025 /* UICollectionView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Layout.swift"; sourceTree = "<group>"; };
 		CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailCell.swift; sourceTree = "<group>"; };
 		CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoVideoDetailCell.xib; sourceTree = "<group>"; };
+		CE6A8F1620737E230001EB54 /* ServerMessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMessageError.swift; sourceTree = "<group>"; };
 		CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetsLabel.swift; sourceTree = "<group>"; };
 		CE6DE7441FCBE84100C23CBD /* DropboxStatusValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropboxStatusValue.swift; sourceTree = "<group>"; };
 		CE6DE7451FCBE84100C23CBD /* DropboxResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropboxResponse.swift; sourceTree = "<group>"; };
@@ -7151,6 +7153,7 @@
 				7CF9A9F41FA2279500242FDD /* ImageForDowload.swift */,
 				CE4516A81F7D2EF1008B1F9A /* ServerStatusError.swift */,
 				CE7466FE1FD6B35400D0885D /* ServerValueError.swift */,
+				CE6A8F1620737E230001EB54 /* ServerMessageError.swift */,
 				CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */,
 				CEF69DE61FB593AF00FCE6AB /* ServerError.swift */,
 				CE7467001FD6B61600D0885D /* ErrorResponse.swift */,
@@ -14955,6 +14958,7 @@
 				8C5408431F62895300D4717A /* GridListTopBarConfig.swift in Sources */,
 				CE2F56221F7552A900F49DA1 /* ColumnsCollectionLayout.swift in Sources */,
 				8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
+				CE6A8F1720737E230001EB54 /* ServerMessageError.swift in Sources */,
 				78E3D51A203FFEC800FA3478 /* MenloworksTags.swift in Sources */,
 				B5BA987B2068C6F200CA3BF9 /* UIImage+Size.swift in Sources */,
 				4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
