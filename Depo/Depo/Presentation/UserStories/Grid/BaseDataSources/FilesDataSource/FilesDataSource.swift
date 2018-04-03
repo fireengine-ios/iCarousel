@@ -12,20 +12,20 @@ import Photos
 
 protocol PhotoDataSource {
     
-    typealias Itemslist = (_ items: [Item]) -> Swift.Void
+    typealias Itemslist = (_ items: [Item]) -> Void
     
-    typealias PrevieImage = (_ image: UIImage) -> Swift.Void
+    typealias PrevieImage = (_ image: UIImage) -> Void
     
     typealias FullImage = PrevieImage
         
-    func getSmalImage(path: PathForItem, compliteImage: @escaping RemoteImage)
+    func getSmalImage(path: PathForItem, completeImage: @escaping RemoteImage)
     
     func cancelImgeRequest(path: PathForItem)
     
 }
 
 protocol AsynImage {
-    func getImage(patch: PathForItem, compliteImage:@escaping RemoteImage) -> URL?
+    func getImage(patch: PathForItem, completeImage:@escaping RemoteImage) -> URL?
 }
 
 class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
@@ -45,14 +45,14 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     // MARK: PhotoDataSource
 
-    func getSmalImage(path patch: PathForItem, compliteImage: @escaping RemoteImage) {
+    func getSmalImage(path patch: PathForItem, completeImage: @escaping RemoteImage) {
         
         switch patch {
         case let .localMediaContent(local):
-            localManager.getPreviewImage(asset: local.asset, image: compliteImage)
+            localManager.getPreviewImage(asset: local.asset, image: completeImage)
             
         case let .remoteUrl(url):
-            getImageServise.getImage(patch: url, compliteImage: compliteImage)
+            getImageServise.getImage(patch: url, completeImage: completeImage)
         }
     }
     
@@ -77,35 +77,35 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     // MARK: AsynImage
     
     @discardableResult
-    func getImage(patch: PathForItem, compliteImage: @escaping RemoteImage) -> URL? {
+    func getImage(patch: PathForItem, completeImage: @escaping RemoteImage) -> URL? {
         switch patch {
         case let .localMediaContent(local):
-            localManager.getPreviewImage(asset: local.asset, image: compliteImage)
+            localManager.getPreviewImage(asset: local.asset, image: completeImage)
             return nil
         case let .remoteUrl(url):
-            getImageServise.getImage(patch: url, compliteImage: compliteImage)
+            getImageServise.getImage(patch: url, completeImage: completeImage)
             return url
         }
     }
     
     @discardableResult
-    func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) -> URL? {
+    func getImage(for item: Item, isOriginal: Bool, completeImage: @escaping RemoteImage) -> URL? {
         if isOriginal {
             switch item.patchToPreview {
             case let .localMediaContent(local):
-                localManager.getPreviewMaxImage(asset: local.asset, image: compliteImage)
+                localManager.getPreviewMaxImage(asset: local.asset, image: completeImage)
                 
             case let .remoteUrl(url):
                 if let largeUrl = item.metaData?.largeUrl {
-                    getImageServise.getImage(patch: largeUrl, compliteImage: compliteImage)
+                    getImageServise.getImage(patch: largeUrl, completeImage: completeImage)
                     return largeUrl
                 } else {
-                    getImageServise.getImage(patch: url, compliteImage: compliteImage)
+                    getImageServise.getImage(patch: url, completeImage: completeImage)
                     return url
                 }
             }
         } else {
-            return getImage(patch: item.patchToPreview, compliteImage: compliteImage)
+            return getImage(patch: item.patchToPreview, completeImage: completeImage)
         }
         
         return nil
@@ -116,7 +116,6 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     private lazy var defaultImageRequestOptions: PHImageRequestOptions = {
         let options = PHImageRequestOptions()
         options.deliveryMode = .highQualityFormat
-        options.isNetworkAccessAllowed = true
         options.isSynchronous = true
         return options
     }()

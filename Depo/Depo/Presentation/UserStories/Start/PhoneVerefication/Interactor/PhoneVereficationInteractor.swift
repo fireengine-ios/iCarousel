@@ -9,9 +9,11 @@
 class PhoneVereficationInteractor: PhoneVereficationInteractorInput {    
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
-    var dataStorage: PhoneVereficationDataStorage = PhoneVereficationDataStorage()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    let authenticationService = AuthenticationService()
+    private let dataStorage: PhoneVereficationDataStorage = PhoneVereficationDataStorage()    
+    private lazy var authenticationService = AuthenticationService()
+    
     
     weak var output: PhoneVereficationInteractorOutput!
     
@@ -96,6 +98,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
         
         authenticationService.login(user: user, sucess: { [weak self] _ in
             self?.tokenStorage.isRememberMe = true
+            self?.analyticsService.track(event: .login)
             DispatchQueue.main.async {
                 self?.output.succesLogin()
             }

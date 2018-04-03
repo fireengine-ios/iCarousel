@@ -41,8 +41,12 @@ class AutoSyncDataStorage: NSObject {
     }
     
     static func clear() {
-        let userId = SingletonStorage.shared.unigueUserID
-        UserDefaults.standard.removeObject(forKey: userId)
+        SingletonStorage.shared.getUniqueUserID(success: { userId in
+            UserDefaults.standard.removeObject(forKey: userId)
+        }, fail: {
+            ///error should be handled before the callback
+        })
+        
     }
     
 }

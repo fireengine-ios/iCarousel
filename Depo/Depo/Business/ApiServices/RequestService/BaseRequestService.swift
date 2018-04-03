@@ -129,7 +129,8 @@ class BaseRequestService {
         task.resume()
     }
     
-    func executeGetRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>) {
+    @discardableResult
+    func executeGetRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>)  -> URLSessionTask {
         let task = requestService.requestTask(patch: param.patch,
                                                       headerParametrs: param.header,
                                                       body: nil,
@@ -137,6 +138,8 @@ class BaseRequestService {
                                                       timeoutInterval: param.timeout,
                                                       response: handler.response)
         task.resume()
+        
+        return task
     }
     
     func executeDeleteRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>) {

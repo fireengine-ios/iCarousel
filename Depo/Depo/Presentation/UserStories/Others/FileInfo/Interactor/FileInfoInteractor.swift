@@ -7,10 +7,11 @@
 //
 
 class FileInfoInteractor: FileInfoInteractorInput {
-
+    
     weak var output: FileInfoInteractorOutput!
     
     var item: BaseDataSourceItem?
+    private lazy var albumService = PhotosAlbumService()
 
     func setObject(object: BaseDataSourceItem) {
         item = object
@@ -25,36 +26,47 @@ class FileInfoInteractor: FileInfoInteractorInput {
     func onRename(newName: String) {
         if let file = item as? Item {
             let renameFile = RenameFile(uuid: file.uuid, newName: newName)
-            FileService().rename(rename: renameFile, success: {
-                DispatchQueue.main.async { [weak self] in
+            FileService().rename(rename: renameFile, success: { [weak self] in
+                DispatchQueue.main.async {
                     self?.output.updated()
                     if let file = self?.item {
                         file.name = newName
                     }
                 }
-            }, fail: { error in
-                DispatchQueue.main.async { [weak self] in
+            }, fail: { [weak self] error in
+                DispatchQueue.main.async {
                     self?.output.updated()
                 }
             })
-
         }
         
         if let album = item as? AlbumItem {
             let renameAlbum = RenameAlbum(albumUUID: album.uuid, newName: newName)
-            PhotosAlbumService().renameAlbum(parameters: renameAlbum, success: {
-                DispatchQueue.main.async { [weak self] in
+            PhotosAlbumService().renameAlbum(parameters: renameAlbum, success: { [weak self] in
+                DispatchQueue.main.async {
                     self?.output.updated()
                     if let file = self?.item {
                         file.name = newName
                     }
                 }
-            }, fail: { error in
-                DispatchQueue.main.async { [weak self] in
+            }, fail: { [weak self] error in
+                DispatchQueue.main.async {
                     self?.output.updated()
                 }
             })
         }
     }
     
+    func getAlbum(for item: BaseDataSourceItem) {
+        albumService.getAlbum(for: item.uuid) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let album):
+                    self?.output.albumForUuidSuccessed(album: album)
+                case .failed(let error):
+                    self?.output.albumForUuidFailed(error: error)
+                }
+            }
+        }
+    }
 }

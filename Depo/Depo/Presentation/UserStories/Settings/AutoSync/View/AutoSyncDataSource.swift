@@ -50,11 +50,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func showCells(from settings: AutoSyncSettings) {
         autoSyncSettings = settings
-        let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: nil, selected: settings.isAutoSyncOptionEnabled)
-        let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.photoSetting, selected: false)
-        let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.videoSetting, selected: false)
-        tableDataArray.append(contentsOf: [headerModel, photoSettingModel, videoSettingModel])
-        reloadTableView()
+        setupCells(with: settings)
     }
     
     private func updateCells() {
@@ -63,6 +59,10 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         }
         
         tableDataArray.removeAll()
+        setupCells(with: settings)
+    }
+    
+    private func setupCells(with settings: AutoSyncSettings) {
         let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: nil, selected: settings.isAutoSyncOptionEnabled)
         let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.photoSetting, selected: false)
         let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.videoSetting, selected: false)
@@ -75,19 +75,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             return AutoSyncSettings()
         }
         return settings
-    }
-    
-    private func getTableHeight() -> CGFloat {
-        let rowsCount = tableView?.numberOfRows(inSection: 0) ?? 0
-        var tableH: CGFloat = 0.0
-        for i in 0...rowsCount {
-            let indexPath = IndexPath(row: i, section: 0)
-            if let cellRect = tableView?.rectForRow(at: indexPath) {
-                tableH = tableH + cellRect.size.height
-            }
-        }
-        
-        return tableH
     }
     
     func forceDisableAutoSync() {
@@ -142,7 +129,9 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
 
     func reloadTableView() {
-        tableView?.reloadData()
+        DispatchQueue.main.async {
+            self.tableView?.reloadData()
+        }
     }
 
 }
@@ -160,7 +149,7 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
                 autoSyncSettings?.isAutoSyncOptionEnabled = true
                 delegate?.enableAutoSync()
             } else {
-                autoSyncSettings?.disableAutoSync()
+                forceDisableAutoSync()
                 reloadTableView()
             }
         }

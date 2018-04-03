@@ -52,6 +52,15 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
         listView.isHidden = isBigSize()
         greedView.isHidden = !isBigSize()
         
+        isAccessibilityElement = true
+        accessibilityTraits = UIAccessibilityTraitNone
+        accessibilityLabel = album.name
+        
+        setNeedsLayout()
+        layoutIfNeeded()
+        
+        greedShadowView.addShadowView()
+        listShadowView.addShadowView()
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {

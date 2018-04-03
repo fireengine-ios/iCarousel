@@ -15,7 +15,9 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
-    @IBOutlet weak var iconImageViewForCurrentFile: LoadingImageView!
+    @IBOutlet weak var iconImageViewForCurrentFile: LoadingImageView! {
+        didSet { iconImageViewForCurrentFile.delegate = self }
+    }
     
     var wrapItem: WrapData?
     var typeOfOperation: OperationType?
@@ -102,4 +104,14 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
             
     }
 
+}
+
+extension ProgressPopUp: LoadingImageViewDelegate {
+    func onImageLoaded(image: UIImage?) {
+        WidgetService.shared.notifyWidgetAbout(currentImage: image)
+    }
+    
+    func onLoadingImageCanceled() {
+        WidgetService.shared.notifyWidgetAbout(currentImage: nil)
+    }
 }

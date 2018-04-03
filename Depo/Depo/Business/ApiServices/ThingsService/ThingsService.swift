@@ -72,7 +72,7 @@ final class ThingsItemsService: RemoteItemsService {
         let param = ThingsPageParameters(pageSize: requestSize, pageNumber: currentPage)
         
         service.getThingsPage(param: param, success: { [weak self] response in
-            if let response = response as? ThingsPageResponse, !response.list.isEmpty {
+            if let response = response as? ThingsPageResponse {
                 success?(response.list.map({ ThingsItem(response: $0) }))
                 self?.currentPage += 1
             } else {

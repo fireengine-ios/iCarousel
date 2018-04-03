@@ -31,17 +31,19 @@ class AlbumCell: UICollectionViewCell {
         } else {
             setup(withSliderItem: item)
         }
+        
+        isAccessibilityElement = true
+        accessibilityTraits = UIAccessibilityTraitNone
+        accessibilityLabel = item.name
     }
     
     private func setup(withAlbum album: AlbumItem?) {
-        placeholderImage.layer.borderColor = ColorConstants.blueColor.cgColor
         bigPreviewImage.loadImageForItem(object: album?.preview)
     }
     
     private func setup(withSliderItem item: SliderItem) {
         if let items = item.previewItems, !items.isEmpty {
-            previewBackView.isHidden = false
-            placeholderImage.layer.borderColor = ColorConstants.blueColor.cgColor
+            previewBackView.isHidden = false            
             placeholderImage.image = nil
             setupImage(previewImage1, path: items.first)
             setupImage(previewImage2, path: items[safe: 1])
@@ -49,7 +51,6 @@ class AlbumCell: UICollectionViewCell {
             setupImage(previewImage4, path: items[safe: 3])
         } else {
             previewBackView.isHidden = true
-            placeholderImage.layer.borderColor = item.type?.placeholderBorderColor ?? ColorConstants.blueColor.cgColor
             placeholderImage.image = item.placeholderImage
         }
     }
@@ -63,6 +64,7 @@ class AlbumCell: UICollectionViewCell {
         super.awakeFromNib()
         titleLabel.text = ""
         placeholderImage.layer.borderWidth = 1
+        placeholderImage.layer.borderColor = ColorConstants.blueColor.cgColor
         titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
         titleLabel.textColor = ColorConstants.darkText
     }

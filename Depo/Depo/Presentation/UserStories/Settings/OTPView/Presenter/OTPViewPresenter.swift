@@ -7,8 +7,11 @@
 //
 
 class OTPViewPresenter: PhoneVereficationPresenter {
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    
     override func verificationSucces() {
-        compliteAsyncOperationEnableScreen()
+        tokenStorage.isClearTokens = true
+        completeAsyncOperationEnableScreen()
         view.getNavigationController()?.popViewController(animated: true)
     }
 }

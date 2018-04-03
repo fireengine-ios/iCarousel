@@ -69,8 +69,9 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
 
 extension FaceImageItemsViewController: FaceImageItemsViewInput {
     
-    func configurateUgglaView() {
+    func configurateUgglaView(hidden: Bool) {
         ugglaImageView = UIImageView(frame: CGRect(x: 0, y: view.bounds.size.height - ugglaViewHeight, width: view.bounds.size.width, height: ugglaViewHeight))
+        ugglaImageView.isHidden = hidden
         ugglaImageView.contentMode = .center
         ugglaImageView.image = UIImage(named: "poweredByUggla")
         view.addSubview(ugglaImageView)
@@ -82,7 +83,7 @@ extension FaceImageItemsViewController: FaceImageItemsViewInput {
         ugglaViewBottomConstraint = ugglaImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: ugglaViewHeight)
         ugglaViewBottomConstraint.isActive = true
         
-        collectionView.contentInset.bottom = ugglaViewHeight
+        collectionView.contentInset.bottom = hidden ? 0 : ugglaViewHeight
     }
     
     func updateUgglaViewPosition() {
@@ -105,9 +106,13 @@ extension FaceImageItemsViewController: FaceImageItemsViewInput {
         view.layoutIfNeeded()
     }
     
+    func showUgglaView() {
+        ugglaImageView?.isHidden = false
+        collectionView.contentInset.bottom = ugglaViewHeight
+    }
+    
     func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool, isShowUggla: Bool) {
         showNoFilesWith(text: text, image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
-        startCreatingFilesButton.isHidden = true
         noFilesTopLabel?.isHidden = true
         isCanChangeVisibility = false
         if isShowUggla {

@@ -10,8 +10,8 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
-typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Swift.Void
-typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
+typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Void
+typealias FailResponse = (_ value: ErrorResponse) -> Void
 
 class AuthenticationUser: BaseRequestParametrs {
     
@@ -225,8 +225,8 @@ struct ResendVerificationSMS: RequestParametrs {
 }
 
 
-typealias  SuccessLogin = () -> Swift.Void
-typealias  SuccessLogout = () -> Swift.Void
+typealias  SuccessLogin = () -> Void
+typealias  SuccessLogout = () -> Void
 typealias  FailLoginType = FailResponse
 typealias  HeadersHandler = ([String: Any]) -> Void
 
@@ -336,6 +336,7 @@ class AuthenticationService: BaseRequestService {
             SyncServiceManager.shared.stopSync()
             AutoSyncDataStorage.clear()
             SingletonStorage.shared.accountInfo = nil
+            ItemOperationManager.default.clear()
             self.player.stop()
             self.cancellAllRequests()
             
@@ -411,5 +412,40 @@ class AuthenticationService: BaseRequestService {
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
             self?.autificationByToken(sucess: success, fail: fail)
         })
+    }
+    
+    
+    // MARK: - With new SessionManager
+    
+    private let sessionManagerWithoutToken: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+        return SessionManager(configuration: configuration)
+    }()
+    
+    func checkEmptyEmail(handler: @escaping ResponseBool) {
+        let headers = [HeaderConstant.RememberMeToken: tokenStorage.refreshToken ?? ""]
+        let refreshAccessTokenUrl = RouteRequests.BaseUrl +/ RouteRequests.authificationByRememberMe
+        
+        sessionManagerWithoutToken
+            .request(refreshAccessTokenUrl, method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers)
+            .customValidate()
+            .responseJSON { response in
+                if let headers = response.response?.allHeaderFields as? [String: Any],
+                    let warning = headers[HeaderConstant.accountWarning] as? String,
+                    warning == HeaderConstant.emptyEmail
+                {
+                    handler(ResponseResult.success(true))
+                } else {
+                    handler(ResponseResult.success(false))
+                }
+        }
+    }
+    
+    func updateUserLanguage(_ language: String, handler: @escaping ResponseVoid) {
+        SessionManager.default
+            .request(RouteRequests.updateLanguage, method: .post, encoding: language)
+            .customValidate()
+            .responseVoid(handler)
     }
 }

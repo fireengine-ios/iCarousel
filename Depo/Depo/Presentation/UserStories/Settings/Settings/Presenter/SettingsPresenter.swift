@@ -131,8 +131,12 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     
     // MARK: - interactor output PhotoRelated
     
-    func profilePhotoUploadSuccessed() {
-        view.profileInfoChanged()
+    func profilePhotoUploadSuccessed(image: UIImage?) {
+        if let image = image {
+            view.updatePhoto(image: image)
+        } else {
+            view.profileInfoChanged()
+        }
     }
     
     func profilePhotoUploadFailed(error: Error) {

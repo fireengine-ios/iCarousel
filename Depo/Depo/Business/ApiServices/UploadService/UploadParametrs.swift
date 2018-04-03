@@ -90,12 +90,13 @@ class Upload: UploadRequestParametrs {
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
-            HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue
+            HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue,
+            HeaderConstant.Expect                : "100-continue"
 //            HeaderConstant.Etag                   : md5
             //                  HeaderConstant.ContentLength         : contentLenght,
             //                  HeaderConstant.XObjectMetaAlbumLabel  : "",
             //                  HeaderConstant.XObjectMetaFolderLabel : "",
-            //                  HeaderConstant.Expect                 : "100-continue",
+            
         ]
         return header
     }
@@ -118,7 +119,12 @@ class UploadNotify: BaseRequestParametrs {
     let fileUUID: String
     
     init(parentUUID: String, fileUUID: String) {
-        self.parentUUID = parentUUID
+        if parentUUID.isEmpty {
+            self.parentUUID = "ROOT_FOLDER"
+        }else{
+            self.parentUUID = parentUUID
+        }
+        //self.parentUUID = parentUUID
         self.fileUUID = fileUUID
         super.init()
     }

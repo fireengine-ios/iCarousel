@@ -15,7 +15,7 @@ protocol PackagesInteractorInput {
     func getToken(for offer: OfferServiceResponse)
     func getResendToken(for offer: OfferServiceResponse)
     func activate(offerApple: OfferApple)
-    func verifyOffer(token: String, otp: String)
+    func verifyOffer(_ offer: OfferServiceResponse?, token: String, otp: String)
     func submit(promocode: String)
     func getActiveSubscriptions()
     func getAccountType()
@@ -23,6 +23,7 @@ protocol PackagesInteractorInput {
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan]
     func convertToSubscriptionPlans(offerApples: [OfferApple]) -> [SubscriptionPlan]
     
+    func restorePurchases()
     /// MAYBE WILL BE NEED
     //func getCurrentSubscription()
 }
