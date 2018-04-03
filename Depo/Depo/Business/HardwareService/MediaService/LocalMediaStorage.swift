@@ -325,9 +325,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             if status {
                 if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
-                    DispatchQueue.main.async {
-                        self?.merge(asset: assetIdentifier, with: item)
-                    }
+                    self?.merge(asset: assetIdentifier, with: item)
                 }
                 if let album = album, let assetPlaceholder = assetPlaceholder {
                     self?.add(asset: assetPlaceholder.localIdentifier, to: album)
@@ -353,17 +351,20 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             let wrapData = WrapData(asset: asset)
             wrapData.copyFileData(from: item)
             
-            let context = CoreDataStack.default.mainContext
-            let mediaItem: MediaItem
-            if let existingMediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
-                mediaItem = existingMediaItem
-            } else {
-                mediaItem = MediaItem(wrapData: wrapData, context: context)
+            let context = CoreDataStack.default.backgroundContext
+            context.perform {
+                let mediaItem: MediaItem
+                if let existingMediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
+                    mediaItem = existingMediaItem
+                } else {
+                    mediaItem = MediaItem(wrapData: wrapData, context: context)
+                }
+                
+                
+                mediaItem.localFileID = assetIdentifier
+                CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)
             }
-        
             
-            mediaItem.localFileID = assetIdentifier
-            CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)
         }
     }
     
