@@ -355,6 +355,8 @@ struct TextConstants {
     static let faceImageThisPerson = NSLocalizedString("this person", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImagePhotos = NSLocalizedString("Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageNoPhotos = NSLocalizedString("We couldn't find anybody on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImagePlacesNoPhotos = NSLocalizedString("We couldn’t find any place on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageThingsNoPhotos = NSLocalizedString("We couldn’t find anything on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageNoPhotosButton = NSLocalizedString("Start adding your photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageWaitAlbum = NSLocalizedString("Grouping of your photos will take some time. Please wait and then check the albums.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
