@@ -16,7 +16,6 @@ final class PackagesViewController: UIViewController {
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    private var itemSize = SubscriptionPlanCollectionViewCell.sizeForAccount(type: .all)
     private lazy var activityManager = ActivityIndicatorManager()
     
     private var plans = [SubscriptionPlan]() {
@@ -93,7 +92,9 @@ extension PackagesViewController: PackagesViewInput {
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan]) {
-        itemSize = SubscriptionPlanCollectionViewCell.sizeForAccount(type: output.getAccountType())
+        if let layout = collectionView.collectionViewLayout as? ColumnsCollectionLayout {
+            layout.cellHeight = SubscriptionPlanCollectionViewCell.heightForAccount(type: output.getAccountType())
+        }
         plans += array
     }
     
@@ -157,14 +158,6 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
             MenloworksAppEvents.onSubscriptionClicked(tag)
         }
         output.didPressOn(plan: plan)
-    }
-}
-
-// MARK: UICollectionViewDelegateFlowLayout
-extension PackagesViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return itemSize
     }
 }
 
