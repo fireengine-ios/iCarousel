@@ -10,16 +10,6 @@ import Foundation
 import Photos
 import JDStatusBarNotification
 
-struct MetaAssetInfo {
-    var asset: PHAsset
-    var url: URL
-    var fileSize = UInt64(0)
-    var originalName = ""
-    var md5: String {
-        return "\(originalName)\(fileSize)"
-    }
-}
-
 typealias LocalFilesCallBack = (_ localFiles: [WrapData]) -> Void
 
 extension CoreDataStack {
@@ -339,11 +329,11 @@ extension CoreDataStack {
     }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        let currentlyInLibriaryIDs: [String] = allList.flatMap { $0.localIdentifier }
+        let currentlyInLibriaryIDs: [String] = allList.compactMap { $0.localIdentifier }
         let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
         let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
         
-        let alredySavedIDs = alredySaved.flatMap { $0.localFileID }
+        let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
         
         checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs, context: context)
         

@@ -108,7 +108,7 @@ struct RouteRequests {
     static let faqContentUrl = "http://mylifebox.life.com.by/faq/?lang=%@"
 
     // MARK: - Contacts
-    static let getContacts = "contact?sortField=firstname&sortOrder=ASC&maxResult=16&currentPage=%d"
+    static let getContacts = "contact?sortField=firstname&sortOrder=ASC&maxResult=32&currentPage=%d"
     static let searchContacts = "search?sortField=firstname&sortOrder=ASC&maxResult=16&query=%@&currentPage=%d"
     static let deleteContacts = "contact"
     

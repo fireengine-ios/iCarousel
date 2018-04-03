@@ -13,9 +13,35 @@ typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatu
 
 typealias FileDataSorceImg = (_ image: UIImage?) -> Void
 
-typealias AssetInfo = (url: URL, name: String, size: UInt64, md5: String)
-
 typealias AssetsList = (_ assets: [PHAsset] ) -> Void
+
+struct AssetInfo {
+    var asset: PHAsset
+    var url = LocalMediaStorage.defaultUrl
+    var size = Int64(0)
+    var name = ""
+    var md5: String {
+        if !name.isEmpty && size > 0 {
+            return "\(name)\(size)"//String(format: "%@%i", name, size)
+        }
+        return LocalMediaStorage.noneMD5
+    }
+    
+    init(libraryAsset: PHAsset) {
+        asset = libraryAsset
+        url = LocalMediaStorage.defaultUrl
+        size = Int64(0)
+        name = ""
+    }
+    
+    init(fileAsset: PHAsset, fileUrl: URL, fileSize: Int64, fileName: String) {
+        asset = fileAsset
+        url = fileUrl
+        size = fileSize
+        name = fileName
+    }
+    
+}
 
 
 protocol LocalMediaStorageProtocol {
@@ -74,35 +100,43 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return status == .authorized
     }
     
-    func getInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [MetaAssetInfo])->Void) {
-
+//    func getInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [MetaAssetInfo])->Void) {
+    func getInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [AssetInfo])->Void) {
         let fileDataSource = FilesDataSource()
-        var assetsInfo = [MetaAssetInfo]()
+        var assetsInfo = [AssetInfo]()//[MetaAssetInfo]()
         
         var i = 0
         for asset in assets {
             let _ = autoreleasepool {
-                fileDataSource.requestInfo(for: asset, completion: { (size, url, isICloud) in
-                    i += 1
-                    debugPrint("got requestInfo \(i)")
-                    let success = {
-                        if i == assets.count {
-                            completion(assetsInfo)
-                        }
-                    }
-                    
-                    guard !isICloud, let url = url, let assetName = asset.originalFilename  else {
-                        CoreDataStack.default.originalAssetsBeingAppended.remove(identifier: asset.originalFilename ?? "")
-                        success()
-                        return
-                    }
-                    debugPrint("originalNAME is \(assetName)")
-                    
-                    let assetInfo = MetaAssetInfo(asset: asset, url: url, fileSize: size, originalName: assetName)
-                    assetsInfo.append(assetInfo)
-                    
-                    success()
-                })
+                let assetInfo = self.fullInfoAboutAsset(asset: asset)
+                i += 1
+                assetsInfo.append(assetInfo)
+                
+                if i == assets.count {
+                    completion(assetsInfo)
+                }
+                
+//                fileDataSource.requestInfo(for: asset, completion: { (size, url, isICloud) in
+//                    i += 1
+//                    debugPrint("got requestInfo \(i)")
+//                    let success = {
+//                        if i == assets.count {
+//                            completion(assetsInfo)
+//                        }
+//                    }
+                
+//                    guard !isICloud, let url = url, let assetName = asset.originalFilename  else {
+//                        CoreDataStack.default.originalAssetsBeingAppended.remove(identifier: asset.originalFilename ?? "")
+//                        success()
+//                        return
+//                    }
+//                    debugPrint("originalNAME is \(assetName)")
+//
+//                    let assetInfo = MetaAssetInfo(asset: asset, url: url, fileSize: size, originalName: assetName)
+//                    assetsInfo.append(assetInfo)
+//
+//                    success()
+//                })
             }
         }
     }
@@ -543,29 +577,32 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             return fullInfoAboutVideoAsset(asset: asset)
         
         default:
-            return (url: LocalMediaStorage.defaultUrl, name: "", size: 0, md5: LocalMediaStorage.noneMD5)
+            return AssetInfo(libraryAsset: asset)
         }
     }
     
     func fullInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutVideoAsset")
 
-        var url: URL = LocalMediaStorage.defaultUrl
-        var md5: String = LocalMediaStorage.noneMD5
-        var size: UInt64 = 0
+        var assetInfo = AssetInfo(libraryAsset: asset)
         let semaphore = DispatchSemaphore(value: 0)
-        var originalFileName = ""
         
-        let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, Dict in
+        let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, dict in
+            if let error = dict?[PHImageErrorKey] as? NSError, let inCloud = dict?[PHImageResultIsInCloudKey] as? Bool, inCloud {
+                print(error.localizedDescription)
+                semaphore.signal()
+                return
+            }
+            
             if let urlToFile = (avAsset as? AVURLAsset)?.url {
                 do {
-                    url = urlToFile
-                    size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).uint64Value
+                    assetInfo.url = urlToFile
+                    assetInfo.size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).int64Value
                     if let name = asset.originalFilename {
-                        originalFileName = name
+                        assetInfo.name = name
                     }
-                    debugPrint("ORIGINAL NAME VIDEO is \(originalFileName)")
-                    md5 = String(format: "%@%i", originalFileName, size)
+                    debugPrint("ORIGINAL NAME VIDEO is \(assetInfo.name)")
+//                    md5 = String(format: "%@%i", originalFileName, size)
                     semaphore.signal()
                 } catch {
                     semaphore.signal()
@@ -578,30 +615,31 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         getDetailQueue.addOperation(operation)
         /// added timeout bcz callback from "requestAVAsset(forVideo" may not come
         _ = semaphore.wait(timeout: .now() + .seconds(40))
-        return (url: url, name: originalFileName, size: size, md5: md5)
+        return assetInfo
     }
     
     func fullInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutImageAsset")
         
-        var url: URL = LocalMediaStorage.defaultUrl
-        var md5: String = LocalMediaStorage.noneMD5
-        var size: UInt64 = 0
-        var originalFileName = ""
+        var assetInfo = AssetInfo(libraryAsset: asset)
         
         let semaphore = DispatchSemaphore(value: 0)
         let operation = GetOriginalImageOperation(photoManager: self.photoManger,
                                                   asset: asset) { data, string, orientation, dict in
+                                                    if let error = dict?[PHImageErrorKey] as? NSError, let inCloud = dict?[PHImageResultIsInCloudKey] as? Bool, inCloud {
+                                                        print(error.localizedDescription)
+                                                        semaphore.signal()
+                                                        return
+                                                    }
             if let wrapDict = dict, let dataValue = data {
                 if let name = asset.originalFilename {
-                    originalFileName = name
+                    assetInfo.name = name
                 }
-                debugPrint("ORIGINAL NAME PHOTO is \(originalFileName)")
+                debugPrint("ORIGINAL NAME PHOTO is \(assetInfo.name)")
                 if let unwrapedUrl = wrapDict["PHImageFileURLKey"] as? URL {
-                    url = unwrapedUrl
+                    assetInfo.url = unwrapedUrl
                 }
-                size = UInt64(dataValue.count)
-                md5 = String(format: "%@%i", originalFileName, size)
+                assetInfo.size = Int64(dataValue.count)
                 
                 semaphore.signal()
             } else {
@@ -610,7 +648,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         getDetailQueue.addOperation(operation)
         semaphore.wait()
-        return (url: url, name: originalFileName, size: size, md5: md5)
+        return assetInfo
     }
     
     
@@ -696,8 +734,7 @@ class GetOriginalImageOperation: Operation {
         let options = PHImageRequestOptions()
         options.version = .current
         options.deliveryMode = .highQualityFormat
-        options.isSynchronous = false
-        options.isNetworkAccessAllowed = false
+        options.isSynchronous = true
         
         photoManager.requestImageData(for: asset, options: options, resultHandler: callback)
     }
@@ -727,7 +764,7 @@ class GetOriginalVideoOperation: Operation {
         let options = PHVideoRequestOptions()
         options.version = .original
         options.deliveryMode = .highQualityFormat
-        options.isNetworkAccessAllowed = false
+
         photoManager.requestAVAsset(forVideo: asset, options: options, resultHandler: callback)
     }
 }

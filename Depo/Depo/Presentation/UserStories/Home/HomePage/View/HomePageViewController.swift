@@ -50,6 +50,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateNavigationItemsState(state: true)
         
         output.viewIsReady()
         
@@ -82,13 +83,26 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     func configureNavBarActions() {
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
+            self?.updateNavigationItemsState(state: false)
             self?.output.showSearch(output: self)
         })
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
+            self?.updateNavigationItemsState(state: false)
             self?.output.showSettings()
         })
         navBarConfigurator.configure(right: [setting, search], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        
+    }
+    
+    func updateNavigationItemsState(state: Bool) {
+        guard let items = navigationItem.rightBarButtonItems else {
+            return
+        }
+        
+        for item in items {
+            item.isEnabled = state
+        }
     }
         
     // MARK: HomePageViewInput

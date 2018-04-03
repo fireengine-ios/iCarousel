@@ -606,9 +606,14 @@ class WrapData: BaseDataSourceItem, Wrappered {
         self.init(baseModel: BaseMediaContent(curentAsset: asset, generalInfo: info))
     }
     
-    convenience init(info: MetaAssetInfo) {
-        let assetInfo = (url: info.url, name: info.originalName, size: info.fileSize, md5: info.md5)
-        self.init(baseModel: BaseMediaContent(curentAsset: info.asset, generalInfo: assetInfo))
+//    convenience init(info: MetaAssetInfo) {
+//        let assetInfo = (url: info.url, name: info.originalName, size: info.fileSize, md5: info.md5)
+//        self.init(baseModel: BaseMediaContent(curentAsset: info.asset, generalInfo: assetInfo))
+//    }
+    
+    convenience init(info: AssetInfo) {
+//        let assetInfo = (url: info.url, name: info.name, size: info.size, md5: info.md5)
+        self.init(baseModel: BaseMediaContent(curentAsset: info.asset, generalInfo: info) )//(curentAsset: info.asset, generalInfo: assetInfo))
     }
     
     init(musicForCreateStory: CreateStoryMusicItem) {

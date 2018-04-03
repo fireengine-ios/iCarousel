@@ -43,8 +43,6 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         return cachingManager
     }()
     
-    let privateQueue = DispatchQueue(label: "com.lifebox.FilesDataSource", attributes: .concurrent)
-    
     // MARK: PhotoDataSource
 
     func getSmalImage(path patch: PathForItem, completeImage: @escaping RemoteImage) {
@@ -118,18 +116,9 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     private lazy var defaultImageRequestOptions: PHImageRequestOptions = {
         let options = PHImageRequestOptions()
         options.deliveryMode = .highQualityFormat
-        options.isNetworkAccessAllowed = false
         options.isSynchronous = true
         return options
     }()
-    
-    private lazy var defaultVideoRequestOptions: PHVideoRequestOptions = {
-        let options = PHVideoRequestOptions()
-        options.deliveryMode = .highQualityFormat
-        options.isNetworkAccessAllowed = false
-        return options
-    }()
-    
 }
 
 extension FilesDataSource {
@@ -154,63 +143,3 @@ extension FilesDataSource {
         })
     }
 }
-
-
-extension FilesDataSource {
-    func requestInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL?, _ isICloud: Bool) -> Void) {
-//        privateQueue.async { [weak self] in
-//            guard let `self` = self else {
-//                debugPrint("DED DEDEDEDEDprivateQueue.asyncprivateQueue.asyncprivateQueue.asyncprivateQueue.async")
-//                completion(0, nil, false)
-//                return
-//            }
-            debugPrint("privateQueue.asyncprivateQueue.asyncprivateQueue.asyncprivateQueue.async")
-            switch asset.mediaType {
-            case .image:
-                self.requestImageInfo(for: asset, completion: completion)
-            case .video:
-                self.requestVideoInfo(for: asset, completion: completion)
-            default:
-                completion(0, nil, false)
-            }
-//        }
-        
-    }
-    
-    private func requestImageInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL?, _ isICloud: Bool) -> Void) {
-        assetCache?.requestImageData(for: asset, options: defaultImageRequestOptions, resultHandler: { (data, utType, orientation, info) in
-            guard let isICloud = info?[PHImageResultIsInCloudKey] as? Bool, !isICloud,
-                let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool, !isDegraded,
-                let data = data,
-                let url = info?["PHImageFileURLKey"] as? URL
-            else {
-                completion(0, nil, true)
-                return
-            }
-            
-            completion(UInt64(data.count), url, false)
-        })
-    }
-    
-    private func requestVideoInfo(for asset: PHAsset, completion: @escaping (_ size: UInt64, _ url: URL?, _ isICloud: Bool) -> Void) {
-        assetCache?.requestAVAsset(forVideo: asset, options: defaultVideoRequestOptions, resultHandler: { (avAsset, avAudioMix, info) in
-            guard let isICloud = info?[PHImageResultIsInCloudKey] as? Bool, !isICloud,
-                let urlToFile = (avAsset as? AVURLAsset)?.url
-            else {
-                completion(0, nil, true)
-                return
-            }
-            
-            var size = UInt64(0)
-            do {
-                size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).uint64Value
-            } catch  {
-                return completion(0, nil, true)
-            }
-
-            completion(size, urlToFile, false)
-        })
-    }
-}
-
-
