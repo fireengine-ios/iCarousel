@@ -35,6 +35,10 @@ class ReachabilityService: ReachabilityProtocol {
         return self.reachability.connection != .none
     }
     
+    var status: String {
+        return self.reachability.connection.description    
+    }
+    
     init() {
         self.reachability.whenReachable = { Reachability in
             //

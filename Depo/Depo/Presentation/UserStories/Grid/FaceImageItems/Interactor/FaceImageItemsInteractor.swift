@@ -33,9 +33,9 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         if remoteItems is PeopleItemsService {
             return TextConstants.faceImageNoPhotos
         } else if remoteItems is ThingsItemsService {
-            return TextConstants.faceImageNoPhotos
+            return TextConstants.faceImageThingsNoPhotos
         } else if remoteItems is PlacesItemsService {
-            return TextConstants.faceImageNoPhotos
+            return TextConstants.faceImagePlacesNoPhotos
         }
         
         return ""

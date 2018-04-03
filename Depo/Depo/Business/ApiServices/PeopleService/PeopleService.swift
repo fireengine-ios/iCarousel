@@ -85,7 +85,7 @@ final class PeopleService: BaseRequestService {
     }
     
     func getPeopleAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
-        log.debug("PeopleService getPeopleAlbum")
+        log.debug("PeopleService getPeopleAlbumWithID")
         
         let param = PeopleAlbumParameters(id: id)
         

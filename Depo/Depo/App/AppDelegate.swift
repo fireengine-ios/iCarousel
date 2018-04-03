@@ -278,9 +278,7 @@ private func setupLog() {
         fileDestination.showFileName = true
         fileDestination.showLineNumber = true
         fileDestination.showDate = true
-        
-        let day: TimeInterval = 24 * 60 * 60
-        fileDestination.targetMaxTimeInterval = day * 2
+        fileDestination.targetMaxTimeInterval = NumericConstants.logDuration
         log.add(destination: fileDestination)
     }
     

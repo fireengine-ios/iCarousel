@@ -241,6 +241,8 @@ class AuthenticationService: BaseRequestService {
     // MARK: - Login
     
     func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?) {
+        log.debug("AuthenticationService loginUser")
+        
         let params: [String: Any] = ["username": user.login,
                                      "password": user.password,
                                      "deviceInfo": Device.deviceInfo]
@@ -286,6 +288,8 @@ class AuthenticationService: BaseRequestService {
     }
     
     func autificationByToken(sucess: SuccessLogin?, fail: FailResponse?) {
+        log.debug("AuthenticationService autificationByToken")
+        
         let user = AuthenticationUserByToken()
         let params: [String: Any] = ["deviceInfo": Device.deviceInfo]
         
@@ -296,6 +300,8 @@ class AuthenticationService: BaseRequestService {
     }
     
     func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
+        log.debug("AuthenticationService turkcellAutification")
+        
         SessionManager.default.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
             .responseString { [weak self] response in
                 self?.loginHandler(response, sucess, fail)
