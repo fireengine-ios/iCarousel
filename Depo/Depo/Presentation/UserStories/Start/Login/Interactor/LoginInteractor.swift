@@ -284,7 +284,7 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     func updateUserLanguage() {
-        authService.updateUserLanguage(Device.locale) { [weak self] result in
+        authService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
