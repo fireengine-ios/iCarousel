@@ -581,6 +581,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, dict in
+            guard let isDegraded = dict?[PHImageResultIsDegradedKey] as? Bool, !isDegraded else {
+                return
+            }
+            
             if let error = dict?[PHImageErrorKey] as? NSError, let inCloud = dict?[PHImageResultIsInCloudKey] as? Bool, inCloud {
                 print(error.localizedDescription)
                 semaphore.signal()
@@ -617,18 +621,21 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         var assetInfo = AssetInfo(libraryAsset: asset)
         
         let semaphore = DispatchSemaphore(value: 0)
-        let operation = GetOriginalImageOperation(photoManager: self.photoManger,
-                                                  asset: asset) { data, string, orientation, dict in
-                                                    if let error = dict?[PHImageErrorKey] as? NSError, let inCloud = dict?[PHImageResultIsInCloudKey] as? Bool, inCloud {
-                                                        print(error.localizedDescription)
-                                                        semaphore.signal()
-                                                        return
-                                                    }
+        let operation = GetOriginalImageOperation(photoManager: self.photoManger, asset: asset) { data, string, orientation, dict in
+            guard let isDegraded = dict?[PHImageResultIsDegradedKey] as? Bool, !isDegraded else {
+                return
+            }
+            
+            if let error = dict?[PHImageErrorKey] as? NSError, let inCloud = dict?[PHImageResultIsInCloudKey] as? Bool, inCloud {
+                print(error.localizedDescription)
+                semaphore.signal()
+                return
+            }
             if let wrapDict = dict, let dataValue = data {
                 if let name = asset.originalFilename {
                     assetInfo.name = name
                 }
-//                debugPrint("ORIGINAL NAME PHOTO is \(assetInfo.name)")
+                //                debugPrint("ORIGINAL NAME PHOTO is \(assetInfo.name)")
                 if let unwrapedUrl = wrapDict["PHImageFileURLKey"] as? URL {
                     assetInfo.url = unwrapedUrl
                 }
