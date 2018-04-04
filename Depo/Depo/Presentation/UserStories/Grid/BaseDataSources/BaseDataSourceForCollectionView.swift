@@ -99,6 +99,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var sortingRules: SortedRules
     
+    private let pageCompounder = PageCompounder()
+    
     private func canShowFolderFilters(filters: [GeneralFilesFiltrationType]) -> Bool {
         for filter in filters {
             switch filter {
@@ -468,6 +470,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func dropData() {
         log.debug("BaseDataSourceForCollectionViewDelegate dropData()")
         debugPrint("BaseDataSourceForCollectionViewDelegate dropData()")
+        allRemoteItems.removeAll()
         allItems.removeAll()
         allMediaItems.removeAll()
     }
@@ -908,13 +911,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             debugPrint("BaseDataSourceForCollectionViewDelegate isLastCell, isLastSection, !isPaginationDidEnd ")
         }
         
-        if isLocalPaginationOn, isLastCell, isLastSection,
-            let lastItem = allMediaItems.last, !isLocalFilesRequested,
-            allRemoteItems.isEmpty {
-            log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems sLocalPaginationOn, isLastCell, isLastSection let lastItem = allMediaItems.last, !isLocalFilesRequested,")
-            debugPrint("BaseDataSourceForCollectionViewDelegate appendLocalItems sLocalPaginationOn, isLastCell, isLastSection let lastItem = allMediaItems.last, !isLocalFilesRequested,")
-            compoundItems(pageItems: [lastItem], pageNum: 0)
-        }
+//        if isLocalPaginationOn, isLastCell, isLastSection,
+//            let lastItem = allMediaItems.last, !isLocalFilesRequested,
+//            allRemoteItems.isEmpty {
+//            log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems sLocalPaginationOn, isLastCell, isLastSection let lastItem = allMediaItems.last, !isLocalFilesRequested,")
+//            debugPrint("BaseDataSourceForCollectionViewDelegate appendLocalItems sLocalPaginationOn, isLastCell, isLastSection let lastItem = allMediaItems.last, !isLocalFilesRequested,")
+//            compoundItems(pageItems: [lastItem], pageNum: 0)
+//        }
         
         if let photoCell = cell_ as? CollectionViewCellForPhoto{
             let file = itemForIndexPath(indexPath: indexPath)
