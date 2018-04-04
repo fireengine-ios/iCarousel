@@ -18,7 +18,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var refresher: UIRefreshControl!
+    private var refreshControl: UIRefreshControl!
     
     let homePageDataSource = BaseCollectionViewDataSource()
     
@@ -47,13 +47,17 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         
-        refresher = UIRefreshControl()
-        refresher.tintColor = ColorConstants.whiteColor
-        refresher.addTarget(self, action: #selector(reloadData), for: .valueChanged)
-        collectionView!.addSubview(refresher)
+        configurateRefreshControl()
         
         showSpiner()
         output.homePagePresented()
+    }
+    
+    private func configurateRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.tintColor = ColorConstants.whiteColor
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+        collectionView!.addSubview(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,7 +168,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     @objc func reloadData() {
         showSpiner()
-        refresher.endRefreshing()
+        refreshControl.endRefreshing()
         output.needRefresh()
     }
     
