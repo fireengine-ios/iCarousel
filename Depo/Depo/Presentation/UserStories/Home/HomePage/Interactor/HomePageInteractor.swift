@@ -18,8 +18,17 @@ class HomePageInteractor: HomePageInteractorInput {
         SyncServiceManager.shared.updateImmediately()
         PushNotificationService.shared.openActionScreen()
         
-        homeCardsService.all { result in
-            DispatchQueue.main.async {
+        getAllCardsForHomePage()
+    }
+    
+    func needRefresh() {
+        getAllCardsForHomePage()
+    }
+    
+    func getAllCardsForHomePage() {
+        homeCardsService.all {[weak self] result in
+            DispatchQueue.main.async { [weak self] in
+                self?.output.stopRefresh()
                 switch result {
                 case .success(let array):
                     CardsManager.default.startOperatonsForCardsResponces(cardsResponces: array)
