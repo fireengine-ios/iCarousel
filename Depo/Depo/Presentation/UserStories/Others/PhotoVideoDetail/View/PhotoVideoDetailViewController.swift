@@ -130,7 +130,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         output.viewIsReady(view: viewForBottomBar)
-        setStatusBarBackgroundColor(color: UIColor.black)
+        statusBarColor = .black
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -144,7 +144,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setNavigationBackgroundColor(color: UIColor.clear)
         
         visibleNavigationBarStyle()
-        setStatusBarBackgroundColor(color: .clear)
+        statusBarColor = .clear
         
         output.viewWillDisappear()
     }

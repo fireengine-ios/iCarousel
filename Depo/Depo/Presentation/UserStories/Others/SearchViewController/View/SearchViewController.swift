@@ -75,7 +75,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         } else {
             defaultNavBarStyle()
         }
-        setStatusBarBackgroundColor(color: .white)
+        statusBarColor = .white
         
         editingTabBar?.view.layoutIfNeeded()
         
@@ -93,7 +93,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         
         if #available(iOS 11.0, *) {
             defaultNavBarStyle()
-            setStatusBarBackgroundColor(color: .white)
+            statusBarColor = .white
         }
         navigationController?.delegate = nil
     }
@@ -102,7 +102,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         super.viewWillDisappear(animated)
         
         output.viewWillDisappear()
-        setStatusBarBackgroundColor(color: .clear)
+        statusBarColor = .clear
         if goBack {
             homePageNavigationBarStyle()
         }
