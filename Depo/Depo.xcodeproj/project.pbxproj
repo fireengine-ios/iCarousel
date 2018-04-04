@@ -537,6 +537,8 @@
 		8C00971C1F6BDAF800FA069C /* AlertFilesActionsSheetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C00971B1F6BDAF800FA069C /* AlertFilesActionsSheetInteractor.swift */; };
 		8C00971E1F6BDB0500FA069C /* AlertFilesActionsSheetInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C00971D1F6BDB0500FA069C /* AlertFilesActionsSheetInteractorInput.swift */; };
 		8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C00971F1F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift */; };
+		8C017B762074B782002484E7 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
+		8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C06AC0820066641003D8E05 /* TurkcellSecurityConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABF920066640003D8E05 /* TurkcellSecurityConfigurator.swift */; };
 		8C06AC0920066641003D8E05 /* TurkcellSecurityConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABF920066640003D8E05 /* TurkcellSecurityConfigurator.swift */; };
 		8C06AC0A20066641003D8E05 /* TurkcellSecurityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06ABFA20066640003D8E05 /* TurkcellSecurityInitializer.swift */; };
@@ -13976,6 +13978,7 @@
 				8C0E8ECE1FDEBDFF00789C91 /* AlbumItem.swift in Sources */,
 				8C0E8ECF1FDEBDFF00789C91 /* UserProfileRouter.swift in Sources */,
 				8C0E8ED01FDEBDFF00789C91 /* SelectionImageView.swift in Sources */,
+				8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */,
 				8C0E8ED11FDEBDFF00789C91 /* Int64+Bytes.swift in Sources */,
 				C62239A5204972D00043ED44 /* SharedEnums.swift in Sources */,
 				4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
@@ -14008,6 +14011,7 @@
 				8C0E8EE51FDEBDFF00789C91 /* MediaItem+CoreDataClass.swift in Sources */,
 				8C0E8EE61FDEBDFF00789C91 /* CreateStoryNameModuleInput.swift in Sources */,
 				8C0E8EE71FDEBDFF00789C91 /* HelpAndSupportInteractor.swift in Sources */,
+				8C017B762074B782002484E7 /* Keys.swift in Sources */,
 				8C0E8EE81FDEBDFF00789C91 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				4A8CC312201A01CC00C040C4 /* FaceImageRouterInput.swift in Sources */,
 				8C0E8EE91FDEBDFF00789C91 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
@@ -15946,9 +15950,7 @@
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "a52e227d-e046-4efa-ba7f-d9e95531d2f5";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxForTurkcell;
-
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -16001,7 +16003,6 @@
 				PROVISIONING_PROFILE = "6f81a9f3-c2cd-4de6-9dd4-7455315f659a";
 				PROVISIONING_PROFILE_SPECIFIER = "6f81a9f3-c2cd-4de6-9dd4-7455315f659a";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;
