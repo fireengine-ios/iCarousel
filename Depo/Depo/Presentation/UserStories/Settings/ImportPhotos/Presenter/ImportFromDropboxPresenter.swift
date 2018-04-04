@@ -27,8 +27,7 @@ extension ImportFromDropboxPresenter: ImportFromDropboxViewOutput {
     }
     
     func startDropbox() {
-        view?.startActivityIndicator()
-        interactor.requestStatusForStart()
+        interactor.login()
     }
 }
 
