@@ -19,6 +19,7 @@ final class SavingAttemptsCounterByUnigueUserID {
     }
     
     private let limit: Int
+    var autoReset = false
     
     init(limit: Int, userDefaultsKey: String) {
         self.userDefaultsKey = userDefaultsKey
@@ -33,7 +34,9 @@ final class SavingAttemptsCounterByUnigueUserID {
     func up(limitHandler: @escaping VoidHandler) -> Bool {
         attempts += 1
         if attempts >= limit {
-            reset()
+            if autoReset {
+                reset()
+            }
             limitHandler()
             return false
         }
