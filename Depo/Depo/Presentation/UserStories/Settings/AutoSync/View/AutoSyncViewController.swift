@@ -19,6 +19,8 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     @IBOutlet weak var bacgroundImage: UIImageView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
+    private lazy var storageVars: StorageVars = factory.resolve()
+    
     var fromSettings: Bool = false
     var isFirstTime = true
     
@@ -83,8 +85,8 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
         if !settings.isAutoSyncEnabled {
             MenloworksEventsService.shared.onFirstAutosyncOff()
         }
-        
-        UserDefaults.standard.set(true, forKey: "autoSyncSet")
+        storageVars.autoSyncSet = true
+        //UserDefaults.standard.set(true, forKey: "autoSyncSet")
         
         output.change(settings: settings)
     }

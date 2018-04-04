@@ -15,6 +15,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     private lazy var customProgressHUD = CustomProgressHUD()
     private var turkcellLogin = false
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
@@ -84,11 +85,12 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                 self?.customProgressHUD.hideProgressSpinner()
                 
                 if (self?.turkcellLogin)! {
-                    let autoSyncSet = UserDefaults.standard.bool(forKey: "autoSyncSet")
-                    if autoSyncSet {
-                        self?.router.navigateToApplication()
-                    } else {
-                        self?.router.goToSyncSettingsView()
+                    if let autoSyncSet = self?.storageVars.autoSyncSet {
+                        if autoSyncSet {
+                            self?.router.navigateToApplication()
+                        } else {
+                            self?.router.goToSyncSettingsView()
+                        }
                     }
                 } else {
                     self?.router.navigateToApplication()
