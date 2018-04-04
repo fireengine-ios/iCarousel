@@ -8,33 +8,56 @@
 
 typealias CompoundedPageCallback = (_ compundedPage: [WrapData], _ leftoversRemotes: [WrapData])->Void
 
-protocol PageSortingPredicates {
-    
+fileprivate protocol PageSortingPredicates {
+    func getSortingPredicateMidPage(sortType: SortedRules, firstItem: Item,  lastItem: Item) -> NSPredicate
+    func getSortingPredicateLastPage(sortType: SortedRules, lastItem: Item) -> NSPredicate
+    func getSortingPredicateFirstPage(sortType: SortedRules, lastItem: Item) -> NSPredicate
 }
 
 class PageCompounder {
     
     let coreData = CoreDataStack.default
     
-    func compoundItems(pageItems: [WrapData], pageNum: Int, compoundedCallback: CompoundedPageCallback) {
+    private func compoundItems(pageItems: [WrapData],
+                       notAllowedMD5: [String],
+                       notAllowedLocalIDs: [String],
+                       compoundedCallback:@escaping CompoundedPageCallback) {
+        let requestContext = coreData.newChildBackgroundContext
+        
+        let request = NSFetchRequest<MediaItem>()
+        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
+                                                    in: requestContext)
+        
         
      
         
     }
     
-    private func compoundFirstPage(pageItems: [WrapData]) -> [WrapData] {
+    func compoundFirstPage(pageItems: [WrapData],
+                           filesType: FileType, sortType: SortedRules,
+                                   notAllowedMD5: [String],
+                                   notAllowedLocalIDs: [String],
+                                   compoundedCallback:@escaping CompoundedPageCallback) {
         
-        return []
+        
     }
     
-    private func compoundMiddlePage(pageItems: [WrapData]) -> [WrapData]  {
+    func compoundMiddlePage(pageItems: [WrapData],
+                            filesType: FileType, sortType: SortedRules,
+                                    notAllowedMD5: [String],
+                                    notAllowedLocalIDs: [String],
+                                    compoundedCallback:@escaping CompoundedPageCallback) {
         
-        return []
+        
     }
     
-    private func compoundLastPage(pageItems: [WrapData]) -> [WrapData]  {
+    func compoundLastPage(pageItems: [WrapData],
+                          filesType: FileType, sortType: SortedRules,
+                                  notAllowedMD5: [String],
+                                  notAllowedLocalIDs: [String],
+                                  compoundedCallback:@escaping CompoundedPageCallback) {
         
-        return []
+        
     }
     
     func getLocalFilesForPhotoVideoPage(filesType: FileType, sortType: SortedRules,
@@ -49,8 +72,11 @@ class PageCompounder {
     
     }
     
+}
+
+extension PageCompounder: PageSortingPredicates {
     
-    private func getSortingPredicate(sortType: SortedRules, firstItem: Item,  lastItem: Item) -> NSPredicate {
+    func getSortingPredicateMidPage(sortType: SortedRules, firstItem: Item,  lastItem: Item) -> NSPredicate {
         switch sortType {
         case .timeUp, .timeUpWithoutSection:
             return NSPredicate(format: "creationDateValue > %@ AND creationDateValue < %@",
@@ -78,7 +104,7 @@ class PageCompounder {
         }
     }
     
-    private func getSortingPredicateLastPage(sortType: SortedRules, lastItem: Item) -> NSPredicate {
+    func getSortingPredicateLastPage(sortType: SortedRules, lastItem: Item) -> NSPredicate {
         switch sortType {
         case .timeUp, .timeUpWithoutSection:
             return NSPredicate(format: "creationDateValue < %@", (lastItem.creationDate ?? Date()) as NSDate)
@@ -99,7 +125,7 @@ class PageCompounder {
         }
     }
     
-    private func getSortingPredicateFirstPage(sortType: SortedRules, lastItem: Item) -> NSPredicate {
+    func getSortingPredicateFirstPage(sortType: SortedRules, lastItem: Item) -> NSPredicate {
         switch sortType {
         case .timeUp, .timeUpWithoutSection:
             return NSPredicate(format: "creationDateValue > %@", (lastItem.creationDate ?? Date()) as NSDate)
@@ -121,3 +147,4 @@ class PageCompounder {
     }
     
 }
+

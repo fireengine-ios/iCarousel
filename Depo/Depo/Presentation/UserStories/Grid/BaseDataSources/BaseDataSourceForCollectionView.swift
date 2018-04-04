@@ -45,6 +45,8 @@ enum BaseDataSourceDisplayingType{
     @objc optional func didDelete(items: [BaseDataSourceItem])
 }
 
+typealias PageItemsCallBack = ([WrapData])->Void
+
 class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
 UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationManagerViewProtocol {
     
@@ -83,6 +85,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
+    private var pageLeftOvers = [WrapData]()
     private var allRemoteItems = [WrapData]() // -----------------------=========
     private var uploadedObjectID = [String]()
     private var uploadToAlbumItems = [String]()
@@ -248,35 +251,116 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
   
     }
     
-    func compoundItems(pageItems: [WrapData], pageNum: Int) {
+    func compoundItems(pageItems: [WrapData], pageNum: Int, complition: @escaping VoidHandler) {
         isLocalFilesRequested = true
         log.debug("BaseDataSourceForCollectionViewDelegate compoundItems")
         debugPrint("BaseDataSourceForCollectionViewDelegate compoundItems")
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let `self` = self else {
+                complition()
                 return
             }
-            self.appendLocalItems(originalItemsArray: pageItems, pageNum: pageNum, localFileasAppendedCallback: { [weak self] imbededwithLocalsItems in
-                guard let `self` = self else {
-                    return
-                }
-                log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems callback")
+            
+            guard let unwrapedFilters = self.originalFilters,
+                let specificFilters = self.getFileFilterType(filters: unwrapedFilters),
+                !self.isOnlyNonLocal(filters: unwrapedFilters) else {
+                self.allMediaItems.append(contentsOf: pageItems)
+                self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                complition()
+                return
+            }
+            
+            switch specificFilters {
+            case .video, .image:
                 
-                self.allMediaItems.append(contentsOf: imbededwithLocalsItems)
-                self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-//                  self.reloadData()
-                self.isLocalFilesRequested =  false
-                DispatchQueue.main.async {
-                    if self.isPaginationDidEnd {
-                        debugPrint("LastPage Reload compoundItems")
+                var lastRemote = pageItems
+//                if originalItemsArray.isEmpty, let lastItemFromPreviousPage = allMediaItems.last {
+//                    lastRemote = [lastItemFromPreviousPage]
+//                }
+                
+                var md5s = [String]()
+                var localIDs = [String]()
+                self.allRemoteItems.forEach{
+                    md5s.append($0.md5)
+                    let splitedUuid = $0.uuid.split(separator: "~")
+                    if let localID = splitedUuid.first {
+                        localIDs.append(String(localID))
                     }
-                    log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems callback going to reload")
-
-                    self.collectionView?.reloadData()
-                    self.delegate?.filesAppendedAndSorted()
                 }
-            })
+                if pageNum == 1 {
+                    self.pageCompounder.compoundFirstPage(pageItems: pageItems,
+                                                          filesType: specificFilters,
+                                                          sortType: self.currentSortType,
+                                                          notAllowedMD5: md5s,
+                                                          notAllowedLocalIDs: localIDs,
+                                                          compoundedCallback: { [weak self] (compoundedItems, lefovers) in
+                                                            guard let `self` = self else {
+                                                                return
+                                                            }
+                                                            //check lefovers here
+                                                            
+                                                            self.allMediaItems.append(contentsOf: compoundedItems)
+                                                            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                                                            
+                                                            
+                                                            
+                    })
+                } else if self.isPaginationDidEnd {
+                    self.pageCompounder.compoundLastPage(pageItems: pageItems,
+                                                         filesType: specificFilters,
+                                                         sortType: self.currentSortType,
+                                                         notAllowedMD5: md5s,
+                                                         notAllowedLocalIDs: localIDs,
+                                                         compoundedCallback: { [weak self] (compoundedItems, lefovers) in
+                                                            
+                                                            //break into sections here
+                                                            
+                                                            
+                                                            
+                    })
+                } else {
+                    self.pageCompounder.compoundMiddlePage(pageItems: pageItems,
+                                                           filesType: specificFilters,
+                                                           sortType: self.currentSortType,
+                                                           notAllowedMD5: md5s,
+                                                           notAllowedLocalIDs: localIDs,
+                                                           compoundedCallback: { [weak self] (compoundedItems, lefovers) in
+                                                            
+                                                            //break into sections here
+                                                            
+                                                            
+                                                            
+                    })
+                }
+                
+            default:
+                break
+            }
+            
+//            self.pageCompounder.
+//            self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+            
+//            self.appendLocalItems(originalItemsArray: pageItems, pageNum: pageNum, localFileasAppendedCallback: { [weak self] imbededwithLocalsItems in
+//                guard let `self` = self else {
+//                    return
+//                }
+//                log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems callback")
+//
+//                self.allMediaItems.append(contentsOf: imbededwithLocalsItems)
+//                self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+////                  self.reloadData()
+//                self.isLocalFilesRequested =  false
+//                DispatchQueue.main.async {
+//                    if self.isPaginationDidEnd {
+//                        debugPrint("LastPage Reload compoundItems")
+//                    }
+//                    log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems callback going to reload")
+//
+//                    self.collectionView?.reloadData()
+//                    self.delegate?.filesAppendedAndSorted()
+//                }
+//            })
         }
     }
     
@@ -461,10 +545,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         } else {
             isLocalPaginationOn = false
         }
-        log.debug("BaseDataSourceForCollectionViewDelegate appendCollectionView \(nonEmptyMetaItems.count)")
-        debugPrint("BaseDataSourceForCollectionViewDelegate appendCollectionView \(nonEmptyMetaItems.count)")
+        log.debug("BaseDataSourceForCollectionView appendCollectionView \(nonEmptyMetaItems.count)")
+        
         allRemoteItems.append(contentsOf: nonEmptyMetaItems)
-        compoundItems(pageItems: nonEmptyMetaItems, pageNum: pageNum)
+        
+        compoundItems(pageItems: nonEmptyMetaItems, pageNum: pageNum, complition: { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView?.reloadData()
+                self?.delegate?.filesAppendedAndSorted()
+            }
+        })
     }
     
     func dropData() {
@@ -670,8 +760,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
     }
-    
-    
     
     //MARK: selection
     

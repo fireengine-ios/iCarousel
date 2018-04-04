@@ -84,137 +84,137 @@ extension CoreDataStack {
                                         notAllowedLocalIDs: [String],
                                         filesCallBack: @escaping LocalFilesCallBack) {
         
-        let requestContext = newChildBackgroundContext
-        
-        let request = NSFetchRequest<MediaItem>()
-        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
-                                                    in: requestContext)
-        
-        let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
-        
-        
-        let cahchePredicate = NSPredicate(format:"NOT (md5Value IN %@)", notAllowedMD5)
-        //"NOT (md5Value IN %@ OR localFileID IN %@)", md5s, uuids)//AND?
-        let sortingPredicate: NSPredicate
-        
-        let compundedPredicate: NSCompoundPredicate
-        compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:[fileTypePredicate, cahchePredicate])
-        
-
-        request.predicate = compundedPredicate
-        guard let localDataBaseItems = try? requestContext.fetch(request) else {
-            filesCallBack([])
-            return
-        }
-        
-        let arrayLocalItems = NSArray(array: localDataBaseItems)
-        
-        
-        if pageRemoteItems.isEmpty {
-            //
-            filesCallBack([])
-            //
-            if inProcessAppendingLocalFiles {
-            //local pagination here
-            }
-            
-        } else if firstPage {
-            debugPrint("!LOCAL FIRST PAGE")
-            
-            guard let lastRemoteItem = pageRemoteItems.last,
-            let localFiltered = arrayLocalItems.filtered(using: getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem)) as? [MediaItem],
-            !originalAssetsBeingAppended.assets(before: lastRemoteItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty else {
-                filesCallBack([])
-                return
-            }
-            
-            if inProcessAppendingLocalFiles {
-                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue as? Date,
-                    lastRemoteItem.metaDate > lastAppendedToDBItemDate {
-                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
-                } else if localFiltered.count >= 100 {
-                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
-                } else {
-                    pageAppendedCallBack = { [weak self] localItems in
-                        guard let `self` = self,
-                            let lastAppendedToDBItemDate = localItems.last?.metaDate,
-                            lastRemoteItem.metaDate < lastAppendedToDBItemDate
-                            else {
-                            filesCallBack([])
-                            return
-                        }
-                        self.pageAppendedCallBack = nil
-                        self.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, paginationEnd: paginationEnd, firstPage: firstPage, pageRemoteItems: pageRemoteItems, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, filesCallBack: filesCallBack)
-                    }
-                }
-            } else {
-                filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
-            }
-            
-        } else if pageRemoteItems.count == 1,
-            paginationEnd,
-            let lastItem = pageRemoteItems.last {
-            debugPrint("!LOCAL END PAGE")
-            guard let localFiltered = arrayLocalItems.filtered(using: getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)) as? [MediaItem],
-                !originalAssetsBeingAppended.assets(afterDate: lastItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty else {
-                filesCallBack([])
-                return
-            }
- 
-            if inProcessAppendingLocalFiles {
-                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue,
-                     lastItem.metaDate < lastAppendedToDBItemDate as Date {
-                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
-                } else if localFiltered.count >= 100 {
-                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
-                } else {
-                    pageAppendedCallBack = { [weak self] localItems in
-                        guard let `self` = self,
-                            let lastAppendedToDBItemDate = localItems.last?.metaDate,
-                            lastItem.metaDate > lastAppendedToDBItemDate
-                            else {
-                            filesCallBack([])
-                            return
-                        }
-                        self.pageAppendedCallBack = nil
-                        self.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, paginationEnd: paginationEnd, firstPage: firstPage, pageRemoteItems: pageRemoteItems, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, filesCallBack: filesCallBack)
-                    }
-                }
-            } else {
-                filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
-            }
-        } else {
-            guard let lastRemoteItem = pageRemoteItems.last,
-                let firstRemoteItem = pageRemoteItems.first,
-                let localFiltered = arrayLocalItems.filtered(using: getSortingPredicate(sortType: sortType, firstItem: firstRemoteItem, lastItem: lastRemoteItem)) as? [MediaItem],
-                !originalAssetsBeingAppended.assets(beforeDate: lastRemoteItem.metaDate, afterDate: firstRemoteItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty else {
-                filesCallBack([])
-                return
-            }
-            
-            debugPrint("!LOCAL MIDDLE")
-            if inProcessAppendingLocalFiles {
-                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue as? Date,
-                firstRemoteItem.metaDate > lastAppendedToDBItemDate{
-                    debugPrint("!LOCAL MIDDLE files founded \(localFiltered.count), original count \(arrayLocalItems.count)")
-                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
-                } else {
-                    pageAppendedCallBack = { [weak self] localItems in
-                        guard let `self` = self,
-                            let lastAppendedToDBItemDate = localItems.last?.metaDate,
-                            firstRemoteItem.metaDate < lastAppendedToDBItemDate
-                             else {
-                            filesCallBack([])
-                            return
-                        }
-                        self.pageAppendedCallBack = nil
-                        self.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, paginationEnd: paginationEnd, firstPage: firstPage, pageRemoteItems: pageRemoteItems, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, filesCallBack: filesCallBack)
-                    }
-                }
-            } else {
-                filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
-            }
-        }
+//        let requestContext = newChildBackgroundContext
+//        
+//        let request = NSFetchRequest<MediaItem>()
+//        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
+//                                                    in: requestContext)
+//        
+//        let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
+//        
+//        
+//        let cahchePredicate = NSPredicate(format:"NOT (md5Value IN %@)", notAllowedMD5)
+//        //"NOT (md5Value IN %@ OR localFileID IN %@)", md5s, uuids)//AND?
+//        let sortingPredicate: NSPredicate
+//        
+//        let compundedPredicate: NSCompoundPredicate
+//        compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:[fileTypePredicate, cahchePredicate])
+//        
+//
+//        request.predicate = compundedPredicate
+//        guard let localDataBaseItems = try? requestContext.fetch(request) else {
+//            filesCallBack([])
+//            return
+//        }
+//        
+//        let arrayLocalItems = NSArray(array: localDataBaseItems)
+//        
+//        
+//        if pageRemoteItems.isEmpty {
+//            //
+//            filesCallBack([])
+//            //
+//            if inProcessAppendingLocalFiles {
+//            //local pagination here
+//            }
+//            
+//        } else if firstPage {
+//            debugPrint("!LOCAL FIRST PAGE")
+//            
+//            guard let lastRemoteItem = pageRemoteItems.last,
+//            let localFiltered = arrayLocalItems.filtered(using: getSortingPredicateFirstPage(sortType: sortType, lastItem: lastRemoteItem)) as? [MediaItem],
+//            !originalAssetsBeingAppended.assets(before: lastRemoteItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty else {
+//                filesCallBack([])
+//                return
+//            }
+//            
+//            if inProcessAppendingLocalFiles {
+//                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue as? Date,
+//                    lastRemoteItem.metaDate > lastAppendedToDBItemDate {
+//                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+//                } else if localFiltered.count >= 100 {
+//                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+//                } else {
+//                    pageAppendedCallBack = { [weak self] localItems in
+//                        guard let `self` = self,
+//                            let lastAppendedToDBItemDate = localItems.last?.metaDate,
+//                            lastRemoteItem.metaDate < lastAppendedToDBItemDate
+//                            else {
+//                            filesCallBack([])
+//                            return
+//                        }
+//                        self.pageAppendedCallBack = nil
+//                        self.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, paginationEnd: paginationEnd, firstPage: firstPage, pageRemoteItems: pageRemoteItems, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, filesCallBack: filesCallBack)
+//                    }
+//                }
+//            } else {
+//                filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+//            }
+//            
+//        } else if pageRemoteItems.count == 1,
+//            paginationEnd,
+//            let lastItem = pageRemoteItems.last {
+//            debugPrint("!LOCAL END PAGE")
+//            guard let localFiltered = arrayLocalItems.filtered(using: getSortingPredicateLastPage(sortType: sortType, lastItem: lastItem)) as? [MediaItem],
+//                !originalAssetsBeingAppended.assets(afterDate: lastItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty else {
+//                filesCallBack([])
+//                return
+//            }
+// 
+//            if inProcessAppendingLocalFiles {
+//                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue,
+//                     lastItem.metaDate < lastAppendedToDBItemDate as Date {
+//                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+//                } else if localFiltered.count >= 100 {
+//                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+//                } else {
+//                    pageAppendedCallBack = { [weak self] localItems in
+//                        guard let `self` = self,
+//                            let lastAppendedToDBItemDate = localItems.last?.metaDate,
+//                            lastItem.metaDate > lastAppendedToDBItemDate
+//                            else {
+//                            filesCallBack([])
+//                            return
+//                        }
+//                        self.pageAppendedCallBack = nil
+//                        self.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, paginationEnd: paginationEnd, firstPage: firstPage, pageRemoteItems: pageRemoteItems, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, filesCallBack: filesCallBack)
+//                    }
+//                }
+//            } else {
+//                filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+//            }
+//        } else {
+//            guard let lastRemoteItem = pageRemoteItems.last,
+//                let firstRemoteItem = pageRemoteItems.first,
+//                let localFiltered = arrayLocalItems.filtered(using: getSortingPredicate(sortType: sortType, firstItem: firstRemoteItem, lastItem: lastRemoteItem)) as? [MediaItem],
+//                !originalAssetsBeingAppended.assets(beforeDate: lastRemoteItem.metaDate, afterDate: firstRemoteItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty else {
+//                filesCallBack([])
+//                return
+//            }
+//            
+//            debugPrint("!LOCAL MIDDLE")
+//            if inProcessAppendingLocalFiles {
+//                if let lastAppendedToDBItemDate = localDataBaseItems.last?.creationDateValue as? Date,
+//                firstRemoteItem.metaDate > lastAppendedToDBItemDate{
+//                    debugPrint("!LOCAL MIDDLE files founded \(localFiltered.count), original count \(arrayLocalItems.count)")
+//                    filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+//                } else {
+//                    pageAppendedCallBack = { [weak self] localItems in
+//                        guard let `self` = self,
+//                            let lastAppendedToDBItemDate = localItems.last?.metaDate,
+//                            firstRemoteItem.metaDate < lastAppendedToDBItemDate
+//                             else {
+//                            filesCallBack([])
+//                            return
+//                        }
+//                        self.pageAppendedCallBack = nil
+//                        self.getLocalFilesForPhotoVideoPage(filesType: filesType, sortType: sortType, paginationEnd: paginationEnd, firstPage: firstPage, pageRemoteItems: pageRemoteItems, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, filesCallBack: filesCallBack)
+//                    }
+//                }
+//            } else {
+//                filesCallBack(localFiltered.map{WrapData(mediaItem: $0)})
+//            }
+//        }
     }
     
     private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping ()->Void ) {
