@@ -96,7 +96,7 @@ class MailVerificationViewController: BaseViewController {
                 DispatchQueue.main.async {
                     self?.actionDelegate?.mailVerificationFailed()
                     self?.hideSpiner()
-                    UIApplication.showErrorAlert(message: TextConstants.notCorrectEmail)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
         })
     }

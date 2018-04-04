@@ -79,7 +79,7 @@ class SharedServiceResponse: ObjectRequestResponse {
 }
 
 
-typealias  SuccessShared = (_ url: String) -> Swift.Void
+typealias  SuccessShared = (_ url: String) -> Void
 
 class SharedService: BaseRequestService {
     

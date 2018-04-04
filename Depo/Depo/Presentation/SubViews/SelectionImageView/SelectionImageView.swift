@@ -9,9 +9,7 @@
 import UIKit
 
 class SelectionImageView: UIImageView {
-
-    var selectionImageView: UIImageView! = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-    var cornerView = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+    var cornerView = UIView(frame: CGRect(x: 0, y: 0, width: 42, height: 42))
     
     var configured: Bool = false
     var isSelected: Bool = false
@@ -20,22 +18,17 @@ class SelectionImageView: UIImageView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        selectionImageView.center = CGPoint(x: 40, y: 6)
-        
         cornerView.backgroundColor = UIColor.clear
         cornerView.layer.borderColor = ColorConstants.darcBlueColor.cgColor
         cornerView.layer.borderWidth = 2
         cornerView.alpha = 0
         addSubview(cornerView)
-        bringSubview(toFront: selectionImageView)
-        
     }
     
     func setSelection(selection: Bool, showSelectonBorder: Bool) {
         isSelected = selection
         self.showSelectionBorder = showSelectonBorder
         if (!configured) {
-            selectionImageView.removeFromSuperview()
             self.cornerView.alpha = 0
             return
         }
@@ -44,18 +37,10 @@ class SelectionImageView: UIImageView {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.cornerView.alpha = selection ? 1 : 0
             })
-            addSubview(selectionImageView)
         } else {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.cornerView.alpha = 0
             })
-            selectionImageView.removeFromSuperview()
-        }
-        
-        if (selection) {
-            selectionImageView.image = UIImage(named: "selected")
-        } else {
-            selectionImageView.image = UIImage(named: "notSelected")
         }
     }
     

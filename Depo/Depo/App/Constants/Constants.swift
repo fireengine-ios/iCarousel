@@ -335,6 +335,12 @@ struct TextConstants {
     static let importFromFB = NSLocalizedString("Import From Facebook", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let importFromInstagram = NSLocalizedString("Import From Instagram", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let importFromCropy = NSLocalizedString("Import From Cropy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let importFiles = NSLocalizedString("Importing files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let dropboxAuthorisationError = NSLocalizedString("Dropbox authorisation error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let dropboxLastUpdatedFile = NSLocalizedString("dropboxLastUpdatedFile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let dropboxLastUpdatedFiles = NSLocalizedString("dropboxLastUpdatedFiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     
     // MARK: Face Image
     static let faceImageGrouping = NSLocalizedString("Face image grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -349,6 +355,9 @@ struct TextConstants {
     static let faceImageThisPerson = NSLocalizedString("this person", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImagePhotos = NSLocalizedString("Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageNoPhotos = NSLocalizedString("We couldn't find anybody on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImagePlacesNoPhotos = NSLocalizedString("We couldn’t find any place on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageThingsNoPhotos = NSLocalizedString("We couldn’t find anything on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageNoPhotosButton = NSLocalizedString("Start adding your photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageWaitAlbum = NSLocalizedString("Grouping of your photos will take some time. Please wait and then check the albums.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: userProfile
@@ -372,6 +381,7 @@ struct TextConstants {
     static let fileInfoFileSizeTitle = NSLocalizedString("File size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoDurationTitle = NSLocalizedString("Duration", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoUploadDateTitle = NSLocalizedString("Upload date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fileInfoCreationDateTitle = NSLocalizedString("Creation date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoTakenDateTitle = NSLocalizedString("Taken date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoAlbumTitle = NSLocalizedString("Album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let fileInfoArtistTitle = NSLocalizedString("Artist", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -503,6 +513,7 @@ struct TextConstants {
     static let removeReadOnlyAlbumError = NSLocalizedString("Video album is automatically created, therefore cannot be deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadVideoToReadOnlyAlbumError = NSLocalizedString("You cannot upload any video to auto generated video album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let haveNoAnyFiles = NSLocalizedString("You have no any files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let albumEmptyText = NSLocalizedString("Album is Empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Albums view
     static let albumsViewNoAlbumsTitleText = NSLocalizedString("You don’t have any albums on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -644,6 +655,14 @@ struct TextConstants {
     static let offersPrice = NSLocalizedString("%.2f %@ / month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let offersAllCancel = NSLocalizedString("You can open settings and cancel subscption.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
+    static let subscriptionGoogleText = NSLocalizedString("Google Play Store", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let subscriptionAppleText = NSLocalizedString("AppStore", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let validatePurchaseSuccessText = NSLocalizedString("Successful purchase.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let validatePurchaseInvalidText = NSLocalizedString("Invalid purchase. AppStore does not verify purchase for the given parameters.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let validatePurchaseTemporaryErrorText = NSLocalizedString("A temporary error has occurred due to technical reasons.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let validatePurchaseAlreadySubscribedText = NSLocalizedString("Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let validatePurchaseRestoredText = NSLocalizedString("Shows that a response operation is done for the given receipt.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - OTP
     static let otpResendButton = NSLocalizedString("Resend", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -797,7 +816,11 @@ struct NumericConstants {
     static let albumCellGreedWidth: CGFloat = 100
     static let storiesCellGreedHeight: CGFloat = 100
     
-    static let insetAlbumCellGreed: CGFloat = 8
+    static let insetStoryCellGreed: CGFloat = 16
+    static let insetAlbumCellGreed: CGFloat = 14
+    static let amountInsetInRowAlbumCell: CGFloat = 72
+    static let amountInsetInRowStoryCell: CGFloat = 76
+    static let heightTextAlbumCell: CGFloat = 21
     
     static let numberOfElementsInSyncRequest: Int = 30000
     
@@ -831,6 +854,8 @@ struct NumericConstants {
     static let secondsBeetweenUploadAttempts = 5
     
     static let emptyEmailUserCloseLimit = 3
+    
+    static let logDuration: TimeInterval = 24 * 60 * 60 * 3
 }
 
 struct RequestSizeConstant {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -19,86 +19,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SubscriptionPlanCollectionViewCell" id="F33-PF-zlW" customClass="SubscriptionPlanCollectionViewCell" customModule="Depo_LifeTech" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="140" height="220"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SubscriptionPlanCollectionViewCell" id="F33-PF-zlW" customClass="SubscriptionPlanCollectionViewCell" customModule="lifebox" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="140" height="255"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="140" height="220"/>
+                <rect key="frame" x="0.0" y="0.0" width="140" height="255"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQX-dm-k0f">
-                        <rect key="frame" x="23.5" y="182" width="93" height="30"/>
-                        <color key="backgroundColor" red="0.019607843140000001" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="Ovt-dP-msx"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="14"/>
-                        <inset key="contentEdgeInsets" minX="19" minY="0.0" maxX="19" maxY="0.0"/>
-                        <state key="normal" title="Upgrade">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="15"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <action selector="actionUpgradeButtonClicked:" destination="F33-PF-zlW" eventType="touchUpInside" id="qmK-Yg-VIQ"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ash-LH-18U">
-                        <rect key="frame" x="41" y="182" width="58" height="30"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="00x-PS-wos"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="14"/>
-                        <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                        <state key="normal" title="Free">
-                            <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bLy-k3-Vp4">
-                        <rect key="frame" x="11" y="182" width="118" height="30"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="I9E-iF-zIU"/>
-                        </constraints>
-                        <inset key="contentEdgeInsets" minX="19" minY="0.0" maxX="19" maxY="0.0"/>
-                        <state key="normal">
-                            <attributedString key="attributedTitle">
-                                <fragment content="Cancel your subscription">
-                                    <attributes>
-                                        <color key="NSColor" red="0.019607843140000001" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <font key="NSFont" metaFont="system" size="14"/>
-                                        <integer key="NSUnderline" value="1"/>
-                                    </attributes>
-                                </fragment>
-                            </attributedString>
-                        </state>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="15"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <action selector="actionCancelButtonClicked:" destination="F33-PF-zlW" eventType="touchUpInside" id="KW9-Ux-ZPh"/>
-                        </connections>
-                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="Rr9-VH-Jut">
-                        <rect key="frame" x="31" y="12" width="16" height="12"/>
+                        <rect key="frame" x="35" y="16" width="16" height="12"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 GB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aw-2Z-Vhj">
-                        <rect key="frame" x="53" y="10" width="34.5" height="17"/>
+                        <rect key="frame" x="57" y="10" width="26.5" height="22.5"/>
                         <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="15"/>
                         <color key="textColor" red="0.019607843140000001" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xBU-hF-SK6">
-                        <rect key="frame" x="16" y="40" width="109" height="97"/>
+                        <rect key="frame" x="24" y="45.5" width="93.5" height="97"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPN-Ro-kbt" userLabel="Photos View">
-                                <rect key="frame" x="0.0" y="0.0" width="109" height="16"/>
+                                <rect key="frame" x="0.0" y="0.0" width="93.5" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usageinfo_photos" translatesAutoresizingMaskIntoConstraints="NO" id="QN2-5s-gZq">
                                         <rect key="frame" x="0.0" y="-0.5" width="16" height="16"/>
@@ -108,7 +49,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5000 photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZQ-WQ-OC0">
-                                        <rect key="frame" x="30" y="0.0" width="79" height="16"/>
+                                        <rect key="frame" x="30" y="0.0" width="63.5" height="16"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="14"/>
                                         <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -126,7 +67,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pQ5-r5-6pe" userLabel="Videos View">
-                                <rect key="frame" x="0.0" y="27" width="109" height="16"/>
+                                <rect key="frame" x="0.0" y="27" width="93.5" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usageinfo_videos" translatesAutoresizingMaskIntoConstraints="NO" id="VEH-Ts-Zl9">
                                         <rect key="frame" x="0.0" y="-0.5" width="16" height="16"/>
@@ -136,7 +77,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 videos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orB-Ea-wqj">
-                                        <rect key="frame" x="30" y="0.0" width="79" height="16"/>
+                                        <rect key="frame" x="30" y="0.0" width="63.5" height="16"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="14"/>
                                         <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -154,7 +95,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EYM-uE-upr" userLabel="Songs View">
-                                <rect key="frame" x="0.0" y="54" width="109" height="16"/>
+                                <rect key="frame" x="0.0" y="54" width="93.5" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usageinfo_songs" translatesAutoresizingMaskIntoConstraints="NO" id="bHP-Ll-k4u">
                                         <rect key="frame" x="0.0" y="-0.5" width="16" height="16"/>
@@ -164,7 +105,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2500 songs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w0I-oj-OoQ">
-                                        <rect key="frame" x="30" y="0.0" width="79" height="16"/>
+                                        <rect key="frame" x="30" y="0.0" width="63.5" height="16"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="14"/>
                                         <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -182,7 +123,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2lt-bG-Mlg" userLabel="Docs View">
-                                <rect key="frame" x="0.0" y="81" width="109" height="16"/>
+                                <rect key="frame" x="0.0" y="81" width="93.5" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usageinfo_docs" translatesAutoresizingMaskIntoConstraints="NO" id="vct-zL-NtW">
                                         <rect key="frame" x="0.0" y="-0.5" width="16" height="16"/>
@@ -192,7 +133,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50 000 doc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJF-4m-cRK">
-                                        <rect key="frame" x="30" y="0.0" width="79" height="16"/>
+                                        <rect key="frame" x="30" y="0.0" width="63.5" height="16"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="14"/>
                                         <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -218,6 +159,7 @@
                             <constraint firstItem="EYM-uE-upr" firstAttribute="leading" secondItem="xBU-hF-SK6" secondAttribute="leading" id="JVD-BQ-erb"/>
                             <constraint firstItem="ZPN-Ro-kbt" firstAttribute="leading" secondItem="xBU-hF-SK6" secondAttribute="leading" id="TRu-IW-smo"/>
                             <constraint firstItem="2lt-bG-Mlg" firstAttribute="leading" secondItem="xBU-hF-SK6" secondAttribute="leading" id="Z3s-TN-LEF"/>
+                            <constraint firstAttribute="height" constant="97" id="bLN-6x-w2F"/>
                             <constraint firstAttribute="trailing" secondItem="EYM-uE-upr" secondAttribute="trailing" id="cyO-hr-40R"/>
                             <constraint firstItem="EYM-uE-upr" firstAttribute="top" secondItem="pQ5-r5-6pe" secondAttribute="bottom" constant="11" id="mwd-YE-SA8"/>
                             <constraint firstAttribute="bottom" secondItem="2lt-bG-Mlg" secondAttribute="bottom" id="oUv-fc-jLA"/>
@@ -227,57 +169,142 @@
                             <constraint firstAttribute="trailing" secondItem="ZPN-Ro-kbt" secondAttribute="trailing" id="tbA-Is-ASh"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sPa-ZQ-U8n" userLabel="Price View">
-                        <rect key="frame" x="22" y="137" width="98" height="45"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6Fi-8X-GKP">
+                        <rect key="frame" x="0.0" y="150.5" width="140" height="97"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2,69 $ / month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54n-wZ-Iyf">
-                                <rect key="frame" x="0.0" y="13.5" width="98" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2,69 $ / month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sip-qD-wbP">
+                                <rect key="frame" x="0.0" y="0.0" width="140" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="mH9-b9-5vN"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="15"/>
                                 <color key="textColor" red="0.019607843140000001" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Renewal date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hbm-0x-VOq">
+                                <rect key="frame" x="0.0" y="26" width="140" height="12.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="aJy-fq-Vak"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="11"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVE-qx-jLH">
+                                <rect key="frame" x="0.0" y="46.5" width="140" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBi-AK-SBO">
+                                        <rect key="frame" x="28" y="0.0" width="84" height="30"/>
+                                        <color key="backgroundColor" red="0.019607843140000001" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="F2m-gO-hfR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="14"/>
+                                        <inset key="contentEdgeInsets" minX="19" minY="0.0" maxX="19" maxY="0.0"/>
+                                        <state key="normal" title="Upgrade">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="actionUpgradeButtonClicked:" destination="F33-PF-zlW" eventType="touchUpInside" id="Emc-Kv-5Zk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evq-vg-PZs">
+                                        <rect key="frame" x="43" y="-0.5" width="54" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="deh-nD-hoF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="14"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                        <state key="normal" title="Free">
+                                            <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6nz-Ll-Gfk">
+                                        <rect key="frame" x="11" y="-0.5" width="118" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="vZA-69-iLD"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="19" minY="0.0" maxX="19" maxY="0.0"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Cancel your subscription">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.019607843140000001" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" metaFont="system" size="14"/>
+                                                        <integer key="NSUnderline" value="1"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="actionCancelButtonClicked:" destination="F33-PF-zlW" eventType="touchUpInside" id="qjH-Al-8uC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ZBi-AK-SBO" firstAttribute="centerY" secondItem="tVE-qx-jLH" secondAttribute="centerY" id="AcA-J7-bGG"/>
+                                    <constraint firstItem="evq-vg-PZs" firstAttribute="centerY" secondItem="tVE-qx-jLH" secondAttribute="centerY" id="CCq-CH-IK0"/>
+                                    <constraint firstItem="evq-vg-PZs" firstAttribute="centerX" secondItem="tVE-qx-jLH" secondAttribute="centerX" id="Uye-Ia-Fpc"/>
+                                    <constraint firstAttribute="height" constant="30" id="V5C-a6-4Cf"/>
+                                    <constraint firstItem="6nz-Ll-Gfk" firstAttribute="centerY" secondItem="tVE-qx-jLH" secondAttribute="centerY" id="VdO-RJ-5EI"/>
+                                    <constraint firstItem="6nz-Ll-Gfk" firstAttribute="centerX" secondItem="tVE-qx-jLH" secondAttribute="centerX" id="W1n-0D-AYu"/>
+                                    <constraint firstItem="ZBi-AK-SBO" firstAttribute="centerX" secondItem="tVE-qx-jLH" secondAttribute="centerX" id="qZt-cf-rIu"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AppStore" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vd1-I7-SyL">
+                                <rect key="frame" x="0.0" y="84.5" width="140" height="12.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="B26-Y2-0hY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="54n-wZ-Iyf" secondAttribute="trailing" id="0YS-g7-GL1"/>
-                            <constraint firstItem="54n-wZ-Iyf" firstAttribute="leading" secondItem="sPa-ZQ-U8n" secondAttribute="leading" id="WVc-rx-XBP"/>
-                            <constraint firstItem="54n-wZ-Iyf" firstAttribute="centerY" secondItem="sPa-ZQ-U8n" secondAttribute="centerY" id="Zzq-Sd-TXK"/>
-                            <constraint firstItem="54n-wZ-Iyf" firstAttribute="centerX" secondItem="sPa-ZQ-U8n" secondAttribute="centerX" id="wPh-Sf-tjY"/>
-                        </constraints>
-                    </view>
+                    </stackView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="nQX-dm-k0f" firstAttribute="centerX" secondItem="F33-PF-zlW" secondAttribute="centerX" id="5dg-VK-g1n"/>
+                <constraint firstItem="6Fi-8X-GKP" firstAttribute="top" secondItem="xBU-hF-SK6" secondAttribute="bottom" constant="8" id="3dd-8J-u6f"/>
                 <constraint firstItem="9aw-2Z-Vhj" firstAttribute="leading" secondItem="Rr9-VH-Jut" secondAttribute="trailing" constant="6" id="6wL-JY-DUe"/>
                 <constraint firstItem="9aw-2Z-Vhj" firstAttribute="centerX" secondItem="F33-PF-zlW" secondAttribute="centerX" id="7ye-hr-1nZ"/>
-                <constraint firstItem="bLy-k3-Vp4" firstAttribute="centerX" secondItem="F33-PF-zlW" secondAttribute="centerX" id="F1A-zZ-bQy"/>
-                <constraint firstItem="nQX-dm-k0f" firstAttribute="top" secondItem="sPa-ZQ-U8n" secondAttribute="bottom" id="R97-Gr-BRO"/>
-                <constraint firstItem="sPa-ZQ-U8n" firstAttribute="top" secondItem="xBU-hF-SK6" secondAttribute="bottom" id="RJ0-Ri-nWu"/>
-                <constraint firstAttribute="bottom" secondItem="bLy-k3-Vp4" secondAttribute="bottom" constant="8" id="Roo-Vq-09P"/>
+                <constraint firstAttribute="bottom" secondItem="6Fi-8X-GKP" secondAttribute="bottom" constant="8" id="PIv-Ia-7Yd"/>
                 <constraint firstItem="9aw-2Z-Vhj" firstAttribute="top" secondItem="F33-PF-zlW" secondAttribute="top" constant="10" id="UTI-HR-sAZ"/>
-                <constraint firstAttribute="bottom" secondItem="ash-LH-18U" secondAttribute="bottom" constant="8" id="aRu-Mp-Fil"/>
-                <constraint firstItem="sPa-ZQ-U8n" firstAttribute="centerX" secondItem="F33-PF-zlW" secondAttribute="centerX" id="cFQ-bv-bhS"/>
-                <constraint firstAttribute="bottom" secondItem="nQX-dm-k0f" secondAttribute="bottom" constant="8" id="eBA-fx-l98"/>
                 <constraint firstItem="Rr9-VH-Jut" firstAttribute="centerY" secondItem="9aw-2Z-Vhj" secondAttribute="centerY" id="gGy-Bg-xoP"/>
-                <constraint firstItem="ash-LH-18U" firstAttribute="centerX" secondItem="F33-PF-zlW" secondAttribute="centerX" id="h3E-I3-YNS"/>
                 <constraint firstItem="xBU-hF-SK6" firstAttribute="top" secondItem="9aw-2Z-Vhj" secondAttribute="bottom" constant="13" id="hXV-Zc-Yei"/>
                 <constraint firstItem="xBU-hF-SK6" firstAttribute="centerX" secondItem="F33-PF-zlW" secondAttribute="centerX" id="ncx-nY-hTd"/>
+                <constraint firstAttribute="trailing" secondItem="6Fi-8X-GKP" secondAttribute="trailing" id="rvn-0r-S32"/>
+                <constraint firstItem="6Fi-8X-GKP" firstAttribute="leading" secondItem="F33-PF-zlW" secondAttribute="leading" id="wV9-fc-sPH"/>
             </constraints>
-            <size key="customSize" width="161" height="275"/>
+            <size key="customSize" width="161" height="320"/>
             <connections>
-                <outlet property="cancelButton" destination="bLy-k3-Vp4" id="rHX-f9-tIJ"/>
+                <outlet property="cancelButton" destination="6nz-Ll-Gfk" id="Fgh-YU-hsU"/>
                 <outlet property="checkmarkImageView" destination="Rr9-VH-Jut" id="AIG-D2-yoK"/>
                 <outlet property="docsCountLabel" destination="cJF-4m-cRK" id="0Re-sn-djL"/>
-                <outlet property="freeButton" destination="ash-LH-18U" id="0ea-UJ-y1B"/>
+                <outlet property="freeButton" destination="evq-vg-PZs" id="YCf-kb-uhQ"/>
                 <outlet property="photosCountLabel" destination="9ZQ-WQ-OC0" id="ny0-9J-HeZ"/>
                 <outlet property="planeNameLabel" destination="9aw-2Z-Vhj" id="tLb-Wb-ezB"/>
-                <outlet property="priceLabel" destination="54n-wZ-Iyf" id="E2T-nV-vvd"/>
+                <outlet property="priceHeightConstraint" destination="mH9-b9-5vN" id="fLz-bR-isQ"/>
+                <outlet property="priceLabel" destination="sip-qD-wbP" id="nkC-id-u0M"/>
+                <outlet property="renewalDateLabel" destination="Hbm-0x-VOq" id="wvd-gr-t5t"/>
                 <outlet property="songsCountLabel" destination="w0I-oj-OoQ" id="7Kc-gT-d6Z"/>
-                <outlet property="upgradeButton" destination="nQX-dm-k0f" id="XwD-OC-Gg5"/>
+                <outlet property="storeLabel" destination="vd1-I7-SyL" id="npx-4t-Nsm"/>
+                <outlet property="upgradeButton" destination="ZBi-AK-SBO" id="JO4-7l-V4B"/>
                 <outlet property="videosCountLabel" destination="orB-Ea-wqj" id="cqr-X6-Xyc"/>
             </connections>
-            <point key="canvasLocation" x="54" y="125"/>
+            <point key="canvasLocation" x="54" y="146.5"/>
         </collectionViewCell>
     </objects>
     <resources>

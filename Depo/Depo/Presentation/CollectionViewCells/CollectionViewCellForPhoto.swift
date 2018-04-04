@@ -110,6 +110,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
 
     override func setImage(with url: URL) {
         self.imageView.contentMode = .center
+        let dateStart = Date()
         imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
             guard let `self` = self else {
                 return
@@ -120,7 +121,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
                 return
             }
             
-            self.setImage(image: image, animated: true)
+            let isImageLoadedNotQuickly = dateStart.timeIntervalSinceNow < -0.2
+            self.setImage(image: image, animated: isImageLoadedNotQuickly)
         }
         
         isAlreadyConfigured = true

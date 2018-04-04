@@ -13,19 +13,18 @@ struct SharedConstants {
     private init() {}
     
     #if APPSTORE
-        static let groupIdentifier = "group.com.turkcell.akillidepo"
+    static let groupIdentifier = "group.com.turkcell.akillidepo"
     
     #elseif ENTERPRISE
-        static let groupIdentifier = "group.com.turkcell.akillideponew.ent"
+    static let groupIdentifier = "group.com.turkcell.akillideponew.ent"
     
     #elseif DEBUG
-        static let groupIdentifier = "group.come.life.Lifebox"
+    static let groupIdentifier = "group.come.life.Lifebox"
     
     #else
-        static let groupIdentifier = "group.come.life.Lifebox"
+    static let groupIdentifier = "group.come.life.Lifebox"
     #endif
     
-    //static let groupIdentifier = "group.come.life.Lifebox"
     
     static let wormholeDirectoryIdentifier = "wormhole"
     static let wormholeMessageIdentifier = "wormholeMessageIdentifier"

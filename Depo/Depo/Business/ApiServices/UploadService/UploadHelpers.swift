@@ -26,5 +26,5 @@ enum MetaStrategy: String {
     case WithoutConflictControl = "1"
 }
 
-typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Swift.Void
-typealias FileUploadOperationSucces = (_ item: WrapData) -> Swift.Void
+typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
+typealias FileUploadOperationSucces = (_ item: WrapData) -> Void

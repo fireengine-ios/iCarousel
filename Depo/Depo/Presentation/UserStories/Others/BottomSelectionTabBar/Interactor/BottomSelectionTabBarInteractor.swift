@@ -10,7 +10,7 @@ class BottomSelectionTabBarInteractor: MoreFilesActionsInteractor, BottomSelecti
     
     let dataStorage = BottomSelectionTabBarDataStorage()
     
-    typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
+    typealias FailResponse = (_ value: ErrorResponse) -> Void
     
     var currentBarcongfig: EditingBarConfig? {
         set {

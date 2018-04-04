@@ -182,6 +182,7 @@ final class MediaPlayer: NSObject {
             return
         }
         
+        resetTime()
         if playNext() >= 0 {
             play()
         } else {
@@ -233,7 +234,7 @@ final class MediaPlayer: NSObject {
             urls.remove(at: i)
             items.remove(at: i)
             
-            if i < currentIndex {
+            if i <= currentIndex, currentIndex != 0 {
                 currentIndex -= 1
             }
         }
@@ -244,7 +245,7 @@ final class MediaPlayer: NSObject {
         if deleteIndexes.contains(currentIndex) {
             // TODO: CHECK ALL STATES
             if play(at: currentIndex) {
-//                currentIndex -= 1 /// check
+                currentIndex -= 1
             } else if list.count > 0 {
                 currentIndex = list.count - 1
                 play(at: currentIndex)
@@ -270,6 +271,7 @@ final class MediaPlayer: NSObject {
         currentIndex = index
         if playMode == .shaffle {
             shuffleCurrentList()
+            currentIndex = 0
         }
         setupPlayerWithItem(at: chooseIndex(for: currentIndex))
         play()
@@ -376,15 +378,14 @@ final class MediaPlayer: NSObject {
             }
             return -1
         }
-        if currentIndex == items.count - 1 {
-            if playMode == .normal {
-                return -1
-            } else {
-                currentIndex = 0
-            }
+        
+        let isPlayListEnded = currentIndex == items.count - 1
+        if isPlayListEnded {
+            currentIndex = 0
         } else {
             currentIndex += 1
         }
+        
         let nextIndex = chooseIndex(for: currentIndex)
         setupPlayerWithItem(at: nextIndex)
         return nextIndex
@@ -393,12 +394,9 @@ final class MediaPlayer: NSObject {
     
     @discardableResult
     func playPrevious() -> Int {
-        if currentIndex == 0 {
-            if playMode == .normal {
-                return -1
-            } else {
-                currentIndex = list.count - 1
-            }
+        let isPlayItemBeforeFirst = currentIndex == 0 
+        if isPlayItemBeforeFirst {
+            currentIndex = list.count - 1
         } else {
             currentIndex -= 1
         }
@@ -456,7 +454,7 @@ final class MediaPlayer: NSObject {
     var shuffledIndexes = [Int]()
     
     func shuffleCurrentList() {
-        if list.count == 0 || currentIndex == list.count {
+        if list.count == 0 || currentIndex == list.count || currentIndex < 0 {
             return
         }
         

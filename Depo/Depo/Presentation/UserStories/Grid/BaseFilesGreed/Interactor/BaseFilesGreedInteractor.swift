@@ -116,6 +116,15 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         return !(remoteItems is PhotoAndVideoService)
     }
     
+    func textForNoFileTopLabel() -> String {
+        if remoteItems is AlbumDetailService {
+            return TextConstants.albumEmptyText
+        } else if remoteItems is FaceImageDetailService {
+            return TextConstants.albumEmptyText
+        }
+        return TextConstants.folderEmptyText
+    }
+    
     func textForNoFileLbel() -> String {
         if remoteItems is PhotoAndVideoService {
             return TextConstants.photosVideosViewNoPhotoTitleText

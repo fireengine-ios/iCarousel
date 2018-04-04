@@ -63,7 +63,11 @@ final class WidgetService {
     }
     
     func notifyWidgetAbout(currentImage: UIImage?) {
-        wormhole.passMessageObject(currentImage, identifier: SharedConstants.wormholeCurrentImageIdentifier)
+        if let compressedData = currentImage?.jpeg(.low) {
+            var compressedImage = UIImage(data: compressedData)
+            compressedImage = compressedImage?.resizedImage(to: CGSize(width: 100, height: 100))
+            wormhole.passMessageObject(compressedImage, identifier: SharedConstants.wormholeCurrentImageIdentifier)
+        }
     }
     
     func notifyWidgetAbout(status: AutoSyncStatus) {

@@ -8,21 +8,17 @@
 
 import UIKit
 
-class TapGestureRecognizerWithClosure: UITapGestureRecognizer {
-
-    private var closure: VoidHandler?
+final class TapGestureRecognizerWithClosure: UITapGestureRecognizer {
     
-    init() {
-        super.init(target: self, action: #selector(runAction))
-    }
+    private let closure: VoidHandler
     
-    convenience init(closure: @escaping VoidHandler) {
-        self.init()
+    init(closure: @escaping VoidHandler) {
         self.closure = closure
+        super.init(target: nil, action: nil)
+        addTarget(self, action: #selector(runAction))
     }
     
     @objc private func runAction() {
-        closure?()
+        closure()
     }
-    
 }

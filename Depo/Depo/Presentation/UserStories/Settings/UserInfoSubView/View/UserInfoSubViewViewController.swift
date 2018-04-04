@@ -72,6 +72,10 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
         output.reloadUserInfoRequired()
     }
     
+    func updatePhoto(image: UIImage) {
+        userIconImageView.image = image
+    }
+    
     func showLoadingSpinner() {
         output.loadingIndicatorRequired()
     }

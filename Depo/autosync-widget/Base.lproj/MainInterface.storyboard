@@ -47,9 +47,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AGH-Xy-zne">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AGH-Xy-zne">
                                 <rect key="frame" x="24" y="12" width="48" height="48"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="WUd-FG-1fN"/>
                                     <constraint firstAttribute="width" secondItem="AGH-Xy-zne" secondAttribute="height" multiplier="1:1" id="fpx-Hf-wSm"/>
                                 </constraints>
                             </imageView>

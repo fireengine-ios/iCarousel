@@ -19,11 +19,11 @@ class ImageDownloder {
         downloder = SDWebImageManager.shared().imageDownloader!
     }
     
-    func getImage(patch: URL?, compliteImage:@escaping RemoteImage) {
+    func getImage(patch: URL?, completeImage:@escaping RemoteImage) {
         
         if (patch == nil) {
             DispatchQueue.main.async {
-                compliteImage(nil)
+                completeImage(nil)
             }
         }
         
@@ -34,7 +34,7 @@ class ImageDownloder {
         
         if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
             DispatchQueue.main.async {
-                compliteImage(image)
+                completeImage(image)
             }
             return
         }
@@ -44,7 +44,7 @@ class ImageDownloder {
                                            progress: nil) { image, data, error, bool in
                                             
                                             SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
-                                            compliteImage(image)
+                                            completeImage(image)
         }
         
         guard let it = item else {
@@ -54,10 +54,10 @@ class ImageDownloder {
         
     }
     
-    func getImagesByImagesURLs(list: [ImageForDowload], images: @escaping ([URL]) -> Swift.Void) {
+    func getImagesByImagesURLs(list: [ImageForDowload], images: @escaping ([URL]) -> Void) {
         if list.count > 0 {
             let imageObject = list.first
-            getImage(patch: imageObject?.downloadURL, compliteImage: {image in
+            getImage(patch: imageObject?.downloadURL, completeImage: {image in
                 var urlsArray = [URL]()
                 
                 var url: URL? = nil
@@ -91,7 +91,7 @@ class ImageDownloder {
         }
     }
     
-    func removeImageFromCache(url: URL?, completion: @escaping () -> Swift.Void) {
+    func removeImageFromCache(url: URL?, completion: @escaping () -> Void) {
         var cachePath: String?
         if let path = url?.absoluteString, let query = url?.query, let imageCache = SDWebImageManager.shared().imageCache {            
             cachePath = path.replacingOccurrences(of: "?"+query, with: "")
@@ -112,8 +112,8 @@ class ImageDownloder {
     }
 }
 
-typealias FilesDownloaderResponse = (_ fileURLs: [URL], _ directoryURL: URL) -> Swift.Void
-typealias FilesDownloaderFail = (_ errorMessage: String) -> Swift.Void
+typealias FilesDownloaderResponse = (_ fileURLs: [URL], _ directoryURL: URL) -> Void
+typealias FilesDownloaderFail = (_ errorMessage: String) -> Void
 
 class FilesDownloader {
     

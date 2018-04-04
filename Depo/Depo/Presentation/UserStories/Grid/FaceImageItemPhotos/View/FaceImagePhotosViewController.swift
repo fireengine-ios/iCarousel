@@ -49,6 +49,7 @@ import UIKit
         
         configureFaceImageItemsPhotoActions()
         
+        
         configureNavBarWithTouch()
     }
     
@@ -56,7 +57,7 @@ import UIKit
         super.changeSortingRepresentation(sortType: type)
         sortType = type
 
-        addNavBarTouch()
+        configureNavBarWithTouch()
     }
     
     @objc func addNameAction() {
@@ -160,7 +161,10 @@ import UIKit
             setTouchableTitle(title: mainTitle)
         }
         
-        addNavBarTouch()
+        if let output = output as? FaceImagePhotosViewOutput,
+            let type = output.faceImageType(), type == .people {
+            addNavBarTouch()
+        }
     }
     
     private func addNavBarTouch() {

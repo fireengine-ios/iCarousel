@@ -107,7 +107,7 @@ final class ShareViewController: UIViewController, ShareController {
     
     private func updateCurrentUI(for shareData: ShareData) {
         DispatchQueue.global().async { [weak self] in
-            FileManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
+            FilesExistManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
                 guard let `self` = self else {
                     return
                 }

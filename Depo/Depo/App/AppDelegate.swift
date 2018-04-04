@@ -50,6 +50,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        FBSDKAppLinkUtility.fetchDeferredAppLink { url, error in
+            if let url = url {
+                if UIApplication.shared.canOpenURL(url) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+            } else {
+                log.debug("Received error while fetching deferred app link \(String(describing: error))")
+            }
+        }
+        
         setupLog()
         
         MenloworksAppEvents.onAppLaunch()
@@ -176,11 +190,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.debug("AppDelegate applicationDidBecomeActive")
         
         checkPasscodeIfNeed()
+        FBSDKAppEvents.activateApp()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillTerminate")
-        SyncServiceManager.shared.stopSync()
+        
+        if !tokenStorage.isRememberMe {
+            SyncServiceManager.shared.stopSync()
+            AutoSyncDataStorage.clear()
+        }
+        
         UserDefaults.standard.synchronize()
         player.stop()
     }
@@ -209,6 +229,7 @@ extension AppDelegate {
         MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         
         MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
+        FBSDKAppEvents.setPushNotificationsDeviceToken(deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -218,9 +239,20 @@ extension AppDelegate {
         MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        self.application(application, didReceiveRemoteNotification: userInfo) { result in
+        }
+    }
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         log.debug("AppDelegate didReceiveRemoteNotification")
         MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
+        
+        FBSDKAppEvents.logPushNotificationOpen(userInfo)
+        
+        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: userInfo) {
+            PushNotificationService.shared.openActionScreen()
+        }
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
@@ -247,9 +279,7 @@ private func setupLog() {
         fileDestination.showFileName = true
         fileDestination.showLineNumber = true
         fileDestination.showDate = true
-        
-        let day: TimeInterval = 24 * 60 * 60
-        fileDestination.targetMaxTimeInterval = day * 2
+        fileDestination.targetMaxTimeInterval = NumericConstants.logDuration
         log.add(destination: fileDestination)
     }
     

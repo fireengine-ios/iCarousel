@@ -9,7 +9,7 @@
 import Foundation
 
 
-typealias  ContainsAction = (_ sender: UIBarButtonItem) -> Swift.Void
+typealias  ContainsAction = (_ sender: UIBarButtonItem) -> Void
 
 class NavigationBarList {
     

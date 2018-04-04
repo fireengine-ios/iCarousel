@@ -20,8 +20,9 @@ class WhiteButtonWithRoundedCorner: UIButton {
         configurate()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
         setCornerRadius()
     }
     
@@ -29,6 +30,7 @@ class WhiteButtonWithRoundedCorner: UIButton {
         backgroundColor = ColorConstants.whiteColor
         setTitleColor(ColorConstants.blueColor, for: UIControlState.normal)
         titleLabel?.font = ApplicationPalette.bigRoundButtonFont
+        layer.masksToBounds = true
         setCornerRadius()
     }
     

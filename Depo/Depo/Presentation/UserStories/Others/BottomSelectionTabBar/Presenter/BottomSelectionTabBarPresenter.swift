@@ -475,13 +475,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     // MARK: - Interactor output
     
     override func operationFinished(type: ElementTypes) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.unselectAll()
         basePassingPresenter?.operationFinished(withType: type, response: nil)
     }
     
     override func operationFailed(type: ElementTypes, message: String) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.unselectAll()
         basePassingPresenter?.operationFailed(withType: type)
         UIApplication.showErrorAlert(message: message)

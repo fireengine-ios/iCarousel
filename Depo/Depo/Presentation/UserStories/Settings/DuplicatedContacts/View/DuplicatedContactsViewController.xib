@@ -29,18 +29,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7z-te-2rn" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="22" y="562" width="161.5" height="45"/>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7z-te-2rn" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="45" y="561" width="128" height="46"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="45" id="syl-8f-g1i"/>
+                        <constraint firstAttribute="height" constant="46" id="zod-7D-TV5">
+                            <variation key="heightClass=regular-widthClass=regular" constant="56"/>
+                        </constraint>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="onDeleteAllTapped:" destination="-1" eventType="touchUpInside" id="aZz-tx-D3m"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFU-Lz-2ek" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="191.5" y="562" width="161.5" height="45"/>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFU-Lz-2ek" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="188" y="561" width="128" height="46"/>
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="onKeepTapped:" destination="-1" eventType="touchUpInside" id="1t1-2l-K6c"/>
@@ -62,20 +64,20 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="TFU-Lz-2ek" secondAttribute="trailing" constant="22" id="2Bm-gL-oKA"/>
+                <constraint firstItem="TFU-Lz-2ek" firstAttribute="trailing" secondItem="l1M-6Z-A1n" secondAttribute="trailing" constant="-19" id="5nH-1o-0bR"/>
                 <constraint firstAttribute="trailing" secondItem="l1M-6Z-A1n" secondAttribute="trailing" constant="40" id="7IY-0b-TcW"/>
                 <constraint firstItem="fgS-mi-6YC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="B7h-Q6-aS0"/>
                 <constraint firstItem="l1M-6Z-A1n" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.45" id="HnO-FI-NRF"/>
                 <constraint firstItem="P7z-te-2rn" firstAttribute="width" secondItem="TFU-Lz-2ek" secondAttribute="width" id="Ljn-4V-Mp6"/>
-                <constraint firstItem="P7z-te-2rn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="MHT-lx-WXU"/>
                 <constraint firstItem="fgS-mi-6YC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.39" id="Vie-Gw-v2u"/>
-                <constraint firstItem="TFU-Lz-2ek" firstAttribute="leading" secondItem="P7z-te-2rn" secondAttribute="trailing" constant="8" id="cXf-SI-Vm1"/>
+                <constraint firstItem="TFU-Lz-2ek" firstAttribute="leading" secondItem="P7z-te-2rn" secondAttribute="trailing" constant="15" id="cXf-SI-Vm1"/>
                 <constraint firstAttribute="trailing" secondItem="fgS-mi-6YC" secondAttribute="trailing" constant="22" id="elD-R1-sHl"/>
                 <constraint firstItem="l1M-6Z-A1n" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.58" id="iO8-vB-d7x"/>
                 <constraint firstItem="P7z-te-2rn" firstAttribute="centerY" secondItem="TFU-Lz-2ek" secondAttribute="centerY" id="ixE-HZ-r64"/>
                 <constraint firstItem="l1M-6Z-A1n" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="jsx-gj-Qld"/>
                 <constraint firstAttribute="bottom" secondItem="P7z-te-2rn" secondAttribute="bottom" constant="60" id="oND-Rg-6VH"/>
-                <constraint firstItem="TFU-Lz-2ek" firstAttribute="height" secondItem="P7z-te-2rn" secondAttribute="height" id="p22-An-G3U"/>
+                <constraint firstItem="P7z-te-2rn" firstAttribute="leading" secondItem="l1M-6Z-A1n" secondAttribute="leading" constant="5" id="qd8-lX-hGv"/>
+                <constraint firstItem="TFU-Lz-2ek" firstAttribute="height" secondItem="P7z-te-2rn" secondAttribute="height" id="r99-cx-SJK"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

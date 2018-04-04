@@ -69,8 +69,7 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
         button.addTarget(self, action: #selector(selectItem(_:)), for: .touchUpInside)
         button.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
-        if let type = item.type, type == .thing,
-           let name = item.info?.name {
+        if let name = item.info?.name {
             let title = UILabel(frame: CGRect(x: 0, y: itemSize.height - 15, width: itemSize.width, height: 14))
             title.text = name
             title.textColor = .white

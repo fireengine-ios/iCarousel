@@ -14,17 +14,15 @@ class OfferApple {
     var name: String?
     var rawPrice: Float = 0
     var price: String?
-//    var offerType: String?
     var description: String?
-    var skProduct: SKProduct
+    var skProduct = SKProduct()
     
-    init() {
-        skProduct = SKProduct()
+    
+    init(productId: String) {
+        storeProductIdentifier = productId
     }
     
-    convenience init(skProduct: SKProduct) {
-        self.init()
-        
+    init(skProduct: SKProduct) {
         storeProductIdentifier = skProduct.productIdentifier
         period = parseDuration(byIdentifier: skProduct.productIdentifier)
         name = skProduct.localizedTitle
