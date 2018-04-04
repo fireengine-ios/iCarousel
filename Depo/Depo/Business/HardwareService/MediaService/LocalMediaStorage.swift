@@ -651,7 +651,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             }
             
             if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
-            return
+                return
             }
             
             if let error = dict[PHImageErrorKey] as? NSError {
