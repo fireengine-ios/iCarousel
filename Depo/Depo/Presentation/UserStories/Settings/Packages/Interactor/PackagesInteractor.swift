@@ -365,12 +365,11 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     private func getCurrency(for accountType: AccountType) -> String {
         switch accountType {
-        case .turkcell:
+        ///https://en.wikipedia.org/wiki/Northern_Cyprus
+        case .turkcell, .cyprus:
             return "TL"
         case .ukranian:
             return "UAH"
-        case .cyprus:
-            return "CYP"
         case .moldovian:
             return "MDL"
         case .all:
