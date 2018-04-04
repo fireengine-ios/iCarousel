@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInput, UITextViewDelegate {
+class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput, UITextViewDelegate {
 
     var output: TermsAndServicesViewOutput!
 

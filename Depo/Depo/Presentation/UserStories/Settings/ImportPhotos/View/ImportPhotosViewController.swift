@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImportPhotosViewController: UIViewController, ErrorPresenter {
+class ImportPhotosViewController: ViewController, ErrorPresenter {
     var fbOutput: ImportFromFBViewOutput!
     var dbOutput: ImportFromDropboxViewOutput!
     var instOutput: ImportFromInstagramViewOutput!

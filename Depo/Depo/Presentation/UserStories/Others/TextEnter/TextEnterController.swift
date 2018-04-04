@@ -10,7 +10,7 @@ import Foundation
 
 typealias TextEnterHandler = (_ text: String, _ vc: TextEnterController) -> Void
 
-final class TextEnterController: UIViewController {
+final class TextEnterController: ViewController {
     
     // MARK: - Static
     

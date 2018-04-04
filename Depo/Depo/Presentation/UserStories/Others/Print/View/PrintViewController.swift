@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PrintViewController: UIViewController {
+class PrintViewController: ViewController {
     
     @IBOutlet private weak var webView: UIWebView!
 

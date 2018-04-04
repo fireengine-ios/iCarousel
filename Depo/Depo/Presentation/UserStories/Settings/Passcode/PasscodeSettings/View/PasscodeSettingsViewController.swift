@@ -13,7 +13,7 @@ enum PasscodeSettingsViewState {
     case ready
 }
 
-final class PasscodeSettingsViewController: UIViewController {
+final class PasscodeSettingsViewController: ViewController {
     var output: PasscodeSettingsViewOutput!
     
     @IBOutlet weak var passcodeView: UIView!

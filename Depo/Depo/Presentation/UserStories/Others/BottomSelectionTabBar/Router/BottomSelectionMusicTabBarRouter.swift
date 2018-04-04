@@ -22,7 +22,7 @@ class BottomSelectionMusicTabBarRouter: BottomSelectionTabBarRouter {
     
     override func showSelectFolder(selectFolder: SelectFolderViewController) {
         let topVC = UIApplication.topController()
-        let nContr = UINavigationController(rootViewController: selectFolder)
+        let nContr = NavigationController(rootViewController: selectFolder)
         nContr.navigationBar.isHidden = false
         topVC?.present(nContr, animated: true, completion: nil)
     }

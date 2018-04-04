@@ -53,7 +53,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
             
             /// without animation
             
-            Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+            setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+            
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.navigationBar.isHidden = isFullScreen
             
@@ -79,7 +80,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             collectionView.layoutIfNeeded()
         }
     }
-    
+        
     // MARK: Life cycle
     
     override func viewDidLoad() {
@@ -130,7 +131,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         output.viewIsReady(view: viewForBottomBar)
         setStatusBarBackgroundColor(color: UIColor.black)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -229,7 +229,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewWillTransition(to: size, with: coordinator)
         
         needToScrollAfterRotation = true
-        Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+        setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
     }
     
     override func getBacgroundColor() -> UIColor {
@@ -268,17 +268,17 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         localPlayer?.replaceCurrentItem(with: item)
         playerController = AVPlayerViewController()
         playerController?.player = localPlayer
-        present(playerController!, animated: true) { [weak playerController] in
-            playerController?.player?.play()
+        present(playerController!, animated: true) { [weak self] in
+            self?.playerController?.player?.play()
             if Device.operationSystemVersionLessThen(11) {
-                UIApplication.shared.isStatusBarHidden = true
+                self?.statusBarHidden = true
             }
         }
     }
     
     func onStopPlay() {
         if Device.operationSystemVersionLessThen(11) {
-            UIApplication.shared.isStatusBarHidden = false
+            statusBarHidden = false
         }
     }
     

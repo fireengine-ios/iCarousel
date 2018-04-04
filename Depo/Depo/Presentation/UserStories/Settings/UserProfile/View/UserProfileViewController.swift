@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController, UserProfileViewInput, UITextFieldDelegate {
+class UserProfileViewController: ViewController, UserProfileViewInput, UITextFieldDelegate {
     var output: UserProfileViewOutput!
     
     @IBOutlet var keyboardHideManager: KeyboardHideManager! /// not weak

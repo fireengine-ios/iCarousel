@@ -25,7 +25,7 @@ enum TabScreenIndex: Int {
     case documentsScreenIndex = 4
 }
 
-final class TabBarViewController: UIViewController, UITabBarDelegate {
+final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var tabBar: CustomTabBar!
     
@@ -118,7 +118,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             selectedViewController?.view.frame = contentView.bounds
             contentView.addSubview(selectedViewController!.view)
             selectedViewController?.didMove(toParentViewController: self)
-            setNeedsStatusBarAppearanceUpdate()
             if let navigationController = selectedViewController as? UINavigationController {
                 navigationController.popToRootViewController(animated: true)
             }
@@ -132,6 +131,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
         return result
     }
+    
+    //MAKR: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -340,7 +341,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                     router.videosScreen,
                     router.musics,
                     router.documents]
-        customNavigationControllers = list.flatMap { UINavigationController(rootViewController: $0!) }
+        customNavigationControllers = list.compactMap { NavigationController(rootViewController: $0!) }
     }
     
     @objc func gearButtonAction(sender: Any) {
@@ -720,7 +721,7 @@ extension TabBarViewController: TabBarActionHandler {
         case .createFolder:
             let isFavorites = router.isOnFavoritesView()
             let controller = router.createNewFolder(rootFolderID: getFolderUUID(), isFavorites: isFavorites)
-            let nController = UINavigationController(rootViewController: controller)
+            let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             
         case .createStory:
@@ -731,13 +732,13 @@ extension TabBarViewController: TabBarActionHandler {
             guard !checkReadOnlyPermission() else { return }
 
             let controller = router.uploadPhotos()
-            let navigation = UINavigationController(rootViewController: controller)
+            let navigation = NavigationController(rootViewController: controller)
             navigation.navigationBar.isHidden = false
             router.presentViewController(controller: navigation)
             
         case .createAlbum:
             let controller = router.createNewAlbum()
-            let nController = UINavigationController(rootViewController: controller)
+            let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             
         case .uploadFromLifeBox:
@@ -750,7 +751,7 @@ extension TabBarViewController: TabBarActionHandler {
             } else {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder)
             }
-            let navigationController = UINavigationController(rootViewController: controller)
+            let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         }

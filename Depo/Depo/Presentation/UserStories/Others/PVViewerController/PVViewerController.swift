@@ -75,7 +75,7 @@ final class PVViewerController: BaseViewController, NibInit {
     
     private var isFullScreen = false {
         didSet {
-            Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+            setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             navigationController?.navigationBar.isHidden = isFullScreen
         }
     } 
@@ -83,7 +83,7 @@ final class PVViewerController: BaseViewController, NibInit {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+        setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
     }
 }
 

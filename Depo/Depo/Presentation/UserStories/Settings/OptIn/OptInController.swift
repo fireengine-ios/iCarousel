@@ -15,7 +15,7 @@ protocol OptInControllerDelegate: class {
     func optInReachedMaxAttempts(_ optInVC: OptInController)
 }
 
-final class OptInController: UIViewController, NibInit {
+final class OptInController: ViewController, NibInit {
 
     static func with(phone: String) -> OptInController {
         let vc = OptInController.initFromNib()

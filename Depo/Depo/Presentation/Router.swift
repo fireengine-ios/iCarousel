@@ -81,7 +81,7 @@ class RouterVC: NSObject {
     
     func createRootNavigationController(controller: UIViewController) -> UINavigationController {
         
-        let navController = UINavigationController(rootViewController: controller)
+        let navController = NavigationController(rootViewController: controller)
         return navController
     }
     
