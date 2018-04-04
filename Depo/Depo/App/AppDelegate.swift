@@ -83,17 +83,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
     
-    /// iOS 8-
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        
-        if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
-            return true
-        } else if dropboxManager.handleRedirect(url: url) {
-            return true
-        }
-        return false
-    }
-    
     /// iOS targets < 9
     /// TODO: for Facebook ???
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
