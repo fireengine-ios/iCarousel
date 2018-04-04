@@ -16,7 +16,9 @@ fileprivate protocol PageSortingPredicates {
 
 class PageCompounder {
     
-    let coreData = CoreDataStack.default
+    var pageSize: Int = 100
+    
+    private let coreData = CoreDataStack.default
     
     private func compoundItems(pageItems: [WrapData],
                        notAllowedMD5: [String],
@@ -38,7 +40,32 @@ class PageCompounder {
                                    notAllowedMD5: [String],
                                    notAllowedLocalIDs: [String],
                                    compoundedCallback:@escaping CompoundedPageCallback) {
+        guard let lastItem = pageItems.last else {
+            compoundedCallback([], [])
+            return
+        }
         
+        
+        //
+        let requestContext = coreData.newChildBackgroundContext
+        
+        let request = NSFetchRequest<MediaItem>()
+        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
+                                                    in: requestContext)
+        let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
+        
+        //check in BASE GREED if dataCore still appending, then only time is avilable
+        let sortingTypePredicate = getSortingPredicateFirstPage(sortType: sortType, lastItem: lastItem)
+        
+        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
+        request.predicate = compundedPredicate
+        
+        
+        //
+        
+        
+        //pageSize
+//       USE // sortByCurrentType // in compoundedCallback
         
     }
     
@@ -70,6 +97,29 @@ class PageCompounder {
     
     
     
+    }
+    
+    fileprivate func sortByCurrentType(items: [WrapData], sortType: SortedRules) -> [WrapData] {
+        var tempoArray = items
+        switch sortType {
+        case .timeUp, .timeUpWithoutSection:
+            tempoArray.sort{$0.creationDate! > $1.creationDate!}
+        case .timeDown, .timeDownWithoutSection:
+            tempoArray.sort{$0.creationDate! < $1.creationDate!}
+        case .lettersAZ, .albumlettersAZ:
+            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
+        case .lettersZA, .albumlettersZA:
+            tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
+        case .sizeAZ:
+            tempoArray.sort{$0.fileSize > $1.fileSize}
+        case .sizeZA:
+            tempoArray.sort{$0.fileSize < $1.fileSize}
+        case .metaDataTimeUp:
+            tempoArray.sort{$0.metaDate > $1.metaDate}
+        case .metaDataTimeDown:
+            tempoArray.sort{$0.metaDate < $1.metaDate}
+        }
+        return tempoArray
     }
     
 }

@@ -170,91 +170,32 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return false
     }
     
-    private func appendLocalItems(originalItemsArray: [WrapData], pageNum: Int, localFileasAppendedCallback: @escaping ([WrapData])->()) {
-        log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems")
-        debugPrint("BaseDataSourceForCollectionViewDelegate appendLocalItems")
-        var tempoArray = originalItemsArray
-        
-        if let unwrapedFilters = originalFilters,
-            let specificFilters = getFileFilterType(filters: unwrapedFilters),
-            !isOnlyNonLocal(filters: unwrapedFilters) {
-            
-            switch specificFilters {
-            case .video, .image:
-                
-                var lastRemote = originalItemsArray
-                if originalItemsArray.isEmpty, let lastItemFromPreviousPage = allMediaItems.last {
-                    lastRemote = [lastItemFromPreviousPage]
-                }
-                let isFirstPage = (pageNum == 1)
-                
-                var md5s = [String]()
-                var localIDs = [String]()
-                allRemoteItems.forEach{
-                    md5s.append($0.md5)
-                    let splitedUuid = $0.uuid.split(separator: "~")
-                    if let localID = splitedUuid.first {
-                        localIDs.append(String(localID))
-                    }
-                }
-                
-                CoreDataStack.default.getLocalFilesForPhotoVideoPage(filesType: specificFilters,
-                                                                     sortType: currentSortType,
-                                                                     paginationEnd: isPaginationDidEnd, firstPage: isFirstPage,
-                                                                     pageRemoteItems: lastRemote,
-                                                                     notAllowedMD5: md5s,
-                                                                     notAllowedLocalIDs: localIDs,
-                                                                     filesCallBack:
-                    { [weak self] localItems in
-                        guard let `self` = self else {
-                            return
-                        }
-                        log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage \(localItems.count)")
-    
-                        if localItems.count == 0 {
-                            localFileasAppendedCallback(originalItemsArray)
-                            return
-                        }
-                        tempoArray.append(contentsOf: localItems)
-                        
-                        switch self.currentSortType {
-                        case .timeUp, .timeUpWithoutSection:
-                            tempoArray.sort{$0.creationDate! > $1.creationDate!}
-                        case .timeDown, .timeDownWithoutSection:
-                            tempoArray.sort{$0.creationDate! < $1.creationDate!}
-                        case .lettersAZ, .albumlettersAZ:
-                            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
-                        case .lettersZA, .albumlettersZA:
-                            tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
-                        case .sizeAZ:
-                            tempoArray.sort{$0.fileSize > $1.fileSize}
-                        case .sizeZA:
-                            tempoArray.sort{$0.fileSize < $1.fileSize}
-                        case .metaDataTimeUp:
-                            tempoArray.sort{$0.metaDate > $1.metaDate}
-                        case .metaDataTimeDown:
-                            tempoArray.sort{$0.metaDate < $1.metaDate}
-                        }
-                        
-                        localFileasAppendedCallback(tempoArray)
-                        log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems getLocalFilesForPhotoVideoPage page items \(tempoArray.count)")
-                        debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
-                        
-                })
-            //                return
-            default:
-                localFileasAppendedCallback(originalItemsArray)
-            }
-        } else {
-            localFileasAppendedCallback(originalItemsArray)
-        }
-  
-    }
+//    fileprivate func sortByCurrentType(items: [WrapData]) -> [WrapData] {
+//        var tempoArray = items
+//        switch self.currentSortType {
+//        case .timeUp, .timeUpWithoutSection:
+//            tempoArray.sort{$0.creationDate! > $1.creationDate!}
+//        case .timeDown, .timeDownWithoutSection:
+//            tempoArray.sort{$0.creationDate! < $1.creationDate!}
+//        case .lettersAZ, .albumlettersAZ:
+//            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
+//        case .lettersZA, .albumlettersZA:
+//            tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
+//        case .sizeAZ:
+//            tempoArray.sort{$0.fileSize > $1.fileSize}
+//        case .sizeZA:
+//            tempoArray.sort{$0.fileSize < $1.fileSize}
+//        case .metaDataTimeUp:
+//            tempoArray.sort{$0.metaDate > $1.metaDate}
+//        case .metaDataTimeDown:
+//            tempoArray.sort{$0.metaDate < $1.metaDate}
+//        }
+//        return tempoArray
+//    }
     
     func compoundItems(pageItems: [WrapData], pageNum: Int, complition: @escaping VoidHandler) {
         isLocalFilesRequested = true
         log.debug("BaseDataSourceForCollectionViewDelegate compoundItems")
-        debugPrint("BaseDataSourceForCollectionViewDelegate compoundItems")
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let `self` = self else {
@@ -273,12 +214,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             switch specificFilters {
             case .video, .image:
-                
                 var lastRemote = pageItems
 //                if originalItemsArray.isEmpty, let lastItemFromPreviousPage = allMediaItems.last {
 //                    lastRemote = [lastItemFromPreviousPage]
 //                }
-                
                 var md5s = [String]()
                 var localIDs = [String]()
                 self.allRemoteItems.forEach{
@@ -294,16 +233,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                                           sortType: self.currentSortType,
                                                           notAllowedMD5: md5s,
                                                           notAllowedLocalIDs: localIDs,
-                                                          compoundedCallback: { [weak self] (compoundedItems, lefovers) in
-                                                            guard let `self` = self else {
-                                                                return
-                                                            }
-                                                            //check lefovers here
-                                                            
-                                                            self.allMediaItems.append(contentsOf: compoundedItems)
-                                                            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-                                                            
-                                                            
+                                                          compoundedCallback:
+                        { [weak self] (compoundedItems, lefovers) in
+                            guard let `self` = self else {
+                                return
+                            }
+                            //check lefovers here
+                            self.pageLeftOvers.removeAll()
+                            self.pageLeftOvers.append(contentsOf: lefovers)
+                            
+//                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
+                            self.allMediaItems.append(contentsOf: compoundedItems)
+                            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                            
                                                             
                     })
                 } else if self.isPaginationDidEnd {
@@ -312,7 +254,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                                          sortType: self.currentSortType,
                                                          notAllowedMD5: md5s,
                                                          notAllowedLocalIDs: localIDs,
-                                                         compoundedCallback: { [weak self] (compoundedItems, lefovers) in
+                                                         compoundedCallback:
+                        { [weak self] (compoundedItems, lefovers) in
                                                             
                                                             //break into sections here
                                                             
@@ -325,12 +268,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                                            sortType: self.currentSortType,
                                                            notAllowedMD5: md5s,
                                                            notAllowedLocalIDs: localIDs,
-                                                           compoundedCallback: { [weak self] (compoundedItems, lefovers) in
-                                                            
-                                                            //break into sections here
-                                                            
-                                                            
-                                                            
+                                                           compoundedCallback:
+                        { [weak self] (compoundedItems, lefovers) in
+                            
+                            //break into sections here
+                            
+                            
+                            
                     })
                 }
                 
@@ -540,10 +484,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return $0.metaData != nil
         }
         if nonEmptyMetaItems.isEmpty {
-            isLocalPaginationOn = true
+//            isLocalPaginationOn = true
             isPaginationDidEnd = true
         } else {
-            isLocalPaginationOn = false
+//            isLocalPaginationOn = false
         }
         log.debug("BaseDataSourceForCollectionView appendCollectionView \(nonEmptyMetaItems.count)")
         
@@ -557,9 +501,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         })
     }
     
+    private func facingPageEnd() {
+        
+    }
+    
     func dropData() {
         log.debug("BaseDataSourceForCollectionViewDelegate dropData()")
-        debugPrint("BaseDataSourceForCollectionViewDelegate dropData()")
+        
         allRemoteItems.removeAll()
         allItems.removeAll()
         allMediaItems.removeAll()
