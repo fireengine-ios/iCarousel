@@ -16,7 +16,7 @@ protocol AutoSyncDataSourceDelegate: class {
 
 class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
 
-    private let estimatedRowHeight: CGFloat = 88.0
+    private let estimatedRowHeight: CGFloat = 260.0
     
     @IBOutlet weak var tableView: UITableView?
     
@@ -97,10 +97,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = tableDataArray[indexPath.row]
-        if model.cellType == .headerLike {
-            return estimatedRowHeight
-        }
         return UITableViewAutomaticDimension
     }
 

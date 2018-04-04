@@ -561,6 +561,9 @@
 "View" = "View";
 "photos" = "photos";
 "Never" = "Never";
+"Daily" = "Daily";
+"Weekly" = "Weekly";
+"Monthly" = "Monthly";
 "Approve" = "Approve";
 "infomationEmptyEmail" = "Having an e-mail address on your account is one of the easiest and most reliable ways to help keep your account safe and ensure that you can get back into your account. Please add your e-mail address";
 "E-Mail Entry" = "E-Mail Entry";

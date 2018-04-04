@@ -17,13 +17,26 @@ protocol AutoSyncSwitcherTableViewCellDelegate {
 class AutoSyncSwitcherTableViewCell: UITableViewCell {
     @IBOutlet weak var separatorView: UIView!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var subTitleLabel: UILabel!
     @IBOutlet weak var switcher: CustomSwitch!
+    @IBOutlet private var optionsViews: [AutoSyncSettingsOptionView]!
+    @IBOutlet private weak var optionsStackView: UIStackView!
+    @IBOutlet private var optionSeparators: [UIView]!
+    
+    private let options: [AutoSyncOption] = [.daily, .weekly, .monthly]
+    
     var model: AutoSyncModel?
     
     var delegate: AutoSyncSwitcherTableViewCellDelegate?
     
+    private var autoSyncSetting = AutoSyncSetting(syncItemType: .time, option: .daily) {
+        didSet {
+            if autoSyncSetting != oldValue {
+                updateViews()
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +49,8 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         subTitleLabel.font = .TurkcellSaturaBolFont(size: 14)
         
         separatorView.isHidden = true
+        
+        updateViews()
     }
     
     func setup(with model: AutoSyncModel) {
@@ -46,12 +61,23 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         titleLabel.text = model.titleString
         subTitleLabel.text = model.subTitleString
         switcher.isSelected = model.isSelected
+        
+        optionsStackView.isHidden = !model.isSelected
     }
     
     func setColors(isFromSettings: Bool) {
         titleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         subTitleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         separatorView.backgroundColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        
+        for view in optionsViews {
+            view.delegate = self
+            view.setColors(isFromSettings: isFromSettings)
+        }
+        
+        for separator in optionSeparators {
+            separator.backgroundColor = isFromSettings ? ColorConstants.lightGrayColor : ColorConstants.whiteColor
+        }
     }
     
     @IBAction func onSwitcherValueChanged() {
@@ -63,5 +89,24 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         separatorView.isHidden = !switcher.isOn
         delegate?.onValueChanged(model: model, cell: self)
     }
+    
+    func updateViews() {
+        for (option, view) in zip(options, optionsViews) {
+            view.setup(with: option, isSelected: autoSyncSetting.option == option)
+            view.delegate = self
+        }
+        
+        optionsStackView.isHidden = !switcher.isOn
+    }
 
 }
+
+// MARK: - AutoSyncSettingsOptionViewDelegate
+
+extension AutoSyncSwitcherTableViewCell: AutoSyncSettingsOptionViewDelegate {
+    func didSelect(option: AutoSyncOption) {
+        autoSyncSetting.option = option
+        updateViews()
+    }
+}
+

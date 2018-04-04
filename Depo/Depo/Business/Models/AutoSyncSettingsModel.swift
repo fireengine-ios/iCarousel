@@ -24,6 +24,7 @@ extension AutoSyncSetting: Equatable {
 enum AutoSyncItemType {
     case photo
     case video
+    case time
     
     var localizedText: String {
         switch self {
@@ -31,6 +32,8 @@ enum AutoSyncItemType {
             return TextConstants.autoSyncCellPhotos
         case .video:
             return TextConstants.autoSyncCellVideos
+        case .time:
+            return ""
         }
     }
 }
@@ -40,6 +43,9 @@ enum AutoSyncOption {
     case wifiOnly
     case wifiAndCellular
     case never
+    case daily
+    case weekly
+    case monthly
     
     var localizedText: String {
         switch self {
@@ -49,6 +55,12 @@ enum AutoSyncOption {
             return TextConstants.autoSyncSettingsOptionWiFi
         case .wifiAndCellular:
             return TextConstants.autoSyncSettingsOptionWiFiAndCellular
+        case .daily:
+            return TextConstants.autoSyncSettingsOptionDaily
+        case .weekly:
+            return TextConstants.autoSyncSettingsOptionWeekly
+        case .monthly:
+            return TextConstants.autoSyncSettingsOptionMonthly
         }
     }
 }
@@ -122,6 +134,8 @@ final class AutoSyncSettings {
             set(photoSyncSetting: setting)
         case .video:
             set(videoSyncSetting: setting)
+        case .time:
+            set(videoSyncSetting: setting)
         }
     }
     
@@ -164,7 +178,6 @@ extension AutoSyncSettings {
         case videos
         case none
     }
-    
     
     static func createMigrated() -> AutoSyncSettings {
         let settings = AutoSyncSettings()
