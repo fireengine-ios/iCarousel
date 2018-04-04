@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return OrientationManager.shared.orientationLock
     }
     
+    
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()

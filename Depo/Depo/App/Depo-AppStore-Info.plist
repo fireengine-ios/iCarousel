@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.11.0.7</string>
+	<string>1.0.12</string>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIStatusBarStyle</key>
@@ -97,6 +97,20 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string></string>
+	<key>NSContactsUsageDescription</key>
+	<string></string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location will be used for background syncing</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location will be used for background syncing</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Need access to save your photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your photos will be backed up to lifebox</string>
 	<key>MenloApplicationKey</key>
 	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
 	<key>MenloPushSandboxMode</key>
