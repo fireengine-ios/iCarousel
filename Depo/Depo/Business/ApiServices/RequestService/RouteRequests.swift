@@ -12,7 +12,8 @@ struct RouteRequests {
     
     // MARK: Authentication
     
-    static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/")!
+    //static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/")!
+    static let BaseUrl = URL(string: "https://adepotest.turkcell.com.tr/")!
     static let baseApi = BaseUrl +/ "api"
     static let BaseContactsUrl = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
     static let NewURL = URL(string: "https://mylifebox.com/")!
@@ -115,6 +116,7 @@ struct RouteRequests {
     
     struct HomeCards {
         static let all = BaseUrl +/ "api/assistant/v1"
+        //static let all = BasePreProdUrl +/ "api/assistant/v1"
         static func card(with id: Int) -> URL {
             return all +/ String(id)
         }

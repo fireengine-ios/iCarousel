@@ -28,6 +28,7 @@ enum OperationType: String {
     case latestUploads              = "latestUploads"
     case stylizedPhoto              = "stylizedPhoto"
     case movieCard                  = "movieCard"
+    case animationCard              = "animation"
 }
 
 typealias BlockObject = VoidHandler
@@ -276,6 +277,8 @@ class CardsManager: NSObject {
             cardView = FilterPhotoCard.initFromNib()
         case .movieCard:
             cardView = MovieCard.initFromNib()
+        case .animationCard:
+            cardView = AnimationCard.initFromNib()
         }
         
         cardView.set(object: serverObject)
