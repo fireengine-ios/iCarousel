@@ -18,7 +18,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var refreshControl: UIRefreshControl!
+    private var refreshControl = UIRefreshControl()
     
     let homePageDataSource = BaseCollectionViewDataSource()
     
@@ -54,10 +54,9 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     private func configurateRefreshControl() {
-        refreshControl = UIRefreshControl()
         refreshControl.tintColor = ColorConstants.whiteColor
         refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
-        collectionView!.addSubview(refreshControl)
+        collectionView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
