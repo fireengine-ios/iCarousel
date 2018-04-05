@@ -39,71 +39,56 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         
         let group = DispatchGroup()
         let queue = DispatchQueue(label: "GetMyStreamData")
+
+        group.enter()
+        faceImageAllowed { [weak self] result in
+            self?.getAlbums(group: group)
+            self?.getStories(group: group)
+            
+            if result == true {
+                self?.getFaceImageItems(group: group)
+            }
+            group.leave()
+        }
         
+        group.notify(queue: queue) { [weak self] in
+            self?.operationSuccessed()
+        }
+    }
+    
+    private func getAlbums(group: DispatchGroup) {
         group.enter()
-        group.enter()
-        group.enter()
-        group.enter()
-        group.enter()
-        
         let albumService = AlbumService(requestSize: 4)
         albumService.allAlbums(sortBy: .date, sortOrder: .desc, success: { [weak self] albums in
             DispatchQueue.main.async {
                 self?.dataStorage.addNew(item: SliderItem(withAlbumItems: albums))
                 group.leave()
             }
-        }, fail: { [weak self] in
-            DispatchQueue.main.async {
-                self?.output.operationFailed()
-                group.leave()
-            }
+            }, fail: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.output.operationFailed()
+                    group.leave()
+                }
         })
-
+    }
+    
+    private func getStories(group: DispatchGroup) {
+        group.enter()
         let storiesService = StoryService(requestSize: 4)
         storiesService.allStories(success: { [weak self] stories in
             DispatchQueue.main.async {
                 self?.dataStorage.addNew(item: SliderItem(withStoriesItems: stories))
                 group.leave()
             }
-        }, fail: { [weak self] in
-            DispatchQueue.main.async {
-                self?.output.operationFailed()
-                group.leave()
-            }
-        })
-        
-        faceImageAllowed { [weak self] result in
-            if result == true {
-                self?.getThumbnails(forType: .people, group: group)
-                self?.getThumbnails(forType: .things, group: group)
-                self?.getThumbnails(forType: .places, group: group)
-            } else {
+            }, fail: { [weak self] in
                 DispatchQueue.main.async {
-                    group.leave()
-                    group.leave()
+                    self?.output.operationFailed()
                     group.leave()
                 }
-            }
-        }
-        
-        group.notify(queue: queue) { [weak self] in
-             DispatchQueue.main.async {
-                guard let `self` = self else {
-                    return
-                }
-                
-                let items = self.currentItems.sorted(by: { item1, item2 -> Bool in
-                    let type1 = item1.type ?? .album
-                    let type2 = item2.type ?? .album
-                    return type1.rawValue < type2.rawValue
-                })
-                
-                self.output.operationSuccessed(withItems: items)
-            }
-        }
+        })
     }
     
-    fileprivate func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
+    private func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
         let accountService = AccountService()
         accountService.faceImageAllowed(success: { response in
             if let response = response as? FaceImageAllowedResponse, let allowed = response.allowed {
@@ -120,7 +105,8 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         })
     }
     
-    fileprivate func getThumbnails(forType type: FaceImageType, group: DispatchGroup) {
+    private func getThumbnails(forType type: FaceImageType, group: DispatchGroup) {
+        group.enter()
         faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: type), success: { [weak self] response in
             log.debug("FaceImageService \(type.description) Thumbnails success")
             
@@ -144,6 +130,35 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
                     group.leave()
                 }
         })
+    }
+    
+    private func getFaceImageItems(group: DispatchGroup) {
+        getThumbnails(forType: .people, group: group)
+        getThumbnails(forType: .things, group: group)
+        getThumbnails(forType: .places, group: group)
+    }
+    
+    private func updateFaceImageItems() {
+        let group = DispatchGroup()
+        let queue = DispatchQueue(label: "UpdateFaceImageItems")
+        
+        getFaceImageItems(group: group)
+        
+        group.notify(queue: queue) { [weak self] in
+            self?.operationSuccessed()
+        }
+    }
+    
+    private func operationSuccessed() {
+        let items = currentItems.sorted(by: { item1, item2 -> Bool in
+            let type1 = item1.type ?? .album
+            let type2 = item2.type ?? .album
+            return type1.rawValue < type2.rawValue
+        })
+        
+        DispatchQueue.main.async {
+            self.output.operationSuccessed(withItems: items)
+        }
     }
     
     //Protocol ItemOperationManagerViewProtocol
@@ -174,6 +189,19 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String) {
         requestAllItems()
+    }
+    
+    func finishedUploadFile(file: WrapData) {
+        var needUpdate = false
+        currentItems.forEach { item in
+            if let type = item.type, type.isFaceImageType(),
+                let previews = item.previewItems, previews.count < 4 {
+                needUpdate = true
+            }
+        }
+        if needUpdate {
+            updateFaceImageItems()
+        }
     }
 
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {

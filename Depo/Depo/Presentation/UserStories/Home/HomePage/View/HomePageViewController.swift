@@ -18,6 +18,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private var refreshControl = UIRefreshControl()
+    
     let homePageDataSource = BaseCollectionViewDataSource()
     
     var navBarConfigurator = NavigationBarConfigurator()
@@ -45,11 +47,21 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         
+        configurateRefreshControl()
+        
+        showSpiner()
         output.homePagePresented()
+    }
+    
+    private func configurateRefreshControl() {
+        refreshControl.tintColor = ColorConstants.whiteColor
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateNavigationItemsState(state: true)
         
         output.viewIsReady()
         
@@ -82,19 +94,32 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     func configureNavBarActions() {
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
+            self?.updateNavigationItemsState(state: false)
             self?.output.showSearch(output: self)
         })
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
+            self?.updateNavigationItemsState(state: false)
             self?.output.showSettings()
         })
         navBarConfigurator.configure(right: [setting, search], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        
+    }
+    
+    func updateNavigationItemsState(state: Bool) {
+        guard let items = navigationItem.rightBarButtonItems else {
+            return
+        }
+        
+        for item in items {
+            item.isEnabled = state
+        }
     }
         
     // MARK: HomePageViewInput
     
-    func setupInitialState() {
-        
+    func stopRefresh() {
+        hideSpiner()
     }
     
     
@@ -139,6 +164,12 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     func cancelSearch() { }
     
     func previewSearchResultsHide() { }
+    
+    @objc func reloadData() {
+        showSpiner()
+        refreshControl.endRefreshing()
+        output.needRefresh()
+    }
     
 }
 

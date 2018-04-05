@@ -23,7 +23,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func setupConfig(withConfig config: EditingBarConfig) {
-        var itemTupple: [(String, String)] = []
+        var itemTupple: [(String, String, String)] = []
         for type in config.elementsConfig {
             switch type {
             case .delete:
@@ -475,13 +475,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     // MARK: - Interactor output
     
     override func operationFinished(type: ElementTypes) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.unselectAll()
         basePassingPresenter?.operationFinished(withType: type, response: nil)
     }
     
     override func operationFailed(type: ElementTypes, message: String) {
-        compliteAsyncOperationEnableScreen()
+        completeAsyncOperationEnableScreen()
         view.unselectAll()
         basePassingPresenter?.operationFailed(withType: type)
         UIApplication.showErrorAlert(message: message)

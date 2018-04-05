@@ -6,6 +6,8 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
+import Alamofire
+
 struct AlbumsPatch {
     static let album =  "/api/album"
 //    static let deleteAlbumss =  "/api/album"
@@ -154,10 +156,10 @@ class AlbumService: RemoteItemsService {
 }
 
 
-typealias PhotosAlbumOperation = () -> Swift.Void
-typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Swift.Void
-typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Swift.Void
-typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Swift.Void
+typealias PhotosAlbumOperation = () -> Void
+typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Void
+typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Void
+typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Void
 
 class PhotosAlbumService: BaseRequestService {
     
@@ -301,5 +303,12 @@ class PhotosAlbumService: BaseRequestService {
         group.notify(queue: DispatchQueue.main) {
             success?(allItems)
         }
+    }
+    
+    func getAlbum(for uuid: String, handler: @escaping ResponseHandler<AlbumServiceResponse>) {
+        let url = RouteRequests.BaseUrl +/ "api/album/\(uuid)"
+        SessionManager.default
+            .request(url)
+            .responseObject(handler)
     }
 }

@@ -80,6 +80,13 @@
 "Cancel" = "Cancel";
 "Info" = "Info";
 "You can open settings and cancel subscption." = "You can open settings and cancel subscption.";
+"Google Play Store" = "Google Play Store";
+"AppStore" = "AppStore";
+"Successful purchase." = "Successful purchase.";
+"Invalid purchase. AppStore does not verify purchase for the given parameters." = "Invalid purchase. AppStore does not verify purchase for the given parameters.";
+"A temporary error has occurred due to technical reasons." = "A temporary error has occurred due to technical reasons.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation.";
+"Shows that a response operation is done for the given receipt." = "Shows that a response operation is done for the given receipt.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription";
 "You can visit iTunes to cancel your subscription" = "You can visit iTunes to cancel your subscription";
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2";
@@ -194,6 +201,7 @@
 "Upload Photos" = "Upload Photos";
 "Video album is automatically created, therefore cannot be deleted" = "Video album is automatically created, therefore cannot be deleted";
 "You cannot upload any video to auto generated video album" = "You cannot upload any video to auto generated video album";
+"You have no any files" = "You have no any files";
 "You don’t have any albums on your Lifebox yet." = "You don’t have any albums on your Lifebox yet.";
 "Start creating albums" = "Start creating albums";
 "Add" = "Add";
@@ -370,6 +378,7 @@
 "Start adding your music" = "Start adding your music";
 "You don’t have any music on your Lifebox yet." = "You don’t have any music on your Lifebox yet.";
 "Folder is Empty" = "Folder is Empty";
+"Album is Empty" = "Album is Empty";
 "Folder Items" = "Items";
 "Delete" = "Delete";
 "Move" = "Move";
@@ -554,7 +563,7 @@
 "Login" = "Login";
 "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>";
 "Accept  Terms" = "Accept  Terms";
-"Start Using" = "Start Using";
+"Get Started" = "Get Started";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
 "Welcome to Lifebox!" = "Welcome to Lifebox!";
 "You need to confirm the User Agreement to continue." = "You need to confirm the User Agreement to continue.";
@@ -616,6 +625,10 @@
 "Selected" = "Selected";
 "Show & Hide" = "Show & Hide";
 "Show and Hide" = "Show and Hide";
+"Home" = "Home";
+"PhotosAndViedos" = "Photos and Videos";
+"Music" = "Music";
+"Documents" = "Documents";
 "Done" = "Done";
 "+Add a Name" = "+Add a Name";
 "+Add Name" = "+Add Name";
@@ -627,6 +640,8 @@
 "this person" = "this person";
 "Photos" = "Photos";
 "We couldn't find anybody on your Lifebox yet." = "We couldn't find anybody on your Lifebox yet.";
+"We couldn’t find any place on your Lifebox yet." = "We couldn’t find any place on your Lifebox yet.";
+"We couldn’t find anything on your Lifebox yet." = "We couldn’t find anything on your Lifebox yet.";
 "Not selected" = "Not selected";
 "E-mail is empty" = "E-mail is empty";
 "Filter Card" = "Filter Card";
@@ -635,3 +650,7 @@
 "Never" = "Never";
 "Approve" = "Approve";
 "E-Mail Entry" = "E-Mail Entry";
+"Importing files" = "Importing files %@%%";
+"Dropbox authorisation error" = "Dropbox authorisation error";
+"dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
+"dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";

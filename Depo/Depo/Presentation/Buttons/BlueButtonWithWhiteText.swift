@@ -28,14 +28,7 @@ final class BlueButtonWithMediumWhiteText: BlueButtonWithWhiteText {
         titleLabel?.numberOfLines = 0
         titleLabel?.textAlignment = .center
     }
-    
-    override func setCornerRadius() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            layer.cornerRadius = frame.size.height * 0.4
-        } else {
-            layer.cornerRadius = frame.size.height * 0.5
-        }
-    }
+
 }
 
 final class BlueButtonWithNoFilesWhiteText: BlueButtonWithWhiteText {

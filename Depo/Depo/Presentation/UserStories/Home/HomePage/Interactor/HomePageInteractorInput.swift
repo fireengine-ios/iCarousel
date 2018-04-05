@@ -12,4 +12,6 @@ protocol HomePageInteractorInput {
     
     func homePagePresented()
     
+    func needRefresh()
+    
 }

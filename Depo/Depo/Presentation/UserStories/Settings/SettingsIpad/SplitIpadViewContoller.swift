@@ -41,8 +41,8 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     }
     
     func goToIportPhotos() {
-        if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().importPhotos!])
+        if let left = leftController, let controller = RouterVC().importPhotos {
+            configurateWithControllers(leftViewController: left, controllers: [controller])
         }
     }
     
@@ -59,15 +59,15 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     }
     
     func goToHelpAndSupport() {
-        if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().helpAndSupport!])
+        if let left = leftController, let controller = RouterVC().helpAndSupport {
+            configurateWithControllers(leftViewController: left, controllers: [controller])
         }
     }
     
     func goToUsageInfo() {
-        if let left = leftController {
-            let navVC = UINavigationController(rootViewController: RouterVC().usageInfo!)
-            configurateWithControllers(leftViewController: left, controllers: [navVC])
+        if let left = leftController, let controller = RouterVC().usageInfo {
+            
+            configurateWithControllers(leftViewController: left, controllers: [controller])
         }
     }
     

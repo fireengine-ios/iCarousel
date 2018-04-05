@@ -8,17 +8,32 @@
 
 import UIKit
 
-typealias ImageNameToTitleTupple = (imageName: String, title: String)
+enum AccessibilityImageType: String {
+    case outlineHome
+    case outlinePhotosVideos
+    case outlineMusic
+    case outlineDoc
+}
+
+typealias ImageNameToTitleTupple = (imageName: String, title: String, accessibilityTitle: String)
 
 class CustomTabBar: UITabBar {
     
     func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple]) {
-
         tintColor = ColorConstants.blueColor
-        let items = names.map {CustomTabBarItem(title: $0.title.isEmpty ? nil : $0.title,
-                                                   image: UIImage(named: $0.imageName),
-                                                   tag: 0)
+        
+        let items: [CustomTabBarItem] = names.map { item in
+            
+            let tabBarItem = CustomTabBarItem(title: item.title, image: UIImage(named: item.imageName), tag: 0)
+            tabBarItem.isAccessibilityElement = true
+
+            if !item.accessibilityTitle.isEmpty {
+                tabBarItem.accessibilityLabel = item.accessibilityTitle
+            }
+        
+            return tabBarItem
         }
+        
         items[2].isEnabled = false
         
         if !Device.isIpad {
