@@ -30,29 +30,11 @@ class ViewController: UIViewController {
         return statusBarStyle
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        changeStatusBarStyleIfNeed()
-    }
-    
     func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {
         if !Device.isIpad, UIDevice.current.orientation.isContained(in: [.landscapeLeft, .landscapeRight]) {
             statusBarHidden = true
         } else {
             statusBarHidden = hidden
         }
-    }
-    
-    private func changeStatusBarStyleIfNeed() {
-        if UIApplication.shared.statusBarStyle != preferredStatusBarStyle {
-            let topVC = UIApplication.topController()
-            if let tabBarVC = topVC as? TabBarViewController {
-                tabBarVC.statusBarStyle = preferredStatusBarStyle
-            } else if let navController = topVC?.navigationController as? NavigationController {
-                navController.statusBarStyle = preferredStatusBarStyle
-            }
-        }
-    }
-    
+    }    
 }

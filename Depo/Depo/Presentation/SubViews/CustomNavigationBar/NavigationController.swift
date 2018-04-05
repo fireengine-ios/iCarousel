@@ -29,4 +29,8 @@ class NavigationController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyle
     }
+    
+    override var childViewControllerForStatusBarStyle: UIViewController? {
+        return viewControllers.last
+    }
 }

@@ -156,6 +156,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         plussButton.accessibilityLabel = TextConstants.accessibilityPlus
     }
+       
+    override var childViewControllerForStatusBarStyle: UIViewController? {
+        return activeNavigationController?.viewControllers.last
+    }
     
     deinit {
         player.delegates.remove(self)
