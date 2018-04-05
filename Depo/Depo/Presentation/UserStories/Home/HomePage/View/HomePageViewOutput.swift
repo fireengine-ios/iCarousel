@@ -23,4 +23,6 @@ protocol HomePageViewOutput {
     func favoritesPressed()
     
     func createStory()
+    
+    func needRefresh()
 }

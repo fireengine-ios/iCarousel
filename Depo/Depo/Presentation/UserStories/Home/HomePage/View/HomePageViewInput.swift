@@ -13,5 +13,6 @@ protocol HomePageViewInput: class, CurrentNavController {
         Setup initial state of the view
     */
 
-    func setupInitialState()
+    func stopRefresh()
+    
 }
