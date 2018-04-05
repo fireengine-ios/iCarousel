@@ -156,15 +156,15 @@ class LoadingImageView: UIImageView {
         
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
 
-//            do {
-//                let data = try Data(contentsOf: url)
-//                let image = UIImage.sd_animatedGIF(with: data)
-//                DispatchQueue.main.async { [weak self] in
-//                    self?.image = image
-//                }
-//            } catch {
-//                return
-//            }
+            do {
+                let data = try Data(contentsOf: url)
+                let image = UIImage.sd_animatedGIF(with: data)
+                DispatchQueue.main.async { [weak self] in
+                    self?.image = image
+                }
+            } catch {
+                return
+            }
         
             
             
