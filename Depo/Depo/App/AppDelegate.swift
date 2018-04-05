@@ -202,6 +202,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AutoSyncDataStorage.clear()
         }
         
+        WidgetService.shared.notifyWidgetAbout(status: .stoped)
+        
         UserDefaults.standard.synchronize()
         player.stop()
     }
