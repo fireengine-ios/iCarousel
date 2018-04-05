@@ -10,10 +10,16 @@ import Foundation
 import CoreData
 import Photos
 
+extension Notification.Name {
+    public static let allLocalMediaItemsHaveBeenLoaded = Notification.Name("allLocalMediaItemsHaveBeenLoaded")
+}
+
 class CoreDataStack: NSObject {
     
     typealias AppendingLocaclItemsFinishCallback = () -> Void
     typealias AppendingLocaclItemsProgressCallback = (Float) -> Void
+    
+    typealias AppendingLocalItemsPageAppended = ([Item])->Void
     
     @objc static let `default` = CoreDataStack()
     
@@ -37,9 +43,6 @@ class CoreDataStack: NSObject {
         
         return coordinator
     }()
-    
-//    var appendingItemsFinishBlock: AppendingLocaclItemsFinishCallback?
-    var inProcessAppendingLocalFiles = false
 
     var mainContext: NSManagedObjectContext
     
@@ -51,14 +54,19 @@ class CoreDataStack: NSObject {
     
     var backgroundContext: NSManagedObjectContext
     
-    let queue = DispatchQueue(label: "com.lifebox.CoreDataStack")
+    let privateQueue = DispatchQueue(label: "com.lifebox.CoreDataStack", attributes: .concurrent)//(label: "com.lifebox.CoreDataStack")
     
+    var pageAppendedCallBack: AppendingLocalItemsPageAppended?
+    
+    var inProcessAppendingLocalFiles = false
+    
+    var originalAssetsBeingAppended = AssetsСache()
+    var nonCloudAlreadySavedAssets = AssetsСache()
     
     override init() {
-
+        
         mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        
         
         super.init()
         mainContext.persistentStoreCoordinator = persistentStoreCoordinator
@@ -68,8 +76,6 @@ class CoreDataStack: NSObject {
     func clearDataBase() {
         deleteRemoteFiles()
     }
-    
-//    func
     
     func deleteRemoteFiles() {
         // Album has remote status by default for now
@@ -86,7 +92,7 @@ class CoreDataStack: NSObject {
     }
 
     func deleteLocalFiles() {
-        DispatchQueue.main.async {
+        
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
             let predicateRules = PredicateRules()
             guard let predicate = predicateRules.predicate(filters: [.localStatus(.local)]) else {
@@ -94,7 +100,7 @@ class CoreDataStack: NSObject {
             }
             fetchRequest.predicate = predicate
             self.deleteObjects(fromFetch: fetchRequest)
-        }
+        
     }
     
     func getLocalDuplicates(remoteItems: [Item]) -> [Item] {
@@ -103,20 +109,13 @@ class CoreDataStack: NSObject {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
         fetchRequest.predicate = NSPredicate(format: "md5Value IN %@", remoteMd5s)
         
-        guard let localDuplicatesMediaItems = (try? CoreDataStack.default.mainContext.fetch(fetchRequest)) as? [MediaItem] else {
+        guard let localDuplicatesMediaItems = (try? CoreDataStack.default.newChildBackgroundContext.fetch(fetchRequest)) as? [MediaItem] else {
             return []
         }
         
-        return localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
+        return localDuplicatesMediaItems.compactMap { WrapData(mediaItem: $0) }
     }
 
-    /// MAYBE WILL BE NEED
-//    private func deleteAllObjects(forEntity entity: NSEntityDescription) {
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
-//        fetchRequest.entity = entity
-//        deleteObjects(fromFetch: fetchRequest)
-//    }
-    
     private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>]) {
         for fetchRequest in fetchRequests {
             self.deleteObjects(fromFetch: fetchRequest)
@@ -124,52 +123,69 @@ class CoreDataStack: NSObject {
     }
     
     private func deleteObjects(fromFetch fetchRequest: NSFetchRequest<NSFetchRequestResult>) {
-        let context = mainContext
-        
-        guard let fetchResult = try? context.fetch(fetchRequest),
-            let unwrapedObjects = fetchResult as? [NSManagedObject],
-            unwrapedObjects.count > 0 else {
-                
-                return
+        let context = newChildBackgroundContext
+        context.perform { [weak self] in
+            guard let fetchResult = try? context.fetch(fetchRequest),
+                let unwrapedObjects = fetchResult as? [NSManagedObject],
+                unwrapedObjects.count > 0 else {
+                    
+                    return
+            }
+            for object in unwrapedObjects {
+                context.delete(object)
+            }
+            self?.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
+                debugPrint("Data base deleted objects")
+            })
+            
         }
-        for object in unwrapedObjects {
-            context.delete(object)
-        }
-        saveDataForContext(context: context, saveAndWait: true)
-        debugPrint("Data base should be cleared any moment now")
     }
     
-    func saveMainContext() {
+    func saveMainContext(savedMainCallBack: VoidHandler?) {
         mainContext.processPendingChanges()
-        saveDataForContext(context: mainContext, saveAndWait: true)
+        if mainContext.hasChanges {
+            mainContext.performAndWait{
+                do {
+                    log.debug("mainContext.save()()")
+                    try mainContext.save()
+                    
+                    privateQueue.async {
+                        savedMainCallBack?()
+                    }
+                } catch {
+                    log.debug("Error saving context mainContext.save()()")
+                    print("Error saving context ___ ")
+                }
+            }
+        }
     }
     
-    @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true) {
-        debugPrint("save context")
-        let saveBlock: VoidHandler = {
+    @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true,
+                                  savedCallBack: VoidHandler?) {
+
+        log.debug("saveDataForContext()")
+        let saveBlock: VoidHandler = { [weak self] in
+            guard let `self` = self else {
+                return
+            }
             do {
+                log.debug("saveDataForContext() save()")
                 try context.save()
-                if !self.inProcessAppendingLocalFiles {
-                    //TODO: some NOTIFICATION OR ACTUAL finished block
-                }
             } catch {
+                log.debug("saveDataForContext() save() Error saving contex")
                 print("Error saving context ___ ")
+            }
+            
+            if context.parent == self.mainContext, context != self.mainContext {
+                self.saveMainContext(savedMainCallBack: {
+                    savedCallBack?()
+                })
+                return
             }
         }
         
         if context.hasChanges {
-            if (saveAndWait) {
-                context.performAndWait(saveBlock)
-            } else {
-                context.perform(saveBlock)
-            }
-        }
-        
-        if context.parent == mainContext, context != mainContext {
-            DispatchQueue.main.async {
-                self.saveMainContext()
-            }
-            return
+            context.perform(saveBlock)
         }
     }
 }

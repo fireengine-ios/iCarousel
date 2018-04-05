@@ -131,18 +131,12 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     // MARK: - EULA
     
     func onSuccessEULA() {
-        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
-            DispatchQueue.main.async {
-                self?.completeAsyncOperationEnableScreen()
-                self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
-            }
-        }, end: { [weak self] in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.hideProgressSpinner()
-                self?.completeAsyncOperationEnableScreen()
-                self?.openEmptyEmailIfNeedOrOpenSyncSettings()
-            }
-        })
+        completeAsyncOperationEnableScreen()
+//        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+ 
+       
+        openEmptyEmailIfNeedOrOpenSyncSettings()
+ 
     }
     
     func onFailEULA() {

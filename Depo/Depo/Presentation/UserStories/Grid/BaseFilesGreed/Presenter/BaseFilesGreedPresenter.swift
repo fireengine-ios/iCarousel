@@ -41,6 +41,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var needShowProgressInCells = false
     
+    private let dispatchQueue = DispatchQueue(label: "com.lifebox.baseFilesGreed")
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
@@ -140,7 +142,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
         log.debug("BaseFilesGreedPresenter compoundAllFiltersAndNextItems")
-
 //        startAsyncOperation()
         interactor.nextItems(searchText,
                              sortBy: sortedRule.sortingRules,
@@ -149,6 +150,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
     func reloadData() {
         log.debug("BaseFilesGreedPresenter reloadData")
+        debugPrint("BaseFilesGreedPresenter reloadData")
 
         dataSource.dropData()
         dataSource.currentSortType = sortedRule
@@ -188,13 +190,23 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func getContentWithSuccessEnd() {
         log.debug("BaseFilesGreedPresenter getContentWithSuccessEnd")
         debugPrint("???getContentWithSuccessEnd()")
-        asyncOperationSucces()
+//        asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
-        dataSource.appendCollectionView(items: [])
-        dataSource.reloadData()
-        updateNoFilesView()
-        updateThreeDotsButton()
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            self.dataSource.appendCollectionView(items: [], pageNum: self.interactor.requestPageNum)
+        }
+//        dataSource.reloadData()
+//        updateNoFilesView()
+//=======
+//        dataSource.appendCollectionView(items: [])
+//        dataSource.reloadData()
+//        updateNoFilesView()
+//        updateThreeDotsButton()
+//>>>>>>> develop
     }
     
     func getContentWithSuccess(items: [WrapData]) {
@@ -203,16 +215,25 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (view == nil) {
             return
         }
-        asyncOperationSucces()
-        view.stopRefresher()
-        
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+           self.dataSource.appendCollectionView(items: items, pageNum: self.interactor.requestPageNum)
+        }
+        
 
-        dataSource.appendCollectionView(items: items)
 
-        dataSource.reloadData()
-        updateNoFilesView()
-        updateThreeDotsButton()
+//        dataSource.reloadData()
+//        updateNoFilesView()
+//=======
+//        dataSource.appendCollectionView(items: items)
+//
+//        dataSource.reloadData()
+//        updateNoFilesView()
+//        updateThreeDotsButton()
+//>>>>>>> develop
     }
     
     func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
@@ -223,8 +244,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         debugPrint("???getContentWithSuccessEnd()")
         asyncOperationSucces()
-        view.stopRefresher()
+//        view.stopRefresher()
         if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView {
+
             dataSourceForArray.configurateWithArray(array: array)
         } else {
             dataSource.reloadData()
@@ -325,6 +347,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         reloadData()
     }
     
+    func filesAppendedAndSorted() {
+        DispatchQueue.main.async {
+            self.view.stopRefresher()
+            self.updateNoFilesView()
+            self.asyncOperationSucces()
+        }
+    }
+
     func didDelete(items: [BaseDataSourceItem]) {
         updateNoFilesView()
         updateThreeDotsButton()

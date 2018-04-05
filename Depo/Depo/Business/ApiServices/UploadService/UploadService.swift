@@ -773,12 +773,12 @@ final class UploadOperations: Operation {
                                 UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
                                 ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
                             })
-                        }
+                        } 
                         self?.item.tmpDownloadUrl = resp.tempDownloadURL
                     }
                     
                     customSucces()
-                    
+
                     }, fail: customFail)
                 
                 }, fail: { error in

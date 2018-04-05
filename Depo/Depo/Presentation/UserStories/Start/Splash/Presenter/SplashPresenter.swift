@@ -19,6 +19,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
         showPasscodeIfNeed()
+        CoreDataStack.default.appendLocalMediaItems(completion: nil)
     }
     
     private func showPasscodeIfNeed() {
@@ -81,33 +82,27 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onSuccessEULA() {
+        
+        router.navigateToApplication()
         interactor.updateUserLanguage()
     }
     
     private func openApp() {
         storageVars.emptyEmailUp = false
-        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercentage in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.showProgressSpinner(progress: progressPercentage)
-            }
-            
-        }, end: { [weak self] in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.hideProgressSpinner()
+        
                 
-                if (self?.turkcellLogin)! {
-                    let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-                    if launchedBefore {
-                        self?.router.navigateToApplication()
-                    } else {
-                        self?.router.goToSyncSettingsView()
-                        UserDefaults.standard.set(true, forKey: "launchedBefore")
-                    }
-                } else {
-                    self?.router.navigateToApplication()
-                }
+        if turkcellLogin {
+            let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+            if launchedBefore {
+                router.navigateToApplication()
+            } else {
+                router.goToSyncSettingsView()
+                UserDefaults.standard.set(true, forKey: "launchedBefore")
             }
-        })
+        } else {
+            router.navigateToApplication()
+        }
+  
     }
     
     func showEmptyEmail(show: Bool) {

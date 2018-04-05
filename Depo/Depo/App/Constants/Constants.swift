@@ -824,6 +824,8 @@ struct NumericConstants {
     
     static let numberOfElementsInSyncRequest: Int = 30000
     
+    static let numberOfLocalItemsOnPage: Int = 100
+    
     static let animationDuration: Double = 0.3
     static let fastAnimationDuration: Double = 0.1
     
@@ -853,6 +855,8 @@ struct NumericConstants {
     static let maxNumberOfUploadAttempts = 5
     static let secondsBeetweenUploadAttempts = 5
     
+    static let numberOfLocalFilesPage = 100
+
     static let emptyEmailUserCloseLimit = 3
     
     static let logDuration: TimeInterval = 24 * 60 * 60 * 3

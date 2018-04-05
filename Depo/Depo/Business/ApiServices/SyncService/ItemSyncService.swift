@@ -202,19 +202,28 @@ class ItemSyncServiceImpl: ItemSyncService {
 
 extension CoreDataStack {
     func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData]) -> Void) {
-        allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image, completion: { localItems in
-            self.queue.async { [weak self] in
-                self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { items, error in
+
+        
+        backgroundContext.perform { [weak self] in
+            guard let `self` = self else {
+                completion([])
+                return
+            }
+            self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image, completion: {[weak self] items in
+                guard let `self` = self else {
+                    completion([])
+                    return
+                }
+                self.compareRemoteItems(with: items, service: service, fieldValue: fieldValue) { items, error in
                     guard error == nil, let unsyncedItems = items else {
                         print(error!.localizedDescription)
                         completion([])
                         return
                     }
-                    
-                    completion(unsyncedItems)
                 }
-            }
-        })
+            })
+            
+        }
         
     }
     
@@ -223,7 +232,7 @@ extension CoreDataStack {
             handler([], nil)
             return
         }
-        
+        log.debug("LocalMediaStorage compareRemoteItems")
         var localItems = localItems
         var localMd5s = localItems.map { $0.md5 }
         
@@ -233,7 +242,7 @@ extension CoreDataStack {
                 handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
                 return
             }
-            self.queue.async { [weak self] in
+            self.privateQueue.async { [weak self] in
                 for item in items {
                     if item.metaDate < oldestItemDate {
                         finished = true

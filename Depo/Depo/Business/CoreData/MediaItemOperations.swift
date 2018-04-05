@@ -67,14 +67,19 @@ extension CoreDataStack {
                 }
             }
         }
-        saveDataForContext(context: context)
+        saveDataForContext(context: context, savedCallBack: nil)
     }
     
     func updateLocalItemSyncStatus(item: Item) {
         let context = backgroundContext
         context.perform { [weak self] in
+            
+            guard let `self` = self else {
+                return
+            }
+            
             let predicateForRemoteFile = NSPredicate(format: "uuidValue == %@", item.uuid)
-            if let alreadySavedMediaItems = self?.executeRequest(predicate: predicateForRemoteFile, context: context) {
+            let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: context)
                 alreadySavedMediaItems.forEach({ savedItem in
                     //for locals
                     savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
@@ -91,8 +96,9 @@ extension CoreDataStack {
                     
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
-                self?.saveDataForContext(context: context)
-            }
+            
+            self.saveDataForContext(context: context, savedCallBack: nil)
+            
         }
     }
     
@@ -101,7 +107,7 @@ extension CoreDataStack {
     
     func mediaItemByUUIDs(uuidList: [String]) -> [MediaItem] {
         let predicate = NSPredicate(format: "uuidValue IN %@", uuidList)
-        return executeRequest(predicate: predicate, context: mainContext)
+        return executeRequest(predicate: predicate, context: newChildBackgroundContext)
     }
     
     func executeRequest(predicate: NSPredicate, context: NSManagedObjectContext) -> [MediaItem] {

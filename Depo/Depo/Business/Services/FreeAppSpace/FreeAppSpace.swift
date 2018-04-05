@@ -30,15 +30,15 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func getCheckedDuplicatesArray(checkedArray: @escaping([WrapData]) -> Void) {
-        DispatchQueue.main.async {[weak self] in
-            if let `self` = self {
+//        DispatchQueue.main.async {[weak self] in
+//            if let `self` = self {
                 let array = CoreDataStack.default.getLocalDuplicates(remoteItems: self.getDuplicatesObjects())
                 self.duplicatesArray.removeAll()
                 self.duplicatesArray.append(contentsOf: array)
                 self.sortDuplicatesArray()
                 checkedArray(self.duplicatesArray)
-            }
-        }
+//            }
+//        }
     }
     
     func clear() {
@@ -152,7 +152,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         duplicatesArray.removeAll()
         serverDuplicatesArray.removeAll()
         
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             self.localtemsArray.append(contentsOf: self.allLocalItems().sorted { item1, item2 -> Bool in
                 if let date1 = item1.creationDate, let date2 = item2.creationDate {
                     if (date1 > date2) {
@@ -184,7 +184,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             } else {
                 finished()
             }
-        }
+//        }
         
     }
     
@@ -317,7 +317,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func addedLocalFiles(items: [Item]) {
+
         let serverObjectsUUIDs = serverDuplicatesArray.map({ $0.uuid })
+
         for item in items {
             if serverObjectsUUIDs.contains(item.uuid) {
                 localtemsArray.append(item)
