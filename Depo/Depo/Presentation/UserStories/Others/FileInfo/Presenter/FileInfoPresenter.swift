@@ -48,6 +48,11 @@ class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput,
         view.goBack()
     }
     
+    func failedUpdate(error: Error) {
+        asyncOperationSucces()
+        view.showErrorAlert(message: error.description)
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
