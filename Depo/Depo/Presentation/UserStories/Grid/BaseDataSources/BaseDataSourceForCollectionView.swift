@@ -106,6 +106,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private let pageCompounder = PageCompounder()
     
+    private let dispatchQueue = DispatchQueue(label: "com.lifebox.BaseDataSourceForCollectionView")
+    
     private func canShowFolderFilters(filters: [GeneralFilesFiltrationType]) -> Bool {
         for filter in filters {
             switch filter {
@@ -179,7 +181,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         isLocalFilesRequested = true
         
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 complition()
                 return
@@ -223,10 +225,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
-                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
-                                self.delegate?.getNextItems()
-                                return
-                            }
+//                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
+//                                self.delegate?.getNextItems()
+//                                return
+//                            }
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
                                                             
@@ -258,10 +260,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
-                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
-                                self.delegate?.getNextItems()
-                                return
-                            }
+//                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
+//                                self.delegate?.getNextItems()
+//                                return
+//                            }
                             
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
@@ -292,12 +294,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
-                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
-                                self.pageLeftOvers.append(contentsOf: compoundedItems)
-                                self.isLocalFilesRequested = false
-                                self.delegate?.getNextItems()
-                                return
-                            }
+//                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
+//                                self.pageLeftOvers.append(contentsOf: compoundedItems)
+//                                self.isLocalFilesRequested = false
+//                                self.delegate?.getNextItems()
+//                                return
+//                            }
                             
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
@@ -494,7 +496,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             return $0.metaData != nil
         }
-        if nonEmptyMetaItems.isEmpty {
+        if items.isEmpty {
             isPaginationDidEnd = true
         }
         

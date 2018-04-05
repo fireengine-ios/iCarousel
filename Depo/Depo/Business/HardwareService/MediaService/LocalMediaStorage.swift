@@ -74,6 +74,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private let getDetailQueue = OperationQueue()
     
+    private let dispatchQueue = DispatchQueue(label: "com.lifebox.local_media_storage")
+    
     static let notificationPhotoLibraryDidChange = NSNotification.Name(rawValue: "notificationPhotoLibraryDidChange")
     
     static let defaultUrl = URL(string: "http://Not.url.com")!
@@ -582,47 +584,50 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, dict in
-            let failCompletion = {
-                assetInfo.isValid = false
-                semaphore.signal()
-                return
-            }
-            
-            guard let dict = dict else {
-                assetInfo.isValid = false
-                semaphore.signal()
-                return
-            }
-            
-            if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
-                return
-            }
-            
-            if let inCloud = dict[PHImageResultIsInCloudKey] as? Bool, inCloud {
-                print("LOCAL_ITEMS: \(asset.localIdentifier) is in iCloud")
-                failCompletion()
-            }
-            
-            if let error = dict[PHImageErrorKey] as? NSError {
-                print(error.localizedDescription)
-                failCompletion()
-            }
-            
-            if let urlToFile = (avAsset as? AVURLAsset)?.url {
-                do {
-                    assetInfo.url = urlToFile
-                    assetInfo.size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).int64Value
-                    if let name = asset.originalFilename {
-                        assetInfo.name = name
-                    }
-                    debugPrint("ORIGINAL NAME VIDEO is \(assetInfo.name)")
+            self.dispatchQueue.async {
+                let failCompletion = {
+                    assetInfo.isValid = false
                     semaphore.signal()
-                } catch {
+                    return
+                }
+                
+                guard let dict = dict else {
+                    assetInfo.isValid = false
+                    semaphore.signal()
+                    return
+                }
+                
+                if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
+                    return
+                }
+                
+                if let inCloud = dict[PHImageResultIsInCloudKey] as? Bool, inCloud {
+                    print("LOCAL_ITEMS: \(asset.localIdentifier) is in iCloud")
                     failCompletion()
                 }
-            } else {
-                failCompletion()
+                
+                if let error = dict[PHImageErrorKey] as? NSError {
+                    print(error.localizedDescription)
+                    failCompletion()
+                }
+                
+                if let urlToFile = (avAsset as? AVURLAsset)?.url {
+                    do {
+                        assetInfo.url = urlToFile
+                        assetInfo.size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).int64Value
+                        if let name = asset.originalFilename {
+                            assetInfo.name = name
+                        }
+                        debugPrint("ORIGINAL NAME VIDEO is \(assetInfo.name)")
+                        semaphore.signal()
+                    } catch {
+                        failCompletion()
+                    }
+                } else {
+                    failCompletion()
+                }
             }
+            
         }
     
         getDetailQueue.addOperation(operation)
@@ -638,43 +643,45 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         let operation = GetOriginalImageOperation(photoManager: self.photoManger, asset: asset) { data, string, orientation, dict in
-            let failCompletion = {
-                assetInfo.isValid = false
-                semaphore.signal()
-                return
-            }
-            
-            guard let dict = dict else {
-                assetInfo.isValid = false
-                semaphore.signal()
-                return
-            }
-            
-            if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
-                return
-            }
-            
-            if let error = dict[PHImageErrorKey] as? NSError {
-                print(error.localizedDescription)
-                failCompletion()
-            }
-            
-            if let inCloud = dict[PHImageResultIsInCloudKey] as? Bool, inCloud {
-                print("LOCAL_ITEMS: \(asset.localIdentifier) is in iCloud")
-                failCompletion()
-            }
-            
-            if let dataValue = data {
-                if let name = asset.originalFilename {
-                    assetInfo.name = name
+            self.dispatchQueue.async {
+                let failCompletion = {
+                    assetInfo.isValid = false
+                    semaphore.signal()
+                    return
                 }
-                if let unwrapedUrl = dict["PHImageFileURLKey"] as? URL {
-                    assetInfo.url = unwrapedUrl
+                
+                guard let dict = dict else {
+                    assetInfo.isValid = false
+                    semaphore.signal()
+                    return
                 }
-                assetInfo.size = Int64(dataValue.count)
-                semaphore.signal()
-            } else {
-                failCompletion()
+                
+                if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
+                    return
+                }
+                
+                if let error = dict[PHImageErrorKey] as? NSError {
+                    print(error.localizedDescription)
+                    failCompletion()
+                }
+                
+                if let inCloud = dict[PHImageResultIsInCloudKey] as? Bool, inCloud {
+                    print("LOCAL_ITEMS: \(asset.localIdentifier) is in iCloud")
+                    failCompletion()
+                }
+                
+                if let dataValue = data {
+                    if let name = asset.originalFilename {
+                        assetInfo.name = name
+                    }
+                    if let unwrapedUrl = dict["PHImageFileURLKey"] as? URL {
+                        assetInfo.url = unwrapedUrl
+                    }
+                    assetInfo.size = Int64(dataValue.count)
+                    semaphore.signal()
+                } else {
+                    failCompletion()
+                }
             }
         }
         getDetailQueue.addOperation(operation)

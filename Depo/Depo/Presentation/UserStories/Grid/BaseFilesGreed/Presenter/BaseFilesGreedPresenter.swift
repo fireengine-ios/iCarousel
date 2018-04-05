@@ -41,6 +41,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var needShowProgressInCells = false
     
+    private let dispatchQueue = DispatchQueue(label: "com.lifebox.baseFilesGreed")
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
@@ -191,7 +193,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 //        asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
             }
@@ -218,7 +220,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
         
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
             }
