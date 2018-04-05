@@ -82,7 +82,16 @@ class CollectionViewLayout: UICollectionViewLayout {
     }
     
     override var collectionViewContentSize: CGSize {
-        return CGSize(width: contentWidth, height: contentHeight)
+        //content size should be more then frame size because,  if content size will be less than frame scrolling will not work
+        var calculatedContentHeight = contentHeight
+        if let cView = collectionView {
+            let minContentHeight = cView.frame.size.height + 1 - cView.contentInset.bottom - cView.contentInset.top
+            if contentHeight < minContentHeight {
+                calculatedContentHeight = minContentHeight
+            }
+        }
+        
+        return CGSize(width: contentWidth, height: calculatedContentHeight)
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
