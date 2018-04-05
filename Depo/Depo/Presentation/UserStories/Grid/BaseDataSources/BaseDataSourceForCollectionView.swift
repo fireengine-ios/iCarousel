@@ -171,8 +171,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func compoundItems(pageItems: [WrapData], pageNum: Int, complition: @escaping VoidHandler) {
+        guard !isLocalFilesRequested else {
+            return
+        }
+        
         isLocalFilesRequested = true
-        log.debug("BaseDataSourceForCollectionViewDelegate compoundItems")
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let `self` = self else {
@@ -218,7 +221,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
-                            if compoundedItems.count >= self.pageCompounder.pageSize, !self.isPaginationDidEnd {
+                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
                                 self.delegate?.getNextItems()
                                 return
                             }
@@ -252,6 +255,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             
                             //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
+                            
+                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
+                                self.delegate?.getNextItems()
+                                return
+                            }
+                            
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
                     })
@@ -280,6 +289,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             
                             //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
+                            
+                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
+                                self.delegate?.getNextItems()
+                                return
+                            }
+                            
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
                     })
@@ -489,6 +504,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             DispatchQueue.main.async {
                 self?.collectionView?.reloadData()
                 self?.delegate?.filesAppendedAndSorted()
+                self?.isLocalFilesRequested = false
             }
         })
     }
@@ -935,14 +951,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if isLastCell, isLastSection, !isPaginationDidEnd {
             
-            pageLeftOvers.isEmpty ? delegate?.getNextItems() : compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-                self.collectionView?.reloadData()
-                self.delegate?.filesAppendedAndSorted()
+
+            if pageLeftOvers.isEmpty, !isLocalFilesRequested {
+                delegate?.getNextItems()
+            } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
+                compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] in
+                    guard let `self` = self else {
+                        return
+                    }
+                    self.collectionView?.reloadData()
+                    self.delegate?.filesAppendedAndSorted()
+                    self.isLocalFilesRequested = false
+                    
+                })
+            }
                 
-            })
+                
             
             debugPrint("BaseDataSourceForCollectionViewDelegate isLastCell, isLastSection, !isPaginationDidEnd ")
         }
