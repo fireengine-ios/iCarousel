@@ -33,13 +33,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let topVC = UIApplication.topController()
-        if let tabBarVC = topVC as? TabBarViewController {
-            tabBarVC.statusBarStyle = preferredStatusBarStyle
-            if let navVC = tabBarVC.activeNavigationController as? NavigationController {
-                navVC.statusBarStyle = preferredStatusBarStyle
-            }
-        }
+        changeStatusBarStyleIfNeed()
     }
     
     func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {
@@ -47,6 +41,17 @@ class ViewController: UIViewController {
             statusBarHidden = true
         } else {
             statusBarHidden = hidden
+        }
+    }
+    
+    private func changeStatusBarStyleIfNeed() {
+        if UIApplication.shared.statusBarStyle != preferredStatusBarStyle {
+            let topVC = UIApplication.topController()
+            if let tabBarVC = topVC as? TabBarViewController {
+                tabBarVC.statusBarStyle = preferredStatusBarStyle
+            } else if let navController = topVC?.navigationController as? NavigationController {
+                navController.statusBarStyle = preferredStatusBarStyle
+            }
         }
     }
     
