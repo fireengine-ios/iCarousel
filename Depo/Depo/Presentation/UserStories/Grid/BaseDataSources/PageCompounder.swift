@@ -16,7 +16,7 @@ fileprivate protocol PageSortingPredicates {
 
 class PageCompounder {
     
-    var pageSize: Int = 100
+    var pageSize: Int = NumericConstants.numberOfLocalItemsOnPage
     
     private let coreData = CoreDataStack.default
     
@@ -29,10 +29,7 @@ class PageCompounder {
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                     in: requestContext)
-        
-        
-     
-        
+
     }
     
     func compoundFirstPage(pageItems: [WrapData],
@@ -91,8 +88,7 @@ class PageCompounder {
         tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
         let actualArray = tempoArray.prefix(pageSize)
-        let leftoversFirstIndex = (tempoArray.count - actualArray.count > 0) ? actualArray.count : 0
-        let leftovers = tempoArray.suffix(from: leftoversFirstIndex)
+        let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
         compoundedCallback(Array(actualArray), Array(leftovers))
     }
     
@@ -153,8 +149,7 @@ class PageCompounder {
         tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
         let actualArray = tempoArray.prefix(pageSize)
-        let leftoversFirstIndex = (tempoArray.count - actualArray.count > 0) ? actualArray.count : 0
-        let leftovers = tempoArray.suffix(from: leftoversFirstIndex)
+        let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
         compoundedCallback(Array(actualArray), Array(leftovers))
     }
     
@@ -217,8 +212,7 @@ class PageCompounder {
         tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
         let actualArray = tempoArray.prefix(pageSize)
-        let leftoversFirstIndex = (tempoArray.count - actualArray.count > 0) ? actualArray.count : 0
-        let leftovers = tempoArray.suffix(from: leftoversFirstIndex)
+        let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
         compoundedCallback(Array(actualArray), Array(leftovers))
     }
     
