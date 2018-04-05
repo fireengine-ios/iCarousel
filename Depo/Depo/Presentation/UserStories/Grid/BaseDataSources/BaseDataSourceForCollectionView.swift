@@ -60,7 +60,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     internal var preferedCellReUseID: String?
     
-    var canSelectionState = true
+    var canSelectionState = false
     
     var isSelectionStateActive = false
     
@@ -198,6 +198,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             switch specificFilters {
             case .video, .image:
+                self.isLocalPaginationOn = true
                 if originalRemotes {
                     self.isLocalPaginationOn = true
                 }
