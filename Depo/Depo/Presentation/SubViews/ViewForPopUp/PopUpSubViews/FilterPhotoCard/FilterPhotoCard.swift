@@ -133,7 +133,7 @@ final class FilterPhotoCard: BaseView {
                 case .success(let asset):
                     self?.showPhotoVideoDetail(with: asset)
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
             }
         }
@@ -159,7 +159,7 @@ final class FilterPhotoCard: BaseView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
             }
         }

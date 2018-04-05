@@ -290,7 +290,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     
     func profileWontChangeWith(error: Error) {
         let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                      message: error.localizedDescription,
+                                      message: error.description,
                                       image: .error,
                                       buttonTitle: TextConstants.ok)
         present(vc, animated: true, completion: nil)

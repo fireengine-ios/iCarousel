@@ -47,7 +47,7 @@ class BaseView: UIView, NibInit {
                 case .success(_):
                     return
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
             }
         }

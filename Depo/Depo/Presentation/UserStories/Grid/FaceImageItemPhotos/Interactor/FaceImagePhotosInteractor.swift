@@ -72,7 +72,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                         }
                     }
                 }) { [weak self] error in
-                    self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+                    self?.output.asyncOperationFail(errorMessage: error.description)
                 }
             }
         }
@@ -97,7 +97,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                         }
                     }
                 }) { [weak self] error in
-                    self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+                    self?.output.asyncOperationFail(errorMessage: error.description)
                 }
             }
         }
@@ -122,7 +122,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                         }
                     }
                 }) { [weak self] error in
-                    self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+                    self?.output.asyncOperationFail(errorMessage: error.description)
                 }
             }
         }

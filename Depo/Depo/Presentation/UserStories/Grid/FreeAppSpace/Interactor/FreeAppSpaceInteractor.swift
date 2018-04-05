@@ -72,7 +72,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     presenter.canceled()
                 }
             }
-            UIApplication.showErrorAlert(message: error.localizedDescription)
+            UIApplication.showErrorAlert(message: error.description)
         })
     }
     

@@ -137,7 +137,7 @@ class FilesDownloader {
         do {
             try fileManager.createDirectory(at: tmpDirectoryURL, withIntermediateDirectories: true, attributes: nil)
         } catch {
-            fail(error.localizedDescription)
+            fail(error.description)
             return
         }
         

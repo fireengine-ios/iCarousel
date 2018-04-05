@@ -139,7 +139,7 @@ final class FeedbackViewController: UIViewController, FeedbackViewInput, DropDov
             Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [TextConstants.feedbackEmail], success: {
                 //
             }, fail: { error in
-                UIApplication.showErrorAlert(message: error?.localizedDescription ?? TextConstants.feedbackEmailError)
+                UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
             })
         } else {
             UIApplication.showErrorAlert(message: TextConstants.feedbackEmailError)

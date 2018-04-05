@@ -49,7 +49,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareSmallSize(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+                UIApplication.showErrorAlert(message: errorResponse.description)
             })
         }
         
@@ -60,7 +60,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareOrignalSize(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+                UIApplication.showErrorAlert(message: errorResponse.description)
             })
         }
         controler.addAction(originalAction)
@@ -70,7 +70,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+                UIApplication.showErrorAlert(message: errorResponse.description)
             })
         }
         controler.addAction(shareViaLinkAction)
@@ -114,7 +114,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         do {
                             try FileManager.default.removeItem(at: directoryURL)
                         } catch {
-                            print(error.localizedDescription)
+                            print(error.description)
                         }
                     }
                     
@@ -408,7 +408,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 self?.router.createStoryName(items: items)
             }
         }, cancel: {}, fail: { errorResponse in
-            UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+            UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
     
@@ -440,7 +440,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }
             }
         }, cancel: {}, fail: { errorResponse in
-            UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+            UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
     
