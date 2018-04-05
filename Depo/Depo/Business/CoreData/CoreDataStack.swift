@@ -113,7 +113,7 @@ class CoreDataStack: NSObject {
             return []
         }
         
-        return localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
+        return localDuplicatesMediaItems.compactMap { WrapData(mediaItem: $0) }
     }
 
     private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>]) {

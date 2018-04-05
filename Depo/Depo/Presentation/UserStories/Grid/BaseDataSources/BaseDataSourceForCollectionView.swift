@@ -223,10 +223,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
-                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
-                                self.delegate?.getNextItems()
-                                return
-                            }
+//                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
+//                                self.delegate?.getNextItems()
+//                                return
+//                            }
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
                                                             
@@ -235,11 +235,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     //check lefovers here
                     let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
                     let itemsToCompound = isEmptyLeftOvers ? pageItems : self.transformedLeftOvers()
-                    if pageItems.isEmpty, isEmptyLeftOvers {
-                        self.delegate?.getNextItems()
-                        //DO I need callback here?
-                        return
-                    }
+//                    if pageItems.isEmpty, isEmptyLeftOvers {
+//                        self.delegate?.getNextItems()
+//                        //DO I need callback here?
+//                        return
+//                    }
 
                     self.pageCompounder.compoundLastPage(pageItems: itemsToCompound,
                                                          filesType: specificFilters,
@@ -259,8 +259,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
                             if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
-                                self.delegate?.getNextItems()
-                                return
+//                                self.delegate?.getNextItems()
+//                                return
+                                self.isLocalPaginationOn = false
                             }
                             
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
