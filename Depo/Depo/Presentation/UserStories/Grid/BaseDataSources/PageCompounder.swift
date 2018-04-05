@@ -10,7 +10,7 @@ typealias CompoundedPageCallback = (_ compundedPage: [WrapData], _ leftoversRemo
 
 fileprivate protocol PageSortingPredicates {
     func getSortingPredicateMidPage(sortType: SortedRules, firstItem: Item,  lastItem: Item) -> NSPredicate
-    func getSortingPredicateLastPage(sortType: SortedRules, lastItem: Item) -> NSPredicate
+    func getSortingPredicateLastPage(sortType: SortedRules, firstItem: Item) -> NSPredicate
     func getSortingPredicateFirstPage(sortType: SortedRules, lastItem: Item) -> NSPredicate
 }
 
@@ -41,10 +41,11 @@ class PageCompounder {
                                    notAllowedLocalIDs: [String],
                                    compoundedCallback:@escaping CompoundedPageCallback) {
         guard let lastItem = pageItems.last else {
-            compoundedCallback([], [])
+            compoundedCallback(pageItems, [])
             return
         }
         
+        var tempoArray = pageItems
         
         //
         let requestContext = coreData.newChildBackgroundContext
@@ -60,13 +61,39 @@ class PageCompounder {
         let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
         request.predicate = compundedPredicate
         
+        guard let savedLocalals = try? requestContext.fetch(request) else {
+            compoundedCallback(pageItems, [])
+            return
+        }
+        if coreData.inProcessAppendingLocalFiles, !savedLocalals.isEmpty,
+            !coreData.originalAssetsBeingAppended.assets(afterDate: lastItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
+
+                coreData.pageAppendedCallBack = { [weak self]  dbSaveLocals in
+                    guard let `self` = self else {
+                        compoundedCallback(pageItems, [])//actualy no need for that, cuz class is dead
+                        return
+                    }
+                    self.coreData.pageAppendedCallBack = nil
+//                    if let lastSavedObject = dbSaveLocals.last,
+//                        lastSavedObject.metaDate < lastItem.metaDate {
+                    
+                        self.compoundFirstPage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
+                        return
+//                    } else {
+//
+//                    }
+                }
+        }
         
-        //
         
+        let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
+        tempoArray.append(contentsOf: wrapedLocals)
+        tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
-        //pageSize
-//       USE // sortByCurrentType // in compoundedCallback
-        
+        let actualArray = tempoArray[..<pageSize]
+        let leftovers = tempoArray[pageSize...]
+        compoundedCallback(Array(actualArray), Array(leftovers))
+   
     }
     
     func compoundMiddlePage(pageItems: [WrapData],
@@ -75,7 +102,59 @@ class PageCompounder {
                                     notAllowedLocalIDs: [String],
                                     compoundedCallback:@escaping CompoundedPageCallback) {
         
+        guard let lastItem = pageItems.last, let firstItem = pageItems.first else {
+            compoundedCallback(pageItems, [])
+            return
+        }
         
+        var tempoArray = pageItems
+        
+        //
+        let requestContext = coreData.newChildBackgroundContext
+        
+        let request = NSFetchRequest<MediaItem>()
+        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
+                                                    in: requestContext)
+        let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
+        
+        //check in BASE GREED if dataCore still appending, then only time sorting is avilable
+        let sortingTypePredicate = getSortingPredicateMidPage(sortType: sortType, firstItem: firstItem, lastItem: lastItem)
+        
+        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
+        request.predicate = compundedPredicate
+        
+        guard let savedLocalals = try? requestContext.fetch(request), !savedLocalals.isEmpty else {
+            compoundedCallback(pageItems, [])
+            return
+        }
+        //
+        if coreData.inProcessAppendingLocalFiles, !savedLocalals.isEmpty,
+            !coreData.originalAssetsBeingAppended.assets(afterDate: lastItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
+            
+            coreData.pageAppendedCallBack = { [weak self]  dbSaveLocals in
+                guard let `self` = self else {
+                    compoundedCallback(pageItems, [])//actualy no need for that, cuz class is dead
+                    return
+                }
+                self.coreData.pageAppendedCallBack = nil
+                //                    if let lastSavedObject = dbSaveLocals.last,
+                //                        lastSavedObject.metaDate < lastItem.metaDate {
+                
+                self.compoundFirstPage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
+                return
+                //                    } else {
+                //
+                //                    }
+            }
+        }
+        //
+        let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
+        tempoArray.append(contentsOf: wrapedLocals)
+        tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
+        
+        let actualArray = tempoArray[..<pageSize]
+        let leftovers = tempoArray[pageSize...]
+        compoundedCallback(Array(actualArray), Array(leftovers))
     }
     
     func compoundLastPage(pageItems: [WrapData],
@@ -84,19 +163,61 @@ class PageCompounder {
                                   notAllowedLocalIDs: [String],
                                   compoundedCallback:@escaping CompoundedPageCallback) {
         
+        guard let firstItem = pageItems.first else {
+            compoundedCallback(pageItems, [])
+            return
+        }
         
-    }
-    
-    func getLocalFilesForPhotoVideoPage(filesType: FileType, sortType: SortedRules,
-                                        paginationEnd: Bool,
-                                        firstPage: Bool,
-                                        pageRemoteItems: [Item],
-                                        notAllowedMD5: [String],
-                                        notAllowedLocalIDs: [String],
-                                        filesCallBack: @escaping LocalFilesCallBack) {
-    
-    
-    
+        var tempoArray = pageItems
+        
+        //
+        let requestContext = coreData.newChildBackgroundContext
+        
+        let request = NSFetchRequest<MediaItem>()
+        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
+                                                    in: requestContext)
+        let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
+        
+        //check in BASE GREED if dataCore still appending, then only time is avilable
+        let sortingTypePredicate = getSortingPredicateLastPage(sortType: sortType, firstItem: firstItem)
+        
+        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
+        request.predicate = compundedPredicate
+        
+        guard let savedLocalals = try? requestContext.fetch(request), !savedLocalals.isEmpty else {
+            compoundedCallback(pageItems, [])
+            return
+        }
+        
+        //
+        if coreData.inProcessAppendingLocalFiles, !savedLocalals.isEmpty,
+            !coreData.originalAssetsBeingAppended.assets(afterDate: lastItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
+            
+            coreData.pageAppendedCallBack = { [weak self]  dbSaveLocals in
+                guard let `self` = self else {
+                    compoundedCallback(pageItems, [])//actualy no need for that, cuz class is dead
+                    return
+                }
+                self.coreData.pageAppendedCallBack = nil
+                //                    if let lastSavedObject = dbSaveLocals.last,
+                //                        lastSavedObject.metaDate < lastItem.metaDate {
+                
+                self.compoundFirstPage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
+                return
+                //                    } else {
+                //
+                //                    }
+            }
+        }
+        //
+        
+        let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
+        tempoArray.append(contentsOf: wrapedLocals)
+        tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
+        
+        let actualArray = tempoArray[..<pageSize]
+        let leftovers = tempoArray[pageSize...]
+        compoundedCallback(Array(actualArray), Array(leftovers))
     }
     
     fileprivate func sortByCurrentType(items: [WrapData], sortType: SortedRules) -> [WrapData] {
@@ -154,24 +275,24 @@ extension PageCompounder: PageSortingPredicates {
         }
     }
     
-    func getSortingPredicateLastPage(sortType: SortedRules, lastItem: Item) -> NSPredicate {
+    func getSortingPredicateLastPage(sortType: SortedRules, firstItem: Item) -> NSPredicate {
         switch sortType {
         case .timeUp, .timeUpWithoutSection:
-            return NSPredicate(format: "creationDateValue < %@", (lastItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue < %@", (firstItem.creationDate ?? Date()) as NSDate)
         case .timeDown, .timeDownWithoutSection:
-            return NSPredicate(format: "creationDateValue > %@", (lastItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue > %@", (firstItem.creationDate ?? Date()) as NSDate)
         case .lettersAZ, .albumlettersAZ:
-            return NSPredicate(format: "nameValue < %@", lastItem.name ?? "")
+            return NSPredicate(format: "nameValue < %@", firstItem.name ?? "")
         case .lettersZA, .albumlettersZA:
-            return NSPredicate(format: "nameValue > %@", lastItem.name ?? "")
+            return NSPredicate(format: "nameValue > %@", firstItem.name ?? "")
         case .sizeAZ:
-            return NSPredicate(format: "fileSizeValue < %ui", lastItem.fileSize)
+            return NSPredicate(format: "fileSizeValue < %ui", firstItem.fileSize)
         case .sizeZA:
-            return NSPredicate(format: "fileSizeValue > %ui", lastItem.fileSize)
+            return NSPredicate(format: "fileSizeValue > %ui", firstItem.fileSize)
         case .metaDataTimeUp:
-            return NSPredicate(format: "creationDateValue < %@", lastItem.metaDate as NSDate)
+            return NSPredicate(format: "creationDateValue < %@", firstItem.metaDate as NSDate)
         case .metaDataTimeDown:
-            return NSPredicate(format: "creationDateValue > %@", lastItem.metaDate as NSDate)
+            return NSPredicate(format: "creationDateValue > %@", firstItem.metaDate as NSDate)
         }
     }
     

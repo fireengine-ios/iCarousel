@@ -61,6 +61,7 @@ class CoreDataStack: NSObject {
     var inProcessAppendingLocalFiles = false
     
     var originalAssetsBeingAppended = AssetsСache()
+    var nonCloudAlreadySavedAssets = AssetsСache()
     
     override init() {
         

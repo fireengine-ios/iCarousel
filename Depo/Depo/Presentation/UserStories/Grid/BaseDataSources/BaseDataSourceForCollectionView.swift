@@ -170,29 +170,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return false
     }
     
-//    fileprivate func sortByCurrentType(items: [WrapData]) -> [WrapData] {
-//        var tempoArray = items
-//        switch self.currentSortType {
-//        case .timeUp, .timeUpWithoutSection:
-//            tempoArray.sort{$0.creationDate! > $1.creationDate!}
-//        case .timeDown, .timeDownWithoutSection:
-//            tempoArray.sort{$0.creationDate! < $1.creationDate!}
-//        case .lettersAZ, .albumlettersAZ:
-//            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
-//        case .lettersZA, .albumlettersZA:
-//            tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
-//        case .sizeAZ:
-//            tempoArray.sort{$0.fileSize > $1.fileSize}
-//        case .sizeZA:
-//            tempoArray.sort{$0.fileSize < $1.fileSize}
-//        case .metaDataTimeUp:
-//            tempoArray.sort{$0.metaDate > $1.metaDate}
-//        case .metaDataTimeDown:
-//            tempoArray.sort{$0.metaDate < $1.metaDate}
-//        }
-//        return tempoArray
-//    }
-    
     func compoundItems(pageItems: [WrapData], pageNum: Int, complition: @escaping VoidHandler) {
         isLocalFilesRequested = true
         log.debug("BaseDataSourceForCollectionViewDelegate compoundItems")
@@ -214,10 +191,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             switch specificFilters {
             case .video, .image:
-                var lastRemote = pageItems
-//                if originalItemsArray.isEmpty, let lastItemFromPreviousPage = allMediaItems.last {
-//                    lastRemote = [lastItemFromPreviousPage]
-//                }
                 var md5s = [String]()
                 var localIDs = [String]()
                 self.allRemoteItems.forEach{
@@ -227,7 +200,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         localIDs.append(String(localID))
                     }
                 }
-                if pageNum == 1 {
+                if pageNum == 1, self.allMediaItems.isEmpty, self.pageLeftOvers.isEmpty {
                     self.pageCompounder.compoundFirstPage(pageItems: pageItems,
                                                           filesType: specificFilters,
                                                           sortType: self.currentSortType,
@@ -238,43 +211,77 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             guard let `self` = self else {
                                 return
                             }
-                            //check lefovers here
+                            
                             self.pageLeftOvers.removeAll()
                             self.pageLeftOvers.append(contentsOf: lefovers)
                             
 //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
-                            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             
+                            if compoundedItems.count >= self.pageCompounder.pageSize, !self.isPaginationDidEnd {
+                                self.delegate?.getNextItems()
+                                return
+                            }
+                            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                            complition()
                                                             
                     })
                 } else if self.isPaginationDidEnd {
-                    self.pageCompounder.compoundLastPage(pageItems: pageItems,
+                    //check lefovers here
+                    let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
+                    let itemsToCompound = isEmptyLeftOvers ? pageItems : self.transformedLeftOvers()
+                    if pageItems.isEmpty, isEmptyLeftOvers {
+                        self.delegate?.getNextItems()
+                        //DO I need callback here?
+                        return
+                    }
+
+                    self.pageCompounder.compoundLastPage(pageItems: itemsToCompound,
                                                          filesType: specificFilters,
                                                          sortType: self.currentSortType,
                                                          notAllowedMD5: md5s,
                                                          notAllowedLocalIDs: localIDs,
                                                          compoundedCallback:
                         { [weak self] (compoundedItems, lefovers) in
-                                                            
-                                                            //break into sections here
-                                                            
-                                                            
-                                                            
+                            guard let `self` = self else {
+                                return
+                            }
+                            
+                            self.pageLeftOvers.removeAll()
+                            self.pageLeftOvers.append(contentsOf: lefovers)
+                            
+                            //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
+                            self.allMediaItems.append(contentsOf: compoundedItems)
+                            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                            complition()
                     })
                 } else {
-                    self.pageCompounder.compoundMiddlePage(pageItems: pageItems,
+                    //check lefovers here
+                    let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
+                    let itemsToCompound = isEmptyLeftOvers ? pageItems : self.transformedLeftOvers()
+                    if pageItems.isEmpty, isEmptyLeftOvers {
+                        self.delegate?.getNextItems()
+                        //DO I need callback here?
+                        return
+                    }
+                    
+                    self.pageCompounder.compoundMiddlePage(pageItems: itemsToCompound,
                                                            filesType: specificFilters,
                                                            sortType: self.currentSortType,
                                                            notAllowedMD5: md5s,
                                                            notAllowedLocalIDs: localIDs,
                                                            compoundedCallback:
                         { [weak self] (compoundedItems, lefovers) in
+                            guard let `self` = self else {
+                                return
+                            }
+                            self.pageLeftOvers.removeAll()
+                            self.pageLeftOvers.append(contentsOf: lefovers)
                             
-                            //break into sections here
-                            
-                            
-                            
+                            //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
+                            self.allMediaItems.append(contentsOf: compoundedItems)
+                            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                            complition()
                     })
                 }
                 
@@ -282,30 +289,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 break
             }
             
-//            self.pageCompounder.
-//            self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-            
-//            self.appendLocalItems(originalItemsArray: pageItems, pageNum: pageNum, localFileasAppendedCallback: { [weak self] imbededwithLocalsItems in
-//                guard let `self` = self else {
-//                    return
-//                }
-//                log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems callback")
-//
-//                self.allMediaItems.append(contentsOf: imbededwithLocalsItems)
-//                self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-////                  self.reloadData()
-//                self.isLocalFilesRequested =  false
-//                DispatchQueue.main.async {
-//                    if self.isPaginationDidEnd {
-//                        debugPrint("LastPage Reload compoundItems")
-//                    }
-//                    log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems callback going to reload")
-//
-//                    self.collectionView?.reloadData()
-//                    self.delegate?.filesAppendedAndSorted()
-//                }
-//            })
         }
+    }
+    
+    private func transformedLeftOvers() -> [WrapData] {
+        guard let lastAppendedItem = allMediaItems.last else {
+            return []
+        }
+        let pseudoPageArray = [lastAppendedItem] + pageLeftOvers.filter{!$0.isLocalItem}
+        return pseudoPageArray
     }
     
     private func setupOneSectionMediaItemsArray(items: [WrapData]) {
@@ -942,18 +934,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         let isLastCell = Bool((countRow - 1) == indexPath.row)
         
         if isLastCell, isLastSection, !isPaginationDidEnd {
-            self.delegate?.getNextItems()
-            log.debug("BaseDataSourceForCollectionViewDelegate isLastCell, isLastSection, !isPaginationDidEnd ")
+            
+            pageLeftOvers.isEmpty ? delegate?.getNextItems() : compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                self.collectionView?.reloadData()
+                self.delegate?.filesAppendedAndSorted()
+                
+            })
+            
             debugPrint("BaseDataSourceForCollectionViewDelegate isLastCell, isLastSection, !isPaginationDidEnd ")
         }
-        
-//        if isLocalPaginationOn, isLastCell, isLastSection,
-//            let lastItem = allMediaItems.last, !isLocalFilesRequested,
-//            allRemoteItems.isEmpty {
-//            log.debug("BaseDataSourceForCollectionViewDelegate appendLocalItems sLocalPaginationOn, isLastCell, isLastSection let lastItem = allMediaItems.last, !isLocalFilesRequested,")
-//            debugPrint("BaseDataSourceForCollectionViewDelegate appendLocalItems sLocalPaginationOn, isLastCell, isLastSection let lastItem = allMediaItems.last, !isLocalFilesRequested,")
-//            compoundItems(pageItems: [lastItem], pageNum: 0)
-//        }
         
         if let photoCell = cell_ as? CollectionViewCellForPhoto{
             let file = itemForIndexPath(indexPath: indexPath)
