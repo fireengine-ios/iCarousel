@@ -140,7 +140,7 @@ class PageCompounder {
                 //                    if let lastSavedObject = dbSaveLocals.last,
                 //                        lastSavedObject.metaDate < lastItem.metaDate {
                 
-                self.compoundFirstPage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
+                self.compoundMiddlePage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
                 return
                 //                    } else {
                 //
@@ -191,7 +191,7 @@ class PageCompounder {
         
         //
         if coreData.inProcessAppendingLocalFiles, !savedLocalals.isEmpty,
-            !coreData.originalAssetsBeingAppended.assets(afterDate: lastItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
+            !coreData.originalAssetsBeingAppended.assets(afterDate: firstItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
             
             coreData.pageAppendedCallBack = { [weak self]  dbSaveLocals in
                 guard let `self` = self else {
@@ -202,7 +202,7 @@ class PageCompounder {
                 //                    if let lastSavedObject = dbSaveLocals.last,
                 //                        lastSavedObject.metaDate < lastItem.metaDate {
                 
-                self.compoundFirstPage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
+                self.compoundLastPage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
                 return
                 //                    } else {
                 //
