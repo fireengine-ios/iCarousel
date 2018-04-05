@@ -53,6 +53,7 @@ class PageCompounder {
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                     in: requestContext)
+        request.fetchLimit = pageSize
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         
         //check in BASE GREED if dataCore still appending, then only time is avilable
@@ -115,6 +116,7 @@ class PageCompounder {
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                     in: requestContext)
+        request.fetchLimit = pageSize
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         
         //check in BASE GREED if dataCore still appending, then only time sorting is avilable
@@ -177,6 +179,7 @@ class PageCompounder {
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                     in: requestContext)
+        request.fetchLimit = pageSize
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         
         //check in BASE GREED if dataCore still appending, then only time is avilable

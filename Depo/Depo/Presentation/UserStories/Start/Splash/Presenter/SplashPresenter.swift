@@ -19,6 +19,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
         showPasscodeIfNeed()
+        CoreDataStack.default.appendLocalMediaItems(completion: nil)
     }
     
     private func showPasscodeIfNeed() {
@@ -81,7 +82,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onSuccessEULA() {
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+        
         router.navigateToApplication()
         interactor.updateUserLanguage()
     }

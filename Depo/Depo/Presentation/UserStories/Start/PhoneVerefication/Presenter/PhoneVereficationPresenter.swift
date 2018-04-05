@@ -77,7 +77,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         completeAsyncOperationEnableScreen()
         view.dropTimer()
         
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+//        CoreDataStack.default.appendLocalMediaItems(completion: nil)
         router.goAutoSync()
     }
     

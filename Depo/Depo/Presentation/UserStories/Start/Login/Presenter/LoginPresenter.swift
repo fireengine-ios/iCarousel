@@ -133,7 +133,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func onSuccessEULA() {
         completeAsyncOperationEnableScreen()
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+//        CoreDataStack.default.appendLocalMediaItems(completion: nil)
  
        
         openEmptyEmailIfNeedOrOpenSyncSettings()
