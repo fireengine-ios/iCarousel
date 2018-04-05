@@ -65,6 +65,7 @@ class LatestUpladsCard: BaseView {
     }
     
     private func set(details object: JSON) {
+        collectionViewDataSource.removeAll()
         if let arrayOfJsons = object.array {
             for itemObject in arrayOfJsons {
                 let searchItem = SearchItemResponse(withJSON: itemObject)

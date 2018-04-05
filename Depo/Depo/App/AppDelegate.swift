@@ -73,9 +73,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    /// iOS 9+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
+        if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) {
             return true
         } else if dropboxManager.handleRedirect(url: url) {
             return true

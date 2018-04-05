@@ -100,10 +100,10 @@ class CardsManager: NSObject {
         }
         homeCardsObjects.removeAll()
         homeCardsObjects.append(contentsOf: sortedArray)
-        sortingAllCards()
+        showHomeCards()
     }
     
-    private func sortingAllCards() {
+    private func showHomeCards() {
         DispatchQueue.main.async {
             for notificationView in self.foloversArray {
                 notificationView.startOperationsWith(serverObjects: self.homeCardsObjects)

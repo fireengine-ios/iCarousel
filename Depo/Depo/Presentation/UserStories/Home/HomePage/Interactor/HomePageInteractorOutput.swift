@@ -9,5 +9,7 @@
 import Foundation
 
 protocol HomePageInteractorOutput: class {
-
+    
+    func stopRefresh()
+    
 }
