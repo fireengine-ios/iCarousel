@@ -33,7 +33,7 @@ class HomePageInteractor: HomePageInteractorInput {
                 case .success(let array):
                     CardsManager.default.startOperatonsForCardsResponces(cardsResponces: array)
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
             }
         }
