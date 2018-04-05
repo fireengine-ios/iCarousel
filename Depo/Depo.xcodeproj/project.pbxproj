@@ -461,6 +461,8 @@
 		7CD92DBA20750A4400010BFA /* AnimationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD92DB720750A4400010BFA /* AnimationCard.swift */; };
 		7CD92DBB20750A4400010BFA /* AnimationCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD92DB820750A4400010BFA /* AnimationCard.xib */; };
 		7CD92DBC20750A4400010BFA /* AnimationCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD92DB820750A4400010BFA /* AnimationCard.xib */; };
+		7CD92DC12076027D00010BFA /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD92DC02076027D00010BFA /* iOSDevCenters+GIF.swift */; };
+		7CD92DC22076027D00010BFA /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD92DC02076027D00010BFA /* iOSDevCenters+GIF.swift */; };
 		7CDABD051F1E3A6300C8CC16 /* UserProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCF41F1E3A6300C8CC16 /* UserProfileConfigurator.swift */; };
 		7CDABD061F1E3A6300C8CC16 /* UserProfileInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCF51F1E3A6300C8CC16 /* UserProfileInitializer.swift */; };
 		7CDABD071F1E3A6300C8CC16 /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABCF71F1E3A6300C8CC16 /* UserProfileInteractor.swift */; };
@@ -3907,6 +3909,7 @@
 		7CD7C2A520189E24009F6D3D /* StorageCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StorageCard.xib; sourceTree = "<group>"; };
 		7CD92DB720750A4400010BFA /* AnimationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCard.swift; sourceTree = "<group>"; };
 		7CD92DB820750A4400010BFA /* AnimationCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnimationCard.xib; sourceTree = "<group>"; };
+		7CD92DC02076027D00010BFA /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
 		7CDABCF41F1E3A6300C8CC16 /* UserProfileConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileConfigurator.swift; sourceTree = "<group>"; };
 		7CDABCF51F1E3A6300C8CC16 /* UserProfileInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileInitializer.swift; sourceTree = "<group>"; };
 		7CDABCF71F1E3A6300C8CC16 /* UserProfileInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileInteractor.swift; sourceTree = "<group>"; };
@@ -10075,6 +10078,7 @@
 				CE228D532017338B0082BA14 /* Alamofire+Request.swift */,
 				CED4B0292017731400D06CA9 /* Alamofire+Response.swift */,
 				CE08BDEC1FC8415600440CA0 /* URL+Path.swift */,
+				7CD92DC02076027D00010BFA /* iOSDevCenters+GIF.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -14247,6 +14251,7 @@
 				8C0E8F8B1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
 				8C0B91A220170E7B00A5BA81 /* ManageContactTableViewCell.swift in Sources */,
 				8C0E8F8C1FDEBDFF00789C91 /* GridListTopBarSortingTableCell.swift in Sources */,
+				7CD92DC22076027D00010BFA /* iOSDevCenters+GIF.swift in Sources */,
 				8C0E8F8D1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
 				4A8CC31B201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */,
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
@@ -15409,6 +15414,7 @@
 				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */,
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
+				7CD92DC12076027D00010BFA /* iOSDevCenters+GIF.swift in Sources */,
 				78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */,
 				2BA37C39202837B400660394 /* FaceImageChangeCoverInteractor.swift in Sources */,
 			);
