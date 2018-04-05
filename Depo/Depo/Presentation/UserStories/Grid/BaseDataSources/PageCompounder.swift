@@ -56,7 +56,8 @@ class PageCompounder {
         //check in BASE GREED if dataCore still appending, then only time is avilable
         let sortingTypePredicate = getSortingPredicateFirstPage(sortType: sortType, lastItem: lastItem)
         
-        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
+        let md5Predicate = NSPredicate(format:"NOT (md5Value IN %@)", notAllowedMD5)
+        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate, md5Predicate])
         request.predicate = compundedPredicate
         
         guard let savedLocalals = try? requestContext.fetch(request) else {
@@ -118,7 +119,8 @@ class PageCompounder {
         //check in BASE GREED if dataCore still appending, then only time sorting is avilable
         let sortingTypePredicate = getSortingPredicateMidPage(sortType: sortType, firstItem: firstItem, lastItem: lastItem)
         
-        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
+        let md5Predicate = NSPredicate(format:"NOT (md5Value IN %@)", notAllowedMD5)
+        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate, md5Predicate])
         request.predicate = compundedPredicate
         
         guard let savedLocalals = try? requestContext.fetch(request), !savedLocalals.isEmpty else {
@@ -180,7 +182,8 @@ class PageCompounder {
         //check in BASE GREED if dataCore still appending, then only time is avilable
         let sortingTypePredicate = getSortingPredicateLastPage(sortType: sortType, firstItem: firstItem)
         
-        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
+        let md5Predicate = NSPredicate(format:"NOT (md5Value IN %@)", notAllowedMD5)
+        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate, md5Predicate])
         request.predicate = compundedPredicate
         
         guard let savedLocalals = try? requestContext.fetch(request), !savedLocalals.isEmpty else {

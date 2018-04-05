@@ -143,32 +143,28 @@ extension CoreDataStack {
             
             self.saveDataForContext(context: context, savedCallBack: nil)
         }
-        
-        
-        
+ 
     }
     
     func  allLocalItems() -> [WrapData] {
-//        let context = mainContext
-//        let predicate = NSPredicate(format: "localFileID != nil")
-//        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
-//        return items.flatMap { $0.wrapedObject }
-        return []
+        let context = newChildBackgroundContext
+        let predicate = NSPredicate(format: "localFileID != nil")
+        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
+        return items.flatMap { $0.wrapedObject }
     }
     
     func  allLocalItems(with localIds: [String]) -> [WrapData] {
-//        let context = mainContext
-//        let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
-//        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
-//        return items.flatMap { $0.wrapedObject }
-        return []
+        let context = newChildBackgroundContext
+        let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
+        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
+        return items.flatMap { $0.wrapedObject }
     }
     
     func  allLocalItems(withUUIDS uuids: [String]) -> [WrapData] {
         let context = mainContext
         let predicate = NSPredicate(format: "(uuidValue IN %@)", uuids)
         let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
-        return items.flatMap { $0.wrapedObject }
+        return items.compactMap { $0.wrapedObject }
     }
     
     func hasLocalItemsForSync(video: Bool, image: Bool, completion: @escaping  (_ has: Bool) -> Void) {

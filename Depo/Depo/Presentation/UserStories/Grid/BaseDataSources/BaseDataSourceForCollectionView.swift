@@ -174,7 +174,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return false
     }
     
-    func compoundItems(pageItems: [WrapData], pageNum: Int, complition: @escaping VoidHandler) {
+    func compoundItems(pageItems: [WrapData], pageNum: Int, originalRemotes: Bool = false, complition: @escaping VoidHandler) {
         guard !isLocalFilesRequested else {
             return
         }
@@ -198,6 +198,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             switch specificFilters {
             case .video, .image:
+                if originalRemotes {
+                    self.isLocalPaginationOn = true
+                }
                 var md5s = [String]()
                 var localIDs = [String]()
                 self.allRemoteItems.forEach{
@@ -514,9 +517,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         allRemoteItems.append(contentsOf: nonEmptyMetaItems)
         
         self.pageLeftOvers.removeAll()
-        isLocalPaginationOn = true
         
-        compoundItems(pageItems: pageItems, pageNum: pageNum, complition: { [weak self] in
+        
+        compoundItems(pageItems: pageItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView?.reloadData()
                 self?.delegate?.filesAppendedAndSorted()
