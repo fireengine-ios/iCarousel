@@ -86,7 +86,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
     private var pageLeftOvers = [WrapData]()
-    private var allRemoteItems = [WrapData]() // -----------------------=========
+
+    
+    private var allRemoteItems = [WrapData]()
     private var uploadedObjectID = [String]()
     private var uploadToAlbumItems = [String]()
     
@@ -291,6 +293,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
                             if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
+                                self.pageLeftOvers.append(contentsOf: compoundedItems)
+                                self.isLocalFilesRequested = false
                                 self.delegate?.getNextItems()
                                 return
                             }
@@ -491,20 +495,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return $0.metaData != nil
         }
         if nonEmptyMetaItems.isEmpty {
-//            isLocalPaginationOn = true
             isPaginationDidEnd = true
-        } else {
-//            isLocalPaginationOn = false
         }
+        
+        let pageItems = transformedLeftOvers() + nonEmptyMetaItems
+        
         log.debug("BaseDataSourceForCollectionView appendCollectionView \(nonEmptyMetaItems.count)")
         
         allRemoteItems.append(contentsOf: nonEmptyMetaItems)
         
-        compoundItems(pageItems: nonEmptyMetaItems, pageNum: pageNum, complition: { [weak self] in
+        self.pageLeftOvers.removeAll()
+        
+        compoundItems(pageItems: pageItems, pageNum: pageNum, complition: { [weak self] in
             DispatchQueue.main.async {
+                self?.isLocalFilesRequested = false
                 self?.collectionView?.reloadData()
                 self?.delegate?.filesAppendedAndSorted()
-                self?.isLocalFilesRequested = false
             }
         })
     }
@@ -951,17 +957,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if isLastCell, isLastSection, !isPaginationDidEnd {
             
-
             if pageLeftOvers.isEmpty, !isLocalFilesRequested {
                 delegate?.getNextItems()
             } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
                 compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] in
-                    guard let `self` = self else {
-                        return
+                    DispatchQueue.main.async {
+                        self?.isLocalFilesRequested = false
+                        self?.collectionView?.reloadData()
+                        self?.delegate?.filesAppendedAndSorted()
+                        
                     }
-                    self.collectionView?.reloadData()
-                    self.delegate?.filesAppendedAndSorted()
-                    self.isLocalFilesRequested = false
                     
                 })
             }
