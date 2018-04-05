@@ -237,11 +237,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     //check lefovers here
                     let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
                     let itemsToCompound = isEmptyLeftOvers ? pageItems : self.transformedLeftOvers()
-                    if pageItems.isEmpty, isEmptyLeftOvers {
-                        self.delegate?.getNextItems()
-                        //DO I need callback here?
-                        return
-                    }
+//                    if pageItems.isEmpty, isEmptyLeftOvers {
+//                        self.delegate?.getNextItems()
+//                        //DO I need callback here?
+//                        return
+//                    }
 
                     self.pageCompounder.compoundLastPage(pageItems: itemsToCompound,
                                                          filesType: specificFilters,
@@ -260,10 +260,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
-//                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
-//                                self.delegate?.getNextItems()
-//                                return
-//                            }
+                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
+                                self.isLocalPaginationOn = false
+                            }
                             
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
@@ -1338,21 +1337,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             localObjectsForReplace = CoreDataStack.default.allLocalItems(withUUIDS: localUUIDS)
-            
-//<<<<<<< HEAD
-//            let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
-//            let predicate = PredicateRules().allLocalObjectsForObjects(objects: serverObjects)
-//            let sortDescriptors = CollectionSortingRules(sortingRules: currentSortType).rule.sortDescriptors
-//            
-//            fetchRequest.predicate = predicate
-//            fetchRequest.sortDescriptors = sortDescriptors
-//            
-//            guard let fetchResult = try? CoreDataStack.default.mainContext.fetch(fetchRequest) else {
-//                return
-//            }
-//            localObjectsForReplace = fetchResult.map{ return WrapData(mediaItem: $0) }
-//=======
-//>>>>>>> develop
+
             let uuids = localObjectsForReplace.map({ $0.uuid })
             
             if (localObjectsForReplace.count != serverObjects.count) {
