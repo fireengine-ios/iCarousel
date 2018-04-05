@@ -215,10 +215,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (view == nil) {
             return
         }
-//        asyncOperationSucces()
-//        view.stopRefresher()
-        
-        
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {

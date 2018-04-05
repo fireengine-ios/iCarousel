@@ -203,6 +203,8 @@ class PageCompounder {
                     //
                     //                    }
                 }
+            } else if firstItem.isLocalItem {
+                compoundedCallback([], [])
             } else {
                 compoundedCallback(pageItems, [])
             }
