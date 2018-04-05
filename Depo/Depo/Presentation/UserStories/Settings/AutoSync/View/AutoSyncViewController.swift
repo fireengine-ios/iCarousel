@@ -86,7 +86,6 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
             MenloworksEventsService.shared.onFirstAutosyncOff()
         }
         storageVars.autoSyncSet = true
-        //UserDefaults.standard.set(true, forKey: "autoSyncSet")
         
         output.change(settings: settings)
     }
