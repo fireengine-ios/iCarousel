@@ -90,10 +90,10 @@ class PageCompounder {
         tempoArray.append(contentsOf: wrapedLocals)
         tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
-        let actualArray = tempoArray[..<pageSize]
-        let leftovers = tempoArray[pageSize...]
+        let actualArray = tempoArray.prefix(pageSize)
+        let leftoversFirstIndex = (tempoArray.count - actualArray.count > 0) ? actualArray.count : 0
+        let leftovers = tempoArray.suffix(from: leftoversFirstIndex)
         compoundedCallback(Array(actualArray), Array(leftovers))
-   
     }
     
     func compoundMiddlePage(pageItems: [WrapData],
@@ -152,8 +152,9 @@ class PageCompounder {
         tempoArray.append(contentsOf: wrapedLocals)
         tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
-        let actualArray = tempoArray[..<pageSize]
-        let leftovers = tempoArray[pageSize...]
+        let actualArray = tempoArray.prefix(pageSize)
+        let leftoversFirstIndex = (tempoArray.count - actualArray.count > 0) ? actualArray.count : 0
+        let leftovers = tempoArray.suffix(from: leftoversFirstIndex)
         compoundedCallback(Array(actualArray), Array(leftovers))
     }
     
@@ -215,8 +216,9 @@ class PageCompounder {
         tempoArray.append(contentsOf: wrapedLocals)
         tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
-        let actualArray = tempoArray[..<pageSize]
-        let leftovers = tempoArray[pageSize...]
+        let actualArray = tempoArray.prefix(pageSize)
+        let leftoversFirstIndex = (tempoArray.count - actualArray.count > 0) ? actualArray.count : 0
+        let leftovers = tempoArray.suffix(from: leftoversFirstIndex)
         compoundedCallback(Array(actualArray), Array(leftovers))
     }
     

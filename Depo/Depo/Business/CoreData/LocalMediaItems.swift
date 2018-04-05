@@ -224,37 +224,36 @@ extension CoreDataStack {
             completion()
             return
         }
-
+        
         print("LOCAL_ITEMS: \(items.count) local files to add")
         let start = Date()
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
-//        privateQueue.async { [weak self] in
-        
-        LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] info in
-            context.perform { [weak self] in
-                var addedObjects = [WrapData]()
-                let assetsInfo = info.filter { $0.isValid }
-                assetsInfo.forEach { element in
-                    autoreleasepool {
-                        let wrapedItem =  WrapData(info: element)
-                        _ = MediaItem(wrapData: wrapedItem, context: context)
-                        
-                        addedObjects.append(wrapedItem)
+        privateQueue.async { [weak self] in
+            LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] info in
+                context.perform { [weak self] in
+                    var addedObjects = [WrapData]()
+                    let assetsInfo = info.filter { $0.isValid }
+                    assetsInfo.forEach { element in
+                        autoreleasepool {
+                            let wrapedItem =  WrapData(info: element)
+                            _ = MediaItem(wrapData: wrapedItem, context: context)
+                            
+                            addedObjects.append(wrapedItem)
+                        }
                     }
+                    
+                    self?.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
+                        debugPrint("LOCAL_ITEMS: Saved to Context")
+                        log.debug("LocalMediaItem saveDataForContext(")
+                        self?.pageAppendedCallBack?(addedObjects)
+                    })
+                    
+                    ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
+                    print("LOCAL_ITEMS: page has been added in \(Date().timeIntervalSince(start)) secs")
+                    self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
                 }
-                
-                self?.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
-                    debugPrint("LOCAL_ITEMS: Saved to Context")
-                    log.debug("LocalMediaItem saveDataForContext(")
-                    self?.pageAppendedCallBack?(addedObjects)
-                })
-                
-                ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
-                print("LOCAL_ITEMS: page has been added in \(Date().timeIntervalSince(start)) secs")
-                self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
-            }
-        })
-//        }
+            })
+        }
     }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
