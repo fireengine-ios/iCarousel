@@ -508,9 +508,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         compoundItems(pageItems: pageItems, pageNum: pageNum, complition: { [weak self] in
             DispatchQueue.main.async {
-                self?.isLocalFilesRequested = false
                 self?.collectionView?.reloadData()
                 self?.delegate?.filesAppendedAndSorted()
+                self?.isLocalFilesRequested = false
             }
         })
     }
@@ -962,10 +962,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
                 compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] in
                     DispatchQueue.main.async {
-                        self?.isLocalFilesRequested = false
                         self?.collectionView?.reloadData()
                         self?.delegate?.filesAppendedAndSorted()
-                        
+                        self?.isLocalFilesRequested = false
                     }
                     
                 })

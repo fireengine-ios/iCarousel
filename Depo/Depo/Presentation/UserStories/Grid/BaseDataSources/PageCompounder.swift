@@ -63,25 +63,25 @@ class PageCompounder {
             compoundedCallback(pageItems, [])
             return
         }
-        if coreData.inProcessAppendingLocalFiles, !savedLocalals.isEmpty,
-            !coreData.originalAssetsBeingAppended.assets(afterDate: lastItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
-
-                coreData.pageAppendedCallBack = { [weak self]  dbSaveLocals in
-                    guard let `self` = self else {
-                        compoundedCallback(pageItems, [])//actualy no need for that, cuz class is dead
-                        return
-                    }
-                    self.coreData.pageAppendedCallBack = nil
-//                    if let lastSavedObject = dbSaveLocals.last,
-//                        lastSavedObject.metaDate < lastItem.metaDate {
-                    
-                        self.compoundFirstPage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
-                        return
-//                    } else {
+//        if coreData.inProcessAppendingLocalFiles, !savedLocalals.isEmpty,
+//            !coreData.originalAssetsBeingAppended.assets(afterDate: lastItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
 //
+//                coreData.pageAppendedCallBack = { [weak self]  dbSaveLocals in
+//                    guard let `self` = self else {
+//                        compoundedCallback(pageItems, [])//actualy no need for that, cuz class is dead
+//                        return
 //                    }
-                }
-        }
+//                    self.coreData.pageAppendedCallBack = nil
+////                    if let lastSavedObject = dbSaveLocals.last,
+////                        lastSavedObject.metaDate < lastItem.metaDate {
+//                    
+//                        self.compoundFirstPage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
+//                        return
+////                    } else {
+////
+////                    }
+//                }
+//        }
         
         
         let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
@@ -184,30 +184,34 @@ class PageCompounder {
         request.predicate = compundedPredicate
         
         guard let savedLocalals = try? requestContext.fetch(request), !savedLocalals.isEmpty else {
-            compoundedCallback(pageItems, [])
+            
+            if coreData.inProcessAppendingLocalFiles,
+                !coreData.originalAssetsBeingAppended.assets(afterDate: firstItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
+                
+                coreData.pageAppendedCallBack = { [weak self]  dbSaveLocals in
+                    guard let `self` = self else {
+                        compoundedCallback(pageItems, [])//actualy no need for that, cuz class is dead
+                        return
+                    }
+                    self.coreData.pageAppendedCallBack = nil
+                    //                    if let lastSavedObject = dbSaveLocals.last,
+                    //                        lastSavedObject.metaDate < lastItem.metaDate {
+                    
+                    self.compoundLastPage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
+                    return
+                    //                    } else {
+                    //
+                    //                    }
+                }
+            } else {
+                compoundedCallback(pageItems, [])
+            }
+//            compoundedCallback(pageItems, [])
             return
         }
         
         //
-        if coreData.inProcessAppendingLocalFiles, !savedLocalals.isEmpty,
-            !coreData.originalAssetsBeingAppended.assets(afterDate: firstItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
-            
-            coreData.pageAppendedCallBack = { [weak self]  dbSaveLocals in
-                guard let `self` = self else {
-                    compoundedCallback(pageItems, [])//actualy no need for that, cuz class is dead
-                    return
-                }
-                self.coreData.pageAppendedCallBack = nil
-                //                    if let lastSavedObject = dbSaveLocals.last,
-                //                        lastSavedObject.metaDate < lastItem.metaDate {
-                
-                self.compoundLastPage(pageItems: pageItems, filesType: filesType, sortType: sortType, notAllowedMD5: notAllowedMD5, notAllowedLocalIDs: notAllowedLocalIDs, compoundedCallback: compoundedCallback)
-                return
-                //                    } else {
-                //
-                //                    }
-            }
-        }
+        
         //
         
         let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
