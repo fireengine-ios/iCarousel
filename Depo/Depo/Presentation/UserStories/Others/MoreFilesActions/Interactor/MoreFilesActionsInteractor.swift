@@ -179,9 +179,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         ImageDownloder().getImage(patch: url) { [weak self] image in
-            guard let `self` = self, let image = image,
+            guard
+                let `self` = self,
+                let image = image,
                 let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
             else {
+                UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
                 complition?()
                 return
             }
