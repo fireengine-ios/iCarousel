@@ -16,7 +16,6 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var startButton: WhiteButtonWithRoundedCorner!
     @IBOutlet weak var skipButton: ButtonWithCorner!
-    @IBOutlet weak var tableHConstaint: NSLayoutConstraint!
     @IBOutlet weak var bacgroundImage: UIImageView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
@@ -53,11 +52,11 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !Device.isIpad {
+        if !Device.isIpad, fromSettings {
             setNavigationTitle(title: TextConstants.autoSyncNavigationTitle)
         }
         
-        titleLabel.text = TextConstants.autoSyncTitle
+        titleLabel.text =  fromSettings ? TextConstants.autoSyncFromSettingsTitle : TextConstants.autoSyncTitle
         titleLabel.font = fromSettings ? UIFont.TurkcellSaturaDemFont(size: 16) : UIFont.TurkcellSaturaDemFont(size: 18)
         titleLabel.textAlignment = .left
         if Device.isIpad {
@@ -70,7 +69,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
         startButton.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
         skipButton.setTitle(TextConstants.autoSyncskipForNowButton, for: .normal)
         
-        dataSource.setup(table: tableView, with: tableHConstaint)
+        dataSource.setup(table: tableView)
         dataSource.delegate = self
         
         output.viewIsReady()

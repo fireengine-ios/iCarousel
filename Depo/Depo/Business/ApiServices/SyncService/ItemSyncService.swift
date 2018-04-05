@@ -56,12 +56,12 @@ class ItemSyncServiceImpl: ItemSyncService {
     func start(newItems: Bool) {
         log.debug("ItemSyncServiceImpl start")
         
-        guard !(newItems && self.status.isContained(in: [.prepairing, .executing])) else {
-            self.appendNewUnsyncedItems()
+        guard !(newItems && status.isContained(in: [.prepairing, .executing])) else {
+            appendNewUnsyncedItems()
             return
         }
         
-        self.sync()
+        sync()
     }
     
     func stop() {
@@ -78,11 +78,13 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         lastSyncedMD5s.removeAll()
         
-        let hasItemsToSync = CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image)
+        CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image, completion: { [weak self] hasItemsToSync in
+            if hasItemsToSync {
+                self?.status = .waitingForWifi
+            }
+        })
         
-        if hasItemsToSync {
-            status = .waitingForWifi
-        }
+       
     }
     
     func fail() {
@@ -104,10 +106,14 @@ class ItemSyncServiceImpl: ItemSyncService {
         status = .prepairing
         
         localItems.removeAll()
-        self.itemsSortedToUpload { items in
+        itemsSortedToUpload { [weak self] items in
+            guard let `self` = self else {
+                return
+            }
+            
             if self.status == .prepairing {
                 self.localItems = items
-                self.lastSyncedMD5s = self.localItems.map({ $0.md5 })
+                self.lastSyncedMD5s = self.localItems.map { $0.md5 }
                 
                 guard !self.localItems.isEmpty else {
                     self.status = .synced
@@ -163,12 +169,18 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func appendNewUnsyncedItems() {
-        itemsSortedToUpload { items in
+        itemsSortedToUpload { [weak self] items in
+            guard let `self` = self else {
+                return
+            }
+            
             let newUnsyncedLocalItems = items.filter({ !self.lastSyncedMD5s.contains($0.md5) })
             
             guard !newUnsyncedLocalItems.isEmpty else {
                 return
             }
+            
+            self.lastSyncedMD5s.append(contentsOf: newUnsyncedLocalItems.map { $0.md5 })
             
             self.upload(items: newUnsyncedLocalItems)
         }
@@ -190,18 +202,20 @@ class ItemSyncServiceImpl: ItemSyncService {
 
 extension CoreDataStack {
     func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData]) -> Void) {
-        let localItems = allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image)
-        self.queue.async { [weak self] in
-            self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { items, error in
-                guard error == nil, let unsyncedItems = items else {
-                    print(error!.localizedDescription)
-                    completion([])
-                    return
+        allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image, completion: { localItems in
+            self.queue.async { [weak self] in
+                self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue) { items, error in
+                    guard error == nil, let unsyncedItems = items else {
+                        print(error!.localizedDescription)
+                        completion([])
+                        return
+                    }
+                    
+                    completion(unsyncedItems)
                 }
-                
-                completion(unsyncedItems)
             }
-        }
+        })
+        
     }
     
     private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?) -> Void ) {

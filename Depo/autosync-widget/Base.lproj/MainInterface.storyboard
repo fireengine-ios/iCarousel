@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,6 +47,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AGH-Xy-zne">
+                                <rect key="frame" x="24" y="12" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="WUd-FG-1fN"/>
+                                    <constraint firstAttribute="width" secondItem="AGH-Xy-zne" secondAttribute="height" multiplier="1:1" id="fpx-Hf-wSm"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="0TI-s2-Djp" firstAttribute="centerY" secondItem="M9V-y6-Nuj" secondAttribute="bottom" id="2um-on-Hs3"/>
@@ -53,10 +61,13 @@
                             <constraint firstItem="0TI-s2-Djp" firstAttribute="leading" secondItem="YQR-LQ-xgm" secondAttribute="leading" id="IS7-IZ-fGc"/>
                             <constraint firstItem="UBt-NQ-8iz" firstAttribute="centerX" secondItem="M9V-y6-Nuj" secondAttribute="centerX" id="OrS-hP-uPE"/>
                             <constraint firstItem="0TI-s2-Djp" firstAttribute="trailing" secondItem="YQR-LQ-xgm" secondAttribute="trailing" id="QAj-do-BYq"/>
+                            <constraint firstItem="AGH-Xy-zne" firstAttribute="centerX" secondItem="M9V-y6-Nuj" secondAttribute="centerX" id="SDG-jE-v4q"/>
+                            <constraint firstItem="YQR-LQ-xgm" firstAttribute="leading" secondItem="AGH-Xy-zne" secondAttribute="trailing" constant="16" id="U54-jy-rDe"/>
                             <constraint firstItem="YQR-LQ-xgm" firstAttribute="leading" secondItem="M9V-y6-Nuj" secondAttribute="trailing" constant="24" id="cXa-TF-hDQ"/>
                             <constraint firstItem="M9V-y6-Nuj" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="dgW-UY-bFv"/>
                             <constraint firstItem="M9V-y6-Nuj" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="32" id="jQJ-7a-XHW"/>
                             <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="YQR-LQ-xgm" secondAttribute="trailing" constant="24" id="oxY-hv-gjy"/>
+                            <constraint firstItem="AGH-Xy-zne" firstAttribute="centerY" secondItem="M9V-y6-Nuj" secondAttribute="centerY" id="pCv-g0-GSY"/>
                             <constraint firstItem="YQR-LQ-xgm" firstAttribute="centerY" secondItem="M9V-y6-Nuj" secondAttribute="top" id="ybp-4A-l77"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
@@ -67,6 +78,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="UBt-NQ-8iz" id="3hf-iS-55C"/>
                         <outlet property="bottomLabel" destination="0TI-s2-Djp" id="RAp-uh-m9U"/>
+                        <outlet property="currentImage" destination="AGH-Xy-zne" id="hIG-oC-NX6"/>
                         <outlet property="successImage" destination="M9V-y6-Nuj" id="Coo-n9-cCo"/>
                         <outlet property="topLabel" destination="YQR-LQ-xgm" id="Ii6-sb-xAI"/>
                     </connections>

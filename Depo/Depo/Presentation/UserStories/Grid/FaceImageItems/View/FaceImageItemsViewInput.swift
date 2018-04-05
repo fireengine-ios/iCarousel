@@ -9,7 +9,8 @@
 import UIKit
 
 protocol FaceImageItemsViewInput: class {
-    func configurateUgglaView()
+    func configurateUgglaView(hidden: Bool)
     func updateUgglaViewPosition()
+    func showUgglaView()
     func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool, isShowUggla: Bool)
 }

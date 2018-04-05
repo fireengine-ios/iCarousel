@@ -19,7 +19,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
     func viewIsReady() {
-        view.setupInitialState()
+        
     }
     
     func homePagePresented() {
@@ -48,6 +48,14 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     
     func createStory() {
         router.moveToCreationStory()
+    }
+    
+    func needRefresh() {
+        interactor.needRefresh()
+    }
+    
+    func stopRefresh() {
+        view.stopRefresh()
     }
     
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {

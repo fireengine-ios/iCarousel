@@ -18,13 +18,15 @@ final class PlacesService: BaseRequestService {
 //    }
     
     func getPlacesPage(param: PlacesPageParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("SearchService suggestion")
+        log.debug("PlacesService getPlacesPage")
         
         let handler = BaseResponseHandler<PlacesPageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func getPlacesAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+        log.debug("PlacesService getPlacesAlbumWithID")
+        
         let param = PlacesAlbumParameters(id: id)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
@@ -63,7 +65,7 @@ final class PlacesItemsService: RemoteItemsService {
         let param = PlacesPageParameters(pageSize: requestSize, pageNumber: currentPage)
 
         service.getPlacesPage(param: param, success: { [weak self] response in
-            if let response = response as? PlacesPageResponse, !response.list.isEmpty {
+            if let response = response as? PlacesPageResponse {
                 success?(response.list.map({ PlacesItem(response: $0) }))
                 self?.currentPage += 1
             } else {

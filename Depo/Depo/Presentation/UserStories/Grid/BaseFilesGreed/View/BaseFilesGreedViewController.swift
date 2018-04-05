@@ -280,15 +280,20 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
     }
     
-    func showNoFilesTop() {
+    func showNoFilesTop(text: String) {
+        noFilesTopLabel?.text = text
         noFilesTopLabel?.isHidden = false
         topBarContainer.isHidden = true
+        floatingHeaderContainerHeightConstraint.constant = 0
+        view.layoutIfNeeded()
     }
     
     func hideNoFiles() {
         noFilesView.isHidden = true
         noFilesTopLabel?.isHidden = true
         topBarContainer.isHidden = false
+        floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
+        view.layoutIfNeeded()
     }
     
     func requestStarted() {

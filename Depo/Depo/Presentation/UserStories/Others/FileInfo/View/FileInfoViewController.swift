@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDelegate {
+class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDelegate, ActivityIndicator, ErrorPresenter {
     
     @IBOutlet weak var fileNameTitle: UILabel!
     @IBOutlet weak var fileName: UITextField!
@@ -97,7 +97,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
                 configurateAudioMethadataFor(object: obj)
             }
             
-            if (obj.fileType.typeWithDuration) {
+            if obj.fileType.typeWithDuration {
                 durationLabel.text = obj.duration
             } else {
                 durationH.constant = 0
@@ -113,6 +113,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
                 fileInfoTitle.text = TextConstants.fileInfoFolderInfoTitle
                 folderSizeTitle.text = TextConstants.fileInfoAlbumSizeTitle
                 folderSizeLabel.text = String(obj.childCount ?? 0)
+                uploadDateTitle.text = TextConstants.fileInfoCreationDateTitle
             } else {
                 folderSizeTitle.text = TextConstants.fileInfoFileSizeTitle
             }
@@ -126,12 +127,13 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
                     takenDateTitle.isHidden = true
                 }
             } else {
-                hiddeInfoDateLabels()
+                hideInfoDateLabels()
             }
             return
         }
         
         if let album = object as? AlbumItem {
+            uploadDateTitle.text = TextConstants.fileInfoCreationDateTitle
             folderSizeTitle.text = TextConstants.fileInfoAlbumSizeTitle
             fileNameTitle.text = TextConstants.fileInfoAlbumNameTitle
             fileInfoTitle.text = TextConstants.fileInfoAlbumInfoTitle
@@ -146,13 +148,20 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             }
         }
         
+        if let createdDate = object.creationDate {
+            uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
+            takenDateLabel.isHidden = true
+            takenDateTitle.isHidden = true
+        } else {
+            hideInfoDateLabels()
+        }
+        
         durationH.constant = 0
-        hiddeInfoDateLabels()
         view.layoutIfNeeded()
     }
 
     func addReturnIfNeed(string: inout String) {
-        if string.count > 0 {
+        if !string.isEmpty {
             string.append("\n")
         }
     }
@@ -161,21 +170,15 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         if let musickMethadata = object.metaData {
             var string = ""
             if let album = musickMethadata.album {
-                string.append(TextConstants.fileInfoAlbumTitle)
-                string.append(": ")
-                string.append(album)
+                string += TextConstants.fileInfoAlbumTitle + ": " + album
             }
             if let artist = musickMethadata.artist {
                 addReturnIfNeed(string: &string)
-                string.append(TextConstants.fileInfoArtistTitle)
-                string.append(": ")
-                string.append(artist)
+                string += TextConstants.fileInfoArtistTitle + ": " + artist
             }
             if let title = musickMethadata.title {
                 addReturnIfNeed(string: &string)
-                string.append(TextConstants.fileInfoTitleTitle)
-                string.append(": ")
-                string.append(title)
+                string += TextConstants.fileInfoTitleTitle + ": " + title
             }
             
             moreFileInfoLabel.text = string
@@ -193,7 +196,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     }
     
     func goBack() {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: UITextFieldDelegate
@@ -215,11 +218,18 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         output.onRename(newName: fileName.text!)
     }
     
-    private func hiddeInfoDateLabels () {
+    private func hideInfoDateLabels () {
         takenDateLabel.isHidden = true
         takenDateTitle.isHidden = true
         uploadDateLabel.isHidden = true
         uploadDateTitle.isHidden = true
     }
     
+    func hideViews() {
+        view.subviews.forEach { $0.isHidden = true }
+    }
+    
+    func showViews() {
+        view.subviews.forEach { $0.isHidden = false }
+    }
 }

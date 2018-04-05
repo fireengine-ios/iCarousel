@@ -31,7 +31,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     private let underNavBarBarHeight: CGFloat = 53
     private let searchSectionCount = 6
-    private let musicBar = MusicBar(frame: CGRect.zero)
+    private let minRectFotMusicBar = CGRect(x: 0, y: 0, width: 300, height: 70)
+    private lazy var musicBar = MusicBar(frame: minRectFotMusicBar)
     
     // MARK: - Variables
     var underNavBarBar: GridListTopBar?
@@ -262,7 +263,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     // MARK: - UISearchbarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+        self.searchBar.resignFirstResponder()
         dismissController(animated: true)
         output.tapCancel()
     }
@@ -329,7 +330,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func successWithSuggestList(list: [SuggestionObject]) {
         items[.suggestion] = Array(list.prefix(NumericConstants.maxSuggestions))
-        if collectionView.isHidden {
+        if collectionView.isHidden && noFilesView.isHidden {
             suggestTableView.isHidden = isEmptyItems()
         }
         suggestTableView.reloadData()
@@ -531,7 +532,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        if (item.type == .people || item.type == .thing) && item.info != nil {
+        if item.info?.id != nil, let type = item.type, type.isFaceImageType() {
             output.openFaceImage(item: item)
         } else if let searchBar = navigationItem.titleView as? UISearchBar {
             searchBar.text = item.text?.removingPercentEncoding ?? item.text

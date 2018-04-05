@@ -40,7 +40,7 @@ final class UploadService {
     
     func upload(url: URL, contentType: String, progressHandler: @escaping Request.ProgressHandler, dataRequestHandler: DataRequestHandler?, complition: @escaping ResponseVoid) {
         
-        FileManager.shared.waitFilePreparation(at: url) { [weak self] result in
+        FilesExistManager.shared.waitFilePreparation(at: url) { [weak self] result in
             switch result {
             case .success(_):
                 

@@ -9,13 +9,16 @@
 import UIKit
 import SDWebImage
 import Alamofire
+import Adjust
 
 class AppConfigurator {
     
     static let dropboxManager: DropboxManager = factory.resolve()
+    static let analyticsManager: AnalyticsService = factory.resolve()
     
     class func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         dropboxManager.start()
+        analyticsManager.start()
         
         emptyEmailUpIfNeed()
         
@@ -45,6 +48,8 @@ class AppConfigurator {
 //        CoreDataStack.default.appendLocalMediaItems {
             startMenloworks(with: launchOptions)
 //        }
+        
+        _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
     }
     
     private class func emptyEmailUpIfNeed() {

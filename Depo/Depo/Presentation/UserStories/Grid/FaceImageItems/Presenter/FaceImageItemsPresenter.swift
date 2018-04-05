@@ -25,7 +25,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         dataSource.isHeaderless = true
         
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
-            view.configurateUgglaView()
+            view.configurateUgglaView(hidden: !dataSource.isPaginationDidEnd)
         }
     }
     
@@ -46,6 +46,9 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     override func getContentWithSuccess(items: [WrapData]) {
+        if let interactor = interactor as? FaceImageItemsInteractorInput {
+            interactor.changeCheckPhotosState(isCheckPhotos: false)
+        }
         allItmes = []
         
         items.forEach { item in
@@ -76,6 +79,20 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         updateThreeDotsButton()
     }
     
+    override func getContentWithSuccessEnd() {
+        super.getContentWithSuccessEnd()
+        
+        updateNoFilesView()
+
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
+            view.showUgglaView()
+        }
+        
+        if let interactor = interactor as? FaceImageItemsInteractorInput {
+            interactor.checkPhotos()
+        }
+    }
+    
     override func getContentWithFail(errorString: String?) {
         super.getContentWithFail(errorString: errorString)
         
@@ -97,6 +114,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     override func updateCoverPhotoIfNeeded() {
         reloadData()
+    }
+    
+    override func startAsyncOperation() {
+        outputView()?.showSpiner()
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -122,7 +143,9 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             if let view = view as? FaceImageItemsViewInput {
                 view.showNoFilesWith(text: interactor.textForNoFileLbel(),
                                      image: interactor.imageForNoFileImageView(),
-                                     createFilesButtonText: "", needHideTopBar: interactor.needHideTopBar(), isShowUggla: hasUgglaLabel())
+                                     createFilesButtonText: interactor.textForNoFileButton(),
+                                     needHideTopBar: interactor.needHideTopBar(),
+                                     isShowUggla: hasUgglaLabel())
             }
         }
     }
@@ -148,6 +171,12 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         view.stopSelection()
         
         reloadData()
+    }
+    
+    func didShowPopUp() {        
+        if let router = router as? FaceImageItemsRouterInput {
+            router.showPopUp()
+        }
     }
     
 }

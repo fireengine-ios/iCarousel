@@ -11,6 +11,16 @@ import UIKit
 
 class Device {
     
+    static func getFreeDiskSpaceInBytes() -> Int64? {
+        guard
+            let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString()),
+            let freeSize = systemAttributes[.systemFreeSize] as? NSNumber
+            else {
+                return nil
+        }
+        return freeSize.int64Value
+    }
+    
     static func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {
         if !Device.isIpad, UIDevice.current.orientation.isContained(in: [.landscapeLeft, .landscapeRight]) {
             UIApplication.shared.isStatusBarHidden = true

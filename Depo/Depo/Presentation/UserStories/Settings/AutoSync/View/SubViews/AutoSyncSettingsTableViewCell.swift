@@ -54,6 +54,16 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     private var expandHeight: CGFloat {
         return isFullHeight ? 177.5 : 0.0
     }
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        ///iPad, iOS < 10, prevent white color
+        ///https://stackoverflow.com/questions/27551291/uitableview-backgroundcolor-always-white-on-ipad
+        backgroundColor = contentView.backgroundColor
+        updateViews()
+    }
 
     
     // MARK: - Public

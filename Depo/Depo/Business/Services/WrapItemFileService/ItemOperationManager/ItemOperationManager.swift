@@ -134,6 +134,10 @@ class ItemOperationManager: NSObject {
         }
     }
     
+    func clear() {
+        views.removeAll()
+    }
+    
     func startUploadFile(file: WrapData) {
         currentUploadingObject = file
         

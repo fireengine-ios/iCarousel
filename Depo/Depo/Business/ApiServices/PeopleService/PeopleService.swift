@@ -85,7 +85,7 @@ final class PeopleService: BaseRequestService {
     }
     
     func getPeopleAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
-        log.debug("PeopleService getPeopleAlbum")
+        log.debug("PeopleService getPeopleAlbumWithID")
         
         let param = PeopleAlbumParameters(id: id)
         
@@ -178,7 +178,7 @@ final class PeopleItemsService: RemoteItemsService {
         let param = PeoplePageParameters(pageSize: requestSize, pageNumber: currentPage)
         
         service.getPeoplePage(param: param, success: { [weak self] response in
-            if let response = response as? PeoplePageResponse, !response.list.isEmpty {
+            if let response = response as? PeoplePageResponse {
                 success?(response.list.map({ PeopleItem(response: $0) }))
                 self?.currentPage += 1
             } else {
@@ -191,7 +191,7 @@ final class PeopleItemsService: RemoteItemsService {
     
     func searchPeople(text: String, success: ListRemoveItems?, fail: FailRemoteItems?) {
         service.searchPeople(text: text, success: { response in
-            if let response = response as? PeopleServiceResponse, !response.list.isEmpty {
+            if let response = response as? PeopleServiceResponse {
                 success?(response.list.map({ PeopleItem(response: $0) }))
             } else {
                 fail?()

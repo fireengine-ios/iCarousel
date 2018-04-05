@@ -172,20 +172,22 @@ class CreateStoryMusicService: RemoteItemsService {
     }
 }
 
-typealias CreateStorSuccess = () -> Swift.Void
-typealias GetPreviewStorrySyccess = (_ responce: CreateStoryResponce) -> Swift.Void
+typealias CreateStorSuccess = () -> Void
+typealias GetPreviewStorrySyccess = (_ responce: CreateStoryResponce) -> Void
 
 class CreateStoryService: BaseRequestService {
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     func createStory(createStory: CreateStory, success: CreateStorSuccess?, fail: FailResponse?) {
         log.debug("CreateStoryMusicService createStory")
 
-        let  handler = BaseResponseHandler< CreateResponse, ObjectRequestResponse>(success: {
-            resp  in
+        let  handler = BaseResponseHandler< CreateResponse, ObjectRequestResponse>(success: { [weak self] resp in
             if let created = resp as? CreateResponse,
                 created.isOkStatus {
                 log.debug("CreateStoryMusicServic createStory success")
 
+                self?.analyticsService.track(event: .createStory)
                 success?()
             } else {
                 log.debug("CreateStoryMusicService createStory fail")

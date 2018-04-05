@@ -104,12 +104,13 @@ class SyncServiceManager {
         let time = NSDate().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncs {
             lastAutoSyncTime = time
-            log.debug("Sync should start in bacground")
+            log.debug("Sync should start in background")
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         }
     }
     
     func stopSync() {
+        WidgetService.shared.notifyWidgetAbout(status: .stoped)
         stop(photo: true, video: true)
     }
     
@@ -143,6 +144,7 @@ class SyncServiceManager {
     }
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
+        print("AUTOSYNC: checkReachabilityAndSettings")
         dispatchQueue.async {
             guard let syncSettings = self.settings else {
                 AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, _ in
@@ -172,10 +174,10 @@ class SyncServiceManager {
                 return
             }
             
+            let photoOption = syncSettings.photoSetting.option
+            let videoOption = syncSettings.videoSetting.option
+            
             if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
-                let photoOption = syncSettings.photoSetting.option
-                let videoOption = syncSettings.videoSetting.option
-                
                 let photoEnabled = (reachability.connection == .wifi && photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
                     (reachability.connection == .cellular && photoOption == .wifiAndCellular)
                 
@@ -185,21 +187,23 @@ class SyncServiceManager {
                 let photoServiceWaitingForWiFi = reachability.connection == .cellular && photoOption == .wifiOnly
                 let videoServiceWaitingForWiFi = reachability.connection == .cellular && videoOption == .wifiOnly
                 
+                if !photoEnabled || !videoEnabled {
+                    self.stop(photo: !photoEnabled, video: !videoEnabled)
+                }
+                
                 if photoServiceWaitingForWiFi || videoServiceWaitingForWiFi {
                     self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
-                } else {
-                    self.stop(photo: !photoEnabled, video: !videoEnabled)
                 }
                 
                 if photoEnabled || videoEnabled {
                     self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
                 }
             } else {
-                if reachabilityChanged {
-                    self.waitForWifi(photo: true, video: true)
-                } else {
-                    self.stopSync()
-                }
+                self.stopSync()
+                
+                let photoServiceWaitingForWiFi = photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
+                let videoServiceWaitingForWiFi = videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
+                self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
             }
         }
     }
@@ -341,7 +345,11 @@ extension SyncServiceManager {
                                               secondAction: { vc in
                                                 vc.close(completion: {
                                                     let router = RouterVC()
-                                                    router.pushViewController(viewController: router.packages)
+                                                    if router.navigationController?.presentedViewController != nil {
+                                                        router.pushOnPresentedView(viewController: router.packages)
+                                                    } else {
+                                                        router.pushViewController(viewController: router.packages)
+                                                    }
                                                 })
         })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)

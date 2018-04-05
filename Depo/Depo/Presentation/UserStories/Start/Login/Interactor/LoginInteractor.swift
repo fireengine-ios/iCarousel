@@ -10,12 +10,14 @@ class LoginInteractor: LoginInteractorInput {
     
     weak var output: LoginInteractorOutput?
     
-    var dataStorage = LoginDataStorage()
+    private var dataStorage = LoginDataStorage()
+    private let authService = AuthenticationService()
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var eulaService = EulaService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var rememberMe: Bool = true
     private var attempts: Int = 0
@@ -76,6 +78,7 @@ class LoginInteractor: LoginInteractorInput {
             self.emptyEmailCheck(for: headers)
             
             self.tokenStorage.isRememberMe = self.rememberMe
+            self.analyticsService.track(event: .login)
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }
@@ -276,6 +279,19 @@ class LoginInteractor: LoginInteractorInput {
         }) { [weak self] errorRespose in
             DispatchQueue.main.async {
                 self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
+            }
+        }
+    }
+    
+    func updateUserLanguage() {
+        authService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.output?.updateUserLanguageSuccess()
+                case .failed(let error):
+                    self?.output?.updateUserLanguageFailed(error: error)
+                }
             }
         }
     }

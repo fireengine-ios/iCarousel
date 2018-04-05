@@ -75,6 +75,10 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         navigationBarWithGradientStyle()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        backButtonForNavigationItem(title: TextConstants.backTitle)
+    }
+    
     // MARK: SettingsViewInput
     
     func setupVersionLabel() {
@@ -278,6 +282,10 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     
     func profileInfoChanged() {
         userInfoSubView.reloadUserInfo()
+    }
+    
+    func updatePhoto(image: UIImage) {
+        userInfoSubView.updatePhoto(image: image)
     }
     
     func profileWontChangeWith(error: Error) {

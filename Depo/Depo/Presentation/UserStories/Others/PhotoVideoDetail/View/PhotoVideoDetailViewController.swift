@@ -144,6 +144,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setNavigationBackgroundColor(color: UIColor.clear)
         
         visibleNavigationBarStyle()
+        setStatusBarBackgroundColor(color: .clear)
+        
         output.viewWillDisappear()
     }
     
@@ -349,7 +351,6 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
             switch file.patchToPreview {
             case let .localMediaContent(local):
                 let option = PHVideoRequestOptions()
-                option.isNetworkAccessAllowed = true
                 
                 output.startCreatingAVAsset()
                 

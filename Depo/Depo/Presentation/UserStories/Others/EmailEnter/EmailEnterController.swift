@@ -26,7 +26,9 @@ final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
     @objc private func actionCloseButton(_ sender: UIBarButtonItem) {
         let isUpped = attemptsCounter.up(limitHandler: { [weak self] in
             self?.view.endEditing(true)
-            AppConfigurator.logout()
+            self?.dismiss(animated: true) { 
+                AppConfigurator.logout()
+            }
         })
         
         if isUpped {
@@ -55,7 +57,7 @@ final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
     }
     
     private func verifyMail() {
-        guard let email = emailTextField.text, !email.isEmpty else {
+        guard let email = emailTextField.text?.lowercased(), !email.isEmpty else {
             showErrorAlert(message: TextConstants.registrationCellPlaceholderEmail)
             return
         }
@@ -74,7 +76,7 @@ final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
                 }
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {
-                    self?.showErrorAlert(message: TextConstants.notCorrectEmail)
+                    self?.showErrorAlert(message: error.description)
                     self?.hideSpiner()
                 }
         })

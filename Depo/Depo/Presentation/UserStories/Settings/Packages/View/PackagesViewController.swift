@@ -8,14 +8,13 @@
 
 import UIKit
 
-class PackagesViewController: UIViewController {
+final class PackagesViewController: UIViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak private var collectionView: ResizableCollectionView!
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
     @IBOutlet weak var scrollView: UIScrollView!
-    
     
     private lazy var activityManager = ActivityIndicatorManager()
     
@@ -33,6 +32,7 @@ class PackagesViewController: UIViewController {
         activityManager.delegate = self
         promoView.deleagte = self
         setupCollectionView()
+        
         output.viewIsReady()
         
         MenloworksAppEvents.onPackagesOpen()
@@ -46,6 +46,20 @@ class PackagesViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
     }
+
+    func showRestoreButton() {
+        //IF THE USER NON CELL USER
+        let moreButton = UIBarButtonItem(image: UIImage(named: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
+        moreButton.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem = moreButton
+
+    }
+    
+    @objc private func restorePurhases() {
+        startActivityIndicator()
+        output.restorePurchasesPressed()
+    }
+    
 }
 
 // MARK: PackagesViewInput
@@ -78,6 +92,9 @@ extension PackagesViewController: PackagesViewInput {
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan]) {
+        if let layout = collectionView.collectionViewLayout as? ColumnsCollectionLayout {
+            layout.cellHeight = SubscriptionPlanCollectionViewCell.heightForAccount(type: output.getAccountType())
+        }
         plans += array
     }
     
@@ -127,7 +144,7 @@ extension PackagesViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeue(cell: SubscriptionPlanCollectionViewCell.self, for: indexPath)
         cell.delegate = self
         cell.indexPath = indexPath
-        cell.configure(with: plans[indexPath.item])
+        cell.configure(with: plans[indexPath.item], accountType: output.getAccountType())
         return cell
     }
 }
@@ -142,14 +159,6 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
         }
         output.didPressOn(plan: plan)
     }
-}
-
-// MARK: UICollectionViewDelegateFlowLayout
-extension PackagesViewController: UICollectionViewDelegateFlowLayout {
-}
-
-// MARK: UICollectionViewDelegate
-extension PackagesViewController: UICollectionViewDelegate {
 }
 
 // MARK: - ActivityIndicator

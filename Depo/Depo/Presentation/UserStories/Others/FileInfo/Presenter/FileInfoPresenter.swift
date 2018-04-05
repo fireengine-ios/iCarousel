@@ -17,7 +17,25 @@ class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput,
     }
     
     func setObject(object: BaseDataSourceItem) {
-        view.setObject(object: object)
+        if object.fileType == .photoAlbum {
+            view.hideViews()
+            view.startActivityIndicator()
+            interactor.getAlbum(for: object)
+        } else {
+            view.setObject(object: object)
+        }
+    }
+    
+    func albumForUuidSuccessed(album: AlbumServiceResponse) {
+        let albumItem = AlbumItem(remote: album)
+        view.showViews()
+        view.setObject(object: albumItem)
+        view.stopActivityIndicator()
+    }
+    
+    func albumForUuidFailed(error: Error) {
+        view.stopActivityIndicator()
+        view.showErrorAlert(message: error.description)
     }
     
     func onRename(newName: String) {

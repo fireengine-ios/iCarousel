@@ -198,7 +198,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         setLastBackUpDate(response.date)
         setStateWithBackUp()
         
-        var template: String
+        let template: String
         switch operation {
         case .backup:
             template = TextConstants.settingsBackupedText

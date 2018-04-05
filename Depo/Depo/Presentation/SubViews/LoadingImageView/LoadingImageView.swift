@@ -32,7 +32,8 @@ class LoadingImageView: UIImageView {
         super.awakeFromNib()
         
         if (cornerView == nil) {
-            cornerView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
+            cornerView = UIView()
+            cornerView?.translatesAutoresizingMaskIntoConstraints = false
             
             cornerView!.backgroundColor = UIColor.clear
             cornerView!.layer.borderColor = ColorConstants.darcBlueColor.cgColor
@@ -96,7 +97,7 @@ class LoadingImageView: UIImageView {
         activity.startAnimating()
         let path_: PathForItem = PathForItem.remoteUrl(url)
         path = path_
-        self.url = filesDataSource.getImage(patch: PathForItem.remoteUrl(url), compliteImage: { [weak self] image in
+        self.url = filesDataSource.getImage(patch: PathForItem.remoteUrl(url), completeImage: { [weak self] image in
             if self?.path == path_ {
                 self?.finishImageLoading(image)
             }
@@ -148,7 +149,15 @@ class LoadingImageView: UIImageView {
     
     func setBorderVisibility(visibility: Bool) {
         if (visibility) {
-            addSubview(cornerView!)
+            guard let cornerView = cornerView else {
+                return
+            }
+            
+            addSubview(cornerView)
+            cornerView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+            cornerView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+            cornerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            cornerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         } else {
             cornerView!.removeFromSuperview()
         }

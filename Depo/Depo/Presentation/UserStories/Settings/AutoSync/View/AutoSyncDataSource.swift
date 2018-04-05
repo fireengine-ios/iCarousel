@@ -19,7 +19,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     private let estimatedRowHeight: CGFloat = 88.0
     
     @IBOutlet weak var tableView: UITableView?
-    @IBOutlet weak var tableHConstraint: NSLayoutConstraint?
     
     var isFromSettings: Bool = false
     
@@ -29,7 +28,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     weak var delegate: AutoSyncDataSourceDelegate?
     
-    func setup(table: UITableView, with heightConstratint: NSLayoutConstraint?) {
+    func setup(table: UITableView) {
         tableView = table
         tableView?.delegate = self
         tableView?.dataSource = self
@@ -37,7 +36,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.estimatedRowHeight = estimatedRowHeight
         tableView?.separatorStyle = .none
-        tableHConstraint = heightConstratint
         
         registerCells(with: [CellsIdConstants.autoSyncSwitcherCellID,
                              CellsIdConstants.autoSyncSettingsCellID])
@@ -52,11 +50,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func showCells(from settings: AutoSyncSettings) {
         autoSyncSettings = settings
-        let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: nil, selected: settings.isAutoSyncOptionEnabled)
-        let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.photoSetting, selected: false)
-        let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.videoSetting, selected: false)
-        tableDataArray.append(contentsOf: [headerModel, photoSettingModel, videoSettingModel])
-        reloadTableView()
+        setupCells(with: settings)
     }
     
     private func updateCells() {
@@ -65,6 +59,10 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         }
         
         tableDataArray.removeAll()
+        setupCells(with: settings)
+    }
+    
+    private func setupCells(with settings: AutoSyncSettings) {
         let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: nil, selected: settings.isAutoSyncOptionEnabled)
         let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.photoSetting, selected: false)
         let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.videoSetting, selected: false)
@@ -77,19 +75,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             return AutoSyncSettings()
         }
         return settings
-    }
-    
-    private func getTableHeight() -> CGFloat {
-        let rowsCount = tableView?.numberOfRows(inSection: 0) ?? 0
-        var tableH: CGFloat = 0.0
-        for i in 0...rowsCount {
-            let indexPath = IndexPath(row: i, section: 0)
-            if let cellRect = tableView?.rectForRow(at: indexPath) {
-                tableH = tableH + cellRect.size.height
-            }
-        }
-        
-        return tableH
     }
     
     func forceDisableAutoSync() {
@@ -144,10 +129,8 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
 
     func reloadTableView() {
-        tableView?.reloadData()
-        if let constraint = tableHConstraint {
-            constraint.constant = getTableHeight()
-            tableView?.updateConstraints()
+        DispatchQueue.main.async {
+            self.tableView?.reloadData()
         }
     }
 
@@ -166,7 +149,7 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
                 autoSyncSettings?.isAutoSyncOptionEnabled = true
                 delegate?.enableAutoSync()
             } else {
-                autoSyncSettings?.disableAutoSync()
+                forceDisableAutoSync()
                 reloadTableView()
             }
         }
@@ -186,11 +169,6 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
         UIView.performWithoutAnimation {
             tableView?.beginUpdates()
             tableView?.endUpdates()
-        }
-
-        if let constraint = tableHConstraint {
-            constraint.constant = getTableHeight()
-            tableView?.updateConstraints()
         }
     }
 }

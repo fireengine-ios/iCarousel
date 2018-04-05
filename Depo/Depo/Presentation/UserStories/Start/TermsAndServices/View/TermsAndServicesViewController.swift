@@ -60,7 +60,7 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
         
         acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
         
-        textView.contentInset.right = 10
+        textView.textContainerInset.right = 10
         textView.text = ""
         textView.dataDetectorTypes = [.phoneNumber, .link]
         textView.indicatorStyle = .white

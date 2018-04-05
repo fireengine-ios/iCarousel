@@ -12,7 +12,7 @@ class PackagesPresenter {
     var router: PackagesRouterInput!
     
     var activeSubscriptions: [SubscriptionPlanBaseResponse] = []
-    var accountType = AccountType.all
+    private var accountType = AccountType.all
     
     private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
         if accountType == "TURKCELL" {
@@ -40,6 +40,11 @@ class PackagesPresenter {
 
 // MARK: PackagesViewOutput
 extension PackagesPresenter: PackagesViewOutput {
+    
+    func getAccountType() -> AccountType {
+        return accountType
+    }
+    
     func submit(promocode: String) {
         interactor.submit(promocode: promocode)
     }
@@ -92,6 +97,10 @@ extension PackagesPresenter: PackagesViewOutput {
             }
         })
     }
+    
+    func restorePurchasesPressed() {
+        interactor.restorePurchases()
+    }
 }
 
 // MARK: - OptInControllerDelegate
@@ -117,7 +126,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
         optInVC.startActivityIndicator()
         self.optInVC = optInVC
-        interactor.verifyOffer(token: referenceToken, otp: code)
+        interactor.verifyOffer(offerToBuy, token: referenceToken, otp: code)
     }
 }
 
@@ -192,10 +201,12 @@ extension PackagesPresenter: PackagesInteractorOutput {
         case .moldovian:
             break
         case .all:
-            break
+            //show restore
+            view?.showRestoreButton()
+//            break
             /// in app purchase
 //            view?.startActivityIndicator()
-//            interactor.getOfferApples()
+            interactor.getOfferApples()
         }
         
         let subscriptionPlans = interactor.convertToASubscriptionList(activeSubscriptionList: activeSubscriptions, accountType: accountType)
@@ -224,6 +235,10 @@ extension PackagesPresenter: PackagesInteractorOutput {
         optInVC?.stopActivityIndicator()
         view?.stopActivityIndicator()
         view?.display(error: error)
+    }
+    
+    func purchasesRestored(text: String) {
+        
     }
 }
 
