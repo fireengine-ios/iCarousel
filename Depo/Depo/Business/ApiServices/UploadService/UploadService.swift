@@ -86,9 +86,11 @@ final class UploadService: BaseRequestService {
     @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
         
         trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
+    
+        guard let filteredItems = filter(items: items) else {
+            return nil
+        }
         
-        let filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes && $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
-        //TODO: Show 4 gigabytes error here?
         switch uploadType {
         case .autoSync:
             return self.syncFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail)
@@ -579,6 +581,33 @@ extension UploadService {
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
         }
     }
+    
+    fileprivate func filter(items: [WrapData]) -> [WrapData]? {
+        if items.count == 1 {
+            if !validateItemSize(item: items.first!) {
+                return nil
+            }
+            return items
+        }
+        
+        return items.filter { $0.fileSize < NumericConstants.fourGigabytes && $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
+        
+    }
+    
+    fileprivate func validateItemSize(item: WrapData) -> Bool {
+        guard item.fileSize < NumericConstants.fourGigabytes else {
+            UIApplication.showErrorAlert(message: TextConstants.syncFourGbVideo)
+            return false
+        }
+        
+        guard item.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 else {
+            UIApplication.showErrorAlert(message: TextConstants.syncNotEnoughMemory)
+            return false
+        }
+        
+        return true
+    }
+    
 }
 
 extension UploadService {
