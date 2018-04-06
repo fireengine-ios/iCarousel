@@ -27,6 +27,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     private let options: [AutoSyncOption] = [.daily, .weekly, .monthly]
     
     var model: AutoSyncModel?
+    private var isFromSettings: Bool = false
     
     var delegate: AutoSyncSwitcherTableViewCellDelegate?
     
@@ -66,6 +67,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     }
     
     func setColors(isFromSettings: Bool) {
+        self.isFromSettings = isFromSettings
         titleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         subTitleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         separatorView.backgroundColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
@@ -94,6 +96,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         for (option, view) in zip(options, optionsViews) {
             view.setup(with: option, isSelected: autoSyncSetting.option == option)
             view.delegate = self
+            view.setColors(isFromSettings: isFromSettings)
         }
         
         optionsStackView.isHidden = !switcher.isOn
