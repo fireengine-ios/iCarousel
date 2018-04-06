@@ -12,7 +12,7 @@ extension Notification.Name {
     public static let changeFaceImageStatus = Notification.Name("changeFaceImageStatus")
 }
 
-final class FaceImageViewController: UIViewController {
+final class FaceImageViewController: ViewController {
     
     var output: FaceImageViewOutput!
     

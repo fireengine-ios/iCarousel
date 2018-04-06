@@ -21,7 +21,7 @@ final class FaceImagePhotosRouter: BaseFilesGreedRouter {
         
         let albumUUID = router.getParentUUID()
         let controller = router.filesDetailFaceImageAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID, albumItem: item)
-        let nController = UINavigationController(rootViewController: controller)
+        let nController = NavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
     }
     

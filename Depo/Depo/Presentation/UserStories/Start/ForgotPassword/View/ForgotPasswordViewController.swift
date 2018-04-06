@@ -9,7 +9,7 @@
 import UIKit
 import Typist
 
-class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, UITableViewDelegate, UITableViewDataSource, ProtoInputCellProtocol {
+class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput, UITableViewDelegate, UITableViewDataSource, ProtoInputCellProtocol {
 
     var output: ForgotPasswordViewOutput!
     

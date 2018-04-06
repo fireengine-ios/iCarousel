@@ -44,6 +44,15 @@ extension UIViewController {
         return 787878
     }
     
+    var statusBarColor: UIColor? {
+        get {
+            return UIApplication.shared.statusBarView?.backgroundColor
+        }
+        set {
+            UIApplication.shared.statusBarView?.backgroundColor = newValue
+        }
+    }
+    
     func defaultNavBarStyle(backgroundImg: UIImage = UIImage()) {
         visibleNavigationBarStyle()
         navBar?.setBackgroundImage(backgroundImg, for: .default)
@@ -56,7 +65,7 @@ extension UIViewController {
             view.removeFromSuperview()
         }
         
-        setStatusBarBackgroundColor(color: .clear)
+        statusBarColor = .clear
     }
     
     func backButtonForNavigationItem(title: String) {
@@ -73,10 +82,6 @@ extension UIViewController {
         navigationItem.titleView = nil
         navigationItem.title = title
         navBar?.titleTextAttributes = [NSAttributedStringKey.font: UIFont.TurkcellSaturaDemFont(size: 19), NSAttributedStringKey.foregroundColor: UIColor.white]
-    }
-    
-    func setStatusBarBackgroundColor(color: UIColor) {
-        UIApplication.shared.statusBarView?.backgroundColor = color
     }
     
     func setNavigationBackgroundColor(color: UIColor) {
@@ -96,7 +101,7 @@ extension UIViewController {
         if let view = navBar?.viewWithTag(tagHomeView) {
             view.removeFromSuperview()
         }
-        setStatusBarBackgroundColor(color: .clear)
+        statusBarColor = .clear
         
         navBar?.isTranslucent = true
     }
@@ -132,7 +137,7 @@ extension UIViewController {
         }
         
         navBar?.backgroundColor = .black
-        setStatusBarBackgroundColor(color: .black)
+        statusBarColor = .black
         navBar?.isTranslucent = true
     }
     

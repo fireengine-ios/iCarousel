@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BasicCustomNavBarViewController: UIViewController {
+class BasicCustomNavBarViewController: ViewController {
 }
 
 extension BasicCustomNavBarViewController: CustomNavBarViewActionDelegate {
