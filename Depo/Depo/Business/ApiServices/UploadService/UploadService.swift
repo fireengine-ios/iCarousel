@@ -583,31 +583,24 @@ extension UploadService {
     }
     
     fileprivate func filter(items: [WrapData]) -> [WrapData]? {
-        if items.count == 1 {
-            if let first = items.first, !validateItemSize(item: first) {
-                return nil
-            }
-            return items
+        guard !items.isEmpty else {
+            return nil
         }
         
-        return items.filter { $0.fileSize < NumericConstants.fourGigabytes && $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
-        
-    }
-    
-    fileprivate func validateItemSize(item: WrapData) -> Bool {
-        guard item.fileSize < NumericConstants.fourGigabytes else {
+        var result = items.filter { $0.fileSize < NumericConstants.fourGigabytes }
+        guard !result.isEmpty else {
             UIApplication.showErrorAlert(message: TextConstants.syncFourGbVideo)
-            return false
+            return nil
         }
         
-        guard item.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 else {
+        result = result.filter { $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
+        guard !result.isEmpty else {
             UIApplication.showErrorAlert(message: TextConstants.syncNotEnoughMemory)
-            return false
+            return nil
         }
         
-        return true
+        return result
     }
-    
 }
 
 extension UploadService {

@@ -15,12 +15,18 @@ final class StreamReaderWriter {
     func copyFile(from fromURL: URL, to toURL: URL, progress: ProgressCallBack? = nil, completion: @escaping ResponseVoid) {
         guard let copyOutput = OutputStream(url: toURL, append: false),
             let fileInput = InputStream(url: fromURL),
-            let fileSize = sizeOfInputFile(src: fromURL),
             let freeSpace = Device.getFreeDiskSpaceInBytes() else {
                 completion(ResponseResult.failed(CustomErrors.unknown))
                 return
         }
         
+        let fileSize: Int
+        do {
+            fileSize = try sizeOfInputFile(src: fromURL)
+        } catch {
+            return completion(ResponseResult.failed(error))
+        }
+
         guard fileSize < NumericConstants.fourGigabytes else {
             completion(ResponseResult.failed(CustomErrors.text(TextConstants.syncFourGbVideo)))
             return
@@ -80,13 +86,8 @@ final class StreamReaderWriter {
         }
     }
     
-    private func sizeOfInputFile(src: URL) -> Int? {
-        do {
-            let fileSize = try FileManager.default.attributesOfItem(atPath: src.path)
-            return fileSize[FileAttributeKey.size] as? Int
-        } catch  {
-           
-        }
-        return nil
+    private func sizeOfInputFile(src: URL) throws -> Int {
+        let fileSize = try FileManager.default.attributesOfItem(atPath: src.path)
+        return fileSize[.size] as? Int ?? 0
     }
 }

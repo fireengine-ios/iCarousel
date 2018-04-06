@@ -471,8 +471,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                             case .success(_):
                                                                 break
                                                             case .failed(let error):
-                                                                if let error = error as? CustomErrors {
-                                                                    UIApplication.showErrorAlert(message: error.errorDescription ?? "")
+                                                                if let message = (error as? CustomErrors)?.errorDescription {
+                                                                    UIApplication.showErrorAlert(message: message)
+                                                                } else {
+                                                                    UIApplication.showErrorAlert(message: error.localizedDescription)
                                                                 }
                                                             }
                                                             semaphore.signal()
