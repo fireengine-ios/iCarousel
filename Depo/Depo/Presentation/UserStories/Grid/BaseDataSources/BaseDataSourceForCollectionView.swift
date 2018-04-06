@@ -80,7 +80,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var isHeaderless = false
     
-    private var isLocalPaginationOn = true // ---------------------=======
+    private var isLocalPaginationOn = false // ---------------------=======
     private var isLocalFilesRequested = false // -----------------------=========
     
     var allMediaItems = [WrapData]()
@@ -262,12 +262,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             self.pageLeftOvers.removeAll()
                             self.pageLeftOvers.append(contentsOf: lefovers)
                             
-                            //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
                             if compoundedItems.count < self.pageCompounder.pageSize, self.isPaginationDidEnd {
-//                                self.delegate?.getNextItems()
-//                                return
                                 self.isLocalPaginationOn = false
                             }
                             
@@ -472,29 +469,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return headerText
     }
     
-    func getAllLocalItems() -> [WrapData] {
-        guard
-            let unwrapedFilters = originalFilters,
-            let specificFilters = getFileFilterType(filters: unwrapedFilters),
-            !isOnlyNonLocal(filters: unwrapedFilters),
-            (specificFilters == .video || specificFilters == .image)
-        else {
-            return []
-        }
-
-        let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
-        let predicate = PredicateRules().predicate(filters: [.localStatus(.local)])
-        let sortDescriptors = CollectionSortingRules(sortingRules: currentSortType).rule.sortDescriptors
-        
-        fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = sortDescriptors
-        
-        guard let fetchResult = try? CoreDataStack.default.mainContext.fetch(fetchRequest) else {
-            return []
-        }
-        return fetchResult.map{ return WrapData(mediaItem: $0) }
-    }
-    
     func appendCollectionView(items: [WrapData], pageNum: Int) {
         let nonEmptyMetaItems = items.filter {
             if $0.fileType == .image, !$0.isLocalItem {
@@ -502,12 +476,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             return $0.metaData != nil
         }
-//<<<<<<< HEAD
-//        if items.isEmpty {
-//=======
-//
+
         if nonEmptyMetaItems.isEmpty {
-//>>>>>>> working pagination
             isPaginationDidEnd = true
         }
         
@@ -518,7 +488,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         allRemoteItems.append(contentsOf: nonEmptyMetaItems)
         
         self.pageLeftOvers.removeAll()
-        
         
         compoundItems(pageItems: pageItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] in
             DispatchQueue.main.async {
