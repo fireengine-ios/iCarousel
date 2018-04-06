@@ -99,6 +99,14 @@ class CardsManager: NSObject {
         }
         homeCardsObjects.removeAll()
         homeCardsObjects.append(contentsOf: sortedArray)
+        
+        homeCardsObjects = homeCardsObjects.filter {
+            if let type = $0.getOperationType(){
+                return !deletedCards.contains(type)
+            }
+            return false
+        }
+        
         showHomeCards()
     }
     
@@ -176,8 +184,15 @@ class CardsManager: NSObject {
         }
     }
     
-    func manuallyDeleteCardsByType(type: OperationType) {
-        if type == .freeAppSpaceLocalWarning || type == .freeAppSpace {
+    func manuallyDeleteCardsByType(type: OperationType, homeCardResponce: HomeCardResponse? = nil) {
+        var typeForInsert: OperationType? = nil
+        if let responce = homeCardResponce, !responce.actionable {
+            typeForInsert = type
+        }else if type == .freeAppSpaceLocalWarning || type == .freeAppSpace {
+            typeForInsert = type
+        }
+        
+        if let typeForInsert = typeForInsert, !deletedCards.contains(typeForInsert) {
             deletedCards.insert(type)
         }
         

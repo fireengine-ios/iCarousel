@@ -37,6 +37,11 @@ class BaseView: UIView, NibInit {
     }
     
     func deleteCard() {
+        
+        if let object = cardObject, let type = object.getOperationType() {
+            CardsManager.default.manuallyDeleteCardsByType(type: type, homeCardResponce: cardObject)
+        }
+        
         guard let id = cardObject?.id else {
             return
         }
