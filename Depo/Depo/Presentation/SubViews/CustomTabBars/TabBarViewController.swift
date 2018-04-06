@@ -683,7 +683,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         }) { [weak self] error in
             DispatchQueue.main.async {
                 let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                              message: error.localizedDescription,
+                                              message: error.description,
                                               image: .error,
                                               buttonTitle: TextConstants.ok)
                 self?.present(vc, animated: true, completion: nil)

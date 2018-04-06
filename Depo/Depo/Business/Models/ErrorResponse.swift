@@ -48,7 +48,7 @@ extension ErrorResponse: LocalizedError {
             if recivedError.isNetworkError {
                 return TextConstants.errorConnectedToNetwork
             }
-            return recivedError.localizedDescription
+            return recivedError.description
         case .httpCode(let code):
             return String(code)
         }

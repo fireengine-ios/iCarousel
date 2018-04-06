@@ -185,6 +185,7 @@ final class PeopleItemsService: RemoteItemsService {
                 fail?()
             }
         }) { error in
+            error.showInternetErrorGlobal()
             fail?()
         }
     }
@@ -197,6 +198,7 @@ final class PeopleItemsService: RemoteItemsService {
                 fail?()
             }
         }) { error in
+            error.showInternetErrorGlobal()
             fail?()
         }
     }
