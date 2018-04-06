@@ -653,6 +653,7 @@ final class UploadOperations: Operation {
     private var isPhotoAlbum: Bool = false
     private var attemptsCount = 0
     private let semaphore: DispatchSemaphore
+    private let dispatchQueue = DispatchQueue(label: "com.lifebox.upload_operation")
     
     
     init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, handler: @escaping UploadOperationHandler) {
@@ -665,7 +666,7 @@ final class UploadOperations: Operation {
         self.semaphore = DispatchSemaphore(value: 0)
         self.isFavorites = isFavorites
         self.isPhotoAlbum = isFromAlbum
-        
+
         super.init()
         self.qualityOfService = (uploadType == .autoSync) ? .background : .userInitiated
         SingletonStorage.shared.progressDelegates.add(self)
@@ -727,51 +728,54 @@ final class UploadOperations: Operation {
                                      rootFolder: self.folder,
                                      isFavorite: self.isFavorites)
             
-            self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
-                
-                let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
-                                                    fileUUID: uploadParam.tmpUUId )
-                
-                self?.item.uuid = uploadParam.tmpUUId
-                
-                self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
-                    if let localURL = uploadParam.urlToLocalFile {
-                        try? FileManager.default.removeItem(at: localURL)
-                    }
+            self.dispatchQueue.async {
+                self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
                     
-                    if let resp = baseurlResponse as? SearchItemResponse {
-                        if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
-                            let item = Item.init(remote: resp)
-                            let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
-                            PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
-                                ItemOperationManager.default.fileAddedToAlbum(item: item)
-                            }, fail: { error in
-                                UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
-                                ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
+                    let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
+                                                        fileUUID: uploadParam.tmpUUId )
+                    
+                    self?.item.uuid = uploadParam.tmpUUId
+                    
+                    self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
+                        if let localURL = uploadParam.urlToLocalFile {
+                            try? FileManager.default.removeItem(at: localURL)
+                        }
+                        
+                        if let resp = baseurlResponse as? SearchItemResponse {
+                            if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
+                                let item = Item.init(remote: resp)
+                                let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
+                                PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
+                                    ItemOperationManager.default.fileAddedToAlbum(item: item)
+                                }, fail: { error in
+                                    UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
+                                    ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
+                                })
+                            }
+                            self?.item.tmpDownloadUrl = resp.tempDownloadURL
+                        }
+                        
+                        customSucces()
+                        
+                        }, fail: customFail)
+                    
+                    }, fail: { [weak self] error in
+                        guard let `self` = self else {
+                            return
+                        }
+                        
+                        if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                            let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
+                            DispatchQueue.global().asyncAfter(deadline: delay, execute: {
+                                self.attemptsCount += 1
+                                self.attempmtUpload()
                             })
-                        } 
-                        self?.item.tmpDownloadUrl = resp.tempDownloadURL
-                    }
-                    
-                    customSucces()
-
-                    }, fail: customFail)
-                
-                }, fail: { [weak self] error in
-                    guard let `self` = self else {
-                        return
-                    }
-                    
-                    if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                        let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
-                        DispatchQueue.global().asyncAfter(deadline: delay, execute: {
-                            self.attemptsCount += 1
-                            self.attempmtUpload()
-                        })
-                    } else {
-                        customFail(error)
-                    }
-            })
+                        } else {
+                            customFail(error)
+                        }
+                })
+            }
+            
             
             }, fail: customFail)
     }

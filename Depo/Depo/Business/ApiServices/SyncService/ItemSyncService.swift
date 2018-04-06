@@ -202,8 +202,6 @@ class ItemSyncServiceImpl: ItemSyncService {
 
 extension CoreDataStack {
     func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData]) -> Void) {
-
-        
         backgroundContext.perform { [weak self] in
             guard let `self` = self else {
                 completion([])
@@ -220,6 +218,8 @@ extension CoreDataStack {
                         completion([])
                         return
                     }
+                    
+                    completion(unsyncedItems)
                 }
             })
             
