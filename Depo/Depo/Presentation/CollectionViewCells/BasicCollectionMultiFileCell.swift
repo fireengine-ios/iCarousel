@@ -14,6 +14,8 @@ protocol BasicCollectionMultiFileCellActionDelegate: class {
 
 class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
+    private var smallSelectionImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+    
     @IBOutlet weak var bottomSeparator: UIView!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var cellContentView: UIView!
@@ -77,7 +79,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             bigContentImageView.contentMode = .scaleAspectFill
             bigContentImageView.image = image
         } else {
-            smallContentImageView.contentMode = .scaleToFill
+            smallContentImageView.contentMode = .scaleAspectFill
+            smallContentImageView.clipsToBounds = true
             smallContentImageView.configured = true
             smallContentImageView.setImage(image: image)
             smallContentImageView.isHidden = false
@@ -199,6 +202,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         if wrappered.fileType.isFaceImageAlbum || wrappered.fileType.isFaceImageType {
             moreButton.isHidden = true
         }
+        
+        if isCellSelected, !isBigSize() {
+            setSelectionSmallSelectionImageView(isSelected, isHidden: !isImageOrVideoType(wrappered.fileType))
+        }
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
@@ -225,12 +232,14 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         var bgColor: UIColor = ColorConstants.whiteColor
         if isSelectionActive {
             selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
+            
             selectionImageView.accessibilityLabel = isSelected ? TextConstants.accessibilitySelected : TextConstants.accessibilityNotSelected
             if isBigSize() {
                 UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                     self.bigSelectionView.alpha = isSelected ? 1 : 0
                 })
                 smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
+                setSelectionSmallSelectionImageView(false, isHidden: true)
             } else {
                 self.bigSelectionView.alpha = 0
                 bgColor = ColorConstants.whiteColor
@@ -240,6 +249,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 }
                 //because if we have image for object and object is not selected we should not show empty circle in top right corner of image
                 smallContentImageView.setSelection(selection: isSelected, showSelectonBorder: isSelected)
+                setSelectionSmallSelectionImageView(isSelected, isHidden: !isSelected)
             }
         } else {
             if isBigSize() {
@@ -253,9 +263,16 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 bgColor = ColorConstants.whiteColor
             }
             smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
+            setSelectionSmallSelectionImageView(false, isHidden: true)
         }
         
         bgView.backgroundColor = bgColor
+        
+        if let item = itemModel,
+            isCellSelected,
+            !isBigSize() {
+            setSelectionSmallSelectionImageView(isSelected, isHidden: !isImageOrVideoType(item.fileType))
+        }
     }
     
     override func awakeFromNib() {
@@ -280,15 +297,46 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         detailsLabel.textColor = ColorConstants.textGrayColor.withAlphaComponent(0.6)
         
         moreButton.accessibilityLabel = TextConstants.accessibilityMore
+        
+        configureSmallSelectionImageView()
+        setSelectionSmallSelectionImageView(false, isHidden: true)
     }
     
     override func updating() {
         super.updating()
         smallContentImageView.configured = false
         smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
+        setSelectionSmallSelectionImageView(false, isHidden: true)
     }
     
     @IBAction func moreButtonAction(_ sender: Any) {
         actionDelegate?.morebuttonGotPressed(sender: sender, itemModel: itemModel)
     }
+    
+    // MARK: - Utility methods
+    
+    private func setSelectionSmallSelectionImageView(_ isSelected: Bool, isHidden: Bool) {
+        smallSelectionImageView.isHidden = isHidden
+        smallSelectionImageView.image = UIImage(named: "selected")
+    }
+    
+    private func configureSmallSelectionImageView() {
+        addSubview(smallSelectionImageView)
+        smallSelectionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        smallSelectionImageView.rightAnchor.constraint(equalTo: smallContentImageView.rightAnchor, constant: smallSelectionImageView.bounds.width /  2).isActive = true
+        smallSelectionImageView.topAnchor.constraint(equalTo: smallContentImageView.topAnchor, constant: -(smallContentImageView.bounds.height / 4)).isActive = true
+    }
+    
+    private func isImageOrVideoType(_ type: FileType) -> Bool {
+        switch type {
+        case .image:
+            return true
+        case .video:
+            return true
+        default:
+            return false
+        }
+    }
+    
 }

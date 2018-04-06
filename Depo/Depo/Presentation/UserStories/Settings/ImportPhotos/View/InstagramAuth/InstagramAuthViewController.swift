@@ -13,7 +13,7 @@ protocol InstagramAuthViewControllerDelegate: class {
     func instagramAuthCancel()
 }
     
-class InstagramAuthViewController: UIViewController {
+class InstagramAuthViewController: ViewController {
     
     @IBOutlet weak private var webView: UIWebView!
     

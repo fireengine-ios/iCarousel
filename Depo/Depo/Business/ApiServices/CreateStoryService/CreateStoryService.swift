@@ -156,9 +156,9 @@ class CreateStoryMusicService: RemoteItemsService {
 
                 fail?()
             }
-        }, fail: { _  in
+        }, fail: { errorResponse  in
             log.debug("CreateStoryMusicService allItems fail")
-
+            errorResponse.showInternetErrorGlobal()
             fail?()
         })
 

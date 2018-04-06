@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return OrientationManager.shared.orientationLock
     }
     
+    
     private lazy var dropboxManager: DropboxManager = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
@@ -34,9 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         log.debug("AppDelegate didFinishLaunchingWithOptions")
-        
-        application.isStatusBarHidden = false
-        application.statusBarStyle = .lightContent
         
         AppConfigurator.applicationStarted(with: launchOptions)
         
@@ -72,9 +70,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    /// iOS 9+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
+        if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) {
             return true
         } else if dropboxManager.handleRedirect(url: url) {
             return true
@@ -162,7 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
         
-        let navVC = UINavigationController(rootViewController: vc)
+        let navVC = NavigationController(rootViewController: vc)
         vc.navigationBarWithGradientStyleWithoutInsets()
         
         topVC?.present(navVC, animated: false, completion: nil)
@@ -199,6 +198,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SyncServiceManager.shared.stopSync()
             AutoSyncDataStorage.clear()
         }
+        
+        WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         UserDefaults.standard.synchronize()
         player.stop()
@@ -278,9 +279,7 @@ private func setupLog() {
         fileDestination.showFileName = true
         fileDestination.showLineNumber = true
         fileDestination.showDate = true
-        
-        let day: TimeInterval = 24 * 60 * 60
-        fileDestination.targetMaxTimeInterval = day * 2
+        fileDestination.targetMaxTimeInterval = NumericConstants.logDuration
         log.add(destination: fileDestination)
     }
     

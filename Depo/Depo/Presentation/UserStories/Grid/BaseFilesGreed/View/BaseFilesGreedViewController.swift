@@ -58,6 +58,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     var refresherY: CGFloat = 0
     
     let underNavBarBarHeight: CGFloat = 53
+    var calculatedUnderNavBarBarHeight: CGFloat = 0
     
     @IBOutlet private weak var topCarouselConstraint: NSLayoutConstraint!
     
@@ -284,12 +285,16 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesTopLabel?.text = text
         noFilesTopLabel?.isHidden = false
         topBarContainer.isHidden = true
+        floatingHeaderContainerHeightConstraint.constant = 0
+        view.layoutIfNeeded()
     }
     
     func hideNoFiles() {
         noFilesView.isHidden = true
         noFilesTopLabel?.isHidden = true
         topBarContainer.isHidden = false
+        floatingHeaderContainerHeightConstraint.constant = calculatedUnderNavBarBarHeight
+        view.layoutIfNeeded()
     }
     
     func requestStarted() {
@@ -449,6 +454,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         topBarContainer.addConstraints(horisontalConstraints + verticalConstraints + [heightConstraint])
         
         floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
+        calculatedUnderNavBarBarHeight = underNavBarBarHeight
     }
     
     

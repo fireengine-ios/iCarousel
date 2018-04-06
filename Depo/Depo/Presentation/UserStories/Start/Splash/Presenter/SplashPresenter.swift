@@ -37,7 +37,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
             self.interactor.startLoginInBackroung()
         }
         
-        let navVC = UINavigationController(rootViewController: vc)
+        let navVC = NavigationController(rootViewController: vc)
         vc.navigationBarWithGradientStyleWithoutInsets()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -120,7 +120,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         vc.approveCancelHandler = { [weak self] in
             self?.openApp()
         }
-        let navVC = UINavigationController(rootViewController: vc)
+        let navVC = NavigationController(rootViewController: vc)
         UIApplication.topController()?.present(navVC, animated: true, completion: nil)
     }
     

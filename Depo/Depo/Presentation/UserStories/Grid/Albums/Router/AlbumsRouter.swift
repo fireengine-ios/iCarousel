@@ -37,7 +37,7 @@ final class AlbumsRouter: BaseFilesGreedRouter, AlbumRouterInput {
     
     func onCreateAlbum() {
         let controller = router.createNewAlbum()
-        let nController = UINavigationController(rootViewController: controller)
+        let nController = NavigationController(rootViewController: controller)
         router.presentViewController(controller: nController)
     }
     

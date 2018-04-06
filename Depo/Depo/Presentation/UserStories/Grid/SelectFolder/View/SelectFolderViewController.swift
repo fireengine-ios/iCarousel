@@ -91,7 +91,7 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
         cancelSelectBlock = cancel
         
         let router = RouterVC()
-        let nContr = UINavigationController(rootViewController: self)
+        let nContr = NavigationController(rootViewController: self)
         nContr.navigationBar.isHidden = false
         router.presentViewController(controller: nContr)
     }

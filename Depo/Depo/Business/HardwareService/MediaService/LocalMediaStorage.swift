@@ -387,7 +387,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             }
             
         } catch {
-            print(error.localizedDescription)
+            print(error.description)
         }
         return nil
     }
@@ -527,7 +527,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, dict in
             if let error = dict?[PHImageErrorKey] as? NSError, let inCloud = dict?[PHImageResultIsInCloudKey] as? Bool, inCloud {
-                print(error.localizedDescription)
+                print(error.description)
                 semaphore.signal()
                 return
             }
@@ -563,7 +563,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let operation = GetOriginalImageOperation(photoManager: self.photoManger,
                                                   asset: asset) { data, string, orientation, dict in
                                                     if let error = dict?[PHImageErrorKey] as? NSError, let inCloud = dict?[PHImageResultIsInCloudKey] as? Bool, inCloud {
-                                                        print(error.localizedDescription)
+                                                        print(error.description)
                                                         semaphore.signal()
                                                         return
                                                     }

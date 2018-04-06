@@ -42,10 +42,6 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         }
         setTitle(withString: mainTitle, andSubTitle: subTitle)
     }
-    
-    override func configurateViewForPopUp() {
-        scrolliblePopUpView.isEnable = false
-    }
 
     override func configurateNavigationBar() {
         configureNavBarActions()

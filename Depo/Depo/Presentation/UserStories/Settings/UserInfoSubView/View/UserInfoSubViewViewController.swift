@@ -14,7 +14,7 @@ protocol UserInfoSubViewViewControllerActionsDelegate: class {
     func upgradeButtonPressed()
 }
 
-class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput {
+class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
 
     var output: UserInfoSubViewViewOutput!
     

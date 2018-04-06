@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol SyncContactsViewInput: class {
+protocol SyncContactsViewInput: class, ErrorPresenter {
     func setInitialState()
     func setStateWithoutBackUp()
     func setStateWithBackUp()

@@ -18,13 +18,15 @@ final class PlacesService: BaseRequestService {
 //    }
     
     func getPlacesPage(param: PlacesPageParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("SearchService suggestion")
+        log.debug("PlacesService getPlacesPage")
         
         let handler = BaseResponseHandler<PlacesPageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func getPlacesAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+        log.debug("PlacesService getPlacesAlbumWithID")
+        
         let param = PlacesAlbumParameters(id: id)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
@@ -70,6 +72,7 @@ final class PlacesItemsService: RemoteItemsService {
                 fail?()
             }
         }) { error in
+            error.showInternetErrorGlobal()
             fail?()
         }
     }

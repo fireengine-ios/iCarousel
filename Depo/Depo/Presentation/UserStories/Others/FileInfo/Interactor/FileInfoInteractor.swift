@@ -35,7 +35,7 @@ class FileInfoInteractor: FileInfoInteractorInput {
                 }
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {
-                    self?.output.updated()
+                    self?.output.failedUpdate(error: error)
                 }
             })
         }

@@ -20,7 +20,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             }
             }, fail: { [weak self] fail in
                 DispatchQueue.main.async {
-                    self?.output.fail(text: fail.localizedDescription)
+                    self?.output.fail(text: fail.description)
                 }
         })
         

@@ -19,8 +19,9 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     
     var tableView: UITableView = UITableView()
     var viewsArray = [BaseView]()
-    var notPermittedPopUpViewTypes = Set<String>()
-    var isEnable: Bool = true
+    var notPermittedPopUpViewTypes  = Set<String>()
+    var permittedPopUpViewTypes     = Set<String>()
+    var isEnable: Bool = false
     
     var viewsByType = [OperationType: BaseView]()
     
@@ -151,11 +152,16 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         if !isEnable {
             return false
         }
-        
-        if notPermittedPopUpViewTypes.count == 0 {
-            return true
+
+        if notPermittedPopUpViewTypes.contains(type.rawValue){
+            return false
         }
-        return !notPermittedPopUpViewTypes.contains(type.rawValue)
+        
+        if !permittedPopUpViewTypes.isEmpty {
+            return permittedPopUpViewTypes.contains(type.rawValue)
+        }
+        
+        return true
     }
     
     private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool {
@@ -249,6 +255,13 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         let array = types.map { $0.rawValue }
         for operationName in array {
             notPermittedPopUpViewTypes.insert(operationName)
+        }
+    }
+    
+    func addPermittedPopUpViewTypes(types: [OperationType]) {
+        let array = types.map { $0.rawValue }
+        for operationName in array {
+            permittedPopUpViewTypes.insert(operationName)
         }
     }
     

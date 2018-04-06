@@ -168,10 +168,15 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func startOperationsWith(serverObjects: [HomeCardResponse]) {
+        var newPopUps = [BaseView]()
+        
         for object in serverObjects {
-            if let type = object.getOperationType() {
-                if let view = viewsByType[type] {
-                    view.cardObject = object
+            if let type = object.getOperationType(){
+                if let view = viewsByType[type], CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
+                    view.removeFromSuperview()
+                    view.set(object: object)
+                    view.layoutIfNeeded()
+                    newPopUps.append(view)
                 } else {
                     if !checkIsThisIsPermittedType(type: type) {
                         continue
@@ -182,17 +187,22 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                     if !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
                         let view = getViewForOperation(operation: type)
                         view.layoutIfNeeded()
-                        popUps.insert(view, at: 0)
+                        newPopUps.insert(view, at: 0)
                         viewsByType[type] = view
                     }
                 }
             }
         }
-        popUps = popUps.sorted(by: { view1, view2 -> Bool in
+        
+        newPopUps = newPopUps.sorted(by: { view1, view2 -> Bool in
             let order1 = view1.cardObject?.order ?? 0
             let order2 = view2.cardObject?.order ?? 0
             return order1 < order2
         })
+        
+        popUps.removeAll()
+        popUps.append(contentsOf: newPopUps)
+        
         collectionView.reloadData()
     }
     

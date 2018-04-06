@@ -18,6 +18,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private var refreshControl = UIRefreshControl()
+    
     let homePageDataSource = BaseCollectionViewDataSource()
     
     var navBarConfigurator = NavigationBarConfigurator()
@@ -45,7 +47,16 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         
+        configurateRefreshControl()
+        
+        showSpiner()
         output.homePagePresented()
+    }
+    
+    private func configurateRefreshControl() {
+        refreshControl.tintColor = ColorConstants.whiteColor
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,8 +118,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
     // MARK: HomePageViewInput
     
-    func setupInitialState() {
-        
+    func stopRefresh() {
+        hideSpiner()
     }
     
     
@@ -153,6 +164,12 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     func cancelSearch() { }
     
     func previewSearchResultsHide() { }
+    
+    @objc func reloadData() {
+        showSpiner()
+        refreshControl.endRefreshing()
+        output.needRefresh()
+    }
     
 }
 

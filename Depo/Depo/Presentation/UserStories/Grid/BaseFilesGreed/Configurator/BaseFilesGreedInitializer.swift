@@ -22,6 +22,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonCreateAlbum])
         viewController.scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
+        viewController.scrolliblePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .delete, .sync, .download, .addToAlbum],
                                                style: .default, tintColor: nil)
@@ -101,6 +102,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonNewFolder])
+        viewController.scrolliblePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
+        viewController.scrolliblePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
@@ -162,6 +165,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
+        viewController.scrolliblePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
+        viewController.scrolliblePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)

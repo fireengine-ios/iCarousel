@@ -10,8 +10,11 @@ import Foundation
 import ObjectiveDropboxOfficial
 
 enum DropboxManagerResult {
-    case success(String)
+    /// User is logged into Dropbox
+    case success(token: String)
+    /// Authorization flow was manually canceled by user!
     case cancel
+    /// some error from sdk
     case failed(String)
 }
 typealias DropboxLoginHandler = (DropboxManagerResult) -> Void
@@ -31,13 +34,11 @@ final class DropboxManager {
         
         print(dbResult)
         if dbResult.isSuccess() {
-            handler?(.success(dbResult.accessToken.accessToken))
+            handler?(.success(token: dbResult.accessToken.accessToken))
             log.debug("DropboxManager User is logged into Dropbox.")
-            print("Success! User is logged into Dropbox.")
         } else if dbResult.isCancel() {
             handler?(.cancel)
             log.debug("DropboxManager Authorization flow was manually canceled by user!")
-            print("Authorization flow was manually canceled by user!")
         } else if dbResult.isError() {
             handler?(.failed(dbResult.description()))
             log.debug("DropboxManager Error: \(dbResult)")
@@ -47,15 +48,24 @@ final class DropboxManager {
         return true
     }
     
-    var handler: DropboxLoginHandler?
+    private var handler: DropboxLoginHandler?
+    
+    private var token: String? {
+        return DBOAuthManager.shared()?.retrieveFirstAccessToken()?.accessToken
+    }
+    
+    func loginIfNeed(handler: @escaping DropboxLoginHandler) {
+        log.debug("DropboxManager login")
+        if let token = token {
+            handler(.success(token: token))
+            return
+        }
+        login(handler: handler)
+    }
     
     func login(handler: @escaping DropboxLoginHandler) {
         log.debug("DropboxManager login")
-
-        if let token = DBOAuthManager.shared()?.retrieveFirstAccessToken()?.accessToken {
-            handler(.success(token))
-            return
-        }
+        
         self.handler = handler
         guard let vc = (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController else {
             return

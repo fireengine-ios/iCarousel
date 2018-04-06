@@ -52,7 +52,7 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     
     
     private var expandHeight: CGFloat {
-        return isFullHeight ? 177.5 : 0.0
+        return isFullHeight ? 167.5 : 0.0
     }
     
     

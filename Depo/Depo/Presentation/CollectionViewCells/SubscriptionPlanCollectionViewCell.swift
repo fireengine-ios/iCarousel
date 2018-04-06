@@ -35,11 +35,11 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
     weak var delegate: SubscriptionPlanCellDelegate?
     var indexPath = IndexPath()
     
-    static func sizeForAccount(type: AccountType) -> CGSize {
+    static func heightForAccount(type: AccountType) -> CGFloat {
         if type == .all {
-            return CGSize(width: 140, height: 255)
+            return 255
         } else {
-            return CGSize(width: 140, height: 220)
+            return 220
         }
     }
     

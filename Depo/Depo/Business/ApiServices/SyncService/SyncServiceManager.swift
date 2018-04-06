@@ -104,7 +104,7 @@ class SyncServiceManager {
         let time = NSDate().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncs {
             lastAutoSyncTime = time
-            log.debug("Sync should start in bacground")
+            log.debug("Sync should start in background")
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         }
     }

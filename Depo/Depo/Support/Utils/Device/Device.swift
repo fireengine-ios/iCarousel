@@ -20,14 +20,6 @@ class Device {
         }
         return freeSize.int64Value
     }
-    
-    static func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {
-        if !Device.isIpad, UIDevice.current.orientation.isContained(in: [.landscapeLeft, .landscapeRight]) {
-            UIApplication.shared.isStatusBarHidden = true
-        } else {
-            UIApplication.shared.isStatusBarHidden = hidden
-        }
-    }
 
     static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es"]
     static private let defaultLocale = "en"

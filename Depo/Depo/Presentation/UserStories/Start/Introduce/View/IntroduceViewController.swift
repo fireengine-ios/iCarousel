@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class IntroduceViewController: UIViewController, IntroduceViewInput {
+class IntroduceViewController: ViewController, IntroduceViewInput {
 
     var output: IntroduceViewOutput!
     var dataSource = IntroduceDataSource()

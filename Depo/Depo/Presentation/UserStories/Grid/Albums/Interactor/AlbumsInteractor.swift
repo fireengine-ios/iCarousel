@@ -65,7 +65,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
             log.debug("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum error")
 
             DispatchQueue.main.async {
-                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+                self?.output.asyncOperationFail(errorMessage: error.description)
             }
         }
     }
