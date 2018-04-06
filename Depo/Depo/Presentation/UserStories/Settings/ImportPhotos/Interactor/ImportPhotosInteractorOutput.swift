@@ -42,6 +42,7 @@ protocol ImportFromDropboxInteractorOutput: class {
     
     func loginSuccessCallback(token: String)
     func loginFailureCallback(errorMessage: String)
+    func loginCanceled()
     
     func connectSuccessCallback()
     func connectFailureCallback(errorMessage: String)
