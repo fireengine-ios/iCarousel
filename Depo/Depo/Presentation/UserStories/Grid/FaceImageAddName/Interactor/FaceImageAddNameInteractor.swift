@@ -57,7 +57,7 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
             }
             
             }, fail: { [weak self] error in
-                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+                self?.output.asyncOperationFail(errorMessage: error.description)
         })
     }
     
@@ -75,7 +75,7 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
                 output.didMergePeople()
             }
         }, fail: { [weak self] error in
-            self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+            self?.output.asyncOperationFail(errorMessage: error.description)
         })
     }
 }

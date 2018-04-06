@@ -36,9 +36,9 @@ class AlbumDetailService: RemoteItemsService {
             let list = resultResponse.flatMap { WrapData(remote: $0) }
             self.currentPage = self.currentPage + 1
             success?(list)
-        }, fail: { _ in
+        }, fail: { error in
             log.debug("AlbumDetailService nextItems SearchService searchContentAlbum fail")
-
+            error.showInternetErrorGlobal()
             fail?()
         })
     }
@@ -58,9 +58,9 @@ class AlbumDetailService: RemoteItemsService {
             log.debug("AlbumDetailService albumCoverPhoto success")
 
             success(WrapData(remote: coverPhoto))
-        }, fail: { _ in
+        }, fail: { error in
             log.debug("AlbumDetailService albumCoverPhoto fail")
-            
+            error.showInternetErrorGlobal()
             fail()
         })
     }

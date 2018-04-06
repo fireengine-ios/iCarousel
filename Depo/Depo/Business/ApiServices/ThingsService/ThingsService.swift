@@ -81,6 +81,7 @@ final class ThingsItemsService: RemoteItemsService {
                 fail?()
             }
         }) { error in
+            error.showInternetErrorGlobal()
             fail?()
         }
     }

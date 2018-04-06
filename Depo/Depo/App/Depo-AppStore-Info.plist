@@ -58,7 +58,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+	<true/>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon.png</string>

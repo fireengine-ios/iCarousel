@@ -152,7 +152,7 @@ final class AlbumCard: BaseView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
             }
         }

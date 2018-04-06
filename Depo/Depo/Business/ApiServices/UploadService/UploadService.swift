@@ -203,7 +203,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if let error = error {
-                    print("AUTOSYNC: \(error.localizedDescription)")
+                    print("AUTOSYNC: \(error.description)")
                     if !finishedOperation.isCancelled {
                         self.uploadOperations.removeIfExists(finishedOperation)
                     }
@@ -290,7 +290,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if let error = error {
-                    print("AUTOSYNC: \(error.localizedDescription)")
+                    print("AUTOSYNC: \(error.description)")
                     if finishedOperation.isCancelled {
                         //operation was cancelled - not an actual error
                         self.showUploadCardProgress()

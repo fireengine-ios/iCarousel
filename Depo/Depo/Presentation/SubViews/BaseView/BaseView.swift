@@ -37,6 +37,11 @@ class BaseView: UIView, NibInit {
     }
     
     func deleteCard() {
+        
+        if let object = cardObject, let type = object.getOperationType() {
+            CardsManager.default.manuallyDeleteCardsByType(type: type, homeCardResponce: cardObject)
+        }
+        
         guard let id = cardObject?.id else {
             return
         }
@@ -47,7 +52,7 @@ class BaseView: UIView, NibInit {
                 case .success(_):
                     return
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
             }
         }

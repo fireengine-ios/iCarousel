@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TurkcellSecurityViewController: UIViewController {
+class TurkcellSecurityViewController: ViewController {
 
     var output: TurkcellSecurityViewOutput!
 

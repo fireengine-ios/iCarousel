@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PasscodeEnterViewController: UIViewController {
+class PasscodeEnterViewController: ViewController {
     
     @IBOutlet weak var passcodeViewImp: PasscodeViewImp!
     let authtService = AuthenticationService()

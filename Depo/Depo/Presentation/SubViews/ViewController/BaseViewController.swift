@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: ViewController {
 
     var keyboardHeight: CGFloat = 0
     

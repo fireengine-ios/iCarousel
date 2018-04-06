@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UsageInfoViewController: UIViewController {
+class UsageInfoViewController: ViewController {
     var output: UsageInfoViewOutput!
     
     @IBOutlet weak private var memoryUsageProgressView: RoundedProgressView! {

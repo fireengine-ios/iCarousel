@@ -117,7 +117,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             }
             
             guard error == nil else {
-                print("SD_WebImage_setImage error: \(error!.localizedDescription)")
+                print("SD_WebImage_setImage error: \(error!.description)")
                 return
             }
             

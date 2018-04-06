@@ -22,7 +22,7 @@ final class FaceImageInteractor {
                 completion(false)
             }
         }, fail: { [weak self] error in
-            self?.fail(error: error.localizedDescription)
+            self?.fail(error: error.description)
             completion(false)
         })
     }
@@ -61,7 +61,7 @@ extension FaceImageInteractor: FaceImageInteractorInput {
 
         }, fail: { [weak self] error in
             DispatchQueue.main.async {
-                self?.output.failedChangeFaceImageStatus(error: error.localizedDescription)
+                self?.output.failedChangeFaceImageStatus(error: error.description)
             }
         })
     }

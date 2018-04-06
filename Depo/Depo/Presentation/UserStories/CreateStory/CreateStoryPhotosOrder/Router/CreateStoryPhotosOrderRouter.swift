@@ -16,7 +16,7 @@ class CreateStoryPhotosOrderRouter: CreateStoryPhotosOrderRouterInput {
     func goToMusicSelection(story: PhotoStory, navigationController: UINavigationController?) {
         let router = RouterVC()
         let controller = router.audioSelection(forStory: story)
-        let navigation = UINavigationController(rootViewController: controller)
+        let navigation = NavigationController(rootViewController: controller)
         
         navigation.navigationBar.isHidden = false
         router.presentViewController(controller: navigation)

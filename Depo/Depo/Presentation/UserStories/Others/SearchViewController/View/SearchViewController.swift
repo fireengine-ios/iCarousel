@@ -69,15 +69,13 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        UIApplication.shared.statusBarStyle = .default
-        
+                
         if #available(iOS 11.0, *) {
             navigationBarWithGradientStyle()
         } else {
             defaultNavBarStyle()
         }
-        setStatusBarBackgroundColor(color: .white)
+        statusBarColor = .white
         
         editingTabBar?.view.layoutIfNeeded()
         
@@ -95,7 +93,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         
         if #available(iOS 11.0, *) {
             defaultNavBarStyle()
-            setStatusBarBackgroundColor(color: .white)
+            statusBarColor = .white
         }
         navigationController?.delegate = nil
     }
@@ -103,14 +101,17 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        UIApplication.shared.statusBarStyle = .lightContent
         output.viewWillDisappear()
-        setStatusBarBackgroundColor(color: .clear)
+        statusBarColor = .clear
         if goBack {
             homePageNavigationBarStyle()
         }
         
         searchBar.resignFirstResponder()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
     }
     
     deinit {
