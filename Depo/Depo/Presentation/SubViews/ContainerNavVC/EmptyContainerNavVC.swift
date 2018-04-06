@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class EmptyContainerNavVC: UIViewController {
+class EmptyContainerNavVC: ViewController {
     
 
     class func setupContainer(withSubVC subVC: UIViewController) -> EmptyContainerNavVC {

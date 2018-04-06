@@ -11,7 +11,7 @@ import iCarousel
 import SDWebImage
 import MediaPlayer
 
-class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewInput {
+class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInput {
     var output: VisualMusicPlayerViewOutput!
     
     lazy var player: MediaPlayer = factory.resolve()

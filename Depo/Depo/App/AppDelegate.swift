@@ -36,9 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         log.debug("AppDelegate didFinishLaunchingWithOptions")
         
-        application.isStatusBarHidden = false
-        application.statusBarStyle = .lightContent
-        
         AppConfigurator.applicationStarted(with: launchOptions)
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -164,7 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
         
-        let navVC = UINavigationController(rootViewController: vc)
+        let navVC = NavigationController(rootViewController: vc)
         vc.navigationBarWithGradientStyleWithoutInsets()
         
         topVC?.present(navVC, animated: false, completion: nil)

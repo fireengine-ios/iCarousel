@@ -82,7 +82,7 @@ final class CollageCard: BaseView {
         
         let vc = PVViewerController.initFromNib()
         vc.image = image
-        let nController = UINavigationController(rootViewController: vc)
+        let nController = NavigationController(rootViewController: vc)
         RouterVC().presentViewController(controller: nController)
     }
     
@@ -119,7 +119,7 @@ final class CollageCard: BaseView {
         
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = UINavigationController(rootViewController: controller)
+        let nController = NavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
     }
 }

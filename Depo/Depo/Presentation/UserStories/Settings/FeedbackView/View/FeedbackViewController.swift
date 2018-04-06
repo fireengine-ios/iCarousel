@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewDelegate {
+final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnViewDelegate {
     
     @IBOutlet weak var allertView: UIView!
     

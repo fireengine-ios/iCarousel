@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class LBAlbumLikePreviewSliderViewController: UIViewController {
+final class LBAlbumLikePreviewSliderViewController: ViewController {
     var output: LBAlbumLikePreviewSliderViewOutput!
     
     var sliderTitle: String?
