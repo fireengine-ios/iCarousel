@@ -815,6 +815,8 @@ struct NumericConstants {
     static let storiesCellGreedHeight: CGFloat = 100
     
     static let  heightTextAlbumCell: CGFloat = 21
+    static let amountInsetForStoryAlbum: CGFloat = 10
+    static let amountInsetForAlbum: CGFloat = 3
     
     static let numberOfElementsInSyncRequest: Int = 30000
     

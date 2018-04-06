@@ -39,11 +39,11 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     
     override func getCellSizeForGreed() -> CGSize {
         if dataSource is AlbumsDataSourceForCollectionView {
-            let sizeCell: CGFloat = (UIScreen.main.bounds.width - 10) / 4
+            let sizeCell: CGFloat = (UIScreen.main.bounds.width - NumericConstants.amountInsetForAlbum) / 4
 
             return CGSize(width: sizeCell, height: sizeCell + NumericConstants.heightTextAlbumCell)
         } else {
-            let sizeCell: CGFloat = (UIScreen.main.bounds.width - 10) / 4
+            let sizeCell: CGFloat = (UIScreen.main.bounds.width - NumericConstants.amountInsetForStoryAlbum) / 4
 
             return CGSize(width: sizeCell, height: sizeCell)
         }
