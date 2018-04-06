@@ -455,22 +455,20 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         log.debug("LocalMediaStorage copyVideoAsset")
 
         var url = LocalMediaStorage.defaultUrl
-        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
+        let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalVideoOperation(photoManager: self.photoManger,
                                                   asset: asset) { avAsset, aVAudioMix, Dict in
                                                     
                                                     if let urlToFile = (avAsset as? AVURLAsset)?.url {
+                                                        let file = UUID().uuidString
+                                                        url = Device.tmpFolderUrl(withComponent: file)
                                                         
-                                                        do {
-                                                            let file = UUID().uuidString
-                                                            url = Device.tmpFolderUrl(withComponent: file)
-                                                            
-                                                          try FileManager.default.copyItem(at: urlToFile, to: url)
+                                                        StreamReaderWriter.copyFile(fromURL: urlToFile, toURL: url, completion: { success in
                                                             semaphore.signal()
-                                                        } catch {
-                                                            semaphore.signal()
-                                                        }
+                                                        })
+                                                    } else {
+                                                        semaphore.signal()
                                                     }
         }
         getDetailQueue.addOperation(operation)
