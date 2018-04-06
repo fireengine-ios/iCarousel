@@ -162,7 +162,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         vc.approveCancelHandler = { [weak self] in
             self?.interactor.updateUserLanguage()
         }
-        let navVC = UINavigationController(rootViewController: vc)
+        let navVC = NavigationController(rootViewController: vc)
         RouterVC().presentViewController(controller: navVC)
     }
     

@@ -73,10 +73,10 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
 
             self?.output.asyncOperationSucces()
-        }) { [weak self] errorResponse in
+        }, fail: { [weak self] errorResponse in
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList fail")
-
+            UIApplication.showInternetErrorOnTabBar()
             self?.output.asyncOperationSucces()
-        }
+        })
     }
 }

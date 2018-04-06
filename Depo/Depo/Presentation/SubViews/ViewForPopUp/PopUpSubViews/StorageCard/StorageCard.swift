@@ -49,7 +49,7 @@ class StorageCard: BaseView {
                 break
             case .emptyStorage:
                 let controller = router.uploadPhotos()
-                let navigation = UINavigationController(rootViewController: controller)
+                let navigation = NavigationController(rootViewController: controller)
                 navigation.navigationBar.isHidden = false
                 router.presentViewController(controller: navigation)
                 break

@@ -111,7 +111,7 @@ final class MovieCard: BaseView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
             }
         }
@@ -122,7 +122,7 @@ final class MovieCard: BaseView {
         
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], hideActions: hideActions)
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = UINavigationController(rootViewController: controller)
+        let nController = NavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
     }
 }

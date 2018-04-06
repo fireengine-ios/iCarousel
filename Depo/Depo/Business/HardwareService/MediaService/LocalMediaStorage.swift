@@ -448,7 +448,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             }
             
         } catch {
-            print(error.localizedDescription)
+            print(error.description)
         }
         return nil
     }
@@ -581,11 +581,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     func fullInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutVideoAsset")
-
+        
         var assetInfo = AssetInfo(libraryAsset: asset)
         let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, dict in
+            
             self.dispatchQueue.async {
                 let failCompletion = {
                     assetInfo.isValid = false
@@ -631,7 +632,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             }
             
         }
-    
+        
         getDetailQueue.addOperation(operation)
         /// added timeout bcz callback from "requestAVAsset(forVideo" may not come
         _ = semaphore.wait(timeout: .now() + .seconds(40))

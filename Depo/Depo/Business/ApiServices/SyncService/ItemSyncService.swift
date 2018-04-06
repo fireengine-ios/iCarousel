@@ -216,7 +216,7 @@ extension CoreDataStack {
                 }
                 self.compareRemoteItems(with: items, service: service, fieldValue: fieldValue) { items, error in
                     guard error == nil, let unsyncedItems = items else {
-                        print(error!.localizedDescription)
+                        print(error!.description)
                         completion([])
                         return
                     }

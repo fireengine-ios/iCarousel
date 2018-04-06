@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataSourceDelegate {
+class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSourceDelegate {
 
     var output: AutoSyncViewOutput!
     

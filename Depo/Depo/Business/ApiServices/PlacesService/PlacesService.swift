@@ -72,6 +72,7 @@ final class PlacesItemsService: RemoteItemsService {
                 fail?()
             }
         }) { error in
+            error.showInternetErrorGlobal()
             fail?()
         }
     }

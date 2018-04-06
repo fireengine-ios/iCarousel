@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PackagesViewController: UIViewController {
+final class PackagesViewController: ViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak private var collectionView: ResizableCollectionView!
@@ -88,7 +88,7 @@ extension PackagesViewController: PackagesViewInput {
     }
     
     func display(error: ErrorResponse) {
-        UIApplication.showErrorAlert(message: error.localizedDescription)
+        UIApplication.showErrorAlert(message: error.description)
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan]) {

@@ -255,7 +255,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                     if case ErrorResponse.httpCode(500) = errorResponse {
                         self?.output.failedPromocode(with: TextConstants.promocodeError)
                     } else {
-                        self?.output.failedPromocode(with: errorResponse.localizedDescription)
+                        self?.output.failedPromocode(with: errorResponse.description)
                     }
                 }
         })

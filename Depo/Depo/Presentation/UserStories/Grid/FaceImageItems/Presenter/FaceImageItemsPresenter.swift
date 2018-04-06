@@ -95,8 +95,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     override func getContentWithFail(errorString: String?) {
         super.getContentWithFail(errorString: errorString)
-        
-        updateNoFilesView()
         updateThreeDotsButton()
     }
     

@@ -12,7 +12,7 @@ protocol RegistrationViewDelegate: class {
     func show(errorString: String)
 }
 
-class RegistrationViewController: UIViewController, RegistrationViewInput, DataSourceOutput {
+class RegistrationViewController: ViewController, RegistrationViewInput, DataSourceOutput {
     
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var userRegistrationTable: UITableView!

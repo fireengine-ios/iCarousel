@@ -21,7 +21,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     var viewsArray = [BaseView]()
     var notPermittedPopUpViewTypes  = Set<String>()
     var permittedPopUpViewTypes     = Set<String>()
-    var isEnable: Bool = true
+    var isEnable: Bool = false
     
     var viewsByType = [OperationType: BaseView]()
     
