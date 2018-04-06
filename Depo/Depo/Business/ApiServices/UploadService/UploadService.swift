@@ -584,7 +584,7 @@ extension UploadService {
     
     fileprivate func filter(items: [WrapData]) -> [WrapData]? {
         if items.count == 1 {
-            if !validateItemSize(item: items.first!) {
+            if let first = items.first, !validateItemSize(item: first) {
                 return nil
             }
             return items

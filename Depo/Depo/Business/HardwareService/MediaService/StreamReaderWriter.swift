@@ -11,26 +11,23 @@ import Foundation
 final class StreamReaderWriter {
     
     typealias ProgressCallBack = (_ copySize: Double, _ percent: Double) -> Void
-    typealias CompleteCallBack = (_ success: Bool) -> Void
     
-    static func copyFile(fromURL: URL, toURL: URL, progress: ProgressCallBack? = nil, completion: CompleteCallBack) {
+    func copyFile(from fromURL: URL, to toURL: URL, progress: ProgressCallBack? = nil, completion: @escaping ResponseVoid) {
         guard let copyOutput = OutputStream(url: toURL, append: false),
             let fileInput = InputStream(url: fromURL),
-            let fileSize = StreamReaderWriter.sizeOfInputFile(src: fromURL),
+            let fileSize = sizeOfInputFile(src: fromURL),
             let freeSpace = Device.getFreeDiskSpaceInBytes() else {
-                completion(false)
+                completion(ResponseResult.failed(CustomErrors.unknown))
                 return
         }
         
         guard fileSize < NumericConstants.fourGigabytes else {
-            UIApplication.showErrorAlert(message: TextConstants.syncFourGbVideo)
-            completion(false)
+            completion(ResponseResult.failed(CustomErrors.text(TextConstants.syncFourGbVideo)))
             return
         }
         
         guard fileSize < freeSpace else {
-            UIApplication.showErrorAlert(message: TextConstants.syncNotEnoughMemory)
-            completion(false)
+            completion(ResponseResult.failed(CustomErrors.text(TextConstants.syncNotEnoughMemory)))
             return
         }
         
@@ -72,7 +69,7 @@ final class StreamReaderWriter {
             }
         }
         
-        completion(true)
+        completion(ResponseResult.success(()))
         
         //close streams
         if fileInput.streamStatus == .atEnd {
@@ -83,7 +80,7 @@ final class StreamReaderWriter {
         }
     }
     
-    private static func sizeOfInputFile(src: URL) -> Int? {
+    private func sizeOfInputFile(src: URL) -> Int? {
         do {
             let fileSize = try FileManager.default.attributesOfItem(atPath: src.path)
             return fileSize[FileAttributeKey.size] as? Int

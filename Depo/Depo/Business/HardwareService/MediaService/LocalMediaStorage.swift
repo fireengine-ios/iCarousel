@@ -53,6 +53,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
+    private lazy var streamReaderWrite = StreamReaderWriter()
+    
     private let queue = OperationQueue()
     
     private let getDetailQueue = OperationQueue()
@@ -463,8 +465,16 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                     if let urlToFile = (avAsset as? AVURLAsset)?.url {
                                                         let file = UUID().uuidString
                                                         url = Device.tmpFolderUrl(withComponent: file)
-                                                        
-                                                        StreamReaderWriter.copyFile(fromURL: urlToFile, toURL: url, completion: { success in
+
+                                                        self.streamReaderWrite.copyFile(from: urlToFile, to: url, completion: { result in
+                                                            switch result {
+                                                            case .success(_):
+                                                                break
+                                                            case .failed(let error):
+                                                                if let error = error as? CustomErrors {
+                                                                    UIApplication.showErrorAlert(message: error.errorDescription ?? "")
+                                                                }
+                                                            }
                                                             semaphore.signal()
                                                         })
                                                     } else {
