@@ -75,8 +75,8 @@ final class PVViewerController: BaseViewController, NibInit {
     
     private var isFullScreen = false {
         didSet {
-            setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
-            navigationController?.navigationBar.isHidden = isFullScreen
+            navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
+            setStatusBarHiddenForLandscapeIfNeed(isFullScreen)            
         }
     } 
     

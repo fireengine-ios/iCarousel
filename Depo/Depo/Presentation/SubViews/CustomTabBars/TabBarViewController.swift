@@ -158,7 +158,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
        
     override var childViewControllerForStatusBarStyle: UIViewController? {
-        return activeNavigationController?.viewControllers.last
+        return activeNavigationController?.viewControllers.last ?? activeNavigationController?.presentedViewController
     }
     
     deinit {
