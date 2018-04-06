@@ -611,6 +611,8 @@
 "E-mail is already exist" = "E-mail is already exist";
 "Please enter your GSM number"="Please enter your GSM number";
 "GSM number"="GSM number";
+"The videos larger than 4GB can not be uploaded to lifebox" = "The videos larger than 4GB can not be uploaded to lifebox";
+"You have not enough memory in your device" = "You have not enough memory in your device";
 "Plus" = "Plus";
 "Close" = "Close";
 "Home" = "Home";
