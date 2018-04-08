@@ -74,7 +74,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private let getDetailQueue = OperationQueue()
     
-    private let dispatchQueue = DispatchQueue(label: "com.lifebox.local_media_storage")
+    private let dispatchQueue = DispatchQueue(label: "com.lifebox.local_media_storage", attributes: .concurrent)
     
     static let notificationPhotoLibraryDidChange = NSNotification.Name(rawValue: "notificationPhotoLibraryDidChange")
     
