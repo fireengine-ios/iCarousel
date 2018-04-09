@@ -10,6 +10,7 @@ import UIKit
 
 protocol AutoSyncSwitcherTableViewCellDelegate {
     
+    func didChangeTime(setting: AutoSyncSetting)
     func onValueChanged(model: AutoSyncModel, cell: AutoSyncSwitcherTableViewCell)
     
 }
@@ -34,6 +35,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     private var autoSyncSetting = AutoSyncSetting(syncItemType: .time, option: .daily) {
         didSet {
             if autoSyncSetting != oldValue {
+                delegate?.didChangeTime(setting: autoSyncSetting)
                 updateViews()
             }
         }
@@ -54,7 +56,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         updateViews()
     }
     
-    func setup(with model: AutoSyncModel) {
+    func setup(with model: AutoSyncModel, setting: AutoSyncSetting) {
         self.model = model
         switcher.isOn = model.isSelected
         separatorView.isHidden = !model.isSelected
@@ -64,6 +66,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         switcher.isSelected = model.isSelected
         
         optionsStackView.isHidden = !model.isSelected
+        autoSyncSetting = setting
     }
     
     func setColors(isFromSettings: Bool) {

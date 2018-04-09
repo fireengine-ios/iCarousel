@@ -63,7 +63,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     private func setupCells(with settings: AutoSyncSettings) {
-        let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: nil, selected: settings.isAutoSyncOptionEnabled)
+        let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: settings.timeSetting, selected: settings.isAutoSyncOptionEnabled)
         let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.photoSetting, selected: false)
         let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.videoSetting, selected: false)
         tableDataArray.append(contentsOf: [headerModel, photoSettingModel, videoSettingModel])
@@ -107,7 +107,9 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSwitcherTableViewCell
             autoSyncCell.delegate = self
-            autoSyncCell.setup(with: model)
+            if let syncSetting = model.syncSetting {
+                autoSyncCell.setup(with: model, setting: syncSetting)
+            }
             autoSyncCell.setColors(isFromSettings: isFromSettings)
             return autoSyncCell
         } else {
@@ -149,6 +151,10 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
                 reloadTableView()
             }
         }
+    }
+    
+    func didChangeTime(setting: AutoSyncSetting) {
+        autoSyncSettings?.set(setting: setting)
     }
 }
 
