@@ -177,6 +177,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                     view.set(object: object)
                     view.layoutIfNeeded()
                     newPopUps.append(view)
+                    if let index = popUps.index(of: view){
+                        popUps.remove(at: index)
+                    }
                 } else {
                     if !checkIsThisIsPermittedType(type: type) {
                         continue
@@ -191,6 +194,14 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                         viewsByType[type] = view
                     }
                 }
+            }
+        }
+        
+        for popUp in popUps {
+            if let type = popUp.cardObject?.getOperationType(), !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type){
+                
+            }else{
+                newPopUps.insert(popUp, at: 0)
             }
         }
         
