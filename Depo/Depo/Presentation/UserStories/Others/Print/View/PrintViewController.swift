@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PrintViewController: UIViewController, ErrorPresenter {
+class PrintViewController: BaseViewController, ErrorPresenter {
     
     @IBOutlet private weak var webView: UIWebView!
 
