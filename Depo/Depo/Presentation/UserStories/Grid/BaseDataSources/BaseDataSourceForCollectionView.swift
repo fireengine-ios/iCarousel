@@ -176,7 +176,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     fileprivate func compoundItems(pageItems: [WrapData], pageNum: Int, originalRemotes: Bool = false, complition: @escaping VoidHandler) {
         
-        
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 complition()
@@ -200,24 +199,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 self.isLocalFilesRequested = true
                 self.isLocalPaginationOn = true
-//                if originalRemotes {
-//                    self.isLocalPaginationOn = true
-//                }
-//                var md5s = [String]()
-//                var localIDs = [String]()
-//                self.allRemoteItems.forEach {
-//                    md5s.append($0.md5)
-//                    let splitedUuid = $0.uuid.split(separator: "~")
-//                    if let localID = splitedUuid.first {
-//                        localIDs.append(String(localID))
-//                    }
-//                }
+
                 if pageNum == 1, self.allMediaItems.isEmpty, self.pageLeftOvers.isEmpty {
                     self.pageCompounder.compoundFirstPage(pageItems: pageItems,
                                                           filesType: specificFilters,
                                                           sortType: self.currentSortType,
-//                                                          notAllowedMD5: md5s,
-//                                                          notAllowedLocalIDs: localIDs,
                                                           compoundedCallback:
                         { [weak self] (compoundedItems, lefovers) in
                             guard let `self` = self else {
@@ -321,10 +307,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func transformedLeftOvers() -> [WrapData] {
-        guard let lastAppendedItem = allMediaItems.last else {
+        /*guard let lastAppendedItem = allMediaItems.last else {
             return []
-        }
-        let pseudoPageArray = [lastAppendedItem] + pageLeftOvers.filter{!$0.isLocalItem}
+        }*/
+        let pseudoPageArray = /*[lastAppendedItem] + */pageLeftOvers.filter{!$0.isLocalItem}
         return pseudoPageArray
     }
     
@@ -485,10 +471,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             isPaginationDidEnd = true
         }
         
-        let pageItems = transformedLeftOvers() + nonEmptyMetaItems
-        
         log.debug("BaseDataSourceForCollectionView appendCollectionView \(nonEmptyMetaItems.count)")
         
+        let pageItems = transformedLeftOvers() + nonEmptyMetaItems
+
         allRemoteItems.append(contentsOf: nonEmptyMetaItems)
         
         self.pageLeftOvers.removeAll()
