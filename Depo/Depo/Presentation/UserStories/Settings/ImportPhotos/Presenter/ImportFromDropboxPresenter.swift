@@ -117,6 +117,10 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         view?.failedDropboxStart(errorMessage: errorMessage)
     }
     
+    func loginCanceled() {
+        view?.stopActivityIndicator()
+    }
+    
     // MARK: connect
     
     func connectSuccessCallback() {
