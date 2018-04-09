@@ -45,6 +45,8 @@ class PageCompounder {
         
         request.predicate = compoundedPredicate
         
+//        request.sortDescriptors = [NSSortDescriptor(key: "creationDateValue", ascending: true)]
+        
         guard let savedLocalals = try? requestContext.fetch(request) else {
             compoundedCallback(pageItems, [])
             return
@@ -72,19 +74,28 @@ class PageCompounder {
     func compoundFirstPage(pageItems: [WrapData],
                            filesType: FileType, sortType: SortedRules,
                                    compoundedCallback: @escaping CompoundedPageCallback) {
-        guard let lastItem = pageItems.last else {
-            compoundedCallback(pageItems, [])
-            return
-        }
         
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
-        let sortingTypePredicate = getSortingPredicateFirstPage(sortType: sortType, lastItem: lastItem)
-        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
-
-        compoundItems(pageItems: pageItems,
-                      sortType: sortType,
-                      predicate: compundedPredicate,
-                      compoundedCallback: compoundedCallback)
+        if let lastItem = pageItems.last {
+            let sortingTypePredicate = getSortingPredicateFirstPage(sortType: sortType, lastItem: lastItem)
+            let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
+            
+            compoundItems(pageItems: pageItems,
+                          sortType: sortType,
+                          predicate: compundedPredicate,
+                          compoundedCallback: compoundedCallback)
+            
+        } else {
+            
+            compoundItems(pageItems: pageItems,
+                          sortType: sortType,
+                          predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate]),
+                          compoundedCallback: compoundedCallback)
+            
+//            compoundedCallback(pageItems, [])
+        }
+        
+        
     }
     
     func compoundMiddlePage(pageItems: [WrapData],
@@ -200,6 +211,12 @@ class PageCompounder {
         let md5Predicate = NSPredicate(format:"NOT (md5Value IN %@)", md5s)
         let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", localIDs)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, md5Predicate])
+    }
+    
+    private func getSortingDescription(sortingRule: SortedRules) -> NSSortDescriptor {
+        
+        
+        return NSSortDescriptor(key: "creationDateValue", ascending: true)
     }
     
 }
