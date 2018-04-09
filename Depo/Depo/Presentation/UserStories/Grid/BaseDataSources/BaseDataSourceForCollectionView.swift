@@ -185,7 +185,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             guard let unwrapedFilters = self.originalFilters,
                 let specificFilters = self.getFileFilterType(filters: unwrapedFilters),
-                !self.isOnlyNonLocal(filters: unwrapedFilters) else {
+                !self.showOnlyRemotes(filters: unwrapedFilters) else {
                 self.allMediaItems.append(contentsOf: pageItems)
                 self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                 complition()
@@ -389,7 +389,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return nil
     }
     
-    private func isOnlyNonLocal(filters: [GeneralFilesFiltrationType]) -> Bool {
+    private func showOnlyRemotes(filters: [GeneralFilesFiltrationType]) -> Bool {
         for filter in filters {
             switch filter {
             case .localStatus(.nonLocal):
@@ -1055,11 +1055,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         let isLastSection = (section == allItems.count - 1)
         
         let h: CGFloat// = (isPaginationDidEnd && !isLastSection) ? 0 : 50
-        if !isLastSection {
+        if !isLastSection || (isPaginationDidEnd && (!isLocalPaginationOn && !isLocalFilesRequested)) {
             h = 0
-        } else if isPaginationDidEnd {
-            h = 0
-        } else  {
+        } else
+//            if isPaginationDidEnd || !isLocalPaginationOn {
+//            h = 0
+//        } else
+            {
             h = 50
         }
         return CGSize(width: collectionView.contentSize.width, height: h)
@@ -1300,7 +1302,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var localObjectsForReplace = [Item]()
         
         if let unwrapedFilters = originalFilters,
-            !isOnlyNonLocal(filters: unwrapedFilters) {
+            !showOnlyRemotes(filters: unwrapedFilters) {
             
             var serverObjects = [Item]()
             
