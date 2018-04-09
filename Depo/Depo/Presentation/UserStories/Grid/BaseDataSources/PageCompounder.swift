@@ -125,17 +125,21 @@ class PageCompounder {
     
     func compoundLastPage(pageItems: [WrapData],
                           filesType: FileType, sortType: SortedRules,
+                          dropFirst: Bool = false,
                                   compoundedCallback: @escaping CompoundedPageCallback) {
-        
+        var tempoArray = pageItems
         guard let firstItem = pageItems.first else {
             compoundedCallback(pageItems, [])
             return
+        }
+        if dropFirst {
+            tempoArray.removeFirst()
         }
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         
         let sortingTypePredicate = getSortingPredicateLastPage(sortType: sortType, firstItem: firstItem)
         let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
-        compoundItems(pageItems: pageItems,
+        compoundItems(pageItems: tempoArray,
                       sortType: sortType,
                       predicate: compundedPredicate,
                       compoundedCallback: compoundedCallback)

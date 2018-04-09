@@ -175,11 +175,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     fileprivate func compoundItems(pageItems: [WrapData], pageNum: Int, originalRemotes: Bool = false, complition: @escaping VoidHandler) {
-        guard !isLocalFilesRequested else {
-            return
-        }
         
-        isLocalFilesRequested = true
         
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
@@ -198,6 +194,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             switch specificFilters {
             case .video, .image:
+                guard !self.isLocalFilesRequested else {
+                    return
+                }
+                
+                self.isLocalFilesRequested = true
                 self.isLocalPaginationOn = true
 //                if originalRemotes {
 //                    self.isLocalPaginationOn = true
@@ -241,8 +242,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                   //check lefovers here
                     let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
                     var itemsToCompound = isEmptyLeftOvers ? pageItems : self.transformedLeftOvers()
+                    var needToDropFirstItem = false
                     if pageItems.isEmpty, isEmptyLeftOvers, let lastMediItem = self.allMediaItems.last {
                         itemsToCompound.append(lastMediItem)
+                        needToDropFirstItem = true
 //                        self.delegate?.getNextItems()
 //                        //DO I need callback here?
 //                        return
@@ -251,8 +254,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self.pageCompounder.compoundLastPage(pageItems: itemsToCompound,
                                                          filesType: specificFilters,
                                                          sortType: self.currentSortType,
-//                                                         notAllowedMD5: md5s,
-//                                                         notAllowedLocalIDs: localIDs,
+                                                         dropFirst: needToDropFirstItem,
                                                          compoundedCallback:
                         { [weak self] (compoundedItems, lefovers) in
                             guard let `self` = self else {
@@ -271,7 +273,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
                     })
-                } else if !self.isPaginationDidEnd { //Middle page
+                } else if !self.isPaginationDidEnd { ///Middle page
                     //check lefovers here
                     let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
                     let itemsToCompound = isEmptyLeftOvers ? pageItems : self.transformedLeftOvers()
@@ -310,7 +312,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
                 
             default:
-                break
+                self.allMediaItems.append(contentsOf: pageItems)
+                self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                complition()
             }
             
         }
