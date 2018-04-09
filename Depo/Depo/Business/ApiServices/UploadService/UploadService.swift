@@ -736,7 +736,7 @@ final class UploadOperations: Operation {
             self.semaphore.signal()
         }
         
-        guard isCancelled else {
+        guard !isCancelled else {
             customFail(ErrorResponse.string(TextConstants.canceledOperationTextError))
             return
         }
