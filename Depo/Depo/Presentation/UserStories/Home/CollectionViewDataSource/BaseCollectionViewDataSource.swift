@@ -198,9 +198,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
         
         for popUp in popUps {
-            if let type = popUp.cardObject?.getOperationType(), !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type){
-                
-            }else{
+            if let type = popUp.cardObject?.getOperationType(), !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
+                continue
+            } else {
                 newPopUps.insert(popUp, at: 0)
             }
         }
