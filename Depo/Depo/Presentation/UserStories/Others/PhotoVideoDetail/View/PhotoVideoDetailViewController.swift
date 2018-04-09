@@ -99,13 +99,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isHidden = true
         
-        let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-        cancelButton.setTitle(TextConstants.backTitle, for: .normal)
-        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
-        
-        let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-        navigationItem.leftBarButtonItem = barButtonLeft
+        navigationItem.leftBarButtonItem = BackButtonItem(action: { [weak self] in 
+            self?.hideView()
+        })
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
     }
@@ -157,10 +153,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             needToScrollAfterRotation = false
             scrollToSelectedIndex()
         }
-    }
-    
-    @objc private func onCancelButton() {
-        hideView()
     }
     
     private func hideView() {

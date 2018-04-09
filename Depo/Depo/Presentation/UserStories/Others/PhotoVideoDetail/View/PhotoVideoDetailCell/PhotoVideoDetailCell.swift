@@ -23,7 +23,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     weak var delegate: PhotoVideoDetailCellDelegate?
     
     private lazy var tapGesture: UITapGestureRecognizer = {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(actionTapGesture))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(actionFullscreenTapGesture))
         gesture.require(toFail: imageScrollView.doubleTapGesture)
         gesture.delegate = self
         return gesture
@@ -52,7 +52,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         addGestureRecognizer(tapGesture)
     }
     
-    @objc private func actionTapGesture(_ gesture: UITapGestureRecognizer) {
+    @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
         delegate?.tapOnCellForFullScreen()
     }
     
