@@ -18,10 +18,10 @@ class ShadowView: UIView {
         }
         
         let layer = CALayer()
-        layer.frame = CGRect(x: 0 ,
-                             y: 0 ,
-                             width: frame.size.width ,
-                             height: frame.size.height )
+        layer.frame = CGRect(x: 0,
+                             y: 0,
+                             width: frame.size.width,
+                             height: frame.size.height)
         
         layer.shadowColor = UIColor.lightGray.cgColor
         layer.shadowOpacity = 1
