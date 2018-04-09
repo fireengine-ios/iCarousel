@@ -45,7 +45,7 @@ class PageCompounder {
         
         request.predicate = compoundedPredicate
         
-//        request.sortDescriptors = [NSSortDescriptor(key: "creationDateValue", ascending: true)]
+        request.sortDescriptors = [getSortingDescription(sortingRule: sortType)]
         
         guard let savedLocalals = try? requestContext.fetch(request) else {
             compoundedCallback(pageItems, [])
@@ -214,11 +214,22 @@ class PageCompounder {
     }
     
     private func getSortingDescription(sortingRule: SortedRules) -> NSSortDescriptor {
-        
-        
-        return NSSortDescriptor(key: "creationDateValue", ascending: true)
+        switch sortingRule {
+        case .lettersAZ, .albumlettersAZ:
+            return NSSortDescriptor(key: "nameValue", ascending: false)
+        case .lettersZA, .albumlettersZA:
+            return NSSortDescriptor(key: "nameValue", ascending: true)
+        case .sizeAZ:
+            return NSSortDescriptor(key: "fileSizeValue", ascending: false)
+        case .sizeZA:
+            return NSSortDescriptor(key: "fileSizeValue", ascending: true)
+        case .metaDataTimeUp, .timeUp, .timeUpWithoutSection:
+            return NSSortDescriptor(key: "creationDateValue", ascending: false)
+        case .metaDataTimeDown, .timeDown, .timeDownWithoutSection:
+            return NSSortDescriptor(key: "creationDateValue", ascending: true)
+        }
     }
-    
+
 }
 
 extension PageCompounder: PageSortingPredicates {
