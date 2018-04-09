@@ -201,7 +201,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             return
         }
         if let name = objects[selectedIndex].name {
-            setTitle(withString: name)
+            setNavigationTitle(title: name)
         }
     }
     
