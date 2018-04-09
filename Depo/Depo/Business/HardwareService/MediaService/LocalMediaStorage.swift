@@ -53,6 +53,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
+    private lazy var streamReaderWrite = StreamReaderWriter()
+    
     private let queue = OperationQueue()
     
     private let getDetailQueue = OperationQueue()
@@ -455,22 +457,26 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         log.debug("LocalMediaStorage copyVideoAsset")
 
         var url = LocalMediaStorage.defaultUrl
-        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
+        let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalVideoOperation(photoManager: self.photoManger,
                                                   asset: asset) { avAsset, aVAudioMix, Dict in
                                                     
                                                     if let urlToFile = (avAsset as? AVURLAsset)?.url {
-                                                        
-                                                        do {
-                                                            let file = UUID().uuidString
-                                                            url = Device.tmpFolderUrl(withComponent: file)
-                                                            
-                                                          try FileManager.default.copyItem(at: urlToFile, to: url)
+                                                        let file = UUID().uuidString
+                                                        url = Device.tmpFolderUrl(withComponent: file)
+
+                                                        self.streamReaderWrite.copyFile(from: urlToFile, to: url, completion: { result in
+                                                            switch result {
+                                                            case .success(_):
+                                                                break
+                                                            case .failed(let error):
+                                                                UIApplication.showErrorAlert(message: error.description)
+                                                            }
                                                             semaphore.signal()
-                                                        } catch {
-                                                            semaphore.signal()
-                                                        }
+                                                        })
+                                                    } else {
+                                                        semaphore.signal()
                                                     }
         }
         getDetailQueue.addOperation(operation)

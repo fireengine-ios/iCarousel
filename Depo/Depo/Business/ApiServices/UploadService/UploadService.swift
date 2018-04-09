@@ -86,9 +86,11 @@ final class UploadService: BaseRequestService {
     @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
         
         trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
+    
+        guard let filteredItems = filter(items: items) else {
+            return nil
+        }
         
-        let filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes && $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
-        //TODO: Show 4 gigabytes error here?
         switch uploadType {
         case .autoSync:
             return self.syncFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail)
@@ -578,6 +580,26 @@ extension UploadService {
         DispatchQueue.main.async {
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
         }
+    }
+    
+    fileprivate func filter(items: [WrapData]) -> [WrapData]? {
+        guard !items.isEmpty else {
+            return nil
+        }
+        
+        var result = items.filter { $0.fileSize < NumericConstants.fourGigabytes }
+        guard !result.isEmpty else {
+            UIApplication.showErrorAlert(message: TextConstants.syncFourGbVideo)
+            return nil
+        }
+        
+        result = result.filter { $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
+        guard !result.isEmpty else {
+            UIApplication.showErrorAlert(message: TextConstants.syncNotEnoughMemory)
+            return nil
+        }
+        
+        return result
     }
 }
 
