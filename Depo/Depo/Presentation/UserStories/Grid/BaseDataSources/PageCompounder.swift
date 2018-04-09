@@ -26,10 +26,9 @@ class PageCompounder {
     private func compoundItems(pageItems: [WrapData],
                                sortType: SortedRules,
                                predicate: NSCompoundPredicate,
-                       compoundedCallback: @escaping CompoundedPageCallback) {
-        let notAllowedMD5sArray = pageItems.map{$0.md5}
-        notAllowedMD5s = notAllowedMD5s.union(notAllowedMD5sArray)
+                               compoundedCallback: @escaping CompoundedPageCallback) {
         
+        notAllowedMD5s = notAllowedMD5s.union(pageItems.map{$0.md5})
         notAllowedLocalIDs = notAllowedLocalIDs.union(pageItems.map{$0.getUUIDAsLocal()})///there should be no similar UID on BackEnd so this is fine
         
         
@@ -65,6 +64,11 @@ class PageCompounder {
         
     }
     
+    func dropData() {
+        notAllowedMD5s.removeAll()
+        notAllowedLocalIDs.removeAll()
+    }
+    
     func compoundFirstPage(pageItems: [WrapData],
                            filesType: FileType, sortType: SortedRules,
                                    compoundedCallback: @escaping CompoundedPageCallback) {
@@ -72,12 +76,6 @@ class PageCompounder {
             compoundedCallback(pageItems, [])
             return
         }
-        let requestContext = coreData.newChildBackgroundContext
-        
-        let request = NSFetchRequest<MediaItem>()
-        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
-                                                    in: requestContext)
-        request.fetchLimit = pageSize
         
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         let sortingTypePredicate = getSortingPredicateFirstPage(sortType: sortType, lastItem: lastItem)
@@ -91,37 +89,13 @@ class PageCompounder {
     
     func compoundMiddlePage(pageItems: [WrapData],
                             filesType: FileType, sortType: SortedRules,
-//                                    notAllowedMD5: Set<String>,   //[String],
-//                                    notAllowedLocalIDs: Set<String>,  //[String],
                                     compoundedCallback: @escaping CompoundedPageCallback) {
-        
         guard let lastItem = pageItems.last, let firstItem = pageItems.first else {
             compoundedCallback(pageItems, [])
             return
         }
-        
-//        var tempoArray = pageItems
-        
-        //
-//        let requestContext = coreData.newChildBackgroundContext
-        
-//        let request = NSFetchRequest<MediaItem>()
-//        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
-//                                                    in: requestContext)
-//        request.fetchLimit = pageSize
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
-        
-        //check in BASE GREED if dataCore still appending, then only time sorting is avilable
         let sortingTypePredicate = getSortingPredicateMidPage(sortType: sortType, firstItem: firstItem, lastItem: lastItem)
-        
-//        let md5Predicate = NSPredicate(format:"NOT (md5Value IN %@)", notAllowedMD5)
-//        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate, md5Predicate])
-//        request.predicate = compundedPredicate
-        
-//        guard let savedLocalals = try? requestContext.fetch(request), !savedLocalals.isEmpty else {
-//            compoundedCallback(pageItems, [])
-//            return
-//        }
         let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
         compoundItems(pageItems: pageItems,
                       sortType: sortType,
@@ -147,43 +121,19 @@ class PageCompounder {
 //                //                    }
 //            }
 //        }
-        //
-//        let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
-//        tempoArray.append(contentsOf: wrapedLocals)
-//        tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
-//
-//        let actualArray = tempoArray.prefix(pageSize)
-//        let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
-//        compoundedCallback(Array(actualArray), Array(leftovers))
     }
     
     func compoundLastPage(pageItems: [WrapData],
                           filesType: FileType, sortType: SortedRules,
-//                          notAllowedMD5: Set<String>,//[String],
-//                                  notAllowedLocalIDs: Set<String>,//[String],
                                   compoundedCallback: @escaping CompoundedPageCallback) {
         
         guard let firstItem = pageItems.first else {
             compoundedCallback(pageItems, [])
             return
         }
-        
-//        var tempoArray = pageItems
-        
-//        let requestContext = coreData.newChildBackgroundContext
-//
-//        let request = NSFetchRequest<MediaItem>()
-//        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
-//                                                    in: requestContext)
-//        request.fetchLimit = pageSize
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         
-        //check in BASE GREED if dataCore still appending, then only time is avilable
         let sortingTypePredicate = getSortingPredicateLastPage(sortType: sortType, firstItem: firstItem)
-        
-//        let md5Predicate = NSPredicate(format:"NOT (md5Value IN %@)", notAllowedMD5)
-//        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate, md5Predicate])
-//        request.predicate = compundedPredicate
         let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
         compoundItems(pageItems: pageItems,
                       sortType: sortType,
@@ -217,18 +167,6 @@ class PageCompounder {
 ////            compoundedCallback(pageItems, [])
 //            return
 //        }
-//
-//        //
-//
-//        //
-//
-//        let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
-//        tempoArray.append(contentsOf: wrapedLocals)
-//        tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
-//
-//        let actualArray = tempoArray.prefix(pageSize)
-//        let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
-//        compoundedCallback(Array(actualArray), Array(leftovers))
     }
     
     fileprivate func sortByCurrentType(items: [WrapData], sortType: SortedRules) -> [WrapData] {

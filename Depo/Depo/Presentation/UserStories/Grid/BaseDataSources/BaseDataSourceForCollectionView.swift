@@ -508,6 +508,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         allRemoteItems.removeAll()
         allItems.removeAll()
         allMediaItems.removeAll()
+        pageCompounder.dropData()
     }
     
     init(sortingRules: SortedRules = .timeUp) {
