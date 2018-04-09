@@ -753,6 +753,9 @@ struct TextConstants {
     static let loginEnterGSM = NSLocalizedString("Please enter your GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginGSMNumber = NSLocalizedString("GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let syncFourGbVideo = NSLocalizedString("The videos larger than 4GB can not be uploaded to lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let syncNotEnoughMemory = NSLocalizedString("You have not enough memory in your device", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     // MARK: - Navigation bar img names
     
     static let moreBtnImgName = "more"
@@ -812,15 +815,13 @@ struct NumericConstants {
     static let creationStoryOrderingCountPhotosInLineiPhone: Int = 4
     static let creationStoryOrderingCountPhotosInLineiPad: Int = 6
     static let albumCellListHeight: CGFloat = 100
-    static let albumCellGreedHeight: CGFloat = 136
+    static let albumCellGreedHeight: CGFloat = 121
     static let albumCellGreedWidth: CGFloat = 100
     static let storiesCellGreedHeight: CGFloat = 100
     
-    static let insetStoryCellGreed: CGFloat = 16
-    static let insetAlbumCellGreed: CGFloat = 14
-    static let amountInsetInRowAlbumCell: CGFloat = 72
-    static let amountInsetInRowStoryCell: CGFloat = 76
-    static let heightTextAlbumCell: CGFloat = 21
+    static let  heightTextAlbumCell: CGFloat = 21
+    static let amountInsetForStoryAlbum: CGFloat = 10
+    static let amountInsetForAlbum: CGFloat = 3
     
     static let numberOfElementsInSyncRequest: Int = 30000
     
@@ -834,6 +835,7 @@ struct NumericConstants {
     static let freeAppSpaceLimit = 0.2
     
     static let fourGigabytes: UInt64 = 4 * 1024 * 1024 * 1024
+    static let copyVideoBufferSize = 1024 * 1024
     
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     

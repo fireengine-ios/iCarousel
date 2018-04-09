@@ -31,6 +31,8 @@ enum ResponseParser {
             return ServerValueError(value: value, code: statusCode)
         } else if let status = JSON(data: data)["status"].string {
             return ServerStatusError(status: status, code: statusCode)
+        } else if let message = JSON(data: data)["errorMsg"].string {
+            return ServerMessageError(message: message, code: statusCode)
         } else if let text = String(data: data, encoding: .utf8) {
             return CustomErrors.text(text)
         } else {
