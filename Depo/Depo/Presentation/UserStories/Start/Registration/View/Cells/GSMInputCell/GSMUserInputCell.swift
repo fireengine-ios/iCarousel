@@ -8,15 +8,21 @@
 
 import UIKit
 
+enum GSMUserInputCellStyle {
+    case registration
+    case textEnter
+}
+
 protocol GSMCodeCellDelegate {
     func codeViewGotTapped()
     func phoneNumberChanged(toNumber number: String)
 }
 
-class GSMUserInputCell: BaseUserInputCellView {
+final class GSMUserInputCell: BaseUserInputCellView {
 
     @IBOutlet weak var gsmCountryCodeLabel: UILabel!
     @IBOutlet weak var gsmCodeContainerView: UIView!
+    @IBOutlet var separators: [UIView]!
     var delegate: GSMCodeCellDelegate?
     
     override func awakeFromNib() {
@@ -58,6 +64,29 @@ class GSMUserInputCell: BaseUserInputCellView {
         changeInfoButtonTo(hidden: true)
         delegate?.phoneNumberChanged(toNumber: textInputField.text!)
         delegate?.codeViewGotTapped()
+    }
+    
+    func setup(style: GSMUserInputCellStyle) {
+        switch style {
+        case .registration:
+            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            gsmCountryCodeLabel.textColor = UIColor.white.lighter(by: 10)
+            titleLabel.textColor = .white
+            textInputField.textColor = .white
+            separators.forEach { view in
+                view.backgroundColor = .white
+            }
+            defaultTitleHightlightColor = .white
+        case .textEnter:
+            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            titleLabel.textColor = ColorConstants.textGrayColor
+            gsmCountryCodeLabel.textColor = ColorConstants.textGrayColor            
+            textInputField.textColor = ColorConstants.textGrayColor
+            separators.forEach { view in
+                view.backgroundColor = ColorConstants.textLightGrayColor
+            }
+            defaultTitleHightlightColor = ColorConstants.textLightGrayColor
+        }
     }
 }
 
