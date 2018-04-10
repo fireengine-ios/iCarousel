@@ -20,7 +20,7 @@ final class PVViewerController: BaseViewController, NibInit {
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         view.backgroundColor = UIColor.black
-        view.addGestureRecognizer(tapGesture)
+        view.addGestureRecognizer(fullscreenTapGesture)
         
         imageScrollView.delegate = self
         imageScrollView.image = image
@@ -30,14 +30,10 @@ final class PVViewerController: BaseViewController, NibInit {
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
-        
-        let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-        cancelButton.setTitle(TextConstants.backTitle, for: .normal)
-        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
-        let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-        navigationItem.leftBarButtonItem = barButtonLeft
-        
+         
+        navigationItem.leftBarButtonItem = BackButtonItem(action: { [weak self] in 
+            self?.hideView()
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,18 +50,14 @@ final class PVViewerController: BaseViewController, NibInit {
         return UIColor.black
     }
 
-    private lazy var tapGesture: UITapGestureRecognizer = {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(actionTapGesture))
+    private lazy var fullscreenTapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(actionFullscreenTapGesture))
         gesture.require(toFail: imageScrollView.doubleTapGesture)
         return gesture
     }()
     
-    @objc private func actionTapGesture(_ gesture: UITapGestureRecognizer) {
+    @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
         isFullScreen = !isFullScreen 
-    }
-    
-    @objc private func onCancelButton() {
-        hideView()
     }
     
     private func hideView() {
