@@ -7,6 +7,8 @@
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Deleting these files will remove them from cloud. You won't be able to access them once deleted";
 "Purchase" = "Purchase";
 "Packages" = "Packages";
+"PackagesPolicyHeader" = "Auto-renewable subscription nature of the in-app purchase:";
+"PackagesPolicyText" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase\nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period\nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen.\nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase\nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable\nPrivacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik";
 "Delete Device Original" = "Delete Device Original";
 "Verification code is blocked.\nPlease request a new code" = "Verification code is blocked.\nPlease request a new code";
 "Verification code is invalid.\nPlease try again" = "Verification code is invalid.\nPlease try again";
@@ -611,6 +613,8 @@
 "E-mail is already exist" = "E-mail is already exist";
 "Please enter your GSM number"="Please enter your GSM number";
 "GSM number"="GSM number";
+"The videos larger than 4GB can not be uploaded to lifebox" = "The videos larger than 4GB can not be uploaded to lifebox";
+"You have not enough memory in your device" = "You have not enough memory in your device";
 "Plus" = "Plus";
 "Close" = "Close";
 "Home" = "Home";
