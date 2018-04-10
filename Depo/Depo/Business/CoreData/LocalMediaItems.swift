@@ -161,7 +161,7 @@ extension CoreDataStack {
     }
     
     func  allLocalItems(withUUIDS uuids: [String]) -> [WrapData] {
-        let context = mainContext
+        let context = newChildBackgroundContext
         let predicate = NSPredicate(format: "(uuidValue IN %@)", uuids)
         let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
         return items.compactMap { $0.wrapedObject }

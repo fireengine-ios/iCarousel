@@ -1276,9 +1276,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func deleteItems(items: [Item]) {
-        if (items.count == 0) {
+        guard !items.isEmpty else {
             return
         }
+
         var objectsForRemoving = [Item]()
         var localObjectsForReplace = [Item]()
         
