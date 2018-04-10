@@ -17,7 +17,7 @@ enum ErrorResponse {
 
 extension ErrorResponse {
     func showInternetErrorGlobal() {
-        if case ErrorResponse.error(let error) = self {
+        if case ErrorResponse.error(let error) = self, error.isNetworkError {
             UIApplication.showErrorAlert(message: error.description)
         }
     }
@@ -31,7 +31,6 @@ extension ErrorResponse {
 }
 
 extension ErrorResponse: CustomStringConvertible {
-    /// need to optimize this (remove from using)
     var description: String {
         return localizedDescription
     }
@@ -61,6 +60,15 @@ extension ErrorResponse: LocalizedError {
 
 extension Error {
     var description: String {
-        return (!isNetworkError || urlErrorCode != .unknown) ? localizedDescription : TextConstants.errorUnrecognizedOccured
+        if isNetworkError {
+            switch urlErrorCode {
+            case .notConnectedToInternet:
+                return TextConstants.errorConnectedToNetwork
+            default:
+                return TextConstants.errorBadConnection
+            }
+        }
+        
+        return localizedDescription
     }
 }

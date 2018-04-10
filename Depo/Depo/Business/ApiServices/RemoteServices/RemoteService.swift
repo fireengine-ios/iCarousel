@@ -197,7 +197,7 @@ final class NextPageOperation: Operation {
             
             /// temp error handling
             if UIApplication.topController() is FloatingContainerVC {
-                UIApplication.showOnTabBar(errorMessage: errorResponce.errorDescription)
+                UIApplication.showOnTabBar(errorMessage: errorResponce.description)
             } else {
                 errorResponce.showInternetErrorGlobal()
             }

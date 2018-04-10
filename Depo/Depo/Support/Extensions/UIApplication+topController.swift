@@ -25,8 +25,8 @@ extension UIApplication {
         return controller
     }
     
-    static func showOnTabBar(errorMessage: String?) {
-        let errorPopUpVC = PopUpController.with(errorMessage: errorMessage ?? TextConstants.errorUnrecognizedOccured)
+    static func showOnTabBar(errorMessage: String) {
+        let errorPopUpVC = PopUpController.with(errorMessage: errorMessage)
         RouterVC().tabBarVC?.present(errorPopUpVC, animated: false, completion: nil)
     }
     

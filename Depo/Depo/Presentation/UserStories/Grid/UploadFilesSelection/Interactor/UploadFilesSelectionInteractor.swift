@@ -72,11 +72,15 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
 
-            self?.output.asyncOperationSucces()
+            DispatchQueue.main.async {
+                self?.output.asyncOperationSucces()
+            }
         }, fail: { [weak self] errorResponse in
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList fail")
-            UIApplication.showOnTabBar(errorMessage: errorResponse.errorDescription)
-            self?.output.asyncOperationSucces()
+            DispatchQueue.main.async {
+                UIApplication.showOnTabBar(errorMessage: errorResponse.description)
+                self?.output.asyncOperationSucces()
+            }
         })
     }
 }
