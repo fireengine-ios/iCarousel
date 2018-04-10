@@ -57,7 +57,6 @@
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
 "Unknown error" = "Unknown error";
-"An error occured" = "An error occured";
 "Too many verification code requested for this msisdn. Please try again later" = "Too many verification code requested for this msisdn. Please try again later";
 "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry." = "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry.";
 "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response.";
