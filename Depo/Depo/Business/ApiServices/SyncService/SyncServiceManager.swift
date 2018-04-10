@@ -187,22 +187,17 @@ class SyncServiceManager {
                 let photoServiceWaitingForWiFi = reachability.connection == .cellular && photoOption == .wifiOnly
                 let videoServiceWaitingForWiFi = reachability.connection == .cellular && videoOption == .wifiOnly
                 
-                if !photoEnabled || !videoEnabled {
-                    self.stop(photo: !photoEnabled, video: !videoEnabled)
-                }
+                let shoudStopPhotoSync = !photoEnabled && !photoServiceWaitingForWiFi
+                let shouldStopVideoSync = !videoEnabled && !videoServiceWaitingForWiFi
                 
-                if photoServiceWaitingForWiFi || videoServiceWaitingForWiFi {
-                    self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
-                }
-                
-                if photoEnabled || videoEnabled {
-                    self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
-                }
+                self.stop(photo: shoudStopPhotoSync, video: shouldStopVideoSync)
+                self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
+                self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
             } else {
-                self.stopSync()
-                
                 let photoServiceWaitingForWiFi = photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
                 let videoServiceWaitingForWiFi = videoOption.isContained(in: [.wifiOnly, .wifiAndCellular])
+                
+                self.stop(photo: !photoServiceWaitingForWiFi, video: !videoServiceWaitingForWiFi)
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
             }
         }
@@ -212,32 +207,38 @@ class SyncServiceManager {
 
     //start to sync
     private func start(photo: Bool, video: Bool, newItems: Bool) {
-        operationQueue.cancelAllOperations()
-        
-        if photo {
-            let operation = ItemSyncOperation(service: photoSyncService, newItems: newItems)
-            operationQueue.addOperation(operation)
-        }
-        
-        if video {
-            let operation = ItemSyncOperation(service: videoSyncService, newItems: newItems)
-            operationQueue.addOperation(operation)
+        if photo || video {
+            operationQueue.cancelAllOperations()
+            
+            if photo {
+                let operation = ItemSyncOperation(service: photoSyncService, newItems: newItems)
+                operationQueue.addOperation(operation)
+            }
+            
+            if video {
+                let operation = ItemSyncOperation(service: videoSyncService, newItems: newItems)
+                operationQueue.addOperation(operation)
+            }
         }
     }
     
     //stop/cancel completely
     private func waitForWifi(photo: Bool, video: Bool) {
-        operationQueue.cancelAllOperations()
-        
-        if photo { photoSyncService.waitForWiFi() }
-        if video { videoSyncService.waitForWiFi() }
+        if photo || video {
+            operationQueue.cancelAllOperations()
+            
+            if photo { photoSyncService.waitForWiFi() }
+            if video { videoSyncService.waitForWiFi() }
+        }
     }
     
     private func stop(photo: Bool, video: Bool) {
-        operationQueue.cancelAllOperations()
-        
-        if photo { photoSyncService.stop() }
-        if video { videoSyncService.stop() }
+        if photo || video {
+            operationQueue.cancelAllOperations()
+            
+            if photo { photoSyncService.stop() }
+            if video { videoSyncService.stop() }
+        }
     }
 }
 

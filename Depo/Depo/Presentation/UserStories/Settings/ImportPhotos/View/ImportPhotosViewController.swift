@@ -57,6 +57,18 @@ class ImportPhotosViewController: ViewController, ErrorPresenter {
         MenloworksEventsService.shared.onSocialMediaPageOpen()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        dropboxLoaderImageView.resumeAnimations()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        dropboxLoaderImageView.pauseAnimations()
+    }
+    
     // MARK: - Helpers
     
     fileprivate func configureLabels() {

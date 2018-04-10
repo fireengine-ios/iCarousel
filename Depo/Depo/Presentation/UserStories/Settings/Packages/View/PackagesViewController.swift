@@ -15,6 +15,7 @@ final class PackagesViewController: ViewController {
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var policyTextView: UITextView!
     
     private lazy var activityManager = ActivityIndicatorManager()
     
@@ -23,6 +24,11 @@ final class PackagesViewController: ViewController {
             collectionView.reloadData()
         }
     }
+    
+    private let policyHeaderSize: CGFloat = Device.isIpad ? 15 : 13
+    private let policyTextSize: CGFloat = Device.isIpad ? 13 : 10
+    
+    // MARK: - View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +38,7 @@ final class PackagesViewController: ViewController {
         activityManager.delegate = self
         promoView.deleagte = self
         setupCollectionView()
+        setupPolicy()
         
         output.viewIsReady()
         
@@ -45,6 +52,21 @@ final class PackagesViewController: ViewController {
     
     private func setupCollectionView() {
         collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
+    }
+    
+    
+    private func setupPolicy() {
+        let attributedString = NSMutableAttributedString(string: TextConstants.packagesPolicyHeader,
+                                                         attributes: [.foregroundColor: ColorConstants.textGrayColor,
+                                                                      .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
+        
+        let policyAttributedString = NSMutableAttributedString(string: "\n\n" + TextConstants.packagesPolicyText,
+                                                               attributes: [.foregroundColor: ColorConstants.textGrayColor,
+                                                                            .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
+        attributedString.append(policyAttributedString)
+        
+        policyTextView.attributedText = attributedString
+        policyTextView.textContainerInset = .zero
     }
 
     func showRestoreButton() {
@@ -178,5 +200,19 @@ extension PackagesViewController: PromoViewDelegate {
         startActivityIndicator()
         output.submit(promocode: promocode)
         keyboardHideManager.dismissKeyboard()
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension PackagesViewController: UITextViewDelegate {
+    
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return UIApplication.shared.openURL(URL)
     }
 }

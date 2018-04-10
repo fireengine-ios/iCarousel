@@ -740,8 +740,13 @@ struct TextConstants {
     static let promocodeInvalid = NSLocalizedString("Verification code is invalid.\nPlease try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let promocodeBlocked = NSLocalizedString("Verification code is blocked.\nPlease request a new code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    // MARK: - Packages
+    
     static let packages = NSLocalizedString("Packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let purchase = NSLocalizedString("Purchase", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let packagesPolicyHeader = NSLocalizedString("PackagesPolicyHeader", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packagesPolicyText = NSLocalizedString("PackagesPolicyText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let deleteFilesText = NSLocalizedString("Deleting these files will remove them from cloud. You won't be able to access them once deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteAlbums = NSLocalizedString("Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
