@@ -3864,7 +3864,6 @@
 		7C6E2FA21F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		7C6E2FA61F3304D700536DB6 /* AudioSelectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSelectionDataSource.swift; sourceTree = "<group>"; };
 		7C73CDF2200356B6000824AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
-		7C73CDF4200356B9000824AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		7C7ED4DC1F84C8C400DC5D33 /* CircleYellowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleYellowButton.swift; sourceTree = "<group>"; };
 		7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FolderSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -15528,7 +15527,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				7C73CDF2200356B6000824AA /* en */,
-				7C73CDF4200356B9000824AA /* Base */,
 			);
 			name = OurLocalizable.strings;
 			path = .;
