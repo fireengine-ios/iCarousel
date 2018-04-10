@@ -265,7 +265,7 @@ final class PeopleChangeVisibilityParameters: BaseRequestParametrs {
         
         peoples.forEach {
             if let id = $0.responseObject.id, let isVisibility = $0.responseObject.visible {
-                dict.updateValue(!isVisibility, forKey: "\(id)")
+                dict.updateValue(isVisibility, forKey: "\(id)")
             }
         }
     
