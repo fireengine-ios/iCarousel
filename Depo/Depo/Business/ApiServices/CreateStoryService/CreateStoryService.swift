@@ -191,9 +191,7 @@ class CreateStoryService: BaseRequestService {
                 success?()
             } else {
                 log.debug("CreateStoryMusicService createStory fail")
-
-                let erorr: Error = NSError(domain: "Create story ", code: -6000, userInfo: nil)
-                fail?(.error(erorr))
+                fail?(ErrorResponse.string(TextConstants.errorUnknown))
             }
         }, fail: fail)
         executePostRequest(param: createStory, handler: handler)
@@ -209,15 +207,11 @@ class CreateStoryService: BaseRequestService {
                 success(responce)
             } else {
                 log.debug("CreateStoryMusicService getPreview fail")
-
-                let erorr: Error = NSError(domain: "Create story ", code: -6000, userInfo: nil)
-                fail(.error(erorr))
+                fail(ErrorResponse.string(TextConstants.errorUnknown))
             }
-        }, fail: { _  in
+        }, fail: { errorResponse  in
             log.debug("CreateStoryMusicService getPreview fail")
-
-            let erorr: Error = NSError(domain: "Create story ", code: -6000, userInfo: nil)
-            fail(.error(erorr))
+            fail(errorResponse)
         })
         executePostRequest(param: preview, handler: handler)
     }

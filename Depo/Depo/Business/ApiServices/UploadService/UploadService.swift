@@ -518,7 +518,7 @@ final class UploadService: BaseRequestService {
         finishedVideoSyncOperationsCount = 0
     }
     
-    func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask {
+    func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
         logEvent("StartUpload \(uploadParam.fileName)")
         
         let request = executeUploadRequest(param: uploadParam, response: { data, response, error in
@@ -737,6 +737,11 @@ final class UploadOperations: Operation {
             self.semaphore.signal()
         }
         
+        guard !isCancelled else {
+            customFail(ErrorResponse.string(TextConstants.canceledOperationTextError))
+            return
+        }
+        
         requestObject = baseUrl(success: { [weak self] baseurlResponse in
             guard let `self` = self,
                 let baseurlResponse = baseurlResponse,
@@ -801,6 +806,11 @@ final class UploadOperations: Operation {
             }
             
             
+            ///If upload service can't create upload request task for some reason
+            if self.requestObject == nil {
+                customFail(ErrorResponse.string(TextConstants.commonServiceError))
+            }
+            
             }, fail: customFail)
     }
     
@@ -808,7 +818,7 @@ final class UploadOperations: Operation {
         return UploadService.default.baseUrl(success: success, fail: fail)
     }
     
-    private func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask {
+    private func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
         return UploadService.default.upload(uploadParam: uploadParam,
                                             success: success,
                                             fail: fail)
