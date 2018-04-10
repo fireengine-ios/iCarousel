@@ -610,7 +610,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func reloadData() {
         collectionView?.reloadData()
-        
+        updateVisibleCells()
         resetCachedAssets()
     }
     
