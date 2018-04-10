@@ -3133,6 +3133,8 @@
 		CED54F6E204A760900B750BB /* SwiftyJSONExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1CEA91F21E11200C9DD8F /* SwiftyJSONExtension.swift */; };
 		CED54F6F204A7D4B00B750BB /* BytesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEC01F78F94900FB4C3D /* BytesType.swift */; };
 		CED6442E2060E776009AFC12 /* StorageVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6442D2060E776009AFC12 /* StorageVars.swift */; };
+		CEDA44D9207CA9E600E653DD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
+		CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		CEDA44C5207B8ADF00E653DD /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44C4207B8ADF00E653DD /* BackButton.swift */; };
 		CEDEAB311FADA5D20046555F /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */; };
 		CEDEAB321FADA5D20046555F /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEAB301FADA5D20046555F /* AlbumCell.xib */; };
@@ -3863,7 +3865,6 @@
 		7C6E2FA21F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		7C6E2FA61F3304D700536DB6 /* AudioSelectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSelectionDataSource.swift; sourceTree = "<group>"; };
 		7C73CDF2200356B6000824AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
-		7C73CDF4200356B9000824AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		7C7ED4DC1F84C8C400DC5D33 /* CircleYellowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleYellowButton.swift; sourceTree = "<group>"; };
 		7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C83B6EF1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FolderSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -5202,6 +5203,7 @@
 		CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardResponse.swift; sourceTree = "<group>"; };
 		CED5E81F1EF7E81D009649EB /* CoreTelephonyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTelephonyService.swift; sourceTree = "<group>"; };
 		CED6442D2060E776009AFC12 /* StorageVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageVars.swift; sourceTree = "<group>"; };
+		CEDA44D8207CA9E600E653DD /* NumericConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericConstants.swift; sourceTree = "<group>"; };
 		CEDA44C4207B8ADF00E653DD /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		CEDEAB301FADA5D20046555F /* AlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
@@ -6936,6 +6938,7 @@
 				CE5A612E2060F8AE00793EB0 /* Keys.swift */,
 				7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */,
 				7C032B811EEFE465006532C8 /* Constants.swift */,
+				CEDA44D8207CA9E600E653DD /* NumericConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -13732,6 +13735,7 @@
 				8C0E8DC01FDEBDFF00789C91 /* BottomSelectionTabBarViewInput.swift in Sources */,
 				8C0E8DC11FDEBDFF00789C91 /* RegistrationConfigurator.swift in Sources */,
 				8C0E8DC21FDEBDFF00789C91 /* LocalAlbumViewController.swift in Sources */,
+				CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */,
 				8C0E8DC31FDEBDFF00789C91 /* CreateStoryPreviewInitializer.swift in Sources */,
 				8C06AC1720066641003D8E05 /* TurkcellSecurityRouterInput.swift in Sources */,
 				8C0E8DC41FDEBDFF00789C91 /* PurchaseResult.swift in Sources */,
@@ -14854,6 +14858,7 @@
 				8C7786A11F3F38EF005CB432 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				7CDABD091F1E3A6300C8CC16 /* UserProfileInteractorOutput.swift in Sources */,
 				CE51ACE11EF90853005DCEE0 /* IntroducePresenter.swift in Sources */,
+				CEDA44D9207CA9E600E653DD /* NumericConstants.swift in Sources */,
 				CE2469F51F3BF8F3008DF705 /* CreateStoryService.swift in Sources */,
 				CE51ACE21EF90853005DCEE0 /* IntroduceInteractorInput.swift in Sources */,
 				7CFF0C8C1F4C0E6F00E72E6A /* AlbumServiceResponse.swift in Sources */,
@@ -15526,7 +15531,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				7C73CDF2200356B6000824AA /* en */,
-				7C73CDF4200356B9000824AA /* Base */,
 			);
 			name = OurLocalizable.strings;
 			path = .;
