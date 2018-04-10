@@ -25,39 +25,38 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
             return
         }
         
-        guard let story_ = story else {
+        guard let story = story else {
             return
         }
         
-        if story_.music == nil {
+        if story.music == nil {
             output.audioNotSelectedError()
             return
         }
         
         
-        story_.storyPhotos.removeAll()
-        story_.storyPhotos.append(contentsOf: array)
+        story.storyPhotos.removeAll()
+        story.storyPhotos.append(contentsOf: array)
         //TODO: creation story on server
         isRequestStarted = true
-        let parameter = story_.photoStoryRequestParameter()
-        if let parameter_ = parameter {
-            let t = CreateStoryPreview(name: parameter_.title,
-                                       imageuuid: parameter_.imageUUids,
-                                       musicUUID: parameter_.audioUuid,
-                                       musicId: parameter_.musicId)
+        if let parameter = story.photoStoryRequestParameter() {
+            let t = CreateStoryPreview(name: parameter.title,
+                                       imageuuid: parameter.imageUUids,
+                                       musicUUID: parameter.audioUuid,
+                                       musicId: parameter.musicId)
             
             CreateStoryService().getPreview(preview: t, success: { [weak self] responce in
-                if let self_ = self {
-                    self_.isRequestStarted = false
+                if let `self` = self {
+                    self.isRequestStarted = false
                     DispatchQueue.main.async {
-                        self_.output.goToStoryPreview(story: story_, responce: responce)
+                        self.output.goToStoryPreview(story: story, responce: responce)
                     }
                 }
             }, fail: { [weak self] fail in
-                if let self_ = self {
-                    self_.isRequestStarted = false
+                if let `self` = self {
+                    self.isRequestStarted = false
                     DispatchQueue.main.async {
-                        self_.output.storyCreatedWithError()
+                        self.output.createdStoryFailed(with: fail)
                     }
                 }
             })

@@ -40,19 +40,11 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func storyCreatedWithError() {
+    func createdStoryFailed(with error: ErrorResponse) {
         asyncOperationSucces()
         
-        let controller = PopUpController.with(title: TextConstants.errorAlert,
-                                              message: TextConstants.createStoryNotCreated,
-                                              image: .error,
-                                              buttonTitle: TextConstants.ok,
-                                              action: { [weak self] vc in
-                                                vc.close { [weak self] in
-                                                    self?.router.goToMain()
-                                                }
-        })
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        let errorMessage = error.isNetworkError ? error.description : TextConstants.createStoryNotCreated
+        view.showErrorAlert(message: errorMessage)
     }
     
     func onMusicSelection() {
