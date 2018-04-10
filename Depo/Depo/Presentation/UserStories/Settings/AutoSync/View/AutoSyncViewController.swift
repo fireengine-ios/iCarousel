@@ -92,7 +92,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput, AutoSyncDataS
     
     @IBAction func onSkipButtn() {
         output.skipForNowPressed(onSyncDisabled: { [weak self] in
-            UserDefaults.standard.set(true, forKey: "autoSyncSet")
+            self?.storageVars.autoSyncSet = true
             self?.disableAutoSync()
         })
     }
