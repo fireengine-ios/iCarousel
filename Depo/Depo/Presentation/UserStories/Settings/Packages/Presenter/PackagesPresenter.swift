@@ -204,11 +204,8 @@ extension PackagesPresenter: PackagesInteractorOutput {
             //show restore
             view?.showRestoreButton()
             /// in app purchase
-            interactor.getOfferApples()
-        }
-        
-        if accountType != .turkcell {
             view?.showInAppPolicy()
+            interactor.getOfferApples()
         }
         
         let subscriptionPlans = interactor.convertToASubscriptionList(activeSubscriptionList: activeSubscriptions, accountType: accountType)
