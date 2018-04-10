@@ -11,6 +11,7 @@ import Foundation
 protocol StorageVars: class {
     var currentUserID: String? { get set }
     var emptyEmailUp: Bool { get set }
+    var autoSyncSet: Bool { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -20,6 +21,12 @@ final class UserDefaultsVars: StorageVars {
     var currentUserID: String? {
         get { return userDefaults.string(forKey: currentUserIDKey) }
         set { userDefaults.set(newValue, forKey: currentUserIDKey) }
+    }
+    
+    private let autoSyncSetKey = "AutoSyncSetKey"
+    var autoSyncSet: Bool {
+        get { return userDefaults.bool(forKey: autoSyncSetKey) }
+        set { userDefaults.set(newValue, forKey: autoSyncSetKey) }
     }
     
     /// need flag for SavingAttemptsCounterByUnigueUserID.emptyEmailCounter

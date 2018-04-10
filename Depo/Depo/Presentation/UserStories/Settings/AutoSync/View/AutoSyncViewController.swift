@@ -19,6 +19,8 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
     @IBOutlet weak var bacgroundImage: UIImageView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
+    private lazy var storageVars: StorageVars = factory.resolve()
+    
     var fromSettings: Bool = false
     var isFirstTime = true
     
@@ -83,12 +85,14 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         if !settings.isAutoSyncEnabled {
             MenloworksEventsService.shared.onFirstAutosyncOff()
         }
+        storageVars.autoSyncSet = true
         
         output.change(settings: settings)
     }
     
     @IBAction func onSkipButtn() {
         output.skipForNowPressed(onSyncDisabled: { [weak self] in
+            self?.storageVars.autoSyncSet = true
             self?.disableAutoSync()
         })
     }
