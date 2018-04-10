@@ -75,7 +75,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             self?.output.asyncOperationSucces()
         }, fail: { [weak self] errorResponse in
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList fail")
-            UIApplication.showInternetErrorOnTabBar()
+            UIApplication.showOnTabBar(errorMessage: errorResponse.errorDescription)
             self?.output.asyncOperationSucces()
         })
     }

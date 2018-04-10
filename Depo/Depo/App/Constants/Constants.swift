@@ -688,6 +688,7 @@ struct TextConstants {
     
     static let errorUnknown = NSLocalizedString("Unknown error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorServer = NSLocalizedString("Server error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let errorUnrecognizedOccured = NSLocalizedString("An error occured", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let errorFileSystemAccessDenied = NSLocalizedString("Can't get access to file system", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorNothingToDownload = NSLocalizedString("Nothing to download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -833,7 +834,7 @@ struct NumericConstants {
     static let animationDuration: Double = 0.3
     static let fastAnimationDuration: Double = 0.1
     
-    static let timeIntervalBetweenAutoSync: TimeInterval = 10 * 60
+    static let timeIntervalBetweenAutoSync: TimeInterval = 0
     
     static let timeIntervalBetweenAutoSyncAfterOutOfSpaceError: TimeInterval = 60 * 60 * 12 // 12 hours
 

@@ -17,9 +17,9 @@ enum ErrorResponse {
 
 extension ErrorResponse {
     func showInternetErrorGlobal() {
-        if case ErrorResponse.error(let error) = self, error is URLError {
-            UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
-        }   
+        if case ErrorResponse.error(let error) = self {
+            UIApplication.showErrorAlert(message: error.description)
+        }
     }
     
     var isOutOfSpaceError: Bool {
@@ -45,9 +45,6 @@ extension ErrorResponse: LocalizedError {
         case .string(let errorString):
             return errorString
         case .error(let recivedError):
-            if recivedError.isNetworkError {
-                return TextConstants.errorConnectedToNetwork
-            }
             return recivedError.description
         case .httpCode(let code):
             return String(code)
@@ -64,6 +61,6 @@ extension ErrorResponse: LocalizedError {
 
 extension Error {
     var description: String {
-        return isNetworkError ? TextConstants.errorConnectedToNetwork : localizedDescription
+        return (!isNetworkError || urlErrorCode != .unknown) ? localizedDescription : TextConstants.errorUnrecognizedOccured
     }
 }
