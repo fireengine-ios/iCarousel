@@ -53,6 +53,7 @@ end
 
 target 'LifeboxShared' do
     shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
 end
 
 target 'LifeboxFileProvider' do
