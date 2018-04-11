@@ -26,12 +26,12 @@ extension CoreDataStack {
         }
     }
     
-    func append(localMediaItems: [PHAsset], completion: @escaping ()->Void) {
+    func append(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
 //        let newBgcontext = backgroundContext//self.newChildBackgroundContext
         save(items: localMediaItems, context: backgroundContext, completion: {})
     }
     
-    func remove(localMediaItems: [PHAsset], completion: @escaping ()->Void) {
+    func remove(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
         removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier })
     }
 
@@ -183,16 +183,8 @@ extension CoreDataStack {
             let sortedItems = items.sorted { $0.fileSizeValue < $1.fileSizeValue }
             let currentUserID = SingletonStorage.shared.unigueUserID
             let filtredArray = sortedItems.filter { !$0.syncStatusesArray.contains(currentUserID) }
-            
-//<<<<<<< HEAD
             completion(filtredArray.compactMap { $0.wrapedObject })
         })
-//=======
-//            !$0.syncStatusesArray.contains(currentUserID)
-//        }
-//
-//        return filtredArray.compactMap { $0.wrapedObject }
-//>>>>>>> specBuild_PHLibrary
     }
     
     private func getUnsyncsedMediaItems(video: Bool, image: Bool, completion: @escaping (_ items: [MediaItem]) -> Void) {

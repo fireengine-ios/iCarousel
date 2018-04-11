@@ -85,11 +85,7 @@ class AssetsCache {
     }
     
     func assetBy(identifier: String) -> PHAsset? {
-        var assets: PHAsset?
-//        dispatchQueue.sync {
-            assets = storage[identifier]
-//        }
-        return assets
+        return storage[identifier]
     }
     
     func dropAll() {
