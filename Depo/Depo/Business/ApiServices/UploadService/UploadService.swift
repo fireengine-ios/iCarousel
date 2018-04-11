@@ -189,10 +189,7 @@ final class UploadService: BaseRequestService {
         logSyncSettings(state: "StartSyncToUseFileList")
         
         let operations: [UploadOperations] = itemsToUpload.compactMap {
-            let backgroundTaskId = self.beginBackgroundTask(with: $0.uuid)
-            
             let operation = UploadOperations(item: $0, uploadType: .syncToUse, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)
                 guard let `self` = self else {
                     return
                 }
@@ -278,10 +275,7 @@ final class UploadService: BaseRequestService {
         logSyncSettings(state: "StartUploadFileList")
         
         let operations: [UploadOperations] = itemsToUpload.compactMap {
-            let taskId = self.beginBackgroundTask(with: $0.uuid)
-            
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
-                UIApplication.shared.endBackgroundTask(taskId)
                 guard let `self` = self else {
                     return
                 }
@@ -367,10 +361,7 @@ final class UploadService: BaseRequestService {
         var successHandled = false
             
         let operations: [UploadOperations] = itemsToSync.compactMap {
-            let backgroundTaskId = self.beginBackgroundTask(with: $0.uuid)
-            
             let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)                
                 guard let `self` = self else {
                     return
                 }
@@ -563,16 +554,6 @@ final class UploadService: BaseRequestService {
         let handler = BaseResponseHandler<SearchItemResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
-    
-    // MARK: - Helpers
-    
-    private func beginBackgroundTask(with name: String?) -> UIBackgroundTaskIdentifier {
-        var taskId = UIBackgroundTaskInvalid
-        taskId = UIApplication.shared.beginBackgroundTask(withName: name, expirationHandler: {
-            UIApplication.shared.endBackgroundTask(taskId)
-        })
-        return taskId
-    }
 }
 
 
@@ -679,8 +660,8 @@ extension UploadService {
 }
 
 
-typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Void
-typealias UploadOperationHandler = (_ uploadOberation: UploadOperations, _ value: ErrorResponse?) -> Void
+typealias UploadOperationSuccess = (_ uploadOperation: UploadOperations) -> Void
+typealias UploadOperationHandler = (_ uploadOperation: UploadOperations, _ value: ErrorResponse?) -> Void
 
 final class UploadOperations: Operation {
     
@@ -696,6 +677,7 @@ final class UploadOperations: Operation {
     private var attemptsCount = 0
     private let semaphore: DispatchSemaphore
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.uploadOperation)
+    private var backgroundTaskId: UIBackgroundTaskIdentifier?
     
     
     init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, handler: @escaping UploadOperationHandler) {
@@ -726,12 +708,14 @@ final class UploadOperations: Operation {
     }
     
     override func main() {
+        backgroundTaskId = beginBackgroundTask()
         ItemOperationManager.default.startUploadFile(file: item)
         
         attemptsCount = 0
         attempmtUpload()
         
         semaphore.wait()
+        endBackgroundTask()
     }
     
     private func attempmtUpload() {
@@ -847,8 +831,27 @@ final class UploadOperations: Operation {
                                            success: success,
                                            fail: fail)
     }
+    
+    // MARK: - Helpers
+    
+    private func beginBackgroundTask() -> UIBackgroundTaskIdentifier {
+        var taskId = UIBackgroundTaskInvalid
+        DispatchQueue.main.async {
+            taskId = UIApplication.shared.beginBackgroundTask(withName: self.item.uuid, expirationHandler: {
+                UIApplication.shared.endBackgroundTask(taskId)
+            })
+        }
+        return taskId
+    }
+    
+    private func endBackgroundTask() {
+        if let taskId = backgroundTaskId {
+            DispatchQueue.main.async {
+                UIApplication.shared.endBackgroundTask(taskId)
+            }
+        }
+    }
 }
-
 
 extension UploadOperations: OperationProgressServiceDelegate {
     func didSend(ratio: Float, for url: URL) {
