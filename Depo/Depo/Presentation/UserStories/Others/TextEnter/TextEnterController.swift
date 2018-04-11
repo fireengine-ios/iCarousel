@@ -10,23 +10,9 @@ import Foundation
 
 typealias TextEnterHandler = (_ text: String, _ vc: TextEnterController) -> Void
 
-final class TextEnterController: ViewController {
+final class TextEnterController: ViewController, NibInit {
     
-    // MARK: - Static
-    
-    static func with(title: String, buttonTitle: String, buttonAction: TextEnterHandler? = nil) -> TextEnterController {
-        
-        let vc = TextEnterController(nibName: "TextEnterController", bundle: nil)
-        
-        vc.alertTitle = title
-        vc.doneButtonTitle = buttonTitle
-        
-        if let action = buttonAction {
-            vc.doneAction = action
-        }
-        
-        return vc
-    }
+    var output: RegistrationViewOutput!
     
     // MARK: - Outlets
     
@@ -35,6 +21,7 @@ final class TextEnterController: ViewController {
     @IBOutlet private weak var pickerContainer: UIView!
     @IBOutlet private weak var pickerView: UIPickerView!
     @IBOutlet private weak var pickerBottomConstraint: NSLayoutConstraint!
+    
     @IBOutlet private weak var changeButton: BlueButtonWithWhiteText! {
         didSet {
             changeButton.isExclusiveTouch = true
@@ -42,7 +29,7 @@ final class TextEnterController: ViewController {
         }
     }
     
-    var output: RegistrationViewOutput!
+    
     private let dataSource = TextEnterDataSource()
     private let gsmCompositor = CounrtiesGSMCodeCompositor()
     private let dataStorage = DataStorage()
@@ -56,14 +43,14 @@ final class TextEnterController: ViewController {
     }
     
     private var phone: String? {
-        get {
-            guard let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? GSMUserInputCell,
-                let code = cell.gsmCountryCodeLabel.text,
-                let number = cell.inputTextField?.text else {
-                    return nil
-            }
-            return code + number
+        guard
+            let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? GSMUserInputCell,
+            let code = cell.gsmCountryCodeLabel.text,
+            let number = cell.inputTextField?.text
+        else {
+            return nil
         }
+        return code + number
     }
     
     // MAKR: - View lifecycle
@@ -97,13 +84,12 @@ final class TextEnterController: ViewController {
         let doneButton = UIBarButtonItem(title: TextConstants.chooseTitle,
                                          style: .plain,
                                          target: self,
-                                         action: #selector(donePicker(sender:)))
+                                         action: #selector(donePicker))
         let pickerToolBar = barButtonItemsWithRitht(button: doneButton)
         pickerContainer.addSubview(pickerToolBar)
         pickerView.dataSource = dataSource
         pickerView.delegate = dataSource
     }
-    
 
     func showAlertMessage(with text: String) {
         showAlertMessage(with: text)
@@ -134,7 +120,7 @@ final class TextEnterController: ViewController {
         dismiss(animated: true, completion: completion)
     }
     
-    @objc func donePicker(sender: AnyObject) {
+    @objc func donePicker() {
         chooseButtonPressed()
     }
     
@@ -201,5 +187,22 @@ extension TextEnterController: DataSourceOutput {
     
     func infoButtonGotPressed(withType: UserValidationResults) {
 
+    }
+}
+
+// MARK: - Static
+extension TextEnterController {
+    
+    static func with(title: String, buttonTitle: String, buttonAction: TextEnterHandler? = nil) -> TextEnterController {
+        
+        let vc = TextEnterController.initFromNib()
+        vc.alertTitle = title
+        vc.doneButtonTitle = buttonTitle
+        
+        if let action = buttonAction {
+            vc.doneAction = action
+        }
+        
+        return vc
     }
 }
