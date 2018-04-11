@@ -36,6 +36,7 @@ final class ShareViewController: UIViewController, ShareController {
     @IBOutlet private weak var progressLabel: UILabel!
     
     private let shareConfigurator = ShareConfigurator()
+    private lazy var shareWormholeListener = ShareWormholeListener()
     private var sharedItems = [ShareData]()
     private var currentUploadIndex = -1
     
@@ -43,8 +44,43 @@ final class ShareViewController: UIViewController, ShareController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupSharedItems()
         shareConfigurator.setup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupPasscodeIfNeed()
+    }
+
+    private func setupPasscodeIfNeed() {
+        if shareConfigurator.isNeedToShowPasscode {
+            shareWormholeListener.listenLogout { [weak self] in
+                if let navVC = self?.navVC {
+                    navVC.dismiss(animated: true) { 
+                        self?.animateDismiss()
+                    }
+                } else {
+                    self?.animateDismiss()
+                }
+            }
+            showPasscode()
+        }
+    }
+    
+    private var navVC: UINavigationController?
+    
+    private func showPasscode() {
+        let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeSetTitle)
+        
+        let navVC = UINavigationController(rootViewController: vc)
+        self.navVC = navVC
+        vc.success = {
+            navVC.dismiss(animated: true, completion: nil)
+        }
+        
+        present(navVC, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
