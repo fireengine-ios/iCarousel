@@ -86,7 +86,7 @@ class Upload: UploadRequestParametrs {
         
         header = header + [ HeaderConstant.ContentType : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
-            HeaderConstant.XMetaRecentServerHash : "s",
+//            HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,

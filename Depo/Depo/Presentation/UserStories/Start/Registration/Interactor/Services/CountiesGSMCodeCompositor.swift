@@ -22,7 +22,7 @@ class CounrtiesGSMCodeCompositor {
         let isoCodes = NSLocale.isoCountryCodes
         let locale = NSLocale(localeIdentifier: Device.supportedLocale)
         
-        resulArray = isoCodes.flatMap {
+        resulArray = isoCodes.compactMap {
             
             let countryCode: String = $0
             let contryName = locale.displayName(forKey: NSLocale.Key.countryCode, value: countryCode)
