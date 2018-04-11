@@ -103,17 +103,24 @@ class CoreDataStack: NSObject {
         
     }
     
-    func getLocalDuplicates(remoteItems: [Item]) -> [Item] {
+    func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping ([Item]) -> Void) {
         let remoteMd5s = remoteItems.map { $0.md5 }
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
         fetchRequest.predicate = NSPredicate(format: "md5Value IN %@", remoteMd5s)
         
-        guard let localDuplicatesMediaItems = (try? CoreDataStack.default.newChildBackgroundContext.fetch(fetchRequest)) as? [MediaItem] else {
-            return []
+        let context = CoreDataStack.default.newChildBackgroundContext
+        context.perform {
+            guard let localDuplicatesMediaItems = (try? context.fetch(fetchRequest)) as? [MediaItem] else {
+                duplicatesCallBack([])
+                return
+            }
+            var array = [Item]()
+            array = localDuplicatesMediaItems.compactMap { WrapData(mediaItem: $0) }
+
+            duplicatesCallBack(array)
+            
         }
-        
-        return localDuplicatesMediaItems.compactMap { WrapData(mediaItem: $0) }
     }
 
     private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>]) {

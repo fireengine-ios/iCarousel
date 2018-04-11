@@ -380,7 +380,7 @@ class FileService: BaseRequestService {
                     if let item = downloadParam.item, let mediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
                         CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
                                                                remoteItems: [item],
-                                                               context: CoreDataStack.default.mainContext)
+                                                               context: CoreDataStack.default.newChildBackgroundContext)
                         removeDestinationFile()
                         success?()
                     } else {

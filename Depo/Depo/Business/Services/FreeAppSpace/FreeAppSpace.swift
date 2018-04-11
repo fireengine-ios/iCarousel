@@ -32,11 +32,17 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     func getCheckedDuplicatesArray(checkedArray: @escaping([WrapData]) -> Void) {
 //        DispatchQueue.main.async {[weak self] in
 //            if let `self` = self {
-                let array = CoreDataStack.default.getLocalDuplicates(remoteItems: self.getDuplicatesObjects())
-                self.duplicatesArray.removeAll()
-                self.duplicatesArray.append(contentsOf: array)
-                self.sortDuplicatesArray()
-                checkedArray(self.duplicatesArray)
+        CoreDataStack.default.getLocalDuplicates(remoteItems: self.getDuplicatesObjects(), duplicatesCallBack: { [weak self] items in
+            guard let `self` = self else {
+                checkedArray([])
+                return
+            }
+            self.duplicatesArray.removeAll()
+            self.duplicatesArray.append(contentsOf: items)
+            self.sortDuplicatesArray()
+            checkedArray(self.duplicatesArray)
+        })
+        
 //            }
 //        }
     }
@@ -279,9 +285,13 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             fetchRequest.predicate = predicate
             fetchRequest.sortDescriptors = sortDescriptors
             
-            guard let fetchResult = try? CoreDataStack.default.mainContext.fetch(fetchRequest) else {
+            let context = CoreDataStack.default.newChildBackgroundContext
+            guard let fetchResult = try? context.fetch(fetchRequest) else {
                 return
             }
+            //
+            debugPrint("!!!!!! perform in context ???")
+            //
             let localObjects = fetchResult.map { WrapData(mediaItem: $0) }
             for localObject in localObjects {
                 if localMD5Array.index(of: localObject.md5) == nil {
@@ -301,18 +311,24 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     func finishedDownloadFile(file: WrapData) {
         if !file.isLocalItem {
-            let localObjects = CoreDataStack.default.getLocalDuplicates(remoteItems: [file])
-            if !localObjects.isEmpty {
-                for localObject in localObjects {
-                    if localMD5Array.index(of: localObject.md5) == nil {
-                        file.metaData?.takenDate = Date()
-                        duplicatesArray.append(localObject)
-                        localMD5Array.append(localObject.md5)
-                    }
+            CoreDataStack.default.getLocalDuplicates(remoteItems: [file], duplicatesCallBack: { [weak self] items in
+                guard let `self` = self else {
+                    return
                 }
-                sortDuplicatesArray()
-            }
-            checkFreeAppSpaceAfterAutoSync()
+                if !items.isEmpty {
+                    for localObject in items {
+                        if self.localMD5Array.index(of: localObject.md5) == nil {
+                            file.metaData?.takenDate = Date()
+                            self.duplicatesArray.append(localObject)
+                            self.localMD5Array.append(localObject.md5)
+                        }
+                    }
+                    self.sortDuplicatesArray()
+                }
+               self.checkFreeAppSpaceAfterAutoSync()
+                
+            })
+            
         }
     }
     
@@ -357,20 +373,25 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     !$0.isLocalItem
                 }
                 
-                localObjects = CoreDataStack.default.getLocalDuplicates(remoteItems: networksObjects)
-                let duplicatesServerMD5Set = Set<String>(localObjects.map({ $0.md5 }))
-                newDuplicatesArray.removeAll()
-                for object in self.duplicatesArray {
-                    if !duplicatesServerMD5Set.contains(object.md5) {
-                        newDuplicatesArray.append(object)
+                CoreDataStack.default.getLocalDuplicates(remoteItems: networksObjects, duplicatesCallBack: { [weak self] items in
+                    guard let `self` = self else {
+                        return
                     }
-                }
-                self.duplicatesArray = newDuplicatesArray
+                    let duplicatesServerMD5Set = Set<String>(items.map({ $0.md5 }))
+                    newDuplicatesArray.removeAll()
+                    for object in self.duplicatesArray {
+                        if !duplicatesServerMD5Set.contains(object.md5) {
+                            newDuplicatesArray.append(object)
+                        }
+                    }
+                    self.duplicatesArray = newDuplicatesArray
+                    
+                    if (self.duplicatesArray.count == 0) {
+                        CardsManager.default.stopOperationWithType(type: .freeAppSpace)
+                        CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
+                    }
+                })
                 
-                if (self.duplicatesArray.count == 0) {
-                    CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-                    CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
-                }
             }
         }
     }

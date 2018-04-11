@@ -31,6 +31,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
     var alertSheetExcludeTypes = [ElementTypes]()
     
+    private let semaphore = DispatchSemaphore(value: 0)
+    
     var bottomBarConfig: EditingBarConfig?    
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
     
@@ -323,13 +325,16 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                 if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
                 } else if selectedItems is [Item] {
-                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item])
-                    if localDuplicates.count == 0 {
-                        //selectedItems = localDuplicates
-                        actionTypes.remove(at: deleteOriginalIndex)
-                    } else {
-                        
-                    }
+                    
+                    CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
+                        let localDuplicates = items
+                        if localDuplicates.count == 0 {
+                            //selectedItems = localDuplicates
+                            actionTypes.remove(at: deleteOriginalIndex)
+                        }
+                        self?.semaphore.signal()
+                    })
+                    semaphore.wait()
                 }
                 
             }

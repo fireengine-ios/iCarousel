@@ -41,6 +41,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var needShowProgressInCells = false
     
+    private let semaphore = DispatchSemaphore(value: 0)
+    
     private let dispatchQueue = DispatchQueue(label: "com.lifebox.baseFilesGreed")
     
     init(sortedRule: SortedRules = .timeDown) {
@@ -564,13 +566,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
                 } else if selectedItems is [Item] {
-                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item])
-                    if localDuplicates.count == 0 {
-                        //selectedItems = localDuplicates
-                        actionTypes.remove(at: deleteOriginalIndex)
-                    } else {
-                        
-                    }
+                    CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
+                        if items.count == 0 {
+                            //selectedItems = localDuplicates
+                            actionTypes.remove(at: deleteOriginalIndex)
+                        }
+                        self?.semaphore.signal()
+                    })
+                    semaphore.wait()
                 }
                 
             }

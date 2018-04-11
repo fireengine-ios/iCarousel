@@ -7,7 +7,8 @@
 //
 
 class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActionsSheetModuleInput {
-
+    
+    private let semaphore = DispatchSemaphore(value: 0)
     
     let rightButtonBox = CGRect(x: Device.winSize.width - 50, y: 64, width: 10, height: 10)
     // MARK: Module Input
@@ -151,10 +152,15 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 filteredActionTypes.remove(at: removeFromFavorites)
             }
             
-            let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems)
-            if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
-                filteredActionTypes.remove(at: index)
-            }
+            CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
+                let localDuplicates = items
+                if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
+                    filteredActionTypes.remove(at: index)
+                }
+                self?.semaphore.signal()
+            })
+            semaphore.wait()
+            
         } else {
             if let printIndex = filteredActionTypes.index(of: .print) {
                 filteredActionTypes.remove(at: printIndex)
@@ -351,11 +357,18 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     let serverObjects = itemsArray.filter({
                         !$0.isLocalItem
                     })
-                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects)
-                    action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
-                        MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.deleteDeviceOriginal(items: localDuplicates)
+                    
+                    action = UIAlertAction(title: nil, style: .default, handler: nil)
+                    CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects, duplicatesCallBack: { [weak self] items in
+                        let localDuplicates = items
+                        action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
+                            MenloworksAppEvents.onDeleteClicked()
+                            self?.interactor.deleteDeviceOriginal(items: localDuplicates)
+                        })
+                        self?.semaphore.signal()
                     })
+                    semaphore.wait()
+                    
                 } else {
                     action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
