@@ -89,20 +89,16 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     private func openApp() {
         storageVars.emptyEmailUp = false
-        
-                
+
         if turkcellLogin {
-            let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-            if launchedBefore {
+            if storageVars.autoSyncSet {
                 router.navigateToApplication()
             } else {
                 router.goToSyncSettingsView()
-                UserDefaults.standard.set(true, forKey: "launchedBefore")
             }
         } else {
             router.navigateToApplication()
         }
-  
     }
     
     func showEmptyEmail(show: Bool) {

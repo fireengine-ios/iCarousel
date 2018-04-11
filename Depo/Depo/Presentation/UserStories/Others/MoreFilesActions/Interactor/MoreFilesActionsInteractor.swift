@@ -184,7 +184,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 let image = image,
                 let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
             else {
-                UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+                UIApplication.showErrorAlert(message: TextConstants.errorServer)
                 complition?()
                 return
             }

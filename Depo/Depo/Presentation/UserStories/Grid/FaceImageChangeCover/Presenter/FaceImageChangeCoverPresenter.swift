@@ -25,6 +25,10 @@ final class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func onReloadData() {
+        getContentWithSuccess(items: [])
+    }
+    
     override func selectPressed(type: MoreActionsConfig.SelectedType) { }
     
     override func selectModeSelected() { }

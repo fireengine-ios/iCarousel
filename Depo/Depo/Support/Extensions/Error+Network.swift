@@ -12,4 +12,12 @@ extension Error {
     var isNetworkError: Bool {
         return self is URLError
     }
+    
+    var urlErrorCode: URLError.Code {
+        guard let urlError = self as? URLError else {
+            return .unknown
+        }
+        
+        return urlError.code
+    }
 }
