@@ -270,7 +270,7 @@ private func setupLog() {
     
     if let logPath = documentDirectory.appendingPathComponent("app.log") as NSURL? {
         UserDefaults.standard.set(logPath.path!, forKey: "app.log")
-        let fileDestination: AutoRotatingFileDestination = AutoRotatingFileDestination(owner: log, writeToFile: logPath, identifier: "advancedLogger", shouldAppend: true)
+        let fileDestination = AutoRotatingFileDestination(owner: log, writeToFile: logPath, identifier: "advancedLogger", shouldAppend: true)
         fileDestination.outputLevel = .debug
         fileDestination.showLogIdentifier = true
         fileDestination.showFunctionName = true
@@ -279,7 +279,9 @@ private func setupLog() {
         fileDestination.showFileName = true
         fileDestination.showLineNumber = true
         fileDestination.showDate = true
+        fileDestination.targetMaxFileSize = NumericConstants.logMaxSize
         fileDestination.targetMaxTimeInterval = NumericConstants.logDuration
+        fileDestination.logQueue = XCGLogger.logQueue
         log.add(destination: fileDestination)
     }
     

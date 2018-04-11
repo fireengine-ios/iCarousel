@@ -189,7 +189,10 @@ final class UploadService: BaseRequestService {
         logSyncSettings(state: "StartSyncToUseFileList")
         
         let operations: [UploadOperations] = itemsToUpload.compactMap {
+            let backgroundTaskId = self.beginBackgroundTask(with: $0.uuid)
+            
             let operation = UploadOperations(item: $0, uploadType: .syncToUse, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
+                UIApplication.shared.endBackgroundTask(backgroundTaskId)
                 guard let `self` = self else {
                     return
                 }
@@ -275,7 +278,10 @@ final class UploadService: BaseRequestService {
         logSyncSettings(state: "StartUploadFileList")
         
         let operations: [UploadOperations] = itemsToUpload.compactMap {
+            let taskId = self.beginBackgroundTask(with: $0.uuid)
+            
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
+                UIApplication.shared.endBackgroundTask(taskId)
                 guard let `self` = self else {
                     return
                 }
@@ -361,8 +367,10 @@ final class UploadService: BaseRequestService {
         var successHandled = false
             
         let operations: [UploadOperations] = itemsToSync.compactMap {
+            let backgroundTaskId = self.beginBackgroundTask(with: $0.uuid)
             
             let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
+                UIApplication.shared.endBackgroundTask(backgroundTaskId)                
                 guard let `self` = self else {
                     return
                 }
@@ -554,6 +562,16 @@ final class UploadService: BaseRequestService {
     func uploadNotify(param: UploadNotify, success: @escaping SuccessResponse, fail: FailResponse?) {
         let handler = BaseResponseHandler<SearchItemResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
+    }
+    
+    // MARK: - Helpers
+    
+    private func beginBackgroundTask(with name: String?) -> UIBackgroundTaskIdentifier {
+        var taskId = UIBackgroundTaskInvalid
+        taskId = UIApplication.shared.beginBackgroundTask(withName: name, expirationHandler: {
+            UIApplication.shared.endBackgroundTask(taskId)
+        })
+        return taskId
     }
 }
 
