@@ -50,6 +50,7 @@ final class MediaPlayer: NSObject {
     private var player: AVPlayer!
     private var playerTimeObserver: Any?
     private let playDidEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime
+    private var enabledBackground = false
     
     // MARK: - Setup
     
@@ -58,14 +59,16 @@ final class MediaPlayer: NSObject {
         
         setup(player: AVPlayer())
         setupFinishedPlayingObserver()
-        enableBackground()
     }
     
     /// Add Capabilities - Background modes - Audio...
     private func enableBackground() {
-        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-        try? AVAudioSession.sharedInstance().setActive(true)
-        UIApplication.shared.beginReceivingRemoteControlEvents()
+        if !enabledBackground {
+            try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try? AVAudioSession.sharedInstance().setActive(true)
+            UIApplication.shared.beginReceivingRemoteControlEvents()
+            enabledBackground = true
+        }
     }
     
     private func guardAudioSession() {
@@ -262,7 +265,7 @@ final class MediaPlayer: NSObject {
     
     func play(list: [Item], startAt index: Int) {
         self.list = list
-        let newUrls = list.flatMap { $0.urlToFile }
+        let newUrls = list.compactMap { $0.urlToFile }
         play(urls: newUrls, startAt: index)
     }
     
@@ -300,6 +303,7 @@ final class MediaPlayer: NSObject {
         }
         
         resetTime()
+        enableBackground()
     }
     
     private func validateItem(at index: Int) {
