@@ -28,7 +28,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
     
     func getUserInfoString(with languageName: String) {
         let group = DispatchGroup()
-        let queue = DispatchQueue(label: "GetUserInfo")
+        let queue = DispatchQueue(label: DispatchQueueLabels.getUserInfo)
         group.enter()
         group.enter()
         group.enter()

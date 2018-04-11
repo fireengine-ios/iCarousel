@@ -76,7 +76,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private let getDetailQueue = OperationQueue()
     
-    private let dispatchQueue = DispatchQueue(label: "com.lifebox.local_media_storage", attributes: .concurrent)
+    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.localMediaStorage, attributes: .concurrent)
     
     static let notificationPhotoLibraryDidChange = NSNotification.Name(rawValue: "notificationPhotoLibraryDidChange")
     
@@ -84,7 +84,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     static let noneMD5 = "NONE MD5"
     
-    var assetsCache = AssetsСache()
+    var assetsCache = AssetsCache()
     
     private override init() {
         queue.maxConcurrentOperationCount = 1

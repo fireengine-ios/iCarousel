@@ -77,7 +77,7 @@ extension CoreDataStack {
         }
     }
     
-    private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping ()->Void ) {
+    private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping VoidHandler ) {
         guard !items.isEmpty else {
             print("LOCAL_ITEMS: no files to add")
             completion()

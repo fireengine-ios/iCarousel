@@ -238,7 +238,7 @@ typealias FileOperation = () -> Void
 class FileService: BaseRequestService {
     
     let downloadOperation = OperationQueue()
-    private let dispatchQueue = DispatchQueue(label: "Download Queue")
+    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.download)
     
     override init() {
         super.init()

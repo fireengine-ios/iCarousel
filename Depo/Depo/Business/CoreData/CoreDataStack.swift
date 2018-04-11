@@ -54,14 +54,14 @@ class CoreDataStack: NSObject {
     
     var backgroundContext: NSManagedObjectContext
     
-    let privateQueue = DispatchQueue(label: "com.lifebox.CoreDataStack", attributes: .concurrent)//(label: "com.lifebox.CoreDataStack")
+    let privateQueue = DispatchQueue(label: DispatchQueueLabels.coreDataStack, attributes: .concurrent)
     
     var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     
     var inProcessAppendingLocalFiles = false
     
-    var originalAssetsBeingAppended = AssetsСache()
-    var nonCloudAlreadySavedAssets = AssetsСache()
+    var originalAssetsBeingAppended = AssetsCache()
+    var nonCloudAlreadySavedAssets = AssetsCache()
     
     override init() {
         

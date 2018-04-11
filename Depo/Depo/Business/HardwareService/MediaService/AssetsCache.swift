@@ -1,5 +1,5 @@
 //
-//  AssetsСache.swift
+//  AssetsCache.swift
 //  Depo_LifeTech
 //
 //  Created by Alexander Gurin on 9/27/17.
@@ -9,8 +9,8 @@
 import Foundation
 import Photos
 
-class AssetsСache {
-    let dispatchQueue = DispatchQueue(label: "com.lifebox.assetCache")
+class AssetsCache {
+    let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.assetCache)
     
     
     private var storage: [String: PHAsset] = [:]

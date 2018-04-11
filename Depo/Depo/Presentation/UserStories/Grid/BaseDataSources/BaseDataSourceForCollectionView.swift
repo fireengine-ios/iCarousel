@@ -109,7 +109,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private let pageCompounder = PageCompounder()
     
-    private let dispatchQueue = DispatchQueue(label: "com.lifebox.BaseDataSourceForCollectionView")
+    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
     
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules

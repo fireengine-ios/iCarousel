@@ -13,7 +13,7 @@ import Reachability
 class SyncServiceManager {
     static let shared = SyncServiceManager()
     
-    private let dispatchQueue = DispatchQueue(label: "com.lifebox.autosync")
+    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.autosync)
     
     private let reachabilityService = Reachability()
     

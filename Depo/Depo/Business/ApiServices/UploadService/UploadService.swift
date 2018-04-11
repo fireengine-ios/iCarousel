@@ -15,7 +15,7 @@ final class UploadService: BaseRequestService {
     
     static let notificatioUploadServiceDidUpload = "notificatioUploadServiceDidUpload"
     
-    private let dispatchQueue = DispatchQueue(label: "com.lifebox.upload")
+    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.upload)
     
     private var uploadQueue = OperationQueue()
     private var uploadOperations = SynchronizedArray<UploadOperations>()
@@ -677,7 +677,7 @@ final class UploadOperations: Operation {
     private var isPhotoAlbum: Bool = false
     private var attemptsCount = 0
     private let semaphore: DispatchSemaphore
-    private let dispatchQueue = DispatchQueue(label: "com.lifebox.upload_operation")
+    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.uploadOperation)
     
     
     init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, handler: @escaping UploadOperationHandler) {

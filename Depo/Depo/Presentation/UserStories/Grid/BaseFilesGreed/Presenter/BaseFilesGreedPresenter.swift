@@ -43,7 +43,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private let semaphore = DispatchSemaphore(value: 0)
     
-    private let dispatchQueue = DispatchQueue(label: "com.lifebox.baseFilesGreed")
+    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreed)
     
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
