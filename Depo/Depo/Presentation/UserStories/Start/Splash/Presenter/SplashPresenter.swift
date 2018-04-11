@@ -19,6 +19,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
         showPasscodeIfNeed()
+        CoreDataStack.default.appendLocalMediaItems(completion: nil)
     }
     
     private func showPasscodeIfNeed() {
@@ -81,33 +82,23 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onSuccessEULA() {
+        
+        router.navigateToApplication()
         interactor.updateUserLanguage()
     }
     
     private func openApp() {
         storageVars.emptyEmailUp = false
-        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercentage in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.showProgressSpinner(progress: progressPercentage)
+
+        if turkcellLogin {
+            if storageVars.autoSyncSet {
+                router.navigateToApplication()
+            } else {
+                router.goToSyncSettingsView()
             }
-            
-        }, end: { [weak self] in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.hideProgressSpinner()
-                
-                if (self?.turkcellLogin)! {
-                    if let autoSyncSet = self?.storageVars.autoSyncSet {
-                        if autoSyncSet {
-                            self?.router.navigateToApplication()
-                        } else {
-                            self?.router.goToSyncSettingsView()
-                        }
-                    }
-                } else {
-                    self?.router.navigateToApplication()
-                }
-            }
-        })
+        } else {
+            router.navigateToApplication()
+        }
     }
     
     func showEmptyEmail(show: Bool) {
