@@ -56,7 +56,7 @@ extension PasscodeEnterViewController: PasscodeManagerDelegate {
         lock.view.resignResponder()
         success?()
         if let unwrapedUserFlag = isTurkCellUser, unwrapedUserFlag {
-            accountService.securitySettingsChange(turkcellPasswordAuthEnabled: false, mobileNetworkAuthEnabled: false,
+            accountService.securitySettingsChange(turkcellPasswordAuthEnabled: true, mobileNetworkAuthEnabled: false,
                                                     success: nil, fail: nil)
         }
     }
