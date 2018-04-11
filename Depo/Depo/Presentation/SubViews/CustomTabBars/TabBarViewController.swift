@@ -620,6 +620,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
             
+            let array = [3, 4]
+            if tabbarSelectedIndex == selectedIndex && array.contains(tabbarSelectedIndex) {
+                return
+            }
             selectedIndex = tabbarSelectedIndex
             
             if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {

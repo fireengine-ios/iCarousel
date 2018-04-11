@@ -162,7 +162,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColor : UIColor.white
         
         //Big size (Grid)
-        if isBigSize() && bottomViewH.constant == BasicCollectionMultiFileCell.bigH {
+        if isBigSize() && bottomViewH.constant != BasicCollectionMultiFileCell.smallH {
             bottomViewH.constant = BasicCollectionMultiFileCell.smallH
             
             smallContentImageViewW.constant = BasicCollectionMultiFileCell.smallContentImageViewWConst
