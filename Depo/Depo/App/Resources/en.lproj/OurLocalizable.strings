@@ -57,6 +57,7 @@
 "Can't get access to file system" = "Can't get access to file system";
 "Server error" = "Server error";
 "Unknown error" = "Unknown error";
+"Bad internet connection" = "Bad internet connection";
 "Too many verification code requested for this msisdn. Please try again later" = "Too many verification code requested for this msisdn. Please try again later";
 "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response.";
 "The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response.";

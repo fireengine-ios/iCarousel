@@ -69,7 +69,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
                 case .failed(let error):
                     if let errorResponse = error as? ErrorResponse,
                         case ErrorResponse.error(let error) = errorResponse,
-                        error is URLError
+                        error.isNetworkError 
                     {
                         self?.output?.failedWithInternetError(errorMessage: error.description)
                     }

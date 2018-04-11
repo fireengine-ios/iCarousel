@@ -25,8 +25,8 @@ extension UIApplication {
         return controller
     }
     
-    static func showInternetErrorOnTabBar() {
-        let errorPopUpVC = PopUpController.with(errorMessage: TextConstants.errorConnectedToNetwork)
+    static func showOnTabBar(errorMessage: String) {
+        let errorPopUpVC = PopUpController.with(errorMessage: errorMessage)
         RouterVC().tabBarVC?.present(errorPopUpVC, animated: false, completion: nil)
     }
     
