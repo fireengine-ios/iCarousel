@@ -38,7 +38,7 @@ final class PackagesViewController: ViewController {
         activityManager.delegate = self
         promoView.deleagte = self
         setupCollectionView()
-        setupPolicy()
+        policyTextView.text = ""
         
         output.viewIsReady()
         
@@ -66,7 +66,11 @@ final class PackagesViewController: ViewController {
         attributedString.append(policyAttributedString)
         
         policyTextView.attributedText = attributedString
-        policyTextView.textContainerInset = .zero
+        policyTextView.clipsToBounds = true
+        policyTextView.layer.cornerRadius = 5
+        policyTextView.layer.borderColor = ColorConstants.textLightGrayColor.cgColor
+        policyTextView.layer.borderWidth = 1
+        view.layoutIfNeeded()
     }
 
     func showRestoreButton() {
@@ -75,6 +79,10 @@ final class PackagesViewController: ViewController {
         moreButton.tintColor = UIColor.white
         navigationItem.rightBarButtonItem = moreButton
 
+    }
+    
+    func showInAppPolicy() {
+        setupPolicy()
     }
     
     @objc private func restorePurhases() {
