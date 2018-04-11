@@ -592,7 +592,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 if let urlToFile = (avAsset as? AVURLAsset)?.url {
                     do {
                         assetInfo.url = urlToFile
-                        assetInfo.size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).int64Value
+                        if let size = try FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as? NSNumber {
+                            assetInfo.size = size.int64Value
+                        }
+
                         if let name = asset.originalFilename {
                             assetInfo.name = name
                         }
