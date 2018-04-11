@@ -102,7 +102,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="hZZ-dA-LwW">
-                                    <rect key="frame" x="10" y="596.5" width="748" height="176"/>
+                                    <rect key="frame" x="10" y="596.5" width="748" height="177"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="dxs-eW-wJ3">
                                             <rect key="frame" x="0.0" y="0.0" width="748" height="50"/>
@@ -235,13 +235,13 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BjP-ys-4HT">
-                                            <rect key="frame" x="29.5" y="75" width="689" height="55"/>
+                                            <rect key="frame" x="29.5" y="75" width="689" height="56"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4we-6Z-PGt" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="224.5" height="55"/>
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4we-6Z-PGt" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="224.5" height="56"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="65R-wG-sGq">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="55"/>
+                                                        <constraint firstAttribute="height" constant="46" id="65R-wG-sGq">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="56"/>
                                                         </constraint>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
@@ -249,15 +249,15 @@
                                                         <action selector="onBackUpButton" destination="-1" eventType="touchUpInside" id="L5z-9z-O7L"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGU-WQ-T3u" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                                                    <rect key="frame" x="232.5" y="0.0" width="224" height="55"/>
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGU-WQ-T3u" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                                                    <rect key="frame" x="232.5" y="0.0" width="224" height="56"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="onRestoreButton" destination="-1" eventType="touchUpInside" id="xww-re-r8O"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXY-Hc-WhS" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                                                    <rect key="frame" x="464.5" y="0.0" width="224.5" height="55"/>
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXY-Hc-WhS" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                                                    <rect key="frame" x="464.5" y="0.0" width="224.5" height="56"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="onDeleteDuplicatedTapped:" destination="-1" eventType="touchUpInside" id="oRg-ye-Zay"/>
@@ -265,13 +265,14 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="zXY-Hc-WhS" firstAttribute="height" secondItem="4we-6Z-PGt" secondAttribute="height" id="1gg-iK-0CG"/>
                                                 <constraint firstItem="JGU-WQ-T3u" firstAttribute="width" secondItem="4we-6Z-PGt" secondAttribute="width" id="6HG-P8-RwN"/>
                                                 <constraint firstItem="JGU-WQ-T3u" firstAttribute="height" secondItem="4we-6Z-PGt" secondAttribute="height" id="kXR-On-4f7"/>
                                                 <constraint firstItem="zXY-Hc-WhS" firstAttribute="width" secondItem="4we-6Z-PGt" secondAttribute="width" id="t5X-jM-QO1"/>
                                             </constraints>
                                         </stackView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy9-O6-ddF">
-                                            <rect key="frame" x="353" y="155" width="42" height="21"/>
+                                            <rect key="frame" x="353" y="156" width="42" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="WOl-ef-EvQ"/>
                                             </constraints>
