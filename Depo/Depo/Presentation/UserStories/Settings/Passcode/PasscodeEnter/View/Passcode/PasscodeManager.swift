@@ -13,7 +13,7 @@ protocol PasscodeManager: class {
     var view: PasscodeView { get }
     var storage: PasscodeStorage { get }
     func changeState(to state: PasscodeState)
-    weak var delegate: PasscodeManagerDelegate? { get set }
+    var delegate: PasscodeManagerDelegate? { get set }
     func authenticateWithBiometrics()
     var maximumInccorectPasscodeAttempts: Int { get }
     var finishBiometrics: Bool { get set }
@@ -103,9 +103,9 @@ extension PasscodeManagerImp: PasscodeManager {
     }
     
     private func canShowBiometrics() -> Bool {
-        if UIApplication.shared.applicationState != .active || biometricsOnScreen || finishBiometrics {
-            return false
-        }
+//        if UIApplication.shared.applicationState != .active || biometricsOnScreen || finishBiometrics {
+//            return false
+//        }
         return true
     }
 }

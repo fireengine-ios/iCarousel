@@ -145,9 +145,9 @@ extension PasscodeInputView: UIKeyInput {
         passcode.append(text)
         
         if isPasscodeFull {
-            UIApplication.shared.beginIgnoringInteractionEvents()
+//            UIApplication.shared.beginIgnoringInteractionEvents()
             DispatchQueue.main.asyncAfter(deadline: .now() + finishDelay ) {
-                UIApplication.shared.endIgnoringInteractionEvents()
+//                UIApplication.shared.endIgnoringInteractionEvents()
                 self.delegate?.finish(with: self.passcode)
             }
         }
