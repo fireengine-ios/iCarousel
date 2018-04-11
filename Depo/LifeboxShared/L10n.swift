@@ -17,15 +17,15 @@ import Foundation
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 enum L10n {
     /// Cancel
-    static let cancel = L10n.tr("Localizable", "cancel")
+    static let cancel = L10n.tr("OurLocalizable", "cancel")
     /// Please check your internet connection is active and Mobile Data is ON.
-    static let errorInternet = L10n.tr("Localizable", "error_internet")
+    static let errorInternet = L10n.tr("OurLocalizable", "error_internet")
     /// You have not login via app yet
-    static let errorLogin = L10n.tr("Localizable", "error_login")
+    static let errorLogin = L10n.tr("OurLocalizable", "error_login")
     /// Upload
-    static let upload = L10n.tr("Localizable", "upload")
+    static let upload = L10n.tr("OurLocalizable", "upload")
     /// Uploading...
-    static let uploading = L10n.tr("Localizable", "uploading")
+    static let uploading = L10n.tr("OurLocalizable", "uploading")
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 

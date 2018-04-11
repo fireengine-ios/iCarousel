@@ -2495,7 +2495,6 @@
 		B54BFF34202B20250018AF82 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF33202B20250018AF82 /* TodayViewController.swift */; };
 		B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54BFF35202B20250018AF82 /* MainInterface.storyboard */; };
 		B54BFF3B202B20250018AF82 /* autosync-widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B54BFF30202B20250018AF82 /* autosync-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B54BFF42202B264D0018AF82 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B54BFF41202B264D0018AF82 /* Localizable.strings */; };
 		B54BFF47202B43DF0018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		B54BFF4C202C73790018AF82 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		B54BFF4D202C73790018AF82 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
@@ -2614,8 +2613,6 @@
 		CE18CC84204E85DC00FA3F44 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
 		CE18CC85204E85DC00FA3F44 /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
 		CE18CC86204E85DC00FA3F44 /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
-		CE18CC89204E861400FA3F44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE18CC8B204E861400FA3F44 /* Localizable.strings */; };
-		CE18CC8C204E861B00FA3F44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE18CC8E204E861B00FA3F44 /* Localizable.strings */; };
 		CE18CC90204E87CE00FA3F44 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC8F204E87CE00FA3F44 /* L10n.swift */; };
 		CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
@@ -2760,6 +2757,26 @@
 		CE4851F12018B03A006B8854 /* FilterPhotoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4851EF2018B03A006B8854 /* FilterPhotoCard.swift */; };
 		CE4CFEBF1F78F18700FB4C3D /* ResizableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEBE1F78F18700FB4C3D /* ResizableTableView.swift */; };
 		CE4CFEC11F78F94900FB4C3D /* BytesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEC01F78F94900FB4C3D /* BytesType.swift */; };
+		CE4D27F1207E00D2003AE4FB /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
+		CE4D27F2207E00D3003AE4FB /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
+		CE4D27F3207E00D4003AE4FB /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
+		CE4D27F4207E00D6003AE4FB /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
+		CE4D27F5207E0249003AE4FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
+		CE4D27F6207E0249003AE4FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
+		CE4D27F7207E024A003AE4FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
+		CE4D27F8207E024B003AE4FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
+		CE4D27F9207E0250003AE4FB /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
+		CE4D27FD207E0479003AE4FB /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
+		CE4D27FE207E0479003AE4FB /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
+		CE4D27FF207E0479003AE4FB /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
+		CE4D2800207E0479003AE4FB /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
+		CE4D2801207E0479003AE4FB /* TurkcellSaturaIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE031F01E69B00CDF527 /* TurkcellSaturaIta.ttf */; };
+		CE4D2802207E0479003AE4FB /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
+		CE4D2803207E0479003AE4FB /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
+		CE4D2804207E0479003AE4FB /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
+		CE4D2805207E086A003AE4FB /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
+		CE4D2806207E086C003AE4FB /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
+		CE4D2807207E086D003AE4FB /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4DBF1F14AD2A00EF1F0C /* BaseRequestService.swift */; };
 		CE4F4DC11F14BCC900EF1F0C /* EULAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AF76F1F01D63D002AD17C /* EULAService.swift */; };
 		CE4F6190206CBC8600B179DA /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
@@ -3133,9 +3150,9 @@
 		CED54F6E204A760900B750BB /* SwiftyJSONExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1CEA91F21E11200C9DD8F /* SwiftyJSONExtension.swift */; };
 		CED54F6F204A7D4B00B750BB /* BytesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEC01F78F94900FB4C3D /* BytesType.swift */; };
 		CED6442E2060E776009AFC12 /* StorageVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6442D2060E776009AFC12 /* StorageVars.swift */; };
+		CEDA44C5207B8ADF00E653DD /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44C4207B8ADF00E653DD /* BackButton.swift */; };
 		CEDA44D9207CA9E600E653DD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
-		CEDA44C5207B8ADF00E653DD /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44C4207B8ADF00E653DD /* BackButton.swift */; };
 		CEDEAB311FADA5D20046555F /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */; };
 		CEDEAB321FADA5D20046555F /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEAB301FADA5D20046555F /* AlbumCell.xib */; };
 		CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
@@ -4847,7 +4864,6 @@
 		B54BFF33202B20250018AF82 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		B54BFF36202B20250018AF82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		B54BFF38202B20250018AF82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B54BFF41202B264D0018AF82 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		B54BFF46202B43DF0018AF82 /* WidgetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetService.swift; sourceTree = "<group>"; };
 		B54BFF48202B45490018AF82 /* autosync-widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "autosync-widget.entitlements"; sourceTree = "<group>"; };
 		B54BFF4B202C73790018AF82 /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
@@ -4922,8 +4938,6 @@
 		CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentActionCustomizator.swift; sourceTree = "<group>"; };
-		CE18CC8A204E861400FA3F44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CE18CC8D204E861B00FA3F44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE18CC8F204E87CE00FA3F44 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorIdentificators.swift; sourceTree = "<group>"; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
@@ -5203,8 +5217,8 @@
 		CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardResponse.swift; sourceTree = "<group>"; };
 		CED5E81F1EF7E81D009649EB /* CoreTelephonyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTelephonyService.swift; sourceTree = "<group>"; };
 		CED6442D2060E776009AFC12 /* StorageVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageVars.swift; sourceTree = "<group>"; };
-		CEDA44D8207CA9E600E653DD /* NumericConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericConstants.swift; sourceTree = "<group>"; };
 		CEDA44C4207B8ADF00E653DD /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		CEDA44D8207CA9E600E653DD /* NumericConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericConstants.swift; sourceTree = "<group>"; };
 		CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		CEDEAB301FADA5D20046555F /* AlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
 		CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topController.swift"; sourceTree = "<group>"; };
@@ -9512,7 +9526,6 @@
 				B54BFF33202B20250018AF82 /* TodayViewController.swift */,
 				B54BFF35202B20250018AF82 /* MainInterface.storyboard */,
 				B54BFF38202B20250018AF82 /* Info.plist */,
-				B54BFF41202B264D0018AF82 /* Localizable.strings */,
 				B5513AF8205BAED70016C344 /* L10n.swift */,
 			);
 			path = "autosync-widget";
@@ -9752,7 +9765,6 @@
 				CE1BE937204831CE0074BDDC /* Info.plist */,
 				7AFAB37A2073AE2B00C54C9B /* InfoAppStore.plist */,
 				7AFAB37C2073AE3200C54C9B /* InfoEnterprise.plist */,
-				CE18CC8E204E861B00FA3F44 /* Localizable.strings */,
 				CE18CC8F204E87CE00FA3F44 /* L10n.swift */,
 			);
 			path = LifeboxFileProviderUI;
@@ -10351,7 +10363,6 @@
 				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
 				7A3E0BFC20626B7100F79A1C /* LifeboxShared-appstore.entitlements */,
 				7A3E0BFD20626B7100F79A1C /* LifeboxShared-enterprise.entitlements */,
-				CE18CC8B204E861400FA3F44 /* Localizable.strings */,
 				CEA629FE2047ED3200215811 /* L10n.swift */,
 			);
 			path = LifeboxShared;
@@ -12384,8 +12395,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B54BFF5A202C86F30018AF82 /* Images.xcassets in Resources */,
+				CE4D27FD207E0479003AE4FB /* TurkcellSaturaBol.ttf in Resources */,
+				CE4D27FF207E0479003AE4FB /* TurkcellSaturaDem.ttf in Resources */,
 				B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */,
-				B54BFF42202B264D0018AF82 /* Localizable.strings in Resources */,
+				CE4D2801207E0479003AE4FB /* TurkcellSaturaIta.ttf in Resources */,
+				CE4D2804207E0479003AE4FB /* TurkcellSaturaReg.ttf in Resources */,
+				CE4D27F4207E00D6003AE4FB /* OurLocalizable.strings in Resources */,
+				CE4D2803207E0479003AE4FB /* TurkcellSaturaMedIta.ttf in Resources */,
+				CE4D2802207E0479003AE4FB /* TurkcellSaturaMed.ttf in Resources */,
+				CE4D2800207E0479003AE4FB /* TurkcellSaturaDemIta.ttf in Resources */,
+				CE4D27FE207E0479003AE4FB /* TurkcellSaturaBolIta.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12393,6 +12412,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4D27F1207E00D2003AE4FB /* OurLocalizable.strings in Resources */,
 				7AFAB3782073AE1500C54C9B /* InfoAppStore.plist in Resources */,
 				7AFAB3792073AE1A00C54C9B /* InfoEnterprise.plist in Resources */,
 			);
@@ -12406,10 +12426,10 @@
 				CE18CC96204E8DC900FA3F44 /* Images.xcassets in Resources */,
 				CE18CC7F204E85DC00FA3F44 /* TurkcellSaturaBol.ttf in Resources */,
 				CE18CC80204E85DC00FA3F44 /* TurkcellSaturaBolIta.ttf in Resources */,
+				CE4D27F3207E00D4003AE4FB /* OurLocalizable.strings in Resources */,
 				CE18CC81204E85DC00FA3F44 /* TurkcellSaturaDem.ttf in Resources */,
 				CE18CC82204E85DC00FA3F44 /* TurkcellSaturaDemIta.ttf in Resources */,
 				CE18CC83204E85DC00FA3F44 /* TurkcellSaturaIta.ttf in Resources */,
-				CE18CC8C204E861B00FA3F44 /* Localizable.strings in Resources */,
 				CE18CC84204E85DC00FA3F44 /* TurkcellSaturaMed.ttf in Resources */,
 				CE18CC85204E85DC00FA3F44 /* TurkcellSaturaMedIta.ttf in Resources */,
 				CE18CC86204E85DC00FA3F44 /* TurkcellSaturaReg.ttf in Resources */,
@@ -12968,10 +12988,10 @@
 			files = (
 				CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */,
 				CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */,
-				CE18CC89204E861400FA3F44 /* Localizable.strings in Resources */,
 				CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */,
 				CEBDB1DF20444E50007EE1AE /* TurkcellSaturaDemIta.ttf in Resources */,
 				CEBDB1E020444E50007EE1AE /* TurkcellSaturaIta.ttf in Resources */,
+				CE4D27F2207E00D3003AE4FB /* OurLocalizable.strings in Resources */,
 				CEBDB1E120444E50007EE1AE /* TurkcellSaturaMed.ttf in Resources */,
 				CEBDB1E220444E50007EE1AE /* TurkcellSaturaMedIta.ttf in Resources */,
 				CEBDB1E320444E50007EE1AE /* TurkcellSaturaReg.ttf in Resources */,
@@ -14358,6 +14378,8 @@
 				B5BA98792066830A00CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */,
 				B5513AF9205BAED70016C344 /* L10n.swift in Sources */,
+				CE4D27F5207E0249003AE4FB /* Constants.swift in Sources */,
+				CE4D27F9207E0250003AE4FB /* NumericConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14372,6 +14394,7 @@
 				CE18CC94204E8A3D00FA3F44 /* PasscodeStorage.swift in Sources */,
 				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
 				CE1BE94D20492C8B0074BDDC /* AuthorizationRepository.swift in Sources */,
+				CE4D27F7207E024A003AE4FB /* Constants.swift in Sources */,
 				CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */,
 				CE98F6DB204E71E300433915 /* String+UTType.swift in Sources */,
 				CE1BE95120492CCE0074BDDC /* Dictionary.swift in Sources */,
@@ -14381,6 +14404,7 @@
 				CE1BE94920492C550074BDDC /* TokenStorage.swift in Sources */,
 				CE1BE927204831CE0074BDDC /* FileProviderItem.swift in Sources */,
 				CEE3017E2049520B007E70CE /* Mapping.swift in Sources */,
+				CE4D2806207E086C003AE4FB /* NumericConstants.swift in Sources */,
 				CE1BE95520492DE40074BDDC /* Alamofire+Validate.swift in Sources */,
 				CE1BE95420492D040074BDDC /* FileService.swift in Sources */,
 				CE1BE95220492CD50074BDDC /* URL+Path.swift in Sources */,
@@ -14398,10 +14422,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE18CC90204E87CE00FA3F44 /* L10n.swift in Sources */,
+				CE4D2807207E086D003AE4FB /* NumericConstants.swift in Sources */,
 				CE1BE933204831CE0074BDDC /* DocumentActionViewController.swift in Sources */,
 				CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */,
 				CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */,
 				CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */,
+				CE4D27F8207E024B003AE4FB /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -15449,10 +15475,12 @@
 				CE1458C62045617600812544 /* RouteRequests.swift in Sources */,
 				CE654FB520454B3900232025 /* UICollectionView+Layout.swift in Sources */,
 				CE109C2B2057A9C9006C9FA0 /* ShareController.swift in Sources */,
+				CE4D27F6207E0249003AE4FB /* Constants.swift in Sources */,
 				CEA524BC2046D6A10036FCEA /* UploadOperation.swift in Sources */,
 				CE654FAF20454A4400232025 /* ShareData.swift in Sources */,
 				CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */,
 				CE61D1BF2046872A001D01DC /* URL+ContentType.swift in Sources */,
+				CE4D2805207E086A003AE4FB /* NumericConstants.swift in Sources */,
 				CE654FB62045613A00232025 /* AuthorizationRepository.swift in Sources */,
 				CE1458CB2045633D00812544 /* ShareConfigurator.swift in Sources */,
 				CE1458C82045619500812544 /* RequestHeader.swift in Sources */,
@@ -15580,22 +15608,6 @@
 				B54BFF36202B20250018AF82 /* Base */,
 			);
 			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
-		CE18CC8B204E861400FA3F44 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE18CC8A204E861400FA3F44 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		CE18CC8E204E861B00FA3F44 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE18CC8D204E861B00FA3F44 /* en */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		CE1BE934204831CE0074BDDC /* MainInterface.storyboard */ = {

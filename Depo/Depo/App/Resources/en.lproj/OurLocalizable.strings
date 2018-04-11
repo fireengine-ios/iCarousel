@@ -392,7 +392,6 @@
 "Settings" = "Settings";
 "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!";
 "Error occurred while accessing your photos.\nPlease check your settings." = "Error occurred while accessing your photos.\nPlease check your settings.";
-"Error" = "Error";
 "Photos" = "Photos";
 "Videos" = "Videos";
 "Select All" = "Select All";
@@ -454,8 +453,6 @@
 "This e-mail address is not registered. Please try again" = "This e-mail address is not registered. Please try again";
 "This text doesn't match. Please try again" = "This text doesn't match. Please try again";
 "Please check the e-mail address" = "Please check the e-mail address";
-"Error" = "Error";
-"Error" = "Error";
 "Next" = "Next";
 "Resend" = "Resend";
 "Type the text" = "Type the text";
@@ -580,3 +577,17 @@
 "Dropbox authorisation error" = "Dropbox authorisation error";
 "dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
+"widgetTopTitleInProgress" = "Photo synchronization is in progress";
+"widgetTopTitleFinished" = "Photos are up-to-date";
+"widgetTopTitleInactive" = "Photo synchronization is inactive";
+"widgetBottomTitleNewerSyncronized" = "never";
+"widgetBottomTitleLastSyncFormat" = "Last upload: %@";
+"error_passcode_title" = "Passcode Lock is enabled";
+"error_passcode_message" = "Files app cannot be used with a passcode. If you would like to use Files app, please open lifebox and disable Passcode Lock";
+"error_authentication_title" = "Sign in to lifebox";
+"error_authentication_message" = "Please open lifebox app and sign in to continue";
+"uploading" = "Uploading...";
+"cancel" = "Cancel";
+"upload" = "Upload";
+"error_internet" = "Please check your internet connection is active and Mobile Data is ON.";
+"error_login" = "You have not login via app yet";
