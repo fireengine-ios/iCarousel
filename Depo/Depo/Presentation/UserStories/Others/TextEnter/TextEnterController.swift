@@ -59,10 +59,11 @@ final class TextEnterController: ViewController, NibInit {
         super.viewDidLoad()
         
         title = alertTitle
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.exitWhite, style: .plain, target: self, action: #selector(dismiss))
         
         shadowView.isHidden = true
         shadowView.isUserInteractionEnabled = false
+        shadowView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hidePicker)))
+        
         setupDelegates()
     }
     
@@ -111,10 +112,6 @@ final class TextEnterController: ViewController, NibInit {
         }
     }
     
-    @objc private func dismiss(_ sender: UIBarButtonItem) {
-        close(completion: nil)
-    }
-    
     @objc func close(completion: VoidHandler? = nil) {
         view.endEditing(true)
         dismiss(animated: true, completion: completion)
@@ -142,7 +139,7 @@ final class TextEnterController: ViewController, NibInit {
     
     // MARK: - Picker
     
-    private func hidePicker() {
+    @objc private func hidePicker() {
         changePickerState(state: false)
     }
     
