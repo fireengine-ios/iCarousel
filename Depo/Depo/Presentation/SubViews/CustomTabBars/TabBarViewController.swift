@@ -620,6 +620,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
             
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.musicScreenIndex.rawValue, TabScreenIndex.documentsScreenIndex.rawValue]
+            if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {
+                return
+            }
             selectedIndex = tabbarSelectedIndex
             
             if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
