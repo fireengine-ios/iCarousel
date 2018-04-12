@@ -25,6 +25,7 @@ class BaseFilesGreedModuleConfigurator {
         if remoteServices is PhotoAndVideoService {
             presenter = BaseFilesGreedPresenter()
             presenter?.needShowProgressInCells = true
+            presenter?.needShowScrollIndicator = true
         } else {
             presenter = DocumentsGreedPresenter()
             presenter?.sortedRule = .timeUpWithoutSection

@@ -2465,6 +2465,10 @@
 		9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
 		9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */; };
 		9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
+		9826DB3F207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
+		9826DB40207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
+		9826DB42207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
+		9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
 		984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
 		984F8E7F200CE10100D9D595 /* StoriesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */; };
 		986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
@@ -4819,6 +4823,8 @@
 		9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationServiceConstants.swift; sourceTree = "<group>"; };
 		9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderWithText.swift; sourceTree = "<group>"; };
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
+		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
+		9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomScrollIndicator.xib; sourceTree = "<group>"; };
 		984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInteractor.swift; sourceTree = "<group>"; };
 		984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInitializer.swift; sourceTree = "<group>"; };
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
@@ -6963,6 +6969,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				9826DB3D207F60BC00C00238 /* CustomScrollIndicator */,
 				8CF6A9C0207C8CF8007DEF71 /* CollectionViewFooter */,
 				8C0B918E2013200A00A5BA81 /* CustomProgressHud */,
 				87B335A82008AD1D0079965F /* TitleView */,
@@ -9365,6 +9372,15 @@
 				9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */,
 			);
 			path = PushNotificationService;
+			sourceTree = "<group>";
+		};
+		9826DB3D207F60BC00C00238 /* CustomScrollIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */,
+				9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */,
+			);
+			path = CustomScrollIndicator;
 			sourceTree = "<group>";
 		};
 		98B01C74206BCD4A00DD78C7 /* AnalyticsService */ = {
@@ -12251,6 +12267,7 @@
 				7C73CDF1200356B6000824AA /* OurLocalizable.strings in Resources */,
 				8C06AF312008AD70003D8E05 /* cizgi_3@3x.png in Resources */,
 				8C06AEED2008AD70003D8E05 /* Buyuk@3x.png in Resources */,
+				9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */,
 				8C06AF4D2008AD70003D8E05 /* crop_selected@2x.png in Resources */,
 				8C06AF292008AD70003D8E05 /* cizgi_2_selected@2x.png in Resources */,
 				8C06AF872008AD70003D8E05 /* extraOptions@2x.png in Resources */,
@@ -12683,6 +12700,7 @@
 				8C06B13C2008AD72003D8E05 /* tahta_yeni@2x.png in Resources */,
 				8C06B05A2008AD71003D8E05 /* paylas_akilli_depo@2x.png in Resources */,
 				8C06B1B42008AD72003D8E05 /* CRYShareImageViewController.nib in Resources */,
+				9826DB42207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */,
 				8C06B1342008AD72003D8E05 /* t_orta_selected.png in Resources */,
 				7C257B4020174D8B00CB56F8 /* ContactBackupEmpty.xib in Resources */,
 				8C7786891F3F38D9005CB432 /* MusicBar.xib in Resources */,
@@ -14326,6 +14344,7 @@
 				8C0E8FA91FDEBDFF00789C91 /* PackagesRouter.swift in Sources */,
 				4A8CC309201A016F00C040C4 /* FaceImageViewInput.swift in Sources */,
 				8C0E8FAA1FDEBDFF00789C91 /* AlbumDetailRouter.swift in Sources */,
+				9826DB40207F60F900C00238 /* CustomScrollIndicator.swift in Sources */,
 				8C0E8FAB1FDEBDFF00789C91 /* AlbumDetailInitializer.swift in Sources */,
 				8C0E8FAC1FDEBDFF00789C91 /* VolumeSlider.swift in Sources */,
 				8C0E8FAD1FDEBDFF00789C91 /* FeedbackViewInput.swift in Sources */,
@@ -15036,6 +15055,7 @@
 				CEADDA9D1F23491D001DDA8A /* FileService.swift in Sources */,
 				8C7E1F65207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */,
 				CE3B3AF1202888240002558C /* OrientationManager.swift in Sources */,
+				9826DB3F207F60F900C00238 /* CustomScrollIndicator.swift in Sources */,
 				8C0097181F6BDACA00FA069C /* AlertFilesActionsSheetPresenter.swift in Sources */,
 				CEF0C28A1FC594E300105C31 /* InstagramAuthViewController.swift in Sources */,
 				CEC3C22F1FB997A600C3D67F /* FromNib.swift in Sources */,

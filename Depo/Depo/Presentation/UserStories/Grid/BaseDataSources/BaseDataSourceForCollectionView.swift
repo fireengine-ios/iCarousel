@@ -36,8 +36,6 @@ enum BaseDataSourceDisplayingType{
     
     @objc optional func needReloadData()
     
-    @objc optional func scrollViewDidScroll(scrollView: UIScrollView)
-    
     @objc optional func didChangeSelection(state: Bool)
     
     @objc optional func updateCoverPhotoIfNeeded()
@@ -45,7 +43,19 @@ enum BaseDataSourceDisplayingType{
     @objc optional func didDelete(items: [BaseDataSourceItem])
     
     @objc optional func onItemSelectedActiveState(item: BaseDataSourceItem)
+}
 
+@objc protocol BaseDataSourceForCollectionViewScrollDelegate: class {
+    
+    @objc optional func didChangeTopHeader(text: String)
+    
+    @objc optional func scrollViewDidScroll(scrollView: UIScrollView)
+    
+    @objc optional func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
+    
+    @objc optional func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
+    
+    @objc optional func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
 }
 
 typealias PageItemsCallBack = ([WrapData])->Void
@@ -60,6 +70,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var displayingType: BaseDataSourceDisplayingType = .greed
     
     weak var delegate: BaseDataSourceForCollectionViewDelegate?
+    
+    weak var scrollDelegate: BaseDataSourceForCollectionViewScrollDelegate?
     
     internal var preferedCellReUseID: String?
     
@@ -98,6 +110,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var needShowProgressInCell: Bool = false
     var needShowCloudIcon: Bool = true
     var needShow3DotsInCell: Bool = true
+    var needShowCustomScrollIndicator = false
     
     var parentUUID: String?
     
@@ -110,6 +123,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private let pageCompounder = PageCompounder()
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
+    
+    private var currentTopSection: Int?
     
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
@@ -817,14 +832,45 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         delegate?.onMoreActions(ofItem: itemModel, sender: sender)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delegate?.scrollViewDidScroll?(scrollView: scrollView)
-        
-        updateCachedAssets()
-    }
-    
     func isInSelectionMode() -> Bool {
         return isSelectionStateActive
+    }
+    
+    //MARK: UIScrollViewDelegate
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewDidScroll?(scrollView: scrollView)
+        
+        updateCachedAssets()
+        
+        if needShowCustomScrollIndicator {
+            let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+                return first < second
+            })
+            
+            guard let indexPath = firstVisibleIndexPath else {
+                return
+            }
+            
+            if let currentTopSection = currentTopSection, currentTopSection == indexPath.section {
+                return
+            }
+            
+            let headerText = getHeaderText(indexPath: indexPath)
+            scrollDelegate?.didChangeTopHeader?(text: headerText)
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewWillBeginDragging?(scrollView)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewDidEndDecelerating?(scrollView)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        scrollDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
     }
     
     //MARK: collectionViewDataSource
