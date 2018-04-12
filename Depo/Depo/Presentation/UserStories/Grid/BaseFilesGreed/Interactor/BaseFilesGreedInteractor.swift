@@ -210,4 +210,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     func getAllItems(sortBy: SortedRules) {
         
     }
+    
+    var requestPageNum: Int {
+        return remoteItems.currentPage
+    }
 }

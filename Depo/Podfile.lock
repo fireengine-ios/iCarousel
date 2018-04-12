@@ -21,6 +21,7 @@ PODS:
     - FBSDKCoreKit
   - GoogleConversionTracking (3.4.0)
   - iCarousel (1.8.3)
+  - JDStatusBarNotification (1.5.6)
   - MBProgressHUD (1.0.0)
   - MMWormhole (2.0.0):
     - MMWormhole/Core (= 2.0.0)
@@ -54,6 +55,7 @@ DEPENDENCIES:
   - FBSDKShareKit
   - GoogleConversionTracking
   - iCarousel
+  - JDStatusBarNotification
   - MBProgressHUD (~> 1.0.0)
   - MMWormhole (~> 2.0.0)
   - ObjectiveDropboxOfficial
@@ -87,6 +89,7 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 18a2cd118aef11dd657fe7e8b64bae5c719088b2
   GoogleConversionTracking: ca8c89abda2bd28bb6472b316eeb4ece9264e279
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
+  JDStatusBarNotification: d5829a8f2f291b23b8a54b87fac8bf2549945a2f
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
@@ -100,6 +103,6 @@ SPEC CHECKSUMS:
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
 
-PODFILE CHECKSUM: 24760eab5719900c74d291b726f74762362828b0
+PODFILE CHECKSUM: 0fb4e9276db033ecc4607c8f509ee5aba965b8ce
 
 COCOAPODS: 1.4.0

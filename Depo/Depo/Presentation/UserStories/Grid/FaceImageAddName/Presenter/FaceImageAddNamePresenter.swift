@@ -52,7 +52,7 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
     // MARK: - Utility methods
     
     private func clearItems() {
-        dataSource.allLocalItems = [WrapData]()
+//        dataSource.allLocalItems = [WrapData]()
         dataSource.allMediaItems = [WrapData]()
         dataSource.allItems = [[WrapData]]()
     }

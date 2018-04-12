@@ -75,6 +75,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     override func getContentWithSuccess(items: [WrapData]) {
         super.getContentWithSuccess(items: items)
         
+        dataSource.isPaginationDidEnd = true
+        
         if let interactor = interactor as? FaceImagePhotosInteractorInput {
             interactor.loadItem(item)
         }

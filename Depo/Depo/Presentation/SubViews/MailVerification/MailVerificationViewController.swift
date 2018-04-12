@@ -40,11 +40,14 @@ class MailVerificationViewController: BaseViewController {
         
         inputTextField.font = UIFont.TurkcellSaturaRegFont(size: 20)
         
-        sendButton.setTitle(TextConstants.registrationNextButtonText, for: .normal)
+        sendButton.setTitle(TextConstants.save, for: .normal)
         sendButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
         sendButton.setTitleColor(ColorConstants.blueColor, for: .normal)
 
         contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        
+        alertLikeView.layer.cornerRadius = 5
+        alertLikeView.layer.masksToBounds = true
     }
     
     @objc func handleTap() {
