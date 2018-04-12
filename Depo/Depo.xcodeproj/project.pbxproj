@@ -2797,8 +2797,8 @@
 		CE4D2821207E244A003AE4FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
 		CE4D2822207E2493003AE4FB /* Equatable+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */; };
 		CE4D2827207E3CF0003AE4FB /* WormholePoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2826207E3CF0003AE4FB /* WormholePoster.swift */; };
-		CE4D282A207E3D50003AE4FB /* WormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2828207E3D05003AE4FB /* WormholeListener.swift */; };
-		CE4D282B207E3D51003AE4FB /* WormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2828207E3D05003AE4FB /* WormholeListener.swift */; };
+		CE4D282A207E3D50003AE4FB /* AppWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2828207E3D05003AE4FB /* AppWormholeListener.swift */; };
+		CE4D282B207E3D51003AE4FB /* AppWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2828207E3D05003AE4FB /* AppWormholeListener.swift */; };
 		CE4D282C207E3E6E003AE4FB /* WormholePoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2826207E3CF0003AE4FB /* WormholePoster.swift */; };
 		CE4D282D207E3E6F003AE4FB /* WormholePoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2826207E3CF0003AE4FB /* WormholePoster.swift */; };
 		CE4D282F207E4A14003AE4FB /* ShareWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D282E207E4A14003AE4FB /* ShareWormholeListener.swift */; };
@@ -3068,7 +3068,6 @@
 		CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524B92046C95E0036FCEA /* UploadQueueService.swift */; };
 		CEA524BC2046D6A10036FCEA /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BB2046D6A10036FCEA /* UploadOperation.swift */; };
 		CEA524BE2046EB860036FCEA /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
-		CEA629FF2047ED3200215811 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA629FE2047ED3200215811 /* L10n.swift */; };
 		CEA84C231F7CE8F7009B0769 /* UIApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84C221F7CE8F7009B0769 /* UIApplication+Settings.swift */; };
 		CEACBEA11F6C0EEA003BE328 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACBEA01F6C0EEA003BE328 /* RingView.swift */; };
 		CEACBEA31F6C1110003BE328 /* ActivityTimelineTableBackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEACBEA21F6C1110003BE328 /* ActivityTimelineTableBackView.xib */; };
@@ -5071,7 +5070,7 @@
 		CE4CFEBE1F78F18700FB4C3D /* ResizableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTableView.swift; sourceTree = "<group>"; };
 		CE4CFEC01F78F94900FB4C3D /* BytesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytesType.swift; sourceTree = "<group>"; };
 		CE4D2826207E3CF0003AE4FB /* WormholePoster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WormholePoster.swift; sourceTree = "<group>"; };
-		CE4D2828207E3D05003AE4FB /* WormholeListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WormholeListener.swift; sourceTree = "<group>"; };
+		CE4D2828207E3D05003AE4FB /* AppWormholeListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWormholeListener.swift; sourceTree = "<group>"; };
 		CE4D282E207E4A14003AE4FB /* ShareWormholeListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWormholeListener.swift; sourceTree = "<group>"; };
 		CE4F4DBF1F14AD2A00EF1F0C /* BaseRequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequestService.swift; sourceTree = "<group>"; };
 		CE4F6191206CE8C600B179DA /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
@@ -5158,7 +5157,6 @@
 		CEA524B92046C95E0036FCEA /* UploadQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadQueueService.swift; sourceTree = "<group>"; };
 		CEA524BB2046D6A10036FCEA /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		CEA524BD2046EB860036FCEA /* Error+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Network.swift"; sourceTree = "<group>"; };
-		CEA629FE2047ED3200215811 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CEA84C221F7CE8F7009B0769 /* UIApplication+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Settings.swift"; sourceTree = "<group>"; };
 		CEACBEA01F6C0EEA003BE328 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		CEACBEA21F6C1110003BE328 /* ActivityTimelineTableBackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityTimelineTableBackView.xib; sourceTree = "<group>"; };
@@ -9562,7 +9560,6 @@
 		B54BFF45202B43CE0018AF82 /* WidgetService */ = {
 			isa = PBXGroup;
 			children = (
-				B54BFF46202B43DF0018AF82 /* WidgetService.swift */,
 			);
 			path = WidgetService;
 			sourceTree = "<group>";
@@ -9926,6 +9923,7 @@
 				CE51A0C61EF8ED38005DCEE0 /* ApiServices */,
 				CED5E81D1EF7E81D009649EB /* HardwareService */,
 				7CA6C69B1EF1811100D21EBE /* Services */,
+				CEF193EB207F400300F281BF /* Wormhole */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -10391,10 +10389,6 @@
 				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
 				7A3E0BFC20626B7100F79A1C /* LifeboxShared-appstore.entitlements */,
 				7A3E0BFD20626B7100F79A1C /* LifeboxShared-enterprise.entitlements */,
-				CEA629FE2047ED3200215811 /* L10n.swift */,
-				CE4D2826207E3CF0003AE4FB /* WormholePoster.swift */,
-				CE4D2828207E3D05003AE4FB /* WormholeListener.swift */,
-				CE4D282E207E4A14003AE4FB /* ShareWormholeListener.swift */,
 			);
 			path = LifeboxShared;
 			sourceTree = "<group>";
@@ -11090,6 +11084,17 @@
 				CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */,
 			);
 			path = InstagramAuth;
+			sourceTree = "<group>";
+		};
+		CEF193EB207F400300F281BF /* Wormhole */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D2826207E3CF0003AE4FB /* WormholePoster.swift */,
+				CE4D2828207E3D05003AE4FB /* AppWormholeListener.swift */,
+				CE4D282E207E4A14003AE4FB /* ShareWormholeListener.swift */,
+				B54BFF46202B43DF0018AF82 /* WidgetService.swift */,
+			);
+			path = Wormhole;
 			sourceTree = "<group>";
 		};
 		CEF41E99203593BE0008FCD5 /* PhotoVideoDetailCell */ = {
@@ -14352,7 +14357,7 @@
 				8C0E8FB31FDEBDFF00789C91 /* FeedbackViewPresenter.swift in Sources */,
 				8C06AC242008AB17003D8E05 /* AsyncOperation.swift in Sources */,
 				FA793D88201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
-				CE4D282B207E3D51003AE4FB /* WormholeListener.swift in Sources */,
+				CE4D282B207E3D51003AE4FB /* AppWormholeListener.swift in Sources */,
 				FA793D8B201872E600A02B46 /* PeopleService.swift in Sources */,
 				8C0E8FB41FDEBDFF00789C91 /* UploadFromLifeBoxRouter.swift in Sources */,
 				8C0E8FB51FDEBDFF00789C91 /* BaseViewController.swift in Sources */,
@@ -15281,7 +15286,7 @@
 				CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */,
 				2EA03B3FBEC8D2ED563D175D /* ActionsMenuViewInput.swift in Sources */,
 				ED00E6080A9C91B4A3F19BDC /* ActionsMenuView.swift in Sources */,
-				CE4D282A207E3D50003AE4FB /* WormholeListener.swift in Sources */,
+				CE4D282A207E3D50003AE4FB /* AppWormholeListener.swift in Sources */,
 				8C06AC1C20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */,
 				F49D6CB617DCAACFFD246614 /* FileInfoViewInput.swift in Sources */,
 				38648D9D5A7F951F856B308B /* FileInfoViewOutput.swift in Sources */,
@@ -15519,7 +15524,6 @@
 				CE1B7623204D343500B5E12A /* Error+Localization.swift in Sources */,
 				CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */,
 				CE98F6DD204E721200433915 /* FilesExistManager.swift in Sources */,
-				CEA629FF2047ED3200215811 /* L10n.swift in Sources */,
 				CE1458D520458D9100812544 /* CustomErrors.swift in Sources */,
 				CE1458C62045617600812544 /* RouteRequests.swift in Sources */,
 				CE654FB520454B3900232025 /* UICollectionView+Layout.swift in Sources */,

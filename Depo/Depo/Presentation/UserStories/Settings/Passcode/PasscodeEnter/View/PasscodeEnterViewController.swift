@@ -21,7 +21,7 @@ class PasscodeEnterViewController: ViewController, NibInit {
     
     @IBOutlet weak var passcodeViewImp: PasscodeViewImp!
     
-    let wormholePoster = WormholePoster.shared
+    let wormholePoster = WormholePoster()
     
     var passcodeManager: PasscodeManager!
     

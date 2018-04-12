@@ -11,12 +11,7 @@ import MMWormhole
 
 final class WormholePoster {
     
-    static let shared = WormholePoster()
-    
-    private (set) lazy var wormhole: MMWormhole = {
-        MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier,
-                   optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
-    }()
+    private(set) lazy var wormhole: MMWormhole = MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier, optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
     
     func logout() {
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeLogout)

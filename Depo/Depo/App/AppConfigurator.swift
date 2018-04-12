@@ -19,7 +19,7 @@ class AppConfigurator {
     class func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         dropboxManager.start()
         analyticsManager.start()
-        WormholeListener.shared.startListen()
+        AppWormholeListener.shared.startListen()
         
         emptyEmailUpIfNeed()
         

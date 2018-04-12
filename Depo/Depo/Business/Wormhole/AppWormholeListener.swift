@@ -1,5 +1,5 @@
 //
-//  WormholeListener.swift
+//  AppWormholeListener.swift
 //  LifeboxShared
 //
 //  Created by Bondar Yaroslav on 4/11/18.
@@ -9,9 +9,9 @@
 import Foundation
 import MMWormhole
 
-final class WormholeListener {
+final class AppWormholeListener {
     
-    static let shared = WormholeListener()
+    static let shared = AppWormholeListener()
     
     private let authtService = AuthenticationService()
     private let accountService = AccountService()
@@ -21,24 +21,16 @@ final class WormholeListener {
         listenOffTurkcellPassword()
     }
     
-    private (set) lazy var wormhole: MMWormhole = {
-        MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier,
-                   optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
-    }()
-    
-    //    private lazy var defaults: UserDefaults? = {
-    //        UserDefaults(suiteName: SharedConstants.groupIdentifier)
-    //    }()
-    //    
-    //    private (set) var totalCount: Int {
-    //        get { return defaults?.integer(forKey: SharedConstants.totalAutoSyncCountKey) ?? 0 }
-    //        set { defaults?.set(newValue, forKey: SharedConstants.totalAutoSyncCountKey) }
-    //    }
+    private(set) lazy var wormhole: MMWormhole = MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier, optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
     
     private func listenLogout() {
         wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeLogout) { [weak self] _ in
             self?.authtService.logout {
                 DispatchQueue.main.async {
+                    if let vc = UIApplication.topController() as? PasscodeEnterViewController {
+                        vc.view.endEditing(true)
+                    }
+                    
                     let router = RouterVC()
                     router.setNavigationController(controller: router.onboardingScreen)
                 }
