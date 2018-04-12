@@ -153,7 +153,22 @@ class PageCompounder {
         compoundItems(pageItems: tempoArray,
                       sortType: sortType,
                       predicate: compundedPredicate,
-                      compoundedCallback: compoundedCallback)
+                      compoundedCallback: { [weak self] compoundedPage, leftovers in
+                        guard let `self` = self else {
+                            return
+                        }
+                        if compoundedPage.isEmpty, self.coreData.inProcessAppendingLocalFiles,
+                           self.coreData.originalAssetsBeingAppended.assets(afterDate: firstItem.metaDate, mediaType: <#T##PHAssetMediaType#>) {
+                            
+                            
+                            
+                        } else {
+                           compoundedCallback(compoundedPage, leftovers)
+                        }
+                        
+//
+                        
+        })
 //        guard let savedLocalals = try? requestContext.fetch(request), !savedLocalals.isEmpty else {
 //
 //            if coreData.inProcessAppendingLocalFiles,
