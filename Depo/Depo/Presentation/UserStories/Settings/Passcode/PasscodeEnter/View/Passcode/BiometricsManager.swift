@@ -31,12 +31,14 @@ final class BiometricsManagerImp: BiometricsManager {
     var isEnabled: Bool {
         get { return UserDefaults.standard.bool(forKey: BiometricsManagerImp.isEnabledKey) }
         set {
-//            if isEnabled != newValue {
-//                MenloworksTagsService.shared.onTouchIDSettingsChanged(newValue)
-//            }
-//            if newValue {
-//                MenloworksEventsService.shared.onTouchIDSet()
-//            }
+            #if MAIN_APP
+            if isEnabled != newValue {
+                MenloworksTagsService.shared.onTouchIDSettingsChanged(newValue)
+            }
+            if newValue {
+                MenloworksEventsService.shared.onTouchIDSet()
+            }
+            #endif
             UserDefaults.standard.set(newValue, forKey: BiometricsManagerImp.isEnabledKey)
         }
     }

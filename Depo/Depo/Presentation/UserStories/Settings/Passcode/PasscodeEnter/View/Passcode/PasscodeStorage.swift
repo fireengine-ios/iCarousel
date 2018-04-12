@@ -51,10 +51,11 @@ extension PasscodeStorageDefaults: PasscodeStorage {
     }
     
     func save(passcode: Passcode) {
-        /// commented bcz of using in LifeboxShared target
-//        if self.passcode.count == 0 && passcode.count > 0 {
-//            MenloworksEventsService.shared.onPasscodeSet()
-//        }
+        #if MAIN_APP
+        if self.passcode.count == 0 && passcode.count > 0 {
+            MenloworksEventsService.shared.onPasscodeSet()
+        }
+        #endif
         self.passcode = passcode
     }
     

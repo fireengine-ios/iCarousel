@@ -97,11 +97,9 @@ class ConfirmNewPasscodeState: PasscodeState {
     
     func finish(with passcode: Passcode, manager: PasscodeManager) {
         if self.passcode == passcode {
-//            UIApplication.shared.beginIgnoringInteractionEvents()
             manager.storage.save(passcode: passcode)
             manager.view.passcodeOutput.animateError(with: TextConstants.passcodeChanged)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6 ) {
-//                UIApplication.shared.endIgnoringInteractionEvents()
                 manager.delegate?.passcodeLockDidSucceed(manager)
             }
             
@@ -114,16 +112,20 @@ class ConfirmNewPasscodeState: PasscodeState {
 
 class ConfirmCreateingNewPasscodeState: ConfirmNewPasscodeState {
     
-//    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    #if MAIN_APP
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    #endif
+    
     
     override func finish(with passcode: Passcode, manager: PasscodeManager) {
         if self.passcode == passcode {
-//            UIApplication.shared.beginIgnoringInteractionEvents()
             manager.storage.save(passcode: passcode)
             manager.view.passcodeOutput.animateError(with: TextConstants.passcodeSet)
-//            analyticsService.track(event: .setPasscode)
+            #if MAIN_APP
+            analyticsService.track(event: .setPasscode)
+            #endif
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6 ) {
-//                UIApplication.shared.endIgnoringInteractionEvents()
                 manager.delegate?.passcodeLockDidSucceed(manager)
             }
             
