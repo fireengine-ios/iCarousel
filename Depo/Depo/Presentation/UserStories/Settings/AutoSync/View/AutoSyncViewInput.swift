@@ -10,6 +10,7 @@ protocol AutoSyncViewInput: class {
 
     func setupInitialState()
     func prepaire(syncSettings: AutoSyncSettings)
-    func reloadTableView()
     func disableAutoSync()
+    func checkPermissionsSuccessed()
+    func checkPermissionsFailedWith(error: String)
 }
