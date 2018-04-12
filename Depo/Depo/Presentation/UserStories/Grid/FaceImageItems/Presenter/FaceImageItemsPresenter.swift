@@ -75,7 +75,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
         
         dataSource.isHeaderless = true
-        updateNoFilesView()
         updateThreeDotsButton()
     }
     
