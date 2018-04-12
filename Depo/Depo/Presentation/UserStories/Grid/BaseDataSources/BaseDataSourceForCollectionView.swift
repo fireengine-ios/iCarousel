@@ -944,9 +944,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             debugPrint("BaseDataSourceForCollectionViewDelegate isLastCell, isLastSection, !isPaginationDidEnd ")
         } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
             compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] in
-                if let flag = self?.isLocalPaginationOn{
-                    debugPrint("isLocalPaginationOn \(flag)")
-                }
                 DispatchQueue.main.async {
                     self?.collectionView?.reloadData()
                     self?.delegate?.filesAppendedAndSorted()
