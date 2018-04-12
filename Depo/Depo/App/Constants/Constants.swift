@@ -797,4 +797,11 @@ struct TextConstants {
     static let photos = NSLocalizedString("photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let approve = NSLocalizedString("Approve", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let infomationEmptyEmail = NSLocalizedString("infomationEmptyEmail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    // MARK: - Quota PopUps
+    static let fullQuotaSmallPopUpTitle = NSLocalizedString("LifeboxSmallPopUpTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fullQuotaSmallPopUpSubTitle = NSLocalizedString("LifeboxSmallPopUpSubTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fullQuotaSmallPopUpCheckBoxText = NSLocalizedString("LifeboxSmallPopUpCheckBoxTex", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fullQuotaSmallPopUpFistButtonTitle = NSLocalizedString("LifeboxSmallPopUpFirstButtonText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fullQuotaSmallPopUpSecondButtonTitle = NSLocalizedString("LifeboxSmallPopUpSecondButtonText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

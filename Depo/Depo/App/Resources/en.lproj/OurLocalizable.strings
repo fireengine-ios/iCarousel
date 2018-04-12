@@ -582,3 +582,8 @@
 "Dropbox authorisation error" = "Dropbox authorisation error";
 "dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
+"LifeboxSmallPopUpTitle" = "Lifebox storage is almost full";
+"LifeboxSmallPopUpSubTitle" = "You have reached your lifebox memory limit. Let’s have a look for upgrade options!";
+"LifeboxSmallPopUpCheckBoxTex" = "Don't show me this message again";
+"LifeboxSmallPopUpFirstButtonText" = "CANCEL";
+"LifeboxSmallPopUpSecondButtonText" = "OK";

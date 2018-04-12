@@ -440,6 +440,16 @@
 		7C849215201CB990007C502A /* LatestUpladsCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C849213201CB990007C502A /* LatestUpladsCard.xib */; };
 		7CA2A7AD1F14CDF800F37E2C /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AB1F14CDF800F37E2C /* CircleButton.swift */; };
 		7CA2A7B01F14CE3F00F37E2C /* LocalMediaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA2A7AF1F14CE3F00F37E2C /* LocalMediaStorage.swift */; };
+		7CA4A165207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4A163207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift */; };
+		7CA4A166207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4A163207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift */; };
+		7CA4A167207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA4A164207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib */; };
+		7CA4A168207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA4A164207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib */; };
+		7CA4A171207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4A16F207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift */; };
+		7CA4A172207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4A16F207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift */; };
+		7CA4A173207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA4A170207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib */; };
+		7CA4A174207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA4A170207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib */; };
+		7CA4A176207F3F7E00F270C8 /* CustomCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4A175207F3F7E00F270C8 /* CustomCheckBox.swift */; };
+		7CA4A177207F3F7E00F270C8 /* CustomCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4A175207F3F7E00F270C8 /* CustomCheckBox.swift */; };
 		7CAB66DD1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAB66DC1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift */; };
 		7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23BB1F45718700607660 /* RemoteService.swift */; };
 		7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23BE1F4ABD3100607660 /* LoadingImageView.swift */; };
@@ -3884,6 +3894,11 @@
 		7C942FED1EF94A18008F8A8E /* Depo_LifeTech-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Depo_LifeTech-Info.plist"; sourceTree = "<group>"; };
 		7CA2A7AB1F14CDF800F37E2C /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		7CA2A7AF1F14CE3F00F37E2C /* LocalMediaStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalMediaStorage.swift; sourceTree = "<group>"; };
+		7CA4A163207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeFullOfQuotaPopUp.swift; sourceTree = "<group>"; };
+		7CA4A164207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LargeFullOfQuotaPopUp.xib; sourceTree = "<group>"; };
+		7CA4A16F207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallFullOfQuotaPopUp.swift; sourceTree = "<group>"; };
+		7CA4A170207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmallFullOfQuotaPopUp.xib; sourceTree = "<group>"; };
+		7CA4A175207F3F7E00F270C8 /* CustomCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCheckBox.swift; sourceTree = "<group>"; };
 		7CA6C6A51EF2AABF00D21EBE /* Depo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Depo-Bridging-Header.h"; sourceTree = "<group>"; };
 		7CA6C6A61EF2C7BD00D21EBE /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgotPasswordViewController.xib; sourceTree = "<group>"; };
 		7CAB66DC1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellDataProtocol.swift; sourceTree = "<group>"; };
@@ -6963,6 +6978,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				7CA4A160207E3D4E00F270C8 /* FullOfQuotaPopUps */,
 				8CF6A9C0207C8CF8007DEF71 /* CollectionViewFooter */,
 				8C0B918E2013200A00A5BA81 /* CustomProgressHud */,
 				87B335A82008AD1D0079965F /* TitleView */,
@@ -7639,6 +7655,33 @@
 				CEB2734F205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7CA4A160207E3D4E00F270C8 /* FullOfQuotaPopUps */ = {
+			isa = PBXGroup;
+			children = (
+				7CA4A162207E3DC400F270C8 /* LargePopUp */,
+				7CA4A161207E3DB800F270C8 /* SmallPopUp */,
+			);
+			path = FullOfQuotaPopUps;
+			sourceTree = "<group>";
+		};
+		7CA4A161207E3DB800F270C8 /* SmallPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				7CA4A16F207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift */,
+				7CA4A170207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib */,
+			);
+			path = SmallPopUp;
+			sourceTree = "<group>";
+		};
+		7CA4A162207E3DC400F270C8 /* LargePopUp */ = {
+			isa = PBXGroup;
+			children = (
+				7CA4A163207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift */,
+				7CA4A164207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib */,
+			);
+			path = LargePopUp;
 			sourceTree = "<group>";
 		};
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
@@ -10640,6 +10683,7 @@
 				7C7ED4DC1F84C8C400DC5D33 /* CircleYellowButton.swift */,
 				CEDA44C4207B8ADF00E653DD /* BackButton.swift */,
 				CEAE3F901EFD4D6200A405B2 /* ButtonWithLabel */,
+				7CA4A175207F3F7E00F270C8 /* CustomCheckBox.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -11922,6 +11966,7 @@
 				8C0E90041FDEBDFF00789C91 /* BottomSelectionTabBarViewController.xib in Resources */,
 				8C06B1312008AD72003D8E05 /* t_orta@2x.png in Resources */,
 				8C06AFD32008AD71003D8E05 /* ins_paylas.png in Resources */,
+				7CA4A168207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib in Resources */,
 				8C06AF692008AD70003D8E05 /* duz_cizgi@3x.png in Resources */,
 				8C06B0DF2008AD71003D8E05 /* sample_red@3x.png in Resources */,
 				8C06B10D2008AD72003D8E05 /* status_badge@2x.png in Resources */,
@@ -12049,6 +12094,7 @@
 				8C0E90261FDEBDFF00789C91 /* TurkcellSaturaReg.ttf in Resources */,
 				8C06B1AB2008AD72003D8E05 /* CRYFilterCell.nib in Resources */,
 				8C06B07D2008AD71003D8E05 /* paylas_linkedin.png in Resources */,
+				7CA4A174207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib in Resources */,
 				8C0E90271FDEBDFF00789C91 /* OTPViewController~ipad.xib in Resources */,
 				8C06B1952008AD72003D8E05 /* undo@3x.png in Resources */,
 				8C0E90281FDEBDFF00789C91 /* ActivityTimelineHeader.xib in Resources */,
@@ -12654,6 +12700,7 @@
 				8C06AFBE2008AD71003D8E05 /* geri@3x.png in Resources */,
 				8C06AEC02008AD70003D8E05 /* alt_cizgili@3x.png in Resources */,
 				7C00FE1E1F5982FA0041D041 /* FeedbackViewController.xib in Resources */,
+				7CA4A167207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib in Resources */,
 				8C06AED42008AD70003D8E05 /* bold.png in Resources */,
 				8C06B1942008AD72003D8E05 /* undo@3x.png in Resources */,
 				8C06B0002008AD71003D8E05 /* Kucuk.png in Resources */,
@@ -12924,6 +12971,7 @@
 				8C06AF642008AD70003D8E05 /* duz_cizgi.png in Resources */,
 				D47863FB1F3F18FA00EFDC6D /* UsageInfoViewController.xib in Resources */,
 				8C06AF922008AD71003D8E05 /* filtre@2x.png in Resources */,
+				7CA4A173207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib in Resources */,
 				8C06AFB22008AD71003D8E05 /* frekans@3x.png in Resources */,
 				8C06AED82008AD70003D8E05 /* bold@3x.png in Resources */,
 				8C06AEEC2008AD70003D8E05 /* Buyuk@3x.png in Resources */,
@@ -13529,6 +13577,7 @@
 				8C0E8CE41FDEBDFF00789C91 /* Contact.m in Sources */,
 				8C0E8CE51FDEBDFF00789C91 /* CreateStoryNameViewInput.swift in Sources */,
 				8C0E8CE61FDEBDFF00789C91 /* HomePageViewController.swift in Sources */,
+				7CA4A172207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift in Sources */,
 				8C0E8CE71FDEBDFF00789C91 /* LoginViewOutput.swift in Sources */,
 				8C06AC1E2008AA93003D8E05 /* TabBarActionHandler.swift in Sources */,
 				8C0E8CE81FDEBDFF00789C91 /* SettingsTableViewCell.swift in Sources */,
@@ -13816,6 +13865,7 @@
 				4A8CC30C201A018000C040C4 /* FaceImageViewOutput.swift in Sources */,
 				8C0E8DE01FDEBDFF00789C91 /* IntroduceViewOutput.swift in Sources */,
 				8C0E8DE11FDEBDFF00789C91 /* IntroduceViewController.swift in Sources */,
+				7CA4A166207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift in Sources */,
 				8C0E8DE21FDEBDFF00789C91 /* IntroduceModuleInput.swift in Sources */,
 				CE827586203FEC6600067724 /* UIWebView+Gesture.swift in Sources */,
 				8C0E8DE31FDEBDFF00789C91 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
@@ -14134,6 +14184,7 @@
 				8C0B91B120170ED100A5BA81 /* ManageContactsInitializer.swift in Sources */,
 				8C0E8F151FDEBDFF00789C91 /* HelpAndSupportViewInput.swift in Sources */,
 				8C0B919220170E0500A5BA81 /* DuplicatedContactsModuleOutput.swift in Sources */,
+				7CA4A177207F3F7E00F270C8 /* CustomCheckBox.swift in Sources */,
 				8C0E8F161FDEBDFF00789C91 /* PrintInteractorInput.swift in Sources */,
 				8C0E8F171FDEBDFF00789C91 /* ImportPhotosViewInput.swift in Sources */,
 				4A8CC321201A02A600C040C4 /* FaceImageConfigurator.swift in Sources */,
@@ -14994,6 +15045,7 @@
 				7CA2A7B01F14CE3F00F37E2C /* LocalMediaStorage.swift in Sources */,
 				2BA37C342028379400660394 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				8C6EF8841F348B5C002AC795 /* BottomSelectionTabBarViewOutput.swift in Sources */,
+				7CA4A176207F3F7E00F270C8 /* CustomCheckBox.swift in Sources */,
 				98C878262074E1C100374177 /* NavigationController.swift in Sources */,
 				CE8F44E81F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift in Sources */,
 				7CDB43351F86678D00789FA6 /* AppConfigurator.swift in Sources */,
@@ -15261,6 +15313,7 @@
 				F49D6CB617DCAACFFD246614 /* FileInfoViewInput.swift in Sources */,
 				38648D9D5A7F951F856B308B /* FileInfoViewOutput.swift in Sources */,
 				FA793D832018725400A02B46 /* PeopleServiceResponse.swift in Sources */,
+				7CA4A171207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift in Sources */,
 				3027A2E14F67F63A1600AE42 /* FileInfoViewController.swift in Sources */,
 				9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */,
 				8C6EF8801F348B5C002AC795 /* BottomSelectionTabBarRouterInput.swift in Sources */,
@@ -15450,6 +15503,7 @@
 				C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */,
 				C16DECBEE5DA1602185ABA27 /* OTPViewInteractor.swift in Sources */,
 				759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */,
+				7CA4A165207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift in Sources */,
 				4A8CC31A201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */,
 				48AAD540DF9AE2C249F9B6D4 /* OTPViewRouter.swift in Sources */,
 				D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */,

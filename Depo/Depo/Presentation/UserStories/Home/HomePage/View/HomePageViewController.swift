@@ -80,6 +80,11 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         } else {
             navigationBarWithGradientStyle()
         }
+        
+        let view = SmallFullOfQuotaPopUp.popUp()
+        present(view, animated: true) {
+            
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
