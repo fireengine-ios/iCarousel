@@ -20,6 +20,7 @@
 "Success" = "Success";
 "Apply" = "Apply";
 "Please check your internet connection is active and Mobile Data is ON." = "Please check your internet connection is active and Mobile Data is ON.";
+"Up to 5000 contacts can be backed up.";
 "Invalid passcode. %@ attempts left. Please try again" = "Invalid passcode. %@ attempts left. Please try again";
 "Touch ID" = "Touch ID";
 "Face ID" = "Face ID";

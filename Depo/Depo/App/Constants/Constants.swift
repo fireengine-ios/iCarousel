@@ -731,6 +731,7 @@ struct TextConstants {
     static let passcodeTouchID = NSLocalizedString("Touch ID", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passcodeNumberOfTries = NSLocalizedString("Invalid passcode. %@ attempts left. Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorConnectedToNetwork = NSLocalizedString("Please check your internet connection is active and Mobile Data is ON.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let errorManyContactsToBackUp = NSLocalizedString("Up to 5000 contacts can be backed up.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let apply = NSLocalizedString("Apply", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let success = NSLocalizedString("Success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
