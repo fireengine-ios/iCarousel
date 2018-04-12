@@ -151,7 +151,7 @@ class SyncServiceManager {
             }
             
             guard let syncSettings = self.settings else {
-                let settings = AutoSyncDataStorage().getAutosyncSettings()
+                let settings = AutoSyncDataStorage().settings
                 self.update(syncSettings: settings)
                 return
             }

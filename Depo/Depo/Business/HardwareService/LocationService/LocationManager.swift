@@ -62,7 +62,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func startUpdateLocation() {
         log.debug("LocationManager startUpdateLocation")
-        let settings = AutoSyncDataStorage().getAutosyncSettings()
+        let settings = AutoSyncDataStorage().settings
         
         if settings.isAutoSyncEnabled {
             if CLLocationManager.locationServicesEnabled() {

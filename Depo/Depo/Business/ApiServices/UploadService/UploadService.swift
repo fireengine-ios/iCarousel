@@ -642,9 +642,9 @@ extension UploadService {
     }
     
     fileprivate func logSyncSettings(state: String) {
-        let settings = autoSyncStorage.getAutosyncSettings()
-        var logString = "Auto Sync Settings: PHOTOS: \(settings.photoSetting.option.text()) + VIDEOS: \(settings.videoSetting.option.text())"
-        logString += "; DEVICE NETWORK: \(self.reachabilityService.status)"
+        let settings = autoSyncStorage.settings
+        var logString = "Auto Sync Settings: PHOTOS: \(settings.photoSetting.option.localizedText) + VIDEOS: \(settings.videoSetting.option.localizedText)"
+        logString += "; DEVICE NETWORK: \(reachabilityService.status)"
         logString += " --> \(state)"
         log.debug(logString)
     }

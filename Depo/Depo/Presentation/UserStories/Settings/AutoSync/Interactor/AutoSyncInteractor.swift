@@ -13,7 +13,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     let localMediaStorage = LocalMediaStorage.default
 
     func prepareCellModels() {
-        let settings = dataStorage.getAutosyncSettings()
+        let settings = dataStorage.settings
         output.prepaire(syncSettings: settings)
     }
     

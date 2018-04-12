@@ -12,7 +12,7 @@ final class AutoSyncDataStorage {
     
     private let storageVars: StorageVars = factory.resolve()
     
-    func getAutosyncSettings() -> AutoSyncSettings {
+    var settings: AutoSyncSettings {
         if let storedSettings = storageVars.autoSyncSettings as? [String: Bool] {
             return AutoSyncSettings(with: storedSettings)
         } else if !storageVars.autoSyncSettingsMigrationCompleted {

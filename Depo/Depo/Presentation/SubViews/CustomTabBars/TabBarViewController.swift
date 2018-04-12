@@ -569,7 +569,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         switch index {
         case .photosScreenIndex:
             MenloworksAppEvents.onPhotosAndVideosOpen()
-            let settings = AutoSyncDataStorage().getAutosyncSettings()
+            let settings = AutoSyncDataStorage().settings
             MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
             
             if settings.isAutoSyncEnabled {

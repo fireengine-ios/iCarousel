@@ -9,12 +9,12 @@
 import Foundation
 
 
-struct AutoSyncSetting: Equatable {
-    
+struct AutoSyncSetting {
     var syncItemType: AutoSyncItemType
     var option: AutoSyncOption
-    
-    
+}
+
+extension AutoSyncSetting: Equatable {
     static func ==(lhs: AutoSyncSetting, rhs: AutoSyncSetting) -> Bool {
         return lhs.option == rhs.option && lhs.syncItemType == rhs.syncItemType
     }
@@ -25,7 +25,7 @@ enum AutoSyncItemType {
     case photo
     case video
     
-    func text() -> String {
+    var localizedText: String {
         switch self {
         case .photo:
             return TextConstants.autoSyncCellPhotos
@@ -41,7 +41,7 @@ enum AutoSyncOption {
     case wifiAndCellular
     case never
     
-    func text() -> String {
+    var localizedText: String {
         switch self {
         case .never:
             return TextConstants.autoSyncSettingsOptionNever
