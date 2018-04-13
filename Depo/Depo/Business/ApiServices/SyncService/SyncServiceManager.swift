@@ -298,9 +298,9 @@ extension SyncServiceManager {
             WidgetService.shared.notifyWidgetAbout(status: .executing)
             return
         }
-        
+    
         CardsManager.default.stopOperationWithType(type: .sync)
-        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
+        
         ItemOperationManager.default.syncFinished()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
@@ -312,21 +312,16 @@ extension SyncServiceManager {
         
         CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
         
+        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
+        ItemOperationManager.default.syncFinished()
+        WidgetService.shared.notifyWidgetAbout(status: .stoped)
+        
         if hasWaitingForWiFiSync {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
             return
         }
         
         CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
-        
-        if isSyncStoped || isSyncFailed || isSyncFinished {
-            //TODO: show error?
-            return
-        }
-        
-        if hasFailedSync || hasSyncStoped {
-            //TODO: show error?
-        }
     }
 }
 
