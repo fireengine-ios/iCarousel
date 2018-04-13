@@ -31,6 +31,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
     var alertSheetExcludeTypes = [ElementTypes]()
     
+    private let albumMoreTypes: [ElementTypes] = [.shareAlbum, .download, .completelyDeleteAlbums, .removeAlbum, .albumDetails]
+    
     private let semaphore = DispatchSemaphore(value: 0)
     
     var bottomBarConfig: EditingBarConfig?    
@@ -262,10 +264,19 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         }
         log.debug("SearchViewPresenter onMoreActions")
         
-        alertSheetModule?.showSpecifiedAlertSheet(with: item,
-                                                  presentedBy: sender,
-                                                  onSourceView: nil,
-                                                  viewController: nil)
+        
+        if item.fileType == .photoAlbum {
+            alertSheetModule?.showSpecifiedAlertSheet(with: albumMoreTypes,
+                                                      item: item,
+                                                      presentedBy: sender,
+                                                      onSourceView: nil,
+                                                      viewController: nil)
+        } else {
+            alertSheetModule?.showSpecifiedAlertSheet(with: item,
+                                                      presentedBy: sender,
+                                                      onSourceView: nil,
+                                                      viewController: nil)
+        }
     }
     
     func getNextItems() { }
