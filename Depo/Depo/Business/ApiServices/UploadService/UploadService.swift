@@ -706,7 +706,6 @@ final class UploadOperations: Operation {
         backgroundTaskId = beginBackgroundTask()
         ItemOperationManager.default.startUploadFile(file: item)
         
-        attemptsCount = 0
         attempmtUpload()
         
         semaphore.wait()
@@ -747,14 +746,18 @@ final class UploadOperations: Operation {
                     return
             }
             
-            let uploadParam = Upload(item: self.item,
-                                     destitantion: responseURL,
-                                     uploadStategy: self.uploadStategy,
-                                     uploadTo: self.uploadTo,
-                                     rootFolder: self.folder,
-                                     isFavorite: self.isFavorites)
-            
-            self.dispatchQueue.async {
+            self.dispatchQueue.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                let uploadParam = Upload(item: self.item,
+                                         destitantion: responseURL,
+                                         uploadStategy: self.uploadStategy,
+                                         uploadTo: self.uploadTo,
+                                         rootFolder: self.folder,
+                                         isFavorite: self.isFavorites)
+                
                 self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
                     
                     let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
@@ -763,26 +766,22 @@ final class UploadOperations: Operation {
                     self?.item.uuid = uploadParam.tmpUUId
                     
                     self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
-                        if let localURL = uploadParam.urlToLocalFile {
-                            try? FileManager.default.removeItem(at: localURL)
-                        }
-                        
-                        if let resp = baseurlResponse as? SearchItemResponse {
-                            if let isPhotoAlbum = self?.isPhotoAlbum, isPhotoAlbum {
-                                let item = Item.init(remote: resp)
-                                let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
-                                PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
-                                    ItemOperationManager.default.fileAddedToAlbum(item: item)
-                                }, fail: { error in
-                                    UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
-                                    ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
-                                })
+                        self?.dispatchQueue.async { [weak self] in
+                            guard let `self` = self else {
+                                return
                             }
-                            self?.item.tmpDownloadUrl = resp.tempDownloadURL
+                            
+                            if let localURL = uploadParam.urlToLocalFile {
+                                try? FileManager.default.removeItem(at: localURL)
+                            }
+                            
+                            if let response = baseurlResponse as? SearchItemResponse {
+                                self.addPhotoToTheAlbum(with: uploadParam, response: response)
+                                self.item.tmpDownloadUrl = response.tempDownloadURL
+                            }
+                            
+                            customSucces()
                         }
-                        
-                        customSucces()
-                        
                         }, fail: customFail)
                     
                     }, fail: { [weak self] error in
@@ -792,7 +791,7 @@ final class UploadOperations: Operation {
                         
                         if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
                             let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
-                            DispatchQueue.global().asyncAfter(deadline: delay, execute: {
+                            self.dispatchQueue.asyncAfter(deadline: delay, execute: {
                                 self.attemptsCount += 1
                                 self.attempmtUpload()
                             })
@@ -809,6 +808,20 @@ final class UploadOperations: Operation {
             }
             
             }, fail: customFail)
+    }
+    
+    private func addPhotoToTheAlbum(with parameters: Upload, response: SearchItemResponse) {
+        if self.isPhotoAlbum {
+            let item = Item(remote: response)
+            let parameter = AddPhotosToAlbum(albumUUID: parameters.rootFolder, photos: [item])
+            
+            PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
+                ItemOperationManager.default.fileAddedToAlbum(item: item)
+            }, fail: { error in
+                UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
+                ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
+            })
+        }
     }
     
     private func baseUrl(success: @escaping UploadServiceBaseUrlResponse, fail: FailResponse?) -> URLSessionTask {
