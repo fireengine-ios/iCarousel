@@ -279,23 +279,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             guard let `self` = self else {
                                 return
                             }
-                            
                             self.pageLeftOvers.removeAll()
                             self.pageLeftOvers.append(contentsOf: lefovers)
-                            
-                            //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
-                            
-                            //                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
-                            //                                self.delegate?.getNextItems()
-                            //                                return
-                            //                            }
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
                             
                     })
                 } else if self.isPaginationDidEnd {
-                    //check lefovers here
                     let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
                     var itemsToCompound = isEmptyLeftOvers ? pageItems : self.transformedLeftOvers()
                     var needToDropFirstItem = false
@@ -322,7 +313,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
-                            if compoundedItems.count < self.pageCompounder.pageSize, self.isPaginationDidEnd {
+                            if compoundedItems.isEmpty,
+                                self.isPaginationDidEnd {
                                 self.isLocalPaginationOn = false
                             }
                             
@@ -538,8 +530,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         allRemoteItems.removeAll()
         allItems.removeAll()
+        pageLeftOvers.removeAll()
         allMediaItems.removeAll()
         pageCompounder.dropData()
+        isLocalFilesRequested = false
     }
     
     func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil){
