@@ -46,8 +46,6 @@ struct TextConstants {
     static let registrationEmailPopupTitle = NSLocalizedString("E-mail Usage Information", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationEmailPopupMessage = NSLocalizedString("You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let changeButtonTitle = NSLocalizedString("Change", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
     // MARK: - Registration Error Messages
     static let invalidMailErrorText = NSLocalizedString("Please enter a valid email address.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invalidPhoneNumberText = NSLocalizedString("Please enter a valid GSM number.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -759,7 +757,7 @@ struct TextConstants {
     static let locationServiceDisable = NSLocalizedString("Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let loginEnterGSM = NSLocalizedString("Please enter your GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let loginChangeGSM = NSLocalizedString("Change GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginAddGSM = NSLocalizedString("Add GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginGSMNumber = NSLocalizedString("GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let syncFourGbVideo = NSLocalizedString("The videos larger than 4GB can not be uploaded to lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

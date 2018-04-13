@@ -487,7 +487,6 @@
 "Please enter a valid GSM number." = "Please enter a valid GSM number.";
 "Please enter a valid email address." = "Please enter a valid email address.";
 "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications";
-"Change" = "Change";
 "E-mail Usage Information" = "E-mail Usage Information";
 "Password fields do not match." = "Password fields do not match.";
 "Please check the e-mail address." = "Please check the e-mail address.";
@@ -521,7 +520,7 @@
 "Start using Lifebox now!" = "Start using Lifebox now!";
 "E-mail field is invalid" = "E-mail field is invalid";
 "Please enter your GSM number"="Please enter your GSM number";
-"Change GSM Number" = "Change GSM Number";
+"Add GSM Number" = "Add GSM Number";
 "GSM number"="GSM number";
 "The videos larger than 4GB can not be uploaded to lifebox" = "The videos larger than 4GB can not be uploaded to lifebox";
 "You have not enough memory in your device" = "You have not enough memory in your device";
