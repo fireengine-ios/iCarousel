@@ -79,6 +79,8 @@ struct NumericConstants {
     static let logMaxSize: UInt64 = 10_485_760
     
     static let numberOfLocalItemsOnPage: Int = 100
+    
+    static let limitContactsForBackUp: Int = 5000
 }
 
 struct RequestSizeConstant {

@@ -29,6 +29,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     private let contactsSyncService = ContactsSyncService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private let contactService: ContactService = ContactService()
     
     func startOperation(operationType: SyncOperationType) {
         switch operationType {
@@ -52,21 +53,29 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     func performOperation(forType type: SYNCMode) {
-        contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, type in
+        guard let contactsCount = contactService.getContactsCount() else { return }
+        
+        if contactsCount < NumericConstants.limitContactsForBackUp {
+            contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, type in
                 DispatchQueue.main.async {
                     self?.output?.showProggress(progress: progressPercentage, count: 0, forOperation: type)
                 }
-            }, finishCallback: { [weak self] result, type in
-                DispatchQueue.main.async {
-                    self?.output?.success(response: result, forOperation: type)
-                    CardsManager.default.stopOperationWithType(type: .contactBacupOld)
-                    CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
-                }
-        }, errorCallback: { [weak self] errorType, type in
+                }, finishCallback: { [weak self] result, type in
+                    DispatchQueue.main.async {
+                        self?.output?.success(response: result, forOperation: type)
+                        CardsManager.default.stopOperationWithType(type: .contactBacupOld)
+                        CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
+                    }
+                }, errorCallback: { [weak self] errorType, type in
+                    DispatchQueue.main.async {
+                        self?.output?.showError(errorType: errorType)
+                    }
+            })
+        } else {
             DispatchQueue.main.async {
-                self?.output?.showError(errorType: errorType)
+                self.output?.showPopUpWithManyContacts()
             }
-        })
+        }
     }
     
     private func loadLastBackUp() {
@@ -100,4 +109,6 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     private func deleteDuplicated() {
         contactsSyncService.deleteDuplicates()
     }
+    
+    
 }
