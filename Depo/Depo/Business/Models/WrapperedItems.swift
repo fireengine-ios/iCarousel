@@ -927,10 +927,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     func getLocalID() -> String {
         if isLocalItem {
             return asset?.localIdentifier ?? ""
-        } else {
-            if uuid.contains("~"){
-                return uuid.components(separatedBy: "~").first ?? uuid
-            }
+        } else if uuid.contains("~"){
+            return uuid.components(separatedBy: "~").first ?? uuid
         }
         return ""
     }
