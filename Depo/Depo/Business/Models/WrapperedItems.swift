@@ -924,6 +924,17 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return ""
     }
     
+    func getLocalID() -> String {
+        if isLocalItem {
+            return asset?.localIdentifier ?? ""
+        } else {
+            if uuid.contains("~"){
+                return uuid.components(separatedBy: "~").first ?? uuid
+            }
+        }
+        return ""
+    }
+    
     /*
     //Need this beacase old app shares name with slash
     */
