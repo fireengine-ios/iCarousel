@@ -13,5 +13,5 @@ protocol AutoSyncInteractorInput {
 
     func onSave(settings: AutoSyncSettings)
     
-    func checkPermissionForPhoto()
+    func checkPermissions()
 }
