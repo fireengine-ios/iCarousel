@@ -44,7 +44,7 @@ class SingletonStorage {
         }
     }
     
-    var unigueUserID: String {
+    var uniqueUserID: String {
         return accountInfo?.projectID ?? ""
     }
     
