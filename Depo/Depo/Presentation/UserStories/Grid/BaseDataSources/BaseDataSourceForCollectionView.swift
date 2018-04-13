@@ -313,7 +313,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
-                            if compoundedItems.count == 0 /*< self.pageCompounder.pageSize*/, self.isPaginationDidEnd {
+                            if compoundedItems.isEmpty,
+                                self.isPaginationDidEnd {
                                 self.isLocalPaginationOn = false
                             }
                             
