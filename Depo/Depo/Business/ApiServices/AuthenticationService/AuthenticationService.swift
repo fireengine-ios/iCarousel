@@ -340,7 +340,7 @@ class AuthenticationService: BaseRequestService {
             CardsManager.default.clear()
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
-            AutoSyncDataStorage.clear()
+            AutoSyncDataStorage().clear()
             SingletonStorage.shared.accountInfo = nil
             ItemOperationManager.default.clear()
             self.player.stop()

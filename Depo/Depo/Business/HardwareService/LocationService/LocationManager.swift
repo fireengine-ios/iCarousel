@@ -76,27 +76,22 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func startUpdateLocation() {
         log.debug("LocationManager startUpdateLocation")
-
-        AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, _ in
-            guard let `self` = self else {
-                return
-            }
-            
-            if settings.isAutoSyncEnabled {
-                if CLLocationManager.locationServicesEnabled() {
-                    if CLLocationManager.authorizationStatus() == .notDetermined {
-                        self.passcodeStorage.systemCallOnScreen = true
-                        self.locationManager.requestAlwaysAuthorization()
-                    } else {
-                        self.locationManager.startMonitoringSignificantLocationChanges()
-                        self.locationManager.allowsBackgroundLocationUpdates = true
-                        self.locationManager.startUpdatingLocation()
-                    }
+        let settings = AutoSyncDataStorage().settings
+        
+        if settings.isAutoSyncEnabled {
+            if CLLocationManager.locationServicesEnabled() {
+                if CLLocationManager.authorizationStatus() == .notDetermined {
+                    self.passcodeStorage.systemCallOnScreen = true
+                    self.locationManager.requestAlwaysAuthorization()
                 } else {
-                    self.showIfNeedLocationPermissionAllert()
+                    self.locationManager.startMonitoringSignificantLocationChanges()
+                    self.locationManager.allowsBackgroundLocationUpdates = true
+                    self.locationManager.startUpdatingLocation()
                 }
+            } else {
+                self.showIfNeedLocationPermissionAllert()
             }
-        })
+        }
     }
  
     func stopUpdateLocation() {

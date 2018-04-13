@@ -9,23 +9,19 @@
 class AutoSyncInteractor: AutoSyncInteractorInput {
 
     weak var output: AutoSyncInteractorOutput!
+
     private var dataStorage = AutoSyncDataStorage()
     private let localMediaStorage = LocalMediaStorage.default
     private lazy var locationManager = LocationManager.shared
-    
-    private var uniqueUserID: String? = ""
 
     func prepareCellModels() {
-        dataStorage.getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, uniqueUserId in
-            self?.output.prepaire(syncSettings: settings)
-            self?.uniqueUserID = uniqueUserId
-        })
+        let settings = dataStorage.settings
+        output.prepaire(syncSettings: settings)
     }
     
     func onSave(settings: AutoSyncSettings) {
         output.onSettingSaved()
-        
-        dataStorage.save(autoSyncSettings: settings, uniqueUserId: uniqueUserID ?? "")
+        dataStorage.save(autoSyncSettings: settings)
         SyncServiceManager.shared.update(syncSettings: settings)
     }
     

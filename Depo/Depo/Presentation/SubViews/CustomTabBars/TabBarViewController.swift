@@ -569,18 +569,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         switch index {
         case .photosScreenIndex:
             MenloworksAppEvents.onPhotosAndVideosOpen()
+            let settings = AutoSyncDataStorage().settings
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
             
-            AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { settings, userId in
-                MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
-                
-                if settings.isAutoSyncEnabled {
-                    MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
-                    MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
-                } else {
-                    MenloworksTagsService.shared.onAutosyncVideosStatusOff()
-                    MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
-                }
-            })
+            if settings.isAutoSyncEnabled {
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
+            } else {
+                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
+            }
         case .musicScreenIndex:
             MenloworksAppEvents.onMusicOpen()
         case .documentsScreenIndex:
@@ -620,6 +618,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
             
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.musicScreenIndex.rawValue, TabScreenIndex.documentsScreenIndex.rawValue]
+            if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {
+                return
+            }
             selectedIndex = tabbarSelectedIndex
             
             if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {

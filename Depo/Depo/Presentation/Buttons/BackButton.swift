@@ -35,12 +35,26 @@ final class BackButton: UIButton {
         setup()
     }
     
+    var buttonColor: UIColor {
+        get {
+            return tintColor
+        }
+        set (color) {
+            tintColor = color
+            setTitleColor(color, for: .normal)
+            setTitleColor(color.darker(by: 40), for: .highlighted)
+        }
+    }
+    
     private func setup() {
-        setTitle(" " + TextConstants.backTitle, for: .normal)
+        buttonColor = ColorConstants.whiteColor
+        
+        contentHorizontalAlignment = .left
+        titleEdgeInsets.left = 8
+        
+        setTitle(TextConstants.backTitle, for: .normal)
         setImage(UIImage(named: "im_backButton"), for: .normal)
         titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        setTitleColor(ColorConstants.whiteColor, for: .normal)
-        setTitleColor(ColorConstants.whiteColor.darker(by: 40), for: .highlighted)
         addTarget(self, action: #selector(actionTouchUp), for: .touchUpInside)
     }
     
