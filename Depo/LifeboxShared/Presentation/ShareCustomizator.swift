@@ -22,7 +22,7 @@ final class ShareCustomizator: NSObject {
             cancelButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             cancelButton.setTitleColor(ColorConstants.lightText, for: .normal)
             cancelButton.setTitleColor(ColorConstants.darkText, for: .highlighted)
-            cancelButton.setTitle(L10n.cancel, for: .normal)
+            cancelButton.setTitle(TextConstants.cancel, for: .normal)
         }
     }
     
@@ -32,7 +32,7 @@ final class ShareCustomizator: NSObject {
             uploadButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             uploadButton.setTitleColor(ColorConstants.blueColor, for: .normal)
             uploadButton.setTitleColor(ColorConstants.blueColor.darker(), for: .highlighted)
-            uploadButton.setTitle(L10n.upload, for: .normal)
+            uploadButton.setTitle(TextConstants.upload, for: .normal)
         }
     }
     

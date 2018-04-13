@@ -10,172 +10,196 @@ import Foundation
 
 typealias TextEnterHandler = (_ text: String, _ vc: TextEnterController) -> Void
 
-final class TextEnterController: ViewController {
+final class TextEnterController: ViewController, NibInit {
     
-    // MARK: - Static
+    var output: RegistrationViewOutput!
     
-    static func with(title: String, textPlaceholder: String? = nil, buttonTitle: String, buttonAction: TextEnterHandler? = nil) -> TextEnterController {
-        
-        let vc = TextEnterController(nibName: "TextEnterController", bundle: nil)
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overFullScreen
-        
-        vc.alertTitle = title
-        vc.doneButtonTitle = buttonTitle
-        vc.textPlaceholder = textPlaceholder
-        
-        if let action = buttonAction {
-            vc.doneAction = action
-        }
-        
-        return vc
-    }
+    // MARK: - Outlets
     
-    // MARK: - IBOutlet
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var shadowView: UIView!
+    @IBOutlet private weak var pickerContainer: UIView!
+    @IBOutlet private weak var pickerView: UIPickerView!
+    @IBOutlet private weak var pickerBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet private weak var shadowView: UIView! {
+    @IBOutlet private weak var changeButton: BlueButtonWithWhiteText! {
         didSet {
-            shadowView.layer.cornerRadius = 5
-            shadowView.layer.shadowColor = UIColor.black.cgColor
-            shadowView.layer.shadowRadius = 10
-            shadowView.layer.shadowOpacity = 0.5
-            shadowView.layer.shadowOffset = .zero
+            changeButton.isExclusiveTouch = true
+            changeButton.setTitle(doneButtonTitle, for: .normal)
         }
     }
     
-    @IBOutlet private weak var containerView: UIView! {
-        didSet {
-            containerView.layer.masksToBounds = true
-            containerView.layer.cornerRadius = 5
-        }
-    }
     
-    @IBOutlet private weak var titleLabel: UILabel! {
-        didSet {
-            titleLabel.textColor = ColorConstants.darcBlueColor
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
-        }
-    }
-    
-    @IBOutlet private weak var messageLabel: UILabel! {
-        didSet {
-            messageLabel.textColor = ColorConstants.lightText
-            messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
-        }
-    }
-    
-    @IBOutlet private weak var doneButton: UIButton! {
-        didSet {
-            doneButton.isExclusiveTouch = true
-            doneButton.isEnabled = false
-            
-            doneButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            
-            doneButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-            doneButton.setTitleColor(ColorConstants.blueColor.darker(), for: .highlighted)
-            
-            doneButton.setBackgroundColor(ColorConstants.blueColor, for: .highlighted)
-            
-            doneButton.layer.borderColor = ColorConstants.blueColor.cgColor
-            doneButton.layer.borderWidth = 1
-        }
-    }
-    
-    @IBOutlet private weak var enterTextField: UITextField! {
-        didSet {
-            enterTextField.font = UIFont.TurkcellSaturaRegFont(size: 20)
-        }
-    }
-    
-    // MARK: - Setup
+    private let dataSource = TextEnterDataSource()
+    private let gsmCompositor = CounrtiesGSMCodeCompositor()
+    private let dataStorage = DataStorage()
     
     private var alertTitle = ""
     private var doneButtonTitle = ""
     private var textPlaceholder: String?
     
     private lazy var doneAction: TextEnterHandler = { [weak self] _, _ in
-        self?.close()
+        self?.close(completion: nil)
     }
+    
+    private var phone: String? {
+        guard
+            let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? GSMUserInputCell,
+            let code = cell.gsmCountryCodeLabel.text,
+            let number = cell.inputTextField?.text
+        else {
+            return nil
+        }
+        return code + number
+    }
+    
+    // MAKR: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = alertTitle
-        doneButton.setTitle(doneButtonTitle, for: .normal)
-        enterTextField.placeholder = textPlaceholder
+        title = alertTitle
+        
+        shadowView.isHidden = true
+        shadowView.isUserInteractionEnabled = false
+        shadowView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hidePicker)))
+        
+        setupDelegates()
     }
-    
-    @IBAction func actionDoneButton(_ sender: UIButton) {
-        doneAction(enterTextField.text ?? "", self)
-    }
-    
-    func showAlertMessage(with text: String) {
-        messageLabel.text = text
-    }
-    
-    func startLoading() {
-        doneButton.isEnabled = false
-    }
-    
-    func stopLoading() {
-        doneButton.isEnabled = true
-    }
-    
-    // MARK: - Animation
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        enterTextField.becomeFirstResponder()
-        open()
+        navigationBarWithGradientStyle()
     }
     
-    private var isShown = false
-    private func open() {
-        if isShown {
-            return
-        }
-        isShown = true
-        shadowView.transform = NumericConstants.scaleTransform
-        containerView.transform = NumericConstants.scaleTransform
-        view.alpha = 0
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.view.alpha = 1
-            self.shadowView.transform = .identity
-            self.containerView.transform = .identity
-        }
+    private func setupDelegates() {
+        dataSource.setupCells(withModels: dataStorage.getModels())
+        dataSource.setupPickerCells(withModels: gsmCompositor.getGSMCCModels())
+        dataSource.output = self
+        
+        tableView.register(UINib(nibName: "GSMUInputCell", bundle: nil), forCellReuseIdentifier: CellsIdConstants.gSMUserInputCellID)
+        tableView.dataSource = dataSource
+        tableView.delegate = dataSource
+        
+        let doneButton = UIBarButtonItem(title: TextConstants.chooseTitle,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(donePicker))
+        let pickerToolBar = barButtonItemsWithRitht(button: doneButton)
+        pickerContainer.addSubview(pickerToolBar)
+        pickerView.dataSource = dataSource
+        pickerView.delegate = dataSource
     }
-    
-    func close(completion: VoidHandler? = nil) {
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.view.alpha = 0
-            self.shadowView.transform = NumericConstants.scaleTransform
-            self.containerView.transform = NumericConstants.scaleTransform
-        }, completion: { _ in
-            self.dismiss(animated: false, completion: completion)
-        })
-    }
-    
-    private func isAvailableCharacters(in text: String) -> Bool {
-        return text.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
-    }
-}
 
-extension TextEnterController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard isAvailableCharacters(in: string) else {
+    func showAlertMessage(with text: String) {
+        showAlertMessage(with: text)
+    }
+
+    func startLoading() {
+        showSpiner()
+    }
+
+    func stopLoading() {
+        hideSpiner()
+    }
+       
+    // MARK: - Actions
+    
+    @IBAction func change(_ sender: UIButton) {
+        if verifyPhone() {
+            doneAction(phone ?? "", self)
+        }
+    }
+    
+    @objc func close(completion: VoidHandler? = nil) {
+        view.endEditing(true)
+        dismiss(animated: true, completion: completion)
+    }
+    
+    @objc func donePicker() {
+        chooseButtonPressed()
+    }
+    
+    private func verifyPhone() -> Bool {
+        guard let phone = phone?.replacingOccurrences(of: "+", with: "") else {
             return false
         }
-        if textField.text?.isEmpty == true {
-            textField.text = "+"
+
+        guard phone.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil else {
+            return false
         }
         
-        if let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string), newString.isEmpty {
-            doneButton.isEnabled = false
-        } else {
-            doneButton.isEnabled = true
+        guard phone.count > 8 else {
+            return false
         }
         
         return true
+    }
+    
+    // MARK: - Picker
+    
+    @objc private func hidePicker() {
+        changePickerState(state: false)
+    }
+    
+    private func showPicker() {
+        changePickerState(state: true)
+    }
+    
+    private func changePickerState(state isActive: Bool) {
+        shadowView.isHidden = !isActive
+        shadowView.isUserInteractionEnabled = isActive
+        if isActive {
+            pickerBottomConstraint.constant = 0
+        } else {
+            pickerBottomConstraint.constant = -271
+        }
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func chooseButtonPressed() {
+        hidePicker()
+        let currentRow = pickerView.selectedRow(inComponent: 0)
+        dataSource.changeGSMCodeLabel(withRow: currentRow)
+        tableView.reloadData()
+    }
+}
+
+extension TextEnterController: DataSourceOutput {
+    func pickerGotTapped() {
+        view.endEditing(true)
+        showPicker()
+    }
+    
+    func protoCellTextFinishedEditing(cell: ProtoInputTextCell) {
+        
+    }
+    
+    func protoCellTextStartedEditing(cell: ProtoInputTextCell) {
+        hidePicker()
+    }
+    
+    func infoButtonGotPressed(withType: UserValidationResults) {
+
+    }
+}
+
+// MARK: - Static
+extension TextEnterController {
+    
+    static func with(title: String, buttonTitle: String, buttonAction: TextEnterHandler? = nil) -> TextEnterController {
+        
+        let vc = TextEnterController.initFromNib()
+        vc.alertTitle = title
+        vc.doneButtonTitle = buttonTitle
+        
+        if let action = buttonAction {
+            vc.doneAction = action
+        }
+        
+        return vc
     }
 }

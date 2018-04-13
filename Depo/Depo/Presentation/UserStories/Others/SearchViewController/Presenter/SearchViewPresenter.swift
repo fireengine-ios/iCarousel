@@ -31,6 +31,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
     var alertSheetExcludeTypes = [ElementTypes]()
     
+    private let semaphore = DispatchSemaphore(value: 0)
+    
     var bottomBarConfig: EditingBarConfig?    
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
     
@@ -67,7 +69,13 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         ItemOperationManager.default.startUpdateView(view: dataSource)
     }
     
-    // MARK: - UnderNavBarBar/TopBar
+
+    func filesAppendedAndSorted() {
+        dataSource.reloadData()
+
+    }
+    
+    //MARK: - UnderNavBarBar/TopBar
     
     private func setupTopBar() {
         guard let unwrapedConfig = topBarConfig else {
@@ -128,8 +136,11 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             view.setVisibleTabBar(!flag)
         } else {
             view.setCollectionViewVisibilityStatus(visibilityStatus: false)
+
+            dataSource.appendCollectionView(items: items, pageNum: 0)//
+
             view.setVisibleTabBar(true)
-            dataSource.appendCollectionView(items: items)
+
         }
         
     }
@@ -314,13 +325,16 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                 if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
                 } else if selectedItems is [Item] {
-                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item])
-                    if localDuplicates.count == 0 {
-                        //selectedItems = localDuplicates
-                        actionTypes.remove(at: deleteOriginalIndex)
-                    } else {
-                        
-                    }
+                    
+                    CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
+                        let localDuplicates = items
+                        if localDuplicates.count == 0 {
+                            //selectedItems = localDuplicates
+                            actionTypes.remove(at: deleteOriginalIndex)
+                        }
+                        self?.semaphore.signal()
+                    })
+                    semaphore.wait()
                 }
                 
             }

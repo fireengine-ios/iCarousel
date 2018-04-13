@@ -20,8 +20,6 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
     
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
-    
     var fromSettings: Bool = false
 
     func viewIsReady() {
@@ -74,19 +72,26 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         
     }
     
-    func enableAutoSync() {
-        interactor.checkPermissionForPhoto()
+    func checkPermissions() {
+        interactor.checkPermissions()
     }
     
-    func onCheckPermissionForPhoto(accessGranted: Bool) {
-        if accessGranted {
-            view.reloadTableView()
-            analyticsService.track(event: .turnOnAutosync)
-        } else {
+    func onCheckPermissions(photoAccessGranted: Bool, locationAccessGranted: Bool) {
+        guard photoAccessGranted else {
             view.disableAutoSync()
+            view.checkPermissionsFailedWith(error: TextConstants.cameraAccessAlertText)
+            return
         }
+        
+        guard locationAccessGranted else {
+            view.disableAutoSync()
+            view.checkPermissionsFailedWith(error: TextConstants.locationServiceDisable)
+            return
+        }
+        
+        view.checkPermissionsSuccessed()
     }
-    
+        
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {

@@ -21,7 +21,7 @@ def core_pods
   pod 'GoogleConversionTracking'
   pod 'Adjust'
   #pod 'ActiveLabel'
-
+  pod 'JDStatusBarNotification'
 
 
   #Keyboard
@@ -53,6 +53,7 @@ end
 
 target 'LifeboxShared' do
     shared_pods
+    pod 'MMWormhole', '~> 2.0.0'
 end
 
 target 'LifeboxFileProvider' do

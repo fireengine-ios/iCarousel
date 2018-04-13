@@ -21,6 +21,13 @@ class BaseUserInputCellView: ProtoInputTextCell {
     
     weak var infoButtonDelegate: InfoButtonCellProtocol?
     
+    var defaultTitleHightlightColor = ColorConstants.whiteColor {
+        didSet {
+            changeTitleHeighlight(heighlight: isTitleTitleHightlight)
+        }
+    }
+    var isTitleTitleHightlight = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         textInputField.delegate = self
@@ -37,10 +44,11 @@ class BaseUserInputCellView: ProtoInputTextCell {
     }
     
     func changeTitleHeighlight(heighlight: Bool) {
+        isTitleTitleHightlight = heighlight
         var placeholder = ""
         if heighlight {
             textInputField.font = UIFont.TurkcellSaturaBolFont(size: 21)
-            titleLabel.textColor = ColorConstants.whiteColor
+            titleLabel.textColor = defaultTitleHightlightColor
         } else {
             titleLabel.textColor = ColorConstants.yellowColor
             if let savedPlaceholder = placeholderText {

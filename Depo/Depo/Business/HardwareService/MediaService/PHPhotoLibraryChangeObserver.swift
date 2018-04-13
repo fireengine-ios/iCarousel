@@ -22,7 +22,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         
         guard fetchResult != nil, let changes = changeInstance.changeDetails(for: fetchResult)
             else { return }
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             self.fetchResult = changes.fetchResultAfterChanges
             if changes.hasIncrementalChanges, changes.insertedIndexes != nil || changes.removedIndexes != nil {
                 let previosFetch = changes.fetchResultBeforeChanges
@@ -36,12 +36,12 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                     phChanges[.removed] = previosFetch.objects(at: removedIndexes)
                 }
                 
-                CoreDataStack.default.appendLocalMediaItems(progress: nil, end: {
+                CoreDataStack.default.appendLocalMediaItems(completion: {
                     UploadService.default.cancelOperations(with: phChanges[.removed])
                     NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
                 })
             }
-        }
+//        }
 
     }
 }

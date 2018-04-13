@@ -203,9 +203,8 @@ extension PackagesPresenter: PackagesInteractorOutput {
         case .all:
             //show restore
             view?.showRestoreButton()
-//            break
             /// in app purchase
-//            view?.startActivityIndicator()
+            view?.showInAppPolicy()
             interactor.getOfferApples()
         }
         
