@@ -88,6 +88,7 @@ extension CoreDataStack {
         let start = Date()
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
         privateQueue.async { [weak self] in
+            
             LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] info in
                 context.perform { [weak self] in
                     var addedObjects = [WrapData]()

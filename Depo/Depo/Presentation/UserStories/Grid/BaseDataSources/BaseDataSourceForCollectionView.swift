@@ -280,7 +280,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
-                            if compoundedItems.count < self.pageCompounder.pageSize, self.isPaginationDidEnd {
+                            if compoundedItems.count == 0 /*< self.pageCompounder.pageSize*/, self.isPaginationDidEnd {
                                 self.isLocalPaginationOn = false
                             }
                             
@@ -496,8 +496,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         allRemoteItems.removeAll()
         allItems.removeAll()
+        pageLeftOvers.removeAll()
         allMediaItems.removeAll()
         pageCompounder.dropData()
+        isLocalFilesRequested = false
     }
     
     func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil){

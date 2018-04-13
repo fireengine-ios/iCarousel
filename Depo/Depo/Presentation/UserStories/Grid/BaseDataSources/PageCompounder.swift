@@ -67,6 +67,7 @@ class PageCompounder {
     }
     
     func dropData() {
+        coreData.pageAppendedCallBack = nil
         notAllowedMD5s.removeAll()
         notAllowedLocalIDs.removeAll()
     }
@@ -159,25 +160,37 @@ class PageCompounder {
                     
                     debugPrint("!!! time for a recurcieve callback loop")
                     
-//                    self?.compoundLastPage(pageItems: pageItems, filesType: filesType, sortType: sortType, compoundedCallback: compoundedCallback)
                     self?.compoundItems(pageItems: pageItems,
                                         sortType: sortType,
                                         predicate: predicate,
-                                        compoundedCallback: { [weak self] localItems in
-                                            guard 
-                    
+                                        compoundedCallback: { [weak self] compoundedPage, leftovers  in
+                                            guard let `self` = self else {
+                                                compoundedCallback([], [])
+                                                return
+                                            }
+                                            if self.coreData.inProcessAppendingLocalFiles,
+                                                compoundedPage.isEmpty {
+                                                self.monitorDBLastAppendedPage(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
+                                                return
+                                            } else if !compoundedPage.isEmpty {
+                                                compoundedCallback(compoundedPage, leftovers)
+                                            }
+                                            
                     })
                     
                     return
             }
             debugPrint("!!! regular callback")
-            
             self?.compoundItems(pageItems: pageItems,
                                 sortType: sortType,
                                 predicate: predicate,
-                                compoundedCallback: compoundedCallback)
-        
-            
+                                compoundedCallback: { [weak self] compoundedPage, leftovers  in
+                                    guard !compoundedPage.isEmpty else {
+                                        self?.monitorDBLastAppendedPage(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
+                                        return
+                                    }
+                                    compoundedCallback(compoundedPage, leftovers)
+            })
         }
     }
     
