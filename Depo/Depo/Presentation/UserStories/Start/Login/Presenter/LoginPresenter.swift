@@ -200,8 +200,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         tokenStorage.isClearTokens = true
         
         let textEnterVC = TextEnterController.with(
-            title: TextConstants.loginChangeGSM,
-            buttonTitle: TextConstants.changeButtonTitle) { [weak self] enterText, vc in
+            title: TextConstants.loginAddGSM,
+            buttonTitle: TextConstants.save) { [weak self] enterText, vc in
                 self?.newPhone = enterText
                 self?.interactor.getTokenToUpdatePhone(for: enterText)
                 vc.startLoading()
