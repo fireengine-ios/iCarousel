@@ -20,16 +20,15 @@ class SyncServiceManager {
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
-//        queue.underlyingQueue = dispatchQueue
         return queue
     }()
     
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()
-    private var settings: AutoSyncSettings?
+    private var settings = AutoSyncDataStorage().settings
     
     private var lastAutoSyncTime: TimeInterval = 0
-    private var timeIntervalBetweenSyncs: TimeInterval = NumericConstants.timeIntervalBetweenAutoSync
+    private var timeIntervalBetweenSyncsInBackground: TimeInterval = NumericConstants.timeIntervalBetweenAutoSyncInBackground
     
     
     private var isSyncStoped: Bool {
@@ -102,7 +101,7 @@ class SyncServiceManager {
         log.debug("SyncServiceManager updateInBackground")
 
         let time = NSDate().timeIntervalSince1970
-        if time - lastAutoSyncTime > timeIntervalBetweenSyncs {
+        if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             lastAutoSyncTime = time
             log.debug("Sync should start in background")
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
@@ -145,22 +144,14 @@ class SyncServiceManager {
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         print("AUTOSYNC: checkReachabilityAndSettings")
-        dispatchQueue.async {
-            guard let syncSettings = self.settings else {
-                AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, _ in
-                    if let `self` = self {
-                        if self.settings == nil {
-                            self.update(syncSettings: settings)
-                        }
-                    }
-                })
-                
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
                 return
             }
             
-            self.timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
+            self.timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncInBackground
             
-            guard syncSettings.isAutoSyncEnabled else {
+            guard self.settings.isAutoSyncEnabled else {
                 self.stopSync()
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
                 MenloworksEventsService.shared.onAutosyncOff()
@@ -179,10 +170,11 @@ class SyncServiceManager {
                 return
             }
             
-            let photoOption = syncSettings.photoSetting.option
-            let videoOption = syncSettings.videoSetting.option
+            let photoOption = self.settings.photoSetting.option
+            let videoOption = self.settings.videoSetting.option
+            let serverIsReachable = (reachability.connection != .none && APIReachabilityService.shared.connection != .unreachable)
             
-            if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
+            if serverIsReachable {
                 let photoEnabled = (reachability.connection == .wifi && photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
                     (reachability.connection == .cellular && photoOption == .wifiAndCellular)
                 
@@ -300,9 +292,9 @@ extension SyncServiceManager {
             WidgetService.shared.notifyWidgetAbout(status: .executing)
             return
         }
-        
+    
         CardsManager.default.stopOperationWithType(type: .sync)
-        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
+        
         ItemOperationManager.default.syncFinished()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
@@ -314,21 +306,16 @@ extension SyncServiceManager {
         
         CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
         
+        FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
+        ItemOperationManager.default.syncFinished()
+        WidgetService.shared.notifyWidgetAbout(status: .stoped)
+        
         if hasWaitingForWiFiSync {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
             return
         }
         
         CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
-        
-        if isSyncStoped || isSyncFailed || isSyncFinished {
-            //TODO: show error?
-            return
-        }
-        
-        if hasFailedSync || hasSyncStoped {
-            //TODO: show error?
-        }
     }
 }
 
@@ -339,7 +326,7 @@ extension SyncServiceManager: ItemSyncServiceDelegate {
     func didReceiveOutOfSpaceError() {
         stopSync()
         if UIApplication.shared.applicationState == .background {
-            timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
+            timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
         }
         showOutOfSpaceAlert()
     }

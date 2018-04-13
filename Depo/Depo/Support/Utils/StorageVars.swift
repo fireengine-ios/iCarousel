@@ -12,6 +12,8 @@ protocol StorageVars: class {
     var currentUserID: String? { get set }
     var emptyEmailUp: Bool { get set }
     var autoSyncSet: Bool { get set }
+    var autoSyncSettings: [String: Any]? { get set }
+    var autoSyncSettingsMigrationCompleted: Bool { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -36,5 +38,18 @@ final class UserDefaultsVars: StorageVars {
     var emptyEmailUp: Bool {
         get { return userDefaults.bool(forKey: emptyEmailUpKey) }
         set { userDefaults.set(newValue, forKey: emptyEmailUpKey) }
+    }
+    
+    private let autoSyncSettingsKey = "autoSyncSettingsKey"
+    var autoSyncSettings: [String: Any]? {
+        get { return userDefaults.dictionary(forKey: autoSyncSettingsKey) }
+        set { userDefaults.set(newValue, forKey: autoSyncSettingsKey) }
+    }
+    
+    /// auto sync settings migration from the old app
+    private let autoSyncSettingsMigrationCompletedKey = "autoSyncSettingsMigrationCompletedKey"
+    var autoSyncSettingsMigrationCompleted: Bool {
+        get { return userDefaults.bool(forKey: autoSyncSettingsMigrationCompletedKey) }
+        set { userDefaults.set(newValue, forKey: autoSyncSettingsMigrationCompletedKey) }
     }
 }

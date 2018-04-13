@@ -14,7 +14,6 @@ protocol Factory: SharedFactory {
     func resolve() -> MediaPlayer
     func resolve() -> DropboxManager
     func resolve() -> PasscodeStorage
-    func resolve() -> BiometricsManager
     
     func resolve() -> HomeCardsService
     
@@ -33,11 +32,6 @@ final class FactoryMain: FactoryBase, Factory {
     private static let dropboxManager = DropboxManager()
     func resolve() -> DropboxManager {
         return FactoryMain.dropboxManager
-    }
-    
-    private static let biometricsManager = BiometricsManagerImp()
-    func resolve() -> BiometricsManager {
-        return FactoryMain.biometricsManager
     }
     
     private static let storageVars = UserDefaultsVars()

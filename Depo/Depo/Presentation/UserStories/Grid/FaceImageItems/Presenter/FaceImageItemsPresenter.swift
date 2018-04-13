@@ -75,7 +75,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
         
         dataSource.isHeaderless = true
-        updateNoFilesView()
         updateThreeDotsButton()
     }
     
@@ -118,7 +117,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         outputView()?.showSpiner()
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput, scrollView == dataSource.collectionView {
             view.updateUgglaViewPosition()
         }
