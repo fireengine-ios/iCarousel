@@ -16,16 +16,16 @@ import Foundation
 enum L10n {
     /// Last upload: %@
     static func widgetBottomTitleLastSyncFormat(_ p1: String) -> String {
-        return L10n.tr("Localizable", "widgetBottomTitleLastSyncFormat", p1)
+        return L10n.tr("OurLocalizable", "widgetBottomTitleLastSyncFormat", p1)
     }
     /// never
-    static let widgetBottomTitleNewerSyncronized = L10n.tr("Localizable", "widgetBottomTitleNewerSyncronized")
+    static let widgetBottomTitleNewerSyncronized = L10n.tr("OurLocalizable", "widgetBottomTitleNewerSyncronized")
     /// Photos are up-to-date
-    static let widgetTopTitleFinished = L10n.tr("Localizable", "widgetTopTitleFinished")
+    static let widgetTopTitleFinished = L10n.tr("OurLocalizable", "widgetTopTitleFinished")
     /// Photo synchronization is inactive
-    static let widgetTopTitleInactive = L10n.tr("Localizable", "widgetTopTitleInactive")
+    static let widgetTopTitleInactive = L10n.tr("OurLocalizable", "widgetTopTitleInactive")
     /// Photo synchronization is in progress
-    static let widgetTopTitleInProgress = L10n.tr("Localizable", "widgetTopTitleInProgress")
+    static let widgetTopTitleInProgress = L10n.tr("OurLocalizable", "widgetTopTitleInProgress")
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 
