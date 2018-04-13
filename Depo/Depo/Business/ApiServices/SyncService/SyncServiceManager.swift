@@ -29,7 +29,7 @@ class SyncServiceManager {
     private var settings: AutoSyncSettings?
     
     private var lastAutoSyncTime: TimeInterval = 0
-    private var timeIntervalBetweenSyncs: TimeInterval = NumericConstants.timeIntervalBetweenAutoSync
+    private var timeIntervalBetweenSyncsInBackground: TimeInterval = NumericConstants.timeIntervalBetweenAutoSyncInBackground
     
     
     private var isSyncStoped: Bool {
@@ -102,7 +102,7 @@ class SyncServiceManager {
         log.debug("SyncServiceManager updateInBackground")
 
         let time = NSDate().timeIntervalSince1970
-        if time - lastAutoSyncTime > timeIntervalBetweenSyncs {
+        if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             lastAutoSyncTime = time
             log.debug("Sync should start in background")
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
@@ -156,7 +156,7 @@ class SyncServiceManager {
                 return
             }
             
-            self.timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSync
+            self.timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncInBackground
             
             guard syncSettings.isAutoSyncEnabled else {
                 self.stopSync()
@@ -332,7 +332,7 @@ extension SyncServiceManager: ItemSyncServiceDelegate {
     func didReceiveOutOfSpaceError() {
         stopSync()
         if UIApplication.shared.applicationState == .background {
-            timeIntervalBetweenSyncs = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
+            timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
         }
         showOutOfSpaceAlert()
     }
