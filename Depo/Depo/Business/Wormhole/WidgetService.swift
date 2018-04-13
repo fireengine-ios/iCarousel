@@ -14,14 +14,9 @@ final class WidgetService {
     static let shared = WidgetService()
     
     //Using Wormhole is overkill but it's in the old app and we'll probably need it in a future
-    private (set) lazy var wormhole: MMWormhole = {
-        MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier,
-                          optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
-    }()
+    private(set) lazy var wormhole: MMWormhole = MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier, optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
     
-    private lazy var defaults: UserDefaults? = {
-        UserDefaults(suiteName: SharedConstants.groupIdentifier)
-    }()
+    private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
     
     
     private (set) var totalCount: Int {

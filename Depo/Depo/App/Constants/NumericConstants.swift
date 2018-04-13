@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import CoreGraphics
 
 struct NumericConstants {
-    //verefy phone screen
+    
     static let vereficationCharacterLimit = 6
     static let vereficationTimerLimit = 120//in seconds
     static let maxVereficationAttempts = 3
-    //
+    
     static let maxDetailsLoadingAttempts = 5
     static let detailsLoadingTimeAwait = UInt32(2)
     

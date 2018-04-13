@@ -8,17 +8,20 @@
 
 import UIKit
 
-class PasscodeEnterViewController: ViewController {
+
+
+class PasscodeEnterViewController: ViewController, NibInit {
     
-    @IBOutlet weak var passcodeViewImp: PasscodeViewImp!
-    let authtService = AuthenticationService()
-    let accountService = AccountService()
     static func with(flow: PasscodeFlow, navigationTitle: String) -> PasscodeEnterViewController {
-        let vc = PasscodeEnterViewController(nibName: "PasscodeEnterViewController", bundle: nil)
+        let vc = PasscodeEnterViewController.initFromNib()
         vc.state = flow.startState
         vc.navigationTitle = navigationTitle
         return vc
     }
+    
+    @IBOutlet weak var passcodeViewImp: PasscodeViewImp!
+    
+    let wormholePoster = WormholePoster()
     
     var passcodeManager: PasscodeManager!
     
@@ -29,7 +32,7 @@ class PasscodeEnterViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTitle(withString: navigationTitle)
+        title = navigationTitle
         passcodeManager = PasscodeManagerImp(passcodeView: passcodeViewImp, state: state)
         passcodeManager.delegate = self
     }
@@ -38,26 +41,16 @@ class PasscodeEnterViewController: ViewController {
 // MARK: PasscodeEnterViewInput
 extension PasscodeEnterViewController: PasscodeManagerDelegate {
     func passcodeLockDidFailNumberOfTries(_ lock: PasscodeManager) {
-        authtService.logout { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            DispatchQueue.main.async {
-                CoreDataStack.default.clearDataBase()
-                let router = RouterVC()
-                router.setNavigationController(controller: router.onboardingScreen)
-                self.view.window?.endEditing(true)
-                self.passcodeManager.storage.numberOfTries = self.passcodeManager.maximumInccorectPasscodeAttempts
-            }
-        }
+        view.window?.endEditing(true)
+        passcodeManager.storage.numberOfTries = passcodeManager.maximumInccorectPasscodeAttempts
+        wormholePoster.logout()
     }
     
     func passcodeLockDidSucceed(_ lock: PasscodeManager) {
         lock.view.resignResponder()
         success?()
         if let unwrapedUserFlag = isTurkCellUser, unwrapedUserFlag {
-            accountService.securitySettingsChange(turkcellPasswordAuthEnabled: true, mobileNetworkAuthEnabled: false,
-                                                    success: nil, fail: nil)
+            wormholePoster.offTurkcellPassword()
         }
     }
     

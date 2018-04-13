@@ -13,6 +13,8 @@ let factory: SharedFactory = FactoryBase()
 
 final class ShareConfigurator {
     
+    let passcodeStorage: PasscodeStorage = factory.resolve()
+    
     func setup() {
         let urls: AuthorizationURLs = AuthorizationURLsImp()
         let tokenStorage: TokenStorage = factory.resolve()
@@ -22,5 +24,9 @@ final class ShareConfigurator {
         let sessionManager: SessionManager = factory.resolve()
         sessionManager.retrier = auth
         sessionManager.adapter = auth
+    }
+    
+    var isNeedToShowPasscode: Bool {
+        return !passcodeStorage.isEmpty
     }
 }
