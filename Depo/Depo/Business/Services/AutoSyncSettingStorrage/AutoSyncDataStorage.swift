@@ -8,28 +8,25 @@
 
 import UIKit
 
-class AutoSyncDataStorage: NSObject {
-
-    func getAutoSyncSettingsForCurrentUser(success: @escaping (AutoSyncSettings, _ uniqueUserId: String) -> Void) {
-        SingletonStorage.shared.getAccountInfoForUser(success: { accountInfoResponce in
-            var settings = AutoSyncSettings()
-            
-            let uniqueUserID = accountInfoResponce.projectID ?? ""
-            if let dict = UserDefaults.standard.object(forKey: uniqueUserID) as? [String: Bool] {
-                settings = AutoSyncSettings(with: dict)
-            } else if !settings.isMigrationCompleted {
-                settings.migrate()
-            }
-            
-            success(settings, uniqueUserID)
-        }) { error in
-            success(AutoSyncSettings(), "")
+final class AutoSyncDataStorage {
+    
+    private let storageVars: StorageVars = factory.resolve()
+    
+    var settings: AutoSyncSettings {
+        if let storedSettings = storageVars.autoSyncSettings as? [String: Bool] {
+            return AutoSyncSettings(with: storedSettings)
+        } else if !storageVars.autoSyncSettingsMigrationCompleted {
+            storageVars.autoSyncSettingsMigrationCompleted = true
+            return AutoSyncSettings.createMigrated()
         }
+        
+        return AutoSyncSettings()
     }
     
-    func save(autoSyncSettings: AutoSyncSettings, uniqueUserId: String) {
-        let dict = autoSyncSettings.asDictionary()
-        UserDefaults.standard.set(dict, forKey: uniqueUserId)
+    func save(autoSyncSettings: AutoSyncSettings) {
+        let settingsToStore = autoSyncSettings.asDictionary()
+        storageVars.autoSyncSettings = settingsToStore
+        
         if autoSyncSettings.isAutoSyncEnabled {
             LocationManager.shared.startUpdateLocation()
         } else {
@@ -40,13 +37,8 @@ class AutoSyncDataStorage: NSObject {
         
     }
     
-    static func clear() {
-        SingletonStorage.shared.getUniqueUserID(success: { userId in
-            UserDefaults.standard.removeObject(forKey: userId)
-        }, fail: {
-            ///error should be handled before the callback
-        })
-        
+    func clear() {
+        storageVars.autoSyncSettings = nil
     }
     
 }
