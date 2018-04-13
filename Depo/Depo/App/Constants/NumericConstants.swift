@@ -45,6 +45,7 @@ struct NumericConstants {
     
     static let animationDuration: Double = 0.3
     static let fastAnimationDuration: Double = 0.1
+    static let scrollIndicatorAnimationDuration: TimeInterval = 1.8
     
     static let timeIntervalBetweenAutoSyncInBackground: TimeInterval = 0
     
@@ -79,6 +80,9 @@ struct NumericConstants {
     static let logMaxSize: UInt64 = 10_485_760
     
     static let numberOfLocalItemsOnPage: Int = 100
+    
+    static let limitContactsForBackUp: Int = 5000
+    static let defaultCustomScrollIndicatorOffset: CGFloat = 50
 }
 
 struct RequestSizeConstant {

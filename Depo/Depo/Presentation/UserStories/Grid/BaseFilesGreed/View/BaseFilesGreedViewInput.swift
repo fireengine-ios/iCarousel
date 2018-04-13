@@ -42,5 +42,13 @@ protocol BaseFilesGreedViewInput: class {
     
     func requestStarted()
     
-    func requestStopped() 
+    func requestStopped()
+    
+    //MARK: ScrollIndicator
+    
+    func changeScrollIndicatorTitle(with text: String)
+    
+    func startScrollCollectionView()
+    
+    func endScrollCollectionView()
 }

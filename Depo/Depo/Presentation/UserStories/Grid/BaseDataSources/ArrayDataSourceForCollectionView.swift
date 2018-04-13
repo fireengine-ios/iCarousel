@@ -91,7 +91,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
                     self?.tableDataMArray = newArray
                     self?.collectionView?.deleteItems(at: arrayOfIndexes)
                 }, completion: { [weak self] finished in
-                    self?.delegate?.didDelete?(items: albums)
+                    self?.delegate?.didDelete(items: albums)
                 })
             }
         }
