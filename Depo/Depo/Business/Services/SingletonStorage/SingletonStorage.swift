@@ -18,6 +18,15 @@ class SingletonStorage {
     var referenceToken: String?
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
+    
+    func updateAccountInfo() {
+        AccountService().info(success: { [weak self] accountInfoResponce in
+            if let resp = accountInfoResponce as? AccountInfoResponse {
+                self?.accountInfo = resp
+            }
+            }, fail: { _ in } ) 
+    }
+    
     func getAccountInfoForUser(success:@escaping (AccountInfoResponse) -> Void, fail: @escaping (ErrorResponse?) -> Void ) {
         if let info = accountInfo {
             success(info)
@@ -49,6 +58,11 @@ class SingletonStorage {
     }
     
     func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), fail:@escaping VoidHandler) {
+        if !uniqueUserID.isEmpty {
+            success(uniqueUserID)
+            return
+        }
+        
         getAccountInfoForUser(success: { info in
             success(info.projectID ?? "")
         }) { error in

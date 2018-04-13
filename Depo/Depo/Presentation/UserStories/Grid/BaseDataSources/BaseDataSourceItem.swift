@@ -93,9 +93,15 @@ class BaseDataSourceItem: NSObject {
     }
     
     func setSyncStatusesAsSyncedForCurrentUser() {
-        if !syncStatuses.contains(SingletonStorage.shared.uniqueUserID) {
-            syncStatuses.append(SingletonStorage.shared.uniqueUserID)
-        }
+        SingletonStorage.shared.getUniqueUserID(success: { [weak self] userId in
+            guard let `self` = self else {
+                return
+            }
+            
+            if !self.syncStatuses.contains(userId) {
+                self.syncStatuses.append(userId)
+            }
+        }, fail: {})
     }
     
 }

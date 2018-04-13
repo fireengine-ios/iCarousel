@@ -242,8 +242,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.output?.operationStarted(type: .delete)
             self?.player.remove(listItems: items)
             self?.fileService.delete(deleteFiles: items,
-            success: self?.succesAction(elementType: .delete),
-            fail: self?.failAction(elementType: .delete))
+                                     success: self?.succesAction(elementType: .delete),
+                                     fail: self?.failAction(elementType: .delete))
         }
         
         let controller = PopUpController.with(title: TextConstants.actionSheetDelete,

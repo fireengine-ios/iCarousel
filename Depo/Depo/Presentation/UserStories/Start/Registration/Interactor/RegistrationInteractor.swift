@@ -44,6 +44,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                                    eulaId: 0) /// 0 is server logic
         
         authenticationService.signUp(user: sigUpUser, sucess: { [weak self] result in
+            SingletonStorage.shared.updateAccountInfo()
             DispatchQueue.main.async {
                 guard let t = result as? SignUpSuccessResponse,
                     let userRegistrationInfo = self?.dataStorage.userRegistrationInfo  else {

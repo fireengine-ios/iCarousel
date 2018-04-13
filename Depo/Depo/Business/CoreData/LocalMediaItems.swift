@@ -170,7 +170,7 @@ extension CoreDataStack {
     
     func hasLocalItemsForSync(video: Bool, image: Bool, completion: @escaping  (_ has: Bool) -> Void) {
         getUnsyncsedMediaItems(video: video, image: image, completion: { items in
-            let currentUserID = SingletonStorage.shared.unigueUserID
+            let currentUserID = SingletonStorage.shared.uniqueUserID
             
             let filteredArray = items.filter { !$0.syncStatusesArray.contains(currentUserID) }
             
@@ -182,9 +182,11 @@ extension CoreDataStack {
     func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping (_ items: [WrapData]) -> Void) {
         getUnsyncsedMediaItems(video: video, image: image, completion: { items in
             let sortedItems = items.sorted { $0.fileSizeValue < $1.fileSizeValue }
-            let currentUserID = SingletonStorage.shared.unigueUserID
-            let filtredArray = sortedItems.filter { !$0.syncStatusesArray.contains(currentUserID) }
-            completion(filtredArray.compactMap { $0.wrapedObject })
+            SingletonStorage.shared.getUniqueUserID(success: { userId in
+                let filtredArray = sortedItems.filter { !$0.syncStatusesArray.contains(userId) }
+                completion(filtredArray.compactMap { $0.wrapedObject })
+            }, fail: {})
+            
         })
     }
     
