@@ -675,8 +675,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             log.debug("BaseDataSourceForCollectionViewDelegate reloadData")
             debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
             self.collectionView?.reloadData()
-            self.updateVisibleCells()
+            self.collectionView?.performBatchUpdates({
+                
+            }, completion: { (flag) in
+                self.updateVisibleCells()
+            })
             self.resetCachedAssets()
+            
         }
     }
     
