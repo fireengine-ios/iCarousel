@@ -587,3 +587,9 @@
 "LifeboxSmallPopUpCheckBoxTex" = "Don't show me this message again";
 "LifeboxSmallPopUpFirstButtonText" = "CANCEL";
 "LifeboxSmallPopUpSecondButtonText" = "OK";
+"LifeboxLargePopUpTitle100" = "You have reached your lifebox memory limit.";
+"LifeboxLargePopUpTitle90" = "90% of your storage is full!";
+"LifeboxLargePopUpTitle80" = "80% of your storage is full!";
+"LifeboxLargePopUpSubTitle" = "Let’s have a look at upgrade options!";
+"LifeboxLargePopUpExpandButtonTitle" = "Expand My Storage";
+"LifeboxLargePopUpSkipButtonTitle" = "Skip";

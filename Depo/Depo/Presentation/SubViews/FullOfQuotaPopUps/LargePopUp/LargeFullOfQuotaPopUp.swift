@@ -9,27 +9,131 @@
 import UIKit
 
 class LargeFullOfQuotaPopUp: UIViewController {
+    
+    static func popUp() -> LargeFullOfQuotaPopUp {
+        let controller = LargeFullOfQuotaPopUp(nibName: "LargeFullOfQuotaPopUp", bundle: nil)
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+        return controller
+    }
+    
+    @IBOutlet private weak var shadowView: UIView! {
+        didSet {
+            shadowView.layer.cornerRadius = 5
+            shadowView.layer.shadowColor = UIColor.black.cgColor
+            shadowView.layer.shadowRadius = 10
+            shadowView.layer.shadowOpacity = 0.5
+            shadowView.layer.shadowOffset = .zero
+        }
+    }
+    
+    @IBOutlet private weak var bacgroundViewForImage: UIView! {
+        didSet {
+            
+        }
+    }
+    
+    @IBOutlet private weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.textColor = ColorConstants.whiteColor
+            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 28)
+        }
+    }
+    
+    @IBOutlet private weak var subTitleLabel: UILabel! {
+        didSet {
+            subTitleLabel.textColor = ColorConstants.whiteColor
+            subTitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            subTitleLabel.text = TextConstants.lifeboxLargePopUpSubTitle
+        }
+    }
+    
+    @IBOutlet private weak var expandStorage: UIButton! {
+        didSet {
+            
+        }
+    }
+    
+    @IBOutlet private weak var skip: UIButton! {
+        didSet {
+            
+        }
+    }
+    
+    @IBOutlet private weak var containerView: UIView! {
+        didSet {
+            containerView.layer.masksToBounds = true
+            containerView.layer.cornerRadius = 5
+        }
+    }
+    
+    @IBOutlet private weak var expandButton: BlueButtonWithWhiteText! {
+        didSet {
+            expandButton.setTitle(TextConstants.lifeboxLargePopUpExpandButtonTitle, for: .normal)
+        }
+    }
+    
+    @IBOutlet private weak var skipButton: UIButton! {
+        didSet {
+            skipButton.setTitle(TextConstants.lifeboxLargePopUpSkipButtonTitle, for: .normal)
+            skipButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
+            skipButton.setTitleColor(ColorConstants.grayTabBarButtonsColor, for: .normal)
+        }
+    }
+    
+    // MARK: - Animation
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        open()
+    }
+    
+    private var isShown = false
+    private func open() {
+        if isShown {
+            return
+        }
+        isShown = true
+        shadowView.transform = NumericConstants.scaleTransform
+        containerView.transform = NumericConstants.scaleTransform
+        view.alpha = 0
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.view.alpha = 1
+            self.shadowView.transform = .identity
+            self.containerView.transform = .identity
+        }
+    }
+    
+    func close(completion: VoidHandler? = nil) {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.view.alpha = 0
+            self.shadowView.transform = NumericConstants.scaleTransform
+            self.containerView.transform = NumericConstants.scaleTransform
+        }) { _ in
+            self.dismiss(animated: false, completion: completion)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        let colorTop = ColorConstants.orangeGradientStart
+        let colorBottom = ColorConstants.orangeGradientEnd
+        
+        let gradient = CAGradientLayer()
+        gradient.colors = [colorTop.cgColor, colorBottom.cgColor]
+        gradient.locations = [0.0, 1.0]
+        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.endPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.frame = bacgroundViewForImage.frame
+        bacgroundViewForImage.layer.insertSublayer(gradient, at: 0)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func onSkipButton() {
+        close()
     }
-    */
-
+    
+    @IBAction func onExpandButton() {
+        close()
+    }
+    
 }

@@ -81,9 +81,10 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
             navigationBarWithGradientStyle()
         }
         
-        let view = SmallFullOfQuotaPopUp.popUp()
+        //let view = SmallFullOfQuotaPopUp.popUp()
+        let view = LargeFullOfQuotaPopUp.popUp()
         present(view, animated: true) {
-            
+
         }
     }
     
