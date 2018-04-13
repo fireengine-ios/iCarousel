@@ -20,13 +20,12 @@ class SyncServiceManager {
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
-//        queue.underlyingQueue = dispatchQueue
         return queue
     }()
     
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()
-    private var settings: AutoSyncSettings?
+    private var settings = AutoSyncDataStorage().settings
     
     private var lastAutoSyncTime: TimeInterval = 0
     private var timeIntervalBetweenSyncsInBackground: TimeInterval = NumericConstants.timeIntervalBetweenAutoSyncInBackground
@@ -150,15 +149,9 @@ class SyncServiceManager {
                 return
             }
             
-            guard let syncSettings = self.settings else {
-                let settings = AutoSyncDataStorage().settings
-                self.update(syncSettings: settings)
-                return
-            }
-            
             self.timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncInBackground
             
-            guard syncSettings.isAutoSyncEnabled else {
+            guard self.settings.isAutoSyncEnabled else {
                 self.stopSync()
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
                 MenloworksEventsService.shared.onAutosyncOff()
@@ -177,10 +170,11 @@ class SyncServiceManager {
                 return
             }
             
-            let photoOption = syncSettings.photoSetting.option
-            let videoOption = syncSettings.videoSetting.option
+            let photoOption = self.settings.photoSetting.option
+            let videoOption = self.settings.videoSetting.option
+            let serverIsReachable = (reachability.connection != .none && APIReachabilityService.shared.connection != .unreachable)
             
-            if reachability.connection != .none, APIReachabilityService.shared.connection != .unreachable {
+            if serverIsReachable {
                 let photoEnabled = (reachability.connection == .wifi && photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
                     (reachability.connection == .cellular && photoOption == .wifiAndCellular)
                 
