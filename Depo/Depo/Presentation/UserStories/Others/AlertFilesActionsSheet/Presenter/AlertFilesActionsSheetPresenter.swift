@@ -358,7 +358,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         !$0.isLocalItem
                     })
                     
-                    action = UIAlertAction(title: nil, style: .default, handler: nil)
+                    action = UIAlertAction(title: "", style: .default, handler: nil)
                     CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects, duplicatesCallBack: { [weak self] items in
                         let localDuplicates = items
                         action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
