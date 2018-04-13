@@ -38,12 +38,14 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func turkcellSuccessLogin() {
+        SingletonStorage.shared.updateAccountInfo()
         DispatchQueue.main.async {
             self.output.onSuccessLoginTurkcell()
         }
     }
     
     func successLogin() {
+        SingletonStorage.shared.updateAccountInfo()
         DispatchQueue.main.async {
             self.output.onSuccessLogin()
         }
