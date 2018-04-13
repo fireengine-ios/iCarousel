@@ -6,8 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-import Contacts
-
 enum SyncOperationType {
     case backup
     case restore
@@ -31,6 +29,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     private let contactsSyncService = ContactsSyncService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private let contactService: ContactService = ContactService()
     
     func startOperation(operationType: SyncOperationType) {
         switch operationType {
@@ -54,7 +53,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     func performOperation(forType type: SYNCMode) {
-        guard let contactsCount = getContactsCount() else { return }
+        guard let contactsCount = contactService.getContactsCount() else { return }
         
         if contactsCount < NumericConstants.limitContactsForBackUp {
             contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, type in
@@ -111,18 +110,5 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         contactsSyncService.deleteDuplicates()
     }
     
-    private func getContactsCount() -> Int? {
-        let contactStore = CNContactStore()
-        var contactsCount: Int = 0
-        let contactFetchRequest = CNContactFetchRequest(keysToFetch: [])
-        do {
-            try contactStore.enumerateContacts(with: contactFetchRequest) { (contact, error) in
-                contactsCount += 1
-            }
-        } catch {
-            return nil
-        }
-        
-        return contactsCount
-    }
+    
 }
