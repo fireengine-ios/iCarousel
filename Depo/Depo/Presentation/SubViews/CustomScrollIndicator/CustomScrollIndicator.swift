@@ -13,7 +13,6 @@ final class CustomScrollIndicator: UIView {
     @IBOutlet private weak var sectionView: UIView!
     @IBOutlet private weak var sectionLabel: UILabel!
     @IBOutlet private weak var topOffsetConstraint: NSLayoutConstraint!
-    private var contentView: UIView!
     
     var sectionTitle = "" {
         didSet {
@@ -48,11 +47,10 @@ final class CustomScrollIndicator: UIView {
         if let view = Bundle.main.loadNibNamed("CustomScrollIndicator", owner: self, options: nil)?.first as? UIView {
             view.translatesAutoresizingMaskIntoConstraints = false
             addSubview(view)
-            view.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-            view.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-            view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-            contentView = view
+            view.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+            view.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+            view.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
 
         sectionView.clipsToBounds = true

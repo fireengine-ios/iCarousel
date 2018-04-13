@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseDataSourceForCollectionViewScrollDelegate, BaseFilesGreedModuleOutput {
+class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
 
     lazy var player: MediaPlayer = factory.resolve()
     
@@ -66,7 +66,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                                        filters: interactor.originalFilesTypeFilter)
        
         dataSource.delegate = self
-        dataSource.scrollDelegate = self
         dataSource.needShowProgressInCell = needShowProgressInCells
         dataSource.needShowCustomScrollIndicator = needShowScrollIndicator
         dataSource.parentUUID = interactor.getFolder()?.uuid
@@ -367,18 +366,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func updateCoverPhotoIfNeeded() { }
-        
-    // MARK: - UnderNavBarBar/TopBar
-    
-    private func setupTopBar() {
-        guard let unwrapedConfig = topBarConfig else {
-            return
-        }
-        view.setupUnderNavBarBar(withConfig: unwrapedConfig)
-        sortedRule = unwrapedConfig.defaultSortType.sortedRulesConveted
-    }
-    
-    // MARK: BaseDataSourceForCollectionViewScrollDelegate
     
     func didChangeTopHeader(text: String) {
         if needShowScrollIndicator {
@@ -410,6 +397,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
     }
     
+    // MARK: - UnderNavBarBar/TopBar
+    
+    private func setupTopBar() {
+        guard let unwrapedConfig = topBarConfig else {
+            return
+        }
+        view.setupUnderNavBarBar(withConfig: unwrapedConfig)
+        sortedRule = unwrapedConfig.defaultSortType.sortedRulesConveted
+    }
+ 
     // MARK: Bottom Bar
     
     private func canShow3DotsButton() -> Bool {

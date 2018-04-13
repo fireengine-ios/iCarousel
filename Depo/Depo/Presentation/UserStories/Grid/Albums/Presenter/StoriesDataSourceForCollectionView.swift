@@ -16,7 +16,7 @@ class StoriesDataSourceForCollectionView: ArrayDataSourceForCollectionView {
     }
     
     override func newStoryCreated() {
-        delegate?.needReloadData?()
+        delegate?.needReloadData()
     }
     
 }

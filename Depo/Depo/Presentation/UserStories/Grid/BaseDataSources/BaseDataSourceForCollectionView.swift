@@ -14,7 +14,7 @@ enum BaseDataSourceDisplayingType{
     case list
 }
 
-@objc protocol BaseDataSourceForCollectionViewDelegate: class {
+protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]])
     
@@ -34,28 +34,48 @@ enum BaseDataSourceDisplayingType{
     
     func filesAppendedAndSorted()
     
-    @objc optional func needReloadData()
+    func needReloadData()
     
-    @objc optional func didChangeSelection(state: Bool)
+    func didChangeSelection(state: Bool)
     
-    @objc optional func updateCoverPhotoIfNeeded()
+    func updateCoverPhotoIfNeeded()
     
-    @objc optional func didDelete(items: [BaseDataSourceItem])
+    func didDelete(items: [BaseDataSourceItem])
     
-    @objc optional func onItemSelectedActiveState(item: BaseDataSourceItem)
+    func onItemSelectedActiveState(item: BaseDataSourceItem)
+    
+    func didChangeTopHeader(text: String)
+    
+    func scrollViewDidScroll(scrollView: UIScrollView)
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
 }
 
-@objc protocol BaseDataSourceForCollectionViewScrollDelegate: class {
+extension BaseDataSourceForCollectionViewDelegate {
     
-    @objc optional func didChangeTopHeader(text: String)
+    func needReloadData() { }
     
-    @objc optional func scrollViewDidScroll(scrollView: UIScrollView)
+    func didChangeSelection(state: Bool) { }
     
-    @objc optional func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
+    func updateCoverPhotoIfNeeded() { }
     
-    @objc optional func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
+    func didDelete(items: [BaseDataSourceItem]) { }
     
-    @objc optional func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    func onItemSelectedActiveState(item: BaseDataSourceItem) { }
+    
+    func didChangeTopHeader(text: String) { }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) { }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) { }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) { }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) { }
 }
 
 typealias PageItemsCallBack = ([WrapData])->Void
@@ -70,8 +90,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var displayingType: BaseDataSourceDisplayingType = .greed
     
     weak var delegate: BaseDataSourceForCollectionViewDelegate?
-    
-    weak var scrollDelegate: BaseDataSourceForCollectionViewScrollDelegate?
     
     internal var preferedCellReUseID: String?
     
@@ -614,7 +632,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
         }
         
-        delegate?.didChangeSelection?(state: isSelectionStateActive)
+        delegate?.didChangeSelection(state: isSelectionStateActive)
     }
     
     func getAllObjects() -> [[BaseDataSourceItem]] {
@@ -839,7 +857,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     //MARK: UIScrollViewDelegate
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollDelegate?.scrollViewDidScroll?(scrollView: scrollView)
+        delegate?.scrollViewDidScroll(scrollView: scrollView)
         
         updateCachedAssets()
         
@@ -857,20 +875,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             let headerText = getHeaderText(indexPath: indexPath)
-            scrollDelegate?.didChangeTopHeader?(text: headerText)
+            delegate?.didChangeTopHeader(text: headerText)
         }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        scrollDelegate?.scrollViewWillBeginDragging?(scrollView)
+        delegate?.scrollViewWillBeginDragging(scrollView)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        scrollDelegate?.scrollViewDidEndDecelerating?(scrollView)
+        delegate?.scrollViewDidEndDecelerating(scrollView)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        scrollDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
+        delegate?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
     }
     
     //MARK: collectionViewDataSource
@@ -1036,7 +1054,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
             if  let forwardDelegate = self.delegate {
-                forwardDelegate.onItemSelectedActiveState?(item: unwrapedObject)
+                forwardDelegate.onItemSelectedActiveState(item: unwrapedObject)
             }
         } else {
             if  let forwardDelegate = self.delegate {
@@ -1312,7 +1330,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func addFilesToFavorites(items: [Item]){
         if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }else{
             updateFavoritesCellStatus(items: items, isFavorites: true)
         }
@@ -1414,7 +1432,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         updateCellsForObjects(objectsForDelete: objectsForRemoving, objectsForUpdate: localObjectsForReplace)
         
-        delegate?.didDelete?(items: items)
+        delegate?.didDelete(items: items)
     }
     
     private func updateCellsForObjects(objectsForDelete: [BaseDataSourceItem], objectsForUpdate:[BaseDataSourceItem]) {
@@ -1488,14 +1506,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func newFolderCreated(){
         if let unwrapedFilters = originalFilters,
             canShowFolderFilters(filters: unwrapedFilters) {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }
     }
     
     func newAlbumCreated(){
         if let unwrapedFilters = originalFilters,
             canShowAlbumsFilters(filters: unwrapedFilters) {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }
     }
     
@@ -1528,7 +1546,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             uploadToAlbumItems.remove(at: index)
         }
         if uploadToAlbumItems.isEmpty {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
             updateCoverPhoto()
         }
     }
@@ -1536,7 +1554,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func filesAddedToAlbum() {
         if let unwrapedFilters = originalFilters,
             isAlbumDetail(filters: unwrapedFilters) {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }
         updateCoverPhoto()
     }
@@ -1544,7 +1562,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func filesUploadToFolder() {
         if let unwrapedFilters = originalFilters,
             canUploadFromLifeBox(filters: unwrapedFilters) {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }
         updateCoverPhoto()
     }
@@ -1589,7 +1607,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         if !needShowProgressInCell{
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }
     }
     
@@ -1601,7 +1619,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func updateCoverPhoto() {
-        delegate?.updateCoverPhotoIfNeeded?()
+        delegate?.updateCoverPhotoIfNeeded()
     }
     
 }
