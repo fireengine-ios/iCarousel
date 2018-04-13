@@ -6,7 +6,6 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-import Foundation
 struct DispatchQueueLabels {
     static let baseFilesGreed = "com.lifebox.baseFilesGreed"
     static let baseFilesGreedCollectionDataSource = "com.lifebox.BaseDataSourceForCollectionView"

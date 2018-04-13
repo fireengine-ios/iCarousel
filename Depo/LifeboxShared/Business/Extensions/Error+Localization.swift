@@ -11,9 +11,9 @@ import Foundation
 extension Error {
     var parsedDescription: String {
         if isNetworkError {
-            return L10n.errorInternet
+            return TextConstants.errorConnectedToNetwork
         } else if notAuthorized {
-            return L10n.errorLogin
+            return TextConstants.errorLogin
         }
         return localizedDescription
     }

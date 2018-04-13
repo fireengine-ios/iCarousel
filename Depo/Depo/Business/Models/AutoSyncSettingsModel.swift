@@ -9,8 +9,53 @@
 import Foundation
 
 
-final class AutoSyncSettings {
+struct AutoSyncSetting {
+    var syncItemType: AutoSyncItemType
+    var option: AutoSyncOption
+}
+
+extension AutoSyncSetting: Equatable {
+    static func ==(lhs: AutoSyncSetting, rhs: AutoSyncSetting) -> Bool {
+        return lhs.option == rhs.option && lhs.syncItemType == rhs.syncItemType
+    }
+}
+
+
+enum AutoSyncItemType {
+    case photo
+    case video
     
+    var localizedText: String {
+        switch self {
+        case .photo:
+            return TextConstants.autoSyncCellPhotos
+        case .video:
+            return TextConstants.autoSyncCellVideos
+        }
+    }
+}
+
+
+enum AutoSyncOption {
+    case wifiOnly
+    case wifiAndCellular
+    case never
+    
+    var localizedText: String {
+        switch self {
+        case .never:
+            return TextConstants.autoSyncSettingsOptionNever
+        case .wifiOnly:
+            return TextConstants.autoSyncSettingsOptionWiFi
+        case .wifiAndCellular:
+            return TextConstants.autoSyncSettingsOptionWiFiAndCellular
+        }
+    }
+}
+
+
+final class AutoSyncSettings {
+
     private struct SettingsKeys {
         private init() {}
         
@@ -22,38 +67,14 @@ final class AutoSyncSettings {
     }
     
     
-    private struct MigrationKeys {
-        private init() {}
-        
-        static let settingsUploadPhotosVideos = "SETTINGS_UPLOAD_PHOTOSVIDEOS"
-        static let settingsUploadMediaType = "SETTINGS_UPLOAD_SYNC_MEDIA_TYPE"
-        static let migrationCompletedKey = "SETTINGS_UPLOAD_MIGRATION_COMPLETED"
-    }
-    
-    private enum MigrationEnableOption: Int {
-        case off = 1
-        case on
-        case auto
-    }
-    
-    private enum MigrationSyncMediaType: Int {
-        case all = 1
-        case photos
-        case videos
-        case none
-    }
-    
-    var isMigrationCompleted: Bool {
-        return UserDefaults.standard.bool(forKey: MigrationKeys.migrationCompletedKey)
-    }
-    
     var isAutoSyncEnabled: Bool {
         return isAutoSyncOptionEnabled && (photoSetting.option != .never || videoSetting.option != .never)
     }
     var photoSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiAndCellular)
     var videoSetting = AutoSyncSetting(syncItemType: .video, option: .wifiOnly)
     
-    var isAutoSyncOptionEnabled: Bool = true //auto sync switcher in settings is on/off
+    //auto sync switcher in settings is on/off
+    var isAutoSyncOptionEnabled: Bool = true
     
     
     init() { }
@@ -89,11 +110,73 @@ final class AutoSyncSettings {
         }
     }
     
-    func migrate() {
+    func disableAutoSync() {
+        isAutoSyncOptionEnabled = false
+        photoSetting.option = .wifiAndCellular
+        videoSetting.option = .wifiOnly
+    }
+    
+    func set(setting: AutoSyncSetting) {
+        switch setting.syncItemType {
+        case .photo:
+            set(photoSyncSetting: setting)
+        case .video:
+            set(videoSyncSetting: setting)
+        }
+    }
+    
+    private func set(photoSyncSetting: AutoSyncSetting) {
+        photoSetting = photoSyncSetting
+    }
+    
+    private func set(videoSyncSetting: AutoSyncSetting) {
+        videoSetting = videoSyncSetting
+    }
+    
+    func asDictionary() -> [String: Bool] {
+        return [SettingsKeys.isAutoSyncEnabledKey: isAutoSyncOptionEnabled,
+                SettingsKeys.mobileDataPhotosKey: (photoSetting.option == .wifiAndCellular),
+                SettingsKeys.mobileDataVideoKey: (videoSetting.option == .wifiAndCellular),
+                SettingsKeys.wifiPhotosKey: (photoSetting.option == .wifiOnly),
+                SettingsKeys.wifiVideoKey: (videoSetting.option == .wifiOnly)]
+    }
+}
+
+
+//    MARK: - Migration from the old app
+extension AutoSyncSettings {
+    private struct MigrationKeys {
+        private init() {}
+        
+        static let settingsUploadPhotosVideos = "SETTINGS_UPLOAD_PHOTOSVIDEOS"
+        static let settingsUploadMediaType = "SETTINGS_UPLOAD_SYNC_MEDIA_TYPE"
+    }
+    
+    private enum MigrationEnableOption: Int {
+        case off = 1
+        case on
+        case auto
+    }
+    
+    private enum MigrationSyncMediaType: Int {
+        case all = 1
+        case photos
+        case videos
+        case none
+    }
+    
+    
+    static func createMigrated() -> AutoSyncSettings {
+        let settings = AutoSyncSettings()
+        settings.migrate()
+        
+        return settings
+    }
+    
+    private func migrate() {
         defer {
             UserDefaults.standard.removeObject(forKey: MigrationKeys.settingsUploadPhotosVideos)
             UserDefaults.standard.removeObject(forKey: MigrationKeys.settingsUploadMediaType)
-            UserDefaults.standard.set(true, forKey: MigrationKeys.migrationCompletedKey)
         }
         
         let oldValueAutoSyncState = UserDefaults.standard.integer(forKey: MigrationKeys.settingsUploadPhotosVideos)
@@ -121,83 +204,6 @@ final class AutoSyncSettings {
                 photoSetting.option = .wifiOnly
                 videoSetting.option = .wifiOnly
             }
-        }
-    }
-    
-    func disableAutoSync() {
-        isAutoSyncOptionEnabled = false
-        photoSetting.option = .wifiAndCellular
-        videoSetting.option = .wifiOnly
-    }
-    
-    func set(setting: AutoSyncSetting) {
-        switch setting.syncItemType {
-        case .photo:
-            set(photoSyncSetting: setting)
-        case .video:
-            set(videoSyncSetting: setting)
-        }
-    }
-    
-    private func set(photoSyncSetting: AutoSyncSetting) {
-        photoSetting = photoSyncSetting
-    }
-    
-    private func set(videoSyncSetting: AutoSyncSetting) {
-        videoSetting = videoSyncSetting
-    }
-    
-    
-    func asDictionary() -> [String: Bool] {
-        return [SettingsKeys.isAutoSyncEnabledKey: isAutoSyncOptionEnabled,
-                SettingsKeys.mobileDataPhotosKey: (photoSetting.option == .wifiAndCellular),
-                SettingsKeys.mobileDataVideoKey: (videoSetting.option == .wifiAndCellular),
-                SettingsKeys.wifiPhotosKey: (photoSetting.option == .wifiOnly),
-                SettingsKeys.wifiVideoKey: (videoSetting.option == .wifiOnly)]
-    }
-}
-
-
-struct AutoSyncSetting: Equatable {
-
-    var syncItemType: AutoSyncItemType
-    var option: AutoSyncOption
-    
-    
-    static func ==(lhs: AutoSyncSetting, rhs: AutoSyncSetting) -> Bool {
-        return lhs.option == rhs.option && lhs.syncItemType == rhs.syncItemType
-    }
-}
-
-
-enum AutoSyncItemType {
-    case photo
-    case video
-    
-    func text() -> String {
-        switch self {
-        case .photo:
-            return TextConstants.autoSyncCellPhotos
-        case .video:
-            return TextConstants.autoSyncCellVideos
-        }
-    }
-}
-
-
-enum AutoSyncOption {
-    case wifiOnly
-    case wifiAndCellular
-    case never
-    
-    func text() -> String {
-        switch self {
-        case .never:
-            return TextConstants.autoSyncSettingsOptionNever
-        case .wifiOnly:
-            return TextConstants.autoSyncSettingsOptionWiFi
-        case .wifiAndCellular:
-            return TextConstants.autoSyncSettingsOptionWiFiAndCellular
         }
     }
 }

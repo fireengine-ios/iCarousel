@@ -10,12 +10,11 @@ import UIKit
 
 extension UIImageView {
     func setScreenScaledImage(_ newImage: UIImage?) {
-//        DispatchQueue.global().async {
-//            let resizedImage = newImage?.resizedImage(to: self.bounds.size.screenScaled)
-//            DispatchQueue.main.async {
-//                self.image = resizedImage
-//            }
-//        }
-        image = newImage?.resizedImage(to: bounds.size.screenScaled)
+        DispatchQueue.global().async {
+            let resizedImage = newImage?.resizedImage(to: self.bounds.size.screenScaled)
+            DispatchQueue.main.async {
+                self.image = resizedImage
+            }
+        }
     }
 }

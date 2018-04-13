@@ -20,37 +20,15 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     private lazy var storageVars: StorageVars = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     var fromSettings: Bool = false
     var isFirstTime = true
+    private var onStartUsingButtonTapped = false
     
     let dataSource = AutoSyncDataSource()
 
-    // MARK: Life cycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationItem.hidesBackButton = !fromSettings
-        startButton.isHidden = fromSettings
-        bacgroundImage.isHidden = fromSettings
-        dataSource.isFromSettings = fromSettings
-        
-        if fromSettings {
-            view.backgroundColor = ColorConstants.whiteColor
-            navigationBarWithGradientStyle()
-        } else {
-            view.backgroundColor = UIColor.lrTiffanyBlue
-            hidenNavigationBarStyle()
-            topConstraint.constant = 64
-            view.layoutIfNeeded()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        let settings = dataSource.createAutoSyncSettings()
-        output.save(settings: settings)
-    }
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,18 +54,47 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         
         output.viewIsReady()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = !fromSettings
+        startButton.isHidden = fromSettings
+        bacgroundImage.isHidden = fromSettings
+        dataSource.isFromSettings = fromSettings
+        
+        if fromSettings {
+            view.backgroundColor = ColorConstants.whiteColor
+            navigationBarWithGradientStyle()
+        } else {
+            view.backgroundColor = UIColor.lrTiffanyBlue
+            hidenNavigationBarStyle()
+            topConstraint.constant = 64
+            view.layoutIfNeeded()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if fromSettings {
+            let settings = dataSource.createAutoSyncSettings()
+            output.save(settings: settings)
+        }
+    }
 
     // MARK: buttons actions
     
     @IBAction func onStartUsingButton() {
+        onStartUsingButtonTapped = true
         let settings = dataSource.createAutoSyncSettings()
         
         if !settings.isAutoSyncEnabled {
             MenloworksEventsService.shared.onFirstAutosyncOff()
+            storageVars.autoSyncSet = true
+            output.change(settings: settings)
+        } else {
+            output.checkPermissions()
         }
-        storageVars.autoSyncSet = true
-        
-        output.change(settings: settings)
     }
     
     @IBAction func onSkipButtn() {
@@ -96,7 +103,7 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
             self?.disableAutoSync()
         })
     }
-
+    
     
     // MARK: AutoSyncViewInput
     func setupInitialState() {
@@ -105,19 +112,19 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
     func prepaire(syncSettings: AutoSyncSettings) {
         dataSource.showCells(from: syncSettings)
     }
-    
-    func reloadTableView() {
-        dataSource.reloadTableView()
-    }
-    
+        
     func disableAutoSync() {
         dataSource.forceDisableAutoSync()
+        if !fromSettings {
+            let settings = dataSource.createAutoSyncSettings()
+            output.save(settings: settings)
+        }
     }
     
     // MARK: AutoSyncDataSourceDelegate
     
     func enableAutoSync() {
-        output.enableAutoSync()
+        output.checkPermissions()
     }
     
     func mobileDataEnabledFor(model: AutoSyncModel) {
@@ -139,4 +146,35 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         }
     }
     
+    func checkPermissionsSuccessed() {
+        if onStartUsingButtonTapped {
+            onStartUsingButtonTapped = false
+            let settings = dataSource.createAutoSyncSettings()
+            storageVars.autoSyncSet = true
+            output.change(settings: settings)
+        } else {
+            analyticsService.track(event: .turnOnAutosync)
+            dataSource.reloadTableView()
+        }
+    }
+    
+    func checkPermissionsFailedWith(error: String) {
+        showAccessAlert(message: error)
+    }
+    
+    private func showAccessAlert(message: String) {
+        log.debug("AutoSyncViewController showAccessAlert")
+        
+        let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
+                                              message: message,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.cameraAccessAlertNo,
+                                              secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
+                                              secondAction: { vc in
+                                                vc.close {
+                                                    UIApplication.shared.openSettings()
+                                                }
+        })
+        present(controller, animated: true, completion: nil)
+    }
 }

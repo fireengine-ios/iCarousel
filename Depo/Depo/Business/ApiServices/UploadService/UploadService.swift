@@ -642,16 +642,11 @@ extension UploadService {
     }
     
     fileprivate func logSyncSettings(state: String) {
-        autoSyncStorage.getAutoSyncSettingsForCurrentUser { [weak self] settings, userId in
-            guard let `self` = self else {
-                return
-            }
-            
-            var logString = "Auto Sync Settings: PHOTOS: \(settings.photoSetting.option.text()) + VIDEOS: \(settings.videoSetting.option.text())"
-            logString += "; DEVICE NETWORK: \(self.reachabilityService.status)"
-            logString += " --> \(state)"
-            log.debug(logString)
-        }
+        let settings = autoSyncStorage.settings
+        var logString = "Auto Sync Settings: PHOTOS: \(settings.photoSetting.option.localizedText) + VIDEOS: \(settings.videoSetting.option.localizedText)"
+        logString += "; DEVICE NETWORK: \(reachabilityService.status)"
+        logString += " --> \(state)"
+        log.debug(logString)
     }
     
     @objc fileprivate func updateSyncSettings() {

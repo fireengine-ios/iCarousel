@@ -14,7 +14,7 @@ enum BaseDataSourceDisplayingType{
     case list
 }
 
-@objc protocol BaseDataSourceForCollectionViewDelegate: class {
+protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]])
     
@@ -34,18 +34,48 @@ enum BaseDataSourceDisplayingType{
     
     func filesAppendedAndSorted()
     
-    @objc optional func needReloadData()
+    func needReloadData()
     
-    @objc optional func scrollViewDidScroll(scrollView: UIScrollView)
+    func didChangeSelection(state: Bool)
     
-    @objc optional func didChangeSelection(state: Bool)
+    func updateCoverPhotoIfNeeded()
     
-    @objc optional func updateCoverPhotoIfNeeded()
+    func didDelete(items: [BaseDataSourceItem])
     
-    @objc optional func didDelete(items: [BaseDataSourceItem])
+    func onItemSelectedActiveState(item: BaseDataSourceItem)
     
-    @objc optional func onItemSelectedActiveState(item: BaseDataSourceItem)
+    func didChangeTopHeader(text: String)
+    
+    func scrollViewDidScroll(scrollView: UIScrollView)
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+}
 
+extension BaseDataSourceForCollectionViewDelegate {
+    
+    func needReloadData() { }
+    
+    func didChangeSelection(state: Bool) { }
+    
+    func updateCoverPhotoIfNeeded() { }
+    
+    func didDelete(items: [BaseDataSourceItem]) { }
+    
+    func onItemSelectedActiveState(item: BaseDataSourceItem) { }
+    
+    func didChangeTopHeader(text: String) { }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) { }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) { }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) { }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) { }
 }
 
 typealias PageItemsCallBack = ([WrapData])->Void
@@ -98,6 +128,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var needShowProgressInCell: Bool = false
     var needShowCloudIcon: Bool = true
     var needShow3DotsInCell: Bool = true
+    var needShowCustomScrollIndicator = false
     
     var parentUUID: String?
     
@@ -110,6 +141,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private let pageCompounder = PageCompounder()
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
+    
+    private var currentTopSection: Int?
     
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
@@ -246,23 +279,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             guard let `self` = self else {
                                 return
                             }
-                            
                             self.pageLeftOvers.removeAll()
                             self.pageLeftOvers.append(contentsOf: lefovers)
-                            
-                            //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
                             self.allMediaItems.append(contentsOf: compoundedItems)
-                            
-                            //                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
-                            //                                self.delegate?.getNextItems()
-                            //                                return
-                            //                            }
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
                             
                     })
                 } else if self.isPaginationDidEnd {
-                    //check lefovers here
                     let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
                     var itemsToCompound = isEmptyLeftOvers ? pageItems : self.transformedLeftOvers()
                     var needToDropFirstItem = false
@@ -289,7 +313,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             
-                            if compoundedItems.count < self.pageCompounder.pageSize, self.isPaginationDidEnd {
+                            if compoundedItems.isEmpty,
+                                self.isPaginationDidEnd {
                                 self.isLocalPaginationOn = false
                             }
                             
@@ -505,8 +530,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         allRemoteItems.removeAll()
         allItems.removeAll()
+        pageLeftOvers.removeAll()
         allMediaItems.removeAll()
         pageCompounder.dropData()
+        isLocalFilesRequested = false
     }
     
     func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil){
@@ -599,7 +626,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
         }
         
-        delegate?.didChangeSelection?(state: isSelectionStateActive)
+        delegate?.didChangeSelection(state: isSelectionStateActive)
     }
     
     func getAllObjects() -> [[BaseDataSourceItem]] {
@@ -817,14 +844,45 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         delegate?.onMoreActions(ofItem: itemModel, sender: sender)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delegate?.scrollViewDidScroll?(scrollView: scrollView)
-        
-        updateCachedAssets()
-    }
-    
     func isInSelectionMode() -> Bool {
         return isSelectionStateActive
+    }
+    
+    //MARK: UIScrollViewDelegate
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.scrollViewDidScroll(scrollView: scrollView)
+        
+        updateCachedAssets()
+        
+        if needShowCustomScrollIndicator {
+            let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+                return first < second
+            })
+            
+            guard let indexPath = firstVisibleIndexPath else {
+                return
+            }
+            
+            if let currentTopSection = currentTopSection, currentTopSection == indexPath.section {
+                return
+            }
+            
+            let headerText = getHeaderText(indexPath: indexPath)
+            delegate?.didChangeTopHeader(text: headerText)
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.scrollViewWillBeginDragging(scrollView)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        delegate?.scrollViewDidEndDecelerating(scrollView)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        delegate?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
     }
     
     //MARK: collectionViewDataSource
@@ -944,7 +1002,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             debugPrint("BaseDataSourceForCollectionViewDelegate isLastCell, isLastSection, !isPaginationDidEnd ")
         } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
             compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] in
-                debugPrint("isLocalPaginationOn \(self?.isLocalPaginationOn)")
                 DispatchQueue.main.async {
                     self?.collectionView?.reloadData()
                     self?.delegate?.filesAppendedAndSorted()
@@ -990,7 +1047,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
             if  let forwardDelegate = self.delegate {
-                forwardDelegate.onItemSelectedActiveState?(item: unwrapedObject)
+                forwardDelegate.onItemSelectedActiveState(item: unwrapedObject)
             }
         } else {
             if  let forwardDelegate = self.delegate {
@@ -1266,7 +1323,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func addFilesToFavorites(items: [Item]){
         if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }else{
             updateFavoritesCellStatus(items: items, isFavorites: true)
         }
@@ -1368,7 +1425,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         updateCellsForObjects(objectsForDelete: objectsForRemoving, objectsForUpdate: localObjectsForReplace)
         
-        delegate?.didDelete?(items: items)
+        delegate?.didDelete(items: items)
     }
     
     private func updateCellsForObjects(objectsForDelete: [BaseDataSourceItem], objectsForUpdate:[BaseDataSourceItem]) {
@@ -1442,14 +1499,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func newFolderCreated(){
         if let unwrapedFilters = originalFilters,
             canShowFolderFilters(filters: unwrapedFilters) {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }
     }
     
     func newAlbumCreated(){
         if let unwrapedFilters = originalFilters,
             canShowAlbumsFilters(filters: unwrapedFilters) {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }
     }
     
@@ -1482,7 +1539,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             uploadToAlbumItems.remove(at: index)
         }
         if uploadToAlbumItems.isEmpty {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
             updateCoverPhoto()
         }
     }
@@ -1490,7 +1547,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func filesAddedToAlbum() {
         if let unwrapedFilters = originalFilters,
             isAlbumDetail(filters: unwrapedFilters) {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }
         updateCoverPhoto()
     }
@@ -1498,7 +1555,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func filesUploadToFolder() {
         if let unwrapedFilters = originalFilters,
             canUploadFromLifeBox(filters: unwrapedFilters) {
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }
         updateCoverPhoto()
     }
@@ -1543,7 +1600,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         if !needShowProgressInCell{
-            delegate?.needReloadData?()
+            delegate?.needReloadData()
         }
     }
     
@@ -1555,7 +1612,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func updateCoverPhoto() {
-        delegate?.updateCoverPhotoIfNeeded?()
+        delegate?.updateCoverPhotoIfNeeded()
     }
     
 }

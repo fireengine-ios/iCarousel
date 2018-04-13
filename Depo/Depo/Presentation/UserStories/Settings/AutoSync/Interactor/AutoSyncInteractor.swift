@@ -9,27 +9,34 @@
 class AutoSyncInteractor: AutoSyncInteractorInput {
 
     weak var output: AutoSyncInteractorOutput!
-    var dataStorage = AutoSyncDataStorage()
-    var uniqueUserID: String? = ""
-    let localMediaStorage = LocalMediaStorage.default
+
+    private var dataStorage = AutoSyncDataStorage()
+    private let localMediaStorage = LocalMediaStorage.default
+    private lazy var locationManager = LocationManager.shared
 
     func prepareCellModels() {
-        dataStorage.getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, uniqueUserId in
-            self?.output.prepaire(syncSettings: settings)
-            self?.uniqueUserID = uniqueUserId
-        })
+        let settings = dataStorage.settings
+        output.prepaire(syncSettings: settings)
     }
     
     func onSave(settings: AutoSyncSettings) {
         output.onSettingSaved()
-        
-        dataStorage.save(autoSyncSettings: settings, uniqueUserId: uniqueUserID ?? "")
+        dataStorage.save(autoSyncSettings: settings)
         SyncServiceManager.shared.update(syncSettings: settings)
     }
     
-    func checkPermissionForPhoto() {
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
-            self?.output.onCheckPermissionForPhoto(accessGranted: accessGranted)
+    func checkPermissions() {
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] photoAccessGranted, _ in
+            guard photoAccessGranted else {
+                self?.output.onCheckPermissions(photoAccessGranted: photoAccessGranted, locationAccessGranted: false)
+                return
+            }
+
+            self?.locationManager.authorizationStatus { [weak self] status in
+                let locationAccessGranted = (status == .authorizedAlways)
+                
+                self?.output.onCheckPermissions(photoAccessGranted: photoAccessGranted, locationAccessGranted: locationAccessGranted)
+            }
         }
     }
 }
