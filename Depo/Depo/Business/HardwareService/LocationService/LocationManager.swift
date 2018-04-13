@@ -11,11 +11,15 @@ import CoreLocation
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
+    typealias RequestAuthorizationStatusHandler = (_ status: CLAuthorizationStatus) -> Void
+    
     private let locationManager = CLLocationManager()
     
     static let shared = LocationManager()
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    
+    private var requestAuthorizationStatusHandler: RequestAuthorizationStatusHandler?
     
     private override init() {
         super.init()
@@ -28,6 +32,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.distanceFilter = 100 //kCLDistanceFilterNone - any changes
         locationManager.pausesLocationUpdatesAutomatically = false
         
+    }
+    
+    func authorizationStatus(_ completion: @escaping (_ status: CLAuthorizationStatus) -> Void) {
+        let currentStatus = CLLocationManager.authorizationStatus()
+        if currentStatus == .notDetermined {
+            requestAuthorizationStatusHandler = completion
+            locationManager.requestAlwaysAuthorization()
+        } else {
+            completion(currentStatus)
+        }
     }
     
     func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping VoidHandler) {
@@ -99,11 +113,15 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         passcodeStorage.systemCallOnScreen = false
         
         var isAuthorized = false
-        if ((status == .authorizedAlways) || (status == .authorizedWhenInUse) || (status == .authorizedAlways)) {
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
             isAuthorized = true
             startUpdateLocation()
         }
         MenloworksTagsService.shared.onLocationPermissionChanged(isAuthorized)
+        
+        if status != .notDetermined, let handler = requestAuthorizationStatusHandler {
+            handler(status)
+        }
     }
     
 }
