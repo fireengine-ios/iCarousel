@@ -7689,7 +7689,6 @@
 				C65DCBDA204683820083A965 /* MenloworksEventsService */,
 				78E3D516203FF9A000FA3478 /* MenloworksTagsService */,
 				7C529686203EFE3A00BF3FBE /* SyncedBlock */,
-				B54BFF45202B43CE0018AF82 /* WidgetService */,
 				782E40B11FE7D05F007F7838 /* RecentSearchesService */,
 				7CC11AA91FE1360B00AF022D /* PopUpService */,
 				7CB2E30C1FB9CB26009CF813 /* FreeAppSpace */,
@@ -9583,13 +9582,6 @@
 				B5513AF8205BAED70016C344 /* L10n.swift */,
 			);
 			path = "autosync-widget";
-			sourceTree = "<group>";
-		};
-		B54BFF45202B43CE0018AF82 /* WidgetService */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WidgetService;
 			sourceTree = "<group>";
 		};
 		B54BFF4A202C734C0018AF82 /* Shared */ = {
