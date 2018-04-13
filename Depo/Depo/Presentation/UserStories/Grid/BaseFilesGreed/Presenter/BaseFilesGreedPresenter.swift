@@ -594,28 +594,33 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: editIndex)
             }
             
-            if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                let serverObjects = selectedItems.filter({ !$0.isLocalItem })
-                if serverObjects.isEmpty {
-                    actionTypes.remove(at: deleteOriginalIndex)
-                } else if selectedItems is [Item] {
-                    CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
-                        if items.count == 0 {
-                            //selectedItems = localDuplicates
-                            actionTypes.remove(at: deleteOriginalIndex)
-                        }
-                        self?.semaphore.signal()
-                    })
-                    semaphore.wait()
+            DispatchQueue.global().async {[weak self] in
+                if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
+                    let serverObjects = selectedItems.filter({ !$0.isLocalItem })
+                    if serverObjects.isEmpty {
+                        actionTypes.remove(at: deleteOriginalIndex)
+                    } else if selectedItems is [Item] {
+                        CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
+                            if items.count == 0 {
+                                //selectedItems = localDuplicates
+                                actionTypes.remove(at: deleteOriginalIndex)
+                            }
+                            self?.semaphore.signal()
+                        })
+                        self?.semaphore.wait()
+                    }
+                    
                 }
                 
+                if let `self` = self {
+                    self.alertSheetModule?.showAlertSheet(with: actionTypes,
+                                                     items: selectedItems,
+                                                     presentedBy: sender,
+                                                     onSourceView: nil,
+                                                     excludeTypes: self.alertSheetExcludeTypes)
+                }
             }
             
-            alertSheetModule?.showAlertSheet(with: actionTypes,
-                                             items: selectedItems,
-                                             presentedBy: sender,
-                                             onSourceView: nil,
-                                             excludeTypes: alertSheetExcludeTypes)
         } else {
             actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             

@@ -39,9 +39,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         presentedBy sender: Any?,
                         onSourceView sourceView: UIView?,
                         excludeTypes: [ElementTypes]) {
+        constractSpecifiedActions(with: types, for: items) {[weak self] (actions) in
+            DispatchQueue.main.async { [weak self] in
+                self?.presentAlertSheet(with: actions, presentedBy: sender)
+            }
+        }
         
-        let actions = constractSpecifiedActions(with: types, for: items, excludeTypes: excludeTypes)
-        presentAlertSheet(with: actions, presentedBy: sender)
     }
     
     func showSpecifiedAlertSheet(with item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController? = nil) {
@@ -136,40 +139,44 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     
     private func constractSpecifiedActions(with types: [ElementTypes],
                                            for items: [BaseDataSourceItem]?,
-                                           excludeTypes: [ElementTypes] = [ElementTypes]()) -> [UIAlertAction] {
-        var filteredActionTypes = types
-        
-        if let remoteItems = items?.filter({ !$0.isLocalItem }) as? [Item], remoteItems.count > 0 {
-            if remoteItems.contains(where: { !$0.favorites }) {
-                filteredActionTypes.append(.addToFavorites)
-            } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
-                filteredActionTypes.remove(at: addToFavoritesIndex)
-            }
+                                           excludeTypes: [ElementTypes] = [ElementTypes](),
+                                           succes: @escaping (_ actions: [UIAlertAction]) -> Void) {
+        DispatchQueue.global().async { [weak self] in
+            var filteredActionTypes = types
             
-            if remoteItems.contains(where: { $0.favorites }) {
-                filteredActionTypes.append(.removeFromFavorites)
-            } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
-                filteredActionTypes.remove(at: removeFromFavorites)
-            }
-            
-            CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
-                let localDuplicates = items
-                if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
-                    filteredActionTypes.remove(at: index)
+            if let remoteItems = items?.filter({ !$0.isLocalItem }) as? [Item], remoteItems.count > 0 {
+                if remoteItems.contains(where: { !$0.favorites }) {
+                    filteredActionTypes.append(.addToFavorites)
+                } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
+                    filteredActionTypes.remove(at: addToFavoritesIndex)
                 }
-                self?.semaphore.signal()
-            })
-            semaphore.wait()
+                
+                if remoteItems.contains(where: { $0.favorites }) {
+                    filteredActionTypes.append(.removeFromFavorites)
+                } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
+                    filteredActionTypes.remove(at: removeFromFavorites)
+                }
+                
+                CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
+                    let localDuplicates = items
+                    if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
+                        filteredActionTypes.remove(at: index)
+                    }
+                    self?.semaphore.signal()
+                })
+                self?.semaphore.wait()
+                
+            } else {
+                if let printIndex = filteredActionTypes.index(of: .print) {
+                    filteredActionTypes.remove(at: printIndex)
+                }
+            }
             
-        } else {
-            if let printIndex = filteredActionTypes.index(of: .print) {
-                filteredActionTypes.remove(at: printIndex)
+            filteredActionTypes = filteredActionTypes.filter({ !excludeTypes.contains($0) })
+            if let `self` = self {
+                succes(self.constractActions(with: filteredActionTypes, for: items))
             }
         }
-        
-        filteredActionTypes = filteredActionTypes.filter({ !excludeTypes.contains($0) })
-        
-        return constractActions(with: filteredActionTypes, for: items)
     }
     
     private func constractActions(with types: [ElementTypes],
@@ -358,7 +365,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         !$0.isLocalItem
                     })
                     
-                    action = UIAlertAction(title: nil, style: .default, handler: nil)
+                    action = UIAlertAction(title: "", style: .default, handler: nil)
                     CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects, duplicatesCallBack: { [weak self] items in
                         let localDuplicates = items
                         action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
@@ -400,7 +407,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     }
     
     private func presentAlertSheet(with actions: [UIAlertAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil, viewController: UIViewController? = nil) {
-        
         let vc: UIViewController
         
         if let unwrapedVC = viewController {
