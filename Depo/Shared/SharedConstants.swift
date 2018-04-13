@@ -34,4 +34,7 @@ struct SharedConstants {
     static let totalAutoSyncCountKey = "totalAutoSyncCount"
     static let lastSyncDateKey = "lastSyncDate"
     static let syncStatusKey = "syncStatus"
+    
+    static let wormholeLogout = "wormholeLogout"
+    static let wormholeOffTurkcellPassword = "wormholeOffTurkcellPassword"
 }

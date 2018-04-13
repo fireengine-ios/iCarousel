@@ -28,7 +28,7 @@ final class AutoSyncSettingsOptionView: UIView {
     
     
     private var option: AutoSyncOption = .wifiOnly {
-        willSet { button.setTitle(newValue.text(), for: .normal) }
+        willSet { button.setTitle(newValue.localizedText, for: .normal) }
     }
     
     private var isSelected: Bool = false {
