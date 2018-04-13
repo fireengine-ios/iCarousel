@@ -82,7 +82,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         }
         
         //let view = SmallFullOfQuotaPopUp.popUp()
-        let view = LargeFullOfQuotaPopUp.popUp()
+        let view = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType90)
         present(view, animated: true) {
 
         }

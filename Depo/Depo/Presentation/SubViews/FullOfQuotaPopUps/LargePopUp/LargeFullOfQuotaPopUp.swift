@@ -8,13 +8,33 @@
 
 import UIKit
 
+enum LargeFullOfQuotaPopUpType{
+    case LargeFullOfQuotaPopUpType80
+    case LargeFullOfQuotaPopUpType90
+    case LargeFullOfQuotaPopUpType100
+}
+
 class LargeFullOfQuotaPopUp: UIViewController {
     
-    static func popUp() -> LargeFullOfQuotaPopUp {
+    static func popUp(type: LargeFullOfQuotaPopUpType) -> LargeFullOfQuotaPopUp {
         let controller = LargeFullOfQuotaPopUp(nibName: "LargeFullOfQuotaPopUp", bundle: nil)
         controller.modalTransitionStyle = .crossDissolve
         controller.modalPresentationStyle = .overFullScreen
+        controller.viewType = type
         return controller
+    }
+    
+    var viewType: LargeFullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
+    
+    private static func textForTitle(type: LargeFullOfQuotaPopUpType) -> String {
+        switch type {
+        case .LargeFullOfQuotaPopUpType80:
+            return TextConstants.lifeboxLargePopUpTitle80
+        case .LargeFullOfQuotaPopUpType90:
+            return TextConstants.lifeboxLargePopUpTitle90
+        case .LargeFullOfQuotaPopUpType100:
+            return TextConstants.lifeboxLargePopUpTitle100
+        }
     }
     
     @IBOutlet private weak var shadowView: UIView! {
@@ -86,6 +106,7 @@ class LargeFullOfQuotaPopUp: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         open()
+        titleLabel.text = LargeFullOfQuotaPopUp.textForTitle(type: viewType)
     }
     
     private var isShown = false
