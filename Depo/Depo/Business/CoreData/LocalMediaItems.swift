@@ -28,11 +28,12 @@ extension CoreDataStack {
     
     func append(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
 //        let newBgcontext = backgroundContext//self.newChildBackgroundContext
-        save(items: localMediaItems, context: backgroundContext, completion: {})
+        save(items: localMediaItems, context: backgroundContext, completion: completion)
     }
     
     func remove(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
         removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier })
+        completion()
     }
 
     func insertFromGallery(completion: VoidHandler?) {
@@ -106,11 +107,13 @@ extension CoreDataStack {
                         debugPrint("LOCAL_ITEMS: Saved to Context")
                         log.debug("LocalMediaItem saveDataForContext(")
                         self?.pageAppendedCallBack?(addedObjects)
+                        
+                        ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
+                        print("LOCAL_ITEMS: page has been added in \(Date().timeIntervalSince(start)) secs")
+                        self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
                     })
                     
-                    ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
-                    print("LOCAL_ITEMS: page has been added in \(Date().timeIntervalSince(start)) secs")
-                    self?.save(items: Array(items.dropFirst(nextItemsToSave.count)), context: context, completion: completion)
+
                 }
             })
         }

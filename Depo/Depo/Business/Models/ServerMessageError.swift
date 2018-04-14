@@ -23,6 +23,10 @@ final class ServerMessageError {
 }
 extension ServerMessageError: LocalizedError {
     var errorDescription: String? {
+        if code == 500 {
+            return TextConstants.errorServer
+        }
+        
         switch message {
         case ErrorKeys.accountNotFoundForEmail:
             return TextConstants.forgotPasswordErrorNotRegisteredText

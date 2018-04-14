@@ -364,11 +364,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func cancellAllRequests() {
-        SessionManager.default.session.getTasksWithCompletionHandler { dataTasks, uploadTasks, downloadTasks in
-            dataTasks.forEach { $0.cancel() }
-            uploadTasks.forEach { $0.cancel() }
-            downloadTasks.forEach { $0.cancel() }
-        }
+        SessionManager.default.cancellAllRequests()
     }
     
     func signUp(user: SignUpUser, sucess: SuccessResponse?, fail: FailResponse?) {
