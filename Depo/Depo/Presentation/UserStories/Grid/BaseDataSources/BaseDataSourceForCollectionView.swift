@@ -1252,13 +1252,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        if !needShowProgressInCell{
-            //delegate?.needReloadData?()
+        
+        guard needShowProgressInCell else {
             return
         }
-        
-        if localFinishedItemUUID != nil, let cell = getCellForFile(objectUUID: file.uuid) {
-            cell.finishedUploadForObject()
+
+        DispatchQueue.main.async {
+            if localFinishedItemUUID != nil, let cell = self.getCellForFile(objectUUID: file.uuid) {
+                cell.finishedUploadForObject()
+            }
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
