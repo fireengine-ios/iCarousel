@@ -69,13 +69,13 @@ class Upload: UploadRequestParametrs {
 
         self.isFavorite = isFavorite
 
-        if item.isLocalItem, !item.syncStatus.isContained(in: [.synced]), !item.uuid.isEmpty {
-            self.tmpUUId = item.uuid
+        if item.isLocalItem {
+            let localID = item.asset?.localIdentifier ?? ""
+            self.tmpUUId = "\(localID)~\(UUID().uuidString)"
         } else {
-            var newUUID = item.uuid
-            if !newUUID.contains("~") { newUUID.append("~\(UUID().uuidString)") } // compound uuid
-            self.tmpUUId = newUUID
+            self.tmpUUId = UUID().uuidString
         }
+
     }
     
     var requestParametrs: Any {
