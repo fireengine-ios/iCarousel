@@ -12,7 +12,7 @@ class PopUpService {
     static let shared = PopUpService()
     
     private var getKeyForLoginCountForUser: String {
-        return "loginCountForUser" + SingletonStorage.shared.unigueUserID
+        return "loginCountForUser" + SingletonStorage.shared.uniqueUserID
     }
     
     func resetLoginCountForUploadOffPopUp() {

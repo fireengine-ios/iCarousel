@@ -277,7 +277,9 @@ class AuthenticationService: BaseRequestService {
                             fail?(ErrorResponse.error(error))
                             return
                         }
-
+                        
+                        SingletonStorage.shared.updateAccountInfo()
+                        
                         sucess?(headers)
                         MenloworksAppEvents.onLogin()
                         
@@ -316,6 +318,7 @@ class AuthenticationService: BaseRequestService {
                 let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
+                SingletonStorage.shared.updateAccountInfo()
                 sucess?()
                 
             } else {
