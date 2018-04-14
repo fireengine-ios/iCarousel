@@ -57,6 +57,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
 
 extension BaseDataSourceForCollectionViewDelegate {
     
+    func onLongPressInCell() { }
+    
     func needReloadData() { }
     
     func didChangeSelection(state: Bool) { }

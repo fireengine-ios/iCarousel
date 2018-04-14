@@ -33,8 +33,6 @@ final class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter {
     
     override func selectModeSelected() { }
     
-    override func onLongPressInCell() { }
-    
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
 }
 

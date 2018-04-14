@@ -772,7 +772,11 @@ final class UploadOperations: Operation {
                             }
                             
                             if let localURL = uploadParam.urlToLocalFile {
-                                try? FileManager.default.removeItem(at: localURL)
+                                do {
+                                    try FileManager.default.removeItem(at: localURL)
+                                } catch {
+                                    print(error.description)
+                                }
                             }
                             
                             if let response = baseurlResponse as? SearchItemResponse {
