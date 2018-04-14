@@ -169,11 +169,11 @@ class ItemOperationManager: NSObject {
     
     
     func finishedUploadFile(file: WrapData) {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             for view in self.views {
                 view.finishedUploadFile(file: file)
             }
-        }
+//        }
         
         MenloworksAppEvents.onFileUploadedWithType(file.fileType)
         
