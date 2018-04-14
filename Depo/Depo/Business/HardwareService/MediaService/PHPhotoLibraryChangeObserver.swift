@@ -22,26 +22,46 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         
         guard fetchResult != nil, let changes = changeInstance.changeDetails(for: fetchResult)
             else { return }
-//        DispatchQueue.main.async {
-            self.fetchResult = changes.fetchResultAfterChanges
-            if changes.hasIncrementalChanges, changes.insertedIndexes != nil || changes.removedIndexes != nil {
-                let previosFetch = changes.fetchResultBeforeChanges
-                var phChanges = [PhotoLibraryChangeType: [PHAsset]]()
-                
-                if let addedIndexes = changes.insertedIndexes {
-                    phChanges[.added] = self.fetchResult.objects(at: addedIndexes)
-                }
-                
-                if let removedIndexes = changes.removedIndexes {
-                    phChanges[.removed] = previosFetch.objects(at: removedIndexes)
-                }
-                
-                CoreDataStack.default.appendLocalMediaItems(completion: {
-                    UploadService.default.cancelOperations(with: phChanges[.removed])
-                    NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
-                })
+        self.fetchResult = changes.fetchResultAfterChanges
+        if changes.hasIncrementalChanges, changes.insertedIndexes != nil || changes.removedIndexes != nil {
+            let previosFetch = changes.fetchResultBeforeChanges
+            var phChanges = [PhotoLibraryChangeType: [PHAsset]]()
+            
+            
+            
+            func notify() {
+                NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
             }
-//        }
+            
+            func checkDeleteIndexes() {
+                if let removedIndexes = changes.removedIndexes {
+                    let removedAssets = previosFetch.objects(at: removedIndexes)
+                    phChanges[.removed] = removedAssets
+                    
+                    LocalMediaStorage.default.assetsCache.remove(list: removedAssets)
+                    UploadService.default.cancelOperations(with: removedAssets)
+                    
+                    CoreDataStack.default.remove(localMediaItems: removedAssets) { 
+                        notify()
+                    }
+                } else {
+                    notify()
+                }
+            }
+            
+            if let addedIndexes = changes.insertedIndexes {
+                let newAssets = self.fetchResult.objects(at: addedIndexes)
+                phChanges[.added] = newAssets
+                LocalMediaStorage.default.assetsCache.append(list: newAssets)
+                
+                CoreDataStack.default.append(localMediaItems: newAssets) {
+                    checkDeleteIndexes()
+                }
+            } else {
+                checkDeleteIndexes()
+            }
 
+        }
     }
+    
 }
