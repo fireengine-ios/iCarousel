@@ -28,7 +28,7 @@ extension CoreDataStack {
     
     func append(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
 //        let newBgcontext = backgroundContext//self.newChildBackgroundContext
-        save(items: localMediaItems, context: backgroundContext, completion: {})
+        save(items: localMediaItems, context: backgroundContext, completion: completion)
     }
     
     func remove(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
