@@ -764,7 +764,11 @@ final class UploadOperations: Operation {
                     
                     self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
                         if let localURL = uploadParam.urlToLocalFile {
-                            try? FileManager.default.removeItem(at: localURL)
+                            do {
+                                try FileManager.default.removeItem(at: localURL)
+                            } catch {
+                                print(error.description)
+                            }
                         }
                         
                         if let resp = baseurlResponse as? SearchItemResponse {

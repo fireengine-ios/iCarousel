@@ -217,9 +217,9 @@ class PageCompounder {
         return tempoArray
     }
     
-    private func getFilteringPredicate(md5s: Set<String>, localIDs: Set<String>) -> NSCompoundPredicate {
+    private func getFilteringPredicate(md5s: Set<String>, localIDs: Set<String>, sizeLimit: UInt64 = NumericConstants.fourGigabytes) -> NSCompoundPredicate {
         let md5Predicate = NSPredicate(format:"NOT (md5Value IN %@)", md5s)
-        let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", localIDs)
+        let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@) AND fileSizeValue < \(sizeLimit)", localIDs)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, md5Predicate])
     }
     
