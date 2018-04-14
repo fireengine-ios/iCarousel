@@ -673,11 +673,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func reloadData() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             log.debug("BaseDataSourceForCollectionViewDelegate reloadData")
             debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
-            self.collectionView?.reloadData()
-            self.resetCachedAssets()
+            self?.collectionView?.reloadData()
+            self?.collectionView?.performBatchUpdates({
+                
+            }, completion: { [weak self] (flag) in
+                self?.updateVisibleCells()
+            })
+            self?.resetCachedAssets()
         }
     }
     

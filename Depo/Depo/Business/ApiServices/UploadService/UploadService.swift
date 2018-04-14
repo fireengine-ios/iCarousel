@@ -815,6 +815,20 @@ final class UploadOperations: Operation {
             }, fail: customFail)
     }
     
+    private func addPhotoToTheAlbum(with parameters: Upload, response: SearchItemResponse) {
+        if self.isPhotoAlbum {
+            let item = Item(remote: response)
+            let parameter = AddPhotosToAlbum(albumUUID: parameters.rootFolder, photos: [item])
+            
+            PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
+                ItemOperationManager.default.fileAddedToAlbum(item: item)
+            }, fail: { error in
+                UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
+                ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
+            })
+        }
+    }
+    
     private func baseUrl(success: @escaping UploadServiceBaseUrlResponse, fail: FailResponse?) -> URLSessionTask {
         return UploadService.default.baseUrl(success: success, fail: fail)
     }
