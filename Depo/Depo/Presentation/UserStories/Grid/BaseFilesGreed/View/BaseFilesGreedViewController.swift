@@ -62,7 +62,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet private weak var topCarouselConstraint: NSLayoutConstraint!
     
-    @IBOutlet private weak var scrollIndicator: CustomScrollIndicator!
+    @IBOutlet private weak var scrollIndicator: CustomScrollIndicator?
     
     // MARK: Life cycle
     
@@ -102,7 +102,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText, for: .normal)
         
-        scrollIndicator.changeHiddenState(to: true, animated: false)
+        scrollIndicator?.changeHiddenState(to: true, animated: false)
         
         output.viewIsReady(collectionView: collectionView)
     }
@@ -484,13 +484,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
 extension BaseFilesGreedViewController {
     
     func changeScrollIndicatorTitle(with text: String) {
-        scrollIndicator.sectionTitle = text
+        scrollIndicator?.sectionTitle = text
     }
     
     func startScrollCollectionView() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(hideScrollIndicator), object: nil)
-        let hidden = collectionView.contentOffset.y < contentSliderH?.constant ?? scrollIndicator.titleOffset
-        scrollIndicator.changeHiddenState(to: hidden)
+        let hidden = collectionView.contentOffset.y < contentSliderH?.constant ?? 0
+        scrollIndicator?.changeHiddenState(to: hidden)
     }
     
     func endScrollCollectionView() {
@@ -498,10 +498,10 @@ extension BaseFilesGreedViewController {
     }
     
     @objc private func hideScrollIndicator() {
-        scrollIndicator.changeHiddenState(to: true)
+        scrollIndicator?.changeHiddenState(to: true)
     }
     
     private func scrollIndicator(set topOffset: CGFloat) {
-        scrollIndicator.titleOffset = topOffset
+        scrollIndicator?.titleOffset = topOffset
     }
 }

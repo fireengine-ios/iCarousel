@@ -48,22 +48,38 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     }
     
     func showSpecifiedAlertSheet(with item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController? = nil) {
+        let types: [ElementTypes] = [.info, .share, .move]
         
+        showSpecifiedAlertSheet(with: types, item: item, presentedBy: sender, onSourceView: sourceView, viewController: viewController)
+    }
+    
+    func showSpecifiedAlertSheet(with types: [ElementTypes], item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController? = nil) {
         let headerAction = UIAlertAction(title: item.name ?? "file", style: .default, handler: {_ in
             
         })
         headerAction.isEnabled = false
         
-        var types: [ElementTypes] = [.info, .share, .move]
-        
         guard let item = item as? Item else {
             return
         }
-        types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-        types.append(.delete)
+
+        var showTypes = types
+        showTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
         
-        if item.fileType == .image || item.fileType == .video {
-            types.append(.download)
+        if item.favorites {
+            showTypes.append(.removeFromFavorites)
+            showTypes.remove(.addToFavorites)
+        } else {
+            showTypes.append(.addToFavorites)
+            showTypes.remove(.removeFromFavorites)
+        }
+        
+        if !showTypes.contains(.delete) {
+            showTypes.append(.delete)
+        }        
+        
+        if (item.fileType == .image || item.fileType == .video) && !showTypes.contains(.download) {
+            showTypes.append(.download)
         }
         
         let actions = constractActions(with: types, for: [item])
