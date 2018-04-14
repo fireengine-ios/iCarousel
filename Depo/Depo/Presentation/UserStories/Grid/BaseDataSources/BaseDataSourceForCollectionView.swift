@@ -165,11 +165,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         lastPage = pageNum
         log.debug("BaseDataSourceForCollectionView appendCollectionView \(nonEmptyMetaItems.count)")
         
-//        let pageItems = pageLeftOvers + nonEmptyMetaItems
-        
         allRemoteItems.append(contentsOf: nonEmptyMetaItems)
-        
-//        self.pageLeftOvers.removeAll() //////???????
         
         compoundItems(pageItems: nonEmptyMetaItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] in
             DispatchQueue.main.async {
