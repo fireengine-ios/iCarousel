@@ -7,7 +7,7 @@
 //
 
 class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
-
+    
     lazy var player: MediaPlayer = factory.resolve()
     
     var dataSource: BaseDataSourceForCollectionView
@@ -318,6 +318,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
+    
+    func onItemSelectedActiveState(item: BaseDataSourceItem) { }
     
     private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
         let allItems = items.flatMap { $0 }

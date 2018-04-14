@@ -9,7 +9,7 @@
 import Foundation
 
 class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleInput {
-    
+
     weak var view: SearchViewInput!
     var interactor: SearchViewInteractorInput!
     var router: SearchViewRouterInput!
@@ -195,6 +195,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
+    
+    func onItemSelectedActiveState(item: BaseDataSourceItem) { }
     
     private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
         let allItems = items.flatMap { $0 }
