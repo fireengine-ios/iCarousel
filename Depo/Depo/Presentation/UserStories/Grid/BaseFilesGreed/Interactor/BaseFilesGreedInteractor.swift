@@ -109,7 +109,10 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             remoteItems is StoryService ||
             remoteItems is AlbumService ||
             remoteItems is AllFilesService ||
-            remoteItems is FavouritesService
+            remoteItems is FavouritesService ||
+            remoteItems is PeopleItemsService ||
+            remoteItems is ThingsItemsService ||
+            remoteItems is PlacesItemsService
     }
     
     func needHideTopBar() -> Bool {

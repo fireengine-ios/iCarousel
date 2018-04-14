@@ -144,6 +144,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var currentTopSection: Int?
     
+    private var lastPage: Int = 0
+    
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
         super.init()
@@ -160,17 +162,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if nonEmptyMetaItems.isEmpty {
             isPaginationDidEnd = true
         }
-        
+        lastPage = pageNum
         log.debug("BaseDataSourceForCollectionView appendCollectionView \(nonEmptyMetaItems.count)")
-        
-        let pageItems = transformedLeftOvers() + nonEmptyMetaItems
         
         allRemoteItems.append(contentsOf: nonEmptyMetaItems)
         
-        self.pageLeftOvers.removeAll()
-        
-        compoundItems(pageItems: pageItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] in
+        compoundItems(pageItems: nonEmptyMetaItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] in
             DispatchQueue.main.async {
+                debugPrint("!!!! remotes items \(self!.allRemoteItems.count)")
+                debugPrint("!!!! all media items \(self!.allMediaItems.count)")
                 self?.collectionView?.reloadData()
                 self?.delegate?.filesAppendedAndSorted()
                 self?.isLocalFilesRequested = false
@@ -267,11 +267,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     return
                 }
                 
+                let pageTempoItems = self.pageLeftOvers + pageItems
+                
                 self.isLocalFilesRequested = true
                 self.isLocalPaginationOn = true
                 
-                if pageNum == 1, self.allMediaItems.isEmpty, self.pageLeftOvers.isEmpty {
-                    self.pageCompounder.compoundFirstPage(pageItems: pageItems,
+                if pageNum == 1, !self.isPaginationDidEnd/*, self.allMediaItems.isEmpty*//*, self.pageLeftOvers.isEmpty*/ {
+                    self.pageCompounder.compoundFirstPage(pageItems: pageTempoItems,
                                                           filesType: specificFilters,
                                                           sortType: self.currentSortType,
                                                           compoundedCallback:
@@ -288,9 +290,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     })
                 } else if self.isPaginationDidEnd {
                     let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
-                    var itemsToCompound = isEmptyLeftOvers ? pageItems : self.transformedLeftOvers()
+                    var itemsToCompound = isEmptyLeftOvers ? pageTempoItems : self.transformedLeftOvers()
                     var needToDropFirstItem = false
-                    if pageItems.isEmpty, isEmptyLeftOvers, let lastMediItem = self.allMediaItems.last {
+                    if pageTempoItems.isEmpty, isEmptyLeftOvers, let lastMediItem = self.allMediaItems.last {
                         itemsToCompound.append(lastMediItem)
                         needToDropFirstItem = true
                         //                        self.delegate?.getNextItems()
@@ -323,9 +325,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     })
                 } else if !self.isPaginationDidEnd { ///Middle page
                     //check lefovers here
-                    let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
-                    let itemsToCompound = isEmptyLeftOvers ? pageItems : self.transformedLeftOvers()
-                    if pageItems.isEmpty, isEmptyLeftOvers {
+                    let isEmptyLeftOvers = self.pageLeftOvers.isEmpty
+                    ///.filter{!$0.isLocalItem}.isEmpty in case for only remotes
+                    let itemsToCompound = isEmptyLeftOvers ? pageTempoItems : self.pageLeftOvers
+                    ///self.transformedLeftOvers() in case for only remotes
+                    if pageTempoItems.isEmpty, self.transformedLeftOvers().isEmpty
+                        /**isEmptyLeftOvers*/ {
                         self.delegate?.getNextItems()
                         //DO I need callback here?
                         return
@@ -334,8 +339,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self.pageCompounder.compoundMiddlePage(pageItems: itemsToCompound,
                                                            filesType: specificFilters,
                                                            sortType: self.currentSortType,
-                                                           //                                                           notAllowedMD5: md5s,
-                        //                                                           notAllowedLocalIDs: localIDs,
                         compoundedCallback:
                         { [weak self] (compoundedItems, lefovers) in
                             guard let `self` = self else {
@@ -343,17 +346,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             }
                             self.pageLeftOvers.removeAll()
                             self.pageLeftOvers.append(contentsOf: lefovers)
-                            
-                            //                            let sortedItems = self.sortByCurrentType(items: compoundedItems)
+
                             self.allMediaItems.append(contentsOf: compoundedItems)
-                            
-                            //                            if compoundedItems.count < self.pageCompounder.pageSize, !self.isPaginationDidEnd {
-                            //                                self.pageLeftOvers.append(contentsOf: compoundedItems)
-                            //                                self.isLocalFilesRequested = false
-                            //                                self.delegate?.getNextItems()
-                            //                                return
-                            //                            }
-                            
+
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition()
                     })
@@ -369,10 +364,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func transformedLeftOvers() -> [WrapData] {
-        /*guard let lastAppendedItem = allMediaItems.last else {
-         return []
-         }*/
-        let pseudoPageArray = /*[lastAppendedItem] + */pageLeftOvers.filter{!$0.isLocalItem}
+        let pseudoPageArray = pageLeftOvers.filter{!$0.isLocalItem}
         return pseudoPageArray
     }
     
@@ -671,11 +663,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func reloadData() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             log.debug("BaseDataSourceForCollectionViewDelegate reloadData")
             debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
-            self.collectionView?.reloadData()
-            self.resetCachedAssets()
+            self?.collectionView?.reloadData()
+            self?.collectionView?.performBatchUpdates({
+                
+            }, completion: { [weak self] (flag) in
+                self?.updateVisibleCells()
+            })
+            self?.resetCachedAssets()
         }
     }
     
@@ -986,12 +983,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         let isLastCell = Bool((countRow - 1) == indexPath.row)
         
         if isLastCell, isLastSection, !isPaginationDidEnd {
-            
             if pageLeftOvers.isEmpty, !isLocalFilesRequested {
                 delegate?.getNextItems()
             } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
-                compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] in
+                debugPrint("!!! page compunding for page \(lastPage)")
+                
+                compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] in
                     DispatchQueue.main.async {
+                        debugPrint("!!!! remotes items \(self!.allRemoteItems.count)")
+                        debugPrint("!!!! all media items \(self!.allMediaItems.count)")
                         self?.collectionView?.reloadData()
                         self?.delegate?.filesAppendedAndSorted()
                         self?.isLocalFilesRequested = false
@@ -1003,6 +1003,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
             compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] in
                 DispatchQueue.main.async {
+                    debugPrint("!!!! remotes items \(self!.allRemoteItems.count)")
+                    debugPrint("!!!! all media items \(self!.allMediaItems.count)")
                     self?.collectionView?.reloadData()
                     self?.delegate?.filesAppendedAndSorted()
                     self?.isLocalFilesRequested = false
@@ -1068,7 +1070,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return CGSize(width: 0, height: 0)
     }
     
-    //-----
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if (Device.isIpad){
             return NumericConstants.iPadGreedHorizontalSpace
@@ -1077,7 +1078,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    //|||||
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if (Device.isIpad){
             return NumericConstants.iPadGreedHorizontalSpace
@@ -1098,14 +1098,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         let isLastSection = (section == allItems.count - 1)
         
-        let h: CGFloat// = (isPaginationDidEnd && !isLastSection) ? 0 : 50
+        let h: CGFloat
         if !isLastSection || (isPaginationDidEnd && (!isLocalPaginationOn && !isLocalFilesRequested)) {
             h = 0
-        } else
-//            if isPaginationDidEnd || !isLocalPaginationOn {
-//            h = 0
-//        } else
-            {
+        } else {
             h = 50
         }
         return CGSize(width: collectionView.contentSize.width, height: h)
@@ -1118,7 +1114,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             let textHeader = headerView as! CollectionViewSimpleHeaderWithText
             
-            let title = getHeaderText(indexPath: indexPath)//fetchService.headerText(indexPath: indexPath)
+            let title = getHeaderText(indexPath: indexPath)
             
             textHeader.setText(text: title)
             

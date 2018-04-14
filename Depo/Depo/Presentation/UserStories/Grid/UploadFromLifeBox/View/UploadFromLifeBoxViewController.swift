@@ -21,14 +21,11 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
     
     override func viewDidAppear(_ animated: Bool) {
         scrolliblePopUpView.isEnable = false
-        
         super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureNavBarActions()
-        
         if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1 {
             let barButtonLeft = UIBarButtonItem(customView: cancelButton)
             navigationItem.leftBarButtonItem = barButtonLeft
@@ -41,10 +38,14 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         button.setTitle(TextConstants.uploadFromLifeBoxNextButton, for: .normal)
         button.setTitleColor(ColorConstants.whiteColor, for: .normal)
         button.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
-        
+
         let barButton = UIBarButtonItem(customView: button)
-        
+
         navigationItem.rightBarButtonItem = barButton
+    }
+    
+    override func setThreeDotsMenu(active isActive: Bool)  {
+        
     }
     
     @objc func onNextButton() {

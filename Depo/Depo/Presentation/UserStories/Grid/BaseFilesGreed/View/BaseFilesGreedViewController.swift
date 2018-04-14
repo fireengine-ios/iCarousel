@@ -473,8 +473,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func representationChanged(viewType: MoreActionsConfig.ViewType) {
-        var asGrid: Bool
-        viewType == .Grid ? (asGrid = true) : (asGrid = false)
+        let asGrid = viewType == .Grid ? true : false
         output.viewAppearanceChangedTopBar(asGrid: asGrid)
     }
 }
