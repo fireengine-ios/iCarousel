@@ -67,8 +67,6 @@ extension BaseDataSourceForCollectionViewDelegate {
     
     func didDelete(items: [BaseDataSourceItem]) { }
     
-    func onItemSelectedActiveState(item: BaseDataSourceItem) { }
-    
     func didChangeTopHeader(text: String) { }
     
     func scrollViewDidScroll(scrollView: UIScrollView) { }
