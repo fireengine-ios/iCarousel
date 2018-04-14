@@ -35,7 +35,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    func onItemSelectedActiveState(item: BaseDataSourceItem) {
+    override func onItemSelectedActiveState(item: BaseDataSourceItem) {
         dataSource.allMediaItems.forEach { peopleItem in
             if let peopleItem = peopleItem as? PeopleItem,
             let isVisible = peopleItem.responseObject.visible,
