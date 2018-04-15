@@ -161,7 +161,7 @@ class PageCompounder {
                         }
                         if compoundedPage.count < self.pageSize, self.coreData.inProcessAppendingLocalFiles,
                            !self.coreData.originalAssetsBeingAppended.assets(afterDate: firstItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
-                            self.monitorDBLastAppendedPage(firstItem: firstItem, pageItems: compoundedPage, sortType: sortType, predicate: compundedPredicate, compoundedCallback: compoundedCallback)
+                            self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: compoundedPage, sortType: sortType, predicate: compundedPredicate, compoundedCallback: compoundedCallback)
                             return
                             
                         } else {
@@ -171,8 +171,7 @@ class PageCompounder {
     }
     
     //MARK: - DB appending
-    ///for last page only for now
-    private func monitorDBLastAppendedPage(firstItem: WrapData,
+    private func monitorDBLastAppendedPageLast(firstItem: WrapData,
                                         pageItems: [WrapData],
                                            sortType: SortedRules,
                                            predicate: NSCompoundPredicate,
@@ -196,7 +195,7 @@ class PageCompounder {
                                             }
                                             if self.coreData.inProcessAppendingLocalFiles,
                                                 compoundedPage.isEmpty {
-                                                self.monitorDBLastAppendedPage(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
+                                                self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                                 return
                                             } else if !compoundedPage.isEmpty {
                                                 compoundedCallback(compoundedPage, leftovers)
@@ -240,7 +239,8 @@ class PageCompounder {
                                 predicate: predicate,
                                 compoundedCallback: { [weak self] compoundedPage, leftovers  in
                                     
-                                    guard !compoundedPage.isEmpty else {/* or shpuld I use compundedPage.count >= self.pageSize ?*/
+                                    guard !compoundedPage.isEmpty else {
+                                        /* or shpuld I use compundedPage.count >= self.pageSize ?*/
                                         self?.monitorDBLastAppendedPageFirst(lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                         return
                                     }
@@ -271,7 +271,6 @@ class PageCompounder {
                                 compoundedCallback: { [weak self] compoundedPage, leftovers  in
                                     guard !compoundedPage.isEmpty else {
                                         self?.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
-//                                        (firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                         return
                                     }
                                     compoundedCallback(compoundedPage, leftovers)
