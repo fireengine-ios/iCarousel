@@ -272,7 +272,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 self.isLocalFilesRequested = true
                 self.isLocalPaginationOn = true
                 
-                if pageNum == 1, !self.isPaginationDidEnd/*, self.allMediaItems.isEmpty*//*, self.pageLeftOvers.isEmpty*/ {
+                if pageNum == 1 {
+                    if self.isPaginationDidEnd {
+                        /**in case when there are less then a 100 remotes on BE,
+                         and
+                         a lot of locals with deferent range of dates*/
+                        self.compoundItems(pageItems: pageItems, pageNum: 2, complition: complition)
+                        return
+                    }
                     self.pageCompounder.compoundFirstPage(pageItems: pageTempoItems,
                                                           filesType: specificFilters,
                                                           sortType: self.currentSortType,
