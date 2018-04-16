@@ -164,6 +164,10 @@ class CoreDataStack: NSObject {
                     print("Error saving context ___ ")
                 }
             }
+        } else {
+            privateQueue.async {
+                savedMainCallBack?()
+            }
         }
     }
     
@@ -193,6 +197,10 @@ class CoreDataStack: NSObject {
         
         if context.hasChanges {
             context.perform(saveBlock)
+        } else {
+            privateQueue.async {
+                savedCallBack?()
+            }
         }
     }
 }
