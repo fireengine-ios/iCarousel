@@ -33,7 +33,7 @@ class Device {
             do {
                 try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
             } catch {
-                print(error.description)
+                print(error.localizedDescription)
             }
         }
         return path
@@ -65,7 +65,7 @@ class Device {
                 let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
                 freeSize = values.volumeAvailableCapacityForImportantUsage
             } catch {
-                print(error.description)
+                print(error.localizedDescription)
             }
         }
         return freeSize ?? getFreeDiskSpaceInBytesIOS10()
@@ -77,7 +77,7 @@ class Device {
             let systemAttributes = try FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString())
             freeSize = systemAttributes[.systemFreeSize] as? NSNumber
         } catch {
-            print(error.description)
+            print(error.localizedDescription)
         }
         return freeSize?.int64Value
     }
@@ -88,7 +88,7 @@ class Device {
             let dict = try FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString())
             totalSpace = dict[.systemSize] as? NSNumber
         } catch {
-            print(error.description)
+            print(error.localizedDescription)
         }
         return totalSpace?.int64Value
     }
