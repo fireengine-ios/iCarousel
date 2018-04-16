@@ -671,15 +671,26 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func reloadData() {
         DispatchQueue.main.async { [weak self] in
+            
+            guard let `self` = self, let collectionView = self.collectionView else {
+                return
+            }
+            
             log.debug("BaseDataSourceForCollectionViewDelegate reloadData")
             debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
-            self?.collectionView?.reloadData()
-            self?.collectionView?.performBatchUpdates({
-                
-            }, completion: { [weak self] (flag) in
+            
+            collectionView.reloadData()
+            
+            if self.numberOfSections(in: collectionView) == 0 {
+                self.updateVisibleCells()
+                self.resetCachedAssets()
+                return
+            }
+            
+            collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
                 self?.updateVisibleCells()
             })
-            self?.resetCachedAssets()
+            self.resetCachedAssets()
         }
     }
     
@@ -1098,20 +1109,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let h: CGFloat = isHeaderless ? 0 : 50
-        return CGSize(width: collectionView.contentSize.width, height: h)
+        let height: CGFloat = isHeaderless ? 0 : 50
+        return CGSize(width: collectionView.contentSize.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         let isLastSection = (section == allItems.count - 1)
         
-        let h: CGFloat
+        let height: CGFloat
         if !isLastSection || (isPaginationDidEnd && (!isLocalPaginationOn && !isLocalFilesRequested)) {
-            h = 0
+            height = 0
         } else {
-            h = 50
+            height = 50
         }
-        return CGSize(width: collectionView.contentSize.width, height: h)
+        return CGSize(width: collectionView.contentSize.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
