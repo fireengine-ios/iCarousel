@@ -117,6 +117,8 @@ class ItemOperationManager: NSObject {
     private var currentDownloadingObject: WrapData?
     private var currentDownloadingProgress: Float = 0
     
+    private let serialItemOperationQueue = DispatchQueue(label: DispatchQueueLabels.serialStopUpdateItemManager)
+    
     func startUpdateView(view: ItemOperationManagerViewProtocol) {
         if views.index(where: { $0.isEqual(object: view) }) == nil {
             views.append(view)
@@ -129,8 +131,10 @@ class ItemOperationManager: NSObject {
     }
     
     func stopUpdateView(view: ItemOperationManagerViewProtocol) {
-        if let index = views.index(where: { $0.isEqual(object: view) }) {
-            views.remove(at: index)
+        serialItemOperationQueue.sync {
+            if let index = views.index(where: { $0.isEqual(object: view) }) {
+                views.remove(at: index)
+            }
         }
     }
     
