@@ -22,7 +22,9 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
         duplicatesTextLabel.text = ""
         
         FreeAppSpace.default.getCheckedDuplicatesArray { [weak self] duplicatesArray in
-            self?.duplicatesTextLabel?.text = String(format: TextConstants.freeAppSpaceTitle, FreeAppSpace.default.getDuplicatesObjects().count)
+            DispatchQueue.main.async {
+                self?.duplicatesTextLabel?.text = String(format: TextConstants.freeAppSpaceTitle, FreeAppSpace.default.getDuplicatesObjects().count)
+            }
         }
         
         mainTitle = ""
