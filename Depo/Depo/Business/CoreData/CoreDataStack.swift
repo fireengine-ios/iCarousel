@@ -193,6 +193,10 @@ class CoreDataStack: NSObject {
         
         if context.hasChanges {
             context.perform(saveBlock)
+        } else {
+            privateQueue.async {
+                savedCallBack?()
+            }
         }
     }
 }
