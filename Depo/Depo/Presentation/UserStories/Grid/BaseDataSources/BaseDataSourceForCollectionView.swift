@@ -273,7 +273,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 self.isLocalPaginationOn = true
                 
                 if pageNum == 1 {
-                    if self.isPaginationDidEnd {
+                    if self.isPaginationDidEnd, !pageTempoItems.isEmpty  {
                         /**in case when there are less then a 100 remotes on BE,
                          and
                          a lot of locals with deferent range of dates*/
