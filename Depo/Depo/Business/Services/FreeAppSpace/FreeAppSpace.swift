@@ -98,12 +98,14 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func checkFreeAppSpace() {
-        NotificationCenter.default.addObserver(self,
-                                       selector: #selector(onLocalFilesHaveBeenLoaded),
-                                       name: Notification.Name.allLocalMediaItemsHaveBeenLoaded,
-                                       object: nil)
-        
-        
+        if CoreDataStack.default.inProcessAppendingLocalFiles {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(onLocalFilesHaveBeenLoaded),
+                                                   name: Notification.Name.allLocalMediaItemsHaveBeenLoaded,
+                                                   object: nil)
+        } else {
+            onLocalFilesHaveBeenLoaded()
+        }
     }
     
     func showFreeAppSpaceCard() {
