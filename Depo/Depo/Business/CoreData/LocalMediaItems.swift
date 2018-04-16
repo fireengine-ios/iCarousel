@@ -218,7 +218,10 @@ extension CoreDataStack {
     }
     
     func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], context: NSManagedObjectContext) {
-        newChildBackgroundContext.perform { [weak self] in
+        
+        let newContext = newChildBackgroundContext
+        
+        newContext.perform { [weak self] in
             guard let `self` = self else {
                 return
             }
@@ -226,11 +229,13 @@ extension CoreDataStack {
             let allNonAccurateSavedLocalFiles: [MediaItem] = self.executeRequest(predicate: predicate,
                                                                             context: context)
             allNonAccurateSavedLocalFiles.forEach {
-                context.delete($0)
+                newContext.delete($0)
             }
-            /// put notification here that item deleted
-            let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
-            ItemOperationManager.default.deleteItems(items: items)
+            self.saveDataForContext(context: newContext, savedCallBack: {
+                /// put notification here that item deleted
+                let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
+                ItemOperationManager.default.deleteItems(items: items)
+            })
         }
     }
 }
