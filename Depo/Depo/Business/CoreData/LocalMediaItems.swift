@@ -121,15 +121,14 @@ extension CoreDataStack {
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
         let currentlyInLibriaryIDs: [String] = allList.compactMap { $0.localIdentifier }
-        let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
-//        let deletedItems: [MediaItem] = executeRequest(predicate: predicate, context: context)
         
+        checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs)
+        
+        let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
+
         let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
         
         let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
-        
-//        delete specific items here
-        checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs, context: context)
         
         return allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) }
     }
@@ -217,7 +216,7 @@ extension CoreDataStack {
         
     }
     
-    func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], context: NSManagedObjectContext) {
+    func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String]) {
         
         let newContext = newChildBackgroundContext
         
@@ -227,7 +226,7 @@ extension CoreDataStack {
             }
             let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", actualPhotoLibItemsIDs)
             let allNonAccurateSavedLocalFiles: [MediaItem] = self.executeRequest(predicate: predicate,
-                                                                            context: context)
+                                                                            context: newContext)
             allNonAccurateSavedLocalFiles.forEach {
                 newContext.delete($0)
             }
