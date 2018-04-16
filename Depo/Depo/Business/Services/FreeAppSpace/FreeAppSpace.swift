@@ -98,27 +98,12 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func checkFreeAppSpace() {
-        if tokenStorage.refreshToken == nil {
-            return
-        }
-        photoVideoService?.currentPage = 0
-        startSearchDuplicates(finished: { [weak self] in
-            guard let self_ = self else {
-                return
-            }
-            
-            self_.isSearchRunning = false
-            
-            if (self_.needSearchAgain) {
-                self_.needSearchAgain = false
-                self_.checkFreeAppSpace()
-                return
-            }
-            
-            self_.sortDuplicatesArray()
-            
-            self_.showFreeAppSpaceCard()
-        })
+        NotificationCenter.default.addObserver(self,
+                                       selector: #selector(onLocalFilesHaveBeenLoaded),
+                                       name: Notification.Name.allLocalMediaItemsHaveBeenLoaded,
+                                       object: nil)
+        
+        
     }
     
     func showFreeAppSpaceCard() {
@@ -131,6 +116,35 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             }
         } else {
             print("have no duplicates")
+        }
+    }
+    
+    @objc private func onLocalFilesHaveBeenLoaded() {
+        DispatchQueue.global().async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            if self.self.tokenStorage.refreshToken == nil {
+                return
+            }
+            self.photoVideoService?.currentPage = 0
+            self.startSearchDuplicates(finished: { [weak self] in
+                guard let self_ = self else {
+                    return
+                }
+                
+                self_.isSearchRunning = false
+                
+                if (self_.needSearchAgain) {
+                    self_.needSearchAgain = false
+                    self_.checkFreeAppSpace()
+                    return
+                }
+                
+                self_.sortDuplicatesArray()
+                
+                self_.showFreeAppSpaceCard()
+            })
         }
     }
     

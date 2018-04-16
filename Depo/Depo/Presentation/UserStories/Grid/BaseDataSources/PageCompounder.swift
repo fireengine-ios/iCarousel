@@ -211,7 +211,7 @@ class PageCompounder {
                                 predicate: predicate,
                                 compoundedCallback: { [weak self] compoundedPage, leftovers  in
                                     guard !compoundedPage.isEmpty else {
-                                        self?.monitorDBLastAppendedPage(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
+                                        self?.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                         return
                                     }
                                     compoundedCallback(compoundedPage, leftovers)
