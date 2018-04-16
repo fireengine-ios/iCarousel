@@ -121,12 +121,14 @@ extension CoreDataStack {
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
         let currentlyInLibriaryIDs: [String] = allList.compactMap { $0.localIdentifier }
+        
+        checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs)
+        
         let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
+
         let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
         
         let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
-        
-        checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs, context: context)
         
         return allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) }
     }
@@ -214,19 +216,25 @@ extension CoreDataStack {
         
     }
     
-    func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], context: NSManagedObjectContext) {
-        context.perform { [weak self] in
+    func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String]) {
+        
+        let newContext = newChildBackgroundContext
+        
+        newContext.perform { [weak self] in
             guard let `self` = self else {
                 return
             }
             let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", actualPhotoLibItemsIDs)
             let allNonAccurateSavedLocalFiles: [MediaItem] = self.executeRequest(predicate: predicate,
-                                                                            context: context)
+                                                                            context: newContext)
             allNonAccurateSavedLocalFiles.forEach {
-                context.delete($0)
+                newContext.delete($0)
             }
-            let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
-            ItemOperationManager.default.deleteItems(items: items)
+            self.saveDataForContext(context: newContext, savedCallBack: {
+                /// put notification here that item deleted
+                let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
+                ItemOperationManager.default.deleteItems(items: items)
+            })
         }
     }
 }
