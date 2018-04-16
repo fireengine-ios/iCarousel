@@ -40,6 +40,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
             startAsyncOperation()
             if let interactor_ = interactor as? UploadFilesSelectionInteractor, let dataSource = dataSource as? ArrayDataSourceForCollectionView {
                 interactor_.addToUploadOnDemandItems(items: dataSource.getSelectedItems())
+                router.showBack()
             }
             dataSource.selectAll(isTrue: false)
         } else {
