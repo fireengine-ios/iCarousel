@@ -126,7 +126,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             guard let `self` = self else {
                 return
             }
-            if self.self.tokenStorage.refreshToken == nil {
+            if self.tokenStorage.refreshToken == nil {
                 return
             }
             self.photoVideoService?.currentPage = 0
