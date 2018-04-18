@@ -82,16 +82,6 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onSuccessEULA() {
-        
-        if turkcellLogin {
-            if storageVars.autoSyncSet {
-                router.navigateToApplication()
-            } else {
-                router.goToSyncSettingsView()
-            }
-        } else {
-            router.navigateToApplication()
-        }
         interactor.updateUserLanguage()
     }
     
