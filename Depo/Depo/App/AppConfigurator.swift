@@ -17,7 +17,7 @@ class AppConfigurator {
     static let analyticsManager: AnalyticsService = factory.resolve()
     
     class func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        AppConfigurator.getRefreshTockenFromOldApplication()
+        AppConfigurator.getRefreshTokenFromOldApplication()
         dropboxManager.start()
         analyticsManager.start()
         AppWormholeListener.shared.startListen()
@@ -56,7 +56,7 @@ class AppConfigurator {
         LocalMediaStorage.default.clearTemporaryFolder()
     }
     
-    private class func getRefreshTockenFromOldApplication() {
+    private class func getRefreshTokenFromOldApplication() {
         AppMigrator.migrateFromOldApplicationIfNeed()
         
     }
