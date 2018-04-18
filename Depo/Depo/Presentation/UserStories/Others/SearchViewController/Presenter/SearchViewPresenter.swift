@@ -152,7 +152,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         view.endSearchRequestWith(text: text)
         //DBOUT
 //        dataSource.fetchService.performFetch(sortingRules: .timeUp, filtes: [.name(text)])
-        dataSource.reloadData()
     }
     
     // MARK: - BaseDataSourceForCollectionViewDelegate
