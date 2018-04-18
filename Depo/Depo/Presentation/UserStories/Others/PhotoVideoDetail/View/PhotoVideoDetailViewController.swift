@@ -292,8 +292,10 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
     }
     
     func finishedUploadFile(file: WrapData) {
-        output.setSelectedItemIndex(selectedIndex: selectedIndex)
-        setupNavigationBar()
+        DispatchQueue.main.async {
+            self.output.setSelectedItemIndex(selectedIndex: self.selectedIndex)
+            self.setupNavigationBar()
+        }
     }
 }
 
