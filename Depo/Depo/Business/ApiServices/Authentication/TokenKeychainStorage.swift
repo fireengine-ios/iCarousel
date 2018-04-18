@@ -25,6 +25,9 @@ final class TokenKeychainStorage: TokenStorage {
                 return nil
             }
             print("- accessToken", token)
+            if token.isEmpty {
+                return nil
+            }
             return token
         }
         set {
@@ -38,6 +41,9 @@ final class TokenKeychainStorage: TokenStorage {
                 return nil
             }
             print("- refreshToken", token)
+            if token.isEmpty {
+                return nil
+            }
             return token
         }
         set {
