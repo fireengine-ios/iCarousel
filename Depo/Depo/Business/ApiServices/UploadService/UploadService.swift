@@ -88,6 +88,7 @@ final class UploadService: BaseRequestService {
         trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
     
         guard let filteredItems = filter(items: items) else {
+            success()
             return nil
         }
         
@@ -592,7 +593,8 @@ extension UploadService {
             return nil
         }
         
-        result = result.filter { $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
+        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes() ?? 0
+        result = result.filter { $0.fileSize < freeDiskSpaceInBytes }
         guard !result.isEmpty else {
             UIApplication.showErrorAlert(message: TextConstants.syncNotEnoughMemory)
             return nil
