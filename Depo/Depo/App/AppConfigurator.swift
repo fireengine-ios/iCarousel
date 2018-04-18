@@ -52,6 +52,8 @@ class AppConfigurator {
 //        }
         
         _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
+        
+        LocalMediaStorage.default.clearTemporaryFolder()
     }
     
     private class func getRefreshTockenFromOldApplication() {

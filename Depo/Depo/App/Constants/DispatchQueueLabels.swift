@@ -20,4 +20,6 @@ struct DispatchQueueLabels {
     static let assetCache = "com.lifebox.assetCache"
     static let localMediaStorage = "com.lifebox.local_media_storage"
     static let syncronizedArray = "com.lifebox.SynchronizedArray"
+    static let serialStopUpdateItemManager = "com.lifebox.serialStopUpdateItemManager"
+    static let freeAppSpace = "com.lifebox.freeAppSpace"
 }

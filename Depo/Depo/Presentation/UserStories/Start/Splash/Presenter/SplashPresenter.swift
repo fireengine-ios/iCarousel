@@ -82,8 +82,6 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onSuccessEULA() {
-        
-        router.navigateToApplication()
         interactor.updateUserLanguage()
     }
     

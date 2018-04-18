@@ -88,6 +88,7 @@ final class UploadService: BaseRequestService {
         trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
     
         guard let filteredItems = filter(items: items) else {
+            success()
             return nil
         }
         
@@ -592,7 +593,8 @@ extension UploadService {
             return nil
         }
         
-        result = result.filter { $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
+        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes() ?? 0
+        result = result.filter { $0.fileSize < freeDiskSpaceInBytes }
         guard !result.isEmpty else {
             UIApplication.showErrorAlert(message: TextConstants.syncNotEnoughMemory)
             return nil
@@ -772,7 +774,11 @@ final class UploadOperations: Operation {
                             }
                             
                             if let localURL = uploadParam.urlToLocalFile {
-                                try? FileManager.default.removeItem(at: localURL)
+                                do {
+                                    try FileManager.default.removeItem(at: localURL)
+                                } catch {
+                                    print(error.description)
+                                }
                             }
                             
                             if let response = baseurlResponse as? SearchItemResponse {
@@ -844,19 +850,15 @@ final class UploadOperations: Operation {
     
     private func beginBackgroundTask() -> UIBackgroundTaskIdentifier {
         var taskId = UIBackgroundTaskInvalid
-        DispatchQueue.main.async {
-            taskId = UIApplication.shared.beginBackgroundTask(withName: self.item.uuid, expirationHandler: {
-                UIApplication.shared.endBackgroundTask(taskId)
-            })
-        }
+        taskId = UIApplication.shared.beginBackgroundTask(withName: self.item.uuid, expirationHandler: {
+            UIApplication.shared.endBackgroundTask(taskId)
+        })
         return taskId
     }
     
     private func endBackgroundTask() {
         if let taskId = backgroundTaskId {
-            DispatchQueue.main.async {
-                UIApplication.shared.endBackgroundTask(taskId)
-            }
+            UIApplication.shared.endBackgroundTask(taskId)
         }
     }
 }

@@ -82,8 +82,7 @@ extension CoreDataStack {
             guard let `self` = self else {
                 return
             }
-            
-            let predicateForRemoteFile = NSPredicate(format: "uuidValue == %@", item.uuid)
+            let predicateForRemoteFile = NSPredicate(format: "localFileID == %@", item.getLocalID())
             let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: context)
                 alreadySavedMediaItems.forEach({ savedItem in
                     //for locals

@@ -7,7 +7,7 @@
 //
 
 class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
-
+    
     lazy var player: MediaPlayer = factory.resolve()
     
     var dataSource: BaseDataSourceForCollectionView
@@ -319,6 +319,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
     }
     
+    func onItemSelectedActiveState(item: BaseDataSourceItem) { }
+    
     private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
         let allItems = items.flatMap { $0 }
         if item.fileType.isDocument {
@@ -368,33 +370,37 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func updateCoverPhotoIfNeeded() { }
     
     func didChangeTopHeader(text: String) {
-        if needShowScrollIndicator {
+        if needShowCustomScrollIndicator() {
             view.changeScrollIndicatorTitle(with: text)
         }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if needShowScrollIndicator {
+        if needShowCustomScrollIndicator() {
             view.startScrollCollectionView()
         }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if needShowScrollIndicator {
+        if needShowCustomScrollIndicator() {
             view.startScrollCollectionView()
         }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if needShowScrollIndicator && !decelerate {
+        if needShowCustomScrollIndicator() && !decelerate {
             view.endScrollCollectionView()
         }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if needShowScrollIndicator {
+        if needShowCustomScrollIndicator() {
             view.endScrollCollectionView()
         }
+    }
+    
+    private func needShowCustomScrollIndicator() -> Bool {
+         return needShowScrollIndicator && sortedRule != .sizeAZ && sortedRule != .sizeZA
     }
     
     // MARK: - UnderNavBarBar/TopBar

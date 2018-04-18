@@ -142,7 +142,9 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         let group = DispatchGroup()
         let queue = DispatchQueue(label: DispatchQueueLabels.faceImageItemsUpdate)
         
-        getFaceImageItems(group: group)
+        queue.async { [weak self] in
+            self?.getFaceImageItems(group: group)
+        }
         
         group.notify(queue: queue) { [weak self] in
             self?.operationSuccessed()

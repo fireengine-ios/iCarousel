@@ -20,6 +20,8 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     override func viewWillAppear(_ animated: Bool) {
         setTitle(withString: mainTitle )
         
+        navigationBarWithGradientStyle()
+        
         editingTabBar?.view.layoutIfNeeded()
         
         output.viewWillAppear()
