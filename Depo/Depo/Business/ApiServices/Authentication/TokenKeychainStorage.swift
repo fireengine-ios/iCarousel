@@ -16,43 +16,43 @@ final class TokenKeychainStorage: TokenStorage {
     private let isRememberMeKey = "isRememberMeKey"
     private let isClearTokensKey = "isClearTokensKey"
     
-    private lazy var defaults = KeychainSwift()
+    private lazy var keychain = KeychainSwift()
     
     
     var accessToken: String? {
         get {
-            guard let token = defaults.get(accessTokenKey) else {
+            guard let token = keychain.get(accessTokenKey) else {
                 return nil
             }
             print("- accessToken", token)
             return token
         }
         set {
-            defaults.set(newValue ?? "", forKey: accessTokenKey)
+            keychain.set(newValue ?? "", forKey: accessTokenKey)
         }
     }
     
     var refreshToken: String? {
         get {
-            guard let token = defaults.get(refreshTokenKey) else {
+            guard let token = keychain.get(refreshTokenKey) else {
                 return nil
             }
             print("- refreshToken", token)
             return token
         }
         set {
-            defaults.set(newValue ?? "", forKey: refreshTokenKey)
+            keychain.set(newValue ?? "", forKey: refreshTokenKey)
         }
     }
     
     var isRememberMe: Bool {
-        get { return defaults.getBool(isRememberMeKey) ?? false }
-        set { defaults.set(newValue, forKey: isRememberMeKey) }
+        get { return keychain.getBool(isRememberMeKey) ?? false }
+        set { keychain.set(newValue, forKey: isRememberMeKey) }
     }
     
     var isClearTokens: Bool {
-        get { return defaults.getBool(isClearTokensKey) ?? false }
-        set { defaults.set(newValue, forKey: isClearTokensKey) }
+        get { return keychain.getBool(isClearTokensKey) ?? false }
+        set { keychain.set(newValue, forKey: isClearTokensKey) }
     }
     
     func clearTokens() {
