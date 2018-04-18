@@ -166,6 +166,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             
         })
         
+        status = .executing
     }
     
     private func appendNewUnsyncedItems() {
