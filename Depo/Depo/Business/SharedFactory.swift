@@ -18,7 +18,7 @@ protocol SharedFactory {
 
 open class FactoryBase: SharedFactory {
     
-    private static let tokenStorage = TokenStorageUserDefaults()
+    private static let tokenStorage = TokenKeychainStorage()
     func resolve() -> TokenStorage {
         return FactoryBase.tokenStorage
     }
