@@ -1237,8 +1237,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        let uuid = file.uuid
-//        file.isLocalItem = false
+        let uuid = file.getLocalID()
+        
         if uploadedObjectID.index(of: file.uuid) == nil {
             uploadedObjectID.append(uuid)
         }
@@ -1247,7 +1247,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         finished: for (section, array) in allItems.enumerated() {
             for (row, object) in array.enumerated() {
-                if object.uuid == uuid {
+                if object.getLocalID() == uuid {
                     if object.isLocalItem {
                         localFinishedItemUUID = object.uuid
                         file.isLocalItem = false
@@ -1279,7 +1279,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
             if let `self` = self{
-                let cell = self.getCellForFile(objectUUID: uuid)
+                let cell = self.getCellForFile(objectUUID: file.uuid)
                 cell?.resetCloudImage()
                 
                 if let index = self.uploadedObjectID.index(of: uuid){
