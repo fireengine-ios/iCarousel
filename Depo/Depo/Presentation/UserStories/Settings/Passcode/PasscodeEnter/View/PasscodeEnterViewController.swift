@@ -32,7 +32,7 @@ class PasscodeEnterViewController: ViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = navigationTitle
+        setTitle(withString: navigationTitle)
         passcodeManager = PasscodeManagerImp(passcodeView: passcodeViewImp, state: state)
         passcodeManager.delegate = self
     }
