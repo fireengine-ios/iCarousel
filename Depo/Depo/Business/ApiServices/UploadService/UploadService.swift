@@ -88,6 +88,7 @@ final class UploadService: BaseRequestService {
         trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
     
         guard let filteredItems = filter(items: items) else {
+            success()
             return nil
         }
         
