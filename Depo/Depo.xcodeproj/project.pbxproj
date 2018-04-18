@@ -283,6 +283,12 @@
 		7C0D5DF3202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0D5DF1202F108900DE953F /* CreateStoryAudioSelectionViewController.xib */; };
 		7C0DBC311F2F2CE000F90590 /* SelectionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0DBC301F2F2CE000F90590 /* SelectionImageView.swift */; };
 		7C0EBD001F4C5B5100283ECF /* BaseDataSourceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0EBCFF1F4C5B5100283ECF /* BaseDataSourceItem.swift */; };
+		7C121F00208742A800AA585F /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
+		7C121F01208742A800AA585F /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
+		7C121F02208742BC00AA585F /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
+		7C121F03208742BD00AA585F /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
+		7C121F0B20874BCE00AA585F /* AppMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121F0A20874BCE00AA585F /* AppMigrator.swift */; };
+		7C121F0C20874BCE00AA585F /* AppMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121F0A20874BCE00AA585F /* AppMigrator.swift */; };
 		7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18D75C1F9F461A00F8679D /* ShadowView.swift */; };
 		7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CB8F51F724E54000768E8 /* ProgressPopUpProtocol.swift */; };
 		7C1EA0481F9792F1002DBAD8 /* CreateStoryResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EA0471F9792F1002DBAD8 /* CreateStoryResponce.swift */; };
@@ -3795,6 +3801,8 @@
 		7C0DBC301F2F2CE000F90590 /* SelectionImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionImageView.swift; sourceTree = "<group>"; };
 		7C0EBCFF1F4C5B5100283ECF /* BaseDataSourceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDataSourceItem.swift; sourceTree = "<group>"; };
 		7C0EFB4EB989796A6FE4FDA8 /* IntroduceInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractorInput.swift; sourceTree = "<group>"; };
+		7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenKeychainStorage.swift; sourceTree = "<group>"; };
+		7C121F0A20874BCE00AA585F /* AppMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMigrator.swift; sourceTree = "<group>"; };
 		7C18D75C1F9F461A00F8679D /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		7C1CB8F51F724E54000768E8 /* ProgressPopUpProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPopUpProtocol.swift; sourceTree = "<group>"; };
 		7C1EA0471F9792F1002DBAD8 /* CreateStoryResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryResponce.swift; sourceTree = "<group>"; };
@@ -5635,6 +5643,7 @@
 			children = (
 				CE6FBFBB1FB2DC3F008FC18C /* AppDelegate.swift */,
 				7CDB43341F86678D00789FA6 /* AppConfigurator.swift */,
+				7C121F0A20874BCE00AA585F /* AppMigrator.swift */,
 				CE1458CE2045734200812544 /* Alamofire+Validate.swift */,
 				CE3B3AF0202888240002558C /* OrientationManager.swift */,
 				672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */,
@@ -9746,6 +9755,7 @@
 			isa = PBXGroup;
 			children = (
 				CE08BDE91FC8404600440CA0 /* TokenStorage.swift */,
+				7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */,
 				CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */,
 				CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */,
 			);
@@ -13197,6 +13207,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/JDStatusBarNotification/JDStatusBarNotification.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
@@ -13221,6 +13232,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDStatusBarNotification.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
@@ -13286,6 +13298,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/JDStatusBarNotification/JDStatusBarNotification.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
@@ -13310,6 +13323,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDStatusBarNotification.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
@@ -14309,6 +14323,7 @@
 				CE3E4D0E201B698F00173045 /* UIButton+Properties.swift in Sources */,
 				8C0E8F541FDEBDFF00789C91 /* FileInfoRouter.swift in Sources */,
 				8C0E8F551FDEBDFF00789C91 /* UsageInfoRouter.swift in Sources */,
+				7C121F01208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				8C0E8F561FDEBDFF00789C91 /* ActionSheetPredetermendConfigs.swift in Sources */,
 				8C0E8F571FDEBDFF00789C91 /* FileInfoConfigurator.swift in Sources */,
 				8C0E8F581FDEBDFF00789C91 /* FileInfoInitializer.swift in Sources */,
@@ -14364,6 +14379,7 @@
 				8C0E8F7F1FDEBDFF00789C91 /* SelectNameInteractorInput.swift in Sources */,
 				8C0E8F801FDEBDFF00789C91 /* SelectNameInteractorOutput.swift in Sources */,
 				8C0E8F811FDEBDFF00789C91 /* SelectNameInteractor.swift in Sources */,
+				7C121F0C20874BCE00AA585F /* AppMigrator.swift in Sources */,
 				8C0E8F821FDEBDFF00789C91 /* SelectNameRouterInput.swift in Sources */,
 				8C0E8F831FDEBDFF00789C91 /* PackagesRouterInput.swift in Sources */,
 				4A56D5BC202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
@@ -14527,6 +14543,7 @@
 				CE4D2806207E086C003AE4FB /* NumericConstants.swift in Sources */,
 				CE1BE95520492DE40074BDDC /* Alamofire+Validate.swift in Sources */,
 				CE1BE95420492D040074BDDC /* FileService.swift in Sources */,
+				7C121F03208742BD00AA585F /* TokenKeychainStorage.swift in Sources */,
 				CE1BE95220492CD50074BDDC /* URL+Path.swift in Sources */,
 				CE1BE94A20492C5E0074BDDC /* SharedConstants.swift in Sources */,
 				CE1BE94B20492C800074BDDC /* ShareConfigurator.swift in Sources */,
@@ -14652,6 +14669,7 @@
 				78B02CBD200D1AD500D11CD2 /* ContactSyncResponse.swift in Sources */,
 				B54BFF47202B43DF0018AF82 /* WidgetService.swift in Sources */,
 				CEAE3FF41EFD517300A405B2 /* TabBarViewController.swift in Sources */,
+				7C121F0B20874BCE00AA585F /* AppMigrator.swift in Sources */,
 				7C49881A1F3320420039C5F2 /* CreateStoryPhotosOrderPresenter.swift in Sources */,
 				7C257B3D20174D7700CB56F8 /* ContactBackupEmpty.swift in Sources */,
 				CE51AB801EF90853005DCEE0 /* LoginRouter.swift in Sources */,
@@ -14876,6 +14894,7 @@
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */,
 				2BA37C38202837B400660394 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
+				7C121F00208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */,
 				CE51AC7E1EF90853005DCEE0 /* LoginInitializer.swift in Sources */,
 				4A9B3908201F3533009FC572 /* FaceImageItemsRouter.swift in Sources */,
@@ -15604,6 +15623,7 @@
 				CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */,
 				CEA524BE2046EB860036FCEA /* Error+Network.swift in Sources */,
 				CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */,
+				7C121F02208742BC00AA585F /* TokenKeychainStorage.swift in Sources */,
 				CE61D1C32046873A001D01DC /* UploadService.swift in Sources */,
 				CE1B7623204D343500B5E12A /* Error+Localization.swift in Sources */,
 				CEBDB1E620453041007EE1AE /* UICollectionView+Extensions.swift in Sources */,
