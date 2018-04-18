@@ -190,7 +190,9 @@ extension CoreDataStack {
             SingletonStorage.shared.getUniqueUserID(success: { userId in
                 let filtredArray = sortedItems.filter { !$0.syncStatusesArray.contains(userId) }
                 completion(filtredArray.compactMap { $0.wrapedObject })
-            }, fail: {})
+            }, fail: {
+                completion([])
+            })
             
         })
     }
