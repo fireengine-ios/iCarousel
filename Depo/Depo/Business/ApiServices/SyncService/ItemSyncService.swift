@@ -165,7 +165,6 @@ class ItemSyncServiceImpl: ItemSyncService {
             self.fail()
             
         })
-        
     }
     
     private func appendNewUnsyncedItems() {

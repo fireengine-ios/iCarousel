@@ -1416,9 +1416,9 @@
 		8C0B91B220170F4D00A5BA81 /* ContactSyncResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */; };
 		8C0B91B320170F5B00A5BA81 /* ContactSyncParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */; };
 		8C0B91B42017103600A5BA81 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
-		8C0B91B52017103900A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		8C0B91B62017103D00A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		8C0B91B82017104100A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B52017103900A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B62017103D00A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B82017104100A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		8C0B91B92017104300A5BA81 /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
 		8C0B91BA2017104500A5BA81 /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
 		8C0B91BB2017104800A5BA81 /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
@@ -3236,6 +3236,13 @@
 		CEF0C2861FC549C400105C31 /* ImportFromInstagramInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */; };
 		CEF0C28A1FC594E300105C31 /* InstagramAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */; };
 		CEF0C28B1FC594E300105C31 /* InstagramAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */; };
+		CEF3719B20873673007AD36E /* UIViewController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3719A20873673007AD36E /* UIViewController+NavBar.swift */; };
+		CEF3719C20873B0F007AD36E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
+		CEF3719D20873B11007AD36E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
+		CEF3719E20873B12007AD36E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
+		CEF3719F20873B40007AD36E /* UIViewController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3719A20873673007AD36E /* UIViewController+NavBar.swift */; };
+		CEF371A020873B41007AD36E /* UIViewController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3719A20873673007AD36E /* UIViewController+NavBar.swift */; };
+		CEF371A120873B42007AD36E /* UIViewController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3719A20873673007AD36E /* UIViewController+NavBar.swift */; };
 		CEF41E9B2035B2BF0008FCD5 /* PreventCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF41E9A2035B2BF0008FCD5 /* PreventCollectionView.swift */; };
 		CEF41E9C2035B2DB0008FCD5 /* PreventCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF41E9A2035B2BF0008FCD5 /* PreventCollectionView.swift */; };
 		CEF41E9D2035B2DF0008FCD5 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
@@ -5313,6 +5320,7 @@
 		CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramInteractor.swift; sourceTree = "<group>"; };
 		CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAuthViewController.swift; sourceTree = "<group>"; };
 		CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstagramAuthViewController.xib; sourceTree = "<group>"; };
+		CEF3719A20873673007AD36E /* UIViewController+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavBar.swift"; sourceTree = "<group>"; };
 		CEF41E9A2035B2BF0008FCD5 /* PreventCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventCollectionView.swift; sourceTree = "<group>"; };
 		CEF619EB1F79222600BECF03 /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
 		CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseResult.swift; sourceTree = "<group>"; };
@@ -11076,6 +11084,7 @@
 			isa = PBXGroup;
 			children = (
 				CEDFECA21F10C77E003D1A75 /* UINavigationBarExtension.swift */,
+				CEF3719A20873673007AD36E /* UIViewController+NavBar.swift */,
 			);
 			path = UINavigationBar;
 			sourceTree = "<group>";
@@ -13470,7 +13479,7 @@
 				8C0B91A820170EAD00A5BA81 /* ManageContactsRouterInput.swift in Sources */,
 				B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
 				8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */,
-				8C0B91B62017103D00A5BA81 /* (null) in Sources */,
+				8C0B91B62017103D00A5BA81 /* BuildFile in Sources */,
 				8C0E8C671FDEBDFF00789C91 /* ActivityType.swift in Sources */,
 				CE1B7625204D347D00B5E12A /* Error+Network.swift in Sources */,
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
@@ -14034,7 +14043,7 @@
 				8C06AC1D20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */,
 				8C0E8E4A1FDEBDFF00789C91 /* SyncDBUtils.m in Sources */,
 				8C0E8E4B1FDEBDFF00789C91 /* CreateStoryNameViewOutput.swift in Sources */,
-				8C0B91B52017103900A5BA81 /* (null) in Sources */,
+				8C0B91B52017103900A5BA81 /* BuildFile in Sources */,
 				4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
@@ -14389,7 +14398,7 @@
 				4A8CC31B201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */,
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
-				8C0B91B82017104100A5BA81 /* (null) in Sources */,
+				8C0B91B82017104100A5BA81 /* BuildFile in Sources */,
 				8C0E8F901FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				8C0E8F911FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				8C0E8F921FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
@@ -14515,11 +14524,13 @@
 				CE1BE94D20492C8B0074BDDC /* AuthorizationRepository.swift in Sources */,
 				CE4D27F7207E024A003AE4FB /* Constants.swift in Sources */,
 				CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */,
+				CEF3719D20873B11007AD36E /* TitleView.swift in Sources */,
 				CE98F6DB204E71E300433915 /* String+UTType.swift in Sources */,
 				CE1BE95120492CCE0074BDDC /* Dictionary.swift in Sources */,
 				CE4D281C207E0A73003AE4FB /* ColorConstants.swift in Sources */,
 				CE4D2816207E0A25003AE4FB /* FromNib.swift in Sources */,
 				CE1B7628204D34B900B5E12A /* Error+Alamofire.swift in Sources */,
+				CEF371A020873B41007AD36E /* UIViewController+NavBar.swift in Sources */,
 				CE1BE94C20492C870074BDDC /* AuthorizationURLs.swift in Sources */,
 				CE1BE94820492C510074BDDC /* SharedFactory.swift in Sources */,
 				CE4D281A207E0A5B003AE4FB /* Device.swift in Sources */,
@@ -14552,8 +14563,10 @@
 				CE4D281B207E0A5B003AE4FB /* Device.swift in Sources */,
 				CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */,
 				CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */,
+				CEF371A120873B42007AD36E /* UIViewController+NavBar.swift in Sources */,
 				CE4D2817207E0A2B003AE4FB /* FromNib.swift in Sources */,
 				CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */,
+				CEF3719E20873B12007AD36E /* TitleView.swift in Sources */,
 				8CAFBF0220825E720046E881 /* String+Subscript.swift in Sources */,
 				CE4D27F8207E024B003AE4FB /* Constants.swift in Sources */,
 			);
@@ -14829,6 +14842,7 @@
 				CE51AC351EF90853005DCEE0 /* CurioDB.m in Sources */,
 				CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */,
 				78D9BA392007E7F100F2233F /* DuplicatedContactsInteractor.swift in Sources */,
+				CEF3719B20873673007AD36E /* UIViewController+NavBar.swift in Sources */,
 				CEB1CEAA1F21E11200C9DD8F /* SwiftyJSONExtension.swift in Sources */,
 				CE23A0F0205FE5B60048267D /* UserDefaultsForUserID.swift in Sources */,
 				CECA95951F1610590054BDC0 /* RemoteDownloder.swift in Sources */,
@@ -15619,6 +15633,7 @@
 				CE109C2B2057A9C9006C9FA0 /* ShareController.swift in Sources */,
 				CE4D2810207E0996003AE4FB /* PasscodeState.swift in Sources */,
 				CE4D27F6207E0249003AE4FB /* Constants.swift in Sources */,
+				CEF3719C20873B0F007AD36E /* TitleView.swift in Sources */,
 				CEA524BC2046D6A10036FCEA /* UploadOperation.swift in Sources */,
 				CE654FAF20454A4400232025 /* ShareData.swift in Sources */,
 				CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */,
@@ -15632,6 +15647,7 @@
 				CEE3017F2049520C007E70CE /* Mapping.swift in Sources */,
 				CEBDB1D720444C73007EE1AE /* UIColor+Adjust.swift in Sources */,
 				CE4D2811207E0997003AE4FB /* PasscodeInputView.swift in Sources */,
+				CEF3719F20873B40007AD36E /* UIViewController+NavBar.swift in Sources */,
 				CE18CC95204E8AC000FA3F44 /* PasscodeStorage.swift in Sources */,
 				CE654FB120454AAD00232025 /* URL+Video.swift in Sources */,
 				CE2DBA192059043200D08C5E /* ShareDataImageLoader.swift in Sources */,
@@ -16138,7 +16154,7 @@
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "a52e227d-e046-4efa-ba7f-d9e95531d2f5";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxForTurkcell;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -16192,7 +16208,7 @@
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "6f81a9f3-c2cd-4de6-9dd4-7455315f659a";
 				PROVISIONING_PROFILE_SPECIFIER = "6f81a9f3-c2cd-4de6-9dd4-7455315f659a";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;
@@ -16244,7 +16260,7 @@
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "c7326830-eaca-4f1e-9bbb-765e70c0d2fc";
 				PROVISIONING_PROFILE_SPECIFIER = "8c40575c-decc-4227-ac97-05bfd2184acb";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;
@@ -16297,7 +16313,7 @@
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "3d2683f7-410b-4d3d-82ee-4404d6095878";
 				PROVISIONING_PROFILE_SPECIFIER = "4b43f284-4a1e-4a29-9b9e-c38d774e58aa";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "ENTERPRISE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;
@@ -16716,7 +16732,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"LOG2FILE_NO=1",
-					"MAIN_APP=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Depo/App/Depo_LifeTech-Info.plist";
@@ -16737,7 +16752,7 @@
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "85d83443-9582-4c9b-9c0c-24c88c6a5e91";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxForTurkcell;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -16769,10 +16784,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"MAIN_APP=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Depo/App/Depo_LifeTech-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -16792,7 +16804,7 @@
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "9581b4f3-226d-4b11-919d-3d78387424de";
 				PROVISIONING_PROFILE_SPECIFIER = ADHOC_LifeboxForTurkcell;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -16822,10 +16834,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"MAIN_APP=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Depo/App/Depo_LifeTech-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -16845,7 +16854,7 @@
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "9581b4f3-226d-4b11-919d-3d78387424de";
 				PROVISIONING_PROFILE_SPECIFIER = ADHOC_LifeboxForTurkcell;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -16876,10 +16885,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"MAIN_APP=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Depo/App/Depo_LifeTech-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -16899,7 +16905,7 @@
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "9581b4f3-226d-4b11-919d-3d78387424de";
 				PROVISIONING_PROFILE_SPECIFIER = ADHOC_LifeboxForTurkcell;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "ENTERPRISE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

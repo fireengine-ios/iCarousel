@@ -144,9 +144,9 @@ class MenloworksEventsService {
         MPush.hitEvent(MenloworksEventsConstants.faceImageRecognitionOff)
     }
     
-//    func onPasscodeSet() {
-//        MPush.hitEvent(MenloworksEventsConstants.passcodeSet)
-//    }
+    func onPasscodeSet() {
+        MPush.hitEvent(MenloworksEventsConstants.passcodeSet)
+    }
     
     func onTouchIDSet() {
         MPush.hitEvent(MenloworksEventsConstants.touchIDSet)
