@@ -22,11 +22,7 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
         biometricsManager.isEnabled = false
         passcodeStorage.clearPasscode()
     }
-    
-    func setPasscode() {
-        biometricsManager.isEnabled = true
-    }
-    
+        
     var biometricsStatus: BiometricsStatus {
         return biometricsManager.status
     }
