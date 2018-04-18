@@ -435,7 +435,7 @@
 "Warning" = "Warning";
 "TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate login with Turkcell password feature.";
 "TurkcellSecurityAutologinText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate autologin with 3G/LTE feature.";
-"PasscodeActivationWhileTurkcellActivated" = "Auto login to lifebox with 3G/LTE and login to lifebox with Turkcell password have been deactivated for you to use lifebox passcode and touch id features safely, you can reactivate from login settings anytime you wish. In this case, you can login to lifebox with your lifebox password.";
+"PasscodeActivationWhileTurkcellActivated" = "Auto login to lifebox with 3G/LTE has been deactivated for you to use lifebox passcode and touch id features safely. You can also deactivate login to lifebox with Turkcell password from login settings anytime you wish. In this case, you can login to lifebox with your lifebox password.";
 "The file isn't supported" = "The file isn't supported";
 "Yes" = "Yes";
 "Nope" = "Nope";
