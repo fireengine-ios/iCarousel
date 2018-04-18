@@ -11,6 +11,8 @@ class TurkcellSecurityPresenter: BasePresenter {
     var interactor: TurkcellSecurityInteractorInput!
     var router: TurkcellSecurityRouterInput!
     
+    var biometricsManager: BiometricsManager = factory.resolve()
+    
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
@@ -40,6 +42,18 @@ extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
             router.rootViewController?.present(popUP, animated: true, completion: nil)
         } else {
             startAsyncOperation()
+            
+            if biometricsManager.isEnabled {
+                let router = RouterVC()
+                if passcode {
+                    let popUp = PopUpController.with(title: TextConstants.warning, message: TextConstants.turkcellSecurityWaringPasscode, image: .error, buttonTitle: TextConstants.ok)
+                    router.rootViewController?.present(popUp, animated: true, completion: nil)
+                }
+                else if autoLogin {
+                    let popUp = PopUpController.with(title: TextConstants.warning, message: TextConstants.turkcellSecurityWaringAutologin, image: .error, buttonTitle: TextConstants.ok)
+                    router.rootViewController?.present(popUp, animated: true, completion: nil)
+                }
+            }
             
             if passcode != interactor.turkcellPasswordOn {
                 MenloworksTagsService.shared.onTurkcellPasswordSettingsChanged(passcode)
