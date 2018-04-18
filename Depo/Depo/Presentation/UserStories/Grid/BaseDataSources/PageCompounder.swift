@@ -183,7 +183,7 @@ class PageCompounder {
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
                 lastFreshLocalItem.metaDate <= firstItem.metaDate else {
                     
-                    debugPrint("!!! time for a recurcieve callback loop")
+                    debugPrint("!!!? time for a recurcieve callback loop monitorDBLastAppendedPageLast")
                     
                     self?.compoundItems(pageItems: pageItems,
                                         sortType: sortType,
@@ -198,6 +198,7 @@ class PageCompounder {
                                                 self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                                 return
                                             } else if !compoundedPage.isEmpty {
+                                                debugPrint("!!!? monitorDBLastAppendedPageLast last non empty")
                                                 compoundedCallback(compoundedPage, leftovers)
                                             }
                                             
@@ -205,7 +206,7 @@ class PageCompounder {
                     
                     return
             }
-            debugPrint("!!! regular callback")
+            debugPrint("!!!? regular callback monitorDBLastAppendedPageLast")
             self?.compoundItems(pageItems: pageItems,
                                 sortType: sortType,
                                 predicate: predicate,
@@ -214,6 +215,7 @@ class PageCompounder {
                                         self?.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                         return
                                     }
+                                    debugPrint("!!!? last non empty")
                                     compoundedCallback(compoundedPage, leftovers)
             })
         }
@@ -233,17 +235,19 @@ class PageCompounder {
                     compoundedCallback(pageItems,[])
                     return
             }
-            
+            debugPrint("!!!? regular callback monitorDBLastAppendedPageFirst")
             self?.compoundItems(pageItems: pageItems,
                                 sortType: sortType,
                                 predicate: predicate,
                                 compoundedCallback: { [weak self] compoundedPage, leftovers  in
                                     
                                     guard !compoundedPage.isEmpty else {
+                                        debugPrint("!!!? regular callback monitorDBLastAppendedPageFirst else")
                                         /* or shpuld I use compundedPage.count >= self.pageSize ?*/
                                         self?.monitorDBLastAppendedPageFirst(lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                         return
                                     }
+                                    debugPrint("!!!? first non empty")
                                     compoundedCallback(compoundedPage, leftovers)
             })
         }
@@ -260,19 +264,38 @@ class PageCompounder {
             self?.coreData.pageAppendedCallBack = nil
             
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
+                let firstFreshLocalItem = freshlyDBAppendedItems.first,
                 ///DO I need to cehck cache also here?
-                lastFreshLocalItem.metaDate > lastItem.metaDate else {
-                    compoundedCallback(pageItems, [])
+                firstFreshLocalItem.metaDate >= lastItem.metaDate,
+                firstFreshLocalItem.metaDate <= firstItem.metaDate
+                else {
+                    debugPrint("!!!? regularcallbacklastFreshLocalItem.metaDate > lastItem.metaDate")
+//                    compoundedCallback(pageItems, [])
+                    self?.compoundItems(pageItems: pageItems,
+                                        sortType: sortType,
+                                        predicate: predicate,
+                                        compoundedCallback: { [weak self] compoundedPage, leftovers  in
+                                            guard !compoundedPage.isEmpty else {
+                                                debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle else")
+                                                self?.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
+                                                return
+                                            }
+                                            debugPrint("!!!? middle non empty")
+                                            compoundedCallback(compoundedPage, leftovers)
+                    })
                     return
             }
+            debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle")
             self?.compoundItems(pageItems: pageItems,
                                 sortType: sortType,
                                 predicate: predicate,
                                 compoundedCallback: { [weak self] compoundedPage, leftovers  in
                                     guard !compoundedPage.isEmpty else {
+                                        debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle else")
                                         self?.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                         return
                                     }
+                                    debugPrint("!!!? middle non empty")
                                     compoundedCallback(compoundedPage, leftovers)
             })
         }
