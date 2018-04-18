@@ -11,7 +11,8 @@ class TurkcellSecurityPresenter: BasePresenter {
     var interactor: TurkcellSecurityInteractorInput!
     var router: TurkcellSecurityRouterInput!
     
-    var biometricsManager: BiometricsManager = factory.resolve()
+    private lazy var biometricsManager: BiometricsManager = factory.resolve()
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
     override func outputView() -> Waiting? {
         return view as? Waiting
@@ -43,7 +44,7 @@ extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
         } else {
             startAsyncOperation()
             
-            if biometricsManager.isEnabled {
+            if !passcodeStorage.isEmpty {
                 let router = RouterVC()
                 if passcode {
                     let popUp = PopUpController.with(title: TextConstants.warning, message: TextConstants.turkcellSecurityWaringPasscode, image: .error, buttonTitle: TextConstants.ok)
