@@ -72,6 +72,7 @@ final class AutoSyncSettings {
         private init() {}
         
         static let isAutoSyncEnabledKey = "isAutoSyncEnabled"
+        static let isAutoSyncTimingEnabledKey = "isAutoSyncTimingEnabledKey"
         static let mobileDataPhotosKey = "mobileDataPhotos"
         static let mobileDataVideoKey = "mobileDataVideo"
         static let wifiPhotosKey = "wifiPhotos"
@@ -85,18 +86,24 @@ final class AutoSyncSettings {
     var isAutoSyncEnabled: Bool {
         return isAutoSyncOptionEnabled && (photoSetting.option != .never || videoSetting.option != .never)
     }
+    
+    var isAutoSyncTimingEnabled: Bool {
+        return isAutoSyncTimingOptionEnabled
+    }
+
     var photoSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiAndCellular)
     var videoSetting = AutoSyncSetting(syncItemType: .video, option: .wifiOnly)
     var timeSetting = AutoSyncSetting(syncItemType: .time, option: .daily)
     
-    //auto sync switcher in settings is on/off
-    var isAutoSyncOptionEnabled: Bool = true
-    
+
+    var isAutoSyncOptionEnabled: Bool = true //auto sync switcher in settings is on/off
+    var isAutoSyncTimingOptionEnabled: Bool = true //auto sync timing switcher in settings is on/off
     
     init() { }
     
     init(with dictionary: [String: Bool]) {
         isAutoSyncOptionEnabled = dictionary[SettingsKeys.isAutoSyncEnabledKey] ?? true
+        isAutoSyncTimingOptionEnabled = dictionary[SettingsKeys.isAutoSyncTimingEnabledKey] ?? true
         
         let mobileDataPhotos = dictionary[SettingsKeys.mobileDataPhotosKey] ?? true
         let mobileDataVideo = dictionary[SettingsKeys.mobileDataVideoKey] ?? false
@@ -145,6 +152,11 @@ final class AutoSyncSettings {
         timeSetting.option = .daily
     }
     
+    func disableTimingAutoSync() {
+        isAutoSyncTimingOptionEnabled = false
+        timeSetting.option = .daily
+    }
+    
     func set(setting: AutoSyncSetting) {
         switch setting.syncItemType {
         case .photo:
@@ -170,6 +182,7 @@ final class AutoSyncSettings {
     
     func asDictionary() -> [String: Bool] {
         return [SettingsKeys.isAutoSyncEnabledKey: isAutoSyncOptionEnabled,
+                SettingsKeys.isAutoSyncTimingEnabledKey: isAutoSyncTimingOptionEnabled,
                 SettingsKeys.mobileDataPhotosKey: (photoSetting.option == .wifiAndCellular),
                 SettingsKeys.mobileDataVideoKey: (videoSetting.option == .wifiAndCellular),
                 SettingsKeys.wifiPhotosKey: (photoSetting.option == .wifiOnly),

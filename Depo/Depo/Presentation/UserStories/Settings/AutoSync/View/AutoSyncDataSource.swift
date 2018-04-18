@@ -152,10 +152,6 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
             }
         }
     }
-    
-    func didChangeTime(setting: AutoSyncSetting) {
-        autoSyncSettings?.set(setting: setting)
-    }
 }
 
 

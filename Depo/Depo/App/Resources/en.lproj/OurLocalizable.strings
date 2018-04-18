@@ -321,6 +321,7 @@
 "Face & Image Grouping" = "Face & Image Grouping";
 "Import Photos" = "Import Photos";
 "Back-up my contacts" = "Back-up my contacts";
+"Contacts Sync" = "Contacts Sync";
 "Leave feedback" = "Leave feedback";
 "Upload Photo" = "Upload Photo";
 "Login Settings" = "Login Settings";
@@ -387,6 +388,7 @@
 "Error occurred while accessing your photos.\nPlease check your settings." = "Error occurred while accessing your photos.\nPlease check your settings.";
 "Photos" = "Photos";
 "Videos" = "Videos";
+"Auto Sync" = "Auto Sync";
 "Select All" = "Select All";
 "Select" = "Select";
 "Folder" = "Folder";
@@ -583,3 +585,4 @@
 "uploading" = "Uploading...";
 "error_internet" = "Please check your internet connection is active and Mobile Data is ON.";
 "error_login" = "You have not login via app yet";
+"Contacts Sync" = "Contacts Sync";

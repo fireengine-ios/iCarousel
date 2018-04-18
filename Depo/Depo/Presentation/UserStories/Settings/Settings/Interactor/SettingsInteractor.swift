@@ -44,6 +44,7 @@ class SettingsInteractor: SettingsInteractorInput {
         var array = [[TextConstants.settingsViewCellBeckup,
                       TextConstants.settingsViewCellImportPhotos,
                       TextConstants.settingsViewCellAutoUpload,
+                      TextConstants.settingsViewCellContactsSync,
                       TextConstants.settingsViewCellFaceAndImageGrouping],
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
