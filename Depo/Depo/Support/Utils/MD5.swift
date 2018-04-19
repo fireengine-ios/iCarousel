@@ -38,6 +38,12 @@ final class MD5 {
     }
 }
 
+extension String {
+    var md5: String? {
+        return MD5(string: self)?.hex
+    }
+}
+
 /// https://gist.github.com/khanlou/baf60dd62601b879eeba209943b04973
 //extension String {
 //    var md5: String? {

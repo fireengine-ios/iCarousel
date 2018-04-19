@@ -47,10 +47,7 @@ extension PasscodeStorageDefaults: PasscodeStorage {
         return passcode.isEmpty
     }
     func isEqual(to passcode: Passcode) -> Bool {
-        if let md5 = MD5(string: passcode)?.hex {
-            return md5 == self.passcode
-        }
-        return false
+        return passcode == self.passcode
     }
     
     func save(passcode: Passcode) {
@@ -59,9 +56,7 @@ extension PasscodeStorageDefaults: PasscodeStorage {
             MenloworksEventsService.shared.onPasscodeSet()
         }
         #endif
-        if let md5 = MD5(string: passcode)?.hex {
-            self.passcode = md5
-        }
+        self.passcode = passcode
     }
     
     func clearPasscode() {

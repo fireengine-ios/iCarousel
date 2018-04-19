@@ -224,7 +224,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func failedUpdatePhone(errorResponse: ErrorResponse) {
         textEnterVC?.stopLoading()
-        textEnterVC?.showAlertMessage(with: errorResponse.description)
+        textEnterVC?.showErrorAlert(message: errorResponse.description)
     }
     
     func successed(resendUpdatePhone: SignUpSuccessResponse) {
@@ -237,7 +237,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func failedResendUpdatePhone(errorResponse: ErrorResponse) {
         optInVC?.stopActivityIndicator()
-        textEnterVC?.showAlertMessage(with: errorResponse.description)
+        textEnterVC?.showErrorAlert(message: errorResponse.description)
     }
     
     func successedVerifyPhone() {
