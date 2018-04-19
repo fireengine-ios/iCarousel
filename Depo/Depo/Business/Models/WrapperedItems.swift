@@ -582,6 +582,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
             }
             return "image/jpg"
         case .video:
+            if let type = urlToFile?.pathExtension.lowercased(), !type.isEmpty {
+                return "video/\(type)"
+            }
             return "video/mp4"
         default:
             return "unknown"
