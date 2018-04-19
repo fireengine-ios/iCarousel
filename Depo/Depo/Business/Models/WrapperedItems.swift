@@ -867,16 +867,13 @@ class WrapData: BaseDataSourceItem, Wrappered {
         syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         fileType = FileType(value: mediaItem.fileTypeValue)
         isFolder = mediaItem.isFolder
-        log.debug("Wrap initializer from media Item, before getting duration")
         duration = WrapData.getDuration(duration: mediaItem.metadata?.duration)
 
-        log.debug("Wrap initializer from media Item, after getting duration")
 //        syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         
         albums = mediaItem.albumsUUIDs
         
         metaData = BaseMetaData()
-        log.debug("Wrap initializer from media Item, after creating MetaData")
         /// metaData filling
         metaData?.favourite = mediaItem.favoritesValue
         //        metaData?.album = mediaItem.metadata?.album //FIXME: currently disabled
