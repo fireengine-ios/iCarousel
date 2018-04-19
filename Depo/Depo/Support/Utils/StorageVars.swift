@@ -14,6 +14,8 @@ protocol StorageVars: class {
     var autoSyncSet: Bool { get set }
     var autoSyncSettings: [String: Any]? { get set }
     var autoSyncSettingsMigrationCompleted: Bool { get set }
+    var homePageFirstTimeLogin: Bool { get set }
+    var smallFullOfQuotaPopUpCheckBox: Bool { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -51,5 +53,17 @@ final class UserDefaultsVars: StorageVars {
     var autoSyncSettingsMigrationCompleted: Bool {
         get { return userDefaults.bool(forKey: autoSyncSettingsMigrationCompletedKey) }
         set { userDefaults.set(newValue, forKey: autoSyncSettingsMigrationCompletedKey) }
+    }
+    
+    private let homePageFirstTimeKey = "firstTimeKeyLargeQuotaPopUp"
+    var homePageFirstTimeLogin: Bool {
+        get { return userDefaults.bool(forKey: homePageFirstTimeKey + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: homePageFirstTimeKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let smallFullOfQuotaPopUpCheckBoxKey = "smallFullOfQuotaPopUpCheckBox"
+    var smallFullOfQuotaPopUpCheckBox: Bool {
+        get { return userDefaults.bool(forKey: smallFullOfQuotaPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: smallFullOfQuotaPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
     }
 }

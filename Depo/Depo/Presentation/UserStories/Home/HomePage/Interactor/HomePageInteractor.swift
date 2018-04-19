@@ -41,17 +41,17 @@ class HomePageInteractor: HomePageInteractorInput {
         }
     }
     
-    private static let firstTimeKey = "firstTimeKeyLargeQuotaPopUp"
-    
     func showQuotaPopUpIfNeed() {
-        let isFirstTime = !UserDefaults.standard.bool(forKey: HomePageInteractor.firstTimeKey + SingletonStorage.shared.uniqueUserID)
+        let storageVars: StorageVars = factory.resolve()
+        
+        let isFirstTime = !storageVars.homePageFirstTimeLogin
         if isFirstTime {
-            UserDefaults.standard.set(true, forKey: HomePageInteractor.firstTimeKey + SingletonStorage.shared.uniqueUserID)
+            storageVars.homePageFirstTimeLogin = true
         }
         AccountService().quotaInfo(success: { [weak self] response in
             if let qresponce = response as? QuotaInfoResponse {
                 guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else { return }
-                let usagePercent = Float(usedBytes) / Float(quotaBytes)
+                let usagePercent = 1.0 //Float(usedBytes) / Float(quotaBytes)
                 var viewForPresent: UIViewController? = nil
                 
                 if isFirstTime {
@@ -76,7 +76,7 @@ class HomePageInteractor: HomePageInteractorInput {
             
             
             }, fail: { error in
-                
+                //error handling not need
                 
         })
     }

@@ -47,11 +47,7 @@ class LargeFullOfQuotaPopUp: UIViewController {
         }
     }
     
-    @IBOutlet private weak var bacgroundViewForImage: UIView! {
-        didSet {
-            
-        }
-    }
+    @IBOutlet private weak var bacgroundViewForImage: UIView!
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -65,18 +61,6 @@ class LargeFullOfQuotaPopUp: UIViewController {
             subTitleLabel.textColor = ColorConstants.whiteColor
             subTitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
             subTitleLabel.text = TextConstants.lifeboxLargePopUpSubTitle
-        }
-    }
-    
-    @IBOutlet private weak var expandStorage: UIButton! {
-        didSet {
-            
-        }
-    }
-    
-    @IBOutlet private weak var skip: UIButton! {
-        didSet {
-            
         }
     }
     

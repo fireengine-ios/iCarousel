@@ -15,9 +15,7 @@
                 <outlet property="bacgroundViewForImage" destination="gwP-lA-H0d" id="i9i-Kl-VDH"/>
                 <outlet property="containerView" destination="UjI-IO-v9x" id="VXr-FO-qxN"/>
                 <outlet property="expandButton" destination="fhD-Qc-mob" id="Haq-Wb-j2Z"/>
-                <outlet property="expandStorage" destination="fhD-Qc-mob" id="Tkx-Hd-zyj"/>
                 <outlet property="shadowView" destination="KCC-vl-tzA" id="GSb-7e-BYj"/>
-                <outlet property="skip" destination="hNa-DH-6mO" id="BCh-cT-Kda"/>
                 <outlet property="skipButton" destination="hNa-DH-6mO" id="2HC-CL-hSs"/>
                 <outlet property="subTitleLabel" destination="yw4-vK-fSk" id="Cx1-m8-lTk"/>
                 <outlet property="titleLabel" destination="ihW-uN-ZBI" id="UVF-SP-0xk"/>
@@ -59,7 +57,7 @@
                                                     <rect key="frame" x="0.0" y="124" width="338" height="153"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CardIconLamp" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-zA-Iyp">
-                                                            <rect key="frame" x="129" y="0.0" width="78" height="72"/>
+                                                            <rect key="frame" x="130" y="0.0" width="78" height="72"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="78" id="XIs-UE-EEf"/>
                                                                 <constraint firstAttribute="height" constant="72" id="qex-64-WEA"/>
@@ -107,7 +105,7 @@
                                             <rect key="frame" x="0.0" y="400" width="338" height="144"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhD-Qc-mob" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
-                                                    <rect key="frame" x="62" y="30" width="212" height="54"/>
+                                                    <rect key="frame" x="63" y="30" width="212" height="54"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="54" id="QNk-vT-zJK"/>
                                                         <constraint firstAttribute="width" constant="212" id="XzQ-Lg-SWy"/>

@@ -10,10 +10,12 @@ import UIKit
 
 final class SmallFullOfQuotaPopUp: ViewController {
     
-    private static let keyForSmallFullOfQuotaPopUpCheckBox = "keyForSmallFullOfQuotaPopUpCheckBox"
+    //private static let keyForSmallFullOfQuotaPopUpCheckBox = "keyForSmallFullOfQuotaPopUpCheckBox"
     
     static func popUp() -> SmallFullOfQuotaPopUp? {
-        let key = UserDefaults.standard.bool(forKey: SmallFullOfQuotaPopUp.keyForSmallFullOfQuotaPopUpCheckBox + SingletonStorage.shared.uniqueUserID)
+        let storageVars: StorageVars = factory.resolve()
+        
+        let key = storageVars.smallFullOfQuotaPopUpCheckBox
         if key {
             return nil
         }
@@ -174,7 +176,8 @@ final class SmallFullOfQuotaPopUp: ViewController {
     
     func saveCheckBoxState() {
         if customCheckBox.isChecked {
-            UserDefaults.standard.set(true, forKey: SmallFullOfQuotaPopUp.keyForSmallFullOfQuotaPopUpCheckBox + SingletonStorage.shared.uniqueUserID)
+            let storageVars: StorageVars = factory.resolve()
+            storageVars.smallFullOfQuotaPopUpCheckBox = true
         }
     }
     
