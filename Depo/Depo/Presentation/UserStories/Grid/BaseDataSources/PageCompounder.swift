@@ -77,7 +77,7 @@ class PageCompounder {
                                    compoundedCallback: @escaping CompoundedPageCallback) {
         
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
-        if let lastItem = pageItems.last {
+        if let lastItem = getLastNonEmpty(items: pageItems, fileType: filesType) {
             let sortingTypePredicate = getSortingPredicateFirstPage(sortType: sortType, lastItem: lastItem)
             let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
             
@@ -106,6 +106,19 @@ class PageCompounder {
                           predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate]),
                           compoundedCallback: compoundedCallback)
         }
+    }
+    
+    private func getLastNonEmpty(items: [WrapData], fileType: FileType) -> WrapData? {
+        guard fileType == .video else {
+            return items.last
+        }
+        return items.filter{
+            if !$0.isLocalItem {
+                return ($0.metaData?.takenDate != nil)
+            }
+            return $0.metaData != nil
+        }.last
+        
     }
     
     func compoundMiddlePage(pageItems: [WrapData],
