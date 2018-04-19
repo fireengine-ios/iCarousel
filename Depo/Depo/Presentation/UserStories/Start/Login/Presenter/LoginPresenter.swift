@@ -14,6 +14,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
+    private let routerVC = RouterVC()
     
     var optInVC: OptInController?
     var textEnterVC: TextEnterController?
@@ -131,18 +132,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     // MARK: - EULA
     
     func onSuccessEULA() {
-        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercent in
-            DispatchQueue.main.async {
-                self?.completeAsyncOperationEnableScreen()
-                self?.customProgressHUD.showProgressSpinner(progress: progressPercent)
-            }
-        }, end: { [weak self] in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.hideProgressSpinner()
-                self?.completeAsyncOperationEnableScreen()
-                self?.openEmptyEmailIfNeedOrOpenSyncSettings()
-            }
-        })
+        completeAsyncOperationEnableScreen()
+        openEmptyEmailIfNeedOrOpenSyncSettings()
     }
     
     func onFailEULA() {
@@ -159,6 +150,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     private func openApp() {
+        storageVars.emptyEmailUp = false
         router.goToSyncSettingsView()
     }
     
@@ -168,8 +160,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         vc.approveCancelHandler = { [weak self] in
             self?.interactor.updateUserLanguage()
         }
-        let navVC = UINavigationController(rootViewController: vc)
-        RouterVC().presentViewController(controller: navVC)
+        let navVC = NavigationController(rootViewController: vc)
+        routerVC.presentViewController(controller: navVC)
     }
     
     func allAttemtsExhausted(user: String) {
@@ -205,15 +197,15 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         tokenStorage.isClearTokens = true
         
         let textEnterVC = TextEnterController.with(
-            title: TextConstants.loginEnterGSM,
-            textPlaceholder: TextConstants.loginGSMNumber,
+            title: TextConstants.loginAddGSM,
             buttonTitle: TextConstants.save) { [weak self] enterText, vc in
                 self?.newPhone = enterText
                 self?.interactor.getTokenToUpdatePhone(for: enterText)
                 vc.startLoading()
         }
         self.textEnterVC = textEnterVC
-        RouterVC().presentViewController(controller: textEnterVC)
+        let navVC = NavigationController(rootViewController: textEnterVC)
+        routerVC.presentViewController(controller: navVC)
     }
     
     func successed(tokenUpdatePhone: SignUpSuccessResponse) {
@@ -226,7 +218,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
             let optInVC = OptInController.with(phone: newPhone)
             self?.optInVC = optInVC
             optInVC.delegate = self
-            RouterVC().pushViewController(viewController: optInVC)
+            self?.routerVC.pushViewController(viewController: optInVC)
         }
     }
     

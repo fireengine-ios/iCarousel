@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TurkcellSecurityViewController: UIViewController {
+class TurkcellSecurityViewController: ViewController {
 
     var output: TurkcellSecurityViewOutput!
 
@@ -89,6 +89,7 @@ extension TurkcellSecurityViewController: SettingsTableViewSwitchCellDelegate {
                 return
         }
         output.securityChanged(passcode: securityPasscodeCell.stateSwitch.isOn,
-                               autoLogin: securityAutoLoginCell.stateSwitch.isOn)
+                               autoLogin: securityAutoLoginCell.stateSwitch.isOn,
+                               title: cell.titleLabel.text!)
     }
 }

@@ -144,6 +144,19 @@ enum FileType: Equatable {
         
     }
     
+    var convertedToPHMediaType: PHAssetMediaType {
+        switch self {
+        case .image:
+            return .image
+        case .video:
+            return .video
+        case .audio:
+            return .audio
+        default:
+            return .unknown
+        }
+    }
+    
     var isDocument: Bool {
         return self == .application(.doc) ||
                 self == .application(.txt) ||
@@ -588,9 +601,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return Date()
     }
     
+    @available(*, deprecated: 1.0, message: "Use convenience init(info: AssetInfo) instead")
     convenience init(asset: PHAsset) {
         let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
         self.init(baseModel: BaseMediaContent(curentAsset: asset, generalInfo: info))
+    }
+
+    convenience init(info: AssetInfo) {
+        let baseModel = BaseMediaContent(curentAsset: info.asset, generalInfo: info)
+        self.init(baseModel: baseModel)
     }
     
     init(musicForCreateStory: CreateStoryMusicItem) {
@@ -799,7 +818,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     init(mediaItem: MediaItem) {
-        coreDataObject = mediaItem
+//        coreDataObject = mediaItem
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
         status = .unknown
@@ -809,16 +828,17 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         tmpDownloadUrl = url
         
+        var assetDuration : Double?
+        
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
-            
-            let avalibleAsset = LocalMediaStorage.default.assetsCache.assetBy(identifier: assetId)
     
-            if let asset = avalibleAsset {
-                let urlToFile = URL(string: url)!
+            if let asset = LocalMediaStorage.default.assetsCache.assetBy(identifier: assetId),
+                let urlToFile = URL(string: url) {
                 let tmp = LocalMediaContent(asset: asset,
                                              urlToFile: urlToFile)
-                mediaItem.metadata?.duration = asset.duration
+                assetDuration = asset.duration
+//                mediaItem.metadata?.duration = asset.duration
                 patchToPreview = .localMediaContent(tmp)
             } else {
                 // WARNIG: THIS CASE INCOREECTif 
@@ -848,16 +868,19 @@ class WrapData: BaseDataSourceItem, Wrappered {
         fileType = FileType(value: mediaItem.fileTypeValue)
         isFolder = mediaItem.isFolder
         duration = WrapData.getDuration(duration: mediaItem.metadata?.duration)
+
+//        syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         
         albums = mediaItem.albumsUUIDs
         
         metaData = BaseMetaData()
-        
         /// metaData filling
         metaData?.favourite = mediaItem.favoritesValue
         //        metaData?.album = mediaItem.metadata?.album //FIXME: currently disabled
         metaData?.artist = mediaItem.metadata?.artist
-        metaData?.duration = mediaItem.metadata?.duration
+
+        metaData?.duration = (assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration
+        
         metaData?.genre = mediaItem.metadata?.genre ?? []
         metaData?.height = mediaItem.metadata?.height
         metaData?.title = mediaItem.metadata?.title
@@ -894,6 +917,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
             } else {
                 return String(format: "%i:%02i", minutes, seconds)
             }
+        }
+        return ""
+    }
+    
+    func getLocalID() -> String {
+        if isLocalItem {
+            return asset?.localIdentifier ?? ""
+        } else if uuid.contains("~"){
+            return uuid.components(separatedBy: "~").first ?? uuid
         }
         return ""
     }

@@ -110,7 +110,7 @@ final class FilterPhotoCard: BaseView {
         guard let image = photoImageView.image else { return }
         let vc = PVViewerController.initFromNib()
         vc.image = image
-        let nController = UINavigationController(rootViewController: vc)
+        let nController = NavigationController(rootViewController: vc)
         RouterVC().presentViewController(controller: nController)
     }
 
@@ -133,7 +133,7 @@ final class FilterPhotoCard: BaseView {
                 case .success(let asset):
                     self?.showPhotoVideoDetail(with: asset)
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
             }
         }
@@ -144,7 +144,7 @@ final class FilterPhotoCard: BaseView {
         
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = UINavigationController(rootViewController: controller)
+        let nController = NavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
     }
     
@@ -159,7 +159,7 @@ final class FilterPhotoCard: BaseView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
             }
         }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhoneVereficationViewController: UIViewController, PhoneVereficationViewInput {
+class PhoneVereficationViewController: ViewController, PhoneVereficationViewInput {
     
     var output: PhoneVereficationViewOutput!
 

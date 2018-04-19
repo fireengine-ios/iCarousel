@@ -6,17 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol CreateStoryPhotosOrderViewInput: class {
-
-    /**
-        @author Oleg
-        Setup initial state of the view
-    */
-
+protocol CreateStoryPhotosOrderViewInput: class, ErrorPresenter {
     func setupInitialState()
-    
     func showStory(story: PhotoStory)
-    
     func getNavigationControllet() -> UINavigationController?
-    
 }

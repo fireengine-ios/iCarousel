@@ -8,13 +8,14 @@
 
 import UIKit
 
-final class PackagesViewController: UIViewController {
+final class PackagesViewController: ViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak private var collectionView: ResizableCollectionView!
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var policyTextView: UITextView!
     
     private lazy var activityManager = ActivityIndicatorManager()
     
@@ -23,6 +24,11 @@ final class PackagesViewController: UIViewController {
             collectionView.reloadData()
         }
     }
+    
+    private let policyHeaderSize: CGFloat = Device.isIpad ? 15 : 13
+    private let policyTextSize: CGFloat = Device.isIpad ? 13 : 10
+    
+    // MARK: - View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +38,7 @@ final class PackagesViewController: UIViewController {
         activityManager.delegate = self
         promoView.deleagte = self
         setupCollectionView()
+        policyTextView.text = ""
         
         output.viewIsReady()
         
@@ -46,6 +53,25 @@ final class PackagesViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
     }
+    
+    
+    private func setupPolicy() {
+        let attributedString = NSMutableAttributedString(string: TextConstants.packagesPolicyHeader,
+                                                         attributes: [.foregroundColor: ColorConstants.textGrayColor,
+                                                                      .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
+        
+        let policyAttributedString = NSMutableAttributedString(string: "\n\n" + TextConstants.packagesPolicyText,
+                                                               attributes: [.foregroundColor: ColorConstants.textGrayColor,
+                                                                            .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
+        attributedString.append(policyAttributedString)
+        
+        policyTextView.attributedText = attributedString
+        policyTextView.clipsToBounds = true
+        policyTextView.layer.cornerRadius = 5
+        policyTextView.layer.borderColor = ColorConstants.textLightGrayColor.cgColor
+        policyTextView.layer.borderWidth = 1
+        view.layoutIfNeeded()
+    }
 
     func showRestoreButton() {
         //IF THE USER NON CELL USER
@@ -53,6 +79,10 @@ final class PackagesViewController: UIViewController {
         moreButton.tintColor = UIColor.white
         navigationItem.rightBarButtonItem = moreButton
 
+    }
+    
+    func showInAppPolicy() {
+        setupPolicy()
     }
     
     @objc private func restorePurhases() {
@@ -88,7 +118,7 @@ extension PackagesViewController: PackagesViewInput {
     }
     
     func display(error: ErrorResponse) {
-        UIApplication.showErrorAlert(message: error.localizedDescription)
+        UIApplication.showErrorAlert(message: error.description)
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan]) {
@@ -178,5 +208,19 @@ extension PackagesViewController: PromoViewDelegate {
         startActivityIndicator()
         output.submit(promocode: promocode)
         keyboardHideManager.dismissKeyboard()
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension PackagesViewController: UITextViewDelegate {
+    
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return UIApplication.shared.openURL(URL)
     }
 }

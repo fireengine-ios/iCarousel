@@ -9,7 +9,7 @@
 import UIKit
 
 /// doc https://wiki.life.com.by/display/LTFizy/Empty+e-mail+iOS
-final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
+final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
     
     @IBOutlet private var customizator: EmailEnterCustomizator!
     @IBOutlet private weak var emailTextField: UnderlineTextField!
@@ -57,7 +57,7 @@ final class EmailEnterController: UIViewController, NibInit, ErrorPresenter {
     }
     
     private func verifyMail() {
-        guard let email = emailTextField.text?.lowercased(), !email.isEmpty else {
+        guard let email = emailTextField.text, !email.isEmpty else {
             showErrorAlert(message: TextConstants.registrationCellPlaceholderEmail)
             return
         }

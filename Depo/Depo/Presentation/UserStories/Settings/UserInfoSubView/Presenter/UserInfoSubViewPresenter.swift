@@ -43,7 +43,7 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     }
     
     func failedWith(error: Error) {
-        UIApplication.showErrorAlert(message: error.localizedDescription)
+        UIApplication.showErrorAlert(message: error.description)
     }
     
     //MARK : BasePresenter

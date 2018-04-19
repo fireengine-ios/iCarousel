@@ -16,7 +16,7 @@ enum PopUpButtonState {
 }
 
 
-final class PopUpController: UIViewController {
+final class PopUpController: ViewController {
 
     // MARK: - Static
     

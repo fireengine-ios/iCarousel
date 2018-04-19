@@ -17,8 +17,10 @@ class AppConfigurator {
     static let analyticsManager: AnalyticsService = factory.resolve()
     
     class func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        AppConfigurator.getRefreshTokenFromOldApplication()
         dropboxManager.start()
         analyticsManager.start()
+        AppWormholeListener.shared.startListen()
         
         emptyEmailUpIfNeed()
         
@@ -50,6 +52,13 @@ class AppConfigurator {
 //        }
         
         _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
+        
+        LocalMediaStorage.default.clearTemporaryFolder()
+    }
+    
+    private class func getRefreshTokenFromOldApplication() {
+        AppMigrator.migrateFromOldApplicationIfNeed()
+        
     }
     
     private class func emptyEmailUpIfNeed() {

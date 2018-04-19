@@ -25,6 +25,11 @@ extension UIApplication {
         return controller
     }
     
+    static func showOnTabBar(errorMessage: String) {
+        let errorPopUpVC = PopUpController.with(errorMessage: errorMessage)
+        RouterVC().tabBarVC?.present(errorPopUpVC, animated: false, completion: nil)
+    }
+    
     static func showErrorAlert(message: String) {
         let controller = topController()
         if controller is PopUpController {

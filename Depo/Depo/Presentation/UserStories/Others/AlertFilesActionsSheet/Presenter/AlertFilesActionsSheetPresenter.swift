@@ -7,7 +7,8 @@
 //
 
 class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActionsSheetModuleInput {
-
+    
+    private let semaphore = DispatchSemaphore(value: 0)
     
     let rightButtonBox = CGRect(x: Device.winSize.width - 50, y: 64, width: 10, height: 10)
     // MARK: Module Input
@@ -38,31 +39,50 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         presentedBy sender: Any?,
                         onSourceView sourceView: UIView?,
                         excludeTypes: [ElementTypes]) {
+        constractSpecifiedActions(with: types, for: items) {[weak self] (actions) in
+            DispatchQueue.main.async { [weak self] in
+                self?.presentAlertSheet(with: actions, presentedBy: sender)
+            }
+        }
         
-        let actions = constractSpecifiedActions(with: types, for: items, excludeTypes: excludeTypes)
-        presentAlertSheet(with: actions, presentedBy: sender)
     }
     
     func showSpecifiedAlertSheet(with item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController? = nil) {
-        
         let headerAction = UIAlertAction(title: item.name ?? "file", style: .default, handler: {_ in
             
         })
         headerAction.isEnabled = false
         
-        var types: [ElementTypes] = [.info, .share, .move]
-        
         guard let item = item as? Item else {
             return
         }
-        types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-        types.append(.delete)
         
-        if item.fileType == .image || item.fileType == .video {
-            types.append(.download)
+        
+        let actions: [UIAlertAction]
+        
+        if item.fileType == .photoAlbum {
+            let types: [ElementTypes] = [.shareAlbum, .download, .completelyDeleteAlbums, .removeAlbum, .albumDetails]
+            let album = AlbumItem(uuid: item.uuid,
+                                  name: item.name,
+                                  creationDate: item.creationDate,
+                                  lastModifiDate: item.lastModifiDate,
+                                  fileType: item.fileType,
+                                  syncStatus: item.syncStatus,
+                                  isLocalItem: item.isLocalItem)
+            
+            actions = constractActions(with: types, for: [album])
+        } else {
+            var types: [ElementTypes] = [.info, .share, .move]
+            
+            types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
+            types.append(.delete)
+            
+            if item.fileType == .image || item.fileType == .video {
+                types.append(.download)
+            }
+            
+            actions = constractActions(with: types, for: [item])
         }
-        
-        let actions = constractActions(with: types, for: [item])
         
         presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
     }
@@ -135,35 +155,44 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     
     private func constractSpecifiedActions(with types: [ElementTypes],
                                            for items: [BaseDataSourceItem]?,
-                                           excludeTypes: [ElementTypes] = [ElementTypes]()) -> [UIAlertAction] {
-        var filteredActionTypes = types
-        
-        if let remoteItems = items?.filter({ !$0.isLocalItem }) as? [Item], remoteItems.count > 0 {
-            if remoteItems.contains(where: { !$0.favorites }) {
-                filteredActionTypes.append(.addToFavorites)
-            } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
-                filteredActionTypes.remove(at: addToFavoritesIndex)
+                                           excludeTypes: [ElementTypes] = [ElementTypes](),
+                                           succes: @escaping (_ actions: [UIAlertAction]) -> Void) {
+        DispatchQueue.global().async { [weak self] in
+            var filteredActionTypes = types
+            
+            if let remoteItems = items?.filter({ !$0.isLocalItem }) as? [Item], remoteItems.count > 0 {
+                if remoteItems.contains(where: { !$0.favorites }) {
+                    filteredActionTypes.append(.addToFavorites)
+                } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
+                    filteredActionTypes.remove(at: addToFavoritesIndex)
+                }
+                
+                if remoteItems.contains(where: { $0.favorites }) {
+                    filteredActionTypes.append(.removeFromFavorites)
+                } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
+                    filteredActionTypes.remove(at: removeFromFavorites)
+                }
+                
+                CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
+                    let localDuplicates = items
+                    if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
+                        filteredActionTypes.remove(at: index)
+                    }
+                    self?.semaphore.signal()
+                })
+                self?.semaphore.wait()
+                
+            } else {
+                if let printIndex = filteredActionTypes.index(of: .print) {
+                    filteredActionTypes.remove(at: printIndex)
+                }
             }
             
-            if remoteItems.contains(where: { $0.favorites }) {
-                filteredActionTypes.append(.removeFromFavorites)
-            } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
-                filteredActionTypes.remove(at: removeFromFavorites)
-            }
-            
-            let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems)
-            if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
-                filteredActionTypes.remove(at: index)
-            }
-        } else {
-            if let printIndex = filteredActionTypes.index(of: .print) {
-                filteredActionTypes.remove(at: printIndex)
+            filteredActionTypes = filteredActionTypes.filter({ !excludeTypes.contains($0) })
+            if let `self` = self {
+                succes(self.constractActions(with: filteredActionTypes, for: items))
             }
         }
-        
-        filteredActionTypes = filteredActionTypes.filter({ !excludeTypes.contains($0) })
-        
-        return constractActions(with: filteredActionTypes, for: items)
     }
     
     private func constractActions(with types: [ElementTypes],
@@ -351,11 +380,18 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     let serverObjects = itemsArray.filter({
                         !$0.isLocalItem
                     })
-                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects)
-                    action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
-                        MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.deleteDeviceOriginal(items: localDuplicates)
+                    
+                    action = UIAlertAction(title: "", style: .default, handler: nil)
+                    CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects, duplicatesCallBack: { [weak self] items in
+                        let localDuplicates = items
+                        action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
+                            MenloworksAppEvents.onDeleteClicked()
+                            self?.interactor.deleteDeviceOriginal(items: localDuplicates)
+                        })
+                        self?.semaphore.signal()
                     })
+                    semaphore.wait()
+                    
                 } else {
                     action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
@@ -387,7 +423,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     }
     
     private func presentAlertSheet(with actions: [UIAlertAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil, viewController: UIViewController? = nil) {
-        
         let vc: UIViewController
         
         if let unwrapedVC = viewController {

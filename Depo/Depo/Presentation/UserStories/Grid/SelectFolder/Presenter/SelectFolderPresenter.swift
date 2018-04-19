@@ -51,9 +51,4 @@ class SelectFolderPresenter: DocumentsGreedPresenter {
             view_.navigationController?.pushViewController(folderSelector, animated: true)
         }
     }
-    
-    override func onLongPressInCell() {
-        
-    }
-    
 }

@@ -35,7 +35,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    func onItemSelectedActiveState(item: BaseDataSourceItem) {
+    override func onItemSelectedActiveState(item: BaseDataSourceItem) {
         dataSource.allMediaItems.forEach { peopleItem in
             if let peopleItem = peopleItem as? PeopleItem,
             let isVisible = peopleItem.responseObject.visible,
@@ -75,7 +75,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
         
         dataSource.isHeaderless = true
-        updateNoFilesView()
         updateThreeDotsButton()
     }
     
@@ -95,8 +94,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     override func getContentWithFail(errorString: String?) {
         super.getContentWithFail(errorString: errorString)
-        
-        updateNoFilesView()
         updateThreeDotsButton()
     }
     
@@ -120,7 +117,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         outputView()?.showSpiner()
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput, scrollView == dataSource.collectionView {
             view.updateUgglaViewPosition()
         }

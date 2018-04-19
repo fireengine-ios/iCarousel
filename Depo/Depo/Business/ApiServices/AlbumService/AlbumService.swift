@@ -283,7 +283,11 @@ class PhotosAlbumService: BaseRequestService {
     func loadItemsBy(albums: [AlbumItem], success: PhotosByAlbumsOperation?) {
         log.debug("PhotosAlbumService loadItemsBy")
 
-        guard albums.count > 0 else { success?([AlbumItem: [Item]]()); return }
+        guard !albums.isEmpty else {
+            success?([AlbumItem: [Item]]())
+            return
+        }
+        
         let group = DispatchGroup()
         var allItems = [AlbumItem: [Item]]()
         for album in albums {

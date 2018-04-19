@@ -25,6 +25,7 @@
                 <outlet property="noFilesTopLabel" destination="0lC-K4-1ac" id="TJd-tm-6eI"/>
                 <outlet property="noFilesView" destination="ZI3-Dh-bXS" id="Tf2-p8-qvW"/>
                 <outlet property="noFilesViewCenterOffsetConstraint" destination="ecm-g2-fmI" id="Fcz-05-QYh"/>
+                <outlet property="scrollIndicator" destination="e3K-s6-bzd" id="6Fp-Yf-Hid"/>
                 <outlet property="startCreatingFilesButton" destination="UTy-IA-Avr" id="4gU-xN-7wR"/>
                 <outlet property="topBarContainer" destination="Stl-Nh-W5a" id="rEa-AX-y5Q"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Mx3-n5-cYr"/>
@@ -49,6 +50,13 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3K-s6-bzd" customClass="CustomScrollIndicator" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="264" y="0.0" width="150" height="672"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="kw6-u5-Gdo"/>
+                    </constraints>
+                </view>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Folder is empty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lC-K4-1ac">
                     <rect key="frame" x="16" y="150" width="382" height="22"/>
                     <constraints>
@@ -111,10 +119,12 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="0lC-K4-1ac" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="1b8-sN-taw"/>
+                <constraint firstItem="e3K-s6-bzd" firstAttribute="bottom" secondItem="0Sm-wn-Msc" secondAttribute="bottom" id="6My-mu-slE"/>
                 <constraint firstAttribute="bottom" secondItem="Umz-wA-WsK" secondAttribute="bottom" id="BPZ-rn-X4w"/>
                 <constraint firstAttribute="bottom" secondItem="0Sm-wn-Msc" secondAttribute="bottom" id="CRt-nA-Xxz"/>
                 <constraint firstItem="ZI3-Dh-bXS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="KWm-Z2-COp"/>
                 <constraint firstItem="Umz-wA-WsK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KWu-1M-rJ8"/>
+                <constraint firstItem="e3K-s6-bzd" firstAttribute="trailing" secondItem="0Sm-wn-Msc" secondAttribute="trailing" id="OF6-lw-Hr7"/>
                 <constraint firstItem="Umz-wA-WsK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="TwY-91-F59"/>
                 <constraint firstItem="0Sm-wn-Msc" firstAttribute="top" secondItem="Stl-Nh-W5a" secondAttribute="bottom" id="Tzl-Wf-Mm3"/>
                 <constraint firstAttribute="trailing" secondItem="Umz-wA-WsK" secondAttribute="trailing" id="X5G-x9-7Af"/>
@@ -129,6 +139,7 @@
                 <constraint firstAttribute="trailing" secondItem="0lC-K4-1ac" secondAttribute="trailing" constant="16" id="hq9-pl-y0n"/>
                 <constraint firstItem="Stl-Nh-W5a" firstAttribute="top" secondItem="THw-xy-ykx" secondAttribute="top" id="iXp-3s-EIa"/>
                 <constraint firstAttribute="trailing" secondItem="Stl-Nh-W5a" secondAttribute="trailing" id="vnj-3r-PKk"/>
+                <constraint firstItem="e3K-s6-bzd" firstAttribute="top" secondItem="0Sm-wn-Msc" secondAttribute="top" id="wQN-PB-XI0"/>
                 <constraint firstItem="Stl-Nh-W5a" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="y3K-Sk-r6D"/>
                 <constraint firstItem="0lC-K4-1ac" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="150" id="zaN-Ab-UGW"/>
             </constraints>

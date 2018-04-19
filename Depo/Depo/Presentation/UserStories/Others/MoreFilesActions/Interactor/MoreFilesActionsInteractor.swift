@@ -49,7 +49,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareSmallSize(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+                UIApplication.showErrorAlert(message: errorResponse.description)
             })
         }
         
@@ -60,7 +60,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareOrignalSize(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+                UIApplication.showErrorAlert(message: errorResponse.description)
             })
         }
         controler.addAction(originalAction)
@@ -70,7 +70,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
             }, cancel: {}, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+                UIApplication.showErrorAlert(message: errorResponse.description)
             })
         }
         controler.addAction(shareViaLinkAction)
@@ -114,7 +114,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         do {
                             try FileManager.default.removeItem(at: directoryURL)
                         } catch {
-                            print(error.localizedDescription)
+                            print(error.description)
                         }
                     }
                     
@@ -179,9 +179,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         ImageDownloder().getImage(patch: url) { [weak self] image in
-            guard let `self` = self, let image = image,
+            guard
+                let `self` = self,
+                let image = image,
                 let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
             else {
+                UIApplication.showErrorAlert(message: TextConstants.errorServer)
                 complition?()
                 return
             }
@@ -239,8 +242,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.output?.operationStarted(type: .delete)
             self?.player.remove(listItems: items)
             self?.fileService.delete(deleteFiles: items,
-            success: self?.succesAction(elementType: .delete),
-            fail: self?.failAction(elementType: .delete))
+                                     success: self?.succesAction(elementType: .delete),
+                                     fail: self?.failAction(elementType: .delete))
         }
         
         let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
@@ -408,7 +411,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 self?.router.createStoryName(items: items)
             }
         }, cancel: {}, fail: { errorResponse in
-            UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+            UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
     
@@ -440,7 +443,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }
             }
         }, cancel: {}, fail: { errorResponse in
-            UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+            UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
     

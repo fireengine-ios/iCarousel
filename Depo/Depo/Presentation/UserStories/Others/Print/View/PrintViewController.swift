@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PrintViewController: UIViewController {
+class PrintViewController: BaseViewController, ErrorPresenter {
     
     @IBOutlet private weak var webView: UIWebView!
 
@@ -51,6 +51,11 @@ extension PrintViewController: UIWebViewDelegate {
 
     func webViewDidFinishLoad(_ webView: UIWebView) {
         output.didEndLoad()
+    }
+    
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        output.didEndLoad()
+        showErrorAlert(message: error.description)
     }
     
 }

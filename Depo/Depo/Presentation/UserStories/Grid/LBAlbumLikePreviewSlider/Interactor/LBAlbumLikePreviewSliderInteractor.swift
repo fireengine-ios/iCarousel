@@ -38,7 +38,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         currentItems = []
         
         let group = DispatchGroup()
-        let queue = DispatchQueue(label: "GetMyStreamData")
+        let queue = DispatchQueue(label: DispatchQueueLabels.myStreamAlbums)
 
         group.enter()
         faceImageAllowed { [weak self] result in
@@ -140,9 +140,11 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     private func updateFaceImageItems() {
         let group = DispatchGroup()
-        let queue = DispatchQueue(label: "UpdateFaceImageItems")
+        let queue = DispatchQueue(label: DispatchQueueLabels.faceImageItemsUpdate)
         
-        getFaceImageItems(group: group)
+        queue.async { [weak self] in
+            self?.getFaceImageItems(group: group)
+        }
         
         group.notify(queue: queue) { [weak self] in
             self?.operationSuccessed()

@@ -131,9 +131,9 @@ extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, 
     }
     
     func phoneNumberChanged(toNumber number: String) {
-        let oldPhoneModel = cells[1]
+        let oldPhoneModel = cells[0]
         let newPhoneModel = BaseCellModel(withTitle: oldPhoneModel.title, initialText: number)
-        cells[1] = newPhoneModel
+        cells[0] = newPhoneModel
     }
     
     func textFinishedEditing(withCell cell: ProtoInputTextCell) {
@@ -151,14 +151,14 @@ extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return gsmModels.count
     }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard gsmModels.count > 0 else {
-            return ""
-        }
-        let model = gsmModels[row]
-        let pickerTitle = model.gsmCode + "    " + model.countryName
-        return pickerTitle
+        
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        var pickerTitle = ""
+        if !gsmModels.isEmpty {
+            let model = gsmModels[row]
+            pickerTitle = model.gsmCode + "    " + model.countryName
+        }        
+        return NSAttributedString(string: pickerTitle, attributes: [.foregroundColor: UIColor.black])
     }
     
     func infoButtonGotPressed(with sender: Any?, andType type: UserValidationResults) {

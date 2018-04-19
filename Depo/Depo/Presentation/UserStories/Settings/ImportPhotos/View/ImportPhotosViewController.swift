@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImportPhotosViewController: UIViewController, ErrorPresenter {
+class ImportPhotosViewController: ViewController, ErrorPresenter {
     var fbOutput: ImportFromFBViewOutput!
     var dbOutput: ImportFromDropboxViewOutput!
     var instOutput: ImportFromInstagramViewOutput!
@@ -55,6 +55,18 @@ class ImportPhotosViewController: UIViewController, ErrorPresenter {
         instOutput.viewIsReady()
         
         MenloworksEventsService.shared.onSocialMediaPageOpen()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        dropboxLoaderImageView.resumeAnimations()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        dropboxLoaderImageView.pauseAnimations()
     }
     
     // MARK: - Helpers

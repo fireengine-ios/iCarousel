@@ -11,7 +11,7 @@ import iCarousel
 import SDWebImage
 import MediaPlayer
 
-class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewInput {
+class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInput {
     var output: VisualMusicPlayerViewOutput!
     
     lazy var player: MediaPlayer = factory.resolve()
@@ -79,16 +79,9 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
     }
     
     private func setupNavigationBar() {
-        let backButton = UIButton(type: .system)
-        backButton.frame = CGRect(x: 0, y: 0, width: 100, height: 44)
-        backButton.contentHorizontalAlignment = .left
-        backButton.titleEdgeInsets.left = 8
-        backButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        backButton.setImage(UIImage(named: "im_backButton"), for: .normal)
-        backButton.setTitle(TextConstants.backTitle, for: .normal)
-        backButton.addTarget(self, action: #selector(cancelAction(_:)), for: .touchUpInside)
-        backButton.tintColor = UIColor.white
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = BackButtonItem(action: { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        })
         
         let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(actionMoreButton(_:)))
         moreButton.tintColor = UIColor.white

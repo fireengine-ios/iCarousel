@@ -42,39 +42,48 @@ extension CoreDataStack {
         guard savedItems.count > 0 else {
             return
         }
-        for savedMediaItem in savedItems {
-            for remoteWrapedItem in remoteItems {
-                if savedMediaItem.uuidValue == remoteWrapedItem.uuid {
-                    if let unwrapedParent = remoteWrapedItem.parent {
-                        savedMediaItem.parent = unwrapedParent
+        context.perform { [weak self] in
+            for savedMediaItem in savedItems {
+                for remoteWrapedItem in remoteItems {
+                    if savedMediaItem.uuidValue == remoteWrapedItem.uuid {
+                        if let unwrapedParent = remoteWrapedItem.parent {
+                            savedMediaItem.parent = unwrapedParent
+                        }
+                        if let unwrapedAlbumbs = remoteWrapedItem.albums {
+                            //LR-2356
+                            
+                            let albums = unwrapedAlbumbs.map({ albumUuid -> MediaItemsAlbum in
+                                MediaItemsAlbum(uuid: albumUuid, context: context)
+                            })
+                            
+                            
+                            savedMediaItem.albums = NSOrderedSet(array: albums)
+                        }
+                        savedMediaItem.urlToFileValue = remoteWrapedItem.urlToFile?.absoluteString
+                        savedMediaItem.metadata?.largeUrl = remoteWrapedItem.metaData?.largeUrl?.absoluteString
+                        savedMediaItem.metadata?.mediumUrl = remoteWrapedItem.metaData?.mediumUrl?.absoluteString
+                        savedMediaItem.metadata?.smalURl = remoteWrapedItem.metaData?.smalURl?.absoluteString
+                        savedMediaItem.favoritesValue = remoteWrapedItem.favorites
+                        
+                        savedMediaItem.syncStatusValue = remoteWrapedItem.syncStatus.valueForCoreDataMapping()
+                        
+                        break
                     }
-                    if let unwrapedAlbumbs = remoteWrapedItem.albums {
-                        //LR-2356
-                        let albums = unwrapedAlbumbs.map({ albumUuid -> MediaItemsAlbum in
-                            MediaItemsAlbum(uuid: albumUuid, context: context)
-                        })
-                        savedMediaItem.albums = NSOrderedSet(array: albums)
-                    }
-                    savedMediaItem.urlToFileValue = remoteWrapedItem.urlToFile?.absoluteString
-                    savedMediaItem.metadata?.largeUrl = remoteWrapedItem.metaData?.largeUrl?.absoluteString
-                    savedMediaItem.metadata?.mediumUrl = remoteWrapedItem.metaData?.mediumUrl?.absoluteString
-                    savedMediaItem.metadata?.smalURl = remoteWrapedItem.metaData?.smalURl?.absoluteString
-                    savedMediaItem.favoritesValue = remoteWrapedItem.favorites
-                    
-                    savedMediaItem.syncStatusValue = remoteWrapedItem.syncStatus.valueForCoreDataMapping()
-                    
-                    break
                 }
             }
+            self?.saveDataForContext(context: context, savedCallBack: nil)
         }
-        saveDataForContext(context: context)
     }
     
     func updateLocalItemSyncStatus(item: Item) {
         let context = backgroundContext
         context.perform { [weak self] in
-            let predicateForRemoteFile = NSPredicate(format: "uuidValue == %@", item.uuid)
-            if let alreadySavedMediaItems = self?.executeRequest(predicate: predicateForRemoteFile, context: context) {
+            
+            guard let `self` = self else {
+                return
+            }
+            let predicateForRemoteFile = NSPredicate(format: "localFileID == %@", item.getLocalID())
+            let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: context)
                 alreadySavedMediaItems.forEach({ savedItem in
                     //for locals
                     savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
@@ -91,8 +100,9 @@ extension CoreDataStack {
                     
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
-                self?.saveDataForContext(context: context)
-            }
+            
+            self.saveDataForContext(context: context, savedCallBack: nil)
+            
         }
     }
     
@@ -101,7 +111,7 @@ extension CoreDataStack {
     
     func mediaItemByUUIDs(uuidList: [String]) -> [MediaItem] {
         let predicate = NSPredicate(format: "uuidValue IN %@", uuidList)
-        return executeRequest(predicate: predicate, context: mainContext)
+        return executeRequest(predicate: predicate, context: newChildBackgroundContext)
     }
     
     func executeRequest(predicate: NSPredicate, context: NSManagedObjectContext) -> [MediaItem] {

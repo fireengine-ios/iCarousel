@@ -27,17 +27,21 @@ enum BiometricsStatus {
 
 final class BiometricsManagerImp: BiometricsManager {
     
+    private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
+    
     private static let isEnabledKey = "isEnabledKey"
     var isEnabled: Bool {
-        get { return UserDefaults.standard.bool(forKey: BiometricsManagerImp.isEnabledKey) }
+        get { return defaults?.bool(forKey: BiometricsManagerImp.isEnabledKey) ?? false}
         set {
+            #if MAIN_APP
             if isEnabled != newValue {
                 MenloworksTagsService.shared.onTouchIDSettingsChanged(newValue)
             }
             if newValue {
                 MenloworksEventsService.shared.onTouchIDSet()
             }
-            UserDefaults.standard.set(newValue, forKey: BiometricsManagerImp.isEnabledKey)
+            #endif
+            defaults?.set(newValue, forKey: BiometricsManagerImp.isEnabledKey)
         }
     }
     

@@ -43,7 +43,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
         default:
             let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray)
-            let nController = UINavigationController(rootViewController: controller)
+            let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
         }
     }
@@ -70,7 +70,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     
     func showUpload() {
         let controller = router.uploadPhotos()
-        let navigation = UINavigationController(rootViewController: controller)
+        let navigation = NavigationController(rootViewController: controller)
         navigation.navigationBar.isHidden = false
         router.presentViewController(controller: navigation)
     }

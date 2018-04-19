@@ -58,8 +58,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     var refresherY: CGFloat = 0
     
     let underNavBarBarHeight: CGFloat = 53
+    var calculatedUnderNavBarBarHeight: CGFloat = 0
     
     @IBOutlet private weak var topCarouselConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private weak var scrollIndicator: CustomScrollIndicator?
     
     // MARK: Life cycle
     
@@ -98,6 +101,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText, for: .normal)
+        
+        scrollIndicator?.changeHiddenState(to: true, animated: false)
         
         output.viewIsReady(collectionView: collectionView)
     }
@@ -292,7 +297,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesView.isHidden = true
         noFilesTopLabel?.isHidden = true
         topBarContainer.isHidden = false
-        floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
+        floatingHeaderContainerHeightConstraint.constant = calculatedUnderNavBarBarHeight
         view.layoutIfNeeded()
     }
     
@@ -453,6 +458,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         topBarContainer.addConstraints(horisontalConstraints + verticalConstraints + [heightConstraint])
         
         floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
+        calculatedUnderNavBarBarHeight = underNavBarBarHeight
     }
     
     
@@ -467,8 +473,34 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func representationChanged(viewType: MoreActionsConfig.ViewType) {
-        var asGrid: Bool
-        viewType == .Grid ? (asGrid = true) : (asGrid = false)
+        let asGrid = viewType == .Grid ? true : false
         output.viewAppearanceChangedTopBar(asGrid: asGrid)
+    }
+}
+
+// MARK: - ScrollViewIndicator
+
+extension BaseFilesGreedViewController {
+    
+    func changeScrollIndicatorTitle(with text: String) {
+        scrollIndicator?.sectionTitle = text
+    }
+    
+    func startScrollCollectionView() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(hideScrollIndicator), object: nil)
+        let hidden = collectionView.contentOffset.y < contentSliderH?.constant ?? 0
+        scrollIndicator?.changeHiddenState(to: hidden)
+    }
+    
+    func endScrollCollectionView() {
+        perform(#selector(hideScrollIndicator), with: nil, afterDelay: NumericConstants.scrollIndicatorAnimationDuration)
+    }
+    
+    @objc private func hideScrollIndicator() {
+        scrollIndicator?.changeHiddenState(to: true)
+    }
+    
+    private func scrollIndicator(set topOffset: CGFloat) {
+        scrollIndicator?.titleOffset = topOffset
     }
 }

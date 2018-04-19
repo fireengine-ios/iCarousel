@@ -38,12 +38,14 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func turkcellSuccessLogin() {
+        SingletonStorage.shared.updateAccountInfo()
         DispatchQueue.main.async {
             self.output.onSuccessLoginTurkcell()
         }
     }
     
     func successLogin() {
+        SingletonStorage.shared.updateAccountInfo()
         DispatchQueue.main.async {
             self.output.onSuccessLogin()
         }
@@ -66,8 +68,8 @@ class SplashInteractor: SplashInteractorInput {
             }
         }) { [weak self] errorResponce in
             DispatchQueue.main.async {
-                if case ErrorResponse.error(let error) = errorResponce, error is URLError {
-                    UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+                if case ErrorResponse.error(let error) = errorResponce, error.isNetworkError {
+                    UIApplication.showErrorAlert(message: errorResponce.description)
                 } else {
                     self?.output.onFailEULA()
                 }

@@ -36,9 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         log.debug("AppDelegate didFinishLaunchingWithOptions")
         
-        application.isStatusBarHidden = false
-        application.statusBarStyle = .lightContent
-        
         AppConfigurator.applicationStarted(with: launchOptions)
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -164,7 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
         
-        let navVC = UINavigationController(rootViewController: vc)
+        let navVC = NavigationController(rootViewController: vc)
         vc.navigationBarWithGradientStyleWithoutInsets()
         
         topVC?.present(navVC, animated: false, completion: nil)
@@ -199,8 +196,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !tokenStorage.isRememberMe {
             SyncServiceManager.shared.stopSync()
-            AutoSyncDataStorage.clear()
+            AutoSyncDataStorage().clear()
         }
+        
+        WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         UserDefaults.standard.synchronize()
         player.stop()
@@ -271,7 +270,7 @@ private func setupLog() {
     
     if let logPath = documentDirectory.appendingPathComponent("app.log") as NSURL? {
         UserDefaults.standard.set(logPath.path!, forKey: "app.log")
-        let fileDestination: AutoRotatingFileDestination = AutoRotatingFileDestination(owner: log, writeToFile: logPath, identifier: "advancedLogger", shouldAppend: true)
+        let fileDestination = AutoRotatingFileDestination(owner: log, writeToFile: logPath, identifier: "advancedLogger", shouldAppend: true)
         fileDestination.outputLevel = .debug
         fileDestination.showLogIdentifier = true
         fileDestination.showFunctionName = true
@@ -280,7 +279,9 @@ private func setupLog() {
         fileDestination.showFileName = true
         fileDestination.showLineNumber = true
         fileDestination.showDate = true
+        fileDestination.targetMaxFileSize = NumericConstants.logMaxSize
         fileDestination.targetMaxTimeInterval = NumericConstants.logDuration
+        fileDestination.logQueue = XCGLogger.logQueue
         log.add(destination: fileDestination)
     }
     

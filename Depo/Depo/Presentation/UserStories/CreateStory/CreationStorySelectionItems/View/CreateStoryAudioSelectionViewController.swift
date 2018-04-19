@@ -76,7 +76,7 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
     
     @IBAction func segmentControlValueChanged(sender: UISegmentedControl) {
         if let presenter = output as? CreateStoryAudioSelectionPresenter {
-            presenter.onChangeSorce(isYourUpload: sender.selectedSegmentIndex == 1)
+            presenter.onChangeSource(isYourUpload: sender.selectedSegmentIndex == 1)
         }
     }
     

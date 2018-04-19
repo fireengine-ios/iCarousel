@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DarkPopUpController: UIViewController {
+final class DarkPopUpController: ViewController {
 
     static func with(title: String?, message: String?, buttonTitle: String, action: ((_: DarkPopUpController) -> Void)? = nil) -> DarkPopUpController {
         

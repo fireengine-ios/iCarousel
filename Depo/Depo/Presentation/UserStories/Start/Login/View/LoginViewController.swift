@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class LoginViewController: UIViewController, LoginViewInput, LoginDataSourceActionsDelegate {
+class LoginViewController: ViewController, LoginViewInput, LoginDataSourceActionsDelegate {
     
     var captchaViewController: CaptchaViewController!
     
