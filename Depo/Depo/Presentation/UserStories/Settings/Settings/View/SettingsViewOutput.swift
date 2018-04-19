@@ -22,6 +22,8 @@ protocol SettingsViewOutput {
     
     func goToFaceImage()
     
+    func goToPeriodicContactSync()
+    
     func goToHelpAndSupport()
     
     func goToUsageInfo()

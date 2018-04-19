@@ -15,6 +15,7 @@ struct CellsIdConstants {
     static let gSMUserInputCellID = "GSMUserInputCellID"
     static let autoSyncSwitcherCellID = "AutoSyncSwitcherTableViewCell"
     static let autoSyncSettingsCellID = "AutoSyncSettingsTableViewCell"
+    static let periodicContactSyncSettingsCellID = "PeriodicContactSyncSettingsTableViewCell"
     static let settingTableViewCellID = "SettingsTableViewCell"
     static let settingsTableViewSwitchCellID = "SettingsTableViewSwitchCell"
     static let actionsMenuCellID = "ActionsMenuTableViewCell"

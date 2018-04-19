@@ -278,6 +278,13 @@ class RouterVC: NSObject {
         return viewController
     }
     
+    // MARK: PeriodicContacsSync
+    
+    var periodicContactsSync: UIViewController {
+        let viewController = PeriodicContactSyncInitializer.initializeViewController(with: "PeriodicContactSyncViewController")
+        return viewController
+    }
+    
     func manageContacts(moduleOutput: ManageContactsModuleOutput?) -> UIViewController {
         let viewController = ManageContactsModuleInitializer.initializeViewController(with: "ManageContactsViewController", moduleOutput: moduleOutput)
         return viewController

@@ -18,6 +18,8 @@ protocol SettingsRouterInput {
     
     func goToAutoApload()
     
+    func goToPeriodicContactSync()
+    
     func goToFaceImage()
     
     func goToHelpAndSupport()
