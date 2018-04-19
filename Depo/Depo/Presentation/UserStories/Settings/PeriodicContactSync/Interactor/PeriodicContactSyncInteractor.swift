@@ -12,7 +12,6 @@ final class PeriodicContactSyncInteractor {
     weak var output: PeriodicContactSyncInteractorOutput!
     
     private var dataStorage = AutoSyncDataStorage()
-    private var uniqueUserID: String?
     private let localMediaStorage = LocalMediaStorage.default
 }
 
@@ -21,19 +20,14 @@ final class PeriodicContactSyncInteractor {
 extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
     
     func prepareCellModels() {
-        dataStorage.getAutoSyncSettingsForCurrentUser(success: { [weak self] settings, uniqueUserId in
-            DispatchQueue.main.async { [weak self] in
-                self?.output.prepaire(syncSettings: settings)
-            }
-            self?.uniqueUserID = uniqueUserId
-        })
+        DispatchQueue.main.async { [weak self] in
+            self?.output.prepaire(syncSettings: self.dataStorage.settings)
+        }
     }
     
     func onSave(settings: AutoSyncSettings) {
-        if let uniqueUserID = uniqueUserID {
-            dataStorage.save(autoSyncSettings: settings, uniqueUserId: uniqueUserID)
-            SyncServiceManager.shared.update(syncSettings: settings)
-        }
+        dataStorage.save(autoSyncSettings: settings)
+        SyncServiceManager.shared.update(syncSettings: settings)
     }
     
 }
