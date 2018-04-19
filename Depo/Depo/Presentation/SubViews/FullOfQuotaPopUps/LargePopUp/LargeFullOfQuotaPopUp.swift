@@ -154,6 +154,8 @@ class LargeFullOfQuotaPopUp: UIViewController {
     }
     
     @IBAction func onExpandButton() {
+        let viewController = RouterVC().packages
+        RouterVC().pushViewController(viewController: viewController)
         close()
     }
     

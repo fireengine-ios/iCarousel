@@ -80,12 +80,6 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         } else {
             navigationBarWithGradientStyle()
         }
-        
-        //let view = SmallFullOfQuotaPopUp.popUp()
-        let view = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType90)
-        present(view, animated: true) {
-
-        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -126,6 +120,10 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     func stopRefresh() {
         hideSpiner()
+    }
+    
+    func needPresentPopUp(popUpView: UIViewController) {
+        present(popUpView, animated: true, completion: nil)
     }
     
     

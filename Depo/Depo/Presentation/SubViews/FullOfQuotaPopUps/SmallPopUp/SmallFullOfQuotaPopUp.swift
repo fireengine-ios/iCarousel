@@ -9,10 +9,14 @@
 import UIKit
 
 final class SmallFullOfQuotaPopUp: ViewController {
-
-    // MARK: - Static
     
-    static func popUp() -> SmallFullOfQuotaPopUp {
+    private static let keyForSmallFullOfQuotaPopUpCheckBox = "keyForSmallFullOfQuotaPopUpCheckBox"
+    
+    static func popUp() -> SmallFullOfQuotaPopUp? {
+        let key = UserDefaults.standard.bool(forKey: SmallFullOfQuotaPopUp.keyForSmallFullOfQuotaPopUpCheckBox + SingletonStorage.shared.uniqueUserID)
+        if key {
+            return nil
+        }
         let vc = SmallFullOfQuotaPopUp(nibName: "SmallFullOfQuotaPopUp", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
@@ -67,6 +71,8 @@ final class SmallFullOfQuotaPopUp: ViewController {
             checkBoxlabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         }
     }
+    
+    @IBOutlet private weak var customCheckBox: CustomCheckBox!
     
     @IBOutlet private weak var firstButton: UIButton!
     @IBOutlet private weak var secondButton: UIButton!
@@ -166,13 +172,23 @@ final class SmallFullOfQuotaPopUp: ViewController {
         }
     }
     
+    func saveCheckBoxState() {
+        if customCheckBox.isChecked {
+            UserDefaults.standard.set(true, forKey: SmallFullOfQuotaPopUp.keyForSmallFullOfQuotaPopUpCheckBox + SingletonStorage.shared.uniqueUserID)
+        }
+    }
+    
     // MARK: - IBAction
     
     @IBAction func actionFirstButton(_ sender: UIButton) {
+        saveCheckBoxState()
         close()
     }
     
     @IBAction func actionSecondButton(_ sender: UIButton) {
+        saveCheckBoxState()
+        let viewController = RouterVC().packages
+        RouterVC().pushViewController(viewController: viewController)
         close()
     }
     

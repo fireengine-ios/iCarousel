@@ -15,6 +15,7 @@
             <connections>
                 <outlet property="checkBoxlabel" destination="E6e-Is-6nF" id="ReS-mk-69Q"/>
                 <outlet property="containerView" destination="8qh-Pd-GkY" id="hdX-LD-sND"/>
+                <outlet property="customCheckBox" destination="8qb-DH-Otf" id="LQk-EV-vgm"/>
                 <outlet property="darkView" destination="fS1-pt-eE3" id="TeQ-TU-7o5"/>
                 <outlet property="firstButton" destination="tOr-8G-xaM" id="S3U-pc-XMs"/>
                 <outlet property="firstImageView" destination="n7C-4E-QE3" id="kqK-kB-3r2"/>
