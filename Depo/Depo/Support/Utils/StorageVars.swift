@@ -9,6 +9,7 @@
 import Foundation
 
 protocol StorageVars: class {
+    var isAppFirstLaunch: Bool { get set }
     var currentUserID: String? { get set }
     var emptyEmailUp: Bool { get set }
     var autoSyncSet: Bool { get set }
@@ -20,6 +21,12 @@ protocol StorageVars: class {
 
 final class UserDefaultsVars: StorageVars {
     private let userDefaults = UserDefaults.standard
+    
+    private let isAppFirstLaunchKey = "isAppFirstLaunchKey"
+    var isAppFirstLaunch: Bool {
+        get { return userDefaults.object(forKey: isAppFirstLaunchKey) as? Bool ?? false }
+        set { userDefaults.set(newValue, forKey: isAppFirstLaunchKey) }
+    }
     
     private let currentUserIDKey = "CurrentUserIDKey"
     var currentUserID: String? {

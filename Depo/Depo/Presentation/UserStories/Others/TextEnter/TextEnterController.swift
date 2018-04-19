@@ -10,7 +10,7 @@ import Foundation
 
 typealias TextEnterHandler = (_ text: String, _ vc: TextEnterController) -> Void
 
-final class TextEnterController: ViewController, NibInit {
+final class TextEnterController: ViewController, NibInit, ErrorPresenter {
     
     var output: RegistrationViewOutput!
     
@@ -90,10 +90,6 @@ final class TextEnterController: ViewController, NibInit {
         pickerContainer.addSubview(pickerToolBar)
         pickerView.dataSource = dataSource
         pickerView.delegate = dataSource
-    }
-
-    func showAlertMessage(with text: String) {
-        showAlertMessage(with: text)
     }
 
     func startLoading() {

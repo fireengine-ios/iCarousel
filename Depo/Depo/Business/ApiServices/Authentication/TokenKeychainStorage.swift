@@ -18,20 +18,16 @@ final class TokenKeychainStorage: TokenStorage {
     
     private lazy var keychain = KeychainSwift()
     
-    
     var accessToken: String? {
         get {
             guard let token = keychain.get(accessTokenKey) else {
                 return nil
             }
-            print("- accessToken", token)
-            if token.isEmpty {
-                return nil
-            }
+            debugPrint("- accessToken", token)
             return token
         }
         set {
-            keychain.set(newValue ?? "", forKey: accessTokenKey)
+            keychain.set(newValue, forKey: accessTokenKey)
         }
     }
     
@@ -40,14 +36,11 @@ final class TokenKeychainStorage: TokenStorage {
             guard let token = keychain.get(refreshTokenKey) else {
                 return nil
             }
-            print("- refreshToken", token)
-            if token.isEmpty {
-                return nil
-            }
+            debugPrint("- refreshToken", token)
             return token
         }
         set {
-            keychain.set(newValue ?? "", forKey: refreshTokenKey)
+            keychain.set(newValue, forKey: refreshTokenKey)
         }
     }
     
