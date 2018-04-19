@@ -72,7 +72,7 @@ final class ShareViewController: UIViewController, ShareController {
     private var navVC: UINavigationController?
     
     private func showPasscode() {
-        let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeSetTitle)
+        let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         
         let navVC = UINavigationController(rootViewController: vc)
         self.navVC = navVC

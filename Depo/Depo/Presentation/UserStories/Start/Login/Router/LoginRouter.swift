@@ -8,8 +8,6 @@
 
 class LoginRouter: LoginRouterInput {
     
-    private lazy var storageVars: StorageVars = factory.resolve()
-    
     let router = RouterVC()
     
     func goToForgotPassword() {
@@ -33,7 +31,6 @@ class LoginRouter: LoginRouterInput {
     }
     
     func goToSyncSettingsView() {
-        storageVars.emptyEmailUp = false
         router.pushViewController(viewController: router.synchronyseScreen!)
     }
     

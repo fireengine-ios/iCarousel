@@ -88,6 +88,7 @@ final class UploadService: BaseRequestService {
         trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
     
         guard let filteredItems = filter(items: items) else {
+            success()
             return nil
         }
         
@@ -242,6 +243,7 @@ final class UploadService: BaseRequestService {
         uploadOperations.append(operations)
         
         uploadQueue.addOperations(operations, waitUntilFinished: false)
+        log.debug("UPLOADING upload: \(operations.count) have been added to the upload queue")
         print("UPLOADING upload: \(operations.count) have been added to the upload queue")
         
         return uploadOperations.filter({ $0.uploadType == .syncToUse })
@@ -330,6 +332,7 @@ final class UploadService: BaseRequestService {
         uploadOperations.append(operations)
         
         uploadQueue.addOperations(operations, waitUntilFinished: false)
+        log.debug("UPLOADING upload: \(operations.count) have been added to the upload queue")
         print("UPLOADING upload: \(operations.count) have been added to the upload queue")
         
         return uploadOperations.filter({ $0.uploadType == .fromHomePage })
@@ -417,6 +420,7 @@ final class UploadService: BaseRequestService {
         uploadOperations.append(operations)
         
         uploadQueue.addOperations(operations, waitUntilFinished: false)
+        log.debug("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
         print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
         
         return uploadOperations.filter({ $0.uploadType == .autoSync })
@@ -592,7 +596,8 @@ extension UploadService {
             return nil
         }
         
-        result = result.filter { $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
+        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes() ?? 0
+        result = result.filter { $0.fileSize < freeDiskSpaceInBytes }
         guard !result.isEmpty else {
             UIApplication.showErrorAlert(message: TextConstants.syncNotEnoughMemory)
             return nil
