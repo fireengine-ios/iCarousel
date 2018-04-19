@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol LoadingImageViewDelegate: class {
     func onImageLoaded(image: UIImage?)
@@ -145,6 +146,54 @@ class LoadingImageView: UIImageView {
                 self?.finishImageLoading(image)
             }
         }
+    }
+    
+    func loadGifImageFromURL(url: URL?) {
+        guard let url = url else {
+            return
+        }
+        
+        
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+
+            do {
+                let data = try Data(contentsOf: url)
+                let image = UIImage.sd_animatedGIF(with: data)
+                DispatchQueue.main.async { [weak self] in
+                    self?.image = image
+                }
+            } catch {
+                return
+            }
+        
+            
+            
+            
+//            let gif = UIImage.gifImageWithURL(gifUrl: url.absoluteString)
+//            DispatchQueue.main.async { [weak self] in
+//                self?.image = gif
+//            }
+        }
+        
+        
+//        sd_cancelCurrentImageLoad()
+//        sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
+//            guard let image = image, let data = UIImagePNGRepresentation(image) else {
+//                return
+//            }
+//
+//            if ImageFormat.get(from: data) != .gif {
+//                self?.image = image
+//                return
+//            }
+//
+//            guard let nsdata = data as NSData? else {
+//                return
+//            }
+//
+//            let gif = UIImage.gifImageWithData(data: nsdata)
+//            self?.image = gif
+//        }
     }
     
     func setBorderVisibility(visibility: Bool) {
