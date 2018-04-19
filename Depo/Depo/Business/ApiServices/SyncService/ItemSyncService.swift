@@ -133,8 +133,6 @@ class ItemSyncServiceImpl: ItemSyncService {
             return
         }
         
-        status = .executing
-        
         UploadService.default.uploadFileList(items: items,
                                              uploadType: .autoSync,
                                              uploadStategy: .WithoutConflictControl,
@@ -165,6 +163,8 @@ class ItemSyncServiceImpl: ItemSyncService {
             self.fail()
             
         })
+        
+        status = .executing
     }
     
     private func appendNewUnsyncedItems() {
