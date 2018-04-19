@@ -40,7 +40,7 @@ final class MD5 {
 
 extension String {
     var md5: String? {
-        return MD5(string: self)?.hex
+        return MD5(string: self)?.hex.uppercased()
     }
 }
 
